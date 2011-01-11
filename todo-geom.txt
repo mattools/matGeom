@@ -2,27 +2,14 @@ TODO list for GEOM
 
 
 - trouver un nom generique
+    + matGeom (nom choisi)
+    + mat-geom (nom unix du projet)
     + geom (nom actuel)
-    + matGeom
-    + mat-geom
     + Geometry Toolbox for Matlab, ou GTM
     + GeomLab
-
-- reorganiser modules:
-    + geom2d
-    + polygons2d
-    + polynomialCurves2d
-    + geom3d
-    + meshes3d (inclure les polyhedres)
-    + graphs (?)
-    
         
 geom2d
-==============
-
-- clipping de polygones (2010.08.10)
-
-- polygonTriangulate ? (2010.07.28)
+======
 
 - fonctions pour les cercles:
     + intersectCircles
@@ -35,19 +22,31 @@ geom2d
 	pro: plus robuste
 	cons: moins rapide
 
-- pourles fonctions de dessin, prevoir : (2010.07.02)
+- pour les fonctions de dessin, prevoir : (2010.07.02)
     + option de trace sous forme de chaine simple
     + option de trace sous forme de couple 'param' + 'value'
+
+    
+polygons2d
+==========
+
+- clipping de polygones (2010.08.10)
+    
+- polygonTriangulate ? (2010.07.28)
 
 - reprendre doc pour la 'position' des polygones et polylines (2010.07.05)
 
 
 geom3d
-==============
+======
 
 - Conventions pour les angles 3d pas geniales... (2010.07.28)
     ex: drawCircle3d: theta+phi+psi
     pas vraiment de lien avec les angles d'Euler.
+
+    
+meshes3d
+========
         
 - meshes and polyhedra:
     + manage mesh structures with fields vertices, edges and faces (2010.10.06)
@@ -61,5 +60,3 @@ geom3d
     * clipMesh (2010.12.06)
         -> clip each face, and create a new mesh with clipped faces.
         
-
-- create a specific library for mesh functions ? (2010.11.16)

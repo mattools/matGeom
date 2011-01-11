@@ -1,5 +1,5 @@
 function alpha = normalizeAngle(alpha, varargin)
-%NORMALIZEANGLE  Normalizes an angle value in a 2*PI interval
+%NORMALIZEANGLE  Normalize an angle value within a 2*PI interval
 %
 %   ALPHA2 = normalizeAngle(ALPHA);
 %   ALPHA2 is the same as ALPHA modulo 2*PI and is positive.

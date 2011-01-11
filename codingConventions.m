@@ -1,7 +1,6 @@
-%CODINGCONVENTIONS specify coding conventions for IMAEL m-files
+%CODINGCONVENTIONS specify coding conventions for MatGeom files
 %
-%
-%   General:
+%   General
 %
 %   This file specifies coding convention for future files. Current files
 %   do not necessarily follows the requirements, as they were created
@@ -13,8 +12,7 @@
 %   SHOULD: it is better to do it, but not necessary.
 %   MAY: it is optional, but commonly used by some developpers.
 %
-%
-%   Name of functions:
+%   Name of functions
 %
 %   Java convention for file names must be used:
 %   - Each function name must be written in lower case, using english
@@ -24,8 +22,6 @@
 %       Ex: 'distancePointPlane'.
 %
 %   Other convention should be used to avoid name conflicts:
-%   - For function used as image filters, prefix 'im' may be used. Ex :
-%       'imDirFilter'.
 %   - For functions which work on a complex data type, the name of the data
 %       type should be used as a prefix of the function name. 
 %       Ex: functions working on polygons have a prototype on the form
@@ -36,16 +32,16 @@
 %       This convention was not used for the beginning of the library
 %       development, but new functions will try to conform to it.
 %
-%   Function header:
+%   Function header
 %
 %   - First line of documentation must contain the name of the function,
 %   followed by a short description. Name and function may be separated by
 %   colon. Name must be capitalized, without punctuation before
-%   description (to remain valid with matlab documenbtation tools). 
+%   description (to remain valid with matlab documentation tools). 
 %   Ex:   'SLICER interactive visualization of 3D images'
 %
 %   - Main part of header describes usage of function/script with various
-%   parameters. Function name should be the real name. Variables names
+%   parameters. Function name should be the real name. Variable names
 %   should be capitalized. This does not follow matlab's standard, but
 %   allows to copy-paste pieces of code.
 %   Ex: 'RES = myBasicFunction(PARAM1, PARAM2, OPTION);'
@@ -58,27 +54,14 @@
 %   revision.
 %
 %
-%   Library Organization:
-%
-%   The principle is to gather functions which share a similar domain of
-%   application. Ex: image processing filters, geometry functions...
-%   It seems better to have one level of complexity for the directory
-%   structure. 
-%
-%   However, it could be clearer to create specific subdirectories for
-%   functions which operate on complex data (such as polygons, or special
-%   types of curves). This allows to add a Contents file which describes
-%   the model used by functions.
-%
-%
-%   Function code:
+%   Function code
 %
 %   - Please comment the code ! For algorithmic parts, as much comments as
 %   code is a good start ...
 %   - Indentation level should be marked by four space characters.
 %
 %
-%   Tips & Tricks:
+%   Tips & Tricks
 %
 %   - The use of '...' at the end of a line can cause compatibility
 %   problems from Linux to Windows.
@@ -94,7 +77,8 @@
 
 
 %   HISTORY
-%   05/03/2007 add convention for datatype prefix for function names, and
+%   2007-03-05 add convention for datatype prefix for function names, and
 %       library organization
+%   2011-01-11 update for matGeom project
 
 help codingConventions;
