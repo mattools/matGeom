@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of centroid</title>
+  <meta name="keywords" content="centroid">
+  <meta name="description" content="CENTROID compute centroid (center of mass) of a set of points">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom2d</a> &gt; centroid.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>centroid
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CENTROID compute centroid (center of mass) of a set of points</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function center = centroid(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CENTROID compute centroid (center of mass) of a set of points
+
+   PTS = centroid(POINTS, MASS)
+   PTS = centroid(PTX, PTY, MASS)
+   Computes center of mass of POINTS, weighted by coefficient MASS.
+   POINTS is a [N*2] array, MASS is [N*1] array, and PTX and PTY are also
+   [N*1] arrays.
+   The result PTS has the same size as MASS.
+
+   PTS = centroid(POINTS)  or  PTS = centroid(PTX, PTY)
+   Assume equal weights for all points.
+
+   Example:
+   pts = [2 2;6 1;6 5;2 4];
+   centroid(pts)
+   ans =
+        4     3
+
+   See Also:
+   <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="polygonCentroid.html" class="code" title="function pt = polygonCentroid(varargin)">polygonCentroid</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 07/04/2003.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="clipPolygon.html" class="code" title="function poly2 = clipPolygon(polygon, w)">clipPolygon</a>	CLIPPOLYGON clip a polygon with a rectangular window</li><li><a href="curveCMoment.html" class="code" title="function m = curveCMoment(curve, p, q)">curveCMoment</a>	CURVECMOMENT  Compute centered inertia moment of a 2D curve</li><li><a href="curveCSMoment.html" class="code" title="function m = curveCSMoment(curve, p, q)">curveCSMoment</a>	CURVECSMOMENT  Compute centered scaled moment of a 2D curve</li><li><a href="polynomialCurveCentroid.html" class="code" title="function centroid = polynomialCurveCentroid(tBounds, varargin)">polynomialCurveCentroid</a>	POLYNOMIALCURVECENTROID compute the centroid of a polynomial curve</li></ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

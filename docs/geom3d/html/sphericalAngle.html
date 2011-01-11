@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of sphericalAngle</title>
+  <meta name="keywords" content="sphericalAngle">
+  <meta name="description" content="SPHERICALANGLE compute angle on the sphere">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom3d</a> &gt; sphericalAngle.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>sphericalAngle
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>SPHERICALANGLE compute angle on the sphere</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function alpha = sphericalAngle(p1, p2, p3) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">SPHERICALANGLE compute angle on the sphere
+
+   ALPHA = sphericalAngle(P1, P2, P3)
+   compute angle (P1, P2, P2), in radians, between 0 and 2*PI.
+
+   Points are given either as [x y z] (there will be normalized to lie on
+   the unit sphere), or as [phi theta], with phi being the longitude in [0
+   2*PI] and theta being the elevation on horizontal [-pi/2 pi/2].
+
+
+   NOTE: 
+   this is an 'oriented' version of the angle computation, that is, the
+   result of sphericalAngle(P1, P2, P3) equals
+   2*pi-sphericalAngle(P3,P2,P1). To have the more classical relation
+   (with results given betwen 0 and PI), it suffices to take the minimum
+   of angle and 2*pi-angle.
+   
+   See also:
+   <a href="angles3d.html" class="code" title="function angles3d(varargin)">angles3d</a>, <a href="spheres.html" class="code" title="function spheres(varargin)">spheres</a>
+
+   ---------
+
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 21/02/2005.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE create a plane in parametrized form</li><li><a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>	NORMALIZEVECTOR3D normalize a 3D vector</li><li><a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>	PLANEPOSITION compute position of a point on a plane</li><li><a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>	PROJPOINTONPLANE return the projection of a point on a plane</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

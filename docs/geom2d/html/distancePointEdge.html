@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of distancePointEdge</title>
+  <meta name="keywords" content="distancePointEdge">
+  <meta name="description" content="DISTANCEPOINTEDGE compute distance between a point and an edge">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom2d</a> &gt; distancePointEdge.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>distancePointEdge
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DISTANCEPOINTEDGE compute distance between a point and an edge</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = distancePointEdge(point, edge) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DISTANCEPOINTEDGE compute distance between a point and an edge
+
+   DIST = distancePointEdge(POINT, EDGE);
+   Return the euclidean distance between edge EDGE and point POINT. 
+   EDGE has the form : [x1 y1 x2 y2], and POINT is [x y].
+   If EDGE is [Nx4] array, rsult is [Nx1] array computes for each edge.
+   If POINT is [Nx2], then result is computed for each point.
+   If both POINT and EDGE are array, result is [Nx1], computed for each
+   corresponding point and edge.
+
+   [DIST POS] = distancePointEdge(POINT, EDGE);
+   Also returns the position of closest point on the edge. POS is
+   comprised between 0 (first point) and 1 (last point).
+
+   See also:
+   <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>, <a href="distancePointLine.html" class="code" title="function dist = distancePointLine(point, line)">distancePointLine</a>
+
+
+
+   ---------
+   author : David Legland
+   INRA - CEPIA URPOI - MIA MathCell
+   created the 07/04/2004.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>	DISTANCEPOINTS compute distance between two points</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="distancePointPolyline.html" class="code" title="function varargout = distancePointPolyline(point, poly, varargin)">distancePointPolyline</a>	DISTANCEPOINTPOLYLINE  Compute shortest distance between a point and a polyline</li><li><a href="projPointOnPolyline.html" class="code" title="function varargout = projPointOnPolyline(point, poly, varargin)">projPointOnPolyline</a>	PROJPOINTONPOLYLINE  compute position of a point projected on a polyline</li></ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

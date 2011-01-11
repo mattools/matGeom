@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of parametrize</title>
+  <meta name="keywords" content="parametrize">
+  <meta name="description" content="PARAMETRIZE return a parametrization of a curve">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom2d</a> &gt; parametrize.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>parametrize
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>PARAMETRIZE return a parametrization of a curve</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function par = parametrize(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">PARAMETRIZE return a parametrization of a curve
+
+   PAR = PARAMETRIZE(POINTS)
+   return a parametrization of the curve defined by the serie of points,
+   based on euclidean distance between two consecutive points. POINTS is a
+   [N*2] array, and PAR is [N*1].
+
+   PAR = PARAMETRIZE(PX, PY)
+   is the same, but specify points coordinates in separate arrays.
+
+
+   TODO: add normalization option (result between 0 and 1).
+   
+   See also:
+   <a href="polylines2d.html" class="code" title="function polylines2d(varargin)">polylines2d</a>, <a href="curveLength.html" class="code" title="function len = curveLength(varargin)">curveLength</a>;
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 06/04/2003.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="cart2geod.html" class="code" title="function point = cart2geod(src, curve)">cart2geod</a>	CART2GEOD convert cartesian coordinates to geodesic coord.</li><li><a href="curvature.html" class="code" title="function kappa = curvature(varargin)">curvature</a>	CURVATURE estimate curvature of a curve defined by points</li><li><a href="geod2cart.html" class="code" title="function point = geod2cart(src, curve, normal)">geod2cart</a>	GEOD2CART convert geodesic coordinates to cartesian coord.</li><li><a href="polynomialCurveSetFit.html" class="code" title="function varargout = polynomialCurveSetFit(seg, varargin)">polynomialCurveSetFit</a>	POLYNOMIALCURVESETFIT fit a set of polynomial curves to a segmented image</li></ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

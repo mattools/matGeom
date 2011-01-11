@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of linePosition3d</title>
+  <meta name="keywords" content="linePosition3d">
+  <meta name="description" content="LINEPOSITION3D return position of a 3D point on a 3D line">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom3d</a> &gt; linePosition3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>linePosition3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>LINEPOSITION3D return position of a 3D point on a 3D line</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function d = linePosition3d(point, line) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">LINEPOSITION3D return position of a 3D point on a 3D line
+
+   L = linePosition3d(POINT, LINE)
+   compute position of point POINT on the line LINE, relative to origin
+   point and direction vector of the line.
+   LINE has the form [x0 y0 z0 dx dy dy],
+   POINT has the form [x y z], and is assumed to belong to line.
+   If POINT does not belong to LINE, the position of its orthogonal
+   projection is computed instead.
+
+   L = linePosition3d(POINT, LINES)
+   if LINES is an array of NL lines, return NL positions, corresponding to
+   each line.
+
+   L = linePosition3d(POINTS, LINE)
+   if POINTS is an array of NP points, return NP positions, corresponding
+   to each point.
+
+   L = linePosition3d(POINTS, LINES)
+   if POINTS is an array of NP points and LINES is an array of NL lines,
+   return an array of [NP NL] position, corresponding to each couple
+   point-line.
+
+   See also:
+   <a href="lines3d.html" class="code" title="function lines3d(varargin)">lines3d</a>, <a href="points3d.html" class="code" title="function points3d(varargin)">points3d</a>, <a href="createLine3d.html" class="code" title="function line = createLine3d(varargin)">createLine3d</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 17/02/2005.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="clipLine3d.html" class="code" title="function edge = clipLine3d(line, box)">clipLine3d</a>	CLIPLINE3D clip a line with a box and return an edge</li><li><a href="drawPlane3d.html" class="code" title="function varargout = drawPlane3d(plane, varargin)">drawPlane3d</a>	DRAWPLANE3D draw a plane clipped in the current window</li><li><a href="isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>	ISBELOWPLANE test whether a point is below or above a plane</li></ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

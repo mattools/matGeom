@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of transformPoint</title>
+  <meta name="keywords" content="transformPoint">
+  <meta name="description" content="TRANSFORMPOINT transform a point with an affine transform">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom2d</a> &gt; transformPoint.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>transformPoint
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>TRANSFORMPOINT transform a point with an affine transform</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = transformPoint(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">TRANSFORMPOINT transform a point with an affine transform
+
+   PT2 = transformPoint(PT1, TRANS);
+   where PT1 has the form [xp yp], and TRANS is a [2*2], [2*3] or [3*3]
+   matrix, returns the point transformed with affine transform TRANS.
+
+   Format of TRANS can be one of :
+   [a b]   ,   [a b c] , or [a b c]
+   [d e]       [d e f]      [d e f]
+                            [0 0 1]
+
+   PT2 = transformPoint(PT1, TRANS);
+   Also works when PTA is a [N*2] array of double. In this case, PT2 has
+   the same size as PT1.
+
+   [PX2 PY2] = transformPoint(PX1, PY1, TRANS);
+   Also works when PX1 and PY1 are arrays the same size. The function
+   transform each couple of (PX1, PY1), and return the result in 
+   (PX2, PY2), which is the same size as (PX1 PY1).
+
+
+   See also:
+   <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="transforms2d.html" class="code" title="function transforms2d(varargin)">transforms2d</a>, <a href="translation.html" class="code" title="function trans = translation(varargin)">translation</a>, <a href="rotation.html" class="code" title="function trans = rotation(varargin)">rotation</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 06/04/2004.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polynomialCurveCurvatures.html" class="code" title="function varargout = polynomialCurveCurvatures(t, varargin)">polynomialCurveCurvatures</a>	POLYNOMIALCURVECURVATURES compute curvatures of a polynomial revolution surface</li><li><a href="transformLine.html" class="code" title="function dest = transformLine(line, trans)">transformLine</a>	TRANSFORMLINE transform a line with an affine transform</li></ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

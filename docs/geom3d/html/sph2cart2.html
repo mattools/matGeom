@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of sph2cart2</title>
+  <meta name="keywords" content="sph2cart2">
+  <meta name="description" content="SPH2CART2 convert spherical coordinate to cartesian coordinate">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom3d</a> &gt; sph2cart2.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>sph2cart2
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>SPH2CART2 convert spherical coordinate to cartesian coordinate</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = sph2cart2(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">SPH2CART2 convert spherical coordinate to cartesian coordinate
+
+   C = SPH2CART2(S)
+   C = SPH2CART2(THETA, PHI)       (assume rho = 1)
+   C = SPH2CART2(THETA, PHI, RHO)   
+   [X, Y, Z] = SPH2CART2(THETA, PHI, RHO);
+
+   S = [phi theta rho] (sphercial coordiante).
+   C = [X Y Z]  (cartesian coordinate)
+
+   Math convention is used : 
+   THETA is the colatitude, in radians, 0 for north pole, +pi for south
+   pole, pi/2 for points with z=0. 
+   PHI is the azimuth, in radians, defined as matlab cart2sph: angle from
+   Ox axis, counted counter-clockwise.
+   RHO is the distance of the point to the origin.
+   Discussion on choice for convention can be found at:
+   http://www.physics.oregonstate.edu/bridge/papers/spherical.pdf
+
+   See also :
+   <a href="angles3d.html" class="code" title="function angles3d(varargin)">angles3d</a>, <a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 18/02/2005.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE create a plane in parametrized form</li></ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

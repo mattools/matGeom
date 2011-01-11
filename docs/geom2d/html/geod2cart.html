@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of geod2cart</title>
+  <meta name="keywords" content="geod2cart">
+  <meta name="description" content="GEOD2CART convert geodesic coordinates to cartesian coord.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom2d</a> &gt; geod2cart.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>geod2cart
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>GEOD2CART convert geodesic coordinates to cartesian coord.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function point = geod2cart(src, curve, normal) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">GEOD2CART convert geodesic coordinates to cartesian coord.
+
+   PT2 = geod2cart(PT1, CURVE, NORMAL)
+   CURVE and NORMAL are both [N*2] array with the same length, and
+   represent positions of the curve, and normal to each point.
+   PT1 is the point to transform, in geodesic  coordinate (first coord is
+   distance from the curve start, and second coord is distance between
+   point and curve).
+
+   The function return the coordinate of PT1 in the same coordinate system
+   than for the curve.
+
+   TODO : add processing of points not projected on the curve.
+   -&gt; use the closest end 
+
+   See also
+   <a href="polylines2d.html" class="code" title="function polylines2d(varargin)">polylines2d</a>, <a href="cart2geod.html" class="code" title="function point = cart2geod(src, curve)">cart2geod</a>, <a href="curveLength.html" class="code" title="function len = curveLength(varargin)">curveLength</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 08/04/2004.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>	LINEANGLE return angle between lines</li><li><a href="parametrize.html" class="code" title="function par = parametrize(varargin)">parametrize</a>	PARAMETRIZE return a parametrization of a curve</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

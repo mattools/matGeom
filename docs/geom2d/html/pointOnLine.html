@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of pointOnLine</title>
+  <meta name="keywords" content="pointOnLine">
+  <meta name="description" content="POINTONLINE create a point on a line at a given distance from line origin">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom2d</a> &gt; pointOnLine.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>pointOnLine
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POINTONLINE create a point on a line at a given distance from line origin</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function point = pointOnLine(line, d) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POINTONLINE create a point on a line at a given distance from line origin
+
+   P = pointOnLine(LINE, D);
+   Creates the point belonging to the line LINE, and located at the
+   distance D from the line origin.
+   LINE has the form [x0 y0 dx dy].
+   LINE and D should have the same number N of rows. The result will have
+   N rows ans 2 column (x and y positions).
+
+   See also:
+   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="onLine.html" class="code" title="function b = onLine(point, line)">onLine</a>, <a href="onLine.html" class="code" title="function b = onLine(point, line)">onLine</a>, <a href="linePosition.html" class="code" title="function d = linePosition(point, line)">linePosition</a>
+
+   ---------
+
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 07/04/2004.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>	LINEANGLE return angle between lines</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="parallelLine.html" class="code" title="function res = parallelLine(line, point)">parallelLine</a>	PARALLELLINE create a line parallel to another one.</li></ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

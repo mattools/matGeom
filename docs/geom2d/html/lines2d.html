@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of lines2d</title>
+  <meta name="keywords" content="lines2d">
+  <meta name="description" content="LINES2D  description of functions operating on planar lines">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom2d</a> &gt; lines2d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>lines2d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>LINES2D  description of functions operating on planar lines</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function lines2d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">LINES2D  description of functions operating on planar lines
+
+   The term 'line' refers to a planar straight line, which is an unbounded
+   curve. Line segments defined between 2 points, which are bounded, are
+   called 'edge', and are presented in file 'edges2d'.
+
+   A straight line is defined by a point (its origin), and a vector (its
+   direction). The different parameters are bundled into a row vector:
+   LINE = [x0 y0 dx dy];
+
+   A line contains all points (x,y) such that:
+       x = x0 + t*dx
+       y = y0 + t*dy;
+   for all t between -infinity and +infinity.
+
+   See also:
+   <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="vectors2d.html" class="code" title="function vectors2d">vectors2d</a>, <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="rays2d.html" class="code" title="function rays2d(varargin)">rays2d</a>
+   <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>, <a href="cartesianLine.html" class="code" title="function line = cartesianLine(varargin)">cartesianLine</a>, <a href="medianLine.html" class="code" title="function line = medianLine(varargin)">medianLine</a>, <a href="edgeToLine.html" class="code" title="function line = edgeToLine(edge)">edgeToLine</a>
+   <a href="orthogonalLine.html" class="code" title="function res = orthogonalLine(line, point)">orthogonalLine</a>, <a href="parallelLine.html" class="code" title="function res = parallelLine(line, point)">parallelLine</a>, <a href="bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>, <a href="radicalAxis.html" class="code" title="function line = radicalAxis(circle1, circle2)">radicalAxis</a>
+   <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>, <a href="linePosition.html" class="code" title="function d = linePosition(point, line)">linePosition</a>, <a href="projPointOnLine.html" class="code" title="function point = projPointOnLine(point, line)">projPointOnLine</a>
+   <a href="isPointOnLine.html" class="code" title="function b = isPointOnLine(point, line, varargin)">isPointOnLine</a>, <a href="distancePointLine.html" class="code" title="function dist = distancePointLine(point, line)">distancePointLine</a>, <a href="isLeftOriented.html" class="code" title="function b = isLeftOriented(point, line)">isLeftOriented</a>
+   <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2)">intersectLines</a>, <a href="intersectLineEdge.html" class="code" title="function point = intersectLineEdge(line, edge)">intersectLineEdge</a>, <a href="intersectLinePolygon.html" class="code" title="function intersects = intersectLinePolygon(line, poly)">intersectLinePolygon</a>
+   <a href="clipLine.html" class="code" title="function edge = clipLine(line, box)">clipLine</a>, <a href="invertLine.html" class="code" title="function line = invertLine(var)">invertLine</a>, <a href="transformLine.html" class="code" title="function dest = transformLine(line, trans)">transformLine</a>, <a href="drawLine.html" class="code" title="function varargout = drawLine(lin, varargin)">drawLine</a>
+   <a href="lineFit.html" class="code" title="function line = lineFit(varargin)">lineFit</a>
+
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@nantes.inra.fr
+ Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
+ Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+ Licensed under the terms of the LGPL, see the file &quot;license.txt&quot;</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

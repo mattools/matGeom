@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polygonSubcurve</title>
+  <meta name="keywords" content="polygonSubcurve">
+  <meta name="description" content="POLYGONSUBCURVE  extract a portion of a polygon">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom2d</a> &gt; polygonSubcurve.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polygonSubcurve
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYGONSUBCURVE  extract a portion of a polygon</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function res = polygonSubcurve(poly, t0, t1) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLYGONSUBCURVE  extract a portion of a polygon
+
+   POLY2 = polygonSubcurve(POLYGON, POS0, POS1)
+   Create a new polyline, by keeping vertices located between positions
+   POS0 and POS1, and adding points corresponding to positions POS0 and
+   POS1 if they are not already vertices.
+
+   Example
+   Nv = 100;
+   poly = circleAsPolygon([10 20 30], Nv);
+   poly2 = polygonSubcurve(poly, 15, 65);
+   drawCurve(poly2);
+
+   See also
+   <a href="polygons2d.html" class="code" title="function polygons2d(varargin)">polygons2d</a>, <a href="polylineSubcurve.html" class="code" title="function res = polylineSubcurve(poly, t0, t1)">polylineSubcurve</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)
+ Copyright 2009 INRA - Cepia Software Platform.
+ Licensed under the terms of the LGPL, see the file &quot;license.txt&quot;</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polygonPoint.html" class="code" title="function point = polygonPoint(poly, pos)">polygonPoint</a>	POLYGONPOINT  extract a point from a polygon</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polygonLoops.html" class="code" title="function loops = polygonLoops(poly)">polygonLoops</a>	POLYGONLOOPS  divide a possibly self-intersecting polygon into a set of simple loops</li></ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

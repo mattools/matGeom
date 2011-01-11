@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of medianLine</title>
+  <meta name="keywords" content="medianLine">
+  <meta name="description" content="MEDIANLINE create a median line between two points">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom2d</a> &gt; medianLine.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>medianLine
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MEDIANLINE create a median line between two points</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function line = medianLine(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MEDIANLINE create a median line between two points
+
+   L = medianLine(P1, P2);
+   Create the median line of points P1 and P2, that is the line containing
+   all points located at equal distance of P1 and P2.
+
+   L = medianLine(PTS);
+   Creates the median line of 2 points, given as a 2*2 array. Array has
+   the form:
+   [ [ x1 y1 ] ; [ x2 y2 ] ]
+
+   L = medianLine(EDGE);
+   Creates the median of the edge. Edge is a 1*4 array, containing [x0 y0]
+   coordinates of first point, and [dx dy], the vector from first point to
+   second point.
+  
+   See also:
+   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>, <a href="orthogonalLine.html" class="code" title="function res = orthogonalLine(line, point)">orthogonalLine</a>
+
+   ---------
+
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 31/10/2003.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createCircle.html" class="code" title="function circle = createCircle(varargin)">createCircle</a>	CREATECIRCLE create a circle from points</li><li><a href="createDirectedCircle.html" class="code" title="function circle = createDirectedCircle(varargin)">createDirectedCircle</a>	CREATEDIRECTEDCIRCLE create a directed circle</li></ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

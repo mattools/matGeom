@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of Contents</title>
+  <meta name="keywords" content="Contents">
+  <meta name="description" content="Geometry 2D Toolbox">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom2d</a> &gt; Contents.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>Contents
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Geometry 2D Toolbox</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>This is a script file. </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Geometry 2D Toolbox
+ Version 0.3 28-Aug-2007 .
+
+     Library to handle and visualize geometric primitives such as points,
+     lines, circles and ellipses, polygons...
+
+   The goal is to provide a low-level library for manipulating geometrical
+   primitives, making easier the development of more complex geometric
+   algorithms. 
+
+   Most functions works for planar shapes, but some ones have been
+   extended to 3D or to any dimension.
+
+ Points:
+ -------
+   points2d                  - description of functions operating on points
+   clipPoints                - clip a set of points by a box
+   centroid                  - compute centroid (center of mass) of a set of points
+   polarPoint                - create a point from polar coordinates (rho + theta)
+   angle2Points              - return horizontal angle between 2 points
+   angle3Points              - return oriented angle made by 3 points
+   angleSort                 - sort points of plane according to their angles
+   distancePoints            - compute distance between two points
+   minDistancePoints         - compute minimal distance between several points
+
+ Vectors:
+ --------
+   vectors2d                 - description of functions operating on plane vectors
+   vectorNorm                - compute norm of vector or of set of vectors
+   vectorAngle               - compute angle of a vector with horizontal axis
+   normalizeVector           - normalize a vector
+   isPerpendicular           - check orthogonality of two vectors
+   isParallel                - check parallelism of two vectors
+
+ Line objects (lines, edges and rays):
+ -------------------------------------
+   lines2d                   - description of functions operating on planar lines
+   edges2d                   - description of functions operating on planar edges
+   rays2d                    - description of functions operating on planar rays
+   createEdge                - create an edge between two points, or from a line
+   createLine                - create a line with various inputs.
+   createRay                 - create a ray (half-line)
+   edgeToLine                - convert an edge to a straight line
+   medianLine                - create a median line between two points
+   cartesianLine             - create a line with cartesian coefficients
+   orthogonalLine            - create a line orthogonal to another one.
+   parallelLine              - create a line parallel to another one.
+   bisector                  - return the bisector of two lines, or 3 points
+   lineFit                   - least mean square line regression
+
+ Operations on line objects:
+ ---------------------------
+   clipEdge                  - clip an edge with a rectangular box
+   clipLine                  - clip a line with a box
+   reverseLine               - return same line but with opposite orientation
+   edgeAngle                 - return angle of edge
+   edgeLength                - return length of an edge
+   lineAngle                 - return angle between lines
+   linePosition              - return position of a point on a line
+   edgePosition              - return position of a point on an edge
+
+ Points and lines:
+ -----------------
+   intersectEdges            - return all intersections points of N edges in 2D
+   intersectLineEdge         - return intersection between a line and an edge
+   intersectLines            - return all intersection points of N lines in 2D
+   intersectLinePolygon      - get intersection points between a line and a polygon
+   intersectRayPolygon       - get intersection points between a ray and a polygon
+   distancePointEdge         - compute distance between a point and an edge
+   distancePointLine         - compute distance between a point and a line
+   projPointOnLine           - return the projection of a point on a line
+   pointOnLine               - create a point on a line at a given distance from line origin
+   isPointOnEdge             - test if a point belongs to an edge
+   isPointOnLine             - test if a point belongs to a line
+   isPointOnRay              - test if a point belongs to a ray
+   isLeftOriented            - check if a point is on the left side of a line
+
+ Polygons:
+ ---------
+   polygons2d                - description of functions operating on polygons
+   distancePointPolygon      - Compute shortest distance between a point and a polygon
+   distancePolygons          - compute the shortest distance between 2 polygons
+   polygonPoint              - extract a point from a polygon
+   polygonSelfIntersections  - find common points between 2 polygons
+   polygonSubcurve           - extract a portion of a polygon
+   reversePolygon            - reverse a polygon, by iterating vertices from the end
+   projPointOnPolygon        - projPointOnPolygon  compute position of a point projected on a polygon
+   isPointInPolygon          - check if a point islocated inside a polygon
+   clipPolygon               - clip a polygon with a rectangular window
+   clipPolygonHP             - clip a polygon with a Half-plane defined by a directed line
+   polygonCentroid           - compute centroid (center of mass) of a polygon
+   polygonArea               - compute the signed area of a polygon
+   polygonLength             - compute perimeter of a polygon
+   polygonNormalAngle        - compute normal angle at a vertex of the polygon
+   polygonBounds             - compute bounding box of a polygon
+   polygonContains           - test if a point is contained in a multiply connected polygon
+   expandPolygon             - expand a polygon by a given (signed) distance
+   polygonLoops              - divide a possibly self-intersecting polygon into a set of simple loops
+   splitPolygons             - convert a NaN separated polygon list to a cell array of polygons
+   readPolygon               - read a polygon stored in a file
+   rectAsPolygon             - convert a (centered) rectangle into a series of points
+   steinerPoint              - compute steiner point (weighted centroid) of a polygon
+   steinerPolygon            - create a Steiner polygon from a set of vectors
+   supportFunction           - compute support function of a polygon
+   convexification           - compute convexification of a polygon
+   medialAxisConvex          - compute medial axis of a convex polygon
+
+ Polylines:
+ ----------
+   polylines2d               - description of functions operating on polylines
+   polylinePoint             - extract a point from a polyline
+   polylineLength            - return length of a polyline given as a list of points
+   polylineCentroid          - polylineCentroid compute centroid of a curve defined by a series of points
+   polylineSubcurve          - extract a portion of a polyline
+   reversePolyline           - reverse a polyline, by iterating vertices from the end
+   isPointOnPolyline         - check if a point belongs to a polyline
+   projPointOnPolyline       - compute position of a point projected on a polyline
+   distancePointPolyline     - Compute shortest distance between a point and a polyline
+   distancePolylines         - compute the shortest distance between 2 polylines
+   intersectPolylines        - find common points between 2 polylines
+   polylineSelfIntersections - find self-intersections points of a polyline
+   parametrize               - return a parametrization of a curve
+   curvature                 - estimate curvature of a curve defined by points
+   cart2geod                 - convert cartesian coordinates to geodesic coord.
+   geod2cart                 - convert geodesic coordinates to cartesian coord.
+   curveMoment               - Compute inertia moment of a 2D curve
+   curveCMoment              - Compute centered inertia moment of a 2D curve
+   curveCSMoment             - Compute centered scaled moment of a 2D curve
+
+ Circles and Ellipses:
+ ---------------------
+   circles2d                 - description of functions operating on circles
+   createCircle              - create a circle from points
+   createDirectedCircle      - create a directed circle
+   circleAsPolygon           - convert a circle into a series of points
+   ellipseAsPolygon          - convert an ellipse into a series of points
+   circleArcAsCurve          - convert a circle arc into a series of points
+   enclosingCircle           - find the minimum circle enclosing a set of points.
+   isPointInCircle           - test if a point is located inside a given circle.
+   isPointOnCircle           - test if a point is located on a given circle.
+   radicalAxis               - compute the radical axis (or radical line) of 2 circles
+
+ Polynomial curves:
+ ------------------
+   polynomialCurves2d        - description of functions operating on polynomial curves
+   polynomialCurveCentroid   - compute the centroid of a polynomial curve
+   polynomialCurveCurvature  - compute the local curvature of a polynomial curve
+   polynomialCurveCurvatures - compute curvatures of a polynomial revolution surface
+   polynomialCurveDerivative - compute derivative vector of a polynomial curve
+   polynomialCurveProjection - projection of a point on a polynomial curve
+   polynomialCurveFit        - fit a polynomial curve to a series of points
+   polynomialCurveSetFit     - fit a set of polynomial curves to a segmented image
+   polyfit2                  - polynomial approximation of a curve
+   polynomialCurveLength     - compute the length of a polynomial curve
+   polynomialCurveNormal     - compute the normal of a polynomial curve
+   polynomialCurvePoint      - compute point corresponding to a position
+   polynomialCurvePosition   - compute position on a curve for a given length
+   polynomialDerivate        - derivate a polynomial
+
+ Other shapes:
+ -------------
+   squareGrid                - generate equally spaces points in plane.
+   hexagonalGrid             - generate hexagonal grid of points in the plane.
+   triangleGrid              - generate triangular grid of points in the plane.
+   crackPattern              - create a (bounded) crack pattern tessellation
+   crackPattern2             - create a (bounded) crack pattern tessellation
+
+ Geometric transforms:
+ ---------------------
+   transforms2d              - description of functions operating on transforms
+   createTranslation         - return 3*3 matrix of a translation
+   createRotation            - return 3*3 matrix of a rotation
+   createScaling             - return 3*3 matrix of a scaling in 2 dimensions
+   createHomothecy           - create a homothecy as an affine transform
+   createLineReflection      - create line reflection as 2D affine transform
+   fitAffineTransform2d      - fit an affine transform using two point sets
+   transformPoint            - transform a point with an affine transform
+   transformVector           - transform a vector with an affine transform
+   transformEdge             - transform an edge with an affine transform
+   transformLine             - transform a line with an affine transform
+
+ Utility objects:
+ ----------------
+   formatAngle               - Ensure an angle value is comprised between 0 and 2*PI
+   boxes2d                   - conventions for using bounding boxes
+
+ Drawing functions:
+ ------------------
+   drawArrow                 - draw an arrow on the current axis
+   drawCenteredEdge          - draw an edge centered on a point
+   drawCircle                - draw a circle on the current axis
+   drawCircleArc             - draw a circle arc on the current axis
+   drawCurve                 - draw a curve specified by a list of points
+   drawEdge                  - draw the edge given by 2 points
+   drawEllipse               - draw an ellipse on the current axis
+   drawEllipseArc            - draw an ellipse on the current axis
+   drawParabola              - draw a parabola on the current axis
+   drawLabels                - draw labels at specified positions
+   drawLine                  - draw the line on the current axis
+   drawPoint                 - draw the point on the axis.
+   drawPolygon               - draw a polygon specified by a list of points
+   drawPolyline              - draw a polyline specified by a list of points
+   drawRay                   - draw a ray on the current axis
+   drawRect                  - draw rectangle on the current axis
+   drawRect2                 - draw centered rectangle on the current axis
+   drawShape                 - draw various types of shapes (circles, polygons ...)
+   fillPolygon               - fill a polygon specified by a list of points
+
+
+   Credits:
+   * function 'enclosingCircle' rewritten from a file from Yazan Ahed
+       (yash78@gmail.com), available on Matlab File Exchange
+
+ -----
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ created the  07/11/2005.
+ Copyright INRA - Cepia Software Platform.
+ http://www.pfl-cepia.inra.fr/index.php?page=geom2d
+ Licensed under the terms of the BSD License, see the file license.txt</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

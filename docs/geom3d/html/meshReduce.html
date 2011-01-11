@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of meshReduce</title>
+  <meta name="keywords" content="meshReduce">
+  <meta name="description" content="MESHREDUCE return mesh with minimal number of faces">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom3d</a> &gt; meshReduce.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>meshReduce
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MESHREDUCE return mesh with minimal number of faces</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = meshReduce(nodes, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MESHREDUCE return mesh with minimal number of faces
+
+   [NODES FACES] = meshReduce(NODES, FACES)
+   [NODES EDGES FACES] = meshReduce(NODES, EDGES, FACES)
+   NODES is a set of 3D points (as a Nn-by-3 array), 
+   and FACES is one of:
+   - a Nf-by-X array containing vertex indices of each face, with each
+   face having the same number of vertices,
+   - a Nf-by 1 cell array, each cell containing indices of a face.
+   The function groups faces which are coplanar and contiguous, resulting
+   in a &quot;lighter&quot; mesh. This can be useful to visualize binary 3D images
+   for example.
+
+   FACES = meshReduce(..., PRECISION)
+   Adjust the threshold for deciding if two faces are coplanar or
+   parallel. Default value is 1e-14.
+
+   Example
+   [n e f] = createCube;
+   f2 = meshReduce(n);
+   drawPolyhedra(n, f);
+
+   See also
+   <a href="drawPolyhedra.html" class="code" title="function varargout = drawPolyhedra(varargin)">drawPolyhedra</a>, convhull, convhulln, <a href="minConvexHull.html" class="code" title="function faces = minConvexHull(nodes, varargin)">minConvexHull</a>
+
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@jouy.inra.fr
+ Created: 2006-07-05
+ Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="faceNormal.html" class="code" title="function normals = faceNormal(nodes, faces)">faceNormal</a>	FACENORMAL  compute normal vector of a polyhedron face</li><li><a href="isCoplanar.html" class="code" title="function copl = isCoplanar(x,y,z,tolerance)">isCoplanar</a>	ISCOPLANAR Tests input points for coplanarity in 3-space.</li><li><a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>	VECTORNORM3D compute norm of vector or of set of 3D vectors</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

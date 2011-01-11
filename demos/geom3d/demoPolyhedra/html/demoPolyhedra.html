@@ -1,0 +1,242 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      --><title>demoPolyhedra</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2010-12-07"><meta name="m-file" content="demoPolyhedra"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="keyword">function</span> demoPolyhedra(varargin)
+<span class="comment">%DEMOPOLYHEDRA Draw main polyhedra defined in the geom3d toolbox</span>
+<span class="comment">%</span>
+<span class="comment">%   output = demoPolyhedra(input)</span>
+<span class="comment">%</span>
+<span class="comment">%   Example</span>
+<span class="comment">%   demoPolyhedra</span>
+<span class="comment">%</span>
+<span class="comment">%   See also</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+<span class="comment">% ------</span>
+<span class="comment">% Author: David Legland</span>
+<span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+<span class="comment">% Created: 2010-12-07,    using Matlab 7.9.0.529 (R2009b)</span>
+<span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+
+figure;
+
+<span class="comment">% cube</span>
+subplot(3, 3, 1);
+[v f] = createCube;
+drawMesh(v, f);
+view(3); axis(<span class="string">'vis3d'</span>); axis <span class="string">off</span>;
+title(<span class="string">'Cube'</span>);
+
+<span class="comment">% Octahedron</span>
+subplot(3, 3, 2);
+[v f] = createOctahedron;
+drawMesh(v, f);
+view(3); axis(<span class="string">'vis3d'</span>); axis <span class="string">off</span>;
+title(<span class="string">'Octahedron'</span>);
+
+<span class="comment">% Cube-Octahedron</span>
+subplot(3, 3, 3);
+[v f] = createCubeOctahedron;
+drawMesh(v, f);
+view(3); axis(<span class="string">'vis3d'</span>); axis <span class="string">off</span>;
+title(<span class="string">'Cube-Octahedron'</span>);
+
+<span class="comment">% Icosahedron</span>
+subplot(3, 3, 4);
+[v f] = createIcosahedron;
+drawMesh(v, f);
+view(3); axis(<span class="string">'vis3d'</span>); axis <span class="string">off</span>;
+title(<span class="string">'Icosahedron'</span>);
+
+<span class="comment">% Dodecahedron</span>
+subplot(3, 3, 5);
+[v f] = createDodecahedron;
+drawMesh(v, f);
+view(3); axis(<span class="string">'vis3d'</span>); axis <span class="string">off</span>;
+title(<span class="string">'Dodecahedron'</span>);
+
+<span class="comment">% Soccer Ball, buckyall, C60...</span>
+subplot(3, 3, 6);
+[v f] = createSoccerBall;
+drawMesh(v, f);
+view(3); axis(<span class="string">'vis3d'</span>); axis <span class="string">off</span>;
+title(<span class="string">'Soccer Ball'</span>);
+
+
+<span class="comment">% Tetrahedron</span>
+subplot(3, 3, 7);
+[v f] = createTetrahedron;
+drawMesh(v, f);
+view(3); axis(<span class="string">'vis3d'</span>); axis <span class="string">off</span>;
+title(<span class="string">'Tetrahedron'</span>);
+
+
+<span class="comment">% Tetrakaidecahedron</span>
+subplot(3, 3, 8);
+[v f] = createTetrakaidecahedron;
+drawMesh(v, f);
+view(3); axis(<span class="string">'vis3d'</span>); axis <span class="string">off</span>;
+title(<span class="string">'Tetrakaidecahedron'</span>);
+
+
+<span class="comment">% Menger Sponge</span>
+subplot(3, 3, 9);
+[v e f] = createMengerSponge;
+drawMesh(v, f);
+view(3); axis(<span class="string">'vis3d'</span>); axis <span class="string">off</span>;
+title(<span class="string">'Menger Sponge'</span>);
+</pre><img vspace="5" hspace="5" src="demoPolyhedra_01.png" alt=""> <p class="footer"><br>
+      Published with MATLAB&reg; 7.9<br></p></div><!--
+##### SOURCE BEGIN #####
+function demoPolyhedra(varargin)
+%DEMOPOLYHEDRA Draw main polyhedra defined in the geom3d toolbox
+%
+%   output = demoPolyhedra(input)
+%
+%   Example
+%   demoPolyhedra
+%
+%   See also
+%
+%
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% Author: David Legland
+% e-mail: david.legland@grignon.inra.fr
+% Created: 2010-12-07,    using Matlab 7.9.0.529 (R2009b)
+% Copyright 2010 INRA - Cepia Software Platform.
+
+figure;
+
+% cube
+subplot(3, 3, 1);
+[v f] = createCube;
+drawMesh(v, f);
+view(3); axis('vis3d'); axis off;
+title('Cube');
+
+% Octahedron
+subplot(3, 3, 2);
+[v f] = createOctahedron;
+drawMesh(v, f);
+view(3); axis('vis3d'); axis off;
+title('Octahedron');
+
+% Cube-Octahedron
+subplot(3, 3, 3);
+[v f] = createCubeOctahedron;
+drawMesh(v, f);
+view(3); axis('vis3d'); axis off;
+title('Cube-Octahedron');
+
+% Icosahedron
+subplot(3, 3, 4);
+[v f] = createIcosahedron;
+drawMesh(v, f);
+view(3); axis('vis3d'); axis off;
+title('Icosahedron');
+
+% Dodecahedron
+subplot(3, 3, 5);
+[v f] = createDodecahedron;
+drawMesh(v, f);
+view(3); axis('vis3d'); axis off;
+title('Dodecahedron');
+
+% Soccer Ball, buckyall, C60...
+subplot(3, 3, 6);
+[v f] = createSoccerBall;
+drawMesh(v, f);
+view(3); axis('vis3d'); axis off;
+title('Soccer Ball');
+
+
+% Tetrahedron
+subplot(3, 3, 7);
+[v f] = createTetrahedron;
+drawMesh(v, f);
+view(3); axis('vis3d'); axis off;
+title('Tetrahedron');
+
+
+% Tetrakaidecahedron
+subplot(3, 3, 8);
+[v f] = createTetrakaidecahedron;
+drawMesh(v, f);
+view(3); axis('vis3d'); axis off;
+title('Tetrakaidecahedron');
+
+
+% Menger Sponge
+subplot(3, 3, 9);
+[v e f] = createMengerSponge;
+drawMesh(v, f);
+view(3); axis('vis3d'); axis off;
+title('Menger Sponge');
+
+
+
+
+
+##### SOURCE END #####
+--></body></html>

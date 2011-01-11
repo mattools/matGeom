@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of curvature</title>
+  <meta name="keywords" content="curvature">
+  <meta name="description" content="CURVATURE estimate curvature of a curve defined by points">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom2d</a> &gt; curvature.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>curvature
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CURVATURE estimate curvature of a curve defined by points</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function kappa = curvature(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CURVATURE estimate curvature of a curve defined by points
+
+   KAPPA = curvature(T, PX, PY, METHOD, DEGREE)
+   First compute an approximation of the curve given by PX and PY, with
+   the parametrization T. METHOD used for approximation can be only:
+   'polynom', with specified degree
+   Further methods will be provided in a future version.
+   T, PX, and PY are N*1 array of the same length.
+   Then compute the curvature of approximated curve for each point.
+
+   For example:
+   KAPPA = curvature(t, px, py, 'polynom', 6)
+
+   KAPPA = curvature(T, POINTS, METHOD, DEGREE)
+   specify curve as a suite of points. POINTS is size [N*2].
+
+   KAPPA = curvature(PX, PY, METHOD, DEGREE)
+   KAPPA = curvature(POINTS, METHOD, DEGREE)
+   compute implicite normalization of the curve, based on euclidian
+   distance between 2 consecutive points, and normalized between 0 and 1.
+
+
+   See Also:
+   <a href="polylines2d.html" class="code" title="function polylines2d(varargin)">polylines2d</a>, <a href="parametrize.html" class="code" title="function par = parametrize(varargin)">parametrize</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 07/04/2003.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="parametrize.html" class="code" title="function par = parametrize(varargin)">parametrize</a>	PARAMETRIZE return a parametrization of a curve</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

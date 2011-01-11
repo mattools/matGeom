@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of distancePoints3d</title>
+  <meta name="keywords" content="distancePoints3d">
+  <meta name="description" content="DISTANCEPOINTS3D compute euclidean distance between 3D Points">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom3d</a> &gt; distancePoints3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>distancePoints3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DISTANCEPOINTS3D compute euclidean distance between 3D Points</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function dist = distancePoints3d(p1, p2, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DISTANCEPOINTS3D compute euclidean distance between 3D Points
+
+   D = distancePoints3d(P1, P2) return distance between points P1 and
+   P2, given as [X Y Z].
+   
+   If P1 and P2 are two arrays of points, result is a N1*N2 array
+   containing distance between each point of P1 and each point of P2. 
+
+
+   D = distancePoints3d(P1, P2, NOR)
+   with NOR being 1, 2, or Inf, corresponfing to the norm used. Default is
+   2 (euclidean norm). 1 correspond to manhattan (or taxi driver) distance
+   and Inf to maximum difference in each coordinate.
+
+   Deprecated: use function 'geom2d/distancePoints' instead, which manages
+   different norms and different dimensions
+
+   See also :
+       minDistancePoints, distancePoints
+
+   ---------
+
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 18/02/2005.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="intersectPlaneSphere.html" class="code" title="function circle = intersectPlaneSphere(plane, sphere)">intersectPlaneSphere</a>	INTERSECTPLANESPHERE return intersection between a plane and a sphere</li></ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

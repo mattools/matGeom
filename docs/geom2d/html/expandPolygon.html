@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of expandPolygon</title>
+  <meta name="keywords" content="expandPolygon">
+  <meta name="description" content="EXPANDPOLYGON expand a polygon by a given (signed) distance">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom2d</a> &gt; expandPolygon.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>expandPolygon
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>EXPANDPOLYGON expand a polygon by a given (signed) distance</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function loops = expandPolygon(poly, dist) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">EXPANDPOLYGON expand a polygon by a given (signed) distance
+
+   POLY2 = expandPolygon(POLY, DIST);
+   Associates to each edge of the polygon POLY the parallel line located
+   at distance DIST from the current edge, and compute intersections with
+   neighbor parallel lines. The resulting polygon is simplified to remove
+   inner &quot;loops&quot;, and can be disconnected.
+   The result is a cell array, each cell containing a simple linear ring.
+   
+   This is a kind of dilation, but behaviour on corners is different.
+   This function keeps angles of polygons, but there is no direct relation
+   between length of 2 polygons.
+
+   It is also possible to specify negative distance, and get all points
+   inside the polygon. If the polygon is convex, the result equals
+   morphological erosion of polygon by a ball with radius equal to the
+   given distance.
+
+   See also:
+   <a href="polygons2d.html" class="code" title="function polygons2d(varargin)">polygons2d</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 14/05/2005.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>	CREATELINE create a line with various inputs.</li><li><a href="distancePolygons.html" class="code" title="function dist = distancePolygons(poly1, poly2)">distancePolygons</a>	DISTANCEPOLYGONS  compute the shortest distance between 2 polygons</li><li><a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2)">intersectLines</a>	INTERSECTLINES return all intersection points of N lines in 2D</li><li><a href="parallelLine.html" class="code" title="function res = parallelLine(line, point)">parallelLine</a>	PARALLELLINE create a line parallel to another one.</li><li><a href="polygonLoops.html" class="code" title="function loops = polygonLoops(poly)">polygonLoops</a>	POLYGONLOOPS  divide a possibly self-intersecting polygon into a set of simple loops</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

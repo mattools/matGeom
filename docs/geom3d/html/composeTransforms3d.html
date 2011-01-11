@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of composeTransforms3d</title>
+  <meta name="keywords" content="composeTransforms3d">
+  <meta name="description" content="COMPOSETRANSFORMS3D concatenate several space transformations">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom3d</a> &gt; composeTransforms3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>composeTransforms3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>COMPOSETRANSFORMS3D concatenate several space transformations</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function trans = composeTransforms3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">COMPOSETRANSFORMS3D concatenate several space transformations
+
+   TRANS = composeTransforms3d(TRANS1, TRANS2, ...);
+   Computes the affine transform equivalent to performing successively
+   TRANS1, TRANS2, ...
+   
+   Example:
+   PTS  = rand(20, 3);
+   ROT1 = rotationOx(pi/3);
+   ROT2 = rotationOx(pi/4);
+   ROT3 = rotationOx(pi/5);
+   ROTS = composeTransforms3d(ROT1, ROT2, ROT3);
+   Then:
+   PTS2 = transformPoint3d(PTS, ROTS);
+   will give the same result as:
+   PTS3 = transformPoint3d(transformPoint3d(transformPoint3d(PTS, ...
+       ROT1), ROT2), ROT3);
+
+   See also:
+   <a href="transforms3d.html" class="code" title="function varargout = transforms3d(varargin)">transforms3d</a>, <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(varargin)">transformPoint3d</a>
+
+   ---------
+
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 29/29/2006.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

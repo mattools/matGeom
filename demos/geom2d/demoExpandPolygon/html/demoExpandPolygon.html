@@ -1,0 +1,176 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      -->
+      <title>demoExpandPolygon</title>
+      <meta name="generator" content="MATLAB 7.7">
+      <meta name="date" content="2009-06-17">
+      <meta name="m-file" content="demoExpandPolygon"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head>
+   <body>
+      <div class="content">
+         <h2>Contents</h2>
+         <div>
+            <ul>
+               <li><a href="#2">Base polygon</a></li>
+               <li><a href="#3">Positive expansion</a></li>
+               <li><a href="#4">Negative expansion</a></li>
+            </ul>
+         </div><pre class="codeinput"><span class="comment">%DEMOEXPANDPOLYGON  Expand a polygon by a given distance</span>
+<span class="comment">%   demoExpandPolygon</span>
+<span class="comment">%</span>
+<span class="comment">%   Example</span>
+<span class="comment">%   demoExpandPolygon</span>
+<span class="comment">%</span>
+<span class="comment">%   See also</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+<span class="comment">% ------</span>
+<span class="comment">% Author: David Legland</span>
+<span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+<span class="comment">% Created: 2009-06-17,    using Matlab 7.7.0.471 (R2008b)</span>
+<span class="comment">% Copyright 2009 INRA - Cepia Software Platform.</span>
+</pre><h2>Base polygon<a name="2"></a></h2><pre class="codeinput"><span class="comment">% create a non-convex polygon</span>
+poly = [200 100;200 150;150 150;150 200;50 200;150 100];
+
+<span class="comment">% show the polygon</span>
+figure(1); clf; hold <span class="string">on</span>;
+drawPolygon(poly, <span class="string">'linewidth'</span>, 2);
+
+<span class="comment">% set up display</span>
+axis <span class="string">equal</span>;
+axis([20 230 70 230]);
+</pre><img vspace="5" hspace="5" src="demoExpandPolygon_01.png" alt=""> <h2>Positive expansion<a name="3"></a></h2><pre class="codeinput"><span class="comment">% expand the polygon by a positive distance (outside of the polygon)</span>
+polyOut = expandPolygon(poly, 10);
+
+<span class="comment">% draw the expanded polygon</span>
+drawPolygon(polyOut, <span class="string">'k'</span>);
+</pre><img vspace="5" hspace="5" src="demoExpandPolygon_02.png" alt=""> <h2>Negative expansion<a name="4"></a></h2><pre class="codeinput"><span class="comment">% expand the polygon by a negative distance (inside the polygon)</span>
+polyIn = expandPolygon(poly, -20);
+
+<span class="comment">% draw the expanded polygon</span>
+drawPolygon(polyIn, <span class="string">'g'</span>);
+
+<span class="comment">% decorate</span>
+legend(<span class="string">'Original'</span>, <span class="string">'Outside'</span>, <span class="string">'Inside'</span>)
+</pre><img vspace="5" hspace="5" src="demoExpandPolygon_03.png" alt=""> <p class="footer"><br>
+            Published with MATLAB&reg; 7.7<br></p>
+      </div>
+      <!--
+##### SOURCE BEGIN #####
+%DEMOEXPANDPOLYGON  Expand a polygon by a given distance
+%   demoExpandPolygon
+%
+%   Example
+%   demoExpandPolygon
+%
+%   See also
+%
+%
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% Author: David Legland
+% e-mail: david.legland@grignon.inra.fr
+% Created: 2009-06-17,    using Matlab 7.7.0.471 (R2008b)
+% Copyright 2009 INRA - Cepia Software Platform.
+
+
+%% Base polygon
+
+% create a non-convex polygon
+poly = [200 100;200 150;150 150;150 200;50 200;150 100];
+
+% show the polygon
+figure(1); clf; hold on;
+drawPolygon(poly, 'linewidth', 2);
+
+% set up display
+axis equal;
+axis([20 230 70 230]);
+
+
+%% Positive expansion
+
+% expand the polygon by a positive distance (outside of the polygon)
+polyOut = expandPolygon(poly, 10);
+
+% draw the expanded polygon
+drawPolygon(polyOut, 'k');
+
+
+%% Negative expansion
+
+% expand the polygon by a negative distance (inside the polygon)
+polyIn = expandPolygon(poly, -20);
+
+% draw the expanded polygon
+drawPolygon(polyIn, 'g');
+
+% decorate
+legend('Original', 'Outside', 'Inside')
+
+##### SOURCE END #####
+-->
+   </body>
+</html>

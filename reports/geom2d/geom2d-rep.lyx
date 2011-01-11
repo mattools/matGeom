@@ -1,0 +1,2976 @@
+#LyX 1.4.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 245
+\begin_document
+\begin_header
+\textclass report
+\language french
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize 12
+\spacing single
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 2
+\tocdepth 1
+\paragraph_separation indent
+\defskip medskip
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Boîte à outil matlab pour le calcul géométrique
+\end_layout
+
+\begin_layout Author
+D.
+ Legland
+\end_layout
+
+\begin_layout Abstract
+Descriptif des fonctions que j'ai développées sous matlab pour regrouper
+ les calculs faits sur les objets géométriques (points, droites, cercles,
+ polygones, courbes polynomiales...).
+ Je précise les structures de données utilisées, et j'explique quelques
+ fonctions.
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand \tableofcontents{}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\newpage
+
+\end_layout
+
+\begin_layout Chapter
+Introduction
+\end_layout
+
+\begin_layout Standard
+L'idée de cette bibliothèque est de fournir un ensemble de fonctions permettant
+ les calculs sur des primitives géométriques courantes.
+ Les primitives géométriques considérées sont par exemple les points, les
+ droites, les cercles ou les polygones, et les calculs proposés sont par
+ exemple des calculs d'intersections (entre deux droites, entre une droite
+ et un cercle...), de transformation, ou de mesure (aire et périmètre d'un
+ polygone, longueur d'une courbe polynomiale...).
+\end_layout
+
+\begin_layout Standard
+Les fonctions ont été écrites dans le but de cacher la partie calculatoire,
+ en essayant de fournir des noms de fonctions suffisamment explicites pour
+ pouvoir trouver rapidement la fonction nécessaire à une tâche donnée.
+ La bibliothèque ne prétend sûrement pas être complète, mais essaie plutôt
+ de fournir une base stable, qui permet de d'implémenter rapidement des
+ algorithmes plus évolués sans avoir à réinventer sans cesse la roue.
+\end_layout
+
+\begin_layout Standard
+Dans ce document, les fonctions sont classées en fonctions des primitives
+ acceptées en argument (fonctions pour les points, fonctions pour les droites...).
+ Cette distinction n'existe pas pour l'implémentation, toutes les fonctions
+ étant stockées dans le même répertoire.
+\end_layout
+
+\begin_layout Chapter
+Considérations informatiques
+\end_layout
+
+\begin_layout Section
+Représentation des données
+\end_layout
+
+\begin_layout Standard
+On essaie de représenter chaque primitive géométrique par un ensemble de
+ valeurs numériques.
+ On souhaite qu'une série de valeurs puisse définir de manière unique une
+ primitive.
+ Par contre l'inverse n'est pas nécessaire\InsetSpace ~
+: une même primitive peut être
+ définie par plusieurs séries de valeurs.
+ Par exemple une droite peut être définie par plusieurs couples de points.
+\end_layout
+
+\begin_layout Standard
+En général, tous les paramètres définissant une figure peuvent être placés
+ dans un seul vecteur ligne.
+ Cela permet de considérer un ensemble de figures en utilisant simplement
+ un tableau de valeurs.
+\end_layout
+
+\begin_layout Standard
+On tente d'éviter dans la mesure du possible les cas pathologiques pour
+ l'ordinateur (on évite de considérer la pente d'une droite verticale ou
+ presque verticale, qui tend vers l'infini).
+ 
+\end_layout
+
+\begin_layout Section
+Gestion des cas particuliers
+\end_layout
+
+\begin_layout Standard
+Le résultat de certaines fonctions peut ne pas être défini dans certains
+ cas particuliers, par exemple le point d'intersection de deux droites parallèle
+s, ou le cercle passant par 3 points alignés.
+ 
+\end_layout
+
+\begin_layout Standard
+La convention utilisée est de retourner un vecteur ne contenant que des
+ valeurs 
+\begin_inset Formula $\mbox{NaN}$
+\end_inset
+
+ lorsqu'une telle situation se présente.
+ 
+\end_layout
+
+\begin_layout Standard
+Pour certains cas, on considère aussi les valeurs infinies.
+ Par exemple, le point d'intersection de deux droites confondues est donné
+ par les coordonnées 
+\begin_inset Formula $[\infty,\infty]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Gestion des erreurs d'arrondi
+\end_layout
+
+\begin_layout Standard
+Les nombres manipulés ayant avec une précision finie, les calculs peuvent
+ ne pas tomber juste.
+ Par exemple, le calcul de la distance entre un point et une droite peut
+ renvoyer un résultat non nul même si le point appartient à la droite.
+\end_layout
+
+\begin_layout Standard
+La solution retenue est d'utiliser une valeur de tolérance.
+ Deux points sont donc égaux si leur distance est inférieure ou égale à
+ la valeur de tolérance.
+ En pratique, une valeur de tolérance de 
+\begin_inset Formula $10^{-14}$
+\end_inset
+
+ est utilisée.
+ 
+\end_layout
+
+\begin_layout Standard
+Une amélioration appréciable des fonctions consisterait à pouvoir spécifier
+ la tolérance de manière systématique.
+\end_layout
+
+\begin_layout Section
+Primitives utiles
+\end_layout
+
+\begin_layout Subsection
+Angles
+\end_layout
+
+\begin_layout Standard
+De manière générale, la bibliothèque utilise des angles en radians, orientés
+ positivement dans le sens trigonométrique (inverse des aiguilles d'une
+ montre), et calibrés entre 
+\begin_inset Formula $0$
+\end_inset
+
+ et 
+\begin_inset Formula $2\pi$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Boîte
+\end_layout
+
+\begin_layout Standard
+La boîte est un rectangle dont les bords sont parallèles aux axes considérés.
+ Cette structure de donnée est surtout utilisée pour définir les coordonnées
+ minimales et maximales d'une primitive, ou bien pour sélectionner les primitive
+s dans une zone donnée.
+\end_layout
+
+\begin_layout Standard
+Une boîte est définie par les 4 valeurs 
+\begin_inset Formula $[\mbox{xmin},\,\mbox{xmax},\,\mbox{ymin},\,\mbox{ymax}]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Chapter
+Points et vecteurs
+\end_layout
+
+\begin_layout Section
+Représentation
+\end_layout
+
+\begin_layout Standard
+Un point (ainsi qu'un vecteur) est représenté par un vecteur ligne contenant
+ ses coordonnées cartésiennes 
+\begin_inset Formula $x$
+\end_inset
+
+ et 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ En générale, la bibliothèque ne fait de différence formelle entre un point
+ et un vecteur.
+\end_layout
+
+\begin_layout Standard
+Un ensemble de points est représenté par une matrice 
+\begin_inset Formula $n\times2$
+\end_inset
+
+, où chaque ligne représente un point.
+\end_layout
+
+\begin_layout Section
+Création de points
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{centroid}
+
+\end_inset
+
+centroid
+\end_layout
+
+\begin_layout Standard
+Calcule le centroïde, éventuellement pondéré, d'un ensemble de points.
+\end_layout
+
+\begin_layout Description
+entrée un ensemble de points, donnés soit en arguments séparés, soit par
+ un tableau 
+\begin_inset Formula $n\times2$
+\end_inset
+
+, et éventuellement une pondération pour chaque point.
+\end_layout
+
+\begin_layout Description
+sortie le centroïde des points donnés en argument.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{polarPoint}
+
+\end_inset
+
+polarPoint
+\end_layout
+
+\begin_layout Standard
+Calcule les coordonnées d'un point donné en coordonnées polaires (angle+distance
+ à l'origine), en précisant éventuellement un point de référence.
+\end_layout
+
+\begin_layout Description
+entrée le point de référence (optionnel), les coordonnées polaires du point.
+\end_layout
+
+\begin_layout Description
+sortie les coordonnées cartésiennes du point créé.
+\end_layout
+
+\begin_layout Section
+Calculs sur les points
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{angle2points}
+
+\end_inset
+
+angle2points
+\end_layout
+
+\begin_layout Standard
+Calcule l'angle par rapport à l'horizontal formé par la droite passant par
+ deux points.
+ L'angle est compté en radians, positif dans le sens trigonométrique, et
+ calibré entre 
+\begin_inset Formula $0$
+\end_inset
+
+ et 
+\begin_inset Formula $2\pi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+entrée deux points.
+\end_layout
+
+\begin_layout Description
+sortie l'angle avec l'horizontale de la droite passant par les deux points.
+\end_layout
+
+\begin_layout Standard
+Si les entrées sont deux tableaux de 
+\begin_inset Formula $n$
+\end_inset
+
+ points, le résultat est un vecteur colonne de 
+\begin_inset Formula $n$
+\end_inset
+
+ valeurs représentant les angles correspondants à chaque couple de points.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{angle3Points}
+
+\end_inset
+
+angle3Points
+\end_layout
+
+\begin_layout Standard
+Calcule l'angle formé par 
+\begin_inset Formula $3$
+\end_inset
+
+ points, le deuxième point étant pris comme point de mesure de l'angle.
+ Le résultat est calibré entre 
+\begin_inset Formula $0$
+\end_inset
+
+ et 
+\begin_inset Formula $2\pi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+entrée trois points.
+\end_layout
+
+\begin_layout Description
+sortie l'angle entre les 
+\begin_inset Formula $3$
+\end_inset
+
+ points.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{angleSort}
+
+\end_inset
+
+angleSort
+\end_layout
+
+\begin_layout Standard
+Trie un ensemble de points en fonction de leur position angulaire par rapport
+ à l'origine ou par rapport à un point de référence.
+ Le polygone formé par les points après le tri ne se recoupe pas.
+\end_layout
+
+\begin_layout Description
+entrées un point de référence (optionnel), un ensemble de points.
+\end_layout
+
+\begin_layout Description
+sortie les même points qu'en entrée, triés selon leur position angulaire,
+ et éventuellement l'ordre de tri.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{distancePoints}
+
+\end_inset
+
+distancePoints
+\end_layout
+
+\begin_layout Standard
+Calcule la distance entre deux points, entre un points et un groupe de points,
+ ou entre deux groupes de points.
+\end_layout
+
+\begin_layout Description
+entrée un point ou un groupe de points, un point ou un groupe de points,
+ et éventuellement la métrique utilisée.
+\end_layout
+
+\begin_layout Description
+sortie la distance entre les deux points, ou un vecteur colonne contenant
+ les distances entre le point isolé et chaque point du groupe de points,
+ ou alors les distances calculées entre chaque couple de points ayant le
+ mêmes indices dans les deux groupes.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{minDistancePoints}
+
+\end_inset
+
+minDistancePoints
+\end_layout
+
+\begin_layout Standard
+Calcule la plus petite distance entre des points.
+ Selon la dimension des arguments, plusieurs cas peuvent être considérés\InsetSpace ~
+:
+ distance minimale entre un point et un groupe de points, distance minimale
+ entre tous les couples de points possibles parmi un groupe, ou distance
+ minimale calculée pour chaque point d'un groupe par rapport à un autre
+ groupe.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées des points (un ou deux groupes de points), et éventuellem
+ent la métrique utilisée.
+\end_layout
+
+\begin_layout Description
+sortie la distance minimale (ou un vecteur colonne contenant les distances
+ minimales calculées pour chaque point du premier groupe) au deuxième groupe
+ de points.
+\end_layout
+
+\begin_layout Section
+Manipulation de vecteurs
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{vecnorm}
+
+\end_inset
+
+vecnorm
+\end_layout
+
+\begin_layout Standard
+Calcule la norme d'un vecteur.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées du vecteur, ou un groupe de coordonnées.
+\end_layout
+
+\begin_layout Description
+sortie la norme du vecteur, ou un ensemble de normes.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{normalize}
+
+\end_inset
+
+normalize
+\end_layout
+
+\begin_layout Standard
+Calcule le vecteur normalisé, c'est à dire tel que sa norme vaut 
+\begin_inset Formula $1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+entrée un vecteur ou un ensemble de vecteurs.
+\end_layout
+
+\begin_layout Description
+sortie les vecteurs normalisés, avec une norme égale à 1.
+\end_layout
+
+\begin_layout Chapter
+Droites, segments et demi-droites
+\end_layout
+
+\begin_layout Section
+Représentations
+\end_layout
+
+\begin_layout Standard
+On considère plusieurs types d'objets inscrits dans une droite\InsetSpace ~
+: les droites
+ proprement dites (line), les segments (edge), les demi droites (ray), et
+ les arcs de droites (linearc).
+\end_layout
+
+\begin_layout Standard
+Pour les droites et les demi-droites, on considère 
+\begin_inset Formula $4$
+\end_inset
+
+paramètres\InsetSpace ~
+: les coordonnées d'un point origine 
+\begin_inset Formula $(x_{0},y_{0})$
+\end_inset
+
+, et les valeurs d'un vecteur directeur 
+\begin_inset Formula $(d_{x},d_{y})$
+\end_inset
+
+, concaténés dans un vecteur ligne de 
+\begin_inset Formula $4$
+\end_inset
+
+ éléments\InsetSpace ~
+: 
+\begin_inset Formula $[x_{0},y_{0},d_{x},d_{y}]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Pour les segments, on considère les coordonnées du premier point et les
+ coordonnées du deuxième point, concaténées dans un vecteur ligne de 
+\begin_inset Formula $4$
+\end_inset
+
+ éléments : 
+\begin_inset Formula $[x_{1},y_{1},x_{2},y_{2}]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Pour un arc de droite, on considère 
+\begin_inset Formula $6$
+\end_inset
+
+ paramètres\InsetSpace ~
+: les 
+\begin_inset Formula $4$
+\end_inset
+
+ paramètres de la droite support, et 
+\begin_inset Formula $2$
+\end_inset
+
+ paramètres 
+\begin_inset Formula $t_{0}$
+\end_inset
+
+ et 
+\begin_inset Formula $t_{1}$
+\end_inset
+
+ marquant les limites de paramétrisation de l'objet\InsetSpace ~
+: 
+\begin_inset Formula $[x_{0},y_{0},d_{x},d_{y},t_{0},t_{1}]$
+\end_inset
+
+.
+ On retrouve une droite avec 
+\begin_inset Formula $t_{0}=-\infty$
+\end_inset
+
+ et 
+\begin_inset Formula $t_{1}=\infty$
+\end_inset
+
+, une demi-droite si 
+\begin_inset Formula $t_{1}=\infty$
+\end_inset
+
+, et un segment de droite si 
+\begin_inset Formula $t_{0}=0$
+\end_inset
+
+ et 
+\begin_inset Formula $t_{1}=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Fonctions de création
+\end_layout
+
+\begin_layout Standard
+Ces fonctions permettent de créér simplement les structures de données correspon
+dant aux primitives manipulées.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{createLine}
+
+\end_inset
+
+createLine
+\end_layout
+
+\begin_layout Standard
+Crée une droite à partir de deux points.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées de deux points.
+\end_layout
+
+\begin_layout Description
+sortie une paramétrisation de la droite passant par les deux points.
+ L'origine de la droite est le premier point, le vecteur directeur est le
+ vecteur joignant les deux points.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{parallelLine}
+
+\end_inset
+
+parallelLine
+\end_layout
+
+\begin_layout Standard
+Crée une droite parallèle à une droite donnée.
+\end_layout
+
+\begin_layout Description
+entrée la paramétrisation d'une droite, et les coordonnées d'un point.
+\end_layout
+
+\begin_layout Description
+sortie une droite parallèle à la droite donnée en argument, et passant par
+ le point spécifié.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{orthogonalLine}
+
+\end_inset
+
+orthogonalLine
+\end_layout
+
+\begin_layout Standard
+Crée une droite perpendiculaire à une droite donnée.
+\end_layout
+
+\begin_layout Description
+entrée la paramétrisation d'une droite, et les coordonnées d'un point.
+\end_layout
+
+\begin_layout Description
+sortie une droite perpendiculaire à la droite donnée en argument, et passant
+ par le point spécifié.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{medianLine}
+
+\end_inset
+
+medianLine
+\end_layout
+
+\begin_layout Standard
+Crée la médiatrice de deux points.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées de deux points.
+\end_layout
+
+\begin_layout Description
+sortie une paramétrisation de la médiatrice des deux points.
+ L'origine de la droite est le centre des points, le vecteur directeur est
+ le vecteur joignant les deux points augmenté de 
+\begin_inset Formula $\pi/2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{cartesianLine}
+
+\end_inset
+
+cartesianLine
+\end_layout
+
+\begin_layout Standard
+Crée une droite à partir de ses coordonnées cartésiennes\InsetSpace ~
+: 
+\begin_inset Formula $ax+by+c=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+entrée les trois paramètres 
+\begin_inset Formula $a$
+\end_inset
+
+, 
+\begin_inset Formula $b$
+\end_inset
+
+ et 
+\begin_inset Formula $c$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+sortie une paramétrisation de la droite vérifiant 
+\begin_inset Formula $ax+by+c=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{bisector}
+
+\end_inset
+
+bisector
+\end_layout
+
+\begin_layout Standard
+Crée la bissectrice de 
+\begin_inset Formula $3$
+\end_inset
+
+ points ou de 
+\begin_inset Formula $2$
+\end_inset
+
+ droites.
+ Dans le cas où trois points 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $B$
+\end_inset
+
+ et 
+\begin_inset Formula $C$
+\end_inset
+
+ sont passés en argument, la fonction renvoie la bissectrice des deux droites
+ 
+\begin_inset Formula $(BA)$
+\end_inset
+
+ et 
+\begin_inset Formula $(BC)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées des trois points, ou les paramétrisations des deux
+ droites.
+\end_layout
+
+\begin_layout Description
+sortie la bissectrice des points ou des droites.
+ 
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{invertLine}
+
+\end_inset
+
+invertLine
+\end_layout
+
+\begin_layout Standard
+Inverse l'orientation d'une droite.
+ Le changement d'orientation change la paramétrisation de la droite, mais
+ le tracé de la droite reste le même.
+\end_layout
+
+\begin_layout Description
+entrée la paramétrisation d'une droite.
+\end_layout
+
+\begin_layout Description
+sortie la droite avec le même point origine mais avec le vecteur directeur
+ opposé.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{createEdge}
+
+\end_inset
+
+createEdge
+\end_layout
+
+\begin_layout Standard
+Crée un segment de droite à partir de deux points.
+ L'interêt de cette fonction est d'une part de cacher à l'utilisateur la
+ représentation interne de la paramétrisation, d'autre part de rendre le
+ code plus explicite.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées de deux points.
+\end_layout
+
+\begin_layout Description
+sortie la paramétrisation du segment.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{lineFit}
+
+\end_inset
+
+lineFit
+\end_layout
+
+\begin_layout Standard
+Ajuste une droite à un ensemble de points, au sens des moindres carrés de
+ la distance euclidienne.
+\end_layout
+
+\begin_layout Description
+entrée un ensemble de points.
+\end_layout
+
+\begin_layout Description
+sortie une paramétrisation de la droite, telle que la somme des distances
+ au carré entre la droite et chaque point soit minimale.
+\end_layout
+
+\begin_layout Section
+Mesures sur les droites
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{lineAngle}
+
+\end_inset
+
+lineAngle
+\end_layout
+
+\begin_layout Standard
+Calcule l'angle d'une droite avec l'axe horizontal, ou l'angle entre deux
+ droites.
+\end_layout
+
+\begin_layout Description
+entrée la paramétrisation de la (ou des) droites.
+\end_layout
+
+\begin_layout Description
+sortie l'angle entre les deux droites, ou l'angle avec l'horizontale, calibré
+ entre 
+\begin_inset Formula $0$
+\end_inset
+
+ et 
+\begin_inset Formula $2\pi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{edgeAngle}
+
+\end_inset
+
+edgeAngle
+\end_layout
+
+\begin_layout Standard
+Calcule l'angle d'un segment de droite avec l'axe horizontal.
+\end_layout
+
+\begin_layout Description
+entrée la paramétrisation du segment.
+\end_layout
+
+\begin_layout Description
+sortie l'angle avec l'horizontale, calibré entre 
+\begin_inset Formula $0$
+\end_inset
+
+ et 
+\begin_inset Formula $2\pi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{edgeLength}
+
+\end_inset
+
+edgeLength
+\end_layout
+
+\begin_layout Standard
+Calcule la longueur d'un segment de droite.
+\end_layout
+
+\begin_layout Description
+entrée la paramétrisation du segment.
+\end_layout
+
+\begin_layout Description
+sortie la longueur du segment.
+\end_layout
+
+\begin_layout Section
+Opérations géométriques
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{intersectLines}
+
+\end_inset
+
+intersectLines
+\end_layout
+
+\begin_layout Standard
+Calcule le point d'intersection de deux droites.
+\end_layout
+
+\begin_layout Description
+entrée la paramétrisation des deux droites.
+\end_layout
+
+\begin_layout Description
+sortie les coordonnées du point d'intersection.
+ Si les droites sont parallèles, renvoie 
+\begin_inset Formula $[\mbox{NaN},\mbox{NaN}]$
+\end_inset
+
+.
+ Si les droites sont confondues, renvoie 
+\begin_inset Formula $[\infty,\infty]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{intersectEdges}
+
+\end_inset
+
+intersectEdges
+\end_layout
+
+\begin_layout Standard
+Calcule le point d'intersection de deux segments de droite.
+\end_layout
+
+\begin_layout Description
+entrée la paramétrisation des deux segments.
+\end_layout
+
+\begin_layout Description
+sortie les coordonnées du point d'intersection.
+ Si les segments sont parallèles, renvoie 
+\begin_inset Formula $[\mbox{NaN},\mbox{NaN}]$
+\end_inset
+
+.
+ Si les segments sont colinéaires, renvoie 
+\begin_inset Formula $[\infty,\infty]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{intersectLineEdge}
+
+\end_inset
+
+intersectLineEdge
+\end_layout
+
+\begin_layout Standard
+Calcule le point d'intersection d'un segment et d'une droite.
+\end_layout
+
+\begin_layout Description
+entrée la paramétrisation de la droite, et la paramétrisation du segment.
+\end_layout
+
+\begin_layout Description
+sortie les coordonnées du point d'intersection.
+ Si les objets sont parallèles, renvoie 
+\begin_inset Formula $[\mbox{NaN},\mbox{NaN}]$
+\end_inset
+
+.
+ Si les objets sont colinéaires, renvoie 
+\begin_inset Formula $[\infty,\infty]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{clipLineRect}
+
+\end_inset
+
+clipLineRect
+\end_layout
+
+\begin_layout Standard
+Calcule l'intersection d'une droite avec une boîte.
+\end_layout
+
+\begin_layout Description
+entrée la paramétrisation de la droite, et les coordonnées extrêmes de la
+ boîte.
+\end_layout
+
+\begin_layout Description
+sortie les coordonnées du segment de droite contenu dans la boîte.
+ Si la droite ne coupe pas le rectangle, renvoie un vecteur ligne de 
+\begin_inset Formula $4$
+\end_inset
+
+ éléments ne contenant que des valeurs NaN.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{clipEdge}
+
+\end_inset
+
+clipEdge
+\end_layout
+
+\begin_layout Standard
+Calcule l'intersection d'un segment de droite avec une boîte.
+\end_layout
+
+\begin_layout Description
+entrée la paramétrisation du segment, et les coordonnées extrêmes de la
+ boîte.
+\end_layout
+
+\begin_layout Description
+sortie les coordonnées du segment de droite contenu dans la boîte.
+ Si le segment ne coupe pas le rectangle, renvoie un vecteur ligne de 
+\begin_inset Formula $4$
+\end_inset
+
+ éléments ne contenant que des valeurs NaN.
+\end_layout
+
+\begin_layout Section
+Interactions entre droites et points
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{distancePointLine}
+
+\end_inset
+
+distancePointLine
+\end_layout
+
+\begin_layout Standard
+Calcule la plus courte distance entre un point et une droite.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées du point, et la représentation de la droite.
+\end_layout
+
+\begin_layout Description
+sortie la distance entre le point et la droite.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{distancePointEdge}
+
+\end_inset
+
+distancePointEdge
+\end_layout
+
+\begin_layout Standard
+Calcule la plus courte distance entre un point et un segment.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées du point, et la représentation du segment.
+\end_layout
+
+\begin_layout Description
+sortie la distance entre le point et le segment.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{linePosition}
+
+\end_inset
+
+linePosition
+\end_layout
+
+\begin_layout Standard
+Calcule la position 
+\begin_inset Formula $t_{p}$
+\end_inset
+
+ d'un point sur une droite, telle que les coordonnées du point soit égale
+ à 
+\begin_inset Formula $(x_{0}+t_{p}d_{x},y_{0}+t_{p}d_{y})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées du point (ou d'un groupe de points), la représentation
+ de la droite.
+\end_layout
+
+\begin_layout Description
+sortie la position du point sur la droite (ou un vecteur colonne de positions).
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{pointOnLine}
+
+\end_inset
+
+pointOnLine
+\end_layout
+
+\begin_layout Standard
+Crée un point sur une droite, à une distance donnée de l'origine de la droite.
+\end_layout
+
+\begin_layout Description
+entrée une droite, et une distance (signée).
+\end_layout
+
+\begin_layout Description
+sortie les coordonnées du point créé.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{projPointOnLine}
+
+\end_inset
+
+projPointOnLine
+\end_layout
+
+\begin_layout Standard
+Projette un point sur une droite.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées du point à projeter, et la paramétrisation de la
+ droite.
+\end_layout
+
+\begin_layout Description
+sortie les coordonées du point projeté.
+\end_layout
+
+\begin_layout Section
+Tests de position
+\end_layout
+
+\begin_layout Standard
+Ces différentes fonctions permettent de localiser un point par rapport à
+ un objet ligne, segment, ou demi-droite.
+ Les conventions de nommage ne sont pas respectées, car du fait qu'elles
+ renvoient une valeur booléenne, il serait plus logique que le nom commence
+ par 
+\begin_inset Quotes fld
+\end_inset
+
+isXXX
+\begin_inset Quotes frd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{onLine}
+
+\end_inset
+
+onLine 
+\end_layout
+
+\begin_layout Standard
+Teste si un point appartient à une droite.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées du point, les coordonnées de la droite.
+\end_layout
+
+\begin_layout Description
+sortie renvoie 
+\begin_inset Formula $1$
+\end_inset
+
+ si le point est sur la droite, 
+\begin_inset Formula $0$
+\end_inset
+
+sinon.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{onEdge}
+
+\end_inset
+
+onEdge
+\end_layout
+
+\begin_layout Standard
+Teste si un point appartient à un segment de droite.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées du point, les coordonnées du segment.
+\end_layout
+
+\begin_layout Description
+sortie renvoie 
+\begin_inset Formula $1$
+\end_inset
+
+ si le point est sur le segment, 
+\begin_inset Formula $0$
+\end_inset
+
+sinon.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{onRay}
+
+\end_inset
+
+onRay 
+\end_layout
+
+\begin_layout Standard
+Teste si un point est sur une demi-droite.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées du point, les coordonnées de la demi-droite.
+\end_layout
+
+\begin_layout Description
+sortie renvoie 
+\begin_inset Formula $1$
+\end_inset
+
+ si le point est sur la demi-droite, 
+\begin_inset Formula $0$
+\end_inset
+
+sinon.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{isLeftOriented}
+
+\end_inset
+
+isLeftOriented
+\end_layout
+
+\begin_layout Standard
+Teste si un point est localisé 
+\begin_inset Quotes fld
+\end_inset
+
+à gauche
+\begin_inset Quotes frd
+\end_inset
+
+ d'une droite.
+ On considère qu'il est à gauche par rapport à la direction du vecteur de
+ la droite.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées du point, la paramétrisation de la droite.
+\end_layout
+
+\begin_layout Description
+sortie renvoie 
+\begin_inset Formula $1$
+\end_inset
+
+ si le point est du côté gauche de la droite, 
+\begin_inset Formula $0$
+\end_inset
+
+ sinon.
+\end_layout
+
+\begin_layout Chapter
+\begin_inset LatexCommand \label{sec:Polygones}
+
+\end_inset
+
+Polygones et polylignes
+\end_layout
+
+\begin_layout Standard
+On distingue le polygone, qui est une figure fermée, qui ne se croise pas,
+ et la polyligne, qui est un ensemble de segments de droites connectés les
+ uns aux autres, et qui peut éventuellement se croiser.
+\end_layout
+
+\begin_layout Section
+Représentation
+\end_layout
+
+\begin_layout Standard
+Les deux primitives sont définies à partir d'une série de points, avec en
+ plus pour le polygone l'hypothèse que le dernier point est relié au premier
+ point.
+\end_layout
+
+\begin_layout Standard
+Pour les polygones complexes (polygones disjoints, ou polygones troués),
+ on considère un ensemble de polygones simples.
+ Chaque polygone est orienté.
+ Pour le stockage, on considère que deux polygones simples sont séparés
+ par un 
+\begin_inset Quotes fld
+\end_inset
+
+Not-a-point
+\begin_inset Quotes frd
+\end_inset
+
+ avec les coordonnées 
+\begin_inset Formula $(\mbox{NaN},\mbox{NaN})$
+\end_inset
+
+.
+ Cependant, les fonctions ne considèrent en général que les polygones simples.
+\end_layout
+
+\begin_layout Section
+Fonctions sur les polylignes
+\end_layout
+
+\begin_layout Standard
+Il s'agit ici de courbe représentées par un ensemble de points.
+ Pour des mesures plus précises sur des courbes polynomiales, on peut consulter
+ la section 
+\begin_inset LatexCommand \ref{sec:Splines}
+
+\end_inset
+
+ qui leur est consacrée.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{curveLength}
+
+\end_inset
+
+curveLength
+\end_layout
+
+\begin_layout Standard
+Calcule la longueur de la courbe en additionnant la longueur des segments
+ élémentaires.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{curveCentroid}
+
+\end_inset
+
+curveCentroid
+\end_layout
+
+\begin_layout Standard
+Calcule le centroïde de la courbe, en calculant le centroïde des milieux
+ des segments, pondérés par la longueur des segments correspondants.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{parametrize}
+
+\end_inset
+
+parametrize
+\end_layout
+
+\begin_layout Standard
+Calcule une paramétrisation approximative d'une série de points.
+ La paramétrisation correspond à la somme cumulée des longueurs des segments
+ élémentaires.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{curvature}
+
+\end_inset
+
+curvature
+\end_layout
+
+\begin_layout Standard
+[obsolète]Calcule une courbure approchée d'une courbe constituée d'un ensemble
+ de points.
+ Cette fonction commence par calculer une approximation polynomiale de la
+ courbe, il est préférable d'utiliser la fonction polynomialCurveCurvature.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{cart2geod}
+
+\end_inset
+
+cart2geod
+\end_layout
+
+\begin_layout Standard
+Convertit un point en coordonnées cartésiennes en un point en coordonnées
+ 
+\begin_inset Quotes fld
+\end_inset
+
+géodésiques
+\begin_inset Quotes frd
+\end_inset
+
+, composées de la position géodésique sur la courbe, et la distance signée
+ à la courbe.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{geod2cart}
+
+\end_inset
+
+geod2cart
+\end_layout
+
+\begin_layout Standard
+Convertit un point donné par sa position géodésique et sa distance signée
+ à une courbe (polyligne) en un point en coordonnées cartésiennes.
+ L'intérêt de cette fonction est de créer rapidement une courbe parallèle
+ à une autre.
+\end_layout
+
+\begin_layout Section
+Mesures sur les polygones
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{polygonCentroid}
+
+\end_inset
+
+polygonCentroid 
+\end_layout
+
+\begin_layout Standard
+Calcule le centre de gravité d'un polygone.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées des sommets du polygone.
+\end_layout
+
+\begin_layout Description
+sortie les coordonnées du centre de gravité (centroïde géométrique).
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{polygonArea}
+
+\end_inset
+
+polygonArea 
+\end_layout
+
+\begin_layout Standard
+Calcule l'aire signée d'une polygone.
+ Le résultat est un nombre qui peut être négatif.
+ Le signe du résultat dépend du sens de parcours des sommets du polygone.
+ Si les sommets sont parcourus avec l'intérieur du polygone à gauche du
+ contour, le résultat est positif.
+ Sinon, il est négatif.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées des sommets du polygone.
+\end_layout
+
+\begin_layout Description
+sortie l'aire signée du polygone.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{polygonLength}
+
+\end_inset
+
+polygonLength 
+\end_layout
+
+\begin_layout Standard
+Calcule le périmètre d'un polygone.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées des sommets du polygone.
+\end_layout
+
+\begin_layout Description
+sortie le périmètre du polygone.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{polygonNormalAngle}
+
+\end_inset
+
+polygonNormalAngle
+\end_layout
+
+\begin_layout Standard
+Calcule l'angle normal en un ou plusieurs sommet(s) d'un polygone.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées des sommets d'un polygone, et les indices des sommets
+ pour lesquels on souhaite calculer l'angle normal.
+\end_layout
+
+\begin_layout Description
+sortie un vecteur colonne contenant l'angle normal pour chaque sommet spécifié.
+\end_layout
+
+\begin_layout Standard
+Si on calcule les angles normaux de tous les sommets d'un polygone, leur
+ somme vaut 
+\begin_inset Formula $2\pi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{supportFunction}
+
+\end_inset
+
+supportFunction 
+\end_layout
+
+\begin_layout Standard
+Calcule la fonction support d'un polygone convexe.
+ La fonction support est un outil de géométrie souvent utilisé dans les
+ articles de géométrie stochastique, qui correspond à la plus petite distance
+ à l'origine possible d'une droite normale à la direction considérée et
+ contenant la figure étudiée.
+ On en déduit une 
+\begin_inset Quotes fld
+\end_inset
+
+signature
+\begin_inset Quotes frd
+\end_inset
+
+ pour la figure, et certaines propriétés géométrique (diamètre de Feret,
+ épaisseur moyenne...).
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées des sommets d'un polygone convexe, et éventuellement
+ le nombre d'angles à considérer, ou une série de valeurs angulaires.
+\end_layout
+
+\begin_layout Description
+sortie la valeur de la fonction support pour chaque valeur angulaire spécifiée.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{convexification}
+
+\end_inset
+
+convexification 
+\end_layout
+
+\begin_layout Standard
+Calcule la convexification d'une fonction support.
+ C'est la fonction duale de supportFunction.
+\end_layout
+
+\begin_layout Description
+entrée une fonction support
+\end_layout
+
+\begin_layout Description
+sortie le polygone qui a même fonction support que celle spécifiée.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{steinerPoint}
+
+\end_inset
+
+steinerPoint 
+\end_layout
+
+\begin_layout Standard
+Calcule le point de Steiner d'un polygone.
+ Le point de Steiner est un centroïde calculé sur les sommets d'un polygone,
+ mais pondéré par l'angle du polygone au sommet considéré.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées des sommets du polygone.
+\end_layout
+
+\begin_layout Description
+sortie les coordonnées du point de Steiner.
+\end_layout
+
+\begin_layout Section
+Création et composition de polygones
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{readPolygon}
+
+\end_inset
+
+readPolygon
+\end_layout
+
+\begin_layout Standard
+Charge une série de polygones depuis un fichier texte.
+ Le fichier est constitué de plusieurs couples de lignes contenant le même
+ nombre de valeurs numérique.
+ Chaque ligne est une série de coordonnées, deux lignes définissent ainsi
+ une série de point.
+ Chaque couple de ligne définit un polygone simple.
+\end_layout
+
+\begin_layout Description
+entrée le nom du fichier.
+\end_layout
+
+\begin_layout Description
+sortie un tableau de cellules contenant un polygone par cellule.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{rectAsPolygon}
+
+\end_inset
+
+rectAsPolygon
+\end_layout
+
+\begin_layout Standard
+Convertit un rectangle donné par un coin, ses dimensions, et une orientation,
+ en un polygone, représenté par 
+\begin_inset Formula $4$
+\end_inset
+
+ sommets.
+\end_layout
+
+\begin_layout Description
+entrée les paramètres du rectangle : coordonnées du coin inférieur gauche,
+ largeur, hauteur, et orientation (égale à zéro par défaut).
+\end_layout
+
+\begin_layout Description
+sortie les coordonnées des coins du rectangle.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{clipPolygon}
+
+\end_inset
+
+clipPolygon/polygonClipBox
+\end_layout
+
+\begin_layout Standard
+Découpe un polygone à l'aide d'une boîte.
+ La version implémentée ne fonctionne que pour les polygones convexes.
+ Le résultat est donc soit vide, soit un polygone convexe.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées des sommets d'un polygone, les coordonnées maximales
+ de la boîte.
+\end_layout
+
+\begin_layout Description
+sortie les coordonnées des sommets du polygone découpé.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{polygonClipHP}
+
+\end_inset
+
+clipPolygonHP/polygonClipHP 
+\end_layout
+
+\begin_layout Standard
+Découpe un polygone à l'aide d'un demi plan.
+ L'idée est de pouvoir utiliser cet algorithme pour chacun des côtés d'une
+ boîte, et donc de pouvoir découper un polygone par une boîte.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées des sommets d'un polygone, la paramétrisation de
+ la droite.
+\end_layout
+
+\begin_layout Description
+sortie les coordonnées des sommets du polygone découpé.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{steinerPolygon}
+
+\end_inset
+
+steinerPolygon 
+\end_layout
+
+\begin_layout Standard
+Calcule le polygone de Steiner d'un ensemble de vecteurs.
+ Le polygone de Steiner est obtenu en étirant successivement par chaque
+ vecteur le point origine.
+ Le polygone obtenu est convexe, et a ses côtés de même direction et de
+ même longueur que les vecteurs de départ.
+\end_layout
+
+\begin_layout Description
+entrée une liste de vecteurs.
+\end_layout
+
+\begin_layout Description
+sortie les coordonnées des sommets du polygone de Steiner correspondant.
+\end_layout
+
+\begin_layout Section
+Opérations sur les polygones
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{intersectLinePolygon}
+
+\end_inset
+
+intersectLinePolygon
+\end_layout
+
+\begin_layout Standard
+Calcule les points d'intersection entre une droite et un polygone.
+\end_layout
+
+\begin_layout Description
+entrée la paramétrisation de la droite, les coordonnées des sommets du polygone.
+\end_layout
+
+\begin_layout Description
+sortie les coordonnées des points d'intersection
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{polygonExpand}
+
+\end_inset
+
+polygonExpand
+\end_layout
+
+\begin_layout Standard
+Dilate un polygone en décalant chacun de ses côtés d'une distance donnée,
+ et en prolongeant les nouveaux côtés pour créer les nouveaux sommets.
+ La distance peut être positive, ce qui agrandit le polygone, ou négative,
+ ce qui le rétrécit.
+\end_layout
+
+\begin_layout Standard
+Ce n'est pas une dilatation morphologique, pour laquelle le résultat est
+ un polygone arrondi.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées des sommets du polygone, et la distance de dilatation.
+\end_layout
+
+\begin_layout Description
+sortie le polygone dilaté.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{medialAxisConvex}
+
+\end_inset
+
+medialAxisConvex
+\end_layout
+
+\begin_layout Standard
+Calcule l'axe médian d'un polygone convexe.
+ L'axe médian est une définition du squelette d'un polygone.
+ Il a la forme d'un arbre (au sens de graphe) qui relie les sommets du polygone,
+ et pour lequel chaque arête appartient à la bissectrice de deux côtés.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées des sommets du polygone.
+\end_layout
+
+\begin_layout Description
+sortie un ensemble de points représentant les sommets de l'arbre (dont les
+ sommets du polygone), et un ensemble d'arêtes constitués d'un couple d'indices
+ référençant les sommets source et destination.
+\end_layout
+
+\begin_layout Chapter
+\begin_inset LatexCommand \label{sec:Coniques}
+
+\end_inset
+
+Cercles, ellipses, et autres coniques
+\end_layout
+
+\begin_layout Section
+Représentation
+\end_layout
+
+\begin_layout Standard
+Un cercle est défini par un vecteur ligne contenant 
+\begin_inset Formula $3$
+\end_inset
+
+ éléments\InsetSpace ~
+: le centre 
+\begin_inset Formula $x$
+\end_inset
+
+, le centre 
+\begin_inset Formula $y$
+\end_inset
+
+, le rayon 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ De plus, si on considère les cercles orientés, on ajoute un quatrième paramètre
+ valant 
+\begin_inset Formula $1$
+\end_inset
+
+ si le cercle est direct (l'intérieur est à gauche) ou 
+\begin_inset Formula $0$
+\end_inset
+
+ si le cercle est indirect (l'intérieur est à droite du cercle).
+\end_layout
+
+\begin_layout Standard
+Pour un arc de cercle, on ajoute deux éléments correspondants à l'angle
+ de début, et à l'angle de fin.
+\end_layout
+
+\begin_layout Section
+Fonctions de création
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{createCircle}
+
+\end_inset
+
+createCircle
+\end_layout
+
+\begin_layout Standard
+Crée un cercle à partir de 
+\begin_inset Formula $2$
+\end_inset
+
+ ou 
+\begin_inset Formula $3$
+\end_inset
+
+ points.
+ Si trois points sont passés en paramètres, le cercle créé passe par les
+ trois points.
+ Si deux points sont donnés en paramètres, Ils définissent le diamètre du
+ cercle.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées des points.
+\end_layout
+
+\begin_layout Description
+sortie la paramétrisation du cercle.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{createDirectedCircle}
+
+\end_inset
+
+createDirectedCircle
+\end_layout
+
+\begin_layout Standard
+Crée un cercle à partir de 
+\begin_inset Formula $3$
+\end_inset
+
+ points, en spécifiant l'orientation du cercle.
+ 
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées des points, l'orientation du cercle.
+\end_layout
+
+\begin_layout Description
+sortie la paramétrisation du cercle.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{enclosingCircle}
+
+\end_inset
+
+enclosingCircle
+\end_layout
+
+\begin_layout Standard
+Trouve le plus petit cercle qui contient un ensemble de points.
+\end_layout
+
+\begin_layout Description
+entrée un ensemble de points.
+\end_layout
+
+\begin_layout Description
+sortie le plus petit cercle englobant tous les points.
+ 
+\end_layout
+
+\begin_layout Section
+Fonctions de conversion
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{circleAsPolygon}
+
+\end_inset
+
+circleAsPolygon
+\end_layout
+
+\begin_layout Standard
+Convertit un cercle en polygone, éventuellement en spécifiant le nombre
+ de sommets.
+\end_layout
+
+\begin_layout Description
+entrée la paramétrisation du cercle, et éventuellement le nombre de sommets
+ du polygone.
+\end_layout
+
+\begin_layout Description
+sortie un polygone approchant le cercle.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{ellipseAsPolygon}
+
+\end_inset
+
+ellipseAsPolygon
+\end_layout
+
+\begin_layout Standard
+Convertit une ellipse en polygone, éventuellement en spécifiant le nombre
+ de sommets.
+\end_layout
+
+\begin_layout Description
+entrée la paramétrisation de l'ellipse, et éventuellement le nombre de sommets
+ du polygone.
+\end_layout
+
+\begin_layout Description
+sortie un polygone approchant l'ellipse.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{circleArcAsCurve}
+
+\end_inset
+
+circleArcAsCurve
+\end_layout
+
+\begin_layout Standard
+Convertit un arc de cercle en courbe, éventuellement en spécifiant le nombre
+ de points.
+\end_layout
+
+\begin_layout Description
+entrée la paramétrisation de l'arc de cercle, et éventuellement le nombre
+ de points à utiliser pour l'approximation.
+\end_layout
+
+\begin_layout Description
+sortie une série de points approchant l'arc de cercle.
+\end_layout
+
+\begin_layout Section
+Fonctions de tests
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{onCircle}
+
+\end_inset
+
+onCircle
+\end_layout
+
+\begin_layout Standard
+Teste si un point est situé sur un cercle.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées du ou des points, les coordonnées du ou des cercles.
+\end_layout
+
+\begin_layout Description
+sortie une valeur booléenne pour chaque couple point-cercle.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{inCircle}
+
+\end_inset
+
+inCircle
+\end_layout
+
+\begin_layout Standard
+Teste si un point est situé à l'intérieur d'un cercle.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées du ou des points, les coordonnées du ou des cercles.
+\end_layout
+
+\begin_layout Description
+sortie une valeur booléenne pour chaque couple point-cercle.
+\end_layout
+
+\begin_layout Chapter
+\begin_inset LatexCommand \label{sec:Splines}
+
+\end_inset
+
+Courbes polynomiales
+\end_layout
+
+\begin_layout Section
+Représentation
+\end_layout
+
+\begin_layout Standard
+Une courbe polynomiale du plan est définie par :
+\end_layout
+
+\begin_layout Itemize
+un ensemble de coefficients polynomiaux pour les coordonnées 
+\begin_inset Formula $x$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+un ensemble de coefficients polynomiaux pour les coordonnées 
+\begin_inset Formula $y$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+un domaine de variation de la variable utilisée, que l'on note 
+\begin_inset Formula $t$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On considère que si le domaine de définition de 
+\begin_inset Formula $t$
+\end_inset
+
+ n'est pas précisé, il vaut 
+\begin_inset Formula $[0:1]$
+\end_inset
+
+.
+ Les deux ensembles de coefficients sont stockés dans deux vecteurs lignes.
+ Cela permet de considérer des paramétrisation de degré différent sur les
+ axes 
+\begin_inset Formula $x$
+\end_inset
+
+ et 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Les coefficients sont stockés par degré croissant en commençant par le degré
+ 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ Un vecteur de 
+\begin_inset Formula $6$
+\end_inset
+
+ éléments définit ainsi un polynôme de degré 
+\begin_inset Formula $5$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Fonctions de base
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{polynomialCurveFit}
+
+\end_inset
+
+polynomialCurveFit 
+\end_layout
+
+\begin_layout Standard
+Calcule les coefficients polynomiaux qui ajustent au mieux un ensemble de
+ points.
+ L'ajustement des coefficients se fait séparément sur les différentes coordonnée
+s.
+\end_layout
+
+\begin_layout Description
+entrée un ensemble de valeurs de paramétrisation, un ensemble de coordonnées
+ de points correspondant à chaque valeur de paramètrisation, le degré d'ajusteme
+nt pour chaque coordonnée, et éventuellement des conditions pour certaines
+ valeurs de 
+\begin_inset Formula $t$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+sortie les coefficients correspondants à chaque coordonnée.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{polyfit2}
+
+\end_inset
+
+polyfit2
+\end_layout
+
+\begin_layout Standard
+Fonction simplifiée d'ajustement de courbe polynomiale à un ensemble de
+ points.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{polynomialCurvePoint}
+
+\end_inset
+
+polynomialCurvePoint 
+\end_layout
+
+\begin_layout Standard
+Calcule les coordonnées d'un point sur une courbe polynomiale en fonction
+ de la position 
+\begin_inset Formula $t$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+entrée la ou les valeurs de la variable 
+\begin_inset Formula $t$
+\end_inset
+
+, les coefficients correspondant à chaque coordonnée.
+\end_layout
+
+\begin_layout Description
+sortie les points de la courbe correspondant aux paramètres donnés.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{polynomialCurvePosition}
+
+\end_inset
+
+polynomialCurvePosition 
+\end_layout
+
+\begin_layout Standard
+Calcule la position 
+\begin_inset Formula $t$
+\end_inset
+
+ d'un point sur une courbe polynomiale en fonction de sa position géodésique.
+\end_layout
+
+\begin_layout Description
+entrée le domaine de variation de la variable 
+\begin_inset Formula $t$
+\end_inset
+
+, les coefficients correspondant à chaque coordonnée, la position géodésique
+ sur la courbe, et éventuellement la précision voulue.
+\end_layout
+
+\begin_layout Description
+sortie la valeur du paramètre 
+\begin_inset Formula $t$
+\end_inset
+
+ correspondant à la position géodésique donnée.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{polynomialCurveLength}
+
+\end_inset
+
+polynomialCurveLength 
+\end_layout
+
+\begin_layout Standard
+Calcule la longueur géodésique d'une courbe polynomiale, en intégrant le
+ Jacobien sur tout le domaine de paramétrisation.
+\end_layout
+
+\begin_layout Description
+entrée le domaine de variation de la variable 
+\begin_inset Formula $t$
+\end_inset
+
+, les coefficients correspondant à chaque coordonnée, et éventuellement
+ la précision voulue.
+\end_layout
+
+\begin_layout Description
+sortie la longueur géodésique de la courbe.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{polynomialCurveCentroid}
+
+\end_inset
+
+polynomialCurveCentroid
+\end_layout
+
+\begin_layout Standard
+Calcule le centroïde d'une courbe polynomiale.
+\end_layout
+
+\begin_layout Description
+entrée le domaine de variation de la variable 
+\begin_inset Formula $t$
+\end_inset
+
+, les coefficients correspondant à chaque coordonnée, et éventuellement
+ la précision voulue.
+\end_layout
+
+\begin_layout Description
+sortie le centroïde de la courbe.
+\end_layout
+
+\begin_layout Section
+Calculs de courbures
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{polynomialCurveDerivative}
+
+\end_inset
+
+polynomialCurveDerivative 
+\end_layout
+
+\begin_layout Standard
+Calcule le vecteur dérivé d'une courbe polynomiale pour les positions spécifiées.
+\end_layout
+
+\begin_layout Description
+entrée une ou plusieurs valeurs de paramétrisation de la courbe, les coefficient
+s correspondant à chaque coordonnée.
+\end_layout
+
+\begin_layout Description
+sortie le vecteur tangent de la courbe pour chaque valeur de paramétrisation
+ demandée.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{polynomialCurveNormal}
+
+\end_inset
+
+polynomialCurveNormal 
+\end_layout
+
+\begin_layout Standard
+Calcule le vecteur normal d'une courbe polynomiale pour les positions spécifiées.
+ Le vecteur normal est orthogonal au vecteur tangent.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{polynomialCurveCurvature}
+
+\end_inset
+
+polynomialCurveCurvature 
+\end_layout
+
+\begin_layout Standard
+Calcule la courbure d'une courbe polynomiale pour les positions spécifiées.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{polynomialCurveCurvatures}
+
+\end_inset
+
+polynomialCurveCurvatures
+\end_layout
+
+\begin_layout Standard
+Calcule les courbures principales d'une surface de révolution obtenue en
+ utilisant comme courbe génératrice une courbe polynomiale.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{polynomialDerivate}
+
+\end_inset
+
+polynomialDerivate 
+\end_layout
+
+\begin_layout Standard
+Fonction utilitaire qui calcule la dérivée d'un polynôme donné comme un
+ vecteur ligne de coefficients.
+ 
+\end_layout
+
+\begin_layout Chapter
+Autres formes géométriques
+\end_layout
+
+\begin_layout Section
+Grilles de points
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{squareGrid}
+
+\end_inset
+
+squareGrid
+\end_layout
+
+\begin_layout Standard
+Genère un ensemble de sommets et d'arêtes disposés en carrés.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{triangleGrid}
+
+\end_inset
+
+triangleGrid
+\end_layout
+
+\begin_layout Standard
+Genère un ensemble de sommets et d'arêtes disposés en triangles.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{hexagonalGrid}
+
+\end_inset
+
+hexagonalGrid
+\end_layout
+
+\begin_layout Standard
+Genère un ensemble de sommets et d'arêtes disposés en hexagones.
+\end_layout
+
+\begin_layout Section
+Mosaïques
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{crackPattern}
+
+\end_inset
+
+crackPattern
+\end_layout
+
+\begin_layout Standard
+Genère des fissures droites à partir d'un ensemble de points, qui se propagent
+ dans les directions spécifiées.
+ Chaque fissure s'arête lorsqu'elle en rencontre une autre.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{crackPattern2}
+
+\end_inset
+
+crackPattern2
+\end_layout
+
+\begin_layout Standard
+Une variante du modèle de fissure\InsetSpace ~
+: chaque point initie 3 fissures à 
+\begin_inset Formula $120$
+\end_inset
+
+ degrés les une des autres.
+ 
+\end_layout
+
+\begin_layout Chapter
+Transformations affines
+\end_layout
+
+\begin_layout Section
+Représentation
+\end_layout
+
+\begin_layout Standard
+Une transformations affine est définie par une matrice 
+\begin_inset Formula $3\times3$
+\end_inset
+
+, dont la dernière ligne est égale à 
+\begin_inset Formula $(0,0,1)$
+\end_inset
+
+\InsetSpace ~
+:
+\begin_inset Formula \[
+T=\left[\begin{array}{ccc}
+m_{00} & m_{01} & m_{02}\\
+m_{10} & m_{11} & m_{12}\\
+0 & 0 & 1\end{array}\right]\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Les coefficients de la dernière colonne définissent le vecteur de translation.
+ Les quatre coefficients du coin supérieur gauche définissent rotation,
+ agrandissement et déformation.
+ Si le déterminant de la matrice vaut 
+\begin_inset Formula $1$
+\end_inset
+
+, alors la transformation préserve les aires.
+\end_layout
+
+\begin_layout Standard
+Une généralisation pourrait être de considérer les transformations homogènes,
+ pour lesquelle la dernière ligne n'est pas forcément égale à 
+\begin_inset Formula $[0,0,1]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Fonctions de création
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{translation}
+
+\end_inset
+
+translation
+\end_layout
+
+\begin_layout Standard
+Crée une transformation affine représentant une translation.
+\end_layout
+
+\begin_layout Description
+entrée un vecteur de déplacement, donné soit par un vecteur ligne de 
+\begin_inset Formula $2$
+\end_inset
+
+ éléments, soit par deux arguments séparés.
+\end_layout
+
+\begin_layout Description
+sortie une matrice 
+\begin_inset Formula $3\times3$
+\end_inset
+
+ représentant la translation.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{rotation}
+
+\end_inset
+
+rotation
+\end_layout
+
+\begin_layout Standard
+Crée une transformation affine représentant une rotation d'un angle donné
+ (en radians dans le sens trigonométrique), soit autour de l'origine, soit
+ autour d'un point passé en argument.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées du centre de la rotation (optionnel), l'angle de
+ rotation.
+\end_layout
+
+\begin_layout Description
+sortie une matrice 
+\begin_inset Formula $3\times3$
+\end_inset
+
+ représentant la rotation.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{scaling}
+
+\end_inset
+
+scaling
+\end_layout
+
+\begin_layout Standard
+Crée une transformation affine représentant un agrandissement.
+ Si un seul nombre est donné en argument, le même agrandissement est appliqué
+ selon les deux directions 
+\begin_inset Formula $x$
+\end_inset
+
+ et 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ Si deux valeurs sont spécifiées, l'agrandissement est différent selon les
+ axes.
+ 
+\end_layout
+
+\begin_layout Description
+entrée le facteur d'agrandissement, ou les 
+\begin_inset Formula $2$
+\end_inset
+
+ facteurs d'agrandissement selon chaque axe.
+\end_layout
+
+\begin_layout Description
+sortie une matrice 
+\begin_inset Formula $3\times3$
+\end_inset
+
+ représentant l'agrandissement.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{lineSymmetry}
+
+\end_inset
+
+lineSymmetry
+\end_layout
+
+\begin_layout Standard
+Crée une transformation affine représentant une symmétrie orthogonale par
+ rapport à une droite.
+\end_layout
+
+\begin_layout Description
+entrée la paramétrisation d'une droite.
+\end_layout
+
+\begin_layout Description
+sortie une matrice 
+\begin_inset Formula $3\times3$
+\end_inset
+
+ représentant la symétrie par rapport à la droite.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{homothecy}
+
+\end_inset
+
+homothecy
+\end_layout
+
+\begin_layout Standard
+Crée une transformation affine représentant une homothétie, correspondant
+ à un changement d'échelle uniforme dans toutes les directions autour d'un
+ point spécifié.
+ Une homothécie de rapport -1 correspond à une symétrie par rapport à un
+ point.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées du centre de l'homothétie, le facteur d'homothétie.
+\end_layout
+
+\begin_layout Description
+sortie une matrice 
+\begin_inset Formula $3\times3$
+\end_inset
+
+ représentant l'homothétie.
+\end_layout
+
+\begin_layout Section
+Transformation de formes
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{transformPoint}
+
+\end_inset
+
+transformPoint
+\end_layout
+
+\begin_layout Standard
+Retourne les coordonnées du ou des points passés en paramètres.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{transformVector}
+
+\end_inset
+
+transformVector
+\end_layout
+
+\begin_layout Standard
+Renvoie les coordonnées d'un ou de plusieurs vecteurs transformés par une
+ transformation affine.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{transformLine}
+
+\end_inset
+
+transformLine
+\end_layout
+
+\begin_layout Standard
+Renvoie les coordonnées d'une ou de plusieurs droites transformées par une
+ transformation affine.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand \index{transformEdge}
+
+\end_inset
+
+transformEdge
+\end_layout
+
+\begin_layout Standard
+Renvoie les coordonnées d'un ou de plusieurs segments de droite transformés
+ par une transformation affine.
+\end_layout
+
+\begin_layout Chapter
+Fonctions d'affichage
+\end_layout
+
+\begin_layout Standard
+Ces fonctions dessinent la ou les figures spécifiées sur l'axe courant.
+ Dans certains cas (droites, demi-droites...), la figure est découpée en fonction
+ des coordonnées de l'axe avant d'être affichée.
+ Pour la plupart des fonctions, on peut spécifier les propriétés du tracé
+ par un ensemble de paires 'paramètre'-'valeur', cf.\InsetSpace \thinspace{}
+la fonction plot de matlab.
+\end_layout
+
+\begin_layout Section
+Objets génériques
+\end_layout
+
+\begin_layout Description
+\begin_inset LatexCommand \index{drawPoint}
+
+\end_inset
+
+drawPoint Dessine un point ou un ensemble de points.
+\end_layout
+
+\begin_layout Description
+\begin_inset LatexCommand \index{drawLabels}
+
+\end_inset
+
+drawLabels Dessine des labels à des positions spécifiées.
+ Voir aussi la fonction 'text' de matlab.
+\end_layout
+
+\begin_layout Section
+Objets droits
+\end_layout
+
+\begin_layout Description
+\begin_inset LatexCommand \index{drawLine}
+
+\end_inset
+
+drawLine Dessine une droite.
+\end_layout
+
+\begin_layout Description
+\begin_inset LatexCommand \index{drawEdge}
+
+\end_inset
+
+drawEdge Dessine un segment de droite.
+\end_layout
+
+\begin_layout Description
+\begin_inset LatexCommand \index{drawCenteredEdge}
+
+\end_inset
+
+drawCenteredEdge Dessine un segment de droite centré sur un point, et d'angle
+ et de longueur donnés.
+\end_layout
+
+\begin_layout Description
+\begin_inset LatexCommand \index{drawArrow}
+
+\end_inset
+
+drawArrow Dessine une flèche.
+\end_layout
+
+\begin_layout Description
+\begin_inset LatexCommand \index{drawRay}
+
+\end_inset
+
+drawRay Dessine une demi-droite.
+\end_layout
+
+\begin_layout Section
+Polygones
+\end_layout
+
+\begin_layout Description
+\begin_inset LatexCommand \index{drawCurve}
+
+\end_inset
+
+drawCurve Dessine une courbe (polyligne).
+\end_layout
+
+\begin_layout Description
+\begin_inset LatexCommand \index{drawPolygon}
+
+\end_inset
+
+drawPolygon Dessine un polygone défini par une liste de points.
+\end_layout
+
+\begin_layout Description
+\begin_inset LatexCommand \index{fillPolygon}
+
+\end_inset
+
+fillPolygon Remplit un polygone.
+\end_layout
+
+\begin_layout Description
+\begin_inset LatexCommand \index{drawRect}
+
+\end_inset
+
+drawRect Dessine un rectangle.
+\end_layout
+
+\begin_layout Description
+\begin_inset LatexCommand \index{drawRect2}
+
+\end_inset
+
+drawRect2 Dessine un rectangle centré.
+\end_layout
+
+\begin_layout Section
+Objets courbes
+\end_layout
+
+\begin_layout Description
+\begin_inset LatexCommand \index{drawCircle}
+
+\end_inset
+
+drawCircle Dessine un cercle.
+\end_layout
+
+\begin_layout Description
+\begin_inset LatexCommand \index{drawCircleArc}
+
+\end_inset
+
+drawCircleArc Dessine un arc de cercle.
+\end_layout
+
+\begin_layout Description
+\begin_inset LatexCommand \index{drawEllipse}
+
+\end_inset
+
+drawEllipse Dessine une ellipse.
+\end_layout
+
+\begin_layout Description
+\begin_inset LatexCommand \index{drawEllipseArc}
+
+\end_inset
+
+drawEllipseArc Dessine un arc d'ellipse.
+\end_layout
+
+\begin_layout Description
+\begin_inset LatexCommand \index{drawParabola}
+
+\end_inset
+
+drawParabola Dessine un arc de parabole.
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand \printindex{}
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

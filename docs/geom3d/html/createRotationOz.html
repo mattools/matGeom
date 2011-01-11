@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createRotationOz</title>
+  <meta name="keywords" content="createRotationOz">
+  <meta name="description" content="CREATEROTATIONOZ return 4x4 matrix of a rotation around z-axis">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom3d</a> &gt; createRotationOz.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createRotationOz
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATEROTATIONOZ return 4x4 matrix of a rotation around z-axis</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function trans = createRotationOz(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATEROTATIONOZ return 4x4 matrix of a rotation around z-axis
+
+   TRANS = createRotationOz(THETA);
+   Returns the transform matrix corresponding to a rotation by the angle
+   THETA (in radians) around the Oz axis. A rotation by an angle of PI/2
+   would transform the vector [1 0 0] into the vector [0 1 0].
+
+   The returned matrix has the form:
+   [cos(THETA) -sin(THETA)  0  0]
+   [sin(THETA)  cos(THETA)  0  0]
+   [    0           0       1  0]
+   [    0           0       0  1]
+
+   TRANS = createRotationOz(ORIGIN, THETA);
+   TRANS = createRotationOz(X0, Y0, Z0, THETA);
+   Also specifies origin of rotation. The result is similar as performing
+   translation(-X0, -Y0, -Z0), rotation, and translation(X0, Y0, Z0).
+
+
+   See also:
+   <a href="transforms3d.html" class="code" title="function varargout = transforms3d(varargin)">transforms3d</a>, <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(varargin)">transformPoint3d</a>, <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>, <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>
+
+   ---------
+
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 06/04/2004.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="localToGlobal3d.html" class="code" title="function trans = localToGlobal3d(varargin)">localToGlobal3d</a>	LOCALTOGLOBAL3D  create transform from a vector and 3 rotation angles</li><li><a href="rotationOz.html" class="code" title="function trans = rotationOz(varargin)">rotationOz</a>	ROTATIONOZ return 4x4 matrix of a rotation around z-axis</li></ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

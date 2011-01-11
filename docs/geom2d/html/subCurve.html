@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of subCurve</title>
+  <meta name="keywords" content="subCurve">
+  <meta name="description" content="SUBCURVE  extract a portion of a curve">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom2d</a> &gt; subCurve.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>subCurve
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>SUBCURVE  extract a portion of a curve</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function res = subCurve(curve, P1, P2, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">SUBCURVE  extract a portion of a curve
+
+   CURVE2 = subCurve(CURVE, POS1, POS2)
+   extract a subcurve by keeping only points located between indices POS1
+   and POS2. If POS1&gt;POS2, function considers all points after POS1 and
+   all points before POS2.
+
+   CURVE2 = subCurve(CURVE, POS1, POS2, DIRECT)
+   If DIRECT is false, curve points are taken in reverse order, from POS1
+   to POS2 with -1 increment, or from POS1 to 1, then from last point to
+   POS2 index. If direct is true, behaviour corresponds to the first
+   described case.
+
+   Example
+   C = circleAsPolygon([0 0 10], 120);
+   C2 = subCurve(C, 30, 60);
+
+   See also
+   <a href="polylines2d.html" class="code" title="function polylines2d(varargin)">polylines2d</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@nantes.inra.fr
+ Created: 2007-08-23,    using Matlab 7.4.0.287 (R2007a)
+ Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+ Licensed under the terms of the LGPL, see the file &quot;license.txt&quot;</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

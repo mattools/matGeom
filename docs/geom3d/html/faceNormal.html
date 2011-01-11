@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of faceNormal</title>
+  <meta name="keywords" content="faceNormal">
+  <meta name="description" content="FACENORMAL  compute normal vector of a polyhedron face">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom3d</a> &gt; faceNormal.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>faceNormal
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>FACENORMAL  compute normal vector of a polyhedron face</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function normals = faceNormal(nodes, faces) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">FACENORMAL  compute normal vector of a polyhedron face
+
+   NORMALS = faceNormal(NODES, FACES)
+   NODES is a set of 3D points  (as a Nx3 array), and FACES is either a
+   [Nx3] indices array or a cell array of indices. The function computes
+   the normal of each face.
+   The orientation of t he normal is undefined.
+
+
+   Example
+   [n e f] = createCube;
+   normals1 = faceNormal(n, f);
+
+   pts = rand(50, 3);
+   hull = minConvexHull(pts);
+   normals2 = faceNormal(pts, hull);
+
+   See also
+   <a href="polyhedra.html" class="code" title="function polyhedra(varargin)">polyhedra</a>, <a href="drawPolyhedra.html" class="code" title="function varargout = drawPolyhedra(varargin)">drawPolyhedra</a>, convhull, convhulln
+
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@jouy.inra.fr
+ Created: 2006-07-05
+ Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="meshReduce.html" class="code" title="function varargout = meshReduce(nodes, varargin)">meshReduce</a>	MESHREDUCE return mesh with minimal number of faces</li></ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

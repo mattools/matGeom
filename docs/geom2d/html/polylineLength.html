@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polylineLength</title>
+  <meta name="keywords" content="polylineLength">
+  <meta name="description" content="POLYLINELENGTH return length of a polyline given as a list of points">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom2d</a> &gt; polylineLength.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polylineLength
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYLINELENGTH return length of a polyline given as a list of points</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function len = polylineLength(poly, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLYLINELENGTH return length of a polyline given as a list of points
+
+   L = polylineLength(POLY);
+   POLY should be a [NxD] array, with N being the number of points and D
+   the dimension of the points.
+
+   L = polylineLength(..., TYPE);
+   Specifies if the last point is connected to the first one. TYPE can be
+   either 'closed' or 'open'.
+
+   L = polylineLength(POLY, POS);
+   Compute the length of the polyline between its origin and the position
+   given by POS. POS should be between 0 and N-1, where N is the number of
+   points of the polyline.
+
+
+   Example:
+   Compute the perimeter of a circle with radius 1
+   polylineLength(circleAsPolygon([0 0 1], 500), 'closed')
+   -&gt; return 6.2831
+
+   See also:
+   <a href="polylines2d.html" class="code" title="function polylines2d(varargin)">polylines2d</a>, <a href="curveCentroid.html" class="code" title="function center = curveCentroid(varargin)">curveCentroid</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)
+ Copyright 2009 INRA - Cepia Software Platform.
+ Licensed under the terms of the LGPL, see the file &quot;license.txt&quot;</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polylineSubcurve.html" class="code" title="function res = polylineSubcurve(poly, t0, t1)">polylineSubcurve</a>	POLYLINESUBCURVE  extract a portion of a polyline</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="curveCSMoment.html" class="code" title="function m = curveCSMoment(curve, p, q)">curveCSMoment</a>	CURVECSMOMENT  Compute centered scaled moment of a 2D curve</li></ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

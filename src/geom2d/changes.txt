@@ -1,0 +1,28 @@
+changes in geom2d
+
+* new features
+
+- new functions for polygons:
+    polygonPoint, polygonSubcurve, polygonLoops, distancePointPolygon, 
+    distancePolygons, expandPolygon, polygonSelfIntersections,
+    projPointOnPolygon, isPointInPolygon, reveresPolygon
+    
+- new functions for polylines:
+    intersectPolylines, polylineSelfIntersections, distancePolylines,
+    isPointOnPolyline, reveresPolyline
+
+- projPointOnPolyline can also return the distance of the point to the polyline
+
+- function 'edgeToLine' converts an edge to its supporting line
+
+* Changes
+
+- Renamed functions
+    + subcurve      -> polylineSubCurve
+    + curveCentroid -> polylineCentroid
+    + invertLine    -> reverseLine
+            
+- Compatibility considerations
+    + parallelLine: changed convention for signed distance
+
+ * various bug fixes, and doc updates.

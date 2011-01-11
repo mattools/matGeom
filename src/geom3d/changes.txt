@@ -1,0 +1,19 @@
+changes in geom3d
+
+New features
+- added createEulerAnglesRotation
+- added drawPolyline3d
+- added functions for management of 3D boxes (isothetic cuboids)
+- added drawAxisCube function
+- added recenterTransform3d, to change invariant point of 3D transforms.
+
+Enhancements
+- added support for several lines in clipLine3d
+- added support for multiple inputs in distancePointPlane
+- updated doc for polyhedra, for function localToGlobal3d
+- updated several drawing functions
+
+Bug fixes
+- fixed several bugs in 3D rotations
+- fixed bugs in drawCircle3d, drawCircleArc3d, drawEllipse3d.
+- fixed bugs in drawCylinder

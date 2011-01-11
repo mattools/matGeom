@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createLine</title>
+  <meta name="keywords" content="createLine">
+  <meta name="description" content="CREATELINE create a line with various inputs.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom2d</a> &gt; createLine.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createLine
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATELINE create a line with various inputs.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function line = createLine(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATELINE create a line with various inputs.
+
+   Line is represented in a parametric form : [x0 y0 dx dy]
+   x = x0 + t*dx
+   y = y0 + t*dy;
+
+
+   L = createLine(p1, p2);
+   Returns the line going through the two given points.
+   
+   L = createLine(x0, y0, dx, dy);
+   Returns the line going through point (x0, y0) and with direction
+   vector(dx, dy).
+
+   L = createLine(LINE);
+   where LINE is an array of 4 values, creates the line going through the
+   point (LINE(1) LINE(2)), and with direction given by vector (LINE(3)
+   LINE(4)). 
+   
+   L = createLine(THETA);
+   Create a polar line originated at (0,0) and with angle THETA.
+
+   L = createLine(RHO, THETA);
+   Create a polar line with normal theta, and with min distance to origin
+   equal to rho. rho can be negative, in this case, the line is the same
+   as with CREATELINE(-rho, theta+pi), but the orientation is different.
+
+
+   Note: in all cases, parameters can be vertical arrays of the same
+   dimension. The result is then an array of lines, of dimensions [N*4].
+
+
+   See also:
+   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="createEdge.html" class="code" title="function edge = createEdge(varargin)">createEdge</a>, <a href="createRay.html" class="code" title="function ray = createRay(varargin)">createRay</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 31/10/2003.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="angle3Points.html" class="code" title="function theta = angle3Points(varargin)">angle3Points</a>	ANGLE3POINTS return oriented angle made by 3 points</li><li><a href="bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>	BISECTOR return the bisector of two lines, or 3 points</li><li><a href="clipEdge.html" class="code" title="function edge2 = clipEdge(edge, box)">clipEdge</a>	CLIPEDGE clip an edge with a rectangular box</li><li><a href="crackPattern.html" class="code" title="function edges = crackPattern(box, points, alpha, varargin)">crackPattern</a>	CRACKPATTERN create a (bounded) crack pattern tessellation</li><li><a href="crackPattern2.html" class="code" title="function edges = crackPattern2(box, points, alpha, varargin)">crackPattern2</a>	CRACKPATTERN2 create a (bounded) crack pattern tessellation</li><li><a href="edgeAngle.html" class="code" title="function theta = edgeAngle(varargin)">edgeAngle</a>	EDGEANGLE return angle of edge</li><li><a href="expandPolygon.html" class="code" title="function loops = expandPolygon(poly, dist)">expandPolygon</a>	EXPANDPOLYGON expand a polygon by a given (signed) distance</li><li><a href="medialAxisConvex.html" class="code" title="function [nodes, edges] = medialAxisConvex(points)">medialAxisConvex</a>	MEDIALAXISCONVEX compute medial axis of a convex polygon</li><li><a href="polygonExpand.html" class="code" title="function poly2 = polygonExpand(polygon, dist)">polygonExpand</a>	POLYGONEXPAND 'expand' a polygon with a given distance</li><li><a href="radicalAxis.html" class="code" title="function line = radicalAxis(circle1, circle2)">radicalAxis</a>	RADICALAXIS  compute the radical axis (or radical line) of 2 circles</li><li><a href="transformLine.html" class="code" title="function dest = transformLine(line, trans)">transformLine</a>	TRANSFORMLINE transform a line with an affine transform</li></ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of intersectLinePolygon</title>
+  <meta name="keywords" content="intersectLinePolygon">
+  <meta name="description" content="INTERSECTLINEPOLYGON get intersection points between a line and a polygon">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom2d</a> &gt; intersectLinePolygon.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>intersectLinePolygon
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>INTERSECTLINEPOLYGON get intersection points between a line and a polygon</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function intersects = intersectLinePolygon(line, poly) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">INTERSECTLINEPOLYGON get intersection points between a line and a polygon
+
+   P = intersectLinePolygon(LINE, POLY)
+   Returns the intersection points of the lines LINE with polygon POLY. 
+   LINE is a 1x4 array containing parametric representation of the line
+   (in the form [x0 y0 dx dy], see createLine for details). 
+   POLY is a NVx2 array containing coordinates of the NV polygon vertices
+   P is a NIx2 array containing the coordinates of the M intersection
+   points.
+
+   Example
+   % compute intersections between a square and an horizontal line
+   poly = [0 0;10 0;10 10;0 10];
+   line = [5 5 1 0];
+   intersectLinePolygon(line, poly)
+   ans =
+         10     5
+          0     5
+      
+   See also
+   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="polygons2d.html" class="code" title="function polygons2d(varargin)">polygons2d</a>, <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2)">intersectLines</a>, <a href="intersectRayPolygon.html" class="code" title="function intersects = intersectRayPolygon(ray, poly)">intersectRayPolygon</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 31/10/2003.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="edgeToLine.html" class="code" title="function line = edgeToLine(edge)">edgeToLine</a>	EDGETOLINE  convert an edge to a straight line</li><li><a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2)">intersectLines</a>	INTERSECTLINES return all intersection points of N lines in 2D</li><li><a href="isPointOnEdge.html" class="code" title="function b = isPointOnEdge(point, edge, varargin)">isPointOnEdge</a>	ISPOINTONEDGE test if a point belongs to an edge</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="intersectRayPolygon.html" class="code" title="function intersects = intersectRayPolygon(ray, poly)">intersectRayPolygon</a>	INTERSECTRAYPOLYGON get intersection points between a ray and a polygon</li></ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

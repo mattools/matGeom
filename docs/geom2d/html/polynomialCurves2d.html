@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polynomialCurves2d</title>
+  <meta name="keywords" content="polynomialCurves2d">
+  <meta name="description" content="POLYNOMIALCURVES2D  description of functions operating on polynomial curves">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom2d</a> &gt; polynomialCurves2d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polynomialCurves2d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYNOMIALCURVES2D  description of functions operating on polynomial curves</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function polynomialCurves2d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLYNOMIALCURVES2D  description of functions operating on polynomial curves
+
+   Polynomial curves are plane curves whose points are defined by a
+   polynomial for each x and y coordinate.
+   A polynomial curve is represented by 3 row vectors:
+   - the bounds of the parametrization
+   - the coefficients for the x coordinate (in increasing degree)
+   - the coefficients for the y coordinate (in increasing degree)
+
+   Example:
+   C = {[0 1], [3 4], [0 1 -1]};
+   represents the curve defined by:
+       x(t) = 3 + 4*t;
+       y(t) = t - t*t;
+   for t belonging to the interval [0 1].
+
+   As each coordinate are given by polynoms, it is possible to compute
+   various parameters like curvature, normal, or the exact geodesic length
+   of the curve.
+
+   See also
+   <a href="polynomialCurvePoint.html" class="code" title="function point = polynomialCurvePoint(t, varargin)">polynomialCurvePoint</a>, <a href="polynomialCurvePosition.html" class="code" title="function pos = polynomialCurvePosition(tBounds, varargin)">polynomialCurvePosition</a>
+   <a href="polynomialCurveDerivative.html" class="code" title="function v = polynomialCurveDerivative(t, varargin)">polynomialCurveDerivative</a>, <a href="polynomialCurveNormal.html" class="code" title="function v = polynomialCurveNormal(t, varargin)">polynomialCurveNormal</a>,
+   <a href="polynomialCurveCurvature.html" class="code" title="function kappa = polynomialCurveCurvature(t, varargin)">polynomialCurveCurvature</a>, <a href="polynomialCurveCurvatures.html" class="code" title="function varargout = polynomialCurveCurvatures(t, varargin)">polynomialCurveCurvatures</a>
+   <a href="polynomialCurveProjection.html" class="code" title="function pos = polynomialCurveProjection(tBounds, varargin)">polynomialCurveProjection</a>
+   <a href="polynomialCurveLength.html" class="code" title="function L = polynomialCurveLength(tBounds, varargin)">polynomialCurveLength</a>, <a href="polynomialCurveCentroid.html" class="code" title="function centroid = polynomialCurveCentroid(tBounds, varargin)">polynomialCurveCentroid</a>
+   <a href="polynomialCurveFit.html" class="code" title="function varargout = polynomialCurveFit(t, varargin)">polynomialCurveFit</a>, <a href="polynomialCurveSetFit.html" class="code" title="function varargout = polynomialCurveSetFit(seg, varargin)">polynomialCurveSetFit</a>, <a href="polyfit2.html" class="code" title="function coef = polyfit2(varargin)">polyfit2</a>
+   <a href="polynomialDerivate.html" class="code" title="function deriv = polynomialDerivate(poly)">polynomialDerivate</a>
+
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@nantes.inra.fr
+ Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
+ Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+ Licensed under the terms of the LGPL, see the file &quot;license.txt&quot;</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawGrid3d</title>
+  <meta name="keywords" content="drawGrid3d">
+  <meta name="description" content="DRAWGRID3D draw a grid in 3 dimensions">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom3d</a> &gt; drawGrid3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawGrid3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWGRID3D draw a grid in 3 dimensions</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawGrid3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWGRID3D draw a grid in 3 dimensions
+
+   drawGrid3d
+   draws a 3D square grid, with origin (0,0,0) and spacing 1 in each
+   direction, with bounds corresponding to the bounds of current axis.
+
+   drawGrid3d(SPACING)
+   where spacing is either a scalar or a [1x3] matrix, specifies the size
+   of the unit cell.
+
+   drawGrid3d(ORIGIN, SPACING)
+   Also specify origin of grid. ORIGIN is a [1x3] array.
+
+   drawGrid3d(..., EDGE)
+   specifies whether function should draw edges touching edges of axis.
+   EDGE is a characheter string, which can be :
+   - 'OPEN' : each line start from one face of window to the opposite
+   face. This results in a 'spiky' grid.
+   - 'CLOSED' (default value) : each line stops at the last visible point
+   of the grid for this line. The result looks like a box (no free spikes
+   around the grid).
+
+   H = drawGrid3d(...);
+   return a vector of handles for each LINE object which was crated.
+
+
+   ------
+   Author: David Legland
+   e-mail: david.legland@jouy.inra.fr
+   Created: 2005-11-17
+   Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>	DRAWEDGE3D draw the edge in the current Window</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

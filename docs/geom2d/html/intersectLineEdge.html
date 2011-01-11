@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of intersectLineEdge</title>
+  <meta name="keywords" content="intersectLineEdge">
+  <meta name="description" content="INTERSECTLINEEDGE return intersection between a line and an edge">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom2d</a> &gt; intersectLineEdge.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>intersectLineEdge
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>INTERSECTLINEEDGE return intersection between a line and an edge</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function point = intersectLineEdge(line, edge) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">INTERSECTLINEEDGE return intersection between a line and an edge
+
+   P = intersectLineEdge(LINE, EDGE);
+   returns the intersection point of lines LINE and edge EDGE. 
+   LINE is a 1x4 array containing parametric representation of the line
+   (in the form [x0 y0 dx dy], see 'createLine' for details). 
+   EDGE is a 1x4 array containing coordinates of first and second point
+   (in the form [x1 y1 x2 y2], see 'createEdge' for details). 
+   
+   In case of colinear line and edge, returns [Inf Inf].
+   If line does not intersect edge, returns [NaN NaN].
+
+   If each input is [N*4] array, the result is a [N*2] array containing
+   intersections for each couple of edge and line.
+   If one of the input has N rows and the other 1 row, the result is a
+   [N*2] array.
+
+   See also:
+   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="intersectEdges.html" class="code" title="function point = intersectEdges(edge1, edge2)">intersectEdges</a>, <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2)">intersectLines</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 31/10/2003.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="isPointOnEdge.html" class="code" title="function b = isPointOnEdge(point, edge, varargin)">isPointOnEdge</a>	ISPOINTONEDGE test if a point belongs to an edge</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="clipEdge.html" class="code" title="function edge2 = clipEdge(edge, box)">clipEdge</a>	CLIPEDGE clip an edge with a rectangular box</li><li><a href="clipLine.html" class="code" title="function edge = clipLine(line, box)">clipLine</a>	CLIPLINE clip a line with a box</li><li><a href="clipLineRect.html" class="code" title="function edge = clipLineRect(line, rect)">clipLineRect</a>	CLIPLINERECT clip a line with a polygon</li><li><a href="clipPolygonHP.html" class="code" title="function poly2 = clipPolygonHP(poly, line)">clipPolygonHP</a>	CLIPPOLYGONHP clip a polygon with a Half-plane defined by a directed line</li></ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>

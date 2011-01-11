@@ -1,0 +1,1024 @@
+#LyX 1.6.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{sfmath}
+
+\usepackage{algorithmic}
+\usepackage{algorithm}
+
+\renewcommand{\algorithmicrequire}{\textbf{Requiert:}}
+\renewcommand{\algorithmicensure}{\textbf{Assure:}}
+\renewcommand{\algorithmicend}{\textbf{fin}}
+\renewcommand{\algorithmicif}{\textbf{si}}
+\renewcommand{\algorithmicthen}{\textbf{alors}}
+\renewcommand{\algorithmicelse}{\textbf{sinon}}
+\renewcommand{\algorithmicendif}{\textbf{fin si}}
+
+\renewcommand{\algorithmicfor}{\textbf{pour}}
+\renewcommand{\algorithmicendfor}{\textbf{fin pour}}
+\renewcommand{\algorithmicforall}{\textbf{pour chaque}}
+\renewcommand{\algorithmicwhile}{\textbf{tant que}}
+\renewcommand{\algorithmicdo}{\textbf{faire}}
+\renewcommand{\algorithmicendwhile}{\textbf{fin tant que}}
+\renewcommand{\algorithmicrepeat}{\textbf{r{\'{e}}p{\'{e}}ter}}
+\renewcommand{\algorithmicuntil}{\textbf{tant que}}
+\end_preamble
+\use_default_options true
+\language french
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family sfdefault
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\float_placement h
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 2
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Calcul de l'expansion d'un polygone
+\end_layout
+
+\begin_layout Author
+D.
+ Legland
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+Pour certaines applications géométriques, on a besoin de déterminer un polygone
+ situé à une certaine distance d'un autre polygone.
+ Ce document décrit brièvement la méthode utilisée pour la bibliothèque
+ Matlab 
+\begin_inset Quotes fld
+\end_inset
+
+geom2d
+\begin_inset Quotes frd
+\end_inset
+
+, et donne quelques exemples de résultats sur des polygones simplifiés ainsi
+ que sur des polygones issus de cas réels.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+Un problème rencontré fréquemment est de déterminer un polygone qui soit
+ 
+\begin_inset Quotes fld
+\end_inset
+
+à une distance donnée
+\begin_inset Quotes frd
+\end_inset
+
+ d'un autre polygone.
+ On peut avoir deux approches.
+\end_layout
+
+\begin_layout Standard
+On peut définir la forme parallèle à un polygone comme l'ensemble des points
+ situés à une distance donnée de la frontière du polygone.
+ En général, on distingue une distance positive si on va vers l'extérieur
+ du polygone, et une distance négative si on va vers l'intérieur du polygone.
+ Le résultat est un ensemble de courbes, composées de segments de droite
+ et d'arcs de cercle.
+ Ce type de forme est appelé 
+\begin_inset Quotes fld
+\end_inset
+
+Buffer
+\begin_inset Quotes frd
+\end_inset
+
+ avec les systèmes d'information géographique.
+\end_layout
+
+\begin_layout Standard
+Une autre approche est de ne garder pour le résultat que des segments de
+ droite parallèles aux segments d'origine (Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Polygone-expanse"
+
+\end_inset
+
+).
+ Le résultats est un polygone ou un ensemble de polygones.
+ Des cas pathologiques peuvent cependant apparaître près des sommets dont
+ les arêtes voisines sont quasiment parallèles : erreur sur le calcul de
+ l'intersection, ou résultat très pointu avec des nouveaux sommets situés
+ à une grande distance du polygone d'origine.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/poly0Expand.eps
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Polygone-expanse"
+
+\end_inset
+
+Résultat de l'expansion d'un polygone dans un cas simple.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dans certains cas (vers l'intérieur d'un polygone convexe) les deux approches
+ aboutisent au même résultat.
+ Les cas qui me préoccupent sont en général d'avoir des distances vers l'intérie
+ur du polygone, j'ai donc privilégié l'approche avec des arêtes parallèles
+ qui me paraissait plus simple à implémenter.
+\end_layout
+
+\begin_layout Section
+Principe 
+\end_layout
+
+\begin_layout Standard
+Le principe consiste à calculer le polygone 
+\begin_inset Quotes fld
+\end_inset
+
+parallèle
+\begin_inset Quotes frd
+\end_inset
+
+ au polygone d'origine, puis à rajouter un post-traitement pour supprimer
+ des artefacts indésirables dus aux concavités du polygone.
+\end_layout
+
+\begin_layout Subsection
+Polygone parallèle
+\end_layout
+
+\begin_layout Standard
+Le calcul du polygone parallèle ne pose pas de problème particulier.
+ Pour chaque arête du polygone, on détermine la droite parallèle à cette
+ arête.
+ On calcule ensuite les points d'intersection des droites parallèles à deux
+ arêtes consécutives.
+ Le polygone expansé est défini par la succession des points d'intersection
+ (Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:poly1-Expansion"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/poly1Expand.eps
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:poly1-Expansion"
+
+\end_inset
+
+Calcul de l'expansion d'un polygone dans un cas simple.
+ En noir le polygone original, en bleu les droites parallèles à chaque arête,
+ et en rouge les points d'intersection.
+ Le polygone expansé est représenté en bleu et avec un trait épais.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Lorsque le polygone n'est pas convexe, des recouvrements du polygone expansé
+ peuvent apparaître (Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:poly1-Expansion"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/poly2Expand.eps
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:poly2-Parallele"
+
+\end_inset
+
+Recouvrement du polygone expansé dans le cas non convexe.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Un traitement additionnel est nécessaire pour décomposer le résultat en
+ polygones qui ne se recoupent pas.
+\end_layout
+
+\begin_layout Subsection
+Décomposition en polygones simples
+\end_layout
+
+\begin_layout Standard
+Les points d'intersection du polygone sont calculés en itérant sur tous
+ les couples d'arêtes, et en évitant les arêtes voisines (qui se touchent
+ par définition).
+ 
+\end_layout
+
+\begin_layout Standard
+On définit une position pour un point sur le polygone entre 0 et 
+\begin_inset Formula $N_{v}$
+\end_inset
+
+ (
+\begin_inset Formula $N_{v}$
+\end_inset
+
+ étant le nombre de sommets du polygone).
+ La partie entière de la position, entre 0 et 
+\begin_inset Formula $N_{v}-1$
+\end_inset
+
+, identifie l'arête à laquelle appartient le point.
+ La partie fractionnaire (entre 0 et 1) définit la position relative entre
+ les deux extrémités de l'arête.
+\end_layout
+
+\begin_layout Standard
+Chaque point d'intersection peut être identifié par deux positions sur le
+ polygone.
+ Sur le polygone expansé de la figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:poly2-Parallele"
+
+\end_inset
+
+, le point d'intersection du haut peut ainsi avoir la position 
+\begin_inset Formula $2.37$
+\end_inset
+
+, sur la deuxième arête, ou 
+\begin_inset Formula $5.36$
+\end_inset
+
+, sur la cinquième arête (les arêtes sont numérotées de 0 à 7, dans le sens
+ inverse des aiguilles d'une montre, en commençant par l'arête du bas).
+ De manière similaire, le point d'intersection du bas peut avoir la position
+ 
+\begin_inset Formula $2.61$
+\end_inset
+
+ ou 
+\begin_inset Formula $4.61$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pos1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pos2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.37
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.36
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.61
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.61
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.61
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.61
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.36
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.37
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Couples-Positions"
+
+\end_inset
+
+Couples des positions des points d'intersection du polygone expansé.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On stocke ces couples de positions dans un tableau à deux colonnes, une
+ fois en commençant par la première position, une autre fois en commençant
+ par la deuxième.
+ Le résultat est un tableau de 
+\begin_inset Formula $2\times N_{i}$
+\end_inset
+
+ lignes et 2 colonnes.
+ On ordonne ensuite ce tableau en fonction de la première colonne.
+ Pour le polygone de la figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:poly2-Parallele"
+
+\end_inset
+
+, on obtient le tableau
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Couples-Positions"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Extraction des boucles
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{algorithmic}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+WHILE{il reste des intersections}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE{créer une nouvelle boucle (vide)}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE{pos0 $
+\backslash
+leftarrow$ première valeur du premier couple}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE{pos $
+\backslash
+leftarrow$ deuxième valeur du premier couple}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE{supprimer la première ligne du tableau}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+WHILE{on ne revient pas au départ}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE{ind $
+\backslash
+leftarrow$ indice de la première position supérieure à pos}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE{ajouter à la boucle la portion de courbe comprise entre pos et pos1(ind)}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE{pos $
+\backslash
+leftarrow$ pos2(ind)}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE{supprimer la ligne ind du tableau}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ENDWHILE
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE{ajouter la boucle créée à la liste des boucles}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ENDWHILE
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On décompose ensuite le polygone en plusieurs 
+\begin_inset Quotes fld
+\end_inset
+
+boucles
+\begin_inset Quotes frd
+\end_inset
+
+, qui sont des polygones simples (sans intersection).
+ Le principe de cette étape est détaillé dans l'algorithme 1.
+ 
+\end_layout
+
+\begin_layout Subsection
+Sélection des polygones
+\end_layout
+
+\begin_layout Standard
+L'ensemble de boucles obtenu à l'étape précédente comprend des boucles qui
+ touchent le polygone original, ou qui sont trop proche de lui.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/poly2Final.eps
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Poly2-expanse"
+
+\end_inset
+
+Polygone expansé dans un cas non convexe.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On sélectionne les boucles finales en fonction de leur distance au polygone
+ original.
+ Pour calculer cette distance, on calcule la distance entre chaque sommet
+ d'un polygone et chaque segment de l'autre polygone.
+ 
+\end_layout
+
+\begin_layout Standard
+En ne gardant que les boucles situées à la bonne distance, on obtient finalement
+ le polygone expansé (Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Poly2-expanse"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Section
+Application à un contour de tige de maïs
+\end_layout
+
+\begin_layout Standard
+L'objectif du développement était de pouvoir repérer des points à l'intérieur
+ d'images de tiges de maïs acquises en macroscopie.
+ Le contour des tiges a été identifié sur les images, et simplifié pour
+ ne garder que quelques dizaines de points (Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Images-Mais"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/m02a.tif
+	lyxscale 50
+	width 6cm
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/m02aFrontWave.eps
+	width 6cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Images-Mais"
+
+\end_inset
+
+Résultat d'une acquisition d'image de tige, et résultats de l'expansion
+ vers l'intérieur d'un contour simplifié, en utilisant différentes distances.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+L'application de l'algorithme permet de définir différents polygones concentriqu
+es, pour différentes distances à partir du bord de la tige.
+\end_layout
+
+\begin_layout Section
+Conclusion
+\end_layout
+
+\begin_layout Standard
+L'algorithme semble opérationnel sur les quelques polygones testés.
+ Il n'a pas fait l'objet d'une procédure de tests intensive vis-à-vis des
+ cas pathologiques (segments consécutifs colinéaires).
+\end_layout
+
+\begin_layout Standard
+Les quelques précautions à prendre sont :
+\end_layout
+
+\begin_layout Itemize
+éviter les polygones avec un nombre trop important de points, les algorithmes
+ ne sont pas spécialement optimisés
+\end_layout
+
+\begin_layout Itemize
+éviter les arêtes consécutives colinéaires
+\end_layout
+
+\begin_layout Itemize
+garder en tête que tous les points du polygone expansé ne sont pas à la
+ même distance du polygone d'origine : les sommets en particulier sont en
+ général plus éloignés, du fait que l'on évite d'utiliser des arcs de cercle.
+\end_layout
+
+\begin_layout Standard
+Il pourrait être intéressant de faire quelques essais pour évaluer le temps
+ d'exécution en fonction du nombre sommets du polygone de base.
+\end_layout
+
+\end_body
+\end_document

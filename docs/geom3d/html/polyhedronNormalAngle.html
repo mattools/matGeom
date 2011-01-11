@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polyhedronNormalAngle</title>
+  <meta name="keywords" content="polyhedronNormalAngle">
+  <meta name="description" content="POLYHEDRONNORMALANGLE compute normal angle at a vertex of a 3D polyhedron">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">imael</a> &gt; <a href="#">geom3d</a> &gt; polyhedronNormalAngle.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for .\imael\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polyhedronNormalAngle
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYHEDRONNORMALANGLE compute normal angle at a vertex of a 3D polyhedron</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function theta = polyhedronNormalAngle(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLYHEDRONNORMALANGLE compute normal angle at a vertex of a 3D polyhedron
+
+   THETA = polyhedraNormalAngle(NODES, EDGES, FACES, IND);
+   THETA = polyhedraNormalAngle(NODES, FACES, IND);
+   where NODES is a set of 3D points, and FACES a set of faces, whose
+   elements are indices to NODES array, compute the normal angle at the
+   vertex whose index is given by IND.
+
+   THETA = polyhedraNormalAngle(GRAPH, IND);
+   Uses a graph structure. GRAPH should contain at least fields : 'nodes'
+   and 'faces'.
+
+   Example :
+   % create a simple (irregular) tetrahedra
+   nodes = [0 0 0;1 0 0;0 1 0;0 0 1];
+   faces = [1 2 3;1 2 4;1 3 4;2 3 4];
+   % compute normal angle at each vertex
+   theta = polyhedronNormalAngle(nodes, faces, 1:size(nodes, 1));
+   % sum of normal angles should be equal to 4*pi :
+   sum(theta)
+
+
+   TODO works only for polyhedra with convex faces ! ! !
+
+   See also
+   <a href="polyhedra.html" class="code" title="function polyhedra(varargin)">polyhedra</a>, <a href="polygon3dNormalAngle.html" class="code" title="function theta = polygon3dNormalAngle(points, ind)">polygon3dNormalAngle</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@jouy.inra.fr
+ Created: 2005-11-30
+ Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polygon3dNormalAngle.html" class="code" title="function theta = polygon3dNormalAngle(points, ind)">polygon3dNormalAngle</a>	POLYGON3DNORMALANGLE compute normal angle at a vertex of the 3D polygon</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<hr><address>Generated on Fri 05-Feb-2010 11:20:41 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003</address>
+</body>
+</html>
