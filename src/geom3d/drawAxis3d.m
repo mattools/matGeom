@@ -1,16 +1,23 @@
 function drawAxis3d(varargin)
-%DRAWAXIS3D  draw a coordinate system and an origin
+%DRAWAXIS3D Draw a coordinate system and an origin
 %
 %   drawAxis3d
 %	Adds 3 cylinders to the current axis, corresponding to the directions
 %	of the 3 basis vectors Ox, Oy and Oz.
 %	Ox vector is red, Oy vector is green, and Oz vector is blue.
 %
+%   drawAxis3d(L, R)
+%   Specifies the length L and the radius of the cylinders representing the
+%   different axes.
+%
 %   Example
 %   drawAxis
 %
-%   See also
+%   figure;
+%   drawAxis(20, 1);
 %
+%   See also
+%   drawAxisCube
 %
 % ------
 % Author: David Legland

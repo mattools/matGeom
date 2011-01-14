@@ -37,4 +37,4 @@ warning('geom3d:deprecated', ...
     [mfilename ' is deprecated, use ''createRotationOz'' instead']);
 
 % call current implementation
-createRotationOz(varargin{:});
+trans = createRotationOz(varargin{:});

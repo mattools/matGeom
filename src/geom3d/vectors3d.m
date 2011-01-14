@@ -1,5 +1,5 @@
 function vectors3d(varargin)
-%VECTORS3D  description of functions operating on 3D vectors
+%VECTORS3D Description of functions operating on 3D vectors
 %
 %   Vectors are represented by their 3 Cartesian coordinates:
 %   V = [VX VY VZ];

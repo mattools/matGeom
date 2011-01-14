@@ -36,4 +36,4 @@ warning('geom3d:deprecated', ...
     [mfilename ' is deprecated, use ''createRotationOy'' instead']);
 
 % call current implementation
-createRotationOy(varargin{:});
+trans = createRotationOy(varargin{:});

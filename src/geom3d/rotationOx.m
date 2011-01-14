@@ -35,4 +35,4 @@ warning('geom3d:deprecated', ...
     [mfilename ' is deprecated, use ''createRotationOx'' instead']);
 
 % call current implementation
-createRotationOx(varargin{:});
+trans = createRotationOx(varargin{:});

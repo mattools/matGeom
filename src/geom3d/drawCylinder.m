@@ -1,5 +1,5 @@
 function varargout = drawCylinder(cyl, varargin)
-%DRAWCYLINDER draw a cylinder
+%DRAWCYLINDER Draw a cylinder
 %
 %   drawCylinder(CYL)
 %   where CYL is a cylinder defined by [x1 y1 z1 x2 y2 z2 r]:
@@ -109,7 +109,7 @@ y2 = reshape(pts(:,2), size(x));
 z2 = reshape(pts(:,3), size(x));
 
 % add default drawing options
-varargin = {'FaceColor', 'g', 'edgeColor', 'none', varargin{:}};
+varargin = [{'FaceColor', 'g', 'edgeColor', 'none'} varargin];
 
 % plot the cylinder as a surface
 hSurf = surf(x2, y2, z2, varargin{:});

@@ -1,26 +1,26 @@
 function plane = createPlane(varargin)
-%CREATEPLANE create a plane in parametrized form
-%
-%   Creates a plane in the following format: 
-%   PLANE = [X0 Y0 Z0  DX1 DY1 DZ1  DX2 DY2 DZ2], where :
-%   - (X0, Y0, Z0) is a point belonging to the plane
-%   - (DX1, DY1, DZ1) is a first direction vector
-%   - (DX2, DY2, DZ2) is a second direction vector
-%   The 2 direction vectors are normalized and orthogonal.
-%
+%CREATEPLANE Create a plane in parametrized form
 %
 %   PLANE = createPlane(P1, P2, P3) 
-%   create a plane containing the 3 points
+%   creates a plane containing the 3 points
 %
 %   PLANE = createPlane(PTS) 
 %   The 3 points are packed into a single 3x3 array.
 %
 %   PLANE = createPlane(P0, N);
-%   create a plane from a point and from a normal to the plane. parameter N
-%   is given as [THETA PHI], where THETA is the colatitute (angle with the
-%   vertical axis) and PHI is angle with Ox axis, counted
-%   counter-clockwise. Both are given in radians.
+%   Creates a plane from a point and from a normal to the plane. The
+%   parameter N is given either as a 3D vector (1-by-3 row vector), or as
+%   [THETA PHI], where THETA is the colatitute (angle with the vertical
+%   axis) and PHI is angle with Ox axis, counted counter-clockwise (both
+%   given in radians).
 %   
+%   The created plane data has the following format:
+%   PLANE = [X0 Y0 Z0  DX1 DY1 DZ1  DX2 DY2 DZ2], with
+%   - (X0, Y0, Z0) is a point belonging to the plane
+%   - (DX1, DY1, DZ1) is a first direction vector
+%   - (DX2, DY2, DZ2) is a second direction vector
+%   The 2 direction vectors are normalized and orthogonal.
+%
 %   See also:
 %   planes3d, medianPlane
 %   
@@ -30,18 +30,18 @@ function plane = createPlane(varargin)
 %   created the 18/02/2005.
 %
 
-%   HISTORY :
-%   24/11/2005 : add possibility to pack points for plane creation
-%   21/08/2006 : return normalized planes
-%   06/11/2006 : update doc for planes created from normal
+%   HISTORY
+%   24/11/2005 add possibility to pack points for plane creation
+%   21/08/2006 return normalized planes
+%   06/11/2006 update doc for planes created from normal
 
 if length(varargin)==1
     var = varargin{1};
     
     if iscell(var)
-        plane = zeros([0 9]);
+        plane = zeros([length(var) 9]);
         for i=1:length(var)
-            plane = [plane; createPlane(var{i})];
+            plane(i,:) = createPlane(var{i});
         end
     elseif size(var, 1)==3
         % 3 points in a single array
@@ -65,8 +65,10 @@ elseif length(varargin)==2
     % second parameter is either a 3D vector or a 3D angle (2 params)
     var = varargin{2};
     if size(var, 2)==2
+        % normal is given in spherical coordinates
         n = sph2cart2([var ones(size(var, 1))]);
     elseif size(var, 2)==3
+        % normal is given by a 3D vector
         n = normalizeVector3d(var);
     else
         error ('wrong number of parameters in createPlane');

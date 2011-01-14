@@ -1,5 +1,5 @@
 function planes3d(varargin)
-%PLANES3D  description of functions operating on 3D planes
+%PLANES3D Description of functions operating on 3D planes
 %
 %   Planes are represented by a 3D point (the plane origin) and 2 direction
 %   vectors, which should not be colinear.

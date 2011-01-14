@@ -38,7 +38,7 @@
 %
 %
 % 3D Points
-%   points3d                  - description of functions operating on 3D points
+%   points3d                  - Description of functions operating on 3D points
 %   midPoint3d                - Middle point of two 3D points or of a 3D edge
 %   isCoplanar                - Tests input points for coplanarity in 3-space.
 %   transformPoint3d          - transform a point with a 3D affine transform
@@ -46,7 +46,7 @@
 %   clipPoints3d              - clip a set of points by a box
 %
 % 3D Vectors
-%   vectors3d                 - description of functions operating on 3D vectors
+%   vectors3d                 - Description of functions operating on 3D vectors
 %   transformVector3d         - transform a vector with a 3D affine transform
 %   normalizeVector3d         - normalize a 3D vector
 %   vectorNorm3d              - compute norm of vector or of set of 3D vectors
@@ -68,7 +68,7 @@
 %   cyl2cart                  - Convert cylindrical to cartesian coordinates
 %
 % 3D Lines and Edges
-%   lines3d                   - description of functions operating on 3D lines
+%   lines3d                   - Description of functions operating on 3D lines
 %   createLine3d              - create a line with various inputs.
 %   transformLine3d           - transform a 3D line with a 3D affine transform
 %   clipLine3d                - clip a line with a box and return an edge
@@ -77,9 +77,9 @@
 %   linePosition3d            - return position of a 3D point on a 3D line
 %
 % Planes
-%   planes3d                  - description of functions operating on 3D planes
+%   planes3d                  - Description of functions operating on 3D planes
 %   medianPlane               - create a plane in the middle of 2 points
-%   createPlane               - create a plane in parametrized form
+%   createPlane               - Create a plane in parametrized form
 %   normalizePlane            - normalize parametric form of a plane
 %   intersectPlanes           - return intersection between 2 planes in space
 %   projPointOnPlane          - return the projection of a point on a plane
@@ -93,41 +93,9 @@
 %   dihedralAngle             - compute dihedral angle between 2 planes
 %
 % 3D Polygons
-%   polygons3d                - description of functions operating on 3D polygons
+%   polygons3d                - Description of functions operating on 3D polygons
 %   polygonCentroid3d         - compute centroid (center of mass) of a polygon
 %   polygon3dNormalAngle      - compute normal angle at a vertex of the 3D polygon
-%   clipConvexPolygon3dHP     - clip a convex 3D polygon with Half-space
-%
-% Polyhedra
-%   meshes3d                  - Description of functions operating on 3D meshes
-%   meshFace                  - Return the vertex indices of a face in a mesh
-%   meshEdgeFaces             - Compute index of faces adjacent to each edge of a mesh
-%   meshEdgeLength            - Lengths of edges of a polygonal or polyhedral mesh
-%   faceCentroids             - Compute centroids of a mesh faces
-%   faceNormal                - Compute normal vector of faces in a 3D mesh
-%   meshSurfaceArea           - Surface area of a polyhedral mesh
-%   polyhedronNormalAngle     - compute normal angle at a vertex of a 3D polyhedron
-%   polyhedronMeanBreadth     - Mean breadth of a convex polyhedron
-%   clipConvexPolyhedronHP    - clip a convex polyhedron by a plane
-%   meshDihedralAngles        - Dihedral at edges of a polyhedal mesh
-%   polyhedronSlice           - intersect a convex polyhedron with a plane.
-%   minConvexHull             - return the unique minimal convex hull in 3D
-%   triangulateFaces          - convert face array to an array of triangular faces 
-%   meshReduce                - return mesh with minimal number of faces
-%
-% Typical polyhedra
-%   polyhedra                 - Index of classical polyhedral meshes
-%   createCube                - Create a 3D mesh representing the unit cube
-%   createOctahedron          - Create a 3D mesh representing an octahedron
-%   createCubeOctahedron      - Create a 3D mesh representing a cube-octahedron
-%   createIcosahedron         - Create a 3D mesh representing an Icosahedron.
-%   createDodecahedron        - Create a 3D mesh representing a dodecahedron
-%   createTetrahedron         - Create a 3D mesh representing a tetrahedron
-%   createRhombododecahedron  - Create a 3D mesh representing a rhombododecahedron
-%   createTetrakaidecahedron  - Create a 3D mesh representing a tetrakaidecahedron
-%   createSoccerBall          - Create a 3D mesh representing a soccer ball
-%   createMengerSponge        - Create a cube with an inside cross removed
-%   steinerPolytope           - Create a steiner polytope from a set of vectors
 %
 % Other shapes
 %   circles3d                 - description of functions operating on 3D lines
@@ -172,14 +140,13 @@
 %   drawPlane3d               - draw a plane clipped in the current window
 %   drawCircle3d              - draw a 3D circle
 %   drawCircleArc3d           - draw a 3D circle arc
-%   drawCylinder              - draw a cylinder
-%   drawMesh                  - Draw a 3D mesh defined by vertices and faces
+%   drawCylinder              - Draw a cylinder
 %   drawSphere                - Draw a sphere as a mesh
 %   drawSphericalTriangle     - draw a triangle on a sphere
 %   drawSurfPatch             - draw surface patch, with 2 parametrized surfaces
 %   drawGrid3d                - draw a grid in 3 dimensions
 %   fillPolygon3d             - Fill a 3D polygon specified by a list of points
-%   drawAxis3d                - draw a coordinate system and an origin
+%   drawAxis3d                - Draw a coordinate system and an origin
 %   drawAxisCube              - Draw a colored cube representing axis orientation
 %
 %
@@ -194,15 +161,11 @@
 % Created: 2005-11-07
 % Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
-
 % In development:
 %   clipPolygon3dHP           - clip a 3D polygon with Half-space
 %   drawEllipse3d             - draw a 3D ellipse
 %   drawPartialPatch          - draw surface patch, with 2 parametrized surfaces
 %   createOblicProjectionXZ   - Create oblic projection for perspective display
-%   checkMeshAdjacentFaces    - Check if adjacent faces of a mesh have similar orientation
-%   drawFaceNormals           - Draw normal vector of each face in a mesh
-
 
 % Deprecated:
 %   intersectPlaneLine        - return intersection between a plane and a line
@@ -215,8 +178,6 @@
 %   vecnorm3d                 - compute norm of vector or of set of 3D vectors
 %   normalize3d               - normalize a 3D vector
 %   drawCurve3d               - draw a 3D curve specified by a list of points
-%   drawPolyhedra             - draw polyhedra defined by vertices and faces
-%   drawPolyhedron            - draw polyhedron defined by vertices and faces
 
 % Others
 
