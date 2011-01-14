@@ -26,7 +26,10 @@ geom2d
     + option de trace sous forme de chaine simple
     + option de trace sous forme de couple 'param' + 'value'
 
-    
+- pointSetBounds ?
+ 
+
+
 polygons2d
 ==========
 
@@ -36,7 +39,18 @@ polygons2d
 
 - reprendre doc pour la 'position' des polygones et polylines (2010.07.05)
 
+- polygonAverage (2010.07.05)
+    - prend en entree un tableau de cellules de polygones, ou alors plusieurs
+        polygones, 
+    - calcule la moyenne des coordonnees de chaque sommet.
 
+- structure de donnees geom pour stocker des points type polygone, en reprenant
+    idee du kdtree
+    voir par exemple polygones avec ensembles de points ayant la meme direction ?
+    ou decouper par tranches de polylignes ayant un "petit" bounding box
+    -> polygones monotones
+
+    
 geom3d
 ======
 
@@ -44,12 +58,16 @@ geom3d
     ex: drawCircle3d: theta+phi+psi
     pas vraiment de lien avec les angles d'Euler.
 
+
+- faire le point sur les differentes orientations d'axe 3D (2010.07.22)
+    + X droite, Y fond, Z haut
+    + X droite, Y haut, Z avant
     
+        
 meshes3d
 ========
         
 - meshes and polyhedra:
-    + manage mesh structures with fields vertices, edges and faces (2010.10.06)
     + document vertex position and edge and faces adjacencies for typical    
         meshes (2010.10.06)
     + add 'createDurerPolyhedron'
@@ -59,4 +77,4 @@ meshes3d
     * vertexNormal (2010.06.20)
     * clipMesh (2010.12.06)
         -> clip each face, and create a new mesh with clipped faces.
-        
+    * distancePointMesh     

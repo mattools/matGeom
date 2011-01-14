@@ -5,17 +5,13 @@ function vectors2d
 %   vector of 2 elements:
 %   V = [vx vy];
 %
-%   Several points are stores in a matrix with two columns, one for the
+%   Several vectors are stored in a matrix with two columns, one for the
 %   x-coordinate, one for the y-coordinate.
 %   VS = [vx1 vy1 ; vx2 vy2 ; vx3 vy3];
 %
 %   See also: 
-%   vectorNorm
-%   vectorAngle
-%   normalizeVector
-%   isPerpendicular
-%   isParallel
-%   transformVector
+%   vectorNorm, vectorAngle, isPerpendicular, isParallel
+%   normalizeVector, transformVector
 %
 %
 % ------

@@ -8,8 +8,8 @@ function boxes2d(varargin)
 %   infinite shapes.
 %
 %   See also
-%   clipLine, clipPoints, clipPolygon
-%   polygonBounds, intersectBoxes, mergeBoxes
+%   clipPoints, clipLine, clipEdge, clipRay
+%   mergeBoxes, intersectBoxes
 %
 %
 % ------
@@ -17,4 +17,5 @@ function boxes2d(varargin)
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2010 INRA - Cepia Software Platform.
+
 help('boxes2d');

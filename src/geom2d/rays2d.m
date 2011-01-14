@@ -10,14 +10,14 @@ function rays2d(varargin)
 %   y = y0 + t*dy;
 %   for all t>0
 %
-%   Contrary to a line, the points located before the origin do not belong
-%   to the ray.
+%   Contrary to a (straight) line, the points located before the origin do
+%   not belong to the ray.
 %   However, as rays and lines have the same representation, some functions
 %   working on lines are also working on rays (like 'transformLine').
 %
 %   See also:
 %   points2d, vectors2d, lines2d
-%   createRay, bisector, isPointOnRay, intersectRayPolygon
+%   createRay, bisector, isPointOnRay
 %   clipRay, drawRay
 %
 % ------

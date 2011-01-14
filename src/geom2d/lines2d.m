@@ -20,8 +20,8 @@ function lines2d(varargin)
 %   orthogonalLine, parallelLine, bisector, radicalAxis
 %   lineAngle, linePosition, projPointOnLine
 %   isPointOnLine, distancePointLine, isLeftOriented
-%   intersectLines, intersectLineEdge, intersectLinePolygon
-%   clipLine, invertLine, transformLine, drawLine
+%   intersectLines, intersectLineEdge, clipLine
+%   invertLine, transformLine, drawLine
 %   lineFit
 %
 %

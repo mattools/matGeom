@@ -13,10 +13,9 @@ function points2d
 %   P = [5 6];
 %
 %   See also:
-%   centroid, midPoint, polarPoint
+%   centroid, midPoint, polarPoint, pointOnLine
 %   isCounterClockwise, angle2Points, angle3Points, angleSort
 %   distancePoints, minDistancePoints
-%   pointOnLine
 %   transformPoint, clipPoints, drawPoint
 %
 % ------
