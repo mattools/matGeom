@@ -1,4 +1,4 @@
-function test_suite = testIntersectLines(varargin)
+function test_suite = testIntersectLines(varargin) %#ok<STOUT>
 %TESTINTERSECTLINES  One-line description here, please.
 %   output = testIntersectLines(input)
 %
@@ -18,7 +18,7 @@ function test_suite = testIntersectLines(varargin)
 initTestSuite;
 
 
-function testOrthogonal
+function testOrthogonal %#ok<*DEFNU>
 % basic test with two orthogonal lines
 line1 = [3 1 0 1];
 line2 = [1 4 1 0];

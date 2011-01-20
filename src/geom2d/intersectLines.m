@@ -16,6 +16,7 @@ function point = intersectLines(line1, line2)
 %
 %   See also:
 %   lines2d, edges2d, intersectEdges, intersectLineEdge
+%   intersectLineCircle
 %
 %   ---------
 %   author : David Legland 
@@ -24,8 +25,8 @@ function point = intersectLines(line1, line2)
 %
 
 %   HISTORY
-%   19/02/2004: add support for multiple lines.
-%   08/03/2007: update doc
+%   19/02/2004 add support for multiple lines.
+%   08/03/2007 update doc
 
 x1 =  line1(:,1);
 y1 =  line1(:,2);

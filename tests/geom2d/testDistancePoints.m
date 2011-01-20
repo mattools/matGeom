@@ -1,4 +1,4 @@
-function test_suite = testDistancePoints(varargin)
+function test_suite = testDistancePoints(varargin) %#ok<STOUT>
 %TESTDISTANCEPOINTS  One-line description here, please.
 %   output = testDistancePoints(input)
 %
@@ -17,7 +17,7 @@ function test_suite = testDistancePoints(varargin)
 
 initTestSuite;
 
-function testSingleSingle
+function testSingleSingle %#ok<*DEFNU>
 
 pt1 = [10 10];
 pt2 = [10 20];
