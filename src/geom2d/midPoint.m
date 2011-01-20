@@ -45,17 +45,13 @@ elseif nargin == 2
     % assert inputs are equal
     n1 = size(p1, 1);
     n2 = size(p2, 1);
-    if n1>1 && n2==1
-        p2 = repmat(p2, n1, 1);
-    elseif n2>1 && n1==1
-        p1 = repmat(p1, n2, 1);
-    elseif n1~=n2
+    if n1~=n2 && min(n1, n2)>1
         error('geom2d:midPoint', ...
             'Inputs must have same size, or one must have length 1');
     end
     
     % compute middle point
-    mid = (p1 + p2) / 2;
+    mid = bsxfun(@plus, p1, p2) / 2;
 end
 
 % process output arguments

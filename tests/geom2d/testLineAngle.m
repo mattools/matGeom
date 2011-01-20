@@ -1,4 +1,4 @@
-function test_suite = testLineAngle(varargin)
+function test_suite = testLineAngle(varargin) %#ok<STOUT>
 %TESTLINEANGLE  One-line description here, please.
 %   output = testLineAngle(input)
 %
@@ -17,7 +17,7 @@ function test_suite = testLineAngle(varargin)
 
 initTestSuite;
 
-function testLineAngle1
+function testLineAngle1 %#ok<*DEFNU>
 % test lineAngle with one parameter
 
 % horizontal

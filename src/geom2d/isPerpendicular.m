@@ -33,9 +33,10 @@ function b = isPerpendicular(v1, v2, varargin)
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
 %   HISTORY
-%   18/09/2007 copy from isPerpendicular, adapt to any dimension, and add
+%   2007-09-18 copy from isPerpendicular, adapt to any dimension, and add
 %       psb to specify precision
-%   21/09/2009 fix bug for array of 3 vectors
+%   2009-09-21 fix bug for array of 3 vectors
+%   2011-01-20 replace repmat by ones-indexing (faster)
 
 % default accuracy
 acc = 1e-14;
@@ -44,12 +45,17 @@ if ~isempty(varargin)
 end
 
 % adapt size of inputs
-if size(v1, 1)==1 && size(v2, 1)>1
-    v1 = repmat(v1, [size(v2, 1) 1]);
-end
-if size(v2, 1)==1 && size(v1, 1)>1
-    v2 = repmat(v2, [size(v1, 1) 1]);
+n1 = size(v1, 1);
+n2 = size(v2, 1);
+if n1~=n2
+    if n1==1
+        v1 = v1(ones(n2, 1), :);
+    elseif n2==1
+        v2 = v2(ones(n1, 1), :);
+    else
+        error('Inputs must either have same size, or one must be scalar');
+    end
 end
 
 % performs test
-b = abs(dot(v1, v2, 2))<acc;
+b = abs(dot(v1, v2, 2)) < acc;

@@ -1,7 +1,7 @@
-function point = intersectLines(line1, line2)
-%INTERSECTLINES return all intersection points of N lines in 2D
+function point = intersectLines(line1, line2, varargin)
+%INTERSECTLINES Return all intersection points of N lines in 2D
 %
-%   P = intersectLines(L1, L2);
+%   PT = intersectLines(L1, L2);
 %   returns the intersection point of lines L1 and L2. L1 and L2 are [1*4]
 %   arrays, containing parametric representation of each line (in the form
 %   [x0 y0 dx dy], see 'createLine' for details).
@@ -14,7 +14,17 @@ function point = intersectLines(line1, line2)
 %   If one of the input has N rows and the other 1 row, the result is a
 %   [N*2] array.
 %
-%   See also:
+%   PT = intersectLines(L1, L2, EPS);
+%   Specifies the tolerance for detecting parallel lines. Default is 1e-14.
+%
+%   Example
+%   line1 = createLine([0 0], [10 10]);
+%   line2 = createLine([0 10], [10 0]);
+%   point = intersectLines(line1, line2)
+%   point = 
+%       5   5
+%
+%   See also
 %   lines2d, edges2d, intersectEdges, intersectLineEdge
 %   intersectLineCircle
 %
@@ -41,10 +51,10 @@ N1 = length(x1);
 N2 = length(x2);
 
 % indices of parallel lines
-par = abs(dx1.*dy2-dx2.*dy1)<1e-14;
+par = abs(dx1.*dy2-dx2.*dy1) < 1e-14;
 
 % indices of colinear lines
-col = abs((x2-x1).*dy1-(y2-y1).*dx1)<1e-14 & par ;
+col = abs((x2-x1).*dy1-(y2-y1).*dx1) < 1e-14 & par ;
 
 x0(col) = Inf;
 y0(col) = Inf;

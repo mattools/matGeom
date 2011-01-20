@@ -8,7 +8,7 @@ function theta = angle2Points(varargin)
 %   Result is always given in radians, between 0 and 2*pi.
 %
 %   See Also:
-%   points2d, angles2d, angle3points, normalizeAngle
+%   points2d, angles2d, angle3points, normalizeAngle, vectorAngle
 %
 %
 % ---------
@@ -18,6 +18,7 @@ function theta = angle2Points(varargin)
 % Copyright 2010 INRA - Cepia Software Platform.
 
 %   HISTORY:
+%   2011-01-11 use bsxfun
 
 % process input arguments
 if length(varargin)==2
@@ -29,16 +30,14 @@ elseif length(varargin)==1
     p2 = var(2,:);
 end    
 
-% ensure data have same size
-if size(p1, 1)==1
-    p1 = p1(ones(size(p2,1), 1), :);
-elseif size(p2, 1)==1
-    p2 = p2(ones(size(p1,1), 1), :);
-elseif size(p1, 1)~=size(p2, 1)
+% ensure data have correct size
+n1 = size(p1, 1);
+n2 = size(p2, 1);
+if n1~=n2 && min(n1, n2)>1
     error('angle2Points: wrong size for inputs');
 end
 
-% angle of line (P2 P1)
-dp = p2-p1;
+% angle of line (P2 P1), between 0 and 2*pi.
+dp = bsxfun(@minus, p2, p1);
 theta = mod(atan2(dp(:,2), dp(:,1)) + 2*pi, 2*pi);
 

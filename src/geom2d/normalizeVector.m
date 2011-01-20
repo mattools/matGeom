@@ -24,14 +24,15 @@ function vn = normalizeVector(v)
 %
 
 %   HISTORY
-%   14/01/2005 correct bug
-%   22/05/2009 rename as normalizeVector
-
+%   2005-01-14 correct bug
+%   2009-05-22 rename as normalizeVector
+%   2011-01-20 use bsxfun
 
 dim = size(v);
 
 if dim(1)==1 || dim(2)==1
-    vn = v/sqrt(sum(v.*v));
+    vn = v / sqrt(sum(v.^2));
 else
-    vn = v./repmat(sqrt(sum(v.*v, 2)), [1 dim(2)]);
+    %same as: vn = v./repmat(sqrt(sum(v.*v, 2)), [1 dim(2)]);
+    vn = bsxfun(@rdivide, v, sqrt(sum(v.^2, 2)));
 end

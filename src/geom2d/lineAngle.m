@@ -11,7 +11,7 @@ function theta = lineAngle(varargin)
 %   radians between 0 and 2*pi, in counter-clockwise direction.
 %
 %   See also
-%   lines2d, angles2d, createLine, formatAngle
+%   lines2d, angles2d, createLine, normalizeAngle
 %
 %   ---------
 %   author : David Legland 
@@ -19,17 +19,19 @@ function theta = lineAngle(varargin)
 %   created the 31/10/2003.
 %
 
-%   HISTORY :
-%   19/02/2004 : added support for multiple lines.
+%   HISTORY
+%   2004-02-19 added support for multiple lines.
+%   2011-01-20 use bsxfun
 
 nargs = length(varargin);
 if nargs == 1
-    % one line
+    % angle of one line with horizontal
     line = varargin{1};
     theta = mod(atan2(line(:,4), line(:,3)) + 2*pi, 2*pi);
+    
 elseif nargs==2
-    % two lines
+    % angle between two lines
     theta1 = lineAngle(varargin{1});
     theta2 = lineAngle(varargin{2});
-    theta = mod(theta2-theta1+2*pi, 2*pi);
+    theta = mod(bsxfun(@minus, theta2, theta1)+2*pi, 2*pi);
 end

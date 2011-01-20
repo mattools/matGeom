@@ -32,10 +32,11 @@ function b = isParallel(v1, v2, varargin)
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
 %   HISTORY
-%   18/09/2007 copy from isParallel3d, adapt to any dimension, and add psb
+%   2007-09-18 copy from isParallel3d, adapt to any dimension, and add psb
 %       to specify precision
-%   16/01/2007 fix bug
-%   21/09/2009 fix bug for array of 3 vectors
+%   2007-01-16 fix bug
+%   2009-09-21 fix bug for array of 3 vectors
+%   2011-01-20 replace repmat by ones-indexing (faster)
 
 
 % default accuracy
@@ -49,12 +50,14 @@ v1(1,3) = 0;
 v2(1,3) = 0;
 
 % adapt size of inputs
-if size(v1, 1)==1 && size(v2, 1)>1
-    v1 = repmat(v1, [size(v2, 1) 1]);
+n1 = size(v1, 1);
+n2 = size(v2, 1);
+if n1==1 && n2>1
+    v1 = v1(ones(n2,1), :);
 end
-if size(v2, 1)==1 && size(v1, 1)>1
-    v2 = repmat(v2, [size(v1, 1) 1]);
+if n2==1 && n1>1
+    v2 = v2(ones(n1,1), :);
 end
 
 % performs computation
-b = vectorNorm(cross(v1, v2, 2))<acc;
+b = vectorNorm(cross(v1, v2, 2)) < acc;

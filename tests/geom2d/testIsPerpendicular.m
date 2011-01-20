@@ -1,4 +1,4 @@
-function test_suite = testIsPerpendicular(varargin)
+function test_suite = testIsPerpendicular(varargin) %#ok<STOUT>
 %testIsPerpendicular  One-line description here, please.
 %   output = testIsPerpendicular(input)
 %
@@ -18,7 +18,7 @@ function test_suite = testIsPerpendicular(varargin)
 initTestSuite;
 
 
-function testPerpendicular
+function testPerpendicular %#ok<*DEFNU>
 
 v1 = [1 2];
 v2 = [-4 2];
@@ -33,11 +33,28 @@ v2 = [-4 1];
 b  = isPerpendicular(v1, v2);
 assertFalse(b);
 
-function testArray
+function testArrayAndSingle
 
-v1  = [1 0 ; 1 1;1 2];
+v1  = [1 0; 1 1; 1 2];
 v2  = [-4 2];
 th  = [false; false; true];
+
 res = isPerpendicular(v1, v2);
 assertEqual(res, th);
 
+res = isPerpendicular(v2, v1);
+assertEqual(res, th);
+
+
+function testArrayArray
+
+v1  = [1 0; 1 1; 1 2];
+v2  = [0 1; 1 2; 1 1];
+
+th  = [true; false; false];
+
+res = isPerpendicular(v1, v2);
+assertEqual(res, th);
+
+res = isPerpendicular(v1, v2);
+assertEqual(res, th);

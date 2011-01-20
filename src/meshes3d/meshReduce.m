@@ -1,5 +1,5 @@
 function varargout = meshReduce(nodes, varargin)
-%MESHREDUCE return mesh with minimal number of faces
+%MESHREDUCE Merge coplanar faces of a polyhedral mesh
 %
 %   [NODES FACES] = meshReduce(NODES, FACES)
 %   [NODES EDGES FACES] = meshReduce(NODES, EDGES, FACES)
@@ -27,16 +27,17 @@ function varargout = meshReduce(nodes, varargin)
 %
 % ------
 % Author: David Legland
-% e-mail: david.legland@jouy.inra.fr
+% e-mail: david.legland@grignon.inra.fr
 % Created: 2006-07-05
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
-% 20/07/2006: add tolerance for coplanarity test
-% 21/08/2006: fix small bug due to difference of methods to test
+% 20/07/2006 add tolerance for coplanarity test
+% 21/08/2006 fix small bug due to difference of methods to test
 %   coplanaritity, sometimes resulting in 3 points of a face not coplanar !
 %   Also add control on precision
-% 14/08/2007: rename minConvexHull->meshReduce, and extend to non convex
+% 14/08/2007 rename minConvexHull->meshReduce, and extend to non convex
 %   shapes 
+% 2011-01-14 code clean up
 
 
 %% Process input arguments
@@ -114,7 +115,7 @@ for f=1:Nf
     planeEdges = unique(planeEdges, 'rows');
     
     % relabel plane edges, and find connected components
-    [planeNodes I J] = unique(planeEdges(:));
+    [planeNodes I J] = unique(planeEdges(:)); %#ok<ASGLU>
     planeEdges2 = reshape(J, size(planeEdges));
     component   = grLabel(nodes(planeNodes, :), planeEdges2);
     
@@ -232,10 +233,9 @@ function labels = grLabel(nodes, edges)
 %
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@grignon.inra.fr
 % Created: 2007-08-14,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
-% Licensed under the terms of the LGPL, see the file "license.txt"
 
 % init
 Nn = size(nodes, 1);
@@ -295,7 +295,7 @@ nodes2 = edges(i,1:2);
 nodes2 = unique(nodes2(:));
 nodes2 = sort(nodes2(~ismember(nodes2, node)));
 
-function varargout = graph2Contours(nodes, edges)
+function curves = graph2Contours(nodes, edges)
 %GRAPH2CONTOURS convert a graph to a set of contour curves
 % 
 %   CONTOURS = GRAPH2CONTOURS(NODES, EDGES)
@@ -363,8 +363,4 @@ while size(edges,1)>0
     % add the current curve to the list, and start a new curve
     c = c+1;
     curves{c} = curve;
-end
-
-if nargout==1
-    varargout{1} = curves;
 end

@@ -47,10 +47,10 @@ function line = medianLine(varargin)
 % 2010-08-06 vectorize and change behaviour for N-by-4 inputs
 
 nargs = length(varargin);
-x0=0;
-y0=0;
-dx=0;
-dy=0;
+x0 = 0;
+y0 = 0;
+dx = 0;
+dy = 0;
 
 if nargs == 1
     tab = varargin{1};
@@ -67,16 +67,20 @@ if nargs == 1
         dx = tab(:, 3) - tab(:, 1); 
         dy = tab(:, 4) - tab(:, 2);
     end
+    
 elseif nargs==2
-    % input is given as two points
+    % input is given as two points, or two point arrays
     p1 = varargin{1};
     p2 = varargin{2};
     x0 = p1(:, 1); 
     y0 = p1(:, 2);
-    dx = p2(:, 1)-x0; 
-    dy = p2(:, 2)-y0;
+    dx = bsxfun(@minus, p2(:, 1), x0); 
+    dy = bsxfun(@minus, p2(:, 2), y0);
+    
+else
+    error('Too many input arguments');
 end
 
 % compute median using middle point of the edge, and the direction vector
 % rotated by 90 degrees counter-clockwise
-line = [x0+dx/2, y0+dy/2, -dy, dx];
+line = [bsxfun(@plus, x0, dx/2), bsxfun(@plus, y0, dy/2), -dy, dx];

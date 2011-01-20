@@ -45,3 +45,21 @@ assertElementsAlmostEqual(intersectLines(line1, line2), [3 4]);
 line1 = [2 0 20000 30000];
 line2 = [1 6 1 -1];
 assertElementsAlmostEqual(intersectLines(line1, line2), [4 3]);
+
+function testSingleArray
+
+line1 = [3 1 0 1];
+line2 = repmat([1 4 1 0], 5, 1);
+exp = repmat([3 4], 5, 1);
+
+inters = intersectLines(line1, line2);
+assertElementsAlmostEqual(exp, inters);
+
+function testArrayArray
+
+line1 = repmat([3 1 0 1], 5, 1);
+line2 = repmat([1 4 1 0], 5, 1);
+exp = repmat([3 4], 5, 1);
+
+inters = intersectLines(line1, line2);
+assertElementsAlmostEqual(exp, inters);
