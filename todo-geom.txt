@@ -53,7 +53,7 @@ polygons2d
     
 geom3d
 ======
-
+   
 - Conventions pour les angles 3d pas geniales... (2010.07.28)
     ex: drawCircle3d: theta+phi+psi
     pas vraiment de lien avec les angles d'Euler.
@@ -76,5 +76,6 @@ meshes3d
     * meshSubdivide (pour trimesh) (2010.06.20)
     * vertexNormal (2010.06.20)
     * clipMesh (2010.12.06)
+        -> keep only faces with all vertices within box (simple version)
         -> clip each face, and create a new mesh with clipped faces.
     * distancePointMesh     
