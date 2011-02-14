@@ -25,7 +25,6 @@ function varargout = drawRect2(varargin)
 %
 
 
-
 % default values
 theta = 0;
 
@@ -40,19 +39,23 @@ if length(varargin)>3
     end
 else
     coord = varargin{1};
-    x = coord(1);
-    y = coord(2);
-    w = coord(3);
-    h = coord(4);
+    x = coord(:, 1);
+    y = coord(:, 2);
+    w = coord(:, 3);
+    h = coord(:, 4);
+    
     if length(coord)>4
-        theta = coord(5);
+        theta = coord(:, 5);
+    else
+        theta = zeros(size(x));
     end
 end
 
+% use only the half length of each rectanhle
 w = w/2;
 h = h/2;
 
-r = zeros(length(x), 1);
+hr = zeros(length(x), 1);
 for i=1:length(x)
     tx = zeros(5, 1);
     ty = zeros(5, 1);
@@ -72,9 +75,9 @@ for i=1:length(x)
     tx(5) = x(i) - w(i)*cos(theta(i)) + h(i)*sin(theta(i));
     ty(5) = y(i) - w(i)*sin(theta(i)) - h(i)*cos(theta(i));
     
-    r(i) = line(tx, ty);
+    hr(i) = line(tx, ty);
 end
 
-if nargout>0
-    varargout{1}=r;
+if nargout > 0
+    varargout{1} = hr;
 end
