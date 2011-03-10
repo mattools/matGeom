@@ -1,16 +1,16 @@
 function n = vectorNorm3d(v)
-%VECTORNORM3D compute norm of vector or of set of 3D vectors
+%VECTORNORM3D Norm of a 3D vector or of set of 3D vectors
 %
 %   N = vectorNorm3d(V);
-%   Returns norm of vector V.
+%   Returns the norm of vector V.
 %
-%   When V is a Nx3 array, compute norm for each vector of the array.
-%   Vector are given as rows. Result is then a [N*1] array.
+%   When V is a N-by-3 array, compute norm for each vector of the array.
+%   Vector are given as rows. Result is then a N-by-1 array.
 %
 %   NOTE: compute only euclidean norm.
 %
 %   See Also
-%   vectors3d, normalizeVector3d
+%   vectors3d, normalizeVector3d, vectorAngle3d
 %
 %   ---------
 %   author : David Legland 

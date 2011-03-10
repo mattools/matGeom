@@ -12,8 +12,14 @@ function theta = vectorAngle3d(v1, v2)
 %   ans = 
 %       1.5708
 %
-%   See also
+%   % angle between 2 parallel vectors
+%   v0 = [3 4 5];
+%   vectorAngle3d(3*v0, 5*v0)
+%   ans = 
+%       0
 %
+%   See also
+%   vectors3d, vectorNorm3d
 %
 % ------
 % Author: David Legland
@@ -36,9 +42,12 @@ if n1~=n2
     end
 end
 
-% normalize vectors to ensure unit length
-v1 = normalizeVector3d(v1);
-v2 = normalizeVector3d(v2);
+% compute angle using arc-tangent to get better precision for angles near
+% zero, see the discussion in: 
+% http://www.mathworks.com/matlabcentral/newsreader/view_thread/151925#381952
+theta = atan2(vectorNorm3d(cross(v1, v2, 2)), dot(v1, v2, 2));
 
-% compute angle using dot product
-theta = acos(dot(v1, v2, 2));
+% equivalent to:
+% v1 = normalizeVector3d(v1);
+% v2 = normalizeVector3d(v2);
+% theta = acos(dot(v1, v2, 2));

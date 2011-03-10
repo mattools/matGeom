@@ -49,7 +49,7 @@
 %   vectors3d                 - Description of functions operating on 3D vectors
 %   transformVector3d         - transform a vector with a 3D affine transform
 %   normalizeVector3d         - normalize a 3D vector
-%   vectorNorm3d              - compute norm of vector or of set of 3D vectors
+%   vectorNorm3d              - Norm of a 3D vector or of set of 3D vectors
 %   vectorAngle3d             - Angle between two 3D vectors
 %   isParallel3d              - check parallelism of two vectors
 %   isPerpendicular3d         - check orthogonality of two vectors
@@ -74,6 +74,7 @@
 %   clipLine3d                - clip a line with a box and return an edge
 %   midPoint3d                - Middle point of two 3D points or of a 3D edge
 %   distancePointLine3d       - Euclidean distance between 3D point and line
+%   distanceLines3d           - Minimal distance between two 3D lines
 %   linePosition3d            - return position of a 3D point on a 3D line
 %
 % Planes
@@ -94,7 +95,7 @@
 %
 % 3D Polygons
 %   polygons3d                - Description of functions operating on 3D polygons
-%   polygonCentroid3d         - compute centroid (center of mass) of a polygon
+%   polygonCentroid3d         - Centroid (or center of mass) of a polygon
 %   polygon3dNormalAngle      - compute normal angle at a vertex of the 3D polygon
 %
 % Other shapes
@@ -180,4 +181,3 @@
 %   drawCurve3d               - draw a 3D curve specified by a list of points
 
 % Others
-

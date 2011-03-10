@@ -8,7 +8,6 @@ function polygons3d(varargin)
 %   polygon3dNormalAngle, polygonCentroid3d
 %   clipPolygon3dHP, clipConvexPolygon3dHP
 %   drawPolyline3d, fillPolygon3d
-%   polygonCentroid3d
 %
 %
 % ------

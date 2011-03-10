@@ -1,19 +1,32 @@
 TODO list for GEOM
 
+nom du projet global : "matGeom" (pour Matlab Geometry)
 
-- trouver un nom generique
-    + matGeom (nom choisi)
-    + mat-geom (nom unix du projet)
-    + geom (nom actuel)
-    + Geometry Toolbox for Matlab, ou GTM
-    + GeomLab
-        
+Mettre en place le site Sourceforge
+===================================
+
+- trouver un logo pour SourceForge (2011.02.17)
+
+- faire une release pour figer l'impl.
+
+- rediriger site sur le wiki
+
+- generer la doc, la mettre sur le site
+
+- mettre quelques démos sur le site en html
+
+   
 geom2d
 ======
 
-- fonctions pour les cercles:
-    + intersectCircles
-    + intersectLineCircle
+- fonction "enclosingRectangle" pour un ensemble de points (2011.02.06)
+    -> "orientedBox" ?
+    -> renvoie centre, Longueur, largeur, et orientation
+            
+- function feretDiameter (2011.02.06)
+    + en entree, un ensemble de points, et un angle (radians ?)
+    + en sortie, le diamètre mesuré dans la direction spécifiée
+    + appelee "pointSetDiameter" ?
     
 - remplacer les appels a "repmat" par des appels plus rapides (voir comment)
     + utiliser bsxfun quand c'est approprie
@@ -28,7 +41,9 @@ geom2d
 
 - pointSetBounds ?
  
-
+- drawRay:
+    + use clipRay (2011.02.15)
+    + add psb to specify styles (2011.02.15)
 
 polygons2d
 ==========
@@ -49,7 +64,6 @@ polygons2d
     voir par exemple polygones avec ensembles de points ayant la meme direction ?
     ou decouper par tranches de polylignes ayant un "petit" bounding box
     -> polygones monotones
-
     
 geom3d
 ======
@@ -58,12 +72,15 @@ geom3d
     ex: drawCircle3d: theta+phi+psi
     pas vraiment de lien avec les angles d'Euler.
 
-
 - faire le point sur les differentes orientations d'axe 3D (2010.07.22)
     + X droite, Y fond, Z haut
     + X droite, Y haut, Z avant
+
+- (2011.02.17) fitting functions 
+    + fitPlane
+    + fitLine3d
     
-        
+                
 meshes3d
 ========
         
