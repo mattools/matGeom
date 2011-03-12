@@ -43,6 +43,7 @@ function varargout = transformPoint3d(varargin)
 %       in the case of a memory lack.
 %   20/04/2007 add link to rotationXX functions
 %   29/09/2010 fix bug in catch case
+%   12/03/2011 slightly reduce memory usage
 
 % process input arguments
 if length(varargin)==2
@@ -63,7 +64,6 @@ end
 
 % keep initial dimension of input vector
 dim = size(x); 
-NP  = numel(x);
 
 % eventually add null translation
 if size(trans, 2)==3
@@ -79,7 +79,11 @@ end
 try
     % vectorial processing, if there is enough memory
     %res = (trans*[x(:) y(:) z(:) ones(NP, 1)]')';
-    res = [x(:) y(:) z(:) ones(NP, 1)]*trans';
+    %res = [x(:) y(:) z(:) ones(NP, 1)]*trans';
+    res = [x(:) y(:) z(:)]*trans(1:3,1:3)';
+    if size(trans, 2)>3
+        res = bsxfun(@plus, res, trans(4,1:3)');
+    end
     
     % reshape data to original size
     x = reshape(res(:,1), dim);
@@ -87,6 +91,7 @@ try
     z = reshape(res(:,3), dim);
 catch
     % process each point one by one, writing in existing array
+    NP  = numel(x);
     for i=1:NP
         res = [x(i) y(i) z(i) 1]*trans';
         x(i) = res(1);
@@ -97,13 +102,16 @@ end
 
 
 % process output arguments
-if nargout==1 || nargout==0
+if nargout <= 1
+    % results are stored in a unique array
     if length(dim)>2 || dim(2)>1
         varargout{1} = {x, y, z};
     else
         varargout{1} = [x y z];
     end
+    
 elseif nargout==3
+    % coordinates are given as 3 different arrays
     varargout{1} = x;
     varargout{2} = y;
     varargout{3} = z;

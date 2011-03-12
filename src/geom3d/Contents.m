@@ -44,6 +44,7 @@
 %   transformPoint3d          - transform a point with a 3D affine transform
 %   distancePoints3d          - compute euclidean distance between 3D Points
 %   clipPoints3d              - clip a set of points by a box
+%   drawPoint3d               - Draw 3D point on the current axis.
 %
 % 3D Vectors
 %   vectors3d                 - Description of functions operating on 3D vectors
@@ -76,12 +77,14 @@
 %   distancePointLine3d       - Euclidean distance between 3D point and line
 %   distanceLines3d           - Minimal distance between two 3D lines
 %   linePosition3d            - return position of a 3D point on a 3D line
+%   drawEdge3d                - Draw 3D edge in the current Window
+%   drawLine3d                - draw the line in the current Window
 %
 % Planes
 %   planes3d                  - Description of functions operating on 3D planes
-%   medianPlane               - create a plane in the middle of 2 points
 %   createPlane               - Create a plane in parametrized form
 %   normalizePlane            - normalize parametric form of a plane
+%   medianPlane               - create a plane in the middle of 2 points
 %   intersectPlanes           - return intersection between 2 planes in space
 %   projPointOnPlane          - return the projection of a point on a plane
 %   isBelowPlane              - test whether a point is below or above a plane
@@ -92,23 +95,44 @@
 %   planePosition             - compute position of a point on a plane
 %   planePoint                - compute 3D position of a point in a plane
 %   dihedralAngle             - compute dihedral angle between 2 planes
+%   drawPlane3d               - draw a plane clipped in the current window
 %
-% 3D Polygons
+% 3D Polygons and curves
 %   polygons3d                - Description of functions operating on 3D polygons
 %   polygonCentroid3d         - Centroid (or center of mass) of a polygon
 %   polygon3dNormalAngle      - compute normal angle at a vertex of the 3D polygon
+%   drawPolyline3d            - Draw a 3D polyline specified by a list of points
+%   fillPolygon3d             - Fill a 3D polygon specified by a list of points
 %
-% Other shapes
-%   circles3d                 - description of functions operating on 3D lines
+% 3D circles and ellipses
+%   circles3d                 - Description of functions operating on 3D circles
 %   circle3dPosition          - return the angular position of a point on a 3D circle
 %   circle3dOrigin            - return the first point of a 3D circle
-%   spheres                   - description of functions operating on 3D spheres
+%   drawCircle3d              - draw a 3D circle
+%   drawCircleArc3d           - draw a 3D circle arc
+%
+% Smooth surfaces
+%   spheres                   - Description of functions operating on 3D spheres
 %   createSphere              - create a sphere containing 4 points
 %   intersectLineSphere       - return intersection between a line and a sphere
 %   intersectLineCylinder     - Compute intersections between a line and a cylinder
 %   intersectPlaneSphere      - return intersection between a plane and a sphere
+%   inertiaEllipsoid          - Inertia ellipsoid of a set of 3D points
 %   revolutionSurface         - Create a surface of revolution from a planar curve
 %   surfaceCurvature          - compute curvature on a surface in a given direction 
+%   drawCylinder              - Draw a cylinder
+%   drawSphere                - Draw a sphere as a mesh
+%   drawSphericalTriangle     - draw a triangle on a sphere
+%   drawEllipsoid             - Draw a 3D ellipsoid
+%   drawSurfPatch             - draw surface patch, with 2 parametrized surfaces
+%
+% Bounding boxes management
+%   boxes3d                   - Description of functions operating on 3D boxes
+%   point3dBounds             - Bounding box of a set of 3D points
+%   intersectBoxes3d          - Intersection of two 3D bounding boxes
+%   mergeBoxes3d              - Merge 3D boxes, by computing their greatest extent
+%   box3dVolume               - Volume of a 3-dimensional box
+%   drawBox3d                 - Draw a 3D box defined by coordinate extents
 %
 % Geometric transforms
 %   transforms3d              - Conventions for manipulating 3D affine transforms
@@ -125,28 +149,8 @@
 %   createBasisTransform3d    - Compute matrix for transforming a basis into another basis
 %   composeTransforms3d       - concatenate several space transformations
 %
-% Bounding boxes management
-%   boxes3d                   - Description of functions operating on 3D boxes
-%   point3dBounds             - Bounding box of a set of 3D points
-%   intersectBoxes3d          - Intersection of two 3D bounding boxes
-%   mergeBoxes3d              - Merge 3D boxes, by computing their greatest extent
-%   box3dVolume               - Volume of a 3-dimensional box
-%
-% Drawing Functions
-%   drawPoint3d               - Draw 3D point on the current axis.
-%   drawEdge3d                - Draw 3D edge in the current Window
-%   drawBox3d                 - Draw a 3D box defined by coordinate extents
-%   drawPolyline3d            - Draw a 3D polyline specified by a list of points
-%   drawLine3d                - draw the line in the current Window
-%   drawPlane3d               - draw a plane clipped in the current window
-%   drawCircle3d              - draw a 3D circle
-%   drawCircleArc3d           - draw a 3D circle arc
-%   drawCylinder              - Draw a cylinder
-%   drawSphere                - Draw a sphere as a mesh
-%   drawSphericalTriangle     - draw a triangle on a sphere
-%   drawSurfPatch             - draw surface patch, with 2 parametrized surfaces
+% Various drawing Functions
 %   drawGrid3d                - draw a grid in 3 dimensions
-%   fillPolygon3d             - Fill a 3D polygon specified by a list of points
 %   drawAxis3d                - Draw a coordinate system and an origin
 %   drawAxisCube              - Draw a colored cube representing axis orientation
 %

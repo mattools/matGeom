@@ -1,12 +1,19 @@
 function spheres(varargin)
-%SPHERES  description of functions operating on 3D spheres
+%SPHERES Description of functions operating on 3D spheres
 %
-%   Sphere are represented by their center and their radius:
+%   Spheres are represented by their center and their radius:
 %   S = [xc yc zc r];
 %
+%   An ellipsoid is defined by:
+%   ELL = [XC YC ZC A B C PHI THETA PSI]
+%   where [XC YC ZY] is the center, [A B C] are length of semi-axes (in
+%   decreasing order), and [PHI THETA PSI] are euler angles representing
+%   the ellipsoid orientation.
+%
 %   See also
-%   createSphere, intersectLineSphere, intersectPlaneSphere
-%   drawSphere
+%   createSphere, inertiaEllipsoid
+%   intersectLineSphere, intersectPlaneSphere
+%   drawSphere, drawEllipsoid
 %
 % ------
 % Author: David Legland

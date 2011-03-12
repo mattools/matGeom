@@ -55,7 +55,7 @@ function varargout = drawSphere(varargin)
 %
 %
 %   See also
-%   spheres, circles3d, sphere
+%   spheres, circles3d, sphere, drawEllipsoid
 %
 %   ---------
 %   author: David Legland 
