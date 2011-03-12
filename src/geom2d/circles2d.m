@@ -17,10 +17,10 @@ function circles2d(varargin)
 %
 %
 %   See also:
-%   createCircle, createDirectedCircle, enclosingCircle
-%   isPointInCircle, isPointOnCircle, radicalAxis
-%   intersectLineCircle, intersectCircles
-%   circleAsPolygon, circleArcAsCurve, ellipseAsPolygon
+%   createCircle, createDirectedCircle, enclosingCircle, inertiaEllipse
+%   isPointInCircle, isPointOnCircle, isPointInEllipse
+%   intersectLineCircle, intersectCircles, radicalAxis
+%   ellipseAsPolygon, circleAsPolygon, circleArcAsCurve
 %   drawCircle, drawCircleArc, drawEllipse, drawEllipseArc
 %
 % ------

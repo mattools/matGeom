@@ -1,4 +1,4 @@
-function edge = clipRay(ray, box)
+function [edge isInside] = clipRay(ray, box)
 % Clip a ray with a box
 %
 %   EDGE = clipRay(RAY, BOX);
@@ -15,7 +15,7 @@ function edge = clipRay(ray, box)
 %   array.
 %      
 %   See also:
-%   rays2d, boxes2d, edges2d, clipLine, clipEdge
+%   rays2d, boxes2d, edges2d, clipLine, drawRay
 %
 % ------
 % Author: David Legland
@@ -50,3 +50,8 @@ edge(inds(pos1<0), 1:2) = ray(inds(pos1<0), 1:2);
 
 % if last point of edge is before origin, set all edge to NaN
 edge(inds(pos2<0), :) = NaN;
+
+% eventually returns result about inside or outside
+if nargout>1
+    isInside = isfinite(edge(:,1));
+end
