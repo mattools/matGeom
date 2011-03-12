@@ -1,5 +1,5 @@
-function ell = inertiaEllipse(pts)
-%INERTIAELLIPSE  inertia ellipse of a set of points
+function ell = inertiaEllipse(points)
+%INERTIAELLIPSE Inertia ellipse of a set of points
 %
 %   ELL = inertiaEllipse(PTS);
 %   where PTS is a N*2 array containing coordinates of N points, computes
@@ -32,34 +32,33 @@ function ell = inertiaEllipse(pts)
 % Created: 2008-02-21,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 
-%   HISTORY
-%   29/07/2009 take into account ellipse orientation
+% HISTORY
+% 2009-07-29 take into account ellipse orientation
+% 2011-03-12 rewrite using inertia moments
+
+% ellipse center
+xc = mean(points(:,1));
+yc = mean(points(:,2));
+
+% recenter points
+x = points(:,1) - xc;
+y = points(:,2) - yc;
 
 % number of points
-n = size(pts, 1);
+n = size(points, 1);
 
-% center of mass of points
-center = mean(pts);
+% inertia parameters
+Ixx = sum(x.^2) / n;
+Iyy = sum(y.^2) / n;
+Ixy = sum(x.*y) / n;
 
-% compute the covariance matrix
-covPts = cov(pts)/(n-1);
+% compute ellipse semi-axis lengths
+common = sqrt( (Ixx - Iyy)^2 + 4 * Ixy^2);
+ra = sqrt(2) * sqrt(Ixx + Iyy + common);
+rb = sqrt(2) * sqrt(Ixx + Iyy - common);
 
-% perform a principal component analysis with 2 variables, 
-% to extract inertia axes
-[U S] = svd(covPts);
-
-% extract length of each semi axis
-radii = sqrt(diag(S)*n);
-
-% index of first axis
-[dummy ind] = max(radii);
-
-% sort axes from greater to lower
-radii   = sort(radii, 'descend')';
-
-% compute angle of ellipse, from the greater principal vector
-U0 = U(:, ind(1))';
-theta   = mod(vectorAngle(U0), pi);
+% compute ellipse angle
+theta = atan2(2 * Ixy, Ixx - Iyy) / 2;
 
 % create the resulting inertia ellipse
-ell = [center radii theta];
+ell = [xc yc ra rb theta];

@@ -40,7 +40,7 @@
 %   cartesianLine        - create a line with cartesian coefficients
 %   orthogonalLine       - Create a line orthogonal to another one.
 %   parallelLine         - create a line parallel to another one.
-%   intersectLines       - return all intersection points of N lines in 2D
+%   intersectLines       - Return all intersection points of N lines in 2D
 %   lineAngle            - Computes angle between two straight lines
 %   linePosition         - return position of a point on a line
 %   lineFit              - least mean square line regression
@@ -80,12 +80,16 @@
 %   circles2d            - Description of functions operating on circles
 %   createCircle         - Create a circle from 2 or 3 points
 %   createDirectedCircle - Create a directed circle
+%   intersectCircles     - Intersection points of two circles
+%   intersectLineCircle  - Intersection point(s) of a line and a circle
 %   circleAsPolygon      - convert a circle into a series of points
-%   ellipseAsPolygon     - convert an ellipse into a series of points
 %   circleArcAsCurve     - convert a circle arc into a series of points
-%   enclosingCircle      - find the minimum circle enclosing a set of points.
-%   isPointInCircle      - test if a point is located inside a given circle.
+%   isPointInCircle      - Check if a point is located inside a given circle
 %   isPointOnCircle      - test if a point is located on a given circle.
+%   inertiaEllipse       - Inertia ellipse of a set of points
+%   isPointInEllipse     - Check if a point is located inside a given ellipse
+%   ellipseAsPolygon     - convert an ellipse into a series of points
+%   enclosingCircle      - find the minimum circle enclosing a set of points.
 %   radicalAxis          - compute the radical axis (or radical line) of 2 circles
 %
 % Other shapes
@@ -150,10 +154,6 @@
 
 help('Contents');
 
-%% Requires further development
-
-%   inertiaEllipse       - inertia ellipse of a set of points
-
 
 %%   Deprecated functions
 
@@ -177,3 +177,4 @@ help('Contents');
 
 
 %% Others...
+
