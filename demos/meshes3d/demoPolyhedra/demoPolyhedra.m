@@ -1,5 +1,5 @@
 function demoPolyhedra(varargin)
-%DEMOPOLYHEDRA Draw main polyhedra defined in the geom3d toolbox
+%DEMOPOLYHEDRA Draw main polyhedra defined in the matGeom toolbox
 %
 %   output = demoPolyhedra(input)
 %
@@ -15,69 +15,67 @@ function demoPolyhedra(varargin)
 % Created: 2010-12-07,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform.
 
-figure;
-
-% cube
-subplot(3, 3, 1);
+%% Cube
+figure(1); clf; 
 [v f] = createCube;
 drawMesh(v, f);
 view(3); axis('vis3d'); axis off;
 title('Cube');
 
-% Octahedron
-subplot(3, 3, 2);
+%% Octahedron
+figure(1); clf; 
 [v f] = createOctahedron;
 drawMesh(v, f);
 view(3); axis('vis3d'); axis off;
 title('Octahedron');
 
-% Cube-Octahedron
-subplot(3, 3, 3);
+%% Cube-Octahedron
+figure(1); clf; 
 [v f] = createCubeOctahedron;
 drawMesh(v, f);
 view(3); axis('vis3d'); axis off;
 title('Cube-Octahedron');
 
-% Icosahedron
-subplot(3, 3, 4);
+%% Icosahedron
+figure(1); clf; 
 [v f] = createIcosahedron;
 drawMesh(v, f);
 view(3); axis('vis3d'); axis off;
 title('Icosahedron');
 
-% Dodecahedron
-subplot(3, 3, 5);
+%% Dodecahedron
+figure(1); clf; 
 [v f] = createDodecahedron;
 drawMesh(v, f);
 view(3); axis('vis3d'); axis off;
 title('Dodecahedron');
 
-% Soccer Ball, buckyall, C60...
-subplot(3, 3, 6);
+%% Soccer Ball, buckyall, C60...
+figure(1); clf; 
 [v f] = createSoccerBall;
 drawMesh(v, f);
 view(3); axis('vis3d'); axis off;
 title('Soccer Ball');
 
 
-% Tetrahedron
-subplot(3, 3, 7);
+%% Tetrahedron
+figure(1); clf; 
 [v f] = createTetrahedron;
 drawMesh(v, f);
 view(3); axis('vis3d'); axis off;
 title('Tetrahedron');
 
 
-% Tetrakaidecahedron
-subplot(3, 3, 8);
+%% Tetrakaidecahedron
+figure(1); clf; 
 [v f] = createTetrakaidecahedron;
 drawMesh(v, f);
 view(3); axis('vis3d'); axis off;
 title('Tetrakaidecahedron');
 
 
-% Menger Sponge
-subplot(3, 3, 9);
+%% Menger Sponge
+figure(1); clf; 
 [v e f] = createMengerSponge;
 drawMesh(v, f);
 view(3); axis('vis3d'); axis off;

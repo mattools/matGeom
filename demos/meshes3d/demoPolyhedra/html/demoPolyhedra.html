@@ -6,7 +6,7 @@
    <!--
 This HTML is auto-generated from an M-file.
 To make changes, update the M-file and republish this document.
-      --><title>demoPolyhedra</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2010-12-07"><meta name="m-file" content="demoPolyhedra"><style type="text/css">
+      --><title>demoPolyhedra</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2011-03-12"><meta name="m-file" content="demoPolyhedra"><style type="text/css">
 
 body {
   background-color: white;
@@ -62,8 +62,8 @@ p.footer {
   color: gray;
 }
 
-  </style></head><body><div class="content"><pre class="codeinput"><span class="keyword">function</span> demoPolyhedra(varargin)
-<span class="comment">%DEMOPOLYHEDRA Draw main polyhedra defined in the geom3d toolbox</span>
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#3">cube</a></li><li><a href="#4">Octahedron</a></li><li><a href="#5">Cube-Octahedron</a></li><li><a href="#6">Icosahedron</a></li><li><a href="#7">Dodecahedron</a></li><li><a href="#8">Soccer Ball, buckyall, C60...</a></li><li><a href="#9">Tetrahedron</a></li><li><a href="#10">Tetrakaidecahedron</a></li><li><a href="#11">Menger Sponge</a></li></ul></div><pre class="codeinput"><span class="keyword">function</span> demoPolyhedra(varargin)
+</pre><pre class="codeinput"><span class="comment">%DEMOPOLYHEDRA Draw main polyhedra defined in the geom3d toolbox</span>
 <span class="comment">%</span>
 <span class="comment">%   output = demoPolyhedra(input)</span>
 <span class="comment">%</span>
@@ -78,75 +78,52 @@ p.footer {
 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
 <span class="comment">% Created: 2010-12-07,    using Matlab 7.9.0.529 (R2009b)</span>
 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
-
-figure;
-
-<span class="comment">% cube</span>
-subplot(3, 3, 1);
+</pre><h2>cube<a name="3"></a></h2><pre class="codeinput">figure(1); clf;
 [v f] = createCube;
 drawMesh(v, f);
 view(3); axis(<span class="string">'vis3d'</span>); axis <span class="string">off</span>;
 title(<span class="string">'Cube'</span>);
-
-<span class="comment">% Octahedron</span>
-subplot(3, 3, 2);
+</pre><img vspace="5" hspace="5" src="demoPolyhedra_01.png" alt=""> <h2>Octahedron<a name="4"></a></h2><pre class="codeinput">figure(1); clf;
 [v f] = createOctahedron;
 drawMesh(v, f);
 view(3); axis(<span class="string">'vis3d'</span>); axis <span class="string">off</span>;
 title(<span class="string">'Octahedron'</span>);
-
-<span class="comment">% Cube-Octahedron</span>
-subplot(3, 3, 3);
+</pre><img vspace="5" hspace="5" src="demoPolyhedra_02.png" alt=""> <h2>Cube-Octahedron<a name="5"></a></h2><pre class="codeinput">figure(1); clf;
 [v f] = createCubeOctahedron;
 drawMesh(v, f);
 view(3); axis(<span class="string">'vis3d'</span>); axis <span class="string">off</span>;
 title(<span class="string">'Cube-Octahedron'</span>);
-
-<span class="comment">% Icosahedron</span>
-subplot(3, 3, 4);
+</pre><img vspace="5" hspace="5" src="demoPolyhedra_03.png" alt=""> <h2>Icosahedron<a name="6"></a></h2><pre class="codeinput">figure(1); clf;
 [v f] = createIcosahedron;
 drawMesh(v, f);
 view(3); axis(<span class="string">'vis3d'</span>); axis <span class="string">off</span>;
 title(<span class="string">'Icosahedron'</span>);
-
-<span class="comment">% Dodecahedron</span>
-subplot(3, 3, 5);
+</pre><img vspace="5" hspace="5" src="demoPolyhedra_04.png" alt=""> <h2>Dodecahedron<a name="7"></a></h2><pre class="codeinput">figure(1); clf;
 [v f] = createDodecahedron;
 drawMesh(v, f);
 view(3); axis(<span class="string">'vis3d'</span>); axis <span class="string">off</span>;
 title(<span class="string">'Dodecahedron'</span>);
-
-<span class="comment">% Soccer Ball, buckyall, C60...</span>
-subplot(3, 3, 6);
+</pre><img vspace="5" hspace="5" src="demoPolyhedra_05.png" alt=""> <h2>Soccer Ball, buckyall, C60...<a name="8"></a></h2><pre class="codeinput">figure(1); clf;
 [v f] = createSoccerBall;
 drawMesh(v, f);
 view(3); axis(<span class="string">'vis3d'</span>); axis <span class="string">off</span>;
 title(<span class="string">'Soccer Ball'</span>);
-
-
-<span class="comment">% Tetrahedron</span>
-subplot(3, 3, 7);
+</pre><img vspace="5" hspace="5" src="demoPolyhedra_06.png" alt=""> <h2>Tetrahedron<a name="9"></a></h2><pre class="codeinput">figure(1); clf;
 [v f] = createTetrahedron;
 drawMesh(v, f);
 view(3); axis(<span class="string">'vis3d'</span>); axis <span class="string">off</span>;
 title(<span class="string">'Tetrahedron'</span>);
-
-
-<span class="comment">% Tetrakaidecahedron</span>
-subplot(3, 3, 8);
+</pre><img vspace="5" hspace="5" src="demoPolyhedra_07.png" alt=""> <h2>Tetrakaidecahedron<a name="10"></a></h2><pre class="codeinput">figure(1); clf;
 [v f] = createTetrakaidecahedron;
 drawMesh(v, f);
 view(3); axis(<span class="string">'vis3d'</span>); axis <span class="string">off</span>;
 title(<span class="string">'Tetrakaidecahedron'</span>);
-
-
-<span class="comment">% Menger Sponge</span>
-subplot(3, 3, 9);
+</pre><img vspace="5" hspace="5" src="demoPolyhedra_08.png" alt=""> <h2>Menger Sponge<a name="11"></a></h2><pre class="codeinput">figure(1); clf;
 [v e f] = createMengerSponge;
 drawMesh(v, f);
 view(3); axis(<span class="string">'vis3d'</span>); axis <span class="string">off</span>;
 title(<span class="string">'Menger Sponge'</span>);
-</pre><img vspace="5" hspace="5" src="demoPolyhedra_01.png" alt=""> <p class="footer"><br>
+</pre><img vspace="5" hspace="5" src="demoPolyhedra_09.png" alt=""> <p class="footer"><br>
       Published with MATLAB&reg; 7.9<br></p></div><!--
 ##### SOURCE BEGIN #####
 function demoPolyhedra(varargin)
@@ -166,69 +143,67 @@ function demoPolyhedra(varargin)
 % Created: 2010-12-07,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform.
 
-figure;
-
-% cube
-subplot(3, 3, 1);
+%% cube
+figure(1); clf; 
 [v f] = createCube;
 drawMesh(v, f);
 view(3); axis('vis3d'); axis off;
 title('Cube');
 
-% Octahedron
-subplot(3, 3, 2);
+%% Octahedron
+figure(1); clf; 
 [v f] = createOctahedron;
 drawMesh(v, f);
 view(3); axis('vis3d'); axis off;
 title('Octahedron');
 
-% Cube-Octahedron
-subplot(3, 3, 3);
+%% Cube-Octahedron
+figure(1); clf; 
 [v f] = createCubeOctahedron;
 drawMesh(v, f);
 view(3); axis('vis3d'); axis off;
 title('Cube-Octahedron');
 
-% Icosahedron
-subplot(3, 3, 4);
+%% Icosahedron
+figure(1); clf; 
 [v f] = createIcosahedron;
 drawMesh(v, f);
 view(3); axis('vis3d'); axis off;
 title('Icosahedron');
 
-% Dodecahedron
-subplot(3, 3, 5);
+%% Dodecahedron
+figure(1); clf; 
 [v f] = createDodecahedron;
 drawMesh(v, f);
 view(3); axis('vis3d'); axis off;
 title('Dodecahedron');
 
-% Soccer Ball, buckyall, C60...
-subplot(3, 3, 6);
+%% Soccer Ball, buckyall, C60...
+figure(1); clf; 
 [v f] = createSoccerBall;
 drawMesh(v, f);
 view(3); axis('vis3d'); axis off;
 title('Soccer Ball');
 
 
-% Tetrahedron
-subplot(3, 3, 7);
+%% Tetrahedron
+figure(1); clf; 
 [v f] = createTetrahedron;
 drawMesh(v, f);
 view(3); axis('vis3d'); axis off;
 title('Tetrahedron');
 
 
-% Tetrakaidecahedron
-subplot(3, 3, 8);
+%% Tetrakaidecahedron
+figure(1); clf; 
 [v f] = createTetrakaidecahedron;
 drawMesh(v, f);
 view(3); axis('vis3d'); axis off;
 title('Tetrakaidecahedron');
 
 
-% Menger Sponge
-subplot(3, 3, 9);
+%% Menger Sponge
+figure(1); clf; 
 [v e f] = createMengerSponge;
 drawMesh(v, f);
 view(3); axis('vis3d'); axis off;
