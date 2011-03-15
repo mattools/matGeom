@@ -1,5 +1,5 @@
 function b = isPerpendicular(v1, v2, varargin)
-%ISPERPENDICULAR  check orthogonality of two vectors
+%ISPERPENDICULAR Check orthogonality of two vectors
 %
 %   B = isPerpendicular(V1, V2)
 %   where V1 and V2 are 2 [1x3] arrays, returns 1 if the vectors are

@@ -1,5 +1,5 @@
 function vn = normalizeVector(v)
-%NORMALIZEVECTOR normalize a vector
+%NORMALIZEVECTOR Normalize a vector to have norm equal to 1
 %
 %   V2 = normalizeVector(V);
 %   Returns the normalization of vector V, such that ||V|| = 1. V can be
@@ -9,8 +9,12 @@ function vn = normalizeVector(v)
 %   array.
 %
 %   Example:
-%   normalizeVector([3 3])
-%       [ 0.7071   0.7071 ]
+%   vn = normalizeVector([3 4])
+%   vn =
+%       0.6000   0.8000
+%   vectorNorm(vn)
+%   ans =
+%       1
 %
 %   See Also:
 %   vectors2d, vecnorm

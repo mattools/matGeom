@@ -1,5 +1,5 @@
 function varargout = drawShape(type, param, varargin)
-%DRAWSHAPE draw various types of shapes (circles, polygons ...)
+%DRAWSHAPE Draw various types of shapes (circles, polygons ...)
 %
 %   drawShape(TYPE, PARAM)
 %   Draw the shape of type TYPE, specified by given parameter PARAM. TYPE

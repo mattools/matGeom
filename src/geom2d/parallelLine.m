@@ -1,5 +1,5 @@
 function res = parallelLine(line, point)
-%PARALLELLINE create a line parallel to another one.
+%PARALLELLINE Create a line parallel to another one.
 %
 %   RES = parallelLine(LINE, POINT);
 %   Returns the line with same direction vector than LINE and going through

@@ -1,5 +1,5 @@
 function varargout = drawPoint(varargin)
-%DRAWPOINT draw the point on the axis.
+%DRAWPOINT Draw the point on the axis.
 %
 %   drawPoint(X, Y);
 %   Draws points defined by coordinates X and Y.

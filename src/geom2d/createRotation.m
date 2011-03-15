@@ -1,5 +1,5 @@
 function trans = createRotation(varargin)
-%CREATEROTATION return 3*3 matrix of a rotation
+%CREATEROTATION Create the 3*3 matrix of a rotation
 %
 %   TRANS = createRotation(THETA);
 %   Returns the rotation corresponding to angle THETA (in radians)

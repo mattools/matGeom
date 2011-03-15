@@ -15,13 +15,12 @@ function circles2d(varargin)
 %   their angle with Ox direction.
 %   E = [xc yc A B theta];
 %
-%
 %   See also:
-%   createCircle, createDirectedCircle, enclosingCircle, inertiaEllipse
-%   isPointInCircle, isPointOnCircle, isPointInEllipse
+%   ellipses2d, createCircle, createDirectedCircle, enclosingCircle
+%   isPointInCircle, isPointOnCircle
 %   intersectLineCircle, intersectCircles, radicalAxis
-%   ellipseAsPolygon, circleAsPolygon, circleArcAsCurve
-%   drawCircle, drawCircleArc, drawEllipse, drawEllipseArc
+%   circleAsPolygon, circleArcAsCurve
+%   drawCircle, drawCircleArc
 %
 % ------
 % Author: David Legland

@@ -1,5 +1,5 @@
 function varargout = drawCircleArc(varargin)
-%DRAWCIRCLEARC draw a circle arc on the current axis
+%DRAWCIRCLEARC Draw a circle arc on the current axis
 %
 %   drawCircleArc(XC, YC, R, START, EXTENT);
 %   Draws circle with center (XC, YC), with radius R, starting from angle

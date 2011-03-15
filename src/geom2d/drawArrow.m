@@ -1,20 +1,20 @@
 function varargout = drawArrow(varargin)
-%DRAWARROW draw an arrow on the current axis
+%DRAWARROW Draw an arrow on the current axis
 %   
-%   usage :
-%   DRAWARROW(x1, y1, x2, y2) draw an arrow between the points (x1 y1) and
-%   (x2 y2).
+%   DRAWARROW(x1, y1, x2, y2) 
+%   draw an arrow between the points (x1 y1) and (x2 y2).
 %
-%   DRAWARROW([x1 y1 x2 y2]) also works.
+%   DRAWARROW([x1 y1 x2 y2])
+%   gives argument as a single array.
 %
 %   DRAWARROW(..., L, W)
 %   specify length and width of the arrow.
 %
 %   DRAWARROW(..., L, W, TYPE)
 %   also specify arrow type. TYPE can be one of the following :
-%   0 : draw only two strokes
-%   1 : fill a triangle
-%   .5 : draw a half arrow (try it to see ...)
+%   0: draw only two strokes
+%   1: fill a triangle
+%   .5: draw a half arrow (try it to see ...)
 %   
 %   Arguments can be single values or array of size [N*1]. In this case,
 %   the function draws multiple arrows.

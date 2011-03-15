@@ -1,5 +1,5 @@
 function varargout = drawEdge(varargin)
-%DRAWEDGE draw the edge given by 2 points
+%DRAWEDGE Draw an edge given by 2 points
 %   
 %   drawEdge(x1, y1, x2, y2);
 %   draw an edge between the points (x1 y1) and  (x2 y2).

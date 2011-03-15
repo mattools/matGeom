@@ -1,19 +1,19 @@
 function varargout = squareGrid(bounds, origin, size)
-%SQUAREGRID generate equally spaces points in plane.
+%SQUAREGRID Generate equally spaces points in plane.
 %
-%   usage :
+%   usage
 %   PTS = squareGrid(BOUNDS, ORIGIN, SIZE)
 %   generate points, lying in the window defined by BOUNDS (=[xmin ymin
 %   xmax ymax]), starting from origin with a constant step equal to size.
 %   
-%   Example :
+%   Example
 %   PTS = squareGrid([0 0 10 10], [3 3], [4 2])
 %   will return points : 
 %   [3 1;7 1;3 3;7 3;3 5;7 5;3 7;7 7;3 9;7 9];
 %
 %
 %
-%   TODO : add possibility to use rotated grid
+%   TODO: add possibility to use rotated grid
 %
 %   ---------
 %

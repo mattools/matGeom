@@ -1,5 +1,5 @@
 function b = isLeftOriented(point, line)
-%ISLEFTORIENTED Tests if a point is on the left side of a line
+%ISLEFTORIENTED Test if a point is on the left side of a line
 %
 %   B = isLeftOriented(POINT, LINE);
 %   Returns TRUE if the point lies on the left side of the line with

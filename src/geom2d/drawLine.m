@@ -1,5 +1,5 @@
 function varargout = drawLine(lin, varargin)
-%DRAWLINE draw the line on the current axis
+%DRAWLINE Draw the line on the current axis
 %
 %   drawline(LINE);
 %   Draws the line LINE on the current axis, by using current axis to clip

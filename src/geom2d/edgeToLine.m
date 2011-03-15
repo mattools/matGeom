@@ -1,5 +1,5 @@
 function line = edgeToLine(edge)
-%EDGETOLINE  convert an edge to a straight line
+%EDGETOLINE Convert an edge to a straight line
 %
 %   LINE = edgeToLine(EDGE);
 %   Returns the line containing the edge EDGE.

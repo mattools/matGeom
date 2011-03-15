@@ -1,5 +1,5 @@
 function ray = createRay(varargin)
-%CREATERAY create a ray (half-line)
+%CREATERAY Create a ray (half-line), from various inputs
 %
 %   RAY = createRay(POINT, ANGLE)
 %   POINT is a N*2 array giving starting point of the ray, and ANGLE is the

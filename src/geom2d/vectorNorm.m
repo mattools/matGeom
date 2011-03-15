@@ -1,5 +1,5 @@
 function n = vectorNorm(v, varargin)
-%VECTORNORM compute norm of vector or of set of vectors
+%VECTORNORM Compute norm of a vector, or of a set of vectors
 %
 %   N = vectorNorm(V);
 %   Returns the euclidean norm of vector V.
@@ -12,6 +12,15 @@ function n = vectorNorm(v, varargin)
 %
 %   When V is a MxN array, compute norm for each vector of the array.
 %   Vector are given as rows. Result is then a [M*1] array.
+%
+%   Example
+%   n1 = vectorNorm([3 4])
+%   n1 =
+%       5
+%
+%   n2 = vectorNorm([1, 10], inf)
+%   n2 =
+%       10
 %
 %   See Also:
 %   vectors2d, vectorAngle

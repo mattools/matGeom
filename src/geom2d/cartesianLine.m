@@ -1,5 +1,5 @@
 function line = cartesianLine(varargin)
-%CARTESIANLINE create a line with cartesian coefficients
+%CARTESIANLINE Create a straight line from cartesian equation coefficients
 %
 %   L = cartesianLine(A, B, C);
 %   Create a line verifying the Cartesian equation:

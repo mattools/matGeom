@@ -1,11 +1,11 @@
 function boxes2d(varargin)
-%BOXES2D  Conventions for using bounding boxes
+%BOXES2D Description of functions operating on bounding boxes
 %
 %   A box is represented as a set of limits in each direction:
 %   BOX = [XMIN XMAX YMIN YMAX].
 %
 %   Boxes are used as result of computation for bounding boxes, and to clip
-%   infinite shapes.
+%   shapes.
 %
 %   See also
 %   clipPoints, clipLine, clipEdge, clipRay

@@ -1,5 +1,5 @@
 function trans = createLineReflection(line)
-%CREATELINEREFLECTION create line reflection as 2D affine transform
+%CREATELINEREFLECTION Create the the 3x3 matrix of a line reflection
 %
 %   TRANS = createLineReflection(LINE);
 %   where line is given as [x0 y0 dx dy], return the affine tansform

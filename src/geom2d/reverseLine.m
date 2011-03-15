@@ -1,5 +1,5 @@
-function line = reverseLine(var)
-%REVERSELINE return same line but with opposite orientation
+function line = reverseLine(line)
+%REVERSELINE Return same line but with opposite orientation
 %
 %   INVLINE = reverseLine(LINE);
 %   Returns the opposite line of LINE.
@@ -17,18 +17,8 @@ function line = reverseLine(var)
 
 %   HISTORY
 %   30/06/2009 rename as reverseLine
+%   15/03/2011 simplify code
 
+line(:, 3:4) = -line(:, 3:4);
 
-line = 0;    
-
-if size(var, 1)==1
-    % only one line in a single array
-    line = [var(1) var(2) -var(3) -var(4)];
-else
-    % several lines in a single array
-    n = size(var, 1);
-    line(1:n, 1) = var(1:n, 1);
-    line(1:n, 2) = var(1:n, 2);
-    line(1:n, 3) = -var(1:n, 3);
-    line(1:n, 4) = -var(1:n, 4);
-end
+    

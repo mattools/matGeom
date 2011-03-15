@@ -1,5 +1,5 @@
 function d = linePosition(point, line)
-%LINEPOSITION return position of a point on a line
+%LINEPOSITION Return position of a point on a line
 %
 %   L = linePosition(POINT, LINE);
 %   Computes position of point POINT on the line LINE, relative to origin
@@ -20,8 +20,14 @@ function d = linePosition(point, line)
 %   return an array of [NP NL] position, corresponding to each couple
 %   point-line.
 %
+%   Example
+%   line = createLine([10 30], [30 90]);
+%   linePosition([20 60], line)
+%   ans =
+%       .5
+%
 %   See also:
-%   lines2d, createLine, projPointOnLine, onLine
+%   lines2d, createLine, projPointOnLine, isPointOnLine
 %
 %   ---------
 %

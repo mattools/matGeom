@@ -1,8 +1,8 @@
 function point = intersectEdges(edge1, edge2)
-%INTERSECTEDGES return all intersections points of N edges in 2D
+%INTERSECTEDGES Return all intersections between two set of edges
 %
 %   P = intersectEdges(E1, E2);
-%   returns the intersection point of lines L1 and L2. E1 and E2 are [1*4] 
+%   returns the intersection point of lines L1 and L2. E1 and E2 are 1-by-4
 %   arrays, containing parametric representation of each edge (in the form
 %   [x1 y1 x2 y2], see 'createEdge' for details).
 %   

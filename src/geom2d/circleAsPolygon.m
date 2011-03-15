@@ -1,5 +1,5 @@
 function varargout = circleAsPolygon(circle, varargin)
-%CIRCLEASPOLYGON convert a circle into a series of points
+%CIRCLEASPOLYGON Convert a circle into a series of points
 %
 %   P = circleAsPolygon(CIRCLE, N);
 %   convert circle given as [x0 y0 r], where x0 and y0 are coordinate of

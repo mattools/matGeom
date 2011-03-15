@@ -1,9 +1,9 @@
 function res = reverseEdge(edge)
-% Interverts source and target vertices of edge
+%REVERSEEDGE Intervert the source and target vertices of edge
 %
 %   REV = reverseEdge(EDGE);
 %   Returns the opposite edge of EDGE.
-%   EDGE has the format [X Y1 X2 Y2]. The resulting edge INV has value
+%   EDGE has the format [X1 Y1 X2 Y2]. The resulting edge REV has value
 %   [X2 Y2 X1 Y1];
 %
 %   See also:

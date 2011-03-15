@@ -1,5 +1,5 @@
 function trans = createScaling(varargin)
-%CREATESCALING return 3*3 matrix of a scaling in 2 dimensions
+%CREATESCALING Create the 3*3 matrix of a scaling in 2 dimensions
 %
 %   TRANS = createScaling(SX, SY);
 %   return the matrix corresponding to scaling by SX and SY in the 2

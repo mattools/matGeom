@@ -1,5 +1,5 @@
 function circle = enclosingCircle(pts)
-%ENCLOSINGCIRCLE find the minimum circle enclosing a set of points.
+%ENCLOSINGCIRCLE Find the minimum circle enclosing a set of points.
 %
 %   CIRCLE = enclosingCircle(POINTS);
 %   compute cirlce CIRCLE=[xc yc r] which enclose all points POINTS given

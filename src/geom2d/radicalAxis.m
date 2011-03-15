@@ -1,5 +1,5 @@
 function line = radicalAxis(circle1, circle2)
-%RADICALAXIS  compute the radical axis (or radical line) of 2 circles
+%RADICALAXIS Compute the radical axis (or radical line) of 2 circles
 %
 %   L = radicalAxis(C1, C2)
 %   Computes the radical axis of 2 circles.
@@ -38,7 +38,7 @@ dist  = sqrt((x2-x1).^2 + (y2-y1).^2);
 
 % relative position of intersection point of 
 % the radical line with the line joining circle centers
-d = (dist.^2+r1.^2-r2.^2)*.5./dist;
+d = (dist.^2 + r1.^2 - r2.^2) * .5 ./ dist;
 
 % compute angle of radical axis
 angle = lineAngle(createLine([x1 y1], [x2 y2]));

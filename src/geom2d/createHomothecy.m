@@ -1,5 +1,5 @@
 function trans = createHomothecy(point, ratio)
-%CREATEHOMOTHECY create a homothecy as an affine transform
+%CREATEHOMOTHECY Create the the 3x3 matrix of an homothetic transform
 %
 %   TRANS = createHomothecy(POINT, K);
 %   POINT is the center of the homothecy, K is its factor.

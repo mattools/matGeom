@@ -1,5 +1,5 @@
 function edge2 = clipEdge(edge, box)
-%CLIPEDGE clip an edge with a rectangular box
+%CLIPEDGE Clip an edge with a rectangular box
 %
 %   EDGE2 = clipEdge(EDGE, BOX);
 %   EDGE: [x1 y1 x2 y2],
@@ -12,8 +12,8 @@ function edge2 = clipEdge(edge, box)
 %   if EDGE is a [nx4] array, return an [nx4] array, corresponding to each
 %   clipped edge.
 %
-%   See also:
-%   edges2d, clipLine
+%   See also
+%   edges2d, boxes2d, clipLine
 %
 % ---------
 % author : David Legland 

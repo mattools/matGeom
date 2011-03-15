@@ -1,5 +1,5 @@
 function varargout = circleArcAsCurve(arc, N)
-%CIRCLEARCASCURVE convert a circle arc into a series of points
+%CIRCLEARCASCURVE Convert a circle arc into a series of points
 %
 %   P = circleArcAsCurve(ARC, N);
 %   convert the circle ARC into a series of N points. ARC is given in the

@@ -1,5 +1,5 @@
 function varargout = transformPoint(varargin)
-%TRANSFORMPOINT transform a point with an affine transform
+%TRANSFORMPOINT Transform a point with an affine transform
 %
 %   PT2 = transformPoint(PT1, TRANS);
 %   where PT1 has the form [xp yp], and TRANS is a [2*2], [2*3] or [3*3]

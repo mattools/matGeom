@@ -1,5 +1,5 @@
 function varargout = drawCenteredEdge(point, len, theta, varargin)
-%DRAWCENTEREDEDGE draw an edge centered on a point
+%DRAWCENTEREDEDGE Draw an edge centered on a point
 %   
 %   drawCenteredEdge(PT, L, THETA)
 %   Draws an edge centered on point PT, with length L, and orientation

@@ -1,5 +1,5 @@
 function varargout = drawEllipse(varargin)
-%DRAWELLIPSE draw an ellipse on the current axis
+%DRAWELLIPSE Draw an ellipse on the current axis
 %
 %   drawEllipse(XC, YC, A, B);
 %   Draws ellipse with center (XC, YC), with main axis of half-length A,
@@ -15,7 +15,7 @@ function varargout = drawEllipse(varargin)
 %   H = drawEllipse(...);
 %   Also returns handles to the created line objects.
 %
-%   -> Parameters can also be arrays. In this case, all arrays are suposed 
+%   -> Parameters can also be arrays. In this case, all arrays are supposed 
 %   to have the same size.
 %
 %
@@ -42,10 +42,13 @@ function varargout = drawEllipse(varargin)
 %   13/08/2005 uses radians instead of degrees
 %   21/02/2008 add support for drawing styles, code cleanup
 
+
+%% Extract input arguments
+
 % extract dawing style strings
 styles = {};
 for i = 1:length(varargin)
-    if(ischar(varargin{i}))
+    if ischar(varargin{i})
         styles = varargin(i:end);
         varargin(i:end) = [];
         break;
@@ -55,6 +58,7 @@ end
 % extract ellipse parameters
 theta = 0;
 if length(varargin)==1
+    % ellipse is given in a single array
     ellipse = varargin{1};
     x0 = ellipse(1);
     y0 = ellipse(2);
@@ -63,7 +67,9 @@ if length(varargin)==1
     if length(ellipse)>4
         theta = ellipse(5);
     end
+    
 elseif length(varargin)>=4
+    % ellipse parameters given as separate arrays
     x0 = varargin{1};
     y0 = varargin{2};
     a  = varargin{3};
@@ -73,37 +79,57 @@ elseif length(varargin)>=4
     else
         theta = zeros(size(x0));
     end
+    
 else
-    error('drawEllipse: please specify center x, center y and radii a and b');
+    error('drawEllipse: incorrect input arguments');
 end
 
-if nargout<2
-    % compute position of points to draw each ellipse
-    h = zeros(length(x0), 1);
-    for i=1:length(x0)
-        t = linspace(0, 2*pi, 121);
-        cot = cos(theta(i));
-        sit = sin(theta(i));
-        xt = x0(i) + a(i)*cos(t)*cot - b(i)*sin(t)*sit;
-        yt = y0(i) + a(i)*cos(t)*sit + b(i)*sin(t)*cot;
+% angular positions of vertices
+t = linspace(0, 2*pi, 121);
 
-        h(i) = line(xt, yt, styles{:});
-    end
-    
-    % return handles if needed
-    if nargout>0
-        varargout{1}=h;
-    end
-else
+
+%% Process computation of polyline vertices
+
+if nargout >= 2
     % return two arrays : x and y coordinates of points
 
+    if length(x0) > 1
+        error('only one ellipse can be specified');
+    end
+    
+    % pre-compute rotation angles
+    cot = cos(theta);
+    sit = sin(theta);
+    
     % compute position of points used to draw first ellipse
-    t = linspace(0, 2*pi, 121);
+    xt = x0 + a * cos(t) * cot - b * sin(t)*sit;
+    yt = y0 + a * cos(t) * sit + b * sin(t)*cot;
+    
+    varargout = {xt yt};
+    return;
+end
+
+
+%% Process drawing of a set of ellipses
+
+% compute position of points to draw each ellipse
+h = zeros(length(x0), 1);
+for i = 1:length(x0)
+    % pre-compute rotation angles
     cot = cos(theta(i));
     sit = sin(theta(i));
-    xt = x0(i) + a(i)*cos(t)*cot - b(i)*sin(t)*sit;
-    yt = y0(i) + a(i)*cos(t)*sit + b(i)*sin(t)*cot;
     
-    varargout{1} = xt;
-    varargout{2} = yt;
+    % compute position of points used to draw current ellipse
+    xt = x0(i) + a(i) * cos(t) * cot - b(i) * sin(t) * sit;
+    yt = y0(i) + a(i) * cos(t) * sit + b(i) * sin(t) * cot;
+    
+    % stores handle to graphic object
+    h(i) = line(xt, yt, styles{:});
 end
+
+% return handles if required
+if nargout > 0
+    varargout = {h};
+end
+
+

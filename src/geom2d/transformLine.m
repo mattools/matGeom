@@ -1,5 +1,5 @@
 function dest = transformLine(line, trans)
-%TRANSFORMLINE transform a line with an affine transform
+%TRANSFORMLINE Transform a line with an affine transform
 %
 %   LINE2 = transformLine(LINE1, TRANS);
 %   returns the line LINE1 transformed with affine transform TRANS. 

@@ -1,5 +1,5 @@
 function varargout = distancePointEdge(point, edge)
-%DISTANCEPOINTEDGE compute distance between a point and an edge
+%DISTANCEPOINTEDGE Minimum distance between a point and an edge
 %
 %   DIST = distancePointEdge(POINT, EDGE);
 %   Return the euclidean distance between edge EDGE and point POINT. 
@@ -15,7 +15,6 @@ function varargout = distancePointEdge(point, edge)
 %
 %   See also:
 %   edges2d, points2d, distancePoints, distancePointLine
-%
 %   
 %
 %   ---------

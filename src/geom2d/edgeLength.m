@@ -1,5 +1,5 @@
 function len = edgeLength(varargin)
-%EDGELENGTH return length of an edge
+%EDGELENGTH Return length of an edge
 %
 %   L = edgeLength(EDGE);  
 %   Returns the length of an edge, with parametric representation:

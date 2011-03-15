@@ -1,7 +1,7 @@
 function varargout = triangleGrid(bounds, origin, size, varargin)
-%TRIANGLEGRID generate triangular grid of points in the plane.
+%TRIANGLEGRID Generate triangular grid of points in the plane.
 %
-%   usage :
+%   usage
 %   PTS = triangleGrid(BOUNDS, ORIGIN, SIZE)
 %   generate points, lying in the window defined by BOUNDS, given in form
 %   [xmin ymin xmax ymax], starting from origin with a constant step equal
@@ -9,7 +9,7 @@ function varargout = triangleGrid(bounds, origin, size, varargin)
 %   SIZE is constant and is equals to the length of the sides of each
 %   triangles. 
 %
-%   TODO : add possibility to use rotated grid
+%   TODO: add possibility to use rotated grid
 %
 %   ---------
 %

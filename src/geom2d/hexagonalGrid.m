@@ -1,14 +1,14 @@
 function varargout = hexagonalGrid(bounds, origin, size, varargin)
-%HEXAGONALGRID generate hexagonal grid of points in the plane.
+%HEXAGONALGRID Generate hexagonal grid of points in the plane.
 %
-%   usage :
+%   usage
 %   PTS = hexagonalGrid(BOUNDS, ORIGIN, SIZE)
 %   generate points, lying in the window defined by BOUNDS (=[xmin ymin
 %   xmax ymax]), starting from origin with a constant step equal to size.
 %   SIZE is constant and is equals to the length of the sides of each
 %   hexagon. 
 %
-%   TODO : add possibility to use rotated grid
+%   TODO: add possibility to use rotated grid
 %
 %   ---------
 %

@@ -1,5 +1,5 @@
 function b = isPointOnCircle(point, circle, varargin)
-%ISPOINTONCIRCLE test if a point is located on a given circle.
+%ISPOINTONCIRCLE Test if a point is located on a given circle.
 %
 %   B = isPointOnCircle(POINT, CIRCLE) 
 %   return true if point is located on the circle, i.e. if the distance to

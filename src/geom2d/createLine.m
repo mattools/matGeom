@@ -1,5 +1,5 @@
 function line = createLine(varargin)
-%CREATELINE create a line with various inputs.
+%CREATELINE Create a straight line from 2 points, or from other inputs
 %
 %   Line is represented in a parametric form : [x0 y0 dx dy]
 %   x = x0 + t*dx

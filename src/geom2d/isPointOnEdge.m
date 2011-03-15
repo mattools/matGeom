@@ -1,5 +1,5 @@
 function b = isPointOnEdge(point, edge, varargin)
-%ISPOINTONEDGE test if a point belongs to an edge
+%ISPOINTONEDGE Test if a point belongs to an edge
 %
 %   Usage
 %   B = isPointOnEdge(POINT, EDGE)

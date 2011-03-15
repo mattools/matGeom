@@ -1,5 +1,5 @@
 function d = edgePosition(point, edge)
-%EDGEPOSITION return position of a point on an edge
+%EDGEPOSITION Return position of a point on an edge
 %
 %   POS = edgePosition(POINT, EDGE);
 %   Computes position of point POINT on the edge EDGE, relative to the

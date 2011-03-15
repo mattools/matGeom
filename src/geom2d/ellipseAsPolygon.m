@@ -1,5 +1,5 @@
 function varargout = ellipseAsPolygon(ellipse, N)
-%ELLIPSEASPOLYGON convert an ellipse into a series of points
+%ELLIPSEASPOLYGON Convert an ellipse into a series of points
 %
 %   P = ellipseAsPolygon(ELL, N);
 %   converts ELL given as [x0 y0 a b] or [x0 y0 a b theta] into an array

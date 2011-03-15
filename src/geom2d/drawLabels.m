@@ -1,5 +1,5 @@
 function varargout = drawLabels(varargin)
-%DRAWLABELS draw labels at specified positions
+%DRAWLABELS Draw labels at specified positions
 %   
 %   DRAWLABELS(X, Y, LBL) draw labels LBL at position X and Y.
 %   LBL can be either a string array, or a number array. In this case,

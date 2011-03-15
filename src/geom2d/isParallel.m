@@ -1,5 +1,5 @@
 function b = isParallel(v1, v2, varargin)
-%ISPARALLEL  check parallelism of two vectors
+%ISPARALLEL Check parallelism of two vectors
 %
 %   B = isParallel(V1, V2)
 %   where V1 and V2 are 2 row vectors of length Nd, Nd being the dimension, 
