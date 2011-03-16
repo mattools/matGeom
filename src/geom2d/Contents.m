@@ -131,10 +131,11 @@
 %   drawBox              - Draw a box defined by coordinate extents
 %
 % Various drawing functions
+%   drawBezierCurve      - Draw a cubic bezier curve defined by 4 control points
 %   drawParabola         - Draw a parabola on the current axis
 %   drawArrow            - Draw an arrow on the current axis
 %   drawLabels           - Draw labels at specified positions
-%   drawShape            - Draw various types of shapes (circles, polygons ...)
+%   drawShape            - Draw various types of shapes (circles, polygons...)
 %
 % Other shapes
 %   squareGrid           - Generate equally spaces points in plane.
@@ -180,5 +181,6 @@ help('Contents');
 
 
 %% Others...
+
 
 

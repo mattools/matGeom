@@ -90,7 +90,7 @@ for i=1:length(x0)
     xt = x0(i) + r(i)*cot;
     yt = y0(i) + r(i)*sit;
 
-    h(i) = line(xt, yt, varargin{:});
+    h(i) = plot(xt, yt, varargin{:});
 end
 
 if nargout>0
