@@ -1,5 +1,5 @@
 function plane = medianPlane(p1, p2)
-%MEDIANPLANE create a plane in the middle of 2 points
+%MEDIANPLANE Create a plane in the middle of 2 points
 %
 %   PLANE = medianPlane(P1, P2)
 %   Creates a plane in the middle of 2 points.

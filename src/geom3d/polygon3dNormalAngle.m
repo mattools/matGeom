@@ -1,5 +1,5 @@
 function theta = polygon3dNormalAngle(points, ind)
-%POLYGON3DNORMALANGLE compute normal angle at a vertex of the 3D polygon
+%POLYGON3DNORMALANGLE Normal angle at a vertex of the 3D polygon
 %
 %   THETA = polygon3DNormalAngle(POLYGON, IND)
 %   where POLYGON is a set of points, and IND is index of a point in
@@ -16,14 +16,14 @@ function theta = polygon3dNormalAngle(points, ind)
 %   % sum of normal angles must be equal to 2*PI for simple polygons
 %   sum(theta)
 %
-%   TODO works only for convex angles ! ! ! !
+%   IMPORTANT NOTE: works only for convex angles ! ! ! !
 %
 %   See also
 %   polygons3d, faceNormalAngle
 %
 % ------
 % Author: David Legland
-% e-mail: david.legland@jouy.inra.fr
+% e-mail: david.legland@grignon.inra.fr
 % Created: 2005-11-30
 % Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 

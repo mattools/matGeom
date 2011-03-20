@@ -1,5 +1,5 @@
 function point = intersectLineSphere(line, sphere)
-%INTERSECTLINESPHERE return intersection between a line and a sphere
+%INTERSECTLINESPHERE Return intersection points between a line and a sphere
 %
 %   GC = intersectLineSphere(LINE, SPHERE);
 %   Returns the two points which are the intersection of the given line and

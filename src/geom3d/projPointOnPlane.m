@@ -1,5 +1,5 @@
 function point = projPointOnPlane(point, plane)
-%PROJPOINTONPLANE return the projection of a point on a plane
+%PROJPOINTONPLANE Return the orthogonal projection of a point on a plane
 %
 %   PT2 = projPointOnPlane(PT1, PLANE);
 %   Compute the (orthogonal) projection of point PT1 onto the line PLANE.
@@ -20,17 +20,16 @@ function point = projPointOnPlane(point, plane)
 %
 
 %   HISTORY
-%   21/08/2006 : debug support for multiple points or planes
+%   21/08/2006: debug support for multiple points or planes
 
 if size(point, 1)==1
     point = repmat(point, [size(plane, 1) 1]);
 elseif size(plane, 1)==1
     plane = repmat(plane, [size(point, 1) 1]);
 elseif size(plane, 1) ~= size(point, 1)
-    error('projPointOnPlane : size of inputs differ');
+    error('projPointOnPlane: size of inputs differ');
 end
 
 n = planeNormal(plane);
 line = [point n];
 point = intersectLinePlane(line, plane);
-

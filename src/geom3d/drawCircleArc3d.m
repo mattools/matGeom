@@ -1,5 +1,5 @@
 function varargout = drawCircleArc3d(arc, varargin)
-%DRAWCIRCLEARC3D draw a 3D circle arc
+%DRAWCIRCLEARC3D Draw a 3D circle arc
 %
 %   drawCircleArc3d([XC YC ZC R THETA PHI PSI START EXTENT])
 %   [XC YC ZC]  : coordinate of arc center
@@ -29,7 +29,7 @@ function varargout = drawCircleArc3d(arc, varargin)
 if iscell(arc)
     h = [];
     for i=1:length(arc)
-        h = [h drawCircleArc3d(arc{i}, varargin{:})];
+        h = [h drawCircleArc3d(arc{i}, varargin{:})]; %#ok<AGROW>
     end
     if nargout>0
         varargout{1}=h;
@@ -40,7 +40,7 @@ end
 if size(arc, 1)>1
     h = [];
     for i=1:size(arc, 1)
-        h = [h drawCircleArc3d(arc(i,:), varargin{:})];
+        h = [h drawCircleArc3d(arc(i,:), varargin{:})]; %#ok<AGROW>
     end
     if nargout>0
         varargout{1}=h;
@@ -65,7 +65,7 @@ extent  = arc(:,9);
 
 % positions on circle arc
 N       = 64;
-t       = linspace(start, start+extent, N);
+t       = linspace(start, start+extent, N+1);
 
 % compute coordinate of points
 x       = r*cos(t)';
@@ -82,7 +82,7 @@ curve   = transformPoint3d(curve, trans);
 % draw the curve with specified options
 h = drawPolyline3d(curve, varargin{:});
 
-if nargout>0
-    varargout{1}=h;
+if nargout > 0
+    varargout{1} = h;
 end
 

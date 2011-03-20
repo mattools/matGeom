@@ -1,5 +1,5 @@
 function varargout = drawPlane3d(plane, varargin)
-%DRAWPLANE3D draw a plane clipped in the current window
+%DRAWPLANE3D Draw a plane clipped in the current window
 %
 %   drawPlane3d(plane)
 %   plane = [x0 y0 z0  dx1 dy1 dz1  dx2 dy2 dz2];

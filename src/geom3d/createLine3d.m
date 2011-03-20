@@ -1,5 +1,5 @@
 function line = createLine3d(varargin)
-%CREATELINE3D create a line with various inputs.
+%CREATELINE3D Create a line with various inputs.
 %
 %   Line is represented in a parametric form : [x0 y0 z0 dx dy dz]
 %       x = x0 + t*dx
@@ -39,9 +39,9 @@ function line = createLine3d(varargin)
 %   created the 17/02/2005.
 %
 
-%   HISTORY :
+%   HISTORY
 %   30/11/2005 add more cases
-%   04/01/2007: remove unused variables
+%   04/01/2007 remove unused variables
 
 %   NOTE : A 3d line can also be represented with a 1*7 array : 
 %   [x0 y0 z0 dx dy dz t].

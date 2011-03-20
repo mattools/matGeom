@@ -1,5 +1,5 @@
 function dist = distancePoints3d(p1, p2, varargin)
-%DISTANCEPOINTS3D compute euclidean distance between 3D Points
+%DISTANCEPOINTS3D Compute euclidean distance between pairs of 3D Points
 %
 %   D = distancePoints3d(P1, P2) return distance between points P1 and
 %   P2, given as [X Y Z].
@@ -25,7 +25,7 @@ function dist = distancePoints3d(p1, p2, varargin)
 %
 
 %   HISTORY
-%   21/02/2005: add differnet norms
+%   21/02/2005: add different norms
 %   28/08/2007: deprecate
 
 norm = 2;
@@ -38,9 +38,9 @@ n1 = size(p1, 1);
 n2 = size(p2, 1);
 
 % compute difference of coordinate for each pair of point ([n1*n2] array)
-dx = repmat(p1(:,1), [1 n2])-repmat(p2(:,1)', [n1 1]);
-dy = repmat(p1(:,2), [1 n2])-repmat(p2(:,2)', [n1 1]);
-dz = repmat(p1(:,3), [1 n2])-repmat(p2(:,3)', [n1 1]);
+dx = repmat(p1(:,1), [1 n2]) - repmat(p2(:,1)', [n1 1]);
+dy = repmat(p1(:,2), [1 n2]) - repmat(p2(:,2)', [n1 1]);
+dz = repmat(p1(:,3), [1 n2]) - repmat(p2(:,3)', [n1 1]);
 
 switch(norm)
     case 1

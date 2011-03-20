@@ -1,5 +1,5 @@
 function below = isBelowPlane(point, varargin)
-%ISBELOWPLANE test whether a point is below or above a plane
+%ISBELOWPLANE Test whether a point is below or above a plane
 %
 %   BELOW = isBelowPlane(POINT, PLANE)
 %   where POINT is given as coordinate row vector [XP YP ZP], and PLANE is
@@ -8,16 +8,18 @@ function below = isBelowPlane(point, varargin)
 %
 %   Example
 %   isBelowPlane([1 1 1], createPlane([1 2 3], [1 1 1]))
-%   returns true, whereas
+%   ans =
+%       1
 %   isBelowPlane([3 3 3], createPlane([1 2 3], [1 1 1]))
-%   returns false.
+%   ans =
+%       0
 %
 %   See also
 %   planes3d, points3d, linePosition3d, planePosition
 %
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@grignon.inra.fr
 % Created: 2007-01-05
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 
@@ -37,4 +39,4 @@ end
     
 % compute position of point projected on 3D line corresponding to plane
 % normal, and returns true for points locatd below the plane (pos<=0).
-below = linePosition3d(point, [plane(:, 1:3) planeNormal(plane)])<=0;
+below = linePosition3d(point, [plane(:, 1:3) planeNormal(plane)]) <= 0;

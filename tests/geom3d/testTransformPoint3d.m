@@ -1,4 +1,4 @@
-function test_suite = testTransformPoint3d(varargin)
+function test_suite = testTransformPoint3d(varargin) %#ok<STOUT>
 %Check transformation of points
 %   output = testTransformPoint3d(input)
 %
@@ -16,7 +16,7 @@ function test_suite = testTransformPoint3d(varargin)
 
 initTestSuite;
 
-function testTranslation
+function testTranslation %#ok<*DEFNU>
 p0 = [1 2 3];
 v  = [4 5 6];
 trans = createTranslation3d(v);

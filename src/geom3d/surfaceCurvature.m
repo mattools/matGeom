@@ -1,7 +1,7 @@
 function kappa = surfaceCurvature(kappa1, kappa2, theta)
-%SURFACECURVATURE compute curvature on a surface in a given direction 
+%SURFACECURVATURE Curvature on a surface from angle and principal curvatures
 %
-%   usage :
+%   usage:
 %   KAPPA = surfaceCurvature(KAPPA1, KAPPA2, THETA)
 %   return the curvature KAPPA of surface with respect to direction THETA.
 
@@ -9,7 +9,7 @@ function kappa = surfaceCurvature(kappa1, kappa2, theta)
 %   considered point. THETA is angle of direction relative to angle of
 %   first principal curvature KAPPA1.
 %
-%   Examples :
+%   Examples:
 %   K = surfaceCurvature(KAPPA1, KAPPA2, 0) returns KAPPA1.
 %   K = surfaceCurvature(KAPPA1, KAPPA2, pi/2) returns KAPPA2.
 %
@@ -22,7 +22,7 @@ function kappa = surfaceCurvature(kappa1, kappa2, theta)
 %
 
 %   HISTORY
-%   20/04/2004 : change name and add doc.
-%   14/06/2004 : correct creation date
+%   20/04/2004 change name and add doc.
+%   14/06/2004 correct creation date
 
-kappa = kappa1*(cos(theta).*cos(theta)) + kappa2*(sin(theta).*sin(theta));
+kappa = kappa1 * cos(theta).^2 + kappa2 * sin(theta).^2;

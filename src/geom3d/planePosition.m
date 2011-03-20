@@ -1,5 +1,5 @@
 function pos = planePosition(point, plane)
-%PLANEPOSITION compute position of a point on a plane
+%PLANEPOSITION Compute position of a point on a plane
 %
 %   PT2 = planePosition(POINT, PLANE)
 %   POINT has format [X Y Z], and plane has format
@@ -12,7 +12,7 @@ function pos = planePosition(point, plane)
 %   in the coordinate system of the plane.
 %
 %   
-%   CAUTION :
+%   CAUTION:
 %   WORKS ONLY FOR PLANES WITH ORTHOGONAL DIRECTION VECTORS
 %
 %   See also:
@@ -24,7 +24,7 @@ function pos = planePosition(point, plane)
 %   created the 21/02/2005.
 %
 
-%   HISTORY :
+%   HISTORY
 %   24/11/2005 add support for multiple input
 
 % unify size of data
@@ -39,12 +39,12 @@ if size(point, 1)~=size(plane, 1)
 end
 
 
-p0 = plane(:,1:3);
-d1 = plane(:,4:6);
-d2 = plane(:,7:9);
+p0 = plane(:, 1:3);
+d1 = plane(:, 4:6);
+d2 = plane(:, 7:9);
 
-s = dot(point-p0, d1, 2)./vectorNorm3d(d1);
-t = dot(point-p0, d2, 2)./vectorNorm3d(d2);
+s = dot(point-p0, d1, 2) ./ vectorNorm3d(d1);
+t = dot(point-p0, d2, 2) ./ vectorNorm3d(d2);
 
 pos = [s t];
 

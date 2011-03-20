@@ -1,5 +1,5 @@
 function varargout = drawSphericalTriangle(sphere, p1, p2, p3, varargin)
-%DRAWSPHERICALTRIANGLE draw a triangle on a sphere
+%DRAWSPHERICALTRIANGLE Draw a triangle on a sphere
 %
 %   drawsphericaltriangle(SPHERE, PT1, PT2, PT3);
 %

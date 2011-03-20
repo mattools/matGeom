@@ -1,5 +1,5 @@
 function point = intersectEdgePlane(edge, plane)
-%INTERSECTEDGEPLANE return intersection between a plane and a edge
+%INTERSECTEDGEPLANE Return intersection point between a plane and a edge
 %
 %   PT = intersectEdgePlane(edge, PLANE) return the intersection point of
 %   the given edge and the given plane.
@@ -14,7 +14,9 @@ function point = intersectEdgePlane(edge, plane)
 %   edge = [5 5 -1 5 5 1];
 %   plane = [0 0 0 1 0 0 0 1 0];
 %   intersectEdgePlane(edge, plane)     % should return [5 5 0].
-%   
+%   ans =
+%       5   5   0
+%
 %   See Also:
 %   planes3d, intersectLinePlane, createLine3d, createPlane
 %

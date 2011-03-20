@@ -1,9 +1,12 @@
 function varargout = angleSort3d(pts, varargin)
-%ANGLESORT3D sort 3D coplanar points according to their angles in plane
+%ANGLESORT3D Sort 3D coplanar points according to their angles in plane
 %
 %   PTS2 = angleSort3d(PTS);
 %   Considers all points are located on the same plane, and sort them
-%   according to the angle on plane. PTS is a [Nx2] array.
+%   according to the angle on plane. PTS is a [Nx2] array. Note that the
+%   result depend on plane orientation: points can be in reverse order
+%   compared to expected. The reference plane is computed besed on the 3
+%   first points.
 %
 %   PTS2 = angleSort3d(PTS, PTS0);
 %   Computes angles between each point of PTS and PT0. By default, uses
@@ -20,7 +23,7 @@ function varargout = angleSort3d(pts, varargin)
 %
 % ------
 % Author: David Legland
-% e-mail: david.legland@jouy.inra.fr
+% e-mail: david.legland@grignon.inra.fr
 % Created: 2005-11-24
 % Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
@@ -60,7 +63,7 @@ angle   = atan2(pts2d(:,2), pts2d(:,1));
 angle   = mod(angle - theta0 + 4*pi, 2*pi);
 
 % sort points according to angles
-[angle, I] = sort(angle);
+[angle, I] = sort(angle); %#ok<ASGLU>
 
 
 % format output

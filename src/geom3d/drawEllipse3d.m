@@ -1,5 +1,5 @@
 function varargout = drawEllipse3d(varargin)
-%DRAWELLIPSE3D draw a 3D ellipse
+%DRAWELLIPSE3D Draw a 3D ellipse
 %
 %   Possible calls for the function :
 %   drawEllipse3d([XC YC ZC A B THETA PHI])
@@ -25,7 +25,7 @@ function varargout = drawEllipse3d(varargin)
 %   
 %   ------
 %   Author: David Legland
-%   e-mail: david.legland@jouy.inra.fr
+%   e-mail: david.legland@grignon.inra.fr
 %   Created: 2008-05-07
 %   Copyright 2008 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 

@@ -27,6 +27,8 @@ function theta = vectorAngle3d(v1, v2)
 % Created: 2010-10-04,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform.
 
+% 2011-03-10 improve computation precision
+
 % number of vectors
 n1 = size(v1, 1);
 n2 = size(v2, 1);

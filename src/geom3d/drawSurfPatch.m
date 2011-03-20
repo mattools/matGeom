@@ -1,7 +1,7 @@
 function drawSurfPatch(u, v, z, varargin)
-%DRAWSURFPATCH draw surface patch, with 2 parametrized surfaces
+%DRAWSURFPATCH Draw a 3D surface patch, with 2 parametrized surfaces
 %
-%   usage :
+%   usage:
 %   drawSurfPatch(u, v, zuv)
 %   where u, v, and zuv are three matrices the same size, u and
 %   corresponding to each parameter, and zuv being equal to a function of u

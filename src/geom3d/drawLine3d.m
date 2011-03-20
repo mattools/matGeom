@@ -1,5 +1,5 @@
 function varargout = drawLine3d(lin, varargin)
-%DRAWLINE3D draw the line in the current Window
+%DRAWLINE3D Draw a 3D line on the current axis
 %
 %   drawline3d(LINE);
 %   Draws the line LINE on the current axis, by clipping with the current
@@ -7,7 +7,7 @@ function varargout = drawLine3d(lin, varargin)
 %
 %   drawLine3d(LINE, PARAM, VALUE)
 %   Accepts parameter/value pairs, like for plot function.
-%   Color of the line can be given as a single parameter.
+%   Color of the line can also be given as a single parameter.
 %   
 %   H = drawLine3d(...)
 %   Returns a handle to the created graphic line object.

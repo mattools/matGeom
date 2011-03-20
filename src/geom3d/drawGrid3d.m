@@ -1,5 +1,5 @@
 function varargout = drawGrid3d(varargin)
-%DRAWGRID3D draw a grid in 3 dimensions
+%DRAWGRID3D Draw a 3D grid on the current axis
 %
 %   drawGrid3d
 %   draws a 3D square grid, with origin (0,0,0) and spacing 1 in each
@@ -27,7 +27,7 @@ function varargout = drawGrid3d(varargin)
 %
 %   ------
 %   Author: David Legland
-%   e-mail: david.legland@jouy.inra.fr
+%   e-mail: david.legland@grignon.inra.fr
 %   Created: 2005-11-17
 %   Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 

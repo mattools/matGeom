@@ -1,5 +1,5 @@
 function varargout = transformPoint3d(varargin)
-%TRANSFORMPOINT3D transform a point with a 3D affine transform
+%TRANSFORMPOINT3D Transform a point with a 3D affine transform
 %
 %   PT2 = transformPoint3d(PT1, TRANS);
 %   PT2 = transformPoint3d(X1, Y1, Z1, TRANS);
@@ -46,7 +46,7 @@ function varargout = transformPoint3d(varargin)
 %   12/03/2011 slightly reduce memory usage
 
 % process input arguments
-if length(varargin)==2
+if length(varargin) == 2
     % Point coordinates are given in a single argument
     points = varargin{1};
     x = points(:,1);
@@ -54,7 +54,8 @@ if length(varargin)==2
     z = points(:,3);
     trans  = varargin{2};
     clear points;
-elseif length(varargin)==4
+    
+elseif length(varargin) == 4
     % Point coordinates are given in 3 different arrays
     x = varargin{1};
     y = varargin{2};
@@ -66,12 +67,12 @@ end
 dim = size(x); 
 
 % eventually add null translation
-if size(trans, 2)==3
+if size(trans, 2) == 3
     trans = [trans zeros(size(trans, 1), 1)];
 end
 
 % eventually add normalization
-if size(trans, 1)==3
+if size(trans, 1) == 3
     trans = [trans;0 0 0 1];
 end
 
@@ -80,9 +81,9 @@ try
     % vectorial processing, if there is enough memory
     %res = (trans*[x(:) y(:) z(:) ones(NP, 1)]')';
     %res = [x(:) y(:) z(:) ones(NP, 1)]*trans';
-    res = [x(:) y(:) z(:)]*trans(1:3,1:3)';
-    if size(trans, 2)>3
-        res = bsxfun(@plus, res, trans(4,1:3)');
+    res = [x(:) y(:) z(:)] * trans(1:3, 1:3)';
+    if size(trans, 2) > 3
+        res = bsxfun(@plus, res, trans(4, 1:3)');
     end
     
     % reshape data to original size
@@ -92,8 +93,8 @@ try
 catch
     % process each point one by one, writing in existing array
     NP  = numel(x);
-    for i=1:NP
-        res = [x(i) y(i) z(i) 1]*trans';
+    for i = 1:NP
+        res = [x(i) y(i) z(i) 1] * trans';
         x(i) = res(1);
         y(i) = res(2);
         z(i) = res(3);

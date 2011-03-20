@@ -1,10 +1,10 @@
 function sphere = createSphere(varargin)
-%CREATESPHERE  create a sphere containing 4 points
+%CREATESPHERE Create a sphere containing 4 points
 %
 %   s = createSphere(p1, p2, p3, p4);
 %   return in s the sphere common to the 4 pointsp1, p2, p3 and p4.
 %
-%   Ref : P. Bourke :
+%   Ref: P. Bourke
 %   http://astronomy.swin.edu.au/~pbourke/geometry/spherefrom4/
 %
 %   See also

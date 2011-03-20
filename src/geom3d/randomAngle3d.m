@@ -1,15 +1,16 @@
 function varargout = randomAngle3d(varargin)
-%RANDOMANGLE3D return a 3D angle uniformly distributed on unit sphere
+%RANDOMANGLE3D Return a 3D angle uniformly distributed on unit sphere
 %
-%   usage :
+%   usage
 %   [THETA PHI] = randomAngle3d
 %   Generate an angle unformly distributed on the surface of the unit
 %   sphere.
 %
-%   Math convention is used : theta is angle with vertical, 0 for north
-%   pole, +pi for south pole, pi/2 for points with z=0.
-%   phi is the same as matlab cart2sph : angle from Ox axis, counted
-%   counter-clockwise.
+%   "Mathematical" convention is used: theta is the colatitude (angle with
+%   vertical axis, 0 for north pole, +pi for south pole, pi/2 for points at
+%   equator) with z=0. 
+%   phi is the same as matlab cart2sph: angle from Ox axis, counted
+%   positively counter-clockwise.
 %
 %   [THETA PHI] = randomAngle3d(N)
 %   generates N random angles (N is a scalar)
@@ -36,7 +37,7 @@ if ~isempty(varargin)
 end
 
 phi = 2*pi*rand(N, 1);
-theta = asin(2*rand(N, 1)-1)+pi/2;
+theta = asin(2*rand(N, 1)-1) + pi/2;
 
 if nargout<2
     var = [theta phi];

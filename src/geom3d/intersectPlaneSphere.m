@@ -1,5 +1,5 @@
 function circle = intersectPlaneSphere(plane, sphere)
-%INTERSECTPLANESPHERE return intersection between a plane and a sphere
+%INTERSECTPLANESPHERE Return intersection circle between a plane and a sphere
 %
 %   CIRC = intersectPlaneSphere(PLANE, SPHERE)
 %   Returns the circle which is the intersection of the given plane

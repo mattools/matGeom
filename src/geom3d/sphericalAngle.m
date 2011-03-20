@@ -1,8 +1,10 @@
 function alpha = sphericalAngle(p1, p2, p3)
-%SPHERICALANGLE compute angle on the sphere
+%SPHERICALANGLE Compute angle between points on the sphere
 %
 %   ALPHA = sphericalAngle(P1, P2, P3)
-%   compute angle (P1, P2, P2), in radians, between 0 and 2*PI.
+%   Compute angle (P1, P2, P3), i.e. the angle, measured at point P2,
+%   between the direction P2 P1 and the direction P2 P3.
+%   The result is given in radians, between 0 and 2*PI.
 %
 %   Points are given either as [x y z] (there will be normalized to lie on
 %   the unit sphere), or as [phi theta], with phi being the longitude in [0
@@ -20,7 +22,6 @@ function alpha = sphericalAngle(p1, p2, p3)
 %   angles3d, spheres
 %
 %   ---------
-%
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 21/02/2005.

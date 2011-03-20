@@ -41,26 +41,26 @@
 %   points3d                  - Description of functions operating on 3D points
 %   midPoint3d                - Middle point of two 3D points or of a 3D edge
 %   isCoplanar                - Tests input points for coplanarity in 3-space.
-%   transformPoint3d          - transform a point with a 3D affine transform
-%   distancePoints3d          - compute euclidean distance between 3D Points
-%   clipPoints3d              - clip a set of points by a box
+%   transformPoint3d          - Transform a point with a 3D affine transform
+%   distancePoints3d          - Compute euclidean distance between pairs of 3D Points
+%   clipPoints3d              - Clip a set of points by a box
 %   drawPoint3d               - Draw 3D point on the current axis.
 %
 % 3D Vectors
 %   vectors3d                 - Description of functions operating on 3D vectors
-%   transformVector3d         - transform a vector with a 3D affine transform
-%   normalizeVector3d         - normalize a 3D vector
+%   transformVector3d         - Transform a vector with a 3D affine transform
+%   normalizeVector3d         - Normalize a 3D vector to have norm equal to 1
 %   vectorNorm3d              - Norm of a 3D vector or of set of 3D vectors
 %   vectorAngle3d             - Angle between two 3D vectors
-%   isParallel3d              - check parallelism of two vectors
-%   isPerpendicular3d         - check orthogonality of two vectors
+%   isParallel3d              - Check parallelism of two 3D vectors
+%   isPerpendicular3d         - Check orthogonality of two 3D vectors
 %
 % Angles
 %   angles3d                  - Conventions for manipulating angles in 3D
 %   anglePoints3d             - Compute angle between three 3D points
-%   sphericalAngle            - compute angle on the sphere
-%   angleSort3d               - sort 3D coplanar points according to their angles in plane
-%   randomAngle3d             - return a 3D angle uniformly distributed on unit sphere
+%   sphericalAngle            - Compute angle between points on the sphere
+%   angleSort3d               - Sort 3D coplanar points according to their angles in plane
+%   randomAngle3d             - Return a 3D angle uniformly distributed on unit sphere
 %
 % Coordinate transforms
 %   sph2cart2                 - Convert spherical coordinates to cartesian coordinates
@@ -70,61 +70,64 @@
 %
 % 3D Lines and Edges
 %   lines3d                   - Description of functions operating on 3D lines
-%   createLine3d              - create a line with various inputs.
-%   transformLine3d           - transform a 3D line with a 3D affine transform
-%   clipLine3d                - clip a line with a box and return an edge
+%   createLine3d              - Create a line with various inputs.
+%   transformLine3d           - Transform a 3D line with a 3D affine transform
+%   clipLine3d                - Clip a line with a box and return an edge
 %   midPoint3d                - Middle point of two 3D points or of a 3D edge
 %   distancePointLine3d       - Euclidean distance between 3D point and line
 %   distanceLines3d           - Minimal distance between two 3D lines
-%   linePosition3d            - return position of a 3D point on a 3D line
+%   linePosition3d            - Return the position of a 3D point on a 3D line
 %   drawEdge3d                - Draw 3D edge in the current Window
-%   drawLine3d                - draw the line in the current Window
+%   drawLine3d                - Draw a 3D line on the current axis
 %
 % Planes
 %   planes3d                  - Description of functions operating on 3D planes
 %   createPlane               - Create a plane in parametrized form
-%   normalizePlane            - normalize parametric form of a plane
-%   medianPlane               - create a plane in the middle of 2 points
-%   intersectPlanes           - return intersection between 2 planes in space
-%   projPointOnPlane          - return the projection of a point on a plane
-%   isBelowPlane              - test whether a point is below or above a plane
-%   intersectLinePlane        - return intersection between a plane and a line
-%   intersectEdgePlane        - return intersection between a plane and a edge
+%   normalizePlane            - Normalize parametric representation of a plane
+%   intersectPlanes           - Return intersection line between 2 planes in space
+%   intersectLinePlane        - Return intersection point between a plane and a line
+%   intersectEdgePlane        - Return intersection point between a plane and a edge
 %   distancePointPlane        - Signed distance betwen 3D point and plane
-%   planeNormal               - compute the normal to a plane
-%   planePosition             - compute position of a point on a plane
-%   planePoint                - compute 3D position of a point in a plane
-%   dihedralAngle             - compute dihedral angle between 2 planes
-%   drawPlane3d               - draw a plane clipped in the current window
+%   projPointOnPlane          - Return the orthogonal projection of a point on a plane
+%   isBelowPlane              - Test whether a point is below or above a plane
+%   medianPlane               - Create a plane in the middle of 2 points
+%   planeNormal               - Compute the normal to a plane
+%   planePosition             - Compute position of a point on a plane
+%   planePoint                - Compute 3D position of a point in a plane
+%   dihedralAngle             - Compute dihedral angle between 2 planes
+%   drawPlane3d               - Draw a plane clipped in the current window
 %
 % 3D Polygons and curves
 %   polygons3d                - Description of functions operating on 3D polygons
 %   polygonCentroid3d         - Centroid (or center of mass) of a polygon
-%   polygon3dNormalAngle      - compute normal angle at a vertex of the 3D polygon
+%   polygon3dNormalAngle      - Normal angle at a vertex of the 3D polygon
 %   drawPolyline3d            - Draw a 3D polyline specified by a list of points
 %   fillPolygon3d             - Fill a 3D polygon specified by a list of points
 %
 % 3D circles and ellipses
 %   circles3d                 - Description of functions operating on 3D circles
-%   circle3dPosition          - return the angular position of a point on a 3D circle
-%   circle3dOrigin            - return the first point of a 3D circle
-%   drawCircle3d              - draw a 3D circle
-%   drawCircleArc3d           - draw a 3D circle arc
+%   circle3dPosition          - Return the angular position of a point on a 3D circle
+%   circle3dOrigin            - Return the first point of a 3D circle
+%   drawCircle3d              - Draw a 3D circle
+%   drawCircleArc3d           - Draw a 3D circle arc
+%   drawEllipse3d             - Draw a 3D ellipse
+%
+% Spheres
+%   spheres                   - Description of functions operating on 3D spheres
+%   createSphere              - Create a sphere containing 4 points
+%   intersectLineSphere       - Return intersection points between a line and a sphere
+%   intersectPlaneSphere      - Return intersection circle between a plane and a sphere
+%   drawSphere                - Draw a sphere as a mesh
+%   drawSphericalTriangle     - Draw a triangle on a sphere
 %
 % Smooth surfaces
-%   spheres                   - Description of functions operating on 3D spheres
-%   createSphere              - create a sphere containing 4 points
-%   intersectLineSphere       - return intersection between a line and a sphere
-%   intersectLineCylinder     - Compute intersections between a line and a cylinder
-%   intersectPlaneSphere      - return intersection between a plane and a sphere
 %   inertiaEllipsoid          - Inertia ellipsoid of a set of 3D points
+%   intersectLineCylinder     - Compute intersection points between a line and a cylinder
 %   revolutionSurface         - Create a surface of revolution from a planar curve
-%   surfaceCurvature          - compute curvature on a surface in a given direction 
-%   drawCylinder              - Draw a cylinder
-%   drawSphere                - Draw a sphere as a mesh
-%   drawSphericalTriangle     - draw a triangle on a sphere
+%   surfaceCurvature          - Curvature on a surface from angle and principal curvatures
 %   drawEllipsoid             - Draw a 3D ellipsoid
-%   drawSurfPatch             - draw surface patch, with 2 parametrized surfaces
+%   drawCylinder              - Draw a cylinder
+%   drawSurfPatch             - Draw a 3D surface patch, with 2 parametrized surfaces
 %
 % Bounding boxes management
 %   boxes3d                   - Description of functions operating on 3D boxes
@@ -136,21 +139,21 @@
 %
 % Geometric transforms
 %   transforms3d              - Conventions for manipulating 3D affine transforms
-%   createTranslation3d       - return 4x4 matrix of a 3D translation
-%   createScaling3d           - return 4x4 matrix of a 3D scaling
-%   createRotationOx          - return 4x4 matrix of a rotation around x-axis
-%   createRotationOy          - return 4x4 matrix of a rotation around y-axis
-%   createRotationOz          - return 4x4 matrix of a rotation around z-axis
+%   createTranslation3d       - Create the 4x4 matrix of a 3D translation
+%   createScaling3d           - Create the 4x4 matrix of a 3D scaling
+%   createRotationOx          - Create the 4x4 matrix of a 3D rotation around x-axis
+%   createRotationOy          - Create the 4x4 matrix of a 3D rotation around y-axis
+%   createRotationOz          - Create the 4x4 matrix of a 3D rotation around z-axis
 %   createEulerAnglesRotation - Create a rotation matrix from 3 euler angles
 %   createRotation3dLineAngle - Create rotation around a line by an angle theta
 %   rotation3dAxisAndAngle    - Determine axis and angle of a 3D rotation matrix
 %   rotation3dToEulerAngles   - Extract Euler angles from a rotation matrix
 %   recenterTransform3d       - Change the fixed point of an affine 3D transform
 %   createBasisTransform3d    - Compute matrix for transforming a basis into another basis
-%   composeTransforms3d       - concatenate several space transformations
+%   composeTransforms3d       - Concatenate several space transformations
 %
 % Various drawing Functions
-%   drawGrid3d                - draw a grid in 3 dimensions
+%   drawGrid3d                - Draw a 3D grid on the current axis
 %   drawAxis3d                - Draw a coordinate system and an origin
 %   drawAxisCube              - Draw a colored cube representing axis orientation
 %
@@ -168,7 +171,6 @@
 
 % In development:
 %   clipPolygon3dHP           - clip a 3D polygon with Half-space
-%   drawEllipse3d             - draw a 3D ellipse
 %   drawPartialPatch          - draw surface patch, with 2 parametrized surfaces
 %   createOblicProjectionXZ   - Create oblic projection for perspective display
 
