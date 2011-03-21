@@ -24,20 +24,11 @@ Mettre en place le site Sourceforge
         * rotations utilisent des degres -> plus precis pour angles proches des
             mutliples de 90°
     + faire ca dans une release ulterieure
-
-- Ajouter le module graphs ?    
    
 
 geom2d
 ======
     
-- remplacer les appels a "repmat" par des appels plus rapides (voir comment)
-    + utiliser bsxfun quand c'est approprie
-
-- isPerpendicular : normaliser les vecteurs avant ?
-	pro: plus robuste
-	cons: moins rapide
-
 - pour les fonctions de dessin, prevoir : (2010.07.02)
     + option de trace sous forme de chaine simple
     + option de trace sous forme de couple 'param' + 'value'
@@ -55,10 +46,12 @@ geom2d
 polygons2d
 ==========
 
-- fonction "enclosingRectangle" pour un ensemble de points (2011.02.06)
-    -> "orientedBox" ?
-    -> renvoie centre, Longueur, largeur, et orientation
-            
+- polygonAverage (2010.07.05)
+    - prend en entree un tableau de cellules de polygones, ou alors plusieurs
+        polygones, 
+    - calcule la moyenne des coordonnees de chaque sommet.
+    - 2011.03.20 add pointSetAverage ?
+
 - (2011.03.15) gerer les formes de type 'pointSet'
     + "pointSetBounds", qui renvoie un box
     + "pointSetDiameter" (2011.02.06)
@@ -66,16 +59,15 @@ polygons2d
         * en sortie, le diamètre mesuré dans la direction spécifiée
     + inclure au package 'polygons2d' ?
     
+- fonction "enclosingRectangle" pour un ensemble de points (2011.02.06)
+    -> "orientedBox" ?
+    -> renvoie centre, Longueur, largeur, et orientation
+            
 - clipping de polygones (2010.08.10)
     
 - polygonTriangulate ? (2010.07.28)
 
 - reprendre doc pour la 'position' des polygones et polylines (2010.07.05)
-
-- polygonAverage (2010.07.05)
-    - prend en entree un tableau de cellules de polygones, ou alors plusieurs
-        polygones, 
-    - calcule la moyenne des coordonnees de chaque sommet.
 
 - structure de donnees geom pour stocker des points type polygone, en reprenant
     idee du kdtree
@@ -90,6 +82,7 @@ geom3d
 - Conventions pour les angles 3d pas geniales... (2010.07.28)
     ex: drawCircle3d: theta+phi+psi
     pas vraiment de lien avec les angles d'Euler.
+        2011.03.21 si, mais convention ZYZ, qui est pertinente aussi...
     
 - Prposition de convention pour les angles (2011.03.12)
     - partir sur angles d'Euler en convention XYZ (yaw-pitch-roll), base [0 0 0]
