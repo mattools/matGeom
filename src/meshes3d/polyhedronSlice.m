@@ -1,5 +1,5 @@
 function points = polyhedronSlice(nodes, faces, plane)
-%POLYHEDRONSLICE intersect a convex polyhedron with a plane.
+%POLYHEDRONSLICE Intersect a convex polyhedron with a plane.
 %
 %   SLICE = polyhedronSlice(NODES, FACES, PLANE)
 %   NODES: a Nx3 array

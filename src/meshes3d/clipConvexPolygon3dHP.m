@@ -1,5 +1,5 @@
 function poly2 = clipConvexPolygon3dHP(poly, plane)
-%CLIPCONVEXPOLYGON3DHP clip a convex 3D polygon with Half-space
+%CLIPCONVEXPOLYGON3DHP Clip a convex 3D polygon with Half-space
 %
 %   POLY2 = clipConvexPolygon3dHP(POLY, PLANE)
 %   POLY is a [Nx3] array of points, and PLANE is given as:

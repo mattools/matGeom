@@ -1,5 +1,5 @@
 function theta = polyhedronNormalAngle(varargin)
-%POLYHEDRONNORMALANGLE compute normal angle at a vertex of a 3D polyhedron
+%POLYHEDRONNORMALANGLE Compute normal angle at a vertex of a 3D polyhedron
 %
 %   THETA = polyhedraNormalAngle(NODES, EDGES, FACES, IND);
 %   THETA = polyhedraNormalAngle(NODES, FACES, IND);
@@ -73,7 +73,7 @@ for i=1:na
                 indp = find(faces{j}==i);
                 
                 % compute normal angle of vertex
-                thetaf = [thetaf polygon3dNormalAngle(face, indp)];
+                thetaf = [thetaf polygon3dNormalAngle(face, indp)]; %#ok<AGROW>
             end
         end
     else
