@@ -1,6 +1,7 @@
-% GEOM2D Geometry 2D Toolbox
-% Version 0.5 11-Apr-2010 .
+% POLYNOMIALCURVES2D Planar Polynomial Curves
+% Version 1.0 21-Mar-2011 .
 %
+% POLYNOMIALCURVES2D Manipulation of planar smooth curves
 %   Polynomial curves are plane curves whose points are defined by a
 %   polynomial for each x and y coordinate.
 %   A polynomial curve is represented by 3 row vectors:
@@ -53,8 +54,9 @@
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % created the  07/11/2005.
-% Copyright INRA - Cepia Software Platform.
+% homepage: http://matgeom.sourceforge.net/
 % http://www.pfl-cepia.inra.fr/index.php?page=geom2d
+% Copyright INRA - Cepia Software Platform.
 
 help('Contents');
 

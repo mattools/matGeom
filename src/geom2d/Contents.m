@@ -1,5 +1,5 @@
 % GEOM2D Geometry 2D Toolbox
-% Version 0.5 11-Apr-2010 .
+% Version 1.0 21-Mar-2011 .
 %
 % 	Library to handle and visualize geometric primitives such as points,
 % 	lines, circles and ellipses, polygons...
@@ -152,8 +152,9 @@
 % -----
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% created the  07/11/2005.
+% Created: 2005-11-07
 % Copyright INRA - Cepia Software Platform.
+% Homepage: http://matgeom.sourceforge.net/
 % http://www.pfl-cepia.inra.fr/index.php?page=geom2d
 
 help('Contents');

@@ -1,5 +1,5 @@
-% MESHES3D MatGeom - meshes3d
-% Version 0.5 11-Apr-2010 .
+% MESHES3D 3D Surface Meshes
+% Version 1.0 21-Mar-2011 .
 %
 %   Creation, vizualization, and manipulation of 3D surface meshes or
 %   polyhedra.
@@ -74,8 +74,9 @@
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% http://www.pfl-cepia.inra.fr/index.php?page=geom3d
 % Created: 2005-11-07
+% Homepage: http://matgeom.sourceforge.net/
+% http://www.pfl-cepia.inra.fr/index.php?page=geom3d
 % Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
 
