@@ -1,5 +1,5 @@
 function poly2 = clipPolygonHP(poly, line)
-%CLIPPOLYGONHP clip a polygon with a Half-plane defined by a directed line
+%CLIPPOLYGONHP Clip a polygon with a Half-plane defined by a directed line
 %
 %   POLY2 = clipPolygonHP(POLY, LINE)
 %   POLY is a [Nx2] array of points, and LINE is given as [x0 y0 dx dy].
@@ -51,11 +51,11 @@ while i<=N
     
     if isLeftOriented(poly(i,:), line)
         % keep all points located on the right side of line
-        poly2 = [poly2; poly(i,:)];
+        poly2 = [poly2; poly(i,:)]; %#ok<AGROW>
     else
         % compute of preceeding edge with line
         if i>1
-            poly2 = [poly2; intersectLineEdge(line, edges(i, :))];
+            poly2 = [poly2; intersectLineEdge(line, edges(i, :))]; %#ok<AGROW>
         end    
         
         % go to the next point on the left side
@@ -65,10 +65,10 @@ while i<=N
             % find the next point on the right side
             if isLeftOriented(poly(i,:), line)
                 % add intersection of previous edge
-                poly2 = [poly2; intersectLineEdge(line, edges(i, :))];
+                poly2 = [poly2; intersectLineEdge(line, edges(i, :))]; %#ok<AGROW>
                 
                 % add current point
-                poly2 = [poly2; poly(i,:)];
+                poly2 = [poly2; poly(i,:)]; %#ok<AGROW>
                 
                 % exit the second loop
                 break;

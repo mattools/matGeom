@@ -1,5 +1,5 @@
 function dist = distancePolygons(poly1, poly2)
-%DISTANCEPOLYGONS  compute the shortest distance between 2 polygons
+%DISTANCEPOLYGONS Compute the shortest distance between 2 polygons
 %   DIST = distancePolygons(POLY1, POLY2)
 %
 %   Example

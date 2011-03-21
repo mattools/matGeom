@@ -1,5 +1,5 @@
 function box = polygonBounds(polygon)
-%POLYGONBOUNDS compute bounding box of a polygon
+%POLYGONBOUNDS Compute the bounding box of a polygon
 %
 %   BOX = polygonBounds(POLYGON);
 %   Returns the bounding box of the polygon. 

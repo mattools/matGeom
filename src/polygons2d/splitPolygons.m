@@ -1,5 +1,5 @@
 function polygons = splitPolygons(polygon)
-%SPLITPOLYGONS convert a NaN separated polygon list to a cell array of polygons
+%SPLITPOLYGONS Convert a NaN separated polygon list to a cell array of polygons
 %
 %   POLYGONS = splitPolygons(POLYGON);
 %   POLYGON is a N*2 array of points, with possibly couples of NaN values.

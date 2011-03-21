@@ -1,5 +1,5 @@
 function res = polylineSubcurve(poly, t0, t1)
-%POLYLINESUBCURVE  extract a portion of a polyline
+%POLYLINESUBCURVE Extract a portion of a polyline
 %
 %   POLY2 = polylineSubcurve(POLYLINE, POS0, POS1)
 %   Create a new polyline, by keeping vertices located between positions
@@ -13,7 +13,7 @@ function res = polylineSubcurve(poly, t0, t1)
 %   drawCurve(poly2);
 %
 %   See also
-%   polylines2d
+%   polylines2d, polygonSubCurve
 %
 % ------
 % Author: David Legland
@@ -42,7 +42,7 @@ else
 end
 
 % add first point if it is not already a vertex
-if t0~=ind0-1
+if t0 ~= ind0-1
     res = [polylinePoint(poly, t0); res];
 end
 

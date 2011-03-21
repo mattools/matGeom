@@ -1,5 +1,5 @@
 function point = geod2cart(src, curve, normal)
-%GEOD2CART convert geodesic coordinates to cartesian coord.
+%GEOD2CART Convert geodesic coordinates to cartesian coord.
 %
 %   PT2 = geod2cart(PT1, CURVE, NORMAL)
 %   CURVE and NORMAL are both [N*2] array with the same length, and

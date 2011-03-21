@@ -1,7 +1,13 @@
 function res = isPointOnPolyline(point, poly, varargin)
-%ISPOINTONPOLYLINE  check if a point belongs to a polyline
+%ISPOINTONPOLYLINE Test if a point belongs to a polyline
 %
 %   B = isPointOnPolyline(POINT, POLY)
+%   Returns TRUE of the point POINT belong to the polyline defined by the
+%   set of points in POLY.
+%
+%   B = isPointOnPolyline(POINT, POLY, TOL)
+%   Specify the absolute tolerance for testing the distance between the
+%   point and the polyline.
 %
 %   Example
 %       pt1 = [30 20];
@@ -13,7 +19,7 @@ function res = isPointOnPolyline(point, poly, varargin)
 %            1
 %
 %   See also
-%
+%   points2d, polylines2d
 %
 % ------
 % Author: David Legland
@@ -29,4 +35,4 @@ if ~isempty(varargin)
 end
 
 % return true if distance is below a given threshold
-res = distancePointPolyline(point, poly)<tol;
+res = distancePointPolyline(point, poly) < tol;

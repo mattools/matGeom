@@ -1,5 +1,5 @@
 function nodes = steinerPolygon(points)
-%STEINERPOLYGON  create a Steiner polygon from a set of vectors
+%STEINERPOLYGON Create a Steiner polygon from a set of vectors
 %
 %   NODES = steinerPolygon(VECTORS);
 %   Builds the (convex) polygon which contains an edge for each one of the
@@ -20,7 +20,7 @@ function nodes = steinerPolygon(points)
 
 nodes = [0 0];
 for i=1:length(points)
-    nodes = [nodes; nodes+repmat(points(i,:), [size(nodes, 1) 1])];
+    nodes = [nodes; nodes+repmat(points(i,:), [size(nodes, 1) 1])]; %#ok<AGROW>
 end
 
 K = convhull(nodes(:,1), nodes(:,2));

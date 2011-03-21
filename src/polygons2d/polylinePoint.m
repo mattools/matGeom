@@ -1,5 +1,5 @@
 function point = polylinePoint(poly, pos)
-%POLYLINEPOINT  extract a point from a polyline
+%POLYLINEPOINT Extract a point from a polyline
 %
 %   POINT = polylinePoint(POLYLINE, POS)
 %   POLYLINE is a N*2 array containing coordinate of polyline vertices

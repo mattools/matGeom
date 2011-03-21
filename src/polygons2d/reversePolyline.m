@@ -1,5 +1,5 @@
 function rev = reversePolyline(poly)
-%REVERSEPOLYLINE  reverse a polyline, by iterating vertices from the end
+%REVERSEPOLYLINE Reverse a polyline, by iterating vertices from the end
 %
 %   POLY2 = reversePolyline(POLY)
 %   POLY2 has same vertices as POLY, but POLY2(i,:) is the same as

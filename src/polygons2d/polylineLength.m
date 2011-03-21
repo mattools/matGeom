@@ -1,5 +1,5 @@
 function len = polylineLength(poly, varargin)
-%POLYLINELENGTH return length of a polyline given as a list of points
+%POLYLINELENGTH Return length of a polyline given as a list of points
 %
 %   L = polylineLength(POLY);
 %   POLY should be a [NxD] array, with N being the number of points and D
@@ -21,7 +21,7 @@ function len = polylineLength(poly, varargin)
 %   -> return 6.2831
 %
 %   See also:
-%   polylines2d, curveCentroid
+%   polylines2d, polylineCentroid
 %
 % ------
 % Author: David Legland

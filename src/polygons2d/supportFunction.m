@@ -1,5 +1,5 @@
 function h = supportFunction(polygon, varargin)
-%SUPPORTFUNCTION compute support function of a polygon
+%SUPPORTFUNCTION Compute support function of a polygon
 % 
 %   H = supportFunction(POLYGON, N)
 %   uses N points for suport function approximation

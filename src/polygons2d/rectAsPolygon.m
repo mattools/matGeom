@@ -1,5 +1,5 @@
 function varargout = rectAsPolygon(rect)
-%RECTASPOLYGON convert a (centered) rectangle into a series of points
+%RECTASPOLYGON Convert a (centered) rectangle into a series of points
 %
 %   P = rectAsPolygon(RECT);
 %   Converts rectangle given as [x0 y0 w h] or [x0 y0 w h theta] into a

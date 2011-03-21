@@ -1,5 +1,5 @@
 function loops = expandPolygon(poly, dist)
-%EXPANDPOLYGON expand a polygon by a given (signed) distance
+%EXPANDPOLYGON Expand a polygon by a given (signed) distance
 %
 %   POLY2 = expandPolygon(POLY, DIST);
 %   Associates to each edge of the polygon POLY the parallel line located

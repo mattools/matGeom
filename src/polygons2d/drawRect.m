@@ -1,5 +1,5 @@
 function varargout = drawRect(varargin)
-%DRAWRECT draw rectangle on the current axis
+%DRAWRECT Draw rectangle on the current axis
 %   
 %   r = DRAWRECT(x, y, w, h) draw rectangle with width W and height H, at
 %   position (X, Y).

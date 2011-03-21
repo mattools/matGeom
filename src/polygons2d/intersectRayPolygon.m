@@ -1,5 +1,5 @@
 function intersects = intersectRayPolygon(ray, poly)
-%INTERSECTRAYPOLYGON get intersection points between a ray and a polygon
+%INTERSECTRAYPOLYGON Intersection points between a ray and a polygon
 %
 %   P = intersectRayPolygon(RAY, POLY)
 %   Returns the intersection points of the ray RAY with polygon POLY. 

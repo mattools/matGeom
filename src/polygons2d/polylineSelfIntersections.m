@@ -1,5 +1,5 @@
 function varargout = polylineSelfIntersections(poly, varargin)
-%POLYLINESELFINTERSECTIONS  find self-intersections points of a polyline
+%POLYLINESELFINTERSECTIONS Find self-intersections points of a polyline
 %
 %   PTS = polylineSelfIntersections(POLY);
 %   Return the position of self intersection points

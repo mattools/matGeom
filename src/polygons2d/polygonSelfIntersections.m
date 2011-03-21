@@ -1,5 +1,6 @@
 function varargout = polygonSelfIntersections(poly, varargin)
-%POLYGONSELFINTERSECTIONS  find common points between 2 polygons
+%POLYGONSELFINTERSECTIONS Find-self intersection points of a polygon
+%
 %   PTS = polygonSelfIntersections(POLY)
 %   Return the position of self intersection points
 %

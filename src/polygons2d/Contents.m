@@ -27,8 +27,8 @@
 %   'Clockwise'.
 %
 %   Polylines can be parametrized in the following way:
-%   - the i-th vertex is located at position i-1
-%   - points of the i-th edge have positions ranging linearly from i-1 to i
+
+
 %   The parametrisation domain for an open polyline is from 0 to Nv-1, and
 %   from 0 to Nv for a closed polyline (positions 0 and Nv correspond to
 %   the same point).
@@ -45,72 +45,72 @@
 %
 % Polylines
 %   polylines2d               - Description of functions operating on polylines
-%   polylinePoint             - extract a point from a polyline
-%   polylineLength            - return length of a polyline given as a list of points
+%   polylinePoint             - Extract a point from a polyline
+%   polylineLength            - Return length of a polyline given as a list of points
 %   polylineCentroid          - Compute centroid of a curve defined by a series of points
-%   polylineSubcurve          - extract a portion of a polyline
-%   reversePolyline           - reverse a polyline, by iterating vertices from the end
-%   isPointOnPolyline         - check if a point belongs to a polyline
-%   projPointOnPolyline       - compute position of a point projected on a polyline
+%   polylineSubcurve          - Extract a portion of a polyline
+%   reversePolyline           - Reverse a polyline, by iterating vertices from the end
+%   isPointOnPolyline         - Test if a point belongs to a polyline
+%   projPointOnPolyline       - Compute position of a point projected on a polyline
 %   distancePointPolyline     - Compute shortest distance between a point and a polyline
-%   distancePolylines         - compute the shortest distance between 2 polylines
-%   intersectPolylines        - find common points between 2 polylines
-%   polylineSelfIntersections - find self-intersections points of a polyline
+%   distancePolylines         - Compute the shortest distance between 2 polylines
+%   intersectPolylines        - Find the common points between 2 polylines
+%   polylineSelfIntersections - Find self-intersections points of a polyline
 %
 % Curves (polylines with lot of vertices)
-%   parametrize               - return a parametrization of a curve
-%   curvature                 - estimate curvature of a curve defined by points
-%   cart2geod                 - convert cartesian coordinates to geodesic coord.
-%   geod2cart                 - convert geodesic coordinates to cartesian coord.
+%   parametrize               - Compute a parametrization of a curve, based on geodesic length
+%   curvature                 - Estimate curvature of a polyline defined by points
+%   cart2geod                 - Convert cartesian coordinates to geodesic coord.
+%   geod2cart                 - Convert geodesic coordinates to cartesian coord.
 %   curveMoment               - Compute inertia moment of a 2D curve
 %   curveCMoment              - Compute centered inertia moment of a 2D curve
 %   curveCSMoment             - Compute centered scaled moment of a 2D curve
 %
 % Polygons
 %   polygons2d                - Description of functions operating on polygons
-%   polygonPoint              - extract a point from a polygon
-%   polygonLoops              - divide a possibly self-intersecting polygon into a set of simple loops
-%   polygonSubcurve           - extract a portion of a polygon
-%   reversePolygon            - reverse a polygon, by iterating vertices from the end
-%   clipPolygon               - clip a polygon with a rectangular box
-%   clipPolygonHP             - clip a polygon with a Half-plane defined by a directed line
-%   intersectLinePolygon      - get intersection points between a line and a polygon
-%   intersectRayPolygon       - get intersection points between a ray and a polygon
-%   polygonSelfIntersections  - find common points between 2 polygons
+%   polygonPoint              - Extract a point from a polygon
+%   polygonLoops              - Divide a possibly self-intersecting polygon into a set of simple loops
+%   polygonSubcurve           - Extract a portion of a polygon
+%   reversePolygon            - Reverse a polygon, by iterating vertices from the end
+%   clipPolygon               - Clip a polygon with a rectangular box
+%   clipPolygonHP             - Clip a polygon with a Half-plane defined by a directed line
+%   intersectLinePolygon      - Intersection points between a line and a polygon
+%   intersectRayPolygon       - Intersection points between a ray and a polygon
+%   polygonSelfIntersections  - Find-self intersection points of a polygon
 %   projPointOnPolygon        - Compute position of a point projected on a polygon
-%   expandPolygon             - expand a polygon by a given (signed) distance
-%   splitPolygons             - convert a NaN separated polygon list to a cell array of polygons
-%   rectAsPolygon             - convert a (centered) rectangle into a series of points
-%   medialAxisConvex          - compute medial axis of a convex polygon
+%   expandPolygon             - Expand a polygon by a given (signed) distance
+%   splitPolygons             - Convert a NaN separated polygon list to a cell array of polygons
+%   rectAsPolygon             - Convert a (centered) rectangle into a series of points
+%   medialAxisConvex          - Compute medial axis of a convex polygon
 %
 % Measures on Polygons
-%   isPointInPolygon          - Check if a point is located inside a polygon
-%   polygonContains           - test if a point is contained in a multiply connected polygon
-%   polygonCentroid           - compute centroid (center of mass) of a polygon
-%   polygonArea               - compute the signed area of a polygon
-%   polygonLength             - compute perimeter of a polygon
-%   polygonNormalAngle        - compute normal angle at a vertex of the polygon
-%   polygonBounds             - compute bounding box of a polygon
+%   isPointInPolygon          - Test if a point is located inside a polygon
+%   polygonContains           - Test if a point is contained in a multiply connected polygon
+%   polygonCentroid           - Compute the centroid (center of mass) of a polygon
+%   polygonArea               - Compute the signed area of a polygon
+%   polygonLength             - Compute the perimeter of a polygon
+%   polygonNormalAngle        - Compute the normal angle at a vertex of the polygon
+%   polygonBounds             - Compute the bounding box of a polygon
 %   distancePointPolygon      - Compute shortest distance between a point and a polygon
-%   distancePolygons          - compute the shortest distance between 2 polygons
+%   distancePolygons          - Compute the shortest distance between 2 polygons
 %
 % Functions from stochastic geometry
-%   steinerPoint              - compute steiner point (weighted centroid) of a polygon
-%   steinerPolygon            - create a Steiner polygon from a set of vectors
-%   supportFunction           - compute support function of a polygon
-%   convexification           - compute convexification of a polygon
+%   steinerPoint              - Compute steiner point (weighted centroid) of a polygon
+%   steinerPolygon            - Create a Steiner polygon from a set of vectors
+%   supportFunction           - Compute support function of a polygon
+%   convexification           - Compute the convexification of a polygon
 %
 % Input / Output
-%   readPolygon               - read a polygon stored in a file
+%   readPolygon               - Read a polygon stored in a file
 %   polygonToRow              - Convert polygon coordinates to a row vector
 %   rowToPolygon              - Create a polygon from a row vector
 %
 % Drawing functions
-%   drawPolyline              - draw a polyline specified by a list of points
-%   drawPolygon               - draw a polygon specified by a list of points
-%   fillPolygon               - fill a polygon specified by a list of points
-%   drawRect                  - draw rectangle on the current axis
-%   drawRect2                 - draw centered rectangle on the current axis
+%   drawPolyline              - Draw a polyline specified by a list of points
+%   drawPolygon               - Draw a polygon specified by a list of points
+%   fillPolygon               - Fill a polygon specified by a list of points
+%   drawRect                  - Draw rectangle on the current axis
+%   drawOrientedBox           - Draw centered oriented rectangle
 %
 %
 %   Credits:
@@ -136,6 +136,7 @@ help('Contents');
 %   curveLength               - return length of a curve (a list of points)
 %   curveCentroid             - compute centroid of a curve defined by a series of points
 %   drawCurve                 - draw a curve specified by a list of points
+%   drawRect2                 - Draw centered rectangle on the current axis
 
 
 %% Others...

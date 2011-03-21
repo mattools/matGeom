@@ -1,5 +1,5 @@
 function poly2 = clipPolygon(polygon, w)
-%CLIPPOLYGON clip a polygon with a rectangular box
+%CLIPPOLYGON Clip a polygon with a rectangular box
 %
 %   POLY2 = clipPolygon(POLY, BOX);
 %   POLY is [Nx2] array of points
@@ -62,7 +62,7 @@ pc = centroid(pts);
 
 % sort vertices around polygon
 angle = edgeAngle([repmat(pc, [size(pts, 1) 1]) pts]);
-[dummy I] = sort(angle);
+[dummy I] = sort(angle); %#ok<ASGLU>
 
 % create resulting polygon
 poly2 = pts(I, :);

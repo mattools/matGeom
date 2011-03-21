@@ -1,5 +1,5 @@
 function kappa = curvature(varargin)
-%CURVATURE estimate curvature of a curve defined by points
+%CURVATURE Estimate curvature of a polyline defined by points
 %
 %   KAPPA = curvature(T, PX, PY, METHOD, DEGREE)
 %   First compute an approximation of the curve given by PX and PY, with

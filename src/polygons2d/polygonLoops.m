@@ -1,5 +1,5 @@
 function loops = polygonLoops(poly)
-%POLYGONLOOPS  divide a possibly self-intersecting polygon into a set of simple loops
+%POLYGONLOOPS Divide a possibly self-intersecting polygon into a set of simple loops
 %
 %   LOOPS = polygonLoops(POLYGON);
 %   POLYGON is a polygone defined by a series of vertices,
@@ -59,7 +59,7 @@ while true
     end
     
     % add portion of curve
-    loop = [loop;polygonSubcurve(poly, pos, positions(ind, 1))];
+    loop = [loop;polygonSubcurve(poly, pos, positions(ind, 1))]; %#ok<AGROW>
     
     % look for next intersection point
     pos = positions(ind, 2);
@@ -93,7 +93,7 @@ while ~isempty(positions)
         ind = find(positions(:,1)>pos, 1, 'first');
 
         % add portion of curve
-        loop = [loop;polygonSubcurve(poly, pos, positions(ind, 1))];
+        loop = [loop;polygonSubcurve(poly, pos, positions(ind, 1))]; %#ok<AGROW>
 
         % look for next intersection point
         pos = positions(ind, 2);
@@ -106,9 +106,9 @@ while ~isempty(positions)
     end
 
     % remove redundant vertices
-    loop(sum(loop(1:end-1,:) == loop(2:end,:) ,2)==2, :) = [];
+    loop(sum(loop(1:end-1,:) == loop(2:end,:) ,2)==2, :) = []; %#ok<AGROW>
     if sum(diff(loop([1 end], :))==0)==2
-        loop(end, :) = [];
+        loop(end, :) = []; %#ok<AGROW>
     end
 
     % add current loop to the list of loops

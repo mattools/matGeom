@@ -1,5 +1,5 @@
 function rev = reversePolygon(poly)
-%REVERSEPOLYGON  reverse a polygon, by iterating vertices from the end
+%REVERSEPOLYGON Reverse a polygon, by iterating vertices from the end
 %
 %   POLY2 = reversePolygon(POLY)
 %   POLY2 has same vertices as POLY, but in different order. The first

@@ -1,5 +1,5 @@
 function varargout = drawRect2(varargin)
-%DRAWRECT2 draw centered rectangle on the current axis
+%DRAWRECT2 Draw centered rectangle on the current axis
 %   
 %   r = drawRect2(x, y, w, h) draw rectangle with width W and height H,
 %   whose center is located at (x, y);
@@ -13,6 +13,7 @@ function varargout = drawRect2(varargin)
 %   r = drawRect2(coord) is the same as DRAWRECT2(X,Y,W,H), but all
 %   parameters are packed into one array, whose dimensions is 4*1 or 5*1.
 %
+%   deprecated: use 'drawOrientedBox' instead
 %
 %   See Also :
 %   drawRect
@@ -24,6 +25,8 @@ function varargout = drawRect2(varargin)
 %   created the 04/05/2004.
 %
 
+warning('polygons2d:deprecated', ...
+    'This function is deprecated, use "drawOrientedBox" instead');
 
 % default values
 theta = 0;

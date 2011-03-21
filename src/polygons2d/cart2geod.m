@@ -1,5 +1,5 @@
 function point = cart2geod(src, curve)
-%CART2GEOD convert cartesian coordinates to geodesic coord.
+%CART2GEOD Convert cartesian coordinates to geodesic coord.
 %
 %   PT2 = cart2geod(PT1, CURVE)
 %   PT1 is the point to transform, in Cartesian coordinates (same system

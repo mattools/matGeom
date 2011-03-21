@@ -1,5 +1,5 @@
 function point = polygonPoint(poly, pos)
-%POLYGONPOINT  extract a point from a polygon
+%POLYGONPOINT Extract a point from a polygon
 %
 %   POINT = polygonPoint(POLYGON, POS)
 %   

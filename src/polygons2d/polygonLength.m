@@ -1,5 +1,5 @@
 function len = polygonLength(varargin)
-%POLYGONLENGTH compute perimeter of a polygon
+%POLYGONLENGTH Compute the perimeter of a polygon
 %
 %   L = polygonLength(POLYGON);
 %   Computes the length of the boundary of a polygon. POLYGON is given by a
