@@ -1,5 +1,5 @@
 function pos = polynomialCurveProjection(tBounds, varargin)
-%POLYNOMIALCURVEPROJECTION projection of a point on a polynomial curve
+%POLYNOMIALCURVEPROJECTION Projection of a point on a polynomial curve
 %
 %   T = polynomialCurveProjection([T0 T1], XCOEFS, YCOEFS, POINT); 
 %   Computes the position of POINT on the polynomial curve, such that 

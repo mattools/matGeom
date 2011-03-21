@@ -1,5 +1,5 @@
 function v = polynomialCurveNormal(t, varargin)
-%POLYNOMIALCURVENORMAL compute the normal of a polynomial curve
+%POLYNOMIALCURVENORMAL Compute the normal of a polynomial curve
 %
 %   N = polynomialCurveNormal(T, XCOEF, YCOEF)
 %   XCOEF and YCOEF are row vectors of coefficients, in the form:

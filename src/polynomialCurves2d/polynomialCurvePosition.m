@@ -1,5 +1,5 @@
 function pos = polynomialCurvePosition(tBounds, varargin)
-%POLYNOMIALCURVEPOSITION compute position on a curve for a given length
+%POLYNOMIALCURVEPOSITION Compute position on a curve for a given length
 %
 %   POS = polynomialCurvePosition(T, XCOEF, YCOEF, L)
 %   XCOEF and YCOEF are row vectors of coefficients, in the form:

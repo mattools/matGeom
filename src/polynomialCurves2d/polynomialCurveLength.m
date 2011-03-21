@@ -1,5 +1,5 @@
 function L = polynomialCurveLength(tBounds, varargin)
-%POLYNOMIALCURVELENGTH compute the length of a polynomial curve
+%POLYNOMIALCURVELENGTH Compute the length of a polynomial curve
 %
 %   LENGTH = polynomialCurveLength(T, XCOEF, YCOEF)
 %   XCOEF and YCOEF are row vectors of coefficients, in the form:

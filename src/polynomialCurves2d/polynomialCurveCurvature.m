@@ -1,5 +1,5 @@
 function kappa = polynomialCurveCurvature(t, varargin)
-%POLYNOMIALCURVECURVATURE compute the local curvature of a polynomial curve
+%POLYNOMIALCURVECURVATURE Compute the local curvature of a polynomial curve
 %
 %   KAPPA = polynomialCurveCurvature(T, XCOEF, YCOEF)
 %   XCOEF and YCOEF are row vectors of coefficients, in the form:

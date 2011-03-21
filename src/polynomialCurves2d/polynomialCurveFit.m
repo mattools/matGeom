@@ -1,5 +1,5 @@
 function varargout = polynomialCurveFit(t, varargin)
-%POLYNOMIALCURVEFIT fit a polynomial curve to a series of points
+%POLYNOMIALCURVEFIT Fit a polynomial curve to a series of points
 %
 %   [XC YC] = polynomialCurveFit(T, XT, YT, ORDER)
 %   T is a Nx1 vector

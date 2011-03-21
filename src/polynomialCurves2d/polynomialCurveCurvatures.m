@@ -1,5 +1,5 @@
 function varargout = polynomialCurveCurvatures(t, varargin)
-%POLYNOMIALCURVECURVATURES compute curvatures of a polynomial revolution surface
+%POLYNOMIALCURVECURVATURES Compute curvatures of a polynomial revolution surface
 %
 %   KAPPAS = polynomialCurveCurvatures(T, XCOEF, YCOEF)
 %   XCOEF and YCOEF are row vectors of coefficients, in the form:

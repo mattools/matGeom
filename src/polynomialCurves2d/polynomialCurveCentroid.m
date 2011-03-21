@@ -1,5 +1,5 @@
 function centroid = polynomialCurveCentroid(tBounds, varargin)
-%POLYNOMIALCURVECENTROID compute the centroid of a polynomial curve
+%POLYNOMIALCURVECENTROID Compute the centroid of a polynomial curve
 %
 %   C = polynomialCurveCentroid(T, XCOEF, YCOEF)
 %   XCOEF and YCOEF are row vectors of coefficients, in the form:
