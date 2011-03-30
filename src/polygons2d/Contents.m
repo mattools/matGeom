@@ -26,9 +26,12 @@
 %   stands for 'Conter-Clockwise' (positive orientation), CW stands for
 %   'Clockwise'.
 %
-%   Polylines can be parametrized in the following way:
-
-
+%   Polylines are parametrized in the following way:
+%   * the i-th vertex is located at position i-1
+%   * points of the i-th edge have positions ranging linearly from i-1 to i
+%   The parametrisation domain for an open polyline is from 0 to Nv-1, and
+%   from 0 to Nv for a closed polyline (positions 0 and Nv correspond to
+%   the same point).
 %   The parametrisation domain for an open polyline is from 0 to Nv-1, and
 %   from 0 to Nv for a closed polyline (positions 0 and Nv correspond to
 %   the same point).
@@ -109,8 +112,8 @@
 %   drawPolyline              - Draw a polyline specified by a list of points
 %   drawPolygon               - Draw a polygon specified by a list of points
 %   fillPolygon               - Fill a polygon specified by a list of points
-%   drawRect                  - Draw rectangle on the current axis
-%   drawOrientedBox           - Draw centered oriented rectangle
+
+
 %
 %
 %   Credits:
@@ -137,7 +140,7 @@ help('Contents');
 %   curveLength               - return length of a curve (a list of points)
 %   curveCentroid             - compute centroid of a curve defined by a series of points
 %   drawCurve                 - draw a curve specified by a list of points
-%   drawRect2                 - Draw centered rectangle on the current axis
+
 
 
 %% Others...

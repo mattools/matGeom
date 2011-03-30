@@ -24,7 +24,7 @@ function ell = inertiaEllipse(points)
 %   drawEllipse(ell, 'linewidth', 2, 'color', 'r');
 %
 %   See also
-%   circles2d
+%   ellipses2d, drawEllipse
 %
 % ------
 % Author: David Legland
@@ -57,8 +57,9 @@ common = sqrt( (Ixx - Iyy)^2 + 4 * Ixy^2);
 ra = sqrt(2) * sqrt(Ixx + Iyy + common);
 rb = sqrt(2) * sqrt(Ixx + Iyy - common);
 
-% compute ellipse angle
+% compute ellipse angle in degrees
 theta = atan2(2 * Ixy, Ixx - Iyy) / 2;
+theta = rad2deg(theta);
 
 % create the resulting inertia ellipse
 ell = [xc yc ra rb theta];

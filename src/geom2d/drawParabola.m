@@ -14,7 +14,7 @@ function varargout = drawParabola(varargin)
 %      y(t) = A * t^2 + VY;
 %
 %   PARABOLA can also be defined by [XV YV A THETA], with theta being the
-%   angle of rotation of the parabola.
+%   angle of rotation of the parabola (in degrees and Counter-Clockwise).
 %
 %   drawParabola(PARABOLA, T);
 %   Specifies which range of 't' are used for drawing parabola. If T is an
@@ -32,8 +32,8 @@ function varargout = drawParabola(varargin)
 %
 %   Example:
 %   figure(1); clf; hold on;
-%   drawParabola([50 50 .2 pi/3]);
-%   drawParabola([50 50 .2 pi/3], [-1 1], 'color', 'r', 'linewidth', 2);
+%   drawParabola([50 50 .2 60]);
+%   drawParabola([50 50 .2 60], [-1 1], 'color', 'r', 'linewidth', 2);
 %   axis equal;
 %
 %   See Also:
@@ -47,11 +47,11 @@ function varargout = drawParabola(varargin)
 
 %   HISTORY
 %   2010-11-17 rewrite, change parametrisation, update doc
-
+%   2011-03-30 use degrees for angle
 
 % Extract parabola
 if nargin<1
-    error('geom2d:illegalArgument', ...
+    error('geom2d:IllegalArgument', ...
         'Please specify parabola representation');
 end
 
@@ -93,7 +93,7 @@ for i=1:length(x0)
     % compute transformation
     trans = ...
         createTranslation(x0(i), y0(i)) * ...
-        createRotation(theta(i)) * ...
+        createRotation(deg2rad(theta(i))) * ...
         createScaling(1, a);
     
 	% compute points on the parabola

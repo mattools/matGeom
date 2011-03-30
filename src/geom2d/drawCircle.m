@@ -13,7 +13,9 @@ function varargout = drawCircle(varargin)
 %   Specify CENTER as Nx2 array, and radius as a Nx1 array.
 %
 %   drawCircle(..., NSTEP);
-%   use NSTEP points to draw the curve. Default number is 128.
+%   Specify the number of edges that will be used to draw the circle.
+%   Default value is 72, creating an approximation of one point for each 5
+%   degrees.
 %
 %   drawCircle(..., NAME, VALUE);
 %   Specifies plotting options as pair of parameters name/value. See plot
@@ -39,23 +41,25 @@ function varargout = drawCircle(varargin)
 %       discretization steps, and circle as center+radius.
 
 
-% process inpuyt parameters
+% process input parameters
 var = varargin{1};
-if size(var, 2)==1
+if size(var, 2) == 1
     x0 = varargin{1};
     y0 = varargin{2};
     r  = varargin{3};
-    varargin(1:3)=[];
-elseif size(var, 2)==2
+    varargin(1:3) = [];
+    
+elseif size(var, 2) == 2
     x0 = var(:,1);
     y0 = var(:,2);
     r  = varargin{2};
-    varargin(1:2)=[];
-elseif size(var, 2)==3
+    varargin(1:2) = [];
+    
+elseif size(var, 2) == 3
     x0 = var(:,1);
     y0 = var(:,2);
     r  = var(:,3);
-    varargin(1)=[];
+    varargin(1) = [];
 else
     error('bad format for input in drawCircle');
 end
@@ -66,14 +70,14 @@ y0 = y0(:);
 r = r(:);
 
 % default number of discretization steps
-N = 128;
+N = 72;
 
 % check if discretization step is specified
 if ~isempty(varargin)
     var = varargin{1};
     if length(var)==1 && isnumeric(var)
         N = round(var);
-        varargin(1)=[];
+        varargin(1) = [];
     end
 end
 
@@ -86,13 +90,13 @@ sit = sin(t);
 h = zeros(size(x0));
 
 % compute discretization of each circle
-for i=1:length(x0)
-    xt = x0(i) + r(i)*cot;
-    yt = y0(i) + r(i)*sit;
+for i = 1:length(x0)
+    xt = x0(i) + r(i) * cot;
+    yt = y0(i) + r(i) * sit;
 
     h(i) = plot(xt, yt, varargin{:});
 end
 
-if nargout>0
-    varargout{1}=h;
+if nargout > 0
+    varargout = {h};
 end

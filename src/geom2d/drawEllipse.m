@@ -6,11 +6,14 @@ function varargout = drawEllipse(varargin)
 %   and second axis of half-length B. 
 %
 %   drawEllipse(..., THETA);
-%   Also specifies orientation of ellipse, given in radians. Origin of
+%   Also specifies orientation of ellipse, given in degrees. Origin of
 %   orientation is (Ox) axis. 
 %
 %   drawEllipse(PARAM);
 %   Puts all parameters into one single array.
+%
+%   drawEllipse(..., NAME, VALUE);
+%   specify drawing style of ellipse, see the help of plot function.
 %
 %   H = drawEllipse(...);
 %   Also returns handles to the created line objects.
@@ -18,16 +21,13 @@ function varargout = drawEllipse(varargin)
 %   -> Parameters can also be arrays. In this case, all arrays are supposed 
 %   to have the same size.
 %
-%
-%   [X Y] = drawEllipse(...) 
-%   Returns only positions of points used to draw ellipse, but does not
-%   draw the ellipse on the current axe. This allows to compute
-%   intersections of ellipse, or to keep result for a later use. 
-%   In this case, only one ellipse path is computed. If several parameters
-%   are entered, only the first one will be returned.
+%   Example:
+%   figure(1); clf; hold on;
+%   drawEllipse([50 50 40 20 30]);
+%   axis equal;
 %
 %   See also:
-%   circles2d, drawCircle, drawEllipseArc
+%   ellipses2d, drawCircle, drawEllipseArc, ellipseAsPolygon
 %
 %   ---------
 %   author : David Legland 
@@ -36,11 +36,12 @@ function varargout = drawEllipse(varargin)
 %
 
 %   HISTORY
-%   08/01/2004 returns coord of points when 2 output args are asked
-%   08/01/2004 fix bug in extraction of input parameters, theta was not
+%   2004-01-08 returns coord of points when 2 output args are asked
+%   2004-01-08 fix bug in extraction of input parameters, theta was not
 %       initialized in case of array of size 1*5
-%   13/08/2005 uses radians instead of degrees
-%   21/02/2008 add support for drawing styles, code cleanup
+%   2005-08-13 uses radians instead of degrees
+%   2008-02-21 add support for drawing styles, code cleanup
+%   2011-03-30 use degrees instead of radians, remove [x y] = ... format
 
 
 %% Extract input arguments
@@ -84,52 +85,29 @@ else
     error('drawEllipse: incorrect input arguments');
 end
 
-% angular positions of vertices
-t = linspace(0, 2*pi, 121);
-
-
-%% Process computation of polyline vertices
-
-if nargout >= 2
-    % return two arrays : x and y coordinates of points
-
-    if length(x0) > 1
-        error('only one ellipse can be specified');
-    end
-    
-    % pre-compute rotation angles
-    cot = cos(theta);
-    sit = sin(theta);
-    
-    % compute position of points used to draw first ellipse
-    xt = x0 + a * cos(t) * cot - b * sin(t)*sit;
-    yt = y0 + a * cos(t) * sit + b * sin(t)*cot;
-    
-    varargout = {xt yt};
-    return;
-end
-
 
 %% Process drawing of a set of ellipses
+
+% angular positions of vertices
+t = linspace(0, 2*pi, 145);
 
 % compute position of points to draw each ellipse
 h = zeros(length(x0), 1);
 for i = 1:length(x0)
-    % pre-compute rotation angles
-    cot = cos(theta(i));
-    sit = sin(theta(i));
+    % pre-compute rotation angles (given in degrees)
+    cot = cosd(theta(i));
+    sit = sind(theta(i));
     
     % compute position of points used to draw current ellipse
     xt = x0(i) + a(i) * cos(t) * cot - b(i) * sin(t) * sit;
     yt = y0(i) + a(i) * cos(t) * sit + b(i) * sin(t) * cot;
     
     % stores handle to graphic object
-    h(i) = line(xt, yt, styles{:});
+    h(i) = plot(xt, yt, styles{:});
 end
 
 % return handles if required
 if nargout > 0
     varargout = {h};
 end
-
 

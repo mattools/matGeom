@@ -9,7 +9,7 @@ function varargout = drawOrientedBox(box, varargin)
 %   drawOrientedBox(OBOX)
 %   Draws an oriented rectangle (or bounding box) on the current axis. 
 %   OBOX is a 1-by-5 row vector containing box center, dimension (length
-%   and width) and orientation (in radians): 
+%   and width) and orientation (in degrees): 
 %   OBOX = [CX CY LENGTH WIDTH THETA].
 %
 %   When OBOX is a N-by-5 array, the N boxes are drawn.
@@ -56,8 +56,8 @@ hr = zeros(length(cx), 1);
 % iterate on oriented boxes
 for i=1:length(cx)
     % pre-compute angle data
-    cot = cos(theta(i));
-    sit = sin(theta(i));
+    cot = cosd(theta(i));
+    sit = sind(theta(i));
     
     % x and y shifts
     wc = w(i)*cot;
@@ -74,5 +74,5 @@ for i=1:length(cx)
 end
 
 if nargout > 0
-    varargout{1} = hr;
+    varargout = {hr};
 end

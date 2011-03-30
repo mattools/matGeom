@@ -133,6 +133,8 @@
 % Various drawing functions
 %   drawBezierCurve      - Draw a cubic bezier curve defined by 4 control points
 %   drawParabola         - Draw a parabola on the current axis
+%   drawOrientedBox      - Draw centered oriented rectangle
+%   drawRect             - Draw rectangle on the current axis
 %   drawArrow            - Draw an arrow on the current axis
 %   drawLabels           - Draw labels at specified positions
 %   drawShape            - Draw various types of shapes (circles, polygons...)
@@ -182,6 +184,4 @@ help('Contents');
 
 
 %% Others...
-
-
-
+%   drawRect2            - Draw centered rectangle on the current axis

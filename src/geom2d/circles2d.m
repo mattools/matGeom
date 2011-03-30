@@ -8,11 +8,11 @@ function circles2d(varargin)
 %   turning Counter-clockwise) circles.
 %
 %   Circle arcs are represented by their center, their radius, the starting
-%   angle and the angle extent.
+%   angle and the angle extent, both in degrees:
 %   CA = [xc yc r theta0 dtheta];
 %   
 %   Ellipses are represented by their center, their 2 semi-axis length, and
-%   their angle with Ox direction.
+%   their angle (in degrees) with Ox direction.
 %   E = [xc yc A B theta];
 %
 %   See also:

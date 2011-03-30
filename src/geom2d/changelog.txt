@@ -1,8 +1,21 @@
 change log for geom2d
 
+geom2d, release 2011.03.21
+==========================
 
 New functions
-- intersectBoxes and mergeBoxes
+- added functions intersectLineCircle and intersectCircles
+- added functions inertiaEllipse, isPointInEllipse
+- added function drawBezierCurve
+- added functions intersectBoxes and mergeBoxes
+
+Changes 
+- re-organized the library in three sub-directories: geom2d, polygons2d, and
+    polynomialCurves2d
+- cleanup of code and doc
+
+Bug fixes
+- several bugs fixed in clipEdge, isPointOnEdge
 
 
 geom2d, release 2010.08.06

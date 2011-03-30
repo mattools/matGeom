@@ -8,18 +8,21 @@ function b = isPointInEllipse(point, ellipse, varargin)
 %   Specifies the tolerance value
 %
 %   Example:
-%   isPointInEllipse([1 0], [0 0 1])
+%   isPointInEllipse([1 0], [0 0 2 1 0])
 %   ans =
 %       1
-%   isPointInEllipse([0 0], [0 0 1])
+%   isPointInEllipse([0 0], [0 0 2 1 0])
 %   ans =
 %       1
-%   isPointInEllipse([1 1], [0 0 1])
+%   isPointInEllipse([1 1], [0 0 2 1 0])
 %   ans =
 %       0
+%   isPointInEllipse([1 1], [0 0 2 1 30])
+%   ans =
+%       1
 %
 %   See also:
-%   circles2d, isPointInCircle
+%   ellipses2d, isPointInCircle
 %
 %   ---------
 %   author : David Legland 
@@ -36,7 +39,7 @@ if ~isempty(varargin)
 end
 
 % compute ellipse to unit circle transform
-rot = createRotation(-ellipse(5));
+rot = createRotation(-deg2rad(ellipse(5)));
 sca = createScaling(1./ellipse(3:4));
 trans = sca * rot;
 
