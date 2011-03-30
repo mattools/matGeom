@@ -6,7 +6,7 @@ function varargout = drawParabola(varargin)
 %   Such a parabola admits a vertical axis of symetry.
 %
 %   The algebraic equation of parabola is given by:
-%      (Y - YV) = (X - VX)^2 / A
+%      (Y - YV) = A * (X - VX)^2
 %   Where XV and YV are vertex coordinates and A is parabola parameter.
 %
 %   A parametric equation of parabola is given by:
@@ -32,8 +32,8 @@ function varargout = drawParabola(varargin)
 %
 %   Example:
 %   figure(1); clf; hold on;
-%   drawParabola([50 50 .2 60]);
-%   drawParabola([50 50 .2 60], [-1 1], 'color', 'r', 'linewidth', 2);
+%   drawParabola([50 50 .2 30]);
+%   drawParabola([50 50 .2 30], [-1 1], 'color', 'r', 'linewidth', 2);
 %   axis equal;
 %
 %   See Also:
@@ -69,7 +69,7 @@ else
 end
 
 % extract parametrisation bounds
-bounds = [-10 10];
+bounds = [-100 100];
 if ~isempty(varargin)
     var = varargin{1};
     if isnumeric(var)
@@ -100,7 +100,7 @@ for i=1:length(x0)
     [xt yt] = transformPoint(t(:), t(:).^2, trans);
 
     % draw it
-    h(i) = line(xt, yt, varargin{:});
+    h(i) = plot(xt, yt, varargin{:});
 end
 
 % process output arguments

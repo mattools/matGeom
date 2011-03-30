@@ -31,6 +31,7 @@ function varargout = drawEllipse(varargin)
 %
 %   ---------
 %   author : David Legland 
+%   e-mail: david.legland@grignon.inra.fr
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 11/12/2003.
 %
@@ -57,16 +58,17 @@ for i = 1:length(varargin)
 end
 
 % extract ellipse parameters
-theta = 0;
 if length(varargin)==1
     % ellipse is given in a single array
     ellipse = varargin{1};
-    x0 = ellipse(1);
-    y0 = ellipse(2);
-    a  = ellipse(3);
-    b  = ellipse(4);
+    x0 = ellipse(:, 1);
+    y0 = ellipse(:, 2);
+    a  = ellipse(:, 3);
+    b  = ellipse(:, 4);
     if length(ellipse)>4
-        theta = ellipse(5);
+        theta = ellipse(:, 5);
+    else
+        theta = zeros(size(x0));
     end
     
 elseif length(varargin)>=4
