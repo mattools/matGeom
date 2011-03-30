@@ -1,4 +1,3 @@
-function matgeom(varargin)
 %MATGEOM Geometric Computing Toolbox
 % Version 1.0 21-Mar-2011 .
 %
@@ -14,6 +13,10 @@ function matgeom(varargin)
 %   meshes3d            - Manipulation of 3D surfacic meshes
 %
 %   Type 'help(MODULENAME)' for further info.
+%
+%   To install the library, with all sub-directories, run the script
+%   'setupMatGeom'.
+%
 %
 % ------
 % Author: David Legland
