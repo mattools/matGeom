@@ -1,13 +1,27 @@
 function poly = rowToPolygon(row, varargin)
 %ROWTOPOLYGON  Create a polygon from a row vector
 %
-%   output = rowToPolygon(input)
+%   POLY = rowToPolygon(ROW)
+%   Convert a 1-by-2*N row vector that concatenates all polygon vertex
+%   coordinates into a N-by-2 array of coordinates.
+%   Default ordering of coordinates in ROW is:
+%   [X1 Y1 X2 Y2 X3 Y3 .... XN YN].
+%
+%   POLY = rowToPolygon(ROW, METHOD)
+%   Specifies the method for concatenating coordinates. METHOS is one of:
+%   'interlaced': default method, described above.
+%   'packed': the vector ROW has format:
+%   [X1 X2 X3 ... XN Y1 Y2 Y3 ... YN].
 %
 %   Example
-%   rowToPolygon
+%   % Concatenate coordinates of a circle and draw it as a polygon
+%     t = linspace (0, 2*pi, 200);
+%     row = [cos(t) sin(t)];
+%     poly = rowToPolygon(row, 'packed');
+%     figure;drawPolygon(poly)
 %
 %   See also
-%
+%   polygons2d, polygonToRow
 %
 % ------
 % Author: David Legland

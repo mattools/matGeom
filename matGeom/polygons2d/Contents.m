@@ -18,6 +18,10 @@
 %   of the array representing the coordinates of a vertex. 
 %   Simple polygons are assumed to be closed, so there is no need to repeat
 %   the first vertex at the end. 
+%   As both polygons and polylines can be represented by a list of vertex
+%   coordinates, some functions also consider the vertex list itself. Such
+%   functions are prefixed by 'pointSet'. Also, many functions prefixed by
+%   'polygon' or 'polyline' works also on the other type of shape.
 %
 %   For multiple-connected polygons, the different connected boundaries are
 %   separated by a row [NaN NaN].
@@ -45,6 +49,10 @@
 %   P2 = [10 10;40 10;40 40;10 40;NaN NaN;20 20;20 30;30 30;30 20];
 %   figure;drawPolygon(P2); axis([0 50 0 50]);
 %
+%
+% Point Sets
+%   pointSetBounds            - Bounding box of a set of points
+%   pointSetsAverage          - Compute the average of several point sets
 %
 % Polylines
 %   polylinePoint             - Extract a point from a polyline
@@ -138,7 +146,6 @@ help('Contents');
 %   curveLength               - return length of a curve (a list of points)
 %   curveCentroid             - compute centroid of a curve defined by a series of points
 %   drawCurve                 - draw a curve specified by a list of points
-
 
 
 %% Others...
