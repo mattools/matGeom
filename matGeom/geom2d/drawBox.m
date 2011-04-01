@@ -1,4 +1,4 @@
-function varargout = drawBox(box)
+function varargout = drawBox(box, varargin)
 %DRAWBOX Draw a box defined by coordinate extents
 %   
 %   drawBox(BOX)
@@ -14,12 +14,11 @@ function varargout = drawBox(box)
 %   created the 10/12/2003.
 %
 
-% HISTORY
-% 2010-02-22 creation
-
+%   HISTORY
+%   2010-02-22 creation
+%   2011-04-01 add support for drawing option, fix bug for several boxes
 
 % default values
-
 xmin = box(:,1);
 xmax = box(:,2);
 ymin = box(:,3);
@@ -28,7 +27,7 @@ ymax = box(:,4);
 nBoxes = size(box, 1);
 r = zeros(nBoxes, 1);
 
-for i=1:length(nBoxes)
+for i = 1:nBoxes
     tx(1) = xmin(i);
     ty(1) = ymin(i);
     tx(2) = xmax(i);
@@ -40,9 +39,9 @@ for i=1:length(nBoxes)
     tx(5) = xmin(i);
     ty(5) = ymin(i);
 
-    r(i) = line(tx, ty);
+    r(i) = plot(tx, ty, varargin{:});
 end
 
-if nargout>0
-    varargout{1}=r;
+if nargout > 0
+    varargout = {r};
 end
