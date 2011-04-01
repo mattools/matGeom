@@ -29,7 +29,7 @@ function varargout = drawPolyline(varargin)
 %   drawPolyline([px py], 'closed', 'lineWidth', 2, 'lineStyle', '--');
 %
 %   See Also:
-%   polylines2d, drawPolygon
+%   polygons2d, drawPolygon
 %
 %   ---------
 %   author : David Legland 

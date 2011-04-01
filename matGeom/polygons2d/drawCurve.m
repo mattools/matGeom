@@ -29,7 +29,7 @@ function varargout = drawCurve(varargin)
 %   drawCurve([px py], 'closed', 'lineWidth', 2, 'lineStyle', '--');
 %
 %   See Also:
-%   polylines2d, drawPolygon
+%   polygons2d, drawPolyline
 %
 %   ---------
 %   author : David Legland 
@@ -56,7 +56,7 @@ var = varargin{1};
 if iscell(var)
     h = [];
     for i=1:length(var(:))
-        h = [h ; drawCurve(var{i}, varargin{2:end})];
+        h = [h ; drawCurve(var{i}, varargin{2:end})]; %#ok<AGROW>
     end
     if nargout>0
         varargout{1}=h;

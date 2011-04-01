@@ -23,7 +23,7 @@ function pts = intersectPolylines(poly1, varargin)
 %     axis([0 80 0 80]);
 %
 %   See also
-%   polylines2d, polylineSelfIntersections, intersectLinePolygon
+%   polygons2d, polylineSelfIntersections, intersectLinePolygon
 %
 %   This function uses the 'interX' function, found on the FileExchange,
 %   and stored in 'private' directory of this function.

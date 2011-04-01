@@ -17,7 +17,7 @@ function res = subCurve(curve, P1, P2, varargin)
 %   C2 = subCurve(C, 30, 60);
 %
 %   See also
-%   polylines2d
+%   polygons2d
 %
 % ------
 % Author: David Legland

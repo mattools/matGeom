@@ -19,7 +19,7 @@ function res = isPointOnPolyline(point, poly, varargin)
 %            1
 %
 %   See also
-%   points2d, polylines2d
+%   points2d, polygons2d
 %
 % ------
 % Author: David Legland

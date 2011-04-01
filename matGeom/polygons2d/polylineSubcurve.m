@@ -13,7 +13,7 @@ function res = polylineSubcurve(poly, t0, t1)
 %   drawCurve(poly2);
 %
 %   See also
-%   polylines2d, polygonSubCurve
+%   polygons2d, polygonSubCurve
 %
 % ------
 % Author: David Legland

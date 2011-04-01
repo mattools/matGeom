@@ -18,7 +18,7 @@ function point = polylinePoint(poly, pos)
 %
 %
 %   See also
-%
+%   polygons2d
 %
 % ------
 % Author: David Legland

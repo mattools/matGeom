@@ -6,7 +6,7 @@ function m = curveCMoment(curve, p, q)
 %   curveCMoment
 %
 %   See also
-%   curveMoment, curveCSMoment
+%   polygons2d, curveMoment, curveCSMoment
 %
 %   Reference
 %   Based on ideas and references in:

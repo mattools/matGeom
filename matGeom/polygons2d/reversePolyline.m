@@ -9,7 +9,7 @@ function rev = reversePolyline(poly)
 %   reversePolyline
 %
 %   See also
-%   polylines2d, reversePolygon
+%   polygons2d, reversePolygon
 %
 % ------
 % Author: David Legland

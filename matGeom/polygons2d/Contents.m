@@ -47,7 +47,6 @@
 %
 %
 % Polylines
-%   polylines2d               - Description of functions operating on polylines
 %   polylinePoint             - Extract a point from a polyline
 %   polylineLength            - Return length of a polyline given as a list of points
 %   polylineCentroid          - Compute centroid of a curve defined by a series of points
@@ -70,7 +69,6 @@
 %   curveCSMoment             - Compute centered scaled moment of a 2D curve
 %
 % Polygons
-%   polygons2d                - Description of functions operating on polygons
 %   polygonPoint              - Extract a point from a polygon
 %   polygonLoops              - Divide a possibly self-intersecting polygon into a set of simple loops
 %   polygonSubcurve           - Extract a portion of a polygon

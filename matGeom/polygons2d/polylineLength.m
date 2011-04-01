@@ -22,7 +22,7 @@ function len = polylineLength(poly, varargin)
 %       6.2831
 %
 %   See also:
-%   polylines2d, polylineCentroid, polygonLength
+%   polygons2d, polylineCentroid, polygonLength
 %
 % ------
 % Author: David Legland

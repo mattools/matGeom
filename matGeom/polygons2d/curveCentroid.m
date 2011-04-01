@@ -15,7 +15,7 @@ function center = curveCentroid(varargin)
 %
 %
 %   See also :
-%   polylines2d, centroid, polygonCentroid, curveLength
+%   polygons2d, centroid, polygonCentroid, curveLength
 %
 %   ---------
 %   author : David Legland 

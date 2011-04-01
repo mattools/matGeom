@@ -21,7 +21,7 @@ function center = polylineCentroid(varargin)
 %       [10 5]
 %
 %   See also:
-%   polylines2d, centroid, polygonCentroid, polylineLength
+%   polygons2d, centroid, polygonCentroid, polylineLength
 %
 %   ---------
 %   author : David Legland 

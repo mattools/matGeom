@@ -22,7 +22,7 @@ function kappa = curvature(varargin)
 %
 %
 %   See Also:
-%   polylines2d, parametrize
+%   polygons2d, parametrize
 %
 %   ---------
 %   author : David Legland 

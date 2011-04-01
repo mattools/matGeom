@@ -12,7 +12,7 @@ function varargout = distancePointPolyline(point, poly, varargin)
 %            5
 %
 %   See also
-%   polylines2d, points2d
+%   polygons2d, points2d
 %   distancePointEdge, projPointOnPolyline
 %
 % ------

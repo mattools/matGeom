@@ -20,7 +20,7 @@ function len = curveLength(varargin)
 %   -> return 6.2831
 %
 %   See also:
-%   polylines2d, curveCentroid
+%   polygons2d, curveCentroid
 %
 %   ---------
 %

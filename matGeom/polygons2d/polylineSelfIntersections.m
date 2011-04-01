@@ -23,7 +23,7 @@ function varargout = polylineSelfIntersections(poly, varargin)
 %           10 10
 %
 %   See also
-%   polylines2d, intersectPolylines, polygonSelfIntersections
+%   polygons2d, intersectPolylines, polygonSelfIntersections
 %
 % ------
 % Author: David Legland

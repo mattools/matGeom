@@ -31,7 +31,7 @@ function varargout = projPointOnPolyline(point, poly, varargin)
 %   projPointOnPolyline
 %
 %   See also
-%   points2d, polylines2d, polylinePoint
+%   points2d, polygons2d, polylinePoint
 %   distancePointPolyline
 %
 % ------
