@@ -2,7 +2,7 @@ function len = polylineLength(poly, varargin)
 %POLYLINELENGTH Return length of a polyline given as a list of points
 %
 %   L = polylineLength(POLY);
-%   POLY should be a [NxD] array, with N being the number of points and D
+%   POLY should be a N-by-D array, where N is the number of points and D is
 %   the dimension of the points.
 %
 %   L = polylineLength(..., TYPE);
@@ -16,12 +16,13 @@ function len = polylineLength(poly, varargin)
 %
 %
 %   Example:
-%   Compute the perimeter of a circle with radius 1
+%   % Compute the perimeter of a circle with radius 1
 %   polylineLength(circleAsPolygon([0 0 1], 500), 'closed')
-%   -> return 6.2831
+%   ans = 
+%       6.2831
 %
 %   See also:
-%   polylines2d, polylineCentroid
+%   polylines2d, polylineCentroid, polygonLength
 %
 % ------
 % Author: David Legland
@@ -31,10 +32,16 @@ function len = polylineLength(poly, varargin)
 
 
 %   HISTORY
-%   22/05/2006 manage any dimension for points, closed and open curves, 
+%   2006-05-22 manage any dimension for points, closed and open curves, 
 %       and update doc accordingly.
-%   30/04/2009 rename as polylineLength
+%   2009-04-30 rename as polylineLength
+%   2011-03-31 add control for empty polylines
 
+% check there are enough points
+if size(poly, 1) < 2
+    len = 0;
+    return;
+end
 
 % check whether the curve is closed or not (default is open)
 closed = false;
