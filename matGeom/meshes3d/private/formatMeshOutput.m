@@ -2,9 +2,9 @@ function res = formatMeshOutput(nbArgs, vertices, edges, faces)
 %FORMATMESHOUTPUT Format mesh output depending on nargout
 %
 %   OUTPUT = formatMeshOutput(NARGOUT, VERTICES, EDGES, FACES)
-%   Utilitary function to convert mesh data 
-%   If NARGOUT is 0 or 1, return a matlab structure with fields nodes,
-%   edges and vertices.
+%   Utilitary function to convert mesh data .
+%   If NARGOUT is 0 or 1, return a matlab structure with fields vertices,
+%   edges and faces.
 %   If NARGOUT is 2, return a cell array with data VERTICES and FACES.
 %   If NARGOUT is 3, return a cell array with data VERTICES, EDGES and
 %   FACES. 
