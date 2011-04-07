@@ -45,9 +45,13 @@ if ~isempty(varargin)
     acc = abs(varargin{1});
 end
 
-% adds a zero at the end of vectors
-v1(1,3) = 0;
-v2(1,3) = 0;
+% adds a zero at the end of 2D vectors
+if size(v1, 2) < 3
+    v1(1,3) = 0;
+end
+if size(v2, 2) < 3
+    v2(1,3) = 0;
+end
 
 % adapt size of inputs
 n1 = size(v1, 1);

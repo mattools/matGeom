@@ -40,8 +40,14 @@ radii = 2*sqrt(diag(S)*n)';
 % sort axes from greater to lower
 [radii ind] = sort(radii, 'descend');
 
+% format U to ensure first axis points to positive x direction
+U = U(ind, :);
+if U(1,1) < 0
+    U = -U;
+end
+
 % convert axes rotation matrix to Euler angles
-[phi theta psi] = rotation3dToEulerAngles(U(ind, :));
+[phi theta psi] = rotation3dToEulerAngles(U);
 
 % concatenate result to form an ellipsoid object
 ell = [center radii phi theta psi];
