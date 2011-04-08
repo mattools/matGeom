@@ -7,23 +7,17 @@ Mettre en place le site Sourceforge
 
 - trouver un logo pour SourceForge (2011.02.17)
 
-- faire une release pour figer l'impl.
-
-- generer la doc, la mettre sur le site
-
 - reflechir a convention pour les angles : radians ou degres ? (2011.03.12)
     + avantages : 
         * plus intuitif
-        * plus coherent par rapport a la plupart des fonctions Matlab
+        * plus coherent par rapport a certaines fonctions Matlab
     + idee generale : 
         * garder les radians pour les fonctions de bas niveau (angles entre
             droites, entre plans...)
+        * rotations utilisent des radians -> plus rapides, 
         * utiliser des degres pour representer les formes
         * ellipses et ellipsoides d'inertie renvoient des degres
         * angles d'Euler utilisent des degres
-        * rotations utilisent des degres -> plus precis pour angles proches des
-            mutliples de 90°
-    + faire ca dans une release ulterieure
    
 
 geom2d
@@ -46,28 +40,25 @@ geom2d
 polygons2d
 ==========
 
-- polygonAverage (2010.07.05)
-    - prend en entree un tableau de cellules de polygones, ou alors plusieurs
-        polygones, 
-    - calcule la moyenne des coordonnees de chaque sommet.
-    - 2011.03.20 add pointSetAverage ?
-
-- (2011.03.15) gerer les formes de type 'pointSet'
-    + "pointSetBounds", qui renvoie un box
-    + "pointSetDiameter" (2011.02.06)
+- gerer les formes de type 'pointSet'
+    + 2011.02.06 "pointSetDiameter"
         * en entree, un ensemble de points, et un angle (radians ?)
         * en sortie, le diamètre mesuré dans la direction spécifiée
-    + inclure au package 'polygons2d' ?
+    + inclure au package 'polygons2d'
     
-- fonction "enclosingRectangle" pour un ensemble de points (2011.02.06)
+- 2011.04.08 fonction 'minimumCaliperDiameter'
+    + entree : ensemble de points
+    + sortie : la largeur de Feret minimum
+    
+- 2011.02.06 fonction "enclosingRectangle" pour un ensemble de points 
     -> "orientedBox" ?
     -> renvoie centre, Longueur, largeur, et orientation
             
-- clipping de polygones (2010.08.10)
+- 2010.08.10 clipping de polygones
     
-- polygonTriangulate ? (2010.07.28)
+- 2010.07.28 polygonTriangulate ?
 
-- reprendre doc pour la 'position' des polygones et polylines (2010.07.05)
+- 2010.07.05 reprendre doc pour la 'position' des polygones et polylines
 
 - structure de donnees geom pour stocker des points type polygone, en reprenant
     idee du kdtree
@@ -75,6 +66,14 @@ polygons2d
     ou decouper par tranches de polylignes ayant un "petit" bounding box
     -> polygones monotones
     
+    
+polynomialCurves2d
+==================
+
+- 2011.04.04 update polynomialCurveSetFit
+
+- 2011.04.04 manage drawing styles in drawPolynomialCurve
+
 
 geom3d
 ======
@@ -100,8 +99,8 @@ geom3d
         * on applique les transfos de la fin vers le debut
         * yaw plus intuitif que roll en premier ?
         * marche bien pour des objets orientes selon leur axe d'inertie 
-    - pour les objets "plats" (cercles et ellipses 3D), ca semble moins
-        pertinent...
+    - pour les objets "plats" (cercles et ellipses 3D, tore...), ca semble
+        moins pertinent...
         
 - faire le point sur les differentes orientations d'axe 3D (2010.07.22)
     + X droite, Y fond, Z haut
@@ -115,15 +114,20 @@ geom3d
 meshes3d
 ========
         
-- meshes and polyhedra:
-    + (2010.10.06) document vertex position and edge and faces adjacencies for
-        typical meshes 
-    + add 'createDurerPolyhedron'
+- 2010.10.06 document vertex position and edge and faces adjacencies for
+    typical meshes 
     
-- ajouter des fonctions specifiques aux meshes:
-    * meshSubdivide (pour trimesh) (2010.06.20)
-    * vertexNormal (2010.06.20)
-    * clipMesh (2010.12.06)
-        -> keep only faces with all vertices within box (simple version)
-        -> clip each face, and create a new mesh with clipped faces.
-    * distancePointMesh     
+- 'createDurerPolyhedron'
+    
+- distancePointMesh
+    + 2011.04.07 distancePointTriangle3d
+
+- 2010.06.20 meshSubdivide (pour trimesh)
+
+- 2010.06.20 vertexNormal
+
+- 2010.12.06 clipMesh
+    -> clip each face, and create a new mesh with clipped faces.
+
+- 2011.04.07 function for creating triangular mesh for a sphere
+     createSphereMesh ?
