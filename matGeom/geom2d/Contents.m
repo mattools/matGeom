@@ -30,7 +30,7 @@
 %   vectors2d            - Description of functions operating on plane vectors
 %   createVector         - Create a vector from two points
 %   vectorNorm           - Compute norm of a vector, or of a set of vectors
-%   vectorAngle          - Compute angle of a vector with horizontal axis
+%   vectorAngle          - Angle of a vector, or between 2 vectors
 %   normalizeVector      - Normalize a vector to have norm equal to 1
 %   isPerpendicular      - Check orthogonality of two vectors
 %   isParallel           - Check parallelism of two vectors
