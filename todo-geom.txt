@@ -40,6 +40,8 @@ geom2d
 polygons2d
 ==========
 
+- 2011.04.08 vectorAngle : ajouter psb de donner 2 vecteurs
+
 - gerer les formes de type 'pointSet'
     + 2011.02.06 "pointSetDiameter"
         * en entree, un ensemble de points, et un angle (radians ?)

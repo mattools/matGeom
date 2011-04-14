@@ -1,4 +1,4 @@
-function test_suite = testExpandPolygon(varargin)
+function test_suite = testExpandPolygon(varargin) %#ok<STOUT>
 %TESTEXPANDPOLYGON  One-line description here, please.
 %   output = testExpandPolygon(input)
 %
@@ -17,7 +17,7 @@ function test_suite = testExpandPolygon(varargin)
 
 initTestSuite;
 
-function testSquare
+function testSquare %#ok<*DEFNU>
 p1 = [10 10];
 p2 = [20 10];
 p3 = [20 20];

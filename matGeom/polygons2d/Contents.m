@@ -53,6 +53,7 @@
 % Point Sets
 %   pointSetBounds            - Bounding box of a set of points
 %   pointSetsAverage          - Compute the average of several point sets
+%   minimumCaliperDiameter    - Minimum caliper diameter of a set of points
 %
 % Polylines
 %   polylinePoint             - Extract a point from a polyline
@@ -78,18 +79,18 @@
 %
 % Polygons
 %   polygonPoint              - Extract a point from a polygon
-%   polygonLoops              - Divide a possibly self-intersecting polygon into a set of simple loops
 %   polygonSubcurve           - Extract a portion of a polygon
 %   reversePolygon            - Reverse a polygon, by iterating vertices from the end
+%   projPointOnPolygon        - Compute position of a point projected on a polygon
+%   splitPolygons             - Convert a NaN separated polygon list to a cell array of polygons
 %   clipPolygon               - Clip a polygon with a rectangular box
 %   clipPolygonHP             - Clip a polygon with a Half-plane defined by a directed line
 %   intersectLinePolygon      - Intersection points between a line and a polygon
 %   intersectRayPolygon       - Intersection points between a ray and a polygon
 %   polygonSelfIntersections  - Find-self intersection points of a polygon
-%   projPointOnPolygon        - Compute position of a point projected on a polygon
+%   convexHull                - Convex hull of a set of points
+%   polygonLoops              - Divide a possibly self-intersecting polygon into a set of simple loops
 %   expandPolygon             - Expand a polygon by a given (signed) distance
-%   splitPolygons             - Convert a NaN separated polygon list to a cell array of polygons
-%   rectAsPolygon             - Convert a (centered) rectangle into a series of points
 %   medialAxisConvex          - Compute medial axis of a convex polygon
 %
 % Measures on Polygons
@@ -109,17 +110,16 @@
 %   supportFunction           - Compute support function of a polygon
 %   convexification           - Compute the convexification of a polygon
 %
-% Input / Output
+% Input, Output and conversions
 %   readPolygon               - Read a polygon stored in a file
 %   polygonToRow              - Convert polygon coordinates to a row vector
 %   rowToPolygon              - Create a polygon from a row vector
+%   rectAsPolygon             - Convert a (centered) rectangle into a series of points
 %
 % Drawing functions
 %   drawPolyline              - Draw a polyline specified by a list of points
 %   drawPolygon               - Draw a polygon specified by a list of points
 %   fillPolygon               - Fill a polygon specified by a list of points
-
-
 %
 %
 %   Credits:
