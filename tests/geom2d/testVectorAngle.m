@@ -1,4 +1,4 @@
-function test_suite = testVectorAngle(varargin)
+function test_suite = testVectorAngle(varargin) %#ok<STOUT>
 % One-line description here, please.
 %   output = testVectorAngle(input)
 %
@@ -16,7 +16,7 @@ function test_suite = testVectorAngle(varargin)
 
 initTestSuite;
 
-function testSingle
+function testSingle %#ok<*DEFNU>
 
 ang = vectorAngle([1 0]);
 assertAlmostEqual(0, ang);
@@ -82,3 +82,33 @@ function testArrayZeroCentered
 vecs = [1 0;0 1;0 -1;1 1;1 -1];
 angs = [0;pi/2;-pi/2;pi/4;-pi/4];
 assertElementsAlmostEqual(angs, vectorAngle(vecs, 0));
+
+function testCoupleSingleSingle
+
+v1 = [1 0];
+v2 = [0 1];
+ang = pi /2 ;
+assertElementsAlmostEqual(ang, vectorAngle(v1, v2));
+
+function testCoupleSingleArray
+
+v1 = [1 0];
+v2 = [0 1; 0 1; 1 1; -1 1];
+ang = [pi / 2 ;pi / 2 ;pi / 4 ; 3 * pi / 4];
+assertElementsAlmostEqual(ang, vectorAngle(v1, v2));
+
+
+function testCoupleArraySingle
+
+v1 = [0 1; 0 1; 1 1; -1 1];
+v2 = [-1 0];
+ang = [pi / 2 ;pi / 2 ; 3 * pi / 4 ; pi / 4];
+assertElementsAlmostEqual(ang, vectorAngle(v1, v2));
+
+
+function testCoupleArrayArray
+
+v1 = [1 0; 0 1; 1 1; -1 1];
+v2 = [0 1; 1 0; -1 1; -1 0];
+ang = [pi / 2 ;3 * pi / 2 ;pi / 2 ; pi / 4];
+assertElementsAlmostEqual(ang, vectorAngle(v1, v2));

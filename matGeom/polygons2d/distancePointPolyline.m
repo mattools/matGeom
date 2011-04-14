@@ -22,18 +22,18 @@ function varargout = distancePointPolyline(point, poly, varargin)
 % Copyright 2009 INRA - Cepia Software Platform.
 
 %   HISTORY
-%   23/06/2009 compute all distances in one call
+%   2009-06-23 compute all distances in one call
 
 % number of points
 Np = size(point, 1);
 
 % allocate memory for result
-minDist = inf*ones(Np, 1);
+minDist = inf * ones(Np, 1);
 
 % process each point
-for p=1:Np
+for p = 1:Np
     % construct the set of edges
-    edges = [poly(1:end-1,:) poly(2:end,:)];
+    edges = [poly(1:end-1, :) poly(2:end, :)];
     
     % compute distance between current each point and all edges
     dist = distancePointEdge(point(p, :), edges);

@@ -1,4 +1,4 @@
-function test_suite = testDistancePointEdge(varargin)
+function test_suite = testDistancePointEdge(varargin) %#ok<STOUT>
 %TESTDISTANCEPOINTEDGE  One-line description here, please.
 %   output = testDistancePointEdge(input)
 %
@@ -17,7 +17,7 @@ function test_suite = testDistancePointEdge(varargin)
 
 initTestSuite;
 
-function testBasic
+function testBasic %#ok<*DEFNU>
 point = [0 0];
 edge = [1 2 3 4];
 assertElementsAlmostEqual(distancePointEdge(point, edge), sqrt(5));
@@ -46,3 +46,14 @@ assertElementsAlmostEqual(distancePointEdge([5 8], edge), 1);
 assertElementsAlmostEqual(distancePointEdge([6 2], edge), sqrt(13));
 assertElementsAlmostEqual(distancePointEdge([0 6], edge), sqrt(13));
 
+function testSingleMulti
+point = [5 5];
+edges = [0 0 10 0;10 0 10 10;10 10 20 10;10 0 0 10];
+exp = [5;5;5*sqrt(2);0];
+assertElementsAlmostEqual(exp, distancePointEdge(point, edges));
+
+function testMultiSingle
+edge  = [10 10 20 10];
+points = [10 10;15 10;20 10;10 0;30 10];
+exp = [0;0;0;10;10];
+assertElementsAlmostEqual(exp, distancePointEdge(points, edge));

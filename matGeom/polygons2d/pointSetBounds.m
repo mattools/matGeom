@@ -2,14 +2,19 @@ function box = pointSetBounds(points)
 %POINTSETBOUNDS Bounding box of a set of points
 %
 %   BOX = pointSetBounds(POINTS)
-%   Returns the bounding box of the set of points POINTS. POITNS can be
-%   either a N-by-2 or N-by-3 array. The result BOX is a 1-by-4 or 1by-6
+%   Returns the bounding box of the set of points POINTS. POINTS can be
+%   either a N-by-2 or N-by-3 array. The result BOX is a 1-by-4 or 1-by-6
 %   array, containing:
 %   [XMIN XMAX YMIN YMAX] (2D point sets)
 %   [XMIN XMAX YMIN YMAX ZMIN ZMAX] (3D point sets)
 %
 %   Example
-%   pointSetBounds
+%     % Draw the bounding box of a set of random points
+%     points = rand(30, 2);
+%     drawPoint(points, '.');
+%     hold on;
+%     box = pointSetBounds(points);
+%     drawBox(box, 'r');
 %
 %   See also
 %   polygonBounds, drawBox
@@ -19,6 +24,9 @@ function box = pointSetBounds(points)
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2011-04-01,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
+
+%   HISTORY
+%   2011-04-08 add example
 
 % compute extreme x and y values
 xmin = min(points(:,1));

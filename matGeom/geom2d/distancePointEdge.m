@@ -3,11 +3,12 @@ function varargout = distancePointEdge(point, edge)
 %
 %   DIST = distancePointEdge(POINT, EDGE);
 %   Return the euclidean distance between edge EDGE and point POINT. 
-%   EDGE has the form : [x1 y1 x2 y2], and POINT is [x y].
-%   If EDGE is [Nx4] array, rsult is [Nx1] array computes for each edge.
-%   If POINT is [Nx2], then result is computed for each point.
-%   If both POINT and EDGE are array, result is [Nx1], computed for each
-%   corresponding point and edge.
+%   EDGE has the form: [x1 y1 x2 y2], and POINT is [x y].
+%
+%   If EDGE is N-by-4 array, result is N-by-1 array computed for each edge.
+%   If POINT is a N-by-2 array, the result is computed for each point.
+%   If both POINT and EDGE are array, they must have the same number of
+%   rows, and the result is computed for each couple point(i,:);edge(i,:).
 %
 %   [DIST POS] = distancePointEdge(POINT, EDGE);
 %   Also returns the position of closest point on the edge. POS is
@@ -23,44 +24,36 @@ function varargout = distancePointEdge(point, edge)
 %   created the 07/04/2004.
 %
 
-%   HISTORY:
-%   24/06/2005: rename, and change arguments sequence
-%   30/04/2009 add possibility to return position of closest point
-
-% ensure inputs have consistent sizes
-if size(edge, 1)==1 && size(point, 1)>1
-    edge = repmat(edge, [size(point, 1) 1]);
-end
-if size(point, 1)==1 && size(edge, 1)>1
-    point = repmat(point, [size(edge, 1) 1]);
-end
-
-% pre-allocate memory
-N = size(edge, 1);
-dist = zeros(N, 1);
+%   HISTORY
+%   2005-06-24 rename, and change arguments sequence
+%   2009-04-30 add possibility to return position of closest point
+%   2011-04-14 add checkup for degenerate edges, improve speed, update doc
 
 % direction vector of each edge
-dx = edge(:, 3)-edge(:,1);
-dy = edge(:, 4)-edge(:,2);
+dx = edge(:, 3) - edge(:,1);
+dy = edge(:, 4) - edge(:,2);
 
-% compute position of points projected on edge line
-tp = ((point(:, 2) - edge(:, 2)).*dy + (point(:, 1) - edge(:, 1)).*dx) ./ (dx.*dx+dy.*dy);
-p0 = edge(:, 1:2) + [tp tp].*[dx dy];
+% compute position of points projected on the supporting line
+% (Size of tp is the max number of edges or points)
+delta = dx .* dx + dy .* dy;
+tp = ((point(:, 1) - edge(:, 1)) .* dx + (point(:, 2) - edge(:, 2)) .* dy) ./ delta;
 
-% find points before, on, and after the edge.
-ind0 = tp<0;
-ind  = tp>=0 & tp<=1;
-ind1 = tp>1;
+% ensure degenerated edges are correclty processed (consider the first
+% vertex is the closest)
+tp(delta < eps) = 0;
 
-% compute distance, depending on which point (limit1, limit2, or projected
-% point).
-dist(ind0) = distancePoints(point(ind0, :), edge(ind0, 1:2), 'diag');
-dist(ind)  = distancePoints(point(ind, :),  p0(ind, :), 'diag');
-dist(ind1) = distancePoints(point(ind1, :), edge(ind1, 3:4), 'diag');
+% change position to ensure projected point is located on the edge
+tp(tp < 0) = 0;
+tp(tp > 1) = 1;
+
+% coordinates of projected point
+p0 = [edge(:,1) + tp .* dx, edge(:,2) + tp .* dy];
+
+% compute distance between point and its projection on the edge
+dist = sqrt((point(:,1) - p0(:,1)) .^ 2 + (point(:,2) - p0(:,2)) .^ 2);
 
 % process output arguments
 varargout{1} = dist;
-if nargout>1
-    varargout{2} = min(max(tp, 0), 1);
+if nargout > 1
+    varargout{2} = tp;
 end
-
