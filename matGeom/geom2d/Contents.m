@@ -35,6 +35,7 @@
 %   isPerpendicular      - Check orthogonality of two vectors
 %   isParallel           - Check parallelism of two vectors
 %   transformVector      - Transform a vector with an affine transform
+%   rotateVector         - Rotate a vector by a given angle
 %
 % Straight lines
 %   lines2d              - Description of functions operating on planar lines

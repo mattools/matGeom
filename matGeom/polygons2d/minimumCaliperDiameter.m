@@ -108,13 +108,3 @@ while rotated_angle < pi
 
 end
 
-
-function vr = rotateVector(v, angle)
-% rotate a vector by a given angle
-% angle is given in radians
-
-% precomputes angles
-cot = cos(angle);
-sit = sin(angle);
-
-vr = [cot * v(:,1) - sit * v(:,2) , sit * v(:,1) + cot * v(:,2)];

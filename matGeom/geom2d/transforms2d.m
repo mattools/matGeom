@@ -17,7 +17,7 @@ function transforms2d(varargin)
 %   createTranslation, createRotation, createScaling, createBasisTransform
 %   createHomothecy, createLineReflection, fitAffineTransform2d
 %   transformPoint, transformVector, transformLine, transformEdge
-%
+%   rotateVector
 %
 % ------
 % Author: David Legland

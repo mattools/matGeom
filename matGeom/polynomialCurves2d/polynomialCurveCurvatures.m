@@ -67,7 +67,7 @@ end
 % compute the matrix which transform points such that axis becomes the
 % vertical axis
 angle   = lineAngle(axis);
-trans   = rotation(axis(1:2), pi/2-angle);
+trans   = createRotation(axis(1:2), pi/2 - angle);
 
 
 %% Coordinate of curve points

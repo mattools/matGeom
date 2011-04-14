@@ -21,7 +21,7 @@ function varargout = transformVector(varargin)
 %
 %
 %   See also:
-%   vectors2d, transforms2d, translation, rotation, transformPoint
+%   vectors2d, transforms2d, rotateVector, transformPoint
 %
 %   ---------
 %
