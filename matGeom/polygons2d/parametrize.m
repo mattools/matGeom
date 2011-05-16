@@ -13,7 +13,7 @@ function par = parametrize(varargin)
 %   TODO: add normalization option (result between 0 and 1).
 %   
 %   See also:
-%   polygons2d, curveLength
+%   polylines2d, polylineLength
 %
 %   ---------
 %   author : David Legland 

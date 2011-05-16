@@ -45,35 +45,40 @@ function varargout = polynomialCurveCurvatures(t, varargin)
 % polynomial coefficients for each coordinate
 var = varargin{1};
 if iscell(var)
+    % coefficients are given in a cell array
     xCoef = var{1};
     yCoef = var{2};
     varargin(1)=[];
-elseif size(var, 1)==1
+    
+elseif size(var, 1) == 1
+    % coefficients are given as two numeric vectors
     xCoef = varargin{1};
     yCoef = varargin{2};
     varargin(1:2)=[];
+    
 else
+    % coefficients are given as a 2-by-N numeric array
     xCoef = var(1,:);
     yCoef = var(2,:);
     varargin(1)=[];
 end
 
-% revolution axis is vertical axis by default
+% revolution axis is the 2D vertical axis by default
 axis = [0 0 0 1];
 if ~isempty(varargin)
     axis = varargin{1};
 end
-
-% compute the matrix which transform points such that axis becomes the
-% vertical axis
-angle   = lineAngle(axis);
-trans   = createRotation(axis(1:2), pi/2 - angle);
 
 
 %% Coordinate of curve points
 
 % compute coordinates in original base
 pts = polynomialCurvePoint(t, xCoef, yCoef);
+
+% compute the matrix which transform points such that axis becomes the
+% vertical axis
+angle   = lineAngle(axis);
+trans   = createRotation(axis(1:2), pi/2 - angle);
 
 % transform points
 pts = transformPoint(pts, trans);
@@ -114,13 +119,13 @@ ys = vect(:,2);
 %% computation of curvatures
 
 % compute local curvatures of polynomial curve
-kappa1  = sign(pts(:,1)).*(xs.*yp - xp.*ys) ./ power(xp.*xp + yp.*yp, 3/2);
-kappa2  = -yp./abs(pts(:,1)) ./ sqrt(xp.*xp + yp.*yp);
+kappa1  = sign(pts(:,1)) .* (xs.*yp - xp.*ys) ./ power(xp.*xp + yp.*yp, 3/2);
+kappa2  = -yp ./ abs(pts(:,1)) ./ sqrt(xp.*xp + yp.*yp);
 
 
 %% Format output arguments
 
-if nargout<2
+if nargout < 2
     varargout{1} = [kappa1 kappa2];
 else
     varargout{1} = kappa1;

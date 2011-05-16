@@ -36,11 +36,13 @@ geom2d
 
 - 2011.03.15 reincorporer la Toolbox "graphs2d" (apres un peu de menage...)
 
- 
+- 2011.04.26 drawCenteredEdge : utiliser des angles en degres
+
+- 2011.04.26 mise a jour de la page angles2d pour les conventions
+
+
 polygons2d
 ==========
-
-- 2011.04.08 vectorAngle : ajouter psb de donner 2 vecteurs
 
 - gerer les formes de type 'pointSet'
     + 2011.02.06 "pointSetDiameter"
