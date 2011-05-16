@@ -1,0 +1,183 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      --><title>demoOnionPeeling</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2011-05-16"><meta name="m-file" content="demoOnionPeeling"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#3">Data generation</a></li><li><a href="#4">Convex hull</a></li><li><a href="#5">Onion peeling</a></li></ul></div><pre class="codeinput"><span class="keyword">function</span> demoOnionPeeling(varargin)
+</pre><pre class="codeinput"><span class="comment">%DEMOONIONPEELING  Onion peeling of a set of points</span>
+<span class="comment">%</span>
+<span class="comment">%   Just a demo for the convexHull function</span>
+<span class="comment">%</span>
+<span class="comment">%   Example</span>
+<span class="comment">%   demoOnionPeeling</span>
+<span class="comment">%</span>
+<span class="comment">%   See also</span>
+<span class="comment">%   convexHull, polygons2d</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+<span class="comment">% ------</span>
+<span class="comment">% Author: David Legland</span>
+<span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+<span class="comment">% Created: 2011-04-08,    using Matlab 7.9.0.529 (R2009b)</span>
+<span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+</pre><h2>Data generation<a name="3"></a></h2><pre class="codeinput"><span class="comment">% random points within unit square</span>
+points = rand(50, 2);
+
+<span class="comment">% display</span>
+figure; hold <span class="string">on</span>;
+drawPoint(points, <span class="string">'.'</span>);
+</pre><img vspace="5" hspace="5" src="demoOnionPeeling_01.png" alt=""> <h2>Convex hull<a name="4"></a></h2><pre class="codeinput"><span class="comment">% compute hull</span>
+hull = convexHull(points);
+
+<span class="comment">% display</span>
+drawPolygon(hull, <span class="string">'linewidth'</span>, 2);
+</pre><img vspace="5" hspace="5" src="demoOnionPeeling_02.png" alt=""> <h2>Onion peeling<a name="5"></a></h2><pre class="codeinput"><span class="comment">% initialize array of hulls</span>
+layers = {};
+nLayers = 0;
+
+<span class="comment">% remove convex hull of the current set of points, and iterates until there</span>
+<span class="comment">% is no more point on the hull</span>
+<span class="keyword">while</span> size(points, 1) &gt; 2
+    <span class="comment">% compute current layer</span>
+    [hull inds] = convexHull(points);
+
+    <span class="comment">% add a layer</span>
+    nLayers = nLayers + 1;
+    layers{nLayers} = hull; <span class="comment">%#ok&lt;AGROW&gt;</span>
+
+    <span class="comment">% remove vertices of the convex hull</span>
+    points(inds, :) = [];
+<span class="keyword">end</span>
+
+<span class="comment">% draw resulting layers</span>
+<span class="keyword">for</span> i = 1:nLayers
+    drawPolygon(layers{i});
+<span class="keyword">end</span>
+</pre><img vspace="5" hspace="5" src="demoOnionPeeling_03.png" alt=""> <p class="footer"><br>
+      Published with MATLAB&reg; 7.9<br></p></div><!--
+##### SOURCE BEGIN #####
+function demoOnionPeeling(varargin)
+%DEMOONIONPEELING  Onion peeling of a set of points
+%
+%   Just a demo for the convexHull function
+%
+%   Example
+%   demoOnionPeeling
+%
+%   See also
+%   convexHull, polygons2d
+%
+%
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% Author: David Legland
+% e-mail: david.legland@grignon.inra.fr
+% Created: 2011-04-08,    using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011 INRA - Cepia Software Platform.
+
+
+%% Data generation
+
+% random points within unit square
+points = rand(50, 2);
+
+% display
+figure; hold on;
+drawPoint(points, '.');
+
+
+%% Convex hull
+
+% compute hull
+hull = convexHull(points);
+
+% display
+drawPolygon(hull, 'linewidth', 2);
+
+
+%% Onion peeling
+
+% initialize array of hulls
+layers = {};
+nLayers = 0;
+
+% remove convex hull of the current set of points, and iterates until there
+% is no more point on the hull
+while size(points, 1) > 2
+    % compute current layer
+    [hull inds] = convexHull(points);
+    
+    % add a layer
+    nLayers = nLayers + 1;
+    layers{nLayers} = hull; %#ok<AGROW>
+    
+    % remove vertices of the convex hull
+    points(inds, :) = [];
+end
+
+% draw resulting layers
+for i = 1:nLayers
+    drawPolygon(layers{i});
+end
+
+
+##### SOURCE END #####
+--></body></html>
