@@ -17,7 +17,8 @@ function b = isPointInPolygon(point, poly)
 %        0
 %
 %   See also
-%   points2d, polygons2d, inpolygon
+%   points2d, polygons2d, inpolygon, isPointInTriangle
+
 %
 % ------
 % Author: David Legland

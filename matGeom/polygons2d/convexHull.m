@@ -27,5 +27,13 @@ function [hull inds] = convexHull(points)
 % Created: 2011-04-08,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
+% checkup on array size
+if size(points, 1) < 3
+    hull = points;
+    inds = 1:size(points, 1);
+    return;
+end
+
+% compute convex hull by calling the 'convhull' function
 inds = convhull(points(:,1), points(:,2));
 hull = points(inds, :);

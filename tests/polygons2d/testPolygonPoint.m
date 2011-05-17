@@ -1,4 +1,4 @@
-function test_suite = testPolygonPoint(varargin)
+function test_suite = testPolygonPoint(varargin) %#ok<STOUT>
 %TESTPOLYGONPOINT  One-line description here, please.
 %   output = testPolygonPoint(input)
 %
@@ -17,7 +17,7 @@ function test_suite = testPolygonPoint(varargin)
 
 initTestSuite;
 
-function testSquare
+function testSquare %#ok<DEFNU>
 
 p1 = [10 10];
 p2 = [20 10];

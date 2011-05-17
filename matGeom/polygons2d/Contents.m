@@ -96,6 +96,7 @@
 % Measures on Polygons
 %   isPointInPolygon          - Test if a point is located inside a polygon
 %   polygonContains           - Test if a point is contained in a multiply connected polygon
+%   isPointInTriangle         - Test if a point is located inside a triangle
 %   polygonCentroid           - Compute the centroid (center of mass) of a polygon
 %   polygonArea               - Compute the signed area of a polygon
 %   polygonLength             - Compute the perimeter of a polygon
