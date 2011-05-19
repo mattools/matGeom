@@ -24,7 +24,7 @@ x = median(nodes(mnodes, 1));
 y = median(nodes(mnodes, 2));
 
 % index of reference node
-refNode = findPointIndex([x y], nodes);
+refNode = findPoint([x y], nodes);
 mnodes = sort(mnodes(mnodes ~= refNode));
 
 for n = 1:length(mnodes)

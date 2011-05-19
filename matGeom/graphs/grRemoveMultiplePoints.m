@@ -27,10 +27,10 @@ while n <= length(nodes)
     x = nodes(n, 1);
     y = nodes(n, 2);
     
-    p1 = findPointIndex([x-1, y], nodes);
-    p2 = findPointIndex([x+1, y], nodes);
-    p3 = findPointIndex([x, y-1], nodes);
-    p4 = findPointIndex([x, y+1], nodes);
+    p1 = findPoint([x-1, y], nodes);
+    p2 = findPoint([x+1, y], nodes);
+    p3 = findPoint([x, y-1], nodes);
+    p4 = findPoint([x, y+1], nodes);
     
     p = [p1 p2 p3 p4];
     p = p(p ~= 0);
@@ -64,4 +64,3 @@ if nargout == 2
     varargout{2} = edges;
 end
 
-return;
