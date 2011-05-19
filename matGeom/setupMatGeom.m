@@ -7,7 +7,6 @@ function setupMatGeom(varargin)
 %   Example
 %   setupMatGeom;
 %
-%   See also
 %
 %
 % ------
@@ -20,9 +19,18 @@ function setupMatGeom(varargin)
 fileName = mfilename('fullpath');
 libDir = fileparts(fileName);
 
+moduleNames = {...
+    'geom2d', 'polygons2d', 'graphs', ...
+    'polynomialCurves2d', ...
+    'geom3d', 'meshes3d'};
+
+disp('Installing MatGeom Library');
+
 % add all library modules
-addpath(fullfile(libDir, 'geom2d'));
-addpath(fullfile(libDir, 'polygons2d'));
-addpath(fullfile(libDir, 'polynomialCurves2d'));
-addpath(fullfile(libDir, 'geom3d'));
-addpath(fullfile(libDir, 'meshes3d'));
+for i = 1:length(moduleNames)
+    name = moduleNames{i};
+    fprintf('Adding module: %-20s', name);
+    addpath(fullfile(libDir, name));
+    disp(' (ok)');
+end
+
