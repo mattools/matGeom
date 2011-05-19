@@ -34,9 +34,7 @@ geom2d
         * "shapeToString" ?
     + saveShape(shape, fileName)
 
-- 2011.03.15 reincorporer la Toolbox "graphs2d" (apres un peu de menage...)
-
-- 2011.04.26 drawCenteredEdge : utiliser des angles en degres
+- 2011.03.15 reincorporer la Toolbox "graphs" (apres un peu de menage...)
 
 - 2011.04.26 mise a jour de la page angles2d pour les conventions
 
@@ -49,10 +47,6 @@ polygons2d
         * en entree, un ensemble de points, et un angle (radians ?)
         * en sortie, le diamètre mesuré dans la direction spécifiée
     + inclure au package 'polygons2d'
-    
-- 2011.04.08 fonction 'minimumCaliperDiameter'
-    + entree : ensemble de points
-    + sortie : la largeur de Feret minimum
     
 - 2011.02.06 fonction "enclosingRectangle" pour un ensemble de points 
     -> "orientedBox" ?
