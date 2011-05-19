@@ -1,4 +1,4 @@
-function varargout = polynomialCurveSetFit(seg, varargin)
+function [coefs lblBranches] = polynomialCurveSetFit(seg, varargin)
 %POLYNOMIALCURVESETFIT Fit a set of polynomial curves to a segmented image
 %
 %   COEFS = polynomialCurveSetFit(IMG);
@@ -43,7 +43,7 @@ seg(:, [1 end]) = 1;
 seg = bwmorph(seg, 'shrink', Inf);
 
 % compute image of multiple points (intersections between curves)
-imgNodes = imfilter(double(seg), ones([3 3])).*seg > 3;
+imgNodes = imfilter(double(seg), ones([3 3])) .* seg > 3;
 
 % compute coordinate of nodes, as c entroids of the multiple points
 lblNodes = bwlabel(imgNodes, 4);
@@ -74,7 +74,7 @@ coefs = cell(nBranches, 1);
 
 
 % For each curve, find interpolated polynomial curve
-for i=1:nBranches
+for i = 1:nBranches
     disp(i);
     
     % extract points corresponding to current curve
@@ -82,19 +82,19 @@ for i=1:nBranches
     points = chainPixels(imgBranch);
     
     % check number of points is sufficient
-    if size(points, 1)<max(deg+1-2, 2)
+    if size(points, 1) < max(deg+1-2, 2)
         % find labels of nodes
         inds = unique(lblNodes(imdilate(imgBranch, ones(3,3))));
-        inds = inds(inds~=0);
+        inds = inds(inds ~= 0);
         
-        if length(inds)<2
+        if length(inds) < 2
             disp(['Could not find extremities of branch number ' num2str(i)]);
             continue;
         end
         
         % consider extremity nodes
-        node0 = nodes(inds(1),:);
-        node1 = nodes(inds(2),:);
+        node0 = nodes(inds(1), :);
+        node1 = nodes(inds(2), :);
         
         % use only a linear approximation
         xc = zeros(1, deg+1);
@@ -120,7 +120,7 @@ for i=1:nBranches
     
     % parametrization of the polyline
     t = parametrize(points);
-    t = t/max(t);
+    t = t / max(t);
     
     % fit a polynomial curve to the set of points
     [xc yc] = polynomialCurveFit(...
@@ -132,16 +132,6 @@ for i=1:nBranches
     coefs{i} = [xc;yc];
 end
 
-
-%% Post-processing
-
-% manage outputs
-if nargout==1
-    varargout{1} = coefs;
-elseif nargout==2
-    varargout{1} = coefs;
-    varargout{2} = lblBranches;
-end
 
 
 
@@ -168,15 +158,15 @@ if ~isempty(varargin)
 end
 
 % matrice de voisinage
-if conn==4
+if conn == 4
     f = [0 1 0;1 1 1;0 1 0];
-elseif conn==8
+elseif conn == 8
     f = ones([3 3]);
 end
 
 % find extremity points
-nb = imfilter(double(img), f).*img;
-imgEnding = nb==2 | nb==1;
+nb = imfilter(double(img), f) .* img;
+imgEnding = nb == 2 | nb == 1;
 [yi xi] = find(imgEnding);
 
 % extract coordinates of points
@@ -193,8 +183,8 @@ end
 % allocate memory
 points  = zeros(length(x), 2);
 
-if conn==8
-    for i=1:size(points, 1)
+if conn == 8
+    for i = 1:size(points, 1)
         % avoid multiple neighbors (can happen in loops)
         ind = ind(1);
         
@@ -202,13 +192,15 @@ if conn==8
         points(i,:) = [x(ind) y(ind)];
 
         % remove processed coordinate
-        x(ind) = [];    y(ind) = [];
+        x(ind) = [];
+        y(ind) = [];
 
         % find next candidate
         ind = find(abs(x-points(i,1))<=1 & abs(y-points(i,2))<=1);
     end
+    
 else
-    for i=1:size(points, 1)
+    for i = 1:size(points, 1)
         % avoid multiple neighbors (can happen in loops)
         ind = ind(1);
         
@@ -216,7 +208,8 @@ else
         points(i,:) = [x(ind) y(ind)];
 
         % remove processed coordinate
-        x(ind) = [];    y(ind) = [];
+        x(ind) = [];
+        y(ind) = [];
 
         % find next candidate
         ind = find(abs(x-points(i,1)) + abs(y-points(i,2)) <=1 );

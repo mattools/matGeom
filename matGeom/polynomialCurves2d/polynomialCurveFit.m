@@ -152,7 +152,8 @@ beqy = zeros(0, 1);
 % Process local conditions
 while ~isempty(varargin)
     if length(varargin)==1
-        warning('wrong number of arguments in polynomialCurvefit, forgot the last one');
+        warning('MatGeom:PolynomialCurveFit:ArgumentNumber', ...
+            'Wrong number of arguments in polynomialCurvefit');
     end
 
     % extract parameter t, and cell array of local conditions
@@ -166,21 +167,21 @@ while ~isempty(varargin)
     factY = ones(1, Dy+1);
 
     % start condition initialisations
-    for i=1:size(cond, 1)
+    for i = 1:size(cond, 1)
         % degrees of each polynomial
         powX = [zeros(1, i) 1:Dx+1-i];
         powY = [zeros(1, i) 1:Dy+1-i];
         
         % update conditions for x coordinate
         if ~isempty(cond{i,1})
-            Aeqx = [Aeqx ; factY.*power(ti, powX)];
-            beqx = [beqx; cond{i,1}];
+            Aeqx = [Aeqx ; factY.*power(ti, powX)]; %#ok<AGROW>
+            beqx = [beqx; cond{i,1}]; %#ok<AGROW>
         end
 
         % update conditions for y coordinate
         if ~isempty(cond{i,2})
-            Aeqy = [Aeqy ; factY.*power(ti, powY)];
-            beqy = [beqy; cond{i,2}];
+            Aeqy = [Aeqy ; factY.*power(ti, powY)]; %#ok<AGROW>
+            beqy = [beqy; cond{i,2}]; %#ok<AGROW>
         end
         
         % update polynomial degrees for next derivative
@@ -213,7 +214,7 @@ options = optimset('display', 'off');
 
 % main matrix for x coordinate, size L*(degX+1)
 T = ones(L, Dx+1);
-for i=1:Dx
+for i = 1:Dx
     T(:, i+1) = power(t, i);
 end
 
@@ -222,7 +223,7 @@ xc = lsqlin(T, xt, zeros(1, Dx+1), 1, Aeqx, beqx, [], [], [], options)';
 
 % main matrix for y coordinate, size L*(degY+1)
 T = ones(L, Dy+1);
-for i=1:Dy
+for i = 1:Dy
     T(:, i+1) = power(t, i);
 end
 
