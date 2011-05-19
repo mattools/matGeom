@@ -5,7 +5,7 @@ function diam = graphDiameter(v, e, l)
 %   Computes the diameter of the graph given by V and E. The diameter of
 %   the graph is the greatest eccentricity over all vertices in the graph.
 %
-%   CENTER = graphCenter(V, E, L)
+%   D = graphDiameter(V, E, L)
 %   Specifies the weight of each edge for computing the distances. Default
 %   is to consider a weight of 1 for each edge.
 %
