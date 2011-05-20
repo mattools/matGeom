@@ -1,4 +1,4 @@
-function test_suite = testIntersectLines(varargin)
+function test_suite = testIntersectLinePolygon(varargin) %#ok<STOUT>
 %TESTINTERSECTLINES  One-line description here, please.
 %   output = testIntersectLines(input)
 %
@@ -18,7 +18,7 @@ function test_suite = testIntersectLines(varargin)
 initTestSuite;
 
 
-function testSquare
+function testSquare %#ok<*DEFNU>
 poly = [0 0;10 0;10 10;0 10];
 
 lineH1 = [5 5 1 0];
@@ -69,3 +69,11 @@ lineV2 = [20 0 0 3];
 intersects = intersectLinePolygon(lineV2, poly);
 target = [20 10];
 assertTrue(ismember(target, intersects, 'rows'));
+
+function testUniquePoints
+% Check that function returns unique results, even for vertex points
+
+poly = [0 0;10 0;10 10;0 10];
+line = [5 5 1 1];
+intersects = intersectLinePolygon(line, poly);
+assertEqual(2, size(intersects, 1), 'Wrong number of intersections');
