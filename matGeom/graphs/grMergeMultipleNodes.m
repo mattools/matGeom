@@ -12,7 +12,6 @@ function varargout = grMergeMultipleNodes(varargin)
 %   * remove edges that link same nodes
 %
 %   -----
-%
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 09/08/2004.
@@ -26,9 +25,7 @@ n = [];
 e = [];
 f = [];
 
-% ---------------------------------------------------------------
-% extract data of first graph
-
+% extract data of the graph
 var = varargin{1};
 if iscell(var)
     % graph is stored as a cell array : first cell is nodes, second one is
@@ -65,7 +62,6 @@ end
 % simplify graph to remove multiple nodes, and adapt edges and faces
 % indices
 
-
 % simplify nodes
 [n, i, j] = unique(n, 'rows'); %#ok<ASGLU>
 
@@ -78,16 +74,16 @@ e = unique(sort(e, 2), 'rows');
 % change faces indices
 if iscell(f)
     % faces stored as cell array (irregular mesh)
-	for k=1:length(f)
+	for k = 1:length(f)
         face = f{k};
-        for i=1:length(face(:))
+        for i = 1:length(face(:))
             face(i) = j(face(i));
         end
         f{k} = face; %#ok<AGROW>
 	end 
 else
     % faces indices stored as regular array (square or triangle mesh).
-    for i=1:length(f(:))
+    for i = 1:length(f(:))
         f(i) = j(f(i)); %#ok<AGROW>
     end
 end

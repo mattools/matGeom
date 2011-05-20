@@ -18,7 +18,7 @@ function labels = grLabel(nodes, edges)
 %       2   
 %
 %   See also
-%   getNeighbourNodes
+%   getNeighborNodes
 %
 %
 % ------
@@ -31,11 +31,12 @@ function labels = grLabel(nodes, edges)
 Nn = size(nodes, 1);
 labels = (1:Nn)';
 
-% iteration
+% iteration until stability
 modif = true;
 while modif
     modif = false;
     
+    % compute the minimum label in the neighborhood of each node
     for i = 1:Nn
         neigh = grNeighborNodes(edges, i);
         neighLabels = labels([i;neigh]);
@@ -50,7 +51,7 @@ while modif
     end
 end
 
-% change to have fewer labels
+% renumbering to have fewer labels
 labels2 = unique(labels);
 for i = 1:length(labels2)
     labels(labels == labels2(i)) = i;

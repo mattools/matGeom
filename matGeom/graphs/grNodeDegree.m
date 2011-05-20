@@ -24,8 +24,8 @@ function degree = grNodeDegree(node, edges)
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
 %   HISTORY
-%   10/02/2004 : documentation
-%   17/01/2006 : change name, reimplement, and rewrite doc.
+%   10/02/2004 documentation
+%   17/01/2006 change name, reimplement, and rewrite doc.
 
 degree = zeros(size(node));
 

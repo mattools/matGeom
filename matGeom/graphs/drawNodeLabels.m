@@ -24,6 +24,11 @@ function varargout = drawNodeLabels(nodes, value)
 Nn = size(nodes, 1);
 Nd = size(nodes, 2);
 
+% check input size
+if length(value) ~= Nn
+    error('Value array must have same length as node number');
+end
+
 % allocate memory
 h = zeros(Nn, 1);
 

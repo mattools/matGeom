@@ -39,6 +39,9 @@ function varargout = vectorize(img)
 %   18/01/2006 : rewrite by using a label for each point, making it working
 %   faster
 
+
+%% Initialisations
+
 % nodes array
 [y x] = find(img>0);
 points = [x y];
@@ -49,11 +52,11 @@ edges  = zeros(0, 2);
 
 % adapt datasize of label image to the number of points.
 n = length(x);
-if n<256
+if n < 256
     typ = 'uint8';
-elseif n<power(2, 16)
+elseif n < power(2, 16)
     typ = 'uint16';
-elseif n<power(2, 32);
+elseif n < power(2, 32);
     typ = 'uint32';
 else
     typ = 'uint64';
@@ -62,32 +65,30 @@ end
 % create label image
 dim = size(img);
 img = zeros(dim, typ);
-for i=1:length(x)
+for i = 1:length(x)
     img(y(i), x(i)) = i;
 end
 
 %% detection of edges
 
-t = cputime;
-
-% first line -----------
-for x=2:dim(2)
+% first line 
+for x = 2:dim(2)
     % continue if no point
-    if img(1, x)==0
+    if img(1, x) == 0
         continue;
     end
     
     % check the point to the left
-    if img(1,x-1)>0
-        edges = [edges; img(1, x) img(1,x-1)];
+    if img(1, x-1) > 0
+        edges = [edges; img(1, x) img(1, x-1)];
     end
 end
 
-% normal lines --------------------------------------
-for y=2:dim(1)
+% normal lines 
+for y = 2:dim(1)
     
-    % first point of the line --------
-    if img(y, 1)>0
+    % first point of the line 
+    if img(y, 1) > 0
 
         % check point on the top
         if img(y-1,1)>0
@@ -100,7 +101,7 @@ for y=2:dim(1)
         end
     end
     
-    % each 'normal' point of the line --------
+    % each 'normal' point of the line 
     for x=2:dim(2)-1
         if ~img(y,x)
             continue;
@@ -128,7 +129,7 @@ for y=2:dim(1)
         
     end
     
-    % last point of the line ------------
+    % last point of the line 
     if img(y, dim(2))
 
         % check point on the left
@@ -148,7 +149,8 @@ for y=2:dim(1)
     end
 end
 
-%save time;
+
+%% Format output arguments
 
 % process output depending on how many arguments are needed
 if nargout == 1
@@ -162,4 +164,3 @@ if nargout == 2
     varargout{2} = edges;
 end
 
-return;

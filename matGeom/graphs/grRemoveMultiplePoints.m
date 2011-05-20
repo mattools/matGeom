@@ -39,7 +39,7 @@ while n <= length(nodes)
         [nodes edges] = grMergeNodes(nodes, edges, [n p]);
     end
     
-    n=n+1;
+    n = n+1;
 end
 
 % renumerate edges
