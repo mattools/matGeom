@@ -1,7 +1,7 @@
 function varargout = drawEllipsoid(varargin)
 %DRAWELLIPSOID Draw a 3D ellipsoid
 %
-%   output = drawEllipsoid(input)
+%   drawEllipsoid(ELLI)
 %
 %   Example
 %   drawEllipsoid
@@ -19,7 +19,7 @@ function varargout = drawEllipsoid(varargin)
 % process input options: when a string is found, assumes this is the
 % beginning of options
 options = {'FaceColor', 'g', 'linestyle', 'none'};
-for i=1:length(varargin)
+for i = 1:length(varargin)
     if ischar(varargin{i})
         options = [options(1:end) varargin(i:end)];
         varargin = varargin(1:i-1);
@@ -34,7 +34,7 @@ ellPsi   = 0;
 
 % Parse the input (try to extract center coordinates and radius)
 if isempty(varargin)
-    % no input: assumes unit sphere
+    % no input: assumes ellipsoid with defualt shape
     xc = 0;	yc = 0; zc = 0;
     a = 5; b = 4; c = 3;
     
@@ -90,9 +90,9 @@ phi     = linspace(0, 2*pi, nPhi+1);
 
 % convert to cartesian coordinates
 sintheta = sin(theta);
-x = cos(phi')*sintheta;
-y = sin(phi')*sintheta;
-z = ones(length(phi),1)*cos(theta);
+x = cos(phi') * sintheta;
+y = sin(phi') * sintheta;
+z = ones(length(phi),1) * cos(theta);
 
 % convert unit basis to ellipsoid basis
 sca     = createScaling3d(a, b, c);
