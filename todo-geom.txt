@@ -5,13 +5,13 @@ nom du projet global : "matGeom" (pour Matlab Geometry)
 Mettre en place le site Sourceforge
 ===================================
 
-- trouver un logo pour SourceForge (2011.02.17)
+* trouver un logo pour SourceForge (2011.02.17)
 
-- reflechir a convention pour les angles : radians ou degres ? (2011.03.12)
-    + avantages : 
+* reflechir a convention pour les angles : radians ou degres ? (2011.03.12)
+    * avantages : 
         * plus intuitif
         * plus coherent par rapport a certaines fonctions Matlab
-    + idee generale : 
+    * idee generale : 
         * garder les radians pour les fonctions de bas niveau (angles entre
             droites, entre plans...)
         * rotations utilisent des radians -> plus rapides, 
@@ -23,86 +23,93 @@ Mettre en place le site Sourceforge
 geom2d
 ======
     
-- pour les fonctions de dessin, prevoir : (2010.07.02)
-    + option de trace sous forme de chaine simple
-    + option de trace sous forme de couple 'param' + 'value'
+* pour les fonctions de dessin, prevoir : (2010.07.02)
+    * option de trace sous forme de chaine simple
+    * option de trace sous forme de couple 'param' + 'value'
 
-- 2011.03.15 prevoir fonctions de sauvegarde / chargement des formes, ex:
-    + parseShape(string) : renvoie une forme
-    + readShape(filename) : renvoie un ensemble de formes (comment ?)
-    + printShape(shape) : renvoie une chaine de caractères
+* 2011.03.15 prevoir fonctions de sauvegarde / chargement des formes, ex:
+    * parseShape(string) : renvoie une forme
+    * readShape(filename) : renvoie un ensemble de formes (comment ?)
+    * printShape(shape) : renvoie une chaine de caractères
         * "shapeToString" ?
-    + saveShape(shape, fileName)
+    * saveShape(shape, fileName)
 
-- 2011.04.26 mise a jour de la page angles2d pour les conventions
+* 2011.04.26 mise a jour de la page angles2d pour les conventions
 
 
 polygons2d
 ==========
 
-- gerer les formes de type 'pointSet'
+* gerer les formes de type 'pointSet'
     + 2011.02.06 "pointSetDiameter"
         * en entree, un ensemble de points, et un angle (radians ?)
         * en sortie, le diamètre mesuré dans la direction spécifiée
     + inclure au package 'polygons2d'
     
-- 2011.02.06 fonction "enclosingRectangle" pour un ensemble de points 
+* 2011.02.06 fonction "enclosingRectangle" pour un ensemble de points 
     -> "orientedBox" ?
     -> renvoie centre, Longueur, largeur, et orientation
             
-- 2010.08.10 clipping de polygones
+* 2010.08.10 clipping de polygones
     
-- 2010.07.28 polygonTriangulate ?
+* 2010.07.28 polygonTriangulate ?
 
-- 2010.07.05 reprendre doc pour la 'position' des polygones et polylines
+* 2010.07.05 reprendre doc pour la 'position' des polygones et polylines
 
-- structure de donnees geom pour stocker des points type polygone, en reprenant
+* structure de donnees geom pour stocker des points type polygone, en reprenant
     idee du kdtree
     voir par exemple polygones avec ensembles de points ayant la meme direction ?
     ou decouper par tranches de polylignes ayant un "petit" bounding box
     -> polygones monotones
     
-    
+graphs
+======
+
+* 2011.05.22 homogeneiser prefixes des fonctions: 'graphXXX' -> 'grXXX'
+    ou alors garder prefixe 'graph' pour fonction de mesure générales sur le
+    graph (ex: graphDiameter, graphRadius)
+
+   
 polynomialCurves2d
 ==================
 
-- 2011.04.04 update polynomialCurveSetFit
+* 2011.04.04 update polynomialCurveSetFit
 
-- 2011.04.04 manage drawing styles in drawPolynomialCurve
+* 2011.04.04 manage drawing styles in drawPolynomialCurve
 
 
 geom3d
 ======
    
-- Conventions pour les angles 3d pas geniales... (2010.07.28)
+* Conventions pour les angles 3d pas geniales... (2010.07.28)
     ex: drawCircle3d: theta+phi+psi
     pas vraiment de lien avec les angles d'Euler.
         2011.03.21 si, mais convention ZYZ, qui est pertinente aussi...
     
-- Prposition de convention pour les angles (2011.03.12)
-    - partir sur angles d'Euler en convention XYZ (yaw-pitch-roll), base [0 0 0]
-    - stocker dans cet ordre
+* Prposition de convention pour les angles (2011.03.12)
+    * partir sur angles d'Euler en convention XYZ (yaw-pitch-roll), base [0 0 0]
+    * stocker dans cet ordre
         * centre
         * taille
         * orientation (yaw, pitch roll dans cet ordre)
-    - et appliquer les transfos dans cet ordre :
+    * et appliquer les transfos dans cet ordre :
         * Rotation autour Ox (roll),
         * Rotation autour Oy (pitch),
         * Rotation autour Oz (yaw),
         * scaling
         * recentrage
-    - Avantages :
+    * Avantages :
         * on applique les transfos de la fin vers le debut
         * yaw plus intuitif que roll en premier ?
         * marche bien pour des objets orientes selon leur axe d'inertie 
-    - pour les objets "plats" (cercles et ellipses 3D, tore...), ca semble
+    * pour les objets "plats" (cercles et ellipses 3D, tore...), ca semble
         moins pertinent...
         
-- faire le point sur les differentes orientations d'axe 3D (2010.07.22)
+* faire le point sur les differentes orientations d'axe 3D (2010.07.22)
     + X droite, Y fond, Z haut
     + X droite, Y haut, Z avant
 
-- (2011.02.17) fitting functions 
+* (2011.02.17) fitting functions 
     + fitPlane
     + fitLine3d
     
@@ -110,20 +117,20 @@ geom3d
 meshes3d
 ========
         
-- 2010.10.06 document vertex position and edge and faces adjacencies for
+* 2010.10.06 document vertex position and edge and faces adjacencies for
     typical meshes 
     
-- 'createDurerPolyhedron'
+* 'createDurerPolyhedron'
     
-- distancePointMesh
+* distancePointMesh
     + 2011.04.07 distancePointTriangle3d
 
-- 2010.06.20 meshSubdivide (pour trimesh)
+* 2010.06.20 meshSubdivide (pour trimesh)
 
-- 2010.06.20 vertexNormal
+* 2010.06.20 vertexNormal
 
-- 2010.12.06 clipMesh
+* 2010.12.06 clipMesh
     -> clip each face, and create a new mesh with clipped faces.
 
-- 2011.04.07 function for creating triangular mesh for a sphere
+* 2011.04.07 function for creating triangular mesh for a sphere
      createSphereMesh ?
