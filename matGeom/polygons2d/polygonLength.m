@@ -1,9 +1,16 @@
-function len = polygonLength(varargin)
-%POLYGONLENGTH Compute the perimeter of a polygon
+function len = polygonLength(poly, varargin)
+%POLYGONLENGTH Perimeter of a polygon
 %
 %   L = polygonLength(POLYGON);
-%   Computes the length of the boundary of a polygon. POLYGON is given by a
-%   N*2 array of vertices.
+%   Computes the boundary length of a polygon. POLYGON is given by a N-by-2
+%   array of vertices. 
+%
+%   Example
+%     % Perimeter of a circle approximation
+%     poly = circleAsPolygon([0 0 1], 200);
+%     polygonLength(poly)
+%     ans =
+%         6.2829
 %
 %   See also:
 %   polygons2d, polygonCentroid, polygonArea, drawPolygon, polylineLength
@@ -16,25 +23,20 @@ function len = polygonLength(varargin)
 
 %   HISTORY
 %   2011-03-31 add control for empty polygons, code cleanup
-
+%   2011-05-27 fix bugs
 % If first argument is a cell array, this is a multi-polygon, and we simply
 % add the lengths of individual polygons
-if iscell(varargin{1})
-    var = varargin{1};
+if iscell(poly)
     len = 0;
-    for i=1:length(var)
-        len = len + polygonLength(var{i});
+    for i = 1:length(poly)
+        len = len + polygonLength(poly{i});
     end
+    return;
 end
 
-% Extract X and Y coordinates
-if nargin == 1
-    px = var(:,1);
-    py = var(:,2);
-    
-elseif nargin == 2
-    px = varargin{1};
-    py = varargin{2};
+% case of a polygon given as two coordinate arrays
+if nargin == 2
+    poly = [poly varargin{1}];
 end
 
 % check there are enough points
@@ -43,11 +45,10 @@ if size(poly, 1) < 2
     return;
 end
 
-% ensure last point is the same as first one
-N = length(px);
-dx = px([2:N 1]) - px(1:N);
-dy = py([2:N 1]) - py(1:N);
-
 % compute length
-len = sum(hypot(dx, dy));
-
+if size(poly, 2) == 2
+    dp = diff(poly([1:end 1], :), 1, 1);
+    len = sum(hypot(dp(:, 1), dp(:, 2)));
+else
+    len = sum(sqrt(sum(diff(poly([1:end 1], :), 1, 1).^2, 2)));
+end
