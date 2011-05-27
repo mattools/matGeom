@@ -25,7 +25,7 @@ function plane = createPlane(varargin)
 %   planes3d, medianPlane
 %   
 %   ---------
-%   author : David Legland 
+%   author: David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 18/02/2005.
 %
@@ -35,7 +35,7 @@ function plane = createPlane(varargin)
 %   21/08/2006 return normalized planes
 %   06/11/2006 update doc for planes created from normal
 
-if length(varargin)==1
+if length(varargin) == 1
     var = varargin{1};
     
     if iscell(var)
@@ -43,28 +43,28 @@ if length(varargin)==1
         for i=1:length(var)
             plane(i,:) = createPlane(var{i});
         end
-    elseif size(var, 1)==3
+    elseif size(var, 1) >= 3
         % 3 points in a single array
         p1 = var(1,:);
         p2 = var(2,:);
         p3 = var(3,:);
         
         % create direction vectors
-        v1 = p2-p1;
-        v2 = p3-p1;
+        v1 = p2 - p1;
+        v2 = p3 - p1;
 
         % create plane
         plane = normalizePlane([p1 v1 v2]);
         return;
     end
     
-elseif length(varargin)==2
+elseif length(varargin) == 2
     % plane origin
     p0 = varargin{1};
     
     % second parameter is either a 3D vector or a 3D angle (2 params)
     var = varargin{2};
-    if size(var, 2)==2
+    if size(var, 2) == 2
         % normal is given in spherical coordinates
         n = sph2cart2([var ones(size(var, 1))]);
     elseif size(var, 2)==3
@@ -104,13 +104,13 @@ elseif length(varargin)==3
     p3 = varargin{3};
     
     % create direction vectors
-    v1 = p2-p1;
-    v2 = p3-p1;
+    v1 = p2 - p1;
+    v2 = p3 - p1;
    
     plane = normalizePlane([p1 v1 v2]);
     return;
   
 else
-    error('wrong number of arguments in "createPlane".');
+    error('Wrong number of arguments in "createPlane".');
 end
 

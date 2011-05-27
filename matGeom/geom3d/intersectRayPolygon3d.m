@@ -44,7 +44,7 @@ function [inter inside]= intersectRayPolygon3d(ray, poly)
 % Copyright 2011 INRA - Cepia Software Platform.
 
 % supporting plane of polygon vertices
-plane = createPlane(poly);
+plane = createPlane(poly(1:3, :));
 
 % intersection of 3D RAY with the plane
 inter = intersectLinePlane(ray, plane);
