@@ -40,6 +40,12 @@ geom2d
 polygons2d
 ==========
 
+* findPoint : 
+    2011.05.30 renvoyer un ou plusieurs indices, et n'accepter qu'un
+        seul point en entree
+    2011.05.30 fonction findClosestPoint, qui renvoie indice et eventuellement
+        les coordonnees du point le plus proche dans un ensemble
+
 * gerer les formes de type 'pointSet'
     + 2011.02.06 "pointSetDiameter"
         * en entree, un ensemble de points, et un angle (radians ?)
@@ -73,7 +79,7 @@ graphs
 polynomialCurves2d
 ==================
 
-* 2011.04.04 update polynomialCurveSetFit
+* 2011.04.04 update polynomialCurveSetFit (use script in gens/Jasmine/wings)
 
 * 2011.04.04 manage drawing styles in drawPolynomialCurve
 

@@ -33,10 +33,7 @@
 %   Polylines are parametrized in the following way:
 %   * the i-th vertex is located at position i-1
 %   * points of the i-th edge have positions ranging linearly from i-1 to i
-%   The parametrisation domain for an open polyline is from 0 to Nv-1, and
-%   from 0 to Nv for a closed polyline (positions 0 and Nv correspond to
-%   the same point).
-%   The parametrisation domain for an open polyline is from 0 to Nv-1, and
+%   The parametrization domain for an open polyline is from 0 to Nv-1, and
 %   from 0 to Nv for a closed polyline (positions 0 and Nv correspond to
 %   the same point).
 %
@@ -54,6 +51,7 @@
 %   pointSetBounds            - Bounding box of a set of points
 %   pointSetsAverage          - Compute the average of several point sets
 %   minimumCaliperDiameter    - Minimum caliper diameter of a set of points
+%   findPoint                 - Find index of a point in an set from its coordinates
 %
 % Polylines
 %   polylinePoint             - Extract a point from a polyline
@@ -69,7 +67,7 @@
 %   polylineSelfIntersections - Find self-intersections points of a polyline
 %
 % Curves (polylines with lot of vertices)
-%   parametrize               - Compute a parametrization of a curve, based on geodesic length
+%   parametrize               - Parametrization of a curve, based on edges length
 %   curvature                 - Estimate curvature of a polyline defined by points
 %   cart2geod                 - Convert cartesian coordinates to geodesic coord.
 %   geod2cart                 - Convert geodesic coordinates to cartesian coord.
@@ -99,7 +97,7 @@
 %   isPointInTriangle         - Test if a point is located inside a triangle
 %   polygonCentroid           - Compute the centroid (center of mass) of a polygon
 %   polygonArea               - Compute the signed area of a polygon
-%   polygonLength             - Compute the perimeter of a polygon
+%   polygonLength             - Perimeter of a polygon
 %   polygonNormalAngle        - Compute the normal angle at a vertex of the polygon
 %   polygonBounds             - Compute the bounding box of a polygon
 %   distancePointPolygon      - Compute shortest distance between a point and a polygon

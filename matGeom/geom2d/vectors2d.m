@@ -11,7 +11,7 @@ function vectors2d
 %
 %   See also: 
 %   vectorNorm, vectorAngle, isPerpendicular, isParallel
-%   normalizeVector, transformVector
+%   normalizeVector, transformVector, rotateVector
 %
 %
 % ------
