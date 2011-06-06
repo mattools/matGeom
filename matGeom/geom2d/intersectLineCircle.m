@@ -38,12 +38,12 @@ function points = intersectLineCircle(line, circle)
 % Created: 2011-01-14,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
+%   HISTORY
+%   2011-06-06 fix bug in delta test
+
 
 % local precision
 eps = 1e-14;
-
-%TODO ensure inputs have the same size
-
 
 % center parameters
 center = circle(:, 1:2);
@@ -63,20 +63,20 @@ delta = b .^ 2 - 4 * a .* c;
 
 if delta > eps
     % find two roots of second order equation
-    u1 = (-b -sqrt(delta))/2/a;
-    u2 = (-b +sqrt(delta))/2/a;
+    u1 = (-b - sqrt(delta)) / 2 ./ a;
+    u2 = (-b + sqrt(delta)) / 2 ./ a;
     
     % convert into 2D coordinate
-    points = [line(1:2)+u1*line(3:4) ; line(1:2)+u2*line(3:4)];
+    points = [line(1:2) + u1 * line(3:4) ; line(1:2) + u2 * line(3:4)];
 
-elseif abs(delta) > eps
+elseif abs(delta) < eps
     % find unique root, and convert to 2D coord.
-    u = -b/2./a;    
+    u = -b / 2 ./ a;    
     points = line(1:2) + u*line(3:4);
     
 else
     % fill with NaN
-    points = NaN*ones(2, 2);
+    points = NaN * ones(2, 2);
     return;
 end
 
