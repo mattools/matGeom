@@ -156,3 +156,37 @@ assertFalse(isPointOnEdge(p0, edge));
 p0 = [30 50.01]*k;
 assertFalse(isPointOnEdge(p0, edge));
 
+
+function testPointArray
+
+p1 = [10 20];
+p2 = [80 20];
+edge = [p1 p2];
+
+p0 = [10 20; 80 20; 50 20;50 21];
+exp = [true;true;true;false];
+assertEqual(exp, isPointOnEdge(p0, edge));
+
+
+function testEdgeArray
+
+p1 = [10 20];
+p2 = [80 20];
+edge = [p1 p2];
+
+p0 = [40 20];
+exp = [true;true;true;true];
+assertEqual(exp, isPointOnEdge(p0, [edge;edge;edge;edge]));
+
+
+function testTwoArrays
+
+edge1 = [10 20 80 20];
+edge2 = [30 10 30 80];
+edges = [edge1; edge2];
+
+p0 = [40 20;30 90];
+
+exp = [true;false];
+assertEqual(exp, isPointOnEdge(p0, edges));
+

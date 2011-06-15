@@ -83,6 +83,7 @@ function b = isPointOnEdge(point, edge, varargin)
 %   28/10/2010 fix bug to have N results when input is N points and N
 %       edges, add support for arrays with different numbers of rows, and
 %       update doc.
+%   2011-06-15 rewrites by using less memory, and avoiding repmat when psb
 
 
 % extract computation tolerance
@@ -99,44 +100,48 @@ Ne = size(edge, 1);
 if Np == Ne
     % When the number of points and edges is the same, the one-to-one test
     % will be computed, so there is no need to repeat matrices
-    xp = point(:,1);
-    yp = point(:,2);
-    x0 = edge(:,1);
-    y0 = edge(:,2);
-    dx = edge(:,3)-x0;
-    dy = edge(:,4)-y0;
+    dx = edge(:,3) - edge(:,1);
+    dy = edge(:,4) - edge(:,2);
+    lx = point(:,1) - edge(:,1);
+    ly = point(:,2) - edge(:,2);
     
-elseif min(Np, Ne)==1
-    % one of the inputs has one row, so we create arrays the same size by
-    % duplicating rows
-    xp = repmat(point(:,1), Ne, 1);
-    yp = repmat(point(:,2), Ne, 1);
-    x0 = repmat(edge(:,1), Np, 1);
-    y0 = repmat(edge(:,2), Np, 1);
-    dx = repmat(edge(:,3), Np, 1)-x0;
-    dy = repmat(edge(:,4), Np, 1)-y0;
+elseif Np == 1
+    % one point, several edges
+    dx = edge(:, 3) - edge(:, 1);
+    dy = edge(:, 4) - edge(:, 2);
+    lx = point(ones(Ne, 1), 1) - edge(:, 1);
+    ly = point(ones(Ne, 1), 2) - edge(:, 2);
+    
+elseif Ne == 1
+    % several points, one edge
+    dx = (edge(3) - edge(1)) * ones(Np, 1);
+    dy = (edge(4) - edge(2)) * ones(Np, 1);
+    lx = point(:, 1) - edge(1);
+    ly = point(:, 2) - edge(2);
 
 else
-    % Create an array for each parameter, sothat the result will be a
-    % Np-by-Ne matrix of booleans (requires more memory)
-    x0 = repmat(edge(:,1)', Np,  1);
-    y0 = repmat(edge(:,2)', Np,  1);
+    % Np points and Ne edges:
+    % Create an array for each parameter, so that the result will be a
+    % Np-by-Ne matrix of booleans (requires more memory, and uses repmat)
+
+    x0 = repmat(edge(:, 1)', Np, 1);
+    y0 = repmat(edge(:, 2)', Np, 1);
     dx = repmat(edge(:,3)', Np,  1) - x0;
     dy = repmat(edge(:,4)', Np,  1) - y0;
-    xp = repmat(point(:,1),  1, Ne);
-    yp = repmat(point(:,2),  1, Ne);
+    
+    lx = repmat(point(:, 1), 1, Ne) - x0;
+    ly = repmat(point(:, 2), 1, Ne) - y0;
 end
 
-
 % test if point is located on supporting line
-b1 = (abs((xp-x0).*dy - (yp-y0).*dx) ./ hypot(dx, dy)) < tol;
+b1 = (abs(lx.*dy - ly.*dx) ./ hypot(dx, dy)) < tol;
 
 % compute position of point with respect to edge bounds
 % use different tests depending on line angle
 ind     = abs(dx) > abs(dy);
-t       = zeros(size(xp));
-t(ind)  = (xp( ind) - x0( ind)) ./ dx( ind);
-t(~ind) = (yp(~ind) - y0(~ind)) ./ dy(~ind);
+t       = zeros(size(dx));
+t(ind)  = lx( ind) ./ dx( ind);
+t(~ind) = ly(~ind) ./ dy(~ind);
 
 % check if point is located between edge bounds
-b = t>-tol & t-1<tol & b1;
+b = t >- tol & t-1 < tol & b1;
