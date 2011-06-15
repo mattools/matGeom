@@ -25,6 +25,8 @@ geom2d
 
 * 2011.06.15 sortir une partie de isPointOnEdge, mais sans tester point sur la ligne
 
+* 2011.06.15 intersectLines -> clean up code !
+
 * 2010.07.02 pour les fonctions de dessin, prevoir :
     * option de trace sous forme de chaine simple
     * option de trace sous forme de couple 'param' + 'value'

@@ -55,6 +55,17 @@ exp = repmat([3 4], 5, 1);
 inters = intersectLines(line1, line2);
 assertElementsAlmostEqual(exp, inters);
 
+
+function testArraySingle
+
+line1 = repmat([3 1 0 1], 5, 1);
+line2 = [1 4 1 0];
+exp = repmat([3 4], 5, 1);
+
+inters = intersectLines(line1, line2);
+assertElementsAlmostEqual(exp, inters);
+
+
 function testArrayArray
 
 line1 = repmat([3 1 0 1], 5, 1);

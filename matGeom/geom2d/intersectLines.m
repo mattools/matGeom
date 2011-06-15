@@ -38,10 +38,17 @@ function point = intersectLines(line1, line2, varargin)
 %   19/02/2004 add support for multiple lines.
 %   08/03/2007 update doc
 
+% extreact tolerance
+tol = 1e-14;
+if ~isempty(varargin)
+    tol = varargin{1};
+end
+
 x1 =  line1(:,1);
 y1 =  line1(:,2);
 dx1 = line1(:,3);
 dy1 = line1(:,4);
+
 x2 =  line2(:,1);
 y2 =  line2(:,2);
 dx2 = line2(:,3);
@@ -51,10 +58,10 @@ N1 = length(x1);
 N2 = length(x2);
 
 % indices of parallel lines
-par = abs(dx1.*dy2-dx2.*dy1) < 1e-14;
+par = abs(dx1.*dy2 - dx2.*dy1) < tol;
 
 % indices of colinear lines
-col = abs((x2-x1).*dy1-(y2-y1).*dx1) < 1e-14 & par ;
+col = abs((x2-x1) .* dy1 - (y2-y1) .* dx1) < tol & par ;
 
 x0(col) = Inf;
 y0(col) = Inf;
@@ -62,23 +69,26 @@ x0(par & ~col) = NaN;
 y0(par & ~col) = NaN;
 
 i = ~par;
-% compute intersection points
 
+% compute intersection points
 if N1==N2
 	x0(i) = ((y2(i)-y1(i)).*dx1(i).*dx2(i) + x1(i).*dy1(i).*dx2(i) - x2(i).*dy2(i).*dx1(i)) ./ ...
         (dx2(i).*dy1(i)-dx1(i).*dy2(i)) ;
 	y0(i) = ((x2(i)-x1(i)).*dy1(i).*dy2(i) + y1(i).*dx1(i).*dy2(i) - y2(i).*dx2(i).*dy1(i)) ./ ...
         (dx1(i).*dy2(i)-dx2(i).*dy1(i)) ;
+    
 elseif N1==1
 	x0(i) = ((y2(i)-y1).*dx1.*dx2(i) + x1.*dy1.*dx2(i) - x2(i).*dy2(i).*dx1) ./ ...
         (dx2(i).*dy1-dx1.*dy2(i)) ;
 	y0(i) = ((x2(i)-x1).*dy1.*dy2(i) + y1.*dx1.*dy2(i) - y2(i).*dx2(i).*dy1) ./ ...
         (dx1.*dy2(i)-dx2(i).*dy1) ;
+    
 elseif N2==1
    	x0(i) = ((y2-y1(i)).*dx1(i).*dx2 + x1(i).*dy1(i).*dx2 - x2.*dy2.*dx1(i)) ./ ...
         (dx2.*dy1(i)-dx1(i).*dy2) ;
 	y0(i) = ((x2-x1(i)).*dy1(i).*dy2 + y1(i).*dx1(i).*dy2 - y2.*dx2.*dy1(i)) ./ ...
         (dx1(i).*dy2-dx2.*dy1(i)) ;
+    
 else
     % formattage a rajouter
    	x0(i) = ((y2(i)-y1(i)).*dx1(i).*dx2(i) + x1(i).*dy1(i).*dx2(i) - x2(i).*dy2(i).*dx1(i)) ./ ...
@@ -87,4 +97,5 @@ else
         (dx1(i).*dy2(i)-dx2(i).*dy1(i)) ;
 end
 
+% concatenate result
 point = [x0' y0'];
