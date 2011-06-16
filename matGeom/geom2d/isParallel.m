@@ -37,7 +37,7 @@ function b = isParallel(v1, v2, varargin)
 %   2007-01-16 fix bug
 %   2009-09-21 fix bug for array of 3 vectors
 %   2011-01-20 replace repmat by ones-indexing (faster)
-
+%   2011-06-16 use direct computation (faster)
 
 % default accuracy
 acc = 1e-14;
@@ -45,23 +45,22 @@ if ~isempty(varargin)
     acc = abs(varargin{1});
 end
 
-% adds a zero at the end of 2D vectors
-if size(v1, 2) < 3
-    v1(1,3) = 0;
-end
-if size(v2, 2) < 3
-    v2(1,3) = 0;
-end
-
-% adapt size of inputs
+% adapt size of inputs if needed
 n1 = size(v1, 1);
 n2 = size(v2, 1);
-if n1==1 && n2>1
-    v1 = v1(ones(n2,1), :);
-end
-if n2==1 && n1>1
-    v2 = v2(ones(n1,1), :);
+if n1 ~= n2
+    if n1 == 1
+        v1 = v1(ones(n2,1), :);
+    elseif n2 == 1
+        v2 = v2(ones(n1,1), :);
+    end
 end
 
 % performs computation
-b = vectorNorm(cross(v1, v2, 2)) < acc;
+if size(v1, 2) == 2
+    b = abs(v1(:, 1) .* v2(:, 2) - v1(:, 2) .* v2(:, 1)) < acc;
+else
+    % computation in space
+    b = vectorNorm(cross(v1, v2, 2)) < acc;
+end
+

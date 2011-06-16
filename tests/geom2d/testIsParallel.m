@@ -33,7 +33,8 @@ v2 = [2 5];
 b  = isParallel(v1, v2);
 assertFalse(b);
 
-function testArray
+
+function testArraySingle
 
 v1  = [1 0;1 1;1 2];
 v2  = [2 4];
@@ -41,3 +42,11 @@ th  = [false; false; true];
 res = isParallel(v1, v2);
 assertEqual(res, th);
 
+
+function testSingleArray
+
+v1  = [2 4];
+v2  = [1 0;1 1;1 2];
+th  = [false; false; true];
+res = isParallel(v1, v2);
+assertEqual(res, th);

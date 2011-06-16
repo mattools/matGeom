@@ -58,15 +58,12 @@ edges = [poly(1:N, :) poly([2:N 1], :)];
 supportLines = edgeToLine(edges);
 intersects = intersectLines(line, supportLines, tol);
 
-% keep only intersection points located on edges
-% b = isPointOnEdge(intersects, edges, varargin{:});
-% intersects = intersects(b, :);
-
+% compute position of intersection points on corresponding lines,
+% and keep only intersection points located on edges
 inds = find(isfinite(intersects(:,1)));
 pos = linePosition(intersects(inds, :), supportLines(inds, :));
 b = pos > -tol & pos-1 < tol;
 intersects = intersects(inds(b), :);
-
 
 % remove multiple vertices (can occur for intersections located at polygon
 % vertices)
