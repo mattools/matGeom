@@ -33,6 +33,7 @@ assertEqual(2, size(intersectLinePolygon(lineV1, poly), 1));
 lineV2 = [15 5 0 1];
 assertEqual(0, size(intersectLinePolygon(lineV2, poly), 1));
 
+
 function testDiamond
 poly = [10 0;20 10;10 20;0 10];
 
@@ -69,6 +70,7 @@ lineV2 = [20 0 0 3];
 intersects = intersectLinePolygon(lineV2, poly);
 target = [20 10];
 assertTrue(ismember(target, intersects, 'rows'));
+
 
 function testUniquePoints
 % Check that function returns unique results, even for vertex points

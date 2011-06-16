@@ -1,4 +1,4 @@
-function intersects = intersectRayPolygon(ray, poly)
+function intersects = intersectRayPolygon(ray, poly, varargin)
 %INTERSECTRAYPOLYGON Intersection points between a ray and a polygon
 %
 %   P = intersectRayPolygon(RAY, POLY)
@@ -7,6 +7,9 @@ function intersects = intersectRayPolygon(ray, poly)
 %   (in the form [x0 y0 dx dy], see createRay for details). 
 %   POLY is a Nx2 array containing coordinate of polygon vertices
 %   
+%   P = intersectRayPolygon(RAY, POLY, TOL)
+%   Specifies the tolerance for geometric tests. Default is 1e-14.
+%
 %   See also
 %   rays2d, polygons2d, intersectLinePolygon
 %
@@ -21,7 +24,7 @@ function intersects = intersectRayPolygon(ray, poly)
 
 
 % compute intersections with supporting line
-intersects = intersectLinePolygon(ray, poly);
+intersects = intersectLinePolygon(ray, poly, varargin{:});
 
 % compute position of intersects on the supporting line
 pos = linePosition(intersects, ray);

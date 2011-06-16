@@ -1,4 +1,4 @@
-function intersects = intersectLinePolygon(line, poly)
+function intersects = intersectLinePolygon(line, poly, varargin)
 %INTERSECTLINEPOLYGON Intersection points between a line and a polygon
 %
 %   P = intersectLinePolygon(LINE, POLY)
@@ -8,6 +8,9 @@ function intersects = intersectLinePolygon(line, poly)
 %   POLY is a NVx2 array containing coordinates of the NV polygon vertices
 %   P is a NIx2 array containing the coordinates of the M intersection
 %   points.
+%
+%   P = intersectLinePolygon(LINE, POLY, TOL)
+%   Specifies the tolerance for geometric tests. Default is 1e-14.
 %
 %   Example
 %   % compute intersections between a square and an horizontal line
@@ -42,17 +45,28 @@ function intersects = intersectLinePolygon(line, poly)
 %   2010-01-26 rewrite using vectorisation
 %   2011-05-20 returns unique results
 
+tol = 1e-14;
+if ~isempty(varargin)
+    tol = varargin{1};
+end
+
 % create the array of edges
 N = size(poly, 1);
 edges = [poly(1:N, :) poly([2:N 1], :)];
 
 % compute intersections with supporting lines of polygon edges
 supportLines = edgeToLine(edges);
-intersects = intersectLines(line, supportLines);
+intersects = intersectLines(line, supportLines, tol);
 
 % keep only intersection points located on edges
-b = isPointOnEdge(intersects, edges);
-intersects = intersects(b, :);
+% b = isPointOnEdge(intersects, edges, varargin{:});
+% intersects = intersects(b, :);
+
+inds = find(isfinite(intersects(:,1)));
+pos = linePosition(intersects(inds, :), supportLines(inds, :));
+b = pos > -tol & pos-1 < tol;
+intersects = intersects(inds(b), :);
+
 
 % remove multiple vertices (can occur for intersections located at polygon
 % vertices)
