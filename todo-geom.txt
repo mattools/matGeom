@@ -117,8 +117,6 @@ geom3d
     * pour les objets "plats" (cercles et ellipses 3D, tore...), ca semble
         moins pertinent...
         
-* rename "intersectLineTriangle" as "intersectLineTriangle3d"
-
 * faire le point sur les differentes orientations d'axe 3D (2010.07.22)
     + X droite, Y fond, Z haut
     + X droite, Y haut, Z avant

@@ -1,7 +1,7 @@
-function [point isInside pos] = intersectLineTriangle(line, triangle)
-%INTERSECTLINETRIANGLE Intersection point of a 3D line and a 3D triangle
+function [point isInside pos] = intersectLineTriangle3d(line, triangle, varargin)
+%INTERSECTLINETRIANGLE3D Intersection point of a 3D line and a 3D triangle
 %
-%   POINT = intersectLineTriangle(LINE, TRI)
+%   POINT = intersectLineTriangle3d(LINE, TRI)
 %   Compute coordinates of the intersection point between the line LINE and
 %   the triangle TRI.
 %   LINE is a 1-by-6 row vector given as: [X0 Y0 Z0 DX DY DZ]
@@ -11,18 +11,18 @@ function [point isInside pos] = intersectLineTriangle(line, triangle)
 %   The result is a 1-by-3 array containing coordinates of the intesection
 %   point, or [NaN NaN NaN] if the line and the triangle do not intersect.
 %
-%   [POINT POS] = intersectLineTriangle(LINE, TRI)
+%   [POINT POS] = intersectLineTriangle3d(LINE, TRI)
 %   Also returns the position of the intersection point on the line, or NaN
 %   if the line and the supporting plane of the triangle are parallel.
 %
-%   [POINT POS ISINSIDE] = intersectLineTriangle(LINE, TRI)
+%   [POINT POS ISINSIDE] = intersectLineTriangle3d(LINE, TRI)
 %   Also returns a boolean value, set to true if the line and the triangle
 %   intersect each other. Can be used for testing validity of result.
 %
 %   Example
 %     line = [1 1 0 0 0 1];
 %     tri = [0 0 5;5 0 0;0 5 0];
-%     intersectLineTriangle(line, tri)
+%     intersectLineTriangle3d(line, tri)
 %     ans = 
 %         1   1   3
 %
@@ -30,7 +30,7 @@ function [point isInside pos] = intersectLineTriangle(line, triangle)
 %   points3d, lines3d, polygons3d
 %
 %   References
-%   Algorithm adapted from SoftSurfer Ray/Segement-Triangle intersection
+%   Algorithm adapted from SoftSurfer Ray/Segment-Triangle intersection
 %   http://softsurfer.com/Archive/algorithm_0105/algorithm_0105.htm
 %
 % ------
@@ -47,15 +47,22 @@ point = [NaN NaN NaN];
 pos = NaN;
 isInside = false;
 
+tol = 1e-13;
+if ~isempty(varargin)
+    tol = varargin{1};
+end
+
 
 %% Process inputs
 
 % triangle edge vectors
 if size(triangle, 2) > 3
+    % triangle is given as a 1-by-9 row vector
     t0  = triangle(1:3);
     u   = triangle(4:6) - t0;
     v   = triangle(7:9) - t0;
 else
+    % triangle is given as a 3-by-3 array
     t0  = triangle(1, 1:3);
     u   = triangle(2, 1:3) - t0;
     v   = triangle(3, 1:3) - t0;
@@ -68,7 +75,7 @@ end
 n   = cross(u, v);
 
 % test for degenerate case of flat triangle
-if vectorNorm(n) < 1e-13
+if vectorNorm(n) < tol
     return;
 end
 
@@ -83,7 +90,7 @@ a = -dot(n, w0);
 b = dot(n, dir);
 
 % test case of line parallel to the triangle
-if abs(b) < 1e-13
+if abs(b) < tol
     return;    
 end
 
