@@ -14,16 +14,18 @@ Mettre en place le site Sourceforge
     * idee generale : 
         * garder les radians pour les fonctions de bas niveau (angles entre
             droites, entre plans...)
-        * rotations utilisent des radians -> plus rapides, 
+        * rotations utilisent des radians -> plus rapides 
         * utiliser des degres pour representer les formes
         * ellipses et ellipsoides d'inertie renvoient des degres
-        * angles d'Euler utilisent des degres
+        * angles d'Euler utilisent des degres (???)
+        * ordre : YAW PITCH ROLL
    
+* Create an "obsolete" subpackage
+    * maybe "obsolete2d" and "obsolete3d"
 
+    
 geom2d
 ======
-
-* 2011.06.15 sortir une partie de isPointOnEdge, mais sans tester point sur la ligne
 
 * 2011.06.15 intersectLines -> clean up code !
 
@@ -58,7 +60,7 @@ polygons2d
     
 * 2011.02.06 fonction "enclosingRectangle" pour un ensemble de points 
     -> "orientedBox" ?
-    -> renvoie centre, Longueur, largeur, et orientation
+    -> renvoie centre, Longueur, largeur, et orientation (en degres)
             
 * 2010.08.10 clipping de polygones
     
@@ -96,7 +98,7 @@ geom3d
     pas vraiment de lien avec les angles d'Euler.
         2011.03.21 si, mais convention ZYZ, qui est pertinente aussi...
     
-* Prposition de convention pour les angles (2011.03.12)
+* Proposition de convention pour les angles (2011.03.12)
     * partir sur angles d'Euler en convention XYZ (yaw-pitch-roll), base [0 0 0]
     * stocker dans cet ordre
         * centre
@@ -115,6 +117,8 @@ geom3d
     * pour les objets "plats" (cercles et ellipses 3D, tore...), ca semble
         moins pertinent...
         
+* rename "intersectLineTriangle" as "intersectLineTriangle3d"
+
 * faire le point sur les differentes orientations d'axe 3D (2010.07.22)
     + X droite, Y fond, Z haut
     + X droite, Y haut, Z avant

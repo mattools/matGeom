@@ -29,6 +29,9 @@ function point = intersectEdgePlane(edge, plane)
 %
 
 %   HISTORY
+%
+%   17/06/2011 E. J. Payton - fixed indexing error that caused incorrect
+%              points to be returned
 
 % unify sizes of data
 if size(edge,1) == 1;   % one edge and many planes
@@ -39,8 +42,9 @@ elseif (size(plane,1) ~= size(edge,1)) ; % N planes and M edges, not allowed for
     error('input size not correct, either one/many plane and many/one edge, or same # of planes and lines!');
 end
 
-% initialize empty array
+% initialize empty arrays
 point = zeros(size(plane, 1), 3);
+t = zeros(size(plane,1),3);
 
 % plane normal
 n = cross(plane(:,4:6), plane(:,7:9), 2);
@@ -51,15 +55,18 @@ line = createLine3d(edge(:,1:3), edge(:,4:6));
 % get indices of edge and plane which are parallel
 par = abs(dot(n, line(:,4:6), 2))<1e-14;
 point(par,:) = NaN;
+t(par) = NaN;
 
 % difference between origins of plane and edge
 dp = plane(:, 1:3) - line(:, 1:3);
 
 % relative position of intersection on line
-t = dot(n(~par,:), dp(~par,:), 2)./dot(n(~par,:), line(~par,4:6), 2);
+%t = dot(n(~par,:), dp(~par,:), 2)./dot(n(~par,:), line(~par,4:6), 2);
+t(~par) = dot(n(~par,:), dp(~par,:), 2)./dot(n(~par,:), line(~par,4:6), 2);
 
 % compute coord of intersection point
-point(~par, :) = line(~par,1:3) + repmat(t,1,3).*line(~par,4:6);
+%point(~par, :) = line(~par,1:3) + repmat(t,1,3).*line(~par,4:6);
+point(~par, :) = line(~par,1:3) + repmat(t(~par),1,3).*line(~par,4:6);
 
 % set points outside of edge to [NaN NaN NaN]
 point(t<0, :) = NaN;
