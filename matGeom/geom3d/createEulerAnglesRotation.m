@@ -37,6 +37,12 @@ function mat = createEulerAnglesRotation(phi, theta, psi)
 % Created: 2010-07-22,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform.
 
+%   HISTORY
+%   2011-06-20 deprecate
+
+warning('MatGeom:deprecation', ...
+    'Deprecated function, use ''eulerAnglesToRotation3d'' instead');
+
 % create individual rotation matrices
 rotX = createRotationOx(phi);
 rotY = createRotationOy(theta);

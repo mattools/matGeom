@@ -5,13 +5,13 @@
 %   3D primitives, such as points, lines, planes, polyhedra, circles and
 %   spheres.
 %   
-%   Angles are defined as follow:
-%   THETA is the colatitude, i.e. the angle with the Oz axis, with value
-%   between 0 and PI radians.
+%   Euler Angles are defined as follow:
 %   PHI is the azimut, i.e. the angle of the projection on horizontal plane
-%   with the Ox axis, with value beween 0 and 2*PI radians.
-%   PSI is the 'roll', i.e. the rotation around the (THETA, PHI) direction,
-%   with value in radians
+%   with the Ox axis, with value beween 0 and 180 degrees.
+%   THETA is the latitude, i.e. the angle with the Oz axis, with value
+%   between -90 and +90 degrees.
+%   PSI is the 'roll', i.e. the rotation around the (PHI, THETA) direction,
+%   with value in degrees
 %   See also the 'angles3d' page.
 %
 %   Base format for primitives:
@@ -21,7 +21,7 @@
 %   Edge:       [x1 y1 z1 x2 y2 z2]
 %   Plane:      [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2]
 %   Sphere:     [x0 y0 z0 R]
-%   Circle:     [x0 y0 z0 R THETA PHI PSI] (origin+center+normal+'roll').
+%   Circle:     [x0 y0 z0 R PHI THETA PSI] (origin+center+normal+'roll').
 %   Cylinder:   [X1 Y1 Z1 X2 Y2 Z2 R]
 %   Box:        [xmin xmax ymin ymax zmin zmax]. Used for clipping shapes.
 %   
@@ -101,6 +101,9 @@
 %   polygons3d                - Description of functions operating on 3D polygons
 %   polygonCentroid3d         - Centroid (or center of mass) of a polygon
 %   polygon3dNormalAngle      - Normal angle at a vertex of the 3D polygon
+%   intersectLinePolygon3d    - Intersection point of a 3D line and a 3D polygon
+%   intersectLineTriangle3d   - Intersection point of a 3D line and a 3D triangle
+%   intersectRayPolygon3d     - Intersection point of a 3D ray and a 3D polygon
 %   drawPolyline3d            - Draw a 3D polyline specified by a list of points
 %   fillPolygon3d             - Fill a 3D polygon specified by a list of points
 %
@@ -144,10 +147,10 @@
 %   createRotationOx          - Create the 4x4 matrix of a 3D rotation around x-axis
 %   createRotationOy          - Create the 4x4 matrix of a 3D rotation around y-axis
 %   createRotationOz          - Create the 4x4 matrix of a 3D rotation around z-axis
-%   createEulerAnglesRotation - Create a rotation matrix from 3 euler angles
 %   createRotation3dLineAngle - Create rotation around a line by an angle theta
 %   rotation3dAxisAndAngle    - Determine axis and angle of a 3D rotation matrix
 %   rotation3dToEulerAngles   - Extract Euler angles from a rotation matrix
+%   eulerAnglesToRotation3d   - Convert 3D Euler angles to 3D rotation matrix
 %   recenterTransform3d       - Change the fixed point of an affine 3D transform
 %   createBasisTransform3d    - Compute matrix for transforming a basis into another basis
 %   composeTransforms3d       - Concatenate several space transformations
@@ -173,7 +176,7 @@
 % In development:
 %   clipPolygon3dHP           - clip a 3D polygon with Half-space
 %   drawPartialPatch          - draw surface patch, with 2 parametrized surfaces
-%   createOblicProjectionXZ   - Create oblic projection for perspective display
+
 
 % Deprecated:
 %   intersectPlaneLine        - return intersection between a plane and a line
@@ -186,5 +189,7 @@
 %   vecnorm3d                 - compute norm of vector or of set of 3D vectors
 %   normalize3d               - normalize a 3D vector
 %   drawCurve3d               - draw a 3D curve specified by a list of points
+%   createEulerAnglesRotation - Create a rotation matrix from 3 euler angles
 
 % Others
+

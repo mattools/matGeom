@@ -7,7 +7,7 @@ function ell = inertiaEllipsoid(points)
 %   ELL = [XC YC ZC A B C PHI THETA PSI]
 %   where [XC YC ZY] is the centern [A B C] are length of semi-axes (in
 %   decreasing order), and [PHI THETA PSI] are euler angles representing
-%   the ellipsoid orientation.
+%   the ellipsoid orientation, in degrees.
 %
 %   Example
 %   inertiaEllipsoid
@@ -35,7 +35,7 @@ covPts = cov(points)/n;
 [U S] = svd(covPts);
 
 % extract length of each semi axis
-radii = 2*sqrt(diag(S)*n)';
+radii = 2 * sqrt(diag(S)*n)';
 
 % sort axes from greater to lower
 [radii ind] = sort(radii, 'descend');
@@ -47,7 +47,7 @@ if U(1,1) < 0
 end
 
 % convert axes rotation matrix to Euler angles
-[phi theta psi] = rotation3dToEulerAngles(U);
+angles = rotation3dToEulerAngles(U);
 
 % concatenate result to form an ellipsoid object
-ell = [center radii phi theta psi];
+ell = [center radii angles];

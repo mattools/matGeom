@@ -47,9 +47,10 @@ elseif length(varargin) == 1
     a  = elli(:,4);
     b  = elli(:,5);
     c  = elli(:,6);
-    ellPhi   = elli(:,7);
-    ellTheta = elli(:,8);
-    ellPsi   = elli(:,9);
+    k = pi / 180;
+    ellPhi   = elli(:,7) * k;
+    ellTheta = elli(:,8) * k;
+    ellPsi   = elli(:,9) * k;
     
 elseif length(varargin) == 2
     % two arguments, corresponding to center and radius vector
@@ -113,10 +114,11 @@ if nargout == 0
     surf(x, y, z, options{:});
     
 elseif nargout == 1
-    % one output: compute 
+    % one output: draw the sphere and return handle 
     varargout{1} = surf(x, y, z, options{:});
     
 elseif nargout == 3
+    % 3 outputs: return computed coordinates
     varargout{1} = x; 
     varargout{2} = y; 
     varargout{3} = z; 
