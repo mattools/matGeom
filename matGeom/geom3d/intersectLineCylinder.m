@@ -67,7 +67,7 @@ while length(varargin)>1
     if strcmpi(var, 'checkbounds')
         checkBounds = varargin{2};
     else
-        error(['Unkown argument: ' arg]);
+        error(['Unkown argument: ' var]);
     end
     varargin(1:2) = [];
 end

@@ -93,15 +93,15 @@ for i=1:size(edges, 1)
     angle1  = circle3dPosition(point1, circle);
     angle2  = circle3dPosition(point2, circle);
     
-    % ensure angles are in right direction
-    if mod(angle2-angle1+2*pi, 2*pi)>pi
+    % ensure angles are in the right direction
+    if mod(angle2 - angle1 + 360, 360) > 180
         tmp     = angle1;
         angle1  = angle2;
         angle2  = tmp;
     end
     
     % compute angle extent of the circle arc
-    angleExtent = mod(angle2-angle1+2*pi, 2*pi);
+    angleExtent = mod(angle2 - angle1 + 360, 360);
     
     % create circle arc
     arc = [circle angle1 angleExtent];

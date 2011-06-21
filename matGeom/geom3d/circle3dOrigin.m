@@ -7,7 +7,7 @@ function ori = circle3dOrigin(varargin)
 %   drawing circle.
 %
 %   See also:
-%   circles3d, points3d
+%   circles3d, points3d, circle3dPosition
 %
 %   ---------
 %   author : David Legland 
@@ -35,16 +35,8 @@ else
     psi = zeros(size(circle, 1), 1);
 end
 
-% position of first point, 0 by def.
-t = 0;
-
-% (x,y,z) in local coordinate system
-x = r*cos(t);
-y = r*sin(t);
-z = 0;
-
-% create point
-pt0 = [x y z];
+% create origin point
+pt0 = [r 0 0];
 
 % compute transformation from local basis to world basis
 trans   = localToGlobal3d(xc, yc, zc, theta, phi, psi);

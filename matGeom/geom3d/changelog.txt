@@ -1,5 +1,25 @@
 change log for geom3d
 
+geom3d release 2011.??.??
+=========================
+
+Important changes:
+- Package has been splitted up into 'geom3d' and 'meshes3d'.
+- Representation of geometrical shapes (3D circles, ellipsoids...) now uses
+    degrees for angles
+
+New features
+- added function distanceLine3d
+- added functions inertiaEllipsoid and drawEllipsoid
+- added functions intersectLinePolygon3d, intersectRayPolygon3d, and
+    intersectLineTriangle3d
+- added function eulerAngleToRotation3d
+    
+Bug fixes
+- fixed bugs in intersectEdgePlanes
+- enhanced createPlane
+ 
+ 
 geom3d release 2011.01.10
 =========================
 

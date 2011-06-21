@@ -8,11 +8,11 @@ function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)
 %   matrix in homogeneous coordinates.
 %
 %   PHI:    rotation angle around Z-axis, in degrees, corresponding to the
-%       'Yaw'. PSI is between -180 and +180.
+%       'Yaw'. PHI is between -180 and +180.
 %   THETA:  rotation angle around Y-axis, in degrees, corresponding to the
 %       'Pitch'. THETA is between -90 and +90.
 %   PSI:    rotation angle around X-axis, in degrees, corresponding to the
-%       'Roll'. PHI is between -180 and +180. 
+%       'Roll'. PSI is between -180 and +180. 
 %   These angles correspond to the "Yaw-Pitch-Roll" convention, also known
 %   as "Tait–Bryan angles". 
 %

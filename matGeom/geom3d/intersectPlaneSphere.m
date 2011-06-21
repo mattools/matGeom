@@ -15,7 +15,8 @@ function circle = intersectPlaneSphere(plane, sphere)
 %   the circle, [THETA PHI] is the normal of the plane containing the
 %   circle (THETA being the colatitude, and PHI the azimut), and PSI is a
 %   rotation angle around the normal (equal to zero in this function, but
-%   kept for compatibility with other functions). 
+%   kept for compatibility with other functions). All angles are given in
+%   degrees.
 %   
 %   See Also:
 %   planes3d, spheres, circles3d, intersectLinePlane, intersectLineSphere
@@ -29,22 +30,27 @@ function circle = intersectPlaneSphere(plane, sphere)
 %   HISTORY
 %   27/06/2007: change output format of circle, add support for multiple
 %       data
+%   2011-06-21 use degrees for angles
 
+% number of inputs of each type
+Ns = size(sphere, 1);
+Np = size(plane, 1);
 
 % unify data dimension
-if size(sphere, 1)==1
-    sphere = repmat(sphere, [size(plane, 1) 1]);
-elseif size(plane, 1)==1
-    plane = repmat(plane, [size(sphere, 1) 1]);
-elseif size(sphere, 1)~=size(plane, 1)    
-    error('data should have same length, or one data should have length 1');
+if Ns ~= Np 
+    if Ns == 1
+        sphere = sphere(ones(Np, 1), :);
+    elseif Np == 1
+        plane = plane(ones(Ns, 1), :);
+    else
+        error('data should have same length, or one data should have length 1');
+    end
 end
-
 % center of the spheres
 center  = sphere(:,1:3);
 
 % radius of spheres
-if size(sphere, 2)==4
+if size(sphere, 2) == 4
     Rs  = sphere(:,4);
 else
     % assume default radius equal to 1
@@ -63,7 +69,8 @@ nor = planeNormal(plane);
 
 % convert to angles
 [theta phi] = cart2sph2(nor(:,1), nor(:,2), nor(:,3));
-psi = zeros(size(plane, 1), 1);
+psi = zeros(Np, 1);
 
 % create structure for circle
-circle = [circle0 Rc theta phi psi];
+k = 180 / pi;
+circle = [circle0 Rc [theta phi psi]*k];

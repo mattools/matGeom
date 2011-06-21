@@ -15,9 +15,9 @@ function varargout = drawEllipse3d(varargin)
 %
 %   where XC, YC, ZY are coordinate of ellipse center, A and B are the
 %   half-lengths of the major and minor axes of the ellipse,
-%   PHI and THETA are 3D angle of the normal to the plane
-%   containing the ellipse (PHI between 0 and 2xPI corresponding to
-%   longitude, and THETA from 0 to PI, corresponding to angle with
+%   PHI and THETA are 3D angle (in degrees) of the normal to the plane
+%   containing the ellipse (PHI between 0 and 380 corresponding to
+%   longitude, and THETA from 0 to 180, corresponding to angle with
 %   vertical).
 %   
 %   H = drawEllipse3d(...)
@@ -184,8 +184,8 @@ end
 t = linspace(0, 2*pi, 61)';
 
 % polyline approximation of ellipse, centered and parallel to main axes
-x       = a*cos(t);
-y       = b*sin(t);
+x       = a * cos(t);
+y       = b * sin(t);
 z       = zeros(length(t), 1);
 base    = [x y z];
 
@@ -198,7 +198,7 @@ ellipse = transformPoint3d(base, trans);
 % draw the curve
 h = drawPolyline3d(ellipse, options{:});
 
-if nargout>0
-    varargout{1}=h;
+if nargout > 0
+    varargout = {h};
 end
 

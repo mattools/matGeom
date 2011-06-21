@@ -2,11 +2,11 @@ function theta = circle3dPosition(point, circle)
 %CIRCLE3DPOSITION Return the angular position of a point on a 3D circle
 %
 %   POS = circle3dPosition(POINT, CIRCLE)
+%   Returns angular position of point on the circle, in degrees, between 0
+%   and 360.
 %   with POINT: [xp yp zp]
 %   and CIRCLE: [X0 Y0 Z0 R THETA PHI] or [X0 Y0 Z0 R THETA PHI PSI]
 %   (THETA being the colatitude, and PHI the azimut)
-%   return angular position of point on the circle, comprised between 0 and
-%   2*PI.
 %
 %   See also:
 %   circles3d, circle3dOrigin
@@ -19,6 +19,7 @@ function theta = circle3dPosition(point, circle)
 
 %   HISTORY
 %   27/06/2007: change 3D angle convention
+%   2011-06-21 use degrees for angles
 
 
 % get center and radius
@@ -34,7 +35,7 @@ phi     = circle(:,6);
 ori     = circle3dOrigin(circle);
 
 % create plane containing the circle
-plane   = createPlane([xc yc zc], [theta phi]);
+plane   = createPlane([xc yc zc], deg2rad([theta phi]));
 
 % find position of point on the circle plane
 pp0     = planePosition(ori,    plane);
@@ -44,3 +45,5 @@ pp      = planePosition(point,  plane);
 theta0  = mod(atan2(pp0(:,2), pp0(:,1)) + 2*pi, 2*pi);
 theta   = mod(atan2(pp(:,2), pp(:,1)) + 2*pi - theta0, 2*pi);
 
+% convert to degrees
+theta = theta * 180 / pi;

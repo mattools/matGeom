@@ -4,10 +4,10 @@ function varargout = drawCircleArc3d(arc, varargin)
 %   drawCircleArc3d([XC YC ZC R THETA PHI PSI START EXTENT])
 %   [XC YC ZC]  : coordinate of arc center
 %   R           : arc radius
-%   [THETA PHI] : orientation of arc normal (theta : 0->pi).
+%   [THETA PHI] : orientation of arc normal, in degrees (theta: 0->180).
 %   PSI         : roll of arc (rotation of circle origin)
-%   START       : starting angle of arc, from arc origin
-%   EXTENT      : extent of circle arc (can be negative)
+%   START       : starting angle of arc, from arc origin, in degrees
+%   EXTENT      : extent of circle arc, in degrees (can be negative)
 %   
 %   Drawing options can be specified, as for the plot command.
 %
@@ -24,26 +24,27 @@ function varargout = drawCircleArc3d(arc, varargin)
 %   HISTORY
 %   2007-06-27 change 3D angle convention
 %   2010-03-08 use drawPolyline3d
+%   2011-06-21 use angles in degrees
 
 
 if iscell(arc)
     h = [];
-    for i=1:length(arc)
+    for i = 1:length(arc)
         h = [h drawCircleArc3d(arc{i}, varargin{:})]; %#ok<AGROW>
     end
-    if nargout>0
-        varargout{1}=h;
+    if nargout > 0
+        varargout = {h};
     end
     return;
 end
 
-if size(arc, 1)>1
+if size(arc, 1) > 1
     h = [];
-    for i=1:size(arc, 1)
+    for i = 1:size(arc, 1)
         h = [h drawCircleArc3d(arc(i,:), varargin{:})]; %#ok<AGROW>
     end
-    if nargout>0
-        varargout{1}=h;
+    if nargout > 0
+        varargout = {h};
     end
     return;
 end
@@ -64,8 +65,8 @@ start   = arc(:,8);
 extent  = arc(:,9);
 
 % positions on circle arc
-N       = 64;
-t       = linspace(start, start+extent, N+1);
+N       = 60;
+t       = linspace(start, start+extent, N+1) * pi / 180;
 
 % compute coordinate of points
 x       = r*cos(t)';
@@ -83,6 +84,6 @@ curve   = transformPoint3d(curve, trans);
 h = drawPolyline3d(curve, varargin{:});
 
 if nargout > 0
-    varargout{1} = h;
+    varargout = {h};
 end
 
