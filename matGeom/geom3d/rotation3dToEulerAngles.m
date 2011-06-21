@@ -39,7 +39,7 @@ cy = hypot(mat(1, 1), mat(2, 1));
 % avoid dividing by 0
 if cy > 16*eps
     % normal case: theta <> 0
-%    phi     = k * atan2( mat(3, 2) / cy, mat(3, 3) / cy);
+%    psi     = k * atan2( mat(3, 2) / cy, mat(3, 3) / cy);
     psi     = k * atan2( mat(3, 2), mat(3, 3));
     theta   = k * atan2(-mat(3, 1), cy);
 %    psi     = k * atan2( mat(2, 1) / cy, mat(1, 1) / cy);

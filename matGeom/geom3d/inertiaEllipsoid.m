@@ -44,6 +44,8 @@ radii = 2 * sqrt(diag(S)*n)';
 U = U(ind, :);
 if U(1,1) < 0
     U = -U;
+    % keep matrix determinant positive
+    U(:,3) = -U(:,3);
 end
 
 % convert axes rotation matrix to Euler angles

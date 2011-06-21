@@ -2,9 +2,16 @@ function varargout = drawEllipsoid(varargin)
 %DRAWELLIPSOID Draw a 3D ellipsoid
 %
 %   drawEllipsoid(ELLI)
+%   Displays a 3D ellipsoid on current axis. ELLI is given by:
+%   [XC YC ZC A B C PHI THETA PSI],
+%   where (XC, YC, ZC) is the ellipsoid center, A, B and C are the half
+%   lengths of the ellipsoid main axes, and PHI THETA PSI are Euler angles
+%   representing ellipsoid orientation, in degrees.
 %
 %   Example
-%   drawEllipsoid
+%   figure; hold on;
+%   drawEllipsoid([10 20 30   50 30 10   5 10 0], 'FaceColor', 'g');
+%   axis equal;
 %
 %   See also
 %   spheres, drawSphere, inertiaEllipsoid, ellipsoid
@@ -97,9 +104,9 @@ z = ones(length(phi),1) * cos(theta);
 
 % convert unit basis to ellipsoid basis
 sca     = createScaling3d(a, b, c);
-rotX    = createRotationOx(ellPhi);
+rotZ    = createRotationOz(ellPhi);
 rotY    = createRotationOy(ellTheta);
-rotZ    = createRotationOz(ellPsi);
+rotX    = createRotationOx(ellPsi);
 tra     = createTranslation3d([xc yc zc]);
 
 % concatenate transforms

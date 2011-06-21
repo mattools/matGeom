@@ -9,7 +9,7 @@ function theta = circle3dPosition(point, circle)
 %   (THETA being the colatitude, and PHI the azimut)
 %
 %   See also:
-%   circles3d, circle3dOrigin
+%   circles3d, circle3dOrigin, circle3dPoint
 %
 %   ---------
 %   author : David Legland 
@@ -34,8 +34,11 @@ phi     = circle(:,6);
 % find origin of the circle
 ori     = circle3dOrigin(circle);
 
+% normal vector of the supporting plane (cartesian coords)
+vn      = sph2cart2(deg2rad([theta phi]));
+
 % create plane containing the circle
-plane   = createPlane([xc yc zc], deg2rad([theta phi]));
+plane   = createPlane([xc yc zc], vn);
 
 % find position of point on the circle plane
 pp0     = planePosition(ori,    plane);
