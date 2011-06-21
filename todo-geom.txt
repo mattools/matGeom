@@ -7,19 +7,6 @@ Mettre en place le site Sourceforge
 
 * trouver un logo pour SourceForge (2011.02.17)
 
-* reflechir a convention pour les angles : radians ou degres ? (2011.03.12)
-    * avantages : 
-        * plus intuitif
-        * plus coherent par rapport a certaines fonctions Matlab
-    * idee generale : 
-        * garder les radians pour les fonctions de bas niveau (angles entre
-            droites, entre plans...)
-        * rotations utilisent des radians -> plus rapides 
-        * utiliser des degres pour representer les formes
-        * ellipses et ellipsoides d'inertie renvoient des degres
-        * angles d'Euler utilisent des degres (???)
-        * ordre : YAW PITCH ROLL
-   
 * Create an "obsolete" subpackage
     * maybe "obsolete2d" and "obsolete3d"
 
@@ -92,35 +79,7 @@ polynomialCurves2d
 
 geom3d
 ======
-   
-* Conventions pour les angles 3d pas geniales... (2010.07.28)
-    ex: drawCircle3d: theta+phi+psi
-    pas vraiment de lien avec les angles d'Euler.
-        2011.03.21 si, mais convention ZYZ, qui est pertinente aussi...
-    
-* Proposition de convention pour les angles (2011.03.12)
-    * partir sur angles d'Euler en convention XYZ (yaw-pitch-roll), base [0 0 0]
-    * stocker dans cet ordre
-        * centre
-        * taille
-        * orientation (yaw, pitch roll dans cet ordre)
-    * et appliquer les transfos dans cet ordre :
-        * Rotation autour Ox (roll),
-        * Rotation autour Oy (pitch),
-        * Rotation autour Oz (yaw),
-        * scaling
-        * recentrage
-    * Avantages :
-        * on applique les transfos de la fin vers le debut
-        * yaw plus intuitif que roll en premier ?
-        * marche bien pour des objets orientes selon leur axe d'inertie 
-    * pour les objets "plats" (cercles et ellipses 3D, tore...), ca semble
-        moins pertinent...
-        
-* faire le point sur les differentes orientations d'axe 3D (2010.07.22)
-    + X droite, Y fond, Z haut
-    + X droite, Y haut, Z avant
-
+  
 * (2011.02.17) fitting functions 
     + fitPlane
     + fitLine3d
