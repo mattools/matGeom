@@ -14,7 +14,7 @@ function varargout = drawEllipsoid(varargin)
 %   axis equal;
 %
 %   See also
-%   spheres, drawSphere, inertiaEllipsoid, ellipsoid
+%   spheres, drawSphere, drawTorus, inertiaEllipsoid, ellipsoid
 %
 % ------
 % Author: David Legland

@@ -11,7 +11,7 @@ function circles3d(varargin)
 %   The parameter PSI is used to locate a point on the 3D circle.
 %
 %   See also
-%   circle3dOrigin, circle3dPosition, intersectPlaneSphere
+%   circle3dOrigin, circle3dPosition, circle3dPoint, intersectPlaneSphere
 %   drawCircle3d, drawCircleArc3d, drawEllipse3d
 %
 % ------

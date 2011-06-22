@@ -17,6 +17,6 @@ function spheres(varargin)
 %
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@grignon.inra.fr
 % Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.

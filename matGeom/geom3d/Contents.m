@@ -110,6 +110,7 @@
 % 3D circles and ellipses
 %   circles3d                 - Description of functions operating on 3D circles
 %   circle3dPosition          - Return the angular position of a point on a 3D circle
+%   circle3dPoint             - Coordinates of a point on a 3D circle from its position
 %   circle3dOrigin            - Return the first point of a 3D circle
 %   drawCircle3d              - Draw a 3D circle
 %   drawCircleArc3d           - Draw a 3D circle arc
@@ -129,6 +130,7 @@
 %   revolutionSurface         - Create a surface of revolution from a planar curve
 %   surfaceCurvature          - Curvature on a surface from angle and principal curvatures
 %   drawEllipsoid             - Draw a 3D ellipsoid
+%   drawTorus                 - Draw a torus (3D ring)
 %   drawCylinder              - Draw a cylinder
 %   drawSurfPatch             - Draw a 3D surface patch, with 2 parametrized surfaces
 %

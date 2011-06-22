@@ -1,7 +1,7 @@
 function varargout = revolutionSurface(varargin)
 %REVOLUTIONSURFACE Create a surface of revolution from a planar curve
 %
-%   usage : 
+%   usage 
 %   [X Y Z] = revolutionSurface(C1, C2, N);
 %   create the surface of revolution of parametrized function (xt, yt),
 %   with N+1 equally spaced slices, around the Oz axis.
@@ -30,22 +30,23 @@ function varargout = revolutionSurface(varargin)
 %   revolutionSurface(...);
 %   by itself, directly shows the created patch.
 %
-%   Example:
+%   Example
 %   % draws a piece of torus
 %   circle = circleAsPolygon([10 0 3], 50);
-%   [x y t] = revolutionSurface(circle, linspace(0, 4*pi/3, 50));
-%   surf(x, y, t);
+%   [x y z] = revolutionSurface(circle, linspace(0, 4*pi/3, 50));
+%   surf(x, y, z);
 %   axis equal;
 %
 %
 %
-%   See also: surf, transformPoint3d
+%   See also
+%       surf, transformPoint3d, drawSphere, drawTorus, drawEllipsoid
 %       surfature (on Matlab File Exchange)
 %
 %
 %   ------
 %   Author: David Legland
-%   e-mail: david.legland@jouy.inra.fr
+%   e-mail: david.legland@grignon.inra.fr
 %   Created: 2004-04-09
 %   Copyright 2005 INRA - CEPIA Nantes - MIAJ Jouy-en-Josas.
 
@@ -55,6 +56,9 @@ function varargout = revolutionSurface(varargin)
 %       revolution axis
 %   24/10/2008 fix angle vector
 %   29/07/2010 doc update
+
+
+%% Initialisations
 
 % default values
 
@@ -66,33 +70,41 @@ theta = linspace(0, 2*pi, 25);
 % use planar vertical axis as default revolution axis
 revol = [0 0 0 1];
 
-% extract generating curve
+% extract the generating curve
 var = varargin{1};
 if size(var, 2)==1
     xt = var;
     yt = varargin{2};
-    varargin(1:2)=[];
+    varargin(1:2) = [];
 else
     xt = var(:,1);
     yt = var(:,2);
-    varargin(1)=[];
+    varargin(1) = [];
 end
 
 % extract optional parameters: angles, axis of revolution
+% parameters are identified from their length
 while ~isempty(varargin)
     var = varargin{1};
-    if length(var)==4
-        % axis of rotation
+    
+    if length(var) == 4
+        % axis of rotation in the base plane
         revol = var;
-    elseif length(var)==1
+        
+    elseif length(var) == 1
         % number of points -> create row vector of angles
         theta = linspace(0, 2*pi, var);
+        
     else
         % use all specified angle values
-        theta = var(:)';    
+        theta = var(:)';
+        
     end
     varargin(1) = [];
 end
+
+
+%% Create revolution surface
 
 % ensure length is enough
 m = length(xt);
@@ -106,7 +118,7 @@ yt = yt(:);
 
 % transform xt and yt to replace in the reference of the revolution axis
 tra = createTranslation(-revol(1:2));
-rot = createRotation(pi/2-lineAngle(revol));
+rot = createRotation(pi/2 - lineAngle(revol));
 [xt yt] = transformPoint(xt, yt, tra*rot);
 
 % compute surface vertices
@@ -114,19 +126,22 @@ x = xt * cos(theta);
 y = xt * sin(theta);
 z = yt * ones(size(theta));
 
-% format output depending on how many output parameters
+
+%% Process output arguments
+
+% format output depending on how many output parameters are required
 if nargout == 0
     % draw the revolution surface
-    surf(x,y,z)
+    surf(x, y, z);
+    
 elseif nargout == 1
     % draw the surface and return a handle to the shown structure
     h = surf(x, y, z);
     varargout{1} = h;
-elseif nargout==3
+    
+elseif nargout == 3
     % return computed mesh
-    varargout{1} = x;
-    varargout{2} = y;
-    varargout{3} = z;
+    varargout = {x, y, z};
 end
 
 
