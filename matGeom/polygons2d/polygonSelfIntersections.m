@@ -46,13 +46,12 @@ inds = (pos1 == 0 & pos2 == n) | (pos1 == n & pos2 == 0);
 points(inds, :) = [];
 pos1(inds)   = [];
 pos2(inds)   = [];
-% dist = distancePoints(points, poly(1,:));
-% [minDist ind] = min(dist);
-% if minDist < tol
-%     points(ind,:) = [];
-%     pos1(ind)   = [];
-%     pos2(ind)   = [];
-% end
+
+% remove multiple intersections
+[points I J] = unique(points, 'rows', 'first'); %#ok<NASGU>
+pos1 = pos1(I);
+pos2 = pos2(I);
+
 
 %% Post-processing
 

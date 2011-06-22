@@ -33,6 +33,7 @@ intersects = polygonSelfIntersections(poly);
 assertEqual(1, size(intersects, 1));
 assertElementsAlmostEqual([10 10], intersects);
 
+
 function testEllipseArc
 
 t = linspace(-pi/2, pi/2, 60)';
@@ -41,4 +42,15 @@ arc = [10+3*cos(t) 20+5*sin(t)];
 intersects = polygonSelfIntersections(arc);
 
 assertTrue(isempty(intersects));
+
+
+function testCrossingAtFirstPoint
+
+poly = [20 20; 30 20;20 30;20 10; 10 20];
+intersects = polygonSelfIntersections(poly);
+
+assertEqual(1, size(intersects, 1));
+
+exp = [20 20];
+assertElementsAlmostEqual(exp, intersects);
 
