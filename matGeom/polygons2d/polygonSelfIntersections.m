@@ -25,29 +25,40 @@ function varargout = polygonSelfIntersections(poly, varargin)
 % Created: 2009-06-15,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
+%   HISTORY
+%   2011-06-22 fix bug when removing origin vertex (thanks to Federico
+%       Bonelli)
+
+tol = 1e-14;
+
 % ensure the last point equals the first one
-if sum(abs(poly(end, :)-poly(1,:))<1e-14)~=2
+if sum(abs(poly(end, :)-poly(1,:)) < tol) ~= 2
     poly = [poly; poly(1,:)];
 end
 
 % compute intersections by calling algo for polylines
 [points pos1 pos2] = polylineSelfIntersections(poly);
 
-% If the first vertex was found as an intersection, it is removed
-dist = distancePoints(points, poly(1,:));
-[minDist ind] = min(dist); %#ok<ASGLU>
-points(ind,:) = [];
-pos1(ind)   = [];
-pos2(ind)   = [];
-
+% It may append that first vertex of polygon is detected as intersection,
+% the following tries to detect this
+n = size(poly, 1) - 1;
+inds = (pos1 == 0 & pos2 == n) | (pos1 == n & pos2 == 0);
+points(inds, :) = [];
+pos1(inds)   = [];
+pos2(inds)   = [];
+% dist = distancePoints(points, poly(1,:));
+% [minDist ind] = min(dist);
+% if minDist < tol
+%     points(ind,:) = [];
+%     pos1(ind)   = [];
+%     pos2(ind)   = [];
+% end
 
 %% Post-processing
 
 % process output arguments
-if nargout<=1
-    varargout{1} = points;
-elseif nargout==3
-    varargout{1} = points;
-    varargout{2} = pos1;
-    varargout{3} = pos2;
+if nargout <= 1
+    varargout = {points};
+elseif nargout == 3
+    varargout = {points, pos1, pos2};
 end
