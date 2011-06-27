@@ -14,7 +14,7 @@ function boxes3d(varargin)
 %
 %   See also
 %   point3dBounds, box3dVolume, drawBox3d
-%   intersectBoxes3d, mergeBoxes3d
+%   intersectBoxes3d, mergeBoxes3d, randomPointInBox3d
 %
 %
 % ------
