@@ -1,4 +1,4 @@
-function varargout = sph2cart2(varargin)
+function varargout = sph2cart2(theta, phi, rho)
 %SPH2CART2 Convert spherical coordinates to cartesian coordinates
 %
 %   C = SPH2CART2(S)
@@ -19,7 +19,7 @@ function varargout = sph2cart2(varargin)
 %   http://www.physics.oregonstate.edu/bridge/papers/spherical.pdf
 %
 %   See also:
-%   angles3d, cart2sph2
+%   angles3d, cart2sph2, sph2cart, sph2cart2d
 %
 %   ---------
 %   author : David Legland 
@@ -32,20 +32,28 @@ function varargout = sph2cart2(varargin)
 %       1 arg.
 %   03/11/2006: change convention for angle: uses order [THETA PHI RHO]
 
-if length(varargin)==1
-    var = varargin{1};
-    if size(var, 2)==2
-        var = [var ones(size(var, 1), 1)];
+% Process input arguments
+if nargin == 1
+    phi     = theta(:, 2);
+    if size(theta, 2) > 2
+        rho = theta(:, 3);
+    else
+        rho = ones(size(phi));
     end
-elseif length(varargin)==2
-    var = [varargin{1} varargin{2} ones(size(varargin{1}))];
-elseif length(varargin)==3
-    var = [varargin{1} varargin{2} varargin{3}];
+    theta   = theta(:, 1);
+    
+elseif nargin == 2
+    rho     = ones(size(theta));
+    
 end
 
-[x y z] = sph2cart(var(:,2), pi/2-var(:,1), var(:,3));
+% conversion
+rz = rho .* sin(theta);
+x  = rz  .* cos(phi);
+y  = rz  .* sin(phi);
+z  = rho .* cos(theta);
 
-if nargout == 1 || nargout == 0
+if nargout <= 1
     varargout{1} = [x, y, z];
 else
     varargout{1} = x;

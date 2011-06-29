@@ -65,6 +65,8 @@
 % Coordinate transforms
 %   sph2cart2                 - Convert spherical coordinates to cartesian coordinates
 %   cart2sph2                 - Convert cartesian coordinates to spherical coordinates
+%   cart2sph2d                - Convert cartesian coordinates to spherical coordinates in degrees
+%   sph2cart2d                - Convert spherical coordinates to cartesian coordinates in degrees
 %   cart2cyl                  - Convert cartesian to cylindrical coordinates
 %   cyl2cart                  - Convert cylindrical to cartesian coordinates
 %
@@ -140,6 +142,7 @@
 %   intersectBoxes3d          - Intersection of two 3D bounding boxes
 %   mergeBoxes3d              - Merge 3D boxes, by computing their greatest extent
 %   box3dVolume               - Volume of a 3-dimensional box
+%   randomPointInBox3d        - Generate random point(s) within a 3D box
 %   drawBox3d                 - Draw a 3D box defined by coordinate extents
 %
 % Geometric transforms
@@ -194,4 +197,5 @@
 %   createEulerAnglesRotation - Create a rotation matrix from 3 euler angles
 
 % Others
+
 

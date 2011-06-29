@@ -35,7 +35,7 @@ phi     = circle(:,6);
 ori     = circle3dOrigin(circle);
 
 % normal vector of the supporting plane (cartesian coords)
-vn      = sph2cart2(deg2rad([theta phi]));
+vn      = sph2cart2d([theta phi]);
 
 % create plane containing the circle
 plane   = createPlane([xc yc zc], vn);

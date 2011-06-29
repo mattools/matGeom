@@ -19,7 +19,7 @@ function varargout = cart2sph2(varargin)
 %   cart2sph2([0 0 1])  returns [0 0 1];
 %
 %   See also:
-%   angles3d, cart2sph, sph2cart2
+%   angles3d, sph2cart2, cart2sph, cart2sph2d
 %
 %   ---------
 %   author : David Legland 
