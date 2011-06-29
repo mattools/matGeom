@@ -152,18 +152,20 @@
 %   createRotationOx          - Create the 4x4 matrix of a 3D rotation around x-axis
 %   createRotationOy          - Create the 4x4 matrix of a 3D rotation around y-axis
 %   createRotationOz          - Create the 4x4 matrix of a 3D rotation around z-axis
+%   createBasisTransform3d    - Compute matrix for transforming a basis into another basis
+%   eulerAnglesToRotation3d   - Convert 3D Euler angles to 3D rotation matrix
+%   rotation3dToEulerAngles   - Extract Euler angles from a rotation matrix
 %   createRotation3dLineAngle - Create rotation around a line by an angle theta
 %   rotation3dAxisAndAngle    - Determine axis and angle of a 3D rotation matrix
-%   rotation3dToEulerAngles   - Extract Euler angles from a rotation matrix
-%   eulerAnglesToRotation3d   - Convert 3D Euler angles to 3D rotation matrix
 %   recenterTransform3d       - Change the fixed point of an affine 3D transform
-%   createBasisTransform3d    - Compute matrix for transforming a basis into another basis
 %   composeTransforms3d       - Concatenate several space transformations
 %
 % Various drawing Functions
 %   drawGrid3d                - Draw a 3D grid on the current axis
 %   drawAxis3d                - Draw a coordinate system and an origin
 %   drawAxisCube              - Draw a colored cube representing axis orientation
+%   drawCube                  - Draw a 3D centered cube, eventually rotated
+%   drawCuboid                - Draw a 3D cuboid, eventually rotated
 %
 %
 %   Credits:

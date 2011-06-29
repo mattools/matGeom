@@ -34,6 +34,20 @@ function varargout = drawCylinder(cyl, varargin)
 %   h = drawCylinder([0 0 0 10 20 30 5]);
 %   set(h, 'facecolor', 'b');
 %
+%   % Draw three mutually intersecting cylinders
+%     p0 = [30 30 30];
+%     p1 = [90 30 30];
+%     p2 = [30 90 30];
+%     p3 = [30 30 90];
+%     figure;
+%     drawCylinder([p0 p1 25], 'FaceColor', 'r');
+%     hold on
+%     drawCylinder([p0 p2 25], 'FaceColor', 'g');
+%     drawCylinder([p0 p3 25], 'FaceColor', 'b');
+%     axis equal
+%     set(gcf, 'renderer', 'opengl')
+%     view([60 30])
+%
 %   See Also:
 %   drawSphere, drawLine3d, surf
 %
@@ -47,6 +61,10 @@ function varargout = drawCylinder(cyl, varargin)
 %   2006/12/14 bug for coordinate conversion, vectorize transforms
 %   04/01/2007 better input processing, manage end caps of cylinder
 %   19/06/2009 use function localToGlobal3d, add docs
+%   2011-06-29 use sph2cart2d, code cleanup
+
+
+%% Input argument processing
 
 if iscell(cyl)
     res = zeros(length(cyl), 1);
@@ -87,26 +105,36 @@ if ~isempty(varargin)
     end
 end
 
-% compute orientation angle of cylinder
-[theta phi rho] = cart2sph2(cyl(4:6)-cyl(1:3));
-dphi = 0:2*pi/N:2*pi;
+
+%% Computation of mesh coordinates
+
+% extreme points of cylinder
+p1 = cyl(1:3);
+p2 = cyl(4:6);
 
 % radius of cylinder
 r = cyl(7);
 
-% points of cylinder
-x = repmat(cos(dphi)*r, [2 1]);
-y = repmat(sin(dphi)*r, [2 1]);
-z = repmat([0;rho], [1 length(dphi)]);
+% compute orientation angle of cylinder
+[theta phi rho] = cart2sph2d(p2 - p1);
+dphi = linspace(0, 2*pi, N+1);
 
-% transform points
-trans   = localToGlobal3d(cyl(1:3), theta, phi, 0);
+% generate a cylinder oriented upwards
+x = repmat(cos(dphi) * r, [2 1]);
+y = repmat(sin(dphi) * r, [2 1]);
+z = repmat([0 ; rho], [1 length(dphi)]);
+
+% transform points 
+trans   = localToGlobal3d(p1, theta, phi, 0);
 pts     = transformPoint3d([x(:) y(:) z(:)], trans);
 
 % reshape transformed points
 x2 = reshape(pts(:,1), size(x));
 y2 = reshape(pts(:,2), size(x));
 z2 = reshape(pts(:,3), size(x));
+
+
+%% Display cylinder mesh
 
 % add default drawing options
 varargin = [{'FaceColor', 'g', 'edgeColor', 'none'} varargin];

@@ -14,7 +14,8 @@ function varargout = drawEllipsoid(varargin)
 %   axis equal;
 %
 %   See also
-%   spheres, drawSphere, drawTorus, inertiaEllipsoid, ellipsoid
+%   spheres, drawSphere, inertiaEllipsoid, ellipsoid
+%   drawTorus, drawCuboid 
 %
 % ------
 % Author: David Legland
@@ -117,11 +118,11 @@ trans   = tra * rotZ * rotY * rotX * sca;
 
 % Process output
 if nargout == 0
-    % no output: draw the sphere
+    % no output: draw the ellipsoid
     surf(x, y, z, options{:});
     
 elseif nargout == 1
-    % one output: draw the sphere and return handle 
+    % one output: draw the ellipsoid and return handle 
     varargout{1} = surf(x, y, z, options{:});
     
 elseif nargout == 3
