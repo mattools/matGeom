@@ -1,22 +1,22 @@
 function varargout = drawGraphEdges(varargin)
 %DRAWGRAPHEDGES Draw edges of a graph
 %
-%   DRAWGRAPHEDGES(NODES, EDGES) 
-%   draw a graph specified by a set of nodes (array N*2 or N*3,
+%   drawGraphEdges(NODES, EDGES) 
+%   Draws a graph specified by a set of nodes (array N-by-2 or N-by-3,
 %   corresponding to coordinate of each node), and a set of edges (an array
-%   Ne*2, containing for each edge the first and the second node).
-%   Default drawing is a red circle for nodes and a blue line for edges.
+%   Ne-by-2, containing to the first and the second node of each edge).
+%
+%   drawGraphEdges(..., SEDGES)
+%   Specifies the draw mode for each element, as in the classical 'plot'
+%   function.
+%   Default drawing is a blue line for edges.
 %
 %
-%   DRAWGRAPHEDGES(..., SEDGES)
-%   specify the draw mode for each element, as in the classical 'plot'
-%   function. To not display some elements, uses 'none'.
-%
-%
-%   H = DRAWGRAPHEDGES(...) 
+%   H = drawGraphEdges(...) 
 %   return handle to the set of edges.
 %   
-%   See also drawGraph
+%   See also 
+%   drawGraph
 %
 % ------
 % Author: David Legland

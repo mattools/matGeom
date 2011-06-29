@@ -31,7 +31,7 @@ function angles3d(varargin)
 %   See also
 %   cart2sph2, sph2cart2
 %   anglePoints3d, angleSort3d, sphericalAngle, randomAngle3d
-%   dihedralAngle, polygon3dNormalAngle, eulerAnglesToMatrix
+%   dihedralAngle, polygon3dNormalAngle, eulerAnglesToRotation3d
 %   rotation3dAxisAndAngle, rotation3dToEulerAngles
 %
 %

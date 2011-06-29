@@ -13,27 +13,33 @@ function varargout = randomAngle3d(varargin)
 %   positively counter-clockwise.
 %
 %   [THETA PHI] = randomAngle3d(N)
-%   generates N random angles (N is a scalar)
+%   generates N random angles (N is a scalar). The result is a N-by-2
+%   array.
 %
 %   Example:
-%   randomAngle3d
+%     % Draw some points on the surface of a sphere
+%     figure;
+%     drawSphere; hold on;
+%     drawPoint3d(pts, '.');
+%     axis equal;
 %
 %   See also:
 %   angles3d, sph2cart2, cart2sph2
 %
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 18/02/2005.
-%
+% ------
+% Author: David Legland
+% e-mail: david.legland@grignon.inra.fr
+% created the 18/02/2005.
+% Copyright INRA - Cepia Software platform
 
 %   HISTORY
-%   04/01/2007: change angle order, update doc
+%   2007-01-04 change angle order, update doc
+%   2011-06-27 fix bug in input parsing, add doc
+
 
 N = 1;
 if ~isempty(varargin)
-    N = varargin(1);
+    N = varargin{1};
 end
 
 phi = 2*pi*rand(N, 1);
