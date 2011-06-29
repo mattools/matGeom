@@ -31,6 +31,7 @@
 %
 % General functions
 %   meshFace                 - Return the vertex indices of a face in a mesh
+%   computeMeshEdges         - Computes edges array from face array
 %   meshEdgeFaces            - Compute index of faces adjacent to each edge of a mesh
 %   faceCentroids            - Compute centroids of a mesh faces
 %   faceNormal               - Compute normal vector of faces in a 3D mesh
