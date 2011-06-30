@@ -1,6 +1,6 @@
 change log for geom3d
 
-geom3d release 2011.??.??
+geom3d release 2011.06.30
 =========================
 
 Important changes:
@@ -14,9 +14,13 @@ New features
 - added functions intersectLinePolygon3d, intersectRayPolygon3d, and
     intersectLineTriangle3d
 - added function eulerAngleToRotation3d
+- added drawing functions: drawTorus, drawCube, drawCuboid
+- added function randomPointInBox3d
+- added functions sph2cart2d and cart2sph2d, that work with degrees
     
 Bug fixes
 - fixed bugs in intersectEdgePlanes
+- fixed bugs in isPerpendicular3d
 - enhanced createPlane
  
  

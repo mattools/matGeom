@@ -1,5 +1,23 @@
 change log for geom2d
 
+geom2d, release 2011.06.30
+==========================
+
+New functions
+- added function rotateVector
+- added function randomPointInBox
+
+Changes
+- Shape orientation is now represented using degrees
+- function vectorAngle can now compute the angle between two vectors
+
+Bug fixes
+- enhanced function distancePointEdge
+- enhanced function isPointOnEdge
+- enhanced function isParallel
+- fixed bugs intersectLineCircle
+
+
 geom2d, release 2011.03.21
 ==========================
 

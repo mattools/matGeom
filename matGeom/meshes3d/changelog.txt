@@ -1,0 +1,16 @@
+change log for meshes3d
+
+meshes3d release 2011.06.30
+===========================
+
+Important changes:
+- Package has been splitted up into 'geom3d' and 'meshes3d'. See changelog of
+    "geom3d" package for older revisions
+
+New Functions
+- added function clipMeshVertices
+- added function computeMeshEdges
+
+Bug Fixes
+- fixed bug in edge labeling of createCubeOctaedron
+

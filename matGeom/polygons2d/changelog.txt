@@ -1,0 +1,27 @@
+change log for geom2d
+
+geom2d, release 2011.06.30
+==========================
+
+Changes 
+- re-organized the library in three sub-directories: geom2d, polygons2d, and
+    polynomialCurves2d
+- cleanup of code and doc
+
+New functions
+- added function drawOrientedBox
+- added function pointSetBounds, that computes bounding box of a set of points
+- added function pointSetsAverage
+- added function minimumCaliperDiameter
+- added function isPointInTriangle
+- added function findPoint
+
+Changes
+- function intersectLinePolygon now returns unique intersections
+- enhanced intersectLinePolygon
+- enhanced polygonSelfIntersections
+
+Bug fixes
+- general code and doc cleanup
+- fixed bugs in polygonLength and parametrize
+     
