@@ -105,3 +105,11 @@ meshes3d
 
 * 2011.04.07 function for creating triangular mesh for a sphere
      createSphereMesh ?
+     
+     
+Misc.
+=====
+
+* 2011.07.17 create 'shapes2d' directory, for statistical shape analysis ?
+
+     

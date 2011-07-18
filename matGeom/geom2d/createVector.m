@@ -8,15 +8,15 @@ function vect = createVector(p1, p2)
 %   dimension.
 %
 %   If one of the inputs is a N-by-Nd array, the other input is
-%   automatically repeated.
+%   automatically repeated, and the result is N-by-Nd.
 %
-%   If both inputs have the same size, the result alos have the same size.
+%   If both inputs have the same size, the result also have the same size.
 %
 %
 %   Example
-%   vectors2d, points2d, createVector
 %
 %   See also
+%   vectors2d, vectors3d, points2d
 %
 %
 % ------
