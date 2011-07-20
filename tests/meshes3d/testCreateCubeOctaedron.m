@@ -80,5 +80,5 @@ assertTrue(sum(dp <= 0) == 0);
 function [nv ne nf] = getMeshElementsNumber
 
 nv = 12;
-ne = 27;
+ne = 24;
 nf = 14;

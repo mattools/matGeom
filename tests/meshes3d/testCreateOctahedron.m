@@ -1,10 +1,10 @@
-function test_suite = testCreateOctaedron(varargin) %#ok<STOUT>
-%TESTCREATEOCTAEDRON  One-line description here, please.
+function test_suite = testCreateOctahedron(varargin) %#ok<STOUT>
+%TESTCREATEOCTAHEDRON  One-line description here, please.
 %
-%   output = testCreateOctaedron(input)
+%   output = testCreateOctahedron(input)
 %
 %   Example
-%   testCreateOctaedron
+%   testCreateOctahedron
 %
 %   See also
 %
