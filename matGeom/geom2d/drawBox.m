@@ -2,11 +2,14 @@ function varargout = drawBox(box, varargin)
 %DRAWBOX Draw a box defined by coordinate extents
 %   
 %   drawBox(BOX)
-%   Draw a box defined by extent: BOX = [XMIN XMAX YMIN YMAX].
+%   Draws a box defined by its extent: BOX = [XMIN XMAX YMIN YMAX].
 %
+%   drawBox(..., NAME, VALUE)
+%   Specifies drawing parameters using parameter name and value. See plot
+%   function for syntax.
 %
 %   See Also:
-%   drawRect2, drawRect
+%   drawOrientedBox, drawRect
 %
 %   ---------
 %   author : David Legland 
@@ -27,7 +30,9 @@ ymax = box(:,4);
 nBoxes = size(box, 1);
 r = zeros(nBoxes, 1);
 
+% iterate on boxes
 for i = 1:nBoxes
+    % exract min and max values
     tx(1) = xmin(i);
     ty(1) = ymin(i);
     tx(2) = xmax(i);
@@ -39,9 +44,11 @@ for i = 1:nBoxes
     tx(5) = xmin(i);
     ty(5) = ymin(i);
 
+    % display polygon
     r(i) = plot(tx, ty, varargin{:});
 end
 
+% format output
 if nargout > 0
     varargout = {r};
 end
