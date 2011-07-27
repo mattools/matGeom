@@ -46,7 +46,7 @@
 %   parallelLine         - Create a line parallel to another one.
 %   intersectLines       - Return all intersection points of N lines in 2D
 %   lineAngle            - Computes angle between two straight lines
-%   linePosition         - Return position of a point on a line
+%   linePosition         - Position of a point on a line
 %   lineFit              - Fit a straight line to a set of points
 %   clipLine             - Clip a line with a box
 %   reverseLine          - Return same line but with opposite orientation
@@ -122,6 +122,8 @@
 % Angles
 %   angles2d             - Description of functions for manipulating angles
 %   normalizeAngle       - Normalize an angle value within a 2*PI interval
+%   angleAbsDiff         - Absolute difference between two angles
+%   angleDiff            - Difference between two angles
 %   deg2rad              - Convert angle from degrees to radians
 %   rad2deg              - Convert angle from radians to degrees
 %
@@ -129,6 +131,7 @@
 %   boxes2d              - Description of functions operating on bounding boxes
 %   intersectBoxes       - Intersection of two bounding boxes
 %   mergeBoxes           - Merge two boxes, by computing their greatest extent
+%   randomPointInBox     - Generate random point within a box
 %   drawBox              - Draw a box defined by coordinate extents
 %
 % Various drawing functions
@@ -186,3 +189,5 @@ help('Contents');
 
 %% Others...
 %   drawRect2            - Draw centered rectangle on the current axis
+
+

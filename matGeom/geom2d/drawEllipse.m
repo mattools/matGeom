@@ -1,19 +1,18 @@
 function varargout = drawEllipse(varargin)
 %DRAWELLIPSE Draw an ellipse on the current axis
 %
-%   drawEllipse(XC, YC, A, B);
-%   Draws ellipse with center (XC, YC), with main axis of half-length A,
-%   and second axis of half-length B. 
-%
-%   drawEllipse(..., THETA);
-%   Also specifies orientation of ellipse, given in degrees. Origin of
-%   orientation is (Ox) axis. 
-%
-%   drawEllipse(PARAM);
+%   drawEllipse(ELLI);
+%   Draws the ellipse ELLI in the form [XC YC RA RB THETA], with center
+%   (XC, YC), with main axis of half-length RA and RB, and orientation
+%   THETA in degrees counted counter-clockwise.
 %   Puts all parameters into one single array.
 %
+%   drawEllipse(XC, YC, RA, RB);
+%   drawEllipse(XC, YC, RA, RB, THETA);
+%   Specifies ellipse parameters as separate arguments (old syntax).
+%
 %   drawEllipse(..., NAME, VALUE);
-%   specify drawing style of ellipse, see the help of plot function.
+%   Specifies drawing style of ellipse, see the help of plot function.
 %
 %   H = drawEllipse(...);
 %   Also returns handles to the created line objects.
@@ -22,9 +21,11 @@ function varargout = drawEllipse(varargin)
 %   to have the same size.
 %
 %   Example:
-%   figure(1); clf; hold on;
-%   drawEllipse([50 50 40 20 30]);
-%   axis equal;
+%   % Draw an ellipse centered in [50 50], with semi major axis length of
+%   % 40, semi minor axis length of 20, and rotated by 30 degrees.
+%     figure(1); clf; hold on;
+%     drawEllipse([50 50 40 20 30]);
+%     axis equal;
 %
 %   See also:
 %   ellipses2d, drawCircle, drawEllipseArc, ellipseAsPolygon

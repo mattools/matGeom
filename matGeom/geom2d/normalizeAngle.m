@@ -23,6 +23,10 @@ function alpha = normalizeAngle(alpha, varargin)
 %   See also
 %   vectorAngle, lineAngle
 %
+%   References
+%   Follows the same convention as apache commons library, see:
+%   http://commons.apache.org/math/api-2.2/org/apache/commons/math/util/MathUtils.html
+%
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

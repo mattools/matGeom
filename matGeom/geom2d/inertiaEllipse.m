@@ -6,10 +6,11 @@ function ell = inertiaEllipse(points)
 %   the inertia ellispe of the set of points.
 %
 %   The result has the form:
-%   ELL2 = [XC YC A B THETA],
+%   ELL = [XC YC A B THETA],
 %   with XC and YC being the center of mass of the point set, A and B are
 %   the lengths of the inertia ellipse (see below), and THETA is the angle
-%   of the main inertia axis with the horizontal (between 0 and PI).
+%   of the main inertia axis with the horizontal (counted in degrees
+%   between 0 and 180). 
 %   A and B are the standard deviations of the point coordinates when
 %   ellipse is aligned with the inertia axes.
 %
