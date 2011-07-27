@@ -1,5 +1,14 @@
 change log for geom2d
 
+geom2d, release 2011.??.??
+==========================
+
+New functions
+- added angleDiff and angleAbsDiff
+
+various doc updates
+
+
 geom2d, release 2011.06.30
 ==========================
 

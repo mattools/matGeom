@@ -10,7 +10,7 @@ function angles2d
 %   (Counter-Clockwise) orientation.
 %
 %   See also:
-%   normalizeAngle, angleSort, angleDiff, angleAbsDiff
+%   normalizeAngle, angleDiff, angleAbsDiff, angleSort
 %   angle2Points, angle3Points, vectorAngle, lineAngle, edgeAngle
 %   deg2rad, rad2deg
 %
