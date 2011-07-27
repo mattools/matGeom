@@ -79,9 +79,11 @@
 %   graphPeripheralVertices - Peripheral vertices of a graph
 %   graphCenter             - Center of a graph
 %   graphRadius             - Radius of a graph
+%   grFindGeodesicPath      - Find a geodesic path between two nodes in the graph
+%   grFindMaximalLengthPath - Find a path that maximizes sum of edge weights
 %
 % Operations for geometric graphs
-%   grRemoveMultiplePoints  - Remove groups of close nodes in a graph
+%   grMergeNodeClusters     - Merge cluster of connected nodes in a graph
 %   grMergeNodesMedian      - Replace several nodes by their median coordinate
 %   clipGraph               - Clip a graph with a rectangular area
 %   addSquareFace           - Add a (square) face defined from its vertices to a graph
@@ -124,9 +126,9 @@
 
 % Deprecated functions
 %   grSimplifyBranches_old  - Replace branches of a graph by single edges
+%   grRemoveMultiplePoints  - Remove groups of close nodes in a graph
 %
 % Functions that requires further development
 %   quiverToGraph           - Converts quiver data to quad mesh
 
 % Other functions
-
