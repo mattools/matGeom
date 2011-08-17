@@ -111,5 +111,5 @@ Misc.
 =====
 
 * 2011.07.17 create 'shapes2d' directory, for statistical shape analysis ?
-
+    * read / write meshes in various formats
      
