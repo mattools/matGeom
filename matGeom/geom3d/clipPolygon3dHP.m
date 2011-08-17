@@ -1,7 +1,7 @@
 function poly2 = clipPolygon3dHP(poly, plane)
 %CLIPPOLYGON3DHP clip a 3D polygon with Half-space
 %
-%   usage :
+%   usage
 %   POLY2 = clipPolygon3dHP(POLY, PLANE)
 %   POLY is a [Nx3] array of points, and PLANE is given as :
 %   [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2].
@@ -15,11 +15,11 @@ function poly2 = clipPolygon3dHP(poly, plane)
 %
 %   There is a problem for non-convex polygons, as they can be clipped in
 %   several polygons. Possible solutions:
-%   - create another function 'clipConvexPolygon3dPlane' or
+%   * create another function 'clipConvexPolygon3dPlane' or
 %       'clipConvexPolygon3d', using a simplified algorithm
-%   - returns a list of polygons instead of a single polygon,
-%   - in the case of one polygon as return decide what to return
-%   - and rename this function to 'clipPolygon3d'
+%   * returns a list of polygons instead of a single polygon,
+%   * in the case of one polygon as return decide what to return
+%   * and rename this function to 'clipPolygon3d'
 %
 %   See also:
 %   poygons3d, polyhedra, clipConvexPolygon3dHP
@@ -32,64 +32,92 @@ function poly2 = clipPolygon3dHP(poly, plane)
 %
 
 %   HISTORY
-%   04/01/2007: add todo flag
+%   2007-01-04 add todo flag
+%   2011-08-17 rewrite algo, that works for convex polygons, but is slower
+%       than function clipConvexPolgon3dHP
 
+
+%% Pre-Processing
 
 % ensure last point is the same as the first one (makes computation easier)
-if sum(poly(end, :)==poly(1,:))~=3
+if sum(poly(end, :) == poly(1,:)) ~= 3
     poly = [poly; poly(1,:)];
 end
 
 % compute index of position wrt plane for each vertex
-b = isBelowPlane(poly, plane);
+below = isBelowPlane(poly, plane);
 
-% case of totally clipped polygon
-poly2 = zeros(0, 3);
-if sum(b)==0
+% in the case of a polygon totally over the plane, return empty array
+if sum(below) == 0
+    poly2 = zeros(0, 3);
     return;
 end
 
-% compute edges
-N = size(poly, 1);
-edges = [poly([N 1:N-1], :) poly];
+% in the case of a polygon totally over the plane, return original polygon
+if sum(~below) == 0
+    poly2 = poly;
+    return;
+end
+
+% number of intersections
+nInter = sum(abs(diff(below)));
+
+% number of vertices of new polygon
+N   = size(poly, 1);
+% N2  = sum(below(1:end-1)) + nInter;
+N2  = sum(below) + nInter;
+poly2 = zeros(N2, 3);
 
 
-i=1;
-while i<=N
+%% Iteration on polygon vertices
+
+% vertex index in current polygon
+% initialized with first vertex below the plane (vertices before are drop)
+i = find(below, 1, 'first');
+
+% vertex index in result polygon
+j = 1;
+
+while i <= N
     
-    if isBelowPlane(poly(i,:), plane)
-        % keep all points located on the right side of line
-        poly2 = [poly2; poly(i,:)];
+    if below(i)
+        % keep points located below the plane
+        poly2(j, :) = poly(i,:);
+        i = i + 1;
+        j = j + 1;
+
     else
-        % compute of preceeding edge with line
-        if i>1
-            poly2 = [poly2; intersectLineEdge(line, edges(i, :))];
-        end    
+        % current vertex is above the plane. We know that previous vertex
+        % was below. We compute intersection of supporting line, find the
+        % next vertex below, and find next intersection.
         
-        % go to the next point on the left side
-        i=i+1;
-        while i<=N            
-            % find the next point on the right side
-            if isLeftOriented(poly(i,:), line)
-                % add intersection of previous edge
-                poly2 = [poly2; intersectLineEdge(line, edges(i, :))];
-                
-                % add current point
-                poly2 = [poly2; poly(i,:)];
-                
-                % exit the second loop
-                break;
-            end
-            
-            i=i+1;
+        % compute intersection of current edge with plane
+        line = createLine3d(poly(i-1, :), poly(i, :));
+        inter1 = intersectLinePlane(line, plane);
+        poly2(j, :) = inter1;
+        j = j + 1;
+        
+        % find index of next vertex below the plane, possibily re-starting
+        % from the beginning of the polygon
+        while ~below(mod(i - 1, N) + 1)
+            i = i + 1;
         end
+        
+        % compute intersection of current line with plane
+        i2 = mod(i - 1, N) + 1;
+        line = createLine3d(poly(i2-1, :), poly(i2, :));
+        inter2 = intersectLinePlane(line, plane);
+        poly2(j, :) = inter2;
+        j = j + 1;
+        
+        % add also the current vertex
+        poly2(j, :) = poly(i2, :);
+        j = j + 1;
+        i = i + 1;
     end
-    
-    i=i+1;
 end
 
 % remove last point if it is the same as the first one
-if sum(poly2(end, :)==poly(1,:))==2
-    poly2 = poly2(1:end-1, :);
+if sum(poly2(end, :) == poly2(1,:)) == 3
+    poly2(end, :) = [];
 end
-

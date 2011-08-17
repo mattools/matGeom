@@ -106,7 +106,9 @@
 %   intersectLinePolygon3d    - Intersection point of a 3D line and a 3D polygon
 %   intersectLineTriangle3d   - Intersection point of a 3D line and a 3D triangle
 %   intersectRayPolygon3d     - Intersection point of a 3D ray and a 3D polygon
-%   drawPolyline3d            - Draw a 3D polyline specified by a list of points
+%   clipConvexPolygon3dHP     - Clip a convex 3D polygon with Half-space
+%   drawPolygon3d             - Draw a 3D polygon specified by a list of vertices
+%   drawPolyline3d            - Draw a 3D polyline specified by a list of vertices
 %   fillPolygon3d             - Fill a 3D polygon specified by a list of points
 %
 % 3D circles and ellipses
@@ -199,5 +201,4 @@
 %   createEulerAnglesRotation - Create a rotation matrix from 3 euler angles
 
 % Others
-
 

@@ -27,7 +27,6 @@
 %     drawMesh(n, f, 'faceColor', 'g', 'linewidth', 2);
 %     axis equal;
 %  
-%     
 %
 % General functions
 %   meshFace                 - Return the vertex indices of a face in a mesh
@@ -51,7 +50,6 @@
 %   checkMeshAdjacentFaces   - Check if adjacent faces of a mesh have similar orientation
 %   clipMeshVertices         - Clip vertices of a surfacic mesh and remove outer faces
 %   clipConvexPolyhedronHP   - Clip a convex polyhedron by a plane
-%   clipConvexPolygon3dHP    - Clip a convex 3D polygon with Half-space
 %
 % Typical polyhedra
 %   polyhedra                - Index of classical polyhedral meshes
@@ -80,7 +78,6 @@
 % Homepage: http://matgeom.sourceforge.net/
 % http://www.pfl-cepia.inra.fr/index.php?page=geom3d
 % Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
-
 
 
 % Deprecated:
