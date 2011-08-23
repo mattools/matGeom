@@ -1,4 +1,4 @@
-function area = meshArea(vertices, edges, faces)
+function area = meshSurfaceArea(vertices, edges, faces)
 %MESHSURFACEAREA Surface area of a polyhedral mesh
 %
 %   output = meshArea(input)
@@ -15,22 +15,29 @@ function area = meshArea(vertices, edges, faces)
 % Created: 2010-10-13,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform.
 
-if nargin==2
+
+% check input number
+if nargin == 2
     faces = edges;
 end
 
 % pre-compute normals
 normals = normalizeVector3d(faceNormal(vertices, faces));
 
+% init accumulator
 area = 0;
 
+
 if isnumeric(faces)
-    for i=1:size(faces, 1)
+    % iterate on faces in a numeric array
+    for i = 1:size(faces, 1)
         poly = vertices(faces(i, :), :);        
         area = area + polyArea3d(poly, normals(i,:));
     end
+    
 else
-    for i=1:size(faces, 1)
+    % iterate on faces in a cell array
+    for i = 1:size(faces, 1)
         poly = vertices(faces{i}, :);
         area = area + polyArea3d(poly, normals(i,:));
     end

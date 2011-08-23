@@ -28,6 +28,7 @@ function varargout = drawPolygon(varargin)
 %   2008/10/15 manage polygons with holes
 
 
+
 % check input
 if isempty(varargin)
     error('need to specify a polygon');
@@ -35,11 +36,13 @@ end
 
 var = varargin{1};
 
+%% Manage cell arrays of polygons
+
 % case of a set of polygons stored in a cell array
 if iscell(var)
     N = length(var);
     h = zeros(N, 1);
-    for i=1:N
+    for i = 1:N
         state = ishold(gca);
         hold on;
         % check for empty polygons
@@ -51,24 +54,26 @@ if iscell(var)
         end
     end
 
-    if nargout>0
-        varargout{1}=h;
+    if nargout > 0
+        varargout = {h};
     end
 
     return;
 end
 
 
+%% Parse coordinates and options
+
 % Extract coordinates of polygon vertices
-if size(var, 2)>1
+if size(var, 2) > 1
     % first argument is a polygon array
     px = var(:, 1);
     py = var(:, 2);
     varargin(1) = [];
 else
     % arguments 1 and 2 correspond to x and y coordinate respectively
-    if length(varargin)<2
-        error('should specify either a N*2 array, or 2 N*1 vectors');
+    if length(varargin) < 2
+        error('Should specify either a N-by-2 array, or 2 N-by-1 vectors');
     end
     
     px = varargin{1};
@@ -82,16 +87,19 @@ if isempty(varargin)
 end
 
 % check case of polygons with holes
-if sum(isnan(px(:)))>0
+if sum(isnan(px(:))) > 0
     polygons = splitPolygons([px py]);
     h = drawPolygon(polygons);
 
-    if nargout>0
-        varargout{1}=h;
+    if nargout > 0
+        varargout = {h};
     end
 
     return;
 end
+
+
+%% Draw the polygon
 
 % ensure last point is the same as the first one
 px(size(px, 1)+1, :) = px(1,:);
@@ -101,6 +109,6 @@ py(size(py, 1)+1, :) = py(1,:);
 h = plot(px, py, varargin{:});
 
 % format output arg
-if nargout>0
-    varargout{1}=h;
+if nargout > 0
+    varargout = {h};
 end

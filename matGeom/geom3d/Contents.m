@@ -102,6 +102,7 @@
 % 3D Polygons and curves
 %   polygons3d                - Description of functions operating on 3D polygons
 %   polygonCentroid3d         - Centroid (or center of mass) of a polygon
+%   triangleArea3d            - Area of a 3D triangle
 %   polygon3dNormalAngle      - Normal angle at a vertex of the 3D polygon
 %   intersectLinePolygon3d    - Intersection point of a 3D line and a 3D polygon
 %   intersectLineTriangle3d   - Intersection point of a 3D line and a 3D triangle
@@ -201,4 +202,3 @@
 %   createEulerAnglesRotation - Create a rotation matrix from 3 euler angles
 
 % Others
-

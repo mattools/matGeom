@@ -84,9 +84,15 @@ geom3d
     + fitPlane
     + fitLine3d
     
-                
+* 2011.08.17 polygonCentroid3d: better algorithm is possible
+
+* 2011.08.17 implement polygonArea3d
+   
+             
 meshes3d
 ========
+
+* 2011.08.23 create triMeshArea3d, based on triangleArea3d
         
 * 2010.10.06 document vertex position and edge and faces adjacencies for
     typical meshes 

@@ -1,11 +1,11 @@
-function pt = polygonCentroid3d(varargin)
+function centroid = polygonCentroid3d(varargin)
 %POLYGONCENTROID3D Centroid (or center of mass) of a polygon
 %
-%   PT = polygonCentroid3d(POLY)
+%   PTC = polygonCentroid3d(POLY)
 %   Computes center of mass of a polygon defined by POLY. POLY is a N-by-3
 %   array of double containing coordinates of polygon vertices.
 %
-%   PT = polygonCentroid3d(VX, VY, VZ)
+%   PTC = polygonCentroid3d(VX, VY, VZ)
 %   Specifies vertex coordinates as three separate arrays.
 %
 %   Example
@@ -20,27 +20,31 @@ function pt = polygonCentroid3d(varargin)
 %
 % ------
 % Author: David Legland
-% e-mail: david.legland@jouy.inra.fr
+% e-mail: david.legland@grignon.inra.fr
 % Created: 2007-09-18
 % Copyright 2007 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
 
 if nargin==1
+    % polygon is given as a single argument
     pts = varargin{1};
+    
 elseif nargin==2
+    % polygon is given as 3 corodinate arrays
     px = varargin{1};
     py = varargin{2};
     pz = varargin{3};
     pts = [px py pz];
 end
 
-% create support plane
-plane   = createPlane(pts(1:3, :));
+% create supporting plane (assuming first 3 points are not colinear...)
+plane = createPlane(pts(1:3, :));
 
 % project points onto the plane
 pts = planePosition(pts, plane);
 
-centro = polygonCentroid(pts);
+% compute centroid in 2D
+centro2d = polygonCentroid(pts);
 
-pt = planePoint(plane, centro);
-
+% project back in 3D
+centroid = planePoint(plane, centro2d);

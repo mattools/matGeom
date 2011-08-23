@@ -94,7 +94,6 @@
 % Measures on Polygons
 %   isPointInPolygon          - Test if a point is located inside a polygon
 %   polygonContains           - Test if a point is contained in a multiply connected polygon
-%   isPointInTriangle         - Test if a point is located inside a triangle
 %   polygonCentroid           - Compute the centroid (center of mass) of a polygon
 %   polygonArea               - Compute the signed area of a polygon
 %   polygonLength             - Perimeter of a polygon
@@ -102,6 +101,10 @@
 %   polygonBounds             - Compute the bounding box of a polygon
 %   distancePointPolygon      - Compute shortest distance between a point and a polygon
 %   distancePolygons          - Compute the shortest distance between 2 polygons
+%
+% Triangles
+%   isPointInTriangle         - Test if a point is located inside a triangle
+%   triangleArea              - Area of a triangle
 %
 % Functions from stochastic geometry
 %   steinerPoint              - Compute steiner point (weighted centroid) of a polygon
