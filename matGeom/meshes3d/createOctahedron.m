@@ -3,9 +3,9 @@ function varargout = createOctahedron()
 %
 %   [V E F] = createOctahedron;
 %   Create a 3D mesh representing an octahedron
-%   V is a 6*3 array with vertices coordinate, E is a 12*2 array containing
-%   indices of neighbour vertices, and F is a 8*3 array containing array of
-%   vertex index for each face.
+%   V is a 6-by-3 array with vertices coordinate, E is a 12-by-2 array
+%   containing indices of neighbour vertices, and F is a 8-by-3 array
+%   containing array of vertex index for each face.
 %
 %   [V F] = createOctahedron;
 %   Returns only the vertices and the face vertex indices.
@@ -14,9 +14,20 @@ function varargout = createOctahedron()
 %   Returns the data as a mesh structure, with fields 'vertices', 'edges'
 %   and 'faces'.
 %
+%   Vertices are located on grid vertices:
+%    ( ±1,  0,  0 )
+%    (  0, ±1,  0 )
+%    (  0,  0, ±1 )
+%
+%   Edge length of returned octahedron is sqrt(2).
+%   Surface area of octahedron is 2*sqrt(3)*a^2, approximately 6.9282 in
+%   this case.
+%   Volume of octahedron is sqrt(2)/3*a^3, approximately 1.3333 in this
+%   case.
+%
 %   Example
-%   [v e f] = createOctahedron;
-%   drawMesh(v, f);
+%     [v e f] = createOctahedron;
+%     drawMesh(v, f);
 %
 %
 %   See also

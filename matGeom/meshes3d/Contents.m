@@ -5,16 +5,16 @@
 %   polyhedra.
 %
 %   Meshes and Polyhedra are represented by a couple of variables {V, F}:
-%   V: N-by-3 array of vetrtices: [x1 y1 z1; ... ;xn yn zn];
-%   F: is either a [Nf*3] or [Nf*4] array containing reference for vertices
-%       of each face, or a [Nf*1] cell array, where each cell is an array
-%       containing a variable number of node indices.
+%   V: Nv-by-3 array of vertices: [x1 y1 z1; ... ; xn yn zn];
+%   F: is either a NF-by-3 or NF-by-4 array containing reference for
+%   vertices of each face, or a NF-by-1 cell array, where each cell is an
+%   array containing a variable number of node indices.
 %   For some functions, the array E of edges is needed. It consists in a
-%   Ne-by-2 array containing indices of source and target vertices. 
+%   NE-by-2 array containing indices of source and target vertices. 
 %
 %   The library provides function to create basic polyhedric meshes (the 5
 %   platonic solids, plus few others), as well as functions to perform
-%   basic computations (normal angles, face centroids...).
+%   basic computations (surface area, normal angles, face centroids...).
 %   The 'MengerSponge' structure is an example of mesh that is not simply
 %   connected (multiple tunnels in the structure).
 %
@@ -37,6 +37,7 @@
 %
 % Measures on meshes
 %   meshSurfaceArea          - Surface area of a polyhedral mesh
+%   trimeshSurfaceArea       - Surface area of a triangular mesh
 %   meshEdgeLength           - Lengths of edges of a polygonal or polyhedral mesh
 %   meshDihedralAngles       - Dihedral at edges of a polyhedal mesh
 %   polyhedronNormalAngle    - Compute normal angle at a vertex of a 3D polyhedron

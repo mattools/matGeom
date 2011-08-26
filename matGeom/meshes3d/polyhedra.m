@@ -2,8 +2,9 @@ function polyhedra(varargin)
 %POLYHEDRA Index of classical polyhedral meshes
 %   
 %   Polyhedra are specific meshes, with additional assumptions:
-%   - the set of faces is assumed to enclose a single 3D domain
-%   - each face as neighbor face for each edge
+%   * the set of faces is assumed to enclose a single 3D domain
+%   * each face has a neighbor face for each edge
+%   * some functions also assume that normals of all faces point ouwards 
 %
 %   Example
 %   % create a soccer ball mesh and display it
@@ -22,9 +23,8 @@ function polyhedra(varargin)
 %
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@grignon.inra.fr
 % Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 
 % HISTORY 
-% 2010-07-27 rename as meshes3d

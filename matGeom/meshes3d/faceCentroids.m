@@ -14,7 +14,7 @@ function centroids = faceCentroids(nodes, faces)
 %
 % ------
 % Author: David Legland
-% e-mail: david.legland@jouy.inra.fr
+% e-mail: david.legland@grignon.inra.fr
 % Created: 2006-07-05
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 

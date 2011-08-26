@@ -1,13 +1,29 @@
 function area = meshSurfaceArea(vertices, edges, faces)
 %MESHSURFACEAREA Surface area of a polyhedral mesh
 %
-%   output = meshArea(input)
+%   S = meshSurfaceArea(V, F)
+%   S = meshSurfaceArea(V, E, F)
+%   Computes the surface area of the mesh specified by vertex array V and
+%   face array F. Vertex array is a NV-by-3 array of coordinates. 
+%   Face array can be a NF-by-3 or NF-by-4 numeric array, or a Nf-by-1 cell
+%   array, containing vertex indices of each face.
+%
+%   This functions iterates on faces, extract vertices of the current face,
+%   and compute the sum of areas of face triangles.
+%
+%   This function assumes faces are coplanar and convex. If faces area
+%   triangular, the function "trimeshSurfaceArea".
+%
 %
 %   Example
-%   meshArea
+%     % compute the surface of a unit cube (should be equal to 6)
+%     [v f] = createCube;
+%     meshSurfaceArea(v, f)
+%     ans = 
+%         6
 %
 %   See also
-%
+%   meshes3d, trimeshSurfaceArea
 %
 % ------
 % Author: David Legland
