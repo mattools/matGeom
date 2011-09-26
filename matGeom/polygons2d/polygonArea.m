@@ -2,8 +2,8 @@ function area = polygonArea(varargin)
 %POLYGONAREA Compute the signed area of a polygon
 %
 %   A = polygonArea(POINTS);
-%   Compute area of a polygon defined by POINTS. POINTS is a
-%   [N*2] array of double.
+%   Compute area of a polygon defined by POINTS. POINTS is a N-by-2 array
+%   of double containing coordinates of vertices.
 %   
 %   Vertices of the polygon are supposed to be oriented Counter-Clockwise
 %   (CCW). In this case, the signed area is positive.
@@ -11,8 +11,9 @@ function area = polygonArea(varargin)
 %
 %   If polygon is self-crossing, the result is undefined.
 %
-%
-%   Algorithm:
+%   
+%   References
+%   algo adapted from P. Bourke web page
 %   http://local.wasp.uwa.edu.au/~pbourke/geometry/polyarea/
 %
 %   See also :
@@ -28,33 +29,31 @@ function area = polygonArea(varargin)
 %   25/04/2005: add support for multiple polygons
 %   12/10/2007: update doc
 
-% test multiple polygons
-if nargin>0
+% in case of polygon sets, computes several areas
+if nargin > 0
     var = varargin{1};
     if iscell(var)
         area = zeros(length(var), 1);
-        for i=1:length(var)
+        for i = 1:length(var)
             area(i) = polygonArea(var{i}, varargin{2:end});
         end
         return;
     end
 end
 
-if nargin==1
+% extract coordinates
+if nargin == 1
     var = varargin{1};
-    px = var(:,1);
-    py = var(:,2);
-elseif nargin==2
+    px = var(:, 1);
+    py = var(:, 2);
+elseif nargin == 2
     px = varargin{1};
     py = varargin{2};
 end
 
-% algo adapted from P. Bourke web page
-% http://local.wasp.uwa.edu.au/~pbourke/geometry/polyarea/
-sum = 0;
+% indices of next vertices
 N = length(px);
-for i=1:N-1
-    sum = sum + px(i)*py(i+1) - px(i+1)*py(i);
-end
-area = (sum + px(N)*py(1) - px(1)*py(N))/2;
-    
+iNext = [2:N 1];
+
+% compute area (vectorized version)
+area = sum(px .* py(iNext) - px(iNext) .* py) / 2;
