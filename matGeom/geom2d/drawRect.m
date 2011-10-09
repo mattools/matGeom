@@ -1,20 +1,25 @@
-function varargout = drawRect(varargin)
+function varargout = drawRect(rect, varargin)
 %DRAWRECT Draw rectangle on the current axis
 %   
-%   r = DRAWRECT(x, y, w, h) draw rectangle with width W and height H, at
-%   position (X, Y).
+%   drawRect(RECT)
+%   draws the rectangles defined by RECT = [X0 Y0 W H].
 %   the four corners of rectangle are then :
-%   (X, Y), (X+W, Y), (X, Y+H), (X+W, Y+H).
+%   (X0, Y0), (X0+W, Y0), (X0, Y0+H), (X0+W, Y0+H).
 %
-%   r = DRAWRECT(x, y, w, h, theta) also specifies orientation for
-%   rectangle. Theta is given in degrees.
+%   RECT = [X0 Y0 W H THETA] also specifies orientation for the rectangle.
+%   Theta is given in degrees.
 %
-%   r = DRAWRECT(coord) is the same as DRAWRECT(X,Y,W,H), but all
-%   parameters are packed into one array, whose dimensions is 4*1 or 5*1.
+%   If RECT is a N-by-4 or N-by-5 array, several rectangles are drawn.
 %
+%   drawRect(..., PARAM, VALUE)
+%   Specifies one or several parameters name-value pairs, see plot function
+%   for details.
+%
+%   H = drawRect(...) 
+%   Returns handle of the created graphic objects.
 %
 %   See Also:
-%   drawRect2, drawBox, drawOrientedBox
+%   drawOrientedBox, drawBox, rectToPolygon
 %
 %   ---------
 %
@@ -23,52 +28,18 @@ function varargout = drawRect(varargin)
 %   created the 10/12/2003.
 %
 
-%   HISTORY :
+%   HISTORY
 %   2003-12-12 add support for multiple rectangles
+%   2011-10-09 rewrite using rectToPolygon, add support for drawing options
 
+n = size(rect, 1);
 
-% default values
-theta = 0;
-
-% get entered values
-if length(varargin) > 3
-    x = varargin{1};
-    y = varargin{2};
-    w = varargin{3};
-    h = varargin{4};
-    if length(varargin)> 4 
-        theta = varargin{5} * pi / 180;
-    end
-    
-else
-    coord = varargin{1};
-    x = coord(1);
-    y = coord(2);
-    w = coord(3);
-    h = coord(4);
-    if length(coord) > 4
-        theta = coord(5) * pi / 180;
-    end
-end
-
-r = zeros(size(x));
-for i = 1:length(x)
-    tx = zeros(5, 1);
-    ty = zeros(5, 1);
-    tx(1) = x(i);
-    ty(1) = y(i);
-    tx(2) = x(i) + w(i) * cos(theta(i));
-    ty(2) = y(i) + w(i) * sin(theta(i));
-    tx(3) = x(i) + w(i) * cos(theta(i)) - h(i) * sin(theta(i));
-    ty(3) = y(i) + w(i) * sin(theta(i)) + h(i) * cos(theta(i));
-    tx(4) = x(i) - h(i) * sin(theta(i));
-    ty(4) = y(i) + h(i) * cos(theta(i));
-    tx(5) = x(i);
-    ty(5) = y(i);
-
-    r(i) = line(tx, ty);
+r = zeros(n, 1);
+for i = 1:n
+    poly = rectToPolygon(rect(i, :));
+    r(i) = drawPolygon(poly, varargin{:});
 end
 
 if nargout > 0
-    varargout{1} = r;
+    varargout = {r};
 end
