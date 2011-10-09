@@ -2,15 +2,15 @@ function b = isPerpendicular(v1, v2, varargin)
 %ISPERPENDICULAR Check orthogonality of two vectors
 %
 %   B = isPerpendicular(V1, V2)
-%   where V1 and V2 are 2 [1x3] arrays, returns 1 if the vectors are
-%   parallels, and 0 otherwise.
+%   where V1 and V2 are two 1-by-2 row arrays, returns 1 if the vectors are
+%   perpendicular, and 0 otherwise.
 %
-%   Also works when V1 and V2 are two [Nx3] arrays with same number of
-%   rows. In this case, return a [Nx1] array containing 1 at the positions
-%   of parallel vectors.
+%   Also works when V1 and V2 are two N-by-2 arrays with same number of
+%   rows. In this case, return a N-by-1 array containing 1 at the positions
+%   of perpendicular vectors.
 %
-%   Also works when one of V1 or V2 is scalar and the other one is [Nx3]
-%   array, in this case return [Nx1] results.
+%   Also works when one of V1 or V2 is 1-by-2 and the other one is a N-by-2
+%   array. In this case the result has size N-by-1.
 %
 %   B = isPerpendicular(V1, V2, ACCURACY)
 %   specifies accuracy of numerical tests, default is 1e-14.
@@ -18,9 +18,12 @@ function b = isPerpendicular(v1, v2, varargin)
 %
 %   Example
 %   isPerpendicular([1 2 1], [2 4 2])
-%   % returns 1
+%   ans =
+%       1
+%
 %   isPerpendicular([1 2 1], [1 3 2])
-%   % returns 0
+%   ans =
+%       0
 %
 %   See also
 %   vectors2d, isParallel, lines2d

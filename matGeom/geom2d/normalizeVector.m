@@ -17,7 +17,7 @@ function vn = normalizeVector(v)
 %       1
 %
 %   See Also:
-%   vectors2d, vecnorm
+%   vectors2d, vectorNorm
 %
 %
 %   ---------
@@ -35,8 +35,10 @@ function vn = normalizeVector(v)
 dim = size(v);
 
 if dim(1)==1 || dim(2)==1
+    % in case of one vector, the norm is a scalar
     vn = v / sqrt(sum(v.^2));
 else
-    %same as: vn = v./repmat(sqrt(sum(v.*v, 2)), [1 dim(2)]);
+    % for several vectors, need to adapt size of norm
     vn = bsxfun(@rdivide, v, sqrt(sum(v.^2, 2)));
+    %same as: vn = v./repmat(sqrt(sum(v.*v, 2)), [1 dim(2)]);
 end

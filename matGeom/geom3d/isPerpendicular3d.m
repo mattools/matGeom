@@ -2,15 +2,15 @@ function b = isPerpendicular3d(v1, v2, varargin)
 %ISPERPENDICULAR3D Check orthogonality of two 3D vectors
 %
 %   B = isPerpendicular3d(V1, V2)
-%   where V1 and V2 are 2 [1x3] arrays, returns 1 if the vectors are
+%   where V1 and V2 are two 1-by-3 arrays, returns 1 if the vectors are
 %   orthogonal, and 0 otherwise.
 %
-%   Also works when V1 and V2 are two [Nx3] arrays with same number of
-%   rows. In this case, return a [Nx1] array containing 1 at the positions
-%   of parallel vectors.
+%   Also works when V1 and V2 are two N-by-3 arrays with same number of
+%   rows. In this case, return a N-by-1 array containing 1 at the positions
+%   of orthogonal vectors.
 %
-%   Also works when one of V1 or V2 is scalar and the other one is [Nx3]
-%   array, in this case return [Nx1] results.
+%   Also works when one of V1 or V2 is 1-by-3 and the other one is N-by-3
+%   array, in this case return N-by-1 results.
 %
 %   B = isPerpendicular3d(V1, V2, TOL)
 %   Specifies the absolute tolerance (default is 1e-14).
