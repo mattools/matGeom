@@ -21,16 +21,26 @@ function varargout = drawLabels(varargin)
 
 %   HISTORY
 %   09/03/2007: (re)implement it...
+%   2011-10-11 add management of axes handle
 
 % check if enough inputs are given
 if isempty(varargin)
     error('wrong number of arguments in drawLabels');
 end
 
+% extract handle of axis to draw on
+if ishandle(varargin{1})
+    ax = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
+end
+
 % process input parameters
 var = varargin{1};
-if size(var, 2)==1
-    if length(varargin)<3
+if size(var, 2) == 1
+    % coordinates given as separate arguments
+    if length(varargin) < 3
         error('wrong number of arguments in drawLabels');
     end
     px  = var;
@@ -38,7 +48,8 @@ if size(var, 2)==1
     lbl = varargin{3};
     varargin(1:3) = [];
 else
-    if length(varargin)<2
+    % parameters given as a packed array
+    if length(varargin) < 2
         error('wrong number of arguments in drawLabels');
     end
     px  = var(:,1);
@@ -47,21 +58,23 @@ else
     varargin(1:2) = [];
 end
 
+% format for displaying numeric values
 format = '%.2f';
 if ~isempty(varargin)
     format = varargin{1};
 end
-if size(format, 1)==1 && size(px, 1)>1
+if size(format, 1) == 1 && size(px, 1) > 1
     format = repmat(format, size(px, 1), 1);
 end
 
+% compute the strings that have to be displayed
 labels = cell(length(px), 1);
 if isnumeric(lbl)
-    for i=1:length(px)
+    for i = 1:length(px)
         labels{i} = sprintf(format(i,:), lbl(i));
     end
 elseif ischar(lbl)
-    for i=1:length(px)
+    for i = 1:length(px)
         labels{i} = lbl(i,:);
     end
 elseif iscell(lbl)
@@ -69,8 +82,11 @@ elseif iscell(lbl)
 end
 labels = char(labels);
 
-h = text(px, py, labels);
+% display the text
+h = text(px, py, labels, 'parent', ax);
 
-if nargout>0
-    varargout{1}=h;
+% format output
+if nargout > 0
+    varargout = {h};
 end
+

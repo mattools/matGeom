@@ -135,13 +135,17 @@
 %   randomPointInBox      - Generate random point within a box
 %   drawBox               - Draw a box defined by coordinate extents
 %
+% Rectangles and Oriented Boxes
+%   rectToPolygon         - Convert a rectangle into a polygon (set of vertices)
+%   drawRect              - Draw rectangle on the current axis
+%   orientedBoxToPolygon  - Convert an oriented box to a polygon (set of vertices)
+%   drawOrientedBox       - Draw centered oriented rectangle
+%
 % Splines
 %   cubicBezierToPolyline - Compute equivalent polyline from bezier curve control
 %   drawBezierCurve       - Draw a cubic bezier curve defined by 4 control points
 %
 % Various drawing functions
-%   drawOrientedBox       - Draw centered oriented rectangle
-%   drawRect              - Draw rectangle on the current axis
 %   drawArrow             - Draw an arrow on the current axis
 %   drawLabels            - Draw labels at specified positions
 %   drawShape             - Draw various types of shapes (circles, polygons...)
@@ -188,7 +192,7 @@ help('Contents');
 %   invertLine            - return same line but with opposite orientation
 %   clipLineRect          - clip a line with a polygon
 %   formatAngle           - Ensure an angle value is comprised between 0 and 2*PI
+%   drawRect2             - Draw centered rectangle on the current axis
 
 
 %% Others...
-%   drawRect2             - Draw centered rectangle on the current axis

@@ -8,6 +8,18 @@ function varargout = drawBox(box, varargin)
 %   Specifies drawing parameters using parameter name and value. See plot
 %   function for syntax.
 %
+%   drawBox(AX, ...)
+%   Specifies the handle of the axis to draw on.
+%
+%   Example
+%     % define some points, compute their box, display everything
+%     points = [10 30; 20 50; 20 20; 30 10;40 30;50 20];
+%     box = pointSetBounds(points);
+%     figure; hold on;
+%     drawPoint(points, 's');
+%     drawBox(box);
+%     axis([0 60 0 60]);
+%
 %   See Also:
 %   drawOrientedBox, drawRect
 %
@@ -20,6 +32,16 @@ function varargout = drawBox(box, varargin)
 %   HISTORY
 %   2010-02-22 creation
 %   2011-04-01 add support for drawing option, fix bug for several boxes
+%   2011-10-11 add management of axes handle
+
+% extract handle of axis to draw on
+if ishandle(box)
+    ax = box;
+    box = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
+end
 
 % default values
 xmin = box(:,1);
@@ -45,7 +67,7 @@ for i = 1:nBoxes
     ty(5) = ymin(i);
 
     % display polygon
-    r(i) = plot(tx, ty, varargin{:});
+    r(i) = plot(ax, tx, ty, varargin{:});
 end
 
 % format output

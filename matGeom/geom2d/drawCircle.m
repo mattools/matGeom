@@ -21,11 +21,20 @@ function varargout = drawCircle(varargin)
 %   Specifies plotting options as pair of parameters name/value. See plot
 %   documentation for details.
 %
+%   drawCircle(AX, ...)
+%   Specifies the handle of the axis to draw on.
 %
 %   H = drawCircle(...);
 %   return handles to each created curve.
 %
-%   See also:
+%   Example
+%     figure;
+%     hold on;
+%     drawCircle([10 20 30]);
+%     drawCircle([15 15 40], 'color', 'r', 'linewidth', 2);
+%     axis equal;
+%
+%   See also
 %   circles2d, drawCircleArc, drawEllipse
 %
 %   ---------
@@ -39,7 +48,15 @@ function varargout = drawCircle(varargin)
 %   12/01/2005: allow more than 3 parameters
 %   26/02/2007: add possibility to specify plot options, number of
 %       discretization steps, and circle as center+radius.
+%   2011-10-11 add support for axis handle
 
+% extract handle of axis to draw on
+if ishandle(varargin{1})
+    ax = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
+end
 
 % process input parameters
 var = varargin{1};
@@ -75,7 +92,7 @@ N = 72;
 % check if discretization step is specified
 if ~isempty(varargin)
     var = varargin{1};
-    if length(var)==1 && isnumeric(var)
+    if isnumeric(var) && isscalar(var)
         N = round(var);
         varargin(1) = [];
     end
@@ -94,7 +111,7 @@ for i = 1:length(x0)
     xt = x0(i) + r(i) * cot;
     yt = y0(i) + r(i) * sit;
 
-    h(i) = plot(xt, yt, varargin{:});
+    h(i) = plot(ax, xt, yt, varargin{:});
 end
 
 if nargout > 0

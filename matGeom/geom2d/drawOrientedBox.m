@@ -14,10 +14,24 @@ function varargout = drawOrientedBox(box, varargin)
 %
 %   When OBOX is a N-by-5 array, the N boxes are drawn.
 %
+%   drawOrientedBox(AX, ...) 
+%   Specifies the axis to draw to point in. AX should be a handle to a axis
+%   object. By default, display on current axis.
+%
 %   HB = drawOrientedBox(...) 
 %   Returns a handle to the created graphic object(s). Object style can be
 %   modified using syntaw like:
 %   set(HB, 'color', 'g', 'linewidth', 2);
+%
+%   Example
+%     % draw an ellipse together with its oriented box
+%     elli = [30 40 60 30 20];
+%     figure; 
+%     drawEllipse(elli, 'linewidth', 2, 'color', 'g');
+%     hold on
+%     box = [30 40 120 60 20];
+%     drawOrientedBox(box, 'color', 'k');
+%     axis equal;
 %
 %   See also
 %   drawPolygon, drawRect, drawBox
@@ -30,18 +44,30 @@ function varargout = drawOrientedBox(box, varargin)
 
 % HISTORY
 %   2011-07-22 simplifies code
+%   2011-10-11 add management of axes handle
 
 
 %% Parses input arguments
 
-if nargin > 4 && sum(cellfun(@isnumeric, varargin(1:4))) == 4
+% extract handle of axis to draw on
+if ishandle(varargin{1})
+    ax = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
+end
+
+if length(varargin) > 4 && sum(cellfun(@isnumeric, varargin(1:4))) == 4
+    % input given as separate arguments
     cx  = box;
     cy  = varargin{1};
     hl   = varargin{2} / 2;
     hw   = varargin{3} / 2;
     theta   = varargin{4};
     varargin = varargin(5:end);
+    
 else
+    % input given as packed array
     cx  = box(:,1);
     cy  = box(:,2);
     hl   = box(:,3) / 2;
@@ -72,7 +98,7 @@ for i = 1:length(cx)
     vy = cy(i) + [-ls - wc; ls - wc ; ls + wc ; -ls + wc ; -ls - wc];
 
     % draw polygons
-    hr(i) = line(vx, vy, varargin{:});
+    hr(i) = plot(ax, vx, vy, varargin{:});
 end
 
 

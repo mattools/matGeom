@@ -26,6 +26,9 @@ function varargout = drawParabola(varargin)
 %   Can specify one or several graphical options using parameter name-value
 %   pairs.
 %
+%   drawParabola(AX, ...);
+%   Specifies handle of the axis to draw on.
+%
 %   H = drawParabola(...);
 %   Returns an handle to the created graphical object.
 %
@@ -48,11 +51,20 @@ function varargout = drawParabola(varargin)
 %   HISTORY
 %   2010-11-17 rewrite, change parametrisation, update doc
 %   2011-03-30 use degrees for angle
+%   2011-10-11 add management of axes handle
 
 % Extract parabola
-if nargin<1
-    error('geom2d:IllegalArgument', ...
+if nargin < 1
+    error('geom2d:drawParabola:IllegalArgument', ...
         'Please specify parabola representation');
+end
+
+% extract handle of axis to draw on
+if ishandle(varargin{1})
+    ax = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
 end
 
 % input parabola is given as a packed array
@@ -62,7 +74,8 @@ x0 = parabola(:,1);
 y0 = parabola(:,2);
 a  = parabola(:,3);
 
-if size(parabola, 2)>3
+% check if parabola orientation is specified
+if size(parabola, 2) > 3
     theta = parabola(:, 4);
 else
     theta = zeros(length(a), 1);
@@ -78,8 +91,8 @@ if ~isempty(varargin)
     end
 end
 
-% create parametrisation
-if length(bounds)>2
+% create parametrisation array
+if length(bounds) > 2
     t = bounds;
 else
     t = linspace(bounds(1), bounds(end), 100);
@@ -89,7 +102,7 @@ end
 h = zeros(size(x0));
 
 % draw each parabola
-for i=1:length(x0)
+for i = 1:length(x0)
     % compute transformation
     trans = ...
         createTranslation(x0(i), y0(i)) * ...
@@ -100,11 +113,11 @@ for i=1:length(x0)
     [xt yt] = transformPoint(t(:), t(:).^2, trans);
 
     % draw it
-    h(i) = plot(xt, yt, varargin{:});
+    h(i) = plot(ax, xt, yt, varargin{:});
 end
 
 % process output arguments
-if nargout>0
-    varargout{1}=h;
+if nargout > 0
+    varargout = {h};
 end
 

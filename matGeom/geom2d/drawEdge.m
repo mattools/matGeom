@@ -42,26 +42,27 @@ function varargout = drawEdge(varargin)
 [edge options] = parseInputArguments(varargin{:});
 
 % draw the edges
-if size(edge, 2)==4
+if size(edge, 2) == 4
     h = drawEdge_2d(edge, options);
 else
     h = drawEdge_3d(edge, options);
 end
 
 % eventually return handle to created edges
-if nargout>0
-    varargout{1}=h;
+if nargout > 0
+    varargout = {h};
 end
 
 
 function h = drawEdge_2d(edge, options)
 
-h = -1*ones(size(edge, 1), 1);
+h = -1 * ones(size(edge, 1), 1);
 
-for i=1:size(edge, 1)
+for i = 1:size(edge, 1)
     if isnan(edge(i,1))
         continue;
     end
+    
     h(i) = line(...
         [edge(i, 1) edge(i, 3)], ...
         [edge(i, 2) edge(i, 4)], options{:});
@@ -70,12 +71,13 @@ end
 
 function h = drawEdge_3d(edge, options)
 
-h = -1*ones(size(edge, 1), 1);
+h = -1 * ones(size(edge, 1), 1);
 
-for i=1:size(edge, 1)
+for i = 1:size(edge, 1)
     if isnan(edge(i,1))
         continue;
     end
+    
     h(i) = line( ...
         [edge(i, 1) edge(i, 4)], ...
         [edge(i, 2) edge(i, 5)], ...
@@ -85,12 +87,9 @@ end
     
 function [edge options] = parseInputArguments(varargin)
 
-% default values for parameters
-edge = [];
-
 % find the number of arguments defining edges
-nbVal=0;
-for i=1:nargin
+nbVal = 0;
+for i = 1:nargin
     if isnumeric(varargin{i})
         nbVal = nbVal+1;
     else
@@ -103,26 +102,30 @@ end
 options = varargin(nbVal+1:end);
 
 % ensure drawing options have correct format
-if length(options)==1
+if length(options) == 1
     options = [{'color'}, options];
 end
 
 % extract edges characteristics
-if nbVal==1
-    % all parameters in a single array
-    edge = varargin{1};
-
-elseif nbVal==2
-    % parameters are two points, or two arrays of points, of size N*2.
-    p1 = varargin{1};
-    p2 = varargin{2};
-    edge = [p1 p2];
-    
-elseif nbVal==4
-    % parameters are 4 parameters of the edge : x1 y1 x2 and y2
-    edge = [varargin{1} varargin{2} varargin{3} varargin{4}];
-    
-elseif nbVal==6
-    % parameters are 6 parameters of the edge : x1 y1 z1 x2 y2 and z2
-    edge = [varargin{1} varargin{2} varargin{3} varargin{4} varargin{5} varargin{6}];
+switch nbVal
+    case 1
+        % all parameters in a single array
+        edge = varargin{1};
+        
+    case 2
+        % parameters are two points, or two arrays of points, of size N*2.
+        p1 = varargin{1};
+        p2 = varargin{2};
+        edge = [p1 p2];
+        
+    case 4
+        % parameters are 4 parameters of the edge : x1 y1 x2 and y2
+        edge = [varargin{1} varargin{2} varargin{3} varargin{4}];
+        
+    case 6
+        % parameters are 6 parameters of the edge : x1 y1 z1 x2 y2 and z2
+        edge = [varargin{1} varargin{2} varargin{3} varargin{4} varargin{5} varargin{6}];
+        
+    otherwise
+        error('drawEdge:WrongNumberOfParameters', 'Wrong number of parameters');
 end

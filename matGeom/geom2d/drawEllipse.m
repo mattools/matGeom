@@ -5,7 +5,6 @@ function varargout = drawEllipse(varargin)
 %   Draws the ellipse ELLI in the form [XC YC RA RB THETA], with center
 %   (XC, YC), with main axis of half-length RA and RB, and orientation
 %   THETA in degrees counted counter-clockwise.
-%   Puts all parameters into one single array.
 %
 %   drawEllipse(XC, YC, RA, RB);
 %   drawEllipse(XC, YC, RA, RB, THETA);
@@ -27,6 +26,9 @@ function varargout = drawEllipse(varargin)
 %     drawEllipse([50 50 40 20 30]);
 %     axis equal;
 %
+%   % add another ellipse with different orientation and style
+%     drawEllipse([50 50 40 20 -10], 'linewidth', 2, 'color', 'g');
+%
 %   See also:
 %   ellipses2d, drawCircle, drawEllipseArc, ellipseAsPolygon
 %
@@ -44,9 +46,18 @@ function varargout = drawEllipse(varargin)
 %   2005-08-13 uses radians instead of degrees
 %   2008-02-21 add support for drawing styles, code cleanup
 %   2011-03-30 use degrees instead of radians, remove [x y] = ... format
+%   2011-10-11 add support for axis handle
 
 
 %% Extract input arguments
+
+% extract handle of axis to draw on
+if ishandle(varargin{1})
+    ax = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
+end
 
 % extract dawing style strings
 styles = {};
@@ -106,7 +117,7 @@ for i = 1:length(x0)
     yt = y0(i) + a(i) * cos(t) * sit + b(i) * sin(t) * cot;
     
     % stores handle to graphic object
-    h(i) = plot(xt, yt, styles{:});
+    h(i) = plot(ax, xt, yt, styles{:});
 end
 
 % return handles if required

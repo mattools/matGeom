@@ -33,12 +33,21 @@ function varargout = drawLine(lin, varargin)
 %   03/08/2010 bug for lines outside box (thanks to Reto Zingg)
 %   04/08/2010 rewrite using clipLine
 
+% extract handle of axis to draw in
+if ishandle(lin)
+    ax = lin;
+    lin = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
+end
+
 % default style for drawing lines
 varargin = [{'color', 'b'}, varargin];
 
 % extract bounding box of the current axis
-xlim = get(gca, 'xlim');
-ylim = get(gca, 'ylim');
+xlim = get(ax, 'xlim');
+ylim = get(ax, 'ylim');
 
 % clip lines with current axis box
 clip = clipLine(lin, [xlim ylim]);
@@ -51,6 +60,6 @@ h = -1*ones(size(lin, 1), 1);
 h(ok) = line(clip(ok, [1 3])', clip(ok, [2 4])', varargin{:});
 
 % return line handle if needed
-if nargout>0
-    varargout{1}=h;
+if nargout > 0
+    varargout = {h};
 end

@@ -13,6 +13,16 @@ function varargout = drawEllipseArc(varargin)
 %   Parameters can also be arrays. In this case, all arrays are suposed to
 %   have the same size...
 %
+%   drawEllipseArc(..., NAME, VALUE)
+%   Specifies one or more parameters name-value pairs, as in the plot
+%   function.
+%
+%   drawEllipseArc(AX, ...)
+%   Sepcifies the handle of theaxis to draw on.
+%
+%   H = drawEllipseArc(...)
+%   Returns handle(s) of the created graphic objects.
+%
 %   Example
 %     % draw an ellipse arc: center = [10 20], radii = 50 and 30, theta = 45
 %     arc = [10 20 50 30 45 -90 270];
@@ -45,8 +55,17 @@ function varargout = drawEllipseArc(varargin)
 %   HISTORY
 %   2008/10/10 uses fixed number of points for arc.
 %   2011-03-30 use angles in degrees
+%   2011-10-11 add management of axes handle
 
 %% Extract input arguments
+
+% extract handle of axis to draw on
+if ishandle(varargin{1})
+    ax = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
+end
 
 % extract dawing style strings
 styles = {};
@@ -90,7 +109,7 @@ elseif length(varargin)>=6
     end
     
 else
-    error('drawellipse: please specify center x, center y and radii a and b');
+    error('drawEllipseArc: please specify center x, center y and radii a and b');
 end
 
 
@@ -121,7 +140,7 @@ for i = 1:length(x0)
     xt = x0(i) + a(i)*cos(t)*cot - b(i)*sin(t)*sit;
     yt = y0(i) + a(i)*cos(t)*sit + b(i)*sin(t)*cot;
     
-    h(i) = plot(xt, yt, styles{:});
+    h(i) = plot(ax, xt, yt, styles{:});
 end
 
 

@@ -1,17 +1,21 @@
 function varargout = drawCircleArc(varargin)
 %DRAWCIRCLEARC Draw a circle arc on the current axis
 %
-%   drawCircleArc(XC, YC, R, START, EXTENT);
-%   Draws circle with center (XC, YC), with radius R, starting from angle
+%   drawCircleArc(ARC);
+%   Draws circle arc defined by ARC = [XC YC R START EXTENT], with (XC, YC)
+%   being the circle center, R being the circle radius, starting from angle 
 %   START, and with angular extent given by EXTENT. START and EXTENT angles
 %   are given in degrees.
 %
-%   drawCircleArc(ARC);
-%   Puts all parameters into one single array.
+%   drawCircleArc(XC, YC, R, START, EXTENT);
+%   Alternative syntax that seperates inputs.
 %
 %   drawCircleArc(..., PARAM, VALUE);
 %   specifies plot properties by using one or several parameter name-value
 %   pairs.
+%
+%   drawCircleArc(AX, ...);
+%   Specifies handle of the axis to draw on.
 %
 %   H = drawCircleArc(...);
 %   Returns a handle to the created line object.
@@ -38,9 +42,19 @@ function varargout = drawCircleArc(varargin)
 %   2007-06-27 Now uses angle extent
 %   2011-03-30 use angles in degrees
 %   2011-06-09 add support for line styles
+%   2011-10-11 add management of axes handle
 
 if nargin == 0
     error('Need to specify circle arc');
+end
+
+
+% extract handle of axis to draw on
+if ishandle(varargin{1})
+    ax = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
 end
 
 circle = varargin{1};
@@ -84,7 +98,7 @@ for i = 1:length(x0)
     yt = y0(i) + r(i)*sin(t);
     
     % draw the circle arc
-    h(i) = plot(xt, yt, varargin{:});
+    h(i) = plot(ax, xt, yt, varargin{:});
 end
 
 if nargout > 0

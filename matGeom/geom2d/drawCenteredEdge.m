@@ -1,18 +1,23 @@
-function varargout = drawCenteredEdge(center, len, theta, varargin)
+function varargout = drawCenteredEdge(varargin)
 %DRAWCENTEREDEDGE Draw an edge centered on a point
 %   
-%   drawCenteredEdge(CENTER, L, THETA)
-%   Draws an edge centered on point CENTER, with length L, and orientation
-%   THETA (given in degrees). Input arguments can also be arrays, that must
-%   all have the same number odf rows.
-%
 %   drawCenteredEdge(EDGE)
-%   Concatenates edge parameters into a single N-by-4 array, containing:
-%   [XC YV L THETA].
+%   Draws an edge centered on a point. EDGE has format [XC YC L THETA],
+%   with (Xc, YC) being edge center, L being the edge length, and THETA
+%   beigng the edge orientation, in degrees (counted Counter-clockwise from
+%   horizontal).
+%   Input argument can also be a N-by-4 array, in that can several edges
+%   are drawn.
+%
+%   drawCenteredEdge(CENTER, L, THETA)
+%   Specifies argument in seperate inputs.
 %
 %   drawCenteredEdge(..., NAME, VALUE)
 %   Also specifies drawing options by using one or several parameter name -
 %   value pairs (see doc of plot function for details).
+%
+%   drawCenteredEdge(AX, ...)
+%   Specifies the axis to draw the edge on.
 %
 %   H = drawCenteredEdge(...)
 %   Returns handle(s) to the created edges(s).
@@ -42,31 +47,47 @@ function varargout = drawCenteredEdge(center, len, theta, varargin)
 %   HISTORY
 %   2007-06-15 update doc, clean up code
 %   2011-05-18 use angle in degrees, cleanup code and doc
+%   2011-10-11 add management of axes handle
 
 
 %% process input variables
 
-if size(center, 2) == 4
-    % manage edge in single parameter
-    
-    varargin = [{len, theta}, varargin];
+if nargin < 1
+    error('Function requires an input argument');
+end
 
-    len     = center(:, 3);
-    theta   = center(:, 4);
-    center  = center(:, 1:2);
+% extract handle of axis to draw on
+if ishandle(varargin{1})
+    ax = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
+end
+
+var = varargin{1};
+if size(var, 2) == 4
+    % manage edge in single parameter
+    len     = var(:, 3);
+    theta   = var(:, 4);
+    center  = var(:, 1:2);
 
     N = size(center, 1);    
+    varargin(1) = [];
 
-else
+elseif length(varargin) >= 3
     % parameters given in different arguments
     
     % size of data
+    center  = varargin{1};
+    len     = varargin{2};
+    theta   = varargin{3};
+    varargin(1:3) = [];
+
+    % ensure all data have same size
     NP = size(center, 1);
     NL = size(len, 1);
     ND = size(theta, 1);
     N  = max([NP NL ND]);
-
-    % ensure all data have same size
     if N > 1
         if NP == 1, center = repmat(center, [N 1]); end
         if NL == 1, len = repmat(len, [N 1]); end
@@ -102,7 +123,7 @@ y2 = yc + len .* sit / 2;
 % draw the edges
 h = zeros(N, 1);
 for i = 1:N
-    h(i) = plot([x1(i) x2(i)], [y1(i) y2(i)]);
+    h(i) = plot(ax, [x1(i) x2(i)], [y1(i) y2(i)]);
 end
 
 % apply style to edges
