@@ -1,61 +1,40 @@
-#LyX 2.0 created this file. For more info see http://www.lyx.org/
-\lyxformat 413
+#LyX 1.5.6 created this file. For more info see http://www.lyx.org/
+\lyxformat 276
 \begin_document
 \begin_header
 \textclass article
-\use_default_options false
-\maintain_unincluded_children false
 \language french
-\language_package default
 \inputencoding auto
-\fontencoding global
 \font_roman default
 \font_sans default
 \font_typewriter default
 \font_default_family default
-\use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
-
 \graphics default
-\default_output_format default
-\output_sync 0
-\bibtex_command default
-\index_command default
 \paperfontsize 12
 \spacing single
-\use_hyperref false
 \papersize default
 \use_geometry false
 \use_amsmath 1
 \use_esint 0
-\use_mhchem 0
-\use_mathdots 1
 \cite_engine basic
 \use_bibtopic false
-\use_indices false
 \paperorientation portrait
-\suppress_date false
-\use_refstyle 0
-\index Index
-\shortcut idx
-\color #008000
-\end_index
 \secnumdepth 3
 \tocdepth 2
 \paragraph_separation indent
-\paragraph_indentation default
+\defskip medskip
 \quotes_language french
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
 \tracking_changes false
 \output_changes false
-\html_math_output 0
-\html_css_as_file 0
-\html_be_strict false
+\author "" 
+\author "" 
 \end_header
 
 \begin_body
@@ -77,28 +56,14 @@ Descriptif des fonctions que j'ai développées sous matlab pour regrouper
  et les arguments des différentes fonctions.
 \end_layout
 
-\begin_layout Abstract
-NB : le rapport est amené à fusionner avec celui pour 
-\begin_inset Quotes fld
-\end_inset
-
-geom3d
-\begin_inset Quotes frd
-\end_inset
-
-.
-\end_layout
-
 \begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
 
+\newpage
 
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset toc
-LatexCommand tableofcontents
+\begin_inset LatexCommand tableofcontents
 
 \end_inset
 
@@ -106,9 +71,8 @@ LatexCommand tableofcontents
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
 
+\newpage
 
 \end_layout
 
@@ -143,9 +107,8 @@ Dans ce document, les fonctions sont classées en fonctions des primitives
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
 
+\newpage
 
 \end_layout
 
@@ -162,11 +125,9 @@ On essaie de représenter chaque primitive géométrique par un ensemble de
  valeurs numériques.
  On souhaite qu'une série de valeurs puisse définir de manière unique une
  primitive.
- Par contre l'inverse n'est pas nécessaire
-\begin_inset space ~
-\end_inset
-
-: une même primitive peut être définie par plusieurs séries de valeurs.
+ Par contre l'inverse n'est pas nécessaire\InsetSpace ~
+: une même primitive peut être
+ définie par plusieurs séries de valeurs.
  Par exemple une droite peut être définie par plusieurs couples de points.
 \end_layout
 
@@ -267,12 +228,8 @@ De manière générale, la bibliothèque utilise des angles en radians, orienté
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-formatAngle
-\end_layout
+\begin_inset LatexCommand index
+name "formatAngle"
 
 \end_inset
 
@@ -280,13 +237,9 @@ formatAngle
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Formate un angle pour s'assurer que le résultat est compris entre 
 \begin_inset Formula $0$
 \end_inset
@@ -334,9 +287,8 @@ Une boîte est définie par les 4 valeurs
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
 
+\newpage
 
 \end_layout
 
@@ -372,12 +324,8 @@ Création de points
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-centroid
-\end_layout
+\begin_inset LatexCommand index
+name "centroid"
 
 \end_inset
 
@@ -385,13 +333,9 @@ centroid
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule le centroïde, éventuellement pondéré, d'un ensemble de points.
 \end_layout
 
@@ -409,12 +353,8 @@ sortie le centroïde des points donnés en argument.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polarPoint
-\end_layout
+\begin_inset LatexCommand index
+name "polarPoint"
 
 \end_inset
 
@@ -422,13 +362,9 @@ polarPoint
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule les coordonnées d'un point donné en coordonnées polaires (angle
  + distance à l'origine), en précisant éventuellement un point de référence.
 \end_layout
@@ -446,12 +382,8 @@ Calculs sur les points
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-angle2points
-\end_layout
+\begin_inset LatexCommand index
+name "angle2points"
 
 \end_inset
 
@@ -459,13 +391,9 @@ angle2points
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule l'angle par rapport à l'horizontale formé par la droite passant
  par deux points.
  L'angle est compté en radians, positif dans le sens trigonométrique, et
@@ -501,12 +429,8 @@ sortie l'angle avec l'horizontale de la droite passant par les deux points.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-angle3Points
-\end_layout
+\begin_inset LatexCommand index
+name "angle3Points"
 
 \end_inset
 
@@ -514,13 +438,9 @@ angle3Points
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule l'angle formé par 
 \begin_inset Formula $3$
 \end_inset
@@ -562,12 +482,8 @@ sortie l'angle formé par les vecteurs
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-angleSort
-\end_layout
+\begin_inset LatexCommand index
+name "angleSort"
 
 \end_inset
 
@@ -575,13 +491,9 @@ angleSort
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Trie un ensemble de points en fonction de leur position angulaire par rapport
  à l'origine ou par rapport à un point de référence.
  Le polygone formé par les points après le tri ne se recoupe pas.
@@ -597,12 +509,8 @@ sortie les même points qu'en entrée, triés selon leur position angulaire,
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-distancePoints
-\end_layout
+\begin_inset LatexCommand index
+name "distancePoints"
 
 \end_inset
 
@@ -610,22 +518,16 @@ distancePoints
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule la distance entre deux points, entre un points et un groupe de points,
  ou entre deux groupes de points.
  La métrique par défaut est la métrique euclidienne, mais on peut en spécifier
  une autre.
  Le calcul effectué est le suivant :
-\begin_inset Formula 
-\[
-d_{AB}=\left(\left|x_{A}-x_{B}\right|^{d}+\left|y_{A}-y_{B}\right|^{d}\right)^{1/d}
-\]
+\begin_inset Formula \[
+d_{AB}=\left(\left|x_{A}-x_{B}\right|^{d}+\left|y_{A}-y_{B}\right|^{d}\right)^{1/d}\]
 
 \end_inset
 
@@ -662,12 +564,8 @@ sortie la distance entre les deux points, ou un vecteur colonne contenant
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-minDistancePoints
-\end_layout
+\begin_inset LatexCommand index
+name "minDistancePoints"
 
 \end_inset
 
@@ -675,13 +573,9 @@ minDistancePoints
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule la plus petite distance entre des points.
  Selon la dimension des arguments, plusieurs cas peuvent être considérés
  : distance minimale entre un point et un groupe de points, distance minimale
@@ -706,26 +600,18 @@ Manipulation de vecteurs
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
+\begin_inset LatexCommand index
+name "vecnorm"
 
-\begin_layout Plain Layout
+\end_inset
+
 vecnorm
 \end_layout
 
-\end_inset
-
-vectorNorm
-\end_layout
-
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule la norme d'un vecteur, donnée par 
 \begin_inset Formula $\sqrt{x^{2}+y^{2}}$
 \end_inset
@@ -742,12 +628,8 @@ sortie la norme du vecteur, ou un ensemble de normes.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-vectorAngle
-\end_layout
+\begin_inset LatexCommand index
+name "vectorAngle"
 
 \end_inset
 
@@ -755,13 +637,9 @@ vectorAngle
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule l'angle d'un vecteur avec l'horizontale.
 \end_layout
 
@@ -774,26 +652,18 @@ sortie l'angle du vecteur, ou un ensemble d'angles.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
+\begin_inset LatexCommand index
+name "normalize"
 
-\begin_layout Plain Layout
+\end_inset
+
 normalize
 \end_layout
 
-\end_inset
-
-normalizeVector
-\end_layout
-
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule le vecteur normalisé, c'est à dire tel que sa norme vaille 
 \begin_inset Formula $1$
 \end_inset
@@ -811,12 +681,8 @@ sortie les vecteurs normalisés, de mêmes directions, avec une norme égale
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-isParallel
-\end_layout
+\begin_inset LatexCommand index
+name "isParallel"
 
 \end_inset
 
@@ -824,13 +690,9 @@ isParallel
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Teste si deux vecteurs sont parallèles.
 \end_layout
 
@@ -844,12 +706,8 @@ sortie un booléen qui vaut vrai pour chaque couple de vecteur parallèle
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-isPerpendicular
-\end_layout
+\begin_inset LatexCommand index
+name "isPerpendicular"
 
 \end_inset
 
@@ -857,13 +715,9 @@ isPerpendicular
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Teste si deux vecteurs sont perpendiculaires.
 \end_layout
 
@@ -877,9 +731,8 @@ sortie un booléen qui vaut vrai pour chaque couple de vecteur perpendiculaires
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
 
+\newpage
 
 \end_layout
 
@@ -1016,12 +869,8 @@ dant aux primitives manipulées.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-createLine
-\end_layout
+\begin_inset LatexCommand index
+name "createLine"
 
 \end_inset
 
@@ -1029,13 +878,9 @@ createLine
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Crée une droite à partir de deux points.
  L'origine de la droite est le premier point, le vecteur directeur est le
  vecteur joignant les deux points.
@@ -1051,12 +896,8 @@ sortie une représentation de la droite passant par les deux points.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-parallelLine
-\end_layout
+\begin_inset LatexCommand index
+name "parallelLine"
 
 \end_inset
 
@@ -1064,13 +905,9 @@ parallelLine
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Crée une droite parallèle à une droite donnée.
 \end_layout
 
@@ -1084,12 +921,8 @@ sortie une droite parallèle à la droite donnée en argument, et passant par
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-orthogonalLine
-\end_layout
+\begin_inset LatexCommand index
+name "orthogonalLine"
 
 \end_inset
 
@@ -1097,13 +930,9 @@ orthogonalLine
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Crée une droite perpendiculaire à une droite donnée.
 \end_layout
 
@@ -1117,12 +946,8 @@ sortie une droite perpendiculaire à la droite donnée en argument, et passant
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-medianLine
-\end_layout
+\begin_inset LatexCommand index
+name "medianLine"
 
 \end_inset
 
@@ -1130,13 +955,9 @@ medianLine
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Crée la médiatrice de deux points.
  L'origine de la droite est le centre des points, le vecteur directeur est
  le vecteur joignant les deux points augmenté de 
@@ -1156,12 +977,8 @@ sortie une représentation de la médiatrice des deux points.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-cartesianLine
-\end_layout
+\begin_inset LatexCommand index
+name "cartesianLine"
 
 \end_inset
 
@@ -1169,13 +986,9 @@ cartesianLine
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Crée une droite à partir de son équation cartésienne : 
 \begin_inset Formula $ax+by+c=0$
 \end_inset
@@ -1208,12 +1021,8 @@ sortie une représentation de la droite vérifiant
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-bisector
-\end_layout
+\begin_inset LatexCommand index
+name "bisector"
 
 \end_inset
 
@@ -1221,13 +1030,9 @@ bisector
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Crée la bissectrice de 
 \begin_inset Formula $3$
 \end_inset
@@ -1272,12 +1077,8 @@ sortie la bissectrice des points ou des droites.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-invertLine
-\end_layout
+\begin_inset LatexCommand index
+name "invertLine"
 
 \end_inset
 
@@ -1285,13 +1086,9 @@ invertLine
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Inverse l'orientation d'une droite.
  Le changement d'orientation change la représentation de la droite, mais
  le tracé de la droite reste le même.
@@ -1307,12 +1104,8 @@ sortie la droite avec le même point origine mais avec le vecteur directeur
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-createEdge
-\end_layout
+\begin_inset LatexCommand index
+name "createEdge"
 
 \end_inset
 
@@ -1320,13 +1113,9 @@ createEdge
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Crée un segment de droite à partir de deux points.
  L'intérêt de cette fonction est d'une part de cacher à l'utilisateur la
  représentation interne de la droite, d'autre part de rendre le code plus
@@ -1342,12 +1131,8 @@ sortie la représentation du segment.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-createEdge
-\end_layout
+\begin_inset LatexCommand index
+name "createEdge"
 
 \end_inset
 
@@ -1355,13 +1140,9 @@ createRay
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Crée une demi-droite à partir d'un point et d'un angle.
  
 \end_layout
@@ -1376,12 +1157,8 @@ sortie la représentation de la demi-droite ayant le point pour origine,
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-lineFit
-\end_layout
+\begin_inset LatexCommand index
+name "lineFit"
 
 \end_inset
 
@@ -1389,13 +1166,9 @@ lineFit
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Ajuste une droite à un ensemble de points, au sens des moindres carrés de
  la distance euclidienne.
  La représentation est choisie telle que la somme des distances au carré
@@ -1415,12 +1188,8 @@ Mesures sur les droites
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-lineAngle
-\end_layout
+\begin_inset LatexCommand index
+name "lineAngle"
 
 \end_inset
 
@@ -1428,13 +1197,9 @@ lineAngle
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule l'angle d'une droite avec l'axe horizontal, ou l'angle entre deux
  droites.
 \end_layout
@@ -1457,12 +1222,8 @@ sortie l'angle entre les deux droites, ou l'angle avec l'horizontale, calibré
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-edgeAngle
-\end_layout
+\begin_inset LatexCommand index
+name "edgeAngle"
 
 \end_inset
 
@@ -1470,13 +1231,9 @@ edgeAngle
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule l'angle d'un segment de droite avec l'axe horizontal.
 \end_layout
 
@@ -1497,12 +1254,8 @@ sortie l'angle avec l'horizontale, calibré entre
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-edgeLength
-\end_layout
+\begin_inset LatexCommand index
+name "edgeLength"
 
 \end_inset
 
@@ -1510,13 +1263,9 @@ edgeLength
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule la longueur d'un segment de droite.
 \end_layout
 
@@ -1538,12 +1287,8 @@ Fonctions de calculs d'intersection, et de clipping des droites et segments
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-intersectLines
-\end_layout
+\begin_inset LatexCommand index
+name "intersectLines"
 
 \end_inset
 
@@ -1551,13 +1296,9 @@ intersectLines
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule le point d'intersection de deux droites.
 \end_layout
 
@@ -1580,12 +1321,8 @@ sortie les coordonnées du point d'intersection.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-intersectEdges
-\end_layout
+\begin_inset LatexCommand index
+name "intersectEdges"
 
 \end_inset
 
@@ -1593,13 +1330,9 @@ intersectEdges
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule le point d'intersection de deux segments de droite.
 \end_layout
 
@@ -1622,12 +1355,8 @@ sortie les coordonnées du point d'intersection.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-intersectLineEdge
-\end_layout
+\begin_inset LatexCommand index
+name "intersectLineEdge"
 
 \end_inset
 
@@ -1635,13 +1364,9 @@ intersectLineEdge
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule le point d'intersection d'un segment et d'une droite.
 \end_layout
 
@@ -1664,12 +1389,8 @@ sortie les coordonnées du point d'intersection.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-clipLineRect
-\end_layout
+\begin_inset LatexCommand index
+name "clipLineRect"
 
 \end_inset
 
@@ -1677,13 +1398,9 @@ clipLine
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule l'intersection d'une droite avec une boîte.
 \end_layout
 
@@ -1702,12 +1419,8 @@ sortie les coordonnées du segment de droite contenu dans la boîte.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-clipEdge
-\end_layout
+\begin_inset LatexCommand index
+name "clipEdge"
 
 \end_inset
 
@@ -1715,13 +1428,9 @@ clipEdge
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule l'intersection d'un segment de droite avec une boîte.
 \end_layout
 
@@ -1749,12 +1458,8 @@ Calculs sur les positions respectives d'un point et d'une droite ou d'un
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-distancePointLine
-\end_layout
+\begin_inset LatexCommand index
+name "distancePointLine"
 
 \end_inset
 
@@ -1762,13 +1467,9 @@ distancePointLine
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule la plus courte distance entre un point et une droite.
 \end_layout
 
@@ -1781,12 +1482,8 @@ sortie la distance entre le point et la droite.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-distancePointEdge
-\end_layout
+\begin_inset LatexCommand index
+name "distancePointEdge"
 
 \end_inset
 
@@ -1794,13 +1491,9 @@ distancePointEdge
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule la plus courte distance entre un point et un segment.
 \end_layout
 
@@ -1813,12 +1506,8 @@ sortie la distance entre le point et le segment.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-linePosition
-\end_layout
+\begin_inset LatexCommand index
+name "linePosition"
 
 \end_inset
 
@@ -1826,13 +1515,9 @@ linePosition
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule la position 
 \begin_inset Formula $t_{p}$
 \end_inset
@@ -1855,12 +1540,8 @@ sortie la position du point sur la droite (ou un vecteur colonne de positions).
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-pointOnLine
-\end_layout
+\begin_inset LatexCommand index
+name "pointOnLine"
 
 \end_inset
 
@@ -1868,13 +1549,9 @@ pointOnLine
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Crée un point sur une droite, à une distance donnée de l'origine de la droite.
 \end_layout
 
@@ -1887,12 +1564,8 @@ sortie les coordonnées du point créé.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-projPointOnLine
-\end_layout
+\begin_inset LatexCommand index
+name "projPointOnLine"
 
 \end_inset
 
@@ -1900,13 +1573,9 @@ projPointOnLine
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Projette un point sur une droite.
 \end_layout
 
@@ -1940,12 +1609,8 @@ isXXX
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-onLine
-\end_layout
+\begin_inset LatexCommand index
+name "onLine"
 
 \end_inset
 
@@ -1953,13 +1618,9 @@ onLine
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Teste si un point appartient à une droite.
 \end_layout
 
@@ -1980,12 +1641,8 @@ sortie renvoie
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-onEdge
-\end_layout
+\begin_inset LatexCommand index
+name "onEdge"
 
 \end_inset
 
@@ -1993,13 +1650,9 @@ onEdge
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Teste si un point appartient à un segment de droite.
 \end_layout
 
@@ -2020,12 +1673,8 @@ sortie renvoie
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-onRay
-\end_layout
+\begin_inset LatexCommand index
+name "onRay"
 
 \end_inset
 
@@ -2033,13 +1682,9 @@ onRay
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Teste si un point appartient à une demi-droite.
 \end_layout
 
@@ -2060,12 +1705,8 @@ sortie renvoie
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-isLeftOriented
-\end_layout
+\begin_inset LatexCommand index
+name "isLeftOriented"
 
 \end_inset
 
@@ -2073,13 +1714,9 @@ isLeftOriented
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Teste si un point est localisé 
 \begin_inset Quotes fld
 \end_inset
@@ -2110,15 +1747,13 @@ sortie renvoie
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
 
+\newpage
 
 \end_layout
 
 \begin_layout Section
-\begin_inset CommandInset label
-LatexCommand label
+\begin_inset LatexCommand label
 name "sec:Polygones"
 
 \end_inset
@@ -2168,26 +1803,182 @@ Not-a-point
 \end_layout
 
 \begin_layout Subsection
-Polygones de base
+Fonctions sur les chemins polygonaux (polylines)
 \end_layout
 
 \begin_layout Standard
-La bibliothèques manipule quelques polygones simples, rectangulaires :
+Il s'agit ici de courbes représentées par un ensemble de points.
+ Pour des mesures plus précises, on peut consulter la section 
+\begin_inset LatexCommand ref
+reference "sec:Splines"
+
+\end_inset
+
+, qui considère des courbes polynomiales à la place d'approximations polygonales.
+\end_layout
+
+\begin_layout Paragraph
+\begin_inset LatexCommand index
+name "curveLength"
+
+\end_inset
+
+curveLength
+\end_layout
+
+\begin_layout Standard
+\InsetSpace ~
+
+\newline
+Calcule la longueur de la courbe en additionnant la longueur des segments
+ élémentaires.
 \end_layout
 
 \begin_layout Description
-box une boîte englobante, parallèle aux axes du repère, définie par [xmin
- xmax ymin ymax]
+entrée les coordonnées des sommets du chemin polygonal.
 \end_layout
 
 \begin_layout Description
-rect un rectangle défini par un coin, et ses deux dimensions.
- On peut aussi ajouter une orientation, en degrés.
+sortie la longueur du chemin polygonal
+\end_layout
+
+\begin_layout Paragraph
+\begin_inset LatexCommand index
+name "curveCentroid"
+
+\end_inset
+
+curveCentroid
+\end_layout
+
+\begin_layout Standard
+\InsetSpace ~
+
+\newline
+Calcule le centroïde de la courbe.
+ La méthode consiste à calculer le centroïde des milieux des segments, pondérés
+ par la longueur de chaque segment.
+ Pour le centroïde du polygone équivalent, voir la fonction 
+\family typewriter
+polygonCentroid
+\family default
+ (p.\InsetSpace ~
+
+\begin_inset LatexCommand pageref
+reference "par:polygonCentroid"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Description
-orientedBox une boîte englobante définie par un centre, deux dimensions,
- et une orientation en degrés.
+entrée les coordonnées des sommets du chemin polygonal.
+\end_layout
+
+\begin_layout Description
+sortie le centroïde du chemin polygonal.
+\end_layout
+
+\begin_layout Paragraph
+\begin_inset LatexCommand index
+name "parametrize"
+
+\end_inset
+
+parametrize
+\end_layout
+
+\begin_layout Standard
+\InsetSpace ~
+
+\newline
+Calcule une paramétrisation approximative d'une série de points.
+ La paramétrisation correspond à la somme cumulée des longueurs des segments
+ élémentaires.
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées des sommets du chemin polygonal.
+\end_layout
+
+\begin_layout Description
+sortie un vecteur colonne contenant la paramétrisation correspondant à chaque
+ sommet.
+\end_layout
+
+\begin_layout Paragraph
+\begin_inset LatexCommand index
+name "subCurve"
+
+\end_inset
+
+subCurve
+\end_layout
+
+\begin_layout Standard
+\InsetSpace ~
+
+\newline
+Extrait une portion de la courbe ou du polygone.
+ La portion est définie par les indices des points extrêmes, et par un sens
+ de parcours (direct : sens croissant des indices, ou indirect : sens décroissan
+t des indices).
+\end_layout
+
+\begin_layout Description
+entrée les coordonnées des sommets du chemin polygonal, l'indice du premier
+ point, l'indice du dernier point, et éventuellement le sens de parcours.
+\end_layout
+
+\begin_layout Description
+sortie le chemin polygonal extrait de l'entrée.
+ Si l'indice du début est supérieur à l'indice de fin, on boucle pour repartir
+ au début.
+\end_layout
+
+\begin_layout Paragraph
+\begin_inset LatexCommand index
+name "cart2geod"
+
+\end_inset
+
+cart2geod
+\end_layout
+
+\begin_layout Standard
+\InsetSpace ~
+
+\newline
+Convertit des coordonnées cartésiennes en coordonnées 
+\begin_inset Quotes fld
+\end_inset
+
+géodésiques
+\begin_inset Quotes frd
+\end_inset
+
+, composées de la position géodésique sur la courbe, et la distance signée
+ à la courbe.
+\end_layout
+
+\begin_layout Paragraph
+\begin_inset LatexCommand index
+name "geod2cart"
+
+\end_inset
+
+geod2cart
+\end_layout
+
+\begin_layout Standard
+\InsetSpace ~
+
+\newline
+Convertit un point donné par sa position géodésique et sa distance signée
+ à une courbe (polyligne) en un point en coordonnées cartésiennes.
+ L'intérêt de cette fonction est de pouvoir créer rapidement une courbe
+ parallèle à une autre.
 \end_layout
 
 \begin_layout Subsection
@@ -2195,18 +1986,13 @@ Mesures de base sur les polygones
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polygonCentroid
-\end_layout
+\begin_inset LatexCommand index
+name "polygonCentroid"
 
 \end_inset
 
 
-\begin_inset CommandInset label
-LatexCommand label
+\begin_inset LatexCommand label
 name "par:polygonCentroid"
 
 \end_inset
@@ -2215,13 +2001,9 @@ polygonCentroid
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule le centre de gravité d'un polygone.
 \end_layout
 
@@ -2234,12 +2016,8 @@ sortie les coordonnées du centre de gravité (centroïde géométrique).
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polygonArea
-\end_layout
+\begin_inset LatexCommand index
+name "polygonArea"
 
 \end_inset
 
@@ -2247,13 +2025,9 @@ polygonArea
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule l'aire signée d'un polygone.
  Le résultat est un nombre qui peut être négatif.
  Le signe du résultat dépend du sens de parcours des sommets du polygone.
@@ -2271,12 +2045,8 @@ sortie l'aire signée du polygone.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polygonLength
-\end_layout
+\begin_inset LatexCommand index
+name "polygonLength"
 
 \end_inset
 
@@ -2284,13 +2054,9 @@ polygonLength
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule le périmètre d'un polygone.
 \end_layout
 
@@ -2303,12 +2069,8 @@ sortie le périmètre du polygone.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polygonContains
-\end_layout
+\begin_inset LatexCommand index
+name "polygonContains"
 
 \end_inset
 
@@ -2316,13 +2078,9 @@ polygonContains
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Teste si un point est contenu dans un polygone, qui peut être troué.
  Il existe la fonction Matlab 
 \family typewriter
@@ -2340,12 +2098,8 @@ sortie un booléen qui vaut vrai si le point est dans le polygone.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polygonNormalAngle
-\end_layout
+\begin_inset LatexCommand index
+name "polygonNormalAngle"
 
 \end_inset
 
@@ -2353,13 +2107,9 @@ polygonNormalAngle
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule l'angle normal en un ou plusieurs sommet(s) d'un polygone.
  Si on calcule les angles normaux de tous les sommets d'un polygone, leur
  somme vaut 
@@ -2379,12 +2129,8 @@ sortie un vecteur colonne contenant l'angle normal pour chaque sommet spécifié
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polygonNormalAngle
-\end_layout
+\begin_inset LatexCommand index
+name "polygonNormalAngle"
 
 \end_inset
 
@@ -2392,13 +2138,9 @@ polygonBounds
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule la boîte englobante d'un polygone.
 \end_layout
 
@@ -2415,12 +2157,8 @@ Création et composition de polygones
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-readPolygon
-\end_layout
+\begin_inset LatexCommand index
+name "readPolygon"
 
 \end_inset
 
@@ -2428,13 +2166,9 @@ readPolygon
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Charge une série de polygones depuis un fichier texte.
  Le fichier est constitué de plusieurs couples de lignes contenant le même
  nombre de valeurs numérique.
@@ -2452,12 +2186,8 @@ sortie un tableau de cellules contenant un polygone par cellule.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-rectAsPolygon
-\end_layout
+\begin_inset LatexCommand index
+name "rectAsPolygon"
 
 \end_inset
 
@@ -2465,13 +2195,9 @@ rectAsPolygon
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Convertit un rectangle donné par un coin, ses dimensions, et une orientation,
  en un polygone représenté par 
 \begin_inset Formula $4$
@@ -2483,10 +2209,7 @@ Convertit un rectangle donné par un coin, ses dimensions, et une orientation,
 \begin_layout Description
 entrée les paramètres du rectangle : coordonnées du coin inférieur gauche,
  largeur, hauteur, et orientation (égale à zéro par défaut), soit un vecteur
- ligne de la forme
-\begin_inset space ~
-\end_inset
-
+ ligne de la forme\InsetSpace ~
 : 
 \begin_inset Formula $[x_{0},y_{0},w,h,\theta]$
 \end_inset
@@ -2499,12 +2222,8 @@ sortie les coordonnées des coins du rectangle.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-clipPolygon
-\end_layout
+\begin_inset LatexCommand index
+name "clipPolygon"
 
 \end_inset
 
@@ -2512,13 +2231,9 @@ clipPolygon
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Découpe un polygone à l'aide d'une boîte.
  La version implémentée ne fonctionne que pour les polygones convexes.
  Le résultat est donc soit vide, soit un polygone convexe.
@@ -2534,12 +2249,8 @@ sortie les coordonnées des sommets du polygone découpé.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polygonClipHP
-\end_layout
+\begin_inset LatexCommand index
+name "polygonClipHP"
 
 \end_inset
 
@@ -2547,13 +2258,9 @@ clipPolygonHP
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Découpe un polygone à l'aide d'un demi plan.
  L'idée est de pouvoir utiliser cet algorithme pour chacun des côtés d'une
  boîte, et donc de pouvoir découper un polygone par une boîte.
@@ -2571,12 +2278,8 @@ sortie les coordonnées des sommets du polygone découpé.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-splitPolygons
-\end_layout
+\begin_inset LatexCommand index
+name "splitPolygons"
 
 \end_inset
 
@@ -2584,13 +2287,9 @@ splitPolygons
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Convertit un polygone multi-connecté en une liste de polygones simplement
  connectés.
 \end_layout
@@ -2605,12 +2304,8 @@ sortie une liste de cellules, contenant un polygone connexe par cellule.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-steinerPolygon
-\end_layout
+\begin_inset LatexCommand index
+name "steinerPolygon"
 
 \end_inset
 
@@ -2618,13 +2313,9 @@ steinerPolygon
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule le polygone de Steiner d'un ensemble de vecteurs.
  Le polygone de Steiner est obtenu en étirant successivement par chaque
  vecteur le point origine.
@@ -2645,12 +2336,8 @@ Opérations sur les polygones
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-intersectLinePolygon
-\end_layout
+\begin_inset LatexCommand index
+name "intersectLinePolygon"
 
 \end_inset
 
@@ -2658,13 +2345,9 @@ intersectLinePolygon
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule les points d'intersection entre une droite et un polygone.
 \end_layout
 
@@ -2677,12 +2360,8 @@ sortie les coordonnées des points d'intersection.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polygonExpand
-\end_layout
+\begin_inset LatexCommand index
+name "polygonExpand"
 
 \end_inset
 
@@ -2690,13 +2369,9 @@ polygonExpand
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Dilate un polygone en décalant chacun de ses côtés d'une distance donnée,
  et en prolongeant les nouveaux côtés pour créer les nouveaux sommets.
  La distance peut être positive, ce qui agrandit le polygone, ou négative,
@@ -2717,12 +2392,8 @@ sortie le polygone dilaté.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-medialAxisConvex
-\end_layout
+\begin_inset LatexCommand index
+name "medialAxisConvex"
 
 \end_inset
 
@@ -2730,13 +2401,9 @@ medialAxisConvex
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule l'axe médian d'un polygone convexe.
  L'axe médian est une définition du squelette d'un polygone.
  Il a la forme d'un arbre (au sens de graphe) qui relie les sommets du polygone,
@@ -2758,12 +2425,8 @@ Mesures plus évoluées sur les polygones
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-supportFunction
-\end_layout
+\begin_inset LatexCommand index
+name "supportFunction"
 
 \end_inset
 
@@ -2771,13 +2434,9 @@ supportFunction
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule la fonction support d'un polygone convexe.
  La fonction support est un outil de géométrie souvent utilisé dans les
  articles de géométrie stochastique, qui correspond à la plus petite distance
@@ -2805,12 +2464,8 @@ sortie la valeur de la fonction support pour chaque valeur angulaire spécifiée
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-convexification
-\end_layout
+\begin_inset LatexCommand index
+name "convexification"
 
 \end_inset
 
@@ -2818,13 +2473,9 @@ convexification
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule la convexification d'une fonction support.
  C'est la fonction duale de supportFunction.
 \end_layout
@@ -2838,12 +2489,8 @@ sortie le polygone qui a même fonction support que celle spécifiée.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-steinerPoint
-\end_layout
+\begin_inset LatexCommand index
+name "steinerPoint"
 
 \end_inset
 
@@ -2851,13 +2498,9 @@ steinerPoint
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule le point de Steiner d'un polygone.
  Le point de Steiner est un centroïde calculé sur les sommets d'un polygone,
  mais pondéré par l'angle du polygone au sommet considéré.
@@ -2871,248 +2514,14 @@ entrée les coordonnées des sommets du polygone.
 sortie les coordonnées du point de Steiner.
 \end_layout
 
-\begin_layout Subsection
-Fonctions sur les chemins polygonaux 
-\end_layout
-
 \begin_layout Standard
-Il s'agit ici de courbes représentées par un ensemble de points.
- Pour des mesures plus précises, on peut consulter la section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Splines"
 
-\end_inset
-
-, qui considère des courbes polynomiales à la place d'approximations polygonales.
-\end_layout
-
-\begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-curveLength
-\end_layout
-
-\end_inset
-
-curveLength
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Calcule la longueur de la courbe en additionnant la longueur des segments
- élémentaires.
-\end_layout
-
-\begin_layout Description
-entrée les coordonnées des sommets du chemin polygonal.
-\end_layout
-
-\begin_layout Description
-sortie la longueur du chemin polygonal
-\end_layout
-
-\begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-curveCentroid
-\end_layout
-
-\end_inset
-
-curveCentroid
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Calcule le centroïde de la courbe.
- La méthode consiste à calculer le centroïde des milieux des segments, pondérés
- par la longueur de chaque segment.
- Pour le centroïde du polygone équivalent, voir la fonction 
-\family typewriter
-polygonCentroid
-\family default
- (p.
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand pageref
-reference "par:polygonCentroid"
-
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Description
-entrée les coordonnées des sommets du chemin polygonal.
-\end_layout
-
-\begin_layout Description
-sortie le centroïde du chemin polygonal.
-\end_layout
-
-\begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-parametrize
-\end_layout
-
-\end_inset
-
-parametrize
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Calcule une paramétrisation approximative d'une série de points.
- La paramétrisation correspond à la somme cumulée des longueurs des segments
- élémentaires.
-\end_layout
-
-\begin_layout Description
-entrée les coordonnées des sommets du chemin polygonal.
-\end_layout
-
-\begin_layout Description
-sortie un vecteur colonne contenant la paramétrisation correspondant à chaque
- sommet.
-\end_layout
-
-\begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-subCurve
-\end_layout
-
-\end_inset
-
-subCurve
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Extrait une portion de la courbe ou du polygone.
- La portion est définie par les indices des points extrêmes, et par un sens
- de parcours (direct : sens croissant des indices, ou indirect : sens décroissan
-t des indices).
-\end_layout
-
-\begin_layout Description
-entrée les coordonnées des sommets du chemin polygonal, l'indice du premier
- point, l'indice du dernier point, et éventuellement le sens de parcours.
-\end_layout
-
-\begin_layout Description
-sortie le chemin polygonal extrait de l'entrée.
- Si l'indice du début est supérieur à l'indice de fin, on boucle pour repartir
- au début.
-\end_layout
-
-\begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-cart2geod
-\end_layout
-
-\end_inset
-
-cart2geod
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Convertit des coordonnées cartésiennes en coordonnées 
-\begin_inset Quotes fld
-\end_inset
-
-géodésiques
-\begin_inset Quotes frd
-\end_inset
-
-, composées de la position géodésique sur la courbe, et la distance signée
- à la courbe.
-\end_layout
-
-\begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-geod2cart
-\end_layout
-
-\end_inset
-
-geod2cart
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Convertit un point donné par sa position géodésique et sa distance signée
- à une courbe (polyligne) en un point en coordonnées cartésiennes.
- L'intérêt de cette fonction est de pouvoir créer rapidement une courbe
- parallèle à une autre.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
+\newpage
 
 \end_layout
 
 \begin_layout Section
-\begin_inset CommandInset label
-LatexCommand label
+\begin_inset LatexCommand label
 name "sec:Coniques"
 
 \end_inset
@@ -3153,10 +2562,8 @@ Un cercle est défini par un vecteur ligne contenant
 
  si le cercle est indirect (l'intérieur est à droite du cercle).
  La représentation d'un cercle est donc la suivante :
-\begin_inset Formula 
-\[
-[x_{c},y_{c},r,d]
-\]
+\begin_inset Formula \[
+[x_{c},y_{c},r,d]\]
 
 \end_inset
 
@@ -3166,10 +2573,8 @@ Un cercle est défini par un vecteur ligne contenant
 \begin_layout Standard
 Pour un arc de cercle, on oublie le paramètre d'orientation, on ajoute deux
  éléments correspondants à l'angle de début, et à l'angle de fin :
-\begin_inset Formula 
-\[
-[x_{c},y_{c},r,\theta_{1},\theta_{2}]
-\]
+\begin_inset Formula \[
+[x_{c},y_{c},r,\theta_{1},\theta_{2}]\]
 
 \end_inset
 
@@ -3181,12 +2586,8 @@ Fonctions de création
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-createCircle
-\end_layout
+\begin_inset LatexCommand index
+name "createCircle"
 
 \end_inset
 
@@ -3194,13 +2595,9 @@ createCircle
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Crée un cercle à partir de 
 \begin_inset Formula $2$
 \end_inset
@@ -3225,12 +2622,8 @@ sortie la paramétrisation du cercle.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-createDirectedCircle
-\end_layout
+\begin_inset LatexCommand index
+name "createDirectedCircle"
 
 \end_inset
 
@@ -3238,13 +2631,9 @@ createDirectedCircle
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Crée un cercle à partir de 
 \begin_inset Formula $3$
 \end_inset
@@ -3262,12 +2651,8 @@ sortie la paramétrisation du cercle.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-enclosingCircle
-\end_layout
+\begin_inset LatexCommand index
+name "enclosingCircle"
 
 \end_inset
 
@@ -3275,13 +2660,9 @@ enclosingCircle
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Trouve le plus petit cercle qui contient un ensemble de points.
 \end_layout
 
@@ -3295,12 +2676,8 @@ sortie le plus petit cercle englobant tous les points.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-inertiaEllipse
-\end_layout
+\begin_inset LatexCommand index
+name "inertiaEllipse"
 
 \end_inset
 
@@ -3308,13 +2685,9 @@ inertiaEllipse
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule l'ellipse d'inertie d'un ensemble de points.
 \end_layout
 
@@ -3331,12 +2704,8 @@ Fonctions de conversion
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-circleAsPolygon
-\end_layout
+\begin_inset LatexCommand index
+name "circleAsPolygon"
 
 \end_inset
 
@@ -3344,13 +2713,9 @@ circleAsPolygon
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Convertit un cercle en polygone, éventuellement en spécifiant le nombre
  de sommets.
 \end_layout
@@ -3365,12 +2730,8 @@ sortie un polygone approchant le cercle.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-ellipseAsPolygon
-\end_layout
+\begin_inset LatexCommand index
+name "ellipseAsPolygon"
 
 \end_inset
 
@@ -3378,13 +2739,9 @@ ellipseAsPolygon
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Convertit une ellipse en polygone, éventuellement en spécifiant le nombre
  de sommets.
  La représentation d'une ellipse est la même que pour un cercle, en remplaçant
@@ -3396,15 +2753,10 @@ Convertit une ellipse en polygone, éventuellement en spécifiant le nombre
 \begin_inset Formula $b$
 \end_inset
 
- correspondants aux longueurs des demi axes
-\begin_inset space ~
-\end_inset
-
+ correspondants aux longueurs des demi axes\InsetSpace ~
 :
-\begin_inset Formula 
-\[
-[x_{c},y_{c},a,b,\theta]
-\]
+\begin_inset Formula \[
+[x_{c},y_{c},a,b,\theta]\]
 
 \end_inset
 
@@ -3421,12 +2773,8 @@ sortie un polygone approchant l'ellipse.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-circleArcAsCurve
-\end_layout
+\begin_inset LatexCommand index
+name "circleArcAsCurve"
 
 \end_inset
 
@@ -3434,13 +2782,9 @@ circleArcAsCurve
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Convertit un arc de cercle en courbe, éventuellement en spécifiant le nombre
  de points.
 \end_layout
@@ -3459,12 +2803,8 @@ Fonctions de tests
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-onCircle
-\end_layout
+\begin_inset LatexCommand index
+name "onCircle"
 
 \end_inset
 
@@ -3472,23 +2812,15 @@ onCircle
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Teste si un point est situé sur un cercle.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-inCircle
-\end_layout
+\begin_inset LatexCommand index
+name "inCircle"
 
 \end_inset
 
@@ -3496,26 +2828,20 @@ inCircle
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Teste si un point est situé à l'intérieur d'un cercle.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
 
+\newpage
 
 \end_layout
 
 \begin_layout Section
-\begin_inset CommandInset label
-LatexCommand label
+\begin_inset LatexCommand label
 name "sec:Splines"
 
 \end_inset
@@ -3598,12 +2924,8 @@ Fonctions de base
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polynomialCurveFit
-\end_layout
+\begin_inset LatexCommand index
+name "polynomialCurveFit"
 
 \end_inset
 
@@ -3611,13 +2933,9 @@ polynomialCurveFit
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule les coefficients polynomiaux qui ajustent au mieux un ensemble de
  points.
  L'ajustement des coefficients se fait séparément sur les différentes coordonnée
@@ -3625,12 +2943,8 @@ s.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polyfit2
-\end_layout
+\begin_inset LatexCommand index
+name "polyfit2"
 
 \end_inset
 
@@ -3638,24 +2952,16 @@ polyfit2
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Fonction simplifiée d'ajustement de courbe polynomiale à un ensemble de
  points.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polynomialCurvePoint
-\end_layout
+\begin_inset LatexCommand index
+name "polynomialCurvePoint"
 
 \end_inset
 
@@ -3663,13 +2969,9 @@ polynomialCurvePoint
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule les coordonnées d'un point sur une courbe polynomiale en fonction
  de la position 
 \begin_inset Formula $t$
@@ -3679,12 +2981,8 @@ Calcule les coordonnées d'un point sur une courbe polynomiale en fonction
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polynomialCurvePosition
-\end_layout
+\begin_inset LatexCommand index
+name "polynomialCurvePosition"
 
 \end_inset
 
@@ -3692,13 +2990,9 @@ polynomialCurvePosition
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule la position 
 \begin_inset Formula $t$
 \end_inset
@@ -3707,12 +3001,8 @@ Calcule la position
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polynomialCurveLength
-\end_layout
+\begin_inset LatexCommand index
+name "polynomialCurveLength"
 
 \end_inset
 
@@ -3720,24 +3010,16 @@ polynomialCurveLength
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule la longueur géodésique d'une courbe polynomiale, en intégrant le
  Jacobien sur tout le domaine de paramétrisation.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polynomialCurveCentroid
-\end_layout
+\begin_inset LatexCommand index
+name "polynomialCurveCentroid"
 
 \end_inset
 
@@ -3745,13 +3027,9 @@ polynomialCurveCentroid
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule le centroïde d'une courbe polynomiale.
 \end_layout
 
@@ -3760,12 +3038,8 @@ Calculs de courbures
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polynomialCurveDerivative
-\end_layout
+\begin_inset LatexCommand index
+name "polynomialCurveDerivative"
 
 \end_inset
 
@@ -3773,23 +3047,15 @@ polynomialCurveDerivative
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule le vecteur dérivé d'une courbe polynomiale pour les positions spécifiées.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polynomialCurveNormal
-\end_layout
+\begin_inset LatexCommand index
+name "polynomialCurveNormal"
 
 \end_inset
 
@@ -3797,24 +3063,16 @@ polynomialCurveNormal
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule le vecteur normal d'une courbe polynomiale pour les positions spécifiées.
  Le vecteur normal est orthogonal au vecteur tangent.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polynomialCurveCurvature
-\end_layout
+\begin_inset LatexCommand index
+name "polynomialCurveCurvature"
 
 \end_inset
 
@@ -3822,23 +3080,15 @@ polynomialCurveCurvature
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule la courbure d'une courbe polynomiale pour les positions spécifiées.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polynomialCurveCurvatures
-\end_layout
+\begin_inset LatexCommand index
+name "polynomialCurveCurvatures"
 
 \end_inset
 
@@ -3846,24 +3096,16 @@ polynomialCurveCurvatures
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Calcule les courbures principales d'une surface de révolution obtenue en
  utilisant comme courbe génératrice une courbe polynomiale.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polynomialDerivate
-\end_layout
+\begin_inset LatexCommand index
+name "polynomialDerivate"
 
 \end_inset
 
@@ -3871,22 +3113,17 @@ polynomialDerivate
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Fonction utilitaire qui calcule la dérivée d'un polynôme donné comme un
  vecteur ligne de coefficients.
  
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
 
+\newpage
 
 \end_layout
 
@@ -3905,12 +3142,8 @@ Grilles de points
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-squareGrid
-\end_layout
+\begin_inset LatexCommand index
+name "squareGrid"
 
 \end_inset
 
@@ -3918,23 +3151,15 @@ squareGrid
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Génère un ensemble de sommets et d'arêtes disposés en carrés.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-triangleGrid
-\end_layout
+\begin_inset LatexCommand index
+name "triangleGrid"
 
 \end_inset
 
@@ -3942,23 +3167,15 @@ triangleGrid
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Génère un ensemble de sommets et d'arêtes disposés en triangles.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-hexagonalGrid
-\end_layout
+\begin_inset LatexCommand index
+name "hexagonalGrid"
 
 \end_inset
 
@@ -3966,13 +3183,9 @@ hexagonalGrid
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Génère un ensemble de sommets et d'arêtes disposés en hexagones.
 \end_layout
 
@@ -3981,12 +3194,8 @@ Mosaïques
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-crackPattern
-\end_layout
+\begin_inset LatexCommand index
+name "crackPattern"
 
 \end_inset
 
@@ -3994,25 +3203,17 @@ crackPattern
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Génère des fissures droites à partir d'un ensemble de points, qui se propagent
  dans les directions spécifiées.
  Chaque fissure s'arrête lorsqu'elle en rencontre une autre.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-crackPattern2
-\end_layout
+\begin_inset LatexCommand index
+name "crackPattern2"
 
 \end_inset
 
@@ -4020,13 +3221,9 @@ crackPattern2
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Une variante du modèle de fissure : chaque point initie 3 fissures à 
 \begin_inset Formula $120$
 \end_inset
@@ -4036,9 +3233,8 @@ Une variante du modèle de fissure : chaque point initie 3 fissures à
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
 
+\newpage
 
 \end_layout
 
@@ -4056,14 +3252,11 @@ Une transformations affine est définie par une matrice
 \end_inset
 
  :
-\begin_inset Formula 
-\[
+\begin_inset Formula \[
 T=\left[\begin{array}{ccc}
 m_{00} & m_{01} & m_{02}\\
 m_{10} & m_{11} & m_{12}\\
-0 & 0 & 1
-\end{array}\right]
-\]
+0 & 0 & 1\end{array}\right]\]
 
 \end_inset
 
@@ -4095,12 +3288,8 @@ Fonctions de création
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-translation
-\end_layout
+\begin_inset LatexCommand index
+name "translation"
 
 \end_inset
 
@@ -4108,13 +3297,9 @@ translation
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Crée une transformation affine représentant une translation.
 \end_layout
 
@@ -4135,12 +3320,8 @@ sortie une matrice
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-rotation
-\end_layout
+\begin_inset LatexCommand index
+name "rotation"
 
 \end_inset
 
@@ -4148,25 +3329,17 @@ rotation
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Crée une transformation affine représentant une rotation d'un angle donné
  (en radians dans le sens trigonométrique), soit autour de l'origine, soit
  autour d'un point passé en argument.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-scaling
-\end_layout
+\begin_inset LatexCommand index
+name "scaling"
 
 \end_inset
 
@@ -4174,13 +3347,9 @@ scaling
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Crée une transformation affine représentant un agrandissement.
  Si un seul nombre est donné en argument, le même agrandissement est appliqué
  selon les deux directions 
@@ -4198,12 +3367,8 @@ Crée une transformation affine représentant un agrandissement.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-lineSymmetry
-\end_layout
+\begin_inset LatexCommand index
+name "lineSymmetry"
 
 \end_inset
 
@@ -4211,24 +3376,16 @@ lineSymmetry
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Crée une transformation affine représentant une symétrie orthogonale par
  rapport à une droite.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-homothecy
-\end_layout
+\begin_inset LatexCommand index
+name "homothecy"
 
 \end_inset
 
@@ -4236,13 +3393,9 @@ homothecy
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Crée une transformation affine représentant une homothétie, correspondant
  à un changement d'échelle uniforme dans toutes les directions autour d'un
  point spécifié.
@@ -4253,12 +3406,8 @@ Transformation de formes
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-transformPoint
-\end_layout
+\begin_inset LatexCommand index
+name "transformPoint"
 
 \end_inset
 
@@ -4266,23 +3415,15 @@ transformPoint
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Retourne les coordonnées du ou des points passés en paramètres.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-transformVector
-\end_layout
+\begin_inset LatexCommand index
+name "transformVector"
 
 \end_inset
 
@@ -4290,24 +3431,16 @@ transformVector
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Renvoie les coordonnées d'un ou de plusieurs vecteurs transformés par une
  transformation affine.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-transformLine
-\end_layout
+\begin_inset LatexCommand index
+name "transformLine"
 
 \end_inset
 
@@ -4315,24 +3448,16 @@ transformLine
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Renvoie les coordonnées d'une ou de plusieurs droites transformées par une
  transformation affine.
 \end_layout
 
 \begin_layout Paragraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-transformEdge
-\end_layout
+\begin_inset LatexCommand index
+name "transformEdge"
 
 \end_inset
 
@@ -4340,21 +3465,16 @@ transformEdge
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
+\InsetSpace ~
 
-
-\begin_inset Newline newline
-\end_inset
-
+\newline
 Renvoie les coordonnées d'un ou de plusieurs segments de droite transformés
  par une transformation affine.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
 
+\newpage
 
 \end_layout
 
@@ -4367,10 +3487,7 @@ Ces fonctions dessinent la ou les figures spécifiées sur l'axe courant.
  Dans certains cas (droites, demi-droites...), la figure est découpée en fonction
  des coordonnées de l'axe avant d'être affichée.
  Pour la plupart des fonctions, on peut spécifier les propriétés du tracé
- par un ensemble de paires 'paramètre'-'valeur', cf.
-\begin_inset space \thinspace{}
-\end_inset
-
+ par un ensemble de paires 'paramètre'-'valeur', cf.\InsetSpace \thinspace{}
 la fonction plot de matlab.
 \end_layout
 
@@ -4379,12 +3496,8 @@ Objets génériques
 \end_layout
 
 \begin_layout Description
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawPoint
-\end_layout
+\begin_inset LatexCommand index
+name "drawPoint"
 
 \end_inset
 
@@ -4393,12 +3506,8 @@ drawPoint Dessine un point ou un ensemble de points.
 \end_layout
 
 \begin_layout Description
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawLabels
-\end_layout
+\begin_inset LatexCommand index
+name "drawLabels"
 
 \end_inset
 
@@ -4411,12 +3520,8 @@ Objets droits
 \end_layout
 
 \begin_layout Description
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawLine
-\end_layout
+\begin_inset LatexCommand index
+name "drawLine"
 
 \end_inset
 
@@ -4425,12 +3530,8 @@ drawLine Dessine une droite.
 \end_layout
 
 \begin_layout Description
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawEdge
-\end_layout
+\begin_inset LatexCommand index
+name "drawEdge"
 
 \end_inset
 
@@ -4438,12 +3539,8 @@ drawEdge Dessine un segment de droite.
 \end_layout
 
 \begin_layout Description
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawCenteredEdge
-\end_layout
+\begin_inset LatexCommand index
+name "drawCenteredEdge"
 
 \end_inset
 
@@ -4452,12 +3549,8 @@ drawCenteredEdge Dessine un segment de droite centré sur un point, et d'angle
 \end_layout
 
 \begin_layout Description
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawArrow
-\end_layout
+\begin_inset LatexCommand index
+name "drawArrow"
 
 \end_inset
 
@@ -4465,12 +3558,8 @@ drawArrow Dessine une flèche (expérimental...)
 \end_layout
 
 \begin_layout Description
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawRay
-\end_layout
+\begin_inset LatexCommand index
+name "drawRay"
 
 \end_inset
 
@@ -4483,12 +3572,8 @@ Polygones
 \end_layout
 
 \begin_layout Description
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawCurve
-\end_layout
+\begin_inset LatexCommand index
+name "drawCurve"
 
 \end_inset
 
@@ -4496,12 +3581,8 @@ drawCurve Dessine une courbe (polyligne).
 \end_layout
 
 \begin_layout Description
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawPolygon
-\end_layout
+\begin_inset LatexCommand index
+name "drawPolygon"
 
 \end_inset
 
@@ -4509,12 +3590,8 @@ drawPolygon Dessine un polygone défini par une liste de points.
 \end_layout
 
 \begin_layout Description
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-fillPolygon
-\end_layout
+\begin_inset LatexCommand index
+name "fillPolygon"
 
 \end_inset
 
@@ -4522,12 +3599,8 @@ fillPolygon Remplit un polygone.
 \end_layout
 
 \begin_layout Description
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawRect
-\end_layout
+\begin_inset LatexCommand index
+name "drawRect"
 
 \end_inset
 
@@ -4535,12 +3608,8 @@ drawRect Dessine un rectangle.
 \end_layout
 
 \begin_layout Description
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawRect2
-\end_layout
+\begin_inset LatexCommand index
+name "drawRect2"
 
 \end_inset
 
@@ -4552,12 +3621,8 @@ Objets courbes
 \end_layout
 
 \begin_layout Description
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawCircle
-\end_layout
+\begin_inset LatexCommand index
+name "drawCircle"
 
 \end_inset
 
@@ -4565,12 +3630,8 @@ drawCircle Dessine un cercle.
 \end_layout
 
 \begin_layout Description
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawCircleArc
-\end_layout
+\begin_inset LatexCommand index
+name "drawCircleArc"
 
 \end_inset
 
@@ -4578,12 +3639,8 @@ drawCircleArc Dessine un arc de cercle.
 \end_layout
 
 \begin_layout Description
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawEllipse
-\end_layout
+\begin_inset LatexCommand index
+name "drawEllipse"
 
 \end_inset
 
@@ -4591,12 +3648,8 @@ drawEllipse Dessine une ellipse.
 \end_layout
 
 \begin_layout Description
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawEllipseArc
-\end_layout
+\begin_inset LatexCommand index
+name "drawEllipseArc"
 
 \end_inset
 
@@ -4604,12 +3657,8 @@ drawEllipseArc Dessine un arc d'ellipse.
 \end_layout
 
 \begin_layout Description
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawParabola
-\end_layout
+\begin_inset LatexCommand index
+name "drawParabola"
 
 \end_inset
 
@@ -4617,9 +3666,7 @@ drawParabola Dessine un arc de parabole.
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset index_print
-LatexCommand printindex
-type "idx"
+\begin_inset LatexCommand printindex
 
 \end_inset
 
