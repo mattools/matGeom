@@ -1,4 +1,4 @@
-function test_suite = testClipLine(varargin)
+function test_suite = testDrawLine(varargin) %#ok<STOUT>
 % Tests the function 'clipLine'
 %   output = testClipLine(input)
 %
@@ -17,7 +17,7 @@ function test_suite = testClipLine(varargin)
 
 initTestSuite;
 
-function testHoriz
+function testHoriz %#ok<*DEFNU>
 % test clipping of horizontal lines
 
 box = [0 100 0 100];
@@ -84,7 +84,7 @@ function testDiagUp
 box = [0 100 0 100];
 
 hf = figure; clf;
-axis(box);
+axis(box); hold on;
 
 % inside, top right corner
 line = [80 30 10 10];

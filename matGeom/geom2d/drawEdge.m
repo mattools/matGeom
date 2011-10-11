@@ -39,13 +39,13 @@ function varargout = drawEdge(varargin)
 %   03/08/2010 re-organize code
 
 % separate edge and optional arguments
-[edge options] = parseInputArguments(varargin{:});
+[ax edge options] = parseInputArguments(varargin{:});
 
 % draw the edges
 if size(edge, 2) == 4
-    h = drawEdge_2d(edge, options);
+    h = drawEdge_2d(ax, edge, options);
 else
-    h = drawEdge_3d(edge, options);
+    h = drawEdge_3d(ax, edge, options);
 end
 
 % eventually return handle to created edges
@@ -54,7 +54,7 @@ if nargout > 0
 end
 
 
-function h = drawEdge_2d(edge, options)
+function h = drawEdge_2d(ax, edge, options)
 
 h = -1 * ones(size(edge, 1), 1);
 
@@ -63,13 +63,11 @@ for i = 1:size(edge, 1)
         continue;
     end
     
-    h(i) = line(...
-        [edge(i, 1) edge(i, 3)], ...
-        [edge(i, 2) edge(i, 4)], options{:});
+    h(i) = plot(ax, edge(i, [1 3]), edge(i, [2 4]), options{:});
 end
 
 
-function h = drawEdge_3d(edge, options)
+function h = drawEdge_3d(ax, edge, options)
 
 h = -1 * ones(size(edge, 1), 1);
 
@@ -78,18 +76,23 @@ for i = 1:size(edge, 1)
         continue;
     end
     
-    h(i) = line( ...
-        [edge(i, 1) edge(i, 4)], ...
-        [edge(i, 2) edge(i, 5)], ...
-        [edge(i, 3) edge(i, 6)], options{:});
+    h(i) = plot(ax, edge(i, [1 4]), edge(i, [2 5]), edge(i, [3 6]), options{:});
 end
 
     
-function [edge options] = parseInputArguments(varargin)
+function [ax edge options] = parseInputArguments(varargin)
+
+% extract handle of axis to draw on
+if ishandle(varargin{1})
+    ax = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
+end
 
 % find the number of arguments defining edges
 nbVal = 0;
-for i = 1:nargin
+for i = 1:length(varargin)
     if isnumeric(varargin{i})
         nbVal = nbVal+1;
     else

@@ -13,10 +13,11 @@ function varargout = drawLine(lin, varargin)
 %   contained in the axis, the function returns -1.
 %   
 %   Example
-%   figure; hold on; axis equal;
-%   axis([0 100 0 100]);
-%   drawLine([30 40 10 20]);
-%   drawLine([30 40 20 -10], 'color', 'm', 'linewidth', 2);
+%     figure; hold on; axis equal;
+%     axis([0 100 0 100]);
+%     drawLine([30 40 10 20]);
+%     drawLine([30 40 20 -10], 'color', 'm', 'linewidth', 2);
+%     drawLine([-30 140 10 20]);
 %
 %   See also:
 %   lines2d, createLine, drawEdge
@@ -32,6 +33,7 @@ function varargout = drawLine(lin, varargin)
 %   23/05/2005 add support for arguments
 %   03/08/2010 bug for lines outside box (thanks to Reto Zingg)
 %   04/08/2010 rewrite using clipLine
+%   2011-10-11 add management of axes handle
 
 % extract handle of axis to draw in
 if ishandle(lin)
@@ -57,7 +59,7 @@ ok   = isfinite(clip(:,1));
 h = -1*ones(size(lin, 1), 1);
 
 % draw valid lines
-h(ok) = line(clip(ok, [1 3])', clip(ok, [2 4])', varargin{:});
+h(ok) = plot(ax, clip(ok, [1 3])', clip(ok, [2 4])', varargin{:});
 
 % return line handle if needed
 if nargout > 0

@@ -26,9 +26,19 @@ function varargout = drawRay(ray, varargin)
 %   2005-07-06 add support for multiple rays
 %   2007-10-18 add support for drawing options
 %   2011-03-12 rewrite using clipRay
+%   2011-10-11 add management of axes handle
+
+% extract handle of axis to draw in
+if ishandle(ray)
+    ax = lin;
+    ray = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
+end
 
 % get bounding box limits
-box = axis(gca);
+box = axis(ax);
 
 % compute clipped shapes
 [clipped isInside] = clipRay(ray, box);
@@ -37,9 +47,9 @@ box = axis(gca);
 h = -ones(size(ray, 1), 1);
 
 % draw visible rays
-h(isInside) = drawEdge(clipped(isInside, :), varargin{:});
+h(isInside) = drawEdge(ax, clipped(isInside, :), varargin{:});
 
 % process output
-if nargout>0
+if nargout > 0
     varargout = {h};
 end
