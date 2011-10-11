@@ -1,15 +1,22 @@
 function varargout = drawPolygon(varargin)
 %DRAWPOLYGON Draw a polygon specified by a list of points
 %
-%   drawPolygon(COORD);
-%   Packs coordinates in a single [N*2] array.
+%   drawPolygon(POLY);
+%   Packs coordinates in a single N-by-2 array.
 %
 %   drawPolygon(PX, PY);
 %   Specifies coordinates in separate arrays.
 %
 %   drawPolygon(POLYS)
 %   Packs coordinate of several polygons in a cell array. Each element of
-%   the array is a Ni*2 double array.
+%   the array is a Ni-by-2 double array.
+%
+%   drawPolygon(..., NAME, VALUE);
+%   Specifies drawing options by using one or several parameter name-value
+%   pairs, see the doc of plot function for details.
+%
+%   drawPolygon(AX, ...)
+%   Specifies the axis to draw the polygon on.
 %
 %   H = drawPolygon(...);
 %   Also return a handle to the list of line objects.
@@ -26,12 +33,19 @@ function varargout = drawPolygon(varargin)
 
 %   HISTORY
 %   2008/10/15 manage polygons with holes
-
-
+%   2011-10-11 add management of axes handle
 
 % check input
 if isempty(varargin)
     error('need to specify a polygon');
+end
+
+% extract handle of axis to draw on
+if ishandle(varargin{1})
+    ax = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
 end
 
 var = varargin{1};
@@ -47,7 +61,7 @@ if iscell(var)
         hold on;
         % check for empty polygons
         if ~isempty(var{i})
-            h(i) = drawPolygon(var{i}, varargin{2:end});
+            h(i) = drawPolygon(ax, var{i}, varargin{2:end});
         end
         if ~state
             hold off
@@ -87,9 +101,9 @@ if isempty(varargin)
 end
 
 % check case of polygons with holes
-if sum(isnan(px(:))) > 0
+if any(isnan(px(:)))
     polygons = splitPolygons([px py]);
-    h = drawPolygon(polygons);
+    h = drawPolygon(ax, polygons);
 
     if nargout > 0
         varargout = {h};
@@ -106,7 +120,7 @@ px(size(px, 1)+1, :) = px(1,:);
 py(size(py, 1)+1, :) = py(1,:);
 
 % draw the polygon outline
-h = plot(px, py, varargin{:});
+h = plot(ax, px, py, varargin{:});
 
 % format output arg
 if nargout > 0

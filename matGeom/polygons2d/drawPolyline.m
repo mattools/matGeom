@@ -41,30 +41,36 @@ function varargout = drawPolyline(varargin)
 %   03/01/2007: better processing of input, and update doc (drawing
 %       options and CLOSE option)
 %   30/04/2009 rename as drawPolyline.
+%   2011-10-11 add management of axes handle
 
 
-% default values
-closed = false;
+% extract handle of axis to draw on
+if ishandle(varargin{1})
+    ax = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
+end
 
 % If first argument is a cell array, draw each curve individually,
 % and eventually returns handle of each plot.
 var = varargin{1};
 if iscell(var)
     h = [];
-    for i=1:length(var(:))
-        h = [h ; drawPolyline(var{i}, varargin{2:end})];
+    for i = 1:length(var(:))
+        h = [h ; drawPolyline(ax, var{i}, varargin{2:end})];
     end
-    if nargout>0
-        varargout{1}=h;
+    if nargout > 0
+        varargout = {h};
     end
     return;
 end
 
 % extract curve coordinate
-if size(var, 2)==1
+if size(var, 2) == 1
     % first argument contains x coord, second argument contains y coord
     px = var;
-    if length(varargin)==1
+    if length(varargin) == 1
         error('Wrong number of arguments in drawPolyline');
     end
     py = varargin{2};
@@ -77,6 +83,7 @@ else
 end
 
 % check if curve is closed or open
+closed = false;
 if ~isempty(varargin)
     var = varargin{1};
     if strncmpi(var, 'close', 5)
@@ -95,9 +102,9 @@ if closed
 end
 
 % plot the curve, with eventually optional parameters
-h = plot(px, py, varargin{:});
+h = plot(ax, px, py, varargin{:});
 
 % format output arguments
-if nargout>0
-    varargout{1}=h;
+if nargout > 0
+    varargout = {h};
 end

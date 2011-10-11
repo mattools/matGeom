@@ -11,6 +11,9 @@ function varargout = drawBezierCurve(points, varargin)
 %   Specifies additional drawing parameters, see the line function for
 %   details.
 %
+%   drawBezierCurve(AX, ...);
+%   Spcifies the handle of the axis to draw on.
+%
 %   H = drawBezierCurve(...);
 %   Return a handle to the created graphic object.
 %
@@ -28,6 +31,18 @@ function varargout = drawBezierCurve(points, varargin)
 % Created: 2011-03-16,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
+%   HISTORY
+%   2011-10-11 add management of axes handle
+
+% extract handle of axis to draw on
+if ishandle(points)
+    ax = points;
+    points = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
+end
+
 % default number of discretization steps
 N = 64;
 
@@ -44,7 +59,7 @@ end
 poly = cubicBezierToPolyline(points, N);
 
 % draw the curve
-h = drawPolyline(poly, varargin{:});
+h = drawPolyline(ax, poly, varargin{:});
 
 % eventually return a handle to the created object
 if nargout > 0

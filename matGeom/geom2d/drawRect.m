@@ -15,6 +15,9 @@ function varargout = drawRect(rect, varargin)
 %   Specifies one or several parameters name-value pairs, see plot function
 %   for details.
 %
+%   drawRect(AX, ...) 
+%   Specifies the handle of the axis to draw the rectangle on.
+%
 %   H = drawRect(...) 
 %   Returns handle of the created graphic objects.
 %
@@ -31,15 +34,30 @@ function varargout = drawRect(rect, varargin)
 %   HISTORY
 %   2003-12-12 add support for multiple rectangles
 %   2011-10-09 rewrite using rectToPolygon, add support for drawing options
+%   2011-10-11 add management of axes handle
 
-n = size(rect, 1);
-
-r = zeros(n, 1);
-for i = 1:n
-    poly = rectToPolygon(rect(i, :));
-    r(i) = drawPolygon(poly, varargin{:});
+% extract handle of axis to draw on
+if ishandle(rect)
+    ax = rect;
+    rect = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
 end
 
+% number of rectangles to draw
+n = size(rect, 1);
+
+% display each rectangle
+r = zeros(n, 1);
+for i = 1:n
+    % compute vertex corodinates
+    poly = rectToPolygon(rect(i, :));
+    % display resulting polygon
+    r(i) = drawPolygon(ax, poly, varargin{:});
+end
+
+% process output
 if nargout > 0
     varargout = {r};
 end
