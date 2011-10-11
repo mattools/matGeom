@@ -14,7 +14,9 @@ Mettre en place le site Sourceforge
 geom2d
 ======
 
-* 2011.06.15 intersectLines -> clean up code !
+* 2011.10.09 update doc pour transformVector
+
+* 2011.10.09 generaliser transformPoint/Vector pour ND
 
 * 2010.07.02 pour les fonctions de dessin, prevoir :
     * option de trace sous forme de chaine simple
@@ -22,21 +24,40 @@ geom2d
 
 * 2011.03.15 prevoir fonctions de sauvegarde / chargement des formes, ex:
     * mettre dans un package 'ioshapes'
+    * strategie 1 : une forme par fichier
+    * strategie 2 : une forme par ligne
+    
     * readPolygon, writePolygon -> tableau '2D', avec header 1 ligne
     * readPolyline, writePolyline -> tableau '2D'
     * writeShape, readShape -> utilise structure de donnees 'type+data+style'
-    * parseShape(string) : renvoie une forme
     * readShape(filename) : renvoie un ensemble de formes (comment ?)
     * printShape(shape) : renvoie une chaine de caractères
         * "shapeToString" ?
     * saveShape(shape, fileName)
 
+    * readWKT(f)
+    * fprintWKT(f, shape)
+    * parseShape(string) : renvoie une forme
+
 * 2011.04.26 mise a jour de la page angles2d pour les conventions
+
+* 2011.10.09 isPointOnXXX : convention pas claire pour 2 tableaux...
 
 
 polygons2d
 ==========
+* 2011.10.09 ajouter fonction "drawPath", qui gere M, L, Q, C.
 
+* 2011.10.09 ajouter fonction de conversion spline vers polyline
+    + specifier nb points ou "resolution" ?
+    * cubicSplineToPolyline
+    * quadSplineToPolyline
+    * cubicSplineBounds ?
+    * creer repertoire "splines2d" (pour MatGeom-1.2)
+    
+* 2011.10.07
+    mette a jour : circleToPolygon, ellipseToPolygon, circleArcToPolygon
+    
 * findPoint : 
     2011.05.30 renvoyer un ou plusieurs indices, et n'accepter qu'un
         seul point en entree
@@ -94,7 +115,9 @@ geom3d
 * 2011.08.17 polygonCentroid3d: better algorithm is possible
 
 * 2011.08.17 implement polygonArea3d
-   
+
+* 2011.10.11 implement intersectLineTriangle3d, intersectRayTriangle3d
+
              
 meshes3d
 ========

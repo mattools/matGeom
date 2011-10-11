@@ -39,13 +39,13 @@ xp = repmat(point(:,1), 1, Nr);
 yp = repmat(point(:,2), 1, Nr);
 
 % test if points belongs to the supporting line
-b1 = abs((xp-x0).*dy-(yp-y0).*dx)./hypot(dx, dy) < tol;
+b1 = abs((xp-x0).*dy-(yp-y0).*dx) ./ hypot(dx, dy) < tol;
 
 % check if points lie the good direction on the rays
-ind     = abs(dx)>abs(dy);
+ind     = abs(dx) > abs(dy);
 t       = zeros(size(b1));
-t(ind)  = (xp(ind)-x0(ind))./dx(ind);
-t(~ind) = (yp(~ind)-y0(~ind))./dy(~ind);
+t(ind)  = (xp(ind) - x0(ind)) ./ dx(ind);
+t(~ind) = (yp(~ind) - y0(~ind)) ./ dy(~ind);
 
 % combine the two tests
-b = b1 && (t>0);
+b = b1 & (t >= 0);
