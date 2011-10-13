@@ -10,7 +10,7 @@ Mettre en place le site Sourceforge
 * Create an "obsolete" subpackage
     * maybe "obsolete2d" and "obsolete3d"
 
-    
+
 geom2d
 ======
 

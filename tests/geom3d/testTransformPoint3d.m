@@ -26,6 +26,19 @@ ctrl = p0 + v;
 assertElementsAlmostEqual(ctrl, pt);
 
 
+function testTranslationOnArray
+p0 = [1 2 3;10 20 30;10 20 30];
+
+v  = [4 5 6];
+trans = createTranslation3d(v);
+
+pt = transformPoint3d(p0, trans);
+ctrl = p0 + repmat(v, 3, 1);
+
+assertElementsAlmostEqual(ctrl, pt);
+
+
+
 function testRotationOx
 p0 = [10 20 30];
 trans = createRotationOx([10 10 10], pi/2);

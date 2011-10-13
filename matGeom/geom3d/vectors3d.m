@@ -9,7 +9,7 @@ function vectors3d(varargin)
 %
 %
 %   See also
-%   vectorNorm3d, normalizeVector3d, vectorAngle3d
+%   vectorNorm3d, normalizeVector3d, vectorCross3d, vectorAngle3d
 %   isParallel3d, isPerpendicular3d
 %   createTranslation3d
 %

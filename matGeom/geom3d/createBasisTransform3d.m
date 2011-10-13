@@ -2,7 +2,7 @@ function transfo = createBasisTransform3d(source, target)
 %CREATEBASISTRANSFORM3D Compute matrix for transforming a basis into another basis
 %
 %   TRANSFO = createBasisTransform3d(SOURCE, TARGET) will create a 4-by-4
-%   transformation matrix representing the transormation from SOURCE basis
+%   transformation matrix representing the transformation from SOURCE basis
 %   to TARGET basis. 
 %    SOURCE and TARGET are either standard 1-by-9 geom3d PLANE
 %    representations of the form: [x0 y0 z0  ex1 ey1 ez1  ex2 ey2 ez2]
