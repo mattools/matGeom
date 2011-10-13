@@ -33,22 +33,17 @@ if length(varargin)==1
     norm = varargin{1};
 end
 
-% number of points of each array
-n1 = size(p1, 1);
-n2 = size(p2, 1);
+% compute difference of coordinate for each pair of points
+ptsDiff = bsxfun(@minus, p2, p1);
 
-% compute difference of coordinate for each pair of point ([n1*n2] array)
-dx = repmat(p1(:,1), [1 n2]) - repmat(p2(:,1)', [n1 1]);
-dy = repmat(p1(:,2), [1 n2]) - repmat(p2(:,2)', [n1 1]);
-dz = repmat(p1(:,3), [1 n2]) - repmat(p2(:,3)', [n1 1]);
-
+% Return dist based on the type of measurement requested
 switch(norm)
     case 1
-        dist = abs(dx) + abs(dy) + abs(dz);
+        dist = sum(abs(ptsDiff),2);
     case 2
-        dist = sqrt(dx.*dx + dy.*dy + dz.*dz);
+        dist = vectorNorm3d(ptsDiff);
     case Inf
-        dist = max([abs(dx) abs(dy) abs(dz)], [], 2);
+        dist = max(abs(ptsDiff), [], 2);
     otherwise
-        dist = power(power(dx, norm) + power(dy, norm) + power(dz, norm), 1/norm);
+        dist = power(sum(power(ptsDiff, norm),2), 1/norm);
 end

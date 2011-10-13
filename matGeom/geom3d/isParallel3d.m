@@ -35,14 +35,6 @@ function b = isParallel3d(v1, v2, varargin)
 
 % 2011.03.20 fix bug for set of 3 vectors
 
-% ensure inputs have same size
-if size(v1, 1)==1 && size(v2, 1)>1
-    v1 = repmat(v1, [size(v2, 1) 1]);
-end
-if size(v2, 1)==1 && size(v1, 1)>1
-    v2 = repmat(v2, [size(v1, 1) 1]);
-end
-
 % check if tolerance is specified
 tol = 1e-14;
 if ~isempty(varargin)
@@ -50,4 +42,4 @@ if ~isempty(varargin)
 end
 
 % compute
-b = vectorNorm3d(cross(v1, v2, 2))<tol;
+b = vectorNorm3d(vectorCross3d(v1, v2)) < tol;

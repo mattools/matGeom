@@ -11,9 +11,8 @@ function varargout = transformVector3d(varargin)
 %   [g h i]       [g h i l]      [g h i l]
 %                                [0 0 0 1]
 %
-%   V2 = transformVector3d(V1, TRANS);
-%   Also works when V1 is a [Nx3] array of double. In this case, V2 has the
-%   same size as V1. 
+%   V2 = transformVector3d(V1, TRANS) also works when V1 is a [Nx3xMxEtc]
+%   array of double. In this case, V2 has the same size as V1.
 %
 %   V2 = transformVector3d(X1, Y1, Z1, TRANS);
 %   Specifies vectors coordinates in three arrays with same size.
@@ -31,72 +30,16 @@ function varargout = transformVector3d(varargin)
 %   created the 25/11/2008 from transformPoint3d
 %
 
-
-% process input arguments
-if length(varargin)==2
-    vectors = varargin{1};
-    x = vectors(:,1);
-    y = vectors(:,2);
-    z = vectors(:,3);
-    trans  = varargin{2};
-    clear vectors;
-elseif length(varargin)==4
-    x = varargin{1};
-    y = varargin{2};
-    z = varargin{3};
-    trans = varargin{4};
-else 
-    error('Syntax: transformVector3d(VECTOR, TRANSFORM)');
-end
-
-% keep initial dimension of input vector
-dim = size(x); 
-NP = length(x(:));
-%points = [x(:) y(:) z(:) ones(NP, 1)];
-
-% eventually add null translation
-if size(trans, 2)==3
-    trans = [trans zeros(size(trans, 1), 1)];
-end
-
-% eventually add normalization
-if size(trans, 1)==3
-    trans = [trans;0 0 0 1];
+if length(varargin)==2      % func(PTS_XYZ, PLANE) syntax
+    vIds = 1:2; 
+elseif length(varargin)==4  % func(X, Y, Z, PLANE) syntax
+    vIds = 1:3;
 end
 
 % Extract only the linear part of the affine transform
+trans = varargin{vIds(end)};
 trans(1:4, 4) = [0; 0; 0; 1];
 
-% convert coordinates
-try
-    % vectorial processing, if there is enough memory
-    %res = (trans*[x(:) y(:) z(:) ones(NP, 1)]')';
-    res = [x(:) y(:) z(:) ones(NP, 1)]*trans';
-    
-    % reshape data to original size
-    x = reshape(res(:,1), dim);
-    y = reshape(res(:,2), dim);
-    z = reshape(res(:,3), dim);
-catch
-    % process each point one by one
-    for i=1:length(x(:))
-        res = [x(i) y(i) z(i) 1]*trans';
-        x(i) = res(1);
-        y(i) = res(2);
-        z(i) = res(3);
-    end
-end
-
-
-% process output arguments
-if nargout==1 || nargout==0
-    if length(dim)>2 || dim(2)>1
-        varargout{1} = {x, y, z};
-    else
-        varargout{1} = [x y z];
-    end
-elseif nargout==3
-    varargout{1} = x;
-    varargout{2} = y;
-    varargout{3} = z;
-end   
+% Call transformPoint3d using equivalent output arguments
+varargout = cell(1, max(1,nargout));
+[varargout{:}] = transformPoint3d(varargin{vIds(1:end-1)}, trans);
