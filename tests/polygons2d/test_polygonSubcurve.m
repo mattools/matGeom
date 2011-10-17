@@ -1,4 +1,4 @@
-function test_suite = testPolygonSubcurve(varargin)
+function test_suite = test_polygonSubcurve(varargin) %#ok<STOUT>
 %TESTPOLYGONSUBCURVE  One-line description here, please.
 %   output = testPolygonSubcurve(input)
 %
@@ -17,7 +17,7 @@ function test_suite = testPolygonSubcurve(varargin)
 
 initTestSuite;
 
-function testSquare
+function testSquare %#ok<*DEFNU>
 
 p1 = [10 10];
 p2 = [20 10];

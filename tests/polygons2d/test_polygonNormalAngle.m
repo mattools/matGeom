@@ -1,4 +1,4 @@
-function test_suite = testPolygonNormalAngle(varargin)
+function test_suite = test_polygonNormalAngle(varargin) %#ok<STOUT>
 %TESTPOLYGONNORMALANGLE  One-line description here, please.
 %   output = testPolygonNormalAngle(input)
 %
@@ -17,7 +17,7 @@ function test_suite = testPolygonNormalAngle(varargin)
 
 initTestSuite;
 
-function testPolygon1
+function testPolygon1 %#ok<*DEFNU>
 % test with a convex polygon 
 
 poly = [1 1;2 1;3 2;2 2;1 2];

@@ -1,4 +1,4 @@
-function test_suite = testMinimumCaliperDiameter(varargin)
+function test_suite = test_minimumCaliperDiameter(varargin) %#ok<STOUT>
 %TESTMINIMUMCALIPERDIAMETER  One-line description here, please.
 %
 %   output = testMinimumCaliperDiameter(input)

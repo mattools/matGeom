@@ -1,4 +1,4 @@
-function test_suite = testPolygonPoint(varargin) %#ok<STOUT>
+function test_suite = test_polygonPoint(varargin) %#ok<STOUT>
 %TESTPOLYGONPOINT  One-line description here, please.
 %   output = testPolygonPoint(input)
 %

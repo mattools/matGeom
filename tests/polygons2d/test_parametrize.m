@@ -1,4 +1,4 @@
-function test_suite = testParametrize(varargin) %#ok<STOUT>
+function test_suite = test_parametrize(varargin) %#ok<STOUT>
 %TESTPARAMETRIZE  One-line description here, please.
 %
 %   output = testParametrize(input)

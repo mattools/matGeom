@@ -1,4 +1,4 @@
-function test_suite = testPolylineLength(varargin) %#ok<STOUT>
+function test_suite = test_polylineLength(varargin) %#ok<STOUT>
 %TESTPOLYLINELENGTH  One-line description here, please.
 %
 %   output = testPolylineLength(input)

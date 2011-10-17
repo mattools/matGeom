@@ -1,4 +1,4 @@
-function test_suite = testPolygonSelfIntersections(varargin) %#ok<STOUT>
+function test_suite = test_polygonSelfIntersections(varargin) %#ok<STOUT>
 %TESTPOLYGONSELFINTERSECTIONS  One-line description here, please.
 %   output = testPolygonSelfIntersections(input)
 %

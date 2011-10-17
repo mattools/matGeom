@@ -1,4 +1,4 @@
-function test_suite = testExpandPolygon(varargin) %#ok<STOUT>
+function test_suite = test_expandPolygon(varargin) %#ok<STOUT>
 %TESTEXPANDPOLYGON  One-line description here, please.
 %   output = testExpandPolygon(input)
 %

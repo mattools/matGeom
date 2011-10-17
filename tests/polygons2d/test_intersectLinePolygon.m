@@ -1,4 +1,4 @@
-function test_suite = testIntersectLinePolygon(varargin) %#ok<STOUT>
+function test_suite = test_intersectLinePolygon(varargin) %#ok<STOUT>
 %TESTINTERSECTLINEPOLYGON Test case for function intersectLinePolygon
 %   output = testIntersectLinePolygon(input)
 %

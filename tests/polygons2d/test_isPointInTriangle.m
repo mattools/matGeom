@@ -1,4 +1,4 @@
-function test_suite = testIsPointInTriangle(varargin)
+function test_suite = test_isPointInTriangle(varargin) %#ok<STOUT>
 %TESTISPOINTINTRIANGLE  One-line description here, please.
 %
 %   output = testIsPointInTriangle(input)

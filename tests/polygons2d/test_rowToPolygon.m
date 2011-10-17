@@ -1,10 +1,10 @@
-function test_suite = testPolygonToRow(varargin) %#ok<STOUT>
-%TESTPOLYGONTOROW  One-line description here, please.
+function test_suite = test_rowToPolygon(varargin) %#ok<STOUT>
+%TESTROWTOPOLYGON  One-line description here, please.
 %
-%   output = testPolygonToRow(input)
+%   output = testRowToPolygon(input)
 %
 %   Example
-%   testPolygonToRow
+%   testRowToPolygon
 %
 %   See also
 %
@@ -20,14 +20,16 @@ initTestSuite;
 function test_square %#ok<*DEFNU>
 
 square = [10 10 ; 20 10 ; 20 20 ; 10 20];
-exp = [10 10   20 10   20 20   10 20];
 
 row = polygonToRow(square);
-assertEqual(exp, row);
+square2 = rowToPolygon(row);
+assertEqual(square, square2);
 
 row = polygonToRow(square, 'interlaced');
-assertEqual(exp, row);
+square2 = rowToPolygon(row, 'interlaced');
+assertEqual(square, square2);
 
-exp = [10 20 20 10  10 10 20 20];
 row = polygonToRow(square, 'packed');
-assertEqual(exp, row);
+square2 = rowToPolygon(row, 'packed');
+assertEqual(square, square2);
+

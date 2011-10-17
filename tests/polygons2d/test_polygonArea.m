@@ -1,4 +1,4 @@
-function test_suite = testPolygonArea(varargin) %#ok<STOUT>
+function test_suite = test_polygonArea(varargin) %#ok<STOUT>
 %TESTPOLYGONAREA  Test case for the file polygonArea
 %
 %   Test case for the file polygonArea

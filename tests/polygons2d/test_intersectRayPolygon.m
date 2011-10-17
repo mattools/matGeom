@@ -1,4 +1,4 @@
-function test_suite = testIntersectRayPolygon(varargin) %#ok<STOUT>
+function test_suite = test_intersectRayPolygon(varargin) %#ok<STOUT>
 %TESTINTERSECTRAYPOLYGON  One-line description here, please.
 %   output = testIntersectRayPolygon(input)
 %

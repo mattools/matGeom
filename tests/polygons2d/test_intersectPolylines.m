@@ -1,4 +1,4 @@
-function test_suite = testIntersectPolylines(varargin) %#ok<STOUT>
+function test_suite = test_intersectPolylines(varargin) %#ok<STOUT>
 %TESTROWTOPOLYGON  One-line description here, please.
 %
 %   output = testRowToPolygon(input)

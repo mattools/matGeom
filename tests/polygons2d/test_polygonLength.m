@@ -1,4 +1,4 @@
-function test_suite = testPolygonLength(varargin) %#ok<STOUT>
+function test_suite = test_polygonLength(varargin) %#ok<STOUT>
 %TESTPOLYGONLENGTH  One-line description here, please.
 %
 %   output = testPolygonLength(input)

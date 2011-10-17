@@ -1,9 +1,9 @@
-function test_suite = testDistancePointPolyline(varargin)
+function test_suite = test_distancePointPolygon(varargin) %#ok<STOUT>
 %TESTDISTANCEPOINTEDGE  One-line description here, please.
-%   output = testDistancePointPolyline(input)
+%   output = testDistancePointPolygon(input)
 %
 %   Example
-%   testDistancePointPolyline
+%   testDistancePointPolygon
 %
 %   See also
 %
@@ -17,42 +17,50 @@ function test_suite = testDistancePointPolyline(varargin)
 
 initTestSuite;
 
-function testPointOnPolyline
+function testPointOnPolygon %#ok<*DEFNU>
 
 poly = [0 0;10 0;10 10;0 10];
 
 p1 = [0 0];
-d = distancePointPolyline(p1, poly);
+d = distancePointPolygon(p1, poly);
 assertAlmostEqual(0, d);
 
 p1 = [10 0];
-d = distancePointPolyline(p1, poly);
+d = distancePointPolygon(p1, poly);
 assertAlmostEqual(0, d);
 
 p1 = [5 10];
-d = distancePointPolyline(p1, poly);
+d = distancePointPolygon(p1, poly);
 assertAlmostEqual(0, d);
 
 p1 = [10 5];
-d = distancePointPolyline(p1, poly);
+d = distancePointPolygon(p1, poly);
 assertAlmostEqual(0, d);
 
-function testPointNotOnPolyline
+p1 = [0 5];
+d = distancePointPolygon(p1, poly);
+assertAlmostEqual(0, d);
+
+function testPointNotOnPolygon
 
 poly = [0 0;10 0;10 10;0 10];
 
 p1 = [0 -10];
-d = distancePointPolyline(p1, poly);
+d = distancePointPolygon(p1, poly);
 assertAlmostEqual(10, d);
 
 p1 = [20 0];
-d = distancePointPolyline(p1, poly);
+d = distancePointPolygon(p1, poly);
 assertAlmostEqual(10, d);
 
-p1 = [0 5];
-d = distancePointPolyline(p1, poly);
+p1 = [5 5];
+d = distancePointPolygon(p1, poly);
 assertAlmostEqual(5, d);
 
-p1 = [5 5];
-d = distancePointPolyline(p1, poly);
-assertAlmostEqual(5, d);
+p1 = [1 5];
+d = distancePointPolygon(p1, poly);
+assertAlmostEqual(1, d);
+
+p1 = [-1 5];
+d = distancePointPolygon(p1, poly);
+assertAlmostEqual(1, d);
