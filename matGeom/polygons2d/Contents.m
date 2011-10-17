@@ -102,10 +102,6 @@
 %   distancePointPolygon      - Compute shortest distance between a point and a polygon
 %   distancePolygons          - Compute the shortest distance between 2 polygons
 %
-% Triangles
-%   isPointInTriangle         - Test if a point is located inside a triangle
-%   triangleArea              - Area of a triangle
-%
 % Functions from stochastic geometry
 %   steinerPoint              - Compute steiner point (weighted centroid) of a polygon
 %   steinerPolygon            - Create a Steiner polygon from a set of vectors

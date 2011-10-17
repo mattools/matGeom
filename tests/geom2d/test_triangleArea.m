@@ -17,8 +17,7 @@ function test_suite = test_triangleArea(varargin) %#ok<STOUT>
 
 initTestSuite;
 
-function test_Simple %#ok<*DEFNU>
-% Test call of function without argument
+function test_CCW_Triangle %#ok<*DEFNU>
 
 % rectangle triangle with sides 20 and 30 -> area is 300.
 p1 = [10 20];
@@ -27,6 +26,7 @@ p3 = [10 50];
 
 exp = 300;
 
+% run as separate inputs
 area = triangleArea(p1, p2, p3);
 assertEqual(exp, area);
 area = triangleArea(p2, p3, p1);
@@ -34,6 +34,20 @@ assertEqual(exp, area);
 area = triangleArea(p3, p1, p2);
 assertEqual(exp, area);
 
+% run as bundled array
+area = triangleArea([p1; p2; p3]);
+assertEqual(exp, area);
+
+function test_CW_Triangle
+
+% rectangle triangle with sides 20 and 30 -> area is 300.
+p1 = [10 20];
+p2 = [30 20];
+p3 = [10 50];
+
+exp = -300;
+
+% run as separate inputs
 area = triangleArea(p3, p2, p1);
 assertEqual(exp, area);
 area = triangleArea(p1, p3, p2);
@@ -41,6 +55,7 @@ assertEqual(exp, area);
 area = triangleArea(p2, p1, p3);
 assertEqual(exp, area);
 
-area = triangleArea([p1; p2; p3]);
+% run as bundled array
+area = triangleArea([p3; p2; p1]);
 assertEqual(exp, area);
 

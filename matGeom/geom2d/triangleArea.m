@@ -1,5 +1,5 @@
 function area = triangleArea(pt1, pt2, pt3)
-%TRIANGLEAREA Area of a triangle
+%TRIANGLEAREA Signed area of a triangle
 %
 %   AREA = triangleArea(P1, P2, P3)
 %   Computes area of the triangle whose vertices are given by P1, P2 and
@@ -11,9 +11,15 @@ function area = triangleArea(pt1, pt2, pt3)
 %
 %
 %   Example
-%   triangleArea([10 10], [30 10], [10 40])
-%   ans = 
-%       300
+%   % Compute area of a Counter-Clockwise (CCW) oriented triangle
+%     triangleArea([10 10], [30 10], [10 40])
+%     ans = 
+%         300
+%
+%   % Compute area of a Clockwise (CW) oriented triangle
+%     triangleArea([10 40], [30 10], [10 10])
+%     ans = 
+%         -300
 %
 %   See also
 %   polygonArea, triangleArea3d
@@ -36,4 +42,4 @@ v12 = bsxfun(@minus, pt2, pt1);
 v13 = bsxfun(@minus, pt3, pt1);
 
 % compute area from cross product
-area = abs(v13(:,2) .* v12(:,1) - v13(:,1) .* v12(:,2)) / 2;
+area = (v13(:,2) .* v12(:,1) - v13(:,1) .* v12(:,2)) / 2;
