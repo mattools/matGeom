@@ -1,7 +1,7 @@
-function test_suite = testGrClose(varargin) %#ok<STOUT>
+function test_suite = test_grClose(varargin) %#ok<STOUT>
 %TESTGRCLOSE  test suite for function grClose
 %
-%   output = testGrClose(input)
+%   output = test_grClose(input)
 %
 %   Example
 %   testGrClose

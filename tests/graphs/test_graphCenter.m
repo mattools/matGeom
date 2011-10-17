@@ -1,10 +1,10 @@
-function test_suite = testGraphPeripheralVertices(varargin) %#ok<STOUT>
-%TESTGRAPHPERIPHERALVERTICES  One-line description here, please.
+function test_suite = test_graphCenter(varargin) %#ok<STOUT>
+%TEST_GRAPHCENTER  One-line description here, please.
 %
-%   output = testGraphPeripheralVertices(input)
+%   output = test_graphCenter(input)
 %
 %   Example
-%   testGraphPeripheralVertices
+%   test_graphCenter
 %
 %   See also
 %
@@ -21,8 +21,8 @@ initTestSuite;
 function testGraph02 %#ok<*DEFNU>
 
 [nodes edges] = createTestGraph02;
-verts = graphPeripheralVertices(nodes, edges);
+center = graphCenter(nodes, edges);
 
-exp = [1;2;11;12];
-assertEqual(exp, verts);
+exp = [6;7];
+assertEqual(exp, center);
 

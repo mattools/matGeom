@@ -1,7 +1,7 @@
-function test_suite = testGrFindMaximalLengthPath(varargin) %#ok<STOUT>
+function test_suite = test_grFindMaximalLengthPath(varargin) %#ok<STOUT>
 %TESTGRFINDMAXIMALLENGTHPATH  One-line description here, please.
 %
-%   output = testGrFindMaximalLengthPath(input)
+%   output = test_grFindMaximalLengthPath(input)
 %
 %   Example
 %   testGrFindMaximalLengthPath

@@ -1,7 +1,7 @@
-function test_suite = testGrDilate(varargin) %#ok<STOUT>
-%TESTGRDILATE  test suite for function grDilate
+function test_suite = test_grDilate(varargin) %#ok<STOUT>
+%TEST_GRDILATE  test suite for function grDilate
 %
-%   output = testGrDilate(input)
+%   output = test_grDilate(input)
 %
 %   Example
 %   testGrDilate

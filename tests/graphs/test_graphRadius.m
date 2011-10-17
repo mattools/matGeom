@@ -1,10 +1,10 @@
-function test_suite = testGraphCenter(varargin) %#ok<STOUT>
-%TESTGRAPHCENTER  One-line description here, please.
+function test_suite = test_graphRadius(varargin) %#ok<STOUT>
+%TEST_GRAPHRADIUS  One-line description here, please.
 %
-%   output = testGraphCenter(input)
+%   output = test_graphRadius(input)
 %
 %   Example
-%   testGraphCenter
+%   testGraphRadius
 %
 %   See also
 %
@@ -21,8 +21,8 @@ initTestSuite;
 function testGraph02 %#ok<*DEFNU>
 
 [nodes edges] = createTestGraph02;
-center = graphCenter(nodes, edges);
+r = graphRadius(nodes, edges);
 
-exp = [6;7];
-assertEqual(exp, center);
+exp = 3;
+assertEqual(exp, r);
 

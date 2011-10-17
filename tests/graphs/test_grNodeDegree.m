@@ -1,7 +1,7 @@
-function test_suite = testGrNodeDegree(varargin) %#ok<STOUT>
-%TESTGRNODEDEGREE  test suite for function grNodeDegree
+function test_suite = test_grNodeDegree(varargin) %#ok<STOUT>
+%TEST_GRNODEDEGREE  test suite for function grNodeDegree
 %
-%   output = testGrNodeDegree(input)
+%   output = test_grNodeDegree(input)
 %
 %   Example
 %   testGrNodeDegree

@@ -1,10 +1,10 @@
-function test_suite = testGraphDiameter(varargin) %#ok<STOUT>
-%TESTGRAPHDIAMETER  One-line description here, please.
+function test_suite = test_graphPeripheralVertices(varargin) %#ok<STOUT>
+%TEST_GRAPHPERIPHERALVERTICES  One-line description here, please.
 %
-%   output = testGraphDiameter(input)
+%   output = test_graphPeripheralVertices(input)
 %
 %   Example
-%   testGraphDiameter
+%   test_graphPeripheralVertices
 %
 %   See also
 %
@@ -21,8 +21,8 @@ initTestSuite;
 function testGraph02 %#ok<*DEFNU>
 
 [nodes edges] = createTestGraph02;
-diam = graphDiameter(nodes, edges);
+verts = graphPeripheralVertices(nodes, edges);
 
-exp = 6;
-assertEqual(exp, diam);
+exp = [1;2;11;12];
+assertEqual(exp, verts);
 

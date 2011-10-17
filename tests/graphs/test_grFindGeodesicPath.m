@@ -1,7 +1,7 @@
-function test_suite = testGrFindGeodesicPath(varargin) %#ok<STOUT>
-%TESTGRFINDGEODESICPATH  One-line description here, please.
+function test_suite = test_grFindGeodesicPath(varargin) %#ok<STOUT>
+%TEST_GRFINDGEODESICPATH  One-line description here, please.
 %
-%   output = testGrFindGeodesicPath(input)
+%   output = test_grFindGeodesicPath(input)
 %
 %   Example
 %   testGrFindGeodesicPath

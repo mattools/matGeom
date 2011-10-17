@@ -1,10 +1,10 @@
-function test_suite = testGraphRadius(varargin) %#ok<STOUT>
-%testGraphRadius  One-line description here, please.
+function test_suite = test_graphDiameter(varargin) %#ok<STOUT>
+%TEST_GRAPHDIAMETER  One-line description here, please.
 %
-%   output = testGraphRadius(input)
+%   output = test_graphDiameter(input)
 %
 %   Example
-%   testGraphRadius
+%   testGraphDiameter
 %
 %   See also
 %
@@ -21,8 +21,8 @@ initTestSuite;
 function testGraph02 %#ok<*DEFNU>
 
 [nodes edges] = createTestGraph02;
-r = graphRadius(nodes, edges);
+diam = graphDiameter(nodes, edges);
 
-exp = 3;
-assertEqual(exp, r);
+exp = 6;
+assertEqual(exp, diam);
 

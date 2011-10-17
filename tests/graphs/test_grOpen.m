@@ -1,10 +1,10 @@
-function test_suite = testGrErode(varargin) %#ok<STOUT>
-%TESTGRERODE  test suite for function grErode
+function test_suite = test_grOpen(varargin) %#ok<STOUT>
+%TEST_GROPEN  test suite for function grOpen
 %
-%   output = testGrErode(input)
+%   output = test_grOpen(input)
 %
 %   Example
-%   testGrErode
+%   testGrOpen
 %
 %   See also
 %
@@ -22,7 +22,7 @@ function testSimpleGraph %#ok<*DEFNU>
 
 [nodes edges values] = createTestGraph01(); %#ok<ASGLU>
 
-valEro = grErode(edges, values);
-exp = [10;10;10;50;10;20;20;30];
-assertEqual(exp, valEro);
+valClo = grOpen(edges, values);
+exp = [20;10;50;50;50;20;30;30];
+assertEqual(exp, valClo);
 
