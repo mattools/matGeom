@@ -1,10 +1,10 @@
-function test_suite = testCreateSoccerBall(varargin) %#ok<STOUT>
-%TESTCREATESoccerBall  One-line description here, please.
+function test_suite = test_createIcosahedron(varargin) %#ok<STOUT>
+%TESTCREATEICOSAHEDRON  One-line description here, please.
 %
-%   output = testCreateSoccerBall(input)
+%   output = testCreateIcosahedron(input)
 %
 %   Example
-%   testCreateSoccerBall
+%   testCreateIcosahedron
 %
 %   See also
 %
@@ -20,12 +20,12 @@ initTestSuite;
 
 function testCreation %#ok<*DEFNU>
 
-createSoccerBall();
+createIcosahedron();
 
 
 function testVEFCreation
 
-[v e f] = createSoccerBall();
+[v e f] = createIcosahedron();
 assertTrue(~isempty(v));
 assertTrue(~isempty(e));
 assertTrue(~isempty(f));
@@ -38,7 +38,7 @@ assertEqual(nf, length(f));
 
 function testVFCreation
 
-[v f] = createSoccerBall();
+[v f] = createIcosahedron();
 assertTrue(~isempty(v));
 assertTrue(~isempty(f));
 
@@ -49,7 +49,7 @@ assertEqual(nf, length(f));
 
 function testMeshCreation
 
-mesh = createSoccerBall();
+mesh = createIcosahedron();
 assertTrue(isstruct(mesh));
 assertTrue(isfield(mesh, 'vertices'));
 assertTrue(isfield(mesh, 'edges'));
@@ -61,8 +61,24 @@ assertEqual([ne 2], size(mesh.edges));
 assertEqual(nf, length(mesh.faces));
 
 
+function testFacesOutwards
+
+[v e f] = createIcosahedron(); %#ok<ASGLU>
+
+centro = centroid(v);
+fc  = faceCentroids(v, f);
+fc2 = createVector(centro, fc);
+n   = faceNormal(v, f);
+
+assertEqual(size(n), size(fc2));
+
+dp = dot(fc2, n, 2);
+
+assertTrue(sum(dp <= 0) == 0);
+
+
 function [nv ne nf] = getMeshElementsNumber
 
-nv = 60;
-ne = 90;
-nf = 32;
+nv = 12;
+ne = 30;
+nf = 20;

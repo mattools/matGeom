@@ -1,10 +1,10 @@
-function test_suite = testCreateCubeOctaedron(varargin) %#ok<STOUT>
-%TESTCREATECUBEOCTAEDRON  One-line description here, please.
+function test_suite = test_createDodecahedron(varargin) %#ok<STOUT>
+%TESTCREATEDodecahedron  One-line description here, please.
 %
-%   output = testCreateCubeOctaedron(input)
+%   output = testCreateDodecahedron(input)
 %
 %   Example
-%   testCreateCubeOctaedron
+%   testCreateDodecahedron
 %
 %   See also
 %
@@ -20,12 +20,12 @@ initTestSuite;
 
 function testCreation %#ok<*DEFNU>
 
-createCubeOctahedron();
+createDodecahedron();
 
 
 function testVEFCreation
 
-[v e f] = createCubeOctahedron();
+[v e f] = createDodecahedron();
 assertTrue(~isempty(v));
 assertTrue(~isempty(e));
 assertTrue(~isempty(f));
@@ -38,7 +38,7 @@ assertEqual(nf, length(f));
 
 function testVFCreation
 
-[v f] = createCubeOctahedron();
+[v f] = createDodecahedron();
 assertTrue(~isempty(v));
 assertTrue(~isempty(f));
 
@@ -49,7 +49,7 @@ assertEqual(nf, length(f));
 
 function testMeshCreation
 
-mesh = createCubeOctahedron();
+mesh = createDodecahedron();
 assertTrue(isstruct(mesh));
 assertTrue(isfield(mesh, 'vertices'));
 assertTrue(isfield(mesh, 'edges'));
@@ -63,7 +63,7 @@ assertEqual(nf, length(mesh.faces));
 
 function testFacesOutwards
 
-[v e f] = createCubeOctahedron(); %#ok<ASGLU>
+[v e f] = createDodecahedron(); %#ok<ASGLU>
 
 centro = centroid(v);
 fc  = faceCentroids(v, f);
@@ -79,6 +79,6 @@ assertTrue(sum(dp <= 0) == 0);
 
 function [nv ne nf] = getMeshElementsNumber
 
-nv = 12;
-ne = 24;
-nf = 14;
+nv = 20;
+ne = 30;
+nf = 12;

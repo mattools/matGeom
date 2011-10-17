@@ -1,10 +1,10 @@
-function test_suite = testCreateCube(varargin) %#ok<STOUT>
-%TESTCREATECUBE  One-line description here, please.
+function test_suite = test_createTetrakaidecahedron(varargin) %#ok<STOUT>
+%TESTCREATETetrakaidecahedron  One-line description here, please.
 %
-%   output = testCreateCube(input)
+%   output = testCreateTetrakaidecahedron(input)
 %
 %   Example
-%   testCreateCube
+%   testCreateTetrakaidecahedron
 %
 %   See also
 %
@@ -20,12 +20,12 @@ initTestSuite;
 
 function testCreation %#ok<*DEFNU>
 
-createCube();
+createTetrakaidecahedron();
 
 
 function testVEFCreation
 
-[v e f] = createCube();
+[v e f] = createTetrakaidecahedron();
 assertTrue(~isempty(v));
 assertTrue(~isempty(e));
 assertTrue(~isempty(f));
@@ -38,7 +38,7 @@ assertEqual(nf, length(f));
 
 function testVFCreation
 
-[v f] = createCube();
+[v f] = createTetrakaidecahedron();
 assertTrue(~isempty(v));
 assertTrue(~isempty(f));
 
@@ -49,7 +49,7 @@ assertEqual(nf, length(f));
 
 function testMeshCreation
 
-mesh = createCube();
+mesh = createTetrakaidecahedron();
 assertTrue(isstruct(mesh));
 assertTrue(isfield(mesh, 'vertices'));
 assertTrue(isfield(mesh, 'edges'));
@@ -63,7 +63,7 @@ assertEqual(nf, length(mesh.faces));
 
 function testFacesOutwards
 
-[v e f] = createCube(); %#ok<ASGLU>
+[v e f] = createTetrakaidecahedron(); %#ok<ASGLU>
 
 centro = centroid(v);
 fc  = faceCentroids(v, f);
@@ -79,6 +79,6 @@ assertTrue(sum(dp <= 0) == 0);
 
 function [nv ne nf] = getMeshElementsNumber
 
-nv = 8;
-ne = 12;
-nf = 6;
+nv = 24;
+ne = 36;
+nf = 14;
