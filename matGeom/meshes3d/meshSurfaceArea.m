@@ -9,10 +9,10 @@ function area = meshSurfaceArea(vertices, edges, faces)
 %   array, containing vertex indices of each face.
 %
 %   This functions iterates on faces, extract vertices of the current face,
-%   and compute the sum of areas of face triangles.
+%   and computes the sum of face areas.
 %
-%   This function assumes faces are coplanar and convex. If faces area
-%   triangular, the function "trimeshSurfaceArea".
+%   This function assumes faces are coplanar and convex. If faces are all
+%   triangular, the function "trimeshSurfaceArea" should be more efficient.
 %
 %
 %   Example

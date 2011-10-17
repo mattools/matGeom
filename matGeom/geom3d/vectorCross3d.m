@@ -32,7 +32,7 @@ switch sign(numel(sza) - numel(szb))
     case -1
         c = zeros(szb);
     otherwise
-        c = zeros(max(sza,szb));
+        c = zeros(max(sza, szb));
 end
 
 c(:) =  bsxfun(@times, a(:,[2 3 1],:), b(:,[3 1 2],:)) - ...

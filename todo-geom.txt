@@ -13,7 +13,6 @@ Mettre en place le site Sourceforge
 * recuperer quelques polygones de test
 
 
-
 geom2d
 ======
 
