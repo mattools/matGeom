@@ -58,7 +58,7 @@ polygons2d
     * creer repertoire "splines2d" (pour MatGeom-1.2)
     
 * 2011.10.07
-    mette a jour : circleToPolygon, ellipseToPolygon, circleArcToPolygon
+    mettre a jour : circleToPolygon, ellipseToPolygon, circleArcToPolygon
     
 * findPoint : 
     2011.05.30 renvoyer un ou plusieurs indices, et n'accepter qu'un
@@ -89,6 +89,9 @@ polygons2d
     voir par exemple polygones avec ensembles de points ayant la meme direction ?
     ou decouper par tranches de polylignes ayant un "petit" bounding box
     -> polygones monotones
+    
+* 2011.11.06 drawPolygon: add an option to draw vertices, using special style
+    for first vertex    
     
     
 graphs
@@ -144,7 +147,14 @@ meshes3d
 * 2011.04.07 function for creating triangular mesh for a sphere
      createSphereMesh ?
      
-     
+* 2011.10.21 transform a "grid mesh" (x, y, z) to a quadmesh or trimesh (V, F)
+
+* 2011.10.21 merge some vertices of a mesh
+    * [V2 F2] = mergeMergeVertices(V, F, MERGE_INDICES)
+
+* 2011.10.21 readMesh, readMesh_ply, readMesh_off
+
+
 Misc.
 =====
 

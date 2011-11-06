@@ -51,3 +51,19 @@ lines = [0 0 0 3 6 9 ; 10 0 0 3 6 9; 3 6 9 3 6 9];
 assertEqual(3, size(inters, 1));
 assertEqual([true;false;true], inside);
 
+function testBrianMurrihy
+
+lines = [...
+    -5 5 1  0 0 -1; ...
+    -6 6 1  0 0 -1; ...
+    -7 7 1  0 0 -1; ...
+     8 8 1  0 0 -1; ...
+     9 9 1  0 0 -1];
+
+poly = [0 0 0; 10 0 0; 10 10 0; 0 10 0];
+
+[inters inside] = intersectLinePolygon3d(lines, poly); %#ok<ASGLU>
+
+exp = [false; false; false; true; true];
+assertEqual(exp, inside);
+
