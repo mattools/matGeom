@@ -76,7 +76,7 @@ for i = 1:size(edge, 1)
         continue;
     end
     
-    h(i) = plot(ax, edge(i, [1 4]), edge(i, [2 5]), edge(i, [3 6]), options{:});
+    h(i) = plot3(ax, edge(i, [1 4]), edge(i, [2 5]), edge(i, [3 6]), options{:});
 end
 
     
