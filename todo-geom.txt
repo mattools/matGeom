@@ -24,39 +24,16 @@ geom2d
     * option de trace sous forme de chaine simple
     * option de trace sous forme de couple 'param' + 'value'
 
-* 2011.03.15 prevoir fonctions de sauvegarde / chargement des formes, ex:
-    * mettre dans un package 'ioshapes'
-    * strategie 1 : une forme par fichier
-    * strategie 2 : une forme par ligne
-    
-    * readPolygon, writePolygon -> tableau '2D', avec header 1 ligne
-    * readPolyline, writePolyline -> tableau '2D'
-    * writeShape, readShape -> utilise structure de donnees 'type+data+style'
-    * readShape(filename) : renvoie un ensemble de formes (comment ?)
-    * printShape(shape) : renvoie une chaine de caractères
-        * "shapeToString" ?
-    * saveShape(shape, fileName)
-
-    * readWKT(f)
-    * fprintWKT(f, shape)
-    * parseShape(string) : renvoie une forme
-
 * 2011.04.26 mise a jour de la page angles2d pour les conventions
 
 * 2011.10.09 isPointOnXXX : convention pas claire pour 2 tableaux...
 
+* 2011.11.15 stienenDiagram : convertit un ensemble de points en un ensemble de disques
+
 
 polygons2d
 ==========
-* 2011.10.09 ajouter fonction "drawPath", qui gere M, L, Q, C.
 
-* 2011.10.09 ajouter fonction de conversion spline vers polyline
-    + specifier nb points ou "resolution" ?
-    * cubicSplineToPolyline
-    * quadSplineToPolyline
-    * cubicSplineBounds ?
-    * creer repertoire "splines2d" (pour MatGeom-1.2)
-    
 * 2011.10.07
     mettre a jour : circleToPolygon, ellipseToPolygon, circleArcToPolygon
     
@@ -79,9 +56,6 @@ polygons2d
 * 2010.08.10 clipping de polygones
     * 2011.09.25 voir les algos d'opérations booléennes, type Vatti
     
-* 2010.07.28 polygonTriangulate ?
-    * 2011.09.25 algo des oreilles.
-
 * 2010.07.05 reprendre doc pour la 'position' des polygones et polylines
 
 * structure de donnees geom pour stocker des points type polygone, en reprenant
@@ -92,6 +66,66 @@ polygons2d
     
 * 2011.11.06 drawPolygon: add an option to draw vertices, using special style
     for first vertex    
+
+
+ioshapes
+====
+
+* 2011.03.15 prevoir fonctions de sauvegarde / chargement des formes, ex:
+* mettre dans un package 'ioshapes'
+* strategie 1 : une forme par fichier
+* strategie 2 : une forme par ligne
+
+* readPolygon, writePolygon -> tableau '2D', avec header 1 ligne
+* readPolyline, writePolyline -> tableau '2D'
+* writeShape, readShape -> utilise structure de donnees 'type+data+style'
+* readShape(filename) : renvoie un ensemble de formes (comment ?)
+* printShape(shape) : renvoie une chaine de caractères
+    * "shapeToString" ?
+* saveShape(shape, fileName)
+
+* readWKT(f)
+* fprintWKT(f, shape)
+* parseShape(string) : renvoie une forme
+
+* gui : ShapeView
+
+
+Splines2D
+====
+
+* 2011.10.09 ajouter fonction "drawPath", qui gere M, L, Q, C.
+
+* 2011.10.09 ajouter fonction de conversion spline vers polyline
+    + specifier nb points ou "resolution" ?
+    * cubicSplineToPolyline
+    * quadSplineToPolyline
+    * cubicSplineBounds ?
+    * creer repertoire "splines2d" (pour MatGeom-1.2)
+    
+        
+Fourier Contours 2D
+=====
+        
+* 2011.11.14 creer des fonctions autour de "fourierContour" ?
+    * nom du module : "fourierContours2d"
+    * defini par un ensemble de coefficients complexes (paire ou aimpaire...)
+    * [COEFS INERTIA] = fourierContour(POLYGON) 
+        -> calcule les coefs a partir des points
+    * drawFourierContour(COEFS), drawFourierContour(COEFS, NPTS)
+    * S = fourierContourSpectrum(COEFS) 
+        -> calcule le module des coefs
+    * I = fourierContourInertia(COEFS) 
+        -> calcule module du spectre
+    * COEFS2 = fourierContourKeepCoefs(COEFS, N)
+    * COEFS2 = fourierContourKeepInertia(COEFS, PERCENT)
+    * PT = fourierContourPoint(COEFS, POS)
+    * PT = fourierContourCenter(COEFS)
+        -> conversion du coef 1 vers coordonnees 2D
+    * VECT = fourierCoutourTangent(FC, POS)
+    * KAPPA = fourierCoutourCurvature(FC, POS)
+    * L = fourierCoutourLength(FC) 
+        -> calcule longueur par intégration du jacobien
     
     
 graphs
@@ -154,10 +188,3 @@ meshes3d
 
 * 2011.10.21 readMesh, readMesh_ply, readMesh_off
 
-
-Misc.
-=====
-
-* 2011.07.17 create 'shapes2d' directory, for statistical shape analysis ?
-    * read / write meshes in various formats
-     
