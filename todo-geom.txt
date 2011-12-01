@@ -34,6 +34,8 @@ geom2d
 polygons2d
 ==========
 
+* 2011.12.01 privat function 'parseTriangle' (based on triangleCircumCircle)
+
 * 2011.10.07
     mettre a jour : circleToPolygon, ellipseToPolygon, circleArcToPolygon
     

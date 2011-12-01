@@ -16,8 +16,8 @@ function circles2d(varargin)
 %   E = [xc yc A B theta];
 %
 %   See also:
-%   ellipses2d, createCircle, createDirectedCircle, enclosingCircle
-%   isPointInCircle, isPointOnCircle
+%   ellipses2d, createCircle, createDirectedCircle, 
+%   isPointInCircle, isPointOnCircle, enclosingCircle, triangleCircumCircle
 %   intersectLineCircle, intersectCircles, radicalAxis
 %   circleAsPolygon, circleArcAsCurve
 %   drawCircle, drawCircleArc

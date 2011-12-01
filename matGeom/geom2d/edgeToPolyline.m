@@ -11,10 +11,8 @@ function poly = edgeToPolyline(edge, N)
 %     drawPoint(poly);
 %     axis equal;
 %
-%   edgeToPolyline
-%
 %   See also
-%
+%     edges2d, drawEdge, drawPolyline   
 %
 % ------
 % Author: David Legland

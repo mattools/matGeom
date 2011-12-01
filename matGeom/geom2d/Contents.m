@@ -136,9 +136,12 @@
 %   randomPointInBox      - Generate random point within a box
 %   drawBox               - Draw a box defined by coordinate extents
 %
-% Simple polygons
+% Triangles
 %   isPointInTriangle     - Test if a point is located inside a triangle
 %   triangleArea          - Signed area of a triangle
+%   triangleCircumCircle  - Circumscribed circle of a triangle
+%
+% Rectangles
 %   rectToPolygon         - Convert a rectangle into a polygon (set of vertices)
 %   drawRect              - Draw rectangle on the current axis
 %   orientedBoxToPolygon  - Convert an oriented box to a polygon (set of vertices)
