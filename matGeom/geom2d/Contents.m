@@ -66,6 +66,7 @@
 %   intersectEdges        - Return all intersections between two set of edges
 %   intersectLineEdge     - Return intersection between a line and an edge
 %   transformEdge         - Transform an edge with an affine transform
+%   edgeToPolyline        - Convert an edge to a polyline with a given number of segments
 %   drawEdge              - Draw an edge given by 2 points
 %   drawCenteredEdge      - Draw an edge centered on a point
 %

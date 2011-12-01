@@ -52,6 +52,7 @@
 %   pointSetsAverage          - Compute the average of several point sets
 %   minimumCaliperDiameter    - Minimum caliper diameter of a set of points
 %   findPoint                 - Find index of a point in an set from its coordinates
+%   convexHull                - Convex hull of a set of points
 %
 % Polylines
 %   polylinePoint             - Extract a point from a polyline
@@ -86,9 +87,10 @@
 %   intersectLinePolygon      - Intersection points between a line and a polygon
 %   intersectRayPolygon       - Intersection points between a ray and a polygon
 %   polygonSelfIntersections  - Find-self intersection points of a polygon
-%   convexHull                - Convex hull of a set of points
 %   polygonLoops              - Divide a possibly self-intersecting polygon into a set of simple loops
 %   expandPolygon             - Expand a polygon by a given (signed) distance
+%   densifyPolygon            - add several points on each edge of the polygon
+%   triangulatePolygon        - Compute a triangulation of the polygon
 %   medialAxisConvex          - Compute medial axis of a convex polygon
 %
 % Measures on Polygons
