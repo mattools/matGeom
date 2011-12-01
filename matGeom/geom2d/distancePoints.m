@@ -17,7 +17,7 @@ function dist = distancePoints(p1, p2, varargin)
 %   compute only distances between P1(i,:) and P2(i,:).
 %
 %   See also:
-%   points2d, minDistancePoints
+%   points2d, minDistancePoints, nndist
 %
 %
 %   ---------

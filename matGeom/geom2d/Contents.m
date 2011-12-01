@@ -23,6 +23,7 @@
 %   angleSort             - Sort points in the plane according to their angle to origin
 %   distancePoints        - Compute distance between two points
 %   minDistancePoints     - Minimal distance between several points
+%   nndist                - Nearest-neighbor distances of each point in a set
 %   transformPoint        - Transform a point with an affine transform
 %   drawPoint             - Draw the point on the axis.
 %

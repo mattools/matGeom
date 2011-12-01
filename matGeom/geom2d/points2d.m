@@ -15,7 +15,7 @@ function points2d
 %   See also:
 %   centroid, midPoint, polarPoint, pointOnLine
 %   isCounterClockwise, angle2Points, angle3Points, angleSort
-%   distancePoints, minDistancePoints
+%   distancePoints, minDistancePoints, nndist
 %   transformPoint, clipPoints, drawPoint
 %
 % ------
