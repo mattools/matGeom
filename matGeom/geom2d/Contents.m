@@ -16,6 +16,7 @@
 %   clipPoints            - Clip a set of points by a box
 %   centroid              - Compute centroid (center of mass) of a set of points
 %   midPoint              - Middle point of two points or of an edge
+%   circumCenter          - Circumcenter of three points
 %   isCounterClockwise    - Compute relative orientation of 3 points
 %   polarPoint            - Create a point from polar coordinates (rho + theta)
 %   angle2Points          - Compute horizontal angle between 2 points
@@ -102,6 +103,7 @@
 %   radicalAxis           - Compute the radical axis (or radical line) of 2 circles
 %   drawCircle            - Draw a circle on the current axis
 %   drawCircleArc         - Draw a circle arc on the current axis
+%   circumCircle          - Circumscribed circle of a triangle
 %
 % Ellipses and Parabola
 %   ellipses2d            - Description of functions operating on ellipses
@@ -140,7 +142,6 @@
 % Triangles
 %   isPointInTriangle     - Test if a point is located inside a triangle
 %   triangleArea          - Signed area of a triangle
-%   triangleCircumCircle  - Circumscribed circle of a triangle
 %
 % Rectangles
 %   rectToPolygon         - Convert a rectangle into a polygon (set of vertices)

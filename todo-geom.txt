@@ -6,6 +6,7 @@ Mettre en place le site Sourceforge
 ===================================
 
 * trouver un logo pour SourceForge (2011.02.17)
+    * carre triangle rond ?
 
 * Create an "obsolete" subpackage
     * maybe "obsolete2d" and "obsolete3d"
@@ -30,18 +31,9 @@ geom2d
 
 * 2011.11.15 stienenDiagram : convertit un ensemble de points en un ensemble de disques
 
-* 2011.12.01 create private function 'parseTriangle' (based on triangleCircumCircle)
-
-* 2011.12.01 rename triangleCircumCircle to circumCircle
-
-* 2011.12.01 create function circumcenter, that should be dimension-generic
-
 
 polygons2d
 ==========
-
-* 2011.10.07
-    mettre a jour : circleToPolygon, ellipseToPolygon, circleArcToPolygon
     
 * findPoint : 
     2011.05.30 renvoyer un ou plusieurs indices, et n'accepter qu'un
