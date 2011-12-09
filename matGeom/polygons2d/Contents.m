@@ -59,6 +59,7 @@
 %   polylineLength            - Return length of a polyline given as a list of points
 %   polylineCentroid          - Compute centroid of a curve defined by a series of points
 %   polylineSubcurve          - Extract a portion of a polyline
+%   resamplePolyline          - Distribute N points equally spaced on a polyline
 %   reversePolyline           - Reverse a polyline, by iterating vertices from the end
 %   isPointOnPolyline         - Test if a point belongs to a polyline
 %   projPointOnPolyline       - Compute position of a point projected on a polyline
@@ -67,19 +68,11 @@
 %   intersectPolylines        - Find the common points between 2 polylines
 %   polylineSelfIntersections - Find self-intersections points of a polyline
 %
-% Curves (polylines with lot of vertices)
-%   parametrize               - Parametrization of a curve, based on edges length
-%   curvature                 - Estimate curvature of a polyline defined by points
-%   cart2geod                 - Convert cartesian coordinates to geodesic coord.
-%   geod2cart                 - Convert geodesic coordinates to cartesian coord.
-%   curveMoment               - Compute inertia moment of a 2D curve
-%   curveCMoment              - Compute centered inertia moment of a 2D curve
-%   curveCSMoment             - Compute centered scaled moment of a 2D curve
-%
 % Polygons
 %   polygonPoint              - Extract a point from a polygon
 %   polygonSubcurve           - Extract a portion of a polygon
 %   reversePolygon            - Reverse a polygon, by iterating vertices from the end
+%   resamplePolygon           - Distribute N points equally spaced on a polygon
 %   projPointOnPolygon        - Compute position of a point projected on a polygon
 %   splitPolygons             - Convert a NaN separated polygon list to a cell array of polygons
 %   clipPolygon               - Clip a polygon with a rectangular box
@@ -89,7 +82,7 @@
 %   polygonSelfIntersections  - Find-self intersection points of a polygon
 %   polygonLoops              - Divide a possibly self-intersecting polygon into a set of simple loops
 %   expandPolygon             - Expand a polygon by a given (signed) distance
-%   densifyPolygon            - add several points on each edge of the polygon
+%   densifyPolygon            - Add several points on each edge of the polygon
 %   triangulatePolygon        - Compute a triangulation of the polygon
 %   medialAxisConvex          - Compute medial axis of a convex polygon
 %
@@ -103,6 +96,15 @@
 %   polygonBounds             - Compute the bounding box of a polygon
 %   distancePointPolygon      - Compute shortest distance between a point and a polygon
 %   distancePolygons          - Compute the shortest distance between 2 polygons
+%
+% Curves (polylines with lot of vertices)
+%   parametrize               - Parametrization of a polyline, based on edges lengths
+%   curvature                 - Estimate curvature of a polyline defined by points
+%   cart2geod                 - Convert cartesian coordinates to geodesic coord.
+%   geod2cart                 - Convert geodesic coordinates to cartesian coord.
+%   curveMoment               - Compute inertia moment of a 2D curve
+%   curveCMoment              - Compute centered inertia moment of a 2D curve
+%   curveCSMoment             - Compute centered scaled moment of a 2D curve
 %
 % Functions from stochastic geometry
 %   steinerPoint              - Compute steiner point (weighted centroid) of a polygon

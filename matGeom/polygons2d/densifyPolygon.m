@@ -1,5 +1,5 @@
 function poly2 = densifyPolygon(poly, N)
-%DENSIFYPOLYGON add several points on each edge of the polygon
+%DENSIFYPOLYGON Add several points on each edge of the polygon
 %
 %   POLY2 = densifyPolygon(POLY, N)
 %   POLY is a NV-by-2 array containing polygon coordinates. The function
@@ -11,7 +11,7 @@ function poly2 = densifyPolygon(poly, N)
 %     % Densifies a simple polygon
 %     poly = [0 0 ; 10 0;5 10;15 15;5 20;-5 10];
 %     poly2 = densifyPolygon(poly, 10);
-%     figure;drawPolygon(poly); axis equal
+%     figure; drawPolygon(poly); axis equal
 %     hold on; drawPoint(poly2);
 %
 %   See also

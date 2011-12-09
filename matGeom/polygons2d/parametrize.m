@@ -1,5 +1,5 @@
 function par = parametrize(varargin)
-%PARAMETRIZE Parametrization of a curve, based on edges length
+%PARAMETRIZE Parametrization of a polyline, based on edges lengths
 %
 %   PAR = parametrize(POLY);
 %   Returns a parametrization of the curve defined by the serie of points,
