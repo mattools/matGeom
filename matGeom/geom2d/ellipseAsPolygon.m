@@ -1,6 +1,8 @@
 function varargout = ellipseAsPolygon(ellipse, N)
 %ELLIPSEASPOLYGON Convert an ellipse into a series of points
 %
+%   Deprecated, use ellipseToPolygon instead.
+%
 %   P = ellipseAsPolygon(ELL, N);
 %   converts ELL given as [x0 y0 a b] or [x0 y0 a b theta] into a polygon
 %   with N edges. The result P is (N+1)-by-2 array containing coordinates
@@ -26,38 +28,15 @@ function varargout = ellipseAsPolygon(ellipse, N)
 
 %   HISTORY
 %   2011-03-30 use angles in degrees, add default value for N
+%   2011-12-09 deprecate
 
-% default value for N
-if nargin < 2
-    N = 72;
-end
+warning('matGeom:deprecated', ...
+    'function "ellipseAsCurve" is deprecated, use "ellipseToPolygon" instead');
 
-% angle of ellipse
-theta = 0;
-if size(ellipse, 2) > 4
-    theta = ellipse(:,5);
-end
-
-% get ellipse parameters
-xc = ellipse(:,1);
-yc = ellipse(:,2);
-a  = ellipse(:,3);
-b  = ellipse(:,4);
-
-% create time basis
-t = linspace(0, 2*pi, N+1)';
-
-% pre-compute trig functions (angles is in degrees)
-cot = cosd(theta);
-sit = sind(theta);
-
-% position of points
-x = xc + a * cos(t) * cot - b * sin(t) * sit;
-y = yc + a * cos(t) * sit + b * sin(t) * cot;
-
-% format output depending on number of a param.
-if nargout == 1
-    varargout = {[x y]};
-elseif nargout == 2
+% format output
+if nargout <= 1
+    varargout = {ellipseToPolygon(ellipse, N)};
+else
+    [x y] = ellipseToPolygon(ellipse, N);
     varargout = {x, y};
 end

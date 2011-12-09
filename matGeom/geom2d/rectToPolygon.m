@@ -6,7 +6,7 @@ function varargout = rectToPolygon(rect)
 %   4*2 array double, containing coordinate of rectangle vertices.
 %
 %   See also:
-%   orientedBoxToPolygon, drawRect, drawPolygon
+%   orientedBoxToPolygon, ellipseToPolygon, drawRect, drawPolygon
 %
 %
 %   ---------

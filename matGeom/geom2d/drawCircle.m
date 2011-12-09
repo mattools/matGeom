@@ -35,7 +35,7 @@ function varargout = drawCircle(varargin)
 %     axis equal;
 %
 %   See also
-%   circles2d, drawCircleArc, drawEllipse
+%   circles2d, drawCircleArc, drawEllipse, circleToPolygon
 %
 %   ---------
 %   author : David Legland 

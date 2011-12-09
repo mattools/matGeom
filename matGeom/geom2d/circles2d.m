@@ -19,7 +19,7 @@ function circles2d(varargin)
 %   ellipses2d, createCircle, createDirectedCircle, 
 %   isPointInCircle, isPointOnCircle, enclosingCircle, triangleCircumCircle
 %   intersectLineCircle, intersectCircles, radicalAxis
-%   circleAsPolygon, circleArcAsCurve
+%   circleToPolygon, circleArcToPolyline
 %   drawCircle, drawCircleArc
 %
 % ------

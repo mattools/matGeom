@@ -9,7 +9,7 @@ function circle = enclosingCircle(pts)
 %   Rewritten from a file from
 %           Yazan Ahed (yash78@gmail.com)
 %
-%   which was rewritten from a Java applet by Shripad Thite :
+%   which was rewritten from a Java applet by Shripad Thite:
 %   http://heyoka.cs.uiuc.edu/~thite/mincircle/
 %
 %   See also:

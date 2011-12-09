@@ -56,7 +56,7 @@ dca = c - a;
 % common denominator
 D  = .5 / (a(1) * dbc(2) + b(1) * dca(2) + c(1) * dab(2));
 
-% cetner coordinates
+% center coordinates
 xc =  (ah * dbc(2) + bh * dca(2) + ch * dab(2) ) * D;
 yc = -(ah * dbc(1) + bh * dca(1) + ch * dab(1) ) * D;
 

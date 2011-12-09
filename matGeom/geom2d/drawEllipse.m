@@ -30,7 +30,7 @@ function varargout = drawEllipse(varargin)
 %     drawEllipse([50 50 40 20 -10], 'linewidth', 2, 'color', 'g');
 %
 %   See also:
-%   ellipses2d, drawCircle, drawEllipseArc, ellipseAsPolygon
+%   ellipses2d, drawCircle, drawEllipseArc, ellipseToPolygon
 %
 %   ---------
 %   author : David Legland 
@@ -70,26 +70,26 @@ for i = 1:length(varargin)
 end
 
 % extract ellipse parameters
-if length(varargin)==1
+if length(varargin) == 1
     % ellipse is given in a single array
     ellipse = varargin{1};
     x0 = ellipse(:, 1);
     y0 = ellipse(:, 2);
     a  = ellipse(:, 3);
     b  = ellipse(:, 4);
-    if length(ellipse)>4
+    if length(ellipse) > 4
         theta = ellipse(:, 5);
     else
         theta = zeros(size(x0));
     end
     
-elseif length(varargin)>=4
+elseif length(varargin) >= 4
     % ellipse parameters given as separate arrays
     x0 = varargin{1};
     y0 = varargin{2};
     a  = varargin{3};
     b  = varargin{4};
-    if length(varargin)>4
+    if length(varargin) > 4
         theta = varargin{5};
     else
         theta = zeros(size(x0));

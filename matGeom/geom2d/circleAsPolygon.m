@@ -28,20 +28,13 @@ function varargout = circleAsPolygon(circle, varargin)
 %   HISTORY
 %   20/04/2007: return a closed polygon with N+1 vertices, use default N=64
 
-% determines number of points
-N = 64;
-if ~isempty(varargin)
-    N = varargin{1};
-end
+warning('matGeom:deprecated', ...
+    'function "circleAsPolygon" is deprecated, use "circleToPolygon" instead');
 
-% create circle
-t = linspace(0, 2*pi, N+1)';
-x = circle(1) + circle(3)*cos(t);
-y = circle(2) + circle(3)*sin(t);
-
-if nargout==1
-    varargout{1}=[x y];
-elseif nargout==2
-    varargout{1}=x;
-    varargout{2}=y;    
+% format output
+if nargout <= 1
+    varargout = {circleToPolygon(circle, varargin{:})};
+else
+    [x y] = circleToPolygon(circle, varargin{:});
+    varargout = {x, y};
 end

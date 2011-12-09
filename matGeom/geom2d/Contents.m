@@ -94,8 +94,8 @@
 %   createDirectedCircle  - Create a directed circle
 %   intersectCircles      - Intersection points of two circles
 %   intersectLineCircle   - Intersection point(s) of a line and a circle
-%   circleAsPolygon       - Convert a circle into a series of points
-%   circleArcAsCurve      - Convert a circle arc into a series of points
+%   circleToPolygon       - Convert a circle into a series of points
+%   circleArcToPolyline   - Convert a circle arc into a series of points
 %   isPointInCircle       - Test if a point is located inside a given circle
 %   isPointOnCircle       - Test if a point is located on a given circle.
 %   enclosingCircle       - Find the minimum circle enclosing a set of points.
@@ -107,7 +107,7 @@
 %   ellipses2d            - Description of functions operating on ellipses
 %   inertiaEllipse        - Inertia ellipse of a set of points
 %   isPointInEllipse      - Check if a point is located inside a given ellipse
-%   ellipseAsPolygon      - Convert an ellipse into a series of points
+%   ellipseToPolygon      - Convert an ellipse into a series of points
 %   drawEllipse           - Draw an ellipse on the current axis
 %   drawEllipseArc        - Draw an ellipse arc on the current axis
 %   drawParabola          - Draw a parabola on the current axis
@@ -200,6 +200,9 @@ help('Contents');
 %   clipLineRect          - clip a line with a polygon
 %   formatAngle           - Ensure an angle value is comprised between 0 and 2*PI
 %   drawRect2             - Draw centered rectangle on the current axis
+%   circleAsPolygon       - Convert a circle into a series of points
+%   circleArcAsCurve      - Convert a circle arc into a series of points
+%   ellipseAsPolygon      - Convert an ellipse into a series of points
 
 
 %% Others...

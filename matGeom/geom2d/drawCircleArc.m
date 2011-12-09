@@ -29,7 +29,7 @@ function varargout = drawCircleArc(varargin)
 %     drawCircleArc(arc, 'LineWidth', 3, 'Color', 'r')
 %
 %   See also:
-%   circles2d, drawCircle, drawEllipse
+%   circles2d, drawCircle, drawEllipse, circleArcToPolyline
 %
 %   --------
 %   author: David Legland 
