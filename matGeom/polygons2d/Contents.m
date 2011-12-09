@@ -48,7 +48,6 @@
 %
 %
 % Point Sets
-%   pointSetBounds            - Bounding box of a set of points
 %   pointSetsAverage          - Compute the average of several point sets
 %   minimumCaliperDiameter    - Minimum caliper diameter of a set of points
 %   findPoint                 - Find index of a point in an set from its coordinates

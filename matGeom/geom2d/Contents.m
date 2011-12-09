@@ -15,6 +15,7 @@
 %   points2d              - Description of functions operating on points
 %   clipPoints            - Clip a set of points by a box
 %   centroid              - Compute centroid (center of mass) of a set of points
+%   boundingBox           - Bounding box of a set of points
 %   midPoint              - Middle point of two points or of an edge
 %   circumCenter          - Circumcenter of three points
 %   isCounterClockwise    - Compute relative orientation of 3 points

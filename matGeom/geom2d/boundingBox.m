@@ -1,7 +1,7 @@
-function box = pointSetBounds(points)
-%POINTSETBOUNDS Bounding box of a set of points
+function box = boundingBox(points)
+%BOUNDINGBOX Bounding box of a set of points
 %
-%   BOX = pointSetBounds(POINTS)
+%   BOX = boundingBox(POINTS)
 %   Returns the bounding box of the set of points POINTS. POINTS can be
 %   either a N-by-2 or N-by-3 array. The result BOX is a 1-by-4 or 1-by-6
 %   array, containing:
@@ -13,7 +13,7 @@ function box = pointSetBounds(points)
 %     points = rand(30, 2);
 %     drawPoint(points, '.');
 %     hold on;
-%     box = pointSetBounds(points);
+%     box = boundingBox(points);
 %     drawBox(box, 'r');
 %
 %   See also
@@ -27,6 +27,7 @@ function box = pointSetBounds(points)
 
 %   HISTORY
 %   2011-04-08 add example
+%   2011-12-09 rename to boundingBox
 
 % compute extreme x and y values
 xmin = min(points(:,1));
