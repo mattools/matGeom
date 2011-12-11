@@ -121,6 +121,7 @@
 %   drawPolyline              - Draw a polyline specified by a list of points
 %   drawPolygon               - Draw a polygon specified by a list of points
 %   fillPolygon               - Fill a polygon specified by a list of points
+%   drawVertices              - Draw the vertices of a polygon or polyline
 %
 %
 %   Credits:
