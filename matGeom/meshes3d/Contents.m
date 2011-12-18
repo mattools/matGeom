@@ -49,6 +49,7 @@
 %   minConvexHull            - Return the unique minimal convex hull of a set of 3D points
 %   polyhedronSlice          - Intersect a convex polyhedron with a plane.
 %   checkMeshAdjacentFaces   - Check if adjacent faces of a mesh have similar orientation
+%   gridmeshToQuadmesh       - Create a quad mesh from a grid mesh
 %   clipMeshVertices         - Clip vertices of a surfacic mesh and remove outer faces
 %   clipConvexPolyhedronHP   - Clip a convex polyhedron by a plane
 %
@@ -86,3 +87,4 @@
 %   drawPolyhedron           - draw polyhedron defined by vertices and faces
 
 % Others
+
