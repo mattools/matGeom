@@ -1,6 +1,12 @@
 function angles3d(varargin)
 %ANGLES3D Conventions for manipulating angles in 3D
 %
+%   The library uses both radians and degrees angles;
+%   Results of angle computation between shapes usually returns angles in
+%   radians.
+%   Representation of 3D shapes use angles in degrees (easier to manipulate
+%   and to save). 
+%
 %   Contrary to the plane, there are no oriented angles in 3D. Angles
 %   between lines or between planes are comprised between 0 and PI.
 %

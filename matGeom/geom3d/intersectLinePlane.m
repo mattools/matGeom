@@ -1,11 +1,11 @@
 function point = intersectLinePlane(line, plane)
-%INTERSECTLINEPLANE return intersection between a plane and a line
+%INTERSECTLINEPLANE Intersection point between a 3D line and a plane
 %
-%   PT = intersectLinePlane(LINE, PLANE)%
+%   PT = intersectLinePlane(LINE, PLANE)
 %   Returns the intersection point of the given line and the given plane.
-%   PLANE : [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2]
-%   LINE :  [x0 y0 z0 dx dy dz]
-%   PT :    [xi yi zi]
+%   LINE:  [x0 y0 z0 dx dy dz]
+%   PLANE: [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2]
+%   PT:    [xi yi zi]
 %   If LINE and PLANE are parallel, return [NaN NaN NaN].
 %   If LINE (or PLANE) is a matrix with 6 (or 9) columns and N rows, result
 %   is an array of points with N rows and 3 columns.

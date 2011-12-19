@@ -1,11 +1,12 @@
 function c = vectorCross3d(a,b)
-%VECTORCROSS  Vector cross product faster than inbuilt MATLAB cross.
+%VECTORCROSS3D Vector cross product faster than inbuilt MATLAB cross.
 %
-%   C = VECTORCROSS(A,B) returns the cross product of the vectors A and B.
-%   That is, C = A x B. 
-%   A and B must be Nx3 element vectors. If either A or B is a 1x3 element
-%   vector, C will have the size of the other input and will be the
-%   concatenation of each row's cross product. 
+%   C = VECTORCROSS3D(A, B) 
+%   returns the cross product of the 3D vectors A and B, that is: 
+%       C = A x B
+%   A and B must be N-by-3 element vectors. If either A or B is a 1-by-3
+%   row vector, the result C will have the size of the other input and will
+%   be the  concatenation of each row's cross product. 
 %
 %   Class support for inputs A,B:
 %      float: double, single

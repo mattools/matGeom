@@ -9,7 +9,7 @@ function alpha = meshDihedralAngles(vertices, edges, faces)
 %
 %   Note: the function assumes that the faces are correctly oriented. The
 %   face vertices should be indexed counter-clockwise when considering the
-%   supporting plane of the plane, with the outer normal oriented outwards
+%   supporting plane of the face, with the outer normal oriented outwards
 %   of the mesh.
 %
 %   Example
@@ -50,7 +50,7 @@ Ne = size(edges, 1);
 alpha = zeros(Ne, 1);
 
 % iterate over edges
-for i=1:Ne
+for i = 1:Ne
     % indices of adjacent faces
     indFace1 = edgeFaces(i, 1);
     indFace2 = edgeFaces(i, 2);

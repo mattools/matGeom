@@ -34,6 +34,7 @@
 %   meshEdgeFaces            - Compute index of faces adjacent to each edge of a mesh
 %   faceCentroids            - Compute centroids of a mesh faces
 %   faceNormal               - Compute normal vector of faces in a 3D mesh
+%   vertexNormal             - Compute normals to a mesh vertices
 %
 % Measures on meshes
 %   meshSurfaceArea          - Surface area of a polyhedral mesh
@@ -87,4 +88,3 @@
 %   drawPolyhedron           - draw polyhedron defined by vertices and faces
 
 % Others
-

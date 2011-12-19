@@ -24,57 +24,64 @@ edgeFaces = zeros(Ne, 2);
 % stored as index 2D array or as cell array of 1D arrays.
 if isnumeric(faces)
     Nf = size(faces, 1);
-    for i=1:Nf
+    for i = 1:Nf
         face = faces(i, :);
         processFace(face, i)
     end
 elseif iscell(faces)
     Nf = length(faces);
-    for i=1:Nf
+    for i = 1:Nf
         face = faces{i};
         processFace(face, i)
     end
 end
 
     function processFace(face, indFace)
+        % iterate on face edges
         for j = 1:length(face)
             % build edge: array of vertices
-            currentEdge = [face(j) face(mod(j, length(face))+1)];
+            j2 = mod(j, length(face)) + 1;
             
-            % avoid the case of faces with last vertex equal to the first
-            % one
-            if currentEdge(1)==currentEdge(2)
+            % do not process edges with same vertices
+            if face(j) == face(j2)
                 continue;
             end
             
-            % find index of current edge within edge array
+            % vertex indices of current edge
+            currentEdge = [face(j) face(j2)];
+            
+            % find index of current edge, assuming face is left-located
             b1 = ismember(edges, currentEdge, 'rows');
             indEdge = find(b1);
-            if isempty(indEdge)
-                b2 = ismember(edges, currentEdge([2 1]), 'rows');
-                indEdge = find(b2);
+            if ~isempty(indEdge)
+                if edgeFaces(indEdge, 1) ~= 0
+                    error('meshes3d:IllegalTopology', ...
+                        'Two faces were found on left side of edge %d ', indEdge);
+                end
+                
+                edgeFaces(indEdge, 1) = indFace;
+                continue;
             end
-            
-            % check up
-            if isempty(indEdge)
-                warning('geom3d:ElementNotFound', ...
-                    'Edge %d of face %d was not found in edge array', ...
-                    j, indFace);
+                
+            % otherwise, assume the face is right-located
+            b2 = ismember(edges, currentEdge([2 1]), 'rows');
+            indEdge = find(b2);
+            if ~isempty(indEdge)
+                if edgeFaces(indEdge, 2) ~= 0
+                    error('meshes3d:IllegalTopology', ...
+                        'Two faces were found on left side of edge %d ', indEdge);
+                end
+                
+                edgeFaces(indEdge, 2) = indFace;
                 continue;
             end
             
-            updateEdgeFaces(indEdge, i);
+            % If face was neither left nor right, error
+            warning('meshes3d:IllegalTopology', ...
+                'Edge %d of face %d was not found in edge array', ...
+                j, indFace);
+            continue;
         end
     end
 
-    function updateEdgeFaces(indEdge, indFace)
-        % stores index of current face with found edge
-        if edgeFaces(indEdge, 1)==0
-            edgeFaces(indEdge, 1) = indFace;
-        elseif edgeFaces(indEdge, 2)==0
-            edgeFaces(indEdge, 2) = indFace;
-        else
-            error('Edge %d has more than 2 adjacent faces', indEdge);
-        end
-    end
 end

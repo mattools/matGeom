@@ -17,7 +17,7 @@ function edges = computeMeshEdges(faces)
 
 if ~iscell(faces)
     % faces is given as numeric array, 
-    % all faces have same number of vertices
+    % all faces have same number of vertices, stored in nVF variable
     
     % compute total number of edges
     nFaces  = size(faces, 1);
@@ -56,5 +56,5 @@ else
     
 end
 
-% keep only unique edges
-edges = unique(sort(edges, 2), 'rows');
+% keep only unique edges, and return sorted result
+edges = sortrows(unique(sort(edges, 2), 'rows'));

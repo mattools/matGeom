@@ -28,14 +28,6 @@
 %   Polygons are represented by N-by-3 array of points, the last point is
 %   not necessarily the same as the first one. Points must be coplanar.
 %
-%   Meshes and Polyhedra are represented by a couple of variables {V, F}:
-%   V: N-by-3 array of vetrtices: [x1 y1 z1; ... ;xn yn zn];
-%   F: is either a [Nf*3] or [Nf*4] array containing reference for vertices
-%       of each face, or a [Nf*1] cell array, where each cell is an array
-%       containing a variable number of node indices.
-%   For some functions, the array E of edges is needed. It consists in a
-%   Ne-by-2 array containing indices of source and target vertices. 
-%
 %
 % 3D Points
 %   points3d                  - Description of functions operating on 3D points
@@ -51,9 +43,11 @@
 %   transformVector3d         - Transform a vector with a 3D affine transform
 %   normalizeVector3d         - Normalize a 3D vector to have norm equal to 1
 %   vectorNorm3d              - Norm of a 3D vector or of set of 3D vectors
+%   vectorCross3d             - Vector cross product faster than inbuilt MATLAB cross.
 %   vectorAngle3d             - Angle between two 3D vectors
 %   isParallel3d              - Check parallelism of two 3D vectors
 %   isPerpendicular3d         - Check orthogonality of two 3D vectors
+%   drawVector3d              - Draw vector at a given position
 %
 % Angles
 %   angles3d                  - Conventions for manipulating angles in 3D
@@ -87,7 +81,7 @@
 %   createPlane               - Create a plane in parametrized form
 %   normalizePlane            - Normalize parametric representation of a plane
 %   intersectPlanes           - Return intersection line between 2 planes in space
-%   intersectLinePlane        - Return intersection point between a plane and a line
+%   intersectLinePlane        - Intersection point between a 3D line and a plane
 %   intersectEdgePlane        - Return intersection point between a plane and a edge
 %   distancePointPlane        - Signed distance betwen 3D point and plane
 %   projPointOnPlane          - Return the orthogonal projection of a point on a plane
