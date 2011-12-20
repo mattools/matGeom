@@ -46,11 +46,14 @@
 %
 % Basic processing
 %   triangulateFaces         - Convert face array to an array of triangular faces 
+%   gridmeshToQuadmesh       - Create a quad mesh from a grid mesh
+%   checkMeshAdjacentFaces   - Check if adjacent faces of a mesh have similar orientation
 %   meshReduce               - Merge coplanar faces of a polyhedral mesh
 %   minConvexHull            - Return the unique minimal convex hull of a set of 3D points
+%
+% Intersections and clipping
+%   intersectLineMesh3d      - Intersection points of a 3D line with a mesh
 %   polyhedronSlice          - Intersect a convex polyhedron with a plane.
-%   checkMeshAdjacentFaces   - Check if adjacent faces of a mesh have similar orientation
-%   gridmeshToQuadmesh       - Create a quad mesh from a grid mesh
 %   clipMeshVertices         - Clip vertices of a surfacic mesh and remove outer faces
 %   clipConvexPolyhedronHP   - Clip a convex polyhedron by a plane
 %
@@ -73,6 +76,10 @@
 % Drawing functions
 %   drawFaceNormals          - Draw normal vector of each face in a mesh
 %   drawMesh                 - Draw a 3D mesh defined by vertices and faces
+%
+% Reading from file
+%   readMesh_off             - Read mesh data stord in OFF format
+%
 %
 % ------
 % Author: David Legland
