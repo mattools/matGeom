@@ -118,12 +118,12 @@ d   = size(p1, 2);
 dist = zeros(n1, n2);
 
 % different behaviour depending on the norm used
-if n==2
+if n == 2
     % Compute euclidian distance. this is the default case
-    % Compute difference of coordinate for each pair of point ([n1*n2] array)
-    % and for each dimension. -> dist is a [n1*n2] array.
+    % Compute difference of coordinate for each pair of point and for each
+    % dimension. Result "dist" is a n1-by-n2 array. 
     % in 2D: dist = dx.*dx + dy.*dy;
-    for i=1:d
+    for i = 1:d
         dist = dist + (repmat(p1(:,i), [1 n2])-repmat(p2(:,i)', [n1 1])).^2;
     end
 
@@ -140,12 +140,14 @@ if n==2
     
     % convert squared distance to distance
     minDist = sqrt(minSqDist);
-elseif n==inf
+    
+elseif n == inf
     % infinite norm corresponds to maximum absolute value of differences
     % in 2D: dist = max(abs(dx) + max(abs(dy));
-    for i=1:d
+    for i = 1:d
         dist = max(dist, abs(p1(:,i)-p2(:,i)));
     end
+    
 else
     % compute distance using the specified norm.
     % in 2D: dist = power(abs(dx), n) + power(abs(dy), n);
@@ -166,9 +168,8 @@ else
 
     % convert squared distance to distance
     minDist = power(minSqDist, 1/n);
+    
 end
-
-
 
 if ~allPoints
     % convert index in array to row ad column subindices.
@@ -184,18 +185,19 @@ end
 %% format output parameters
 
 % format output depending on number of asked parameters
-if nargout<=1
+if nargout <= 1
     varargout{1} = minDist;
-elseif nargout==2
+    
+elseif nargout == 2
     % If two arrays are asked, 'ind' is an array of indices, one for each
     % point in PTS1, corresponding to the result in minDist
     varargout{1} = minDist;
     varargout{2} = ind;
-elseif nargout==3
+    
+elseif nargout == 3
     % If only one array is asked, minDist is a scalar, ind1 and ind2 are 2
     % indices corresponding to the closest points.
     varargout{1} = minDist;
     varargout{2} = ind1;
     varargout{3} = ind2;
 end
-    
