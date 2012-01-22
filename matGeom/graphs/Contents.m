@@ -32,6 +32,7 @@
 % Graph creation
 %   knnGraph                - Create the k-nearest neighbors graph of a set of points
 %   delaunayGraph           - Graph associated to Delaunay triangulation of input points
+%   gabrielGraph            - Gabriel Graph of a set of points
 %   euclideanMST            - Build euclidean minimal spanning tree of a set of points
 %   prim_mst                - Minimal spanning tree by Prim's algorithm
 %
