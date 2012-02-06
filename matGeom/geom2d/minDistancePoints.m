@@ -2,13 +2,13 @@ function varargout = minDistancePoints(p1, varargin)
 %MINDISTANCEPOINTS Minimal distance between several points
 %
 %   DIST = minDistancePoints(PTS)
-%   Returns the minimum distance between all couple of points in PTS. PTS is
-%   an array of [NxND] values, N being the number of points and ND the
+%   Returns the minimum distance between all couple of points in PTS. PTS
+%   is a N-by-D array of values, N being the number of points and D the
 %   dimension of the points.
 %
 %   DIST = minDistancePoints(PTS1, PTS2)
 %   Computes for each point in PTS1 the minimal distance to every point of
-%   PTS2. PTS1 and PTS2 are [NxD] arrays, where N is the number of points,
+%   PTS2. PTS1 and PTS2 are N-by-D arrays, where N is the number of points,
 %   and D is the dimension. Dimension must be the same for both arrays, but
 %   number of points can be different.
 %   The result is an array the same length as PTS1.
@@ -28,8 +28,9 @@ function varargout = minDistancePoints(p1, varargin)
 %
 %   [DIST J] = minDistancePoints(PTS1, PTS2, ...)
 %   Also returns the indices of points which are the closest. J has the
-%   same size as DIST. It verifies relation : 
+%   same size as DIST. It verifies relation: 
 %   DIST(I) = distancePoints(PTS1(I,:), PTS2(J,:));
+%   for I comprised between 1 and the number of rows in PTS1.
 %
 %
 %   Examples:
@@ -84,9 +85,9 @@ if isempty(varargin)
     % specify only one array of points, not the norm
     p2 = p1;
     
-elseif length(varargin)==1
+elseif length(varargin) == 1
     var = varargin{1};
-    if length(var)>1       
+    if length(var) > 1       
         % specify two arrays of points
         p2  = var;
         allPoints = true;
@@ -151,7 +152,7 @@ elseif n == inf
 else
     % compute distance using the specified norm.
     % in 2D: dist = power(abs(dx), n) + power(abs(dy), n);
-    for i=1:d
+    for i = 1:d
         dist = dist + power((abs(repmat(p1(:,i), [1 n2])-repmat(p2(:,i)', [n1 1]))), n);
     end
 
