@@ -76,7 +76,11 @@ function varargout = drawCircle3d(varargin)
 
 
 % extract drawing options
-ind = find(cellfun(@ischar, varargin), 1, 'first');
+if verLessThan('matlab', '7.8')
+    ind = find(cellfun('isclass', varargin, 'char'), 1, 'first');
+else
+    ind = find(cellfun(@ischar, varargin), 1, 'first');
+end
 options = {};
 if ~isempty(ind)
     options = varargin(ind:end);
