@@ -12,8 +12,10 @@ function spheres(varargin)
 %
 %   See also
 %   createSphere, inertiaEllipsoid
-%   intersectLineSphere, intersectPlaneSphere
+%   intersectLineSphere, intersectPlaneSphere, sphericalVoronoiDomain
 %   drawSphere, drawEllipsoid
+%   drawSphericalEdge, drawSphericalTriangle, drawSphericalPolygon
+%   fillSphericalTriangle, fillSphericalPolygon
 %
 % ------
 % Author: David Legland

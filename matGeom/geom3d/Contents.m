@@ -121,7 +121,12 @@
 %   intersectLineSphere       - Return intersection points between a line and a sphere
 %   intersectPlaneSphere      - Return intersection circle between a plane and a sphere
 %   drawSphere                - Draw a sphere as a mesh
+%   drawSphericalEdge         - Draw an edge on the surface of a sphere
 %   drawSphericalTriangle     - Draw a triangle on a sphere
+%   fillSphericalTriangle     - Fill a triangle on a sphere
+%   drawSphericalPolygon      - Draw a spherical polygon
+%   fillSphericalPolygon      - Fill a spherical polygon
+%   sphericalVoronoiDomain    - Compute a spherical voronoi domain
 %
 % Smooth surfaces
 %   inertiaEllipsoid          - Inertia ellipsoid of a set of 3D points
