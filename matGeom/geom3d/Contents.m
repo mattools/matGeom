@@ -22,6 +22,7 @@
 %   Plane:      [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2]
 %   Sphere:     [x0 y0 z0 R]
 %   Circle:     [x0 y0 z0 R PHI THETA PSI] (origin+center+normal+'roll').
+%   Ellipsoid:  [x0 y0 z0 A B C PHI THETA PSI]
 %   Cylinder:   [X1 Y1 Z1 X2 Y2 Z2 R]
 %   Box:        [xmin xmax ymin ymax zmin zmax]. Used for clipping shapes.
 %   
@@ -130,10 +131,11 @@
 %
 % Smooth surfaces
 %   inertiaEllipsoid          - Inertia ellipsoid of a set of 3D points
+%   ellipsoidSurfaceArea      - Approximated surface area of an ellipsoid
+%   drawEllipsoid             - Draw a 3D ellipsoid
 %   intersectLineCylinder     - Compute intersection points between a line and a cylinder
 %   revolutionSurface         - Create a surface of revolution from a planar curve
 %   surfaceCurvature          - Curvature on a surface from angle and principal curvatures
-%   drawEllipsoid             - Draw a 3D ellipsoid
 %   drawTorus                 - Draw a torus (3D ring)
 %   drawCylinder              - Draw a cylinder
 %   drawSurfPatch             - Draw a 3D surface patch, with 2 parametrized surfaces
