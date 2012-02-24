@@ -1,74 +1,150 @@
-function varargout = centroidalVoronoi2d(germs, box, varargin)
-%CENTROIDALVORONOI2D Create a 2D Centroidal Voronoi Tesselation
+function [germs germPaths] = centroidalVoronoi2d(nGerms, poly, varargin)
+%CENTROIDALVORONOI2D Centroidal Voronoi tesselation within a polygon
 %
-%   [N E F] = centroidalVoronoi2d(GERMS, BOX)
-%   GERMS are N-by-2 point array, BOX is given as [xmin xmax ymin ymax].
-%   Algorithm is an iteration of voronoi diagram computations, using at
-%   each steps the centroids of previous diagram as germs for the new
-%   diagram.
+%   PTS = centroidalVoronoi2d(NPTS, POLY)
+%   Generate points in a polygon based on centroidal voronoi tesselation.
+%   Centroidal germs can be computed by using the Llyod's algorithm:
+%   1) initial germs are chosen at random within polygon
+%   2) voronoi polygon of the germs is computed
+%   3) the centroid of each domain are computed, and used as germs of the
+%   next iteration
 %
-%   [N E F] = centroidalVoronoi2d(GERMS, BOX, NITER)
-%   Specifies the number of iterations.
+%   This version uses an approximated version of Llyod's algorithm. The
+%   centroids are not computed explicitly, but approximated by sampling N
+%   points within the bounding polygon. 
 %
-%   [N E F G] = centroidalVoronoi2d(...)
-%   also returns the positions of germs/centroids for each face. If the
-%   number of iteration was sufficient, location of germs should correspond
-%   to centroids of faces 'fc' computed using: 
-%   fc(i,:) = polygonCentroid(n(f{i}, :));
+%   PTS = centroidalVoronoi2d(.., PARAM, VALUE)
+%   Specify one or several optional arguments. PARAM can be one of:
+%   * 'nIter'   specifies the number of iterations of the algorithm
+%       (default is 30)
+%   * 'nPoints' number of points for updating positions of germs at each
+%       iteration. Default is 200 times the number of germs.
+%   * 'verbose' display iteration number. Default is false.
 %
 %   Example
-%   [n e f] = centroidalVoronoi2d(rand(20, 2)*100, [0 100 0 100]);
-%   drawGraph(n, e, f);
+%   centroidalVoronoi2d
 %
 %   See also
+%   graphs, boundedVoronoi2d
 %
+%   Rewritten from programs found in
+%   http://people.scs.fsu.edu/~burkardt/m_src/cvt/cvt.html
+%
+%  Reference:
+%    Qiang Du, Vance Faber, and Max Gunzburger,
+%    Centroidal Voronoi Tessellations: Applications and Algorithms,
+%    SIAM Review, Volume 41, 1999, pages 637-676.
 %
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2007-01-12
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% Created: 2012-02-23,    using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012 INRA - Cepia Software Platform.
 
-%   HISTORY
-%   27/07/2007 add doc, and psb to specify number of iterations
-%   18/09/2007 add psb to return germs of tessellation
+%% Parse input arguments
 
+% Number of points
+nPts = 200 * nGerms;
 
-% number of iteration
-nIter = 10;
-if ~isempty(varargin)
-    nIter = varargin{1};
+% Number of iterations
+nIter = 30;
+
+verbose = false;
+
+keepPaths = nargout > 1;
+
+while length(varargin) > 1
+    paramName = varargin{1};
+    switch lower(paramName)
+        case 'verbose'
+            verbose = varargin{2};
+        case 'niter'
+            nIter = varargin{2};
+        case 'npoints'
+            nPts = varargin{2};
+        otherwise
+            error(['Unknown parameter name: ' paramName]);
+    end
+
+    varargin(1:2) = [];
 end
 
-% limits and size of the box
-x0 = box(1); x1 = box(2);
-y0 = box(3); y1 = box(4);
-dx = x1-x0;  dy = y1-y0;
 
-% far points to bound the voronoi diagram
-farPoints = [...
-    x1+10*dx y1+10*dy;...
-    x0-10*dx y1+10*dy;...
-    x0-10*dx y0-10*dy;...
-    x1+10*dx y0-10*dy];
+%% Initialisations
 
-% iterate bounded voronoi tesselation
+% bounding box of polygon
+box = polygonBounds(poly);
+
+% init germs
+germs = generatePointsInPoly(nGerms);
+
+germIters = cell(nIter, 1);
+
+
+%% Iteration of the McQueen algorithm
+
 for i = 1:nIter
-    % generate Voronoi diagram, and clip woth the box
-    [n e f] = voronoi2d([germs ; farPoints]);
-    [n e f] = clipGraph(n, e, f, box);
+    if verbose
+        disp(sprintf('Iteration: %d/%d', i, nIter)); %#ok<DSPS>
+    end
     
-    % compute new germs as centroids of of each face
-    for j = 1:length(f)
-        face = n(f{j}, :);
-        germs(j, 1:2) = polygonCentroid(face);
+    if keepPaths
+        germIters{i} = germs;
+    end
+    
+    % random uniform points in polygon
+    points = generatePointsInPoly(nPts);
+    
+    % update germs of Voronoi
+    germs = cvtUpdate(germs, points);
+end
+
+
+%% Evenutally compute germs trajectories
+
+if nargout > 1
+    % init
+    germPaths = cell(nGerms, 1);
+    path = zeros(nIter+1, 2);
+    
+    % Iteration on germs
+    for i = 1:nGerms
+        
+        % create path corresponding to germ
+        for j = 1:nIter
+            pts = germIters{j};
+            path(j,:) = pts(i,:);
+        end
+        path(nIter+1, :) = germs(i,:);
+        
+        germPaths{i} = path;
     end
 end
 
-% result is given in n, e, and f, eventually germs
-varargout{1} = n;
-varargout{2} = e;
-varargout{3} = f;
-if nargout>3
-    varargout{4} = germs;
+function pts = generatePointsInPoly(nPts)
+    % extreme coordinates
+    xmin = box(1);  xmax = box(2);
+    ymin = box(3);  ymax = box(4);
+    
+    % compute size of box
+    dx = xmax - xmin;
+    dy = ymax - ymin;
+    
+    % allocate memory for result
+    pts = zeros(nPts, 2);
+
+    % iterate until all points have been sampled within the polygon
+    ind = (1:nPts)';
+    while ~isempty(ind)
+        NI = length(ind);
+        x = rand(NI, 1) * dx + xmin;
+        y = rand(NI, 1) * dy + ymin;
+        pts(ind, :) = [x y];
+        
+        ind = ind(~polygonContains(poly, pts(ind, :)));
+    end
+    
 end
+
+end
+
