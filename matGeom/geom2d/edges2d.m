@@ -1,18 +1,18 @@
 function edges2d(varargin)
 %EDGES2D  Description of functions operating on planar edges
 %
-%   An edge is represented by the corodinate of its end points:
+%   An edge is represented by the coordinate of its extremities:
 %   EDGE = [X1 Y1 X2 Y2];
 %
-%   A set of edges is represented by a N*4 array, each row representing an
-%   edge.
+%   A set of edges is represented by a N-by-4 array, each row representing
+%   an edge.
 %
 %
 %   See also:
 %   lines2d, rays2d, points2d
 %   createEdge, edgeAngle, edgeLength, edgeToLine, midPoint
 %   intersectEdges, intersectLineEdge, isPointOnEdge, edgeToPolyline
-%   clipEdge, transformEdge
+%   clipEdge, transformEdge, intersectEdgePolygon
 %   drawEdge, drawCenteredEdge
 %
 % ------

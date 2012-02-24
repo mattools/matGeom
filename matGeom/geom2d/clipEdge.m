@@ -28,7 +28,7 @@ function edge2 = clipEdge(edge, box)
 %   01/10/2010 fix bug due to precision, thanks to Reto Zingg.
 
 % process data input
-if size(box, 1)==2
+if size(box, 1) == 2
     box = box';
 end
 
@@ -47,10 +47,10 @@ lineY1 = [xmax ymin 0 ymax-ymin];
 
 
 % compute outcodes of each vertex
-p11 = edge(:,1)<xmin; p21 = edge(:,3)<xmin;
-p12 = edge(:,1)>xmax; p22 = edge(:,3)>xmax;
-p13 = edge(:,2)<ymin; p23 = edge(:,4)<ymin;
-p14 = edge(:,2)>ymax; p24 = edge(:,4)>ymax;
+p11 = edge(:,1) < xmin; p21 = edge(:,3) < xmin;
+p12 = edge(:,1) > xmax; p22 = edge(:,3) > xmax;
+p13 = edge(:,2) < ymin; p23 = edge(:,4) < ymin;
+p14 = edge(:,2) > ymax; p24 = edge(:,4) > ymax;
 out1 = [p11 p12 p13 p14];
 out2 = [p21 p22 p23 p24];
 
@@ -69,7 +69,7 @@ edge2 = zeros(size(edge));
 edge2(inside, :) = edge(inside, :);
 
 
-for i=1:length(ind)
+for i = 1:length(ind)
     % current edge
     iedge = edge(ind(i), :);
         
@@ -92,12 +92,12 @@ for i=1:length(ind)
     centers = (points(2:end,:) + points(1:end-1,:))/2;
     
     % find the centers (if any) inside window
-    inside = find(  centers(:,1)>=xmin & centers(:,2)>=ymin & ...
-                    centers(:,1)<=xmax & centers(:,2)<=ymax);
+    inside = find(  centers(:,1) >= xmin & centers(:,2) >= ymin & ...
+                    centers(:,1) <= xmax & centers(:,2) <= ymax);
 
     % if multiple segments are inside box, which can happen due to finite
     % resolution, only take the longest segment
-    if length(inside)>1
+    if length(inside) > 1
         % compute delta vectors of the segments
         dv = points(inside+1,:) - points(inside,:); 
         % compute lengths of segments
@@ -109,15 +109,15 @@ for i=1:length(ind)
     
     % if one of the center points is inside box, then the according edge
     % segment is indide box
-    if length(inside)==1
+    if length(inside) == 1
          % restore same direction of edge
-        if iedge(1)>iedge(3) || (iedge(1)==iedge(3) && iedge(2)>iedge(4))
+        if iedge(1) > iedge(3) || (iedge(1) == iedge(3) && iedge(2) > iedge(4))
             edge2(i, :) = [points(inside+1,:) points(inside,:)];
         else
             edge2(i, :) = [points(inside,:) points(inside+1,:)];
         end
     end
     
-end % end of loop of edges
+end % end of loop over edges
 
 

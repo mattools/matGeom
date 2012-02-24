@@ -78,6 +78,7 @@
 %   clipPolygonHP             - Clip a polygon with a Half-plane defined by a directed line
 %   intersectLinePolygon      - Intersection points between a line and a polygon
 %   intersectRayPolygon       - Intersection points between a ray and a polygon
+%   intersectEdgePolygon      - Intersection point of an edge with a polygon
 %   polygonSelfIntersections  - Find-self intersection points of a polygon
 %   polygonLoops              - Divide a possibly self-intersecting polygon into a set of simple loops
 %   expandPolygon             - Expand a polygon by a given (signed) distance

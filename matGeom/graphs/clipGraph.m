@@ -74,7 +74,7 @@ for i=1:length(indNodes)
     hashNodes(indNodes(i)) = i;
 end
 
-% select clipepd nodes
+% select clipped nodes
 nodes2 = nodes(indNodes, :);
 
 
