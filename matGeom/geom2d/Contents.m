@@ -110,6 +110,7 @@
 %   ellipses2d            - Description of functions operating on ellipses
 %   inertiaEllipse        - Inertia ellipse of a set of points
 %   isPointInEllipse      - Check if a point is located inside a given ellipse
+%   ellipsePerimeter      - Perimeter of an ellipse
 %   ellipseToPolygon      - Convert an ellipse into a series of points
 %   drawEllipse           - Draw an ellipse on the current axis
 %   drawEllipseArc        - Draw an ellipse arc on the current axis

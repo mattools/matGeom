@@ -17,8 +17,8 @@ function polyhedra(varargin)
 %   createCube, createCubeOctahedron, createIcosahedron, createOctahedron
 %   createRhombododecahedron, createTetrahedron, createTetrakaidecahedron
 %   createDodecahedron, createSoccerBall, createMengerSponge
-%   steinerPolytope
-%   polyhedronNormalAngle, polyhedronMeanBreadth, minConvexHull
+%   steinerPolytope, minConvexHull
+%   polyhedronNormalAngle, polyhedronMeanBreadth
 %
 %
 % ------

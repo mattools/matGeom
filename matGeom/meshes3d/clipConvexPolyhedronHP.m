@@ -15,7 +15,7 @@ function [nodes2 faces2] = clipConvexPolyhedronHP(nodes, faces, plane)
 %   drawPolyhedra(N2, F2);
 %
 %   See also
-%   polyhedra, planes
+%   meshes3d, polyhedra, planes3d
 %
 %
 % ------
@@ -27,10 +27,13 @@ function [nodes2 faces2] = clipConvexPolyhedronHP(nodes, faces, plane)
 
 %% Preprocessing
 
+% used for identifying identical vertices
+tol = 1e-10;
+
 % if faces is a numeric array, convert it to cell array
 if isnumeric(faces)
     faces2 = cell(size(faces, 1), 1);
-    for f=1:length(faces2)
+    for f = 1:length(faces2)
         faces2{f} = faces(f,:);
     end
     faces = faces2;
@@ -52,19 +55,19 @@ faces2 = faces;         % list of new faces. Start with initial list, and remove
 %   - all points up plane -> remove face
 %   - both -> clip the polygon
 keep = true(length(faces), 1);
-for f=1:length(faces)
+for f = 1:length(faces)
     % current face
     face = faces{f};
     bf = b(face);
 
-    % face totally outside plane
-    if sum(bf)==0
+    % face totally above plane
+    if sum(bf) == 0
         keep(f) = false;
         continue;
     end
 
     % face totally below plane
-    if sum(bf==1)==length(bf)
+    if sum(bf == 1) == length(bf)
         continue;
     end
 
@@ -75,16 +78,16 @@ for f=1:length(faces)
     % identify indices of polygon vertices
     inds = zeros(1, size(clipped, 1));
     faceb = face(bf==1); % indices of vertices still in clipped face
-    [minDists I] = minDistancePoints(nodes(faceb,:), clipped);
-    for i=1:length(I)
+    [minDists I] = minDistancePoints(nodes(faceb,:), clipped); %#ok<ASGLU>
+    for i = 1:length(I)
         inds(I(i)) = faceb(i);
     end
 
     % indices of new points in clipped polygon
-    indNews = find(inds==0);
+    indNews = find(inds == 0);
     
-    if size(nodes2, 1)<2
-        nodes2 = [nodes2; clipped(indNews, :)];
+    if size(nodes2, 1) < 2
+        nodes2 = [nodes2; clipped(indNews, :)]; %#ok<AGROW>
         inds(indNews(1)) = Nn + 1;
         inds(indNews(2)) = Nn + 2;
         faces2{f} = inds;
@@ -95,18 +98,18 @@ for f=1:length(faces)
     [minDists I] = minDistancePoints(clipped(indNews, :), nodes2);
     
     % compute index of first vertex
-    if minDists(1)<1e-10
+    if minDists(1) < tol
         inds(indNews(1)) = Nn + I(1);
     else
-        nodes2 = [nodes2; clipped(indNews(1), :)];
+        nodes2 = [nodes2; clipped(indNews(1), :)]; %#ok<AGROW>
         inds(indNews(1)) = Nn + size(nodes2, 1);
     end
     
     % compute index of second vertex
-    if minDists(2)<1e-10
+    if minDists(2) < tol
         inds(indNews(2)) = Nn + I(2);
     else
-        nodes2 = [nodes2; clipped(indNews(2), :)];
+        nodes2 = [nodes2; clipped(indNews(2), :)]; %#ok<AGROW>
         inds(indNews(2)) = Nn + size(nodes2, 1);
     end
     
@@ -118,8 +121,8 @@ end
 %% Postprocessing
 
 % creates a new face formed by the added nodes
-[tmp I] = angleSort3d(nodes2);
-newFace = I'+Nn;
+[tmp I] = angleSort3d(nodes2); %#ok<ASGLU>
+newFace = I' + Nn;
 
 % remove faces outside plane and add the new face
 faces2 = {faces2{keep}, newFace};
@@ -134,12 +137,12 @@ b = [b; ones(N2, 1)];
 % create look up table between old indices and new indices
 inds = zeros(size(nodes2, 1), 1);
 indb = find(b);
-for i=1:length(indb)
+for i = 1:length(indb)
     inds(indb(i)) = i;
 end
 
 % update indices of faces
-for f=1:length(faces2)
+for f = 1:length(faces2)
     face = faces2{f};
     faces2{f} = inds(face);
 end

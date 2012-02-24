@@ -6,15 +6,15 @@ function planes3d(varargin)
 %   PLANE = [X0 Y0 Z0 DX1 DY1 DZ1 DX2 DY2 DZ2];
 %
 %   See also
-%   createPlane, medianPlane, normalizePlane
-%   planeNormal, planePosition, dihedralAngle
-%   intersectPlanes, projPointOnPlane, isBelowPlane
-%   intersectLinePlane, intersectEdgePlane, distancePointPlane
+%   createPlane, normalizePlane, medianPlane, planeNormal, dihedralAngle
+%   distancePointPlane, projPointOnPlane, planePosition, isBelowPlane
+%   intersectPlanes, intersectLinePlane, intersectEdgePlane
+%   polyhedronSlice,  clipConvexPolyhedronHP
 %   drawPlane3d
 %
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@grignon.inra.fr
 % Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 
