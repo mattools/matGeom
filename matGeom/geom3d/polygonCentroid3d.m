@@ -16,7 +16,7 @@ function centroid = polygonCentroid3d(varargin)
 %         5.0000    5.0000    10.0000
 %
 %   See also
-%   polygons3d, polygonCentroid
+%   polygons3d, polygonArea3d, polygonCentroid
 %
 % ------
 % Author: David Legland
