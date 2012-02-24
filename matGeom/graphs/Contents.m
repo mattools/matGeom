@@ -95,6 +95,7 @@
 %   voronoi2d               - Compute a voronoi diagram as a graph structure
 %   boundedVoronoi2d        - Return a bounded voronoi diagram as a graph structure
 %   centroidalVoronoi2d     - Create a 2D Centroidal Voronoi Tesselation
+%   boundedCentroidalVoronoi2d - Create a 2D Centroidal Voronoi Tesselation in a box
 %   cvtUpdate               - Update germs of a CVT with given points
 %   cvtIterate              - Update germs of a CVT using random points with given density
 %
