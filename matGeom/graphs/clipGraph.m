@@ -13,7 +13,7 @@ function varargout = clipGraph(nodes, edges, varargin)
 %   clipGraph
 %
 %   See also
-%
+%   drawGraph, clipGraphPolygon
 %
 % ------
 % Author: David Legland

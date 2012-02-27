@@ -87,6 +87,7 @@
 %   grMergeNodeClusters     - Merge cluster of connected nodes in a graph
 %   grMergeNodesMedian      - Replace several nodes by their median coordinate
 %   clipGraph               - Clip a graph with a rectangular area
+%   clipGraphPolygon        - Clip a graph with a polygon
 %   addSquareFace           - Add a (square) face defined from its vertices to a graph
 %   grFaceToPolygon         - Compute the polygon corresponding to a graph face
 %   graph2Contours          - Convert a graph to a set of contour curves
@@ -134,3 +135,4 @@
 %   quiverToGraph           - Converts quiver data to quad mesh
 
 % Other functions
+

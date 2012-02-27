@@ -1,17 +1,17 @@
 function varargout = drawGraph(varargin)
 %DRAWGRAPH Draw a graph, given as a set of vertices and edges
 %
-%   DRAWGRAPH(NODES, EDGES) 
-%   draw a graph specified by a set of nodes (array N*2 or N*3,
+%   drawGraph(NODES, EDGES) 
+%   Draws a graph specified by a set of nodes (array N*2 or N*3,
 %   corresponding to coordinate of each node), and a set of edges (an array
 %   Ne*2, containing for each edge the first and the second node).
 %   Default drawing is a red circle for nodes and a blue line for edges.
 %
-%   DRAWGRAPH(NODES, EDGES, FACES)
-%   also draw faces of the graph as patches.
+%   drawGraph(NODES, EDGES, FACES)
+%   Also draws faces of the graph as patches.
 %
-%   DRAWGRAPH(GRAPH)
-%   passes argument in a srtucture with at least 2 fields named 'nodes' and
+%   drawGraph(GRAPH)
+%   Passes argument in a srtucture with at least 2 fields named 'nodes' and
 %   'edges', and possibly one field 'faces', corresponding to previously
 %   described parameters.
 %   GRAPH can also be a cell array, whose first element is node array,
@@ -19,24 +19,26 @@ function varargout = drawGraph(varargin)
 %   array.
 %
 %
-%   DRAWGRAPH(..., SNODES)
-%   DRAWGRAPH(..., SNODES, SEDGES)
-%   DRAWGRAPH(..., SNODES, SEDGES, SFACES)
-%   specify the draw mode for each element, as in the classical 'plot'
+%   drawGraph(..., SNODES)
+%   drawGraph(..., SNODES, SEDGES)
+%   drawGraph(..., SNODES, SEDGES, SFACES)
+%   Specifies the draw mode for each element, as in the classical 'plot'
 %   function. To not display some elements, uses 'none'.
 %
 %
-%   H = DRAWGRAPH(...) 
-%   return handle to the set of edges.
+%   H = drawGraph(...) 
+%   Returns handle to the set of edges.
 %   
-%   [HN, HE] = DRAWGRAPH(...) 
-%   return handle to the set of nodes and to the set of edges.
+%   [HN, HE] = drawGraph(...) 
+%   Returns handle to the set of nodes and to the set of edges.
 %
-%   [HN, HE, HF] = DRAWGRAPH(...)   
-%   Also return handle to the set of faces.
+%   [HN, HE, HF] = drawGraph(...)   
+%   Also returns handle to the set of faces.
 %   
+%   See Also
+%   clipGraph, clipGraphPolygon
+%
 %   -----
-%
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 17/07/2003.
