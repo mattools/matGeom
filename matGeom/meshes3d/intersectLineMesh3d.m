@@ -1,13 +1,20 @@
 function [points pos faceInds] = intersectLineMesh3d(line, vertices, faces)
 %INTERSECTLINEMESH3D Intersection points of a 3D line with a mesh
 %
-%   output = intersectLineMesh3d(input)
+%   INTERS = intersectLineMesh3d(LINE, VERTICES, FACES)
+%   Compute the intersection points between a 3D line and a 3D mesh defined
+%   by vertices and faces.
 %
+%   [INTERS POS INDS] = intersectLineMesh3d(LINE, VERTICES, FACES)
+%   Also returns the position of each intersection point on the input line,
+%   and the index of the intersected faces.
+%   If POS > 0, the point is also on the ray corresponding to the line. 
+%   
 %   Example
 %   intersectLineMesh3d
 %
 %   See also
-%
+%   meshes3d, triangulateFaces
 %
 % ------
 % Author: David Legland
@@ -15,21 +22,14 @@ function [points pos faceInds] = intersectLineMesh3d(line, vertices, faces)
 % Created: 2011-12-20,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-% nf = size(faces, 1);
-
-% pts = NaN * ones(nf, 3);
-
-% % code using a loop:
-% for i = 1:nf
-%     face = faces(i,:);
-%     tri = [vertices(face(1), :) vertices(face(2), :) vertices(face(3), :)];
-%     
-%     pts(i,:) = intersectLineTriangle3d(line, tri);
-% end
-% 
-% pts = unique(pts(isfinite(pts(:,1)), :), 'rows');
 
 tol = 1e-12;
+
+% ensure the mesh has triangular faces
+tri2Face = [];
+if iscell(faces) || size(faces, 2) ~= 3
+    [faces tri2Face] = triangulateFaces(faces);
+end
 
 % find triangle edge vectors
 t0  = vertices(faces(:,1), :);
@@ -93,3 +93,7 @@ points = points(inds, :);
 pos = pos(inds);
 faceInds = find(inds);
 
+% convert to face indices of original mesh
+if ~isempty(tri2Face)
+    faceInds = tri2Face(faceInds);
+end
