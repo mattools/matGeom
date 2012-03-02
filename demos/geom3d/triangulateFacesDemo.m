@@ -13,7 +13,6 @@ function triangulateFacesDemo(varargin)
 % e-mail: david.legland@nantes.inra.fr
 % Created: 2008-10-16,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
-% Licensed under the terms of the LGPL, see the file "license.txt"
 
 % cree une figure simple (?) sous forme de sommets + aretes + faces
 [n e f] = createCubeOctahedron; %#ok<ASGLU>
@@ -26,3 +25,6 @@ drawPolyhedron(n, f);
 tri = triangulateFaces(f);
 figure(2); clf;
 patch('vertices', n, 'faces', tri, 'facecolor', 'r');
+
+view(3);
+axis equal;

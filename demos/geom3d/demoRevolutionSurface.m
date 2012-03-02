@@ -13,7 +13,6 @@ function demoRevolutionSurface(varargin)
 % e-mail: david.legland@nantes.inra.fr
 % Created: 2007-04-20
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
-% Licensed under the terms of the LGPL, see the file "license.txt"
 
 
 %% Draw a torus with horizontal axis as revolution axis
