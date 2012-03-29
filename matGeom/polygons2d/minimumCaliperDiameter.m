@@ -29,7 +29,7 @@ function [min_width min_angle] = minimumCaliperDiameter(points)
 %   http://en.wikipedia.org/wiki/Rotating_calipers
 %
 %   See also
-%   polygons2d, convexHull
+%   polygons2d, convexHull, orientedBox
 %
 % ------
 % Author: David Legland

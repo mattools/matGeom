@@ -10,7 +10,7 @@ function varargout = orientedBoxToPolygon(obox)
 %   degrees between 0 and 360.
 %
 %   See also:
-%   polygons2d, drawOrientedBox, drawPolygon
+%   polygons2d, orientedBox, drawOrientedBox, drawPolygon
 %
 %
 %   ---------

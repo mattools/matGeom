@@ -148,6 +148,7 @@
 % Rectangles
 %   rectToPolygon         - Convert a rectangle into a polygon (set of vertices)
 %   drawRect              - Draw rectangle on the current axis
+%   orientedBox           - Minimum-width oriented bounding box of a set of points
 %   orientedBoxToPolygon  - Convert an oriented box to a polygon (set of vertices)
 %   drawOrientedBox       - Draw centered oriented rectangle
 %
@@ -209,3 +210,4 @@ help('Contents');
 
 
 %% Others...
+

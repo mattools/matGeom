@@ -30,7 +30,7 @@ function varargout = drawRay(ray, varargin)
 
 % extract handle of axis to draw in
 if isscalar(ray) && ishandle(ray)
-    ax = lin;
+    ax = ray;
     ray = varargin{1};
     varargin(1) = [];
 else
