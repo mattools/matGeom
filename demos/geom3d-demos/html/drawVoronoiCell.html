@@ -1,18 +1,12 @@
 
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-   <head>
+<html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   
-      <!--
+   <!--
 This HTML is auto-generated from an M-file.
 To make changes, update the M-file and republish this document.
-      -->
-      <title>drawVoronoiCell</title>
-      <meta name="generator" content="MATLAB 7.7">
-      <meta name="date" content="2009-08-19">
-      <meta name="m-file" content="drawVoronoiCell"><style type="text/css">
+      --><title>drawVoronoiCell</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2012-04-05"><meta name="m-file" content="drawVoronoiCell"><style type="text/css">
 
 body {
   background-color: white;
@@ -68,17 +62,7 @@ p.footer {
   color: gray;
 }
 
-  </style></head>
-   <body>
-      <div class="content">
-         <h2>Contents</h2>
-         <div>
-            <ul>
-               <li><a href="#3">Creation of germs</a></li>
-               <li><a href="#4">Display Voronoi polyhedron associated with germ</a></li>
-               <li><a href="#5">Compute and display minimal polyhedron</a></li>
-            </ul>
-         </div><pre class="codeinput"><span class="keyword">function</span> drawVoronoiCell(varargin)
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#3">Creation of germs</a></li><li><a href="#4">Display Voronoi polyhedron associated with germ</a></li><li><a href="#5">Compute and display minimal polyhedron</a></li></ul></div><pre class="codeinput"><span class="keyword">function</span> drawVoronoiCell(varargin)
 </pre><pre class="codeinput"><span class="comment">%DRAWVORONOICELL  compute and draw voronoi polyhedron using geom3d library</span>
 <span class="comment">%</span>
 <span class="comment">%   This demo show how to manipulate polyhedra, using matlab's voronoin</span>
@@ -104,11 +88,11 @@ p.footer {
 <span class="comment">% Created: 2009-06-22,    using Matlab 7.7.0.471 (R2008b)</span>
 <span class="comment">% Copyright 2009 INRA - Cepia Software Platform.</span>
 </pre><h2>Creation of germs<a name="3"></a></h2><pre class="codeinput"><span class="comment">% germ of the cell of interest, in the center of the unit cube</span>
-germ0   = [.5 .5 .5];
+germ0  = [.5 .5 .5];
 
 <span class="comment">% create random germs, and add corners of unit cube to ensure finiteness of</span>
 <span class="comment">% voronoi pattern</span>
-corners = createCube;
+[corners faces] = createCube; <span class="comment">%#ok&lt;NASGU&gt;</span>
 germs   = [germ0;rand(10, 3);corners];
 
 <span class="comment">% dispay the germs</span>
@@ -140,9 +124,7 @@ drawPoint3d(germs);
 <span class="comment">% draw the polyhedron</span>
 drawPolyhedron(vertices, K2);
 </pre><img vspace="5" hspace="5" src="drawVoronoiCell_03.png" alt=""> <p class="footer"><br>
-            Published with MATLAB&reg; 7.7<br></p>
-      </div>
-      <!--
+      Published with MATLAB&reg; 7.9<br></p></div><!--
 ##### SOURCE BEGIN #####
 function drawVoronoiCell(varargin)
 %DRAWVORONOICELL  compute and draw voronoi polyhedron using geom3d library
@@ -174,11 +156,11 @@ function drawVoronoiCell(varargin)
 %% Creation of germs
 
 % germ of the cell of interest, in the center of the unit cube
-germ0   = [.5 .5 .5];
+germ0  = [.5 .5 .5];
 
 % create random germs, and add corners of unit cube to ensure finiteness of
 % voronoi pattern
-corners = createCube;
+[corners faces] = createCube; %#ok<NASGU>
 germs   = [germ0;rand(10, 3);corners];
 
 % dispay the germs
@@ -219,6 +201,4 @@ drawPoint3d(germs);
 drawPolyhedron(vertices, K2);
 
 ##### SOURCE END #####
--->
-   </body>
-</html>
+--></body></html>

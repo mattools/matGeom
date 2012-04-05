@@ -4,7 +4,7 @@ function varargout = drawSphericalTriangle(sphere, p1, p2, p3, varargin)
 %   drawSphericalTriangle(SPHERE, PT1, PT2, PT3);
 %
 %   See also
-%   drawSphere, drawSphericalPolygon
+%   drawSphere, fillSphericalTriangle, drawSphericalPolygon
 %
 %   ---------
 %   author : David Legland 

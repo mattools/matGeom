@@ -28,11 +28,11 @@ function drawVoronoiCell(varargin)
 %% Creation of germs
 
 % germ of the cell of interest, in the center of the unit cube
-germ0   = [.5 .5 .5];
+germ0  = [.5 .5 .5];
 
 % create random germs, and add corners of unit cube to ensure finiteness of
 % voronoi pattern
-corners = createCube;
+[corners faces] = createCube; %#ok<NASGU>
 germs   = [germ0;rand(10, 3);corners];
 
 % dispay the germs
