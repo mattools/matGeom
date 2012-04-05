@@ -1,0 +1,136 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      --><title>demoRevolutionSurface</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2012-04-05"><meta name="m-file" content="demoRevolutionSurface"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#3">Draw a torus with horizontal axis as revolution axis</a></li><li><a href="#4">Draw a torus with vertical axis as revolution axis</a></li></ul></div><pre class="codeinput"><span class="keyword">function</span> demoRevolutionSurface(varargin)
+</pre><pre class="codeinput"><span class="comment">%DEMOREVOLUTIONSURFACE  One-line description here, please.</span>
+<span class="comment">%   output = demoRevolutionSurface(input)</span>
+<span class="comment">%</span>
+<span class="comment">%   Example</span>
+<span class="comment">%   demoRevolutionSurface</span>
+<span class="comment">%</span>
+<span class="comment">%   See also</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+<span class="comment">% ------</span>
+<span class="comment">% Author: David Legland</span>
+<span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+<span class="comment">% Created: 2007-04-20</span>
+<span class="comment">% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+</pre><h2>Draw a torus with horizontal axis as revolution axis<a name="3"></a></h2><pre class="codeinput">circle  = circleToPolygon([10 0 3], 50);
+[x y t] = revolutionSurface(circle, linspace(0, 4*pi/3, 50));
+
+figure;
+surf(x, y, t);
+axis <span class="string">equal</span>;
+</pre><img vspace="5" hspace="5" src="demoRevolutionSurface_01.png" alt=""> <h2>Draw a torus with vertical axis as revolution axis<a name="4"></a></h2><pre class="codeinput">circle  = circleToPolygon([10 0 3], 50);
+revol   = [0 0 0 1];
+[x y t] = revolutionSurface(circle, revol, linspace(0, 4*pi/3, 50));
+
+figure;
+surf(x, y, t);
+axis <span class="string">equal</span>;
+</pre><img vspace="5" hspace="5" src="demoRevolutionSurface_02.png" alt=""> <p class="footer"><br>
+      Published with MATLAB&reg; 7.9<br></p></div><!--
+##### SOURCE BEGIN #####
+function demoRevolutionSurface(varargin)
+%DEMOREVOLUTIONSURFACE  One-line description here, please.
+%   output = demoRevolutionSurface(input)
+%
+%   Example
+%   demoRevolutionSurface
+%
+%   See also
+%
+%
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% Author: David Legland
+% e-mail: david.legland@nantes.inra.fr
+% Created: 2007-04-20
+% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+
+
+%% Draw a torus with horizontal axis as revolution axis
+
+circle  = circleToPolygon([10 0 3], 50);
+[x y t] = revolutionSurface(circle, linspace(0, 4*pi/3, 50));
+
+figure;
+surf(x, y, t);
+axis equal;
+ 
+
+
+%% Draw a torus with vertical axis as revolution axis
+
+circle  = circleToPolygon([10 0 3], 50);
+revol   = [0 0 0 1];
+[x y t] = revolutionSurface(circle, revol, linspace(0, 4*pi/3, 50));
+
+figure;
+surf(x, y, t);
+axis equal;
+ 
+
+##### SOURCE END #####
+--></body></html>
