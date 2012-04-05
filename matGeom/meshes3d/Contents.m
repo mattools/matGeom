@@ -41,6 +41,10 @@
 %   trimeshSurfaceArea       - Surface area of a triangular mesh
 %   meshEdgeLength           - Lengths of edges of a polygonal or polyhedral mesh
 %   meshDihedralAngles       - Dihedral at edges of a polyhedal mesh
+%
+% Measures on (convex) polyhedra
+%   polyhedronCentroid       - Compute the centroid of a 3D convex polyhedron
+%   tetrahedronVolume        - Signed volume of a tetrahedron
 %   polyhedronNormalAngle    - Compute normal angle at a vertex of a 3D polyhedron
 %   polyhedronMeanBreadth    - Mean breadth of a convex polyhedron
 %
@@ -92,6 +96,6 @@
 
 % Deprecated:
 %   drawPolyhedra            - draw polyhedra defined by vertices and faces
-%   drawPolyhedron           - draw polyhedron defined by vertices and faces
+%   drawPolyhedron           - Draw polyhedron defined by vertices and faces
 
 % Others
