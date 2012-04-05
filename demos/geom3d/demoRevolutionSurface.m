@@ -17,7 +17,7 @@ function demoRevolutionSurface(varargin)
 
 %% Draw a torus with horizontal axis as revolution axis
 
-circle  = circleAsPolygon([10 0 3], 50);
+circle  = circleToPolygon([10 0 3], 50);
 [x y t] = revolutionSurface(circle, linspace(0, 4*pi/3, 50));
 
 figure;
@@ -28,7 +28,7 @@ axis equal;
 
 %% Draw a torus with vertical axis as revolution axis
 
-circle  = circleAsPolygon([10 0 3], 50);
+circle  = circleToPolygon([10 0 3], 50);
 revol   = [0 0 0 1];
 [x y t] = revolutionSurface(circle, revol, linspace(0, 4*pi/3, 50));
 

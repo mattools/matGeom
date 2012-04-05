@@ -145,7 +145,7 @@
 %
 % Bounding boxes management
 %   boxes3d                   - Description of functions operating on 3D boxes
-%   point3dBounds             - Bounding box of a set of 3D points
+%   boundingBox3d             - Bounding box of a set of 3D points
 %   intersectBoxes3d          - Intersection of two 3D bounding boxes
 %   mergeBoxes3d              - Merge 3D boxes, by computing their greatest extent
 %   box3dVolume               - Volume of a 3-dimensional box
@@ -193,6 +193,7 @@
 
 
 % Deprecated:
+%   point3dBounds             - Bounding box of a set of 3D points
 %   intersectPlaneLine        - return intersection between a plane and a line
 %   translation3d             - return 4x4 matrix of a 3D translation
 %   scale3d                   - return 4x4 matrix of a 3D scaling

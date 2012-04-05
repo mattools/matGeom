@@ -6,8 +6,19 @@ function drawBox3d(box, varargin)
 %   BOX = [XMIN XMAX YMIN YMAX ZMIN ZMAX].
 %   The function draws only the outline edges of the box.
 %
+%   Example
+%     % Draw bounding box of a cubeoctehedron
+%     [v e f] = createCubeOctahedron;
+%     box3d = boundingBox3d(v);
+%     figure; hold on;
+%     drawMesh(v, f);
+%     drawBox3d(box3d);
+%     set(gcf, 'renderer', 'opengl')
+%     axis([-2 2 -2 2 -2 2]);
+%     view(3)
+%
 %   See Also:
-%   boxes3d, drawRect2, drawRect
+%   boxes3d, boundingBox3d
 %
 %   ---------
 %   author : David Legland 

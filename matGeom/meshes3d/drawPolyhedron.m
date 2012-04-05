@@ -1,10 +1,10 @@
 function varargout = drawPolyhedron(nodes, faces, varargin)
-%DRAWPOLYHEDRON draw polyhedron defined by vertices and faces
+%DRAWPOLYHEDRON Draw polyhedron defined by vertices and faces
 %
 %   drawPolyhedron(NODES, FACES)
 %   Draws the polyhedron defined by vertices NODES and the faces FACES. 
-%   NODES is a [NNx3] array containing coordinates of vertices, and FACES
-%   is either a [NFx3] or [NFx4] array containing indices of vertices of
+%   NODES is a NV-by-3 array containing coordinates of vertices, and FACES
+%   is either a NF-by3 or NF-by-4 array containing indices of vertices of
 %   the triangular or rectangular faces.
 %   FACES can also be a cell array, in the content of each cell is an array
 %   of indices to the nodes of the current face. Faces can have different
@@ -18,7 +18,7 @@ function varargout = drawPolyhedron(nodes, faces, varargin)
 %   drawPolyhedron(n, f);
 %
 %   See also:
-%   polyhedra, drawPolygon
+%   polyhedra, drawMesh, drawPolygon
 %
 %   ---------
 %
@@ -57,8 +57,8 @@ end
 hold on;
 
 % if nodes are 2D points, add a z=0 coordinate
-if size(nodes, 2)==2
-    nodes(1,3)=0;
+if size(nodes, 2) == 2
+    nodes(1,3) = 0;
 end
 
 
@@ -68,7 +68,7 @@ if iscell(faces)
     % array FACES is a cell array
     h = zeros(length(faces(:)), 1);
 
-    for f=1:length(faces(:))
+    for f = 1:length(faces(:))
         % get nodes of the cell
         face = faces{f};
 
@@ -94,7 +94,7 @@ else
     % array FACES is a NC*NV indices array, with NV : number of vertices of
     % each face, and NC number of faces
     h = zeros(size(faces, 1), 1);
-    for f=1:size(faces, 1)
+    for f = 1:size(faces, 1)
         % get nodes of the cell
         cnodes = nodes(faces(f,:)', :);
         h(f) = patch(cnodes(:, 1), cnodes(:, 2), cnodes(:, 3), [1 0 0]);
@@ -107,6 +107,6 @@ if ~isempty(varargin)
 end
 
 % format output parameters
-if nargout>0
-    varargout{1}=h;
+if nargout > 0
+    varargout = {h};
 end

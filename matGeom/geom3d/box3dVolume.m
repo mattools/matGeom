@@ -8,14 +8,14 @@ function vol = box3dVolume(box)
 %
 %   Example
 %   [n e f] = createCubeOctahedron;
-%   box = point3dBounds(n);
+%   box = boundingBox3d(n);
 %   vol = box3dVolume(box)
 %   vol = 
 %       8
 %
 %
 %   See also
-%   boxes3d
+%   boxes3d, boundingBox3d
 %
 % ------
 % Author: David Legland
@@ -23,4 +23,4 @@ function vol = box3dVolume(box)
 % Created: 2010-07-26,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform.
 
-vol = prod(box(:,2:2:end)-box(:, 1:2:end), 2);
+vol = prod(box(:, 2:2:end) - box(:, 1:2:end), 2);

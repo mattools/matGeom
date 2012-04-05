@@ -6,6 +6,7 @@ function box = point3dBounds(points)
 %   column. The result BOX contains extreme coordinates in the form:
 %   BOX = [XMIN XMAX YMIN YMAX ZMIN ZMAX].
 %
+%   Note: deprecated, use BoundingBox3d instead.
 %
 %   Example
 %   % compute bounding box of a cubeoctehedron
@@ -16,13 +17,16 @@ function box = point3dBounds(points)
 %
 %
 %   See also
-%   points3d, boxes3d
+%   points3d, boundingBox, boxes3d
 %
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2010-07-26,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform.
+
+warning('matgeom:geom3d:deprecated', ...
+    'point3dBounds is deprecated, use boundingBox3d instead');
 
 % comput extreme coords
 mini = min(points, [], 1);

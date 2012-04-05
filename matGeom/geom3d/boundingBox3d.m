@@ -1,24 +1,16 @@
-function box = boundingBox(points)
-%BOUNDINGBOX Bounding box of a set of points
+function box = boundingBox3d(points)
+%BOUNDINGBOX3D Bounding box of a set of 3D points
 %
-%   BOX = boundingBox(POINTS)
-%   Returns the bounding box of the set of points POINTS. POINTS can be
-%   either a N-by-2 or N-by-3 array. The result BOX is a 1-by-4 or 1-by-6
+%   BOX = boundingBox3d(POINTS)
+%   Returns the bounding box of the set of points POINTS. POINTS is a
+%   N-by-3 array containing points coordinates. The result BOX is a 1-by-6 
 %   array, containing:
-%   [XMIN XMAX YMIN YMAX] (2D point sets)
-%   [XMIN XMAX YMIN YMAX ZMIN ZMAX] (3D point sets)
+%   [XMIN XMAX YMIN YMAX ZMIN ZMAX]
 %
 %   Example
-%   % Draw the bounding box of a set of random points
-%     points = rand(30, 2);
-%     figure; hold on;
-%     drawPoint(points, '.');
-%     box = boundingBox(points);
-%     drawBox(box, 'r');
-%
 %   % Draw bounding box of a cubeoctehedron
 %     [v e f] = createCubeOctahedron;
-%     box3d = boundingBox(v);
+%     box3d = boundingBox3d(v);
 %     figure; hold on;
 %     drawMesh(v, f);
 %     drawBox3d(box3d);
@@ -27,7 +19,7 @@ function box = boundingBox(points)
 %     view(3)
 %     
 %   See also
-%   polygonBounds, drawBox
+%   boxes3d, drawBox3d
 %
 % ------
 % Author: David Legland
@@ -37,7 +29,7 @@ function box = boundingBox(points)
 
 %   HISTORY
 %   2011-04-08 add example
-%   2011-12-09 rename to boundingBox
+%   2011-12-09 rename to boundingBox3d
 
 % compute extreme x and y values
 xmin = min(points(:,1));
