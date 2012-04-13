@@ -67,24 +67,21 @@
 %   intersectPolylines        - Find the common points between 2 polylines
 %   polylineSelfIntersections - Find self-intersections points of a polyline
 %
-% Polygons
+% Polygon basic manipulation
 %   polygonPoint              - Extract a point from a polygon
 %   polygonSubcurve           - Extract a portion of a polygon
 %   reversePolygon            - Reverse a polygon, by iterating vertices from the end
-%   resamplePolygon           - Distribute N points equally spaced on a polygon
 %   projPointOnPolygon        - Compute position of a point projected on a polygon
 %   splitPolygons             - Convert a NaN separated polygon list to a cell array of polygons
-%   clipPolygon               - Clip a polygon with a rectangular box
-%   clipPolygonHP             - Clip a polygon with a Half-plane defined by a directed line
+%   polygonLoops              - Divide a possibly self-intersecting polygon into a set of simple loops
+%
+% Polygon clipping and intersections
 %   intersectLinePolygon      - Intersection points between a line and a polygon
 %   intersectRayPolygon       - Intersection points between a ray and a polygon
 %   intersectEdgePolygon      - Intersection point of an edge with a polygon
 %   polygonSelfIntersections  - Find-self intersection points of a polygon
-%   polygonLoops              - Divide a possibly self-intersecting polygon into a set of simple loops
-%   expandPolygon             - Expand a polygon by a given (signed) distance
-%   densifyPolygon            - Add several points on each edge of the polygon
-%   triangulatePolygon        - Compute a triangulation of the polygon
-%   medialAxisConvex          - Compute medial axis of a convex polygon
+%   clipPolygon               - Clip a polygon with a rectangular box
+%   clipPolygonHP             - Clip a polygon with a Half-plane defined by a directed line
 %
 % Measures on Polygons
 %   isPointInPolygon          - Test if a point is located inside a polygon
@@ -96,6 +93,13 @@
 %   polygonBounds             - Compute the bounding box of a polygon
 %   distancePointPolygon      - Compute shortest distance between a point and a polygon
 %   distancePolygons          - Compute the shortest distance between 2 polygons
+%
+% More complex operations on polygons
+%   resamplePolygon           - Distribute N points equally spaced on a polygon
+%   densifyPolygon            - Add several points on each edge of the polygon
+%   expandPolygon             - Expand a polygon by a given (signed) distance
+%   triangulatePolygon        - Compute a triangulation of the polygon
+%   medialAxisConvex          - Compute medial axis of a convex polygon
 %
 % Curves (polylines with lot of vertices)
 %   parametrize               - Parametrization of a polyline, based on edges lengths
