@@ -40,7 +40,12 @@ tp = ((point(:, 1) - edge(:, 1)) .* dx + (point(:, 2) - edge(:, 2)) .* dy) ./ de
 
 % ensure degenerated edges are correclty processed (consider the first
 % vertex is the closest)
-tp(delta < eps) = 0;
+if size(edge, 1) > 1
+    tp(delta < eps) = 0;
+elseif delta < eps
+    % in case of only one edge, need to expand the result manually
+    tp(:) = 0;
+end
 
 % change position to ensure projected point is located on the edge
 tp(tp < 0) = 0;
@@ -50,7 +55,7 @@ tp(tp > 1) = 1;
 p0 = [edge(:,1) + tp .* dx, edge(:,2) + tp .* dy];
 
 % compute distance between point and its projection on the edge
-dist = sqrt((point(:,1) - p0(:,1)) .^ 2 + (point(:,2) - p0(:,2)) .^ 2);
+dist = hypot(point(:,1) - p0(:,1), point(:,2) - p0(:,2));
 
 % process output arguments
 varargout{1} = dist;
