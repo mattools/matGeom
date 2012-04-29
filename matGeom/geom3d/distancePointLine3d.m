@@ -8,7 +8,10 @@ function d = distancePointLine3d(point, line)
 %   D     : (positive) scalar  
 %   
 %   See also:
-%   lines3d, points3d
+%   lines3d, points3d, distancePointLine
+%
+%   References
+%   http://mathworld.wolfram.com/Point-LineDistance3-Dimensional.html
 %
 %   ---------
 %   author : David Legland 

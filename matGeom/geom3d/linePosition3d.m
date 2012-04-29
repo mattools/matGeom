@@ -1,24 +1,25 @@
-function d = linePosition3d(point, line)
+function t = linePosition3d(point, line)
 %LINEPOSITION3D Return the position of a 3D point on a 3D line
 %
-%   L = linePosition3d(POINT, LINE)
-%   compute position of point POINT on the line LINE, relative to origin
+%   T = linePosition3d(POINT, LINE)
+%   Computes position of point POINT on the line LINE, relative to origin
 %   point and direction vector of the line.
 %   LINE has the form [x0 y0 z0 dx dy dy],
 %   POINT has the form [x y z], and is assumed to belong to line.
+%   The result T is the value such that POINT = LINE(1:3) + T * LINE(4:6).
 %   If POINT does not belong to LINE, the position of its orthogonal
-%   projection is computed instead.
+%   projection is computed instead. 
 %
-%   L = linePosition3d(POINT, LINES)
-%   if LINES is an array of NL lines, return NL positions, corresponding to
+%   T = linePosition3d(POINT, LINES)
+%   If LINES is an array of NL lines, return NL positions, corresponding to
 %   each line.
 %
-%   L = linePosition3d(POINTS, LINE)
-%   if POINTS is an array of NP points, return NP positions, corresponding
+%   T = linePosition3d(POINTS, LINE)
+%   If POINTS is an array of NP points, return NP positions, corresponding
 %   to each point.
 %
 %   See also:
-%   lines3d, points3d, createLine3d
+%   lines3d, points3d, createLine3d, distancePointLine3d
 %
 %   ---------
 %   author : David Legland 
@@ -38,4 +39,4 @@ dp = bsxfun(@minus, point, line(:,1:3));
 dl = line(:, 4:6);
 
 % compute position using dot product normalized with norm of line vector.
-d = bsxfun(@rdivide, sum(bsxfun(@times, dp, dl), 2), sum(dl.^2, 2));
+t = bsxfun(@rdivide, sum(bsxfun(@times, dp, dl), 2), sum(dl.^2, 2));
