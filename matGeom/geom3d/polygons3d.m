@@ -7,8 +7,9 @@ function polygons3d(varargin)
 %   parameters (centroid, angles), or intersections with lines or planes.
 %
 %   See also:
-%   polygon3dNormalAngle, polygonCentroid3d, clipConvexPolygon3dHP
+%   polygonArea3d, triangleArea3d, polygonCentroid3d, polygon3dNormalAngle 
 %   intersectLinePolygon3d, intersectLineTriangle3d, intersectRayPolygon3d
+%   clipConvexPolygon3dHP
 %   drawPolygon3d, drawPolyline3d, fillPolygon3d
 %
 % ------

@@ -10,7 +10,7 @@ function n = vectorNorm3d(v)
 %   NOTE: compute only euclidean norm.
 %
 %   See Also
-%   vectors3d, normalizeVector3d, vectorAngle3d
+%   vectors3d, normalizeVector3d, vectorAngle3d, hypot3
 %
 %   ---------
 %   author : David Legland 

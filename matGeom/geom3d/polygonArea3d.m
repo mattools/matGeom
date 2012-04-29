@@ -1,15 +1,18 @@
 function area = polygonArea3d(poly, varargin)
-%POLYGON3DAREA Area of a 3D polygon
+%POLYGONAREA3D Area of a 3D polygon
 %
-%   AREA = polygon3dArea(POLY)
+%   AREA = polygonArea3d(POLY)
 %   POLY is given as a N-by-3 array of vertex coordinates. The resulting
 %   area is positive.
 %
 %   Example
-%   polygon3dArea
+%     poly = [10 30 20;20 30 20;20 40 20;10 40 20];
+%     polygonArea3d(poly)
+%     ans =
+%        100
 %
 %   See also
-%
+%     polygons3d, triangleArea3d, polygonArea, polygonCentroid3d
 %
 % ------
 % Author: David Legland

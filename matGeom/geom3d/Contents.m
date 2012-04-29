@@ -44,6 +44,7 @@
 %   transformVector3d         - Transform a vector with a 3D affine transform
 %   normalizeVector3d         - Normalize a 3D vector to have norm equal to 1
 %   vectorNorm3d              - Norm of a 3D vector or of set of 3D vectors
+%   hypot3                    - Diagonal length of a cuboidal 3D box 
 %   vectorCross3d             - Vector cross product faster than inbuilt MATLAB cross.
 %   vectorAngle3d             - Angle between two 3D vectors
 %   isParallel3d              - Check parallelism of two 3D vectors
@@ -72,6 +73,7 @@
 %   clipLine3d                - Clip a line with a box and return an edge
 %   midPoint3d                - Middle point of two 3D points or of a 3D edge
 %   distancePointLine3d       - Euclidean distance between 3D point and line
+%   distancePointEdge3d       - Minimum distance between a 3D point and a 3D edge
 %   distanceLines3d           - Minimal distance between two 3D lines
 %   linePosition3d            - Return the position of a 3D point on a 3D line
 %   drawEdge3d                - Draw 3D edge in the current Window
@@ -97,6 +99,7 @@
 % 3D Polygons and curves
 %   polygons3d                - Description of functions operating on 3D polygons
 %   polygonCentroid3d         - Centroid (or center of mass) of a polygon
+%   polygonArea3d             - Area of a 3D polygon
 %   triangleArea3d            - Area of a 3D triangle
 %   polygon3dNormalAngle      - Normal angle at a vertex of the 3D polygon
 %   intersectLinePolygon3d    - Intersection point of a 3D line and a 3D polygon
