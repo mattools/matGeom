@@ -115,6 +115,7 @@
 % -----
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
+% Project homepage: http://matgeom.sourceforge.net/
 % created the  07/11/2005.
 % Copyright INRA - Cepia Software Platform.
 

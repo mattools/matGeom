@@ -177,7 +177,7 @@
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2005-11-07
 % Copyright INRA - Cepia Software Platform.
-% Homepage: http://matgeom.sourceforge.net/
+% Project homepage: http://matgeom.sourceforge.net/
 % http://www.pfl-cepia.inra.fr/index.php?page=geom2d
 
 help('Contents');
