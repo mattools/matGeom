@@ -4,7 +4,7 @@ function dist = distancePoints(p1, p2, varargin)
 %   D = distancePoints(P1, P2)
 %   Return the Euclidean distance between points P1 and P2.
 %
-%   If P1 and P2 are two arrays of points, result is a N1*N2 array
+%   If P1 and P2 are two arrays of points, result is a N1-by-N2 array
 %   containing distance between each point of P1 and each point of P2. 
 %
 %   D = distancePoints(P1, P2, NORM)
@@ -17,7 +17,7 @@ function dist = distancePoints(p1, p2, varargin)
 %   compute only distances between P1(i,:) and P2(i,:).
 %
 %   See also:
-%   points2d, minDistancePoints, nndist
+%   points2d, minDistancePoints, nndist, hausdorffDistance
 %
 %
 %   ---------
@@ -69,22 +69,22 @@ d   = size(p1, 2);
 if diag
     % compute distance only for apparied couples of pixels
     dist = zeros(n1, 1);
-    if norm==2
+    if norm == 2
         % Compute euclidian distance. this is the default case
         % Compute difference of coordinate for each pair of point
         % and for each dimension. -> dist is a [n1*n2] array.
-        for i=1:d
+        for i = 1:d
             dist = dist + (p2(:,i)-p1(:,i)).^2;
         end
         dist = sqrt(dist);
     elseif norm==inf
         % infinite norm corresponds to maximal difference of coordinate
-        for i=1:d
+        for i = 1:d
             dist = max(dist, abs(p2(:,i)-p1(:,i)));
         end
     else
         % compute distance using the specified norm.
-        for i=1:d
+        for i = 1:d
             dist = dist + power((abs(p2(:,i)-p1(:,i))), norm);
         end
         dist = power(dist, 1/norm);
@@ -92,11 +92,11 @@ if diag
 else
     % compute distance for all couples of pixels
     dist = zeros(n1, n2);
-    if norm==2
+    if norm == 2
         % Compute euclidian distance. this is the default case
         % Compute difference of coordinate for each pair of point
         % and for each dimension. -> dist is a [n1*n2] array.
-        for i=1:d
+        for i = 1:d
             % equivalent to:
             % dist = dist + ...
             %   (repmat(p1(:,i), [1 n2])-repmat(p2(:,i)', [n1 1])).^2;
@@ -105,12 +105,12 @@ else
         dist = sqrt(dist);
     elseif norm==inf
         % infinite norm corresponds to maximal difference of coordinate
-        for i=1:d
+        for i = 1:d
             dist = max(dist, abs(p1(:, i*ones(1, n2))-p2(:, i*ones(n1, 1))'));
         end
     else
         % compute distance using the specified norm.
-        for i=1:d
+        for i = 1:d
             % equivalent to:
             % dist = dist + power((abs(repmat(p1(:,i), [1 n2]) - ...
             %     repmat(p2(:,i)', [n1 1]))), norm);

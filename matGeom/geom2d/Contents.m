@@ -13,21 +13,24 @@
 %
 % Points
 %   points2d              - Description of functions operating on points
-%   clipPoints            - Clip a set of points by a box
-%   centroid              - Compute centroid (center of mass) of a set of points
-%   boundingBox           - Bounding box of a set of points
 %   midPoint              - Middle point of two points or of an edge
 %   circumCenter          - Circumcenter of three points
 %   isCounterClockwise    - Compute relative orientation of 3 points
 %   polarPoint            - Create a point from polar coordinates (rho + theta)
 %   angle2Points          - Compute horizontal angle between 2 points
 %   angle3Points          - Compute oriented angle made by 3 points
-%   angleSort             - Sort points in the plane according to their angle to origin
 %   distancePoints        - Compute distance between two points
-%   minDistancePoints     - Minimal distance between several points
-%   nndist                - Nearest-neighbor distances of each point in a set
 %   transformPoint        - Transform a point with an affine transform
 %   drawPoint             - Draw the point on the axis.
+%
+% Point Sets
+%   clipPoints            - Clip a set of points by a box
+%   centroid              - Compute centroid (center of mass) of a set of points
+%   boundingBox           - Bounding box of a set of points
+%   angleSort             - Sort points in the plane according to their angle to origin
+%   minDistancePoints     - Minimal distance between several points
+%   hausdorffDistance     - Hausdorff distance between two point sets
+%   nndist                - Nearest-neighbor distances of each point in a set
 %
 % Vectors
 %   vectors2d             - Description of functions operating on plane vectors
@@ -101,10 +104,10 @@
 %   isPointInCircle       - Test if a point is located inside a given circle
 %   isPointOnCircle       - Test if a point is located on a given circle.
 %   enclosingCircle       - Find the minimum circle enclosing a set of points.
+%   circumCircle          - Circumscribed circle of three points
 %   radicalAxis           - Compute the radical axis (or radical line) of 2 circles
 %   drawCircle            - Draw a circle on the current axis
 %   drawCircleArc         - Draw a circle arc on the current axis
-%   circumCircle          - Circumscribed circle of a triangle
 %
 % Ellipses and Parabola
 %   ellipses2d            - Description of functions operating on ellipses

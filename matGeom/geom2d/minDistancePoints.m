@@ -54,7 +54,7 @@ function varargout = minDistancePoints(p1, varargin)
 %   % results should be the same
 %   
 %   See Also
-%   points2d, distancePoints, nndist
+%   points2d, distancePoints, nndist, hausdorffDistance
 %
 %   ---------
 %   author: David Legland 

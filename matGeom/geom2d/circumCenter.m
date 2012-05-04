@@ -7,7 +7,7 @@ function varargout = circumCenter(a, b, c)
 %   circumcenter
 %
 %   See also
-%     points2d, circumCircle, centroid
+%     points2d, circles2d, circumCircle, centroid
 %
 % ------
 % Author: David Legland

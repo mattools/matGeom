@@ -1,5 +1,5 @@
 function varargout = circumCircle(varargin)
-%CIRCUMCIRCLE Circumscribed circle of a triangle
+%CIRCUMCIRCLE Circumscribed circle of three points
 %
 %   CIRC = circumCircle(TRI)
 %   CIRC = circumCircle(P1, P2, P3)
@@ -13,7 +13,7 @@ function varargout = circumCircle(varargin)
 %     axis equal; axis([0 100 0 100]);
 %
 %   See also
-%     enclosingCircle, circumCenter
+%     circles2d, enclosingCircle, circumCenter
 %
 % ------
 % Author: David Legland

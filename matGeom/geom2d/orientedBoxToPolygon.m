@@ -48,7 +48,7 @@ ty = zeros(4, 1);
 
 % compute 
 tx(1) = x - wc + hs;
-ty(1) = y - wc - hc;
+ty(1) = y - ws - hc;
 tx(2) = x + wc + hs;
 ty(2) = y + ws - hc;
 tx(3) = x + wc - hs;
