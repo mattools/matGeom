@@ -17,7 +17,7 @@ function circles2d(varargin)
 %
 %   See also:
 %   ellipses2d, createCircle, createDirectedCircle, 
-%   isPointInCircle, isPointOnCircle, enclosingCircle, triangleCircumCircle
+%   isPointInCircle, isPointOnCircle, enclosingCircle, circumCircle
 %   intersectLineCircle, intersectCircles, radicalAxis
 %   circleToPolygon, circleArcToPolyline
 %   drawCircle, drawCircleArc

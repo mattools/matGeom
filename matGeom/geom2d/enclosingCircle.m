@@ -13,7 +13,7 @@ function circle = enclosingCircle(pts)
 %   http://heyoka.cs.uiuc.edu/~thite/mincircle/
 %
 %   See also:
-%   circles2d, points2d, boxes2d, triangleCircumCircle
+%   circles2d, points2d, boxes2d, circumCircle
 %
 %   ---------
 %   author : David Legland 

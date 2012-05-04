@@ -66,6 +66,7 @@
 %   distancePolylines         - Compute the shortest distance between 2 polylines
 %   intersectPolylines        - Find the common points between 2 polylines
 %   polylineSelfIntersections - Find self-intersections points of a polyline
+%   simplifyPolyline          - Douglas-Peucker simplification of a polyline
 %
 % Polygon basic manipulation
 %   polygonPoint              - Extract a point from a polygon
