@@ -27,10 +27,12 @@ function varargout = drawPlane3d(plane, varargin)
 %   HISTORY
 %   2008-10-30 replace intersectPlaneLine by intersectLinePlane, add doc
 %   2010-10-04 fix a bug for planes touching box by one corner
+%   2011-07-19 fix a bug for param by Xin KANG (Ben)
+% 
 
-param = 'm';
+param = {'m'};
 if ~isempty(varargin)
-    param = varargin{:};
+  param = varargin;
 end
 
 lim = get(gca, 'xlim');
@@ -108,7 +110,7 @@ ind = convhull(u1, u2);
 ind = ind(1:end-1);
 
 % draw the patch
-h = patch(pts(ind, 1), pts(ind, 2), pts(ind, 3), param);
+h = patch(pts(ind, 1), pts(ind, 2), pts(ind, 3), param{:});
 
 % return handle to plane if needed
 if nargout>0

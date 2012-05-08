@@ -13,7 +13,7 @@ function theta = dihedralAngle(plane1, plane2)
 %   http://mathworld.wolfram.com/DihedralAngle.html
 %
 %   See also:
-%   planes3d, lines3d, angles3d
+%   planes3d, lines3d, angles3d, planesBisector
 %
 %   ---------
 %   author : David Legland 

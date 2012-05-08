@@ -3,13 +3,13 @@ function planes3d(varargin)
 %
 %   Planes are represented by a 3D point (the plane origin) and 2 direction
 %   vectors, which should not be colinear.
-%   PLANE = [X0 Y0 Z0 DX1 DY1 DZ1 DX2 DY2 DZ2];
+%   PLANE = [X0 Y0 Z0  DX1 DY1 DZ1  DX2 DY2 DZ2];
 %
 %   See also
-%   createPlane, normalizePlane, medianPlane, planeNormal, dihedralAngle
+%   createPlane, normalizePlane, medianPlane, planeNormal
 %   distancePointPlane, projPointOnPlane, planePosition, isBelowPlane
 %   intersectPlanes, intersectLinePlane, intersectEdgePlane
-%   polyhedronSlice,  clipConvexPolyhedronHP
+%   dihedralAngle, planesBisector, polyhedronSlice,  clipConvexPolyhedronHP
 %   drawPlane3d
 %
 % ------
