@@ -70,8 +70,9 @@
 %   lines3d                   - Description of functions operating on 3D lines
 %   createLine3d              - Create a line with various inputs.
 %   transformLine3d           - Transform a 3D line with a 3D affine transform
-%   clipLine3d                - Clip a line with a box and return an edge
+%   reverseLine3d             - Return same 3D line but with opposite orientation
 %   midPoint3d                - Middle point of two 3D points or of a 3D edge
+%   clipLine3d                - Clip a line with a box and return an edge
 %   distancePointLine3d       - Euclidean distance between 3D point and line
 %   distancePointEdge3d       - Minimum distance between a 3D point and a 3D edge
 %   distanceLines3d           - Minimal distance between two 3D lines
@@ -83,6 +84,8 @@
 %   planes3d                  - Description of functions operating on 3D planes
 %   createPlane               - Create a plane in parametrized form
 %   normalizePlane            - Normalize parametric representation of a plane
+%   reversePlane              - Return same 3D plane but with opposite orientation
+%   planesBisector            - Bisector plane between two other planes
 %   intersectPlanes           - Return intersection line between 2 planes in space
 %   intersectLinePlane        - Intersection point between a 3D line and a plane
 %   intersectEdgePlane        - Return intersection point between a plane and a edge
