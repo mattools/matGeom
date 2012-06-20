@@ -123,6 +123,7 @@
 %   transforms2d          - Description of functions operating on transforms
 %   createTranslation     - Create the 3*3 matrix of a translation
 %   createRotation        - Create the 3*3 matrix of a rotation
+%   createRotation90      - Matrix of a rotation for 90 degrees multiples
 %   createScaling         - Create the 3*3 matrix of a scaling in 2 dimensions
 %   createHomothecy       - Create the the 3x3 matrix of an homothetic transform
 %   createBasisTransform  - Compute matrix for transforming a basis into another basis

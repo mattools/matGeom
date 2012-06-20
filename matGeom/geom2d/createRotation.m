@@ -15,7 +15,7 @@ function trans = createRotation(varargin)
 %
 %
 %   See also:
-%   transforms2d, transformPoint, createTranslation, createScaling
+%   transforms2d, transformPoint, createRotation90, createTranslation
 %
 %   ---------
 %   author : David Legland 

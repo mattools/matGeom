@@ -14,10 +14,10 @@ function transforms2d(varargin)
 %
 %
 %   See also:
-%   createTranslation, createRotation, createScaling, createBasisTransform
-%   createHomothecy, createLineReflection, fitAffineTransform2d
+%   createTranslation, createRotation, createRotation90, createScaling
+%   createHomothecy, createLineReflection, createBasisTransform
 %   transformPoint, transformVector, transformLine, transformEdge
-%   rotateVector
+%   rotateVector, fitAffineTransform2d
 %
 % ------
 % Author: David Legland
