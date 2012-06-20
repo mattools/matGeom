@@ -1,4 +1,4 @@
-function area = polygonArea(varargin)
+function area = polygonArea(poly, varargin)
 %POLYGONAREA Compute the signed area of a polygon
 %
 %   A = polygonArea(POINTS);
@@ -40,26 +40,31 @@ function area = polygonArea(varargin)
 %   25/04/2005: add support for multiple polygons
 %   12/10/2007: update doc
 
-% in case of polygon sets, computes several areas
-if nargin > 0
-    var = varargin{1};
-    if iscell(var)
-        area = zeros(length(var), 1);
-        for i = 1:length(var)
-            area(i) = polygonArea(var{i}, varargin{2:end});
-        end
-        return;
+% in case of polygon sets, computes the sum of polygon areas
+if iscell(poly)
+    area = 0;
+    for i = 1:length(poly)
+        area = area + polygonArea(poly{i});
     end
+    return;
+end
+
+% check there are enough points
+if size(poly, 1) < 2
+    area = 0;
+    return;
 end
 
 % extract coordinates
 if nargin == 1
-    var = varargin{1};
-    px = var(:, 1);
-    py = var(:, 2);
+    % polygon given as N-by-2 array
+    px = poly(:, 1);
+    py = poly(:, 2);
+    
 elseif nargin == 2
-    px = varargin{1};
-    py = varargin{2};
+    % poylgon given as two N-by-1 arrays
+    px = poly;
+    py = varargin{1};
 end
 
 % indices of next vertices

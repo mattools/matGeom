@@ -7,7 +7,7 @@ function len = polygonLength(poly, varargin)
 %
 %   Example
 %     % Perimeter of a circle approximation
-%     poly = circleAsPolygon([0 0 1], 200);
+%     poly = circleToPolygon([0 0 1], 200);
 %     polygonLength(poly)
 %     ans =
 %         6.2829
@@ -24,6 +24,7 @@ function len = polygonLength(poly, varargin)
 %   HISTORY
 %   2011-03-31 add control for empty polygons, code cleanup
 %   2011-05-27 fix bugs
+
 % If first argument is a cell array, this is a multi-polygon, and we simply
 % add the lengths of individual polygons
 if iscell(poly)
@@ -50,5 +51,5 @@ if size(poly, 2) == 2
     dp = diff(poly([1:end 1], :), 1, 1);
     len = sum(hypot(dp(:, 1), dp(:, 2)));
 else
-    len = sum(sqrt(sum(diff(poly([1:end 1], :), 1, 1).^2, 2)));
+    len = sum(sqrt(sum(diff(poly([2:end 1], :), 1, 1).^2, 2)));
 end

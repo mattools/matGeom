@@ -100,7 +100,7 @@ while ~isempty(positions)
         positions(ind, :) = [];
 
         % if not found, break
-        if pos==pos0
+        if pos == pos0
             break;
         end
     end

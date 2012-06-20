@@ -1,6 +1,8 @@
 function varargout = circleAsPolygon(circle, varargin)
 %CIRCLEASPOLYGON Convert a circle into a series of points
 %
+%   Note: this function is deprecated, use "circleToPolygon" instead
+%
 %   P = circleAsPolygon(CIRCLE, N);
 %   convert circle given as [x0 y0 r], where x0 and y0 are coordinate of
 %   center, and r is the radius, into an array of  [(N+1)x2] double, 
@@ -16,7 +18,7 @@ function varargout = circleAsPolygon(circle, varargin)
 %   drawPolygon(circle);
 %
 %   See also:
-%   circles2d, polygons2d, createCircle
+%   circles2d, circleToPolygon
 %
 %
 % ---------

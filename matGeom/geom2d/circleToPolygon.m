@@ -1,14 +1,15 @@
 function varargout = circleToPolygon(circle, varargin)
 %CIRCLETOPOLYGON Convert a circle into a series of points
 %
-%   P = circleToPolygon(CIRCLE, N);
-%   convert circle given as [x0 y0 r], where x0 and y0 are coordinate of
-%   center, and r is the radius, into an array of  [(N+1)x2] double, 
-%   containing x and y values of points. 
-%   The polygon is closed
+%   P = circleToPolygon(CIRC, N);
+%   Converts the circle CIRC into an array of  (N+1)-by-2 of double,
+%   containing x and y positions of vertices.
+%   CIRC is given as [x0 y0 r], where x0 and y0 are coordinate of center,
+%   and r is the radius. 
+%   The resulting polygon is closed (first and last vertices are the same).
 %
 %   P = circleToPolygon(CIRCLE);
-%   uses a default value of N=64 points
+%   uses a default value of N=64 vertices.
 %
 %   Example
 %   circle = circleToPolygon([10 0 5], 16);

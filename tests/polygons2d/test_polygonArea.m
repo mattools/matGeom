@@ -37,7 +37,7 @@ exp = 100;
 assertEqual(exp, res);
 
 
-function test_RevertedSquare %#ok<*DEFNU>
+function test_RevertedSquare 
 % Test for a square in CW orientation
 
 poly = [0 0;0 10;10 10;10 0];
@@ -46,3 +46,19 @@ res = polygonArea(poly);
 exp = -100;
 
 assertEqual(exp, res);
+
+
+function test_MultiPolygon
+% Test for a rectangle with two rectangular holes
+
+poly1 = [10 10;60 10;60 50;10 50];  % outer ring
+poly2 = [20 20;20 40;30 40;30 20];  % inner ring 1
+poly3 = [40 20;40 40;50 40;50 20];  % inner ring 2
+poly = {poly1, poly2, poly3};
+
+res = polygonArea(poly);
+assertEqual(1, length(res));
+
+exp = 16 * 100;
+assertEqual(exp, res);
+

@@ -39,10 +39,10 @@ expanded = expandPolygon(poly, 5);
 assertTrue(length(expanded)==1);
 
 % value>10: two outlines
-expanded = expandPolygon(poly, 20);
+expanded = expandPolygon(poly, 20, 'cleanupLoops', true);
 assertTrue(length(expanded)==2);
 
 % value>30: the inner outline disappear
-expanded = expandPolygon(poly, 35);
+expanded = expandPolygon(poly, 35, 'cleanupLoops', true);
 assertTrue(length(expanded)==1);
 
