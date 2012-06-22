@@ -15,8 +15,15 @@ function area = trimeshSurfaceArea(v, e, f)
 %     ans = 
 %         6.9282
 %
+%     % triangulate a compute area of a unit cube
+%     [v f] = createCube;
+%     f2 = triangulateFaces(f);
+%     trimeshSurfaceArea(v, f2)
+%     ans =
+%         6
+%
 %   See also
-%   meshes3d, meshSurfaceArea
+%   meshes3d, meshSurfaceArea, triangulateFaces
 %
 % ------
 % Author: David Legland
@@ -29,12 +36,12 @@ if nargin == 2
     f = e;
 end
 
-% compute two direction vectors, using first face vertex as origin
+% compute two direction vectors, using first vertex of each face as origin
 v1 = v(f(:, 2), :) - v(f(:, 1), :);
 v2 = v(f(:, 3), :) - v(f(:, 1), :);
 
 % area of each triangle is half the cross product norm
-vn = vectorNorm(vectorCross3d(v1, v2));
+vn = vectorNorm3d(vectorCross3d(v1, v2));
 
 % sum up and normalize
 area = sum(vn) / 2;
