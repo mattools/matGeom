@@ -32,12 +32,16 @@ N = length(polygons);
 Np = size(point, 1);
 
 % compute orientation of polygon, and format to have Np*N matrix
-ccw = polygonArea(polygons)>0;
+areas = zeros(N, 1);
+for i = 1:N
+    areas(i) = polygonArea(polygons{i});
+end
+ccw = areas > 0;
 ccw = repmat(ccw', Np, 1);
 
 % test if point inside each polygon
 in = false(size(point, 1), N);
-for i=1:N
+for i = 1:N
     poly = polygons{i};
     in(:, i) = inpolygon(point(:,1), point(:,2), poly(:,1), poly(:,2));
 end

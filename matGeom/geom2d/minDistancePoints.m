@@ -120,14 +120,14 @@ dist = zeros(n1, n2);
 
 % different behaviour depending on the norm used
 if n == 2
-    % Compute euclidian distance. this is the default case
+    % Compute euclidian distance (default case).
     % Compute difference of coordinate for each pair of point and for each
     % dimension. Result "dist" is a n1-by-n2 array. 
     % in 2D: dist = dx.*dx + dy.*dy;
     for i = 1:d
         dist = dist + (repmat(p1(:,i), [1 n2])-repmat(p2(:,i)', [n1 1])).^2;
     end
-
+    
     % compute minimal distance:
     if ~allPoints
         % either on all couple of points
@@ -173,7 +173,7 @@ else
 end
 
 if ~allPoints
-    % convert index in array to row ad column subindices.
+    % convert index in array to row and column subindices.
     % This uses the fact that index are sorted in a triangular matrix,
     % with the last index of each column being a so-called triangular
     % number
