@@ -1,11 +1,11 @@
 function varargout = drawLine(lin, varargin)
-%DRAWLINE Draw the line on the current axis
+%DRAWLINE Draw a straight line clipepd on the current axis
 %
-%   drawline(LINE);
+%   drawLine(LINE);
 %   Draws the line LINE on the current axis, by using current axis to clip
 %   the line. 
 %
-%   drawline(LINE, PARAM, VALUE);
+%   drawLine(LINE, PARAM, VALUE);
 %   Specifies drawing options.
 %
 %   H = drawLine(...)
@@ -16,7 +16,7 @@ function varargout = drawLine(lin, varargin)
 %     figure; hold on; axis equal;
 %     axis([0 100 0 100]);
 %     drawLine([30 40 10 20]);
-%     drawLine([30 40 20 -10], 'color', 'm', 'linewidth', 2);
+%     drawLine([30 40 20 -10], 'Color', 'm', 'LineWidth', 2);
 %     drawLine([-30 140 10 20]);
 %
 %   See also:
@@ -36,7 +36,7 @@ function varargout = drawLine(lin, varargin)
 %   2011-10-11 add management of axes handle
 
 % extract handle of axis to draw in
-if isscalar(lin) && ishandle(lin)
+if isscalar(lin) && ishandle(lin) && strcmp(get(lin, 'type'), 'axes')
     ax = lin;
     lin = varargin{1};
     varargin(1) = [];
@@ -56,7 +56,7 @@ clip = clipLine(lin, [xlim ylim]);
 ok   = isfinite(clip(:,1));
 
 % initialize result array to invalide handles
-h = -1*ones(size(lin, 1), 1);
+h = -1 * ones(size(lin, 1), 1);
 
 % draw valid lines
 h(ok) = plot(ax, clip(ok, [1 3])', clip(ok, [2 4])', varargin{:});

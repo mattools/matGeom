@@ -71,6 +71,7 @@
 %   createTetrahedron        - Create a 3D mesh representing a tetrahedron
 %   createRhombododecahedron - Create a 3D mesh representing a rhombododecahedron
 %   createTetrakaidecahedron - Create a 3D mesh representing a tetrakaidecahedron
+%   createDurerPolyhedron    - Create a mesh representing Durer's polyhedron 
 %
 % Less typical polyhedra
 %   createSoccerBall         - Create a 3D mesh representing a soccer ball
@@ -99,3 +100,4 @@
 %   drawPolyhedron           - Draw polyhedron defined by vertices and faces
 
 % Others
+

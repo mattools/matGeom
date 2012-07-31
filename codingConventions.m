@@ -31,6 +31,8 @@
 %       Ex: 'distancePointLine3d'.
 %       This convention was not used for the beginning of the library
 %       development, but new functions will try to conform to it.
+%   * Conversion functions use 'To' between radicals. Ex:
+%       ellipseToPolygon, edgeToLine, circleArcToPolyline...
 %
 %   Function header
 %

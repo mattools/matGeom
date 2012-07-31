@@ -144,5 +144,5 @@ end
 % update indices of faces
 for f = 1:length(faces2)
     face = faces2{f};
-    faces2{f} = inds(face);
+    faces2{f} = inds(face)';
 end
