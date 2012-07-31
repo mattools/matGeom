@@ -23,17 +23,19 @@ function varargout = createDurerPolyhedron(varargin)
 %   triangular faces are equilateral.
 %
 %   Example
+%     % Display Durer's polyhedron 
 %     [v f] = createDurerPolyhedron;
 %     figure; hold on; set(gcf, 'renderer', 'opengl');
-%     drawMesh(v, f);
-%     axis([-2 2 -2 2 -2 2]); axis equal;
+%     drawMesh(v, f, 'FaceColor', [.7 .7 .7]);
+%     axis equal; axis([-1 1 -1 1 -1 1]);
+%     view(3)
 %
 %   See also
-%     meshes3d, createCube, createOctaedron
+%     meshes3d, createCube, createOctahedron
 %
 %   References
 %   http://mathworld.wolfram.com/DuerersSolid.html
-%   http://en.wikipedia.org/wiki/D%C3%BCrer_graph
+%   http://en.wikipedia.org/wiki/Dürer_graph
 %
 % ------
 % Author: David Legland
