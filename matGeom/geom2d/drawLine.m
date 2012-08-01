@@ -45,7 +45,9 @@ else
 end
 
 % default style for drawing lines
-varargin = [{'color', 'b'}, varargin];
+if length(varargin) ~= 1
+    varargin = [{'color', 'b'}, varargin];
+end
 
 % extract bounding box of the current axis
 xlim = get(ax, 'xlim');

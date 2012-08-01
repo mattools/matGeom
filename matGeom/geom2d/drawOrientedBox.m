@@ -34,7 +34,7 @@ function varargout = drawOrientedBox(box, varargin)
 %     axis equal;
 %
 %   See also
-%   orientedBox, drawPolygon, drawRect, drawBox
+%   orientedBox, drawPolygon, drawRect, drawBox, drawCenteredEdge
 %
 % ------
 % Author: David Legland

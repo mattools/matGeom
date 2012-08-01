@@ -1,6 +1,11 @@
 function varargout = drawCenteredEdge(varargin)
 %DRAWCENTEREDEDGE Draw an edge centered on a point
 %   
+%   Draws a centered edge, defined by a center, a length and an orientation
+%   (in degrees). This function can be used to draw principal axes of an
+%   ellipse or of an oriented box.
+%
+%
 %   drawCenteredEdge(EDGE)
 %   Draws an edge centered on a point. EDGE has format [XC YC L THETA],
 %   with (Xc, YC) being edge center, L being the edge length, and THETA
@@ -36,7 +41,7 @@ function varargout = drawCenteredEdge(varargin)
 %     drawCenteredEdge(edges, 'linewidth', 2, 'color', 'g');
 % 
 %   See also:
-%   edges2d, drawEdge
+%   edges2d, drawOrientedBox, drawEllipse, centeredEdgeToEdge, drawEdge
 %
 %   ---------
 %   author : David Legland 

@@ -12,8 +12,19 @@ function res = parallelLine(line, point)
 %   located at distance DIST, counted positive in the right side of LINE
 %   and negative in the left side.
 %
+%   Examples
+%     P1 = [20 30]; P2 = [50 10];
+%     L1 = createLine([50 10], [20 30]);
+%     figure; hold on; axis equal; axis([0 60 0 50]);
+%     drawPoint([P1; P2], 'ko');
+%     drawLine(L1, 'k');
+%     P = [30 40];
+%     drawPoint(P, 'ko');
+%     L2 = parallelLine(L1, P);
+%     drawLine(L2, 'Color', 'b');
+%
 %   See also:
-%   lines2d, orthogonalLine, distancePointLine
+%   lines2d, orthogonalLine, distancePointLine, parallelEdge
 %
 %   ---------
 %
@@ -27,7 +38,7 @@ function res = parallelLine(line, point)
 %   15/06/2009 change convention for distance sign
 
 
-if size(point, 1)==1
+if size(point, 2) == 1
     % use a distance. Compute position of point located at distance DIST on
     % the line orthogonal to the first one.
     point = pointOnLine([line(:,1) line(:,2) line(:,4) -line(:,3)], point);

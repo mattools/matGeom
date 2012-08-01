@@ -4,15 +4,21 @@ function edges2d(varargin)
 %   An edge is represented by the coordinate of its extremities:
 %   EDGE = [X1 Y1 X2 Y2];
 %
+%   Centered edges are sometimes used (for example for representing main
+%   axes of an ellipse or an oriented box). Centered edges are represented
+%   by their center, their length, and their orientation (counted in
+%   degrees and counter-clockwise).
+%   CEDGE = [XC YC LEN THETA];
+%
 %   A set of edges is represented by a N-by-4 array, each row representing
 %   an edge.
 %
 %
 %   See also:
 %   lines2d, rays2d, points2d
-%   createEdge, edgeAngle, edgeLength, edgeToLine, midPoint
+%   createEdge, edgeAngle, edgeLength, edgeToLine, midPoint, parallelEdge
 %   intersectEdges, intersectLineEdge, isPointOnEdge, edgeToPolyline
-%   clipEdge, transformEdge, intersectEdgePolygon
+%   clipEdge, transformEdge, intersectEdgePolygon, centeredEdgeToEdge
 %   drawEdge, drawCenteredEdge
 %
 % ------
