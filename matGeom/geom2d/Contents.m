@@ -57,7 +57,7 @@
 %   clipLine              - Clip a line with a box
 %   reverseLine           - Return same line but with opposite orientation
 %   transformLine         - Transform a line with an affine transform
-%   drawLine              - Draw the line on the current axis
+%   drawLine              - Draw a straight line clipped by the current axis
 %
 % Edges (line segments between 2 points)
 %   edges2d               - Description of functions operating on planar edges
@@ -65,6 +65,8 @@
 %   edgeToLine            - Convert an edge to a straight line
 %   edgeAngle             - Return angle of edge
 %   edgeLength            - Return length of an edge
+%   parallelEdge          - Edge parallel to another edge
+%   centeredEdgeToEdge    - Convert a centered edge to a two-points edge
 %   midPoint              - Middle point of two points or of an edge
 %   edgePosition          - Return position of a point on an edge
 %   clipEdge              - Clip an edge with a rectangular box
@@ -143,6 +145,7 @@
 %   intersectBoxes        - Intersection of two bounding boxes
 %   mergeBoxes            - Merge two boxes, by computing their greatest extent
 %   randomPointInBox      - Generate random point within a box
+%   boxToRect             - Convert box data to rectangle data
 %   drawBox               - Draw a box defined by coordinate extents
 %
 % Triangles
@@ -151,6 +154,7 @@
 %
 % Rectangles
 %   rectToPolygon         - Convert a rectangle into a polygon (set of vertices)
+%   rectToBox             - Convert rectangle data to box data
 %   drawRect              - Draw rectangle on the current axis
 %   orientedBox           - Minimum-width oriented bounding box of a set of points
 %   orientedBoxToPolygon  - Convert an oriented box to a polygon (set of vertices)

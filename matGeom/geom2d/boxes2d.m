@@ -9,7 +9,7 @@ function boxes2d(varargin)
 %
 %   See also
 %   boundingBox, lipPoints, clipLine, clipEdge, clipRay
-%   mergeBoxes, intersectBoxes, randomPointInBox
+%   mergeBoxes, intersectBoxes, randomPointInBox, boxToRect
 %
 %
 % ------
