@@ -10,6 +10,12 @@ function point = projPointOnLine(point, line)
 %   for details). Result PT2 is a [N*2] array, containing coordinates of
 %   orthogonal projections of PT1 onto lines LINE.
 %
+%   Example
+%     line = [0 2  2 1];
+%     projPointOnLine([3 1], line)
+%     ans = 
+%          2   3
+%
 %   See also:
 %   lines2d, points2d, isPointOnLine, linePosition
 %
@@ -20,23 +26,19 @@ function point = projPointOnLine(point, line)
 %
 
 %   HISTORY
-%   06/08/2005 : correct bug when several points were passed as param.
+%   2005-08-06 correct bug when several points were passed as param.
+%   2012-08-23 remove repmats
 
+% direction vector of the line
+vx = line(:, 3);
+vy = line(:, 4);
 
-% ensure input arguments have same size
-if size(line, 1)==1 && size(point, 1)>1
-    line = repmat(line, [size(point, 1) 1]);
-end
-if size(point, 1)==1 && size(line, 1)>1
-    point = repmat(point, [size(line, 1) 1]);
-end
+% difference of point with line origin
+dx = point(:,1) - line(:,1);
+dy = point(:,2) - line(:,2);
 
-% slope of line
-dx = line(:, 3);
-dy = line(:, 4);
+% Position of projection on line, using dot product
+tp = (dx .* vx + dy .* vy ) ./ (vx .* vx + vy .* vy);
 
-% first find relative position of projection on the line,
-tp = ((point(:, 2) - line(:, 2)).*dy + (point(:, 1) - line(:, 1)).*dx) ./ (dx.*dx+dy.*dy);
-
-% convert position on line to cartesian coordinate
-point = line(:,1:2) + [tp tp].*[dx dy];
+% convert position on line to cartesian coordinates
+point = [line(:,1) + tp .* vx, line(:,2) + tp .* vy];

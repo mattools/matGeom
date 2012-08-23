@@ -74,5 +74,5 @@ else
 end
 
 % compute position
-d = (dxp.*dxl + dyp.*dyl) ./ (dxl.^2 + dyl.^2);
+d = (dxp .* dxl + dyp .* dyl) ./ (dxl .* dxl + dyl .* dyl);
 

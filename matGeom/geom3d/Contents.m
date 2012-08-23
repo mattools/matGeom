@@ -69,14 +69,16 @@
 % 3D Lines and Edges
 %   lines3d                   - Description of functions operating on 3D lines
 %   createLine3d              - Create a line with various inputs.
+%   parallelLine3d            - Create 3D line parallel to another one.
+%   projPointOnLine3d         - Project a 3D point orthogonally onto a 3D line
+%   distancePointLine3d       - Euclidean distance between 3D point and line
+%   distancePointEdge3d       - Minimum distance between a 3D point and a 3D edge
+%   linePosition3d            - Return the position of a 3D point on a 3D line
+%   distanceLines3d           - Minimal distance between two 3D lines
 %   transformLine3d           - Transform a 3D line with a 3D affine transform
 %   reverseLine3d             - Return same 3D line but with opposite orientation
 %   midPoint3d                - Middle point of two 3D points or of a 3D edge
 %   clipLine3d                - Clip a line with a box and return an edge
-%   distancePointLine3d       - Euclidean distance between 3D point and line
-%   distancePointEdge3d       - Minimum distance between a 3D point and a 3D edge
-%   distanceLines3d           - Minimal distance between two 3D lines
-%   linePosition3d            - Return the position of a 3D point on a 3D line
 %   drawEdge3d                - Draw 3D edge in the current Window
 %   drawLine3d                - Draw a 3D line on the current axis
 %
@@ -84,13 +86,14 @@
 %   planes3d                  - Description of functions operating on 3D planes
 %   createPlane               - Create a plane in parametrized form
 %   normalizePlane            - Normalize parametric representation of a plane
+%   parallelPlane             - Parallel to a plane through a point or at a given distance
 %   reversePlane              - Return same 3D plane but with opposite orientation
 %   planesBisector            - Bisector plane between two other planes
+%   projPointOnPlane          - Return the orthogonal projection of a point on a plane
 %   intersectPlanes           - Return intersection line between 2 planes in space
 %   intersectLinePlane        - Intersection point between a 3D line and a plane
 %   intersectEdgePlane        - Return intersection point between a plane and a edge
 %   distancePointPlane        - Signed distance betwen 3D point and plane
-%   projPointOnPlane          - Return the orthogonal projection of a point on a plane
 %   isBelowPlane              - Test whether a point is below or above a plane
 %   medianPlane               - Create a plane in the middle of 2 points
 %   planeNormal               - Compute the normal to a plane

@@ -6,10 +6,10 @@ function planes3d(varargin)
 %   PLANE = [X0 Y0 Z0  DX1 DY1 DZ1  DX2 DY2 DZ2];
 %
 %   See also
-%   createPlane, normalizePlane, medianPlane, planeNormal
+%   createPlane, normalizePlane, medianPlane, planeNormal, parallelPlane
 %   distancePointPlane, projPointOnPlane, planePosition, isBelowPlane
 %   intersectPlanes, intersectLinePlane, intersectEdgePlane
-%   dihedralAngle, planesBisector, polyhedronSlice,  clipConvexPolyhedronHP
+%   dihedralAngle, planesBisector, polyhedronSlice, clipConvexPolyhedronHP
 %   drawPlane3d
 %
 % ------

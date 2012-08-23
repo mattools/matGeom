@@ -19,7 +19,7 @@ function t = linePosition3d(point, line)
 %   to each point.
 %
 %   See also:
-%   lines3d, points3d, createLine3d, distancePointLine3d
+%   lines3d, createLine3d, distancePointLine3d, projPointOnLine3d
 %
 %   ---------
 %   author : David Legland 
