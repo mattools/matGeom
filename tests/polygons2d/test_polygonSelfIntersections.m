@@ -33,6 +33,15 @@ intersects = polygonSelfIntersections(poly);
 assertEqual(1, size(intersects, 1));
 assertElementsAlmostEqual([10 10], intersects);
 
+function test_S_Shape
+% Test on a S-shaped polygon, crossing is between last and first vertices
+
+poly = [10 0;0 0;0 10;20 10;20 20;10 20];
+
+res = polygonSelfIntersections(poly);
+exp = [10 10];
+assertElementsAlmostEqual(exp, res);
+
 
 function testEllipseArc
 

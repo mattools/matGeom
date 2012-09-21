@@ -65,7 +65,7 @@
 %   distancePointPolyline     - Compute shortest distance between a point and a polyline
 %   distancePolylines         - Compute the shortest distance between 2 polylines
 %   intersectPolylines        - Find the common points between 2 polylines
-%   polylineSelfIntersections - Find self-intersections points of a polyline
+%   polylineSelfIntersections - Find self-intersection points of a polyline
 %   simplifyPolyline          - Douglas-Peucker simplification of a polyline
 %
 % Polygon basic manipulation
@@ -80,7 +80,7 @@
 %   intersectLinePolygon      - Intersection points between a line and a polygon
 %   intersectRayPolygon       - Intersection points between a ray and a polygon
 %   intersectEdgePolygon      - Intersection point of an edge with a polygon
-%   polygonSelfIntersections  - Find-self intersection points of a polygon
+%   polygonSelfIntersections  - Find self-intersection points of a polygon
 %   clipPolygon               - Clip a polygon with a rectangular box
 %   clipPolygonHP             - Clip a polygon with a Half-plane defined by a directed line
 %

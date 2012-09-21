@@ -1,8 +1,13 @@
 function varargout = polylineSelfIntersections(poly, varargin)
-%POLYLINESELFINTERSECTIONS Find self-intersections points of a polyline
+%POLYLINESELFINTERSECTIONS Find self-intersection points of a polyline
 %
 %   PTS = polylineSelfIntersections(POLY);
-%   Return the position of self intersection points
+%   Returns the position of self intersections of the given polyline.
+%
+%   PTS = polylineSelfIntersections(POLY, CLOSED);
+%   Adds an options to specify if the polyline is closed (i.e., is a
+%   polygon), or open (the default). CLOSED can be a boolean, or one of
+%   'closed' or 'open'.
 %
 %   [PTS POS1 POS2] = polylineSelfIntersections(POLY);
 %   Also return the 2 positions of each intersection point (the position
@@ -19,6 +24,9 @@ function varargout = polylineSelfIntersections(poly, varargin)
 %       % use a 'S'-shaped polyline
 %       poly = [10 0;0 0;0 10;20 10;20 20;10 20];
 %       polylineSelfIntersections(poly)
+%       ans =
+%           Empty matrix: 0-by-2
+%       polylineSelfIntersections(poly, 'closed')
 %       ans = 
 %           10 10
 %
@@ -37,7 +45,7 @@ function varargout = polylineSelfIntersections(poly, varargin)
 
 %% Initialisations
 
-% determine whether the polyline is closed
+% determine whether the polyline is open or closed
 closed = false;
 if ~isempty(varargin)
     closed = varargin{1};
@@ -52,7 +60,7 @@ end
 
 % if polyline is closed, ensure the last point equals the first one
 if closed
-    if sum(abs(poly(end, :)-poly(1,:))<1e-14)~=2
+    if sum(abs(poly(end, :) - poly(1,:)) < 1e-14) ~= 2
         poly = [poly; poly(1,:)];
     end
 end
@@ -72,38 +80,39 @@ Nv = size(poly, 1);
 ip = 0;
 
 % iterate over each couple of edge ( (N-1)*(N-2)/2 iterations)
-for i=1:Nv-2
+for i = 1:Nv-2
     % create first edge
     edge1 = [poly(i, :) poly(i+1, :)];
-    for j=i+2:Nv-1
+    for j = i+2:Nv-1
         % create second edge
         edge2 = [poly(j, :) poly(j+1, :)];
 
-        % check conditions on bounding boxes
-        if min(edge1([1 3]))>max(edge2([1 3]))
+        % check conditions on bounding boxes, to avoid computing the
+        % intersections
+        if min(edge1([1 3])) > max(edge2([1 3]))
             continue;
         end
-        if max(edge1([1 3]))<min(edge2([1 3]))
+        if max(edge1([1 3])) < min(edge2([1 3]))
             continue;
         end
-        if min(edge1([2 4]))>max(edge2([2 4]))
+        if min(edge1([2 4])) > max(edge2([2 4]))
             continue;
         end
-        if max(edge1([2 4]))<min(edge2([2 4]))
+        if max(edge1([2 4])) < min(edge2([2 4]))
             continue;
         end
         
         % compute intersection point
         inter = intersectEdges(edge1, edge2);
         
-        if sum(isfinite(inter))==2
+        if sum(isfinite(inter)) == 2
             % add point to the list
             ip = ip + 1;
             points(ip, :) = inter;
             
             % also compute positions on the polyline
-            pos1(ip, 1) = i+edgePosition(inter, edge1)-1;
-            pos2(ip, 1) = j+edgePosition(inter, edge2)-1;
+            pos1(ip, 1) = i + edgePosition(inter, edge1) - 1;
+            pos2(ip, 1) = j + edgePosition(inter, edge2) - 1;
         end
     end
 end
@@ -121,9 +130,10 @@ end
 %% Post-processing
 
 % process output arguments
-if nargout<=1
+if nargout <= 1
     varargout{1} = points;
-elseif nargout==3
+    
+elseif nargout == 3
     varargout{1} = points;
     varargout{2} = pos1;
     varargout{3} = pos2;

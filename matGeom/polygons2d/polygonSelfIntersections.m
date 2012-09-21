@@ -1,5 +1,5 @@
 function varargout = polygonSelfIntersections(poly, varargin)
-%POLYGONSELFINTERSECTIONS Find-self intersection points of a polygon
+%POLYGONSELFINTERSECTIONS Find self-intersection points of a polygon
 %
 %   PTS = polygonSelfIntersections(POLY)
 %   Return the position of self intersection points
@@ -37,7 +37,7 @@ if sum(abs(poly(end, :)-poly(1,:)) < tol) ~= 2
 end
 
 % compute intersections by calling algo for polylines
-[points pos1 pos2] = polylineSelfIntersections(poly);
+[points pos1 pos2] = polylineSelfIntersections(poly, 'closed');
 
 % It may append that first vertex of polygon is detected as intersection,
 % the following tries to detect this
