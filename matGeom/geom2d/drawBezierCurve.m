@@ -35,7 +35,7 @@ function varargout = drawBezierCurve(points, varargin)
 %   2011-10-11 add management of axes handle
 
 % extract handle of axis to draw on
-if isscalar(points) && ishandle(points)
+if isAxisHandle(points)
     ax = points;
     points = varargin{1};
     varargin(1) = [];

@@ -35,7 +35,7 @@ function varargout = drawBox(box, varargin)
 %   2011-10-11 add management of axes handle
 
 % extract handle of axis to draw on
-if isscalar(box) && ishandle(box)
+if isAxisHandle(box)
     ax = box;
     box = varargin{1};
     varargin(1) = [];

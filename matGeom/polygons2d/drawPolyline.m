@@ -45,7 +45,7 @@ function varargout = drawPolyline(varargin)
 
 
 % extract handle of axis to draw on
-if ishandle(varargin{1})
+if isAxisHandle(varargin{1})
     ax = varargin{1};
     varargin(1) = [];
 else

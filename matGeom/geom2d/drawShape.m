@@ -39,6 +39,7 @@ if ~iscell(param)
     param = tmp;
 end
 
+% compute drawing options
 option = 'draw';
 if ~isempty(varargin)
     var = varargin{1};
@@ -50,7 +51,7 @@ end
     
 % transform each shape into a polygon
 shape = cell(1,length(type));
-for i=1:length(type)    
+for i = 1:length(type)    
     if strcmpi(type{i}, 'circle')
         shape{i} = circleAsPolygon(param{i}, 128);
     elseif strcmpi(type{i}, 'rect')
@@ -61,18 +62,20 @@ for i=1:length(type)
 end
 
 
+% draw or fill each shape as polygon
 hold on;
 h = zeros(length(shape), 1);
 if strcmp(option, 'draw')
-    for i=1:length(shape)
+    for i = 1:length(shape)
         h(i) = drawPolygon(shape{i});
     end
 else
-    for i=1:length(shape)
+    for i = 1:length(shape)
         h(i) = fillPolygon(shape{i});
     end
 end
 
-if nargout>0
-    varargout{1}=h;
+% foramt output
+if nargout > 0
+    varargout = {h};
 end

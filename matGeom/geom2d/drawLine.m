@@ -36,7 +36,7 @@ function varargout = drawLine(lin, varargin)
 %   2011-10-11 add management of axes handle
 
 % extract handle of axis to draw in
-if isscalar(lin) && ishandle(lin) && strcmp(get(lin, 'type'), 'axes')
+if isAxisHandle(lin)
     ax = lin;
     lin = varargin{1};
     varargin(1) = [];

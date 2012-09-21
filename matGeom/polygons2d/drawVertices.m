@@ -21,7 +21,7 @@ function varargout = drawVertices(varargin)
 % Copyright 2011 INRA - Cepia Software Platform.
 
 % extract handle of axis to draw on
-if ishandle(varargin{1})
+if isAxisHandle(varargin{1})
     ax = varargin{1};
     varargin(1) = [];
 else

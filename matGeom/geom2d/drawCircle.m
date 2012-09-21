@@ -51,7 +51,7 @@ function varargout = drawCircle(varargin)
 %   2011-10-11 add support for axis handle
 
 % extract handle of axis to draw on
-if isscalar(varargin{1}) && ishandle(varargin{1})
+if isAxisHandle(varargin{1})
     ax = varargin{1};
     varargin(1) = [];
 else

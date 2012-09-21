@@ -29,7 +29,7 @@ function varargout = drawRay(ray, varargin)
 %   2011-10-11 add management of axes handle
 
 % extract handle of axis to draw in
-if isscalar(ray) && ishandle(ray)
+if isAxisHandle(ray)
     ax = ray;
     ray = varargin{1};
     varargin(1) = [];

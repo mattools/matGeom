@@ -37,7 +37,7 @@ function varargout = drawRect(rect, varargin)
 %   2011-10-11 add management of axes handle
 
 % extract handle of axis to draw on
-if isscalar(rect) && ishandle(rect)
+if isAxisHandle(rect)
     ax = rect;
     rect = varargin{1};
     varargin(1) = [];
