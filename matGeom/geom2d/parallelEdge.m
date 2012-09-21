@@ -2,7 +2,7 @@ function res = parallelEdge(edge, dist)
 %PARALLELEDGE Edge parallel to another edge
 %
 %   EDGE2 = parallelEdge(EDGE, DIST)
-%   Computes the edge parallel to the input edge EDGE and locagted at the
+%   Computes the edge parallel to the input edge EDGE and located at the
 %   given signed distance DIST.
 %
 %   Example

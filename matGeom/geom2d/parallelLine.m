@@ -36,7 +36,7 @@ function res = parallelLine(line, point)
 %   HISTORY
 %   31/07/2005 add usage of distance
 %   15/06/2009 change convention for distance sign
-
+%   31/09/2012 adapt for multiple lines
 
 if size(point, 2) == 1
     % use a distance. Compute position of point located at distance DIST on
@@ -45,6 +45,6 @@ if size(point, 2) == 1
 end
 
 % normal case: compute line through a point with given direction
-res = zeros(1, 4);
-res(1:2) = point;
-res(3:4) = line(3:4);
+res = zeros(size(line, 1), 4);
+res(:, 1:2) = point;
+res(:, 3:4) = line(:, 3:4);
