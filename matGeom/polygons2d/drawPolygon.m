@@ -21,7 +21,19 @@ function varargout = drawPolygon(varargin)
 %   H = drawPolygon(...);
 %   Also return a handle to the list of line objects.
 %
+%   Example
+%     % draw a red rectangle
+%     poly = [10 10;40 10;40 30;10 30];
+%     figure; drawPolygon(poly, 'r');
+%     axis equal; axis([0 50 0 50]); 
 %
+%     % Draw two squares
+%     px = [10 20 20 10 NaN 30 40 40 30]';
+%     py = [10 10 20 20 NaN 10 10 20 20]';
+%     figure; 
+%     drawPolygon([px py], 'lineWidth', 2);
+%     axis equal; axis([0 50 0 50]); 
+% 
 %   See also:
 %   polygons2d, drawCurve
 %
@@ -103,7 +115,7 @@ end
 % check case of polygons with holes
 if any(isnan(px(:)))
     polygons = splitPolygons([px py]);
-    h = drawPolygon(ax, polygons);
+    h = drawPolygon(ax, polygons, varargin{:});
 
     if nargout > 0
         varargout = {h};
