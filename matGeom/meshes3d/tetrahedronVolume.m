@@ -17,7 +17,7 @@ function vol = tetrahedronVolume(tetra, varargin)
 %         -.3333
 %
 %   See also
-%   meshes3d, createTetrahedron
+%   meshes3d, createTetrahedron, meshVolume
 %
 % ------
 % Author: David Legland

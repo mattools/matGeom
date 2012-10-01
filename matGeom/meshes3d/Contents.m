@@ -39,6 +39,7 @@
 % Measures on meshes
 %   meshSurfaceArea          - Surface area of a polyhedral mesh
 %   trimeshSurfaceArea       - Surface area of a triangular mesh
+%   meshVolume               - Volume of the space enclosed by a polygonal mesh
 %   meshEdgeLength           - Lengths of edges of a polygonal or polyhedral mesh
 %   meshDihedralAngles       - Dihedral at edges of a polyhedal mesh
 %
