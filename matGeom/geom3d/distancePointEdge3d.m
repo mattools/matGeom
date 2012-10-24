@@ -1,4 +1,4 @@
-function varargout = distancePointEdge3d(point, edge)
+function [dist t] = distancePointEdge3d(point, edge)
 %DISTANCEPOINTEDGE3D Minimum distance between a 3D point and a 3D edge
 %
 %   DIST = distancePointEdge3d(POINT, EDGE);
@@ -36,23 +36,13 @@ vl = edge(:, 4:6) - edge(:, 1:3);
 % (Size of t is the max number of edges or points)
 t = linePosition3d(point, [edge(:,1:3) vl]);
 
-% ensure degenerated edges are correclty processed (consider the first
-% vertex is the closest)
-delta = vectorNorm3d(vl);
-t(delta < eps) = 0;
-
 % change position to ensure projected point is located on the edge
 t(t < 0) = 0;
 t(t > 1) = 1;
 
-% coordinates of projected point
+% difference of coordinates between projected point and base point
 p0 = bsxfun(@plus, edge(:,1:3), [t .* vl(:,1) t .* vl(:,2) t .* vl(:,3)]);
+p0 = bsxfun(@minus, point, p0);
 
 % compute distance between point and its projection on the edge
-dist = sqrt((point(:,1) - p0(:,1)) .^ 2 + (point(:,2) - p0(:,2)) .^ 2 + (point(:,3) - p0(:,3)) .^ 2);
-
-% process output arguments
-varargout{1} = dist;
-if nargout > 1
-    varargout{2} = t;
-end
+dist = sqrt(sum(p0 .* p0, 2));

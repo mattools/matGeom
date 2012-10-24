@@ -51,8 +51,8 @@ dy = bsxfun(@minus, point(:, 2), line(:, 2)');
 
 % squared norm of direction vector, with a check of validity 
 delta = vx .* vx + vy .* vy;
-invalidEdges = delta < eps;
-delta(invalidEdges) = 1; 
+invalidLine = delta < eps;
+delta(invalidLine) = 1; 
 
 % compute position of points projected on the line, by using normalised dot
 % product (NP-by-NE array) 
@@ -60,4 +60,4 @@ pos = bsxfun(@rdivide, bsxfun(@times, dx, vx) + bsxfun(@times, dy, vy), delta);
 
 % ensure degenerated edges are correclty processed (consider the first
 % vertex is the closest)
-pos(:, invalidEdges) = 0;
+pos(:, invalidLine) = 0;

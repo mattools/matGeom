@@ -1,5 +1,5 @@
-function t = linePosition3d(point, line)
-%LINEPOSITION3D Return the position of a 3D point on a 3D line
+function pos = linePosition3d(point, line)
+%LINEPOSITION3D Return the position of a 3D point projected on a 3D line
 %
 %   T = linePosition3d(POINT, LINE)
 %   Computes position of point POINT on the line LINE, relative to origin
@@ -36,7 +36,15 @@ function t = linePosition3d(point, line)
 dp = bsxfun(@minus, point, line(:,1:3));
 
 % direction vector of the line
-dl = line(:, 4:6);
+vl = line(:, 4:6);
+
+% precompute and check validity of denominator
+denom = sum(vl.^2, 2);
+invalidLine = denom < eps;
+denom(invalidLine) = 1;
 
 % compute position using dot product normalized with norm of line vector.
-t = bsxfun(@rdivide, sum(bsxfun(@times, dp, dl), 2), sum(dl.^2, 2));
+pos = bsxfun(@rdivide, sum(bsxfun(@times, dp, vl), 2), denom);
+
+% position on a degenerated line is set to 0
+pos(invalidLine) = 0;
