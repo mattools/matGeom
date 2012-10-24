@@ -1,4 +1,4 @@
-function d = linePosition(point, line)
+function pos = linePosition(point, line)
 %LINEPOSITION Position of a point on a line
 %
 %   POS = linePosition(POINT, LINE);
@@ -39,40 +39,25 @@ function d = linePosition(point, line)
 %   HISTORY
 %   2005-07-07 manage multiple input
 %   2011-06-15 avoid the use of repmat when possible
+%   2012-10-24 rewrite using bsxfun
 
-% number of inputs
-Nl = size(line, 1);
-Np = size(point, 1);
+% direction vector of the line
+vx = line(:, 3)';
+vy = line(:, 4)';
 
-if Np == Nl
-    % if both inputs have the same size, no problem
-    dxl = line(:, 3);
-    dyl = line(:, 4);
-    dxp = point(:, 1) - line(:, 1);
-    dyp = point(:, 2) - line(:, 2);
+% difference of coordinates between point and line origin
+dx = bsxfun(@minus, point(:, 1), line(:, 1)');
+dy = bsxfun(@minus, point(:, 2), line(:, 2)');
 
-elseif Np == 1
-    % one point, several lines
-    dxl = line(:, 3);
-    dyl = line(:, 4);
-    dxp = point(ones(Nl, 1), 1) - line(:, 1);
-    dyp = point(ones(Nl, 1), 2) - line(:, 2);
-    
-elseif Nl == 1
-    % one line, several points
-    dxl = line(ones(Np, 1), 3);
-    dyl = line(ones(Np, 1), 4);
-    dxp = point(:, 1) - line(1);
-    dyp = point(:, 2) - line(2);
-    
-else
-    % expand one of the array to have the same size
-    dxl = repmat(line(:,3)', Np, 1);
-    dyl = repmat(line(:,4)', Np, 1);
-    dxp = repmat(point(:,1), 1, Nl) - repmat(line(:,1)', Np, 1);
-    dyp = repmat(point(:,2), 1, Nl) - repmat(line(:,2)', Np, 1);
-end
+% squared norm of direction vector, with a check of validity 
+delta = vx .* vx + vy .* vy;
+invalidEdges = delta < eps;
+delta(invalidEdges) = 1; 
 
-% compute position
-d = (dxp .* dxl + dyp .* dyl) ./ (dxl .* dxl + dyl .* dyl);
+% compute position of points projected on the line, by using normalised dot
+% product (NP-by-NE array) 
+pos = bsxfun(@rdivide, bsxfun(@times, dx, vx) + bsxfun(@times, dy, vy), delta);
 
+% ensure degenerated edges are correclty processed (consider the first
+% vertex is the closest)
+pos(:, invalidEdges) = 0;

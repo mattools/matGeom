@@ -38,12 +38,17 @@ end
 % first compute clipping of supporting line
 edge = clipLine(ray, box);
 
-% detectes valid edges (edges outside box are all NaN)
+% detects valid edges (edges outside box are all NaN)
 inds = find(isfinite(edge(:, 1)));
 
 % compute position of edge extremities relative to the ray
-pos1 = linePosition(edge(inds,1:2), ray(inds,:));
-pos2 = linePosition(edge(inds,3:4), ray(inds,:));
+n = length(inds);
+pos1 = zeros(n, 1);
+pos2 = zeros(n, 1);
+for i = 1:n
+    pos1(i) = linePosition(edge(inds(i),1:2), ray(inds(i),:));
+    pos2(i) = linePosition(edge(inds(i),3:4), ray(inds(i),:));
+end
 
 % if first point is before ray origin, replace by origin
 edge(inds(pos1<0), 1:2) = ray(inds(pos1<0), 1:2);
@@ -52,6 +57,6 @@ edge(inds(pos1<0), 1:2) = ray(inds(pos1<0), 1:2);
 edge(inds(pos2<0), :) = NaN;
 
 % eventually returns result about inside or outside
-if nargout>1
+if nargout > 1
     isInside = isfinite(edge(:,1));
 end

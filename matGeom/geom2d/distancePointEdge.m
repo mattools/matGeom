@@ -52,12 +52,13 @@ function [dist pos] = distancePointEdge(point, edge)
 %   2009-04-30 add possibility to return position of closest point
 %   2011-04-14 add checkup for degenerate edges, improve speed, update doc
 
+
 % direction vector of each edge (row vectors)
 vx = (edge(:, 3) - edge(:,1))';
 vy = (edge(:, 4) - edge(:,2))';
 
-% squared length of edges, with a check of valifity
-delta = (vx .* vx + vy .* vy);
+% squared length of edges, with a check of validity
+delta = vx .* vx + vy .* vy;
 invalidEdges = delta < eps;
 delta(invalidEdges) = 1; 
 

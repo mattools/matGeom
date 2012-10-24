@@ -39,20 +39,22 @@ function edge = clipLine(line, box, varargin)
 %   again to Reto Zingg)
 
 % adjust size of two input arguments
-if size(line, 1)==1
-    line = repmat(line, size(box, 1), 1);
-elseif size(box, 1)==1
-    box = repmat(box, size(line, 1), 1);
-elseif size(line, 1) ~= size(box, 1)
+nLines = size(line, 1);
+nBoxes = size(box, 1);
+if nLines == 1 && nBoxes > 1
+    line = repmat(line, nBoxes, 1);
+elseif nBoxes == 1 && nLines > 1
+    box = repmat(box, nLines, 1);
+elseif nLines ~= nBoxes
     error('bad sizes for input');
 end
 
 % allocate memory
-nbLines = size(line, 1);
-edge    = zeros(nbLines, 4);
+nLines = size(line, 1);
+edge   = zeros(nLines, 4);
 
 % main loop on lines
-for i=1:nbLines
+for i = 1:nLines
     % extract limits of the box
     xmin = box(i, 1);
     xmax = box(i, 2);
@@ -63,17 +65,11 @@ for i=1:nbLines
     % line in order to reduce computation errors
     delta = hypot(line(i,3), line(i,4));
     
-    
 	% compute intersection with each edge of the box
-    
-    % lower edge
-	px1 = intersectLines(line(i,:), [xmin ymin delta 0]);
-    % right edge
-	px2 = intersectLines(line(i,:), [xmax ymin 0 delta]);
-    % upper edge
-	py1 = intersectLines(line(i,:), [xmax ymax -delta 0]);
-    % left edge
-	py2 = intersectLines(line(i,:), [xmin ymax 0 -delta]);
+    px1 = intersectLines(line(i,:), [xmin ymin delta 0]);   % lower edge
+    px2 = intersectLines(line(i,:), [xmax ymin 0 delta]);   % right edge
+    py1 = intersectLines(line(i,:), [xmax ymax -delta 0]);  % upper edge
+    py2 = intersectLines(line(i,:), [xmin ymax 0 -delta]);  % left edge
     
     % remove undefined intersections (case of lines parallel to box edges)
     points = [px1 ; px2 ; py1 ; py2];
@@ -101,4 +97,3 @@ for i=1:nbLines
         edge (i,:) = NaN;
     end
 end
-

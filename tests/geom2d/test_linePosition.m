@@ -48,7 +48,7 @@ line2 = createLine([0 0], [20 60]);
 line3 = createLine([20 60], [40 120]);
 lines = [line1;line2;line3];
 
-exp = [.5; 1; 0];
+exp = [.5  1  0];
 pos = linePosition(point, lines);
 
 assertEqual(exp, pos);
