@@ -49,11 +49,36 @@ assertElementsAlmostEqual(distancePointEdge([0 6], edge), sqrt(13));
 function testSingleMulti
 point = [5 5];
 edges = [0 0 10 0;10 0 10 10;10 10 20 10;10 0 0 10];
-exp = [5;5;5*sqrt(2);0];
+exp = [5 5 5*sqrt(2) 0];
 assertElementsAlmostEqual(exp, distancePointEdge(point, edges));
+
+function testSingleMultiWithInvalid
+point = [5 5];
+edges = [0 0 10 0;10 0 10 10;10 10 20 10;5 0 5 0];
+exp = [5 5 5*sqrt(2) 5];
+assertElementsAlmostEqual(exp, distancePointEdge(point, edges));
+
 
 function testMultiSingle
 edge  = [10 10 20 10];
 points = [10 10;15 10;20 10;10 0;30 10];
 exp = [0;0;0;10;10];
 assertElementsAlmostEqual(exp, distancePointEdge(points, edge));
+
+function testMultiSingleInvalidEdge
+edge  = [15 10 15 10];
+points = [10 10;15 10;20 10;10 10;30 10];
+exp = [5;0;5;5;15];
+assertElementsAlmostEqual(exp, distancePointEdge(points, edge));
+
+function testMultiMulti
+edges  = [10 30 20 30; 20 30 20 40;20 40 10 40;10 40 10 30];
+points = [14 33;15 38];
+exp = [3 6 7 4;8 5 2 5];
+assertElementsAlmostEqual(exp, distancePointEdge(points, edges));
+
+function testMultiMultiWithInvalid
+edges  = [10 30 20 30; 20 30 20 40;20 40 10 40;10 40 10 30;10 30 10 30];
+points = [14 33;15 38];
+exp = [3 6 7 4 5;8 5 2 5 hypot(8, 5)];
+assertElementsAlmostEqual(exp, distancePointEdge(points, edges));
