@@ -49,18 +49,23 @@
 %   polyhedronNormalAngle    - Compute normal angle at a vertex of a 3D polyhedron
 %   polyhedronMeanBreadth    - Mean breadth of a convex polyhedron
 %
-% Basic processing
-%   triangulateFaces         - Convert face array to an array of triangular faces 
-%   gridmeshToQuadmesh       - Create a quad mesh from a grid mesh
-%   checkMeshAdjacentFaces   - Check if adjacent faces of a mesh have similar orientation
-%   meshReduce               - Merge coplanar faces of a polyhedral mesh
-%   minConvexHull            - Return the unique minimal convex hull of a set of 3D points
-%
 % Intersections and clipping
 %   intersectLineMesh3d      - Intersection points of a 3D line with a mesh
 %   polyhedronSlice          - Intersect a convex polyhedron with a plane.
 %   clipMeshVertices         - Clip vertices of a surfacic mesh and remove outer faces
 %   clipConvexPolyhedronHP   - Clip a convex polyhedron by a plane
+%
+% Basic processing
+%   triangulateFaces         - Convert face array to an array of triangular faces 
+%   checkMeshAdjacentFaces   - Check if adjacent faces of a mesh have similar orientation
+%   meshReduce               - Merge coplanar faces of a polyhedral mesh
+%
+% Creation and conversion
+%   surfToMesh               - Convert surface grids into face-vertex mesh
+%   cylinderMesh             - Create a 3D mesh representing a cylinder
+%   sphereMesh               - Create a 3D mesh representing a sphere
+%   torusMesh                - Create a 3D mesh representing a torus
+%   minConvexHull            - Return the unique minimal convex hull of a set of 3D points
 %
 % Typical polyhedra
 %   polyhedra                - Index of classical polyhedral meshes
@@ -99,6 +104,7 @@
 % Deprecated:
 %   drawPolyhedra            - draw polyhedra defined by vertices and faces
 %   drawPolyhedron           - Draw polyhedron defined by vertices and faces
+%   gridmeshToQuadmesh       - Create a quad mesh from a grid mesh
 
 % Others
 

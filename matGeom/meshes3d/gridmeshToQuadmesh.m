@@ -1,6 +1,8 @@
 function varargout = gridmeshToQuadmesh(x, y, varargin)
 %GRIDMESHTOQUADMESH Create a quad mesh from a grid mesh
 %
+%   Deprecated: replaced by surfToMesh (2012.10.25)
+%
 %   [V F] = gridmeshToQuadmesh(X, Y)
 %   [V F] = gridmeshToQuadmesh(X, Y, Z)
 %   Converts the surface grid given by two or three coordinate arrays into
@@ -29,6 +31,9 @@ function varargout = gridmeshToQuadmesh(x, y, varargin)
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2011-12-18,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
+
+warning('MatGeom:deprecated', ...
+    'function "gridmeshToQuadmesh" is deprecated, and was replaced by "surfToMesh".');
 
 % number of vertices
 dim = size(x);

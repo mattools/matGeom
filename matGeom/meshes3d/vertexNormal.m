@@ -1,13 +1,22 @@
 function normals = vertexNormal(vertices, faces)
 %VERTEXNORMAL Compute normals to a mesh vertices
 %
-%   output = vertexNormal(input)
+%   N = vertexNormal(V, F)
+%   Computes vertex normals of the mesh given by vertices V and F. 
+%   V is a vertex array with 3 columns, F is either a NF-by-3 or NF-by-4
+%   index array, or a cell array with NF elements.
 %
 %   Example
-%   vertexNormal
+%     % Draw the vertex normals of a sphere
+%     s = [10 20 30 40];
+%     [v f] = sphereMesh(s);
+%     drawMesh(v, f);
+%     view(3);axis equal; light; lighting gouraud;
+%     normals = vertexNormal(v, f);
+%     drawVector3d(v, normals);
 %
 %   See also
-%
+%     meshes3d, faceNormal, triangulateFaces
 %
 % ------
 % Author: David Legland

@@ -14,7 +14,7 @@ function varargout = drawTorus(torus, varargin)
 %   axis equal;
 %
 %   See also
-%   drawEllipsoid, revolutionSurface
+%   drawEllipsoid, revolutionSurface, torusMesh
 %
 % ------
 % Author: David Legland
@@ -28,13 +28,15 @@ r2 = torus(5);
 
 if size(torus, 2) >= 7
     normal = torus(6:7);
+else
+    normal = [0 0];
 end
 
 % default drawing options
 varargin = [{'FaceColor', 'g'}, varargin];
 
 % create base torus
-circle = circleAsPolygon([r1 0 r2], 60);
+circle = circleToPolygon([r1 0 r2], 60);
 [x y z] = revolutionSurface(circle, linspace(0, 2*pi, 60));
 
 % transform torus
