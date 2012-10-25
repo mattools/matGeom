@@ -3,16 +3,26 @@ function varargout = gridmeshToQuadmesh(x, y, varargin)
 %
 %   [V F] = gridmeshToQuadmesh(X, Y)
 %   [V F] = gridmeshToQuadmesh(X, Y, Z)
+%   Converts the surface grid given by two or three coordinate arrays into
+%   a face-vertex quad mesh.
 %
 %   Example
+%     % transform a surface into a mesh
 %     [X,Y] = meshgrid(-2:.2:2, -2:.2:2);                                
 %     Z = X .* exp(-X.^2 - Y.^2);
 %     [V F] = gridmeshToQuadmesh(X, Y, Z);
 %     figure;
 %     drawMesh(V, F);
 %
+%     % Transform surface of a cylinder as a mesh
+%     [x y z] = cylinder(5*ones(1, 10));
+%     [v f] = gridmeshToQuadmesh(x, y, z);
+%     figure;
+%     drawMesh(v, f);
+%     view(3); axis equal;
+%
 %   See also
-%     meshgrid, drawMesh
+%     meshes3d, meshgrid, drawMesh
 %
 % ------
 % Author: David Legland

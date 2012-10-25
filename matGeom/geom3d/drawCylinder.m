@@ -49,7 +49,7 @@ function varargout = drawCylinder(cyl, varargin)
 %     view([60 30])
 %
 %   See Also:
-%   drawSphere, drawLine3d, surf
+%   drawSphere, cylinderMesh, drawLine3d, surf
 %
 %   ---------
 %   author : David Legland 
@@ -68,11 +68,11 @@ function varargout = drawCylinder(cyl, varargin)
 
 if iscell(cyl)
     res = zeros(length(cyl), 1);
-    for i=1:length(cyl)
+    for i = 1:length(cyl)
         res(i) = drawCylinder(cyl{i}, varargin{:});
     end
     
-    if nargout>0
+    if nargout > 0
         varargout{1} = res;
     end    
     return;
