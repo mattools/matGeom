@@ -9,20 +9,24 @@ function normals = faceNormal(nodes, faces)
 %
 %
 %   Example
-%   [n e f] = createCube;
-%   normals1 = faceNormal(n, f);
+%     [v e f] = createIcosahedron;
+%     normals1 = faceNormal(v, f);
+%     centros1 = faceCentroids(v, f);
+%     figure; drawMesh(v, f); 
+%     hold on; axis equal; view(3);
+%     drawVector3d(centros1, normals1);
 %
-%   pts = rand(50, 3);
-%   hull = minConvexHull(pts);
-%   normals2 = faceNormal(pts, hull);
+%     pts = rand(50, 3);
+%     hull = minConvexHull(pts);
+%     normals2 = faceNormal(pts, hull);
 %
 %   See also
-%   meshes3d, drawMesh, convhull, convhulln
+%   meshes3d, drawMesh, convhull, convhulln, drawVector3d
 %
 %
 % ------
 % Author: David Legland
-% e-mail: david.legland@jouy.inra.fr
+% e-mail: david.legland@grignon.inra.fr
 % Created: 2006-07-05
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
@@ -36,12 +40,13 @@ if isnumeric(faces)
     v2 = normalizeVector3d(v2);
    
     % compute normals using cross product
-	normals = cross(v1, v2, 2);
+	normals = vectorCross3d(v1, v2);
 
 else
+    % initialize empty array
     normals = zeros(length(faces), 3);
     
-    for i=1:length(faces)
+    for i = 1:length(faces)
         face = faces{i};
         % compute vector of first edges
         v1 = nodes(face(2),1:3) - nodes(face(1),1:3);
@@ -52,7 +57,7 @@ else
         v2 = normalizeVector3d(v2);
         
         % compute normals using cross product
-        normals(i, :) = cross(v1, v2, 2);
+        normals(i, :) = vectorCross3d(v1, v2);
     end
 end
 
