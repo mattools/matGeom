@@ -8,7 +8,7 @@ function lines3d(varargin)
 %   See also:
 %   createLine3d, transformLine3d, distancePointLine3d, linePosition3d
 %   intersectLinePlane, distanceLines3d, parallelLine3d, projPointOnLine3d
-%   clipLine3d, drawLine3d
+%   clipLine3d, fitLine3d, drawLine3d
 %   
 %
 % ------

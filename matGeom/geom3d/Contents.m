@@ -69,11 +69,12 @@
 % 3D Lines and Edges
 %   lines3d                   - Description of functions operating on 3D lines
 %   createLine3d              - Create a line with various inputs.
+%   fitLine3d                 - Fit a 3D line to a set of points
 %   parallelLine3d            - Create 3D line parallel to another one.
 %   projPointOnLine3d         - Project a 3D point orthogonally onto a 3D line
 %   distancePointLine3d       - Euclidean distance between 3D point and line
 %   distancePointEdge3d       - Minimum distance between a 3D point and a 3D edge
-%   linePosition3d            - Return the position of a 3D point on a 3D line
+%   linePosition3d            - Return the position of a 3D point projected on a 3D line
 %   distanceLines3d           - Minimal distance between two 3D lines
 %   transformLine3d           - Transform a 3D line with a 3D affine transform
 %   reverseLine3d             - Return same 3D line but with opposite orientation
@@ -85,6 +86,7 @@
 % Planes
 %   planes3d                  - Description of functions operating on 3D planes
 %   createPlane               - Create a plane in parametrized form
+%   fitPlane                  - Fit a 3D plane to a set of points
 %   normalizePlane            - Normalize parametric representation of a plane
 %   parallelPlane             - Parallel to a plane through a point or at a given distance
 %   reversePlane              - Return same 3D plane but with opposite orientation
@@ -213,3 +215,4 @@
 %   createEulerAnglesRotation - Create a rotation matrix from 3 euler angles
 
 % Others
+
