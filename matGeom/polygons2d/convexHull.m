@@ -11,12 +11,21 @@ function [hull inds] = convexHull(points)
 %   array of points.
 %
 %   Example
-%   % Draw the convex hull of a set of random points
+%     % Draws the convex hull of a set of random points
 %     pts = rand(30,2);
 %     drawPoint(pts, '.');
 %     hull = convexHull(pts);
 %     hold on; 
 %     drawPolygon(hull);
+%
+%     % Draws the convex hull of a paper hen
+%     x = [0 10 20  0 -10 -20 -10 -10  0];
+%     y = [0  0 10 10  20  10  10  0 -10];
+%     poly = [x' y'];
+%     hull = convexHull(poly);
+%     figure; drawPolygon(poly);
+%     hold on; axis equal;
+%     drawPolygon(hull, 'm');
 %
 %   See also
 %   polygons2d, convhull

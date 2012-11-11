@@ -23,11 +23,19 @@ function area = polygonArea(poly, varargin)
 %     area2 = 
 %         -200
 %
+%     % Computes area of a paper hen
+%     x = [0 10 20  0 -10 -20 -10 -10  0];
+%     y = [0  0 10 10  20  10  10  0 -10];
+%     poly = [x' y'];
+%     area = polygonArea(poly)
+%     area =
+%        400
+%
 %   References
 %   algo adapted from P. Bourke web page
 %   http://local.wasp.uwa.edu.au/~pbourke/geometry/polyarea/
 %
-%   See also :
+%   See also:
 %   polygons2d, polygonCentroid, drawPolygon, triangleArea
 %
 %   ---------
