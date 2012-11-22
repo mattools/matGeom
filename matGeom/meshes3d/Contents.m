@@ -51,6 +51,7 @@
 %
 % Intersections and clipping
 %   intersectLineMesh3d      - Intersection points of a 3D line with a mesh
+%   intersectPlaneMesh       - Compute the polygons resulting from plane-mesh intersection
 %   polyhedronSlice          - Intersect a convex polyhedron with a plane.
 %   clipMeshVertices         - Clip vertices of a surfacic mesh and remove outer faces
 %   clipConvexPolyhedronHP   - Clip a convex polyhedron by a plane
