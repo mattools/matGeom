@@ -64,6 +64,7 @@ function [intersects edgeIndices] = intersectLinePolygon(line, poly, varargin)
 %   2010-01-26 rewrite using vectorisation
 %   2011-05-20 returns unique results
 %   2011-07-20 returns intersected edge indices
+%   2012-11-33 add 'diag' option for linePosition
 
 % get computation tolerance
 tol = 1e-14;
@@ -83,7 +84,7 @@ intersects = intersectLines(line, supportLines, tol);
 inds = find(isfinite(intersects(:, 1)));
 
 % compute position of intersection points on corresponding lines
-pos = linePosition(intersects(inds, :), supportLines(inds, :));
+pos = linePosition(intersects(inds, :), supportLines(inds, :), 'diag');
 
 % and keep only intersection points located on edges
 b = pos > -tol & pos < 1+tol;

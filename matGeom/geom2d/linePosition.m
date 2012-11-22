@@ -1,4 +1,4 @@
-function pos = linePosition(point, line)
+function pos = linePosition(point, line, varargin)
 %LINEPOSITION Position of a point on a line
 %
 %   POS = linePosition(POINT, LINE);
@@ -20,6 +20,12 @@ function pos = linePosition(point, line)
 %   return an array of [NP NL] position, corresponding to each couple
 %   point-line.
 %
+%   POS = linePosition(POINTS, LINES, 'diag');
+%   When POINTS and LINES have the same number of rows, computes positions
+%   only for couples POINTS(i,:) and LINES(i,:). The result POS is a column
+%   vector with as many rows as the number of points/lines.
+%
+%
 %   Example
 %   line = createLine([10 30], [30 90]);
 %   linePosition([20 60], line)
@@ -40,14 +46,41 @@ function pos = linePosition(point, line)
 %   2005-07-07 manage multiple input
 %   2011-06-15 avoid the use of repmat when possible
 %   2012-10-24 rewrite using bsxfun
+%   2012-11-22 add support for the diag option
 
-% direction vector of the line
-vx = line(:, 3)';
-vy = line(:, 4)';
 
-% difference of coordinates between point and line origin
-dx = bsxfun(@minus, point(:, 1), line(:, 1)');
-dy = bsxfun(@minus, point(:, 2), line(:, 2)');
+if ~isempty(varargin) && ischar(varargin{1}) && strcmpi(varargin{1}, 'diag')
+    % In the case of 'diag' option, use direct correspondence between
+    % points and lines
+    
+    % check input have same size
+    np = size(point, 1);
+    nl = size(line, 1);
+    if np ~= nl
+        error('matGeom:linePosition', ...
+            'Using diag option, number of points and lines should be the same');
+    end
+    
+    % direction vector of the lines
+    vx = line(:, 3);
+    vy = line(:, 4);
+    
+    % difference of coordinates between point and line origin
+    dx = point(:, 1) - line(:, 1);
+    dy = point(:, 2) - line(:, 2);
+    
+else
+    % General case -> return NP-by-NL array
+    
+    % direction vector of the lines
+    vx = line(:, 3)';
+    vy = line(:, 4)';
+    
+    % difference of coordinates between point and line origin
+    dx = bsxfun(@minus, point(:, 1), line(:, 1)');
+    dy = bsxfun(@minus, point(:, 2), line(:, 2)');
+
+end
 
 % squared norm of direction vector, with a check of validity 
 delta = vx .* vx + vy .* vy;

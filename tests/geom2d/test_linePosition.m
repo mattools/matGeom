@@ -53,3 +53,22 @@ pos = linePosition(point, lines);
 
 assertEqual(exp, pos);
 
+function testArrayArray
+
+lines = [10 20 1 0;10 20 0 1;10 20 1 1];
+points = [30 20;10 40; 30 40];
+
+exp = [20 0 10; 0 20 10; 20 20 20];
+pos = linePosition(points, lines);
+
+assertElementsAlmostEqual(exp, pos);
+
+function testArrayArrayDiag
+
+lines = [10 20 1 0;10 20 0 1;10 20 1 1];
+points = [30 20;10 40; 30 40];
+
+exp = [20; 20; 20];
+pos = linePosition(points, lines, 'diag');
+
+assertElementsAlmostEqual(exp, pos);
