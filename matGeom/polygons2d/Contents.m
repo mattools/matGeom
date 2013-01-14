@@ -118,10 +118,11 @@
 %   convexification           - Compute the convexification of a polygon
 %
 % Input, Output and conversions
-%   readPolygon               - Read a polygon stored in a file
 %   polygonToRow              - Convert polygon coordinates to a row vector
 %   rowToPolygon              - Create a polygon from a row vector
 %   rectAsPolygon             - Convert a (centered) rectangle into a series of points
+%   readPolygonSet            - Read a set of simmle polygons stored in a file
+%   writePolygonSet           - Write a set of simmle polygons into a file
 %
 % Drawing functions
 %   drawPolyline              - Draw a polyline specified by a list of points
@@ -157,3 +158,4 @@ help('Contents');
 
 
 %% Others...
+

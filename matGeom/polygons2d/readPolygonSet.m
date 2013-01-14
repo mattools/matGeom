@@ -1,12 +1,18 @@
-function polys = readPolygon(filename)
-%READPOLYGON Read a polygon stored in a file
+function polys = readPolygonSet(filename)
+%READPOLYGONSET Read a set of simmle polygons stored in a file
 %   
-%   POLY = readPolygon(FILENAME);
+%   POLY = readPolygonSet(FILENAME);
 %   Returns the polygon stored in the file FILENAME.
 %   Polygons are assumed to be stored in text files, without headers, with
 %   x and y coordinates packed in two separate lines:
-%     X1 X2 X3...
-%     Y1 Y2 Y3...
+%     X11 X12 X13 ... X1N
+%     Y11 Y12 Y13 ... Y1N
+%     X21 X22 X23 ... X2N
+%     Y21 Y22 Y23 ... Y2N
+%
+%   Each polygon may have a different number of vertices. The result is a
+%   cell array of polygon, each cell containing a N-by-2 array representing
+%   the vertex coordinates.
 %
 %   See also:
 %   polygons2d
@@ -17,7 +23,7 @@ function polys = readPolygon(filename)
 %   created the 11/04/2004.
 %
 
-% the set ogf polygons (no pre-allocation, as we do not know how many
+% the set of polygons (no pre-allocation, as we do not know how many
 % polygons are stored)
 polys = {};
 
@@ -42,3 +48,5 @@ while true
     p = p+1;
     polys{p} = [str2num(line1)' str2num(line2)']; %#ok<AGROW,ST2NM>
 end    
+
+fclose(fid);
