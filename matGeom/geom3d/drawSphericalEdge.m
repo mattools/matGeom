@@ -2,7 +2,7 @@ function varargout = drawSphericalEdge(sphere, edge, varargin)
 %DRAWSPHERICALEDGE Draw an edge on the surface of a sphere
 %
 %   drawSphericalEdge(SPHERE, EDGE)
-%   EDGE is given as a couple of 3D corodinates corresponding to edge
+%   EDGE is given as a couple of 3D coordinates corresponding to edge
 %   extremities. The shortest spherical edge joining the two extremities is
 %   drawn on the current axes.
 %

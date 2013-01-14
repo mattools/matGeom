@@ -65,7 +65,7 @@ if ~isempty(varargin) && ischar(varargin{1}) && strcmpi(varargin{1}, 'diag')
     vx = line(:, 3);
     vy = line(:, 4);
     
-    % difference of coordinates between point and line origin
+    % difference of coordinates between point and line origins
     dx = point(:, 1) - line(:, 1);
     dy = point(:, 2) - line(:, 2);
     
@@ -76,7 +76,7 @@ else
     vx = line(:, 3)';
     vy = line(:, 4)';
     
-    % difference of coordinates between point and line origin
+    % difference of coordinates between point and line origins
     dx = bsxfun(@minus, point(:, 1), line(:, 1)');
     dy = bsxfun(@minus, point(:, 2), line(:, 2)');
 

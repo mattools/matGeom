@@ -2,9 +2,9 @@ function normals = faceNormal(nodes, faces)
 %FACENORMAL Compute normal vector of faces in a 3D mesh
 %
 %   NORMALS = faceNormal(VERTICES, FACES)
-%   VERTICES is a set of 3D points  (as a Nx3 array), and FACES is either a
-%   [Nx3] indices array or a cell array of indices. The function computes
-%   the normal of each face.
+%   VERTICES is a set of 3D points (as a N-by-3 array), and FACES is either
+%   a N-by-3 index array or a cell array of indices. The function computes
+%   the normal vector of each face.
 %   The orientation of the normal is undefined.
 %
 %
@@ -31,7 +31,7 @@ function normals = faceNormal(nodes, faces)
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
 if isnumeric(faces)
-    % compute vector of first edge
+    % compute vector of first edges
 	v1 = nodes(faces(:,2),1:3) - nodes(faces(:,1),1:3);
     v2 = nodes(faces(:,3),1:3) - nodes(faces(:,1),1:3);
     
