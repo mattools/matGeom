@@ -50,11 +50,11 @@ plane   = createPlane(poly(1:3, :));
 inter   = intersectLinePlane(ray, plane);
 
 % project all points on reference plane
-pts2d   = projPointOnPlane(poly, plane);
-pInt2d  = projPointOnPlane(inter, plane);
+pts2d   = planePosition(projPointOnPlane(poly, plane), plane);
+pInt2d  = planePosition(projPointOnPlane(inter, plane), plane);
 
 % need to check polygon orientation
-inPoly  = xor(isPointInPolygon(pInt2d, pts2d), polygonArea(pInt2d) < 0);
+inPoly  = xor(isPointInPolygon(pInt2d, pts2d), polygonArea(pts2d) < 0);
 onRay   = linePosition3d(inter, ray) >= 0;
 inside  = inPoly & onRay;
 
