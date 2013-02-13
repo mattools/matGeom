@@ -7,7 +7,7 @@ function dist = distancePolylines(poly1, poly2)
 %
 %
 %   See also
-%   polygons2d
+%   polygons2d, distancePolygons, distancePointPolyline
 %
 % ------
 % Author: David Legland

@@ -1,12 +1,21 @@
 function dist = distancePolygons(poly1, poly2)
 %DISTANCEPOLYGONS Compute the shortest distance between 2 polygons
+%
 %   DIST = distancePolygons(POLY1, POLY2)
+%   Computes the shortest distance between the boundaries of the two
+%   polygons. Each polygon is given by a N-by-2 array containing the vertex
+%   coordinates.
 %
 %   Example
-%   distancePolygons
+%     % Computes the distance between a square and a triangle
+%     poly1 = [10 10;20 10;20 20;10 20];
+%     poly2 = [30 20;50 20;40 45];
+%     distancePolygons(poly1, poly2)
+%     ans =
+%         10
 %
 %   See also
-%
+%   polygons2d, distancePolylines, distancePointPolygon
 %
 % ------
 % Author: David Legland

@@ -1,6 +1,10 @@
 function varargout = distancePointPolygon(point, poly)
 %DISTANCEPOINTPOLYGON  Compute shortest distance between a point and a polygon
-%   output = distancePointPolygon(POINT, POLYGON)
+%
+%   DIST = distancePointPolygon(POINT, POLYGON)
+%   Computes the shortest distance between the point POINT and the polygon
+%   boundary POLYGON. POINT is a 1-by- row vector, and POLYGON is a N-by-2
+%   array containing vertex coordinates.
 %
 %   Example
 %   distancePointPolygon
@@ -16,7 +20,7 @@ function varargout = distancePointPolygon(point, poly)
 % Copyright 2009 INRA - Cepia Software Platform.
 
 % eventually copy first point at the end to ensure closed polygon
-if sum(poly(end, :)==poly(1,:))~=2
+if sum(poly(end, :) == poly(1,:)) ~= 2
     poly = [poly; poly(1,:)];
 end
 
@@ -24,6 +28,6 @@ end
 minDist = distancePointPolyline(point, poly);
 
 % process output arguments
-if nargout<=1
+if nargout <= 1
     varargout{1} = minDist;
 end
