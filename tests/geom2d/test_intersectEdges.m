@@ -103,3 +103,15 @@ assertEqual([3 2], size(inters));
 
 expected = [20 20;20 30;NaN NaN];
 assertElementsAlmostEqual(expected, inters);
+
+function testSeveralEdgesWithParallelAndColinear
+% Check intersection of two edge groups
+
+edges1 = [10 20 40 20];
+edges2 = [10 20 30 20; 30 10 30 30; 10 50 30 50];
+
+inters = intersectEdges(edges1, edges2);
+assertEqual([3 2], size(inters));
+
+expected = [Inf Inf;30 20;NaN NaN];
+assertElementsAlmostEqual(expected, inters);
