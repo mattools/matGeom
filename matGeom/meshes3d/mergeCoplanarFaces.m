@@ -1,10 +1,8 @@
-function varargout = meshReduce(nodes, varargin)
-%MESHREDUCE Merge coplanar faces of a polyhedral mesh
+function varargout = mergeCoplanarFaces(nodes, varargin)
+%MERGECOPLANARFACES Merge coplanar faces of a polyhedral mesh
 %
-%   Note: deprecated, should use "mergeCoplanarFaces" instead
-%
-%   [NODES FACES] = meshReduce(NODES, FACES)
-%   [NODES EDGES FACES] = meshReduce(NODES, EDGES, FACES)
+%   [NODES FACES] = mergeCoplanarFaces(NODES, FACES)
+%   [NODES EDGES FACES] = mergeCoplanarFaces(NODES, EDGES, FACES)
 %   NODES is a set of 3D points (as a Nn-by-3 array), 
 %   and FACES is one of:
 %   - a Nf-by-X array containing vertex indices of each face, with each
@@ -14,18 +12,18 @@ function varargout = meshReduce(nodes, varargin)
 %   in a "lighter" mesh. This can be useful for visualizing binary 3D
 %   images for example.
 %
-%   FACES = meshReduce(..., PRECISION)
+%   FACES = mergeCoplanarFaces(..., PRECISION)
 %   Adjust the threshold for deciding if two faces are coplanar or
 %   parallel. Default value is 1e-14.
 %
 %   Example
-%   [n e f] = createCube;
-%   figure; drawMesh(n, f); view(3); axis equal;
-%   f2 = meshReduce(n, f);
-%   figure; drawMesh(n, f2); view(3); axis equal;
+%   [v e f] = createCube;
+%   figure; drawMesh(v, f); view(3); axis equal; view vis3d;
+%   f2 = mergeCoplanarFaces(v, f);
+%   figure; drawMesh(v, f2); view(3); axis equal; view vis3d;
 %
 %   See also
-%   meshes3d, mergeCoplanarFaces
+%   meshes3d, drawMesh, minConvexHull, triangulateFaces
 %
 %
 % ------
@@ -41,11 +39,8 @@ function varargout = meshReduce(nodes, varargin)
 % 14/08/2007 rename minConvexHull->meshReduce, and extend to non convex
 %   shapes 
 % 2011-01-14 code clean up
-% 2013-02-22 deprecate and rename to mergeCoplanarFaces
+% 2013-02-22 rename from meshReduce to mergeCoplanarFaces
 
-
-warning('MatGeom:meshes3d:deprecated', ...
-    'Function ''meshReduce'' is deprecated, should use ''mergeCoplanarFaces'' instead');
 
 %% Process input arguments
 
@@ -53,14 +48,14 @@ warning('MatGeom:meshes3d:deprecated', ...
 acc = 1e-14;
 if ~isempty(varargin)
     var = varargin{end};
-    if length(var)==1
+    if length(var) == 1
         acc = var;
         varargin(end) = [];
     end
 end
 
 % extract faces and edges
-if length(varargin)==1
+if length(varargin) == 1
     faces = varargin{1};
 else
     faces = varargin{2};
@@ -74,7 +69,7 @@ Nn = size(nodes, 1);
 Nf = size(faces, 1);
 
 % compute number of vertices of each face
-Fn = ones(Nf, 1)*size(faces, 2);
+Fn = ones(Nf, 1) * size(faces, 2);
 
 % compute normal of each faces
 normals = faceNormal(nodes, faces);
@@ -92,7 +87,7 @@ flag = ones(Nf, 1);
 %% Main iteration
 
 % iterate on each  face
-for f=1:Nf
+for f = 1:Nf
     
     % check if face was already performed
     if ~flag(f)
@@ -100,20 +95,21 @@ for f=1:Nf
     end
 
     % indices of faces with same normal
-    ind = find(abs(vectorNorm3d(cross(repmat(normals(f, :), [Nf 1]), normals)))<acc);
+%     ind = find(abs(vectorNorm3d(cross(repmat(normals(f, :), [Nf 1]), normals)))<acc);
+    ind = find(vectorNorm3d(vectorCross3d(normals(f, :), normals)) < acc);
     %ind = ind(ind~=i);
     
     % keep only coplanar faces (test coplanarity of points in both face)
     ind2 = false(size(ind));
-    for j=1:length(ind)
+    for j = 1:length(ind)
         ind2(j) = isCoplanar(nodes([faces(f,:) faces(ind(j),:)], :), acc);
     end
     ind2 = ind(ind2);
     
     % compute edges of all faces in the plane
     planeEdges  = zeros(sum(Fn(ind2)), 2);
-    pos  = 1;
-    for i=1:length(ind2)
+    pos = 1;
+    for i = 1:length(ind2)
         face = faces(ind2(i), :);
         faceEdges = sort([face' face([2:end 1])'], 2);
         planeEdges(pos:sum(Fn(ind2(1:i))), :) = faceEdges;
@@ -129,10 +125,10 @@ for f=1:Nf
     % compute degree (number of adjacent faces) of each edge.
     Npe = size(planeEdges, 1);
     edgesDegree = zeros(Npe, 1);
-    for i=1:length(ind2)
+    for i = 1:length(ind2)
         face = faces(ind2(i), :);
         faceEdges = sort([face' face([2:end 1])'], 2);
-        for j=1:size(faceEdges, 1)
+        for j = 1:size(faceEdges, 1)
             indEdge = find(sum(ismember(planeEdges, faceEdges(j,:)),2)==2);
             edgesDegree(indEdge) = edgesDegree(indEdge)+1;
         end
@@ -144,20 +140,20 @@ for f=1:Nf
     
     % find connected component of each edge
     planeEdgesComp = zeros(size(planeEdges, 1), 1);
-    for e=1:size(planeEdges, 1)
+    for e = 1:size(planeEdges, 1)
         planeEdgesComp(e) = component(planeEdges2(e, 1));
     end
     
     % iterate on connected faces
-    for c=1:max(component)
+    for c = 1:max(component)
         
         % convert to chains of nodes
         loops = graph2Contours(nodes, planeEdges(planeEdgesComp==c, :));
     
         % add a simple Polygon for each loop
         facePolygon = loops{1};
-        for l=2:length(loops)
-            facePolygon = [facePolygon, NaN, loops{l}];
+        for l = 2:length(loops)
+            facePolygon = [facePolygon, NaN, loops{l}]; %#ok<AGROW>
         end
         faces2{length(faces2)+1, 1}  = facePolygon;
     
@@ -177,19 +173,19 @@ indNodes = unique(edges2(:));
 
 % for each node, compute index of corresponding new node (or 0 if dropped)
 refNodes = zeros(Nn, 1);
-for i=1:length(indNodes)
+for i = 1:length(indNodes)
     refNodes(indNodes(i)) = i;
 end
 
 % changes indices of nodes in edges2 array
-for i=1:length(edges2(:))
+for i = 1:length(edges2(:))
     edges2(i) = refNodes(edges2(i));
 end
 
 % changes indices of nodes in faces2 array
-for f=1:length(faces2)
+for f = 1:length(faces2)
     face = faces2{f};
-    for i=1:length(face)
+    for i = 1:length(face)
         if ~isnan(face(i))
             face(i) = refNodes(face(i));
         end
@@ -269,7 +265,7 @@ end
 
 % change to have fewer labels
 labels2 = unique(labels);
-for i=1:length(labels2)
+for i = 1:length(labels2)
     labels(labels==labels2(i)) = i;
 end
 
@@ -297,12 +293,12 @@ function nodes2 = getNeighbourNodes(node, edges)
 %   13/07/2004 faster algorithm
 %   03/10/2007 can specify several input nodes
 
-[i, j] = find(ismember(edges, node));
+[i, j] = find(ismember(edges, node)); %#ok<NASGU>
 nodes2 = edges(i,1:2);
 nodes2 = unique(nodes2(:));
 nodes2 = sort(nodes2(~ismember(nodes2, node)));
 
-function curves = graph2Contours(nodes, edges)
+function curves = graph2Contours(nodes, edges) %#ok<INUSL>
 %GRAPH2CONTOURS convert a graph to a set of contour curves
 % 
 %   CONTOURS = GRAPH2CONTOURS(NODES, EDGES)
@@ -340,7 +336,7 @@ while size(edges,1)>0
     
 	while true
         % add current point to the curve
-		curve = [curve n];        
+		curve = [curve n];         %#ok<AGROW>
 		
         % remove current edge from the list
         edges = edges((1:size(edges,1))~=e,:);
@@ -369,5 +365,5 @@ while size(edges,1)>0
     
     % add the current curve to the list, and start a new curve
     c = c+1;
-    curves{c} = curve;
+    curves{c} = curve; %#ok<AGROW>
 end

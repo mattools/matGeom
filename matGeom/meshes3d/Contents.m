@@ -58,8 +58,8 @@
 %
 % Basic processing
 %   triangulateFaces         - Convert face array to an array of triangular faces 
+%   mergeCoplanarFaces       - Merge coplanar faces of a polyhedral mesh
 %   checkMeshAdjacentFaces   - Check if adjacent faces of a mesh have similar orientation
-%   meshReduce               - Merge coplanar faces of a polyhedral mesh
 %
 % Creation and conversion
 %   surfToMesh               - Convert surface grids into face-vertex mesh
@@ -106,6 +106,6 @@
 %   drawPolyhedra            - draw polyhedra defined by vertices and faces
 %   drawPolyhedron           - Draw polyhedron defined by vertices and faces
 %   gridmeshToQuadmesh       - Create a quad mesh from a grid mesh
+%   meshReduce               - Merge coplanar faces of a polyhedral mesh
 
 % Others
-

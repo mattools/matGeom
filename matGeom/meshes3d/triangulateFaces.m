@@ -30,7 +30,7 @@ function [tri inds] = triangulateFaces(faces)
 %     patch('vertices', n, 'faces', tri, 'facecolor', 'r');
 %
 %   See also
-%   meshes3d, drawMesh
+%   meshes3d, drawMesh, mergeCoplanarFaces
 %
 % ------
 % Author: David Legland
@@ -39,7 +39,8 @@ function [tri inds] = triangulateFaces(faces)
 % Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 
 %% Tri mesh case: return original set of faces
-if isnumeric(faces) && size(faces, 2)==3
+
+if isnumeric(faces) && size(faces, 2) == 3
     tri = faces;
     if nargout > 1
         inds = (1:size(faces, 1))';
@@ -47,7 +48,9 @@ if isnumeric(faces) && size(faces, 2)==3
     return;
 end
 
+
 %% Square faces: split each square into 2 triangles
+
 if isnumeric(faces) && size(faces, 2) == 4
     nf = size(faces, 1);
     tri = zeros(nf * 2, 3);
@@ -61,7 +64,9 @@ if isnumeric(faces) && size(faces, 2) == 4
     return;
 end
 
+
 %% Pentagonal faces (for dodecahedron...): split into 3 triangles
+
 if isnumeric(faces) && size(faces, 2) == 5
     nf = size(faces, 1);
     tri = zeros(nf * 3, 3);
