@@ -8,7 +8,7 @@
 %   The library is organized into several modules:
 %   geom2d              - General function in euclidean plane
 %   polygons2d          - Functions operating on point lists 
-%   graph               - Manipulation of geometric graphs
+%   graphs              - Manipulation of geometric graphs
 %   polynomialCurves2d  - Representation of smooth polynomial curves
 %   geom3d              - General function in 3D euclidean space
 %   meshes3d            - Manipulation of 3D surfacic meshes
@@ -23,7 +23,7 @@
 %
 %   Online documentation:
 %   http://matgeom.sourceforge.net/doc/api/matgeom/index.html
-%
+%   
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

@@ -1,4 +1,5 @@
-% MATGEOM-POLYGONS
+% POLYGONS Manipulation of planar polygons
+% Version 1.6 21-Mar-2011 .
 %
 %   The 'polygons' module contains functions operating on shapes composed
 %   of a vertex list, like polygons or polylines.
