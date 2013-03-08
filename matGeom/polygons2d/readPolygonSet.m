@@ -1,5 +1,5 @@
 function polys = readPolygonSet(filename)
-%READPOLYGONSET Read a set of simmle polygons stored in a file
+%READPOLYGONSET Read a set of simple polygons stored in a file
 %   
 %   POLY = readPolygonSet(FILENAME);
 %   Returns the polygon stored in the file FILENAME.
@@ -45,8 +45,9 @@ while true
     end
    
     % create a new polygon by concatenating vertex coordinates
-    p = p+1;
+    p = p + 1;
     polys{p} = [str2num(line1)' str2num(line2)']; %#ok<AGROW,ST2NM>
 end    
 
+% close file
 fclose(fid);
