@@ -77,7 +77,7 @@ else
 end    
 
 if isempty(varargin)
-    varargin = {'ks', 'MarkerSize', 4};
+    varargin = {'ks', 'MarkerSize', 6};
 end
 
 
@@ -87,7 +87,7 @@ end
 h = plot(ax, px, py, varargin{:});
 
 % draw the first vertex with a different style
-plot(ax, px(1), py(1), 'ks', 'MarkerFaceColor', 'k', 'MarkerSize', 4);
+plot(ax, px(1), py(1), 'ks', 'MarkerFaceColor', 'k', 'MarkerSize', 8);
 
 % format output arg
 if nargout > 0

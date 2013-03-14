@@ -76,6 +76,7 @@
 %   projPointOnPolygon        - Compute position of a point projected on a polygon
 %   splitPolygons             - Convert a NaN separated polygon list to a cell array of polygons
 %   polygonLoops              - Divide a possibly self-intersecting polygon into a set of simple loops
+%   simplifyPolygon           - Douglas-Peucker simplification of a polygon
 %
 % Polygon clipping and intersections
 %   intersectLinePolygon      - Intersection points between a line and a polygon
@@ -95,6 +96,7 @@
 %   polygonBounds             - Compute the bounding box of a polygon
 %   distancePointPolygon      - Compute shortest distance between a point and a polygon
 %   distancePolygons          - Compute the shortest distance between 2 polygons
+%   polygonSignature          - Polar signature of a polygon (polar distance to origin)
 %
 % More complex operations on polygons
 %   resamplePolygon           - Distribute N points equally spaced on a polygon
@@ -122,8 +124,8 @@
 %   polygonToRow              - Convert polygon coordinates to a row vector
 %   rowToPolygon              - Create a polygon from a row vector
 %   rectAsPolygon             - Convert a (centered) rectangle into a series of points
-%   readPolygonSet            - Read a set of simmle polygons stored in a file
-%   writePolygonSet           - Write a set of simmle polygons into a file
+%   readPolygonSet            - Read a set of simple polygons stored in a file
+%   writePolygonSet           - Write a set of simple polygons into a file
 %
 % Drawing functions
 %   drawPolyline              - Draw a polyline specified by a list of points

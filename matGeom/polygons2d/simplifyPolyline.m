@@ -13,7 +13,7 @@ function [poly2 keepInds] = simplifyPolyline(poly, tol)
 %     drawPoint(poly2, 'mo');
 %
 %   See also
-%   polygons2d
+%   polygons2d, simplifyPolygon
 %
 %   References
 %   http://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm

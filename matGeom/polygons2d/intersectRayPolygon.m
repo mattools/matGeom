@@ -1,4 +1,4 @@
-function intersects = intersectRayPolygon(ray, poly, varargin)
+function [intersects edgeIndices] = intersectRayPolygon(ray, poly, varargin)
 %INTERSECTRAYPOLYGON Intersection points between a ray and a polygon
 %
 %   P = intersectRayPolygon(RAY, POLY)
@@ -9,6 +9,10 @@ function intersects = intersectRayPolygon(ray, poly, varargin)
 %   
 %   P = intersectRayPolygon(RAY, POLY, TOL)
 %   Specifies the tolerance for geometric tests. Default is 1e-14.
+%
+%   [P IND] = intersectRayPolygon(...)
+%   Also returns index of polygon intersected edge(s). See
+%   intersectLinePolygon for details.
 %
 %   See also
 %   rays2d, polygons2d, intersectLinePolygon
@@ -21,13 +25,15 @@ function intersects = intersectRayPolygon(ray, poly, varargin)
 
 %   HISTORY
 %   2010/01/26 creation from intersectLinePolygon
-
+%   2013-02-11 also returns edgeIndices
 
 % compute intersections with supporting line
-intersects = intersectLinePolygon(ray, poly, varargin{:});
+[intersects edgeIndices] = intersectLinePolygon(ray, poly, varargin{:});
 
 % compute position of intersects on the supporting line
 pos = linePosition(intersects, ray);
 
-% keep only intersects with position>0
-intersects(pos<0, :) = [];
+% keep only intersects with non-negative position on line
+indPos = pos >= 0;
+intersects  = intersects(indPos, :);
+edgeIndices = edgeIndices(indPos);
