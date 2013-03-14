@@ -42,4 +42,4 @@ v12 = bsxfun(@minus, pt2, pt1);
 v13 = bsxfun(@minus, pt3, pt1);
 
 % compute area from cross product
-area = vectorNorm(cross(v12, v13, 2)) / 2;
+area = vectorNorm3d(cross(v12, v13, 2)) / 2;

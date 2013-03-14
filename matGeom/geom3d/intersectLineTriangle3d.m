@@ -75,7 +75,7 @@ end
 n   = cross(u, v);
 
 % test for degenerate case of flat triangle
-if vectorNorm(n) < tol
+if vectorNorm3d(n) < tol
     return;
 end
 
