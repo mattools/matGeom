@@ -10,15 +10,24 @@ function loops = expandPolygon(poly, dist, varargin)
 %   
 %   This is a kind of dilation, but behaviour on corners is different.
 %   This function keeps angles of polygons, but there is no direct relation
-%   between length of 2 polygons.
+%   between the lengths of each polygon.
 %
 %   It is also possible to specify negative distance, and get all points
 %   inside the polygon. If the polygon is convex, the result equals
 %   morphological erosion of polygon by a ball with radius equal to the
 %   given distance.
 %
+%   Example:
+%   % Computes the negative offset of a non-convex polygon
+%     poly = [10 10;30 10;30 30;20 20;10 30];
+%     poly2 = expandPolygon(poly, -3);
+%     figure;
+%     drawPolygon(poly, 'linewidth', 2);
+%     hold on; drawPolygon(poly2, 'm')
+%     axis equal; axis([0 40 0 40]);
+%
 %   See also:
-%   polygons2d
+%   polygons2d, polygonLoops, polygonSelfIntersections 
 %
 %   ---------
 %   author : David Legland 
@@ -26,9 +35,9 @@ function loops = expandPolygon(poly, dist, varargin)
 %   created the 14/05/2005.
 %
 
-%   HISTORY :
-%   31/07/2005 : change algo for negative distance : use clipping of
-%   polygon by half-planes
+%   HISTORY:
+%   31-07-2005 change algo for negative distance: use clipping of polygon
+%   by half-planes 
 
 % default options
 cleanupLoops = false;
