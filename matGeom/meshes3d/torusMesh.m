@@ -8,6 +8,9 @@ function varargout = torusMesh(torus, varargin)
 %   is the radius of the torus section, and (THETA PHI) is the angle of the
 %   torus normal vector (both in degrees).
 %
+%   [v f] = torusMesh()
+%   Create a mesh representing a defalt torus.
+%
 %   Example
 %     [v f] = torusMesh([50 50 50 30 10 30 45]);
 %     figure; drawMesh(v, f, 'linestyle', 'none');
@@ -16,13 +19,21 @@ function varargout = torusMesh(torus, varargin)
 %
 %
 %   See also
-%     drawTorus, revolutionSurface, cylinderMesh, drawMesh
-%
+%     meshes3d, drawTorus, revolutionSurface, cylinderMesh, drawMesh
+
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2012-10-25,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
+
+%   HISTIRY
+%   2013-04-30 add support for empty argument
+
+if nargin == 0
+    torus = [0 0 0 30 10 0 0 0];
+end
 
 center = torus(1:3);
 r1 = torus(4);
@@ -41,7 +52,7 @@ trans = localToGlobal3d([center normal]);
 [x y z] = transformPoint3d(x, y, z, trans);
 
 % convert to FV mesh
-[vertices faces] = surfToMesh(x, y, z);
+[vertices faces] = surfToMesh(x, y, z, 'xPeriodic', true, 'yPeriodic', true);
 
 % format output
 varargout = formatMeshOutput(nargout, vertices, faces);

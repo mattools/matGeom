@@ -67,10 +67,10 @@ n1 = size(x, 1);
 n2 = size(x, 2);
 
 if xPeriodic
-    n2 = n2 - 1;
+    n1 = n1 - 1;
 end
 if yPeriodic
-    n1 = n1 - 1;
+    n2 = n2 - 1;
 end
 
 % new size of vertex grid

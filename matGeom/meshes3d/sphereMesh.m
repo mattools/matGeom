@@ -4,6 +4,9 @@ function varargout = sphereMesh(sphere, varargin)
 %   [V F] = sphereMesh(S)
 %   Creates a 3D mesh representing the sphere S given by [xc yc zy r].
 %
+%   [V F] = sphereMesh();
+%   Assumes sphere is the unit sphere centered at the origin.
+%
 %   Example
 %     s = [10 20 30 40];
 %     [v f] = sphereMesh(s);
@@ -11,13 +14,17 @@ function varargout = sphereMesh(sphere, varargin)
 %     view(3);axis equal; light; lighting gouraud;
 %
 %   See also
-%     cylinder, surfToMesh, drawSphere
+%     meshes3d, cylinder, surfToMesh, drawSphere
 %
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2012-10-25,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
+
+if nargin == 0
+    sphere = [0 0 0 1];
+end
 
 % extract sphere data
 xc = sphere(:,1);
@@ -42,7 +49,7 @@ y = yc + sin(phi') * sintheta * r;
 z = zc + ones(length(phi),1) * cos(theta) * r;
 
 % convert to FV mesh
-[vertices faces] = surfToMesh(x, y, z);
+[vertices faces] = surfToMesh(x, y, z, 'xperiodic', true);
 
 % format output
 varargout = formatMeshOutput(nargout, vertices, faces);

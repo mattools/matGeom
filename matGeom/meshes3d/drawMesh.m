@@ -74,7 +74,9 @@ switch length(varargin)
         % use argument as color for faces
         varargin = {'facecolor', varargin{1}};
     otherwise
-        % otherwise keep varargin unchanged
+        % otherwise add default settings before new options
+        varargin = [{'facecolor', [1 0 0 ]} varargin];
+
 end
 
 % overwrites on current figure
