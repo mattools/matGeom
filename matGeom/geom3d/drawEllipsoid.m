@@ -175,12 +175,22 @@ if nargout == 0
 elseif nargout == 1
     % one output: draw the ellipsoid and return handle 
     varargout{1} = surf(x, y, z, options{:});
+    if drawEllipses
+        plot3(xc1, yc1, zc1, ellipseOptions{:});
+        plot3(xc2, yc2, zc2, ellipseOptions{:});
+        plot3(xc3, yc3, zc3, ellipseOptions{:});
+    end
     
 elseif nargout == 3
     % 3 outputs: return computed coordinates
     varargout{1} = x; 
     varargout{2} = y; 
     varargout{3} = z; 
+    if drawEllipses
+        plot3(xc1, yc1, zc1, ellipseOptions{:});
+        plot3(xc2, yc2, zc2, ellipseOptions{:});
+        plot3(xc3, yc3, zc3, ellipseOptions{:});
+    end
     
 elseif nargout == 4 && drawEllipses
     % Also returns handles to ellipses
