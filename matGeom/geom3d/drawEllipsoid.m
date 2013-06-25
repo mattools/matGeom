@@ -52,7 +52,7 @@ ellipseWidth = 1;
 %% Extract input arguments
 
 % Parse the input (try to extract center coordinates and radius)
-if nargin == 1
+if nargin == 0
     % no input: assumes ellipsoid with default shape
     elli = [0 0 0 5 4 3 0 0 0];
 end
