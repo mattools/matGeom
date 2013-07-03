@@ -84,7 +84,7 @@ elseif length(varargin) == 2
 
     % find a vector not colinear to the normal
     v0 = repmat([1 0 0], [size(p0, 1) 1]);
-    inds = vectorNorm(cross(n, v0, 2))<1e-14;
+    inds = vectorNorm3d(cross(n, v0, 2))<1e-14;
     v0(inds, :) = repmat([0 1 0], [sum(inds) 1]);
 %     if abs(cross(n, v0, 2))<1e-14
 %         v0 = repmat([0 1 0], [size(p0, 1) 1]);
