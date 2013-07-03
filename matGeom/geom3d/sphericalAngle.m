@@ -18,6 +18,23 @@ function alpha = sphericalAngle(p1, p2, p3)
 %   (with results given betwen 0 and PI), it suffices to take the minimum
 %   of angle and 2*pi-angle.
 %   
+%   Examples
+%     % Use inputs as cartesian coordinates   
+%     p1 = [0 1 0];
+%     p2 = [1 0 0];
+%     p3 = [0 0 1];
+%     alpha = sphericalAngle(p1, p2, p3)
+%     alpha =
+%         1.5708
+%
+%     % Use inputs as spherical coordinates   
+%     sph1 = [.1 0];
+%     sph2 = [0 0];
+%     sph3 = [0 .1];
+%     alphas = sphericalAngle(sph1, sph2, sph3)
+%     alphas =
+%         1.5708
+% 
 %   See also:
 %   angles3d, spheres
 %
@@ -28,15 +45,17 @@ function alpha = sphericalAngle(p1, p2, p3)
 %
 
 %   HISTORY
-%   23/05/2006 fix bug for points with angle from center > pi/2
+%   23-05-2006 fix bug for points with angle from center > pi/2
+%   05-06-2013 fix bug for points given as spherical coordinates, better
+%       support for multiple inputs
 
-% test if points are given as matlab spherical coordinate
-if size(p1, 2) ==2
-    [x y z] = sph2cart(p1(:,1), p1(:,2));
+% test if points are given as matlab spherical coordinates
+if size(p1, 2) == 2
+    [x y z] = sph2cart(p1(:,1), p1(:,2), ones(size(p1,1), 1));
     p1 = [x y z];
-    [x y z] = sph2cart(p2(:,1), p2(:,2));
+    [x y z] = sph2cart(p2(:,1), p2(:,2), ones(size(p2,1), 1));
     p2 = [x y z];
-    [x y z] = sph2cart(p3(:,1), p3(:,2));
+    [x y z] = sph2cart(p3(:,1), p3(:,2), ones(size(p3,1), 1));
     p3 = [x y z];
 end
 
@@ -49,9 +68,10 @@ p3  = normalizeVector3d(p3);
 plane = createPlane(p2, p2);
 
 % project the two other points on the plane
-pi1 = planePosition(projPointOnPlane(p1, plane), plane);
-pi3 = planePosition(projPointOnPlane(p3, plane), plane);
+pp1 = planePosition(projPointOnPlane(p1, plane), plane);
+pp3 = planePosition(projPointOnPlane(p3, plane), plane);
 
 % compute angle on the tangent plane
-alpha = angle3Points(pi1, [0 0], pi3);
+pp2 = zeros(max(size(pp1, 1), size(pp3,1)), 2);
+alpha = angle3Points(pp1, pp2, pp3);
 
