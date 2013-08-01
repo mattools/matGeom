@@ -56,7 +56,7 @@ function varargout = drawSphere(varargin)
 %
 %   See also
 %   spheres, circles3d, sphere, drawEllipsoid
-%
+
 %   ---------
 %   author: David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -72,9 +72,13 @@ function varargout = drawSphere(varargin)
 % process input options: when a string is found, assumes this is the
 % beginning of options
 options = {'FaceColor', 'g', 'linestyle', 'none'};
-for i=1:length(varargin)
+for i = 1:length(varargin)
     if ischar(varargin{i})
-        options = [options(1:end) varargin(i:end)];
+        if length(varargin) == 1
+            options = {'FaceColor', varargin{1}, 'linestyle', 'none'};
+        else
+            options = [options(1:end) varargin(i:end)];
+        end
         varargin = varargin(1:i-1);
         break;
     end
