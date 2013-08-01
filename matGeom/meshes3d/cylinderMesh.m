@@ -28,8 +28,8 @@ function varargout = cylinderMesh(cyl, varargin)
 %       set(gcf, 'renderer', 'opengl')
 %  
 %   See also
-%     drawCylinder
-%
+%     drawCylinder, torusMesh, sphereMesh
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -48,19 +48,21 @@ r  = cyl(:, 7);
 t = linspace(0, 2*pi, 20);
 lx = r * cos(t);
 ly = r * sin(t);
+
+% parametrisation on z
 lz = linspace(0, rho, 10);
 
 % generate surface grids
 x = repmat(lx, [length(lz) 1]);
 y = repmat(ly, [length(lz) 1]);
-z = repmat(lz, [1 length(t)]);
+z = repmat(lz', [1 length(t)]);
 
 % transform points 
 trans   = localToGlobal3d(p1, theta, phi, 0);
 [x y z] = transformPoint3d(x, y, z, trans);
 
 % convert to FV mesh
-[vertices faces] = surfToMesh(x, y, z);
+[vertices faces] = surfToMesh(x, y, z, 'xPeriodic', true);
 
 % format output
 varargout = formatMeshOutput(nargout, vertices, faces);

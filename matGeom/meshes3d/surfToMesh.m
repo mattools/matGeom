@@ -16,14 +16,14 @@ function varargout = surfToMesh(x, y, varargin)
 %
 %     % Transform surface of a cylinder as a mesh
 %     [x y z] = cylinder(5*ones(1, 10));
-%     [v f] = surfToMesh(x, y, z, 'yPeriodic', true);
+%     [v f] = surfToMesh(x, y, z, 'xPeriodic', true);
 %     figure;
 %     drawMesh(v, f);
 %     view(3); axis equal;
 %
 %   See also
-%     meshes3d, meshgrid, drawMesh
-%
+%     meshes3d, meshgrid, drawMesh, torusMesh, sphereMesh
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -62,15 +62,17 @@ end
 
 %% Compute vertex indices
 
-% size along each direction
+% size along each direction (arrays are (y,x)-indexed)
 n1 = size(x, 1);
 n2 = size(x, 2);
 
+% in case of periodicity, the last vertex of the grid is drop (it is
+% assumed to be the same as the first one)
 if xPeriodic
-    n1 = n1 - 1;
+    n2 = n2 - 1;
 end
 if yPeriodic
-    n2 = n2 - 1;
+    n1 = n1 - 1;
 end
 
 % new size of vertex grid
@@ -84,7 +86,7 @@ nv = n1 * n2;
 x = x(1:n1, 1:n2);
 y = y(1:n1, 1:n2);
 
-% extract vertices
+% create vertex array
 if ~exist('z', 'var')
     vertices = [x(:) y(:)];
 else
@@ -97,12 +99,11 @@ end
 
 % vertex indices in grid
 inds = reshape(1:nv, dim);
-
 if xPeriodic
-    inds = inds([1:end 1], :);
+    inds = inds(:, [1:end 1]);
 end
 if yPeriodic
-    inds = inds(:, [1:end 1]);
+    inds = inds([1:end 1], :);
 end
 
 % vertex indices for each face

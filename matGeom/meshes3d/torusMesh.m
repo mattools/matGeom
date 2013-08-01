@@ -19,8 +19,8 @@ function varargout = torusMesh(torus, varargin)
 %
 %
 %   See also
-%     meshes3d, drawTorus, revolutionSurface, cylinderMesh, drawMesh
-
+%     meshes3d, drawTorus, revolutionSurface, cylinderMesh, sphereMesh
+%     drawMesh
 
 % ------
 % Author: David Legland
