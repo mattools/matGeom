@@ -1,0 +1,201 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      --><title>demoNapoleon</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2013-08-19"><meta name="m-file" content="demoNapoleon"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#3">base triangle</a></li><li><a href="#4">Equliateral triangles</a></li><li><a href="#5">Compute centroid of each triangle</a></li></ul></div><pre class="codeinput"><span class="keyword">function</span> demoNapoleon(varargin)
+</pre><pre class="codeinput"><span class="comment">%DEMONAPOLEON  Small demo of a theorem on triangles</span>
+<span class="comment">%</span>
+<span class="comment">%   output = demoNapoleon(input)</span>
+<span class="comment">%</span>
+<span class="comment">%   Example</span>
+<span class="comment">%   demoNapoleon</span>
+<span class="comment">%</span>
+<span class="comment">%   See also</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+<span class="comment">% ------</span>
+<span class="comment">% Author: David Legland</span>
+<span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+<span class="comment">% Created: 2013-08-19,    using Matlab 7.9.0.529 (R2009b)</span>
+<span class="comment">% Copyright 2013 INRA - Cepia Software Platform.</span>
+</pre><h2>base triangle<a name="3"></a></h2><pre class="codeinput"><span class="comment">% choose 3 points on the plane</span>
+A = [10 8];
+B = [3 2];
+C = [12 3];
+
+<span class="comment">% create a polygon for the base triangle</span>
+ABC = [A ; B ; C];
+
+<span class="comment">% Draw the base triangle</span>
+figure;
+drawPolygon(ABC, <span class="string">'color'</span>, <span class="string">'k'</span>, <span class="string">'lineWidth'</span>, 2);
+axis <span class="string">equal</span>;
+axis([-5 20 -8 12]);
+hold <span class="string">on</span>;
+</pre><img vspace="5" hspace="5" src="demoNapoleon_01.png" alt=""> <h2>Equliateral triangles<a name="4"></a></h2><pre class="codeinput"><span class="comment">% create an equilateral triangle from each side, pointing outwards</span>
+tAB = createTriangle(B, A);
+tBC = createTriangle(C, B);
+tAC = createTriangle(A, C);
+
+<span class="comment">% draw each equilateral triangle</span>
+drawPolygon(tAB, <span class="string">'color'</span>, <span class="string">'b'</span>);
+drawPolygon(tBC, <span class="string">'color'</span>, <span class="string">'b'</span>);
+drawPolygon(tAC, <span class="string">'color'</span>, <span class="string">'b'</span>);
+</pre><img vspace="5" hspace="5" src="demoNapoleon_02.png" alt=""> <h2>Compute centroid of each triangle<a name="5"></a></h2><pre class="codeinput"><span class="comment">% compute centroids</span>
+c1 = polygonCentroid(tAB);
+c2 = polygonCentroid(tBC);
+c3 = polygonCentroid(tAC);
+
+<span class="comment">% draw the triangle formed by the centroids</span>
+triC = [c1; c2; c3];
+drawPolygon(triC, <span class="string">'lineWidth'</span>, 2, <span class="string">'color'</span>, [0 .8 0]);
+drawPoint(triC, <span class="string">'marker'</span>, <span class="string">'o'</span>, <span class="string">'markerSize'</span>, 8, <span class="string">'markerfacecolor'</span>, [0 .8 0]);
+</pre><pre class="codeinput"><span class="keyword">function</span> tri = createTriangle(p1, p2)
+
+d12 = distancePoints(p1, p2);
+c1 = [p1 d12];
+c2 = [p2 d12];
+inters = intersectCircles(c1, c2);
+
+indPos = isCounterClockwise(p1, p2, inters) &gt; 0;
+p3 = inters(indPos, :);
+
+tri = [p1; p2; p3];
+</pre><img vspace="5" hspace="5" src="demoNapoleon_03.png" alt=""> <p class="footer"><br>
+      Published with MATLAB&reg; 7.9<br></p></div><!--
+##### SOURCE BEGIN #####
+function demoNapoleon(varargin)
+%DEMONAPOLEON  Small demo of a theorem on triangles
+%
+%   output = demoNapoleon(input)
+%
+%   Example
+%   demoNapoleon
+%
+%   See also
+%
+%
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% Author: David Legland
+% e-mail: david.legland@grignon.inra.fr
+% Created: 2013-08-19,    using Matlab 7.9.0.529 (R2009b)
+% Copyright 2013 INRA - Cepia Software Platform.
+
+%% base triangle 
+
+% choose 3 points on the plane
+A = [10 8];
+B = [3 2];
+C = [12 3];
+
+% create a polygon for the base triangle
+ABC = [A ; B ; C];
+
+% Draw the base triangle
+figure;
+drawPolygon(ABC, 'color', 'k', 'lineWidth', 2);
+axis equal;
+axis([-5 20 -8 12]);
+hold on;
+
+
+%% Equliateral triangles
+
+% create an equilateral triangle from each side, pointing outwards
+tAB = createTriangle(B, A);
+tBC = createTriangle(C, B);
+tAC = createTriangle(A, C);
+
+% draw each equilateral triangle
+drawPolygon(tAB, 'color', 'b');
+drawPolygon(tBC, 'color', 'b');
+drawPolygon(tAC, 'color', 'b');
+
+
+%% Compute centroid of each triangle
+
+% compute centroids
+c1 = polygonCentroid(tAB);
+c2 = polygonCentroid(tBC);
+c3 = polygonCentroid(tAC);
+
+% draw the triangle formed by the centroids
+triC = [c1; c2; c3];
+drawPolygon(triC, 'lineWidth', 2, 'color', [0 .8 0]);
+drawPoint(triC, 'marker', 'o', 'markerSize', 8, 'markerfacecolor', [0 .8 0]);
+
+
+function tri = createTriangle(p1, p2)
+
+d12 = distancePoints(p1, p2);
+c1 = [p1 d12];
+c2 = [p2 d12];
+inters = intersectCircles(c1, c2);
+
+indPos = isCounterClockwise(p1, p2, inters) > 0;
+p3 = inters(indPos, :);
+
+tri = [p1; p2; p3];
+
+##### SOURCE END #####
+--></body></html>
