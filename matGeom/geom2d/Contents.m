@@ -165,6 +165,7 @@
 %   drawBezierCurve       - Draw a cubic bezier curve defined by 4 control points
 %
 % Various drawing functions
+%   drawVector            - Draw vector at a given position
 %   drawArrow             - Draw an arrow on the current axis
 %   drawLabels            - Draw labels at specified positions
 %   drawShape             - Draw various types of shapes (circles, polygons...)
