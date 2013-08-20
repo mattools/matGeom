@@ -23,7 +23,8 @@ function area = meshSurfaceArea(vertices, edges, faces)
 %         6
 %
 %   See also
-%   meshes3d, trimeshSurfaceArea, meshVolume
+%   meshes3d, trimeshSurfaceArea, meshVolume, meshFacePolygon,
+%   polygonArea3d
 %
 % ------
 % Author: David Legland
@@ -53,7 +54,7 @@ if isnumeric(faces)
     
 else
     % iterate on faces in a cell array
-    for i = 1:size(faces, 1)
+    for i = 1:length(faces)
         poly = vertices(faces{i}, :);
         area = area + polyArea3d(poly, normals(i,:));
     end

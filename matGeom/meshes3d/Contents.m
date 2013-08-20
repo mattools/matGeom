@@ -30,6 +30,7 @@
 %
 % General functions
 %   meshFace                 - Return the vertex indices of a face in a mesh
+%   meshFacePolygons         - Returns the set of polygons that constitutes a mesh
 %   computeMeshEdges         - Computes edges array from face array
 %   meshEdgeFaces            - Compute index of faces adjacent to each edge of a mesh
 %   faceCentroids            - Compute centroids of a mesh faces
@@ -60,6 +61,8 @@
 %   triangulateFaces         - Convert face array to an array of triangular faces 
 %   mergeCoplanarFaces       - Merge coplanar faces of a polyhedral mesh
 %   checkMeshAdjacentFaces   - Check if adjacent faces of a mesh have similar orientation
+%   meshAdjacencyMatrix      - Compute adjacency matrix of a mesh from set of faces
+%   smoothMesh               - Smooth mesh by replacing each vertex by the average of its neighbors 
 %
 % Creation and conversion
 %   surfToMesh               - Convert surface grids into face-vertex mesh

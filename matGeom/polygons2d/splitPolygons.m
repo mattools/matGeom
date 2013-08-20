@@ -19,21 +19,21 @@ if iscell(polygon)
     % case of a cell array
     polygons = polygon;
     
-elseif sum(isnan(polygon(:)))==0
+elseif sum(isnan(polygon(:))) == 0
     % single polygon -> no break
     polygons = {polygon};
     
 else
     % find indices of NaN couples
-    inds = find(sum(isnan(polygon), 2)>0);
+    inds = find(sum(isnan(polygon), 2) > 0);
     
     % number of polygons
-    N = length(inds)+1;
+    N = length(inds) + 1;
     polygons = cell(N, 1);
 
     % iterate over NaN-separated regions to create new polygon
-    inds = [0;inds;size(polygon, 1)+1];
-    for i=1:N
+    inds = [0; inds; size(polygon, 1)+1];
+    for i = 1:N
         polygons{i} = polygon((inds(i)+1):(inds(i+1)-1), :);    
     end
 end
