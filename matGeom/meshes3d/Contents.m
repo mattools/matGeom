@@ -12,8 +12,8 @@
 %   For some functions, the array E of edges is needed. It consists in a
 %   NE-by-2 array containing indices of source and target vertices. 
 %
-%   The library provides function to create basic polyhedric meshes (the 5
-%   platonic solids, plus few others), as well as functions to perform
+%   The library provides function to create basic polyhedric meshes (the
+%   five platonic solids, plus few others), as well as functions to perform
 %   basic computations (surface area, normal angles, face centroids...).
 %   The 'MengerSponge' structure is an example of mesh that is not simply
 %   connected (multiple tunnels in the structure).
@@ -23,16 +23,17 @@
 %
 %   Example
 %     % create a soccer ball mesh and display it
-%     [n e f] = createSoccerBall;
-%     drawMesh(n, f, 'faceColor', 'g', 'linewidth', 2);
-%     axis equal;
+%     [v e f] = createSoccerBall;
+%     drawMesh(v, f, 'faceColor', 'g', 'linewidth', 2);
+%     axis equal; view(3);
 %  
 %
-% General functions
-%   meshFace                 - Return the vertex indices of a face in a mesh
+% General processing on meshes
+%   smoothMesh               - Smooth mesh by replacing each vertex by the average of its neighbors 
+%   subdivideMesh            - Subdivides each face of the mesh
+%   triangulateFaces         - Convert face array to an array of triangular faces 
+%   mergeCoplanarFaces       - Merge coplanar faces of a polyhedral mesh
 %   meshFacePolygons         - Returns the set of polygons that constitutes a mesh
-%   computeMeshEdges         - Computes edges array from face array
-%   meshEdgeFaces            - Compute index of faces adjacent to each edge of a mesh
 %   faceCentroids            - Compute centroids of a mesh faces
 %   faceNormal               - Compute normal vector of faces in a 3D mesh
 %   vertexNormal             - Compute normals to a mesh vertices
@@ -57,19 +58,21 @@
 %   clipMeshVertices         - Clip vertices of a surfacic mesh and remove outer faces
 %   clipConvexPolyhedronHP   - Clip a convex polyhedron by a plane
 %
-% Basic processing
-%   triangulateFaces         - Convert face array to an array of triangular faces 
-%   mergeCoplanarFaces       - Merge coplanar faces of a polyhedral mesh
-%   checkMeshAdjacentFaces   - Check if adjacent faces of a mesh have similar orientation
-%   meshAdjacencyMatrix      - Compute adjacency matrix of a mesh from set of faces
-%   smoothMesh               - Smooth mesh by replacing each vertex by the average of its neighbors 
-%
 % Creation and conversion
 %   surfToMesh               - Convert surface grids into face-vertex mesh
 %   cylinderMesh             - Create a 3D mesh representing a cylinder
 %   sphereMesh               - Create a 3D mesh representing a sphere
 %   torusMesh                - Create a 3D mesh representing a torus
 %   minConvexHull            - Return the unique minimal convex hull of a set of 3D points
+%
+% Utility functions
+%   meshFace                 - Return the vertex indices of a face in a mesh
+%   meshFaceEdges            - Computes edge indices of each face
+%   meshFaceNumber           - Returns the number of faces in this mesh
+%   computeMeshEdges         - Computes edges array from face array
+%   meshEdgeFaces            - Compute index of faces adjacent to each edge of a mesh
+%   checkMeshAdjacentFaces   - Check if adjacent faces of a mesh have similar orientation
+%   meshAdjacencyMatrix      - Compute adjacency matrix of a mesh from set of faces
 %
 % Typical polyhedra
 %   polyhedra                - Index of classical polyhedral meshes
