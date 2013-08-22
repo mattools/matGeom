@@ -1,4 +1,4 @@
-% POLYGONS Manipulation of planar polygons
+% POLYGONS Manipulation of planar polygons and polylines
 % Version 1.6 21-Mar-2011 .
 %
 %   The 'polygons' module contains functions operating on shapes composed
@@ -123,6 +123,7 @@
 % Input, Output and conversions
 %   polygonToRow              - Convert polygon coordinates to a row vector
 %   rowToPolygon              - Create a polygon from a row vector
+%   contourMatrixToPolylines  - Converts a contour matrix array into a polyline set
 %   rectAsPolygon             - Convert a (centered) rectangle into a series of points
 %   readPolygonSet            - Read a set of simple polygons stored in a file
 %   writePolygonSet           - Write a set of simple polygons into a file
