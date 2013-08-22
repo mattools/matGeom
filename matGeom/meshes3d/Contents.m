@@ -69,7 +69,7 @@
 %   meshFace                 - Return the vertex indices of a face in a mesh
 %   meshFaceEdges            - Computes edge indices of each face
 %   meshFaceNumber           - Returns the number of faces in this mesh
-%   computeMeshEdges         - Computes edges array from face array
+%   meshEdges                - Computes array of edge vertex indices from face array
 %   meshEdgeFaces            - Compute index of faces adjacent to each edge of a mesh
 %   checkMeshAdjacentFaces   - Check if adjacent faces of a mesh have similar orientation
 %   meshAdjacencyMatrix      - Compute adjacency matrix of a mesh from set of faces
@@ -113,5 +113,6 @@
 %   drawPolyhedron           - Draw polyhedron defined by vertices and faces
 %   gridmeshToQuadmesh       - Create a quad mesh from a grid mesh
 %   meshReduce               - Merge coplanar faces of a polyhedral mesh
+%   computeMeshEdges         - Computes edges array from face array
 
 % Others

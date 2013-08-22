@@ -28,11 +28,11 @@ if ~isnumeric(faces) || size(faces, 2) ~= 3
 end
 
 % compute the edge array
-edgeVertexIndices = computeMeshEdges(faces);
-nEdges = size(edgeVertexIndices, 1);
+% edgeVertexIndices = computeMeshEdges(faces);
+edges = meshEdges(faces);
+nEdges = size(edges, 1);
 
 % index of faces around each edge
-edges = computeMeshEdges(faces);
 % edgeFaceIndices = meshEdgeFaces(vertices, edges, faces);
 
 % index of edges around each face
@@ -49,22 +49,23 @@ coef1 = 1 - t(2:end-1);
 % initialise the array of new vertices
 vertices2 = vertices;
 
+% keep an array containing index of new vertices for each original edge
 edgeNewVertexIndices = zeros(nEdges, n-1);
 
 % create new vertices on each edge
 for iEdge = 1:nEdges
-    v1 = vertices(edgeVertexIndices(iEdge, 1), :);
-    v2 = vertices(edgeVertexIndices(iEdge, 2), :);
+    % extract each extremity as a point
+    v1 = vertices(edges(iEdge, 1), :);
+    v2 = vertices(edges(iEdge, 2), :);
 
+    % compute new points
     newPoints = coef1 * v1 + coef2 * v2;
     
+    % add new vertices, and keep their indices
     edgeNewVertexIndices(iEdge,:) = size(vertices2, 1) + (1:n-1);
-    
     vertices2 = [vertices2 ; newPoints]; %#ok<AGROW>
 end
 
-% % for checkup
-% edgeNewVertexIndices
 
 %% Process each face
 
@@ -96,12 +97,7 @@ for iFace = 1:nFaces
     if edges(ie3, 1) ~= iv1
         edge3NewVertexIndices = edge3NewVertexIndices(end:-1:1);
     end
-    
-    % for edge 2, keep vertex 2 of the current face as reference 
-    if edges(ie2, 1) ~= iv2
-        edge2NewVertexIndices = edge2NewVertexIndices(end:-1:1);
-    end
-    
+       
     % create the first new face, on 'top' of the original face
     topVertexInds = [edge1NewVertexIndices(1) edge3NewVertexIndices(1)];
     newFace = [iv1 topVertexInds];
@@ -117,7 +113,7 @@ for iFace = 1:nFaces
         v1 = vertices2(ivr1, :);
         v2 = vertices2(ivr2, :);
         
-        % create additional vertices within the row
+        % create additional vertices within the bottom row of the strip
         t = linspace(0, 1, iStrip+1)';
         coef2 = t(2:end-1);
         coef1 = 1 - t(2:end-1);
@@ -146,7 +142,12 @@ for iFace = 1:nFaces
         topVertexInds = botVertexInds;
     end
         
-    % create new faces for the last strip
+    % for edge 2, keep vertex 2 of the current face as reference
+    if edges(ie2, 1) ~= iv2
+        edge2NewVertexIndices = edge2NewVertexIndices(end:-1:1);
+    end
+    
+    % consider new vertices together with extremities
     botVertexInds = [iv2 edge2NewVertexIndices iv3];
     
     % create top faces for last strip
@@ -160,14 +161,6 @@ for iFace = 1:nFaces
         newFace = [topVertexInds(k) botVertexInds(k) botVertexInds(k+1)];
         faces2 = [faces2; newFace]; %#ok<AGROW>
     end
-    
-    
-%     % create additional vertices in the middle of the face
-%     for iRow = 1:nv-2
-%         % index of extreme vertices of current row
-%         ivr1 = edge1NewVertexIndices(iRow);
-%         ivr2 = edge3NewVertexIndices(iRow);
-%     end
     
 end
 

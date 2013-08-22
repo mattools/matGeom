@@ -31,7 +31,7 @@ function polys = intersectPlaneMesh(plane, v, f)
 % Copyright 2012 INRA - Cepia Software Platform.
 
 % compute the edge list
-e = computeMeshEdges(f);
+e = meshEdges(f);
 edges = [ v(e(:,1), :) v(e(:,2), :) ];
 
 % associate two neighbour face to each edge

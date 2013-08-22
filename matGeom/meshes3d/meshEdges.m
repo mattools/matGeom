@@ -1,22 +1,37 @@
-function edges = computeMeshEdges(faces)
-%COMPUTEMESHEDGES Computes edges array from face array
+function edges = meshEdges(faces, varargin)
+%MESHEDGES Computes array of edge vertex indices from face array
 %
-%   Deprecated, use 'meshEdges' instead.
+%   EDGES = meshEdges(FACES);
+%
+%   Example
+%     meshEdges
 %
 %   See also
-%   meshes3d, meshEdges
-%
+%     meshes3d, meshEdgeFaces, meshFaceEdges
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2011-06-28,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-warning('MatGeom:deprecated', ...
-    'function computeMeshEdges is obsolete, use meshEdges instead');
+%   HISTORY
+%   2013-08-22 rename from computeMeshEdges to meshEdges, add more control
+%       on inputs
+
+%% Process input arguments
+
+if iscell(faces) && isfield(faces, 'faces')
+    % if input is a mesh structure, extract the 'faces' field
+    faces = faces.faces;
+elseif nargin > 1
+    % if two arguments are given, keep the second one
+    faces = varargin{1};
+end
+
 
 if ~iscell(faces)
-    % faces is given as numeric array, 
+    %% Process faces given as numeric array
     % all faces have same number of vertices, stored in nVF variable
     
     % compute total number of edges
@@ -32,11 +47,13 @@ if ~iscell(faces)
     end
     
 else
-    % faces are given as a cell array, with possibly different number of
-    % vertices
+    %% faces are given as a cell array
+    % faces may have different number of vertices
+    
+    % number of faces
     nFaces  = length(faces);
     
-    % compute number of edges
+    % compute the number of edges
     nEdges = 0;
     for i = nFaces
         nEdges = nEdges + length(faces{i});
