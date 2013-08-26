@@ -5,7 +5,7 @@ function breadth = polyhedronMeanBreadth(vertices, edges, faces)
 %   Return the mean breadth (average of polyhedron caliper diameter over
 %   all direction) of a convex polyhedron.
 %
-%   The mean breadth is omputed using the sum, over the edges of the
+%   The mean breadth is computed using the sum, over the edges of the
 %   polyhedron, of the edge dihedral angles multiplied by the edge length, 
 %   the final sum being divided by (4*PI).
 %
@@ -29,7 +29,7 @@ function breadth = polyhedronMeanBreadth(vertices, edges, faces)
 %       1.5
 %
 %   See also
-%   meshes3d, meshEdgeFaces, meshDihedralAngles
+%   meshes3d, meshEdgeFaces, meshDihedralAngles, checkMeshAdjacentFaces
 %
 %   References
 %   Stoyan D., Kendall W.S., Mecke J. (1995) "Stochastic Geometry and its

@@ -30,7 +30,7 @@ function alpha = meshDihedralAngles(vertices, edges, faces)
 %       90
 %
 %   See also
-%   meshes3d, polyhedronMeanBreadth, dihedralAngle
+%   meshes3d, polyhedronMeanBreadth, dihedralAngle, meshEdgeFaces
 %
 %
 % ------

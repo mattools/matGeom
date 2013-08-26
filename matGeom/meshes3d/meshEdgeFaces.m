@@ -2,12 +2,21 @@ function edgeFaces = meshEdgeFaces(vertices, edges, faces) %#ok<INUSL>
 %MESHEDGEFACES Compute index of faces adjacent to each edge of a mesh
 %
 %   EF = meshEdgeFaces(V, E, F)
-%
+%   Compute index array of faces adjacent to each edge of a mesh.
+%   V, E and F define the mesh: V is vertex array, E contains vertex
+%   indices of edge extremities, and F contains vertex indices of each
+%   face, either as a numerical array or as a cell array.
+%   The result EF has as many rows as the number of edges, and two column.
+%   The first column contains index of faces located on the left of the
+%   corresponding edge, whereas the second column contains index of the
+%   face located on the right. Some indices may be 0 if the mesh is not
+%   'closed'.
+%   
 %   Example
 %   meshEdgeFaces
 %
 %   See also
-%   meshes3d
+%   meshes3d, meshDihedralAngles, polyhedronMeanBreadth
 %
 % ------
 % Author: David Legland
