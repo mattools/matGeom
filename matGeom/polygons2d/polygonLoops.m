@@ -39,31 +39,51 @@ end
 % array for storing loops
 loops = cell(0, 1);
 
-positions = sortrows([pos1 pos2;pos2 pos1]);
+% sort intersection points with respect to their position on the polygon
+[positions order] = sortrows([pos1 pos2;pos2 pos1]);
+inters = [inters ; inters];
+inters = inters(order, :);
 
 
 %% First loop
 
+% initialize the beginning of the loop
 pos0 = 0;
 loop = polygonSubcurve(poly, pos0, positions(1, 1));
+loop(end, :) = inters(1,:);
+vertex = inters(1,:);
+
+% prepare iteration on positions
 pos = positions(1, 2);
 positions(1, :) = [];
+inters(1,:) = [];
 
 while true
     % index of next intersection point
     ind = find(positions(:,1) > pos, 1, 'first');
     
-    % if not found, break
+    % if not index is found, the current loop is complete
     if isempty(ind)
         break;
     end
+
+    % compute the portion of curve between the two intersection points
+    portion = polygonSubcurve(poly, pos, positions(ind, 1));
     
-    % add portion of curve
-    loop = [loop;polygonSubcurve(poly, pos, positions(ind, 1))]; %#ok<AGROW>
+    % ensure extremities have been computed only once
+    portion(1, :) = vertex;
+    vertex = inters(ind, :);
+    portion(end, :) = vertex;
     
-    % look for next intersection point
+    % add the current portion of curve
+    loop = [loop; portion]; %#ok<AGROW>
+    
+    % update current position on the polygon
     pos = positions(ind, 2);
+    
+    % remove processed intersection
     positions(ind, :) = [];
+    inters(ind,:) = [];
 end
 
 % add the last portion of curve
@@ -84,22 +104,35 @@ loops{1} = loop;
 Nl = 1;
 while ~isempty(positions)
 
+    % initialize the next loop
     loop    = [];
     pos0    = positions(1, 2);
     pos     = positions(1, 2);
+    vertex  = inters(1,:);
     
     while true
         % index of next intersection point
-        ind = find(positions(:,1)>pos, 1, 'first');
+        ind = find(positions(:,1) > pos, 1, 'first');
 
-        % add portion of curve
-        loop = [loop;polygonSubcurve(poly, pos, positions(ind, 1))]; %#ok<AGROW>
+        % compute the portion of curve between the two intersection points
+        portion = polygonSubcurve(poly, pos, positions(ind, 1));
+        
+        % ensure extremities have been computed only once
+        portion(1, :) = vertex;
+        vertex = inters(ind, :);
+        portion(end, :) = vertex;
+        
+        % add the current portion of curve
+        loop = [loop; portion]; %#ok<AGROW>
 
-        % look for next intersection point
+        % update current position on the polygon
         pos = positions(ind, 2);
-        positions(ind, :) = [];
 
-        % if not found, break
+        % remove processed intersection
+        positions(ind, :) = [];
+        inters(ind,:) = [];
+
+        % if not found, current loop is processed
         if pos == pos0
             break;
         end
