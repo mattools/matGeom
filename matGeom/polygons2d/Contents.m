@@ -48,12 +48,6 @@
 %   figure;drawPolygon(P2); axis([0 50 0 50]);
 %
 %
-% Point Sets
-%   pointSetsAverage          - Compute the average of several point sets
-%   minimumCaliperDiameter    - Minimum caliper diameter of a set of points
-%   findPoint                 - Find index of a point in an set from its coordinates
-%   convexHull                - Convex hull of a set of points
-%
 % Polylines
 %   polylinePoint             - Extract a point from a polyline
 %   polylineLength            - Return length of a polyline given as a list of points
@@ -68,6 +62,7 @@
 %   intersectPolylines        - Find the common points between 2 polylines
 %   polylineSelfIntersections - Find self-intersection points of a polyline
 %   simplifyPolyline          - Douglas-Peucker simplification of a polyline
+%   removeMultipleVertices    - Remove multiple vertices of a polygon or polyline
 %
 % Polygon basic manipulation
 %   polygonPoint              - Extract a point from a polygon
@@ -85,6 +80,12 @@
 %   polygonSelfIntersections  - Find self-intersection points of a polygon
 %   clipPolygon               - Clip a polygon with a rectangular box
 %   clipPolygonHP             - Clip a polygon with a Half-plane defined by a directed line
+%
+% Point Sets
+%   pointSetsAverage          - Compute the average of several point sets
+%   minimumCaliperDiameter    - Minimum caliper diameter of a set of points
+%   findPoint                 - Find index of a point in an set from its coordinates
+%   convexHull                - Convex hull of a set of points
 %
 % Measures on Polygons
 %   isPointInPolygon          - Test if a point is located inside a polygon
@@ -162,4 +163,3 @@ help('Contents');
 
 
 %% Others...
-

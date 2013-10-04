@@ -51,7 +51,7 @@ positions(1, :) = [];
 
 while true
     % index of next intersection point
-    ind = find(positions(:,1)>pos, 1, 'first');
+    ind = find(positions(:,1) > pos, 1, 'first');
     
     % if not found, break
     if isempty(ind)

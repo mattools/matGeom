@@ -29,6 +29,7 @@
 %   boundingBox           - Bounding box of a set of points
 %   angleSort             - Sort points in the plane according to their angle to origin
 %   minDistancePoints     - Minimal distance between several points
+%   mergeClosePoints      - Merge points that are closer than a given distance
 %   hausdorffDistance     - Hausdorff distance between two point sets
 %   nndist                - Nearest-neighbor distances of each point in a set
 %
@@ -169,6 +170,7 @@
 %   drawArrow             - Draw an arrow on the current axis
 %   drawLabels            - Draw labels at specified positions
 %   drawShape             - Draw various types of shapes (circles, polygons...)
+%   isAxisHandle          - Check if the input corresponds to a valid axis hanfle
 %
 % Other shapes
 %   squareGrid            - Generate equally spaces points in plane.
@@ -219,4 +221,5 @@ help('Contents');
 
 
 %% Others...
+
 
