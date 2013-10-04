@@ -1,4 +1,4 @@
-function vol = tetrahedronVolume(tetra, varargin)
+function vol = tetrahedronVolume(vertices, varargin)
 %TETRAHEDRONVOLUME Signed volume of a tetrahedron
 %
 %   VOL = tetrahedronVolume(TETRA)
@@ -12,7 +12,7 @@ function vol = tetrahedronVolume(tetra, varargin)
 %         0.1667
 %
 %     [V F] = createTetrahedron;
-%     tetrahedronVolume(V, F)
+%     tetrahedronVolume(V)
 %     ans = 
 %         -.3333
 %
@@ -25,14 +25,25 @@ function vol = tetrahedronVolume(tetra, varargin)
 % Created: 2012-04-05,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
-% control on inputs
-if nargin == 4
-    tetra = [tetra ; varargin{1} ; varargin{2} ; varargin{3}];
+if nargin == 2
+    tetras = varargin{1};
+    nTetras = size(tetras, 1);
+    vol = zeros(nTetras, 1);
+    for i = 1:nTetras
+        tetra = tetras(i,:);
+        vol(i) = det(bsxfun(@minus, vertices(tetra(2:4),:), vertices(tetra(1),:))) / 6;
+    end
+    return;
 end
 
-if size(tetra, 1) < 4
+% control on inputs
+if nargin == 4
+    vertices = [vertices ; varargin{1} ; varargin{2} ; varargin{3}];
+end
+
+if size(vertices, 1) < 4
     error('Input vertex array requires at least 4 vertices');
 end
 
 % compute volume of tetrahedron, using first vertex as origin
-vol = det(tetra(2:4,:) - tetra([1 1 1],:)) / 6;
+vol = det(vertices(2:4,:) - vertices([1 1 1],:)) / 6;

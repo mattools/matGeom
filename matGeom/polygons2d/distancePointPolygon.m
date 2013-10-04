@@ -1,17 +1,23 @@
 function varargout = distancePointPolygon(point, poly)
-%DISTANCEPOINTPOLYGON  Compute shortest distance between a point and a polygon
+%DISTANCEPOINTPOLYGON Shortest distance between a point and a polygon
 %
 %   DIST = distancePointPolygon(POINT, POLYGON)
 %   Computes the shortest distance between the point POINT and the polygon
-%   boundary POLYGON. POINT is a 1-by- row vector, and POLYGON is a N-by-2
+%   given by POLYGON. POINT is a 1-by-2 row vector, and POLYGON is a N-by-2
 %   array containing vertex coordinates.
+%   The distance is computed as the minimal distance to the boundary edges.
 %
 %   Example
-%   distancePointPolygon
+%     % Computes the distance between a point and a square
+%     square = [0 0; 10 0;10 10;0 10];
+%     p0 = [16 3];
+%     distancePointPolygon(p0, square)
+%     ans =
+%          6
 %
 %   See also
-%   polygons2d, points2d, distancePointPolyline
-%   distancePointEdge, projPointOnPolyline
+%   polygons2d, points2d, distancePointPolyline, distancePointEdge,
+%   projPointOnPolyline
 %
 % ------
 % Author: David Legland
