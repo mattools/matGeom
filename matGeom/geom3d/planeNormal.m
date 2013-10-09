@@ -7,7 +7,7 @@ function n = planeNormal(plane)
 %   N : [dx dy dz]
 %   
 %   See also
-%   planes3d, createPlane
+%   geom3d, planes3d, createPlane
 %
 %   ---------
 %   author : David Legland 

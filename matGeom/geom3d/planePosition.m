@@ -15,9 +15,16 @@ function pos = planePosition(point, plane)
 %   CAUTION:
 %   WORKS ONLY FOR PLANES WITH ORTHOGONAL DIRECTION VECTORS
 %
-%   See also:
-%   planes3d, points3d, planePoint
+%   Example
+%     plane = [10 20 30  1 0 0  0 1 0];
+%     point = [13 24 35];
+%     pos = planePosition(point, plane)
+%     pos = 
+%         3   4
 %
+%   See also:
+%   geom3d, planes3d, points3d, planePoint
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -25,26 +32,39 @@ function pos = planePosition(point, plane)
 %
 
 %   HISTORY
-%   24/11/2005 add support for multiple input
+%   24/11/2005 add support for multiple inputs
 
-% unify size of data
-if size(point, 1)~=size(plane, 1)
-    if size(point, 1)==1
-        point = repmat(point, [size(plane, 1) 1]);
-    elseif size(plane, 1)==1
-        plane = repmat(plane, [size(point, 1) 1]);
-    else
-        error('point and plane do not have the same dimension');
-    end
+% size of input arguments
+npl = size(plane, 1);
+npt = size(point, 1);
+
+% check inputs have compatible sizes
+if npl ~= npt && npl > 1 && npt > 1
+    error('geom3d:planePoint:inputSize', ...
+        'plane and point should have same size, or one of them must have 1 row');
 end
 
-
+% origin and direction vectors of the plane
 p0 = plane(:, 1:3);
 d1 = plane(:, 4:6);
 d2 = plane(:, 7:9);
 
-s = dot(point-p0, d1, 2) ./ vectorNorm3d(d1);
-t = dot(point-p0, d2, 2) ./ vectorNorm3d(d2);
+% Compute dot products with direction vectors of the plane
+if npl > 1 || npt == 1
+    s = dot(bsxfun(@minus, point, p0), d1, 2) ./ vectorNorm3d(d1);
+    t = dot(bsxfun(@minus, point, p0), d2, 2) ./ vectorNorm3d(d2);
+else
+    % we have npl == 1 and npt > 1
+    d1 = d1 / vectorNorm3d(d1);
+    d2 = d2 / vectorNorm3d(d2);
+    inds = ones(npt,1);
+    s = dot(bsxfun(@minus, point, p0), d1(inds, :), 2);
+    t = dot(bsxfun(@minus, point, p0), d2(inds, :), 2);
+end
+
+% % old version:
+% s = dot(point-p0, d1, 2) ./ vectorNorm3d(d1);
+% t = dot(point-p0, d2, 2) ./ vectorNorm3d(d2);
 
 pos = [s t];
 
