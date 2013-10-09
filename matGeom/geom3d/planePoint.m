@@ -7,31 +7,38 @@ function coord = planePoint(plane, point)
 %   POINT is the 3D coordinate in global basis.
 %
 %   Example
-%   planePoint
+%     plane = [10 20 30  1 0 0  0 1 1];
+%     pos2d = [3 4];
+%     pt = planePoint(plane, pos2d)
+%     pt = 
+%           13  24   34
 %
 %   See also
-%   planes3d, planePosition
-%
+%   geom3d, planes3d, planePosition
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2007-09-18,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 
-% adapt size of input arguments
+% size of input arguments
 npl = size(plane, 1);
 npt = size(point, 1);
-if npl~=npt
-    if npl==1
-        plane = repmat(plane, npt, 1);
-    elseif npt==1
-        point = repmat(point, npl, 1);
-    else
-        error('plane and point should have same size');
-    end
+
+% check inputs have compatible sizes
+if npl ~= npt && npl > 1 && npt > 1
+    error('geom3d:planePoint:inputSize', ...
+        'plane and point should have same size, or one of them must have 1 row');
+end
+
+% basis origin, eventually resized
+origin = plane(:, 1:3);
+if npl == 1 && npt > 1
+    origin = origin(ones(npt,1), :);
 end
 
 % compute 3D coordinate
-coord = plane(:,1:3) + ...
-    plane(:,4:6).*repmat(point(:,1), 1, 3) + ...
-    plane(:,7:9).*repmat(point(:,2), 1, 3);
+coord = origin + ...
+    bsxfun(@times, plane(:,4:6), point(:,1)) + ...
+    bsxfun(@times, plane(:,7:9), point(:,2)) ;
