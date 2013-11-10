@@ -18,6 +18,7 @@ function transforms2d(varargin)
 %   createHomothecy, createLineReflection, createBasisTransform
 %   transformPoint, transformVector, transformLine, transformEdge
 %   rotateVector, fitAffineTransform2d
+%   polynomialTransform2d, fitPolynomialTransform2d
 %
 % ------
 % Author: David Legland

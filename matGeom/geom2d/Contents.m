@@ -132,6 +132,8 @@
 %   createBasisTransform  - Compute matrix for transforming a basis into another basis
 %   createLineReflection  - Create the the 3x3 matrix of a line reflection
 %   fitAffineTransform2d  - Fit an affine transform using two point sets
+%   polynomialTransform2d - Apply a polynomial transform to a set of points
+%   fitPolynomialTransform2d - Coefficients of polynomial transform between two point sets
 %
 % Angles
 %   angles2d              - Description of functions for manipulating angles

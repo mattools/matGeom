@@ -12,7 +12,8 @@ function trans = fitAffineTransform2d(pts1, pts2)
 %   
 %
 %   See also
-%
+%     transforms2d, transformPoint, transformVector,
+%     fitPolynomialTransform2d
 %
 % ------
 % Author: David Legland
