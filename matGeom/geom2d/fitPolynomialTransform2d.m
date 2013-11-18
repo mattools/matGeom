@@ -27,9 +27,12 @@ xi = pts(:,1);
 yi = pts(:,2);
 nCoords = size(pts, 1);
 
-b = ptsRef';
-b = b(:);
-
+% check inputs have same size
+if size(ptsRef, 1) ~= nCoords
+    error('fitPolynomialTransform2d:sizeError', ...
+        'input arrays must have same number of points');
+end
+    
 
 %% compute coefficient matrix
 
@@ -56,6 +59,11 @@ A = kron(A1, [1 0;0 1]);
 
 %% solve linear system that minimizes least squares
 
+% create the vector of expected values
+b = ptsRef';
+b = b(:);
+
+% solve the system
 coeffs = (A \ b)';
 
 

@@ -42,7 +42,7 @@ if iscell(var)
         hold on;
         % check for empty polygons
         if ~isempty(var{i})
-            h(i) = drawPolygon(ax, var{i}, varargin{2:end});
+            h(i) = drawVertices(ax, var{i}, varargin{2:end});
         end
         if ~state
             hold off
@@ -65,19 +65,24 @@ if size(var, 2) > 1
     px = var(:, 1);
     py = var(:, 2);
     varargin(1) = [];
-else
-    % arguments 1 and 2 correspond to x and y coordinate respectively
-    if length(varargin) < 2
-        error('Should specify either a N-by-2 array, or 2 N-by-1 vectors');
-    end
     
+elseif length(varargin) >= 2 && isnumeric(varargin{1}) && isnumeric(varargin{2})
+    % arguments 1 and 2 correspond to x and y coordinate respectively    
     px = varargin{1};
     py = varargin{2};
     varargin(1:2) = [];
-end    
+    
+else
+    % unknow input format
+    error('Should specify either a N-by-2 array, or 2 N-by-1 vectors');
+end
 
-if isempty(varargin)
-    varargin = {'ks', 'MarkerSize', 6};
+% concatenate input argument(s) with default options
+defaults = {'MarkerSize', 6};
+if length(varargin) == 1
+    varargin = [varargin defaults];
+else
+    varargin = [{'ks'} defaults varargin];
 end
 
 

@@ -9,14 +9,15 @@ function varargout = ellipseToPolygon(ellipse, N)
 %   first one.
 %
 %   P = ellipseToPolygon(ELL);
-%   Use a default number of edges equal to 72. This result in one piont for
-%   each 5 degrees.
+%   Use a default number of edges equal to 72. This results in one point
+%   for each 5 degrees.
 %   
 %   [X Y] = ellipseToPolygon(...);
-%   Return the coordinates o fvertices in two separate arrays.
+%   Return the coordinates of vertices in two separate arrays.
+%
 %
 %   See also:
-%   ellipses2d, circleToPolygon, rectToPolygon, drawEllipse
+%   ellipses2d, drawEllipse, circleToPolygon, rectToPolygon
 %
 %   ---------
 %   author : David Legland 
