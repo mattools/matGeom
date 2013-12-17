@@ -73,6 +73,7 @@
 %   parallelLine3d            - Create 3D line parallel to another one.
 %   projPointOnLine3d         - Project a 3D point orthogonally onto a 3D line
 %   distancePointLine3d       - Euclidean distance between 3D point and line
+%   isPointOnLine3d           - Test if a 3D point belongs to a 3D line
 %   distancePointEdge3d       - Minimum distance between a 3D point and a 3D edge
 %   linePosition3d            - Return the position of a 3D point projected on a 3D line
 %   distanceLines3d           - Minimal distance between two 3D lines

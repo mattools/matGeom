@@ -6,9 +6,9 @@ function lines3d(varargin)
 %   LINE = [X0 Y0 Z0 DX DY DZ];
 %
 %   See also:
-%   createLine3d, transformLine3d, distancePointLine3d, linePosition3d
+%   createLine3d, distancePointLine3d, isPointOnLine3d, linePosition3d 
 %   intersectLinePlane, distanceLines3d, parallelLine3d, projPointOnLine3d
-%   clipLine3d, fitLine3d, drawLine3d
+%   clipLine3d, fitLine3d, drawLine3d, transformLine3d
 %   
 %
 % ------
