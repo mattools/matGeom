@@ -3,7 +3,7 @@
 %
 %   The aim of this package is to provides functions to easily create,  
 %   modify and display geometric graphs (geometric in a sense position
-%   of vertices is kept in memory).
+%   nodes are associated to geometric position in 2D or 3D).
 %
 %   Graph structure is represented by at least two arrays:
 %   * NODES, which contains coordinates of each vertex
@@ -15,13 +15,12 @@
 %   * CELLS, which contains indices of faces of each cell.
 %
 %   An alternative representation is to use a structure, with fields:
-%   * edges
-%   * faces
-%   * cells
+%   * 'nodes'
+%   * 'edges'
 %   corresponding to the data described above.
 %
 %   Note that topological description of 2D graph is entirely contained in
-%   EDGES array, and that NODES array is used only to display graph
+%   EDGES array, and that NODES array is used only to display the graph.
 %   
 %   Caution: this type of data structure is easy to create and to manage,
 %   but may be very inefficient for some algorithms. 
@@ -84,6 +83,7 @@
 %   grFindMaximalLengthPath - Find a path that maximizes sum of edge weights
 %
 % Operations for geometric graphs
+%   grEdgeLength            - Compute length of edges in a geometric graph
 %   grMergeNodeClusters     - Merge cluster of connected nodes in a graph
 %   grMergeNodesMedian      - Replace several nodes by their median coordinate
 %   clipGraph               - Clip a graph with a rectangular area
