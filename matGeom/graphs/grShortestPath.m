@@ -78,7 +78,7 @@ while ~isempty(unprocessedNodeInds)
     end
     
     % find the index list of edges incident to current node 
-    adjEdgeInds = grNeighborEdges(edges, ind);
+    adjEdgeInds = grAdjacentEdges(edges, ind);
     
     % select edges whose opposite node has not yet been processed
     inds2 = sum(ismember(edges(adjEdgeInds, :), unprocessedNodeInds), 2) > 0;
@@ -114,33 +114,13 @@ while ~isempty(unprocessedNodeInds)
     end
 end
 
-% % update distance of nodes adjacent to initial node
-% % find adjacent nodes
-% % inds = grNeighborNodes(edges, ind0);
-% inds = grNeighborEdges(edges, ind0);
-% for iNeigh = 1:length(inds)
-%     edge = edges(inds(iNeigh), :);
-%     neighNode = edge(~ismember(edge, ind0));
-%     dists(neighNode) = min(dists(neighNode), edgeWeights(inds(iNeigh)));
-% end
-% disp(edges2)
+
 
 
 %% Path creation
 
 % create the path: start from en index, and identify successive set of
 % neighbor edges and nodes
-
-% % find the only edge connected to target node
-% edgeInd = find(sum(edges2 == ind1, 2));
-% edge = edges2(edgeInd, :);
-% 
-% % find adjacent node
-% nodeInd = edge(edge ~= ind1);
-% 
-% % initialize path
-% edgePath = edgeInd;
-% nodePath = [ind1 ; nodeInd];
 
 nodeInd = ind1;
 nodePath = nodeInd;
@@ -156,29 +136,7 @@ while nodeInd ~= ind0
     edgePath = [edgePath ; edgeInd]; %#ok<AGROW>
 end
     
-% % find predecessors until we reach ind0 node
-% while nodeInd ~= ind0
-%     % indices of all edge incident to current node
-%     inds = sum(ismember(edges2, nodeInd), 2)>0;
-%     
-%     % indices of nodes adjacent to current node
-%     nodeInds = unique(edges2(inds, :));
-%     nodeInds(nodeInds == nodeInd) = [];
-%     
-%     % index of next node
-%     dists2 = dists(nodeInds);
-%     [tmp minDistInd] = min(dists2); %#ok<ASGLU>
-% 
-%     newNode = nodeInds(minDistInd);
-%     edgeInd = find(sum(ismember(edges2, [nodeInd newNode]), 2) == 2);
-% 
-%     nodeInd = newNode;
-% 
-%     nodePath = [nodePath ; nodeInd]; %#ok<AGROW>
-%     edgePath = [edgePath ; edgeInd]; %#ok<AGROW>
-% end
-
-
+% reverse the path
 nodePath = nodePath(end:-1:1);
 edgePath = edgePath(end:-1:1);
 

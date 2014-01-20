@@ -18,7 +18,7 @@ function varargout = grSimplifyBranches_old(nodes, edges)
 
 n = 1;
 while n < length(nodes)
-    neigh = grNeighborNodes(edges, n);
+    neigh = grAdjacentNodes(edges, n);
     if length(neigh) == 2
         % find other node of first edge
         edge = edges(neigh(1), :);

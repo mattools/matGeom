@@ -21,7 +21,7 @@ function [nodes2, edges2] = grRemoveNodes(nodes, edges, rmNodes)
 
 % remove all edges connected to each node
 for i = 1:length(rmNodes)
-    neighbours = grNeighborNodes(edges, rmNodes(i));
+    neighbours = grAdjacentNodes(edges, rmNodes(i));
     if ~isempty(neighbours)
         [nodes, edges] = grRemoveEdges(nodes, edges, neighbours);
     end

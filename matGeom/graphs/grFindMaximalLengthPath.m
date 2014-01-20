@@ -43,7 +43,7 @@ ind1 = find(dists == max(dists), 1, 'first');
 path = [];
 while true
     % find neighbor with lowest cumulated distance
-    neighs = grNeighborNodes(edges, ind1);
+    neighs = grAdjacentNodes(edges, ind1);
     neighDists = dists(neighs);
     indN = find(neighDists == min(neighDists), 1);
     ind2 = neighs(indN);

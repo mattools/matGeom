@@ -18,7 +18,7 @@ function [nodes2, edges2] = grRemoveNode(nodes, edges, node)
 
 
 % remove all edges connected to the node 
-neighbours = grNeighborNodes(edges, node);
+neighbours = grAdjacentEdges(edges, node);
 [nodes2, edges2] = grRemoveEdges(nodes, edges, neighbours); %#ok<ASGLU>
 
 

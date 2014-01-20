@@ -46,8 +46,8 @@
 %   grNodeDegree            - Degree of a node in a (undirected) graph
 %   grNodeInnerDegree       - Inner degree of a node in a graph
 %   grNodeOuterDegree       - Outer degree of a node in a graph
-%   grNeighborNodes         - Find adjacent nodes of a given node
-%   grNeighborEdges         - Find adjacent edges of a given node
+%   grAdjacentNodes         - Find list of nodes adjacent to a given node
+%   grAdjacentEdges         - Find list of edges adjacent to a given node
 %   grOppositeNode          - Return opposite node in an edge
 %   grLabel                 - Associate a label to each connected component of the graph
 %
@@ -72,7 +72,8 @@
 %   grClose                 - Morphological closing on graph
 %   grOpen                  - Morphological opening on graph
 %
-% Geodesic operations
+% Geodesic and shortest path operations
+%   grShortestPath          - Find a shortest path between two nodes in the graph
 %   grPropagateDistance     - Propagates distances from a vertex to other vertices
 %   grVertexEccentricity    - Eccentricity of vertices in the graph
 %   graphDiameter           - Diameter of a graph
@@ -83,7 +84,7 @@
 %   grFindMaximalLengthPath - Find a path that maximizes sum of edge weights
 %
 % Operations for geometric graphs
-%   grEdgeLength            - Compute length of edges in a geometric graph
+%   grEdgeLengths           - Compute length of edges in a geometric graph
 %   grMergeNodeClusters     - Merge cluster of connected nodes in a graph
 %   grMergeNodesMedian      - Replace several nodes by their median coordinate
 %   clipGraph               - Clip a graph with a rectangular area
@@ -131,7 +132,11 @@
 % Deprecated functions
 %   grSimplifyBranches_old  - Replace branches of a graph by single edges
 %   grRemoveMultiplePoints  - Remove groups of close nodes in a graph
-%
+%   grEdgeLength            - Compute length of edges in a geometric graph
+%   grNeighborNodes         - Find adjacent nodes of a given node
+%   grNeighborEdges         - Find adjacent edges of a given node
+
+
 % Functions that requires further development
 %   quiverToGraph           - Converts quiver data to quad mesh
 

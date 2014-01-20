@@ -58,7 +58,7 @@ while ~isempty(verticesToProcess)
         vertex = verticesToProcess(i);
         
         % iterate over neighbor edges of current vertex
-        vertexEdges = grNeighborEdges(e, vertex);
+        vertexEdges = grAdjacentEdges(e, vertex);
         for j = 1:length(vertexEdges)
             iEdge = vertexEdges(j);
             

@@ -34,7 +34,7 @@ lbl2 = zeros(size(lbl));
 
 uni = unique(edges(:));
 for n = 1:length(uni)
-    neigh = grNeighborNodes(edges, uni(n));
+    neigh = grAdjacentNodes(edges, uni(n));
     lbl2(uni(n)) = median(lbl([uni(n); neigh]));    
 end
 

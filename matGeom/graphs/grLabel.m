@@ -1,5 +1,6 @@
 function labels = grLabel(nodes, edges)
 %GRLABEL Associate a label to each connected component of the graph
+%
 %   LABELS = grLabel(NODES, EDGES)
 %   Returns an array with as many rows as the array NODES, containing index
 %   number of each connected component of the graph. If the graph is
@@ -38,7 +39,7 @@ while modif
     
     % compute the minimum label in the neighborhood of each node
     for i = 1:Nn
-        neigh = grNeighborNodes(edges, i);
+        neigh = grAdjacentNodes(edges, i);
         neighLabels = labels([i;neigh]);
         
         % check for a modification

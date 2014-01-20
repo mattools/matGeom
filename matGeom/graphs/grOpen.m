@@ -35,13 +35,13 @@ uni = unique(edges(:));
 % performs erosion
 lbl2 = zeros(size(lbl));
 for n = 1:length(uni)
-    neigh = grNeighborNodes(edges, uni(n));
+    neigh = grAdjacentNodes(edges, uni(n));
     lbl2(uni(n)) = min(lbl([uni(n); neigh]));    
 end
 
 % performs dilation
 for n = 1:length(uni)
-    neigh = grNeighborNodes(edges, uni(n));
+    neigh = grAdjacentNodes(edges, uni(n));
     lbl(uni(n)) = max(lbl2([uni(n); neigh]));    
 end
 

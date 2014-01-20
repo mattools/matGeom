@@ -31,7 +31,7 @@ for n = 1:length(mnodes)
     node = mnodes(n);
     
     % process each neighbor of the current node
-    neighbors = grNeighborNodes(edges, node);
+    neighbors = grAdjacentNodes(edges, node);
     for e = 1:length(neighbors)
         edge = neighbors(e);
         
