@@ -40,7 +40,6 @@
 %   boundaryGraph           - Get boundary of image as a graph
 %   gcontour2d              - Creates contour graph of a 2D binary image.
 %   gcontour3d              - Create contour graph of a 3D binary image.
-%   vectorize               - Transform a binary skeleton into a graph (nodes and edges)
 %
 % Graph information
 %   grNodeDegree            - Degree of a node in a (undirected) graph
@@ -112,6 +111,9 @@
 %   drawSquareMesh          - Draw a 3D square mesh given as a graph
 %   patchGraph              - Transform 3D graph (mesh) into a patch handle
 %
+% Input/Output
+%   readGraph               - Read a graph from a text file
+%   writeGraph              - Write a graph to an ascii file
 %
 % -----
 % Author: David Legland
@@ -135,6 +137,7 @@
 %   grEdgeLength            - Compute length of edges in a geometric graph
 %   grNeighborNodes         - Find adjacent nodes of a given node
 %   grNeighborEdges         - Find adjacent edges of a given node
+%   vectorize               - Transform a binary skeleton into a graph (nodes and edges)
 
 
 % Functions that requires further development
