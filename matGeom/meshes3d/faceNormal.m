@@ -5,7 +5,8 @@ function normals = faceNormal(nodes, faces)
 %   VERTICES is a set of 3D points (as a N-by-3 array), and FACES is either
 %   a N-by-3 index array or a cell array of indices. The function computes
 %   the normal vector of each face.
-%   The orientation of the normal is undefined.
+%   The orientation of the normal is defined by the sign of cross product
+%   between vectors joining vertices 1 to 2 and 1 to 3.
 %
 %
 %   Example
@@ -22,8 +23,7 @@ function normals = faceNormal(nodes, faces)
 %
 %   See also
 %   meshes3d, drawMesh, convhull, convhulln, drawVector3d
-%
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -35,12 +35,12 @@ if isnumeric(faces)
 	v1 = nodes(faces(:,2),1:3) - nodes(faces(:,1),1:3);
     v2 = nodes(faces(:,3),1:3) - nodes(faces(:,1),1:3);
     
-    % normalize vectors
-    v1 = normalizeVector3d(v1);
-    v2 = normalizeVector3d(v2);
+%     % normalize vectors
+%     v1 = normalizeVector3d(v1);
+%     v2 = normalizeVector3d(v2);
    
-    % compute normals using cross product
-	normals = vectorCross3d(v1, v2);
+    % compute normals using cross product (nodes have same size)
+	normals = normalizeVector3d(cross(v1, v2, 2));
 
 else
     % initialize empty array
@@ -52,12 +52,12 @@ else
         v1 = nodes(face(2),1:3) - nodes(face(1),1:3);
         v2 = nodes(face(3),1:3) - nodes(face(1),1:3);
         
-        % normalize vectors
-        v1 = normalizeVector3d(v1);
-        v2 = normalizeVector3d(v2);
+%         % normalize vectors
+%         v1 = normalizeVector3d(v1);
+%         v2 = normalizeVector3d(v2);
         
         % compute normals using cross product
-        normals(i, :) = vectorCross3d(v1, v2);
+        normals(i, :) = normalizeVector3d(cross(v1, v2, 2));
     end
 end
 
