@@ -1,4 +1,4 @@
-function [coefs lblBranches] = polynomialCurveSetFit(seg, varargin)
+function varargout = polynomialCurveSetFit(seg, varargin)
 %POLYNOMIALCURVESETFIT Fit a set of polynomial curves to a segmented image
 %
 %   COEFS = polynomialCurveSetFit(IMG);
@@ -16,17 +16,32 @@ function [coefs lblBranches] = polynomialCurveSetFit(seg, varargin)
 %   - Image Processing
 %
 %   Example
-%   polynomialCurveSetFit
+%     % Fit a set of curves to a binary skeleton
+%     img = imread('circles.png');
+%     % compute skeleton, and ensure one-pixel thickness
+%     skel = bwmorph(img, 'skel', 'Inf');
+%     skel = bwmorph(skel, 'shrink');
+%     figure; imshow(skel==0)
+%     coeffs = polynomialCurveSetFit(skel, 2);
+%     % Display segmented image with curves
+%     figure; imshow(~img); hold on;
+%     for i = 1:length(coeffs)
+%         hc = drawPolynomialCurve([0 1], coeffs{i});
+%         set(hc, 'linewidth', 2, 'color', 'g');
+%     end
 %
 %   See also
 %   polynomialCurves2d, polynomialCurveFit
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2007-03-21
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+
+
+%% Initialisations
 
 % default degree for curves
 deg = 2;
@@ -34,37 +49,44 @@ if ~isempty(varargin)
     deg = varargin{1};
 end
 
+% ensure image is binary
+seg = seg > 0;
 
-% ajoute un contour
-seg([1 end], :) = 1;
-seg(:, [1 end]) = 1;
 
-% skeletise le segmentat
-seg = bwmorph(seg, 'shrink', Inf);
+%% Extract branching points and terminating points
+
+% compute image of end points
+imgEndPoints = imfilter(double(seg), ones([3 3])) .* seg == 2;
+
+% compute centroids of end points
+lblEndPoints    = bwlabel(imgEndPoints, 4);
+regEndPoints    = bwconncomp(imgEndPoints, 4);
+struct   = regionprops(regEndPoints, 'Centroid');
+
+endPoints = cat(1, struct.Centroid);
+
 
 % compute image of multiple points (intersections between curves)
-imgNodes = imfilter(double(seg), ones([3 3])) .* seg > 3;
+imgBranching    = imfilter(double(seg), ones([3 3])) .* seg > 3;
 
-% compute coordinate of nodes, as c entroids of the multiple points
-lblNodes = bwlabel(imgNodes, 4);
-struct   = regionprops(lblNodes, 'Centroid');
-nodes = zeros(length(struct), 2);
-for i=1:length(struct)
-    nodes(i, 1:2) = struct(i).Centroid;
-end
+% compute coordinate of nodes, as centroids of the multiple points
+lblBranching = bwlabel(imgBranching, 4);
+regBranching = bwconncomp(imgBranching, 4);
+struct   = regionprops(regBranching, 'Centroid');
 
-% enleve les bords de l'image
-seg([1 end], :) = 0;
-seg(:, [1 end]) = 0;
+branchPoints = cat(1, struct.Centroid);
 
-% Isoles les branches
-imgBranches = seg & ~imgNodes;
+
+% list of nodes (all categories)
+nodes = [branchPoints; endPoints];
+
+% image of node labels
+lblNodes = lblBranching;
+lblNodes(lblEndPoints > 0) = lblEndPoints(lblEndPoints > 0) + size(branchPoints, 1);
+
+% isolate branches
+imgBranches = seg & ~imgBranching & ~imgEndPoints;
 lblBranches = bwlabel(imgBranches, 8);
-
-% % donne une couleur a chaque branche, et affiche
-% map = colorcube(max(lblBranches(:))+1);
-% rgbBranches = label2rgb(lblBranches, map, 'w', 'shuffle');
-% imshow(rgbBranches);
 
 % number of curves
 nBranches = max(lblBranches(:));
@@ -75,26 +97,27 @@ coefs = cell(nBranches, 1);
 
 % For each curve, find interpolated polynomial curve
 for i = 1:nBranches
-    disp(i);
+    %disp(i);
     
     % extract points corresponding to current curve
     imgBranch = lblBranches == i;
     points = chainPixels(imgBranch);
     
-    % check number of points is sufficient
+    % if number of points is not sufficient, simply create a line segment
     if size(points, 1) < max(deg+1-2, 2)
         % find labels of nodes
         inds = unique(lblNodes(imdilate(imgBranch, ones(3,3))));
-        inds = inds(inds ~= 0);
+        inds = inds(inds~=0);
         
-        if length(inds) < 2
+        if length(inds)<2
             disp(['Could not find extremities of branch number ' num2str(i)]);
+            coefs{i} = [0 0;0 0];
             continue;
         end
         
         % consider extremity nodes
-        node0 = nodes(inds(1), :);
-        node1 = nodes(inds(2), :);
+        node0 = nodes(inds(1),:);
+        node1 = nodes(inds(2),:);
         
         % use only a linear approximation
         xc = zeros(1, deg+1);
@@ -120,7 +143,7 @@ for i = 1:nBranches
     
     % parametrization of the polyline
     t = parametrize(points);
-    t = t / max(t);
+    t = t/max(t);
     
     % fit a polynomial curve to the set of points
     [xc yc] = polynomialCurveFit(...
@@ -129,9 +152,18 @@ for i = 1:nBranches
         1, {points(end,1), points(end,2)});
     
     % stores result
-    coefs{i} = [xc;yc];
+    coefs{i} = [xc ; yc];
 end
 
+
+%% Post-processing
+
+% manage outputs
+if nargout == 1
+    varargout = {coefs};
+elseif nargout == 2
+    varargout = {coefs, lblBranches};
+end
 
 
 
@@ -144,7 +176,7 @@ function points = chainPixels(img, varargin)
 %
 %   See also
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -158,15 +190,15 @@ if ~isempty(varargin)
 end
 
 % matrice de voisinage
-if conn == 4
+if conn==4
     f = [0 1 0;1 1 1;0 1 0];
-elseif conn == 8
+elseif conn==8
     f = ones([3 3]);
 end
 
 % find extremity points
-nb = imfilter(double(img), f) .* img;
-imgEnding = nb == 2 | nb == 1;
+nb = imfilter(double(img), f).*img;
+imgEnding = nb==2 | nb==1;
 [yi xi] = find(imgEnding);
 
 % extract coordinates of points
@@ -183,8 +215,8 @@ end
 % allocate memory
 points  = zeros(length(x), 2);
 
-if conn == 8
-    for i = 1:size(points, 1)
+if conn==8
+    for i=1:size(points, 1)
         % avoid multiple neighbors (can happen in loops)
         ind = ind(1);
         
@@ -192,15 +224,13 @@ if conn == 8
         points(i,:) = [x(ind) y(ind)];
 
         % remove processed coordinate
-        x(ind) = [];
-        y(ind) = [];
+        x(ind) = [];    y(ind) = [];
 
         % find next candidate
         ind = find(abs(x-points(i,1))<=1 & abs(y-points(i,2))<=1);
     end
-    
 else
-    for i = 1:size(points, 1)
+    for i=1:size(points, 1)
         % avoid multiple neighbors (can happen in loops)
         ind = ind(1);
         
@@ -208,8 +238,7 @@ else
         points(i,:) = [x(ind) y(ind)];
 
         % remove processed coordinate
-        x(ind) = [];
-        y(ind) = [];
+        x(ind) = [];    y(ind) = [];
 
         % find next candidate
         ind = find(abs(x-points(i,1)) + abs(y-points(i,2)) <=1 );
