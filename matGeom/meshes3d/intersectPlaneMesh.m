@@ -71,6 +71,11 @@ while ~isempty(validEdgeInds)
         % indices of the two valid edges for current face
         % (length should be equal to 2)
         inds = validEdgeInds(sum(validFaceEdge == currentFace, 2) > 0);
+        if length(inds) > 2
+            error('meshes3d:intersectPlaneMesh', ...
+                'face index %d has too many edges (%d) intersecting the plane', ...
+                currentFace, length(inds));
+        end
         currentEdgeIndex = inds(inds ~= currentEdgeIndex);
         
         inds = faceEdges(currentEdgeIndex, :);
