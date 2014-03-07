@@ -38,6 +38,14 @@ if nargin == 0
     return;
 end
 
+% extract handle of axis to draw on
+if isAxisHandle(varargin{1})
+    ax = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
+end
+
 % First extract the graph structure
 var = varargin{1};
 if iscell(var)
@@ -80,14 +88,14 @@ if size(n, 2) == 2
     % Draw 2D edges
     x = [n(e(:,1), 1) n(e(:,2), 1)]';
     y = [n(e(:,1), 2) n(e(:,2), 2)]';
-    he = plot(x, y, varargin{:});
+    he = plot(ax, x, y, varargin{:});
     
 elseif size(n, 2) == 3
     % Draw 3D edges
     x = [n(e(:,1), 1) n(e(:,2), 1)]';
     y = [n(e(:,1), 2) n(e(:,2), 2)]';
     z = [n(e(:,1), 3) n(e(:,2), 3)]';
-    he = plot3(x, y, z, varargin{:});
+    he = plot3(ax, x, y, z, varargin{:});
     
 end
 

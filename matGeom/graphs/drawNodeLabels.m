@@ -1,4 +1,4 @@
-function varargout = drawNodeLabels(nodes, value)
+function varargout = drawNodeLabels(nodes, value, varargin)
 %DRAWNODELABELS Draw values associated to graph nodes
 % 
 %   Usage:
@@ -20,6 +20,15 @@ function varargout = drawNodeLabels(nodes, value)
 %   HISTORY
 %   10/03/2004 included into lib/graph library
 
+% extract handle of axis to draw on
+if isAxisHandle(nodes)
+    ax = nodes;
+    nodes = value;
+    value = varargin{1};
+else
+    ax = gca;
+end
+
 % number and dimension of nodes
 Nn = size(nodes, 1);
 Nd = size(nodes, 2);
@@ -31,6 +40,8 @@ end
 
 % allocate memory
 h = zeros(Nn, 1);
+
+axes(ax);
 
 if Nd == 2
     % Draw labels of 2D nodes
