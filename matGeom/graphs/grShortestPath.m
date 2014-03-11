@@ -7,6 +7,10 @@ function [nodePath edgePath] = grShortestPath(nodes, edges, ind0, ind1, edgeWeig
 %   edge.
 %   The function returns a set of node indices.
 %
+%   PATH = grShortestPath(NODES, EDGES, NODEINDS, WEIGHTS)
+%   Specifies two or more points that must be traversed by the path, in the
+%   specified order.
+%
 %   % Create a simple tree graph, and compute shortest path
 %     [x y] = meshgrid([10 20 30], [10 20 30]);
 %     nodes = [x(:) y(:)];
@@ -15,20 +19,45 @@ function [nodePath edgePath] = grShortestPath(nodes, edges, ind0, ind1, edgeWeig
 %     axis equal; axis([0 40 0 40]);
 %     drawNodeLabels(nodes, 1:9)
 %     path = grShortestPath(nodes, edges, 1, 9);
+%     % same as:
+%     path = grShortestPath(nodes, edges, [1 9]);
 %
 %   See also
-%   grFindMaximalLengthPath
+%     grFindMaximalLengthPath
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2011-05-22,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
+% process the case where several node indices are specified in first arg.
+if length(ind0) > 1
+    % following optional argument is edge values
+    if exist('ind1', 'var')
+        edgeWeights = ind1;
+    else
+        edgeWeights = ones(size(edges, 1), 1);
+    end
+    
+    % concatenate path pieces
+    nodePath = [];
+    edgePath = [];
+    for i = 2:length(ind0)
+        [node0 edge0] = grShortestPath(nodes, edges, ind0(i-1), ind0(i), edgeWeights);
+        nodePath = [nodePath ; node0(2:end)]; %#ok<AGROW>
+        edgePath = [edgePath ; edge0]; %#ok<AGROW>
+    end
+    
+    return;
+end
+
 % ensure weights are defined
 if ~exist('edgeWeights', 'var')
     edgeWeights = ones(size(edges, 1), 1);
 end
+
 
 % check indices limits
 nNodes = size(nodes, 1);
