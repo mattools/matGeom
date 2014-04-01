@@ -19,6 +19,7 @@ function poly2 = polygonExpand(polygon, dist)
 %   See also:
 %   polygons2d
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE

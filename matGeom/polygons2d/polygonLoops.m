@@ -17,7 +17,7 @@ function loops = polygonLoops(poly)
 %   See also
 %   polygons2d, polygonSelfIntersections
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

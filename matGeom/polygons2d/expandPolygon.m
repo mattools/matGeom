@@ -4,9 +4,12 @@ function loops = expandPolygon(poly, dist, varargin)
 %   POLY2 = expandPolygon(POLY, DIST);
 %   Associates to each edge of the polygon POLY the parallel line located
 %   at distance DIST from the current edge, and compute intersections with
-%   neighbor parallel lines. The resulting polygon is simplified to remove
-%   inner "loops", and can be disconnected.
-%   The result is a cell array, each cell containing a simple linear ring.
+%   neighbor parallel lines. The input polygon POLY must be oriented
+%   counter-clockwise. Otherwise, distance is computed inside the polygon.
+%   The resulting polygon is simplified to remove inner "loops", and can
+%   eventually be disconnected. 
+%   The result POLY2 is a cell array, each cell containing a simple linear
+%   ring. 
 %   
 %   This is a kind of dilation, but behaviour on corners is different.
 %   This function keeps angles of polygons, but there is no direct relation
@@ -29,6 +32,7 @@ function loops = expandPolygon(poly, dist, varargin)
 %   See also:
 %   polygons2d, polygonLoops, polygonSelfIntersections 
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
