@@ -23,7 +23,7 @@ function [nodePath edgePath] = grShortestPath(nodes, edges, ind0, ind1, edgeWeig
 %     path = grShortestPath(nodes, edges, [1 9]);
 %
 %   See also
-%     grFindMaximalLengthPath
+%     graphs, grFindMaximalLengthPath
 %
 
 % ------
@@ -42,7 +42,7 @@ if length(ind0) > 1
     end
     
     % concatenate path pieces
-    nodePath = [];
+    nodePath = ind0(1);
     edgePath = [];
     for i = 2:length(ind0)
         [node0 edge0] = grShortestPath(nodes, edges, ind0(i-1), ind0(i), edgeWeights);
