@@ -1,4 +1,4 @@
-function [point isInside pos] = intersectLineTriangle3d(line, triangle, varargin)
+function [point pos isInside] = intersectLineTriangle3d(line, triangle, varargin)
 %INTERSECTLINETRIANGLE3D Intersection point of a 3D line and a 3D triangle
 %
 %   POINT = intersectLineTriangle3d(LINE, TRI)
@@ -79,13 +79,13 @@ if vectorNorm3d(n) < tol
     return;
 end
 
-
 % line direction vector
 dir = line(4:6);
 
 % vector between triangle origin and line origin
 w0 = line(1:3) - t0;
 
+% compute projection of each vector on the plane normal
 a = -dot(n, w0);
 b = dot(n, dir);
 
@@ -96,7 +96,7 @@ end
 
 % compute intersection point of line with supporting plane
 % If r < 0: point before ray
-% IF r > 1: point after edge
+% If r > 1: point after edge
 pos = a / b;
 
 % coordinates of intersection point

@@ -17,8 +17,8 @@ function varargout = fillPolygon(varargin)
 %
 %
 %   See also:
-%   polygons2d, drawCurve, drawPolygon
-%
+%     polygons2d, drawCurve, drawPolygon
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -39,7 +39,7 @@ var = varargin{1};
 if iscell(var)
     N = length(var);
     h = zeros(N, 1);
-    for i=1:N
+    for i = 1:N
         % check for empty polygons
         if ~isempty(var{i})
             h(i) = fillPolygon(var{i}, varargin{2:end});
@@ -47,21 +47,21 @@ if iscell(var)
     end
 
     % setup output values
-    if nargout>0
-        varargout{1}=h;
+    if nargout > 0
+        varargout{1} = h;
     end
     return;
 end
 
 % Extract coordinates of polygon vertices
-if size(var, 2)>1
+if size(var, 2) > 1
     % first argument is a polygon array
     px = var(:, 1);
     py = var(:, 2);
     varargin(1) = [];
 else
     % arguments 1 and 2 correspond to x and y coordinate respectively
-    if length(varargin)<2
+    if length(varargin) < 2
         error('should specify either a N*2 array, or 2 N*1 vectors');
     end
     
@@ -71,8 +71,7 @@ else
 end
 
 
-% Find position of breaks, and copies first point of each loop at the
-% end
+% Find position of breaks, and copies first point of each loop at the end
 inds = find(isnan(px(:)));
 i1 = [inds ; length(px)+1];
 i0 = [1 ; inds+1];
@@ -90,6 +89,6 @@ end
 h = fill(px, py, varargin{:}, 'lineStyle', 'none');
 
 % output
-if nargout>0
-    varargout{1}=h;
+if nargout > 0
+    varargout{1} = h;
 end
