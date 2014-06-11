@@ -150,6 +150,7 @@
 %   surfaceCurvature          - Curvature on a surface from angle and principal curvatures
 %   drawTorus                 - Draw a torus (3D ring)
 %   drawCylinder              - Draw a cylinder
+%   drawEllipseCylinder       - Draw a cylinder with ellipse cross-section
 %   drawSurfPatch             - Draw a 3D surface patch, with 2 parametrized surfaces
 %
 % Bounding boxes management
