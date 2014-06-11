@@ -6,7 +6,9 @@ function varargout = drawEdge3d(varargin)
 %   [x1 y1 z1 x2 y2 z2].
 %   No clipping is performed.
 %
-%
+%   See also
+%   drawLine3d, clipLine3d, drawEdge
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -18,15 +20,17 @@ function varargout = drawEdge3d(varargin)
 
 % extract edges from input arguments
 nCol = size(varargin{1}, 2);
-if nCol==6
+if nCol == 6
     % all parameters in a single array
     edges = varargin{1};
     options = varargin(2:end);
-elseif nCol==3
+    
+elseif nCol == 3
     % parameters are two points, or two arrays of points, of size N*3.
     edges = [varargin{1} varargin{2}];
     options = varargin(3:end);
-elseif nCol==6
+    
+elseif nargin >= 6
     % parameters are 6 parameters of the edge : x1 y1 z1 x2 y2 and z2
     edges = [varargin{1} varargin{2} varargin{3} varargin{4} varargin{5} varargin{6}];
     options = varargin(7:end);
@@ -43,6 +47,6 @@ if ~isempty(options)
 end
 
 % return handle to created Edges
-if nargout>0
-    varargout{1}=h;
+if nargout > 0
+    varargout = {h};
 end
