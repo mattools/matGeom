@@ -57,7 +57,7 @@ vertices = V(indVert, :);
 K = convhulln(vertices);
 
 % draw the polyhedron
-drawPolyhedron(vertices, K);
+drawMesh(vertices, K);
 
 
 %% Compute and display minimal polyhedron
@@ -66,16 +66,17 @@ drawPolyhedron(vertices, K);
 % new faces are 3D polygons
 % K2 is a cell array, each cell containing a row vector with indices of
 % 'points' corresponding to vertices of each face.
-K2 = meshReduce(vertices, K);
+[V2 F2] = mergeCoplanarFaces(vertices, K);
 
 % display the germs
-figure(1); clf; hold on;
+figure(2); clf; hold on;
 set(gcf, 'renderer', 'opengl');
 drawPoint3d(germs);
 
 % draw the polyhedron
-drawPolyhedron(vertices, K2);
+drawMesh(V2, F2);
 
 % graphical settings
 view(3);
 axis equal;
+

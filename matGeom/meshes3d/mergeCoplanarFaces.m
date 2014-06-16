@@ -3,29 +3,30 @@ function varargout = mergeCoplanarFaces(nodes, varargin)
 %
 %   [NODES FACES] = mergeCoplanarFaces(NODES, FACES)
 %   [NODES EDGES FACES] = mergeCoplanarFaces(NODES, EDGES, FACES)
-%   NODES is a set of 3D points (as a Nn-by-3 array), 
+%   NODES is a set of 3D points (as a nNodes-by-3 array), 
 %   and FACES is one of:
-%   - a Nf-by-X array containing vertex indices of each face, with each
+%   - a nFaces-by-X array containing vertex indices of each face, with each
 %   face having the same number of vertices,
-%   - a Nf-by 1 cell array, each cell containing indices of a face.
+%   - a nFaces-by-1 cell array, each cell containing indices of a face.
 %   The function groups faces which are coplanar and contiguous, resulting
 %   in a "lighter" mesh. This can be useful for visualizing binary 3D
 %   images for example.
 %
 %   FACES = mergeCoplanarFaces(..., PRECISION)
 %   Adjust the threshold for deciding if two faces are coplanar or
-%   parallel. Default value is 1e-14.
+%   parallel. Default value is 1e-5.
 %
 %   Example
-%   [v e f] = createCube;
-%   figure; drawMesh(v, f); view(3); axis equal; view vis3d;
-%   f2 = mergeCoplanarFaces(v, f);
-%   figure; drawMesh(v, f2); view(3); axis equal; view vis3d;
+%   [v e iFace] = createCube;
+%   figure; drawMesh(v, iFace); view(3); axis equal;
+%   [v2 f2] = mergeCoplanarFaces(v, iFace);
+%   figure; drawMesh(v, f2); 
+%   view(3); axis equal; view(3);
 %
 %   See also
 %   meshes3d, drawMesh, minConvexHull, triangulateFaces
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -45,7 +46,7 @@ function varargout = mergeCoplanarFaces(nodes, varargin)
 %% Process input arguments
 
 % set up precision
-acc = 1e-14;
+acc = 1e-5;
 if ~isempty(varargin)
     var = varargin{end};
     if length(var) == 1
@@ -65,11 +66,11 @@ end
 %% Initialisations
 
 % number of faces
-Nn = size(nodes, 1);
-Nf = size(faces, 1);
+nNodes = size(nodes, 1);
+nFaces = size(faces, 1);
 
 % compute number of vertices of each face
-Fn = ones(Nf, 1) * size(faces, 2);
+Fn = ones(nFaces, 1) * size(faces, 2);
 
 % compute normal of each faces
 normals = faceNormal(nodes, faces);
@@ -81,28 +82,27 @@ edges2  = zeros(0, 2);
 % Processing flag for each face
 % 1: face to process, 0: already processed
 % in the beginning, every triangle face need to be processed
-flag = ones(Nf, 1);
+flag = ones(nFaces, 1);
 
 
 %% Main iteration
 
 % iterate on each  face
-for f = 1:Nf
+for iFace = 1:nFaces
     
     % check if face was already performed
-    if ~flag(f)
+    if ~flag(iFace)
         continue;
     end
 
     % indices of faces with same normal
-%     ind = find(abs(vectorNorm3d(cross(repmat(normals(f, :), [Nf 1]), normals)))<acc);
-    ind = find(vectorNorm3d(vectorCross3d(normals(f, :), normals)) < acc);
-    %ind = ind(ind~=i);
+%     ind = find(abs(vectorNorm3d(cross(repmat(normals(iFace, :), [nFaces 1]), normals)))<acc);
+    ind = find(vectorNorm3d(vectorCross3d(normals(iFace, :), normals)) < acc);
     
     % keep only coplanar faces (test coplanarity of points in both face)
     ind2 = false(size(ind));
     for j = 1:length(ind)
-        ind2(j) = isCoplanar(nodes([faces(f,:) faces(ind(j),:)], :), acc);
+        ind2(j) = isCoplanar(nodes([faces(iFace,:) faces(ind(j),:)], :), acc);
     end
     ind2 = ind(ind2);
     
@@ -117,31 +117,34 @@ for f = 1:Nf
     end
     planeEdges = unique(planeEdges, 'rows');
     
-    % relabel plane edges, and find connected components
+    % relabel plane edges
     [planeNodes I J] = unique(planeEdges(:)); %#ok<ASGLU>
     planeEdges2 = reshape(J, size(planeEdges));
+    
+    % The set of coplanar faces may not necessarily form a single connected
+    % component. The following computes label of each connected component.
     component   = grLabel(nodes(planeNodes, :), planeEdges2);
     
     % compute degree (number of adjacent faces) of each edge.
     Npe = size(planeEdges, 1);
-    edgesDegree = zeros(Npe, 1);
+    edgeDegrees = zeros(Npe, 1);
     for i = 1:length(ind2)
         face = faces(ind2(i), :);
         faceEdges = sort([face' face([2:end 1])'], 2);
         for j = 1:size(faceEdges, 1)
             indEdge = find(sum(ismember(planeEdges, faceEdges(j,:)),2)==2);
-            edgesDegree(indEdge) = edgesDegree(indEdge)+1;
+            edgeDegrees(indEdge) = edgeDegrees(indEdge)+1;
         end
     end
     
     % extract unique edges and nodes of the plane
-    planeEdges  = planeEdges(edgesDegree==1, :);
-    planeEdges2 = planeEdges2(edgesDegree==1, :);
+    planeEdges  = planeEdges(edgeDegrees==1, :);
+    planeEdges2 = planeEdges2(edgeDegrees==1, :);
     
     % find connected component of each edge
     planeEdgesComp = zeros(size(planeEdges, 1), 1);
-    for e = 1:size(planeEdges, 1)
-        planeEdgesComp(e) = component(planeEdges2(e, 1));
+    for iEdge = 1:size(planeEdges, 1)
+        planeEdgesComp(iEdge) = component(planeEdges2(iEdge, 1));
     end
     
     % iterate on connected faces
@@ -172,7 +175,7 @@ end
 indNodes = unique(edges2(:));
 
 % for each node, compute index of corresponding new node (or 0 if dropped)
-refNodes = zeros(Nn, 1);
+refNodes = zeros(nNodes, 1);
 for i = 1:length(indNodes)
     refNodes(indNodes(i)) = i;
 end
@@ -183,14 +186,14 @@ for i = 1:length(edges2(:))
 end
 
 % changes indices of nodes in faces2 array
-for f = 1:length(faces2)
-    face = faces2{f};
+for iFace = 1:length(faces2)
+    face = faces2{iFace};
     for i = 1:length(face)
         if ~isnan(face(i))
             face(i) = refNodes(face(i));
         end
     end
-    faces2{f} = face;
+    faces2{iFace} = face;
 end
 
 % keep only boundary nodes
@@ -241,15 +244,15 @@ function labels = grLabel(nodes, edges)
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 
 % init
-Nn = size(nodes, 1);
-labels = (1:Nn)';
+nNodes = size(nodes, 1);
+labels = (1:nNodes)';
 
 % iteration
 modif = true;
 while modif
     modif = false;
     
-    for i=1:Nn
+    for i=1:nNodes
         neigh = getNeighbourNodes(i, edges);
         neighLabels = labels([i;neigh]);
         
