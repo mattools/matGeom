@@ -60,7 +60,7 @@ faces = {};
 flag = ones(N, 1);
 
 % iterate on each triangle face
-for i=1:N
+for i = 1:N
     
     % check if face was already performed
     if ~flag(i)
@@ -73,7 +73,7 @@ for i=1:N
     
     % keep only coplanar faces (test coplanarity of points in both face)
     ind2 = i;
-    for j=1:length(ind)
+    for j = 1:length(ind)
         if isCoplanar(nodes([hull(i,:) hull(ind(j),:)], :), acc)
             ind2 = [ind2 ind(j)]; %#ok<AGROW>
         end
@@ -82,7 +82,7 @@ for i=1:N
     
     % compute order of the vertices in current face
     vertices = unique(hull(ind2, :));
-    [tmp I]  = angleSort3d(nodes(vertices, :)); %#ok<ASGLU>
+    [tmp, I]  = angleSort3d(nodes(vertices, :)); %#ok<ASGLU>
     
     % add a new face to the list
     face = vertices(I);
