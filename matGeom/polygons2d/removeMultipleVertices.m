@@ -52,7 +52,7 @@ if closed
     dist = sqrt(sum((poly(end,:) - poly(1,:)).^2, 2));
     multi = [multi ; dist < eps];
 else
-    multi = [mutli ; 0];
+    multi = [multi ; false];
 end
 
 % remove multiple vertices
