@@ -22,6 +22,6 @@ warning('matGeom:deprecated', ...
 if nargout <= 1
     varargout = {circleArcToPolyline(arc, N)};
 else
-    [x y] = circleArcToPolyline(arc, N);
+    [x, y] = circleArcToPolyline(arc, N);
     varargout = {x, y};
 end

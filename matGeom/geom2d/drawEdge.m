@@ -39,7 +39,7 @@ function varargout = drawEdge(varargin)
 %   03/08/2010 re-organize code
 
 % separate edge and optional arguments
-[ax edge options] = parseInputArguments(varargin{:});
+[ax, edge, options] = parseInputArguments(varargin{:});
 
 % draw the edges
 if size(edge, 2) == 4
@@ -80,7 +80,7 @@ for i = 1:size(edge, 1)
 end
 
     
-function [ax edge options] = parseInputArguments(varargin)
+function [ax, edge, options] = parseInputArguments(varargin)
 
 % extract handle of axis to draw on
 if isAxisHandle(varargin{1})

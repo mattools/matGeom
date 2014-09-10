@@ -37,6 +37,6 @@ warning('matGeom:deprecated', ...
 if nargout <= 1
     varargout = {ellipseToPolygon(ellipse, N)};
 else
-    [x y] = ellipseToPolygon(ellipse, N);
+    [x, y] = ellipseToPolygon(ellipse, N);
     varargout = {x, y};
 end

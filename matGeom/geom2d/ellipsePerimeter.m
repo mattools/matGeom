@@ -22,6 +22,7 @@ function perim = ellipsePerimeter(ellipse, varargin)
 %     ellipses2d, drawEllipse
 %
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -66,6 +67,10 @@ for i = 1:n
     eps = tol * max(ra(i), rb(i));
     
     % integrate on first quadrant
-    perim(i) = 4 * quad(f, 0, pi/2, eps);
+    if verLessThan('matlab', '7.14')
+        perim(i) = 4 * quad(f, 0, pi/2, eps); %#ok<DQUAD>
+    else
+        perim(i) = 4 * integral(f, 0, pi/2, 'AbsTol', eps);
+    end
 end
 

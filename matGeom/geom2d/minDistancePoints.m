@@ -133,10 +133,10 @@ if n == 2
         % either on all couple of points
         mat = repmat((1:n1)', [1 n1]);
         ind = mat < mat';
-        [minSqDist ind] = min(dist(ind));
+        [minSqDist, ind] = min(dist(ind));
     else
         % or for each point of P1
-        [minSqDist ind] = min(dist, [], 2);
+        [minSqDist, ind] = min(dist, [], 2);
     end
     
     % convert squared distance to distance
@@ -161,10 +161,10 @@ else
         % either on all couple of points
         mat = repmat((1:n1)', [1 n1]);
         ind = mat < mat';
-        [minSqDist ind] = min(dist(ind));
+        [minSqDist, ind] = min(dist(ind));
     else
         % or for each point of P1
-        [minSqDist ind] = min(dist, [], 2);
+        [minSqDist, ind] = min(dist, [], 2);
     end
 
     % convert squared distance to distance

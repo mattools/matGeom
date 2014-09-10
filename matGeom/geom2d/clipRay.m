@@ -1,4 +1,4 @@
-function [edge isInside] = clipRay(ray, box)
+function [edge, isInside] = clipRay(ray, box)
 % Clip a ray with a box
 %
 %   EDGE = clipRay(RAY, BOX);

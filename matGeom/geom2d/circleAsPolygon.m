@@ -37,6 +37,6 @@ warning('matGeom:deprecated', ...
 if nargout <= 1
     varargout = {circleToPolygon(circle, varargin{:})};
 else
-    [x y] = circleToPolygon(circle, varargin{:});
+    [x, y] = circleToPolygon(circle, varargin{:});
     varargout = {x, y};
 end

@@ -52,7 +52,7 @@ pts2 = pts - repmat(pt0, [n 1]);
 angle = lineAngle([zeros(n, 2) pts2]);
 angle = mod(angle - theta0 + 2*pi, 2*pi);
 
-[dummy, I] = sort(angle);
+[dummy, I] = sort(angle); %#ok<ASGLU>
 
 % format output
 if nargout<2

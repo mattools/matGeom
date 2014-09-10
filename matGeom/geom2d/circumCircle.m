@@ -22,7 +22,7 @@ function varargout = circumCircle(varargin)
 % Copyright 2011 INRA - Cepia Software Platform.
 
 % extract the three points
-[a b c] = parseThreePoints(varargin{:});
+[a, b, c] = parseThreePoints(varargin{:});
 
 % circle center
 center = circumCenter(a, b, c);

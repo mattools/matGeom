@@ -77,7 +77,7 @@ for i = 1:nLines
 	
     % sort points according to their position on the line
     pos = linePosition(points, line(i,:));
-    [pos inds] = sort(pos); %#ok<ASGLU>
+    [pos, inds] = sort(pos); %#ok<ASGLU>
     points = points(inds, :);
     
     % create clipped edge by using the two points in the middle

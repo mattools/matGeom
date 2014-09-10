@@ -110,7 +110,7 @@ for i = 1:length(x0)
         createScaling(1, a);
     
 	% compute points on the parabola
-    [xt yt] = transformPoint(t(:), t(:).^2, trans);
+    [xt, yt] = transformPoint(t(:), t(:).^2, trans);
 
     % draw it
     h(i) = plot(ax, xt, yt, varargin{:});

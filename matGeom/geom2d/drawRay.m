@@ -41,7 +41,7 @@ end
 box = axis(ax);
 
 % compute clipped shapes
-[clipped isInside] = clipRay(ray, box);
+[clipped, isInside] = clipRay(ray, box);
 
 % allocate memory for handle
 h = -ones(size(ray, 1), 1);

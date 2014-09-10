@@ -1,4 +1,4 @@
-function [hd ind1 ind2] = hausdorffDistance(pts1, pts2)
+function [hd, ind1, ind2] = hausdorffDistance(pts1, pts2)
 %HAUSDORFFDISTANCE  Hausdorff distance between two point sets
 %
 %   HD = hausdorffDistance(PTS1, PTS2)
@@ -44,12 +44,12 @@ function [hd ind1 ind2] = hausdorffDistance(pts1, pts2)
 % Copyright 2012 INRA - Cepia Software Platform.
 
 % distance from pts1 to pts2
-[dists1 ind12] = minDistancePoints(pts1, pts2);
-[max1 ind11] = max(dists1);
+[dists1, ind12] = minDistancePoints(pts1, pts2);
+[max1, ind11] = max(dists1);
 
 % distance from pts2 to pts1
-[dists2 ind22] = minDistancePoints(pts2, pts1);
-[max2 ind21] = max(dists2);
+[dists2, ind22] = minDistancePoints(pts2, pts1);
+[max2, ind21] = max(dists2);
 
 % keep the max of the two distances
 hd = max(max1, max2);

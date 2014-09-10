@@ -1,4 +1,4 @@
-function [dists neighInds] = nndist(points)
+function [dists, neighInds] = nndist(points)
 %NNDIST  Nearest-neighbor distances of each point in a set
 %
 %   DISTS = nndist(POINTS)
@@ -44,6 +44,6 @@ for i = 1:n
     inds = unique(tri.Triangulation(sum(tri.Triangulation == i, 2) > 0, :));
     
     % compute minimal distance 
-    [dists(i) indN] = min(distancePoints(points(i,:), points(inds(inds~=i), :)));
+    [dists(i), indN] = min(distancePoints(points(i,:), points(inds(inds~=i), :)));
     neighInds(i) = inds(indN);
 end

@@ -1,4 +1,4 @@
-function [dist pos] = distancePointLine(point, line)
+function [dist, pos] = distancePointLine(point, line)
 %DISTANCEPOINTLINE Minimum distance between a point and a line
 %
 %   D = distancePointLine(POINT, LINE)

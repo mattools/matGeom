@@ -56,8 +56,8 @@ if nV < 3
 end
 
 % indices of vertices in extreme y directions
-[tmp indA] = min(hull(:, 2)); %#ok<ASGLU>
-[tmp indB] = max(hull(:, 2)); %#ok<ASGLU>
+[tmp, indA] = min(hull(:, 2)); %#ok<ASGLU>
+[tmp, indB] = max(hull(:, 2)); %#ok<ASGLU>
 
 caliperA = [ 1 0];    % Caliper A points along the positive x-axis
 caliperB = [-1 0];    % Caliper B points along the negative x-axis

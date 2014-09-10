@@ -86,8 +86,8 @@ opt.Display = 'off';
 % using linear regression
 % Not very clean : I could not impose a*a+b*b=1, so I checked for both a=1
 % and b=1, and I kept the result with lowest residual error....
-[coef1 res1] = lsqlin(X, zeros(N, 1), A, b, Aeq1, beq1, [], [], [], opt);
-[coef2 res2] = lsqlin(X, zeros(N, 1), A, b, Aeq2, beq2, [], [], [], opt);
+[coef1, res1] = lsqlin(X, zeros(N, 1), A, b, Aeq1, beq1, [], [], [], opt);
+[coef2, res2] = lsqlin(X, zeros(N, 1), A, b, Aeq2, beq2, [], [], [], opt);
 
 % choose the best line
 if res1<res2

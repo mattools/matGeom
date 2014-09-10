@@ -47,10 +47,6 @@ function line = medianLine(varargin)
 % 2010-08-06 vectorize and change behaviour for N-by-4 inputs
 
 nargs = length(varargin);
-x0 = 0;
-y0 = 0;
-dx = 0;
-dy = 0;
 
 if nargs == 1
     tab = varargin{1};

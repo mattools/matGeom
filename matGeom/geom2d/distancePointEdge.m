@@ -1,4 +1,4 @@
-function [dist pos] = distancePointEdge(point, edge)
+function [dist, pos] = distancePointEdge(point, edge)
 %DISTANCEPOINTEDGE Minimum distance between a point and an edge
 %
 %   DIST = distancePointEdge(POINT, EDGE);
