@@ -20,14 +20,14 @@ initTestSuite;
 
 function testGraph01 %#ok<*DEFNU>
 
-[nodes edges] = createTestGraph01;
+[nodes, edges] = createTestGraph01;
 path = grFindGeodesicPath(nodes, edges, 3, 8);
 exp = [4 1 3 10];
 assertEqual(exp, path);
 
 function testGraph03
 
-[nodes edges] = createTestGraph03;
+[nodes, edges] = createTestGraph03;
 path = grFindGeodesicPath(nodes, edges, 1, 12);
 exp = [1 2 5 7 11 13];
 assertEqual(exp, path);

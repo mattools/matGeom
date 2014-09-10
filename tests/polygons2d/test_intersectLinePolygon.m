@@ -61,7 +61,7 @@ target = [10 0];
 intersects = intersectLinePolygon(lineH0, poly);
 assertTrue(ismember(target, intersects, 'rows'));
 
-[intersects inds] = intersectLinePolygon(lineH0, poly);
+[intersects, inds] = intersectLinePolygon(lineH0, poly);
 assertEqual(size(intersects, 1), size(inds, 1));
 
 
@@ -72,7 +72,7 @@ assertTrue(ismember(target, intersects, 'rows'));
 target = [0 10];
 assertTrue(ismember(target, intersects, 'rows'));
 
-[intersects inds] = intersectLinePolygon(lineH1, poly);
+[intersects, inds] = intersectLinePolygon(lineH1, poly);
 assertEqual(size(intersects, 1), size(inds, 1));
 
 
@@ -81,7 +81,7 @@ intersects = intersectLinePolygon(lineH2, poly);
 target = [10 20];
 assertTrue(ismember(target, intersects, 'rows'));
 
-[intersects inds] = intersectLinePolygon(lineH2, poly);
+[intersects, inds] = intersectLinePolygon(lineH2, poly);
 assertEqual(size(intersects, 1), size(inds, 1));
 
 
@@ -90,7 +90,7 @@ target = [0 10];
 intersects = intersectLinePolygon(lineV0, poly);
 assertTrue(ismember(target, intersects, 'rows'));
 
-[intersects inds] = intersectLinePolygon(lineV0, poly);
+[intersects, inds] = intersectLinePolygon(lineV0, poly);
 assertEqual(size(intersects, 1), size(inds, 1));
 
 
@@ -101,7 +101,7 @@ assertTrue(ismember(target, intersects, 'rows'));
 target = [10 0];
 assertTrue(ismember(target, intersects, 'rows'));
 
-[intersects inds] = intersectLinePolygon(lineV1, poly);
+[intersects, inds] = intersectLinePolygon(lineV1, poly);
 assertEqual(size(intersects, 1), size(inds, 1));
 
 
@@ -110,7 +110,7 @@ intersects = intersectLinePolygon(lineV2, poly);
 target = [20 10];
 assertTrue(ismember(target, intersects, 'rows'));
 
-[intersects inds] = intersectLinePolygon(lineV2, poly);
+[intersects, inds] = intersectLinePolygon(lineV2, poly);
 assertEqual(size(intersects, 1), size(inds, 1));
 
 
@@ -120,7 +120,7 @@ function testMShape
 poly = [10 10;60 10;60 40;40 20;30 20;10 40];
 line = [0 30 3 0];
 
-[inters inds] = intersectLinePolygon(line, poly);
+[inters, inds] = intersectLinePolygon(line, poly);
 expInters = [10 30;20 30;50 30;60 30];
 assertEqual(expInters, inters);
 expInds = [6;5;3;2];
@@ -139,7 +139,7 @@ function testGetEdgesIndices
 
 poly = [0 0;10 0;10 10;0 10];
 line = [5 5 1 0];
-[intersects inds] = intersectLinePolygon(line, poly); %#ok<ASGLU>
+[intersects, inds] = intersectLinePolygon(line, poly); %#ok<ASGLU>
 
 assertEqual(2, length(inds));
 assertEqual([4;2], inds);

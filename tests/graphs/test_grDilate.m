@@ -20,7 +20,7 @@ initTestSuite;
 
 function testSimpleGraph %#ok<*DEFNU>
 
-[nodes edges values] = createTestGraph01(); %#ok<ASGLU>
+[nodes, edges, values] = createTestGraph01(); %#ok<ASGLU>
 
 valDil = grDilate(edges, values);
 exp = [80;80;70;70;80;50;80;40];

@@ -28,7 +28,7 @@ assertEqual(exp, inter);
 
 line2 = [10 0 0 1 2 3];
 
-[inter inside] = intersectLinePolygon3d(line2, pts3d); %#ok<ASGLU>
+[inter, inside] = intersectLinePolygon3d(line2, pts3d); %#ok<ASGLU>
 assertFalse(inside);
 
 
@@ -47,7 +47,7 @@ function testLineArray
 pts3d = [3 0 0;0 0 9; 0 6 0];
 lines = [0 0 0 3 6 9 ; 10 0 0 3 6 9; 3 6 9 3 6 9];
 
-[inters inside] = intersectLinePolygon3d(lines, pts3d);
+[inters, inside] = intersectLinePolygon3d(lines, pts3d);
 assertEqual(3, size(inters, 1));
 assertEqual([true;false;true], inside);
 
@@ -62,7 +62,7 @@ lines = [...
 
 poly = [0 0 0; 10 0 0; 10 10 0; 0 10 0];
 
-[inters inside] = intersectLinePolygon3d(lines, poly); %#ok<ASGLU>
+[inters, inside] = intersectLinePolygon3d(lines, poly); %#ok<ASGLU>
 
 exp = [false; false; false; true; true];
 assertEqual(exp, inside);

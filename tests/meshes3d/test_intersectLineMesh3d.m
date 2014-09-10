@@ -27,7 +27,7 @@ z0 = 40+30;
 origin = [x0 y0 z0];
     
 % create a cube
-[v f] = createCube();
+[v, f] = createCube();
 v = transformPoint3d(v*60, createTranslation3d([20 30 40]));
 f = triangulateFaces(f);
 

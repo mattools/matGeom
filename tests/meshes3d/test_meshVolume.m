@@ -19,14 +19,14 @@ initTestSuite;
 
 function test_Cube %#ok<*DEFNU>
 % Test call of function without argument
-[v f] = createCube;
+[v, f] = createCube;
 vol = meshVolume(v, f);
 assertEqual(1, vol);
 
 
 function test_Tetrahedron
 % Test call of function without argument
-[v f] = createTetrahedron;
+[v, f] = createTetrahedron;
 vol = meshVolume(v, f);
 
 % this is not a unit tetrahedron, volume is bigger...

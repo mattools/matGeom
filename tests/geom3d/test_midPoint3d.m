@@ -89,7 +89,7 @@ expX = [20 ; 30 ; 40];
 expY = [30 ; 40 ; 50];
 expZ = [40 ; 50 ; 60];
 
-[x y z] = midPoint3d(p1, p2);
+[x, y, z] = midPoint3d(p1, p2);
 assertEqual(expX, x);
 assertEqual(expY, y);
 assertEqual(expZ, z);

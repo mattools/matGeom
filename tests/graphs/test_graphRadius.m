@@ -20,7 +20,7 @@ initTestSuite;
 
 function testGraph02 %#ok<*DEFNU>
 
-[nodes edges] = createTestGraph02;
+[nodes, edges] = createTestGraph02;
 r = graphRadius(nodes, edges);
 
 exp = 3;

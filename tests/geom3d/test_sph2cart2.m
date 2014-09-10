@@ -19,21 +19,21 @@ initTestSuite;
 
 function testNorthPole %#ok<*DEFNU>
 
-[x y z] = sph2cart2(0, 0, 1);
+[x, y, z] = sph2cart2(0, 0, 1);
 assertElementsAlmostEqual(0, x);
 assertElementsAlmostEqual(0, y);
 assertElementsAlmostEqual(1, z);
 
 function testPointOx
 
-[x y z] = sph2cart2(pi/2, 0, 10);
+[x, y, z] = sph2cart2(pi/2, 0, 10);
 assertElementsAlmostEqual(10, x);
 assertElementsAlmostEqual(0, y);
 assertElementsAlmostEqual(0, z);
 
 function testPointXY
 
-[x y z] = sph2cart2(pi/2, pi/4, 10*sqrt(2));
+[x, y, z] = sph2cart2(pi/2, pi/4, 10*sqrt(2));
 assertElementsAlmostEqual(10, x);
 assertElementsAlmostEqual(10, y);
 assertElementsAlmostEqual(0, z);
@@ -42,7 +42,7 @@ assertElementsAlmostEqual(0, z);
 
 function testSingleInput
 
-[x y z] = sph2cart2([0, 0, 1]);
+[x, y, z] = sph2cart2([0, 0, 1]);
 assertElementsAlmostEqual(0, x);
 assertElementsAlmostEqual(0, y);
 assertElementsAlmostEqual(1, z);
@@ -65,7 +65,7 @@ pts = [ ...
     pi/3 7*pi/3 20; ...
     2*pi/3 7*pi/3 2];
 
-[theta phi rho] = cart2sph2(pts);
+[theta, phi, rho] = cart2sph2(pts);
 pts2 = sph2cart2(theta, phi, rho);
 
 assertElementsAlmostEqual(pts2, pts);

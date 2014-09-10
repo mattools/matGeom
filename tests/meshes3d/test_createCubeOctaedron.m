@@ -25,12 +25,12 @@ createCubeOctahedron();
 
 function testVEFCreation
 
-[v e f] = createCubeOctahedron();
+[v, e, f] = createCubeOctahedron();
 assertTrue(~isempty(v));
 assertTrue(~isempty(e));
 assertTrue(~isempty(f));
 
-[nv ne nf] = getMeshElementsNumber;
+[nv, ne, nf] = getMeshElementsNumber;
 assertEqual([nv 3], size(v));
 assertEqual([ne 2], size(e));
 assertEqual(nf, length(f));
@@ -38,11 +38,11 @@ assertEqual(nf, length(f));
 
 function testVFCreation
 
-[v f] = createCubeOctahedron();
+[v, f] = createCubeOctahedron();
 assertTrue(~isempty(v));
 assertTrue(~isempty(f));
 
-[nv ne nf] = getMeshElementsNumber; %#ok<ASGLU>
+[nv, ne, nf] = getMeshElementsNumber; %#ok<ASGLU>
 assertEqual([nv 3], size(v));
 assertEqual(nf, length(f));
 
@@ -55,7 +55,7 @@ assertTrue(isfield(mesh, 'vertices'));
 assertTrue(isfield(mesh, 'edges'));
 assertTrue(isfield(mesh, 'faces'));
 
-[nv ne nf] = getMeshElementsNumber;
+[nv, ne, nf] = getMeshElementsNumber;
 assertEqual([nv 3], size(mesh.vertices));
 assertEqual([ne 2], size(mesh.edges));
 assertEqual(nf, length(mesh.faces));
@@ -63,7 +63,7 @@ assertEqual(nf, length(mesh.faces));
 
 function testFacesOutwards
 
-[v e f] = createCubeOctahedron(); %#ok<ASGLU>
+[v, e, f] = createCubeOctahedron(); %#ok<ASGLU>
 
 centro = centroid(v);
 fc  = faceCentroids(v, f);
@@ -77,7 +77,7 @@ dp = dot(fc2, n, 2);
 assertTrue(sum(dp <= 0) == 0);
 
 
-function [nv ne nf] = getMeshElementsNumber
+function [nv, ne, nf] = getMeshElementsNumber
 
 nv = 12;
 ne = 24;

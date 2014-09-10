@@ -1,4 +1,4 @@
-function [nodes edges] = createTestGraph03(varargin)
+function [nodes, edges] = createTestGraph03(varargin)
 %CREATETESTGRAPH03  One-line description here, please.
 %
 %   output = createTestGraph03(input)

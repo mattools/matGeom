@@ -88,7 +88,7 @@ p2 = [30 40];
 expX = [20 ; 30 ; 40];
 expY = [30 ; 40 ; 50];
 
-[x y] = midPoint(p1, p2);
+[x, y] = midPoint(p1, p2);
 assertEqual(expX, x);
 assertEqual(expY, y);
 

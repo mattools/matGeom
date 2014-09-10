@@ -28,7 +28,7 @@ assertEqual(exp, inter);
 
 line2 = [10 0 0 1 2 3];
 
-[inter inside] = intersectRayPolygon3d(line2, pts3d); %#ok<ASGLU>
+[inter, inside] = intersectRayPolygon3d(line2, pts3d); %#ok<ASGLU>
 assertFalse(inside);
 
 
@@ -37,7 +37,7 @@ function testReverseTriangle
 pts3d = [3 0 0; 0 6 0;0 0 9];
 line1 = [0 0 0 1 2 3];
 
-inter = intersectRayPolygon3d(line1, pts3d);
+inter, = intersectRayPolygon3d(line1, pts3d);
 exp = [1 2 3];
 assertEqual(exp, inter);
 

@@ -19,13 +19,13 @@ initTestSuite;
 
 function test_Simple %#ok<*DEFNU>
 % Test call of function without argument
-[v f] = createDurerPolyhedron;
+[v, f] = createDurerPolyhedron;
 assertEqual([12 3], size(v));
 assertEqual(8, length(f));
 
 function test_VEF
 % Test call of function without argument
-[v e f] = createDurerPolyhedron;
+[v, e, f] = createDurerPolyhedron;
 assertEqual([12 3], size(v));
 assertEqual([18 2], size(e));
 assertEqual(8, length(f));

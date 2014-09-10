@@ -21,7 +21,7 @@ function test_cube_horizPlane %#ok<*DEFNU>
 % Test call of function without argument
 
 plane = createPlane([5 5 5], [0 0 1]);
-[v f] = createCube;
+[v, f] = createCube;
 v = v * 10;
 
 polys = intersectPlaneMesh(plane, v, f);
@@ -35,7 +35,7 @@ function test_cube_diagPlane
 % Test call of function without argument
 
 plane = createPlane([1 1 1], [3 4 5]);
-[v f] = createCube;
+[v, f] = createCube;
 v = v * 5;
 
 polys = intersectPlaneMesh(plane, v, f);
@@ -50,7 +50,7 @@ function test_cube_planeOutside
 % Test call of function without argument
 
 plane = createPlane([15 15 15], [0 0 1]);
-[v f] = createCube;
+[v, f] = createCube;
 v = v * 5;
 
 polys = intersectPlaneMesh(plane, v, f);

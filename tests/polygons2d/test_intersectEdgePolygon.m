@@ -30,7 +30,7 @@ function test_GetIndex
 poly = [0 0;10 0;10 10;0 10];
 edge = [9 2 9+3*1 2+3*2];
 exp = [10 4];
-[inter index] = intersectEdgePolygon(edge, poly);
+[inter, index] = intersectEdgePolygon(edge, poly);
 assertEqual(exp, inter);
 assertEqual(2, index);
 

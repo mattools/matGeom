@@ -1,4 +1,4 @@
-function [nodes edges] = createTestGraph02(varargin)
+function [nodes, edges] = createTestGraph02(varargin)
 %CREATETESTGRAPH02  Test graph for geodesic functions
 %
 %   [nodes edges] = createTestGraph02;

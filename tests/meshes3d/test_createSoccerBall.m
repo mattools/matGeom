@@ -25,12 +25,12 @@ createSoccerBall();
 
 function testVEFCreation
 
-[v e f] = createSoccerBall();
+[v, e, f] = createSoccerBall();
 assertTrue(~isempty(v));
 assertTrue(~isempty(e));
 assertTrue(~isempty(f));
 
-[nv ne nf] = getMeshElementsNumber;
+[nv, ne, nf] = getMeshElementsNumber;
 assertEqual([nv 3], size(v));
 assertEqual([ne 2], size(e));
 assertEqual(nf, length(f));
@@ -38,11 +38,11 @@ assertEqual(nf, length(f));
 
 function testVFCreation
 
-[v f] = createSoccerBall();
+[v, f] = createSoccerBall();
 assertTrue(~isempty(v));
 assertTrue(~isempty(f));
 
-[nv ne nf] = getMeshElementsNumber; %#ok<ASGLU>
+[nv, ne, nf] = getMeshElementsNumber; %#ok<ASGLU>
 assertEqual([nv 3], size(v));
 assertEqual(nf, length(f));
 
@@ -55,13 +55,13 @@ assertTrue(isfield(mesh, 'vertices'));
 assertTrue(isfield(mesh, 'edges'));
 assertTrue(isfield(mesh, 'faces'));
 
-[nv ne nf] = getMeshElementsNumber;
+[nv, ne, nf] = getMeshElementsNumber;
 assertEqual([nv 3], size(mesh.vertices));
 assertEqual([ne 2], size(mesh.edges));
 assertEqual(nf, length(mesh.faces));
 
 
-function [nv ne nf] = getMeshElementsNumber
+function [nv, ne, nf] = getMeshElementsNumber
 
 nv = 60;
 ne = 90;

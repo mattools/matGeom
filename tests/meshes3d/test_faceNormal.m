@@ -19,7 +19,7 @@ initTestSuite;
 
 function test_Cube %#ok<*DEFNU>
 % Test call of function without argument
-[v f] = createCube;
+[v, f] = createCube;
 n = faceNormal(v, f);
 exp = [0 0 -1; 0 0 1; 1 0 0; -1 0 0; 0 -1 0; 0 1 0];
 assertElementsAlmostEqual(exp, n, 'absolute', 1e-10);

@@ -20,7 +20,7 @@ initTestSuite;
 
 function testGraph02 %#ok<*DEFNU>
 
-[nodes edges] = createTestGraph02;
+[nodes, edges] = createTestGraph02;
 verts = graphPeripheralVertices(nodes, edges);
 
 exp = [1;2;11;12];

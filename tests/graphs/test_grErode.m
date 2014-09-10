@@ -20,7 +20,7 @@ initTestSuite;
 
 function testSimpleGraph %#ok<*DEFNU>
 
-[nodes edges values] = createTestGraph01(); %#ok<ASGLU>
+[nodes, edges, values] = createTestGraph01(); %#ok<ASGLU>
 
 valEro = grErode(edges, values);
 exp = [10;10;10;50;10;20;20;30];

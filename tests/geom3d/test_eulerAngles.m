@@ -20,7 +20,7 @@ initTestSuite;
 function testPositiveAngles %#ok<*DEFNU>
 
 mat = eulerAnglesToRotation3d(10, 20, 30);
-[phi theta psi] = rotation3dToEulerAngles(mat);
+[phi, theta, psi] = rotation3dToEulerAngles(mat);
 
 assertElementsAlmostEqual(10, phi);
 assertElementsAlmostEqual(20, theta);
@@ -30,7 +30,7 @@ assertElementsAlmostEqual(30, psi);
 function testNegativeAngles
 
 mat = eulerAnglesToRotation3d(-10, -20, -30);
-[phi theta psi] = rotation3dToEulerAngles(mat);
+[phi, theta, psi] = rotation3dToEulerAngles(mat);
 
 assertElementsAlmostEqual(-10, phi);
 assertElementsAlmostEqual(-20, theta);
