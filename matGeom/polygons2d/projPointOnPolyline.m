@@ -24,16 +24,23 @@ function varargout = projPointOnPolyline(point, poly, varargin)
 %       number of points -> specify individually if each polyline is
 %       closed (true=closed).
 %
-%   [POS DIST] = projPointOnPolyline(...)
+%   [POS, DIST] = projPointOnPolyline(...)
 %   Also returns the distance between POINT and POLYLINE.
 %
 %   Example
-%   projPointOnPolyline
+%     poly = [10 10; 20 10;20 20;10 20];
+%     projPointOnPolyline([15 0], poly)
+%     ans =
+%         0.5000
+%     projPointOnPolyline([0 16], poly)
+%     ans =
+%         3.0000
 %
 %   See also
-%   points2d, polygons2d, polylinePoint
+%   points2d, polygons2d, polylinePoint, projPointOnPolygon
 %   distancePointPolyline
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -61,35 +68,27 @@ end
 % number of points
 Np = size(point, 1);
 
-% number of vertices in polyline
-Nv = size(poly, 1);
-
 % allocate memory results
 pos     = zeros(Np, 1);
 minDist = inf*ones(Np, 1);
 
 % iterate on points
-for p=1:Np
-    % compute smallest distance to each edge
-    for i=1:Nv-1
-        % build current edge
-        edge = [poly(i,:) poly(i+1,:)];
-        
-        % compute distance between current point and edge
-        [dist edgePos] = distancePointEdge(point(p, :), edge);
-        
-        % update distance and position if necessary
-        if dist<minDist(p)
-            minDist(p) = dist;
-            pos(p) = i-1 + edgePos;
-        end
-    end    
+for p = 1:Np
+    % build set of edges
+    edges = [poly(1:end-1, :) poly(2:end, :)];
+    
+    % compute distance between current point and all edges
+    [dist, edgePos] = distancePointEdge(point(p, :), edges);
+    
+    % update distance and position if necessary
+    [minDist(p), edgeIndex] = min(dist);
+    pos(p) = edgeIndex-1 + edgePos(edgeIndex);   
 end
 
 % process output arguments
-if nargout<=1
+if nargout <= 1
     varargout{1} = pos;
-elseif nargout==2
+elseif nargout == 2
     varargout{1} = pos;
     varargout{2} = minDist;
 end
