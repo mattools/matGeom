@@ -24,19 +24,19 @@ edge = [10 10 10 30 10 10];
 
 p0 = [10 10 10];
 exp0 = 0;
-assertEqual(exp0, distancePointEdge3d(p0, edge));
+assertElementsAlmostEqual(exp0, distancePointEdge3d(p0, edge));
 
 p1 = [30 10 10];
 exp1 = 0;
-assertEqual(exp1, distancePointEdge3d(p1, edge));
+assertElementsAlmostEqual(exp1, distancePointEdge3d(p1, edge));
 
 p2 = [0 0 0];
 exp2 = 10 * sqrt(3);
-assertAlmostEqual(exp2, distancePointEdge3d(p2, edge), 1e-14);
+assertElementsAlmostEqual(exp2, distancePointEdge3d(p2, edge), 'absolute', 1e-14);
 
 p3 = [40 20 20];
 exp3 = 10 * sqrt(3);
-assertAlmostEqual(exp3, distancePointEdge3d(p3, edge), 1e-14);
+assertElementsAlmostEqual(exp3, distancePointEdge3d(p3, edge), 'absolute', 1e-14);
 
 function testArray
 

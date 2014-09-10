@@ -26,13 +26,13 @@ p3 = [0 0 4];
 exp = pi/2;
 
 res = anglePoints3d(p1, origin, p2);
-assertAlmostEqual(exp, res, .01);
+assertElementsAlmostEqual(exp, res, 'absolute', .01);
 
 res = anglePoints3d(p1, origin, p3);
-assertAlmostEqual(exp, res, .01);
+assertElementsAlmostEqual(exp, res, 'absolute', .01);
 
 res = anglePoints3d(p2, origin, p3);
-assertAlmostEqual(exp, res, .01);
+assertElementsAlmostEqual(exp, res, 'absolute', .01);
 
 
 function test_Simple2
@@ -44,7 +44,7 @@ exp = pi/4;
 
 res = anglePoints3d(p1, origin, p2);
 
-assertAlmostEqual(exp, res, .01);
+assertElementsAlmostEqual(exp, res, 'absolute', .01);
 
 
 function test_Point2Array
@@ -56,5 +56,5 @@ p2(:,2) = -2:2;
 p3 = [10 0 0];
 
 res = anglePoints3d(p1, p2, p3);
-assertAlmostEqual([5 1], size(res));
+assertElementsAlmostEqual([5 1], size(res));
 

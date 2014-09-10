@@ -19,36 +19,36 @@ initTestSuite;
 function testSingle %#ok<*DEFNU>
 
 ang = vectorAngle([1 0]);
-assertAlmostEqual(0, ang);
+assertElementsAlmostEqual(0, ang);
 
 ang = vectorAngle([0 1]);
-assertAlmostEqual(pi/2, ang);
+assertElementsAlmostEqual(pi/2, ang);
 
 ang = vectorAngle([-1 0]);
-assertAlmostEqual(pi, ang);
+assertElementsAlmostEqual(pi, ang);
 
 ang = vectorAngle([0 -1]);
-assertAlmostEqual(3*pi/2, ang);
+assertElementsAlmostEqual(3*pi/2, ang);
 
 ang = vectorAngle([-1 1]);
-assertAlmostEqual(3*pi/4, ang);
+assertElementsAlmostEqual(3*pi/4, ang);
 
 function testSinglePiCentered 
 
 ang = vectorAngle([1 0], pi);
-assertAlmostEqual(0, ang);
+assertElementsAlmostEqual(0, ang);
 
 ang = vectorAngle([0 1], pi);
-assertAlmostEqual(pi/2, ang);
+assertElementsAlmostEqual(pi/2, ang);
 
 ang = vectorAngle([-1 0], pi);
-assertAlmostEqual(pi, ang);
+assertElementsAlmostEqual(pi, ang);
 
 ang = vectorAngle([0 -1], pi);
-assertAlmostEqual(3*pi/2, ang);
+assertElementsAlmostEqual(3*pi/2, ang);
 
 ang = vectorAngle([-1 1], pi);
-assertAlmostEqual(3*pi/4, ang);
+assertElementsAlmostEqual(3*pi/4, ang);
 
 
 function testArray
@@ -66,16 +66,16 @@ assertElementsAlmostEqual(angs, vectorAngle(vecs, pi));
 function testSingleZeroCentered
 
 ang = vectorAngle([1 0], 0);
-assertAlmostEqual(0, ang);
+assertElementsAlmostEqual(0, ang);
 
 ang = vectorAngle([0 1], 0);
-assertAlmostEqual(pi/2, ang);
+assertElementsAlmostEqual(pi/2, ang);
 
 ang = vectorAngle([0 -1], 0);
-assertAlmostEqual(-pi/2, ang);
+assertElementsAlmostEqual(-pi/2, ang);
 
 ang = vectorAngle([-1 1], 0);
-assertAlmostEqual(3*pi/4, ang);
+assertElementsAlmostEqual(3*pi/4, ang);
 
 function testArrayZeroCentered
 

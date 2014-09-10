@@ -20,29 +20,29 @@ function testEuclidean %#ok<*DEFNU>
 
 v = [3 4];
 norm = vectorNorm(v);
-assertAlmostEqual(5, norm);
+assertElementsAlmostEqual(5, norm);
 
 function testEuclideanArray
 
 v = [3 4;4 3;6 8;5 12];
 norm = vectorNorm(v);
-assertAlmostEqual([5;5;10;13], norm);
+assertElementsAlmostEqual([5;5;10;13], norm);
 
 function testExplicitEuclideanArray
 
 v = [3 4;4 3;6 8;5 12];
 norm = vectorNorm(v, 2);
-assertAlmostEqual([5;5;10;13], norm);
+assertElementsAlmostEqual([5;5;10;13], norm);
 
 function testNorm1Array
 
 v = [3 4;4 3;6 8;5 12];
 norm = vectorNorm(v, 1);
-assertAlmostEqual([7;7;14;17], norm);
+assertElementsAlmostEqual([7;7;14;17], norm);
 
 function testNormInfArray
 
 v = [3 4;4 3;6 8;5 12];
 norm = vectorNorm(v, inf);
-assertAlmostEqual([4;4;8;12], norm);
+assertElementsAlmostEqual([4;4;8;12], norm);
 

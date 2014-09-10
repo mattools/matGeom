@@ -22,10 +22,10 @@ function testHoriz %#ok<*DEFNU>
 p1 = [0 0];
 p2 = [10 0];
 angle = angle2Points(p1, p2);
-assertAlmostEqual(0, angle);
+assertElementsAlmostEqual(0, angle);
 
 angle = angle2Points(p2, p1);
-assertAlmostEqual(pi, angle);
+assertElementsAlmostEqual(pi, angle);
 
 function testVert
 % all points inside window, possibly touching edges
@@ -33,10 +33,10 @@ function testVert
 p1 = [0 0];
 p2 = [0 10];
 angle = angle2Points(p1, p2);
-assertAlmostEqual(pi/2, angle);
+assertElementsAlmostEqual(pi/2, angle);
 
 angle = angle2Points(p2, p1);
-assertAlmostEqual(3*pi/2, angle);
+assertElementsAlmostEqual(3*pi/2, angle);
 
 
 function testMultiMulti

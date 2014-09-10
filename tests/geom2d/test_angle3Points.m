@@ -23,7 +23,7 @@ p1 = [10 0];
 p2 = [0 0];
 p3 = [0 10];
 angle = angle3Points(p1, p2, p3);
-assertAlmostEqual(pi/2, angle);
+assertElementsAlmostEqual(pi/2, angle);
 
 
 function testBundledInput
@@ -33,7 +33,7 @@ p1 = [10 0];
 p2 = [0 0];
 p3 = [0 10];
 angle = angle3Points([p1; p2; p3]);
-assertAlmostEqual(pi/2, angle);
+assertElementsAlmostEqual(pi/2, angle);
 
 function testArray
 % all points inside window, possibly touching edges

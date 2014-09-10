@@ -23,13 +23,13 @@ function test_Simple %#ok<*DEFNU>
 exp = pi/2;
 
 dif = angleAbsDiff(pi/2, 0);
-assertAlmostEqual(exp, dif);
+assertElementsAlmostEqual(exp, dif);
 
 dif = angleAbsDiff(0, pi/2);
-assertAlmostEqual(exp, dif);
+assertElementsAlmostEqual(exp, dif);
 
 dif = angleAbsDiff(0, 3*pi/2);
-assertAlmostEqual(exp, dif);
+assertElementsAlmostEqual(exp, dif);
 
 dif = angleAbsDiff(3*pi/2, 0);
-assertAlmostEqual(exp, dif);
+assertElementsAlmostEqual(exp, dif);

@@ -28,7 +28,7 @@ h = r*sqrt(3)/2;
 exp = [r/2 -h ; r/2 h];
 
 inters = intersectCircles(c1, c2);
-assertAlmostEqual(exp, inters);
+assertElementsAlmostEqual(exp, inters);
 
 function testTangentCircles
 
@@ -38,7 +38,7 @@ c2 = [2*r 0 r];
 
 exp = [r 0;r 0];
 inters = intersectCircles(c1, c2);
-assertAlmostEqual(exp, inters);
+assertElementsAlmostEqual(exp, inters);
 
 function testArrays
 

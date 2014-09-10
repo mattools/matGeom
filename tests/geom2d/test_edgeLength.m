@@ -22,7 +22,7 @@ p1 = [2 3];
 p2 = [5 7];
 edge = createEdge(p1, p2);
 len = edgeLength(edge);
-assertAlmostEqual(5, len);
+assertElementsAlmostEqual(5, len);
 
 function testArray
 
@@ -32,5 +32,5 @@ edge = createEdge(p1, p2);
 len = edgeLength(edge);
 
 assertEqual(4, size(len, 1));
-assertAlmostEqual([5;5;5;5], len);
+assertElementsAlmostEqual([5;5;5;5], len);
 

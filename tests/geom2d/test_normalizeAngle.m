@@ -19,24 +19,24 @@ initTestSuite;
 function testDefault %#ok<*DEFNU>
 
 theta = pi/2;
-assertAlmostEqual(theta, normalizeAngle(theta));
+assertElementsAlmostEqual(theta, normalizeAngle(theta));
 
 theta = pi;
-assertAlmostEqual(theta, normalizeAngle(theta));
+assertElementsAlmostEqual(theta, normalizeAngle(theta));
 
 theta = 3*pi/2;
-assertAlmostEqual(theta, normalizeAngle(theta));
+assertElementsAlmostEqual(theta, normalizeAngle(theta));
 
 function testPiCentered
 
 theta = pi/2;
-assertAlmostEqual(theta, normalizeAngle(theta, pi));
+assertElementsAlmostEqual(theta, normalizeAngle(theta, pi));
 
 theta = pi;
-assertAlmostEqual(theta, normalizeAngle(theta, pi));
+assertElementsAlmostEqual(theta, normalizeAngle(theta, pi));
 
 theta = 3*pi/2;
-assertAlmostEqual(theta, normalizeAngle(theta, pi));
+assertElementsAlmostEqual(theta, normalizeAngle(theta, pi));
 
 
 function testVector
@@ -48,16 +48,16 @@ assertElementsAlmostEqual(theta, normalizeAngle(theta));
 function testZeroCentered
 
 theta = 0;
-assertAlmostEqual(theta, normalizeAngle(theta, 0));
+assertElementsAlmostEqual(theta, normalizeAngle(theta, 0));
 
 theta = pi/2;
-assertAlmostEqual(theta, normalizeAngle(theta, 0));
+assertElementsAlmostEqual(theta, normalizeAngle(theta, 0));
 
 theta = -pi;
-assertAlmostEqual(theta, normalizeAngle(theta, 0));
+assertElementsAlmostEqual(theta, normalizeAngle(theta, 0));
 
 theta = 7*pi/2;
-assertAlmostEqual(-pi/2, normalizeAngle(theta, 0));
+assertElementsAlmostEqual(-pi/2, normalizeAngle(theta, 0));
 
 function testVectorZeroCentered
 

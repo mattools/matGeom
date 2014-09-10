@@ -25,10 +25,10 @@ assertElementsAlmostEqual(minDistancePoints(pts), 20);
 function testArrayIndInd
 
 pts = [10 10;25 5;20 20;30 20;10 30];
-[dist ind1 ind2] = minDistancePoints(pts);
-assertAlmostEqual(10, dist);
-assertAlmostEqual(3, ind1);
-assertAlmostEqual(4, ind2);
+[dist, ind1, ind2] = minDistancePoints(pts);
+assertElementsAlmostEqual(10, dist);
+assertElementsAlmostEqual(3, ind1);
+assertElementsAlmostEqual(4, ind2);
 
 
 function testPointArray
@@ -83,7 +83,7 @@ pts1    = [40 50;20 30;40 20];
 pts2    = [0 80;10 60;20 40;30 20;40 0;0 0;100 0;0 100;0 -10;-10 -20];
 dists0  = [10*sqrt(5);10;10];
 inds1   = [3;3;4];
-[minDists inds] = minDistancePoints(pts1, pts2);
+[minDists, inds] = minDistancePoints(pts1, pts2);
 assertElementsAlmostEqual(dists0, minDists);
 assertElementsAlmostEqual(inds1, inds);
 

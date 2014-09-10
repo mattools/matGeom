@@ -26,7 +26,7 @@ line2 = createLine(p0, p2);
 
 ray = bisector(line1, line2);
 assertElementsAlmostEqual([0 0], ray(1,1:2));
-assertAlmostEqual(pi/4, lineAngle(ray));
+assertElementsAlmostEqual(pi/4, lineAngle(ray));
 
 function testThreePoints
 
@@ -36,7 +36,7 @@ p2 = [0 10];
 
 ray = bisector(p1, p0, p2);
 assertElementsAlmostEqual([0 0], ray(1,1:2));
-assertAlmostEqual(pi/4, lineAngle(ray));
+assertElementsAlmostEqual(pi/4, lineAngle(ray));
 
 function testThreeBundldedPoints
 
@@ -46,4 +46,4 @@ p2 = [0 10];
 
 ray = bisector([p1; p0; p2]);
 assertElementsAlmostEqual([0 0], ray(1,1:2));
-assertAlmostEqual(pi/4, lineAngle(ray));
+assertElementsAlmostEqual(pi/4, lineAngle(ray));

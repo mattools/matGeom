@@ -23,23 +23,23 @@ poly = [0 0;10 0;10 10;0 10];
 
 p1 = [0 0];
 d = distancePointPolygon(p1, poly);
-assertAlmostEqual(0, d);
+assertElementsAlmostEqual(0, d);
 
 p1 = [10 0];
 d = distancePointPolygon(p1, poly);
-assertAlmostEqual(0, d);
+assertElementsAlmostEqual(0, d);
 
 p1 = [5 10];
 d = distancePointPolygon(p1, poly);
-assertAlmostEqual(0, d);
+assertElementsAlmostEqual(0, d);
 
 p1 = [10 5];
 d = distancePointPolygon(p1, poly);
-assertAlmostEqual(0, d);
+assertElementsAlmostEqual(0, d);
 
 p1 = [0 5];
 d = distancePointPolygon(p1, poly);
-assertAlmostEqual(0, d);
+assertElementsAlmostEqual(0, d);
 
 function testPointNotOnPolygon
 
@@ -47,20 +47,20 @@ poly = [0 0;10 0;10 10;0 10];
 
 p1 = [0 -10];
 d = distancePointPolygon(p1, poly);
-assertAlmostEqual(10, d);
+assertElementsAlmostEqual(10, d);
 
 p1 = [20 0];
 d = distancePointPolygon(p1, poly);
-assertAlmostEqual(10, d);
+assertElementsAlmostEqual(10, d);
 
 p1 = [5 5];
 d = distancePointPolygon(p1, poly);
-assertAlmostEqual(5, d);
+assertElementsAlmostEqual(5, d);
 
 p1 = [1 5];
 d = distancePointPolygon(p1, poly);
-assertAlmostEqual(1, d);
+assertElementsAlmostEqual(1, d);
 
 p1 = [-1 5];
 d = distancePointPolygon(p1, poly);
-assertAlmostEqual(1, d);
+assertElementsAlmostEqual(1, d);

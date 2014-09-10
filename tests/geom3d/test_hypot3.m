@@ -21,12 +21,12 @@ function test_UnitCube %#ok<*DEFNU>
 % Test call of function without argument
 h = hypot3(1, 1, 1);
 exp = sqrt(3);
-assertAlmostEqual(exp, h);
+assertElementsAlmostEqual(exp, h);
 
 function test_Cuboid345
 
 exp = sqrt(50);
 h = hypot3(3, 4, 5);
-assertAlmostEqual(exp, h);
+assertElementsAlmostEqual(exp, h);
 
 
