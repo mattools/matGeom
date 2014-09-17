@@ -1,4 +1,4 @@
-function [tri inds] = triangulateFaces(faces)
+function [tri, inds] = triangulateFaces(faces)
 %TRIANGULATEFACES Convert face array to an array of triangular faces 
 %
 %   TRI = triangulateFaces(FACES)
@@ -32,6 +32,7 @@ function [tri inds] = triangulateFaces(faces)
 %   See also
 %   meshes3d, drawMesh, mergeCoplanarFaces
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr

@@ -51,11 +51,11 @@ function alpha = sphericalAngle(p1, p2, p3)
 
 % test if points are given as matlab spherical coordinates
 if size(p1, 2) == 2
-    [x y z] = sph2cart(p1(:,1), p1(:,2), ones(size(p1,1), 1));
+    [x, y, z] = sph2cart(p1(:,1), p1(:,2), ones(size(p1,1), 1));
     p1 = [x y z];
-    [x y z] = sph2cart(p2(:,1), p2(:,2), ones(size(p2,1), 1));
+    [x, y, z] = sph2cart(p2(:,1), p2(:,2), ones(size(p2,1), 1));
     p2 = [x y z];
-    [x y z] = sph2cart(p3(:,1), p3(:,2), ones(size(p3,1), 1));
+    [x, y, z] = sph2cart(p3(:,1), p3(:,2), ones(size(p3,1), 1));
     p3 = [x y z];
 end
 

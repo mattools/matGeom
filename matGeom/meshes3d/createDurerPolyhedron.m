@@ -44,7 +44,7 @@ function varargout = createDurerPolyhedron(varargin)
 % Copyright 2012 INRA - Cepia Software Platform.
 
 % start from a cube basis
-[v f] = createCube;
+[v, f] = createCube;
 
 % recenter, rotate, and rescale
 v    = v -.5;
@@ -60,9 +60,9 @@ z1 = zmax - d;
 
 % clip by two horizontal planes
 plane1  = createPlane([0 0 z1], [0 0 1]);
-[v f]   = clipConvexPolyhedronHP(v, f, plane1);
+[v, f]   = clipConvexPolyhedronHP(v, f, plane1);
 plane2  = createPlane([0 0 -z1], [0 0 -1]);
-[v f]   = clipConvexPolyhedronHP(v, f, plane2);
+[v, f]   = clipConvexPolyhedronHP(v, f, plane2);
 
 % complete with edge information
 e = meshEdges(f);

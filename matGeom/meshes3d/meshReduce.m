@@ -27,7 +27,7 @@ function varargout = meshReduce(nodes, varargin)
 %   See also
 %   meshes3d, mergeCoplanarFaces
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -92,7 +92,7 @@ flag = ones(Nf, 1);
 %% Main iteration
 
 % iterate on each  face
-for f=1:Nf
+for f = 1:Nf
     
     % check if face was already performed
     if ~flag(f)
@@ -105,7 +105,7 @@ for f=1:Nf
     
     % keep only coplanar faces (test coplanarity of points in both face)
     ind2 = false(size(ind));
-    for j=1:length(ind)
+    for j = 1:length(ind)
         ind2(j) = isCoplanar(nodes([faces(f,:) faces(ind(j),:)], :), acc);
     end
     ind2 = ind(ind2);
@@ -122,17 +122,17 @@ for f=1:Nf
     planeEdges = unique(planeEdges, 'rows');
     
     % relabel plane edges, and find connected components
-    [planeNodes I J] = unique(planeEdges(:)); %#ok<ASGLU>
+    [planeNodes, I, J] = unique(planeEdges(:)); %#ok<ASGLU>
     planeEdges2 = reshape(J, size(planeEdges));
     component   = grLabel(nodes(planeNodes, :), planeEdges2);
     
     % compute degree (number of adjacent faces) of each edge.
     Npe = size(planeEdges, 1);
     edgesDegree = zeros(Npe, 1);
-    for i=1:length(ind2)
+    for i = 1:length(ind2)
         face = faces(ind2(i), :);
         faceEdges = sort([face' face([2:end 1])'], 2);
-        for j=1:size(faceEdges, 1)
+        for j = 1:size(faceEdges, 1)
             indEdge = find(sum(ismember(planeEdges, faceEdges(j,:)),2)==2);
             edgesDegree(indEdge) = edgesDegree(indEdge)+1;
         end
@@ -144,7 +144,7 @@ for f=1:Nf
     
     % find connected component of each edge
     planeEdgesComp = zeros(size(planeEdges, 1), 1);
-    for e=1:size(planeEdges, 1)
+    for e = 1:size(planeEdges, 1)
         planeEdgesComp(e) = component(planeEdges2(e, 1));
     end
     
@@ -156,8 +156,8 @@ for f=1:Nf
     
         % add a simple Polygon for each loop
         facePolygon = loops{1};
-        for l=2:length(loops)
-            facePolygon = [facePolygon, NaN, loops{l}];
+        for l = 2:length(loops)
+            facePolygon = [facePolygon, NaN, loops{l}]; %#ok<AGROW>
         end
         faces2{length(faces2)+1, 1}  = facePolygon;
     

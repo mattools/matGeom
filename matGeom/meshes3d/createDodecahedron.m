@@ -26,6 +26,7 @@ function varargout = createDodecahedron()
 %   meshes3d, drawMesh
 %   createCube, createOctahedron, createIcosahedron, createTetrahedron
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -59,7 +60,7 @@ tmp = [ ...
 ];
 
 % extract coordinates of unique vertices
-[verts M N] = unique(tmp, 'rows', 'first'); %#ok<ASGLU>
+[verts, M, N] = unique(tmp, 'rows', 'first'); %#ok<ASGLU>
 
 % compute indices of face vertices, put result in a 12-by-5 index array
 ind0 = reshape((1:60), [5 12])';

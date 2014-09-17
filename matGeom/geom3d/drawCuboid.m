@@ -30,6 +30,7 @@ function varargout = drawCuboid(cuboid, varargin)
 %   See also
 %   meshes3d, polyhedra, createCube, drawEllipsoid, drawCube
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -66,7 +67,7 @@ end
 %% Compute cuboid coordinates
 
 % create unit centered cube
-[v f] = createCube;
+[v, f] = createCube;
 v = bsxfun(@minus, v, mean(v, 1));
 
 % convert unit basis to ellipsoid basis
@@ -80,7 +81,7 @@ tra     = createTranslation3d([xc yc zc]);
 trans   = tra * rotZ * rotY * rotX * sca;
 
 % transform mesh vertices
-[x y z] = transformPoint3d(v, trans);
+[x, y, z] = transformPoint3d(v, trans);
 
 
 %% Process output

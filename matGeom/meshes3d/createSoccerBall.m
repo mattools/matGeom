@@ -27,10 +27,10 @@ function varargout = createSoccerBall()
 
 
 % get vertices and adjacency matrix of the buckyball
-[b n] = bucky;
+[b, n] = bucky;
 
 % compute edges
-[i j] = find(b);
+[i, j] = find(b);
 e = [i j];
 e = unique(sort(e, 2), 'rows');
 

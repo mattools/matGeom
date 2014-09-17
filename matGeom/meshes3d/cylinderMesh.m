@@ -42,7 +42,7 @@ p2 = cyl(:, 4:6);
 r  = cyl(:, 7);
 
 % compute length and orientation
-[theta phi rho] = cart2sph2d(p2 - p1);
+[theta, phi, rho] = cart2sph2d(p2 - p1);
 
 % parametrisation on x
 t = linspace(0, 2*pi, 20);
@@ -59,10 +59,10 @@ z = repmat(lz', [1 length(t)]);
 
 % transform points 
 trans   = localToGlobal3d(p1, theta, phi, 0);
-[x y z] = transformPoint3d(x, y, z, trans);
+[x, y, z] = transformPoint3d(x, y, z, trans);
 
 % convert to FV mesh
-[vertices faces] = surfToMesh(x, y, z, 'xPeriodic', true);
+[vertices, faces] = surfToMesh(x, y, z, 'xPeriodic', true);
 
 % format output
 varargout = formatMeshOutput(nargout, vertices, faces);

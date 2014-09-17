@@ -118,7 +118,7 @@ for iFace = 1:nFaces
     planeEdges = unique(planeEdges, 'rows');
     
     % relabel plane edges
-    [planeNodes I J] = unique(planeEdges(:)); %#ok<ASGLU>
+    [planeNodes, I, J] = unique(planeEdges(:)); %#ok<ASGLU>
     planeEdges2 = reshape(J, size(planeEdges));
     
     % The set of coplanar faces may not necessarily form a single connected
@@ -207,7 +207,7 @@ if nargout == 1
 elseif nargout == 2
     varargout{1} = nodes2;
     varargout{2} = faces2;
-elseif nargout==3
+elseif nargout == 3
     varargout{1} = nodes2;
     varargout{2} = edges2;
     varargout{3} = faces2;

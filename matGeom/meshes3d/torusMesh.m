@@ -45,14 +45,14 @@ end
 
 % create base torus
 circle = circleToPolygon([r1 0 r2], 60);
-[x y z] = revolutionSurface(circle, linspace(0, 2*pi, 60));
+[x, y, z] = revolutionSurface(circle, linspace(0, 2*pi, 60));
 
 % transform torus
 trans = localToGlobal3d([center normal]);
-[x y z] = transformPoint3d(x, y, z, trans);
+[x, y, z] = transformPoint3d(x, y, z, trans);
 
 % convert to FV mesh
-[vertices faces] = surfToMesh(x, y, z, 'xPeriodic', true, 'yPeriodic', true);
+[vertices, faces] = surfToMesh(x, y, z, 'xPeriodic', true, 'yPeriodic', true);
 
 % format output
 varargout = formatMeshOutput(nargout, vertices, faces);

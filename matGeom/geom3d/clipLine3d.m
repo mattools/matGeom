@@ -14,6 +14,7 @@ function edge = clipLine3d(line, box)
 %   See also:
 %   lines3d, edges3d, createLine3d
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -81,7 +82,7 @@ for i=1:Nl
     points  = points(ind,:);
 
     % sort points with respect to their position
-    [pos ind] = sort(pos); %#ok<ASGLU>
+    [pos, ind] = sort(pos); %#ok<ASGLU>
     points  = points(ind, :);
 
     % keep median points wrt to position. These points define the limit of

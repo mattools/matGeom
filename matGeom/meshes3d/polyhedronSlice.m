@@ -14,8 +14,9 @@ function points = polyhedronSlice(nodes, faces, plane)
 %   polyhedronSlice
 %
 %   See also
-%   polyhedra, clipConvexPolyhedronHP
+%   polyhedra, clipConvexPolyhedronHP, intersectPlaneMesh
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
@@ -25,13 +26,13 @@ function points = polyhedronSlice(nodes, faces, plane)
 % if faces is a numeric array, convert it to cell array
 if isnumeric(faces)
     faces2 = cell(size(faces, 1), 1);
-    for f=1:length(faces2)
+    for f = 1:length(faces2)
         faces2{f} = faces(f,:);
     end
     faces = faces2;
 else
     % ensure we have face with horizontal vectors...
-    for f=1:length(faces)
+    for f = 1:length(faces)
         face = faces{f};
         faces{f} = face(:)';
     end
@@ -39,9 +40,9 @@ end
 
 % compute edges of the polyhedron
 inds = zeros(0, 2);
-for f=1:length(faces)
+for f = 1:length(faces)
     face = faces{f}';
-    inds = [inds ; sort([face face([2:end 1])], 2)];
+    inds = [inds ; sort([face face([2:end 1])], 2)]; %#ok<AGROW>
 end
 inds = unique(inds, 'rows');
 edges = [nodes(inds(:,1), :) nodes(inds(:,2), :)];

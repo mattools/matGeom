@@ -16,6 +16,7 @@ function varargout = sphereMesh(sphere, varargin)
 %   See also
 %     meshes3d, cylinder, surfToMesh, drawSphere
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -49,7 +50,7 @@ y = yc + sin(phi') * sintheta * r;
 z = zc + ones(length(phi),1) * cos(theta) * r;
 
 % convert to FV mesh
-[vertices faces] = surfToMesh(x, y, z, 'xperiodic', true);
+[vertices, faces] = surfToMesh(x, y, z, 'xperiodic', true);
 
 % format output
 varargout = formatMeshOutput(nargout, vertices, faces);

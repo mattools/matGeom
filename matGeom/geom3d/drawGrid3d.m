@@ -24,7 +24,7 @@ function varargout = drawGrid3d(varargin)
 %   H = drawGrid3d(...);
 %   return a vector of handles for each LINE object which was crated.
 %
-%
+
 %   ------
 %   Author: David Legland
 %   e-mail: david.legland@grignon.inra.fr
@@ -44,7 +44,7 @@ if ~isempty(varargin)
     str = varargin{end};
 end
 if ischar(str)
-    if strmatch(lower(str), 'open')
+    if strncmpi(str, 'open', 4)
         closed = false;
     end
     varargin = varargin(1:end-1);
@@ -89,23 +89,23 @@ h = [];
 %TODO: rewrite code, avoiding loops
 
 % draw lines parallel to x axis
-for y=ye:dy:yf
-    for z=ze:dz:zf
-        h = [h; drawEdge3d([x0 y z x1 y z])];
+for y = ye:dy:yf
+    for z = ze:dz:zf
+        h = [h; drawEdge3d([x0 y z x1 y z])]; %#ok<AGROW>
     end
 end
 
 % draw lines parallel to y axis
-for x=xe:dx:xf
-    for z=ze:dz:zf
-        h = [h; drawEdge3d([x y0 z x y1 z])];
+for x = xe:dx:xf
+    for z = ze:dz:zf
+        h = [h; drawEdge3d([x y0 z x y1 z])]; %#ok<AGROW>
     end
 end
 
 % draw lines parallel to z axis
-for x=xe:dx:xf
-    for y=ye:dy:yf
-        h = [h; drawEdge3d([x y z0 x y z1])];
+for x = xe:dx:xf
+    for y = ye:dy:yf
+        h = [h; drawEdge3d([x y z0 x y z1])]; %#ok<AGROW>
     end
 end
 

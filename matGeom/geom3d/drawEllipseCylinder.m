@@ -120,7 +120,7 @@ if size(cyl, 2) > 8
 end
 
 % compute orientation angle of cylinder (in degrees)
-[theta phi rho] = cart2sph2d(p2 - p1);
+[theta, phi, rho] = cart2sph2d(p2 - p1);
 dphi = linspace(0, 2*pi, N+1);
 
 % generate a cylinder oriented upwards

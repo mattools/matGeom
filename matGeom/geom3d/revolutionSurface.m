@@ -119,7 +119,7 @@ yt = yt(:);
 % transform xt and yt to replace in the reference of the revolution axis
 tra = createTranslation(-revol(1:2));
 rot = createRotation(pi/2 - lineAngle(revol));
-[xt yt] = transformPoint(xt, yt, tra*rot);
+[xt, yt] = transformPoint(xt, yt, tra*rot);
 
 % compute surface vertices
 x = xt * cos(theta);

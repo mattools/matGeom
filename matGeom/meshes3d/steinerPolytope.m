@@ -1,4 +1,4 @@
-function [vertices faces] = steinerPolytope(vectors)
+function [vertices, faces] = steinerPolytope(vectors)
 %STEINERPOLYTOPE Create a steiner polytope from a set of vectors
 %
 %   [VERTICES FACES] = steinerPolygon(VECTORS)
@@ -17,6 +17,7 @@ function [vertices faces] = steinerPolytope(vectors)
 %   See also
 %   meshes3d, drawMesh, steinerPolygon, mergeCoplanarFaces
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

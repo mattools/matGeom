@@ -16,6 +16,7 @@ function varargout = drawTorus(torus, varargin)
 %   See also
 %   drawEllipsoid, revolutionSurface, torusMesh
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -37,11 +38,11 @@ varargin = [{'FaceColor', 'g'}, varargin];
 
 % create base torus
 circle = circleToPolygon([r1 0 r2], 60);
-[x y z] = revolutionSurface(circle, linspace(0, 2*pi, 60));
+[x, y, z] = revolutionSurface(circle, linspace(0, 2*pi, 60));
 
 % transform torus
 trans = localToGlobal3d([center normal]);
-[x y z] = transformPoint3d(x, y, z, trans);
+[x, y, z] = transformPoint3d(x, y, z, trans);
 
 % draw the surface
 hs = surf(x, y, z, varargin{:});

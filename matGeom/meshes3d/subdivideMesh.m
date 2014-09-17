@@ -1,4 +1,4 @@
-function [vertices2 faces2] = subdivideMesh(vertices, faces, n)
+function [vertices2, faces2] = subdivideMesh(vertices, faces, n)
 %SUBDIVIDEMESH Subdivides each face of the mesh
 %
 %   [V2 F2] = subdivideMesh(V, F, N)
@@ -14,6 +14,7 @@ function [vertices2 faces2] = subdivideMesh(vertices, faces, n)
 %   See also
 %     meshes3d, drawMesh
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

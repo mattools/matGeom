@@ -51,7 +51,7 @@ if length(varargin) == 2
     % Preallocate x, y, and z to size N-by-1-by-M-by-etc, then fill them in
     dim = size(varargin{1});
     dim(2) = 1;
-    [x,y,z] = deal(zeros(dim,class(varargin{1})));
+    [x, y, z] = deal(zeros(dim, class(varargin{1})));
     x(:) = varargin{1}(:,1,:);
     y(:) = varargin{1}(:,2,:);
     z(:) = varargin{1}(:,3,:);

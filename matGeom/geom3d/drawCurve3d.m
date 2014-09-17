@@ -32,8 +32,8 @@ var = varargin{1};
 if iscell(var)
     hold on;
     h = [];
-    for i=1:length(var(:))
-        h = [h; drawCurve3d(var{i}, varargin{2:end})];
+    for i = 1:length(var(:))
+        h = [h; drawCurve3d(var{i}, varargin{2:end})]; %#ok<AGROW>
     end
     if nargout>0
         varargout{1}=h;
@@ -83,5 +83,5 @@ end
 h = plot3(px, py, pz, varargin{:});
 
 if nargout>0
-    varargout{1}=h;
+    varargout{1} = h;
 end

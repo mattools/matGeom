@@ -16,8 +16,9 @@ function varargout = drawFaceNormals(varargin)
 %     drawFaceNormals(v, e, f)
 %
 %   See also
-%   meshes3d, quiver3
+%   meshes3d, drawMesh, drawVector3d, quiver3
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -25,7 +26,7 @@ function varargout = drawFaceNormals(varargin)
 % Copyright 2010 INRA - Cepia Software Platform.
 
 % extract vertices and faces
-[vertices faces] = parseMeshData(varargin{:});
+[vertices, faces] = parseMeshData(varargin{:});
 
 % compute vector data
 c = faceCentroids(vertices, faces);

@@ -20,6 +20,7 @@ function plane = fitPlane(points)
 %   See also
 %     planes3d, inertiaEllipsoid, fitLine3d
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -37,10 +38,10 @@ covPts = cov(points)/n;
 
 % perform a principal component analysis with 2 variables, 
 % to extract inertia axes
-[U S] = svd(covPts);
+[U, S] = svd(covPts);
 
 % sort axes from greater to lower
-[dummy ind] = sort(diag(S), 'descend'); %#ok<ASGLU>
+[dummy, ind] = sort(diag(S), 'descend'); %#ok<ASGLU>
 
 % format U to ensure first axis points to positive x direction
 U = U(ind, :);

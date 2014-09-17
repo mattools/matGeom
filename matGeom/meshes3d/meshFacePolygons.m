@@ -22,7 +22,7 @@ function polys = meshFacePolygons(varargin)
 % Copyright 2013 INRA - Cepia Software Platform.
 
 % extract vertices and faces
-[v f] = parseMeshData(varargin{:});
+[v, f] = parseMeshData(varargin{:});
 
 % number of faces
 if iscell(f)

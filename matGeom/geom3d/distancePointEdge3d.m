@@ -1,4 +1,4 @@
-function [dist t] = distancePointEdge3d(point, edge)
+function [dist, t] = distancePointEdge3d(point, edge)
 %DISTANCEPOINTEDGE3D Minimum distance between a 3D point and a 3D edge
 %
 %   DIST = distancePointEdge3d(POINT, EDGE);
@@ -17,7 +17,7 @@ function [dist t] = distancePointEdge3d(point, edge)
 %   See also:
 %   edges3d, points3d, distancePoints3d, distancePointLine3d
 %   
-%
+
 %   ---------
 %   author : David Legland 
 %   INRA - CEPIA URPOI - MIA MathCell

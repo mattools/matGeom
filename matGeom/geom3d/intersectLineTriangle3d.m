@@ -1,4 +1,4 @@
-function [point pos isInside] = intersectLineTriangle3d(line, triangle, varargin)
+function [point, pos, isInside] = intersectLineTriangle3d(line, triangle, varargin)
 %INTERSECTLINETRIANGLE3D Intersection point of a 3D line and a 3D triangle
 %
 %   POINT = intersectLineTriangle3d(LINE, TRI)
@@ -33,6 +33,7 @@ function [point pos isInside] = intersectLineTriangle3d(line, triangle, varargin
 %   Algorithm adapted from SoftSurfer Ray/Segment-Triangle intersection
 %   http://softsurfer.com/Archive/algorithm_0105/algorithm_0105.htm
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

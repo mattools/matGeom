@@ -1,4 +1,4 @@
-function [v2 faces] = smoothMesh(vertices, faces, varargin)
+function [v2, faces] = smoothMesh(vertices, faces, varargin)
 %SMOOTHMESH Smooth mesh by replacing each vertex by the average of its neighbors 
 %
 %   V2 = smoothMesh(V, F)
@@ -19,6 +19,7 @@ function [v2 faces] = smoothMesh(vertices, faces, varargin)
 %
 %   See also
 %     meshes3d, meshAdjacencyMatrix, triangulateFaces
+%
 
 % ------
 % Author: David Legland

@@ -1,4 +1,4 @@
-function [points pos faceInds] = intersectLineMesh3d(line, vertices, faces, varargin)
+function [points, pos, faceInds] = intersectLineMesh3d(line, vertices, faces, varargin)
 %INTERSECTLINEMESH3D Intersection points of a 3D line with a mesh
 %
 %   INTERS = intersectLineMesh3d(LINE, VERTICES, FACES)
@@ -16,6 +16,7 @@ function [points pos faceInds] = intersectLineMesh3d(line, vertices, faces, vara
 %   See also
 %   meshes3d, triangulateFaces, intersectLineTriangle3d
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -32,7 +33,7 @@ end
 % ensure the mesh has triangular faces
 tri2Face = [];
 if iscell(faces) || size(faces, 2) ~= 3
-    [faces tri2Face] = triangulateFaces(faces);
+    [faces, tri2Face] = triangulateFaces(faces);
 end
 
 % find triangle edge vectors

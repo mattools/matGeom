@@ -68,7 +68,7 @@ Rc  = sqrt(Rs.*Rs - d.*d);
 nor = planeNormal(plane);
 
 % convert to angles
-[theta phi] = cart2sph2(nor(:,1), nor(:,2), nor(:,3));
+[theta, phi] = cart2sph2(nor(:,1), nor(:,2), nor(:,3));
 psi = zeros(Np, 1);
 
 % create structure for circle

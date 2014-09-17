@@ -41,13 +41,13 @@ covPts = cov(points)/n;
 
 % perform a principal component analysis with 2 variables, 
 % to extract inertia axes
-[U S] = svd(covPts);
+[U, S] = svd(covPts);
 
 % extract length of each semi axis
 radii = 2 * sqrt(diag(S)*n)';
 
 % sort axes from greater to lower
-[radii ind] = sort(radii, 'descend');
+[radii, ind] = sort(radii, 'descend');
 
 % format U to ensure first axis points to positive x direction
 U = U(ind, :);
@@ -61,4 +61,4 @@ end
 angles = rotation3dToEulerAngles(U);
 
 % concatenate result to form an ellipsoid object
-ell = [center radii angles];
+ell = [center, radii, angles];

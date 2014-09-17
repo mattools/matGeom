@@ -1,4 +1,4 @@
-function [nodes2 faces2] = clipConvexPolyhedronHP(nodes, faces, plane)
+function [nodes2, faces2] = clipConvexPolyhedronHP(nodes, faces, plane)
 %CLIPCONVEXPOLYHEDRONHP Clip a convex polyhedron by a plane
 %
 %   [NODES2, FACES2] = clipConvexPolyhedronHP(NODES, FACES, PLANE)
@@ -17,7 +17,7 @@ function [nodes2 faces2] = clipConvexPolyhedronHP(nodes, faces, plane)
 %   See also
 %   meshes3d, polyhedra, planes3d
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
@@ -78,7 +78,7 @@ for f = 1:length(faces)
     % identify indices of polygon vertices
     inds = zeros(1, size(clipped, 1));
     faceb = face(bf==1); % indices of vertices still in clipped face
-    [minDists I] = minDistancePoints(nodes(faceb,:), clipped); %#ok<ASGLU>
+    [minDists, I] = minDistancePoints(nodes(faceb,:), clipped); %#ok<ASGLU>
     for i = 1:length(I)
         inds(I(i)) = faceb(i);
     end
@@ -95,7 +95,7 @@ for f = 1:length(faces)
     end
      
     % distances from new vertices to already added vertices
-    [minDists I] = minDistancePoints(clipped(indNews, :), nodes2);
+    [minDists, I] = minDistancePoints(clipped(indNews, :), nodes2);
     
     % compute index of first vertex
     if minDists(1) < tol
@@ -121,7 +121,7 @@ end
 %% Postprocessing
 
 % creates a new face formed by the added nodes
-[tmp I] = angleSort3d(nodes2); %#ok<ASGLU>
+[tmp, I] = angleSort3d(nodes2); %#ok<ASGLU>
 newFace = I' + Nn;
 
 % remove faces outside plane and add the new face

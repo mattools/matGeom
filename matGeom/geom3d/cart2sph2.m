@@ -21,6 +21,7 @@ function varargout = cart2sph2(varargin)
 %   See also:
 %   angles3d, sph2cart2, cart2sph, cart2sph2d
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -42,7 +43,7 @@ if size(var, 2)==2
     var(:,3)=1;
 end
 
-[p t r] = cart2sph(var(:,1), var(:,2), var(:,3));
+[p, t, r] = cart2sph(var(:,1), var(:,2), var(:,3));
 
 if nargout == 1 || nargout == 0
     varargout{1} = [pi/2-t p r];

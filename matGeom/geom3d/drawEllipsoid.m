@@ -25,9 +25,9 @@ function varargout = drawEllipsoid(elli, varargin)
 %     axis equal;
 %
 %   See also
-%   spheres, drawSphere, inertiaEllipsoid, ellipsoid
-%   drawTorus, drawCuboid 
+%   spheres, drawSphere, inertiaEllipsoid, ellipsoid, drawTorus, drawCuboid 
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -148,12 +148,13 @@ tra     = createTranslation3d([xc yc zc]);
 trans   = tra * rotZ * rotY * rotX * sca;
 
 % transform mesh vertices
-[x y z] = transformPoint3d(x, y, z, trans);
+[x, y, z] = transformPoint3d(x, y, z, trans);
 
+% transform the 3D polygons corresponding to ellipse cross sections
 if drawEllipses
-    [xc1 yc1 zc1] = transformPoint3d(xc1, yc1, zc1, trans);
-    [xc2 yc2 zc2] = transformPoint3d(xc2, yc2, zc2, trans);
-    [xc3 yc3 zc3] = transformPoint3d(xc3, yc3, zc3, trans);
+    [xc1, yc1, zc1] = transformPoint3d(xc1, yc1, zc1, trans);
+    [xc2, yc2, zc2] = transformPoint3d(xc2, yc2, zc2, trans);
+    [xc3, yc3, zc3] = transformPoint3d(xc3, yc3, zc3, trans);
 end
 
 

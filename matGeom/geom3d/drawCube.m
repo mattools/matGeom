@@ -27,6 +27,7 @@ function varargout = drawCube(cube, varargin)
 %   See also
 %   meshes3d, polyhedra, createCube, drawCuboid
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -67,7 +68,7 @@ end
 %% Compute cube coordinates
 
 % create unit centered cube
-[v f] = createCube;
+[v, f] = createCube;
 v = bsxfun(@minus, v, mean(v, 1));
 
 % convert unit basis to cube basis
@@ -81,7 +82,7 @@ tra     = createTranslation3d([xc yc zc]);
 trans   = tra * rot3 * rot2 * rot1 * sca;
 
 % transform mesh vertices
-[x y z] = transformPoint3d(v, trans);
+[x, y, z] = transformPoint3d(v, trans);
 
 
 %% Process output

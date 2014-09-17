@@ -1,4 +1,4 @@
-function [vertices faces] = readMesh_off(fileName)
+function [vertices, faces] = readMesh_off(fileName)
 %READMESH_OFF Read mesh data stord in OFF format
 %
 %   [VERTICES FACES] = readMesh_off(FILNAME)
@@ -8,7 +8,7 @@ function [vertices faces] = readMesh_off(fileName)
 %
 %   See also
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -37,7 +37,7 @@ nf = vals(2);
 
 
 % read vertex data
-[vertices count] = fscanf(f, '%f ', [3 nv]);
+[vertices, count] = fscanf(f, '%f ', [3 nv]);
 if count ~= nv*3
     error('matGeom:readMesh_off:FileFormatError', ...
         ['Could not read all the ' num2str(nv) ' vertices']);
@@ -45,7 +45,7 @@ end
 vertices = vertices';
 
 % read face data (face start by index)
-[faces count] = fscanf(f, '%d %d %d %d\n', [4 nf]);
+[faces, count] = fscanf(f, '%d %d %d %d\n', [4 nf]);
 if count ~= nf * 4
     error('matGeom:readMesh_off:FileFormatError', ...
         ['Could not read all the ' num2str(nf) ' faces']);

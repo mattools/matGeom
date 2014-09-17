@@ -1,4 +1,4 @@
-function [cVertices cFaces] = clipMeshVertices(vertices, faces, box)
+function [cVertices, cFaces] = clipMeshVertices(vertices, faces, box)
 %CLIPMESHVERTICES Clip vertices of a surfacic mesh and remove outer faces
 %
 %   output = clipMeshVertices(input)
@@ -8,7 +8,7 @@ function [cVertices cFaces] = clipMeshVertices(vertices, faces, box)
 %
 %   See also
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -21,7 +21,7 @@ if isstruct(vertices)
     vertices = vertices.vertices;
 end
 
-[cVertices indVertices] = clipPoints3d(vertices, box);
+[cVertices, indVertices] = clipPoints3d(vertices, box);
 
 
 % for face indices relabeling

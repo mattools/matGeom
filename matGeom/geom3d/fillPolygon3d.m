@@ -18,7 +18,7 @@ function varargout = fillPolygon3d(varargin)
 %   See Also:
 %   polygons3d, drawPolygon, drawPolyline3d
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
@@ -31,8 +31,8 @@ var = varargin{1};
 if iscell(var)
     hold on;
     h = [];
-    for i=1:length(var(:))
-        h = [h; fillPolygon3d(var{i}, varargin{2:end})];
+    for i = 1:length(var(:))
+        h = [h; fillPolygon3d(var{i}, varargin{2:end})]; %#ok<AGROW>
     end
     if nargout>0
         varargout{1}=h;

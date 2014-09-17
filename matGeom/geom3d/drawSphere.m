@@ -118,7 +118,7 @@ end
 
 % number of meridians
 nPhi    = 32;
-ind = strmatch('nphi', lower(options(1:2:end)));
+ind = find(strcmpi('nPhi', options(1:2:end)));
 if ~isempty(ind)
     ind = ind(1);
     nPhi = options{2*ind};
@@ -127,7 +127,7 @@ end
     
 % number of parallels
 nTheta  = 16;
-ind = strmatch('ntheta', lower(options(1:2:end)));
+ind = find(strcmpi('nTheta', options(1:2:end)));
 if ~isempty(ind)
     ind = ind(1);
     nTheta = options{2*ind};

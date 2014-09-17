@@ -1,4 +1,4 @@
-function [axis theta] = rotation3dAxisAndAngle(mat)
+function [axis, theta] = rotation3dAxisAndAngle(mat)
 %ROTATION3DAXISANDANGLE Determine axis and angle of a 3D rotation matrix
 %
 %   [AXIS ANGLE] = rotation3dAxisAndAngle(MAT)
@@ -27,6 +27,7 @@ function [axis theta] = rotation3dAxisAndAngle(mat)
 %   See also
 %   transforms3d, vectors3d, angles3d
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -37,10 +38,10 @@ function [axis theta] = rotation3dAxisAndAngle(mat)
 A = mat(1:3, 1:3);
 
 % extract eigen values and eigen vectors
-[V D] = eig(A - eye(3));
+[V, D] = eig(A - eye(3));
 
 % we need the eigen vector corresponding to eigenvalue==1
-[dummy ind] = min(abs(diag(D)-1)); %#ok<ASGLU>
+[dummy, ind] = min(abs(diag(D)-1)); %#ok<ASGLU>
 
 % extract corresponding eigen vector
 vector = V(:, ind)';
@@ -57,7 +58,7 @@ end
 
 % try to get a point on the line
 % seems to work, but not sure about stability
-[V D] = eig(mat-eye(4)); %#ok<NASGU>
+[V, D] = eig(mat-eye(4)); %#ok<NASGU>
 origin = V(1:3,4)'/V(4, 4);
 
 % create line corresponding to rotation axis
