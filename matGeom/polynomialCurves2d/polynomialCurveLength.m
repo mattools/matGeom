@@ -65,5 +65,9 @@ dx = dx(end:-1:1);
 dy = dy(end:-1:1);
 
 % numerical integration of the Jacobian of parametrized curve
-L = quad(@(t)sqrt(polyval(dx, t).^2+polyval(dy, t).^2), t0, t1, tol);
-
+if verLessThan('matlab', '7.14')
+    L = quad(@(t)sqrt(polyval(dx, t).^2+polyval(dy, t).^2), t0, t1, tol); %#ok<DQUAD>
+else
+    L = integral(@(t)sqrt(polyval(dx, t).^2+polyval(dy, t).^2), ...
+        t0, t1, 'AbsTol', tol);
+end

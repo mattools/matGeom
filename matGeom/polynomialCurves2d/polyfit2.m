@@ -41,8 +41,8 @@ function coef = polyfit2(varargin)
 %   See also  :
 %   polyfit (matlab)
 %
+
 %   -----
-%
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 30/04/2004.
@@ -146,19 +146,19 @@ beq = zeros(0, 1);
 
 % start condition initialisations
 fact = ones(1, N+1);
-for i=1:length(cond1)    
+for i = 1:length(cond1)    
     pow = [zeros(1, i) 1:N+1-i];
-    Aeq = [Aeq ; fact.*power(t0, pow)];
-    beq = [beq; cond1(i)];
+    Aeq = [Aeq ; fact.*power(t0, pow)]; %#ok<AGROW>
+    beq = [beq; cond1(i)]; %#ok<AGROW>
     fact = fact.*pow;
 end
 
 % end condition initialisations
 fact = ones(1, N+1);
-for i=1:length(cond2)    
+for i = 1:length(cond2)    
     pow = [zeros(1, i) 1:N+1-i];
-    Aeq = [Aeq ; fact.*power(t1, pow)];
-    beq = [beq; cond2(i)];
+    Aeq = [Aeq ; fact.*power(t1, pow)];%#ok<AGROW>
+    beq = [beq; cond2(i)];%#ok<AGROW>
     fact = fact.*pow;
 end
 
@@ -166,7 +166,7 @@ end
 
 % main matrix of the problem, size L*(deg+1)
 X = ones(L, N+1);
-for i=1:N
+for i = 1:N
     X(:, i+1) = power(t, i);
 end
 

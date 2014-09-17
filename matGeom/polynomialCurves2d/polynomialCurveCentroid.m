@@ -70,14 +70,28 @@ dy = dy(end:-1:1);
 cx = xCoef(end:-1:1);
 cy = yCoef(end:-1:1);
 
-% compute curve length by integrating the Jacobian
-L = quad(@(t)sqrt(polyval(dx, t).^2+polyval(dy, t).^2), t0, t1, tol);
-
-% compute first coordinate of centroid
-xc = quad(@(t)polyval(cx, t).*sqrt(polyval(dx, t).^2+polyval(dy, t).^2), t0, t1, tol);
-
-% compute first coordinate of centroid
-yc = quad(@(t)polyval(cy, t).*sqrt(polyval(dx, t).^2+polyval(dy, t).^2), t0, t1, tol);
+if verLessThan('matlab', '7.14')
+    % compute curve length by integrating the Jacobian
+    L = quad(@(t)sqrt(polyval(dx, t).^2+polyval(dy, t).^2), t0, t1, tol); %#ok<*DQUAD>
+    
+    % compute first coordinate of centroid
+    xc = quad(@(t)polyval(cx, t).*sqrt(polyval(dx, t).^2+polyval(dy, t).^2), t0, t1, tol);
+    
+    % compute first coordinate of centroid
+    yc = quad(@(t)polyval(cy, t).*sqrt(polyval(dx, t).^2+polyval(dy, t).^2), t0, t1, tol);
+else
+    % compute curve length by integrating the Jacobian
+    L = integral(@(t)hypot(polyval(dx, t), polyval(dy, t)), ...
+        t0, t1, 'AbsTol', tol);
+    
+    % compute first coordinate of centroid
+    xc = integral(@(t)polyval(cx, t).*hypot(polyval(dx, t), polyval(dy, t)), ...
+        t0, t1, 'AbsTol', tol);
+    
+    % compute first coordinate of centroid
+    yc = integral(@(t)polyval(cy, t).*hypot(polyval(dx, t), polyval(dy, t)), ...
+        t0, t1, 'AbsTol', tol);
+end
 
 % divide result of integration by total length of the curve
-centroid = [xc yc]/L;
+centroid = [xc yc] / L;

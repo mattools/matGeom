@@ -100,6 +100,11 @@ function res = funCurveLength(t0, t1, c1, c2, varargin)
 % Created: 2007-02-14
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 
-res = quad(@(t)sqrt(polyval(c1, t).^2+polyval(c2, t).^2), t0, t1, varargin{:});
+if verLessThan('matlab', '7.14')
+    res = quad(@(t)sqrt(polyval(c1, t).^2+polyval(c2, t).^2), t0, t1, varargin{:}); %#ok<DQUAD>
+else
+    res = integral(@(t)sqrt(polyval(c1, t).^2+polyval(c2, t).^2), ...
+        t0, t1, 'AbsTol', varargin{:});
+end
 
 

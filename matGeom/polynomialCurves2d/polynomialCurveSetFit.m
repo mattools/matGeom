@@ -146,7 +146,7 @@ for i = 1:nBranches
     t = t/max(t);
     
     % fit a polynomial curve to the set of points
-    [xc yc] = polynomialCurveFit(...
+    [xc, yc] = polynomialCurveFit(...
         t, points, deg, ...
         0, {points(1,1), points(1,2)},...
         1, {points(end,1), points(end,2)});
@@ -199,10 +199,10 @@ end
 % find extremity points
 nb = imfilter(double(img), f).*img;
 imgEnding = nb==2 | nb==1;
-[yi xi] = find(imgEnding);
+[yi, xi] = find(imgEnding);
 
 % extract coordinates of points
-[y x] = find(img);
+[y, x] = find(img);
 
 % index of first point
 if isempty(xi)
