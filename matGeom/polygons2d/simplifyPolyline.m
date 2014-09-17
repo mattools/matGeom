@@ -1,4 +1,4 @@
-function [poly2 keepInds] = simplifyPolyline(poly, tol)
+function [poly2, keepInds] = simplifyPolyline(poly, tol)
 %SIMPLIFYPOLYLINE Douglas-Peucker simplification of a polyline
 %
 %   POLY2 = simplifyPolyline(POLY, TOL)
@@ -18,7 +18,7 @@ function [poly2 keepInds] = simplifyPolyline(poly, tol)
 %   References
 %   http://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

@@ -1,4 +1,4 @@
-function [intersects inds] = intersectEdgePolygon(edge, poly, varargin)
+function [intersects, inds] = intersectEdgePolygon(edge, poly, varargin)
 %INTERSECTEDGEPOLYGON  Intersection point of an edge with a polygon
 %
 %   INTER = intersectEdgePolygon(EDGE, POLY)
@@ -37,7 +37,7 @@ end
 
 line = edgeToLine(edge);
 
-[intersects inds] = intersectLinePolygon(line, poly, tol);
+[intersects, inds] = intersectLinePolygon(line, poly, tol);
 
 if ~isempty(intersects)
     pos = linePosition(intersects, line);

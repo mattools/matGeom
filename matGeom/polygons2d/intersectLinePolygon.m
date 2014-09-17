@@ -1,4 +1,4 @@
-function [intersects edgeIndices] = intersectLinePolygon(line, poly, varargin)
+function [intersects, edgeIndices] = intersectLinePolygon(line, poly, varargin)
 %INTERSECTLINEPOLYGON Intersection points between a line and a polygon
 %
 %   P = intersectLinePolygon(LINE, POLY)
@@ -51,6 +51,7 @@ function [intersects edgeIndices] = intersectLinePolygon(line, poly, varargin)
 %   See Also
 %   lines2d, polygons2d, intersectLines, intersectRayPolygon
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -93,7 +94,7 @@ intersects = intersects(inds, :);
 
 % remove multiple vertices (can occur for intersections located at polygon
 % vertices)
-[intersects I J] = unique(intersects, 'rows'); %#ok<NASGU>
+[intersects, I, J] = unique(intersects, 'rows'); %#ok<NASGU>
 
 if nargout > 1
     % return indices of edges involved in intersection

@@ -33,6 +33,7 @@ function varargout = polylineSelfIntersections(poly, varargin)
 %   See also
 %   polygons2d, intersectPolylines, polygonSelfIntersections
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -121,7 +122,7 @@ end
 % we need to remove it
 if closed
     dist = distancePoints(points, poly(1,:));
-    [minDist ind] = min(dist); %#ok<ASGLU>
+    [minDist, ind] = min(dist); %#ok<ASGLU>
     points(ind,:) = [];
     pos1(ind)   = [];
     pos2(ind)   = [];

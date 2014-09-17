@@ -1,4 +1,4 @@
-function [centroid area] = polygonCentroid(varargin)
+function [centroid, area] = polygonCentroid(varargin)
 %POLYGONCENTROID Compute the centroid (center of mass) of a polygon
 %
 %   CENTROID = polygonCentroid(POLY)
@@ -25,6 +25,7 @@ function [centroid area] = polygonCentroid(varargin)
 %   See also:
 %   polygons2d, polygonArea, drawPolygon
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE

@@ -12,6 +12,7 @@ function poly2 = clipPolygon(polygon, w)
 %   See also:
 %   polygons2d, boxes2d, clipPolygonHP
 %
+
 % ---------
 % author : David Legland 
 % created the 14/05/2005.
@@ -62,7 +63,7 @@ pc = centroid(pts);
 
 % sort vertices around polygon
 angle = edgeAngle([repmat(pc, [size(pts, 1) 1]) pts]);
-[dummy I] = sort(angle); %#ok<ASGLU>
+[dummy, I] = sort(angle); %#ok<ASGLU>
 
 % create resulting polygon
 poly2 = pts(I, :);

@@ -19,6 +19,7 @@ function varargout = polygonSelfIntersections(poly, varargin)
 %   See also
 %   polygons2d, polylineSelfIntersections
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -37,7 +38,7 @@ if sum(abs(poly(end, :)-poly(1,:)) < tol) ~= 2
 end
 
 % compute intersections by calling algo for polylines
-[points pos1 pos2] = polylineSelfIntersections(poly, 'closed');
+[points, pos1, pos2] = polylineSelfIntersections(poly, 'closed');
 
 % It may append that first vertex of polygon is detected as intersection,
 % the following tries to detect this
@@ -48,7 +49,7 @@ pos1(inds)   = [];
 pos2(inds)   = [];
 
 % remove multiple intersections
-[points I J] = unique(points, 'rows', 'first'); %#ok<NASGU>
+[points, I, J] = unique(points, 'rows', 'first'); %#ok<NASGU>
 pos1 = pos1(I);
 pos2 = pos2(I);
 

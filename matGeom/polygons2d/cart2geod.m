@@ -4,7 +4,7 @@ function point = cart2geod(src, curve)
 %   PT2 = cart2geod(PT1, CURVE)
 %   PT1 is the point to transform, in Cartesian coordinates (same system
 %   used for the curve).
-%   CURVE is a [N*2] array which represents positions of the curve.
+%   CURVE is a N-by-2 array which represents coordinates of curve vertices.
 %
 %   The function first compute the projection of PT1 on the curve. Then,
 %   the first geodesic coordinate is the length of the curve to the
@@ -18,7 +18,8 @@ function point = cart2geod(src, curve)
 %   See also
 %   polylines2d, geod2cart, curveLength
 %
-%   ---------
+
+% ---------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % created the 08/04/2004.
@@ -32,7 +33,7 @@ function point = cart2geod(src, curve)
 t = parametrize(curve);
 
 % compute distance between each src point and the curve
-[dist ind] = minDistancePoints(src, curve);
+[dist, ind] = minDistancePoints(src, curve);
 
 % convert to 'geodesic' coordinate
 point = [t(ind) dist];

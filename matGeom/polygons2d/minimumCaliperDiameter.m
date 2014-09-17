@@ -1,4 +1,4 @@
-function [min_width min_angle] = minimumCaliperDiameter(points)
+function [min_width, min_angle] = minimumCaliperDiameter(points)
 %MINIMUMCALIPERDIAMETER Minimum caliper diameter of a set of points
 %
 %   WIDTH = minimumCaliperDiameter(POINTS)
@@ -31,6 +31,7 @@ function [min_width min_angle] = minimumCaliperDiameter(points)
 %   See also
 %   polygons2d, convexHull, orientedBox
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -59,8 +60,8 @@ if nV < 3
     return;
 end
 
-[tmp p_a] = min(hull(:, 2)); %#ok<ASGLU>
-[tmp p_b] = max(hull(:, 2)); %#ok<ASGLU>
+[tmp, p_a] = min(hull(:, 2)); %#ok<ASGLU>
+[tmp, p_b] = max(hull(:, 2)); %#ok<ASGLU>
 
 caliper_a = [ 1 0];    % Caliper A points along the positive x-axis
 caliper_b = [-1 0];    % Caliper B points along the negative x-axis

@@ -1,11 +1,11 @@
-function [res thetaList] = polygonSignature(poly, varargin)
+function [res, thetaList] = polygonSignature(poly, varargin)
 %POLYGONSIGNATURE Polar signature of a polygon (polar distance to origin)
 %
 %   DISTS = polygonSignature(POLY, THETALIST)
 %   Computes the polar signature of a polygon, for a set of angles in
 %   degrees.
 %   
-%   [DISTS THETA] = polygonSignature(...)
+%   [DISTS, THETA] = polygonSignature(...)
 %   Also returns the angle set for which the signature was computed.
 %
 %   Example
@@ -14,6 +14,7 @@ function [res thetaList] = polygonSignature(poly, varargin)
 %   See also
 %   polygons2d
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

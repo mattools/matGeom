@@ -28,7 +28,7 @@ function loops = polygonLoops(poly)
 %% Initialisations
 
 % compute intersections
-[inters pos1 pos2] = polygonSelfIntersections(poly);
+[inters, pos1, pos2] = polygonSelfIntersections(poly);
 
 % case of a polygon without self-intersection
 if isempty(inters)
@@ -40,7 +40,7 @@ end
 loops = cell(0, 1);
 
 % sort intersection points with respect to their position on the polygon
-[positions order] = sortrows([pos1 pos2;pos2 pos1]);
+[positions, order] = sortrows([pos1 pos2;pos2 pos1]);
 inters = [inters ; inters];
 inters = inters(order, :);
 
@@ -141,7 +141,7 @@ while ~isempty(positions)
     % remove redundant vertices
     loop(sum(loop(1:end-1,:) == loop(2:end,:) ,2)==2, :) = []; %#ok<AGROW>
     if sum(diff(loop([1 end], :))==0)==2
-        loop(end, :) = []; %#ok<AGROW>
+        loop(end, :) = []; 
     end
 
     % add current loop to the list of loops

@@ -58,7 +58,7 @@ var = varargin{1};
 if iscell(var)
     h = [];
     for i = 1:length(var(:))
-        h = [h ; drawPolyline(ax, var{i}, varargin{2:end})];
+        h = [h ; drawPolyline(ax, var{i}, varargin{2:end})]; %#ok<AGROW>
     end
     if nargout > 0
         varargout = {h};

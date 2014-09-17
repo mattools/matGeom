@@ -1,4 +1,4 @@
-function [hull inds] = convexHull(points)
+function [hull, inds] = convexHull(points)
 %CONVEXHULL Convex hull of a set of points
 %
 %   POLY = convexHull(POINTS)
@@ -30,6 +30,7 @@ function [hull inds] = convexHull(points)
 %   See also
 %   polygons2d, convhull
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

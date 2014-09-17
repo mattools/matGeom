@@ -13,7 +13,7 @@ function tri = triangulatePolygon(poly)
 %     figure;drawPolygon(poly); axis equal
 %     tri = triangulatePolygon(poly);
 %     figure;
-%     %patch('Faces', tri, 'Vertices', poly, 'facecolor', 'c');
+%     % patch('Faces', tri, 'Vertices', poly, 'facecolor', 'c');
 %     drawMesh(poly, tri, 'facecolor', 'c');
 %     axis equal
 %
@@ -26,8 +26,9 @@ function tri = triangulatePolygon(poly)
 %     axis([0 150 0 50])
 %
 %   See also
-%     DelaunayTri, drawMesh, patch
+%     delaunayTriangulation, drawMesh, patch
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -38,12 +39,32 @@ function tri = triangulatePolygon(poly)
 nv = size(poly, 1);
 cons = [(1:nv)' [2:nv 1]'];
 
-% delaunay triangulation 
-dt = DelaunayTri(poly(:,1), poly(:, 2), cons);
+if verLessThan('matlab', '8.1')
+    % Code for versions before R2013a
+    
+    % delaunay triangulation
+    dt = DelaunayTri(poly(:,1), poly(:, 2), cons); %#ok<DDELTRI>
+    
+    % find which triangles are contained in polygon
+    centers = incenters(dt);
+    inds = isPointInPolygon(centers, poly);
+    
+    % keep selected triangles
+    tri = dt.Triangulation(inds, :);
 
-% find which triangles are contained in polygon
-centers = incenters(dt);
-inds = isPointInPolygon(centers, poly);
+else
+    % Code for versions R2013a and later
 
-% keep selected triangles
-tri = dt.Triangulation(inds, :);
+    % delaunay triangulation 
+    % dt = DelaunayTri(poly(:,1), poly(:, 2), cons);
+    dt = delaunayTriangulation(poly(:,1), poly(:, 2), cons);
+
+    % find which triangles are contained in polygon
+    % centers = incenters(dt);
+    centers = incenter(dt);
+    inds = isPointInPolygon(centers, poly);
+
+    % keep selected triangles
+    % tri = dt.Triangulation(inds, :);
+    tri = dt.ConnectivityList(inds, :);
+end

@@ -1,4 +1,4 @@
-function [intersects edgeIndices] = intersectRayPolygon(ray, poly, varargin)
+function [intersects, edgeIndices] = intersectRayPolygon(ray, poly, varargin)
 %INTERSECTRAYPOLYGON Intersection points between a ray and a polygon
 %
 %   P = intersectRayPolygon(RAY, POLY)
@@ -17,6 +17,7 @@ function [intersects edgeIndices] = intersectRayPolygon(ray, poly, varargin)
 %   See also
 %   rays2d, polygons2d, intersectLinePolygon
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -28,7 +29,7 @@ function [intersects edgeIndices] = intersectRayPolygon(ray, poly, varargin)
 %   2013-02-11 also returns edgeIndices
 
 % compute intersections with supporting line
-[intersects edgeIndices] = intersectLinePolygon(ray, poly, varargin{:});
+[intersects, edgeIndices] = intersectLinePolygon(ray, poly, varargin{:});
 
 % compute position of intersects on the supporting line
 pos = linePosition(intersects, ray);

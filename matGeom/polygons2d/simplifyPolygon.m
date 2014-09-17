@@ -1,4 +1,4 @@
-function [poly keepInds] = simplifyPolygon(poly, varargin)
+function [poly, keepInds] = simplifyPolygon(poly, varargin)
 %SIMPLIFYPOLYGON  Douglas-Peucker simplification of a polygon
 %
 %   POLY2 = simplifyPolygon(POLY)
@@ -19,8 +19,9 @@ function [poly keepInds] = simplifyPolygon(poly, varargin)
 %   http://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm
 %
 %   See also
+%   polygons2d, simplifyPolyline
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -29,7 +30,7 @@ function [poly keepInds] = simplifyPolygon(poly, varargin)
 
 % call simlpifyPolyline by ensuring the last vertex is present
 poly = poly([1:end 1], :);
-[poly keepInds] = simplifyPolyline(poly, varargin{:});
+[poly, keepInds] = simplifyPolyline(poly, varargin{:});
 
 % remove last vertex
 poly(end, :) = [];

@@ -83,12 +83,12 @@ edges = zeros(0, 2);
 % process each event until there is no more
 
 % start after index of last vertex, and process N-3 intermediate rays
-for i=N+1:2*N-3
+for i = N+1:2*N-3
     % add new node at the rays intersection
     nodes(i,:) = events(1, 3:4);
     
     % add new couple of edges
-    edges = [edges; events(1,1) i; events(1,2) i];
+    edges = [edges; events(1,1) i; events(1,2) i]; %#ok<AGROW>
             
     % find the two edges creating the new emanating ray
     n1 = rayEdges(events(1, 1), 1);
@@ -103,7 +103,7 @@ for i=N+1:2*N-3
     ray0(1:2) = nodes(i, :);
 
     % add the new ray to the list
-    rays = [rays; ray0];
+    rays = [rays; ray0]; %#ok<AGROW>
     rayEdges(size(rayEdges, 1)+1, 1:2) = [n1 n2];
     
     % find the two neighbour rays
@@ -121,7 +121,7 @@ for i=N+1:2*N-3
     events = events(ind, :);
     
     % add the newly formed events
-    events = [events; ir(1) i pint(1,:) ti(1); ir(2) i pint(2,:) ti(2)];
+    events = [events; ir(1) i pint(1,:) ti(1); ir(2) i pint(2,:) ti(2)]; %#ok<AGROW>
 
     % and sort them according to 'position' parameter
     events = sortrows(events, 5);
