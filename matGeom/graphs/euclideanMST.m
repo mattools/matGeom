@@ -23,7 +23,7 @@ function varargout = euclideanMST(points)
 %   See also
 %   prim_mst, distancePoints, delaunayn
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -69,7 +69,7 @@ for i = 1:size(edges,1)
 end
 
 % compute MST of created graph
-[edges2 vals2] = prim_mst(edges, val);
+[edges2, vals2] = prim_mst(edges, val);
 
 % process output arguments
 if nargout == 1

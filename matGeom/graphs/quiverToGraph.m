@@ -1,4 +1,4 @@
-function [v e] = quiverToGraph(x, y, dx, dy)
+function [v, e] = quiverToGraph(x, y, dx, dy)
 %QUIVERTOGRAPH Converts quiver data to quad mesh
 %
 %   [V E] = quiverToGraph(x, y, dx, dy)
@@ -12,7 +12,7 @@ function [v e] = quiverToGraph(x, y, dx, dy)
 %
 %   See also
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

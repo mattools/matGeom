@@ -3,27 +3,21 @@ function varargout = mergeGraphs(varargin)
 %
 %   
 %
+
 %   -----
-%
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 09/08/2004.
 %
 
-
 simplify = false;
-
 
 edges = {}; edges2 = {};
 faces = {}; faces2 = {}; 
 
+%% process input arguments
 
-% ===============================================================
-% process input arguments
-
-% ---------------------------------------------------------------
 % extract simplify tag
-
 var = varargin{nargin};
 if ischar(var)
 	if strcmp(var, 'simplify');
@@ -33,8 +27,7 @@ if ischar(var)
 end
 
 
-% ---------------------------------------------------------------
-% extract data of first graph
+%% extract data of first graph
 
 var = varargin{1};
 if iscell(var)
@@ -82,9 +75,8 @@ else
     error('Error in passing arguments in mergeGraphs');
 end
 
-  
-% ---------------------------------------------------------------    
-% extract data of second graph
+
+%% extract data of second graph
 
 var = varargin{1};
 if iscell(var)
@@ -123,13 +115,12 @@ else
 end
 
 
-% ===============================================================
-% Main algorithm
+%% Main algorithm
 
 % eventually convert faces
 if ~iscell(faces)
     f = cell(size(faces, 1), 1);
-    for i=1:size(faces, 1)
+    for i = 1:size(faces, 1)
         f{i} = faces(i,:);
     end
     faces = f;
@@ -137,7 +128,7 @@ end
 
 edges = [edges ; edges2 + size(nodes, 1)];
 if iscell(faces2)
-	for i=1:length(faces2)
+	for i = 1:length(faces2)
         faces{length(faces)+1} = faces2{i} + size(nodes, 1); %#ok<AGROW>
 	end
 else
@@ -147,15 +138,14 @@ nodes = [nodes; nodes2];
 
 if simplify
     if ~isempty(faces)
-        [nodes edges faces] = grSimplifyBranches(nodes, edges, faces);
+        [nodes, edges, faces] = grSimplifyBranches(nodes, edges, faces);
     else
-        [nodes edges] = grSimplifyBranches(nodes, edges);
+        [nodes, edges] = grSimplifyBranches(nodes, edges);
     end
 end
 
 
-% ===============================================================
-% process output depending on how many arguments are needed
+%% process output depending on how many arguments are needed
 
 if nargout == 1
     graph.nodes = nodes;

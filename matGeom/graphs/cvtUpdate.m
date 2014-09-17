@@ -21,6 +21,7 @@ function varargout = cvtUpdate(germs, points)
 %    Centroidal Voronoi Tessellations: Applications and Algorithms,
 %    SIAM Review, Volume 41, 1999, pages 637-676.
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -44,7 +45,7 @@ count = ones(Ng, 1);
 %% Generate random points
 
 % for each point, determines which germ is the closest ones
-[dist ind] = minDistancePoints(points, germs); %#ok<ASGLU>
+[dist, ind] = minDistancePoints(points, germs); %#ok<ASGLU>
 
 h = zeros(Ng, 1);
 for i = 1:Ng

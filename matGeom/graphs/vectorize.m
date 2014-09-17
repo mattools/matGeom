@@ -22,10 +22,11 @@ function varargout = vectorize(img)
 %   drawGraph(nodes, edges);
 %
 %
-%   See Also: drawGraph, minGraph, removeMultiplePoints
+%   See Also: 
+%     drawGraph, minGraph, removeMultiplePoints
 %
+
 %   -----
-%
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 17/07/2003.
@@ -43,7 +44,7 @@ function varargout = vectorize(img)
 %% Initialisations
 
 % nodes array
-[y x] = find(img>0);
+[y, x] = find(img>0);
 points = [x y];
 
 % intialize empty edges array.
@@ -80,7 +81,7 @@ for x = 2:dim(2)
     
     % check the point to the left
     if img(1, x-1) > 0
-        edges = [edges; img(1, x) img(1, x-1)];
+        edges = [edges; img(1, x) img(1, x-1)]; %#ok<AGROW>
     end
 end
 
@@ -92,12 +93,12 @@ for y = 2:dim(1)
 
         % check point on the top
         if img(y-1,1)>0
-            edges = [edges; img(y, 1) img(y-1,1)];
+            edges = [edges; img(y, 1) img(y-1,1)]; %#ok<AGROW>
         end
 
         % check point on the top-right
         if img(y-1,2)>0
-            edges = [edges; img(y, 1) img(y-1,2)];
+            edges = [edges; img(y, 1) img(y-1,2)]; %#ok<AGROW>
         end
     end
     
@@ -109,22 +110,22 @@ for y = 2:dim(1)
         
         % check point on the left
         if img(y, x-1)>0
-            edges = [edges; img(y, x) img(y, x-1)];
+            edges = [edges; img(y, x) img(y, x-1)]; %#ok<AGROW>
         end
 
         % check point on the top-left
         if img(y-1, x-1)>0
-            edges = [edges; img(y, x) img(y-1, x-1)];
+            edges = [edges; img(y, x) img(y-1, x-1)]; %#ok<AGROW>
         end
         
         % check point on the top
         if img(y-1, x)>0
-            edges = [edges; img(y, x) img(y-1, x)];
+            edges = [edges; img(y, x) img(y-1, x)]; %#ok<AGROW>
         end
         
         % check point on the top-right
         if img(y-1, x+1)>0
-            edges = [edges; img(y, x) img(y-1, x+1)];
+            edges = [edges; img(y, x) img(y-1, x+1)]; %#ok<AGROW>
         end
         
     end
@@ -134,17 +135,17 @@ for y = 2:dim(1)
 
         % check point on the left
         if img(y, dim(2)-1)>0
-            edges = [edges; img(y, dim(2)) img(y, dim(2)-1)];
+            edges = [edges; img(y, dim(2)) img(y, dim(2)-1)]; %#ok<AGROW>
         end
         
         % check point on the top-left
         if img(y-1, dim(2)-1)>0
-            edges = [edges; img(y, dim(2)) img(y-1, dim(2)-1)];
+            edges = [edges; img(y, dim(2)) img(y-1, dim(2)-1)]; %#ok<AGROW>
         end
         
         % check point on the top
         if img(y-1, dim(2))>0
-            edges = [edges; img(y, dim(2)) img(y-1, dim(2))];
+            edges = [edges; img(y, dim(2)) img(y-1, dim(2))]; %#ok<AGROW>
         end
     end
 end

@@ -19,8 +19,8 @@ D2 = size(img, 2);
 D3 = size(img, 3);
 
 % first direction for image
-for y=1:D2  
-    for z=1:D3
+for y = 1:D2  
+    for z = 1:D3
         % find transitions between the two phases
         ind = find(img(1:D1-1, y, z)~=img(2:D1, y, z));
     
@@ -34,7 +34,7 @@ for y=1:D2
             n4 = [ind(i2)+.5 y+.5 z-.5];
         
             % add the face (and edges) with the 4 given nodes
-            [nodes edges faces] = addFace(nodes, edges, faces, [n1; n2; n3; n4]);
+            [nodes, edges, faces] = addFace(nodes, edges, faces, [n1; n2; n3; n4]);
         end        
     end
 end
@@ -55,7 +55,7 @@ for x=1:D1
             n4 = [x+.5 ind(i2)+.5 z-.5];           
         
             % add the face (and edges) with the 4 given nodes
-            [nodes edges faces] = addFace(nodes, edges, faces, [n1; n2; n3; n4]);
+            [nodes, edges, faces] = addFace(nodes, edges, faces, [n1; n2; n3; n4]);
         end        
     end
 end
@@ -76,7 +76,7 @@ for x=1:D1
             n4 = [x+.5 y-.5 ind(i2)+.5];
         
             % add the face (and edges) with the 4 given nodes
-            [nodes edges faces] = addFace(nodes, edges, faces, [n1; n2; n3; n4]);
+            [nodes, edges, faces] = addFace(nodes, edges, faces, [n1; n2; n3; n4]);
         end        
     end
 end

@@ -17,7 +17,7 @@ D1 = size(img, 1);
 D2 = size(img, 2);
 
 % first direction for image
-for i=1:D1
+for i = 1:D1
     
     % find transitions between the two phases
     ind = find(img(i, 1:D2-1)~=img(i, 2:D2));
@@ -31,11 +31,11 @@ for i=1:D1
         ind1 = find(ismember(nodes, n1, 'rows'));       
         ind2 = find(ismember(nodes, n2, 'rows'));
         if isempty(ind1)
-            nodes = [nodes; n1];
+            nodes = [nodes; n1]; %#ok<AGROW>
             ind1 = size(nodes, 1);
         end
         if isempty(ind2)
-            nodes = [nodes; n2];
+            nodes = [nodes; n2]; %#ok<AGROW>
             ind2 = size(nodes, 1);
         end
         
@@ -60,11 +60,11 @@ for i=1:D2
         ind1 = find(ismember(nodes, n1, 'rows'));       
         ind2 = find(ismember(nodes, n2, 'rows'));
         if isempty(ind1)
-            nodes = [nodes; n1];
+            nodes = [nodes; n1]; %#ok<AGROW>
             ind1 = size(nodes, 1);
         end
         if isempty(ind2)
-            nodes = [nodes; n2];
+            nodes = [nodes; n2]; %#ok<AGROW>
             ind2 = size(nodes, 1);
         end
         

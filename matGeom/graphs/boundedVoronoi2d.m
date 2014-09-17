@@ -1,4 +1,4 @@
-function [nodes edges faces] = boundedVoronoi2d(box, germs)
+function [nodes, edges, faces] = boundedVoronoi2d(box, germs)
 %BOUNDEDVORONOI2D Return a bounded voronoi diagram as a graph structure
 %   
 %   [NODES EDGES FACES] = boundedVoronoi2d(BOX, GERMS)
@@ -10,8 +10,8 @@ function [nodes edges faces] = boundedVoronoi2d(box, germs)
 %   drawGraph(n, e);
 %
 %   See also
-%
-%
+%     boundedCentroidalVoronoi2d
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -33,7 +33,7 @@ farPoints = [...
     ];
 
 % extract voronoi vertices and face structure
-[V C] = voronoin([germs;farPoints]);
+[V, C] = voronoin([germs;farPoints]);
 
 % for each germ, determines the different lines
 

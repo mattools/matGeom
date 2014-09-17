@@ -20,14 +20,21 @@ function varargout = gabrielGraph(pts)
 %   See also
 %     drawGraph, delaunayGraph
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2012-01-22,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
-% compute delaunay triangulation
-dt = DelaunayTri(pts);
+% compute Delaunay triangulation
+if verLessThan('matlab', '8.1')
+    % Code for versions before R2013a
+    dt = DelaunayTri(pts); %#ok<DDELTRI>
+else
+    % Code for versions R2013a and later
+    dt = delaunayTriangulation(pts);
+end
 
 % extract edges (N-by-2 array)
 eds = dt.edges();

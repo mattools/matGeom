@@ -1,4 +1,4 @@
-function [nodes edges faces] = voronoi2d(germs)
+function [nodes, edges, faces] = voronoi2d(germs)
 %VORONOI2D Compute a voronoi diagram as a graph structure
 %   
 %   [NODES EDGES FACES] = voronoi2d(GERMS)
@@ -11,7 +11,7 @@ function [nodes edges faces] = voronoi2d(germs)
 %
 %   See also
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -19,13 +19,13 @@ function [nodes edges faces] = voronoi2d(germs)
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 
 
-[V C] = voronoin(germs);
+[V, C] = voronoin(germs);
 
 nodes = V(2:end, :);
 edges = zeros(0, 2);
 faces = {};
 
-for i=1:length(C)
+for i = 1:length(C)
     cell = C{i};
     if ismember(1, cell)
         continue;

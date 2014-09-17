@@ -1,4 +1,4 @@
-function [germs germPaths] = centroidalVoronoi2d(nGerms, poly, varargin)
+function [germs, germPaths] = centroidalVoronoi2d(nGerms, poly, varargin)
 %CENTROIDALVORONOI2D Centroidal Voronoi tesselation within a polygon
 %
 %   PTS = centroidalVoronoi2d(NPTS, POLY)
@@ -35,6 +35,7 @@ function [germs germPaths] = centroidalVoronoi2d(nGerms, poly, varargin)
 %    Centroidal Voronoi Tessellations: Applications and Algorithms,
 %    SIAM Review, Volume 41, 1999, pages 637-676.
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

@@ -1,15 +1,15 @@
 function [nodes2, edges2] = grMergeNodesMedian(nodes, edges, mnodes)
 %GRMERGENODESMEDIAN Replace several nodes by their median coordinate
 %
-%   [NODES2 EDGES2] = grMergeNodesMedian(NODES, EDGES, NODES2MERGE)
+%   [NODES2, EDGES2] = grMergeNodesMedian(NODES, EDGES, NODES2MERGE)
 %   NODES ans EDGES are the graph structure, and NODES2MERGE is the list of
 %   indices of nodes to be merged.
 %   The median coordinate of merged nodes is computed, and all nodes are
 %   merged to this new node.
 %
 %
+
 %   -----
-%
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 13/08/2003.
@@ -52,7 +52,7 @@ end
 
 % remove nodes from the list, except the reference node.
 for n = 1:length(mnodes)
-    [nodes edges] = grRemoveNode(nodes, edges, mnodes(n)-n+1);
+    [nodes, edges] = grRemoveNode(nodes, edges, mnodes(n)-n+1);
 end
 
 nodes2 = nodes;

@@ -1,4 +1,4 @@
-function [nodes edges] = readGraph(fileName)
+function [nodes, edges] = readGraph(fileName)
 %READGRAPH Read a graph from a text file
 %
 %   [NODES EDGES] = readGraph(FILENAME)
@@ -14,6 +14,7 @@ function [nodes edges] = readGraph(fileName)
 %   See also
 %     writeGraph
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -49,7 +50,7 @@ end
 
 % read the number of nodes
 line = fgetl(f);
-[nNodesStr line] = strtok(line);
+[nNodesStr, line] = strtok(line);
 nNodes = str2double(nNodesStr);
 
 % read number of dimension, assumes 2 by default if not specified
@@ -59,7 +60,7 @@ if ~isempty(line)
 end
 
 % read node coordinates
-[nodes nRead] = fscanf(f, '%g', [nDims nNodes]);
+[nodes, nRead] = fscanf(f, '%g', [nDims nNodes]);
 assert(nRead == nNodes * nDims, ...
     'Could not read all node info in file %s', fileName);
 nodes = nodes';
@@ -82,7 +83,7 @@ nEdgesStr = strtok(line);
 nEdges = str2double(nEdgesStr);
 
 % read node indices of each edge
-[edges nRead] = fscanf(f, '%d %d\n', [2 nEdges]);
+[edges, nRead] = fscanf(f, '%d %d\n', [2 nEdges]);
 assert(nRead == nEdges * 2, ...
     'Could not read all edge info in file %s', fileName);
 edges = edges';

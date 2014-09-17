@@ -21,8 +21,9 @@ function varargout = boundedCentroidalVoronoi2d(germs, box, varargin)
 %   drawGraph(n, e, f);
 %
 %   See also
+%     boundedVoronoi2d, centroidalVoronoi2d 
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -55,8 +56,8 @@ farPoints = [...
 % iterate bounded voronoi tesselation
 for i = 1:nIter
     % generate Voronoi diagram, and clip with the box
-    [n e f] = voronoi2d([germs ; farPoints]);
-    [n e f] = clipGraph(n, e, f, box);
+    [n, e, f] = voronoi2d([germs ; farPoints]);
+    [n, e, f] = clipGraph(n, e, f, box);
     
     % centroid of each face will be used as germs for next iteration
     for j = 1:length(f)

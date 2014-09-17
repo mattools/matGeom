@@ -6,8 +6,8 @@ function varargout = grRemoveMultiplePoints(nodes, edges)
 %   This function is intended to be used as filter after a binary image
 %   skeletonization and vectorization.
 %
+
 %   -----
-%
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 13/08/2003.
@@ -36,7 +36,7 @@ while n <= length(nodes)
     p = p(p ~= 0);
         
     if length(p) > 1
-        [nodes edges] = grMergeNodes(nodes, edges, [n p]);
+        [nodes, edges] = grMergeNodes(nodes, edges, [n p]);
     end
     
     n = n+1;

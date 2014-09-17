@@ -6,8 +6,8 @@ function varargout = grSimplifyBranches_old(nodes, edges)
 %   2-degree nodes) by a single edge, whose extremities are nodes with
 %   degree >= 3.
 %
+
 %   -----
-%
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 13/08/2003.
@@ -37,7 +37,7 @@ while n < length(nodes)
             edges(neigh(2), 2) = node1;
         end
         
-        [nodes edges] = grRemoveNode(nodes, edges, n);
+        [nodes, edges] = grRemoveNode(nodes, edges, n);
         continue
     end
     

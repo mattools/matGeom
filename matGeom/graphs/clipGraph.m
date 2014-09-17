@@ -15,6 +15,7 @@ function varargout = clipGraph(nodes, edges, varargin)
 %   See also
 %   drawGraph, clipGraphPolygon
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -88,7 +89,7 @@ hashEdges = zeros(size(edges, 1), 1);
 
 
 % iterate over each edge
-for e=1:size(edges, 1)    
+for e = 1:size(edges, 1)    
     % current edge
     edge = [nodes(edges(e, 1), :) nodes(edges(e, 2), :)];
     
@@ -184,7 +185,7 @@ for f = 1:length(faces)
     faceNodes = nodes2(face2, :);
 
     % sort vertices according to their angle around the centroid
-    [faceNodes I] = angleSort(faceNodes, centroid(faceNodes)); %#ok<ASGLU>
+    [faceNodes, I] = angleSort(faceNodes, centroid(faceNodes)); %#ok<ASGLU>
     
     % add current face to list of faces
     faces2 = [faces2, {face2(I)'}]; %#ok<AGROW>

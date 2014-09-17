@@ -9,8 +9,8 @@ function edges = knnGraph(nodes, varargin)
 %   drawGraph(nodes, edges);
 %
 %   See also
-%
-%
+%     graphs
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
@@ -30,7 +30,7 @@ edges   = zeros(k*n, 2);
 % iterate on nodes
 for i = 1:n
     dists = distancePoints(nodes(i,:), nodes);
-    [dists inds]    = sort(dists); %#ok<ASGLU>
+    [dists, inds]    = sort(dists); %#ok<ASGLU>
     for j = 1:k
         edges(k*(i-1)+j, :) = [i inds(j+1)];
     end

@@ -17,8 +17,8 @@ function varargout = boundaryGraph(img)
 %   See also :
 %   imPatch, drawMesh
 %
+
 %   ---------
-%
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 28/06/2004.
@@ -39,7 +39,7 @@ nodes = zeros([0 nd]);  % coordinates of vertices
 edges = zeros([0 2]);   % first node and second nodes
 faces = zeros([0 4]);   % indices of 4 corners of each square face
 
-if nd==1
+if nd == 1
     img = img(:)>0;
     D1 = size(img,1);
     nodes = find(img(1:D1-1)~=img(2:D1))+.5;
@@ -49,7 +49,7 @@ if nd==1
     end
     return
     
-elseif nd==2
+elseif nd == 2
     D1 = size(img, 1);
 	D2 = size(img, 2);
 	
@@ -57,12 +57,12 @@ elseif nd==2
 	py = [];
 	
 	ind = find(img(1:D1-1, :)~=img(2:D1, :));
-	[x y] = ind2sub([D1-1 D2], ind);
+	[x, y] = ind2sub([D1-1 D2], ind);
 	px = [px; reshape([x+.5 x+.5]', length(x)*2,1)];
 	py = [py; reshape([y-.5 y+.5]', length(x)*2,1)];
 	
 	ind = find(img(:, 1:D2-1)~=img(:, 2:D2));
-	[x y] = ind2sub([D1 D2-1], ind);
+	[x, y] = ind2sub([D1 D2-1], ind);
 	px = [px; reshape([x-.5 x+.5]', length(x)*2,1)];
 	py = [py; reshape([y+.5 y+.5]', length(x)*2,1)];	
 	
@@ -87,20 +87,20 @@ elseif nd==3
 	pz = [];
 	
 	ind = find(img(1:D1-1, :, :)~=img(2:D1, :, :));
-	[x y z] = ind2sub([D1-1 D2 D3], ind);
+	[x, y, z] = ind2sub([D1-1 D2 D3], ind);
 	px = [px; reshape([x+.5 x+.5 x+.5 x+.5]', length(x)*4,1)];
 	py = [py; reshape([y-.5 y+.5 y+.5 y-.5]', length(x)*4,1)];
 	pz = [pz; reshape([z-.5 z-.5 z+.5 z+.5]', length(x)*4,1)];
 	
 	
 	ind = find(img(:, 1:D2-1, :)~=img(:, 2:D2, :));
-	[x y z] = ind2sub([D1 D2-1 D3], ind);
+	[x, y, z] = ind2sub([D1 D2-1 D3], ind);
 	px = [px; reshape([x-.5 x-.5 x+.5 x+.5]', length(x)*4,1)];
 	py = [py; reshape([y+.5 y+.5 y+.5 y+.5]', length(x)*4,1)];
 	pz = [pz; reshape([z-.5 z+.5 z+.5 z-.5]', length(x)*4,1)];
 	
 	ind = find(img(:, :, 1:D3-1)~=img(:, :, 2:D3));
-	[x y z] = ind2sub([D1 D2 D3-1], ind);
+	[x, y, z] = ind2sub([D1 D2 D3-1], ind);
 	px = [px; reshape([x-.5 x+.5 x+.5 x-.5]', length(x)*4,1)];
 	py = [py; reshape([y-.5 y-.5 y+.5 y+.5]', length(x)*4,1)];
 	pz = [pz; reshape([z+.5 z+.5 z+.5 z+.5]', length(x)*4,1)];

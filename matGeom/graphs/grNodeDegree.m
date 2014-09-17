@@ -1,4 +1,4 @@
-function [degree node] = grNodeDegree(node, edges)
+function [degree, node] = grNodeDegree(node, edges)
 %GRNODEDEGREE Degree of a node in a (undirected) graph
 %
 %   DEGREE = grNodeDegree(NODE_INDEX, EDGES);
@@ -16,7 +16,7 @@ function [degree node] = grNodeDegree(node, edges)
 %   a column vector with as many rows as the number of nodes referenced by
 %   edges.
 %
-%   [DEG INDS] = grNodeDegree(EDGES);
+%   [DEG, INDS] = grNodeDegree(EDGES);
 %   Also returns the indices of the nodes that were referenced.
 %   
 %   Example
@@ -30,7 +30,7 @@ function [degree node] = grNodeDegree(node, edges)
 %
 %   See Also: grNodeInnerDegree, grNodeOuterDegree
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

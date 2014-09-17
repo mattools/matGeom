@@ -1,4 +1,4 @@
-function [points edges] = delaunayGraph(points, varargin)
+function [points, edges] = delaunayGraph(points, varargin)
 %DELAUNAYGRAPH Graph associated to Delaunay triangulation of input points
 %
 %   [NODES EDGES] = delaunayGraph(POINTS)
@@ -21,8 +21,9 @@ function [points edges] = delaunayGraph(points, varargin)
 %     view(3);
 %
 %   See Also
-%   delaunay, delaunayn
+%   delaunay, delaunayn, delaunayTriangulation
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

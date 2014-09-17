@@ -1,4 +1,4 @@
-function [nodePath edgePath] = grShortestPath(nodes, edges, ind0, ind1, edgeWeights)
+function [nodePath, edgePath] = grShortestPath(nodes, edges, ind0, ind1, edgeWeights)
 %GRSHORTESTPATH Find a shortest path between two nodes in the graph
 %
 %   PATH = grShortestPath(NODES, EDGES, NODE1, NODE2, WEIGHTS)
@@ -45,7 +45,7 @@ if length(ind0) > 1
     nodePath = ind0(1);
     edgePath = [];
     for i = 2:length(ind0)
-        [node0 edge0] = grShortestPath(nodes, edges, ind0(i-1), ind0(i), edgeWeights);
+        [node0, edge0] = grShortestPath(nodes, edges, ind0(i-1), ind0(i), edgeWeights);
         nodePath = [nodePath ; node0(2:end)]; %#ok<AGROW>
         edgePath = [edgePath ; edge0]; %#ok<AGROW>
     end
@@ -94,7 +94,7 @@ edgeCount = 0;
 
 while ~isempty(unprocessedNodeInds)
     % choose unprocessed node with lowest distance
-    [tmp ind] = min(dists(unprocessedNodeInds)); %#ok<ASGLU>
+    [tmp, ind] = min(dists(unprocessedNodeInds)); %#ok<ASGLU>
     ind = unprocessedNodeInds(ind);
     ind = ind(1);
 
@@ -148,7 +148,7 @@ end
 
 %% Path creation
 
-% create the path: start from en index, and identify successive set of
+% create the path: start from end index, and identify successive set of
 % neighbor edges and nodes
 
 nodeInd = ind1;

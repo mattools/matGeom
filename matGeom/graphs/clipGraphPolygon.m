@@ -1,4 +1,4 @@
-function [nodes2 edges2] = clipGraphPolygon(nodes, edges, poly)
+function [nodes2, edges2] = clipGraphPolygon(nodes, edges, poly)
 %CLIPGRAPHPOLYGON  Clip a graph with a polygon
 %
 %   [NODES2 EDGES2] = clipGraphPolygon(NODES, EDGES, POLY)
@@ -11,6 +11,7 @@ function [nodes2 edges2] = clipGraphPolygon(nodes, edges, poly)
 %   See also
 %   drawGraph, clipGraph
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

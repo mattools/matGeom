@@ -24,6 +24,7 @@ function varargout = cvtIterate(germs, funcPtr, funcArgs, N)
 %    Centroidal Voronoi Tessellations: Applications and Algorithms,
 %    SIAM Review, Volume 41, 1999, pages 637-676.
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -54,7 +55,7 @@ count = ones(Ng, 1);
 pts = feval(funcPtr, N, funcArgs{:});
 
 % for each point, determines which germ is the closest ones
-[dist ind] = minDistancePoints(pts, germs); %#ok<ASGLU>
+[dist, ind] = minDistancePoints(pts, germs); %#ok<ASGLU>
 
 h = zeros(Ng, 1);
 for i = 1:Ng

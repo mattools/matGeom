@@ -6,6 +6,7 @@ function varargout = prim_mst(edges, vals)
 %   by EDGES, and whose edges are valuated by VALUES.
 %
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -33,7 +34,7 @@ for i = 1:N-1
         (ismember(edges(:,1), nodes) & ismember(edges(:,2), nodes2(1:i))) ));
     
     % choose edge with lowest value
-    [tmp ind2] = min(vals(ind)); %#ok<ASGLU>
+    [tmp, ind2] = min(vals(ind)); %#ok<ASGLU>
     ind = ind(ind2(1));
     vals2(i) = vals(ind);
     
