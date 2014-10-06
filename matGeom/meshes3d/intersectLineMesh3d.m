@@ -81,13 +81,15 @@ D = uv.^2 - uu .* vv;
 
 % test first coordinate
 s = (uv .* wv - vv .* wu) ./ D;
-ind1 = s < 0.0 | s > 1.0;
+% ind1 = s < 0.0 | s > 1.0;
+ind1 = s < -tol | s > (1.0 + tol);
 points(ind1, :) = NaN;
 pos(ind1) = NaN;
 
 % test second coordinate, and third triangle edge
 t = (uv .* wu - uu .* wv) ./ D;
-ind2 = t < 0.0 | (s + t) > 1.0;
+% ind2 = t < 0.0 | (s + t) > 1.0;
+ind2 = t < -tol | (s + t) > (1.0 + tol);
 points(ind2, :) = NaN;
 pos(ind2) = NaN;
 
