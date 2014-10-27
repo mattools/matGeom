@@ -98,3 +98,22 @@ function testClipBoth
 box = [0 100 0 100];
 assertElementsAlmostEqual([0 20 80 100], clipEdge([-10 10 90 110], box));
 
+
+function testClipArray
+% test an array of edges, with one inside
+
+% one edge totally inside, one edge crossing boundary
+edge1 = [40 40 60 40];
+edge2 = [60 60 100 60];
+edges = [edge1 ; edge2];
+
+box = [20 80 20 80];
+
+% compute clipping results
+clip1 = clipEdge(edge1, box);
+clip2 = clipEdge(edge2, box);
+clipped = clipEdge(edges, box);
+
+% compare results
+assertElementsAlmostEqual(clip1, clipped(1,:), 'absolute', .01);
+assertElementsAlmostEqual(clip2, clipped(2,:), 'absolute', .01);

@@ -3,13 +3,13 @@ function edge2 = clipEdge(edge, box)
 %
 %   EDGE2 = clipEdge(EDGE, BOX);
 %   EDGE: [x1 y1 x2 y2],
-%   BOX : [xmin xmax ; ymin ymax] or [xmin xmax ymin ymax];
+%   BOX : [xmin xmax ymin ymax], or [xmin xmax ; ymin ymax].
 %   return :
 %   EDGE2 = [xc1 yc1 xc2 yc2];
 %
 %   If clipping is null, return [0 0 0 0];
 %
-%   if EDGE is a [nx4] array, return an [nx4] array, corresponding to each
+%   if EDGE is a N-by-4 array, return an N-by-4 array, corresponding to each
 %   clipped edge.
 %
 %   See also
@@ -55,17 +55,19 @@ out1 = [p11 p12 p13 p14];
 out2 = [p21 p22 p23 p24];
 
 % detect edges totally inside window -> no clip.
-inside = sum(out1 | out2, 2)==0;
+inside = sum(out1 | out2, 2) == 0;
 
 % detect edges totally outside window
-outside = sum(out1 & out2, 2)>0;
+outside = sum(out1 & out2, 2) > 0;
 
 % select edges not totally outside, and process separately edges totally
 % inside window
 ind = find(~(inside | outside));
 
-
+% allocate memroty for all clipped edges
 edge2 = zeros(size(edge));
+
+% copy result of edges totally inside clipping box
 edge2(inside, :) = edge(inside, :);
 
 
@@ -112,12 +114,11 @@ for i = 1:length(ind)
     if length(inside) == 1
          % restore same direction of edge
         if iedge(1) > iedge(3) || (iedge(1) == iedge(3) && iedge(2) > iedge(4))
-            edge2(i, :) = [points(inside+1,:) points(inside,:)];
+            edge2(ind(i), :) = [points(inside+1,:) points(inside,:)];
         else
-            edge2(i, :) = [points(inside,:) points(inside+1,:)];
+            edge2(ind(i), :) = [points(inside,:) points(inside+1,:)];
         end
     end
     
 end % end of loop over edges
-
 
