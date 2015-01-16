@@ -23,10 +23,17 @@
 %
 %   Example
 %     % create a soccer ball mesh and display it
-%     [v e f] = createSoccerBall;
+%     [v, e, f] = createSoccerBall;
 %     drawMesh(v, f, 'faceColor', 'g', 'linewidth', 2);
 %     axis equal; view(3);
 %  
+%
+% Creation and conversion
+%   surfToMesh               - Convert surface grids into face-vertex mesh
+%   cylinderMesh             - Create a 3D mesh representing a cylinder
+%   sphereMesh               - Create a 3D mesh representing a sphere
+%   torusMesh                - Create a 3D mesh representing a torus
+%   minConvexHull            - Return the unique minimal convex hull of a set of 3D points
 %
 % General processing on meshes
 %   smoothMesh               - Smooth mesh by replacing each vertex by the average of its neighbors 
@@ -38,14 +45,12 @@
 %   faceNormal               - Compute normal vector of faces in a 3D mesh
 %   vertexNormal             - Compute normals to a mesh vertices
 %
-% Measures on meshes
+% Geometric measures on meshes
 %   meshSurfaceArea          - Surface area of a polyhedral mesh
 %   trimeshSurfaceArea       - Surface area of a triangular mesh
 %   meshVolume               - Volume of the space enclosed by a polygonal mesh
 %   meshEdgeLength           - Lengths of edges of a polygonal or polyhedral mesh
 %   meshDihedralAngles       - Dihedral at edges of a polyhedal mesh
-%
-% Measures on (convex) polyhedra
 %   polyhedronCentroid       - Compute the centroid of a 3D convex polyhedron
 %   tetrahedronVolume        - Signed volume of a tetrahedron
 %   polyhedronNormalAngle    - Compute normal angle at a vertex of a 3D polyhedron
@@ -57,13 +62,6 @@
 %   polyhedronSlice          - Intersect a convex polyhedron with a plane.
 %   clipMeshVertices         - Clip vertices of a surfacic mesh and remove outer faces
 %   clipConvexPolyhedronHP   - Clip a convex polyhedron by a plane
-%
-% Creation and conversion
-%   surfToMesh               - Convert surface grids into face-vertex mesh
-%   cylinderMesh             - Create a 3D mesh representing a cylinder
-%   sphereMesh               - Create a 3D mesh representing a sphere
-%   torusMesh                - Create a 3D mesh representing a torus
-%   minConvexHull            - Return the unique minimal convex hull of a set of 3D points
 %
 % Utility functions
 %   meshFace                 - Return the vertex indices of a face in a mesh
@@ -85,10 +83,10 @@
 %   createTetrahedron        - Create a 3D mesh representing a tetrahedron
 %   createRhombododecahedron - Create a 3D mesh representing a rhombododecahedron
 %   createTetrakaidecahedron - Create a 3D mesh representing a tetrakaidecahedron
-%   createDurerPolyhedron    - Create a mesh representing Durer's polyhedron 
 %
 % Less typical polyhedra
 %   createSoccerBall         - Create a 3D mesh representing a soccer ball
+%   createDurerPolyhedron    - Create a mesh representing Durer's polyhedron 
 %   createMengerSponge       - Create a cube with an inside cross removed
 %   steinerPolytope          - Create a steiner polytope from a set of vectors
 %

@@ -23,9 +23,10 @@ function area = meshSurfaceArea(vertices, edges, faces)
 %         6
 %
 %   See also
-%   meshes3d, trimeshSurfaceArea, meshVolume, meshFacePolygon,
+%   meshes3d, trimeshSurfaceArea, meshVolume, meshFacePolygons,
 %   polygonArea3d
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
