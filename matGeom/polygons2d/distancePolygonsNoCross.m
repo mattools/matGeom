@@ -1,14 +1,15 @@
-function dist = distancePolygons(poly1, poly2)
-%DISTANCEPOLYGONS Compute the shortest distance between 2 polygons
+function dist = distancePolygonsNoCross(poly1, poly2)
+%DISTANCEPOLYGONSNOCROSS Compute the shortest distance between 2 polygons
 %
-%   DIST = distancePolygons(POLY1, POLY2)
+%   DIST = distancePolygonsNoCross(POLY1, POLY2)
 %   Computes the shortest distance between the boundaries of the two
-%   polygons. Each polygon is given by a N-by-2 array containing the vertex
+%   polygons, assuming they do not cross. 
+%   Each polygon is given by a N-by-2 array containing the vertex
 %   coordinates.
 %
-%   In the case the two polygons are known not to intersect, the function
-%   'distancePolygonsNoCross' may be used more efficiently (no test for
-%   crossing is done).
+%   If the polygons may cross, it is necessary to use the
+%   'distancePolygons' function, that adds a potentially costly test on the
+%   intersection.
 %
 %   Example
 %     % Computes the distance between a square and a triangle
@@ -19,8 +20,7 @@ function dist = distancePolygons(poly1, poly2)
 %         10
 %
 %   See also
-%   polygons2d, distancePolygonsNoCross, distancePolylines,
-%   distancePointPolygon 
+%   polygons2d, distancePolygons, distancePolylines, distancePointPolygon
 %
 
 % ------
@@ -28,13 +28,6 @@ function dist = distancePolygons(poly1, poly2)
 % e-mail: david.legland@nantes.inra.fr
 % Created: 2009-06-17,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
-
-% cjeck if the two polygons intersect
-pts = intersectPolylines(poly1([1:end 1], :), poly2([1:end 1], :));
-if size(pts, 1) > 0
-    dist = 0;
-    return;
-end
 
 % compute distance of each vertex of a polygon to the other polygon
 dist1   = min(distancePointPolygon(poly1, poly2));
