@@ -7,19 +7,16 @@ function [poly, keepInds] = simplifyPolygon(poly, varargin)
 %   Example
 %     elli = [20 30 40 20 30];
 %     poly = ellipseToPolygon(elli, 500);
-%     poly2 = simplifyPolyline(poly, 1);
+%     poly2 = simplifyPolygon(poly, 1);
 %     figure; hold on;
 %     drawEllipse(elli);
 %     drawPoint(poly2, 'mo');
 %
 %   See also
-%   polygons2d, simplifyPolyline
+%   polygons2d, smoothPolygon, simplifyPolyline
 %
 %   References
 %   http://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm
-%
-%   See also
-%   polygons2d, simplifyPolyline
 %
 
 % ------

@@ -15,7 +15,7 @@ function poly2 = resamplePolygon(poly, n)
 %
 %
 %   See also
-%     polygons2d, drawPolygon, resamplePolyline
+%     polygons2d, drawPolygon, smoothPolygon, resamplePolyline
 %
 % ------
 % Author: David Legland

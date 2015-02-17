@@ -68,10 +68,11 @@
 %   polygonPoint              - Extract a point from a polygon
 %   polygonSubcurve           - Extract a portion of a polygon
 %   reversePolygon            - Reverse a polygon, by iterating vertices from the end
+%   smoothPolygon             - Smooth a polygon using local averaging
+%   simplifyPolygon           - Douglas-Peucker simplification of a polygon
 %   projPointOnPolygon        - Compute position of a point projected on a polygon
 %   splitPolygons             - Convert a NaN separated polygon list to a cell array of polygons
 %   polygonLoops              - Divide a possibly self-intersecting polygon into a set of simple loops
-%   simplifyPolygon           - Douglas-Peucker simplification of a polygon
 %
 % Polygon clipping and intersections
 %   intersectLinePolygon      - Intersection points between a line and a polygon
@@ -97,6 +98,7 @@
 %   polygonBounds             - Compute the bounding box of a polygon
 %   distancePointPolygon      - Shortest distance between a point and a polygon
 %   distancePolygons          - Compute the shortest distance between 2 polygons
+%   distancePolygonsNoCross   - Compute the shortest distance between 2 polygons
 %   polygonSignature          - Polar signature of a polygon (polar distance to origin)
 %
 % More complex operations on polygons
