@@ -57,6 +57,7 @@
 %   grRemoveEdges           - Remove several edges from a graph
 %
 % Graph processing (general applications)
+%   pruneGraph              - Remove all edges with a terminal vertex
 %   mergeGraphs             - Merge two graphs, by adding nodes, edges and faces lists. 
 %   grMergeNodes            - Merge two (or more) nodes in a graph.
 %   grMergeMultipleNodes    - Simplify a graph by merging multiple nodes
