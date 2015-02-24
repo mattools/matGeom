@@ -61,7 +61,7 @@ if iscell(poly) || any(isnan(poly(:)))
     end
     
     % count polygons containing point, weighted by polygon orientation
-    b = sum(in.*(ccw==1) - in.*(ccw==0), 2);
+    b = sum(in.*(ccw==1) - in.*(ccw==0), 2) > 0;
 
 else
     % standard test for simple polygons
