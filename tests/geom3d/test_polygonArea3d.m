@@ -31,3 +31,14 @@ area = polygonArea3d(poly);
 
 % area equals 20*40 + 2 * (20 * 80) / 2 = 800 + 1600 = 2400
 assertEqual(2400, area);
+
+function test_colinearEdges
+% a polygon with two colinear edges, inducing potential bug in cross
+% product computations
+
+poly = [0 0 10 ; 5 0 10; 10 0 10; 10 10 10; 0 10 10];
+exp = 100;
+
+area = polygonArea3d(poly);
+
+assertEqual(exp, area);

@@ -57,11 +57,21 @@ poly = bsxfun(@minus, poly, v0);
 N = size(poly, 1);
 iNext = [2:N 1];
 
-% compute area (vectorized version)
-% need to compute the sign expicitely, as the norm of the cross product
-% doas not keep orientation within supporting plane.
+% compute cross-product of each elementary triangle formed by origin and
+% two consecutive vertices
 cp = cross(poly, poly(iNext,:), 2);
-sign_i = sign(dot(cp, repmat(cp(2,:), N, 1), 2));
+
+% choose one of the triangles as reference for the normal direction
+vn = vectorNorm(cp);
+[tmp, ind] = max(vn); %#ok<ASGLU>
+cpRef = cp(ind,:);
+
+% compute the sign of the area of each triangle
+% (need to compute the sign explicitely, as the norm of the cross product
+% does not keep orientation within supporting plane)
+sign_i = sign(dot(cp, repmat(cpRef, N, 1), 2));
+
+% compute area of each triangle, using sign correction
 area_i = vectorNorm3d(cp) .* sign_i;
 
 % sum up individual triangles area
