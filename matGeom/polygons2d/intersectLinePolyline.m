@@ -91,7 +91,7 @@ intersects = intersects(inds, :);
 
 % remove multiple vertices (can occur for intersections located at polyline
 % vertices)
-[intersects, I, J] = unique(intersects, 'rows'); %#ok<NASGU>
+[intersects, I, J] = unique(intersects, 'rows'); %#ok<ASGLU>
 
 if nargout > 1
     % return indices of edges involved in intersection

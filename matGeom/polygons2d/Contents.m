@@ -59,9 +59,11 @@
 %   projPointOnPolyline       - Compute position of a point projected on a polyline
 %   distancePointPolyline     - Compute shortest distance between a point and a polyline
 %   distancePolylines         - Compute the shortest distance between 2 polylines
+%   intersectLinePolyline     - Intersection points between a line and a polyline
 %   intersectPolylines        - Find the common points between 2 polylines
 %   polylineSelfIntersections - Find self-intersection points of a polyline
 %   simplifyPolyline          - Douglas-Peucker simplification of a polyline
+%   smoothPolyline            - Smooth a polyline using local averaging
 %   removeMultipleVertices    - Remove multiple vertices of a polygon or polyline
 %
 % Polygon basic manipulation
@@ -165,3 +167,4 @@ help('Contents');
 
 
 %% Others...
+

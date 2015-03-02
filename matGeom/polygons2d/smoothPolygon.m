@@ -16,7 +16,7 @@ function res = smoothPolygon(poly, M)
 %     drawPolygon(contourf, 'm');
 %
 %   See also
-%     polygons2d, simplifyPolygon, resamplePolygon
+%     polygons2d, smoothPolyline, simplifyPolygon, resamplePolygon
  
 % ------
 % Author: David Legland
