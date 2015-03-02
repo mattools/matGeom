@@ -29,7 +29,7 @@ M1 = floor((M - 1) / 2);
 M2 = ceil((M - 1) / 2);
 
 % repeat beginning and end of contour
-poly2 = [poly(end-M2+1:end, :) ; poly ; poly(1:M1,:)];
+poly2 = [poly(end-M1+1:end, :) ; poly ; poly(1:M2,:)];
 
 % create convolution vector
 v2 = ones(M, 1) / M;
@@ -39,4 +39,4 @@ res(:,1) = conv(poly2(:,1), v2, 'same');
 res(:,2) = conv(poly2(:,2), v2, 'same');
 
 % keep the interesting part
-res = res(M2+1:end-M1, :);
+res = res(M1+1:end-M2, :);
