@@ -51,5 +51,10 @@ for i = 1:n
     l1 = s(ind1) - pos(i);
     
     % linear interpolation of neighbor positions
-    poly2(i, :) = (pt0 * l1 + pt1 * l0) / (l0 + l1);
+    if (l0 + l1) > Lmax * 1e-12
+        poly2(i, :) = (pt0 * l1 + pt1 * l0) / (l0 + l1);
+    else
+        % if neighbors are too close, do not use interpolation
+        poly2(i, :) = pt0;
+    end
 end
