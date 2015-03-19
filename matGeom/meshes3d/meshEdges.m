@@ -21,7 +21,7 @@ function edges = meshEdges(faces, varargin)
 
 %% Process input arguments
 
-if iscell(faces) && isfield(faces, 'faces')
+if isstruct(faces) && isfield(faces, 'faces')
     % if input is a mesh structure, extract the 'faces' field
     faces = faces.faces;
 elseif nargin > 1
@@ -65,7 +65,8 @@ else
     
     % fillup edge array
     for i = 1:nFaces
-        f = faces{i};
+        % get vertex indices, ensuring horizontal array
+        f = faces{i}(:)';
         nVF = length(f);
         edges(ind+1:ind+nVF, :) = [f' f([2:end 1])'];
         ind = ind + nVF;
