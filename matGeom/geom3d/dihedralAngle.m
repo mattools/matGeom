@@ -34,10 +34,10 @@ n1 = size(v1, 1);
 n2 = size(v2, 1);
 
 % ensures vectors have same dimension
-if n1~=n2
-    if n1==1
+if n1 ~= n2
+    if n1 == 1
         v1 = repmat(v1, [n2 1]);
-    elseif n2==1
+    elseif n2 == 1
         v2 = repmat(v2, [n1 1]);
     else
         error('Arguments V1 and V2 must have the same size');
@@ -47,7 +47,7 @@ end
 % compute dihedral angle(s)
 theta = atan2(vectorNorm3d(cross(v1, v2, 2)), dot(v1, v2, 2));
 
-% % equivalent to:
+% % equivalent to following formula, but more precise for small angles:
 % n1 = normalizeVector3d(planeNormal(plane1));
 % n2 = normalizeVector3d(planeNormal(plane2));
 % theta = acos(dot(n1, n2, 2));

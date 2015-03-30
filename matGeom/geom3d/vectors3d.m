@@ -4,17 +4,18 @@ function vectors3d(varargin)
 %   Vectors are represented by their 3 Cartesian coordinates:
 %   V = [VX VY VZ];
 %
-%   List of vectors are represented by N*3 arrays, with the coordinates of
-%   each vector on a row.
+%   List of vectors are represented by N-by-3 arrays, with the coordinates
+%   of each vector on a row.
 %
 %
 %   See also
 %   vectorNorm3d, normalizeVector3d, vectorCross3d, vectorAngle3d
-%   isParallel3d, isPerpendicular3d
-%   createTranslation3d
+%   isParallel3d, isPerpendicular3d, createTranslation3d
+%   drawVector3d
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@nantes.inra.fr
 % Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
