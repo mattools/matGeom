@@ -28,6 +28,7 @@
 %   centroid              - Compute centroid (center of mass) of a set of points
 %   boundingBox           - Bounding box of a set of points
 %   angleSort             - Sort points in the plane according to their angle to origin
+%   findClosestPoint      - Find index of closest point in an array
 %   minDistancePoints     - Minimal distance between several points
 %   mergeClosePoints      - Merge points that are closer than a given distance
 %   hausdorffDistance     - Hausdorff distance between two point sets
@@ -49,7 +50,7 @@
 %   createLine            - Create a straight line from 2 points, or from other inputs
 %   medianLine            - Create a median line between two points
 %   cartesianLine         - Create a straight line from cartesian equation coefficients
-%   orthogonalLine        - Create a line orthogonal to another one.
+%   orthogonalLine        - Create a line orthogonal to another one through a point
 %   parallelLine          - Create a line parallel to another one.
 %   intersectLines        - Return all intersection points of N lines in 2D
 %   lineAngle             - Computes angle between two straight lines
