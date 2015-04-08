@@ -70,8 +70,9 @@
 %   meshEdges                - Computes array of edge vertex indices from face array
 %   meshEdgeFaces            - Compute index of faces adjacent to each edge of a mesh
 %   trimMesh                 - Reduce memory footprint of a polygonal mesh
-%   checkMeshAdjacentFaces   - Check if adjacent faces of a mesh have similar orientation
+%   meshFaceAdjacency        - Compute adjacency list of face around each face
 %   meshAdjacencyMatrix      - Compute adjacency matrix of a mesh from set of faces
+%   checkMeshAdjacentFaces   - Check if adjacent faces of a mesh have similar orientation
 %
 % Typical polyhedra
 %   polyhedra                - Index of classical polyhedral meshes
