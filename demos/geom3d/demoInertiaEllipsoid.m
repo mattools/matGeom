@@ -40,7 +40,7 @@ figure;
 drawPoint3d(points, '.');
 hold on;
 axis equal;
-view([30 20]);
+view([80 -10]);
 
 
 %% Inertia ellipsoid computation and display
@@ -49,5 +49,12 @@ view([30 20]);
 elli = inertiaEllipsoid(points);
 
 % draw the ellipsoid with transparency
-drawEllipsoid(elli, 'FaceColor', 'g', 'FaceAlpha', .3);
+drawEllipsoid(elli, 'FaceColor', 'g', 'FaceAlpha', .5);
 
+
+%% Add ellipses and main axes
+
+drawEllipsoid(elli, 'FaceColor', 'g', 'FaceAlpha', .5, ...
+          'drawEllipses', true, 'EllipseColor', 'b', 'EllipseWidth', 2, ...
+          'drawAxes', true);
+      
