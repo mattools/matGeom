@@ -48,6 +48,10 @@ drawEllipses = false;
 ellipseColor = 'k';
 ellipseWidth = 1;
 
+drawAxes = false;
+axesColor = 'k';
+axesWidth = 2;
+
 
 %% Extract input arguments
 
@@ -73,10 +77,19 @@ while length(varargin) > 1
             
         case 'ellipsecolor'
             ellipseColor = varargin{2};
-
+            
         case 'ellipsewidth'
             ellipseWidth = varargin{2};
-
+            
+        case 'drawaxes'
+            drawAxes = varargin{2};
+            
+        case 'axescolor'
+            axesColor = varargin{2};
+            
+        case 'axeswidth'
+            axesWidth = varargin{2};
+            
         otherwise
             % assumes this is drawing option
             options = [options varargin(1:2)]; %#ok<AGROW>
@@ -101,7 +114,20 @@ ellTheta = elli(:,8) * k;
 ellPsi   = elli(:,9) * k;
 
 
-%% parametrisation
+%% Coordinates computation
+
+% convert unit basis to ellipsoid basis
+sca     = createScaling3d(a, b, c);
+rotZ    = createRotationOz(ellPhi);
+rotY    = createRotationOy(ellTheta);
+rotX    = createRotationOx(ellPsi);
+tra     = createTranslation3d([xc yc zc]);
+
+% concatenate transforms
+trans   = tra * rotZ * rotY * rotX * sca;
+
+
+%% parametrisation of ellipsoid
 
 % spherical coordinates
 theta   = linspace(0, pi, nTheta+1);
@@ -112,6 +138,12 @@ sintheta = sin(theta);
 x = cos(phi') * sintheta;
 y = sin(phi') * sintheta;
 z = ones(length(phi),1) * cos(theta);
+
+% transform mesh vertices
+[x, y, z] = transformPoint3d(x, y, z, trans);
+
+
+%% parametrisation of ellipses
 
 if drawEllipses
     % parametrisation for ellipses
@@ -132,35 +164,25 @@ if drawEllipses
     xc3 = zeros(size(t'));
     yc3 = cos(t');
     zc3 = sin(t');
-end
 
-
-%% Coordinates computation
-
-% convert unit basis to ellipsoid basis
-sca     = createScaling3d(a, b, c);
-rotZ    = createRotationOz(ellPhi);
-rotY    = createRotationOy(ellTheta);
-rotX    = createRotationOx(ellPsi);
-tra     = createTranslation3d([xc yc zc]);
-
-% concatenate transforms
-trans   = tra * rotZ * rotY * rotX * sca;
-
-% transform mesh vertices
-[x, y, z] = transformPoint3d(x, y, z, trans);
-
-% transform the 3D polygons corresponding to ellipse cross sections
-if drawEllipses
+    % compute transformed ellipses
     [xc1, yc1, zc1] = transformPoint3d(xc1, yc1, zc1, trans);
     [xc2, yc2, zc2] = transformPoint3d(xc2, yc2, zc2, trans);
     [xc3, yc3, zc3] = transformPoint3d(xc3, yc3, zc3, trans);
+end
+
+%% parametrisation of main axis edges
+
+if drawAxes
+    axesEndings = [-1 0 0; +1 0 0; 0 -1 0; 0 +1 0; 0 0 -1; 0 0 +1];
+    axesEndings = transformPoint3d(axesEndings, trans);
 end
 
 
 %% Drawing 
 
 ellipseOptions = {'color', ellipseColor, 'LineWidth', ellipseWidth};
+axesOptions = {'color', axesColor, 'LineWidth', axesWidth};
 
 % Process output
 if nargout == 0
@@ -171,6 +193,12 @@ if nargout == 0
         plot3(xc1, yc1, zc1, ellipseOptions{:});
         plot3(xc2, yc2, zc2, ellipseOptions{:});
         plot3(xc3, yc3, zc3, ellipseOptions{:});
+    end
+    
+    if drawAxes
+        drawEdge3d([axesEndings(1,:), axesEndings(2,:)], axesOptions{:});
+        drawEdge3d([axesEndings(3,:), axesEndings(4,:)], axesOptions{:});
+        drawEdge3d([axesEndings(5,:), axesEndings(6,:)], axesOptions{:});
     end
     
 elseif nargout == 1
