@@ -102,6 +102,7 @@
 %   distancePolygons          - Compute the shortest distance between 2 polygons
 %   distancePolygonsNoCross   - Compute the shortest distance between 2 polygons
 %   polygonSignature          - Polar signature of a polygon (polar distance to origin)
+%   signatureToPolygon        - Reconstruct a polygon from its polar signature
 %
 % More complex operations on polygons
 %   resamplePolygon           - Distribute N points equally spaced on a polygon
@@ -146,7 +147,7 @@
 %
 % -----
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@nantes.inra.fr
 % created the  07/11/2005.
 % Homepage: http://matgeom.sourceforge.net/
 % http://www.pfl-cepia.inra.fr/index.php?page=geom2d
@@ -167,4 +168,3 @@ help('Contents');
 
 
 %% Others...
-

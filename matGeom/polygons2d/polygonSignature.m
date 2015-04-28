@@ -4,6 +4,9 @@ function [res, thetaList] = polygonSignature(poly, varargin)
 %   DISTS = polygonSignature(POLY, THETALIST)
 %   Computes the polar signature of a polygon, for a set of angles in
 %   degrees.
+%
+%   DISTS = polygonSignature(POLY, N)
+%   When N is a scalar, uses N angles equally distributed between 0 and 360.
 %   
 %   [DISTS, THETA] = polygonSignature(...)
 %   Also returns the angle set for which the signature was computed.
@@ -12,12 +15,12 @@ function [res, thetaList] = polygonSignature(poly, varargin)
 %   polygonSignature
 %
 %   See also
-%   polygons2d
+%     polygons2d, signatureToPolygon
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@nantes.inra.fr
 % Created: 2013-03-14,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2013 INRA - Cepia Software Platform.
 
