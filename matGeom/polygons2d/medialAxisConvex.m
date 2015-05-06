@@ -63,10 +63,14 @@ end
 rayEdges = [[N (1:N-1)]' (1:N)'];
 
 pint = intersectLines(rays, rays([2:N 1], :));
-%ti   = linePosition(pint, rays);
-%ti   = min(linePosition(pint, rays), linePosition(pint, rays([2:N 1], :)));
-ti = distancePointLine(pint, ...
-    createLine(points([N (1:N-1)]', :), points((1:N)', :)));
+
+% compute the distance between each intersection point and the closest
+% edge. This distance is used as marker to propagate processing front.
+ti = zeros(N, 1);
+for i = 1:N
+    line = createLine(points(mod(i-2, N)+1, :), points(i, :));
+    ti(i) = abs(distancePointLine(pint(i,:), line));
+end
 
 % create list of events.
 % terms are : R1 R2 X Y t0
@@ -107,17 +111,16 @@ for i = N+1:2*N-3
     rayEdges(size(rayEdges, 1)+1, 1:2) = [n1 n2];
     
     % find the two neighbour rays
-    ind = sum(ismember(events(:,1:2), events(1, 1:2)), 2)==0;
+    ind = sum(ismember(events(:,1:2), events(1, 1:2)), 2) ~= 0;
     ir = unique(events(ind, 1:2));
     ir = ir(~ismember(ir, events(1,1:2)));
     
     % create new intersections
     pint = intersectLines(ray0, rays(ir, :));
-    %ti   = min(linePosition(pint, ray0), linePosition(pint, rays(ir, :))) + events(1,5);
-    ti = distancePointLine(pint, line1);
+    ti = abs(distancePointLine(pint, line1));
     
     % remove all events involving old intersected rays
-    ind = sum(ismember(events(:,1:2), events(1, 1:2)), 2)==0;
+    ind = sum(ismember(events(:,1:2), events(1, 1:2)), 2) == 0;
     events = events(ind, :);
     
     % add the newly formed events
