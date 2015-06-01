@@ -1,18 +1,22 @@
 function varargout = torusMesh(torus, varargin)
 %TORUSMESH  Create a 3D mesh representing a torus
 %
-%   [v f] = torusMesh(torus)
+%   [V, F] = torusMesh(TORUS)
 %   Converts the torus in TORUS into a face-vertex quadrangular mesh.
 %   TORUS is given by [XC YC ZY R1 R2 THETA PHI]
 %   where (XC YZ ZC) is the center of the torus, R1 is the main radius, R2
 %   is the radius of the torus section, and (THETA PHI) is the angle of the
 %   torus normal vector (both in degrees).
 %
-%   [v f] = torusMesh()
-%   Create a mesh representing a defalt torus.
+%   [V, F] = torusMesh(TORUS, 'nTheta', NT, 'nPhi', NP)
+%   Creates a mesh using NP circles, each circle being discretized with NT
+%   vertices. Default are 60 for both parameters.
+%
+%   [V, F] = torusMesh()
+%   Creates a mesh representing a default torus.
 %
 %   Example
-%     [v f] = torusMesh([50 50 50 30 10 30 45]);
+%     [v, f] = torusMesh([50 50 50 30 10 30 45]);
 %     figure; drawMesh(v, f, 'linestyle', 'none');
 %     view(3); axis equal; 
 %     lighting gouraud; light;
@@ -28,8 +32,11 @@ function varargout = torusMesh(torus, varargin)
 % Created: 2012-10-25,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
-%   HISTIRY
+%   HISTORY
 %   2013-04-30 add support for empty argument
+
+
+%% Extract data for torus
 
 if nargin == 0
     torus = [0 0 0 30 10 0 0 0];
@@ -43,9 +50,32 @@ if size(torus, 2) >= 7
     normal = torus(6:7);
 end
 
+
+%% Extract data for discretisation
+
+% number 
+nTheta = 60;
+nPhi = 60;
+while length(varargin) > 1
+    argName = varargin{1};
+    switch lower(argName)
+        case 'ntheta'
+            nTheta = varargin{2};
+        case 'nphi'
+            nPhi = varargin{2};
+        otherwise
+            error('Unknown optional argument: %s', argName);
+    end
+    
+    varargin(1:2) = [];
+end
+
+
+%% Discretize torus
+
 % create base torus
-circle = circleToPolygon([r1 0 r2], 60);
-[x, y, z] = revolutionSurface(circle, linspace(0, 2*pi, 60));
+circle = circleToPolygon([r1 0 r2], nTheta);
+[x, y, z] = revolutionSurface(circle, linspace(0, 2*pi, nPhi));
 
 % transform torus
 trans = localToGlobal3d([center normal]);
