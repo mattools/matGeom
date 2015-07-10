@@ -144,10 +144,12 @@
 % Smooth surfaces
 %   inertiaEllipsoid          - Inertia ellipsoid of a set of 3D points
 %   ellipsoidSurfaceArea      - Approximated surface area of an ellipsoid
-%   drawEllipsoid             - Draw a 3D ellipsoid
+%   oblateSurfaceArea         - Approximated surface area of an oblate ellipsoid
+%   prolateSurfaceArea        - Approximated surface area of a prolate ellipsoid
 %   intersectLineCylinder     - Compute intersection points between a line and a cylinder
 %   revolutionSurface         - Create a surface of revolution from a planar curve
 %   surfaceCurvature          - Curvature on a surface from angle and principal curvatures
+%   drawEllipsoid             - Draw a 3D ellipsoid
 %   drawTorus                 - Draw a torus (3D ring)
 %   drawCylinder              - Draw a cylinder
 %   drawEllipseCylinder       - Draw a cylinder with ellipse cross-section

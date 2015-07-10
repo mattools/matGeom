@@ -17,12 +17,13 @@ function s = ellipsoidSurfaceArea(elli)
 %   ellipsoidSurfaceArea
 %
 %   See also
-%   geom3d, ellipsePerimeter
+%   geom3d, ellipsePerimeter, oblateSurfaceArea, prolateSurfaceArea
 %
 %   References
 %   * http://en.wikipedia.org/wiki/Ellipsoid
 %   * http://mathworld.wolfram.com/Ellipsoid.html
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

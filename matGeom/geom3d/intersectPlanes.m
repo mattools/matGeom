@@ -1,5 +1,5 @@
 function line = intersectPlanes(plane1, plane2, varargin)
-%INTERSECTPLANES return intersection between 2 planes in space
+%INTERSECTPLANES Return intersection line between 2 planes in space
 %
 %   LINE = intersectPlanes(PLANE1, PLANE2)
 %   Returns the straight line belonging to both planes.
