@@ -79,7 +79,7 @@ if iscell(cyl)
 end
 
 % default values
-N = 32;
+N = 128;
 closed = true;
 
 % check number of discretization steps
