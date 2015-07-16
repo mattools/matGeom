@@ -5,7 +5,7 @@ function polys = intersectPlaneMesh(plane, v, f)
 %   Computes the interection between a plane and a mesh given by vertex and
 %   face lists. The result is a cell array of polygons.
 %
-%   The function currenlty returns at most one polygon in the cell array
+%   The function currently returns at most one polygon in the cell array
 %   POLYS.
 %
 %
@@ -21,64 +21,117 @@ function polys = intersectPlaneMesh(plane, v, f)
 %     polys = intersectPlaneMesh(plane, v, f);
 %     drawPolygon3d(polys, 'LineWidth', 2);
 %
+%     % Intersect a torus by a set of planes, and draw the results
+%     % first creates a torus slightly shifted and rotated
+%     torus = [.5 .6 .7   30 10   3 4];
+%     figure; drawTorus(torus, 'nTheta', 180, 'nPhi', 180);
+%     hold on; view (3); axis equal; light;
+%     % convert to mesh representation
+%     [v, f] = torusMesh(torus, 'nTheta', 64, 'nPhi', 64);
+%     % compute intersections with collection of planes
+%     xList = -50:5:50;
+%     polySet = cell(length(xList), 1);
+%     for i = 1:length(xList)
+%         x0 = xList(i);
+%         plane = createPlane([x0 .5 .5], [1 .2 .3]);
+%         polySet{i} = intersectPlaneMesh2(plane, v, f);
+%     end
+%     % draw the resulting 3D polygons
+%     drawPolygon3d(polySet, 'lineWidth', 2, 'color', 'k')
+%
+%
 %   See also
 %     meshes3d, intersectPlanes, intersectEdgePlane
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2012-07-31,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
+
+%% Computation of crossing edges
+
 % compute the edge list
 e = meshEdges(f);
 edges = [ v(e(:,1), :) v(e(:,2), :) ];
 
-% associate two neighbour face to each edge
-faceEdges = meshEdgeFaces(v, e, f);
+% identify which edges cross the mesh
+inds = isBelowPlane(v, plane);
+edgeCrossInds = find(sum(inds(e), 2) == 1);
 
 % compute one intersection point for each edge
-intersectionsPoints = intersectEdgePlane(edges, plane);
+intersectionPoints = intersectEdgePlane(edges(edgeCrossInds, :), plane);
 
-% keep only 'valid' intersection points and intersected edges
-validEdges = isfinite(intersectionsPoints(:,1));
-validEdgeInds = find(isfinite(intersectionsPoints(:,1)));
 
-validFaceEdge = faceEdges(validEdges, :);
-% validFaceInds = unique(validFaceEdge(:));
 
-% processedEdge = false(size(e, 1), 1);
+%% mapping edges <-> faces
+% identify for each face the indices of edges that intersect the plane, as
+% well as for each edge, the indices of the two faces around it.
+% We expect each face to contain either 0 or 2 intersecting edges.
+% 
 
+nFaces = length(f);
+faceEdges = cell(1, nFaces);
+nCrossEdges = length(edgeCrossInds);
+crossEdgeFaces = zeros(nCrossEdges, 2);
+
+for iEdge = 1:length(edgeCrossInds)
+    edge = e(edgeCrossInds(iEdge), :);
+    indFaces = find(sum(ismember(f, edge), 2) == 2);
+    
+    if length(indFaces) ~= 2
+        error('crossing edge %d (%d,%d) is associated to %d faces', ...
+            iEdge, edge(1), edge(2), length(indFaces));
+    end
+    
+    crossEdgeFaces(iEdge, :) = indFaces;
+    
+    for iFace = 1:length(indFaces)
+        indEdges = faceEdges{indFaces(iFace)};
+        indEdges = [indEdges iEdge]; %#ok<AGROW>
+        faceEdges{indFaces(iFace)} = indEdges;
+    end
+end
+
+
+%% Iterate on edges and faces to form polygons
+
+% initialize an array indicating which indices need to be processed
+nCrossEdges = length(edgeCrossInds);
+remainingCrossEdges = true(nCrossEdges, 1);
+
+% create empty cell array of polygons
 polys = {};
-while ~isempty(validEdgeInds)
-    % start new polygon
+
+% iterate while there are some crossing edges to process
+while any(remainingCrossEdges)
     
     % start at any edge, mark it as current
-    startEdgeIndex = validEdgeInds(1);
+    startEdgeIndex = find(remainingCrossEdges, 1, 'first');
     currentEdgeIndex = startEdgeIndex;
+    
+    % mark current edge as processed
+    remainingCrossEdges(currentEdgeIndex) = false;
     
     % initialize new set of edge indices
     polyEdgeInds = currentEdgeIndex;
-    
+
     % choose one of the two faces around the edge
-    currentFace = faceEdges(currentEdgeIndex, 1);
-    
-%     % current edge is ready
-%     processedEdge(currentEdgeIndex) = true;
-    
+    currentFace = crossEdgeFaces(currentEdgeIndex, 1);
+
     % iterate along current face-edge couples until back to first edge
     while true
-        % indices of the two valid edges for current face
-        % (length should be equal to 2)
-        inds = validEdgeInds(sum(validFaceEdge == currentFace, 2) > 0);
-        if length(inds) > 2
-            error('meshes3d:intersectPlaneMesh', ...
-                'face index %d has too many edges (%d) intersecting the plane', ...
-                currentFace, length(inds));
-        end
+        % find the index of next crossing edge
+        inds = faceEdges{currentFace};
         currentEdgeIndex = inds(inds ~= currentEdgeIndex);
-        
-        inds = faceEdges(currentEdgeIndex, :);
+     
+        % mark current edge as processed
+        remainingCrossEdges(currentEdgeIndex) = false;
+    
+        % find the index of the other face containing current edge
+        inds = crossEdgeFaces(currentEdgeIndex, :);
         currentFace = inds(inds ~= currentFace);
     
         % check end of current loop
@@ -90,8 +143,7 @@ while ~isempty(validEdgeInds)
         polyEdgeInds = [polyEdgeInds currentEdgeIndex]; %#ok<AGROW>
     end
     
-    poly = intersectionsPoints(polyEdgeInds, :);
-    
+    % create polygon, and add it to list of polygons
+    poly = intersectionPoints(polyEdgeInds, :);
     polys = [polys, {poly}]; %#ok<AGROW>
-    break;
 end
