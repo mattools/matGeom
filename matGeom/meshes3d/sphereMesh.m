@@ -19,7 +19,7 @@ function varargout = sphereMesh(sphere, varargin)
 %     view(3);axis equal; light; lighting gouraud;
 %
 %   See also
-%     meshes3d, cylinderMesh, surfToMesh, drawSphere
+%     meshes3d, drawSphere, ellipsoidMesh, cylinderMesh, surfToMesh
 %
 
 % ------
