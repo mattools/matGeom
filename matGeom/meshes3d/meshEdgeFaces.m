@@ -12,12 +12,14 @@ function edgeFaces = meshEdgeFaces(vertices, edges, faces) %#ok<INUSL>
 %   face located on the right. Some indices may be 0 if the mesh is not
 %   'closed'.
 %   
+%   Note: a faster version is available for triangular meshes.
+%
 %   Example
 %   meshEdgeFaces
 %
 %   See also
-%   meshes3d, meshDihedralAngles, polyhedronMeanBreadth
-%
+%   meshes3d, trimeshEdgeFaces, meshDihedralAngles, polyhedronMeanBreadth
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

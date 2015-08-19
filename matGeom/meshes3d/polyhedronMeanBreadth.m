@@ -30,13 +30,14 @@ function breadth = polyhedronMeanBreadth(vertices, edges, faces)
 %
 %   See also
 %   meshes3d, meshEdgeFaces, meshDihedralAngles, checkMeshAdjacentFaces
+%   trimeshMeanBreadth
 %
 %   References
 %   Stoyan D., Kendall W.S., Mecke J. (1995) "Stochastic Geometry and its
 %       Applications", John Wiley and Sons, p. 26
 %   Ohser, J., Muescklich, F. (2000) "Statistical Analysis of
 %       Microstructures in Materials Sciences", John Wiley and Sons, p.352
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

@@ -56,6 +56,7 @@
 %   tetrahedronVolume        - Signed volume of a tetrahedron
 %   polyhedronNormalAngle    - Compute normal angle at a vertex of a 3D polyhedron
 %   polyhedronMeanBreadth    - Mean breadth of a convex polyhedron
+%   trimeshMeanBreadth       - Mean breadth of a triangular mesh
 %
 % Intersections and clipping
 %   intersectLineMesh3d      - Intersection points of a 3D line with a mesh
@@ -70,6 +71,7 @@
 %   meshFaceNumber           - Returns the number of faces in this mesh
 %   meshEdges                - Computes array of edge vertex indices from face array
 %   meshEdgeFaces            - Compute index of faces adjacent to each edge of a mesh
+%   trimeshEdgeFaces         - Compute index of faces adjacent to each edge of a triangular mesh
 %   trimMesh                 - Reduce memory footprint of a polygonal mesh
 %   meshFaceAdjacency        - Compute adjacency list of face around each face
 %   meshAdjacencyMatrix      - Compute adjacency matrix of a mesh from set of faces
