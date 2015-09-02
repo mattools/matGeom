@@ -24,9 +24,10 @@ function ell = inertiaEllipsoid(points)
 %   See also
 %   spheres, drawEllipsoid, inertiaEllipse
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@nantes.inra.fr
 % Created: 2011-03-12,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
@@ -44,7 +45,7 @@ covPts = cov(points)/n;
 [U, S] = svd(covPts);
 
 % extract length of each semi axis
-radii = 2 * sqrt(diag(S)*n)';
+radii = sqrt(5) * sqrt(diag(S)*n)';
 
 % sort axes from greater to lower
 [radii, ind] = sort(radii, 'descend');
