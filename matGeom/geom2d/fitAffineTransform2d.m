@@ -15,9 +15,10 @@ function trans = fitAffineTransform2d(pts1, pts2)
 %     transforms2d, transformPoint, transformVector,
 %     fitPolynomialTransform2d
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@nantes.inra.fr
 % Created: 2009-07-31,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
