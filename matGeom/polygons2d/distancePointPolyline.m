@@ -1,6 +1,12 @@
-function varargout = distancePointPolyline(point, poly, varargin)
+function minDist = distancePointPolyline(point, poly, varargin)
 %DISTANCEPOINTPOLYLINE  Compute shortest distance between a point and a polyline
-%   output = distancePointPolyline(POINT, POLYLINE)
+%
+%   DIST = distancePointPolyline(POINT, POLYLINE)
+%   Returns the shortest distance between a point given as a 1-by-2 row
+%   vector, and a polyline given as a NV-by-2 array of coordinates.
+%
+%   If POINT is a NP-by-2 array, the result DIST is a NP-by-1 array,
+%   containig the distance of each point to the polyline.
 %
 %   Example:
 %       pt1 = [30 20];
@@ -13,11 +19,12 @@ function varargout = distancePointPolyline(point, poly, varargin)
 %
 %   See also
 %   polygons2d, points2d
-%   distancePointEdge, projPointOnPolyline
+%   distancePointEdge, distancePointPolygon, projPointOnPolyline
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@nantes.inra.fr
 % Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
@@ -42,7 +49,3 @@ for p = 1:Np
     minDist(p) = min(dist);
 end
 
-% process output arguments
-if nargout<=1
-    varargout{1} = minDist;
-end

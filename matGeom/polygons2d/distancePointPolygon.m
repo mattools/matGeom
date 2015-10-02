@@ -1,4 +1,4 @@
-function varargout = distancePointPolygon(point, poly)
+function minDist = distancePointPolygon(point, poly)
 %DISTANCEPOINTPOLYGON Shortest distance between a point and a polygon
 %
 %   DIST = distancePointPolygon(POINT, POLYGON)
@@ -19,9 +19,10 @@ function varargout = distancePointPolygon(point, poly)
 %   polygons2d, points2d, distancePointPolyline, distancePointEdge,
 %   projPointOnPolyline
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@nantes.inra.fr
 % Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
@@ -32,8 +33,3 @@ end
 
 % call to distancePointPolyline 
 minDist = distancePointPolyline(point, poly);
-
-% process output arguments
-if nargout <= 1
-    varargout{1} = minDist;
-end

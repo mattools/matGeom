@@ -10,28 +10,29 @@ function point = polygonPoint(poly, pos)
 %   See also
 %   polygons2d, polylinePoint
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@nantes.inra.fr
 % Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
 % eventually copy first point at the end to ensure closed polygon
-if sum(poly(end, :)==poly(1,:))~=2
+if sum(poly(end, :) == poly(1,:))~=2
     poly = [poly; poly(1,:)];
 end
 
 % number of points to compute
-Np = length(pos(:));
+nPoints = length(pos(:));
 
 % number of vertices in polygon
 Nv = size(poly, 1)-1;
 
 % allocate memory results
-point = zeros(Np, 2);
+point = zeros(nPoints, 2);
 
 % iterate on points
-for i=1:Np
+for i = 1:nPoints
     % compute index of edge (between 0 and Nv)
     ind = floor(pos(i));
     
