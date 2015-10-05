@@ -109,6 +109,7 @@
 %   densifyPolygon            - Add several points on each edge of the polygon
 %   expandPolygon             - Expand a polygon by a given (signed) distance
 %   triangulatePolygon        - Compute a triangulation of the polygon
+%   polygonSymmetryAxis       - Try to identify symmetry axis of polygon
 %   medialAxisConvex          - Compute medial axis of a convex polygon
 %
 % Curves (polylines with lot of vertices)
@@ -168,3 +169,4 @@ help('Contents');
 
 
 %% Others...
+
