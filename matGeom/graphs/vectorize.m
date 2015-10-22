@@ -1,6 +1,9 @@
 function varargout = vectorize(img)
 %VECTORIZE Transform a binary skeleton into a graph (nodes and edges)
 %
+%   Deprecated: should use "imBinaryToGraph" from the matImage library
+%   instead
+%
 %   [NODES EDGES] = vectorize(IMG);
 %   IMG is a binary image, with structure of width 1 pixel (such as the
 %   result of sketetonization)
@@ -23,7 +26,8 @@ function varargout = vectorize(img)
 %
 %
 %   See Also: 
-%     drawGraph, minGraph, removeMultiplePoints
+%     imBinaryToGraph
+%     drawGraph, grMergeMultipleNodes, grSimplifyBranches
 %
 
 %   -----
@@ -40,6 +44,8 @@ function varargout = vectorize(img)
 %   18/01/2006 : rewrite by using a label for each point, making it working
 %   faster
 
+warning('matGeom:deprecated', ...
+    '"vectorize" function is deprecated, use "imBinaryToGraph" from MatImage library instead');
 
 %% Initialisations
 
