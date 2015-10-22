@@ -193,7 +193,7 @@
 %
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@nantes.inra.fr
 % Created: 2005-11-07
 % Homepage: http://matgeom.sourceforge.net/
 % http://www.pfl-cepia.inra.fr/index.php?page=geom3d
