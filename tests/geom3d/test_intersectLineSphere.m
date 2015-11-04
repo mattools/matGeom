@@ -60,3 +60,20 @@ exp = [...
     center(1) center(2) center(3)-radius; ... 
     center(1) center(2) center(3)+radius];
 assertElementsAlmostEqual(exp, inter);
+
+
+function testMultiLine
+
+center = [10 20 30];
+radius = 50;
+sphere  = [center radius];
+
+line1 = [center 6 0 0];
+line2 = [center 0 6 0];
+line3 = [center 0 0 6];
+lines = [line1 ; line2 ; line3];
+
+
+inter = intersectLineSphere(lines, sphere);
+
+
