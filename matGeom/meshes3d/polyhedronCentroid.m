@@ -7,25 +7,39 @@ function centroid = polyhedronCentroid(vertices, faces) %#ok<INUSD>
 %   The polyhedron is assumed to be convex.
 %
 %   Example
-%   polyhedronCentroid
+%     % Creates a polyhedron centered on origin, and add an arbitrary
+%     % translation
+%     [v, f] = createDodecahedron;
+%     v2 = bsxfun(@plus, v, [3 4 5]);
+%     % computes the centroid, that should equal the translation vector
+%     centroid = polyhedronCentroid(v2, f)
+%     centroid =
+%         3.0000    4.0000    5.0000
+%
 %
 %   See also
-%   meshes3d, tetrahedronVolume
+%   meshes3d, meshVolume, meshSurfaceArea, polyhedronMeanBreadth
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@nantes.inra.fr
 % Created: 2012-04-05,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
+% 2015.11.13 use delaunayTriangulation instead of delaunayn (strange bug
+%       with icosahedron...)
+
 % compute set of elementary tetrahedra
-T = delaunayn(vertices);
+DT = delaunayTriangulation(vertices);
+T = DT.ConnectivityList;
 
 % number of tetrahedra
 nT  = size(T, 1);
 
 % initialize result
 centroid = zeros(1, 3);
+vt = 0;
 
 % Compute the centroid and the volume of each tetrahedron
 for i = 1:nT
