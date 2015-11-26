@@ -30,7 +30,7 @@ d1  = normalizeVector3d(plane1(:,4:6));
 
 % compute second direction vector
 n   = normalizeVector3d(planeNormal(plane1));
-d2  = -normalizeVector3d(cross(d1, n));
+d2  = -normalizeVector3d(vectorCross3d(d1, n));
 
 % compute origin point of the plane
 origins = repmat([0 0 0], [size(plane1, 1) 1]);
