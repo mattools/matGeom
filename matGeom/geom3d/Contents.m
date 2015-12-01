@@ -158,6 +158,7 @@
 % Bounding boxes management
 %   boxes3d                   - Description of functions operating on 3D boxes
 %   boundingBox3d             - Bounding box of a set of 3D points
+%   orientedbox3d             - Object-oriented bounding box of a set of 3D points
 %   intersectBoxes3d          - Intersection of two 3D bounding boxes
 %   mergeBoxes3d              - Merge 3D boxes, by computing their greatest extent
 %   box3dVolume               - Volume of a 3-dimensional box
