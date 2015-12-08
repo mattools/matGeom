@@ -1,9 +1,9 @@
 function [dists, neighInds] = nndist(points)
-%NNDIST  Nearest-neighbor distances of each point in a set
+%NNDIST Nearest-neighbor distances of each point in a set
 %
 %   DISTS = nndist(POINTS)
-%   Returns the distance to the nearest enighbor of each point in the given
-%   pattern.
+%   Returns the distance to the nearest neighbor of each point in an array
+%   of points.
 %   POINTS is an array of points, NP-by-ND.
 %   DISTS is a NP-by-1 array containing the distances to the nearest
 %   neighbor.
@@ -22,7 +22,7 @@ function [dists, neighInds] = nndist(points)
 %     axis equal; axis([-.1 1.1 -.1 1.1]);
 %
 %   See also
-%     points2d, distancePoints, minDistancePoints
+%     points2d, distancePoints, minDistancePoints, findPoint
 %
 
 % ------
@@ -36,13 +36,13 @@ n = size(points, 1);
 dists = zeros(n, 1);
 neighInds = zeros(n, 1);
 
-tri = DelaunayTri(points);
+DT = delaunayTriangulation(points);
 
 % compute distance to nearest neighbor of each point in the pattern
 for i = 1:n
     % find indices of neighbor vertices in Delaunay Triangulation.
-    % this contains the nearest neighbor
-    inds = unique(tri.Triangulation(sum(tri.Triangulation == i, 2) > 0, :));
+    % this set contains the nearest neighbor
+    inds = unique(DT.ConnectivityList(sum(DT.ConnectivityList == i, 2) > 0, :));
     
     % compute minimal distance 
     [dists(i), indN] = min(distancePoints(points(i,:), points(inds(inds~=i), :)));
