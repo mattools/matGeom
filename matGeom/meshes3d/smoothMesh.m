@@ -2,7 +2,7 @@ function [v2, faces] = smoothMesh(vertices, faces, varargin)
 %SMOOTHMESH Smooth mesh by replacing each vertex by the average of its neighbors 
 %
 %   V2 = smoothMesh(V, F)
-%   [V2 F2] = smoothMesh(V, F)
+%   [V2, F2] = smoothMesh(V, F)
 %   Performs smoothing of the values given in V, by using adjacency
 %   information given in F. 
 %   V is a numeric array representing either vertex coordinate, or value
@@ -23,7 +23,7 @@ function [v2, faces] = smoothMesh(vertices, faces, varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@nantes.inra.fr
 % Created: 2013-04-29,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2013 INRA - Cepia Software Platform.
 

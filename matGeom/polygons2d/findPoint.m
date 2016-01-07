@@ -15,7 +15,7 @@ function index = findPoint(coord, points, varargin)
 %   Default tolerance is zero.
 %
 %   See also
-%    points2d, minDistancePoints, distancePoints
+%    points2d, minDistancePoints, distancePoints, findClosestPoint
 
 %   -----
 %   author: David Legland 
