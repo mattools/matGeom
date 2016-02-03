@@ -40,6 +40,7 @@
 %   smoothMesh               - Smooth mesh by replacing each vertex by the average of its neighbors 
 %   subdivideMesh            - Subdivides each face of the mesh
 %   triangulateFaces         - Convert face array to an array of triangular faces 
+%   removeMeshVertices       - Remove vertices and associated faces from a mesh
 %   mergeCoplanarFaces       - Merge coplanar faces of a polyhedral mesh
 %   meshFacePolygons         - Returns the set of polygons that constitutes a mesh
 %   faceCentroids            - Compute centroids of a mesh faces
