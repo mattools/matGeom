@@ -1,4 +1,4 @@
-function [minDist pos] = distancePointPolyline (point, poly, closed = false)
+function [minDist pos] = distancePointPolyline (point, poly, c)
 %DISTANCEPOINTPOLYLINE  Compute shortest distance between a point and a polyline
 %   output = distancePointPolyline(POINT, POLYLINE)
 %
@@ -28,10 +28,14 @@ function [minDist pos] = distancePointPolyline (point, poly, closed = false)
 %   2016-02-04 Vectorize
 
 % check if input polyline is closed or not
-if strcmp ('closed', closed)
+closed = false;
+if strcmp('closed', c)
   closed = true;
-elseif strcmp ('open', closed)
-  closed = false;
+  elseif strcmp('open', c)
+    closed = false;
+  elseif islogical(c)
+    closed = c;
+  end
 end
 
 % closes the polyline if necessary
