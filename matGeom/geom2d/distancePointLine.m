@@ -4,7 +4,7 @@ function [dist, pos] = distancePointLine(point, line)
 %   D = distancePointLine(POINT, LINE)
 %   Return the euclidean distance between line LINE and point POINT. 
 %
-%   LINE has the form : [x0 y0 dx dy], and POINT is [x y].
+%   LINE has the form: [x0 y0 dx dy], and POINT is [x y].
 %
 %   If LINE is N-by-4 array, result is N-by-1 array computes for each line.
 %
@@ -18,12 +18,12 @@ function [dist, pos] = distancePointLine(point, line)
 %   See also:
 %   lines2d, points2d, distancePoints, distancePointEdge
 %
-%   
-%   ---------
-%   author : David Legland 
-%   INRA - CEPIA URPOI - MIA MathCell
-%   created the 24/06/2005
-%
+   
+% ------
+% Author: David Legland
+% e-mail: david.legland@nantes.inra.fr
+% Created: 2005-06-24
+% Copyright 2016 INRA - BIA-BIBS.
 
 %   HISTORY:
 %   2012-10-24 rewrite using bsxfun

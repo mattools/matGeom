@@ -40,11 +40,12 @@ function [dist, pos] = distancePointEdge(point, edge)
 %   See also:
 %   edges2d, points2d, distancePoints, distancePointLine
 %   
-%
-%   ---------
-%   author : David Legland 
-%   INRA - CEPIA URPOI - MIA MathCell
-%   created the 07/04/2004.
+
+% ------
+% Author: David Legland
+% e-mail: david.legland@nantes.inra.fr
+% Created: 2004-04-07
+% Copyright 2016 INRA - BIA-BIBS.
 %
 
 %   HISTORY
