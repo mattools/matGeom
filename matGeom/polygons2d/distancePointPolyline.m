@@ -1,4 +1,4 @@
-function minDist = distancePointPolyline(point, poly, varargin)
+function [minDist, pos] = distancePointPolyline(point, poly, varargin)
 %DISTANCEPOINTPOLYLINE  Compute shortest distance between a point and a polyline
 %
 %   DIST = distancePointPolyline(POINT, POLYLINE)
@@ -27,25 +27,47 @@ function minDist = distancePointPolyline(point, poly, varargin)
 % e-mail: david.legland@nantes.inra.fr
 % Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
+% Author: Juan Pablo Carbajal
+% e-mail: ajuanpi+dev@gmail.com
 
 %   HISTORY
 %   2009-06-23 compute all distances in one call
+%   2016-02-04 Vectorize
+
+% check if input polyline is closed or not
+closed = false;
+if ~isempty(varagin)
+    c = varargin{1};
+    if strcmp('closed', c)
+        closed = true;
+    elseif strcmp('open', c)
+        closed = false;
+    elseif islogical(c)
+        closed = c;
+    end
+end
+
+% closes the polyline if necessary
+if closed
+    poly = [poly; poly(1,:)];
+end
 
 % number of points
 Np = size(point, 1);
 
-% allocate memory for result
-minDist = inf * ones(Np, 1);
+% construct the set of edges
+edges = [poly(1:end-1, :) poly(2:end, :)];
 
-% process each point
-for p = 1:Np
-    % construct the set of edges
-    edges = [poly(1:end-1, :) poly(2:end, :)];
-    
-    % compute distance between current each point and all edges
-    dist = distancePointEdge(point(p, :), edges);
+% compute distance between current each point and all edges
+[dist, edgepos] = distancePointEdge(point, edges);
 
-    % update distance if necessary
-    minDist(p) = min(dist);
+% get the minimum distance
+[minDist, i] = min(dist, [], 2);
+
+% if required, compute projections
+pos = [];
+if nargout == 2
+  Ne = size(edgepos, 2);
+  j  = sub2ind([Np,Ne], (1:Np).', i);
+  pos = i - 1 + edgepos(j);
 end
-
