@@ -37,7 +37,7 @@ function testReverseTriangle
 pts3d = [3 0 0; 0 6 0;0 0 9];
 line1 = [0 0 0 1 2 3];
 
-inter, = intersectRayPolygon3d(line1, pts3d);
+inter = intersectRayPolygon3d(line1, pts3d);
 exp = [1 2 3];
 assertEqual(exp, inter);
 
@@ -47,7 +47,7 @@ function testLineArray
 pts3d = [3 0 0;0 0 9; 0 6 0];
 lines = [0 0 0 3 6 9 ; 10 0 0 3 6 9; 3 6 9 3 6 9];
 
-[inters inside] = intersectRayPolygon3d(lines, pts3d);
+[inters, inside] = intersectRayPolygon3d(lines, pts3d);
 assertEqual(3, size(inters, 1));
 assertEqual([true;false;false], inside);
 
