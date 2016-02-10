@@ -8,6 +8,19 @@ function [minDist, pos] = distancePointPolyline(point, poly, varargin)
 %   If POINT is a NP-by-2 array, the result DIST is a NP-by-1 array,
 %   containig the distance of each point to the polyline.
 %
+%   [DIST, POS] = distancePointPolyline(POINT, POLYLINE)
+%   Also returns the relative position of the point projected on the
+%   polyline, between 0 and NV, the number of polyline vertices.
+%
+%   ... = distancePointPolyline(POINT, POLYLINE, CLOSED)
+%   Specifies if the polyline is closed or not. CLOSED can be one of:
+%   * 'closed' -> the polyline is closed
+%   * 'open' -> the polyline is open
+%     a column vector of logical with the same number of elements as the
+%       number of points -> specify individually if each polyline is
+%       closed (true=closed).
+%
+%
 %   Example:
 %       pt1 = [30 20];
 %       pt2 = [30 5];
@@ -36,7 +49,7 @@ function [minDist, pos] = distancePointPolyline(point, poly, varargin)
 
 % check if input polyline is closed or not
 closed = false;
-if ~isempty(varagin)
+if ~isempty(varargin)
     c = varargin{1};
     if strcmp('closed', c)
         closed = true;
@@ -58,16 +71,17 @@ Np = size(point, 1);
 % construct the set of edges
 edges = [poly(1:end-1, :) poly(2:end, :)];
 
-% compute distance between current each point and all edges
-[dist, edgepos] = distancePointEdge(point, edges);
+% compute distance between current each point and all edges, and also
+% returns the position of projection on corresponding edge, between 0 and 1
+[dist, edgePos] = distancePointEdge(point, edges);
 
-% get the minimum distance
-[minDist, i] = min(dist, [], 2);
+% get the minimum distance, and index of edge providing minimum distance
+[minDist, edgeIndex] = min(dist, [], 2);
 
 % if required, compute projections
 pos = [];
 if nargout == 2
-  Ne = size(edgepos, 2);
-  j  = sub2ind([Np,Ne], (1:Np).', i);
-  pos = i - 1 + edgepos(j);
+    Ne = size(edgePos, 2);
+    j  = sub2ind([Np, Ne], (1:Np)', edgeIndex);
+    pos = edgeIndex - 1 + edgePos(j);
 end
