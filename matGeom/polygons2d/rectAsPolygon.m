@@ -1,9 +1,12 @@
 function [tx, ty] = rectAsPolygon(rect)
 %RECTASPOLYGON Convert a (centered) rectangle into a series of points
 %
+%   deprecated: replaced by rectToPolygon
+%
 %   POLY = rectAsPolygon(RECT);
-%   Converts rectangle given as [x0 y0 w h] or [x0 y0 w h theta] into a
+%   Converts rectangle given as [X0 Y0 W H] or [X0 Y0 W H THETA] into a
 %   4-by-2 array double, containing coordinate of rectangle vertices.
+%   X0 and Y0 represents t
 %
 %   [PX, PY] = rectAsPolygon(RECT);
 %   Returns the coordinates of the rectangle as two arrays.
@@ -12,7 +15,7 @@ function [tx, ty] = rectAsPolygon(rect)
 %   polygons2d, drawRect, drawOrientedBox, drawPolygon
 %
 
-%   ---------
+% ---------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
 % INRA - TPV URPOI - BIA IMASTE
@@ -21,6 +24,9 @@ function [tx, ty] = rectAsPolygon(rect)
 
 %   HISTORY
 %   2016: Simplify by JuanPi Carbajal
+
+warning('matGeom:deprecated', ...
+    'function "rectAsPolygon" is deprecated, use "orientedBoxToPolygon" instead');
 
 theta = 0;
 x     = rect(1);
@@ -36,6 +42,6 @@ M = bsxfun (@times, [-1 1; 1 1; 1 -1; -1 -1], [w h]);
 tx  = x + M * v;
 ty  = y + M(4:-1:1,[2 1]) * v;
 
-if nargout == 1
+if nargout <= 1
   tx = [tx ty];
 end

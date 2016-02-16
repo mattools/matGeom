@@ -1,4 +1,4 @@
-function varargout = orientedBoxToPolygon(obox)
+function [tx, ty] = orientedBoxToPolygon(obox)
 %ORIENTEDBOXTOPOLYGON Convert an oriented box to a polygon (set of vertices)
 %
 %   POLY = orientedBoxToPolygon(OBOX);
@@ -9,56 +9,46 @@ function varargout = orientedBoxToPolygon(obox)
 %   (dimension in the main directions), and THETA is the orientation, in
 %   degrees between 0 and 360.
 %
+%   Example
+%     OBOX = [20 10  40 20 0];
+%     RECT = orientedBoxToPolygon(OBOX)
+%     RECT =
+%         -20 -10 
+%          20 -10 
+%          20  10 
+%         -20  10 
+%
+%
 %   See also:
-%   polygons2d, orientedBox, drawOrientedBox, drawPolygon
+%   polygons2d, orientedBox, drawOrientedBox, rectToPolygon
 %
-%
+
 %   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 06/04/2005.
+% Author: David Legland
+% e-mail: david.legland@nantes.inra.fr
+% INRA - TPV URPOI - BIA IMASTE
+% created the 06/04/2005.
 %
 
 %   HISTORY
 %   2011-10-09 rewrite from rectAsPolygon to orientedBoxToPolygon
+%   2016: Simplify by JuanPi Carbajal
 
 % extract box parameters
 theta = 0;
-x   = obox(1);
-y   = obox(2);
-hw  = obox(3) / 2;  % easier to compute with w and h divided by 2
-hh  = obox(4) / 2;
+x = obox(1);
+y = obox(2);
+w = obox(3) / 2;  % easier to compute with w and h divided by 2
+h = obox(4) / 2;
 if length(obox) > 4
     theta = obox(5);
 end
 
-% pre-compute angles
-cot = cosd(theta);
-sit = sind(theta);
+v = [cosd(theta); sind(theta)];
+M = bsxfun (@times, [-1 1; 1 1; 1 -1; -1 -1], [w h]);
+tx  = x + M * v;
+ty  = y + M(4:-1:1,[2 1]) * v;
 
-% precompute shifts
-wc = hw * cot;
-ws = hw * sit;
-hc = hh * cot;
-hs = hh * sit;
-
-% allocate memory
-tx = zeros(4, 1);
-ty = zeros(4, 1);
-
-% compute 
-tx(1) = x - wc + hs;
-ty(1) = y - ws - hc;
-tx(2) = x + wc + hs;
-ty(2) = y + ws - hc;
-tx(3) = x + wc - hs;
-ty(3) = y + ws + hc;
-tx(4) = x - wc - hs;
-ty(4) = y - ws + hc;
-
-% format output
 if nargout <= 1
-    varargout = {[tx ty]};
-elseif nargout == 2
-    varargout = {tx, ty};
+  tx = [tx ty];
 end
