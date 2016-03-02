@@ -29,92 +29,93 @@
 %
 %
 % Graph creation
-%   knnGraph                - Create the k-nearest neighbors graph of a set of points
-%   delaunayGraph           - Graph associated to Delaunay triangulation of input points
-%   gabrielGraph            - Gabriel Graph of a set of points
-%   euclideanMST            - Build euclidean minimal spanning tree of a set of points
-%   prim_mst                - Minimal spanning tree by Prim's algorithm
+%   delaunayGraph              - Graph associated to Delaunay triangulation of input points
+%   euclideanMST               - Build euclidean minimal spanning tree of a set of points
+%   prim_mst                   - Minimal spanning tree by Prim's algorithm
+%   knnGraph                   - Create the k-nearest neighbors graph of a set of points
+%   relativeNeighborhoodGraph  - Relative Neighborhood Graph of a set of points
+%   gabrielGraph               - Gabriel Graph of a set of points
 %
 % Create graph from images
-%   imageGraph              - Create equivalent graph of a binary image
-%   boundaryGraph           - Get boundary of image as a graph
-%   gcontour2d              - Creates contour graph of a 2D binary image.
-%   gcontour3d              - Create contour graph of a 3D binary image.
+%   imageGraph                 - Create equivalent graph of a binary image
+%   boundaryGraph              - Get boundary of image as a graph
+%   gcontour2d                 - Creates contour graph of a 2D binary image.
+%   gcontour3d                 - Create contour graph of a 3D binary image.
 %
 % Graph information
-%   grNodeDegree            - Degree of a node in a (undirected) graph
-%   grNodeInnerDegree       - Inner degree of a node in a graph
-%   grNodeOuterDegree       - Outer degree of a node in a graph
-%   grAdjacentNodes         - Find list of nodes adjacent to a given node
-%   grAdjacentEdges         - Find list of edges adjacent to a given node
-%   grOppositeNode          - Return opposite node in an edge
-%   grLabel                 - Associate a label to each connected component of the graph
+%   grNodeDegree               - Degree of a node in a (undirected) graph
+%   grNodeInnerDegree          - Inner degree of a node in a graph
+%   grNodeOuterDegree          - Outer degree of a node in a graph
+%   grAdjacentNodes            - Find list of nodes adjacent to a given node
+%   grAdjacentEdges            - Find list of edges adjacent to a given node
+%   grOppositeNode             - Return opposite node in an edge
+%   grLabel                    - Associate a label to each connected component of the graph
 %
 % Graph management (low level operations)
-%   grRemoveNode            - Remove a node in a graph
-%   grRemoveNodes           - Remove several nodes in a graph
-%   grRemoveEdge            - Remove an edge in a graph.
-%   grRemoveEdges           - Remove several edges from a graph
+%   grRemoveNode               - Remove a node in a graph
+%   grRemoveNodes              - Remove several nodes in a graph
+%   grRemoveEdge               - Remove an edge in a graph.
+%   grRemoveEdges              - Remove several edges from a graph
 %
 % Graph processing (general applications)
-%   pruneGraph              - Remove all edges with a terminal vertex
-%   mergeGraphs             - Merge two graphs, by adding nodes, edges and faces lists. 
-%   grMergeNodes            - Merge two (or more) nodes in a graph.
-%   grMergeMultipleNodes    - Simplify a graph by merging multiple nodes
-%   grMergeMultipleEdges    - Remove all edges sharing the same extremities
-%   grSimplifyBranches      - Replace branches of a graph by single edges
+%   pruneGraph                 - Remove all edges with a terminal vertex
+%   mergeGraphs                - Merge two graphs, by adding nodes, edges and faces lists. 
+%   grMergeNodes               - Merge two (or more) nodes in a graph.
+%   grMergeMultipleNodes       - Simplify a graph by merging multiple nodes
+%   grMergeMultipleEdges       - Remove all edges sharing the same extremities
+%   grSimplifyBranches         - Replace branches of a graph by single edges
 %
 % Filtering operations on Graph
-%   grMean                  - Compute mean from neihgbours
-%   grMedian                - Compute median from neihgbours
-%   grDilate                - Morphological dilation on graph
-%   grErode                 - Morphological erosion on graph
-%   grClose                 - Morphological closing on graph
-%   grOpen                  - Morphological opening on graph
+%   grMean                     - Compute mean from neihgbours
+%   grMedian                   - Compute median from neihgbours
+%   grDilate                   - Morphological dilation on graph
+%   grErode                    - Morphological erosion on graph
+%   grClose                    - Morphological closing on graph
+%   grOpen                     - Morphological opening on graph
 %
 % Geodesic and shortest path operations
-%   grShortestPath          - Find a shortest path between two nodes in the graph
-%   grPropagateDistance     - Propagates distances from a vertex to other vertices
-%   grVertexEccentricity    - Eccentricity of vertices in the graph
-%   graphDiameter           - Diameter of a graph
-%   graphPeripheralVertices - Peripheral vertices of a graph
-%   graphCenter             - Center of a graph
-%   graphRadius             - Radius of a graph
-%   grFindGeodesicPath      - Find a geodesic path between two nodes in the graph
-%   grFindMaximalLengthPath - Find a path that maximizes sum of edge weights
+%   grShortestPath             - Find a shortest path between two nodes in the graph
+%   grPropagateDistance        - Propagates distances from a vertex to other vertices
+%   grVertexEccentricity       - Eccentricity of vertices in the graph
+%   graphDiameter              - Diameter of a graph
+%   graphPeripheralVertices    - Peripheral vertices of a graph
+%   graphCenter                - Center of a graph
+%   graphRadius                - Radius of a graph
+%   grFindGeodesicPath         - Find a geodesic path between two nodes in the graph
+%   grFindMaximalLengthPath    - Find a path that maximizes sum of edge weights
 %
 % Operations for geometric graphs
-%   grEdgeLengths           - Compute length of edges in a geometric graph
-%   grMergeNodeClusters     - Merge cluster of connected nodes in a graph
-%   grMergeNodesMedian      - Replace several nodes by their median coordinate
-%   clipGraph               - Clip a graph with a rectangular area
-%   clipGraphPolygon        - Clip a graph with a polygon
-%   addSquareFace           - Add a (square) face defined from its vertices to a graph
-%   grFaceToPolygon         - Compute the polygon corresponding to a graph face
-%   graph2Contours          - Convert a graph to a set of contour curves
+%   grEdgeLengths              - Compute length of edges in a geometric graph
+%   grMergeNodeClusters        - Merge cluster of connected nodes in a graph
+%   grMergeNodesMedian         - Replace several nodes by their median coordinate
+%   clipGraph                  - Clip a graph with a rectangular area
+%   clipGraphPolygon           - Clip a graph with a polygon
+%   addSquareFace              - Add a (square) face defined from its vertices to a graph
+%   grFaceToPolygon            - Compute the polygon corresponding to a graph face
+%   graph2Contours             - Convert a graph to a set of contour curves
 %
 % Voronoi Graphs
-%   voronoi2d               - Compute a voronoi diagram as a graph structure
-%   boundedVoronoi2d        - Return a bounded voronoi diagram as a graph structure
-%   centroidalVoronoi2d     - Centroidal Voronoi tesselation within a polygon
+%   voronoi2d                  - Compute a voronoi diagram as a graph structure
+%   boundedVoronoi2d           - Return a bounded voronoi diagram as a graph structure
+%   centroidalVoronoi2d        - Centroidal Voronoi tesselation within a polygon
 %   boundedCentroidalVoronoi2d - Create a 2D Centroidal Voronoi Tesselation in a box
-%   cvtUpdate               - Update germs of a CVT with given points
-%   cvtIterate              - Update germs of a CVT using random points with given density
+%   cvtUpdate                  - Update germs of a CVT with given points
+%   cvtIterate                 - Update germs of a CVT using random points with given density
 %
 % Graph display
-%   drawGraph               - Draw a graph, given as a set of vertices and edges
-%   drawGraphEdges          - Draw edges of a graph
-%   drawGraphFaces          - Draw faces of a graph
-%   drawDigraph             - Draw a directed graph, given as a set of vertices and edges
-%   drawDirectedEdges       - Draw edges with arrow indicating direction
-%   drawEdgeLabels          - Draw values associated to graph edges
-%   drawNodeLabels          - Draw values associated to graph nodes
-%   drawSquareMesh          - Draw a 3D square mesh given as a graph
-%   patchGraph              - Transform 3D graph (mesh) into a patch handle
+%   drawGraph                  - Draw a graph, given as a set of vertices and edges
+%   drawGraphEdges             - Draw edges of a graph
+%   drawGraphFaces             - Draw faces of a graph
+%   drawDigraph                - Draw a directed graph, given as a set of vertices and edges
+%   drawDirectedEdges          - Draw edges with arrow indicating direction
+%   drawEdgeLabels             - Draw values associated to graph edges
+%   drawNodeLabels             - Draw values associated to graph nodes
+%   drawSquareMesh             - Draw a 3D square mesh given as a graph
+%   patchGraph                 - Transform 3D graph (mesh) into a patch handle
 %
 % Input/Output
-%   readGraph               - Read a graph from a text file
-%   writeGraph              - Write a graph to an ascii file
+%   readGraph                  - Read a graph from a text file
+%   writeGraph                 - Write a graph to an ascii file
 %
 % -----
 % Author: David Legland
@@ -133,16 +134,15 @@
 % 18/05/2011 code re-organisation, add to MatGeom library
 
 % Deprecated functions
-%   grSimplifyBranches_old  - Replace branches of a graph by single edges
-%   grRemoveMultiplePoints  - Remove groups of close nodes in a graph
-%   grEdgeLength            - Compute length of edges in a geometric graph
-%   grNeighborNodes         - Find adjacent nodes of a given node
-%   grNeighborEdges         - Find adjacent edges of a given node
-%   vectorize               - Transform a binary skeleton into a graph (nodes and edges)
+%   grSimplifyBranches_old     - Replace branches of a graph by single edges
+%   grRemoveMultiplePoints     - Remove groups of close nodes in a graph
+%   grEdgeLength               - Compute length of edges in a geometric graph
+%   grNeighborNodes            - Find adjacent nodes of a given node
+%   grNeighborEdges            - Find adjacent edges of a given node
+%   vectorize                  - Transform a binary skeleton into a graph (nodes and edges)
 
 
 % Functions that requires further development
-%   quiverToGraph           - Converts quiver data to quad mesh
+%   quiverToGraph              - Converts quiver data to quad mesh
 
 % Other functions
-
