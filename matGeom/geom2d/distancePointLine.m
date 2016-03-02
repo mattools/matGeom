@@ -32,25 +32,26 @@ function [dist, pos] = distancePointLine(point, line)
 vx = line(:, 3)';
 vy = line(:, 4)';
 
-% squared length of edges, with a check of valifity
+% squared norm of direction vectors, with a check of validity
 delta = (vx .* vx + vy .* vy);
 invalidEdges = delta < eps;
 delta(invalidEdges) = 1; 
 
-% difference of coordinates between point and edge first vertex 
+% difference of coordinates between point and line origins
 % (NP-by-NE arrays)
 dx  = bsxfun(@minus, point(:, 1), line(:, 1)');
 dy  = bsxfun(@minus, point(:, 2), line(:, 2)');
 
-% compute position of points projected on the supporting line, by using
-% normalised dot product (NP-by-NL array)
+% compute position of points projected on the line, by using normalised dot
+% product 
+% (result is a NP-by-NL array) 
 pos = bsxfun(@rdivide, bsxfun(@times, dx, vx) + bsxfun(@times, dy, vy), delta);
 
-% ensure degenerated edges are correclty processed (consider the line
+% ensure degenerated lines are correclty processed (consider the line
 % origin as closest point)
 pos(:, invalidEdges) = 0;
 
-% compute distance between point and its projection on the edge
+% compute distance between point and its projection on the line
 dist = hypot(bsxfun(@times, pos, vx) - dx, bsxfun(@times, pos, vy) - dy);
 
 
