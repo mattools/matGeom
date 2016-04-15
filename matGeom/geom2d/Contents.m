@@ -133,6 +133,7 @@
 %   createBasisTransform  - Compute matrix for transforming a basis into another basis
 %   createLineReflection  - Create the the 3x3 matrix of a line reflection
 %   fitAffineTransform2d  - Fit an affine transform using two point sets
+%   registerICP           - Fit affine transform by Iterative Closest Point algorithm
 %   polynomialTransform2d - Apply a polynomial transform to a set of points
 %   fitPolynomialTransform2d - Coefficients of polynomial transform between two point sets
 %
@@ -224,5 +225,4 @@ help('Contents');
 
 
 %% Others...
-
 
