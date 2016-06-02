@@ -49,88 +49,90 @@ function h = drawPolygon (px, varargin)
 %   2016-05-26 Juanpi Carbajal reorgnaized the function for readability and
 %              removed unnecessary variable arguemnts
 
-  % Store hold state
-  state = ishold (gca);
-  hold on;
+    % Store hold state
+    state = ishold (gca);
+    hold on;
 
-  %% Check input
-  if nargin < 1
-      print_usage ();
-  end
-  % check for empty polygons
-  if isempty (px)
-    return
-  end
-  ax = gca;
-  if ( isAxisHandle (px) )
-   % extract handle of axis to draw on
-    ax          = px;
-    px          = varargin{1};
-    varargin(1) = [];
-  end
-
-  %% Manage cell arrays of polygons
-  % case of a set of polygons stored in a cell array
-  if iscell (px)
-
-    opt = varargin(2:end);
-    h   = cellfun (@(x)drawPolygon (x, opt{:}), px, 'UniformOutput', 0);
-    h   = horzcat (h{:});
-  else
-
-    % Check size vs number of arguments
-    if (size (px, 2) == 1)
-
-      if ( (nargin < 2) || (nargin == 2 && ~isnumeric(varargin{1})) )
-        error('Matgeom:invalid-input-arg', ...
-        'Should specify either a N-by-2 array, or 2 N-by-1 vectors');
-      else
-
-        %% Parse coordinates and options
-        % Extract coordinates of polygon vertices
-        py          = varargin{1};
+    %% Check input
+    if nargin < 1
+        error ('should specify at least one argument');
+    end
+    % check for empty polygons
+    if isempty (px)
+        return
+    end
+    ax = gca;
+    if isAxisHandle (px)
+       % extract handle of axis to draw on
+        ax          = px;
+        px          = varargin{1};
         varargin(1) = [];
-
-        if (length (py) ~= length (px))
-          error ('Matgeom:invalid-input-arg', ...
-          'X and Y coordinates should have same numebr of rows (%d,%d)', ...
-          length (px), length (px))
-        end
-
-      end
-
-    elseif (size (px, 2) == 2)
-
-      py = px(:, 2);
-      px = px(:, 1);
-
-    else
-      error('Matgeom:invalid-input-arg', 'Should specify a N-by-2 array');
     end
 
-    % Check case of polygons with holes
-    if ( any (isnan (px(:)) ) )
-        polygons = splitPolygons ([px py]);
-        h        = drawPolygon (polygons, varargin{:});
+    %% Manage cell arrays of polygons
+    % case of a set of polygons stored in a cell array
+    if iscell (px)
+
+        opt = varargin(2:end);
+        h   = cellfun (@(x)drawPolygon (x, opt{:}), px, 'UniformOutput', 0);
+        h   = horzcat (h{:});
+
     else
-      % set default line format
-      if isempty (varargin)
-          varargin = {'b-'};
-      end
 
-      %% Draw the polygon
-      % ensure last point is the same as the first one
-      px(end+1, :) = px(1,:);
-      py(end+1, :) = py(1,:);
-      % draw the polygon outline
-      h = plot (px, py, varargin{:});
+        % Check size vs number of arguments
+        if size (px, 2) == 1
 
-    end % whether there where holes
+              if nargin < 2) || (nargin == 2 && ~isnumeric(varargin{1}) 
+                error('Matgeom:invalid-input-arg', ...
+                'Should specify either a N-by-2 array, or 2 N-by-1 vectors');
 
-  end % whether input arg was a cell
+            else
 
-  if ~state
-    hold off
-  end
+                %% Parse coordinates and options
+                % Extract coordinates of polygon vertices
+                py          = varargin{1};
+                varargin(1) = [];
+
+                if length (py) ~= length (px)
+                    error ('Matgeom:invalid-input-arg', ...
+                    'X and Y coordinates should have same numebr of rows (%d,%d)', ...
+                    length (px), length (px))
+                end
+
+          end
+
+        elseif size (px, 2) == 2
+
+            py = px(:, 2);
+            px = px(:, 1);
+
+        else
+            error ('Matgeom:invalid-input-arg', 'Should specify a N-by-2 array');
+        end
+
+        % Check case of polygons with holes
+        if any (isnan (px(:)) )
+            polygons = splitPolygons ([px py]);
+            h        = drawPolygon (polygons, varargin{:});
+        else
+            % set default line format
+            if isempty (varargin)
+                  varargin = {'b-'};
+            end
+
+            %% Draw the polygon
+            % ensure last point is the same as the first one
+            px(end+1, :) = px(1,:);
+            py(end+1, :) = py(1,:);
+            % draw the polygon outline
+            h = plot (px, py, varargin{:});
+
+        end % whether there where holes
+
+    end % whether input arg was a cell
+
+    if ~state
+        hold off
+    end
 
 end

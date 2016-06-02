@@ -45,20 +45,20 @@ function varargout = drawArrow(varargin)
 %   2014-09-17 fix managment of handle values as suggested by Benoit Botton
 %   2016-05-23 Improve codee and reduce calculations (by JuanPi Carbajal)
 
-if isempty(varargin)
-    error('should specify at least one argument');
+if isempty (varargin)
+    error ('should specify at least one argument');
 end
 
 % parse arrow coordinates
 var = varargin{1};
-if size(var, 2) == 4
+if size (var, 2) == 4
     x1 = var(:,1);
     y1 = var(:,2);
     x2 = var(:,3);
     y2 = var(:,4);
     varargin = varargin(2:end);
-    
-elseif length(varargin) > 3
+
+elseif length (varargin) > 3
     x1 = varargin{1};
     y1 = varargin{2};
     x2 = varargin{3};
@@ -66,38 +66,38 @@ elseif length(varargin) > 3
     varargin = varargin(5:end);
     
 else
-    error('MatGeom:drawArrow:invalidArgumentNumber', ...
+    error ('MatGeom:drawArrow:invalidArgumentNumber', ...
         'wrong number of arguments, please read the doc');
 end
 N     = size (x1, 1);
 
-# default values
+% default values
 l = 10  * ones (N, 1); % Body length
 w = 5   * ones (N, 1); % Head width
 r = 0.1 * ones (N, 1); % Head to body ratio
 h = zeros (N, 1);      % Head type
 
 if ~isempty (varargin)
-  # Parse paramters
-  k      = length (varargin);
-  vartxt = 'lwrh';
-  cmd    = ['%s = varargin{%d}; %s = %s(:);' ...
-            'if length (%s) < N; %s = %s(1) * ones (N , 1); end'];
-  for i = 1:k
-    v = vartxt(i);
-    eval (sprintf (cmd, v, i, v, v, v, v, v));
-  end
+    % Parse paramters
+    k      = length (varargin);
+    vartxt = 'lwrh';
+    cmd    = ['%s = varargin{%d}; %s = %s(:);' ...
+              'if length (%s) < N; %s = %s(1) * ones (N , 1); end'];
+    for i = 1:k
+        v = vartxt(i);
+        eval (sprintf (cmd, v, i, v, v, v, v, v));
+    end
 end
 
 hold on;
-oldHold = ishold(gca);
+oldHold = ishold (gca);
 if ~oldHold
     hold on;
 end
 axis equal;
 
 % angle of the edge
-theta = atan2(y2-y1, x2-x1);
+theta = atan2 (y2-y1, x2-x1);
 
 rl = r .* l;
 rh = r .* h;
@@ -120,21 +120,21 @@ handle.body = tmp;
 % draw only 2 wings
 ind = find (h == 0);
 if ~isempty (ind)
-  tmp              = line ([xa1(ind).'; x2(ind).'], [ya1(ind).'; y2(ind).'], ...
-                           'color', [0 0 1]);
-  handle.wing(:,1) = tmp;
+    tmp              = line ([xa1(ind).'; x2(ind).'], [ya1(ind).'; y2(ind).'], ...
+                             'color', [0 0 1]);
+    handle.wing(:,1) = tmp;
 
-  tmp              = line([xa2(ind).'; x2(ind).'], [ya2(ind).'; y2(ind).'], ...
-                           'color', [0 0 1]);
-  handle.wing(:,2) = tmp;
+    tmp              = line ([xa2(ind).'; x2(ind).'], [ya2(ind).'; y2(ind).'], ...
+                             'color', [0 0 1]);
+    handle.wing(:,2) = tmp;
 end
 
 % draw a full arrow
 ind = find (h ~= 0);
 if ~isempty (ind)
-  tmp         = patch ([x2(ind) xa1(ind) xa3(ind) xa2(ind) x2(ind)].', ...
-                       [y2(ind) ya1(ind) ya3(ind) ya2(ind) y2(ind)].', [0 0 1]);
-  handle.head = tmp;
+    tmp         = patch ([x2(ind) xa1(ind) xa3(ind) xa2(ind) x2(ind)].', ...
+                         [y2(ind) ya1(ind) ya3(ind) ya2(ind) y2(ind)].', [0 0 1]);
+    handle.head = tmp;
 end
 
 % format output arguments

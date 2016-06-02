@@ -64,33 +64,33 @@ function area = polygonArea(poly, varargin)
 
 function A = polygonArea(px, py)
 
-  # in case of polygon sets, computes several areas
-  if iscell (px)
-     A = cellfun (@func, px);
-  else
+    % in case of polygon sets, computes several areas
+    if iscell (px)
+         A = cellfun (@func, px);
+    else
 
-    if (nargin == 2)
-      px = [px py];
+        if nargin == 2
+            px = [px py];
+        end
+        A = func (px);
     end
-    A = func (px);
-  end
 
 end
 
 function a = func (c)
 
-  if (any (isnan (c)) )
-    cc = splitPolygons (c);
-    a  = cellfun (@func, cc);
-    a  = sum (a);
-  else
-    N = size (c, 1);
-    if (N < 3)
-      a = 0;
+    if any (isnan (c))
+        cc = splitPolygons (c);
+        a  = cellfun (@func, cc);
+        a  = sum (a);
     else
-      iNext = [2:N 1];
-      a     = sum (c(:,1) .* c(iNext,2) - c(iNext,1) .* c(:,2)) / 2;
+        N = size (c, 1);
+        if N < 3
+            a = 0;
+        else
+            iNext = [2:N 1];
+            a     = sum (c(:,1) .* c(iNext,2) - c(iNext,1) .* c(:,2)) / 2;
+        end
     end
-  end
 
 end
