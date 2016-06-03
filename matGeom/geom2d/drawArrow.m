@@ -78,7 +78,7 @@ r = 0.1 * ones (N, 1); % Head to body ratio
 h = zeros (N, 1);      % Head type
 
 if ~isempty (varargin)
-    % Parse paramters
+    % Parse parameters
     k      = length (varargin);
     vartxt = 'lwrh';
     cmd    = ['%s = varargin{%d}; %s = %s(:);' ...
