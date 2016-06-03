@@ -62,3 +62,18 @@ assertEqual(1, length(res));
 exp = 16 * 100;
 assertEqual(exp, res);
 
+
+function test_MultiPolygon_NaN
+% Test for a rectangle with two rectangular holes separated by NaN values
+
+poly1 = [10 10;60 10;60 50;10 50];  % outer ring
+poly2 = [20 20;20 40;30 40;30 20];  % inner ring 1
+poly3 = [40 20;40 40;50 40;50 20];  % inner ring 2
+poly = [poly1; NaN NaN; poly2; NaN NaN; poly3];
+
+res = polygonArea(poly);
+assertEqual(1, length(res));
+
+exp = 16 * 100;
+assertEqual(exp, res);
+
