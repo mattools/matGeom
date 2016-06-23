@@ -6,17 +6,18 @@ function box = polygonBounds(polygon)
 %   BOX has the format: [XMIN XMAX YMIN YMAX].
 %
 %   Input polygon POLY is as a N-by-2 array containing coordinates of each
-%   vertex. multiple polygons can be specified either by inserting NaN rows
-%   between vertex coordinates, or by using a cell array, each cell
-%   containing the vertex coordinates of a polygon loop.
+%   vertex. 
+%   Multiple polygons can be specified either by inserting NaN rows between
+%   vertex coordinates, or by using a cell array, each cell containing the
+%   vertex coordinates of a polygon loop. 
 %
 %   See also
 %   polygons2d, boxes2d, boundingBox
 %
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@nantes.inra.fr
 % Created: 2007-10-12,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2007 INRA - Cepia software platform
 
@@ -30,6 +31,7 @@ xmax = -inf;
 ymin = inf;
 ymax = -inf;
 
+% iterate over loops
 for i = 1:length(polygons)
     polygon = polygons{i};
     
@@ -39,4 +41,5 @@ for i = 1:length(polygons)
     ymax = max(ymax, max(polygon(:,2)));
 end
 
+% format output
 box = [xmin xmax ymin ymax];
