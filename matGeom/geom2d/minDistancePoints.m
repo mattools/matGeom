@@ -56,11 +56,13 @@ function varargout = minDistancePoints(p1, varargin)
 %   See Also
 %   points2d, distancePoints, nndist, hausdorffDistance
 %
-%   ---------
-%   author: David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 15/06/2004.
-%
+
+% ------
+% Author: David Legland
+% e-mail: david.legland@nantes.inra.fr
+% Copyright 2009 INRA - Cepia Software Platform.
+% created the 15/06/2004.
+
 
 % HISTORY:
 % 22/06/2005 compute sqrt only at the end (faster), and change behaviour
