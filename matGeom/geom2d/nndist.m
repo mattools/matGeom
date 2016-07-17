@@ -16,10 +16,12 @@ function [dists, neighInds] = nndist(points)
 %   Example
 %     % Display Stienen diagram of a set of random points in unit square
 %     pts = rand(100, 2);
-%     dists = nndist(pts);
-%     figure; drawPoint(pts, '.');
-%     hold on; drawCircle([pts dists/2]);
+%     [dists, inds] = nndist(pts);
+%     figure; drawPoint(pts, 'k.');
+%     hold on; drawCircle([pts dists/2], 'b');
 %     axis equal; axis([-.1 1.1 -.1 1.1]);
+%     % also display edges
+%     drawEdge([pts pts(inds, :)], 'b');
 %
 %   See also
 %     points2d, distancePoints, minDistancePoints, findPoint
@@ -31,11 +33,29 @@ function [dists, neighInds] = nndist(points)
 % Created: 2011-12-01,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
+% number of points
 n = size(points, 1);
 
+% allocate memory
 dists = zeros(n, 1);
 neighInds = zeros(n, 1);
 
+% in case of few points, use direct computation
+if n < 3
+    inds = 1:n;
+    for i = 1:n
+        % compute minimal distance
+        [dists(i), indN] = minDistancePoints(points(i,:), points(inds~=i, :));
+        if indN >= i
+            neighInds(i) = inds(indN) + 1;
+        else
+            neighInds(i) = inds(indN);
+        end
+    end
+    return;
+end
+
+% use Delaunay Triangulation to facilitate computations
 DT = delaunayTriangulation(points);
 
 % compute distance to nearest neighbor of each point in the pattern
@@ -43,8 +63,9 @@ for i = 1:n
     % find indices of neighbor vertices in Delaunay Triangulation.
     % this set contains the nearest neighbor
     inds = unique(DT.ConnectivityList(sum(DT.ConnectivityList == i, 2) > 0, :));
+    inds = inds(inds~=i);
     
     % compute minimal distance 
-    [dists(i), indN] = min(distancePoints(points(i,:), points(inds(inds~=i), :)));
+    [dists(i), indN] = min(distancePoints(points(i,:), points(inds, :)));
     neighInds(i) = inds(indN);
 end
