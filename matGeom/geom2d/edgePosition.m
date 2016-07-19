@@ -1,4 +1,4 @@
-function d = edgePosition(point, edge)
+function pos = edgePosition(point, edge)
 %EDGEPOSITION Return position of a point on an edge
 %
 %   POS = edgePosition(POINT, EDGE);
@@ -6,15 +6,15 @@ function d = edgePosition(point, edge)
 %   position of edge vertices.
 %   EDGE has the form [x1 y1 x2 y2],
 %   POINT has the form [x y], and is assumed to belong to edge.
-%   The position POS has meaning:
-%     POS<0:    POINT is located before the first vertex
-%     POS=0:    POINT is located on the first vertex
-%     0<POS<1:  POINT is located between the 2 vertices (on the edge)
-%     POS=1:    POINT is located on the second vertex
-%     POS<0:    POINT is located after the second vertex
+%   The result POS has the following meaning:
+%     POS < 0:      POINT is located before the first vertex
+%     POS = 0:      POINT is located on the first vertex
+%     0 < POS < 1:  POINT is located between the 2 vertices (on the edge)
+%     POS = 1:      POINT is located on the second vertex
+%     POS < 0:      POINT is located after the second vertex
 %
 %   POS = edgePosition(POINT, EDGES);
-%   If EDGES is an array of NL edges, return NL positions, corresponding to
+%   If EDGES is an array of NL edges, return NE positions, corresponding to
 %   each edge.
 %
 %   POS = edgePosition(POINTS, EDGE);
@@ -22,42 +22,41 @@ function d = edgePosition(point, edge)
 %   to each point.
 %
 %   POS = edgePosition(POINTS, EDGES);
-%   If POINTS is an array of NP points and edgeS is an array of NL edges,
-%   return an array of [NP NL] position, corresponding to each couple
+%   If POINTS is an array of NP points and EDGES is an array of NE edges,
+%   return an array of [NP NE] position, corresponding to each couple
 %   point-edge.
 %
 %   See also:
-%   edges2d, createEdge, onEdge
+%   edges2d, createEdge, isPointOnEdge
 %
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 25/05/2004.
+
+% ------
+% Author: David Legland
+% e-mail: david.legland@nantes.inra.fr
+% Created: 2004-05-25
+% Copyright 2009 INRA - Cepia Software Platform.
 %
 
 %   HISTORY:
 %   06/12/2009 created from linePosition
 
 % number of points and of edges
-Nl = size(edge, 1);
-Np = size(point, 1);
+nEdges = size(edge, 1);
+nPoints = size(point, 1);
 
-if Np==Nl
-    dxl = edge(:, 3)-edge(:,1);
-    dyl = edge(:, 4)-edge(:,2);
+if nPoints == nEdges
+    dxe = (edge(:, 3) - edge(:,1))';
+    dye = (edge(:, 4) - edge(:,2))';
     dxp = point(:, 1) - edge(:, 1);
     dyp = point(:, 2) - edge(:, 2);
 
-    d = (dxp.*dxl + dyp.*dyl)./(dxl.*dxl+dyl.*dyl);
-
 else
-    % expand one of the array to have the same size
-    dxl = repmat((edge(:,3)-edge(:,1))', Np, 1);
-    dyl = repmat((edge(:,4)-edge(:,2))', Np, 1);
-    dxp = repmat(point(:,1), 1, Nl) - repmat(edge(:,1)', Np, 1);
-    dyp = repmat(point(:,2), 1, Nl) - repmat(edge(:,2)', Np, 1);
+    % expand one of the arrays to have the same size
+    dxe = (edge(:,3) - edge(:,1))';
+    dye = (edge(:,4) - edge(:,2))';
+    dxp = bsxfun(@minus, point(:,1), edge(:,1)');
+    dyp = bsxfun(@minus, point(:,2), edge(:,2)');
 
-    d = (dxp.*dxl + dyp.*dyl)./(dxl.*dxl+dyl.*dyl);
 end
 
+pos = (dxp .* dxe + dyp .* dye) ./ (dxe .* dxe + dye .* dye);
