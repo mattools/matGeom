@@ -132,7 +132,7 @@ for iEdge1 = 1:nEdges-1
         end
         
         % compute intersection point
-        inter = intersectEdges(edge1, edge2);
+        inter = intersectEdges(edge1, edge2, tol);
         
         if sum(isfinite(inter)) == 2
             % add point to the list
@@ -166,7 +166,10 @@ pos1 = pos1(I);
 pos2 = pos2(I);
 
 % remove multiple intersections, using tolerance on distance
-for iInter = 1:size(points, 1)-1
+iInter = 0;
+while iInter < size(points, 1) - 1
+    iInter = iInter + 1;
+% for iInter = 1:size(points, 1)-1
     % determine distance between current point and remaining points
     inds = iInter+1:size(points, 1);
     dists = distancePoints(points(iInter,:), points(inds, :));
