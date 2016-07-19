@@ -1,26 +1,35 @@
-function point = intersectEdges(edge1, edge2)
+function point = intersectEdges(edge1, edge2, varargin)
 %INTERSECTEDGES Return all intersections between two set of edges
 %
 %   P = intersectEdges(E1, E2);
-%   returns the intersection point of lines L1 and L2. E1 and E2 are 1-by-4
-%   arrays, containing parametric representation of each edge (in the form
-%   [x1 y1 x2 y2], see 'createEdge' for details).
+%   returns the intersection point of edges E1 and E2. 
+%   E1 and E2 are 1-by-4 arrays, containing parametric representation of
+%   each edge (in the form [x1 y1 x2 y2], see 'createEdge' for details).
 %   
-%   In case of colinear edges, returns [Inf Inf].
-%   In case of parallel but not colinear edges, returns [NaN NaN].
+%   In case of colinear edges, the result P contains [Inf Inf].
+%   In case of parallel but not colinear edges, the result P contains 
+%   [NaN NaN]. 
 %
-%   If each input is [N*4] array, the result is a [N*2] array containing
-%   intersections of each couple of edges.
+%   If each input is N-by-4 array, the result is a N-by-2 array containing
+%   the intersection of each couple of edges.
 %   If one of the input has N rows and the other 1 row, the result is a
-%   [N*2] array.
+%   N-by-2 array.
+%
+%   P = intersectEdges(E1, E2, TOL);
+%   Specifies a tolerance parameter to determine parallel and colinear
+%   edges, and if a point belongs to an edge or not. The latter test is
+%   performed on the relative position of the intersection point over the
+%   edge, that should lie within [-TOL; 1+TOL]. 
 %
 %   See also:
 %   edges2d, intersectLines
 %
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
+
+% ------
+% Author: David Legland
+% e-mail: david.legland@nantes.inra.fr
+% INRA - Cepia Software Platform
+% created the 31/10/2003.
 %
 
 %   HISTORY
@@ -31,6 +40,15 @@ function point = intersectEdges(edge1, edge2)
 %   03/08/2010 fix another bug for edge arrays (thanks to Reto Zingg)
 %   20/02/2013 fix bug for management of parallel edges (thanks to Nicolaj
 %   Kirchhof)
+%   19/07/2016 add support for tolerance
+
+% tolerance for precision
+tol = 1e-14;
+
+if nargin > 2
+    tol = varargin{1};
+end
+
 
 %% Initialisations
 
@@ -39,17 +57,14 @@ N1  = size(edge1, 1);
 N2  = size(edge2, 1);
 
 % ensure input have same size
-if N1~=N2
-    if N1==1
+if N1 ~= N2
+    if N1 == 1
         edge1 = repmat(edge1, [N2 1]);
         N1 = N2;
-    elseif N2==1
+    elseif N2 == 1
         edge2 = repmat(edge2, [N1 1]);
     end
 end
-
-% tolerance for precision
-tol = 1e-14;
 
 % initialize result array
 x0  = zeros(N1, 1);
@@ -92,8 +107,8 @@ if sum(col) > 0
     end
     
     % edge totally before first vertex or totally after last vertex
-    resCol(col(t2 < -eps))  = NaN;
-    resCol(col(t1 > 1+eps)) = NaN;
+    resCol(col(t2 < -tol))  = NaN;
+    resCol(col(t1 > 1+tol)) = NaN;
         
     % set up result into point coordinate
     x0(col) = resCol(col);
