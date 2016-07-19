@@ -4,10 +4,16 @@ function varargout = polygonSelfIntersections(poly, varargin)
 %   PTS = polygonSelfIntersections(POLY)
 %   Return the position of self intersection points
 %
-%   [PTS POS1 POS2] = polygonSelfIntersections(POLY)
+%   [PTS, POS1, POS2] = polygonSelfIntersections(POLY)
 %   Also return the 2 positions of each intersection point (the position
 %   when meeting point for first time, then position when meeting point
 %   for the second time).
+%
+%   [...] = polygonSelfIntersections(POLY, 'tolerance', TOL)
+%   Specifies an additional parameter to decide whether two intersection
+%   points should be considered the same, based on their euclidean
+%   distance.  
+%
 %
 %   Example
 %       % use a '8'-shaped polygon
@@ -22,7 +28,7 @@ function varargout = polygonSelfIntersections(poly, varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@nantes.inra.fr
 % Created: 2009-06-15,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
@@ -38,7 +44,7 @@ if sum(abs(poly(end, :)-poly(1,:)) < tol) ~= 2
 end
 
 % compute intersections by calling algo for polylines
-[points, pos1, pos2] = polylineSelfIntersections(poly, 'closed');
+[points, pos1, pos2] = polylineSelfIntersections(poly, 'closed', varargin{:});
 
 % It may append that first vertex of polygon is detected as intersection,
 % the following tries to detect this
@@ -47,11 +53,6 @@ inds = (pos1 == 0 & pos2 == n) | (pos1 == n & pos2 == 0);
 points(inds, :) = [];
 pos1(inds)   = [];
 pos2(inds)   = [];
-
-% remove multiple intersections
-[points, I, J] = unique(points, 'rows', 'first'); %#ok<NASGU>
-pos1 = pos1(I);
-pos2 = pos2(I);
 
 
 %% Post-processing

@@ -63,3 +63,11 @@ assertEqual(1, size(intersects, 1));
 exp = [20 20];
 assertElementsAlmostEqual(exp, intersects);
 
+function testCrossingAtVertex
+
+poly = [10 10;20.3 10; 20 20;20.1 30;30 30;30 20;20 20;10 20];
+
+intersects = polygonSelfIntersections(poly);
+
+exp = [20 20];
+assertElementsAlmostEqual(exp, intersects);
