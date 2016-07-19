@@ -38,18 +38,34 @@ function varargout = polygonSelfIntersections(poly, varargin)
 
 tol = 1e-14;
 
+% parse optional arguments
+while length(varargin) > 1
+    pname = varargin{1};
+    if ~ischar(pname)
+        error('Expect optional arguments as name-value pairs');
+    end
+    
+    if strcmpi(pname, 'tolerance')
+        tol = varargin{2};
+    else
+        error(['Unknown parameter name: ' pname]);
+    end
+    varargin(1:2) = [];
+end
+
 % ensure the last point equals the first one
 if sum(abs(poly(end, :)-poly(1,:)) < tol) ~= 2
     poly = [poly; poly(1,:)];
 end
 
 % compute intersections by calling algo for polylines
-[points, pos1, pos2] = polylineSelfIntersections(poly, 'closed', varargin{:});
+[points, pos1, pos2] = polylineSelfIntersections(poly, 'closed', 'tolerance', tol);
 
 % It may append that first vertex of polygon is detected as intersection,
-% the following tries to detect this
+% the following tries to detect this.
+% (pos1 < pos2 by construction)
 n = size(poly, 1) - 1;
-inds = (pos1 == 0 & pos2 == n) | (pos1 == n & pos2 == 0);
+inds = abs(pos1) < tol & abs(pos2 - n) < tol;
 points(inds, :) = [];
 pos1(inds)   = [];
 pos2(inds)   = [];
