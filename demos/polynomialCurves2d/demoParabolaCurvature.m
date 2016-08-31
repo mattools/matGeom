@@ -6,13 +6,12 @@
 %
 %   See also
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
 % Created: 2007-02-26
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
-% Licensed under the terms of the LGPL, see the file "license.txt"
 
 
 %% Parabola definition
@@ -32,7 +31,7 @@ figure(1); clf;
 hold on;
 
 % draw curve
-drawCurve(curve, 'linewidth', 2);
+drawPolyline(curve, 'linewidth', 2);
 
 % format axis
 axis equal;
