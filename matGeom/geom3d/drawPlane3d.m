@@ -18,10 +18,12 @@ function varargout = drawPlane3d(plane, varargin)
 %   drawLine3d([p0 v2])
 %   set(gcf, 'renderer', 'zbuffer');
 %
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 17/02/2005.
+
+% ------
+% Author: David Legland
+% e-mail: david.legland@inra.fr
+% INRA - TPV URPOI - BIA IMASTE
+% created the 17/02/2005.
 %
 
 %   HISTORY
@@ -85,14 +87,14 @@ points = [...
 
 % check validity: keep only points inside window
 ac = 1e-14;
-vx = points(:,1)>=xmin-ac & points(:,1)<=xmax+ac;
-vy = points(:,2)>=ymin-ac & points(:,2)<=ymax+ac;
-vz = points(:,3)>=zmin-ac & points(:,3)<=zmax+ac;
-valid = vx & vy & vz;
+ivx = points(:,1) >= xmin-ac & points(:,1) <= xmax+ac;
+ivy = points(:,2) >= ymin-ac & points(:,2) <= ymax+ac;
+ivz = points(:,3) >= zmin-ac & points(:,3) <= zmax+ac;
+valid = ivx & ivy & ivz;
 pts = unique(points(valid, :), 'rows');
 
 % If there is no intersection point, escape.
-if size(pts, 1)<3
+if size(pts, 1) < 3
     disp('plane is outside the drawing window');
     return;
 end
@@ -110,9 +112,9 @@ ind = convhull(u1, u2);
 ind = ind(1:end-1);
 
 % draw the patch
-h = patch(pts(ind, 1), pts(ind, 2), pts(ind, 3), param{:});
+h = patch('XData', pts(ind, 1), 'YData', pts(ind, 2), 'ZData', pts(ind, 3), param{:});
 
 % return handle to plane if needed
-if nargout>0
-    varargout{1}=h;
+if nargout > 0
+    varargout = {h};
 end
