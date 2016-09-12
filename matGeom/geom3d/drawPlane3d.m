@@ -32,11 +32,23 @@ function varargout = drawPlane3d(plane, varargin)
 %   2011-07-19 fix a bug for param by Xin KANG (Ben)
 % 
 
-param = {'m'};
+% default display
+options = {'FaceColor', 'm'};
+
+% parse input arguments if any
 if ~isempty(varargin)
-  param = varargin;
+    options = varargin;
+    
+    % if options are specified as struct, need to convert to parameter
+    % name-value pairs
+    if isstruct(options{1})
+        s = options{1};
+        options = [fieldnames(s) struct2cell(s)]';
+        options = options(:)';
+    end
 end
 
+% extract axis bounds to crop plane
 lim = get(gca, 'xlim');
 xmin = lim(1);
 xmax = lim(2);
@@ -48,7 +60,7 @@ zmin = lim(1);
 zmax = lim(2);
 
 
-% line corresponding to cube edges
+% create lines corresponding to cube edges
 lineX00 = [xmin ymin zmin 1 0 0];
 lineX01 = [xmin ymin zmax 1 0 0];
 lineX10 = [xmin ymax zmin 1 0 0];
@@ -85,7 +97,7 @@ points = [...
     piY00;piY01;piY10;piY11; ...
     piZ00;piZ01;piZ10;piZ11;];
 
-% check validity: keep only points inside window
+% check validity: keep only points inside window (with tolerance)
 ac = 1e-14;
 ivx = points(:,1) >= xmin-ac & points(:,1) <= xmax+ac;
 ivy = points(:,2) >= ymin-ac & points(:,2) <= ymax+ac;
@@ -112,7 +124,8 @@ ind = convhull(u1, u2);
 ind = ind(1:end-1);
 
 % draw the patch
-h = patch('XData', pts(ind, 1), 'YData', pts(ind, 2), 'ZData', pts(ind, 3), param{:});
+h = patch('XData', pts(ind, 1), 'YData', pts(ind, 2), 'ZData', pts(ind, 3));
+set(h, options{:});
 
 % return handle to plane if needed
 if nargout > 0
