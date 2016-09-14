@@ -12,7 +12,7 @@ function mat = createRotation3dLineAngle(line, theta)
 %     [axis angle2] = rotation3dAxisAndAngle(rot);
 %     angle2
 %     angle2 =
-%           1.015
+%           1.0472
 %
 %   See also
 %   transforms3d, rotation3dAxisAndAngle, rotation3dToEulerAngles,
