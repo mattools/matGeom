@@ -158,7 +158,8 @@
 % Bounding boxes management
 %   boxes3d                   - Description of functions operating on 3D boxes
 %   boundingBox3d             - Bounding box of a set of 3D points
-%   orientedbox3d             - Object-oriented bounding box of a set of 3D points
+%   orientedBox3d             - Object-oriented bounding box of a set of 3D points
+
 %   intersectBoxes3d          - Intersection of two 3D bounding boxes
 %   mergeBoxes3d              - Merge 3D boxes, by computing their greatest extent
 %   box3dVolume               - Volume of a 3-dimensional box
@@ -194,7 +195,7 @@
 %
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2005-11-07
 % Homepage: http://github.com/dlegland/matGeom
 % http://www.pfl-cepia.inra.fr/index.php?page=geom3d
@@ -204,20 +205,8 @@
 %   clipPolygon3dHP           - clip a 3D polygon with Half-space
 %   drawPartialPatch          - draw surface patch, with 2 parametrized surfaces
 
-
 % Deprecated:
-%   point3dBounds             - Bounding box of a set of 3D points
-%   intersectPlaneLine        - return intersection between a plane and a line
-%   translation3d             - return 4x4 matrix of a 3D translation
-%   scale3d                   - return 4x4 matrix of a 3D scaling
-%   rotationOx                - return 4x4 matrix of a rotation around x-axis
-%   rotationOy                - return 4x4 matrix of a rotation around y-axis
-%   rotationOz                - return 4x4 matrix of a rotation around z-axis
-%   scaling3d                 - return 4x4 matrix of a 3D scaling
-%   vecnorm3d                 - compute norm of vector or of set of 3D vectors
-%   normalize3d               - normalize a 3D vector
-%   drawCurve3d               - draw a 3D curve specified by a list of points
-%   createEulerAnglesRotation - Create a rotation matrix from 3 euler angles
 
 % Others
+
 
