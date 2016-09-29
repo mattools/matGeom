@@ -1,13 +1,13 @@
 function varargout = createDodecahedron()
 %CREATEDODECAHEDRON Create a 3D mesh representing a dodecahedron
 %
-%   [V E F] = createDodecahedron;
+%   [V, E, F] = createDodecahedron;
 %   Create a 3D mesh representing a dodecahedron
 %   V is the 20-by-3 array of vertex coordinates
 %   E is the 30-by-2 array of edge vertex indices
 %   F is the 12-by-5 array of face vertex indices
 %
-%   [V F] = createDodecahedron;
+%   [V, F] = createDodecahedron;
 %   Returns only the vertices and the face vertex indices.
 %
 %   MESH = createDodecahedron;
@@ -15,7 +15,7 @@ function varargout = createDodecahedron()
 %   and 'faces'.
 %
 %   Example
-%   [v e f] = createDodecahedron;
+%   [v, e, f] = createDodecahedron;
 %   drawMesh(v, f);
 %
 %   Use values given by P. Bourke, see:
@@ -29,6 +29,7 @@ function varargout = createDodecahedron()
 
 %   ---------
 %   author : David Legland 
+%   e-mail: david.legland@inra.fr
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 29/07/2010.
 %

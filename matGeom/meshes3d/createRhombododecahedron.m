@@ -1,12 +1,12 @@
 function varargout = createRhombododecahedron()
 %CREATERHOMBODODECAHEDRON Create a 3D mesh representing a rhombododecahedron
 %
-%   [V E F] = createRhombododecahedron
+%   [V, E, F] = createRhombododecahedron
 %   V is a 14-by-3 array with vertex coordinate, 
 %   E is a 12-by-2 array containing indices of neighbour vertices,
 %   F is a 8-by-3 array containing vertices array of each face.
 %
-%   [V F] = createRhombododecahedron;
+%   [V, F] = createRhombododecahedron;
 %   Returns only the vertices and the face vertex indices.
 %
 %   MESH = createRhombododecahedron;
@@ -14,15 +14,16 @@ function varargout = createRhombododecahedron()
 %   and 'faces'.
 %
 %   Example
-%   [v e f] = createRhombododecahedron;
+%   [v, e, f] = createRhombododecahedron;
 %   drawMesh(v, f);
 %
 %
 %   See also
 %   meshes3d, drawMesh
-%
+
 %   ---------
 %   author : David Legland 
+%   e-mail: david.legland@inra.fr
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 10/02/2005.
 %

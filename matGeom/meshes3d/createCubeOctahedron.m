@@ -1,14 +1,14 @@
 function varargout = createCubeOctahedron()
 %CREATECUBEOCTAHEDRON Create a 3D mesh representing a cube-octahedron
 %
-%   [V E F] = createCubeOctahedron;
+%   [V, E, F] = createCubeOctahedron;
 %   Cubeoctahedron can be seen either as a truncated cube, or as a
 %   truncated octahedron.
 %   V is the 12-by-3 array of vertex coordinates
 %   E is the 27-by-2 array of edge vertex indices
 %   F is the 1-by-14 cell array of face vertex indices
 %
-%   [V F] = createCubeOctahedron;
+%   [V, F] = createCubeOctahedron;
 %   Returns only the vertices and the face vertex indices.
 %
 %   MESH = createCubeOctahedron;
@@ -16,16 +16,16 @@ function varargout = createCubeOctahedron()
 %   and 'faces'.
 %
 %   Example
-%   [n e f] = createCubeOctahedron;
+%   [n, e, f] = createCubeOctahedron;
 %   drawMesh(n, f);
 %   
 %   See also
 %   meshes3d, drawMesh, createCube, createOctahedron
 %
-%
-%
+
 %   ---------
 %   author : David Legland 
+%   e-mail: david.legland@inra.fr
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 10/02/2005.
 %
