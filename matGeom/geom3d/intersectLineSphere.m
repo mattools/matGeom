@@ -22,7 +22,18 @@ function points = intersectLineSphere(line, sphere, varargin)
 %     drawSphere(sphere);
 %     drawLine3d(lines);
 %     pts = intersectLineSphere(lines, sphere);
-%     drawPoint3d(pts, 'ro');
+%     drawPoint3d(pts, 'rx');
+%
+%     % apply rotation on set of lines to check with non vertical lines
+%     rot = eulerAnglesToRotation3d(20, 30, 10);
+%     rot2 = recenterTransform3d(rot, [50 50 50]);
+%     lines2 = transformLine3d(lines, rot2);
+%     figure; hold on; axis equal;
+%     axis([0 100 0 100 0 100]); view(3);
+%     drawSphere(sphere);
+%     drawLine3d(lines2);
+%     pts2 = intersectLineSphere(lines2, sphere);
+%     drawPoint3d(pts, 'rx');
 %
 %   See also
 %   spheres, circles3d, intersectPlaneSphere
@@ -63,7 +74,7 @@ points = NaN * ones(2 * size(delta, 1), 3);
 
 %% process couples with two intersection points
 
-% proces couples with two intersection points
+% process couples with two intersection points
 inds = find(delta > tol);
 if ~isempty(inds)
     % delta positive: find two roots of second order equation
