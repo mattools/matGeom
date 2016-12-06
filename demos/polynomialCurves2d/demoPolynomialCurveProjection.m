@@ -6,13 +6,12 @@
 %
 %   See also
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
 % Created: 2007-12-21,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
-% Licensed under the terms of the LGPL, see the file "license.txt"
 
 
 %% Initializations
@@ -29,7 +28,7 @@ curve = polynomialCurvePoint(t, xc, yc);
 
 % draw the curve
 figure(1); clf; hold on;
-drawCurve(curve);
+drawPolyline(curve);
 axis equal;
 
 
@@ -47,6 +46,6 @@ proj = polynomialCurvePoint(pos, xc, yc);
 % draw the point and its projection
 drawPoint(point, 'bo');
 drawPoint(proj, 'ro');
-
+drawEdge([point proj], 'k');
 
 

@@ -2,8 +2,8 @@ function circle = enclosingCircle(pts)
 %ENCLOSINGCIRCLE Find the minimum circle enclosing a set of points.
 %
 %   CIRCLE = enclosingCircle(POINTS);
-%   compute cirlce CIRCLE=[xc yc r] which enclose all points POINTS given
-%   as an [Nx2] array.
+%   computes the circle CIRCLE=[xc yc r] which encloses all the points POINTS
+%   given as a N-by-2 array.
 %
 %
 %   Rewritten from a file from
@@ -15,15 +15,18 @@ function circle = enclosingCircle(pts)
 %   See also:
 %   circles2d, points2d, boxes2d, circumCircle
 %
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 07/07/2005.
-%
 
-% works on convex hull : it is faster
+% ------
+% Author: David Legland
+% e-mail: david.legland@nantes.inra.fr
+% created the 07/07/2005.
+% Copyright 2012 INRA - Cepia Software Platform.
+
+
+% works on convex hull: it is faster
 pts = pts(convhull(pts(:,1), pts(:,2)), :);
 
+% call the recursive function
 circle = recurseCircle(size(pts, 1), pts, 1, zeros(3, 2));
 
 
@@ -41,7 +44,7 @@ function circ = recurseCircle(n, p, m, b)
 %                        -10 -10]
 
 
-if m==4
+if m == 4
     circ = createCircle(b(1,:), b(2,:), b(3,:));
     return;
 end

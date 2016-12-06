@@ -1,14 +1,14 @@
 function varargout = createTetrahedron()
 %CREATETETRAHEDRON Create a 3D mesh representing a tetrahedron
 %
-%   [V E F] = createTetrahedron
+%   [V, E, F] = createTetrahedron
 %   create a simple tetrahedron, using mesh representation. The tetrahedron
 %   is inscribed in the unit cube.
 %   V is a 4-by-3 array with vertex coordinates, 
 %   E is a 6-by-2 array containing indices of neighbour vertices,
 %   F is a 4-by-3 array containing vertices array of each (triangular) face.
 %
-%   [V F] = createTetrahedron;
+%   [V, F] = createTetrahedron;
 %   Returns only the vertices and the faces.
 %
 %   MESH = createTetrahedron;
@@ -18,15 +18,16 @@ function varargout = createTetrahedron()
 %
 %   Example
 %   % Create and display a tetrahedron
-%   [V E F] = createTetrahedron;
+%   [V, E, F] = createTetrahedron;
 %   drawMesh(V, F);
 %
 %   See also 
 %   meshes3d, drawMesh
 %   createCube, createOctahedron, createDodecahedron, createIcosahedron
-%
+
 %   ---------
 %   author : David Legland 
+%   e-mail: david.legland@inra.fr
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 21/03/2005.
 %

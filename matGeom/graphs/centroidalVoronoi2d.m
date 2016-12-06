@@ -85,7 +85,7 @@ germIters = cell(nIter, 1);
 %% Iteration of the McQueen algorithm
 
 for i = 1:nIter
-    if verbose
+     if verbose
         disp(sprintf('Iteration: %d/%d', i, nIter)); %#ok<DSPS>
     end
     
@@ -94,10 +94,30 @@ for i = 1:nIter
     end
     
     % random uniform points in polygon
+    if verbose
+        disp('  generate points');
+    end
     points = generatePointsInPoly(nPts);
     
-    % update germs of Voronoi
-    germs = cvtUpdate(germs, points);
+    % for each point, determines index of the closest germ
+    if verbose
+        disp('  find closest germ');
+    end
+    ind = zeros(nPts, 1);
+    for iPoint = 1:nPts
+        x0 = points(iPoint, 1);
+        y0 = points(iPoint, 2);
+        [tmp, ind(iPoint)] = min((germs(:,1)-x0).^2 + (germs(:,2)-y0).^2); %#ok<ASGLU>
+    end
+
+    % update the position of each germ
+    if verbose
+        disp('  update germ position');
+    end
+    for iGerm = 1:nGerms
+        germs(iGerm,:) = centroid(points(ind == iGerm, :));
+    end
+    
 end
 
 

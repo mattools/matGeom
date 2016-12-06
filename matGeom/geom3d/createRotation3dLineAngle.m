@@ -12,15 +12,16 @@ function mat = createRotation3dLineAngle(line, theta)
 %     [axis angle2] = rotation3dAxisAndAngle(rot);
 %     angle2
 %     angle2 =
-%           1.015
+%           1.0472
 %
 %   See also
 %   transforms3d, rotation3dAxisAndAngle, rotation3dToEulerAngles,
-%   createEulerAnglesRotation
+%   eulerAnglesToRotation3d
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2010-08-11,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform.
 

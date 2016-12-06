@@ -19,12 +19,12 @@ function dist = distancePoints(p1, p2, varargin)
 %   See also:
 %   points2d, minDistancePoints, nndist, hausdorffDistance
 %
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 24/02/2004.
+
+% ------
+% Author: David Legland
+% e-mail: david.legland@nantes.inra.fr
+% Copyright 2009 INRA - Cepia Software Platform.
+% created the 24/02/2004.
 %
 
 %   HISTORY :

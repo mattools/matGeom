@@ -1,4 +1,4 @@
-function loops = polygonLoops(poly)
+function loops = polygonLoops(poly, varargin)
 %POLYGONLOOPS Divide a possibly self-intersecting polygon into a set of simple loops
 %
 %   LOOPS = polygonLoops(POLYGON);
@@ -20,15 +20,34 @@ function loops = polygonLoops(poly)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@nantes.inra.fr
 % Created: 2009-06-15,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
+
+
+% tolerance for detecting two vertices as equal
+tol = 1e-14;
+
+% parse optional arguments
+while length(varargin) > 1
+    pname = varargin{1};
+    if ~ischar(pname)
+        error('Expect optional arguments as name-value pairs');
+    end
+    
+    if strcmpi(pname, 'tolerance')
+        tol = varargin{2};
+    else
+        error(['Unknown parameter name: ' pname]);
+    end
+    varargin(1:2) = [];
+end
 
 
 %% Initialisations
 
 % compute intersections
-[inters, pos1, pos2] = polygonSelfIntersections(poly);
+[inters, pos1, pos2] = polygonSelfIntersections(poly, 'tolerance', tol);
 
 % case of a polygon without self-intersection
 if isempty(inters)
@@ -40,7 +59,7 @@ end
 loops = cell(0, 1);
 
 % sort intersection points with respect to their position on the polygon
-[positions, order] = sortrows([pos1 pos2;pos2 pos1]);
+[positions, order] = sortrows([pos1 pos2 ; pos2 pos1]);
 inters = [inters ; inters];
 inters = inters(order, :);
 
@@ -86,12 +105,12 @@ while true
     inters(ind,:) = [];
 end
 
-% add the last portion of curve
-loop = [loop;polygonSubcurve(poly, pos, pos0)];
+% append the last portion of curve
+loop = [loop ; polygonSubcurve(poly, pos, pos0)];
 
 % remove redundant vertices
 loop(sum(loop(1:end-1,:) == loop(2:end,:) ,2)==2, :) = [];
-if sum(diff(loop([1 end], :))==0)==2
+if sum(diff(loop([1 end], :)) == 0) == 2
     loop(end, :) = [];
 end
 
@@ -122,8 +141,8 @@ while ~isempty(positions)
         vertex = inters(ind, :);
         portion(end, :) = vertex;
         
-        % add the current portion of curve
-        loop = [loop; portion]; %#ok<AGROW>
+        % append the current portion of curve
+        loop = [loop ; portion]; %#ok<AGROW>
 
         % update current position on the polygon
         pos = positions(ind, 2);
@@ -140,7 +159,7 @@ while ~isempty(positions)
 
     % remove redundant vertices
     loop(sum(loop(1:end-1,:) == loop(2:end,:) ,2)==2, :) = []; %#ok<AGROW>
-    if sum(diff(loop([1 end], :))==0)==2
+    if sum(diff(loop([1 end], :))==0) == 2
         loop(end, :) = []; 
     end
 

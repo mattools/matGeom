@@ -38,9 +38,10 @@ function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)
 %   transforms3d, createRotationOx, createRotationOy, createRotationOz
 %   rotation3dAxisAndAngle
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2010-07-22,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform.
 

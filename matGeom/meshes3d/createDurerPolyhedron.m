@@ -1,8 +1,8 @@
 function varargout = createDurerPolyhedron(varargin)
 %CREATEDURERPOLYHEDRON  Create a mesh representing Durer's polyhedron 
 %
-%   [V F] = createDurerPolyhedron
-%   [V E F] = createDurerPolyhedron
+%   [V, F] = createDurerPolyhedron
+%   [V, E, F] = createDurerPolyhedron
 %   Returns a mesh data structure that represents Durer's polyhedron shown
 %   in "Melancholia". Vertices are stored in V as Nv-by-3 array of 3D
 %   coordinates, faces are stored in Nf-by-1 cell array containing the
@@ -39,7 +39,7 @@ function varargout = createDurerPolyhedron(varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2012-07-31,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 

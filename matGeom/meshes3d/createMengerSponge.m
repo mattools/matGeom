@@ -1,20 +1,21 @@
 function varargout = createMengerSponge()
 %CREATEMENGERSPONGE Create a cube with an inside cross removed
 %
-%   [n e f] = createMengerSponge;
+%   [n, e, f] = createMengerSponge;
 %   Main use is to test possibility of drawing polyhedra with complex faces
 %   (polygonal faces with holes)
 %
 %   Example
-%   [n e f] = createMengerSponge;
+%   [n, e, f] = createMengerSponge;
 %   drawMesh(n, f);
 %   
 %   See also
 %   meshes3d, drawMesh
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2007-10-18
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 
