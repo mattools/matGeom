@@ -100,13 +100,13 @@ else
             % equivalent to:
             % dist = dist + ...
             %   (repmat(p1(:,i), [1 n2])-repmat(p2(:,i)', [n1 1])).^2;
-            dist = dist + (p1(:, i*ones(1, n2))-p2(:, i*ones(n1, 1))').^2;
+            dist = dist + bsxfun (@minus, p1(:,i), p2(:, i)').^2;
         end
         dist = sqrt(dist);
     elseif norm==inf
         % infinite norm corresponds to maximal difference of coordinate
         for i = 1:d
-            dist = max(dist, abs(p1(:, i*ones(1, n2))-p2(:, i*ones(n1, 1))'));
+            dist = max(dist, abs(bsxfun (@minus, p1(:,i), p2(:, i)')));
         end
     else
         % compute distance using the specified norm.
@@ -114,7 +114,7 @@ else
             % equivalent to:
             % dist = dist + power((abs(repmat(p1(:,i), [1 n2]) - ...
             %     repmat(p2(:,i)', [n1 1]))), norm);
-            dist = dist + power((abs(p1(:, i*ones(1, n2))-p2(:, i*ones(n1, 1))')), norm);
+            dist = dist + power((abs(bsxfun (@minus, p1(:,i), p2(:, i)')), norm);
         end
         dist = power(dist, 1/norm);
     end
