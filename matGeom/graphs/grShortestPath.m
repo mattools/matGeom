@@ -159,10 +159,14 @@ edgePath = [];
 while nodeInd ~= ind0
     newNodeInd = preds(nodeInd);
     nodePath = [nodePath ; newNodeInd]; %#ok<AGROW>
-    nodeInd = newNodeInd;
-    
-    edgeInd = find(sum(ismember(edges2, [nodeInd newNodeInd]), 2) == 2); 
+
+    % search the edge (both directions) in the list of edges
+    e_tmp                 = [nideInd newNodeInd];
+    [~,edgeInd]           = ismember ([e_tmp; e_tmp(end:-1:1)], edges, 'rows');
+    edgeInd(edgeInd == 0) = []; % erase the one that isn't there
     edgePath = [edgePath ; edgeInd]; %#ok<AGROW>
+
+    nodeInd = newNodeInd;
 end
     
 % reverse the path
