@@ -69,6 +69,7 @@ d   = size(p1, 2);
 if diag
     % compute distance only for apparied couples of pixels
     dist = zeros(n1, 1);
+    
     if norm == 2
         % Compute euclidian distance. this is the default case
         % Compute difference of coordinate for each pair of point
@@ -77,11 +78,13 @@ if diag
             dist = dist + (p2(:,i)-p1(:,i)).^2;
         end
         dist = sqrt(dist);
-    elseif norm==inf
+        
+    elseif norm == inf
         % infinite norm corresponds to maximal difference of coordinate
         for i = 1:d
             dist = max(dist, abs(p2(:,i)-p1(:,i)));
         end
+        
     else
         % compute distance using the specified norm.
         for i = 1:d
@@ -92,8 +95,9 @@ if diag
 else
     % compute distance for all couples of pixels
     dist = zeros(n1, n2);
+    
     if norm == 2
-        % Compute euclidian distance. this is the default case
+        % Compute euclidian distance. This is the default case.
         % Compute difference of coordinate for each pair of point
         % and for each dimension. -> dist is a [n1*n2] array.
         for i = 1:d
@@ -103,18 +107,20 @@ else
             dist = dist + bsxfun (@minus, p1(:,i), p2(:, i)').^2;
         end
         dist = sqrt(dist);
-    elseif norm==inf
+        
+    elseif norm == inf
         % infinite norm corresponds to maximal difference of coordinate
         for i = 1:d
             dist = max(dist, abs(bsxfun (@minus, p1(:,i), p2(:, i)')));
         end
+        
     else
         % compute distance using the specified norm.
         for i = 1:d
             % equivalent to:
             % dist = dist + power((abs(repmat(p1(:,i), [1 n2]) - ...
             %     repmat(p2(:,i)', [n1 1]))), norm);
-            dist = dist + power((abs(bsxfun (@minus, p1(:,i), p2(:, i)')), norm);
+            dist = dist + power(abs(bsxfun(@minus, p1(:,i), p2(:, i)')), norm);
         end
         dist = power(dist, 1/norm);
     end
