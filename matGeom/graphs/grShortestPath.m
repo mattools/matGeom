@@ -28,7 +28,7 @@ function [nodePath, edgePath] = grShortestPath(nodes, edges, ind0, ind1, edgeWei
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2011-05-22,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
@@ -144,8 +144,6 @@ while ~isempty(unprocessedNodeInds)
 end
 
 
-
-
 %% Path creation
 
 % create the path: start from end index, and identify successive set of
@@ -161,7 +159,7 @@ while nodeInd ~= ind0
     nodePath = [nodePath ; newNodeInd]; %#ok<AGROW>
 
     % search the edge (both directions) in the list of edges
-    e_tmp                 = [nideInd newNodeInd];
+    e_tmp                 = [nodeInd newNodeInd];
     [~,edgeInd]           = ismember ([e_tmp; e_tmp(end:-1:1)], edges, 'rows');
     edgeInd(edgeInd == 0) = []; % erase the one that isn't there
     edgePath = [edgePath ; edgeInd]; %#ok<AGROW>

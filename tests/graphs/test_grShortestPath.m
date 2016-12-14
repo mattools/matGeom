@@ -1,4 +1,4 @@
-function test_suite = test_grShortestPath(varargin) %#ok<STOUT>
+function test_suite = test_grShortestPath
 %TEST_GRSHORTESTPATH  Test case for the file grShortestPath
 %
 %   Test case for the file grShortestPath
@@ -15,10 +15,9 @@ function test_suite = test_grShortestPath(varargin) %#ok<STOUT>
 % Created: 2014-01-13,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2014 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-
-function test_Simple %#ok<*DEFNU>
+function test_Simple(testCase) %#ok<*DEFNU>
 % propagate distance on a graph where a branch has smaller nodes but larger
 % cumulated distance
 
@@ -30,4 +29,4 @@ l0 = [2 5 2 2 2 5]';
 path = grShortestPath(n0, e0, 1, 5, l0);
 
 expPath = [1 2 3 4 5]';
-assertElementsAlmostEqual(expPath, path);
+testCase.assertEqual(expPath, path, 'AbsTol', .01);

@@ -1,4 +1,4 @@
-function test_suite = test_graphPeripheralVertices(varargin) %#ok<STOUT>
+function test_suite = test_graphPeripheralVertices
 %TEST_GRAPHPERIPHERALVERTICES  One-line description here, please.
 %
 %   output = test_graphPeripheralVertices(input)
@@ -16,13 +16,13 @@ function test_suite = test_graphPeripheralVertices(varargin) %#ok<STOUT>
 % Copyright 2011 INRA - Cepia Software Platform.
 
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testGraph02 %#ok<*DEFNU>
+function testGraph02(testCase) %#ok<*DEFNU>
 
 [nodes, edges] = createTestGraph02;
 verts = graphPeripheralVertices(nodes, edges);
 
 exp = [1;2;11;12];
-assertEqual(exp, verts);
+testCase.assertEqual(exp, verts);
 

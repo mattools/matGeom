@@ -1,4 +1,4 @@
-function test_suite = test_graphCenter(varargin) %#ok<STOUT>
+function test_suite = test_graphCenter
 %TEST_GRAPHCENTER  One-line description here, please.
 %
 %   output = test_graphCenter(input)
@@ -15,14 +15,13 @@ function test_suite = test_graphCenter(varargin) %#ok<STOUT>
 % Created: 2011-05-19,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
+test_suite = functiontests(localfunctions); 
 
-initTestSuite;
-
-function testGraph02 %#ok<*DEFNU>
+function testGraph02(testCase) %#ok<*DEFNU>
 
 [nodes, edges] = createTestGraph02;
 center = graphCenter(nodes, edges);
 
 exp = [6;7];
-assertEqual(exp, center);
+testCase.assertEqual(exp, center);
 

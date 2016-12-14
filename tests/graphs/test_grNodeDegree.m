@@ -1,4 +1,4 @@
-function test_suite = test_grNodeDegree(varargin) %#ok<STOUT>
+function test_suite = test_grNodeDegree
 %TEST_GRNODEDEGREE  test suite for function grNodeDegree
 %
 %   output = test_grNodeDegree(input)
@@ -16,21 +16,21 @@ function test_suite = test_grNodeDegree(varargin) %#ok<STOUT>
 % Copyright 2011 INRA - Cepia Software Platform.
 
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testSimpleNode %#ok<*DEFNU>
+function testSimpleNode(testCase) %#ok<*DEFNU>
 
 [nodes, edges] = createTestGraph01(); %#ok<ASGLU>
 
 deg1 = grNodeDegree(1, edges);
-assertEqual(3, deg1);
+testCase.assertEqual(3, deg1);
 
 
-function testAllNodes
+function testAllNodes(testCase)
 
 [nodes, edges] = createTestGraph01(); %#ok<ASGLU>
 
 deg = grNodeDegree(1:8, edges);
 exp = [3 3 2 2 4 2 3 1];
-assertEqual(exp, deg);
+testCase.assertEqual(exp, deg);
 
