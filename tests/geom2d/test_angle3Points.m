@@ -1,4 +1,4 @@
-function test_suite = test_angle3Points(varargin) %#ok<STOUT>
+function test_suite = test_angle3Points
 % One-line description here, please.
 %   output = testAngle3Points(input)
 %
@@ -14,28 +14,28 @@ function test_suite = test_angle3Points(varargin) %#ok<STOUT>
 % Created: 2009-04-22,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions);
 
-function testSimple %#ok<*DEFNU>
+function testSimple(testCase) %#ok<*DEFNU>
 % all points inside window, possibly touching edges
 
 p1 = [10 0];
 p2 = [0 0];
 p3 = [0 10];
 angle = angle3Points(p1, p2, p3);
-assertElementsAlmostEqual(pi/2, angle);
+testCase.assertEqual(pi/2, angle, 'AbsTol', .01);
 
 
-function testBundledInput
+function testBundledInput(testCase)
 % all points inside window, possibly touching edges
 
 p1 = [10 0];
 p2 = [0 0];
 p3 = [0 10];
 angle = angle3Points([p1; p2; p3]);
-assertElementsAlmostEqual(pi/2, angle);
+testCase.assertEqual(pi/2, angle, 'AbsTol', .01);
 
-function testArray
+function testArray(testCase)
 % all points inside window, possibly touching edges
 
 p1 = [10 0; 20 0];
@@ -43,6 +43,6 @@ p2 = [0 0;0 0];
 p3 = [0 10; 0 20];
 angle = angle3Points(p1, p2, p3);
 
-assertEqual(2, size(angle, 1));
-assertElementsAlmostEqual([pi/2;pi/2], angle);
+testCase.assertEqual(2, size(angle, 1));
+testCase.assertEqual([pi/2;pi/2], angle, 'AbsTol', .01);
 

@@ -1,4 +1,4 @@
-function test_suite = test_angleDiff(varargin) %#ok<STOUT>
+function test_suite = test_angleDiff
 %TEST_ANGLEDIFF  Test case for the file angleDiff
 %
 %   Test case for the file angleDiff
@@ -15,20 +15,20 @@ function test_suite = test_angleDiff(varargin) %#ok<STOUT>
 % Created: 2011-07-27,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions);
 
-function test_Simple %#ok<*DEFNU>
+function test_Simple(testCase) %#ok<*DEFNU>
 % simple tests
 
 
 dif = angleDiff(0, pi/2);
-assertElementsAlmostEqual(pi/2, dif);
+testCase.assertEqual(pi/2, dif, 'AbsTol', .01);
 
 dif = angleDiff(pi/2, 0);
-assertElementsAlmostEqual(-pi/2, dif);
+testCase.assertEqual(-pi/2, dif, 'AbsTol', .01);
 
 dif = angleDiff(0, 3*pi/2);
-assertElementsAlmostEqual(-pi/2, dif);
+testCase.assertEqual(-pi/2, dif, 'AbsTol', .01);
 
 dif = angleDiff(3*pi/2, 0);
-assertElementsAlmostEqual(pi/2, dif);
+testCase.assertEqual(pi/2, dif, 'AbsTol', .01);

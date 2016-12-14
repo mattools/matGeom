@@ -1,4 +1,4 @@
-function test_suite = test_centroid(varargin) %#ok<STOUT>
+function test_suite = test_centroid
 %TESTCLIPLINE  One-line description here, please.
 %   output = testCentroid(input)
 %
@@ -14,34 +14,34 @@ function test_suite = test_centroid(varargin) %#ok<STOUT>
 % Created: 2009-04-22,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions);
 
-function testSquareCentroid %#ok<*DEFNU>
+function testSquareCentroid(testCase) %#ok<*DEFNU>
 % Centroid of 4 points
 
 points = [0 0;10 0;10 10;0 10];
 centro = centroid(points);
-assertElementsAlmostEqual([5 5], centro);
+testCase.assertEqual([5 5], centro, 'AbsTol', .01);
 
-function testSquareCentroidSeparateCoords
+function testSquareCentroidSeparateCoords(testCase)
 % Centroid of 4 points
 
 points = [0 0;10 0;10 10;0 10];
 centro = centroid(points(:,1), points(:,2));
-assertElementsAlmostEqual([5 5], centro);
+testCase.assertEqual([5 5], centro, 'AbsTol', .01);
 
-function testSquareWeightedCentroid
+function testSquareWeightedCentroid(testCase)
 % Centroid of 4 points
 
 points = [0 0;30 0;30 30;0 30];
 centro = centroid(points, [1;1;1;3]);
-assertElementsAlmostEqual([10 20], centro);
+testCase.assertEqual([10 20], centro, 'AbsTol', .01);
 
 
-function testSquareWeightedCentroidSeparateCoords
+function testSquareWeightedCentroidSeparateCoords(testCase)
 % Centroid of 4 points
 
 points = [0 0;30 0;30 30;0 30];
 centro = centroid(points(:,1), points(:,2), [1;1;1;3]);
-assertElementsAlmostEqual([10 20], centro);
+testCase.assertEqual([10 20], centro, 'AbsTol', .01);
 

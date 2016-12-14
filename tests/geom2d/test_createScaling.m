@@ -1,4 +1,4 @@
-function test_suite = test_createScaling(varargin) %#ok<STOUT>
+function test_suite = test_createScaling
 %TESTCREATESCALING  One-line description here, please.
 %   output = testCreateScaling(input)
 %
@@ -15,23 +15,23 @@ function test_suite = test_createScaling(varargin) %#ok<STOUT>
 % Copyright 2009 INRA - Cepia Software Platform.
 % Licensed under the terms of the LGPL, see the file "license.txt"
 
-initTestSuite;
+test_suite = functiontests(localfunctions);
 
-function testCentered %#ok<*DEFNU>
+function testCentered(testCase) %#ok<*DEFNU>
 
 % same coeff for both x and y
 trans = createScaling(2);
-assertElementsAlmostEqual(trans, [2 0 0;0 2 0;0 0 1]);
+testCase.assertEqual(trans, [2 0 0;0 2 0;0 0 1], 'AbsTol', .01);
 
 % different factor
 trans = createScaling(2, 3);
-assertElementsAlmostEqual(trans, [2 0 0;0 3 0;0 0 1]);
+testCase.assertEqual(trans, [2 0 0;0 3 0;0 0 1], 'AbsTol', .01);
 
 % different factor
 trans = createScaling([2 3]);
-assertElementsAlmostEqual(trans, [2 0 0;0 3 0;0 0 1]);
+testCase.assertEqual(trans, [2 0 0;0 3 0;0 0 1], 'AbsTol', .01);
 
-function testShifted
+function testShifted(testCase)
 
 sx = 2;
 sy = 3;
@@ -43,4 +43,4 @@ sca = createScaling(sx, sy);
 t2 = createTranslation(p0);
 trans2 = t2*sca*t1;
 
-assertElementsAlmostEqual(trans1, trans2);
+testCase.assertEqual(trans1, trans2, 'AbsTol', .01);

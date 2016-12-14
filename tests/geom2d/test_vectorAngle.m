@@ -1,4 +1,4 @@
-function test_suite = test_vectorAngle(varargin) %#ok<STOUT>
+function test_suite = test_vectorAngle
 % One-line description here, please.
 %   output = testVectorAngle(input)
 %
@@ -14,101 +14,101 @@ function test_suite = test_vectorAngle(varargin) %#ok<STOUT>
 % Created: 2009-04-22,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testSingle %#ok<*DEFNU>
+function testSingle(testCase) %#ok<*DEFNU>
 
 ang = vectorAngle([1 0]);
-assertElementsAlmostEqual(0, ang);
+testCase.assertEqual(0, ang, 'AbsTol', .01);
 
 ang = vectorAngle([0 1]);
-assertElementsAlmostEqual(pi/2, ang);
+testCase.assertEqual(pi/2, ang, 'AbsTol', .01);
 
 ang = vectorAngle([-1 0]);
-assertElementsAlmostEqual(pi, ang);
+testCase.assertEqual(pi, ang, 'AbsTol', .01);
 
 ang = vectorAngle([0 -1]);
-assertElementsAlmostEqual(3*pi/2, ang);
+testCase.assertEqual(3*pi/2, ang, 'AbsTol', .01);
 
 ang = vectorAngle([-1 1]);
-assertElementsAlmostEqual(3*pi/4, ang);
+testCase.assertEqual(3*pi/4, ang, 'AbsTol', .01);
 
-function testSinglePiCentered 
+function testSinglePiCentered(testCase)
 
 ang = vectorAngle([1 0], pi);
-assertElementsAlmostEqual(0, ang);
+testCase.assertEqual(0, ang, 'AbsTol', .01);
 
 ang = vectorAngle([0 1], pi);
-assertElementsAlmostEqual(pi/2, ang);
+testCase.assertEqual(pi/2, ang, 'AbsTol', .01);
 
 ang = vectorAngle([-1 0], pi);
-assertElementsAlmostEqual(pi, ang);
+testCase.assertEqual(pi, ang, 'AbsTol', .01);
 
 ang = vectorAngle([0 -1], pi);
-assertElementsAlmostEqual(3*pi/2, ang);
+testCase.assertEqual(3*pi/2, ang, 'AbsTol', .01);
 
 ang = vectorAngle([-1 1], pi);
-assertElementsAlmostEqual(3*pi/4, ang);
+testCase.assertEqual(3*pi/4, ang, 'AbsTol', .01);
 
 
-function testArray
-
-vecs = [1 0;0 1;-1 0;0 -1;1 1];
-angs = [0;pi/2;pi;3*pi/2;pi/4];
-assertElementsAlmostEqual(angs, vectorAngle(vecs));
-
-function testArrayPiCentered
+function testArray(testCase)
 
 vecs = [1 0;0 1;-1 0;0 -1;1 1];
 angs = [0;pi/2;pi;3*pi/2;pi/4];
-assertElementsAlmostEqual(angs, vectorAngle(vecs, pi));
+testCase.assertEqual(angs, vectorAngle(vecs), 'AbsTol', .01);
 
-function testSingleZeroCentered
+function testArrayPiCentered(testCase)
+
+vecs = [1 0;0 1;-1 0;0 -1;1 1];
+angs = [0;pi/2;pi;3*pi/2;pi/4];
+testCase.assertEqual(angs, vectorAngle(vecs, pi), 'AbsTol', .01);
+
+function testSingleZeroCentered(testCase)
 
 ang = vectorAngle([1 0], 0);
-assertElementsAlmostEqual(0, ang);
+testCase.assertEqual(0, ang, 'AbsTol', .01);
 
 ang = vectorAngle([0 1], 0);
-assertElementsAlmostEqual(pi/2, ang);
+testCase.assertEqual(pi/2, ang, 'AbsTol', .01);
 
 ang = vectorAngle([0 -1], 0);
-assertElementsAlmostEqual(-pi/2, ang);
+testCase.assertEqual(-pi/2, ang, 'AbsTol', .01);
 
 ang = vectorAngle([-1 1], 0);
-assertElementsAlmostEqual(3*pi/4, ang);
+testCase.assertEqual(3*pi/4, ang, 'AbsTol', .01);
 
-function testArrayZeroCentered
+function testArrayZeroCentered(testCase)
 
 vecs = [1 0;0 1;0 -1;1 1;1 -1];
 angs = [0;pi/2;-pi/2;pi/4;-pi/4];
-assertElementsAlmostEqual(angs, vectorAngle(vecs, 0));
+testCase.assertEqual(angs, vectorAngle(vecs, 0), 'AbsTol', .01);
 
-function testCoupleSingleSingle
+function testCoupleSingleSingle(testCase)
 
 v1 = [1 0];
 v2 = [0 1];
 ang = pi /2 ;
-assertElementsAlmostEqual(ang, vectorAngle(v1, v2));
+testCase.assertEqual(ang, vectorAngle(v1, v2), 'AbsTol', .01);
 
-function testCoupleSingleArray
+function testCoupleSingleArray(testCase)
 
 v1 = [1 0];
 v2 = [0 1; 0 1; 1 1; -1 1];
 ang = [pi / 2 ;pi / 2 ;pi / 4 ; 3 * pi / 4];
-assertElementsAlmostEqual(ang, vectorAngle(v1, v2));
+testCase.assertEqual(ang, vectorAngle(v1, v2), 'AbsTol', .01);
 
 
-function testCoupleArraySingle
+function testCoupleArraySingle(testCase)
 
 v1 = [0 1; 0 1; 1 1; -1 1];
 v2 = [-1 0];
 ang = [pi / 2 ;pi / 2 ; 3 * pi / 4 ; pi / 4];
-assertElementsAlmostEqual(ang, vectorAngle(v1, v2));
+testCase.assertEqual(ang, vectorAngle(v1, v2), 'AbsTol', .01);
 
 
-function testCoupleArrayArray
+function testCoupleArrayArray(testCase)
 
 v1 = [1 0; 0 1; 1 1; -1 1];
 v2 = [0 1; 1 0; -1 1; -1 0];
 ang = [pi / 2 ;3 * pi / 2 ;pi / 2 ; pi / 4];
-assertElementsAlmostEqual(ang, vectorAngle(v1, v2));
+testCase.assertEqual(ang, vectorAngle(v1, v2), 'AbsTol', .01);

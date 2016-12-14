@@ -1,4 +1,4 @@
-function test_suite = test_drawRect(varargin) %#ok<STOUT>
+function test_suite = test_drawRect 
 %TESTDRAWRECT  One-line description here, please.
 %   output = testDrawRect(input)
 %
@@ -14,9 +14,9 @@ function test_suite = test_drawRect(varargin) %#ok<STOUT>
 % Created: 2010-05-19,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions);
 
-function testSimple %#ok<*DEFNU>
+function testSimple(testCase) %#ok<*DEFNU>
 
 x0 = 20;
 y0 = 30;
@@ -28,7 +28,7 @@ figure(hf); clf;
 hr = drawRect([x0 y0 w h]);
 xth = [x0 x0+w x0+w x0 x0];
 yth = [y0 y0 y0+h y0+h y0];
-assertElementsAlmostEqual(xth, get(hr, 'XData'));
-assertElementsAlmostEqual(yth, get(hr, 'YData'));
+testCase.assertEqual(xth, get(hr, 'XData'), 'AbsTol', .01);
+testCase.assertEqual(yth, get(hr, 'YData'), 'AbsTol', .01);
 
 close(hf);

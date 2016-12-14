@@ -1,4 +1,4 @@
-function test_suite = test_clipRay(varargin) %#ok<STOUT>
+function test_suite = test_clipRay
 % Tests the function 'clipRay'
 %   output = testClipRay(input)
 %
@@ -15,9 +15,9 @@ function test_suite = test_clipRay(varargin) %#ok<STOUT>
 % Copyright 2009 INRA - Cepia Software Platform.
 % Licensed under the terms of the LGPL, see the file "license.txt"
 
-initTestSuite;
+test_suite = functiontests(localfunctions);
 
-function testRightSide %#ok<*DEFNU>
+function testRightSide(testCase) %#ok<*DEFNU>
 % test edges totally inside window, possibly touching edges
 
 % a basic bounding box
@@ -28,21 +28,21 @@ origin      = [30 40];
 direction   = [10 0];
 ray         = [origin direction];
 expected    = [30 40 100 40];
-assertElementsAlmostEqual(expected, clipRay(ray, box));
+testCase.assertEqual(expected, clipRay(ray, box), 'AbsTol', .01);
 
 % outside
 origin      = [30 140];
 direction   = [10 0];
 ray         = [origin direction];
-assertTrue(sum(isnan(clipRay(ray, box)))==4);
+testCase.assertTrue(sum(isnan(clipRay(ray, box)))==4);
 
 % line inside, but ray outside
 origin      = [130 40];
 direction   = [10 0];
 ray         = [origin direction];
-assertTrue(sum(isnan(clipRay(ray, box)))==4);
+testCase.assertTrue(sum(isnan(clipRay(ray, box)))==4);
 
-function testLeftSide
+function testLeftSide(testCase)
 % test edges totally inside window, possibly touching edges
 
 % a basic bounding box
@@ -53,22 +53,22 @@ origin      = [30 40];
 direction   = [-10 0];
 ray         = [origin direction];
 expected    = [30 40 0 40];
-assertElementsAlmostEqual(expected, clipRay(ray, box));
+testCase.assertEqual(expected, clipRay(ray, box), 'AbsTol', .01);
 
 % outside
 origin      = [30 140];
 direction   = [-10 0];
 ray         = [origin direction];
-assertTrue(sum(isnan(clipRay(ray, box)))==4);
+testCase.assertTrue(sum(isnan(clipRay(ray, box)))==4);
 
 % line inside, but ray outside
 origin      = [-30 40];
 direction   = [-10 0];
 ray         = [origin direction];
-assertTrue(sum(isnan(clipRay(ray, box)))==4);
+testCase.assertTrue(sum(isnan(clipRay(ray, box)))==4);
 
 
-function testUpSide
+function testUpSide(testCase)
 % test edges totally inside window, possibly touching edges
 
 box = [0 100 0 100];
@@ -78,22 +78,22 @@ origin      = [30 40];
 direction   = [0 10];
 ray         = [origin direction];
 expected    = [30 40 30 100];
-assertElementsAlmostEqual(expected, clipRay(ray, box));
+testCase.assertEqual(expected, clipRay(ray, box), 'AbsTol', .01);
 
 % outside
 origin      = [130 40];
 direction   = [0 10];
 ray         = [origin direction];
-assertTrue(sum(isnan(clipRay(ray, box)))==4);
+testCase.assertTrue(sum(isnan(clipRay(ray, box)))==4);
 
 % line inside, but ray outside
 origin      = [30 140];
 direction   = [0 10];
 ray         = [origin direction];
-assertTrue(sum(isnan(clipRay(ray, box)))==4);
+testCase.assertTrue(sum(isnan(clipRay(ray, box)))==4);
 
 
-function testDownSide
+function testDownSide(testCase)
 % test edges totally inside window, possibly touching edges
 
 box = [0 100 0 100];
@@ -103,22 +103,22 @@ origin      = [30 40];
 direction   = [0 -10];
 ray         = [origin direction];
 expected    = [30 40 30 0];
-assertElementsAlmostEqual(expected, clipRay(ray, box));
+testCase.assertEqual(expected, clipRay(ray, box), 'AbsTol', .01);
 
 % outside
 origin      = [130 40];
 direction   = [0 -10];
 ray         = [origin direction];
-assertTrue(sum(isnan(clipRay(ray, box)))==4);
+testCase.assertTrue(sum(isnan(clipRay(ray, box)))==4);
 
 % line inside, but ray outside
 origin      = [30 -40];
 direction   = [0 -10];
 ray         = [origin direction];
-assertTrue(sum(isnan(clipRay(ray, box)))==4);
+testCase.assertTrue(sum(isnan(clipRay(ray, box)))==4);
 
 
-function testArray
+function testArray(testCase)
 % test with an array of rays and a box
 
 box = [0 100 0 100];
@@ -128,4 +128,4 @@ directions  = [10 0;0 10;10 0;0 10];
 rays        = [origins directions];
 expected    = [30 40 100 40;30 40 30 100;NaN NaN NaN NaN;NaN NaN NaN NaN];
 clipped     = clipRay(rays, box);
-assertElementsAlmostEqual(expected, clipped);
+testCase.assertEqual(expected, clipped, 'AbsTol', .01);

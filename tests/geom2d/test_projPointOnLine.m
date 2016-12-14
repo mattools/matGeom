@@ -1,4 +1,4 @@
-function test_suite = test_projPointOnLine(varargin) %#ok<STOUT>
+function test_suite = test_projPointOnLine
 %TESTPROJPOINTONLINE  One-line description here, please.
 %   output = testProjPointOnLine(input)
 %
@@ -14,29 +14,29 @@ function test_suite = test_projPointOnLine(varargin) %#ok<STOUT>
 % Created: 2009-04-22,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testHorizontal %#ok<*DEFNU>
+function testHorizontal(testCase) %#ok<*DEFNU>
 point = [0 0];
 line = [1 0 0 1];
-assertElementsAlmostEqual(projPointOnLine(point, line), [1 0]);
+testCase.assertEqual(projPointOnLine(point, line), [1 0], 'AbsTol', .01);
 
-function testDiagonal
+function testDiagonal(testCase)
 point = [0 0];
 line = [2 0 1 1];
-assertElementsAlmostEqual(projPointOnLine(point, line), [1 -1], 'absolute', 1e-14);
+testCase.assertEqual(projPointOnLine(point, line), [1 -1], 'AbsTol', .01);
 
-function testBigDerivative
+function testBigDerivative(testCase)
 point = [0 0];
 line = [2 0 1000 1000];
-assertElementsAlmostEqual(projPointOnLine(point, line), [1 -1], 'absolute', 1e-14);
+testCase.assertEqual(projPointOnLine(point, line), [1 -1], 'AbsTol', .01);
 
-function testDiagonal2
+function testDiagonal2(testCase)
 point = [2 3];
 line = [-2 -4 6 4];
-assertElementsAlmostEqual(projPointOnLine(point, line), [4 0], 'absolute', 1e-14);
+testCase.assertEqual(projPointOnLine(point, line), [4 0], 'AbsTol', .01);
 
-function test_SingleMulti
+function test_SingleMulti(testCase)
 
 point = [4 2];
 line1 = [0 0 1 0];
@@ -45,9 +45,9 @@ line3 = [0 2 2 2];
 
 res = projPointOnLine(point, [line1;line2;line3]);
 exp = [4 0;0 2;2 4];
-assertElementsAlmostEqual(exp, res);
+testCase.assertEqual(exp, res, 'AbsTol', .01);
 
-function test_MultiSingle
+function test_MultiSingle(testCase)
 
 line = [0 2 4 2];
 p1 = [3 1];
@@ -56,9 +56,9 @@ p3 = [3 6];
 
 res = projPointOnLine([p1;p2;p3], line);
 exp = [2 3;4 4;4 4];
-assertElementsAlmostEqual(exp, res);
+testCase.assertEqual(exp, res, 'AbsTol', .01);
 
-function test_MultiMulti
+function test_MultiMulti(testCase)
 
 line1 = [0 0 1 0];
 line2 = [0 0 0 1];
@@ -68,4 +68,4 @@ p2 = [2 3];
 p3 = [1 5];
 res = projPointOnLine([p1;p2;p3], [line1;line2;line3]);
 exp = [3 0;0 3;2 4];
-assertElementsAlmostEqual(exp, res);
+testCase.assertEqual(exp, res, 'AbsTol', .01);
