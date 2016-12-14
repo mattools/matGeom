@@ -1,4 +1,4 @@
-function test_suite = test_transformPoint3d(varargin) %#ok<STOUT>
+function test_suite = test_transformPoint3d
 %Check transformation of points
 %   output = testTransformPoint3d(input)
 %
@@ -14,19 +14,19 @@ function test_suite = test_transformPoint3d(varargin) %#ok<STOUT>
 % Created: 2009-06-19,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testTranslation %#ok<*DEFNU>
+function testTranslation(testCase) %#ok<*DEFNU>
 p0 = [1 2 3];
 v  = [4 5 6];
 trans = createTranslation3d(v);
 
 pt = transformPoint3d(p0, trans);
 ctrl = p0 + v;
-assertElementsAlmostEqual(ctrl, pt);
+testCase.assertEqual(ctrl, pt, 'AbsTol', .01);
 
 
-function testTranslationOnArray
+function testTranslationOnArray(testCase)
 p0 = [1 2 3;10 20 30;10 20 30];
 
 v  = [4 5 6];
@@ -35,15 +35,14 @@ trans = createTranslation3d(v);
 pt = transformPoint3d(p0, trans);
 ctrl = p0 + repmat(v, 3, 1);
 
-assertElementsAlmostEqual(ctrl, pt);
+testCase.assertEqual(ctrl, pt, 'AbsTol', .01);
 
 
-
-function testRotationOx
+function testRotationOx(testCase)
 p0 = [10 20 30];
 trans = createRotationOx([10 10 10], pi/2);
 
 pt = transformPoint3d(p0, trans);
 ctrl = [10 -10 20];
-assertElementsAlmostEqual(ctrl, pt);
+testCase.assertEqual(ctrl, pt, 'AbsTol', .01);
 

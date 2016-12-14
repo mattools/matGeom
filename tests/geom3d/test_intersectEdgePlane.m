@@ -1,4 +1,4 @@
-function test_suite = test_intersectEdgePlane(varargin) %#ok<STOUT>
+function test_suite = test_intersectEdgePlane
 %TESTINTERSECTEDGEPLANE  One-line description here, please.
 %
 %   output = testIntersectEdgePlane(input)
@@ -15,9 +15,9 @@ function test_suite = test_intersectEdgePlane(varargin) %#ok<STOUT>
 % Created: 2011-06-17,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testOx %#ok<*DEFNU>
+function testOx(testCase) %#ok<*DEFNU>
 % edge in direction (1,0,0), plane orthogonal
 
 edge = [10 10 10 10+20 10 10];
@@ -26,10 +26,10 @@ plane = createPlane([20 0 0], [20 50 20], [20 0 40]);
 exp = [20 10 10];
 inter = intersectEdgePlane(edge, plane);
 
-assertEqual(exp, inter);
+testCase.assertEqual(exp, inter);
 
 
-function testOxParallel
+function testOxParallel(testCase)
 % edge in direction (1,0,0), plane orthogonal
 
 edge = [10 10 10 10+50 10 10];
@@ -38,10 +38,10 @@ plane = createPlane([0 0 0], [0 20 0], [0 0 20]);
 exp = [NaN NaN NaN];
 inter = intersectEdgePlane(edge, plane);
 
-assertEqual(exp, inter);
+testCase.assertEqual(exp, inter);
 
 
-function testOxPass
+function testOxPass(testCase)
 % edge in direction (1,0,0), plane orthogonal
 
 edge = [10+20 10 10 10+50 10 10];
@@ -50,10 +50,10 @@ plane = createPlane([20 0 0], [20 50 20], [20 0 40]);
 exp = [NaN NaN NaN];
 inter = intersectEdgePlane(edge, plane);
 
-assertEqual(exp, inter);
+testCase.assertEqual(exp, inter);
 
 
-function testOy
+function testOy(testCase)
 % edge in direction (0,1,0), plane orthogonal
 
 edge = [10 10 10 10 10+20 10];
@@ -62,10 +62,10 @@ plane = createPlane([0 20 0], [50 20 20], [0 20 40]);
 exp = [10 20 10];
 inter = intersectEdgePlane(edge, plane);
 
-assertEqual(exp, inter);
+testCase.assertEqual(exp, inter);
 
 
-function testOz
+function testOz(testCase)
 % edge in direction (0,0,1), plane orthogonal
 
 edge = [10 10 10 10 10 10+20];
@@ -74,10 +74,10 @@ plane = createPlane([0 0 20], [50 20 20], [0 40 20]);
 exp = [10 10 20];
 inter = intersectEdgePlane(edge, plane);
 
-assertEqual(exp, inter);
+testCase.assertEqual(exp, inter);
 
 
-function testSingleArray
+function testSingleArray(testCase)
 
 edge = [10 10 10 10+20 10 10];
 plane = createPlane([20 0 0], [20 50 20], [20 0 40]);
@@ -85,10 +85,10 @@ plane = createPlane([20 0 0], [20 50 20], [20 0 40]);
 exp = repmat([20 10 10], 3, 1);
 inter = intersectEdgePlane(edge, repmat(plane, 3, 1));
 
-assertEqual(exp, inter);
+testCase.assertEqual(exp, inter);
 
 
-function testArraySingle
+function testArraySingle(testCase)
 
 edge = [10 10 10 10+20 10 10];
 plane = createPlane([20 0 0], [20 50 20], [20 0 40]);
@@ -96,10 +96,10 @@ plane = createPlane([20 0 0], [20 50 20], [20 0 40]);
 exp = repmat([20 10 10], 3, 1);
 inter = intersectEdgePlane(repmat(edge, 3, 1), plane);
 
-assertEqual(exp, inter);
+testCase.assertEqual(exp, inter);
 
 
-function testArrayArray
+function testArrayArray(testCase)
 
 edge = [10 10 10 10+20 10 10];
 plane = createPlane([20 0 0], [20 50 20], [20 0 40]);
@@ -107,4 +107,4 @@ plane = createPlane([20 0 0], [20 50 20], [20 0 40]);
 exp = repmat([20 10 10], 3, 1);
 inter = intersectEdgePlane(repmat(edge, 3, 1), repmat(plane, 3, 1));
 
-assertEqual(exp, inter);
+testCase.assertEqual(exp, inter);

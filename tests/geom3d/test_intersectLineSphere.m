@@ -1,4 +1,4 @@
-function varargout = test_intersectLineSphere(varargin) %#ok<STOUT>
+function test_suite = test_intersectLineSphere
 %TESTINTERSECTLINESPHERE  One-line description here, please.
 %
 %   output = testIntersectLineSphere(input)
@@ -15,9 +15,9 @@ function varargout = test_intersectLineSphere(varargin) %#ok<STOUT>
 % Created: 2011-06-21,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testOx %#ok<*DEFNU>
+function testOx(testCase) %#ok<*DEFNU>
 
 center = [10 20 30];
 radius = 50;
@@ -29,10 +29,10 @@ inter = intersectLineSphere(line, [center radius]);
 exp = [...
     center(1)-radius center(2) center(3); ... 
     center(1)+radius center(2) center(3)];
-assertElementsAlmostEqual(exp, inter);
+testCase.assertEqual(exp, inter, 'AbsTol', .01);
 
 
-function testOy
+function testOy(testCase)
 
 center = [10 20 30];
 radius = 50;
@@ -44,10 +44,10 @@ inter = intersectLineSphere(line, [center radius]);
 exp = [...
     center(1) center(2)-radius center(3); ... 
     center(1) center(2)+radius center(3)];
-assertElementsAlmostEqual(exp, inter);
+testCase.assertEqual(exp, inter, 'AbsTol', .01);
 
 
-function testOz
+function testOz(testCase)
 
 center = [10 20 30];
 radius = 50;
@@ -59,10 +59,10 @@ inter = intersectLineSphere(line, [center radius]);
 exp = [...
     center(1) center(2) center(3)-radius; ... 
     center(1) center(2) center(3)+radius];
-assertElementsAlmostEqual(exp, inter);
+testCase.assertEqual(exp, inter, 'AbsTol', .01);
 
 
-function testMultiLine
+function testMultiLine(testCase)
 
 center = [10 20 30];
 radius = 50;

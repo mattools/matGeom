@@ -1,4 +1,4 @@
-function test_suite = test_transformLine3d(varargin) %#ok<STOUT>
+function test_suite = test_transformLine3d
 %Check transformation of 3Dlines
 %   output = testTransformLine3d(input)
 %
@@ -14,9 +14,9 @@ function test_suite = test_transformLine3d(varargin) %#ok<STOUT>
 % Created: 2009-06-19,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testTranslation %#ok<*DEFNU>
+function testTranslation(testCase) %#ok<*DEFNU>
 p0 = [1 2 3];
 v0 = [4 5 6];
 line = [p0 v0];
@@ -26,10 +26,10 @@ trans   = createTranslation3d(shift);
 
 linet   = transformLine3d(line, trans);
 ctrl    = [p0+shift v0];
-assertElementsAlmostEqual(ctrl, linet);
+testCase.assertEqual(ctrl, linet, 'AbsTol', .01);
 
 
-function testRotationOx
+function testRotationOx(testCase)
 p1 = [1 2 3];
 p2 = [4 5 6];
 line = createLine3d(p1, p2);
@@ -42,5 +42,5 @@ p1t     = transformPoint3d(p1, trans);
 p2t     = transformPoint3d(p2, trans);
 ctrl    = createLine3d(p1t, p2t);
 
-assertElementsAlmostEqual(ctrl, linet);
+testCase.assertEqual(ctrl, linet, 'AbsTol', .01);
 

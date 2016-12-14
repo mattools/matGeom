@@ -1,4 +1,4 @@
-function varargout = test_intersectPlaneSphere(varargin) %#ok<STOUT>
+function test_suite = test_intersectPlaneSphere
 %TESTINTERSECTPLANESPHERE  One-line description here, please.
 %
 %   output = testIntersectPlaneSphere(input)
@@ -15,9 +15,9 @@ function varargout = test_intersectPlaneSphere(varargin) %#ok<STOUT>
 % Created: 2011-06-21,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testOx %#ok<*DEFNU>
+function testOx(testCase) %#ok<*DEFNU>
 % Plane normal to direction [1 0 0]
 
 center = [10 20 30];
@@ -29,10 +29,10 @@ plane = createPlane(center, [6 0 0]);
 circle = intersectPlaneSphere(plane, sphere);
 
 exp = [center radius 90 0 0];
-assertElementsAlmostEqual(exp, circle);
+testCase.assertEqual(exp, circle);
 
 
-function testOxShifted
+function testOxShifted(testCase)
 % Plane normal to direction [1 0 0]
 
 center = [10 20 30];
@@ -46,10 +46,10 @@ circle = intersectPlaneSphere(plane, sphere);
 
 radius2 = radius * sqrt(3) / 2;
 exp = [center2 radius2 90 0 0];
-assertElementsAlmostEqual(exp, circle);
+testCase.assertEqual(exp, circle);
 
 
-function testOy
+function testOy(testCase)
 % Plane normal to direction [0 1 0]
 
 center = [10 20 30];
@@ -61,10 +61,10 @@ plane = createPlane(center, [0 6 0]);
 circle = intersectPlaneSphere(plane, sphere);
 
 exp = [center radius 90 90 0];
-assertElementsAlmostEqual(exp, circle);
+testCase.assertEqual(exp, circle, 'AbsTol', .01);
 
 
-function testOyShifted
+function testOyShifted(testCase)
 % Plane normal to direction [0 1 0]
 
 center = [10 20 30];
@@ -78,10 +78,10 @@ circle = intersectPlaneSphere(plane, sphere);
 
 radius2 = radius * sqrt(3) / 2;
 exp = [center2 radius2 90 90 0];
-assertElementsAlmostEqual(exp, circle);
+testCase.assertEqual(exp, circle, 'AbsTol', .01);
 
 
-function testOz
+function testOz(testCase)
 % Plane normal to direction [0 1 0]
 
 center = [10 20 30];
@@ -93,10 +93,10 @@ plane = createPlane(center, [0 0 6]);
 circle = intersectPlaneSphere(plane, sphere);
 
 exp = [center radius 0 0 0];
-assertElementsAlmostEqual(exp, circle);
+testCase.assertEqual(exp, circle, 'AbsTol', .01);
 
 
-function testOzShifted
+function testOzShifted(testCase)
 % Plane normal to direction [0 0 1]
 
 center = [10 20 30];
@@ -110,5 +110,5 @@ circle = intersectPlaneSphere(plane, sphere);
 
 radius2 = radius * sqrt(3) / 2;
 exp = [center2 radius2 0 0 0];
-assertElementsAlmostEqual(exp, circle);
+testCase.assertEqual(exp, circle, 'AbsTol', .01);
 

@@ -1,4 +1,4 @@
-function test_suite = test_linePosition3d(varargin) %#ok<STOUT>
+function test_suite = test_linePosition3d
 %TESTLINEPOSITION3D  One-line description here, please.
 %
 %   output = test_linePosition3d(input)
@@ -16,23 +16,23 @@ function test_suite = test_linePosition3d(varargin) %#ok<STOUT>
 % Copyright 2010 INRA - Cepia Software Platform.
 
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testSimple %#ok<*DEFNU>
+function testSimple(testCase) %#ok<*DEFNU>
 
 p0 = [10 20 30];
 v0 = [40 50 60];
 line = [p0 v0];
 
 pos0 = linePosition3d(p0, line);
-assertEqual(0, pos0);
+testCase.assertEqual(0, pos0);
 
 p1 = p0 + v0;
 pos1 = linePosition3d(p1, line);
-assertEqual(1, pos1);
+testCase.assertEqual(1, pos1);
 
 
-function testPointArray
+function testPointArray(testCase)
 
 p0 = [10 20 30];
 v0 = [40 50 60];
@@ -42,10 +42,10 @@ points = [p0; p0+v0; p0-v0; p0+3*v0];
 
 pos = linePosition3d(points, line);
 exp = [0;1;-1;3];
-assertEqual(exp, pos);
+testCase.assertEqual(exp, pos);
 
 
-function testLineArray
+function testLineArray(testCase)
 
 p0 = [10 20 30];
 
@@ -59,10 +59,10 @@ lines = [line1;line2;line3];
 
 pos = linePosition3d(p0, lines);
 exp = [0;0;0];
-assertEqual(exp, pos);
+testCase.assertEqual(exp, pos);
 
 
-function testTwoArraysSameSize
+function testTwoArraysSameSize(testCase)
 
 p0 = [10 20 30];
 
@@ -79,5 +79,5 @@ lines = [line1;line2;line3;line4];
 points = [p0+2*v1;p0+3*v2;p0+4*v3;p0+v1+v2+v3];
 pos = linePosition3d(points, lines);
 exp = [2;3;4;1];
-assertEqual(exp, pos);
+testCase.assertEqual(exp, pos);
 

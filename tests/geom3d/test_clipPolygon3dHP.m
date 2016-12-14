@@ -1,4 +1,4 @@
-function test_suite = test_clipPolygon3dHP(varargin) %#ok<STOUT>
+function test_suite = test_clipPolygon3dHP
 %TEST_CLIPPOLYGON3DHP  Test case for the file clipPolygon3dHP
 %
 %   Test case for the file clipPolygon3dHP
@@ -15,9 +15,9 @@ function test_suite = test_clipPolygon3dHP(varargin) %#ok<STOUT>
 % Created: 2011-08-17,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function test_Triangle_FirstVertexOutside %#ok<*DEFNU>
+function test_Triangle_FirstVertexOutside(testCase) %#ok<*DEFNU>
 
 poly = [...
     12.1519 14.0046 58.5201; ...
@@ -26,15 +26,15 @@ poly = [...
 plane = createPlane([0 0 0], [deg2rad(-75) deg2rad(0)]);
 clipped = clipPolygon3dHP(poly, plane) ;
 
-assertEqual(4, size(clipped, 1));
+testCase.assertEqual(4, size(clipped, 1));
 
 
 poly = poly([1:end 1], :);
 clipped = clipPolygon3dHP(poly, plane) ;
-assertEqual(4, size(clipped, 1));
+testCase.assertEqual(4, size(clipped, 1));
 
 
-function test_Triangle_LastVertexOutside
+function test_Triangle_LastVertexOutside(testCase)
 
 poly = [...
     12.0680 18.2066 37.4846; ...
@@ -44,14 +44,14 @@ poly = [...
 plane = createPlane([0 0 0], [deg2rad(-75) deg2rad(0)]);
 clipped = clipPolygon3dHP(poly, plane) ;
 
-assertEqual(4, size(clipped, 1));
+testCase.assertEqual(4, size(clipped, 1));
 
 poly = poly([1:end 1], :);
 clipped = clipPolygon3dHP(poly, plane) ;
-assertEqual(4, size(clipped, 1));
+testCase.assertEqual(4, size(clipped, 1));
 
 
-function test_Triangle_MiddleVertexOutside
+function test_Triangle_MiddleVertexOutside(testCase)
 
 poly = [...
     12.1988 17.9510 37.4621; ...
@@ -61,14 +61,14 @@ poly = [...
 plane = createPlane([0 0 0], [deg2rad(-75) deg2rad(0)]);
 clipped = clipPolygon3dHP(poly, plane) ;
 
-assertEqual(4, size(clipped, 1));
+testCase.assertEqual(4, size(clipped, 1));
 
 poly = poly([1:end 1], :);
 clipped = clipPolygon3dHP(poly, plane) ;
-assertEqual(4, size(clipped, 1));
+testCase.assertEqual(4, size(clipped, 1));
 
 
-function test_Square_SecondVertexOutside
+function test_Square_SecondVertexOutside(testCase)
 
 poly = [...
     10 20 30; ...
@@ -80,10 +80,10 @@ poly = [...
 plane = createPlane([30 60 30], [1 0 0]);
 
 clipped = clipPolygon3dHP(poly, plane) ;
-assertEqual(4, size(clipped, 1));
+testCase.assertEqual(4, size(clipped, 1));
 
 
-function test_Square_FirstVertexOutside
+function test_Square_FirstVertexOutside(testCase)
 
 poly = [...
     50 20 30; ...
@@ -95,10 +95,10 @@ poly = [...
 plane = createPlane([30 60 30], [1 0 0]);
 
 clipped = clipPolygon3dHP(poly, plane) ;
-assertEqual(4, size(clipped, 1));
+testCase.assertEqual(4, size(clipped, 1));
 
 
-function test_Square_LastVertexOutside
+function test_Square_LastVertexOutside(testCase)
 
 poly = [...
     10 80 30; ...
@@ -110,4 +110,4 @@ poly = [...
 plane = createPlane([30 60 30], [1 0 0]);
 
 clipped = clipPolygon3dHP(poly, plane) ;
-assertEqual(4, size(clipped, 1));
+testCase.assertEqual(4, size(clipped, 1));

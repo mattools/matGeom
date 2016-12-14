@@ -1,4 +1,4 @@
-function test_suite = test_createRotationOx(varargin) %#ok<STOUT>
+function test_suite = test_createRotationOx
 %Check creation of rotation around Ox axis
 %   output = testCreateRotationOx(input)
 %
@@ -14,9 +14,9 @@ function test_suite = test_createRotationOx(varargin) %#ok<STOUT>
 % Created: 2009-06-19,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testShiftedCenter %#ok<*DEFNU>
+function testShiftedCenter(testCase) %#ok<*DEFNU>
 center = [10 20 30];
 theta = pi/3;
 
@@ -27,5 +27,5 @@ r0 = createRotationOx(theta);
 t2 = createTranslation3d(center);
 ctrl = t2*r0*t1;
 
-assertElementsAlmostEqual(ctrl, trans);
+testCase.assertEqual(ctrl, trans, 'AbsTol', .01);
 

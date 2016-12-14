@@ -1,4 +1,4 @@
-function test_suite = test_mergeBoxes3d(varargin) %#ok<STOUT>
+function test_suite = test_mergeBoxes3d
 %TESTMERGEBOXES3D  One-line description here, please.
 %
 %   output = testMergeBoxes3d(input)
@@ -16,11 +16,11 @@ function test_suite = test_mergeBoxes3d(varargin) %#ok<STOUT>
 % Copyright 2010 INRA - Cepia Software Platform.
 
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testBasic %#ok<*DEFNU>
+function testBasic(testCase) %#ok<*DEFNU>
 box1 = [5 20 5 30 10 50];
 box2 = [0 15 0 15 0 20];
 box = mergeBoxes3d(box1, box2);
-assertElementsAlmostEqual([0 20 0 30 0 50], box);
+testCase.assertEqual([0 20 0 30 0 50], box, 'AbsTol', .01);
 
