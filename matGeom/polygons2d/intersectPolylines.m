@@ -26,11 +26,12 @@ function pts = intersectPolylines(poly1, varargin)
 %   polygons2d, polylineSelfIntersections, intersectLinePolygon
 %
 %   This function uses the 'interX' function, found on the FileExchange,
-%   and stored in 'private' directory of this function.
+%   and stored in the 'private' directory containing this function.
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2009-06-15,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 

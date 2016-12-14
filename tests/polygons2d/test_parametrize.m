@@ -1,4 +1,4 @@
-function test_suite = test_parametrize(varargin) %#ok<STOUT>
+function test_suite = test_parametrize
 %TESTPARAMETRIZE  One-line description here, please.
 %
 %   output = testParametrize(input)
@@ -15,9 +15,9 @@ function test_suite = test_parametrize(varargin) %#ok<STOUT>
 % Created: 2011-05-27,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testSquare %#ok<*DEFNU>
+function testSquare(testCase) %#ok<*DEFNU>
 % Tests with a square of perimeter 40
 p1 = [10 10];
 p2 = [20 10];
@@ -26,9 +26,9 @@ p4 = [10 20];
 square = [p1;p2;p3;p4];
 exp = [0;10;20;30];
 
-assertEqual(exp, parametrize(square));
+testCase.assertEqual(exp, parametrize(square));
 
-function testSquare3d
+function testSquare3d(testCase)
 % Tests with a square of perimeter 40
 p1 = [10 10 0];
 p2 = [20 10 0];
@@ -37,9 +37,9 @@ p4 = [10 20 0];
 square = [p1;p2;p3;p4];
 exp = [0;10;20;30];
 
-assertEqual(exp, parametrize(square));
+testCase.assertEqual(exp, parametrize(square));
 
-function testSquareNormaized %#ok<*DEFNU>
+function testSquareNormaized(testCase) %#ok<*DEFNU>
 % Tests with a square of perimeter 40
 p1 = [10 10];
 p2 = [20 10];
@@ -48,4 +48,4 @@ p4 = [10 20];
 square = [p1;p2;p3;p4;p1];
 exp = [0;.25;.5;.75;1];
 
-assertEqual(exp, parametrize(square, 'normalize', true));
+testCase.assertEqual(exp, parametrize(square, 'normalize', true));
