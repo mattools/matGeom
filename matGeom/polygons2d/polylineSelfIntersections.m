@@ -1,6 +1,13 @@
 function varargout = polylineSelfIntersections(poly, varargin)
 %POLYLINESELFINTERSECTIONS Find self-intersection points of a polyline
 %
+%   Computes self-intersections of a polyline, eventually specifying if
+%   polyline is closed or open, and eventually returning position of
+%   intersection points on polyline.
+%   For common use cases, the intersectPolylines function may return the
+%   desired result in a faster way.
+%
+%
 %   PTS = polylineSelfIntersections(POLY);
 %   Returns the position of self intersections of the given polyline.
 %
@@ -9,14 +16,14 @@ function varargout = polylineSelfIntersections(poly, varargin)
 %   polygon), or open (the default). CLOSED can be a boolean, or one of
 %   'closed' or 'open'.
 %
-%   [PTS POS1 POS2] = polylineSelfIntersections(POLY);
+%   [PTS, POS1, POS2] = polylineSelfIntersections(POLY);
 %   Also return the 2 positions of each intersection point (the position
 %   when meeting point for first time, then position when meeting point
 %   for the second time).
 %
 %   [...] = polylineSelfIntersections(POLY, 'tolerance', TOL)
 %   Specifies an additional parameter to decide whether two intersection
-%   points should be considered the same, based on their euclidean
+%   points should be considered the same, based on their Euclidean
 %   distance.  
 %
 %
@@ -42,7 +49,7 @@ function varargout = polylineSelfIntersections(poly, varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2009-06-15,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
