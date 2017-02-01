@@ -72,135 +72,127 @@ function varargout = minDistancePoints(p1, varargin)
 % 25/10/2006 also returns indices of closest points
 % 30/10/2006 generalize to points of any dimension
 % 28/08/2007 code cleanup, add comments and help
+% 01/02/2017 complete re-write by JuanPi Carbajal
 
+  %% Initialisations
+  % default norm (euclidean)
+  n = 2;
+  % a single array is given
+  one_array = true;
+  % process input variables
+  if nargin == 1
+      % specify only one array of points, not the norm
+      p2 = p1;
+  elseif nargin == 2
+      if isscalar (varargin{1})
+          % specify array of points and the norm
+          n   = varargin{1};
+          p2  = p1;
+      else
+          % specify two arrays of points
+          p2           = varargin{1};
+          one_array = false;
+      end
+  elseif nargin == 3
+      % specify two array of points and the norm
+      p2        = varargin{1};
+      n         = varargin{2};
+      one_array = false;
+  else
+    error ('Wrong number of input arguments');
+  end
 
-%% Initialisations
+  % number of points in each array
+  n1  = size (p1, 1);
+  n2  = size (p2, 1);
+  % dimension of points
+  d   = size (p1, 2);
 
-% default norm (euclidean)
-n = 2;
-
-% flag for processing of all points
-allPoints = false;
-
-% process input variables
-if isempty(varargin)
-    % specify only one array of points, not the norm
-    p2 = p1;
-    
-elseif length(varargin) == 1
-    var = varargin{1};
-    if length(var) > 1       
-        % specify two arrays of points
-        p2  = var;
-        allPoints = true;
-    else
-        % specify array of points and the norm
-        n   = var;
-        p2  = p1;
-    end
-    
-else
-    % specify two array of points and the norm
-    p2  = varargin{1};
-    n   = varargin{2};
-    allPoints = true;
-end
-
-
-% number of points in each array
-n1  = size(p1, 1);
-n2  = size(p2, 1);
-
-% dimension of points
-d   = size(p1, 2);
-
-
-%% Computation of distances
-
-% allocate memory
-dist = zeros(n1, n2);
-
-% different behaviour depending on the norm used
-if n == 2
-    % Compute euclidian distance (default case).
-    % Compute difference of coordinate for each pair of point and for each
-    % dimension. Result "dist" is a n1-by-n2 array. 
-    % in 2D: dist = dx.*dx + dy.*dy;
-    for i = 1:d
-        dist = dist + (repmat(p1(:,i), [1 n2])-repmat(p2(:,i)', [n1 1])).^2;
-    end
-    
-    % compute minimal distance:
-    if ~allPoints
-        % either on all couple of points
-        mat = repmat((1:n1)', [1 n1]);
-        ind = mat < mat';
-        [minSqDist, ind] = min(dist(ind));
-    else
-        % or for each point of P1
-        [minSqDist, ind] = min(dist, [], 2);
-    end
-    
-    % convert squared distance to distance
-    minDist = sqrt(minSqDist);
-    
-elseif n == inf
+  %% Computation of distances
+  % allocate memory
+  dist = zeros (n1, n2);
+  % Compute difference of coordinate for each pair of point (n1-by-n2 array)
+  % and for each dimension. -> dist is a n1-by-n2 array.
+  % in 2D: dist = dx.*dx + dy.*dy;
+  if n == inf
     % infinite norm corresponds to maximum absolute value of differences
     % in 2D: dist = max(abs(dx) + max(abs(dy));
-    for i = 1:d
-        dist = max(dist, abs(p1(:,i)-p2(:,i)));
+    for i=1:d
+        dist = max (dist, abs(bsxfun (@minus, p1(:,i), p2(:,i).')));
     end
-    
-else
-    % compute distance using the specified norm.
-    % in 2D: dist = power(abs(dx), n) + power(abs(dy), n);
-    for i = 1:d
-        dist = dist + power((abs(repmat(p1(:,i), [1 n2])-repmat(p2(:,i)', [n1 1]))), n);
+  else
+    for i=1:d
+        dist = dist + abs (bsxfun (@minus, p1(:,i), p2(:,i).')).^n;
     end
+  end
+  % TODO the previous could be optimized when a single array  is given (maybe!)
 
-    % compute minimal distance
-    if ~allPoints
-        % either on all couple of points
-        mat = repmat((1:n1)', [1 n1]);
-        ind = mat < mat';
-        [minSqDist, ind] = min(dist(ind));
-    else
-        % or for each point of P1
-        [minSqDist, ind] = min(dist, [], 2);
-    end
+  % If two array of points where given
+  if ~one_array
+    [minSqDist ind] = min(dist, [], 2);
+    minDist         = power (minSqDist, 1/n);
+    [ind2 ind1]     = ind2sub ([n1 n2], ind);
+  else
+    % A single array was given
+    dist            = dist + diag (inf (n1,1)); % remove zeros from diagonal
+    dist            = vech (dist);
+    [minSqDist ind] = min (dist); % index on packed lower trinagular matrix
+    minDist         = power (minSqDist, 1/n);
 
-    % convert squared distance to distance
-    minDist = power(minSqDist, 1/n);
-    
+    [ind2 ind1]     = ind2sub_tril (n1, ind);
+    ind             = sub2ind ([n1 n1], ind2, ind1);
+  end
+
+  %% format output parameters
+  % format output depending on number of asked parameters
+  if nargout<=1
+      varargout{1} = minDist;
+  elseif nargout==2
+      % If two arrays are asked, 'ind' is an array of indices of p2, one for each
+      % point in p1, corresponding to the result in minDist
+      varargout{1} = minDist;
+      varargout{2} = ind;
+  elseif nargout==3
+      % If only one array is asked, minDist is a scalar, ind1 and ind2 are 2
+      % indices corresponding to the closest points.
+      varargout{1} = minDist;
+      varargout{2} = ind1;
+      varargout{3} = ind2;
+  end
+
 end
 
-if ~allPoints
-    % convert index in array to row and column subindices.
-    % This uses the fact that index are sorted in a triangular matrix,
-    % with the last index of each column being a so-called triangular
-    % number
-    ind2 = ceil((-1+sqrt(8*ind+1))/2);
-    ind1 = ind - ind2*(ind2-1)/2;
-    ind2 = ind2 + 1;
-end
+function [r c] = ind2sub_tril (N,idx)
+%% [r, c] = ind2sub_tril (N, idx)
+%% Convert a linear index to subscripts of a trinagular matrix.
+%%
+%% An example of trinagular matrix linearly indexed follows
+%%
+%%          N = 4;
+%%          A = -repmat (1:N,N,1);
+%%          A += repmat (diagind, N,1) - A.';
+%%          A = tril(A)
+%%          => A =
+%%              1    0    0    0
+%%              2    5    0    0
+%%              3    6    8    0
+%%              4    7    9   10
+%%
+%% The following example shows how to convert the linear index `6' in
+%% the 4-by-4 matrix of the example into a subscript.
+%%
+%%          [r, c] = ind2sub_tril (4, 6)
+%%          => r =  3
+%%            c =  2
+%%
+%% when idx is a row or column matrix of linear indeces then r and
+%% c have the same shape as idx.
+%%
+%% See also
+%% vech, ind2sub
 
+  endofrow = 0.5 * (1:N) .* (2*N:-1:N + 1);
+  c        = lookup (endofrow, idx - 1) + 1;
+  r        = N - endofrow(c) + idx ;
 
-%% format output parameters
-
-% format output depending on number of asked parameters
-if nargout <= 1
-    varargout{1} = minDist;
-    
-elseif nargout == 2
-    % If two arrays are asked, 'ind' is an array of indices, one for each
-    % point in PTS1, corresponding to the result in minDist
-    varargout{1} = minDist;
-    varargout{2} = ind;
-    
-elseif nargout == 3
-    % If only one array is asked, minDist is a scalar, ind1 and ind2 are 2
-    % indices corresponding to the closest points.
-    varargout{1} = minDist;
-    varargout{2} = ind1;
-    varargout{3} = ind2;
 end
