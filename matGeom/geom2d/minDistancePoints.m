@@ -141,7 +141,7 @@ function varargout = minDistancePoints(p1, varargin)
 
     [ind2 ind1]     = ind2sub_tril (n1, ind);
     ind             = sub2ind ([n1 n1], ind2, ind1);
-  endif
+  end
 
   %% format output parameters
   % format output depending on number of asked parameters
