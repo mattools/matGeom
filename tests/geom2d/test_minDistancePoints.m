@@ -49,7 +49,10 @@ testCase.assertEqual(minDistancePoints(pts1, pts2), res, 'AbsTol', .01);
 
 function testArrayNorm(testCase)
 
-pts = [50 10;40 60;40 30;20 0;10 60;10 30;0 10];
+% an array of points with several pairs at distance (+-20,+/-10).
+% resulting in distance equal to 30 with L1 metric.
+pts = [50 10; 40 60; 40 30; 20 0; 10 60; 10 30; 0 10];
+
 testCase.assertEqual(minDistancePoints(pts, 1), 30, 'AbsTol', .01);
 testCase.assertEqual(minDistancePoints(pts, 100), 20, 'AbsTol', .01);
 
