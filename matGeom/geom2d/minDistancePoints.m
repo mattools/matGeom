@@ -73,12 +73,15 @@ function varargout = minDistancePoints(p1, varargin)
 % 30/10/2006 generalize to points of any dimension
 % 28/08/2007 code cleanup, add comments and help
 % 01/02/2017 complete re-write by JuanPi Carbajal
+% 01/02/2017 fix bugs, update code, fix MLInt Warning (D. Legland)
+% 01/02/2017 remove use of vech
 
 
 %% Initialisations
 
 % default norm (euclidean)
 n = 2;
+
 % a single array is given
 one_array = true;
 
@@ -108,7 +111,8 @@ end
 % number of points in each array
 n1  = size (p1, 1);
 n2  = size (p2, 1);
-% dimension of points
+
+% dimensionality of points
 d   = size (p1, 2);
 
 
@@ -133,15 +137,16 @@ else
 end
 % TODO the previous could be optimized when a single array  is given (maybe!)
 
-% If two array of points where given
 if ~one_array
-    [minSqDist, ind]    = min(dist, [], 2);
+    % If two array of points where given
+    [minSqDist, ind]    = min (dist, [], 2);
     minDist             = power (minSqDist, 1/n);
     [ind2, ind1]        = ind2sub ([n1 n2], ind);
+    
 else
     % A single array was given
     dist                = dist + diag (inf (n1,1)); % remove zeros from diagonal
-    dist                = vech (dist);
+    dist                = dist (tril(true(n1, n1)));
     [minSqDist, ind]    = min (dist); % index on packed lower triangular matrix
     minDist             = power (minSqDist, 1/n);
     
@@ -201,7 +206,7 @@ function [r, c] = ind2sub_tril (N, idx)
 % c have the same shape as idx.
 %
 % See also
-%   vech, ind2sub
+%   ind2sub
 
 endofrow = 0.5 * (1:N) .* (2*N:-1:N + 1);
 c = zeros(size(endofrow));
