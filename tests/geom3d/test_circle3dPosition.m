@@ -1,4 +1,4 @@
-function test_suite = test_circle3dPosition(varargin) %#ok<STOUT>
+function test_suite = test_circle3dPosition
 %TEST_CIRCLE3DPOSITION  One-line description here, please.
 %
 %   output = test_circle3dPosition(input)
@@ -15,20 +15,19 @@ function test_suite = test_circle3dPosition(varargin) %#ok<STOUT>
 % Created: 2011-06-21,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testBasicPoints %#ok<*DEFNU>
+function testBasicPoints(testCase) %#ok<*DEFNU>
 
 % create basic 3D circle
 circle = [10 20 30  50  60 30 20];
 
-
 pos60 = circle3dPosition(circle3dPoint(circle, 60), circle);
-assertElementsAlmostEqual(60, pos60);
+testCase.assertEqual(60, pos60, 'AbsTol', .001);
 
 pos20 = circle3dPosition(circle3dPoint(circle, 20), circle);
-assertElementsAlmostEqual(20, pos20);
+testCase.assertEqual(20, pos20, 'AbsTol', .001);
 
 pos230 = circle3dPosition(circle3dPoint(circle, 230), circle);
-assertElementsAlmostEqual(230, pos230);
+testCase.assertEqual(230, pos230, 'AbsTol', .001);
 

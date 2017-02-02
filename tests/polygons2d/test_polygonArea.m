@@ -1,4 +1,4 @@
-function test_suite = test_polygonArea(varargin) %#ok<STOUT>
+function test_suite = test_polygonArea
 %TESTPOLYGONAREA  Test case for the file polygonArea
 %
 %   Test case for the file polygonArea
@@ -15,9 +15,9 @@ function test_suite = test_polygonArea(varargin) %#ok<STOUT>
 % Created: 2011-09-26,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions);
 
-function test_SimpleSquare %#ok<*DEFNU>
+function test_SimpleSquare(testCase) %#ok<*DEFNU>
 % Test for a square in CCW (direct) orientation
 
 poly = [0 0;10 0;10 10;0 10];
@@ -25,19 +25,19 @@ poly = [0 0;10 0;10 10;0 10];
 res = polygonArea(poly);
 exp = 100;
 
-assertEqual(exp, res);
+testCase.assertEqual(exp, res);
 
-function test_ClosedSquare
+function test_ClosedSquare(testCase)
 
 poly = [0 0;10 0;10 10;0 10; 0 0];
 
 res = polygonArea(poly);
 exp = 100;
 
-assertEqual(exp, res);
+testCase.assertEqual(exp, res);
 
 
-function test_RevertedSquare 
+function test_RevertedSquare(testCase) 
 % Test for a square in CW orientation
 
 poly = [0 0;0 10;10 10;10 0];
@@ -45,10 +45,10 @@ poly = [0 0;0 10;10 10;10 0];
 res = polygonArea(poly);
 exp = -100;
 
-assertEqual(exp, res);
+testCase.assertEqual(exp, res);
 
 
-function test_MultiPolygon
+function test_MultiPolygon(testCase)
 % Test for a rectangle with two rectangular holes
 
 poly1 = [10 10;60 10;60 50;10 50];  % outer ring
@@ -57,13 +57,13 @@ poly3 = [40 20;40 40;50 40;50 20];  % inner ring 2
 poly = {poly1, poly2, poly3};
 
 res = polygonArea(poly);
-assertEqual(1, length(res));
+testCase.assertEqual(1, length(res));
 
 exp = 16 * 100;
-assertEqual(exp, res);
+testCase.assertEqual(exp, res);
 
 
-function test_MultiPolygon_NaN
+function test_MultiPolygon_NaN(testCase)
 % Test for a rectangle with two rectangular holes separated by NaN values
 
 poly1 = [10 10;60 10;60 50;10 50];  % outer ring
@@ -72,8 +72,8 @@ poly3 = [40 20;40 40;50 40;50 20];  % inner ring 2
 poly = [poly1; NaN NaN; poly2; NaN NaN; poly3];
 
 res = polygonArea(poly);
-assertEqual(1, length(res));
+testCase.assertEqual(1, length(res));
 
 exp = 16 * 100;
-assertEqual(exp, res);
+testCase.assertEqual(exp, res);
 

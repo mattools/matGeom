@@ -1,7 +1,7 @@
 function varargout = createTetrakaidecahedron()
 %CREATETETRAKAIDECAHEDRON Create a 3D mesh representing a tetrakaidecahedron
 %
-%   [V E F] = createTetrakaidecahedron;
+%   [V, E, F] = createTetrakaidecahedron;
 %   Create a mesh structure representing a tetrakaidecahedron, composed of
 %   both square and hexagonal faces. Tetrakaidecahedron can be used to tile
 %   the 3D Euclidean space.
@@ -10,7 +10,7 @@ function varargout = createTetrakaidecahedron()
 %   E is a 36-by-2 array containing indices of neighbour vertices,
 %   F is a 14-by-1 cell array containing vertex indices array of each face.
 %
-%   [V F] = createTetrakaidecahedron;
+%   [V, F] = createTetrakaidecahedron;
 %   Returns only the vertices and the face vertex indices.
 %
 %   MESH = createTetrakaidecahedron;
@@ -18,14 +18,15 @@ function varargout = createTetrakaidecahedron()
 %   and 'faces'.
 %
 %   Example
-%   [n e f] = createTetrakaidecahedron;
+%   [n, e, f] = createTetrakaidecahedron;
 %   drawMesh(n, f);
 %   
 %   See also
 %   meshes3d, drawMesh
-%
+
 %   ---------
 %   author : David Legland 
+%   e-mail: david.legland@inra.fr
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 10/02/2005.
 %

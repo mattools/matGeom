@@ -1,4 +1,4 @@
-function test_suite = test_grClose(varargin) %#ok<STOUT>
+function test_suite = test_grClose
 %TESTGRCLOSE  test suite for function grClose
 %
 %   output = test_grClose(input)
@@ -16,13 +16,13 @@ function test_suite = test_grClose(varargin) %#ok<STOUT>
 % Copyright 2011 INRA - Cepia Software Platform.
 
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testSimpleGraph %#ok<*DEFNU>
+function testSimpleGraph(testCase) %#ok<*DEFNU>
 
 [nodes, edges, values] = createTestGraph01(); %#ok<ASGLU>
 
 valClo = grClose(edges, values);
 exp = [80;70;70;70;50;50;40;40];
-assertEqual(exp, valClo);
+testCase.assertEqual(exp, valClo);
 

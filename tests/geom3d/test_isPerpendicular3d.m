@@ -1,4 +1,4 @@
-function test_suite = test_isPerpendicular3d(varargin) %#ok<STOUT>
+function test_suite = test_isPerpendicular3d
 %Check orthogonality 2 vectors
 %   output = testIsPerpendicular3d(input)
 %
@@ -14,34 +14,34 @@ function test_suite = test_isPerpendicular3d(varargin) %#ok<STOUT>
 % Created: 2009-06-19,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testSingle %#ok<*DEFNU>
+function testSingle(testCase) %#ok<*DEFNU>
 v1  = [10 0 0];
 v2  = [0 20 0];
 v3  = [0 0 30];
 
-assertTrue(isPerpendicular3d(v1, v2));
-assertTrue(isPerpendicular3d(v1, v3));
-assertTrue(isPerpendicular3d(v2, v3));
+testCase.assertTrue(isPerpendicular3d(v1, v2));
+testCase.assertTrue(isPerpendicular3d(v1, v3));
+testCase.assertTrue(isPerpendicular3d(v2, v3));
 
-function testNegative
+function testNegative(testCase)
 v1  = [10 0 0];
 v2  = [-1 -5 0];
 
-assertFalse(isPerpendicular3d(v1, v2));
+testCase.assertFalse(isPerpendicular3d(v1, v2));
 
-function testSingleArray
+function testSingleArray(testCase)
 v1  = [10 0 0];
 v2  = [0 20 0];
 v3  = [0 0 30];
 res = isPerpendicular3d(v1, [v1; v2; v3]);
-assertEqual([false;true;true], res);
+testCase.assertEqual([false;true;true], res);
 
-function testArraySingle
+function testArraySingle(testCase)
 v1  = [10 0 0];
 v2  = [0 20 0];
 v3  = [0 0 30];
 res = isPerpendicular3d([v1; v2; v3], v1);
-assertEqual([false;true;true], res);
+testCase.assertEqual([false;true;true], res);
 

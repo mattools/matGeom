@@ -1,4 +1,4 @@
-function test_suite = test_createRotation %#ok<STOUT>
+function test_suite = test_createRotation 
 %TESTCREATEROTATION  One-line description here, please.
 %   output = testCreateRotation(input)
 %
@@ -15,23 +15,23 @@ function test_suite = test_createRotation %#ok<STOUT>
 % Copyright 2009 INRA - Cepia Software Platform.
 % Licensed under the terms of the LGPL, see the file "license.txt"
 
-initTestSuite;
+test_suite = functiontests(localfunctions);
 
-function testCreateCentered %#ok<*DEFNU>
+function testCreateCentered(testCase) %#ok<*DEFNU>
 
 trans = createRotation(0);
-assertElementsAlmostEqual(trans, [1 0 0;0 1 0;0 0 1]);
+testCase.assertEqual(trans, [1 0 0;0 1 0;0 0 1], 'AbsTol', .01);
 
 trans = createRotation(pi/2);
-assertElementsAlmostEqual(trans, [0 -1 0; 1 0 0; 0 0 1]);
+testCase.assertEqual(trans, [0 -1 0; 1 0 0; 0 0 1], 'AbsTol', .01);
 
 trans = createRotation(pi);
-assertElementsAlmostEqual(trans, [-1 0 0;0 -1 0;0 0 1]);
+testCase.assertEqual(trans, [-1 0 0;0 -1 0;0 0 1], 'AbsTol', .01);
 
 trans = createRotation(3*pi/2);
-assertElementsAlmostEqual(trans, [0 1 0; -1 0 0; 0 0 1]);
+testCase.assertEqual(trans, [0 1 0; -1 0 0; 0 0 1], 'AbsTol', .01);
 
-function testCreateShifted
+function testCreateShifted(testCase)
 
 p0 = [3 5];
 theta = pi/3;
@@ -42,4 +42,4 @@ rot = createRotation(theta);
 t2 = createTranslation(p0);
 trans2 = t2*rot*t1;
 
-assertElementsAlmostEqual(trans1, trans2);
+testCase.assertEqual(trans1, trans2, 'AbsTol', .01);

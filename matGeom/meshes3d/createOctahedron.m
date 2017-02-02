@@ -1,13 +1,13 @@
 function varargout = createOctahedron()
 %CREATEOCTAHEDRON Create a 3D mesh representing an octahedron
 %
-%   [V E F] = createOctahedron;
+%   [V, E, F] = createOctahedron;
 %   Create a 3D mesh representing an octahedron
 %   V is a 6-by-3 array with vertices coordinate, E is a 12-by-2 array
 %   containing indices of neighbour vertices, and F is a 8-by-3 array
 %   containing array of vertex index for each face.
 %
-%   [V F] = createOctahedron;
+%   [V, F] = createOctahedron;
 %   Returns only the vertices and the face vertex indices.
 %
 %   MESH = createOctahedron;
@@ -26,17 +26,18 @@ function varargout = createOctahedron()
 %   case.
 %
 %   Example
-%     [v e f] = createOctahedron;
+%     [v, e, f] = createOctahedron;
 %     drawMesh(v, f);
-%
 %
 %   See also
 %   meshes3d, drawMesh
 %   createCube, createIcosahedron, createDodecahedron, createTetrahedron
 %   createCubeOctahedron
 %
+
 %   ---------
 %   author : David Legland 
+%   e-mail: david.legland@inra.fr
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 10/02/2005.
 %

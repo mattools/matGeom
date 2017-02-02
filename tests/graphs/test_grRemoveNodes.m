@@ -1,4 +1,4 @@
-function test_suite = test_grRemoveNodes(varargin) %#ok<STOUT>
+function test_suite = test_grRemoveNodes
 %TEST_GRREMOVENODES  Test case for the file grRemoveNodes
 %
 %   Test case for the file grRemoveNodes
@@ -15,28 +15,28 @@ function test_suite = test_grRemoveNodes(varargin) %#ok<STOUT>
 % Created: 2014-03-07,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2014 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function test_RemoveOneVertex %#ok<*DEFNU>
+function test_RemoveOneVertex(testCase) %#ok<*DEFNU>
 % Test call of function without argument
 [nodes, edges] = makeSimpleGraph();
 [nodes2, edges2] = grRemoveNodes(nodes, edges, 3);
-assertEqual(5, size(nodes2, 1));
-assertEqual(7, size(edges2, 1));
+testCase.assertEqual(5, size(nodes2, 1));
+testCase.assertEqual(7, size(edges2, 1));
 
-function test_RemoveTwoMiddleVertices
+function test_RemoveTwoMiddleVertices(testCase)
 % Test call of function without argument
 [nodes, edges] = makeSimpleGraph();
 [nodes2, edges2] = grRemoveNodes(nodes, edges, [3 4]);
-assertEqual(4, size(nodes2, 1));
-assertEqual(5, size(edges2, 1));
+testCase.assertEqual(4, size(nodes2, 1));
+testCase.assertEqual(5, size(edges2, 1));
 
-function test_RemoveTwoExtremeVertices
+function test_RemoveTwoExtremeVertices(testCase)
 % Test call of function without argument
 [nodes, edges] = makeSimpleGraph();
 [nodes2, edges2] = grRemoveNodes(nodes, edges, [1 6]);
-assertEqual(4, size(nodes2, 1));
-assertEqual(3, size(edges2, 1));
+testCase.assertEqual(4, size(nodes2, 1));
+testCase.assertEqual(3, size(edges2, 1));
 
 
 function [nodes, edges] = makeSimpleGraph()

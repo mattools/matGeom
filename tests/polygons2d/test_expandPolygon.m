@@ -1,4 +1,4 @@
-function test_suite = test_expandPolygon(varargin) %#ok<STOUT>
+function test_suite = test_expandPolygon
 %TESTEXPANDPOLYGON  One-line description here, please.
 %   output = testExpandPolygon(input)
 %
@@ -15,9 +15,9 @@ function test_suite = test_expandPolygon(varargin) %#ok<STOUT>
 % Copyright 2009 INRA - Cepia Software Platform.
 % Licensed under the terms of the LGPL, see the file "license.txt"
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testSquare %#ok<*DEFNU>
+function testSquare(testCase) %#ok<*DEFNU>
 p1 = [10 10];
 p2 = [20 10];
 p3 = [20 20];
@@ -26,23 +26,23 @@ square = [p1;p2;p3;p4];
 
 expanded5 = [5 5;25 5;25 25;5 25];
 expanded = expandPolygon(square, 5);
-assertTrue(length(expanded)==1);
-assertTrue(distancePolygons(expanded{1}, expanded5)<1e-14);
+testCase.assertTrue(length(expanded)==1);
+testCase.assertTrue(distancePolygons(expanded{1}, expanded5)<1e-14);
 
-function testOverlap
+function testOverlap(testCase)
 
 % a polygon whose expansion overlaps at critical distance 10
 poly = [10 10;190 10;190 140;110 140;110 120;150 120;150 50;50 50;50 100;90 100;90 160;10 160];
 
 % small value: only one outline
 expanded = expandPolygon(poly, 5);
-assertTrue(length(expanded)==1);
+testCase.assertTrue(length(expanded)==1);
 
 % value>10: two outlines
 expanded = expandPolygon(poly, 20, 'cleanupLoops', true);
-assertTrue(length(expanded)==2);
+testCase.assertTrue(length(expanded)==2);
 
 % value>30: the inner outline disappear
 expanded = expandPolygon(poly, 35, 'cleanupLoops', true);
-assertTrue(length(expanded)==1);
+testCase.assertTrue(length(expanded)==1);
 

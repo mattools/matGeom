@@ -1,4 +1,4 @@
-function test_suite = test_projPointOnPlane(varargin) %#ok<STOUT>
+function test_suite = test_projPointOnPlane
 %TEST_PROJPOINTONPLANE  Test case for the file projPointOnPlane
 %
 %   Test case for the file projPointOnPlane
@@ -15,9 +15,9 @@ function test_suite = test_projPointOnPlane(varargin) %#ok<STOUT>
 % Created: 2013-07-03,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2013 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function test_Simple %#ok<*DEFNU>
+function test_Simple(testCase) %#ok<*DEFNU>
 % Test call of function without argument
 
 plane = createPlane([10 20 30], [0 0 1]);
@@ -26,6 +26,6 @@ point = [12 23 34];
 proj = projPointOnPlane(point, plane);
 exp = [12 23 30];
 
-assertElementsAlmostEqual(exp, proj, 'absolute', 1e-12);
+testCase.assertEqual(exp, proj, 'AbsTol', 1e-12);
 
 

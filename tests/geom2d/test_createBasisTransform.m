@@ -1,4 +1,4 @@
-function test_suite = test_createBasisTransform(varargin) %#ok<STOUT>
+function test_suite = test_createBasisTransform
 %TEST_CREATEBASISTRANSFORM  Test case for the file createBasisTransform
 %
 %   Test case for the file createBasisTransform
@@ -15,10 +15,9 @@ function test_suite = test_createBasisTransform(varargin) %#ok<STOUT>
 % Created: 2011-10-13,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions);
 
-
-function test_Translate %#ok<*DEFNU>
+function test_Translate(testCase) %#ok<*DEFNU>
 % Basic test to check the function runs
 
 p1 = [3 4];
@@ -30,4 +29,4 @@ dp = p1-p2;
 exp = [eye(2) dp' ; 0 0 1];
 
 trans = createBasisTransform(basis1, basis2);
-assertElementsAlmostEqual(exp, trans);
+testCase.assertEqual(exp, trans, 'AbsTol', .01);

@@ -1,4 +1,4 @@
-function test_suite = test_mergeBoxes(varargin) %#ok<*STOUT>
+function test_suite = test_mergeBoxes
 %testMergeBoxes  One-line description here, please.
 %
 %   output = testMergeBoxes(input)
@@ -16,11 +16,11 @@ function test_suite = test_mergeBoxes(varargin) %#ok<*STOUT>
 % Copyright 2010 INRA - Cepia Software Platform.
 
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testBasic %#ok<*DEFNU>
+function testBasic(testCase) %#ok<*DEFNU>
 box1 = [5 20 10 25];
 box2 = [0 15 15 20];
 exp  = [0 20 10 25];
 box = mergeBoxes(box1, box2);
-assertElementsAlmostEqual(exp, box);
+testCase.assertEqual(exp, box, 'AbsTol', .01);

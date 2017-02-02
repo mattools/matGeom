@@ -1,4 +1,4 @@
-function test_suite = test_linePosition(varargin) %#ok<STOUT>
+function test_suite = test_linePosition
 %TESTLINEPOSITION  One-line description here, please.
 %
 %   output = testLinePosition(input)
@@ -16,9 +16,9 @@ function test_suite = test_linePosition(varargin) %#ok<STOUT>
 % Copyright 2011 INRA - Cepia Software Platform.
 
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testBasic %#ok<*DEFNU>
+function testBasic(testCase) %#ok<*DEFNU>
 
 point = [20 60];
 line = createLine([10 30], [30 90]);
@@ -26,10 +26,10 @@ line = createLine([10 30], [30 90]);
 exp = .5;
 pos = linePosition(point, line);
 
-assertEqual(exp, pos);
+testCase.assertEqual(exp, pos);
 
 
-function testPointArray
+function testPointArray(testCase)
 
 point = [20 60;10 30;25 75];
 line = createLine([10 30], [30 90]);
@@ -37,10 +37,10 @@ line = createLine([10 30], [30 90]);
 exp = [.5; 0; .75];
 pos = linePosition(point, line);
 
-assertEqual(exp, pos);
+testCase.assertEqual(exp, pos);
 
 
-function testLineArray
+function testLineArray(testCase)
 
 point = [20 60];
 line1 = createLine([10 30], [30 90]);
@@ -51,9 +51,9 @@ lines = [line1;line2;line3];
 exp = [.5  1  0];
 pos = linePosition(point, lines);
 
-assertEqual(exp, pos);
+testCase.assertEqual(exp, pos);
 
-function testArrayArray
+function testArrayArray(testCase)
 
 lines = [10 20 1 0;10 20 0 1;10 20 1 1];
 points = [30 20;10 40; 30 40];
@@ -61,9 +61,9 @@ points = [30 20;10 40; 30 40];
 exp = [20 0 10; 0 20 10; 20 20 20];
 pos = linePosition(points, lines);
 
-assertElementsAlmostEqual(exp, pos);
+testCase.assertEqual(exp, pos, 'AbsTol', .01);
 
-function testArrayArrayDiag
+function testArrayArrayDiag(testCase)
 
 lines = [10 20 1 0;10 20 0 1;10 20 1 1];
 points = [30 20;10 40; 30 40];
@@ -71,4 +71,4 @@ points = [30 20;10 40; 30 40];
 exp = [20; 20; 20];
 pos = linePosition(points, lines, 'diag');
 
-assertElementsAlmostEqual(exp, pos);
+testCase.assertEqual(exp, pos, 'AbsTol', .01);

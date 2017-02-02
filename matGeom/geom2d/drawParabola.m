@@ -34,14 +34,18 @@ function varargout = drawParabola(varargin)
 %
 %
 %   Example:
-%   figure(1); clf; hold on;
-%   drawParabola([50 50 .2 30]);
-%   drawParabola([50 50 .2 30], [-1 1], 'color', 'r', 'linewidth', 2);
-%   axis equal;
+%     figure(1); clf; hold on;
+%     axis equal; axis([0 100 0 100])
+%     % draw parabola with default parameterization bounds 
+%     drawParabola([50 50 .2 30]);
+%     % draw parabola with more specific bounds and drawing style
+%     drawParabola([50 50 .2 30], [-3 3], 'color', 'r', 'linewidth', 2);
+%   
 %
 %   See Also:
 %   drawCircle, drawEllipse
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE

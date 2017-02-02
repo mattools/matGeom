@@ -1,4 +1,4 @@
-function test_suite = test_meshVolume(varargin) %#ok<STOUT>
+function test_suite = test_meshVolume
 %TEST_MESHVOLUME  Test case for the file meshVolume
 %
 %   Test case for the file meshVolume
@@ -15,21 +15,21 @@ function test_suite = test_meshVolume(varargin) %#ok<STOUT>
 % Created: 2012-10-01,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions);
 
-function test_Cube %#ok<*DEFNU>
+function test_Cube(testCase) %#ok<*DEFNU>
 % Test call of function without argument
 [v, f] = createCube;
 vol = meshVolume(v, f);
-assertEqual(1, vol);
+testCase.assertEqual(1, vol);
 
 
-function test_Tetrahedron
+function test_Tetrahedron(testCase)
 % Test call of function without argument
 [v, f] = createTetrahedron;
 vol = meshVolume(v, f);
 
 % this is not a unit tetrahedron, volume is bigger...
 exp = 1 / 3;
-assertEqual(exp, vol);
+testCase.assertEqual(exp, vol);
 

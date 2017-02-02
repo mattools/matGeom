@@ -1,4 +1,4 @@
-function test_suite = test_nndist(varargin) %#ok<STOUT>
+function test_suite = test_nndist
 %TEST_NNDIST  One-line description here, please.
 %
 %   output = test_nndist(input)
@@ -16,9 +16,9 @@ function test_suite = test_nndist(varargin) %#ok<STOUT>
 % Copyright 2016 INRA - Cepia Software Platform.
 
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testTwoPoints %#ok<*DEFNU>
+function testTwoPoints(testCase) %#ok<*DEFNU>
 % compute for two points
 
 p1 = [10 10];
@@ -27,11 +27,11 @@ pts = [p1 ; p2];
 
 [dists, inds] = nndist(pts);
 
-assertElementsAlmostEqual([10; 10], dists);
-assertElementsAlmostEqual([2;1], inds);
+testCase.assertEqual([10; 10], dists, 'AbsTol', .01);
+testCase.assertEqual([2;1], inds, 'AbsTol', .01);
 
 
-function testFourPoints %#ok<*DEFNU>
+function testFourPoints(testCase) %#ok<*DEFNU>
 % compute for four points
 
 p1 = [10 10];
@@ -42,5 +42,5 @@ pts = [p1 ; p2 ; p3 ; p4];
 
 [dists, inds] = nndist(pts);
 
-assertElementsAlmostEqual([10; 10; 20; 30], dists);
-assertElementsAlmostEqual([2;1;2;3], inds);
+testCase.assertEqual([10; 10; 20; 30], dists, 'AbsTol', .01);
+testCase.assertEqual([2;1;2;3], inds, 'AbsTol', .01);
