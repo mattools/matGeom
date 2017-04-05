@@ -39,6 +39,11 @@ options = {'FaceColor', 'm'};
 if ~isempty(varargin)
     options = varargin;
     
+    % if option is a single argument, assume it corresponds to plane color
+    if length(options) == 1
+        options = {'FaceColor', options{1}};
+    end
+    
     % if options are specified as struct, need to convert to parameter
     % name-value pairs
     if isstruct(options{1})
