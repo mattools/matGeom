@@ -45,7 +45,7 @@ function points = intersectLineCircle(line, circle)
 %   15/04/2017: improved code by JuanPi Carbajal <ajuanpi+dev@gmail.com>
 
 n = size (line, 1);
-if (n != size (circle, 1))
+if n ~= size (circle, 1)
   error ('matGeom:invalid-input-arg', 'Function takes same number of lines and circles.');
 endif
 
