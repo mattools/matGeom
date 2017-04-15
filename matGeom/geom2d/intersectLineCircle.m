@@ -1,11 +1,13 @@
 function points = intersectLineCircle(line, circle)
-%INTERSECTLINECIRCLE Intersection point(s) of a line and a circle
+%INTERSECTLINECIRCLE Intersection point(s) of N lines and N circles
 %
 %   INTERS = intersectLineCircle(LINE, CIRCLE);
-%   Returns a 2-by-2 array, containing on each row the coordinates of an
-%   intersection point. If the line and circle do not intersect, the result
-%   is filled with NaN.
-%
+%   Returns a 2-by-2-by-N array @var{points}, containing on each row the
+%   coordinates of an intersection point for each line-circle pair, i.e.
+%   INTERS(:,:,k)} contains the intersections between LINE(k,:)
+%   and CIRCLE(k,:).
+%   If a line and a circle do not intersect, the result is NA.
+
 %   Example
 %   % base point
 %   center = [10 0];
@@ -40,12 +42,14 @@ function points = intersectLineCircle(line, circle)
 
 %   HISTORY
 %   2011-06-06 fix bug in delta test
+%   15/04/2017: improved code by JuanPi Carbajal <ajuanpi+dev@gmail.com>
 
+n = size (line, 1);
+if (n != size (circle, 1))
+  error ('matGeom:invalid-input-arg', 'Function takes same number of lines and circles.');
+endif
 
-% local precision
-eps = 1e-14;
-
-% center parameters
+% circle parameters
 center = circle(:, 1:2);
 radius = circle(:, 3);
 
@@ -54,29 +58,31 @@ dp = line(:, 1:2) - center;
 vl = line(:, 3:4);
 
 % coefficient of second order equation
-a = sum(line(:, 3:4).^2, 2);
-b = 2*sum(dp .* vl, 2);
-c =  sum(dp.^2, 2) - radius.^2;
+a = sum (line(:, 3:4).^2, 2);
+b = 2 * sum (dp .* vl, 2);
+c =  sum (dp.^2, 2) - radius.^2;
 
 % discriminant
-delta = b .^ 2 - 4 * a .* c;
+delta    = b .^ 2 - 4 * a .* c;
+nn_delta = delta >= 0;          % nonnegative delta
+nnn      = sum (nn_delta);
 
-if delta > eps
-    % find two roots of second order equation
-    u1 = (-b - sqrt(delta)) / 2 ./ a;
-    u2 = (-b + sqrt(delta)) / 2 ./ a;
-    
-    % convert into 2D coordinate
-    points = [line(1:2) + u1 * line(3:4) ; line(1:2) + u2 * line(3:4)];
+points = NA (2, 2, n);
 
-elseif abs(delta) < eps
-    % find unique root, and convert to 2D coord.
-    u = -b / 2 ./ a;    
-    points = line(1:2) + u*line(3:4);
-    
-else
-    % fill with NaN
-    points = NaN * ones(2, 2);
-    return;
+if nnn > 0
+  % roots
+  u = -b(nn_delta) + bsxfun(@times, [-1 1], sqrt (delta(nn_delta)) );
+  u = bsxfun (@rdivide, u, a(nn_delta)) / 2;
+
+  if n == 1
+    points = [line(1:2) + u(:,1) .* line(3:4); ...
+              line(1:2) + u(:,2) .* line(3:4)];
+  else
+    tmp = [line(nn_delta,1:2) + u(:,1) .* line(nn_delta,3:4) ...
+           line(nn_delta,1:2) + u(:,2) .* line(nn_delta,3:4)].';
+
+    points(:,:, nn_delta) = permute (reshape ( tmp, [2,2,nnn]), [2 1 3]);
+  end
+
 end
 
