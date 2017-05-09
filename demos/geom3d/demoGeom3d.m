@@ -13,10 +13,10 @@ function demoGeom3d(varargin)
 %
 %   See also
 %
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2009-06-22,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
@@ -52,7 +52,7 @@ drawPoint3d(points);
 drawLine3d(line12, 'color', 'k');
 
 % draw an edge, using a thick stroke and a different color
-drawEdge(edge13, 'color', 'r', 'linewidth', 2);
+drawEdge3d(edge13, 'color', 'r', 'linewidth', 2);
 
 
 %% Create planes

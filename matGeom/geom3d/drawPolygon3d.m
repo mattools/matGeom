@@ -1,24 +1,33 @@
 function varargout = drawPolygon3d(varargin)
-%DRAWPOLYGON3D Draw a 3D polygon specified by a list of vertices
+%DRAWPOLYGON3D Draw a 3D polygon specified by a list of vertex coords
 %
 %   drawPolygon3d(POLY);
 %   packs coordinates in a single N-by-3 array.
 %
 %   drawPolygon3d(PX, PY, PZ);
-%   specifies coordinates in separate arrays.
+%   specifies coordinates in separate numeric vectors (either row or
+%   columns)
 %
 %   drawPolygon3d(..., PARAM, VALUE);
 %   Specifies style options to draw the polyline, see plot for details.
 %
 %   H = drawPolygon3d(...);
-%   also return a handle to the list of line objects.
+%   also returns a handle to the list of created line objects. 
 %
+%   Example
+%     t = linspace(0, 2*pi, 100)';
+%     xt = 10 * cos(t);
+%     yt = 5 * sin(t);
+%     zt = zeros(1,100);
+%     figure; drawPolygon3d(xt, yt, zt, 'b');
+% 
 %   See Also:
 %   polygons3d, fillPolygon3d, drawPolyline3d
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2011-08-17 from drawPolyline3d, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
@@ -39,13 +48,14 @@ if iscell(var)
     return;
 end
 
-% extract curve coordinate
-if size(var, 2) == 1
-    % first argument contains x coord, second argument contains y coord
-    % and third one the z coord
+% extract curve coordinates
+if min(size(var)) == 1
+    % if first argument is a vector (either row or column), then assumes
+    % first argument contains x coords, second argument contains y coords
+    % and third one the z coords
     px = var;
     if length(varargin) < 3
-        error('Wrong number of arguments in drawPolygon3d');
+        error('geom3d:drawPolygon3d:Wrong number of arguments in fillPolygon3d');
     end
     py = varargin{2};
     pz = varargin{3};
@@ -63,9 +73,9 @@ end
 
 % check that the polygon is closed
 if px(1) ~= px(end) || py(1) ~= py(end) || pz(1) ~= pz(end)
-    px = [px; px(1)];
-    py = [py; py(1)];
-    pz = [pz; pz(1)];
+    px = [px(:); px(1)];
+    py = [py(:); py(1)];
+    pz = [pz(:); pz(1)];
 end
 
 % draw the closed curve

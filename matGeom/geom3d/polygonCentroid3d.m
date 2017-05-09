@@ -18,18 +18,19 @@ function centroid = polygonCentroid3d(varargin)
 %   See also
 %   polygons3d, polygonArea3d, polygonCentroid
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2007-09-18
 % Copyright 2007 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
 
-if nargin==1
+if nargin == 1
     % polygon is given as a single argument
     pts = varargin{1};
     
-elseif nargin==2
+elseif nargin == 2
     % polygon is given as 3 corodinate arrays
     px = varargin{1};
     py = varargin{2};

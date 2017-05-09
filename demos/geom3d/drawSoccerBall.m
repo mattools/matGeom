@@ -15,10 +15,12 @@ function drawSoccerBall
 %   Usage:
 %   drawSoccerBall
 %
-%
+%   See Also
+%     demoDrawTubularMesh, demoRevolutionSurface
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2009-06-22,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
@@ -32,7 +34,7 @@ origin = [0 0 0];
 sphere = [origin 1];
 
 % extract vertices, edges, and faces of soccerball polyhedron
-[vertices edges faces] = createSoccerBall;
+[vertices, edges, faces] = createSoccerBall;
 
 % prepare figure
 figure(1); clf; hold on;
@@ -53,7 +55,7 @@ for f = 1:length(faces)
     
     % compute centroid of face vertices
     % (See also function faceCentroids)
-    faceCenter = centroid(vertices(faceVertices, :));
+    faceCenter = mean(vertices(faceVertices, :), 1);
     
     % color of the current face (black for pentagons, white for heaxagons)
     if Nvf == 5

@@ -7,18 +7,19 @@ function demoDrawTubularMesh(varargin)
 %   demoDrawTubularMesh
 %
 %   See also
+%     drawSoccerBall, demoRevolutionSurface, demoInertiaEllipsoid
 %
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2012-04-25,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
 %% Initialisation
 
 % extract vertices, edges, and faces of soccerball polyhedron
-[vertices edges faces] = createSoccerBall;
+[vertices, edges, faces] = createSoccerBall;
 
 % prepare figure
 figure(1); clf; hold on;
