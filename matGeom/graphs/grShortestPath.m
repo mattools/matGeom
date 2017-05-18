@@ -43,7 +43,7 @@ if length(ind0) > 1
     
     % concatenate path pieces
     nodePath = ind0(1);
-    edgePath = [];
+    edgePath = size(0, 2);
     for i = 2:length(ind0)
         [node0, edge0] = grShortestPath(nodes, edges, ind0(i-1), ind0(i), edgeWeights);
         nodePath = [nodePath ; node0(2:end)]; %#ok<AGROW>
