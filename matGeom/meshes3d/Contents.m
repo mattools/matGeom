@@ -77,6 +77,7 @@
 %   sphereMesh               - Create a 3D mesh representing a sphere
 %   ellipsoidMesh            - Convert a 3D ellipsoid to face-vertex mesh representation
 %   torusMesh                - Create a 3D mesh representing a torus
+%   curveToMesh              - Create a mesh surrounding a 3D curve
 %   boxToMesh                - Convert a box into a quad mesh with the same size
 %   minConvexHull            - Return the unique minimal convex hull of a set of 3D points
 %
