@@ -25,6 +25,11 @@ if iscell(faces) || (isnumeric(faces) && size(faces, 2) > 4)
     faces = triangulateFaces(faces);
 end
 
+% forces faces to b efloating point array, for sparse function
+if ~isfloat(faces)
+    faces = double(faces);
+end
+    
 % populate a sparse matrix
 if size(faces, 2) == 3
     adj = sparse(...
