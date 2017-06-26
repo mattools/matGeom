@@ -1,33 +1,24 @@
 function [vertices, facets] = triangulateCurvePair(curve1, curve2)
-%TRIANGULATECURVEPAIR Compute triangulation between a pair of 3D curves
+%TRIANGULATECURVEPAIR Compute triangulation between a pair of 3D open curves
 %
-%   output = testTriangulateCurvePair(input)
+%   [V, F] = testTriangulateCurvePair(CURVE1, CURVE2)
 %
 %   Example
-%     % triangulate a surface patch between two ellipses
+%     % triangulate a surface patch between two open curves
 %     % create two sample curves
-%     poly1 = ellipseToPolygon([50 50 40 20 0], 36);
-%     poly2 = ellipseToPolygon([50 50 40 20 60], 36);
-%     poly1 = poly1(1:end-1,:);
-%     poly2 = poly2(1:end-1,:);
-%     % transform to 3D polygons / curves
-%     curve1 = [poly1 10*ones(size(poly1, 1), 1)];
-%     curve2 = [poly2 20*ones(size(poly2, 1), 1)];
-%     % draw as 3D curves
-%     figure(1); clf; hold on;
-%     drawPolygon3d(curve1, 'b'); drawPoint3d(curve1, 'bo');
-%     drawPolygon3d(curve2, 'g'); drawPoint3d(curve2, 'go');
+%     t = linspace(0, 2*pi, 100);
+%     curve1 = [linspace(0, 10, 100)' 5 * sin(t') zeros(100,1)];
+%     curve2 = [linspace(0, 10, 100)' 2 * sin(t') 2*ones(100,1)];
+%     figure; hold on;
+%     drawPolyline3d(curve1, 'b');
+%     drawPolyline3d(curve2, 'g');
 %     view(3); axis equal;
-%     [vertices, faces] = triangulateCurvePair(curve1, curve2);
-%     % display the resulting mesh
-%     figure(2); clf; hold on;
-%     drawMesh(vertices, faces);
-%     drawPolygon3d(curve1, 'color', 'b', 'linewidth', 2);
-%     drawPolygon3d(curve2, 'color', 'g', 'linewidth', 2);
-%     view(3); axis equal;
+%     [v, f] = triangulateCurvePair(curve1, curve2);
+%     figure; drawMesh(v, f, 'linestyle', 'none');
+%     view(3); axis equal
 %
 %   See also
-%     meshes3D, meshSurfaceArea
+%     meshes3D, triangulatePolygonPair, meshSurfaceArea
  
 % ------
 % Author: David Legland
@@ -38,29 +29,26 @@ function [vertices, facets] = triangulateCurvePair(curve1, curve2)
 
 %% Memory allocation
 
-% concatenate vertex coordinates for creating mesh
-vertices = [curve1 ; curve2];
-
 % number of vertices on each curve
 n1 = size(curve1, 1);
 n2 = size(curve2, 1);
 
 % allocate the array of facets (each edge of each curve provides a facet)
-nFacets = n1 + n2;
+nFacets = n1 + n2 - 2;
 facets = zeros(nFacets, 3);
 
+% look for the closest ends of two curves and reverse the second curve if
+% needed
+p1 = curve1(1, :);
+if distancePoints(p1, curve2(1,:)) > distancePoints(p1, curve2(end,:))
+    curve2 = curve2(end:-1:1,:);
+end
+currentIndex1 = 1;
+currentIndex2 = 1;
 
-%% Init iteration
+% concatenate vertex coordinates for creating mesh
+vertices = [curve1 ; curve2];
 
-% find the pair of points with smallest distance.
-% This will be the current diagonal.
-[dists, inds] = minDistancePoints(curve1, curve2);
-[dummy, ind1] = min(dists); %#ok<ASGLU>
-ind2 = inds(ind1);
-
-% consider two consecutive vertices on each curve
-currentIndex1 = ind1;
-currentIndex2 = ind2;
 
 
 %% Main iteration

@@ -72,7 +72,8 @@
 %
 % Creation and conversion
 %   surfToMesh               - Convert surface grids into face-vertex mesh
-%   triangulateCurvePair     - Compute triangulation between a pair of 3D curves
+%   triangulateCurvePair     - Compute triangulation between a pair of 3D open curves
+%   triangulatePolygonPair   - Compute triangulation between a pair of 3D closed curves
 %   cylinderMesh             - Create a 3D mesh representing a cylinder
 %   sphereMesh               - Create a 3D mesh representing a sphere
 %   ellipsoidMesh            - Convert a 3D ellipsoid to face-vertex mesh representation
