@@ -1,4 +1,4 @@
-function [cVertices, cFaces] = clipMeshVertices(vertices, faces, box)
+function [v2, f2] = clipMeshVertices(v, f, b, varargin)
 %CLIPMESHVERTICES Clip vertices of a surfacic mesh and remove outer faces
 %
 %   [V2, F2] = clipMeshVertices(V, F, B)
@@ -6,6 +6,9 @@ function [cVertices, cFaces] = clipMeshVertices(vertices, faces, box)
 %   box represented by B. The result is the set of vertices contained in
 %   the box, and a new set of faces corresponding to original faces with
 %   all vertices within the box.
+%   
+%   [V2, F2] = clipMeshVertices(..., 'inside',false) removes the inner 
+%   faces instead of the outer faces.
 %
 %   Example
 %     [v, f] = createSoccerBall;
@@ -17,7 +20,6 @@ function [cVertices, cFaces] = clipMeshVertices(vertices, faces, box)
 %   See also
 %   meshes3d, clipPoints3d
 %
-
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -25,15 +27,22 @@ function [cVertices, cFaces] = clipMeshVertices(vertices, faces, box)
 % Copyright 2011 INRA - Cepia Software Platform.
 
 % if input is given as a structure, parse fields
-if isstruct(vertices)
-    box = faces;
-    faces = vertices.faces;
-    vertices = vertices.vertices;
+if isstruct(v)
+    b = f;
+    f = v.faces;
+    v = v.vertices;
 end
 
-% clip the vertices
-[cVertices, indVertices] = clipPoints3d(vertices, box);
+parser = inputParser;
+addOptional(parser,'inside',true,@islogical);
+parse(parser,varargin{:});
 
+% clip the vertices
+[v2, indVertices] = clipPoints3d(v, b);
+if ~parser.Results.inside
+    indVertices=find(~ismember(v,v2,'rows'));
+    v2=v(indVertices,:);
+end
 
 % create index array for face indices relabeling
 refInds = zeros(size(indVertices));
@@ -42,22 +51,22 @@ for i = 1:length(indVertices)
 end
 
 % select the faces with all vertices within the box
-if isnumeric(faces)
+if isnumeric(f)
     % Faces given as numeric array
-    indFaces = sum(~ismember(faces, indVertices), 2) == 0;
-    cFaces = refInds(faces(indFaces, :));
+    indFaces = sum(~ismember(f, indVertices), 2) == 0;
+    f2 = refInds(f(indFaces, :));
     
-elseif iscell(faces)
+elseif iscell(f)
     % Faces given as cell array
-    nFaces = length(faces);
+    nFaces = length(f);
     indFaces = false(nFaces, 1);
     for i = 1:nFaces
-        indFaces(i) = sum(~ismember(faces{i}, indVertices), 2) == 0;
+        indFaces(i) = sum(~ismember(f{i}, indVertices), 2) == 0;
     end
-    cFaces = faces(indFaces, :);
+    f2 = f(indFaces, :);
     
     % re-label indices of face vertices (keeping horizontal index array)
-    for i = 1:length(cFaces)
-        cFaces{i} = refInds(cFaces{i})';
+    for i = 1:length(f2)
+        f2{i} = refInds(f2{i})';
     end
 end
