@@ -28,15 +28,6 @@
 %     axis equal; view(3);
 %  
 %
-% Creation and conversion
-%   surfToMesh               - Convert surface grids into face-vertex mesh
-%   cylinderMesh             - Create a 3D mesh representing a cylinder
-%   sphereMesh               - Create a 3D mesh representing a sphere
-%   ellipsoidMesh            - Convert a 3D ellipsoid to face-vertex mesh representation
-%   torusMesh                - Create a 3D mesh representing a torus
-%   boxToMesh                - Convert a box into a quad mesh with the same size
-%   minConvexHull            - Return the unique minimal convex hull of a set of 3D points
-%
 % General processing on meshes
 %   smoothMesh               - Smooth mesh by replacing each vertex by the average of its neighbors 
 %   subdivideMesh            - Subdivides each face of the mesh
@@ -47,6 +38,13 @@
 %   faceCentroids            - Compute centroids of a mesh faces
 %   faceNormal               - Compute normal vector of faces in a 3D mesh
 %   vertexNormal             - Compute normals to a mesh vertices
+%
+% Intersections and clipping
+%   intersectLineMesh3d      - Intersection points of a 3D line with a mesh
+%   intersectPlaneMesh       - Compute the polygons resulting from plane-mesh intersection
+%   polyhedronSlice          - Intersect a convex polyhedron with a plane.
+%   clipMeshVertices         - Clip vertices of a surfacic mesh and remove outer faces
+%   clipConvexPolyhedronHP   - Clip a convex polyhedron by a plane
 %
 % Geometric measures on meshes
 %   meshSurfaceArea          - Surface area of a polyhedral mesh
@@ -60,13 +58,6 @@
 %   polyhedronMeanBreadth    - Mean breadth of a convex polyhedron
 %   trimeshMeanBreadth       - Mean breadth of a triangular mesh
 %
-% Intersections and clipping
-%   intersectLineMesh3d      - Intersection points of a 3D line with a mesh
-%   intersectPlaneMesh       - Compute the polygons resulting from plane-mesh intersection
-%   polyhedronSlice          - Intersect a convex polyhedron with a plane.
-%   clipMeshVertices         - Clip vertices of a surfacic mesh and remove outer faces
-%   clipConvexPolyhedronHP   - Clip a convex polyhedron by a plane
-%
 % Utility functions
 %   meshFace                 - Return the vertex indices of a face in a mesh
 %   meshFaceEdges            - Computes edge indices of each face
@@ -79,7 +70,19 @@
 %   meshAdjacencyMatrix      - Compute adjacency matrix of a mesh from set of faces
 %   checkMeshAdjacentFaces   - Check if adjacent faces of a mesh have similar orientation
 %
-% Typical polyhedra
+% Creation and conversion
+%   surfToMesh               - Convert surface grids into face-vertex mesh
+%   triangulateCurvePair     - Compute triangulation between a pair of 3D open curves
+%   triangulatePolygonPair   - Compute triangulation between a pair of 3D closed curves
+%   cylinderMesh             - Create a 3D mesh representing a cylinder
+%   sphereMesh               - Create a 3D mesh representing a sphere
+%   ellipsoidMesh            - Convert a 3D ellipsoid to face-vertex mesh representation
+%   torusMesh                - Create a 3D mesh representing a torus
+%   curveToMesh              - Create a mesh surrounding a 3D curve
+%   boxToMesh                - Convert a box into a quad mesh with the same size
+%   minConvexHull            - Return the unique minimal convex hull of a set of 3D points
+%
+% Create meshes representing polyhedra
 %   polyhedra                - Index of classical polyhedral meshes
 %   createCube               - Create a 3D mesh representing the unit cube
 %   createOctahedron         - Create a 3D mesh representing an octahedron
@@ -89,8 +92,6 @@
 %   createTetrahedron        - Create a 3D mesh representing a tetrahedron
 %   createRhombododecahedron - Create a 3D mesh representing a rhombododecahedron
 %   createTetrakaidecahedron - Create a 3D mesh representing a tetrakaidecahedron
-%
-% Less typical polyhedra
 %   createSoccerBall         - Create a 3D mesh representing a soccer ball
 %   createDurerPolyhedron    - Create a mesh representing Durer's polyhedron 
 %   createMengerSponge       - Create a cube with an inside cross removed
