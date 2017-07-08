@@ -5,14 +5,14 @@ function varargout = removeMeshFaces(v, f, fLI)
 %   by the vertex array V and the face array F. The result is the new set 
 %   of vertices V2 and faces F2 without the faces indexed by FLI.
 %
-%   [V2, F2] = removeMeshFaces(MESH, FLI) with the struct MESH 
-%   containing the fields "vertices" (V) and "faces" (F)
+%   [V2, F2] = removeMeshFaces(MESH, FLI) with the struct MESH containing 
+%   the fields "vertices" (V) and "faces" (F)
 %   
-%   MESH2 = cutFacesOffMesh(V, F, FLI) with the struct MESH2
-%   containing the fields "vertices" (V2) and "faces" (F2)
+%   MESH2 = cutFacesOffMesh(V, F, FLI) with the struct MESH2 containing the
+%   fields "vertices" (V2) and "faces" (F2)
 %   
-%   MESH2 = cutFacesOffMesh(MESH, FLI) with the structs MESH and
-%   MESH2 containing the fields "vertices" (V, V2) and "faces" (F, F2)
+%   MESH2 = cutFacesOffMesh(MESH, FLI) with the structs MESH and MESH2 
+%   containing the fields "vertices" (V, V2) and "faces" (F, F2)
 %   
 %   Example
 %     [v, f] = createSoccerBall;
