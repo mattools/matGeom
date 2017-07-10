@@ -23,22 +23,26 @@ function varargout = cutMeshByPlane(v, f, plane, varargin)
 % ---------
 % Authors: oqilipo, David Legland
 % Created: 2017-07-09
+% Copyright 2017
 
-% parse inputs
 narginchk(2,5)
 nargoutchk(1,6)
 
+
+%% Parse inputs
 % If first argument is a struct
 if nargin == 2 || nargin == 4
+    if ~isempty(varargin)
+        varargin={plane, varargin{:}};
+    end
     plane = f;
     [v, f] = parseMeshData(v);
 end
 
 p = inputParser;
-isPlane = @(x) numel(x)==9;
-addRequired(p,'plane',isPlane)
+addRequired(p,'plane',@isPlane)
 validStrings = {'above','in','below'};
-addOptional(p,'part','above',@(x) any(validatestring(x, validStrings)))
+addParameter(p,'part','above',@(x) any(validatestring(x, validStrings)))
 
 parse(p, plane, varargin{:});
 
@@ -46,24 +50,24 @@ plane=p.Results.plane;
 part=p.Results.part;
 
 
-% algorithm
+%% Algorithm
 % Logical index to the vertices below the plane
 VBPl_LI = isBelowPlane(v, plane);
 
 % Logical index to three vertices of each face
 FBP_LI = VBPl_LI(f);
 
-% Faces above the plane, all three vertices == 0
+% Faces above the plane, all three vertices == 0 -> sum has to be 0
 above = removeMeshFaces(v, f, ~(sum(FBP_LI, 2) == 0) );
 
-% Faces in the plane, 1 or 2 vertices == 0
-inside = removeMeshFaces(v, f, ~((sum(FBP_LI, 2) > 0 & sum(FBP_LI, 2) < 3)) );
+% Faces in the plane, 1 or 2 vertices == 0 -> sum can be 1 or 2
+inside = removeMeshFaces(v, f, ~((sum(FBP_LI, 2) > 0 & sum(FBP_LI, 2) < 3)));
 
-% Faces below the plane, all three vertices == 1
+% Faces below the plane, all three vertices == 1 -> sum has to be 3
 below = removeMeshFaces(v, f, ~(sum(FBP_LI, 2) == 3) );
 
 
-% parse outputs
+%% Parse outputs
 switch nargout
     case 1
         switch part
@@ -102,5 +106,3 @@ switch nargout
 end
 
 end
-
-
