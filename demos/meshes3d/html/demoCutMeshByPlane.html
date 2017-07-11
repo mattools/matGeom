@@ -1,0 +1,279 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>demoCutMeshByPlane</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-07-11"><meta name="DC.source" content="demoCutMeshByPlane.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Initialisations</a></li></ul></div><pre class="codeinput"><span class="comment">%DEMOCUTMESHBYPLANE cut a soccerball by a plane</span>
+<span class="comment">%</span>
+<span class="comment">%   output = demoCutMeshByPlane(input)</span>
+<span class="comment">%</span>
+<span class="comment">%   Example</span>
+<span class="comment">%   demoCutMeshByPlane</span>
+<span class="comment">%</span>
+<span class="comment">%   See also</span>
+<span class="comment">%</span>
+
+<span class="comment">% ------</span>
+<span class="comment">% Author: David Legland</span>
+<span class="comment">% e-mail: david.legland@inra.fr</span>
+<span class="comment">% Created: 2017-07-11,    using Matlab 9.1.0.441655 (R2016b)</span>
+<span class="comment">% Copyright 2017 INRA - Cepia Software Platform.</span>
+</pre><h2 id="2">Initialisations</h2><pre class="codeinput">[v, f] = createSoccerBall;
+f = triangulateFaces(f);
+mesh.vertices=v; mesh.faces=f;
+planeOrigin = [-0.2 0 0];
+planeNormaL = [-1 0 -1];
+plane = createPlane(planeOrigin, planeNormaL);
+</pre><pre class="codeinput">[above, inside, below] = cutMeshByPlane(mesh, plane);
+
+figure(<span class="string">'color'</span>,<span class="string">'w'</span>); axis <span class="string">equal</span>; hold <span class="string">on</span>; view(3)
+drawMesh(above, <span class="string">'FaceColor'</span>, <span class="string">'r'</span>);
+drawMesh(inside, <span class="string">'FaceColor'</span>, <span class="string">'g'</span>);
+drawMesh(below, <span class="string">'FaceColor'</span>, <span class="string">'b'</span>);
+
+drawPlane3d(plane, <span class="string">'FaceAlpha'</span>,.7)
+drawVector3d(planeOrigin, planeNormaL)
+</pre><img vspace="5" hspace="5" src="demoCutMeshByPlane_01.png" alt=""> <pre class="codeinput">[aV, aF, iV, iF, bV, bF] = cutMeshByPlane(mesh.vertices, mesh.faces, plane);
+
+figure(<span class="string">'color'</span>,<span class="string">'w'</span>); axis <span class="string">equal</span>; hold <span class="string">on</span>; view(3)
+drawMesh(aV, aF, <span class="string">'FaceColor'</span>, <span class="string">'r'</span>);
+drawMesh(iV, iF, <span class="string">'FaceColor'</span>, <span class="string">'g'</span>);
+drawMesh(bV, bF, <span class="string">'FaceColor'</span>, <span class="string">'b'</span>);
+
+drawPlane3d(plane, <span class="string">'FaceAlpha'</span>,.7)
+drawVector3d(planeOrigin, planeNormaL)
+</pre><img vspace="5" hspace="5" src="demoCutMeshByPlane_02.png" alt=""> <pre class="codeinput">[aV, aF] = cutMeshByPlane(mesh.vertices, mesh.faces, plane,<span class="string">'part'</span>,<span class="string">'above'</span>);
+
+figure(<span class="string">'color'</span>,<span class="string">'w'</span>); axis <span class="string">equal</span>; hold <span class="string">on</span>; view(3)
+drawMesh(aV, aF, <span class="string">'FaceColor'</span>, <span class="string">'r'</span>);
+<span class="comment">% drawMesh(iV, iF, 'FaceColor', 'g');</span>
+<span class="comment">% drawMesh(bV, bF, 'FaceColor', 'b');</span>
+
+drawPlane3d(plane, <span class="string">'FaceAlpha'</span>,.7)
+drawVector3d(planeOrigin, planeNormaL)
+</pre><img vspace="5" hspace="5" src="demoCutMeshByPlane_03.png" alt=""> <pre class="codeinput">[iV, iF] = cutMeshByPlane(mesh.vertices, mesh.faces, plane,<span class="string">'part'</span>,<span class="string">'in'</span>);
+
+figure(<span class="string">'color'</span>,<span class="string">'w'</span>); axis <span class="string">equal</span>; hold <span class="string">on</span>; view(3)
+<span class="comment">% drawMesh(aV, aF, 'FaceColor', 'r');</span>
+drawMesh(iV, iF, <span class="string">'FaceColor'</span>, <span class="string">'g'</span>);
+<span class="comment">% drawMesh(bV, bF, 'FaceColor', 'b');</span>
+
+drawPlane3d(plane, <span class="string">'FaceAlpha'</span>,.7)
+drawVector3d(planeOrigin, planeNormaL)
+</pre><img vspace="5" hspace="5" src="demoCutMeshByPlane_04.png" alt=""> <pre class="codeinput">[bV, bF] = cutMeshByPlane(mesh.vertices, mesh.faces, plane,<span class="string">'part'</span>,<span class="string">'below'</span>);
+
+figure(<span class="string">'color'</span>,<span class="string">'w'</span>); axis <span class="string">equal</span>; hold <span class="string">on</span>; view(3)
+<span class="comment">% drawMesh(aV, aF, 'FaceColor', 'r');</span>
+<span class="comment">% drawMesh(iV, iF, 'FaceColor', 'g');</span>
+drawMesh(bV, bF, <span class="string">'FaceColor'</span>, <span class="string">'b'</span>);
+
+drawPlane3d(plane, <span class="string">'FaceAlpha'</span>,.7)
+drawVector3d(planeOrigin, planeNormaL)
+</pre><img vspace="5" hspace="5" src="demoCutMeshByPlane_05.png" alt=""> <pre class="codeinput">above = cutMeshByPlane(mesh, plane,<span class="string">'part'</span>,<span class="string">'above'</span>);
+
+figure(<span class="string">'color'</span>,<span class="string">'w'</span>); axis <span class="string">equal</span>; hold <span class="string">on</span>; view(3)
+drawMesh(above, <span class="string">'FaceColor'</span>, <span class="string">'r'</span>);
+<span class="comment">% drawMesh(iV, iF, 'FaceColor', 'g');</span>
+<span class="comment">% drawMesh(bV, bF, 'FaceColor', 'b');</span>
+
+drawPlane3d(plane, <span class="string">'FaceAlpha'</span>,.7)
+drawVector3d(planeOrigin, planeNormaL)
+</pre><img vspace="5" hspace="5" src="demoCutMeshByPlane_06.png" alt=""> <pre class="codeinput">inside = cutMeshByPlane(mesh, plane,<span class="string">'part'</span>,<span class="string">'in'</span>);
+
+figure(<span class="string">'color'</span>,<span class="string">'w'</span>); axis <span class="string">equal</span>; hold <span class="string">on</span>; view(3)
+<span class="comment">% drawMesh(aV, aF, 'FaceColor', 'r');</span>
+drawMesh(inside, <span class="string">'FaceColor'</span>, <span class="string">'g'</span>);
+<span class="comment">% drawMesh(bV, bF, 'FaceColor', 'b');</span>
+
+drawPlane3d(plane, <span class="string">'FaceAlpha'</span>,.7)
+drawVector3d(planeOrigin, planeNormaL)
+</pre><img vspace="5" hspace="5" src="demoCutMeshByPlane_07.png" alt=""> <pre class="codeinput">below = cutMeshByPlane(mesh, plane,<span class="string">'part'</span>,<span class="string">'below'</span>);
+
+figure(<span class="string">'color'</span>,<span class="string">'w'</span>); axis <span class="string">equal</span>; hold <span class="string">on</span>; view(3)
+<span class="comment">% drawMesh(aV, aF, 'FaceColor', 'r');</span>
+<span class="comment">% drawMesh(iV, iF, 'FaceColor', 'g');</span>
+drawMesh(below, <span class="string">'FaceColor'</span>, <span class="string">'b'</span>);
+
+drawPlane3d(plane, <span class="string">'FaceAlpha'</span>,.7)
+drawVector3d(planeOrigin, planeNormaL)
+</pre><img vspace="5" hspace="5" src="demoCutMeshByPlane_08.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%DEMOCUTMESHBYPLANE cut a soccerball by a plane
+%
+%   output = demoCutMeshByPlane(input)
+%
+%   Example
+%   demoCutMeshByPlane
+%
+%   See also
+%
+ 
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% Author: David Legland
+% e-mail: david.legland@inra.fr
+% Created: 2017-07-11,    using Matlab 9.1.0.441655 (R2016b)
+% Copyright 2017 INRA - Cepia Software Platform.
+
+
+%% Initialisations
+
+[v, f] = createSoccerBall;
+f = triangulateFaces(f);
+mesh.vertices=v; mesh.faces=f;
+planeOrigin = [-0.2 0 0];
+planeNormaL = [-1 0 -1];
+plane = createPlane(planeOrigin, planeNormaL);
+
+
+%%
+[above, inside, below] = cutMeshByPlane(mesh, plane);
+
+figure('color','w'); axis equal; hold on; view(3)
+drawMesh(above, 'FaceColor', 'r');
+drawMesh(inside, 'FaceColor', 'g');
+drawMesh(below, 'FaceColor', 'b');
+
+drawPlane3d(plane, 'FaceAlpha',.7)
+drawVector3d(planeOrigin, planeNormaL)
+
+%%
+[aV, aF, iV, iF, bV, bF] = cutMeshByPlane(mesh.vertices, mesh.faces, plane);
+
+figure('color','w'); axis equal; hold on; view(3)
+drawMesh(aV, aF, 'FaceColor', 'r');
+drawMesh(iV, iF, 'FaceColor', 'g');
+drawMesh(bV, bF, 'FaceColor', 'b');
+
+drawPlane3d(plane, 'FaceAlpha',.7)
+drawVector3d(planeOrigin, planeNormaL)
+
+%%
+[aV, aF] = cutMeshByPlane(mesh.vertices, mesh.faces, plane,'part','above');
+
+figure('color','w'); axis equal; hold on; view(3)
+drawMesh(aV, aF, 'FaceColor', 'r');
+% drawMesh(iV, iF, 'FaceColor', 'g');
+% drawMesh(bV, bF, 'FaceColor', 'b');
+
+drawPlane3d(plane, 'FaceAlpha',.7)
+drawVector3d(planeOrigin, planeNormaL)
+
+%%
+[iV, iF] = cutMeshByPlane(mesh.vertices, mesh.faces, plane,'part','in');
+
+figure('color','w'); axis equal; hold on; view(3)
+% drawMesh(aV, aF, 'FaceColor', 'r');
+drawMesh(iV, iF, 'FaceColor', 'g');
+% drawMesh(bV, bF, 'FaceColor', 'b');
+
+drawPlane3d(plane, 'FaceAlpha',.7)
+drawVector3d(planeOrigin, planeNormaL)
+
+%%
+[bV, bF] = cutMeshByPlane(mesh.vertices, mesh.faces, plane,'part','below');
+
+figure('color','w'); axis equal; hold on; view(3)
+% drawMesh(aV, aF, 'FaceColor', 'r');
+% drawMesh(iV, iF, 'FaceColor', 'g');
+drawMesh(bV, bF, 'FaceColor', 'b');
+
+drawPlane3d(plane, 'FaceAlpha',.7)
+drawVector3d(planeOrigin, planeNormaL)
+
+%%
+above = cutMeshByPlane(mesh, plane,'part','above');
+
+figure('color','w'); axis equal; hold on; view(3)
+drawMesh(above, 'FaceColor', 'r');
+% drawMesh(iV, iF, 'FaceColor', 'g');
+% drawMesh(bV, bF, 'FaceColor', 'b');
+
+drawPlane3d(plane, 'FaceAlpha',.7)
+drawVector3d(planeOrigin, planeNormaL)
+
+%%
+inside = cutMeshByPlane(mesh, plane,'part','in');
+
+figure('color','w'); axis equal; hold on; view(3)
+% drawMesh(aV, aF, 'FaceColor', 'r');
+drawMesh(inside, 'FaceColor', 'g');
+% drawMesh(bV, bF, 'FaceColor', 'b');
+
+drawPlane3d(plane, 'FaceAlpha',.7)
+drawVector3d(planeOrigin, planeNormaL)
+
+%%
+below = cutMeshByPlane(mesh, plane,'part','below');
+
+figure('color','w'); axis equal; hold on; view(3)
+% drawMesh(aV, aF, 'FaceColor', 'r');
+% drawMesh(iV, iF, 'FaceColor', 'g');
+drawMesh(below, 'FaceColor', 'b');
+
+drawPlane3d(plane, 'FaceAlpha',.7)
+drawVector3d(planeOrigin, planeNormaL)
+##### SOURCE END #####
+--></body></html>
