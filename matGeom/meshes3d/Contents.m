@@ -33,6 +33,7 @@
 %   subdivideMesh            - Subdivides each face of the mesh
 %   triangulateFaces         - Convert face array to an array of triangular faces 
 %   removeMeshVertices       - Remove vertices and associated faces from a mesh
+%   removeMeshFaces          - Remove faces from a mesh by face indices
 %   mergeCoplanarFaces       - Merge coplanar faces of a polyhedral mesh
 %   meshFacePolygons         - Returns the set of polygons that constitutes a mesh
 %   faceCentroids            - Compute centroids of a mesh faces
@@ -45,6 +46,7 @@
 %   polyhedronSlice          - Intersect a convex polyhedron with a plane.
 %   clipMeshVertices         - Clip vertices of a surfacic mesh and remove outer faces
 %   clipConvexPolyhedronHP   - Clip a convex polyhedron by a plane
+%   cutMeshByPlane           - Cut a mesh by a plane
 %
 % Geometric measures on meshes
 %   meshSurfaceArea          - Surface area of a polyhedral mesh
@@ -119,4 +121,3 @@
 %   drawPolyhedron           - Draw polyhedron defined by vertices and faces
 
 % Others
-
