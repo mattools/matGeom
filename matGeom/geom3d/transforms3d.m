@@ -22,7 +22,7 @@ function transforms3d(varargin)
 %   createRotationOx, createRotationOy, createRotationOz
 %   rotation3dAxisAndAngle, rotation3dToEulerAngles,
 %   createRotation3dLineAngle, eulerAnglesToRotation3d
-%   transformPoint3d, transformVector3d, transformLine3d
+%   transformPoint3d, transformVector3d, transformLine3d, transformPlane3d
 %   composeTransforms3d, recenterTransform3d
 %
 
