@@ -5,7 +5,7 @@ Matlab geometry toolbox for 2D/3D geometric computing
 It contains several hundreds of functions for the creation and manipulation 
 of 2D and 3D shapes such as point sets, lines, polygons, 3D meshes, ellipses... 
 
-The official homepage for the project is http://github.com/matmools/matGeom. 
+The official homepage for the project is http://github.com/mattools/matGeom. 
 A starting help is provided in the [MatGeom wiki](https://github.com/mattools/matGeom/wiki "MatGeom Wiki homepage")
 
 Package organization
