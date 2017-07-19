@@ -6,7 +6,7 @@ It contains several hundreds of functions for the creation and manipulation
 of 2D and 3D shapes such as point sets, lines, polygons, 3D meshes, ellipses... 
 
 The official homepage for the project is http://github.com/MatTools/matGeom. 
-A comprenhesive help is provided in the [MatGeom wiki](https://github.com/MatTools/matGeom/wiki "MatGeom Wiki homepage")
+A starting help is provided in the [MatGeom wiki](https://github.com/MatTools/matGeom/wiki "MatGeom Wiki homepage")
 
 Package organization
 ---
