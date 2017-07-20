@@ -5,17 +5,17 @@ function point = circle3dPoint(circle, pos)
 %
 %   Example
 %   % Draw some points on a 3D circle
-%     figure; hold on;
+%     figure('color','w'); hold on; view(130,-10);
+%     circle = [10 20 30 50 90 45 0];
+%     drawCircle3d(circle)
 %     % origin point
 %     pos1 = 0;
 %     drawPoint3d(circle3dPoint(circle, pos1), 'ro')
 %     % few points regularly spaced
-%     for i = 10:10:40
-%         drawPoint3d(circle3dPoint(circle, i))
-%     end
+%     drawPoint3d(circle3dPoint(circle, 10:10:40), '+')
 %     % Draw point opposite to origin
 %     drawPoint3d(circle3dPoint(circle, 180), 'k*')
-
+%   
 %
 %   See also
 %   circles3d, circle3dPosition
@@ -25,6 +25,8 @@ function point = circle3dPoint(circle, pos)
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2011-06-21,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
+
+pos=pos(:);
 
 % extract circle coordinates
 xc  = circle(1);
@@ -42,7 +44,7 @@ t = pos * pi / 180;
 % compute position on base circle
 x   = r * cos(t);
 y   = r * sin(t);
-z   = 0;
+z   = zeros(length(pos),1);
 pt0 = [x y z];
 
 % compute transformation from local basis to world basis
