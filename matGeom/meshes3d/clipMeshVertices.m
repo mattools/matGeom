@@ -12,10 +12,13 @@ function [v2, f2] = clipMeshVertices(v, f, b, varargin)
 %
 %   Example
 %     [v, f] = createSoccerBall;
-%     box = [-.8 2 -.8 2 -.8 2];
-%     [v2, f2] = clipMeshVertices(v, f, box);
-%     figure; drawMesh(v2, f2, 'faceAlpha', .7); 
-%     view(3); axis equal;
+%     f = triangulateFaces(f);
+%     box = [0 2 -1 2 -.5 2];
+%     [v2, f2] = clipMeshVertices(v, f, box, 'inside', false);
+%     figure('color','w'); view(3); axis equal
+%     drawMesh(v, f, 'faceColor', 'none', 'faceAlpha', .2);
+%     drawBox3d(box)
+%     drawMesh(v2, f2, 'faceAlpha', .7);
 %
 %   See also
 %   meshes3d, clipPoints3d
@@ -38,11 +41,7 @@ addOptional(parser,'inside',true,@islogical);
 parse(parser,varargin{:});
 
 % clip the vertices
-[v2, indVertices] = clipPoints3d(v, b);
-if ~parser.Results.inside
-    indVertices=find(~ismember(v,v2,'rows'));
-    v2=v(indVertices,:);
-end
+[v2, indVertices] = clipPoints3d(v, b, parser.Results.inside);
 
 % create index array for face indices relabeling
 refInds = zeros(size(indVertices));
