@@ -119,8 +119,8 @@
 %
 % -----
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
-% Project homepage: http://github.com/dlegland/matGeom
+% e-mail: david.legland@inra.fr
+% Project homepage: http://github.com/mattools/matGeom
 % created the  07/11/2005.
 % Copyright INRA - Cepia Software Platform.
 

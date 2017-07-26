@@ -1,5 +1,5 @@
 % MATGEOM Geometric Computing Toolbox
-% Version 1.0 21-Mar-2011 .
+% Version 1.0 26-07-2017 .
 %
 %   MatGeom Provides low-level functions for geometric computing. It is
 %   possible to create, display, compute intersections... of various
@@ -19,16 +19,16 @@
 %   'setupMatGeom'.
 %
 %   More information on the project homepage:
-%   http://matgeom.sourceforge.net/
+%   https://github.com/mattools/matGeom
 %
 %   Online documentation:
-%   http://matgeom.sourceforge.net/doc/api/matgeom/index.html
+%   https://github.com/mattools/matGeom
 %   
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2011-03-21,    using Matlab 7.9.0.529 (R2009b)
-% Project homepage: http://github.com/dlegland/matGeom 
+% Project homepage: http://github.com/mattools/matGeom 
 % http://www.pfl-cepia.inra.fr/index.php?page=geom3d
 % Copyright 2011 INRA - Cepia Software Platform.
 

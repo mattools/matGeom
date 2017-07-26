@@ -200,7 +200,7 @@
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % Created: 2005-11-07
-% Homepage: http://github.com/dlegland/matGeom
+% Homepage: http://github.com/mattools/matGeom
 % http://www.pfl-cepia.inra.fr/index.php?page=geom3d
 % Copyright 2005 INRA
 
