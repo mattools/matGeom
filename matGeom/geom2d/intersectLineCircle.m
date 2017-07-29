@@ -6,7 +6,7 @@ function points = intersectLineCircle(line, circle)
 %   coordinates of an intersection point for each line-circle pair, i.e.
 %   INTERS(:,:,k)} contains the intersections between LINE(k,:)
 %   and CIRCLE(k,:).
-%   If a line and a circle do not intersect, the result is NA.
+%   If a line and a circle do not intersect, the result is NaN.
 
 %   Example
 %     % base point
@@ -69,7 +69,7 @@ c = sum(dp.^2, 2) - radius.^2;
 % discriminant
 delta  = b .^ 2 - 4 * a .* c;
 
-points = nan(2, 2, nCircles);
+points = nan (2, 2, nCircles);
 
 validInds = delta > 0;
 
