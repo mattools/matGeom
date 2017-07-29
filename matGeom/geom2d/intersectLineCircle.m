@@ -68,6 +68,7 @@ c = sum(dp.^2, 2) - radius.^2;
 
 % discriminant
 delta  = b .^ 2 - 4 * a .* c;
+
 points = nan(2, 2, nCircles);
 
 validInds = delta > 0;
