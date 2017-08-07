@@ -38,18 +38,17 @@ options = {'FaceColor', 'm'};
 % parse input arguments if any
 if ~isempty(varargin)
     options = varargin;
-    
-    % if option is a single argument, assume it corresponds to plane color
     if length(options) == 1
-        options = {'FaceColor', options{1}};
-    end
-    
-    % if options are specified as struct, need to convert to parameter
-    % name-value pairs
-    if isstruct(options{1})
-        s = options{1};
-        options = [fieldnames(s) struct2cell(s)]';
-        options = options(:)';
+        if isstruct(options{1})
+            % if options are specified as struct, need to convert to 
+            % parameter name-value pairs
+            options = [fieldnames(options{1}) struct2cell(options{1})]';
+            options = options(:)';
+        else
+            % if option is a single argument, assume it corresponds to 
+            % plane color
+            options = {'FaceColor', options{1}};
+        end
     end
 end
 
