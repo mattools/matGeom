@@ -1,17 +1,15 @@
 function test_suite = test_createRotationVector3d
 %TEST_CREATEROTATIONVECTOR3D  Test case for the file createRotationVector3d
 %
-%   Test case for the file distancePointEdge3d
+%   Test case for the file createRotationVector3d
 
 %   Example
-%   test_createRotationVector3d
+%   runtests('test_createRotationVector3d.m')
 %
 %   See also
 %
-%
 % ------
 % Author: oqilipo
-% e-mail: 
 % Created: 2017-08-08, using Matlab R2016b
 % Copyright 2017
 
