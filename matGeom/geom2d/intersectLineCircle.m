@@ -2,9 +2,12 @@ function points = intersectLineCircle(line, circle)
 %INTERSECTLINECIRCLE Intersection point(s) of a line and a circle
 %
 %   INTERS = intersectLineCircle(LINE, CIRCLE);
-%   Returns a 2-by-2 array, containing on each row the coordinates of an
-%   intersection point. If the line and circle do not intersect, the result
-%   is filled with NaN.
+%   Returns a 2-by-2-by-N array, containing on each row the coordinates of
+%   an intersection point for each line-circle pair, i.e. INTERS(:,:,k)
+%   contains the intersections between LINE(k,:) and CIRCLE(k,:).
+%
+%   If a line-circle pair does not intersect, the corresponding results are
+%   set to NaN. 
 %
 %   Example
 %     % base point
@@ -34,14 +37,15 @@ function points = intersectLineCircle(line, circle)
 %
 
 % ------
-% Author: David Legland
-% e-mail: david.legland@inra.fr
+% Author: David Legland, david.legland@inra.fr
+% Author: JuanPi Carbajal <ajuanpi+dev@gmail.com>
 % Created: 2011-01-14,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
 % HISTORY
 % 2011-06-06 fix bug in delta test
-% 05/05/2017 included some suggestions from code by JuanPi Carbajal <ajuanpi+dev@gmail.com>
+% 2017-05-05 included some suggestions from code by JuanPi Carbajal <ajuanpi+dev@gmail.com>
+% 2017-08-08 update doc
   		  
 % check size of inputs
 nLines = size(line, 1);
@@ -69,12 +73,12 @@ delta = b .^ 2 - 4 * a .* c;
 
 points = nan(2, 2, nCircles);
 
-validInds = delta > 0;
+valid = delta >= 0;
 
-if any(validInds)
+if any(valid)
     % compute roots
-    u = bsxfun(@plus, -b(validInds), bsxfun(@times, [-1 1], sqrt(delta(validInds))));
-    u = bsxfun(@rdivide, u, a(validInds)) / 2;
+    u = bsxfun(@plus, -b(valid), bsxfun(@times, [-1 1], sqrt(delta(valid))));
+    u = bsxfun(@rdivide, u, a(valid)) / 2;
 
     if nCircles == 1
         points = [...
@@ -82,8 +86,8 @@ if any(validInds)
             line(1:2) + u(:,2) .* line(3:4)];
     else
         tmp = [...
-            line(validInds,1:2) + u(:,1) .* line(validInds,3:4) ...
-            line(validInds,1:2) + u(:,2) .* line(validInds,3:4)].';
-	    points(:,:, validInds) = permute(reshape(tmp, [2,2, nCircles]), [2 1 3]);
+            line(valid, 1:2) + u(:,1) .* line(valid, 3:4) ...
+            line(valid, 1:2) + u(:,2) .* line(valid, 3:4)].';
+	    points(:, :, valid) = permute(reshape(tmp, [2, 2, nCircles]), [2 1 3]);
     end
 end
