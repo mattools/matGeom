@@ -54,6 +54,7 @@
 %   polylineCentroid          - Compute centroid of a curve defined by a series of points
 %   polylineSubcurve          - Extract a portion of a polyline
 %   resamplePolyline          - Distribute N points equally spaced on a polyline
+%   resamplePolylineByLength  - Resample a polyline with a fixed sampling step
 %   reversePolyline           - Reverse a polyline, by iterating vertices from the end
 %   isPointOnPolyline         - Test if a point belongs to a polyline
 %   projPointOnPolyline       - Compute position of a point projected on a polyline
@@ -106,6 +107,7 @@
 %
 % More complex operations on polygons
 %   resamplePolygon           - Distribute N points equally spaced on a polygon
+%   resamplePolygonByLength   - Resample a polygon with a fixed sampling step
 %   densifyPolygon            - Add several points on each edge of the polygon
 %   expandPolygon             - Expand a polygon by a given (signed) distance
 %   triangulatePolygon        - Compute a triangulation of the polygon
@@ -131,7 +133,6 @@
 %   polygonToRow              - Convert polygon coordinates to a row vector
 %   rowToPolygon              - Create a polygon from a row vector
 %   contourMatrixToPolylines  - Converts a contour matrix array into a polyline set
-%   rectAsPolygon             - Convert a (centered) rectangle into a series of points
 %   readPolygonSet            - Read a set of simple polygons stored in a file
 %   writePolygonSet           - Write a set of simple polygons into a file
 %
@@ -148,9 +149,9 @@
 %
 % -----
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@inra.fr
 % created the  07/11/2005.
-% Project homepage: http://github.com/dlegland/matGeom
+% Project homepage: http://github.com/mattools/matGeom
 % http://www.pfl-cepia.inra.fr/index.php?page=geom2d
 % Copyright INRA - Cepia Software Platform.
 
@@ -161,12 +162,7 @@ help('Contents');
 
 %%   Deprecated functions
 
-%   polygonExpand             - 'expand' a polygon with a given distance
-%   subCurve                  - extract a portion of a curve
-%   curveLength               - return length of a curve (a list of points)
-%   curveCentroid             - compute centroid of a curve defined by a series of points
-%   drawCurve                 - draw a curve specified by a list of points
-
-
 %% Others...
+
+
 
