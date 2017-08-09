@@ -33,7 +33,7 @@ center = [10 0];
 l1 = [15 0 0 1];
 c1 = [center 5];
 pts = intersectLineCircle(l1, c1);
-exp = [15 0];
+exp = [15 0;15 0];
 testCase.assertEqual(exp, pts, 'AbsTol', .01);
 
 function testNoIntersect(testCase)

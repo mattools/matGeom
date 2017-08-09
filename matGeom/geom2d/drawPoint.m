@@ -55,7 +55,7 @@ end
 
 % extract point(s) coordinates
 var = varargin{1};
-if size(var, 2) == 1
+if isnumeric(var) && length(varargin) > 1 && all(size(var) == size(varargin{2}))
     % points stored in separate arrays
     px = varargin{1};
     py = varargin{2};
