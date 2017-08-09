@@ -91,6 +91,8 @@
 %   normalizePlane            - Normalize parametric representation of a plane
 %   parallelPlane             - Parallel to a plane through a point or at a given distance
 %   reversePlane              - Return same 3D plane but with opposite orientation
+%   isPlane                   - Check if input is a plane
+%   transformPlane3d          - Transform a 3D plane with a 3D affine transform
 %   planesBisector            - Bisector plane between two other planes
 %   projPointOnPlane          - Return the orthogonal projection of a point on a plane
 %   intersectPlanes           - Return intersection line between 2 planes in space
@@ -115,12 +117,13 @@
 %   intersectLineTriangle3d   - Intersection point of a 3D line and a 3D triangle
 %   intersectRayPolygon3d     - Intersection point of a 3D ray and a 3D polygon
 %   clipConvexPolygon3dHP     - Clip a convex 3D polygon with Half-space
-%   drawPolygon3d             - Draw a 3D polygon specified by a list of vertices
-%   drawPolyline3d            - Draw a 3D polyline specified by a list of vertices
-%   fillPolygon3d             - Fill a 3D polygon specified by a list of points
+%   drawPolygon3d             - Draw a 3D polygon specified by a list of vertex coords
+%   drawPolyline3d            - Draw a 3D polyline specified by a list of vertex coords
+%   fillPolygon3d             - Fill a 3D polygon specified by a list of vertex coords
 %
 % 3D circles and ellipses
 %   circles3d                 - Description of functions operating on 3D circles
+%   fitCircle3d               - Fit a 3D circle to a set of points
 %   circle3dPosition          - Return the angular position of a point on a 3D circle
 %   circle3dPoint             - Coordinates of a point on a 3D circle from its position
 %   circle3dOrigin            - Return the first point of a 3D circle
@@ -159,7 +162,6 @@
 %   boxes3d                   - Description of functions operating on 3D boxes
 %   boundingBox3d             - Bounding box of a set of 3D points
 %   orientedBox3d             - Object-oriented bounding box of a set of 3D points
-
 %   intersectBoxes3d          - Intersection of two 3D bounding boxes
 %   mergeBoxes3d              - Merge 3D boxes, by computing their greatest extent
 %   box3dVolume               - Volume of a 3-dimensional box
@@ -192,6 +194,7 @@
 %   Credits:
 %   * function isCoplanar was originally written by Brett Shoelson.
 %   * Songbai Ji enhanced file intersectPlaneLine (6/23/2006).
+%   * several functions contributed by oqilipo
 %
 % ------
 % Author: David Legland

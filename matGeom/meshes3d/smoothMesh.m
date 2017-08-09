@@ -10,6 +10,11 @@ function [v2, faces] = smoothMesh(vertices, faces, varargin)
 %   as a NF-by-3 or NF-by-4 numeric array, or as a cell array. 
 %   Artifact adjacencies are added if faces have more than 4 vertices.
 %
+%   ... = smoothMesh(V, F, NITER)
+%   Repeat the smoothing procedure NITER times. This is equivalent to
+%   calling the smoothMesh function NITER times.
+%
+%
 %   Example
 %     [v f] = torusMesh([50 50 50 30 10 30 45]);
 %     v = v + randn(size(v));
@@ -18,12 +23,12 @@ function [v2, faces] = smoothMesh(vertices, faces, varargin)
 %     l = light; lighting gouraud
 %
 %   See also
-%     meshes3d, meshAdjacencyMatrix, triangulateFaces
+%     meshes3d, meshAdjacencyMatrix, triangulateFaces, drawMesh
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2013-04-29,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2013 INRA - Cepia Software Platform.
 
@@ -33,16 +38,18 @@ if ~isempty(varargin)
     nIter = varargin{1};
 end
 
-% % ensure faces correspond to a triangulation
-% if iscell(faces) || size(faces, 2) > 3
-%     faces = triangulateFaces(faces);
-% end
-
-% compute adjacency matrix
+% compute adjacency matrix, 
+% result is a Nv-by-Nv matrix with zeros on the diagonal
 adj = meshAdjacencyMatrix(faces);
 
+% ensure the size of the matrix is Nv-by-Nv
+% (this can not be the case if some vertices are not referenced)
+nv = size(vertices, 1);
+if size(adj, 1) < nv
+    adj(nv, nv) = 0;
+end
+
 % Add "self adjacencies"
-nv = size(adj, 1);
 adj = adj + speye(nv);
 
 % weight each vertex by the number of its neighbors
