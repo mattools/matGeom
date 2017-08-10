@@ -296,7 +296,7 @@ function nodes2 = getNeighbourNodes(node, edges)
 %   13/07/2004 faster algorithm
 %   03/10/2007 can specify several input nodes
 
-[i, j] = find(ismember(edges, node)); %#ok<NASGU>
+[i, j] = find(ismember(edges, node));  %#ok<ASGLU>
 nodes2 = edges(i,1:2);
 nodes2 = unique(nodes2(:));
 nodes2 = sort(nodes2(~ismember(nodes2, node)));
