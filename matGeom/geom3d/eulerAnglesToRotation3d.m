@@ -12,13 +12,13 @@ function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)
 %   THETA:  rotation angle around Y-axis, in degrees, corresponding to the
 %       'Pitch'. THETA is between -90 and +90.
 %   PSI:    rotation angle around X-axis, in degrees, corresponding to the
-%       'Roll'. PSI is between -180 and +180. 
+%       'Roll'. PSI is between -180 and +180.
 %   These angles correspond to the "Yaw-Pitch-Roll" convention, also known
-%   as "Tait–Bryan angles". 
+%   as "Tait–Bryan angles".
 %
 %   The resulting rotation is equivalent to a rotation around X-axis by an
 %   angle PSI, followed by a rotation around the Y-axis by an angle THETA,
-%   followed by a rotation around the Z-axis by an angle PHI. 
+%   followed by a rotation around the Z-axis by an angle PHI.
 %   That is:
 %       ROT = Rz * Ry * Rx;
 %
@@ -48,20 +48,33 @@ function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)
 %   HISTORY
 %   2011-06-20 rename and use degrees
 
+p = inputParser;
+validStrings = {'ZYX','ZYZ'};
+addOptional(p,'sequence','ZYX',@(x) any(validatestring(x,validStrings)));
+parse(p,varargin{:});
+sequence=p.Results.sequence;
 
 % Process input arguments
 if size(phi, 2) == 3
     % manages arguments given as one array
+    phi     = phi(:, 1);
     theta   = phi(:, 2);
     psi     = phi(:, 3);
-    phi     = phi(:, 1);
 end
 
 % create individual rotation matrices
 k = pi / 180;
-rotX = createRotationOx(psi * k);
-rotY = createRotationOy(theta * k);
-rotZ = createRotationOz(phi * k);
+
+switch sequence
+    case 'ZYX'
+        rot1 = createRotationOx(psi * k);
+        rot2 = createRotationOy(theta * k);
+        rot3 = createRotationOz(phi * k);
+    case 'ZYZ'
+        rot1 = createRotationOz(psi * k);
+        rot2 = createRotationOy(theta * k);
+        rot3 = createRotationOz(phi * k);
+end
 
 % concatenate matrices
-mat = rotZ * rotY * rotX;
+mat = rot3 * rot2 * rot1;

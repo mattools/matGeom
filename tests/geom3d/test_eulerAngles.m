@@ -1,5 +1,5 @@
 function test_suite = test_eulerAngles
-%TESTEULERANGLES Test conversion euler angles <-> rotaion matrix
+%TESTEULERANGLES Test conversion euler angles <-> rotation matrix
 %
 %   output = testEulerAngles(input)
 %

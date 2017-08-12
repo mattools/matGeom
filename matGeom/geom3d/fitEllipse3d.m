@@ -16,7 +16,7 @@ function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin)
 %     center=-100+200*rand(1,3);
 %     phi=randi([-360,360]); theta=randi([-360,360]); psi=randi([-360,360]);
 %     % Create a random transformation
-%     TFM=[eul2rotm(deg2rad([phi theta psi]),'ZYZ'),center'; 0 0 0 1];
+%     TFM=eulerAnglesToRotation3d(phi, theta, psi, 'ZYZ'); TFM(1:3,4)=center';
 %     points = transformPoint3d(points, TFM);
 %     % Fit ellipse
 %     [fE, fTFM] = fitEllipse3d(points, 'vis', true);
@@ -55,13 +55,13 @@ centeredPoints = bsxfun(@minus, points, meanPoint);
 tfmPoints = transformPoint3d(centeredPoints, R');
 
 % Fit ellipse
-p = ellipsefit_direct(tfmPoints(:,1),tfmPoints(:,2));
+parEllipse = ellipsefit_direct(tfmPoints(:,1),tfmPoints(:,2));
 % Convert to explicit form
-[x, y, a, b, phi2D] = ellipse_im2ex(p);
+[X, Y, A, B, phi2D] = ellipse_im2ex(parEllipse);
 
 % Transform to fitted 2d ellipse
 TFM2D = createRotationOz(phi2D);
-TFM2D(1:3,4)=[x; y; 0];
+TFM2D(1:3,4)=[X; Y; 0];
 
 % Transformation back to 3d space
 TFM3D = [inv(R'), meanPoint'; 0 0 0 1]*TFM2D;
@@ -73,18 +73,18 @@ center = TFM3D(1:3,4)';
 TFM3D_ROT=TFM3D(1:3,1:3);
 % Convert to euler angles
 euler_zyz = rad2deg(rotm2eul(TFM3D_ROT,'ZYZ'));
-phi = euler_zyz(1);
-theta=euler_zyz(2);
-psi=euler_zyz(3);
+PHI = euler_zyz(1);
+THETA=euler_zyz(2);
+PSI=euler_zyz(3);
 
 % Test if psi is correct
-TFM3D_test = eul2rotm(deg2rad(euler_zyz),'ZYZ');
-if ~all(all(ismembertol(TFM3D_test, TFM3D_ROT)))
-    psi=-1*psi;
+TFM3D_test = eulerAnglesToRotation3d(PHI, THETA, PSI,'ZYZ');
+if ~all(all(ismembertol(TFM3D_test(1:3,1:3), TFM3D_ROT)))
+    PSI=-1*PSI;
 end
 
 % matGeom format
-fittedEllipse3d=[center a b theta phi psi];
+fittedEllipse3d=[center A B THETA PHI PSI];
 
 %% Visualization
 if parser.Results.visualization == true

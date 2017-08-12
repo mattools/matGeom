@@ -2,9 +2,9 @@ function test_suite = test_createRotationVector3d
 %TEST_CREATEROTATIONVECTOR3D  Test case for the file createRotationVector3d
 %
 %   Test case for the file createRotationVector3d
-
+%   
 %   Example
-%   runtests('test_createRotationVector3d.m')
+%     runtests('test_createRotationVector3d.m')
 %
 %   See also
 %
