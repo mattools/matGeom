@@ -72,10 +72,7 @@ center = TFM3D(1:3,4)';
 % Extract rotation
 TFM3D_ROT=TFM3D(1:3,1:3);
 % Convert to euler angles
-euler_zyz = rad2deg(rotm2eul(TFM3D_ROT,'ZYZ'));
-PHI = euler_zyz(1);
-THETA=euler_zyz(2);
-PSI=euler_zyz(3);
+[PHI, THETA, PSI] = rotation3dToEulerAngles(TFM3D_ROT,'ZYZ');
 
 % Test if psi is correct
 TFM3D_test = eulerAnglesToRotation3d(PHI, THETA, PSI,'ZYZ');

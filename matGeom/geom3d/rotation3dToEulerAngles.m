@@ -1,4 +1,4 @@
-function varargout = rotation3dToEulerAngles(mat)
+function varargout = rotation3dToEulerAngles(mat, varargin)
 %ROTATION3DTOEULERANGLES Extract Euler angles from a rotation matrix
 %
 %   [PHI, THETA, PSI] = rotation3dToEulerAngles(MAT)
@@ -29,26 +29,42 @@ function varargout = rotation3dToEulerAngles(mat)
 % Created: 2010-08-11,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform.
 
+p = inputParser;
+validStrings = {'ZYX','ZYZ'};
+addOptional(p,'sequence','ZYX',@(x) any(validatestring(x,validStrings)));
+parse(p,varargin{:});
+sequence=p.Results.sequence;
 
 % conversion from radians to degrees
 k = 180 / pi;
 
-% extract |cos(theta)|
-cy = hypot(mat(1, 1), mat(2, 1));
-
-% avoid dividing by 0
-if cy > 16*eps
-    % normal case: theta <> 0
-%    psi     = k * atan2( mat(3, 2) / cy, mat(3, 3) / cy);
-    psi     = k * atan2( mat(3, 2), mat(3, 3));
-    theta   = k * atan2(-mat(3, 1), cy);
-%    psi     = k * atan2( mat(2, 1) / cy, mat(1, 1) / cy);
-    phi     = k * atan2( mat(2, 1), mat(1, 1));
-else
-    % 
-    psi     = k * atan2(-mat(2, 3), mat(2, 2));
-    theta   = k * atan2(-mat(3, 1), cy);
-    phi     = 0;
+switch sequence
+    case 'ZYX'
+        % extract |cos(theta)|
+        cy = hypot(mat(1,1), mat(2,1));
+        % avoid dividing by 0
+        if cy > 16*eps
+            % normal case: theta <> 0
+            phi   = k * atan2( mat(2,1), mat(1,1));
+            theta = k * atan2(-mat(3,1), cy);
+            psi   = k * atan2( mat(3,2), mat(3,3));
+        else
+            % 
+            phi   = 0;
+            theta = k * atan2(-mat(3,1), cy);
+            psi   = k * atan2(-mat(2,3), mat(2,2));
+        end
+    case 'ZYZ'
+        cy = hypot(mat(3,2), mat(3,1));
+        if cy > 16*eps
+            phi   = k * -atan2(mat(2,3), -mat(1,3));
+            theta = k * -atan2(cy, mat(3,3));
+            psi   = k * -atan2(mat(3,2), mat(3,1));
+        else
+            phi   = 0;
+            theta = k * atan2(cy, mat(3,3));
+            psi   = k * atan2(mat(2,1), mat(2,2));
+        end
 end
 
 % format output arguments
