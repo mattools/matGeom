@@ -21,21 +21,22 @@ function dest = transformEdge(edge, trans)
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 06/04/2004.
-%
+
+% 14/08/2017 Updated by Juanpi Carbajal <ajuanpi+dev@gmail.com>
+
 
 % allocate memory
 dest = zeros(size(edge));
 
 % compute position
-dest(:,1) = edge(:,1)*trans(1,1) + edge(:,2)*trans(1,2);
-dest(:,2) = edge(:,1)*trans(2,1) + edge(:,2)*trans(2,2);
-dest(:,3) = edge(:,3)*trans(1,1) + edge(:,3)*trans(1,2);
-dest(:,4) = edge(:,4)*trans(2,1) + edge(:,4)*trans(2,2);
+for i=1:2
+  T           = trans(i,1:2).';
+  dest(:,i)   = edge(:,1:2) * T;
+  dest(:,i+2) = edge(:,3:4) * T;
+end
 
 % add translation vector, if exist
-if size(trans, 2)>2
-    dest(:,1) = dest(:,1)+trans(1,3);
-    dest(:,2) = dest(:,2)+trans(2,3);
-    dest(:,3) = dest(:,3)+trans(1,3);
-    dest(:,4) = dest(:,4)+trans(2,3);
+if size(trans, 2) > 2
+  dest = bsxfun (@plus, dest, trans([1:2 1:2],3).');
 end
+
