@@ -44,14 +44,9 @@ function points = intersectLineCircle(line, circle)
 
 % HISTORY
 % 2011-06-06 fix bug in delta test
-<<<<<<< HEAD
-% 05/05/2017 included some suggestions from code by JuanPi Carbajal <ajuanpi+dev@gmail.com>
-
-=======
 % 2017-05-05 included some suggestions from code by JuanPi Carbajal <ajuanpi+dev@gmail.com>
 % 2017-08-08 update doc
   		  
->>>>>>> d80ff3e7fbcad41ca4a88631ac5ce1a4994c52f5
 % check size of inputs
 nLines = size(line, 1);
 nCircles = size(circle, 1);
@@ -91,14 +86,8 @@ if any(valid)
             line(1:2) + u(:,2) .* line(3:4)];
     else
         tmp = [...
-<<<<<<< HEAD
             line(validInds,1:2) + u(:,1) .* line(validInds,3:4) ...
             line(validInds,1:2) + u(:,2) .* line(validInds,3:4)].';
         points(:,:, validInds) = permute(reshape(tmp, [2,2, nCircles]), [2 1 3]);
-=======
-            line(valid, 1:2) + u(:,1) .* line(valid, 3:4) ...
-            line(valid, 1:2) + u(:,2) .* line(valid, 3:4)].';
-	    points(:, :, valid) = permute(reshape(tmp, [2, 2, nCircles]), [2 1 3]);
->>>>>>> d80ff3e7fbcad41ca4a88631ac5ce1a4994c52f5
     end
 end
