@@ -1,5 +1,5 @@
 function points = intersectLineCircle(line, circle)
-%INTERSECTLINECIRCLE Intersection point(s) of N lines and N circles
+%INTERSECTLINECIRCLE Intersection point(s) of a line and a circle
 %
 %   INTERS = intersectLineCircle(LINE, CIRCLE);
 %   Returns a 2-by-2-by-N array, containing on each row the coordinates of
@@ -51,10 +51,10 @@ function points = intersectLineCircle(line, circle)
 nLines = size(line, 1);
 nCircles = size(circle, 1);
 if nLines ~= nCircles
-  error ('matGeom:geom2d:invalidArguments', ...
+  error ('matGeom:geom3d:invalidArguments', ...
       'Requires same number of lines and circles');
 end
-
+  		  
 % center parameters
 center = circle(:, 1:2);
 radius = circle(:, 3);
@@ -69,9 +69,9 @@ b = 2*sum(dp .* vl, 2);
 c = sum(dp.^2, 2) - radius.^2;
 
 % discriminant
-delta  = b .^ 2 - 4 * a .* c;
+delta = b .^ 2 - 4 * a .* c;
 
-points = nan (2, 2, nCircles);
+points = nan(2, 2, nCircles);
 
 valid = delta >= 0;
 
@@ -86,8 +86,8 @@ if any(valid)
             line(1:2) + u(:,2) .* line(3:4)];
     else
         tmp = [...
-            line(validInds,1:2) + u(:,1) .* line(validInds,3:4) ...
-            line(validInds,1:2) + u(:,2) .* line(validInds,3:4)].';
-        points(:,:, validInds) = permute(reshape(tmp, [2,2, nCircles]), [2 1 3]);
+            line(valid, 1:2) + u(:,1) .* line(valid, 3:4) ...
+            line(valid, 1:2) + u(:,2) .* line(valid, 3:4)].';
+	    points(:, :, valid) = permute(reshape(tmp, [2, 2, nCircles]), [2 1 3]);
     end
 end
