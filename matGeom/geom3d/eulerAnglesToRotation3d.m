@@ -24,6 +24,10 @@ function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)
 %
 %   MAT = eulerAnglesToRotation3d(ANGLES)
 %   Concatenates all angles in a single 1-by-3 array.
+%   
+%   ... = eulerAnglesToRotation3d(ANGLES, CONVENTION)
+%   CONVENTION specifies the axis rotation sequence. 
+%   Supported conventions are: 'ZYX', 'ZYZ'. Default is 'ZYX'.
 %
 %   Example
 %   [n e f] = createCube;
@@ -50,9 +54,9 @@ function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)
 
 p = inputParser;
 validStrings = {'ZYX','ZYZ'};
-addOptional(p,'sequence','ZYX',@(x) any(validatestring(x,validStrings)));
+addOptional(p,'convention','ZYX',@(x) any(validatestring(x,validStrings)));
 parse(p,varargin{:});
-sequence=p.Results.sequence;
+convention=p.Results.convention;
 
 % Process input arguments
 if size(phi, 2) == 3
@@ -65,7 +69,7 @@ end
 % create individual rotation matrices
 k = pi / 180;
 
-switch sequence
+switch convention
     case 'ZYX'
         rot1 = createRotationOx(psi * k);
         rot2 = createRotationOy(theta * k);
