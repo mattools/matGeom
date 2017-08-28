@@ -42,20 +42,24 @@
 %   gcontour2d                 - Creates contour graph of a 2D binary image.
 %   gcontour3d                 - Create contour graph of a 3D binary image.
 %
-% Graph information
-%   grNodeDegree               - Degree of a node in a (undirected) graph
-%   grNodeInnerDegree          - Inner degree of a node in a graph
-%   grNodeOuterDegree          - Outer degree of a node in a graph
-%   grAdjacentNodes            - Find list of nodes adjacent to a given node
-%   grAdjacentEdges            - Find list of edges adjacent to a given node
-%   grOppositeNode             - Return opposite node in an edge
-%   grLabel                    - Associate a label to each connected component of the graph
+% Voronoi Graphs
+%   voronoi2d                  - Compute a voronoi diagram as a graph structure
+%   boundedVoronoi2d           - Return a bounded voronoi diagram as a graph structure
+%   centroidalVoronoi2d        - Centroidal Voronoi tesselation within a polygon
+%   boundedCentroidalVoronoi2d - Create a 2D Centroidal Voronoi Tesselation in a box
+%   cvtUpdate                  - Update germs of a CVT with given points
+%   cvtIterate                 - Update germs of a CVT using random points with given density
 %
-% Graph management (low level operations)
-%   grRemoveNode               - Remove a node in a graph
-%   grRemoveNodes              - Remove several nodes in a graph
-%   grRemoveEdge               - Remove an edge in a graph.
-%   grRemoveEdges              - Remove several edges from a graph
+% Geodesic and shortest path operations
+%   grShortestPath             - Find a shortest path between two nodes in the graph
+%   grPropagateDistance        - Propagates distances from a vertex to other vertices
+%   grVertexEccentricity       - Eccentricity of vertices in the graph
+%   graphDiameter              - Diameter of a graph
+%   graphPeripheralVertices    - Peripheral vertices of a graph
+%   graphCenter                - Center of a graph
+%   graphRadius                - Radius of a graph
+%   grFindGeodesicPath         - Find a geodesic path between two nodes in the graph
+%   grFindMaximalLengthPath    - Find a path that maximizes sum of edge weights
 %
 % Graph processing (general applications)
 %   pruneGraph                 - Remove all edges with a terminal vertex
@@ -73,17 +77,6 @@
 %   grClose                    - Morphological closing on graph
 %   grOpen                     - Morphological opening on graph
 %
-% Geodesic and shortest path operations
-%   grShortestPath             - Find a shortest path between two nodes in the graph
-%   grPropagateDistance        - Propagates distances from a vertex to other vertices
-%   grVertexEccentricity       - Eccentricity of vertices in the graph
-%   graphDiameter              - Diameter of a graph
-%   graphPeripheralVertices    - Peripheral vertices of a graph
-%   graphCenter                - Center of a graph
-%   graphRadius                - Radius of a graph
-%   grFindGeodesicPath         - Find a geodesic path between two nodes in the graph
-%   grFindMaximalLengthPath    - Find a path that maximizes sum of edge weights
-%
 % Operations for geometric graphs
 %   grEdgeLengths              - Compute length of edges in a geometric graph
 %   grMergeNodeClusters        - Merge cluster of connected nodes in a graph
@@ -94,13 +87,20 @@
 %   grFaceToPolygon            - Compute the polygon corresponding to a graph face
 %   graph2Contours             - Convert a graph to a set of contour curves
 %
-% Voronoi Graphs
-%   voronoi2d                  - Compute a voronoi diagram as a graph structure
-%   boundedVoronoi2d           - Return a bounded voronoi diagram as a graph structure
-%   centroidalVoronoi2d        - Centroidal Voronoi tesselation within a polygon
-%   boundedCentroidalVoronoi2d - Create a 2D Centroidal Voronoi Tesselation in a box
-%   cvtUpdate                  - Update germs of a CVT with given points
-%   cvtIterate                 - Update germs of a CVT using random points with given density
+% Graph information
+%   grNodeDegree               - Degree of a node in a (undirected) graph
+%   grNodeInnerDegree          - Inner degree of a node in a graph
+%   grNodeOuterDegree          - Outer degree of a node in a graph
+%   grAdjacentNodes            - Find list of nodes adjacent to a given node
+%   grAdjacentEdges            - Find list of edges adjacent to a given node
+%   grOppositeNode             - Return opposite node in an edge
+%   grLabel                    - Associate a label to each connected component of the graph
+%
+% Graph management (low level operations)
+%   grRemoveNode               - Remove a node in a graph
+%   grRemoveNodes              - Remove several nodes in a graph
+%   grRemoveEdge               - Remove an edge in a graph.
+%   grRemoveEdges              - Remove several edges from a graph
 %
 % Graph display
 %   drawGraph                  - Draw a graph, given as a set of vertices and edges
@@ -136,11 +136,6 @@
 % Deprecated functions
 %   grSimplifyBranches_old     - Replace branches of a graph by single edges
 %   grRemoveMultiplePoints     - Remove groups of close nodes in a graph
-%   grEdgeLength               - Compute length of edges in a geometric graph
-%   grNeighborNodes            - Find adjacent nodes of a given node
-%   grNeighborEdges            - Find adjacent edges of a given node
-%   vectorize                  - Transform a binary skeleton into a graph (nodes and edges)
-
 
 % Functions that requires further development
 %   quiverToGraph              - Converts quiver data to quad mesh

@@ -1,8 +1,8 @@
 function varargout = clipGraph(nodes, edges, varargin)
 %CLIPGRAPH Clip a graph with a rectangular area
 %
-%   [N2 E2] = clipGraph(N, E, BOX);
-%   [N2 E2 F2] = clipGraph(N, E, F, BOX);
+%   [N2, E2] = clipGraph(N, E, BOX);
+%   [N2, E2, F2] = clipGraph(N, E, F, BOX);
 %   N is an array ov vertices, E an array of edges, containing indices of
 %   first ans second vertices, and F (optional) is either a matrice or a
 %   cell array containing indices of vertices for each face.
@@ -10,15 +10,25 @@ function varargout = clipGraph(nodes, edges, varargin)
 %   vector following matlab axis format: [XMIN XMAX YMIN YMAX].
 %
 %   Example
-%   clipGraph
-%
+%     % create a simple graph structure
+%     n = [0 60; 40 100; 40 60; 60 40; 100 40; 60 0];
+%     e = [1 3; 2 3; 3 4; 4 5; 4 6; 5 6];
+%     figure(1); clf; hold on;
+%     drawGraph(n, e);
+%     axis equal; axis([-10 110 -10 110]);
+%     % clip with a box
+%     box = [10 90 10 90];
+%     drawBox(box, 'k');
+%     [n2, e2] = clipGraph(n, e, box);
+%     drawGraphEdges(n2, e2, 'color', 'b', 'linewidth', 2);
+%     
 %   See also
-%   drawGraph, clipGraphPolygon
+%     graphs, drawGraph, clipGraphPolygon
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2007-01-18
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 
@@ -71,7 +81,7 @@ indNodes = find(insideNodes);
 
 % create correspondance between original nodes and inside nodes
 hashNodes = zeros(size(nodes, 1), 1);
-for i=1:length(indNodes)
+for i = 1:length(indNodes)
     hashNodes(indNodes(i)) = i;
 end
 

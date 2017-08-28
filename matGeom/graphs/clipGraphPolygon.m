@@ -1,23 +1,43 @@
 function [nodes2, edges2] = clipGraphPolygon(nodes, edges, poly)
 %CLIPGRAPHPOLYGON  Clip a graph with a polygon
 %
-%   [NODES2 EDGES2] = clipGraphPolygon(NODES, EDGES, POLY)
+%   [NODES2, EDGES2] = clipGraphPolygon(NODES, EDGES, POLY)
 %   Clips the graph defined by nodes NODES and edges EDGES with the polygon
 %   given in POLY. POLY is a N-by-2 array of vertices.
 %   The result is a new graph containing nodes inside the polygon, as well
 %   as nodes created by the intersection of edges with the polygon.
 %
+%   Example
+%     elli = [50 50 40 20 30];
+%     figure; hold on;
+%     drawEllipse(elli, 'k');
+%     poly = ellipseToPolygon(elli, 200);
+%     box = polygonBounds(poly);
+%     germs = randomPointInPolygon(poly, 100);
+%     drawPoint(germs, 'b.');
+%     [n, e, f] = boundedVoronoi2d(box, germs);
+%     [n2, e2] = clipGraphPolygon(n, e, poly);
+%     drawGraphEdges(n2, e2);
 %
 %   See also
-%   drawGraph, clipGraph
+%     graphs, drawGraph, clipGraph
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2012-02-24,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
+% Algorithm summary:
+% * For each edge not outside do:
+%    * clip edge with poly
+%    * if no inter
+%    *    add current edge (same vertex indices)
+%    *    continue
+%    * end
+%    * add intersections to list, compute their indices
+%    * create the new edge(s)
 
 %% Clip the nodes
 
@@ -27,9 +47,9 @@ nodeInside = isPointInPolygon(nodes, poly);
 indNodes = find(nodeInside);
 
 % create correspondance between original nodes and inside nodes
-hashNodes = zeros(size(nodes, 1), 1);
+nodeIndsMap = zeros(size(nodes, 1), 1);
 for i = 1:length(indNodes)
-    hashNodes(indNodes(i)) = i;
+    nodeIndsMap(indNodes(i)) = i;
 end
 
 % select clipped nodes
@@ -69,7 +89,7 @@ for iEdge = 1:nEdges
     if isempty(intersects)
         if nodeInside(v1) && nodeInside(v2)
             % current edge is totally inside the clipping polygon
-            edges2(iEdge2,:) = hashNodes([v1 v2]);
+            edges2(iEdge2,:) = nodeIndsMap([v1 v2]);
             iEdge2 = iEdge2 + 1;
         end
         continue;
@@ -83,10 +103,10 @@ for iEdge = 1:nEdges
     
     % concatenate vertex indices with indices of extremities inside poly
     if nodeInside(v1)
-        intersectInds = [hashNodes(v1) intersectInds]; %#ok<AGROW>
+        intersectInds = [nodeIndsMap(v1) intersectInds]; %#ok<AGROW>
     end
     if nodeInside(v2)
-        intersectInds = [intersectInds hashNodes(v2)]; %#ok<AGROW>
+        intersectInds = [intersectInds nodeIndsMap(v2)]; %#ok<AGROW>
     end
     
     % create new edge for each couple of contiguous intersection
@@ -97,17 +117,7 @@ for iEdge = 1:nEdges
     end
     
     if ~isempty(intersectInds)
-        warning('graphs:AlgorithmicError', ...
-            'edge %d has odd number of intersectss', iEdge);
+        warning('matGeom:graphs:AlgorithmicError', ...
+            'edge %d has odd number of intersects', iEdge);
     end
 end
-
-% algo:
-% * For each edge not outside do:
-%    * clip edge with poly
-%    * if no inter
-%    *    add current edge (same vertex indices)
-%    *    continue
-%    * end
-%    * add intersections to list, compute their indices
-%    * create the new edge(s)
