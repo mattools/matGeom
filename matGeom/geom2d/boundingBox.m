@@ -29,26 +29,31 @@ function box = boundingBox(points)
 %   See also
 %   polygonBounds, drawBox
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2011-04-01,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-%   HISTORY
-%   2011-04-08 add example
-%   2011-12-09 rename to boundingBox
+% HISTORY
+% 2011-04-08 add example
+% 2011-12-09 rename to boundingBox
 
 % compute extreme x and y values
 xmin = min(points(:,1));
 xmax = max(points(:,1));
 ymin = min(points(:,2));
 ymax = max(points(:,2));
-box = [xmin xmax ymin ymax];
 
-% process case of 3D points
 if size(points, 2) > 2
+    % process case of 3D points
     zmin = min(points(:,3));
     zmax = max(points(:,3));
+    
+    % format as box 3D data structure
     box = [xmin xmax ymin ymax zmin zmax];
+else
+    % format as box data structure
+    box = [xmin xmax ymin ymax];
 end
