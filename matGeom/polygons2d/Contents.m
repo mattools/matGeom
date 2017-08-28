@@ -90,6 +90,7 @@
 %   minimumCaliperDiameter    - Minimum caliper diameter of a set of points
 %   findPoint                 - Find index of a point in an set from its coordinates
 %   convexHull                - Convex hull of a set of points
+%   randomPointInPolygon      - Generate random point(s) in a polygon
 %
 % Measures on Polygons
 %   isPointInPolygon          - Test if a point is located inside a polygon
@@ -159,10 +160,4 @@ help('Contents');
 
 %% Requires further development
 
-
-%%   Deprecated functions
-
 %% Others...
-
-
-
