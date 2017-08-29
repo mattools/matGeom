@@ -7,6 +7,9 @@ function [v2, f2] = clipMeshVertices(v, f, b, varargin)
 %   the box, and a new set of faces corresponding to original faces with
 %   all vertices within the box.
 %   
+%   [V2, F2] = clipMeshVertices(..., 'shape','sphere') Specify the shape.
+%   Default is 'box'. But it's also possible to use a 'sphere'.
+%   
 %   [V2, F2] = clipMeshVertices(..., 'inside',false) removes the inner 
 %   faces instead of the outer faces.
 %
@@ -24,7 +27,7 @@ function [v2, f2] = clipMeshVertices(v, f, b, varargin)
 %   meshes3d, clipPoints3d
 %
 % ------
-% Author: David Legland
+% Author: David Legland, oqilipo
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2011-04-07,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
@@ -37,11 +40,14 @@ if isstruct(v)
 end
 
 parser = inputParser;
-addOptional(parser,'inside',true,@islogical);
+validStrings = {'box','sphere'};
+addParameter(parser,'shape','box',@(x) any(validatestring(x, validStrings)));
+addParameter(parser,'inside',true,@islogical);
 parse(parser,varargin{:});
 
 % clip the vertices
-[v2, indVertices] = clipPoints3d(v, b, parser.Results.inside);
+[v2, indVertices] = clipPoints3d(v, b,...
+    'shape', parser.Results.shape, 'inside', parser.Results.inside);
 
 % create index array for face indices relabeling
 refInds = zeros(size(indVertices));
