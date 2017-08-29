@@ -70,6 +70,7 @@
 % Polygon basic manipulation
 %   polygonPoint              - Extract a point from a polygon
 %   polygonSubcurve           - Extract a portion of a polygon
+%   polygonEdges              - Return the edges of a simple or multiple polygon
 %   reversePolygon            - Reverse a polygon, by iterating vertices from the end
 %   smoothPolygon             - Smooth a polygon using local averaging
 %   simplifyPolygon           - Douglas-Peucker simplification of a polygon

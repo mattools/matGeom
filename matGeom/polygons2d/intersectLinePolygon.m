@@ -49,7 +49,7 @@ function [intersects, edgeIndices] = intersectLinePolygon(line, poly, varargin)
 %           10    10
 %
 %   See Also
-%   lines2d, polygons2d, intersectLines, intersectRayPolygon
+%   lines2d, polygons2d, intersectLines, intersectRayPolygon, polygonEdges
 %
 
 % ------
