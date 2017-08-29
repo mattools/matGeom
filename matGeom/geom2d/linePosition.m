@@ -48,8 +48,11 @@ function pos = linePosition(point, line, varargin)
 %   2012-10-24 rewrite using bsxfun
 %   2012-11-22 add support for the diag option
 
+% if diag is true, we need only to compute position of i-th point with i-th
+% line.
+diag = ~isempty(varargin) && ischar(varargin{1}) && strcmpi(varargin{1}, 'diag');
 
-if ~isempty(varargin) && ischar(varargin{1}) && strcmpi(varargin{1}, 'diag')
+if diag
     % In the case of 'diag' option, use direct correspondence between
     % points and lines
     
@@ -88,9 +91,13 @@ invalidLine = delta < eps;
 delta(invalidLine) = 1; 
 
 % compute position of points projected on the line, by using normalised dot
-% product (NP-by-NE array) 
+% product (NP-by-NL array) 
 pos = bsxfun(@rdivide, bsxfun(@times, dx, vx) + bsxfun(@times, dy, vy), delta);
 
 % ensure degenerated edges are correclty processed (consider the first
-% vertex is the closest)
-pos(:, invalidLine) = 0;
+% vertex is the closest one)
+if diag
+    pos(invalidLine) = 0;
+else
+    pos(:, invalidLine) = 0;
+end

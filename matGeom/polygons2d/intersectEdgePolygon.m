@@ -23,9 +23,10 @@ function [intersects, inds] = intersectEdgePolygon(edge, poly, varargin)
 %   See also
 %   edges2d, polygons2d, intersectLinePolygon, intersectRayPolygon
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2012-02-24,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
@@ -35,6 +36,7 @@ if ~isempty(varargin)
     tol = varargin{1};
 end
 
+% get supporting line of edge
 line = edgeToLine(edge);
 
 [intersects, inds] = intersectLinePolygon(line, poly, tol);
