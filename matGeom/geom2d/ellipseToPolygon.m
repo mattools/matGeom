@@ -3,22 +3,27 @@ function varargout = ellipseToPolygon(ellipse, N)
 %
 %   P = ellipseToPolygon(ELL, N);
 %   converts ELL given as [x0 y0 a b] or [x0 y0 a b theta] into a polygon
-%   with N edges. The result P is (N+1)-by-2 array containing coordinates
-%   of the N+1 vertices of the polygon.
-%   The resulting polygon is closed, i.e. the last point is the same as the
-%   first one.
+%   with N edges. The result P is a N-by-2 array containing the coordinates
+%   of the N vertices of the polygon.
 %
 %   P = ellipseToPolygon(ELL);
 %   Use a default number of edges equal to 72. This results in one point
 %   for each 5 degrees.
 %   
-%   [X Y] = ellipseToPolygon(...);
+%   [X, Y] = ellipseToPolygon(...);
 %   Return the coordinates of vertices in two separate arrays.
 %
+%   Example
+%     poly = ellipseToPolygon([50 50 40 30 20], 60);
+%     figure; hold on;
+%     axis equal; axis([0 100 10 90]);
+%     drawPolygon(poly, 'b');
+%     drawPoint(poly, 'bo');
 %
 %   See also:
 %   ellipses2d, drawEllipse, circleToPolygon, rectToPolygon
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -28,6 +33,7 @@ function varargout = ellipseToPolygon(ellipse, N)
 % HISTORY
 % 2011-03-30 use angles in degrees, add default value for N
 % 2011-12-09 rename to ellipseToPolygon
+% 2017-08-31 returns N vertices instead of N+1
 
 % default value for N
 if nargin < 2
@@ -48,6 +54,7 @@ b  = ellipse(:,4);
 
 % create time basis
 t = linspace(0, 2*pi, N+1)';
+t(end) = [];
 
 % pre-compute trig functions (angles is in degrees)
 cot = cosd(theta);

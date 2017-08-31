@@ -67,6 +67,7 @@ function b = isPointOnEdge(point, edge, varargin)
 %   See also
 %   edges2d, points2d, isPointOnLine
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -93,11 +94,11 @@ if ~isempty(varargin)
 end
 
 % number of edges and of points
-Np = size(point, 1);
-Ne = size(edge, 1);
+nPoints = size(point, 1);
+nEdges = size(edge, 1);
 
 % adapt size of inputs if needed, and extract elements for computation
-if Np == Ne
+if nPoints == nEdges
     % When the number of points and edges is the same, the one-to-one test
     % will be computed, so there is no need to repeat matrices
     dx = edge(:,3) - edge(:,1);
@@ -105,17 +106,17 @@ if Np == Ne
     lx = point(:,1) - edge(:,1);
     ly = point(:,2) - edge(:,2);
     
-elseif Np == 1
+elseif nPoints == 1
     % one point, several edges
     dx = edge(:, 3) - edge(:, 1);
     dy = edge(:, 4) - edge(:, 2);
-    lx = point(ones(Ne, 1), 1) - edge(:, 1);
-    ly = point(ones(Ne, 1), 2) - edge(:, 2);
+    lx = point(ones(nEdges, 1), 1) - edge(:, 1);
+    ly = point(ones(nEdges, 1), 2) - edge(:, 2);
     
-elseif Ne == 1
+elseif nEdges == 1
     % several points, one edge
-    dx = (edge(3) - edge(1)) * ones(Np, 1);
-    dy = (edge(4) - edge(2)) * ones(Np, 1);
+    dx = (edge(3) - edge(1)) * ones(nPoints, 1);
+    dy = (edge(4) - edge(2)) * ones(nPoints, 1);
     lx = point(:, 1) - edge(1);
     ly = point(:, 2) - edge(2);
 
@@ -124,17 +125,17 @@ else
     % Create an array for each parameter, so that the result will be a
     % Np-by-Ne matrix of booleans (requires more memory, and uses repmat)
 
-    x0 = repmat(edge(:, 1)', Np, 1);
-    y0 = repmat(edge(:, 2)', Np, 1);
-    dx = repmat(edge(:,3)', Np,  1) - x0;
-    dy = repmat(edge(:,4)', Np,  1) - y0;
+    x0 = repmat(edge(:, 1)', nPoints, 1);
+    y0 = repmat(edge(:, 2)', nPoints, 1);
+    dx = repmat(edge(:, 3)', nPoints,  1) - x0;
+    dy = repmat(edge(:, 4)', nPoints,  1) - y0;
     
-    lx = repmat(point(:, 1), 1, Ne) - x0;
-    ly = repmat(point(:, 2), 1, Ne) - y0;
+    lx = repmat(point(:, 1), 1, nEdges) - x0;
+    ly = repmat(point(:, 2), 1, nEdges) - y0;
 end
 
 % test if point is located on supporting line
-b1 = (abs(lx.*dy - ly.*dx) ./ hypot(dx, dy)) < tol;
+b1 = abs(lx.*dy - ly.*dx) ./ (dx.*dx + dy.*dy) < tol;
 
 % compute position of point with respect to edge bounds
 % use different tests depending on line angle

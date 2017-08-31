@@ -44,16 +44,16 @@ function [nodes2, edges2] = clipGraphPolygon(nodes, edges, poly)
 % find index of nodes inside clipping window
 nodeInside = isPointInPolygon(nodes, poly);
 
-indNodes = find(nodeInside);
+innerNodeInds = find(nodeInside);
 
 % create correspondance between original nodes and inside nodes
 nodeIndsMap = zeros(size(nodes, 1), 1);
-for i = 1:length(indNodes)
-    nodeIndsMap(indNodes(i)) = i;
+for i = 1:length(innerNodeInds)
+    nodeIndsMap(innerNodeInds(i)) = i;
 end
 
 % select clipped nodes
-nodes2 = nodes(indNodes, :);
+nodes2 = nodes(innerNodeInds, :);
 
 
 %% Clip the edges
@@ -110,7 +110,7 @@ for iEdge = 1:nEdges
     end
     
     % create new edge for each couple of contiguous intersection
-    while ~isempty(intersectInds)
+    while length(intersectInds) > 1
         edges2(iEdge2, :) = intersectInds(1:2);
         intersectInds(1:2) = [];
         iEdge2 = iEdge2 + 1;

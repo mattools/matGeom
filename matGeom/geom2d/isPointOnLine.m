@@ -15,7 +15,7 @@ function b = isPointOnLine(point, line, varargin)
 %   See also: 
 %   lines2d, points2d, isPointOnEdge, isPointOnRay, angle3Points
 %
-%
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -36,10 +36,10 @@ end
 
 % test if lines are colinear, using third coordinate of 3D cross-product
 % same test as:
-% b = abs((xp-x0).*dy-(yp-y0).*dx)./hypot(dx, dy) < tol;
+% b = abs((xp-x0).*dy-(yp-y0).*dx)./hypot(dx, dy).^2 < tol;
 b = bsxfun(...
     @rdivide, abs(...
     bsxfun(@times, bsxfun(@minus, point(:,1), line(:,1)'), line(:,4)') - ...
     bsxfun(@times, bsxfun(@minus, point(:,2), line(:,2)'), line(:,3)')), ...
-    hypot(line(:,3)', line(:,4)')) < tol;
+    (line(:,3).^2 + line(:,4).^2)') < tol;
 
