@@ -69,6 +69,11 @@ else
     nGerms = size(germs, 1);
 end
 
+% random point generator
+% Should be either empty (-> use random generator) or be an instance of
+% quasi-random sequence generator sucha as haltonset or sobolset.
+generator = [];
+
 % Number of points
 nPts = 200 * nGerms;
 
@@ -88,6 +93,18 @@ while length(varargin) > 1
             nIter = varargin{2};
         case 'npoints'
             nPts = varargin{2};
+        case 'generator'
+            generator = varargin{2};
+
+            % ensure generator is a stream
+            if isa(generator, 'qrandset')
+                generator = qrandstream(generator);
+            elseif isa(generator, 'qrandstream')
+                % ok, nothing to do...
+            else
+                error('quasi-random generator is not properly specified');
+            end
+            
         otherwise
             error(['Unknown parameter name: ' paramName]);
     end
@@ -103,9 +120,12 @@ box = polygonBounds(poly);
 
 % init germs if needed
 if isempty(germs)
-    germs = generatePointsInPoly(nGerms);
+    if isempty(generator)
+        germs = generatePointsInPoly(nGerms);
+    else
+        germs = generateQRandPointsInPoly(nGerms);
+    end
 end
-
 germIters = cell(nIter, 1);
 
 
@@ -124,7 +144,11 @@ for i = 1:nIter
     if verbose
         disp('  generate points');
     end
-    points = generatePointsInPoly(nPts);
+    if isempty(generator)
+        points = generatePointsInPoly(nPts);
+    else
+        points = generateQRandPointsInPoly(nPts);
+    end
     
     % for each point, determines index of the closest germ
     if verbose
@@ -191,7 +215,31 @@ function pts = generatePointsInPoly(nPts)
         
         ind = ind(~polygonContains(poly, pts(ind, :)));
     end
+end
+
+function pts = generateQRandPointsInPoly(nPts)
+    % extreme coordinates
+    xmin = box(1);  xmax = box(2);
+    ymin = box(3);  ymax = box(4);
     
+    % compute size of box
+    dx = xmax - xmin;
+    dy = ymax - ymin;
+    
+    % allocate memory for result
+    pts = zeros(nPts, 2);
+
+    % iterate until all points have been sampled within the polygon
+    ind = (1:nPts)';
+    while ~isempty(ind)
+        NI = length(ind);
+        pts0 = qrand(generator, NI);
+        x = pts0(:, 1) * dx + xmin;
+        y = pts0(:, 2) * dy + ymin;
+        pts(ind, :) = [x y];
+        
+        ind = ind(~polygonContains(poly, pts(ind, :)));
+    end
 end
 
 end
