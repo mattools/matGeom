@@ -5,9 +5,9 @@ function ell = inertiaEllipsoid(points)
 %   Compute the inertia ellipsoid of the set of points PTS. The result is
 %   an ellispoid defined by:
 %   ELL = [XC YC ZC A B C PHI THETA PSI]
-%   where [XC YC ZY] is the center, [A B C] are the lengths of the 
-%   semi-axes (in decreasing order), and [PHI THETA PSI] are euler angles 
-%   representing the ellipsoid orientation, in degrees.
+%   where [XC YC ZY] is the center, [A B C] are lengths of semi-axes (in
+%   decreasing order), and [PHI THETA PSI] are euler angles representing 
+%   the ellipsoid orientation, in degrees.
 %
 %   Example
 %     pts = randn(300, 3);
