@@ -15,7 +15,7 @@ function b = isPointOnLine(point, line, varargin)
 %   See also: 
 %   lines2d, points2d, isPointOnEdge, isPointOnRay, angle3Points
 %
-%
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
