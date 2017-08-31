@@ -24,6 +24,7 @@ function ell = inertiaEllipsoid(points)
 %   See also
 %   spheres, drawEllipsoid, inertiaEllipse
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
