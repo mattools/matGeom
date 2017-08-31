@@ -134,7 +134,8 @@ else
 end
 
 % test if point is located on supporting line
-b1 = (abs(lx.*dy - ly.*dx) ./ hypot(dx, dy)) < tol;
+% TODO: replace by test on position on edge
+b1 = abs(lx.*dy - ly.*dx) ./ (dx.*dx + dy.*dy) < tol;
 
 % compute position of point with respect to edge bounds
 % use different tests depending on line angle

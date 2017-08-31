@@ -117,3 +117,12 @@ clipped = clipEdge(edges, box);
 % compare results
 testCase.assertEqual(clip1, clipped(1,:), 'AbsTol', .01);
 testCase.assertEqual(clip2, clipped(2,:), 'AbsTol', .01);
+
+function testDiagonalEdge(testCase)
+
+edge=[ 102.5260 -1.8235 91.5926 12.6135]; 
+box=[0 100 0 100]; 
+
+clip = clipEdge(edge, box);
+
+testCase.assertEqual(clip(1), 100, 'AbsTol', .01);
