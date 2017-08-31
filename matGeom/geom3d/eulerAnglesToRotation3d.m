@@ -61,9 +61,9 @@ convention=p.Results.convention;
 % Process input arguments
 if size(phi, 2) == 3
     % manages arguments given as one array
-    phi     = phi(:, 1);
-    theta   = phi(:, 2);
     psi     = phi(:, 3);
+    theta   = phi(:, 2);
+    phi     = phi(:, 1);
 end
 
 % create individual rotation matrices
