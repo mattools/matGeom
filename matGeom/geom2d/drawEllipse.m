@@ -24,17 +24,18 @@ function varargout = drawEllipse(varargin)
 %   % 40, semi minor axis length of 20, and rotated by 30 degrees.
 %     figure(1); clf; hold on;
 %     drawEllipse([50 50 40 20 30]);
-%     axis equal;
+%     axis equal; axis([0 100 10 90])
 %
 %   % add another ellipse with different orientation and style
 %     drawEllipse([50 50 40 20 -10], 'linewidth', 2, 'color', 'g');
 %
 %   See also:
-%   ellipses2d, drawCircle, drawEllipseArc, ellipseToPolygon
+%     ellipses2d, drawCircle, drawEllipseArc, ellipseToPolygon
 %
+
 %   ---------
 %   author : David Legland 
-%   e-mail: david.legland@grignon.inra.fr
+%   e-mail: david.legland@inra.fr
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 11/12/2003.
 %
