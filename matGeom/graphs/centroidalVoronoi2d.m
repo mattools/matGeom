@@ -1,4 +1,4 @@
-function [germs, germPaths] = centroidalVoronoi2d(nGerms, poly, varargin)
+function [germs, germPaths] = centroidalVoronoi2d(germs, poly, varargin)
 %CENTROIDALVORONOI2D Centroidal Voronoi tesselation within a polygon
 %
 %   PTS = centroidalVoronoi2d(NPTS, POLY)
@@ -13,16 +13,32 @@ function [germs, germPaths] = centroidalVoronoi2d(nGerms, poly, varargin)
 %   centroids are not computed explicitly, but approximated by sampling N
 %   points within the bounding polygon. 
 %
+%   [PTS, PATHLIST] = centroidalVoronoi2d(NPTS, POLY)
+%   Also returns the path of each germs at each iteration. The result
+%   PATHLIST is a cell array with as many cells as the number of germs,
+%   containing in each cell the successive positions of the germ.
+%
 %   PTS = centroidalVoronoi2d(.., PARAM, VALUE)
 %   Specify one or several optional arguments. PARAM can be one of:
 %   * 'nIter'   specifies the number of iterations of the algorithm
-%       (default is 30)
+%       (default is 50)
 %   * 'nPoints' number of points for updating positions of germs at each
 %       iteration. Default is 200 times the number of germs.
 %   * 'verbose' display iteration number. Default is false.
 %
 %   Example
-%   centroidalVoronoi2d
+%     poly = ellipseToPolygon([50 50 40 30 20], 200);
+%     nGerms = 100;
+%     germs = centroidalVoronoi2d(nGerms, poly);
+%     figure; hold on;
+%     drawPolygon(poly, 'k');
+%     drawPoint(germs, 'bo');
+%     axis equal; axis([0 100 10 90]);
+%     % extract regions of the CVD
+%     box = polygonBounds(poly);
+%     [n, e] = boundedVoronoi2d(box, germs);
+%     [n2, e2] = clipGraphPolygon(n, e, poly);
+%     drawGraphEdges(n2, e2, 'b');
 %
 %   See also
 %   graphs, boundedVoronoi2d
@@ -30,7 +46,7 @@ function [germs, germPaths] = centroidalVoronoi2d(nGerms, poly, varargin)
 %   Rewritten from programs found in
 %   http://people.scs.fsu.edu/~burkardt/m_src/cvt/cvt.html
 %
-%  Reference:
+%   Reference:
 %    Qiang Du, Vance Faber, and Max Gunzburger,
 %    Centroidal Voronoi Tessellations: Applications and Algorithms,
 %    SIAM Review, Volume 41, 1999, pages 637-676.
@@ -42,13 +58,22 @@ function [germs, germPaths] = centroidalVoronoi2d(nGerms, poly, varargin)
 % Created: 2012-02-23,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
+
 %% Parse input arguments
+
+% number of germs
+if isscalar(germs)
+    nGerms = germs;
+    germs = [];
+else
+    nGerms = size(germs, 1);
+end
 
 % Number of points
 nPts = 200 * nGerms;
 
 % Number of iterations
-nIter = 30;
+nIter = 50;
 
 verbose = false;
 
@@ -76,13 +101,15 @@ end
 % bounding box of polygon
 box = polygonBounds(poly);
 
-% init germs
-germs = generatePointsInPoly(nGerms);
+% init germs if needed
+if isempty(germs)
+    germs = generatePointsInPoly(nGerms);
+end
 
 germIters = cell(nIter, 1);
 
 
-%% Iteration of the McQueen algorithm
+%% Iteration of the Lloyd algorithm
 
 for i = 1:nIter
      if verbose
