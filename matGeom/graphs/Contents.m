@@ -1,7 +1,7 @@
 % GRAPHS Simple Toolbox for manipulating Geometric Graphs
-% Version 0.5 11-Apr-2010 .
+% Version 0.6 04-Sep-2017 .
 %
-%   The aim of this package is to provides functions to easily create,  
+%   The aim of this package is to provide functions to easily create,  
 %   modify and display geometric graphs (geometric in a sense position
 %   nodes are associated to geometric position in 2D or 3D).
 %
@@ -105,7 +105,7 @@
 % Graph display
 %   drawGraph                  - Draw a graph, given as a set of vertices and edges
 %   drawGraphEdges             - Draw edges of a graph
-%   drawGraphFaces             - Draw faces of a graph
+%   fillGraphFaces             - Fill faces of a graph with specified color
 %   drawDigraph                - Draw a directed graph, given as a set of vertices and edges
 %   drawDirectedEdges          - Draw edges with arrow indicating direction
 %   drawEdgeLabels             - Draw values associated to graph edges

@@ -2,9 +2,9 @@ function varargout = drawGraph(varargin)
 %DRAWGRAPH Draw a graph, given as a set of vertices and edges
 %
 %   drawGraph(NODES, EDGES) 
-%   Draws a graph specified by a set of nodes (array N*2 or N*3,
+%   Draws a graph specified by a set of nodes (array N-by-2 or N-by-3,
 %   corresponding to coordinate of each node), and a set of edges (an array
-%   Ne*2, containing for each edge the first and the second node).
+%   NE-by-2, containing for each edge the first and the second node).
 %   Default drawing is a red circle for nodes and a blue line for edges.
 %
 %   drawGraph(NODES, EDGES, FACES)
@@ -36,8 +36,9 @@ function varargout = drawGraph(varargin)
 %   Also returns handle to the set of faces.
 %   
 %   See Also
-%   clipGraph, clipGraphPolygon
+%   graphs, drawGraphEdges, fillGraphFaces, clipGraph, clipGraphPolygon
 %
+
 %   -----
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -79,7 +80,7 @@ sf = {'EdgeColor', 'none', 'Facecolor', 'c'};
 %% Process input arguments
 
 % case of a call without arguments
-if nargin==0
+if nargin == 0
     help drawGraph;
     return;
 end
@@ -148,11 +149,11 @@ end
 
 
 
-%% main drawing processing
+%% Main drawing processing
 
 hold on;
 
-if size(n, 2)==2
+if size(n, 2) == 2
     % Draw a 2 dimensional graph ----------------------
 
     % Draw faces of the graph ------------
@@ -160,7 +161,7 @@ if size(n, 2)==2
         if iscell(f)
             % each face is contained in a cell.
             hf = zeros(size(f));
-            for fi=1:length(f)
+            for fi = 1:length(f)
                 hf(fi) = patch('Faces', f{fi}, 'Vertices', n, sf{:}); 
             end
         else
@@ -171,7 +172,7 @@ if size(n, 2)==2
     end
     
     % Draw 2D Edges ----------------------
-    if ~strcmp(se{1}, 'none') && size(e, 1)>0
+    if ~strcmp(se{1}, 'none') && size(e, 1) > 0
         he = plot([n(e(:,1),1) n(e(:,2),1)]', [n(e(:,1),2) n(e(:,2),2)]', se{:});
     end
 
@@ -192,7 +193,7 @@ elseif size(n, 2)==3
         if iscell(f)
             % each face is contained in a cell.
             hf = zeros(size(f));
-            for fi=1:length(f)
+            for fi = 1:length(f)
                 hf(fi) = patch('Faces', f{fi}, 'Vertices', n, sf{:}); 
             end
         else
@@ -203,12 +204,7 @@ elseif size(n, 2)==3
     end
        
     % Draw 3D edges ----------------------
-    if ~strcmp(se{1}, 'none') && size(e, 1)>0
-%         he = plot3(...
-%             [n(e(:,1),1) n(e(:,2),1)]', ...
-%             [n(e(:,1),2) n(e(:,2),2)]', ...
-%             [n(e(:,1),3) n(e(:,2),3)]', ...
-%             se{:});
+    if ~strcmp(se{1}, 'none') && size(e, 1) > 0
         he = line(...
             [n(e(:,1),1) n(e(:,2),1)]', ...
             [n(e(:,1),2) n(e(:,2),2)]', ...
@@ -217,7 +213,7 @@ elseif size(n, 2)==3
     end
     
     % Draw 3D nodes ----------------------
-    if ~strcmp(sn{1}, 'none');
+    if ~strcmp(sn{1}, 'none')
         hn = plot3(n(:,1), n(:,2), n(:,3), sn{:});
     end
     
