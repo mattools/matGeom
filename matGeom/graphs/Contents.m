@@ -46,9 +46,10 @@
 %   voronoi2d                  - Compute a voronoi diagram as a graph structure
 %   boundedVoronoi2d           - Return a bounded voronoi diagram as a graph structure
 %   centroidalVoronoi2d        - Centroidal Voronoi tesselation within a polygon
-%   boundedCentroidalVoronoi2d - Create a 2D Centroidal Voronoi Tesselation in a box
+%   centroidalVoronoi2d_MC     - Centroidal Voronoi tesselation by Monte-Carlo
 %   cvtUpdate                  - Update germs of a CVT with given points
 %   cvtIterate                 - Update germs of a CVT using random points with given density
+%   boundedCentroidalVoronoi2d - Create a 2D Centroidal Voronoi Tesselation in a box
 %
 % Geodesic and shortest path operations
 %   grShortestPath             - Find a shortest path between two nodes in the graph

@@ -6,12 +6,8 @@ function [germs, germPaths] = centroidalVoronoi2d(germs, poly, varargin)
 %   Centroidal germs can be computed by using the Llyod's algorithm:
 %   1) initial germs are chosen at random within polygon
 %   2) voronoi polygon of the germs is computed
-%   3) the centroid of each domain are computed, and used as germs of the
+%   3) the centroids of each domain are computed, and used as germs of the
 %   next iteration
-%
-%   This version uses an approximated version of Llyod's algorithm. The
-%   centroids are not computed explicitly, but approximated by sampling N
-%   points within the bounding polygon. 
 %
 %   [PTS, PATHLIST] = centroidalVoronoi2d(NPTS, POLY)
 %   Also returns the path of each germs at each iteration. The result
@@ -22,8 +18,6 @@ function [germs, germPaths] = centroidalVoronoi2d(germs, poly, varargin)
 %   Specify one or several optional arguments. PARAM can be one of:
 %   * 'nIter'   specifies the number of iterations of the algorithm
 %       (default is 50)
-%   * 'nPoints' number of points for updating positions of germs at each
-%       iteration. Default is 200 times the number of germs.
 %   * 'verbose' display iteration number. Default is false.
 %
 %   Example
@@ -41,7 +35,7 @@ function [germs, germPaths] = centroidalVoronoi2d(germs, poly, varargin)
 %     drawGraphEdges(n2, e2, 'b');
 %
 %   See also
-%   graphs, boundedVoronoi2d
+%   graphs, boundedVoronoi2d, centroidalVoronoi2d_MC
 %
 %   Rewritten from programs found in
 %   http://people.scs.fsu.edu/~burkardt/m_src/cvt/cvt.html
@@ -61,21 +55,13 @@ function [germs, germPaths] = centroidalVoronoi2d(germs, poly, varargin)
 
 %% Parse input arguments
 
-% number of germs
+% Number of germs
 if isscalar(germs)
     nGerms = germs;
     germs = [];
 else
     nGerms = size(germs, 1);
 end
-
-% random point generator
-% Should be either empty (-> use random generator) or be an instance of
-% quasi-random sequence generator sucha as haltonset or sobolset.
-generator = [];
-
-% Number of points
-nPts = 200 * nGerms;
 
 % Number of iterations
 nIter = 50;
@@ -91,19 +77,6 @@ while length(varargin) > 1
             verbose = varargin{2};
         case 'niter'
             nIter = varargin{2};
-        case 'npoints'
-            nPts = varargin{2};
-        case 'generator'
-            generator = varargin{2};
-
-            % ensure generator is a stream
-            if isa(generator, 'qrandset')
-                generator = qrandstream(generator);
-            elseif isa(generator, 'qrandstream')
-                % ok, nothing to do...
-            else
-                error('quasi-random generator is not properly specified');
-            end
             
         otherwise
             error(['Unknown parameter name: ' paramName]);
@@ -116,15 +89,11 @@ end
 %% Initialisations
 
 % bounding box of polygon
-box = polygonBounds(poly);
+bbox = polygonBounds(poly);
 
 % init germs if needed
 if isempty(germs)
-    if isempty(generator)
-        germs = generatePointsInPoly(nGerms);
-    else
-        germs = generateQRandPointsInPoly(nGerms);
-    end
+    germs = generatePointsInPoly(nGerms);
 end
 germIters = cell(nIter, 1);
 
@@ -140,33 +109,20 @@ for i = 1:nIter
         germIters{i} = germs;
     end
     
-    % random uniform points in polygon
+    % Compute Clipped Voronoi diagram of germs
     if verbose
-        disp('  generate points');
+        disp('  compute Voronoi Diagram');
     end
-    if isempty(generator)
-        points = generatePointsInPoly(nPts);
-    else
-        points = generateQRandPointsInPoly(nPts);
-    end
-    
-    % for each point, determines index of the closest germ
-    if verbose
-        disp('  find closest germ');
-    end
-    ind = zeros(nPts, 1);
-    for iPoint = 1:nPts
-        x0 = points(iPoint, 1);
-        y0 = points(iPoint, 2);
-        [tmp, ind(iPoint)] = min((germs(:,1)-x0).^2 + (germs(:,2)-y0).^2); %#ok<ASGLU>
-    end
+    [n, e, f] = boundedVoronoi2d(bbox, germs);
+    [n2, e2, f2] = clipMesh2dPolygon(n, e, f, poly); %#ok<ASGLU>
 
     % update the position of each germ
     if verbose
-        disp('  update germ position');
+        disp('  compute centroids');
     end
     for iGerm = 1:nGerms
-        germs(iGerm,:) = centroid(points(ind == iGerm, :));
+        polygon = n2(f2{iGerm}, :);
+        germs(iGerm,:) = polygonCentroid(polygon);
     end
     
 end
@@ -195,8 +151,8 @@ end
 
 function pts = generatePointsInPoly(nPts)
     % extreme coordinates
-    xmin = box(1);  xmax = box(2);
-    ymin = box(3);  ymax = box(4);
+    xmin = bbox(1);  xmax = bbox(2);
+    ymin = bbox(3);  ymax = bbox(4);
     
     % compute size of box
     dx = xmax - xmin;
@@ -211,31 +167,6 @@ function pts = generatePointsInPoly(nPts)
         NI = length(ind);
         x = rand(NI, 1) * dx + xmin;
         y = rand(NI, 1) * dy + ymin;
-        pts(ind, :) = [x y];
-        
-        ind = ind(~polygonContains(poly, pts(ind, :)));
-    end
-end
-
-function pts = generateQRandPointsInPoly(nPts)
-    % extreme coordinates
-    xmin = box(1);  xmax = box(2);
-    ymin = box(3);  ymax = box(4);
-    
-    % compute size of box
-    dx = xmax - xmin;
-    dy = ymax - ymin;
-    
-    % allocate memory for result
-    pts = zeros(nPts, 2);
-
-    % iterate until all points have been sampled within the polygon
-    ind = (1:nPts)';
-    while ~isempty(ind)
-        NI = length(ind);
-        pts0 = qrand(generator, NI);
-        x = pts0(:, 1) * dx + xmin;
-        y = pts0(:, 2) * dy + ymin;
         pts(ind, :) = [x y];
         
         ind = ind(~polygonContains(poly, pts(ind, :)));
