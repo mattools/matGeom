@@ -43,7 +43,7 @@ function area = polygonArea(poly, varargin)
 %   http://paulbourke.net/geometry/polygonmesh/
 %
 %   See also:
-%   polygons2d, polygonCentroid, drawPolygon, triangleArea
+%   polygons2d, polygonCentroid, polygonSecondAreaMoments, triangleArea
 %
 
 %   ---------
