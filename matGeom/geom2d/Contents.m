@@ -151,6 +151,7 @@
 %   mergeBoxes               - Merge two boxes, by computing their greatest extent
 %   randomPointInBox         - Generate random point within a box
 %   boxToRect                - Convert box data to rectangle data
+%   boxToPolygon             - Convert a bounding box to a square polygon
 %   drawBox                  - Draw a box defined by coordinate extents
 %
 % Triangles
@@ -203,5 +204,4 @@ help('Contents');
 %   normalize                - Normalize a vector
 
 %% Others...
-
 
