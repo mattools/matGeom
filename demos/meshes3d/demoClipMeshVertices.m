@@ -34,11 +34,11 @@ drawMesh(v2, f2, 'faceAlpha', .7);
 [v, f] = createSoccerBall;
 f = triangulateFaces(f);
 sphere = [0.9 -0.7 0 1.1];
-[v2, f2] = clipMeshVertices(v, f, sphere, 'shape', 'sphere');
+mesh2 = clipMeshVertices(v, f, sphere, 'shape', 'sphere');
 figure('color','w'); view(3); axis equal
 drawMesh(v, f, 'faceColor', 'none', 'faceAlpha', .2);
 drawSphere(sphere,'faceColor', 'none','linestyle','-','edgecolor','b')
-drawMesh(v2, f2, 'faceAlpha', .7);
+drawMesh(mesh2, 'faceAlpha', .7);
 
 %% clip by a sphere and return the outside
 [mesh.vertices, mesh.faces] = createSoccerBall;

@@ -1,4 +1,4 @@
-function [v2, f2] = clipMeshVertices(v, f, b, varargin)
+function varargout = clipMeshVertices(v, f, b, varargin)
 %CLIPMESHVERTICES Clip vertices of a surfacic mesh and remove outer faces
 %
 %   [V2, F2] = clipMeshVertices(V, F, B)
@@ -75,4 +75,14 @@ elseif iscell(f)
     for i = 1:length(f2)
         f2{i} = refInds(f2{i})';
     end
+end
+
+switch nargout
+    case 1
+        mesh2.vertices=v2;
+        mesh2.faces=f2;
+        varargout{1}=mesh2;
+    case 2
+        varargout{1}=v2;
+        varargout{2}=f2;
 end
