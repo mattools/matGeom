@@ -34,7 +34,7 @@ function [v2, f2] = clipMeshVertices(v, f, b, varargin)
 
 % if input is given as a structure, parse fields
 if isstruct(v)
-    if exist('b','var'); varargin = [b, varargin]; end
+    if nargin > 2; varargin = [b, varargin]; end
     b = f;
     f = v.faces;
     v = v.vertices;
