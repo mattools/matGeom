@@ -1,7 +1,7 @@
 % GRAPHS Simple Toolbox for manipulating Geometric Graphs
-% Version 0.5 11-Apr-2010 .
+% Version 0.6 04-Sep-2017 .
 %
-%   The aim of this package is to provides functions to easily create,  
+%   The aim of this package is to provide functions to easily create,  
 %   modify and display geometric graphs (geometric in a sense position
 %   nodes are associated to geometric position in 2D or 3D).
 %
@@ -46,9 +46,10 @@
 %   voronoi2d                  - Compute a voronoi diagram as a graph structure
 %   boundedVoronoi2d           - Return a bounded voronoi diagram as a graph structure
 %   centroidalVoronoi2d        - Centroidal Voronoi tesselation within a polygon
-%   boundedCentroidalVoronoi2d - Create a 2D Centroidal Voronoi Tesselation in a box
+%   centroidalVoronoi2d_MC     - Centroidal Voronoi tesselation by Monte-Carlo
 %   cvtUpdate                  - Update germs of a CVT with given points
 %   cvtIterate                 - Update germs of a CVT using random points with given density
+%   boundedCentroidalVoronoi2d - Create a 2D Centroidal Voronoi Tesselation in a box
 %
 % Geodesic and shortest path operations
 %   grShortestPath             - Find a shortest path between two nodes in the graph
@@ -83,6 +84,7 @@
 %   grMergeNodesMedian         - Replace several nodes by their median coordinate
 %   clipGraph                  - Clip a graph with a rectangular area
 %   clipGraphPolygon           - Clip a graph with a polygon
+%   clipMesh2dPolygon          - Clip a planar mesh with a polygon
 %   addSquareFace              - Add a (square) face defined from its vertices to a graph
 %   grFaceToPolygon            - Compute the polygon corresponding to a graph face
 %   graph2Contours             - Convert a graph to a set of contour curves
@@ -105,7 +107,7 @@
 % Graph display
 %   drawGraph                  - Draw a graph, given as a set of vertices and edges
 %   drawGraphEdges             - Draw edges of a graph
-%   drawGraphFaces             - Draw faces of a graph
+%   fillGraphFaces             - Fill faces of a graph with specified color
 %   drawDigraph                - Draw a directed graph, given as a set of vertices and edges
 %   drawDirectedEdges          - Draw edges with arrow indicating direction
 %   drawEdgeLabels             - Draw values associated to graph edges

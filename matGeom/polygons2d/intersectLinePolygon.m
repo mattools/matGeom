@@ -13,7 +13,7 @@ function [intersects, edgeIndices] = intersectLinePolygon(line, poly, varargin)
 %   P = intersectLinePolygon(LINE, POLY, TOL)
 %   Specifies the tolerance for geometric tests. Default is 1e-14.
 %
-%   [P INDS] = intersectLinePolygon(...)
+%   [P, INDS] = intersectLinePolygon(...)
 %   Also returns the indices of edges involved in intersections. INDS is a
 %   K-by-1 column vector, such that P(i,:) corresponds to intersection of
 %   the line with the i-th edge of the polygon. If the intersection occurs
@@ -32,7 +32,7 @@ function [intersects, edgeIndices] = intersectLinePolygon(line, poly, varargin)
 %           10     5
 %            0     5
 %     % also return indices of edges
-%     [inters inds] = intersectLinePolygon(line, poly)
+%     [inters, inds] = intersectLinePolygon(line, poly)
 %     inters =
 %           10     5
 %            0     5

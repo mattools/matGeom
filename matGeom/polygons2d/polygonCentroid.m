@@ -23,7 +23,7 @@ function [centroid, area] = polygonCentroid(varargin)
 %   algo adapted from P. Bourke web page
 %
 %   See also:
-%   polygons2d, polygonArea, drawPolygon
+%   polygons2d, polygonArea, polygonInertiaMoments, drawPolygon
 %
 
 %   ---------

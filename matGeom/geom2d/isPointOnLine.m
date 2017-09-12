@@ -13,7 +13,7 @@ function b = isPointOnLine(point, line, varargin)
 %   Specifies the tolerance used for testing location on 3D line.
 %
 %   See also: 
-%   lines2d, points2d, isPointOnEdge, isPointOnRay, angle3Points
+%   lines2d, points2d, isPointOnEdge, isPointOnRay, isLeftOriented
 %
 
 %   ---------
