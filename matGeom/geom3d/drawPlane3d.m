@@ -32,24 +32,23 @@ function varargout = drawPlane3d(plane, varargin)
 %   2011-07-19 fix a bug for param by Xin KANG (Ben)
 % 
 
-% default display
-options = {'FaceColor', 'm'};
-
 % parse input arguments if any
 if ~isempty(varargin)
-    options = varargin;
-    if length(options) == 1
-        if isstruct(options{1})
+    if length(varargin) == 1
+        if isstruct(varargin{1})
             % if options are specified as struct, need to convert to 
             % parameter name-value pairs
-            options = [fieldnames(options{1}) struct2cell(options{1})]';
-            options = options(:)';
+            varargin = [fieldnames(varargin{1}) struct2cell(varargin{1})]';
+            varargin = varargin(:)';
         else
             % if option is a single argument, assume it corresponds to 
             % plane color
-            options = {'FaceColor', options{1}};
+            varargin = {'FaceColor', varargin{1}};
         end
     end
+else
+    % default face color
+    varargin = {'FaceColor', 'm'};
 end
 
 % extract axis bounds to crop plane
@@ -129,7 +128,7 @@ ind = ind(1:end-1);
 
 % draw the patch
 h = patch('XData', pts(ind, 1), 'YData', pts(ind, 2), 'ZData', pts(ind, 3));
-set(h, options{:});
+set(h, varargin{:});
 
 % return handle to plane if needed
 if nargout > 0
