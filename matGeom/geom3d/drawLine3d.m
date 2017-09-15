@@ -22,13 +22,20 @@ function varargout = drawLine3d(lin, varargin)
 %   created the 17/02/2005.
 %
 
-%   HISTORY
-%   30/10/2008 replace intersectPlaneLine by intersectLinePlane
-
-
-% ensure color is given as name-value pair
-if length(varargin)==1
-    varargin = {'color', varargin{1}};
+% parse input arguments if there are any
+if ~isempty(varargin)
+    if length(varargin) == 1
+        if isstruct(varargin{1})
+            % if options are specified as struct, need to convert to 
+            % parameter name-value pairs
+            varargin = [fieldnames(varargin{1}) struct2cell(varargin{1})]';
+            varargin = varargin(:)';
+        else
+            % if option is a single argument, assume it corresponds to 
+            % plane color
+            varargin = {'Color', varargin{1}};
+        end
+    end
 end
 
 % extract limits of the bounding box
@@ -42,7 +49,7 @@ lim = get(gca, 'zlim');
 zmin = lim(1);
 zmax = lim(2);
 
-% clip the ine with the limits of the current axis
+% clip the line with the limits of the current axis
 edge = clipLine3d(lin, [xmin xmax ymin ymax zmin zmax]);
 
 % draw the clipped line

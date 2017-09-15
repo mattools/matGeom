@@ -80,14 +80,22 @@ drawLine3d(line, 'lineWidth', 2);
 
 % compute intersection between a plane and a line
 inter = intersectLinePlane(line12, plane0);
-drawPoint3d(inter, 'marker', '+', 'markerSize', 10, 'linewidth', 3);
+drawPoint3d(inter, 'Marker', '+', 'MarkerSize', 10, 'LineWidth', 3);
 
 % create a line perpendicular to a plane
 normal = planeNormal(plane);
 perpLine = [80 60 40 normal];
-drawLine3d(perpLine);
+% define line properties as struct
+lineProps.LineStyle='--';
+lineProps.LineWidth=2;
+lineProps.Color='c';
+drawLine3d(perpLine,lineProps);
 
 % compute intersection of line with plane
 inter2 = intersectLinePlane(perpLine, plane);
-drawPoint3d(inter2);
+% define point properties as struct
+pointProps.Marker='^';
+pointProps.MarkerFaceColor='c';
+pointProps.MarkerEdgeColor='k';
+drawPoint3d(inter2,pointProps);
 
