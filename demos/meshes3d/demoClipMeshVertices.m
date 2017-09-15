@@ -12,11 +12,11 @@
 
 
 %% clip by a box and return the inside
-[v, f] = createSoccerBall;
+[mesh.vertices, mesh.faces] = createSoccerBall;
 box = [0 2 -1 2 -.5 2];
-[v2, f2] = clipMeshVertices(v, f, box);
+[v2, f2] = clipMeshVertices(mesh, box);
 figure('color','w'); view(3); axis equal
-drawMesh(v, f, 'faceColor', 'none', 'faceAlpha', .2);
+drawMesh(mesh, 'faceColor', 'none', 'faceAlpha', .2);
 drawBox3d(box)
 drawMesh(v2, f2, 'faceAlpha', .7);
 
@@ -34,17 +34,17 @@ drawMesh(v2, f2, 'faceAlpha', .7);
 [v, f] = createSoccerBall;
 f = triangulateFaces(f);
 sphere = [0.9 -0.7 0 1.1];
-[v2, f2] = clipMeshVertices(v, f, sphere, 'shape', 'sphere');
+mesh2 = clipMeshVertices(v, f, sphere, 'shape', 'sphere');
 figure('color','w'); view(3); axis equal
 drawMesh(v, f, 'faceColor', 'none', 'faceAlpha', .2);
 drawSphere(sphere,'faceColor', 'none','linestyle','-','edgecolor','b')
-drawMesh(v2, f2, 'faceAlpha', .7);
+drawMesh(mesh2, 'faceAlpha', .7);
 
 %% clip by a sphere and return the outside
-[v, f] = createSoccerBall;
+[mesh.vertices, mesh.faces] = createSoccerBall;
 sphere = [0.9 -0.7 0 1.1];
-[v2, f2] = clipMeshVertices(v, f, sphere, 'shape', 'sphere', 'inside', false);
+[v2, f2] = clipMeshVertices(mesh, sphere, 'shape', 'sphere', 'inside', false);
 figure('color','w'); view(3); axis equal
-drawMesh(v, f, 'faceColor', 'none', 'faceAlpha', .2);
+drawMesh(mesh, 'faceColor', 'none', 'faceAlpha', .2);
 drawSphere(sphere,'faceColor', 'none','linestyle','-','edgecolor','b')
 drawMesh(v2, f2, 'faceAlpha', .7);
