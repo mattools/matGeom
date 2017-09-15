@@ -10,7 +10,7 @@ function varargout = concatenateMeshes(varargin)
 %   vertices and faces
 %   
 % ---------
-% Authors: Alec Jacobsen (loop), oqilipo (parsing)
+% Authors: oqilipo (parsing), Alec Jacobson (loop)
 % Created: 2017-09-12
 % Copyright 2017
 
