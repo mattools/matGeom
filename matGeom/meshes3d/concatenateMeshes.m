@@ -8,6 +8,9 @@ function varargout = concatenateMeshes(varargin)
 %   [V,F] = concatenateMeshes(MESH1, MESH2, ...)
 %   where MESH1, MESH2, ... are structs or struct arrays with the fields  
 %   vertices and faces
+%
+%   See also
+%     splitMesh
 %   
 % ---------
 % Authors: oqilipo (parsing), Alec Jacobson (loop)

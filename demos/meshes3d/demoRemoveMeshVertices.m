@@ -21,7 +21,6 @@ indAbove = find(~isBelowPlane(v, plane));
 [v2, f2] = removeMeshVertices(v, f, indAbove);
 drawMesh(v2, f2); drawPlane3d(plane); axis equal;
 
-
 %% in: faces / vertices | out: vertices-faces-struct
 figure('color','w'); view(3); 
 [v, f] = createSoccerBall; 
