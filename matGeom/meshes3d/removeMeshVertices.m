@@ -1,10 +1,9 @@
-function varargout = removeMeshVertices(vertices, faces, indsToRemove, varargin)
+function varargout = removeMeshVertices(vertices, faces, indsToRemove)
 %REMOVEMESHVERTICES Remove vertices and associated faces from a mesh
 %
 %   [V2, F2] = removeMeshVertices(VERTS, FACES, VERTINDS)
 %   Removes the vertices specified by the vertex indices VERTINDS, and
 %   remove the faces containing one of the removed vertices.
-%
 %
 %   Example
 %     % remove some vertices from a soccerball polyhedron
@@ -24,6 +23,11 @@ function varargout = removeMeshVertices(vertices, faces, indsToRemove, varargin)
 % Created: 2016-02-03,    using Matlab 8.6.0.267246 (R2015b)
 % Copyright 2016 INRA - Cepia Software Platform.
 
+% parse inputs
+if nargin == 2
+    indsToRemove = faces;
+    [vertices, faces] = parseMeshData(vertices);
+end
 
 % create array of indices to keep
 nVertices = size(vertices, 1);

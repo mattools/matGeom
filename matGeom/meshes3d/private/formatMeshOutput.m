@@ -39,7 +39,9 @@ switch nbArgs
     case {0, 1}
         % output is a data structure with fields vertices, edges and faces
         mesh.vertices = vertices;
-        mesh.edges = edges;
+        if ~isempty(edges)
+            mesh.edges = edges;
+        end
         mesh.faces = faces;
         res = {mesh};
 
