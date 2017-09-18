@@ -7,6 +7,9 @@ function meshes = splitMesh(vertices, faces, varargin)
 %
 %   MESHES = splitMesh(MESH) with the vertices-faces-struct MESH is also
 %   possible
+%   
+%   ... = splitMesh(..., 'mostVertices') returns only the component with
+%   the most vertices
 %
 %   Example
 %     [v1, f1] = boxToMesh([1 0 -1 0 -1 0]);
