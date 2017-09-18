@@ -1,4 +1,4 @@
-function meshes = splitMesh(varargin)
+function meshes = splitMesh(vertices, faces, varargin)
 %SPLITMESH return the connected components of a mesh
 %
 %   MESHES = splitMesh(VERTICES, FACES) returns the connected components of
@@ -35,14 +35,30 @@ function meshes = splitMesh(varargin)
 % Created: 2017-09-17
 % Copyright 2017
 
-[vertices, faces]=parseMeshData(varargin{:});
+% input parsing
+if isstruct(vertices)
+    if nargin > 1; varargin = [faces, varargin]; end
+    [vertices, faces]=parseMeshData(vertices);
+end
 
+parser = inputParser;
+validStrings = {'all','mostVertices'};
+addOptional(parser,'components','all',@(x) any(validatestring(x, validStrings)));
+parse(parser,varargin{:});
+
+% algorithm
 CC = connected_components(faces);
 [a,~]=hist(CC,unique(CC));
 [~,b] = sort(a);
 meshes=repmat(struct('vertices',[],'faces',[]),length(b),1);
 for cc=b
     meshes(cc)=removeMeshVertices(vertices, faces, ~(CC'==b(cc)));
+end
+
+% output parsing
+switch parser.Results.components
+    case 'mostVertices'
+        meshes=meshes(end);
 end
 
 end
