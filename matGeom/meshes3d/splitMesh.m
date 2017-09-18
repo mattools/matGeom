@@ -1,4 +1,4 @@
-function meshes = splitMesh(vertices, faces)
+function meshes = splitMesh(varargin)
 %SPLITMESH return the connected components of a mesh
 %
 %   MESHES = splitMesh(VERTICES, FACES) returns the connected components of
@@ -34,6 +34,8 @@ function meshes = splitMesh(vertices, faces)
 % Author: oqilipo
 % Created: 2017-09-17
 % Copyright 2017
+
+[vertices, faces]=parseMeshData(varargin{:});
 
 CC = connected_components(faces);
 [a,~]=hist(CC,unique(CC));
