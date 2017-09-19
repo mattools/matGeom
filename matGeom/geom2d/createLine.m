@@ -21,6 +21,9 @@ function line = createLine(varargin)
 %   L = createLine(THETA);
 %   Create a polar line originated at (0,0) and with angle THETA.
 %
+%   L = createLine(p, THETA);
+%   Create a polar line originated at p and with angle THETA.
+%
 %   L = createLine(RHO, THETA);
 %   Create a polar line with normal theta, and with min distance to origin
 %   equal to rho. rho can be negative, in this case, the line is the same
@@ -94,7 +97,10 @@ elseif length(varargin)==2
     % - 2 points, then 2 arrays of 1*2 double.
     v1 = varargin{1};
     v2 = varargin{2};
-    if size(v1, 2)==1
+    if size(v1, 2)==2 && size(v2, 2)==1
+        % first param is point, and second param is angle of line
+        line = [v1(:,1), v1(:,2) cos(v2) sin(v2)];
+    elseif size(v1, 2)==1
         % first param is angle of line, and second param is signed distance
         % to origin.
         line = [v1.*cos(v2) v1.*sin(v2) -sin(v2) cos(v2)];
