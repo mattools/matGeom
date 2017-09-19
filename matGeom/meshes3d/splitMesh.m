@@ -1,4 +1,4 @@
-function meshes = splitMesh(vertices, faces)
+function meshes = splitMesh(vertices, faces, varargin)
 %SPLITMESH return the connected components of a mesh
 %
 %   MESHES = splitMesh(VERTICES, FACES) returns the connected components of
@@ -7,6 +7,9 @@ function meshes = splitMesh(vertices, faces)
 %
 %   MESHES = splitMesh(MESH) with the vertices-faces-struct MESH is also
 %   possible
+%   
+%   ... = splitMesh(..., 'mostVertices') returns only the component with
+%   the most vertices
 %
 %   Example
 %     [v1, f1] = boxToMesh([1 0 -1 0 -1 0]);
@@ -35,12 +38,30 @@ function meshes = splitMesh(vertices, faces)
 % Created: 2017-09-17
 % Copyright 2017
 
+% input parsing
+if isstruct(vertices)
+    if nargin > 1; varargin = [faces, varargin]; end
+    [vertices, faces]=parseMeshData(vertices);
+end
+
+parser = inputParser;
+validStrings = {'all','mostVertices'};
+addOptional(parser,'components','all',@(x) any(validatestring(x, validStrings)));
+parse(parser,varargin{:});
+
+% algorithm
 CC = connected_components(faces);
 [a,~]=hist(CC,unique(CC));
 [~,b] = sort(a);
 meshes=repmat(struct('vertices',[],'faces',[]),length(b),1);
 for cc=b
     meshes(cc)=removeMeshVertices(vertices, faces, ~(CC'==b(cc)));
+end
+
+% output parsing
+switch parser.Results.components
+    case 'mostVertices'
+        meshes=meshes(end);
 end
 
 end
