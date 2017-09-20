@@ -46,9 +46,9 @@ end
 % change labels of vertices referenced by faces
 if isnumeric(faces)
     faces2 = oldNewMap(faces);
+    if size(faces2,2)==1; faces2=faces2'; end
     % keep only faces with valid vertices
     faces2 = faces2(sum(faces2 == 0, 2) == 0, :);
-    
 elseif iscell(faces)
     faces2 = cell(1, length(faces));
     for iFace = 1:length(faces)
