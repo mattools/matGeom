@@ -13,7 +13,14 @@ function plane = createPlane(varargin)
 %   [THETA PHI], where THETA is the colatitute (angle with the vertical
 %   axis) and PHI is angle with Ox axis, counted counter-clockwise (both
 %   given in radians).
-%   
+% 
+%   PLANE = createPlane(P0, Dip, DipDir);
+%   Creates a plane from a point and from a dip and dip direction angles 
+%   of the plane. Parameters Dip and DipDir angles are given as numbers.
+%   Dip : maximum inclination to the horizontal.
+%   DipDir : direction of the horizontal trace of the line of dip, 
+%            measured clockwise from north.
+%
 %   The created plane data has the following format:
 %   PLANE = [X0 Y0 Z0  DX1 DY1 DZ1  DX2 DY2 DZ2], with
 %   - (X0, Y0, Z0) is a point belonging to the plane
@@ -99,17 +106,40 @@ elseif length(varargin) == 2
     return;
     
 elseif length(varargin)==3
-    p1 = varargin{1};    
-    p2 = varargin{2};
-    p3 = varargin{3};
+    var1 = varargin{1};
+    var2 = varargin{2};
+    var3 = varargin{3};
     
-    % create direction vectors
-    v1 = p2 - p1;
-    v2 = p3 - p1;
-   
-    plane = normalizePlane([p1 v1 v2]);
-    return;
-  
+    if size(var1, 2) == 3 && size(var2, 2) == 3 && size(var3, 2) == 3
+        p1 = var1;    
+        p2 = var2;
+        p3 = var3;
+
+        % create direction vectors
+        v1 = p2 - p1;
+        v2 = p3 - p1;
+
+        plane = normalizePlane([p1 v1 v2]);
+        return;
+    elseif size(var1, 2) == 3 && size(var2, 2) == 1 && size(var3, 2) == 1
+        p0 = var1;
+        n = [sin(var2)*sin(var3) sin(var2)*cos(var3) cos(var2)];
+        
+        % find a vector not colinear to the normal
+        v0 = repmat([1 0 0], [size(p0, 1) 1]);
+        inds = vectorNorm3d(cross(n, v0, 2))<1e-14;
+        v0(inds, :) = repmat([0 1 0], [sum(inds) 1]);
+
+        % create direction vectors
+        v1 = normalizeVector3d(cross(n, v0, 2));
+        v2 = -normalizeVector3d(cross(v1, n, 2));
+
+        % concatenate result in the array representing the plane
+        plane = [p0 v1 v2];  
+        return;
+    else
+        error('Wrong argument in "createPlane".');
+    end  
 else
     error('Wrong number of arguments in "createPlane".');
 end
