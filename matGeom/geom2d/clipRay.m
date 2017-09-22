@@ -1,4 +1,4 @@
-function [edge, isInside] = clipRay(ray, box)
+function [edge, isInside] = clipRay(ray, bb)
 % Clip a ray with a box
 %
 %   EDGE = clipRay(RAY, BOX);
@@ -25,38 +25,36 @@ function [edge, isInside] = clipRay(ray, box)
 
 %   HISTORY
 %   2010-05-13 create from clipLine
+%   2017-09-21 simplify code
 
-% adjust size of two input arguments
-if size(ray, 1)==1
-    ray = repmat(ray, size(box, 1), 1);
-elseif size(box, 1)==1
-    box = repmat(box, size(ray, 1), 1);
-elseif size(ray, 1) ~= size(box, 1)
-    error('bad sizes for input');
-end
+  % adjust size of two input arguments
+  if size(ray, 1)==1
+      ray = repmat(ray, size(bb, 1), 1);
+  elseif size(bb, 1)==1
+      bb = repmat(bb, size(ray, 1), 1);
+  elseif size(ray, 1) != size(bb, 1)
+      error('bad sizes for input');
+  end
 
-% first compute clipping of supporting line
-edge = clipLine(ray, box);
+  % first compute clipping of supporting line
+  edge = clipLine(ray, bb);
 
-% detects valid edges (edges outside box are all NaN)
-inds = find(isfinite(edge(:, 1)));
+  % detects valid edges (edges outside box are all NaN)
+  inds = find(isfinite(edge(:, 1)));
 
-% compute position of edge extremities relative to the ray
-n = length(inds);
-pos1 = zeros(n, 1);
-pos2 = zeros(n, 1);
-for i = 1:n
-    pos1(i) = linePosition(edge(inds(i),1:2), ray(inds(i),:));
-    pos2(i) = linePosition(edge(inds(i),3:4), ray(inds(i),:));
-end
+  % compute position of edge extremities relative to the ray
+  pos1 = linePosition(edge(inds,1:2), ray(inds,:));
+  pos2 = linePosition(edge(inds,3:4), ray(inds,:));
 
-% if first point is before ray origin, replace by origin
-edge(inds(pos1<0), 1:2) = ray(inds(pos1<0), 1:2);
+  % if first point is before ray origin, replace by origin
+  edge(inds(pos1<0), 1:2) = ray(inds(pos1<0), 1:2);
 
-% if last point of edge is before origin, set all edge to NaN
-edge(inds(pos2<0), :) = NaN;
+  % if last point of edge is before origin, set all edge to NaN
+  edge(inds(pos2<0), :) = NaN;
 
-% eventually returns result about inside or outside
-if nargout > 1
-    isInside = isfinite(edge(:,1));
+  % eventually returns result about inside or outside
+  if nargout>1
+      isInside = isfinite(edge(:,1));
+  end
+  
 end
