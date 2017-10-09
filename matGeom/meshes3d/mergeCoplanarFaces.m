@@ -1,8 +1,8 @@
 function varargout = mergeCoplanarFaces(nodes, varargin)
 %MERGECOPLANARFACES Merge coplanar faces of a polyhedral mesh
 %
-%   [NODES FACES] = mergeCoplanarFaces(NODES, FACES)
-%   [NODES EDGES FACES] = mergeCoplanarFaces(NODES, EDGES, FACES)
+%   [NODES, FACES] = mergeCoplanarFaces(NODES, FACES)
+%   [NODES, EDGES, FACES] = mergeCoplanarFaces(NODES, EDGES, FACES)
 %   NODES is a set of 3D points (as a nNodes-by-3 array), 
 %   and FACES is one of:
 %   - a nFaces-by-X array containing vertex indices of each face, with each
@@ -17,19 +17,19 @@ function varargout = mergeCoplanarFaces(nodes, varargin)
 %   parallel. Default value is 1e-5.
 %
 %   Example
-%   [v e iFace] = createCube;
-%   figure; drawMesh(v, iFace); view(3); axis equal;
-%   [v2 f2] = mergeCoplanarFaces(v, iFace);
-%   figure; drawMesh(v, f2); 
+%   [v, e, f] = createCube;
+%   figure; drawMesh(v, f); view(3); axis equal;
+%   [v2, f2] = mergeCoplanarFaces(v, f);
+%   figure; drawMesh(v2, f2); 
 %   view(3); axis equal; view(3);
 %
 %   See also
-%   meshes3d, drawMesh, minConvexHull, triangulateFaces
+%     meshes3d, drawMesh, minConvexHull, triangulateFaces
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2006-07-05
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
@@ -96,7 +96,6 @@ for iFace = 1:nFaces
     end
 
     % indices of faces with same normal
-%     ind = find(abs(vectorNorm3d(cross(repmat(normals(iFace, :), [nFaces 1]), normals)))<acc);
     ind = find(vectorNorm3d(vectorCross3d(normals(iFace, :), normals)) < acc);
     
     % keep only coplanar faces (test coplanarity of points in both face)
@@ -123,7 +122,7 @@ for iFace = 1:nFaces
     
     % The set of coplanar faces may not necessarily form a single connected
     % component. The following computes label of each connected component.
-    component   = grLabel(nodes(planeNodes, :), planeEdges2);
+    component = grLabel(nodes(planeNodes, :), planeEdges2);
     
     % compute degree (number of adjacent faces) of each edge.
     Npe = size(planeEdges, 1);
