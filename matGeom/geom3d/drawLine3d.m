@@ -22,6 +22,15 @@ function varargout = drawLine3d(lin, varargin)
 %   created the 17/02/2005.
 %
 
+% Parse and check inputs
+if ishandle(lin)
+    hAx = lin;
+    lin = varargin{1};
+    varargin(1) = [];
+else
+    hAx = gca;
+end
+
 % parse input arguments if there are any
 if ~isempty(varargin)
     if length(varargin) == 1
@@ -39,13 +48,13 @@ if ~isempty(varargin)
 end
 
 % extract limits of the bounding box
-lim = get(gca, 'xlim');
+lim = get(hAx, 'xlim');
 xmin = lim(1);
 xmax = lim(2);
-lim = get(gca, 'ylim');
+lim = get(hAx, 'ylim');
 ymin = lim(1);
 ymax = lim(2);
-lim = get(gca, 'zlim');
+lim = get(hAx, 'zlim');
 zmin = lim(1);
 zmax = lim(2);
 
@@ -54,7 +63,7 @@ edge = clipLine3d(lin, [xmin xmax ymin ymax zmin zmax]);
 
 % draw the clipped line
 if sum(isnan(edge))==0
-    h  = drawEdge3d(edge);
+    h  = drawEdge3d(hAx, edge);
     if ~isempty(varargin)
         set(h, varargin{:});
     end

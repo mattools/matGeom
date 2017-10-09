@@ -32,6 +32,15 @@ function varargout = drawPlane3d(plane, varargin)
 %   2011-07-19 fix a bug for param by Xin KANG (Ben)
 % 
 
+% Parse and check inputs
+if ishandle(plane)
+    hAx = plane;
+    plane = varargin{1};
+    varargin(1) = [];
+else
+    hAx = gca;
+end
+
 % parse input arguments if any
 if ~isempty(varargin)
     if length(varargin) == 1
@@ -52,13 +61,13 @@ else
 end
 
 % extract axis bounds to crop plane
-lim = get(gca, 'xlim');
+lim = get(hAx, 'xlim');
 xmin = lim(1);
 xmax = lim(2);
-lim = get(gca, 'ylim');
+lim = get(hAx, 'ylim');
 ymin = lim(1);
 ymax = lim(2);
-lim = get(gca, 'zlim');
+lim = get(hAx, 'zlim');
 zmin = lim(1);
 zmax = lim(2);
 
@@ -127,7 +136,7 @@ ind = convhull(u1, u2);
 ind = ind(1:end-1);
 
 % draw the patch
-h = patch('XData', pts(ind, 1), 'YData', pts(ind, 2), 'ZData', pts(ind, 3));
+h = patch(hAx, 'XData', pts(ind, 1), 'YData', pts(ind, 2), 'ZData', pts(ind, 3));
 set(h, varargin{:});
 
 % return handle to plane if needed

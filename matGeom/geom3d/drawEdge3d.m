@@ -18,6 +18,14 @@ function varargout = drawEdge3d(varargin)
 %   04/01/2007 remove unused variables
 %   15/12/2009 "reprecate", and add processing of input arguments
 
+% Parse and check inputs
+if ishandle(varargin{1})
+    hAx = varargin{1};
+    varargin(1) = [];
+else
+    hAx = gca;
+end
+
 % extract edges from input arguments
 nCol = size(varargin{1}, 2);
 if nCol == 6
@@ -37,9 +45,10 @@ elseif nargin >= 6
 end
 
 % draw edges
-h = line(   [edges(:, 1) edges(:, 4)]', ...
-            [edges(:, 2) edges(:, 5)]', ...
-            [edges(:, 3) edges(:, 6)]', 'color', 'b');
+h = line(hAx,...
+    [edges(:, 1) edges(:, 4)]', ...
+    [edges(:, 2) edges(:, 5)]', ...
+    [edges(:, 3) edges(:, 6)]', 'color', 'b');
     
 % apply optional drawing style
 if ~isempty(options)
