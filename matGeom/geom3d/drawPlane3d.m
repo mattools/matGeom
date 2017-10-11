@@ -1,31 +1,37 @@
 function varargout = drawPlane3d(plane, varargin)
-%DRAWPLANE3D Draw a plane clipped in the current window
+%DRAWPLANE3D Draw a plane clipped by the current axes
 %
-%   drawPlane3d(plane)
-%   plane = [x0 y0 z0  dx1 dy1 dz1  dx2 dy2 dz2];
+%   DRAWPLANE3D(PLANE) draws a plane of the format:
+%       [x0 y0 z0  dx1 dy1 dz1  dx2 dy2 dz2]
+%
+%   DRAWPLANE3D(...,'PropertyName',PropertyValue,...) sets the value of the
+%   specified patch property. Multiple property values can be set with
+%   a single statement.
+%
+%   DRAWPLANE3D(AX,...) plots into AX instead of GCA.
+%
+%   H = DRAWPLANE3D(...) returns a handle H to the patch object.
 %
 %   See also
 %   planes3d, createPlane
 %
 %   Example
-%   p0 = [1 2 3];
-%   v1 = [1 0 1];
-%   v2 = [0 -1 1];
-%   plane = [p0 v1 v2];
-%   axis([-10 10 -10 10 -10 10]);
-%   drawPlane3d(plane)
-%   drawLine3d([p0 v1])
-%   drawLine3d([p0 v2])
-%   set(gcf, 'renderer', 'zbuffer');
+%     p0 = [1 2 3];
+%     v1 = [1 0 1];
+%     v2 = [0 -1 1];
+%     plane = [p0 v1 v2];
+%     axis([-10 10 -10 10 -10 10]);
+%     drawPlane3d(plane)
+%     drawLine3d([p0 v1])
+%     drawLine3d([p0 v2])
+%     set(gcf, 'renderer', 'zbuffer');
 %
-
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % INRA - TPV URPOI - BIA IMASTE
 % created the 17/02/2005.
 %
-
 %   HISTORY
 %   2008-10-30 replace intersectPlaneLine by intersectLinePlane, add doc
 %   2010-10-04 fix a bug for planes touching box by one corner
@@ -33,13 +39,17 @@ function varargout = drawPlane3d(plane, varargin)
 % 
 
 % Parse and check inputs
-if ishandle(plane)
+if numel(plane) == 1 && ishandle(plane)
     hAx = plane;
     plane = varargin{1};
     varargin(1) = [];
 else
     hAx = gca;
 end
+
+p=inputParser;
+addRequired(p,'plane',@(x) size(x,1)==1 && isPlane(x))
+parse(p,plane)
 
 % parse input arguments if any
 if ~isempty(varargin)
@@ -120,6 +130,10 @@ pts = unique(points(valid, :), 'rows');
 % If there is no intersection point, escape.
 if size(pts, 1) < 3
     disp('plane is outside the drawing window');
+    if nargout > 0
+        h=nan;
+        varargout = {h};
+    end
     return;
 end
 

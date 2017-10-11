@@ -1,25 +1,27 @@
 function varargout = drawEdge3d(varargin)
-%DRAWEDGE3D Draw 3D edge in the current Window
+%DRAWEDGE3D Draw 3D edge in the current axes
 %
-%   drawEdge(EDGE)
-%   draw the edge EDGE on the current axis. EDGE has the form:
-%   [x1 y1 z1 x2 y2 z2].
-%   No clipping is performed.
+%   DRAWEDGE3D(EDGE) draws the edge EDGE on the current axis. 
+%   EDGE has the form: [x1 y1 z1 x2 y2 z2]. No clipping is performed.
+%   
+%   DRAWEDGE3D(AX,...) plots into AX instead of GCA.
+%
+%   H = DRAWEDGE3D(...) returns a handle H to the line object.
 %
 %   See also
 %   drawLine3d, clipLine3d, drawEdge
-
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 18/02/2005.
-
+%   
+% ---------
+% author : David Legland 
+% INRA - TPV URPOI - BIA IMASTE
+% created the 18/02/2005.
+%   
 %   HISTORY
 %   04/01/2007 remove unused variables
 %   15/12/2009 "reprecate", and add processing of input arguments
 
 % Parse and check inputs
-if ishandle(varargin{1})
+if numel(varargin{1}) == 1 && ishandle(varargin{1})
     hAx = varargin{1};
     varargin(1) = [];
 else

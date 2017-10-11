@@ -43,10 +43,7 @@ p = inputParser;
 addRequired(p,'plane',@isPlane)
 validStrings = {'above','in','below'};
 addParameter(p,'part','above',@(x) any(validatestring(x, validStrings)))
-
 parse(p, plane, varargin{:});
-
-plane=p.Results.plane;
 part=p.Results.part;
 
 

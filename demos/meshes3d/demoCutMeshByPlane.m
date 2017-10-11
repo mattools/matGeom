@@ -81,7 +81,7 @@ drawPlane3d(plane, 'FaceAlpha',.7)
 drawVector3d(planeOrigin, planeNormaL)
 
 %%
-above = cutMeshByPlane(mesh, plane,'part','above');
+above = cutMeshByPlane(mesh, plane);
 
 figure('color','w'); axis equal; hold on; view(3)
 drawMesh(above, 'FaceColor', 'r');
