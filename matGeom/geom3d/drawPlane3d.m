@@ -1,36 +1,55 @@
 function varargout = drawPlane3d(plane, varargin)
-%DRAWPLANE3D Draw a plane clipped in the current window
+%DRAWPLANE3D Draw a plane clipped by the current axes
 %
-%   drawPlane3d(plane)
-%   plane = [x0 y0 z0  dx1 dy1 dz1  dx2 dy2 dz2];
+%   DRAWPLANE3D(PLANE) draws a plane of the format:
+%       [x0 y0 z0  dx1 dy1 dz1  dx2 dy2 dz2]
+%
+%   DRAWPLANE3D(...,'PropertyName',PropertyValue,...) sets the value of the
+%   specified patch property. Multiple property values can be set with
+%   a single statement.
+%
+%   DRAWPLANE3D(AX,...) plots into AX instead of GCA.
+%
+%   H = DRAWPLANE3D(...) returns a handle H to the patch object.
 %
 %   See also
 %   planes3d, createPlane
 %
 %   Example
-%   p0 = [1 2 3];
-%   v1 = [1 0 1];
-%   v2 = [0 -1 1];
-%   plane = [p0 v1 v2];
-%   axis([-10 10 -10 10 -10 10]);
-%   drawPlane3d(plane)
-%   drawLine3d([p0 v1])
-%   drawLine3d([p0 v2])
-%   set(gcf, 'renderer', 'zbuffer');
+%     p0 = [1 2 3];
+%     v1 = [1 0 1];
+%     v2 = [0 -1 1];
+%     plane = [p0 v1 v2];
+%     axis([-10 10 -10 10 -10 10]);
+%     drawPlane3d(plane)
+%     drawLine3d([p0 v1])
+%     drawLine3d([p0 v2])
+%     set(gcf, 'renderer', 'zbuffer');
 %
-
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % INRA - TPV URPOI - BIA IMASTE
 % created the 17/02/2005.
 %
-
 %   HISTORY
 %   2008-10-30 replace intersectPlaneLine by intersectLinePlane, add doc
 %   2010-10-04 fix a bug for planes touching box by one corner
 %   2011-07-19 fix a bug for param by Xin KANG (Ben)
 % 
+
+% Parse and check inputs
+if numel(plane) == 1 && ishandle(plane)
+    hAx = plane;
+    plane = varargin{1};
+    varargin(1) = [];
+else
+    hAx = gca;
+end
+
+p=inputParser;
+addRequired(p,'plane',@(x) size(x,1)==1 && isPlane(x))
+parse(p,plane)
 
 % parse input arguments if any
 if ~isempty(varargin)
@@ -52,13 +71,13 @@ else
 end
 
 % extract axis bounds to crop plane
-lim = get(gca, 'xlim');
+lim = get(hAx, 'xlim');
 xmin = lim(1);
 xmax = lim(2);
-lim = get(gca, 'ylim');
+lim = get(hAx, 'ylim');
 ymin = lim(1);
 ymax = lim(2);
-lim = get(gca, 'zlim');
+lim = get(hAx, 'zlim');
 zmin = lim(1);
 zmax = lim(2);
 
@@ -111,6 +130,10 @@ pts = unique(points(valid, :), 'rows');
 % If there is no intersection point, escape.
 if size(pts, 1) < 3
     disp('plane is outside the drawing window');
+    if nargout > 0
+        h=nan;
+        varargout = {h};
+    end
     return;
 end
 
@@ -127,7 +150,7 @@ ind = convhull(u1, u2);
 ind = ind(1:end-1);
 
 % draw the patch
-h = patch('XData', pts(ind, 1), 'YData', pts(ind, 2), 'ZData', pts(ind, 3));
+h = patch(hAx, 'XData', pts(ind, 1), 'YData', pts(ind, 2), 'ZData', pts(ind, 3));
 set(h, varargin{:});
 
 % return handle to plane if needed

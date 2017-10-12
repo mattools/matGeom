@@ -21,8 +21,8 @@
 f = triangulateFaces(f);
 mesh.vertices=v; mesh.faces=f;
 planeOrigin = [-0.2 0 0];
-planeNormaL = [-1 0 -1];
-plane = createPlane(planeOrigin, planeNormaL);
+planeNormal = [-1 0 -1];
+plane = createPlane(planeOrigin, planeNormal);
 
 
 %%
@@ -34,7 +34,7 @@ drawMesh(inside, 'FaceColor', 'g');
 drawMesh(below, 'FaceColor', 'b');
 
 drawPlane3d(plane, 'FaceAlpha',.7)
-drawVector3d(planeOrigin, planeNormaL)
+drawVector3d(planeOrigin, planeNormal)
 
 %%
 [aV, aF, iV, iF, bV, bF] = cutMeshByPlane(mesh.vertices, mesh.faces, plane);
@@ -45,10 +45,10 @@ drawMesh(iV, iF, 'FaceColor', 'g');
 drawMesh(bV, bF, 'FaceColor', 'b');
 
 drawPlane3d(plane, 'FaceAlpha',.7)
-drawVector3d(planeOrigin, planeNormaL)
+drawVector3d(planeOrigin, planeNormal)
 
 %%
-[aV, aF] = cutMeshByPlane(mesh.vertices, mesh.faces, plane,'part','above');
+[aV, aF] = cutMeshByPlane(mesh.vertices, mesh.faces, plane);
 
 figure('color','w'); axis equal; hold on; view(3)
 drawMesh(aV, aF, 'FaceColor', 'r');
@@ -56,7 +56,7 @@ drawMesh(aV, aF, 'FaceColor', 'r');
 % drawMesh(bV, bF, 'FaceColor', 'b');
 
 drawPlane3d(plane, 'FaceAlpha',.7)
-drawVector3d(planeOrigin, planeNormaL)
+drawVector3d(planeOrigin, planeNormal)
 
 %%
 [iV, iF] = cutMeshByPlane(mesh.vertices, mesh.faces, plane,'part','in');
@@ -67,7 +67,7 @@ drawMesh(iV, iF, 'FaceColor', 'g');
 % drawMesh(bV, bF, 'FaceColor', 'b');
 
 drawPlane3d(plane, 'FaceAlpha',.7)
-drawVector3d(planeOrigin, planeNormaL)
+drawVector3d(planeOrigin, planeNormal)
 
 %%
 [bV, bF] = cutMeshByPlane(mesh.vertices, mesh.faces, plane,'part','below');
@@ -78,10 +78,10 @@ figure('color','w'); axis equal; hold on; view(3)
 drawMesh(bV, bF, 'FaceColor', 'b');
 
 drawPlane3d(plane, 'FaceAlpha',.7)
-drawVector3d(planeOrigin, planeNormaL)
+drawVector3d(planeOrigin, planeNormal)
 
 %%
-above = cutMeshByPlane(mesh, plane,'part','above');
+above = cutMeshByPlane(mesh, plane);
 
 figure('color','w'); axis equal; hold on; view(3)
 drawMesh(above, 'FaceColor', 'r');
@@ -89,7 +89,7 @@ drawMesh(above, 'FaceColor', 'r');
 % drawMesh(bV, bF, 'FaceColor', 'b');
 
 drawPlane3d(plane, 'FaceAlpha',.7)
-drawVector3d(planeOrigin, planeNormaL)
+drawVector3d(planeOrigin, planeNormal)
 
 %%
 inside = cutMeshByPlane(mesh, plane,'part','in');
@@ -100,7 +100,7 @@ drawMesh(inside, 'FaceColor', 'g');
 % drawMesh(bV, bF, 'FaceColor', 'b');
 
 drawPlane3d(plane, 'FaceAlpha',.7)
-drawVector3d(planeOrigin, planeNormaL)
+drawVector3d(planeOrigin, planeNormal)
 
 %%
 below = cutMeshByPlane(mesh, plane,'part','below');
@@ -111,4 +111,4 @@ figure('color','w'); axis equal; hold on; view(3)
 drawMesh(below, 'FaceColor', 'b');
 
 drawPlane3d(plane, 'FaceAlpha',.7)
-drawVector3d(planeOrigin, planeNormaL)
+drawVector3d(planeOrigin, planeNormal)
