@@ -74,7 +74,7 @@ switch nargout
         % Faces below the plane, all three vertices == 1 -> sum has to be 3
         below = removeMeshFaces(v, f, ~(sum(FBP_LI, 2) == 3) );
     otherwise
-        error('Invalid numer of output arguments')
+        error('Invalid number of output arguments')
 end
 
 
@@ -113,7 +113,7 @@ switch nargout
         varargout{5}=below.vertices;
         varargout{6}=below.faces;
     otherwise
-        error('Invalid numer of output arguments')
+        error('Invalid number of output arguments')
 end
 
 end
