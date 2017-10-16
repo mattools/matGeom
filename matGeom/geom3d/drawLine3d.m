@@ -23,29 +23,11 @@ function varargout = drawLine3d(lin, varargin)
 %
 
 % Parse and check inputs
-if numel(lin) == 1 && ishandle(lin)
-    hAx = lin;
-    lin = varargin{1};
-    varargin(1) = [];
-else
-    hAx = gca;
-end
-
-% parse input arguments if there are any
-if ~isempty(varargin)
-    if length(varargin) == 1
-        if isstruct(varargin{1})
-            % if options are specified as struct, need to convert to 
-            % parameter name-value pairs
-            varargin = [fieldnames(varargin{1}) struct2cell(varargin{1})]';
-            varargin = varargin(:)';
-        else
-            % if option is a single argument, assume it corresponds to 
-            % plane color
-            varargin = {'Color', varargin{1}};
-        end
-    end
-end
+isLine3d = @(x) validateattributes(x,{'numeric'},...
+    {'nonempty','nonnan','real','finite','size',[nan,6]});
+defOpts.Color='b';
+[hAx, lin, varargin]=...
+    parseDrawInput(lin, isLine3d, 'line', defOpts, varargin{:});
 
 % extract limits of the bounding box
 lim = get(hAx, 'xlim');
