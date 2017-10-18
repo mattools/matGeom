@@ -37,8 +37,9 @@ function transfo = createBasisTransform3d(source, target)
 
 % HISTORY
 % 2013-07-03 added support for multiple inputs (Sven Holcombe)
+% 2017-10-16 rewrite
 
-% init basis transform to identity
+% size of input arguments
 srcSz = size(source, 1);
 tgtSz = size(target, 1);
 maxSz = max(srcSz, tgtSz);
@@ -62,36 +63,32 @@ if isnumeric(source)
     if maxSz > 1 && srcSz == 1
         source = bsxfun(@times, source, ones(1,1,maxSz));
     end
-    t1(1, 1:3, :) = source(1, 4:6, :);
-    t1(2, 1:3, :) = source(1, 7:9, :);
-    t1(3, 1:3, :) = vectorCross3d(source(1,4:6,:), source(1,7:9,:));
+    t1(1:3, 1, :) = source(1, 4:6, :);
+    t1(1:3, 2, :) = source(1, 7:9, :);
+    t1(1:3, 3, :) = vectorCross3d(source(1,4:6,:), source(1,7:9,:));
     t1(1:3, 4, :) = source(1, 1:3, :);
 end
 if isnumeric(target)
     if maxSz > 1 && tgtSz == 1
         target = bsxfun(@times, target, ones(1,1,maxSz));
     end
-    t2(1, 1:3, :) = target(1, 4:6, :);
-    t2(2, 1:3, :) = target(1, 7:9, :);
-    t2(3, 1:3, :) = vectorCross3d(target(1,4:6,:), target(1,7:9,:));
+    t2(1:3, 1, :) = target(1, 4:6, :);
+    t2(1:3, 2, :) = target(1, 7:9, :);
+    t2(1:3, 3, :) = vectorCross3d(target(1,4:6,:), target(1,7:9,:));
     t2(1:3, 4, :) = target(1, 1:3, :);
 end
 
 
-% compute transfo
+% compute transform matrix
 transfo = zeros(4, 4, maxSz);
 for i = 1:maxSz
-    % three reference points in source basis
+    % coordinate of four reference points in source basis
     po = t1(1:3, 4, i)';
-    px = po + t1(1, 1:3, i);
-    py = po + t1(2, 1:3, i);
-    pz = po + t1(3, 1:3, i);
-%     po = t1(1, 1:3, i);
-%     px = po + source(1, 4:6, i);
-%     py = po + source(1, 7:9, i);
-%     pz = po + vectorCross3d(source(1,4:6,:,i), source(1,7:9,i));
+    px = po + t1(1:3, 1, i)';
+    py = po + t1(1:3, 2, i)';
+    pz = po + t1(1:3, 3, i)';
     
-    % express reference points in the new basis
+    % express coordinates of reference points in the new basis
     t2i = inv(t2(:,:,i));
     pot = transformPoint3d(po, t2i);
     pxt = transformPoint3d(px, t2i);
@@ -103,9 +100,6 @@ for i = 1:maxSz
     vy = pyt - pot;
     vz = pzt - pot;
 
-    transfo(:,:,i) = [[vx ; vy ; vz] pot' ; 0 0 0 1];
-
-    
-%     % same as: transfo = inv(t1)*t2;
-%     transfo(:,:,i) = t2(:,:,i) \ t1(:,:,i);
+    % concatenate result in a 4-by-4 affine transform matrix 
+    transfo(:,:,i) = [vx' vy' vz' pot' ; 0 0 0 1];
 end
