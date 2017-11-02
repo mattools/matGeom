@@ -154,3 +154,61 @@ pts     = intersectLineCylinder(line, cyl);
 ctrl    = transformPoint3d([-R 0 0;R 0 0], trans);
 testCase.assertEqual(ctrl, pts, 'AbsTol', .01);
 
+
+function test_TypeInfinite(testCase)
+% vertical cylinder and diagonal line
+
+% def line
+p0  = [0 0 0];
+v0  = [1 0 1];
+line = [p0 v0];
+
+% def cylinder
+H = 5;
+p1  = [0 0 -H];
+p2  = [0 0 +H];
+R   = 10;
+cyl = [p1 p2 R];
+
+% case of infinite cylinder -> two 'classical' intersections
+pts = intersectLineCylinder(line, cyl, 'type', 'infinite');
+testCase.assertEqual([-R 0 -R;R 0 R], pts, 'AbsTol', .01);
+
+function test_TypeOpen(testCase)
+% vertical cylinder and diagonal line
+
+% def line
+p0  = [0 0 0];
+v0  = [1 0 1];
+line = [p0 v0];
+
+% def cylinder
+H = 5;
+p1  = [0 0 -H];
+p2  = [0 0 +H];
+R   = 10;
+cyl = [p1 p2 R];
+
+% case of open cylinder -> no intersection
+pts = intersectLineCylinder(line, cyl, 'type', 'open');
+testCase.assertEmpty(pts);
+
+
+function test_TypeClosed(testCase)
+% vertical cylinder and diagonal line
+
+% def line
+p0  = [0 0 0];
+v0  = [1 0 1];
+line = [p0 v0];
+
+% def cylinder
+H = 5;
+p1  = [0 0 -H];
+p2  = [0 0 +H];
+R   = 10;
+cyl = [p1 p2 R];
+
+% case of open cylinder -> no intersection
+pts = intersectLineCylinder(line, cyl, 'type', 'closed');
+testCase.assertEqual([-H 0 -H;H 0 H], pts, 'AbsTol', .01);
