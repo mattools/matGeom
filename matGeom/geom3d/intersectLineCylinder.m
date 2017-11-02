@@ -40,7 +40,7 @@ function points = intersectLineCylinder(line, cylinder, varargin)
 %
 %   
 %   See also
-%   lines3d, intersectLinePlane
+%   lines3d, intersectLinePlane, drawCylinder, cylinderSurfaceArea
 %
 %   References
 %   See the link:
@@ -166,14 +166,22 @@ if strncmpi(type, 'open', 1)
     return;
 end
 
+% which intersection fall before and after bounds
+ind1 = find(ts < 0);
+ind2 = find(ts > 1);
+
+% case of both intersection on the same side -> no intersection
+if length(ind1) == 2 || length(ind2) == 2
+    points = zeros(0, 3);
+    return;
+end
+
 % Process the remaining case of closed cylinder
 % -> compute eventual intersection(s) with end faces
-ind1 = find(ts < 0);
 if ~isempty(ind1)
     plane = createPlane(c1, dc);
     points(ind1, :) = intersectLinePlane(line, plane);
 end
-ind2 = find(ts > 1);
 if ~isempty(ind2)
     plane = createPlane(c2, dc);
     points(ind2, :) = intersectLinePlane(line, plane);
