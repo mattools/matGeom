@@ -103,6 +103,7 @@
 %   polygonLength             - Perimeter of a polygon
 %   polygonNormalAngle        - Compute the normal angle at a vertex of the polygon
 %   polygonBounds             - Compute the bounding box of a polygon
+%   polygonOuterNormal        - Outer normal vector for a given vertex(ices)
 %   distancePointPolygon      - Shortest distance between a point and a polygon
 %   distancePolygons          - Compute the shortest distance between 2 polygons
 %   distancePolygonsNoCross   - Compute the shortest distance between 2 polygons
