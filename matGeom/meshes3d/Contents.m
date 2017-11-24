@@ -38,7 +38,7 @@
 %   meshFacePolygons         - Returns the set of polygons that constitutes a mesh
 %   meshFaceCentroids        - Compute centroids of faces in a mesh
 %   meshFaceNormals          - Compute normal vector of faces in a 3D mesh
-%   vertexNormal             - Compute normals to a mesh vertices
+%   meshVertexNormals        - Compute normals to a mesh vertices
 %
 % Intersections and clipping
 %   intersectLineMesh3d      - Intersection points of a 3D line with a mesh
@@ -123,5 +123,6 @@
 %   drawPolyhedron           - Draw polyhedron defined by vertices and faces
 %   faceCentroids            - Compute centroids of a mesh faces
 %   faceNormal               - Compute normal vector of faces in a 3D mesh
+%   vertexNormal             - Compute normals to a mesh vertices
 
 % Others

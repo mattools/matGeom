@@ -22,7 +22,8 @@ function normals = meshFaceNormals(nodes, faces)
 %     normals2 = meshFaceNormals(pts, hull);
 %
 %   See also
-%   meshes3d, drawMesh, meshFaceCentroids, drawFaceNormals
+%   meshes3d, meshFaceCentroids, meshVertexNormals, drawFaceNormals
+%   drawMesh 
 
 % ------
 % Author: David Legland
