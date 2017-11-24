@@ -4,14 +4,16 @@ function [vertices, faces] = readMesh_off(fileName)
 %   [VERTICES FACES] = readMesh_off(FILNAME)
 %
 %   Example
-%   readMesh_off
+%     [v, f] = readMesh_off('mushroom.off');
+%     figure; drawMesh(v, f, 'faceColor', [0 1 0], 'edgeColor', 'none')
+%     view([5 80]); light; lighting gouraud
 %
 %   See also
-%
+%     meshes3d, drawMesh
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2011-12-20,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
