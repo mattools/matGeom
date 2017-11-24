@@ -10,13 +10,14 @@ function varargout = drawFaceNormals(varargin)
 %
 %   Example
 %   % draw face normals of a cube
-%     drawMesh(v, f)
-%     axis([-1 2 -1 2 -1 2]);
-%     hold on
-%     drawFaceNormals(v, e, f)
+%     [v, f] = createCubeOctahedron;
+%     figure; drawMesh(v, f)
+%     axis([-2 2 -2 2 -2 2]); axis equal; hold on;
+%     drawFaceNormals(v, f)
+%     view(3);
 %
 %   See also
-%   meshes3d, drawMesh, drawVector3d, meshFaceNormals, quiver3
+%   meshes3d, drawMesh, drawVector3d, meshFaceNormals, meshFaceCentroids
 %
 
 % ------
@@ -29,7 +30,7 @@ function varargout = drawFaceNormals(varargin)
 [vertices, faces] = parseMeshData(varargin{:});
 
 % compute vector data
-c = faceCentroids(vertices, faces);
+c = meshFaceCentroids(vertices, faces);
 n = meshFaceNormals(vertices, faces);
 
 % display an arrow for each normal

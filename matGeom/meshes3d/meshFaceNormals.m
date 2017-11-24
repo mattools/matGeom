@@ -22,13 +22,16 @@ function normals = meshFaceNormals(nodes, faces)
 %     normals2 = meshFaceNormals(pts, hull);
 %
 %   See also
-%   meshes3d, drawMesh, convhull, convhulln, drawVector3d
+%   meshes3d, drawMesh, meshFaceCentroids, drawFaceNormals
 
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % Created: 2006-07-05
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
+
+% HISTORY
+% 2011-11-24 rename from faceNormal to meshFaceNormals
 
 if isnumeric(faces)
     % compute vector of first edges
