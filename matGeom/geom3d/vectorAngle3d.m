@@ -19,11 +19,12 @@ function theta = vectorAngle3d(v1, v2)
 %       0
 %
 %   See also
-%   vectors3d, vectorNorm3d
+%   vectors3d, vectorNorm3d, crossProduct3d
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2010-10-04,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform.
 
@@ -33,6 +34,7 @@ function theta = vectorAngle3d(v1, v2)
 % zero, see the discussion in: 
 % http://www.mathworks.com/matlabcentral/newsreader/view_thread/151925#381952
 theta = atan2(vectorNorm3d(vectorCross3d(v1, v2)), sum(bsxfun(@times, v1, v2),2));
+
 % equivalent to:
 % v1 = normalizeVector3d(v1);
 % v2 = normalizeVector3d(v2);

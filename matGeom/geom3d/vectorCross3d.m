@@ -30,6 +30,10 @@ function c = vectorCross3d(a,b)
 % c = bsxfun(@times, a(:,[2 3 1],clnSet{:}), b(:,[3 1 2],clnSet{:})) - ...
 %     bsxfun(@times, b(:,[2 3 1],clnSet{:}), a(:,[3 1 2],clnSet{:}));
 
+% deprecation warning
+warning('geom3d:deprecated', ...
+    [mfilename ' is deprecated, use ''crossProduct3d'' instead']);
+
 sza = size(a);
 szb = size(b);
 

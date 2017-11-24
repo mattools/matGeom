@@ -36,7 +36,7 @@
 %   isCoplanar                - Tests input points for coplanarity in 3-space.
 %   transformPoint3d          - Transform a point with a 3D affine transform
 %   distancePoints3d          - Compute euclidean distance between pairs of 3D Points
-%   clipPoints3d              - Clip a set of points by a box
+%   clipPoints3d              - Clip a set of points by a box or other 3d shapes
 %   drawPoint3d               - Draw 3D point on the current axis.
 %
 % 3D Vectors
@@ -45,7 +45,7 @@
 %   normalizeVector3d         - Normalize a 3D vector to have norm equal to 1
 %   vectorNorm3d              - Norm of a 3D vector or of set of 3D vectors
 %   hypot3                    - Diagonal length of a cuboidal 3D box 
-%   vectorCross3d             - Vector cross product faster than inbuilt MATLAB cross.
+%   crossProduct3d            - Vector cross product faster than inbuilt MATLAB cross.
 %   vectorAngle3d             - Angle between two 3D vectors
 %   isParallel3d              - Check parallelism of two 3D vectors
 %   isPerpendicular3d         - Check orthogonality of two 3D vectors
@@ -81,8 +81,8 @@
 %   reverseLine3d             - Return same 3D line but with opposite orientation
 %   midPoint3d                - Middle point of two 3D points or of a 3D edge
 %   clipLine3d                - Clip a line with a box and return an edge
-%   drawEdge3d                - Draw 3D edge in the current Window
-%   drawLine3d                - Draw a 3D line on the current axis
+%   drawEdge3d                - Draw 3D edge in the current axes
+%   drawLine3d                - Draw a 3D line clipped by the current axes
 %
 % Planes
 %   planes3d                  - Description of functions operating on 3D planes
@@ -96,16 +96,18 @@
 %   planesBisector            - Bisector plane between two other planes
 %   projPointOnPlane          - Return the orthogonal projection of a point on a plane
 %   intersectPlanes           - Return intersection line between 2 planes in space
+%   intersectThreePlanes      - Return intersection point between 3 planes in space
 %   intersectLinePlane        - Intersection point between a 3D line and a plane
 %   intersectEdgePlane        - Return intersection point between a plane and a edge
 %   distancePointPlane        - Signed distance betwen 3D point and plane
+%   projLineOnPlane           - Return the orthogonal projection of a line on a plane
 %   isBelowPlane              - Test whether a point is below or above a plane
 %   medianPlane               - Create a plane in the middle of 2 points
 %   planeNormal               - Compute the normal to a plane
 %   planePosition             - Compute position of a point on a plane
 %   planePoint                - Compute 3D position of a point in a plane
 %   dihedralAngle             - Compute dihedral angle between 2 planes
-%   drawPlane3d               - Draw a plane clipped in the current window
+%   drawPlane3d               - Draw a plane clipped by the current axes
 %
 % 3D Polygons and curves
 %   polygons3d                - Description of functions operating on 3D polygons
@@ -146,9 +148,11 @@
 %
 % Smooth surfaces
 %   inertiaEllipsoid          - Inertia ellipsoid of a set of 3D points
+%   fitEllipse3d              - Fit an ellipse to a set of points
 %   ellipsoidSurfaceArea      - Approximated surface area of an ellipsoid
 %   oblateSurfaceArea         - Approximated surface area of an oblate ellipsoid
 %   prolateSurfaceArea        - Approximated surface area of a prolate ellipsoid
+%   cylinderSurfaceArea       - Surface area of a cylinder
 %   intersectLineCylinder     - Compute intersection points between a line and a cylinder
 %   revolutionSurface         - Create a surface of revolution from a planar curve
 %   surfaceCurvature          - Curvature on a surface from angle and principal curvatures
@@ -180,6 +184,8 @@
 %   rotation3dToEulerAngles   - Extract Euler angles from a rotation matrix
 %   createRotation3dLineAngle - Create rotation around a line by an angle theta
 %   rotation3dAxisAndAngle    - Determine axis and angle of a 3D rotation matrix
+%   createRotationVector3d      - Calculates the rotation between two vectors
+%   createRotationVectorPoint3d - Calculates the rotation between two vectors
 %   recenterTransform3d       - Change the fixed point of an affine 3D transform
 %   composeTransforms3d       - Concatenate several space transformations
 %
@@ -192,10 +198,12 @@
 %
 %
 %   Credits:
+%   * Several functions contributed by Sven Holcombe
 %   * function isCoplanar was originally written by Brett Shoelson.
 %   * Songbai Ji enhanced file intersectPlaneLine (6/23/2006).
 %   * several functions contributed by oqilipo
 %
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
@@ -209,7 +217,7 @@
 %   drawPartialPatch          - draw surface patch, with 2 parametrized surfaces
 
 % Deprecated:
+%   vectorCross3d             - Vector cross product faster than inbuilt MATLAB cross.
 
 % Others
-
 

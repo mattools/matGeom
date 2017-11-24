@@ -9,13 +9,13 @@ function vectors3d(varargin)
 %
 %
 %   See also
-%   vectorNorm3d, normalizeVector3d, vectorCross3d, vectorAngle3d
+%   vectorNorm3d, normalizeVector3d, crossProduct3d, vectorAngle3d
 %   isParallel3d, isPerpendicular3d, createTranslation3d
 %   drawVector3d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
