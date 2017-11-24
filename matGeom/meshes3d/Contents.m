@@ -36,8 +36,8 @@
 %   removeMeshFaces          - Remove faces from a mesh by face indices
 %   mergeCoplanarFaces       - Merge coplanar faces of a polyhedral mesh
 %   meshFacePolygons         - Returns the set of polygons that constitutes a mesh
-%   faceCentroids            - Compute centroids of a mesh faces
-%   faceNormal               - Compute normal vector of faces in a 3D mesh
+%   meshFaceCentroids        - Compute centroids of faces in a mesh
+%   meshFaceNormals          - Compute normal vector of faces in a 3D mesh
 %   vertexNormal             - Compute normals to a mesh vertices
 %
 % Intersections and clipping
@@ -47,6 +47,8 @@
 %   clipMeshVertices         - Clip vertices of a surfacic mesh and remove outer faces
 %   clipConvexPolyhedronHP   - Clip a convex polyhedron by a plane
 %   cutMeshByPlane           - Cut a mesh by a plane
+%   concatenateMeshes        - Concatenate multiple meshes
+%   splitMesh                - Return the connected components of a mesh
 %
 % Geometric measures on meshes
 %   meshSurfaceArea          - Surface area of a polyhedral mesh
@@ -101,7 +103,7 @@
 %
 % Drawing functions
 %   drawFaceNormals          - Draw normal vector of each face in a mesh
-%   drawMesh                 - Draw a 3D mesh defined by vertices and faces
+%   drawMesh                 - Draw a 3D mesh defined by vertex and face arrays
 %
 % Reading from file
 %   readMesh_off             - Read mesh data stord in OFF format
@@ -119,5 +121,7 @@
 % Deprecated:
 
 %   drawPolyhedron           - Draw polyhedron defined by vertices and faces
+%   faceCentroids            - Compute centroids of a mesh faces
+%   faceNormal               - Compute normal vector of faces in a 3D mesh
 
 % Others
