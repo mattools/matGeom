@@ -36,7 +36,7 @@ plSize = size(plane);
 plSize(2) = 3;
 [origins, normals] = deal(zeros(plSize));
 origins(:) = plane(:,1:3,:);
-normals(:) = vectorCross3d(plane(:,4:6,:), plane(:, 7:9,:));
+normals(:) = crossProduct3d(plane(:,4:6,:), plane(:, 7:9,:));
 
 % difference between origins of plane and point
 dp = bsxfun(@minus, origins, point);

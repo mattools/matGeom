@@ -106,8 +106,8 @@ for iFace = 1:N
     face = face(:)';
     
     % ensure face has normal pointing outwards
-    outerNormal = faceCentroids(points, face) - pointsCentroid;
-    if dot(faceNormal(points, face), outerNormal, 2) < 0
+    outerNormal = meshFaceCentroids(points, face) - pointsCentroid;
+    if dot(meshFaceNormals(points, face), outerNormal, 2) < 0
         face = face([1 end:-1:2]);
     end
     

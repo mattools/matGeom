@@ -20,7 +20,7 @@ test_suite = functiontests(localfunctions);
 function test_Cube(testCase) %#ok<*DEFNU>
 % Test call of function without argument
 [v, f] = createCube;
-n = faceNormal(v, f);
+n = meshFaceNormals(v, f);
 exp = [0 0 -1; 0 0 1; 1 0 0; -1 0 0; 0 -1 0; 0 1 0];
 testCase.assertEqual(exp, n, 'AbsTol', 1e-10);
 

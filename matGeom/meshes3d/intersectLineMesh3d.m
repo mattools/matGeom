@@ -47,7 +47,7 @@ u   = vertices(faces(:,2), :) - t0;
 v   = vertices(faces(:,3), :) - t0;
 
 % triangle normal
-n   = normalizeVector3d(vectorCross3d(u, v));
+n   = normalizeVector3d(crossProduct3d(u, v));
 
 % direction vector of line
 dir = line(4:6);

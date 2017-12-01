@@ -65,7 +65,7 @@ if isnumeric(source)
     end
     t1(1:3, 1, :) = source(1, 4:6, :);
     t1(1:3, 2, :) = source(1, 7:9, :);
-    t1(1:3, 3, :) = vectorCross3d(source(1,4:6,:), source(1,7:9,:));
+    t1(1:3, 3, :) = crossProduct3d(source(1,4:6,:), source(1,7:9,:));
     t1(1:3, 4, :) = source(1, 1:3, :);
 end
 if isnumeric(target)
@@ -74,7 +74,7 @@ if isnumeric(target)
     end
     t2(1:3, 1, :) = target(1, 4:6, :);
     t2(1:3, 2, :) = target(1, 7:9, :);
-    t2(1:3, 3, :) = vectorCross3d(target(1,4:6,:), target(1,7:9,:));
+    t2(1:3, 3, :) = crossProduct3d(target(1,4:6,:), target(1,7:9,:));
     t2(1:3, 4, :) = target(1, 1:3, :);
 end
 

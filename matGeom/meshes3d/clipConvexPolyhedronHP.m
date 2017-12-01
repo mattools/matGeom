@@ -125,7 +125,7 @@ end
 
 % compute normal vector of new face, and reverse order if face points in
 % the opposite direction as plane normal
-newFaceNormal = faceNormal(sortedNodes, 1:length(sortedNodes));
+newFaceNormal = meshFaceNormals(sortedNodes, 1:length(sortedNodes));
 if dot(newFaceNormal, planeNormal(plane)) < 0
     I(2:end) = I(end:-1:2);
 end
