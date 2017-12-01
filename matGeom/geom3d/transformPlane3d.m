@@ -1,7 +1,7 @@
 function plane2 = transformPlane3d(plane, trans)
 %TRANSFORMPLANE3D Transform a 3D plane with a 3D affine transform
 %
-%   PLANE2 = transformLine3d(PLANE, TRANS)
+%   PLANE2 = transformPlane3d(PLANE, TRANS)
 %
 %   Example
 %     p1 = [10 20 30];
@@ -19,9 +19,10 @@ function plane2 = transformPlane3d(plane, trans)
 %   lines3d, transforms3d, transformPoint3d, transformVector3d,
 %   transformLine3d
 %
+
 % ------
 % Author: David Legland, oqilipo
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2017-07-09
 % Copyright 2017 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 

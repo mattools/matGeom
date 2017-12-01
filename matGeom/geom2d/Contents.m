@@ -175,7 +175,7 @@
 %   drawArrow                - Draw an arrow on the current axis
 %   drawLabels               - Draw labels at specified positions
 %   drawShape                - Draw various types of shapes (circles, polygons...)
-
+%
 %
 % Other shapes
 %   squareGrid               - Generate equally spaces points in plane.
