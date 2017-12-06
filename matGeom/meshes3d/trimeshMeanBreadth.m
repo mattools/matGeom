@@ -14,13 +14,27 @@ function mb = trimeshMeanBreadth(vertices, faces)
 %
 %   See also
 %   meshes3d, trimeshSurfaceArea, trimeshEdgeFaces, polyhedronMeanBreadth
+%
+%   References
+%   Stoyan D., Kendall W.S., Mecke J. (1995) "Stochastic Geometry and its
+%       Applications", John Wiley and Sons, p. 26
+%   Ohser, J., Muescklich, F. (2000) "Statistical Analysis of
+%       Microstructures in Materials Sciences", John Wiley and Sons, p.352
  
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2015-08-19,    using Matlab 8.5.0.197613 (R2015a)
 % Copyright 2015 INRA - Cepia Software Platform.
 
+
+%% Check input validity
+
+if size(faces, 2) ~= 3
+    error('meshes3d:trimeshMeanBreadth:NonTriangularMesh', ...
+        'Requires a triangular mesh as input');
+end
+    
 %% Compute edge and edgeFaces arrays
 % Uses the same code as in trimeshEdgeFaces
 
@@ -48,7 +62,7 @@ end
 %% Compute dihedral angle for each edge
 
 % compute normal of each face
-normals = faceNormal(vertices, faces);
+normals = meshFaceNormals(vertices, faces);
 
 % allocate memory for resulting angles
 alpha = zeros(nEdges, 1);

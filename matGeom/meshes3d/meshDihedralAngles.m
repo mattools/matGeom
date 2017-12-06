@@ -13,7 +13,7 @@ function alpha = meshDihedralAngles(vertices, edges, faces)
 %   of the mesh.
 %
 %   Example
-%   [v e f] = createCube;
+%   [v, e, f] = createCube;
 %   rad2deg(meshDihedralAngles(v, e, f))
 %   ans = 
 %       90
@@ -30,17 +30,17 @@ function alpha = meshDihedralAngles(vertices, edges, faces)
 %       90
 %
 %   See also
-%   meshes3d, polyhedronMeanBreadth, dihedralAngle, meshEdgeFaces
+%   meshes3d, polyhedronMeanBreadth, trimeshMeanBreadth, dihedralAngle, meshEdgeFaces
 %
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2010-10-04,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform.
 
 % compute normal of each face
-normals = faceNormal(vertices, faces);
+normals = meshFaceNormals(vertices, faces);
 
 % indices of faces adjacent to each edge
 edgeFaces = meshEdgeFaces(vertices, edges, faces);
