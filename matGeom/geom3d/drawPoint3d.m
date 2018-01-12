@@ -1,35 +1,40 @@
 function varargout = drawPoint3d(varargin)
 %DRAWPOINT3D Draw 3D point on the current axis.
 %
-%   drawPoint3d(X, Y, Z) 
+%   DRAWPOINT3D(X, Y, Z) 
 %   will draw points defined by coordinates X and Y. 
 %   X and Y are N*1 array, with N being number of points to be drawn.
 %   
-%   drawPoint3d(COORD) 
-%   packs coordinates in a single [N*3] array.
+%   DRAWPOINT3D(COORD) packs coordinates in a single [N*3] array.
 %
-%   drawPoint3d(..., OPT) 
-%   will draw each point with given option. OPT is a string compatible with
-%   'plot' model.
+%   DRAWPOINT3D(..., OPT) will draw each point with given option. OPT is a 
+%   string compatible with 'plot' model.
 %
-%   H = drawPoint3d(...) 
-%   Also return a handle to each of the drawn points.
+%   DRAWPOINT3D(AX,...) plots into AX instead of GCA.
 %
-%   
+%   H = DRAWPOINT3D(...) returns a handle H to the line object
+%
 %   See also
 %   points3d, clipPoints3d
 %
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 18/02/2005.
+% ---------
+% Author : David Legland 
+% INRA - TPV URPOI - BIA IMASTE
+% created the 18/02/2005.
 %
-
 %   HISTORY
 %   04/01/2007: remove unused variables, and enhance support for plot
 %       options
 %   12/02/2010 does not clip points anymore
+%   12/01/2018 added axes handle input
+%
 
+if numel(varargin{1}) == 1 && ishghandle(varargin{1}, 'axes')
+    hAx = varargin{1};
+    varargin(1)=[];
+else
+    hAx = gca;
+end
 
 var = varargin{1};
 if size(var, 2)==3
@@ -54,7 +59,7 @@ if length(varargin)~=1
 end
 
 % plot only points inside the axis.
-h = plot3(px, py, pz, varargin{:});
+h = plot3(hAx, px, py, pz, varargin{:});
 
 if nargout>0
     varargout{1} = h;
