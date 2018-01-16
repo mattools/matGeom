@@ -1,16 +1,16 @@
 function varargout = drawLine3d(lin, varargin)
 %DRAWLINE3D Draw a 3D line clipped by the current axes
 %
-%   DRAWLINE3D(LINE) draws the line LINE on the current axis, by clipping 
+%   drawLine3d(LINE) draws the line LINE on the current axis, by clipping 
 %   with the current axis.
 %
-%   DRAWLINE3D(LINE, PARAM, VALUE) accepts parameter/value pairs, like 
+%   drawLine3d(LINE, PARAM, VALUE) accepts parameter/value pairs, like 
 %   for plot function. Color of the line can also be given as a single 
 %   parameter.
 %
-%   DRAWLINE3D(AX,...) plots into AX instead of GCA.
+%   drawLine3d(AX,...) plots into AX instead of GCA.
 %   
-%   H = DRAWLINE3D(...) returns a handle to the created line object. 
+%   H = drawLine3d(...) returns a handle to the created line object. 
 %   If the line is not clipped by the axis, function returns -1.
 %
 %   See also:
