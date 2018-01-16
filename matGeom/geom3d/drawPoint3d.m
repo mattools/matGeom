@@ -1,18 +1,18 @@
 function varargout = drawPoint3d(varargin)
 %DRAWPOINT3D Draw 3D point on the current axis.
 %
-%   DRAWPOINT3D(X, Y, Z) 
+%   drawPoint3d(X, Y, Z) 
 %   will draw points defined by coordinates X and Y. 
 %   X and Y are N*1 array, with N being number of points to be drawn.
 %   
-%   DRAWPOINT3D(COORD) packs coordinates in a single [N*3] array.
+%   drawPoint3d(COORD) packs coordinates in a single [N*3] array.
 %
-%   DRAWPOINT3D(..., OPT) will draw each point with given option. OPT is a 
+%   drawPoint3d(..., OPT) will draw each point with given option. OPT is a 
 %   string compatible with 'plot' model.
 %
-%   DRAWPOINT3D(AX,...) plots into AX instead of GCA.
+%   drawPoint3d(AX,...) plots into AX instead of GCA.
 %
-%   H = DRAWPOINT3D(...) returns a handle H to the line object
+%   H = drawPoint3d(...) returns a handle H to the line object
 %
 %   See also
 %   points3d, clipPoints3d
