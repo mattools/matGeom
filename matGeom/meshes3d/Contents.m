@@ -61,6 +61,7 @@
 %   polyhedronNormalAngle    - Compute normal angle at a vertex of a 3D polyhedron
 %   polyhedronMeanBreadth    - Mean breadth of a convex polyhedron
 %   trimeshMeanBreadth       - Mean breadth of a triangular mesh
+%   isPointInMesh            - Check if a point is inside a 3D mesh
 %
 % Utility functions
 %   meshFace                 - Return the vertex indices of a face in a mesh
