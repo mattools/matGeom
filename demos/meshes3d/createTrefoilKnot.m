@@ -34,13 +34,13 @@ t = linspace(0, 2*pi, nPoints + 1);
 t(end) = [];
 
 % trefoil curve coordinates
-x = sin(t) + 2 * sin(2 * t);
-y = cos(t) - 2 * cos(2 * t);
-z = -sin(3 * t);
+curve(:,1) = sin(t) + 2 * sin(2 * t);
+curve(:,2) = cos(t) - 2 * cos(2 * t);
+curve(:,3) = -sin(3 * t);
 
 % display curve
 figure; 
-plot3(x, y, z, 'linewidth', 2, 'color', 'b');
+drawPolyline3d(curve, 'LineWidth', 4, 'color', 'b');
 axis equal; view(3);
 axis([-4 4 -4 4 -2 2]);
 
@@ -50,10 +50,5 @@ axis([-4 4 -4 4 -2 2]);
 % compute mesh
 [v2, f2] = curveToMesh(curve, thickness, nCorners);
 
-% diusplay mesh
-figure;
-drawMesh(v2, f2);
-
-% keep same display options
-axis equal; view(3);
-axis([-4 4 -4 4 -2 2]);
+% display mesh
+drawMesh(v2, f2, 'FaceAlpha', 0.5);
