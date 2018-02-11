@@ -73,7 +73,7 @@ nFaces = size(faces, 1);
 Fn = ones(nFaces, 1) * size(faces, 2);
 
 % compute normal of each faces
-normals = faceNormal(nodes, faces);
+normals = meshFaceNormals(nodes, faces);
 
 % initialize empty faces and edges
 faces2  = cell(0, 1);
@@ -96,7 +96,7 @@ for iFace = 1:nFaces
     end
 
     % indices of faces with same normal
-    ind = find(vectorNorm3d(vectorCross3d(normals(iFace, :), normals)) < acc);
+    ind = find(vectorNorm3d(crossProduct3d(normals(iFace, :), normals)) < acc);
     
     % keep only coplanar faces (test coplanarity of points in both face)
     ind2 = false(size(ind));

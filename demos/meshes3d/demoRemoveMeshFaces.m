@@ -24,11 +24,11 @@ fLI = false(length(faces),1);
 rmFI=round(linspace(1,length(faces),10));
 fLI(rmFI)=true;
 
-faceCents = faceCentroids(vertices, faces);
+faceCents = meshFaceCentroids(vertices, faces);
 
 %% 
 [vertices2, faces2] = removeMeshFaces(vertices, faces, fLI);
-assert(isequal(faceCentroids(vertices, faces(~fLI,:)),faceCentroids(vertices2, faces2)))
+assert(isequal(meshFaceCentroids(vertices, faces(~fLI,:)),meshFaceCentroids(vertices2, faces2)))
 
 figure('color','w')
 drawMesh(vertices, faces, 'faceColor', 'none', 'faceAlpha', .2);
@@ -39,7 +39,7 @@ axis equal
 
 %% 
 [m2] = removeMeshFaces(vertices, faces, fLI);
-assert(isequal(faceCentroids(vertices, faces(~fLI,:)),faceCentroids(m2.vertices, m2.faces)))
+assert(isequal(meshFaceCentroids(vertices, faces(~fLI,:)),meshFaceCentroids(m2.vertices, m2.faces)))
 
 figure('color','w')
 drawMesh(vertices, faces, 'faceColor', 'none', 'faceAlpha', .2);
@@ -50,7 +50,7 @@ axis equal
 
 %%
 [m2] = removeMeshFaces(m, fLI);
-assert(isequal(faceCentroids(m.vertices, m.faces(~fLI,:)),faceCentroids(m2.vertices, m2.faces)))
+assert(isequal(meshFaceCentroids(m.vertices, m.faces(~fLI,:)),meshFaceCentroids(m2.vertices, m2.faces)))
 
 figure('color','w')
 drawMesh(vertices, faces, 'faceColor', 'none', 'faceAlpha', .2);
