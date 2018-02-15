@@ -9,7 +9,7 @@ function centroids = meshFaceCentroids(nodes, faces)
 %
 %   Example
 %     [v e f] = createIcosahedron;
-%     normals1 = faceNormal(v, f);
+%     normals1 = meshFaceNormals(v, f);
 %     centros1 = meshFaceCentroids(v, f);
 %     figure; drawMesh(v, f); 
 %     hold on; axis equal; view(3);

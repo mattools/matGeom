@@ -12,7 +12,7 @@ function normals = meshFaceNormals(nodes, faces)
 %   Example
 %     [v e f] = createIcosahedron;
 %     normals1 = meshFaceNormals(v, f);
-%     centros1 = faceCentroids(v, f);
+%     centros1 = meshFaceCentroids(v, f);
 %     figure; drawMesh(v, f); 
 %     hold on; axis equal; view(3);
 %     drawVector3d(centros1, normals1);

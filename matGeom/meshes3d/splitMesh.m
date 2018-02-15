@@ -67,7 +67,7 @@ end
 end
 
 
-%% Locals functions are part of the gptoolbox by Alec Jacobson
+%% Local functions are part of the gptoolbox by Alec Jacobson
 function C = connected_components(F)
 % CONNECTED_COMPONENTS Determine the connected components of a mesh
 % described by the simplex list F. Components are determined with respect
@@ -138,4 +138,3 @@ S = numel(r)-1;
 C = cumsum(full(sparse(1,r(1:end-1),1,1,size(G,1))));
 C(p) = C;
 end
-

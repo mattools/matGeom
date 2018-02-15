@@ -1,10 +1,10 @@
-function test_suite = test_faceNormal
-%TEST_FACENORMAL  Test case for the file faceNormal
+function test_suite = test_meshFaceNormals
+%TEST_FACENORMAL  Test case for the file meshFaceNormals
 %
-%   Test case for the file faceNormal
+%   Test case for the file meshFaceNormals
 
 %   Example
-%   test_faceNormal
+%   test_meshFaceNormals
 %
 %   See also
 %
