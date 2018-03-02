@@ -109,6 +109,7 @@
 %   distancePolygonsNoCross   - Compute the shortest distance between 2 polygons
 %   polygonSignature          - Polar signature of a polygon (polar distance to origin)
 %   signatureToPolygon        - Reconstruct a polygon from its polar signature
+%   polygonCurvature          - Estimate curvature on polygon vertices using polynomial fit
 %
 % More complex operations on polygons
 %   resamplePolygon           - Distribute N points equally spaced on a polygon
