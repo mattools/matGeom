@@ -22,7 +22,7 @@ function [dist, proj] = distancePointTriangle3d(point, triangle)
 %           0.5774
 %
 %   See also
-%   meshes3d, distancePointTrimesh, distancePointEdge3d, distancePointPlane
+%   meshes3d, distancePointMesh, distancePointEdge3d, distancePointPlane
 %
 %   Reference
 %   * David Eberly (1999), "Distance Between Point and Triangle in 3D"

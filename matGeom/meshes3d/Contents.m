@@ -62,6 +62,7 @@
 %   polyhedronMeanBreadth    - Mean breadth of a convex polyhedron
 %   trimeshMeanBreadth       - Mean breadth of a triangular mesh
 %   isPointInMesh            - Check if a point is inside a 3D mesh
+%   distancePointMesh        - Shortest distance between a (3D) point and a triangle mesh
 %
 % Utility functions
 %   meshFace                 - Return the vertex indices of a face in a mesh
@@ -122,8 +123,6 @@
 % Deprecated:
 
 %   drawPolyhedron           - Draw polyhedron defined by vertices and faces
-%   faceCentroids            - Compute centroids of a mesh faces
-%   faceNormal               - Compute normal vector of faces in a 3D mesh
 %   vertexNormal             - Compute normals to a mesh vertices
 
 % Others
