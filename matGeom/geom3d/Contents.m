@@ -113,15 +113,18 @@
 %   polygons3d                - Description of functions operating on 3D polygons
 %   polygonCentroid3d         - Centroid (or center of mass) of a polygon
 %   polygonArea3d             - Area of a 3D polygon
-%   triangleArea3d            - Area of a 3D triangle
 %   polygon3dNormalAngle      - Normal angle at a vertex of the 3D polygon
 %   intersectLinePolygon3d    - Intersection point of a 3D line and a 3D polygon
-%   intersectLineTriangle3d   - Intersection point of a 3D line and a 3D triangle
 %   intersectRayPolygon3d     - Intersection point of a 3D ray and a 3D polygon
 %   clipConvexPolygon3dHP     - Clip a convex 3D polygon with Half-space
 %   drawPolygon3d             - Draw a 3D polygon specified by a list of vertex coords
 %   drawPolyline3d            - Draw a 3D polyline specified by a list of vertex coords
 %   fillPolygon3d             - Fill a 3D polygon specified by a list of vertex coords
+%
+% 3D Triangles
+%   triangleArea3d            - Area of a 3D triangle
+%   distancePointTriangle3d   - Minimum distance between a 3D point and a 3D triangle
+%   intersectLineTriangle3d   - Intersection point of a 3D line and a 3D triangle
 %
 % 3D circles and ellipses
 %   circles3d                 - Description of functions operating on 3D circles

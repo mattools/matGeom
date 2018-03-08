@@ -27,7 +27,8 @@ function [point, pos, isInside] = intersectLineTriangle3d(line, triangle, vararg
 %         1   1   3
 %
 %   See also
-%   points3d, lines3d, polygons3d, intersectRayPolygon3d
+%   points3d, lines3d, polygons3d, intersectRayPolygon3d,
+%   distancePointTriangle3d
 %
 %   References
 %   Algorithm adapted from SoftSurfer Ray/Segment-Triangle intersection
