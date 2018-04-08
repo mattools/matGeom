@@ -41,8 +41,11 @@ if isnumeric(faces)
         end
     else
         % 3D case
-        for f = 1:nf
-            centroids(f,:) = polygonCentroid3d(nodes(faces(f,:), :));
+        % for f = 1:nf
+        %     centroids(f,:) = polygonCentroid3d(nodes(faces(f,:), :));
+        % end
+        for ff = 1:size(faces,2)
+            centroids = centroids + 1/size(faces,2) * nodes(faces(:,ff),:);
         end
     end        
 else
