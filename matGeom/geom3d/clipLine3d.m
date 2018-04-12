@@ -15,10 +15,11 @@ function edge = clipLine3d(line, box)
 %   lines3d, edges3d, createLine3d
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 30/10/2008 from drawLine3d
+% ---------
+% author : David Legland 
+% e-mail: david.legland@inra.fr
+% INRA - TPV URPOI - BIA IMASTE
+% created the 30/10/2008 from drawLine3d
 
 %   HISTORY
 %   30/10/2008 replace intersectPlaneLine by intersectLinePlane
@@ -53,14 +54,13 @@ planeX0 = [p000 ey ez];
 planeX1 = [p111 ey ez];
 
 % number of lines
-Nl = size(line, 1);
+nLines = size(line, 1);
 
 % allocate memory for result
-edge = zeros(Nl, 6);
+edge = zeros(nLines, 6);
 
-
-% process each line
-for i=1:Nl
+% iterate over lines to clip
+for i = 1:nLines
     
     % compute intersection point with each plane
     ipZ0 = intersectLinePlane(line(i,:), planeZ0);
