@@ -10,9 +10,9 @@ function edge = clipLine(line, box, varargin)
 %   extreme points: [x1 y1 x2 y2].
 %   If line does not intersect the box, [NaN NaN NaN NaN] is returned.
 %   
-%   Function works also if LINE is a Nx4 array, if BOX is a Nx4 array, or
-%   if both LINE and BOX are Nx4 arrays. In these cases, EDGE is a Nx4
-%   array.
+%   Function works also if LINE is a N-by-4 array, if BOX is a Nx4 array,
+%   or if both LINE and BOX are N-by-4 arrays. In these cases, EDGE is a
+%   N-by-4 array.
 %   
 %
 %   Example
@@ -24,11 +24,12 @@ function edge = clipLine(line, box, varargin)
 %
 %   See also:
 %   lines2d, boxes2d, edges2d
-%   clipEdge, clipRay
+%   clipEdge, clipRay, clipLine3d
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2007-08-27,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2010 INRA - Cepia Software Platform.
 
