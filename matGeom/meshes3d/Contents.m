@@ -107,8 +107,9 @@
 %   drawFaceNormals          - Draw normal vector of each face in a mesh
 %   drawMesh                 - Draw a 3D mesh defined by vertex and face arrays
 %
-% Reading from file
+% I/O functions
 %   readMesh_off             - Read mesh data stord in OFF format
+%   writeMesh_off            - Writes a mesh into a text file in OFF format
 %
 
 % ------
@@ -126,3 +127,4 @@
 %   vertexNormal             - Compute normals to a mesh vertices
 
 % Others
+
