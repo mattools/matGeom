@@ -41,11 +41,17 @@ if isnumeric(faces)
         end
     else
         % 3D case
-        % for f = 1:nf
-        %     centroids(f,:) = polygonCentroid3d(nodes(faces(f,:), :));
-        % end
-        for ff = 1:size(faces,2)
-            centroids = centroids + 1/size(faces,2) * nodes(faces(:,ff),:);
+        if size(faces, 2) == 3
+            % for triangular meshes, uses accelerated method (thanks to
+            % Oqilipo)
+            for ff = 1:3
+                centroids = centroids + 1/3 * nodes(faces(:,ff),:);
+            end
+        else
+            % for quad (or larger) meshes, use slower but more precise method
+            for f = 1:nf
+                centroids(f,:) = polygonCentroid3d(nodes(faces(f,:), :));
+            end
         end
     end        
 else
