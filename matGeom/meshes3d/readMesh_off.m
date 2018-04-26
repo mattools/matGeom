@@ -1,5 +1,5 @@
-function [vertices, faces] = readMesh_off(fileName)
-%READMESH_OFF Read mesh data stord in OFF format
+function varargout = readMesh_off(fileName)
+%READMESH_OFF Read mesh data stored in OFF format
 %
 %   [VERTICES FACES] = readMesh_off(FILNAME)
 %
@@ -9,7 +9,7 @@ function [vertices, faces] = readMesh_off(fileName)
 %     view([5 80]); light; lighting gouraud
 %
 %   See also
-%     meshes3d, drawMesh
+%     meshes3d, writeMesh_off, drawMesh
 
 % ------
 % Author: David Legland
@@ -25,14 +25,14 @@ if f == -1
 end
 
 % check format
-line = fgets(f);   % -1 if eof
+line = fgetl(f);   % -1 if eof
 if ~strcmp(line(1:3), 'OFF')
     error('matGeom:readMesh_off:FileFormatError', ...
         'Not a valid OFF file');    
 end
 
 % number of faces and vertices
-line = fgets(f);
+line = fgetl(f);
 vals = sscanf(line, '%d %d');
 nv = vals(1);
 nf = vals(2);
@@ -59,3 +59,11 @@ faces = faces(2:4, :)' + 1;
 % close the file
 fclose(f);
 
+% format output arguments
+if nargout < 2
+    mesh.vertices = vertices;
+    mesh.faces = faces;
+    varargout = {mesh};
+else
+    varargout = {vertices, faces};
+end

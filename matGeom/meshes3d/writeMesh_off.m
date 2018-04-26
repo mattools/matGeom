@@ -44,7 +44,7 @@ if isnumeric(faces)
     ns = size(faces, 2);
     format = ['%d' repmat(' %d', 1, ns) '\n'];
     for iFace = 1:nFaces
-        fprintf(f, format, ns, faces(iFace, :));
+        fprintf(f, format, ns, faces(iFace, :)-1);
     end
 else
     % if faces are stored in a cell array, the number of vertices in each
@@ -52,7 +52,7 @@ else
     for iFace = 1:nFaces
         ns = length(faces{iFace});
         format = ['%d' repmat(' %d', 1, ns) '\n'];
-        fprintf(f, format, ns, faces{iFace});
+        fprintf(f, format, ns, faces{iFace}-1);
     end
 end
 
