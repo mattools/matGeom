@@ -42,8 +42,8 @@ if isnumeric(faces)
     else
         % 3D case
         if size(faces, 2) == 3
-            % for triangular meshes, uses accelerated method (thanks to
-            % Oqilipo)
+            % For triangular meshes, uses accelerated method
+            % (taken from https://github.com/alecjacobson/gptoolbox)
             for ff = 1:3
                 centroids = centroids + 1/3 * nodes(faces(:,ff),:);
             end
