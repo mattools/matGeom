@@ -1,4 +1,4 @@
-function normals = meshFaceNormals(nodes, faces)
+function normals = meshFaceNormals(vertices, faces)
 %MESHFACENORMALS Compute normal vector of faces in a 3D mesh
 %
 %   NORMALS = meshFaceNormals(VERTICES, FACES)
@@ -34,10 +34,16 @@ function normals = meshFaceNormals(nodes, faces)
 % HISTORY
 % 2011-11-24 rename from faceNormal to meshFaceNormals
 
+% if input is given as a structure, parse fields
+if isstruct(vertices)
+    faces = vertices.faces;
+    vertices = vertices.vertices;
+end
+
 if isnumeric(faces)
     % compute vector of first edges
-	v1 = nodes(faces(:,2),1:3) - nodes(faces(:,1),1:3);
-    v2 = nodes(faces(:,3),1:3) - nodes(faces(:,1),1:3);
+	v1 = vertices(faces(:,2),1:3) - vertices(faces(:,1),1:3);
+    v2 = vertices(faces(:,3),1:3) - vertices(faces(:,1),1:3);
     
     % compute normals using cross product (nodes have same size)
 	normals = cross(v1, v2, 2);
@@ -49,8 +55,8 @@ else
     for i = 1:length(faces)
         face = faces{i};
         % compute vector of first edges
-        v1 = nodes(face(2),1:3) - nodes(face(1),1:3);
-        v2 = nodes(face(3),1:3) - nodes(face(1),1:3);
+        v1 = vertices(face(2),1:3) - vertices(face(1),1:3);
+        v2 = vertices(face(3),1:3) - vertices(face(1),1:3);
 
         % compute normals using cross product
         normals(i, :) = cross(v1, v2, 2);
