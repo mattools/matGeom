@@ -1,4 +1,4 @@
-function centroids = meshFaceCentroids(vertices, faces)
+function centroids = meshFaceCentroids(varargin)
 %MESHFACECENTROIDS Compute centroids of faces in a mesh
 %
 %   CENTROIDS = meshFaceCentroids(VERTICES, FACES)
@@ -30,11 +30,8 @@ function centroids = meshFaceCentroids(vertices, faces)
 % 2007-09-18 fix: worked only for 2D case, now works also for 3D
 % 2011-11-24 rename from faceCentroids to meshFaceCentroids
 
-% if input is given as a structure, parse fields
-if isstruct(vertices)
-    faces = vertices.faces;
-    vertices = vertices.vertices;
-end
+% parse input data
+[vertices, faces] = parseMeshData(varargin{:});
 
 if isnumeric(faces)
     % trimesh or quadmesh

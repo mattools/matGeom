@@ -77,12 +77,5 @@ elseif iscell(f)
     end
 end
 
-switch nargout
-    case 1
-        mesh2.vertices=v2;
-        mesh2.faces=f2;
-        varargout{1}=mesh2;
-    case 2
-        varargout{1}=v2;
-        varargout{2}=f2;
+    varargout = formatMeshOutput(nargout, v2, f2);
 end

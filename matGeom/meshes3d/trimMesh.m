@@ -1,4 +1,4 @@
-function varargout = trimMesh(vertices, edges, faces)
+function varargout = trimMesh(varargin)
 %TRIMMESH Reduce memory footprint of a polygonal mesh
 %
 %   [V2 F2] = trimMesh(V, F)
@@ -22,10 +22,8 @@ function varargout = trimMesh(vertices, edges, faces)
 % Created: 2014-08-01,    using Matlab 8.3.0.532 (R2014a)
 % Copyright 2014 INRA - Cepia Software Platform.
 
-% check input number
-if nargin == 2
-    faces = edges;
-end
+% parse input data
+[vertices, faces] = parseMeshData(varargin{:});
 
 % identify vertices referenced by a face
 vertexUsed = false(size(vertices, 1), 1);
