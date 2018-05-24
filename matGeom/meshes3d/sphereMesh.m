@@ -9,14 +9,14 @@ function varargout = sphereMesh(sphere, varargin)
 %
 %   [V, F] = sphereMesh(S, 'nTheta', NT, 'nPhi', NP);
 %   Specifies the number of discretisation steps for the meridians and the
-%   parallels.
+%   parallels. Default values are nTheta = 16 and nPhi = 32.
 %
 %
 %   Example
 %     s = [10 20 30 40];
-%     [v f] = sphereMesh(s);
+%     [v, f] = sphereMesh(s);
 %     drawMesh(v, f);
-%     view(3);axis equal; light; lighting gouraud;
+%     view(3); axis equal; light; lighting gouraud;
 %
 %   See also
 %     meshes3d, drawSphere, ellipsoidMesh, cylinderMesh, surfToMesh
@@ -24,7 +24,7 @@ function varargout = sphereMesh(sphere, varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2012-10-25,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 

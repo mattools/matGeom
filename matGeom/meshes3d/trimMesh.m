@@ -1,24 +1,24 @@
 function varargout = trimMesh(vertices, edges, faces)
 %TRIMMESH Reduce memory footprint of a polygonal mesh
 %
-%   [V2 F2] = trimMesh(V, F)
+%   [V2, F2] = trimMesh(V, F)
 %   Reduces the size occupied by mesh, by keeping only vertices that are
 %   referenced by at least one face, and relabel face indices.
 %
 %   Example
-%     [V F] = createIcosahedron;
+%     [V, F] = createIcosahedron;
 %     F(13:20, :) = [];
-%     [V2 F2] = trimMesh(V, F);
+%     [V2, F2] = trimMesh(V, F);
 %     figure; drawMesh(V2, F2)
 %     view(3); axis equal;
 %     axis([-1 1 -1 1 0 2])
 %
 %   See also
-%     meshes3d
+%     meshes3d, clipMeshVertices
  
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2014-08-01,    using Matlab 8.3.0.532 (R2014a)
 % Copyright 2014 INRA - Cepia Software Platform.
 

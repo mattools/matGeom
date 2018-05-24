@@ -7,11 +7,16 @@ function varargout = clipMeshVertices(v, f, b, varargin)
 %   the box, and a new set of faces corresponding to original faces with
 %   all vertices within the box.
 %   
-%   [V2, F2] = clipMeshVertices(..., 'shape','sphere') Specify the shape.
+%   [V2, F2] = clipMeshVertices(..., 'shape', 'sphere') Specify the shape.
 %   Default is 'box'. But it's also possible to use a 'sphere'.
 %   
-%   [V2, F2] = clipMeshVertices(..., 'inside',false) removes the inner 
+%   [V2, F2] = clipMeshVertices(..., 'inside', false) removes the inner 
 %   faces instead of the outer faces.
+%
+%   [V2, F2] = clipMeshVertices(..., 'trimMesh', TF)
+%   Also specifies if the isolated vertices need to be removed (TF=true) ot
+%   not (TF=false). Default is false.
+%
 %
 %   Example
 %     [v, f] = createSoccerBall;
@@ -26,15 +31,18 @@ function varargout = clipMeshVertices(v, f, b, varargin)
 %   See also
 %   meshes3d, clipPoints3d
 %
+
 % ------
 % Author: David Legland, oqilipo
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2011-04-07,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
 % if input is given as a structure, parse fields
 if isstruct(v)
-    if nargin > 2; varargin = [b, varargin]; end
+    if nargin > 2
+        varargin = [b, varargin]; 
+    end
     b = f;
     f = v.faces;
     v = v.vertices;
@@ -44,6 +52,7 @@ parser = inputParser;
 validStrings = {'box','sphere'};
 addParameter(parser,'shape','box',@(x) any(validatestring(x, validStrings)));
 addParameter(parser,'inside',true,@islogical);
+addParameter(parser,'trimMesh',false,@islogical);
 parse(parser,varargin{:});
 
 % clip the vertices
@@ -75,6 +84,10 @@ elseif iscell(f)
     for i = 1:length(f2)
         f2{i} = refInds(f2{i})';
     end
+end
+
+if parser.Results.trimMesh
+    [v2, f2] = trimMesh(v2, f2);
 end
 
 switch nargout
