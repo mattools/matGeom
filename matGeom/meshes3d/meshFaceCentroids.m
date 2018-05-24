@@ -1,4 +1,4 @@
-function centroids = meshFaceCentroids(nodes, faces)
+function centroids = meshFaceCentroids(varargin)
 %MESHFACECENTROIDS Compute centroids of faces in a mesh
 %
 %   CENTROIDS = meshFaceCentroids(VERTICES, FACES)
@@ -30,14 +30,17 @@ function centroids = meshFaceCentroids(nodes, faces)
 % 2007-09-18 fix: worked only for 2D case, now works also for 3D
 % 2011-11-24 rename from faceCentroids to meshFaceCentroids
 
+% parse input data
+[vertices, faces] = parseMeshData(varargin{:});
+
 if isnumeric(faces)
     % trimesh or quadmesh
     nf = size(faces, 1);
-    centroids = zeros(nf, size(nodes, 2));
-    if size(nodes, 2) == 2
+    centroids = zeros(nf, size(vertices, 2));
+    if size(vertices, 2) == 2
         % planar case
         for f = 1:nf
-            centroids(f,:) = polygonCentroid(nodes(faces(f,:), :));
+            centroids(f,:) = polygonCentroid(vertices(faces(f,:), :));
         end
     else
         % 3D case
@@ -45,28 +48,28 @@ if isnumeric(faces)
             % For triangular meshes, uses accelerated method
             % (taken from https://github.com/alecjacobson/gptoolbox)
             for ff = 1:3
-                centroids = centroids + 1/3 * nodes(faces(:,ff),:);
+                centroids = centroids + 1/3 * vertices(faces(:,ff),:);
             end
         else
             % for quad (or larger) meshes, use slower but more precise method
             for f = 1:nf
-                centroids(f,:) = polygonCentroid3d(nodes(faces(f,:), :));
+                centroids(f,:) = polygonCentroid3d(vertices(faces(f,:), :));
             end
         end
     end        
 else
     % mesh with faces stored as cell array
     nf = length(faces);
-    centroids = zeros(nf, size(nodes, 2));
-    if size(nodes, 2) == 2
+    centroids = zeros(nf, size(vertices, 2));
+    if size(vertices, 2) == 2
         % planar case
         for f = 1:nf
-            centroids(f,:) = polygonCentroid(nodes(faces{f}, :));
+            centroids(f,:) = polygonCentroid(vertices(faces{f}, :));
         end
     else
         % 3D case
         for f = 1:nf
-            centroids(f,:) = polygonCentroid3d(nodes(faces{f}, :));
+            centroids(f,:) = polygonCentroid3d(vertices(faces{f}, :));
         end
     end
 end
