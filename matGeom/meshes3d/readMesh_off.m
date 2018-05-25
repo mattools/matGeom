@@ -34,30 +34,62 @@ end
 % number of faces and vertices
 line = fgetl(f);
 vals = sscanf(line, '%d %d');
-nv = vals(1);
-nf = vals(2);
+nVertices = vals(1);
+nFaces = vals(2);
 
 
 % read vertex data
-[vertices, count] = fscanf(f, '%f ', [3 nv]);
-if count ~= nv*3
+[vertices, count] = fscanf(f, '%f ', [3 nVertices]);
+if count ~= nVertices * 3
     error('matGeom:readMesh_off:FileFormatError', ...
-        ['Could not read all the ' num2str(nv) ' vertices']);
+        ['Could not read all the ' num2str(nVertices) ' vertices']);
 end
 vertices = vertices';
 
-% read face data (face start by index)
-[faces, count] = fscanf(f, '%d %d %d %d\n', [4 nf]);
-if count ~= nf * 4
-    error('matGeom:readMesh_off:FileFormatError', ...
-        ['Could not read all the ' num2str(nf) ' faces']);
-end
+% % read face data (face start by index)
+% [faces, count] = fscanf(f, '%d %d %d %d\n', [4 nf]);
+% if count ~= nf * 4
+%     error('matGeom:readMesh_off:FileFormatError', ...
+%         ['Could not read all the ' num2str(nf) ' faces']);
+% end
 
-% clean up: remove index, and use 1-indexing
-faces = faces(2:4, :)' + 1;
+% allocate memory
+faces = cell(1, nFaces);
+
+% iterate over faces
+for iFace = 1:nFaces
+    % read next line
+    line = fgetl(f);
+    if line == -1
+        error('matGeom:readMesh_off:FileFormatError', ...
+            'Unexpected end of file');
+    end
+    
+    % parse vertex indices for current face
+    tokens = split(line);
+    nv = str2double(tokens{1});
+    face = zeros(1,nv);
+    for iv = 1:nv
+        face(iv) = str2double(tokens{iv+1}) + 1;
+    end
+    faces{iFace} = face;
+end
 
 % close the file
 fclose(f);
+
+
+%% Post-process faces
+
+% % clean up: remove index, and use 1-indexing
+% faces = faces(2:4, :)' + 1;
+
+% if faces all have same number of vertices, convert to Nf-by-N array
+nVertices = cellfun(@length, faces);
+if all(nVertices == nVertices(1))
+    faces = cell2mat(faces(:));
+end
+
 
 % format output arguments
 if nargout < 2
