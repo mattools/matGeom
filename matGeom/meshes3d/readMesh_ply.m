@@ -158,6 +158,15 @@ end
 fclose(f);
 
 
+%% Post-process faces
+
+% if faces all have same number of vertices, convert to Nf-by-N array
+nv = cellfun(@length, faces);
+if all(nv == nv(1))
+    faces = cell2mat(faces(:));
+end
+
+
 %% Format mesh output
 
 % format output arguments
