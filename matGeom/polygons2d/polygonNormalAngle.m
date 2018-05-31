@@ -18,11 +18,12 @@ function theta = polygonNormalAngle(points, ind)
 %   sum(theta)
 %
 %   See also:
-%   polygons2d, formatAngle
+%   polygons2d, polygonOuterNormal, normalizeAngle
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2005-11-30
 % Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
@@ -35,20 +36,13 @@ nv = length(ind);
 
 theta = zeros(nv, 1);
 
-for i=1:nv
-    p0 = points(ind(i), :);
+for i = 1:nv
+    % current vertex
+    curr = points(ind(i), :);
     
-    if ind(i)==1
-        p1 = points(np, :);
-    else
-        p1 = points(ind(i)-1, :);
-    end
+    % previous and next vertices
+    prev = points(mod(ind(i)-2, np)+1, :);
+    next = points(mod(ind(i), np)+1, :);
     
-    if ind(i)==np
-        p2 = points(1, :);
-    else
-        p2 = points(ind(i)+1, :);
-    end
-    
-    theta(i) = angle3Points(p1, p0, p2) - pi;
+    theta(i) = angle3Points(prev, curr, next) - pi;
 end

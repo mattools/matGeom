@@ -1,67 +1,59 @@
 function varargout = drawPlane3d(plane, varargin)
-%DRAWPLANE3D Draw a plane clipped in the current window
+%DRAWPLANE3D Draw a plane clipped by the current axes
 %
-%   drawPlane3d(plane)
-%   plane = [x0 y0 z0  dx1 dy1 dz1  dx2 dy2 dz2];
+%   drawPlane3d(PLANE) draws a plane of the format:
+%       [x0 y0 z0  dx1 dy1 dz1  dx2 dy2 dz2]
+%
+%   drawPlane3d(...,'PropertyName',PropertyValue,...) sets the value of the
+%   specified patch property. Multiple property values can be set with
+%   a single statement.
+%
+%   drawPlane3d(AX,...) plots into AX instead of GCA.
+%
+%   H = drawPlane3d(...) returns a handle H to the patch object.
 %
 %   See also
 %   planes3d, createPlane
 %
 %   Example
-%   p0 = [1 2 3];
-%   v1 = [1 0 1];
-%   v2 = [0 -1 1];
-%   plane = [p0 v1 v2];
-%   axis([-10 10 -10 10 -10 10]);
-%   drawPlane3d(plane)
-%   drawLine3d([p0 v1])
-%   drawLine3d([p0 v2])
-%   set(gcf, 'renderer', 'zbuffer');
+%     p0 = [1 2 3];
+%     v1 = [1 0 1];
+%     v2 = [0 -1 1];
+%     plane = [p0 v1 v2];
+%     axis([-10 10 -10 10 -10 10]);
+%     drawPlane3d(plane)
+%     drawLine3d([p0 v1])
+%     drawLine3d([p0 v2])
+%     set(gcf, 'renderer', 'zbuffer');
 %
-
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % INRA - TPV URPOI - BIA IMASTE
 % created the 17/02/2005.
 %
-
 %   HISTORY
 %   2008-10-30 replace intersectPlaneLine by intersectLinePlane, add doc
 %   2010-10-04 fix a bug for planes touching box by one corner
 %   2011-07-19 fix a bug for param by Xin KANG (Ben)
 % 
 
-% parse input arguments if any
-if ~isempty(varargin)
-    if length(varargin) == 1
-        if isstruct(varargin{1})
-            % if options are specified as struct, need to convert to 
-            % parameter name-value pairs
-            varargin = [fieldnames(varargin{1}) struct2cell(varargin{1})]';
-            varargin = varargin(:)';
-        else
-            % if option is a single argument, assume it corresponds to 
-            % plane color
-            varargin = {'FaceColor', varargin{1}};
-        end
-    end
-else
-    % default face color
-    varargin = {'FaceColor', 'm'};
-end
+% Parse and check inputs
+valFun = @(x) size(x,1)==1 && isPlane(x);
+defOpts.FaceColor='m';
+[hAx, plane, varargin]=...
+    parseDrawInput(plane, valFun, 'patch', defOpts, varargin{:});
 
 % extract axis bounds to crop plane
-lim = get(gca, 'xlim');
+lim = get(hAx, 'xlim');
 xmin = lim(1);
 xmax = lim(2);
-lim = get(gca, 'ylim');
+lim = get(hAx, 'ylim');
 ymin = lim(1);
 ymax = lim(2);
-lim = get(gca, 'zlim');
+lim = get(hAx, 'zlim');
 zmin = lim(1);
 zmax = lim(2);
-
 
 % create lines corresponding to cube edges
 lineX00 = [xmin ymin zmin 1 0 0];
@@ -78,7 +70,6 @@ lineZ00 = [xmin ymin zmin 0 0 1];
 lineZ01 = [xmin ymax zmin 0 0 1];
 lineZ10 = [xmax ymin zmin 0 0 1];
 lineZ11 = [xmax ymax zmin 0 0 1];
-
 
 % compute intersection points with each plane
 piX00 = intersectLinePlane(lineX00, plane);
@@ -111,6 +102,10 @@ pts = unique(points(valid, :), 'rows');
 % If there is no intersection point, escape.
 if size(pts, 1) < 3
     disp('plane is outside the drawing window');
+    if nargout > 0
+        h=nan;
+        varargout = {h};
+    end
     return;
 end
 
@@ -127,8 +122,10 @@ ind = convhull(u1, u2);
 ind = ind(1:end-1);
 
 % draw the patch
-h = patch('XData', pts(ind, 1), 'YData', pts(ind, 2), 'ZData', pts(ind, 3));
-set(h, varargin{:});
+h = patch(hAx, ...
+    'XData', pts(ind,1), ...
+    'YData', pts(ind,2), ...
+    'ZData', pts(ind,3), varargin{:});
 
 % return handle to plane if needed
 if nargout > 0

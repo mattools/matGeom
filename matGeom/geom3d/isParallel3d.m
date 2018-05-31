@@ -42,4 +42,4 @@ if ~isempty(varargin)
 end
 
 % compute
-b = vectorNorm3d(vectorCross3d(v1, v2)) < tol;
+b = vectorNorm3d(crossProduct3d(v1, v2)) < tol;

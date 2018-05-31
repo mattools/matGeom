@@ -65,9 +65,9 @@ function testFacesOutwards(testCase)
 [v, e, f] = createCube(); %#ok<ASGLU>
 
 centro = centroid(v);
-fc  = faceCentroids(v, f);
+fc  = meshFaceCentroids(v, f);
 fc2 = createVector(centro, fc);
-n   = faceNormal(v, f);
+n   = meshFaceNormals(v, f);
 
 testCase.assertEqual(size(n), size(fc2));
 

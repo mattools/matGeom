@@ -36,9 +36,9 @@
 %   removeMeshFaces          - Remove faces from a mesh by face indices
 %   mergeCoplanarFaces       - Merge coplanar faces of a polyhedral mesh
 %   meshFacePolygons         - Returns the set of polygons that constitutes a mesh
-%   faceCentroids            - Compute centroids of a mesh faces
-%   faceNormal               - Compute normal vector of faces in a 3D mesh
-%   vertexNormal             - Compute normals to a mesh vertices
+%   meshFaceCentroids        - Compute centroids of faces in a mesh
+%   meshFaceNormals          - Compute normal vector of faces in a 3D mesh
+%   meshVertexNormals        - Compute normals to a mesh vertices
 %
 % Intersections and clipping
 %   intersectLineMesh3d      - Intersection points of a 3D line with a mesh
@@ -47,6 +47,8 @@
 %   clipMeshVertices         - Clip vertices of a surfacic mesh and remove outer faces
 %   clipConvexPolyhedronHP   - Clip a convex polyhedron by a plane
 %   cutMeshByPlane           - Cut a mesh by a plane
+%   concatenateMeshes        - Concatenate multiple meshes
+%   splitMesh                - Return the connected components of a mesh
 %
 % Geometric measures on meshes
 %   meshSurfaceArea          - Surface area of a polyhedral mesh
@@ -59,6 +61,8 @@
 %   polyhedronNormalAngle    - Compute normal angle at a vertex of a 3D polyhedron
 %   polyhedronMeanBreadth    - Mean breadth of a convex polyhedron
 %   trimeshMeanBreadth       - Mean breadth of a triangular mesh
+%   isPointInMesh            - Check if a point is inside a 3D mesh
+%   distancePointMesh        - Shortest distance between a (3D) point and a triangle mesh
 %
 % Utility functions
 %   meshFace                 - Return the vertex indices of a face in a mesh
@@ -101,10 +105,11 @@
 %
 % Drawing functions
 %   drawFaceNormals          - Draw normal vector of each face in a mesh
-%   drawMesh                 - Draw a 3D mesh defined by vertices and faces
+%   drawMesh                 - Draw a 3D mesh defined by vertex and face arrays
 %
-% Reading from file
+% I/O functions
 %   readMesh_off             - Read mesh data stord in OFF format
+%   writeMesh_off            - Writes a mesh into a text file in OFF format
 %
 
 % ------
@@ -119,5 +124,7 @@
 % Deprecated:
 
 %   drawPolyhedron           - Draw polyhedron defined by vertices and faces
+%   vertexNormal             - Compute normals to a mesh vertices
 
 % Others
+

@@ -16,7 +16,7 @@ function normals = vertexNormal(vertices, faces)
 %     drawVector3d(v, normals);
 %
 %   See also
-%     meshes3d, faceNormal, triangulateFaces
+%     meshes3d, meshFaceNormals, triangulateFaces
 %
 % ------
 % Author: David Legland
@@ -29,7 +29,7 @@ nv = size(vertices, 1);
 nf = size(faces, 1);
 
 % unit normals to the faces
-faceNormals = normalizeVector3d(faceNormal(vertices, faces));
+faceNormals = normalizeVector3d(meshFaceNormals(vertices, faces));
 
 % compute normal of each vertex: sum of normals to each face
 normals = zeros(nv, 3);

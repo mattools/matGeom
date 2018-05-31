@@ -103,11 +103,13 @@
 %   polygonLength             - Perimeter of a polygon
 %   polygonNormalAngle        - Compute the normal angle at a vertex of the polygon
 %   polygonBounds             - Compute the bounding box of a polygon
+%   polygonOuterNormal        - Outer normal vector for a given vertex(ices)
 %   distancePointPolygon      - Shortest distance between a point and a polygon
 %   distancePolygons          - Compute the shortest distance between 2 polygons
 %   distancePolygonsNoCross   - Compute the shortest distance between 2 polygons
 %   polygonSignature          - Polar signature of a polygon (polar distance to origin)
 %   signatureToPolygon        - Reconstruct a polygon from its polar signature
+%   polygonCurvature          - Estimate curvature on polygon vertices using polynomial fit
 %
 % More complex operations on polygons
 %   resamplePolygon           - Distribute N points equally spaced on a polygon

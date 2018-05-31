@@ -4,11 +4,17 @@ function polyhedra(varargin)
 %   Polyhedra are specific meshes, with additional assumptions:
 %   * the set of faces is assumed to enclose a single 3D domain
 %   * each face has a neighbor face for each edge
-%   * some functions also assume that normals of all faces point ouwards 
+%   * some functions also assume that normals of all faces point outwards 
+%
+%   Most polyhedron creation functions follow the patterns:
+%   * [V, F] = createXXX();     % returns vertex and face arrays
+%   * [V, E, F] = createXXX();  % returns also edge array
+%   * M = createXXX();          % return a data structure with 'vertices',
+%                               % 'edges' and 'faces' fields.
 %
 %   Example
 %   % create a soccer ball mesh and display it
-%   [n e f] = createSoccerBall;
+%   [n, f] = createSoccerBall;
 %   drawMesh(n, f, 'faceColor', 'g', 'linewidth', 2);
 %   axis equal;
 %
@@ -20,10 +26,10 @@ function polyhedra(varargin)
 %   steinerPolytope, minConvexHull
 %   polyhedronNormalAngle, polyhedronMeanBreadth
 %
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 

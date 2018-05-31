@@ -29,6 +29,10 @@ function centroids = faceCentroids(nodes, faces)
 %   HISTORY
 %   2007/09/18 fix: worked only for 2D case, now works also for 3D
 
+% deprecation warning
+warning('geom3d:deprecated', ...
+    [mfilename ' is deprecated, use ''meshFaceCentroids'' instead']);
+
 
 if isnumeric(faces)
     % trimesh or quadmesh

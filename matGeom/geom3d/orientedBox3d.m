@@ -70,7 +70,7 @@ v1n = normalizeVector3d(markers3d(2,:) - centerProj);
 v2n = normalizeVector3d(markers3d(3,:) - centerProj);
 
 % compute rotation matrix and convert to Euler Angles
-v3n = vectorCross3d(v1n, v2n);
+v3n = crossProduct3d(v1n, v2n);
 rotMat = [v1n' v2n' v3n'];
 boxAngles = rotation3dToEulerAngles(rotMat);
 

@@ -12,6 +12,7 @@ function n = vectorNorm3d(v)
 %   See Also
 %   vectors3d, normalizeVector3d, vectorAngle3d, hypot3
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE

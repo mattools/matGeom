@@ -30,3 +30,22 @@ exp = [eye(2) dp' ; 0 0 1];
 
 trans = createBasisTransform(basis1, basis2);
 testCase.assertEqual(exp, trans, 'AbsTol', .01);
+
+
+function test_NonOrthogonalBasis(testCase)
+% Check consistency of transfomating to Non Ortho bases, and back to global
+
+src = [0 0  1 0  0 1];
+tgt = [1 2  3 4  -5 6];
+
+% transform a polygon to TGT basis
+poly = [10 10;30 10; 30 20; 20 20;20 40; 10 40];
+trans = createBasisTransform(src, tgt);
+poly2 = transformPoint(poly, trans);
+
+% transform back to original basis
+trans2 = createBasisTransform(tgt, src);
+poly3 = transformPoint(poly2, trans2);
+
+testCase.assertEqual(poly, poly3, 'AbsTol', .01);
+
