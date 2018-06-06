@@ -16,6 +16,12 @@ function writeMesh_ply(fileName, vertices, faces)
 % Copyright 2018 INRA - Cepia Software Platform.
 
 
+%% Check inputs
+
+if ~ischar(fileName)
+    error('First argument must contain the name of the file');
+end
+
 %% Initializations
 
 % number of vertices and faces
