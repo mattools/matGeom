@@ -33,8 +33,8 @@ function h = drawPoint(varargin)
 %     axis equal;
 %
 %   See also
-%   points2d, clipPoints
-%
+%     points2d, clipPoints
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -58,7 +58,7 @@ else
 end
 
 % extract point(s) coordinates
-if isvector (varargin{1})
+if isvector(varargin{1})
     % points stored in separate arrays
     if ~isnumeric (varargin{2})
       error ('Missing array of y-coordinates');
@@ -68,14 +68,15 @@ if isvector (varargin{1})
     varargin(1:2) = [];
     px = px(:);
     py = py(:);
-elseif size (px, 2) == 2
+    
+elseif size(varargin{1}, 2) == 2
     % points packed in one array
     var = varargin{1};
     px = var(:, 1);
     py = var(:, 2);
     varargin(1) = [];
 else
-  error ('Points should be two 1D arrays or one Nx2 array');
+  error ('Points should be two 1D arrays or one N-by-2 array');
 end
 
 if ~isempty (varargin)
@@ -84,7 +85,7 @@ if ~isempty (varargin)
         'UniformOutput', false);
     tf = ismember ('linestyle', char_opt);
     if tf
-      error ('Points cannot be draw with lines, use plot or drawPolygon instead');
+        error ('Points cannot be draw with lines, use plot or drawPolygon instead');
     end
     h = plot (ax, px, py, 'marker', 'o', 'linestyle', 'none', varargin{:});
 else
