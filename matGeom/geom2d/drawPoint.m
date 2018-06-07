@@ -79,15 +79,20 @@ else
   error ('Points should be two 1D arrays or one N-by-2 array');
 end
 
-if ~isempty (varargin)
+if length(varargin) > 1
     % Check if linestyle is given
-    char_opt = cellfun (@tolower, varargin(cellfun (@ischar, varargin)), ...
+    char_opt = cellfun (@lower, varargin(cellfun (@ischar, varargin)), ...
         'UniformOutput', false);
     tf = ismember ('linestyle', char_opt);
     if tf
         error ('Points cannot be draw with lines, use plot or drawPolygon instead');
     end
     h = plot (ax, px, py, 'marker', 'o', 'linestyle', 'none', varargin{:});
+    
+elseif length(varargin) == 1
+    % use the specified single option (for example: 'b.', or 'k+')
+    h = plot (ax, px, py, varargin{1});
 else
+    % use a default marker
     h = plot (ax, px, py, 'o');
 end
