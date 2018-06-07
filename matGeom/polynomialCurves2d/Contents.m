@@ -1,5 +1,5 @@
 % POLYNOMIALCURVES2D Planar Polynomial Curves
-% Version 1.0 21-Mar-2011 .
+% Version 1.24 07-Jun-2018 .
 %
 % POLYNOMIALCURVES2D Manipulation of planar smooth curves
 %   Polynomial curves are plane curves whose points are defined by a

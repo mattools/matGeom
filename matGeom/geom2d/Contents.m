@@ -1,5 +1,5 @@
 % GEOM2D Geometry 2D Toolbox
-% Version 1.0 21-Mar-2011 .
+% Version 1.24 07-Jun-2018 .
 %
 % 	Library to handle and visualize geometric primitives such as points,
 % 	lines, circles and ellipses, polygons...
