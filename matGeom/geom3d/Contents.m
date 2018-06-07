@@ -1,5 +1,5 @@
 % GEOM3D Geometry 3D Toolbox
-% Version 1.0 21-Mar-2011 .
+% Version 1.22 06-Jun-2018 .
 %
 %   Creation, transformations, algorithms and visualization of geometrical
 %   3D primitives, such as points, lines, planes, polyhedra, circles and

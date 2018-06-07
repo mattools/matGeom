@@ -1,7 +1,7 @@
 % MESHES3D 3D Surface Meshes
-% Version 1.0 21-Mar-2011 .
+% Version 1.22 06-Jun-2018 .
 %
-%   Creation, vizualization, and manipulation of 3D surface meshes or
+%   Creation, visualization, and manipulation of 3D surface meshes or
 %   polyhedra.
 %
 %   Meshes and Polyhedra are represented by a couple of variables {V, F}:
@@ -108,8 +108,10 @@
 %   drawMesh                 - Draw a 3D mesh defined by vertex and face arrays
 %
 % I/O functions
-%   readMesh_off             - Read mesh data stord in OFF format
+%   readMesh_off             - Read mesh data stored in OFF format
+%   readMesh_ply             - Read mesh data stored in PLY (Stanford triangle) format
 %   writeMesh_off            - Writes a mesh into a text file in OFF format
+%   writeMesh_ply            - Writes a mesh into a text file in PLY format
 %
 
 % ------
