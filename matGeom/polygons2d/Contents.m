@@ -68,15 +68,16 @@
 %   removeMultipleVertices    - Remove multiple vertices of a polygon or polyline
 %
 % Polygon basic manipulation
-%   polygonPoint              - Extract a point from a polygon
-%   polygonSubcurve           - Extract a portion of a polygon
-%   polygonEdges              - Return the edges of a simple or multiple polygon
 %   reversePolygon            - Reverse a polygon, by iterating vertices from the end
 %   smoothPolygon             - Smooth a polygon using local averaging
 %   simplifyPolygon           - Douglas-Peucker simplification of a polygon
 %   projPointOnPolygon        - Compute position of a point projected on a polygon
 %   splitPolygons             - Convert a NaN separated polygon list to a cell array of polygons
 %   polygonLoops              - Divide a possibly self-intersecting polygon into a set of simple loops
+%   polygonPoint              - Extract a point from a polygon
+%   polygonSubcurve           - Extract a portion of a polygon
+%   polygonEdges              - Return the edges of a simple or multiple polygon
+%   polygonVertices           - Extract all vertices of a (multi-)polygon
 %
 % Polygon clipping and intersections
 %   intersectLinePolygon      - Intersection points between a line and a polygon
