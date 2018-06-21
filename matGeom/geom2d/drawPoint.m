@@ -36,13 +36,13 @@ function h = drawPoint(varargin)
 %     points2d, clipPoints
 
 %   ---------
-%   author : David Legland 
+%   author : David Legland
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 31/10/2003.
 %
 
 %   HISTORY
-%   23/02/2004 add more documentation. Manage different kind of inputs. 
+%   23/02/2004 add more documentation. Manage different kind of inputs.
 %     Does not draw points outside visible area.
 %   26/02/2007 update processing of input arguments.
 %   30/04/2009 remove clipping of points (use clipPoints if necessary)
@@ -60,8 +60,8 @@ end
 % extract point(s) coordinates
 if isvector(varargin{1})
     % points stored in separate arrays
-    if ~isnumeric (varargin{2})
-      error ('Missing array of y-coordinates');
+    if ~isnumeric(varargin{2})
+        error('Missing array of y-coordinates');
     end
     px = varargin{1};
     py = varargin{2};
@@ -76,23 +76,29 @@ elseif size(varargin{1}, 2) == 2
     py = var(:, 2);
     varargin(1) = [];
 else
-  error ('Points should be two 1D arrays or one N-by-2 array');
+    error('Points should be two 1D arrays or one N-by-2 array');
 end
 
 if length(varargin) > 1
     % Check if linestyle is given
-    char_opt = cellfun (@lower, varargin(cellfun (@ischar, varargin)), ...
+    char_opt = cellfun(@lower, varargin(cellfun(@ischar, varargin)), ...
         'UniformOutput', false);
-    tf = ismember ('linestyle', char_opt);
+    tf = ismember('linestyle', char_opt);
     if tf
-        error ('Points cannot be draw with lines, use plot or drawPolygon instead');
+        error('Points cannot be draw with lines, use plot or drawPolygon instead');
     end
-    h = plot (ax, px, py, 'marker', 'o', 'linestyle', 'none', varargin{:});
+    hh = plot(ax, px, py, 'marker', 'o', 'linestyle', 'none', varargin{:});
     
 elseif length(varargin) == 1
     % use the specified single option (for example: 'b.', or 'k+')
-    h = plot (ax, px, py, varargin{1});
+    hh = plot(ax, px, py, varargin{1});
 else
     % use a default marker
-    h = plot (ax, px, py, 'o');
+    hh = plot(ax, px, py, 'o');
+end
+
+if nargout == 1
+    h = hh;
+end
+
 end
