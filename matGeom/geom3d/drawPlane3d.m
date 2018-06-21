@@ -120,7 +120,13 @@ ind = convhull(u1, u2);
 ind = ind(1:end-1);
 
 % draw the patch
-h = patch(hAx, ...
+htmp = patch(hAx, ...
     'XData', pts(ind,1), ...
     'YData', pts(ind,2), ...
     'ZData', pts(ind,3), varargin{:});
+
+% Do not return axis if not requested
+% avoids output when called without semicolon
+if (nargout > 0)
+    h = htmp;
+endif
