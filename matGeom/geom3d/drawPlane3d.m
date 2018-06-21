@@ -129,4 +129,4 @@ htmp = patch(hAx, ...
 % avoids output when called without semicolon
 if (nargout > 0)
     h = htmp;
-endif
+end
