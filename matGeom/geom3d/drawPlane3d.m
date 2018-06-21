@@ -103,7 +103,9 @@ pts = unique(points(valid, :), 'rows');
 % If there is no intersection point, escape.
 if size(pts, 1) < 3
     disp('plane is outside the drawing window');
-    h = [];
+    if nargout > 0
+        h = [];
+    end
     return;
 end
 
@@ -127,6 +129,6 @@ htmp = patch(hAx, ...
 
 % Do not return axis if not requested
 % avoids output when called without semicolon
-if (nargout > 0)
+if nargout > 0
     h = htmp;
-endif
+end
