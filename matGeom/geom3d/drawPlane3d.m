@@ -1,21 +1,19 @@
-function varargout = drawPlane3d(plane, varargin)
-%DRAWPLANE3D Draw a plane clipped by the current axes
+function h = drawPlane3d(plane, varargin)
+%DRAWPLANE3D Draw a plane clipped in the current axes
 %
 %   drawPlane3d(PLANE) draws a plane of the format:
 %       [x0 y0 z0  dx1 dy1 dz1  dx2 dy2 dz2]
 %
 %   drawPlane3d(...,'PropertyName',PropertyValue,...) sets the value of the
 %   specified patch property. Multiple property values can be set with
-%   a single statement.
+%   a single statement. See function patch for details.
 %
 %   drawPlane3d(AX,...) plots into AX instead of GCA.
 %
 %   H = drawPlane3d(...) returns a handle H to the patch object.
 %
-%   See also
-%   planes3d, createPlane
-%
 %   Example
+%
 %     p0 = [1 2 3];
 %     v1 = [1 0 1];
 %     v2 = [0 -1 1];
@@ -26,6 +24,9 @@ function varargout = drawPlane3d(plane, varargin)
 %     drawLine3d([p0 v2])
 %     set(gcf, 'renderer', 'zbuffer');
 %
+%   See also
+%   planes3d, createPlane, patch
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
@@ -92,7 +93,7 @@ points = [...
     piZ00;piZ01;piZ10;piZ11;];
 
 % check validity: keep only points inside window (with tolerance)
-ac = 1e-14;
+ac = sqrt (eps);
 ivx = points(:,1) >= xmin-ac & points(:,1) <= xmax+ac;
 ivy = points(:,2) >= ymin-ac & points(:,2) <= ymax+ac;
 ivz = points(:,3) >= zmin-ac & points(:,3) <= zmax+ac;
@@ -103,8 +104,7 @@ pts = unique(points(valid, :), 'rows');
 if size(pts, 1) < 3
     disp('plane is outside the drawing window');
     if nargout > 0
-        h=nan;
-        varargout = {h};
+        h = [];
     end
     return;
 end
@@ -122,12 +122,13 @@ ind = convhull(u1, u2);
 ind = ind(1:end-1);
 
 % draw the patch
-h = patch(hAx, ...
+htmp = patch(hAx, ...
     'XData', pts(ind,1), ...
     'YData', pts(ind,2), ...
     'ZData', pts(ind,3), varargin{:});
 
-% return handle to plane if needed
+% Do not return axis if not requested
+% avoids output when called without semicolon
 if nargout > 0
-    varargout = {h};
+    h = htmp;
 end

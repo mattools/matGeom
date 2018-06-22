@@ -87,12 +87,16 @@ if length(varargin) > 1
     if tf
         error ('Points cannot be draw with lines, use plot or drawPolygon instead');
     end
-    h = plot (ax, px, py, 'marker', 'o', 'linestyle', 'none', varargin{:});
+    htmp = plot (ax, px, py, 'marker', 'o', 'linestyle', 'none', varargin{:});
     
 elseif length(varargin) == 1
     % use the specified single option (for example: 'b.', or 'k+')
-    h = plot (ax, px, py, varargin{1});
+    htmp = plot (ax, px, py, varargin{1});
 else
     % use a default marker
-    h = plot (ax, px, py, 'o');
+    htmp = plot (ax, px, py, 'o');
+end
+
+if nargout > 0
+    h = htmp;
 end
