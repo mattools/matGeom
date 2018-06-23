@@ -18,7 +18,7 @@ function edges = polygonEdges(poly)
 %         50    20    50    10
 %
 %   See also
-%     polygons2d
+%     polygons2d, polygonVertices
  
 % ------
 % Author: David Legland

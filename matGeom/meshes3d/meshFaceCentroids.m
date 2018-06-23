@@ -8,16 +8,16 @@ function centroids = meshFaceCentroids(varargin)
 %   containing their coordinates.
 %
 %   Example
-%     [v e f] = createIcosahedron;
+%     [v, e, f] = createIcosahedron;
 %     normals1 = meshFaceNormals(v, f);
 %     centros1 = meshFaceCentroids(v, f);
-%     figure; drawMesh(v, f); 
-%     hold on; axis equal; view(3);
+%     figure; hold on; axis equal; view(3);
+%     drawMesh(v, f); 
 %     drawVector3d(centros1, normals1);
 %
 %
 %   See also:
-%   meshes3d, drawMesh, meshFaceNormals, convhull, convhulln
+%     meshes3d, drawMesh, meshFaceNormals, meshFaceAreas, convhull
 %
 
 % ------
@@ -28,7 +28,7 @@ function centroids = meshFaceCentroids(varargin)
 
 % HISTORY
 % 2007-09-18 fix: worked only for 2D case, now works also for 3D
-% 2011-11-24 rename from faceCentroids to meshFaceCentroids
+% 2017-11-24 rename from faceCentroids to meshFaceCentroids
 
 % parse input data
 [vertices, faces] = parseMeshData(varargin{:});
