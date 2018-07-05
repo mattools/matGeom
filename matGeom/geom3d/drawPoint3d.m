@@ -1,4 +1,4 @@
-function varargout = drawPoint3d(varargin)
+function h = drawPoint3d(varargin)
 %DRAWPOINT3D Draw 3D point on the current axis.
 %
 %   drawPoint3d(X, Y, Z) 
@@ -14,9 +14,18 @@ function varargout = drawPoint3d(varargin)
 %
 %   H = drawPoint3d(...) returns a handle H to the line object
 %
-%   See also
-%   points3d, clipPoints3d
+%   Example
+%     % generate points on a 3D circle
+%     pts = circleToPolygon([40 30 20], 120);
+%     mat = eulerAnglesToRotation3d([30 20 10]);
+%     pts3d = transformPoint3d([pts zeros(120,1)],mat);
+%     figure; drawPoint3d(pts3d, 'b.');
+%     view(3); axis equal;
 %
+%   See also
+%     points3d, clipPoints3d, drawPoint
+%
+
 % ---------
 % Author : David Legland 
 % INRA - TPV URPOI - BIA IMASTE
@@ -37,30 +46,32 @@ else
 end
 
 var = varargin{1};
-if size(var, 2)==3
+if size(var, 2) == 3
     % points are given as one single array with 3 columns
     px = var(:, 1);
     py = var(:, 2);
     pz = var(:, 3);
     varargin = varargin(2:end);
-elseif length(varargin)<3
-    error('wrong number of arguments in drawPoint3d');
-else
-    % points are given as 3 columns with equal length
+    
+elseif length(varargin) > 3
+    % points are given as 3 columns with equal lengths
     px = varargin{1};
     py = varargin{2};
     pz = varargin{3};
     varargin = varargin(4:end);
+    
+else
+    error('wrong number of arguments in drawPoint3d');
 end
 
 % default draw style: no line, marker is 'o'
-if length(varargin)~=1
+if length(varargin) ~= 1
     varargin = ['linestyle', 'none', 'marker', 'o', varargin];
 end
 
 % plot only points inside the axis.
-h = plot3(hAx, px, py, pz, varargin{:});
+hh = plot3(hAx, px, py, pz, varargin{:});
 
-if nargout>0
-    varargout{1} = h;
+if nargout > 0
+    h = hh;
 end

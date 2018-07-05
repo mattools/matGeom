@@ -41,8 +41,8 @@ function h = drawPlane3d(plane, varargin)
 
 % Parse and check inputs
 valFun = @(x) size(x,1)==1 && isPlane(x);
-defOpts.FaceColor='m';
-[hAx, plane, varargin]=...
+defOpts.FaceColor = 'm';
+[hAx, plane, varargin] = ...
     parseDrawInput(plane, valFun, 'patch', defOpts, varargin{:});
 
 % extract axis bounds to crop plane
