@@ -17,8 +17,7 @@ function [hAx, prim, varargin]=parseDrawInput(prim,valFun,type,defOpts,varargin)
 % Copyright 2017
 
 % Check if first input argument is an axes handle
-% (Could be replaced by undocumented: axescheck)
-if numel(prim) == 1 && ishandle(prim)
+if isAxisHandle(prim)
     hAx = prim;
     prim = varargin{1};
     varargin(1) = [];
