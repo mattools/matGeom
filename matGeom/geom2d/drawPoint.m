@@ -29,7 +29,7 @@ function h = drawPoint(varargin)
 %
 %     % display several points forming a circle
 %     t = linspace(0, 2*pi, 20)';
-%     drawPoint([5*cos(t)+10 3*sin(t)+10], 'r', 'marker', '+');
+%     drawPoint([5*cos(t)+10 3*sin(t)+10], 'r+');
 %     axis equal;
 %
 %   See also
@@ -58,9 +58,16 @@ else
 end
 
 % extract point(s) coordinates
-if isvector(varargin{1})
+if size(varargin{1}, 2) == 2
+    % points packed in one array
+    var = varargin{1};
+    px = var(:, 1);
+    py = var(:, 2);
+    varargin(1) = [];
+    
+elseif isvector(varargin{1})
     % points stored in separate arrays
-    if ~isnumeric(varargin{2})
+    if nargin == 1 || ~isnumeric(varargin{2})
         error('Missing array of y-coordinates');
     end
     px = varargin{1};
@@ -69,12 +76,6 @@ if isvector(varargin{1})
     px = px(:);
     py = py(:);
     
-elseif size(varargin{1}, 2) == 2
-    % points packed in one array
-    var = varargin{1};
-    px = var(:, 1);
-    py = var(:, 2);
-    varargin(1) = [];
 else
     error('Points should be two 1D arrays or one N-by-2 array');
 end
