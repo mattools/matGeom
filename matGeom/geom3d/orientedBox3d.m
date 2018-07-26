@@ -52,7 +52,7 @@ box2d = orientedBox(pts2d);
 center2d = box2d(1:2);
 L1 = box2d(3);
 L2 = box2d(4);
-markers2d = [center2d; L1/2 0; 0 L2/2];
+markers2d = [0 0; L1/2 0; 0 L2/2];
 
 % orient reference points to 2d basis
 theta2d = box2d(5);
