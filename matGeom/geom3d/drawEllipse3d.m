@@ -23,9 +23,19 @@ function varargout = drawEllipse3d(varargin)
 %   H = drawEllipse3d(...)
 %   return handle on the created LINE object
 %   
+%   Example
+%     figure; axis([-10 10 -10 10 -10 10]); hold on;
+%     ellXY = [0 0 0  8 5  0 0 0];
+%     drawEllipse3d(ellXY, 'color', [.8 0 0], 'linewidth', 2)
+%     ellXZ = [0 0 0  8 2  90 90 90];
+%     drawEllipse3d(ellXZ, 'color', [0 .8 0], 'linewidth', 2)
+%     ellYZ = [0 0 0  5 2  90 0 90];
+%     drawEllipse3d(ellYZ, 'color', [0 0 .8], 'linewidth', 2)
+% 
+ 
 %   ------
 %   Author: David Legland
-%   e-mail: david.legland@grignon.inra.fr
+%   e-mail: david.legland@inra.fr
 %   Created: 2008-05-07
 %   Copyright 2008 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
