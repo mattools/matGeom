@@ -46,8 +46,11 @@ PKG_ADD     := $(shell $(GREP) -sPho '(?<=(//|\#\#) PKG_ADD: ).*' \
                          __matgeom_package_register__.m)
 
 ## Folders to be packages
+ORIG_FOLDER = ../matGeom
 INST_FOLDER = $(RELEASE_DIR)/inst
-PKG_FOLDERS = geom3d polygons2d geom2d meshes3d utils graphs polynomialCurves2d
+PKG_FOLDERS = $(ORIG_FOLDER)/geom3d $(ORIG_FOLDER)/polygons2d $(ORIG_FOLDER)/geom2d \
+              $(ORIG_FOLDER)/meshes3d $(ORIG_FOLDER)/utils $(ORIG_FOLDER)/graphs \
+              $(ORIG_FOLDER)/polynomialCurves2d
 SHADOWING = $(INST_FOLDER)/geom2d/deg2rad.m $(INST_FOLDER)/geom2d/rad2deg.m
 
 ## Targets that are not filenames.
@@ -86,7 +89,7 @@ html: $(HTML_TARBALL)
 # Create the unpacked package.
 #
 # Notes:
-#    * having ".hg/dirstate" as a prerequesite means it is only rebuilt
+#    * having ".git/index" as a prerequesite means it is only rebuilt
 #      if we are at a different commit.
 #    * the variable RM usually defaults to "rm -f"
 #    * having this recipe separate from the one that makes the tarball
@@ -107,7 +110,7 @@ $(RELEASE_DIR): ../.git/index
 	./index.sh "$@" > "$@/INDEX"
 	@echo
 	@echo "Creating Copyright files ..."
-	cp "license.txt" "$@/COPYING"
+	cp "$(ORIG_FOLDER)/license.txt" "$@/COPYING"
 	@echo
 	chmod -R a+rX,u+w,go-w $@
 
