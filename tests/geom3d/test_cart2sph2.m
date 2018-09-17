@@ -1,4 +1,4 @@
-function test_suite = test_cart2sph2(varargin) %#ok<STOUT>
+function test_suite = test_cart2sph2
 %TEST_CART2SPH2  One-line description here, please.
 %
 %   output = test_cart2sph2(input)
@@ -15,51 +15,49 @@ function test_suite = test_cart2sph2(varargin) %#ok<STOUT>
 % Created: 2011-06-29,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testNorthPole %#ok<*DEFNU>
+function testNorthPole(testCase) %#ok<*DEFNU>
 
 [theta, phi, rho] = cart2sph2(0, 0, 1);
-assertElementsAlmostEqual(0, theta);
-assertElementsAlmostEqual(0, phi);
-assertElementsAlmostEqual(1, rho);
+testCase.assertEqual(0, theta);
+testCase.assertEqual(0, phi);
+testCase.assertEqual(1, rho);
 
-function testPointOx
+function testPointOx(testCase)
 
 [theta, phi, rho] = cart2sph2(10, 0, 0);
-assertElementsAlmostEqual(pi/2, theta);
-assertElementsAlmostEqual(0, phi);
-assertElementsAlmostEqual(10, rho);
+testCase.assertEqual(pi/2, theta);
+testCase.assertEqual(0, phi);
+testCase.assertEqual(10, rho);
 
-function testPointXY
+function testPointXY(testCase)
 
 [theta, phi, rho] = cart2sph2(10, 10, 0);
-assertElementsAlmostEqual(pi/2, theta);
-assertElementsAlmostEqual(pi/4, phi);
-assertElementsAlmostEqual(10*sqrt(2), rho);
+testCase.assertEqual(pi/2, theta);
+testCase.assertEqual(pi/4, phi);
+testCase.assertEqual(10*sqrt(2), rho);
 
-
-
-function testSingleInput
+function testSingleInput(testCase)
 
 [theta, phi, rho] = cart2sph2([0, 0, 1]);
-assertElementsAlmostEqual(0, theta);
-assertElementsAlmostEqual(0, phi);
-assertElementsAlmostEqual(1, rho);
+testCase.assertEqual(0, theta);
+testCase.assertEqual(0, phi);
+testCase.assertEqual(1, rho);
 
-function testSingleOutput
+function testSingleOutput(testCase)
 
 res = cart2sph2([0, 0, 1]);
-assertElementsAlmostEqual(0, res(1));
-assertElementsAlmostEqual(0, res(2));
-assertElementsAlmostEqual(1, res(3));
+testCase.assertEqual(0, res(1));
+testCase.assertEqual(0, res(2));
+testCase.assertEqual(1, res(3));
 
 
-function testManyPoints
+function testManyPoints(testCase)
 
 pts = [10 0 0;0 10 0;10 10 0;10 0 10;0 10 10;10 10 10];
 
 [theta, phi, rho] = cart2sph2(pts);
 pts2 = sph2cart2(theta, phi, rho);
 
-assertElementsAlmostEqual(pts2, pts);
+testCase.assertEqual(pts2, pts, 'AbsTol', .0001);

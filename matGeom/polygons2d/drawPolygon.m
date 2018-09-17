@@ -1,4 +1,4 @@
-function varargout = drawPolygon(varargin)
+function varargout = drawPolygon (px, varargin)
 %DRAWPOLYGON Draw a polygon specified by a list of points
 %
 %   drawPolygon(POLY);
@@ -35,8 +35,8 @@ function varargout = drawPolygon(varargin)
 %     axis equal; axis([0 50 0 50]); 
 % 
 %   See also:
-%   polygons2d, drawCurve
-%
+%   polygons2d, drawPolyline
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -46,95 +46,94 @@ function varargout = drawPolygon(varargin)
 %   HISTORY
 %   2008/10/15 manage polygons with holes
 %   2011-10-11 add management of axes handle
+%   2016-05-26 Juanpi Carbajal reorgnaized the function for readability and
+%              removed unnecessary variable arguemnts
 
-% check input
-if isempty(varargin)
-    error('need to specify a polygon');
+% Store hold state
+state = ishold (gca);
+hold on;
+
+
+%% Check input
+if nargin < 1
+    error ('should specify at least one argument');
+end
+
+% check for empty polygons
+if isempty (px)
+    return
 end
 
 % extract handle of axis to draw on
-if isAxisHandle(varargin{1})
-    ax = varargin{1};
+ax = gca;
+if isAxisHandle (px)
+    ax          = px;
+    px          = varargin{1};
     varargin(1) = [];
-else
-    ax = gca;
 end
 
-var = varargin{1};
 
 %% Manage cell arrays of polygons
 
 % case of a set of polygons stored in a cell array
-if iscell(var)
-    N = length(var);
-    h = zeros(N, 1);
-    for i = 1:N
-        state = ishold(gca);
-        hold on;
-        % check for empty polygons
-        if ~isempty(var{i})
-            h(i) = drawPolygon(ax, var{i}, varargin{2:end});
-        end
-        if ~state
-            hold off
-        end
-    end
-
-    if nargout > 0
-        varargout = {h};
-    end
-
-    return;
-end
-
-
-%% Parse coordinates and options
-
-% Extract coordinates of polygon vertices
-if size(var, 2) > 1
-    % first argument is a polygon array
-    px = var(:, 1);
-    py = var(:, 2);
-    varargin(1) = [];
+if iscell (px)
+    h   = cellfun (@(x)drawPolygon (ax, x, varargin{:}), px, 'UniformOutput', 0);
+    h   = horzcat (h{:});
+    
 else
-    % arguments 1 and 2 correspond to x and y coordinate respectively
-    if length(varargin) < 2
-        error('Should specify either a N-by-2 array, or 2 N-by-1 vectors');
+    % Check size vs number of arguments
+    if size (px, 2) == 1
+        if nargin < 2 || nargin == 2 && ~isnumeric(varargin{1})
+            error('Matgeom:invalid-input-arg', ...
+                'Should specify either a N-by-2 array, or 2 N-by-1 vectors'); %#ok<CTPCT>
+        end
+        
+        % Extract coordinates of polygon vertices
+        py          = varargin{1};
+        varargin(1) = [];
+        
+        if length (py) ~= length (px)
+            error ('Matgeom:invalid-input-arg', ...
+                'X and Y coordinates should have same numebr of rows (%d,%d)', ...
+                length (px), length (px)) %#ok<CTPCT>
+        end
+        
+    elseif size (px, 2) == 2
+        py = px(:, 2);
+        px = px(:, 1);
+        
+    else
+        error ('Matgeom:invalid-input-arg', 'Should specify a N-by-2 array'); %#ok<CTPCT>
     end
     
-    px = varargin{1};
-    py = varargin{2};
-    varargin(1:2) = [];
-end    
-
-% set default line format
-if isempty(varargin)
-    varargin = {'b-'};
-end
-
-% check case of polygons with holes
-if any(isnan(px(:)))
-    polygons = splitPolygons([px py]);
-    h = drawPolygon(ax, polygons, varargin{:});
-
-    if nargout > 0
-        varargout = {h};
+    % set default line format
+    if isempty (varargin)
+        varargin = {'b-'};
     end
+   
+    % Check case of polygons with holes
+    if any (isnan (px(:)) )
+        polygons = splitPolygons ([px py]);
+        h        = drawPolygon (ax, polygons, varargin{:});
+        
+    else
+        % ensure last point is the same as the first one
+        px(end+1, :) = px(1,:);
+        py(end+1, :) = py(1,:);
 
-    return;
+        % draw the polygon outline
+        h = plot(ax, px, py, varargin{:});
+        
+    end % whether there where holes
+    
+end % whether input arg was a cell
+
+if ~state
+    hold off
 end
 
 
-%% Draw the polygon
-
-% ensure last point is the same as the first one
-px(size(px, 1)+1, :) = px(1,:);
-py(size(py, 1)+1, :) = py(1,:);
-
-% draw the polygon outline
-h = plot(ax, px, py, varargin{:});
-
-% format output arg
+% avoid returning argument if not required
 if nargout > 0
     varargout = {h};
 end

@@ -1,4 +1,4 @@
-function test_suite = test_grFindGeodesicPath(varargin) %#ok<STOUT>
+function test_suite = test_grFindGeodesicPath
 %TEST_GRFINDGEODESICPATH  One-line description here, please.
 %
 %   output = test_grFindGeodesicPath(input)
@@ -16,18 +16,18 @@ function test_suite = test_grFindGeodesicPath(varargin) %#ok<STOUT>
 % Copyright 2011 INRA - Cepia Software Platform.
 
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testGraph01 %#ok<*DEFNU>
+function testGraph01(testCase) %#ok<*DEFNU>
 
 [nodes, edges] = createTestGraph01;
 path = grFindGeodesicPath(nodes, edges, 3, 8);
 exp = [4 1 3 10];
-assertEqual(exp, path);
+testCase.assertEqual(exp, path);
 
-function testGraph03
+function testGraph03(testCase)
 
 [nodes, edges] = createTestGraph03;
 path = grFindGeodesicPath(nodes, edges, 1, 12);
 exp = [1 2 5 7 11 13];
-assertEqual(exp, path);
+testCase.assertEqual(exp, path);

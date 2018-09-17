@@ -24,8 +24,8 @@ function varargout = drawRect(rect, varargin)
 %   See Also:
 %   drawOrientedBox, drawBox, rectToPolygon
 %
+
 %   ---------
-%
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 10/12/2003.

@@ -1,4 +1,4 @@
-function test_suite = test_distancePoints(varargin) %#ok<STOUT>
+function test_suite = test_distancePoints
 %TESTDISTANCEPOINTS  One-line description here, please.
 %   output = test_distancePoints(input)
 %
@@ -15,53 +15,53 @@ function test_suite = test_distancePoints(varargin) %#ok<STOUT>
 % Copyright 2009 INRA - Cepia Software Platform.
 % Licensed under the terms of the LGPL, see the file "license.txt"
 
-initTestSuite;
+test_suite = functiontests(localfunctions);
 
-function testSingleSingle %#ok<*DEFNU>
+function testSingleSingle(testCase) %#ok<*DEFNU>
 
 pt1 = [10 10];
 pt2 = [10 20];
 pt3 = [20 20];
 
-assertElementsAlmostEqual(distancePoints(pt1, pt2), 10);
-assertElementsAlmostEqual(distancePoints(pt2, pt3), 10);
-assertElementsAlmostEqual(distancePoints(pt1, pt3), 10*sqrt(2));
+testCase.assertEqual(distancePoints(pt1, pt2), 10, 'AbsTol', .01);
+testCase.assertEqual(distancePoints(pt2, pt3), 10, 'AbsTol', .01);
+testCase.assertEqual(distancePoints(pt1, pt3), 10*sqrt(2), 'AbsTol', .01);
 
-function testSingleSingleNorm1
+function testSingleSingleNorm1(testCase)
 % test norm 1, equivalent to sum of absolute differences
 
 pt1 = [10 10];
 pt2 = [10 20];
 pt3 = [20 20];
 
-assertElementsAlmostEqual(distancePoints(pt1, pt2, 1), 10);
-assertElementsAlmostEqual(distancePoints(pt2, pt3, 1), 10);
-assertElementsAlmostEqual(distancePoints(pt1, pt3, 1), 20);
+testCase.assertEqual(distancePoints(pt1, pt2, 1), 10, 'AbsTol', .01);
+testCase.assertEqual(distancePoints(pt2, pt3, 1), 10, 'AbsTol', .01);
+testCase.assertEqual(distancePoints(pt1, pt3, 1), 20, 'AbsTol', .01);
 
-function testSingleSingleMaxNorm
+function testSingleSingleMaxNorm(testCase)
 
 pt1 = [10 10];
 pt2 = [10 20];
 pt3 = [20 20];
 
-assertElementsAlmostEqual(distancePoints(pt1, pt2, inf), 10);
-assertElementsAlmostEqual(distancePoints(pt2, pt3, inf), 10);
-assertElementsAlmostEqual(distancePoints(pt1, pt3, inf), 10);
+testCase.assertEqual(distancePoints(pt1, pt2, inf), 10, 'AbsTol', .01);
+testCase.assertEqual(distancePoints(pt2, pt3, inf), 10, 'AbsTol', .01);
+testCase.assertEqual(distancePoints(pt1, pt3, inf), 10, 'AbsTol', .01);
 
-function testSingleSingle3d
+function testSingleSingle3d(testCase)
 
 pt1 = [10 10 10];
 pt2 = [10 20 10];
 pt3 = [20 20 10];
 pt4 = [20 20 20];
 
-assertElementsAlmostEqual(distancePoints(pt1, pt2), 10);
-assertElementsAlmostEqual(distancePoints(pt2, pt3), 10);
-assertElementsAlmostEqual(distancePoints(pt1, pt3), 10*sqrt(2));
-assertElementsAlmostEqual(distancePoints(pt1, pt4), 10*sqrt(3));
+testCase.assertEqual(distancePoints(pt1, pt2), 10, 'AbsTol', .01);
+testCase.assertEqual(distancePoints(pt2, pt3), 10, 'AbsTol', .01);
+testCase.assertEqual(distancePoints(pt1, pt3), 10*sqrt(2), 'AbsTol', .01);
+testCase.assertEqual(distancePoints(pt1, pt4), 10*sqrt(3), 'AbsTol', .01);
 
 
-function testSingleSingle3dNorm1
+function testSingleSingle3dNorm1(testCase)
 % test norm 1, equivalent to sum of absolute differences
 
 pt1 = [10 10 30];
@@ -69,34 +69,34 @@ pt2 = [10 20 30];
 pt3 = [20 20 30];
 pt4 = [20 20 40];
 
-assertElementsAlmostEqual(distancePoints(pt1, pt2, 1), 10);
-assertElementsAlmostEqual(distancePoints(pt2, pt3, 1), 10);
-assertElementsAlmostEqual(distancePoints(pt1, pt3, 1), 20);
-assertElementsAlmostEqual(distancePoints(pt1, pt4, 1), 30);
+testCase.assertEqual(distancePoints(pt1, pt2, 1), 10, 'AbsTol', .01);
+testCase.assertEqual(distancePoints(pt2, pt3, 1), 10, 'AbsTol', .01);
+testCase.assertEqual(distancePoints(pt1, pt3, 1), 20, 'AbsTol', .01);
+testCase.assertEqual(distancePoints(pt1, pt4, 1), 30, 'AbsTol', .01);
 
-function testSingleSingleMaxNorm3d
+function testSingleSingleMaxNorm3d(testCase)
 
 pt1 = [10 10 10];
 pt2 = [10 20 10];
 pt3 = [20 20 10];
 pt4 = [20 20 20];
 
-assertElementsAlmostEqual(distancePoints(pt1, pt2, inf), 10);
-assertElementsAlmostEqual(distancePoints(pt2, pt3, inf), 10);
-assertElementsAlmostEqual(distancePoints(pt1, pt3, inf), 10);
-assertElementsAlmostEqual(distancePoints(pt1, pt4, inf), 10);
+testCase.assertEqual(distancePoints(pt1, pt2, inf), 10, 'AbsTol', .01);
+testCase.assertEqual(distancePoints(pt2, pt3, inf), 10, 'AbsTol', .01);
+testCase.assertEqual(distancePoints(pt1, pt3, inf), 10, 'AbsTol', .01);
+testCase.assertEqual(distancePoints(pt1, pt4, inf), 10, 'AbsTol', .01);
 
-function testSingleArray
+function testSingleArray(testCase)
 
 pt1 = [10 10];
 pt2 = [10 20];
 pt3 = [20 20];
 
-assertElementsAlmostEqual(...
+testCase.assertEqual(...
     distancePoints(pt1, [pt1; pt2; pt3]), ...
-    [0 10 10*sqrt(2)]);
+    [0 10 10*sqrt(2)], 'AbsTol', .01);
 
-function testArrayArray
+function testArrayArray(testCase)
 
 pt1 = [10 10];
 pt2 = [10 20];
@@ -110,9 +110,9 @@ res = [...
     10 0 10 10*sqrt(2);...
     10*sqrt(2) 10 0 10];
     
-assertElementsAlmostEqual(distancePoints(array1, array2), res);
+testCase.assertEqual(distancePoints(array1, array2), res, 'AbsTol', .01);
 
-function testArrayArrayDiag
+function testArrayArrayDiag(testCase)
 
 pt1 = [10 10];
 pt2 = [10 20];
@@ -120,11 +120,11 @@ pt3 = [20 20];
 
 array = [pt1;pt2;pt3];
 
-assertElementsAlmostEqual(...
+testCase.assertEqual(...
     distancePoints(array, array, 'diag'), ...
-    [0;0;0]);
+    [0;0;0], 'AbsTol', .01);
 
-function testArrayArray3dDiag
+function testArrayArray3dDiag(testCase)
 
 pt1 = [10 10 30];
 pt2 = [10 20 30];
@@ -133,11 +133,11 @@ pt3 = [10 20 40];
 array1 = [pt1;pt2;pt3];
 array2 = [pt2;pt3;pt1];
 
-assertElementsAlmostEqual(...
+testCase.assertEqual(...
     distancePoints(array1, array2, 'diag'), ...
-    [10;10;10*sqrt(2)]);
+    [10;10;10*sqrt(2)], 'AbsTol', .01);
 
-function testArrayArray3dNorm1Diag
+function testArrayArray3dNorm1Diag(testCase)
 
 pt1 = [10 10 30];
 pt2 = [10 20 30];
@@ -146,12 +146,12 @@ pt3 = [10 20 40];
 array1 = [pt1;pt2;pt3];
 array2 = [pt2;pt3;pt1];
 
-assertElementsAlmostEqual(...
+testCase.assertEqual(...
     distancePoints(array1, array2, 1, 'diag'), ...
-    [10;10;20]);
+    [10;10;20], 'AbsTol', .01);
 
 
-function testArrayArrayDiagMaxNorm
+function testArrayArrayDiagMaxNorm(testCase)
 
 pt1 = [10 10];
 pt2 = [10 20];
@@ -160,6 +160,6 @@ pt3 = [20 20];
 array1 = [pt1;pt2;pt3];
 array2 = [pt2;pt3;pt1];
 
-assertElementsAlmostEqual(...
+testCase.assertEqual(...
     distancePoints(array1, array2, inf, 'diag'), ...
-    [10;10;10]);
+    [10;10;10], 'AbsTol', .01);

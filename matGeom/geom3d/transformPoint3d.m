@@ -26,11 +26,13 @@ function varargout = transformPoint3d(varargin)
 %   [X2 Y2 Z2] = transformPoint3d(...);
 %   returns the result in 3 different arrays the same size as the input.
 %   This form can be useful when used with functions like meshgrid or warp.
-%
+%   
+%   MESH2 = transformPoint3d(MESH, TRANS) transforms the field 'vertices' 
+%   of the struct MESH and returns the same struct with the transformed
+%   vertices
 %
 %   See also:
-%   points3d, transforms3d, translation3d
-%   meshgrid
+%   points3d, transforms3d, translation3d, meshgrid
 %
 %   ---------
 %   author : David Legland 
@@ -45,8 +47,16 @@ function varargout = transformPoint3d(varargin)
 %   29/09/2010 fix bug in catch case
 %   12/03/2011 slightly reduce memory usage
 
-% process input arguments
+% parse input arguments
+meshStructSwitch = false;
 if length(varargin) == 2
+    if isstruct(varargin{1}) && isfield(varargin{1}, 'vertices')
+        % If first argument is a struct with the field 'vertices' the 
+        % output will be the same struct, but with the transformed vertices
+        meshStructSwitch = true;
+        meshStruct = varargin{1};
+        varargin{1}=varargin{1}.vertices;
+    end
     % Point coordinates are given in a single N-by-3-by-M-by-etc argument.
     % Preallocate x, y, and z to size N-by-1-by-M-by-etc, then fill them in
     dim = size(varargin{1});
@@ -55,8 +65,7 @@ if length(varargin) == 2
     x(:) = varargin{1}(:,1,:);
     y(:) = varargin{1}(:,2,:);
     z(:) = varargin{1}(:,3,:);
-    trans  = varargin{2};
-    
+    trans  = varargin{2};  
 elseif length(varargin) == 4
     % Point coordinates are given in 3 different arrays
     x = varargin{1};
@@ -107,7 +116,12 @@ if nargout <= 1
             'Shape mismatch: Non-vector xyz input should have multiple x,y,z output arguments. Cell {x,y,z} returned instead.')
         varargout{1} = {x,y,z};
     else
-        varargout{1} = [x y z];
+        if meshStructSwitch
+            meshStruct.vertices = [x y z];
+            varargout{1}=meshStruct;
+        else
+            varargout{1} = [x y z];
+        end
     end
     
 elseif nargout == 3

@@ -3,10 +3,12 @@ function [res, thetaList] = polygonSignature(poly, varargin)
 %
 %   DISTS = polygonSignature(POLY, THETALIST)
 %   Computes the polar signature of a polygon, for a set of angles in
-%   degrees.
+%   degrees. If a ray at a given angle does not intersect the polygon, the
+%   corresponding distance value is set to NaN.
 %
 %   DISTS = polygonSignature(POLY, N)
-%   When N is a scalar, uses N angles equally distributed between 0 and 360.
+%   When N is a scalar, uses N angles equally distributed between 0 and 360
+%   degrees.
 %   
 %   [DISTS, THETA] = polygonSignature(...)
 %   Also returns the angle set for which the signature was computed.
@@ -15,7 +17,7 @@ function [res, thetaList] = polygonSignature(poly, varargin)
 %   polygonSignature
 %
 %   See also
-%     polygons2d, signatureToPolygon
+%     polygons2d, signatureToPolygon, intersectRayPolygon
 %
 
 % ------
@@ -46,7 +48,7 @@ end
 
 % allocate memory
 nTheta = length(thetaList);
-res = zeros(nTheta, 1);
+res = NaN * ones(nTheta, 1);
 
 % iterate on angles
 for i = 1:length(thetaList)
@@ -54,5 +56,7 @@ for i = 1:length(thetaList)
     ray = [center cos(theta) sin(theta)];
 
     ptInt = intersectRayPolygon(ray, poly);
-    res(i) = distancePoints(center, ptInt(1,:));
+    if ~isempty(ptInt)
+        res(i) = distancePoints(center, ptInt(1,:));
+    end
 end

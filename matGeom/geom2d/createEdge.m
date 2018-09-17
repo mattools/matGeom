@@ -24,24 +24,25 @@ function edge = createEdge(varargin)
 %
 %
 %   Note: in all cases, parameters can be vertical arrays of the same
-%   dimension. The result is then an array of edges, of dimensions [N*4].
+%   dimension. The result is then an array of edges, of dimensions N-by-4.
 %
 %
 %   See also:
-%   edges2d, lines2d, drawEdge, clipEdge
+%   edges2d, lines2d, drawEdge, clipEdge, createLine
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 31/10/2003.
 %
 
-%   HISTORY :
+%   HISTORY
 %   18/02/2004 : add more possibilities to create edges, not only from 2
 %   points. Also add support for arrays.
 %   31/03/2004 : convert to [P1 P2] format
 
-if length(varargin)==1
+if nargin == 1
     % Only one input parameter. It can be :
     % - line angle
     % - array of four parameters
@@ -61,13 +62,16 @@ if length(varargin)==1
         error('wrong number of dimension for arg1 : can be 1 or 4');
     end
     
-elseif length(varargin)==2    
+elseif nargin == 2    
     % 2 input parameters. They can be :
     % - 2 points, then 2 arrays of 1*2 double,
     % - a line, and a distance.
+    
+    % extract the two arguments
     v1 = varargin{1};
     v2 = varargin{2};
-    if size(v1, 2)==2
+    
+    if size(v1, 2) == 2
         % first input parameter is first point, and second input is the
         % second point.
         %edge = [v1(:,1), v1(:,2), v2(:,1), v2(:,2)];
@@ -78,19 +82,19 @@ elseif length(varargin)==2
         edge = [v1(:,1), v1(:,2), v1(:,1)+v2.*cos(angle), v1(:,2)+v2.*sin(angle)];
     end
     
-elseif length(varargin)==3
+elseif nargin == 3
     % 3 input parameters :
     % first one is a point belonging to the line,
     % second and third ones are direction vector of the line (dx and dy).
     p = varargin{1};
     edge = [p(:,1) p(:,2) p(:,1)+varargin{2} p(:,2)+varargin{3}];
    
-elseif length(varargin)==4
+elseif nargin == 4
     % 4 input parameters :
     % they are x0, y0 (point belonging to line) and dx, dy (direction
     % vector of the line).
     % All parameters should have the same size.
     edge = [varargin{1} varargin{2} varargin{1}+varargin{3} varargin{2}+varargin{4}];
 else
-    error('Wrong number of arguments in ''createLine'' ');
+    error('Wrong number of arguments in ''createEdge'' ');
 end

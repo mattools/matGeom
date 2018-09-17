@@ -19,12 +19,12 @@ function dist = distancePoints(p1, p2, varargin)
 %   See also:
 %   points2d, minDistancePoints, nndist, hausdorffDistance
 %
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 24/02/2004.
+
+% ------
+% Author: David Legland
+% e-mail: david.legland@nantes.inra.fr
+% Copyright 2009 INRA - Cepia Software Platform.
+% created the 24/02/2004.
 %
 
 %   HISTORY :
@@ -69,6 +69,7 @@ d   = size(p1, 2);
 if diag
     % compute distance only for apparied couples of pixels
     dist = zeros(n1, 1);
+    
     if norm == 2
         % Compute euclidian distance. this is the default case
         % Compute difference of coordinate for each pair of point
@@ -77,11 +78,13 @@ if diag
             dist = dist + (p2(:,i)-p1(:,i)).^2;
         end
         dist = sqrt(dist);
-    elseif norm==inf
+        
+    elseif norm == inf
         % infinite norm corresponds to maximal difference of coordinate
         for i = 1:d
             dist = max(dist, abs(p2(:,i)-p1(:,i)));
         end
+        
     else
         % compute distance using the specified norm.
         for i = 1:d
@@ -92,29 +95,32 @@ if diag
 else
     % compute distance for all couples of pixels
     dist = zeros(n1, n2);
+    
     if norm == 2
-        % Compute euclidian distance. this is the default case
+        % Compute euclidian distance. This is the default case.
         % Compute difference of coordinate for each pair of point
         % and for each dimension. -> dist is a [n1*n2] array.
         for i = 1:d
             % equivalent to:
             % dist = dist + ...
             %   (repmat(p1(:,i), [1 n2])-repmat(p2(:,i)', [n1 1])).^2;
-            dist = dist + (p1(:, i*ones(1, n2))-p2(:, i*ones(n1, 1))').^2;
+            dist = dist + bsxfun (@minus, p1(:,i), p2(:, i)').^2;
         end
         dist = sqrt(dist);
-    elseif norm==inf
+        
+    elseif norm == inf
         % infinite norm corresponds to maximal difference of coordinate
         for i = 1:d
-            dist = max(dist, abs(p1(:, i*ones(1, n2))-p2(:, i*ones(n1, 1))'));
+            dist = max(dist, abs(bsxfun (@minus, p1(:,i), p2(:, i)')));
         end
+        
     else
         % compute distance using the specified norm.
         for i = 1:d
             % equivalent to:
             % dist = dist + power((abs(repmat(p1(:,i), [1 n2]) - ...
             %     repmat(p2(:,i)', [n1 1]))), norm);
-            dist = dist + power((abs(p1(:, i*ones(1, n2))-p2(:, i*ones(n1, 1))')), norm);
+            dist = dist + power(abs(bsxfun(@minus, p1(:,i), p2(:, i)')), norm);
         end
         dist = power(dist, 1/norm);
     end

@@ -1,4 +1,4 @@
-function  test_suite = test_intersectLineCircle(varargin) %#ok<STOUT>
+function  test_suite = test_intersectLineCircle 
 %TESTINTERSECTLINECIRCLE  One-line description here, please.
 %
 %   output = testIntersectLineCircle(input)
@@ -15,33 +15,33 @@ function  test_suite = test_intersectLineCircle(varargin) %#ok<STOUT>
 % Created: 2011-06-06,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
 
-function testIntersect %#ok<*DEFNU>
+function testIntersect(testCase) %#ok<*DEFNU>
 
 center = [10 0];
 l1 = [center 0 1];
 c1 = [center 5];
 pts = intersectLineCircle(l1, c1);
 exp = [10 -5; 10 5];
-assertEqual(exp, pts);
+testCase.assertEqual(exp, pts, 'AbsTol', .01);
 
-function testTangent
+function testTangent(testCase)
 
 center = [10 0];
 l1 = [15 0 0 1];
 c1 = [center 5];
 pts = intersectLineCircle(l1, c1);
-exp = [15 0];
-assertEqual(exp, pts);
+exp = [15 0;15 0];
+testCase.assertEqual(exp, pts, 'AbsTol', .01);
 
-function testNoIntersect
+function testNoIntersect(testCase)
 
 center = [10 0];
 l1 = [16 0 0 1];
 c1 = [center 5];
 pts = intersectLineCircle(l1, c1);
 exp = [NaN NaN;NaN NaN];
-assertEqual(exp, pts);
+testCase.assertEqual(exp, pts);
 

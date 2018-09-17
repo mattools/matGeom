@@ -5,9 +5,31 @@ function b = isPointOnRay(point, ray, varargin)
 %   Returns 1 if point PT belongs to the ray RAY.
 %   PT is given by [x y] and RAY by [x0 y0 dx dy].
 %
-%   See also:
-%   rays2d, points2d, isPointOnLine
+%   If PT is a N-by-2 array, and RAY is a M-by-4 array, then the result is
+%   a N-by-M array containing the result of each pair-wise test.
 %
+%   B = isPointOnRay(PT, RAY, TOL);
+%   Specifies the tolerance to use for testing if point is on the ray.
+%
+%   Example
+%     ray = [10 20 3 4];
+%     % test for a point on the ray
+%     p1 = [16 28]; 
+%     isPointOnRay(p1, ray)
+%     ans =
+%       logical
+%        0
+%     % test for a point on the supporting line but "before" the origin
+%     p2 = [7 16];
+%     isPointOnRay(p1, ray)
+%     ans =
+%       logical
+%        0
+% 
+%   See also:
+%   rays2d, points2d, isPointOnLine, isPointOnEdge
+%
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -39,7 +61,7 @@ xp = repmat(point(:,1), 1, Nr);
 yp = repmat(point(:,2), 1, Nr);
 
 % test if points belongs to the supporting line
-b1 = abs((xp-x0).*dy-(yp-y0).*dx) ./ hypot(dx, dy) < tol;
+b1 = abs((xp-x0).*dy - (yp-y0).*dx) ./ (dx.*dx + dy.*dy) < tol;
 
 % check if points lie the good direction on the rays
 ind     = abs(dx) > abs(dy);

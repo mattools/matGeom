@@ -1,4 +1,4 @@
-function test_suite = test_polylinePoint(varargin) %#ok<STOUT>
+function test_suite = test_polylinePoint
 %TESTPOLYLINEPOINT  One-line description here, please.
 %   output = testPolylinePoint(input)
 %
@@ -15,19 +15,19 @@ function test_suite = test_polylinePoint(varargin) %#ok<STOUT>
 % Copyright 2009 INRA - Cepia Software Platform.
 % Licensed under the terms of the LGPL, see the file "license.txt"
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testSquare %#ok<*DEFNU>
+function testSquare(testCase) %#ok<*DEFNU>
 
 p1 = [10 10];
 p2 = [20 10];
 p3 = [20 20];
 p4 = [10 20];
 square = [p1;p2;p3;p4];
-assertElementsAlmostEqual(polygonPoint(square, 0), p1);
-assertElementsAlmostEqual(polygonPoint(square, 1), p2);
-assertElementsAlmostEqual(polygonPoint(square, 2), p3);
-assertElementsAlmostEqual(polygonPoint(square, 3), p4);
+testCase.assertEqual(polygonPoint(square, 0), p1, 'AbsTol', .01);
+testCase.assertEqual(polygonPoint(square, 1), p2, 'AbsTol', .01);
+testCase.assertEqual(polygonPoint(square, 2), p3, 'AbsTol', .01);
+testCase.assertEqual(polygonPoint(square, 3), p4, 'AbsTol', .01);
 
-assertElementsAlmostEqual(polygonPoint(square, 4), p1);
-assertElementsAlmostEqual(polygonPoint(square, 3.5), centroid([p1;p4]));
+testCase.assertEqual(polygonPoint(square, 4), p1);
+testCase.assertEqual(polygonPoint(square, 3.5), centroid([p1;p4]), 'AbsTol', .01);

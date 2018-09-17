@@ -1,4 +1,4 @@
-function test_suite = test_grOpen(varargin) %#ok<STOUT>
+function test_suite = test_grOpen
 %TEST_GROPEN  test suite for function grOpen
 %
 %   output = test_grOpen(input)
@@ -16,13 +16,13 @@ function test_suite = test_grOpen(varargin) %#ok<STOUT>
 % Copyright 2011 INRA - Cepia Software Platform.
 
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testSimpleGraph %#ok<*DEFNU>
+function testSimpleGraph(testCase) %#ok<*DEFNU>
 
 [nodes, edges, values] = createTestGraph01(); %#ok<ASGLU>
 
 valClo = grOpen(edges, values);
 exp = [20;10;50;50;50;20;30;30];
-assertEqual(exp, valClo);
+testCase.assertEqual(exp, valClo);
 

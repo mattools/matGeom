@@ -50,7 +50,9 @@ function varargout = drawCylinder(cyl, varargin)
 %
 %   See Also:
 %   cylinderMesh, drawEllipseCylinder, drawSphere, drawLine3d, surf
+%   intersectLineCylinder, cylinderSurfaceArea
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE

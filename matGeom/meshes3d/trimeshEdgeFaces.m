@@ -7,7 +7,7 @@ function edgeFaces = trimeshEdgeFaces(faces, varargin)
 %   Compute index array of faces adjacent to each edge of a mesh.
 %   FACES is a NF-by-3 array containing vertex indices of each face. The
 %   result EF is a NE-by-2 array containing the indices of the two faces
-%   incident to each edge. If an edge belong to only one face, the other
+%   incident to each edge. If an edge belongs to only one face, the other
 %   face index is ZERO.
 %
 %   The list of edges (as array of source and target vertex indices) can be

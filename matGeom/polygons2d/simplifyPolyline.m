@@ -7,13 +7,13 @@ function [poly2, keepInds] = simplifyPolyline(poly, tol)
 %   Example
 %     elli = [20 30 40 20 30];
 %     poly = ellipseToPolygon(elli, 500);
-%     poly2 = simplifyPolyline(poly, 1);
+%     poly2 = simplifyPolyline(poly, 1); % use a tolerance equal to 1
 %     figure; hold on;
 %     drawEllipse(elli);
 %     drawPoint(poly2, 'mo');
 %
 %   See also
-%   polygons2d, simplifyPolygon
+%   polygons2d, simplifyPolygon, resamplePolyline, smoothPolyline
 %
 %   References
 %   http://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm
@@ -21,7 +21,7 @@ function [poly2, keepInds] = simplifyPolyline(poly, tol)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2012-05-04,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 

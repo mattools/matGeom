@@ -1,4 +1,4 @@
-function [germs, germPaths] = centroidalVoronoi2d(nGerms, poly, varargin)
+function [germs, germPaths] = centroidalVoronoi2d(germs, poly, varargin)
 %CENTROIDALVORONOI2D Centroidal Voronoi tesselation within a polygon
 %
 %   PTS = centroidalVoronoi2d(NPTS, POLY)
@@ -6,31 +6,41 @@ function [germs, germPaths] = centroidalVoronoi2d(nGerms, poly, varargin)
 %   Centroidal germs can be computed by using the Llyod's algorithm:
 %   1) initial germs are chosen at random within polygon
 %   2) voronoi polygon of the germs is computed
-%   3) the centroid of each domain are computed, and used as germs of the
+%   3) the centroids of each domain are computed, and used as germs of the
 %   next iteration
 %
-%   This version uses an approximated version of Llyod's algorithm. The
-%   centroids are not computed explicitly, but approximated by sampling N
-%   points within the bounding polygon. 
+%   [PTS, PATHLIST] = centroidalVoronoi2d(NPTS, POLY)
+%   Also returns the path of each germs at each iteration. The result
+%   PATHLIST is a cell array with as many cells as the number of germs,
+%   containing in each cell the successive positions of the germ.
 %
 %   PTS = centroidalVoronoi2d(.., PARAM, VALUE)
 %   Specify one or several optional arguments. PARAM can be one of:
 %   * 'nIter'   specifies the number of iterations of the algorithm
-%       (default is 30)
-%   * 'nPoints' number of points for updating positions of germs at each
-%       iteration. Default is 200 times the number of germs.
+%       (default is 50)
 %   * 'verbose' display iteration number. Default is false.
 %
 %   Example
-%   centroidalVoronoi2d
+%     poly = ellipseToPolygon([50 50 40 30 20], 200);
+%     nGerms = 100;
+%     germs = centroidalVoronoi2d(nGerms, poly);
+%     figure; hold on;
+%     drawPolygon(poly, 'k');
+%     drawPoint(germs, 'bo');
+%     axis equal; axis([0 100 10 90]);
+%     % extract regions of the CVD
+%     box = polygonBounds(poly);
+%     [n, e] = boundedVoronoi2d(box, germs);
+%     [n2, e2] = clipGraphPolygon(n, e, poly);
+%     drawGraphEdges(n2, e2, 'b');
 %
 %   See also
-%   graphs, boundedVoronoi2d
+%   graphs, boundedVoronoi2d, centroidalVoronoi2d_MC
 %
 %   Rewritten from programs found in
 %   http://people.scs.fsu.edu/~burkardt/m_src/cvt/cvt.html
 %
-%  Reference:
+%   Reference:
 %    Qiang Du, Vance Faber, and Max Gunzburger,
 %    Centroidal Voronoi Tessellations: Applications and Algorithms,
 %    SIAM Review, Volume 41, 1999, pages 637-676.
@@ -38,17 +48,23 @@ function [germs, germPaths] = centroidalVoronoi2d(nGerms, poly, varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2012-02-23,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
+
 %% Parse input arguments
 
-% Number of points
-nPts = 200 * nGerms;
+% Number of germs
+if isscalar(germs)
+    nGerms = germs;
+    germs = [];
+else
+    nGerms = size(germs, 1);
+end
 
 % Number of iterations
-nIter = 30;
+nIter = 50;
 
 verbose = false;
 
@@ -61,8 +77,7 @@ while length(varargin) > 1
             verbose = varargin{2};
         case 'niter'
             nIter = varargin{2};
-        case 'npoints'
-            nPts = varargin{2};
+            
         otherwise
             error(['Unknown parameter name: ' paramName]);
     end
@@ -74,18 +89,19 @@ end
 %% Initialisations
 
 % bounding box of polygon
-box = polygonBounds(poly);
+bbox = polygonBounds(poly);
 
-% init germs
-germs = generatePointsInPoly(nGerms);
-
+% init germs if needed
+if isempty(germs)
+    germs = generatePointsInPoly(nGerms);
+end
 germIters = cell(nIter, 1);
 
 
-%% Iteration of the McQueen algorithm
+%% Iteration of the Lloyd algorithm
 
 for i = 1:nIter
-    if verbose
+     if verbose
         disp(sprintf('Iteration: %d/%d', i, nIter)); %#ok<DSPS>
     end
     
@@ -93,11 +109,22 @@ for i = 1:nIter
         germIters{i} = germs;
     end
     
-    % random uniform points in polygon
-    points = generatePointsInPoly(nPts);
+    % Compute Clipped Voronoi diagram of germs
+    if verbose
+        disp('  compute Voronoi Diagram');
+    end
+    [n, e, f] = boundedVoronoi2d(bbox, germs);
+    [n2, e2, f2] = clipMesh2dPolygon(n, e, f, poly); %#ok<ASGLU>
+
+    % update the position of each germ
+    if verbose
+        disp('  compute centroids');
+    end
+    for iGerm = 1:nGerms
+        polygon = n2(f2{iGerm}, :);
+        germs(iGerm,:) = polygonCentroid(polygon);
+    end
     
-    % update germs of Voronoi
-    germs = cvtUpdate(germs, points);
 end
 
 
@@ -124,8 +151,8 @@ end
 
 function pts = generatePointsInPoly(nPts)
     % extreme coordinates
-    xmin = box(1);  xmax = box(2);
-    ymin = box(3);  ymax = box(4);
+    xmin = bbox(1);  xmax = bbox(2);
+    ymin = bbox(3);  ymax = bbox(4);
     
     % compute size of box
     dx = xmax - xmin;
@@ -144,7 +171,6 @@ function pts = generatePointsInPoly(nPts)
         
         ind = ind(~polygonContains(poly, pts(ind, :)));
     end
-    
 end
 
 end

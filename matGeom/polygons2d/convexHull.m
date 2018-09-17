@@ -1,4 +1,4 @@
-function [hull, inds] = convexHull(points)
+function [hull, inds] = convexHull(points, varargin)
 %CONVEXHULL Convex hull of a set of points
 %
 %   POLY = convexHull(POINTS)
@@ -6,10 +6,16 @@ function [hull, inds] = convexHull(points)
 %   mainly a wrapper to the convhull function, that format the result to a
 %   polygon.
 %
-%   [POLY INDS] = convexHull(POINTS)
+%   [POLY, INDS] = convexHull(POINTS)
 %   Also returns the indices of convex hull vertices within the original
 %   array of points.
 %
+%   ... = convexHull(POINTS, 'simplify', BOOL)
+%   specifies the 'simplify' option use dfor calling convhull. By default,
+%   the convexHull functions uses simplify equals to TRUE (contrary to the
+%   convhull function), resulting in a more simple convex polygon.
+%   
+%   
 %   Example
 %     % Draws the convex hull of a set of random points
 %     pts = rand(30,2);
@@ -33,7 +39,7 @@ function [hull, inds] = convexHull(points)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@nantes.inra.fr
 % Created: 2011-04-08,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
@@ -44,6 +50,12 @@ if size(points, 1) < 3
     return;
 end
 
+% parse simplify option
+simplify = true;
+if nargin > 2 && strcmpi(varargin{1}, 'simplify')
+    simplify = varargin{2};
+end
+
 % compute convex hull by calling the 'convhull' function
-inds = convhull(points(:,1), points(:,2));
+inds = convhull(points(:,1), points(:,2), 'simplify', simplify);
 hull = points(inds, :);

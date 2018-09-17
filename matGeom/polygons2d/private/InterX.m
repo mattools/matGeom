@@ -43,11 +43,13 @@ function P = InterX(L1,varargin)
 %   and line segments of the other.
 
     %...Argument checks and assignment of L2
-    error(nargchk(1,2,nargin));
-    if nargin == 1,
-        L2 = L1;    hF = @lt;   %...Avoid the inclusion of common points
+    narginchk(1,2);
+    if nargin == 1
+        L2 = L1;    
+        hF = @lt;   %...Avoid the inclusion of common points
     else
-        L2 = varargin{1}; hF = @le;
+        L2 = varargin{1}; 
+        hF = @le;
     end
        
     %...Preliminary stuff

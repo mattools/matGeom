@@ -1,7 +1,16 @@
 function vol = meshVolume(vertices, edges, faces)
 %MESHVOLUME Volume of the space enclosed by a polygonal mesh
 %
-%   output = meshVolume(input)
+%   V = meshVolume(VERTS, FACES)
+%   Computes the volume of the space enclosed by the polygonal mesh
+%   represented by vertices VERTS (as a Nv-by-3 array of cooridnates) and
+%   the array of faces FACES (either as a Nf-by-3 array of vertex indices,
+%   or as a cell array of arrays of vertex indices).
+%
+%   The volume is computed as the sum of the signed volumes of tetrahedra
+%   formed by triangular faces and the centroid of the mesh. Faces need to
+%   be oriented such that normal points outwards the mesh. See:
+%   http://stackoverflow.com/questions/1838401/general-formula-to-calculate-polyhedron-volume
 %
 %   Example
 %     % computes the volume of a unit cube (should be equal to 1...)
@@ -15,7 +24,7 @@ function vol = meshVolume(vertices, edges, faces)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@nantes.inra.fr
 % Created: 2012-10-01,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 

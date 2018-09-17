@@ -1,21 +1,27 @@
-function varargout = rectToPolygon(rect)
+function [tx, ty] = rectToPolygon(rect)
 %RECTTOPOLYGON Convert a rectangle into a polygon (set of vertices)
 %
 %   POLY = rectToPolygon(RECT);
-%   Converts rectangle given as [x0 y0 w h] or [x0 y0 w h theta] into a
-%   4*2 array double, containing coordinate of rectangle vertices.
+%   Converts rectangle given as [X0 Y0 W H] or [X0 Y0 W H THETA] into a
+%   4-by-2 array double, containing coordinate of rectangle vertices.
+%   X0 and Y0 are the coordinates of the "lower left" vertex (before
+%   applying rotation), W and H are the width and the height of the
+%   rectangle, and THETA is the rotation angle around the first vertex, in
+%   degrees.
 %
 %   See also:
 %   orientedBoxToPolygon, ellipseToPolygon, drawRect, drawPolygon
 %
 %
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 06/04/2005.
+
+% ---------
+% Author: David Legland
+% e-mail: david.legland@nantes.inra.fr
+% INRA - TPV URPOI - BIA IMASTE
+% created the 06/04/2005.
 %
 
-%   HISTORY
+% HISTORY
 
 % extract rectangle parameters
 theta = 0;
@@ -45,7 +51,5 @@ ty(4) = y0 + h * cot;
 
 % format output
 if nargout <= 1
-    varargout = {[tx ty]};
-else
-    varargout = {tx, ty};
+    tx = [tx ty];
 end

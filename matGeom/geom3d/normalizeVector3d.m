@@ -11,6 +11,7 @@ function vn = normalizeVector3d(v)
 %   See also:
 %   vectors3d, vectorNorm3d
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE

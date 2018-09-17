@@ -52,7 +52,7 @@ box2d = orientedBox(pts2d);
 center2d = box2d(1:2);
 L1 = box2d(3);
 L2 = box2d(4);
-markers2d = [center2d; L1/2 0; 0 L2/2];
+markers2d = [0 0; L1/2 0; 0 L2/2];
 
 % orient reference points to 2d basis
 theta2d = box2d(5);
@@ -70,7 +70,7 @@ v1n = normalizeVector3d(markers3d(2,:) - centerProj);
 v2n = normalizeVector3d(markers3d(3,:) - centerProj);
 
 % compute rotation matrix and convert to Euler Angles
-v3n = vectorCross3d(v1n, v2n);
+v3n = crossProduct3d(v1n, v2n);
 rotMat = [v1n' v2n' v3n'];
 boxAngles = rotation3dToEulerAngles(rotMat);
 

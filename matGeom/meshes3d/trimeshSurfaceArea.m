@@ -27,7 +27,7 @@ function area = trimeshSurfaceArea(v, e, f)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2011-08-26,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
@@ -41,7 +41,7 @@ v1 = v(f(:, 2), :) - v(f(:, 1), :);
 v2 = v(f(:, 3), :) - v(f(:, 1), :);
 
 % area of each triangle is half the cross product norm
-vn = vectorNorm3d(vectorCross3d(v1, v2));
+vn = vectorNorm3d(crossProduct3d(v1, v2));
 
 % sum up and normalize
 area = sum(vn) / 2;

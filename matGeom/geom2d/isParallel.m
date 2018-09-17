@@ -28,9 +28,10 @@ function b = isParallel(v1, v2, varargin)
 %   See also
 %   vectors2d, isPerpendicular, lines2d
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2006-04-25
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
@@ -41,12 +42,17 @@ function b = isParallel(v1, v2, varargin)
 %   2009-09-21 fix bug for array of 3 vectors
 %   2011-01-20 replace repmat by ones-indexing (faster)
 %   2011-06-16 use direct computation (faster)
+%   2017-08-31 use normalized vectors
 
 % default accuracy
 acc = 1e-14;
 if ~isempty(varargin)
     acc = abs(varargin{1});
 end
+
+% normalize vectors
+v1 = normalizeVector(v1);
+v2 = normalizeVector(v2);
 
 % adapt size of inputs if needed
 n1 = size(v1, 1);

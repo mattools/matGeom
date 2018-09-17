@@ -1,5 +1,5 @@
 function vn = normalize(v)
-%NORMALIZE normalize a vector
+%NORMALIZE Normalize a vector
 %
 %   V2 = normalize(V);
 %   Returns the normalization of vector V, such that ||V|| = 1. V can be
@@ -9,11 +9,10 @@ function vn = normalize(v)
 %   array.
 %
 %   See Also:
-%   vectors2d, vecnorm
+%   vectors2d, normalizeVector, vectorNorm
 %
-%
+
 %   ---------
-%
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 29/11/2004.

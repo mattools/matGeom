@@ -3,7 +3,7 @@ function trans = createScaling3d(varargin)
 %
 %   TRANS = createScaling3d(S);
 %   returns the scaling transform corresponding to a scaling factor S in
-%   each direction. S can be a scalar, or a 1x3 vector containing the
+%   each direction. S can be a scalar, or a 1-by-3 vector containing the
 %   scaling factor in each direction.
 %
 %   TRANS = createScaling3d(SX, SY, SZ);
@@ -19,6 +19,7 @@ function trans = createScaling3d(varargin)
 %   See also:
 %   transforms3d, transformPoint3d, transformVector3d, createTranslation3d,
 %   createRotationOx, createRotationOy, createRotationOz
+
 %
 %   ---------
 %   author : David Legland 
@@ -31,37 +32,56 @@ function trans = createScaling3d(varargin)
 %   30/04/2009 rename to createScaling3d
 
 
-% process input parameters
-if isempty(varargin)
-    % assert uniform scaling in each direction
-    sx = 1;
-    sy = 1;
-    sz = 1;
-elseif length(varargin)==1
-    % only one argument
-    var = varargin{1};
-    if length(var)==1
-        % same scaling factor in each direction
-        sx = var;
-        sy = var;
-        sz = var;
-    elseif length(var)==3
-        % scaling is a vector, giving different scaling in each direction
-        sx = var(1);
-        sy = var(2);
-        sz = var(3);
-    else
-        error('wrong size for first parameter of "createScaling3d"');
-    end
-elseif length(varargin)==3
+%% default arguments
+sx = 1;
+sy = 1;
+sz = 1;
+center = [0 0 0];
+
+%% process input parameters
+if nargin == 1
+    % only one argument -> scaling factor
+    [sx, sy, sz]= parseScalingFactors(varargin{1});
+    
+elseif nargin == 2
+    % 2 arguments, giving center and uniform scaling
+    center = varargin{1};
+    [sx, sy, sz]= parseScalingFactors(varargin{2});
+
+elseif nargin == 3
     % 3 arguments, giving scaling in each direction
     sx = varargin{1};
     sy = varargin{2};
     sz = varargin{3};
-else
-    error('wrong number of arguments for "createScaling3d"');
+    
+elseif nargin == 4
+    % 4 arguments, giving center and scaling in each direction
+    center = varargin{1};
+    sx = varargin{2};
+    sy = varargin{3};
+    sz = varargin{4};
 end
 
-% create the scaling matrix
-trans = [sx 0 0 0;0 sy 0 0;0 0 sz 0;0 0 0 1];
+%% create the scaling matrix
+trans = [...
+    sx 0 0 center(1)*(1-sx);...
+    0 sy 0 center(2)*(1-sy);...
+    0 0 sz center(3)*(1-sz);...
+    0 0 0 1];
 
+%% Helper function
+function [sx, sy, sz] = parseScalingFactors(var)
+
+if length(var)==1
+    % same scaling factor in each direction
+    sx = var;
+    sy = var;
+    sz = var;
+elseif length(var)==3
+    % scaling is a vector, giving different scaling in each direction
+    sx = var(1);
+    sy = var(2);
+    sz = var(3);
+else
+    error('wrong size for first parameter of "createScaling3d"');
+end

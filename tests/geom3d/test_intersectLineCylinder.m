@@ -1,4 +1,4 @@
-function test_suite = test_intersectLineCylinder(varargin) %#ok<STOUT>
+function test_suite = test_intersectLineCylinder
 %Check parallelity of 2 vectors
 %   output = testIsParallel3d(input)
 %
@@ -14,9 +14,9 @@ function test_suite = test_intersectLineCylinder(varargin) %#ok<STOUT>
 % Created: 2009-06-19,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testSimple %#ok<*DEFNU>
+function testSimple(testCase) %#ok<*DEFNU>
 % vertical cylinder and horizontal line
 
 % def line
@@ -31,9 +31,9 @@ R   = 5;
 cyl = [p1 p2 R];
 
 pts = intersectLineCylinder(line, cyl);
-assertElementsAlmostEqual([-R 0 0;R 0 0], pts);
+testCase.assertEqual([-R 0 0;R 0 0], pts, 'AbsTol', .01);
 
-function testShifted
+function testShifted(testCase)
 % shift everything by vector [1 2 3]
 
 xt = 1; yt = 2; zt = 3;
@@ -54,9 +54,9 @@ line = [p0 v0];
 % compute intersection
 pts     = intersectLineCylinder(line, cyl);
 ctrl    = [-R 0 0;R 0 0] + repmat(vect, 2, 1);
-assertElementsAlmostEqual(ctrl, pts);
+testCase.assertEqual(ctrl, pts, 'AbsTol', .01);
 
-function testTranslated
+function testTranslated(testCase)
 % shift everything by vector [1 2 3]
 
 trans = createTranslation(1, 2, 3);
@@ -77,10 +77,10 @@ line = transformLine3d([p0 v0], trans);
 % compute intersection
 pts     = intersectLineCylinder(line, cyl);
 ctrl    = transformPoint3d([-R 0 0;R 0 0], trans);
-assertElementsAlmostEqual(ctrl, pts);
+testCase.assertEqual(ctrl, pts, 'AbsTol', .01);
 
 
-function testRotatedOx
+function testRotatedOx(testCase)
 % shift everything by vector [1 2 3]
 Rx = createRotationOx([1 2 3], pi/4);
 trans = Rx;
@@ -101,9 +101,9 @@ line = transformLine3d([p0 v0], trans);
 % compute intersection
 pts     = intersectLineCylinder(line, cyl);
 ctrl    = transformPoint3d([-R 0 0;R 0 0], trans);
-assertElementsAlmostEqual(ctrl, pts);
+testCase.assertEqual(ctrl, pts, 'AbsTol', .01);
 
-function testRotatedOy
+function testRotatedOy(testCase)
 % shift everything by vector [1 2 3]
 
 Rx = createRotationOy([0 0 0], pi/4);
@@ -125,10 +125,10 @@ line = transformLine3d([p0 v0], trans);
 % compute intersection
 pts     = intersectLineCylinder(line, cyl);
 ctrl    = transformPoint3d([-R 0 0;R 0 0], trans);
-assertElementsAlmostEqual(ctrl, pts);
+testCase.assertEqual(ctrl, pts, 'AbsTol', .01);
 
 
-function testRotatedOxOy
+function testRotatedOxOy(testCase)
 % Compose two rotations and check results still apply
 
 center = [1 2 3];
@@ -152,5 +152,63 @@ line = transformLine3d([p0 v0], trans);
 % compute intersection
 pts     = intersectLineCylinder(line, cyl);
 ctrl    = transformPoint3d([-R 0 0;R 0 0], trans);
-assertElementsAlmostEqual(ctrl, pts);
+testCase.assertEqual(ctrl, pts, 'AbsTol', .01);
 
+
+function test_TypeInfinite(testCase)
+% vertical cylinder and diagonal line
+
+% def line
+p0  = [0 0 0];
+v0  = [1 0 1];
+line = [p0 v0];
+
+% def cylinder
+H = 5;
+p1  = [0 0 -H];
+p2  = [0 0 +H];
+R   = 10;
+cyl = [p1 p2 R];
+
+% case of infinite cylinder -> two 'classical' intersections
+pts = intersectLineCylinder(line, cyl, 'type', 'infinite');
+testCase.assertEqual([-R 0 -R;R 0 R], pts, 'AbsTol', .01);
+
+function test_TypeOpen(testCase)
+% vertical cylinder and diagonal line
+
+% def line
+p0  = [0 0 0];
+v0  = [1 0 1];
+line = [p0 v0];
+
+% def cylinder
+H = 5;
+p1  = [0 0 -H];
+p2  = [0 0 +H];
+R   = 10;
+cyl = [p1 p2 R];
+
+% case of open cylinder -> no intersection
+pts = intersectLineCylinder(line, cyl, 'type', 'open');
+testCase.assertEmpty(pts);
+
+
+function test_TypeClosed(testCase)
+% vertical cylinder and diagonal line
+
+% def line
+p0  = [0 0 0];
+v0  = [1 0 1];
+line = [p0 v0];
+
+% def cylinder
+H = 5;
+p1  = [0 0 -H];
+p2  = [0 0 +H];
+R   = 10;
+cyl = [p1 p2 R];
+
+% case of open cylinder -> no intersection
+pts = intersectLineCylinder(line, cyl, 'type', 'closed');
+testCase.assertEqual([-H 0 -H;H 0 H], pts, 'AbsTol', .01);

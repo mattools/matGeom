@@ -18,24 +18,30 @@ function transfo = createBasisTransform(source, target)
 %
 %
 %   Example
-%     % standard basis transform
-%     src = [0 0   1 0   0 1];
-%     % target transform, just a rotation by atan(2/3) followed by a scaling
-%     tgt = [0 0   .75 .5   -.5 .75];
-%     % compute transform
+%     % define source and target bases
+%     src = [ 0 0   1  0    0  1];
+%     tgt = [20 0  .5 .5  -.5 .5];
 %     trans = createBasisTransform(src, tgt);
-%     % transform the point (.25,1.25) into the point (1,1)
-%     p1 = [.25 1.25];
-%     p2 = transformPoint(p1, trans)
-%     ans =
-%         1   1
+%     % create a polygon in source basis
+%     poly = [10 10;30 10; 30 20; 20 20;20 40; 10 40];
+%     figure;
+%     subplot(121); drawPolygon(poly, 'b'); axis equal; axis([-10 50 -10 50]);
+%     hold on; drawLine([0 0 1 0], 'k'); drawLine([0 0 0 1], 'k');
+%     drawLine([20 0 1 1], 'r'); drawLine([20 0 -1 1], 'r');
+%     t = -1:5; plot(t*5+20, t*5, 'r.'); plot(-t*5+20, t*5, 'r.');
+%     % transform the polygon in target basis
+%     poly2 = transformPoint(poly, trans);
+%     subplot(122); drawPolygon(poly2, 'b'); axis equal; axis([-10 50 -10 50]);
+%     hold on; drawLine([0 0 1 0], 'r'); drawLine([0 0 0 1], 'r');
+%     t = -1:5; plot(t*10, zeros(size(t)), 'r.'); plot(zeros(size(t)), t*10, 'r.');
 %
 %   See also
 %   transforms2d
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2010-12-03,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform.
 
@@ -43,7 +49,7 @@ function transfo = createBasisTransform(source, target)
 t1 = eye(3);
 t2 = eye(3);
 
-if nargin==2
+if nargin == 2
     % from source to reference basis
     t1(1:2, 1) = source(3:4);
     t1(1:2, 2) = source(5:6);
@@ -59,7 +65,26 @@ t2(1:2, 1) = target(3:4);
 t2(1:2, 2) = target(5:6);
 t2(1:2, 3) = target(1:2);
 
-% compute transfo
-% same as: transfo = inv(t2)*t1;
-transfo = t2\t1;
+% compute transform matrix
+transfo = zeros(3, 3);
+maxSz = 1;
+for i = 1:maxSz
+    % coordinate of three reference points in source basis
+    po = t1(1:2, 3, i)';
+    px = po + t1(1:2, 1, i)';
+    py = po + t1(1:2, 2, i)';
+    
+    % express coordinates of reference points in the new basis
+    t2i = inv(t2(:,:,i));
+    pot = transformPoint(po, t2i);
+    pxt = transformPoint(px, t2i);
+    pyt = transformPoint(py, t2i);
+    
+    % compute direction vectors in new basis
+    vx = pxt - pot;
+    vy = pyt - pot;
+
+    % concatenate result in a 3-by-3 affine transform matrix 
+    transfo(:,:,i) = [vx' vy' pot' ; 0 0 1];
+end
 

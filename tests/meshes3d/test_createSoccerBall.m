@@ -1,4 +1,4 @@
-function test_suite = test_createSoccerBall(varargin) %#ok<STOUT>
+function test_suite = test_createSoccerBall
 %TESTCREATESoccerBall  One-line description here, please.
 %
 %   output = testCreateSoccerBall(input)
@@ -15,50 +15,49 @@ function test_suite = test_createSoccerBall(varargin) %#ok<STOUT>
 % Created: 2010-12-07,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions);
 
-
-function testCreation %#ok<*DEFNU>
+function testCreation(testCase) %#ok<*DEFNU>
 
 createSoccerBall();
 
 
-function testVEFCreation
+function testVEFCreation(testCase)
 
 [v, e, f] = createSoccerBall();
-assertTrue(~isempty(v));
-assertTrue(~isempty(e));
-assertTrue(~isempty(f));
+testCase.assertTrue(~isempty(v));
+testCase.assertTrue(~isempty(e));
+testCase.assertTrue(~isempty(f));
 
 [nv, ne, nf] = getMeshElementsNumber;
-assertEqual([nv 3], size(v));
-assertEqual([ne 2], size(e));
-assertEqual(nf, length(f));
+testCase.assertEqual([nv 3], size(v));
+testCase.assertEqual([ne 2], size(e));
+testCase.assertEqual(nf, length(f));
 
 
-function testVFCreation
+function testVFCreation(testCase)
 
 [v, f] = createSoccerBall();
-assertTrue(~isempty(v));
-assertTrue(~isempty(f));
+testCase.assertTrue(~isempty(v));
+testCase.assertTrue(~isempty(f));
 
 [nv, ne, nf] = getMeshElementsNumber; %#ok<ASGLU>
-assertEqual([nv 3], size(v));
-assertEqual(nf, length(f));
+testCase.assertEqual([nv 3], size(v));
+testCase.assertEqual(nf, length(f));
 
 
-function testMeshCreation
+function testMeshCreation(testCase)
 
 mesh = createSoccerBall();
-assertTrue(isstruct(mesh));
-assertTrue(isfield(mesh, 'vertices'));
-assertTrue(isfield(mesh, 'edges'));
-assertTrue(isfield(mesh, 'faces'));
+testCase.assertTrue(isstruct(mesh));
+testCase.assertTrue(isfield(mesh, 'vertices'));
+testCase.assertTrue(isfield(mesh, 'edges'));
+testCase.assertTrue(isfield(mesh, 'faces'));
 
 [nv, ne, nf] = getMeshElementsNumber;
-assertEqual([nv 3], size(mesh.vertices));
-assertEqual([ne 2], size(mesh.edges));
-assertEqual(nf, length(mesh.faces));
+testCase.assertEqual([nv 3], size(mesh.vertices));
+testCase.assertEqual([ne 2], size(mesh.edges));
+testCase.assertEqual(nf, length(mesh.faces));
 
 
 function [nv, ne, nf] = getMeshElementsNumber

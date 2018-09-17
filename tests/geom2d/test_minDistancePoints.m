@@ -1,4 +1,4 @@
-function test_suite = test_minDistancePoints(varargin) %#ok<STOUT>
+function test_suite = test_minDistancePoints
 %TESTMINDISTANCEPOINTS  One-line description here, please.
 %   output = testMinDistancePoints(input)
 %
@@ -15,75 +15,77 @@ function test_suite = test_minDistancePoints(varargin) %#ok<STOUT>
 % Copyright 2009 INRA - Cepia Software Platform.
 % Licensed under the terms of the LGPL, see the file "license.txt"
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testArray %#ok<*DEFNU>
+function testArray(testCase) %#ok<*DEFNU>
 
 pts = [50 10;40 60;30 30;20 0;10 60;10 30;0 10];
-assertElementsAlmostEqual(minDistancePoints(pts), 20);
+testCase.assertEqual(minDistancePoints(pts), 20, 'AbsTol', .01);
 
-function testArrayIndInd
+function testArrayIndInd(testCase)
 
 pts = [10 10;25 5;20 20;30 20;10 30];
 [dist, ind1, ind2] = minDistancePoints(pts);
-assertElementsAlmostEqual(10, dist);
-assertElementsAlmostEqual(3, ind1);
-assertElementsAlmostEqual(4, ind2);
+testCase.assertEqual(10, dist, 'AbsTol', .01);
+testCase.assertEqual(3, ind1, 'AbsTol', .01);
+testCase.assertEqual(4, ind2, 'AbsTol', .01);
 
 
-function testPointArray
+function testPointArray(testCase)
 
 pts = [0 80;10 60;20 40;30 20;40 0;0 0;100 0;0 100;0 -10;-10 -20];
-assertElementsAlmostEqual(minDistancePoints([40 50], pts), 10*sqrt(5));
-assertElementsAlmostEqual(minDistancePoints([25 30], pts), 5*sqrt(5));
-assertElementsAlmostEqual(minDistancePoints([30 40], pts), 10);
-assertElementsAlmostEqual(minDistancePoints([20 40], pts), 0);
+testCase.assertEqual(minDistancePoints([40 50], pts), 10*sqrt(5), 'AbsTol', .01);
+testCase.assertEqual(minDistancePoints([25 30], pts), 5*sqrt(5), 'AbsTol', .01);
+testCase.assertEqual(minDistancePoints([30 40], pts), 10, 'AbsTol', .01);
+testCase.assertEqual(minDistancePoints([20 40], pts), 0, 'AbsTol', .01);
 
-function testArrayArray
+function testArrayArray(testCase)
 
 pts1 = [40 50;25 30;40 20];
 pts2 = [0 80;10 60;20 40;30 20;40 0;0 0;100 0;0 100;0 -10;-10 -20];
 res = [10*sqrt(5);5*sqrt(5);10];
-assertElementsAlmostEqual(minDistancePoints(pts1, pts2), res);
+testCase.assertEqual(minDistancePoints(pts1, pts2), res, 'AbsTol', .01);
 
 
+function testArrayNorm(testCase)
 
-function testArrayNorm
+% an array of points with several pairs at distance (+-20,+/-10).
+% resulting in distance equal to 30 with L1 metric.
+pts = [50 10; 40 60; 40 30; 20 0; 10 60; 10 30; 0 10];
 
-pts = [50 10;40 60;40 30;20 0;10 60;10 30;0 10];
-assertElementsAlmostEqual(minDistancePoints(pts, 1), 30);
-assertElementsAlmostEqual(minDistancePoints(pts, 100), 20);
+testCase.assertEqual(minDistancePoints(pts, 1), 30, 'AbsTol', .01);
+testCase.assertEqual(minDistancePoints(pts, 100), 20, 'AbsTol', .01);
 
 
-function testPointArrayNorm
+function testPointArrayNorm(testCase)
 
 pts = [0 80;10 60;20 40;30 20;40 0;0 0;100 0;0 100;0 -10;-10 -20];
-assertElementsAlmostEqual(minDistancePoints([40 50], pts, 2), 10*sqrt(5));
-assertElementsAlmostEqual(minDistancePoints([25 30], pts, 2), 5*sqrt(5));
-assertElementsAlmostEqual(minDistancePoints([30 40], pts, 2), 10);
-assertElementsAlmostEqual(minDistancePoints([20 40], pts, 2), 0);
-assertElementsAlmostEqual(minDistancePoints([40 50], pts, 1), 30);
-assertElementsAlmostEqual(minDistancePoints([25 30], pts, 1), 15);
-assertElementsAlmostEqual(minDistancePoints([30 40], pts, 1), 10);
-assertElementsAlmostEqual(minDistancePoints([20 40], pts, 1), 0);
+testCase.assertEqual(minDistancePoints([40 50], pts, 2), 10*sqrt(5), 'AbsTol', .01);
+testCase.assertEqual(minDistancePoints([25 30], pts, 2), 5*sqrt(5), 'AbsTol', .01);
+testCase.assertEqual(minDistancePoints([30 40], pts, 2), 10, 'AbsTol', .01);
+testCase.assertEqual(minDistancePoints([20 40], pts, 2), 0, 'AbsTol', .01);
+testCase.assertEqual(minDistancePoints([40 50], pts, 1), 30, 'AbsTol', .01);
+testCase.assertEqual(minDistancePoints([25 30], pts, 1), 15, 'AbsTol', .01);
+testCase.assertEqual(minDistancePoints([30 40], pts, 1), 10, 'AbsTol', .01);
+testCase.assertEqual(minDistancePoints([20 40], pts, 1), 0, 'AbsTol', .01);
 
-function testArrayArrayNorm
+function testArrayArrayNorm(testCase)
 
 pts1 = [40 50;25 30;40 20];
 pts2 = [0 80;10 60;20 40;30 20;40 0;0 0;100 0;0 100;0 -10;-10 -20];
 res1 = [10*sqrt(5);5*sqrt(5);10];
-assertElementsAlmostEqual(minDistancePoints(pts1, pts2, 2), res1);
+testCase.assertEqual(minDistancePoints(pts1, pts2, 2), res1, 'AbsTol', .01);
 
 res2 = [30;15;10];
-assertElementsAlmostEqual(minDistancePoints(pts1, pts2, 1), res2);
+testCase.assertEqual(minDistancePoints(pts1, pts2, 1), res2, 'AbsTol', .01);
 
-function testArrayArrayIndices
+function testArrayArrayIndices(testCase)
 
 pts1    = [40 50;20 30;40 20];
 pts2    = [0 80;10 60;20 40;30 20;40 0;0 0;100 0;0 100;0 -10;-10 -20];
 dists0  = [10*sqrt(5);10;10];
 inds1   = [3;3;4];
 [minDists, inds] = minDistancePoints(pts1, pts2);
-assertElementsAlmostEqual(dists0, minDists);
-assertElementsAlmostEqual(inds1, inds);
+testCase.assertEqual(dists0, minDists, 'AbsTol', .01);
+testCase.assertEqual(inds1, inds, 'AbsTol', .01);
 

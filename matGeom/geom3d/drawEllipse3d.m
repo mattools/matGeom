@@ -16,16 +16,26 @@ function varargout = drawEllipse3d(varargin)
 %   where XC, YC, ZY are coordinate of ellipse center, A and B are the
 %   half-lengths of the major and minor axes of the ellipse,
 %   PHI and THETA are 3D angle (in degrees) of the normal to the plane
-%   containing the ellipse (PHI between 0 and 380 corresponding to
+%   containing the ellipse (PHI between 0 and 360 corresponding to
 %   longitude, and THETA from 0 to 180, corresponding to angle with
 %   vertical).
 %   
 %   H = drawEllipse3d(...)
 %   return handle on the created LINE object
 %   
+%   Example
+%     figure; axis([-10 10 -10 10 -10 10]); hold on;
+%     ellXY = [0 0 0  8 5  0 0 0];
+%     drawEllipse3d(ellXY, 'color', [.8 0 0], 'linewidth', 2)
+%     ellXZ = [0 0 0  8 2  90 90 90];
+%     drawEllipse3d(ellXZ, 'color', [0 .8 0], 'linewidth', 2)
+%     ellYZ = [0 0 0  5 2  90 0 90];
+%     drawEllipse3d(ellYZ, 'color', [0 0 .8], 'linewidth', 2)
+% 
+ 
 %   ------
 %   Author: David Legland
-%   e-mail: david.legland@grignon.inra.fr
+%   e-mail: david.legland@inra.fr
 %   Created: 2008-05-07
 %   Copyright 2008 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 

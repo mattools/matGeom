@@ -8,7 +8,7 @@ function [intersects, inds] = intersectEdgePolygon(edge, poly, varargin)
 %   INTER is a M-by-2 array containing coordinates of intersection(s). It
 %   can be empty if no intersection is found.
 %
-%   [INTER INDS] = intersectEdgePolygon(EDGE, POLY)
+%   [INTER, INDS] = intersectEdgePolygon(EDGE, POLY)
 %   Also returns index/indices of edge(s) involved in intersections.
 %
 %   Example
@@ -23,9 +23,10 @@ function [intersects, inds] = intersectEdgePolygon(edge, poly, varargin)
 %   See also
 %   edges2d, polygons2d, intersectLinePolygon, intersectRayPolygon
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2012-02-24,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
@@ -35,13 +36,16 @@ if ~isempty(varargin)
     tol = varargin{1};
 end
 
+% get supporting line of edge
 line = edgeToLine(edge);
 
+% compute all intersections of supporting line with polygon
 [intersects, inds] = intersectLinePolygon(line, poly, tol);
 
+% keep only intersection points located on the edge
 if ~isempty(intersects)
     pos = linePosition(intersects, line);
-    keep = pos >= 0 & pos <= 1;
+    keep = pos >= -tol & pos <= (1+tol);
     intersects = intersects(keep, :);
     inds = inds(keep);
 end

@@ -1,4 +1,4 @@
-function test_suite = test_graphDiameter(varargin) %#ok<STOUT>
+function test_suite = test_graphDiameter
 %TEST_GRAPHDIAMETER  One-line description here, please.
 %
 %   output = test_graphDiameter(input)
@@ -16,13 +16,13 @@ function test_suite = test_graphDiameter(varargin) %#ok<STOUT>
 % Copyright 2011 INRA - Cepia Software Platform.
 
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testGraph02 %#ok<*DEFNU>
+function testGraph02(testCase) %#ok<*DEFNU>
 
 [nodes, edges] = createTestGraph02;
 diam = graphDiameter(nodes, edges);
 
 exp = 6;
-assertEqual(exp, diam);
+testCase.assertEqual(exp, diam);
 

@@ -1,4 +1,4 @@
-function test_suite = test_polylineLength(varargin) %#ok<STOUT>
+function test_suite = test_polylineLength
 %TESTPOLYLINELENGTH  One-line description here, please.
 %
 %   output = testPolylineLength(input)
@@ -15,9 +15,9 @@ function test_suite = test_polylineLength(varargin) %#ok<STOUT>
 % Created: 2011-05-27,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testSquare %#ok<*DEFNU>
+function testSquare(testCase) %#ok<*DEFNU>
 % Tests with a square of perimeter 40
 p1 = [10 10];
 p2 = [20 10];
@@ -26,4 +26,4 @@ p4 = [10 20];
 square = [p1;p2;p3;p4];
 exp = 30;
 
-assertEqual(exp, polylineLength(square));
+testCase.assertEqual(exp, polylineLength(square));

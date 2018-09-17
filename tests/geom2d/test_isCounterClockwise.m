@@ -1,4 +1,4 @@
-function test_suite = test_isCounterClockwise %#ok<STOUT>
+function test_suite = test_isCounterClockwise 
 %test orientation of 3 points
 %   output = testEq(input)
 %
@@ -15,9 +15,9 @@ function test_suite = test_isCounterClockwise %#ok<STOUT>
 % Copyright 2009 INRA - Cepia Software Platform.
 % Licensed under the terms of the LGPL, see the file "license.txt"
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testCcwTurnLeft %#ok<*DEFNU>
+function testCcwTurnLeft(testCase) %#ok<*DEFNU>
 % turn 90° left => return +1
 
 p0 = [2, 3]; % center point
@@ -26,12 +26,12 @@ pd = [2, 2]; % down point
 pl = [1, 3]; % left point
 pr = [3, 3]; % right point
 
-assertEqual(isCounterClockwise(pl, p0, pu), +1);
-assertEqual(isCounterClockwise(pd, p0, pl), +1);
-assertEqual(isCounterClockwise(pr, p0, pd), +1);
-assertEqual(isCounterClockwise(pu, p0, pr), +1);
+testCase.assertEqual(isCounterClockwise(pl, p0, pu), +1);
+testCase.assertEqual(isCounterClockwise(pd, p0, pl), +1);
+testCase.assertEqual(isCounterClockwise(pr, p0, pd), +1);
+testCase.assertEqual(isCounterClockwise(pu, p0, pr), +1);
 
-function testCcwTurnRight
+function testCcwTurnRight(testCase)
 % turn 90° right => return -1
 
 p0 = [2, 3]; % center point
@@ -40,12 +40,12 @@ pd = [2, 2]; % down point
 pl = [1, 3]; % left point
 pr = [3, 3]; % right point
 
-assertEqual(isCounterClockwise(pl, p0, pd), -1);
-assertEqual(isCounterClockwise(pd, p0, pr), -1);
-assertEqual(isCounterClockwise(pr, p0, pu), -1);
-assertEqual(isCounterClockwise(pu, p0, pl), -1);
+testCase.assertEqual(isCounterClockwise(pl, p0, pd), -1);
+testCase.assertEqual(isCounterClockwise(pd, p0, pr), -1);
+testCase.assertEqual(isCounterClockwise(pr, p0, pu), -1);
+testCase.assertEqual(isCounterClockwise(pu, p0, pl), -1);
 
-function testCcwTurnLeftArray
+function testCcwTurnLeftArray(testCase)
 % turn 90° left => return +1
 
 p0 = [2, 3]; % center point
@@ -59,9 +59,9 @@ pts2 = [p0;p0;p0;p0;p0;p0;p0;p0];
 pts3 = [pu;pl;pd;pr;pd;pr;pu;pl];
 expected = [1;1;1;1;-1;-1;-1;-1];
 result = isCounterClockwise(pts1, pts2, pts3);
-assertElementsAlmostEqual(expected, result);
+testCase.assertEqual(expected, result, 'AbsTol', .01);
 
-function testCcwCol1
+function testCcwCol1(testCase)
 % aligned with p0-p1-p2 => return +1
 
 p0 = [2, 3]; % center point
@@ -70,12 +70,12 @@ pd = [2, 2]; % down point
 pl = [1, 3]; % left point
 pr = [3, 3]; % right point
 
-assertEqual(isCounterClockwise(pl, p0, pr), +1);
-assertEqual(isCounterClockwise(pu, p0, pd), +1);
-assertEqual(isCounterClockwise(pr, p0, pl), +1);
-assertEqual(isCounterClockwise(pd, p0, pu), +1);
+testCase.assertEqual(isCounterClockwise(pl, p0, pr), +1);
+testCase.assertEqual(isCounterClockwise(pu, p0, pd), +1);
+testCase.assertEqual(isCounterClockwise(pr, p0, pl), +1);
+testCase.assertEqual(isCounterClockwise(pd, p0, pu), +1);
 
-function testCcwCol0
+function testCcwCol0(testCase)
 % aligned ]ith p0-p2-p1 => return 0
 p0 = [2, 3]; % center point
 pu = [2, 4]; % up point
@@ -83,12 +83,12 @@ pd = [2, 2]; % down point
 pl = [1, 3]; % left point
 pr = [3, 3]; % right point
 
-assertEqual(isCounterClockwise(pl, pr, p0), 0);
-assertEqual(isCounterClockwise(pu, pd, p0), 0);
-assertEqual(isCounterClockwise(pr, pl, p0), 0);
-assertEqual(isCounterClockwise(pd, pu, p0), 0);
+testCase.assertEqual(isCounterClockwise(pl, pr, p0), 0);
+testCase.assertEqual(isCounterClockwise(pu, pd, p0), 0);
+testCase.assertEqual(isCounterClockwise(pr, pl, p0), 0);
+testCase.assertEqual(isCounterClockwise(pd, pu, p0), 0);
 
-function testCcwColM1
+function testCcwColM1(testCase)
 % aligned with p1-p0-p2 => return -1
 p0 = [2, 3]; % center point
 pu = [2, 4]; % up point
@@ -96,8 +96,8 @@ pd = [2, 2]; % down point
 pl = [1, 3]; % left point
 pr = [3, 3]; % right point
 
-assertEqual(isCounterClockwise(p0, pl, pr), -1);
-assertEqual(isCounterClockwise(p0, pu, pd), -1);
-assertEqual(isCounterClockwise(p0, pr, pl), -1);
-assertEqual(isCounterClockwise(p0, pd, pu), -1);
+testCase.assertEqual(isCounterClockwise(p0, pl, pr), -1);
+testCase.assertEqual(isCounterClockwise(p0, pu, pd), -1);
+testCase.assertEqual(isCounterClockwise(p0, pr, pl), -1);
+testCase.assertEqual(isCounterClockwise(p0, pd, pu), -1);
 

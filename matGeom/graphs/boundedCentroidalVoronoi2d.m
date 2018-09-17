@@ -1,32 +1,32 @@
 function varargout = boundedCentroidalVoronoi2d(germs, box, varargin)
 %BOUNDEDCENTROIDALVORONOI2D Create a 2D Centroidal Voronoi Tesselation in a box
 %
-%   [N E F] = boundedCentroidalVoronoi2d(GERMS, BOX)
+%   [N, E, F] = boundedCentroidalVoronoi2d(GERMS, BOX)
 %   GERMS are N-by-2 point array, BOX is given as [xmin xmax ymin ymax].
 %   Algorithm is an iteration of voronoi diagram computations, using at
 %   each steps the centroids of previous diagram as germs for the new
 %   diagram.
 %
-%   [N E F] = boundedCentroidalVoronoi2d(GERMS, BOX, NITER)
+%   [N, E, F] = boundedCentroidalVoronoi2d(GERMS, BOX, NITER)
 %   Specifies the number of iterations.
 %
-%   [N E F G] = boundedCentroidalVoronoi2d(...)
+%   [N, E, F, G] = boundedCentroidalVoronoi2d(...)
 %   also returns the positions of germs/centroids for each face. If the
 %   number of iteration was sufficient, location of germs should correspond
 %   to centroids of faces 'fc' computed using: 
 %   fc(i,:) = polygonCentroid(n(f{i}, :));
 %
 %   Example
-%   [n e f] = boundedCentroidalVoronoi2d(rand(20, 2)*100, [0 100 0 100]);
+%   [n, e, f] = boundedCentroidalVoronoi2d(rand(20, 2)*100, [0 100 0 100]);
 %   drawGraph(n, e, f);
 %
 %   See also
-%     boundedVoronoi2d, centroidalVoronoi2d 
+%     graphs, boundedVoronoi2d, centroidalVoronoi2d, clipGraph
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2007-01-12
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 

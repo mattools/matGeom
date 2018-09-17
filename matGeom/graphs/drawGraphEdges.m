@@ -16,11 +16,12 @@ function varargout = drawGraphEdges(varargin)
 %   return handle to the set of edges.
 %   
 %   See also 
-%   drawGraph
+%   graphs, drawGraph, fillGraphFaces
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2005-11-24
 % Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
@@ -50,8 +51,8 @@ end
 var = varargin{1};
 if iscell(var)
     % TODO: should consider array of graph structures.
-    % graph is stored as a cell array : first cell is nodes, second one is
-    % edges, and third is faces
+    % graph is stored as a cell array: first cell is nodes, second one is
+    % edges, and third one is faces
     n = var{1};
     if length(var) > 1
         e = var{2};

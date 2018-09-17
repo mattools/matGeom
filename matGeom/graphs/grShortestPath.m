@@ -28,7 +28,7 @@ function [nodePath, edgePath] = grShortestPath(nodes, edges, ind0, ind1, edgeWei
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2011-05-22,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
@@ -43,7 +43,7 @@ if length(ind0) > 1
     
     % concatenate path pieces
     nodePath = ind0(1);
-    edgePath = [];
+    edgePath = size(0, 2);
     for i = 2:length(ind0)
         [node0, edge0] = grShortestPath(nodes, edges, ind0(i-1), ind0(i), edgeWeights);
         nodePath = [nodePath ; node0(2:end)]; %#ok<AGROW>
@@ -144,8 +144,6 @@ while ~isempty(unprocessedNodeInds)
 end
 
 
-
-
 %% Path creation
 
 % create the path: start from end index, and identify successive set of
@@ -159,10 +157,14 @@ edgePath = [];
 while nodeInd ~= ind0
     newNodeInd = preds(nodeInd);
     nodePath = [nodePath ; newNodeInd]; %#ok<AGROW>
-    nodeInd = newNodeInd;
-    
-    edgeInd = find(sum(ismember(edges2, [nodeInd newNodeInd]), 2) == 2); 
+
+    % search the edge (both directions) in the list of edges
+    e_tmp                 = [nodeInd newNodeInd];
+    [~,edgeInd]           = ismember ([e_tmp; e_tmp(end:-1:1)], edges, 'rows');
+    edgeInd(edgeInd == 0) = []; % erase the one that isn't there
     edgePath = [edgePath ; edgeInd]; %#ok<AGROW>
+
+    nodeInd = newNodeInd;
 end
     
 % reverse the path

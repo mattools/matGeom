@@ -23,13 +23,13 @@ function area = meshSurfaceArea(vertices, edges, faces)
 %         6
 %
 %   See also
-%   meshes3d, trimeshSurfaceArea, meshVolume, meshFacePolygons,
-%   polygonArea3d
+%     meshes3d, trimeshSurfaceArea, meshVolume, meshFaceAreas,
+%     meshFacePolygons, polygonArea3d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2010-10-13,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform.
 
@@ -40,7 +40,7 @@ if nargin == 2
 end
 
 % pre-compute normals
-normals = normalizeVector3d(faceNormal(vertices, faces));
+normals = normalizeVector3d(meshFaceNormals(vertices, faces));
 
 % init accumulator
 area = 0;

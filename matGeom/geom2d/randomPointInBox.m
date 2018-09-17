@@ -22,12 +22,12 @@ function points = randomPointInBox(box, N, varargin)
 %     axis([0 100 0 100]);
 %
 %   See also
-%   points2d, boxes2d
+%     geom2d, points2d, boxes2d, randomPointInBox3d, randomPointInPolygon
 %
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2007-10-10,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 

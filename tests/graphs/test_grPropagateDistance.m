@@ -1,4 +1,4 @@
-function test_suite = test_grPropagateDistance(varargin) %#ok<STOUT>
+function test_suite = test_grPropagateDistance
 %TEST_GRPROPAGATEDISTANCE  Test case for the file grPropagateDistance
 %
 %   Test case for the file grPropagateDistance
@@ -15,9 +15,9 @@ function test_suite = test_grPropagateDistance(varargin) %#ok<STOUT>
 % Created: 2014-01-13,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2014 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function test_Simple %#ok<*DEFNU>
+function test_Simple(testCase) %#ok<*DEFNU>
 % propagate distance on a graph where a branch has smaller nodes but larger
 % cumulated distance
 
@@ -28,6 +28,6 @@ e0 = [1 2;1 6; 2 3;3 4;4 5;5 6];
 l0 = [2 5 2 2 2 5]';
 % distance of node number 5 should be 8 (four times 2)
 dists = grPropagateDistance(n0, e0, 1, l0);
-assertEqual(8, dists(5));
+testCase.assertEqual(8, dists(5));
 
 

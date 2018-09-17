@@ -4,12 +4,12 @@ function varargout = projPointOnPolyline(point, poly, varargin)
 %   POS = projPointOnPolyline(POINT, POLYLINE)
 %   Compute the position of the orthogonal projection of a point on a
 %   polyline.
-%   POINT is a 1x2 row vector containing point coordinates
-%   POLYLINE is a Nx2 array containing coordinates of polyline vertices
+%   POINT is a 1-by-2 row vector containing point coordinates
+%   POLYLINE is a N-by-2 array containing coordinates of polyline vertices
 %   POS is the position of the point on the polyline, between 0 and the
 %   number of vertices of the polyline. POS can be a non-integer value, in
-%   this case, the integer part correspond to the polyline edge index
-%   (between 0 and Nv-1), and the floating-point part correspond to the
+%   this case, the integer part corresponds to the polyline edge index
+%   (between 0 and Nv-1), and the floating-point part corresponds to the
 %   relative position on i-th edge (between 0 and 1, 0: edge start, 1: edge
 %   end).
 %
@@ -17,7 +17,7 @@ function varargout = projPointOnPolyline(point, poly, varargin)
 %   rows as the number of points.
 %
 %   POS = projPointOnPolyline(POINT, POLYLINE, CLOSED)
-%   Specify if the polyline is closed or not. CLOSED can be one of:
+%   Specifies if the polyline is closed or not. CLOSED can be one of:
 %     'closed' -> the polyline is closed
 %     'open' -> the polyline is open
 %     a column vector of logical with the same number of elements as the
@@ -43,7 +43,7 @@ function varargout = projPointOnPolyline(point, poly, varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@nantes.inra.fr
 % Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
@@ -62,7 +62,7 @@ end
 
 % closes the polyline if necessary
 if closed
-    poly = [poly;poly(1,:)];
+    poly = [poly ; poly(1,:)];
 end
 
 % number of points
@@ -82,7 +82,7 @@ for p = 1:Np
     
     % update distance and position if necessary
     [minDist(p), edgeIndex] = min(dist);
-    pos(p) = edgeIndex-1 + edgePos(edgeIndex);   
+    pos(p) = edgeIndex - 1 + edgePos(edgeIndex);   
 end
 
 % process output arguments

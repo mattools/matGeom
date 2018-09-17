@@ -1,4 +1,4 @@
-function test_suite = test_grFindMaximalLengthPath(varargin) %#ok<STOUT>
+function test_suite = test_grFindMaximalLengthPath
 %TESTGRFINDMAXIMALLENGTHPATH  One-line description here, please.
 %
 %   output = test_grFindMaximalLengthPath(input)
@@ -16,11 +16,11 @@ function test_suite = test_grFindMaximalLengthPath(varargin) %#ok<STOUT>
 % Copyright 2011 INRA - Cepia Software Platform.
 
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testGraph03 %#ok<*DEFNU>
+function testGraph03(testCase) %#ok<*DEFNU>
 
 [nodes, edges] = createTestGraph03;
 path = grFindMaximalLengthPath(nodes, edges);
 exp = [1 2 5 7 11 13];
-assertEqual(exp, path);
+testCase.assertEqual(exp, path);

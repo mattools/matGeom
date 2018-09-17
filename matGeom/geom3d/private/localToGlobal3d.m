@@ -24,7 +24,7 @@ function trans = localToGlobal3d(varargin)
 %   This corresponds to Euler ZYZ rotation, using angles PHI, THETA and
 %   PSI.
 %
-%   The 'createEulerAnglesRotation' function may better suit your needs as
+%   The 'eulerAnglesToRotation3d' function may better suit your needs as
 %   it is more 'natural'.
 %
 %   Example

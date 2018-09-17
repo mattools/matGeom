@@ -37,6 +37,7 @@ function varargout = drawCircle(varargin)
 %   See also
 %   circles2d, drawCircleArc, drawEllipse, circleToPolygon
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE

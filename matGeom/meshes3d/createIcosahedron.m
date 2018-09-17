@@ -2,11 +2,11 @@ function varargout = createIcosahedron()
 %CREATEICOSAHEDRON Create a 3D mesh representing an Icosahedron.
 %
 %   MESH = createIcosahedron;
-%   [V E F] = createIcosahedron;
+%   [V, E, F] = createIcosahedron;
 %   Create a solid with 12 vertices, and 20 triangular faces. Faces are
 %   oriented outwards of the mesh.
 %
-%   [V F] = createIcosahedron;
+%   [V, F] = createIcosahedron;
 %   Returns only the vertices and the face vertex indices.
 %
 %   MESH = createIcosahedron;
@@ -14,17 +14,17 @@ function varargout = createIcosahedron()
 %   and 'faces'.
 %
 %   Example
-%     [n e f] = createIcosahedron;
+%     [n, e, f] = createIcosahedron;
 %     drawMesh(n, f);
 %   
 %   See also
 %   meshes3d, drawMesh
 %   createCube, createOctahedron, createDodecahedron, createTetrahedron
 %
-%
+
 %   ---------
 %   author: David Legland 
-%   mail: david.legland@grignon.inra.fr
+%   mail: david.legland@inra.fr
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 21/03/2005.
 %

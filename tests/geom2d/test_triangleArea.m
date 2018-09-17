@@ -1,4 +1,4 @@
-function test_suite = test_triangleArea(varargin) %#ok<STOUT>
+function test_suite = test_triangleArea
 %TEST_TRIANGLEAREA  Test case for the file triangleArea
 %
 %   Test case for the file triangleArea
@@ -15,9 +15,9 @@ function test_suite = test_triangleArea(varargin) %#ok<STOUT>
 % Created: 2011-08-23,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function test_CCW_Triangle %#ok<*DEFNU>
+function test_CCW_Triangle(testCase) %#ok<*DEFNU>
 
 % rectangle triangle with sides 20 and 30 -> area is 300.
 p1 = [10 20];
@@ -28,17 +28,17 @@ exp = 300;
 
 % run as separate inputs
 area = triangleArea(p1, p2, p3);
-assertEqual(exp, area);
+testCase.assertEqual(exp, area);
 area = triangleArea(p2, p3, p1);
-assertEqual(exp, area);
+testCase.assertEqual(exp, area);
 area = triangleArea(p3, p1, p2);
-assertEqual(exp, area);
+testCase.assertEqual(exp, area);
 
 % run as bundled array
 area = triangleArea([p1; p2; p3]);
-assertEqual(exp, area);
+testCase.assertEqual(exp, area);
 
-function test_CW_Triangle
+function test_CW_Triangle(testCase)
 
 % rectangle triangle with sides 20 and 30 -> area is 300.
 p1 = [10 20];
@@ -49,13 +49,13 @@ exp = -300;
 
 % run as separate inputs
 area = triangleArea(p3, p2, p1);
-assertEqual(exp, area);
+testCase.assertEqual(exp, area);
 area = triangleArea(p1, p3, p2);
-assertEqual(exp, area);
+testCase.assertEqual(exp, area);
 area = triangleArea(p2, p1, p3);
-assertEqual(exp, area);
+testCase.assertEqual(exp, area);
 
 % run as bundled array
 area = triangleArea([p3; p2; p1]);
-assertEqual(exp, area);
+testCase.assertEqual(exp, area);
 

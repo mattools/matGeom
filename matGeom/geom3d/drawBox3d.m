@@ -1,4 +1,4 @@
-function drawBox3d(box, varargin)
+function varargout = drawBox3d(box, varargin)
 %DRAWBOX3D Draw a 3D box defined by coordinate extents
 %   
 %   drawBox3d(BOX);
@@ -41,25 +41,32 @@ zmax = box(:,6);
 
 nBoxes = size(box, 1);
 
-for i=1:length(nBoxes)
+gh=zeros(nBoxes,1);
+for i=1:nBoxes
     % lower face (z=zmin)
-    drawEdge3d([xmin(i) ymin(i) zmin(i)     xmax(i) ymin(i) zmin(i)], varargin{:});
-    drawEdge3d([xmin(i) ymin(i) zmin(i)     xmin(i) ymax(i) zmin(i)], varargin{:});
-    drawEdge3d([xmax(i) ymin(i) zmin(i)     xmax(i) ymax(i) zmin(i)], varargin{:});
-    drawEdge3d([xmin(i) ymax(i) zmin(i)     xmax(i) ymax(i) zmin(i)], varargin{:});
+    sh(1)=drawEdge3d([xmin(i) ymin(i) zmin(i)     xmax(i) ymin(i) zmin(i)], varargin{:});
+    sh(2)=drawEdge3d([xmin(i) ymin(i) zmin(i)     xmin(i) ymax(i) zmin(i)], varargin{:});
+    sh(3)=drawEdge3d([xmax(i) ymin(i) zmin(i)     xmax(i) ymax(i) zmin(i)], varargin{:});
+    sh(4)=drawEdge3d([xmin(i) ymax(i) zmin(i)     xmax(i) ymax(i) zmin(i)], varargin{:});
  
     % front face (y=ymin)
-    drawEdge3d([xmin(i) ymin(i) zmin(i)     xmin(i) ymin(i) zmax(i)], varargin{:});
-    drawEdge3d([xmax(i) ymin(i) zmin(i)     xmax(i) ymin(i) zmax(i)], varargin{:});
-    drawEdge3d([xmin(i) ymin(i) zmax(i)     xmax(i) ymin(i) zmax(i)], varargin{:});
+    sh(5)=drawEdge3d([xmin(i) ymin(i) zmin(i)     xmin(i) ymin(i) zmax(i)], varargin{:});
+    sh(6)=drawEdge3d([xmax(i) ymin(i) zmin(i)     xmax(i) ymin(i) zmax(i)], varargin{:});
+    sh(7)=drawEdge3d([xmin(i) ymin(i) zmax(i)     xmax(i) ymin(i) zmax(i)], varargin{:});
 
     % left face (x=xmin)
-    drawEdge3d([xmin(i) ymax(i) zmin(i)     xmin(i) ymax(i) zmax(i)], varargin{:});
-    drawEdge3d([xmin(i) ymin(i) zmax(i)     xmin(i) ymax(i) zmax(i)], varargin{:});
+    sh(8)=drawEdge3d([xmin(i) ymax(i) zmin(i)     xmin(i) ymax(i) zmax(i)], varargin{:});
+    sh(9)=drawEdge3d([xmin(i) ymin(i) zmax(i)     xmin(i) ymax(i) zmax(i)], varargin{:});
 
     % the last 3 remaining edges
-    drawEdge3d([xmin(i) ymax(i) zmax(i)     xmax(i) ymax(i) zmax(i)], varargin{:});
-    drawEdge3d([xmax(i) ymax(i) zmin(i)     xmax(i) ymax(i) zmax(i)], varargin{:});
-    drawEdge3d([xmax(i) ymin(i) zmax(i)     xmax(i) ymax(i) zmax(i)], varargin{:});
+    sh(10)=drawEdge3d([xmin(i) ymax(i) zmax(i)     xmax(i) ymax(i) zmax(i)], varargin{:});
+    sh(11)=drawEdge3d([xmax(i) ymax(i) zmin(i)     xmax(i) ymax(i) zmax(i)], varargin{:});
+    sh(12)=drawEdge3d([xmax(i) ymin(i) zmax(i)     xmax(i) ymax(i) zmax(i)], varargin{:});
+    
+    gh(i) = hggroup;
+    set(sh,'Parent',gh(i))
+end
 
+if nargout > 0
+    varargout = {gh};
 end

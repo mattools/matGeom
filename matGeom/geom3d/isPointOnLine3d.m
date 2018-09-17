@@ -13,12 +13,14 @@ function b = isPointOnLine3d(point, line, varargin)
 %   Specifies the tolerance used for testing location on 3D line.
 %
 %   See also: 
-%   lines3d, distancePointLine3d, linePosition3d
+%   lines3d, distancePointLine3d, linePosition3d, isPointOnLine
 %
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
+
+% ---------
+% author : David Legland 
+% e-mail: david.legland@inra.fr
+% INRA - TPV URPOI - BIA IMASTE
+% created the 31/10/2003.
 %
 
 %   HISTORY
@@ -32,6 +34,6 @@ end
 
 % test if lines are colinear, using norm of the cross product
 b = bsxfun(@rdivide, vectorNorm3d( ...
-        vectorCross3d(bsxfun(@minus, line(:,1:3), point), line(:,4:6))), ...
+        crossProduct3d(bsxfun(@minus, line(:,1:3), point), line(:,4:6))), ...
         vectorNorm3d(line(:,4:6))) < tol;
 

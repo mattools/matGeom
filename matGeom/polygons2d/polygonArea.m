@@ -31,13 +31,21 @@ function area = polygonArea(poly, varargin)
 %     area =
 %        400
 %
+%     % Area of unit square with 25% hole
+%     pccw = [0 0; 1 0; 1 1; 0 1];
+%     pcw = pccw([1 4 3 2], :) * .5 + .25;
+%     polygonArea ([pccw; nan(1,2); pcw])
+%     ans =
+%        0.75
+%
 %   References
 %   algo adapted from P. Bourke web page
-%   http://local.wasp.uwa.edu.au/~pbourke/geometry/polyarea/
+%   http://paulbourke.net/geometry/polygonmesh/
 %
 %   See also:
-%   polygons2d, polygonCentroid, drawPolygon, triangleArea
+%   polygons2d, polygonCentroid, polygonSecondAreaMoments, triangleArea
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -47,6 +55,9 @@ function area = polygonArea(poly, varargin)
 %   HISTORY
 %   25/04/2005: add support for multiple polygons
 %   12/10/2007: update doc
+
+
+%% Process special cases
 
 % in case of polygon sets, computes the sum of polygon areas
 if iscell(poly)
@@ -62,6 +73,15 @@ if size(poly, 1) < 2
     area = 0;
     return;
 end
+
+% case of polygons with holes -> computes the sum of areas
+if any(isnan(poly))
+    area = sum(polygonArea(splitPolygons(poly)));
+    return;
+end
+
+
+%% Process single polygons or single rings
 
 % extract coordinates
 if nargin == 1

@@ -1,18 +1,18 @@
 function varargout = drawMesh(vertices, faces, varargin)
-%DRAWMESH Draw a 3D mesh defined by vertices and faces
+%DRAWMESH Draw a 3D mesh defined by vertex and face arrays
 %
 %   drawMesh(VERTICES, FACES)
 %   Draws the 3D mesh defined by vertices VERTICES and the faces FACES. 
-%   vertices is a [NVx3] array containing coordinates of vertices, and FACES
-%   is either a [NFx3] or [NFx4] array containing indices of vertices of
-%   the triangular or rectangular faces.
+%   vertices is a NV-by-3 array containing coordinates of vertices, and
+%   FACES is either a NF-by-3 or NF-by-4 array containing face vertex
+%   indices of the triangular or rectangular faces.
 %   FACES can also be a cell array, in the content of each cell is an array
-%   of indices to the vertices of the current face. Faces can have different
-%   number of vertices.
+%   of indices to the vertices of the current face. Faces can have
+%   different number of vertices.
 %   
 %   drawMesh(MESH)
-%   Where mesh is a structure with fields 'vertices' and 'faces', draws the
-%   given mesh.
+%   Specifies the mesh as a structure with at least the fields 'vertices'
+%   and 'faces'. 
 %
 %   drawMesh(..., COLOR)
 %   Use the specified color to render the mesh faces.
@@ -26,12 +26,13 @@ function varargout = drawMesh(vertices, faces, varargin)
 %   Also returns a handle to the created patch.
 %
 %   Example:
-%     [v f] = createSoccerBall;
+%     [v, f] = createSoccerBall;
 %     drawMesh(v, f);
 %
 %   See also:
-%   polyhedra, meshes3d, patch
+%     meshes3d, polyhedra, patch
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE

@@ -8,13 +8,13 @@ function boxes2d(varargin)
 %   shapes.
 %
 %   See also
-%   boundingBox, lipPoints, clipLine, clipEdge, clipRay
-%   mergeBoxes, intersectBoxes, randomPointInBox, boxToRect
+%   boundingBox, clipPoints, clipLine, clipEdge, clipRay
+%   mergeBoxes, intersectBoxes, randomPointInBox, boxToRect, boxToPolygon
 %
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2010 INRA - Cepia Software Platform.
 

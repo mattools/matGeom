@@ -1,4 +1,4 @@
-function test_suite = test_polygonCentroid(varargin) %#ok<STOUT>
+function test_suite = test_polygonCentroid
 %TEST_POLYGONCENTROID  Test case for the file polygonCentroid
 %
 %   Test case for the file polygonCentroid
@@ -15,26 +15,26 @@ function test_suite = test_polygonCentroid(varargin) %#ok<STOUT>
 % Created: 2012-02-24,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions);
 
-function test_Square %#ok<*DEFNU>
+function test_Square(testCase) %#ok<*DEFNU>
 % Test call of function without argument
 square = [0 0;10 0;10 10;0 10];
 
 centro = polygonCentroid(square);
-assertEqual([5 5], centro);
+testCase.assertEqual([5 5], centro);
 
-function test_SquareMultiVertices
+function test_SquareMultiVertices(testCase)
 % Test call of function without argument
 square = [0 0;10 0;10 10;10 10;0 10;0 0];
 
 centro = polygonCentroid(square);
-assertEqual([5 5], centro);
+testCase.assertEqual([5 5], centro);
 
-function test_Lozenge
+function test_Lozenge(testCase)
 % Test call of function without argument
 poly = [10 10;20 20;10 30;0 20];
 
 centro = polygonCentroid(poly);
-assertEqual([10 20], centro);
+testCase.assertEqual([10 20], centro);
 

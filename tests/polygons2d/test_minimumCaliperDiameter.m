@@ -1,4 +1,4 @@
-function test_suite = test_minimumCaliperDiameter(varargin) %#ok<STOUT>
+function test_suite = test_minimumCaliperDiameter
 %TESTMINIMUMCALIPERDIAMETER  One-line description here, please.
 %
 %   output = testMinimumCaliperDiameter(input)
@@ -16,9 +16,9 @@ function test_suite = test_minimumCaliperDiameter(varargin) %#ok<STOUT>
 % Copyright 2011 INRA - Cepia Software Platform.
 
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function testSquare %#ok<*DEFNU>
+function testSquare(testCase) %#ok<*DEFNU>
 
 p1 = [10 10];
 p2 = [20 10];
@@ -27,9 +27,9 @@ p4 = [10 20];
 square = [p1;p2;p3;p4];
 
 width = minimumCaliperDiameter(square);
-assertEqual(10, width);
+testCase.assertEqual(10, width);
 
-function testRectangle
+function testRectangle(testCase)
 
 p1 = [10 10];
 p2 = [20 10];
@@ -38,9 +38,9 @@ p4 = [10 50];
 square = [p1;p2;p3;p4];
 
 width = minimumCaliperDiameter(square);
-assertEqual(10, width);
+testCase.assertEqual(10, width);
 
-function testCross
+function testCross(testCase)
 
 pts = [...
     10 40; ...
@@ -56,9 +56,9 @@ pts = [...
     50 60; ...
     10 60];
 width = minimumCaliperDiameter(pts);
-assertEqual(60, width);
+testCase.assertEqual(60, width);
 
 % try again by shuffling vertices
 pts = pts([ 4 10 6 12 2 11 8 1 5 3 9 7], :);
 width = minimumCaliperDiameter(pts);
-assertEqual(60, width);
+testCase.assertEqual(60, width);

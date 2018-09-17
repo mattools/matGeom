@@ -9,15 +9,17 @@ function edge2 = clipEdge(edge, box)
 %
 %   If clipping is null, return [0 0 0 0];
 %
-%   if EDGE is a N-by-4 array, return an N-by-4 array, corresponding to each
-%   clipped edge.
+%   if EDGE is a N-by-4 array, return an N-by-4 array, corresponding to
+%   each clipped edge.
 %
 %   See also
 %   edges2d, boxes2d, clipLine
 %
+
 % ---------
 % author : David Legland 
-% created the 14/05/2005.
+% e-mail: david.legland@inra.fr
+% created: the 14/05/2005.
 % Copyright 2010 INRA - Cepia Software Platform.
 
 %   HISTORY
@@ -70,7 +72,7 @@ edge2 = zeros(size(edge));
 % copy result of edges totally inside clipping box
 edge2(inside, :) = edge(inside, :);
 
-
+% iterate over edges
 for i = 1:length(ind)
     % current edge
     iedge = edge(ind(i), :);

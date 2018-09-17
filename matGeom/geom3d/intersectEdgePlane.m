@@ -33,17 +33,19 @@ function point = intersectEdgePlane(edge, plane, varargin)
 %   17/06/2011 E. J. Payton - fixed indexing error that caused incorrect
 %              points to be returned
 
+% extract tolerance for determination of parallel edges and planes
 tol = 1e-14;
 if ~isempty(varargin)
     tol = varargin{1};
 end
 
+% number of planes and edges
 np = size(plane, 1);
 ne = size(edge, 1);
 
 % unify sizes of data
 if np ~= ne
-    if ne == 1;
+    if ne == 1
         % one edge and many planes
         edge = edge(ones(np, 1), :);
     elseif np == 1

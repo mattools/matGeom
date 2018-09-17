@@ -1,4 +1,4 @@
-function test_suite = test_subdivideMesh(varargin) %#ok<STOUT>
+function test_suite = test_subdivideMesh
 %TEST_SUBDIVIDEMESH  Test case for the file subdivideMesh
 %
 %   Test case for the file subdivideMesh
@@ -15,37 +15,38 @@ function test_suite = test_subdivideMesh(varargin) %#ok<STOUT>
 % Created: 2013-08-22,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2013 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions);
 
-function test_Subdivide_N2 %#ok<*DEFNU>
+
+function test_Subdivide_N2(testCase) %#ok<*DEFNU>
 % subdivide by a factor of 2
 
 [v, f] = createSimpleMesh();
 [v2, f2] = subdivideMesh(v, f, 2);
 
-assertEqual(9, size(v2, 1));
+testCase.assertEqual(9, size(v2, 1));
 nFaces = size(f2, 1);
-assertEqual(8, nFaces);
+testCase.assertEqual(8, nFaces);
 
-function test_Subdivide_N3
+function test_Subdivide_N3(testCase)
 % subdivide by a factor of 3
 
 [v, f] = createSimpleMesh();
 [v2, f2] = subdivideMesh(v, f, 3);
 
-assertEqual(16, size(v2, 1));
+testCase.assertEqual(16, size(v2, 1));
 nFaces = size(f2, 1);
-assertEqual(18, nFaces);
+testCase.assertEqual(18, nFaces);
 
-function test_Subdivide_N4
+function test_Subdivide_N4(testCase)
 % subdivide by a factor of 4
 
 [v, f] = createSimpleMesh();
 [v2, f2] = subdivideMesh(v, f, 4);
 
-assertEqual(25, size(v2, 1));
+testCase.assertEqual(25, size(v2, 1));
 nFaces = size(f2, 1);
-assertEqual(32, nFaces);
+testCase.assertEqual(32, nFaces);
 
 
 function [v, f] = createSimpleMesh()

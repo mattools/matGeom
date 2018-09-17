@@ -1,5 +1,5 @@
 % POLYNOMIALCURVES2D Planar Polynomial Curves
-% Version 1.0 21-Mar-2011 .
+% Version 1.24 07-Jun-2018 .
 %
 % POLYNOMIALCURVES2D Manipulation of planar smooth curves
 %   Polynomial curves are plane curves whose points are defined by a
@@ -52,9 +52,9 @@
 %
 % -----
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@inra.fr
 % created the  07/11/2005.
-% Project homepage: http://github.com/dlegland/matGeom
+% Project homepage: http://github.com/mattools/matGeom
 % http://www.pfl-cepia.inra.fr/index.php?page=geom2d
 % Copyright INRA - Cepia Software Platform.
 

@@ -1,4 +1,4 @@
-function test_suite = test_polygonSubcurve(varargin) %#ok<STOUT>
+function test_suite = test_polygonSubcurve
 %TESTPOLYGONSUBCURVE  One-line description here, please.
 %   output = testPolygonSubcurve(input)
 %
@@ -15,9 +15,9 @@ function test_suite = test_polygonSubcurve(varargin) %#ok<STOUT>
 % Copyright 2009 INRA - Cepia Software Platform.
 % Licensed under the terms of the LGPL, see the file "license.txt"
 
-initTestSuite;
+test_suite = functiontests(localfunctions);
 
-function testSquare %#ok<*DEFNU>
+function testSquare(testCase) %#ok<*DEFNU>
 
 p1 = [10 10];
 p2 = [20 10];
@@ -26,7 +26,7 @@ p4 = [10 20];
 square = [p1;p2;p3;p4];
 
 subcurve = polygonSubcurve(square, .5, 1.5);
-assertElementsAlmostEqual(subcurve, [15 10;20 10;20 15]);
+testCase.assertEqual(subcurve, [15 10;20 10;20 15], 'AbsTol', .01);
 
 subcurve = polygonSubcurve(square, 3.5, .5);
-assertElementsAlmostEqual(subcurve, [10 15;10 10;15 10]);
+testCase.assertEqual(subcurve, [10 15;10 10;15 10], 'AbsTol', .01);

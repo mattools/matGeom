@@ -30,6 +30,10 @@ function normals = faceNormal(nodes, faces)
 % Created: 2006-07-05
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
+% deprecation warning
+warning('geom3d:deprecated', ...
+    [mfilename ' is deprecated, use ''meshFaceNormals'' instead']);
+
 if isnumeric(faces)
     % compute vector of first edges
 	v1 = nodes(faces(:,2),1:3) - nodes(faces(:,1),1:3);

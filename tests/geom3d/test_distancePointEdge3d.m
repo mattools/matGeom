@@ -1,4 +1,4 @@
-function test_suite = test_distancePointEdge3d(varargin) %#ok<STOUT>
+function test_suite = test_distancePointEdge3d
 %TEST_DISTANCEPOINTEDGE3D  Test case for the file distancePointEdge3d
 %
 %   Test case for the file distancePointEdge3d
@@ -15,33 +15,33 @@ function test_suite = test_distancePointEdge3d(varargin) %#ok<STOUT>
 % Created: 2012-04-29,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
-initTestSuite;
+test_suite = functiontests(localfunctions); 
 
-function test_Simple %#ok<*DEFNU>
+function test_Simple(testCase) %#ok<*DEFNU>
 % Test call of function without argument
 
 edge = [10 10 10 30 10 10];
 
 p0 = [10 10 10];
 exp0 = 0;
-assertElementsAlmostEqual(exp0, distancePointEdge3d(p0, edge));
+testCase.assertEqual(exp0, distancePointEdge3d(p0, edge), 'AbsTol', .01);
 
 p1 = [30 10 10];
 exp1 = 0;
-assertElementsAlmostEqual(exp1, distancePointEdge3d(p1, edge));
+testCase.assertEqual(exp1, distancePointEdge3d(p1, edge), 'AbsTol', .01);
 
 p2 = [0 0 0];
 exp2 = 10 * sqrt(3);
-assertElementsAlmostEqual(exp2, distancePointEdge3d(p2, edge), 'absolute', 1e-14);
+testCase.assertEqual(exp2, distancePointEdge3d(p2, edge), 'AbsTol', 1e-14);
 
 p3 = [40 20 20];
 exp3 = 10 * sqrt(3);
-assertElementsAlmostEqual(exp3, distancePointEdge3d(p3, edge), 'absolute', 1e-14);
+testCase.assertEqual(exp3, distancePointEdge3d(p3, edge), 'AbsTol', 1e-14);
 
-function testArray
+function testArray(testCase)
 
 edge = [10 10 10 30 10 10];
 pts = [10 10 10;30 10 10;0 0 0;40 20 20];
 exp = [0 0 10*sqrt(3) 10*sqrt(3)]';
-assertElementsAlmostEqual(exp, distancePointEdge3d(pts, edge), 'absolute', 1e-14);
+testCase.assertEqual(exp, distancePointEdge3d(pts, edge), 'AbsTol', 1e-14);
 

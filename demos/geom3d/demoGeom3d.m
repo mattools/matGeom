@@ -13,10 +13,10 @@ function demoGeom3d(varargin)
 %
 %   See also
 %
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2009-06-22,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
@@ -52,7 +52,7 @@ drawPoint3d(points);
 drawLine3d(line12, 'color', 'k');
 
 % draw an edge, using a thick stroke and a different color
-drawEdge(edge13, 'color', 'r', 'linewidth', 2);
+drawEdge3d(edge13, 'color', 'r', 'linewidth', 2);
 
 
 %% Create planes
@@ -80,14 +80,22 @@ drawLine3d(line, 'lineWidth', 2);
 
 % compute intersection between a plane and a line
 inter = intersectLinePlane(line12, plane0);
-drawPoint3d(inter, 'marker', '+', 'markerSize', 10, 'linewidth', 3);
+drawPoint3d(inter, 'Marker', '+', 'MarkerSize', 10, 'LineWidth', 3);
 
 % create a line perpendicular to a plane
 normal = planeNormal(plane);
 perpLine = [80 60 40 normal];
-drawLine3d(perpLine);
+% define line properties as struct
+lineProps.LineStyle='--';
+lineProps.LineWidth=2;
+lineProps.Color='c';
+drawLine3d(perpLine,lineProps);
 
 % compute intersection of line with plane
 inter2 = intersectLinePlane(perpLine, plane);
-drawPoint3d(inter2);
+% define point properties as struct
+pointProps.Marker='^';
+pointProps.MarkerFaceColor='c';
+pointProps.MarkerEdgeColor='k';
+drawPoint3d(inter2,pointProps);
 

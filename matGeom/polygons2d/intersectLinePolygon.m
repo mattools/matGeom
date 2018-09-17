@@ -13,7 +13,7 @@ function [intersects, edgeIndices] = intersectLinePolygon(line, poly, varargin)
 %   P = intersectLinePolygon(LINE, POLY, TOL)
 %   Specifies the tolerance for geometric tests. Default is 1e-14.
 %
-%   [P INDS] = intersectLinePolygon(...)
+%   [P, INDS] = intersectLinePolygon(...)
 %   Also returns the indices of edges involved in intersections. INDS is a
 %   K-by-1 column vector, such that P(i,:) corresponds to intersection of
 %   the line with the i-th edge of the polygon. If the intersection occurs
@@ -32,7 +32,7 @@ function [intersects, edgeIndices] = intersectLinePolygon(line, poly, varargin)
 %           10     5
 %            0     5
 %     % also return indices of edges
-%     [inters inds] = intersectLinePolygon(line, poly)
+%     [inters, inds] = intersectLinePolygon(line, poly)
 %     inters =
 %           10     5
 %            0     5
@@ -49,14 +49,14 @@ function [intersects, edgeIndices] = intersectLinePolygon(line, poly, varargin)
 %           10    10
 %
 %   See Also
-%   lines2d, polygons2d, intersectLines, intersectRayPolygon
+%   lines2d, polygons2d, intersectLines, intersectRayPolygon, polygonEdges
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
+% ------
+% Author: David Legland
+% e-mail: david.legland@inra.fr
+% Created: 2003-10-31,    using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012 INRA - Cepia Software Platform.
 
 %   HISTORY
 %   2008-11-24 rename 'pi' as 'intersects', update doc
@@ -65,7 +65,7 @@ function [intersects, edgeIndices] = intersectLinePolygon(line, poly, varargin)
 %   2010-01-26 rewrite using vectorisation
 %   2011-05-20 returns unique results
 %   2011-07-20 returns intersected edge indices
-%   2012-11-33 add 'diag' option for linePosition
+%   2012-11-22 add 'diag' option for linePosition
 
 % get computation tolerance
 tol = 1e-14;
@@ -73,9 +73,24 @@ if ~isempty(varargin)
     tol = varargin{1};
 end
 
-% create the array of edges
-N = size(poly, 1);
-edges = [poly(1:N, :) poly([2:N 1], :)];
+% test presence of NaN values
+if isnumeric(poly) && any(isnan(poly(:)))
+    poly = splitPolygons(poly);
+end
+
+% create the array of polygon edges
+if iscell(poly)
+    edges = zeros(0, 4);
+    for i = 1:length(poly)
+        pol = poly{i};
+        N = size(pol, 1);
+        edges = [edges; pol(1:N, :) pol([2:N 1], :)]; %#ok<AGROW>
+    end
+else
+    % get edges of a simple polygon
+    N = size(poly, 1);
+    edges = [poly(1:N, :) poly([2:N 1], :)];
+end
 
 % compute intersections with supporting lines of polygon edges
 supportLines = edgeToLine(edges);
@@ -94,7 +109,7 @@ intersects = intersects(inds, :);
 
 % remove multiple vertices (can occur for intersections located at polygon
 % vertices)
-[intersects, I, J] = unique(intersects, 'rows'); %#ok<NASGU>
+[intersects, I, J] = unique(intersects, 'rows'); %#ok<ASGLU>
 
 if nargout > 1
     % return indices of edges involved in intersection

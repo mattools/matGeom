@@ -1,5 +1,5 @@
 % POLYGONS Manipulation of planar polygons and polylines
-% Version 1.6 21-Mar-2011 .
+% Version 1.24 07-Jun-2018 .
 %
 %   The 'polygons' module contains functions operating on shapes composed
 %   of a vertex list, like polygons or polylines.
@@ -54,6 +54,7 @@
 %   polylineCentroid          - Compute centroid of a curve defined by a series of points
 %   polylineSubcurve          - Extract a portion of a polyline
 %   resamplePolyline          - Distribute N points equally spaced on a polyline
+%   resamplePolylineByLength  - Resample a polyline with a fixed sampling step
 %   reversePolyline           - Reverse a polyline, by iterating vertices from the end
 %   isPointOnPolyline         - Test if a point belongs to a polyline
 %   projPointOnPolyline       - Compute position of a point projected on a polyline
@@ -67,14 +68,16 @@
 %   removeMultipleVertices    - Remove multiple vertices of a polygon or polyline
 %
 % Polygon basic manipulation
-%   polygonPoint              - Extract a point from a polygon
-%   polygonSubcurve           - Extract a portion of a polygon
 %   reversePolygon            - Reverse a polygon, by iterating vertices from the end
 %   smoothPolygon             - Smooth a polygon using local averaging
 %   simplifyPolygon           - Douglas-Peucker simplification of a polygon
 %   projPointOnPolygon        - Compute position of a point projected on a polygon
 %   splitPolygons             - Convert a NaN separated polygon list to a cell array of polygons
 %   polygonLoops              - Divide a possibly self-intersecting polygon into a set of simple loops
+%   polygonPoint              - Extract a point from a polygon
+%   polygonSubcurve           - Extract a portion of a polygon
+%   polygonEdges              - Return the edges of a simple or multiple polygon
+%   polygonVertices           - Extract all vertices of a (multi-)polygon
 %
 % Polygon clipping and intersections
 %   intersectLinePolygon      - Intersection points between a line and a polygon
@@ -89,23 +92,29 @@
 %   minimumCaliperDiameter    - Minimum caliper diameter of a set of points
 %   findPoint                 - Find index of a point in an set from its coordinates
 %   convexHull                - Convex hull of a set of points
+%   randomPointInPolygon      - Generate random point(s) in a polygon
 %
 % Measures on Polygons
 %   isPointInPolygon          - Test if a point is located inside a polygon
 %   polygonContains           - Test if a point is contained in a multiply connected polygon
 %   polygonCentroid           - Compute the centroid (center of mass) of a polygon
 %   polygonArea               - Compute the signed area of a polygon
+%   polygonInertiaEllipse     - Compute ellipse with same inertia moments as polygon
+%   polygonSecondAreaMoments  - Compute second-order area moments of a polygon
 %   polygonLength             - Perimeter of a polygon
 %   polygonNormalAngle        - Compute the normal angle at a vertex of the polygon
 %   polygonBounds             - Compute the bounding box of a polygon
+%   polygonOuterNormal        - Outer normal vector for a given vertex(ices)
 %   distancePointPolygon      - Shortest distance between a point and a polygon
 %   distancePolygons          - Compute the shortest distance between 2 polygons
 %   distancePolygonsNoCross   - Compute the shortest distance between 2 polygons
 %   polygonSignature          - Polar signature of a polygon (polar distance to origin)
 %   signatureToPolygon        - Reconstruct a polygon from its polar signature
+%   polygonCurvature          - Estimate curvature on polygon vertices using polynomial fit
 %
 % More complex operations on polygons
 %   resamplePolygon           - Distribute N points equally spaced on a polygon
+%   resamplePolygonByLength   - Resample a polygon with a fixed sampling step
 %   densifyPolygon            - Add several points on each edge of the polygon
 %   expandPolygon             - Expand a polygon by a given (signed) distance
 %   triangulatePolygon        - Compute a triangulation of the polygon
@@ -131,7 +140,6 @@
 %   polygonToRow              - Convert polygon coordinates to a row vector
 %   rowToPolygon              - Create a polygon from a row vector
 %   contourMatrixToPolylines  - Converts a contour matrix array into a polyline set
-%   rectAsPolygon             - Convert a (centered) rectangle into a series of points
 %   readPolygonSet            - Read a set of simple polygons stored in a file
 %   writePolygonSet           - Write a set of simple polygons into a file
 %
@@ -148,9 +156,9 @@
 %
 % -----
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@inra.fr
 % created the  07/11/2005.
-% Project homepage: http://github.com/dlegland/matGeom
+% Project homepage: http://github.com/mattools/matGeom
 % http://www.pfl-cepia.inra.fr/index.php?page=geom2d
 % Copyright INRA - Cepia Software Platform.
 
@@ -158,15 +166,4 @@ help('Contents');
 
 %% Requires further development
 
-
-%%   Deprecated functions
-
-%   polygonExpand             - 'expand' a polygon with a given distance
-%   subCurve                  - extract a portion of a curve
-%   curveLength               - return length of a curve (a list of points)
-%   curveCentroid             - compute centroid of a curve defined by a series of points
-%   drawCurve                 - draw a curve specified by a list of points
-
-
 %% Others...
-

@@ -5,13 +5,18 @@ function [points, pos, faceInds] = intersectLineMesh3d(line, vertices, faces, va
 %   Compute the intersection points between a 3D line and a 3D mesh defined
 %   by vertices and faces.
 %
-%   [INTERS POS INDS] = intersectLineMesh3d(LINE, VERTICES, FACES)
+%   [INTERS, POS, INDS] = intersectLineMesh3d(LINE, VERTICES, FACES)
 %   Also returns the position of each intersection point on the input line,
 %   and the index of the intersected faces.
 %   If POS > 0, the point is also on the ray corresponding to the line. 
 %   
 %   Example
-%   intersectLineMesh3d
+%     [V, F] = createCube;
+%     line = [.2 .3 .4 1 0 0];
+%     pts = intersectLineMesh3d(line, V, F)
+%     pts =
+%         1.0000    0.3000    0.4000
+%              0    0.3000    0.4000
 %
 %   See also
 %   meshes3d, triangulateFaces, intersectLineTriangle3d
@@ -19,11 +24,11 @@ function [points, pos, faceInds] = intersectLineMesh3d(line, vertices, faces, va
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2011-12-20,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-
+% tolerance for detecting if a point is 
 tol = 1e-12;
 if ~isempty(varargin)
     tol = varargin{1};
@@ -42,7 +47,7 @@ u   = vertices(faces(:,2), :) - t0;
 v   = vertices(faces(:,3), :) - t0;
 
 % triangle normal
-n   = normalizeVector3d(vectorCross3d(u, v));
+n   = normalizeVector3d(crossProduct3d(u, v));
 
 % direction vector of line
 dir = line(4:6);
