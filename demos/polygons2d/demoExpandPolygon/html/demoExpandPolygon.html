@@ -108,7 +108,7 @@ polyOut = expandPolygon(poly, 10);
 <span class="comment">% draw the expanded polygon</span>
 drawPolygon(polyOut, <span class="string">'k'</span>);
 </pre><img vspace="5" hspace="5" src="demoExpandPolygon_02.png" alt=""> <h2>Negative expansion<a name="4"></a></h2><pre class="codeinput"><span class="comment">% expand the polygon by a negative distance (inside the polygon)</span>
-polyIn = expandPolygon(poly, -20);
+polyIn = expandPolygon(poly, -20, 'cleanuploops', true);
 
 <span class="comment">% draw the expanded polygon</span>
 drawPolygon(polyIn, <span class="string">'g'</span>);
@@ -162,7 +162,7 @@ drawPolygon(polyOut, 'k');
 %% Negative expansion
 
 % expand the polygon by a negative distance (inside the polygon)
-polyIn = expandPolygon(poly, -20);
+polyIn = expandPolygon(poly, -20, 'cleanuploops', true);
 
 % draw the expanded polygon
 drawPolygon(polyIn, 'g');
