@@ -15,6 +15,7 @@ function len = polygonLength(poly, varargin)
 %   See also:
 %   polygons2d, polygonCentroid, polygonArea, drawPolygon, polylineLength
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -48,8 +49,10 @@ end
 
 % compute length
 if size(poly, 2) == 2
+    % polygon in dimension 2 (classical case)
     dp = diff(poly([1:end 1], :), 1, 1);
     len = sum(hypot(dp(:, 1), dp(:, 2)));
 else
+    % polygon of larger dimension
     len = sum(sqrt(sum(diff(poly([2:end 1], :), 1, 1).^2, 2)));
 end
