@@ -100,6 +100,7 @@
 %   createRhombododecahedron - Create a 3D mesh representing a rhombododecahedron
 %   createTetrakaidecahedron - Create a 3D mesh representing a tetrakaidecahedron
 %   createSoccerBall         - Create a 3D mesh representing a soccer ball
+%   createStellatedMesh      - Replaces each face of a mesh by a pyramid
 %   createDurerPolyhedron    - Create a mesh representing Durer's polyhedron 
 %   createMengerSponge       - Create a cube with an inside cross removed
 %   steinerPolytope          - Create a steiner polytope from a set of vectors
