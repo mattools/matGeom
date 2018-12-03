@@ -30,8 +30,8 @@ if nargin == 1
     % polygon is given as a single argument
     pts = varargin{1};
     
-elseif nargin == 2
-    % polygon is given as 3 corodinate arrays
+elseif nargin == 3
+    % polygon is given as 3 coordinate arrays
     px = varargin{1};
     py = varargin{2};
     pz = varargin{3};

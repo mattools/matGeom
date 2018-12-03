@@ -26,7 +26,7 @@ function area = polygonArea3d(poly, varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2012-02-24,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
@@ -62,7 +62,7 @@ iNext = [2:N 1];
 cp = cross(poly, poly(iNext,:), 2);
 
 % choose one of the triangles as reference for the normal direction
-vn = vectorNorm(cp);
+vn = vectorNorm3d(cp);
 [tmp, ind] = max(vn); %#ok<ASGLU>
 cpRef = cp(ind,:);
 
