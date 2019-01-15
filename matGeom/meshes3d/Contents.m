@@ -73,6 +73,8 @@
 %   meshEdgeFaces            - Compute index of faces adjacent to each edge of a mesh
 %   trimeshEdgeFaces         - Compute index of faces adjacent to each edge of a triangular mesh
 %   trimMesh                 - Reduce memory footprint of a polygonal mesh
+%   removeDuplicateFaces     - Remove duplicate faces in a face array
+%   removeMeshEars           - Remove vertices that are connected to only one face
 %   meshFaceAdjacency        - Compute adjacency list of face around each face
 %   meshAdjacencyMatrix      - Compute adjacency matrix of a mesh from set of faces
 %   checkMeshAdjacentFaces   - Check if adjacent faces of a mesh have similar orientation
@@ -131,4 +133,3 @@
 %   vertexNormal             - Compute normals to a mesh vertices
 
 % Others
-

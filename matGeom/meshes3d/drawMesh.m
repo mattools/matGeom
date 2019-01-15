@@ -109,7 +109,8 @@ end
 if isnumeric(faces)
     % array FACES is a NC*NV indices array, with NV : number of vertices of
     % each face, and NC number of faces
-    h = patch(ax, 'vertices', vertices, 'faces', faces, varargin{:});
+    h = patch('vertices', vertices, 'faces', faces, varargin{:}, ...
+        'Parent', ax);
 
 elseif iscell(faces)
     % array FACES is a cell array
