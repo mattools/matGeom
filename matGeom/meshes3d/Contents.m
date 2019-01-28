@@ -31,6 +31,7 @@
 % General processing on meshes
 %   smoothMesh               - Smooth mesh by replacing each vertex by the average of its neighbors 
 %   subdivideMesh            - Subdivides each face of the mesh
+%   meshVertexClustering     - Simplifies a mesh using vertex clustering
 %   triangulateFaces         - Convert face array to an array of triangular faces 
 %   removeMeshVertices       - Remove vertices and associated faces from a mesh
 %   removeMeshFaces          - Remove faces from a mesh by face indices
