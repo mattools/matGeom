@@ -7,7 +7,7 @@ function [vertices, faces] = removeInvalidBorderFaces(varargin)
 %   removeInvalidBorderFaces
 %
 %   See also
-%
+%     isManifoldMesh, collapseEdgesWithManyFaces
  
 % ------
 % Author: David Legland

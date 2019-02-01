@@ -83,6 +83,7 @@
 % Mesh cleanup
 %   trimMesh                 - Reduce memory footprint of a polygonal mesh
 %   isManifoldMesh           - Check whether the input mesh may be considered as manifold
+%   ensureManifoldMesh       - Apply several simplification to obtain a manifold mesh
 %   removeDuplicateFaces     - Remove duplicate faces in a face array
 %   removeMeshEars           - Remove vertices that are connected to only one face
 %   removeInvalidBorderFaces - Remove faces whose edges are connected to 3, 3, and 1 faces

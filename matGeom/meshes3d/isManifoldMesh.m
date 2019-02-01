@@ -18,7 +18,7 @@ function [b1, b2] = isManifoldMesh(varargin)
 %        1
 %
 %   See also
-%
+%     ensureManifoldMeshn, trimMesh
  
 % ------
 % Author: David Legland

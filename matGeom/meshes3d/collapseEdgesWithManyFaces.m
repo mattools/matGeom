@@ -10,7 +10,7 @@ function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargi
 %   collapseEdgesWithManyFaces
 %
 %   See also
-%       trimMesh
+%       trimMesh, isManifoldMesh
  
 % ------
 % Author: David Legland
@@ -18,11 +18,22 @@ function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargi
 % Created: 2019-01-31,    using Matlab 9.5.0.944444 (R2018b)
 % Copyright 2019 INRA - Cepia Software Platform.
 
+verbose = false;
+while length(varargin) > 1 && ischar(varargin{1})
+    name = varargin{1};
+    if strcmpi(name, 'verbose')
+        verbose = varargin{2};
+    else
+        error(['Unknown optional argument: ' name]);
+    end
+    varargin(1:2) = [];
+end
+
 while true
     % compute edge to vertex mapping
     edges = meshEdges(faces);
     
-    % compute number of faces incident each edge
+    % compute number of faces incident to each edge
     edgeFaces = trimeshEdgeFaces(faces);
     edgeFaceDegrees = sum(edgeFaces > 0, 2);
     
@@ -32,8 +43,12 @@ while true
         break;
     end
     
-    [v2, f2] = mergeMeshVertices(vertices, faces, edges(inds(1),:));
+    edge = edges(inds(1), :);
+    if verbose
+        fprintf('remove edge with index %d: (%d, %d)\n', inds(1), edge);
+    end
+    [vertices, faces] = mergeMeshVertices(vertices, faces, edge);
 end
 
 % trim
-[vertices, faces] = trimMesh(v2, f2);
+[vertices, faces] = trimMesh(vertices, faces);
