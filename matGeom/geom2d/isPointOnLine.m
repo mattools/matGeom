@@ -10,7 +10,7 @@ function b = isPointOnLine(point, line, varargin)
 %   If LINE is a N-by-4 array of line, B is a 1-by-N array of booleans.
 %
 %   B = isPointOnLine(POINT, LINE, TOL)
-%   Specifies the tolerance used for testing location on 3D line.
+%   Specifies the tolerance used for testing location on 3D line. Default value is 1e-14.
 %
 %   See also: 
 %   lines2d, points2d, isPointOnEdge, isPointOnRay, isLeftOriented
