@@ -15,7 +15,7 @@
 ## Makefile to simplify Octave Forge package maintenance tasks
 
 ## Some shell programs
-MD5SUM    ?= md5sum
+PKGSUM    ?= sha256sum
 SED       ?= sed
 GREP      ?= grep
 TAR       ?= tar
@@ -42,7 +42,7 @@ HTML_TARBALL    := $(TARGET_DIR)/$(PACKAGE)-html.tar.gz
 MKOCTFILE := mkoctfile
 OCTAVE    := octave --no-gui
 
-PKG_ADD     := $(shell $(GREP) -sPho '(?<=(//|\#\#) PKG_ADD: ).*' \
+PKG_ADD   := $(shell $(GREP) -sPho '(?<=(//|\#\#) PKG_ADD: ).*' \
                          __matgeom_package_register__.m)
 
 ## Folders to be packages
@@ -76,7 +76,9 @@ help:
 # dist and html targets are only PHONY/alias targets to the release
 # and html tarballs.
 dist: $(RELEASE_TARBALL)
+	@$(PKGSUM) $(RELEASE_TARBALL)
 html: $(HTML_TARBALL)
+	@$(PKGSUM) $(HTML_TARBALL)
 
 # An implicit rule with a recipe to build the tarballs correctly.
 %.tar.gz: %
@@ -117,12 +119,21 @@ $(RELEASE_DIR): ../.git/index
 # install is a prerequesite to the html directory (note that the html
 # tarball will use the implicit rule for ".tar.gz" files).
 $(HTML_DIR): install
+	@echo "Generating HTML documentation. This may take a while ..."
+	-rm -rf $@
+	$(OCTAVE) --silent \
+	  --eval 'page_screen_output (false);' \
+	  --eval 'set (0, "defaultfigurevisible", "off");' \
+	  --eval 'pkg load generate_html $(PACKAGE);' \
+	  --eval 'generate_package_html ("$(PACKAGE)", "$@", "octave-forge");'
+	chmod -R a+rX,u+w,go-w $@
 
 # To make a release, build the distribution and html tarballs.
 release: dist html
-	@$(MD5SUM) $(RELEASE_TARBALL) $(HTML_TARBALL)
+	@$(PKGSUM) $(RELEASE_TARBALL) $(HTML_TARBALL)
 	@echo "Upload @ https://sourceforge.net/p/octave/package-releases/new/"
-	@echo "    and inform to rebuild release with '$$(hg id)'"
+	@echo "    and inform to rebuild release with '$$(git describe --abbrev=12 --always)'"
+	@echo "After it has been accepted, execute: git tag release-$(VERSION)"
 
 install: $(RELEASE_TARBALL)
 	@echo "Installing package locally ..."
