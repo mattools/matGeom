@@ -1,4 +1,4 @@
-function demoRevolutionSurface(varargin)
+function demoRevolutionSurface
 %DEMOREVOLUTIONSURFACE  One-line description here, please.
 %   output = demoRevolutionSurface(input)
 %
@@ -24,8 +24,20 @@ figure;
 surf(x, y, t);
 axis equal;
 
- 
 
+%% Draw a torus with horizontal axis as revolution axis
+
+circle  = circleToPolygon([0 10 3], 50);
+[x, y, t] = revolutionSurface(circle, [0 0 1 0], linspace(0, pi/3, 50));
+
+figure;
+surf(x, y, t);
+axis equal;
+drawnow;
+
+end
+
+%% Inner function to avoid call to geom2d module
 function varargout = circleToPolygon(circle, varargin)
 %CIRCLETOPOLYGON Convert a circle into a series of points
 %
@@ -74,4 +86,6 @@ if nargout == 1
 elseif nargout == 2
     varargout{1} = x;
     varargout{2} = y;    
+end
+
 end

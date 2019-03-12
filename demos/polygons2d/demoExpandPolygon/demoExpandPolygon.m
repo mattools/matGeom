@@ -40,7 +40,7 @@ drawPolygon(polyOut, 'k');
 %% Negative expansion
 
 % expand the polygon by a negative distance (inside the polygon)
-polyIn = expandPolygon(poly, -20);
+polyIn = expandPolygon(poly, -20, 'cleanuploops', true);
 
 % draw the expanded polygon
 drawPolygon(polyIn, 'g');

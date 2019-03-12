@@ -32,15 +32,26 @@ function varargout = drawPolygon3d(varargin)
 % Copyright 2011 INRA - Cepia Software Platform.
 
 % HISTORY
- 
-   
+% 2019-02-02 add support for multiple polygons 
+
+
+%% Process input arguments 
+
+% extract handle of axis to draw on
+ax = gca;
+var1 = varargin{1};
+if isAxisHandle (var1)
+    ax          = var1;
+    varargin(1) = [];
+end
+
 % check case we want to draw several curves, stored in a cell array
-var = varargin{1};
-if iscell(var)
+var1 = varargin{1};
+if iscell(var1)
     hold on;
     h = [];
-    for i = 1:length(var(:))
-        h = [h; drawPolygon3d(var{i}, varargin{2:end})]; %#ok<AGROW>
+    for i = 1:length(var1(:))
+        h = [h; drawPolygon3d(ax, var1{i}, varargin{2:end})]; %#ok<AGROW>
     end
     if nargout > 0
         varargout{1} = h;
@@ -48,12 +59,12 @@ if iscell(var)
     return;
 end
 
-% extract curve coordinates
-if min(size(var)) == 1
+%% extract polygon coordinates
+if min(size(var1)) == 1
     % if first argument is a vector (either row or column), then assumes
     % first argument contains x coords, second argument contains y coords
     % and third one the z coords
-    px = var;
+    px = var1;
     if length(varargin) < 3
         error('geom3d:drawPolygon3d:Wrong number of arguments in fillPolygon3d');
     end
@@ -62,9 +73,9 @@ if min(size(var)) == 1
     varargin = varargin(4:end);
 else
     % first argument contains both coordinate
-    px = var(:, 1);
-    py = var(:, 2);
-    pz = var(:, 3);
+    px = var1(:, 1);
+    py = var1(:, 2);
+    pz = var1(:, 3);
     varargin = varargin(2:end);
 end
 
@@ -79,7 +90,10 @@ if px(1) ~= px(end) || py(1) ~= py(end) || pz(1) ~= pz(end)
 end
 
 % draw the closed curve
-h = plot3(px, py, pz, varargin{:});
+h = plot3(ax, px, py, pz, varargin{:});
+
+
+%% Format output
 
 if nargout > 0
     varargout = {h};
