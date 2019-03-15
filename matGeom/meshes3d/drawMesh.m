@@ -1,4 +1,4 @@
-function varargout = drawMesh(vertices, faces, varargin)
+function varargout = drawMesh(varargin)
 %DRAWMESH Draw a 3D mesh defined by vertex and face arrays
 %
 %   drawMesh(VERTICES, FACES)
@@ -20,6 +20,9 @@ function varargout = drawMesh(vertices, faces, varargin)
 %   drawMesh(..., NAME, VALUE)
 %   Use one or several pairs of parameter name/value to specify drawing
 %   options. Options are the same as the 'patch' function.
+%
+%   drawMesh(AX,...) 
+%   Draw into the axis specified by AX instead of the current axis.
 %
 %
 %   H = drawMesh(...);
@@ -52,18 +55,31 @@ function varargout = drawMesh(vertices, faces, varargin)
 %   07/12/2010 update management of mesh structures
 
 
-%% Initialisations
+%% Parse input arguments
+
+% extract first argument
+var1 = varargin{1};
+varargin(1) = [];
+
+% Check if first input argument is an axes handle
+if isAxisHandle(var1)
+    ax = var1;
+    var1 = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
+end
 
 % Check if the input is a mesh structure
-if isstruct(vertices)
-    % refresh options
-    if nargin > 1
-        varargin = [{faces} varargin];
-    end
-    
+if isstruct(var1)
     % extract data to display
-    faces = vertices.faces;
-    vertices = vertices.vertices;
+    vertices = var1.vertices;
+    faces = var1.faces;
+else
+    % assumes input is given with vertices+faces arrays
+    vertices = var1;
+    faces = varargin{1};
+    varargin(1) = [];
 end
 
 % process input arguments
@@ -81,11 +97,11 @@ switch length(varargin)
 end
 
 % overwrites on current figure
-hold on;
+hold(ax, 'on');
 
 % if vertices are 2D points, add a z=0 coordinate
 if size(vertices, 2) == 2
-    vertices(1,3) = 0;
+    vertices(1, 3) = 0;
 end
 
 
@@ -93,7 +109,8 @@ end
 if isnumeric(faces)
     % array FACES is a NC*NV indices array, with NV : number of vertices of
     % each face, and NC number of faces
-    h = patch('vertices', vertices, 'faces', faces, varargin{:});
+    h = patch('vertices', vertices, 'faces', faces, varargin{:}, ...
+        'Parent', ax);
 
 elseif iscell(faces)
     % array FACES is a cell array
@@ -118,7 +135,7 @@ elseif iscell(faces)
         
         % draw current face
         cnodes  = vertices(face, :);
-        h(f)    = patch(cnodes(:, 1), cnodes(:, 2), cnodes(:, 3), [1 0 0]);
+        h(f)    = patch(ax, cnodes(:, 1), cnodes(:, 2), cnodes(:, 3), [1 0 0]);
     end
     
     % set up drawing options

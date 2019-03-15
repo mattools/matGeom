@@ -31,9 +31,8 @@
 % General processing on meshes
 %   smoothMesh               - Smooth mesh by replacing each vertex by the average of its neighbors 
 %   subdivideMesh            - Subdivides each face of the mesh
+%   meshVertexClustering     - Simplifies a mesh using vertex clustering
 %   triangulateFaces         - Convert face array to an array of triangular faces 
-%   removeMeshVertices       - Remove vertices and associated faces from a mesh
-%   removeMeshFaces          - Remove faces from a mesh by face indices
 %   mergeCoplanarFaces       - Merge coplanar faces of a polyhedral mesh
 %   meshFacePolygons         - Returns the set of polygons that constitutes a mesh
 %   meshFaceCentroids        - Compute centroids of faces in a mesh
@@ -72,10 +71,23 @@
 %   meshEdges                - Computes array of edge vertex indices from face array
 %   meshEdgeFaces            - Compute index of faces adjacent to each edge of a mesh
 %   trimeshEdgeFaces         - Compute index of faces adjacent to each edge of a triangular mesh
-%   trimMesh                 - Reduce memory footprint of a polygonal mesh
 %   meshFaceAdjacency        - Compute adjacency list of face around each face
 %   meshAdjacencyMatrix      - Compute adjacency matrix of a mesh from set of faces
 %   checkMeshAdjacentFaces   - Check if adjacent faces of a mesh have similar orientation
+%
+% Basic edition on meshes
+%   removeMeshVertices       - Remove vertices and associated faces from a mesh
+%   mergeMeshVertices        - Merge two vertices and removes eventual degenerated faces
+%   removeMeshFaces          - Remove faces from a mesh by face indices
+%
+% Mesh cleanup
+%   trimMesh                 - Reduce memory footprint of a polygonal mesh
+%   isManifoldMesh           - Check whether the input mesh may be considered as manifold
+%   ensureManifoldMesh       - Apply several simplification to obtain a manifold mesh
+%   removeDuplicateFaces     - Remove duplicate faces in a face array
+%   removeMeshEars           - Remove vertices that are connected to only one face
+%   removeInvalidBorderFaces - Remove faces whose edges are connected to 3, 3, and 1 faces
+%   collapseEdgesWithManyFaces - removes mesh edges adjacent to more than two faces
 %
 % Creation and conversion
 %   surfToMesh               - Convert surface grids into face-vertex mesh
@@ -100,6 +112,7 @@
 %   createRhombododecahedron - Create a 3D mesh representing a rhombododecahedron
 %   createTetrakaidecahedron - Create a 3D mesh representing a tetrakaidecahedron
 %   createSoccerBall         - Create a 3D mesh representing a soccer ball
+%   createStellatedMesh      - Replaces each face of a mesh by a pyramid
 %   createDurerPolyhedron    - Create a mesh representing Durer's polyhedron 
 %   createMengerSponge       - Create a cube with an inside cross removed
 %   steinerPolytope          - Create a steiner polytope from a set of vectors
@@ -130,4 +143,3 @@
 %   vertexNormal             - Compute normals to a mesh vertices
 
 % Others
-

@@ -19,6 +19,9 @@ function varargout = drawCylinder(cyl, varargin)
 %   value can be given as argument, and will be transfered to the 'surf'
 %   matlab function
 %
+%   drawCylinder(..., 'FaceAlpha', ALPHA)
+%   Specifies the transparency of the cylinder and of the optionnal caps.
+%
 %   H = drawCylinder(...)
 %   returns a handle to the patch representing the cylinder.
 %
@@ -64,6 +67,7 @@ function varargout = drawCylinder(cyl, varargin)
 %   04/01/2007 better input processing, manage end caps of cylinder
 %   19/06/2009 use function localToGlobal3d, add docs
 %   2011-06-29 use sph2cart2d, code cleanup
+%   2018-01-02 add transparency managements
 
 
 %% Input argument processing
@@ -107,6 +111,24 @@ if ~isempty(varargin)
     end
 end
 
+faceColor = 'g';
+ind = find(strcmpi(varargin, 'facecolor'), 1, 'last');
+if ~isempty(ind)
+    faceColor = varargin{ind+1};
+    varargin(ind:ind+1) = [];
+end
+
+% extract transparency
+alpha = 1;
+ind = find(strcmpi(varargin, 'faceAlpha'), 1, 'last');
+if ~isempty(ind)
+    alpha = varargin{ind+1};
+    varargin(ind:ind+1) = [];
+end
+
+% add default drawing options
+varargin = [{'FaceColor', faceColor, 'edgeColor', 'none', 'FaceAlpha', alpha} varargin];
+
 
 %% Computation of mesh coordinates
 
@@ -138,23 +160,13 @@ z2 = reshape(pts(:,3), size(x));
 
 %% Display cylinder mesh
 
-% add default drawing options
-varargin = [{'FaceColor', 'g', 'edgeColor', 'none'} varargin];
-
 % plot the cylinder as a surface
 hSurf = surf(x2, y2, z2, varargin{:});
 
 % eventually plot the ends of the cylinder
 if closed
-    ind = find(strcmpi(varargin, 'facecolor'), 1, 'last');
-    if isempty(ind)
-        color = 'k';
-    else
-        color = varargin{ind+1};
-    end
-
-    patch(x2(1,:)', y2(1,:)', z2(1,:)', color, 'edgeColor', 'none');
-    patch(x2(2,:)', y2(2,:)', z2(2,:)', color, 'edgeColor', 'none');
+    patch(x2(1,:)', y2(1,:)', z2(1,:)', faceColor, 'edgeColor', 'none', 'FaceAlpha', alpha);
+    patch(x2(2,:)', y2(2,:)', z2(2,:)', faceColor, 'edgeColor', 'none', 'FaceAlpha', alpha);
 end
 
 % format ouptut

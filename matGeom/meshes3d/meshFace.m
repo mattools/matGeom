@@ -3,19 +3,27 @@ function face = meshFace(faces, index)
 %
 %   FACE = meshFace(FACES, INDEX)
 %   Return the vertex indices of the i-th face in the face array. This is
-%   mainly an utilitary function that manages faces stored either as int
+%   mainly an utility function that manages faces stored either as int
 %   array (when all faces have same number of sides) or cell array (when
 %   faces may have different number of edges).
 %
 %   Example
-%   meshFace
+%     [v, f] = createCubeOctahedron;
+%     % some faces are squares
+%     meshFace(f, 1)
+%     ans =
+%          1     2     3     4
+%     % other are triangles
+%     meshFace(f, 2)
+%     ans =
+%          1     5     2
 %
 %   See also
-%
-%
+%     meshes3d, meshFaceCentroid, meshFaceNormals, meshFaceAreas
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2010-10-06,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform.
 

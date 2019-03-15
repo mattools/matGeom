@@ -11,6 +11,15 @@ function [dist, proj] = distancePointMesh(point, vertices, faces, varargin)
 %   [DIST, PROJ] = distancePointMesh(...)
 %   Also returns the projection of the query point on the triangular mesh.
 %
+%   ... = distancePointMesh(..., 'algorithm', ALGO)
+%   Allows to choose the type of algorithm. Options are:
+%   * sequential:   process each face sequentially, using the function
+%               distancePointTriangle3d 
+%   * vectorized:   vectorized algorithm, usually faster for large number
+%               of faces
+%   * auto:         (default) automatically choose the most appropriate
+%               between sequential and vectorized.
+%
 %   Example
 %     [V, F] = torusMesh();
 %     F2 = triangulateFaces(F);
@@ -81,7 +90,7 @@ if strcmpi(algo, 'auto')
     if size(faces, 1) > 30
         algo = 'vectorized';
     else
-        algo = 'linear';
+        algo = 'sequential';
     end
 end
 
@@ -96,12 +105,12 @@ if strcmpi(algo, 'vectorized')
 end
 
 
-%% Linear algorithm
+%% Sequential algorithm
 % For each point, iterates over the triangular faces
 
 % allocate memory for result
 nPoints = size(point, 1);
-dists = zeros(nPoints, 1);
+dist = zeros(nPoints, 1);
 
 if nargout > 1
     projPoints = zeros(nPoints, 3);
@@ -110,7 +119,7 @@ end
 % iterate over points
 for i = 1:nPoints
     % % min distance and projection for current point
-    dist = inf;
+    minDist = inf;
     proj = [0 0 0];
     
     % iterate over faces
@@ -127,7 +136,7 @@ for i = 1:nPoints
         end
     end
     
-    dists(i) = minDist;
+    dist(i) = minDist;
     if nargout > 1
         projPoints(i,:) = proj;
     end
@@ -157,11 +166,16 @@ function [dist, proj] = distancePointTrimesh_vectorized(point, vertices, faces)
 
 % Regions are not numbered as in the original paper of D. Eberly to allow
 % automated computation of regions from the 3 conditions on lines.
-% Region indices are as follow:
-%
+% Region indices are computed as follow:
+%   IND = b2 * 2^2 + b1 * 2 + b0
+% with:
+%   b0 = 1 if s < 0, 0 otherwise
+%   b1 = 1 if t < 0, 0 otherwise
+%   b2 = 1 if s+t > 1, 0 otherwise
+% resulting ion the following region indices:
 %        /\ t
 %        |
-%   \ R6 |
+%   \ R5 |
 %    \   |
 %     \  |
 %      \ |
@@ -176,7 +190,7 @@ function [dist, proj] = distancePointTrimesh_vectorized(point, vertices, faces)
 %        | P1   \ P2
 %  ------*-------*------> s
 %        |        \   
-%   R3   |   R2    \   R5 
+%   R3   |   R2    \   R6 
 
 % allocate memory for result
 nPoints = size(point, 1);
@@ -280,50 +294,21 @@ for i = 1:nPoints
     numer = numer(numer > 0);
     denom = a(inds2) - 2 * b(inds2) + c(inds2);
     s(inds2(numer > denom)) = 1;
-    bool3 = numer < denom;
+    bool3 = numer <= denom;
     s(inds2(bool3)) = numer(bool3) ./ denom(bool3);
     t(inds) = 1 - s(inds);
 
 
-    % region 5 (formerly region 6)
-    % The minimum distance must occur
-    % * on the line s + t = 1
-    % * on the line t = 0, with s <= 1
-    % * at the intersection of the two lines
-    inds = find(regIndex == 5);
-    tmp0 = b(inds) + e(inds);
-    tmp1 = a(inds) + d(inds);
-    
-     % minimum on edge s+t=1, with t > 0
-    bool2 = tmp1 > tmp0;
-    inds2 = inds(bool2);
-    numer = tmp1(bool2) - tmp0(bool2);
-    denom = a(inds2) - 2 * b(inds2) + c(inds2);
-    bool3 = numer <= denom;
-    t(inds2(~bool3)) = 1;
-    inds3 = inds2(bool3);
-    t(inds3) = numer(bool3) ./ denom(bool3);
-    s(inds2) = 1 - t(inds2);
-
-    % minimum on edge t = 0 with s <= 1
-    inds2 = inds(~bool2);
-    t(inds2) = 0;
-    s(inds2(tmp1(~bool2) <= 0)) = 1;
-    s(inds2(tmp1(~bool2) > 0 & d(inds2) >= 0)) = 0;
-    inds3 = inds2(tmp1(~bool2) > 0 & d(inds2) < 0);
-    s(inds3) = -d(inds3) ./ a(inds3);
-    
-
-    % Region 6, formerly region 2
+    % Region 5 (formerly region 2)
     % The minimum distance must occur:
     % * on the line s + t = 1
     % * on the line s = 0 with t <= 1
     % * or at the intersection of the two (s=0; t=1)
-    inds = find(regIndex == 6);
+    inds = find(regIndex == 5);
     tmp0 = b(inds) + d(inds);
     tmp1 = c(inds) + e(inds);
     
-    % minimum on edge s+t = 1, with s > 1
+    % minimum on edge s+t = 1, with s > 0
     bool2 = tmp1 > tmp0;
     inds2 = inds(bool2);
     numer = tmp1(bool2) - tmp0(bool2);
@@ -343,11 +328,40 @@ for i = 1:nPoints
     t(inds3) = -e(inds3) ./ c(inds3);
 
         
+    % region 6 (formerly region 6)
+    % The minimum distance must occur
+    % * on the line s + t = 1
+    % * on the line t = 0, with s <= 1
+    % * at the intersection of the two lines (s=1; t=0)
+    inds = find(regIndex == 6);
+    tmp0 = b(inds) + e(inds);
+    tmp1 = a(inds) + d(inds);
+    
+    % minimum on edge s+t=1, with t > 0
+    bool2 = tmp1 > tmp0;
+    inds2 = inds(bool2);
+    numer = tmp1(bool2) - tmp0(bool2);
+    denom = a(inds2) - 2 * b(inds2) + c(inds2);
+    bool3 = numer <= denom;
+    t(inds2(~bool3)) = 1;
+    inds3 = inds2(bool3);
+    t(inds3) = numer(bool3) ./ denom(bool3);
+    s(inds2) = 1 - t(inds2);
+
+    % minimum on edge t = 0 with s <= 1
+    inds2 = inds(~bool2);
+    t(inds2) = 0;
+    s(inds2(tmp1(~bool2) <= 0)) = 1;
+    s(inds2(tmp1(~bool2) > 0 & d(inds2) >= 0)) = 0;
+    inds3 = inds2(tmp1(~bool2) > 0 & d(inds2) < 0);
+    s(inds3) = -d(inds3) ./ a(inds3);
+    
+
     % compute coordinates of closest point on plane
     projList = p1 + bsxfun(@times, s, v12) + bsxfun(@times, t, v13);
     
     % squared distance between point and closest point on plane
-    [dist(i), ind] = min(sum((bsxfun(@minus, point, projList)).^2, 2));
+    [dist(i), ind] = min(sum((bsxfun(@minus, point(i,:), projList)).^2, 2));
 
     % keep the valid projection
     proj(i, :) = projList(ind,:);

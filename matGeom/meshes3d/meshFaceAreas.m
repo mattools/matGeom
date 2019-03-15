@@ -35,7 +35,7 @@ if isnumeric(faces)
             v1 = vertices(faces(:,1), :);
             v12 = vertices(faces(:,2), :) - v1;
             v13 = vertices(faces(:,3), :) - v1;
-            areas = vectorNorm3d(crossProduct3d(v12, v13));
+            areas = vectorNorm3d(crossProduct3d(v12, v13))/2;
             
         else
             % for quad (or larger) meshes, use slower but more precise method
