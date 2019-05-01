@@ -22,7 +22,7 @@ function inds = meshBoundaryEdgeIndices(varargin)
 %     hold on; drawEdge3d(edges, 'linewidth', 2, 'color', 'b');
 %
 %   See also
-%     meshes3d, meshBoundaryVertexIndices, meshEdgeFaces
+%     meshes3d, meshBoundary, meshBoundaryVertexIndices, meshEdgeFaces
  
 % ------
 % Author: David Legland

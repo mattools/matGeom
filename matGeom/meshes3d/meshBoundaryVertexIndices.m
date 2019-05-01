@@ -20,7 +20,7 @@ function inds = meshBoundaryVertexIndices(varargin)
 %     hold on; drawPoint3d(vc(inds,:), 'k*');
 %
 %   See also
-%     meshes3d, meshBoundaryEdgeIndices, meshEdgeFaces
+%     meshes3d, meshBoundary, meshBoundaryEdgeIndices, meshEdgeFaces
  
 % ------
 % Author: David Legland
