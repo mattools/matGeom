@@ -8,29 +8,32 @@ function varargout = clipPoints3d(points, shape, varargin)
 %   Also returns the indices of clipped points.
 %   
 %   ... = clipPoints3d(..., 'shape', 'sphere') Specify the shape.
-%   Default is 'box'. But it's also possible to use a 'sphere'.
+%   Default is 'box'. But it is also possible to use 'sphere' or 'plane'.
 %   
-%   ... = clipPoints3d(..., 'inside',false) returns the set of  
+%   ... = clipPoints3d(..., 'inside', false) returns the set of  
 %   points outside the shape instead of inside.
 %
 %   See also
 %   points3d, boxes3d, spheres
 %
+
 % ------
 % Author: David Legland, oqilipo
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% Copyright 2008 INRA - BIA Nantes - MIAJ Jouy-en-Josas.
 
 parser = inputParser;
-validStrings = {'box','sphere'};
-addParameter(parser,'shape','box',@(x) any(validatestring(x, validStrings)));
-addParameter(parser,'inside',true,@islogical);
+validStrings = {'box', 'sphere', 'plane'};
+addParameter(parser, 'shape', 'box', @(x) any(validatestring(x, validStrings)));
+addParameter(parser, 'inside', true, @islogical);
 parse(parser,varargin{:});
 
 switch parser.Results.shape
     case 'box'
         LI = clipPointsByBox(points, shape);
+    case 'plane'
+        LI = clipPointsByPlane(points, shape);
     case 'sphere'
         LI = clipPointsBySphere(points, shape);
 end
@@ -67,9 +70,14 @@ end
         LI = xOk & yOk & zOk;
     end
 
+    function LI = clipPointsByPlane(points, plane)
+        % points inside and on the surface of the sphere
+        LI = isBelowPlane(points, plane);
+    end
+
     function LI = clipPointsBySphere(points, sphere)
         % points inside and on the surface of the sphere
-        LI = distancePoints3d(points, sphere(1:3))<=sphere(4);
+        LI = distancePoints3d(points, sphere(1:3)) <= sphere(4);
     end
 
 end
