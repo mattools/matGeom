@@ -38,6 +38,8 @@
 %   meshFaceCentroids        - Compute centroids of faces in a mesh
 %   meshFaceNormals          - Compute normal vector of faces in a 3D mesh
 %   meshVertexNormals        - Compute normals to a mesh vertices
+%   meshBoundaryEdgeIndices  - Indices of boundary edges of a mesh
+%   meshBoundaryVertexIndices- Indices of boundary vertices of a mesh
 %
 % Intersections and clipping
 %   intersectLineMesh3d      - Intersection points of a 3D line with a mesh
