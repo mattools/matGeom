@@ -59,12 +59,12 @@
 %   clipLine                 - Clip a line with a box
 %   reverseLine              - Return same line but with opposite orientation
 %   transformLine            - Transform a line with an affine transform
+%   lineToEdge               - Convert a straight line to a finite edge
 %   drawLine                 - Draw a straight line clipped by the current axis
 %
 % Edges (line segments between 2 points)
 %   edges2d                  - Description of functions operating on planar edges
 %   createEdge               - Create an edge between two points, or from a line
-%   edgeToLine               - Convert an edge to a straight line
 %   edgeAngle                - Return angle of edge
 %   edgeLength               - Return length of an edge
 %   parallelEdge             - Edge parallel to another edge
@@ -76,6 +76,7 @@
 %   intersectEdges           - Return all intersections between two set of edges
 %   intersectLineEdge        - Return intersection between a line and an edge
 %   transformEdge            - Transform an edge with an affine transform
+%   edgeToLine               - Convert an edge to a straight line
 %   edgeToPolyline           - Convert an edge to a polyline with a given number of segments
 %   drawEdge                 - Draw an edge given by 2 points
 %   drawCenteredEdge         - Draw an edge centered on a point
