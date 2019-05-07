@@ -9,7 +9,7 @@ function edges3d(varargin)
 %
 %   See also
 %   lines3d, edges2d, createEdge3d, edgeLength3d
-%   intersectEdgePlane, edgeToLine3d, clipEdge3d, midPoint3d
+%   intersectEdgePlane, edgeToLine3d, edgeToLine3d, clipEdge3d, midPoint3d
 %   distancePointEdge3d, drawEdge3d, drawSphericalEdge
  
 % ------
