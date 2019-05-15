@@ -15,8 +15,8 @@ function edges2d(varargin)
 %
 %
 %   See also:
-%   lines2d, rays2d, points2d
-%   createEdge, edgeAngle, edgeLength, edgeToLine, midPoint, parallelEdge
+%   lines2d, rays2d, points2d, createEdge, parallelEdge, 
+%   edgeAngle, edgeLength, midPoint, edgeToLine, lineToEdge
 %   intersectEdges, intersectLineEdge, isPointOnEdge, edgeToPolyline
 %   clipEdge, transformEdge, intersectEdgePolygon, centeredEdgeToEdge
 %   drawEdge, drawCenteredEdge
