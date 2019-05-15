@@ -1,5 +1,5 @@
 function diam = graphDiameter(v, e, l)
-%GRAPHDIAMETER Diameter of a graph
+%GRAPHDIAMETER Diameter of a graph.
 %
 %   D = graphDiameter(V, E)
 %   Computes the diameter of the graph given by V and E. The diameter of

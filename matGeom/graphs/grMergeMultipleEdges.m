@@ -1,5 +1,5 @@
 function varargout = grMergeMultipleEdges(nodes, edges)
-%GRMERGEMULTIPLEEDGES Remove all edges sharing the same extremities
+%GRMERGEMULTIPLEEDGES Remove all edges sharing the same extremities.
 %
 %   [NODES2, EDGES2] = grMergeMultipleEdges(NODES, EDGES)
 %   Remove configuration with two edges sharing the same 2 nodes.

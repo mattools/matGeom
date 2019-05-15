@@ -1,5 +1,5 @@
 function trans = translation(varargin)
-%TRANSLATION return 3*3 matrix of a translation
+%TRANSLATION return 3*3 matrix of a translation.
 %
 %   TRANS = translation(DX, DY);
 %   Returns the translation corresponding to DX and DY.

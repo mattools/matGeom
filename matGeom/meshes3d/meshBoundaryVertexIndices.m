@@ -1,5 +1,5 @@
 function inds = meshBoundaryVertexIndices(varargin)
-%MESHBOUNDARYVERTEXINDICES Indices of boundary vertices of a mesh
+%MESHBOUNDARYVERTEXINDICES Indices of boundary vertices of a mesh.
 %
 %   INDS = meshBoundaryVertexIndices(V, F)
 %   INDS = meshBoundaryVertexIndices(V, E, F)

@@ -1,5 +1,5 @@
 function b = onLine(point, line)
-%ONLINE test if a point belongs to a line
+%ONLINE test if a point belongs to a line.
 %
 %   B = onLine(POINT, LINE)
 %   with POINT being [xp yp], and LINE being [x0 y0 dx dy].

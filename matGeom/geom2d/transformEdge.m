@@ -1,5 +1,5 @@
 function dest = transformEdge(edge, trans)
-%TRANSFORMEDGE Transform an edge with an affine transform
+%TRANSFORMEDGE Transform an edge with an affine transform.
 %
 %   EDGE2 = transformEdge(EDGE1, TRANS);
 %   where EDGE1 has the form [x1 y1 x2 y1], and TRANS is a transformation

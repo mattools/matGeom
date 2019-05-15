@@ -1,5 +1,5 @@
 function varargout = transformPoint3d(varargin)
-%TRANSFORMPOINT3D Transform a point with a 3D affine transform
+%TRANSFORMPOINT3D Transform a point with a 3D affine transform.
 %
 %   PT2 = transformPoint3d(PT1, TRANS);
 %   PT2 = transformPoint3d(X1, Y1, Z1, TRANS);

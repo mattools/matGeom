@@ -1,5 +1,5 @@
 function transforms2d(varargin)
-%TRANSFORMS2D Description of functions operating on transforms
+%TRANSFORMS2D Description of functions operating on transforms.
 %
 %   By 'transform' we mean an affine transform. A planar affine transform
 %   can be represented by a 3x3 matrix.

@@ -1,5 +1,5 @@
 function obox = orientedBox(points)
-%ORIENTEDBOX Minimum-width oriented bounding box of a set of points
+%ORIENTEDBOX Minimum-width oriented bounding box of a set of points.
 %
 %   OBOX = orientedBox(PTS)
 %   Computes the oriented bounding box of a set of points. Oriented box is

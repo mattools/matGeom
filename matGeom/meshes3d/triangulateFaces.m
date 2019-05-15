@@ -1,5 +1,5 @@
 function [tri, inds] = triangulateFaces(faces)
-%TRIANGULATEFACES Convert face array to an array of triangular faces 
+%TRIANGULATEFACES Convert face array to an array of triangular faces .
 %
 %   TRI = triangulateFaces(FACES)
 %   Returns a 3-columns array of indices, based on the data stored in the

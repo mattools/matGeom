@@ -1,5 +1,5 @@
 function varargout = fillPolygon3d(varargin)
-%FILLPOLYGON3D Fill a 3D polygon specified by a list of vertex coords
+%FILLPOLYGON3D Fill a 3D polygon specified by a list of vertex coords.
 %
 %   fillPolygon3d(COORD, COLOR)
 %   packs coordinates in a single [N*3] array.

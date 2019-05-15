@@ -1,5 +1,5 @@
 function [b1, b2] = isManifoldMesh(varargin)
-%ISMANIFOLDMESH Check whether the input mesh may be considered as manifold
+%ISMANIFOLDMESH Check whether the input mesh may be considered as manifold.
 %
 %   B = isManifoldMesh(V, F)
 %   B = isManifoldMesh(V, E, F)

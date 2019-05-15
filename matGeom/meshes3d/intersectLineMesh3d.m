@@ -1,5 +1,5 @@
 function [points, pos, faceInds] = intersectLineMesh3d(line, vertices, faces, varargin)
-%INTERSECTLINEMESH3D Intersection points of a 3D line with a mesh
+%INTERSECTLINEMESH3D Intersection points of a 3D line with a mesh.
 %
 %   INTERS = intersectLineMesh3d(LINE, VERTICES, FACES)
 %   Compute the intersection points between a 3D line and a 3D mesh defined

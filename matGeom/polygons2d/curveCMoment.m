@@ -1,5 +1,5 @@
 function m = curveCMoment(curve, p, q)
-%CURVECMOMENT  Compute centered inertia moment of a 2D curve
+%CURVECMOMENT  Compute centered inertia moment of a 2D curve.
 %   M = curveCMoment(CURVE, P, Q)
 %
 %   Example

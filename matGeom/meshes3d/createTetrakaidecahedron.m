@@ -1,5 +1,5 @@
 function varargout = createTetrakaidecahedron()
-%CREATETETRAKAIDECAHEDRON Create a 3D mesh representing a tetrakaidecahedron
+%CREATETETRAKAIDECAHEDRON Create a 3D mesh representing a tetrakaidecahedron.
 %
 %   [V, E, F] = createTetrakaidecahedron;
 %   Create a mesh structure representing a tetrakaidecahedron, composed of

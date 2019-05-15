@@ -1,5 +1,5 @@
 function [minDist, pos] = distancePointPolyline(point, poly, varargin)
-%DISTANCEPOINTPOLYLINE  Compute shortest distance between a point and a polyline
+%DISTANCEPOINTPOLYLINE  Compute shortest distance between a point and a polyline.
 %
 %   DIST = distancePointPolyline(POINT, POLYLINE)
 %   Returns the shortest distance between a point given as a 1-by-2 row

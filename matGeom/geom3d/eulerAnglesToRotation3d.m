@@ -1,5 +1,5 @@
 function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)
-%EULERANGLESTOROTATION3D Convert 3D Euler angles to 3D rotation matrix
+%EULERANGLESTOROTATION3D Convert 3D Euler angles to 3D rotation matrix.
 %
 %   MAT = eulerAnglesToRotation3d(PHI, THETA, PSI)
 %   Creates a rotation matrix from the 3 euler angles PHI THETA and PSI,

@@ -1,5 +1,5 @@
 function boxes3d(varargin)
-%BOXES3D Description of functions operating on 3D boxes
+%BOXES3D Description of functions operating on 3D boxes.
 %
 %   A box defined by its coordinate extents: 
 %   BOX = [XMIN XMAX YMIN YMAX ZMIN ZMAX].

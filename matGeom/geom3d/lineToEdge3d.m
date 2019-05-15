@@ -1,5 +1,5 @@
 function edge = lineToEdge3d(line)
-%LINETOEDGE3D Convert a 3D straight line to a 3D finite edge
+%LINETOEDGE3D Convert a 3D straight line to a 3D finite edge.
 %
 %   EDGE = lineToEdge3d(LINE)
 %   Returns the edge with same origin as the line LINE, and with second

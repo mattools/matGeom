@@ -1,5 +1,5 @@
 function circles2d(varargin)
-%CIRCLES2D Description of functions operating on circles
+%CIRCLES2D Description of functions operating on circles.
 %
 %   Circles are represented by their center and their radius:
 %   C = [xc yc r];

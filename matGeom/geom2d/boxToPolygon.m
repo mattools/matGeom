@@ -1,5 +1,5 @@
 function poly = boxToPolygon(box)
-%BOXTOPOLYGON Convert a bounding box to a square polygon
+%BOXTOPOLYGON Convert a bounding box to a square polygon.
 %
 %   poly = boxToPolygon(box)
 %   Utility function that convert box data in [XMIN XMAX YMIN YMAX] format

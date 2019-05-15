@@ -1,5 +1,5 @@
 function varargout = imageGraph(img, varargin)
-%IMAGEGRAPH Create equivalent graph of a binary image
+%IMAGEGRAPH Create equivalent graph of a binary image.
 %
 %   [N E] = imageGraph(IMG);
 %   or 

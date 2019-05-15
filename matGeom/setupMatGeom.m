@@ -1,5 +1,5 @@
 function setupMatGeom(varargin)
-%SETUPMATGEOM Add the different directories of MatGeom to the path
+%SETUPMATGEOM Add the different directories of MatGeom to the path.
 %
 %   Usage:
 %   setupMatGeom;

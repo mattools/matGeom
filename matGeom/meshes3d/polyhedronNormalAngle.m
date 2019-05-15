@@ -1,5 +1,5 @@
 function theta = polyhedronNormalAngle(varargin)
-%POLYHEDRONNORMALANGLE Compute normal angle at a vertex of a 3D polyhedron
+%POLYHEDRONNORMALANGLE Compute normal angle at a vertex of a 3D polyhedron.
 %
 %   THETA = polyhedraNormalAngle(NODES, EDGES, FACES, IND);
 %   THETA = polyhedraNormalAngle(NODES, FACES, IND);

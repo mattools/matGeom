@@ -1,5 +1,5 @@
 function varargout = drawCuboid(cuboid, varargin)
-%DRAWCUBOID Draw a 3D cuboid, eventually rotated
+%DRAWCUBOID Draw a 3D cuboid, eventually rotated.
 %
 %   drawCuboid(CUBOID)
 %   Displays a 3D cuboid on current axis. CUBOID is given by:

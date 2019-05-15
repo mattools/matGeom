@@ -1,5 +1,5 @@
 function plane = reversePlane(plane)
-%REVERSEPLANE Return same 3D plane but with opposite orientation
+%REVERSEPLANE Return same 3D plane but with opposite orientation.
 %
 %   IP = reversePlane(PLANE);
 %   Returns a plane contining the same ppints but with normal opposite to

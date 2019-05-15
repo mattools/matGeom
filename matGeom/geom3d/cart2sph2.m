@@ -1,5 +1,5 @@
 function varargout = cart2sph2(varargin)
-%CART2SPH2 Convert cartesian coordinates to spherical coordinates
+%CART2SPH2 Convert cartesian coordinates to spherical coordinates.
 %
 %   [THETA PHI RHO] = cart2sph2([X Y Z])
 %   [THETA PHI RHO] = cart2sph2(X, Y, Z)

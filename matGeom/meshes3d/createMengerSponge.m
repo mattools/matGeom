@@ -1,5 +1,5 @@
 function varargout = createMengerSponge()
-%CREATEMENGERSPONGE Create a cube with an inside cross removed
+%CREATEMENGERSPONGE Create a cube with an inside cross removed.
 %
 %   [n, e, f] = createMengerSponge;
 %   Main use is to test possibility of drawing polyhedra with complex faces

@@ -1,5 +1,5 @@
 function circle = createDirectedCircle(varargin)
-%CREATEDIRECTEDCIRCLE Create a directed circle
+%CREATEDIRECTEDCIRCLE Create a directed circle.
 %
 %   C = createDirectedCircle(P1, P2, P3);
 %   Creates a circle going through the given points.

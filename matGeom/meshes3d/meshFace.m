@@ -1,5 +1,5 @@
 function face = meshFace(faces, index)
-%MESHFACE Return the vertex indices of a face in a mesh
+%MESHFACE Return the vertex indices of a face in a mesh.
 %
 %   FACE = meshFace(FACES, INDEX)
 %   Return the vertex indices of the i-th face in the face array. This is

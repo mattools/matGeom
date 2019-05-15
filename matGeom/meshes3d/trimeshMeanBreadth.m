@@ -1,5 +1,5 @@
 function mb = trimeshMeanBreadth(vertices, faces)
-%TRIMESHMEANBREADTH Mean breadth of a triangular mesh
+%TRIMESHMEANBREADTH Mean breadth of a triangular mesh.
 %
 %   MB = trimeshMeanBreadth(VERTICES, FACES)
 %   Computes the mean breadth (proporitonal to the integral of mean

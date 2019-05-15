@@ -1,5 +1,5 @@
 function polygons3d(varargin)
-%POLYGONS3D Description of functions operating on 3D polygons
+%POLYGONS3D Description of functions operating on 3D polygons.
 %
 %   A 3D polygon is simply a set of 3D points (called vertices) which are
 %   assumed to be located in the same plane.

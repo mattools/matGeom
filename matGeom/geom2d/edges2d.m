@@ -1,5 +1,5 @@
 function edges2d(varargin)
-%EDGES2D  Description of functions operating on planar edges
+%EDGES2D  Description of functions operating on planar edges.
 %
 %   An edge is represented by the coordinate of its extremities:
 %   EDGE = [X1 Y1 X2 Y2];

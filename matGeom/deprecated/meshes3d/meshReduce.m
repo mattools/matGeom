@@ -1,5 +1,5 @@
 function varargout = meshReduce(nodes, varargin)
-%MESHREDUCE Merge coplanar faces of a polyhedral mesh
+%MESHREDUCE Merge coplanar faces of a polyhedral mesh.
 %
 %   Note: deprecated, should use "mergeCoplanarFaces" instead
 %

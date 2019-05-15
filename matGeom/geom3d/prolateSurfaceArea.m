@@ -1,5 +1,5 @@
 function S = prolateSurfaceArea(elli, varargin)
-%PROLATESURFACEAREA  Approximated surface area of a prolate ellipsoid
+%PROLATESURFACEAREA  Approximated surface area of a prolate ellipsoid.
 %
 %   S = prolateSurfaceArea(R1,R2)
 %

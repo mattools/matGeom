@@ -1,5 +1,5 @@
 function transforms3d(varargin)
-%TRANSFORMS3D  Conventions for manipulating 3D affine transforms
+%TRANSFORMS3D  Conventions for manipulating 3D affine transforms.
 %
 %   By 'transform' we mean an affine transform. A 3D affine transform
 %   is represented by a 4*4 matrix. The last row of the matrix is equal to

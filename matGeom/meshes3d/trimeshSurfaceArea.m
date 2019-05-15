@@ -1,5 +1,5 @@
 function area = trimeshSurfaceArea(v, e, f)
-%TRIMESHSURFACEAREA Surface area of a triangular mesh
+%TRIMESHSURFACEAREA Surface area of a triangular mesh.
 %
 %   S = trimeshSurfaceArea(V, F)
 %   S = trimeshSurfaceArea(V, E, F)

@@ -1,5 +1,5 @@
 function plane = createPlane(varargin)
-%CREATEPLANE Create a plane in parametrized form
+%CREATEPLANE Create a plane in parametrized form.
 %
 %   PLANE = createPlane(P1, P2, P3) 
 %   creates a plane containing the 3 points

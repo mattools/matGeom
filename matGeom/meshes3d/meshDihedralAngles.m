@@ -1,5 +1,5 @@
 function alpha = meshDihedralAngles(vertices, edges, faces)
-%MESHDIHEDRALANGLES Dihedral at edges of a polyhedal mesh
+%MESHDIHEDRALANGLES Dihedral at edges of a polyhedal mesh.
 %
 %   ALPHA = meshDihedralAngles(V, E, F)
 %   where V, E and F represent vertices, edges and faces of a mesh,

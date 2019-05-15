@@ -1,5 +1,5 @@
 function [hAx, prim, varargin]=parseDrawInput(prim,valFun,type,defOpts,varargin)
-%PARSEDRAWINPUT Parse input arguments for drawing functions: draw*
+%PARSEDRAWINPUT Parse input arguments for drawing functions: draw*.
 % 
 %   INPUT:
 %       PRIM: The primitive object: line, plane, ...

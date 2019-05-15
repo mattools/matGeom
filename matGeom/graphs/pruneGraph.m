@@ -1,5 +1,5 @@
 function [nodes2, edges2] = pruneGraph(nodes, edges)
-%PRUNEGRAPH Remove all edges with a terminal vertex
+%PRUNEGRAPH Remove all edges with a terminal vertex.
 %
 %   [NODES2, EDGES2] = pruneGraph(NODES, EDGES)
 %

@@ -1,5 +1,5 @@
 function varargout = clipPoints3d(points, shape, varargin)
-%CLIPPOINTS3D Clip a set of points by a box or other 3d shapes
+%CLIPPOINTS3D Clip a set of points by a box or other 3d shapes.
 %
 %   CLIP = clipPoints3d(POINTS, BOX);
 %   Returns the set of points which are located inside of the box BOX.

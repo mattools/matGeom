@@ -1,5 +1,5 @@
 function varargout = circumCenter(a, b, c)
-%CIRCUMCENTER  Circumcenter of three points
+%CIRCUMCENTER  Circumcenter of three points.
 %
 %   CC = circumCenter(P1, P2, P3)
 %

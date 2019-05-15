@@ -1,5 +1,5 @@
 function v = polynomialCurveDerivative(t, varargin)
-%POLYNOMIALCURVEDERIVATIVE Compute derivative vector of a polynomial curve
+%POLYNOMIALCURVEDERIVATIVE Compute derivative vector of a polynomial curve.
 %
 %   VECT = polynomialCurveLength(T, XCOEF, YCOEF);
 %   XCOEF and YCOEF are row vectors of coefficients, in the form:

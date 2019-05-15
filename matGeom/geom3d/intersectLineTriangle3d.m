@@ -1,5 +1,5 @@
 function [point, pos, isInside] = intersectLineTriangle3d(line, triangle, varargin)
-%INTERSECTLINETRIANGLE3D Intersection point of a 3D line and a 3D triangle
+%INTERSECTLINETRIANGLE3D Intersection point of a 3D line and a 3D triangle.
 %
 %   POINT = intersectLineTriangle3d(LINE, TRI)
 %   Compute coordinates of the intersection point between the line LINE and

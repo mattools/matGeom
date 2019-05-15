@@ -1,5 +1,5 @@
 function edge = clipLineRect(line, rect)
-%CLIPLINERECT clip a line with a polygon
+%CLIPLINERECT clip a line with a polygon.
 %
 %   EDGE = clipLineRect(LINE, RECT);
 %   LINE: line in the form [x0 y0 dx dy]

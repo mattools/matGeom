@@ -1,5 +1,5 @@
 function line = edgeToLine3d(edge)
-%EDGETOLINE3D Convert a 3D edge to a 3D straight line
+%EDGETOLINE3D Convert a 3D edge to a 3D straight line.
 %
 %   LINE = edgeToLine3d(EDGE)
 %   Returns the 3D straight line containing the 3D edge EDGE.

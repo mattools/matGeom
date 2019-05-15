@@ -1,5 +1,5 @@
 function varargout = mergeCoplanarFaces(nodes, varargin)
-%MERGECOPLANARFACES Merge coplanar faces of a polyhedral mesh
+%MERGECOPLANARFACES Merge coplanar faces of a polyhedral mesh.
 %
 %   [NODES, FACES] = mergeCoplanarFaces(NODES, FACES)
 %   [NODES, EDGES, FACES] = mergeCoplanarFaces(NODES, EDGES, FACES)

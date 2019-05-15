@@ -1,5 +1,5 @@
 function boxes2d(varargin)
-%BOXES2D Description of functions operating on bounding boxes
+%BOXES2D Description of functions operating on bounding boxes.
 %
 %   A box is represented as a set of limits in each direction:
 %   BOX = [XMIN XMAX YMIN YMAX].

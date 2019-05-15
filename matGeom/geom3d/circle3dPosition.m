@@ -1,5 +1,5 @@
 function theta = circle3dPosition(point, circle)
-%CIRCLE3DPOSITION Return the angular position of a point on a 3D circle
+%CIRCLE3DPOSITION Return the angular position of a point on a 3D circle.
 %
 %   POS = circle3dPosition(POINT, CIRCLE)
 %   Returns angular position of point on the circle, in degrees, between 0

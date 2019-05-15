@@ -1,5 +1,5 @@
 function varargout = drawPolyline3d(varargin)
-%DRAWPOLYLINE3D Draw a 3D polyline specified by a list of vertex coords
+%DRAWPOLYLINE3D Draw a 3D polyline specified by a list of vertex coords.
 %
 %   drawPolyline3d(POLY);
 %   packs coordinates in a single N-by-3 array.

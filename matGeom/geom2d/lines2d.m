@@ -1,5 +1,5 @@
 function lines2d(varargin)
-%LINES2D  Description of functions operating on planar lines
+%LINES2D  Description of functions operating on planar lines.
 %
 %   The term 'line' refers to a planar straight line, which is an unbounded
 %   curve. Line segments defined between 2 points, which are bounded, are

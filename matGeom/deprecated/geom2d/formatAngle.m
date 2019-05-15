@@ -1,5 +1,5 @@
 function alpha = formatAngle(alpha)
-%FORMATANGLE  Ensure an angle value is comprised between 0 and 2*PI
+%FORMATANGLE  Ensure an angle value is comprised between 0 and 2*PI.
 %   ALPHA2 = formatAngle(ALPHA)
 %   ALPHA2 is the same as ALPHA modulo 2*PI and is positive.
 %

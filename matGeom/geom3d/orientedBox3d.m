@@ -1,5 +1,5 @@
 function box3d = orientedBox3d(pts)
-%ORIENTEDBOX3D Object-oriented bounding box of a set of 3D points
+%ORIENTEDBOX3D Object-oriented bounding box of a set of 3D points.
 %
 %   OOBB = orientedBox3d(PTS)
 %

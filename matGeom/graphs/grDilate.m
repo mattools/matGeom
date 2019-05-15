@@ -1,5 +1,5 @@
 function varargout = grDilate(varargin)
-%GRDILATE Morphological dilation on graph
+%GRDILATE Morphological dilation on graph.
 %
 %   LBL2 = grDilate(EDGES, LBL1)
 %   Each label of the graph is assigned the highest label of its

@@ -1,5 +1,5 @@
 function varargout = circleArcToPolyline(arc, N)
-%CIRCLEARCTOPOLYLINE Convert a circle arc into a series of points
+%CIRCLEARCTOPOLYLINE Convert a circle arc into a series of points.
 %
 %   P = circleArcToPolyline(ARC, N);
 %   convert the circle ARC into a series of N points. 

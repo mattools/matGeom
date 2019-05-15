@@ -1,5 +1,5 @@
 function [nodes, edges] = medialAxisConvex(points)
-%MEDIALAXISCONVEX Compute medial axis of a convex polygon
+%MEDIALAXISCONVEX Compute medial axis of a convex polygon.
 %
 %   [N, E] = medialAxisConvex(POLYGON);
 %   where POLYGON is given as a set of points [x1 y1;x2 y2 ...], returns

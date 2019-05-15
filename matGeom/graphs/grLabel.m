@@ -1,5 +1,5 @@
 function labels = grLabel(nodes, edges)
-%GRLABEL Associate a label to each connected component of the graph
+%GRLABEL Associate a label to each connected component of the graph.
 %
 %   LABELS = grLabel(NODES, EDGES)
 %   Returns an array with as many rows as the array NODES, containing index

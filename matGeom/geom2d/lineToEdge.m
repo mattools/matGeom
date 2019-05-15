@@ -1,5 +1,5 @@
 function edge = lineToEdge(line)
-%LINETOEDGE Convert a straight line to a finite edge
+%LINETOEDGE Convert a straight line to a finite edge.
 %
 %   EDGE = lineToEdge(LINE)
 %   Returns the edge with same origin as the line LINE, and with second

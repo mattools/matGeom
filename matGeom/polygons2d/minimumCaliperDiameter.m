@@ -1,5 +1,5 @@
 function [min_width, min_angle] = minimumCaliperDiameter(points)
-%MINIMUMCALIPERDIAMETER Minimum caliper diameter of a set of points
+%MINIMUMCALIPERDIAMETER Minimum caliper diameter of a set of points.
 %
 %   WIDTH = minimumCaliperDiameter(POINTS)
 %   Computes the minimum width of a set of points. As polygons and

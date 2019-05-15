@@ -1,5 +1,5 @@
 function neigh = grNeighborEdges(edges, node)
-%GRNEIGHBOREDGES Find adjacent edges of a given node
+%GRNEIGHBOREDGES Find adjacent edges of a given node.
 %
 %   Deprecated, use 'grAdjacentEdges' instead.
 %

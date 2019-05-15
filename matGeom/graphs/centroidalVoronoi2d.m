@@ -1,5 +1,5 @@
 function [germs, germPaths] = centroidalVoronoi2d(germs, poly, varargin)
-%CENTROIDALVORONOI2D Centroidal Voronoi tesselation within a polygon
+%CENTROIDALVORONOI2D Centroidal Voronoi tesselation within a polygon.
 %
 %   PTS = centroidalVoronoi2d(NPTS, POLY)
 %   Generate points in a polygon based on centroidal voronoi tesselation.

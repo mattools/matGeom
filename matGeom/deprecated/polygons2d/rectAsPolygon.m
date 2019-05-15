@@ -1,5 +1,5 @@
 function [tx, ty] = rectAsPolygon(rect)
-%RECTASPOLYGON Convert a (centered) rectangle into a series of points
+%RECTASPOLYGON Convert a (centered) rectangle into a series of points.
 %
 %   deprecated: replaced by rectToPolygon
 %

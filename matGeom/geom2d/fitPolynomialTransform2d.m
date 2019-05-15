@@ -1,5 +1,5 @@
 function coeffs = fitPolynomialTransform2d(pts, ptsRef, degree)
-%FITPOLYNOMIALTRANSFORM2D Coefficients of polynomial transform between two point sets
+%FITPOLYNOMIALTRANSFORM2D Coefficients of polynomial transform between two point sets.
 %
 %   COEFFS = fitPolynomialTransform2d(PTS, PTSREF, DEGREE)
 %

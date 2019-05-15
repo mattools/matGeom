@@ -1,5 +1,5 @@
 function [index, minDist] = findClosestPoint(coord, points)
-%FINDCLOSESTPOINT Find index of closest point in an array
+%FINDCLOSESTPOINT Find index of closest point in an array.
 %
 %   INDEX = findClosestPoint(POINT, POINTARRAY)
 %

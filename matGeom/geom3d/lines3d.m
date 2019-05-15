@@ -1,5 +1,5 @@
 function lines3d(varargin)
-%LINES3D Description of functions operating on 3D lines
+%LINES3D Description of functions operating on 3D lines.
 %
 %   A 3D Line is represented by a 1-by-6 row vector containing a 3D point
 %   (its origin) and a 3D vector (its direction):

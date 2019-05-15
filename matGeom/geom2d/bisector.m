@@ -1,5 +1,5 @@
 function ray = bisector(varargin)
-%BISECTOR Return the bisector of two lines, or 3 points
+%BISECTOR Return the bisector of two lines, or 3 points.
 %
 %   RAY = bisector(LINE1, LINE2);
 %   create the bisector of the two lines, given as [x0 y0 dx dy].

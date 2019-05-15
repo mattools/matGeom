@@ -1,5 +1,5 @@
 function res = isPointInMesh(point, v, f, varargin)
-%ISPOINTINMESH Check if a point is inside a 3D mesh
+%ISPOINTINMESH Check if a point is inside a 3D mesh.
 %
 %   B = isPointInMesh(PT, V, F)
 %   Check if the point PT (given as a 1-by-3 array) is inside the mesh

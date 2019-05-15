@@ -1,5 +1,5 @@
 function path = grFindMaximalLengthPath(nodes, edges, edgeWeights)
-%GRFINDMAXIMALLENGTHPATH Find a path that maximizes sum of edge weights
+%GRFINDMAXIMALLENGTHPATH Find a path that maximizes sum of edge weights.
 %
 %   PATH = grFindMaximalLengthPath(NODES, EDGES, EDGE_WEIGHTS);
 %   Finds a greatest geodesic path in the graph. A path between two nodes

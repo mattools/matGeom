@@ -1,5 +1,5 @@
 function box = rectToBox(rect)
-%RECTTOBOX Convert rectangle data to box data
+%RECTTOBOX Convert rectangle data to box data.
 %
 %   RECT = rectToBox(BOX)
 %   Converts from rectangle representation to box representation.

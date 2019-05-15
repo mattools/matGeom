@@ -1,5 +1,5 @@
 function theta = lineAngle(varargin)
-%LINEANGLE Computes angle between two straight lines
+%LINEANGLE Computes angle between two straight lines.
 %
 %   A = lineAngle(LINE);
 %   Returns the angle between horizontal, right-axis and the given line.

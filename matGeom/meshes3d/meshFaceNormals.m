@@ -1,5 +1,5 @@
 function normals = meshFaceNormals(varargin)
-%MESHFACENORMALS Compute normal vector of faces in a 3D mesh
+%MESHFACENORMALS Compute normal vector of faces in a 3D mesh.
 %
 %   NORMALS = meshFaceNormals(VERTICES, FACES)
 %   VERTICES is a set of 3D points (as a N-by-3 array), and FACES is either

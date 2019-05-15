@@ -1,5 +1,5 @@
 function coef = polyfit2(varargin)
-%POLYFIT2 Polynomial approximation of a curve
+%POLYFIT2 Polynomial approximation of a curve.
 %
 %
 %   usage :

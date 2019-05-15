@@ -1,5 +1,5 @@
 function node2 = grOppositeNode(edges, node)
-%GROPPOSITENODE Return opposite node in an edge
+%GROPPOSITENODE Return opposite node in an edge.
 %
 %   NODE2 = grOppositeNode(EDGE, NODE);
 %   Return the index of the node opposite to NODE in EDGE.

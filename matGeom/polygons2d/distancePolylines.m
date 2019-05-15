@@ -1,5 +1,5 @@
 function dist = distancePolylines(poly1, poly2)
-%DISTANCEPOLYLINES Compute the shortest distance between 2 polylines
+%DISTANCEPOLYLINES Compute the shortest distance between 2 polylines.
 %
 %   DIST = distancePolylines(POLY1, POLY2)
 %   POLY1 and POLY2 should be two polylines represented by their list of

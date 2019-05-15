@@ -1,5 +1,5 @@
 function vn = normalizeVector(v)
-%NORMALIZEVECTOR Normalize a vector to have norm equal to 1
+%NORMALIZEVECTOR Normalize a vector to have norm equal to 1.
 %
 %   V2 = normalizeVector(V);
 %   Returns the normalization of vector V, such that ||V|| = 1. V can be

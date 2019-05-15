@@ -1,5 +1,5 @@
 function FE = meshFaceEdges(vertices, edges, faces)
-%MESHFACEEDGES Computes edge indices of each face
+%MESHFACEEDGES Computes edge indices of each face.
 %
 %   FE = meshFaceEdges(V, E, F)
 %   Returns a 1-by-NF cell array containing for each face, the set of edge

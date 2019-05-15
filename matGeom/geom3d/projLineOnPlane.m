@@ -1,5 +1,5 @@
 function [newLine, isOrthogonal] = projLineOnPlane(line, plane)
-%PROJLINEONPLANE Return the orthogonal projection of a line on a plane
+%PROJLINEONPLANE Return the orthogonal projection of a line on a plane.
 % 
 %   NEWLINE = PROJLINEONPLANE(LINE, PLANE) Returns the orthogonal
 %   projection of LINE or multiple lines on the PLANE.

@@ -1,5 +1,5 @@
 function line = fitLine3d(points)
-%FITLINE3D Fit a 3D line to a set of points
+%FITLINE3D Fit a 3D line to a set of points.
 %
 %   LINE = fitLine3d(PTS)
 %

@@ -1,5 +1,5 @@
 function varargout = drawSquareMesh(nodes, edges, faces, varargin) %#ok<INUSL>
-%DRAWSQUAREMESH Draw a 3D square mesh given as a graph
+%DRAWSQUAREMESH Draw a 3D square mesh given as a graph.
 %
 %   drawSquareMesh(NODES, EDGES, FACES)
 %   Draw the mesh defined by NODES, EDGES and FACES. FACES must be a N-by-4

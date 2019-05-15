@@ -1,5 +1,5 @@
 function [intersects, inds] = intersectEdgePolygon(edge, poly, varargin)
-%INTERSECTEDGEPOLYGON  Intersection point of an edge with a polygon
+%INTERSECTEDGEPOLYGON  Intersection point of an edge with a polygon.
 %
 %   INTER = intersectEdgePolygon(EDGE, POLY)
 %   Computes intersection(s) point(s) between the edge EDGE and the polygon

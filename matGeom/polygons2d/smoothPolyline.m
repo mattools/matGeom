@@ -1,5 +1,5 @@
 function res = smoothPolyline(poly, M)
-%SMOOTHPOLYLINE Smooth a polyline using local averaging
+%SMOOTHPOLYLINE Smooth a polyline using local averaging.
 %
 %   RES = smoothPolygon(POLY, M)
 %   POLY contains the polyline vertices, and M is the size of smoothing

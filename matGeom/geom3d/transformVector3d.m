@@ -1,5 +1,5 @@
 function varargout = transformVector3d(varargin)
-%TRANSFORMVECTOR3D Transform a vector with a 3D affine transform
+%TRANSFORMVECTOR3D Transform a vector with a 3D affine transform.
 %
 %   V2 = transformVector3d(V1, TRANS);
 %   Computes the vector obtained by transforming vector V1 with affine

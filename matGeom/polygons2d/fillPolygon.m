@@ -1,5 +1,5 @@
 function varargout = fillPolygon(varargin)
-%FILLPOLYGON Fill a polygon specified by a list of points
+%FILLPOLYGON Fill a polygon specified by a list of points.
 %
 %   fillPolygon(POLY);
 %   Fills the interior of the polygon specified by POLY. The boundary of

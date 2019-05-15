@@ -1,5 +1,5 @@
 function line = reverseLine3d(line)
-%REVERSELINE3D Return same 3D line but with opposite orientation
+%REVERSELINE3D Return same 3D line but with opposite orientation.
 %
 %   INVLINE = reverseLine(LINE);
 %   Returns the opposite line of LINE.

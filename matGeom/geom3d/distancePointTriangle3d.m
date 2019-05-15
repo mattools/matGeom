@@ -1,5 +1,5 @@
 function [dist, proj] = distancePointTriangle3d(point, triangle)
-%DISTANCEPOINTTRIANGLE3D Minimum distance between a 3D point and a 3D triangle
+%DISTANCEPOINTTRIANGLE3D Minimum distance between a 3D point and a 3D triangle.
 %
 %   DIST = distancePointTriangle3d(PT, TRI);
 %   Computes the minimum distance between the point PT and the triangle

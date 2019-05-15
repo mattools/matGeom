@@ -1,5 +1,5 @@
 function poly = removeMultipleVertices(poly, varargin)
-%REMOVEMULTIPLEVERTICES Remove multiple vertices of a polygon or polyline
+%REMOVEMULTIPLEVERTICES Remove multiple vertices of a polygon or polyline.
 %
 %   POLY2 = removeMultipleVertices(POLY, EPS)
 %   Remove adjacent vertices that are closer than the distance EPS to each

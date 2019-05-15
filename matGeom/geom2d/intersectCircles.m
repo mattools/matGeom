@@ -1,5 +1,5 @@
 function points = intersectCircles(circle1, circle2)
-%INTERSECTCIRCLES Intersection points of two circles
+%INTERSECTCIRCLES Intersection points of two circles.
 %
 %   POINTS = intersectCircles(CIRCLE1, CIRCLE2)
 %   Computes the intersetion point of the two circles CIRCLE1 and CIRCLE1.

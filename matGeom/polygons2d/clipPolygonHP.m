@@ -1,5 +1,5 @@
 function poly2 = clipPolygonHP(poly, line)
-%CLIPPOLYGONHP Clip a polygon with a Half-plane defined by a directed line
+%CLIPPOLYGONHP Clip a polygon with a Half-plane defined by a directed line.
 %
 %   POLY2 = clipPolygonHP(POLY, LINE)
 %   POLY is a [Nx2] array of points, and LINE is given as [x0 y0 dx dy].

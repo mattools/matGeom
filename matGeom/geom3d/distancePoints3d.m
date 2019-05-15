@@ -1,5 +1,5 @@
 function dist = distancePoints3d(p1, p2, varargin)
-%DISTANCEPOINTS3D Compute euclidean distance between pairs of 3D Points
+%DISTANCEPOINTS3D Compute euclidean distance between pairs of 3D Points.
 %
 %   D = distancePoints3d(P1, P2) return distance between points P1 and
 %   P2, given as [X Y Z].

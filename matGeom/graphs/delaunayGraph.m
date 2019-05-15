@@ -1,5 +1,5 @@
 function [points, edges] = delaunayGraph(points, varargin)
-%DELAUNAYGRAPH Graph associated to Delaunay triangulation of input points
+%DELAUNAYGRAPH Graph associated to Delaunay triangulation of input points.
 %
 %   [NODES EDGES] = delaunayGraph(POINTS)
 %   Compute the Delaunay triangulation of the set of input points, and

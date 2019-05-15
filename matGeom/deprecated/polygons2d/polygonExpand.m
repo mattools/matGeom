@@ -1,5 +1,5 @@
 function poly2 = polygonExpand(polygon, dist)
-%POLYGONEXPAND 'expand' a polygon with a given distance
+%POLYGONEXPAND 'expand' a polygon with a given distance.
 %
 %   EXPOLY = polygonExpand(POLYGON, D);
 %   Associates each edge of POLYGON to an edge located at distance D, and

@@ -1,5 +1,5 @@
 function n = planeNormal(plane)
-%PLANENORMAL Compute the normal to a plane
+%PLANENORMAL Compute the normal to a plane.
 %
 %   N = planeNormal(PLANE) 
 %   compute the normal of the given plane

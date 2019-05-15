@@ -1,5 +1,5 @@
 function edgeFaces = meshEdgeFaces(vertices, edges, faces) %#ok<INUSL>
-%MESHEDGEFACES Compute index of faces adjacent to each edge of a mesh
+%MESHEDGEFACES Compute index of faces adjacent to each edge of a mesh.
 %
 %   EF = meshEdgeFaces(V, E, F)
 %   Compute index array of faces adjacent to each edge of a mesh.

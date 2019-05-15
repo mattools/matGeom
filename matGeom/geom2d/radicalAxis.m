@@ -1,5 +1,5 @@
 function line = radicalAxis(circle1, circle2)
-%RADICALAXIS Compute the radical axis (or radical line) of 2 circles
+%RADICALAXIS Compute the radical axis (or radical line) of 2 circles.
 %
 %   L = radicalAxis(C1, C2)
 %   Computes the radical axis of 2 circles.

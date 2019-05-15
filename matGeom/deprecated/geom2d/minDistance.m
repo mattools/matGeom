@@ -1,5 +1,5 @@
 function [dist, varargout] = minDistance(p, curve)
-%MINDISTANCE compute minimum distance between a point and a set of points
+%MINDISTANCE compute minimum distance between a point and a set of points.
 %
 %   Deprecated: use minDistancePoints instead
 %

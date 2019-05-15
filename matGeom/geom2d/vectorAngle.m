@@ -1,5 +1,5 @@
 function alpha = vectorAngle(v1, varargin)
-%VECTORANGLE Angle of a vector, or between 2 vectors
+%VECTORANGLE Angle of a vector, or between 2 vectors.
 %
 %   A = vectorAngle(V);
 %   Returns angle between Ox axis and vector direction, in Counter

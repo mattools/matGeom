@@ -1,5 +1,5 @@
 function [centroid, area] = polygonCentroid(varargin)
-%POLYGONCENTROID Compute the centroid (center of mass) of a polygon
+%POLYGONCENTROID Compute the centroid (center of mass) of a polygon.
 %
 %   CENTROID = polygonCentroid(POLY)
 %   CENTROID = polygonCentroid(PTX, PTY)

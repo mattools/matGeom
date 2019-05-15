@@ -1,5 +1,5 @@
 function poly2 = resamplePolylineByLength(poly, step)
-%RESAMPLEPOLYLINEBYLENGTH Resample a polyline with a fixed sampling step
+%RESAMPLEPOLYLINEBYLENGTH Resample a polyline with a fixed sampling step.
 %
 %   RES = resamplePolyline(POLY, STEP)
 %   Resample the input polyline POLY by distributing new vertices on the

@@ -1,5 +1,5 @@
 function edge = createEdge(varargin)
-%CREATEEDGE Create an edge between two points, or from a line
+%CREATEEDGE Create an edge between two points, or from a line.
 %
 %   The internal format for edge representation is given by coordinates of
 %   two points : [x1 y1 x2 y2].

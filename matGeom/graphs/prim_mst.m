@@ -1,5 +1,5 @@
 function varargout = prim_mst(edges, vals)
-%PRIM_MST Minimal spanning tree by Prim's algorithm
+%PRIM_MST Minimal spanning tree by Prim's algorithm.
 %
 %   EDGES2 = prim_mst(EDGES, VALUES)
 %   Compute the minimal spanning tree (MST) of the graph with edges given

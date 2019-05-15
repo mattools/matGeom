@@ -1,5 +1,5 @@
 function areas = meshFaceAreas(vertices, faces)
-%MESHFACEAREAS Surface area of each face of a mesh
+%MESHFACEAREAS Surface area of each face of a mesh.
 %
 %   areas = meshFaceAreas(vertices, faces)
 %

@@ -1,5 +1,5 @@
 function [vertices, faces] = mergeMeshVertices(vertices, faces, vertexInds, varargin)
-%MERGEMESHVERTICES Merge two vertices and removes eventual degenerated faces
+%MERGEMESHVERTICES Merge two vertices and removes eventual degenerated faces.
 %
 %   output = mergeMeshVertices(input)
 %

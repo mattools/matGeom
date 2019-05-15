@@ -1,5 +1,5 @@
 function theta = vectorAngle3d(v1, v2)
-%VECTORANGLE3D Angle between two 3D vectors
+%VECTORANGLE3D Angle between two 3D vectors.
 %
 %   THETA = vectorAngle3d(V1, V2)
 %   Computes the angle between the 2 3D vectors V1 and V2. The result THETA

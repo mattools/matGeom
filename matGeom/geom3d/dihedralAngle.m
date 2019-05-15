@@ -1,5 +1,5 @@
 function theta = dihedralAngle(plane1, plane2)
-%DIHEDRALANGLE Compute dihedral angle between 2 planes
+%DIHEDRALANGLE Compute dihedral angle between 2 planes.
 %
 %   THETA = dihedralAngle(PLANE1, PLANE2)
 %   PLANE1 and PLANE2 are plane representations given in the following

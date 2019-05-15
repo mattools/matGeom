@@ -1,5 +1,5 @@
 function polyList = meshBoundary(varargin)
-%MESHBOUNDARY Boundary of a mesh as a collection of 3D line strings
+%MESHBOUNDARY Boundary of a mesh as a collection of 3D line strings.
 %
 %   CURVES = meshBoundary(V, F)
 %

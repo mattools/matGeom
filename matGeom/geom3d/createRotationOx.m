@@ -1,5 +1,5 @@
 function trans = createRotationOx(varargin)
-%CREATEROTATIONOX Create the 4x4 matrix of a 3D rotation around x-axis
+%CREATEROTATIONOX Create the 4x4 matrix of a 3D rotation around x-axis.
 %
 %   TRANS = createRotationOx(THETA);
 %   Returns the transform matrix corresponding to a rotation by the angle

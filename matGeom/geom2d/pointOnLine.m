@@ -1,5 +1,5 @@
 function point = pointOnLine(line, pos)
-%POINTONLINE Create a point on a line at a given position on the line
+%POINTONLINE Create a point on a line at a given position on the line.
 %
 %   P = pointOnLine(LINE, POS);
 %   Creates the point belonging to the line LINE, and located at the

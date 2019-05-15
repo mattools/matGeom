@@ -1,5 +1,5 @@
 function centroid = polygonCentroid3d(varargin)
-%POLYGONCENTROID3D Centroid (or center of mass) of a polygon
+%POLYGONCENTROID3D Centroid (or center of mass) of a polygon.
 %
 %   PTC = polygonCentroid3d(POLY)
 %   Computes center of mass of a polygon defined by POLY. POLY is a N-by-3

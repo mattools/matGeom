@@ -1,5 +1,5 @@
 function index = findPoint(coord, points, varargin)
-%FINDPOINT Find index of a point in an set from its coordinates
+%FINDPOINT Find index of a point in an set from its coordinates.
 % 
 %   IND = findPoint(POINT, ARRAY) 
 %   Returns the index of point whose coordinates match the 1-by-2 row array

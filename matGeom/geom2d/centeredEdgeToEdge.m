@@ -1,5 +1,5 @@
 function edge = centeredEdgeToEdge(cedge)
-%CENTEREDEDGETOEDGE Convert a centered edge to a two-points edge
+%CENTEREDEDGETOEDGE Convert a centered edge to a two-points edge.
 %
 %   EDGE = centeredEdgeToEdge(CEDGE)
 %   Converts an edge represented using center, length and orientation to an

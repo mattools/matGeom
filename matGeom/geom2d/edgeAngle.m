@@ -1,5 +1,5 @@
 function theta = edgeAngle(edge)
-%EDGEANGLE Return angle of edge
+%EDGEANGLE Return angle of edge.
 %
 %   A = edgeAngle(EDGE)
 %   Returns the angle between horizontal, right-axis and the edge EDGE.

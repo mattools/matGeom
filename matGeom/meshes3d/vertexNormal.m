@@ -1,5 +1,5 @@
 function normals = vertexNormal(vertices, faces)
-%VERTEXNORMAL Compute normals to a mesh vertices
+%VERTEXNORMAL Compute normals to a mesh vertices.
 %
 %   N = vertexNormal(V, F)
 %   Computes vertex normals of the mesh given by vertices V and F. 

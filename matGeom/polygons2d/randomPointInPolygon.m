@@ -1,5 +1,5 @@
 function points = randomPointInPolygon(poly, varargin)
-%RANDOMPOINTINPOLYGON Generate random point(s) in a polygon
+%RANDOMPOINTINPOLYGON Generate random point(s) in a polygon.
 %
 %   POINT = randomPointInPolygon(POLY)
 %   POINTS = randomPointInPolygon(POLY, NPTS)

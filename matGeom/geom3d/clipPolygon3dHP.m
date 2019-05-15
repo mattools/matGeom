@@ -1,5 +1,5 @@
 function poly2 = clipPolygon3dHP(poly, plane)
-%CLIPPOLYGON3DHP clip a 3D polygon with Half-space
+%CLIPPOLYGON3DHP clip a 3D polygon with Half-space.
 %
 %   usage
 %   POLY2 = clipPolygon3dHP(POLY, PLANE)
