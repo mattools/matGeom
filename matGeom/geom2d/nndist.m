@@ -29,7 +29,7 @@ function [dists, neighInds] = nndist(points)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2011-12-01,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
@@ -56,13 +56,13 @@ if n < 3
 end
 
 % use Delaunay Triangulation to facilitate computations
-DT = delaunayTriangulation(points);
+DT = delaunay (points);
 
 % compute distance to nearest neighbor of each point in the pattern
 for i = 1:n
     % find indices of neighbor vertices in Delaunay Triangulation.
     % this set contains the nearest neighbor
-    inds = unique(DT.ConnectivityList(sum(DT.ConnectivityList == i, 2) > 0, :));
+    inds = unique(DT(sum(DT == i, 2) > 0, :));
     inds = inds(inds~=i);
     
     % compute minimal distance 
