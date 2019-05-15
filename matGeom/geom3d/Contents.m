@@ -70,6 +70,7 @@
 %   lines3d                     - Description of functions operating on 3D lines
 %   edges3d                     - Description of functions operating on 3D edges
 %   createLine3d                - Create a line with various inputs.
+%   createEdge3d                - Create an edge between two 3D points, or from a 3D line
 %   fitLine3d                   - Fit a 3D line to a set of points
 %   parallelLine3d              - Create 3D line parallel to another one.
 %   projPointOnLine3d           - Project a 3D point orthogonally onto a 3D line
@@ -81,7 +82,9 @@
 %   transformLine3d             - Transform a 3D line with a 3D affine transform
 %   reverseLine3d               - Return same 3D line but with opposite orientation
 %   midPoint3d                  - Middle point of two 3D points or of a 3D edge
+%   edgeLength3d                - Return the length of a 3D edge
 %   clipEdge3d                  - Clip a 3D edge with a cuboid box
+%   lineToEdge3d                - Convert a 3D straight line to a 3D finite edge
 %   edgeToLine3d                - Convert a 3D edge to a 3D straight line
 %   clipLine3d                  - Clip a line with a box and return an edge
 %   drawEdge3d                  - Draw 3D edge in the current axes
@@ -187,6 +190,7 @@
 %   createRotationOz            - Create the 4x4 matrix of a 3D rotation around z-axis
 %   createBasisTransform3d      - Compute matrix for transforming a basis into another basis
 %   eulerAnglesToRotation3d     - Convert 3D Euler angles to 3D rotation matrix
+%   isTransform3d               - Check if input is a affine transformation matrix
 %   rotation3dToEulerAngles     - Extract Euler angles from a rotation matrix
 %   createRotation3dLineAngle   - Create rotation around a line by an angle theta
 %   rotation3dAxisAndAngle      - Determine axis and angle of a 3D rotation matrix
@@ -201,6 +205,7 @@
 %   drawAxisCube                - Draw a colored cube representing axis orientation
 %   drawCube                    - Draw a 3D centered cube, eventually rotated
 %   drawCuboid                  - Draw a 3D cuboid, eventually rotated
+%   drawPlatform                - Draw a rectangular platform with a given size
 %
 %
 %   Credits:

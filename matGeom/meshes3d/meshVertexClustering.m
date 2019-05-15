@@ -99,7 +99,7 @@ for iFace = 1:nFaces
         
         % keep smaller vertex at first position
         [tmp, indMin] = min(face2); %#ok<ASGLU>
-        face2 = circshift(face2, 1-indMin);
+        face2 = circshift(face2, [1-indMin 0]);
         
         % append the new face to the array
         faces2 = [faces2 ; face2]; %#ok<AGROW>
