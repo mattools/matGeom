@@ -1,5 +1,5 @@
 function varargout = drawGrid3d(varargin)
-%DRAWGRID3D Draw a 3D grid on the current axis
+%DRAWGRID3D Draw a 3D grid on the current axis.
 %
 %   drawGrid3d
 %   draws a 3D square grid, with origin (0,0,0) and spacing 1 in each

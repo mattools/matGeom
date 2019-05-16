@@ -1,5 +1,5 @@
 function [vertices, faces] = steinerPolytope(vectors)
-%STEINERPOLYTOPE Create a steiner polytope from a set of vectors
+%STEINERPOLYTOPE Create a steiner polytope from a set of vectors.
 %
 %   [VERTICES FACES] = steinerPolygon(VECTORS)
 %   Creates the Steiner polytope defined by the set of vectors VECTORS.

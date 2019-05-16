@@ -1,5 +1,5 @@
 function box = intersectBoxes3d(box1, box2)
-%INTERSECTBOXES3D Intersection of two 3D bounding boxes
+%INTERSECTBOXES3D Intersection of two 3D bounding boxes.
 %
 %   RES = intersectBoxes3d(BOX1, BOX2)
 %

@@ -1,5 +1,5 @@
 function dif = angleAbsDiff(angle1, angle2)
-%ANGLEABSDIFF Absolute difference between two angles
+%ANGLEABSDIFF Absolute difference between two angles.
 %
 %   AD = angleAbsDiff(ANGLE1, ANGLE2)
 %   Computes the absolute angular difference between two angles in radians.

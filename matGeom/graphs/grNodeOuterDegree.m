@@ -1,5 +1,5 @@
 function degree = grNodeOuterDegree(node, edges)
-%GRNODEOUTERDEGREE Outer degree of a node in a graph
+%GRNODEOUTERDEGREE Outer degree of a node in a graph.
 %
 %   DEG = grNodeOuterDegree(NODE, EDGES);
 %   Returns the outer degree of a node in the given edge list, i.e. the

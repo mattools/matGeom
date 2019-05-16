@@ -1,5 +1,5 @@
 function point = intersectLineEdge(line, edge, varargin)
-%INTERSECTLINEEDGE Return intersection between a line and an edge
+%INTERSECTLINEEDGE Return intersection between a line and an edge.
 %
 %   P = intersectLineEdge(LINE, EDGE);
 %   returns the intersection point of lines LINE and edge EDGE. 

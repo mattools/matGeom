@@ -1,5 +1,5 @@
 function d = grPropagateDistance(v, e, v0, l)
-%GRPROPAGATEDISTANCE Propagates distances from a vertex to other vertices
+%GRPROPAGATEDISTANCE Propagates distances from a vertex to other vertices.
 %
 %   DISTS = grPropagateDistance(V, E, V0, L)
 %   V0 is index of initial vertex

@@ -1,5 +1,5 @@
 function [dist, t] = distancePointEdge3d(point, edge)
-%DISTANCEPOINTEDGE3D Minimum distance between a 3D point and a 3D edge
+%DISTANCEPOINTEDGE3D Minimum distance between a 3D point and a 3D edge.
 %
 %   DIST = distancePointEdge3d(POINT, EDGE);
 %   Return the euclidean distance between edge EDGE and point POINT. 

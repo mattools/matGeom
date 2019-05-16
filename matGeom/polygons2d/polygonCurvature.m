@@ -1,5 +1,5 @@
 function curv = polygonCurvature(poly, M)
-%POLYGONCURVATURE Estimate curvature on polygon vertices using polynomial fit
+%POLYGONCURVATURE Estimate curvature on polygon vertices using polynomial fit.
 %
 %   CURV = polygonCurvature(POLY, M)
 %   Estimate the curvature for each vertex of a polygon, using polynomial

@@ -1,5 +1,5 @@
 function poly2 = clipPolygon(polygon, w)
-%CLIPPOLYGON Clip a polygon with a rectangular box
+%CLIPPOLYGON Clip a polygon with a rectangular box.
 %
 %   POLY2 = clipPolygon(POLY, BOX);
 %   POLY is [Nx2] array of points

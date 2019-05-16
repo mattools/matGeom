@@ -1,5 +1,5 @@
 function varargout = grClose(varargin)
-%GRCLOSE Morphological closing on graph
+%GRCLOSE Morphological closing on graph.
 %
 %   LBL2 = grClose(EDGES, LBL1)
 %   First performs dilatation, then erosion.

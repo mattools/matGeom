@@ -1,5 +1,5 @@
 function centroids = meshFaceCentroids(varargin)
-%MESHFACECENTROIDS Compute centroids of faces in a mesh
+%MESHFACECENTROIDS Compute centroids of faces in a mesh.
 %
 %   CENTROIDS = meshFaceCentroids(VERTICES, FACES)
 %   VERTICES is a set of 3D points  (as a N-by-3 array), and FACES is

@@ -1,5 +1,5 @@
 function h = hypot3(dx, dy, dz)
-%HYPOT3 Diagonal length of a cuboidal 3D box 
+%HYPOT3 Diagonal length of a cuboidal 3D box .
 %
 %   h = hypot3(a, b, c)
 %   computes the quantity sqrt(a^2 + b^2 + c^2), by avoiding roundoff

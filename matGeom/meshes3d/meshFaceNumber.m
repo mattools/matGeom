@@ -1,5 +1,5 @@
 function nFaces = meshFaceNumber(varargin)
-%MESHFACENUMBER Returns the number of faces in this mesh
+%MESHFACENUMBER Returns the number of faces in this mesh.
 %
 %   NF = meshFaceNumber(V, F)
 %   NF = meshFaceNumber(V, E, F)

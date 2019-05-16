@@ -1,5 +1,5 @@
 function len = edgeLength3d(edge, varargin)
-%EDGELENGTH3D Return the length of a 3D edge
+%EDGELENGTH3D Return the length of a 3D edge.
 %
 %   L = edgeLength3D(EDGE);  
 %   Returns the length of a 3D edge, with following representation:

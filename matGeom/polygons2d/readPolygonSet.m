@@ -1,5 +1,5 @@
 function polys = readPolygonSet(filename)
-%READPOLYGONSET Read a set of simple polygons stored in a file
+%READPOLYGONSET Read a set of simple polygons stored in a file.
 %   
 %   POLY = readPolygonSet(FILENAME);
 %   Returns the polygon stored in the file FILENAME.

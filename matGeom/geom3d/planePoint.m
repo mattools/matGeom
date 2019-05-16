@@ -1,5 +1,5 @@
 function coord = planePoint(plane, point)
-%PLANEPOINT Compute 3D position of a point in a plane
+%PLANEPOINT Compute 3D position of a point in a plane.
 %
 %   POINT = planePoint(PLANE, POS)
 %   PLANE is a 9 element row vector [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2]

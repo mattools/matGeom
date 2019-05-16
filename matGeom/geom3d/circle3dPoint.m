@@ -1,5 +1,5 @@
 function point = circle3dPoint(circle, pos)
-%CIRCLE3DPOINT Coordinates of a point on a 3D circle from its position
+%CIRCLE3DPOINT Coordinates of a point on a 3D circle from its position.
 %
 %   output = circle3dPoint(input)
 %

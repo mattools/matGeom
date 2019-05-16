@@ -1,5 +1,5 @@
 function [a b c] = parseThreePoints(varargin)
-%PARSETHREEPOINTS Parse three points from variable length input array
+%PARSETHREEPOINTS Parse three points from variable length input array.
 %
 %   [A B C] = parseThreePoints(PTS);
 %   [A B C] = parseThreePoints(P1, P2, P3);

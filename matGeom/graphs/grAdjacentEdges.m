@@ -1,5 +1,5 @@
 function neigh = grAdjacentEdges(edges, node)
-%GRADJACENTEDGES Find list of edges adjacent to a given node
+%GRADJACENTEDGES Find list of edges adjacent to a given node.
 %
 %   NEIGHS = grAdjacentEdges(EDGES, NODE)
 %   EDGES  the complete edges list (containing indices of neighbor nodes)

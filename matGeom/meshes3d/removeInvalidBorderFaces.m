@@ -1,5 +1,5 @@
 function [vertices, faces] = removeInvalidBorderFaces(varargin)
-%REMOVEINVALIDBORDERFACES Remove faces whose edges are connected to 3, 3, and 1 faces
+%REMOVEINVALIDBORDERFACES Remove faces whose edges are connected to 3, 3, and 1 faces.
 %
 %   [V2, F2] = removeInvalidBorderFaces(V, F)
 %

@@ -1,5 +1,5 @@
 function trans = scaling(varargin)
-%SCALING return 3*3 matrix of a scaling in 2 dimensions
+%SCALING return 3*3 matrix of a scaling in 2 dimensions.
 %
 %   TRANS = scaling(SX, SY);
 %   return the matrix corresponding to scaling by SX and SY in the 2

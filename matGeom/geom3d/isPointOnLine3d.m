@@ -1,5 +1,5 @@
 function b = isPointOnLine3d(point, line, varargin)
-%ISPOINTONLINE3D Test if a 3D point belongs to a 3D line
+%ISPOINTONLINE3D Test if a 3D point belongs to a 3D line.
 %
 %   B = isPointOnLine3d(POINT, LINE)
 %   with POINT being [xp yp zp], and LINE being [x0 y0 z0 dx dy dz].

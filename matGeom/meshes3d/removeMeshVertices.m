@@ -1,5 +1,5 @@
 function varargout = removeMeshVertices(vertices, faces, indsToRemove)
-%REMOVEMESHVERTICES Remove vertices and associated faces from a mesh
+%REMOVEMESHVERTICES Remove vertices and associated faces from a mesh.
 %
 %   [V2, F2] = removeMeshVertices(VERTS, FACES, VERTINDS)
 %   Removes the vertices specified by the vertex indices VERTINDS, and

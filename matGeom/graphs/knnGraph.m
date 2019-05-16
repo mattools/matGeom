@@ -1,5 +1,5 @@
 function edges = knnGraph(nodes, varargin)
-%KNNGRAPH Create the k-nearest neighbors graph of a set of points
+%KNNGRAPH Create the k-nearest neighbors graph of a set of points.
 %
 %   EDGES = knnGraph(NODES)
 %

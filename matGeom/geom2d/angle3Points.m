@@ -1,5 +1,5 @@
 function theta = angle3Points(varargin)
-%ANGLE3POINTS Compute oriented angle made by 3 points
+%ANGLE3POINTS Compute oriented angle made by 3 points.
 %
 %   ALPHA = angle3Points(P1, P2, P3);
 %   Computes the angle between the points P1, P2 and P3.

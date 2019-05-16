@@ -1,5 +1,5 @@
 function [nodes2, edges2] = grMergeNodesMedian(nodes, edges, mnodes)
-%GRMERGENODESMEDIAN Replace several nodes by their median coordinate
+%GRMERGENODESMEDIAN Replace several nodes by their median coordinate.
 %
 %   [NODES2, EDGES2] = grMergeNodesMedian(NODES, EDGES, NODES2MERGE)
 %   NODES ans EDGES are the graph structure, and NODES2MERGE is the list of

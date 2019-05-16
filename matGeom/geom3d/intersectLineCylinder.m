@@ -1,5 +1,5 @@
 function points = intersectLineCylinder(line, cylinder, varargin)
-%INTERSECTLINECYLINDER Compute intersection points between a line and a cylinder
+%INTERSECTLINECYLINDER Compute intersection points between a line and a cylinder.
 %
 %   POINTS = intersectLineCylinder(LINE, CYLINDER)
 %   Returns intersection points between a line and a cylinder.

@@ -1,5 +1,5 @@
 function alpha = sphericalAngle(p1, p2, p3)
-%SPHERICALANGLE Compute angle between points on the sphere
+%SPHERICALANGLE Compute angle between points on the sphere.
 %
 %   ALPHA = sphericalAngle(P1, P2, P3)
 %   Computes angle (P1, P2, P3), i.e. the angle, measured at point P2,

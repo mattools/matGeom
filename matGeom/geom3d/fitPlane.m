@@ -1,5 +1,5 @@
 function plane = fitPlane(points)
-%FITPLANE  Fit a 3D plane to a set of points
+%FITPLANE  Fit a 3D plane to a set of points.
 %
 %   PLANE = fitPlane(POINTS)
 %

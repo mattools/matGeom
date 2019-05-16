@@ -1,5 +1,5 @@
 function [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(poly)
-%POLYGONSECONDAREAMOMENTS Compute second-order area moments of a polygon
+%POLYGONSECONDAREAMOMENTS Compute second-order area moments of a polygon.
 %
 %   [IXX, IYY, IXY] = polygonSecondAreaMoments(POLY)
 %   Compute the second-order inertia moments of a polygon. The polygon is

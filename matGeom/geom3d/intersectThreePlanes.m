@@ -1,5 +1,5 @@
 function point = intersectThreePlanes(plane1, plane2, plane3)
-%INTERSECTTHREEPLANES Return intersection point between 3 planes in space
+%INTERSECTTHREEPLANES Return intersection point between 3 planes in space.
 %
 %   LINE = intersectThreePlanes(PLANE1, PLANE2, PLANE3)
 %   Returns the point or straight line belonging to three planes.

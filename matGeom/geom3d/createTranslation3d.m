@@ -1,5 +1,5 @@
 function trans = createTranslation3d(varargin)
-%CREATETRANSLATION3D Create the 4x4 matrix of a 3D translation
+%CREATETRANSLATION3D Create the 4x4 matrix of a 3D translation.
 %
 %   usage:
 %   TRANS = createTranslation3d(DX, DY, DZ);

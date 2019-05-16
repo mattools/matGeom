@@ -1,5 +1,5 @@
 function varargout = mergeGraphs(varargin)
-%MERGEGRAPHS Merge two graphs, by adding nodes, edges and faces lists. 
+%MERGEGRAPHS Merge two graphs, by adding nodes, edges and faces lists. .
 %
 %   
 %

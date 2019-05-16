@@ -1,5 +1,5 @@
 function dist = distancePoints(p1, p2, varargin)
-%DISTANCEPOINTS Compute distance between two points
+%DISTANCEPOINTS Compute distance between two points.
 %
 %   D = distancePoints(P1, P2)
 %   Return the Euclidean distance between points P1 and P2.

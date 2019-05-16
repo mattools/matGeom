@@ -1,5 +1,5 @@
 function points = intersectLineCircle(line, circle)
-%INTERSECTLINECIRCLE Intersection point(s) of a line and a circle
+%INTERSECTLINECIRCLE Intersection point(s) of a line and a circle.
 %
 %   INTERS = intersectLineCircle(LINE, CIRCLE);
 %   Returns a 2-by-2-by-N array, containing on each row the coordinates of

@@ -1,5 +1,5 @@
 function s = ellipsoidSurfaceArea(elli)
-%ELLIPSOIDSURFACEAREA  Approximated surface area of an ellipsoid
+%ELLIPSOIDSURFACEAREA  Approximated surface area of an ellipsoid.
 %
 %   S = ellipsoidSurfaceArea(ELLI)
 %   Computes an approximation of the surface area of an ellipsoid. 

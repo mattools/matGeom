@@ -1,5 +1,5 @@
 function circle = createCircle(varargin)
-%CREATECIRCLE Create a circle from 2 or 3 points
+%CREATECIRCLE Create a circle from 2 or 3 points.
 %
 %   C = createCircle(P1, P2, P3);
 %   Creates the circle passing through the 3 given points. 

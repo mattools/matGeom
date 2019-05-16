@@ -1,5 +1,5 @@
 function trans = localToGlobal3d(varargin)
-%LOCALTOGLOBAL3D Transformation matrix from local to global coordinate system
+%LOCALTOGLOBAL3D Transformation matrix from local to global coordinate system.
 %
 %   TRANS = localToGlobal3d(CENTER, THETA, PHI, PSI)
 %   Compute the transformation matrix from a local (or modelling)

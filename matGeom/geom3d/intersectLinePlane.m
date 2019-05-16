@@ -1,5 +1,5 @@
 function point = intersectLinePlane(line, plane, varargin)
-%INTERSECTLINEPLANE Intersection point between a 3D line and a plane
+%INTERSECTLINEPLANE Intersection point between a 3D line and a plane.
 %
 %   PT = intersectLinePlane(LINE, PLANE)
 %   Returns the intersection point of the given line and the given plane.

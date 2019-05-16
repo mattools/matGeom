@@ -1,5 +1,5 @@
 function varargout = drawCube(cube, varargin)
-%DRAWCUBE Draw a 3D centered cube, eventually rotated
+%DRAWCUBE Draw a 3D centered cube, eventually rotated.
 %
 %   drawCube(CUBE)
 %   Displays a 3D cube on current axis. CUBE is given by:

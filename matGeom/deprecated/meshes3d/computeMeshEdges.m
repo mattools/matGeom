@@ -1,5 +1,5 @@
 function edges = computeMeshEdges(faces)
-%COMPUTEMESHEDGES Computes edges array from face array
+%COMPUTEMESHEDGES Computes edges array from face array.
 %
 %   Deprecated, use 'meshEdges' instead.
 %

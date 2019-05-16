@@ -1,5 +1,5 @@
 function trans = fitAffineTransform2d(pts1, pts2)
-%FITAFFINETRANSFORM2D Fit an affine transform using two point sets
+%FITAFFINETRANSFORM2D Fit an affine transform using two point sets.
 %   TRANS = fitAffineTransform2d(PTS1, PTS2)
 %
 %   Example

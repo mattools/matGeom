@@ -1,5 +1,5 @@
 function varargout = ellipsoidMesh(elli, varargin)
-%ELLIPSOIDMESH Convert a 3D ellipsoid to face-vertex mesh representation
+%ELLIPSOIDMESH Convert a 3D ellipsoid to face-vertex mesh representation.
 %
 %   [V, F] = ellipsoidMesh(ELLI)
 %   ELLI is given by:

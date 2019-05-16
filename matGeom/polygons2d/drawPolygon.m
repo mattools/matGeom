@@ -1,5 +1,5 @@
 function varargout = drawPolygon (px, varargin)
-%DRAWPOLYGON Draw a polygon specified by a list of points
+%DRAWPOLYGON Draw a polygon specified by a list of points.
 %
 %   drawPolygon(POLY);
 %   Packs coordinates in a single N-by-2 array.

@@ -1,5 +1,5 @@
 function line = medianLine(varargin)
-%MEDIANLINE Create a median line between two points
+%MEDIANLINE Create a median line between two points.
 %
 %   L = medianLine(P1, P2);
 %   Create the median line of points P1 and P2, that is the line containing

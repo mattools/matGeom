@@ -1,5 +1,5 @@
 function [axis, theta] = rotation3dAxisAndAngle(mat)
-%ROTATION3DAXISANDANGLE Determine axis and angle of a 3D rotation matrix
+%ROTATION3DAXISANDANGLE Determine axis and angle of a 3D rotation matrix.
 %
 %   [AXIS, ANGLE] = rotation3dAxisAndAngle(MAT)
 %   Where MAT is a 4-by-4 matrix representing a rotation, computes the

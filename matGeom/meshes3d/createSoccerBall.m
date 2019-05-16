@@ -1,5 +1,5 @@
 function varargout = createSoccerBall()
-%CREATESOCCERBALL Create a 3D mesh representing a soccer ball
+%CREATESOCCERBALL Create a 3D mesh representing a soccer ball.
 %
 %   It is basically a wrapper of the 'bucky' function in matlab.
 %   [V, E, F] = createSoccerBall

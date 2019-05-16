@@ -1,5 +1,5 @@
 function clipped = clipEdge3d(edge, box)
-%CLIPEDGE3D Clip a 3D edge with a cuboid box
+%CLIPEDGE3D Clip a 3D edge with a cuboid box.
 %
 %   CLIPPED = clipEdge3d(EDGE, BOX)
 %

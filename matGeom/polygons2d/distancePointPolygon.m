@@ -1,5 +1,5 @@
 function minDist = distancePointPolygon(point, poly)
-%DISTANCEPOINTPOLYGON Shortest distance between a point and a polygon
+%DISTANCEPOINTPOLYGON Shortest distance between a point and a polygon.
 %
 %   DIST = distancePointPolygon(POINT, POLYGON)
 %   Computes the shortest distance between the point POINT and the polygon

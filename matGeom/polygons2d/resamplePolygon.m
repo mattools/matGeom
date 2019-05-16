@@ -1,5 +1,5 @@
 function poly2 = resamplePolygon(poly, n)
-%RESAMPLEPOLYGON  Distribute N points equally spaced on a polygon
+%RESAMPLEPOLYGON  Distribute N points equally spaced on a polygon.
 %
 %   POLY2 = resamplePolygon(POLY, N)
 %   Resample the input polygon POLY such that the resulting polygon POLY2

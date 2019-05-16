@@ -1,5 +1,5 @@
 function box = boundingBox3d(points)
-%BOUNDINGBOX3D Bounding box of a set of 3D points
+%BOUNDINGBOX3D Bounding box of a set of 3D points.
 %
 %   BOX = boundingBox3d(POINTS)
 %   Returns the bounding box of the set of points POINTS. POINTS is a

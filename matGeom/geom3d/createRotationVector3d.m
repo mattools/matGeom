@@ -1,5 +1,5 @@
 function ROT = createRotationVector3d(A,B)
-%CREATEROTATIONVECTOR3D Calculates the rotation between two vectors
+%CREATEROTATIONVECTOR3D Calculates the rotation between two vectors.
 %
 %   ROT = createRotationVector3d(A, B) returns the 4x4 rotation matrix ROT
 %   to transform vector A in the same direction as vector B.

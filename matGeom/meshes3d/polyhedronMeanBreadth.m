@@ -1,5 +1,5 @@
 function breadth = polyhedronMeanBreadth(vertices, edges, faces)
-%POLYHEDRONMEANBREADTH Mean breadth of a convex polyhedron
+%POLYHEDRONMEANBREADTH Mean breadth of a convex polyhedron.
 %
 %   BREADTH = polyhedronMeanBreadth(V, E, F)
 %   Return the mean breadth (average of polyhedron caliper diameter over

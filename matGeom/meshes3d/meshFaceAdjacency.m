@@ -1,5 +1,5 @@
 function adjList = meshFaceAdjacency(vertices, edges, faces)
-%MESHFACEADJACENCY Compute adjacency list of face around each face
+%MESHFACEADJACENCY Compute adjacency list of face around each face.
 %
 %
 %   Example

@@ -1,5 +1,5 @@
 function vectors2d
-%VECTORS2D Description of functions operating on plane vectors
+%VECTORS2D Description of functions operating on plane vectors.
 %
 %   A vector is defined by its two cartesian coordinates, put into a row
 %   vector of 2 elements:

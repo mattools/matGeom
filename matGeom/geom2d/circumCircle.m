@@ -1,5 +1,5 @@
 function varargout = circumCircle(varargin)
-%CIRCUMCIRCLE Circumscribed circle of three points
+%CIRCUMCIRCLE Circumscribed circle of three points.
 %
 %   CIRC = circumCircle(TRI)
 %   CIRC = circumCircle(P1, P2, P3)

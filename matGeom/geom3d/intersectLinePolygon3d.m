@@ -1,5 +1,5 @@
 function [inter, inside]= intersectLinePolygon3d(line, poly)
-%INTERSECTLINEPOLYGON3D Intersection point of a 3D line and a 3D polygon
+%INTERSECTLINEPOLYGON3D Intersection point of a 3D line and a 3D polygon.
 %
 %   INTER = intersectLinePolygon3d(LINE, POLY)
 %   Compute coordinates of intersection point between the 3D line LINE and

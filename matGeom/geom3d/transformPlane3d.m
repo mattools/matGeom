@@ -1,5 +1,5 @@
 function plane2 = transformPlane3d(plane, trans)
-%TRANSFORMPLANE3D Transform a 3D plane with a 3D affine transform
+%TRANSFORMPLANE3D Transform a 3D plane with a 3D affine transform.
 %
 %   PLANE2 = transformPlane3d(PLANE, TRANS)
 %

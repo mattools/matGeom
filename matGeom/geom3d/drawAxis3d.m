@@ -1,5 +1,5 @@
 function drawAxis3d(varargin)
-%DRAWAXIS3D Draw a coordinate system and an origin
+%DRAWAXIS3D Draw a coordinate system and an origin.
 %
 %   drawAxis3d
 %	Adds 3 cylinders to the current axis, corresponding to the directions

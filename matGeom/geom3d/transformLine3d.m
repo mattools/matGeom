@@ -1,5 +1,5 @@
 function res = transformLine3d(line, trans)
-%TRANSFORMLINE3D Transform a 3D line with a 3D affine transform
+%TRANSFORMLINE3D Transform a 3D line with a 3D affine transform.
 %
 %   LINE2 = transformLine3d(LINE1, TRANS)
 %

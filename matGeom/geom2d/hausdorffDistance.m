@@ -1,5 +1,5 @@
 function [hd, ind1, ind2] = hausdorffDistance(pts1, pts2)
-%HAUSDORFFDISTANCE  Hausdorff distance between two point sets
+%HAUSDORFFDISTANCE  Hausdorff distance between two point sets.
 %
 %   HD = hausdorffDistance(PTS1, PTS2)
 %   Computes the Hausdorff distance between the two point sets PTS1 and

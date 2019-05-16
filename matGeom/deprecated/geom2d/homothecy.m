@@ -1,5 +1,5 @@
 function trans = homothecy(point, ratio)
-%HOMOTHECY create a homothecy as an affine transform
+%HOMOTHECY create a homothecy as an affine transform.
 %
 %   TRANS = homothecy(POINT, K);
 %   POINT is the center of the homothecy, K is its factor.

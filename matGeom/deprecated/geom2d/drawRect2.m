@@ -1,5 +1,5 @@
 function varargout = drawRect2(varargin)
-%DRAWRECT2 Draw centered rectangle on the current axis
+%DRAWRECT2 Draw centered rectangle on the current axis.
 %   
 %   r = drawRect2(x, y, w, h) draw rectangle with width W and height H,
 %   whose center is located at (x, y);

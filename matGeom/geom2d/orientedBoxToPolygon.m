@@ -1,5 +1,5 @@
 function [tx, ty] = orientedBoxToPolygon(obox)
-%ORIENTEDBOXTOPOLYGON Convert an oriented box to a polygon (set of vertices)
+%ORIENTEDBOXTOPOLYGON Convert an oriented box to a polygon (set of vertices).
 %
 %   POLY = orientedBoxToPolygon(OBOX);
 %   Converts the oriented box OBOX given either as [XC YC W H] or as 

@@ -1,5 +1,5 @@
 function mat = createRotation90(varargin)
-%CREATEROTATION90  Matrix of a rotation for 90 degrees multiples
+%CREATEROTATION90  Matrix of a rotation for 90 degrees multiples.
 %
 %   MAT = createRotation90
 %   Returns the 3-by-3 matrix corresponding to a rotation by 90 degrees.

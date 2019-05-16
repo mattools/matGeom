@@ -1,5 +1,5 @@
 function trans = rotation(varargin)
-%ROTATION return 3*3 matrix of a rotation
+%ROTATION return 3*3 matrix of a rotation.
 %
 %   TRANS = rotation(THETA);
 %   Returns the rotation corresponding to angle THETA (in radians)

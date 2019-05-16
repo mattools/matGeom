@@ -1,5 +1,5 @@
 function loops = polygonLoops(poly, varargin)
-%POLYGONLOOPS Divide a possibly self-intersecting polygon into a set of simple loops
+%POLYGONLOOPS Divide a possibly self-intersecting polygon into a set of simple loops.
 %
 %   LOOPS = polygonLoops(POLYGON);
 %   POLYGON is a polygone defined by a series of vertices,

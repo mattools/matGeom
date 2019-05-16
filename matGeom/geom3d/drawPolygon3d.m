@@ -1,5 +1,5 @@
 function varargout = drawPolygon3d(varargin)
-%DRAWPOLYGON3D Draw a 3D polygon specified by a list of vertex coords
+%DRAWPOLYGON3D Draw a 3D polygon specified by a list of vertex coords.
 %
 %   drawPolygon3d(POLY);
 %   packs coordinates in a single N-by-3 array.

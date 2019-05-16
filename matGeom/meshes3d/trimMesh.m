@@ -1,9 +1,9 @@
 function varargout = trimMesh(varargin)
-%TRIMMESH Reduce memory footprint of a polygonal mesh
+%TRIMMESH Reduce memory footprint of a polygonal mesh.
 %
 %   [V2, F2] = trimMesh(V, F)
-%   Reduces the size occupied by mesh, by keeping only vertices that are
-%   referenced by at least one face, and relabel face indices.
+%   Unreferenced vertices are removed.
+%   Duplicate vertices are removed (triangle meshes only).
 %
 %   Example
 %     [V, F] = createIcosahedron;
@@ -15,9 +15,9 @@ function varargout = trimMesh(varargin)
 %
 %   See also
 %     meshes3d, clipMeshVertices
- 
+
 % ------
-% Author: David Legland
+% Author: David Legland, oqilipo
 % e-mail: david.legland@inra.fr
 % Created: 2014-08-01,    using Matlab 8.3.0.532 (R2014a)
 % Copyright 2014 INRA - Cepia Software Platform.
@@ -25,33 +25,40 @@ function varargout = trimMesh(varargin)
 % parse input data
 [vertices, faces] = parseMeshData(varargin{:});
 
-% identify vertices referenced by a face
-vertexUsed = false(size(vertices, 1), 1);
 if isnumeric(faces)
-    vertexUsed(unique(faces(:))) = true;
+    % Delete duplicate vertices
+    [tempVertices, ~, tempFaceVertexIdx] = unique(vertices, 'rows');
+    tempFaces = tempFaceVertexIdx(faces);
+    % Delete unindexed/unreferenced vertices
+    usedVertexIdx = ismember(1:length(tempVertices),unique(tempFaces(:)));
+    newVertexIdx = cumsum(usedVertexIdx);
+    faceVertexIdx = 1:length(tempVertices);
+    faceVertexIdx(usedVertexIdx) = newVertexIdx(usedVertexIdx);
+    faceVertexIdx(~usedVertexIdx) = nan;
+    faces2 = faceVertexIdx(tempFaces);
+    vertices2 = tempVertices(usedVertexIdx,:);
+    
 elseif iscell(faces)
+    % identify vertices referenced by a face
+    vertexUsed = false(size(vertices, 1), 1);
     for iFace = 1:length(faces)
         face = faces{iFace};
         vertexUsed(face) = true;
     end
-end
-vertices2 = vertices(vertexUsed, :);
-
-% compute map from old index to new index
-inds = find(vertexUsed);
-newInds = zeros(size(vertices, 1), 1);
-for iIndex = 1:length(inds)
-    newInds(inds(iIndex)) = iIndex;
-end
-
-% change labels of vertices referenced by faces
-if isnumeric(faces)
-    faces2 = newInds(faces);
-elseif iscell(faces)
+    vertices2 = vertices(vertexUsed, :);
+    % compute map from old index to new index
+    inds = find(vertexUsed);
+    newInds = zeros(size(vertices, 1), 1);
+    for iIndex = 1:length(inds)
+        newInds(inds(iIndex)) = iIndex;
+    end
+    % change labels of vertices referenced by faces
     faces2 = cell(1, length(faces));
     for iFace = 1:length(faces)
         faces2{iFace} = newInds(faces{iFace});
     end
+else
+    error('Unsupported format!')
 end
 
 % format output arguments

@@ -1,5 +1,5 @@
 function trans = createTranslation(varargin)
-%CREATETRANSLATION Create the 3*3 matrix of a translation
+%CREATETRANSLATION Create the 3*3 matrix of a translation.
 %
 %   TRANS = createTranslation(DX, DY);
 %   Returns the translation corresponding to DX and DY.

@@ -1,5 +1,5 @@
 function b = isPointOnLine(point, line, varargin)
-%ISPOINTONLINE Test if a point belongs to a line
+%ISPOINTONLINE Test if a point belongs to a line.
 %
 %   B = isPointOnLine(POINT, LINE)
 %   with POINT being [xp yp], and LINE being [x0 y0 dx dy].

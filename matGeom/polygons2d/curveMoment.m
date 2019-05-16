@@ -1,5 +1,5 @@
 function m = curveMoment(curve, p, q)
-%CURVEMOMENT  Compute inertia moment of a 2D curve
+%CURVEMOMENT  Compute inertia moment of a 2D curve.
 %   M = curveMoment(CURVE, P, Q)
 %
 %   Example

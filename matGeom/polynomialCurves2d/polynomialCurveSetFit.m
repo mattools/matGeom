@@ -1,5 +1,5 @@
 function varargout = polynomialCurveSetFit(seg, varargin)
-%POLYNOMIALCURVESETFIT Fit a set of polynomial curves to a segmented image
+%POLYNOMIALCURVESETFIT Fit a set of polynomial curves to a segmented image.
 %
 %   COEFS = polynomialCurveSetFit(IMG);
 %   COEFS = polynomialCurveSetFit(IMG, DEG);

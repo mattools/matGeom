@@ -1,5 +1,5 @@
 function adj = meshAdjacencyMatrix(faces, varargin)
-%MESHADJACENCYMATRIX Compute adjacency matrix of a mesh from set of faces
+%MESHADJACENCYMATRIX Compute adjacency matrix of a mesh from set of faces.
 %
 %   ADJMAT = meshAdjacencyMatrix(FACES)
 %   Returns a sparse NV-by-NV matrix (NV being the maximum vertex index)

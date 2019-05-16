@@ -1,5 +1,5 @@
 function vol = tetrahedronVolume(vertices, varargin)
-%TETRAHEDRONVOLUME Signed volume of a tetrahedron
+%TETRAHEDRONVOLUME Signed volume of a tetrahedron.
 %
 %   VOL = tetrahedronVolume(TETRA)
 %   Comptues the siged volume of the tetrahedron TETRA defined by a 4-by-4

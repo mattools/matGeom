@@ -1,5 +1,5 @@
 function [degree, node] = grNodeDegree(node, edges)
-%GRNODEDEGREE Degree of a node in a (undirected) graph
+%GRNODEDEGREE Degree of a node in a (undirected) graph.
 %
 %   DEGREE = grNodeDegree(NODE_INDEX, EDGES);
 %   return the degree of a node in the given edge list, that is the number

@@ -1,5 +1,5 @@
 function varargout = createDurerPolyhedron(varargin)
-%CREATEDURERPOLYHEDRON  Create a mesh representing Durer's polyhedron 
+%CREATEDURERPOLYHEDRON  Create a mesh representing Durer's polyhedron .
 %
 %   [V, F] = createDurerPolyhedron
 %   [V, E, F] = createDurerPolyhedron

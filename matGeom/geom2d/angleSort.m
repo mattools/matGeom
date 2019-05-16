@@ -1,5 +1,5 @@
 function varargout = angleSort(pts, varargin)
-%ANGLESORT Sort points in the plane according to their angle to origin
+%ANGLESORT Sort points in the plane according to their angle to origin.
 %
 %
 %   PTS2 = angleSort(PTS);

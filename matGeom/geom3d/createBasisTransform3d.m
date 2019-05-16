@@ -1,5 +1,5 @@
 function transfo = createBasisTransform3d(source, target)
-%CREATEBASISTRANSFORM3D Compute matrix for transforming a basis into another basis
+%CREATEBASISTRANSFORM3D Compute matrix for transforming a basis into another basis.
 %
 %   TRANSFO = createBasisTransform3d(SOURCE, TARGET) will create a 4-by-4
 %   transformation matrix representing the transformation from SOURCE basis

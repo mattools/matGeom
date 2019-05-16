@@ -1,5 +1,5 @@
 function varargout = drawVector(pos, vect, varargin)
-%DRAWVECTOR Draw vector at a given position
+%DRAWVECTOR Draw vector at a given position.
 %
 %   drawVector(POS, VECT)
 %   POS should be a N-by-2 or N-by-3 array containing position of vector

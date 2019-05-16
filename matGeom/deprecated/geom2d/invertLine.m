@@ -1,5 +1,5 @@
 function line = invertLine(var)
-%INVERTLINE return same line but with opposite orientation
+%INVERTLINE return same line but with opposite orientation.
 %
 %   INVLINE = invertLine(LINE);
 %   Returns the opposite line of LINE.

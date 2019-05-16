@@ -1,5 +1,5 @@
 function varargout = vectorize(img)
-%VECTORIZE Transform a binary skeleton into a graph (nodes and edges)
+%VECTORIZE Transform a binary skeleton into a graph (nodes and edges).
 %
 %   Deprecated: should use "imBinaryToGraph" from the matImage library
 %   instead

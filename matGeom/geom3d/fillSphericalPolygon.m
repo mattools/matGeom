@@ -1,5 +1,5 @@
 function varargout = fillSphericalPolygon(sphere, poly, germ)
-%FILLSPHERICALPOLYGON  Fill a spherical polygon
+%FILLSPHERICALPOLYGON  Fill a spherical polygon.
 %
 %   fillSphericalPolygon(SPHERE, POLY, GERM)
 %

@@ -1,5 +1,5 @@
 function edge = clipLine(line, box, varargin)
-%CLIPLINE Clip a line with a box
+%CLIPLINE Clip a line with a box.
 %
 %   EDGE = clipLine(LINE, BOX);
 %   LINE is a straight line given as a 4 element row vector: [x0 y0 dx dy],

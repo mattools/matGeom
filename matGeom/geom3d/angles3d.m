@@ -1,5 +1,5 @@
 function angles3d(varargin)
-%ANGLES3D Conventions for manipulating angles in 3D
+%ANGLES3D Conventions for manipulating angles in 3D.
 %
 %   The library uses both radians and degrees angles;
 %   Results of angle computation between shapes usually returns angles in

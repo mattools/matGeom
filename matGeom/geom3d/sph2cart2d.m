@@ -1,5 +1,5 @@
 function varargout = sph2cart2d(theta, phi, rho)
-%SPH2CART2D Convert spherical coordinates to cartesian coordinates in degrees
+%SPH2CART2D Convert spherical coordinates to cartesian coordinates in degrees.
 %
 %   C = SPH2CART2(THETA, PHI, RHO)
 %   C = SPH2CART2(THETA, PHI)       (assume rho = 1)

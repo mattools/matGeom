@@ -1,5 +1,5 @@
 function varargout = polygonSelfIntersections(poly, varargin)
-%POLYGONSELFINTERSECTIONS Find self-intersection points of a polygon
+%POLYGONSELFINTERSECTIONS Find self-intersection points of a polygon.
 %
 %   PTS = polygonSelfIntersections(POLY)
 %   Return the position of self intersection points

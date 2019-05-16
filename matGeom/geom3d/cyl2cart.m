@@ -1,5 +1,5 @@
 function varargout = cyl2cart(varargin)
-%CYL2CART  Convert cylindrical to cartesian coordinates
+%CYL2CART  Convert cylindrical to cartesian coordinates.
 %
 %   CART = cyl2cart(CYL)
 %   convert the 3D cylindrical coordinates of points CYL (given by 

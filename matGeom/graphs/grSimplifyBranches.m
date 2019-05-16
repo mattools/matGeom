@@ -1,5 +1,5 @@
 function varargout = grSimplifyBranches(nodes, edges)
-%GRSIMPLIFYBRANCHES Replace branches of a graph by single edges
+%GRSIMPLIFYBRANCHES Replace branches of a graph by single edges.
 %
 %   [NODES2 EDGES2] = grSimplifyBranches(NODES, EDGES)
 %   renvoie une version simplifiee d'un graphe, en ne gardant que les 

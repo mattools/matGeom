@@ -1,5 +1,5 @@
 function varargout = drawPolynomialCurve(tBounds, varargin)
-%DRAWPOLYNOMIALCURVE Draw a polynomial curve approximation
+%DRAWPOLYNOMIALCURVE Draw a polynomial curve approximation.
 %
 %   Usage
 %   drawPolynomialCurve(BND, XCOEFS, YCOEFS)

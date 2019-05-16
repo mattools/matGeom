@@ -1,5 +1,5 @@
 function varargout = boundedCentroidalVoronoi2d(germs, box, varargin)
-%BOUNDEDCENTROIDALVORONOI2D Create a 2D Centroidal Voronoi Tesselation in a box
+%BOUNDEDCENTROIDALVORONOI2D Create a 2D Centroidal Voronoi Tesselation in a box.
 %
 %   [N, E, F] = boundedCentroidalVoronoi2d(GERMS, BOX)
 %   GERMS are N-by-2 point array, BOX is given as [xmin xmax ymin ymax].

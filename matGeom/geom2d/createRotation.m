@@ -1,5 +1,5 @@
 function trans = createRotation(varargin)
-%CREATEROTATION Create the 3*3 matrix of a rotation
+%CREATEROTATION Create the 3*3 matrix of a rotation.
 %
 %   TRANS = createRotation(THETA);
 %   Returns the rotation corresponding to angle THETA (in radians)
@@ -13,10 +13,20 @@ function trans = createRotation(varargin)
 %   Also specifies origin of rotation. The result is similar as performing
 %   translation(-X0, -Y0), rotation(THETA), and translation(X0, Y0).
 %
+%   Example
+%     % apply a rotation on a polygon
+%     poly = [0 0; 30 0;30 10;10 10;10 20;0 20];
+%     trans = createRotation([10 20], pi/6);
+%     polyT = transformPoint(poly, trans);
+%     % display the original and the rotated polygons
+%     figure; hold on; axis equal; axis([-10 40 -10 40]);
+%     drawPolygon(poly, 'k');
+%     drawPolygon(polyT, 'b');
 %
 %   See also:
 %   transforms2d, transformPoint, createRotation90, createTranslation
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE

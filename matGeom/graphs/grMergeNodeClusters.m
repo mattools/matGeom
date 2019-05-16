@@ -1,5 +1,5 @@
 function [nodes2, edges2] = grMergeNodeClusters(nodes, edges)
-%GRMERGENODECLUSTERS Merge cluster of connected nodes in a graph
+%GRMERGENODECLUSTERS Merge cluster of connected nodes in a graph.
 %
 %   grMergeNodeClusters(nodes, edges)
 %   Detects groups of nodes that belongs to the same global node, and

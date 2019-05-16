@@ -1,5 +1,5 @@
 function varargout = drawEdge(varargin)
-%DRAWEDGE Draw an edge given by 2 points
+%DRAWEDGE Draw an edge given by 2 points.
 %   
 %   drawEdge(x1, y1, x2, y2);
 %   draw an edge between the points (x1 y1) and  (x2 y2).
@@ -24,6 +24,7 @@ function varargout = drawEdge(varargin)
 %   See also:
 %   edges2d, drawCenteredEdge, drawLine
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -41,11 +42,20 @@ function varargout = drawEdge(varargin)
 % separate edge and optional arguments
 [ax, edge, options] = parseInputArguments(varargin{:});
 
+% save hold state
+holdState = ishold(ax);
+hold(ax, 'on');
+
 % draw the edges
 if size(edge, 2) == 4
     h = drawEdge_2d(ax, edge, options);
 else
     h = drawEdge_3d(ax, edge, options);
+end
+
+% restore hold state
+if ~holdState
+    hold(ax, 'off');
 end
 
 % eventually return handle to created edges

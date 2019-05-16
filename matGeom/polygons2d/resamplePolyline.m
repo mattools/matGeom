@@ -1,5 +1,5 @@
 function poly2 = resamplePolyline(poly, n)
-%RESAMPLEPOLYLINE Distribute N points equally spaced on a polyline
+%RESAMPLEPOLYLINE Distribute N points equally spaced on a polyline.
 %
 %   RES = resamplePolyline(POLY, N)
 %   Resample the input polyline POLY such that the resulting polyline RES

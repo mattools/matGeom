@@ -1,5 +1,5 @@
 function varargout = readMesh_ply(fileName)
-%READMESH_PLY  Read mesh data stored in PLY (Stanford triangle) format
+%READMESH_PLY  Read mesh data stored in PLY (Stanford triangle) format.
 %
 %   [V, F] = readMesh_ply(FNAME)
 %

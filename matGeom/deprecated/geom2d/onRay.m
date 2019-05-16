@@ -1,5 +1,5 @@
 function b = onRay(point, ray)
-%ONRAY test if a point belongs to a ray
+%ONRAY test if a point belongs to a ray.
 %
 %   B = onRay(PT, RAY);
 %   Returns 1 if point PT belongs to the ray RAY.

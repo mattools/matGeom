@@ -1,5 +1,5 @@
 function varargout = circleToPolygon(circle, varargin)
-%CIRCLETOPOLYGON Convert a circle into a series of points
+%CIRCLETOPOLYGON Convert a circle into a series of points.
 %
 %   PTS = circleToPolygon(CIRC, N);
 %   Converts the circle CIRC into an array of  N-by-2 of double, containing

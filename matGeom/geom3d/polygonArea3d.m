@@ -1,5 +1,5 @@
 function area = polygonArea3d(poly, varargin)
-%POLYGONAREA3D Area of a 3D polygon
+%POLYGONAREA3D Area of a 3D polygon.
 %
 %   AREA = polygonArea3d(POLY)
 %   POLY is given as a N-by-3 array of vertex coordinates. The resulting

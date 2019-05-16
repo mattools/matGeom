@@ -1,5 +1,5 @@
 function below = isBelowPlane(point, varargin)
-%ISBELOWPLANE Test whether a point is below or above a plane
+%ISBELOWPLANE Test whether a point is below or above a plane.
 %
 %   BELOW = isBelowPlane(POINT, PLANE)
 %   where POINT is given as coordinate row vector [XP YP ZP], and PLANE is

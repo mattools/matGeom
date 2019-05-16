@@ -1,5 +1,5 @@
 function path = grFindGeodesicPath(nodes, edges, ind0, ind1, edgeWeights)
-%GRFINDGEODESICPATH Find a geodesic path between two nodes in the graph
+%GRFINDGEODESICPATH Find a geodesic path between two nodes in the graph.
 %
 %   PATH = grFindGeodesicPath(NODES, EDGES, NODE1, NODE2, WEIGHTS)
 %   NODES and EDGES defines the graph, NODE1 and NODE2 are indices of the

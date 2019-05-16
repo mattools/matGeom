@@ -1,5 +1,5 @@
 function varargout = createOctahedron()
-%CREATEOCTAHEDRON Create a 3D mesh representing an octahedron
+%CREATEOCTAHEDRON Create a 3D mesh representing an octahedron.
 %
 %   [V, E, F] = createOctahedron;
 %   Create a 3D mesh representing an octahedron

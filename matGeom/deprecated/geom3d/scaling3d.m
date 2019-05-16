@@ -1,5 +1,5 @@
 function trans = scaling3d(varargin)
-%SCALING3D return 4x4 matrix of a 3D scaling
+%SCALING3D return 4x4 matrix of a 3D scaling.
 %
 %   TRANS = scaling3d(S);
 %   returns the scaling transform corresponding to a scaling factor S in

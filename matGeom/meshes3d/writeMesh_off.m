@@ -1,5 +1,5 @@
 function writeMesh_off(fileName, vertices, faces)
-%WRITEMESH_OFF Writes a mesh into a text file in OFF format
+%WRITEMESH_OFF Writes a mesh into a text file in OFF format.
 %
 %   writeMesh_off(FNAME, V, F)
 %

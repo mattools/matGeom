@@ -1,5 +1,5 @@
 function poly = sphericalVoronoiDomain(refPoint, neighbors)
-%SPHERICALVORONOIDOMAIN Compute a spherical voronoi domain
+%SPHERICALVORONOIDOMAIN Compute a spherical voronoi domain.
 %
 %   POLY = sphericalVoronoiDomain(GERM, NEIGHBORS)
 %   GERM is a 1-by-3 row vector representing cartesian coordinates of a

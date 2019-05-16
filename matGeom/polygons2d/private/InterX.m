@@ -1,5 +1,5 @@
 function P = InterX(L1,varargin)
-%INTERX Intersection of curves
+%INTERX Intersection of curves.
 %   P = INTERX(L1,L2) returns the intersection points of two curves L1 
 %   and L2. The curves L1,L2 can be either closed or open and are described
 %   by two-row-matrices, where each row contains its x- and y- coordinates.

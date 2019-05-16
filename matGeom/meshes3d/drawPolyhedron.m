@@ -1,5 +1,5 @@
 function varargout = drawPolyhedron(nodes, faces, varargin)
-%DRAWPOLYHEDRON Draw polyhedron defined by vertices and faces
+%DRAWPOLYHEDRON Draw polyhedron defined by vertices and faces.
 %
 %   drawPolyhedron(NODES, FACES)
 %   Draws the polyhedron defined by vertices NODES and the faces FACES. 
