@@ -1,5 +1,5 @@
 function pts = intersectPolylines(poly1, varargin)
-%INTERSECTPOLYLINES Find the common points between 2 polylines
+%INTERSECTPOLYLINES Find the common points between 2 polylines.
 %
 %   INTERS = intersectPolylines(POLY1, POLY2)
 %   Returns the intersection points between two polylines. Each polyline is

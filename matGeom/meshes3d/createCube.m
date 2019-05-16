@@ -1,5 +1,5 @@
 function varargout = createCube()
-%CREATECUBE Create a 3D mesh representing the unit cube
+%CREATECUBE Create a 3D mesh representing the unit cube.
 %
 %   [V, E, F] = createCube 
 %   Create a unit cube, as a polyhedra representation.

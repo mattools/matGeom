@@ -1,5 +1,5 @@
 function [intersects, edgeIndices] = intersectLinePolyline(line, poly, varargin)
-%INTERSECTLINEPOLYLINE Intersection points between a line and a polyline
+%INTERSECTLINEPOLYLINE Intersection points between a line and a polyline.
 %
 %   P = intersectLinePolyline(LINE, POLY)
 %   Returns the intersection points of the lines LINE with polyline POLY. 

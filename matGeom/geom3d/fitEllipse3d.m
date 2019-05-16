@@ -1,5 +1,5 @@
 function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin)
-%FITELLIPSE3D Fit an ellipse to a set of points
+%FITELLIPSE3D Fit an ellipse to a set of points.
 %
 %   FITTEDELLIPSE3D = fitEllipse3d(POINTS) returns the 3D ellipse fitted to
 %   a set of 3D points.

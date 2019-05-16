@@ -1,5 +1,5 @@
 function varargout = randomAngle3d(varargin)
-%RANDOMANGLE3D Return a 3D angle uniformly distributed on unit sphere
+%RANDOMANGLE3D Return a 3D angle uniformly distributed on unit sphere.
 %
 %   usage
 %   [THETA PHI] = randomAngle3d

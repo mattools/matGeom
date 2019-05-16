@@ -1,5 +1,5 @@
 function meshes = splitMesh(vertices, faces, varargin)
-%SPLITMESH Return the connected components of a mesh
+%SPLITMESH Return the connected components of a mesh.
 %
 %   MESHES = splitMesh(VERTICES, FACES) returns the connected components of
 %   the mesh defined by vertices and faces as a struct array with the  

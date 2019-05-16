@@ -1,5 +1,5 @@
 function [intersects, edgeIndices] = intersectLinePolygon(line, poly, varargin)
-%INTERSECTLINEPOLYGON Intersection points between a line and a polygon
+%INTERSECTLINEPOLYGON Intersection points between a line and a polygon.
 %
 %   P = intersectLinePolygon(LINE, POLY)
 %   Returns the intersection points of the lines LINE with polygon POLY. 

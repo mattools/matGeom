@@ -1,5 +1,5 @@
 function faces2 = removeDuplicateFaces(faces, varargin)
-%REMOVEDUPLICATEFACES Remove duplicate faces in a face array
+%REMOVEDUPLICATEFACES Remove duplicate faces in a face array.
 %
 %   [V, F] = removeDuplicateFaces(V, F)
 %

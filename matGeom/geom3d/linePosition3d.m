@@ -1,5 +1,5 @@
 function pos = linePosition3d(point, line)
-%LINEPOSITION3D Return the position of a 3D point projected on a 3D line
+%LINEPOSITION3D Return the position of a 3D point projected on a 3D line.
 %
 %   T = linePosition3d(POINT, LINE)
 %   Computes position of point POINT on the line LINE, relative to origin

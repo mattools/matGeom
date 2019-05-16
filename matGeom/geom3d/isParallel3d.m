@@ -1,5 +1,5 @@
 function b = isParallel3d(v1, v2, varargin)
-%ISPARALLEL3D Check parallelism of two 3D vectors
+%ISPARALLEL3D Check parallelism of two 3D vectors.
 %
 %   B = isParallel3d(V1, V2)
 %   where V1 and V2 are 2 [1x3] arrays, returns 1 if the vectors are

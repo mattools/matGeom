@@ -1,5 +1,5 @@
 function varargout = patchGraph(nodes, edges, faces) %#ok<INUSL>
-%PATCHGRAPH Transform 3D graph (mesh) into a patch handle
+%PATCHGRAPH Transform 3D graph (mesh) into a patch handle.
 %
 %   [PX, PY, PZ] = PATCHGRAPH(NODES, EDGES, FACES)
 %   Transform the graph defined as a set of nodes, edges and faces in a

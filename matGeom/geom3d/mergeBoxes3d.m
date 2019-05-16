@@ -1,5 +1,5 @@
 function box = mergeBoxes3d(box1, box2)
-%MERGEBOXES3D Merge 3D boxes, by computing their greatest extent
+%MERGEBOXES3D Merge 3D boxes, by computing their greatest extent.
 %
 %   BOX = mergeBoxes3d(BOX1, BOX2);
 %

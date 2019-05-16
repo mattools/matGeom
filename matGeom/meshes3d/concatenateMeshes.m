@@ -1,5 +1,5 @@
 function varargout = concatenateMeshes(varargin)
-% CONCATENATEMESHES Concatenate multiple meshes
+% CONCATENATEMESHES Concatenate multiple meshes.
 %
 %   [V,F] = concatenateMeshes(V1,F1,V2,F2, ...)
 %   Returns one mesh represented by vertices V and faces F by concatenating

@@ -1,5 +1,5 @@
 function [dists, neighInds] = nndist(points)
-%NNDIST Nearest-neighbor distances of each point in a set
+%NNDIST Nearest-neighbor distances of each point in a set.
 %
 %   DISTS = nndist(POINTS)
 %   Returns the distance to the nearest neighbor of each point in an array

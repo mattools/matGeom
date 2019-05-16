@@ -1,5 +1,5 @@
 function [nodes2, edges2, faces2] = clipMesh2dPolygon(nodes, edges, faces, poly)
-%CLIPMESH2DPOLYGON  Clip a planar mesh with a polygon
+%CLIPMESH2DPOLYGON  Clip a planar mesh with a polygon.
 %
 %   [NODES2, EDGES2, FACES2] = clipMesh2dPolygon(NODES, EDGES, FACES, POLY)
 %   Clips the graph defined by nodes NODES and edges EDGES with the polygon

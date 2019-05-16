@@ -1,5 +1,5 @@
 function [nodes, edges, faces] = addSquareFace(nodes, edges, faces, faceNodes)
-%ADDSQUAREFACE Add a (square) face defined from its vertices to a graph
+%ADDSQUAREFACE Add a (square) face defined from its vertices to a graph.
 %
 %   [N2 E2 F2] = addSquareFace(N, E, F, FN)
 %   Add a new face, defined by the nodes indices FN, to the graph defined

@@ -1,5 +1,5 @@
 function varargout = meshVertexClustering(vertices, faces, spacing, varargin)
-%MESHVERTEXCLUSTERING Simplifies a mesh using vertex clustering
+%MESHVERTEXCLUSTERING Simplifies a mesh using vertex clustering.
 %
 %   [V2, F2] = meshVertexClustering(V, F, SPACING)
 %   [V2, F2] = meshVertexClustering(MESH, SPACING)

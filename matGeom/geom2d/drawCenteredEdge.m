@@ -1,5 +1,5 @@
 function varargout = drawCenteredEdge(varargin)
-%DRAWCENTEREDEDGE Draw an edge centered on a point
+%DRAWCENTEREDEDGE Draw an edge centered on a point.
 %   
 %   Draws a centered edge, defined by a center, a length and an orientation
 %   (in degrees). This function can be used to draw principal axes of an

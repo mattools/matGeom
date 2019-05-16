@@ -1,5 +1,5 @@
 function points = clipPoints(points, box)
-%CLIPPOINTS Clip a set of points by a box
+%CLIPPOINTS Clip a set of points by a box.
 %
 %   CLIP = clipPoints(POINTS, BOX);
 %   Returns the set of points which are located inside of the box BOX.

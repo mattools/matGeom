@@ -1,5 +1,5 @@
 function mat = createEulerAnglesRotation(phi, theta, psi)
-%CREATEEULERANGLESROTATION Create a rotation matrix from 3 euler angles
+%CREATEEULERANGLESROTATION Create a rotation matrix from 3 euler angles.
 %
 %   ROT = createEulerAnglesRotation(PHI, THETA, PSI)
 %   Create a rotation matrix from the 3 euler angles PHI THETA and PSI,

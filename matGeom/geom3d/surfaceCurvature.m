@@ -1,5 +1,5 @@
 function kappa = surfaceCurvature(kappa1, kappa2, theta)
-%SURFACECURVATURE Curvature on a surface from angle and principal curvatures
+%SURFACECURVATURE Curvature on a surface from angle and principal curvatures.
 %
 %   usage:
 %   KAPPA = surfaceCurvature(KAPPA1, KAPPA2, THETA)

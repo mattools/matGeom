@@ -1,5 +1,5 @@
 function varargout = polylineSelfIntersections(poly, varargin)
-%POLYLINESELFINTERSECTIONS Find self-intersection points of a polyline
+%POLYLINESELFINTERSECTIONS Find self-intersection points of a polyline.
 %
 %   Computes self-intersections of a polyline, eventually specifying if
 %   polyline is closed or open, and eventually returning position of

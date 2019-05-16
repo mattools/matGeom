@@ -1,5 +1,5 @@
 function varargout = gabrielGraph(pts)
-%GABRIELGRAPH  Gabriel Graph of a set of points
+%GABRIELGRAPH  Gabriel Graph of a set of points.
 %
 %   EDGES = gabrielGraph(PTS)
 %   Computes the Gabriel graph of the input set of points PTS. The Gabriel

@@ -1,5 +1,5 @@
 function center = polylineCentroid(varargin)
-%POLYLINECENTROID Compute centroid of a curve defined by a series of points
+%POLYLINECENTROID Compute centroid of a curve defined by a series of points.
 %
 %   PT = polylineCentroid(POINTS);
 %   Computes center of mass of a polyline defined by POINTS. POINTS is a

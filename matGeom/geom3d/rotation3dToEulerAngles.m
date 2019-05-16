@@ -1,5 +1,5 @@
 function varargout = rotation3dToEulerAngles(mat, varargin)
-%ROTATION3DTOEULERANGLES Extract Euler angles from a rotation matrix
+%ROTATION3DTOEULERANGLES Extract Euler angles from a rotation matrix.
 %
 %   [PHI, THETA, PSI] = rotation3dToEulerAngles(MAT)
 %   Computes Euler angles PHI, THETA and PSI (in degrees) from a 3D 4-by-4

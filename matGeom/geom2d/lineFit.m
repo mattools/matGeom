@@ -1,5 +1,5 @@
 function line = lineFit(varargin)
-%LINEFIT Fit a straight line to a set of points
+%LINEFIT Fit a straight line to a set of points.
 %
 %   L = lineFit(X, Y)
 %   Computes parametric line minimizing square error of all points (X,Y).

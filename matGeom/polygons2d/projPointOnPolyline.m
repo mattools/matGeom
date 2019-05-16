@@ -1,5 +1,5 @@
 function varargout = projPointOnPolyline(point, poly, varargin)
-%PROJPOINTONPOLYLINE Compute position of a point projected on a polyline
+%PROJPOINTONPOLYLINE Compute position of a point projected on a polyline.
 %
 %   POS = projPointOnPolyline(POINT, POLYLINE)
 %   Compute the position of the orthogonal projection of a point on a

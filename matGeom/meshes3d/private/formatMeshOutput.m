@@ -1,5 +1,5 @@
 function res = formatMeshOutput(nbArgs, vertices, edges, faces)
-%FORMATMESHOUTPUT Format mesh output depending on nargout
+%FORMATMESHOUTPUT Format mesh output depending on nargout.
 %
 %   OUTPUT = formatMeshOutput(NARGOUT, VERTICES, EDGES, FACES)
 %   Utilitary function to convert mesh data .

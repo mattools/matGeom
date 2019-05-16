@@ -1,5 +1,5 @@
 function b = isPointInTriangle(point, p1, p2, p3)
-%ISPOINTINTRIANGLE Test if a point is located inside a triangle
+%ISPOINTINTRIANGLE Test if a point is located inside a triangle.
 %
 %   B = isPointInTriangle(POINT, V1, V2, V3)
 %   POINT is a 1-by-2 row vector containing coordinates of the test point,

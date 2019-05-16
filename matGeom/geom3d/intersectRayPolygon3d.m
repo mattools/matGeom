@@ -1,5 +1,5 @@
 function [inter, inside]= intersectRayPolygon3d(ray, poly)
-%INTERSECTRAYPOLYGON3D Intersection point of a 3D ray and a 3D polygon
+%INTERSECTRAYPOLYGON3D Intersection point of a 3D ray and a 3D polygon.
 %
 %   INTER = intersectRayPolygon3d(RAY, POLY)
 %   Compute coordinates of intersection point between the 3D ray RAY and

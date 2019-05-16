@@ -1,5 +1,5 @@
 function varargout = cvtUpdate(germs, points)
-%CVTUPDATE Update germs of a CVT with given points
+%CVTUPDATE Update germs of a CVT with given points.
 %
 %   G2 = cvtUpdate(G, PTS)
 %   G: inital germs 

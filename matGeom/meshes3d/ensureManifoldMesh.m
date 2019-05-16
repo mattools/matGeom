@@ -1,5 +1,5 @@
 function varargout = ensureManifoldMesh(varargin)
-%ENSUREMANIFOLDMESH Apply several simplification to obtain a manifold mesh
+%ENSUREMANIFOLDMESH Apply several simplification to obtain a manifold mesh.
 %
 %   output = ensureManifoldMesh(input)
 %

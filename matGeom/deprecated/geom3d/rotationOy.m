@@ -1,5 +1,5 @@
 function trans = rotationOy(varargin)
-%ROTATIONOY return 4x4 matrix of a rotation around y-axis
+%ROTATIONOY return 4x4 matrix of a rotation around y-axis.
 %
 %   TRANS = rotationOy(THETA);
 %   Returns the transform matrix corresponding to a rotation by the angle

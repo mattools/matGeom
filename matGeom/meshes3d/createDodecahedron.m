@@ -1,5 +1,5 @@
 function varargout = createDodecahedron()
-%CREATEDODECAHEDRON Create a 3D mesh representing a dodecahedron
+%CREATEDODECAHEDRON Create a 3D mesh representing a dodecahedron.
 %
 %   [V, E, F] = createDodecahedron;
 %   Create a 3D mesh representing a dodecahedron

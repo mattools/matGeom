@@ -1,5 +1,5 @@
 function theta = polygon3dNormalAngle(points, ind)
-%POLYGON3DNORMALANGLE Normal angle at a vertex of the 3D polygon
+%POLYGON3DNORMALANGLE Normal angle at a vertex of the 3D polygon.
 %
 %   THETA = polygon3DNormalAngle(POLYGON, IND)
 %   where POLYGON is a set of points, and IND is index of a point in

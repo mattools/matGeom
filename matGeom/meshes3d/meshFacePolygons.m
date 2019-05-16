@@ -1,5 +1,5 @@
 function polys = meshFacePolygons(varargin)
-%MESHFACEPOLYGONS Returns the set of polygons that constitutes a mesh
+%MESHFACEPOLYGONS Returns the set of polygons that constitutes a mesh.
 %
 %   POLYGONS = meshFacePolygons(V, F)
 %   POLYGONS = meshFacePolygons(MESH)

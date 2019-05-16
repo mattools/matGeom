@@ -1,5 +1,5 @@
 function varargout = clipGraph(nodes, edges, varargin)
-%CLIPGRAPH Clip a graph with a rectangular area
+%CLIPGRAPH Clip a graph with a rectangular area.
 %
 %   [N2, E2] = clipGraph(N, E, BOX);
 %   [N2, E2, F2] = clipGraph(N, E, F, BOX);

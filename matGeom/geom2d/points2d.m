@@ -1,5 +1,5 @@
 function points2d
-%POINTS2D  Description of functions operating on points
+%POINTS2D  Description of functions operating on points.
 %
 %   A point is defined by its two cartesian coordinate, put into a row
 %   vector of 2 elements:

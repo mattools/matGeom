@@ -1,5 +1,5 @@
 function lengths = grEdgeLength(nodes, edges, varargin)
-%GREDGELENGTH  Compute length of edges in a geometric graph
+%GREDGELENGTH  Compute length of edges in a geometric graph.
 %
 %   Deprecated, use 'grEdgeLengths' instead.
 %

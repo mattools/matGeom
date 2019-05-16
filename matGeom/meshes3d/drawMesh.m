@@ -1,5 +1,5 @@
 function varargout = drawMesh(varargin)
-%DRAWMESH Draw a 3D mesh defined by vertex and face arrays
+%DRAWMESH Draw a 3D mesh defined by vertex and face arrays.
 %
 %   drawMesh(VERTICES, FACES)
 %   Draws the 3D mesh defined by vertices VERTICES and the faces FACES. 

@@ -1,5 +1,5 @@
 function [poly2, keepInds] = simplifyPolyline(poly, tol)
-%SIMPLIFYPOLYLINE Douglas-Peucker simplification of a polyline
+%SIMPLIFYPOLYLINE Douglas-Peucker simplification of a polyline.
 %
 %   POLY2 = simplifyPolyline(POLY, TOL)
 %   Simplifies the input polyline using the Douglas-Peucker algorithm. 

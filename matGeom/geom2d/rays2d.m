@@ -1,5 +1,5 @@
 function rays2d(varargin)
-%RAYS2D  Description of functions operating on planar rays
+%RAYS2D  Description of functions operating on planar rays.
 %
 %   A ray is defined by a point (its origin), and a vector (its
 %   direction). The different parameters are bundled into a row vector:

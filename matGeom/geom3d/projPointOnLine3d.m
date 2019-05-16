@@ -1,5 +1,5 @@
 function point = projPointOnLine3d(point, line)
-%PROJPOINTONLINE3D Project a 3D point orthogonally onto a 3D line
+%PROJPOINTONLINE3D Project a 3D point orthogonally onto a 3D line.
 %
 %   PT2 = projPointOnLine3d(PT, LINE).
 %   Computes the (orthogonal) projection of 3D point PT onto the 3D line

@@ -1,5 +1,5 @@
 function center = graphCenter(v, e, l)
-%GRAPHCENTER Center of a graph
+%GRAPHCENTER Center of a graph.
 %
 %   CENTER = graphCenter(V, E)
 %   Computes the center of the graph given by V and E. The center of the

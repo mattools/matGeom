@@ -1,5 +1,5 @@
 function writeGraph(nodes, edges, fileName)
-%WRITEGRAPH Write a graph to an ascii file
+%WRITEGRAPH Write a graph to an ascii file.
 %
 %   writeGraph(NODES, EDGES, FILENAME)
 %

@@ -1,5 +1,5 @@
 function b = isAxisHandle(arg)
-%ISAXISHANDLE Check if the input corresponds to a valid axis hanfle
+%ISAXISHANDLE Check if the input corresponds to a valid axis hanfle.
 %
 %   B = isAxisHandle(VAR)
 %   If the value of VAR is scalar, corresponds to a valid matlab handle,

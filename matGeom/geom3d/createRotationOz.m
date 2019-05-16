@@ -1,5 +1,5 @@
 function trans = createRotationOz(varargin)
-%CREATEROTATIONOZ Create the 4x4 matrix of a 3D rotation around z-axis
+%CREATEROTATIONOZ Create the 4x4 matrix of a 3D rotation around z-axis.
 %
 %   TRANS = createRotationOz(THETA);
 %   Returns the transform matrix corresponding to a rotation by the angle

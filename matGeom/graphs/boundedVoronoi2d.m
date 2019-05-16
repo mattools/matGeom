@@ -1,5 +1,5 @@
 function [nodes, edges, faces] = boundedVoronoi2d(box, germs)
-%BOUNDEDVORONOI2D Return a bounded voronoi diagram as a graph structure
+%BOUNDEDVORONOI2D Return a bounded voronoi diagram as a graph structure.
 %   
 %   [NODES, EDGES, FACES] = boundedVoronoi2d(BOX, GERMS)
 %   GERMS an array of points with dimension 2

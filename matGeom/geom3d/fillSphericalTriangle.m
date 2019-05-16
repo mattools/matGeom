@@ -1,5 +1,5 @@
 function varargout = fillSphericalTriangle(sphere, p1, p2, p3, varargin)
-%FILLSPHERICALTRIANGLE Fill a triangle on a sphere
+%FILLSPHERICALTRIANGLE Fill a triangle on a sphere.
 %
 %   fillSphericalTriangle(SPHERE, PT1, PT2, PT3);
 %

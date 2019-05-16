@@ -1,5 +1,5 @@
 function d = isPlane(plane)
-%ISPLANE Check if input is a plane
+%ISPLANE Check if input is a plane.
 %
 %   B = isPlane(PLANE) where PLANE should be a plane or multiple planes
 %

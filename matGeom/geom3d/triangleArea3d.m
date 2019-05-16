@@ -1,5 +1,5 @@
 function area = triangleArea3d(pt1, pt2, pt3)
-%TRIANGLEAREA3D Area of a 3D triangle
+%TRIANGLEAREA3D Area of a 3D triangle.
 %
 %   AREA = triangleArea3d(P1, P2, P3)
 %   Computes area of the 3D triangle whose vertices are given by P1, P2 and

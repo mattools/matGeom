@@ -1,5 +1,5 @@
 function [nodes, edges] = readGraph(fileName)
-%READGRAPH Read a graph from a text file
+%READGRAPH Read a graph from a text file.
 %
 %   [NODES EDGES] = readGraph(FILENAME)
 %

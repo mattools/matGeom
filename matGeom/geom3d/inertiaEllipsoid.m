@@ -1,5 +1,5 @@
 function ell = inertiaEllipsoid(points)
-%INERTIAELLIPSOID Inertia ellipsoid of a set of 3D points
+%INERTIAELLIPSOID Inertia ellipsoid of a set of 3D points.
 %
 %   ELL = inertiaEllipsoid(PTS)
 %   Compute the inertia ellipsoid of the set of points PTS. The result is

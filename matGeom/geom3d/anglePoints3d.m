@@ -1,5 +1,5 @@
 function alpha = anglePoints3d(varargin)
-%ANGLEPOINTS3D Compute angle between three 3D points
+%ANGLEPOINTS3D Compute angle between three 3D points.
 %
 %   ALPHA = anglePoints3d(P1, P2)
 %   Computes angle (P1, O, P2), in radians, between 0 and PI.

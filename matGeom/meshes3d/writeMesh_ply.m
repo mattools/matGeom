@@ -1,5 +1,5 @@
 function writeMesh_ply(fileName, vertices, faces)
-%WRITEMESH_PLY Writes a mesh into a text file in PLY format
+%WRITEMESH_PLY Writes a mesh into a text file in PLY format.
 %
 %   writeMesh_ply(FNAME, VERTS, FACES)
 %

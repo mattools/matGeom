@@ -1,5 +1,5 @@
 function varargout = drawCurve(varargin)
-%DRAWCURVE draw a curve specified by a list of points
+%DRAWCURVE draw a curve specified by a list of points.
 %
 %   drawCurve(COORD);
 %   packs coordinates in a single [N*2] array.

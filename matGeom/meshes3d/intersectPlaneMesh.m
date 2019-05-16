@@ -1,5 +1,5 @@
 function polys = intersectPlaneMesh(plane, v, f)
-%INTERSECTPLANEMESH Compute the polygons resulting from plane-mesh intersection
+%INTERSECTPLANEMESH Compute the polygons resulting from plane-mesh intersection.
 %
 %   POLYS = intersectPlaneMesh(P, V, F)
 %   Computes the interection between a plane and a mesh given by vertex and

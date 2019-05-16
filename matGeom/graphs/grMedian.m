@@ -1,5 +1,5 @@
 function varargout = grMedian(varargin)
-%GRMEDIAN Compute median from neihgbours
+%GRMEDIAN Compute median from neihgbours.
 %
 %   LBL2 = grMedian(EDGES, LBL1)
 %   new label for each node of the graph is computed as the median of the

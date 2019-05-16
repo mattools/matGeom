@@ -1,5 +1,5 @@
 function res = recenterTransform3d(transfo, center)
-%RECENTERTRANSFORM3D Change the fixed point of an affine 3D transform
+%RECENTERTRANSFORM3D Change the fixed point of an affine 3D transform.
 %
 %   TRANSFO2 = recenterTransform3d(TRANSFO, CENTER)
 %   where TRANSFO is a 4x4 transformation matrix, and CENTER is a 1x3 row

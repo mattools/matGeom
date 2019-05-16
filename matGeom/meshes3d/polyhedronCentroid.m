@@ -1,5 +1,5 @@
 function centroid = polyhedronCentroid(vertices, faces) %#ok<INUSD>
-%POLYHEDRONCENTROID Compute the centroid of a 3D convex polyhedron
+%POLYHEDRONCENTROID Compute the centroid of a 3D convex polyhedron.
 %
 %   CENTRO = polyhedronCentroid(V, F)
 %   Computes the centroid (center of mass) of the polyhedron defined by

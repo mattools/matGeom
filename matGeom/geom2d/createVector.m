@@ -1,5 +1,5 @@
 function vect = createVector(p1, p2)
-%CREATEVECTOR Create a vector from two points
+%CREATEVECTOR Create a vector from two points.
 %
 %   V12 = createVector(P1, P2)
 %   Creates the vector V12, defined as the difference between coordinates

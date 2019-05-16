@@ -1,5 +1,5 @@
 function plane2 = normalizePlane(plane1)
-%NORMALIZEPLANE Normalize parametric representation of a plane
+%NORMALIZEPLANE Normalize parametric representation of a plane.
 %
 %   PLANE2 = normalizePlane(PLANE1);
 %   Transforms the plane PLANE1 in the following format:

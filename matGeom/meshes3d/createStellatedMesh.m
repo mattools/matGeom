@@ -1,5 +1,5 @@
 function varargout = createStellatedMesh(vertices, faces, varargin)
-%CREATESTELLATEDMESH  Replaces each face of a mesh by a pyramid
+%CREATESTELLATEDMESH  Replaces each face of a mesh by a pyramid.
 %
 %   [V2, F2] = createStellatedMesh(V, F)
 %

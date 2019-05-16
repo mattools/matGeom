@@ -1,5 +1,5 @@
 function varargout = cutMeshByPlane(v, f, plane, varargin)
-%CUTMESHBYPLANE Cut a mesh by a plane
+%CUTMESHBYPLANE Cut a mesh by a plane.
 %   [ABOVE, IN, BELOW] = cutMeshByPlane(MESH, PLANE)
 %   where MESH, ABOVE, IN, BELOW are structs with the fields vertices and
 %   faces, and PLANE is given as a row containing initial point and 2

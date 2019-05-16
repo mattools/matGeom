@@ -1,5 +1,5 @@
 function S = oblateSurfaceArea(elli, varargin)
-%OBLATESURFACEAREA  Approximated surface area of an oblate ellipsoid
+%OBLATESURFACEAREA  Approximated surface area of an oblate ellipsoid.
 %
 %   S = oblateSurfaceArea(R1,R2)
 %

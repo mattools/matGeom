@@ -1,5 +1,5 @@
 function points = mergeClosePoints(points, varargin)
-%MERGECLOSEPOINTS Merge points that are closer than a given distance
+%MERGECLOSEPOINTS Merge points that are closer than a given distance.
 %
 %   PTS2 = mergeClosePoints(PTS, DIST)
 %   Remove points in the array PTS such that no points closer than the

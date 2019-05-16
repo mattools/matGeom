@@ -1,5 +1,5 @@
 function edges = meshEdges(faces, varargin)
-%MESHEDGES Computes array of edge vertex indices from face array
+%MESHEDGES Computes array of edge vertex indices from face array.
 %
 %   EDGES = meshEdges(FACES);
 %

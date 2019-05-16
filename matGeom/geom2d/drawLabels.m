@@ -1,14 +1,14 @@
 function varargout = drawLabels(varargin)
-%DRAWLABELS Draw labels at specified positions
+%DRAWLABELS Draw labels at specified positions.
 %   
 %   DRAWLABELS(X, Y, LBL) draw labels LBL at position X and Y.
 %   LBL can be either a string array, or a number array. In this case,
 %   string are created by using sprintf function, with '%.2f' mask.
 %
-%   DRAWLABELS(POS, LBL) draw labels LBL at position specified by POS,
+%   DRAWLABELS(POS, LBL) draw labels LBL at position specified by POS,.
 %   where POS is a N*2 int array.
 %
-%   DRAWLABELS(..., NUMBERS, FORMAT) create labels using sprintf function,
+%   DRAWLABELS(..., NUMBERS, FORMAT) create labels using sprintf function,.
 %   with the mask given by FORMAT (e. g. '%03d' or '5.3f'), and the
 %   corresponding values.
 %

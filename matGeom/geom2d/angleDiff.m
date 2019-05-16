@@ -1,5 +1,5 @@
 function dif = angleDiff(angle1, angle2)
-%ANGLEDIFF Difference between two angles
+%ANGLEDIFF Difference between two angles.
 %
 %   Computes the signed angular difference between two angles in radians.
 %   The result is comprised between -PI and +PI.

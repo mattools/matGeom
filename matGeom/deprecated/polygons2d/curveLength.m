@@ -1,5 +1,5 @@
 function len = curveLength(varargin)
-%CURVELENGTH return length of a curve (a list of points)
+%CURVELENGTH return length of a curve (a list of points).
 %
 %   Compute the length of a curve given as a list of following points. 
 %

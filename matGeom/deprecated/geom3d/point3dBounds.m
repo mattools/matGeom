@@ -1,5 +1,5 @@
 function box = point3dBounds(points)
-%POINT3DBOUNDS Bounding box of a set of 3D points
+%POINT3DBOUNDS Bounding box of a set of 3D points.
 %
 %   BOX = point3dBounds(POINTS);
 %   POINTS is a N-by-3 array of points, each coordinate being given in a

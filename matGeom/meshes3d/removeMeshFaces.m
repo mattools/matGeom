@@ -1,5 +1,5 @@
 function varargout = removeMeshFaces(v, f, fI)
-%REMOVEMESHFACES Remove faces from a mesh by face indices
+%REMOVEMESHFACES Remove faces from a mesh by face indices.
 %   [V2, F2] = removeMeshFaces(V, F, FI) removes faces from the mesh by
 %   the face indices FI into faces F of the mesh. The mesh is represented 
 %   by the vertex array V and the face array F. The result is the new set 

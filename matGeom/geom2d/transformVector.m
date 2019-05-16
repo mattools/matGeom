@@ -1,5 +1,5 @@
 function varargout = transformVector(varargin)
-%TRANSFORMVECTOR Transform a vector with an affine transform
+%TRANSFORMVECTOR Transform a vector with an affine transform.
 %
 %   VECT2 = transformVector(VECT1, TRANS);
 %   where VECT1 has the form [xv yv], and TRANS is a [2*2], [2*3] or [3*3]

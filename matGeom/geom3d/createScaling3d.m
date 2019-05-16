@@ -1,5 +1,5 @@
 function trans = createScaling3d(varargin)
-%CREATESCALING3D Create the 4x4 matrix of a 3D scaling
+%CREATESCALING3D Create the 4x4 matrix of a 3D scaling.
 %
 %   TRANS = createScaling3d(S);
 %   returns the scaling transform corresponding to a scaling factor S in

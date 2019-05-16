@@ -1,5 +1,5 @@
 function d = distancePointLine3d(point, line)
-%DISTANCEPOINTLINE3D Euclidean distance between 3D point and line
+%DISTANCEPOINTLINE3D Euclidean distance between 3D point and line.
 %
 %   D = distancePointLine3d(POINT, LINE);
 %   Returns the distance between point POINT and the line LINE, given as:

@@ -1,5 +1,5 @@
 function varargout = fillGraphFaces(varargin)
-%FILLGRAPHFACES Fill faces of a graph with specified color
+%FILLGRAPHFACES Fill faces of a graph with specified color.
 %
 %   fillGraphFaces(NODES, FACES) 
 %   draw the faces of a graph / mesh defined by a sef of vertices and a set

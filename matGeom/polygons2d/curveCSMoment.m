@@ -1,5 +1,5 @@
 function m = curveCSMoment(curve, p, q)
-%CURVECSMOMENT  Compute centered scaled moment of a 2D curve
+%CURVECSMOMENT  Compute centered scaled moment of a 2D curve.
 %   M = curveCSMoment(CURVE, P, Q)
 %
 %   Example

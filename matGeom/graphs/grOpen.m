@@ -1,5 +1,5 @@
 function varargout = grOpen(varargin)
-%GROPEN Morphological opening on graph
+%GROPEN Morphological opening on graph.
 %
 %   LBL2 = grOpen(EDGES, LBL1)
 %   The labels are the result of a morphological erosion followed by a

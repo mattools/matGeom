@@ -1,5 +1,5 @@
 function varargout = cvtIterate(germs, funcPtr, funcArgs, N)
-%CVTITERATE Update germs of a CVT using random points with given density
+%CVTITERATE Update germs of a CVT using random points with given density.
 %
 %   G2 = cvtIterate(G, FPTR, FARGS, N)
 %   G: inital germs 

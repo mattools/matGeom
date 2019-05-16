@@ -1,5 +1,5 @@
 function vr = rotateVector(v, angle)
-%ROTATEVECTOR Rotate a vector by a given angle
+%ROTATEVECTOR Rotate a vector by a given angle.
 %
 %   VR = rotateVector(V, THETA)
 %   Rotate the vector V by an angle THETA, given in radians.

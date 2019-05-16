@@ -1,5 +1,5 @@
 function [poly, keepInds] = simplifyPolygon(poly, varargin)
-%SIMPLIFYPOLYGON  Douglas-Peucker simplification of a polygon
+%SIMPLIFYPOLYGON  Douglas-Peucker simplification of a polygon.
 %
 %   POLY2 = simplifyPolygon(POLY, TOL)
 %   Simplifies the input polygon using the Douglas-Peucker algorithm. 

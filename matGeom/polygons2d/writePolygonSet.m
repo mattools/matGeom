@@ -1,5 +1,5 @@
 function writePolygonSet(polys, filename)
-%WRITEPOLYGONSET Write a set of simple polygons into a file
+%WRITEPOLYGONSET Write a set of simple polygons into a file.
 %   
 %   writePolygonSet(POLYS, FILENAME);
 %   Writes the set of polygons in the file FILENAME.

@@ -1,5 +1,5 @@
 function b = isPointOnRay(point, ray, varargin)
-%ISPOINTONRAY Test if a point belongs to a ray
+%ISPOINTONRAY Test if a point belongs to a ray.
 %
 %   B = isPointOnRay(PT, RAY);
 %   Returns 1 if point PT belongs to the ray RAY.

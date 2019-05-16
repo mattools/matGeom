@@ -1,5 +1,5 @@
 function lengths = meshEdgeLength(vertices, edges, faces) %#ok<INUSD>
-%MESHEDGELENGTH Lengths of edges of a polygonal or polyhedral mesh
+%MESHEDGELENGTH Lengths of edges of a polygonal or polyhedral mesh.
 %
 %   output = meshEdgeLength(V, E, F)
 %

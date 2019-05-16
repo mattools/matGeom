@@ -1,5 +1,5 @@
 function [fittedCircle, circleNormal] = fitCircle3d(pts)
-%FITCIRCLE3D Fit a 3D circle to a set of points
+%FITCIRCLE3D Fit a 3D circle to a set of points.
 %
 %   [FITTEDCIRCLE, CIRCLENORMAL] = fitCircle3d(PTS)
 %

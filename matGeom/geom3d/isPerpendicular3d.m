@@ -1,5 +1,5 @@
 function b = isPerpendicular3d(v1, v2, varargin)
-%ISPERPENDICULAR3D Check orthogonality of two 3D vectors
+%ISPERPENDICULAR3D Check orthogonality of two 3D vectors.
 %
 %   B = isPerpendicular3d(V1, V2)
 %   where V1 and V2 are 2 [1x3] arrays, returns 1 if the vectors are

@@ -1,5 +1,5 @@
 function res = parallelPlane(plane, point)
-%PARALLELPLANE Parallel to a plane through a point or at a given distance
+%PARALLELPLANE Parallel to a plane through a point or at a given distance.
 %
 %   PL2 = parallelPlane(PL, PT)
 %   Constructs the plane parallel to plane PL and containing the point PT.

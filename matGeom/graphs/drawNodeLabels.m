@@ -1,5 +1,5 @@
 function varargout = drawNodeLabels(nodes, value, varargin)
-%DRAWNODELABELS Draw values associated to graph nodes
+%DRAWNODELABELS Draw values associated to graph nodes.
 % 
 %   Usage:
 %   drawNodeLabels(NODES, VALUES);

@@ -1,5 +1,5 @@
 function rad = deg2rad(deg)
-%DEG2RAD Convert angle from degrees to radians
+%DEG2RAD Convert angle from degrees to radians.
 %
 %   Usage:
 %   R = deg2rad(D)

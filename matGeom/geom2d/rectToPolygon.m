@@ -1,5 +1,5 @@
 function [tx, ty] = rectToPolygon(rect)
-%RECTTOPOLYGON Convert a rectangle into a polygon (set of vertices)
+%RECTTOPOLYGON Convert a rectangle into a polygon (set of vertices).
 %
 %   POLY = rectToPolygon(RECT);
 %   Converts rectangle given as [X0 Y0 W H] or [X0 Y0 W H THETA] into a

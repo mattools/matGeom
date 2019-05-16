@@ -1,5 +1,5 @@
 function varargout = minDistancePoints(p1, varargin)
-%MINDISTANCEPOINTS Minimal distance between several points
+%MINDISTANCEPOINTS Minimal distance between several points.
 %
 %   DIST = minDistancePoints(PTS)
 %   Returns the minimum distance between all couple of points in PTS. PTS

@@ -1,5 +1,5 @@
 function varargout = smoothMesh(varargin)
-%SMOOTHMESH Smooth mesh by replacing each vertex by the average of its neighbors 
+%SMOOTHMESH Smooth mesh by replacing each vertex by the average of its neighbors .
 %
 %   V2 = smoothMesh(V, F)
 %   [V2, F2] = smoothMesh(V, F)

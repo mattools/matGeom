@@ -1,5 +1,5 @@
 function varargout = drawVertices(varargin)
-%DRAWVERTICES Draw the vertices of a polygon or polyline
+%DRAWVERTICES Draw the vertices of a polygon or polyline.
 %
 %   drawVertices(POLY)
 %   Draws the vertices of the given polygon, using pre-defined style.

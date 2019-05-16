@@ -1,5 +1,5 @@
 function center = curveCentroid(varargin)
-%CURVECENTROID compute centroid of a curve defined by a series of points
+%CURVECENTROID compute centroid of a curve defined by a series of points.
 %
 %   PT = curveCentroid(POINTS);
 %   Computes center of mass of a curve defined by POINTS. POINTS is a [NxD]

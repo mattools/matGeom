@@ -1,5 +1,5 @@
 function varargout = drawPolyline(varargin)
-%DRAWPOLYLINE Draw a polyline specified by a list of points
+%DRAWPOLYLINE Draw a polyline specified by a list of points.
 %
 %   drawPolyline(COORD);
 %   packs coordinates in a single [N*2] array.

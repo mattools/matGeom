@@ -1,5 +1,5 @@
 function area = triangleArea(pt1, pt2, pt3)
-%TRIANGLEAREA Signed area of a triangle
+%TRIANGLEAREA Signed area of a triangle.
 %
 %   AREA = triangleArea(P1, P2, P3)
 %   Computes area of the triangle whose vertices are given by P1, P2 and

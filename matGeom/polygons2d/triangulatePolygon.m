@@ -1,5 +1,5 @@
 function tri = triangulatePolygon(poly)
-%TRIANGULATEPOLYGON Compute a triangulation of the polygon
+%TRIANGULATEPOLYGON Compute a triangulation of the polygon.
 %
 %   TRI = triangulatePolygon(POLY)
 %   Computes a triangulation TRI of the polygon defined by POLY

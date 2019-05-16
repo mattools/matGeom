@@ -1,5 +1,5 @@
 function point = polarPoint(varargin)
-%POLARPOINT Create a point from polar coordinates (rho + theta)
+%POLARPOINT Create a point from polar coordinates (rho + theta).
 %
 %   POINT = polarPoint(RHO, THETA);
 %   Creates a point using polar coordinate. THETA is angle with horizontal

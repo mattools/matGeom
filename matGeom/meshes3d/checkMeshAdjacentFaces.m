@@ -1,5 +1,5 @@
 function checkMeshAdjacentFaces(vertices, edges, faces)
-%CHECKMESHADJACENTFACES Check if adjacent faces of a mesh have similar orientation
+%CHECKMESHADJACENTFACES Check if adjacent faces of a mesh have similar orientation.
 %
 %   checkMeshAdjacentFaces(VERTICES, EDGES, FACES)
 %   The functions returns no output, but if two faces share a common edge

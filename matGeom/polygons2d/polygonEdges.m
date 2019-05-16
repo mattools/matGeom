@@ -1,5 +1,5 @@
 function edges = polygonEdges(poly)
-%POLYGONEDGES Return the edges of a simple or multiple polygon
+%POLYGONEDGES Return the edges of a simple or multiple polygon.
 %
 %   EDGES = polygonEdges(POLY)
 %   Return the set of edges of the polygon specified by POLY. POLY may be

@@ -1,5 +1,5 @@
 function nodes = steinerPolygon(points)
-%STEINERPOLYGON Create a Steiner polygon from a set of vectors
+%STEINERPOLYGON Create a Steiner polygon from a set of vectors.
 %
 %   NODES = steinerPolygon(VECTORS);
 %   Builds the (convex) polygon which contains an edge for each one of the

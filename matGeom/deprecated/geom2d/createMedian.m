@@ -1,5 +1,5 @@
 function line = createMedian(varargin)
-%CREATEMEDIAN create a median line
+%CREATEMEDIAN create a median line.
 %
 %   DEPRECATED: use medianLine instead
 %

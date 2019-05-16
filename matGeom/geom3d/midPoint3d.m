@@ -1,5 +1,5 @@
 function varargout = midPoint3d(varargin)
-%MIDPOINT3D Middle point of two 3D points or of a 3D edge
+%MIDPOINT3D Middle point of two 3D points or of a 3D edge.
 %
 %   MID = midPoint3d(P1, P2)
 %   Compute the middle point of the two points P1 and P2.

@@ -1,5 +1,5 @@
 function varargout = drawPolyhedra(varargin)
-%DRAWPOLYHEDRA draw polyhedra defined by vertices and faces
+%DRAWPOLYHEDRA draw polyhedra defined by vertices and faces.
 %
 %   DEPRECATED: use drawPolyhedron instead.
 %

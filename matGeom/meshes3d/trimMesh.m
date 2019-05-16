@@ -1,5 +1,5 @@
 function varargout = trimMesh(varargin)
-%TRIMMESH Reduce memory footprint of a polygonal mesh
+%TRIMMESH Reduce memory footprint of a polygonal mesh.
 %
 %   [V2, F2] = trimMesh(V, F)
 %   Unreferenced vertices are removed.

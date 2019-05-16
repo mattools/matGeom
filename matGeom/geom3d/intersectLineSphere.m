@@ -1,5 +1,5 @@
 function points = intersectLineSphere(line, sphere, varargin)
-%INTERSECTLINESPHERE Return intersection points between a line and a sphere
+%INTERSECTLINESPHERE Return intersection points between a line and a sphere.
 %
 %   PTS = intersectLineSphere(LINE, SPHERE);
 %   Returns the two points which are the intersection of the given line and

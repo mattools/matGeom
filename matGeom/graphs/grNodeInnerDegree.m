@@ -1,5 +1,5 @@
 function degree = grNodeInnerDegree(node, edges)
-%GRNODEINNERDEGREE Inner degree of a node in a graph
+%GRNODEINNERDEGREE Inner degree of a node in a graph.
 %
 %   DEG = grNodeInnerDegree(NODE, EDGES);
 %   Returns the inner degree of a node in the given edge list, i.e. the

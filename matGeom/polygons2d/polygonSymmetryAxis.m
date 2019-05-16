@@ -1,5 +1,5 @@
 function axis = polygonSymmetryAxis(poly)
-%POLYGONSYMMETRYAXIS Try to identify symmetry axis of polygon
+%POLYGONSYMMETRYAXIS Try to identify symmetry axis of polygon.
 %
 %   LINE = polygonSymmetryAxis(POLY)
 %   Returns a line that minimize difference between the polygon POLY and

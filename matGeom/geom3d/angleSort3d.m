@@ -1,5 +1,5 @@
 function varargout = angleSort3d(pts, varargin)
-%ANGLESORT3D Sort 3D coplanar points according to their angles in plane
+%ANGLESORT3D Sort 3D coplanar points according to their angles in plane.
 %
 %   PTS2 = angleSort3d(PTS);
 %   Considers all points are located on the same plane, and sort them

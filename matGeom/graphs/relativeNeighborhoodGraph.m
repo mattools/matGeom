@@ -1,5 +1,5 @@
 function [gnodes, gedges] = relativeNeighborhoodGraph(points)
-%RELATIVENEIGHBORHOODGRAPH Relative Neighborhood Graph of a set of points
+%RELATIVENEIGHBORHOODGRAPH Relative Neighborhood Graph of a set of points.
 %
 %   [NODES, EDGES] = relativeNeighborhoodGraph(POINTS)
 %   EDGES = relativeNeighborhoodGraph(POINTS)

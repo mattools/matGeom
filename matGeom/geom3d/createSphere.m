@@ -1,5 +1,5 @@
 function sphere = createSphere(varargin)
-%CREATESPHERE Create a sphere containing 4 points
+%CREATESPHERE Create a sphere containing 4 points.
 %
 %   s = createSphere(p1, p2, p3, p4);
 %   return in s the sphere common to the 4 pointsp1, p2, p3 and p4.

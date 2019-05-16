@@ -1,5 +1,5 @@
 function [nodes2, faces2] = clipConvexPolyhedronHP(nodes, faces, plane)
-%CLIPCONVEXPOLYHEDRONHP Clip a convex polyhedron by a plane
+%CLIPCONVEXPOLYHEDRONHP Clip a convex polyhedron by a plane.
 %
 %   [NODES2, FACES2] = clipConvexPolyhedronHP(NODES, FACES, PLANE)
 %

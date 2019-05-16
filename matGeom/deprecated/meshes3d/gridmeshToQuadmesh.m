@@ -1,5 +1,5 @@
 function varargout = gridmeshToQuadmesh(x, y, varargin)
-%GRIDMESHTOQUADMESH Create a quad mesh from a grid mesh
+%GRIDMESHTOQUADMESH Create a quad mesh from a grid mesh.
 %
 %   Deprecated: replaced by surfToMesh (2012.10.25)
 %

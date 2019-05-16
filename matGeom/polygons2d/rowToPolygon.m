@@ -1,5 +1,5 @@
 function poly = rowToPolygon(row, varargin)
-%ROWTOPOLYGON  Create a polygon from a row vector
+%ROWTOPOLYGON  Create a polygon from a row vector.
 %
 %   POLY = rowToPolygon(ROW)
 %   Convert a 1-by-2*N row vector that concatenates all polygon vertex

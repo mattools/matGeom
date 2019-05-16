@@ -1,5 +1,5 @@
 function varargout = graph2Contours(nodes, edges) %#ok<INUSL>
-%GRAPH2CONTOURS Convert a graph to a set of contour curves
+%GRAPH2CONTOURS Convert a graph to a set of contour curves.
 % 
 %   CONTOURS = GRAPH2CONTOURS(NODES, EDGES)
 %   NODES, EDGES is a graph representation (type "help graphs" for details)

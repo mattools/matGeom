@@ -1,5 +1,5 @@
 function box = intersectBoxes(box1, box2)
-%INTERSECTBOXES Intersection of two bounding boxes
+%INTERSECTBOXES Intersection of two bounding boxes.
 %
 %   RES = intersectBoxes(BOX1, BOX2)
 %

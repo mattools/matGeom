@@ -1,5 +1,5 @@
 function n = vecnorm3d(v)
-%VECNORM3D compute norm of vector or of set of 3D vectors
+%VECNORM3D compute norm of vector or of set of 3D vectors.
 %
 %   N = vecnorm(V);
 %   Returns norm of vector V.

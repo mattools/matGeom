@@ -1,5 +1,5 @@
 function varargout = parseMeshData(varargin)
-%PARSEMESHDATA Conversion of data representation for meshes
+%PARSEMESHDATA Conversion of data representation for meshes.
 %
 %   MESH = parseMeshData(VERTICES, FACES)
 %   MESH = parseMeshData(VERTICES, EDGES, FACES)

@@ -1,5 +1,5 @@
 function deriv = polynomialDerivate(poly)
-%POLYNOMIALDERIVATE Derivate a polynomial
+%POLYNOMIALDERIVATE Derivate a polynomial.
 %
 %   DERIV = polynomialDERIVATE(POLY)
 %   POLY is a row vector of [n+1] coefficients, in the form:

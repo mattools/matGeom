@@ -1,5 +1,5 @@
 function b = onEdge(point, edge)
-%ONEDGE test if a point belongs to an edge
+%ONEDGE test if a point belongs to an edge.
 %
 %   B = onEdge(POINT, EDGE)
 %   with POINT being [xp yp], and EDGE being [x1 y1 x2 y2].

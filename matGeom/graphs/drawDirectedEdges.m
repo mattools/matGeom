@@ -1,5 +1,5 @@
 function varargout = drawDirectedEdges(p, e, varargin)
-%DRAWDIRECTEDEDGES Draw edges with arrow indicating direction
+%DRAWDIRECTEDEDGES Draw edges with arrow indicating direction.
 % 
 %   usage:
 %   drawDirectedEdges(NODES, EDGES);

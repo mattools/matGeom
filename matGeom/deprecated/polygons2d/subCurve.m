@@ -1,5 +1,5 @@
 function res = subCurve(curve, P1, P2, varargin)
-%SUBCURVE  extract a portion of a curve
+%SUBCURVE  extract a portion of a curve.
 %
 %   CURVE2 = subCurve(CURVE, POS1, POS2)
 %   extract a subcurve by keeping only points located between indices POS1

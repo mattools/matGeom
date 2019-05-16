@@ -1,5 +1,5 @@
 function varargout = boundaryGraph(img)
-%BOUNDARYGRAPH Get boundary of image as a graph
+%BOUNDARYGRAPH Get boundary of image as a graph.
 %
 %   [NODES, EDGES] = boundaryGraph(IMG)         (2D)
 %   [NODES, EDGES, FACES] = boundaryGraph(IMG)  (3D)
