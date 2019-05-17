@@ -1,5 +1,5 @@
-function [v2, faces] = smoothMesh(vertices, faces, varargin)
-%SMOOTHMESH Smooth mesh by replacing each vertex by the average of its neighbors 
+function varargout = smoothMesh(varargin)
+%SMOOTHMESH Smooth mesh by replacing each vertex by the average of its neighbors .
 %
 %   V2 = smoothMesh(V, F)
 %   [V2, F2] = smoothMesh(V, F)
@@ -32,6 +32,17 @@ function [v2, faces] = smoothMesh(vertices, faces, varargin)
 % Created: 2013-04-29,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2013 INRA - Cepia Software Platform.
 
+var1 = varargin{1};
+if isstruct(var1)
+    vertices = var1.vertices;
+    faces = var1.faces;
+    varargin(1) = [];
+else
+    vertices = varargin{1};
+    faces = varargin{1};
+    varargin(1:2) = [];
+end
+
 % determine number of iterations
 nIter = 1;
 if ~isempty(varargin)
@@ -62,6 +73,7 @@ for k = 1:nIter
     v2 = adj * v2;
 end
 
+varargout = formatMeshOutput(nargout, v2, faces);
 
 %% Old version
 % % Compute vertex adjacencies

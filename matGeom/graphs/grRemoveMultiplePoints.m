@@ -1,5 +1,5 @@
 function varargout = grRemoveMultiplePoints(nodes, edges)
-%GRREMOVEMULTIPLEPOINTS Remove groups of close nodes in a graph
+%GRREMOVEMULTIPLEPOINTS Remove groups of close nodes in a graph.
 %
 %   grRemoveMultiplePoints(nodes, edges)
 %   Detects groups of nodes that belongs to the same global node.

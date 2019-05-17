@@ -1,5 +1,5 @@
 function pos = planePosition(point, plane)
-%PLANEPOSITION Compute position of a point on a plane
+%PLANEPOSITION Compute position of a point on a plane.
 %
 %   PT2 = planePosition(POINT, PLANE)
 %   POINT has format [X Y Z], and plane has format

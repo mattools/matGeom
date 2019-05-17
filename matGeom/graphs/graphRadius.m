@@ -1,5 +1,5 @@
 function r = graphRadius(v, e, l)
-%GRAPHRADIUS Radius of a graph
+%GRAPHRADIUS Radius of a graph.
 %
 %   R = graphRadius(V, E)
 %   Computes the radius of the graph given by V and E. The radius of the

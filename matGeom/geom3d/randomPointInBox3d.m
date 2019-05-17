@@ -1,5 +1,5 @@
 function points = randomPointInBox3d(box, N, varargin)
-%RANDOMPOINTINBOX3D Generate random point(s) within a 3D box
+%RANDOMPOINTINBOX3D Generate random point(s) within a 3D box.
 %
 %   PTS = randomPointInBox3d(BOX)
 %   Generate a random point within the 3D box BOX. The result is a 1-by-3

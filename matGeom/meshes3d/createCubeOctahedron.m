@@ -1,5 +1,5 @@
 function varargout = createCubeOctahedron()
-%CREATECUBEOCTAHEDRON Create a 3D mesh representing a cube-octahedron
+%CREATECUBEOCTAHEDRON Create a 3D mesh representing a cube-octahedron.
 %
 %   [V, E, F] = createCubeOctahedron;
 %   Cubeoctahedron can be seen either as a truncated cube, or as a

@@ -1,5 +1,5 @@
 function b = isPointInPolygon(point, poly)
-%ISPOINTINPOLYGON Test if a point is located inside a polygon
+%ISPOINTINPOLYGON Test if a point is located inside a polygon.
 %
 %   B = isPointInPolygon(POINT, POLYGON)
 %   Returns true if the point is located within the given polygon.

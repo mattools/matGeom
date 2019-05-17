@@ -1,5 +1,5 @@
 function box = boundingBox(points)
-%BOUNDINGBOX Bounding box of a set of points
+%BOUNDINGBOX Bounding box of a set of points.
 %
 %   BOX = boundingBox(POINTS)
 %   Returns the bounding box of the set of points POINTS. POINTS can be

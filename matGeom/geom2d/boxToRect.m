@@ -1,5 +1,5 @@
 function rect = boxToRect(box)
-%BOXTORECT Convert box data to rectangle data
+%BOXTORECT Convert box data to rectangle data.
 %
 %   RECT = boxToRect(BOX)
 %   Converts from boxrepresentation to rectangle representation.

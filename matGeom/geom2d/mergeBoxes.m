@@ -1,5 +1,5 @@
 function box = mergeBoxes(box1, box2)
-%MERGEBOXES Merge two boxes, by computing their greatest extent
+%MERGEBOXES Merge two boxes, by computing their greatest extent.
 %
 %   BOX = mergeBoxes(BOX1, BOX2);
 %

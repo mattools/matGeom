@@ -1,5 +1,5 @@
 function edge = createEdge3d(varargin)
-%CREATEEDGE3D Create an edge between two 3D points, or from a 3D line
+%CREATEEDGE3D Create an edge between two 3D points, or from a 3D line.
 %
 %   E = createEdge3d(P1, P2)
 %   Creates the 3D edge joining the two points P1 and P2.

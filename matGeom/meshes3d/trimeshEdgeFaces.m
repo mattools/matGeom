@@ -1,5 +1,5 @@
 function edgeFaces = trimeshEdgeFaces(faces, varargin)
-%TRIMESHEDGEFACES Compute index of faces adjacent to each edge of a triangular mesh
+%TRIMESHEDGEFACES Compute index of faces adjacent to each edge of a triangular mesh.
 %
 %   EF = trimeshEdgeFaces(FACES)
 %   EF = trimeshEdgeFaces(VERTICES, FACES)

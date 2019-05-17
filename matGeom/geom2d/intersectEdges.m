@@ -1,5 +1,5 @@
 function point = intersectEdges(edge1, edge2, varargin)
-%INTERSECTEDGES Return all intersections between two set of edges
+%INTERSECTEDGES Return all intersections between two set of edges.
 %
 %   P = intersectEdges(E1, E2);
 %   returns the intersection point of edges E1 and E2. 

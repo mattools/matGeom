@@ -1,5 +1,5 @@
 function trans = composeTransforms3d(varargin)
-%COMPOSETRANSFORMS3D Concatenate several space transformations
+%COMPOSETRANSFORMS3D Concatenate several space transformations.
 %
 %   TRANS = composeTransforms3d(TRANS1, TRANS2, ...);
 %   Computes the affine transform equivalent to performing successively

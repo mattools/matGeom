@@ -1,5 +1,5 @@
 function varargout = midPoint(varargin)
-%MIDPOINT Middle point of two points or of an edge
+%MIDPOINT Middle point of two points or of an edge.
 %
 %   MID = midPoint(P1, P2)
 %   Compute the middle point of the two points P1 and P2.

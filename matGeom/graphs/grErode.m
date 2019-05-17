@@ -1,5 +1,5 @@
 function varargout = grErode(varargin)
-%GRERODE Morphological erosion on graph
+%GRERODE Morphological erosion on graph.
 %
 %   LBL2 = grErode(EDGES, LBL1)
 %   Each label of the graph is assigned the smallest label of its

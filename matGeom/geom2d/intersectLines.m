@@ -1,5 +1,5 @@
 function point = intersectLines(line1, line2, varargin)
-%INTERSECTLINES Return all intersection points of N lines in 2D
+%INTERSECTLINES Return all intersection points of N lines in 2D.
 %
 %   PT = intersectLines(L1, L2);
 %   returns the intersection point of lines L1 and L2. L1 and L2 are 1-by-4

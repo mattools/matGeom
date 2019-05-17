@@ -1,5 +1,5 @@
 function mat = createRotation3dLineAngle(line, theta)
-%CREATEROTATION3DLINEANGLE Create rotation around a line by an angle theta
+%CREATEROTATION3DLINEANGLE Create rotation around a line by an angle theta.
 %
 %   MAT = createRotation3dLineAngle(LINE, ANGLE)
 %

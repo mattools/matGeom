@@ -1,5 +1,5 @@
 function pts2 = grFaceToPolygon(varargin)
-%GRFACETOPOLYGON Compute the polygon corresponding to a graph face
+%GRFACETOPOLYGON Compute the polygon corresponding to a graph face.
 %
 %   PTS2 = grFaceToPolygon(NODES, EDGES, FACES, INDF)
 %   PTS2 = grFaceToPolygon(NODES, FACES, INDF)

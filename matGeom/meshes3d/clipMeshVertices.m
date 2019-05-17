@@ -1,5 +1,5 @@
 function varargout = clipMeshVertices(v, f, b, varargin)
-%CLIPMESHVERTICES Clip vertices of a surfacic mesh and remove outer faces
+%CLIPMESHVERTICES Clip vertices of a surfacic mesh and remove outer faces.
 %
 %   [V2, F2] = clipMeshVertices(V, F, B)
 %   Clip a mesh represented by vertex array V and face array F, with the
@@ -8,7 +8,7 @@ function varargout = clipMeshVertices(v, f, b, varargin)
 %   all vertices within the box.
 %   
 %   [V2, F2] = clipMeshVertices(..., 'shape', 'sphere') Specify the shape.
-%   Default is 'box'. But it's also possible to use a 'sphere'.
+%   Default is 'box'. But it is also possible to use 'sphere' or 'plane'.
 %   
 %   [V2, F2] = clipMeshVertices(..., 'inside', false) removes the inner 
 %   faces instead of the outer faces.
@@ -49,11 +49,11 @@ if isstruct(v)
 end
 
 parser = inputParser;
-validStrings = {'box','sphere'};
-addParameter(parser,'shape','box',@(x) any(validatestring(x, validStrings)));
-addParameter(parser,'inside',true,@islogical);
-addParameter(parser,'trimMesh',false,@islogical);
-parse(parser,varargin{:});
+validStrings = {'box', 'sphere', 'plane'};
+addParameter(parser, 'shape', 'box', @(x) any(validatestring(x, validStrings)));
+addParameter(parser, 'inside', true, @islogical);
+addParameter(parser, 'trimMesh', false, @islogical);
+parse(parser, varargin{:});
 
 % clip the vertices
 [v2, indVertices] = clipPoints3d(v, b,...

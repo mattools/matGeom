@@ -1,5 +1,5 @@
 function varargout = cubicBezierToPolyline(points, varargin)
-%CUBICBEZIERTOPOLYLINE Compute equivalent polyline from bezier curve control
+%CUBICBEZIERTOPOLYLINE Compute equivalent polyline from bezier curve control.
 %
 %   POLY = cubicBezierToPolyline(POINTS, N)
 %   Creates a polyline with N edges from the coordinates of the 4 control

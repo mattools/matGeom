@@ -1,5 +1,5 @@
 function varargout = drawSphere(varargin)
-%DRAWSPHERE Draw a sphere as a mesh
+%DRAWSPHERE Draw a sphere as a mesh.
 %
 %   drawSphere(SPHERE)
 %   Where SPHERE = [XC YC ZC R], draw the sphere centered on the point with

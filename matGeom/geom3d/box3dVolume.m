@@ -1,5 +1,5 @@
 function vol = box3dVolume(box)
-%BOX3DVOLUME Volume of a 3-dimensional box
+%BOX3DVOLUME Volume of a 3-dimensional box.
 %
 %   V = box3dVolume(BOX)
 %

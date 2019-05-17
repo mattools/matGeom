@@ -1,5 +1,5 @@
 function elli = polygonInertiaEllipse(poly)
-%POLYGONINERTIAELLIPSE Compute ellipse with same inertia moments as polygon
+%POLYGONINERTIAELLIPSE Compute ellipse with same inertia moments as polygon.
 %
 %   ELLI = polygonInertiaEllipse(POLY)
 %

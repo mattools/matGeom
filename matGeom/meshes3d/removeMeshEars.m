@@ -1,5 +1,5 @@
 function [vertices2, faces2] = removeMeshEars(vertices, faces, varargin)
-%REMOVEMESHEARS Remove vertices that are connected to only one face
+%REMOVEMESHEARS Remove vertices that are connected to only one face.
 %
 %   [V, F] = removeMeshEars(V, F)
 %

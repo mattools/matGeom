@@ -1,5 +1,5 @@
 function ell = inertiaEllipse(points)
-%INERTIAELLIPSE Inertia ellipse of a set of points
+%INERTIAELLIPSE Inertia ellipse of a set of points.
 %
 %   ELL = inertiaEllipse(PTS);
 %   where PTS is a N*2 array containing coordinates of N points, computes

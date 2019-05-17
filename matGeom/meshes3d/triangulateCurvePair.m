@@ -1,5 +1,5 @@
 function [vertices, facets] = triangulateCurvePair(curve1, curve2)
-%TRIANGULATECURVEPAIR Compute triangulation between a pair of 3D open curves
+%TRIANGULATECURVEPAIR Compute triangulation between a pair of 3D open curves.
 %
 %   [V, F] = testTriangulateCurvePair(CURVE1, CURVE2)
 %

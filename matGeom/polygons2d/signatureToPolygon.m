@@ -1,5 +1,5 @@
 function poly = signatureToPolygon(signature, varargin)
-%SIGNATURETOPOLYGON Reconstruct a polygon from its polar signature
+%SIGNATURETOPOLYGON Reconstruct a polygon from its polar signature.
 %
 %   POLY = signatureToPolygon(SIGNATURE)
 %   POLY = signatureToPolygon(SIGNATURE, ANGLES)

@@ -1,5 +1,5 @@
 function varargout = drawEllipse3d(varargin)
-%DRAWELLIPSE3D Draw a 3D ellipse
+%DRAWELLIPSE3D Draw a 3D ellipse.
 %
 %   Possible calls for the function :
 %   drawEllipse3d([XC YC ZC A B THETA PHI])

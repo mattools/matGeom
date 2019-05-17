@@ -1,5 +1,5 @@
 function S = cylinderSurfaceArea(cyl)
-%CYLINDERSURFACEAREA  Surface area of a cylinder
+%CYLINDERSURFACEAREA  Surface area of a cylinder.
 %
 %   S = cylinderSurfaceArea(CYL)
 %   Computes the surface area of the cylinder defined by:

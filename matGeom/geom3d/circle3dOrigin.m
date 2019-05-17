@@ -1,5 +1,5 @@
 function ori = circle3dOrigin(varargin)
-%CIRCLE3DORIGIN Return the first point of a 3D circle
+%CIRCLE3DORIGIN Return the first point of a 3D circle.
 %
 %   P = circle3dOrigin([XC YC ZC R THETA PHI])
 %   P = circle3dOrigin([XC YC ZC R THETA PHI PSI])

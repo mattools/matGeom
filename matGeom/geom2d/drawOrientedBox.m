@@ -1,5 +1,5 @@
 function varargout = drawOrientedBox(box, varargin)
-%DRAWORIENTEDBOX Draw centered oriented rectangle
+%DRAWORIENTEDBOX Draw centered oriented rectangle.
 %   
 %   Syntax
 %   drawOrientedBox(BOX)

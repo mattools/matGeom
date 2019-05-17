@@ -1,5 +1,5 @@
 function varargout = polygonContains(poly, point)
-%POLYGONCONTAINS Test if a point is contained in a multiply connected polygon
+%POLYGONCONTAINS Test if a point is contained in a multiply connected polygon.
 %
 %   B = polygonContains(POLYGON, POINT);
 %   Returns TRUE if the (possibly multi-connected) polygon POLYGON contains

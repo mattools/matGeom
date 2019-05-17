@@ -1,5 +1,5 @@
 function vn = normalize(v)
-%NORMALIZE Normalize a vector
+%NORMALIZE Normalize a vector.
 %
 %   V2 = normalize(V);
 %   Returns the normalization of vector V, such that ||V|| = 1. V can be

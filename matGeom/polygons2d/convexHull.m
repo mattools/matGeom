@@ -1,5 +1,5 @@
 function [hull, inds] = convexHull(points, varargin)
-%CONVEXHULL Convex hull of a set of points
+%CONVEXHULL Convex hull of a set of points.
 %
 %   POLY = convexHull(POINTS)
 %   Computes the convex hull of the set of points POINTS. This function is

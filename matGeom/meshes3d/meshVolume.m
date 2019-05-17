@@ -1,5 +1,5 @@
 function vol = meshVolume(vertices, edges, faces)
-%MESHVOLUME Volume of the space enclosed by a polygonal mesh
+%MESHVOLUME Volume of the space enclosed by a polygonal mesh.
 %
 %   V = meshVolume(VERTS, FACES)
 %   Computes the volume of the space enclosed by the polygonal mesh

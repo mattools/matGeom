@@ -1,5 +1,5 @@
 function varargout = drawCircleArc3d(arc, varargin)
-%DRAWCIRCLEARC3D Draw a 3D circle arc
+%DRAWCIRCLEARC3D Draw a 3D circle arc.
 %
 %   drawCircleArc3d([XC YC ZC R THETA PHI PSI START EXTENT])
 %   [XC YC ZC]  : coordinate of arc center

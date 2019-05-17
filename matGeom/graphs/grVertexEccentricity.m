@@ -1,5 +1,5 @@
 function g = grVertexEccentricity(v, e, l, inds)
-%GRVERTEXECCENTRICITY Eccentricity of vertices in the graph
+%GRVERTEXECCENTRICITY Eccentricity of vertices in the graph.
 %
 %   G = grVertexEccentricity(V, E, L)
 %   V is the array of vertices

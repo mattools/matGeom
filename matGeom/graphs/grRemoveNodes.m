@@ -1,5 +1,5 @@
 function [nodes2, edges2] = grRemoveNodes(nodes, edges, rmNodes)
-%GRREMOVENODES Remove several nodes in a graph
+%GRREMOVENODES Remove several nodes in a graph.
 %
 %   usage:
 %   [NODES2 EDGES2] = grRemoveNodes(NODES, EDGES, NODES2REMOVE)

@@ -1,5 +1,5 @@
 function varargout = drawCircle3d(varargin)
-%DRAWCIRCLE3D Draw a 3D circle
+%DRAWCIRCLE3D Draw a 3D circle.
 %
 %   Possible calls for the function:
 %   drawCircle3d([XC YC ZC R THETA PHI])

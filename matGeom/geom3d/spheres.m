@@ -1,5 +1,5 @@
 function spheres(varargin)
-%SPHERES Description of functions operating on 3D spheres
+%SPHERES Description of functions operating on 3D spheres.
 %
 %   Spheres are represented by their center and their radius:
 %   S = [xc yc zc r];

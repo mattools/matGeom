@@ -1,5 +1,5 @@
 function varargout = drawEllipseCylinder(cyl, varargin)
-%DRAWELLIPSECYLINDER Draw a cylinder with ellipse cross-section
+%DRAWELLIPSECYLINDER Draw a cylinder with ellipse cross-section.
 %
 %   drawEllipseCylinder(CYL)
 %   draws the cylinder CYL on the current axis.

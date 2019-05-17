@@ -1,5 +1,5 @@
 function inds = graphPeripheralVertices(v, e, l)
-%GRAPHPERIPHERALVERTICES Peripheral vertices of a graph
+%GRAPHPERIPHERALVERTICES Peripheral vertices of a graph.
 %
 %   INDS = graphPeripheralVertices(V, E)
 %   Return indices of peripheral vertices, that is, vertices whose

@@ -59,5 +59,15 @@ polys = intersectPlaneMesh(plane, v, f);
 testCase.assertTrue(iscell(polys));
 testCase.assertEqual(0, length(polys));
 
+function test_torus(testCase)
+
+torus = [0 0 0  30 10 0 0];
+[v, f] = torusMesh(torus);
+
+plane = [0 0 0  1 0 0  0 0 1];
+
+polys = intersectPlaneMesh(plane, v, f);
+
+testCase.assertEqual(2, length(polys));
 
 

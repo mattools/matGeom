@@ -1,5 +1,5 @@
 function d = distancePointPlane(point, plane)
-%DISTANCEPOINTPLANE Signed distance betwen 3D point and plane
+%DISTANCEPOINTPLANE Signed distance betwen 3D point and plane.
 %
 %   D = distancePointPlane(POINT, PLANE)
 %   Returns the euclidean distance between point POINT and the plane PLANE,

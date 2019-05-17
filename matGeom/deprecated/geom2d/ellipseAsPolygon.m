@@ -1,5 +1,5 @@
 function varargout = ellipseAsPolygon(ellipse, N)
-%ELLIPSEASPOLYGON Convert an ellipse into a series of points
+%ELLIPSEASPOLYGON Convert an ellipse into a series of points.
 %
 %   Deprecated, use ellipseToPolygon instead.
 %

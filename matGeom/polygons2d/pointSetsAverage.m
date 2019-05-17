@@ -1,5 +1,5 @@
 function average = pointSetsAverage(pointSets, varargin)
-%POINTSETSAVERAGE Compute the average of several point sets
+%POINTSETSAVERAGE Compute the average of several point sets.
 %
 %   AVERAGESET = pointSetsAverage(POINTSETS)
 %   POINTSETS is a cell array containing several liste of points with the

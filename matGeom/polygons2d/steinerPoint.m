@@ -1,5 +1,5 @@
 function pt = steinerPoint(varargin)
-%STEINERPOINT Compute steiner point (weighted centroid) of a polygon
+%STEINERPOINT Compute steiner point (weighted centroid) of a polygon.
 %
 %   PT = steinerPoint(POINTS);
 %   PT = steinerPoint(PTX, PTY);

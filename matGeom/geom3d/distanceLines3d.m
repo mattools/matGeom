@@ -1,5 +1,5 @@
 function [d, pt1, pt2] = distanceLines3d(line1, line2)
-%DISTANCELINES3D Minimal distance between two 3D lines
+%DISTANCELINES3D Minimal distance between two 3D lines.
 %
 %   D = distanceLines3d(LINE1, LINE2);
 %   Returns the distance between line LINE1 and the line LINE2, given as:

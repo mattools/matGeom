@@ -1,5 +1,5 @@
 function [dist, proj] = distancePointMesh(point, vertices, faces, varargin)
-%DISTANCEPOINTMESH  Shortest distance between a (3D) point and a triangle mesh
+%DISTANCEPOINTMESH  Shortest distance between a (3D) point and a triangle mesh.
 %
 %   DIST = distancePointMesh(POINT, VERTICES, FACES)
 %   Returns the shortest distance between the query point POINT and the

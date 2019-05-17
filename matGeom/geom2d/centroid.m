@@ -1,5 +1,5 @@
 function center = centroid(varargin)
-%CENTROID Compute centroid (center of mass) of a set of points
+%CENTROID Compute centroid (center of mass) of a set of points.
 %
 %   PTS = centroid(POINTS)
 %   PTS = centroid(PTX, PTY)

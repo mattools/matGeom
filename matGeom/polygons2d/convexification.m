@@ -1,5 +1,5 @@
 function co = convexification(varargin)
-%CONVEXIFICATION Compute the convexification of a polygon
+%CONVEXIFICATION Compute the convexification of a polygon.
 %
 %   CO = convexification(H)
 %   Creates convexification from support function. Support function is

@@ -1,5 +1,5 @@
 function varargout = circleArcAsCurve(arc, N)
-%CIRCLEARCASCURVE Convert a circle arc into a series of points
+%CIRCLEARCASCURVE Convert a circle arc into a series of points.
 %
 %   deprecated: replaced by circleArcToPolyline
 %

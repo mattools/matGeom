@@ -1,5 +1,5 @@
 function varargout = drawCylinder(cyl, varargin)
-%DRAWCYLINDER Draw a cylinder
+%DRAWCYLINDER Draw a cylinder.
 %
 %   drawCylinder(CYL)
 %   where CYL is a cylinder defined by [x1 y1 z1 x2 y2 z2 r]:

@@ -1,5 +1,5 @@
 function centroids = faceCentroids(nodes, faces)
-%FACECENTROIDS Compute centroids of a mesh faces
+%FACECENTROIDS Compute centroids of a mesh faces.
 %
 %   NORMALS = faceCentroids(VERTICES, FACES)
 %   VERTICES is a set of 3D points  (as a N-by-3 array), and FACES is

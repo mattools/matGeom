@@ -1,5 +1,5 @@
 function points = randomPointInBox(box, N, varargin)
-%RANDOMPOINTINBOX Generate random point within a box
+%RANDOMPOINTINBOX Generate random point within a box.
 %
 %   PTS = randomPointInBox(BOX)
 %   Generate a random point within the box BOX. The result is a 1-by-2 row

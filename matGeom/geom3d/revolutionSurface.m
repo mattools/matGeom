@@ -1,5 +1,5 @@
 function varargout = revolutionSurface(varargin)
-%REVOLUTIONSURFACE Create a surface of revolution from a planar curve
+%REVOLUTIONSURFACE Create a surface of revolution from a planar curve.
 %
 %   usage 
 %   [X Y Z] = revolutionSurface(C1, C2, N);

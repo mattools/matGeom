@@ -1,5 +1,5 @@
 function varargout = drawDigraph(varargin)
-%DRAWDIGRAPH Draw a directed graph, given as a set of vertices and edges
+%DRAWDIGRAPH Draw a directed graph, given as a set of vertices and edges.
 %
 %   drawDigraph(NODES1, NODES2, EDGES) 
 %   NODES1 are originating vertices

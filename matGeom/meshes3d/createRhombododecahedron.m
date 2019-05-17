@@ -1,5 +1,5 @@
 function varargout = createRhombododecahedron()
-%CREATERHOMBODODECAHEDRON Create a 3D mesh representing a rhombododecahedron
+%CREATERHOMBODODECAHEDRON Create a 3D mesh representing a rhombododecahedron.
 %
 %   [V, E, F] = createRhombododecahedron
 %   V is a 14-by-3 array with vertex coordinate, 

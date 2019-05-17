@@ -1,5 +1,5 @@
 function theta = angle2Points(varargin)
-%ANGLE2POINTS Compute horizontal angle between 2 points
+%ANGLE2POINTS Compute horizontal angle between 2 points.
 %
 %   ALPHA = angle2Points(P1, P2),
 %   Pi are either [1*2] arrays, or [N*2] arrays, in this case ALPHA is a 

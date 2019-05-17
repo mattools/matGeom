@@ -1,5 +1,5 @@
 function varargout = cylinderMesh(cyl, varargin)
-%CYLINDERMESH  Create a 3D mesh representing a cylinder
+%CYLINDERMESH  Create a 3D mesh representing a cylinder.
 %
 %   [V F] = cylinderMesh(CYL)
 %   Computes vertex coordinates and face vertex indices of a mesh

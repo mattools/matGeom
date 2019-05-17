@@ -1,5 +1,5 @@
 function a = isTransform3d(trans, varargin)
-%ISTRANSFORM3D Check if input is a affine transformation matrix
+%ISTRANSFORM3D Check if input is a affine transformation matrix.
 %
 %   A = isTransform3d(TRANS) where TRANS should be a transformation matrix.
 %   The function accepts transformations given using the following formats:

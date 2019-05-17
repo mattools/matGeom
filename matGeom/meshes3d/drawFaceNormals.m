@@ -1,5 +1,5 @@
 function varargout = drawFaceNormals(varargin)
-%DRAWFACENORMALS Draw normal vector of each face in a mesh
+%DRAWFACENORMALS Draw normal vector of each face in a mesh.
 %
 %   drawFaceNormals(V, E, F)
 %   Compute and draw the face normals of the mesh defined by vertices V,

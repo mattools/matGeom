@@ -1,5 +1,5 @@
 function res = isPointOnPolyline(point, poly, varargin)
-%ISPOINTONPOLYLINE Test if a point belongs to a polyline
+%ISPOINTONPOLYLINE Test if a point belongs to a polyline.
 %
 %   B = isPointOnPolyline(POINT, POLY)
 %   Returns TRUE of the point POINT belong to the polyline defined by the

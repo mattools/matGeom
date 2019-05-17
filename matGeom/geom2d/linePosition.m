@@ -1,5 +1,5 @@
 function pos = linePosition(point, line, varargin)
-%LINEPOSITION Position of a point on a line
+%LINEPOSITION Position of a point on a line.
 %
 %   POS = linePosition(POINT, LINE);
 %   Computes position of point POINT on the line LINE, relative to origin

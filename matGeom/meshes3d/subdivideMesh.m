@@ -1,5 +1,5 @@
 function [vertices2, faces2] = subdivideMesh(vertices, faces, n)
-%SUBDIVIDEMESH Subdivides each face of the mesh
+%SUBDIVIDEMESH Subdivides each face of the mesh.
 %
 %   [V2 F2] = subdivideMesh(V, F, N)
 %   Subdivides the mesh specified by (V,F) such that each face F is divided

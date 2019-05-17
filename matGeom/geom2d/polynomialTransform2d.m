@@ -1,5 +1,5 @@
 function res = polynomialTransform2d(pts, coeffs)
-%POLYNOMIALTRANSFORM2D Apply a polynomial transform to a set of points
+%POLYNOMIALTRANSFORM2D Apply a polynomial transform to a set of points.
 %
 %   RES = polynomialTransform2d(PTS, COEFFS)
 %   Transforms the input points PTS given as a N-by-2 array of coordinates

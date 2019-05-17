@@ -1,5 +1,5 @@
 function edge2 = clipEdge(edge, box)
-%CLIPEDGE Clip an edge with a rectangular box
+%CLIPEDGE Clip an edge with a rectangular box.
 %
 %   EDGE2 = clipEdge(EDGE, BOX);
 %   EDGE: [x1 y1 x2 y2],

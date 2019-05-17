@@ -1,5 +1,5 @@
 function [dist, pos] = distancePointLine(point, line)
-%DISTANCEPOINTLINE Minimum distance between a point and a line
+%DISTANCEPOINTLINE Minimum distance between a point and a line.
 %
 %   D = distancePointLine(POINT, LINE)
 %   Return the euclidean distance between line LINE and point POINT. 

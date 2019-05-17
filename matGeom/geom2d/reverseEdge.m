@@ -1,5 +1,5 @@
 function res = reverseEdge(edge)
-%REVERSEEDGE Intervert the source and target vertices of edge
+%REVERSEEDGE Intervert the source and target vertices of edge.
 %
 %   REV = reverseEdge(EDGE);
 %   Returns the opposite edge of EDGE.

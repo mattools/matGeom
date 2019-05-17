@@ -1,5 +1,5 @@
 function h = drawPlane3d(plane, varargin)
-%DRAWPLANE3D Draw a plane clipped in the current axes
+%DRAWPLANE3D Draw a plane clipped by the current axes.
 %
 %   drawPlane3d(PLANE) draws a plane of the format:
 %       [x0 y0 z0  dx1 dy1 dz1  dx2 dy2 dz2]
@@ -133,3 +133,4 @@ htmp = patch( ...
 if nargout > 0
     h = htmp;
 end
+

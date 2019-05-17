@@ -1,5 +1,5 @@
 function varargout = createTetrahedron()
-%CREATETETRAHEDRON Create a 3D mesh representing a tetrahedron
+%CREATETETRAHEDRON Create a 3D mesh representing a tetrahedron.
 %
 %   [V, E, F] = createTetrahedron
 %   create a simple tetrahedron, using mesh representation. The tetrahedron

@@ -1,5 +1,5 @@
 function dist = distancePolygonsNoCross(poly1, poly2)
-%DISTANCEPOLYGONSNOCROSS Compute the shortest distance between 2 polygons
+%DISTANCEPOLYGONSNOCROSS Compute the shortest distance between 2 polygons.
 %
 %   DIST = distancePolygonsNoCross(POLY1, POLY2)
 %   Computes the shortest distance between the boundaries of the two

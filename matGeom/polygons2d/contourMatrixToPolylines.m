@@ -1,5 +1,5 @@
 function polys = contourMatrixToPolylines(C)
-%CONTOURMATRIXTOPOLYLINES Converts a contour matrix array into a polyline set
+%CONTOURMATRIXTOPOLYLINES Converts a contour matrix array into a polyline set.
 %
 %   POLYS = contourMatrixToPolylines(C)
 %   Converts the contour matrix array, as given as the result of the

@@ -1,5 +1,5 @@
 function polyhedra(varargin)
-%POLYHEDRA Index of classical polyhedral meshes
+%POLYHEDRA Index of classical polyhedral meshes.
 %   
 %   Polyhedra are specific meshes, with additional assumptions:
 %   * the set of faces is assumed to enclose a single 3D domain

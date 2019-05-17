@@ -1,5 +1,5 @@
 function trans = translation3d(varargin)
-%TRANSLATION3D return 4x4 matrix of a 3D translation
+%TRANSLATION3D return 4x4 matrix of a 3D translation.
 %
 %   usage :
 %   TRANS = translation3d(DX, DY, DZ);

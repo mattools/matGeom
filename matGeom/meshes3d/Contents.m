@@ -74,6 +74,9 @@
 %   meshFaceAdjacency        - Compute adjacency list of face around each face
 %   meshAdjacencyMatrix      - Compute adjacency matrix of a mesh from set of faces
 %   checkMeshAdjacentFaces   - Check if adjacent faces of a mesh have similar orientation
+%   meshBoundary             - Boundary of a mesh as a collection of 3D line strings
+%   meshBoundaryEdgeIndices  - Indices of boundary edges of a mesh
+%   meshBoundaryVertexIndices  - Indices of boundary vertices of a mesh
 %
 % Basic edition on meshes
 %   removeMeshVertices       - Remove vertices and associated faces from a mesh

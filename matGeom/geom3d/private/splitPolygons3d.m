@@ -1,5 +1,5 @@
 function polygons = splitPolygons3d(polygon)
-%SPLITPOLYGONS3D Convert a NaN separated polygon list to a cell array of polygons
+%SPLITPOLYGONS3D Convert a NaN separated polygon list to a cell array of polygons.
 %
 %   Same function as splitpolygons for planar case, included in private
 %   directory of geom3d to avoid missing file problems.

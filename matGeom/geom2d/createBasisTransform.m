@@ -1,5 +1,5 @@
 function transfo = createBasisTransform(source, target)
-%CREATEBASISTRANSFORM Compute matrix for transforming a basis into another basis
+%CREATEBASISTRANSFORM Compute matrix for transforming a basis into another basis.
 %
 %   TRANSFO = createBasisTransform(SOURCE, TARGET)
 %   Both SOURCE and TARGET represent basis, in the following form:

@@ -1,5 +1,5 @@
 function varargout = drawGraphFaces(varargin)
-%DRAWGRAPHFACES Draw faces of a graph
+%DRAWGRAPHFACES Draw faces of a graph.
 %
 %   DEPRECATED. Replaced by fillGraphFaces
 %

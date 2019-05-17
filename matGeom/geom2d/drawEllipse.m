@@ -1,5 +1,5 @@
 function varargout = drawEllipse(varargin)
-%DRAWELLIPSE Draw an ellipse on the current axis
+%DRAWELLIPSE Draw an ellipse on the current axis.
 %
 %   drawEllipse(ELLI);
 %   Draws the ellipse ELLI in the form [XC YC RA RB THETA], with center

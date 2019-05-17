@@ -1,5 +1,5 @@
 function varargout = drawBox(box, varargin)
-%DRAWBOX Draw a box defined by coordinate extents
+%DRAWBOX Draw a box defined by coordinate extents.
 %   
 %   drawBox(BOX)
 %   Draws a box defined by its extent: BOX = [XMIN XMAX YMIN YMAX].

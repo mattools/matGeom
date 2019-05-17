@@ -1,5 +1,5 @@
 function newFaces = minConvexHull(points, varargin)
-%MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points
+%MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.
 %
 %   FACES = minConvexHull(PTS)
 %   NODES is a set of 3D points  (as a Nx3 array). The function computes

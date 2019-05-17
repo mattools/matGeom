@@ -1,5 +1,5 @@
 function TFM = createRotationVectorPoint3d(A,B,P)
-%CREATEROTATIONVECTORPOINT3D Calculates the rotation between two vectors
+%CREATEROTATIONVECTORPOINT3D Calculates the rotation between two vectors.
 %   around a point
 %   
 %   TFM = createRotationVectorPoint3d(A,B,P) returns the transformation 

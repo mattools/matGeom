@@ -1,5 +1,5 @@
 function nodes2 = grNeighborNodes(edges, node)
-%GRNEIGHBORNODES Find adjacent nodes of a given node
+%GRNEIGHBORNODES Find adjacent nodes of a given node.
 %
 %   Deprecated, use 'grAdjacentNodes' instead.
 %

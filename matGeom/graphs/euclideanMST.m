@@ -1,5 +1,5 @@
 function varargout = euclideanMST(points)
-%EUCLIDEANMST Build euclidean minimal spanning tree of a set of points
+%EUCLIDEANMST Build euclidean minimal spanning tree of a set of points.
 %
 %   EDGES = euclideanMST(POINTS)
 %   POINTS is a [NxP] array, N being the number of points and P being the

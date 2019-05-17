@@ -1,5 +1,5 @@
 function point = intersectEdgePlane(edge, plane, varargin)
-%INTERSECTEDGEPLANE Return intersection point between a plane and a edge
+%INTERSECTEDGEPLANE Return intersection point between a plane and a edge.
 %
 %   PT = intersectEdgePlane(edge, PLANE) return the intersection point of
 %   the given edge and the given plane.

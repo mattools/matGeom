@@ -1,5 +1,5 @@
 function edges3d(varargin)
-%EDGES3D  Description of functions operating on 3D edges
+%EDGES3D  Description of functions operating on 3D edges.
 %
 %   A 3D edge is represented by the coordinates of its extremities:
 %   EDGE = [X1 Y1 Z1  X2 Y2 Z2];
@@ -9,7 +9,7 @@ function edges3d(varargin)
 %
 %   See also
 %   lines3d, edges2d, createEdge3d, edgeLength3d
-%   intersectEdgePlane, edgeToLine3d, clipEdge3d, midPoint3d
+%   intersectEdgePlane, edgeToLine3d, edgeToLine3d, clipEdge3d, midPoint3d
 %   distancePointEdge3d, drawEdge3d, drawSphericalEdge
  
 % ------

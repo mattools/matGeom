@@ -1,5 +1,5 @@
 function poly = edgeToPolyline(edge, N)
-%EDGETOPOLYLINE Convert an edge to a polyline with a given number of segments
+%EDGETOPOLYLINE Convert an edge to a polyline with a given number of segments.
 %
 %   POLY = edgeToPolyline(EDGE, N)
 %   

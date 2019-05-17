@@ -1,5 +1,5 @@
 function edge = clipLine3d(line, box)
-%CLIPLINE3D Clip a line with a box and return an edge
+%CLIPLINE3D Clip a line with a box and return an edge.
 %
 %   EDGE = clipLine3d(LINE, BOX);
 %   Clips the line LINE with the bounds given in BOX, and returns the

@@ -1,5 +1,5 @@
 function edges = crackPattern(box, points, alpha, varargin)
-%CRACKPATTERN Create a (bounded) crack pattern tessellation
+%CRACKPATTERN Create a (bounded) crack pattern tessellation.
 %
 %   E = crackPattern(BOX, POINTS, ALPHA)
 %   create a crack propagation pattern wit following parameters :

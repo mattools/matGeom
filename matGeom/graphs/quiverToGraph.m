@@ -1,5 +1,5 @@
 function [v, e] = quiverToGraph(x, y, dx, dy)
-%QUIVERTOGRAPH Converts quiver data to quad mesh
+%QUIVERTOGRAPH Converts quiver data to quad mesh.
 %
 %   [V E] = quiverToGraph(x, y, dx, dy)
 %   x, y, dx and dy are matrices the same dimension, typically ones used

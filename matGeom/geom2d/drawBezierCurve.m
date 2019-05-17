@@ -1,5 +1,5 @@
 function varargout = drawBezierCurve(points, varargin)
-%DRAWBEZIERCURVE Draw a cubic bezier curve defined by 4 control points
+%DRAWBEZIERCURVE Draw a cubic bezier curve defined by 4 control points.
 %
 %   drawBezierCurve(POINTS)
 %   Draw the Bezier curve defined by the 4 control points stored in POINTS.

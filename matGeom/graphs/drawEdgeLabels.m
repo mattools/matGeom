@@ -1,5 +1,5 @@
 function varargout = drawEdgeLabels(p, e, value)
-%DRAWEDGELABELS Draw values associated to graph edges
+%DRAWEDGELABELS Draw values associated to graph edges.
 % 
 %   usage:
 %   drawEdgeLabels(NODES, EDGES, VALUES);

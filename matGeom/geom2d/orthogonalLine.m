@@ -1,5 +1,5 @@
 function res = orthogonalLine(line, point)
-%ORTHOGONALLINE Create a line orthogonal to another one through a point
+%ORTHOGONALLINE Create a line orthogonal to another one through a point.
 %
 %   PERP = orthogonalLine(LINE, POINT);
 %   Returns the line orthogonal to the line LINE and going through the

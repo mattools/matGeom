@@ -1,5 +1,5 @@
 function point = polynomialCurvePoint(t, varargin)
-%POLYNOMIALCURVEPOINT Compute point corresponding to a position
+%POLYNOMIALCURVEPOINT Compute point corresponding to a position.
 %
 %   POINT = polynomialCurvePoint(T, XCOEF, YCOEF)
 %   XCOEF and YCOEF are row vectors of coefficients, in the form:

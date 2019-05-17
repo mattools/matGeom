@@ -1,5 +1,5 @@
 function row = polygonToRow(polygon, varargin)
-%POLYGONTOROW Convert polygon coordinates to a row vector
+%POLYGONTOROW Convert polygon coordinates to a row vector.
 %
 %   ROW = polygonToRow(POLY);
 %   where POLY is a N-by-2 array of points representing vertices of the

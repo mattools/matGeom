@@ -1,5 +1,5 @@
 function points3d(varargin)
-%POINTS3D Description of functions operating on 3D points
+%POINTS3D Description of functions operating on 3D points.
 %
 %   Points are represented by their 3 Cartesian coordinates:
 %   P = [X Y Z];

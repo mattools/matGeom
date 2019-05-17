@@ -1,5 +1,5 @@
 function varargout = drawCircle(varargin)
-%DRAWCIRCLE Draw a circle on the current axis
+%DRAWCIRCLE Draw a circle on the current axis.
 %
 %   drawCircle(X0, Y0, R);
 %   Draw the circle with center (X0,Y0) and the radius R. If X0, Y0 and R

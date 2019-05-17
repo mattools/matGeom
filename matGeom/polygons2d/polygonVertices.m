@@ -1,5 +1,5 @@
 function vertices = polygonVertices(poly)
-%POLYGONVERTICES Extract all vertices of a (multi-)polygon
+%POLYGONVERTICES Extract all vertices of a (multi-)polygon.
 %
 %   VERTS = polygonVertices(POLY)
 %   Returns the set of verttices from the polygon POLY. POLY can be either:

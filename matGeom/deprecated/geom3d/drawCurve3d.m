@@ -1,5 +1,5 @@
 function varargout = drawCurve3d(varargin)
-%DRAWCURVE3D draw a 3D curve specified by a list of points
+%DRAWCURVE3D draw a 3D curve specified by a list of points.
 %
 %   drawCurve3d(COORD) packs coordinates in a single [N*3] array.
 %

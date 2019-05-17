@@ -1,5 +1,5 @@
 function varargout = drawGraph(varargin)
-%DRAWGRAPH Draw a graph, given as a set of vertices and edges
+%DRAWGRAPH Draw a graph, given as a set of vertices and edges.
 %
 %   drawGraph(NODES, EDGES) 
 %   Draws a graph specified by a set of nodes (array N-by-2 or N-by-3,

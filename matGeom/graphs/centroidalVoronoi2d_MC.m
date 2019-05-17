@@ -1,5 +1,5 @@
 function [germs, germPaths] = centroidalVoronoi2d_MC(germs, poly, varargin)
-%CENTROIDALVORONOI2D_MC Centroidal Voronoi tesselation by Monte-Carlo
+%CENTROIDALVORONOI2D_MC Centroidal Voronoi tesselation by Monte-Carlo.
 %
 %   PTS = centroidalVoronoi2d_MC(NPTS, POLY)
 %   Generate points in a polygon based on centroidal voronoi tesselation.

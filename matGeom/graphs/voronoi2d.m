@@ -1,5 +1,5 @@
 function [nodes, edges, faces] = voronoi2d(germs)
-%VORONOI2D Compute a voronoi diagram as a graph structure
+%VORONOI2D Compute a voronoi diagram as a graph structure.
 %   
 %   [NODES, EDGES, FACES] = voronoi2d(GERMS)
 %   GERMS an array of points with dimension 2

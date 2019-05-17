@@ -1,5 +1,5 @@
 function point = projPointOnPlane(point, plane)
-%PROJPOINTONPLANE Return the orthogonal projection of a point on a plane
+%PROJPOINTONPLANE Return the orthogonal projection of a point on a plane.
 %
 %   PT2 = projPointOnPlane(PT1, PLANE);
 %   Compute the (orthogonal) projection of point PT1 onto the plane PLANE,

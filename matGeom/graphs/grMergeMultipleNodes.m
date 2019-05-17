@@ -1,5 +1,5 @@
 function varargout = grMergeMultipleNodes(varargin)
-%GRMERGEMULTIPLENODES Simplify a graph by merging multiple nodes
+%GRMERGEMULTIPLENODES Simplify a graph by merging multiple nodes.
 %
 %   OUTPUT = grMergeMultipleNodes(INPUT);
 %   simplify the graph INPUT, and return the result in the graph OUTPUT.
