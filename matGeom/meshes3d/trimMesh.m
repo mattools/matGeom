@@ -3,7 +3,9 @@ function varargout = trimMesh(varargin)
 %
 %   [V2, F2] = trimMesh(V, F)
 %   Unreferenced vertices are removed.
-%   Duplicate vertices are removed (triangle meshes only).
+%   Following functions are implemented for only numeric faces:
+%       Duplicate vertices are removed.
+%       Duplicate faces are removed.
 %
 %   Example
 %     [V, F] = createIcosahedron;
@@ -35,9 +37,12 @@ if isnumeric(faces)
     faceVertexIdx = 1:length(tempVertices);
     faceVertexIdx(usedVertexIdx) = newVertexIdx(usedVertexIdx);
     faceVertexIdx(~usedVertexIdx) = nan;
-    faces2 = faceVertexIdx(tempFaces);
-    vertices2 = tempVertices(usedVertexIdx,:);
-    
+    tempFaces2 = faceVertexIdx(tempFaces);
+    tempVertices2 = tempVertices(usedVertexIdx,:);
+    % Delete duplicate faces
+    [~, uniqueFaceIdx, ~] = unique(tempFaces2, 'rows');
+    duplicateFaceIdx=~ismember(1:size(tempFaces2,1),uniqueFaceIdx);
+    [vertices2, faces2] = removeMeshFaces(tempVertices2, tempFaces2, duplicateFaceIdx);
 elseif iscell(faces)
     % identify vertices referenced by a face
     vertexUsed = false(size(vertices, 1), 1);
