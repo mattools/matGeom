@@ -1,11 +1,8 @@
-function demoInertiaEllipsoid(varargin)
+function demoInertiaEllipsoid
 %DEMOINERTIAELLIPSOID Demo program for the use of ellipsoids
 %
-%   Usage:
-%   demoInertiaEllipsoid;
-%
 %   Example
-%   demoInertiaEllipsoid
+%     demoInertiaEllipsoid
 %
 %   See also
 %     demoRevolutionSurface, demoDrawTubularMesh

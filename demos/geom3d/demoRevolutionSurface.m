@@ -1,9 +1,8 @@
 function demoRevolutionSurface
-%DEMOREVOLUTIONSURFACE  One-line description here, please.
-%   output = demoRevolutionSurface(input)
+%DEMOREVOLUTIONSURFACE Demo of revolutionSurface
 %
 %   Example
-%   demoRevolutionSurface
+%     demoRevolutionSurface
 %
 %   See also
 %
