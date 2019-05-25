@@ -12,8 +12,8 @@ function drawSoccerBall
 %   * compute intersections of planes, spheres, lines
 %   * draw spherical patches
 %
-%   Usage:
-%   drawSoccerBall
+%   Example
+%     drawSoccerBall
 %
 %   See Also
 %     demoDrawTubularMesh, demoRevolutionSurface

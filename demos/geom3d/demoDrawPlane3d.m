@@ -1,10 +1,12 @@
+function demoDrawPlane3d
 %DEMODRAWPLANE3D demo for drawPlane3d
 %
 %   Example
-%   demoDrawPlane3d
+%     demoDrawPlane3d
 %
 %   See also
 %
+
 % ------
 % Author: oqilipo
 % Created: 2017-10-13, using R2017b
