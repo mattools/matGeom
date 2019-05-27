@@ -9,13 +9,21 @@ function [nodes2, faces2] = clipConvexPolyhedronHP(nodes, faces, plane)
 %   to NODES2 vertices.
 %
 %   Example
-%   [N E F] = createCube;
-%   P = createPlane([.5 .5 .5], [1 1 1]);
-%   [N2 F2] = clipConvexPolyhedronHP(N, F, P);
-%   drawPolyhedra(N2, F2);
+%     [N, F] = createCube;
+%     P = createPlane([.5 .5 .5], [1 1 1]);
+%     [N2, F2] = clipConvexPolyhedronHP(N, F, P);
+%     figure('color','w'); view(3); axis equal
+%     drawPolyhedron(N2, F2);
+% 
+%     [v, f] = createSoccerBall;
+%     p = createPlane([-.5 .5 -.5], [1 1 1]);
+%     [v2, f2] = clipConvexPolyhedronHP(v, f, p);
+%     figure('color','w'); view(3); axis equal
+%     drawMesh(v, f, 'faceColor', 'none');
+%     drawMesh(v2, f2);
 %
 %   See also
-%   meshes3d, polyhedra, planes3d
+%     meshes3d, polyhedra, planes3d
 %
 
 % ------
