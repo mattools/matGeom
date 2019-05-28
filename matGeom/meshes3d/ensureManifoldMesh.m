@@ -1,13 +1,20 @@
 function varargout = ensureManifoldMesh(varargin)
 %ENSUREMANIFOLDMESH Apply several simplification to obtain a manifold mesh.
 %
-%   output = ensureManifoldMesh(input)
+%   Try to transform an input mesh into a manifold mesh.
+%
+%   Not all cases of "non-manifoldity" are checked, so please use with
+%   care.
+%
+%   [V2, F2] = ensureManifoldMesh(V, F);
+%   [V2, F2] = ensureManifoldMesh(MESH);
+%   MESH2 = ensureManifoldMesh(...);
 %
 %   Example
 %   ensureManifoldMesh
 %
 %   See also
-%
+%    meshes3d, isManifoldMesh
  
 % ------
 % Author: David Legland
@@ -18,9 +25,7 @@ function varargout = ensureManifoldMesh(varargin)
 
 %% Parse input arguments
 
-vertices = varargin{1};
-faces = varargin{2};
-
+[vertices, faces] = parseMeshData(varargin{:});
 verbose = true;
 
 
@@ -51,13 +56,5 @@ faces = removeDuplicateFaces(faces);
 
 %% Format output
 
-switch nargout
-    case 1
-        mesh.vertices = vertices;
-        mesh.faces = faces;
-        varargout{1} = mesh;
-    case 2
-        varargout{1} = vertices;
-        varargout{2} = faces;
-end
+varargout = formatMeshOutput(nargout, vertices, faces);
 
