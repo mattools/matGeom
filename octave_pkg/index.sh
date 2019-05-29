@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script i used by Makefile
+# This script is used by Makefile
 # You can run it like `bash index.sh OF/matgeom-1.0.0`
 DIR=$1
 PACKAGE=$(sed -n -e 's/^Title: *\(\w\+\)/\1/p' $DIR/DESCRIPTION)
