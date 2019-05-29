@@ -8,22 +8,21 @@ function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin)
 %     % Create 2D ellipse
 %     n=randi([10,100]);
 %     a=randi([30,50]); b=randi([5,25]);
-%     [x, y] = ellipseToPolygon([0 0 a b 0 ], n); x(end)=[]; y(end)=[];
-%     % 3D
+%     [x, y] = ellipseToPolygon([0 0 a b 0 ], n);
+%     % 3D and add some noise
 %     points = [x, y, zeros(n,1)];
-%     % Add some noise
 %     points=points+(-1+2*rand(n,3));
-%     center=-100+200*rand(1,3);
-%     phi=randi([-360,360]); theta=randi([-360,360]); psi=randi([-360,360]);
 %     % Create a random transformation
+%     center=-100+200*rand(1,3);
+%     phi=randi([-180,180]); theta=randi([-180,180]); psi=randi([-180,180]);
 %     TFM=eulerAnglesToRotation3d(phi, theta, psi, 'ZYZ'); TFM(1:3,4)=center';
 %     points = transformPoint3d(points, TFM);
 %     % Fit ellipse
 %     [fE, fTFM] = fitEllipse3d(points, 'vis', true);
 %     % Plot reconstructed ellipse
-%     [fx, fy] = ellipseToPolygon([0 0 fE(4), fE(5) 0 ], n); fx(end)=[]; fy(end)=[];
+%     [fx, fy] = ellipseToPolygon([0 0 fE(4), fE(5) 0 ], n);
 %     fpoints = transformPoint3d([fx, fy, zeros(n,1)], fTFM);
-%     drawPoint3d(fpoints,'Marker','+','Color','y');
+%     drawEllipse3d(fE,'k')
 %   
 %   See also
 %     drawEllipse3d, ellipseToPolygon

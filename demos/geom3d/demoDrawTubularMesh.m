@@ -1,10 +1,8 @@
-function demoDrawTubularMesh(varargin)
-%DEMODRAWTUBULARMESH  One-line description here, please.
-%
-%   output = demoDrawTubularMesh(input)
+function demoDrawTubularMesh
+%DEMODRAWTUBULARMESH Draw a tubular mesh using matGeom library
 %
 %   Example
-%   demoDrawTubularMesh
+%     demoDrawTubularMesh
 %
 %   See also
 %     drawSoccerBall, demoRevolutionSurface, demoInertiaEllipsoid
