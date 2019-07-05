@@ -1,12 +1,18 @@
-function [vertices2, faces2] = removeMeshEars(vertices, faces, varargin)
+function varargout = removeMeshEars(varargin)
 %REMOVEMESHEARS Remove vertices that are connected to only one face.
 %
 %   [V, F] = removeMeshEars(V, F)
+%   [V, F] = removeMeshEars(MESH)
+%   Remove vertices that are connected to only one face. This removes also
+%   "pending" faces.
+%   Note that if the mesh has boundary, this may remove some regular faces
+%   located on the boundary.
 %
 %   Example
 %   removeMeshEars
 %
 %   See also
+%     meshes3d, ensureManifoldMesh
 %
  
 % ------
@@ -14,6 +20,8 @@ function [vertices2, faces2] = removeMeshEars(vertices, faces, varargin)
 % e-mail: david.legland@inra.fr
 % Created: 2019-01-08,    using Matlab 8.6.0.267246 (R2015b)
 % Copyright 2019 INRA - Cepia Software Platform.
+
+[vertices, faces] = parseMeshData(varargin{:});
 
 nVertices = size(vertices, 1);
 
@@ -25,5 +33,9 @@ end
 
 % remove vertices with degree 1
 inds = find(vertexDegree == 1);
-[vertices2, faces2] = removeMeshVertices(vertices, faces, inds);
+[vertices, faces] = removeMeshVertices(vertices, faces, inds);
 
+
+%% Format output
+
+varargout = formatMeshOutput(nargout, vertices, faces);
