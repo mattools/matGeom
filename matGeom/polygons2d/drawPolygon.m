@@ -2,10 +2,11 @@ function varargout = drawPolygon (px, varargin)
 %DRAWPOLYGON Draw a polygon specified by a list of points.
 %
 %   drawPolygon(POLY);
-%   Packs coordinates in a single N-by-2 array.
+%   Packs coordinates in a single N-by-2 array, with N the vertex number.
 %
 %   drawPolygon(PX, PY);
-%   Specifies coordinates in separate arrays.
+%   Specifies coordinates in separate arrays. Both array must be N-by-1,
+%   with N the number of vertices.
 %
 %   drawPolygon(POLYS)
 %   Packs coordinate of several polygons in a cell array. Each element of
@@ -46,11 +47,11 @@ function varargout = drawPolygon (px, varargin)
 %   HISTORY
 %   2008/10/15 manage polygons with holes
 %   2011-10-11 add management of axes handle
-%   2016-05-26 Juanpi Carbajal reorgnaized the function for readability and
+%   2016-05-26 Juanpi Carbajal reorganized the function for readability and
 %              removed unnecessary variable arguemnts
 
 % Store hold state
-state = ishold (gca);
+state = ishold(gca);
 hold on;
 
 
@@ -66,7 +67,7 @@ end
 
 % extract handle of axis to draw on
 ax = gca;
-if isAxisHandle (px)
+if isAxisHandle(px)
     ax          = px;
     px          = varargin{1};
     varargin(1) = [];
@@ -76,34 +77,36 @@ end
 %% Manage cell arrays of polygons
 
 % case of a set of polygons stored in a cell array
-if iscell (px)
-    h   = cellfun (@(x)drawPolygon (ax, x, varargin{:}), px, 'UniformOutput', 0);
-    h   = horzcat (h{:});
+if iscell(px)
+    h   = cellfun(@(x) drawPolygon(ax, x, varargin{:}), px, 'UniformOutput', 0);
+    h   = horzcat(h{:});
     
 else
     % Check size vs number of arguments
-    if size (px, 2) == 1
+    if size(px, 2) == 2
+        % Case of polygon specified as a N-by-2 array (most standard case)
+        py = px(:, 2);
+        px = px(:, 1);
+        
+    elseif size(px, 2) == 1
+        % Case of polygon specified as two N-by-1 arrays with same length
         if nargin < 2 || nargin == 2 && ~isnumeric(varargin{1})
-            error('Matgeom:invalid-input-arg', ...
-                'Should specify either a N-by-2 array, or 2 N-by-1 vectors'); %#ok<CTPCT>
+            error('Matgeom:invalid_input_arg', ...
+                'Should specify either a N-by-2 array, or 2 N-by-1 vectors');
         end
         
         % Extract coordinates of polygon vertices
         py          = varargin{1};
         varargin(1) = [];
         
-        if length (py) ~= length (px)
-            error ('Matgeom:invalid-input-arg', ...
-                'X and Y coordinates should have same numebr of rows (%d,%d)', ...
-                length (px), length (px)) %#ok<CTPCT>
+        if length(py) ~= length(px)
+            error('Matgeom:invalid_input_arg', ...
+                'X and Y coordinate arrays should have same lengths (%d,%d)', ...
+                length(px), length(py)) 
         end
         
-    elseif size (px, 2) == 2
-        py = px(:, 2);
-        px = px(:, 1);
-        
     else
-        error ('Matgeom:invalid-input-arg', 'Should specify a N-by-2 array'); %#ok<CTPCT>
+        error('Matgeom:invalid_input_arg', 'Should specify a N-by-2 array');
     end
     
     % set default line format
@@ -131,7 +134,6 @@ end % whether input arg was a cell
 if ~state
     hold off
 end
-
 
 % avoid returning argument if not required
 if nargout > 0
