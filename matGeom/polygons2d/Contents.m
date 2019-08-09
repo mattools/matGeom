@@ -99,7 +99,7 @@
 %   polygonContains           - Test if a point is contained in a multiply connected polygon.
 %   polygonCentroid           - Compute the centroid (center of mass) of a polygon.
 %   polygonArea               - Compute the signed area of a polygon.
-%   polygonInertiaEllipse     - Compute ellipse with same inertia moments as polygon.
+%   polygonEquivalentEllipse  - Compute equivalent ellipse with same second order moments as polygon.
 %   polygonSecondAreaMoments  - Compute second-order area moments of a polygon.
 %   polygonLength             - Perimeter of a polygon.
 %   polygonNormalAngle        - Compute the normal angle at a vertex of the polygon.
@@ -163,6 +163,9 @@
 % Copyright INRA - Cepia Software Platform.
 
 help('Contents');
+
+%% Deprecated
+%   polygonInertiaEllipse     - Compute ellipse with same inertia moments as polygon.
 
 %% Requires further development
 
