@@ -22,8 +22,9 @@ function b = isPointInEllipse(point, ellipse, varargin)
 %       1
 %
 %   See also:
-%   ellipses2d, isPointInCircle
+%     ellipses2d, isPointInCircle
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE

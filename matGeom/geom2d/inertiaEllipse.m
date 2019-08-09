@@ -1,9 +1,11 @@
 function ell = inertiaEllipse(points)
 %INERTIAELLIPSE Inertia ellipse of a set of points.
 %
+%   Note: Deprecated! Use equivalentEllipse instead.
+%
 %   ELL = inertiaEllipse(PTS);
 %   where PTS is a N*2 array containing coordinates of N points, computes
-%   the inertia ellispe of the set of points.
+%   the inertia ellipse of the set of points.
 %
 %   The result has the form:
 %   ELL = [XC YC A B THETA],
@@ -12,7 +14,7 @@ function ell = inertiaEllipse(points)
 %   of the main inertia axis with the horizontal (counted in degrees
 %   between 0 and 180). 
 %   A and B are the standard deviations of the point coordinates when
-%   ellipse is aligned with the inertia axes.
+%   ellipse is aligned with the principal axes.
 %
 %   Example
 %   pts = randn(100, 2);
@@ -25,17 +27,22 @@ function ell = inertiaEllipse(points)
 %   drawEllipse(ell, 'linewidth', 2, 'color', 'r');
 %
 %   See also
-%   ellipses2d, drawEllipse
+%     equivalentEllipse
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2008-02-21,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 
 % HISTORY
 % 2009-07-29 take into account ellipse orientation
 % 2011-03-12 rewrite using inertia moments
+
+% deprecation warning
+warning('geom2d:deprecated', ...
+    [mfilename ' is deprecated, use ''equivalentEllipse'' instead']);
 
 % ellipse center
 xc = mean(points(:,1));

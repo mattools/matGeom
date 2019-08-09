@@ -116,7 +116,7 @@
 %
 % Ellipses and Parabola
 %   ellipses2d               - Description of functions operating on ellipses.
-%   inertiaEllipse           - Inertia ellipse of a set of points.
+%   equivalentEllipse        - Equivalent ellipse of a set of points.
 %   isPointInEllipse         - Check if a point is located inside a given ellipse.
 %   ellipsePerimeter         - Perimeter of an ellipse.
 %   ellipseToPolygon         - Convert an ellipse into a series of points.
@@ -203,6 +203,7 @@ help('Contents');
 
 %%   Deprecated functions
 %   normalize                - Normalize a vector.
+%   inertiaEllipse           - Inertia ellipse of a set of points.
 
 %% Others...
 
