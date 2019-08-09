@@ -156,7 +156,7 @@
 %   sphericalVoronoiDomain      - Compute a spherical voronoi domain.
 %
 % Smooth surfaces
-%   inertiaEllipsoid            - Inertia ellipsoid of a set of 3D points.
+%   equivalentEllipsoid         - Equivalent ellipsoid of a set of 3D points.
 %   fitEllipse3d                - Fit an ellipse to a set of points.
 %   ellipsoidSurfaceArea        - Approximated surface area of an ellipsoid.
 %   oblateSurfaceArea           - Approximated surface area of an oblate ellipsoid.
@@ -208,6 +208,7 @@
 %   drawCube                    - Draw a 3D centered cube, eventually rotated.
 %   drawCuboid                  - Draw a 3D cuboid, eventually rotated.
 %   drawPlatform                - Draw a rectangular platform with a given size.
+%   drawLabels3d                - Draw text labels at specified 3D positions.
 %
 %
 %   Credits:
@@ -231,8 +232,8 @@
 
 % Deprecated:
 %   vectorCross3d               - Vector cross product faster than inbuilt MATLAB cross.
+%   inertiaEllipsoid            - Inertia ellipsoid of a set of 3D points.
 
 % Others
 
-%   drawLabels3d                - Draw text labels at specified 3D positions
 

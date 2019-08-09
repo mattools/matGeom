@@ -1,5 +1,5 @@
 function varargout = drawLabels3d(varargin)
-%DRAWLABELS3D Draw text labels at specified 3D positions
+%DRAWLABELS3D Draw text labels at specified 3D positions.
 %   
 %   drawLabels3d(X, Y, Z, LBL) draw labels LBL at position X and Y.
 %   LBL can be either a string array, or a number array. In this case,
