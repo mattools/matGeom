@@ -22,8 +22,8 @@ function ell = equivalentEllipsoid(points)
 %         'drawEllipses', true, 'EllipseColor', 'b', 'EllipseWidth', 3);
 %
 %   See also
-%     spheres, drawEllipsoid, equivalentEllipse, rotation3dToEulerAngles
-%
+%     spheres, drawEllipsoid, equivalentEllipse, principalAxes
+%     rotation3dToEulerAngles
 
 % ------
 % Author: David Legland

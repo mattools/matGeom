@@ -27,6 +27,7 @@
 %   clipPoints               - Clip a set of points by a box.
 %   centroid                 - Compute centroid (center of mass) of a set of points.
 %   boundingBox              - Bounding box of a set of points.
+%   principalAxes            - Principal axes of a set of ND points.
 %   angleSort                - Sort points in the plane according to their angle to origin.
 %   findClosestPoint         - Find index of closest point in an array.
 %   minDistancePoints        - Minimal distance between several points.
@@ -69,7 +70,7 @@
 %   edgeLength               - Return length of an edge.
 %   parallelEdge             - Edge parallel to another edge.
 %   centeredEdgeToEdge       - Convert a centered edge to a two-points edge.
-%   midPoint                 - Middle point of two points or of an edge
+%   midPoint                 - Middle point of two points or of an edge.
 %   edgePosition             - Return position of a point on an edge.
 %   clipEdge                 - Clip an edge with a rectangular box.
 %   reverseEdge              - Intervert the source and target vertices of edge.
@@ -85,7 +86,7 @@
 %   rays2d                   - Description of functions operating on planar rays.
 %   createRay                - Create a ray (half-line), from various inputs.
 %   bisector                 - Return the bisector of two lines, or 3 points.
-%   clipRay                  - Clip a ray with a box
+%   clipRay                  - Clip a ray with a box.
 %   drawRay                  - Draw a ray on the current axis.
 %
 % Relations between points and lines
@@ -206,4 +207,3 @@ help('Contents');
 %   inertiaEllipse           - Inertia ellipse of a set of points.
 
 %% Others...
-

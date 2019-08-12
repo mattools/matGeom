@@ -25,7 +25,7 @@ function ell = equivalentEllipse(points)
 %     drawEllipse(ell, 'linewidth', 2, 'color', 'r');
 %
 %   See also
-%     ellipses2d, drawEllipse, equivalentEllipsoid
+%     ellipses2d, drawEllipse, equivalentEllipsoid, principalAxes
 %
 
 % ------
