@@ -1,7 +1,13 @@
-function [vertices, facets] = triangulatePolygonPair(poly1, poly2)
-%TRIANGULATEPOLYGONPAIR Compute triangulation between a pair of 3D closed curves.
+function [vertices, faces] = triangulatePolygonPair(poly1, poly2, varargin)
+% Compute triangulation between a pair of 3D closed curves.
 %
 %   [V, F] = triangulatePolygonPair(POLY1, POLY2)
+%
+%   [V, F] = triangulatePolygonPair(..., 'recenter', FLAG)
+%   Where FLAG is a boolean, specifies whether the second curve should be
+%   translated to have the same centroid as the first curve. This can
+%   improve mathcing of vertices. Default is true.
+%
 %
 %   Example
 %     % triangulate a surface patch between two ellipses
@@ -28,12 +34,27 @@ function [vertices, facets] = triangulatePolygonPair(poly1, poly2)
 %
 %   See also
 %     meshes3D, triangulateCurvePair, meshSurfaceArea
+%
  
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % Created: 2017-05-18,    using Matlab 9.1.0.441655 (R2016b)
 % Copyright 2017 INRA - Cepia Software Platform.
+
+
+%% Settings
+
+recenterFlag = true;
+while length(varargin) > 1
+    pname = varargin{1};
+    if strcmpi(pname, 'recenter')
+        recenterFlag = varargin{2};
+    else
+        error('Unknown parameter name: %s', pname);
+    end
+    varargin(1:2) = [];
+end
 
 
 %% Memory allocation
@@ -46,8 +67,22 @@ n1 = size(poly1, 1);
 n2 = size(poly2, 1);
 
 % allocate the array of facets (each edge of each polygon provides a facet)
-nFacets = n1 + n2;
-facets = zeros(nFacets, 3);
+nFaces = n1 + n2;
+faces = zeros(nFaces, 3);
+
+
+% Translate the second polygon such that the centroids of the bounding
+% boxes coincide. This is expected to improve the matching of the two
+% curves.
+if recenterFlag
+    box1 = boundingBox3d(poly1);
+    box2 = boundingBox3d(poly2);
+    center1 = (box1(2:2:end) + box1(1:2:end-1)) / 2;
+    center2 = (box2(2:2:end) + box2(1:2:end-1)) / 2;
+    vecTrans = center1 - center2;
+    trans = createTranslation3d(vecTrans);
+    poly2 = transformPoint3d(poly2, trans);
+end
 
 
 %% Init iteration
@@ -69,7 +104,7 @@ currentIndex2 = ind2;
 % closest one. 
 % Then update current diagonal for next iteration.
 
-for i = 1:nFacets
+for iFace = 1:nFaces
     nextIndex1 = mod(currentIndex1, n1) + 1;
     nextIndex2 = mod(currentIndex2, n2) + 1;
     
@@ -79,15 +114,15 @@ for i = 1:nFacets
     
     if dist1 < dist2
         % keep current vertex of curve1, use next vertex on curve2
-        facet = [currentIndex1 currentIndex2+n1 nextIndex2+n1];
+        face = [currentIndex1 currentIndex2+n1 nextIndex2+n1];
         currentIndex2 = nextIndex2;
     else
         % keep current vertex of curve2, use next vertex on curve1
-        facet = [currentIndex1 currentIndex2+n1 nextIndex1];
+        face = [currentIndex1 currentIndex2+n1 nextIndex1];
         currentIndex1 = nextIndex1;
     end
     
     % create the facet
-    facets(i, :) = facet;
+    faces(iFace, :) = face;
 end
 
