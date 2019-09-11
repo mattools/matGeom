@@ -39,7 +39,7 @@ if isstruct(var1)
     varargin(1) = [];
 else
     vertices = varargin{1};
-    faces = varargin{1};
+    faces = varargin{2};
     varargin(1:2) = [];
 end
 
