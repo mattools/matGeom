@@ -8,10 +8,11 @@ and finally by module.
 ## [Unreleased]
 
 
-## MatGeom 1.2.0 - 2018-06-07
+## MatGeom 1.2.1 - 2019-09-26
 
-Main changes are new functions for processing 3D meshes, and renaming of 
-inertia ellipse/ellipsoid into equivalent ellipse/ellipsoid.
+Main changes are new functions for processing 3D meshes (repairing, 
+simplification), and renaming of inertia ellipse/ellipsoid into equivalent 
+ellipse/ellipsoid.
 
 ### Added
 
