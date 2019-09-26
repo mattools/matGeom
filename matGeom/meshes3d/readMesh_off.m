@@ -1,7 +1,14 @@
 function varargout = readMesh_off(fileName)
-%READMESH_OFF Read mesh data stored in OFF format.
+% Read mesh data stored in OFF format.
 %
-%   [VERTICES FACES] = readMesh_off(FILNAME)
+%   [VERTICES, FACES] = readMesh_off(FILENAME)
+%   Read the data stored in file FILENAME and return the vertex and face
+%   arrays as NV-by-3 array and NF-by-N array respectively, where NV is the
+%   number of vertices and Nf is the number of faces.
+%
+%   MESH = readMesh_off(FILENAME)
+%   Read the data stored in file FILENAME and return the mesh into a struct
+%   with fields 'vertices' and 'faces'.
 %
 %   Example
 %     [v, f] = readMesh_off('mushroom.off');
@@ -10,12 +17,16 @@ function varargout = readMesh_off(fileName)
 %
 %   See also
 %     meshes3d, writeMesh_off, drawMesh
+%
 
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % Created: 2011-12-20,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
+
+
+%% Read header 
 
 % open file
 f = fopen(fileName, 'r');
@@ -38,7 +49,7 @@ nVertices = vals(1);
 nFaces = vals(2);
 
 
-% read vertex data
+%% Read vertex data
 [vertices, count] = fscanf(f, '%f ', [3 nVertices]);
 if count ~= nVertices * 3
     error('matGeom:readMesh_off:FileFormatError', ...
@@ -46,50 +57,68 @@ if count ~= nVertices * 3
 end
 vertices = vertices';
 
-% % read face data (face start by index)
-% [faces, count] = fscanf(f, '%d %d %d %d\n', [4 nf]);
-% if count ~= nf * 4
-%     error('matGeom:readMesh_off:FileFormatError', ...
-%         ['Could not read all the ' num2str(nf) ' faces']);
-% end
 
-% allocate memory
-faces = cell(1, nFaces);
+%% Read Face data
+% First try to read faces as an homogeneous array. It if fails, start from
+% face offset and parse each face individually. In the latter case, faces
+% can have different number of vertices.
 
-% iterate over faces
-for iFace = 1:nFaces
-    % read next line
-    line = fgetl(f);
-    if line == -1
-        error('matGeom:readMesh_off:FileFormatError', ...
-            'Unexpected end of file');
-    end
-    
-    % parse vertex indices for current face
-    tokens = split(line);
-    nv = str2double(tokens{1});
-    face = zeros(1,nv);
-    for iv = 1:nv
-        face(iv) = str2double(tokens{iv+1}) + 1;
-    end
-    faces{iFace} = face;
+% keep position of face info within file
+faceOffset = ftell(f);
+
+% read first face to assess number of vertices per face
+line = fgetl(f);
+if line == -1
+    error('matGeom:readMesh_off:FileFormatError', ...
+        'Unexpected end of file');
 end
+tokens = split(line);
+face1 = str2double(tokens(2:end))' + 1;
+nv = length(face1);
+
+try 
+    % attenpt to read the remaining faces assuming they all have the same
+    % number of vertices
+    pattern = ['%d' repmat(' %d', 1, nv) '\n'];
+    [faces, count] = fscanf(f, pattern, [(nv+1) (nFaces-1)]);
+    if count ~= (nFaces-1) * (nv+1)
+        error('matGeom:readMesh_off:FileFormatError', ...
+            'Could not read all the %d faces', nFaces);
+    end
+
+    % transpose, remove first column, use 1-indexing, and concatenate with
+    % first face
+    faces = [face1 ; faces(2:end,:)'+1];
+
+catch
+    % if attempt failed, switch to slower face-by-face parsing
+    disp('readMesh_off: Inhomogeneous number of vertices per face, switching to face-per-face parsing');
+    
+    fseek(f, faceOffset, 'bof');
+    
+    % allocate cell array
+    faces = cell(1, nFaces);
+    
+    % iterate over faces
+    for iFace = 1:nFaces
+        % read next line
+        line = fgetl(f);
+        if line == -1
+            error('matGeom:readMesh_off:FileFormatError', ...
+                'Unexpected end of file');
+        end
+
+        % parse vertex indices for current face
+        tokens = split(line);
+        faces{iFace} = str2double(tokens(2:end))' + 1;
+    end
+end
+
+
+%% Post-processing
 
 % close the file
 fclose(f);
-
-
-%% Post-process faces
-
-% % clean up: remove index, and use 1-indexing
-% faces = faces(2:4, :)' + 1;
-
-% if faces all have same number of vertices, convert to Nf-by-N array
-nVertices = cellfun(@length, faces);
-if all(nVertices == nVertices(1))
-    faces = cell2mat(faces(:));
-end
-
 
 % format output arguments
 if nargout < 2
