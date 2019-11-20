@@ -49,105 +49,105 @@
 %
 %
 % Polylines
-%   polylinePoint             - Extract a point from a polyline
-%   polylineLength            - Return length of a polyline given as a list of points
-%   polylineCentroid          - Compute centroid of a curve defined by a series of points
-%   polylineSubcurve          - Extract a portion of a polyline
-%   resamplePolyline          - Distribute N points equally spaced on a polyline
-%   resamplePolylineByLength  - Resample a polyline with a fixed sampling step
-%   reversePolyline           - Reverse a polyline, by iterating vertices from the end
-%   isPointOnPolyline         - Test if a point belongs to a polyline
-%   projPointOnPolyline       - Compute position of a point projected on a polyline
-%   distancePointPolyline     - Compute shortest distance between a point and a polyline
-%   distancePolylines         - Compute the shortest distance between 2 polylines
-%   intersectLinePolyline     - Intersection points between a line and a polyline
-%   intersectPolylines        - Find the common points between 2 polylines
-%   polylineSelfIntersections - Find self-intersection points of a polyline
-%   simplifyPolyline          - Douglas-Peucker simplification of a polyline
-%   smoothPolyline            - Smooth a polyline using local averaging
-%   removeMultipleVertices    - Remove multiple vertices of a polygon or polyline
+%   polylinePoint             - Extract a point from a polyline.
+%   polylineLength            - Return length of a polyline given as a list of points.
+%   polylineCentroid          - Compute centroid of a curve defined by a series of points.
+%   polylineSubcurve          - Extract a portion of a polyline.
+%   resamplePolyline          - Distribute N points equally spaced on a polyline.
+%   resamplePolylineByLength  - Resample a polyline with a fixed sampling step.
+%   reversePolyline           - Reverse a polyline, by iterating vertices from the end.
+%   isPointOnPolyline         - Test if a point belongs to a polyline.
+%   projPointOnPolyline       - Compute position of a point projected on a polyline.
+%   distancePointPolyline     - Compute shortest distance between a point and a polyline.
+%   distancePolylines         - Compute the shortest distance between 2 polylines.
+%   intersectLinePolyline     - Intersection points between a line and a polyline.
+%   intersectPolylines        - Find the common points between 2 polylines.
+%   polylineSelfIntersections - Find self-intersection points of a polyline.
+%   simplifyPolyline          - Douglas-Peucker simplification of a polyline.
+%   smoothPolyline            - Smooth a polyline using local averaging.
+%   removeMultipleVertices    - Remove multiple vertices of a polygon or polyline.
 %
 % Polygon basic manipulation
-%   reversePolygon            - Reverse a polygon, by iterating vertices from the end
-%   smoothPolygon             - Smooth a polygon using local averaging
-%   simplifyPolygon           - Douglas-Peucker simplification of a polygon
-%   projPointOnPolygon        - Compute position of a point projected on a polygon
-%   splitPolygons             - Convert a NaN separated polygon list to a cell array of polygons
-%   polygonLoops              - Divide a possibly self-intersecting polygon into a set of simple loops
-%   polygonPoint              - Extract a point from a polygon
-%   polygonSubcurve           - Extract a portion of a polygon
-%   polygonEdges              - Return the edges of a simple or multiple polygon
-%   polygonVertices           - Extract all vertices of a (multi-)polygon
+%   reversePolygon            - Reverse a polygon, by iterating vertices from the end.
+%   smoothPolygon             - Smooth a polygon using local averaging.
+%   simplifyPolygon           - Douglas-Peucker simplification of a polygon.
+%   projPointOnPolygon        - Compute position of a point projected on a polygon.
+%   splitPolygons             - Convert a NaN separated polygon list to a cell array of polygons.
+%   polygonLoops              - Divide a possibly self-intersecting polygon into a set of simple loops.
+%   polygonPoint              - Extract a point from a polygon.
+%   polygonSubcurve           - Extract a portion of a polygon.
+%   polygonEdges              - Return the edges of a simple or multiple polygon.
+%   polygonVertices           - Extract all vertices of a (multi-)polygon.
 %
 % Polygon clipping and intersections
-%   intersectLinePolygon      - Intersection points between a line and a polygon
-%   intersectRayPolygon       - Intersection points between a ray and a polygon
-%   intersectEdgePolygon      - Intersection point of an edge with a polygon
-%   polygonSelfIntersections  - Find self-intersection points of a polygon
-%   clipPolygon               - Clip a polygon with a rectangular box
-%   clipPolygonHP             - Clip a polygon with a Half-plane defined by a directed line
+%   intersectLinePolygon      - Intersection points between a line and a polygon.
+%   intersectRayPolygon       - Intersection points between a ray and a polygon.
+%   intersectEdgePolygon      - Intersection point of an edge with a polygon.
+%   polygonSelfIntersections  - Find self-intersection points of a polygon.
+%   clipPolygon               - Clip a polygon with a rectangular box.
+%   clipPolygonHP             - Clip a polygon with a Half-plane defined by a directed line.
 %
 % Point Sets
-%   pointSetsAverage          - Compute the average of several point sets
-%   minimumCaliperDiameter    - Minimum caliper diameter of a set of points
-%   findPoint                 - Find index of a point in an set from its coordinates
-%   convexHull                - Convex hull of a set of points
-%   randomPointInPolygon      - Generate random point(s) in a polygon
+%   pointSetsAverage          - Compute the average of several point sets.
+%   minimumCaliperDiameter    - Minimum caliper diameter of a set of points.
+%   findPoint                 - Find index of a point in an set from its coordinates.
+%   convexHull                - Convex hull of a set of points.
+%   randomPointInPolygon      - Generate random point(s) in a polygon.
 %
 % Measures on Polygons
-%   isPointInPolygon          - Test if a point is located inside a polygon
-%   polygonContains           - Test if a point is contained in a multiply connected polygon
-%   polygonCentroid           - Compute the centroid (center of mass) of a polygon
-%   polygonArea               - Compute the signed area of a polygon
-%   polygonInertiaEllipse     - Compute ellipse with same inertia moments as polygon
-%   polygonSecondAreaMoments  - Compute second-order area moments of a polygon
-%   polygonLength             - Perimeter of a polygon
-%   polygonNormalAngle        - Compute the normal angle at a vertex of the polygon
-%   polygonBounds             - Compute the bounding box of a polygon
-%   polygonOuterNormal        - Outer normal vector for a given vertex(ices)
-%   distancePointPolygon      - Shortest distance between a point and a polygon
-%   distancePolygons          - Compute the shortest distance between 2 polygons
-%   distancePolygonsNoCross   - Compute the shortest distance between 2 polygons
-%   polygonSignature          - Polar signature of a polygon (polar distance to origin)
-%   signatureToPolygon        - Reconstruct a polygon from its polar signature
-%   polygonCurvature          - Estimate curvature on polygon vertices using polynomial fit
+%   isPointInPolygon          - Test if a point is located inside a polygon.
+%   polygonContains           - Test if a point is contained in a multiply connected polygon.
+%   polygonCentroid           - Compute the centroid (center of mass) of a polygon.
+%   polygonArea               - Compute the signed area of a polygon.
+%   polygonEquivalentEllipse  - Compute equivalent ellipse with same second order moments as polygon.
+%   polygonSecondAreaMoments  - Compute second-order area moments of a polygon.
+%   polygonLength             - Perimeter of a polygon.
+%   polygonNormalAngle        - Compute the normal angle at a vertex of the polygon.
+%   polygonBounds             - Compute the bounding box of a polygon.
+%   polygonOuterNormal        - Outer normal vector for a given vertex(ices).
+%   distancePointPolygon      - Shortest distance between a point and a polygon.
+%   distancePolygons          - Compute the shortest distance between 2 polygons.
+%   distancePolygonsNoCross   - Compute the shortest distance between 2 polygons.
+%   polygonSignature          - Polar signature of a polygon (polar distance to origin).
+%   signatureToPolygon        - Reconstruct a polygon from its polar signature.
+%   polygonCurvature          - Estimate curvature on polygon vertices using polynomial fit.
 %
 % More complex operations on polygons
-%   resamplePolygon           - Distribute N points equally spaced on a polygon
-%   resamplePolygonByLength   - Resample a polygon with a fixed sampling step
-%   densifyPolygon            - Add several points on each edge of the polygon
-%   expandPolygon             - Expand a polygon by a given (signed) distance
-%   triangulatePolygon        - Compute a triangulation of the polygon
-%   polygonSymmetryAxis       - Try to identify symmetry axis of polygon
-%   medialAxisConvex          - Compute medial axis of a convex polygon
+%   resamplePolygon           - Distribute N points equally spaced on a polygon.
+%   resamplePolygonByLength   - Resample a polygon with a fixed sampling step.
+%   densifyPolygon            - Add several points on each edge of the polygon.
+%   expandPolygon             - Expand a polygon by a given (signed) distance.
+%   triangulatePolygon        - Compute a triangulation of the polygon.
+%   polygonSymmetryAxis       - Try to identify symmetry axis of polygon.
+%   medialAxisConvex          - Compute medial axis of a convex polygon.
 %
 % Curves (polylines with lot of vertices)
-%   parametrize               - Parametrization of a polyline, based on edges lengths
-%   curvature                 - Estimate curvature of a polyline defined by points
+%   parametrize               - Parametrization of a polyline, based on edges lengths.
+%   curvature                 - Estimate curvature of a polyline defined by points.
 %   cart2geod                 - Convert cartesian coordinates to geodesic coord.
 %   geod2cart                 - Convert geodesic coordinates to cartesian coord.
-%   curveMoment               - Compute inertia moment of a 2D curve
-%   curveCMoment              - Compute centered inertia moment of a 2D curve
-%   curveCSMoment             - Compute centered scaled moment of a 2D curve
+%   curveMoment               - Compute inertia moment of a 2D curve.
+%   curveCMoment              - Compute centered inertia moment of a 2D curve.
+%   curveCSMoment             - Compute centered scaled moment of a 2D curve.
 %
 % Functions from stochastic geometry
-%   steinerPoint              - Compute steiner point (weighted centroid) of a polygon
-%   steinerPolygon            - Create a Steiner polygon from a set of vectors
-%   supportFunction           - Compute support function of a polygon
-%   convexification           - Compute the convexification of a polygon
+%   steinerPoint              - Compute steiner point (weighted centroid) of a polygon.
+%   steinerPolygon            - Create a Steiner polygon from a set of vectors.
+%   supportFunction           - Compute support function of a polygon.
+%   convexification           - Compute the convexification of a polygon.
 %
 % Input, Output and conversions
-%   polygonToRow              - Convert polygon coordinates to a row vector
-%   rowToPolygon              - Create a polygon from a row vector
-%   contourMatrixToPolylines  - Converts a contour matrix array into a polyline set
-%   readPolygonSet            - Read a set of simple polygons stored in a file
-%   writePolygonSet           - Write a set of simple polygons into a file
+%   polygonToRow              - Convert polygon coordinates to a row vector.
+%   rowToPolygon              - Create a polygon from a row vector.
+%   contourMatrixToPolylines  - Converts a contour matrix array into a polyline set.
+%   readPolygonSet            - Read a set of simple polygons stored in a file.
+%   writePolygonSet           - Write a set of simple polygons into a file.
 %
 % Drawing functions
-%   drawPolyline              - Draw a polyline specified by a list of points
-%   drawPolygon               - Draw a polygon specified by a list of points
-%   fillPolygon               - Fill a polygon specified by a list of points
-%   drawVertices              - Draw the vertices of a polygon or polyline
+%   drawPolyline              - Draw a polyline specified by a list of points.
+%   drawPolygon               - Draw a polygon specified by a list of points.
+%   fillPolygon               - Fill a polygon specified by a list of points.
+%   drawVertices              - Draw the vertices of a polygon or polyline.
 %
 %
 %   Credits:
@@ -164,6 +164,10 @@
 
 help('Contents');
 
+%% Deprecated
+%   polygonInertiaEllipse     - Compute ellipse with same inertia moments as polygon.
+
 %% Requires further development
 
 %% Others...
+

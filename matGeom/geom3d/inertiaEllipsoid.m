@@ -1,9 +1,12 @@
 function ell = inertiaEllipsoid(points)
 %INERTIAELLIPSOID Inertia ellipsoid of a set of 3D points.
 %
+%   Note: Deprecated! Use equivalentEllipsoid instead.
+%
+%
 %   ELL = inertiaEllipsoid(PTS)
 %   Compute the inertia ellipsoid of the set of points PTS. The result is
-%   an ellispoid defined by:
+%   an ellipsoid defined by:
 %   ELL = [XC YC ZC A B C PHI THETA PSI]
 %   where [XC YC ZY] is the center, [A B C] are lengths of semi-axes (in
 %   decreasing order), and [PHI THETA PSI] are euler angles representing 
@@ -22,14 +25,18 @@ function ell = inertiaEllipsoid(points)
 %         'drawEllipses', true, 'EllipseColor', 'b', 'EllipseWidth', 3);
 %
 %   See also
-%   spheres, drawEllipsoid, inertiaEllipse
+%     equivalentEllipsoid
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2011-03-12,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
+
+% deprecation warning
+warning('geom3d:deprecated', ...
+    [mfilename ' is deprecated, use ''equivalentEllipsoid'' instead']);
 
 % number of points
 n = size(points, 1);

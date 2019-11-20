@@ -19,6 +19,12 @@ if ~ischar(fileName)
     error('First argument must contain the name of the file');
 end
 
+% optionnaly parses data
+if isstruct(vertices)
+    faces = vertices.faces;
+    vertices = vertices.vertices;
+end
+
 % open file for writing text
 f = fopen(fileName, 'wt');
 if (f == -1)

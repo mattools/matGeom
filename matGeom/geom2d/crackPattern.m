@@ -19,8 +19,10 @@ function edges = crackPattern(box, points, alpha, varargin)
 %     figure;
 %     drawEdge(E);
 %
-%   See also drawEdge
+%   See also 
+%     drawEdge
 %
+
 %   ---------
 %
 %   author : David Legland 
@@ -94,7 +96,7 @@ while true
                 end
             else
                  if abs(pos2)<abs(posr(i2)) && abs(pos2)<lines(il, 6)
-                    if lines(i, 5) ~= posr(i2);
+                    if lines(i, 5) ~= posr(i2)
                         edges(i, 3:4) = pi(il,:);
                         lines(i, 5) = posr(i2);
                         modif = 1;
@@ -106,13 +108,12 @@ while true
         end   % end processing of right points of the line
             
         
-        
          % consider points to the left (negative position), and sort them
         indl = find(pos<=0 && pos~=Inf);
         [posl, indl2] = sort(abs(pos(indl)));        
 
         % look for the closest intersection to the right
-        for i2=1:length(indl2)
+        for i2 = 1:length(indl2)
             % index of intersected line
             il = indl(indl2(i2));
             
@@ -123,7 +124,7 @@ while true
             % stop the current line, or if it was stopped before
             if pos2>0
                 if pos2<abs(posl(i2)) && pos2<lines(il, 5)
-                    if lines(i, 6) ~= abs(posl(i2));
+                    if lines(i, 6) ~= abs(posl(i2))
                         edges(i, 1:2) = pi(il, :);
                         lines(i, 6) = abs(posl(i2));
                         modif = 1;
@@ -132,7 +133,7 @@ while true
                 end
             else
                  if abs(pos2)<abs(posl(i2)) && abs(pos2)<lines(il, 6)
-                    if lines(i, 6) ~= abs(posl(i2));
+                    if lines(i, 6) ~= abs(posl(i2))
                         edges(i, 1:2) = pi(il, :);
                         lines(i, 6) = abs(posl(i2));
                         modif = 1;

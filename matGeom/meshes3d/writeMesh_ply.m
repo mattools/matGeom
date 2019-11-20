@@ -22,6 +22,13 @@ if ~ischar(fileName)
     error('First argument must contain the name of the file');
 end
 
+% optionnaly parses data
+if isstruct(vertices)
+    faces = vertices.faces;
+    vertices = vertices.vertices;
+end
+
+
 %% Initializations
 
 % number of vertices and faces

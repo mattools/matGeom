@@ -17,7 +17,7 @@ function [vertices2, faces2] = subdivideMesh(vertices, faces, n)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2013-08-22,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2013 INRA - Cepia Software Platform.
 
@@ -29,12 +29,8 @@ if ~isnumeric(faces) || size(faces, 2) ~= 3
 end
 
 % compute the edge array
-% edgeVertexIndices = computeMeshEdges(faces);
 edges = meshEdges(faces);
 nEdges = size(edges, 1);
-
-% index of faces around each edge
-% edgeFaceIndices = meshEdgeFaces(vertices, edges, faces);
 
 % index of edges around each face
 faceEdgeIndices = meshFaceEdges(vertices, edges, faces);

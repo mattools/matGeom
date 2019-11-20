@@ -29,18 +29,19 @@ end
 if ~isfloat(faces)
     faces = double(faces);
 end
+nv = max(faces(:));
     
 % populate a sparse matrix
 if size(faces, 2) == 3
     adj = sparse(...
         [faces(:,1); faces(:,1); faces(:,2); faces(:,2); faces(:,3); faces(:,3)], ...
         [faces(:,3); faces(:,2); faces(:,1); faces(:,3); faces(:,2); faces(:,1)], ...
-        1.0);
+        1.0, nv, nv);
 elseif size(faces, 2) == 4
     adj = sparse(...
         [faces(:,1); faces(:,1); faces(:,2); faces(:,2); faces(:,3); faces(:,3); faces(:,4); faces(:,4)], ...
         [faces(:,4); faces(:,2); faces(:,1); faces(:,3); faces(:,2); faces(:,4); faces(:,3); faces(:,1)], ...
-        1.0);
+        1.0, nv, nv);
 end
    
 % remove double adjacencies

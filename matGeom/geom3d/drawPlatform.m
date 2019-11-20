@@ -1,8 +1,8 @@
 function  varargout = drawPlatform(plane, siz, varargin)
-%DRAWPLPLATFORM Draw a rectangular platform with a given size
+%DRAWPLATFORM Draw a rectangular platform with a given size.
 %
 %   drawPlatform(PLANE, SIZ) draws a rectangular platform with the
-%   dimensions specified by SIZ. If SIZ contains only one value instaed of 
+%   dimensions specified by SIZ. If SIZ contains only one value instead of 
 %   two the platform will be quadratic.
 %
 %   drawPlatform(...,'PropertyName',PropertyValue,...) sets the value of 
@@ -32,6 +32,8 @@ function  varargout = drawPlatform(plane, siz, varargin)
 % Copyright 2018
 
 %% Parse inputs
+
+% extract axis handle
 if numel(plane) == 1 && ishandle(plane)
     hAx = plane;
     plane = siz;
@@ -41,11 +43,12 @@ else
     hAx = gca;
 end
 
-p=inputParser;
-addRequired(p,'plane',@(x) size(x,1)==1 && isPlane(x))
-addRequired(p,'siz',@(x)validateattributes(x,{'numeric'},...
+% parse optional arguments
+p = inputParser;
+addRequired(p, 'plane', @(x) size(x,1)==1 && isPlane(x))
+addRequired(p, 'siz', @(x)validateattributes(x,{'numeric'},...
     {'size',[1, nan],'positive','nonnan','real','finite'}))
-parse(p,plane, siz)
+parse(p, plane, siz)
 
 if ~isempty(varargin)
     if length(varargin) == 1
@@ -65,20 +68,20 @@ else
     varargin = {'FaceColor', 'm'};
 end
 
-if numel(siz)==1
-    siz(2)=siz(1);
+if numel(siz) == 1
+    siz(2) = siz(1);
 end
 
 
 %% Algorithm
 % Calculate vertex points of the platform 
-pts(1,:) = planePoint(plane,[1,1]*0.5.*siz);
-pts(2,:) = planePoint(plane,[1,-1]*0.5.*siz);
-pts(3,:) = planePoint(plane,[-1,-1]*0.5.*siz);
-pts(4,:) = planePoint(plane,[-1,1]*0.5.*siz);
+pts(1,:) = planePoint(plane, [1,1]*0.5.*siz);
+pts(2,:) = planePoint(plane, [1,-1]*0.5.*siz);
+pts(3,:) = planePoint(plane, [-1,-1]*0.5.*siz);
+pts(4,:) = planePoint(plane, [-1,1]*0.5.*siz);
 
-pf.vertices=pts;
-pf.faces=[1 2 3 4];
+pf.vertices = pts;
+pf.faces = [1 2 3 4];
 
 % Draw the patch
 h = patch(hAx, pf, varargin{:});
@@ -86,8 +89,9 @@ h = patch(hAx, pf, varargin{:});
 
 %% Parse outputs
 % Return handle to plane if needed
-if nargout>0
-    varargout{1}=h;
+if nargout > 0
+    varargout{1} = h;
 end
 
 end
+

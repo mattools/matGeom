@@ -1,5 +1,5 @@
 function [tri, inds] = triangulateFaces(faces)
-%TRIANGULATEFACES Convert face array to an array of triangular faces .
+%TRIANGULATEFACES Convert face array to an array of triangular faces.
 %
 %   TRI = triangulateFaces(FACES)
 %   Returns a 3-columns array of indices, based on the data stored in the
@@ -30,12 +30,12 @@ function [tri, inds] = triangulateFaces(faces)
 %     patch('vertices', n, 'faces', tri, 'facecolor', 'r');
 %
 %   See also
-%   meshes3d, drawMesh, mergeCoplanarFaces
+%     meshes3d, drawMesh, mergeCoplanarFaces
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2008-09-08,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 

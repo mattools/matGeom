@@ -1,5 +1,5 @@
 function [edge, isInside] = clipRay(ray, bb)
-% Clip a ray with a box
+% Clip a ray with a box.
 %
 %   EDGE = clipRay(RAY, BOX);
 %   RAY is a straight ray given as a 4 element row vector: [x0 y0 dx dy],
@@ -10,12 +10,12 @@ function [edge, isInside] = clipRay(ray, bb)
 %   extreme points: [x1 y1 x2 y2].
 %   If the ray does not intersect the box, [NaN NaN NaN NaN] is returned.
 %   
-%   Function works also if RAY is a Nx4 array, if BOX is a Nx4 array, or
-%   if both RAY and BOX are Nx4 arrays. In these cases, EDGE is a Nx4
+%   Function works also if RAY is a N-by-4 array, if BOX is a Nx4 array, or
+%   if both RAY and BOX are N-by-4 arrays. In these cases, EDGE is a N-by-4
 %   array.
 %      
 %   See also:
-%   rays2d, boxes2d, edges2d, clipLine, drawRay
+%     rays2d, boxes2d, edges2d, clipLine, drawRay
 %
 
 % ------
