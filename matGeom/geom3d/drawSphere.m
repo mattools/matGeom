@@ -68,14 +68,21 @@ function varargout = drawSphere(varargin)
 %   2007-01-04 typo
 %   2010-11-08 code cleanup, add doc
 
+% Check if axes handle is specified
+if numel(varargin{1}) == 1 && ishghandle(varargin{1}, 'axes')
+    hAx = varargin{1};
+    varargin(1)=[];
+else
+    hAx = gca;
+end
 
 % process input options: when a string is found, assumes this is the
 % beginning of options
-options = {'FaceColor', 'g', 'linestyle', 'none'};
+options = {'FaceColor', 'g', 'LineStyle', 'none'};
 for i = 1:length(varargin)
     if ischar(varargin{i})
         if length(varargin) == 1
-            options = {'FaceColor', varargin{1}, 'linestyle', 'none'};
+            options = {'FaceColor', varargin{1}, 'LineStyle', 'none'};
         else
             options = [options(1:end) varargin(i:end)];
         end
@@ -147,11 +154,11 @@ z = zc + ones(length(phi),1)*cos(theta)*r;
 % Process output
 if nargout == 0
     % no output: draw the sphere
-    surf(x, y, z, options{:});
+    surf(hAx, x, y, z, options{:});
     
 elseif nargout == 1
     % one output: compute 
-    varargout{1} = surf(x, y, z, options{:});
+    varargout{1} = surf(hAx, x, y, z, options{:});
     
 elseif nargout == 3
     varargout{1} = x; 

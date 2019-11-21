@@ -44,8 +44,8 @@ end
 % reach the intersection point.
 NP = size(points, 1);
 lines = zeros(0, 5);
-for i=1:size(alpha, 2)    
-    lines = [lines; points speed.*cos(alpha(:,i)) speed.*sin(alpha(:,i)) Inf*ones(NP, 1)];
+for i = 1:size(alpha, 2)
+    lines = [lines; points speed.*cos(alpha(:,i)) speed.*sin(alpha(:,i)) Inf*ones(NP, 1)]; %#ok<AGROW>
 end
 NL = size(lines, 1);
 

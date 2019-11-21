@@ -13,18 +13,21 @@ function trans = fitAffineTransform2d(pts1, pts2)
 %
 %   See also
 %     transforms2d, transformPoint, transformVector,
-%     fitPolynomialTransform2d, registerICP
+%     fitPolynomialTransform2d, registerICP, fitAffineTransform3d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2009-07-31,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform.
 
 
 % number of points 
 N = size(pts1, 1);
+if size(pts2, 1) ~= N
+    error('Requires the same number of points for both arrays');
+end
 
 % main matrix of the problem
 A = [...

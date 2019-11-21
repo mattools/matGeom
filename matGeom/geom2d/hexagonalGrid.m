@@ -1,7 +1,7 @@
 function varargout = hexagonalGrid(bounds, origin, size, varargin)
 %HEXAGONALGRID Generate hexagonal grid of points in the plane.
 %
-%   usage
+%   usage:
 %   PTS = hexagonalGrid(BOUNDS, ORIGIN, SIZE)
 %   generate points, lying in the window defined by BOUNDS (=[xmin ymin
 %   xmax ymax]), starting from origin with a constant step equal to size.
@@ -10,17 +10,17 @@ function varargout = hexagonalGrid(bounds, origin, size, varargin)
 %
 %   TODO: add possibility to use rotated grid
 %
+
 %   ---------
 %
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 06/08/2005.
 %
+
 size = size(1);
 dx = 3*size;
 dy = size*sqrt(3);
-
-
 
 % consider two square grids with different centers
 pts1 = squareGrid(bounds, origin + [0 0],        [dx dy], varargin{:});
@@ -32,11 +32,9 @@ pts4 = squareGrid(bounds, origin + [-dx/6 dy/2], [dx dy], varargin{:});
 pts = [pts1;pts2;pts3;pts4];
 
 
-
-
 % eventually compute also edges, clipped by bounds
 % TODO : manage generation of edges 
-if nargout>1
+if nargout > 1
     edges = zeros([0 4]);
     x0 = origin(1);
     y0 = origin(2);
@@ -55,11 +53,11 @@ if nargout>1
     ny = length(ly);
     nx = length(lx);
  
-    if bounds(1)-x1+dx<size
+    if bounds(1)-x1+dx < size
         disp('intersect bounding box');
     end
     
-    if bounds(3)-x2<size
+    if bounds(3)-x2 < size
         disp('intersect 2');
         edges = [edges;repmat(x2, [ny 1]) ly repmat(bounds(3), [ny 1]) ly];
         x2 = x2-dx;
@@ -67,22 +65,23 @@ if nargout>1
         nx = length(lx);
     end
   
-    for i=1:length(ly)
+    for i = 1:length(ly)
         ind = (1:nx)';
+        tmpEdges = zeros(length(ind), 4);
         tmpEdges(ind, 1) = lx;
         tmpEdges(ind, 2) = ly(i);
         tmpEdges(ind, 3) = lx+size;
         tmpEdges(ind, 4) = ly(i);
-        edges = [edges; tmpEdges];
+        edges = [edges; tmpEdges]; %#ok<AGROW>
     end
     
 end
 
 % process output arguments
-if nargout>0
+if nargout > 0
     varargout{1} = pts;
     
-    if nargout>1
+    if nargout > 1
         varargout{2} = edges;
     end
 end

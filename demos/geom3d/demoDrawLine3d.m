@@ -1,10 +1,12 @@
-%DEMODRAWLINE3D demo for drawLine3d
+function demoDrawLine3d
+%DEMODRAWLINE3D Demo of drawLine3d
 %
 %   Example
-%   demodrawLine3d
+%     demoDrawLine3d
 %
 %   See also
 %
+
 % ------
 % Author: oqilipo
 % Created: 2017-10-13, using R2017b

@@ -1,5 +1,6 @@
 function varargout = cutMeshByPlane(v, f, plane, varargin)
 %CUTMESHBYPLANE Cut a mesh by a plane.
+%
 %   [ABOVE, IN, BELOW] = cutMeshByPlane(MESH, PLANE)
 %   where MESH, ABOVE, IN, BELOW are structs with the fields vertices and
 %   faces, and PLANE is given as a row containing initial point and 2
@@ -20,6 +21,7 @@ function varargout = cutMeshByPlane(v, f, plane, varargin)
 %   [BELOW_V, BELOW_F] = cutMeshByPlane(MESH, PLANE, 'part', 'below') is
 %   possible, too.
 %
+
 % ---------
 % Authors: oqilipo, David Legland
 % Created: 2017-07-09
@@ -33,7 +35,7 @@ nargoutchk(1,6)
 % If first argument is a struct
 if nargin == 2 || nargin == 4
     if ~isempty(varargin)
-        varargin={plane, varargin{:}};
+        varargin = [{plane}, varargin(:)'];
     end
     plane = f;
     [v, f] = parseMeshData(v);

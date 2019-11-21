@@ -1,16 +1,16 @@
-%DEMODRAWPOINT3D demo for drawPoint3d
+function demoDrawPoint3d
+%DEMODRAWPOINT3D Demo of drawPoint3d
 %
 %   Example
-%   demodrawPoint3d
+%     demoDrawPoint3d
 %
 %   See also
 %
+
 % ------
 % Author: oqilipo
 % Created: 2018-01-12, using R2017b
 % Copyright 2018
-
-if exist('props', 'var'); clearvars props; end
 
 %% Initialisation
 ptsx = rand(1,5);
@@ -26,7 +26,7 @@ hold on
 drawPoint3d(gca,pts2)
 %% 2
 figure('color','w')
-drawPoint3d(pts2,'g')
+drawPoint3d(pts2,'g.')
 hold on
 drawPoint3d(gca,ptsx, ptsy, ptsz,'r')
 %% 3
@@ -40,7 +40,7 @@ hold on
 drawPoint3d(gca,pts2,props,'MarkerSize',5)
 %% 4
 figure('color','w')
-drawPoint3d(ptsx, ptsy, ptsz,'MarkerSize',5,props,'Marker','s')
+drawPoint3d(ptsx, ptsy, ptsz,'MarkerSize',8,props,'Marker','s')
 hold on
 drawPoint3d(gca, pts2,'MarkerSize',12,props,'Marker','h')
 %% 5

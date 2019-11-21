@@ -1,15 +1,15 @@
 function demoGeom3d(varargin)
 %DEMOGEOM3D Demo of geom3d basic processing
-%   
-%   Usage:
-%   demoGeom3d
 %
-%   This demo demonstrates some usage example of the geom3d library. 
+%   Demonstrates some usage example of the geom3d library. 
 %   In particular, it shows how to:
 %   - create shapes like points, edges, lines and plane
 %   - draw these shape on current figure
 %   - compute intersections of lines and planes
 %   - compute lines perpendicular to a plane
+%
+%   Example
+%     demoGeom3d
 %
 %   See also
 %

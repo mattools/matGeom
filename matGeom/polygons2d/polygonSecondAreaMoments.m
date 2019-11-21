@@ -13,7 +13,7 @@ function [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(poly)
 %   * https://en.wikipedia.org/wiki/Second_moment_of_area
 %
 %   See also
-%     polygons2d, polygonInertiaEllipse, polygonArea, polygonCentroid
+%     polygons2d, polygonEquivalentEllipse, polygonArea, polygonCentroid
  
 % ------
 % Author: David Legland

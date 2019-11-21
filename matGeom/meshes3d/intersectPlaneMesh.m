@@ -1,5 +1,5 @@
 function polys = intersectPlaneMesh(plane, v, f)
-%INTERSECTPLANEMESH Compute the polygons resulting from plane-mesh intersection.
+% Compute the polygons resulting from plane-mesh intersection.
 %
 %   POLYS = intersectPlaneMesh(P, V, F)
 %   Computes the interection between a plane and a mesh given by vertex and
@@ -46,15 +46,26 @@ function polys = intersectPlaneMesh(plane, v, f)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2012-07-31,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
+
+e = [];
+if isstruct(v)
+    f = v.faces;
+    if isfield(v, 'edges')
+        e = v.edges;
+    end
+    v = v.vertices;
+end
 
 
 %% Computation of crossing edges
 
 % compute the edge list
-e = meshEdges(f);
+if isempty(e)
+    e = meshEdges(f);
+end
 edges = [ v(e(:,1), :) v(e(:,2), :) ];
 
 % identify which edges cross the mesh

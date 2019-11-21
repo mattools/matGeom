@@ -10,10 +10,10 @@ function FE = meshFaceEdges(vertices, edges, faces)
 %
 %   See also
 %     meshes3d, meshEdgeFaces
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2013-08-22,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2013 INRA - Cepia Software Platform.
 
