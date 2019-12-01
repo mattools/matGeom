@@ -62,6 +62,7 @@
 %   distancePolylines         - Compute the shortest distance between 2 polylines.
 %   intersectLinePolyline     - Intersection points between a line and a polyline.
 %   intersectPolylines        - Find the common points between 2 polylines.
+%   clipPolyline              - Clip an open polyline with a rectangular box.
 %   polylineSelfIntersections - Find self-intersection points of a polyline.
 %   simplifyPolyline          - Douglas-Peucker simplification of a polyline.
 %   smoothPolyline            - Smooth a polyline using local averaging.
