@@ -126,6 +126,8 @@
 % created the  07/11/2005.
 % Copyright INRA - Cepia Software Platform.
 
+help(mfilename);
+
   
 % HISTORY
 % 25/07/2007 remove old functions

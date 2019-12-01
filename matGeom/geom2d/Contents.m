@@ -199,8 +199,7 @@
 % Project homepage: http://github.com/mattools/matGeom
 % http://www.pfl-cepia.inra.fr/index.php?page=geom2d
 
-help('Contents');
-
+help(mfilename);
 
 %%   Deprecated functions
 %   normalize                - Normalize a vector.
