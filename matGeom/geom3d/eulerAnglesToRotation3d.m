@@ -14,7 +14,7 @@ function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)
 %   PSI:    rotation angle around X-axis, in degrees, corresponding to the
 %       'Roll'. PSI is between -180 and +180.
 %   These angles correspond to the "Yaw-Pitch-Roll" convention, also known
-%   as "Tait–Bryan angles".
+%   as "Tait-Bryan angles".
 %
 %   The resulting rotation is equivalent to a rotation around X-axis by an
 %   angle PSI, followed by a rotation around the Y-axis by an angle THETA,
