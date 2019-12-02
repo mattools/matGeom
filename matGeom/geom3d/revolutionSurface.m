@@ -63,8 +63,8 @@ function varargout = revolutionSurface(varargin)
 % default values
 
 % use revolution using the full unit circle, decomposed into 24 angular
-% segments (thus, some vertices correspond to particular angles 30°,
-% 45°...)
+% segments (thus, some vertices correspond to particular angles 30Â°,
+% 45Â°...)
 theta = linspace(0, 2*pi, 25);
 
 % use planar vertical axis as default revolution axis

@@ -4,7 +4,7 @@ function mat = createEulerAnglesRotation(phi, theta, psi)
 %   ROT = createEulerAnglesRotation(PHI, THETA, PSI)
 %   Create a rotation matrix from the 3 euler angles PHI THETA and PSI,
 %   in radians, using the 'XYZ' convention. These angles correspond to the
-%   "Roll-Pitch-Yaw" convention, also known as "Tait–Bryan angles".
+%   "Roll-Pitch-Yaw" convention, also known as "TaitÂ–Bryan angles".
 %   PHI:    rotation angle around X-axis, in radians, corresponding to the
 %       'Roll'. PHI is between -pi and +pi. 
 %   THETA:  rotation angle around Y-axis, in radians, corresponding to the

@@ -203,7 +203,7 @@ else
 end
 
 % circle parametrisation (by using N=60, some vertices are located at
-% special angles like 45°, 30°...)
+% special angles like 45Â°, 30Â°...)
 Nt  = 60;
 t   = linspace(0, 2*pi, Nt+1);
 
