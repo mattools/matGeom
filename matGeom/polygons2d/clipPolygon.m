@@ -2,15 +2,15 @@ function poly2 = clipPolygon(polygon, w)
 %CLIPPOLYGON Clip a polygon with a rectangular box.
 %
 %   POLY2 = clipPolygon(POLY, BOX);
-%   POLY is [Nx2] array of points
+%   POLY is N-by-2 array of points
 %   BOX has the form: [XMIN XMAX YMIN YMAX].
-%   Returns the polygon created by the itnersection of the polygon POLY and
+%   Returns the polygon created by the intersection of the polygon POLY and
 %   the bounding box BOX.
 %
 %   Note: Works only for convex polygons at the moment.
 %
 %   See also:
-%   polygons2d, boxes2d, clipPolygonHP
+%     polygons2d, boxes2d, clipPolygonHP, clipPolyline
 %
 
 % ---------
@@ -24,7 +24,7 @@ function poly2 = clipPolygon(polygon, w)
 % check case of polygons stored in cell array
 if iscell(polygon)
     poly2 = cell(1, length(polygon));
-    for i=1:length(polygon)
+    for i = 1:length(polygon)
         poly2{i} = clipPolygon(polygon{i}, w);
     end
     return;
@@ -32,7 +32,7 @@ end
 
 % check case of empty polygon
 N = size(polygon, 1);
-if N==0
+if N == 0
     poly2 = zeros(0, 2);
     return
 end
@@ -44,7 +44,7 @@ edges = [polygon polygon([2:N 1], :)];
 edges = clipEdge(edges, w);
 
 % select non empty edges, and get their vertices
-ind = sum(abs(edges), 2)>1e-14;
+ind = sum(abs(edges), 2) > 1e-14;
 pts = unique([edges(ind, 1:2); edges(ind, 3:4)], 'rows');
 
 % add vertices of window corner

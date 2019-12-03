@@ -15,9 +15,9 @@ function varargout = createOctahedron()
 %   and 'faces'.
 %
 %   Vertices are located on grid vertices:
-%    ( ±1,  0,  0 )
-%    (  0, ±1,  0 )
-%    (  0,  0, ±1 )
+%    ( Â±1,  0,  0 )
+%    (  0, Â±1,  0 )
+%    (  0,  0, Â±1 )
 %
 %   Edge length of returned octahedron is sqrt(2).
 %   Surface area of octahedron is 2*sqrt(3)*a^2, approximately 6.9282 in

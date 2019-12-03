@@ -217,7 +217,7 @@
 %   * Songbai Ji enhanced file intersectPlaneLine (6/23/2006).
 %   * several functions contributed by oqilipo
 %
-
+%
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
@@ -225,6 +225,8 @@
 % Homepage: http://github.com/mattools/matGeom
 % http://www.pfl-cepia.inra.fr/index.php?page=geom3d
 % Copyright 2005 INRA
+
+help(mfilename);
 
 % In development:
 %   clipPolygon3dHP             - clip a 3D polygon with Half-space.
