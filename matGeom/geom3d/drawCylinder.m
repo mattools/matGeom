@@ -1,17 +1,19 @@
 function varargout = drawCylinder(varargin)
-%DRAWCYLINDER Draw a cylinder.
+% Draw a cylinder.
 %
 %   drawCylinder(CYL)
-%   where CYL is a cylinder defined by [x1 y1 z1 x2 y2 z2 r]:
-%   [x1 y2 z1] are coordinates of starting point, [x2 y2 z2] are
-%   coordinates of ending point, and R is the radius of the cylinder,
-%   draws the corresponding cylinder on the current axis.
+%   Draws the cylinder CYL on the current axis. 
+%   CYL is a 1-by-7 row vector in the form [x1 y1 z1 x2 y2 z2 r] where:
+%   * [x1 y1 z1] are the coordinates of starting point, 
+%   * [x2 y2 z2] are the coordinates of ending point, 
+%   * R is the radius of the cylinder
 %
 %   drawCylinder(CYL, N)
-%   uses N points for discretisation of angle. Default value is 32.
+%   Uses N points for discretizating the circles of the cylinder. Default
+%   value is 32. 
 %
 %   drawCylinder(..., OPT)
-%   with OPT = 'open' (default) or 'closed', specify if bases of the
+%   with OPT = 'open' (default) or 'closed', specify if the bases of the
 %   cylinder should be drawn.
 %
 %   drawCylinder(..., 'FaceColor', COLOR)
@@ -22,38 +24,51 @@ function varargout = drawCylinder(varargin)
 %   drawCylinder(..., 'FaceAlpha', ALPHA)
 %   Specifies the transparency of the cylinder and of the optionnal caps.
 %
+%   drawCylinder(AX, ...)
+%   Specifies the axis to draw on. AX should be a valid axis handle.
+%
 %   H = drawCylinder(...)
-%   returns a handle to the patch representing the cylinder.
+%   Returns a handle to the patch representing the cylinder.
 %
 %
-%   Example:
-%   figure;drawCylinder([0 0 0 10 20 30 5]);
+%   Examples:
+%   % basic example
+%     figure; drawCylinder([0 0 0 10 20 30 5]);
 %
-%   figure;drawCylinder([0 0 0 10 20 30 5], 'open');
+%   % draw hollow cylinders
+%     figure; drawCylinder([0 0 0 10 20 30 5], 'open');
 %
-%   figure;drawCylinder([0 0 0 10 20 30 5], 'FaceColor', 'r');
+%   % change cylinder color
+%     figure; drawCylinder([0 0 0 10 20 30 5], 'FaceColor', 'r');
 %
-%   figure;
-%   h = drawCylinder([0 0 0 10 20 30 5]);
-%   set(h, 'facecolor', 'b');
+%   % change cylinder color using graphical handle
+%     figure;
+%     h = drawCylinder([0 0 0 10 20 30 5]);
+%     set(h, 'facecolor', 'b');
 %
 %   % Draw three mutually intersecting cylinders
-%     p0 = [30 30 30];
-%     p1 = [90 30 30];
-%     p2 = [30 90 30];
-%     p3 = [30 30 90];
-%     figure;
-%     drawCylinder([p0 p1 25], 'FaceColor', 'r');
-%     hold on
-%     drawCylinder([p0 p2 25], 'FaceColor', 'g');
-%     drawCylinder([p0 p3 25], 'FaceColor', 'b');
+%     p0 = [10 10 10];
+%     p1 = p0 + 80 * [1 0 0];
+%     p2 = p0 + 80 * [0 1 0];
+%     p3 = p0 + 80 * [0 0 1];
+%     figure; axis equal; axis([0 100 0 100 0 100]); hold on
+%     drawCylinder([p0 p1 10], 'FaceColor', 'r');
+%     drawCylinder([p0 p2 10], 'FaceColor', 'g');
+%     drawCylinder([p0 p3 10], 'FaceColor', 'b');
 %     axis equal
 %     set(gcf, 'renderer', 'opengl')
-%     view([60 30])
+%     view([60 30]); light;
+%
+%   % draw cube skeleton
+%     [v, e, f] = createCube;
+%     figure; axis equal; axis([-0.2 1.2 -0.2 1.2 -0.2 1.2]); hold on; view(3);
+%     cyls = [v(e(:,1), :) v(e(:,2),:) repmat(0.1, size(e, 1), 1)];
+%     drawCylinder(cyls);
+%     light
 %
 %   See Also:
-%   cylinderMesh, drawEllipseCylinder, drawSphere, drawLine3d, surf
-%   intersectLineCylinder, cylinderSurfaceArea
+%     cylinderMesh, drawEllipseCylinder, drawSphere, drawLine3d, surf
+%     intersectLineCylinder, cylinderSurfaceArea
 %
 
 %   ---------
@@ -72,6 +87,7 @@ function varargout = drawCylinder(varargin)
 
 %% Input argument processing
 
+% parse axis handle
 if numel(varargin{1}) == 1 && ishandle(varargin{1})
     hAx = varargin{1};
     varargin(1) = [];
@@ -79,8 +95,11 @@ else
     hAx = gca;
 end
 
+% input argument representing cylinders
 cyl = varargin{1};
 varargin(1) = [];
+
+% process the case of multiple cylinders
 if iscell(cyl)
     res = zeros(length(cyl), 1);
     for i = 1:length(cyl)
@@ -92,9 +111,20 @@ if iscell(cyl)
     end    
     return;
 end
+if size(cyl, 1) > 1
+    res = zeros(length(cyl), 1);
+    for i = 1:length(cyl)
+        res(i) = drawCylinder(hAx, cyl(i, :), varargin{:});
+    end
+    
+    if nargout > 0
+        varargout{1} = res;
+    end    
+    return;
+end
 
 % default values
-N = 128;
+N = 32;
 closed = true;
 
 % check number of discretization steps
@@ -121,7 +151,7 @@ if ~isempty(varargin)
 end
 
 faceColor = 'g';
-ind = find(strcmpi(varargin, 'facecolor'), 1, 'last');
+ind = find(strcmpi(varargin, 'FaceColor'), 1, 'last');
 if ~isempty(ind)
     faceColor = varargin{ind+1};
     varargin(ind:ind+1) = [];
@@ -129,7 +159,7 @@ end
 
 % extract transparency
 alpha = 1;
-ind = find(strcmpi(varargin, 'faceAlpha'), 1, 'last');
+ind = find(strcmpi(varargin, 'FaceAlpha'), 1, 'last');
 if ~isempty(ind)
     alpha = varargin{ind+1};
     varargin(ind:ind+1) = [];
