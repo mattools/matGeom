@@ -3,11 +3,9 @@ function varargout = transformPoint3d(varargin)
 %
 %   PT2 = transformPoint3d(PT1, TRANS);
 %   PT2 = transformPoint3d(X1, Y1, Z1, TRANS);
-%   where PT1 has the form [xp yp zp], and TRANS is a [3x3], [3x4], [4x4]
-%   matrix, return the point transformed according to the affine transform
-%   specified by TRANS.
-%
-%   Format of TRANS is a 4-by-4 matrix.
+%   where PT1 has the form [xp yp zp], and TRANS is a 3-by-3, 3-by-4, or
+%   4-by-4 matrix, returns the point transformed according to the affine
+%   transform specified by TRANS.
 %
 %   The function accepts transforms given using the following formats:
 %   [a b c]   ,   [a b c j] , or [a b c j]
@@ -23,17 +21,18 @@ function varargout = transformPoint3d(varargin)
 %   also work when X1, Y1 and Z1 are 3 arrays with the same size. In this
 %   case, PT2 will be a 1-by-3 cell containing {X Y Z} outputs of size(X1).
 %
-%   [X2 Y2 Z2] = transformPoint3d(...);
+%   [X2, Y2, Z2] = transformPoint3d(...);
 %   returns the result in 3 different arrays the same size as the input.
 %   This form can be useful when used with functions like meshgrid or warp.
 %   
-%   MESH2 = transformPoint3d(MESH, TRANS) transforms the field 'vertices' 
-%   of the struct MESH and returns the same struct with the transformed
-%   vertices
+%   MESH2 = transformPoint3d(MESH, TRANS) 
+%   transforms the field 'vertices' of the struct MESH and returns the same
+%   struct with the transformed vertices.
 %
 %   See also:
-%   points3d, transforms3d, translation3d, meshgrid
+%     points3d, transforms3d, translation3d, meshgrid
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -65,7 +64,8 @@ if length(varargin) == 2
     x(:) = varargin{1}(:,1,:);
     y(:) = varargin{1}(:,2,:);
     z(:) = varargin{1}(:,3,:);
-    trans  = varargin{2};  
+    trans  = varargin{2};
+    
 elseif length(varargin) == 4
     % Point coordinates are given in 3 different arrays
     x = varargin{1};
@@ -82,7 +82,7 @@ end
 
 % eventually add normalization
 if size(trans, 1) == 3
-    trans = [trans;0 0 0 1];
+    trans = [trans ; 0 0 0 1];
 end
 
 % convert coordinates
