@@ -140,6 +140,7 @@
 % http://www.pfl-cepia.inra.fr/index.php?page=geom3d
 % Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
+help(mfilename);
 
 % Deprecated:
 

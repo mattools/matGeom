@@ -163,7 +163,7 @@
 % http://www.pfl-cepia.inra.fr/index.php?page=geom2d
 % Copyright INRA - Cepia Software Platform.
 
-help('Contents');
+help(mfilename);
 
 %% Deprecated
 %   polygonInertiaEllipse     - Compute ellipse with same inertia moments as polygon.
