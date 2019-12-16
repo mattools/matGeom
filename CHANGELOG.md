@@ -7,6 +7,11 @@ and finally by module.
 
 ## [Unreleased]
 
+### Changed
+
+- (polygons2d) added clipPolyline function
+- (meshes3d) reading of OFF files is now faster when faces have homogeneous number of vertices
+
 
 ## MatGeom 1.2.1 - 2019-09-26
 
