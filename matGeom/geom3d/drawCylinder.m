@@ -1,4 +1,4 @@
-function varargout = drawCylinder(cyl, varargin)
+function varargout = drawCylinder(varargin)
 %DRAWCYLINDER Draw a cylinder.
 %
 %   drawCylinder(CYL)
@@ -72,10 +72,19 @@ function varargout = drawCylinder(cyl, varargin)
 
 %% Input argument processing
 
+if numel(varargin{1}) == 1 && ishandle(varargin{1})
+    hAx = varargin{1};
+    varargin(1) = [];
+else
+    hAx = gca;
+end
+
+cyl = varargin{1};
+varargin(1) = [];
 if iscell(cyl)
     res = zeros(length(cyl), 1);
     for i = 1:length(cyl)
-        res(i) = drawCylinder(cyl{i}, varargin{:});
+        res(i) = drawCylinder(hAx, cyl{i}, varargin{:});
     end
     
     if nargout > 0
@@ -161,12 +170,15 @@ z2 = reshape(pts(:,3), size(x));
 %% Display cylinder mesh
 
 % plot the cylinder as a surface
-hSurf = surf(x2, y2, z2, varargin{:});
+hSurf(1) = surf(hAx, x2, y2, z2, varargin{:});
 
 % eventually plot the ends of the cylinder
 if closed
-    patch(x2(1,:)', y2(1,:)', z2(1,:)', faceColor, 'edgeColor', 'none', 'FaceAlpha', alpha);
-    patch(x2(2,:)', y2(2,:)', z2(2,:)', faceColor, 'edgeColor', 'none', 'FaceAlpha', alpha);
+    hSurf(2)=patch(hAx, x2(1,:)', y2(1,:)', z2(1,:)', faceColor, 'edgeColor', 'none', 'FaceAlpha', alpha);
+    hSurf(3)=patch(hAx, x2(2,:)', y2(2,:)', z2(2,:)', faceColor, 'edgeColor', 'none', 'FaceAlpha', alpha);
+    gh = hggroup;
+    set(hSurf,'Parent',gh)
+    hSurf = gh;
 end
 
 % format ouptut
