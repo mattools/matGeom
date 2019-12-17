@@ -103,7 +103,7 @@
 %   polygonEquivalentEllipse  - Compute equivalent ellipse with same second order moments as polygon.
 %   polygonSecondAreaMoments  - Compute second-order area moments of a polygon.
 %   polygonLength             - Perimeter of a polygon.
-%   polygonNormalAngle        - Compute the normal angle at a vertex of the polygon.
+%   polygonNormalAngle        - Normal angle at each vertex of a polygon.
 %   polygonBounds             - Compute the bounding box of a polygon.
 %   polygonOuterNormal        - Outer normal vector for a given vertex(ices).
 %   distancePointPolygon      - Shortest distance between a point and a polygon.
