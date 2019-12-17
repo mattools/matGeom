@@ -101,24 +101,22 @@ varargin(1) = [];
 
 % process the case of multiple cylinders
 if iscell(cyl)
-    res = zeros(length(cyl), 1);
+    hCyls = gobjects(length(cyl), 1);
     for i = 1:length(cyl)
-        res(i) = drawCylinder(hAx, cyl{i}, varargin{:});
+        hCyls(i) = drawCylinder(hAx, cyl{i}, varargin{:});
     end
-    
     if nargout > 0
-        varargout{1} = res;
+        varargout{1} = hCyls;
     end    
     return;
-end
-if size(cyl, 1) > 1
-    res = zeros(length(cyl), 1);
-    for i = 1:length(cyl)
-        res(i) = drawCylinder(hAx, cyl(i, :), varargin{:});
+elseif size(cyl, 1) > 1
+    hCyls = gobjects(size(cyl, 1), 1);
+    for i = 1:size(cyl, 1)
+        hCyls(i) = drawCylinder(hAx, cyl(i, :), varargin{:});
     end
     
     if nargout > 0
-        varargout{1} = res;
+        varargout{1} = hCyls;
     end    
     return;
 end
@@ -200,18 +198,18 @@ z2 = reshape(pts(:,3), size(x));
 %% Display cylinder mesh
 
 % plot the cylinder as a surface
-hSurf(1) = surf(hAx, x2, y2, z2, varargin{:});
+hCyl(1) = surf(hAx, x2, y2, z2, varargin{:});
 
 % eventually plot the ends of the cylinder
 if closed
-    hSurf(2)=patch(hAx, x2(1,:)', y2(1,:)', z2(1,:)', faceColor, 'edgeColor', 'none', 'FaceAlpha', alpha);
-    hSurf(3)=patch(hAx, x2(2,:)', y2(2,:)', z2(2,:)', faceColor, 'edgeColor', 'none', 'FaceAlpha', alpha);
+    hCyl(2)=patch(hAx, x2(1,:)', y2(1,:)', z2(1,:)', faceColor, 'edgeColor', 'none', 'FaceAlpha', alpha);
+    hCyl(3)=patch(hAx, x2(2,:)', y2(2,:)', z2(2,:)', faceColor, 'edgeColor', 'none', 'FaceAlpha', alpha);
     gh = hggroup;
-    set(hSurf,'Parent',gh)
-    hSurf = gh;
+    set(hCyl,'Parent',gh)
+    hCyl = gh;
 end
 
 % format ouptut
 if nargout == 1
-    varargout{1} = hSurf;
+    varargout{1} = hCyl;
 end
