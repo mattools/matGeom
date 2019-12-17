@@ -124,7 +124,7 @@ for e = 1:size(edges, 1)
     edge = clipEdge(edge, [box(1) box(2); box(3) box(4)]);
     
     % display debug info
-    %disp(sprintf('clip edge n°%2d, from %2d to %2d', e, edges(e,1), edges(e,2)));
+    % disp(sprintf('clip edge n°%2d, from %2d to %2d', e, edges(e,1), edges(e,2)));
     
     % Node for first vertex
     if ~in1
