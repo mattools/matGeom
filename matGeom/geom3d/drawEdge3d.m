@@ -8,6 +8,17 @@ function varargout = drawEdge3d(varargin)
 %
 %   H = drawEdge3d(...) returns a handle H to the line object.
 %
+%   Example
+%     figure; axis equal; view(3)
+%     p1 = [10 20 80];
+%     p2 = [80 10 20];
+%     p3 = [20 50 10];
+%     drawEdge3d(gca, [p1;p2],[p2;p3],'b');
+%     drawEdge3d([p1;p3],'k');
+%     pause(1)
+%     drawEdge3d(gca, [p1 p2; p2 p3],'g');
+%     drawEdge3d(p1(1), p1(2), p1(3),p3(1), p3(2), p3(3),'Color','r','Marker','x');
+%
 %   See also
 %   drawLine3d, clipLine3d, drawEdge
 %   
@@ -21,7 +32,7 @@ function varargout = drawEdge3d(varargin)
 %   15/12/2009 "reprecate", and add processing of input arguments
 
 % Parse and check inputs
-if numel(varargin{1}) == 1 && ishandle(varargin{1})
+if isAxisHandle(varargin{1})
     hAx = varargin{1};
     varargin(1) = [];
 else
@@ -33,30 +44,39 @@ nCol = size(varargin{1}, 2);
 if nCol == 6
     % all parameters in a single array
     edges = varargin{1};
-    options = varargin(2:end);
-    
+    varargin(1) = [];
 elseif nCol == 3
-    % parameters are two points, or two arrays of points, of size N*3.
-    edges = [varargin{1} varargin{2}];
-    options = varargin(3:end);
-    
+    if isequal(size(varargin{1}), [2 3]) && length(varargin) == 1
+        % parameters are two points given as 2x3
+        edges = [varargin{1}(1,:) varargin{1}(2,:)];
+    elseif isequal(size(varargin{1}), [2 3]) && ~isnumeric(varargin{2})
+        % parameters are two points given as 2x3
+        edges = [varargin{1}(1,:) varargin{1}(2,:)];
+        varargin(1) = [];
+    else
+        % parameters are two points, or two arrays of points, of size N*3.
+        edges = [varargin{1} varargin{2}];
+        varargin(1:2) = [];
+    end
 elseif nargin >= 6
     % parameters are 6 parameters of the edge : x1 y1 z1 x2 y2 and z2
     edges = [varargin{1} varargin{2} varargin{3} varargin{4} varargin{5} varargin{6}];
-    options = varargin(7:end);
+    varargin(1:6) = [];
 end
+
+% Parse and check inputs
+isEdge3d = @(x) validateattributes(x,{'numeric'},...
+    {'nonempty','nonnan','real','finite','size',[nan,6]});
+defOpts.Color = 'b';
+[~, edges, varargin] = ...
+    parseDrawInput(edges, isEdge3d, 'line', defOpts, varargin{:});
 
 % draw edges
 h = line(...
     [edges(:, 1) edges(:, 4)]', ...
     [edges(:, 2) edges(:, 5)]', ...
-    [edges(:, 3) edges(:, 6)]', 'color', 'b', ...
+    [edges(:, 3) edges(:, 6)]', varargin{:}, ...
     'Parent', hAx);
-    
-% apply optional drawing style
-if ~isempty(options)
-    set(h, options{:});
-end
 
 % return handle to created Edges
 if nargout > 0

@@ -104,6 +104,8 @@ elseif length(varargin)==2
         % first param is angle of line, and second param is signed distance
         % to origin.
         line = [v1.*cos(v2) v1.*sin(v2) -sin(v2) cos(v2)];
+    elseif size(v1, 2)==3 || size(v2, 2)==3
+        error('The 1st or 2nd input argument has 3 columns. You may want to try createLine3d.');
     else
         % first input parameter is first point, and second input is the
         % second point.

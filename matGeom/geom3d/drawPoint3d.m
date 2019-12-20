@@ -38,7 +38,7 @@ function h = drawPoint3d(varargin)
 %   12/01/2018 added axes handle input
 %
 
-if numel(varargin{1}) == 1 && ishghandle(varargin{1}, 'axes')
+if isAxisHandle(varargin{1})
     hAx = varargin{1};
     varargin(1)=[];
 else

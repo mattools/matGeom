@@ -88,7 +88,7 @@ function varargout = drawCylinder(varargin)
 %% Input argument processing
 
 % parse axis handle
-if numel(varargin{1}) == 1 && ishandle(varargin{1})
+if isAxisHandle(varargin{1})
     hAx = varargin{1};
     varargin(1) = [];
 else
