@@ -58,7 +58,7 @@ vertices = [...
 edges = [1 2;1 3;1 5;2 4;2 6;3 4;3 7;4 8;5 6;5 7;6 8;7 8];
 
 % faces are oriented such that normals point outwards
-faces = [1 3 4 2;5 6 8 7;2 4 8 6;1 5 7 3;1 2 6 5;3 7 8 4];
+faces = [2 4 3 1;7 8 6 5;6 8 4 2;3 7 5 1;5 6 2 1;4 8 7 3];
 
 % format output
 varargout = formatMeshOutput(nargout, vertices, edges, faces);
