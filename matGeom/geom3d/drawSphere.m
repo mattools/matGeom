@@ -69,7 +69,7 @@ function varargout = drawSphere(varargin)
 %   2010-11-08 code cleanup, add doc
 
 % Check if axes handle is specified
-if numel(varargin{1}) == 1 && ishghandle(varargin{1}, 'axes')
+if isAxisHandle(varargin{1})
     hAx = varargin{1};
     varargin(1)=[];
 else

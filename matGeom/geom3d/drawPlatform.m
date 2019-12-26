@@ -34,7 +34,7 @@ function  varargout = drawPlatform(plane, siz, varargin)
 %% Parse inputs
 
 % extract axis handle
-if numel(plane) == 1 && ishandle(plane)
+if isAxisHandle(plane)
     hAx = plane;
     plane = siz;
     siz = varargin{1};
