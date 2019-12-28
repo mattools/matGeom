@@ -27,17 +27,17 @@ function varargout = drawEllipseCylinder(cyl, varargin)
 %
 %
 %   Example:
-%   figure;drawEllipseCylinder([0 0 0 10 20 30 5]);
+%     figure; drawEllipseCylinder([0 0 0 10 20 30 5 2]);
 %
-%   figure;drawEllipseCylinder([0 0 0 10 20 30 5], 'open');
+%     figure; drawEllipseCylinder([0 0 0 10 20 30 5 2], 'open');
 %
-%   figure;drawEllipseCylinder([0 0 0 10 20 30 5], 'FaceColor', 'r');
+%     figure; drawEllipseCylinder([0 0 0 10 20 30 5 2], 'FaceColor', 'r');
 %
-%   figure;
-%   h = drawEllipseCylinder([0 0 0 10 20 30 5]);
-%   set(h, 'facecolor', 'b');
+%     figure;
+%     h = drawEllipseCylinder([0 0 0 10 20 30 5 2]);
+%     set(h, 'facecolor', 'b');
 %
-%   % Draw three mutually intersecting elliptic cylinders
+%     % Draw three mutually intersecting elliptic cylinders
 %     p1 = [30 0 0];
 %     p2 = [0 30 0];
 %     p3 = [0 0 30];

@@ -1,4 +1,4 @@
-function drawAxis3d(varargin)
+function varargout=drawAxis3d(varargin)
 %DRAWAXIS3D Draw a coordinate system and an origin.
 %
 %   drawAxis3d
@@ -11,10 +11,10 @@ function drawAxis3d(varargin)
 %   different axes.
 %
 %   Example
-%   drawAxis
+%   drawAxis3d
 %
 %   figure;
-%   drawAxis(20, 1);
+%   drawAxis3d(20, 1);
 %
 %   See also
 %   drawAxisCube
@@ -24,6 +24,14 @@ function drawAxis3d(varargin)
 % e-mail: david.legland@nantes.inra.fr
 % Created: 2007-08-14,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+
+% Check if axes handle is specified
+if isAxisHandle(varargin{1})
+    hAx = varargin{1};
+    varargin(1)=[];
+else
+    hAx = gca;
+end
 
 % geometrical data
 origin = [0 0 0];
@@ -45,8 +53,13 @@ end
 
 % draw 3 cylinders and a ball
 hold on;
-drawCylinder([origin origin+v1*L r], 16, 'facecolor', 'r', 'edgecolor', 'none');
-drawCylinder([origin origin+v2*L r], 16, 'facecolor', 'g', 'edgecolor', 'none');
-drawCylinder([origin origin+v3*L r], 16, 'facecolor', 'b', 'edgecolor', 'none');
-drawSphere([origin 2*r], 'faceColor', 'black');
+sh(1)=drawCylinder(hAx,[origin origin+v1*L r], 16, 'facecolor', 'r', 'edgecolor', 'none');
+sh(2)=drawCylinder(hAx,[origin origin+v2*L r], 16, 'facecolor', 'g', 'edgecolor', 'none');
+sh(3)=drawCylinder(hAx,[origin origin+v3*L r], 16, 'facecolor', 'b', 'edgecolor', 'none');
+sh(4)=drawSphere(hAx,[origin 2*r], 'faceColor', 'black');
+gh = hggroup;
+set(sh,'Parent',gh)
 
+if nargout > 0
+    varargout = {gh};
+end
