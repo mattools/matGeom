@@ -23,15 +23,18 @@ function varargout = drawBox3d(box, varargin)
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
-%   created the 10/12/2003.
+%   created the 22/02/2010.
 %
 
-% HISTORY
-% 2010-02-22 creation
+% Parse and check inputs
+isBox3d = @(x) validateattributes(x,{'numeric'},...
+    {'nonempty','nonnan','real','finite','size',[nan,6]});
+defOpts.Color = 'b';
+[hAx, box, varargin] = ...
+    parseDrawInput(box, isBox3d, 'line', defOpts, varargin{:});
 
 
-% default values
-
+% box limits
 xmin = box(:,1);
 xmax = box(:,2);
 ymin = box(:,3);
@@ -44,24 +47,24 @@ nBoxes = size(box, 1);
 gh=zeros(nBoxes,1);
 for i=1:nBoxes
     % lower face (z=zmin)
-    sh(1)=drawEdge3d([xmin(i) ymin(i) zmin(i)     xmax(i) ymin(i) zmin(i)], varargin{:});
-    sh(2)=drawEdge3d([xmin(i) ymin(i) zmin(i)     xmin(i) ymax(i) zmin(i)], varargin{:});
-    sh(3)=drawEdge3d([xmax(i) ymin(i) zmin(i)     xmax(i) ymax(i) zmin(i)], varargin{:});
-    sh(4)=drawEdge3d([xmin(i) ymax(i) zmin(i)     xmax(i) ymax(i) zmin(i)], varargin{:});
+    sh(1)=drawEdge3d(hAx, [xmin(i) ymin(i) zmin(i)     xmax(i) ymin(i) zmin(i)], varargin{:});
+    sh(2)=drawEdge3d(hAx, [xmin(i) ymin(i) zmin(i)     xmin(i) ymax(i) zmin(i)], varargin{:});
+    sh(3)=drawEdge3d(hAx, [xmax(i) ymin(i) zmin(i)     xmax(i) ymax(i) zmin(i)], varargin{:});
+    sh(4)=drawEdge3d(hAx, [xmin(i) ymax(i) zmin(i)     xmax(i) ymax(i) zmin(i)], varargin{:});
  
     % front face (y=ymin)
-    sh(5)=drawEdge3d([xmin(i) ymin(i) zmin(i)     xmin(i) ymin(i) zmax(i)], varargin{:});
-    sh(6)=drawEdge3d([xmax(i) ymin(i) zmin(i)     xmax(i) ymin(i) zmax(i)], varargin{:});
-    sh(7)=drawEdge3d([xmin(i) ymin(i) zmax(i)     xmax(i) ymin(i) zmax(i)], varargin{:});
+    sh(5)=drawEdge3d(hAx, [xmin(i) ymin(i) zmin(i)     xmin(i) ymin(i) zmax(i)], varargin{:});
+    sh(6)=drawEdge3d(hAx, [xmax(i) ymin(i) zmin(i)     xmax(i) ymin(i) zmax(i)], varargin{:});
+    sh(7)=drawEdge3d(hAx, [xmin(i) ymin(i) zmax(i)     xmax(i) ymin(i) zmax(i)], varargin{:});
 
     % left face (x=xmin)
-    sh(8)=drawEdge3d([xmin(i) ymax(i) zmin(i)     xmin(i) ymax(i) zmax(i)], varargin{:});
-    sh(9)=drawEdge3d([xmin(i) ymin(i) zmax(i)     xmin(i) ymax(i) zmax(i)], varargin{:});
+    sh(8)=drawEdge3d(hAx, [xmin(i) ymax(i) zmin(i)     xmin(i) ymax(i) zmax(i)], varargin{:});
+    sh(9)=drawEdge3d(hAx, [xmin(i) ymin(i) zmax(i)     xmin(i) ymax(i) zmax(i)], varargin{:});
 
     % the last 3 remaining edges
-    sh(10)=drawEdge3d([xmin(i) ymax(i) zmax(i)     xmax(i) ymax(i) zmax(i)], varargin{:});
-    sh(11)=drawEdge3d([xmax(i) ymax(i) zmin(i)     xmax(i) ymax(i) zmax(i)], varargin{:});
-    sh(12)=drawEdge3d([xmax(i) ymin(i) zmax(i)     xmax(i) ymax(i) zmax(i)], varargin{:});
+    sh(10)=drawEdge3d(hAx, [xmin(i) ymax(i) zmax(i)     xmax(i) ymax(i) zmax(i)], varargin{:});
+    sh(11)=drawEdge3d(hAx, [xmax(i) ymax(i) zmin(i)     xmax(i) ymax(i) zmax(i)], varargin{:});
+    sh(12)=drawEdge3d(hAx, [xmax(i) ymin(i) zmax(i)     xmax(i) ymax(i) zmax(i)], varargin{:});
     
     gh(i) = hggroup;
     set(sh,'Parent',gh(i))
