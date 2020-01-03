@@ -1,5 +1,5 @@
 function n = vectorNorm3d(v)
-%VECTORNORM3D Norm of a 3D vector or of set of 3D vectors.
+% Norm of a 3D vector or of set of 3D vectors.
 %
 %   N = vectorNorm3d(V);
 %   Returns the norm of vector V.
@@ -10,7 +10,7 @@ function n = vectorNorm3d(v)
 %   NOTE: compute only euclidean norm.
 %
 %   See Also
-%   vectors3d, normalizeVector3d, vectorAngle3d, hypot3
+%     vectors3d, normalizeVector3d, vectorAngle3d, hypot3
 %
 
 %   ---------
@@ -21,4 +21,4 @@ function n = vectorNorm3d(v)
 %   HISTORY
 %   19/06/2009 rename as vectorNorm3d
 
-n = sqrt(sum(v.*v, 2));
+n = sqrt(sum(v.*v, ndims(v)));

@@ -1,5 +1,5 @@
 function vn = normalizeVector3d(v)
-%NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.
+% Normalize a 3D vector to have norm equal to 1.
 %
 %   V2 = normalizeVector3d(V);
 %   Returns the normalization of vector V, such that ||V|| = 1. Vector V is
@@ -8,8 +8,11 @@ function vn = normalizeVector3d(v)
 %   If V is a N-by-3 array, normalization is performed for each row of the
 %   input array.
 %
+%   If V is a M-by-N-by-3 array, normalization is performed along the last
+%   dimension of the array.
+%
 %   See also:
-%   vectors3d, vectorNorm3d
+%     vectors3d, vectorNorm3d
 %
 
 %   ---------
@@ -23,4 +26,8 @@ function vn = normalizeVector3d(v)
 % 2009-06-19 rename as normalizeVector3d
 % 2010-11-16 use bsxfun (Thanks to Sven Holcombe)
 
-vn   = bsxfun(@rdivide, v, sqrt(sum(v.^2, 2)));
+if ismatrix(v)
+    vn = bsxfun(@rdivide, v, sqrt(sum(v.^2, 2)));
+else
+    vn = bsxfun(@rdivide, v, sqrt(sum(v.^2, ndims(v))));
+end
