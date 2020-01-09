@@ -1,5 +1,5 @@
 function [vertices, faces] = curveToMesh(curve, varargin)
-%CURVETOMESH  Create a mesh surrounding a 3D curve.
+% Create a mesh surrounding a 3D curve.
 %
 %   [V, F] = curveToMesh(CURVE)
 %   Computes the vertices and the faces of the mesh surrounding the

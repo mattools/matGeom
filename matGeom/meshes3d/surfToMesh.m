@@ -1,22 +1,22 @@
 function varargout = surfToMesh(x, y, varargin)
-%SURFTOMESH Convert surface grids into face-vertex mesh.
+% Convert surface grids into face-vertex mesh.
 %
-%   [V F] = surfToMesh(X, Y)
-%   [V F] = surfToMesh(X, Y, Z)
+%   [V, F] = surfToMesh(X, Y)
+%   [V, F] = surfToMesh(X, Y, Z)
 %   Converts the surface grid given by two or three coordinate arrays into
 %   a face-vertex quad mesh.
 %
 %   Example
 %     % transform a surface into a mesh
-%     [X,Y] = meshgrid(-2:.2:2, -2:.2:2);                                
+%     [X, Y] = meshgrid(-2:.2:2, -2:.2:2);                                
 %     Z = X .* exp(-X.^2 - Y.^2);
-%     [V F] = surfToMesh(X, Y, Z);
+%     [V, F] = surfToMesh(X, Y, Z);
 %     figure;
 %     drawMesh(V, F); view(3);
 %
 %     % Transform surface of a cylinder as a mesh
-%     [x y z] = cylinder(5*ones(1, 10));
-%     [v f] = surfToMesh(x, y, z, 'xPeriodic', true);
+%     [x, y, z] = cylinder(5*ones(1, 10));
+%     [v, f] = surfToMesh(x, y, z, 'xPeriodic', true);
 %     figure;
 %     drawMesh(v, f);
 %     view(3); axis equal;
@@ -26,7 +26,7 @@ function varargout = surfToMesh(x, y, varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2012-10-25,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
@@ -57,7 +57,6 @@ while length(varargin) > 1
 
     varargin(1:2) = [];
 end
-
 
 
 %% Compute vertex indices

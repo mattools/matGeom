@@ -1,5 +1,5 @@
 function varargout = sphereMesh(sphere, varargin)
-%SPHEREMESH  Create a 3D mesh representing a sphere.
+% Create a 3D mesh representing a sphere.
 %
 %   [V, F] = sphereMesh(S)
 %   Creates a 3D mesh representing the sphere S given by [xc yc zy r].

@@ -1,14 +1,14 @@
 function varargout = cylinderMesh(cyl, varargin)
-%CYLINDERMESH  Create a 3D mesh representing a cylinder.
+% Create a 3D mesh representing a cylinder.
 %
-%   [V F] = cylinderMesh(CYL)
+%   [V, F] = cylinderMesh(CYL)
 %   Computes vertex coordinates and face vertex indices of a mesh
 %   representing a 3D cylinder given as [X1 Y1 Z1 X2 Y2 Z2 R].
 %
 %   Example
 %     % Draw a rotated cylinder
 %     cyl = [0 0 0 10 20 30 5];
-%     [v f] = cylinderMesh(cyl);
+%     [v, f] = cylinderMesh(cyl);
 %     figure;drawMesh(v, f, 'FaceColor', 'r');
 %     view(3); axis equal;
 %
@@ -32,7 +32,7 @@ function varargout = cylinderMesh(cyl, varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inra.fr
 % Created: 2012-10-25,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
