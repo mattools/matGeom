@@ -1,5 +1,5 @@
 function varargout = drawCube(cube, varargin)
-%DRAWCUBE Draw a 3D centered cube, eventually rotated.
+% Draw a 3D centered cube, eventually rotated.
 %
 %   drawCube(CUBE)
 %   Displays a 3D cube on current axis. CUBE is given by:
@@ -30,7 +30,7 @@ function varargout = drawCube(cube, varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2011-06-29,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 

@@ -1,5 +1,5 @@
 function varargout = drawBox3d(box, varargin)
-%DRAWBOX3D Draw a 3D box defined by coordinate extents.
+% Draw a 3D box defined by coordinate extents.
 %   
 %   drawBox3d(BOX);
 %   Draw a box defined by its coordinate extents: 
@@ -18,12 +18,14 @@ function varargout = drawBox3d(box, varargin)
 %     view(3)
 %
 %   See Also:
-%   boxes3d, boundingBox3d
+%     boxes3d, boundingBox3d
 %
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 22/02/2010.
+
+% ---------
+% Author: David Legland
+% e-mail: david.legland@inrae.fr
+% INRA - TPV URPOI - BIA IMASTE
+% created the 22/02/2010.
 %
 
 % Parse and check inputs

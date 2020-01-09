@@ -1,5 +1,5 @@
 function varargout = drawCircleArc3d(arc, varargin)
-%DRAWCIRCLEARC3D Draw a 3D circle arc.
+% Draw a 3D circle arc.
 %
 %   drawCircleArc3d([XC YC ZC R THETA PHI PSI START EXTENT])
 %   [XC YC ZC]  : coordinate of arc center
@@ -12,13 +12,14 @@ function varargout = drawCircleArc3d(arc, varargin)
 %   Drawing options can be specified, as for the plot command.
 %
 %   See also
-%   angles3, circles3d, drawCircle3d, drawCircleArc
+%     angles3d, circles3d, drawCircle3d, drawCircleArc
 %
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 21/02/2005
+
+% ------
+% Author: David Legland
+% e-mail: david.legland@inrae.fr
+% INRA - TPV URPOI - BIA IMASTE
+% created the 21/02/2005
 %
 
 %   HISTORY

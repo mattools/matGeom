@@ -1,5 +1,5 @@
 function varargout = drawCuboid(cuboid, varargin)
-%DRAWCUBOID Draw a 3D cuboid, eventually rotated.
+% Draw a 3D cuboid, eventually rotated.
 %
 %   drawCuboid(CUBOID)
 %   Displays a 3D cuboid on current axis. CUBOID is given by:
@@ -28,12 +28,12 @@ function varargout = drawCuboid(cuboid, varargin)
 %     set(gcf, 'renderer', 'opengl')
 %
 %   See also
-%   meshes3d, polyhedra, createCube, drawEllipsoid, drawCube
+%     meshes3d, polyhedra, createCube, drawEllipsoid, drawCube
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2011-06-29,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 

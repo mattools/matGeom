@@ -1,5 +1,5 @@
 function varargout = drawCircle3d(varargin)
-%DRAWCIRCLE3D Draw a 3D circle.
+% Draw a 3D circle.
 %
 %   Possible calls for the function:
 %   drawCircle3d([XC YC ZC R THETA PHI])
@@ -46,11 +46,12 @@ function varargout = drawCircle3d(varargin)
 %     axis equal;
 %
 %   See also:
-%   circles3d, drawCircleArc3d, drawEllipse3d, drawSphere
+%     circles3d, drawCircleArc3d, drawEllipse3d, drawSphere
+
 %
 %   ------
 %   Author: David Legland
-%   e-mail: david.legland@grignon.inra.fr
+%   e-mail: david.legland@inra.fr
 %   Created: 2005-02-17
 %   Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 

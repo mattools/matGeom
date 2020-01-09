@@ -1,5 +1,5 @@
 function circles3d(varargin)
-%CIRCLES3D Description of functions operating on 3D circles.
+% Description of functions operating on 3D circles.
 %
 %   Circles are represented by a center, a radius and a 3D angle
 %   representing the normal of the plane containing the circle. 
@@ -14,8 +14,9 @@ function circles3d(varargin)
 %   circle3dOrigin, circle3dPosition, circle3dPoint, intersectPlaneSphere
 %   drawCircle3d, drawCircleArc3d, drawEllipse3d
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
