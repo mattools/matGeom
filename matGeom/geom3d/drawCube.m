@@ -34,33 +34,44 @@ function varargout = drawCube(cube, varargin)
 % Created: 2011-06-29,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
+% Parse and check inputs
+hAx = gca;
+if nargin > 0
+    if isAxisHandle(cube)
+        hAx = cube;
+        if ~isempty(varargin)
+            cube=varargin{1};
+            varargin(1) = [];
+        end
+    end
+end
 
 % default values
+xc    = 0;
+yc    = 0;
+zc    = 0;
+a     = 1;
 theta = 0;
 phi   = 0;
 psi   = 0;
 
 %% Parses the input
-if nargin == 0
-    % no input: assumes cube with default shape
-    xc = 0;	yc = 0; zc = 0;
-    a = 1;
-
-else
+if nargin > 0 && ~isAxisHandle(cube)
     % one argument: parses elements
     xc  = cube(:,1);
     yc  = cube(:,2);
     zc  = cube(:,3);
-    a   = cube(:,4);
-
+    % parses side length if present
+    if size(cube, 2) >= 4
+        a   = cube(:,4);
+    end
     % parses orientation if present
-    k   = pi / 180;
     if size(cube, 2) >= 6
-        theta = cube(:,5) * k;
-        phi   = cube(:,6) * k;
+        theta = deg2rad(cube(:,5));
+        phi   = deg2rad(cube(:,6));
     end
     if size(cube, 2) >= 7
-        psi   = cube(:,7) * k;
+        psi   = deg2rad(cube(:,7));
     end
 end
 
@@ -82,22 +93,22 @@ tra     = createTranslation3d([xc yc zc]);
 trans   = tra * rot3 * rot2 * rot1 * sca;
 
 % transform mesh vertices
-[x, y, z] = transformPoint3d(v, trans);
+v = transformPoint3d(v, trans);
 
 
 %% Process output
 if nargout == 0
     % no output: draw the cube
-    drawMesh([x y z], f, varargin{:});
+    drawMesh(hAx, v, f, varargin{:});
     
 elseif nargout == 1
     % one output: draw the cube and return handle 
-    varargout{1} = drawMesh([x y z], f, varargin{:});
+    varargout{1} = drawMesh(hAx, v, f, varargin{:});
     
 elseif nargout == 3
     % 3 outputs: return computed coordinates
-    varargout{1} = x; 
-    varargout{2} = y; 
-    varargout{3} = z; 
+    varargout{1} = v(:,1); 
+    varargout{2} = v(:,2); 
+    varargout{3} = v(:,3); 
 end
 
