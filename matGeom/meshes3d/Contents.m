@@ -39,6 +39,7 @@
 %   meshFaceCentroids          - Compute centroids of faces in a mesh.
 %   meshFaceNormals            - Compute normal vector of faces in a 3D mesh.
 %   meshVertexNormals          - Compute normals to a mesh vertices.
+%   meshComplement             - Reverse the normal of each face in the mesh.
 %
 % Intersections and clipping
 %   intersectLineMesh3d        - Intersection points of a 3D line with a mesh.
@@ -54,7 +55,7 @@
 %   meshSurfaceArea            - Surface area of a polyhedral mesh.
 %   trimeshSurfaceArea         - Surface area of a triangular mesh.
 %   meshFaceAreas              - Surface area of each face of a mesh.
-%   meshVolume                 - Volume of the space enclosed by a polygonal mesh.
+%   meshVolume                 - (Signed) volume of the space enclosed by a polygonal mesh.
 %   meshEdgeLength             - Lengths of edges of a polygonal or polyhedral mesh.
 %   meshDihedralAngles         - Dihedral at edges of a polyhedal mesh.
 %   polyhedronCentroid         - Compute the centroid of a 3D convex polyhedron.
