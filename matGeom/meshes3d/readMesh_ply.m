@@ -109,7 +109,7 @@ while true
             elementPropertyTypes{typeCount} = types; %#ok<AGROW>
             
         otherwise
-            error('matGeom:readMesh_ply:FileFormatError', ...
+            warning('matGeom:readMesh_ply:FileFormatError', ...
                 ['Unknown keyword: ' tokens{1}]);
             
     end
