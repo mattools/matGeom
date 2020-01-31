@@ -40,6 +40,7 @@
 %   meshFaceNormals            - Compute normal vector of faces in a 3D mesh.
 %   meshVertexNormals          - Compute normals to a mesh vertices.
 %   meshComplement             - Reverse the normal of each face in the mesh.
+%   averageMesh                - Compute average mesh from a list of meshes.
 %
 % Intersections and clipping
 %   intersectLineMesh3d        - Intersection points of a 3D line with a mesh.
