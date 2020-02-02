@@ -3,6 +3,9 @@ function varargout = drawAngleBetweenVectors3d(o, v1, v2, r, varargin)
 %
 %   drawAngleBetweenVectors3d(ORIGIN, VECTOR1, VECTOR2, RADIUS) 
 %   draws the arc between VECTOR1 and VECTOR2.
+%
+%   drawAngleBetweenVectors3d(...,'ConjugateAngle',1) draws the conjugate
+%   angle instead of the small angle. Default is false.
 %   
 %   H = drawAngleBetweenVectors3d(...)
 %   returns the handle of the created LINE object
@@ -37,17 +40,33 @@ if isAxisHandle(o)
     varargin(1) = [];
 end
 
+p = inputParser;
+p.KeepUnmatched = true;
+logParValidFunc=@(x) (islogical(x) || isequal(x,1) || isequal(x,0));
+addParameter(p,'ConjugateAngle',false,logParValidFunc);
+parse(p, varargin{:});
+conjugate=p.Results.ConjugateAngle;
+drawOptions=p.Unmatched;
+
+% Normal of the two vectors
 normal=normalizeVector3d(crossProduct3d(v1, v2));
-
+% Align normal with the z axis.
 ROT = createRotationVector3d(normal,[0 0 1]);
+% Align first vector with x axis
 ROTv1 = createRotationVector3d(transformVector3d(v1,ROT),[1 0 0]);
-
+% Get Euler angles of the arc. 
+% The arc is an flat object. Hence, use the 'ZYZ' convention.
 [PHI, THETA, PSI] = rotation3dToEulerAngles((ROTv1*ROT)','ZYZ');
+% Get angle between the vectors
 angle=rad2deg(vectorAngle3d(v1, v2));
+% Draw the arc
+if ~conjugate
+    h = drawCircleArc3d(hAx, [o r [THETA PHI PSI] 0 angle],drawOptions);
+else
+    h = drawCircleArc3d(hAx, [o r [THETA PHI PSI] 0 angle-360],drawOptions);
+end
 
-h = drawCircleArc3d(hAx, [o r [THETA PHI PSI] 0 angle],varargin{:});
-
-% format output
+% Format output
 if nargout > 0
     varargout{1} = h;
 end
