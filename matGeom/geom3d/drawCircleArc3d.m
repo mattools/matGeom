@@ -27,11 +27,18 @@ function varargout = drawCircleArc3d(arc, varargin)
 %   2010-03-08 use drawPolyline3d
 %   2011-06-21 use angles in degrees
 
+% parse axis handle
+hAx = gca;
+if isAxisHandle(arc)
+    hAx = arc;
+    arc = varargin{1};
+    varargin(1) = [];
+end
 
 if iscell(arc)
     h = [];
     for i = 1:length(arc)
-        h = [h drawCircleArc3d(arc{i}, varargin{:})]; %#ok<AGROW>
+        h = [h drawCircleArc3d(hAx, arc{i}, varargin{:})]; %#ok<AGROW>
     end
     if nargout > 0
         varargout = {h};
@@ -42,7 +49,7 @@ end
 if size(arc, 1) > 1
     h = [];
     for i = 1:size(arc, 1)
-        h = [h drawCircleArc3d(arc(i,:), varargin{:})]; %#ok<AGROW>
+        h = [h drawCircleArc3d(hAx, arc(i,:), varargin{:})]; %#ok<AGROW>
     end
     if nargout > 0
         varargout = {h};
@@ -82,7 +89,7 @@ trans   = localToGlobal3d(xc, yc, zc, theta, phi, psi);
 curve   = transformPoint3d(curve, trans);
 
 % draw the curve with specified options
-h = drawPolyline3d(curve, varargin{:});
+h = drawPolyline3d(hAx, curve, varargin{:});
 
 if nargout > 0
     varargout = {h};
