@@ -41,7 +41,6 @@ addRequired(parser, 'points', @(x) validateattributes(x, {'numeric'},...
     {'ncols',3,'real','finite','nonnan'}));
 addOptional(parser,'visualization',false,@islogical);
 parse(parser,points,varargin{:});
-
 points=parser.Results.points;
 
 % Mean of all points

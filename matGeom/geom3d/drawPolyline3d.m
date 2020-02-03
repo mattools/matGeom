@@ -43,14 +43,19 @@ function varargout = drawPolyline3d(varargin)
 
 
 %% Process input arguments
+hAx = gca;
+if isAxisHandle(varargin{1})
+    hAx = varargin{1};
+    varargin(1) = [];
+end
 
 % check case we want to draw several curves, stored in a cell array
 var = varargin{1};
 if iscell(var)
     hold on;
-    h = [];
+    h = zeros(length(var(:)), 1);
     for i = 1:length(var(:))
-        h = [h; drawPolyline3d(var{i}, varargin{2:end})]; %#ok<AGROW>
+        h(i) = drawPolyline3d(hAx, var{i}, varargin{2:end});
     end
     if nargout > 0
         varargout = {h};
@@ -112,7 +117,7 @@ if closed
     pz = [pz(:); pz(1)];
 end
 
-h = plot3(px, py, pz, varargin{:});
+h = plot3(hAx, px, py, pz, varargin{:});
 
 if nargout > 0
     varargout = {h};
