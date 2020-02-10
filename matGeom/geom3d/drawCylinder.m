@@ -204,7 +204,7 @@ hCyl(1) = surf(hAx, x2, y2, z2, varargin{:});
 if closed
     hCyl(2)=patch(hAx, x2(1,:)', y2(1,:)', z2(1,:)', faceColor, 'edgeColor', 'none', 'FaceAlpha', alpha);
     hCyl(3)=patch(hAx, x2(2,:)', y2(2,:)', z2(2,:)', faceColor, 'edgeColor', 'none', 'FaceAlpha', alpha);
-    gh = hggroup;
+    gh = hggroup(hAx);
     set(hCyl,'Parent',gh)
     hCyl = gh;
 end

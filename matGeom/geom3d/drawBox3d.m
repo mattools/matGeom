@@ -68,7 +68,7 @@ for i=1:nBoxes
     sh(11)=drawEdge3d(hAx, [xmax(i) ymax(i) zmin(i)     xmax(i) ymax(i) zmax(i)], varargin{:});
     sh(12)=drawEdge3d(hAx, [xmax(i) ymin(i) zmax(i)     xmax(i) ymax(i) zmax(i)], varargin{:});
     
-    gh(i) = hggroup;
+    gh(i) = hggroup(hAx);
     set(sh,'Parent',gh(i))
 end
 

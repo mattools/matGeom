@@ -57,7 +57,7 @@ sh(1)=drawCylinder(hAx,[origin origin+v1*L r], 16, 'facecolor', 'r', 'edgecolor'
 sh(2)=drawCylinder(hAx,[origin origin+v2*L r], 16, 'facecolor', 'g', 'edgecolor', 'none');
 sh(3)=drawCylinder(hAx,[origin origin+v3*L r], 16, 'facecolor', 'b', 'edgecolor', 'none');
 sh(4)=drawSphere(hAx,[origin 2*r], 'faceColor', 'black');
-gh = hggroup;
+gh = hggroup(hAx);
 set(sh,'Parent',gh)
 
 if nargout > 0
