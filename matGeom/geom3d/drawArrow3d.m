@@ -12,7 +12,7 @@ function varargout = drawArrow3d(pos, vec, varargin)
 %   arrows and each column corresponds to the RGB values. Default color is 
 %   black.
 %
-%   drawArrow3d(..., ,Name,Value) Optional name-value pair arguments:
+%   drawArrow3d(...,Name,Value) Optional name-value pair arguments:
 %   'stemRatio': Ratio of the arrow head (cone) to the arrow stem (cylinder)
 %       For example, setting this value to 0.94 will produce arrows with 
 %       arrow stems 94% of the length and short, 6% cones as arrow heads.

@@ -15,6 +15,7 @@ function varargout=drawAxis3d(varargin)
 %
 %   figure;
 %   drawAxis3d(20, 1);
+%   view(3); lighting('phong'); camlight('head'); axis('equal')
 %
 %   See also
 %   drawAxisCube
@@ -26,18 +27,18 @@ function varargout=drawAxis3d(varargin)
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 
 % Check if axes handle is specified
-if isAxisHandle(varargin{1})
-    hAx = varargin{1};
-    varargin(1)=[];
-else
-    hAx = gca;
+hAx = gca;
+if ~isempty(varargin)
+    if isAxisHandle(varargin{1})
+        hAx = varargin{1};
+        varargin(1)=[];
+    end
 end
 
 % geometrical data
-origin = [0 0 0];
-v1 = [1 0 0];
-v2 = [0 1 0];
-v3 = [0 0 1];
+origin = zeros(3,3);
+vec = eye(3,3);
+color = vec;
 
 % default parameters
 L = 1;
@@ -53,10 +54,8 @@ end
 
 % draw 3 cylinders and a ball
 hold on;
-sh(1)=drawCylinder(hAx,[origin origin+v1*L r], 16, 'facecolor', 'r', 'edgecolor', 'none');
-sh(2)=drawCylinder(hAx,[origin origin+v2*L r], 16, 'facecolor', 'g', 'edgecolor', 'none');
-sh(3)=drawCylinder(hAx,[origin origin+v3*L r], 16, 'facecolor', 'b', 'edgecolor', 'none');
-sh(4)=drawSphere(hAx,[origin 2*r], 'faceColor', 'black');
+sh=drawArrow3d(hAx, origin, vec*L, color, 'arrowRadius', r/L);
+sh(4)=drawSphere(hAx,[origin(1,:) 2*r], 'faceColor', 'black');
 gh = hggroup(hAx);
 set(sh,'Parent',gh)
 
