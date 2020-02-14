@@ -30,16 +30,14 @@ function varargout = transformVector3d(varargin)
 %   created the 25/11/2008 from transformPoint3d
 %
 
-if length(varargin)==2      % func(PTS_XYZ, PLANE) syntax
-    vIds = 1:2; 
-elseif length(varargin)==4  % func(X, Y, Z, PLANE) syntax
-    vIds = 1:3;
+if nargin~=2 && nargin~=4
+    error('Invalid number of input arguments. Type ''help transformVector3d'' for details');
 end
 
 % Extract only the linear part of the affine transform
-trans = varargin{vIds(end)};
-trans(1:4, 4) = [0; 0; 0; 1];
+trans = varargin{end};
+trans(1:4,4) = [0; 0; 0; 1];
 
 % Call transformPoint3d using equivalent output arguments
 varargout = cell(1, max(1,nargout));
-[varargout{:}] = transformPoint3d(varargin{vIds(1:end-1)}, trans);
+[varargout{:}] = transformPoint3d(varargin{1:end-1}, trans);

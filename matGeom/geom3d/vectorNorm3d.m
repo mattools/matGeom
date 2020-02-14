@@ -1,5 +1,5 @@
 function n = vectorNorm3d(v)
-% Norm of a 3D vector or of set of 3D vectors.
+%VECTORNORM3D  Norm of a 3D vector or of set of 3D vectors.
 %
 %   N = vectorNorm3d(V);
 %   Returns the norm of vector V.
