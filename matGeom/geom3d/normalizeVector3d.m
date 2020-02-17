@@ -1,5 +1,5 @@
 function vn = normalizeVector3d(v)
-% Normalize a 3D vector to have norm equal to 1.
+%NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.
 %
 %   V2 = normalizeVector3d(V);
 %   Returns the normalization of vector V, such that ||V|| = 1. Vector V is
