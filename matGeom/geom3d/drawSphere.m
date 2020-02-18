@@ -72,7 +72,7 @@ function varargout = drawSphere(varargin)
 if isAxisHandle(varargin{1})
     hAx = varargin{1};
     varargin(1)=[];
-else
+elseif nargout ~= 3
     hAx = gca;
 end
 
