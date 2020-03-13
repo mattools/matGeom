@@ -23,7 +23,7 @@ function ell = equivalentEllipsoid(points)
 %
 %   See also
 %     spheres, drawEllipsoid, equivalentEllipse, principalAxes
-%     rotation3dToEulerAngles
+%     principalAxesTransform, rotation3dToEulerAngles
 
 % ------
 % Author: David Legland

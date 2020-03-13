@@ -20,7 +20,7 @@
 %   angle2Points             - Compute horizontal angle between 2 points.
 %   angle3Points             - Compute oriented angle made by 3 points.
 %   distancePoints           - Compute distance between two points.
-%   transformPoint           - Transform a point with an affine transform.
+%   transformPoint           - Apply an affine transform to a point or a point set.
 %   drawPoint                - Draw the point on the axis.
 %
 % Point Sets
@@ -134,7 +134,8 @@
 %   createHomothecy          - Create the the 3x3 matrix of an homothetic transform.
 %   createBasisTransform     - Compute matrix for transforming a basis into another basis.
 %   createLineReflection     - Create the the 3x3 matrix of a line reflection.
-%   fitAffineTransform2d     - Fit an affine transform using two point sets.
+%   principalAxesTransform   - Align a set of points along its principal axes.
+%   fitAffineTransform2d     - Compute the affine transform that best register two point sets.
 %   registerICP              - Fit affine transform by Iterative Closest Point algorithm.
 %   polynomialTransform2d    - Apply a polynomial transform to a set of points.
 %   fitPolynomialTransform2d - Coefficients of polynomial transform between two point sets.
@@ -206,3 +207,4 @@ help(mfilename);
 %   inertiaEllipse           - Inertia ellipse of a set of points.
 
 %% Others...
+

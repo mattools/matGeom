@@ -1,8 +1,8 @@
 function varargout = minDistancePoints(p1, varargin)
-%MINDISTANCEPOINTS Minimal distance between several points.
+% Minimal distance between several points.
 %
 %   DIST = minDistancePoints(PTS)
-%   Returns the minimum distance between all couple of points in PTS. PTS
+%   Returns the minimum distance between all pairs of points in PTS. PTS
 %   is a N-by-D array of values, N being the number of points and D the
 %   dimension of the points.
 %
@@ -21,12 +21,12 @@ function varargout = minDistancePoints(p1, varargin)
 %   to the biggest coordinate difference among dimensions. 
 %   
 %
-%   [DIST I J] = minDistancePoints(PTS)
+%   [DIST, I, J] = minDistancePoints(PTS)
 %   Returns indices I and J of the 2 points which are the closest. DIST
 %   verifies relation:
 %   DIST = distancePoints(PTS(I,:), PTS(J,:));
 %
-%   [DIST J] = minDistancePoints(PTS1, PTS2, ...)
+%   [DIST, J] = minDistancePoints(PTS1, PTS2, ...)
 %   Also returns the indices of points which are the closest. J has the
 %   same size as DIST. It verifies relation: 
 %   DIST(I) = distancePoints(PTS1(I,:), PTS2(J,:));
@@ -53,14 +53,26 @@ function varargout = minDistancePoints(p1, varargin)
 %       distancePoints(points1(10, :), points2(inds(10), :))
 %   % results should be the same
 %   
+%   % Find the (approximated) orthogonal projection onto an ellipse
+%     elli = [50 50 40 20 30];
+%     poly = ellipseToPolygon(elli, 200);
+%     figure; axis equal; axis([0 100 0 100]); hold on;
+%     drawPolygon(poly, 'k')
+%     pts = [20 20; 50 20; 80 30];
+%     [dists, inds] = minDistancePoints(pts, poly);
+%     drawPoint(pts, 'bo');
+%     drawPoint(poly(inds,:), 'ko');
+%     drawEdge([pts poly(inds,:)], 'k')
+%   
+%
 %   See Also
-%   points2d, distancePoints, nndist, hausdorffDistance
+%     points2d, distancePoints, nndist, findClosestPoint, hausdorffDistance
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Copyright 2009 INRA - Cepia Software Platform.
+% e-mail: david.legland@inrae.fr
+% Copyright 2009 INRAE - Cepia Software Platform.
 % created the 15/06/2004.
 
 
@@ -183,7 +195,7 @@ function [r, c] = ind2sub_tril (N, idx)
 % [r, c] = ind2sub_tril (N, idx)
 % Convert a linear index to subscripts of a trinagular matrix.
 %
-% An example of trinagular matrix linearly indexed follows
+% An example of triangular matrix linearly indexed follows
 %
 %          N = 4;
 %          A = -repmat (1:N,N,1);
