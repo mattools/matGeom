@@ -31,7 +31,7 @@ function varargout = transformVector3d(varargin)
 %
 
 if nargin~=2 && nargin~=4
-    error('Invalid number of input arguments. Type ''help transformVector3d'' for details');
+    error('Invalid number of input arguments. Type ''help transformVector3d'' for details.');
 end
 
 % Extract only the linear part of the affine transform
