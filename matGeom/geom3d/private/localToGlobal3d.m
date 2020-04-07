@@ -7,7 +7,7 @@ function trans = localToGlobal3d(varargin)
 %   This is a low-level function, used by several drawing functions.
 %
 %   The transform is defined by:
-%   - CENTER: the position of the local origin into the World coordinate
+%   - CENTER: the position of the local origin into the world coordinate
 %       system
 %   - THETA: colatitude, defined as the angle with the Oz axis (between 0
 %       and 180 degrees), positive in the direction of the of Oy axis.
