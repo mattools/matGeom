@@ -1,5 +1,5 @@
 function res = isCounterClockwise(p1, p2, p3, varargin)
-%ISCOUNTERCLOCKWISE Compute relative orientation of 3 points.
+% Compute the relative orientation of 3 points.
 %
 %   CCW = isCounterClockwise(P1, P2, P3);
 %   Computes the orientation of the 3 points. The returns is:
@@ -28,16 +28,17 @@ function res = isCounterClockwise(p1, p2, p3, varargin)
 %       0
 %
 %   See also
-%   points2d, isPointOnLine, isPointInTriangle
+%   points2d, isPointOnLine, isPointInTriangle, polygonArea
 %
 %   References
-%   Algorithm adapated from Sedgewick's book.
+%     Algorithm adapated from Sedgewick's book.
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2010-04-09
-% Copyright 2011 INRA - Cepia Software Platform.
+% Copyright 2011 INRAE - Cepia Software Platform.
 
 
 %   HISTORY
