@@ -53,7 +53,7 @@ function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)
 %   2011-06-20 rename and use degrees
 
 p = inputParser;
-validStrings = {'ZYX','YXZ','ZYZ'};
+validStrings = {'ZYX','ZXY','YXZ','ZYZ'};
 addOptional(p,'convention','ZYX',@(x) any(validatestring(x,validStrings)));
 parse(p,varargin{:});
 convention=p.Results.convention;
@@ -73,6 +73,10 @@ switch convention
     case 'ZYX'
         rot1 = createRotationOx(psi * k);
         rot2 = createRotationOy(theta * k);
+        rot3 = createRotationOz(phi * k);
+    case 'ZXY'
+        rot1 = createRotationOy(psi * k);
+        rot2 = createRotationOx(theta * k);
         rot3 = createRotationOz(phi * k);
     case 'YXZ'
         rot1 = createRotationOz(psi * k);

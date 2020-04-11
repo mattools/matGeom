@@ -36,7 +36,7 @@ function varargout = rotation3dToEulerAngles(mat, varargin)
 % Copyright 2010 INRA - Cepia Software Platform.
 
 p = inputParser;
-validStrings = {'ZYX','YXZ','ZYZ'};
+validStrings = {'ZYX','ZXY','YXZ','ZYZ'};
 addOptional(p,'convention','ZYX',@(x) any(validatestring(x,validStrings)));
 parse(p,varargin{:});
 convention=p.Results.convention;
@@ -55,6 +55,17 @@ switch convention
             phi   = 0;
             theta = atan2(-mat(3,1), cy);
             psi   = atan2(-mat(2,3), mat(2,2));
+        end
+    case 'ZXY'
+        cy = hypot(mat(2,2), mat(1,2));
+        if cy > 16*eps
+            phi   = -atan2( mat(1,2), mat(2,2));
+            theta = -atan2(-mat(3,2), cy);
+            psi   = -atan2( mat(3,1), mat(3,3));
+        else
+            phi   = 0;
+            theta = -atan2(-mat(3,2), cy);
+            psi   = -atan2(-mat(1,3), mat(1,1));
         end
     case 'YXZ'
         cy = hypot(mat(3,3), mat(1,3));
