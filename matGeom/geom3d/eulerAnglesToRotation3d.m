@@ -52,19 +52,22 @@ function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)
 %   HISTORY
 %   2011-06-20 rename and use degrees
 
-p = inputParser;
-validStrings = {'ZYX','YXZ','ZYZ'};
-addOptional(p,'convention','ZYX',@(x) any(validatestring(x,validStrings)));
-parse(p,varargin{:});
-convention=p.Results.convention;
-
 % Process input arguments
 if size(phi, 2) == 3
+    if nargin > 1
+        varargin{1} = theta;
+    end
     % manages arguments given as one array
     psi     = phi(:, 3);
     theta   = phi(:, 2);
     phi     = phi(:, 1);
 end
+
+p = inputParser;
+validStrings = {'ZYX','ZXY','YXZ','ZYZ'};
+addOptional(p,'convention','ZYX',@(x) any(validatestring(x,validStrings)));
+parse(p,varargin{:});
+convention=p.Results.convention;
 
 % create individual rotation matrices
 k = pi / 180;
@@ -73,6 +76,10 @@ switch convention
     case 'ZYX'
         rot1 = createRotationOx(psi * k);
         rot2 = createRotationOy(theta * k);
+        rot3 = createRotationOz(phi * k);
+    case 'ZXY'
+        rot1 = createRotationOy(psi * k);
+        rot2 = createRotationOx(theta * k);
         rot3 = createRotationOz(phi * k);
     case 'YXZ'
         rot1 = createRotationOz(psi * k);
