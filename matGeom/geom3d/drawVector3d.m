@@ -26,7 +26,16 @@ function varargout = drawVector3d(pos, vect, varargin)
 % Created: 2011-12-19,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-h = quiver3(pos(:, 1), pos(:, 2), pos(:, 3), ...
+if isAxisHandle(pos)
+    hAx = pos;
+    pos = vect;
+    vect = varargin{1};
+    varargin(1) = [];
+else
+    hAx = gca;
+end
+
+h = quiver3(hAx, pos(:, 1), pos(:, 2), pos(:, 3), ...
     vect(:, 1), vect(:, 2), vect(:, 3), 0, varargin{:});
 
 % format output
