@@ -5,7 +5,7 @@ function demoDrawTubularMesh
 %     demoDrawTubularMesh
 %
 %   See also
-%     drawSoccerBall, demoRevolutionSurface, demoInertiaEllipsoid
+%     drawSoccerBall, demoRevolutionSurface, demoEquivalentEllipsoid
 %
 
 % ------

@@ -10,7 +10,7 @@ function plane = fitPlane(points)
 %     pts = transformPoint3d(pts, createRotationOy(pi/4));
 %     pts = transformPoint3d(pts, createRotationOz(pi/3));
 %     pts = transformPoint3d(pts, createTranslation3d([5 4 3]));
-%     elli = inertiaEllipsoid(pts);
+%     elli = equivalentEllipsoid(pts);
 %     figure; drawPoint3d(pts); axis equal;
 %     hold on; drawEllipsoid(elli, ...
 %         'drawEllipses', true, 'EllipseColor', 'b', 'EllipseWidth', 3);
@@ -18,7 +18,7 @@ function plane = fitPlane(points)
 %     drawPlane3d(plane, 'm');
 %
 %   See also
-%     planes3d, inertiaEllipsoid, fitLine3d
+%     planes3d, equivalentEllipsoid, fitLine3d
 %
 
 % ------
