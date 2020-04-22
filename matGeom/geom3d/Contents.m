@@ -234,7 +234,7 @@ help(mfilename);
 
 % Deprecated:
 %   vectorCross3d               - Vector cross product faster than inbuilt MATLAB cross.
-%   inertiaEllipsoid            - Inertia ellipsoid of a set of 3D points.
+%   equivalentEllipsoid         - Equivalent (inertia) ellipsoid of a set of 3D points.
 
 % Others
 

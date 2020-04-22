@@ -1,8 +1,8 @@
-function demoInertiaEllipsoid
-%DEMOINERTIAELLIPSOID Demo program for the use of ellipsoids
+function demoEquivalentEllipsoid
+%DEMOEQUIVALENTELLIPSOID Demo program for the use of ellipsoids
 %
 %   Example
-%     demoInertiaEllipsoid
+%     demoEquivalentEllipsoid
 %
 %   See also
 %     demoRevolutionSurface, demoDrawTubularMesh
@@ -40,10 +40,10 @@ axis equal;
 view([80 -10]);
 
 
-%% Inertia ellipsoid computation and display
+%% Equivalent ellipsoid computation and display
 
-% Fit a 3D inertia ellipsoid to data
-elli = inertiaEllipsoid(points);
+% Fit a 3D equivalent ellipsoid to data
+elli = equivalentEllipsoid(points);
 
 % draw the ellipsoid with transparency
 drawEllipsoid(elli, 'FaceColor', 'g', 'FaceAlpha', .5);

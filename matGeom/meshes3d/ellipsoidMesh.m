@@ -10,7 +10,7 @@ function varargout = ellipsoidMesh(elli, varargin)
 %
 %
 %   See also
-%   meshes3d, drawEllipsoid, sphereMesh, inertiaEllipsoid
+%   meshes3d, drawEllipsoid, sphereMesh, equivalentEllipsoid
 %
 
 % ------
