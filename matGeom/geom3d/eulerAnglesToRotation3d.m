@@ -64,7 +64,7 @@ if size(phi, 2) == 3
 end
 
 p = inputParser;
-validStrings = {'ZYX','ZXY','YXZ','ZYZ'};
+validStrings = {'ZYX','ZXY','YXZ','YZX','XYZ','XZY','ZYZ'};
 addOptional(p,'convention','ZYX',@(x) any(validatestring(x,validStrings)));
 parse(p,varargin{:});
 convention=p.Results.convention;
@@ -85,6 +85,18 @@ switch convention
         rot1 = createRotationOz(psi * k);
         rot2 = createRotationOx(theta * k);
         rot3 = createRotationOy(phi * k);
+    case 'YZX'
+        rot1 = createRotationOx(psi * k);
+        rot2 = createRotationOz(theta * k);
+        rot3 = createRotationOy(phi * k);
+    case 'XYZ'
+        rot1 = createRotationOz(psi * k);
+        rot2 = createRotationOy(theta * k);
+        rot3 = createRotationOx(phi * k);
+    case 'XZY'
+        rot1 = createRotationOy(psi * k);
+        rot2 = createRotationOz(theta * k);
+        rot3 = createRotationOx(phi * k);
     case 'ZYZ'
         rot1 = createRotationOz(psi * k);
         rot2 = createRotationOy(theta * k);
