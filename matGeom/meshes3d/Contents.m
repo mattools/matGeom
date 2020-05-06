@@ -124,8 +124,9 @@
 %   steinerPolytope            - Create a steiner polytope from a set of vectors.
 %
 % Drawing functions
-%   drawFaceNormals            - Draw normal vector of each face in a mesh.
 %   drawMesh                   - Draw a 3D mesh defined by vertex and face arrays.
+%   fillMeshFaces              - Fill the faces of a mesh with the specified colors.
+%   drawFaceNormals            - Draw normal vector of each face in a mesh.
 %
 % I/O functions
 %   readMesh_off               - Read mesh data stored in OFF format.

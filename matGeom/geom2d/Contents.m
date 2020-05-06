@@ -15,7 +15,7 @@
 %   points2d                 - Description of functions operating on points.
 %   midPoint                 - Middle point of two points or of an edge.
 %   circumCenter             - Circumcenter of three points.
-%   isCounterClockwise       - Compute relative orientation of 3 points.
+%   isCounterClockwise       - Compute the relative orientation of 3 points.
 %   polarPoint               - Create a point from polar coordinates (rho + theta).
 %   angle2Points             - Compute horizontal angle between 2 points.
 %   angle3Points             - Compute oriented angle made by 3 points.
@@ -145,8 +145,6 @@
 %   normalizeAngle           - Normalize an angle value within a 2*PI interval.
 %   angleAbsDiff             - Absolute difference between two angles.
 %   angleDiff                - Difference between two angles.
-%   deg2rad                  - Convert angle from degrees to radians.
-%   rad2deg                  - Convert angle from radians to degrees.
 %
 % Boxes
 %   boxes2d                  - Description of functions operating on bounding boxes.
@@ -179,7 +177,6 @@
 %   drawLabels               - Draw labels at specified positions.
 %   drawShape                - Draw various types of shapes (circles, polygons...).
 %
-%
 % Other shapes
 %   squareGrid               - Generate equally spaces points in plane.
 %   hexagonalGrid            - Generate hexagonal grid of points in the plane.
@@ -194,7 +191,7 @@
 %
 % -----
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2005-11-07
 % Copyright INRA - Cepia Software Platform.
 % Project homepage: http://github.com/mattools/matGeom

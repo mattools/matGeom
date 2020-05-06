@@ -6,9 +6,9 @@ function [vertices2, faces2] = subdivideMesh(vertices, faces, n)
 %   into N^2 smaller faces.
 %
 %   Example
-%     [v f] = createOctahedron;
+%     [v, f] = createOctahedron;
 %     figure; drawMesh(v, f); view(3);
-%     [v2 f2] = subdivideMesh(v, f, 4);
+%     [v2, f2] = subdivideMesh(v, f, 4);
 %     figure; drawMesh(v2, f2); view(3)
 %
 %   See also
@@ -24,16 +24,40 @@ function [vertices2, faces2] = subdivideMesh(vertices, faces, n)
 
 %% Initialisations
 
+edges = [];
+faceEdgeIndices = [];
+
+if isstruct(vertices)
+    % get relevant inputs
+    mesh = vertices;
+    n = faces;
+    
+    % parse fields from a mesh structure
+    vertices = mesh.vertices;
+    faces = mesh.faces;
+    if isfield(mesh, 'edges')
+        edges = mesh.edges;
+    end
+    if isfield(mesh, 'faceEdges')
+        faceEdgeIndices = mesh.faceEdges;
+    end
+    
+end
+
 if ~isnumeric(faces) || size(faces, 2) ~= 3
     error('Requires a triangular mesh');
 end
 
 % compute the edge array
-edges = meshEdges(faces);
+if isempty(edges)
+    edges = meshEdges(faces);
+end
 nEdges = size(edges, 1);
 
 % index of edges around each face
-faceEdgeIndices = meshFaceEdges(vertices, edges, faces);
+if isempty(faceEdgeIndices)
+    faceEdgeIndices = meshFaceEdges(vertices, edges, faces);
+end
 
 
 %% Create new vertices on edges
