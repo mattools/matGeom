@@ -36,7 +36,7 @@ function varargout = rotation3dToEulerAngles(mat, varargin)
 % Copyright 2010 INRA - Cepia Software Platform.
 
 p = inputParser;
-validStrings = {'ZYX','ZXY','YXZ','ZYZ'};
+validStrings = {'ZYX','ZXY','YXZ','YZX','XYZ','XZY','ZYZ'};
 addOptional(p,'convention','ZYX',@(x) any(validatestring(x,validStrings)));
 parse(p,varargin{:});
 convention=p.Results.convention;
@@ -77,6 +77,39 @@ switch convention
             phi   = 0;
             theta = atan2(-mat(2,3), cy);
             psi   = atan2(-mat(1,2), mat(1,1));
+        end
+    case 'YZX'
+        cy = hypot(mat(1,1), mat(3,1));
+        if cy > 16*eps
+            phi   = -atan2( mat(3,1), mat(1,1));
+            theta = -atan2(-mat(2,1), cy);
+            psi   = -atan2( mat(2,3), mat(2,2));
+        else
+            phi   = 0;
+            theta = -atan2(-mat(2,1), cy);
+            psi   = -atan2(-mat(3,2), mat(3,3));
+        end
+    case 'XYZ'
+        cy = hypot(mat(3,3), mat(2,3));
+        if cy > 16*eps
+            phi   = -atan2( mat(2,3), mat(3,3));
+            theta = -atan2(-mat(1,3), cy);
+            psi   = -atan2( mat(1,2), mat(1,1));
+        else
+            phi   = 0;
+            theta = -atan2(-mat(1,3), cy);
+            psi   = -atan2(-mat(2,1), mat(2,2));
+        end
+    case 'XZY'
+        cy = hypot(mat(2,2), mat(3,2));
+        if cy > 16*eps
+            phi   = atan2( mat(3,2), mat(2,2));
+            theta = atan2(-mat(1,2), cy);
+            psi   = atan2( mat(1,3), mat(1,1));
+        else
+            phi   = 0;
+            theta = atan2(-mat(1,2), cy);
+            psi   = atan2(-mat(3,1), mat(3,3));
         end
     case 'ZYZ'
         cy = hypot(mat(3,2), mat(3,1));
