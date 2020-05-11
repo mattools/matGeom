@@ -1,4 +1,4 @@
-function [points, pos, faceInds] = intersectLineMesh3d(line, vertices, faces, varargin)
+function [points, pos, faceInds] = intersectLineMesh3d(line, vertices, varargin)
 %INTERSECTLINEMESH3D Intersection points of a 3D line with a mesh.
 %
 %   INTERS = intersectLineMesh3d(LINE, VERTICES, FACES)
@@ -30,10 +30,22 @@ function [points, pos, faceInds] = intersectLineMesh3d(line, vertices, faces, va
 
 % tolerance for detecting if a point is 
 tol = 1e-12;
-if ~isempty(varargin)
-    tol = varargin{1};
-end
 
+% parsing
+if ~isempty(varargin)
+    if isscalar(varargin{1})
+        tol = varargin{1};
+        [vertices, faces] = parseMeshData(vertices);
+    else
+        faces = varargin{1};
+        varargin(1) = [];
+        if ~isempty(varargin)
+            tol = varargin{1};
+        end
+    end
+else
+    [vertices, faces] = parseMeshData(vertices);
+end
 
 % ensure the mesh has triangular faces
 tri2Face = [];
