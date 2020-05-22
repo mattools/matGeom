@@ -157,7 +157,13 @@ if ~isempty(ind)
 end
 
 hold on
-h1 = drawCylinder(cap, options_cyl{:});
+if all(cap(1:3) == cap(4:6))
+  % the capsule is only a sphere. take arbitrary axis to be able to plot
+  cap(4:6) = cap(1:3)+eps*([0 0 1]);
+  h1 = 0;
+else
+  h1 = drawCylinder(cap, options_cyl{:});
+end
 h2 = drawDome(cap([1:3,7]),  (cap(1:3)-cap(4:6)), varargin{:});
 h3 = drawDome(cap([4:6,7]), -(cap(1:3)-cap(4:6)), varargin{:});
 
