@@ -15,9 +15,9 @@ function test_suite = test_eulerAngles
 % Created: 2011-06-20,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-test_suite = functiontests(localfunctions); 
+test_suite = functiontests(localfunctions);
 
-function testPositiveAngles(testCase) %#ok<*DEFNU>
+function testPositiveAngles(testCase)
 
 mat = eulerAnglesToRotation3d(10, 20, 30);
 [phi, theta, psi] = rotation3dToEulerAngles(mat);
@@ -25,7 +25,6 @@ mat = eulerAnglesToRotation3d(10, 20, 30);
 testCase.assertEqual(10, phi, 'AbsTol', .01);
 testCase.assertEqual(20, theta, 'AbsTol', .01);
 testCase.assertEqual(30, psi, 'AbsTol', .01);
-
 
 function testNegativeAngles(testCase)
 
@@ -36,6 +35,7 @@ testCase.assertEqual(-10, phi, 'AbsTol', .01);
 testCase.assertEqual(-20, theta, 'AbsTol', .01);
 testCase.assertEqual(-30, psi, 'AbsTol', .01);
 
+%% ZYX
 function testRandomAnglesZYX(testCase)
 
 phi=-360+720*rand;
@@ -43,8 +43,20 @@ theta=-360+720*rand;
 psi=-360+720*rand;
 
 mat = eulerAnglesToRotation3d(phi, theta, psi);
-[phi, theta, psi] = rotation3dToEulerAngles(mat);
-mat2 = eulerAnglesToRotation3d(phi, theta, psi);
+[phi, theta, psi] = rotation3dToEulerAngles(mat, 'ZYX');
+mat2 = eulerAnglesToRotation3d(phi, theta, psi, 'ZYX');
+
+testCase.assertEqual(zeros(4,4),(mat-mat2), 'AbsTol', 10*eps)
+
+function testGimbalLockZYX(testCase)
+
+phi=-360+720*rand;
+theta=90;
+psi=90;
+
+mat = eulerAnglesToRotation3d(phi, theta, psi);
+[phi, theta, psi] = rotation3dToEulerAngles(mat, 'ZYX');
+mat2 = eulerAnglesToRotation3d(phi, theta, psi, 'ZYX');
 
 testCase.assertEqual(zeros(4,4),(mat-mat2), 'AbsTol', 10*eps)
 
@@ -183,5 +195,42 @@ psi=-360+720*rand;
 mat = eulerAnglesToRotation3d(phi, theta, psi);
 [phi, theta, psi] = rotation3dToEulerAngles(mat, 'ZYZ');
 mat2 = eulerAnglesToRotation3d(phi, theta, psi, 'ZYZ');
+
+testCase.assertEqual(zeros(4,4),(mat-mat2), 'AbsTol', 10*eps)
+
+function testGimbalLockZYZ(testCase)
+
+phi=-360+720*rand;
+theta=0;
+psi=180;
+
+mat = eulerAnglesToRotation3d(phi, theta, psi);
+[phi, theta, psi] = rotation3dToEulerAngles(mat, 'ZYZ');
+mat2 = eulerAnglesToRotation3d(phi, theta, psi, 'ZYZ');
+
+testCase.assertEqual(zeros(4,4),(mat-mat2), 'AbsTol', 10*eps)
+
+%% ZXZ
+function testRandomAnglesZXZ(testCase)
+
+phi=-360+720*rand;
+theta=-360+720*rand;
+psi=-360+720*rand;
+
+mat = eulerAnglesToRotation3d(phi, theta, psi);
+[phi, theta, psi] = rotation3dToEulerAngles(mat, 'ZXZ');
+mat2 = eulerAnglesToRotation3d(phi, theta, psi, 'ZXZ');
+
+testCase.assertEqual(zeros(4,4),(mat-mat2), 'AbsTol', 10*eps)
+
+function testGimbalLockZXZ(testCase)
+
+phi=-360+720*rand;
+theta=0;
+psi=180;
+
+mat = eulerAnglesToRotation3d(phi, theta, psi);
+[phi, theta, psi] = rotation3dToEulerAngles(mat, 'ZXZ');
+mat2 = eulerAnglesToRotation3d(phi, theta, psi, 'ZXZ');
 
 testCase.assertEqual(zeros(4,4),(mat-mat2), 'AbsTol', 10*eps)
