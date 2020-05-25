@@ -25,7 +25,7 @@ function h = drawLine3d(lin, varargin)
 %
 %
 %   See also:
-%     lines3d, createLine3d, clipLine3d
+%     lines3d, createLine3d, clipLine3d, drawRay3d, drawEdge3d
 %
 
 % ---------

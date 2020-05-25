@@ -12,7 +12,7 @@ function edge = clipLine3d(line, box)
 %   edge coresponding to each line in a N-by-6 array.
 %
 %   See also:
-%   lines3d, edges3d, createLine3d
+%   lines3d, edges3d, createLine3d, clipRay3d
 %
 
 % ---------

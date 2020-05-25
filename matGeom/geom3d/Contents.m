@@ -78,6 +78,8 @@
 %   isPointOnLine3d             - Test if a 3D point belongs to a 3D line.
 %   distancePointEdge3d         - Minimum distance between a 3D point and a 3D edge.
 %   linePosition3d              - Return the position of a 3D point projected on a 3D line.
+%   clipRay3d                   - Clip a 3D ray with a box and return a 3D edge.
+%   drawRay3d                   - Draw a 3D ray on the current axis.
 %   distanceLines3d             - Minimal distance between two 3D lines.
 %   transformLine3d             - Transform a 3D line with a 3D affine transform.
 %   reverseLine3d               - Return same 3D line but with opposite orientation.
@@ -234,8 +236,6 @@ help(mfilename);
 
 % Deprecated:
 %   vectorCross3d               - Vector cross product faster than inbuilt MATLAB cross.
-%   equivalentEllipsoid         - Equivalent (inertia) ellipsoid of a set of 3D points.
 
 % Others
-
 
