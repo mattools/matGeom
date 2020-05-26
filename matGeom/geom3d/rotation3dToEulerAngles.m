@@ -10,8 +10,10 @@ function varargout = rotation3dToEulerAngles(mat, varargin)
 %   for representing some 3D shapes like ellipsoids.
 %
 %   ... = rotation3dToEulerAngles(MAT, CONVENTION)
-%   CONVENTION specifies the axis rotation sequence. 
-%   Supported conventions are: 'ZYX', 'YXZ', 'ZYZ'. Default is 'ZYX'
+%   CONVENTION specifies the axis rotation sequence. Default is 'ZYX'.
+%   Supported conventions are: 
+%       'ZYX','ZXY','YXZ','YZX','XYZ','XZY'
+%       'ZYZ','ZXZ','YZY','YXY','XZX','XYX'
 %
 %   Example
 %   rotation3dToEulerAngles
@@ -38,7 +40,7 @@ function varargout = rotation3dToEulerAngles(mat, varargin)
 p = inputParser;
 validStrings = {...
     'ZYX','ZXY','YXZ','YZX','XYZ','XZY',...
-    'ZYZ','ZXZ'};
+    'ZYZ','ZXZ','YZY','YXY','XZX','XYX'};
 addOptional(p,'convention','ZYX',@(x) any(validatestring(x,validStrings)));
 logParValidFunc = @(x) (islogical(x) || isequal(x,1) || isequal(x,0));
 addParameter(p,'IsRotation', 1, logParValidFunc);
@@ -149,6 +151,50 @@ switch convention
             phi   = 0;
             theta = atan2(cy, mat(3,3));
             psi   = atan2(-mat(1,2), mat(1,1));
+        end
+    case 'YZY'
+        cy = hypot(mat(2,3), mat(2,1));
+        if cy > 16*eps
+            phi   = atan2(mat(3,2), -mat(1,2));
+            theta = atan2(cy, mat(2,2));
+            psi   = atan2(mat(2,3), mat(2,1));
+        else
+            phi   = 0;
+            theta = atan2(cy, mat(2,2));
+            psi   = atan2(-mat(3,1), mat(3,3));
+        end
+    case 'YXY'
+        cy = hypot(mat(2,3), mat(2,1));
+        if cy > 16*eps
+            phi   = -atan2(mat(1,2), -mat(3,2));
+            theta = -atan2(cy, mat(2,2));
+            psi   = -atan2(mat(2,1), mat(2,3));
+        else
+            phi   = 0;
+            theta = -atan2(cy, mat(2,2));
+            psi   = -atan2(-mat(1,3), mat(1,1));
+        end
+    case 'XZX'
+        cy = hypot(mat(1,3), mat(1,2));
+        if cy > 16*eps
+            phi   = -atan2(mat(3,1), -mat(2,1));
+            theta = -atan2(cy, mat(1,1));
+            psi   = -atan2(mat(1,3), mat(1,2));
+        else
+            phi   = 0;
+            theta = -atan2(cy, mat(1,1));
+            psi   = -atan2(-mat(3,2), mat(3,3));
+        end
+    case 'XYX'
+        cy = hypot(mat(1,2), mat(1,3));
+        if cy > 16*eps
+            phi   = atan2(mat(2,1), -mat(3,1));
+            theta = atan2(cy, mat(1,1));
+            psi   = atan2(mat(1,2), mat(1,3));
+        else
+            phi   = 0;
+            theta = atan2(cy, mat(1,1));
+            psi   = atan2(-mat(2,3), mat(2,2));
         end
 end
 
