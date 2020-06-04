@@ -1,8 +1,8 @@
 function varargout = grMedian(varargin)
-%GRMEDIAN Compute median from neihgbours.
+% Compute median value from neighbour nodes.
 %
-%   LBL2 = grMedian(EDGES, LBL1)
-%   new label for each node of the graph is computed as the median of the
+%   VALS2 = grMedian(EDGES, VALS)
+%   new value for each node of the graph is computed as the median of the
 %   values of neighbours and of old value.
 %
 %   Example
@@ -11,31 +11,31 @@ function varargout = grMedian(varargin)
 %   See also
 %   grMean, grDilate, grErode
 %
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2006-01-20
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
 
 if length(varargin) == 2
     edges   = varargin{1};
-    lbl     = varargin{2};
+    values  = varargin{2};
 elseif length(varargin) == 3
     edges   = varargin{2};
-    lbl     = varargin{3};
+    values  = varargin{3};
 else
     error('Wrong number of arguments in "grMedian"');
 end
    
 
-lbl2 = zeros(size(lbl));
+res = zeros(size(values));
 
 uni = unique(edges(:));
 for n = 1:length(uni)
     neigh = grAdjacentNodes(edges, uni(n));
-    lbl2(uni(n)) = median(lbl([uni(n); neigh]));    
+    res(uni(n)) = median(values([uni(n); neigh]));    
 end
 
-varargout{1} = lbl2;
+varargout{1} = res;

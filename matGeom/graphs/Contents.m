@@ -49,10 +49,10 @@
 %   boundedVoronoi2d           - Return a bounded voronoi diagram as a graph structure.
 %   centroidalVoronoi2d        - Centroidal Voronoi tesselation within a polygon.
 %   centroidalVoronoi2d_MC     - Centroidal Voronoi tesselation by Monte-Carlo.
-%   polygonSkeletonGraph       - Skeletonization of a polygon with a dense distribution of vertices.
+%   boundedCentroidalVoronoi2d - Create a 2D Centroidal Voronoi Tesselation in a box.
 %   cvtUpdate                  - Update germs of a CVT with given points.
 %   cvtIterate                 - Update germs of a CVT using random points with given density.
-%   boundedCentroidalVoronoi2d - Create a 2D Centroidal Voronoi Tesselation in a box.
+%   meshEnergy                 - Computes the energy of a tesselation, as the sum of second area moments.
 %
 % Geodesic and shortest path operations
 %   grShortestPath             - Find a shortest path between two nodes in the graph.
@@ -68,15 +68,15 @@
 % Graph processing (general applications)
 %   adjacencyListToEdges       - Convert an adjacency list to an edge array.
 %   pruneGraph                 - Remove all edges with a terminal vertex.
-%   mergeGraphs                - Merge two graphs, by adding nodes, edges and faces lists. .
+%   mergeGraphs                - Merge two graphs, by adding nodes, edges and faces lists.
 %   grMergeNodes               - Merge two (or more) nodes in a graph.
 %   grMergeMultipleNodes       - Simplify a graph by merging multiple nodes.
 %   grMergeMultipleEdges       - Remove all edges sharing the same extremities.
 %   grSimplifyBranches         - Replace branches of a graph by single edges.
 %
 % Filtering operations on Graph
-%   grMean                     - Compute mean from neihgbours.
-%   grMedian                   - Compute median from neihgbours.
+%   grMean                     - Compute mean value from neighbour nodes.
+%   grMedian                   - Compute median value from neighbour nodes.
 %   grDilate                   - Morphological dilation on graph.
 %   grErode                    - Morphological erosion on graph.
 %   grClose                    - Morphological closing on graph.
@@ -150,5 +150,4 @@ help(mfilename);
 
 % Other functions
 %   polygonBoundedCVT2d        - BOUNDEDCENTROIDALVORONOI2D Create a 2D Centroidal Voronoi Tesselation in a box
-%   meshEnergy                 - One-line description here, please.
 

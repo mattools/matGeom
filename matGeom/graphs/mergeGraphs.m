@@ -1,5 +1,5 @@
 function varargout = mergeGraphs(varargin)
-%MERGEGRAPHS Merge two graphs, by adding nodes, edges and faces lists. .
+%MERGEGRAPHS Merge two graphs, by adding nodes, edges and faces lists.
 %
 %   
 %
@@ -20,7 +20,7 @@ faces = {}; faces2 = {};
 % extract simplify tag
 var = varargin{nargin};
 if ischar(var)
-	if strcmp(var, 'simplify');
+	if strcmp(var, 'simplify')
         simplify = true;
         varargin = varargin(1:length(varargin)-1);
 	end

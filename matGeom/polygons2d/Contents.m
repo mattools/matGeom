@@ -120,6 +120,7 @@
 %   expandPolygon             - Expand a polygon by a given (signed) distance.
 %   triangulatePolygon        - Compute a triangulation of the polygon.
 %   polygonSymmetryAxis       - Try to identify symmetry axis of polygon.
+%   polygonSkeleton           - Skeletonization of a polygon with a dense distribution of vertices.
 %   medialAxisConvex          - Compute medial axis of a convex polygon.
 %
 % Curves (polylines with lot of vertices)
