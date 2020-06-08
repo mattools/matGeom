@@ -20,7 +20,7 @@ function [edge, isInside] = clipRay(ray, bb)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2010-05-13,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2010 INRA - Cepia Software Platform.
 
@@ -44,8 +44,8 @@ edge = clipLine(ray, bb);
 inds = find(isfinite(edge(:, 1)));
 
 % compute position of edge extremities relative to the ray
-pos1 = linePosition(edge(inds,1:2), ray(inds,:));
-pos2 = linePosition(edge(inds,3:4), ray(inds,:));
+pos1 = linePosition(edge(inds,1:2), ray(inds,:), 'diag');
+pos2 = linePosition(edge(inds,3:4), ray(inds,:), 'diag');
 
 % if first point is before ray origin, replace by origin
 edge(inds(pos1 < 0), 1:2) = ray(inds(pos1 < 0), 1:2);
