@@ -5,12 +5,40 @@ Tries to follow semantic versioning.
 Changes are organized by release number, then by change type (added/changed/fixed),
 and finally by module.
 
-## [Unreleased]
+## MatGeom 1.2.2 - 2020-06-08
+
+Main changes are improvements in drawing functions, and in the management of Euler angles.
+
+### Added
+
+- (geom2d) added function principalAxesTransform
+- (polygons2d) added polygnSkeleton function
+- (polygons2d) added clipPolyline function
+- (graphs2d) added adjacencyListToEdges function
+- (geom3d) added function normalizeLine3d
+- (geom3d) added function fitSphere
+- (geom3d) added functions drawDome and drawCapsule
+- (geom3d) added function drawAngleBetweenVectors3d
+- (geom3d) added drawRay3d and clipRay3d
+- (meshes3d) added averageMesh function, to compute an average mesh from several mesh instances
+- (meshes3d) added meshComplement
+- (meshes3d) added function fillMeshFaces
 
 ### Changed
 
-- (polygons2d) added clipPolyline function
+- (geom2d) fitAffineTransform2d: changed convention for source and target point sets
+- (polygons2d) polygonSubcurve and polylineSubcurve now also return indices of selected vertices
+- (geom3d) improvements in management of Euler Angles in rotation3dToEulerAngles and eulerAnglesToRotation3d
+- (geom3d) drawCylinder can now handle multiple cylinders as numeric arrays
+- (geom3d) several updates to drawing functions
+- (geom3d) make some vector operations more generic about dimension
+- (geom3d) fitAffineTransform3d: changed convention for source and target point sets
 - (meshes3d) reading of OFF files is now faster when faces have homogeneous number of vertices
+- (meshes3d) readMesh_ply.m: replaces error by warning
+
+### Regression
+
+- (geom2d) removed functions rad2deg and deg2rad, as they can be replced by Matlab native functions
 
 
 ## MatGeom 1.2.1 - 2019-09-26
