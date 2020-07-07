@@ -68,7 +68,6 @@
 %
 % 3D Lines and Edges
 %   lines3d                     - Description of functions operating on 3D lines.
-%   edges3d                     - Description of functions operating on 3D edges.
 %   createLine3d                - Create a line with various inputs.
 %   createEdge3d                - Create an edge between two 3D points, or from a 3D line.
 %   fitLine3d                   - Fit a 3D line to a set of points.
@@ -76,21 +75,25 @@
 %   projPointOnLine3d           - Project a 3D point orthogonally onto a 3D line.
 %   distancePointLine3d         - Euclidean distance between 3D point and line.
 %   isPointOnLine3d             - Test if a 3D point belongs to a 3D line.
-%   distancePointEdge3d         - Minimum distance between a 3D point and a 3D edge.
 %   linePosition3d              - Return the position of a 3D point projected on a 3D line.
-%   clipRay3d                   - Clip a 3D ray with a box and return a 3D edge.
-%   drawRay3d                   - Draw a 3D ray on the current axis.
 %   distanceLines3d             - Minimal distance between two 3D lines.
 %   transformLine3d             - Transform a 3D line with a 3D affine transform.
 %   reverseLine3d               - Return same 3D line but with opposite orientation.
-%   midPoint3d                  - Middle point of two 3D points or of a 3D edge.
+%   normalizeLine3d             - Normalizes the direction vector of a 3D line.
+%   clipLine3d                  - Clip a line with a box and return an edge.
+%   drawLine3d                  - Draw a 3D line clipped by the current axes.
+%
+% 3D Edges and Rays
+%   edges3d                     - Description of functions operating on 3D edges.
 %   edgeLength3d                - Return the length of a 3D edge.
 %   clipEdge3d                  - Clip a 3D edge with a cuboid box.
 %   lineToEdge3d                - Convert a 3D straight line to a 3D finite edge.
 %   edgeToLine3d                - Convert a 3D edge to a 3D straight line.
-%   clipLine3d                  - Clip a line with a box and return an edge.
+%   distancePointEdge3d         - Minimum distance between a 3D point and a 3D edge.
 %   drawEdge3d                  - Draw 3D edge in the current axes.
-%   drawLine3d                  - Draw a 3D line clipped by the current axes.
+%   createRay3d                 - Create a 3D ray.
+%   clipRay3d                   - Clip a 3D ray with a box and return a 3D edge.
+%   drawRay3d                   - Draw a 3D ray on the current axis.
 %
 % Planes
 %   planes3d                    - Description of functions operating on 3D planes.
@@ -147,6 +150,7 @@
 % Spheres
 %   spheres                     - Description of functions operating on 3D spheres.
 %   createSphere                - Create a sphere containing 4 points.
+%   fitSphere                   - Fit a sphere to 3D points using the least squares approach.
 %   intersectLineSphere         - Return intersection points between a line and a sphere.
 %   intersectPlaneSphere        - Return intersection circle between a plane and a sphere.
 %   drawSphere                  - Draw a sphere as a mesh.
@@ -171,6 +175,8 @@
 %   drawTorus                   - Draw a torus (3D ring).
 %   drawCylinder                - Draw a cylinder.
 %   drawEllipseCylinder         - Draw a cylinder with ellipse cross-section.
+%   drawCapsule                 - Draw a capsule.
+%   drawDome                    - Draw a dome (half-sphere, semi-sphere) as a mesh.
 %   drawSurfPatch               - Draw a 3D surface patch, with 2 parametrized surfaces.
 %
 % Bounding boxes management
@@ -185,7 +191,7 @@
 %
 % Geometric transforms
 %   transforms3d                - Conventions for manipulating 3D affine transforms.
-%   fitAffineTransform3d        - Fit an affine transform using two point sets.
+%   fitAffineTransform3d        - Compute the affine transform that best register two 3D point sets.
 %   registerPoints3dAffine      - Fit 3D affine transform using iterative algorithm.
 %   createTranslation3d         - Create the 4x4 matrix of a 3D translation.
 %   createScaling3d             - Create the 4x4 matrix of a 3D scaling.
@@ -211,6 +217,8 @@
 %   drawCuboid                  - Draw a 3D cuboid, eventually rotated.
 %   drawPlatform                - Draw a rectangular platform with a given size.
 %   drawLabels3d                - Draw text labels at specified 3D positions.
+%   drawArrow3d                 - plot a quiver of 3D arrows.
+%   drawAngleBetweenVectors3d   - Draw an arc between 2 vectors.
 %
 %
 %   Credits:
@@ -238,4 +246,5 @@ help(mfilename);
 %   vectorCross3d               - Vector cross product faster than inbuilt MATLAB cross.
 
 % Others
+
 

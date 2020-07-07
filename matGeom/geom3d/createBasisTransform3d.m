@@ -20,9 +20,9 @@ function transfo = createBasisTransform3d(source, target)
 %
 %   Example:
 %     % Calculate local plane coords. of a point given in global coords.
-%     Plane = [10 10 10  1 0 0  0 1 0];
-%     Tform = createBasisTransform3d('global', Plane);
-%     PT_IN_PLANE = transformPoint3d([3 8 2], Tform)
+%     plane = [10 10 10  1 0 0  0 1 0];
+%     transfo = createBasisTransform3d('global', plane);
+%     PT_IN_PLANE = transformPoint3d([3 8 2], transfo)
 %     PT_IN_PLANE =
 %         13  18  12
 %
