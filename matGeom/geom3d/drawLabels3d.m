@@ -35,10 +35,10 @@ end
 
 % extract handle of axis to draw on
 if isAxisHandle(varargin{1})
-    ax = varargin{1};
+    axH = varargin{1};
     varargin(1) = [];
 else
-    ax = gca;
+    axH = gca;
 end
 
 % process input parameters
@@ -71,7 +71,10 @@ end
 % parse format for displaying numeric values
 format = '%.2f';
 if ~isempty(varargin)
-    format = varargin{1};
+    if varargin{1}(1) == '%'
+        format = varargin{1};
+        varargin(1)=[];
+    end
 end
 if size(format, 1) == 1 && size(px, 1) > 1
     format = repmat(format, size(px, 1), 1);
@@ -95,7 +98,7 @@ labels = char(labels);
 
 
 %% display the text
-h = text(px, py, pz, labels, 'parent', ax);
+h = text(axH, px, py, pz, labels, varargin{:});
 
 
 %% format output
