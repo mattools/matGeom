@@ -16,6 +16,9 @@ function varargout = angleSort(pts, varargin)
 %   [PTS2, I] = angleSort(...);
 %   Also returns in I the indices of PTS, such that PTS2 = PTS(I, :);
 %
+%   [PTS2, I, ANGLES] = angleSort(...);
+%   Also returns the ANGLES in corresponding order to PTS2.
+%
 %   See Also:
 %   points2d, angles2d, angle2points, normalizeAngle
 %
@@ -52,14 +55,19 @@ pts2 = pts - repmat(pt0, [n 1]);
 angle = lineAngle([zeros(n, 2) pts2]);
 angle = mod(angle - theta0 + 2*pi, 2*pi);
 
-[dummy, I] = sort(angle); %#ok<ASGLU>
+[angles, I] = sort(angle); 
 
 % format output
-if nargout<2
-    varargout{1} = pts(I, :);
-elseif nargout==2
-    varargout{1} = pts(I, :);
-    varargout{2} = I;
+switch nargout
+    case 1
+        varargout{1} = pts(I, :);
+    case 2
+        varargout{1} = pts(I, :);
+        varargout{2} = I;
+    case 3
+        varargout{1} = pts(I, :);
+        varargout{2} = I;
+        varargout{3} = angles;
 end
 
         

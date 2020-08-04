@@ -17,7 +17,7 @@ function trans = localToGlobal3d(varargin)
 %       around the direction vector, between 0 and 360 degrees
 %
 %   The resulting transform is obtained by applying (in that order):
-%   - Rotation by PSI   around he Z-axis
+%   - Rotation by PSI   around the Z-axis
 %   - Rotation by THETA around the Y-axis
 %   - Rotation by PHI   around the Z-axis
 %   - Translation by vector CENTER

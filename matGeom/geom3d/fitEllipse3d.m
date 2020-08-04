@@ -82,7 +82,7 @@ end
 fittedEllipse3d=[center A B THETA PHI PSI];
 
 %% Visualization
-if parser.Results.visualization == true
+if parser.Results.visualization
     
     figure('Color','w'); axis equal tight; hold on; view(3)
     xlabel('x'); ylabel('y'); zlabel('z');

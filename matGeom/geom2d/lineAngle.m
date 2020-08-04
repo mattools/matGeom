@@ -3,7 +3,7 @@ function theta = lineAngle(varargin)
 %
 %   A = lineAngle(LINE);
 %   Returns the angle between horizontal, right-axis and the given line.
-%   Angle is fiven in radians, between 0 and 2*pi, in counter-clockwise
+%   Angle is given in radians, between 0 and 2*pi, in counter-clockwise
 %   direction.
 %
 %   A = lineAngle(LINE1, LINE2);
