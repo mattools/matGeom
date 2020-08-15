@@ -31,15 +31,14 @@ function varargout = drawPolyline3d(varargin)
 %   polygons3d, drawPolygon3d, fillPolygon3d
 %
 
-%   ---------
-%   author : David Legland 
+% ---------
+% Author : David Legland 
 % e-mail: david.legland@inra.fr
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 18/02/2005.
-%
+% Created: 2005-02-15
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 % HISTORY
-% 2010-03-08 rename as drawPolyline3d
+% 2010-03-08 rename to drawPolyline3d
 
 
 %% Process input arguments
@@ -72,16 +71,22 @@ if min(size(var)) == 1
     if length(varargin) < 3
         error('geom3d:drawPolyline3d:Wrong number of arguments in drawPolyline3d');
     end
-    py = varargin{2};
-    pz = varargin{3};
-    varargin = varargin(4:end);
-    
+    if  isnumeric(varargin{2}) && isnumeric(varargin{3})
+        py = varargin{2};
+        pz = varargin{3};
+        varargin(1:3) = [];
+    else
+        px = var(:, 1);
+        py = var(:, 2);
+        pz = var(:, 3);
+        varargin(1) = [];
+    end
 else
     % all coordinates are grouped in the first argument
     px = var(:, 1);
     py = var(:, 2);
     pz = var(:, 3);
-    varargin = varargin(2:end);
+    varargin(1) = [];
 end
 
 % check if curve is closed or open (default is open)
