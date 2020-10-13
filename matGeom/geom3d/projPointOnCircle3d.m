@@ -8,9 +8,11 @@ function point2 = projPointOnCircle3d(point, circle)
 %   Result PT2 is a N-by-3 array, containing coordinates of projections of
 %   PT onto the circle CIRCLE. 
 %
-%
-%   See also:
+%   See also
 %   projPointOnLine3d, projPointOnPlane
+%
+%   Source
+%   https://www.geometrictools.com/Documentation/DistanceToCircle3.pdf
 %
 % ---------
 % Author: oqilipo
