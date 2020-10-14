@@ -3,7 +3,7 @@ function varargout = trimMesh(varargin)
 %
 %   [V2, F2] = trimMesh(V, F)
 %   Unreferenced vertices are removed.
-%   Following functions are implemented for only numeric faces:
+%   Following functions are implemented only for numeric faces:
 %       Duplicate vertices are removed.
 %       Duplicate faces are removed.
 %
