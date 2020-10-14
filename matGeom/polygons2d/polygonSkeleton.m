@@ -1,4 +1,4 @@
-function varargout = polygonSkeletonGraph(poly, varargin)
+function varargout = polygonSkeleton(poly, varargin)
 % Skeletonization of a polygon with a dense distribution of vertices.
 %
 %   [V, ADJ] = polygonSkeleton(POLY)
@@ -72,7 +72,7 @@ end
 %% Compute the topology of the skeleton
 %
 % Compute the topology as a list of adjacent vertex indices for each vertex
-% inside the polygon. 
+% inside the polygon.
 % Need to convert between voronoi indices and skeleton indices.
 
 % allocate adjacncy list
@@ -98,7 +98,7 @@ for iGerm = 2:nCells
         
         % convert voronoi vertex index to skeleton vertex index
         indV1 = vertexIndexMap(iVertex);
-
+        
         % update the reference germ associated to current skeleton vertex
         vertexGermInds(indV1) = iGerm;
         
@@ -125,7 +125,7 @@ end
 %% Compute radius list
 
 % for each voronoi vertex inside the polygon, compute the distance to
-% original polygon. 
+% original polygon.
 % Find indices of germs associated to each vertex.
 % By construction, each vertex is the circumcenter of three germs.
 radiusList = zeros(nInnerVertices, 1);

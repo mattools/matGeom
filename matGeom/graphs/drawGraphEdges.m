@@ -1,5 +1,5 @@
 function varargout = drawGraphEdges(varargin)
-%DRAWGRAPHEDGES Draw edges of a graph.
+% Draw edges of a graph.
 %
 %   drawGraphEdges(NODES, EDGES) 
 %   Draws a graph specified by a set of nodes (array N-by-2 or N-by-3,
@@ -13,15 +13,15 @@ function varargout = drawGraphEdges(varargin)
 %
 %
 %   H = drawGraphEdges(...) 
-%   return handle to the set of edges.
+%   Returns handle to the set of edges.
 %   
 %   See also 
-%   graphs, drawGraph, fillGraphFaces
+%     graphs, drawGraph, fillGraphFaces
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2005-11-24
 % Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
