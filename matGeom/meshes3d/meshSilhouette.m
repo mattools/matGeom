@@ -1,5 +1,6 @@
 function silhouette = meshSilhouette(v, f, varargin)
-%MESHSILHOUETTE calculates the 2D outline of a 3D mesh on an arbitrary plane
+%MESHSILHOUETTE Compute the 2D outline of a 3D mesh on an arbitrary plane.
+%
 %   ATTENTION: Very slow brute force approach! Keep the number of faces as
 %   low as possible.
 %

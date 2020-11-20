@@ -4,7 +4,7 @@ function varargout = readMesh_off(fileName)
 %   [VERTICES, FACES] = readMesh_off(FILENAME)
 %   Read the data stored in file FILENAME and return the vertex and face
 %   arrays as NV-by-3 array and NF-by-N array respectively, where NV is the
-%   number of vertices and Nf is the number of faces.
+%   number of vertices and NF is the number of faces.
 %
 %   MESH = readMesh_off(FILENAME)
 %   Read the data stored in file FILENAME and return the mesh into a struct
@@ -16,7 +16,7 @@ function varargout = readMesh_off(fileName)
 %     view([5 80]); light; lighting gouraud
 %
 %   See also
-%     meshes3d, writeMesh_off, drawMesh
+%     meshes3d, readMesh, writeMesh_off, drawMesh
 %
 
 % ------

@@ -41,6 +41,7 @@
 %   meshVertexNormals          - Compute normals to a mesh vertices.
 %   meshComplement             - Reverse the normal of each face in the mesh.
 %   averageMesh                - Compute average mesh from a list of meshes.
+%   meshSilhouette             - Compute the 2D outline of a 3D mesh on an arbitrary plane.
 %
 % Intersections and clipping
 %   intersectLineMesh3d        - Intersection points of a 3D line with a mesh.
@@ -129,10 +130,12 @@
 %   drawFaceNormals            - Draw normal vector of each face in a mesh.
 %
 % I/O functions
+%   readMesh                   - Read a 3D mesh by inferring format from file name.
+%   writeMesh                  - Write 3D mesh data by inferring format from file name.
 %   readMesh_off               - Read mesh data stored in OFF format.
 %   readMesh_ply               - Read mesh data stored in PLY (Stanford triangle) format.
-%   writeMesh_off              - Writes a mesh into a text file in OFF format.
-%   writeMesh_ply              - Writes a mesh into a text file in PLY format.
+%   writeMesh_off              - Write a mesh into a text file in OFF format.
+%   writeMesh_ply              - Write a mesh into a text file in PLY format.
 %
 
 % ------
