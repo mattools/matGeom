@@ -140,12 +140,14 @@
 % 3D circles and ellipses
 %   circles3d                   - Description of functions operating on 3D circles.
 %   fitCircle3d                 - Fit a 3D circle to a set of points.
+%   fitEllipse3d                - Fit an ellipse to a set of points.
 %   circle3dPosition            - Return the angular position of a point on a 3D circle.
 %   circle3dPoint               - Coordinates of a point on a 3D circle from its position.
 %   circle3dOrigin              - Return the first point of a 3D circle.
 %   drawCircle3d                - Draw a 3D circle.
 %   drawCircleArc3d             - Draw a 3D circle arc.
 %   drawEllipse3d               - Draw a 3D ellipse.
+%   projPointOnCircle3d         - Project a 3D point onto a 3D circle.
 %
 % Spheres
 %   spheres                     - Description of functions operating on 3D spheres.
@@ -163,7 +165,7 @@
 %
 % Smooth surfaces
 %   equivalentEllipsoid         - Equivalent ellipsoid of a set of 3D points.
-%   fitEllipse3d                - Fit an ellipse to a set of points.
+%   isPointInEllipsoid          - Check if a point is located inside a 3D ellipsoid.
 %   ellipsoidSurfaceArea        - Approximated surface area of an ellipsoid.
 %   oblateSurfaceArea           - Approximated surface area of an oblate ellipsoid.
 %   prolateSurfaceArea          - Approximated surface area of a prolate ellipsoid.
@@ -246,5 +248,6 @@ help(mfilename);
 %   vectorCross3d               - Vector cross product faster than inbuilt MATLAB cross.
 
 % Others
+
 
 
