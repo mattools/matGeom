@@ -24,6 +24,12 @@ assertEqual(testCase, 448, size(f, 1));
 
 
 function test_mushroom_singleOutput(testCase) %#ok<*DEFNU>
-[v, f] = readMesh_off('mushroom.off');
-assertEqual(testCase, 226, size(v, 1));
-assertEqual(testCase, 448, size(f, 1));
+
+mesh = readMesh_off('mushroom.off');
+
+assertTrue(testCase, isstruct(mesh));
+assertTrue(testCase, isfield(mesh, 'vertices'));
+assertTrue(testCase, isfield(mesh, 'faces'));
+
+assertEqual(testCase, 226, size(mesh.vertices, 1));
+assertEqual(testCase, 448, size(mesh.faces, 1));

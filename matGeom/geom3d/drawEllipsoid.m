@@ -19,7 +19,7 @@ function varargout = drawEllipsoid(elli, varargin)
 %     axis equal;
 %
 %     figure; hold on;
-%     elli = [[10 20 30   50 30 10   5 10 0];
+%     elli = [10 20 30   50 30 10   5 10 0];
 %     drawEllipsoid(elli, 'FaceColor', 'r', ...
 %         'drawEllipses', true, 'EllipseColor', 'b', 'EllipseWidth', 3);
 %     axis equal;
@@ -31,7 +31,7 @@ function varargout = drawEllipsoid(elli, varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2011-03-12,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
