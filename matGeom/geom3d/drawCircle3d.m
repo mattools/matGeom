@@ -75,6 +75,12 @@ function varargout = drawCircle3d(varargin)
 %   drawCircle3d(XC, YC, ZC, R, THETA, PHI)         6
 %   drawCircle3d(XC, YC, ZC, R, THETA, PHI, PSI)    7
 
+% parse axis handle
+hAx = gca;
+if isAxisHandle(varargin{1})
+    hAx = varargin{1};
+    varargin(1) = [];
+end
 
 % extract drawing options
 if verLessThan('matlab', '7.8')
@@ -225,7 +231,7 @@ for i = 1:nCircles
     circle  = transformPoint3d(circle0, trans);
 
     % draw the curve of circle points
-    h(i) = drawPolyline3d(circle, options{:});
+    h(i) = drawPolyline3d(hAx, circle, options{:});
 end
 
 
