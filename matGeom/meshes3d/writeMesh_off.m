@@ -40,7 +40,7 @@ nFaces = size(faces, 1);
 if iscell(faces)
     nFaces = length(faces);
 end
-fprintf(f, '%d %d\n', nVertices, nFaces);
+fprintf(f, '%d %d 0\n', nVertices, nFaces);
 
 % Write vertex info
 format = '%g %g %g\n';
