@@ -7,12 +7,12 @@ function varargout = readMesh_ply(fileName)
 %   readMesh_ply
 %
 %   References
-%   Wrapper function for Gabriel Peyré's read_ply that is a wrapper 
+%   Wrapper function for Gabriel Peyré's read_ply that is a wrapper
 %   function of Pascal Getreuer's plyread.
 %
 %   See also
 %   meshes3d, readMesh, readMesh_off, readMesh_stl
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
@@ -22,7 +22,7 @@ function varargout = readMesh_ply(fileName)
 
 %% open file
 f = fopen(fileName, 'r');
-if f == -1 
+if f == -1
     error('matGeom:readMesh_ply:FileNotFound', ...
         ['Could not find file: ' fileName]);
 end
@@ -85,7 +85,7 @@ function [Elements,varargout] = plyread(Path,Str)
 
 % Pascal Getreuer 2004
 
-[fid,Msg] = fopen(Path,'rt');	% open file in read text mode
+[fid,Msg] = fopen(Path,'rt'); % open file in read text mode
 
 if fid == -1, error(Msg); end
 
@@ -95,28 +95,27 @@ if ~strcmp(Buf,'ply')
     error('Not a PLY file.');
 end
 
-
-%%% read header %%%
-% Position = ftell(fid);
+%% read header
+ftell(fid);
 Format = '';
 NumComments = 0;
-Comments = {};			% for storing any file comments
+Comments = {};      % for storing any file comments
 NumElements = 0;
 NumProperties = 0;
-Elements = [];          % structure for holding the element data
-ElementCount = [];		% number of each type of element in file
-PropertyTypes = [];		% corresponding structure recording property types
-ElementNames = {};		% list of element names in the order they are stored in the file
-PropertyNames = [];		% structure of lists of property names
+Elements = [];      % structure for holding the element data
+ElementCount = [];  % number of each type of element in file
+PropertyTypes = []; % corresponding structure recording property types
+ElementNames = {};  % list of element names in the order they are stored in the file
+PropertyNames = [];	% structure of lists of property names
 
 while 1
-    Buf = fgetl(fid);   								% read one line from file
-    Token = split(Buf);                                 % split line into tokens
-    Count = length(Token);                              % count tokens
-
-    if Count                                            % parse line
+    Buf = fgetl(fid); % read one line from file
+    Token = split(Buf); % split line into tokens
+    Count = length(Token); % count tokens
+    
+    if Count % parse line
         switch lower(Token{1})
-            case 'format'                               % read data format
+            case 'format' % read data format
                 if Count >= 2
                     Format = lower(Token{2});
                     if Count == 3 && ~strcmp(Token{3},'1.0')
@@ -124,13 +123,13 @@ while 1
                         error('Only PLY format version 1.0 supported.');
                     end
                 end
-            case 'comment'                              % read file comment
+            case 'comment' % read file comment
                 NumComments = NumComments + 1;
                 Comments{NumComments} = ''; %#ok<AGROW>
                 for i = 2:Count
                     Comments{NumComments} = [Comments{NumComments},Token{i},' '];
                 end
-            case 'element'                              % element name
+            case 'element' % element name
                 if Count >= 3
                     if isfield(Elements,Token{2})
                         fclose(fid);
@@ -163,14 +162,11 @@ while 1
                     end
                     
                     % add property subfield to Elements
-                    eval(['Elements.',CurElement,'.',Token{Count},'=[];'], ...
-                        'fclose(fid);error([''Error reading property: '',Buf])');
+                    Elements.(CurElement).(Token{Count}) = [];
                     % add property subfield to PropertyTypes and save type
-                    eval(['PropertyTypes.',CurElement,'.',Token{Count},'={Token{2:Count-1}};'], ...
-                        'fclose(fid);error([''Error reading property: '',Buf])');
+                    PropertyTypes.(CurElement).(Token{Count}) = Token(2:Count-1);
                     % record property name order
-                    eval(['PropertyNames.',CurElement,'{NumProperties}=Token{Count};'], ...
-                        'fclose(fid);error([''Error reading property: '',Buf])');
+                    PropertyNames.(CurElement){NumProperties} = Token{Count};
                 else
                     fclose(fid);
                     if isempty(CurElement)
@@ -179,14 +175,13 @@ while 1
                         error(['Bad property definition: ',Buf]);
                     end
                 end
-            case 'end_header'	% end of header, break from while loop
+            case 'end_header' % end of header, break from while loop
                 break;
         end
     end
 end
 
-%%% set reading for specified data format %%%
-
+%% set reading for specified data format
 if isempty(Format)
     warning('Data format unspecified, assuming ASCII.');
     Format = 'ascii';
@@ -205,16 +200,16 @@ switch Format
 end
 
 if ~Format
-    Buf = fscanf(fid,'%f');		% read the rest of the file as ASCII data
+    Buf = fscanf(fid,'%f'); % read the rest of the file as ASCII data
     BufOff = 1;
 else
     % reopen the file in read binary mode
     fclose(fid);
     
     if Format == 1
-        fid = fopen(Path,'r','ieee-le.l64');		% little endian
+        fid = fopen(Path,'r','ieee-le.l64'); % little endian
     else
-        fid = fopen(Path,'r','ieee-be.l64');		% big endian
+        fid = fopen(Path,'r','ieee-be.l64'); % big endian
     end
     
     % find the end of the header again (using ftell on the old handle doesn't give the correct position)
@@ -224,7 +219,7 @@ else
     tmp = -11;
     
     while isempty(i)
-        i = strfind(Buf,['end_header',13,10]);			    % look for end_header + CR/LF
+        i = strfind(Buf,['end_header',13,10]);              % look for end_header + CR/LF
         i = [i,strfind(Buf,['end_header',10])]; %#ok<AGROW> % look for end_header + LF
         
         if isempty(i)
@@ -238,8 +233,7 @@ else
 end
 
 
-%%% read element data %%%
-
+%% read element data
 % PLY and MATLAB data types (for fread)
 PlyTypeNames = {'char','uchar','short','ushort','int','uint','float','double', ...
     'char8','uchar8','short16','ushort16','int32','uint32','float32','double64'};
@@ -254,7 +248,8 @@ for i = 1:NumElements
     
     % fprintf('Reading %s...\n',ElementNames{i});
     
-    if ~Format %%% read ASCII data %%%
+    %% read ASCII data
+    if ~Format
         Type = zeros(1,NumProperties);
         for j = 1:NumProperties
             Token = CurPropertyTypes.(CurPropertyNames{j});
@@ -290,7 +285,8 @@ for i = 1:NumElements
                 end
             end
         end
-    else %%% read binary data %%%
+    else
+        %% read binary data
         % translate PLY data type names to MATLAB data type names
         ListFlag = 0; % = 1 if there is a list type
         SameFlag = 1; % = 1 if all types are the same
@@ -373,12 +369,12 @@ for i = 1:NumElements
                     Position = ftell(fid);
                     % read in BufSize count values, assuming all counts = SkipNum
                     [Buf,BufSize] = fread(fid,BufSize,Type{1},SkipNum*TypeSize2(1));
-                    Miss = find(Buf ~= SkipNum);					% find first count that is not SkipNum
-                    fseek(fid,Position + TypeSize(1),-1); 		% seek back to after first count
+                    Miss = find(Buf ~= SkipNum); % find first count that is not SkipNum
+                    fseek(fid,Position + TypeSize(1),-1); % seek back to after first count
                     
-                    if isempty(Miss)									% all counts are SkipNum
+                    if isempty(Miss) % all counts are SkipNum
                         Buf = fread(fid,[SkipNum,BufSize],[int2str(SkipNum),'*',Type2{1}],TypeSize(1))';
-                        fseek(fid,-TypeSize(1),0); 				% undo last skip
+                        fseek(fid,-TypeSize(1),0); % undo last skip
                         
                         for k = 1:BufSize
                             ListData{1}{j+k} = Buf(k,:);
@@ -387,7 +383,7 @@ for i = 1:NumElements
                         j = j + BufSize;
                         BufSize = floor(1.5*BufSize);
                     else
-                        if Miss(1) > 1									% some counts are SkipNum
+                        if Miss(1) > 1 % some counts are SkipNum
                             Buf2 = fread(fid,[SkipNum,Miss(1)-1],[int2str(SkipNum),'*',Type2{1}],TypeSize(1));
                             Buf2 = Buf2';
                             
@@ -431,9 +427,9 @@ for i = 1:NumElements
     % put data into Elements structure
     for k = 1:NumProperties
         if (~Format && ~Type(k)) || (Format && isempty(Type2{k}))
-            eval(['Elements.',ElementNames{i},'.',CurPropertyNames{k},'=Data(:,k);']);
+            Elements.(ElementNames{i}).(CurPropertyNames{k}) = Data(:,k);
         else
-            eval(['Elements.',ElementNames{i},'.',CurPropertyNames{k},'=ListData{k};']);
+            Elements.(ElementNames{i}).(CurPropertyNames{k}) = ListData{k};
         end
     end
 end
@@ -455,7 +451,7 @@ if (nargin > 1 && strcmpi(Str,'Tri')) || nargout > 2
     end
     
     if any(strcmp(Names,'x')) && any(strcmp(Names,'y')) && any(strcmp(Names,'z'))
-        eval(['varargout{1}=[Elements.',Name,'.x,Elements.',Name,'.y,Elements.',Name,'.z];']);
+        varargout{1} = [Elements.(Name).x, Elements.(Name).y, Elements.(Name).z];
     else
         varargout{1} = zeros(1,3);
     end
