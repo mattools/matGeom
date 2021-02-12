@@ -33,6 +33,8 @@ switch lower(ext)
         mesh = readMesh_off(fileName);
     case '.ply'
         mesh = readMesh_ply(fileName);
+    case '.stl'
+        mesh = readMesh_stl(fileName);
     otherwise
         error('Unrecognized file format for rezading mesh: %s', ext);
 end
