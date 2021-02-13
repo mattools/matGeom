@@ -42,10 +42,15 @@ function [vertex,face,d,c] = read_ply(filename)
 %
 %   Copyright (c) 2003 Gabriel Peyré
 
+possibleFacePropertyNames = ...
+    {'vertex_indices','vertex_indexes','vertex_index','indices','indexes'};
+
 [d,c] = plyread(filename);
-vi = d.face.vertex_indices;
+facePropertyNameIdx = find(matches(possibleFacePropertyNames, fieldnames(d.face)));
+assert(length(facePropertyNameIdx) == 1)
+vi = d.face.(possibleFacePropertyNames{facePropertyNameIdx});
 lengths = cellfun('length',vi);
-maxLength=max(lengths);
+maxLength = max(lengths);
 if all(maxLength == lengths)
     face = cell2mat(vi)+1;
 else
