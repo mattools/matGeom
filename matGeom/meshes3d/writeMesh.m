@@ -38,7 +38,7 @@ switch lower(ext)
     case '.off'
         writeMesh_off(fileName, vertices, faces);
     case '.ply'
-        writeMesh_ply(fileName, vertices, faces);
+        writeMesh_ply(fileName, vertices, faces, varargin{:});
     case '.stl'
         writeMesh_stl(fileName, vertices, faces, varargin{:});
     otherwise
