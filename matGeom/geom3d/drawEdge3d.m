@@ -69,7 +69,7 @@ isEdge3d = @(x) validateattributes(x,{'numeric'},...
     {'nonempty','size',[nan,6]});
 defOpts.Color = 'b';
 [~, edges, varargin] = ...
-    parseDrawInput(edges, isEdge3d, 'line', defOpts, varargin{:});
+    parseDrawInput(hAx, isEdge3d, 'line', defOpts, edges, varargin{:});
 
 % identify indices of valid edge (not containing any NaN's).
 inds = sum(isnan(edges), 2) == 0;

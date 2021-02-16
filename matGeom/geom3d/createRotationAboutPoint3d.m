@@ -1,7 +1,7 @@
 function TFM = createRotationAboutPoint3d(ROT, point)
-%ROTATIONABOUTPOINT3D Rotate about a point using a given rotation matrix.
+%CREATEROTATIONABOUTPOINT3D Rotate about a point using a rotation matrix.
 %
-%   TFM = rotationAboutPoint3d(ROT, POINT); Returns the transformation 
+%   TFM = createRotationAboutPoint3d(ROT, POINT) Returns the transformation 
 %   matrix corresponding to a translation(-POINT), rotation with ROT and 
 %   translation(POINT). Ignores a possible translation in ROT(1:3,4).
 %
