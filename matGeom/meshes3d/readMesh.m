@@ -17,7 +17,7 @@ function varargout = readMesh(fileName)
 %     view([180 -70]); axis equal;
 %
 %   See also
-%     meshes3d, writeMesh, readMesh_off, readMesh_ply
+%     meshes3d, writeMesh, readMesh_off, readMesh_ply, readMesh_stl
 %
  
 % ------

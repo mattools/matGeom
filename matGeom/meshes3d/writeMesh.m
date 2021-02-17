@@ -9,7 +9,7 @@ function writeMesh(fileName, vertices, faces, varargin)
 %   writeMesh
 %
 %   See also
-%     meshes3d, readMesh, writeMesh_off, writeMesh_ply
+%     meshes3d, readMesh, writeMesh_off, writeMesh_ply, writeMesh_stl
 %
 
 % ------

@@ -208,6 +208,7 @@
 %   rotation3dAxisAndAngle      - Determine axis and angle of a 3D rotation matrix.
 %   createRotationVector3d      - Calculates the rotation between two vectors.
 %   createRotationVectorPoint3d - Calculates the rotation between two vectors.
+%   createRotationAboutPoint3d  - Rotate about a point using a rotation matrix.
 %   recenterTransform3d         - Change the fixed point of an affine 3D transform.
 %   composeTransforms3d         - Concatenate several space transformations.
 %

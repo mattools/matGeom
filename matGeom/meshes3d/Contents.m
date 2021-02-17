@@ -134,8 +134,10 @@
 %   writeMesh                  - Write 3D mesh data by inferring format from file name.
 %   readMesh_off               - Read mesh data stored in OFF format.
 %   readMesh_ply               - Read mesh data stored in PLY (Stanford triangle) format.
+%   readMesh_stl               - Read mesh data stored in STL format.
 %   writeMesh_off              - Write a mesh into a text file in OFF format.
-%   writeMesh_ply              - Write a mesh into a text file in PLY format.
+%   writeMesh_ply              - Write a mesh into a file in PLY format.
+%   writeMesh_stl              - Write mesh data in the STL format.
 %
 
 % ------
