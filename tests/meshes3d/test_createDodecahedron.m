@@ -20,7 +20,8 @@ test_suite = functiontests(localfunctions);
 
 function testCreation(testCase) %#ok<*DEFNU>
 
-createDodecahedron();
+mesh = createDodecahedron();
+assertTrue(testCase, ~isempty(mesh));
 
 
 function testVEFCreation(testCase)

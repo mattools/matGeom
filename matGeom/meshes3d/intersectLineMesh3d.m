@@ -1,5 +1,5 @@
 function [points, pos, faceInds] = intersectLineMesh3d(line, vertices, varargin)
-%INTERSECTLINEMESH3D Intersection points of a 3D line with a mesh.
+% Intersection points of a 3D line with a mesh.
 %
 %   INTERS = intersectLineMesh3d(LINE, VERTICES, FACES)
 %   Compute the intersection points between a 3D line and a 3D mesh defined
@@ -24,11 +24,11 @@ function [points, pos, faceInds] = intersectLineMesh3d(line, vertices, varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2011-12-20,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-% tolerance for detecting if a point is 
+% tolerance for detecting if a point is on line or within edge bounds
 tol = 1e-12;
 
 % parsing
@@ -62,13 +62,13 @@ v   = vertices(faces(:,3), :) - t0;
 n   = normalizeVector3d(crossProduct3d(u, v));
 
 % direction vector of line
-dir = line(4:6);
+dv = line(4:6);
 
 % vector between triangle origin and line origin
 w0 = bsxfun(@minus, line(1:3), t0);
 
 a = -dot(n, w0, 2);
-b = dot(n, repmat(dir, size(n, 1), 1), 2);
+b = dot(n, repmat(dv, size(n, 1), 1), 2);
 
 valid = abs(b) > tol & vectorNorm3d(n) > tol;
 
@@ -78,7 +78,7 @@ valid = abs(b) > tol & vectorNorm3d(n) > tol;
 pos = a ./ b;
 
 % coordinates of intersection point
-points = bsxfun(@plus, line(1:3), bsxfun(@times, pos, dir));
+points = bsxfun(@plus, line(1:3), bsxfun(@times, pos, dv));
 
 
 %% test if intersection point is inside triangle
@@ -98,14 +98,12 @@ D = uv.^2 - uu .* vv;
 
 % test first coordinate
 s = (uv .* wv - vv .* wu) ./ D;
-% ind1 = s < 0.0 | s > 1.0;
 ind1 = s < -tol | s > (1.0 + tol);
 points(ind1, :) = NaN;
 pos(ind1) = NaN;
 
 % test second coordinate, and third triangle edge
 t = (uv .* wu - uu .* wv) ./ D;
-% ind2 = t < 0.0 | (s + t) > 1.0;
 ind2 = t < -tol | (s + t) > (1.0 + tol);
 points(ind2, :) = NaN;
 pos(ind2) = NaN;
@@ -114,10 +112,12 @@ pos(ind2) = NaN;
 inds = ~ind1 & ~ind2 & valid;
 points = points(inds, :);
 
-pos = pos(inds);
-faceInds = find(inds);
-
-% convert to face indices of original mesh
-if ~isempty(tri2Face)
-    faceInds = tri2Face(faceInds);
+if nargout > 1
+    pos = pos(inds);
+    faceInds = find(inds);
+    
+    % convert to face indices of original mesh
+    if ~isempty(tri2Face)
+        faceInds = tri2Face(faceInds);
+    end
 end
