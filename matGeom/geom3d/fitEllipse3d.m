@@ -28,8 +28,8 @@ function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin)
 %     drawEllipse3d, ellipseToPolygon
 %
 %   Source
-%     Nested functions are part of the quadfit toolbox of Levente Hunyadi
-%     https://de.mathworks.com/matlabcentral/fileexchange/45356
+%     Nested functions are part of the quadfit toolbox by Levente Hunyadi
+%     https://mathworks.com/matlabcentral/fileexchange/45356
 %
 % ---------
 % Author: oqilipo
