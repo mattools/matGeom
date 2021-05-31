@@ -1,5 +1,5 @@
 function points = intersectLineCircle(line, circle)
-%INTERSECTLINECIRCLE Intersection point(s) of a line and a circle.
+% Intersection point(s) of a line and a circle.
 %
 %   INTERS = intersectLineCircle(LINE, CIRCLE);
 %   Returns a 2-by-2-by-N array, containing on each row the coordinates of
@@ -37,7 +37,7 @@ function points = intersectLineCircle(line, circle)
 %
 
 % ------
-% Author: David Legland, david.legland@inra.fr
+% Author: David Legland, david.legland@inrae.fr
 % Author: JuanPi Carbajal <ajuanpi+dev@gmail.com>
 % Created: 2011-01-14,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
@@ -63,9 +63,9 @@ radius = circle(:, 3);
 dp = line(:, 1:2) - center;
 vl = line(:, 3:4);
 
-% coefficient of second order equation
+% coefficients of second order equation
 a = sum(line(:, 3:4).^2, 2);
-b = 2*sum(dp .* vl, 2);
+b = 2 * sum(dp .* vl, 2);
 c = sum(dp.^2, 2) - radius.^2;
 
 % discriminant
@@ -76,11 +76,11 @@ points = nan(2, 2, nCircles);
 valid = delta >= 0;
 
 if any(valid)
-    % compute roots
+    % compute roots (as a N-by-N-by-2 array)
     u = bsxfun(@plus, -b(valid), bsxfun(@times, [-1 1], sqrt(delta(valid))));
     u = bsxfun(@rdivide, u, a(valid)) / 2;
 
-    if nCircles == 1
+    if sum(valid) == 1
         points = [...
             line(1:2) + u(:,1) .* line(3:4); ...
             line(1:2) + u(:,2) .* line(3:4)];
