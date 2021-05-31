@@ -27,7 +27,7 @@ function ell = equivalentEllipsoid(points)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2011-03-12,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
@@ -40,7 +40,7 @@ center = mean(points);
 % compute the covariance matrix
 covPts = cov(points)/n;
 
-% perform a principal component analysis with 2 variables, 
+% perform a principal component analysis with 3 variables, 
 % to extract equivalent axes
 [U, S] = svd(covPts);
 
