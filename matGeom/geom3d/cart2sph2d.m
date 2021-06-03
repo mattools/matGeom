@@ -26,13 +26,18 @@ function varargout = cart2sph2d(x, y, z)
 %     ans =
 %       0    0    1
 %
+%     % check consistency with sph2cart2d
+%     sph2cart2d(cart2sph2d(30, 40, 5))
+%     ans =
+%         30.0000   40.0000    5.0000
 %
 %   See also:
-%   angles3d, sph2cart2d, cart2sph, cart2sph2
+%     angles3d, sph2cart2d, cart2sph, cart2sph2
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2011-06-29,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
@@ -48,10 +53,6 @@ hxy     = hypot(x, y);
 rho     = hypot(hxy, z);
 theta   = 90 - atan2(z, hxy) * 180 / pi;
 phi     = atan2(y, x) * 180 / pi;
-
-% % convert to degrees and theta to colatitude
-% theta   = 90 - rad2deg(theta);
-% phi     = rad2deg(phi);
 
 % format output
 if nargout <= 1

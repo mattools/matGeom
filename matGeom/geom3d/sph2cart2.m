@@ -2,11 +2,11 @@ function varargout = sph2cart2(theta, phi, rho)
 %SPH2CART2 Convert spherical coordinates to cartesian coordinates.
 %
 %   C = SPH2CART2(S)
-%   C = SPH2CART2(THETA, PHI)       (assume rho = 1)
+%   C = SPH2CART2(THETA, PHI)       (assuming rho = 1)
 %   C = SPH2CART2(THETA, PHI, RHO)   
 %   [X, Y, Z] = SPH2CART2(THETA, PHI, RHO);
 %
-%   S = [phi theta rho] (spherical coordinate).
+%   S = [theta phi rho] (spherical coordinate).
 %   C = [X Y Z]  (cartesian coordinate)
 %
 %   The following convention is used:
@@ -18,13 +18,29 @@ function varargout = sph2cart2(theta, phi, rho)
 %   Discussion on choice for convention can be found at:
 %   http://www.physics.oregonstate.edu/bridge/papers/spherical.pdf
 %
-%   See also:
-%   angles3d, cart2sph2, sph2cart, sph2cart2d
+%   Example
+%     xyz = sph2cart2(pi/2, 0, 10)
+%     xyz =
+%        10.0000         0    0.0000
 %
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 18/02/2005.
+%     xyz = sph2cart2(pi/2, pi/2, 10)
+%     xyz =
+%         0.0000   10.0000    0.0000
+%
+%     % check consistency with cart2sph2
+%     sph2cart2(cart2sph2(0.7, 0.8, 5))
+%     ans =
+%         0.7000    0.8000    5.0000
+%
+%   See also:
+%     angles3d, cart2sph2, sph2cart, sph2cart2d, eulerAnglesToRotation3d
+%
+
+% ------
+% Author: David Legland
+% e-mail: david.legland@inrae.fr
+% INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% created the 18/02/2005.
 %
 
 %   HISTORY
@@ -53,6 +69,7 @@ x  = rz  .* cos(phi);
 y  = rz  .* sin(phi);
 z  = rho .* cos(theta);
 
+% format output
 if nargout <= 1
     varargout{1} = [x, y, z];
 else

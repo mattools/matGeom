@@ -19,7 +19,7 @@ function varargout = cart2sph2(varargin)
 %   cart2sph2([0 0 1])  returns [0 0 1];
 %
 %   See also:
-%   angles3d, sph2cart2, cart2sph, cart2sph2d
+%     angles3d, sph2cart2, cart2sph, cart2sph2d
 %
 
 %   ---------
@@ -33,18 +33,22 @@ function varargout = cart2sph2(varargin)
 %   03/11/2006: change convention for angle : uses order [THETA PHI RHO]
 %   27/06/2007: manage 2 output arguments
 
-if length(varargin)==1
-    var = varargin{1};
-elseif length(varargin)==3
-    var = [varargin{1} varargin{2} varargin{3}];
+% parse input angles based on input argument number
+if length(varargin) == 1
+    xyz = varargin{1};
+elseif length(varargin) == 3
+    xyz = [varargin{1} varargin{2} varargin{3}];
 end
 
-if size(var, 2)==2
-    var(:,3)=1;
+% ensure z coordinate is specified
+if size(xyz, 2) == 2
+    xyz(:,3) = 1;
 end
 
-[p, t, r] = cart2sph(var(:,1), var(:,2), var(:,3));
+% convert to spherical coordinates
+[p, t, r] = cart2sph(xyz(:,1), xyz(:,2), xyz(:,3));
 
+% format output arguments
 if nargout == 1 || nargout == 0
     varargout{1} = [pi/2-t p r];
 elseif nargout==2
