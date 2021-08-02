@@ -1,16 +1,19 @@
 function h = drawPlane3d(plane, varargin)
-%DRAWPLANE3D Draw a plane clipped by the current axes.
+% Draw a plane clipped by the current axes.
 %
 %   drawPlane3d(PLANE) draws a plane of the format:
 %       [x0 y0 z0  dx1 dy1 dz1  dx2 dy2 dz2]
 %
-%   drawPlane3d(...,'PropertyName',PropertyValue,...) sets the value of the
-%   specified patch property. Multiple property values can be set with
-%   a single statement. See function patch for details.
+%   drawPlane3d(..., 'PropertyName', PropertyValue,...)
+%   Sets the value of the specified patch property. Multiple property
+%   values can be set with a single statement. See the function "patch" for
+%   details. 
 %
-%   drawPlane3d(AX,...) plots into AX instead of GCA.
+%   drawPlane3d(AX,...) 
+%   plots into AX instead of GCA.
 %
-%   H = drawPlane3d(...) returns a handle H to the patch object.
+%   H = drawPlane3d(...) 
+%   returns a handle H to the patch object.
 %
 %   Example
 %
@@ -25,11 +28,11 @@ function h = drawPlane3d(plane, varargin)
 %     set(gcf, 'renderer', 'zbuffer');
 %
 %   See also
-%   planes3d, createPlane, patch
+%     planes3d, createPlane, patch
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% e-mail: david.legland@inrae.fr
 % INRA - TPV URPOI - BIA IMASTE
 % created the 17/02/2005.
 %
@@ -38,6 +41,21 @@ function h = drawPlane3d(plane, varargin)
 %   2010-10-04 fix a bug for planes touching box by one corner
 %   2011-07-19 fix a bug for param by Xin KANG (Ben)
 % 
+
+% add support for drawing multiple planes at once
+if size(plane, 1) > 1
+    nPlanes = size(plane, 1);
+    hp = zeros(nPlanes, 1);
+    for iPlane = 1:nPlanes
+        hp(iPlane) = drawPlane3d(plane(iPlane, :), varargin{:});
+    end
+    
+    if nargout > 0
+        h = hp;
+    end
+    
+    return;
+end
 
 % Parse and check inputs
 valFun = @(x) size(x,1)==1 && isPlane(x);
