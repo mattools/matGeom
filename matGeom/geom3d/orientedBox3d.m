@@ -5,13 +5,16 @@ function box3d = orientedBox3d(pts)
 %
 %   Example
 %     [v, f] = sphereMesh;
-%     rotMat = eulerAnglesToRotation3d(30, 20, 10);
-%     pts = transformPoint3d(bsxfun(@times, v, [5 3 1]), rotMat);
+%     phi=-360+720*rand; theta=-360+720*rand; psi=-360+720*rand;
+%     angles = [phi, theta, psi];
+%     rotMat = eulerAnglesToRotation3d(angles);
+%     rotMat(1:3,4) = randi([-100,100],3,1);
+%     scale = [randi([7,9],1,1), randi([4,6],1,1), randi([1,3],1,1)];
+%     pts = transformPoint3d(bsxfun(@times, v, scale), rotMat);
 %     box3d = orientedBox3d(pts);
-%     figure; drawPoint3d(pts, '.'); hold on;
-%     axis equal; axis([-6 6 -6 6 -5 5]);
-%     h = drawCuboid(box3d);
-%     set(h, 'facecolor', 'none');
+%     figure; drawPoint3d(pts, '.'); 
+%     axis equal; xlabel('x'); ylabel('y'); zlabel('z');
+%     drawCuboid(box3d, 'FaceColor', 'none');
 %
 %   See also
 %     meshes3d, drawCuboid
