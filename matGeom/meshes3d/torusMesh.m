@@ -1,5 +1,5 @@
 function varargout = torusMesh(torus, varargin)
-%TORUSMESH  Create a 3D mesh representing a torus.
+% Create a 3D mesh representing a torus.
 %
 %   [V, F] = torusMesh(TORUS)
 %   Converts the torus in TORUS into a face-vertex quadrangular mesh.
@@ -16,7 +16,7 @@ function varargout = torusMesh(torus, varargin)
 %   Creates a mesh representing a default torus.
 %
 %   Example
-%     [v, f] = torusMesh([50 50 50 30 10 30 45]);
+%     [v, f] = torusMesh([50 50 50  30 10  30 45]);
 %     figure; drawMesh(v, f, 'linestyle', 'none');
 %     view(3); axis equal; 
 %     lighting gouraud; light;
@@ -28,7 +28,7 @@ function varargout = torusMesh(torus, varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2012-10-25,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
@@ -39,7 +39,10 @@ function varargout = torusMesh(torus, varargin)
 %% Extract data for torus
 
 if nargin == 0
-    torus = [0 0 0 30 10 0 0 0];
+    torus = [0 0 0  30 10  0 0];
+end
+if ~isnumeric(torus) || size(torus, 2) ~= 7
+    error('First argument must be a numeric row vector with 7 elements');
 end
 
 center = torus(1:3);
@@ -73,9 +76,12 @@ end
 
 %% Discretize torus
 
-% create base torus
+% create base circle (duplicate last vertex to manage mesh periodicity)
 circle = circleToPolygon([r1 0 r2], nTheta);
-[x, y, z] = revolutionSurface(circle, linspace(0, 2*pi, nPhi));
+circle = circle([1:end 1], :);
+% create rotation angle list (duplicate last one to manage mesh periodicity)
+phiList = linspace(0, 2*pi, nPhi + 1);
+[x, y, z] = revolutionSurface(circle, phiList);
 
 % transform torus
 trans = localToGlobal3d([center normal]);
