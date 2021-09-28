@@ -38,10 +38,15 @@ function varargout = torusMesh(torus, varargin)
 
 %% Extract data for torus
 
+% check input number
 if nargin == 0
     torus = [0 0 0  30 10  0 0];
+elseif ischar(torus)
+    varargin = [{torus} varargin];
+    torus = [0 0 0  30 10  0 0];
 end
-if ~isnumeric(torus) || size(torus, 2) ~= 7
+
+if isnumeric(torus) && size(torus, 2) ~= 7
     error('First argument must be a numeric row vector with 7 elements');
 end
 
