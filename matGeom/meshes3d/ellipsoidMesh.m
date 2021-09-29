@@ -8,6 +8,12 @@ function varargout = ellipsoidMesh(elli, varargin)
 %   lengths of the ellipsoid main axes, and PHI THETA PSI are Euler angles
 %   representing ellipsoid orientation, in degrees.
 %
+%   Example
+%     % compute mesh of an ellongated ellipsoid
+%     elli = [50 50 50   50 30 10   30 20 10];
+%     [v, f] = ellipsoidMesh(elli);
+%     figure; hold on; axis equal; axis([0 100 0 100 0 100]); view(3);
+%     drawMesh(v, f);
 %
 %   See also
 %   meshes3d, drawEllipsoid, sphereMesh, equivalentEllipsoid

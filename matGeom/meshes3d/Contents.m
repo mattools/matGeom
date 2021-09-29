@@ -60,6 +60,7 @@
 %   trimeshSurfaceArea         - Surface area of a triangular mesh.
 %   meshFaceAreas              - Surface area of each face of a mesh.
 %   meshVolume                 - (Signed) volume of the space enclosed by a polygonal mesh.
+%   meshCurvatures             - Compute principal curvatures on mesh vertices.
 %   meshEdgeLength             - Lengths of edges of a polygonal or polyhedral mesh.
 %   meshDihedralAngles         - Dihedral at edges of a polyhedal mesh.
 %   polyhedronCentroid         - Compute the centroid of a 3D convex polyhedron.
@@ -83,6 +84,7 @@
 %   meshBoundary               - Boundary of a mesh as a collection of 3D line strings.
 %   meshBoundaryEdgeIndices    - Indices of boundary edges of a mesh.
 %   meshBoundaryVertexIndices  - Indices of boundary vertices of a mesh.
+%   smoothMeshFunction         - Apply smoothing on a functions defines on mesh vertices.
 %
 % Basic edition on meshes
 %   removeMeshVertices         - Remove vertices and associated faces from a mesh.
