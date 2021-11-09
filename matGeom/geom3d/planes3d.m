@@ -10,7 +10,7 @@ function planes3d(varargin)
 %   distancePointPlane, projPointOnPlane, planePosition, isBelowPlane
 %   intersectPlanes, intersectLinePlane, intersectEdgePlane
 %   dihedralAngle, planesBisector, polyhedronSlice, clipConvexPolyhedronHP
-%   fitPlane, drawPlane3d, transformPlane3d, isPlane
+%   fitPlane, drawPlane3d, clipPlane, transformPlane3d, isPlane
 %
 
 % ------
