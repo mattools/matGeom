@@ -1,18 +1,18 @@
 function varargout = drawMesh(varargin)
-%DRAWMESH Draw a 3D mesh defined by vertex and face arrays.
+% Draw a 3D mesh defined by vertex and face arrays.
 %
 %   drawMesh(VERTICES, FACES)
 %   Draws the 3D mesh defined by vertices VERTICES and the faces FACES. 
 %   vertices is a NV-by-3 array containing coordinates of vertices, and
 %   FACES is either a NF-by-3 or NF-by-4 array containing face vertex
 %   indices of the triangular or rectangular faces.
-%   FACES can also be a cell array, in the content of each cell is an array
-%   of indices to the vertices of the current face. Faces can have
-%   different number of vertices.
+%   FACES can also be a cell array, each cell containing an array of vertex
+%   indices for the corresponding face. In this case the faces may have
+%   variable number of vertices. 
 %   
 %   drawMesh(MESH)
-%   Specifies the mesh as a structure with at least the fields 'vertices'
-%   and 'faces'. 
+%   Specifies the mesh as a structure containing at least the fields
+%   'vertices' and 'faces', using the same conventions as above.
 %
 %   drawMesh(..., COLOR)
 %   Use the specified color to render the mesh faces.
@@ -29,8 +29,17 @@ function varargout = drawMesh(varargin)
 %   Also returns a handle to the created patch.
 %
 %   Example:
+%     % display a polyhedra with polygonal faces
 %     [v, f] = createSoccerBall;
 %     drawMesh(v, f);
+%
+%     % Display a mesh representing a  torus, using uniform face color
+%     [v, f] = torusMesh;
+%     figure; hold on; axis equal; view(3);
+%     drawMesh(v, f, 'FaceColor', 'g')
+%     % paint the mesh according to vertex x-coordinate
+%     figure; hold on; axis equal; view(3);
+%     drawMesh(v, f, 'VertexColor', v(:,1), 'LineStyle', 'none');
 %
 %   See also:
 %     meshes3d, polyhedra, patch
@@ -41,18 +50,6 @@ function varargout = drawMesh(varargin)
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 10/02/2005.
 %
-
-%   HISTORY
-%   07/11/2005 update doc.
-%   04/01/2007 typo
-%   18/01/2007 add support for 2D polyhedra ("vertices" is N-by-2 array), and
-%       make 'cnodes' a list of points instead of a list of indices
-%   14/08/2007 add comment, add support for NaN in faces (complex polygons)
-%   14/09/2007 rename as drawPolyhedron
-%   16/10/2008 better support for colors
-%   27/07/2010 renamed as drawMesh
-%   09/11/2010 update doc
-%   07/12/2010 update management of mesh structures
 
 
 %% Parse input arguments
@@ -82,43 +79,67 @@ else
     varargin(1) = [];
 end
 
-% process input arguments
-switch length(varargin)
-    case 0 
-        % default color is red
-        varargin = {'facecolor', [1 0 0]};
-    case 1
-        % use argument as color for faces
-        varargin = {'facecolor', varargin{1}};
-    otherwise
-        % otherwise add default settings before new options
-        varargin = [{'facecolor', [1 0 0 ]} varargin];
-
-end
-
-% overwrites on current figure
-hold(ax, 'on');
-
 % if vertices are 2D points, add a z=0 coordinate
 if size(vertices, 2) == 2
     vertices(1, 3) = 0;
 end
 
 
-%% Use different processing depending on the type of faces
+%% Pre-processing for formatting display options
+
+% default color for drawing mesh
+faceColor = [1 0 0];
+
+% combine defualt face color with varargin
+if isempty(varargin)
+    varargin = [{'FaceColor'}, faceColor];
+elseif length(varargin) == 1
+    % if only one optional argument is provided, it is assumed to be color
+    faceColor = varargin{1};
+    varargin = [{'FaceColor'}, varargin];
+elseif length(varargin) > 1
+    % check if FaceColor option is specified, 
+    % and if not use default face color
+    indFC = strcmpi(varargin(1:2:end), 'FaceColor');
+    if ~any(indFC)
+        varargin = [{'FaceColor'}, {faceColor}, varargin];
+    end
+end
+
+% check if simplified options are present
+indVC = find(strcmpi(varargin(1:2:end), 'VertexColor'));
+if ~isempty(indVC)
+    vertexColor = varargin{indVC * 2};
+    varargin([indVC*2-1 indVC*2]) = [];
+    indFC = find(strcmpi(varargin(1:2:end), 'FaceColor'));
+    if ~isempty(indFC)
+        varargin([indFC*2-1 indFC*2]) = [];
+    end
+    varargin = [{'FaceVertexCData'}, {vertexColor}, {'FaceColor'}, {'interp'}, varargin];
+end
+
+
+%% Draw the mesh
+
+% overwrite on current figure
+hold(ax, 'on');
+
+% Use different processing depending on the type of faces
 if isnumeric(faces)
-    % array FACES is a NC*NV indices array, with NV : number of vertices of
-    % each face, and NC number of faces
-    h = patch('vertices', vertices, 'faces', faces, varargin{:}, ...
-        'Parent', ax);
+    % array FACES is a NF-by-NV indices array, with NF: number of faces,
+    % and NV: number of vertices per face 
+    h = patch('Parent', ax, ...
+        'vertices', vertices, 'faces', faces, ...
+        varargin{:});
 
 elseif iscell(faces)
-    % array FACES is a cell array
+    % array FACES is a cell array. Need to draw each face as a single
+    % patch.
     h = zeros(length(faces(:)), 1);
 
-    for f = 1:length(faces(:))
+    for iFace = 1:length(faces(:))
         % get vertices of the cell
-        face = faces{f};
+        face = faces{iFace};
 
         % Special processing in case of multiple polygonal face:
         % each polygonal loop is separated by a NaN.
@@ -134,14 +155,14 @@ elseif iscell(faces)
         end
         
         % draw current face
-        cnodes  = vertices(face, :);
-        h(f)    = patch(ax, cnodes(:, 1), cnodes(:, 2), cnodes(:, 3), [1 0 0]);
+        cnodes = vertices(face, :);
+        h(iFace) = patch(ax, cnodes(:, 1), cnodes(:, 2), cnodes(:, 3), faceColor);
     end
     
     % set up drawing options
     set(h, varargin{:});
 else
-    error('second argument must be a face array');
+    error('MatGeom:drawMesh', 'Second argument must be a face array');
 end
 
 

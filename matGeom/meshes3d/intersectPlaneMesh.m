@@ -2,11 +2,12 @@ function polys = intersectPlaneMesh(plane, v, f)
 % Compute the polygons resulting from plane-mesh intersection.
 %
 %   POLYS = intersectPlaneMesh(P, V, F)
-%   Computes the interection between a plane and a mesh given by vertex and
-%   face lists. The result is a cell array of polygons.
-%
-%   The function currently returns at most one polygon in the cell array
-%   POLYS.
+%   Computes the intersection between a plane and a mesh. The result is a
+%   cell array of polygons. 
+%   The plane P is given as:
+%   P = [X0 Y0 Z0  DX1 DY1 DZ1  DX2 DY2 DZ2]
+%   The mesh is given as numeric array V of vertex coordinates and an array
+%   of (triangular) face vertex indices.
 %
 %
 %   Example

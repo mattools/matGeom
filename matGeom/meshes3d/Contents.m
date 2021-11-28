@@ -42,9 +42,11 @@
 %   meshComplement             - Reverse the normal of each face in the mesh.
 %   averageMesh                - Compute average mesh from a list of meshes.
 %   meshSilhouette             - Compute the 2D outline of a 3D mesh on an arbitrary plane.
+%   meshVoronoiDiagram         - Voronoi Diagram on the surface of a polygonal mesh.
 %
 % Intersections and clipping
 %   intersectLineMesh3d        - Intersection points of a 3D line with a mesh.
+%   intersectEdgeMesh3d        - Intersection points of a 3D edge with a mesh.
 %   intersectPlaneMesh         - Compute the polygons resulting from plane-mesh intersection.
 %   polyhedronSlice            - Intersect a convex polyhedron with a plane.
 %   clipMeshVertices           - Clip vertices of a surfacic mesh and remove outer faces.
@@ -58,6 +60,7 @@
 %   trimeshSurfaceArea         - Surface area of a triangular mesh.
 %   meshFaceAreas              - Surface area of each face of a mesh.
 %   meshVolume                 - (Signed) volume of the space enclosed by a polygonal mesh.
+%   meshCurvatures             - Compute principal curvatures on mesh vertices.
 %   meshEdgeLength             - Lengths of edges of a polygonal or polyhedral mesh.
 %   meshDihedralAngles         - Dihedral at edges of a polyhedal mesh.
 %   polyhedronCentroid         - Compute the centroid of a 3D convex polyhedron.
@@ -81,6 +84,7 @@
 %   meshBoundary               - Boundary of a mesh as a collection of 3D line strings.
 %   meshBoundaryEdgeIndices    - Indices of boundary edges of a mesh.
 %   meshBoundaryVertexIndices  - Indices of boundary vertices of a mesh.
+%   smoothMeshFunction         - Apply smoothing on a functions defines on mesh vertices.
 %
 % Basic edition on meshes
 %   removeMeshVertices         - Remove vertices and associated faces from a mesh.
@@ -141,12 +145,10 @@
 %
 
 % ------
-% Author: David Legland
-% e-mail: david.legland@inra.fr
+% Initial author/maintainer: David Legland
+% e-mail: david.legland@inrae.fr
 % Created: 2005-11-07
 % Project homepage: http://github.com/mattools/matGeom
-% http://www.pfl-cepia.inra.fr/index.php?page=geom3d
-% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
 help(mfilename);
 
@@ -156,4 +158,3 @@ help(mfilename);
 %   vertexNormal               - Compute normals to a mesh vertices.
 
 % Others
-
