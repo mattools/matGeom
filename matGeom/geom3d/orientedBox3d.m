@@ -1,7 +1,17 @@
-function box3d = orientedBox3d(pts)
-%ORIENTEDBOX3D Object-oriented bounding box of a set of 3D points.
+function [box3d, rotMat] = orientedBox3d(pts)
+% Object-oriented bounding box of a set of 3D points.
 %
 %   OOBB = orientedBox3d(PTS)
+%   REturns the oriented bounding box of the collection of points in the
+%   N-by-3 array PTS. The result is given as:
+%   [XC YC ZC  L W H  PHI THETA PSI]
+%   where (XC,YC,ZC) corresponds to the center of the box, (L,W,H)
+%   corresponds to the length, width, and depth of the box, and (PHI,
+%   THETA, PSI) is the orientation of the box as Euler angles.
+%
+%   [OOBB, ROT] = orientedBox3d(PTS)
+%   Also returns the rotation matrix of the point cloud, as a 3-by-3
+%   numeric array.
 %
 %   Example
 %     [v, f] = sphereMesh;
@@ -14,11 +24,11 @@ function box3d = orientedBox3d(pts)
 %     set(h, 'facecolor', 'none');
 %
 %   See also
-%     meshes3d, drawCuboid
+%     meshes3d, drawCuboid, rotation3dToEulerAngles
  
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2015-12-01,    using Matlab 8.6.0.267246 (R2015b)
 % Copyright 2015 INRA - Cepia Software Platform.
 
