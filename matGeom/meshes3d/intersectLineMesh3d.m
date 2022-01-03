@@ -71,7 +71,7 @@ u   = vertices(faces(:,2), :) - t0;
 v   = vertices(faces(:,3), :) - t0;
 
 % triangle normal
-n   = normalizeVector3d(crossProduct3d(u, v));
+n   = crossProduct3d(u, v);
 
 % direction vectors of lines and origins of lines
 dv = permute(line(:,4:6), [3 2 1]);
