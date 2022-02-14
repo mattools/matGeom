@@ -53,15 +53,13 @@ testCase.assertEqual(0, size(intersectLinePolygon(lineV2, poly), 1));
 
 
 function testDiamond(testCase)
+
 poly = [10 0;20 10;10 20;0 10];
 
+% definition from 14/02/2022 do not intersect lower vertices
 lineH0 = [0 0 3 0];
-target = [10 0];
 intersects = intersectLinePolygon(lineH0, poly);
-testCase.assertTrue(ismember(target, intersects, 'rows'));
-
-[intersects, inds] = intersectLinePolygon(lineH0, poly);
-testCase.assertEqual(size(intersects, 1), size(inds, 1));
+testCase.assertTrue(isempty(intersects));
 
 
 lineH1 = [10 10 3 0];
@@ -84,10 +82,10 @@ testCase.assertTrue(ismember(target, intersects, 'rows'));
 testCase.assertEqual(size(intersects, 1), size(inds, 1));
 
 
+% definition from 14/02/2022 intersects upper vertices twice
 lineV0 = [0 0 0 3];
-target = [0 10];
 intersects = intersectLinePolygon(lineV0, poly);
-testCase.assertTrue(ismember(target, intersects, 'rows'));
+testCase.assertEqual(size(intersects, 2), 2);
 
 [intersects, inds] = intersectLinePolygon(lineV0, poly);
 testCase.assertEqual(size(intersects, 1), size(inds, 1));
@@ -95,19 +93,16 @@ testCase.assertEqual(size(intersects, 1), size(inds, 1));
 
 lineV1 = [10 10 0 3];
 intersects = intersectLinePolygon(lineV1, poly);
-target = [10 20];
-testCase.assertTrue(ismember(target, intersects, 'rows'));
-target = [10 0];
-testCase.assertTrue(ismember(target, intersects, 'rows'));
+testCase.assertEqual(size(intersects, 1), 2);
 
 [intersects, inds] = intersectLinePolygon(lineV1, poly);
 testCase.assertEqual(size(intersects, 1), size(inds, 1));
 
 
+% definition from 14/02/2022 do not intersect lower vertices
 lineV2 = [20 0 0 3];
 intersects = intersectLinePolygon(lineV2, poly);
-target = [20 10];
-testCase.assertTrue(ismember(target, intersects, 'rows'));
+testCase.assertTrue(isempty(intersects));
 
 [intersects, inds] = intersectLinePolygon(lineV2, poly);
 testCase.assertEqual(size(intersects, 1), size(inds, 1));
@@ -121,9 +116,11 @@ line = [0 30 3 0];
 
 [inters, inds] = intersectLinePolygon(line, poly);
 expInters = [10 30;20 30;50 30;60 30];
-testCase.assertEqual(expInters, inters);
+for i = 1:4
+    assertTrue(testCase, ismember(expInters(i,:), inters, 'rows'));
+end
 expInds = [6;5;3;2];
-testCase.assertEqual(expInds, inds);
+testCase.assertEqual(ismember(expInds, inds), true(4,1));
 
 
 function testUniquePoints(testCase)
