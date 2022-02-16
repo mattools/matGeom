@@ -250,13 +250,15 @@ Quick tour
 \end_layout
 
 \begin_layout Itemize
-Installation instructions
+Developer info?
 \end_layout
 
+\begin_deeper
 \begin_layout Itemize
-General conventions
+inner functions
 \end_layout
 
+\end_deeper
 \end_inset
 
 
@@ -294,16 +296,105 @@ http://github.com/mattools/matGeom
  
 \end_layout
 
+\begin_layout Section
+Installation
+\end_layout
+
+\begin_layout Standard
+There are several possibilities for installing the MatGeom library.
+\end_layout
+
+\begin_layout Standard
+You can download the latest version of the toolbox as 
+\begin_inset Quotes eld
+\end_inset
+
+.mltx
+\begin_inset Quotes erd
+\end_inset
+
+ file.
+ When executing the file from Matlab, the toolbox is automatically installed.
+\end_layout
+
+\begin_layout Standard
+If you prefere to get the latest version, you can clone the project from
+ the project homepage.
+\end_layout
+
+\begin_layout Section
+Organisation
+\end_layout
+
 \begin_layout Standard
 The library is organised into several modules:
 \end_layout
 
 \begin_layout Description
-geom2d General functions in euclidean plane
+geom2d General functions in euclidean plane (described in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:geom2d"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Description
-polygons2d Functions operating on point lists
+polygons2d Functions operating on point lists (described in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:polygons2d"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Description
+geom3d General functions in 3D euclidean space (described in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:geom3d"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Description
+meshes3d Manipulation of 3D polygonal meshes (described in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:meshes3d"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+There are dependencies between modules.
+ For examples, the polygons2d and the geom3d modules both depend on the
+ geom2d module.
+ 
+\end_layout
+
+\begin_layout Standard
+Two modules are also included within the library, but are less documented:
 \end_layout
 
 \begin_layout Description
@@ -314,12 +405,212 @@ graphs Manipulation of geometric graphs
 polynomialCurves2d Representation of smooth polynomial curves
 \end_layout
 
-\begin_layout Description
-geom3d General functions in 3D euclidean space
+\begin_layout Section
+Getting help
 \end_layout
 
-\begin_layout Description
-meshes3d Manipulation of 3D polygonal meshes
+\begin_layout Standard
+The user manuel (this document) provides an overview of the library, and
+ a short description of most functions.
+ 
+\end_layout
+
+\begin_layout Standard
+Each function contains a header with additional information.
+ Most of the time, the syntax, and example and related functions are provided.
+ Example for the polygonCentroid function:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+>> help polygonCentroid
+\end_layout
+
+\begin_layout Plain Layout
+
+ Computes the centroid (center of mass) of a polygon.
+\end_layout
+
+\begin_layout Plain Layout
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+    CENTROID = polygonCentroid(POLY)
+\end_layout
+
+\begin_layout Plain Layout
+
+    CENTROID = polygonCentroid(PTX, PTY)
+\end_layout
+
+\begin_layout Plain Layout
+
+    Computes center of mass of a polygon defined by POLY.
+ POLY is a N-by-2
+\end_layout
+
+\begin_layout Plain Layout
+
+    array of double containing coordinates of vertices.
+\end_layout
+
+\begin_layout Plain Layout
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+    [CENTROID, AREA] = polygonCentroid(POLY)
+\end_layout
+
+\begin_layout Plain Layout
+
+    Also returns the (signed) area of the polygon.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+    Example
+\end_layout
+
+\begin_layout Plain Layout
+
+      % Draws the centroid of a paper hen
+\end_layout
+
+\begin_layout Plain Layout
+
+      x = [0 10 20  0 -10 -20 -10 -10  0];
+\end_layout
+
+\begin_layout Plain Layout
+
+      y = [0  0 10 10  20  10  10  0 -10];
+\end_layout
+
+\begin_layout Plain Layout
+
+      poly = [x' y'];
+\end_layout
+
+\begin_layout Plain Layout
+
+      centro = polygonCentroid(poly);
+\end_layout
+
+\begin_layout Plain Layout
+
+      drawPolygon(poly);
+\end_layout
+
+\begin_layout Plain Layout
+
+      hold on; axis equal;
+\end_layout
+
+\begin_layout Plain Layout
+
+      drawPoint(centro, 'bo');
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\end_layout
+
+\begin_layout Plain Layout
+
+    References
+\end_layout
+
+\begin_layout Plain Layout
+
+    algo adapted from P.
+ Bourke web page
+\end_layout
+
+\begin_layout Plain Layout
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+    See also:
+\end_layout
+
+\begin_layout Plain Layout
+
+      polygons2d, polygonArea, polygonSecondAreaMoments, drawPolygon
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Typing 
+\begin_inset Quotes eld
+\end_inset
+
+help geom2d
+\begin_inset Quotes erd
+\end_inset
+
+ (or another module name) displays a list of the functions within the module.
+\end_layout
+
+\begin_layout Section
+General conventions
+\end_layout
+
+\begin_layout Standard
+The MatGeom library tries to follow standard conventions and practices both
+ from mathematical and Matlab-programming point of view.
+ Conventions are recalled within the manual or in function headers when
+ appropriate.
+\end_layout
+
+\begin_layout Standard
+Function names follow the (lower) came case
+\begin_inset Quotes erd
+\end_inset
+
+ convention, example: 
+\family typewriter
+intersectLineCircle
+\family default
+.
+ Functions start either by a verb at the infinitive, or by a noun (when
+ returning the corresponding measure).
+ Examples: 
+\family typewriter
+clipPolygon
+\family default
+, 
+\family typewriter
+polygonCentroid
+\family default
+.
+\end_layout
+
+\begin_layout Standard
+Angles are in radians, except when they are used to define the orientation
+ of geometries.
+ In that case, they are given as degrees (usually more intuitive).
 \end_layout
 
 \begin_layout Chapter
@@ -446,7 +737,7 @@ Description of functions operating on points.
 \begin_layout Minisec
 midPoint
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 midPoint
@@ -464,7 +755,7 @@ Middle point of two points or of an edge.
 \begin_layout Minisec
 circumCenter
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 circumCenter
@@ -482,7 +773,7 @@ Circumcenter of three points.
 \begin_layout Minisec
 isCounterClockwise
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isCounterClockwise
@@ -500,7 +791,7 @@ Computes relative orientation of 3 points.
 \begin_layout Minisec
 polarPoint
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polarPoint
@@ -518,7 +809,7 @@ Creates a point from polar coordinates (rho + theta).
 \begin_layout Minisec
 angle2Points
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 angle2Points
@@ -547,7 +838,7 @@ noprefix "false"
 \begin_layout Minisec
 angle3Points
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 angle3Points
@@ -565,7 +856,7 @@ Computes oriented angle made by 3 points.
 \begin_layout Minisec
 distancePoints
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 distancePoints
@@ -583,7 +874,7 @@ Computes distance between two points.
 \begin_layout Minisec
 transformPoint
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 transformPoint
@@ -612,7 +903,7 @@ noprefix "false"
 \begin_layout Minisec
 drawPoint
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawPoint
@@ -781,7 +1072,7 @@ Generation of a random point set and computation of geometric derived shapes.
 \begin_layout Minisec
 clipPoints
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 clipPoints
@@ -799,7 +1090,7 @@ Clips a set of points by a box.
 \begin_layout Minisec
 centroid
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 centroid
@@ -807,7 +1098,14 @@ centroid
 
 \end_inset
 
- 
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fun:centroid"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -817,7 +1115,7 @@ Computes centroid (center of mass) of a set of points.
 \begin_layout Minisec
 boundingBox
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 boundingBox
@@ -835,7 +1133,7 @@ Bounding box of a set of points.
 \begin_layout Minisec
 principalAxes
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 principalAxes
@@ -855,7 +1153,7 @@ Principal axes of a set of ND points, returned as a centroid, a rotation
 \begin_layout Minisec
 angleSort
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 angleSort
@@ -873,7 +1171,7 @@ Sorts points in the plane according to their angle to origin.
 \begin_layout Minisec
 findClosestPoint
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 findClosestPoint
@@ -891,7 +1189,7 @@ Finds index of closest point in an array.
 \begin_layout Minisec
 minDistancePoints
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 minDistancePoints
@@ -909,7 +1207,7 @@ Minimal distance between several points.
 \begin_layout Minisec
 mergeClosePoints
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 mergeClosePoints
@@ -927,7 +1225,7 @@ Merges points that are closer than a given distance.
 \begin_layout Minisec
 hausdorffDistance
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 hausdorffDistance
@@ -945,7 +1243,7 @@ Hausdorff distance between two point sets.
 \begin_layout Minisec
 nndist
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 nndist
@@ -979,7 +1277,7 @@ Description of functions operating on plane vectors.
 \begin_layout Minisec
 createVector
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createVector
@@ -997,7 +1295,7 @@ Creates a vector from two points.
 \begin_layout Minisec
 vectorNorm
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 vectorNorm
@@ -1015,7 +1313,7 @@ Computes norm of a vector, or of a set of vectors.
 \begin_layout Minisec
 vectorAngle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 vectorAngle
@@ -1033,7 +1331,7 @@ Angle of a vector, or between 2 vectors.
 \begin_layout Minisec
 normalizeVector
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 normalizeVector
@@ -1051,7 +1349,7 @@ Normalizes a vector to have norm equal to 1.
 \begin_layout Minisec
 isPerpendicular
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isPerpendicular
@@ -1069,7 +1367,7 @@ Checks orthogonality of two vectors.
 \begin_layout Minisec
 isParallel
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isParallel
@@ -1087,7 +1385,7 @@ Checks parallelism of two vectors.
 \begin_layout Minisec
 transformVector
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 transformVector
@@ -1105,7 +1403,7 @@ Transforms a vector with an affine transform.
 \begin_layout Minisec
 rotateVector
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 rotateVector
@@ -1131,7 +1429,7 @@ Some functions allow to draw less standard objects.
 \begin_layout Minisec
 drawVector
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawVector
@@ -1149,7 +1447,7 @@ Draws vector at a given position.
 \begin_layout Minisec
 drawArrow
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawArrow
@@ -1167,7 +1465,7 @@ Draws an arrow on the current axis.
 \begin_layout Minisec
 drawLabels
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawLabels
@@ -1185,7 +1483,7 @@ Draws labels at specified positions.
 \begin_layout Minisec
 drawShape
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawShape
@@ -1329,7 +1627,7 @@ Description of functions operating on planar lines.
 \begin_layout Minisec
 createLine
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createLine
@@ -1347,7 +1645,7 @@ Creates a straight line from 2 points, or from other inputs.
 \begin_layout Minisec
 medianLine
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 medianLine
@@ -1365,7 +1663,7 @@ Creates a median line between two points.
 \begin_layout Minisec
 cartesianLine
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 cartesianLine
@@ -1383,7 +1681,7 @@ Creates a straight line from cartesian equation coefficients.
 \begin_layout Minisec
 orthogonalLine
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 orthogonalLine
@@ -1401,7 +1699,7 @@ Creates a line orthogonal to another one through a point.
 \begin_layout Minisec
 parallelLine
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 parallelLine
@@ -1419,7 +1717,7 @@ Creates a line parallel to another one.
 \begin_layout Minisec
 intersectLines
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectLines
@@ -1437,7 +1735,7 @@ Returns all intersection points of N lines in 2D.
 \begin_layout Minisec
 lineAngle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 lineAngle
@@ -1455,7 +1753,7 @@ Computes angle between two straight lines.
 \begin_layout Minisec
 linePosition
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 linePosition
@@ -1473,7 +1771,7 @@ Position of a point on a line.
 \begin_layout Minisec
 lineFit
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 lineFit
@@ -1491,7 +1789,7 @@ Fits a straight line to a set of points.
 \begin_layout Minisec
 clipLine
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 clipLine
@@ -1509,7 +1807,7 @@ Clips a line with a box.
 \begin_layout Minisec
 reverseLine
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 reverseLine
@@ -1527,7 +1825,7 @@ Returns same line but with opposite orientation.
 \begin_layout Minisec
 transformLine
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 transformLine
@@ -1545,7 +1843,7 @@ Transforms a line with an affine transform.
 \begin_layout Minisec
 drawLine
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawLine
@@ -1598,7 +1896,7 @@ Description of functions operating on planar edges.
 \begin_layout Minisec
 createEdge
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createEdge
@@ -1616,7 +1914,7 @@ Creates an edge between two points, or from a line.
 \begin_layout Minisec
 edgeToLine
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 edgeToLine
@@ -1634,7 +1932,7 @@ Converts an edge to a straight line.
 \begin_layout Minisec
 edgeAngle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 edgeAngle
@@ -1652,7 +1950,7 @@ Returns the horizontal angle of edge.
 \begin_layout Minisec
 edgeLength
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 edgeLength
@@ -1670,7 +1968,7 @@ Returns the length of an edge.
 \begin_layout Minisec
 parallelEdge
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 parallelEdge
@@ -1688,7 +1986,7 @@ Create a new edge parallel to another edge.
 \begin_layout Minisec
 centeredEdgeToEdge
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 centeredEdgeToEdge
@@ -1706,7 +2004,7 @@ Converts a centered edge to a two-points edge.
 \begin_layout Minisec
 midPoint
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 midPoint
@@ -1724,7 +2022,7 @@ Middle point of two points or of an edge.
 \begin_layout Minisec
 edgePosition
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 edgePosition
@@ -1742,7 +2040,7 @@ Returns the position of a point on an edge.
 \begin_layout Minisec
 clipEdge
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 clipEdge
@@ -1760,7 +2058,7 @@ Clips an edge with a rectangular box.
 \begin_layout Minisec
 reverseEdge
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 reverseEdge
@@ -1778,7 +2076,7 @@ Interverts the source and target vertices of edge.
 \begin_layout Minisec
 intersectEdges
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectEdges
@@ -1796,7 +2094,7 @@ Returns all intersections between two sets of edges.
 \begin_layout Minisec
 intersectLineEdge
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectLineEdge
@@ -1814,7 +2112,7 @@ Returns the intersection between a line and an edge.
 \begin_layout Minisec
 transformEdge
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 transformEdge
@@ -1832,7 +2130,7 @@ Transforms an edge with an affine transform.
 \begin_layout Minisec
 edgeToPolyline
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 edgeToPolyline
@@ -1850,7 +2148,7 @@ Converts an edge to a polyline with a given number of segments.
 \begin_layout Minisec
 drawEdge
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawEdge
@@ -1868,7 +2166,7 @@ Draws an edge given by 2 points.
 \begin_layout Minisec
 drawCenteredEdge
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawCenteredEdge
@@ -1912,7 +2210,7 @@ Description of functions operating on planar rays.
 \begin_layout Minisec
 createRay
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createRay
@@ -1930,7 +2228,7 @@ Creates a ray (half-line), from various inputs.
 \begin_layout Minisec
 bisector
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 bisector
@@ -1948,7 +2246,7 @@ Returns the bisector of two lines, or 3 points.
 \begin_layout Minisec
 clipRay
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 clipRay
@@ -1966,7 +2264,7 @@ Clips a ray with a box.
 \begin_layout Minisec
 drawRay
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawRay
@@ -1993,7 +2291,7 @@ These functions determine relative position of a point (or an array of points)
 \begin_layout Minisec
 distancePointEdge
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 distancePointEdge
@@ -2011,7 +2309,7 @@ Minimum distance between a point and an edge.
 \begin_layout Minisec
 distancePointLine
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 distancePointLine
@@ -2029,7 +2327,7 @@ Minimum distance between a point and a line.
 \begin_layout Minisec
 projPointOnLine
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 projPointOnLine
@@ -2047,7 +2345,7 @@ Projects of a point orthogonally onto a line.
 \begin_layout Minisec
 pointOnLine
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 pointOnLine
@@ -2065,7 +2363,7 @@ Creates a point on a line at a given position on the line.
 \begin_layout Minisec
 isPointOnLine
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isPointOnLine
@@ -2083,7 +2381,7 @@ Tests if a point belongs to a line.
 \begin_layout Minisec
 isPointOnEdge
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isPointOnEdge
@@ -2101,7 +2399,7 @@ Tests if a point belongs to an edge.
 \begin_layout Minisec
 isPointOnRay
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isPointOnRay
@@ -2119,7 +2417,7 @@ Tests if a point belongs to a ray.
 \begin_layout Minisec
 isLeftOriented
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isLeftOriented
@@ -2172,7 +2470,7 @@ Description of functions for manipulating angles.
 \begin_layout Minisec
 normalizeAngle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 normalizeAngle
@@ -2194,7 +2492,7 @@ Normalizes an angle value within the
 \begin_layout Minisec
 angleAbsDiff
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 angleAbsDiff
@@ -2212,7 +2510,7 @@ Absolute difference between two angles.
 \begin_layout Minisec
 angleDiff
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 angleDiff
@@ -2365,7 +2663,7 @@ Description of functions operating on circles.
 \begin_layout Minisec
 createCircle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createCircle
@@ -2381,17 +2679,17 @@ Creates a circle from 2 or 3 points.
 \end_layout
 
 \begin_layout Minisec
-createDirected
+createDirectedCircle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
-d
+createDirectedCircle
 \end_layout
 
 \end_inset
 
-Circle 
+
 \end_layout
 
 \begin_layout Standard
@@ -2401,7 +2699,7 @@ Creates a directed circle.
 \begin_layout Minisec
 intersectCircles
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectCircles
@@ -2419,7 +2717,7 @@ Computes the intersection points of two circles.
 \begin_layout Minisec
 intersectLineCircle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectLineCircle
@@ -2437,7 +2735,7 @@ Compute the intersection point(s) of a line and a circle.
 \begin_layout Minisec
 circleToPolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 circleToPolygon
@@ -2455,7 +2753,7 @@ Converts a circle into a series of points.
 \begin_layout Minisec
 circleArcToPolyline
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 circleArcToPolyline
@@ -2473,7 +2771,7 @@ Converts a circle arc into a series of points.
 \begin_layout Minisec
 isPointInCircle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isPointInCircle
@@ -2491,7 +2789,7 @@ Tests if a point is located inside a given circle.
 \begin_layout Minisec
 isPointOnCircle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isPointOnCircle
@@ -2509,7 +2807,7 @@ Tests if a point is located on a given circle.
 \begin_layout Minisec
 enclosingCircle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 enclosingCircle
@@ -2527,7 +2825,7 @@ Finds the minimum circle enclosing a set of points.
 \begin_layout Minisec
 circumCircle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 circumCircle
@@ -2545,7 +2843,7 @@ Circumscribed circle of three points.
 \begin_layout Minisec
 radicalAxis
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 radicalAxis
@@ -2563,7 +2861,7 @@ Computes the radical axis (or radical line) of 2 circles
 \begin_layout Minisec
 drawCircle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawCircle
@@ -2581,7 +2879,7 @@ Draws a circle on the current axis.
 \begin_layout Minisec
 drawCircleArc
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawCircleArc
@@ -2652,7 +2950,7 @@ Description of functions operating on ellipses.
 \begin_layout Minisec
 equivalentEllipse
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 equivalentEllipse
@@ -2671,7 +2969,7 @@ Computes the equivalent ellipse with same moments up to the second order
 \begin_layout Minisec
 isPointInEllipse
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isPointInEllipse
@@ -2689,7 +2987,7 @@ Checks if a point is located inside a given ellipse.
 \begin_layout Minisec
 ellipsePerimeter
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 ellipsePerimeter
@@ -2707,7 +3005,7 @@ Computes the perimeter of an ellipse.
 \begin_layout Minisec
 ellipseToPolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 ellipseToPolygon
@@ -2725,7 +3023,7 @@ Converts an ellipse into a series of points.
 \begin_layout Minisec
 drawEllipse
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawEllipse
@@ -2743,7 +3041,7 @@ Draws an ellipse on the current axis.
 \begin_layout Minisec
 drawEllipseArc
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawEllipseArc
@@ -2761,7 +3059,7 @@ Draws an ellipse arc on the current axis.
 \begin_layout Minisec
 drawParabola
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawParabola
@@ -2861,7 +3159,7 @@ Spline curves are a convenient way to represent a large family of curves
 \begin_layout Minisec
 cubicBezierToPolyline
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 cubicBezierToPolyline
@@ -2880,7 +3178,7 @@ Computes an approximated polyline from Bezier curve control points, specifying
 \begin_layout Minisec
 drawBezierCurve
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawBezierCurve
@@ -3014,7 +3312,7 @@ Description of functions operating on bounding boxes.
 \begin_layout Minisec
 intersectBoxes
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectBoxes
@@ -3032,7 +3330,7 @@ Intersection of two bounding boxes.
 \begin_layout Minisec
 mergeBoxes
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 mergeBoxes
@@ -3050,7 +3348,7 @@ Merges two boxes, by computing their greatest extent.
 \begin_layout Minisec
 randomPointInBox
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 randomPointInBox
@@ -3068,7 +3366,7 @@ Generates random point within a box.
 \begin_layout Minisec
 boxToRect
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 boxToRect
@@ -3086,7 +3384,7 @@ Converts box data to rectangle data.
 \begin_layout Minisec
 boxToPolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 boxToPolygon
@@ -3104,7 +3402,7 @@ Converts a bounding box to a rectangular polygon.
 \begin_layout Minisec
 drawBox
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawBox
@@ -3159,7 +3457,7 @@ figure with box, rect , and oriented box
 \begin_layout Minisec
 rectToPolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 rectToPolygon
@@ -3177,7 +3475,7 @@ Converts a rectangle into a polygon (set of vertices).
 \begin_layout Minisec
 rectToBox
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 rectToBox
@@ -3195,7 +3493,7 @@ Converts rectangle data to box data.
 \begin_layout Minisec
 drawRect
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawRect
@@ -3213,7 +3511,7 @@ Draws rectangle on the current axis.
 \begin_layout Minisec
 orientedBox
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 orientedBox
@@ -3231,7 +3529,7 @@ Minimum-width oriented bounding box of a set of points.
 \begin_layout Minisec
 orientedBoxToPolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 orientedBoxToPolygon
@@ -3249,7 +3547,7 @@ Converts an oriented box to a polygon (set of vertices).
 \begin_layout Minisec
 drawOrientedBox
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawOrientedBox
@@ -3279,7 +3577,7 @@ Triangles are simply represented by a
 \begin_layout Minisec
 isPointInTriangle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isPointInTriangle
@@ -3297,7 +3595,7 @@ Tests if a point is located inside a triangle.
 \begin_layout Minisec
 triangleArea
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 triangleArea
@@ -3396,7 +3694,7 @@ Description of functions operating on transforms.
 \begin_layout Minisec
 createTranslation
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createTranslation
@@ -3414,7 +3712,7 @@ Creates the 3-by-3 matrix of a translation.
 \begin_layout Minisec
 createRotation
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createRotation
@@ -3480,7 +3778,7 @@ ans =
 \begin_layout Minisec
 createRotation90
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createRotation90
@@ -3540,7 +3838,7 @@ ans =
 \begin_layout Minisec
 createScaling
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createScaling
@@ -3573,7 +3871,7 @@ s_{x} & 0 & 0\\
 \begin_layout Minisec
 createHomothecy
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createHomothecy
@@ -3591,7 +3889,7 @@ Creates the the 3-by-3 matrix of an homothetic transform.
 \begin_layout Minisec
 createBasisTransform
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createBasisTransform
@@ -3609,7 +3907,7 @@ Computes matrix for transforming a basis into another basis.
 \begin_layout Minisec
 createLineReflection
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createLineReflection
@@ -3631,7 +3929,7 @@ Fit transforms
 \begin_layout Minisec
 fitAffineTransform2d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 fitAffineTransform2d
@@ -3649,7 +3947,7 @@ Fits an affine transform using two point sets.
 \begin_layout Minisec
 registerICP
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 registerICP
@@ -3667,7 +3965,7 @@ Fits an affine transform by using Iterative Closest Point (ICP) algorithm.
 \begin_layout Minisec
 polynomialTransform2d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polynomialTransform2d
@@ -3685,7 +3983,7 @@ Applies a polynomial transform to a set of points.
 \begin_layout Minisec
 fitPolynomialTransform2d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 fitPolynomialTransform2d
@@ -3725,7 +4023,7 @@ This sections presents functions used to generate less common geometric
 \begin_layout Minisec
 squareGrid
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 squareGrid
@@ -3743,7 +4041,7 @@ Generates equally spaces points in plane.
 \begin_layout Minisec
 hexagonalGrid
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 hexagonalGrid
@@ -3761,7 +4059,7 @@ Generates hexagonal grid of points in the plane.
 \begin_layout Minisec
 triangleGrid
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 triangleGrid
@@ -3779,7 +4077,7 @@ Generates triangular grid of points in the plane.
 \begin_layout Minisec
 crackPattern
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 crackPattern
@@ -3797,7 +4095,7 @@ Creates a (bounded) crack pattern tessellation.
 \begin_layout Minisec
 crackPattern2
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 crackPattern2
@@ -4170,7 +4468,7 @@ These functions allow to extract specific elements or subsets of a polyline
 \begin_layout Minisec
 polygonEdges
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonEdges
@@ -4188,7 +4486,7 @@ Returns the edges of a simple or multiple polygon.
 \begin_layout Minisec
 polygonLoops
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonLoops
@@ -4206,7 +4504,7 @@ Divides a possibly self-intersecting polygon into a set of simple loops.
 \begin_layout Minisec
 splitPolygons
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 splitPolygons
@@ -4224,7 +4522,7 @@ Converts a NaN separated polygon list to a cell array of polygons.
 \begin_layout Minisec
 polygonVertices
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonVertices
@@ -4242,7 +4540,7 @@ Extracts all vertices of a (multi-)polygon.
 \begin_layout Minisec
 reversePolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 reversePolygon
@@ -4260,7 +4558,7 @@ Reverses a polygon, by iterating vertices from the end.
 \begin_layout Minisec
 reversePolyline
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 reversePolyline
@@ -4278,7 +4576,7 @@ Reverses a polyline, by iterating vertices from the end.
 \begin_layout Minisec
 removeMultipleVertices
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 removeMultipleVertices
@@ -4353,7 +4651,7 @@ The parametrization domain for an open polyline is from
 \begin_layout Minisec
 polygonPoint
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonPoint
@@ -4371,7 +4669,7 @@ Extracts a point from a polygon and a position.
 \begin_layout Minisec
 polylinePoint
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polylinePoint
@@ -4389,7 +4687,7 @@ Extracts a point from a polyline and a position.
 \begin_layout Minisec
 polygonSubcurve
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonSubcurve
@@ -4407,7 +4705,7 @@ Extracts a portion of a polygon, and returns a polyline.
 \begin_layout Minisec
 polylineSubcurve
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polylineSubcurve
@@ -4432,25 +4730,17 @@ Some functions to compute area, perimeter, or more complex geometric measures
 \end_layout
 
 \begin_layout Minisec
-polygonBounds
+polylineLength
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
-polygonBounds
+polylineLength
 \end_layout
 
 \end_inset
 
  
-\end_layout
-
-\begin_layout Standard
-Computes the bounding box of a polygon.
-\end_layout
-
-\begin_layout Minisec
-polylineLength 
 \end_layout
 
 \begin_layout Standard
@@ -4460,7 +4750,7 @@ Returns the length of a polyline given as a list of points.
 \begin_layout Minisec
 polygonLength
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonLength
@@ -4476,9 +4766,27 @@ Perimeter of a polygon.
 \end_layout
 
 \begin_layout Minisec
+polygonBounds
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+polygonBounds
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Computes the bounding box of a polygon.
+\end_layout
+
+\begin_layout Minisec
 polylineCentroid
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polylineCentroid
@@ -4490,13 +4798,81 @@ polylineCentroid
 \end_layout
 
 \begin_layout Standard
-Computes centroid of a curve defined by a series of points.
+Computes the centroid of a polygonal curve defined by a series of vertices.
+ It is in general different from the vertex-based centroid, as obtained
+ by the 
+\begin_inset Quotes eld
+\end_inset
+
+centroid
+\begin_inset Quotes erd
+\end_inset
+
+ function.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/polygons2d/polygon_centroids.png
+	lyxscale 50
+	height 5cm
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/polygons2d/polygons_bounds_ellipse.png
+	lyxscale 50
+	height 5cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Polygon-Centroids"
+
+\end_inset
+
+Various summary shapes that can be obtained from a polygon: centroids, bounding
+ box, equivalent ellipse.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Minisec
 polygonCentroid
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonCentroid
@@ -4509,12 +4885,13 @@ polygonCentroid
 
 \begin_layout Standard
 Computes the centroid (center of mass) of a polygon.
+ 
 \end_layout
 
 \begin_layout Minisec
 polygonArea
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonArea
@@ -4533,7 +4910,7 @@ Computes the signed area of a polygon.
 \begin_layout Minisec
 polygonEquivalentEllipse
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonEquivalentEllipse
@@ -4551,7 +4928,7 @@ Computes the ellipse with the same moments as the polygon.
 \begin_layout Minisec
 polygonSecondAreaMoments
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonSecondAreaMoments
@@ -4569,7 +4946,7 @@ Computes second-order area moments of a polygon.
 \begin_layout Minisec
 polygonNormalAngle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonNormalAngle
@@ -4587,7 +4964,7 @@ Computes the normal angle at a vertex of the polygon.
 \begin_layout Minisec
 polygonOuterNormal
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonOuterNormal
@@ -4605,7 +4982,7 @@ Outer normal vector for a given vertex(ices).
 \begin_layout Minisec
 distancePolygons
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 distancePolygons
@@ -4631,7 +5008,7 @@ Computes the shortest distance between 2 polygons.
 \begin_layout Minisec
 polygonSignature
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonSignature
@@ -4659,7 +5036,7 @@ figure?
 \begin_layout Minisec
 signatureToPolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 signatureToPolygon
@@ -4677,7 +5054,7 @@ Reconstructs a polygon from its polar signature.
 \begin_layout Minisec
 polygonCurvature
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonCurvature
@@ -4704,7 +5081,7 @@ These functions allow for clipping polygonal shapes, and compute intersections
 \begin_layout Minisec
 clipPolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 clipPolygon
@@ -4722,7 +5099,7 @@ Clips a polygon with a rectangular box.
 \begin_layout Minisec
 clipPolyline
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 clipPolyline
@@ -4740,7 +5117,7 @@ Clips an open polyline with a rectangular box.
 \begin_layout Minisec
 clipPolygonHP
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 clipPolygonHP
@@ -4790,7 +5167,7 @@ Intersection points between a line and a polygon.
 \begin_layout Minisec
 intersectLinePolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectLinePolygon
@@ -4808,7 +5185,7 @@ Computes the intersection points between a line and a polygon.
 \begin_layout Minisec
 intersectLinePolyline
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectLinePolyline
@@ -4826,7 +5203,7 @@ Computes the intersection points between a line and a polyline.
 \begin_layout Minisec
 intersectRayPolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectRayPolygon
@@ -4844,7 +5221,7 @@ Computes the intersection points between a ray and a polygon.
 \begin_layout Minisec
 intersectEdgePolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectEdgePolygon
@@ -4862,7 +5239,7 @@ Computes the intersection point of an edge with a polygon.
 \begin_layout Minisec
 intersectPolylines
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectPolylines
@@ -4880,7 +5257,7 @@ Identifies the common points between 2 polylines.
 \begin_layout Minisec
 polygonSelfIntersections
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonSelfIntersections
@@ -4898,7 +5275,7 @@ Identifies the self-intersection points of a polygon.
 \begin_layout Minisec
 polylineSelfIntersections
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polylineSelfIntersections
@@ -4920,7 +5297,7 @@ Points and polygons
 \begin_layout Minisec
 isPointOnPolyline
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isPointOnPolyline
@@ -4938,7 +5315,7 @@ Test if a point belongs to a polyline.
 \begin_layout Minisec
 isPointInPolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isPointInPolygon
@@ -4956,7 +5333,7 @@ Test if a point is located inside a polygon.
 \begin_layout Minisec
 polygonContains
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonContains
@@ -4974,7 +5351,7 @@ Test if a point is contained in a multiply connected polygon.
 \begin_layout Minisec
 projPointOnPolyline
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 projPointOnPolyline
@@ -4992,7 +5369,7 @@ Computes position of a point projected on a polyline.
 \begin_layout Minisec
 projPointOnPolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 projPointOnPolygon
@@ -5010,7 +5387,7 @@ Computes position of a point projected on a polygon.
 \begin_layout Minisec
 distancePointPolyline
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 distancePointPolyline
@@ -5028,7 +5405,7 @@ Computes shortest distance between a point and a polyline.
 \begin_layout Minisec
 distancePointPolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 distancePointPolygon
@@ -5054,7 +5431,7 @@ Simplification of a polygon or a polyline.
 \begin_layout Minisec
 resamplePolyline
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 resamplePolyline
@@ -5072,7 +5449,7 @@ Distributes N points equally spaced on a polyline.
 \begin_layout Minisec
 resamplePolylineByLength
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 resamplePolylineByLength
@@ -5090,7 +5467,7 @@ Resamples a polyline with a fixed sampling step.
 \begin_layout Minisec
 resamplePolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 resamplePolygon
@@ -5108,7 +5485,7 @@ Distributes N points equally spaced on a polygon.
 \begin_layout Minisec
 resamplePolygonByLength
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 resamplePolygonByLength
@@ -5126,7 +5503,7 @@ Resamples a polygon with a fixed sampling step.
 \begin_layout Minisec
 densifyPolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 densifyPolygon
@@ -5144,7 +5521,7 @@ Adds several points on each edge of the polygon.
 \begin_layout Minisec
 smoothPolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 smoothPolygon
@@ -5162,7 +5539,7 @@ Smooths a polygon using local averaging.
 \begin_layout Minisec
 simplifyPolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 simplifyPolygon
@@ -5206,7 +5583,7 @@ More complex operations on polygons.
 \begin_layout Minisec
 expandPolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 expandPolygon
@@ -5290,7 +5667,7 @@ Expansion (buffering) of a polygon.
 \begin_layout Minisec
 triangulatePolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 triangulatePolygon
@@ -5308,7 +5685,7 @@ Computes a triangulation of the polygon.
 \begin_layout Minisec
 polygonSkeleton
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonSkeleton
@@ -5355,7 +5732,7 @@ add illustration figure...
 \begin_layout Minisec
 medialAxisConvex
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 medialAxisConvex
@@ -5373,7 +5750,7 @@ Computes the medial axis of a convex polygon (not fully functional).
 \begin_layout Minisec
 polygonSymmetryAxis
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonSymmetryAxis
@@ -5399,7 +5776,7 @@ Some conversion functions, and I/O utilities.
 \begin_layout Minisec
 polygonToRow
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonToRow
@@ -5417,7 +5794,7 @@ Convert polygon coordinates to a row vector.
 \begin_layout Minisec
 rowToPolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 rowToPolygon
@@ -5435,7 +5812,7 @@ Create a polygon from a row vector.
 \begin_layout Minisec
 contourMatrixToPolylines
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 contourMatrixToPolylines
@@ -5453,7 +5830,7 @@ Converts a contour matrix array into a polyline set.
 \begin_layout Minisec
 readPolygonSet
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 readPolygonSet
@@ -5471,7 +5848,7 @@ Read a set of simple polygons stored in a file.
 \begin_layout Minisec
 writePolygonSet
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 writePolygonSet
@@ -6638,6 +7015,16 @@ Module geom3d
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:geom3d"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 The geom3d module allows to create, manipulate, transform, and visualize
  geometrical 3D primitives, such as points, lines, planes, polyhedra, circles
  and spheres.
@@ -6804,7 +7191,7 @@ The library provides several generic functions for working with points or
 \begin_layout Minisec
 midPoint3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 midPoint3d
@@ -6822,7 +7209,7 @@ Middle point of two 3D points or of a 3D edge.
 \begin_layout Minisec
 isCoplanar
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isCoplanar
@@ -6840,7 +7227,7 @@ Tests for coplanarity of points in 3-space.
 \begin_layout Minisec
 transformPoint3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 transformPoint3d
@@ -6869,7 +7256,7 @@ noprefix "false"
 \begin_layout Minisec
 distancePoints3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 distancePoints3d
@@ -6887,7 +7274,7 @@ Computes the Euclidean distance between pairs of 3D Points.
 \begin_layout Minisec
 clipPoints3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 clipPoints3d
@@ -6905,7 +7292,7 @@ Clips a set of points by a 3D box or by another 3d shape.
 \begin_layout Minisec
 drawPoint3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawPoint3d
@@ -6942,7 +7329,7 @@ Several functions are also provided to compute derived quantities from 3D
 \begin_layout Minisec
 normalizeVector3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 normalizeVector3d
@@ -6960,7 +7347,7 @@ Normalizes a 3D vector to have norm equal to 1.
 \begin_layout Minisec
 vectorNorm3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 vectorNorm3d
@@ -6978,7 +7365,7 @@ Norm of a 3D vector or of set of 3D vectors.
 \begin_layout Minisec
 hypot3
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 hypot3
@@ -6997,7 +7384,7 @@ Computes the length of a 3D vector, equivalent to the diagonal length of
 \begin_layout Minisec
 crossProduct3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 crossProduct3d
@@ -7015,7 +7402,7 @@ Vector cross product, faster than inbuilt MATLAB cross.
 \begin_layout Minisec
 vectorAngle3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 vectorAngle3d
@@ -7033,7 +7420,7 @@ Angle between two 3D vectors.
 \begin_layout Minisec
 isParallel3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isParallel3d
@@ -7051,7 +7438,7 @@ Checks parallelism of two 3D vectors.
 \begin_layout Minisec
 isPerpendicular3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isPerpendicular3d
@@ -7069,7 +7456,7 @@ Checks orthogonality of two 3D vectors.
 \begin_layout Minisec
 transformVector3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 transformVector3d
@@ -7098,7 +7485,7 @@ noprefix "false"
 \begin_layout Minisec
 drawVector3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawVector3d
@@ -7192,7 +7579,7 @@ Operations on 3D boxes: intersection and merge.
 \begin_layout Minisec
 drawBox3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawBox3d
@@ -7210,7 +7597,7 @@ Draws a 3D box, defined by bounding coordinates along each dimension.
 \begin_layout Minisec
 box3dVolume
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 box3dVolume
@@ -7228,7 +7615,7 @@ Computes the the volume of a 3-dimensional box.
 \begin_layout Minisec
 boundingBox3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 boundingBox3d
@@ -7246,7 +7633,7 @@ Computes the bounding box of a set of 3D points.
 \begin_layout Minisec
 intersectBoxes3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectBoxes3d
@@ -7279,7 +7666,7 @@ noprefix "false"
 \begin_layout Minisec
 mergeBoxes3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 mergeBoxes3d
@@ -7312,7 +7699,7 @@ noprefix "false"
 \begin_layout Minisec
 orientedBox3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 orientedBox3d
@@ -7392,7 +7779,7 @@ Creation
 \begin_layout Minisec
 createLine3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createLine3d
@@ -7410,7 +7797,7 @@ Creates a 3D (straight) line with various inputs.
 \begin_layout Minisec
 createRay3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createRay3d
@@ -7428,7 +7815,7 @@ Creates a 3D ray (half-line) from two points.
 \begin_layout Minisec
 fitLine3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 fitLine3d
@@ -7446,7 +7833,7 @@ Fits a 3D line to a set of points.
 \begin_layout Minisec
 parallelLine3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 parallelLine3d
@@ -7464,7 +7851,7 @@ Creates 3D line parallel to another one.
 \begin_layout Minisec
 transformLine3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 transformLine3d
@@ -7493,7 +7880,7 @@ noprefix "false"
 \begin_layout Minisec
 reverseLine3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 reverseLine3d
@@ -7515,7 +7902,7 @@ Relations with points
 \begin_layout Minisec
 distancePointLine3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 distancePointLine3d
@@ -7533,7 +7920,7 @@ Euclidean distance between 3D point and line.
 \begin_layout Minisec
 isPointOnLine3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isPointOnLine3d
@@ -7551,7 +7938,7 @@ Tests if a 3D point belongs to a 3D line.
 \begin_layout Minisec
 projPointOnLine3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 projPointOnLine3d
@@ -7569,7 +7956,7 @@ Projects a 3D point orthogonally onto a 3D line.
 \begin_layout Minisec
 distancePointEdge3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 distancePointEdge3d
@@ -7587,7 +7974,7 @@ Minimum distance between a 3D point and a 3D edge.
 \begin_layout Minisec
 linePosition3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 linePosition3d
@@ -7614,7 +8001,7 @@ This functions compute the intersection of a linear geometry with a 3D bounding
 \begin_layout Minisec
 clipLine3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 clipLine3d
@@ -7632,7 +8019,7 @@ Clips a 3D line with a 3D box and return a 3D edge.
 \begin_layout Minisec
 clipEdge3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 clipEdge3d
@@ -7650,7 +8037,7 @@ Clips a 3D edge with a cuboid box.
 \begin_layout Minisec
 clipRay3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 clipRay3d
@@ -7672,7 +8059,7 @@ Utility functions
 \begin_layout Minisec
 distanceLines3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 distanceLines3d
@@ -7690,7 +8077,7 @@ Minimal distance between two 3D lines.
 \begin_layout Minisec
 edgeToLine3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 edgeToLine3d
@@ -7708,7 +8095,7 @@ Converts a 3D edge to a 3D straight line.
 \begin_layout Minisec
 midPoint3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 midPoint3d
@@ -7735,7 +8122,7 @@ Drawing functions for linear geometries, performing clipping with the bounding
 \begin_layout Minisec
 drawLine3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawLine3d
@@ -7753,7 +8140,7 @@ Draws a 3D line clipped by the current axes.
 \begin_layout Minisec
 drawEdge3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawEdge3d
@@ -7771,7 +8158,7 @@ Draws 3D edge in the current axes.
 \begin_layout Minisec
 drawRay3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawRay3d
@@ -7859,7 +8246,7 @@ Creation and transformations
 \begin_layout Minisec
 createPlane
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createPlane
@@ -7877,7 +8264,7 @@ Creates a plane in parametrized form.
 \begin_layout Minisec
 medianPlane
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 medianPlane
@@ -7895,7 +8282,7 @@ Creates a plane in the middle of 2 points.
 \begin_layout Minisec
 fitPlane
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 fitPlane
@@ -7913,7 +8300,7 @@ Fits a 3D plane to a set of points.
 \begin_layout Minisec
 normalizePlane
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 normalizePlane
@@ -7931,7 +8318,7 @@ Normalizes parametric representation of a plane.
 \begin_layout Minisec
 parallelPlane
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 parallelPlane
@@ -7949,7 +8336,7 @@ Parallel to a plane through a point or at a given distance.
 \begin_layout Minisec
 reversePlane
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 reversePlane
@@ -7967,7 +8354,7 @@ Returns the same 3D plane but with opposite orientation.
 \begin_layout Minisec
 transformPlane3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 transformPlane3d
@@ -8000,7 +8387,7 @@ Computing intersections
 \begin_layout Minisec
 intersectPlanes
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectPlanes
@@ -8018,7 +8405,7 @@ Returns the intersection line between 2 planes in space.
 \begin_layout Minisec
 intersectThreePlanes
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectThreePlanes
@@ -8036,7 +8423,7 @@ Returns the intersection point between 3 planes in space.
 \begin_layout Minisec
 intersectLinePlane
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectLinePlane
@@ -8054,7 +8441,7 @@ Intersection point between a 3D line and a plane.
 \begin_layout Minisec
 intersectEdgePlane
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectEdgePlane
@@ -8072,7 +8459,7 @@ Returns intersection point between a plane and a edge.
 \begin_layout Minisec
 planesBisector
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 planesBisector
@@ -8094,7 +8481,7 @@ Point positions
 \begin_layout Minisec
 planePosition
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 planePosition
@@ -8112,7 +8499,7 @@ Computes the position of a point on a plane.
 \begin_layout Minisec
 planePoint
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 planePoint
@@ -8130,7 +8517,7 @@ Computes the 3D position of a point in a plane.
 \begin_layout Minisec
 projPointOnPlane
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 projPointOnPlane
@@ -8148,7 +8535,7 @@ Returns the orthogonal projection of a point on a plane.
 \begin_layout Minisec
 distancePointPlane
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 distancePointPlane
@@ -8166,7 +8553,7 @@ Signed distance betwen 3D point and plane.
 \begin_layout Minisec
 isBelowPlane
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isBelowPlane
@@ -8184,7 +8571,7 @@ Tests whether a point is below or above a plane.
 \begin_layout Minisec
 projLineOnPlane
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 projLineOnPlane
@@ -8206,7 +8593,7 @@ Measures
 \begin_layout Minisec
 planeNormal
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 planeNormal
@@ -8224,7 +8611,7 @@ Computes the normal to a plane.
 \begin_layout Minisec
 isPlane
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isPlane
@@ -8242,7 +8629,7 @@ Checks if input is a plane.
 \begin_layout Minisec
 dihedralAngle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 dihedralAngle
@@ -8264,7 +8651,7 @@ Drawing
 \begin_layout Minisec
 drawPlane3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawPlane3d
@@ -8346,7 +8733,7 @@ Computing intersections
 \begin_layout Minisec
 intersectLinePolygon3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectLinePolygon3d
@@ -8364,7 +8751,7 @@ Intersection point of a 3D line and a 3D polygon.
 \begin_layout Minisec
 intersectRayPolygon3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectRayPolygon3d
@@ -8382,7 +8769,7 @@ Intersection point of a 3D ray and a 3D polygon.
 \begin_layout Minisec
 clipConvexPolygon3dHP
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 clipConvexPolygon3dHP
@@ -8404,7 +8791,7 @@ Measurements
 \begin_layout Minisec
 polygonCentroid3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonCentroid3d
@@ -8422,7 +8809,7 @@ Centroid (or center of mass) of a polygon.
 \begin_layout Minisec
 polygonArea3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygonArea3d
@@ -8440,7 +8827,7 @@ Area of a 3D polygon.
 \begin_layout Minisec
 polygon3dNormalAngle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polygon3dNormalAngle
@@ -8462,7 +8849,7 @@ Drawing functions
 \begin_layout Minisec
 drawPolygon3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawPolygon3d
@@ -8480,7 +8867,7 @@ Draws a 3D polygon specified by a list of vertex coords.
 \begin_layout Minisec
 fillPolygon3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 fillPolygon3d
@@ -8509,7 +8896,7 @@ A 3D triangle is simply defined by a triplet of 3D points.
 \begin_layout Minisec
 triangleArea3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 triangleArea3d
@@ -8527,7 +8914,7 @@ Computes the area of a 3D triangle.
 \begin_layout Minisec
 distancePointTriangle3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 distancePointTriangle3d
@@ -8545,7 +8932,7 @@ Comptues the minimum distance between a 3D point and a 3D triangle.
 \begin_layout Minisec
 intersectLineTriangle3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectLineTriangle3d
@@ -8595,7 +8982,7 @@ As for 2D polygons, 3D polylines are represented by a
 \begin_layout Minisec
 drawPolyline3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawPolyline3d
@@ -8638,7 +9025,7 @@ circle = [x0 y0 z0 R PHI THETA PSI];
 \begin_layout Minisec
 fitCircle3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 fitCircle3d
@@ -8656,7 +9043,7 @@ Fits a 3D circle to a set of points.
 \begin_layout Minisec
 circle3dPosition
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 circle3dPosition
@@ -8674,7 +9061,7 @@ Returns the angular position of a point on a 3D circle.
 \begin_layout Minisec
 circle3dPoint
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 circle3dPoint
@@ -8692,7 +9079,7 @@ Coordinates of a point on a 3D circle from its position.
 \begin_layout Minisec
 circle3dOrigin
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 circle3dOrigin
@@ -8710,7 +9097,7 @@ Returns the first point of a 3D circle.
 \begin_layout Minisec
 drawCircle3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawCircle3d
@@ -8728,7 +9115,7 @@ Draws a 3D circle.
 \begin_layout Minisec
 drawCircleArc3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawCircleArc3d
@@ -8768,7 +9155,7 @@ elli = [x0 y0 z0  A B C  PHI THETA PSI];
 \begin_layout Minisec
 fitEllipse3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 fitEllipse3d
@@ -8786,7 +9173,7 @@ Fits a 3D ellipse to a set of points.
 \begin_layout Minisec
 drawEllipse3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawEllipse3d
@@ -8840,7 +9227,7 @@ Creation and intersections
 \begin_layout Minisec
 createSphere
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createSphere
@@ -8858,7 +9245,7 @@ Creates a sphere passing through 4 points.
 \begin_layout Minisec
 intersectLineSphere
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectLineSphere
@@ -8876,7 +9263,7 @@ Returns the intersection points between a line and a sphere.
 \begin_layout Minisec
 intersectPlaneSphere
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectPlaneSphere
@@ -8903,7 +9290,7 @@ Several functions are provided to draw spheres, or geometries defined over
 \begin_layout Minisec
 drawSphere
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawSphere
@@ -8921,7 +9308,7 @@ Draws a sphere as a mesh.
 \begin_layout Minisec
 drawSphericalEdge
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawSphericalEdge
@@ -8939,7 +9326,7 @@ Draws an edge on the surface of a sphere.
 \begin_layout Minisec
 drawSphericalTriangle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawSphericalTriangle
@@ -8957,7 +9344,7 @@ Draws a triangle on a sphere.
 \begin_layout Minisec
 fillSphericalTriangle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 fillSphericalTriangle
@@ -8975,7 +9362,7 @@ Fills a triangle on a sphere.
 \begin_layout Minisec
 drawSphericalPolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawSphericalPolygon
@@ -8993,7 +9380,7 @@ Draws a spherical polygon.
 \begin_layout Minisec
 fillSphericalPolygon
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 fillSphericalPolygon
@@ -9011,7 +9398,7 @@ Fills a spherical polygon.
 \begin_layout Minisec
 sphericalVoronoiDomain
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 sphericalVoronoiDomain
@@ -9067,7 +9454,7 @@ Elli = [x0 y0 z0 RA RB RC PHI THETA PSI]
 \begin_layout Minisec
 equivalentEllipsoid
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 equivalentEllipsoid
@@ -9143,7 +9530,7 @@ Equivalent ellipsoid of a point cloud.
 \begin_layout Minisec
 isPointInEllipsoid
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isPointInEllipsoid
@@ -9161,7 +9548,7 @@ Determines if a 3D points lies within or outside an ellipsoid.
 \begin_layout Minisec
 ellipsoidSurfaceArea
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 ellipsoidSurfaceArea
@@ -9198,7 +9585,7 @@ with
 \begin_layout Minisec
 oblateSurfaceArea
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 oblateSurfaceArea
@@ -9217,7 +9604,7 @@ Approximated surface area of an oblate ellipsoid, given its largest and
 \begin_layout Minisec
 prolateSurfaceArea
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 prolateSurfaceArea
@@ -9236,7 +9623,7 @@ Approximated surface area of a prolate ellipsoid, given its largest and
 \begin_layout Minisec
 drawEllipsoid
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawEllipsoid
@@ -9279,7 +9666,7 @@ Cylinder = [X1 Y1 Z1 X2 Y2 Z2 R];
 \begin_layout Minisec
 cylinderSurfaceArea
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 cylinderSurfaceArea
@@ -9297,7 +9684,7 @@ Computes the surface area of a cylinder, based on its length and radius.
 \begin_layout Minisec
 intersectLineCylinder
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectLineCylinder
@@ -9315,7 +9702,7 @@ Computes the intersection points between a line and a cylinder.
 \begin_layout Minisec
 drawCylinder
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawCylinder
@@ -9333,7 +9720,7 @@ Draws a cylinder on the current axis.
 \begin_layout Minisec
 drawEllipseCylinder
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawEllipseCylinder
@@ -9400,7 +9787,7 @@ name "fig:Revolution-Surface"
 \begin_layout Minisec
 revolutionSurface
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 revolutionSurface
@@ -9433,7 +9820,7 @@ noprefix "false"
 \begin_layout Minisec
 surfaceCurvature
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 surfaceCurvature
@@ -9451,7 +9838,7 @@ Curvature on a surface from angle and principal curvatures.
 \begin_layout Minisec
 drawTorus
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawTorus
@@ -9469,7 +9856,7 @@ Draws a torus (3D ring).
 \begin_layout Minisec
 drawCapsule
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawCapsule
@@ -9487,7 +9874,7 @@ Draws a 3D capsule, composed of a cylinder and two domes at the extremities.
 \begin_layout Minisec
 drawDome
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawDome
@@ -9505,7 +9892,7 @@ Draws a 3D dome, or half-sphere.
 \begin_layout Minisec
 drawSurfPatch
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawSurfPatch
@@ -9569,6 +9956,18 @@ z\\
 
 \end_layout
 
+\begin_layout Standard
+The upper-left 
+\begin_inset Formula $3\times3$
+\end_inset
+
+ square corresponds to the linear part of the transform, whereas the 
+\begin_inset Formula $m_{i3}$
+\end_inset
+
+ elements correspond to the translation part.
+\end_layout
+
 \begin_layout Subsection
 Basic transforms
 \end_layout
@@ -9594,7 +9993,7 @@ TODO: add sketch of 3D rotation angles
 \begin_layout Minisec
 createTranslation3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createTranslation3d
@@ -9625,7 +10024,7 @@ T(\boldsymbol{u}) & =\left[\begin{array}{cccc}
 \begin_layout Minisec
 createScaling3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createScaling3d
@@ -9638,12 +10037,34 @@ createScaling3d
 
 \begin_layout Standard
 Creates the 4x4 matrix of a 3D scaling.
+ The scaling parameter can be either a scalar (uniform scaling), or a three-elem
+ent vector 
+\begin_inset Formula $\boldsymbol{s}=(s_{x},s_{y},s_{z})^{t}$
+\end_inset
+
+ corresponding to the scaling along each dimension.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+S(\boldsymbol{s}) & =\left[\begin{array}{cccc}
+s_{x} & 0 & 0 & 0\\
+0 & s_{y} & 0 & 0\\
+0 & 0 & s_{z} & 0\\
+0 & 0 & 0 & 1
+\end{array}\right]
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Minisec
 createRotationOx
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createRotationOx
@@ -9655,7 +10076,8 @@ createRotationOx
 \end_layout
 
 \begin_layout Standard
-Creates the 4x4 matrix of a 3D rotation around x-axis.
+Creates the 4x4 matrix of a 3D rotation around x-axis, by an angle give
+ n in radians.
 \begin_inset Formula 
 \begin{align*}
 R_{X}(\theta) & =\left[\begin{array}{cccc}
@@ -9674,7 +10096,7 @@ R_{X}(\theta) & =\left[\begin{array}{cccc}
 \begin_layout Minisec
 createRotationOy
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createRotationOy
@@ -9686,7 +10108,8 @@ createRotationOy
 \end_layout
 
 \begin_layout Standard
-Creates the 4x4 matrix of a 3D rotation around y-axis.
+Creates the 4x4 matrix of a 3D rotation around y-axis, by an angle give
+ n in radians.
 \end_layout
 
 \begin_layout Standard
@@ -9708,7 +10131,7 @@ R_{Y}(\theta) & =\left[\begin{array}{cccc}
 \begin_layout Minisec
 createRotationOz
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createRotationOz
@@ -9720,7 +10143,8 @@ createRotationOz
 \end_layout
 
 \begin_layout Standard
-Creates the 4x4 matrix of a 3D rotation around z-axis.
+Creates the 4x4 matrix of a 3D rotation around z-axis, by an angle give
+ n in radians.
 \end_layout
 
 \begin_layout Standard
@@ -9750,7 +10174,7 @@ Other functions for less common creation patterns.
 \begin_layout Minisec
 createBasisTransform3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createBasisTransform3d
@@ -9768,7 +10192,7 @@ Computes matrix for transforming a basis into another basis.
 \begin_layout Minisec
 eulerAnglesToRotation3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 eulerAnglesToRotation3d
@@ -9786,7 +10210,7 @@ Converts 3D Euler angles to 3D rotation matrix.
 \begin_layout Minisec
 rotation3dToEulerAngles
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 rotation3dToEulerAngles
@@ -9804,7 +10228,7 @@ Extracts Euler angles from a rotation matrix.
 \begin_layout Minisec
 createRotation3dLineAngle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createRotation3dLineAngle
@@ -9822,7 +10246,7 @@ Creates rotation around a line by an angle theta.
 \begin_layout Minisec
 rotation3dAxisAndAngle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 rotation3dAxisAndAngle
@@ -9840,7 +10264,7 @@ Determines axis and angle of a 3D rotation matrix.
 \begin_layout Minisec
 createRotationVector3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createRotationVector3d
@@ -9858,7 +10282,7 @@ Calculates the rotation between two vectors.
 \begin_layout Minisec
 createRotationVectorPoint3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createRotationVectorPoint3d
@@ -9884,7 +10308,7 @@ Some functions aim at combining or processing transform matrices.
 \begin_layout Minisec
 recenterTransform3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 recenterTransform3d
@@ -9902,7 +10326,7 @@ Changes the fixed point of an affine 3D transform.
 \begin_layout Minisec
 composeTransforms3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 composeTransforms3d
@@ -10016,7 +10440,7 @@ Definition of spherical coordinates.
 \begin_layout Minisec
 sph2cart2
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 sph2cart2
@@ -10034,7 +10458,7 @@ Converts spherical coordinates to cartesian coordinates.
 \begin_layout Minisec
 cart2sph2
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 cart2sph2
@@ -10052,7 +10476,7 @@ Converts cartesian coordinates to spherical coordinates.
 \begin_layout Minisec
 cart2sph2d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 cart2sph2d
@@ -10070,7 +10494,7 @@ Converts cartesian coordinates to spherical coordinates in degrees.
 \begin_layout Minisec
 sph2cart2d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 sph2cart2d
@@ -10101,7 +10525,7 @@ Cylindrical coordinates comprise three components: the azimut angle, the
 \begin_layout Minisec
 cart2cyl
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 cart2cyl
@@ -10119,7 +10543,7 @@ Converts cartesian to cylindrical coordinates.
 \begin_layout Minisec
 cyl2cart
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 cyl2cart
@@ -10220,7 +10644,7 @@ Other functions for angles
 \begin_layout Minisec
 anglePoints3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 anglePoints3d
@@ -10238,7 +10662,7 @@ Computes angle between three 3D points.
 \begin_layout Minisec
 sphericalAngle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 sphericalAngle
@@ -10256,7 +10680,7 @@ Computes angle between points on the sphere.
 \begin_layout Minisec
 angleSort3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 angleSort3d
@@ -10274,7 +10698,7 @@ Sorts 3D coplanar points according to their angles in plane.
 \begin_layout Minisec
 randomAngle3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 randomAngle3d
@@ -10300,7 +10724,7 @@ Polygonal shapes
 \begin_layout Minisec
 drawCube
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawCube
@@ -10318,7 +10742,7 @@ Draws a 3D centered cube, eventually rotated.
 \begin_layout Minisec
 drawCuboid
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawCuboid
@@ -10336,7 +10760,7 @@ Draws a 3D cuboid, eventually rotated.
 \begin_layout Minisec
 drawPlatform
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawPlatform
@@ -10358,7 +10782,7 @@ Drawing utilities
 \begin_layout Minisec
 drawGrid3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawGrid3d
@@ -10376,7 +10800,7 @@ Draws a 3D grid on the current axis.
 \begin_layout Minisec
 drawAxis3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawAxis3d
@@ -10394,7 +10818,7 @@ Draws a coordinate system and an origin.
 \begin_layout Minisec
 drawAxisCube
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawAxisCube
@@ -10412,7 +10836,7 @@ Draws a colored cube representing axis orientation.
 \begin_layout Minisec
 drawArrow3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawArrow3d
@@ -10430,7 +10854,7 @@ Draws 3D arrows using a quiver plot.
 \begin_layout Minisec
 drawAngleBetweenVectors3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawAngleBetweenVectors3d
@@ -10447,6 +10871,16 @@ Draws a 3D circle arc between two 3D vectors.
 
 \begin_layout Chapter
 Module meshes3d
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:meshes3d"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -10622,7 +11056,7 @@ Representation of a 3D polygonal mesh together with the face normals.
 \begin_layout Minisec
 drawMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawMesh
@@ -10654,7 +11088,7 @@ noprefix "false"
 \begin_layout Minisec
 fillMeshFaces
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 fillMeshFaces
@@ -10672,7 +11106,7 @@ Fills the faces of a mesh with the specified colors.
 \begin_layout Minisec
 drawFaceNormals
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 drawFaceNormals
@@ -10747,7 +11181,7 @@ e
 \begin_layout Minisec
 createCube
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createCube
@@ -10776,7 +11210,7 @@ reference "fig:Platonic-Solids"
 \begin_layout Minisec
 createOctahedron
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createOctahedron
@@ -10890,7 +11324,7 @@ The five platonic solids and a soccer ball represented as 3D meshes.
 \begin_layout Minisec
 createIcosahedron
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createIcosahedron
@@ -10919,7 +11353,7 @@ reference "fig:Platonic-Solids"
 \begin_layout Minisec
 createDodecahedron
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createDodecahedron
@@ -10948,7 +11382,7 @@ reference "fig:Platonic-Solids"
 \begin_layout Minisec
 createTetrahedron
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createTetrahedron
@@ -10985,7 +11419,7 @@ Other classical (non platonic) polyhedra can be easily generated.
 \begin_layout Minisec
 createSoccerBall
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createSoccerBall
@@ -11015,7 +11449,7 @@ reference "fig:Platonic-Solids"
 \begin_layout Minisec
 createCubeOctahedron
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createCubeOctahedron
@@ -11047,7 +11481,7 @@ noprefix "false"
 \begin_layout Minisec
 createTetrakaidecahedron
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createTetrakaidecahedron
@@ -11080,7 +11514,7 @@ noprefix "false"
 \begin_layout Minisec
 createRhombododecahedron
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createRhombododecahedron
@@ -11114,7 +11548,7 @@ noprefix "false"
 \begin_layout Minisec
 createStellatedMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createStellatedMesh
@@ -11132,7 +11566,7 @@ Replaces each face of a mesh by a pyramid.
 \begin_layout Minisec
 createDurerPolyhedron
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createDurerPolyhedron
@@ -11254,7 +11688,7 @@ It is often convenient to convert a geometrical 3D model (cylinder, ellipsoid...
 \begin_layout Minisec
 cylinderMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 cylinderMesh
@@ -11272,7 +11706,7 @@ Creates a 3D mesh representing a cylinder.
 \begin_layout Minisec
 sphereMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 sphereMesh
@@ -11290,7 +11724,7 @@ Creates a 3D mesh representing a sphere.
 \begin_layout Minisec
 ellipsoidMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 ellipsoidMesh
@@ -11308,7 +11742,7 @@ Converts a 3D ellipsoid to face-vertex mesh representation.
 \begin_layout Minisec
 torusMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 torusMesh
@@ -11326,7 +11760,7 @@ Creates a 3D mesh representing a torus.
 \begin_layout Minisec
 curveToMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 curveToMesh
@@ -11422,7 +11856,7 @@ Other creation functions
 \begin_layout Minisec
 boxToMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 boxToMesh
@@ -11440,7 +11874,7 @@ Converts a box into a quad mesh with the same size.
 \begin_layout Minisec
 surfToMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 surfToMesh
@@ -11458,7 +11892,7 @@ Converts surface grids into face-vertex mesh.
 \begin_layout Minisec
 triangulateCurvePair
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 triangulateCurvePair
@@ -11476,7 +11910,7 @@ Computes triangulation between a pair of 3D open curves.
 \begin_layout Minisec
 triangulatePolygonPair
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 triangulatePolygonPair
@@ -11494,7 +11928,7 @@ Computes triangulation between a pair of 3D closed curves.
 \begin_layout Minisec
 minConvexHull
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 minConvexHull
@@ -11515,7 +11949,7 @@ Returns the unique minimal convex hull of a set of 3D points.
 \begin_layout Minisec
 createMengerSponge
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 createMengerSponge
@@ -11534,7 +11968,7 @@ Creates a cube with an inside cross removed.
 \begin_layout Minisec
 steinerPolytope
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 steinerPolytope
@@ -11654,7 +12088,7 @@ Several functions allows for smoothing or simplifying meshes.
 \begin_layout Minisec
 smoothMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 smoothMesh
@@ -11687,7 +12121,7 @@ status open
 \begin_layout Minisec
 meshVertexClustering
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 meshVertexClustering
@@ -11720,7 +12154,7 @@ status open
 \begin_layout Minisec
 concatenateMeshes
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 concatenateMeshes
@@ -11754,7 +12188,7 @@ status open
 \begin_layout Minisec
 splitMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 splitMesh
@@ -11805,7 +12239,7 @@ meshes = splitMesh(vertices, faces);
 \begin_layout Minisec
 subdivideMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 subdivideMesh
@@ -11838,7 +12272,7 @@ status open
 \begin_layout Minisec
 triangulateFaces
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 triangulateFaces
@@ -11877,7 +12311,7 @@ f2 = triangulateFaces(f);
 \begin_layout Minisec
 mergeCoplanarFaces
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 mergeCoplanarFaces
@@ -11910,7 +12344,7 @@ status open
 \begin_layout Minisec
 meshComplement
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 meshComplement
@@ -11987,7 +12421,7 @@ Intersection of a 3D polygonal mesh with a collection of lines, or a collection
 \begin_layout Minisec
 intersectLineMesh3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectLineMesh3d
@@ -12019,7 +12453,7 @@ noprefix "false"
 \begin_layout Minisec
 intersectPlaneMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 intersectPlaneMesh
@@ -12052,7 +12486,7 @@ noprefix "false"
 \begin_layout Minisec
 polyhedronSlice
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polyhedronSlice
@@ -12070,7 +12504,7 @@ Intersects a convex polyhedron with a plane.
 \begin_layout Minisec
 clipMeshVertices
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 clipMeshVertices
@@ -12088,7 +12522,7 @@ Clips vertices of a surface mesh and remove outer faces.
 \begin_layout Minisec
 clipConvexPolyhedronHP
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 clipConvexPolyhedronHP
@@ -12106,7 +12540,7 @@ Clips a convex polyhedron by a plane.
 \begin_layout Minisec
 cutMeshByPlane
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 cutMeshByPlane
@@ -12242,7 +12676,7 @@ Generic operations
 \begin_layout Minisec
 averageMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 averageMesh
@@ -12270,7 +12704,7 @@ Some functions for removing topological inconsistencies and trying to obtain
 \begin_layout Minisec
 trimMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 trimMesh
@@ -12289,7 +12723,7 @@ Reduces the memory footprint of a polygonal mesh by removing vertices that
 \begin_layout Minisec
 isManifoldMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isManifoldMesh
@@ -12309,7 +12743,7 @@ Checks whether the input mesh may be considered as manifold.
 \begin_layout Minisec
 ensureManifoldMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 ensureManifoldMesh
@@ -12327,7 +12761,7 @@ Applies several simplification to obtain a manifold mesh.
 \begin_layout Minisec
 removeDuplicateFaces
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 removeDuplicateFaces
@@ -12345,7 +12779,7 @@ Removes duplicate faces in a face array.
 \begin_layout Minisec
 removeMeshEars
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 removeMeshEars
@@ -12363,7 +12797,7 @@ Removes vertices that are connected to only one face.
 \begin_layout Minisec
 removeInvalidBorderFaces
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 removeInvalidBorderFaces
@@ -12381,7 +12815,7 @@ Removes faces whose edges are connected to 3, 3, and 1 faces.
 \begin_layout Minisec
 collapseEdgesWithManyFaces
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 collapseEdgesWithManyFaces
@@ -12407,7 +12841,7 @@ Some low-level functions to modify a mesh.
 \begin_layout Minisec
 removeMeshVertices
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 removeMeshVertices
@@ -12425,7 +12859,7 @@ Removes vertices and associated faces from a mesh.
 \begin_layout Minisec
 mergeMeshVertices
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 mergeMeshVertices
@@ -12443,7 +12877,7 @@ Merges two vertices and removes eventual degenerated faces.
 \begin_layout Minisec
 removeMeshFaces
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 removeMeshFaces
@@ -12480,7 +12914,7 @@ Low level functions for investigating topology of meshes.
 \begin_layout Minisec
 meshFace
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 meshFace
@@ -12500,7 +12934,7 @@ Returns the vertex indices of a face in a mesh.
 \begin_layout Minisec
 meshFaceEdges
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 meshFaceEdges
@@ -12518,7 +12952,7 @@ Computes edge indices of each face.
 \begin_layout Minisec
 meshFaceNumber
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 meshFaceNumber
@@ -12536,7 +12970,7 @@ Returns the number of faces in this mesh.
 \begin_layout Minisec
 meshEdges
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 meshEdges
@@ -12554,7 +12988,7 @@ Computes array of edge vertex indices from face array.
 \begin_layout Minisec
 meshEdgeFaces
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 meshEdgeFaces
@@ -12572,7 +13006,7 @@ Computes index of faces adjacent to each edge of a mesh.
 \begin_layout Minisec
 trimeshEdgeFaces
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 trimeshEdgeFaces
@@ -12590,7 +13024,7 @@ Computes index of faces adjacent to each edge of a triangular mesh.
 \begin_layout Minisec
 meshFaceAdjacency
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 meshFaceAdjacency
@@ -12608,7 +13042,7 @@ Computes adjacency list of face around each face.
 \begin_layout Minisec
 meshAdjacencyMatrix
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 meshAdjacencyMatrix
@@ -12626,7 +13060,7 @@ Computes the adjacency matrix of a mesh from set of faces.
 \begin_layout Minisec
 checkMeshAdjacentFaces
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 checkMeshAdjacentFaces
@@ -12655,7 +13089,7 @@ Several functions allows to measure 3D intrinsic volumes, corresponding
 \begin_layout Minisec
 meshSurfaceArea
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 meshSurfaceArea
@@ -12673,7 +13107,7 @@ Surface area of a polyhedral mesh.
 \begin_layout Minisec
 trimeshSurfaceArea
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 trimeshSurfaceArea
@@ -12700,7 +13134,7 @@ meshSurfaceArea
 \begin_layout Minisec
 meshFaceAreas
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 meshFaceAreas
@@ -12718,7 +13152,7 @@ Surface area of each face of a mesh.
 \begin_layout Minisec
 meshVolume
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 meshVolume
@@ -12736,7 +13170,7 @@ Volume of the space enclosed by a polygonal mesh.
 \begin_layout Minisec
 meshEdgeLength
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 meshEdgeLength
@@ -12754,7 +13188,7 @@ Lengths of edges of a polygonal or polyhedral mesh.
 \begin_layout Minisec
 meshDihedralAngles
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 meshDihedralAngles
@@ -12772,7 +13206,7 @@ Dihedral angle at edges of a polyhedal mesh.
 \begin_layout Minisec
 meshFacePolygons
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 meshFacePolygons
@@ -12790,7 +13224,7 @@ Returns the set of polygons that constitutes a mesh.
 \begin_layout Minisec
 polyhedronCentroid
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polyhedronCentroid
@@ -12808,7 +13242,7 @@ Computes the centroid of a 3D convex polyhedron.
 \begin_layout Minisec
 tetrahedronVolume
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 tetrahedronVolume
@@ -12826,7 +13260,7 @@ Signed volume of a tetrahedron.
 \begin_layout Minisec
 polyhedronNormalAngle
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polyhedronNormalAngle
@@ -12844,7 +13278,7 @@ Computes the normal angle at a vertex of a 3D polyhedron.
 \begin_layout Minisec
 polyhedronMeanBreadth
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 polyhedronMeanBreadth
@@ -12862,7 +13296,7 @@ Mean breadth of a convex polyhedron.
 \begin_layout Minisec
 trimeshMeanBreadth
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 trimeshMeanBreadth
@@ -12889,7 +13323,7 @@ Describes the relative position of a 3D points with respect to the input
 \begin_layout Minisec
 isPointInMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 isPointInMesh
@@ -12907,7 +13341,7 @@ Checks if a point is inside a 3D mesh.
 \begin_layout Minisec
 distancePointMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 distancePointMesh
@@ -12950,7 +13384,7 @@ The template of functions for reading (or writing) meshes is readMesh_XXX
 \begin_layout Minisec
 readMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 readMesh
@@ -12968,7 +13402,7 @@ Reads mesh data by automatically inferring the file format.
 \begin_layout Minisec
 writeMesh
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 writeMesh
@@ -13168,10 +13602,10 @@ OFF
 \begin_layout Minisec
 readMesh_off
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
-off
+readMesh_off
 \end_layout
 
 \end_inset
@@ -13184,17 +13618,17 @@ Reads mesh data stored in OFF format.
 \end_layout
 
 \begin_layout Minisec
-writeMesh
+writeMesh_off
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
-writeMesh
+writeMesh_off
 \end_layout
 
 \end_inset
 
-_off
+
 \end_layout
 
 \begin_layout Standard
@@ -13361,17 +13795,17 @@ end_header
 \end_layout
 
 \begin_layout Minisec
-readMesh
+readMesh_ply
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
-readMesh
+readMesh_ply
 \end_layout
 
 \end_inset
 
-_ply
+
 \end_layout
 
 \begin_layout Standard
@@ -13379,17 +13813,17 @@ Reads mesh data stored in PLY (Stanford triangle) format.
 \end_layout
 
 \begin_layout Minisec
-writeMesh
+writeMesh_ply
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
-writeMesh
+writeMesh_ply
 \end_layout
 
 \end_inset
 
-_ply
+
 \end_layout
 
 \begin_layout Standard
