@@ -15,7 +15,5 @@ The library is organized into several modules:
 
 * [geom2d](https://github.com/mattools/matGeom/wiki/geom2d "geom2d Wiki page") - General functions in Euclidean plane
 * [polygons2d](https://github.com/mattools/matGeom/wiki/polygons2d "polygons2d Wiki page") - Functions operating on polygons and polylines represented as list of vertices
-* [graphs](https://github.com/mattools/matGeom/wiki/graphs "graphs Wiki page") - Manipulation of geometric graphs
-* [polynomialCurves2d](https://github.com/mattools/matGeom/wiki/polynomialCurves2d "polynomialCurves2d Wiki page") - Representation of smooth polynomial (Bezier) curves
 * [geom3d](https://github.com/mattools/matGeom/wiki/geom3d "geom3d Wiki page") - General functions in 3D Euclidean space
 * [meshes3d](https://github.com/mattools/matGeom/wiki/meshes3d "meshes3d Wiki page") - Manipulation of 3D polygonal meshes (trimesh, quadmesh, or more generic meshes)
