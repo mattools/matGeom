@@ -1,12 +1,12 @@
 function [centroid, area] = polygonCentroid(varargin)
-%POLYGONCENTROID Compute the centroid (center of mass) of a polygon.
+% Computes the centroid (center of mass) of a polygon.
 %
 %   CENTROID = polygonCentroid(POLY)
 %   CENTROID = polygonCentroid(PTX, PTY)
 %   Computes center of mass of a polygon defined by POLY. POLY is a N-by-2
 %   array of double containing coordinates of vertices.
 %
-%   [CENTROID AREA] = polygonCentroid(POLY)
+%   [CENTROID, AREA] = polygonCentroid(POLY)
 %   Also returns the (signed) area of the polygon. 
 %
 %   Example
@@ -20,17 +20,16 @@ function [centroid, area] = polygonCentroid(varargin)
 %     drawPoint(centro, 'bo');
 % 
 %   References
-%   algo adapted from P. Bourke web page
+%     algo adapted from P. Bourke web page.
 %
 %   See also:
-%   polygons2d, polygonArea, polygonSecondAreaMoments, drawPolygon
-%
+%     polygons2d, polygonArea, polygonSecondAreaMoments, drawPolygon
+%     polylineCentroid, centroid
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 05/05/2004.
-%
+% ------
+% Author: David Legland
+% e-mail: david.legland@inrae.fr
+% Created: 2004-05-05
 
 % Algorithme P. Bourke, vectorized version
 
