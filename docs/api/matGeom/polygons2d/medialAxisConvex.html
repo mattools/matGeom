@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of medialAxisConvex</title>
+  <meta name="keywords" content="medialAxisConvex">
+  <meta name="description" content="MEDIALAXISCONVEX Compute medial axis of a convex polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; medialAxisConvex.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>medialAxisConvex
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MEDIALAXISCONVEX Compute medial axis of a convex polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [nodes, edges] = medialAxisConvex(points) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MEDIALAXISCONVEX Compute medial axis of a convex polygon.
+
+   [N, E] = medialAxisConvex(POLYGON);
+   where POLYGON is given as a set of points [x1 y1;x2 y2 ...], returns
+   the medial axis of the polygon as a graph.
+   N is a set of nodes. The first elements of N are the vertices of the
+   original polygon.
+   E is a set of edges, containing indices of source and target nodes.
+   Edges are sorted according to order of creation. Index of first vertex
+   is lower than index of last vertex, i.e. edges always point to newly
+   created nodes.
+
+   Notes:
+   - Is not fully implemented, need more development (usually crashes for
+       polygons with more than 6-7 points...)
+   - Works only for convex polygons.
+   - Complexity is not optimal: this algorithm is O(n*log n), but linear
+   algorithms exist.
+
+   See also:
+   polygons2d, bisector
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 07/07/2005.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>	BISECTOR Return the bisector of two lines, or 3 points.</li><li><a href="../../matGeom/geom2d/createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>	CREATELINE Create a straight line from 2 points, or from other inputs.</li><li><a href="../../matGeom/geom2d/distancePointLine.html" class="code" title="function [dist, pos] = distancePointLine(point, line)">distancePointLine</a>	DISTANCEPOINTLINE Minimum distance between a point and a line.</li><li><a href="../../matGeom/geom2d/intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>	INTERSECTLINES Return all intersection points of N lines in 2D.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [nodes, edges] = medialAxisConvex(points)</a>
+0002 <span class="comment">%MEDIALAXISCONVEX Compute medial axis of a convex polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [N, E] = medialAxisConvex(POLYGON);</span>
+0005 <span class="comment">%   where POLYGON is given as a set of points [x1 y1;x2 y2 ...], returns</span>
+0006 <span class="comment">%   the medial axis of the polygon as a graph.</span>
+0007 <span class="comment">%   N is a set of nodes. The first elements of N are the vertices of the</span>
+0008 <span class="comment">%   original polygon.</span>
+0009 <span class="comment">%   E is a set of edges, containing indices of source and target nodes.</span>
+0010 <span class="comment">%   Edges are sorted according to order of creation. Index of first vertex</span>
+0011 <span class="comment">%   is lower than index of last vertex, i.e. edges always point to newly</span>
+0012 <span class="comment">%   created nodes.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   Notes:</span>
+0015 <span class="comment">%   - Is not fully implemented, need more development (usually crashes for</span>
+0016 <span class="comment">%       polygons with more than 6-7 points...)</span>
+0017 <span class="comment">%   - Works only for convex polygons.</span>
+0018 <span class="comment">%   - Complexity is not optimal: this algorithm is O(n*log n), but linear</span>
+0019 <span class="comment">%   algorithms exist.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See also:</span>
+0022 <span class="comment">%   polygons2d, bisector</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   ---------</span>
+0025 <span class="comment">%   author : David Legland</span>
+0026 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0027 <span class="comment">%   created the 07/07/2005.</span>
+0028 <span class="comment">%</span>
+0029 
+0030 <span class="comment">%   HISTORY</span>
+0031 <span class="comment">%   18/04/2007: fix some typos, note the function to be unimplemented</span>
+0032 
+0033 <span class="comment">%   TODO: is not fully implemented, need to finish it</span>
+0034 
+0035 <span class="comment">% eventually remove the last point if it is the same as the first one</span>
+0036 <span class="keyword">if</span> points(1,:) == points(<span class="keyword">end</span>, :)
+0037     nodes = points(1:end-1, :);
+0038 <span class="keyword">else</span>
+0039     nodes = points;
+0040 <span class="keyword">end</span>
+0041 
+0042 <span class="comment">% special case of triangles:</span>
+0043 <span class="comment">% compute directly the gravity center, and simplify computation.</span>
+0044 <span class="keyword">if</span> size(nodes, 1)==3
+0045     nodes = [nodes; mean(nodes, 1)];
+0046     edges = [1 4;2 4;3 4];
+0047     <span class="keyword">return</span>
+0048 <span class="keyword">end</span>
+0049 
+0050 <span class="comment">% number of nodes, and also of initial rays</span>
+0051 N = size(nodes, 1);
+0052 
+0053 <span class="comment">% create ray of each vertex</span>
+0054 rays = zeros(N, 4);
+0055 rays(1, 1:4) = <a href="../../matGeom/geom2d/bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>(nodes([2 1 N], :));
+0056 rays(N, 1:4) = <a href="../../matGeom/geom2d/bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>(nodes([1 N N-1], :));
+0057 <span class="keyword">for</span> i=2:N-1
+0058     rays(i, 1:4) = <a href="../../matGeom/geom2d/bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>(nodes([i+1, i, i-1], :));
+0059 <span class="keyword">end</span>
+0060 
+0061 <span class="comment">% add indices of edges producing rays (indices of first vertex, second</span>
+0062 <span class="comment">% vertex is obtained by adding one modulo N).</span>
+0063 rayEdges = [[N (1:N-1)]' (1:N)'];
+0064 
+0065 pint = <a href="../../matGeom/geom2d/intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(rays, rays([2:N 1], :));
+0066 
+0067 <span class="comment">% compute the distance between each intersection point and the closest</span>
+0068 <span class="comment">% edge. This distance is used as marker to propagate processing front.</span>
+0069 ti = zeros(N, 1);
+0070 <span class="keyword">for</span> i = 1:N
+0071     line = <a href="../../matGeom/geom2d/createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(points(mod(i-2, N)+1, :), points(i, :));
+0072     ti(i) = abs(<a href="../../matGeom/geom2d/distancePointLine.html" class="code" title="function [dist, pos] = distancePointLine(point, line)">distancePointLine</a>(pint(i,:), line));
+0073 <span class="keyword">end</span>
+0074 
+0075 <span class="comment">% create list of events.</span>
+0076 <span class="comment">% terms are : R1 R2 X Y t0</span>
+0077 <span class="comment">% R1 and R2 are indices of involved rays</span>
+0078 <span class="comment">% X and Y is coordinate of intersection point</span>
+0079 <span class="comment">% t0 is position of point on rays</span>
+0080 events = sortrows([ (1:N)' [2:N 1]' pint ti], 5);
+0081 
+0082 <span class="comment">% initialize edges</span>
+0083 edges = zeros(0, 2);
+0084 
+0085 
+0086 <span class="comment">% -------------------</span>
+0087 <span class="comment">% process each event until there is no more</span>
+0088 
+0089 <span class="comment">% start after index of last vertex, and process N-3 intermediate rays</span>
+0090 <span class="keyword">for</span> i = N+1:2*N-3
+0091     <span class="comment">% add new node at the rays intersection</span>
+0092     nodes(i,:) = events(1, 3:4);
+0093     
+0094     <span class="comment">% add new couple of edges</span>
+0095     edges = [edges; events(1,1) i; events(1,2) i]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0096             
+0097     <span class="comment">% find the two edges creating the new emanating ray</span>
+0098     n1 = rayEdges(events(1, 1), 1);
+0099     n2 = rayEdges(events(1, 2), 2);    
+0100     
+0101     <span class="comment">% create the new ray</span>
+0102     line1 = <a href="../../matGeom/geom2d/createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(nodes(n1, :), nodes(mod(n1,N)+1, :));
+0103     line2 = <a href="../../matGeom/geom2d/createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(nodes(mod(n2,N)+1, :), nodes(n2, :));
+0104     ray0 = <a href="../../matGeom/geom2d/bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>(line1, line2);
+0105     
+0106     <span class="comment">% set its origin to emanating point</span>
+0107     ray0(1:2) = nodes(i, :);
+0108 
+0109     <span class="comment">% add the new ray to the list</span>
+0110     rays = [rays; ray0]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0111     rayEdges(size(rayEdges, 1)+1, 1:2) = [n1 n2];
+0112     
+0113     <span class="comment">% find the two neighbour rays</span>
+0114     ind = sum(ismember(events(:,1:2), events(1, 1:2)), 2) ~= 0;
+0115     ir = unique(events(ind, 1:2));
+0116     ir = ir(~ismember(ir, events(1,1:2)));
+0117     
+0118     <span class="comment">% create new intersections</span>
+0119     pint = <a href="../../matGeom/geom2d/intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(ray0, rays(ir, :));
+0120     ti = abs(<a href="../../matGeom/geom2d/distancePointLine.html" class="code" title="function [dist, pos] = distancePointLine(point, line)">distancePointLine</a>(pint, line1));
+0121     
+0122     <span class="comment">% remove all events involving old intersected rays</span>
+0123     ind = sum(ismember(events(:,1:2), events(1, 1:2)), 2) == 0;
+0124     events = events(ind, :);
+0125     
+0126     <span class="comment">% add the newly formed events</span>
+0127     events = [events; ir(1) i pint(1,:) ti(1); ir(2) i pint(2,:) ti(2)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0128 
+0129     <span class="comment">% and sort them according to 'position' parameter</span>
+0130     events = sortrows(events, 5);
+0131 <span class="keyword">end</span>
+0132 
+0133 <span class="comment">% centroid computation for last 3 rays</span>
+0134 nodes = [nodes; mean(events(:, 3:4))];
+0135 edges = [edges; [unique(events(:,1:2)) ones(3, 1)*(2*N-2)]];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of intersectRayPolygon</title>
+  <meta name="keywords" content="intersectRayPolygon">
+  <meta name="description" content="Intersection points between a ray and a polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; intersectRayPolygon.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>intersectRayPolygon
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Intersection points between a ray and a polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [intersects, edgeIndices] = intersectRayPolygon(ray, poly, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Intersection points between a ray and a polygon.
+
+   PTS = intersectRayPolygon(RAY, POLY)
+   Returns the intersection points of the ray RAY with polygon POLY. 
+   RAY is a 1x4 array containing parametric representation of the ray
+   (in the form [x0 y0 dx dy], see createRay for details). 
+   POLY is a N-by-2 array containing coordinates of polygon vertices.
+   
+   [PTS, INDS] = intersectRayPolygon(...)
+   Also returns index of polygon intersected edge(s). See
+   intersectLinePolygon for details.
+
+   See also
+     rays2d, polygons2d, <a href="intersectLinePolygon.html" class="code" title="function [points, edgeInds, linePositions] = intersectLinePolygon(line, poly, varargin)">intersectLinePolygon</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="intersectLinePolygon.html" class="code" title="function [points, edgeInds, linePositions] = intersectLinePolygon(line, poly, varargin)">intersectLinePolygon</a>	Intersection points between a line and a polygon.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polygonSignature.html" class="code" title="function [res, thetaList] = polygonSignature(poly, varargin)">polygonSignature</a>	POLYGONSIGNATURE Polar signature of a polygon (polar distance to origin).</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [intersects, edgeIndices] = intersectRayPolygon(ray, poly, varargin)</a>
+0002 <span class="comment">% Intersection points between a ray and a polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PTS = intersectRayPolygon(RAY, POLY)</span>
+0005 <span class="comment">%   Returns the intersection points of the ray RAY with polygon POLY.</span>
+0006 <span class="comment">%   RAY is a 1x4 array containing parametric representation of the ray</span>
+0007 <span class="comment">%   (in the form [x0 y0 dx dy], see createRay for details).</span>
+0008 <span class="comment">%   POLY is a N-by-2 array containing coordinates of polygon vertices.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   [PTS, INDS] = intersectRayPolygon(...)</span>
+0011 <span class="comment">%   Also returns index of polygon intersected edge(s). See</span>
+0012 <span class="comment">%   intersectLinePolygon for details.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   See also</span>
+0015 <span class="comment">%     rays2d, polygons2d, intersectLinePolygon</span>
+0016 <span class="comment">%</span>
+0017 
+0018 <span class="comment">% ------</span>
+0019 <span class="comment">% Author: David Legland</span>
+0020 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0021 <span class="comment">% created the 26/01/2010</span>
+0022 
+0023 
+0024 <span class="comment">%   HISTORY</span>
+0025 <span class="comment">%   2010/01/26 creation from intersectLinePolygon</span>
+0026 <span class="comment">%   2013-02-11 also returns edgeIndices</span>
+0027 
+0028 <span class="comment">% compute intersections with supporting line</span>
+0029 [intersects, edgeIndices, pos] = <a href="intersectLinePolygon.html" class="code" title="function [points, edgeInds, linePositions] = intersectLinePolygon(line, poly, varargin)">intersectLinePolygon</a>(ray, poly, varargin{:});
+0030 
+0031 <span class="comment">% keep only intersects with non-negative position on line</span>
+0032 indPos = pos &gt;= 0;
+0033 intersects  = intersects(indPos, :);
+0034 edgeIndices = edgeIndices(indPos);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

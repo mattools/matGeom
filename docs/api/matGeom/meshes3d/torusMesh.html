@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of torusMesh</title>
+  <meta name="keywords" content="torusMesh">
+  <meta name="description" content="Create a 3D mesh representing a torus.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; torusMesh.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>torusMesh
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Create a 3D mesh representing a torus.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = torusMesh(torus, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Create a 3D mesh representing a torus.
+
+   [V, F] = torusMesh(TORUS)
+   Converts the torus in TORUS into a face-vertex quadrangular mesh.
+   TORUS is given by [XC YC ZY R1 R2 THETA PHI]
+   where (XC YZ ZC) is the center of the torus, R1 is the main radius, R2
+   is the radius of the torus section, and (THETA PHI) is the angle of the
+   torus normal vector (both in degrees).
+
+   [V, F] = torusMesh(TORUS, 'nTheta', NT, 'nPhi', NP)
+   Creates a mesh using NP circles, each circle being discretized with NT
+   vertices. Default are 60 for both parameters.
+
+   [V, F] = torusMesh()
+   Creates a mesh representing a default torus.
+
+   Example
+     [v, f] = torusMesh([50 50 50  30 10  30 45]);
+     figure; drawMesh(v, f, 'linestyle', 'none');
+     view(3); axis equal; 
+     lighting gouraud; light;
+
+
+   See also
+     meshes3d, drawTorus, revolutionSurface, <a href="cylinderMesh.html" class="code" title="function varargout = cylinderMesh(cyl, varargin)">cylinderMesh</a>, <a href="sphereMesh.html" class="code" title="function varargout = sphereMesh(sphere, varargin)">sphereMesh</a>
+     <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/circleToPolygon.html" class="code" title="function varargout = circleToPolygon(circle, varargin)">circleToPolygon</a>	CIRCLETOPOLYGON Convert a circle into a series of points.</li><li><a href="../../matGeom/geom3d/revolutionSurface.html" class="code" title="function varargout = revolutionSurface(varargin)">revolutionSurface</a>	REVOLUTIONSURFACE Create a surface of revolution from a planar curve.</li><li><a href="../../matGeom/geom3d/transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li><li><a href="surfToMesh.html" class="code" title="function varargout = surfToMesh(x, y, varargin)">surfToMesh</a>	Convert surface grids into face-vertex mesh.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = torusMesh(torus, varargin)</a>
+0002 <span class="comment">% Create a 3D mesh representing a torus.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V, F] = torusMesh(TORUS)</span>
+0005 <span class="comment">%   Converts the torus in TORUS into a face-vertex quadrangular mesh.</span>
+0006 <span class="comment">%   TORUS is given by [XC YC ZY R1 R2 THETA PHI]</span>
+0007 <span class="comment">%   where (XC YZ ZC) is the center of the torus, R1 is the main radius, R2</span>
+0008 <span class="comment">%   is the radius of the torus section, and (THETA PHI) is the angle of the</span>
+0009 <span class="comment">%   torus normal vector (both in degrees).</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   [V, F] = torusMesh(TORUS, 'nTheta', NT, 'nPhi', NP)</span>
+0012 <span class="comment">%   Creates a mesh using NP circles, each circle being discretized with NT</span>
+0013 <span class="comment">%   vertices. Default are 60 for both parameters.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   [V, F] = torusMesh()</span>
+0016 <span class="comment">%   Creates a mesh representing a default torus.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   Example</span>
+0019 <span class="comment">%     [v, f] = torusMesh([50 50 50  30 10  30 45]);</span>
+0020 <span class="comment">%     figure; drawMesh(v, f, 'linestyle', 'none');</span>
+0021 <span class="comment">%     view(3); axis equal;</span>
+0022 <span class="comment">%     lighting gouraud; light;</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   See also</span>
+0026 <span class="comment">%     meshes3d, drawTorus, revolutionSurface, cylinderMesh, sphereMesh</span>
+0027 <span class="comment">%     drawMesh</span>
+0028 
+0029 <span class="comment">% ------</span>
+0030 <span class="comment">% Author: David Legland</span>
+0031 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0032 <span class="comment">% Created: 2012-10-25,    using Matlab 7.9.0.529 (R2009b)</span>
+0033 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
+0034 
+0035 <span class="comment">%   HISTORY</span>
+0036 <span class="comment">%   2013-04-30 add support for empty argument</span>
+0037 
+0038 
+0039 <span class="comment">%% Extract data for torus</span>
+0040 
+0041 <span class="comment">% check input number</span>
+0042 <span class="keyword">if</span> nargin == 0
+0043     torus = [0 0 0  30 10  0 0];
+0044 <span class="keyword">elseif</span> ischar(torus)
+0045     varargin = [{torus} varargin];
+0046     torus = [0 0 0  30 10  0 0];
+0047 <span class="keyword">end</span>
+0048 
+0049 <span class="keyword">if</span> isnumeric(torus) &amp;&amp; size(torus, 2) ~= 7
+0050     error(<span class="string">'First argument must be a numeric row vector with 7 elements'</span>);
+0051 <span class="keyword">end</span>
+0052 
+0053 center = torus(1:3);
+0054 r1 = torus(4);
+0055 r2 = torus(5);
+0056 
+0057 <span class="keyword">if</span> size(torus, 2) &gt;= 7
+0058     normal = torus(6:7);
+0059 <span class="keyword">end</span>
+0060 
+0061 
+0062 <span class="comment">%% Extract data for discretisation</span>
+0063 
+0064 <span class="comment">% number</span>
+0065 nTheta = 60;
+0066 nPhi = 60;
+0067 <span class="keyword">while</span> length(varargin) &gt; 1
+0068     argName = varargin{1};
+0069     <span class="keyword">switch</span> lower(argName)
+0070         <span class="keyword">case</span> <span class="string">'ntheta'</span>
+0071             nTheta = varargin{2};
+0072         <span class="keyword">case</span> <span class="string">'nphi'</span>
+0073             nPhi = varargin{2};
+0074         <span class="keyword">otherwise</span>
+0075             error(<span class="string">'Unknown optional argument: %s'</span>, argName);
+0076     <span class="keyword">end</span>
+0077     
+0078     varargin(1:2) = [];
+0079 <span class="keyword">end</span>
+0080 
+0081 
+0082 <span class="comment">%% Discretize torus</span>
+0083 
+0084 <span class="comment">% create base circle (duplicate last vertex to manage mesh periodicity)</span>
+0085 circle = <a href="../../matGeom/geom2d/circleToPolygon.html" class="code" title="function varargout = circleToPolygon(circle, varargin)">circleToPolygon</a>([r1 0 r2], nTheta);
+0086 circle = circle([1:end 1], :);
+0087 <span class="comment">% create rotation angle list (duplicate last one to manage mesh periodicity)</span>
+0088 phiList = linspace(0, 2*pi, nPhi + 1);
+0089 [x, y, z] = <a href="../../matGeom/geom3d/revolutionSurface.html" class="code" title="function varargout = revolutionSurface(varargin)">revolutionSurface</a>(circle, phiList);
+0090 
+0091 <span class="comment">% transform torus</span>
+0092 trans = localToGlobal3d([center normal]);
+0093 [x, y, z] = <a href="../../matGeom/geom3d/transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(x, y, z, trans);
+0094 
+0095 <span class="comment">% convert to FV mesh</span>
+0096 [vertices, faces] = <a href="surfToMesh.html" class="code" title="function varargout = surfToMesh(x, y, varargin)">surfToMesh</a>(x, y, z, <span class="string">'xPeriodic'</span>, true, <span class="string">'yPeriodic'</span>, true);
+0097 
+0098 <span class="comment">% format output</span>
+0099 varargout = formatMeshOutput(nargout, vertices, faces);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

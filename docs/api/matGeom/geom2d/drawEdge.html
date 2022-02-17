@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawEdge</title>
+  <meta name="keywords" content="drawEdge">
+  <meta name="description" content="DRAWEDGE Draw an edge given by 2 points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; drawEdge.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawEdge
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWEDGE Draw an edge given by 2 points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawEdge(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWEDGE Draw an edge given by 2 points.
+   
+   drawEdge(x1, y1, x2, y2);
+   draw an edge between the points (x1 y1) and  (x2 y2).
+
+   drawEdge([x1 y1 x2 y2]) ;
+   drawEdge([x1 y1], [x2 y2]);
+   specify data either as bundled edge, or as 2 points
+
+   The function supports 3D edges:
+   drawEdge([x1 y1 z1 x2 y2 z2]);
+   drawEdge([x1 y1 z1], [x2 y2 z2]);
+   drawEdge(x1, y1, z1, x2, y2, z2);
+
+   Arguments can be single values or array of size [N*1]. In this case,
+   the function draws multiple edges.
+
+   H = drawEdge(..., OPT), with OPT being a set of pairwise options, can
+   specify color, line width and so on...
+
+   H = drawEdge(...) return handle(s) to created edges(s)
+
+   See also:
+   <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="drawCenteredEdge.html" class="code" title="function varargout = drawCenteredEdge(varargin)">drawCenteredEdge</a>, <a href="drawLine.html" class="code" title="function varargout = drawLine(lin, varargin)">drawLine</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawRay.html" class="code" title="function varargout = drawRay(ray, varargin)">drawRay</a>	DRAWRAY Draw a ray on the current axis.</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function h = drawEdge_2d(ax, edge, options)</a></li><li><a href="#_sub2" class="code">function h = drawEdge_3d(ax, edge, options)</a></li><li><a href="#_sub3" class="code">function [ax, edge, options] = parseInputArguments(varargin)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawEdge(varargin)</a>
+0002 <span class="comment">%DRAWEDGE Draw an edge given by 2 points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawEdge(x1, y1, x2, y2);</span>
+0005 <span class="comment">%   draw an edge between the points (x1 y1) and  (x2 y2).</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   drawEdge([x1 y1 x2 y2]) ;</span>
+0008 <span class="comment">%   drawEdge([x1 y1], [x2 y2]);</span>
+0009 <span class="comment">%   specify data either as bundled edge, or as 2 points</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   The function supports 3D edges:</span>
+0012 <span class="comment">%   drawEdge([x1 y1 z1 x2 y2 z2]);</span>
+0013 <span class="comment">%   drawEdge([x1 y1 z1], [x2 y2 z2]);</span>
+0014 <span class="comment">%   drawEdge(x1, y1, z1, x2, y2, z2);</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Arguments can be single values or array of size [N*1]. In this case,</span>
+0017 <span class="comment">%   the function draws multiple edges.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   H = drawEdge(..., OPT), with OPT being a set of pairwise options, can</span>
+0020 <span class="comment">%   specify color, line width and so on...</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   H = drawEdge(...) return handle(s) to created edges(s)</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   See also:</span>
+0025 <span class="comment">%   edges2d, drawCenteredEdge, drawLine</span>
+0026 <span class="comment">%</span>
+0027 
+0028 <span class="comment">%   ---------</span>
+0029 <span class="comment">%   author : David Legland</span>
+0030 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0031 <span class="comment">%   created the 31/10/2003.</span>
+0032 <span class="comment">%</span>
+0033 
+0034 <span class="comment">%   HISTORY</span>
+0035 <span class="comment">%   19/02/2004 add support for arrays of edges.</span>
+0036 <span class="comment">%   31/03/2004 change format of edges to [P1 P2] and variants.</span>
+0037 <span class="comment">%   28/11/2004 add support for 3D edges</span>
+0038 <span class="comment">%   01/08/2005 add support for drawing options</span>
+0039 <span class="comment">%   31/05/2007 update doc, and code makeup</span>
+0040 <span class="comment">%   03/08/2010 re-organize code</span>
+0041 
+0042 <span class="comment">% separate edge and optional arguments</span>
+0043 [ax, edge, options] = <a href="#_sub3" class="code" title="subfunction [ax, edge, options] = parseInputArguments(varargin)">parseInputArguments</a>(varargin{:});
+0044 
+0045 <span class="comment">% save hold state</span>
+0046 holdState = ishold(ax);
+0047 hold(ax, <span class="string">'on'</span>);
+0048 
+0049 <span class="comment">% draw the edges</span>
+0050 <span class="keyword">if</span> size(edge, 2) == 4
+0051     h = <a href="#_sub1" class="code" title="subfunction h = drawEdge_2d(ax, edge, options)">drawEdge_2d</a>(ax, edge, options);
+0052 <span class="keyword">else</span>
+0053     h = <a href="#_sub2" class="code" title="subfunction h = drawEdge_3d(ax, edge, options)">drawEdge_3d</a>(ax, edge, options);
+0054 <span class="keyword">end</span>
+0055 
+0056 <span class="comment">% restore hold state</span>
+0057 <span class="keyword">if</span> ~holdState
+0058     hold(ax, <span class="string">'off'</span>);
+0059 <span class="keyword">end</span>
+0060 
+0061 <span class="comment">% eventually return handle to created edges</span>
+0062 <span class="keyword">if</span> nargout &gt; 0
+0063     varargout = {h};
+0064 <span class="keyword">end</span>
+0065 
+0066 
+0067 <a name="_sub1" href="#_subfunctions" class="code">function h = drawEdge_2d(ax, edge, options)</a>
+0068 
+0069 h = -1 * ones(size(edge, 1), 1);
+0070 
+0071 <span class="keyword">for</span> i = 1:size(edge, 1)
+0072     <span class="keyword">if</span> isnan(edge(i,1))
+0073         <span class="keyword">continue</span>;
+0074     <span class="keyword">end</span>
+0075     
+0076     h(i) = plot(ax, edge(i, [1 3]), edge(i, [2 4]), options{:});
+0077 <span class="keyword">end</span>
+0078 
+0079 
+0080 <a name="_sub2" href="#_subfunctions" class="code">function h = drawEdge_3d(ax, edge, options)</a>
+0081 
+0082 h = -1 * ones(size(edge, 1), 1);
+0083 
+0084 <span class="keyword">for</span> i = 1:size(edge, 1)
+0085     <span class="keyword">if</span> isnan(edge(i,1))
+0086         <span class="keyword">continue</span>;
+0087     <span class="keyword">end</span>
+0088     
+0089     h(i) = plot3(ax, edge(i, [1 4]), edge(i, [2 5]), edge(i, [3 6]), options{:});
+0090 <span class="keyword">end</span>
+0091 
+0092     
+0093 <a name="_sub3" href="#_subfunctions" class="code">function [ax, edge, options] = parseInputArguments(varargin)</a>
+0094 
+0095 <span class="comment">% extract handle of axis to draw on</span>
+0096 <span class="keyword">if</span> isAxisHandle(varargin{1})
+0097     ax = varargin{1};
+0098     varargin(1) = [];
+0099 <span class="keyword">else</span>
+0100     ax = gca;
+0101 <span class="keyword">end</span>
+0102 
+0103 <span class="comment">% find the number of arguments defining edges</span>
+0104 nbVal = 0;
+0105 <span class="keyword">for</span> i = 1:length(varargin)
+0106     <span class="keyword">if</span> isnumeric(varargin{i})
+0107         nbVal = nbVal+1;
+0108     <span class="keyword">else</span>
+0109         <span class="comment">% stop at the first non-numeric value</span>
+0110         <span class="keyword">break</span>;
+0111     <span class="keyword">end</span>
+0112 <span class="keyword">end</span>
+0113 
+0114 <span class="comment">% extract drawing options</span>
+0115 options = varargin(nbVal+1:end);
+0116 
+0117 <span class="comment">% ensure drawing options have correct format</span>
+0118 <span class="keyword">if</span> length(options) == 1
+0119     options = [{<span class="string">'color'</span>}, options];
+0120 <span class="keyword">end</span>
+0121 
+0122 <span class="comment">% extract edges characteristics</span>
+0123 <span class="keyword">switch</span> nbVal
+0124     <span class="keyword">case</span> 1
+0125         <span class="comment">% all parameters in a single array</span>
+0126         edge = varargin{1};
+0127         
+0128     <span class="keyword">case</span> 2
+0129         <span class="comment">% parameters are two points, or two arrays of points, of size N*2.</span>
+0130         p1 = varargin{1};
+0131         p2 = varargin{2};
+0132         edge = [p1 p2];
+0133         
+0134     <span class="keyword">case</span> 4
+0135         <span class="comment">% parameters are 4 parameters of the edge : x1 y1 x2 and y2</span>
+0136         edge = [varargin{1} varargin{2} varargin{3} varargin{4}];
+0137         
+0138     <span class="keyword">case</span> 6
+0139         <span class="comment">% parameters are 6 parameters of the edge : x1 y1 z1 x2 y2 and z2</span>
+0140         edge = [varargin{1} varargin{2} varargin{3} varargin{4} varargin{5} varargin{6}];
+0141         
+0142     <span class="keyword">otherwise</span>
+0143         error(<span class="string">'drawEdge:WrongNumberOfParameters'</span>, <span class="string">'Wrong number of parameters'</span>);
+0144 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

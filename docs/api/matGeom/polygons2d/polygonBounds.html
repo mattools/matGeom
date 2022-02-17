@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polygonBounds</title>
+  <meta name="keywords" content="polygonBounds">
+  <meta name="description" content="Computes the bounding box of a polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; polygonBounds.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polygonBounds
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Computes the bounding box of a polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function box = polygonBounds(polygon) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Computes the bounding box of a polygon.
+
+   BOX = polygonBounds(POLY);
+   Returns the bounding box of the polygon. 
+   BOX has the format: [XMIN XMAX YMIN YMAX].
+
+   Input polygon POLY is as a N-by-2 array containing coordinates of each
+   vertex. 
+   Multiple polygons can be specified either by inserting NaN rows between
+   vertex coordinates, or by using a cell array, each cell containing the
+   vertex coordinates of a polygon loop. 
+
+   See also
+   polygons2d, boxes2d, boundingBox</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="splitPolygons.html" class="code" title="function polygons = splitPolygons(polygon)">splitPolygons</a>	SPLITPOLYGONS Convert a NaN separated polygon list to a cell array of polygons.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="randomPointInPolygon.html" class="code" title="function points = randomPointInPolygon(poly, varargin)">randomPointInPolygon</a>	RANDOMPOINTINPOLYGON Generate random point(s) in a polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function box = polygonBounds(polygon)</a>
+0002 <span class="comment">% Computes the bounding box of a polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   BOX = polygonBounds(POLY);</span>
+0005 <span class="comment">%   Returns the bounding box of the polygon.</span>
+0006 <span class="comment">%   BOX has the format: [XMIN XMAX YMIN YMAX].</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Input polygon POLY is as a N-by-2 array containing coordinates of each</span>
+0009 <span class="comment">%   vertex.</span>
+0010 <span class="comment">%   Multiple polygons can be specified either by inserting NaN rows between</span>
+0011 <span class="comment">%   vertex coordinates, or by using a cell array, each cell containing the</span>
+0012 <span class="comment">%   vertex coordinates of a polygon loop.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   See also</span>
+0015 <span class="comment">%   polygons2d, boxes2d, boundingBox</span>
+0016 <span class="comment">%</span>
+0017 
+0018 <span class="comment">% ------</span>
+0019 <span class="comment">% Author: David Legland</span>
+0020 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0021 <span class="comment">% Created: 2007-10-12,    using Matlab 7.4.0.287 (R2007a)</span>
+0022 <span class="comment">% Copyright 2007 INRA - Cepia software platform</span>
+0023 
+0024 
+0025 <span class="comment">% transform as a cell array of simple polygons</span>
+0026 polygons = <a href="splitPolygons.html" class="code" title="function polygons = splitPolygons(polygon)">splitPolygons</a>(polygon);
+0027 
+0028 <span class="comment">% init extreme values</span>
+0029 xmin = inf;
+0030 xmax = -inf;
+0031 ymin = inf;
+0032 ymax = -inf;
+0033 
+0034 <span class="comment">% iterate over loops</span>
+0035 <span class="keyword">for</span> i = 1:length(polygons)
+0036     polygon = polygons{i};
+0037     
+0038     xmin = min(xmin, min(polygon(:,1)));
+0039     xmax = max(xmax, max(polygon(:,1)));
+0040     ymin = min(ymin, min(polygon(:,2)));
+0041     ymax = max(ymax, max(polygon(:,2)));
+0042 <span class="keyword">end</span>
+0043 
+0044 <span class="comment">% format output</span>
+0045 box = [xmin xmax ymin ymax];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

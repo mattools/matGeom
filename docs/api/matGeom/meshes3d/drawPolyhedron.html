@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawPolyhedron</title>
+  <meta name="keywords" content="drawPolyhedron">
+  <meta name="description" content="DRAWPOLYHEDRON Draw polyhedron defined by vertices and faces.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; drawPolyhedron.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawPolyhedron
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWPOLYHEDRON Draw polyhedron defined by vertices and faces.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawPolyhedron(nodes, faces, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWPOLYHEDRON Draw polyhedron defined by vertices and faces.
+
+   drawPolyhedron(NODES, FACES)
+   Draws the polyhedron defined by vertices NODES and the faces FACES. 
+   NODES is a NV-by-3 array containing coordinates of vertices, and FACES
+   is either a NF-by3 or NF-by-4 array containing indices of vertices of
+   the triangular or rectangular faces.
+   FACES can also be a cell array, in the content of each cell is an array
+   of indices to the nodes of the current face. Faces can have different
+   number of vertices.
+   
+   H = drawPolyhedron(...);
+   Also returns a handle to the created patche.
+
+   Example:
+   [n f] = createSoccerBall;
+   drawPolyhedron(n, f);
+
+   See also:
+   <a href="polyhedra.html" class="code" title="function polyhedra(varargin)">polyhedra</a>, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a>, drawPolygon
+
+   ---------
+
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 10/02/2005.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawPolyhedron(nodes, faces, varargin)</a>
+0002 <span class="comment">%DRAWPOLYHEDRON Draw polyhedron defined by vertices and faces.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawPolyhedron(NODES, FACES)</span>
+0005 <span class="comment">%   Draws the polyhedron defined by vertices NODES and the faces FACES.</span>
+0006 <span class="comment">%   NODES is a NV-by-3 array containing coordinates of vertices, and FACES</span>
+0007 <span class="comment">%   is either a NF-by3 or NF-by-4 array containing indices of vertices of</span>
+0008 <span class="comment">%   the triangular or rectangular faces.</span>
+0009 <span class="comment">%   FACES can also be a cell array, in the content of each cell is an array</span>
+0010 <span class="comment">%   of indices to the nodes of the current face. Faces can have different</span>
+0011 <span class="comment">%   number of vertices.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   H = drawPolyhedron(...);</span>
+0014 <span class="comment">%   Also returns a handle to the created patche.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example:</span>
+0017 <span class="comment">%   [n f] = createSoccerBall;</span>
+0018 <span class="comment">%   drawPolyhedron(n, f);</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   See also:</span>
+0021 <span class="comment">%   polyhedra, drawMesh, drawPolygon</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   ---------</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   author : David Legland</span>
+0026 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0027 <span class="comment">%   created the 10/02/2005.</span>
+0028 <span class="comment">%</span>
+0029 
+0030 <span class="comment">%   HISTORY</span>
+0031 <span class="comment">%   07/11/2005 update doc.</span>
+0032 <span class="comment">%   04/01/2007 typo</span>
+0033 <span class="comment">%   18/01/2007 add support for 2D polyhedra (&quot;nodes&quot; is N-by-2 array), and</span>
+0034 <span class="comment">%       make 'cnodes' a list of points instead of a list of indices</span>
+0035 <span class="comment">%   14/08/2007 add comment, add support for NaN in faces (complex polygons)</span>
+0036 <span class="comment">%   14/09/2007 rename as drawPolyhedron</span>
+0037 <span class="comment">%   16/10/2008 better support for colors</span>
+0038 <span class="comment">%   27/07/2010 copy to 'drawMesh'</span>
+0039 
+0040 
+0041 <span class="comment">%% Initialisations</span>
+0042 
+0043 
+0044 <span class="comment">% process input arguments</span>
+0045 <span class="keyword">switch</span> length(varargin)
+0046     <span class="keyword">case</span> 0 
+0047         <span class="comment">% default color is red</span>
+0048         varargin = {<span class="string">'facecolor'</span>, [1 0 0]};
+0049     <span class="keyword">case</span> 1
+0050         <span class="comment">% use argument as color for faces</span>
+0051         varargin = {<span class="string">'facecolor'</span>, varargin{1}};
+0052     <span class="keyword">otherwise</span>
+0053         <span class="comment">% otherwise do nothing</span>
+0054 <span class="keyword">end</span>
+0055 
+0056 <span class="comment">% overwrites on current figure</span>
+0057 hold on;
+0058 
+0059 <span class="comment">% if nodes are 2D points, add a z=0 coordinate</span>
+0060 <span class="keyword">if</span> size(nodes, 2) == 2
+0061     nodes(1,3) = 0;
+0062 <span class="keyword">end</span>
+0063 
+0064 
+0065 <span class="comment">%% main loop : for each face</span>
+0066 
+0067 <span class="keyword">if</span> iscell(faces)
+0068     <span class="comment">% array FACES is a cell array</span>
+0069     h = zeros(length(faces(:)), 1);
+0070 
+0071     <span class="keyword">for</span> f = 1:length(faces(:))
+0072         <span class="comment">% get nodes of the cell</span>
+0073         face = faces{f};
+0074 
+0075         <span class="keyword">if</span> sum(isnan(face))~=0
+0076             <span class="comment">% Special processing in case of multiple polygonal face.</span>
+0077             <span class="comment">% each polygonal loop is separated by a NaN.</span>
+0078             
+0079             <span class="comment">% find indices of loops breaks</span>
+0080             inds = find(isnan(face));
+0081             
+0082             <span class="comment">% replace NaNs by index of first vertex of each polygon</span>
+0083             face(inds(2:end))   = face(inds(1:end-1)+1);
+0084             face(inds(1))       = face(1);
+0085             face(length(face)+1)= face(inds(end)+1);            
+0086         <span class="keyword">end</span>
+0087         
+0088         <span class="comment">% draw current face</span>
+0089         cnodes  = nodes(face, :);
+0090         h(f)    = patch(cnodes(:, 1), cnodes(:, 2), cnodes(:, 3), [1 0 0]);
+0091     <span class="keyword">end</span>
+0092 
+0093 <span class="keyword">else</span>
+0094     <span class="comment">% array FACES is a NC*NV indices array, with NV : number of vertices of</span>
+0095     <span class="comment">% each face, and NC number of faces</span>
+0096     h = zeros(size(faces, 1), 1);
+0097     <span class="keyword">for</span> f = 1:size(faces, 1)
+0098         <span class="comment">% get nodes of the cell</span>
+0099         cnodes = nodes(faces(f,:)', :);
+0100         h(f) = patch(cnodes(:, 1), cnodes(:, 2), cnodes(:, 3), [1 0 0]);
+0101     <span class="keyword">end</span>
+0102 <span class="keyword">end</span>
+0103 
+0104 <span class="comment">% set up drawing options</span>
+0105 <span class="keyword">if</span> ~isempty(varargin)
+0106     set(h, varargin{:});
+0107 <span class="keyword">end</span>
+0108 
+0109 <span class="comment">% format output parameters</span>
+0110 <span class="keyword">if</span> nargout &gt; 0
+0111     varargout = {h};
+0112 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

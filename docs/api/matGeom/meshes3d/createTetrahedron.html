@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createTetrahedron</title>
+  <meta name="keywords" content="createTetrahedron">
+  <meta name="description" content="CREATETETRAHEDRON Create a 3D mesh representing a tetrahedron.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; createTetrahedron.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createTetrahedron
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATETETRAHEDRON Create a 3D mesh representing a tetrahedron.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = createTetrahedron() </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATETETRAHEDRON Create a 3D mesh representing a tetrahedron.
+
+   [V, E, F] = createTetrahedron
+   create a simple tetrahedron, using mesh representation. The tetrahedron
+   is inscribed in the unit cube.
+   V is a 4-by-3 array with vertex coordinates, 
+   E is a 6-by-2 array containing indices of neighbour vertices,
+   F is a 4-by-3 array containing vertices array of each (triangular) face.
+
+   [V, F] = createTetrahedron;
+   Returns only the vertices and the faces.
+
+   MESH = createTetrahedron;
+   Returns the data as a mesh structure, with fields 'vertices', 'edges'
+   and 'faces'.
+
+
+   Example
+   % Create and display a tetrahedron
+   [V, E, F] = createTetrahedron;
+   drawMesh(V, F);
+
+   See also
+   meshes3d, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a>
+   <a href="createCube.html" class="code" title="function varargout = createCube()">createCube</a>, <a href="createOctahedron.html" class="code" title="function varargout = createOctahedron()">createOctahedron</a>, <a href="createDodecahedron.html" class="code" title="function varargout = createDodecahedron()">createDodecahedron</a>, <a href="createIcosahedron.html" class="code" title="function varargout = createIcosahedron()">createIcosahedron</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = createTetrahedron()</a>
+0002 <span class="comment">%CREATETETRAHEDRON Create a 3D mesh representing a tetrahedron.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V, E, F] = createTetrahedron</span>
+0005 <span class="comment">%   create a simple tetrahedron, using mesh representation. The tetrahedron</span>
+0006 <span class="comment">%   is inscribed in the unit cube.</span>
+0007 <span class="comment">%   V is a 4-by-3 array with vertex coordinates,</span>
+0008 <span class="comment">%   E is a 6-by-2 array containing indices of neighbour vertices,</span>
+0009 <span class="comment">%   F is a 4-by-3 array containing vertices array of each (triangular) face.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   [V, F] = createTetrahedron;</span>
+0012 <span class="comment">%   Returns only the vertices and the faces.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   MESH = createTetrahedron;</span>
+0015 <span class="comment">%   Returns the data as a mesh structure, with fields 'vertices', 'edges'</span>
+0016 <span class="comment">%   and 'faces'.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   Example</span>
+0020 <span class="comment">%   % Create and display a tetrahedron</span>
+0021 <span class="comment">%   [V, E, F] = createTetrahedron;</span>
+0022 <span class="comment">%   drawMesh(V, F);</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   See also</span>
+0025 <span class="comment">%   meshes3d, drawMesh</span>
+0026 <span class="comment">%   createCube, createOctahedron, createDodecahedron, createIcosahedron</span>
+0027 
+0028 <span class="comment">%   ---------</span>
+0029 <span class="comment">%   author : David Legland</span>
+0030 <span class="comment">%   e-mail: david.legland@inra.fr</span>
+0031 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0032 <span class="comment">%   created the 21/03/2005.</span>
+0033 <span class="comment">%</span>
+0034 
+0035 <span class="comment">%   HISTORY</span>
+0036 <span class="comment">%   04/01/2007: remove unused variables</span>
+0037 
+0038 x0 = 0; dx= 1;
+0039 y0 = 0; dy= 1;
+0040 z0 = 0; dz= 1;
+0041 
+0042 nodes = [<span class="keyword">...</span>
+0043     x0 y0 z0; <span class="keyword">...</span>
+0044     x0+dx y0+dy z0; <span class="keyword">...</span>
+0045     x0+dx y0 z0+dz; <span class="keyword">...</span>
+0046     x0 y0+dy z0+dz];
+0047 
+0048 edges = [1 2;1 3;1 4;2 3;3 4;4 2];
+0049 
+0050 faces = [1 2 3;1 3 4;1 4 2;4 3 2];
+0051 
+0052 
+0053 <span class="comment">% format output</span>
+0054 varargout = formatMeshOutput(nargout, nodes, edges, faces);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

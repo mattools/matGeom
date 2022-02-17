@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polyhedronMeanBreadth</title>
+  <meta name="keywords" content="polyhedronMeanBreadth">
+  <meta name="description" content="POLYHEDRONMEANBREADTH Mean breadth of a convex polyhedron.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; polyhedronMeanBreadth.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polyhedronMeanBreadth
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYHEDRONMEANBREADTH Mean breadth of a convex polyhedron.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function breadth = polyhedronMeanBreadth(vertices, edges, faces) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLYHEDRONMEANBREADTH Mean breadth of a convex polyhedron.
+
+   BREADTH = polyhedronMeanBreadth(V, E, F)
+   Return the mean breadth (average of polyhedron caliper diameter over
+   all direction) of a convex polyhedron.
+
+   The mean breadth is computed using the sum, over the edges of the
+   polyhedron, of the edge dihedral angles multiplied by the edge length, 
+   the final sum being divided by (4*PI).
+
+   Note: the function assumes that the faces are correctly oriented. The
+   face vertices should be indexed counter-clockwise when considering the
+   supporting plane of the plane, with the outer normal oriented outwards
+   of the polyhedron.
+
+   Typical values for classical polyhedra are:
+     cube side a               breadth = (3/2)*a
+     cuboid sides a, b, c      breadth = (a+b+c)/2
+     tetrahedron side a        breadth = 0.9123*a
+     octaedron side a          beradth = 1.175*a
+     dodecahedron, side a      breadth = 15*arctan(2)*a/(2*pi)
+     icosaehdron, side a       breadth = 15*arcsin(2/3)*a/(2*pi)
+
+   Example
+   [v e f] = createCube;
+   polyhedronMeanBreadth(v, e, f)
+   ans = 
+       1.5
+
+   See also
+   meshes3d, <a href="meshEdgeFaces.html" class="code" title="function edgeFaces = meshEdgeFaces(vertices, edges, faces) %#ok<INUSL>">meshEdgeFaces</a>, <a href="meshDihedralAngles.html" class="code" title="function alpha = meshDihedralAngles(vertices, edges, faces)">meshDihedralAngles</a>, <a href="checkMeshAdjacentFaces.html" class="code" title="function checkMeshAdjacentFaces(vertices, edges, faces)">checkMeshAdjacentFaces</a>
+   <a href="trimeshMeanBreadth.html" class="code" title="function mb = trimeshMeanBreadth(vertices, faces)">trimeshMeanBreadth</a>
+
+   References
+   Stoyan D., Kendall W.S., Mecke J. (1995) &quot;Stochastic Geometry and its
+       Applications&quot;, John Wiley and Sons, p. 26
+   Ohser, J., Muescklich, F. (2000) &quot;Statistical Analysis of
+       Microstructures in Materials Sciences&quot;, John Wiley and Sons, p.352</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="meshDihedralAngles.html" class="code" title="function alpha = meshDihedralAngles(vertices, edges, faces)">meshDihedralAngles</a>	MESHDIHEDRALANGLES Dihedral at edges of a polyhedal mesh.</li><li><a href="meshEdgeLength.html" class="code" title="function lengths = meshEdgeLength(vertices, edges, faces) %#ok<INUSD>">meshEdgeLength</a>	MESHEDGELENGTH Lengths of edges of a polygonal or polyhedral mesh.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function breadth = polyhedronMeanBreadth(vertices, edges, faces)</a>
+0002 <span class="comment">%POLYHEDRONMEANBREADTH Mean breadth of a convex polyhedron.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   BREADTH = polyhedronMeanBreadth(V, E, F)</span>
+0005 <span class="comment">%   Return the mean breadth (average of polyhedron caliper diameter over</span>
+0006 <span class="comment">%   all direction) of a convex polyhedron.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   The mean breadth is computed using the sum, over the edges of the</span>
+0009 <span class="comment">%   polyhedron, of the edge dihedral angles multiplied by the edge length,</span>
+0010 <span class="comment">%   the final sum being divided by (4*PI).</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Note: the function assumes that the faces are correctly oriented. The</span>
+0013 <span class="comment">%   face vertices should be indexed counter-clockwise when considering the</span>
+0014 <span class="comment">%   supporting plane of the plane, with the outer normal oriented outwards</span>
+0015 <span class="comment">%   of the polyhedron.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   Typical values for classical polyhedra are:</span>
+0018 <span class="comment">%     cube side a               breadth = (3/2)*a</span>
+0019 <span class="comment">%     cuboid sides a, b, c      breadth = (a+b+c)/2</span>
+0020 <span class="comment">%     tetrahedron side a        breadth = 0.9123*a</span>
+0021 <span class="comment">%     octaedron side a          beradth = 1.175*a</span>
+0022 <span class="comment">%     dodecahedron, side a      breadth = 15*arctan(2)*a/(2*pi)</span>
+0023 <span class="comment">%     icosaehdron, side a       breadth = 15*arcsin(2/3)*a/(2*pi)</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   Example</span>
+0026 <span class="comment">%   [v e f] = createCube;</span>
+0027 <span class="comment">%   polyhedronMeanBreadth(v, e, f)</span>
+0028 <span class="comment">%   ans =</span>
+0029 <span class="comment">%       1.5</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%   See also</span>
+0032 <span class="comment">%   meshes3d, meshEdgeFaces, meshDihedralAngles, checkMeshAdjacentFaces</span>
+0033 <span class="comment">%   trimeshMeanBreadth</span>
+0034 <span class="comment">%</span>
+0035 <span class="comment">%   References</span>
+0036 <span class="comment">%   Stoyan D., Kendall W.S., Mecke J. (1995) &quot;Stochastic Geometry and its</span>
+0037 <span class="comment">%       Applications&quot;, John Wiley and Sons, p. 26</span>
+0038 <span class="comment">%   Ohser, J., Muescklich, F. (2000) &quot;Statistical Analysis of</span>
+0039 <span class="comment">%       Microstructures in Materials Sciences&quot;, John Wiley and Sons, p.352</span>
+0040 
+0041 <span class="comment">% ------</span>
+0042 <span class="comment">% Author: David Legland</span>
+0043 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0044 <span class="comment">% Created: 2010-10-04,    using Matlab 7.9.0.529 (R2009b)</span>
+0045 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0046 
+0047 
+0048 <span class="comment">% compute dihedral angle of each edge</span>
+0049 alpha = <a href="meshDihedralAngles.html" class="code" title="function alpha = meshDihedralAngles(vertices, edges, faces)">meshDihedralAngles</a>(vertices, edges, faces);
+0050 
+0051 <span class="comment">% compute length of each edge</span>
+0052 lengths = <a href="meshEdgeLength.html" class="code" title="function lengths = meshEdgeLength(vertices, edges, faces) %#ok<INUSD>">meshEdgeLength</a>(vertices, edges);
+0053 
+0054 <span class="comment">% compute product of length by angles</span>
+0055 breadth = sum(alpha.*lengths)/(4*pi);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

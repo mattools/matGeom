@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of mergeClosePoints</title>
+  <meta name="keywords" content="mergeClosePoints">
+  <meta name="description" content="MERGECLOSEPOINTS Merge points that are closer than a given distance.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; mergeClosePoints.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>mergeClosePoints
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MERGECLOSEPOINTS Merge points that are closer than a given distance.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function points = mergeClosePoints(points, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MERGECLOSEPOINTS Merge points that are closer than a given distance.
+
+   PTS2 = mergeClosePoints(PTS, DIST)
+   Remove points in the array PTS such that no points closer than the
+   distance DIST remain in the array.
+
+   PTS2 = mergeClosePoints(PTS)
+   If the distance is not specified, the default value 1e-14 is used.
+
+
+   Example
+     pts = rand(200, 2);
+     pts2 = mergeClosePoints(pts, .1);
+     figure; drawPoint(pts, '.');
+     hold on; drawPoint(pts2, 'mo');
+
+   See also
+     <a href="points2d.html" class="code" title="function points2d">points2d</a>, removeMultipleVertices
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2013-10-04,    using Matlab 7.9.0.529 (R2009b)
+ Copyright 2013 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>	DISTANCEPOINTS Compute distance between two points.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function points = mergeClosePoints(points, varargin)</a>
+0002 <span class="comment">%MERGECLOSEPOINTS Merge points that are closer than a given distance.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PTS2 = mergeClosePoints(PTS, DIST)</span>
+0005 <span class="comment">%   Remove points in the array PTS such that no points closer than the</span>
+0006 <span class="comment">%   distance DIST remain in the array.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   PTS2 = mergeClosePoints(PTS)</span>
+0009 <span class="comment">%   If the distance is not specified, the default value 1e-14 is used.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%     pts = rand(200, 2);</span>
+0014 <span class="comment">%     pts2 = mergeClosePoints(pts, .1);</span>
+0015 <span class="comment">%     figure; drawPoint(pts, '.');</span>
+0016 <span class="comment">%     hold on; drawPoint(pts2, 'mo');</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   See also</span>
+0019 <span class="comment">%     points2d, removeMultipleVertices</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">% ------</span>
+0022 <span class="comment">% Author: David Legland</span>
+0023 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0024 <span class="comment">% Created: 2013-10-04,    using Matlab 7.9.0.529 (R2009b)</span>
+0025 <span class="comment">% Copyright 2013 INRA - Cepia Software Platform.</span>
+0026 
+0027 <span class="comment">% default values</span>
+0028 minDist = 1e-14;
+0029 <span class="keyword">if</span> ~isempty(varargin)
+0030     minDist = varargin{1};
+0031 <span class="keyword">end</span>
+0032 
+0033 i = 1;
+0034 <span class="keyword">while</span> i &lt; size(points, 1)
+0035     dist = <a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(points(i,:), points);
+0036     inds = dist &lt; minDist;
+0037     inds(i) = 0;
+0038     
+0039     points(inds, :) = [];
+0040     
+0041     <span class="comment">% switch to next point</span>
+0042     i = i + 1;
+0043 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polygonContains</title>
+  <meta name="keywords" content="polygonContains">
+  <meta name="description" content="POLYGONCONTAINS Test if a point is contained in a multiply connected polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; polygonContains.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polygonContains
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYGONCONTAINS Test if a point is contained in a multiply connected polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = polygonContains(poly, point) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLYGONCONTAINS Test if a point is contained in a multiply connected polygon.
+
+   B = polygonContains(POLYGON, POINT);
+   Returns TRUE if the (possibly multi-connected) polygon POLYGON contains
+   the point(s) given by POINT.
+   This is an extension of the Matlab function inpolygon for the case of
+   polygons with holes.
+
+   Example
+   POLY = [0 0; 10 0;10 10;0 10;NaN NaN;3 3;3 7;7 7;7 3];
+   PT = [5 1;5 4];
+   polygonContains(POLY, PT);
+   ans =
+        1
+        0
+
+   See also
+   polygons2d, inpolygon, <a href="isPointInPolygon.html" class="code" title="function b = isPointInPolygon(point, poly)">isPointInPolygon</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>	Compute the signed area of a polygon.</li><li><a href="splitPolygons.html" class="code" title="function polygons = splitPolygons(polygon)">splitPolygons</a>	SPLITPOLYGONS Convert a NaN separated polygon list to a cell array of polygons.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="randomPointInPolygon.html" class="code" title="function points = randomPointInPolygon(poly, varargin)">randomPointInPolygon</a>	RANDOMPOINTINPOLYGON Generate random point(s) in a polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = polygonContains(poly, point)</a>
+0002 <span class="comment">%POLYGONCONTAINS Test if a point is contained in a multiply connected polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   B = polygonContains(POLYGON, POINT);</span>
+0005 <span class="comment">%   Returns TRUE if the (possibly multi-connected) polygon POLYGON contains</span>
+0006 <span class="comment">%   the point(s) given by POINT.</span>
+0007 <span class="comment">%   This is an extension of the Matlab function inpolygon for the case of</span>
+0008 <span class="comment">%   polygons with holes.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Example</span>
+0011 <span class="comment">%   POLY = [0 0; 10 0;10 10;0 10;NaN NaN;3 3;3 7;7 7;7 3];</span>
+0012 <span class="comment">%   PT = [5 1;5 4];</span>
+0013 <span class="comment">%   polygonContains(POLY, PT);</span>
+0014 <span class="comment">%   ans =</span>
+0015 <span class="comment">%        1</span>
+0016 <span class="comment">%        0</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   See also</span>
+0019 <span class="comment">%   polygons2d, inpolygon, isPointInPolygon</span>
+0020 
+0021 <span class="comment">% ------</span>
+0022 <span class="comment">% Author: David Legland</span>
+0023 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0024 <span class="comment">% Created: 2007-10-11,    using Matlab 7.4.0.287 (R2007a)</span>
+0025 <span class="comment">% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0026 
+0027 
+0028 <span class="comment">% transform as a cell array of simple polygons</span>
+0029 polygons = <a href="splitPolygons.html" class="code" title="function polygons = splitPolygons(polygon)">splitPolygons</a>(poly);
+0030 N = length(polygons);
+0031 Np = size(point, 1);
+0032 
+0033 <span class="comment">% compute orientation of polygon, and format to have Np*N matrix</span>
+0034 areas = zeros(N, 1);
+0035 <span class="keyword">for</span> i = 1:N
+0036     areas(i) = <a href="polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>(polygons{i});
+0037 <span class="keyword">end</span>
+0038 ccw = areas &gt; 0;
+0039 ccw = repmat(ccw', Np, 1);
+0040 
+0041 <span class="comment">% test if point inside each polygon</span>
+0042 in = false(size(point, 1), N);
+0043 <span class="keyword">for</span> i = 1:N
+0044     poly = polygons{i};
+0045     in(:, i) = inpolygon(point(:,1), point(:,2), poly(:,1), poly(:,2));
+0046 <span class="keyword">end</span>
+0047 
+0048 <span class="comment">% count polygons containing point, weighted by polygon orientation</span>
+0049 res = sum(in.*(ccw==1) - in.*(ccw==0), 2);
+0050 
+0051 varargout{1} = res;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

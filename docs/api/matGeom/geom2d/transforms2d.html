@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of transforms2d</title>
+  <meta name="keywords" content="transforms2d">
+  <meta name="description" content="TRANSFORMS2D Description of functions operating on transforms.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; transforms2d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>transforms2d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>TRANSFORMS2D Description of functions operating on transforms.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function transforms2d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">TRANSFORMS2D Description of functions operating on transforms.
+
+   By 'transform' we mean an affine transform. A planar affine transform
+   can be represented by a 3x3 matrix.
+
+   Example
+     % create a translation by the vector [10 20]:
+     T = createTranslation([10 20])
+     T =
+          1     0    10
+          0     1    20
+          0     0     1
+
+     % apply a rotation on a polygon
+     poly = [0 0; 30 0;30 10;10 10;10 20;0 20];
+     trans = createRotation([10 20], pi/6);
+     polyT = transformPoint(poly, trans);
+     % display the original and the rotated polygons
+     figure; hold on; axis equal; axis([-10 40 -10 40]);
+     drawPolygon(poly, 'k');
+     drawPolygon(polyT, 'b');
+
+
+   See also:
+   <a href="createTranslation.html" class="code" title="function trans = createTranslation(varargin)">createTranslation</a>, <a href="createRotation.html" class="code" title="function trans = createRotation(varargin)">createRotation</a>, <a href="createRotation90.html" class="code" title="function mat = createRotation90(varargin)">createRotation90</a>, <a href="createScaling.html" class="code" title="function trans = createScaling(varargin)">createScaling</a>
+   <a href="createHomothecy.html" class="code" title="function T = createHomothecy(point, ratio)">createHomothecy</a>, <a href="createLineReflection.html" class="code" title="function trans = createLineReflection(line)">createLineReflection</a>, <a href="createBasisTransform.html" class="code" title="function transfo = createBasisTransform(source, target)">createBasisTransform</a>
+   <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>, <a href="transformVector.html" class="code" title="function varargout = transformVector(varargin)">transformVector</a>, <a href="transformLine.html" class="code" title="function dest = transformLine(line, trans)">transformLine</a>, <a href="transformEdge.html" class="code" title="function dest = transformEdge(edge, trans)">transformEdge</a>
+   <a href="rotateVector.html" class="code" title="function vr = rotateVector(v, angle)">rotateVector</a>, <a href="principalAxesTransform.html" class="code" title="function varargout = principalAxesTransform(pts)">principalAxesTransform</a>, <a href="fitAffineTransform2d.html" class="code" title="function trans = fitAffineTransform2d(ref, src)">fitAffineTransform2d</a>
+   <a href="polynomialTransform2d.html" class="code" title="function res = polynomialTransform2d(pts, coeffs)">polynomialTransform2d</a>, <a href="fitPolynomialTransform2d.html" class="code" title="function coeffs = fitPolynomialTransform2d(pts, ptsRef, degree)">fitPolynomialTransform2d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function transforms2d(varargin)</a>
+0002 <span class="comment">%TRANSFORMS2D Description of functions operating on transforms.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   By 'transform' we mean an affine transform. A planar affine transform</span>
+0005 <span class="comment">%   can be represented by a 3x3 matrix.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   Example</span>
+0008 <span class="comment">%     % create a translation by the vector [10 20]:</span>
+0009 <span class="comment">%     T = createTranslation([10 20])</span>
+0010 <span class="comment">%     T =</span>
+0011 <span class="comment">%          1     0    10</span>
+0012 <span class="comment">%          0     1    20</span>
+0013 <span class="comment">%          0     0     1</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%     % apply a rotation on a polygon</span>
+0016 <span class="comment">%     poly = [0 0; 30 0;30 10;10 10;10 20;0 20];</span>
+0017 <span class="comment">%     trans = createRotation([10 20], pi/6);</span>
+0018 <span class="comment">%     polyT = transformPoint(poly, trans);</span>
+0019 <span class="comment">%     % display the original and the rotated polygons</span>
+0020 <span class="comment">%     figure; hold on; axis equal; axis([-10 40 -10 40]);</span>
+0021 <span class="comment">%     drawPolygon(poly, 'k');</span>
+0022 <span class="comment">%     drawPolygon(polyT, 'b');</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   See also:</span>
+0026 <span class="comment">%   createTranslation, createRotation, createRotation90, createScaling</span>
+0027 <span class="comment">%   createHomothecy, createLineReflection, createBasisTransform</span>
+0028 <span class="comment">%   transformPoint, transformVector, transformLine, transformEdge</span>
+0029 <span class="comment">%   rotateVector, principalAxesTransform, fitAffineTransform2d</span>
+0030 <span class="comment">%   polynomialTransform2d, fitPolynomialTransform2d</span>
+0031 
+0032 
+0033 <span class="comment">% ------</span>
+0034 <span class="comment">% Author: David Legland</span>
+0035 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0036 <span class="comment">% Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)</span>
+0037 <span class="comment">% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0038 
+0039 help(<span class="string">'transforms2d'</span>);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of hexagonalGrid</title>
+  <meta name="keywords" content="hexagonalGrid">
+  <meta name="description" content="HEXAGONALGRID Generate hexagonal grid of points in the plane.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; hexagonalGrid.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>hexagonalGrid
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>HEXAGONALGRID Generate hexagonal grid of points in the plane.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = hexagonalGrid(bounds, origin, size, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">HEXAGONALGRID Generate hexagonal grid of points in the plane.
+
+   usage:
+   PTS = hexagonalGrid(BOUNDS, ORIGIN, SIZE)
+   generate points, lying in the window defined by BOUNDS (=[xmin ymin
+   xmax ymax]), starting from origin with a constant step equal to size.
+   SIZE is constant and is equals to the length of the sides of each
+   hexagon. 
+
+   TODO: add possibility to use rotated grid</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="squareGrid.html" class="code" title="function varargout = squareGrid(bounds, origin, size)">squareGrid</a>	SQUAREGRID Generate equally spaces points in plane.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = hexagonalGrid(bounds, origin, size, varargin)</a>
+0002 <span class="comment">%HEXAGONALGRID Generate hexagonal grid of points in the plane.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   usage:</span>
+0005 <span class="comment">%   PTS = hexagonalGrid(BOUNDS, ORIGIN, SIZE)</span>
+0006 <span class="comment">%   generate points, lying in the window defined by BOUNDS (=[xmin ymin</span>
+0007 <span class="comment">%   xmax ymax]), starting from origin with a constant step equal to size.</span>
+0008 <span class="comment">%   SIZE is constant and is equals to the length of the sides of each</span>
+0009 <span class="comment">%   hexagon.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   TODO: add possibility to use rotated grid</span>
+0012 <span class="comment">%</span>
+0013 
+0014 <span class="comment">%   ---------</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   author : David Legland</span>
+0017 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0018 <span class="comment">%   created the 06/08/2005.</span>
+0019 <span class="comment">%</span>
+0020 
+0021 size = size(1);
+0022 dx = 3*size;
+0023 dy = size*sqrt(3);
+0024 
+0025 <span class="comment">% consider two square grids with different centers</span>
+0026 pts1 = <a href="squareGrid.html" class="code" title="function varargout = squareGrid(bounds, origin, size)">squareGrid</a>(bounds, origin + [0 0],        [dx dy], varargin{:});
+0027 pts2 = <a href="squareGrid.html" class="code" title="function varargout = squareGrid(bounds, origin, size)">squareGrid</a>(bounds, origin + [dx/3 0],     [dx dy], varargin{:});
+0028 pts3 = <a href="squareGrid.html" class="code" title="function varargout = squareGrid(bounds, origin, size)">squareGrid</a>(bounds, origin + [dx/2 dy/2],  [dx dy], varargin{:});
+0029 pts4 = <a href="squareGrid.html" class="code" title="function varargout = squareGrid(bounds, origin, size)">squareGrid</a>(bounds, origin + [-dx/6 dy/2], [dx dy], varargin{:});
+0030 
+0031 <span class="comment">% gather points</span>
+0032 pts = [pts1;pts2;pts3;pts4];
+0033 
+0034 
+0035 <span class="comment">% eventually compute also edges, clipped by bounds</span>
+0036 <span class="comment">% TODO : manage generation of edges</span>
+0037 <span class="keyword">if</span> nargout &gt; 1
+0038     edges = zeros([0 4]);
+0039     x0 = origin(1);
+0040     y0 = origin(2);
+0041 
+0042     <span class="comment">% find all x coordinate</span>
+0043     x1 = bounds(1) + mod(x0-bounds(1), dx);
+0044     x2 = bounds(3) - mod(bounds(3)-x0, dx);
+0045     lx = (x1:dx:x2)';
+0046 
+0047     <span class="comment">% horizontal edges : first find y's</span>
+0048     y1 = bounds(2) + mod(y0-bounds(2), dy);
+0049     y2 = bounds(4) - mod(bounds(4)-y0, dy);
+0050     ly = (y1:dy:y2)';
+0051     
+0052     <span class="comment">% number of points in each coord, and total number of points</span>
+0053     ny = length(ly);
+0054     nx = length(lx);
+0055  
+0056     <span class="keyword">if</span> bounds(1)-x1+dx &lt; size
+0057         disp(<span class="string">'intersect bounding box'</span>);
+0058     <span class="keyword">end</span>
+0059     
+0060     <span class="keyword">if</span> bounds(3)-x2 &lt; size
+0061         disp(<span class="string">'intersect 2'</span>);
+0062         edges = [edges;repmat(x2, [ny 1]) ly repmat(bounds(3), [ny 1]) ly];
+0063         x2 = x2-dx;
+0064         lx = (x1:dx:x2)';
+0065         nx = length(lx);
+0066     <span class="keyword">end</span>
+0067   
+0068     <span class="keyword">for</span> i = 1:length(ly)
+0069         ind = (1:nx)';
+0070         tmpEdges = zeros(length(ind), 4);
+0071         tmpEdges(ind, 1) = lx;
+0072         tmpEdges(ind, 2) = ly(i);
+0073         tmpEdges(ind, 3) = lx+size;
+0074         tmpEdges(ind, 4) = ly(i);
+0075         edges = [edges; tmpEdges]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0076     <span class="keyword">end</span>
+0077     
+0078 <span class="keyword">end</span>
+0079 
+0080 <span class="comment">% process output arguments</span>
+0081 <span class="keyword">if</span> nargout &gt; 0
+0082     varargout{1} = pts;
+0083     
+0084     <span class="keyword">if</span> nargout &gt; 1
+0085         varargout{2} = edges;
+0086     <span class="keyword">end</span>
+0087 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

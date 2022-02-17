@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of edgePosition</title>
+  <meta name="keywords" content="edgePosition">
+  <meta name="description" content="EDGEPOSITION Return position of a point on an edge.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; edgePosition.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>edgePosition
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>EDGEPOSITION Return position of a point on an edge.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function pos = edgePosition(point, edge) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">EDGEPOSITION Return position of a point on an edge.
+
+   POS = edgePosition(POINT, EDGE);
+   Computes position of point POINT on the edge EDGE, relative to the
+   position of edge vertices.
+   EDGE has the form [x1 y1 x2 y2],
+   POINT has the form [x y], and is assumed to belong to edge.
+   The result POS has the following meaning:
+     POS &lt; 0:      POINT is located before the first vertex
+     POS = 0:      POINT is located on the first vertex
+     0 &lt; POS &lt; 1:  POINT is located between the 2 vertices (on the edge)
+     POS = 1:      POINT is located on the second vertex
+     POS &lt; 0:      POINT is located after the second vertex
+
+   POS = edgePosition(POINT, EDGES);
+   If EDGES is an array of NL edges, return NE positions, corresponding to
+   each edge.
+
+   POS = edgePosition(POINTS, EDGE);
+   If POINTS is an array of NP points, return NP positions, corresponding
+   to each point.
+
+   POS = edgePosition(POINTS, EDGES);
+   If POINTS is an array of NP points and EDGES is an array of NE edges,
+   return an array of [NP NE] position, corresponding to each couple
+   point-edge.
+
+   See also:
+   <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="createEdge.html" class="code" title="function edge = createEdge(varargin)">createEdge</a>, <a href="isPointOnEdge.html" class="code" title="function b = isPointOnEdge(point, edge, varargin)">isPointOnEdge</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="intersectEdges.html" class="code" title="function point = intersectEdges(edge1, edge2, varargin)">intersectEdges</a>	INTERSECTEDGES Return all intersections between two set of edges.</li><li><a href="../../matGeom/polygons2d/polylineSelfIntersections.html" class="code" title="function varargout = polylineSelfIntersections(poly, varargin)">polylineSelfIntersections</a>	POLYLINESELFINTERSECTIONS Find self-intersection points of a polyline.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function pos = edgePosition(point, edge)</a>
+0002 <span class="comment">%EDGEPOSITION Return position of a point on an edge.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POS = edgePosition(POINT, EDGE);</span>
+0005 <span class="comment">%   Computes position of point POINT on the edge EDGE, relative to the</span>
+0006 <span class="comment">%   position of edge vertices.</span>
+0007 <span class="comment">%   EDGE has the form [x1 y1 x2 y2],</span>
+0008 <span class="comment">%   POINT has the form [x y], and is assumed to belong to edge.</span>
+0009 <span class="comment">%   The result POS has the following meaning:</span>
+0010 <span class="comment">%     POS &lt; 0:      POINT is located before the first vertex</span>
+0011 <span class="comment">%     POS = 0:      POINT is located on the first vertex</span>
+0012 <span class="comment">%     0 &lt; POS &lt; 1:  POINT is located between the 2 vertices (on the edge)</span>
+0013 <span class="comment">%     POS = 1:      POINT is located on the second vertex</span>
+0014 <span class="comment">%     POS &lt; 0:      POINT is located after the second vertex</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   POS = edgePosition(POINT, EDGES);</span>
+0017 <span class="comment">%   If EDGES is an array of NL edges, return NE positions, corresponding to</span>
+0018 <span class="comment">%   each edge.</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   POS = edgePosition(POINTS, EDGE);</span>
+0021 <span class="comment">%   If POINTS is an array of NP points, return NP positions, corresponding</span>
+0022 <span class="comment">%   to each point.</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   POS = edgePosition(POINTS, EDGES);</span>
+0025 <span class="comment">%   If POINTS is an array of NP points and EDGES is an array of NE edges,</span>
+0026 <span class="comment">%   return an array of [NP NE] position, corresponding to each couple</span>
+0027 <span class="comment">%   point-edge.</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%   See also:</span>
+0030 <span class="comment">%   edges2d, createEdge, isPointOnEdge</span>
+0031 <span class="comment">%</span>
+0032 
+0033 <span class="comment">% ------</span>
+0034 <span class="comment">% Author: David Legland</span>
+0035 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0036 <span class="comment">% Created: 2004-05-25</span>
+0037 <span class="comment">% Copyright 2009 INRA - Cepia Software Platform.</span>
+0038 <span class="comment">%</span>
+0039 
+0040 <span class="comment">%   HISTORY:</span>
+0041 <span class="comment">%   06/12/2009 created from linePosition</span>
+0042 
+0043 <span class="comment">% number of points and of edges</span>
+0044 nEdges = size(edge, 1);
+0045 nPoints = size(point, 1);
+0046 
+0047 <span class="keyword">if</span> nPoints == nEdges
+0048     dxe = (edge(:, 3) - edge(:,1))';
+0049     dye = (edge(:, 4) - edge(:,2))';
+0050     dxp = point(:, 1) - edge(:, 1);
+0051     dyp = point(:, 2) - edge(:, 2);
+0052 
+0053 <span class="keyword">else</span>
+0054     <span class="comment">% expand one of the arrays to have the same size</span>
+0055     dxe = (edge(:,3) - edge(:,1))';
+0056     dye = (edge(:,4) - edge(:,2))';
+0057     dxp = bsxfun(@minus, point(:,1), edge(:,1)');
+0058     dyp = bsxfun(@minus, point(:,2), edge(:,2)');
+0059 
+0060 <span class="keyword">end</span>
+0061 
+0062 pos = (dxp .* dxe + dyp .* dye) ./ (dxe .* dxe + dye .* dye);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

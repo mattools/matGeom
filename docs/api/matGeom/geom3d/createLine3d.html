@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createLine3d</title>
+  <meta name="keywords" content="createLine3d">
+  <meta name="description" content="CREATELINE3D Create a line with various inputs.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; createLine3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createLine3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATELINE3D Create a line with various inputs.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function line = createLine3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATELINE3D Create a line with various inputs.
+
+   Line is represented in a parametric form : [x0 y0 z0 dx dy dz]
+       x = x0 + t*dx
+       y = y0 + t*dy;
+       z = z0 + t*dz;
+
+
+   L = createLine3d(P1, P2);
+   Returns the line going through the two given points P1 and P2.
+   
+   L = createLine3d(X0, Y0, Z0, DX, DY, DZ);
+   Returns the line going through the point [x0, y0, z0], and with
+   direction vector given by [DX DY DZ]. 
+
+   L = createLine3d(P0, DX, DY, DZ);
+   Returns the line going through point P0 given by [x0, y0, z0] and with
+   direction vector given by [DX DY DZ]. 
+
+   L = createLine3d(THETA, PHI);
+   Create a line originated at (0,0) and with angles theta and phi.
+
+   L = createLine3d(P0, THETA, PHI);
+   Create a line with direction given by theta and phi, and which contains
+   point P0. 
+
+
+   Note : in all cases, parameters can be vertical arrays of the same
+   dimension. The result is then an array of lines, of dimensions [N*6].
+
+   See also:
+   <a href="lines3d.html" class="code" title="function lines3d(varargin)">lines3d</a>
+
+   ---------
+
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 17/02/2005.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="clipConvexPolygon3dHP.html" class="code" title="function poly2 = clipConvexPolygon3dHP(poly, plane)">clipConvexPolygon3dHP</a>	CLIPCONVEXPOLYGON3DHP Clip a convex 3D polygon with Half-space.</li><li><a href="clipPolygon3dHP.html" class="code" title="function poly2 = clipPolygon3dHP(poly, plane)">clipPolygon3dHP</a>	CLIPPOLYGON3DHP clip a 3D polygon with Half-space.</li><li><a href="intersectEdgePlane.html" class="code" title="function point = intersectEdgePlane(edge, plane, varargin)">intersectEdgePlane</a>	INTERSECTEDGEPLANE Return intersection point between a plane and a edge.</li><li><a href="projLineOnPlane.html" class="code" title="function [newLine, isOrthogonal] = projLineOnPlane(line, plane)">projLineOnPlane</a>	PROJLINEONPLANE Return the orthogonal projection of a line on a plane.</li><li><a href="../../matGeom/meshes3d/isPointInMesh.html" class="code" title="function res = isPointInMesh(point, v, f, varargin)">isPointInMesh</a>	ISPOINTINMESH Check if a point is inside a 3D mesh.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function line = createLine3d(varargin)</a>
+0002 <span class="comment">%CREATELINE3D Create a line with various inputs.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   Line is represented in a parametric form : [x0 y0 z0 dx dy dz]</span>
+0005 <span class="comment">%       x = x0 + t*dx</span>
+0006 <span class="comment">%       y = y0 + t*dy;</span>
+0007 <span class="comment">%       z = z0 + t*dz;</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   L = createLine3d(P1, P2);</span>
+0011 <span class="comment">%   Returns the line going through the two given points P1 and P2.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   L = createLine3d(X0, Y0, Z0, DX, DY, DZ);</span>
+0014 <span class="comment">%   Returns the line going through the point [x0, y0, z0], and with</span>
+0015 <span class="comment">%   direction vector given by [DX DY DZ].</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   L = createLine3d(P0, DX, DY, DZ);</span>
+0018 <span class="comment">%   Returns the line going through point P0 given by [x0, y0, z0] and with</span>
+0019 <span class="comment">%   direction vector given by [DX DY DZ].</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   L = createLine3d(THETA, PHI);</span>
+0022 <span class="comment">%   Create a line originated at (0,0) and with angles theta and phi.</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   L = createLine3d(P0, THETA, PHI);</span>
+0025 <span class="comment">%   Create a line with direction given by theta and phi, and which contains</span>
+0026 <span class="comment">%   point P0.</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%   Note : in all cases, parameters can be vertical arrays of the same</span>
+0030 <span class="comment">%   dimension. The result is then an array of lines, of dimensions [N*6].</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">%   See also:</span>
+0033 <span class="comment">%   lines3d</span>
+0034 <span class="comment">%</span>
+0035 <span class="comment">%   ---------</span>
+0036 <span class="comment">%</span>
+0037 <span class="comment">%   author : David Legland</span>
+0038 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0039 <span class="comment">%   created the 17/02/2005.</span>
+0040 <span class="comment">%</span>
+0041 
+0042 <span class="comment">%   HISTORY</span>
+0043 <span class="comment">%   30/11/2005 add more cases</span>
+0044 <span class="comment">%   04/01/2007 remove unused variables</span>
+0045 
+0046 <span class="comment">%   NOTE : A 3d line can also be represented with a 1*7 array :</span>
+0047 <span class="comment">%   [x0 y0 z0 dx dy dz t].</span>
+0048 <span class="comment">%   whith 't' being one of the following :</span>
+0049 <span class="comment">%   - t=0 : line is a singleton (x0,y0)</span>
+0050 <span class="comment">%   - t=1 : line is an edge segment, between points (x0,y0) and (x0+dx,</span>
+0051 <span class="comment">%   y0+dy).</span>
+0052 <span class="comment">%   - t=Inf : line is a Ray, originated from (x0,y0) and going to infinity</span>
+0053 <span class="comment">%   in the direction(dx,dy).</span>
+0054 <span class="comment">%   - t=-Inf : line is a Ray, originated from (x0,y0) and going to infinity</span>
+0055 <span class="comment">%   in the direction(-dx,-dy).</span>
+0056 <span class="comment">%   - t=NaN : line is a real straight line, and contains all points</span>
+0057 <span class="comment">%   verifying the above equation.</span>
+0058 <span class="comment">%   This seems to be a convenient way to represent uniformly all kind of</span>
+0059 <span class="comment">%   lines (including edges, rays, and even point).</span>
+0060 <span class="comment">%</span>
+0061 <span class="comment">%   NOTE2 : Another form is the 1*8 array :</span>
+0062 <span class="comment">%   [x0 y0 z0 dx dy dz t1 t2].</span>
+0063 <span class="comment">%   with t1 and t2 giving first and last position of the edge on the</span>
+0064 <span class="comment">%   supporting straight line, and with t2&gt;t1.</span>
+0065 
+0066 <span class="keyword">if</span> length(varargin)==1    
+0067     error(<span class="string">'Wrong number of arguments in ''createLine'' '</span>);
+0068     
+0069 <span class="keyword">elseif</span> length(varargin)==2    
+0070     <span class="comment">% 2 input parameters. They can be :</span>
+0071     <span class="comment">% - 2 points, then 2 arrays of 1*2 double.</span>
+0072     v1 = varargin{1};
+0073     v2 = varargin{2};
+0074     <span class="keyword">if</span> size(v1, 2)==3
+0075         <span class="comment">% first input parameter is first point, and second input is the</span>
+0076         <span class="comment">% second point.</span>
+0077         line = [v1(:,1) v1(:,2) v1(:,3) v2(:,1)-v1(:,1) v2(:,2)-v1(:,2) v2(:,3)-v1(:,3)];    
+0078     <span class="keyword">elseif</span> size(v1, 2)==1
+0079         <span class="comment">% first parameter is angle with the vertical</span>
+0080         <span class="comment">% second parameter is horizontal angle with Ox axis</span>
+0081         theta = varargin{1};
+0082         phi = varargin{2};
+0083 
+0084         sit = sin(theta);
+0085         p0 = zeros([size(theta, 1) 3]);
+0086         
+0087         line = [p0 cos(phi)*sit sin(phi)*sit cos(theta)];
+0088     <span class="keyword">end</span>
+0089     
+0090 <span class="keyword">elseif</span> length(varargin)==3
+0091     <span class="comment">% 3 input parameters :</span>
+0092     <span class="comment">% first parameter is a point of the line</span>
+0093     <span class="comment">% second parameter is angle with the vertical</span>
+0094     <span class="comment">% third parameter is horizontal angle with Ox axis</span>
+0095     p0      = varargin{1};
+0096     theta   = varargin{2}; 
+0097     phi     = varargin{3};
+0098     
+0099     <span class="keyword">if</span> size(p0, 2)~=3
+0100         error(<span class="string">'first argument should be a 3D point'</span>);
+0101     <span class="keyword">end</span>
+0102     
+0103     sit = sin(theta);
+0104     line = [p0 cos(phi)*sit sin(phi)*sit cos(theta)];
+0105     
+0106 <span class="keyword">elseif</span> length(varargin)==4
+0107     <span class="comment">% 4 input parameters :</span>
+0108     p0 = varargin{1};
+0109     dx = varargin{2};
+0110     dy = varargin{3};
+0111     dz = varargin{4};
+0112     
+0113     <span class="keyword">if</span> size(p0, 2)~=3
+0114         error(<span class="string">'first argument should be a 3D point'</span>);
+0115     <span class="keyword">end</span>
+0116     
+0117     line = [p0 dx dy dz];
+0118 <span class="keyword">elseif</span> length(varargin)==5
+0119     <span class="comment">% 5 input parameters :</span>
+0120     <span class="comment">% first parameter is distance of lin to origin</span>
+0121     <span class="comment">% second parameter is angle with the vertical</span>
+0122     <span class="comment">% third parameter is horizontal angle with Ox axis</span>
+0123     x0      = varargin{1};
+0124     y0      = varargin{1};
+0125     z0      = varargin{1};
+0126     theta   = varargin{2}; 
+0127     phi     = varargin{3};
+0128     
+0129     sit = sin(theta);
+0130     line = [x0 y0 z0 cos(phi)*sit sin(phi)*sit cos(theta)];
+0131 
+0132 <span class="keyword">elseif</span> length(varargin)==6
+0133     <span class="comment">% 6 input parameters, given as separate arguments for x0, y0, z0 and</span>
+0134     <span class="comment">% dx, dy and dz</span>
+0135     <span class="comment">% (not very useful, but anyway...)</span>
+0136     x0 = varargin{1};
+0137     y0 = varargin{2};
+0138     z0 = varargin{3};
+0139     dx = varargin{4};
+0140     dy = varargin{5};
+0141     dz = varargin{6};
+0142 
+0143     line = [x0 y0 z0 dx dy dz];
+0144 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

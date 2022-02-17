@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of resamplePolyline</title>
+  <meta name="keywords" content="resamplePolyline">
+  <meta name="description" content="RESAMPLEPOLYLINE Distribute N points equally spaced on a polyline.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; resamplePolyline.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>resamplePolyline
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>RESAMPLEPOLYLINE Distribute N points equally spaced on a polyline.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function poly2 = resamplePolyline(poly, n) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">RESAMPLEPOLYLINE Distribute N points equally spaced on a polyline.
+
+   RES = resamplePolyline(POLY, N)
+   Resample the input polyline POLY such that the resulting polyline RES
+   has N points. All points of RES belong to the initial polyline, but are
+   not necessarily vertices.
+
+   Example
+     poly = [0 10;0 0;20 0];
+     figure; drawPolyline(poly, 'b');
+     poly2 = resamplePolyline(poly, 10);
+     hold on; 
+     drawPolyline(poly2, 'bo');
+     axis equal; axis([-10 30 -10 20]);
+
+   See also
+     polygons2d, <a href="drawPolyline.html" class="code" title="function varargout = drawPolyline(varargin)">drawPolyline</a>, <a href="resamplePolygon.html" class="code" title="function poly2 = resamplePolygon(poly, n)">resamplePolygon</a>, <a href="resamplePolylineByLength.html" class="code" title="function poly2 = resamplePolylineByLength(poly, step)">resamplePolylineByLength</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="parametrize.html" class="code" title="function par = parametrize(varargin)">parametrize</a>	PARAMETRIZE Parametrization of a polyline, based on edges lengths.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="resamplePolygon.html" class="code" title="function poly2 = resamplePolygon(poly, n)">resamplePolygon</a>	RESAMPLEPOLYGON  Distribute N points equally spaced on a polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function poly2 = resamplePolyline(poly, n)</a>
+0002 <span class="comment">%RESAMPLEPOLYLINE Distribute N points equally spaced on a polyline.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   RES = resamplePolyline(POLY, N)</span>
+0005 <span class="comment">%   Resample the input polyline POLY such that the resulting polyline RES</span>
+0006 <span class="comment">%   has N points. All points of RES belong to the initial polyline, but are</span>
+0007 <span class="comment">%   not necessarily vertices.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   Example</span>
+0010 <span class="comment">%     poly = [0 10;0 0;20 0];</span>
+0011 <span class="comment">%     figure; drawPolyline(poly, 'b');</span>
+0012 <span class="comment">%     poly2 = resamplePolyline(poly, 10);</span>
+0013 <span class="comment">%     hold on;</span>
+0014 <span class="comment">%     drawPolyline(poly2, 'bo');</span>
+0015 <span class="comment">%     axis equal; axis([-10 30 -10 20]);</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   See also</span>
+0018 <span class="comment">%     polygons2d, drawPolyline, resamplePolygon, resamplePolylineByLength</span>
+0019 <span class="comment">%</span>
+0020 
+0021 <span class="comment">% ------</span>
+0022 <span class="comment">% Author: David Legland</span>
+0023 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0024 <span class="comment">% Created: 2011-12-09,    using Matlab 7.9.0.529 (R2009b)</span>
+0025 <span class="comment">% Copyrightf 2011 INRA - Cepia Software Platform.</span>
+0026 
+0027 <span class="comment">% parametrisation of the curve</span>
+0028 s = <a href="parametrize.html" class="code" title="function par = parametrize(varargin)">parametrize</a>(poly);
+0029 
+0030 <span class="comment">% distribute N points equally spaced</span>
+0031 Lmax = s(end);
+0032 pos = linspace(0, Lmax, n);
+0033 
+0034 poly2 = zeros(n, size(poly, 2));
+0035 <span class="keyword">for</span> i = 1:n
+0036     <span class="comment">% index of surrounding vertices before and after</span>
+0037     ind0 = find(s &lt;= pos(i), 1, <span class="string">'last'</span>);
+0038     ind1 = find(s &gt;= pos(i), 1, <span class="string">'first'</span>);
+0039     
+0040     <span class="keyword">if</span> ind0 == ind1
+0041         <span class="comment">% get position of a vertex in input polyline</span>
+0042         poly2(i, :) = poly(ind0, :);
+0043         <span class="keyword">continue</span>;
+0044     <span class="keyword">end</span>
+0045     
+0046     <span class="comment">% position of surrounding vertices</span>
+0047     pt0 = poly(ind0, :);
+0048     pt1 = poly(ind1, :);
+0049     
+0050     <span class="comment">% weights associated to each neighbor</span>
+0051     l0 = pos(i) - s(ind0);
+0052     l1 = s(ind1) - pos(i);
+0053     
+0054     <span class="comment">% linear interpolation of neighbor positions</span>
+0055     <span class="keyword">if</span> (l0 + l1) &gt; Lmax * 1e-12
+0056         poly2(i, :) = (pt0 * l1 + pt1 * l0) / (l0 + l1);
+0057     <span class="keyword">else</span>
+0058         <span class="comment">% if neighbors are too close, do not use interpolation</span>
+0059         poly2(i, :) = pt0;
+0060     <span class="keyword">end</span>
+0061 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

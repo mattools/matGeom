@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawPlatform</title>
+  <meta name="keywords" content="drawPlatform">
+  <meta name="description" content="DRAWPLATFORM Draw a rectangular platform with a given size.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; drawPlatform.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawPlatform
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWPLATFORM Draw a rectangular platform with a given size.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function  varargout = drawPlatform(plane, siz, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWPLATFORM Draw a rectangular platform with a given size.
+
+   drawPlatform(PLANE, SIZ) draws a rectangular platform with the
+   dimensions specified by SIZ. If SIZ contains only one value instead of 
+   two the platform will be quadratic.
+
+   drawPlatform(...,'PropertyName',PropertyValue,...) sets the value of 
+   the specified patch property. Multiple property values can be set with
+   a single statement. See function patch for details.
+
+   drawPlane3d(AX,...) plots into AX instead of GCA.
+
+   H = drawPlatform(...) returns a handle H to the patch object.
+
+   Example
+
+     p0 = [1 2 3];
+     v1 = [1 0 1];
+     v2 = [0 -1 1];
+     plane = [p0 v1 v2];
+     axis([-10 10 -10 10 -10 10]);
+     drawPlatform(plane, [7,3])
+     set(gcf, 'renderer', 'zbuffer');
+
+   See also
+   <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>, <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>, patch</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="isPlane.html" class="code" title="function d = isPlane(plane)">isPlane</a>	ISPLANE Check if input is a plane.</li><li><a href="planePoint.html" class="code" title="function coord = planePoint(plane, point)">planePoint</a>	PLANEPOINT Compute 3D position of a point in a plane.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function  varargout = drawPlatform(plane, siz, varargin)</a>
+0002 <span class="comment">%DRAWPLATFORM Draw a rectangular platform with a given size.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawPlatform(PLANE, SIZ) draws a rectangular platform with the</span>
+0005 <span class="comment">%   dimensions specified by SIZ. If SIZ contains only one value instead of</span>
+0006 <span class="comment">%   two the platform will be quadratic.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   drawPlatform(...,'PropertyName',PropertyValue,...) sets the value of</span>
+0009 <span class="comment">%   the specified patch property. Multiple property values can be set with</span>
+0010 <span class="comment">%   a single statement. See function patch for details.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   drawPlane3d(AX,...) plots into AX instead of GCA.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   H = drawPlatform(...) returns a handle H to the patch object.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%     p0 = [1 2 3];</span>
+0019 <span class="comment">%     v1 = [1 0 1];</span>
+0020 <span class="comment">%     v2 = [0 -1 1];</span>
+0021 <span class="comment">%     plane = [p0 v1 v2];</span>
+0022 <span class="comment">%     axis([-10 10 -10 10 -10 10]);</span>
+0023 <span class="comment">%     drawPlatform(plane, [7,3])</span>
+0024 <span class="comment">%     set(gcf, 'renderer', 'zbuffer');</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%   See also</span>
+0027 <span class="comment">%   planes3d, createPlane, patch</span>
+0028 
+0029 <span class="comment">% ------</span>
+0030 <span class="comment">% Author: oqilipo</span>
+0031 <span class="comment">% Created: 2018-08-09</span>
+0032 <span class="comment">% Copyright 2018</span>
+0033 
+0034 <span class="comment">%% Parse inputs</span>
+0035 
+0036 <span class="comment">% extract axis handle</span>
+0037 <span class="keyword">if</span> isAxisHandle(plane)
+0038     hAx = plane;
+0039     plane = siz;
+0040     siz = varargin{1};
+0041     varargin(1) = [];
+0042 <span class="keyword">else</span>
+0043     hAx = gca;
+0044 <span class="keyword">end</span>
+0045 
+0046 <span class="comment">% parse optional arguments</span>
+0047 p = inputParser;
+0048 addRequired(p, <span class="string">'plane'</span>, @(x) size(x,1)==1 &amp;&amp; <a href="isPlane.html" class="code" title="function d = isPlane(plane)">isPlane</a>(x))
+0049 addRequired(p, <span class="string">'siz'</span>, @(x)validateattributes(x,{<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0050     {<span class="string">'size'</span>,[1, nan],<span class="string">'positive'</span>,<span class="string">'nonnan'</span>,<span class="string">'real'</span>,<span class="string">'finite'</span>}))
+0051 parse(p, plane, siz)
+0052 
+0053 <span class="keyword">if</span> ~isempty(varargin)
+0054     <span class="keyword">if</span> length(varargin) == 1
+0055         <span class="keyword">if</span> isstruct(varargin{1})
+0056             <span class="comment">% if options are specified as struct, need to convert to</span>
+0057             <span class="comment">% parameter name-value pairs</span>
+0058             varargin = [fieldnames(varargin{1}) struct2cell(varargin{1})]';
+0059             varargin = varargin(:)';
+0060         <span class="keyword">else</span>
+0061             <span class="comment">% if option is a single argument, assume it corresponds to</span>
+0062             <span class="comment">% plane color</span>
+0063             varargin = {<span class="string">'FaceColor'</span>, varargin{1}};
+0064         <span class="keyword">end</span>
+0065     <span class="keyword">end</span>
+0066 <span class="keyword">else</span>
+0067     <span class="comment">% default face color</span>
+0068     varargin = {<span class="string">'FaceColor'</span>, <span class="string">'m'</span>};
+0069 <span class="keyword">end</span>
+0070 
+0071 <span class="keyword">if</span> numel(siz) == 1
+0072     siz(2) = siz(1);
+0073 <span class="keyword">end</span>
+0074 
+0075 
+0076 <span class="comment">%% Algorithm</span>
+0077 <span class="comment">% Calculate vertex points of the platform</span>
+0078 pts(1,:) = <a href="planePoint.html" class="code" title="function coord = planePoint(plane, point)">planePoint</a>(plane, [1,1]*0.5.*siz);
+0079 pts(2,:) = <a href="planePoint.html" class="code" title="function coord = planePoint(plane, point)">planePoint</a>(plane, [1,-1]*0.5.*siz);
+0080 pts(3,:) = <a href="planePoint.html" class="code" title="function coord = planePoint(plane, point)">planePoint</a>(plane, [-1,-1]*0.5.*siz);
+0081 pts(4,:) = <a href="planePoint.html" class="code" title="function coord = planePoint(plane, point)">planePoint</a>(plane, [-1,1]*0.5.*siz);
+0082 
+0083 pf.vertices = pts;
+0084 pf.faces = [1 2 3 4];
+0085 
+0086 <span class="comment">% Draw the patch</span>
+0087 h = patch(hAx, pf, varargin{:});
+0088 
+0089 
+0090 <span class="comment">%% Parse outputs</span>
+0091 <span class="comment">% Return handle to plane if needed</span>
+0092 <span class="keyword">if</span> nargout &gt; 0
+0093     varargout{1} = h;
+0094 <span class="keyword">end</span>
+0095 
+0096 <span class="keyword">end</span>
+0097</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

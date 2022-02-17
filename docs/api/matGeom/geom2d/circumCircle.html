@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of circumCircle</title>
+  <meta name="keywords" content="circumCircle">
+  <meta name="description" content="CIRCUMCIRCLE Circumscribed circle of three points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; circumCircle.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>circumCircle
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CIRCUMCIRCLE Circumscribed circle of three points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = circumCircle(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CIRCUMCIRCLE Circumscribed circle of three points.
+
+   CIRC = circumCircle(TRI)
+   CIRC = circumCircle(P1, P2, P3)
+   Compute circumcircle of a triangle given by 3 points.
+
+   Example
+     T = [10 20; 70 20; 30 70];
+     C = circumCircle(T);
+     figure; drawPolygon(T, 'linewidth', 2);
+     hold on; drawCircle(C);
+     axis equal; axis([0 100 0 100]);
+
+   See also
+     <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="enclosingCircle.html" class="code" title="function circle = enclosingCircle(pts)">enclosingCircle</a>, <a href="circumCenter.html" class="code" title="function varargout = circumCenter(a, b, c)">circumCenter</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="circumCenter.html" class="code" title="function varargout = circumCenter(a, b, c)">circumCenter</a>	CIRCUMCENTER  Circumcenter of three points.</li><li><a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>	DISTANCEPOINTS Compute distance between two points.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = circumCircle(varargin)</a>
+0002 <span class="comment">%CIRCUMCIRCLE Circumscribed circle of three points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   CIRC = circumCircle(TRI)</span>
+0005 <span class="comment">%   CIRC = circumCircle(P1, P2, P3)</span>
+0006 <span class="comment">%   Compute circumcircle of a triangle given by 3 points.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Example</span>
+0009 <span class="comment">%     T = [10 20; 70 20; 30 70];</span>
+0010 <span class="comment">%     C = circumCircle(T);</span>
+0011 <span class="comment">%     figure; drawPolygon(T, 'linewidth', 2);</span>
+0012 <span class="comment">%     hold on; drawCircle(C);</span>
+0013 <span class="comment">%     axis equal; axis([0 100 0 100]);</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   See also</span>
+0016 <span class="comment">%     circles2d, enclosingCircle, circumCenter</span>
+0017 <span class="comment">%</span>
+0018 
+0019 <span class="comment">% ------</span>
+0020 <span class="comment">% Author: David Legland</span>
+0021 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0022 <span class="comment">% Created: 2011-12-01,    using Matlab 7.9.0.529 (R2009b)</span>
+0023 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0024 
+0025 <span class="comment">% extract the three points</span>
+0026 [a, b, c] = parseThreePoints(varargin{:});
+0027 
+0028 <span class="comment">% circle center</span>
+0029 center = <a href="circumCenter.html" class="code" title="function varargout = circumCenter(a, b, c)">circumCenter</a>(a, b, c);
+0030 
+0031 <span class="comment">% radius</span>
+0032 r = <a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(center, a);
+0033 
+0034 <span class="comment">% format output</span>
+0035 varargout = {[center r]};</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of rotation3dAxisAndAngle</title>
+  <meta name="keywords" content="rotation3dAxisAndAngle">
+  <meta name="description" content="ROTATION3DAXISANDANGLE Determine axis and angle of a 3D rotation matrix.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; rotation3dAxisAndAngle.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>rotation3dAxisAndAngle
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ROTATION3DAXISANDANGLE Determine axis and angle of a 3D rotation matrix.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [axis, theta] = rotation3dAxisAndAngle(mat) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ROTATION3DAXISANDANGLE Determine axis and angle of a 3D rotation matrix.
+
+   [AXIS, ANGLE] = rotation3dAxisAndAngle(MAT)
+   Where MAT is a 4-by-4 matrix representing a rotation, computes the
+   rotation axis (containing the points that remain invariant under the
+   rotation), and the rotation angle around that axis.
+   AXIS has the format [DX DY DZ], constrained to unity, and ANGLE is the
+   rotation angle in radians.
+
+   Note: this method use eigen vector extraction. It would be more precise
+   to use quaternions, see:
+   http://www.mathworks.cn/matlabcentral/newsreader/view_thread/160945
+
+   
+   Example
+     origin = [1 2 3];
+     direction = [4 5 6];
+     line = [origin direction];
+     angle = pi/3;
+     rot = createRotation3dLineAngle(line, angle);
+     [axis angle2] = rotation3dAxisAndAngle(rot);
+     angle2
+     angle2 =
+           1.0472
+
+   See also
+   <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="vectors3d.html" class="code" title="function vectors3d(varargin)">vectors3d</a>, <a href="angles3d.html" class="code" title="function angles3d(varargin)">angles3d</a>, <a href="eulerAnglesToRotation3d.html" class="code" title="function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)">eulerAnglesToRotation3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [axis, theta] = rotation3dAxisAndAngle(mat)</a>
+0002 <span class="comment">%ROTATION3DAXISANDANGLE Determine axis and angle of a 3D rotation matrix.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [AXIS, ANGLE] = rotation3dAxisAndAngle(MAT)</span>
+0005 <span class="comment">%   Where MAT is a 4-by-4 matrix representing a rotation, computes the</span>
+0006 <span class="comment">%   rotation axis (containing the points that remain invariant under the</span>
+0007 <span class="comment">%   rotation), and the rotation angle around that axis.</span>
+0008 <span class="comment">%   AXIS has the format [DX DY DZ], constrained to unity, and ANGLE is the</span>
+0009 <span class="comment">%   rotation angle in radians.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Note: this method use eigen vector extraction. It would be more precise</span>
+0012 <span class="comment">%   to use quaternions, see:</span>
+0013 <span class="comment">%   http://www.mathworks.cn/matlabcentral/newsreader/view_thread/160945</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example</span>
+0017 <span class="comment">%     origin = [1 2 3];</span>
+0018 <span class="comment">%     direction = [4 5 6];</span>
+0019 <span class="comment">%     line = [origin direction];</span>
+0020 <span class="comment">%     angle = pi/3;</span>
+0021 <span class="comment">%     rot = createRotation3dLineAngle(line, angle);</span>
+0022 <span class="comment">%     [axis angle2] = rotation3dAxisAndAngle(rot);</span>
+0023 <span class="comment">%     angle2</span>
+0024 <span class="comment">%     angle2 =</span>
+0025 <span class="comment">%           1.0472</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   See also</span>
+0028 <span class="comment">%   transforms3d, vectors3d, angles3d, eulerAnglesToRotation3d</span>
+0029 <span class="comment">%</span>
+0030 
+0031 <span class="comment">% ------</span>
+0032 <span class="comment">% Author: David Legland</span>
+0033 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0034 <span class="comment">% Created: 2010-08-11,    using Matlab 7.9.0.529 (R2009b)</span>
+0035 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0036 
+0037 <span class="comment">% extract the linear part of the rotation matrix</span>
+0038 A = mat(1:3, 1:3);
+0039 
+0040 <span class="comment">% extract eigen values and eigen vectors</span>
+0041 [V, D] = eig(A - eye(3));
+0042 
+0043 <span class="comment">% we need the eigen vector corresponding to eigenvalue==1</span>
+0044 [dummy, ind] = min(abs(diag(D)-1)); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0045 
+0046 <span class="comment">% extract corresponding eigen vector</span>
+0047 vector = V(:, ind)';
+0048 
+0049 <span class="comment">% compute rotation angle</span>
+0050 t = [A(3,2)-A(2,3) , A(1,3)-A(3,1) , A(2,1)-A(1,2)];
+0051 theta = atan2(dot(t, vector), trace(A)-1);
+0052 
+0053 <span class="comment">% If angle is negative, invert both angle and vector direction</span>
+0054 <span class="keyword">if</span> theta&lt;0
+0055     theta  = -theta; 
+0056     vector = -vector; 
+0057 <span class="keyword">end</span>
+0058 
+0059 <span class="comment">% try to get a point on the line</span>
+0060 <span class="comment">% seems to work, but not sure about stability</span>
+0061 [V, D] = eig(mat-eye(4)); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0062 origin = V(1:3,4)'/V(4, 4);
+0063 
+0064 <span class="comment">% create line corresponding to rotation axis</span>
+0065 axis = [origin vector];
+0066</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

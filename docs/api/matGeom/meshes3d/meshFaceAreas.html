@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of meshFaceAreas</title>
+  <meta name="keywords" content="meshFaceAreas">
+  <meta name="description" content="MESHFACEAREAS Surface area of each face of a mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; meshFaceAreas.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>meshFaceAreas
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MESHFACEAREAS Surface area of each face of a mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function areas = meshFaceAreas(vertices, faces) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MESHFACEAREAS Surface area of each face of a mesh.
+
+   areas = meshFaceAreas(vertices, faces)
+
+   Example
+     [v, f] = createOctahedron;
+     meshFaceAreas(v, f)'
+     ans =
+         1.7321  1.7321  1.7321  1.7321  1.7321  1.7321  1.7321  1.7321
+
+   See also
+     meshes3d, <a href="meshSurfaceArea.html" class="code" title="function area = meshSurfaceArea(varargin)">meshSurfaceArea</a>, <a href="meshFaceCentroids.html" class="code" title="function centroids = meshFaceCentroids(varargin)">meshFaceCentroids</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>	CROSSPRODUCT3D Vector cross product faster than inbuilt MATLAB cross.</li><li><a href="../../matGeom/geom3d/polygonArea3d.html" class="code" title="function area = polygonArea3d(poly, varargin)">polygonArea3d</a>	POLYGONAREA3D Area of a 3D polygon.</li><li><a href="../../matGeom/geom3d/vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>	VECTORNORM3D Norm of a 3D vector or of set of 3D vectors.</li><li><a href="../../matGeom/polygons2d/polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>	Compute the signed area of a polygon.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function areas = meshFaceAreas(vertices, faces)</a>
+0002 <span class="comment">%MESHFACEAREAS Surface area of each face of a mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   areas = meshFaceAreas(vertices, faces)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   Example</span>
+0007 <span class="comment">%     [v, f] = createOctahedron;</span>
+0008 <span class="comment">%     meshFaceAreas(v, f)'</span>
+0009 <span class="comment">%     ans =</span>
+0010 <span class="comment">%         1.7321  1.7321  1.7321  1.7321  1.7321  1.7321  1.7321  1.7321</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   See also</span>
+0013 <span class="comment">%     meshes3d, meshSurfaceArea, meshFaceCentroids</span>
+0014  
+0015 <span class="comment">% ------</span>
+0016 <span class="comment">% Author: David Legland</span>
+0017 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0018 <span class="comment">% Created: 2018-06-21,    using Matlab 9.4.0.813654 (R2018a)</span>
+0019 <span class="comment">% Copyright 2018 INRA - Cepia Software Platform.</span>
+0020 
+0021 
+0022 <span class="keyword">if</span> isnumeric(faces)
+0023     <span class="comment">% trimesh or quadmesh</span>
+0024     nf = size(faces, 1);
+0025     areas = zeros(nf, 1);
+0026     <span class="keyword">if</span> size(vertices, 2) == 2
+0027         <span class="comment">% planar case</span>
+0028         <span class="keyword">for</span> f = 1:nf
+0029             areas(f,:) = <a href="../../matGeom/polygons2d/polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>(vertices(faces(f,:), :));
+0030         <span class="keyword">end</span>
+0031     <span class="keyword">else</span>
+0032         <span class="comment">% 3D case</span>
+0033         <span class="keyword">if</span> size(faces, 2) == 3
+0034             <span class="comment">% For triangular meshes, uses accelerated method</span>
+0035             v1 = vertices(faces(:,1), :);
+0036             v12 = vertices(faces(:,2), :) - v1;
+0037             v13 = vertices(faces(:,3), :) - v1;
+0038             areas = <a href="../../matGeom/geom3d/vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(<a href="../../matGeom/geom3d/crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>(v12, v13))/2;
+0039             
+0040         <span class="keyword">else</span>
+0041             <span class="comment">% for quad (or larger) meshes, use slower but more precise method</span>
+0042             <span class="keyword">for</span> f = 1:nf
+0043                 areas(f) = <a href="../../matGeom/geom3d/polygonArea3d.html" class="code" title="function area = polygonArea3d(poly, varargin)">polygonArea3d</a>(vertices(faces(f,:), :));
+0044             <span class="keyword">end</span>
+0045         <span class="keyword">end</span>
+0046     <span class="keyword">end</span>
+0047     
+0048 <span class="keyword">else</span>
+0049     <span class="comment">% mesh with faces stored as cell array</span>
+0050     nf = length(faces);
+0051     areas = zeros(nf, 1);
+0052     <span class="keyword">if</span> size(vertices, 2) == 2
+0053         <span class="comment">% planar case</span>
+0054         <span class="keyword">for</span> f = 1:nf
+0055             areas(f) = <a href="../../matGeom/polygons2d/polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>(vertices(faces{f}, :));
+0056         <span class="keyword">end</span>
+0057     <span class="keyword">else</span>
+0058         <span class="comment">% 3D case</span>
+0059         <span class="keyword">for</span> f = 1:nf
+0060             areas(f) = <a href="../../matGeom/geom3d/polygonArea3d.html" class="code" title="function area = polygonArea3d(poly, varargin)">polygonArea3d</a>(vertices(faces{f}, :));
+0061         <span class="keyword">end</span>
+0062     <span class="keyword">end</span>
+0063 <span class="keyword">end</span>
+0064</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

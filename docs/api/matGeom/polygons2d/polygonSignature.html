@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polygonSignature</title>
+  <meta name="keywords" content="polygonSignature">
+  <meta name="description" content="POLYGONSIGNATURE Polar signature of a polygon (polar distance to origin).">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; polygonSignature.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polygonSignature
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYGONSIGNATURE Polar signature of a polygon (polar distance to origin).</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [res, thetaList] = polygonSignature(poly, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLYGONSIGNATURE Polar signature of a polygon (polar distance to origin).
+
+   DISTS = polygonSignature(POLY, THETALIST)
+   Computes the polar signature of a polygon, for a set of angles in
+   degrees. If a ray at a given angle does not intersect the polygon, the
+   corresponding distance value is set to NaN.
+
+   DISTS = polygonSignature(POLY, N)
+   When N is a scalar, uses N angles equally distributed between 0 and 360
+   degrees.
+   
+   [DISTS, THETA] = polygonSignature(...)
+   Also returns the angle set for which the signature was computed.
+
+   Example
+   polygonSignature
+
+   See also
+     polygons2d, <a href="signatureToPolygon.html" class="code" title="function poly = signatureToPolygon(signature, varargin)">signatureToPolygon</a>, <a href="intersectRayPolygon.html" class="code" title="function [intersects, edgeIndices] = intersectRayPolygon(ray, poly, varargin)">intersectRayPolygon</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>	DISTANCEPOINTS Compute distance between two points.</li><li><a href="intersectRayPolygon.html" class="code" title="function [intersects, edgeIndices] = intersectRayPolygon(ray, poly, varargin)">intersectRayPolygon</a>	Intersection points between a ray and a polygon.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [res, thetaList] = polygonSignature(poly, varargin)</a>
+0002 <span class="comment">%POLYGONSIGNATURE Polar signature of a polygon (polar distance to origin).</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   DISTS = polygonSignature(POLY, THETALIST)</span>
+0005 <span class="comment">%   Computes the polar signature of a polygon, for a set of angles in</span>
+0006 <span class="comment">%   degrees. If a ray at a given angle does not intersect the polygon, the</span>
+0007 <span class="comment">%   corresponding distance value is set to NaN.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   DISTS = polygonSignature(POLY, N)</span>
+0010 <span class="comment">%   When N is a scalar, uses N angles equally distributed between 0 and 360</span>
+0011 <span class="comment">%   degrees.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   [DISTS, THETA] = polygonSignature(...)</span>
+0014 <span class="comment">%   Also returns the angle set for which the signature was computed.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example</span>
+0017 <span class="comment">%   polygonSignature</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   See also</span>
+0020 <span class="comment">%     polygons2d, signatureToPolygon, intersectRayPolygon</span>
+0021 <span class="comment">%</span>
+0022 
+0023 <span class="comment">% ------</span>
+0024 <span class="comment">% Author: David Legland</span>
+0025 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0026 <span class="comment">% Created: 2013-03-14,    using Matlab 7.9.0.529 (R2009b)</span>
+0027 <span class="comment">% Copyright 2013 INRA - Cepia Software Platform.</span>
+0028 
+0029 <span class="comment">% default angle list</span>
+0030 thetaList = 0:359;
+0031 
+0032 <span class="comment">% get user-defined angle list</span>
+0033 <span class="keyword">if</span> ~isempty(varargin)
+0034     var = varargin{1};
+0035     <span class="keyword">if</span> isscalar(var)
+0036         thetaList = linspace(0, 360, var+1);
+0037         thetaList(end) = [];
+0038     <span class="keyword">else</span>
+0039         thetaList = var;
+0040     <span class="keyword">end</span>
+0041 <span class="keyword">end</span>
+0042 
+0043 <span class="comment">% also extract reference point if needed</span>
+0044 center = [0 0];
+0045 <span class="keyword">if</span> nargin &gt; 2
+0046     center = varargin{2};
+0047 <span class="keyword">end</span>
+0048 
+0049 <span class="comment">% allocate memory</span>
+0050 nTheta = length(thetaList);
+0051 res = NaN * ones(nTheta, 1);
+0052 
+0053 <span class="comment">% iterate on angles</span>
+0054 <span class="keyword">for</span> i = 1:length(thetaList)
+0055     theta = deg2rad(thetaList(i));
+0056     ray = [center cos(theta) sin(theta)];
+0057 
+0058     ptInt = <a href="intersectRayPolygon.html" class="code" title="function [intersects, edgeIndices] = intersectRayPolygon(ray, poly, varargin)">intersectRayPolygon</a>(ray, poly);
+0059     <span class="keyword">if</span> ~isempty(ptInt)
+0060         res(i) = <a href="../../matGeom/geom2d/distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(center, ptInt(1,:));
+0061     <span class="keyword">end</span>
+0062 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

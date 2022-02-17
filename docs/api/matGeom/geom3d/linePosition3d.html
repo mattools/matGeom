@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of linePosition3d</title>
+  <meta name="keywords" content="linePosition3d">
+  <meta name="description" content="Return the position of a 3D point projected on a 3D line.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; linePosition3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>linePosition3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Return the position of a 3D point projected on a 3D line.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function pos = linePosition3d(point, line) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Return the position of a 3D point projected on a 3D line.
+
+   T = linePosition3d(POINT, LINE)
+   Computes position of point POINT on the line LINE, relative to origin
+   point and direction vector of the line.
+   LINE has the form [x0 y0 z0 dx dy dy],
+   POINT has the form [x y z], and is assumed to belong to line.
+   The result T is the value such that POINT = LINE(1:3) + T * LINE(4:6).
+   If POINT does not belong to LINE, the position of its orthogonal
+   projection is computed instead. 
+
+   T = linePosition3d(POINT, LINES)
+   If LINES is an array of NL lines, return NL positions, corresponding to
+   each line.
+
+   T = linePosition3d(POINTS, LINE)
+   If POINTS is an array of NP points, return NP positions, corresponding
+   to each point.
+
+   See also:
+   <a href="lines3d.html" class="code" title="function lines3d(varargin)">lines3d</a>, <a href="createLine3d.html" class="code" title="function line = createLine3d(varargin)">createLine3d</a>, <a href="distancePointLine3d.html" class="code" title="function d = distancePointLine3d(point, line)">distancePointLine3d</a>, <a href="projPointOnLine3d.html" class="code" title="function point = projPointOnLine3d(point, line)">projPointOnLine3d</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 17/02/2005.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="clipEdge3d.html" class="code" title="function clipped = clipEdge3d(edge, box)">clipEdge3d</a>	CLIPEDGE3D Clip a 3D edge with a cuboid box.</li><li><a href="clipLine3d.html" class="code" title="function edge = clipLine3d(line, box)">clipLine3d</a>	CLIPLINE3D Clip a line with a box and return an edge.</li><li><a href="clipPlane.html" class="code" title="function poly = clipPlane(plane, box)">clipPlane</a>	Compute the 3D polygon representing a clipped plane.</li><li><a href="clipRay3d.html" class="code" title="function edge = clipRay3d(ray, box)">clipRay3d</a>	Clip a 3D ray with a box and return a 3D edge.</li><li><a href="distancePointEdge3d.html" class="code" title="function [dist, t] = distancePointEdge3d(point, edge)">distancePointEdge3d</a>	DISTANCEPOINTEDGE3D Minimum distance between a 3D point and a 3D edge.</li><li><a href="intersectLineCylinder.html" class="code" title="function points = intersectLineCylinder(line, cylinder, varargin)">intersectLineCylinder</a>	INTERSECTLINECYLINDER Compute intersection points between a line and a cylinder.</li><li><a href="intersectRayPolygon3d.html" class="code" title="function [inter, inside]= intersectRayPolygon3d(ray, poly)">intersectRayPolygon3d</a>	INTERSECTRAYPOLYGON3D Intersection point of a 3D ray and a 3D polygon.</li><li><a href="isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>	ISBELOWPLANE Test whether a point is below or above a plane.</li><li><a href="isPointOnEdge3d.html" class="code" title="function b = isPointOnEdge3d(point, edge, varargin)">isPointOnEdge3d</a>	Test if a 3D point belongs to an edge.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function pos = linePosition3d(point, line)</a>
+0002 <span class="comment">% Return the position of a 3D point projected on a 3D line.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   T = linePosition3d(POINT, LINE)</span>
+0005 <span class="comment">%   Computes position of point POINT on the line LINE, relative to origin</span>
+0006 <span class="comment">%   point and direction vector of the line.</span>
+0007 <span class="comment">%   LINE has the form [x0 y0 z0 dx dy dy],</span>
+0008 <span class="comment">%   POINT has the form [x y z], and is assumed to belong to line.</span>
+0009 <span class="comment">%   The result T is the value such that POINT = LINE(1:3) + T * LINE(4:6).</span>
+0010 <span class="comment">%   If POINT does not belong to LINE, the position of its orthogonal</span>
+0011 <span class="comment">%   projection is computed instead.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   T = linePosition3d(POINT, LINES)</span>
+0014 <span class="comment">%   If LINES is an array of NL lines, return NL positions, corresponding to</span>
+0015 <span class="comment">%   each line.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   T = linePosition3d(POINTS, LINE)</span>
+0018 <span class="comment">%   If POINTS is an array of NP points, return NP positions, corresponding</span>
+0019 <span class="comment">%   to each point.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See also:</span>
+0022 <span class="comment">%   lines3d, createLine3d, distancePointLine3d, projPointOnLine3d</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   ---------</span>
+0025 <span class="comment">%   author : David Legland</span>
+0026 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0027 <span class="comment">%   created the 17/02/2005.</span>
+0028 <span class="comment">%</span>
+0029 
+0030 <span class="comment">%   HISTORY</span>
+0031 <span class="comment">%   05/01/2007 update doc</span>
+0032 <span class="comment">%   28/10/2010 change to bsxfun calculation for arbitrary input sizes</span>
+0033 <span class="comment">%       (Thanks to Sven Holcombe)</span>
+0034 
+0035 <span class="comment">% size of input arguments</span>
+0036 np = size(point, 1);
+0037 nl = size(line, 1);
+0038 
+0039 <span class="keyword">if</span> np == 1 || nl == 1 || np == nl
+0040     <span class="comment">% standard case where result is either scalar or vector</span>
+0041     
+0042     <span class="comment">% vector from line origin to point</span>
+0043     dp = bsxfun(@minus, point, line(:,1:3));
+0044     
+0045     <span class="comment">% direction vector of the line</span>
+0046     vl = line(:, 4:6);
+0047     
+0048     <span class="comment">% precompute and check validity of denominator</span>
+0049     denom = sum(vl.^2, 2);
+0050     invalidLine = denom &lt; eps;
+0051     denom(invalidLine) = 1;
+0052     
+0053     <span class="comment">% compute position using dot product normalized with norm of line vector.</span>
+0054     pos = bsxfun(@rdivide, sum(bsxfun(@times, dp, vl), 2), denom);
+0055     
+0056     <span class="comment">% position on a degenerated line is set to 0</span>
+0057     pos(invalidLine) = 0;
+0058 
+0059 <span class="keyword">else</span>
+0060     <span class="comment">% reshape input</span>
+0061     point = reshape(point, [np 1 3]);
+0062     line = reshape(line, [1 nl 6]);
+0063     
+0064     <span class="comment">% vector from line origin to point</span>
+0065     dp = bsxfun(@minus, point, line(:,:,1:3));
+0066     
+0067     <span class="comment">% direction vector of the line</span>
+0068     vl = line(:, :, 4:6);
+0069     
+0070     <span class="comment">% precompute and check validity of denominator</span>
+0071     denom = sum(vl.^2, 3);
+0072     invalidLine = denom &lt; eps;
+0073     denom(invalidLine) = 1;
+0074     
+0075     <span class="comment">% compute position using dot product normalized with norm of line vector.</span>
+0076     pos = bsxfun(@rdivide, sum(bsxfun(@times, dp, vl), 3), denom);
+0077     
+0078     <span class="comment">% position on a degenerated line is set to 0</span>
+0079     pos(invalidLine) = 0;
+0080 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

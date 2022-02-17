@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawParabola</title>
+  <meta name="keywords" content="drawParabola">
+  <meta name="description" content="DRAWPARABOLA Draw a parabola on the current axis.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; drawParabola.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawParabola
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWPARABOLA Draw a parabola on the current axis.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawParabola(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWPARABOLA Draw a parabola on the current axis.
+
+   drawParabola(PARABOLA);
+   Draws a vertical parabola, defined by its vertex and its parameter.
+   Such a parabola admits a vertical axis of symetry.
+
+   The algebraic equation of parabola is given by:
+      (Y - YV) = A * (X - VX)^2
+   Where XV and YV are vertex coordinates and A is parabola parameter.
+
+   A parametric equation of parabola is given by:
+      x(t) = t + VX;
+      y(t) = A * t^2 + VY;
+
+   PARABOLA can also be defined by [XV YV A THETA], with theta being the
+   angle of rotation of the parabola (in degrees and Counter-Clockwise).
+
+   drawParabola(PARABOLA, T);
+   Specifies which range of 't' are used for drawing parabola. If T is an
+   array with only two values, the first and the last values are used as
+   interval bounds, and several values are distributed within this
+   interval.
+
+   drawParabola(..., NAME, VALUE);
+   Can specify one or several graphical options using parameter name-value
+   pairs.
+
+   drawParabola(AX, ...);
+   Specifies handle of the axis to draw on.
+
+   H = drawParabola(...);
+   Returns an handle to the created graphical object.
+
+
+   Example:
+     figure(1); clf; hold on;
+     axis equal; axis([0 100 0 100])
+     % draw parabola with default parameterization bounds 
+     drawParabola([50 50 .2 30]);
+     % draw parabola with more specific bounds and drawing style
+     drawParabola([50 50 .2 30], [-3 3], 'color', 'r', 'linewidth', 2);
+   
+
+   See Also:
+   <a href="drawCircle.html" class="code" title="function varargout = drawCircle(varargin)">drawCircle</a>, <a href="drawEllipse.html" class="code" title="function varargout = drawEllipse(varargin)">drawEllipse</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createRotation.html" class="code" title="function trans = createRotation(varargin)">createRotation</a>	CREATEROTATION Create the 3*3 matrix of a rotation.</li><li><a href="createScaling.html" class="code" title="function trans = createScaling(varargin)">createScaling</a>	CREATESCALING Create the 3*3 matrix of a scaling in 2 dimensions.</li><li><a href="createTranslation.html" class="code" title="function trans = createTranslation(varargin)">createTranslation</a>	CREATETRANSLATION Create the 3*3 matrix of a translation.</li><li><a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>	Apply an affine transform to a point or a point set.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawParabola(varargin)</a>
+0002 <span class="comment">%DRAWPARABOLA Draw a parabola on the current axis.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawParabola(PARABOLA);</span>
+0005 <span class="comment">%   Draws a vertical parabola, defined by its vertex and its parameter.</span>
+0006 <span class="comment">%   Such a parabola admits a vertical axis of symetry.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   The algebraic equation of parabola is given by:</span>
+0009 <span class="comment">%      (Y - YV) = A * (X - VX)^2</span>
+0010 <span class="comment">%   Where XV and YV are vertex coordinates and A is parabola parameter.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   A parametric equation of parabola is given by:</span>
+0013 <span class="comment">%      x(t) = t + VX;</span>
+0014 <span class="comment">%      y(t) = A * t^2 + VY;</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   PARABOLA can also be defined by [XV YV A THETA], with theta being the</span>
+0017 <span class="comment">%   angle of rotation of the parabola (in degrees and Counter-Clockwise).</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   drawParabola(PARABOLA, T);</span>
+0020 <span class="comment">%   Specifies which range of 't' are used for drawing parabola. If T is an</span>
+0021 <span class="comment">%   array with only two values, the first and the last values are used as</span>
+0022 <span class="comment">%   interval bounds, and several values are distributed within this</span>
+0023 <span class="comment">%   interval.</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   drawParabola(..., NAME, VALUE);</span>
+0026 <span class="comment">%   Can specify one or several graphical options using parameter name-value</span>
+0027 <span class="comment">%   pairs.</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%   drawParabola(AX, ...);</span>
+0030 <span class="comment">%   Specifies handle of the axis to draw on.</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">%   H = drawParabola(...);</span>
+0033 <span class="comment">%   Returns an handle to the created graphical object.</span>
+0034 <span class="comment">%</span>
+0035 <span class="comment">%</span>
+0036 <span class="comment">%   Example:</span>
+0037 <span class="comment">%     figure(1); clf; hold on;</span>
+0038 <span class="comment">%     axis equal; axis([0 100 0 100])</span>
+0039 <span class="comment">%     % draw parabola with default parameterization bounds</span>
+0040 <span class="comment">%     drawParabola([50 50 .2 30]);</span>
+0041 <span class="comment">%     % draw parabola with more specific bounds and drawing style</span>
+0042 <span class="comment">%     drawParabola([50 50 .2 30], [-3 3], 'color', 'r', 'linewidth', 2);</span>
+0043 <span class="comment">%</span>
+0044 <span class="comment">%</span>
+0045 <span class="comment">%   See Also:</span>
+0046 <span class="comment">%   drawCircle, drawEllipse</span>
+0047 <span class="comment">%</span>
+0048 
+0049 <span class="comment">%   ---------</span>
+0050 <span class="comment">%   author : David Legland</span>
+0051 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0052 <span class="comment">%   created the 02/06/2006.</span>
+0053 <span class="comment">%</span>
+0054 
+0055 <span class="comment">%   HISTORY</span>
+0056 <span class="comment">%   2010-11-17 rewrite, change parametrisation, update doc</span>
+0057 <span class="comment">%   2011-03-30 use degrees for angle</span>
+0058 <span class="comment">%   2011-10-11 add management of axes handle</span>
+0059 
+0060 <span class="comment">% Extract parabola</span>
+0061 <span class="keyword">if</span> nargin &lt; 1
+0062     error(<span class="string">'geom2d:drawParabola:IllegalArgument'</span>, <span class="keyword">...</span>
+0063         <span class="string">'Please specify parabola representation'</span>);
+0064 <span class="keyword">end</span>
+0065 
+0066 <span class="comment">% extract handle of axis to draw on</span>
+0067 <span class="keyword">if</span> isAxisHandle(varargin{1})
+0068     ax = varargin{1};
+0069     varargin(1) = [];
+0070 <span class="keyword">else</span>
+0071     ax = gca;
+0072 <span class="keyword">end</span>
+0073 
+0074 <span class="comment">% input parabola is given as a packed array</span>
+0075 parabola = varargin{1};
+0076 varargin(1) = [];
+0077 x0 = parabola(:,1);
+0078 y0 = parabola(:,2);
+0079 a  = parabola(:,3);
+0080 
+0081 <span class="comment">% check if parabola orientation is specified</span>
+0082 <span class="keyword">if</span> size(parabola, 2) &gt; 3
+0083     theta = parabola(:, 4);
+0084 <span class="keyword">else</span>
+0085     theta = zeros(length(a), 1);
+0086 <span class="keyword">end</span>
+0087 
+0088 <span class="comment">% extract parametrisation bounds</span>
+0089 bounds = [-100 100];
+0090 <span class="keyword">if</span> ~isempty(varargin)
+0091     var = varargin{1};
+0092     <span class="keyword">if</span> isnumeric(var)
+0093         bounds = var;
+0094         varargin(1) = [];
+0095     <span class="keyword">end</span>
+0096 <span class="keyword">end</span>
+0097 
+0098 <span class="comment">% create parametrisation array</span>
+0099 <span class="keyword">if</span> length(bounds) &gt; 2
+0100     t = bounds;
+0101 <span class="keyword">else</span>
+0102     t = linspace(bounds(1), bounds(end), 100);
+0103 <span class="keyword">end</span>
+0104 
+0105 <span class="comment">% create handle array (in the case of several parabola)</span>
+0106 h = zeros(size(x0));
+0107 
+0108 <span class="comment">% draw each parabola</span>
+0109 <span class="keyword">for</span> i = 1:length(x0)
+0110     <span class="comment">% compute transformation</span>
+0111     trans = <span class="keyword">...</span>
+0112         <a href="createTranslation.html" class="code" title="function trans = createTranslation(varargin)">createTranslation</a>(x0(i), y0(i)) * <span class="keyword">...</span>
+0113         <a href="createRotation.html" class="code" title="function trans = createRotation(varargin)">createRotation</a>(deg2rad(theta(i))) * <span class="keyword">...</span>
+0114         <a href="createScaling.html" class="code" title="function trans = createScaling(varargin)">createScaling</a>(1, a);
+0115     
+0116     <span class="comment">% compute points on the parabola</span>
+0117     [xt, yt] = <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(t(:), t(:).^2, trans);
+0118 
+0119     <span class="comment">% draw it</span>
+0120     h(i) = plot(ax, xt, yt, varargin{:});
+0121 <span class="keyword">end</span>
+0122 
+0123 <span class="comment">% process output arguments</span>
+0124 <span class="keyword">if</span> nargout &gt; 0
+0125     varargout = {h};
+0126 <span class="keyword">end</span>
+0127</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

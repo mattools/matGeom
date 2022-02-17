@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of boxes3d</title>
+  <meta name="keywords" content="boxes3d">
+  <meta name="description" content="BOXES3D Description of functions operating on 3D boxes.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; boxes3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>boxes3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>BOXES3D Description of functions operating on 3D boxes.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function boxes3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">BOXES3D Description of functions operating on 3D boxes.
+
+   A box defined by its coordinate extents: 
+   BOX = [XMIN XMAX YMIN YMAX ZMIN ZMAX].
+
+   Example
+   % Draw a polyhedron together with its bounding box   
+   [n e f]= createIcosahedron;
+   drawPolyhedron(n, f);
+   hold on;
+   drawBox3d(point3dBounds(n))
+
+
+   See also
+   <a href="boundingBox3d.html" class="code" title="function box = boundingBox3d(points)">boundingBox3d</a>, <a href="box3dVolume.html" class="code" title="function vol = box3dVolume(box)">box3dVolume</a>, <a href="drawBox3d.html" class="code" title="function varargout = drawBox3d(box, varargin)">drawBox3d</a>
+   <a href="intersectBoxes3d.html" class="code" title="function box = intersectBoxes3d(box1, box2)">intersectBoxes3d</a>, <a href="mergeBoxes3d.html" class="code" title="function box = mergeBoxes3d(box1, box2)">mergeBoxes3d</a>, <a href="randomPointInBox3d.html" class="code" title="function points = randomPointInBox3d(box, N, varargin)">randomPointInBox3d</a>
+
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2010-07-26,    using Matlab 7.9.0.529 (R2009b)
+ Copyright 2010 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function boxes3d(varargin)</a>
+0002 <span class="comment">%BOXES3D Description of functions operating on 3D boxes.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   A box defined by its coordinate extents:</span>
+0005 <span class="comment">%   BOX = [XMIN XMAX YMIN YMAX ZMIN ZMAX].</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   Example</span>
+0008 <span class="comment">%   % Draw a polyhedron together with its bounding box</span>
+0009 <span class="comment">%   [n e f]= createIcosahedron;</span>
+0010 <span class="comment">%   drawPolyhedron(n, f);</span>
+0011 <span class="comment">%   hold on;</span>
+0012 <span class="comment">%   drawBox3d(point3dBounds(n))</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   See also</span>
+0016 <span class="comment">%   boundingBox3d, box3dVolume, drawBox3d</span>
+0017 <span class="comment">%   intersectBoxes3d, mergeBoxes3d, randomPointInBox3d</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">% ------</span>
+0021 <span class="comment">% Author: David Legland</span>
+0022 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0023 <span class="comment">% Created: 2010-07-26,    using Matlab 7.9.0.529 (R2009b)</span>
+0024 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

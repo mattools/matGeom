@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of intersectLines</title>
+  <meta name="keywords" content="intersectLines">
+  <meta name="description" content="INTERSECTLINES Return all intersection points of N lines in 2D.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; intersectLines.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>intersectLines
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>INTERSECTLINES Return all intersection points of N lines in 2D.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function point = intersectLines(line1, line2, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">INTERSECTLINES Return all intersection points of N lines in 2D.
+
+   PT = intersectLines(L1, L2);
+   returns the intersection point of lines L1 and L2. L1 and L2 are 1-by-4
+   row arrays, containing parametric representation of each line (in the
+   form [x0 y0 dx dy], see 'createLine' for details).
+   
+   In case of colinear lines, returns [Inf Inf].
+   In case of parallel but not colinear lines, returns [NaN NaN].
+
+   If each input is [N*4] array, the result is a [N*2] array containing
+   intersections of each couple of lines.
+   If one of the input has N rows and the other 1 row, the result is a
+   [N*2] array.
+
+   PT = intersectLines(L1, L2, EPS);
+   Specifies the tolerance for detecting parallel lines. Default is 1e-14.
+
+   Example
+   line1 = createLine([0 0], [10 10]);
+   line2 = createLine([0 10], [10 0]);
+   point = intersectLines(line1, line2)
+   point = 
+       5   5
+
+   See also
+   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="intersectEdges.html" class="code" title="function point = intersectEdges(edge1, edge2, varargin)">intersectEdges</a>, <a href="intersectLineEdge.html" class="code" title="function point = intersectLineEdge(line, edge, varargin)">intersectLineEdge</a>
+   <a href="intersectLineCircle.html" class="code" title="function points = intersectLineCircle(line, circle)">intersectLineCircle</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 31/10/2003.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>	BISECTOR Return the bisector of two lines, or 3 points.</li><li><a href="clipLine.html" class="code" title="function edge = clipLine(line, box, varargin)">clipLine</a>	CLIPLINE Clip a line with a box.</li><li><a href="crackPattern.html" class="code" title="function edges = crackPattern(box, points, alpha, varargin)">crackPattern</a>	CRACKPATTERN Create a (bounded) crack pattern tessellation.</li><li><a href="crackPattern2.html" class="code" title="function edges = crackPattern2(box, points, alpha, varargin)">crackPattern2</a>	CRACKPATTERN2 Create a (bounded) crack pattern tessellation.</li><li><a href="createCircle.html" class="code" title="function circle = createCircle(varargin)">createCircle</a>	CREATECIRCLE Create a circle from 2 or 3 points.</li><li><a href="createDirectedCircle.html" class="code" title="function circle = createDirectedCircle(varargin)">createDirectedCircle</a>	CREATEDIRECTEDCIRCLE Create a directed circle.</li><li><a href="../../matGeom/polygons2d/expandPolygon.html" class="code" title="function loops = expandPolygon(poly, dist, varargin)">expandPolygon</a>	EXPANDPOLYGON Expand a polygon by a given (signed) distance.</li><li><a href="../../matGeom/polygons2d/intersectLinePolyline.html" class="code" title="function [intersects, edgeIndices] = intersectLinePolyline(line, poly, varargin)">intersectLinePolyline</a>	INTERSECTLINEPOLYLINE Intersection points between a line and a polyline.</li><li><a href="../../matGeom/polygons2d/medialAxisConvex.html" class="code" title="function [nodes, edges] = medialAxisConvex(points)">medialAxisConvex</a>	MEDIALAXISCONVEX Compute medial axis of a convex polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function point = intersectLines(line1, line2, varargin)</a>
+0002 <span class="comment">%INTERSECTLINES Return all intersection points of N lines in 2D.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PT = intersectLines(L1, L2);</span>
+0005 <span class="comment">%   returns the intersection point of lines L1 and L2. L1 and L2 are 1-by-4</span>
+0006 <span class="comment">%   row arrays, containing parametric representation of each line (in the</span>
+0007 <span class="comment">%   form [x0 y0 dx dy], see 'createLine' for details).</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   In case of colinear lines, returns [Inf Inf].</span>
+0010 <span class="comment">%   In case of parallel but not colinear lines, returns [NaN NaN].</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   If each input is [N*4] array, the result is a [N*2] array containing</span>
+0013 <span class="comment">%   intersections of each couple of lines.</span>
+0014 <span class="comment">%   If one of the input has N rows and the other 1 row, the result is a</span>
+0015 <span class="comment">%   [N*2] array.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   PT = intersectLines(L1, L2, EPS);</span>
+0018 <span class="comment">%   Specifies the tolerance for detecting parallel lines. Default is 1e-14.</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   Example</span>
+0021 <span class="comment">%   line1 = createLine([0 0], [10 10]);</span>
+0022 <span class="comment">%   line2 = createLine([0 10], [10 0]);</span>
+0023 <span class="comment">%   point = intersectLines(line1, line2)</span>
+0024 <span class="comment">%   point =</span>
+0025 <span class="comment">%       5   5</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   See also</span>
+0028 <span class="comment">%   lines2d, edges2d, intersectEdges, intersectLineEdge</span>
+0029 <span class="comment">%   intersectLineCircle</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%   ---------</span>
+0032 <span class="comment">%   author : David Legland</span>
+0033 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0034 <span class="comment">%   created the 31/10/2003.</span>
+0035 <span class="comment">%</span>
+0036 
+0037 <span class="comment">%   HISTORY</span>
+0038 <span class="comment">%   2004-02-19 add support for multiple lines.</span>
+0039 <span class="comment">%   2007-03-08 update doc</span>
+0040 <span class="comment">%   2011-10-07 code cleanup</span>
+0041 
+0042 
+0043 <span class="comment">%% Process input arguments</span>
+0044 
+0045 <span class="comment">% extract tolerance</span>
+0046 tol = 1e-14;
+0047 <span class="keyword">if</span> ~isempty(varargin)
+0048     tol = varargin{1};
+0049 <span class="keyword">end</span>
+0050 
+0051 <span class="comment">% check size of each input</span>
+0052 N1 = size(line1, 1);
+0053 N2 = size(line2, 1);
+0054 N = max(N1, N2);
+0055 <span class="keyword">if</span> N1 ~= N2 &amp;&amp; N1*N2 ~= N
+0056     error(<span class="string">'matGeom:IntersectLines:IllegalArgument'</span>, <span class="keyword">...</span>
+0057         <span class="string">'The two input arguments must have same number of lines'</span>);
+0058 <span class="keyword">end</span>
+0059 
+0060 
+0061 <span class="comment">%% Check parallel and colinear lines</span>
+0062 
+0063 <span class="comment">% coordinate differences of origin points</span>
+0064 dx = bsxfun(@minus, line2(:,1), line1(:,1));
+0065 dy = bsxfun(@minus, line2(:,2), line1(:,2));
+0066 
+0067 <span class="comment">% indices of parallel lines</span>
+0068 denom = line1(:,3) .* line2(:,4) - line2(:,3) .* line1(:,4);
+0069 par = abs(denom) &lt; tol;
+0070 
+0071 <span class="comment">% indices of colinear lines</span>
+0072 col = abs(dx .* line1(:,4) - dy .* line1(:,3)) &lt; tol &amp; par ;
+0073 
+0074 <span class="comment">% initialize result array</span>
+0075 x0 = zeros(N, 1);
+0076 y0 = zeros(N, 1);
+0077 
+0078 <span class="comment">% initialize result for parallel lines</span>
+0079 x0(col) = Inf;
+0080 y0(col) = Inf;
+0081 x0(par &amp; ~col) = NaN;
+0082 y0(par &amp; ~col) = NaN;
+0083 
+0084 <span class="comment">% in case all line couples are parallel, return</span>
+0085 <span class="keyword">if</span> all(par)
+0086     point = [x0 y0];
+0087     <span class="keyword">return</span>;
+0088 <span class="keyword">end</span>
+0089 
+0090 
+0091 <span class="comment">%% Extract coordinates of itnersecting lines</span>
+0092 
+0093 <span class="comment">% indices of intersecting lines</span>
+0094 inds = ~par;
+0095 
+0096 <span class="comment">% extract base coordinates of first lines</span>
+0097 <span class="keyword">if</span> N1 &gt; 1
+0098     line1 = line1(inds,:);
+0099 <span class="keyword">end</span>
+0100 x1 =  line1(:,1);
+0101 y1 =  line1(:,2);
+0102 dx1 = line1(:,3);
+0103 dy1 = line1(:,4);
+0104 
+0105 <span class="comment">% extract base coordinates of second lines</span>
+0106 <span class="keyword">if</span> N2 &gt; 1
+0107     line2 = line2(inds,:);
+0108 <span class="keyword">end</span>
+0109 x2 =  line2(:,1);
+0110 y2 =  line2(:,2);
+0111 dx2 = line2(:,3);
+0112 dy2 = line2(:,4);
+0113 
+0114 <span class="comment">% re-compute coordinate differences of origin points</span>
+0115 dx = bsxfun(@minus, line2(:,1), line1(:,1));
+0116 dy = bsxfun(@minus, line2(:,2), line1(:,2));
+0117 
+0118 
+0119 <span class="comment">%% Compute intersection points</span>
+0120 
+0121 denom = denom(inds);
+0122 x0(inds) = (x2 .* dy2 .* dx1 - dy .* dx1 .* dx2 - x1 .* dy1 .* dx2) ./ denom ;
+0123 y0(inds) = (dx .* dy1 .* dy2 + y1 .* dx1 .* dy2 - y2 .* dx2 .* dy1) ./ denom ;
+0124 
+0125 <span class="comment">% concatenate result</span>
+0126 point = [x0 y0];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawMesh</title>
+  <meta name="keywords" content="drawMesh">
+  <meta name="description" content="Draw a 3D mesh defined by vertex and face arrays.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; drawMesh.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawMesh
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Draw a 3D mesh defined by vertex and face arrays.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawMesh(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Draw a 3D mesh defined by vertex and face arrays.
+
+   drawMesh(VERTICES, FACES)
+   Draws the 3D mesh defined by vertices VERTICES and the faces FACES. 
+   vertices is a NV-by-3 array containing coordinates of vertices, and
+   FACES is either a NF-by-3 or NF-by-4 array containing face vertex
+   indices of the triangular or rectangular faces.
+   FACES can also be a cell array, each cell containing an array of vertex
+   indices for the corresponding face. In this case the faces may have
+   variable number of vertices. 
+   
+   drawMesh(MESH)
+   Specifies the mesh as a structure containing at least the fields
+   'vertices' and 'faces', using the same conventions as above.
+
+   drawMesh(..., COLOR)
+   Use the specified color to render the mesh faces.
+
+   drawMesh(..., NAME, VALUE)
+   Use one or several pairs of parameter name/value to specify drawing
+   options. Options are the same as the 'patch' function.
+
+   drawMesh(AX,...) 
+   Draw into the axis specified by AX instead of the current axis.
+
+
+   H = drawMesh(...);
+   Also returns a handle to the created patch.
+
+   Example:
+     % display a polyhedra with polygonal faces
+     [v, f] = createSoccerBall;
+     drawMesh(v, f);
+
+     % Display a mesh representing a  torus, using uniform face color
+     [v, f] = torusMesh;
+     figure; hold on; axis equal; view(3);
+     drawMesh(v, f, 'FaceColor', 'g')
+     % paint the mesh according to vertex x-coordinate
+     figure; hold on; axis equal; view(3);
+     drawMesh(v, f, 'VertexColor', v(:,1), 'LineStyle', 'none');
+
+   See also:
+     meshes3d, <a href="polyhedra.html" class="code" title="function polyhedra(varargin)">polyhedra</a>, patch</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/drawCube.html" class="code" title="function varargout = drawCube(cube, varargin)">drawCube</a>	Draw a 3D centered cube, eventually rotated.</li><li><a href="../../matGeom/geom3d/drawCuboid.html" class="code" title="function varargout = drawCuboid(cuboid, varargin)">drawCuboid</a>	Draw a 3D cuboid, eventually rotated.</li><li><a href="meshSilhouette.html" class="code" title="function silhouette = meshSilhouette(v, f, varargin)">meshSilhouette</a>	MESHSILHOUETTE Compute the 2D outline of a 3D mesh on an arbitrary plane.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawMesh(varargin)</a>
+0002 <span class="comment">% Draw a 3D mesh defined by vertex and face arrays.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawMesh(VERTICES, FACES)</span>
+0005 <span class="comment">%   Draws the 3D mesh defined by vertices VERTICES and the faces FACES.</span>
+0006 <span class="comment">%   vertices is a NV-by-3 array containing coordinates of vertices, and</span>
+0007 <span class="comment">%   FACES is either a NF-by-3 or NF-by-4 array containing face vertex</span>
+0008 <span class="comment">%   indices of the triangular or rectangular faces.</span>
+0009 <span class="comment">%   FACES can also be a cell array, each cell containing an array of vertex</span>
+0010 <span class="comment">%   indices for the corresponding face. In this case the faces may have</span>
+0011 <span class="comment">%   variable number of vertices.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   drawMesh(MESH)</span>
+0014 <span class="comment">%   Specifies the mesh as a structure containing at least the fields</span>
+0015 <span class="comment">%   'vertices' and 'faces', using the same conventions as above.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   drawMesh(..., COLOR)</span>
+0018 <span class="comment">%   Use the specified color to render the mesh faces.</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   drawMesh(..., NAME, VALUE)</span>
+0021 <span class="comment">%   Use one or several pairs of parameter name/value to specify drawing</span>
+0022 <span class="comment">%   options. Options are the same as the 'patch' function.</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   drawMesh(AX,...)</span>
+0025 <span class="comment">%   Draw into the axis specified by AX instead of the current axis.</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%   H = drawMesh(...);</span>
+0029 <span class="comment">%   Also returns a handle to the created patch.</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%   Example:</span>
+0032 <span class="comment">%     % display a polyhedra with polygonal faces</span>
+0033 <span class="comment">%     [v, f] = createSoccerBall;</span>
+0034 <span class="comment">%     drawMesh(v, f);</span>
+0035 <span class="comment">%</span>
+0036 <span class="comment">%     % Display a mesh representing a  torus, using uniform face color</span>
+0037 <span class="comment">%     [v, f] = torusMesh;</span>
+0038 <span class="comment">%     figure; hold on; axis equal; view(3);</span>
+0039 <span class="comment">%     drawMesh(v, f, 'FaceColor', 'g')</span>
+0040 <span class="comment">%     % paint the mesh according to vertex x-coordinate</span>
+0041 <span class="comment">%     figure; hold on; axis equal; view(3);</span>
+0042 <span class="comment">%     drawMesh(v, f, 'VertexColor', v(:,1), 'LineStyle', 'none');</span>
+0043 <span class="comment">%</span>
+0044 <span class="comment">%   See also:</span>
+0045 <span class="comment">%     meshes3d, polyhedra, patch</span>
+0046 <span class="comment">%</span>
+0047 
+0048 <span class="comment">%   ---------</span>
+0049 <span class="comment">%   author : David Legland</span>
+0050 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0051 <span class="comment">%   created the 10/02/2005.</span>
+0052 <span class="comment">%</span>
+0053 
+0054 
+0055 <span class="comment">%% Parse input arguments</span>
+0056 
+0057 <span class="comment">% extract first argument</span>
+0058 var1 = varargin{1};
+0059 varargin(1) = [];
+0060 
+0061 <span class="comment">% Check if first input argument is an axes handle</span>
+0062 <span class="keyword">if</span> isAxisHandle(var1)
+0063     ax = var1;
+0064     var1 = varargin{1};
+0065     varargin(1) = [];
+0066 <span class="keyword">else</span>
+0067     ax = gca;
+0068 <span class="keyword">end</span>
+0069 
+0070 <span class="comment">% Check if the input is a mesh structure</span>
+0071 <span class="keyword">if</span> isstruct(var1)
+0072     <span class="comment">% extract data to display</span>
+0073     vertices = var1.vertices;
+0074     faces = var1.faces;
+0075 <span class="keyword">else</span>
+0076     <span class="comment">% assumes input is given with vertices+faces arrays</span>
+0077     vertices = var1;
+0078     faces = varargin{1};
+0079     varargin(1) = [];
+0080 <span class="keyword">end</span>
+0081 
+0082 <span class="comment">% if vertices are 2D points, add a z=0 coordinate</span>
+0083 <span class="keyword">if</span> size(vertices, 2) == 2
+0084     vertices(1, 3) = 0;
+0085 <span class="keyword">end</span>
+0086 
+0087 
+0088 <span class="comment">%% Pre-processing for formatting display options</span>
+0089 
+0090 <span class="comment">% default color for drawing mesh</span>
+0091 faceColor = [1 0 0];
+0092 
+0093 <span class="comment">% combine defualt face color with varargin</span>
+0094 <span class="keyword">if</span> isempty(varargin)
+0095     varargin = [{<span class="string">'FaceColor'</span>}, faceColor];
+0096 <span class="keyword">elseif</span> length(varargin) == 1
+0097     <span class="comment">% if only one optional argument is provided, it is assumed to be color</span>
+0098     faceColor = varargin{1};
+0099     varargin = [{<span class="string">'FaceColor'</span>}, varargin];
+0100 <span class="keyword">elseif</span> length(varargin) &gt; 1
+0101     <span class="comment">% check if FaceColor option is specified,</span>
+0102     <span class="comment">% and if not use default face color</span>
+0103     indFC = strcmpi(varargin(1:2:end), <span class="string">'FaceColor'</span>);
+0104     <span class="keyword">if</span> ~any(indFC)
+0105         varargin = [{<span class="string">'FaceColor'</span>}, {faceColor}, varargin];
+0106     <span class="keyword">end</span>
+0107 <span class="keyword">end</span>
+0108 
+0109 <span class="comment">% check if simplified options are present</span>
+0110 indVC = find(strcmpi(varargin(1:2:end), <span class="string">'VertexColor'</span>));
+0111 <span class="keyword">if</span> ~isempty(indVC)
+0112     vertexColor = varargin{indVC * 2};
+0113     varargin([indVC*2-1 indVC*2]) = [];
+0114     indFC = find(strcmpi(varargin(1:2:end), <span class="string">'FaceColor'</span>));
+0115     <span class="keyword">if</span> ~isempty(indFC)
+0116         varargin([indFC*2-1 indFC*2]) = [];
+0117     <span class="keyword">end</span>
+0118     varargin = [{<span class="string">'FaceVertexCData'</span>}, {vertexColor}, {<span class="string">'FaceColor'</span>}, {<span class="string">'interp'</span>}, varargin];
+0119 <span class="keyword">end</span>
+0120 
+0121 
+0122 <span class="comment">%% Draw the mesh</span>
+0123 
+0124 <span class="comment">% overwrite on current figure</span>
+0125 hold(ax, <span class="string">'on'</span>);
+0126 
+0127 <span class="comment">% Use different processing depending on the type of faces</span>
+0128 <span class="keyword">if</span> isnumeric(faces)
+0129     <span class="comment">% array FACES is a NF-by-NV indices array, with NF: number of faces,</span>
+0130     <span class="comment">% and NV: number of vertices per face</span>
+0131     h = patch(<span class="string">'Parent'</span>, ax, <span class="keyword">...</span>
+0132         <span class="string">'vertices'</span>, vertices, <span class="string">'faces'</span>, faces, <span class="keyword">...</span>
+0133         varargin{:});
+0134 
+0135 <span class="keyword">elseif</span> iscell(faces)
+0136     <span class="comment">% array FACES is a cell array. Need to draw each face as a single</span>
+0137     <span class="comment">% patch.</span>
+0138     h = zeros(length(faces(:)), 1);
+0139 
+0140     <span class="keyword">for</span> iFace = 1:length(faces(:))
+0141         <span class="comment">% get vertices of the cell</span>
+0142         face = faces{iFace};
+0143 
+0144         <span class="comment">% Special processing in case of multiple polygonal face:</span>
+0145         <span class="comment">% each polygonal loop is separated by a NaN.</span>
+0146         <span class="keyword">if</span> sum(isnan(face)) ~= 0
+0147             
+0148             <span class="comment">% find indices of loops breaks</span>
+0149             inds = find(isnan(face));
+0150             
+0151             <span class="comment">% replace NaNs by index of first vertex of each polygon</span>
+0152             face(inds(2:end))   = face(inds(1:end-1)+1);
+0153             face(inds(1))       = face(1);
+0154             face(length(face)+1)= face(inds(end)+1);            
+0155         <span class="keyword">end</span>
+0156         
+0157         <span class="comment">% draw current face</span>
+0158         cnodes = vertices(face, :);
+0159         h(iFace) = patch(ax, cnodes(:, 1), cnodes(:, 2), cnodes(:, 3), faceColor);
+0160     <span class="keyword">end</span>
+0161     
+0162     <span class="comment">% set up drawing options</span>
+0163     set(h, varargin{:});
+0164 <span class="keyword">else</span>
+0165     error(<span class="string">'MatGeom:drawMesh'</span>, <span class="string">'Second argument must be a face array'</span>);
+0166 <span class="keyword">end</span>
+0167 
+0168 
+0169 <span class="comment">%% Process output arguments</span>
+0170 
+0171 <span class="comment">% format output parameters</span>
+0172 <span class="keyword">if</span> nargout &gt; 0
+0173     varargout = {h};
+0174 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

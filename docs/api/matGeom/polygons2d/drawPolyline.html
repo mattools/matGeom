@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawPolyline</title>
+  <meta name="keywords" content="drawPolyline">
+  <meta name="description" content="DRAWPOLYLINE Draw a polyline specified by a list of points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; drawPolyline.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawPolyline
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWPOLYLINE Draw a polyline specified by a list of points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawPolyline(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWPOLYLINE Draw a polyline specified by a list of points.
+
+   drawPolyline(COORD);
+   packs coordinates in a single [N*2] array.
+
+   drawPolyline(PX, PY);
+   specifies coordinates in separate arrays. PX and PY must be column
+   vectors with the same length.
+
+   drawPolyline(..., TYPE);
+   where TYPE is either 'closed' or 'open', specifies if last point must
+   be connected to the first one ('closed') or not ('open').
+   Default is 'open'.
+
+   drawPolyline(..., PARAM, VALUE);
+   specify plot options as described for plot command.
+
+   H = drawPolyline(...) also return a handle to the list of line objects.
+
+   Example:
+   % Draw a curve representing an ellipse
+   t = linspace(0, 2*pi, 100)';
+   px = 10*cos(t); py = 5*sin(t);
+   drawPolyline([px py], 'closed');
+   axis equal;
+
+   % The same, with different drawing options
+   drawPolyline([px py], 'closed', 'lineWidth', 2, 'lineStyle', '--');
+
+   See Also:
+   polygons2d, <a href="drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 06/04/2004.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawPolyline.html" class="code" title="function varargout = drawPolyline(varargin)">drawPolyline</a>	DRAWPOLYLINE Draw a polyline specified by a list of points.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/drawBezierCurve.html" class="code" title="function varargout = drawBezierCurve(points, varargin)">drawBezierCurve</a>	DRAWBEZIERCURVE Draw a cubic bezier curve defined by 4 control points.</li><li><a href="drawPolyline.html" class="code" title="function varargout = drawPolyline(varargin)">drawPolyline</a>	DRAWPOLYLINE Draw a polyline specified by a list of points.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawPolyline(varargin)</a>
+0002 <span class="comment">%DRAWPOLYLINE Draw a polyline specified by a list of points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawPolyline(COORD);</span>
+0005 <span class="comment">%   packs coordinates in a single [N*2] array.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   drawPolyline(PX, PY);</span>
+0008 <span class="comment">%   specifies coordinates in separate arrays. PX and PY must be column</span>
+0009 <span class="comment">%   vectors with the same length.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   drawPolyline(..., TYPE);</span>
+0012 <span class="comment">%   where TYPE is either 'closed' or 'open', specifies if last point must</span>
+0013 <span class="comment">%   be connected to the first one ('closed') or not ('open').</span>
+0014 <span class="comment">%   Default is 'open'.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   drawPolyline(..., PARAM, VALUE);</span>
+0017 <span class="comment">%   specify plot options as described for plot command.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   H = drawPolyline(...) also return a handle to the list of line objects.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   Example:</span>
+0022 <span class="comment">%   % Draw a curve representing an ellipse</span>
+0023 <span class="comment">%   t = linspace(0, 2*pi, 100)';</span>
+0024 <span class="comment">%   px = 10*cos(t); py = 5*sin(t);</span>
+0025 <span class="comment">%   drawPolyline([px py], 'closed');</span>
+0026 <span class="comment">%   axis equal;</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%   % The same, with different drawing options</span>
+0029 <span class="comment">%   drawPolyline([px py], 'closed', 'lineWidth', 2, 'lineStyle', '--');</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%   See Also:</span>
+0032 <span class="comment">%   polygons2d, drawPolygon</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">%   ---------</span>
+0035 <span class="comment">%   author : David Legland</span>
+0036 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0037 <span class="comment">%   created the 06/04/2004.</span>
+0038 <span class="comment">%</span>
+0039 
+0040 <span class="comment">%   HISTORY</span>
+0041 <span class="comment">%   03/01/2007: better processing of input, and update doc (drawing</span>
+0042 <span class="comment">%       options and CLOSE option)</span>
+0043 <span class="comment">%   30/04/2009 rename as drawPolyline.</span>
+0044 <span class="comment">%   2011-10-11 add management of axes handle</span>
+0045 
+0046 
+0047 <span class="comment">% extract handle of axis to draw on</span>
+0048 <span class="keyword">if</span> isAxisHandle(varargin{1})
+0049     ax = varargin{1};
+0050     varargin(1) = [];
+0051 <span class="keyword">else</span>
+0052     ax = gca;
+0053 <span class="keyword">end</span>
+0054 
+0055 <span class="comment">% If first argument is a cell array, draw each curve individually,</span>
+0056 <span class="comment">% and eventually returns handle of each plot.</span>
+0057 var = varargin{1};
+0058 <span class="keyword">if</span> iscell(var)
+0059     h = [];
+0060     <span class="keyword">for</span> i = 1:length(var(:))
+0061         h = [h ; <a href="drawPolyline.html" class="code" title="function varargout = drawPolyline(varargin)">drawPolyline</a>(ax, var{i}, varargin{2:end})]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0062     <span class="keyword">end</span>
+0063     <span class="keyword">if</span> nargout &gt; 0
+0064         varargout = {h};
+0065     <span class="keyword">end</span>
+0066     <span class="keyword">return</span>;
+0067 <span class="keyword">end</span>
+0068 
+0069 <span class="comment">% extract curve coordinate</span>
+0070 <span class="keyword">if</span> size(var, 2) == 1
+0071     <span class="comment">% first argument contains x coord, second argument contains y coord</span>
+0072     px = var;
+0073     <span class="keyword">if</span> length(varargin) == 1
+0074         error(<span class="string">'Wrong number of arguments in drawPolyline'</span>);
+0075     <span class="keyword">end</span>
+0076     py = varargin{2};
+0077     varargin = varargin(3:end);
+0078 <span class="keyword">else</span>
+0079     <span class="comment">% first argument contains both coordinate</span>
+0080     px = var(:, 1);
+0081     py = var(:, 2);
+0082     varargin = varargin(2:end);
+0083 <span class="keyword">end</span>
+0084 
+0085 <span class="comment">% check if curve is closed or open</span>
+0086 closed = false;
+0087 <span class="keyword">if</span> ~isempty(varargin)
+0088     var = varargin{1};
+0089     <span class="keyword">if</span> strncmpi(var, <span class="string">'close'</span>, 5)
+0090         closed = true;
+0091         varargin = varargin(2:end);
+0092     <span class="keyword">elseif</span> strncmpi(var, <span class="string">'open'</span>, 4)
+0093         closed = false;
+0094         varargin = varargin(2:end);
+0095     <span class="keyword">end</span>
+0096 <span class="keyword">end</span>
+0097 
+0098 <span class="comment">% if curve is closed, add first point at the end of the list</span>
+0099 <span class="keyword">if</span> closed
+0100     px = [px; px(1)];
+0101     py = [py; py(1)];
+0102 <span class="keyword">end</span>
+0103 
+0104 <span class="comment">% plot the curve, with eventually optional parameters</span>
+0105 h = plot(ax, px, py, varargin{:});
+0106 
+0107 <span class="comment">% format output arguments</span>
+0108 <span class="keyword">if</span> nargout &gt; 0
+0109     varargout = {h};
+0110 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

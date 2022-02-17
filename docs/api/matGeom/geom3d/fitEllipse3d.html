@@ -1,0 +1,396 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of fitEllipse3d</title>
+  <meta name="keywords" content="fitEllipse3d">
+  <meta name="description" content="FITELLIPSE3D Fit an ellipse to a set of points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; fitEllipse3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>fitEllipse3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>FITELLIPSE3D Fit an ellipse to a set of points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">FITELLIPSE3D Fit an ellipse to a set of points.
+
+   FITTEDELLIPSE3D = fitEllipse3d(POINTS) returns the 3D ellipse fitted to
+   a set of 3D points.
+
+   Example
+     % Create 2D ellipse
+     n=randi([10,100]);
+     a=randi([30,50]); b=randi([5,25]);
+     [x, y] = ellipseToPolygon([0 0 a b 0 ], n);
+     % 3D and add some noise
+     points = [x, y, zeros(n,1)];
+     points=points+(-1+2*rand(n,3));
+     % Create a random transformation
+     center=-100+200*rand(1,3);
+     phi=randi([-180,180]); theta=randi([-180,180]); psi=randi([-180,180]);
+     TFM=eulerAnglesToRotation3d(phi, theta, psi, 'ZYZ'); TFM(1:3,4)=center';
+     points = transformPoint3d(points, TFM);
+     % Fit ellipse
+     [fE, fTFM] = fitEllipse3d(points, 'vis', true);
+     % Plot reconstructed ellipse
+     [fx, fy] = ellipseToPolygon([0 0 fE(4), fE(5) 0 ], n);
+     fpoints = transformPoint3d([fx, fy, zeros(n,1)], fTFM);
+     drawEllipse3d(fE,'k')
+   
+   See also
+     <a href="drawEllipse3d.html" class="code" title="function varargout = drawEllipse3d(varargin)">drawEllipse3d</a>, ellipseToPolygon
+
+   Source
+     Nested functions are part of the quadfit toolbox by Levente Hunyadi
+     https://mathworks.com/matlabcentral/fileexchange/45356
+
+ ---------
+ Author: oqilipo
+ Created: 2017-08-11
+ Copyright 2017</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>	CREATEROTATIONOZ Create the 4x4 matrix of a 3D rotation around z-axis.</li><li><a href="drawEllipse3d.html" class="code" title="function varargout = drawEllipse3d(varargin)">drawEllipse3d</a>	DRAWELLIPSE3D Draw a 3D ellipse.</li><li><a href="eulerAnglesToRotation3d.html" class="code" title="function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)">eulerAnglesToRotation3d</a>	EULERANGLESTOROTATION3D Convert 3D Euler angles to 3D rotation matrix.</li><li><a href="rotation3dToEulerAngles.html" class="code" title="function varargout = rotation3dToEulerAngles(mat, varargin)">rotation3dToEulerAngles</a>	ROTATION3DTOEULERANGLES Extract Euler angles from a rotation matrix.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function p = ellipsefit_direct(x,y)</a></li><li><a href="#_sub2" class="code">function p = ellipsefit_robust(R, Q)</a></li><li><a href="#_sub3" class="code">function varargout = ellipse_im2ex(varargin)</a></li><li><a href="#_sub4" class="code">function [c1,c2,semia,semib,phi] = ellipse_explicit(a,b,c,d,f,g)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin)</a>
+0002 <span class="comment">%FITELLIPSE3D Fit an ellipse to a set of points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   FITTEDELLIPSE3D = fitEllipse3d(POINTS) returns the 3D ellipse fitted to</span>
+0005 <span class="comment">%   a set of 3D points.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   Example</span>
+0008 <span class="comment">%     % Create 2D ellipse</span>
+0009 <span class="comment">%     n=randi([10,100]);</span>
+0010 <span class="comment">%     a=randi([30,50]); b=randi([5,25]);</span>
+0011 <span class="comment">%     [x, y] = ellipseToPolygon([0 0 a b 0 ], n);</span>
+0012 <span class="comment">%     % 3D and add some noise</span>
+0013 <span class="comment">%     points = [x, y, zeros(n,1)];</span>
+0014 <span class="comment">%     points=points+(-1+2*rand(n,3));</span>
+0015 <span class="comment">%     % Create a random transformation</span>
+0016 <span class="comment">%     center=-100+200*rand(1,3);</span>
+0017 <span class="comment">%     phi=randi([-180,180]); theta=randi([-180,180]); psi=randi([-180,180]);</span>
+0018 <span class="comment">%     TFM=eulerAnglesToRotation3d(phi, theta, psi, 'ZYZ'); TFM(1:3,4)=center';</span>
+0019 <span class="comment">%     points = transformPoint3d(points, TFM);</span>
+0020 <span class="comment">%     % Fit ellipse</span>
+0021 <span class="comment">%     [fE, fTFM] = fitEllipse3d(points, 'vis', true);</span>
+0022 <span class="comment">%     % Plot reconstructed ellipse</span>
+0023 <span class="comment">%     [fx, fy] = ellipseToPolygon([0 0 fE(4), fE(5) 0 ], n);</span>
+0024 <span class="comment">%     fpoints = transformPoint3d([fx, fy, zeros(n,1)], fTFM);</span>
+0025 <span class="comment">%     drawEllipse3d(fE,'k')</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   See also</span>
+0028 <span class="comment">%     drawEllipse3d, ellipseToPolygon</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">%   Source</span>
+0031 <span class="comment">%     Nested functions are part of the quadfit toolbox by Levente Hunyadi</span>
+0032 <span class="comment">%     https://mathworks.com/matlabcentral/fileexchange/45356</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">% ---------</span>
+0035 <span class="comment">% Author: oqilipo</span>
+0036 <span class="comment">% Created: 2017-08-11</span>
+0037 <span class="comment">% Copyright 2017</span>
+0038 
+0039 parser = inputParser;
+0040 addRequired(parser, <span class="string">'points'</span>, @(x) validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0041     {<span class="string">'ncols'</span>,3,<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'nonnan'</span>}));
+0042 addOptional(parser,<span class="string">'visualization'</span>,false,@islogical);
+0043 parse(parser,points,varargin{:});
+0044 points=parser.Results.points;
+0045 
+0046 <span class="comment">% Mean of all points</span>
+0047 meanPoint = mean(points,1);
+0048 <span class="comment">% Center points around origin</span>
+0049 centeredPoints = bsxfun(@minus, points, meanPoint);
+0050 
+0051 <span class="comment">% Transformation to x-y plane</span>
+0052 [~,~,R]=svd(centeredPoints);
+0053 tfmPoints = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(centeredPoints, R');
+0054 
+0055 <span class="comment">% Fit ellipse</span>
+0056 parEllipse = <a href="#_sub1" class="code" title="subfunction p = ellipsefit_direct(x,y)">ellipsefit_direct</a>(tfmPoints(:,1),tfmPoints(:,2));
+0057 <span class="comment">% Convert to explicit form</span>
+0058 [X, Y, A, B, phi2D] = <a href="#_sub3" class="code" title="subfunction varargout = ellipse_im2ex(varargin)">ellipse_im2ex</a>(parEllipse);
+0059 
+0060 <span class="comment">% Transform to fitted 2d ellipse</span>
+0061 TFM2D = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(phi2D);
+0062 TFM2D(1:3,4)=[X; Y; 0];
+0063 
+0064 <span class="comment">% Transformation back to 3d space</span>
+0065 TFM3D = [inv(R'), meanPoint'; 0 0 0 1]*TFM2D;
+0066 
+0067 <span class="comment">% Extract translation</span>
+0068 center = TFM3D(1:3,4)';
+0069 
+0070 <span class="comment">% Extract rotation</span>
+0071 TFM3D_ROT=TFM3D(1:3,1:3);
+0072 <span class="comment">% Convert to euler angles</span>
+0073 [PHI, THETA, PSI] = <a href="rotation3dToEulerAngles.html" class="code" title="function varargout = rotation3dToEulerAngles(mat, varargin)">rotation3dToEulerAngles</a>(TFM3D_ROT,<span class="string">'ZYZ'</span>);
+0074 
+0075 <span class="comment">% Test if psi is correct</span>
+0076 TFM3D_test = <a href="eulerAnglesToRotation3d.html" class="code" title="function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)">eulerAnglesToRotation3d</a>(PHI, THETA, PSI,<span class="string">'ZYZ'</span>);
+0077 <span class="keyword">if</span> ~all(all(ismembertol(TFM3D_test(1:3,1:3), TFM3D_ROT)))
+0078     PSI=-1*PSI;
+0079 <span class="keyword">end</span>
+0080 
+0081 <span class="comment">% matGeom format</span>
+0082 fittedEllipse3d=[center A B THETA PHI PSI];
+0083 
+0084 <span class="comment">%% Visualization</span>
+0085 <span class="keyword">if</span> parser.Results.visualization
+0086     
+0087     figure(<span class="string">'Color'</span>,<span class="string">'w'</span>); axis equal tight; hold on; view(3)
+0088     xlabel(<span class="string">'x'</span>); ylabel(<span class="string">'y'</span>); zlabel(<span class="string">'z'</span>);
+0089     
+0090     <span class="comment">% Input points</span>
+0091     scatter3(points(:,1),points(:,2),points(:,3), <span class="string">'r'</span>, <span class="string">'filled'</span>)
+0092     
+0093     <span class="comment">% Centered points</span>
+0094     scatter3(centeredPoints(:,1),centeredPoints(:,2),centeredPoints(:,3), <span class="string">'g'</span>, <span class="string">'filled'</span>)
+0095     
+0096     <span class="comment">% SVD points</span>
+0097     scatter3(tfmPoints(:,1),tfmPoints(:,2),tfmPoints(:,3), <span class="string">'b'</span>, <span class="string">'filled'</span>)
+0098     <span class="comment">% planeProps.FaceAlpha=0.25;</span>
+0099     <span class="comment">% planeProps.FaceColor='b';</span>
+0100     <span class="comment">% drawPlane3d([0 0 0 1 0 0 0 1 0],planeProps)</span>
+0101     
+0102     <span class="comment">% Fitted ellipse</span>
+0103     <a href="drawEllipse3d.html" class="code" title="function varargout = drawEllipse3d(varargin)">drawEllipse3d</a>(fittedEllipse3d)
+0104 <span class="keyword">end</span>
+0105 
+0106 <span class="comment">%% Nested functions</span>
+0107     <a name="_sub1" href="#_subfunctions" class="code">function p = ellipsefit_direct(x,y)</a>
+0108         <span class="comment">% Direct least squares fitting of ellipses.</span>
+0109         <span class="comment">%</span>
+0110         <span class="comment">% Input arguments:</span>
+0111         <span class="comment">% x,y;</span>
+0112         <span class="comment">%    x and y coodinates of 2D points</span>
+0113         <span class="comment">%</span>
+0114         <span class="comment">% Output arguments:</span>
+0115         <span class="comment">% p:</span>
+0116         <span class="comment">%    a 6-parameter vector of the algebraic ellipse fit with</span>
+0117         <span class="comment">%    p(1)*x^2 + p(2)*x*y + p(3)*y^2 + p(4)*x + p(5)*y + p(6) = 0</span>
+0118         <span class="comment">%</span>
+0119         <span class="comment">% References:</span>
+0120         <span class="comment">% Andrew W. Fitzgibbon, Maurizio Pilu and Robert B. Fisher, &quot;Direct Least</span>
+0121         <span class="comment">%    Squares Fitting of Ellipses&quot;, IEEE Trans. PAMI 21, 1999, pp476-480.</span>
+0122         
+0123         <span class="comment">% Copyright 2011 Levente Hunyadi</span>
+0124         
+0125         narginchk(2,2);
+0126         validateattributes(x, {<span class="string">'numeric'</span>}, {<span class="string">'real'</span>,<span class="string">'nonempty'</span>,<span class="string">'vector'</span>});
+0127         validateattributes(y, {<span class="string">'numeric'</span>}, {<span class="string">'real'</span>,<span class="string">'nonempty'</span>,<span class="string">'vector'</span>});
+0128         x = x(:);
+0129         y = y(:);
+0130         
+0131         <span class="comment">% normalize data</span>
+0132         mx = mean(x);
+0133         my = mean(y);
+0134         sx = (max(x)-min(x))/2;
+0135         sy = (max(y)-min(y))/2;
+0136         smax = max(sx,sy);
+0137         sx = smax;
+0138         sy = smax;
+0139         x = (x-mx)/sx;
+0140         y = (y-my)/sy;
+0141         
+0142         <span class="comment">% build design matrix</span>
+0143         D = [ x.^2  x.*y  y.^2  x  y  ones(size(x)) ];
+0144         
+0145         <span class="comment">% build scatter matrix</span>
+0146         S = D'*D;
+0147         
+0148         <span class="comment">% build 6x6 constraint matrix</span>
+0149         C = zeros(6,6);
+0150         C(1,3) = -2;
+0151         C(2,2) = 1;
+0152         C(3,1) = -2;
+0153         
+0154         <span class="keyword">if</span> 1
+0155             p = <a href="#_sub2" class="code" title="subfunction p = ellipsefit_robust(R, Q)">ellipsefit_robust</a>(S,-C);
+0156         <span class="keyword">elseif</span> 0
+0157             <span class="comment">% solve eigensystem</span>
+0158             [gevec, geval] = eig(S,C);
+0159             geval = diag(geval);
+0160             
+0161             <span class="comment">% extract eigenvector corresponding to unique negative (nonpositive) eigenvalue</span>
+0162             p = gevec(:,geval &lt; 0 &amp; ~isinf(geval));
+0163             r = geval(geval &lt; 0 &amp; ~isinf(geval));
+0164         <span class="keyword">elseif</span> 0
+0165             <span class="comment">% formulation as convex optimization problem</span>
+0166             gamma = 0; <span class="comment">%#ok&lt;*UNRCH&gt;</span>
+0167             cvx_begin sdp
+0168             variable(<span class="string">'gamma'</span>);
+0169             variable(<span class="string">'lambda'</span>);
+0170             
+0171             maximize(gamma);
+0172             lambda &gt;= 0; <span class="comment">%#ok&lt;*VUNUS&gt;</span>
+0173             <span class="comment">%[ S + lambda*C,       zeros(size(S,1),1) ...</span>
+0174             <span class="comment">%; zeros(1,size(S,2)), lambda - gamma ...</span>
+0175             <span class="comment">%] &gt;= 0;</span>
+0176             S + lambda*C &gt;= 0;
+0177             lambda - gamma &gt;= 0;
+0178             cvx_end
+0179             
+0180             <span class="comment">% recover primal optimal values from dual</span>
+0181             [evec, eval] = eig(S + lambda*C);
+0182             eval = diag(eval);
+0183             [~,ix] = min(abs(eval));
+0184             p = evec(:,ix);
+0185         <span class="keyword">end</span>
+0186         
+0187         <span class="comment">% unnormalize</span>
+0188         p(:) = <span class="keyword">...</span>
+0189             [ p(1)*sy*sy <span class="keyword">...</span>
+0190             ; p(2)*sx*sy <span class="keyword">...</span>
+0191             ; p(3)*sx*sx <span class="keyword">...</span>
+0192             ; -2*p(1)*sy*sy*mx - p(2)*sx*sy*my + p(4)*sx*sy*sy <span class="keyword">...</span>
+0193             ; -p(2)*sx*sy*mx - 2*p(3)*sx*sx*my + p(5)*sx*sx*sy <span class="keyword">...</span>
+0194             ; p(1)*sy*sy*mx*mx + p(2)*sx*sy*mx*my + p(3)*sx*sx*my*my - p(4)*sx*sy*sy*mx - p(5)*sx*sx*sy*my + p(6)*sx*sx*sy*sy <span class="keyword">...</span>
+0195             ];
+0196         
+0197         p = p ./ norm(p);
+0198     <span class="keyword">end</span>
+0199 
+0200     <a name="_sub2" href="#_subfunctions" class="code">function p = ellipsefit_robust(R, Q)</a>
+0201         <span class="comment">% Constrained ellipse fit by solving a modified eigenvalue problem.</span>
+0202         <span class="comment">% The method is numerically stable.</span>
+0203         <span class="comment">%</span>
+0204         <span class="comment">% Input arguments:</span>
+0205         <span class="comment">% R:</span>
+0206         <span class="comment">%    positive semi-definite data covariance matrix</span>
+0207         <span class="comment">% Q:</span>
+0208         <span class="comment">%    constraint matrix in parameters x^2, xy, y^2, x, y and 1.</span>
+0209         <span class="comment">%</span>
+0210         <span class="comment">% Output arguments:</span>
+0211         <span class="comment">% p:</span>
+0212         <span class="comment">%    estimated parameters (taking constraints into account)</span>
+0213         
+0214         <span class="comment">% References:</span>
+0215         <span class="comment">% Radim Halir and Jan Flusser, &quot;Numerically stable direct least squares fitting of</span>
+0216         <span class="comment">%    ellipses&quot;, 1998</span>
+0217         
+0218         <span class="comment">% Copyright 2012 Levente Hunyadi</span>
+0219         
+0220         validateattributes(R, {<span class="string">'numeric'</span>}, {<span class="string">'real'</span>,<span class="string">'2d'</span>,<span class="string">'size'</span>,[6,6]});
+0221         validateattributes(Q, {<span class="string">'numeric'</span>}, {<span class="string">'real'</span>,<span class="string">'2d'</span>,<span class="string">'size'</span>,[6,6]});
+0222         
+0223         <span class="comment">% check that constraint matrix has all zeros except in upper left block</span>
+0224         assert( nnz(Q(4:6,:)) == 0 );
+0225         assert( nnz(Q(:,4:6)) == 0 );
+0226         
+0227         S1 = R(1:3,1:3);     <span class="comment">% quadratic part of the scatter matrix</span>
+0228         S2 = R(1:3,4:6);     <span class="comment">% combined part of the scatter matrix</span>
+0229         S3 = R(4:6,4:6);     <span class="comment">% linear part of the scatter matrix</span>
+0230         T = -(S3 \ S2');     <span class="comment">% for getting a2 from a1</span>
+0231         M = S1 + S2 * T;     <span class="comment">% reduced scatter matrix</span>
+0232         M = Q(1:3,1:3) \ M;  <span class="comment">% premultiply by inv(C1), e.g. M = [M(3,:)./2 ; -M(2,:) ; M(1,:)./2] for an ellipse</span>
+0233         [evec,~] = eig(M);   <span class="comment">% solve eigensystem</span>
+0234         
+0235         <span class="comment">% evaluate a'*C*a, e.g. cond = 4 * evec(1,:).*evec(3,:) - evec(2,:).^2 for an ellipse</span>
+0236         cond = zeros(1,size(evec,2));
+0237         <span class="keyword">for</span> k = 1 : numel(cond)
+0238             cond(k) = evec(:,k)'*Q(1:3,1:3)*evec(:,k);
+0239         <span class="keyword">end</span>
+0240         
+0241         <span class="comment">% eigenvector for minimum positive eigenvalue</span>
+0242         evec = evec(:,cond &gt; 0);
+0243         cond = cond(cond &gt; 0);
+0244         [~,ix] = min(cond);
+0245         p1 = evec(:,ix);  <span class="comment">% eigenvector for minimum positive eigenvalue</span>
+0246         
+0247         <span class="comment">% ellipse coefficients</span>
+0248         p = [p1 ; T * p1];
+0249     <span class="keyword">end</span>
+0250 
+0251     <a name="_sub3" href="#_subfunctions" class="code">function varargout = ellipse_im2ex(varargin)</a>
+0252         <span class="comment">% Cast ellipse defined with implicit parameter vector to explicit form.</span>
+0253         <span class="comment">%</span>
+0254         <span class="comment">% See also: ellipse_ex2im</span>
+0255         
+0256         <span class="comment">% Copyright 2011 Levente Hunyadi</span>
+0257         
+0258         <span class="keyword">if</span> nargin &gt; 1
+0259             narginchk(6,6);
+0260             <span class="keyword">for</span> k = 1 : 6
+0261                 validateattributes(varargin{k}, {<span class="string">'numeric'</span>}, {<span class="string">'real'</span>,<span class="string">'scalar'</span>});
+0262             <span class="keyword">end</span>
+0263             [c1,c2,a,b,phi] = <a href="#_sub4" class="code" title="subfunction [c1,c2,semia,semib,phi] = ellipse_explicit(a,b,c,d,f,g)">ellipse_explicit</a>(varargin{:});
+0264         <span class="keyword">else</span>
+0265             narginchk(1,1);
+0266             p = varargin{1};
+0267             validateattributes(p, {<span class="string">'numeric'</span>}, {<span class="string">'real'</span>,<span class="string">'vector'</span>});
+0268             p = p(:);
+0269             validateattributes(p, {<span class="string">'numeric'</span>}, {<span class="string">'size'</span>,[6 1]});
+0270             [c1,c2,a,b,phi] = <a href="#_sub4" class="code" title="subfunction [c1,c2,semia,semib,phi] = ellipse_explicit(a,b,c,d,f,g)">ellipse_explicit</a>(p(1), 0.5*p(2), p(3), 0.5*p(4), 0.5*p(5), p(6));
+0271         <span class="keyword">end</span>
+0272         <span class="keyword">if</span> nargout &gt; 1
+0273             varargout = num2cell([c1,c2,a,b,phi]);
+0274         <span class="keyword">else</span>
+0275             varargout{1} = [c1,c2,a,b,phi];
+0276         <span class="keyword">end</span>
+0277         
+0278         <a name="_sub4" href="#_subfunctions" class="code">function [c1,c2,semia,semib,phi] = ellipse_explicit(a,b,c,d,f,g)</a>
+0279             <span class="comment">% Cast ellipse defined with explicit parameter vector to implicit form.</span>
+0280             
+0281             <span class="comment">% helper quantities</span>
+0282             N = 2*(a*f^2+c*d^2+g*b^2-2*b*d*f-a*c*g);
+0283             D = b^2-a*c;
+0284             S = realsqrt((a-c)^2+4*b^2);
+0285             
+0286             <span class="comment">% semi-axes</span>
+0287             ap = realsqrt( N/(D*(S-(a+c))) );
+0288             bp = realsqrt( N/(D*(-S-(a+c))) );
+0289             semia = max(ap,bp);
+0290             semib = min(ap,bp);
+0291             
+0292             <span class="comment">% center</span>
+0293             c1 = (c*d-b*f)/D;
+0294             c2 = (a*f-b*d)/D;
+0295             
+0296             <span class="comment">% angle of tilt</span>
+0297             <span class="keyword">if</span> b ~= 0
+0298                 <span class="keyword">if</span> abs(a) &lt; abs(c)
+0299                     phi = 0.5*acot((a-c)/(2*b));
+0300                 <span class="keyword">else</span>
+0301                     phi = 0.5*pi+0.5*acot((a-c)/(2*b));
+0302                 <span class="keyword">end</span>
+0303             <span class="keyword">else</span>
+0304                 <span class="keyword">if</span> abs(a) &lt; abs(c)
+0305                     phi = 0;
+0306                 <span class="keyword">else</span>  <span class="comment">% a &gt; c</span>
+0307                     phi = 0.5*pi;
+0308                 <span class="keyword">end</span>
+0309             <span class="keyword">end</span>
+0310         <span class="keyword">end</span>
+0311     <span class="keyword">end</span>
+0312 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

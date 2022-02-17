@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of anglePoints3d</title>
+  <meta name="keywords" content="anglePoints3d">
+  <meta name="description" content="ANGLEPOINTS3D Compute angle between three 3D points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; anglePoints3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>anglePoints3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ANGLEPOINTS3D Compute angle between three 3D points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function alpha = anglePoints3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ANGLEPOINTS3D Compute angle between three 3D points.
+
+   ALPHA = anglePoints3d(P1, P2)
+   Computes angle (P1, O, P2), in radians, between 0 and PI.
+
+   ALPHA = anglePoints3d(P1, P2, P3)
+   Computes angle (P1, P2, P3), in radians, between 0 and PI.
+
+   ALPHA = anglePoints3d(PTS)
+   PTS is a 3x3 or 2x3 array containing coordinate of points.
+
+   See also
+   <a href="points3d.html" class="code" title="function points3d(varargin)">points3d</a>, <a href="angles3d.html" class="code" title="function angles3d(varargin)">angles3d</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 21/02/2005.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>	NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polygon3dNormalAngle.html" class="code" title="function theta = polygon3dNormalAngle(points, ind)">polygon3dNormalAngle</a>	POLYGON3DNORMALANGLE Normal angle at a vertex of the 3D polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function alpha = anglePoints3d(varargin)</a>
+0002 <span class="comment">%ANGLEPOINTS3D Compute angle between three 3D points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   ALPHA = anglePoints3d(P1, P2)</span>
+0005 <span class="comment">%   Computes angle (P1, O, P2), in radians, between 0 and PI.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   ALPHA = anglePoints3d(P1, P2, P3)</span>
+0008 <span class="comment">%   Computes angle (P1, P2, P3), in radians, between 0 and PI.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   ALPHA = anglePoints3d(PTS)</span>
+0011 <span class="comment">%   PTS is a 3x3 or 2x3 array containing coordinate of points.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   See also</span>
+0014 <span class="comment">%   points3d, angles3d</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   ---------</span>
+0017 <span class="comment">%   author : David Legland</span>
+0018 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0019 <span class="comment">%   created the 21/02/2005.</span>
+0020 <span class="comment">%</span>
+0021 
+0022 <span class="comment">%   HISTORY</span>
+0023 <span class="comment">%   20/09/2005: add case of single argument for all points</span>
+0024 <span class="comment">%   04/01/2007: check typo</span>
+0025 <span class="comment">%   27/05/2014: adjust known vector sizes n1, n0, n2 once corrected for</span>
+0026 
+0027 
+0028 p2 = [0 0 0];
+0029 <span class="keyword">if</span> length(varargin) == 1
+0030     pts = varargin{1};
+0031     <span class="keyword">if</span> size(pts, 1)==2
+0032         p1 = pts(1,:);
+0033         p0 = [0 0 0];
+0034         p2 = pts(2,:);
+0035     <span class="keyword">else</span>
+0036         p1 = pts(1,:);
+0037         p0 = pts(2,:);
+0038         p2 = pts(3,:);
+0039     <span class="keyword">end</span>
+0040     
+0041 <span class="keyword">elseif</span> length(varargin) == 2
+0042     p1 = varargin{1};
+0043     p0 = [0 0 0];
+0044     p2 = varargin{2};
+0045     
+0046 <span class="keyword">elseif</span> length(varargin) == 3
+0047     p1 = varargin{1};
+0048     p0 = varargin{2};
+0049     p2 = varargin{3};
+0050 <span class="keyword">end</span>
+0051 
+0052 <span class="comment">% ensure all data have same size</span>
+0053 n1 = size(p1, 1);
+0054 n2 = size(p2, 1);
+0055 n0 = size(p0, 1);
+0056 
+0057 <span class="keyword">if</span> n1 ~= n0
+0058     <span class="keyword">if</span> n1 == 1
+0059         p1 = repmat(p1, [n0 1]);
+0060         n1 = n0;
+0061     <span class="keyword">elseif</span> n0==1
+0062         p0 = repmat(p0, [n1 1]);
+0063     <span class="keyword">else</span>
+0064         error(<span class="string">'Arguments P1 and P0 must have the same size'</span>);
+0065     <span class="keyword">end</span>
+0066 <span class="keyword">end</span>
+0067 
+0068 <span class="keyword">if</span> n1 ~= n2
+0069     <span class="keyword">if</span> n1 == 1
+0070         p1 = repmat(p1, [n2 1]);
+0071     <span class="keyword">elseif</span> n2 == 1
+0072         p2 = repmat(p2, [n1 1]);
+0073     <span class="keyword">else</span>
+0074         error(<span class="string">'Arguments P1 and P2 must have the same size'</span>);
+0075     <span class="keyword">end</span>
+0076 <span class="keyword">end</span>
+0077 
+0078 <span class="comment">% normalized vectors</span>
+0079 p1 = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p1 - p0);
+0080 p2 = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p2 - p0);
+0081 
+0082 <span class="comment">% compute angle</span>
+0083 alpha = acos(dot(p1, p2, 2));</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of fitSphere</title>
+  <meta name="keywords" content="fitSphere">
+  <meta name="description" content="FITSPHERE Fit a sphere to 3D points using the least squares approach.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; fitSphere.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>fitSphere
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>FITSPHERE Fit a sphere to 3D points using the least squares approach.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [sphere, residuals] = fitSphere(x,y,z) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">FITSPHERE Fit a sphere to 3D points using the least squares approach.
+
+   SPHERE = fitSphere(PTS)
+   Fits the equation of a sphere in Cartesian coordinates to the N-by-3 
+   array PTS using the least squares approach. The sphere is represented 
+   by its center [xc yc zc] and its radius r: SPHERE = [xc yc zc r].
+
+   SPHERE = fitSphere(X, Y, Z)
+   Use three vectors X, Y and Z with the length N instead of a the 
+   N-by-3 array PTS.
+  
+   [SPHERE, RESIDUALS] = fitSphere(...)
+   Additionally outputs the residuals in the radial direction.
+
+   Example:
+     center=-100 + 200*rand(1,3);
+     radius = randi([10 100]);
+     [x,y,z]=drawSphere(center, radius);
+     x=x+rand(size(x)); y=y+rand(size(y)); z=z+rand(size(z));
+     sampleIdx = randi(numel(x),[1,randi([4, numel(x)])]);
+     x=x(sampleIdx); y=y(sampleIdx); z=z(sampleIdx);
+     sphere = fitSphere(x,y,z);
+     figure('color','w'); hold on; axis equal tight; view(3)
+     drawPoint3d(x,y,z)
+     drawSphere(sphere,'FaceAlpha',0.5)
+   
+   See also:
+     <a href="createSphere.html" class="code" title="function sphere = createSphere(varargin)">createSphere</a>, <a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a>, <a href="intersectLineSphere.html" class="code" title="function points = intersectLineSphere(line, sphere, varargin)">intersectLineSphere</a>, <a href="intersectPlaneSphere.html" class="code" title="function circle = intersectPlaneSphere(plane, sphere)">intersectPlaneSphere</a>
+
+   Source:
+     Levente Hunyadi - Fitting quadratic curves and surfaces:
+     https://de.mathworks.com/matlabcentral/fileexchange/45356</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [sphere, residuals] = fitSphere(x,y,z)</a>
+0002 <span class="comment">%FITSPHERE Fit a sphere to 3D points using the least squares approach.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   SPHERE = fitSphere(PTS)</span>
+0005 <span class="comment">%   Fits the equation of a sphere in Cartesian coordinates to the N-by-3</span>
+0006 <span class="comment">%   array PTS using the least squares approach. The sphere is represented</span>
+0007 <span class="comment">%   by its center [xc yc zc] and its radius r: SPHERE = [xc yc zc r].</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   SPHERE = fitSphere(X, Y, Z)</span>
+0010 <span class="comment">%   Use three vectors X, Y and Z with the length N instead of a the</span>
+0011 <span class="comment">%   N-by-3 array PTS.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   [SPHERE, RESIDUALS] = fitSphere(...)</span>
+0014 <span class="comment">%   Additionally outputs the residuals in the radial direction.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example:</span>
+0017 <span class="comment">%     center=-100 + 200*rand(1,3);</span>
+0018 <span class="comment">%     radius = randi([10 100]);</span>
+0019 <span class="comment">%     [x,y,z]=drawSphere(center, radius);</span>
+0020 <span class="comment">%     x=x+rand(size(x)); y=y+rand(size(y)); z=z+rand(size(z));</span>
+0021 <span class="comment">%     sampleIdx = randi(numel(x),[1,randi([4, numel(x)])]);</span>
+0022 <span class="comment">%     x=x(sampleIdx); y=y(sampleIdx); z=z(sampleIdx);</span>
+0023 <span class="comment">%     sphere = fitSphere(x,y,z);</span>
+0024 <span class="comment">%     figure('color','w'); hold on; axis equal tight; view(3)</span>
+0025 <span class="comment">%     drawPoint3d(x,y,z)</span>
+0026 <span class="comment">%     drawSphere(sphere,'FaceAlpha',0.5)</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%   See also:</span>
+0029 <span class="comment">%     createSphere, drawSphere, intersectLineSphere, intersectPlaneSphere</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%   Source:</span>
+0032 <span class="comment">%     Levente Hunyadi - Fitting quadratic curves and surfaces:</span>
+0033 <span class="comment">%     https://de.mathworks.com/matlabcentral/fileexchange/45356</span>
+0034 
+0035 <span class="comment">% ------</span>
+0036 <span class="comment">% Author: Levente Hunyadi, oqilipo (minor adaptions for matGeom)</span>
+0037 <span class="comment">% Created: 2010</span>
+0038 <span class="comment">% Copyright 2010 Levente Hunyadi</span>
+0039 
+0040 narginchk(1,3);
+0041 
+0042 <span class="keyword">switch</span> nargin  <span class="comment">% n x 3 matrix</span>
+0043     <span class="keyword">case</span> 1
+0044         n = size(x,1);
+0045         validateattributes(x, {<span class="string">'numeric'</span>}, {<span class="string">'2d'</span>,<span class="string">'real'</span>,<span class="string">'size'</span>,[n,3]});
+0046         z = x(:,3);
+0047         y = x(:,2);
+0048         x = x(:,1);
+0049     <span class="keyword">otherwise</span>  <span class="comment">% three x,y,z vectors</span>
+0050         n = length(x(:));
+0051         x = x(:);  <span class="comment">% force into columns</span>
+0052         y = y(:);
+0053         z = z(:);
+0054         validateattributes(x, {<span class="string">'numeric'</span>}, {<span class="string">'real'</span>,<span class="string">'size'</span>,[n,1]});
+0055         validateattributes(y, {<span class="string">'numeric'</span>}, {<span class="string">'real'</span>,<span class="string">'size'</span>,[n,1]});
+0056         validateattributes(z, {<span class="string">'numeric'</span>}, {<span class="string">'real'</span>,<span class="string">'size'</span>,[n,1]});
+0057 <span class="keyword">end</span>
+0058 
+0059 <span class="comment">% need four or more data points</span>
+0060 <span class="keyword">if</span> n &lt; 4
+0061    error(<span class="string">'spherefit:InsufficientData'</span>, <span class="keyword">...</span>
+0062        <span class="string">'At least four points are required to fit a unique sphere.'</span>);
+0063 <span class="keyword">end</span>
+0064 
+0065 <span class="comment">% solve linear system of normal equations</span>
+0066 A = [x, y, z, ones(size(x))];
+0067 b = -(x.^2 + y.^2 + z.^2);
+0068 a = A \ b;
+0069 
+0070 <span class="comment">% return center coordinates and sphere radius</span>
+0071 center = -a(1:3)./2;
+0072 radius = realsqrt(sum(center.^2)-a(4));
+0073 sphere = [center' radius];
+0074 
+0075 <span class="comment">% calculate residuals</span>
+0076 residuals = radius - sqrt(sum(bsxfun(@minus,[x y z],center.').^2,2));
+0077 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

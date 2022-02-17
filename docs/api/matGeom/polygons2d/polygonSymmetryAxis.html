@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polygonSymmetryAxis</title>
+  <meta name="keywords" content="polygonSymmetryAxis">
+  <meta name="description" content="POLYGONSYMMETRYAXIS Try to identify symmetry axis of polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; polygonSymmetryAxis.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polygonSymmetryAxis
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYGONSYMMETRYAXIS Try to identify symmetry axis of polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function axis = polygonSymmetryAxis(poly) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLYGONSYMMETRYAXIS Try to identify symmetry axis of polygon.
+
+   LINE = polygonSymmetryAxis(POLY)
+   Returns a line that minimize difference between the polygon POLY and
+   its reflection with the line.
+   The difference metric between the two polygons is the sum of distances
+   between each vertex of original polygon to the reflected polygon.
+
+   Example
+     % identify symmetry axis of an ellipse
+     elli = [50 50 40 20 30];
+     poly = ellipseToPolygon(elli, 100);
+     line = polygonSymmetryAxis(poly);
+     figure; hold on;
+     drawEllipse(elli);
+     axis equal; axis ([0 100 0 100]);
+     drawLine(line);
+
+   See also
+   transforms2d, transformPoint, <a href="distancePointPolygon.html" class="code" title="function minDist = distancePointPolygon(point, poly)">distancePointPolygon</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>	CREATELINE Create a straight line from 2 points, or from other inputs.</li><li><a href="../../matGeom/geom2d/createLineReflection.html" class="code" title="function trans = createLineReflection(line)">createLineReflection</a>	CREATELINEREFLECTION Create the the 3x3 matrix of a line reflection.</li><li><a href="../../matGeom/geom2d/transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>	Apply an affine transform to a point or a point set.</li><li><a href="distancePointPolygon.html" class="code" title="function minDist = distancePointPolygon(point, poly)">distancePointPolygon</a>	DISTANCEPOINTPOLYGON Shortest distance between a point and a polygon.</li><li><a href="polygonCentroid.html" class="code" title="function [centroid, area] = polygonCentroid(varargin)">polygonCentroid</a>	Computes the centroid (center of mass) of a polygon.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function axis = polygonSymmetryAxis(poly)</a>
+0002 <span class="comment">%POLYGONSYMMETRYAXIS Try to identify symmetry axis of polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   LINE = polygonSymmetryAxis(POLY)</span>
+0005 <span class="comment">%   Returns a line that minimize difference between the polygon POLY and</span>
+0006 <span class="comment">%   its reflection with the line.</span>
+0007 <span class="comment">%   The difference metric between the two polygons is the sum of distances</span>
+0008 <span class="comment">%   between each vertex of original polygon to the reflected polygon.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Example</span>
+0011 <span class="comment">%     % identify symmetry axis of an ellipse</span>
+0012 <span class="comment">%     elli = [50 50 40 20 30];</span>
+0013 <span class="comment">%     poly = ellipseToPolygon(elli, 100);</span>
+0014 <span class="comment">%     line = polygonSymmetryAxis(poly);</span>
+0015 <span class="comment">%     figure; hold on;</span>
+0016 <span class="comment">%     drawEllipse(elli);</span>
+0017 <span class="comment">%     axis equal; axis ([0 100 0 100]);</span>
+0018 <span class="comment">%     drawLine(line);</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   See also</span>
+0021 <span class="comment">%   transforms2d, transformPoint, distancePointPolygon</span>
+0022  
+0023 <span class="comment">% ------</span>
+0024 <span class="comment">% Author: David Legland</span>
+0025 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0026 <span class="comment">% Created: 2015-04-28,    using Matlab 8.4.0.150421 (R2014b)</span>
+0027 <span class="comment">% Copyright 2015 INRA - Cepia Software Platform.</span>
+0028 
+0029 <span class="comment">% start by centering the polygon</span>
+0030 center = <a href="polygonCentroid.html" class="code" title="function [centroid, area] = polygonCentroid(varargin)">polygonCentroid</a>(poly);
+0031 poly = bsxfun(@minus, poly, center);
+0032 
+0033 <span class="comment">% first performs a rough search with 8 angles</span>
+0034 initAngles = linspace(0, pi, 9);
+0035 initAngles(end) = [];
+0036 initRes = zeros(8, 1);
+0037 <span class="keyword">for</span> i = 1:8
+0038     line = <a href="../../matGeom/geom2d/createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>([0 0 cos(initAngles(i)) sin(initAngles(i))]);
+0039     rotMat = <a href="../../matGeom/geom2d/createLineReflection.html" class="code" title="function trans = createLineReflection(line)">createLineReflection</a>(line);
+0040     polyRot = <a href="../../matGeom/geom2d/transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(poly, rotMat);
+0041     initRes(i) = sum(<a href="distancePointPolygon.html" class="code" title="function minDist = distancePointPolygon(point, poly)">distancePointPolygon</a>(poly, polyRot).^2);
+0042 <span class="keyword">end</span>
+0043 
+0044 <span class="comment">% keep the angle that gives best result</span>
+0045 [dummy, indMin] = min(initRes); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0046 initAngle = initAngles(indMin);
+0047 
+0048 <span class="comment">% Compute angle that best fit between polygon and its symmetric along line</span>
+0049 thetaMin = fminbnd(<span class="keyword">...</span>
+0050     @(theta) sum(<a href="distancePointPolygon.html" class="code" title="function minDist = distancePointPolygon(point, poly)">distancePointPolygon</a>(<a href="../../matGeom/geom2d/transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(poly, <a href="../../matGeom/geom2d/createLineReflection.html" class="code" title="function trans = createLineReflection(line)">createLineReflection</a>([0 0 cos(theta) sin(theta)])), poly).^2), <span class="keyword">...</span>
+0051     initAngle-pi/4, initAngle+pi/4);
+0052 
+0053 <span class="comment">% format as a line</span>
+0054 axis = [center cos(thetaMin) sin(thetaMin)];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

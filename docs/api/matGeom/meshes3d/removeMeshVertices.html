@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of removeMeshVertices</title>
+  <meta name="keywords" content="removeMeshVertices">
+  <meta name="description" content="REMOVEMESHVERTICES Remove vertices and associated faces from a mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; removeMeshVertices.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>removeMeshVertices
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>REMOVEMESHVERTICES Remove vertices and associated faces from a mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = removeMeshVertices(vertices, faces, indsToRemove) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">REMOVEMESHVERTICES Remove vertices and associated faces from a mesh.
+
+   [V2, F2] = removeMeshVertices(VERTS, FACES, VERTINDS)
+   Removes the vertices specified by the vertex indices VERTINDS, and
+   remove the faces containing one of the removed vertices.
+
+   Example
+     % remove some vertices from a soccerball polyhedron
+     [v, f] = createSoccerBall; 
+     plane = createPlane([.6 0 0], [1 0 0]);
+     indAbove = find(~isBelowPlane(v, plane));
+     [v2, f2] = removeMeshVertices(v, f, indAbove);
+     drawMesh(v2, f2);
+     axis equal; hold on;
+
+   See also
+     meshes3d, <a href="trimMesh.html" class="code" title="function varargout = trimMesh(varargin)">trimMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="removeMeshEars.html" class="code" title="function varargout = removeMeshEars(varargin)">removeMeshEars</a>	REMOVEMESHEARS Remove vertices that are connected to only one face.</li><li><a href="splitMesh.html" class="code" title="function meshes = splitMesh(vertices, faces, varargin)">splitMesh</a>	SPLITMESH Return the connected components of a mesh.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = removeMeshVertices(vertices, faces, indsToRemove)</a>
+0002 <span class="comment">%REMOVEMESHVERTICES Remove vertices and associated faces from a mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V2, F2] = removeMeshVertices(VERTS, FACES, VERTINDS)</span>
+0005 <span class="comment">%   Removes the vertices specified by the vertex indices VERTINDS, and</span>
+0006 <span class="comment">%   remove the faces containing one of the removed vertices.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Example</span>
+0009 <span class="comment">%     % remove some vertices from a soccerball polyhedron</span>
+0010 <span class="comment">%     [v, f] = createSoccerBall;</span>
+0011 <span class="comment">%     plane = createPlane([.6 0 0], [1 0 0]);</span>
+0012 <span class="comment">%     indAbove = find(~isBelowPlane(v, plane));</span>
+0013 <span class="comment">%     [v2, f2] = removeMeshVertices(v, f, indAbove);</span>
+0014 <span class="comment">%     drawMesh(v2, f2);</span>
+0015 <span class="comment">%     axis equal; hold on;</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   See also</span>
+0018 <span class="comment">%     meshes3d, trimMesh</span>
+0019  
+0020 <span class="comment">% ------</span>
+0021 <span class="comment">% Author: David Legland</span>
+0022 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0023 <span class="comment">% Created: 2016-02-03,    using Matlab 8.6.0.267246 (R2015b)</span>
+0024 <span class="comment">% Copyright 2016 INRA - Cepia Software Platform.</span>
+0025 
+0026 <span class="comment">% parse inputs</span>
+0027 <span class="keyword">if</span> nargin == 2
+0028     indsToRemove = faces;
+0029     [vertices, faces] = parseMeshData(vertices);
+0030 <span class="keyword">end</span>
+0031 
+0032 <span class="comment">% create array of indices to keep</span>
+0033 nVertices = size(vertices, 1);
+0034 newInds = (1:nVertices)';
+0035 newInds(indsToRemove) = [];
+0036 
+0037 <span class="comment">% create new vertex array</span>
+0038 vertices2 = vertices(newInds, :);
+0039 
+0040 <span class="comment">% compute map from old indices to new indices</span>
+0041 oldNewMap = zeros(nVertices, 1);
+0042 <span class="keyword">for</span> iIndex = 1:size(newInds, 1)
+0043    oldNewMap(newInds(iIndex)) = iIndex; 
+0044 <span class="keyword">end</span>
+0045 
+0046 <span class="comment">% change labels of vertices referenced by faces</span>
+0047 <span class="keyword">if</span> isnumeric(faces)
+0048     faces2 = oldNewMap(faces);
+0049     <span class="keyword">if</span> size(faces2,2)==1; faces2=faces2'; <span class="keyword">end</span>
+0050     <span class="comment">% keep only faces with valid vertices</span>
+0051     faces2 = faces2(sum(faces2 == 0, 2) == 0, :);
+0052 <span class="keyword">elseif</span> iscell(faces)
+0053     faces2 = cell(1, length(faces));
+0054     <span class="keyword">for</span> iFace = 1:length(faces)
+0055          newFace = oldNewMap(faces{iFace});
+0056          <span class="comment">% add the new face only if all vertices are valid</span>
+0057          <span class="keyword">if</span> ~any(newFace == 0)
+0058              faces2{iFace} = newFace;
+0059          <span class="keyword">end</span>
+0060     <span class="keyword">end</span>
+0061     
+0062     <span class="comment">% remove empty faces</span>
+0063     faces2 = faces2(~cellfun(@isempty, faces2));
+0064 <span class="keyword">end</span>
+0065 
+0066 <span class="comment">% format output arguments</span>
+0067 varargout = formatMeshOutput(nargout, vertices2, faces2);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawLine</title>
+  <meta name="keywords" content="drawLine">
+  <meta name="description" content="DRAWLINE Draw a straight line clipped by the current axis.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; drawLine.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawLine
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWLINE Draw a straight line clipped by the current axis.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawLine(lin, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWLINE Draw a straight line clipped by the current axis.
+
+   drawLine(LINE);
+   Draws the line LINE on the current axis, by using current axis to clip
+   the line. 
+
+   drawLine(LINE, PARAM, VALUE);
+   Specifies drawing options.
+
+   H = drawLine(...)
+   Returns a handle to the created line object. If clipped line is not
+   contained in the axis, the function returns -1.
+   
+   Example
+     figure; hold on; axis equal;
+     axis([0 100 0 100]);
+     drawLine([30 40 10 20]);
+     drawLine([30 40 20 -10], 'Color', 'm', 'LineWidth', 2);
+     drawLine([-30 140 10 20]);
+
+   See also:
+   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>, <a href="drawEdge.html" class="code" title="function varargout = drawEdge(varargin)">drawEdge</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 31/10/2003.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="clipLine.html" class="code" title="function edge = clipLine(line, box, varargin)">clipLine</a>	CLIPLINE Clip a line with a box.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawLine(lin, varargin)</a>
+0002 <span class="comment">%DRAWLINE Draw a straight line clipped by the current axis.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawLine(LINE);</span>
+0005 <span class="comment">%   Draws the line LINE on the current axis, by using current axis to clip</span>
+0006 <span class="comment">%   the line.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   drawLine(LINE, PARAM, VALUE);</span>
+0009 <span class="comment">%   Specifies drawing options.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   H = drawLine(...)</span>
+0012 <span class="comment">%   Returns a handle to the created line object. If clipped line is not</span>
+0013 <span class="comment">%   contained in the axis, the function returns -1.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   Example</span>
+0016 <span class="comment">%     figure; hold on; axis equal;</span>
+0017 <span class="comment">%     axis([0 100 0 100]);</span>
+0018 <span class="comment">%     drawLine([30 40 10 20]);</span>
+0019 <span class="comment">%     drawLine([30 40 20 -10], 'Color', 'm', 'LineWidth', 2);</span>
+0020 <span class="comment">%     drawLine([-30 140 10 20]);</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   See also:</span>
+0023 <span class="comment">%   lines2d, createLine, drawEdge</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   ---------</span>
+0026 <span class="comment">%   author : David Legland</span>
+0027 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0028 <span class="comment">%   created the 31/10/2003.</span>
+0029 <span class="comment">%</span>
+0030 
+0031 <span class="comment">%   HISTORY</span>
+0032 <span class="comment">%   25/05/2004 add support for multiple lines (loop)</span>
+0033 <span class="comment">%   23/05/2005 add support for arguments</span>
+0034 <span class="comment">%   03/08/2010 bug for lines outside box (thanks to Reto Zingg)</span>
+0035 <span class="comment">%   04/08/2010 rewrite using clipLine</span>
+0036 <span class="comment">%   2011-10-11 add management of axes handle</span>
+0037 
+0038 <span class="comment">% extract handle of axis to draw in</span>
+0039 <span class="keyword">if</span> isAxisHandle(lin)
+0040     ax = lin;
+0041     lin = varargin{1};
+0042     varargin(1) = [];
+0043 <span class="keyword">else</span>
+0044     ax = gca;
+0045 <span class="keyword">end</span>
+0046 
+0047 <span class="comment">% default style for drawing lines</span>
+0048 <span class="keyword">if</span> length(varargin) ~= 1
+0049     varargin = [{<span class="string">'color'</span>, <span class="string">'b'</span>}, varargin];
+0050 <span class="keyword">end</span>
+0051 
+0052 <span class="comment">% extract bounding box of the current axis</span>
+0053 xlim = get(ax, <span class="string">'xlim'</span>);
+0054 ylim = get(ax, <span class="string">'ylim'</span>);
+0055 
+0056 <span class="comment">% clip lines with current axis box</span>
+0057 clip = <a href="clipLine.html" class="code" title="function edge = clipLine(line, box, varargin)">clipLine</a>(lin, [xlim ylim]);
+0058 ok   = isfinite(clip(:,1));
+0059 
+0060 <span class="comment">% initialize result array to invalide handles</span>
+0061 h = -1 * ones(size(lin, 1), 1);
+0062 
+0063 <span class="comment">% draw valid lines</span>
+0064 h(ok) = plot(ax, clip(ok, [1 3])', clip(ok, [2 4])', varargin{:});
+0065 
+0066 <span class="comment">% return line handle if needed</span>
+0067 <span class="keyword">if</span> nargout &gt; 0
+0068     varargout = {h};
+0069 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

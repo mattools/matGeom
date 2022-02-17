@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawTorus</title>
+  <meta name="keywords" content="drawTorus">
+  <meta name="description" content="DRAWTORUS Draw a torus (3D ring).">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; drawTorus.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawTorus
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWTORUS Draw a torus (3D ring).</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawTorus(torus, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWTORUS Draw a torus (3D ring).
+
+   drawTorus(TORUS)
+   Draws the torus on the current axis. TORUS is given by:
+   [XC YC ZY  R1 R2  THETA PHI]
+   where (XC YZ ZC) is the center of the torus, R1 is the main radius, R2
+   is the radius of the torus section, and (THETA PHI) is the angle of the
+   torus normal vector (both in degrees).
+
+   drawTorus(..., PNAME, PVALUE)
+   Specifies a set of parameter name-value pairs. Parameter names include
+   plitting options ('facecolor', 'linestyle'...), or options specific to
+   torus:
+   'nPhi'      number of meridians used to draw the torus (default is 60).
+   'nTheta'    number of parallels used to draw the torus (default is 60).
+
+
+   Example
+     % draw sample torus
+     figure;
+     drawTorus([50 50 50 30 10 30 45]);
+     axis equal; view([95 10]); light;
+
+   See also
+   <a href="drawEllipsoid.html" class="code" title="function varargout = drawEllipsoid(elli, varargin)">drawEllipsoid</a>, <a href="revolutionSurface.html" class="code" title="function varargout = revolutionSurface(varargin)">revolutionSurface</a>, torusMesh</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/circleToPolygon.html" class="code" title="function varargout = circleToPolygon(circle, varargin)">circleToPolygon</a>	CIRCLETOPOLYGON Convert a circle into a series of points.</li><li><a href="revolutionSurface.html" class="code" title="function varargout = revolutionSurface(varargin)">revolutionSurface</a>	REVOLUTIONSURFACE Create a surface of revolution from a planar curve.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawTorus(torus, varargin)</a>
+0002 <span class="comment">%DRAWTORUS Draw a torus (3D ring).</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawTorus(TORUS)</span>
+0005 <span class="comment">%   Draws the torus on the current axis. TORUS is given by:</span>
+0006 <span class="comment">%   [XC YC ZY  R1 R2  THETA PHI]</span>
+0007 <span class="comment">%   where (XC YZ ZC) is the center of the torus, R1 is the main radius, R2</span>
+0008 <span class="comment">%   is the radius of the torus section, and (THETA PHI) is the angle of the</span>
+0009 <span class="comment">%   torus normal vector (both in degrees).</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   drawTorus(..., PNAME, PVALUE)</span>
+0012 <span class="comment">%   Specifies a set of parameter name-value pairs. Parameter names include</span>
+0013 <span class="comment">%   plitting options ('facecolor', 'linestyle'...), or options specific to</span>
+0014 <span class="comment">%   torus:</span>
+0015 <span class="comment">%   'nPhi'      number of meridians used to draw the torus (default is 60).</span>
+0016 <span class="comment">%   'nTheta'    number of parallels used to draw the torus (default is 60).</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   Example</span>
+0020 <span class="comment">%     % draw sample torus</span>
+0021 <span class="comment">%     figure;</span>
+0022 <span class="comment">%     drawTorus([50 50 50 30 10 30 45]);</span>
+0023 <span class="comment">%     axis equal; view([95 10]); light;</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   See also</span>
+0026 <span class="comment">%   drawEllipsoid, revolutionSurface, torusMesh</span>
+0027 <span class="comment">%</span>
+0028 
+0029 <span class="comment">% ------</span>
+0030 <span class="comment">% Author: David Legland</span>
+0031 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0032 <span class="comment">% Created: 2011-06-22,    using Matlab 7.9.0.529 (R2009b)</span>
+0033 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0034 
+0035 <span class="comment">%% Default values</span>
+0036 
+0037 <span class="comment">% number of meridians</span>
+0038 nPhi    = 60;
+0039 
+0040 <span class="comment">% number of parallels</span>
+0041 nTheta  = 60;
+0042 
+0043 
+0044 <span class="comment">%% Extract input arguments</span>
+0045 
+0046 center = torus(1:3);
+0047 r1 = torus(4);
+0048 r2 = torus(5);
+0049 
+0050 normal = [0 0];
+0051 <span class="keyword">if</span> size(torus, 2) &gt;= 7
+0052     normal = torus(6:7);
+0053 <span class="keyword">end</span>
+0054 
+0055 <span class="comment">% default set of options for drawing meshes</span>
+0056 options = {<span class="string">'FaceColor'</span>, <span class="string">'g'</span>, <span class="string">'linestyle'</span>, <span class="string">'none'</span>};
+0057 
+0058 <span class="keyword">while</span> length(varargin) &gt; 1
+0059     <span class="keyword">switch</span> lower(varargin{1})
+0060         <span class="keyword">case</span> <span class="string">'nphi'</span>
+0061             nPhi = varargin{2};
+0062             
+0063         <span class="keyword">case</span> <span class="string">'ntheta'</span>
+0064             nTheta = varargin{2};
+0065 
+0066         <span class="keyword">otherwise</span>
+0067             <span class="comment">% assumes this is drawing option</span>
+0068             options = [options varargin(1:2)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0069     <span class="keyword">end</span>
+0070 
+0071     varargin(1:2) = [];
+0072 <span class="keyword">end</span>
+0073 
+0074 
+0075 <span class="comment">%% Draw the torus</span>
+0076 
+0077 <span class="comment">% create base torus</span>
+0078 circle = <a href="../../matGeom/geom2d/circleToPolygon.html" class="code" title="function varargout = circleToPolygon(circle, varargin)">circleToPolygon</a>([r1 0 r2], nTheta);
+0079 [x, y, z] = <a href="revolutionSurface.html" class="code" title="function varargout = revolutionSurface(varargin)">revolutionSurface</a>(circle, linspace(0, 2*pi, nPhi));
+0080 
+0081 <span class="comment">% transform torus</span>
+0082 trans = localToGlobal3d([center normal]);
+0083 [x, y, z] = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(x, y, z, trans);
+0084 
+0085 <span class="comment">% draw the surface</span>
+0086 hs = surf(x, y, z, options{:});
+0087 
+0088 
+0089 <span class="comment">%% Process output arguments</span>
+0090 
+0091 <span class="keyword">if</span> nargout &gt; 0
+0092     varargout = {hs};
+0093 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

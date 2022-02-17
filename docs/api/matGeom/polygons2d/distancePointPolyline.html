@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of distancePointPolyline</title>
+  <meta name="keywords" content="distancePointPolyline">
+  <meta name="description" content="DISTANCEPOINTPOLYLINE  Compute shortest distance between a point and a polyline.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; distancePointPolyline.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>distancePointPolyline
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DISTANCEPOINTPOLYLINE  Compute shortest distance between a point and a polyline.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [minDist, pos] = distancePointPolyline(point, poly, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DISTANCEPOINTPOLYLINE  Compute shortest distance between a point and a polyline.
+
+   DIST = distancePointPolyline(POINT, POLYLINE)
+   Returns the shortest distance between a point given as a 1-by-2 row
+   vector, and a polyline given as a NV-by-2 array of coordinates.
+
+   If POINT is a NP-by-2 array, the result DIST is a NP-by-1 array,
+   containig the distance of each point to the polyline.
+
+   [DIST, POS] = distancePointPolyline(POINT, POLYLINE)
+   Also returns the relative position of the point projected on the
+   polyline, between 0 and NV, the number of polyline vertices.
+
+   ... = distancePointPolyline(POINT, POLYLINE, CLOSED)
+   Specifies if the polyline is closed or not. CLOSED can be one of:
+   * 'closed' -&gt; the polyline is closed
+   * 'open' -&gt; the polyline is open
+     a column vector of logical with the same number of elements as the
+       number of points -&gt; specify individually if each polyline is
+       closed (true=closed).
+
+
+   Example:
+       pt1 = [30 20];
+       pt2 = [30 5];
+       poly = [10 10;50 10;50 50;10 50];
+       distancePointPolyline([pt1;pt2], poly)
+       ans =
+           10
+            5
+
+   See also
+   polygons2d, points2d
+   distancePointEdge, <a href="distancePointPolygon.html" class="code" title="function minDist = distancePointPolygon(point, poly)">distancePointPolygon</a>, <a href="projPointOnPolyline.html" class="code" title="function varargout = projPointOnPolyline(point, poly, varargin)">projPointOnPolyline</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/distancePointEdge.html" class="code" title="function [dist, pos] = distancePointEdge(point, edge)">distancePointEdge</a>	DISTANCEPOINTEDGE Minimum distance between a point and an edge.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="distancePointPolygon.html" class="code" title="function minDist = distancePointPolygon(point, poly)">distancePointPolygon</a>	DISTANCEPOINTPOLYGON Shortest distance between a point and a polygon.</li><li><a href="distancePolylines.html" class="code" title="function dist = distancePolylines(poly1, poly2)">distancePolylines</a>	DISTANCEPOLYLINES Compute the shortest distance between 2 polylines.</li><li><a href="isPointOnPolyline.html" class="code" title="function res = isPointOnPolyline(point, poly, varargin)">isPointOnPolyline</a>	ISPOINTONPOLYLINE Test if a point belongs to a polyline.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [minDist, pos] = distancePointPolyline(point, poly, varargin)</a>
+0002 <span class="comment">%DISTANCEPOINTPOLYLINE  Compute shortest distance between a point and a polyline.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   DIST = distancePointPolyline(POINT, POLYLINE)</span>
+0005 <span class="comment">%   Returns the shortest distance between a point given as a 1-by-2 row</span>
+0006 <span class="comment">%   vector, and a polyline given as a NV-by-2 array of coordinates.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   If POINT is a NP-by-2 array, the result DIST is a NP-by-1 array,</span>
+0009 <span class="comment">%   containig the distance of each point to the polyline.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   [DIST, POS] = distancePointPolyline(POINT, POLYLINE)</span>
+0012 <span class="comment">%   Also returns the relative position of the point projected on the</span>
+0013 <span class="comment">%   polyline, between 0 and NV, the number of polyline vertices.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   ... = distancePointPolyline(POINT, POLYLINE, CLOSED)</span>
+0016 <span class="comment">%   Specifies if the polyline is closed or not. CLOSED can be one of:</span>
+0017 <span class="comment">%   * 'closed' -&gt; the polyline is closed</span>
+0018 <span class="comment">%   * 'open' -&gt; the polyline is open</span>
+0019 <span class="comment">%     a column vector of logical with the same number of elements as the</span>
+0020 <span class="comment">%       number of points -&gt; specify individually if each polyline is</span>
+0021 <span class="comment">%       closed (true=closed).</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   Example:</span>
+0025 <span class="comment">%       pt1 = [30 20];</span>
+0026 <span class="comment">%       pt2 = [30 5];</span>
+0027 <span class="comment">%       poly = [10 10;50 10;50 50;10 50];</span>
+0028 <span class="comment">%       distancePointPolyline([pt1;pt2], poly)</span>
+0029 <span class="comment">%       ans =</span>
+0030 <span class="comment">%           10</span>
+0031 <span class="comment">%            5</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">%   See also</span>
+0034 <span class="comment">%   polygons2d, points2d</span>
+0035 <span class="comment">%   distancePointEdge, distancePointPolygon, projPointOnPolyline</span>
+0036 <span class="comment">%</span>
+0037 
+0038 <span class="comment">% ------</span>
+0039 <span class="comment">% Author: David Legland</span>
+0040 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0041 <span class="comment">% Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)</span>
+0042 <span class="comment">% Copyright 2009 INRA - Cepia Software Platform.</span>
+0043 <span class="comment">% Author: Juan Pablo Carbajal</span>
+0044 <span class="comment">% e-mail: ajuanpi+dev@gmail.com</span>
+0045 
+0046 <span class="comment">%   HISTORY</span>
+0047 <span class="comment">%   2009-06-23 compute all distances in one call</span>
+0048 <span class="comment">%   2016-02-04 Vectorize</span>
+0049 
+0050 <span class="comment">% check if input polyline is closed or not</span>
+0051 closed = false;
+0052 <span class="keyword">if</span> ~isempty(varargin)
+0053     c = varargin{1};
+0054     <span class="keyword">if</span> strcmp(<span class="string">'closed'</span>, c)
+0055         closed = true;
+0056     <span class="keyword">elseif</span> strcmp(<span class="string">'open'</span>, c)
+0057         closed = false;
+0058     <span class="keyword">elseif</span> islogical(c)
+0059         closed = c;
+0060     <span class="keyword">end</span>
+0061 <span class="keyword">end</span>
+0062 
+0063 <span class="comment">% closes the polyline if necessary</span>
+0064 <span class="keyword">if</span> closed
+0065     poly = [poly; poly(1,:)];
+0066 <span class="keyword">end</span>
+0067 
+0068 <span class="comment">% number of points</span>
+0069 Np = size(point, 1);
+0070 
+0071 <span class="comment">% construct the set of edges</span>
+0072 edges = [poly(1:end-1, :) poly(2:<span class="keyword">end</span>, :)];
+0073 
+0074 <span class="comment">% compute distance between current each point and all edges, and also</span>
+0075 <span class="comment">% returns the position of projection on corresponding edge, between 0 and 1</span>
+0076 [dist, edgePos] = <a href="../../matGeom/geom2d/distancePointEdge.html" class="code" title="function [dist, pos] = distancePointEdge(point, edge)">distancePointEdge</a>(point, edges);
+0077 
+0078 <span class="comment">% get the minimum distance, and index of edge providing minimum distance</span>
+0079 [minDist, edgeIndex] = min(dist, [], 2);
+0080 
+0081 <span class="comment">% if required, compute projections</span>
+0082 pos = [];
+0083 <span class="keyword">if</span> nargout == 2
+0084     Ne = size(edgePos, 2);
+0085     j  = sub2ind([Np, Ne], (1:Np)', edgeIndex);
+0086     pos = edgeIndex - 1 + edgePos(j);
+0087 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

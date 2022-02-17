@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of meshFaceAdjacency</title>
+  <meta name="keywords" content="meshFaceAdjacency">
+  <meta name="description" content="MESHFACEADJACENCY Compute adjacency list of face around each face.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; meshFaceAdjacency.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>meshFaceAdjacency
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MESHFACEADJACENCY Compute adjacency list of face around each face.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function adjList = meshFaceAdjacency(vertices, edges, faces) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MESHFACEADJACENCY Compute adjacency list of face around each face.
+
+
+   Example
+     % Create a sample 3D mesh
+     [v, e, f] = createDodecahedron;
+     adjList = meshFaceAdjacency(v, e, f);
+     figure; hold on; axis equal; view([100 40]);
+     drawMesh(v, f);
+     % draw sample face in a different color
+     drawMesh(v, f(1, :), 'faceColor', 'b');
+     % draw the neighbors of a sample face
+     drawMesh(v, f(adjList{1}, :), 'faceColor', 'g')</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="meshEdgeFaces.html" class="code" title="function edgeFaces = meshEdgeFaces(vertices, edges, faces) %#ok<INUSL>">meshEdgeFaces</a>	MESHEDGEFACES Compute index of faces adjacent to each edge of a mesh.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function adjList = meshFaceAdjacency(vertices, edges, faces)</a>
+0002 <span class="comment">%MESHFACEADJACENCY Compute adjacency list of face around each face.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%</span>
+0005 <span class="comment">%   Example</span>
+0006 <span class="comment">%     % Create a sample 3D mesh</span>
+0007 <span class="comment">%     [v, e, f] = createDodecahedron;</span>
+0008 <span class="comment">%     adjList = meshFaceAdjacency(v, e, f);</span>
+0009 <span class="comment">%     figure; hold on; axis equal; view([100 40]);</span>
+0010 <span class="comment">%     drawMesh(v, f);</span>
+0011 <span class="comment">%     % draw sample face in a different color</span>
+0012 <span class="comment">%     drawMesh(v, f(1, :), 'faceColor', 'b');</span>
+0013 <span class="comment">%     % draw the neighbors of a sample face</span>
+0014 <span class="comment">%     drawMesh(v, f(adjList{1}, :), 'faceColor', 'g')</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%</span>
+0017 
+0018 <span class="comment">% ------</span>
+0019 <span class="comment">% Author: David Legland</span>
+0020 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0021 <span class="comment">% Created: 2010-10-04,    using Matlab 7.9.0.529 (R2009b)</span>
+0022 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0023 
+0024 
+0025 edgeFaceList = <a href="meshEdgeFaces.html" class="code" title="function edgeFaces = meshEdgeFaces(vertices, edges, faces) %#ok<INUSL>">meshEdgeFaces</a>(vertices, edges, faces);
+0026 
+0027 <span class="comment">% allocate memory for adjacency list</span>
+0028 nFaces = max(edgeFaceList(:));
+0029 adjList = cell(1, nFaces);
+0030 
+0031 <span class="comment">% iterate over edges to populate adjacency list</span>
+0032 <span class="keyword">for</span> iEdge = 1:size(edgeFaceList)
+0033     f1 = edgeFaceList(iEdge, 1);
+0034     f2 = edgeFaceList(iEdge, 2);
+0035     adjList{f1} = [adjList{f1} f2];
+0036     adjList{f2} = [adjList{f2} f1];
+0037 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

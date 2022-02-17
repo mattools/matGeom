@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of smoothPolyline</title>
+  <meta name="keywords" content="smoothPolyline">
+  <meta name="description" content="SMOOTHPOLYLINE Smooth a polyline using local averaging.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; smoothPolyline.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>smoothPolyline
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>SMOOTHPOLYLINE Smooth a polyline using local averaging.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function res = smoothPolyline(poly, M) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">SMOOTHPOLYLINE Smooth a polyline using local averaging.
+
+   RES = smoothPolygon(POLY, M)
+   POLY contains the polyline vertices, and M is the size of smoothing
+   (given as the length of the convolution window).
+   Extremities of the polyline are smoothed with reduced window (last and
+   first vertices are kept identical, second and penultimate vertices are
+   smoothed with 3 values, etc.).
+
+   Example
+     img = imread('circles.png');
+     img = imfill(img, 'holes');
+     contours = bwboundaries(img');
+     poly = contours{1}(201:500,:);
+     figure; drawPolyline(poly, 'b'); hold on;
+     poly2 = smoothPolyline(poly, 21);
+     drawPolygon(poly2, 'm');
+
+   See also
+     polygons2d, <a href="smoothPolygon.html" class="code" title="function res = smoothPolygon(poly, M)">smoothPolygon</a>, <a href="simplifyPolyline.html" class="code" title="function [poly2, keepInds] = simplifyPolyline(poly, tol)">simplifyPolyline</a>, <a href="resamplePolyline.html" class="code" title="function poly2 = resamplePolyline(poly, n)">resamplePolyline</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function res = smoothPolyline(poly, M)</a>
+0002 <span class="comment">%SMOOTHPOLYLINE Smooth a polyline using local averaging.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   RES = smoothPolygon(POLY, M)</span>
+0005 <span class="comment">%   POLY contains the polyline vertices, and M is the size of smoothing</span>
+0006 <span class="comment">%   (given as the length of the convolution window).</span>
+0007 <span class="comment">%   Extremities of the polyline are smoothed with reduced window (last and</span>
+0008 <span class="comment">%   first vertices are kept identical, second and penultimate vertices are</span>
+0009 <span class="comment">%   smoothed with 3 values, etc.).</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Example</span>
+0012 <span class="comment">%     img = imread('circles.png');</span>
+0013 <span class="comment">%     img = imfill(img, 'holes');</span>
+0014 <span class="comment">%     contours = bwboundaries(img');</span>
+0015 <span class="comment">%     poly = contours{1}(201:500,:);</span>
+0016 <span class="comment">%     figure; drawPolyline(poly, 'b'); hold on;</span>
+0017 <span class="comment">%     poly2 = smoothPolyline(poly, 21);</span>
+0018 <span class="comment">%     drawPolygon(poly2, 'm');</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   See also</span>
+0021 <span class="comment">%     polygons2d, smoothPolygon, simplifyPolyline, resamplePolyline</span>
+0022  
+0023 <span class="comment">% ------</span>
+0024 <span class="comment">% Author: David Legland</span>
+0025 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0026 <span class="comment">% Created: 2015-02-17,    using Matlab 8.4.0.150421 (R2014b)</span>
+0027 <span class="comment">% Copyright 2015 INRA - Cepia Software Platform.</span>
+0028 
+0029 <span class="comment">% compute the number of elements before and after</span>
+0030 M1 = floor((M - 1) / 2);
+0031 M2 = ceil((M - 1) / 2);
+0032 
+0033 <span class="comment">% create convolution vector</span>
+0034 v2 = ones(M, 1) / M;
+0035 
+0036 <span class="comment">% apply filtering on central part of the polyline</span>
+0037 res(:,1) = conv(poly(:,1), v2, <span class="string">'same'</span>);
+0038 res(:,2) = conv(poly(:,2), v2, <span class="string">'same'</span>);
+0039 
+0040 <span class="comment">% need to recompute the extremities</span>
+0041 <span class="keyword">for</span> i = 1:M1
+0042     i2 = 2 * i - 1;
+0043     res(i, 1) = mean(poly(1:i2, 1));
+0044     res(i, 2) = mean(poly(1:i2, 2));
+0045 <span class="keyword">end</span>
+0046 <span class="keyword">for</span> i = 1:M2
+0047     i2 = 2 * i - 1;
+0048     res(end - i + 1, 1) = mean(poly(end-i2+1:<span class="keyword">end</span>, 1));
+0049     res(end - i + 1, 2) = mean(poly(end-i2+1:<span class="keyword">end</span>, 2));
+0050 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

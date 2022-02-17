@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of nndist</title>
+  <meta name="keywords" content="nndist">
+  <meta name="description" content="NNDIST Nearest-neighbor distances of each point in a set.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; nndist.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>nndist
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>NNDIST Nearest-neighbor distances of each point in a set.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [dists, neighInds] = nndist(points) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">NNDIST Nearest-neighbor distances of each point in a set.
+
+   DISTS = nndist(POINTS)
+   Returns the distance to the nearest neighbor of each point in an array
+   of points.
+   POINTS is an array of points, NP-by-ND.
+   DISTS is a NP-by-1 array containing the distances to the nearest
+   neighbor.
+
+   This functions first computes the Delaunay triangulation of the set of
+   points, then search for nearest distance in the set of each vertex
+   neighbors. This reduces the overall complexity, but difference was
+   noticed only for large sets (&gt;10000 points)
+
+   Example
+     % Display Stienen diagram of a set of random points in unit square
+     pts = rand(100, 2);
+     [dists, inds] = nndist(pts);
+     figure; drawPoint(pts, 'k.');
+     hold on; drawCircle([pts dists/2], 'b');
+     axis equal; axis([-.1 1.1 -.1 1.1]);
+     % also display edges
+     drawEdge([pts pts(inds, :)], 'b');
+
+   See also
+     <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>, <a href="minDistancePoints.html" class="code" title="function varargout = minDistancePoints(p1, varargin)">minDistancePoints</a>, findPoint</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>	DISTANCEPOINTS Compute distance between two points.</li><li><a href="minDistancePoints.html" class="code" title="function varargout = minDistancePoints(p1, varargin)">minDistancePoints</a>	Minimal distance between several points.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [dists, neighInds] = nndist(points)</a>
+0002 <span class="comment">%NNDIST Nearest-neighbor distances of each point in a set.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   DISTS = nndist(POINTS)</span>
+0005 <span class="comment">%   Returns the distance to the nearest neighbor of each point in an array</span>
+0006 <span class="comment">%   of points.</span>
+0007 <span class="comment">%   POINTS is an array of points, NP-by-ND.</span>
+0008 <span class="comment">%   DISTS is a NP-by-1 array containing the distances to the nearest</span>
+0009 <span class="comment">%   neighbor.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   This functions first computes the Delaunay triangulation of the set of</span>
+0012 <span class="comment">%   points, then search for nearest distance in the set of each vertex</span>
+0013 <span class="comment">%   neighbors. This reduces the overall complexity, but difference was</span>
+0014 <span class="comment">%   noticed only for large sets (&gt;10000 points)</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example</span>
+0017 <span class="comment">%     % Display Stienen diagram of a set of random points in unit square</span>
+0018 <span class="comment">%     pts = rand(100, 2);</span>
+0019 <span class="comment">%     [dists, inds] = nndist(pts);</span>
+0020 <span class="comment">%     figure; drawPoint(pts, 'k.');</span>
+0021 <span class="comment">%     hold on; drawCircle([pts dists/2], 'b');</span>
+0022 <span class="comment">%     axis equal; axis([-.1 1.1 -.1 1.1]);</span>
+0023 <span class="comment">%     % also display edges</span>
+0024 <span class="comment">%     drawEdge([pts pts(inds, :)], 'b');</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%   See also</span>
+0027 <span class="comment">%     points2d, distancePoints, minDistancePoints, findPoint</span>
+0028 <span class="comment">%</span>
+0029 
+0030 <span class="comment">% ------</span>
+0031 <span class="comment">% Author: David Legland</span>
+0032 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0033 <span class="comment">% Created: 2011-12-01,    using Matlab 7.9.0.529 (R2009b)</span>
+0034 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0035 
+0036 <span class="comment">% number of points</span>
+0037 n = size(points, 1);
+0038 
+0039 <span class="comment">% allocate memory</span>
+0040 dists = zeros(n, 1);
+0041 neighInds = zeros(n, 1);
+0042 
+0043 <span class="comment">% in case of few points, use direct computation</span>
+0044 <span class="keyword">if</span> n &lt; 3
+0045     inds = 1:n;
+0046     <span class="keyword">for</span> i = 1:n
+0047         <span class="comment">% compute minimal distance</span>
+0048         [dists(i), indN] = <a href="minDistancePoints.html" class="code" title="function varargout = minDistancePoints(p1, varargin)">minDistancePoints</a>(points(i,:), points(inds~=i, :));
+0049         <span class="keyword">if</span> indN &gt;= i
+0050             neighInds(i) = inds(indN) + 1;
+0051         <span class="keyword">else</span>
+0052             neighInds(i) = inds(indN);
+0053         <span class="keyword">end</span>
+0054     <span class="keyword">end</span>
+0055     <span class="keyword">return</span>;
+0056 <span class="keyword">end</span>
+0057 
+0058 <span class="comment">% use Delaunay Triangulation to facilitate computations</span>
+0059 DT = delaunay (points);
+0060 
+0061 <span class="comment">% compute distance to nearest neighbor of each point in the pattern</span>
+0062 <span class="keyword">for</span> i = 1:n
+0063     <span class="comment">% find indices of neighbor vertices in Delaunay Triangulation.</span>
+0064     <span class="comment">% this set contains the nearest neighbor</span>
+0065     inds = unique(DT(sum(DT == i, 2) &gt; 0, :));
+0066     inds = inds(inds~=i);
+0067     
+0068     <span class="comment">% compute minimal distance</span>
+0069     [dists(i), indN] = min(<a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(points(i,:), points(inds, :)));
+0070     neighInds(i) = inds(indN);
+0071 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

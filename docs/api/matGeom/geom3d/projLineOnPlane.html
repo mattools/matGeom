@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of projLineOnPlane</title>
+  <meta name="keywords" content="projLineOnPlane">
+  <meta name="description" content="PROJLINEONPLANE Return the orthogonal projection of a line on a plane.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; projLineOnPlane.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>projLineOnPlane
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>PROJLINEONPLANE Return the orthogonal projection of a line on a plane.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [newLine, isOrthogonal] = projLineOnPlane(line, plane) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">PROJLINEONPLANE Return the orthogonal projection of a line on a plane.
+ 
+   NEWLINE = PROJLINEONPLANE(LINE, PLANE) Returns the orthogonal
+   projection of LINE or multiple lines on the PLANE.
+
+   [..., ISORTHOGONAL] = PROJLINEONPLANE(LINE, PLANE) Also returns if the
+   LINE is orthogonal to the PLANE.
+
+   Example
+     plane = [.1 .2 .3 .4 .5 .6 .7 .8 .9];
+     lines = [0 .3 0 1 0 0;0  .5 .5 0 0 1;...
+         .4 .1 .5 1 0 2;.2 .7 .1 0 1 0;...
+         plane(1:3) planeNormal(plane)];
+     [newLines, isOrthogonal] = projLineOnPlane(lines, plane);
+     figure('color','w'); axis equal; view(3)
+     drawLine3d(lines,'b')
+     drawPlane3d(plane)
+     drawLine3d(newLines(~isOrthogonal,:), 'r')
+
+   See also:
+   <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>, <a href="lines3d.html" class="code" title="function lines3d(varargin)">lines3d</a>, <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>, <a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>
+
+ ---------
+ Author: oqilipo
+ Created: 2017-08-06
+ Copyright 2017</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createLine3d.html" class="code" title="function line = createLine3d(varargin)">createLine3d</a>	CREATELINE3D Create a line with various inputs.</li><li><a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>	PROJPOINTONPLANE Return the orthogonal projection of a point on a plane.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [newLine, isOrthogonal] = projLineOnPlane(line, plane)</a>
+0002 <span class="comment">%PROJLINEONPLANE Return the orthogonal projection of a line on a plane.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   NEWLINE = PROJLINEONPLANE(LINE, PLANE) Returns the orthogonal</span>
+0005 <span class="comment">%   projection of LINE or multiple lines on the PLANE.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   [..., ISORTHOGONAL] = PROJLINEONPLANE(LINE, PLANE) Also returns if the</span>
+0008 <span class="comment">%   LINE is orthogonal to the PLANE.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Example</span>
+0011 <span class="comment">%     plane = [.1 .2 .3 .4 .5 .6 .7 .8 .9];</span>
+0012 <span class="comment">%     lines = [0 .3 0 1 0 0;0  .5 .5 0 0 1;...</span>
+0013 <span class="comment">%         .4 .1 .5 1 0 2;.2 .7 .1 0 1 0;...</span>
+0014 <span class="comment">%         plane(1:3) planeNormal(plane)];</span>
+0015 <span class="comment">%     [newLines, isOrthogonal] = projLineOnPlane(lines, plane);</span>
+0016 <span class="comment">%     figure('color','w'); axis equal; view(3)</span>
+0017 <span class="comment">%     drawLine3d(lines,'b')</span>
+0018 <span class="comment">%     drawPlane3d(plane)</span>
+0019 <span class="comment">%     drawLine3d(newLines(~isOrthogonal,:), 'r')</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See also:</span>
+0022 <span class="comment">%   planes3d, lines3d, intersectLinePlane, projPointOnPlane</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">% ---------</span>
+0025 <span class="comment">% Author: oqilipo</span>
+0026 <span class="comment">% Created: 2017-08-06</span>
+0027 <span class="comment">% Copyright 2017</span>
+0028 
+0029 p1 = <a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>(line(:,1:3), plane);
+0030 p2 = <a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>(line(:,1:3)+line(:,4:6), plane);
+0031 
+0032 newLine=<a href="createLine3d.html" class="code" title="function line = createLine3d(varargin)">createLine3d</a>(p1, p2);
+0033 isOrthogonal = ismembertol(p1,p2,<span class="string">'ByRows'</span>,true);
+0034 
+0035</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polygonCurvature</title>
+  <meta name="keywords" content="polygonCurvature">
+  <meta name="description" content="POLYGONCURVATURE Estimate curvature on polygon vertices using polynomial fit.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; polygonCurvature.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polygonCurvature
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYGONCURVATURE Estimate curvature on polygon vertices using polynomial fit.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function curv = polygonCurvature(poly, M) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLYGONCURVATURE Estimate curvature on polygon vertices using polynomial fit.
+
+   CURV = polygonCurvature(POLY, M)
+   Estimate the curvature for each vertex of a polygon, using polynomial
+   fit from the M verties located around current vertex. M is usually an
+   odd value, resulting in a symmetric neighborhood.
+
+   Polynomial fitting is of degree 2 by default.
+   
+
+   Example
+     img = imread('circles.png');
+     img = imfill(img, 'holes');
+     imgf = imfilter(double(img), fspecial('gaussian', 7, 2));
+     figure(1), imshow(imgf);
+     contours = imContours(imgf, .5); poly = contours{1};
+     poly2 = smoothPolygon(poly, 7);
+     hold on; drawPolygon(poly2);
+     curv = polygonCurvature(poly2, 11);
+     figure; plot(curv);
+     minima = bwlabel(imextendedmin(curv, .05));
+     centroids = imCentroid(minima);
+     inds = round(centroids(:,2));
+     figure(1); hold on; drawPoint(poly2(inds, :), 'g*')
+
+   See also
+     polygons2d</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function curv = polygonCurvature(poly, M)</a>
+0002 <span class="comment">%POLYGONCURVATURE Estimate curvature on polygon vertices using polynomial fit.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   CURV = polygonCurvature(POLY, M)</span>
+0005 <span class="comment">%   Estimate the curvature for each vertex of a polygon, using polynomial</span>
+0006 <span class="comment">%   fit from the M verties located around current vertex. M is usually an</span>
+0007 <span class="comment">%   odd value, resulting in a symmetric neighborhood.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   Polynomial fitting is of degree 2 by default.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%     img = imread('circles.png');</span>
+0014 <span class="comment">%     img = imfill(img, 'holes');</span>
+0015 <span class="comment">%     imgf = imfilter(double(img), fspecial('gaussian', 7, 2));</span>
+0016 <span class="comment">%     figure(1), imshow(imgf);</span>
+0017 <span class="comment">%     contours = imContours(imgf, .5); poly = contours{1};</span>
+0018 <span class="comment">%     poly2 = smoothPolygon(poly, 7);</span>
+0019 <span class="comment">%     hold on; drawPolygon(poly2);</span>
+0020 <span class="comment">%     curv = polygonCurvature(poly2, 11);</span>
+0021 <span class="comment">%     figure; plot(curv);</span>
+0022 <span class="comment">%     minima = bwlabel(imextendedmin(curv, .05));</span>
+0023 <span class="comment">%     centroids = imCentroid(minima);</span>
+0024 <span class="comment">%     inds = round(centroids(:,2));</span>
+0025 <span class="comment">%     figure(1); hold on; drawPoint(poly2(inds, :), 'g*')</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   See also</span>
+0028 <span class="comment">%     polygons2d</span>
+0029  
+0030 <span class="comment">% ------</span>
+0031 <span class="comment">% Author: David Legland</span>
+0032 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0033 <span class="comment">% Created: 2018-03-02,    using Matlab 9.3.0.713579 (R2017b)</span>
+0034 <span class="comment">% Copyright 2018 INRA - Cepia Software Platform.</span>
+0035 
+0036 <span class="comment">% number of vertices of polygon</span>
+0037 n = size(poly, 1);
+0038 
+0039 <span class="comment">% allocate memory for result</span>
+0040 curv = zeros(n, 1);
+0041 
+0042 <span class="comment">% number of vertices before and after current vertex</span>
+0043 s1 = floor((M - 1) / 2);
+0044 s2 = ceil((M - 1) / 2);
+0045 
+0046 <span class="comment">% parametrisation basis</span>
+0047 <span class="comment">% As we recenter the points, the constant factor is omitted</span>
+0048 ti = (-s1:s2)';
+0049 X = [ti ti.^2];
+0050     
+0051 <span class="comment">% Iteration on vertex indices</span>
+0052 <span class="keyword">for</span> i = 1:n
+0053     <span class="comment">% coordinate of current vertex, for recentring neighbor vertices</span>
+0054     x0 = poly(i,1);
+0055     y0 = poly(i,2);
+0056     
+0057     <span class="comment">% indices of neighbors</span>
+0058     inds = i-s1:i+s2;
+0059     inds = mod(inds-1, n) + 1;
+0060     
+0061     <span class="comment">% Least square estimation using mrdivide</span>
+0062     xc = X \ (poly(inds,1) - x0);
+0063     yc = X \ (poly(inds,2) - y0);
+0064     
+0065     <span class="comment">% compute curvature</span>
+0066     curv(i) = 2 * (xc(1)*yc(2) - xc(2)*yc(1) ) / power(xc(1)^2 + yc(1)^2, 3/2);
+0067 <span class="keyword">end</span>
+0068 
+0069</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

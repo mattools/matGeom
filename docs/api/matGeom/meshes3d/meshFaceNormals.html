@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of meshFaceNormals</title>
+  <meta name="keywords" content="meshFaceNormals">
+  <meta name="description" content="MESHFACENORMALS Compute normal vector of faces in a 3D mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; meshFaceNormals.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>meshFaceNormals
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MESHFACENORMALS Compute normal vector of faces in a 3D mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function normals = meshFaceNormals(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MESHFACENORMALS Compute normal vector of faces in a 3D mesh.
+
+   NORMALS = meshFaceNormals(VERTICES, FACES)
+   VERTICES is a set of 3D points (as a N-by-3 array), and FACES is either
+   a N-by-3 index array or a cell array of indices. The function computes
+   the normal vector of each face.
+   The orientation of the normal is defined by the sign of cross product
+   between vectors joining vertices 1 to 2 and 1 to 3.
+
+
+   Example
+     [v e f] = createIcosahedron;
+     normals1 = meshFaceNormals(v, f);
+     centros1 = meshFaceCentroids(v, f);
+     figure; drawMesh(v, f); 
+     hold on; axis equal; view(3);
+     drawVector3d(centros1, normals1);
+
+     pts = rand(50, 3);
+     hull = minConvexHull(pts);
+     normals2 = meshFaceNormals(pts, hull);
+
+   See also
+   meshes3d, <a href="meshFaceCentroids.html" class="code" title="function centroids = meshFaceCentroids(varargin)">meshFaceCentroids</a>, <a href="meshVertexNormals.html" class="code" title="function [normals, faceNormals] = meshVertexNormals(varargin)">meshVertexNormals</a>, <a href="drawFaceNormals.html" class="code" title="function varargout = drawFaceNormals(varargin)">drawFaceNormals</a>
+   <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>	NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="clipConvexPolyhedronHP.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronHP(nodes, faces, plane)">clipConvexPolyhedronHP</a>	CLIPCONVEXPOLYHEDRONHP Clip a convex polyhedron by a plane.</li><li><a href="createStellatedMesh.html" class="code" title="function varargout = createStellatedMesh(vertices, faces, varargin)">createStellatedMesh</a>	CREATESTELLATEDMESH  Replaces each face of a mesh by a pyramid.</li><li><a href="drawFaceNormals.html" class="code" title="function varargout = drawFaceNormals(varargin)">drawFaceNormals</a>	DRAWFACENORMALS Draw normal vector of each face in a mesh.</li><li><a href="mergeCoplanarFaces.html" class="code" title="function varargout = mergeCoplanarFaces(nodes, varargin)">mergeCoplanarFaces</a>	MERGECOPLANARFACES Merge coplanar faces of a polyhedral mesh.</li><li><a href="meshCurvatures.html" class="code" title="function [C1, C2, U1, U2, H, K, N] = meshCurvatures(vertices, faces, varargin)">meshCurvatures</a>	Compute principal curvatures on mesh vertices.</li><li><a href="meshDihedralAngles.html" class="code" title="function alpha = meshDihedralAngles(vertices, edges, faces)">meshDihedralAngles</a>	MESHDIHEDRALANGLES Dihedral at edges of a polyhedal mesh.</li><li><a href="meshSurfaceArea.html" class="code" title="function area = meshSurfaceArea(varargin)">meshSurfaceArea</a>	Surface area of a polyhedral mesh.</li><li><a href="meshVertexNormals.html" class="code" title="function [normals, faceNormals] = meshVertexNormals(varargin)">meshVertexNormals</a>	MESHVERTEXNORMALS Compute normals to a mesh vertices.</li><li><a href="minConvexHull.html" class="code" title="function newFaces = minConvexHull(points, varargin)">minConvexHull</a>	MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.</li><li><a href="trimeshMeanBreadth.html" class="code" title="function mb = trimeshMeanBreadth(vertices, faces)">trimeshMeanBreadth</a>	TRIMESHMEANBREADTH Mean breadth of a triangular mesh.</li><li><a href="vertexNormal.html" class="code" title="function normals = vertexNormal(vertices, faces)">vertexNormal</a>	VERTEXNORMAL Compute normals to a mesh vertices.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function normals = meshFaceNormals(varargin)</a>
+0002 <span class="comment">%MESHFACENORMALS Compute normal vector of faces in a 3D mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   NORMALS = meshFaceNormals(VERTICES, FACES)</span>
+0005 <span class="comment">%   VERTICES is a set of 3D points (as a N-by-3 array), and FACES is either</span>
+0006 <span class="comment">%   a N-by-3 index array or a cell array of indices. The function computes</span>
+0007 <span class="comment">%   the normal vector of each face.</span>
+0008 <span class="comment">%   The orientation of the normal is defined by the sign of cross product</span>
+0009 <span class="comment">%   between vectors joining vertices 1 to 2 and 1 to 3.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%     [v e f] = createIcosahedron;</span>
+0014 <span class="comment">%     normals1 = meshFaceNormals(v, f);</span>
+0015 <span class="comment">%     centros1 = meshFaceCentroids(v, f);</span>
+0016 <span class="comment">%     figure; drawMesh(v, f);</span>
+0017 <span class="comment">%     hold on; axis equal; view(3);</span>
+0018 <span class="comment">%     drawVector3d(centros1, normals1);</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%     pts = rand(50, 3);</span>
+0021 <span class="comment">%     hull = minConvexHull(pts);</span>
+0022 <span class="comment">%     normals2 = meshFaceNormals(pts, hull);</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   See also</span>
+0025 <span class="comment">%   meshes3d, meshFaceCentroids, meshVertexNormals, drawFaceNormals</span>
+0026 <span class="comment">%   drawMesh</span>
+0027 
+0028 <span class="comment">% ------</span>
+0029 <span class="comment">% Author: David Legland</span>
+0030 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0031 <span class="comment">% Created: 2006-07-05</span>
+0032 <span class="comment">% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0033 
+0034 <span class="comment">% HISTORY</span>
+0035 <span class="comment">% 2011-11-24 rename from faceNormal to meshFaceNormals</span>
+0036 
+0037 <span class="comment">% parse input data</span>
+0038 [vertices, faces] = parseMeshData(varargin{:});
+0039 
+0040 <span class="keyword">if</span> isnumeric(faces)
+0041     <span class="comment">% compute vector of first edges</span>
+0042     v1 = vertices(faces(:,2),1:3) - vertices(faces(:,1),1:3);
+0043     v2 = vertices(faces(:,3),1:3) - vertices(faces(:,1),1:3);
+0044     
+0045     <span class="comment">% compute normals using cross product (nodes have same size)</span>
+0046     normals = cross(v1, v2, 2);
+0047 
+0048 <span class="keyword">else</span>
+0049     <span class="comment">% initialize empty array</span>
+0050     normals = zeros(length(faces), 3);
+0051     
+0052     <span class="keyword">for</span> i = 1:length(faces)
+0053         face = faces{i};
+0054         <span class="comment">% compute vector of first edges</span>
+0055         v1 = vertices(face(2),1:3) - vertices(face(1),1:3);
+0056         v2 = vertices(face(3),1:3) - vertices(face(1),1:3);
+0057 
+0058         <span class="comment">% compute normals using cross product</span>
+0059         normals(i, :) = cross(v1, v2, 2);
+0060     <span class="keyword">end</span>
+0061 <span class="keyword">end</span>
+0062 
+0063 normals = <a href="../../matGeom/geom3d/normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(normals);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createEdge3d</title>
+  <meta name="keywords" content="createEdge3d">
+  <meta name="description" content="CREATEEDGE3D Create an edge between two 3D points, or from a 3D line.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; createEdge3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createEdge3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATEEDGE3D Create an edge between two 3D points, or from a 3D line.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function edge = createEdge3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATEEDGE3D Create an edge between two 3D points, or from a 3D line.
+
+   E = createEdge3d(P1, P2)
+   Creates the 3D edge joining the two points P1 and P2.
+
+   E = createEdge3d(LIN)
+   Creates the 3D edge with same origin and same direction vector as the
+   3D line LIN.
+
+   Example
+     p1 = [1 1 1];
+     p2 = [3 4 5];
+     edge = createEdge3d(p1, p2);
+     edgeLength3d(edge)
+     ans =
+         5.3852
+   
+   See also
+     <a href="edges3d.html" class="code" title="function edges3d(varargin)">edges3d</a>, <a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>, <a href="clipEdge3d.html" class="code" title="function clipped = clipEdge3d(edge, box)">clipEdge3d</a>, <a href="edgeLength3d.html" class="code" title="function len = edgeLength3d(edge, varargin)">edgelength3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function edge = createEdge3d(varargin)</a>
+0002 <span class="comment">%CREATEEDGE3D Create an edge between two 3D points, or from a 3D line.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   E = createEdge3d(P1, P2)</span>
+0005 <span class="comment">%   Creates the 3D edge joining the two points P1 and P2.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   E = createEdge3d(LIN)</span>
+0008 <span class="comment">%   Creates the 3D edge with same origin and same direction vector as the</span>
+0009 <span class="comment">%   3D line LIN.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Example</span>
+0012 <span class="comment">%     p1 = [1 1 1];</span>
+0013 <span class="comment">%     p2 = [3 4 5];</span>
+0014 <span class="comment">%     edge = createEdge3d(p1, p2);</span>
+0015 <span class="comment">%     edgeLength3d(edge)</span>
+0016 <span class="comment">%     ans =</span>
+0017 <span class="comment">%         5.3852</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   See also</span>
+0020 <span class="comment">%     edges3d, drawEdge3d, clipEdge3d, edgelength3d</span>
+0021  
+0022 <span class="comment">% ------</span>
+0023 <span class="comment">% Author: David Legland</span>
+0024 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0025 <span class="comment">% Created: 2018-08-29,    using Matlab 9.4.0.813654 (R2018a)</span>
+0026 <span class="comment">% Copyright 2018 INRA - Cepia Software Platform.</span>
+0027 
+0028 
+0029 <span class="keyword">if</span> nargin == 1
+0030     <span class="comment">% Only one input parameter. Assumes it corresponds to a 3D line with</span>
+0031     <span class="comment">% 6 params.</span>
+0032     var = varargin{1};
+0033     
+0034     <span class="keyword">if</span> size(var, 2) ~= 6
+0035         error(<span class="string">'single input must have 6 columns'</span>);
+0036     <span class="keyword">end</span>
+0037     
+0038     <span class="comment">% converts 3D line into 3D edge</span>
+0039     edge = zeros(size(var));
+0040     edge(:, 1:3) = var(:, 1:3);
+0041     edge(:, 4:6) = edge(:, 1:3) + var(:,4:6);
+0042     
+0043 <span class="keyword">elseif</span> nargin == 2    
+0044     <span class="comment">% 2 input parameters correspond to two 3D points</span>
+0045     
+0046     <span class="comment">% extract the two arguments</span>
+0047     v1 = varargin{1};
+0048     v2 = varargin{2};
+0049     
+0050     <span class="keyword">if</span> size(v1, 2) ~= 3 || size(v2, 2) ~= 3
+0051         error(<span class="string">'Input points must be arrays with 3 columns'</span>);
+0052     <span class="keyword">end</span>
+0053     
+0054     <span class="comment">% first input parameter is first point, and second input is the</span>
+0055     <span class="comment">% second point. Allows multiple points.</span>
+0056     n1 = size(v1, 1);
+0057     n2 = size(v2, 1);
+0058     <span class="keyword">if</span> n1 == n2
+0059         edge = [v1 v2];
+0060     <span class="keyword">elseif</span> n1 == 1 || n2 == 1
+0061         edge = [repmat(v1, n2, 1) repmat(v2, n1, 1)];
+0062     <span class="keyword">end</span>
+0063     
+0064 <span class="keyword">else</span>
+0065     error(<span class="string">'Wrong number of arguments in ''%s'''</span>, mfilename);
+0066 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

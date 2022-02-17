@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of intersectLineSphere</title>
+  <meta name="keywords" content="intersectLineSphere">
+  <meta name="description" content="INTERSECTLINESPHERE Return intersection points between a line and a sphere.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; intersectLineSphere.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>intersectLineSphere
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>INTERSECTLINESPHERE Return intersection points between a line and a sphere.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function points = intersectLineSphere(line, sphere, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">INTERSECTLINESPHERE Return intersection points between a line and a sphere.
+
+   PTS = intersectLineSphere(LINE, SPHERE);
+   Returns the two points which are the intersection of the given line and
+   sphere. 
+   LINE   : [x0 y0 z0  dx dy dz]
+   SPHERE : [xc yc zc  R]
+   PTS     : [x1 y1 z1 ; x2 y2 z2]
+   If there is no intersection between the line and the sphere, return a
+   2-by-3 array containing only NaN.
+
+   Example
+     % draw the intersection between a sphere and a collection of parallel
+     % lines 
+     sphere = [50.12 50.23 50.34 40];
+     [x, y] = meshgrid(10:10:90, 10:10:90);
+     n = numel(x);
+     lines = [x(:) y(:) zeros(n,1) zeros(n,2) ones(n,1)];
+     figure; hold on; axis equal;
+     axis([0 100 0 100 0 100]); view(3);
+     drawSphere(sphere);
+     drawLine3d(lines);
+     pts = intersectLineSphere(lines, sphere);
+     drawPoint3d(pts, 'rx');
+
+     % apply rotation on set of lines to check with non vertical lines
+     rot = eulerAnglesToRotation3d(20, 30, 10);
+     rot2 = recenterTransform3d(rot, [50 50 50]);
+     lines2 = transformLine3d(lines, rot2);
+     figure; hold on; axis equal;
+     axis([0 100 0 100 0 100]); view(3);
+     drawSphere(sphere);
+     drawLine3d(lines2);
+     pts2 = intersectLineSphere(lines2, sphere);
+     drawPoint3d(pts, 'rx');
+
+   See also
+   <a href="spheres.html" class="code" title="function spheres(varargin)">spheres</a>, <a href="circles3d.html" class="code" title="function circles3d(varargin)">circles3d</a>, <a href="intersectPlaneSphere.html" class="code" title="function circle = intersectPlaneSphere(plane, sphere)">intersectPlaneSphere</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="sphericalVoronoiDomain.html" class="code" title="function poly = sphericalVoronoiDomain(refPoint, neighbors)">sphericalVoronoiDomain</a>	SPHERICALVORONOIDOMAIN Compute a spherical voronoi domain.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function points = intersectLineSphere(line, sphere, varargin)</a>
+0002 <span class="comment">%INTERSECTLINESPHERE Return intersection points between a line and a sphere.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PTS = intersectLineSphere(LINE, SPHERE);</span>
+0005 <span class="comment">%   Returns the two points which are the intersection of the given line and</span>
+0006 <span class="comment">%   sphere.</span>
+0007 <span class="comment">%   LINE   : [x0 y0 z0  dx dy dz]</span>
+0008 <span class="comment">%   SPHERE : [xc yc zc  R]</span>
+0009 <span class="comment">%   PTS     : [x1 y1 z1 ; x2 y2 z2]</span>
+0010 <span class="comment">%   If there is no intersection between the line and the sphere, return a</span>
+0011 <span class="comment">%   2-by-3 array containing only NaN.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   Example</span>
+0014 <span class="comment">%     % draw the intersection between a sphere and a collection of parallel</span>
+0015 <span class="comment">%     % lines</span>
+0016 <span class="comment">%     sphere = [50.12 50.23 50.34 40];</span>
+0017 <span class="comment">%     [x, y] = meshgrid(10:10:90, 10:10:90);</span>
+0018 <span class="comment">%     n = numel(x);</span>
+0019 <span class="comment">%     lines = [x(:) y(:) zeros(n,1) zeros(n,2) ones(n,1)];</span>
+0020 <span class="comment">%     figure; hold on; axis equal;</span>
+0021 <span class="comment">%     axis([0 100 0 100 0 100]); view(3);</span>
+0022 <span class="comment">%     drawSphere(sphere);</span>
+0023 <span class="comment">%     drawLine3d(lines);</span>
+0024 <span class="comment">%     pts = intersectLineSphere(lines, sphere);</span>
+0025 <span class="comment">%     drawPoint3d(pts, 'rx');</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%     % apply rotation on set of lines to check with non vertical lines</span>
+0028 <span class="comment">%     rot = eulerAnglesToRotation3d(20, 30, 10);</span>
+0029 <span class="comment">%     rot2 = recenterTransform3d(rot, [50 50 50]);</span>
+0030 <span class="comment">%     lines2 = transformLine3d(lines, rot2);</span>
+0031 <span class="comment">%     figure; hold on; axis equal;</span>
+0032 <span class="comment">%     axis([0 100 0 100 0 100]); view(3);</span>
+0033 <span class="comment">%     drawSphere(sphere);</span>
+0034 <span class="comment">%     drawLine3d(lines2);</span>
+0035 <span class="comment">%     pts2 = intersectLineSphere(lines2, sphere);</span>
+0036 <span class="comment">%     drawPoint3d(pts, 'rx');</span>
+0037 <span class="comment">%</span>
+0038 <span class="comment">%   See also</span>
+0039 <span class="comment">%   spheres, circles3d, intersectPlaneSphere</span>
+0040 <span class="comment">%</span>
+0041 
+0042 <span class="comment">%   ---------</span>
+0043 <span class="comment">%   author : David Legland</span>
+0044 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0045 <span class="comment">%   created the 18/02/2005.</span>
+0046 <span class="comment">%</span>
+0047 
+0048 <span class="comment">%   HISTORY</span>
+0049 <span class="comment">%   2011-06-21 bug for tangent lines, add tolerance</span>
+0050 
+0051 
+0052 <span class="comment">%% Process input arguments</span>
+0053 
+0054 <span class="comment">% check if user-defined tolerance is given</span>
+0055 tol = 1e-14;
+0056 <span class="keyword">if</span> ~isempty(varargin)
+0057     tol = varargin{1};
+0058 <span class="keyword">end</span>
+0059 
+0060 <span class="comment">% difference between centers</span>
+0061 dc = bsxfun(@minus, line(:, 1:3), sphere(:, 1:3));
+0062 
+0063 <span class="comment">% equation coefficients</span>
+0064 a = sum(line(:, 4:6) .* line(:, 4:6), 2);
+0065 b = 2 * sum(bsxfun(@times, dc, line(:, 4:6)), 2);
+0066 c = sum(dc.*dc, 2) - sphere(:,4).*sphere(:,4);
+0067 
+0068 <span class="comment">% solve equation</span>
+0069 delta = b.*b - 4*a.*c;
+0070 
+0071 <span class="comment">% initialize empty results</span>
+0072 points = NaN * ones(2 * size(delta, 1), 3);
+0073 
+0074 
+0075 <span class="comment">%% process couples with two intersection points</span>
+0076 
+0077 <span class="comment">% process couples with two intersection points</span>
+0078 inds = find(delta &gt; tol);
+0079 <span class="keyword">if</span> ~isempty(inds)
+0080     <span class="comment">% delta positive: find two roots of second order equation</span>
+0081     u1 = (-b(inds) -sqrt(delta(inds))) / 2 ./ a(inds);
+0082     u2 = (-b(inds) +sqrt(delta(inds))) / 2 ./ a(inds);
+0083     
+0084     <span class="comment">% convert into 3D coordinate</span>
+0085     points(inds, :) = line(inds, 1:3) + bsxfun(@times, u1, line(inds, 4:6));
+0086     points(inds+length(delta),:) = line(inds, 1:3) + bsxfun(@times, u2, line(inds, 4:6));
+0087 <span class="keyword">end</span>
+0088 
+0089 
+0090 <span class="comment">%% process couples with one intersection point</span>
+0091 
+0092 <span class="comment">% proces couples with two intersection points</span>
+0093 inds = find(abs(delta) &lt; tol);
+0094 <span class="keyword">if</span> ~isempty(inds)
+0095     <span class="comment">% delta around zero: find unique root, and convert to 3D coord.</span>
+0096     u = -b(inds) / 2 ./ a(inds);
+0097     
+0098     <span class="comment">% convert into 3D coordinate</span>
+0099     pts = line(inds, 1:3) + bsxfun(@times, u, line(inds, 4:6));
+0100     points(inds, :) = pts;
+0101     points(inds+length(delta),:) = pts;
+0102 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of ensureManifoldMesh</title>
+  <meta name="keywords" content="ensureManifoldMesh">
+  <meta name="description" content="ENSUREMANIFOLDMESH Apply several simplification to obtain a manifold mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; ensureManifoldMesh.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>ensureManifoldMesh
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ENSUREMANIFOLDMESH Apply several simplification to obtain a manifold mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = ensureManifoldMesh(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ENSUREMANIFOLDMESH Apply several simplification to obtain a manifold mesh.
+
+   Try to transform an input mesh into a manifold mesh.
+
+   Not all cases of &quot;non-manifoldity&quot; are checked, so please use with
+   care.
+
+   [V2, F2] = ensureManifoldMesh(V, F);
+   [V2, F2] = ensureManifoldMesh(MESH);
+   MESH2 = ensureManifoldMesh(...);
+
+   Example
+   ensureManifoldMesh
+
+   See also
+    meshes3d, <a href="isManifoldMesh.html" class="code" title="function [b1, b2] = isManifoldMesh(varargin)">isManifoldMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="collapseEdgesWithManyFaces.html" class="code" title="function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargin)">collapseEdgesWithManyFaces</a>	removes mesh edges adjacent to more than two faces</li><li><a href="removeDuplicateFaces.html" class="code" title="function faces2 = removeDuplicateFaces(faces, varargin)">removeDuplicateFaces</a>	REMOVEDUPLICATEFACES Remove duplicate faces in a face array.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = ensureManifoldMesh(varargin)</a>
+0002 <span class="comment">%ENSUREMANIFOLDMESH Apply several simplification to obtain a manifold mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   Try to transform an input mesh into a manifold mesh.</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   Not all cases of &quot;non-manifoldity&quot; are checked, so please use with</span>
+0007 <span class="comment">%   care.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   [V2, F2] = ensureManifoldMesh(V, F);</span>
+0010 <span class="comment">%   [V2, F2] = ensureManifoldMesh(MESH);</span>
+0011 <span class="comment">%   MESH2 = ensureManifoldMesh(...);</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   Example</span>
+0014 <span class="comment">%   ensureManifoldMesh</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   See also</span>
+0017 <span class="comment">%    meshes3d, isManifoldMesh</span>
+0018  
+0019 <span class="comment">% ------</span>
+0020 <span class="comment">% Author: David Legland</span>
+0021 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0022 <span class="comment">% Created: 2019-02-01,    using Matlab 9.5.0.944444 (R2018b)</span>
+0023 <span class="comment">% Copyright 2019 INRA - Cepia Software Platform.</span>
+0024 
+0025 
+0026 <span class="comment">%% Parse input arguments</span>
+0027 
+0028 [vertices, faces] = parseMeshData(varargin{:});
+0029 verbose = true;
+0030 
+0031 
+0032 <span class="comment">%% Pre-processing</span>
+0033 
+0034 <span class="comment">% remove duplicate faces if any</span>
+0035 <span class="keyword">if</span> verbose
+0036     disp(<span class="string">'remove duplicate faces'</span>);
+0037 <span class="keyword">end</span>
+0038 faces = <a href="removeDuplicateFaces.html" class="code" title="function faces2 = removeDuplicateFaces(faces, varargin)">removeDuplicateFaces</a>(faces);
+0039 
+0040 
+0041 <span class="comment">%% Iterative processing of multiple edges</span>
+0042 <span class="comment">% Reduces all edges connected to more than two faces, by collapsing second</span>
+0043 <span class="comment">% vertex onto the first one.</span>
+0044 
+0045 <span class="comment">% iter = 0;</span>
+0046 <span class="comment">% while ~isManifoldMesh(vertices, faces) &amp;&amp; iter &lt; 10</span>
+0047 <span class="comment">%     iter = iter + 1;</span>
+0048     <span class="keyword">if</span> verbose
+0049         disp(<span class="string">'collapse edges with many faces'</span>);
+0050     <span class="keyword">end</span>
+0051     
+0052     [vertices, faces] = <a href="collapseEdgesWithManyFaces.html" class="code" title="function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargin)">collapseEdgesWithManyFaces</a>(vertices, faces);
+0053 <span class="comment">% end</span>
+0054 
+0055 
+0056 
+0057 <span class="comment">%% Format output</span>
+0058 
+0059 varargout = formatMeshOutput(nargout, vertices, faces);
+0060</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

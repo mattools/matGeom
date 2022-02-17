@@ -1,0 +1,282 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of intersectLineCylinder</title>
+  <meta name="keywords" content="intersectLineCylinder">
+  <meta name="description" content="INTERSECTLINECYLINDER Compute intersection points between a line and a cylinder.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; intersectLineCylinder.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>intersectLineCylinder
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>INTERSECTLINECYLINDER Compute intersection points between a line and a cylinder.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function points = intersectLineCylinder(line, cylinder, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">INTERSECTLINECYLINDER Compute intersection points between a line and a cylinder.
+
+   POINTS = intersectLineCylinder(LINE, CYLINDER)
+   Returns intersection points between a line and a cylinder.
+
+   Input parameters:
+   LINE     = [x0 y0 z0  dx dy dz]
+   CYLINDER = [x1 y1 z1 x2 y2 z2 R]
+
+   Output:
+   POINTS   = [x1 y1 z1 ; x2 y2 z2]
+
+   POINTS = intersectLineCylinder(LINE, CYLINDER, 'checkBounds', B)
+   Where B is a boolean (TRUE by default), check if the points are within
+   the bounds defined by the two extreme points. If B is false, the
+   cylinder is considered to be infinite.
+
+   Example
+     % Compute intersection between simple vertical cylinder and line
+     line = [60 60 60 1 2 3];
+     cylinder = [20 50 50 80 50 50 30];
+     points = intersectLineCylinder(line, cylinder);
+     % Display the different shapes
+     figure;
+     drawCylinder(cylinder);
+     hold on; light;
+     axis([0 100 0 100 0 100]);
+     drawLine3d(line);
+     drawPoint3d(points, 'ko');
+     
+
+     % Compute intersections when one of the points is outside the
+     % cylinder
+     line = [80 60 60 1 2 3];
+     cylinder = [20 50 50 80 50 50 30];
+     intersectLineCylinder(line, cylinder)
+     ans = 
+           67.8690   35.7380   23.6069
+
+   
+   See also
+   <a href="lines3d.html" class="code" title="function lines3d(varargin)">lines3d</a>, <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>, <a href="drawCylinder.html" class="code" title="function varargout = drawCylinder(varargin)">drawCylinder</a>, <a href="cylinderSurfaceArea.html" class="code" title="function S = cylinderSurfaceArea(cyl)">cylinderSurfaceArea</a>
+
+   References
+   See the link:
+   http://www.gamedev.net/community/forums/topic.asp?topic_id=467789</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>	INTERSECTLINEPLANE Intersection point between a 3D line and a plane.</li><li><a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>	Return the position of a 3D point projected on a 3D line.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function points = intersectLineCylinder(line, cylinder, varargin)</a>
+0002 <span class="comment">%INTERSECTLINECYLINDER Compute intersection points between a line and a cylinder.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POINTS = intersectLineCylinder(LINE, CYLINDER)</span>
+0005 <span class="comment">%   Returns intersection points between a line and a cylinder.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   Input parameters:</span>
+0008 <span class="comment">%   LINE     = [x0 y0 z0  dx dy dz]</span>
+0009 <span class="comment">%   CYLINDER = [x1 y1 z1 x2 y2 z2 R]</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Output:</span>
+0012 <span class="comment">%   POINTS   = [x1 y1 z1 ; x2 y2 z2]</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   POINTS = intersectLineCylinder(LINE, CYLINDER, 'checkBounds', B)</span>
+0015 <span class="comment">%   Where B is a boolean (TRUE by default), check if the points are within</span>
+0016 <span class="comment">%   the bounds defined by the two extreme points. If B is false, the</span>
+0017 <span class="comment">%   cylinder is considered to be infinite.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   Example</span>
+0020 <span class="comment">%     % Compute intersection between simple vertical cylinder and line</span>
+0021 <span class="comment">%     line = [60 60 60 1 2 3];</span>
+0022 <span class="comment">%     cylinder = [20 50 50 80 50 50 30];</span>
+0023 <span class="comment">%     points = intersectLineCylinder(line, cylinder);</span>
+0024 <span class="comment">%     % Display the different shapes</span>
+0025 <span class="comment">%     figure;</span>
+0026 <span class="comment">%     drawCylinder(cylinder);</span>
+0027 <span class="comment">%     hold on; light;</span>
+0028 <span class="comment">%     axis([0 100 0 100 0 100]);</span>
+0029 <span class="comment">%     drawLine3d(line);</span>
+0030 <span class="comment">%     drawPoint3d(points, 'ko');</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">%     % Compute intersections when one of the points is outside the</span>
+0034 <span class="comment">%     % cylinder</span>
+0035 <span class="comment">%     line = [80 60 60 1 2 3];</span>
+0036 <span class="comment">%     cylinder = [20 50 50 80 50 50 30];</span>
+0037 <span class="comment">%     intersectLineCylinder(line, cylinder)</span>
+0038 <span class="comment">%     ans =</span>
+0039 <span class="comment">%           67.8690   35.7380   23.6069</span>
+0040 <span class="comment">%</span>
+0041 <span class="comment">%</span>
+0042 <span class="comment">%   See also</span>
+0043 <span class="comment">%   lines3d, intersectLinePlane, drawCylinder, cylinderSurfaceArea</span>
+0044 <span class="comment">%</span>
+0045 <span class="comment">%   References</span>
+0046 <span class="comment">%   See the link:</span>
+0047 <span class="comment">%   http://www.gamedev.net/community/forums/topic.asp?topic_id=467789</span>
+0048 <span class="comment">%</span>
+0049 
+0050 <span class="comment">% ---</span>
+0051 <span class="comment">% Author: David Legland, from a file written by Daniel Trauth (RWTH)</span>
+0052 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0053 <span class="comment">% Created: 2007-01-27</span>
+0054 
+0055 <span class="comment">% HISTORY</span>
+0056 <span class="comment">% 2010-10-21 change cylinder argument convention, add bounds check and doc</span>
+0057 <span class="comment">% 2010-10-21 add check for points on cylinders, update doc</span>
+0058 
+0059 
+0060 <span class="comment">%% Parse input arguments</span>
+0061 
+0062 <span class="comment">% default arguments</span>
+0063 checkBounds = true;
+0064 <span class="comment">% type of cylinder, one of {'closed', 'open', 'infinite'}</span>
+0065 type = <span class="string">'closed'</span>;
+0066 
+0067 <span class="comment">% parse inputs</span>
+0068 <span class="keyword">while</span> length(varargin)&gt;1
+0069     var = varargin{1};
+0070     <span class="keyword">if</span> strcmpi(var, <span class="string">'checkbounds'</span>)
+0071         checkBounds = varargin{2};
+0072     <span class="keyword">elseif</span> strcmpi(var, <span class="string">'type'</span>)
+0073         type = varargin{2};
+0074     <span class="keyword">else</span>
+0075         error([<span class="string">'Unkown argument: '</span> var]);
+0076     <span class="keyword">end</span>
+0077     varargin(1:2) = [];
+0078 <span class="keyword">end</span>
+0079 
+0080 
+0081 <span class="comment">%% Parse cylinder parameters</span>
+0082 
+0083 <span class="comment">% Starting point of the line</span>
+0084 l0 = line(1:3);
+0085 
+0086 <span class="comment">% Direction vector of the line</span>
+0087 dl = line(4:6);
+0088 
+0089 <span class="comment">% position of cylinder extremities</span>
+0090 c1 = cylinder(1:3);
+0091 c2 = cylinder(4:6);
+0092 
+0093 <span class="comment">% Direction vector of the cylinder</span>
+0094 dc = c2 - c1;
+0095 
+0096 <span class="comment">% Radius of the cylinder</span>
+0097 r = cylinder(7);
+0098 
+0099 
+0100 <span class="comment">%% Resolution of a quadratic equation to find the increment</span>
+0101 
+0102 <span class="comment">% normalisation coefficient corresponding to direction of vector</span>
+0103 coef = dc / dot(dc, dc);
+0104 
+0105 <span class="comment">% Substitution of parameters</span>
+0106 e = dl - dot(dl,dc) * coef;
+0107 f = (l0-c1) - dot(l0-c1, dc) * coef;
+0108 
+0109 <span class="comment">% Coefficients of 2-nd order equation</span>
+0110 A = dot(e, e);
+0111 B = 2 * dot(e,f);
+0112 C = dot(f,f) - r^2;
+0113 
+0114 <span class="comment">% compute discriminant</span>
+0115 delta = B^2 - 4*A*C;
+0116 
+0117 <span class="comment">% check existence of solution(s)</span>
+0118 <span class="keyword">if</span> delta &lt; 0
+0119     points = zeros(0, 3);
+0120     <span class="keyword">return</span>;
+0121 <span class="keyword">end</span>
+0122 
+0123 <span class="comment">% extract roots</span>
+0124 pos1 = (-B + sqrt(delta)) / (2*A);
+0125 pos2 = (-B - sqrt(delta)) / (2*A);
+0126 posList = [pos1;pos2];
+0127 
+0128 
+0129 <span class="comment">%% Estimation of point positions</span>
+0130 
+0131 <span class="comment">% process the smallest position</span>
+0132 pos1 = min(posList);
+0133 
+0134 <span class="comment">% Point on the line: l0 + x*dl = p</span>
+0135 point1 = l0 + pos1 * dl;
+0136 
+0137 <span class="comment">% process the greatest position</span>
+0138 pos2 = max(posList);
+0139 
+0140 <span class="comment">% Point on the line: l0 + x*dl = p</span>
+0141 point2 = l0 + pos2 * dl;
+0142 
+0143 <span class="comment">% Format result</span>
+0144 points = [point1 ; point2];
+0145 
+0146 
+0147 <span class="comment">%% Check if points are located between bounds</span>
+0148 
+0149 <span class="comment">% if checkBounds option is not set, we can simply skip the rest</span>
+0150 <span class="keyword">if</span> ~checkBounds || strncmpi(type, <span class="string">'infinite'</span>, 1)
+0151     <span class="keyword">return</span>;
+0152 <span class="keyword">end</span>
+0153 
+0154 <span class="comment">% compute cylinder axis</span>
+0155 axis = [c1 dc];
+0156 
+0157 <span class="comment">% compute position on axis</span>
+0158 ts = <a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>(points, axis);
+0159 
+0160 <span class="comment">% check bounds for open cylinder</span>
+0161 <span class="comment">% (keep only intersection points whose projection is between the two</span>
+0162 <span class="comment">% cylinder extremities)</span>
+0163 <span class="keyword">if</span> strncmpi(type, <span class="string">'open'</span>, 1)
+0164     ind = ts&gt;=0 &amp; ts&lt;=1;
+0165     points = points(ind, :);
+0166     <span class="keyword">return</span>;
+0167 <span class="keyword">end</span>
+0168 
+0169 <span class="comment">% which intersection fall before and after bounds</span>
+0170 ind1 = find(ts &lt; 0);
+0171 ind2 = find(ts &gt; 1);
+0172 
+0173 <span class="comment">% case of both intersection on the same side -&gt; no intersection</span>
+0174 <span class="keyword">if</span> length(ind1) == 2 || length(ind2) == 2
+0175     points = zeros(0, 3);
+0176     <span class="keyword">return</span>;
+0177 <span class="keyword">end</span>
+0178 
+0179 <span class="comment">% Process the remaining case of closed cylinder</span>
+0180 <span class="comment">% -&gt; compute eventual intersection(s) with end faces</span>
+0181 <span class="keyword">if</span> ~isempty(ind1)
+0182     plane = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(c1, dc);
+0183     points(ind1, :) = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(line, plane);
+0184 <span class="keyword">end</span>
+0185 <span class="keyword">if</span> ~isempty(ind2)
+0186     plane = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(c2, dc);
+0187     points(ind2, :) = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(line, plane);
+0188 <span class="keyword">end</span>
+0189 
+0190</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

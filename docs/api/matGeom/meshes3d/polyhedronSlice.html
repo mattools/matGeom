@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polyhedronSlice</title>
+  <meta name="keywords" content="polyhedronSlice">
+  <meta name="description" content="POLYHEDRONSLICE Intersect a convex polyhedron with a plane.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; polyhedronSlice.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polyhedronSlice
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYHEDRONSLICE Intersect a convex polyhedron with a plane.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function points = polyhedronSlice(nodes, faces, plane) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLYHEDRONSLICE Intersect a convex polyhedron with a plane.
+
+   SLICE = polyhedronSlice(NODES, FACES, PLANE)
+   NODES: a Nx3 array
+   FACES: either a cell array or a Nf*3 or Nf*4 array
+   PLANE: a plane representation [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2].
+   return the intersection polygon of the polyhedra with the plane, in the
+   form of a set of ordered points.
+
+   Works only for convex polyhedra.
+
+   Example
+   polyhedronSlice
+
+   See also
+   <a href="polyhedra.html" class="code" title="function polyhedra(varargin)">polyhedra</a>, <a href="clipConvexPolyhedronHP.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronHP(nodes, faces, plane)">clipConvexPolyhedronHP</a>, <a href="intersectPlaneMesh.html" class="code" title="function polys = intersectPlaneMesh(plane, v, f)">intersectPlaneMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/angleSort3d.html" class="code" title="function varargout = angleSort3d(pts, varargin)">angleSort3d</a>	ANGLESORT3D Sort 3D coplanar points according to their angles in plane.</li><li><a href="../../matGeom/geom3d/intersectEdgePlane.html" class="code" title="function point = intersectEdgePlane(edge, plane, varargin)">intersectEdgePlane</a>	INTERSECTEDGEPLANE Return intersection point between a plane and a edge.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function points = polyhedronSlice(nodes, faces, plane)</a>
+0002 <span class="comment">%POLYHEDRONSLICE Intersect a convex polyhedron with a plane.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   SLICE = polyhedronSlice(NODES, FACES, PLANE)</span>
+0005 <span class="comment">%   NODES: a Nx3 array</span>
+0006 <span class="comment">%   FACES: either a cell array or a Nf*3 or Nf*4 array</span>
+0007 <span class="comment">%   PLANE: a plane representation [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2].</span>
+0008 <span class="comment">%   return the intersection polygon of the polyhedra with the plane, in the</span>
+0009 <span class="comment">%   form of a set of ordered points.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Works only for convex polyhedra.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   Example</span>
+0014 <span class="comment">%   polyhedronSlice</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   See also</span>
+0017 <span class="comment">%   polyhedra, clipConvexPolyhedronHP, intersectPlaneMesh</span>
+0018 <span class="comment">%</span>
+0019 
+0020 <span class="comment">% ------</span>
+0021 <span class="comment">% Author: David Legland</span>
+0022 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0023 <span class="comment">% Created: 2007-09-18,    using Matlab 7.4.0.287 (R2007a)</span>
+0024 <span class="comment">% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0025 
+0026 <span class="comment">% if faces is a numeric array, convert it to cell array</span>
+0027 <span class="keyword">if</span> isnumeric(faces)
+0028     faces2 = cell(size(faces, 1), 1);
+0029     <span class="keyword">for</span> f = 1:length(faces2)
+0030         faces2{f} = faces(f,:);
+0031     <span class="keyword">end</span>
+0032     faces = faces2;
+0033 <span class="keyword">else</span>
+0034     <span class="comment">% ensure we have face with horizontal vectors...</span>
+0035     <span class="keyword">for</span> f = 1:length(faces)
+0036         face = faces{f};
+0037         faces{f} = face(:)';
+0038     <span class="keyword">end</span>
+0039 <span class="keyword">end</span>
+0040 
+0041 <span class="comment">% compute edges of the polyhedron</span>
+0042 inds = zeros(0, 2);
+0043 <span class="keyword">for</span> f = 1:length(faces)
+0044     face = faces{f}';
+0045     inds = [inds ; sort([face face([2:end 1])], 2)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0046 <span class="keyword">end</span>
+0047 inds = unique(inds, <span class="string">'rows'</span>);
+0048 edges = [nodes(inds(:,1), :) nodes(inds(:,2), :)];
+0049 
+0050 <span class="comment">% intersection of edges with plane</span>
+0051 points = <a href="../../matGeom/geom3d/intersectEdgePlane.html" class="code" title="function point = intersectEdgePlane(edge, plane, varargin)">intersectEdgePlane</a>(edges, plane);
+0052 points = points(sum(isfinite(points), 2)==3, :);
+0053 
+0054 <span class="keyword">if</span> ~isempty(points)
+0055     points = <a href="../../matGeom/geom3d/angleSort3d.html" class="code" title="function varargout = angleSort3d(pts, varargin)">angleSort3d</a>(points);
+0056 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

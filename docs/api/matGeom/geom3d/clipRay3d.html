@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of clipRay3d</title>
+  <meta name="keywords" content="clipRay3d">
+  <meta name="description" content="Clip a 3D ray with a box and return a 3D edge.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; clipRay3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>clipRay3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Clip a 3D ray with a box and return a 3D edge.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function edge = clipRay3d(ray, box) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Clip a 3D ray with a box and return a 3D edge.
+
+   EDGE = clipRay3d(RAY, BOX)
+   Clips the ray RAY with the bounds given in BOX, and returns the
+   corresponding edge. 
+   RAY is given as origin + direction vector: [X0 Y0 Z0  DX DY DZ]
+   BOX is given as  [XMIN XMAX  YMIN YMAX  ZMIN ZMAX].
+   The result EDGE is given as [X1 Y1 Z1  X2 Y2 Z2].
+
+   Example
+     % generate 50 random 3D rays
+     origin = [29 28 27];
+     v = rand(50, 3);
+     v = v - centroid(v);
+     ray = [repmat(origin, size(v,1),1) v];
+     % clip the rays with a 3D box
+     box = [10 40 10 40 10 40];
+     edges = clipRay3d(ray, box);
+     % draw the resulting 3D edges
+     figure; axis equal; axis([0 50 0 50 0 50]); hold on; view(3);
+     drawBox3d(box);
+     drawEdge3d(edges, 'g');
+
+   See also
+     <a href="clipLine3d.html" class="code" title="function edge = clipLine3d(line, box)">clipLine3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>	INTERSECTLINEPLANE Intersection point between a 3D line and a plane.</li><li><a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>	Return the position of a 3D point projected on a 3D line.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function edge = clipRay3d(ray, box)</a>
+0002 <span class="comment">% Clip a 3D ray with a box and return a 3D edge.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   EDGE = clipRay3d(RAY, BOX)</span>
+0005 <span class="comment">%   Clips the ray RAY with the bounds given in BOX, and returns the</span>
+0006 <span class="comment">%   corresponding edge.</span>
+0007 <span class="comment">%   RAY is given as origin + direction vector: [X0 Y0 Z0  DX DY DZ]</span>
+0008 <span class="comment">%   BOX is given as  [XMIN XMAX  YMIN YMAX  ZMIN ZMAX].</span>
+0009 <span class="comment">%   The result EDGE is given as [X1 Y1 Z1  X2 Y2 Z2].</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Example</span>
+0012 <span class="comment">%     % generate 50 random 3D rays</span>
+0013 <span class="comment">%     origin = [29 28 27];</span>
+0014 <span class="comment">%     v = rand(50, 3);</span>
+0015 <span class="comment">%     v = v - centroid(v);</span>
+0016 <span class="comment">%     ray = [repmat(origin, size(v,1),1) v];</span>
+0017 <span class="comment">%     % clip the rays with a 3D box</span>
+0018 <span class="comment">%     box = [10 40 10 40 10 40];</span>
+0019 <span class="comment">%     edges = clipRay3d(ray, box);</span>
+0020 <span class="comment">%     % draw the resulting 3D edges</span>
+0021 <span class="comment">%     figure; axis equal; axis([0 50 0 50 0 50]); hold on; view(3);</span>
+0022 <span class="comment">%     drawBox3d(box);</span>
+0023 <span class="comment">%     drawEdge3d(edges, 'g');</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   See also</span>
+0026 <span class="comment">%     clipLine3d</span>
+0027  
+0028 <span class="comment">% ------</span>
+0029 <span class="comment">% Author: David Legland</span>
+0030 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0031 <span class="comment">% INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0032 <span class="comment">% Created: 2020-05-25,    using Matlab 9.8.0.1323502 (R2020a)</span>
+0033 <span class="comment">% Copyright 2020 INRAE.</span>
+0034 
+0035 <span class="comment">% get box limits</span>
+0036 xmin = box(1); xmax = box(2);
+0037 ymin = box(3); ymax = box(4);
+0038 zmin = box(5); zmax = box(6);
+0039 
+0040 <span class="comment">% extreme corners of the box</span>
+0041 p000 = [xmin ymin zmin];
+0042 p111 = [xmax ymax zmax];
+0043 
+0044 <span class="comment">% main vectors</span>
+0045 ex   = [1 0 0];
+0046 ey   = [0 1 0];
+0047 ez   = [0 0 1];
+0048 
+0049 <span class="comment">% box faces parallel to Oxy</span>
+0050 planeZ0 = [p000 ex ey];
+0051 planeZ1 = [p111 ex ey];
+0052 
+0053 <span class="comment">% box faces parallel to Oxz</span>
+0054 planeY0 = [p000 ex ez];
+0055 planeY1 = [p111 ex ez];
+0056 
+0057 <span class="comment">% box faces parallel to Oyz</span>
+0058 planeX0 = [p000 ey ez];
+0059 planeX1 = [p111 ey ez];
+0060 
+0061 <span class="comment">% number of rays</span>
+0062 nRays = size(ray, 1);
+0063 
+0064 <span class="comment">% allocate memory for result</span>
+0065 edge = NaN * ones(nRays, 6);
+0066 
+0067 <span class="comment">% iterate over rays to clip</span>
+0068 <span class="keyword">for</span> i = 1:nRays
+0069     <span class="comment">% compute intersection point of supporting line with each clipping plane</span>
+0070     ipZ0 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(ray(i,:), planeZ0);
+0071     ipZ1 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(ray(i,:), planeZ1);
+0072     ipY0 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(ray(i,:), planeY0);
+0073     ipY1 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(ray(i,:), planeY1);
+0074     ipX1 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(ray(i,:), planeX1);
+0075     ipX0 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(ray(i,:), planeX0);
+0076 
+0077     <span class="comment">% concatenate resulting points</span>
+0078     points  = [ipX0;ipX1;ipY0;ipY1;ipZ0;ipZ1];
+0079 
+0080     <span class="comment">% compute position of each point on the ray</span>
+0081     pos     = <a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>(points, ray(i,:));
+0082 
+0083     <span class="comment">% keep only defined points</span>
+0084     ind     = find(~isnan(pos));
+0085     pos     = pos(ind);
+0086     points  = points(ind,:);
+0087 
+0088     <span class="keyword">if</span> isempty(pos)
+0089         <span class="keyword">continue</span>;
+0090     <span class="keyword">end</span>
+0091     
+0092     <span class="comment">% sort points with respect to their position</span>
+0093     [pos, ind] = sort(pos);
+0094     points = points(ind, :);
+0095 
+0096     <span class="comment">% keep median points wrt to position. These points define the limit of</span>
+0097     <span class="comment">% the clipped edge.</span>
+0098     nv  = length(ind)/2;
+0099     pos = pos([nv, nv+1]);
+0100     points = points([nv nv+1], :);
+0101     
+0102     <span class="comment">% case of second edge extremity before ray origin</span>
+0103     <span class="keyword">if</span> pos(2) &lt; 0
+0104         <span class="keyword">continue</span>;
+0105     <span class="keyword">end</span>
+0106 
+0107     <span class="comment">% case of first edge extremity before ray origin</span>
+0108     <span class="keyword">if</span> pos(1) &lt; 0
+0109         points(1,1:3) = ray(i,1:3);
+0110     <span class="keyword">end</span>
+0111     
+0112     <span class="comment">% create resulting edge.</span>
+0113     edge(i,:)   = [points(1, :) points(2, :)];
+0114 <span class="keyword">end</span>
+0115 
+0116 <span class="comment">% check that middle point of the edge is contained in the box</span>
+0117 midX = mean(edge(:, [1 4]), 2);
+0118 xOk  = xmin &lt;= midX &amp; midX &lt;= xmax;
+0119 midY = mean(edge(:, [2 5]), 2);
+0120 yOk  = ymin &lt;= midY &amp; midY &lt;= ymax;
+0121 midZ = mean(edge(:, [3 6]), 2);
+0122 zOk  = zmin &lt;= midZ &amp; midZ &lt;= zmax;
+0123 
+0124 <span class="comment">% if one of the bounding condition is not met, set edge to NaN</span>
+0125 edge (~(xOk &amp; yOk &amp; zOk), :) = NaN;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

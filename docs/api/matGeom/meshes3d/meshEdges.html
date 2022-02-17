@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of meshEdges</title>
+  <meta name="keywords" content="meshEdges">
+  <meta name="description" content="MESHEDGES Computes array of edge vertex indices from face array.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; meshEdges.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>meshEdges
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MESHEDGES Computes array of edge vertex indices from face array.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function edges = meshEdges(faces, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MESHEDGES Computes array of edge vertex indices from face array.
+
+   EDGES = meshEdges(FACES);
+
+   Example
+     meshEdges
+
+   See also
+     meshes3d, <a href="meshEdgeFaces.html" class="code" title="function edgeFaces = meshEdgeFaces(vertices, edges, faces) %#ok<INUSL>">meshEdgeFaces</a>, <a href="meshFaceEdges.html" class="code" title="function FE = meshFaceEdges(vertices, edges, faces)">meshFaceEdges</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="checkMeshAdjacentFaces.html" class="code" title="function checkMeshAdjacentFaces(vertices, edges, faces)">checkMeshAdjacentFaces</a>	CHECKMESHADJACENTFACES Check if adjacent faces of a mesh have similar orientation.</li><li><a href="collapseEdgesWithManyFaces.html" class="code" title="function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargin)">collapseEdgesWithManyFaces</a>	removes mesh edges adjacent to more than two faces</li><li><a href="createDurerPolyhedron.html" class="code" title="function varargout = createDurerPolyhedron(varargin)">createDurerPolyhedron</a>	CREATEDURERPOLYHEDRON  Create a mesh representing Durer's polyhedron .</li><li><a href="intersectPlaneMesh.html" class="code" title="function polys = intersectPlaneMesh(plane, v, f)">intersectPlaneMesh</a>	Compute the polygons resulting from plane-mesh intersection.</li><li><a href="isManifoldMesh.html" class="code" title="function [b1, b2] = isManifoldMesh(varargin)">isManifoldMesh</a>	ISMANIFOLDMESH Check whether the input mesh may be considered as manifold.</li><li><a href="meshBoundary.html" class="code" title="function polyList = meshBoundary(varargin)">meshBoundary</a>	MESHBOUNDARY Boundary of a mesh as a collection of 3D line strings.</li><li><a href="meshBoundaryEdgeIndices.html" class="code" title="function inds = meshBoundaryEdgeIndices(varargin)">meshBoundaryEdgeIndices</a>	MESHBOUNDARYEDGEINDICES Indices of boundary edges of a mesh.</li><li><a href="meshBoundaryVertexIndices.html" class="code" title="function inds = meshBoundaryVertexIndices(varargin)">meshBoundaryVertexIndices</a>	MESHBOUNDARYVERTEXINDICES Indices of boundary vertices of a mesh.</li><li><a href="removeInvalidBorderFaces.html" class="code" title="function [vertices, faces] = removeInvalidBorderFaces(varargin)">removeInvalidBorderFaces</a>	REMOVEINVALIDBORDERFACES Remove faces whose edges are connected to 3, 3, and 1 faces.</li><li><a href="splitMesh.html" class="code" title="function meshes = splitMesh(vertices, faces, varargin)">splitMesh</a>	SPLITMESH Return the connected components of a mesh.</li><li><a href="subdivideMesh.html" class="code" title="function [vertices2, faces2] = subdivideMesh(vertices, faces, n)">subdivideMesh</a>	SUBDIVIDEMESH Subdivides each face of the mesh.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function edges = meshEdges(faces, varargin)</a>
+0002 <span class="comment">%MESHEDGES Computes array of edge vertex indices from face array.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   EDGES = meshEdges(FACES);</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   Example</span>
+0007 <span class="comment">%     meshEdges</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   See also</span>
+0010 <span class="comment">%     meshes3d, meshEdgeFaces, meshFaceEdges</span>
+0011 
+0012 <span class="comment">% ------</span>
+0013 <span class="comment">% Author: David Legland</span>
+0014 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0015 <span class="comment">% Created: 2011-06-28,    using Matlab 7.9.0.529 (R2009b)</span>
+0016 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0017 
+0018 <span class="comment">%   HISTORY</span>
+0019 <span class="comment">%   2013-08-22 rename from computeMeshEdges to meshEdges, add more control</span>
+0020 <span class="comment">%       on inputs</span>
+0021 
+0022 <span class="comment">%% Process input arguments</span>
+0023 
+0024 <span class="keyword">if</span> isstruct(faces) &amp;&amp; isfield(faces, <span class="string">'faces'</span>)
+0025     <span class="comment">% if input is a mesh structure, extract the 'faces' field</span>
+0026     faces = faces.faces;
+0027 <span class="keyword">elseif</span> nargin &gt; 1
+0028     <span class="comment">% if two arguments are given, keep the second one</span>
+0029     faces = varargin{1};
+0030 <span class="keyword">end</span>
+0031 
+0032 
+0033 <span class="keyword">if</span> ~iscell(faces)
+0034     <span class="comment">%% Process faces given as numeric array</span>
+0035     <span class="comment">% all faces have same number of vertices, stored in nVF variable</span>
+0036     
+0037     <span class="comment">% compute total number of edges</span>
+0038     nFaces  = size(faces, 1);
+0039     nVF     = size(faces, 2);
+0040     nEdges  = nFaces * nVF;
+0041     
+0042     <span class="comment">% create all edges (with double ones)</span>
+0043     edges = zeros(nEdges, 2);
+0044     <span class="keyword">for</span> i = 1:nFaces
+0045         f = faces(i, :);
+0046         edges(((i-1)*nVF+1):i*nVF, :) = [f' f([2:end 1])'];
+0047     <span class="keyword">end</span>
+0048     
+0049 <span class="keyword">else</span>
+0050     <span class="comment">%% faces are given as a cell array</span>
+0051     <span class="comment">% faces may have different number of vertices</span>
+0052     
+0053     <span class="comment">% number of faces</span>
+0054     nFaces  = length(faces);
+0055     
+0056     <span class="comment">% compute the number of edges</span>
+0057     nEdges = 0;
+0058     <span class="keyword">for</span> i = nFaces
+0059         nEdges = nEdges + length(faces{i});
+0060     <span class="keyword">end</span>
+0061     
+0062     <span class="comment">% allocate memory</span>
+0063     edges = zeros(nEdges, 2);
+0064     ind = 0;
+0065     
+0066     <span class="comment">% fillup edge array</span>
+0067     <span class="keyword">for</span> i = 1:nFaces
+0068         <span class="comment">% get vertex indices, ensuring horizontal array</span>
+0069         f = faces{i}(:)';
+0070         nVF = length(f);
+0071         edges(ind+1:ind+nVF, :) = [f' f([2:end 1])'];
+0072         ind = ind + nVF;
+0073     <span class="keyword">end</span>
+0074     
+0075 <span class="keyword">end</span>
+0076 
+0077 <span class="comment">% keep only unique edges, and return sorted result</span>
+0078 edges = sortrows(unique(sort(edges, 2), <span class="string">'rows'</span>));</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of triangulateFaces</title>
+  <meta name="keywords" content="triangulateFaces">
+  <meta name="description" content="TRIANGULATEFACES Convert face array to an array of triangular faces.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; triangulateFaces.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>triangulateFaces
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>TRIANGULATEFACES Convert face array to an array of triangular faces.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [tri, inds] = triangulateFaces(faces) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">TRIANGULATEFACES Convert face array to an array of triangular faces.
+
+   TRI = triangulateFaces(FACES)
+   Returns a 3-columns array of indices, based on the data stored in the
+   argument FACES:
+   - if FACES is a N-by-3 array, returns the same array
+   - if FACES is a N-by-4 array, returns an array with 2*N rows and 3
+       columns, splitting each square into 2 triangles (uses first and
+       third vertex of each square as diagonal).
+   - if FACES is a cell array, split each face into a set of triangles,
+       and returns the union of all triangles. Faces are assumed to be
+       convex.
+
+   [TRI INDS] = triangulateFaces(FACES)
+   Also returns original face index of each new triangular face. INDS has
+   the same number of rows as TRI, and has values between 1 and the
+   number of rows of the original FACES array.
+
+
+   Example
+     % create a basic shape
+     [n e f] = createCubeOctahedron;
+     % draw with plain faces
+     figure;
+     drawMesh(n, f);
+     % draw as a triangulation
+     tri = triangulateFaces(f);
+     figure;
+     patch('vertices', n, 'faces', tri, 'facecolor', 'r');
+
+   See also
+     meshes3d, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a>, <a href="mergeCoplanarFaces.html" class="code" title="function varargout = mergeCoplanarFaces(nodes, varargin)">mergeCoplanarFaces</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="cylinderMesh.html" class="code" title="function varargout = cylinderMesh(cyl, varargin)">cylinderMesh</a>	Create a 3D mesh representing a cylinder.</li><li><a href="distancePointMesh.html" class="code" title="function [dist, proj] = distancePointMesh(point, vertices, faces, varargin)">distancePointMesh</a>	DISTANCEPOINTMESH  Shortest distance between a (3D) point and a triangle mesh.</li><li><a href="intersectLineMesh3d.html" class="code" title="function [points, pos, faceInds, lineInds] = intersectLineMesh3d(line, vertices, varargin)">intersectLineMesh3d</a>	Intersection points of a 3D line with a mesh.</li><li><a href="meshAdjacencyMatrix.html" class="code" title="function adj = meshAdjacencyMatrix(faces, varargin)">meshAdjacencyMatrix</a>	MESHADJACENCYMATRIX Compute adjacency matrix of a mesh from set of faces.</li><li><a href="meshCurvatures.html" class="code" title="function [C1, C2, U1, U2, H, K, N] = meshCurvatures(vertices, faces, varargin)">meshCurvatures</a>	Compute principal curvatures on mesh vertices.</li><li><a href="meshVertexClustering.html" class="code" title="function varargout = meshVertexClustering(vertices, faces, spacing, varargin)">meshVertexClustering</a>	MESHVERTEXCLUSTERING Simplifies a mesh using vertex clustering.</li><li><a href="meshVolume.html" class="code" title="function vol = meshVolume(varargin)">meshVolume</a>	(Signed) volume of the space enclosed by a polygonal mesh.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [tri, inds] = triangulateFaces(faces)</a>
+0002 <span class="comment">%TRIANGULATEFACES Convert face array to an array of triangular faces.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   TRI = triangulateFaces(FACES)</span>
+0005 <span class="comment">%   Returns a 3-columns array of indices, based on the data stored in the</span>
+0006 <span class="comment">%   argument FACES:</span>
+0007 <span class="comment">%   - if FACES is a N-by-3 array, returns the same array</span>
+0008 <span class="comment">%   - if FACES is a N-by-4 array, returns an array with 2*N rows and 3</span>
+0009 <span class="comment">%       columns, splitting each square into 2 triangles (uses first and</span>
+0010 <span class="comment">%       third vertex of each square as diagonal).</span>
+0011 <span class="comment">%   - if FACES is a cell array, split each face into a set of triangles,</span>
+0012 <span class="comment">%       and returns the union of all triangles. Faces are assumed to be</span>
+0013 <span class="comment">%       convex.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   [TRI INDS] = triangulateFaces(FACES)</span>
+0016 <span class="comment">%   Also returns original face index of each new triangular face. INDS has</span>
+0017 <span class="comment">%   the same number of rows as TRI, and has values between 1 and the</span>
+0018 <span class="comment">%   number of rows of the original FACES array.</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   Example</span>
+0022 <span class="comment">%     % create a basic shape</span>
+0023 <span class="comment">%     [n e f] = createCubeOctahedron;</span>
+0024 <span class="comment">%     % draw with plain faces</span>
+0025 <span class="comment">%     figure;</span>
+0026 <span class="comment">%     drawMesh(n, f);</span>
+0027 <span class="comment">%     % draw as a triangulation</span>
+0028 <span class="comment">%     tri = triangulateFaces(f);</span>
+0029 <span class="comment">%     figure;</span>
+0030 <span class="comment">%     patch('vertices', n, 'faces', tri, 'facecolor', 'r');</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">%   See also</span>
+0033 <span class="comment">%     meshes3d, drawMesh, mergeCoplanarFaces</span>
+0034 <span class="comment">%</span>
+0035 
+0036 <span class="comment">% ------</span>
+0037 <span class="comment">% Author: David Legland</span>
+0038 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0039 <span class="comment">% Created: 2008-09-08,    using Matlab 7.4.0.287 (R2007a)</span>
+0040 <span class="comment">% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0041 
+0042 <span class="comment">%% Tri mesh case: return original set of faces</span>
+0043 
+0044 <span class="keyword">if</span> isnumeric(faces) &amp;&amp; size(faces, 2) == 3
+0045     tri = faces;
+0046     <span class="keyword">if</span> nargout &gt; 1
+0047         inds = (1:size(faces, 1))';
+0048     <span class="keyword">end</span>
+0049     <span class="keyword">return</span>;
+0050 <span class="keyword">end</span>
+0051 
+0052 
+0053 <span class="comment">%% Square faces: split each square into 2 triangles</span>
+0054 
+0055 <span class="keyword">if</span> isnumeric(faces) &amp;&amp; size(faces, 2) == 4
+0056     nf = size(faces, 1);
+0057     tri = zeros(nf * 2, 3);
+0058     tri(1:2:<span class="keyword">end</span>, :) = faces(:, [1 2 3]);
+0059     tri(2:2:<span class="keyword">end</span>, :) = faces(:, [1 3 4]);
+0060     
+0061     <span class="keyword">if</span> nargout &gt; 1
+0062         inds = kron(1:size(faces, 1), ones(1,2))';
+0063     <span class="keyword">end</span>
+0064     
+0065     <span class="keyword">return</span>;
+0066 <span class="keyword">end</span>
+0067 
+0068 
+0069 <span class="comment">%% Pentagonal faces (for dodecahedron...): split into 3 triangles</span>
+0070 
+0071 <span class="keyword">if</span> isnumeric(faces) &amp;&amp; size(faces, 2) == 5
+0072     nf = size(faces, 1);
+0073     tri = zeros(nf * 3, 3);
+0074     tri(1:3:<span class="keyword">end</span>, :) = faces(:, [1 2 3]);
+0075     tri(2:3:<span class="keyword">end</span>, :) = faces(:, [1 3 4]);
+0076     tri(3:3:<span class="keyword">end</span>, :) = faces(:, [1 4 5]);
+0077     
+0078     <span class="keyword">if</span> nargout &gt; 1
+0079         inds = kron(1:size(faces, 1), ones(1,2))';
+0080     <span class="keyword">end</span>
+0081     
+0082     <span class="keyword">return</span>;
+0083 <span class="keyword">end</span>
+0084 
+0085 
+0086 <span class="comment">%% Faces as cell array</span>
+0087 
+0088 <span class="comment">% number of faces</span>
+0089 nf  = length(faces);
+0090 
+0091 <span class="comment">% compute total number of triangles</span>
+0092 ni = zeros(nf, 1);
+0093 <span class="keyword">for</span> i = 1:nf
+0094     <span class="comment">% as many triangles as the number of vertices minus 1</span>
+0095     ni(i) = length(faces{i}) - 2;
+0096 <span class="keyword">end</span>
+0097 nt = sum(ni);
+0098 
+0099 <span class="comment">% allocate memory for triangle array</span>
+0100 tri = zeros(nt, 3);
+0101 inds = zeros(nt, 1);
+0102 
+0103 <span class="comment">% convert faces to triangles</span>
+0104 t = 1;
+0105 <span class="keyword">for</span> i = 1:nf
+0106     face = faces{i};
+0107     nv = length(face);
+0108     v0 = face(1);
+0109     <span class="keyword">for</span> j = 3:nv
+0110         tri(t, :) = [v0 face(j-1) face(j)];
+0111         inds(t) = i;
+0112         t = t + 1;
+0113     <span class="keyword">end</span>
+0114 <span class="keyword">end</span>
+0115</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

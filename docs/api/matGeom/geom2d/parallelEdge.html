@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of parallelEdge</title>
+  <meta name="keywords" content="parallelEdge">
+  <meta name="description" content="PARALLELEDGE Edge parallel to another edge.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; parallelEdge.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>parallelEdge
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>PARALLELEDGE Edge parallel to another edge.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function res = parallelEdge(edge, dist) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">PARALLELEDGE Edge parallel to another edge.
+
+   EDGE2 = parallelEdge(EDGE, DIST)
+   Computes the edge parallel to the input edge EDGE and located at the
+   given signed distance DIST.
+
+   Example
+     obox = [30 40 80 40 30];
+     figure; hold on; axis equal;
+     drawOrientedBox(obox, 'LineWidth', 2);
+     edge1 = centeredEdgeToEdge(obox([1 2 3 5]));
+     edge2 = centeredEdgeToEdge(obox([1 2 4 5])+[0 0 0 90]);
+     drawEdge(edge1, 'LineWidth', 2, 'color', 'g');
+     drawEdge(edge2, 'LineWidth', 2, 'color', 'g');
+     drawEdge(parallelEdge(edge1, -30), 'LineWidth', 2, 'color', 'k');
+     drawEdge(parallelEdge(edge2, -50), 'LineWidth', 2, 'color', 'k');
+
+   See also
+     <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="parallelLine.html" class="code" title="function res = parallelLine(line, point)">parallelLine</a>, <a href="drawEdge.html" class="code" title="function varargout = drawEdge(varargin)">drawEdge</a>, <a href="centeredEdgeToEdge.html" class="code" title="function edge = centeredEdgeToEdge(cedge)">centeredEdgeToEdge</a>, <a href="edgeToLine.html" class="code" title="function line = edgeToLine(edge)">edgeToLine</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2012-07-31,    using Matlab 7.9.0.529 (R2009b)
+ Copyright 2012 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="edgeToLine.html" class="code" title="function line = edgeToLine(edge)">edgeToLine</a>	EDGETOLINE Convert an edge to a straight line.</li><li><a href="parallelLine.html" class="code" title="function res = parallelLine(line, point)">parallelLine</a>	PARALLELLINE Create a line parallel to another one.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function res = parallelEdge(edge, dist)</a>
+0002 <span class="comment">%PARALLELEDGE Edge parallel to another edge.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   EDGE2 = parallelEdge(EDGE, DIST)</span>
+0005 <span class="comment">%   Computes the edge parallel to the input edge EDGE and located at the</span>
+0006 <span class="comment">%   given signed distance DIST.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Example</span>
+0009 <span class="comment">%     obox = [30 40 80 40 30];</span>
+0010 <span class="comment">%     figure; hold on; axis equal;</span>
+0011 <span class="comment">%     drawOrientedBox(obox, 'LineWidth', 2);</span>
+0012 <span class="comment">%     edge1 = centeredEdgeToEdge(obox([1 2 3 5]));</span>
+0013 <span class="comment">%     edge2 = centeredEdgeToEdge(obox([1 2 4 5])+[0 0 0 90]);</span>
+0014 <span class="comment">%     drawEdge(edge1, 'LineWidth', 2, 'color', 'g');</span>
+0015 <span class="comment">%     drawEdge(edge2, 'LineWidth', 2, 'color', 'g');</span>
+0016 <span class="comment">%     drawEdge(parallelEdge(edge1, -30), 'LineWidth', 2, 'color', 'k');</span>
+0017 <span class="comment">%     drawEdge(parallelEdge(edge2, -50), 'LineWidth', 2, 'color', 'k');</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   See also</span>
+0020 <span class="comment">%     edges2d, parallelLine, drawEdge, centeredEdgeToEdge, edgeToLine</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">% ------</span>
+0023 <span class="comment">% Author: David Legland</span>
+0024 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0025 <span class="comment">% Created: 2012-07-31,    using Matlab 7.9.0.529 (R2009b)</span>
+0026 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
+0027 
+0028 <span class="comment">% compute the line parallel to the supporting line of edge</span>
+0029 line = <a href="parallelLine.html" class="code" title="function res = parallelLine(line, point)">parallelLine</a>(<a href="edgeToLine.html" class="code" title="function line = edgeToLine(edge)">edgeToLine</a>(edge), dist);
+0030 
+0031 <span class="comment">% result edge is given by line positions 0 and 1.</span>
+0032 res = [line(:, 1:2) line(:, 1:2)+line(:, 3:4)];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

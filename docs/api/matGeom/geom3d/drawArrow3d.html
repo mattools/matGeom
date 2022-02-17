@@ -1,0 +1,272 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawArrow3d</title>
+  <meta name="keywords" content="drawArrow3d">
+  <meta name="description" content="DRAWARROW3D plot a quiver of 3D arrows.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; drawArrow3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawArrow3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWARROW3D plot a quiver of 3D arrows.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawArrow3d(pos, vec, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWARROW3D plot a quiver of 3D arrows.
+
+   drawArrow3d(pos, vec) 
+   Plots 3D arrows given the (pos)ition array [x1 y1 z1; x2 y2 z2; ...] 
+   and the (vec)tor array [dx1 dy1 dz1; dx2 dy2 dz2; ...].
+
+   drawArrow3d(pos, vec, color)
+   Optional positional argument color conforms to 'ColorSpec.'  
+   For example, 'r','red',[1 0 0] will all plot a quiver with all arrows 
+   as red. This can also be in the form of Nx3 where 'N' is the number of 
+   arrows and each column corresponds to the RGB values. Default color is 
+   black.
+
+   drawArrow3d(...,Name,Value) Optional name-value pair arguments:
+   'stemRatio': Ratio of the arrow head (cone) to the arrow stem (cylinder)
+       For example, setting this value to 0.94 will produce arrows with 
+       arrow stems 94% of the length and short, 6% cones as arrow heads.
+       Values above 0 and below 1 are valid. Default is 0.75.
+   'arrowRadius': changes the radius of the arrowstem. Percentage of the
+       lenght of the arrow. Values between 0.01 and 0.01 are valid. 
+       Default is 0.025.
+   Uses the 'patch' function to plot the arrows. 'patch' properties can be  
+   used to control the appearance of the arrows.
+
+   drawArrow3d(AX,...) plots into AX instead of GCA.
+
+   H = drawArrow3d(...) returns the handles of the arrows.
+
+ Example:
+    [X,Y] = meshgrid(1:5, -2:2);
+    Z = zeros(size(X));
+    pos = [X(:),Y(:),Z(:)];
+    vec = zeros(size(pos));
+    vec(:,1) = 1;
+    drawArrow3d(pos, vec, 'g', 'stemRatio', 0.6);
+    view(3); lighting('phong'); camlight('head'); axis('equal')</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createRotationVector3d.html" class="code" title="function ROT = createRotationVector3d(A,B)">createRotationVector3d</a>	CREATEROTATIONVECTOR3D Calculates the rotation between two vectors.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawAxis3d.html" class="code" title="function varargout = drawAxis3d(varargin)">drawAxis3d</a>	DRAWAXIS3D Draw a coordinate system and an origin.</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function [valid, color]=validateColor(color,numArrows)</a></li><li><a href="#_sub2" class="code">function arrowHandle = drawSingleVector3d(hAx, pos, vec, color, stemRatio, arrowRadius, drawOptions)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawArrow3d(pos, vec, varargin)</a>
+0002 <span class="comment">%DRAWARROW3D plot a quiver of 3D arrows.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawArrow3d(pos, vec)</span>
+0005 <span class="comment">%   Plots 3D arrows given the (pos)ition array [x1 y1 z1; x2 y2 z2; ...]</span>
+0006 <span class="comment">%   and the (vec)tor array [dx1 dy1 dz1; dx2 dy2 dz2; ...].</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   drawArrow3d(pos, vec, color)</span>
+0009 <span class="comment">%   Optional positional argument color conforms to 'ColorSpec.'</span>
+0010 <span class="comment">%   For example, 'r','red',[1 0 0] will all plot a quiver with all arrows</span>
+0011 <span class="comment">%   as red. This can also be in the form of Nx3 where 'N' is the number of</span>
+0012 <span class="comment">%   arrows and each column corresponds to the RGB values. Default color is</span>
+0013 <span class="comment">%   black.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   drawArrow3d(...,Name,Value) Optional name-value pair arguments:</span>
+0016 <span class="comment">%   'stemRatio': Ratio of the arrow head (cone) to the arrow stem (cylinder)</span>
+0017 <span class="comment">%       For example, setting this value to 0.94 will produce arrows with</span>
+0018 <span class="comment">%       arrow stems 94% of the length and short, 6% cones as arrow heads.</span>
+0019 <span class="comment">%       Values above 0 and below 1 are valid. Default is 0.75.</span>
+0020 <span class="comment">%   'arrowRadius': changes the radius of the arrowstem. Percentage of the</span>
+0021 <span class="comment">%       lenght of the arrow. Values between 0.01 and 0.01 are valid.</span>
+0022 <span class="comment">%       Default is 0.025.</span>
+0023 <span class="comment">%   Uses the 'patch' function to plot the arrows. 'patch' properties can be</span>
+0024 <span class="comment">%   used to control the appearance of the arrows.</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%   drawArrow3d(AX,...) plots into AX instead of GCA.</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%   H = drawArrow3d(...) returns the handles of the arrows.</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">% Example:</span>
+0031 <span class="comment">%    [X,Y] = meshgrid(1:5, -2:2);</span>
+0032 <span class="comment">%    Z = zeros(size(X));</span>
+0033 <span class="comment">%    pos = [X(:),Y(:),Z(:)];</span>
+0034 <span class="comment">%    vec = zeros(size(pos));</span>
+0035 <span class="comment">%    vec(:,1) = 1;</span>
+0036 <span class="comment">%    drawArrow3d(pos, vec, 'g', 'stemRatio', 0.6);</span>
+0037 <span class="comment">%    view(3); lighting('phong'); camlight('head'); axis('equal')</span>
+0038 <span class="comment">%</span>
+0039 
+0040 <span class="comment">% ------</span>
+0041 <span class="comment">% Authors: Shawn Arseneau, oqilipo</span>
+0042 <span class="comment">% History:</span>
+0043 <span class="comment">%   Created: 2006-09-14 by Shawn Arseneau</span>
+0044 <span class="comment">%   Updated: 2020-02-08 by oqilipo</span>
+0045 
+0046 <span class="comment">% Check if first argument is an axes handle</span>
+0047 <span class="keyword">if</span> numel(pos) == 1 &amp;&amp; ishghandle(pos, <span class="string">'axes'</span>)
+0048     hAx = pos;
+0049     pos=vec;
+0050     vec=varargin{1};
+0051     varargin(1)=[];
+0052 <span class="keyword">else</span>
+0053     hAx = gca;
+0054 <span class="keyword">end</span>
+0055 
+0056 numArrows = size(pos,1);
+0057 <span class="keyword">if</span> numArrows ~= size(vec,1)
+0058     error([<span class="string">'Number of rows of position and magnitude inputs do not agree. '</span> <span class="keyword">...</span>
+0059         <span class="string">'Type ''help drawArrow3d'' for details'</span>]);
+0060 <span class="keyword">end</span>
+0061 
+0062 <span class="comment">% Parsing</span>
+0063 p = inputParser;
+0064 p.KeepUnmatched = true;
+0065 isPointArray3d = @(x) validateattributes(x,{<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0066     {<span class="string">'nonempty'</span>,<span class="string">'nonnan'</span>,<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'size'</span>,[nan,3]});
+0067 addRequired(p,<span class="string">'pos'</span>,isPointArray3d)
+0068 addRequired(p,<span class="string">'vec'</span>,isPointArray3d);
+0069 addOptional(p,<span class="string">'color'</span>, <span class="string">'k'</span>, @(x) <a href="#_sub1" class="code" title="subfunction [valid, color]=validateColor(color,numArrows)">validateColor</a>(x, numArrows));
+0070 isStemRatio = @(x) validateattributes(x,{<span class="string">'numeric'</span>},{<span class="string">'vector'</span>,<span class="string">'&gt;'</span>, 0, <span class="string">'&lt;'</span>, 1});
+0071 addParameter(p,<span class="string">'stemRatio'</span>, 0.75, isStemRatio);
+0072 isArrowRadius = @(x) validateattributes(x,{<span class="string">'numeric'</span>},{<span class="string">'scalar'</span>,<span class="string">'&gt;='</span>, 0.01, <span class="string">'&lt;='</span>, 0.1});
+0073 addParameter(p,<span class="string">'arrowRadius'</span>,0.025, isArrowRadius);
+0074 
+0075 parse(p,pos,vec,varargin{:});
+0076 pos = p.Results.pos;
+0077 vec = p.Results.vec;
+0078 [~, color] = <a href="#_sub1" class="code" title="subfunction [valid, color]=validateColor(color,numArrows)">validateColor</a>(p.Results.color, numArrows);
+0079 stemRatio = p.Results.stemRatio;
+0080 <span class="keyword">if</span> numel(stemRatio) == 1; stemRatio = repmat(stemRatio,numArrows,1); <span class="keyword">end</span>
+0081 arrowRadius = p.Results.arrowRadius;
+0082 <span class="keyword">if</span> numel(arrowRadius) == 1; arrowRadius = repmat(arrowRadius,numArrows,1); <span class="keyword">end</span>
+0083 drawOptions=p.Unmatched;
+0084 
+0085 <span class="comment">%% Loop through all arrows and plot in 3D</span>
+0086 hold(hAx,<span class="string">'on'</span>)
+0087 qHandle=gobjects(numArrows,1);
+0088 <span class="keyword">for</span> i=1:numArrows
+0089     qHandle(i) = <a href="#_sub2" class="code" title="subfunction arrowHandle = drawSingleVector3d(hAx, pos, vec, color, stemRatio, arrowRadius, drawOptions)">drawSingleVector3d</a>(hAx, pos(i,:), vec(i,:), color(i,:), <span class="keyword">...</span>
+0090         stemRatio(i),arrowRadius(i),drawOptions);
+0091 <span class="keyword">end</span>
+0092 
+0093 <span class="keyword">if</span> nargout &gt; 0
+0094     varargout = {qHandle};
+0095 <span class="keyword">end</span>
+0096 
+0097 <span class="keyword">end</span>
+0098 
+0099 <a name="_sub1" href="#_subfunctions" class="code">function [valid, color]=validateColor(color,numArrows)</a>
+0100 valid=true;
+0101 [arrowRow, arrowCol] = size(color);
+0102 <span class="keyword">if</span> arrowRow==1
+0103     <span class="keyword">if</span> ischar(color) <span class="comment">%in ShortName or LongName color format</span>
+0104         color=repmat(color,numArrows,1);
+0105     <span class="keyword">else</span>
+0106         <span class="keyword">if</span> arrowCol~=3
+0107             error(<span class="string">'color in RGBvalue must be of the form 1x3.'</span>);
+0108         <span class="keyword">end</span>
+0109         color=repmat(color,numArrows,1);
+0110     <span class="keyword">end</span>
+0111 <span class="keyword">elseif</span> arrowRow~=numArrows
+0112     error(<span class="string">'color in RGBvalue must be of the form Nx3.'</span>);
+0113 <span class="keyword">end</span>
+0114 
+0115 <span class="keyword">end</span>
+0116 
+0117 <a name="_sub2" href="#_subfunctions" class="code">function arrowHandle = drawSingleVector3d(hAx, pos, vec, color, stemRatio, arrowRadius, drawOptions)</a>
+0118 <span class="comment">%ARROW3D Plot a single 3D arrow with a cylindrical stem and cone arrowhead</span>
+0119 <span class="comment">%</span>
+0120 <span class="comment">% See header of drawArrow3d</span>
+0121 
+0122 X = pos(1); Y = pos(2); Z = pos(3);
+0123 
+0124 [~, ~, srho] = cart2sph(vec(1), vec(2), vec(3));
+0125 
+0126 <span class="comment">%% CYLINDER == STEM</span>
+0127 cylinderRadius = srho*arrowRadius;
+0128 cylinderLength = srho*stemRatio;
+0129 [CX,CY,CZ] = cylinder(cylinderRadius);
+0130 CZ = CZ.*cylinderLength; <span class="comment">% lengthen</span>
+0131 
+0132 <span class="comment">% Rotate Cylinder</span>
+0133 [row, col] = size(CX); <span class="comment">% initial rotation to coincide with x-axis</span>
+0134 
+0135 newEll = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>([CX(:), CY(:), CZ(:)],<a href="createRotationVector3d.html" class="code" title="function ROT = createRotationVector3d(A,B)">createRotationVector3d</a>([1 0 0],[0 0 -1]));
+0136 CX = reshape(newEll(:,1), row, col);
+0137 CY = reshape(newEll(:,2), row, col);
+0138 CZ = reshape(newEll(:,3), row, col);
+0139 
+0140 [row, col] = size(CX);
+0141 newEll = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>([CX(:), CY(:), CZ(:)],<a href="createRotationVector3d.html" class="code" title="function ROT = createRotationVector3d(A,B)">createRotationVector3d</a>([1 0 0],vec));
+0142 stemX = reshape(newEll(:,1), row, col);
+0143 stemY = reshape(newEll(:,2), row, col);
+0144 stemZ = reshape(newEll(:,3), row, col);
+0145 
+0146 <span class="comment">% Translate cylinder</span>
+0147 stemX = stemX + X;
+0148 stemY = stemY + Y;
+0149 stemZ = stemZ + Z;
+0150 
+0151 <span class="comment">%% CONE == ARROWHEAD</span>
+0152 RADIUS_RATIO = 1.5;
+0153 coneLength = srho*(1-stemRatio);
+0154 coneRadius = cylinderRadius*RADIUS_RATIO;
+0155 incr = 4;  <span class="comment">% Steps of cone increments</span>
+0156 coneincr = coneRadius/incr;
+0157 [coneX, coneY, coneZ] = cylinder(cylinderRadius*2:-coneincr:0); <span class="comment">% Cone</span>
+0158 coneZ = coneZ.*coneLength;
+0159 
+0160 <span class="comment">% Rotate cone</span>
+0161 [row, col] = size(coneX);
+0162 newEll = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>([coneX(:), coneY(:), coneZ(:)],<a href="createRotationVector3d.html" class="code" title="function ROT = createRotationVector3d(A,B)">createRotationVector3d</a>([1 0 0],[0 0 -1]));
+0163 coneX = reshape(newEll(:,1), row, col);
+0164 coneY = reshape(newEll(:,2), row, col);
+0165 coneZ = reshape(newEll(:,3), row, col);
+0166 
+0167 newEll = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>([coneX(:), coneY(:), coneZ(:)],<a href="createRotationVector3d.html" class="code" title="function ROT = createRotationVector3d(A,B)">createRotationVector3d</a>([1 0 0],vec));
+0168 headX = reshape(newEll(:,1), row, col);
+0169 headY = reshape(newEll(:,2), row, col);
+0170 headZ = reshape(newEll(:,3), row, col);
+0171 
+0172 <span class="comment">% Translate cone</span>
+0173 <span class="comment">% centerline for cylinder: the multiplier is to set the cone 'on the rim' of the cylinder</span>
+0174 V = [0, 0, srho*stemRatio];
+0175 Vp = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(V,<a href="createRotationVector3d.html" class="code" title="function ROT = createRotationVector3d(A,B)">createRotationVector3d</a>([1 0 0],[0 0 -1]));
+0176 Vp = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(Vp,<a href="createRotationVector3d.html" class="code" title="function ROT = createRotationVector3d(A,B)">createRotationVector3d</a>([1 0 0],vec));
+0177 headX = headX + Vp(1) + X;
+0178 headY = headY + Vp(2) + Y;
+0179 headZ = headZ + Vp(3) + Z;
+0180 
+0181 <span class="comment">% Draw cylinder &amp; cone</span>
+0182 hStem = patch(hAx, surf2patch(stemX, stemY, stemZ), <span class="string">'FaceColor'</span>, color, <span class="string">'EdgeColor'</span>, <span class="string">'none'</span>, drawOptions);
+0183 hold(hAx,<span class="string">'on'</span>)
+0184 hHead = patch(hAx, surf2patch(headX, headY, headZ), <span class="string">'FaceColor'</span>, color, <span class="string">'EdgeColor'</span>, <span class="string">'none'</span>, drawOptions);
+0185 arrowHandle = hggroup(hAx);
+0186 set([hStem, hHead],<span class="string">'Parent'</span>,arrowHandle);
+0187 
+0188 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

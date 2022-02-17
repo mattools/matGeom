@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of enclosingCircle</title>
+  <meta name="keywords" content="enclosingCircle">
+  <meta name="description" content="ENCLOSINGCIRCLE Find the minimum circle enclosing a set of points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; enclosingCircle.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>enclosingCircle
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ENCLOSINGCIRCLE Find the minimum circle enclosing a set of points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function circle = enclosingCircle(pts) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ENCLOSINGCIRCLE Find the minimum circle enclosing a set of points.
+
+   CIRCLE = enclosingCircle(POINTS);
+   computes the circle CIRCLE=[xc yc r] which encloses all the points POINTS
+   given as a N-by-2 array.
+
+
+   Rewritten from a file from
+           Yazan Ahed (yash78@gmail.com)
+
+   which was rewritten from a Java applet by Shripad Thite:
+   http://heyoka.cs.uiuc.edu/~thite/mincircle/
+
+   See also:
+   <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="boxes2d.html" class="code" title="function boxes2d(varargin)">boxes2d</a>, <a href="circumCircle.html" class="code" title="function varargout = circumCircle(varargin)">circumCircle</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createCircle.html" class="code" title="function circle = createCircle(varargin)">createCircle</a>	CREATECIRCLE Create a circle from 2 or 3 points.</li><li><a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>	DISTANCEPOINTS Compute distance between two points.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function circ = recurseCircle(n, p, m, b)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function circle = enclosingCircle(pts)</a>
+0002 <span class="comment">%ENCLOSINGCIRCLE Find the minimum circle enclosing a set of points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   CIRCLE = enclosingCircle(POINTS);</span>
+0005 <span class="comment">%   computes the circle CIRCLE=[xc yc r] which encloses all the points POINTS</span>
+0006 <span class="comment">%   given as a N-by-2 array.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   Rewritten from a file from</span>
+0010 <span class="comment">%           Yazan Ahed (yash78@gmail.com)</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   which was rewritten from a Java applet by Shripad Thite:</span>
+0013 <span class="comment">%   http://heyoka.cs.uiuc.edu/~thite/mincircle/</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   See also:</span>
+0016 <span class="comment">%   circles2d, points2d, boxes2d, circumCircle</span>
+0017 <span class="comment">%</span>
+0018 
+0019 <span class="comment">% ------</span>
+0020 <span class="comment">% Author: David Legland</span>
+0021 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0022 <span class="comment">% created the 07/07/2005.</span>
+0023 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
+0024 
+0025 
+0026 <span class="comment">% works on convex hull: it is faster</span>
+0027 pts = pts(convhull(pts(:,1), pts(:,2)), :);
+0028 
+0029 <span class="comment">% call the recursive function</span>
+0030 circle = <a href="#_sub1" class="code" title="subfunction circ = recurseCircle(n, p, m, b)">recurseCircle</a>(size(pts, 1), pts, 1, zeros(3, 2));
+0031 
+0032 
+0033 
+0034 <a name="_sub1" href="#_subfunctions" class="code">function circ = recurseCircle(n, p, m, b)</a>
+0035 <span class="comment">%    n: number of points given</span>
+0036 <span class="comment">%    m: an argument used by the function. Always use 1 for m.</span>
+0037 <span class="comment">%    bnry: an argument (3x2 array) used by the function to set the points that</span>
+0038 <span class="comment">%          determines the circle boundry. You have to be careful when choosing this</span>
+0039 <span class="comment">%          array's values. I think the values should be somewhere outside your points</span>
+0040 <span class="comment">%          boundary. For my case, for example, I know the (x,y) I have will be something</span>
+0041 <span class="comment">%          in between (-5,-5) and (5,5), so I use bnry as:</span>
+0042 <span class="comment">%                       [-10 -10</span>
+0043 <span class="comment">%                        -10 -10</span>
+0044 <span class="comment">%                        -10 -10]</span>
+0045 
+0046 
+0047 <span class="keyword">if</span> m == 4
+0048     circ = <a href="createCircle.html" class="code" title="function circle = createCircle(varargin)">createCircle</a>(b(1,:), b(2,:), b(3,:));
+0049     <span class="keyword">return</span>;
+0050 <span class="keyword">end</span>
+0051 
+0052 circ = [Inf Inf 0];
+0053 
+0054 <span class="keyword">if</span> m == 2
+0055     circ = [b(1,1:2) 0];
+0056 <span class="keyword">elseif</span> m == 3
+0057     c = (b(1,:) + b(2,:))/2;
+0058     circ = [c <a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(b(1,:), c)];
+0059 <span class="keyword">end</span>
+0060 
+0061 
+0062 <span class="keyword">for</span> i = 1:n
+0063     <span class="keyword">if</span> <a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(p(i,:), circ(1:2)) &gt; circ(3)
+0064         <span class="keyword">if</span> sum(b(:,1)==p(i,1) &amp; b(:,2)==p(i,2)) == 0
+0065             b(m,:) = p(i,:);
+0066             circ = <a href="#_sub1" class="code" title="subfunction circ = recurseCircle(n, p, m, b)">recurseCircle</a>(i, p, m+1, b);
+0067         <span class="keyword">end</span>
+0068     <span class="keyword">end</span>
+0069 <span class="keyword">end</span>
+0070</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

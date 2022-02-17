@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of transformVector3d</title>
+  <meta name="keywords" content="transformVector3d">
+  <meta name="description" content="TRANSFORMVECTOR3D Transform a vector with a 3D affine transform.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; transformVector3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>transformVector3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>TRANSFORMVECTOR3D Transform a vector with a 3D affine transform.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = transformVector3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">TRANSFORMVECTOR3D Transform a vector with a 3D affine transform.
+
+   V2 = transformVector3d(V1, TRANS);
+   Computes the vector obtained by transforming vector V1 with affine
+   transform TRANS.
+   V1 has the form [x1 y1 z1], and TRANS is a [3x3], [3x4], or [4x4]
+   matrix, with one of the forms:
+   [a b c]   ,   [a b c j] , or [a b c j]
+   [d e f]       [d e f k]      [d e f k]
+   [g h i]       [g h i l]      [g h i l]
+                                [0 0 0 1]
+
+   V2 = transformVector3d(V1, TRANS) also works when V1 is a [Nx3xMxEtc]
+   array of double. In this case, V2 has the same size as V1.
+
+   V2 = transformVector3d(X1, Y1, Z1, TRANS);
+   Specifies vectors coordinates in three arrays with same size.
+
+   [X2 Y2 Z2] = transformVector3d(...);
+   Returns the coordinates of the transformed vector separately.
+
+
+   See also:
+   <a href="vectors3d.html" class="code" title="function vectors3d(varargin)">vectors3d</a>, <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 25/11/2008 from <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawAngleBetweenVectors3d.html" class="code" title="function varargout = drawAngleBetweenVectors3d(o, v1, v2, r, varargin)">drawAngleBetweenVectors3d</a>	DRAWANGLEBETWEENVECTORS3D Draw an arc between 2 vectors.</li><li><a href="drawAxis3d.html" class="code" title="function varargout = drawAxis3d(varargin)">drawAxis3d</a>	DRAWAXIS3D Draw a coordinate system and an origin.</li><li><a href="projPointOnCircle3d.html" class="code" title="function point2 = projPointOnCircle3d(point, circle)">projPointOnCircle3d</a>	PROJPOINTONCIRCLE3D Project a 3D point onto a 3D circle.</li><li><a href="transformLine3d.html" class="code" title="function res = transformLine3d(line, trans)">transformLine3d</a>	TRANSFORMLINE3D Transform a 3D line with a 3D affine transform.</li><li><a href="transformPlane3d.html" class="code" title="function plane2 = transformPlane3d(plane, trans)">transformPlane3d</a>	TRANSFORMPLANE3D Transform a 3D plane with a 3D affine transform.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = transformVector3d(varargin)</a>
+0002 <span class="comment">%TRANSFORMVECTOR3D Transform a vector with a 3D affine transform.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   V2 = transformVector3d(V1, TRANS);</span>
+0005 <span class="comment">%   Computes the vector obtained by transforming vector V1 with affine</span>
+0006 <span class="comment">%   transform TRANS.</span>
+0007 <span class="comment">%   V1 has the form [x1 y1 z1], and TRANS is a [3x3], [3x4], or [4x4]</span>
+0008 <span class="comment">%   matrix, with one of the forms:</span>
+0009 <span class="comment">%   [a b c]   ,   [a b c j] , or [a b c j]</span>
+0010 <span class="comment">%   [d e f]       [d e f k]      [d e f k]</span>
+0011 <span class="comment">%   [g h i]       [g h i l]      [g h i l]</span>
+0012 <span class="comment">%                                [0 0 0 1]</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   V2 = transformVector3d(V1, TRANS) also works when V1 is a [Nx3xMxEtc]</span>
+0015 <span class="comment">%   array of double. In this case, V2 has the same size as V1.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   V2 = transformVector3d(X1, Y1, Z1, TRANS);</span>
+0018 <span class="comment">%   Specifies vectors coordinates in three arrays with same size.</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   [X2 Y2 Z2] = transformVector3d(...);</span>
+0021 <span class="comment">%   Returns the coordinates of the transformed vector separately.</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   See also:</span>
+0025 <span class="comment">%   vectors3d, transforms3d, transformPoint3d</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   ---------</span>
+0028 <span class="comment">%   author : David Legland</span>
+0029 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0030 <span class="comment">%   created the 25/11/2008 from transformPoint3d</span>
+0031 <span class="comment">%</span>
+0032 
+0033 <span class="keyword">if</span> nargin~=2 &amp;&amp; nargin~=4
+0034     error(<span class="string">'Invalid number of input arguments. Type ''help transformVector3d'' for details.'</span>);
+0035 <span class="keyword">end</span>
+0036 
+0037 <span class="comment">% Extract only the linear part of the affine transform</span>
+0038 trans = varargin{end};
+0039 trans(1:4,4) = [0; 0; 0; 1];
+0040 
+0041 <span class="comment">% Call transformPoint3d using equivalent output arguments</span>
+0042 varargout = cell(1, max(1,nargout));
+0043 [varargout{:}] = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(varargin{1:end-1}, trans);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

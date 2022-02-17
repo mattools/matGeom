@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawVector3d</title>
+  <meta name="keywords" content="drawVector3d">
+  <meta name="description" content="DRAWVECTOR3D Draw vector at a given position.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; drawVector3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawVector3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWVECTOR3D Draw vector at a given position.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawVector3d(pos, vect, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWVECTOR3D Draw vector at a given position.
+
+   drawVector3d(POS, VECT)
+   Draws the vector VECT starting at the position POS. Both VECT and POS
+   are N-by-3 arrays.
+
+   drawVector3d(..., PNAME, PVALUE)
+   Specifies additional optional parameters that will be given to the
+   quiver3 function.
+
+   Example
+     figure; hold on;
+     drawVector3d([2 3 4], [1 0 0]);
+     drawVector3d([2 3 4], [0 1 0]);
+     drawVector3d([2 3 4], [0 0 1]);
+     view(3);
+
+   See also
+   <a href="vectors3d.html" class="code" title="function vectors3d(varargin)">vectors3d</a>, quiver3</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawVector3d(pos, vect, varargin)</a>
+0002 <span class="comment">%DRAWVECTOR3D Draw vector at a given position.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawVector3d(POS, VECT)</span>
+0005 <span class="comment">%   Draws the vector VECT starting at the position POS. Both VECT and POS</span>
+0006 <span class="comment">%   are N-by-3 arrays.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   drawVector3d(..., PNAME, PVALUE)</span>
+0009 <span class="comment">%   Specifies additional optional parameters that will be given to the</span>
+0010 <span class="comment">%   quiver3 function.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%     figure; hold on;</span>
+0014 <span class="comment">%     drawVector3d([2 3 4], [1 0 0]);</span>
+0015 <span class="comment">%     drawVector3d([2 3 4], [0 1 0]);</span>
+0016 <span class="comment">%     drawVector3d([2 3 4], [0 0 1]);</span>
+0017 <span class="comment">%     view(3);</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   See also</span>
+0020 <span class="comment">%   vectors3d, quiver3</span>
+0021 <span class="comment">%</span>
+0022 
+0023 <span class="comment">% ------</span>
+0024 <span class="comment">% Author: David Legland</span>
+0025 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0026 <span class="comment">% Created: 2011-12-19,    using Matlab 7.9.0.529 (R2009b)</span>
+0027 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0028 
+0029 <span class="keyword">if</span> isAxisHandle(pos)
+0030     hAx = pos;
+0031     pos = vect;
+0032     vect = varargin{1};
+0033     varargin(1) = [];
+0034 <span class="keyword">else</span>
+0035     hAx = gca;
+0036 <span class="keyword">end</span>
+0037 
+0038 h = quiver3(hAx, pos(:, 1), pos(:, 2), pos(:, 3), <span class="keyword">...</span>
+0039     vect(:, 1), vect(:, 2), vect(:, 3), 0, varargin{:});
+0040 
+0041 <span class="comment">% format output</span>
+0042 <span class="keyword">if</span> nargout &gt; 0
+0043     varargout{1} = h;
+0044 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

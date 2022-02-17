@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of trimeshSurfaceArea</title>
+  <meta name="keywords" content="trimeshSurfaceArea">
+  <meta name="description" content="TRIMESHSURFACEAREA Surface area of a triangular mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; trimeshSurfaceArea.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>trimeshSurfaceArea
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>TRIMESHSURFACEAREA Surface area of a triangular mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function area = trimeshSurfaceArea(v, e, f) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">TRIMESHSURFACEAREA Surface area of a triangular mesh.
+
+   S = trimeshSurfaceArea(V, F)
+   S = trimeshSurfaceArea(V, E, F)
+   Computes the surface area of the mesh specified by vertex array V and
+   face array F. Vertex array is a NV-by-3 array of coordinates. 
+   Face array is a NF-by-3, containing vertex indices of each face.
+
+   Example
+     % Compute area of an octahedron (equal to 2*sqrt(3)*a*a, with 
+     % a = sqrt(2) in this case)
+     [v f] = createOctahedron;
+     trimeshSurfaceArea(v, f)
+     ans = 
+         6.9282
+
+     % triangulate a compute area of a unit cube
+     [v f] = createCube;
+     f2 = triangulateFaces(f);
+     trimeshSurfaceArea(v, f2)
+     ans =
+         6
+
+   See also
+   meshes3d, <a href="meshSurfaceArea.html" class="code" title="function area = meshSurfaceArea(varargin)">meshSurfaceArea</a>, <a href="trimeshMeanBreadth.html" class="code" title="function mb = trimeshMeanBreadth(vertices, faces)">trimeshMeanBreadth</a>, <a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>	CROSSPRODUCT3D Vector cross product faster than inbuilt MATLAB cross.</li><li><a href="../../matGeom/geom3d/vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>	VECTORNORM3D Norm of a 3D vector or of set of 3D vectors.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function area = trimeshSurfaceArea(v, e, f)</a>
+0002 <span class="comment">%TRIMESHSURFACEAREA Surface area of a triangular mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   S = trimeshSurfaceArea(V, F)</span>
+0005 <span class="comment">%   S = trimeshSurfaceArea(V, E, F)</span>
+0006 <span class="comment">%   Computes the surface area of the mesh specified by vertex array V and</span>
+0007 <span class="comment">%   face array F. Vertex array is a NV-by-3 array of coordinates.</span>
+0008 <span class="comment">%   Face array is a NF-by-3, containing vertex indices of each face.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Example</span>
+0011 <span class="comment">%     % Compute area of an octahedron (equal to 2*sqrt(3)*a*a, with</span>
+0012 <span class="comment">%     % a = sqrt(2) in this case)</span>
+0013 <span class="comment">%     [v f] = createOctahedron;</span>
+0014 <span class="comment">%     trimeshSurfaceArea(v, f)</span>
+0015 <span class="comment">%     ans =</span>
+0016 <span class="comment">%         6.9282</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%     % triangulate a compute area of a unit cube</span>
+0019 <span class="comment">%     [v f] = createCube;</span>
+0020 <span class="comment">%     f2 = triangulateFaces(f);</span>
+0021 <span class="comment">%     trimeshSurfaceArea(v, f2)</span>
+0022 <span class="comment">%     ans =</span>
+0023 <span class="comment">%         6</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   See also</span>
+0026 <span class="comment">%   meshes3d, meshSurfaceArea, trimeshMeanBreadth, triangulateFaces</span>
+0027 
+0028 <span class="comment">% ------</span>
+0029 <span class="comment">% Author: David Legland</span>
+0030 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0031 <span class="comment">% Created: 2011-08-26,    using Matlab 7.9.0.529 (R2009b)</span>
+0032 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0033 
+0034 <span class="comment">% check input number</span>
+0035 <span class="keyword">if</span> nargin == 2
+0036     f = e;
+0037 <span class="keyword">end</span>
+0038 
+0039 <span class="comment">% compute two direction vectors, using first vertex of each face as origin</span>
+0040 v1 = v(f(:, 2), :) - v(f(:, 1), :);
+0041 v2 = v(f(:, 3), :) - v(f(:, 1), :);
+0042 
+0043 <span class="comment">% area of each triangle is half the cross product norm</span>
+0044 vn = <a href="../../matGeom/geom3d/vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(<a href="../../matGeom/geom3d/crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>(v1, v2));
+0045 
+0046 <span class="comment">% sum up and normalize</span>
+0047 area = sum(vn) / 2;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

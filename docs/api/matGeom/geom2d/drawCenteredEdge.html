@@ -1,0 +1,241 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawCenteredEdge</title>
+  <meta name="keywords" content="drawCenteredEdge">
+  <meta name="description" content="DRAWCENTEREDEDGE Draw an edge centered on a point.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; drawCenteredEdge.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawCenteredEdge
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWCENTEREDEDGE Draw an edge centered on a point.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawCenteredEdge(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWCENTEREDEDGE Draw an edge centered on a point.
+   
+   Draws a centered edge, defined by a center, a length and an orientation
+   (in degrees). This function can be used to draw principal axes of an
+   ellipse or of an oriented box.
+
+
+   drawCenteredEdge(EDGE)
+   Draws an edge centered on a point. EDGE has format [XC YC L THETA],
+   with (Xc, YC) being edge center, L being the edge length, and THETA
+   beigng the edge orientation, in degrees (counted Counter-clockwise from
+   horizontal).
+   Input argument can also be a N-by-4 array, in that can several edges
+   are drawn.
+
+   drawCenteredEdge(CENTER, L, THETA)
+   Specifies argument in seperate inputs.
+
+   drawCenteredEdge(..., NAME, VALUE)
+   Also specifies drawing options by using one or several parameter name -
+   value pairs (see doc of plot function for details).
+
+   drawCenteredEdge(AX, ...)
+   Specifies the axis to draw the edge on.
+
+   H = drawCenteredEdge(...)
+   Returns handle(s) to the created edges(s).
+
+   Example
+     % Draw an ellipse with its two axes
+     figure(1); clf;
+     center = [50 40];
+     r1 = 30; r2 = 10;
+     theta = 20;
+     elli = [center r1 r2 theta];
+     drawEllipse(elli, 'linewidth', 2);
+     axis([0 100 0 100]); axis equal;
+     hold on;
+     edges = [center 2*r1 theta ; center 2*r2 theta+90];
+     drawCenteredEdge(edges, 'linewidth', 2, 'color', 'g');
+ 
+   See also:
+   <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="drawOrientedBox.html" class="code" title="function varargout = drawOrientedBox(box, varargin)">drawOrientedBox</a>, <a href="drawEllipse.html" class="code" title="function varargout = drawEllipse(varargin)">drawEllipse</a>, <a href="centeredEdgeToEdge.html" class="code" title="function edge = centeredEdgeToEdge(cedge)">centeredEdgeToEdge</a>, <a href="drawEdge.html" class="code" title="function varargout = drawEdge(varargin)">drawEdge</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 05/08/2005.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawCenteredEdge(varargin)</a>
+0002 <span class="comment">%DRAWCENTEREDEDGE Draw an edge centered on a point.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   Draws a centered edge, defined by a center, a length and an orientation</span>
+0005 <span class="comment">%   (in degrees). This function can be used to draw principal axes of an</span>
+0006 <span class="comment">%   ellipse or of an oriented box.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   drawCenteredEdge(EDGE)</span>
+0010 <span class="comment">%   Draws an edge centered on a point. EDGE has format [XC YC L THETA],</span>
+0011 <span class="comment">%   with (Xc, YC) being edge center, L being the edge length, and THETA</span>
+0012 <span class="comment">%   beigng the edge orientation, in degrees (counted Counter-clockwise from</span>
+0013 <span class="comment">%   horizontal).</span>
+0014 <span class="comment">%   Input argument can also be a N-by-4 array, in that can several edges</span>
+0015 <span class="comment">%   are drawn.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   drawCenteredEdge(CENTER, L, THETA)</span>
+0018 <span class="comment">%   Specifies argument in seperate inputs.</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   drawCenteredEdge(..., NAME, VALUE)</span>
+0021 <span class="comment">%   Also specifies drawing options by using one or several parameter name -</span>
+0022 <span class="comment">%   value pairs (see doc of plot function for details).</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   drawCenteredEdge(AX, ...)</span>
+0025 <span class="comment">%   Specifies the axis to draw the edge on.</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   H = drawCenteredEdge(...)</span>
+0028 <span class="comment">%   Returns handle(s) to the created edges(s).</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">%   Example</span>
+0031 <span class="comment">%     % Draw an ellipse with its two axes</span>
+0032 <span class="comment">%     figure(1); clf;</span>
+0033 <span class="comment">%     center = [50 40];</span>
+0034 <span class="comment">%     r1 = 30; r2 = 10;</span>
+0035 <span class="comment">%     theta = 20;</span>
+0036 <span class="comment">%     elli = [center r1 r2 theta];</span>
+0037 <span class="comment">%     drawEllipse(elli, 'linewidth', 2);</span>
+0038 <span class="comment">%     axis([0 100 0 100]); axis equal;</span>
+0039 <span class="comment">%     hold on;</span>
+0040 <span class="comment">%     edges = [center 2*r1 theta ; center 2*r2 theta+90];</span>
+0041 <span class="comment">%     drawCenteredEdge(edges, 'linewidth', 2, 'color', 'g');</span>
+0042 <span class="comment">%</span>
+0043 <span class="comment">%   See also:</span>
+0044 <span class="comment">%   edges2d, drawOrientedBox, drawEllipse, centeredEdgeToEdge, drawEdge</span>
+0045 <span class="comment">%</span>
+0046 <span class="comment">%   ---------</span>
+0047 <span class="comment">%   author : David Legland</span>
+0048 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0049 <span class="comment">%   created the 05/08/2005.</span>
+0050 <span class="comment">%</span>
+0051 
+0052 <span class="comment">%   HISTORY</span>
+0053 <span class="comment">%   2007-06-15 update doc, clean up code</span>
+0054 <span class="comment">%   2011-05-18 use angle in degrees, cleanup code and doc</span>
+0055 <span class="comment">%   2011-10-11 add management of axes handle</span>
+0056 
+0057 
+0058 <span class="comment">%% process input variables</span>
+0059 
+0060 <span class="keyword">if</span> nargin &lt; 1
+0061     error(<span class="string">'Function requires an input argument'</span>);
+0062 <span class="keyword">end</span>
+0063 
+0064 <span class="comment">% extract handle of axis to draw on</span>
+0065 <span class="keyword">if</span> isAxisHandle(varargin{1})
+0066     ax = varargin{1};
+0067     varargin(1) = [];
+0068 <span class="keyword">else</span>
+0069     ax = gca;
+0070 <span class="keyword">end</span>
+0071 
+0072 var = varargin{1};
+0073 <span class="keyword">if</span> size(var, 2) == 4
+0074     <span class="comment">% manage edge in single parameter</span>
+0075     len     = var(:, 3);
+0076     theta   = var(:, 4);
+0077     center  = var(:, 1:2);
+0078 
+0079     N = size(center, 1);    
+0080     varargin(1) = [];
+0081 
+0082 <span class="keyword">elseif</span> length(varargin) &gt;= 3
+0083     <span class="comment">% parameters given in different arguments</span>
+0084     
+0085     <span class="comment">% size of data</span>
+0086     center  = varargin{1};
+0087     len     = varargin{2};
+0088     theta   = varargin{3};
+0089     varargin(1:3) = [];
+0090 
+0091     <span class="comment">% ensure all data have same size</span>
+0092     NP = size(center, 1);
+0093     NL = size(len, 1);
+0094     ND = size(theta, 1);
+0095     N  = max([NP NL ND]);
+0096     <span class="keyword">if</span> N &gt; 1
+0097         <span class="keyword">if</span> NP == 1, center = repmat(center, [N 1]); <span class="keyword">end</span>
+0098         <span class="keyword">if</span> NL == 1, len = repmat(len, [N 1]); <span class="keyword">end</span>
+0099         <span class="keyword">if</span> ND == 1, theta = repmat(theta, [N 1]); <span class="keyword">end</span>
+0100     <span class="keyword">end</span>
+0101     
+0102 <span class="keyword">end</span>
+0103 
+0104 <span class="comment">% extract drawing options</span>
+0105 options = varargin(:);
+0106 
+0107 
+0108 <span class="comment">%% Draw edges</span>
+0109 
+0110 <span class="comment">% coordinates of center point</span>
+0111 xc = center(:, 1);
+0112 yc = center(:, 2);
+0113 
+0114 <span class="comment">% convert angle to radians</span>
+0115 theta = theta * pi / 180;
+0116 
+0117 <span class="comment">% computation shortcuts</span>
+0118 cot = cos(theta);
+0119 sit = sin(theta);
+0120 
+0121 <span class="comment">% compute starting and ending points</span>
+0122 x1 = xc - len .* cot / 2;
+0123 x2 = xc + len .* cot / 2;
+0124 y1 = yc - len .* sit / 2;
+0125 y2 = yc + len .* sit / 2;
+0126 
+0127 
+0128 <span class="comment">% draw the edges</span>
+0129 h = zeros(N, 1);
+0130 <span class="keyword">for</span> i = 1:N
+0131     h(i) = plot(ax, [x1(i) x2(i)], [y1(i) y2(i)]);
+0132 <span class="keyword">end</span>
+0133 
+0134 <span class="comment">% apply style to edges</span>
+0135 <span class="keyword">if</span> ~isempty(options) &gt; 0
+0136     <span class="keyword">for</span> i = 1:N
+0137         set(h(i), options{:});
+0138     <span class="keyword">end</span>
+0139 <span class="keyword">end</span>
+0140 
+0141 
+0142 <span class="comment">%% Format output</span>
+0143 
+0144 <span class="comment">% process output arguments</span>
+0145 <span class="keyword">if</span> nargout &gt; 0
+0146     varargout = {h};
+0147 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

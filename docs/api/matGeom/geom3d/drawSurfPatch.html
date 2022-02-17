@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawSurfPatch</title>
+  <meta name="keywords" content="drawSurfPatch">
+  <meta name="description" content="DRAWSURFPATCH Draw a 3D surface patch, with 2 parametrized surfaces.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; drawSurfPatch.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawSurfPatch
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWSURFPATCH Draw a 3D surface patch, with 2 parametrized surfaces.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function drawSurfPatch(u, v, z, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWSURFPATCH Draw a 3D surface patch, with 2 parametrized surfaces.
+
+   usage:
+   drawSurfPatch(u, v, zuv)
+   where u, v, and zuv are three matrices the same size, u and
+   corresponding to each parameter, and zuv being equal to a function of u
+   and v.
+
+   drawSurfPatch(u, v, zuv, p0)
+   If p0 is specified, two lines with u(p0(1)) and v(p0(2)) are drawn on
+   the surface, and corresponding tangent are also shown.
+
+
+   ---------
+
+   author : David Legland 
+   INRA - TPV URPOI - BIA IMASTE
+   created the 24/05/2005.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>	DRAWPOLYLINE3D Draw a 3D polyline specified by a list of vertex coords.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function drawSurfPatch(u, v, z, varargin)</a>
+0002 <span class="comment">%DRAWSURFPATCH Draw a 3D surface patch, with 2 parametrized surfaces.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   usage:</span>
+0005 <span class="comment">%   drawSurfPatch(u, v, zuv)</span>
+0006 <span class="comment">%   where u, v, and zuv are three matrices the same size, u and</span>
+0007 <span class="comment">%   corresponding to each parameter, and zuv being equal to a function of u</span>
+0008 <span class="comment">%   and v.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   drawSurfPatch(u, v, zuv, p0)</span>
+0011 <span class="comment">%   If p0 is specified, two lines with u(p0(1)) and v(p0(2)) are drawn on</span>
+0012 <span class="comment">%   the surface, and corresponding tangent are also shown.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   ---------</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   author : David Legland</span>
+0018 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0019 <span class="comment">%   created the 24/05/2005.</span>
+0020 <span class="comment">%</span>
+0021 
+0022 <span class="comment">%   HISTORY</span>
+0023 <span class="comment">%   2005-06-08 add doc.</span>
+0024 <span class="comment">%   2007-01-04 remove unused variables and change function name</span>
+0025 <span class="comment">%   2010-03-08 code cleanup, use drawPolyline3d</span>
+0026 
+0027 <span class="comment">% prepare figure</span>
+0028 hold on;
+0029 
+0030 <span class="comment">% draw the surface interior</span>
+0031 surf(u, v, z, <span class="string">'FaceColor'</span>, <span class="string">'g'</span>, <span class="string">'EdgeColor'</span>, <span class="string">'none'</span>);
+0032 
+0033 <span class="comment">% draw the surface boundaries</span>
+0034 <a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>(u(1,:), v(1,:), z(1,:))
+0035 <a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>(u(<span class="keyword">end</span>,:), v(<span class="keyword">end</span>,:), z(<span class="keyword">end</span>,:))
+0036 <a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>(u(:,end), v(:,end), z(:,end))
+0037 <a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>(u(:,1), v(:,1), z(:,1))
+0038 
+0039 <span class="comment">% eventually draw two perpendicular lines on the surface</span>
+0040 <span class="keyword">if</span> ~isempty(varargin)
+0041     pos = varargin{1};
+0042     <a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>(u(pos(1),:), v(pos(1),:), z(pos(1),:));
+0043     <a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>(u(:,pos(2)), v(:,pos(2)), z(:,pos(2)));
+0044 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

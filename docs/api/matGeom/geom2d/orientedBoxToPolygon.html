@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of orientedBoxToPolygon</title>
+  <meta name="keywords" content="orientedBoxToPolygon">
+  <meta name="description" content="ORIENTEDBOXTOPOLYGON Convert an oriented box to a polygon (set of vertices).">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; orientedBoxToPolygon.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>orientedBoxToPolygon
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ORIENTEDBOXTOPOLYGON Convert an oriented box to a polygon (set of vertices).</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [tx, ty] = orientedBoxToPolygon(obox) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ORIENTEDBOXTOPOLYGON Convert an oriented box to a polygon (set of vertices).
+
+   POLY = orientedBoxToPolygon(OBOX);
+   Converts the oriented box OBOX given either as [XC YC W H] or as 
+   [XC YC W H THETA] into a 4-by-2 array of double, containing coordinates
+   of box vertices. 
+   XC and YC are center of the box. W and H are the width and the height
+   (dimension in the main directions), and THETA is the orientation, in
+   degrees between 0 and 360.
+
+   Example
+     OBOX = [20 10  40 20 0];
+     RECT = orientedBoxToPolygon(OBOX)
+     RECT =
+         -20 -10 
+          20 -10 
+          20  10 
+         -20  10 
+
+
+   See also:
+   polygons2d, <a href="orientedBox.html" class="code" title="function obox = orientedBox(points)">orientedBox</a>, <a href="drawOrientedBox.html" class="code" title="function varargout = drawOrientedBox(box, varargin)">drawOrientedBox</a>, <a href="rectToPolygon.html" class="code" title="function [tx, ty] = rectToPolygon(rect)">rectToPolygon</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [tx, ty] = orientedBoxToPolygon(obox)</a>
+0002 <span class="comment">%ORIENTEDBOXTOPOLYGON Convert an oriented box to a polygon (set of vertices).</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POLY = orientedBoxToPolygon(OBOX);</span>
+0005 <span class="comment">%   Converts the oriented box OBOX given either as [XC YC W H] or as</span>
+0006 <span class="comment">%   [XC YC W H THETA] into a 4-by-2 array of double, containing coordinates</span>
+0007 <span class="comment">%   of box vertices.</span>
+0008 <span class="comment">%   XC and YC are center of the box. W and H are the width and the height</span>
+0009 <span class="comment">%   (dimension in the main directions), and THETA is the orientation, in</span>
+0010 <span class="comment">%   degrees between 0 and 360.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%     OBOX = [20 10  40 20 0];</span>
+0014 <span class="comment">%     RECT = orientedBoxToPolygon(OBOX)</span>
+0015 <span class="comment">%     RECT =</span>
+0016 <span class="comment">%         -20 -10</span>
+0017 <span class="comment">%          20 -10</span>
+0018 <span class="comment">%          20  10</span>
+0019 <span class="comment">%         -20  10</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   See also:</span>
+0023 <span class="comment">%   polygons2d, orientedBox, drawOrientedBox, rectToPolygon</span>
+0024 <span class="comment">%</span>
+0025 
+0026 <span class="comment">%   ---------</span>
+0027 <span class="comment">% Author: David Legland</span>
+0028 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0029 <span class="comment">% INRA - TPV URPOI - BIA IMASTE</span>
+0030 <span class="comment">% created the 06/04/2005.</span>
+0031 <span class="comment">%</span>
+0032 
+0033 <span class="comment">%   HISTORY</span>
+0034 <span class="comment">%   2011-10-09 rewrite from rectAsPolygon to orientedBoxToPolygon</span>
+0035 <span class="comment">%   2016: Simplify by JuanPi Carbajal</span>
+0036 
+0037 <span class="comment">% extract box parameters</span>
+0038 theta = 0;
+0039 x = obox(1);
+0040 y = obox(2);
+0041 w = obox(3) / 2;  <span class="comment">% easier to compute with w and h divided by 2</span>
+0042 h = obox(4) / 2;
+0043 <span class="keyword">if</span> length(obox) &gt; 4
+0044     theta = obox(5);
+0045 <span class="keyword">end</span>
+0046 
+0047 v = [cosd(theta); sind(theta)];
+0048 M = bsxfun (@times, [-1 1; 1 1; 1 -1; -1 -1], [w h]);
+0049 tx  = x + M * v;
+0050 ty  = y + M(4:-1:1,[2 1]) * v;
+0051 
+0052 <span class="keyword">if</span> nargout &lt;= 1
+0053   tx = [tx ty];
+0054 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

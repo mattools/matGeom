@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of triangulatePolygon</title>
+  <meta name="keywords" content="triangulatePolygon">
+  <meta name="description" content="Computes a triangulation of the input polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; triangulatePolygon.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>triangulatePolygon
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Computes a triangulation of the input polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function tri = triangulatePolygon(poly) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Computes a triangulation of the input polygon.
+
+   TRI = triangulatePolygon(POLY)
+   Computes a triangulation TRI of the polygon defined by POLY
+   POLY contains the polygon vertices, as a Nv-by-2 array of double. 
+   TRI is a Nt-by-3 array containing indices of vertices forming the
+   triangles. 
+
+   Example
+     % creates a simple polygon and computes its Delaunay triangulation
+     poly = [0 0 ; 10 0;5 10;15 15;5 20;-5 10];
+     figure;drawPolygon(poly); axis equal
+     tri = triangulatePolygon(poly);
+     figure;
+     % patch('Faces', tri, 'Vertices', poly, 'facecolor', 'c');
+     drawMesh(poly, tri, 'facecolor', 'c');
+     axis equal
+
+     % Another example for which constrains were necessary
+     poly2 = [10 10;80 10; 140 20;30 20; 80 30; 140 30; 120 40;10 40];
+     tri2 = triangulatePolygon(poly2);
+     figure; drawMesh(poly2, tri2);
+     hold on, drawPolygon(poly2, 'linewidth', 2);
+     axis equal
+     axis([0 150 0 50])
+
+   See also
+     delaunayTriangulation, drawMesh, patch</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="isPointInPolygon.html" class="code" title="function b = isPointInPolygon(point, poly)">isPointInPolygon</a>	ISPOINTINPOLYGON Test if a point is located inside a polygon.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function tri = triangulatePolygon(poly)</a>
+0002 <span class="comment">% Computes a triangulation of the input polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   TRI = triangulatePolygon(POLY)</span>
+0005 <span class="comment">%   Computes a triangulation TRI of the polygon defined by POLY</span>
+0006 <span class="comment">%   POLY contains the polygon vertices, as a Nv-by-2 array of double.</span>
+0007 <span class="comment">%   TRI is a Nt-by-3 array containing indices of vertices forming the</span>
+0008 <span class="comment">%   triangles.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Example</span>
+0011 <span class="comment">%     % creates a simple polygon and computes its Delaunay triangulation</span>
+0012 <span class="comment">%     poly = [0 0 ; 10 0;5 10;15 15;5 20;-5 10];</span>
+0013 <span class="comment">%     figure;drawPolygon(poly); axis equal</span>
+0014 <span class="comment">%     tri = triangulatePolygon(poly);</span>
+0015 <span class="comment">%     figure;</span>
+0016 <span class="comment">%     % patch('Faces', tri, 'Vertices', poly, 'facecolor', 'c');</span>
+0017 <span class="comment">%     drawMesh(poly, tri, 'facecolor', 'c');</span>
+0018 <span class="comment">%     axis equal</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%     % Another example for which constrains were necessary</span>
+0021 <span class="comment">%     poly2 = [10 10;80 10; 140 20;30 20; 80 30; 140 30; 120 40;10 40];</span>
+0022 <span class="comment">%     tri2 = triangulatePolygon(poly2);</span>
+0023 <span class="comment">%     figure; drawMesh(poly2, tri2);</span>
+0024 <span class="comment">%     hold on, drawPolygon(poly2, 'linewidth', 2);</span>
+0025 <span class="comment">%     axis equal</span>
+0026 <span class="comment">%     axis([0 150 0 50])</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%   See also</span>
+0029 <span class="comment">%     delaunayTriangulation, drawMesh, patch</span>
+0030 <span class="comment">%</span>
+0031 
+0032 <span class="comment">% ------</span>
+0033 <span class="comment">% Author: David Legland</span>
+0034 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0035 <span class="comment">% Created: 2011-11-25,    using Matlab 7.9.0.529 (R2009b)</span>
+0036 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0037 
+0038 <span class="comment">% compute constraints</span>
+0039 nv = size(poly, 1);
+0040 cons = [(1:nv)' [2:nv 1]'];
+0041 
+0042 <span class="keyword">if</span> verLessThan(<span class="string">'matlab'</span>, <span class="string">'8.1'</span>)
+0043     <span class="comment">% Code for versions before R2013a</span>
+0044     
+0045     <span class="comment">% delaunay triangulation</span>
+0046     dt = DelaunayTri(poly(:,1), poly(:, 2), cons); <span class="comment">%#ok&lt;DDELTRI&gt;</span>
+0047     
+0048     <span class="comment">% find which triangles are contained in polygon</span>
+0049     centers = incenters(dt);
+0050     inds = <a href="isPointInPolygon.html" class="code" title="function b = isPointInPolygon(point, poly)">isPointInPolygon</a>(centers, poly);
+0051     
+0052     <span class="comment">% keep selected triangles</span>
+0053     tri = dt.Triangulation(inds, :);
+0054 
+0055 <span class="keyword">else</span>
+0056     <span class="comment">% Code for versions R2013a and later</span>
+0057 
+0058     <span class="comment">% delaunay triangulation</span>
+0059     <span class="comment">% dt = DelaunayTri(poly(:,1), poly(:, 2), cons);</span>
+0060     dt = delaunayTriangulation(poly(:,1), poly(:, 2), cons);
+0061 
+0062     <span class="comment">% find which triangles are contained in polygon</span>
+0063     <span class="comment">% centers = incenters(dt);</span>
+0064     centers = incenter(dt);
+0065     inds = <a href="isPointInPolygon.html" class="code" title="function b = isPointInPolygon(point, poly)">isPointInPolygon</a>(centers, poly);
+0066 
+0067     <span class="comment">% keep selected triangles</span>
+0068     <span class="comment">% tri = dt.Triangulation(inds, :);</span>
+0069     tri = dt.ConnectivityList(inds, :);
+0070 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

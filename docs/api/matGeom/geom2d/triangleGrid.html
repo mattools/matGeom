@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of triangleGrid</title>
+  <meta name="keywords" content="triangleGrid">
+  <meta name="description" content="TRIANGLEGRID Generate triangular grid of points in the plane.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; triangleGrid.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>triangleGrid
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>TRIANGLEGRID Generate triangular grid of points in the plane.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = triangleGrid(bounds, origin, size, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">TRIANGLEGRID Generate triangular grid of points in the plane.
+
+   usage
+   PTS = triangleGrid(BOUNDS, ORIGIN, SIZE)
+   generate points, lying in the window defined by BOUNDS, given in form
+   [xmin ymin xmax ymax], starting from origin with a constant step equal
+   to size. 
+   SIZE is constant and is equals to the length of the sides of each
+   triangles. 
+
+   TODO: add possibility to use rotated grid
+
+   ---------
+
+   author : David Legland 
+   INRA - TPV URPOI - BIA IMASTE
+   created the 06/08/2005.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="squareGrid.html" class="code" title="function varargout = squareGrid(bounds, origin, size)">squareGrid</a>	SQUAREGRID Generate equally spaces points in plane.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = triangleGrid(bounds, origin, size, varargin)</a>
+0002 <span class="comment">%TRIANGLEGRID Generate triangular grid of points in the plane.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   usage</span>
+0005 <span class="comment">%   PTS = triangleGrid(BOUNDS, ORIGIN, SIZE)</span>
+0006 <span class="comment">%   generate points, lying in the window defined by BOUNDS, given in form</span>
+0007 <span class="comment">%   [xmin ymin xmax ymax], starting from origin with a constant step equal</span>
+0008 <span class="comment">%   to size.</span>
+0009 <span class="comment">%   SIZE is constant and is equals to the length of the sides of each</span>
+0010 <span class="comment">%   triangles.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   TODO: add possibility to use rotated grid</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   ---------</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   author : David Legland</span>
+0017 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0018 <span class="comment">%   created the 06/08/2005.</span>
+0019 <span class="comment">%</span>
+0020 
+0021 dx = size(1);
+0022 dy = size(1)*sqrt(3);
+0023 
+0024 <span class="comment">% consider two square grids with different centers</span>
+0025 pts1 = <a href="squareGrid.html" class="code" title="function varargout = squareGrid(bounds, origin, size)">squareGrid</a>(bounds, origin, [dx dy], varargin{:});
+0026 pts2 = <a href="squareGrid.html" class="code" title="function varargout = squareGrid(bounds, origin, size)">squareGrid</a>(bounds, origin + [dx dy]/2, [dx dy], varargin{:});
+0027 
+0028 <span class="comment">% gather points</span>
+0029 pts = [pts1;pts2];
+0030 
+0031 
+0032 <span class="comment">% process output</span>
+0033 <span class="keyword">if</span> nargout&gt;0
+0034     varargout{1} = pts;
+0035 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

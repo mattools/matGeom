@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polygonCentroid</title>
+  <meta name="keywords" content="polygonCentroid">
+  <meta name="description" content="Computes the centroid (center of mass) of a polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; polygonCentroid.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polygonCentroid
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Computes the centroid (center of mass) of a polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [centroid, area] = polygonCentroid(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Computes the centroid (center of mass) of a polygon.
+
+   CENTROID = polygonCentroid(POLY)
+   CENTROID = polygonCentroid(PTX, PTY)
+   Computes center of mass of a polygon defined by POLY. POLY is a N-by-2
+   array of double containing coordinates of vertices.
+
+   [CENTROID, AREA] = polygonCentroid(POLY)
+   Also returns the (signed) area of the polygon. 
+
+   Example
+     % Draws the centroid of a paper hen
+     x = [0 10 20  0 -10 -20 -10 -10  0];
+     y = [0  0 10 10  20  10  10  0 -10];
+     poly = [x' y'];
+     centro = polygonCentroid(poly);
+     drawPolygon(poly);
+     hold on; axis equal;
+     drawPoint(centro, 'bo');
+ 
+   References
+     algo adapted from P. Bourke web page.
+
+   See also:
+     polygons2d, <a href="polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>, <a href="polygonSecondAreaMoments.html" class="code" title="function [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(poly)">polygonSecondAreaMoments</a>, <a href="drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a>
+     <a href="polylineCentroid.html" class="code" title="function center = polylineCentroid(varargin)">polylineCentroid</a>, centroid</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>	CENTROID Compute centroid (center of mass) of a set of points.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/polygonCentroid3d.html" class="code" title="function centroid = polygonCentroid3d(varargin)">polygonCentroid3d</a>	POLYGONCENTROID3D Centroid (or center of mass) of a polygon.</li><li><a href="../../matGeom/meshes3d/meshFaceCentroids.html" class="code" title="function centroids = meshFaceCentroids(varargin)">meshFaceCentroids</a>	MESHFACECENTROIDS Compute centroids of faces in a mesh.</li><li><a href="polygonEquivalentEllipse.html" class="code" title="function elli = polygonEquivalentEllipse(poly)">polygonEquivalentEllipse</a>	Compute equivalent ellipse with same second order moments as polygon.</li><li><a href="polygonInertiaEllipse.html" class="code" title="function elli = polygonInertiaEllipse(poly)">polygonInertiaEllipse</a>	POLYGONINERTIAELLIPSE Compute ellipse with same inertia moments as polygon.</li><li><a href="polygonSecondAreaMoments.html" class="code" title="function [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(poly)">polygonSecondAreaMoments</a>	POLYGONSECONDAREAMOMENTS Compute second-order area moments of a polygon.</li><li><a href="polygonSymmetryAxis.html" class="code" title="function axis = polygonSymmetryAxis(poly)">polygonSymmetryAxis</a>	POLYGONSYMMETRYAXIS Try to identify symmetry axis of polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [centroid, area] = polygonCentroid(varargin)</a>
+0002 <span class="comment">% Computes the centroid (center of mass) of a polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   CENTROID = polygonCentroid(POLY)</span>
+0005 <span class="comment">%   CENTROID = polygonCentroid(PTX, PTY)</span>
+0006 <span class="comment">%   Computes center of mass of a polygon defined by POLY. POLY is a N-by-2</span>
+0007 <span class="comment">%   array of double containing coordinates of vertices.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   [CENTROID, AREA] = polygonCentroid(POLY)</span>
+0010 <span class="comment">%   Also returns the (signed) area of the polygon.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%     % Draws the centroid of a paper hen</span>
+0014 <span class="comment">%     x = [0 10 20  0 -10 -20 -10 -10  0];</span>
+0015 <span class="comment">%     y = [0  0 10 10  20  10  10  0 -10];</span>
+0016 <span class="comment">%     poly = [x' y'];</span>
+0017 <span class="comment">%     centro = polygonCentroid(poly);</span>
+0018 <span class="comment">%     drawPolygon(poly);</span>
+0019 <span class="comment">%     hold on; axis equal;</span>
+0020 <span class="comment">%     drawPoint(centro, 'bo');</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   References</span>
+0023 <span class="comment">%     algo adapted from P. Bourke web page.</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   See also:</span>
+0026 <span class="comment">%     polygons2d, polygonArea, polygonSecondAreaMoments, drawPolygon</span>
+0027 <span class="comment">%     polylineCentroid, centroid</span>
+0028 
+0029 <span class="comment">% ------</span>
+0030 <span class="comment">% Author: David Legland</span>
+0031 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0032 <span class="comment">% Created: 2004-05-05</span>
+0033 
+0034 <span class="comment">% Algorithme P. Bourke, vectorized version</span>
+0035 
+0036 <span class="comment">% HISTORY</span>
+0037 <span class="comment">% 2012.02.24 vectorize code</span>
+0038 
+0039 
+0040 <span class="comment">% parse input arguments</span>
+0041 <span class="keyword">if</span> nargin == 1
+0042     var = varargin{1};
+0043     px = var(:,1);
+0044     py = var(:,2);
+0045 <span class="keyword">elseif</span> nargin == 2
+0046     px = varargin{1};
+0047     py = varargin{2};
+0048 <span class="keyword">end</span>
+0049 
+0050 <span class="comment">% vertex indices</span>
+0051 N = length(px);
+0052 iNext = [2:N 1];
+0053 
+0054 <span class="comment">% compute cross products</span>
+0055 common = px .* py(iNext) - px(iNext) .* py;
+0056 sx = sum((px + px(iNext)) .* common);
+0057 sy = sum((py + py(iNext)) .* common);
+0058 
+0059 <span class="comment">% area and centroid</span>
+0060 area = sum(common) / 2;
+0061 <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a> = [sx sy] / 6 / area;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

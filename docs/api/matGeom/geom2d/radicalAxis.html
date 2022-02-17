@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of radicalAxis</title>
+  <meta name="keywords" content="radicalAxis">
+  <meta name="description" content="RADICALAXIS Compute the radical axis (or radical line) of 2 circles.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; radicalAxis.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>radicalAxis
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>RADICALAXIS Compute the radical axis (or radical line) of 2 circles.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function line = radicalAxis(circle1, circle2) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">RADICALAXIS Compute the radical axis (or radical line) of 2 circles.
+
+   L = radicalAxis(C1, C2)
+   Computes the radical axis of 2 circles.
+
+   Example
+   C1 = [10 10 5];
+   C2 = [60 50 30];
+   L = radicalAxis(C1, C2);
+   hold on; axis equal;axis([0 100 0 100]); 
+   drawCircle(C1);drawCircle(C2);drawLine(L);
+
+   See also
+   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="createCircle.html" class="code" title="function circle = createCircle(varargin)">createCircle</a>
+
+   Ref:
+   http://mathworld.wolfram.com/RadicalLine.html
+   http://en.wikipedia.org/wiki/Radical_axis
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2007-05-15,    using Matlab 7.4.0.287 (R2007a)
+ Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>	CREATELINE Create a straight line from 2 points, or from other inputs.</li><li><a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>	LINEANGLE Computes angle between two straight lines.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function line = radicalAxis(circle1, circle2)</a>
+0002 <span class="comment">%RADICALAXIS Compute the radical axis (or radical line) of 2 circles.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   L = radicalAxis(C1, C2)</span>
+0005 <span class="comment">%   Computes the radical axis of 2 circles.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   Example</span>
+0008 <span class="comment">%   C1 = [10 10 5];</span>
+0009 <span class="comment">%   C2 = [60 50 30];</span>
+0010 <span class="comment">%   L = radicalAxis(C1, C2);</span>
+0011 <span class="comment">%   hold on; axis equal;axis([0 100 0 100]);</span>
+0012 <span class="comment">%   drawCircle(C1);drawCircle(C2);drawLine(L);</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   See also</span>
+0015 <span class="comment">%   lines2d, circles2d, createCircle</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   Ref:</span>
+0018 <span class="comment">%   http://mathworld.wolfram.com/RadicalLine.html</span>
+0019 <span class="comment">%   http://en.wikipedia.org/wiki/Radical_axis</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">% ------</span>
+0022 <span class="comment">% Author: David Legland</span>
+0023 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0024 <span class="comment">% Created: 2007-05-15,    using Matlab 7.4.0.287 (R2007a)</span>
+0025 <span class="comment">% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0026 <span class="comment">%</span>
+0027 
+0028 <span class="comment">% extract circles parameters</span>
+0029 x1 = circle1(:,1);
+0030 x2 = circle2(:,1);
+0031 y1 = circle1(:,2);
+0032 y2 = circle2(:,2);
+0033 r1 = circle1(:,3);
+0034 r2 = circle2(:,3);
+0035 
+0036 <span class="comment">% distance between each couple of centers</span>
+0037 dist  = sqrt((x2-x1).^2 + (y2-y1).^2);
+0038 
+0039 <span class="comment">% relative position of intersection point of</span>
+0040 <span class="comment">% the radical line with the line joining circle centers</span>
+0041 d = (dist.^2 + r1.^2 - r2.^2) * .5 ./ dist;
+0042 
+0043 <span class="comment">% compute angle of radical axis</span>
+0044 angle = <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>(<a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>([x1 y1], [x2 y2]));
+0045 cot = cos(angle);
+0046 sit = sin(angle);
+0047 
+0048 <span class="comment">% parameters of the line</span>
+0049 x0 = x1 + d*cot;
+0050 y0 = y1 + d*sit;
+0051 dx = -sit;
+0052 dy = cot;
+0053 
+0054 <span class="comment">% concatenate into one structure</span>
+0055 line = [x0 y0 dx dy];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

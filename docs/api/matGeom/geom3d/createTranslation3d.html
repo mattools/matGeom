@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createTranslation3d</title>
+  <meta name="keywords" content="createTranslation3d">
+  <meta name="description" content="CREATETRANSLATION3D Create the 4x4 matrix of a 3D translation.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; createTranslation3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createTranslation3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATETRANSLATION3D Create the 4x4 matrix of a 3D translation.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function trans = createTranslation3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATETRANSLATION3D Create the 4x4 matrix of a 3D translation.
+
+   usage:
+   TRANS = createTranslation3d(DX, DY, DZ);
+   return the translation corresponding to DX and DY.
+   The returned matrix has the form :
+   [1 0 0 DX]
+   [0 1 0 DY]
+   [0 0 1 DZ]
+   [0 0 0  1]
+
+   TRANS = createTranslation3d(VECT);
+   return the translation corresponding to the given vector [x y z].
+
+
+   See also:
+   <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>, <a href="transformVector3d.html" class="code" title="function varargout = transformVector3d(varargin)">transformVector3d</a>,
+   <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>, <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>, <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>, <a href="createScaling3d.html" class="code" title="function trans = createScaling3d(varargin)">createScaling3d</a>
+
+   ---------
+
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 06/04/2004.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createRotationAboutPoint3d.html" class="code" title="function TFM = createRotationAboutPoint3d(ROT, point)">createRotationAboutPoint3d</a>	CREATEROTATIONABOUTPOINT3D Rotate about a point using a rotation matrix.</li><li><a href="drawCube.html" class="code" title="function varargout = drawCube(cube, varargin)">drawCube</a>	Draw a 3D centered cube, eventually rotated.</li><li><a href="drawCuboid.html" class="code" title="function varargout = drawCuboid(cuboid, varargin)">drawCuboid</a>	Draw a 3D cuboid, eventually rotated.</li><li><a href="drawEllipsoid.html" class="code" title="function varargout = drawEllipsoid(elli, varargin)">drawEllipsoid</a>	DRAWELLIPSOID Draw a 3D ellipsoid.</li><li><a href="geodesicCylinder.html" class="code" title="function [geo, geoLength, conGeo, conGeoLength] = geodesicCylinder(pts, cyl, varargin)">geodesicCylinder</a>	GEODESICCYLINDER computes the geodesic between two points on a cylinder.</li><li><a href="projPointOnCylinder.html" class="code" title="function ptProj = projPointOnCylinder(pt, cyl, varargin)">projPointOnCylinder</a>	PROJPOINTONCYLINDER Project a 3D point onto a cylinder.</li><li><a href="recenterTransform3d.html" class="code" title="function res = recenterTransform3d(transfo, center)">recenterTransform3d</a>	RECENTERTRANSFORM3D Change the fixed point of an affine 3D transform.</li><li><a href="../../matGeom/meshes3d/curveToMesh.html" class="code" title="function [vertices, faces] = curveToMesh(curve, varargin)">curveToMesh</a>	Create a mesh surrounding a 3D curve.</li><li><a href="../../matGeom/meshes3d/ellipsoidMesh.html" class="code" title="function varargout = ellipsoidMesh(elli, varargin)">ellipsoidMesh</a>	ELLIPSOIDMESH Convert a 3D ellipsoid to face-vertex mesh representation.</li><li><a href="../../matGeom/meshes3d/triangulatePolygonPair.html" class="code" title="function [vertices, faces] = triangulatePolygonPair(poly1, poly2, varargin)">triangulatePolygonPair</a>	Compute triangulation between a pair of 3D closed curves.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function trans = createTranslation3d(varargin)</a>
+0002 <span class="comment">%CREATETRANSLATION3D Create the 4x4 matrix of a 3D translation.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   usage:</span>
+0005 <span class="comment">%   TRANS = createTranslation3d(DX, DY, DZ);</span>
+0006 <span class="comment">%   return the translation corresponding to DX and DY.</span>
+0007 <span class="comment">%   The returned matrix has the form :</span>
+0008 <span class="comment">%   [1 0 0 DX]</span>
+0009 <span class="comment">%   [0 1 0 DY]</span>
+0010 <span class="comment">%   [0 0 1 DZ]</span>
+0011 <span class="comment">%   [0 0 0  1]</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   TRANS = createTranslation3d(VECT);</span>
+0014 <span class="comment">%   return the translation corresponding to the given vector [x y z].</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   See also:</span>
+0018 <span class="comment">%   transforms3d, transformPoint3d, transformVector3d,</span>
+0019 <span class="comment">%   createRotationOx, createRotationOy, createRotationOz, createScaling3d</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   ---------</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   author : David Legland</span>
+0024 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0025 <span class="comment">%   created the 06/04/2004.</span>
+0026 <span class="comment">%</span>
+0027 
+0028 <span class="comment">%   HISTORY</span>
+0029 <span class="comment">%   22/04/2009 rename as createTranslation3d</span>
+0030 
+0031 
+0032 <span class="keyword">if</span> isempty(varargin)
+0033     <span class="comment">% assert translation with null vector</span>
+0034     dx = 0;
+0035     dy = 0;
+0036     dz = 0;
+0037 <span class="keyword">elseif</span> length(varargin)==1
+0038     <span class="comment">% translation vector given in a single argument</span>
+0039     var = varargin{1};
+0040     dx = var(1);
+0041     dy = var(2);
+0042     dz = var(3);
+0043 <span class="keyword">else</span>
+0044     <span class="comment">% translation vector given in 3 arguments</span>
+0045     dx = varargin{1};
+0046     dy = varargin{2};
+0047     dz = varargin{3};
+0048 <span class="keyword">end</span>
+0049 
+0050 <span class="comment">% create the translation matrix</span>
+0051 trans = [1 0 0 dx ; 0 1 0 dy ; 0 0 1 dz; 0 0 0 1];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawLine3d</title>
+  <meta name="keywords" content="drawLine3d">
+  <meta name="description" content="DRAWLINE3D Draw a 3D line clipped by the current axes.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; drawLine3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawLine3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWLINE3D Draw a 3D line clipped by the current axes.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function h = drawLine3d(lin, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWLINE3D Draw a 3D line clipped by the current axes.
+
+   drawLine3d(LINE) draws the line LINE on the current axis, by clipping 
+   with the current axis.
+
+   drawLine3d(LINE, PARAM, VALUE) accepts parameter/value pairs, like 
+   for plot function. Color of the line can also be given as a single 
+   parameter.
+
+   drawLine3d(AX,...) plots into AX instead of GCA.
+   
+   H = drawLine3d(...) returns a handle to the created line object. 
+   If the line is not clipped by the axis, function returns -1.
+
+   Example
+     % draw a sphere together with the three main axes
+     figure; hold on;
+     drawSphere([40 30 20 30]);
+     view(3); axis equal; axis([-20 80 -20 80 -20 80])
+     drawLine3d([0 0 0   1 0 0], 'k');
+     drawLine3d([0 0 0   0 1 0], 'k');
+     drawLine3d([0 0 0   0 0 1], 'k');
+     light;
+
+
+   See also:
+     <a href="lines3d.html" class="code" title="function lines3d(varargin)">lines3d</a>, <a href="createLine3d.html" class="code" title="function line = createLine3d(varargin)">createLine3d</a>, <a href="clipLine3d.html" class="code" title="function edge = clipLine3d(line, box)">clipLine3d</a>, <a href="drawRay3d.html" class="code" title="function h = drawRay3d(ray, varargin)">drawRay3d</a>, <a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="clipLine3d.html" class="code" title="function edge = clipLine3d(line, box)">clipLine3d</a>	CLIPLINE3D Clip a line with a box and return an edge.</li><li><a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>	DRAWEDGE3D Draw 3D edge in the current axes.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function h = drawLine3d(lin, varargin)</a>
+0002 <span class="comment">%DRAWLINE3D Draw a 3D line clipped by the current axes.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawLine3d(LINE) draws the line LINE on the current axis, by clipping</span>
+0005 <span class="comment">%   with the current axis.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   drawLine3d(LINE, PARAM, VALUE) accepts parameter/value pairs, like</span>
+0008 <span class="comment">%   for plot function. Color of the line can also be given as a single</span>
+0009 <span class="comment">%   parameter.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   drawLine3d(AX,...) plots into AX instead of GCA.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   H = drawLine3d(...) returns a handle to the created line object.</span>
+0014 <span class="comment">%   If the line is not clipped by the axis, function returns -1.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example</span>
+0017 <span class="comment">%     % draw a sphere together with the three main axes</span>
+0018 <span class="comment">%     figure; hold on;</span>
+0019 <span class="comment">%     drawSphere([40 30 20 30]);</span>
+0020 <span class="comment">%     view(3); axis equal; axis([-20 80 -20 80 -20 80])</span>
+0021 <span class="comment">%     drawLine3d([0 0 0   1 0 0], 'k');</span>
+0022 <span class="comment">%     drawLine3d([0 0 0   0 1 0], 'k');</span>
+0023 <span class="comment">%     drawLine3d([0 0 0   0 0 1], 'k');</span>
+0024 <span class="comment">%     light;</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   See also:</span>
+0028 <span class="comment">%     lines3d, createLine3d, clipLine3d, drawRay3d, drawEdge3d</span>
+0029 <span class="comment">%</span>
+0030 
+0031 <span class="comment">% ---------</span>
+0032 <span class="comment">% author : David Legland</span>
+0033 <span class="comment">% INRA - TPV URPOI - BIA IMASTE</span>
+0034 <span class="comment">% created the 17/02/2005.</span>
+0035 
+0036 
+0037 <span class="comment">% Parse and check inputs</span>
+0038 isLine3d = @(x) validateattributes(x,{<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0039     {<span class="string">'nonempty'</span>,<span class="string">'nonnan'</span>,<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'size'</span>,[nan,6]});
+0040 defOpts.Color = <span class="string">'b'</span>;
+0041 [hAx, lin, varargin] = <span class="keyword">...</span>
+0042     parseDrawInput(lin, isLine3d, <span class="string">'line'</span>, defOpts, varargin{:});
+0043 
+0044 <span class="comment">% extract limits of the bounding box</span>
+0045 box = [get(hAx, <span class="string">'xlim'</span>) get(hAx, <span class="string">'ylim'</span>) get(hAx, <span class="string">'zlim'</span>)];
+0046 
+0047 <span class="comment">% clip the line with the limits of the current axis</span>
+0048 edge = <a href="clipLine3d.html" class="code" title="function edge = clipLine3d(line, box)">clipLine3d</a>(lin, box);
+0049 
+0050 <span class="comment">% draw the clipped line</span>
+0051 <span class="keyword">if</span> sum(isnan(edge)) == 0
+0052     hh = <a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>(hAx, edge);
+0053     <span class="keyword">if</span> ~isempty(varargin)
+0054         set(hh, varargin{:});
+0055     <span class="keyword">end</span>
+0056 <span class="keyword">else</span>
+0057     hh = [];
+0058 <span class="keyword">end</span>
+0059 
+0060 <span class="comment">% process output</span>
+0061 <span class="keyword">if</span> nargout &gt; 0
+0062     h = hh;
+0063 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

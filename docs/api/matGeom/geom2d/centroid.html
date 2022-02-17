@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of centroid</title>
+  <meta name="keywords" content="centroid">
+  <meta name="description" content="CENTROID Compute centroid (center of mass) of a set of points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; centroid.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>centroid
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CENTROID Compute centroid (center of mass) of a set of points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function center = centroid(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CENTROID Compute centroid (center of mass) of a set of points.
+
+   PTS = centroid(POINTS)
+   PTS = centroid(PTX, PTY)
+   Computes the ND-dimensional centroid of a set of points. 
+   POINTS is an array with as many rows as the number of points, and as
+   many columns as the number of dimensions. 
+   PTX and PTY are two column vectors containing coordinates of the
+   2-dimensional points.
+   The result PTS is a row vector with Nd columns.
+
+   PTS = centroid(POINTS, MASS)
+   PTS = centroid(PTX, PTY, MASS)
+   Computes center of mass of POINTS, weighted by coefficient MASS.
+   POINTS is a Np-by-Nd array, MASS is Np-by-1 array, and PTX and PTY are
+   also both Np-by-1 arrays.
+
+   Example:
+   pts = [2 2;6 1;6 5;2 4];
+   centroid(pts)
+   ans =
+        4     3
+
+   See Also:
+   <a href="points2d.html" class="code" title="function points2d">points2d</a>, polygonCentroid
+
+ ---------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ created the 07/04/2003.
+ Copyright 2010 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/fitCircle3d.html" class="code" title="function [fittedCircle, circleNormal] = fitCircle3d(pts)">fitCircle3d</a>	FITCIRCLE3D Fit a 3D circle to a set of points.</li><li><a href="../../matGeom/geom3d/polygonCentroid3d.html" class="code" title="function centroid = polygonCentroid3d(varargin)">polygonCentroid3d</a>	POLYGONCENTROID3D Centroid (or center of mass) of a polygon.</li><li><a href="../../matGeom/meshes3d/minConvexHull.html" class="code" title="function newFaces = minConvexHull(points, varargin)">minConvexHull</a>	MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.</li><li><a href="../../matGeom/meshes3d/polyhedronCentroid.html" class="code" title="function centroid = polyhedronCentroid(vertices, faces) %#ok<INUSD>">polyhedronCentroid</a>	POLYHEDRONCENTROID Compute the centroid of a 3D convex polyhedron.</li><li><a href="../../matGeom/polygons2d/clipPolygon.html" class="code" title="function poly2 = clipPolygon(polygon, w)">clipPolygon</a>	CLIPPOLYGON Clip a polygon with a rectangular box.</li><li><a href="../../matGeom/polygons2d/curveCMoment.html" class="code" title="function m = curveCMoment(curve, p, q)">curveCMoment</a>	CURVECMOMENT  Compute centered inertia moment of a 2D curve.</li><li><a href="../../matGeom/polygons2d/curveCSMoment.html" class="code" title="function m = curveCSMoment(curve, p, q)">curveCSMoment</a>	CURVECSMOMENT  Compute centered scaled moment of a 2D curve.</li><li><a href="../../matGeom/polygons2d/polygonCentroid.html" class="code" title="function [centroid, area] = polygonCentroid(varargin)">polygonCentroid</a>	Computes the centroid (center of mass) of a polygon.</li><li><a href="../../matGeom/polygons2d/polygonEquivalentEllipse.html" class="code" title="function elli = polygonEquivalentEllipse(poly)">polygonEquivalentEllipse</a>	Compute equivalent ellipse with same second order moments as polygon.</li><li><a href="../../matGeom/polygons2d/polygonInertiaEllipse.html" class="code" title="function elli = polygonInertiaEllipse(poly)">polygonInertiaEllipse</a>	POLYGONINERTIAELLIPSE Compute ellipse with same inertia moments as polygon.</li><li><a href="../../matGeom/polygons2d/polygonSecondAreaMoments.html" class="code" title="function [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(poly)">polygonSecondAreaMoments</a>	POLYGONSECONDAREAMOMENTS Compute second-order area moments of a polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function center = centroid(varargin)</a>
+0002 <span class="comment">%CENTROID Compute centroid (center of mass) of a set of points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PTS = centroid(POINTS)</span>
+0005 <span class="comment">%   PTS = centroid(PTX, PTY)</span>
+0006 <span class="comment">%   Computes the ND-dimensional centroid of a set of points.</span>
+0007 <span class="comment">%   POINTS is an array with as many rows as the number of points, and as</span>
+0008 <span class="comment">%   many columns as the number of dimensions.</span>
+0009 <span class="comment">%   PTX and PTY are two column vectors containing coordinates of the</span>
+0010 <span class="comment">%   2-dimensional points.</span>
+0011 <span class="comment">%   The result PTS is a row vector with Nd columns.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   PTS = centroid(POINTS, MASS)</span>
+0014 <span class="comment">%   PTS = centroid(PTX, PTY, MASS)</span>
+0015 <span class="comment">%   Computes center of mass of POINTS, weighted by coefficient MASS.</span>
+0016 <span class="comment">%   POINTS is a Np-by-Nd array, MASS is Np-by-1 array, and PTX and PTY are</span>
+0017 <span class="comment">%   also both Np-by-1 arrays.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   Example:</span>
+0020 <span class="comment">%   pts = [2 2;6 1;6 5;2 4];</span>
+0021 <span class="comment">%   centroid(pts)</span>
+0022 <span class="comment">%   ans =</span>
+0023 <span class="comment">%        4     3</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   See Also:</span>
+0026 <span class="comment">%   points2d, polygonCentroid</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">% ---------</span>
+0029 <span class="comment">% Author: David Legland</span>
+0030 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0031 <span class="comment">% created the 07/04/2003.</span>
+0032 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0033 <span class="comment">%</span>
+0034 
+0035 <span class="comment">%   HISTORY</span>
+0036 <span class="comment">%   2009-06-22 support for 3D points</span>
+0037 <span class="comment">%   2010-04-12 fix bug in weighted centroid</span>
+0038 <span class="comment">%   2010-12-06 update doc</span>
+0039 
+0040 
+0041 <span class="comment">%% extract input arguments</span>
+0042 
+0043 <span class="comment">% use empty mass by default</span>
+0044 mass = [];
+0045 
+0046 <span class="keyword">if</span> nargin==1
+0047     <span class="comment">% give only array of points</span>
+0048     pts = varargin{1};
+0049     
+0050 <span class="keyword">elseif</span> nargin==2
+0051     <span class="comment">% either POINTS+MASS or PX+PY</span>
+0052     var = varargin{1};
+0053     <span class="keyword">if</span> size(var, 2)&gt;1
+0054         <span class="comment">% arguments are POINTS, and MASS</span>
+0055         pts = var;
+0056         mass = varargin{2};
+0057     <span class="keyword">else</span>
+0058         <span class="comment">% arguments are PX and PY</span>
+0059         pts = [var varargin{2}];
+0060     <span class="keyword">end</span>
+0061     
+0062 <span class="keyword">elseif</span> nargin==3
+0063     <span class="comment">% arguments are PX, PY, and MASS</span>
+0064     pts = [varargin{1} varargin{2}];
+0065     mass = varargin{3};
+0066 <span class="keyword">end</span>
+0067 
+0068 <span class="comment">%% compute centroid</span>
+0069 
+0070 <span class="keyword">if</span> isempty(mass)
+0071     <span class="comment">% no weight</span>
+0072     center = mean(pts);
+0073     
+0074 <span class="keyword">else</span>
+0075     <span class="comment">% format mass to have sum equal to 1, and column format</span>
+0076     mass = mass(:)/sum(mass(:));
+0077     
+0078     <span class="comment">% compute weighted centroid</span>
+0079     center = sum(bsxfun(@times, pts, mass), 1);
+0080     <span class="comment">% equivalent to:</span>
+0081     <span class="comment">% center = sum(pts .* mass(:, ones(1, size(pts, 2))));</span>
+0082 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of equivalentEllipse</title>
+  <meta name="keywords" content="equivalentEllipse">
+  <meta name="description" content="Equivalent ellipse of a set of points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; equivalentEllipse.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>equivalentEllipse
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Equivalent ellipse of a set of points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function ell = equivalentEllipse(points) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Equivalent ellipse of a set of points.
+
+   ELL = equivalentEllipse(PTS);
+   Computes the ellips with the same moments up to the second order as the
+   set of points specified by the N-by-2 array PTS.
+
+   The result has the following form:
+   ELL = [XC YC A B THETA],
+   with XC and YC being the center of mass of the point set, A and B being
+   the lengths of the equivalent ellipse (see below), and THETA being the
+   angle of the first principal axis with the horizontal (counted in
+   degrees between 0 and 180 in counter-clockwise direction). 
+   A and B are the standard deviations of the point coordinates when
+   ellipse is aligned with the principal axes.
+
+   Example
+     pts = randn(100, 2);
+     pts = transformPoint(pts, createScaling(5, 2));
+     pts = transformPoint(pts, createRotation(pi/6));
+     pts = transformPoint(pts, createTranslation(3, 4));
+     ell = equivalentEllipse(pts);
+     figure(1); clf; hold on;
+     drawPoint(pts);
+     drawEllipse(ell, 'linewidth', 2, 'color', 'r');
+
+   See also
+     <a href="ellipses2d.html" class="code" title="function ellipses2d(varargin)">ellipses2d</a>, <a href="drawEllipse.html" class="code" title="function varargout = drawEllipse(varargin)">drawEllipse</a>, equivalentEllipsoid, <a href="principalAxes.html" class="code" title="function varargout = principalAxes(points)">principalAxes</a>,
+     <a href="principalAxesTransform.html" class="code" title="function varargout = principalAxesTransform(pts)">principalAxesTransform</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function ell = equivalentEllipse(points)</a>
+0002 <span class="comment">% Equivalent ellipse of a set of points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   ELL = equivalentEllipse(PTS);</span>
+0005 <span class="comment">%   Computes the ellips with the same moments up to the second order as the</span>
+0006 <span class="comment">%   set of points specified by the N-by-2 array PTS.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   The result has the following form:</span>
+0009 <span class="comment">%   ELL = [XC YC A B THETA],</span>
+0010 <span class="comment">%   with XC and YC being the center of mass of the point set, A and B being</span>
+0011 <span class="comment">%   the lengths of the equivalent ellipse (see below), and THETA being the</span>
+0012 <span class="comment">%   angle of the first principal axis with the horizontal (counted in</span>
+0013 <span class="comment">%   degrees between 0 and 180 in counter-clockwise direction).</span>
+0014 <span class="comment">%   A and B are the standard deviations of the point coordinates when</span>
+0015 <span class="comment">%   ellipse is aligned with the principal axes.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   Example</span>
+0018 <span class="comment">%     pts = randn(100, 2);</span>
+0019 <span class="comment">%     pts = transformPoint(pts, createScaling(5, 2));</span>
+0020 <span class="comment">%     pts = transformPoint(pts, createRotation(pi/6));</span>
+0021 <span class="comment">%     pts = transformPoint(pts, createTranslation(3, 4));</span>
+0022 <span class="comment">%     ell = equivalentEllipse(pts);</span>
+0023 <span class="comment">%     figure(1); clf; hold on;</span>
+0024 <span class="comment">%     drawPoint(pts);</span>
+0025 <span class="comment">%     drawEllipse(ell, 'linewidth', 2, 'color', 'r');</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   See also</span>
+0028 <span class="comment">%     ellipses2d, drawEllipse, equivalentEllipsoid, principalAxes,</span>
+0029 <span class="comment">%     principalAxesTransform</span>
+0030 <span class="comment">%</span>
+0031 
+0032 <span class="comment">% ------</span>
+0033 <span class="comment">% Author: David Legland</span>
+0034 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0035 <span class="comment">% Created: 2008-02-21,    using Matlab 7.4.0.287 (R2007a)</span>
+0036 <span class="comment">% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0037 
+0038 <span class="comment">% HISTORY</span>
+0039 <span class="comment">% 2009-07-29 take into account ellipse orientation</span>
+0040 <span class="comment">% 2011-03-12 rewrite using equivalent moments</span>
+0041 
+0042 <span class="comment">% ellipse center</span>
+0043 xc = mean(points(:,1));
+0044 yc = mean(points(:,2));
+0045 
+0046 <span class="comment">% recenter points</span>
+0047 x = points(:,1) - xc;
+0048 y = points(:,2) - yc;
+0049 
+0050 <span class="comment">% number of points</span>
+0051 n = size(points, 1);
+0052 
+0053 <span class="comment">% equivalent parameters</span>
+0054 Ixx = sum(x.^2) / n;
+0055 Iyy = sum(y.^2) / n;
+0056 Ixy = sum(x.*y) / n;
+0057 
+0058 <span class="comment">% compute ellipse semi-axis lengths</span>
+0059 common = sqrt( (Ixx - Iyy)^2 + 4 * Ixy^2);
+0060 ra = sqrt(2) * sqrt(Ixx + Iyy + common);
+0061 rb = sqrt(2) * sqrt(Ixx + Iyy - common);
+0062 
+0063 <span class="comment">% compute ellipse angle in degrees</span>
+0064 theta = atan2(2 * Ixy, Ixx - Iyy) / 2;
+0065 theta = rad2deg(theta);
+0066 
+0067 <span class="comment">% create the resulting equivalent ellipse</span>
+0068 ell = [xc yc ra rb theta];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

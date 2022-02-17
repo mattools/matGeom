@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of intersectPlaneSphere</title>
+  <meta name="keywords" content="intersectPlaneSphere">
+  <meta name="description" content="INTERSECTPLANESPHERE Return intersection circle between a plane and a sphere.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; intersectPlaneSphere.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>intersectPlaneSphere
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>INTERSECTPLANESPHERE Return intersection circle between a plane and a sphere.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function circle = intersectPlaneSphere(plane, sphere) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">INTERSECTPLANESPHERE Return intersection circle between a plane and a sphere.
+
+   CIRC = intersectPlaneSphere(PLANE, SPHERE)
+   Returns the circle which is the intersection of the given plane
+   and sphere. 
+   PLANE  : [x0 y0 z0  dx1 dy1 dz1  dx2 dy2 dz2]
+   SPHERE : [XS YS ZS  RS]
+   CIRC   : [XC YC ZC  RC  THETA PHI PSI]
+   [x0 y0 z0] is the origin of the plane, [dx1 dy1 dz1] and [dx2 dy2 dz2]
+   are two direction vectors,
+   [XS YS ZS] are coordinates of the sphere center, RS is the sphere
+   radius, 
+   [XC YC ZC] are coordinates of the circle center, RC is the radius of
+   the circle, [THETA PHI] is the normal of the plane containing the
+   circle (THETA being the colatitude, and PHI the azimut), and PSI is a
+   rotation angle around the normal (equal to zero in this function, but
+   kept for compatibility with other functions). All angles are given in
+   degrees.
+   
+   See Also:
+   <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>, <a href="spheres.html" class="code" title="function spheres(varargin)">spheres</a>, <a href="circles3d.html" class="code" title="function circles3d(varargin)">circles3d</a>, <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>, <a href="intersectLineSphere.html" class="code" title="function points = intersectLineSphere(line, sphere, varargin)">intersectLineSphere</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 18/02/2005.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>	CART2SPH2 Convert cartesian coordinates to spherical coordinates.</li><li><a href="distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>	DISTANCEPOINTS3D Compute euclidean distance between pairs of 3D Points.</li><li><a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>	PLANENORMAL Compute the normal to a plane.</li><li><a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>	PROJPOINTONPLANE Return the orthogonal projection of a point on a plane.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>	DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function circle = intersectPlaneSphere(plane, sphere)</a>
+0002 <span class="comment">%INTERSECTPLANESPHERE Return intersection circle between a plane and a sphere.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   CIRC = intersectPlaneSphere(PLANE, SPHERE)</span>
+0005 <span class="comment">%   Returns the circle which is the intersection of the given plane</span>
+0006 <span class="comment">%   and sphere.</span>
+0007 <span class="comment">%   PLANE  : [x0 y0 z0  dx1 dy1 dz1  dx2 dy2 dz2]</span>
+0008 <span class="comment">%   SPHERE : [XS YS ZS  RS]</span>
+0009 <span class="comment">%   CIRC   : [XC YC ZC  RC  THETA PHI PSI]</span>
+0010 <span class="comment">%   [x0 y0 z0] is the origin of the plane, [dx1 dy1 dz1] and [dx2 dy2 dz2]</span>
+0011 <span class="comment">%   are two direction vectors,</span>
+0012 <span class="comment">%   [XS YS ZS] are coordinates of the sphere center, RS is the sphere</span>
+0013 <span class="comment">%   radius,</span>
+0014 <span class="comment">%   [XC YC ZC] are coordinates of the circle center, RC is the radius of</span>
+0015 <span class="comment">%   the circle, [THETA PHI] is the normal of the plane containing the</span>
+0016 <span class="comment">%   circle (THETA being the colatitude, and PHI the azimut), and PSI is a</span>
+0017 <span class="comment">%   rotation angle around the normal (equal to zero in this function, but</span>
+0018 <span class="comment">%   kept for compatibility with other functions). All angles are given in</span>
+0019 <span class="comment">%   degrees.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See Also:</span>
+0022 <span class="comment">%   planes3d, spheres, circles3d, intersectLinePlane, intersectLineSphere</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   ---------</span>
+0025 <span class="comment">%   author : David Legland</span>
+0026 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0027 <span class="comment">%   created the 18/02/2005.</span>
+0028 <span class="comment">%</span>
+0029 
+0030 <span class="comment">%   HISTORY</span>
+0031 <span class="comment">%   27/06/2007: change output format of circle, add support for multiple</span>
+0032 <span class="comment">%       data</span>
+0033 <span class="comment">%   2011-06-21 use degrees for angles</span>
+0034 
+0035 <span class="comment">% number of inputs of each type</span>
+0036 Ns = size(sphere, 1);
+0037 Np = size(plane, 1);
+0038 
+0039 <span class="comment">% unify data dimension</span>
+0040 <span class="keyword">if</span> Ns ~= Np 
+0041     <span class="keyword">if</span> Ns == 1
+0042         sphere = sphere(ones(Np, 1), :);
+0043     <span class="keyword">elseif</span> Np == 1
+0044         plane = plane(ones(Ns, 1), :);
+0045     <span class="keyword">else</span>
+0046         error(<span class="string">'data should have same length, or one data should have length 1'</span>);
+0047     <span class="keyword">end</span>
+0048 <span class="keyword">end</span>
+0049 <span class="comment">% center of the spheres</span>
+0050 center  = sphere(:,1:3);
+0051 
+0052 <span class="comment">% radius of spheres</span>
+0053 <span class="keyword">if</span> size(sphere, 2) == 4
+0054     Rs  = sphere(:,4);
+0055 <span class="keyword">else</span>
+0056     <span class="comment">% assume default radius equal to 1</span>
+0057     Rs  = ones(size(sphere, 1), 1);
+0058 <span class="keyword">end</span>
+0059 
+0060 <span class="comment">% projection of sphere center on plane -&gt; gives circle center</span>
+0061 circle0 = <a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>(center, plane);
+0062 
+0063 <span class="comment">% radius of circles</span>
+0064 d   = <a href="distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>(center, circle0);
+0065 Rc  = sqrt(Rs.*Rs - d.*d);
+0066 
+0067 <span class="comment">% normal of planes = normal of circles</span>
+0068 nor = <a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>(plane);
+0069 
+0070 <span class="comment">% convert to angles</span>
+0071 [theta, phi] = <a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>(nor(:,1), nor(:,2), nor(:,3));
+0072 psi = zeros(Np, 1);
+0073 
+0074 <span class="comment">% create structure for circle</span>
+0075 k = 180 / pi;
+0076 circle = [circle0 Rc [theta phi psi]*k];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

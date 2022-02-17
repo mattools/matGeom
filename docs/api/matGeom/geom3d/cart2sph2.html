@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of cart2sph2</title>
+  <meta name="keywords" content="cart2sph2">
+  <meta name="description" content="CART2SPH2 Convert cartesian coordinates to spherical coordinates.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; cart2sph2.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>cart2sph2
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CART2SPH2 Convert cartesian coordinates to spherical coordinates.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = cart2sph2(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CART2SPH2 Convert cartesian coordinates to spherical coordinates.
+
+   [THETA PHI RHO] = cart2sph2([X Y Z])
+   [THETA PHI RHO] = cart2sph2(X, Y, Z)
+
+   The following convention is used:
+   THETA is the colatitude, in radians, 0 for north pole, +pi for south
+   pole, pi/2 for points with z=0. 
+   PHI is the azimuth, in radians, defined as matlab cart2sph: angle from
+   Ox axis, counted counter-clockwise.
+   RHO is the distance of the point to the origin.
+   Discussion on choice for convention can be found at:
+   http://www.physics.oregonstate.edu/bridge/papers/spherical.pdf
+
+   Example:
+   cart2sph2([1 0 0])  returns [pi/2 0 1];
+   cart2sph2([1 1 0])  returns [pi/2 pi/4 sqrt(2)];
+   cart2sph2([0 0 1])  returns [0 0 1];
+
+   See also:
+     <a href="angles3d.html" class="code" title="function angles3d(varargin)">angles3d</a>, <a href="sph2cart2.html" class="code" title="function varargout = sph2cart2(theta, phi, rho)">sph2cart2</a>, cart2sph, <a href="cart2sph2d.html" class="code" title="function varargout = cart2sph2d(x, y, z)">cart2sph2d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="fitCircle3d.html" class="code" title="function [fittedCircle, circleNormal] = fitCircle3d(pts)">fitCircle3d</a>	FITCIRCLE3D Fit a 3D circle to a set of points.</li><li><a href="intersectPlaneSphere.html" class="code" title="function circle = intersectPlaneSphere(plane, sphere)">intersectPlaneSphere</a>	INTERSECTPLANESPHERE Return intersection circle between a plane and a sphere.</li><li><a href="../../matGeom/meshes3d/curveToMesh.html" class="code" title="function [vertices, faces] = curveToMesh(curve, varargin)">curveToMesh</a>	Create a mesh surrounding a 3D curve.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = cart2sph2(varargin)</a>
+0002 <span class="comment">%CART2SPH2 Convert cartesian coordinates to spherical coordinates.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [THETA PHI RHO] = cart2sph2([X Y Z])</span>
+0005 <span class="comment">%   [THETA PHI RHO] = cart2sph2(X, Y, Z)</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   The following convention is used:</span>
+0008 <span class="comment">%   THETA is the colatitude, in radians, 0 for north pole, +pi for south</span>
+0009 <span class="comment">%   pole, pi/2 for points with z=0.</span>
+0010 <span class="comment">%   PHI is the azimuth, in radians, defined as matlab cart2sph: angle from</span>
+0011 <span class="comment">%   Ox axis, counted counter-clockwise.</span>
+0012 <span class="comment">%   RHO is the distance of the point to the origin.</span>
+0013 <span class="comment">%   Discussion on choice for convention can be found at:</span>
+0014 <span class="comment">%   http://www.physics.oregonstate.edu/bridge/papers/spherical.pdf</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example:</span>
+0017 <span class="comment">%   cart2sph2([1 0 0])  returns [pi/2 0 1];</span>
+0018 <span class="comment">%   cart2sph2([1 1 0])  returns [pi/2 pi/4 sqrt(2)];</span>
+0019 <span class="comment">%   cart2sph2([0 0 1])  returns [0 0 1];</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See also:</span>
+0022 <span class="comment">%     angles3d, sph2cart2, cart2sph, cart2sph2d</span>
+0023 <span class="comment">%</span>
+0024 
+0025 <span class="comment">%   ---------</span>
+0026 <span class="comment">%   author : David Legland</span>
+0027 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0028 <span class="comment">%   created the 18/02/2005.</span>
+0029 <span class="comment">%</span>
+0030 
+0031 <span class="comment">%   HISTORY</span>
+0032 <span class="comment">%   02/11/2006: update doc, and manage case RHO is empty</span>
+0033 <span class="comment">%   03/11/2006: change convention for angle : uses order [THETA PHI RHO]</span>
+0034 <span class="comment">%   27/06/2007: manage 2 output arguments</span>
+0035 
+0036 <span class="comment">% parse input angles based on input argument number</span>
+0037 <span class="keyword">if</span> length(varargin) == 1
+0038     xyz = varargin{1};
+0039 <span class="keyword">elseif</span> length(varargin) == 3
+0040     xyz = [varargin{1} varargin{2} varargin{3}];
+0041 <span class="keyword">end</span>
+0042 
+0043 <span class="comment">% ensure z coordinate is specified</span>
+0044 <span class="keyword">if</span> size(xyz, 2) == 2
+0045     xyz(:,3) = 1;
+0046 <span class="keyword">end</span>
+0047 
+0048 <span class="comment">% convert to spherical coordinates</span>
+0049 [p, t, r] = cart2sph(xyz(:,1), xyz(:,2), xyz(:,3));
+0050 
+0051 <span class="comment">% format output arguments</span>
+0052 <span class="keyword">if</span> nargout == 1 || nargout == 0
+0053     varargout{1} = [pi/2-t p r];
+0054 <span class="keyword">elseif</span> nargout==2
+0055     varargout{1} = pi/2-t;
+0056     varargout{2} = p;
+0057 <span class="keyword">else</span>
+0058     varargout{1} = pi/2-t;
+0059     varargout{2} = p;
+0060     varargout{3} = r;
+0061 <span class="keyword">end</span>
+0062</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

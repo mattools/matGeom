@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of clipConvexPolygon3dHP</title>
+  <meta name="keywords" content="clipConvexPolygon3dHP">
+  <meta name="description" content="CLIPCONVEXPOLYGON3DHP Clip a convex 3D polygon with Half-space.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; clipConvexPolygon3dHP.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>clipConvexPolygon3dHP
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CLIPCONVEXPOLYGON3DHP Clip a convex 3D polygon with Half-space.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function poly2 = clipConvexPolygon3dHP(poly, plane) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CLIPCONVEXPOLYGON3DHP Clip a convex 3D polygon with Half-space.
+
+   POLY2 = clipConvexPolygon3dHP(POLY, PLANE)
+   POLY is a N-by-3 array of points, and PLANE is given as:
+   [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2].
+   The result POLY2 is also an array of 3d points, sometimes smaller than
+   poly, and that can be 0-by-3 (empty polygon).
+
+   POLY2 = clipConvexPolygon3dHP(POLY, PT0, NORMAL)
+   uses plane with normal NORMAL and containing point PT0.
+
+
+   See also:
+   <a href="polygons3d.html" class="code" title="function polygons3d(varargin)">polygons3d</a>, polyhedra
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2007-01-05
+ Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createLine3d.html" class="code" title="function line = createLine3d(varargin)">createLine3d</a>	CREATELINE3D Create a line with various inputs.</li><li><a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>	INTERSECTLINEPLANE Intersection point between a 3D line and a plane.</li><li><a href="isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>	ISBELOWPLANE Test whether a point is below or above a plane.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/meshes3d/clipConvexPolyhedronHP.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronHP(nodes, faces, plane)">clipConvexPolyhedronHP</a>	CLIPCONVEXPOLYHEDRONHP Clip a convex polyhedron by a plane.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function poly2 = clipConvexPolygon3dHP(poly, plane)</a>
+0002 <span class="comment">%CLIPCONVEXPOLYGON3DHP Clip a convex 3D polygon with Half-space.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POLY2 = clipConvexPolygon3dHP(POLY, PLANE)</span>
+0005 <span class="comment">%   POLY is a N-by-3 array of points, and PLANE is given as:</span>
+0006 <span class="comment">%   [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2].</span>
+0007 <span class="comment">%   The result POLY2 is also an array of 3d points, sometimes smaller than</span>
+0008 <span class="comment">%   poly, and that can be 0-by-3 (empty polygon).</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   POLY2 = clipConvexPolygon3dHP(POLY, PT0, NORMAL)</span>
+0011 <span class="comment">%   uses plane with normal NORMAL and containing point PT0.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   See also:</span>
+0015 <span class="comment">%   polygons3d, polyhedra</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">% ------</span>
+0018 <span class="comment">% Author: David Legland</span>
+0019 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0020 <span class="comment">% Created: 2007-01-05</span>
+0021 <span class="comment">% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0022 
+0023 <span class="comment">%   HISTORY</span>
+0024 <span class="comment">%   2007/14/09 fix postprocessing of last point</span>
+0025 
+0026 <span class="comment">% ensure last point is the same as the first one</span>
+0027 <span class="keyword">if</span> sum(poly(<span class="keyword">end</span>, :) == poly(1,:)) ~= 3
+0028     poly = [poly; poly(1,:)];
+0029 <span class="keyword">end</span>
+0030 
+0031 <span class="comment">% initialize empty polygon</span>
+0032 poly2 = zeros(0, 2);
+0033 
+0034 <span class="comment">% compute visible points</span>
+0035 below = <a href="isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>(poly, plane);
+0036 
+0037 <span class="comment">% case of empty polygon</span>
+0038 <span class="keyword">if</span> sum(below) == 0
+0039     <span class="keyword">return</span>;
+0040 <span class="keyword">end</span>
+0041 
+0042 <span class="comment">% case of totally clipped polygon</span>
+0043 <span class="keyword">if</span> sum(below) == length(below)
+0044     poly2 = poly;
+0045     <span class="keyword">return</span>;
+0046 <span class="keyword">end</span>
+0047 
+0048 <span class="comment">% indices of edges intersecting the plane</span>
+0049 ind = find(below ~= below([2:end 1]));
+0050 
+0051 <span class="comment">% compute intersection points: they are 2 for a convex polygon</span>
+0052 lines = <a href="createLine3d.html" class="code" title="function line = createLine3d(varargin)">createLine3d</a>(poly(ind, :), poly(ind+1, :));
+0053 pInt = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(lines, plane);
+0054 
+0055 <span class="comment">% insert intersection points and remove invisible points</span>
+0056 <span class="keyword">if</span> below(1)
+0057     poly2 = [poly(1:ind(1), :); pInt; poly(ind(2)+1:<span class="keyword">end</span>, :)];
+0058 <span class="keyword">else</span>
+0059     poly2 = [pInt(1, :); poly(ind(1)+1:ind(2), :); pInt(2, :)];
+0060 <span class="keyword">end</span>
+0061 
+0062 <span class="comment">% remove last point if it is the same as the first one</span>
+0063 <span class="keyword">if</span> sum(poly2(<span class="keyword">end</span>, :) == poly2(1,:)) == 3
+0064     poly2(<span class="keyword">end</span>, :) = [];
+0065 <span class="keyword">end</span>
+0066</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

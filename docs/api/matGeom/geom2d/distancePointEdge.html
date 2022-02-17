@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of distancePointEdge</title>
+  <meta name="keywords" content="distancePointEdge">
+  <meta name="description" content="DISTANCEPOINTEDGE Minimum distance between a point and an edge.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; distancePointEdge.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>distancePointEdge
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DISTANCEPOINTEDGE Minimum distance between a point and an edge.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [dist, pos] = distancePointEdge(point, edge) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DISTANCEPOINTEDGE Minimum distance between a point and an edge.
+
+   DIST = distancePointEdge(POINT, EDGE);
+   Return the euclidean distance between edge EDGE and point POINT. 
+   EDGE has the form: [x1 y1 x2 y2], and POINT is [x y].
+
+   If EDGE is N-by-4 array, result is 1-by-4 array computed for each edge.
+   If POINT is a N-by-2 array, the result is a N-by-1 array.
+   If both POINT and EDGE are array, the result is computed for each
+   point-edge couple, and stored into a NP-by-NE array.
+
+   [DIST POS] = distancePointEdge(POINT, EDGE);
+   Also returns the position of closest point on the edge. POS is
+   comprised between 0 (first point) and 1 (last point).
+
+   Eaxmple
+     % Distance between a point and an edge
+     distancePointEdge([3 4], [0 0 10 0])
+     ans =
+         4
+
+     % Distance between several points and one edge
+     points = [10 15; 15 10; 30 10];
+     edge   = [10 10 20 10];
+     distancePointEdge(points, edge)
+     ans = 
+         5 
+         0
+        10
+
+     % Distance between a point a several edges
+     point = [14 33];
+     edges  = [10 30 20 30; 20 30 20 40;20 40 10 40;10 40 10 30];
+     distancePointEdge(point, edges)
+     ans = 
+         3    6    7    4
+
+
+   See also:
+   <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>, <a href="distancePointLine.html" class="code" title="function [dist, pos] = distancePointLine(point, line)">distancePointLine</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/polygons2d/distancePointPolyline.html" class="code" title="function [minDist, pos] = distancePointPolyline(point, poly, varargin)">distancePointPolyline</a>	DISTANCEPOINTPOLYLINE  Compute shortest distance between a point and a polyline.</li><li><a href="../../matGeom/polygons2d/projPointOnPolyline.html" class="code" title="function varargout = projPointOnPolyline(point, poly, varargin)">projPointOnPolyline</a>	PROJPOINTONPOLYLINE Compute position of a point projected on a polyline.</li><li><a href="../../matGeom/polygons2d/simplifyPolyline.html" class="code" title="function [poly2, keepInds] = simplifyPolyline(poly, tol)">simplifyPolyline</a>	SIMPLIFYPOLYLINE Douglas-Peucker simplification of a polyline.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [dist, pos] = distancePointEdge(point, edge)</a>
+0002 <span class="comment">%DISTANCEPOINTEDGE Minimum distance between a point and an edge.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   DIST = distancePointEdge(POINT, EDGE);</span>
+0005 <span class="comment">%   Return the euclidean distance between edge EDGE and point POINT.</span>
+0006 <span class="comment">%   EDGE has the form: [x1 y1 x2 y2], and POINT is [x y].</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   If EDGE is N-by-4 array, result is 1-by-4 array computed for each edge.</span>
+0009 <span class="comment">%   If POINT is a N-by-2 array, the result is a N-by-1 array.</span>
+0010 <span class="comment">%   If both POINT and EDGE are array, the result is computed for each</span>
+0011 <span class="comment">%   point-edge couple, and stored into a NP-by-NE array.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   [DIST POS] = distancePointEdge(POINT, EDGE);</span>
+0014 <span class="comment">%   Also returns the position of closest point on the edge. POS is</span>
+0015 <span class="comment">%   comprised between 0 (first point) and 1 (last point).</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   Eaxmple</span>
+0018 <span class="comment">%     % Distance between a point and an edge</span>
+0019 <span class="comment">%     distancePointEdge([3 4], [0 0 10 0])</span>
+0020 <span class="comment">%     ans =</span>
+0021 <span class="comment">%         4</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%     % Distance between several points and one edge</span>
+0024 <span class="comment">%     points = [10 15; 15 10; 30 10];</span>
+0025 <span class="comment">%     edge   = [10 10 20 10];</span>
+0026 <span class="comment">%     distancePointEdge(points, edge)</span>
+0027 <span class="comment">%     ans =</span>
+0028 <span class="comment">%         5</span>
+0029 <span class="comment">%         0</span>
+0030 <span class="comment">%        10</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">%     % Distance between a point a several edges</span>
+0033 <span class="comment">%     point = [14 33];</span>
+0034 <span class="comment">%     edges  = [10 30 20 30; 20 30 20 40;20 40 10 40;10 40 10 30];</span>
+0035 <span class="comment">%     distancePointEdge(point, edges)</span>
+0036 <span class="comment">%     ans =</span>
+0037 <span class="comment">%         3    6    7    4</span>
+0038 <span class="comment">%</span>
+0039 <span class="comment">%</span>
+0040 <span class="comment">%   See also:</span>
+0041 <span class="comment">%   edges2d, points2d, distancePoints, distancePointLine</span>
+0042 <span class="comment">%</span>
+0043 
+0044 <span class="comment">% ------</span>
+0045 <span class="comment">% Author: David Legland</span>
+0046 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0047 <span class="comment">% Created: 2004-04-07</span>
+0048 <span class="comment">% Copyright 2016 INRA - BIA-BIBS.</span>
+0049 <span class="comment">%</span>
+0050 
+0051 <span class="comment">%   HISTORY</span>
+0052 <span class="comment">%   2005-06-24 rename, and change arguments sequence</span>
+0053 <span class="comment">%   2009-04-30 add possibility to return position of closest point</span>
+0054 <span class="comment">%   2011-04-14 add checkup for degenerate edges, improve speed, update doc</span>
+0055 
+0056 
+0057 <span class="comment">% direction vector of each edge (row vectors)</span>
+0058 vx = (edge(:, 3) - edge(:,1))';
+0059 vy = (edge(:, 4) - edge(:,2))';
+0060 
+0061 <span class="comment">% squared length of edges, with a check of validity</span>
+0062 delta = vx .* vx + vy .* vy;
+0063 invalidEdges = delta &lt; eps;
+0064 delta(invalidEdges) = 1; 
+0065 
+0066 <span class="comment">% difference of coordinates between point and edge first vertex</span>
+0067 <span class="comment">% (NP-by-NE arrays)</span>
+0068 dx  = bsxfun(@minus, point(:, 1), edge(:, 1)');
+0069 dy  = bsxfun(@minus, point(:, 2), edge(:, 2)');
+0070 
+0071 <span class="comment">% compute position of points projected on the supporting line, by using</span>
+0072 <span class="comment">% normalised dot product (NP-by-NE array)</span>
+0073 pos = bsxfun(@rdivide, bsxfun(@times, dx, vx) + bsxfun(@times, dy, vy), delta);
+0074 
+0075 <span class="comment">% ensure degenerated edges are correclty processed (consider the first</span>
+0076 <span class="comment">% vertex is the closest)</span>
+0077 pos(:, invalidEdges) = 0;
+0078 
+0079 <span class="comment">% change position to ensure projected point is located on the edge</span>
+0080 pos(pos &lt; 0) = 0;
+0081 pos(pos &gt; 1) = 1;
+0082 
+0083 <span class="comment">% compute distance between point and its projection on the edge</span>
+0084 dist = hypot(bsxfun(@times, pos, vx) - dx, bsxfun(@times, pos, vy) - dy);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

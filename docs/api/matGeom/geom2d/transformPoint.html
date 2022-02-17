@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of transformPoint</title>
+  <meta name="keywords" content="transformPoint">
+  <meta name="description" content="Apply an affine transform to a point or a point set.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; transformPoint.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>transformPoint
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Apply an affine transform to a point or a point set.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = transformPoint(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Apply an affine transform to a point or a point set.
+
+   PT2 = transformPoint(PT1, TRANSFO);
+   Returns the result of the transformation TRANSFO applied to the point
+   PT1. PT1 has the form [xp yp], and TRANSFO is either a 2-by-2, a
+   2-by-3, or a 3-by-3 matrix, 
+
+   Format of TRANSFO can be one of :
+   [a b]   ,   [a b c] , or [a b c]
+   [d e]       [d e f]      [d e f]
+                            [0 0 1]
+
+   PT2 = transformPoint(PT1, TRANSFO);
+   Also works when PTA is a N-by-2 array representing point coordinates.
+   In this case, the result PT2 has the same size as PT1.
+
+   [X2, Y2] = transformPoint(X1, Y1, TRANS);
+   Also works when PX1 and PY1 are two arrays the same size. The function
+   transforms each pair (PX1, PY1), and returns the result in (X2, Y2),
+   which has the same size as (PX1 PY1). 
+
+
+   See also:
+     <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="transforms2d.html" class="code" title="function transforms2d(varargin)">transforms2d</a>, translation, rotation</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createBasisTransform.html" class="code" title="function transfo = createBasisTransform(source, target)">createBasisTransform</a>	CREATEBASISTRANSFORM Compute matrix for transforming a basis into another basis.</li><li><a href="drawParabola.html" class="code" title="function varargout = drawParabola(varargin)">drawParabola</a>	DRAWPARABOLA Draw a parabola on the current axis.</li><li><a href="isPointInEllipse.html" class="code" title="function b = isPointInEllipse(point, ellipse, varargin)">isPointInEllipse</a>	ISPOINTINELLIPSE Check if a point is located inside a given ellipse.</li><li><a href="principalAxesTransform.html" class="code" title="function varargout = principalAxesTransform(pts)">principalAxesTransform</a>	Align a set of points along its principal axes.</li><li><a href="registerICP.html" class="code" title="function [trans, points] = registerICP(points, target, varargin)">registerICP</a>	REGISTERICP Fit affine transform by Iterative Closest Point algorithm.</li><li><a href="transformLine.html" class="code" title="function dest = transformLine(line, trans)">transformLine</a>	TRANSFORMLINE Transform a line with an affine transform.</li><li><a href="../../matGeom/geom3d/orientedBox3d.html" class="code" title="function [box3d, rotMat] = orientedBox3d(pts)">orientedBox3d</a>	Object-oriented bounding box of a set of 3D points.</li><li><a href="../../matGeom/geom3d/revolutionSurface.html" class="code" title="function varargout = revolutionSurface(varargin)">revolutionSurface</a>	REVOLUTIONSURFACE Create a surface of revolution from a planar curve.</li><li><a href="../../matGeom/polygons2d/intersectLinePolygon.html" class="code" title="function [points, edgeInds, linePositions] = intersectLinePolygon(line, poly, varargin)">intersectLinePolygon</a>	Intersection points between a line and a polygon.</li><li><a href="../../matGeom/polygons2d/polygonSymmetryAxis.html" class="code" title="function axis = polygonSymmetryAxis(poly)">polygonSymmetryAxis</a>	POLYGONSYMMETRYAXIS Try to identify symmetry axis of polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = transformPoint(varargin)</a>
+0002 <span class="comment">% Apply an affine transform to a point or a point set.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PT2 = transformPoint(PT1, TRANSFO);</span>
+0005 <span class="comment">%   Returns the result of the transformation TRANSFO applied to the point</span>
+0006 <span class="comment">%   PT1. PT1 has the form [xp yp], and TRANSFO is either a 2-by-2, a</span>
+0007 <span class="comment">%   2-by-3, or a 3-by-3 matrix,</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   Format of TRANSFO can be one of :</span>
+0010 <span class="comment">%   [a b]   ,   [a b c] , or [a b c]</span>
+0011 <span class="comment">%   [d e]       [d e f]      [d e f]</span>
+0012 <span class="comment">%                            [0 0 1]</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   PT2 = transformPoint(PT1, TRANSFO);</span>
+0015 <span class="comment">%   Also works when PTA is a N-by-2 array representing point coordinates.</span>
+0016 <span class="comment">%   In this case, the result PT2 has the same size as PT1.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   [X2, Y2] = transformPoint(X1, Y1, TRANS);</span>
+0019 <span class="comment">%   Also works when PX1 and PY1 are two arrays the same size. The function</span>
+0020 <span class="comment">%   transforms each pair (PX1, PY1), and returns the result in (X2, Y2),</span>
+0021 <span class="comment">%   which has the same size as (PX1 PY1).</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   See also:</span>
+0025 <span class="comment">%     points2d, transforms2d, translation, rotation</span>
+0026 <span class="comment">%</span>
+0027 
+0028 <span class="comment">%   ---------</span>
+0029 <span class="comment">%   author : David Legland</span>
+0030 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0031 <span class="comment">%   created the 06/04/2004.</span>
+0032 <span class="comment">%</span>
+0033 
+0034 <span class="comment">%   HISTORY</span>
+0035 <span class="comment">%   25/04/2005 : support for 2D arrays of points (px, py, trans).</span>
+0036 
+0037 <span class="comment">% parse input arguments</span>
+0038 <span class="keyword">if</span> length(varargin) == 2
+0039     var = varargin{1};
+0040     px = var(:,1);
+0041     py = var(:,2);
+0042     trans = varargin{2};
+0043 <span class="keyword">elseif</span> length(varargin) == 3
+0044     px = varargin{1};
+0045     py = varargin{2};
+0046     trans = varargin{3};
+0047 <span class="keyword">else</span>
+0048     error(<span class="string">'wrong number of arguments in &quot;transformPoint&quot;'</span>);
+0049 <span class="keyword">end</span>
+0050 
+0051 
+0052 <span class="comment">% apply linear part of the transform</span>
+0053 px2 = px * trans(1,1) + py * trans(1,2);
+0054 py2 = px * trans(2,1) + py * trans(2,2);
+0055 
+0056 <span class="comment">% add translation vector, if exist</span>
+0057 <span class="keyword">if</span> size(trans, 2) &gt; 2
+0058     px2 = px2 + trans(1,3);
+0059     py2 = py2 + trans(2,3);
+0060 <span class="keyword">end</span>
+0061 
+0062 <span class="comment">% format output arguments</span>
+0063 <span class="keyword">if</span> nargout &lt; 2
+0064     varargout{1} = [px2 py2];
+0065 <span class="keyword">elseif</span> nargout
+0066     varargout{1} = px2;
+0067     varargout{2} = py2;
+0068 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

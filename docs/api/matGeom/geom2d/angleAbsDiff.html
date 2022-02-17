@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of angleAbsDiff</title>
+  <meta name="keywords" content="angleAbsDiff">
+  <meta name="description" content="ANGLEABSDIFF Absolute difference between two angles.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; angleAbsDiff.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>angleAbsDiff
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ANGLEABSDIFF Absolute difference between two angles.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function dif = angleAbsDiff(angle1, angle2) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ANGLEABSDIFF Absolute difference between two angles.
+
+   AD = angleAbsDiff(ANGLE1, ANGLE2)
+   Computes the absolute angular difference between two angles in radians.
+   The result is comprised between 0 and PI.
+
+   Example
+     A = angleAbsDiff(pi/2, pi/3)
+     A = 
+         0.5236   % equal to pi/6
+
+   See also
+   <a href="angles2d.html" class="code" title="function angles2d">angles2d</a>, <a href="angleDiff.html" class="code" title="function dif = angleDiff(angle1, angle2)">angleDiff</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2011-07-27,    using Matlab 7.9.0.529 (R2009b)
+ Copyright 2011 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="normalizeAngle.html" class="code" title="function alpha = normalizeAngle(alpha, varargin)">normalizeAngle</a>	NORMALIZEANGLE  Normalize an angle value within a 2*PI interval.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function dif = angleAbsDiff(angle1, angle2)</a>
+0002 <span class="comment">%ANGLEABSDIFF Absolute difference between two angles.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   AD = angleAbsDiff(ANGLE1, ANGLE2)</span>
+0005 <span class="comment">%   Computes the absolute angular difference between two angles in radians.</span>
+0006 <span class="comment">%   The result is comprised between 0 and PI.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Example</span>
+0009 <span class="comment">%     A = angleAbsDiff(pi/2, pi/3)</span>
+0010 <span class="comment">%     A =</span>
+0011 <span class="comment">%         0.5236   % equal to pi/6</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   See also</span>
+0014 <span class="comment">%   angles2d, angleDiff</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">% ------</span>
+0017 <span class="comment">% Author: David Legland</span>
+0018 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0019 <span class="comment">% Created: 2011-07-27,    using Matlab 7.9.0.529 (R2009b)</span>
+0020 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0021 
+0022 <span class="comment">% first, normalization</span>
+0023 angle1 = <a href="normalizeAngle.html" class="code" title="function alpha = normalizeAngle(alpha, varargin)">normalizeAngle</a>(angle1);
+0024 angle2 = <a href="normalizeAngle.html" class="code" title="function alpha = normalizeAngle(alpha, varargin)">normalizeAngle</a>(angle2);
+0025 
+0026 <span class="comment">% compute difference and normalize</span>
+0027 dif = <a href="normalizeAngle.html" class="code" title="function alpha = normalizeAngle(alpha, varargin)">normalizeAngle</a>(angle1 - angle2);
+0028 dif = min(dif, 2*pi - dif);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

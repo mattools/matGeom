@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createPlane</title>
+  <meta name="keywords" content="createPlane">
+  <meta name="description" content="CREATEPLANE Create a plane in parametrized form.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; createPlane.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createPlane
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATEPLANE Create a plane in parametrized form.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function plane = createPlane(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATEPLANE Create a plane in parametrized form.
+
+   PLANE = createPlane(P1, P2, P3) 
+   creates a plane containing the 3 points
+
+   PLANE = createPlane(PTS) 
+   The 3 points are packed into a single 3x3 array.
+
+   PLANE = createPlane(P0, N);
+   Creates a plane from a point and from a normal to the plane. The
+   parameter N is given either as a 3D vector (1-by-3 row vector), or as
+   [THETA PHI], where THETA is the colatitute (angle with the vertical
+   axis) and PHI is angle with Ox axis, counted counter-clockwise (both
+   given in radians).
+ 
+   PLANE = createPlane(P0, Dip, DipDir);
+   Creates a plane from a point and from a dip and dip direction angles 
+   of the plane. Parameters Dip and DipDir angles are given as numbers.
+   Dip : maximum inclination to the horizontal.
+   DipDir : direction of the horizontal trace of the line of dip, 
+            measured clockwise from north.
+
+   The created plane data has the following format:
+   PLANE = [X0 Y0 Z0  DX1 DY1 DZ1  DX2 DY2 DZ2], with
+   - (X0, Y0, Z0) is a point belonging to the plane
+   - (DX1, DY1, DZ1) is a first direction vector
+   - (DX2, DY2, DZ2) is a second direction vector
+   The 2 direction vectors are normalized and orthogonal.
+
+   See also:
+   <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>, <a href="medianPlane.html" class="code" title="function plane = medianPlane(p1, p2)">medianPlane</a>
+
+   ---------
+   author: David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 18/02/2005.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="normalizePlane.html" class="code" title="function plane2 = normalizePlane(plane1)">normalizePlane</a>	NORMALIZEPLANE Normalize parametric representation of a plane.</li><li><a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>	NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.</li><li><a href="sph2cart2.html" class="code" title="function varargout = sph2cart2(theta, phi, rho)">sph2cart2</a>	SPH2CART2 Convert spherical coordinates to cartesian coordinates.</li><li><a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>	VECTORNORM3D Norm of a 3D vector or of set of 3D vectors.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="angleSort3d.html" class="code" title="function varargout = angleSort3d(pts, varargin)">angleSort3d</a>	ANGLESORT3D Sort 3D coplanar points according to their angles in plane.</li><li><a href="circle3dPosition.html" class="code" title="function theta = circle3dPosition(point, circle)">circle3dPosition</a>	CIRCLE3DPOSITION Return the angular position of a point on a 3D circle.</li><li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>	DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.</li><li><a href="fillSphericalTriangle.html" class="code" title="function varargout = fillSphericalTriangle(sphere, p1, p2, p3, varargin)">fillSphericalTriangle</a>	FILLSPHERICALTRIANGLE Fill a triangle on a sphere.</li><li><a href="intersectEdgePolygon3d.html" class="code" title="function [inter, valid] = intersectEdgePolygon3d(edge, poly)">intersectEdgePolygon3d</a>	Intersection point of a 3D EDGE segment and a 3D polygon.</li><li><a href="intersectLineCylinder.html" class="code" title="function points = intersectLineCylinder(line, cylinder, varargin)">intersectLineCylinder</a>	INTERSECTLINECYLINDER Compute intersection points between a line and a cylinder.</li><li><a href="intersectLinePolygon3d.html" class="code" title="function [inter, inside]= intersectLinePolygon3d(line, poly)">intersectLinePolygon3d</a>	INTERSECTLINEPOLYGON3D Intersection point of a 3D line and a 3D polygon.</li><li><a href="intersectRayPolygon3d.html" class="code" title="function [inter, inside]= intersectRayPolygon3d(ray, poly)">intersectRayPolygon3d</a>	INTERSECTRAYPOLYGON3D Intersection point of a 3D ray and a 3D polygon.</li><li><a href="isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>	ISBELOWPLANE Test whether a point is below or above a plane.</li><li><a href="medianPlane.html" class="code" title="function plane = medianPlane(p1, p2)">medianPlane</a>	MEDIANPLANE Create a plane in the middle of 2 points.</li><li><a href="orientedBox3d.html" class="code" title="function [box3d, rotMat] = orientedBox3d(pts)">orientedBox3d</a>	Object-oriented bounding box of a set of 3D points.</li><li><a href="planesBisector.html" class="code" title="function out = planesBisector(plane1, plane2)">planesBisector</a>	PLANESBISECTOR  Bisector plane between two other planes.</li><li><a href="polygonCentroid3d.html" class="code" title="function centroid = polygonCentroid3d(varargin)">polygonCentroid3d</a>	POLYGONCENTROID3D Centroid (or center of mass) of a polygon.</li><li><a href="projPointOnCircle3d.html" class="code" title="function point2 = projPointOnCircle3d(point, circle)">projPointOnCircle3d</a>	PROJPOINTONCIRCLE3D Project a 3D point onto a 3D circle.</li><li><a href="sphericalAngle.html" class="code" title="function alpha = sphericalAngle(p1, p2, p3)">sphericalAngle</a>	SPHERICALANGLE Compute angle between points on the sphere.</li><li><a href="../../matGeom/meshes3d/createDurerPolyhedron.html" class="code" title="function varargout = createDurerPolyhedron(varargin)">createDurerPolyhedron</a>	CREATEDURERPOLYHEDRON  Create a mesh representing Durer's polyhedron .</li><li><a href="../../matGeom/meshes3d/minConvexHull.html" class="code" title="function newFaces = minConvexHull(points, varargin)">minConvexHull</a>	MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function plane = createPlane(varargin)</a>
+0002 <span class="comment">%CREATEPLANE Create a plane in parametrized form.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PLANE = createPlane(P1, P2, P3)</span>
+0005 <span class="comment">%   creates a plane containing the 3 points</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   PLANE = createPlane(PTS)</span>
+0008 <span class="comment">%   The 3 points are packed into a single 3x3 array.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   PLANE = createPlane(P0, N);</span>
+0011 <span class="comment">%   Creates a plane from a point and from a normal to the plane. The</span>
+0012 <span class="comment">%   parameter N is given either as a 3D vector (1-by-3 row vector), or as</span>
+0013 <span class="comment">%   [THETA PHI], where THETA is the colatitute (angle with the vertical</span>
+0014 <span class="comment">%   axis) and PHI is angle with Ox axis, counted counter-clockwise (both</span>
+0015 <span class="comment">%   given in radians).</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   PLANE = createPlane(P0, Dip, DipDir);</span>
+0018 <span class="comment">%   Creates a plane from a point and from a dip and dip direction angles</span>
+0019 <span class="comment">%   of the plane. Parameters Dip and DipDir angles are given as numbers.</span>
+0020 <span class="comment">%   Dip : maximum inclination to the horizontal.</span>
+0021 <span class="comment">%   DipDir : direction of the horizontal trace of the line of dip,</span>
+0022 <span class="comment">%            measured clockwise from north.</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   The created plane data has the following format:</span>
+0025 <span class="comment">%   PLANE = [X0 Y0 Z0  DX1 DY1 DZ1  DX2 DY2 DZ2], with</span>
+0026 <span class="comment">%   - (X0, Y0, Z0) is a point belonging to the plane</span>
+0027 <span class="comment">%   - (DX1, DY1, DZ1) is a first direction vector</span>
+0028 <span class="comment">%   - (DX2, DY2, DZ2) is a second direction vector</span>
+0029 <span class="comment">%   The 2 direction vectors are normalized and orthogonal.</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%   See also:</span>
+0032 <span class="comment">%   planes3d, medianPlane</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">%   ---------</span>
+0035 <span class="comment">%   author: David Legland</span>
+0036 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0037 <span class="comment">%   created the 18/02/2005.</span>
+0038 <span class="comment">%</span>
+0039 
+0040 <span class="comment">%   HISTORY</span>
+0041 <span class="comment">%   24/11/2005 add possibility to pack points for plane creation</span>
+0042 <span class="comment">%   21/08/2006 return normalized planes</span>
+0043 <span class="comment">%   06/11/2006 update doc for planes created from normal</span>
+0044 
+0045 <span class="keyword">if</span> length(varargin) == 1
+0046     var = varargin{1};
+0047     
+0048     <span class="keyword">if</span> iscell(var)
+0049         plane = zeros([length(var) 9]);
+0050         <span class="keyword">for</span> i=1:length(var)
+0051             plane(i,:) = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(var{i});
+0052         <span class="keyword">end</span>
+0053     <span class="keyword">elseif</span> size(var, 1) &gt;= 3
+0054         <span class="comment">% 3 points in a single array</span>
+0055         p1 = var(1,:);
+0056         p2 = var(2,:);
+0057         p3 = var(3,:);
+0058         
+0059         <span class="comment">% create direction vectors</span>
+0060         v1 = p2 - p1;
+0061         v2 = p3 - p1;
+0062 
+0063         <span class="comment">% create plane</span>
+0064         plane = <a href="normalizePlane.html" class="code" title="function plane2 = normalizePlane(plane1)">normalizePlane</a>([p1 v1 v2]);
+0065         <span class="keyword">return</span>;
+0066     <span class="keyword">end</span>
+0067     
+0068 <span class="keyword">elseif</span> length(varargin) == 2
+0069     <span class="comment">% plane origin</span>
+0070     p0 = varargin{1};
+0071     
+0072     <span class="comment">% second parameter is either a 3D vector or a 3D angle (2 params)</span>
+0073     var = varargin{2};
+0074     <span class="keyword">if</span> size(var, 2) == 2
+0075         <span class="comment">% normal is given in spherical coordinates</span>
+0076         n = <a href="sph2cart2.html" class="code" title="function varargout = sph2cart2(theta, phi, rho)">sph2cart2</a>([var ones(size(var, 1))]);
+0077     <span class="keyword">elseif</span> size(var, 2)==3
+0078         <span class="comment">% normal is given by a 3D vector</span>
+0079         n = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(var);
+0080     <span class="keyword">else</span>
+0081         error (<span class="string">'wrong number of parameters in createPlane'</span>);
+0082     <span class="keyword">end</span>
+0083     
+0084     <span class="comment">% ensure same dimension for parameters</span>
+0085     <span class="keyword">if</span> size(p0, 1)==1
+0086         p0 = repmat(p0, [size(n, 1) 1]);
+0087     <span class="keyword">end</span>
+0088     <span class="keyword">if</span> size(n, 1)==1
+0089         n = repmat(n, [size(p0, 1) 1]);
+0090     <span class="keyword">end</span>
+0091 
+0092     <span class="comment">% find a vector not colinear to the normal</span>
+0093     v0 = repmat([1 0 0], [size(p0, 1) 1]);
+0094     inds = <a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(cross(n, v0, 2))&lt;1e-14;
+0095     v0(inds, :) = repmat([0 1 0], [sum(inds) 1]);
+0096 <span class="comment">%     if abs(cross(n, v0, 2))&lt;1e-14</span>
+0097 <span class="comment">%         v0 = repmat([0 1 0], [size(p0, 1) 1]);</span>
+0098 <span class="comment">%     end</span>
+0099     
+0100     <span class="comment">% create direction vectors</span>
+0101     v1 = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(cross(n, v0, 2));
+0102     v2 = -<a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(cross(v1, n, 2));
+0103 
+0104     <span class="comment">% concatenate result in the array representing the plane</span>
+0105     plane = [p0 v1 v2];
+0106     <span class="keyword">return</span>;
+0107     
+0108 <span class="keyword">elseif</span> length(varargin)==3
+0109     var1 = varargin{1};
+0110     var2 = varargin{2};
+0111     var3 = varargin{3};
+0112     
+0113     <span class="keyword">if</span> size(var1, 2) == 3 &amp;&amp; size(var2, 2) == 3 &amp;&amp; size(var3, 2) == 3
+0114         p1 = var1;    
+0115         p2 = var2;
+0116         p3 = var3;
+0117 
+0118         <span class="comment">% create direction vectors</span>
+0119         v1 = p2 - p1;
+0120         v2 = p3 - p1;
+0121 
+0122         plane = <a href="normalizePlane.html" class="code" title="function plane2 = normalizePlane(plane1)">normalizePlane</a>([p1 v1 v2]);
+0123         <span class="keyword">return</span>;
+0124     <span class="keyword">elseif</span> size(var1, 2) == 3 &amp;&amp; size(var2, 2) == 1 &amp;&amp; size(var3, 2) == 1
+0125         p0 = var1;
+0126         n = [sin(var2)*sin(var3) sin(var2)*cos(var3) cos(var2)];
+0127         
+0128         <span class="comment">% find a vector not colinear to the normal</span>
+0129         v0 = repmat([1 0 0], [size(p0, 1) 1]);
+0130         inds = <a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(cross(n, v0, 2))&lt;1e-14;
+0131         v0(inds, :) = repmat([0 1 0], [sum(inds) 1]);
+0132 
+0133         <span class="comment">% create direction vectors</span>
+0134         v1 = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(cross(n, v0, 2));
+0135         v2 = -<a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(cross(v1, n, 2));
+0136 
+0137         <span class="comment">% concatenate result in the array representing the plane</span>
+0138         plane = [p0 v1 v2];  
+0139         <span class="keyword">return</span>;
+0140     <span class="keyword">else</span>
+0141         error(<span class="string">'Wrong argument in &quot;createPlane&quot;.'</span>);
+0142     <span class="keyword">end</span>  
+0143 <span class="keyword">else</span>
+0144     error(<span class="string">'Wrong number of arguments in &quot;createPlane&quot;.'</span>);
+0145 <span class="keyword">end</span>
+0146</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

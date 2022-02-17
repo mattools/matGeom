@@ -1,0 +1,465 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of distancePointMesh</title>
+  <meta name="keywords" content="distancePointMesh">
+  <meta name="description" content="DISTANCEPOINTMESH  Shortest distance between a (3D) point and a triangle mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; distancePointMesh.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>distancePointMesh
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DISTANCEPOINTMESH  Shortest distance between a (3D) point and a triangle mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [dist, proj] = distancePointMesh(point, vertices, faces, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DISTANCEPOINTMESH  Shortest distance between a (3D) point and a triangle mesh.
+
+   DIST = distancePointMesh(POINT, VERTICES, FACES)
+   Returns the shortest distance between the query point POINT and the
+   triangular mesh defined by the set of vertex coordinates VERTICES and
+   the set of faces FACES. VERTICES is a NV-by-3 array, and FACES is a
+   NF-by-3 array of vertex indices.
+   If FACES is NF-by-4 array, it is converted to a (NF*2)-by-3 array.
+
+   [DIST, PROJ] = distancePointMesh(...)
+   Also returns the projection of the query point on the triangular mesh.
+
+   ... = distancePointMesh(..., 'algorithm', ALGO)
+   Allows to choose the type of algorithm. Options are:
+   * sequential:   process each face sequentially, using the function
+               distancePointTriangle3d 
+   * vectorized:   vectorized algorithm, usually faster for large number
+               of faces
+   * auto:         (default) automatically choose the most appropriate
+               between sequential and vectorized.
+
+   Example
+     [V, F] = torusMesh();
+     F2 = triangulateFaces(F);
+     P = [10 20 30];
+     [D, PROJ] = distancePointMesh(P, V, F2);
+     figure; drawMesh(V, F)
+     view(3); axis equal; lighting gouraud; light;
+     drawPoint3d(P);
+     drawPoint3d(PROJ, 'm*');
+     drawEdge3d([P PROJ], 'linewidth', 2, 'color', 'b');
+
+   See also
+     distancePointTriangle3d
+
+   References
+   * &quot;Distance Between Point and Triangle in 3D&quot;, David Eberly (1999)
+   https://www.geometrictools.com/Documentation/DistancePoint3Triangle3.pdf
+   * &lt;a href=&quot;matlab:
+     web('https://fr.mathworks.com/matlabcentral/fileexchange/22857-distance-between-a-point-and-a-triangle-in-3d')
+   &quot;&gt;Distance between a point and a triangle in 3d&lt;/a&gt;, by Gwendolyn Fischer.
+   * &lt;a href=&quot;matlab:
+     web('https://fr.mathworks.com/matlabcentral/fileexchange/52882-point2trimesh------distance%C2%A0between-point-and-triangulated-surface')
+   &quot;&gt;Distance Between Point and Triangulated Surface&lt;/a&gt;, by Daniel Frisch.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/distancePointTriangle3d.html" class="code" title="function [dist, proj] = distancePointTriangle3d(point, triangle)">distancePointTriangle3d</a>	DISTANCEPOINTTRIANGLE3D Minimum distance between a 3D point and a 3D triangle.</li><li><a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>	TRIANGULATEFACES Convert face array to an array of triangular faces.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function [dist, proj] = distancePointTrimesh_vectorized(point, vertices, faces)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [dist, proj] = distancePointMesh(point, vertices, faces, varargin)</a>
+0002 <span class="comment">%DISTANCEPOINTMESH  Shortest distance between a (3D) point and a triangle mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   DIST = distancePointMesh(POINT, VERTICES, FACES)</span>
+0005 <span class="comment">%   Returns the shortest distance between the query point POINT and the</span>
+0006 <span class="comment">%   triangular mesh defined by the set of vertex coordinates VERTICES and</span>
+0007 <span class="comment">%   the set of faces FACES. VERTICES is a NV-by-3 array, and FACES is a</span>
+0008 <span class="comment">%   NF-by-3 array of vertex indices.</span>
+0009 <span class="comment">%   If FACES is NF-by-4 array, it is converted to a (NF*2)-by-3 array.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   [DIST, PROJ] = distancePointMesh(...)</span>
+0012 <span class="comment">%   Also returns the projection of the query point on the triangular mesh.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   ... = distancePointMesh(..., 'algorithm', ALGO)</span>
+0015 <span class="comment">%   Allows to choose the type of algorithm. Options are:</span>
+0016 <span class="comment">%   * sequential:   process each face sequentially, using the function</span>
+0017 <span class="comment">%               distancePointTriangle3d</span>
+0018 <span class="comment">%   * vectorized:   vectorized algorithm, usually faster for large number</span>
+0019 <span class="comment">%               of faces</span>
+0020 <span class="comment">%   * auto:         (default) automatically choose the most appropriate</span>
+0021 <span class="comment">%               between sequential and vectorized.</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   Example</span>
+0024 <span class="comment">%     [V, F] = torusMesh();</span>
+0025 <span class="comment">%     F2 = triangulateFaces(F);</span>
+0026 <span class="comment">%     P = [10 20 30];</span>
+0027 <span class="comment">%     [D, PROJ] = distancePointMesh(P, V, F2);</span>
+0028 <span class="comment">%     figure; drawMesh(V, F)</span>
+0029 <span class="comment">%     view(3); axis equal; lighting gouraud; light;</span>
+0030 <span class="comment">%     drawPoint3d(P);</span>
+0031 <span class="comment">%     drawPoint3d(PROJ, 'm*');</span>
+0032 <span class="comment">%     drawEdge3d([P PROJ], 'linewidth', 2, 'color', 'b');</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">%   See also</span>
+0035 <span class="comment">%     distancePointTriangle3d</span>
+0036 <span class="comment">%</span>
+0037 <span class="comment">%   References</span>
+0038 <span class="comment">%   * &quot;Distance Between Point and Triangle in 3D&quot;, David Eberly (1999)</span>
+0039 <span class="comment">%   https://www.geometrictools.com/Documentation/DistancePoint3Triangle3.pdf</span>
+0040 <span class="comment">%   * &lt;a href=&quot;matlab:</span>
+0041 <span class="comment">%     web('https://fr.mathworks.com/matlabcentral/fileexchange/22857-distance-between-a-point-and-a-triangle-in-3d')</span>
+0042 <span class="comment">%   &quot;&gt;Distance between a point and a triangle in 3d&lt;/a&gt;, by Gwendolyn Fischer.</span>
+0043 <span class="comment">%   * &lt;a href=&quot;matlab:</span>
+0044 <span class="comment">%     web('https://fr.mathworks.com/matlabcentral/fileexchange/52882-point2trimesh------distance%C2%A0between-point-and-triangulated-surface')</span>
+0045 <span class="comment">%   &quot;&gt;Distance Between Point and Triangulated Surface&lt;/a&gt;, by Daniel Frisch.</span>
+0046  
+0047 <span class="comment">% ------</span>
+0048 <span class="comment">% Author: David Legland</span>
+0049 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0050 <span class="comment">% Created: 2018-03-08,    using Matlab 9.3.0.713579 (R2017b)</span>
+0051 <span class="comment">% Copyright 2018 INRA - Cepia Software Platform.</span>
+0052 
+0053 
+0054 <span class="comment">%% Parses input arguments</span>
+0055 
+0056 <span class="comment">% check the case of mesh given as structure</span>
+0057 <span class="keyword">if</span> isstruct(vertices)
+0058     faces = vertices.faces;
+0059     vertices = vertices.vertices;
+0060 <span class="keyword">end</span>
+0061 
+0062 <span class="comment">% default option</span>
+0063 algo = <span class="string">'auto'</span>;
+0064 
+0065 <span class="comment">% check optional arguments</span>
+0066 <span class="keyword">while</span> length(varargin) &gt; 1
+0067     varName = varargin{1};
+0068     <span class="keyword">if</span> ~ischar(varName)
+0069         error(<span class="string">'Require options as parameter name-value pairs'</span>);
+0070     <span class="keyword">end</span>
+0071     
+0072     <span class="keyword">if</span> strcmpi(varName, <span class="string">'algorithm'</span>)
+0073         algo = varargin{2};
+0074     <span class="keyword">else</span>
+0075         error([<span class="string">'Unknown option name: '</span> varName]);
+0076     <span class="keyword">end</span>
+0077     
+0078     varargin(1:2) = [];
+0079 <span class="keyword">end</span>
+0080 
+0081 <span class="comment">% number of faces</span>
+0082 nFaces = size(faces, 1);
+0083 
+0084 <span class="keyword">if</span> size(faces, 2) &gt; 3 || iscell(faces)
+0085     faces = <a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>(faces);
+0086 <span class="keyword">end</span>
+0087 
+0088 <span class="comment">% If algorithm is chosen automatically, choose depending on face number</span>
+0089 <span class="keyword">if</span> strcmpi(algo, <span class="string">'auto'</span>)
+0090     <span class="keyword">if</span> size(faces, 1) &gt; 30
+0091         algo = <span class="string">'vectorized'</span>;
+0092     <span class="keyword">else</span>
+0093         algo = <span class="string">'sequential'</span>;
+0094     <span class="keyword">end</span>
+0095 <span class="keyword">end</span>
+0096 
+0097 <span class="comment">% switch to vectorized algorithm if necessary</span>
+0098 <span class="keyword">if</span> strcmpi(algo, <span class="string">'vectorized'</span>)
+0099     <span class="keyword">if</span> nargout &gt; 1
+0100         [dist, proj] = <a href="#_sub1" class="code" title="subfunction [dist, proj] = distancePointTrimesh_vectorized(point, vertices, faces)">distancePointTrimesh_vectorized</a>(point, vertices, faces);
+0101     <span class="keyword">else</span>
+0102         dist = <a href="#_sub1" class="code" title="subfunction [dist, proj] = distancePointTrimesh_vectorized(point, vertices, faces)">distancePointTrimesh_vectorized</a>(point, vertices, faces);
+0103     <span class="keyword">end</span>
+0104     <span class="keyword">return</span>;
+0105 <span class="keyword">end</span>
+0106 
+0107 
+0108 <span class="comment">%% Sequential algorithm</span>
+0109 <span class="comment">% For each point, iterates over the triangular faces</span>
+0110 
+0111 <span class="comment">% allocate memory for result</span>
+0112 nPoints = size(point, 1);
+0113 dist = zeros(nPoints, 1);
+0114 
+0115 <span class="keyword">if</span> nargout &gt; 1
+0116     projPoints = zeros(nPoints, 3);
+0117 <span class="keyword">end</span>
+0118 
+0119 <span class="comment">% iterate over points</span>
+0120 <span class="keyword">for</span> i = 1:nPoints
+0121     <span class="comment">% % min distance and projection for current point</span>
+0122     minDist = inf;
+0123     proj = [0 0 0];
+0124     
+0125     <span class="comment">% iterate over faces</span>
+0126     <span class="keyword">for</span> iFace = 1:nFaces
+0127         <span class="comment">% create triange for current face</span>
+0128         face = faces(iFace, :);
+0129         triangle = vertices(face, :);
+0130         
+0131         [distf, projf] = <a href="../../matGeom/geom3d/distancePointTriangle3d.html" class="code" title="function [dist, proj] = distancePointTriangle3d(point, triangle)">distancePointTriangle3d</a>(point(i,:), triangle);
+0132         
+0133         <span class="keyword">if</span> distf &lt; minDist
+0134             minDist = distf;
+0135             proj = projf;
+0136         <span class="keyword">end</span>
+0137     <span class="keyword">end</span>
+0138     
+0139     dist(i) = minDist;
+0140     <span class="keyword">if</span> nargout &gt; 1
+0141         projPoints(i,:) = proj;
+0142     <span class="keyword">end</span>
+0143 <span class="keyword">end</span>
+0144 <span class="keyword">end</span>
+0145 
+0146 <a name="_sub1" href="#_subfunctions" class="code">function [dist, proj] = distancePointTrimesh_vectorized(point, vertices, faces)</a>
+0147 <span class="comment">%DISTANCEPOINTTRIMESH Vectorized version of the distancePointTrimesh function</span>
+0148 <span class="comment">%</span>
+0149 <span class="comment">%   output = distancePointTrimesh_vectorized(input)</span>
+0150 <span class="comment">%</span>
+0151 <span class="comment">%   This version is  vectorized over faces: for each query point, the</span>
+0152 <span class="comment">%   minimum distance to each triangular face is computed in parallel.</span>
+0153 <span class="comment">%   Then the minimum distance over faces is kept.</span>
+0154 <span class="comment">%</span>
+0155 <span class="comment">%   Example</span>
+0156 <span class="comment">%   distancePointTrimesh</span>
+0157 <span class="comment">%</span>
+0158 <span class="comment">%   See also</span>
+0159 <span class="comment">%</span>
+0160 
+0161 <span class="comment">% ------</span>
+0162 <span class="comment">% Author: David Legland</span>
+0163 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0164 <span class="comment">% Created: 2018-03-08,    using Matlab 9.3.0.713579 (R2017b)</span>
+0165 <span class="comment">% Copyright 2018 INRA - Cepia Software Platform.</span>
+0166 
+0167 <span class="comment">% Regions are not numbered as in the original paper of D. Eberly to allow</span>
+0168 <span class="comment">% automated computation of regions from the 3 conditions on lines.</span>
+0169 <span class="comment">% Region indices are computed as follow:</span>
+0170 <span class="comment">%   IND = b2 * 2^2 + b1 * 2 + b0</span>
+0171 <span class="comment">% with:</span>
+0172 <span class="comment">%   b0 = 1 if s &lt; 0, 0 otherwise</span>
+0173 <span class="comment">%   b1 = 1 if t &lt; 0, 0 otherwise</span>
+0174 <span class="comment">%   b2 = 1 if s+t &gt; 1, 0 otherwise</span>
+0175 <span class="comment">% resulting ion the following region indices:</span>
+0176 <span class="comment">%        /\ t</span>
+0177 <span class="comment">%        |</span>
+0178 <span class="comment">%   \ R5 |</span>
+0179 <span class="comment">%    \   |</span>
+0180 <span class="comment">%     \  |</span>
+0181 <span class="comment">%      \ |</span>
+0182 <span class="comment">%       \| P3</span>
+0183 <span class="comment">%        *</span>
+0184 <span class="comment">%        |\</span>
+0185 <span class="comment">%        | \</span>
+0186 <span class="comment">%   R1   |  \   R4</span>
+0187 <span class="comment">%        |   \</span>
+0188 <span class="comment">%        | R0 \</span>
+0189 <span class="comment">%        |     \</span>
+0190 <span class="comment">%        | P1   \ P2</span>
+0191 <span class="comment">%  ------*-------*------&gt; s</span>
+0192 <span class="comment">%        |        \</span>
+0193 <span class="comment">%   R3   |   R2    \   R6</span>
+0194 
+0195 <span class="comment">% allocate memory for result</span>
+0196 nPoints = size(point, 1);
+0197 dist = zeros(nPoints, 1);
+0198 proj = zeros(nPoints, 3);
+0199 
+0200 <span class="comment">% triangle origins and direction vectors</span>
+0201 p1  = vertices(faces(:,1),:);
+0202 v12 = vertices(faces(:,2),:) - p1;
+0203 v13 = vertices(faces(:,3),:) - p1;
+0204 
+0205 <span class="comment">% identify coefficients of second order equation that do not depend on</span>
+0206 <span class="comment">% query point</span>
+0207 a = dot(v12, v12, 2);
+0208 b = dot(v12, v13, 2);
+0209 c = dot(v13, v13, 2);
+0210 
+0211 <span class="comment">% iterate on query points</span>
+0212 <span class="keyword">for</span> i = 1:nPoints
+0213     <span class="comment">% coefficients of second order equation that depend on query point</span>
+0214     diffP = bsxfun(@minus, p1, point(i, :));
+0215     d = dot(v12, diffP, 2);
+0216     e = dot(v13, diffP, 2);
+0217     
+0218     <span class="comment">% compute position of projected point in the plane of the triangle</span>
+0219     det = a .* c - b .* b;
+0220     s   = b .* e - c .* d;
+0221     t   = b .* d - a .* e;
+0222     
+0223     <span class="comment">% compute region index (one for each face)</span>
+0224     regIndex = (s &lt; 0) + 2 * (t &lt; 0) + 4 * (s + t &gt; det);
+0225     
+0226     <span class="comment">% for each region, process all faces whose projection fall within it</span>
+0227     
+0228     <span class="comment">% region 0</span>
+0229     <span class="comment">% the minimum distance occurs inside the triangle</span>
+0230     inds = regIndex == 0;
+0231     s(inds) = s(inds) ./ det(inds);
+0232     t(inds) = t(inds) ./ det(inds);
+0233     
+0234 
+0235     <span class="comment">% region 1 (formerly region 3)</span>
+0236     <span class="comment">% The minimum distance must occur on the line s = 0</span>
+0237     inds = find(regIndex == 1);
+0238     s(inds) = 0;
+0239     t(inds(e(inds) &gt;= 0)) = 0;
+0240     
+0241     inds2 = inds(e(inds) &lt; 0);
+0242     bool3 = c(inds2) &lt;= -e(inds2);
+0243     t(inds2(bool3)) = 1;
+0244     inds3 = inds2(~bool3);
+0245     t(inds3) = -e(inds3) ./ c(inds3);
+0246     
+0247     
+0248     <span class="comment">% region 2 (formerly region 5)</span>
+0249     <span class="comment">% The minimum distance must occur on the line t = 0</span>
+0250     inds = find(regIndex == 2);
+0251     t(inds) = 0;
+0252     s(inds(d(inds) &gt;= 0)) = 0;
+0253 
+0254     inds2 = inds(d(inds) &lt; 0);
+0255     bool3 = a(inds2) &lt;= -d(inds2);
+0256     s(inds2(bool3)) = 1;
+0257     inds3 = inds2(~bool3);
+0258     s(inds3) = -d(inds3) ./ a(inds3);
+0259 
+0260 
+0261     <span class="comment">% region 3 (formerly region 4)</span>
+0262     <span class="comment">% The minimum distance must occur</span>
+0263     <span class="comment">% * on the line t = 0</span>
+0264     <span class="comment">% * on the line s = 0 with t &gt;= 0</span>
+0265     <span class="comment">% * at the intersection of the two lines</span>
+0266     inds = find(regIndex == 3);
+0267     
+0268     inds2 = inds(d(inds) &lt; 0);
+0269     <span class="comment">% minimum on edge t = 0 with s &gt; 0.</span>
+0270     t(inds2) = 0;
+0271     bool3 = a(inds2) &lt;= -d(inds2);
+0272     s(inds2(bool3)) = 1;
+0273     inds3 = inds2(~bool3);
+0274     s(inds3) = -d(inds3) ./ a(inds3);
+0275       
+0276     inds2 = inds(d(inds) &gt;= 0);
+0277     <span class="comment">% minimum on edge s = 0</span>
+0278     s(inds2) = 0;
+0279     bool3 = e(inds2) &gt;= 0;
+0280     t(inds2(bool3)) = 0;
+0281     bool3 = e(inds2) &lt; 0 &amp; c(inds2) &lt;= e(inds2);
+0282     t(inds2(bool3)) = 1;
+0283     bool3 = e(inds2) &lt; 0 &amp; c(inds2) &gt; e(inds2);
+0284     inds3 = inds2(bool3);
+0285     t(inds3) = -e(inds3) ./ c(inds3);
+0286     
+0287 
+0288     <span class="comment">% region 4 (formerly region 1)</span>
+0289     <span class="comment">% The minimum distance must occur on the line s + t = 1</span>
+0290     inds = find(regIndex == 4);
+0291     numer = (c(inds) + e(inds)) - (b(inds) + d(inds));
+0292     s(inds(numer &lt;= 0)) = 0;
+0293     inds2 = inds(numer &gt; 0);
+0294     numer = numer(numer &gt; 0);
+0295     denom = a(inds2) - 2 * b(inds2) + c(inds2);
+0296     s(inds2(numer &gt; denom)) = 1;
+0297     bool3 = numer &lt;= denom;
+0298     s(inds2(bool3)) = numer(bool3) ./ denom(bool3);
+0299     t(inds) = 1 - s(inds);
+0300 
+0301 
+0302     <span class="comment">% Region 5 (formerly region 2)</span>
+0303     <span class="comment">% The minimum distance must occur:</span>
+0304     <span class="comment">% * on the line s + t = 1</span>
+0305     <span class="comment">% * on the line s = 0 with t &lt;= 1</span>
+0306     <span class="comment">% * or at the intersection of the two (s=0; t=1)</span>
+0307     inds = find(regIndex == 5);
+0308     tmp0 = b(inds) + d(inds);
+0309     tmp1 = c(inds) + e(inds);
+0310     
+0311     <span class="comment">% minimum on edge s+t = 1, with s &gt; 0</span>
+0312     bool2 = tmp1 &gt; tmp0;
+0313     inds2 = inds(bool2);
+0314     numer = tmp1(bool2) - tmp0(bool2);
+0315     denom = a(inds2) - 2 * b(inds2) + c(inds2);
+0316     bool3 = numer &lt; denom;
+0317     s(inds2(~bool3)) = 1;
+0318     inds3 = inds2(bool3);
+0319     s(inds3) = numer(bool3) ./ denom(bool3);
+0320     t(inds2) = 1 - s(inds2);
+0321     
+0322     <span class="comment">% minimum on edge s = 0, with t &lt;= 1</span>
+0323     inds2 = inds(~bool2);
+0324     s(inds2) = 0;
+0325     t(inds2(tmp1(~bool2) &lt;= 0)) = 1;
+0326     t(inds2(tmp1(~bool2) &gt; 0 &amp; e(inds2) &gt;= 0)) = 0;
+0327     inds3 = inds2(tmp1(~bool2) &gt; 0 &amp; e(inds2) &lt; 0);
+0328     t(inds3) = -e(inds3) ./ c(inds3);
+0329 
+0330         
+0331     <span class="comment">% region 6 (formerly region 6)</span>
+0332     <span class="comment">% The minimum distance must occur</span>
+0333     <span class="comment">% * on the line s + t = 1</span>
+0334     <span class="comment">% * on the line t = 0, with s &lt;= 1</span>
+0335     <span class="comment">% * at the intersection of the two lines (s=1; t=0)</span>
+0336     inds = find(regIndex == 6);
+0337     tmp0 = b(inds) + e(inds);
+0338     tmp1 = a(inds) + d(inds);
+0339     
+0340     <span class="comment">% minimum on edge s+t=1, with t &gt; 0</span>
+0341     bool2 = tmp1 &gt; tmp0;
+0342     inds2 = inds(bool2);
+0343     numer = tmp1(bool2) - tmp0(bool2);
+0344     denom = a(inds2) - 2 * b(inds2) + c(inds2);
+0345     bool3 = numer &lt;= denom;
+0346     t(inds2(~bool3)) = 1;
+0347     inds3 = inds2(bool3);
+0348     t(inds3) = numer(bool3) ./ denom(bool3);
+0349     s(inds2) = 1 - t(inds2);
+0350 
+0351     <span class="comment">% minimum on edge t = 0 with s &lt;= 1</span>
+0352     inds2 = inds(~bool2);
+0353     t(inds2) = 0;
+0354     s(inds2(tmp1(~bool2) &lt;= 0)) = 1;
+0355     s(inds2(tmp1(~bool2) &gt; 0 &amp; d(inds2) &gt;= 0)) = 0;
+0356     inds3 = inds2(tmp1(~bool2) &gt; 0 &amp; d(inds2) &lt; 0);
+0357     s(inds3) = -d(inds3) ./ a(inds3);
+0358     
+0359 
+0360     <span class="comment">% compute coordinates of closest point on plane</span>
+0361     projList = p1 + bsxfun(@times, s, v12) + bsxfun(@times, t, v13);
+0362     
+0363     <span class="comment">% squared distance between point and closest point on plane</span>
+0364     [dist(i), ind] = min(sum((bsxfun(@minus, point(i,:), projList)).^2, 2));
+0365 
+0366     <span class="comment">% keep the valid projection</span>
+0367     proj(i, :) = projList(ind,:);
+0368 <span class="keyword">end</span>
+0369 
+0370 <span class="comment">% convert squared distance to distance</span>
+0371 dist = sqrt(dist);
+0372 
+0373 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

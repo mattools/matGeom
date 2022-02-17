@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawAxis3d</title>
+  <meta name="keywords" content="drawAxis3d">
+  <meta name="description" content="DRAWAXIS3D Draw a coordinate system and an origin.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; drawAxis3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawAxis3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWAXIS3D Draw a coordinate system and an origin.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawAxis3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWAXIS3D Draw a coordinate system and an origin.
+
+   drawAxis3d
+    Adds three 3D arrows to the current axis, corresponding to the 
+    directions of the 3 basis vectors Ox, Oy and Oz.
+    Ox vector is red, Oy vector is green, and Oz vector is blue.
+
+   drawAxis3d(L, R)
+   Specifies the length L and the radius of the cylinders representing the
+   different axes.
+   
+   drawAxis3d(..., 'TFM', TRANSFORM)
+   Transforms the coordinate system before drawing using TRANSFORM.
+
+   H = drawAxis3d(...) returns the group handle of the axis object.
+
+   Example
+   drawAxis3d
+
+   figure;
+   drawAxis3d(20, 1);
+   view([135,15]); lighting('phong'); camlight('head'); axis('equal')
+   xlabel X; ylabel Y; zlabel Z
+
+   See also
+   <a href="drawAxisCube.html" class="code" title="function p = drawAxisCube(varargin)">drawAxisCube</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@nantes.inra.fr
+ Created: 2007-08-14,    using Matlab 7.4.0.287 (R2007a)
+ Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawArrow3d.html" class="code" title="function varargout = drawArrow3d(pos, vec, varargin)">drawArrow3d</a>	DRAWARROW3D plot a quiver of 3D arrows.</li><li><a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a>	DRAWSPHERE Draw a sphere as a mesh.</li><li><a href="isTransform3d.html" class="code" title="function a = isTransform3d(trans, varargin)">isTransform3d</a>	ISTRANSFORM3D Check if input is a affine transformation matrix.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li><li><a href="transformVector3d.html" class="code" title="function varargout = transformVector3d(varargin)">transformVector3d</a>	TRANSFORMVECTOR3D Transform a vector with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawAxis3d(varargin)</a>
+0002 <span class="comment">%DRAWAXIS3D Draw a coordinate system and an origin.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawAxis3d</span>
+0005 <span class="comment">%    Adds three 3D arrows to the current axis, corresponding to the</span>
+0006 <span class="comment">%    directions of the 3 basis vectors Ox, Oy and Oz.</span>
+0007 <span class="comment">%    Ox vector is red, Oy vector is green, and Oz vector is blue.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   drawAxis3d(L, R)</span>
+0010 <span class="comment">%   Specifies the length L and the radius of the cylinders representing the</span>
+0011 <span class="comment">%   different axes.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   drawAxis3d(..., 'TFM', TRANSFORM)</span>
+0014 <span class="comment">%   Transforms the coordinate system before drawing using TRANSFORM.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   H = drawAxis3d(...) returns the group handle of the axis object.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   Example</span>
+0019 <span class="comment">%   drawAxis3d</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   figure;</span>
+0022 <span class="comment">%   drawAxis3d(20, 1);</span>
+0023 <span class="comment">%   view([135,15]); lighting('phong'); camlight('head'); axis('equal')</span>
+0024 <span class="comment">%   xlabel X; ylabel Y; zlabel Z</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%   See also</span>
+0027 <span class="comment">%   drawAxisCube</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">% ------</span>
+0030 <span class="comment">% Author: David Legland</span>
+0031 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0032 <span class="comment">% Created: 2007-08-14,    using Matlab 7.4.0.287 (R2007a)</span>
+0033 <span class="comment">% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0034 
+0035 <span class="comment">% Check if axes handle is specified</span>
+0036 hAx = gca;
+0037 <span class="keyword">if</span> ~isempty(varargin)
+0038     <span class="keyword">if</span> isAxisHandle(varargin{1})
+0039         hAx = varargin{1};
+0040         varargin(1)=[];
+0041     <span class="keyword">end</span>
+0042 <span class="keyword">end</span>
+0043 
+0044 <span class="comment">% Parsing</span>
+0045 p = inputParser;
+0046 addOptional(p,<span class="string">'L'</span>,1, @(x)validateattributes(x,{<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0047     {<span class="string">'scalar'</span>,<span class="string">'nonempty'</span>,<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'positive'</span>,<span class="string">'nonnan'</span>}));
+0048 addOptional(p,<span class="string">'R'</span>,[], @(x)validateattributes(x,{<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0049     {<span class="string">'scalar'</span>,<span class="string">'nonempty'</span>,<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'positive'</span>,<span class="string">'nonnan'</span>}));
+0050 addParameter(p,<span class="string">'TFM'</span>,eye(4), @<a href="isTransform3d.html" class="code" title="function a = isTransform3d(trans, varargin)">isTransform3d</a>);
+0051 parse(p,varargin{:});
+0052 
+0053 L = p.Results.L;
+0054 R = p.Results.R;
+0055 <span class="keyword">if</span> isempty(R)
+0056     R=L/10;
+0057 <span class="keyword">elseif</span> R/L &gt; 0.1
+0058     R = (0.1-eps)*L;
+0059     warning(<span class="string">'Value of R is invalid and was ignored!'</span>)
+0060 <span class="keyword">end</span>
+0061 TFM = p.Results.TFM;
+0062 
+0063 <span class="comment">% geometrical data</span>
+0064 origin = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(zeros(3,3), TFM);
+0065 vector = <a href="transformVector3d.html" class="code" title="function varargout = transformVector3d(varargin)">transformVector3d</a>(eye(3,3), TFM);
+0066 color = eye(3,3);
+0067 
+0068 <span class="comment">% draw three arrows and a ball</span>
+0069 hold on;
+0070 sh=<a href="drawArrow3d.html" class="code" title="function varargout = drawArrow3d(pos, vec, varargin)">drawArrow3d</a>(hAx, origin, vector*L, color, <span class="string">'arrowRadius'</span>, R/L);
+0071 sh(4)=<a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a>(hAx,[origin(1,:) 2*R], <span class="string">'faceColor'</span>, <span class="string">'black'</span>);
+0072 gh = hggroup(hAx);
+0073 set(sh,<span class="string">'Parent'</span>,gh)
+0074 
+0075 <span class="keyword">if</span> nargout &gt; 0
+0076     varargout = {gh};
+0077 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of isBelowPlane</title>
+  <meta name="keywords" content="isBelowPlane">
+  <meta name="description" content="ISBELOWPLANE Test whether a point is below or above a plane.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; isBelowPlane.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>isBelowPlane
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ISBELOWPLANE Test whether a point is below or above a plane.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function below = isBelowPlane(point, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ISBELOWPLANE Test whether a point is below or above a plane.
+
+   BELOW = isBelowPlane(POINT, PLANE)
+   where POINT is given as coordinate row vector [XP YP ZP], and PLANE is
+   given as a row containing initial point and 2 direction vectors, 
+   return TRUE if POINT lie below PLANE.
+
+   Example
+   isBelowPlane([1 1 1], createPlane([1 2 3], [1 1 1]))
+   ans =
+       1
+   isBelowPlane([3 3 3], createPlane([1 2 3], [1 1 1]))
+   ans =
+       0
+
+   See also
+   <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>, <a href="points3d.html" class="code" title="function points3d(varargin)">points3d</a>, <a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>, <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2007-01-05
+ Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>	Return the position of a 3D point projected on a 3D line.</li><li><a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>	PLANENORMAL Compute the normal to a plane.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="clipConvexPolygon3dHP.html" class="code" title="function poly2 = clipConvexPolygon3dHP(poly, plane)">clipConvexPolygon3dHP</a>	CLIPCONVEXPOLYGON3DHP Clip a convex 3D polygon with Half-space.</li><li><a href="clipPoints3d.html" class="code" title="function varargout = clipPoints3d(points, shape, varargin)">clipPoints3d</a>	CLIPPOINTS3D Clip a set of points by a box or other 3d shapes.</li><li><a href="clipPolygon3dHP.html" class="code" title="function poly2 = clipPolygon3dHP(poly, plane)">clipPolygon3dHP</a>	CLIPPOLYGON3DHP clip a 3D polygon with Half-space.</li><li><a href="../../matGeom/meshes3d/clipConvexPolyhedronHP.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronHP(nodes, faces, plane)">clipConvexPolyhedronHP</a>	CLIPCONVEXPOLYHEDRONHP Clip a convex polyhedron by a plane.</li><li><a href="../../matGeom/meshes3d/cutMeshByPlane.html" class="code" title="function varargout = cutMeshByPlane(v, f, plane, varargin)">cutMeshByPlane</a>	CUTMESHBYPLANE Cut a mesh by a plane.</li><li><a href="../../matGeom/meshes3d/intersectPlaneMesh.html" class="code" title="function polys = intersectPlaneMesh(plane, v, f)">intersectPlaneMesh</a>	Compute the polygons resulting from plane-mesh intersection.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function below = isBelowPlane(point, varargin)</a>
+0002 <span class="comment">%ISBELOWPLANE Test whether a point is below or above a plane.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   BELOW = isBelowPlane(POINT, PLANE)</span>
+0005 <span class="comment">%   where POINT is given as coordinate row vector [XP YP ZP], and PLANE is</span>
+0006 <span class="comment">%   given as a row containing initial point and 2 direction vectors,</span>
+0007 <span class="comment">%   return TRUE if POINT lie below PLANE.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   Example</span>
+0010 <span class="comment">%   isBelowPlane([1 1 1], createPlane([1 2 3], [1 1 1]))</span>
+0011 <span class="comment">%   ans =</span>
+0012 <span class="comment">%       1</span>
+0013 <span class="comment">%   isBelowPlane([3 3 3], createPlane([1 2 3], [1 1 1]))</span>
+0014 <span class="comment">%   ans =</span>
+0015 <span class="comment">%       0</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   See also</span>
+0018 <span class="comment">%   planes3d, points3d, linePosition3d, planePosition</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">% ------</span>
+0021 <span class="comment">% Author: David Legland</span>
+0022 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0023 <span class="comment">% Created: 2007-01-05</span>
+0024 <span class="comment">% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0025 
+0026 <span class="keyword">if</span> length(varargin)==1
+0027     plane = varargin{1};
+0028 <span class="keyword">elseif</span> length(varargin)==2
+0029     plane = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(varargin{1}, varargin{2});
+0030 <span class="keyword">end</span>
+0031 
+0032 <span class="comment">% ensure same dimension for parameters</span>
+0033 <span class="keyword">if</span> size(point, 1)==1
+0034     point = repmat(point, [size(plane, 1) 1]);
+0035 <span class="keyword">end</span>
+0036 <span class="keyword">if</span> size(plane, 1)==1
+0037     plane = repmat(plane, [size(point, 1) 1]);
+0038 <span class="keyword">end</span>
+0039     
+0040 <span class="comment">% compute position of point projected on 3D line corresponding to plane</span>
+0041 <span class="comment">% normal, and returns true for points locatd below the plane (pos&lt;=0).</span>
+0042 below = <a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>(point, [plane(:, 1:3) <a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>(plane)]) &lt;= 0;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createScaling3d</title>
+  <meta name="keywords" content="createScaling3d">
+  <meta name="description" content="CREATESCALING3D Create the 4x4 matrix of a 3D scaling.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; createScaling3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createScaling3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATESCALING3D Create the 4x4 matrix of a 3D scaling.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function trans = createScaling3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATESCALING3D Create the 4x4 matrix of a 3D scaling.
+
+   TRANS = createScaling3d(S);
+   returns the scaling transform corresponding to a scaling factor S in
+   each direction. S can be a scalar, or a 1-by-3 vector containing the
+   scaling factor in each direction.
+
+   TRANS = createScaling3d(SX, SY, SZ);
+   returns the scaling transform corresponding to a different scaling
+   factor in each direction.
+
+   The returned matrix has the form :
+   [SX  0  0  0]
+   [ 0 SY  0  0]
+   [ 0  0 SZ  0]
+   [ 0  0  0  0]
+
+   See also:
+   <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>, <a href="transformVector3d.html" class="code" title="function varargout = transformVector3d(varargin)">transformVector3d</a>, <a href="createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>,
+   <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>, <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>, <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawCube.html" class="code" title="function varargout = drawCube(cube, varargin)">drawCube</a>	Draw a 3D centered cube, eventually rotated.</li><li><a href="drawCuboid.html" class="code" title="function varargout = drawCuboid(cuboid, varargin)">drawCuboid</a>	Draw a 3D cuboid, eventually rotated.</li><li><a href="drawEllipsoid.html" class="code" title="function varargout = drawEllipsoid(elli, varargin)">drawEllipsoid</a>	DRAWELLIPSOID Draw a 3D ellipsoid.</li><li><a href="isPointInEllipsoid.html" class="code" title="function b = isPointInEllipsoid(point, elli, varargin)">isPointInEllipsoid</a>	Check if a point is located inside a 3D ellipsoid.</li><li><a href="../../matGeom/meshes3d/createDurerPolyhedron.html" class="code" title="function varargout = createDurerPolyhedron(varargin)">createDurerPolyhedron</a>	CREATEDURERPOLYHEDRON  Create a mesh representing Durer's polyhedron .</li><li><a href="../../matGeom/meshes3d/ellipsoidMesh.html" class="code" title="function varargout = ellipsoidMesh(elli, varargin)">ellipsoidMesh</a>	ELLIPSOIDMESH Convert a 3D ellipsoid to face-vertex mesh representation.</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function [sx, sy, sz] = parseScalingFactors(var)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function trans = createScaling3d(varargin)</a>
+0002 <span class="comment">%CREATESCALING3D Create the 4x4 matrix of a 3D scaling.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   TRANS = createScaling3d(S);</span>
+0005 <span class="comment">%   returns the scaling transform corresponding to a scaling factor S in</span>
+0006 <span class="comment">%   each direction. S can be a scalar, or a 1-by-3 vector containing the</span>
+0007 <span class="comment">%   scaling factor in each direction.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   TRANS = createScaling3d(SX, SY, SZ);</span>
+0010 <span class="comment">%   returns the scaling transform corresponding to a different scaling</span>
+0011 <span class="comment">%   factor in each direction.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   The returned matrix has the form :</span>
+0014 <span class="comment">%   [SX  0  0  0]</span>
+0015 <span class="comment">%   [ 0 SY  0  0]</span>
+0016 <span class="comment">%   [ 0  0 SZ  0]</span>
+0017 <span class="comment">%   [ 0  0  0  0]</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   See also:</span>
+0020 <span class="comment">%   transforms3d, transformPoint3d, transformVector3d, createTranslation3d,</span>
+0021 <span class="comment">%   createRotationOx, createRotationOy, createRotationOz</span>
+0022 
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   ---------</span>
+0025 <span class="comment">%   author : David Legland</span>
+0026 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0027 <span class="comment">%   created the 20/04/2006.</span>
+0028 <span class="comment">%</span>
+0029 
+0030 <span class="comment">%   HISTORY</span>
+0031 <span class="comment">%   25/11/2008 rename from scale3d to scaling3d</span>
+0032 <span class="comment">%   30/04/2009 rename to createScaling3d</span>
+0033 
+0034 
+0035 <span class="comment">%% default arguments</span>
+0036 sx = 1;
+0037 sy = 1;
+0038 sz = 1;
+0039 center = [0 0 0];
+0040 
+0041 <span class="comment">%% process input parameters</span>
+0042 <span class="keyword">if</span> nargin == 1
+0043     <span class="comment">% only one argument -&gt; scaling factor</span>
+0044     [sx, sy, sz]= <a href="#_sub1" class="code" title="subfunction [sx, sy, sz] = parseScalingFactors(var)">parseScalingFactors</a>(varargin{1});
+0045     
+0046 <span class="keyword">elseif</span> nargin == 2
+0047     <span class="comment">% 2 arguments, giving center and uniform scaling</span>
+0048     center = varargin{1};
+0049     [sx, sy, sz]= <a href="#_sub1" class="code" title="subfunction [sx, sy, sz] = parseScalingFactors(var)">parseScalingFactors</a>(varargin{2});
+0050 
+0051 <span class="keyword">elseif</span> nargin == 3
+0052     <span class="comment">% 3 arguments, giving scaling in each direction</span>
+0053     sx = varargin{1};
+0054     sy = varargin{2};
+0055     sz = varargin{3};
+0056     
+0057 <span class="keyword">elseif</span> nargin == 4
+0058     <span class="comment">% 4 arguments, giving center and scaling in each direction</span>
+0059     center = varargin{1};
+0060     sx = varargin{2};
+0061     sy = varargin{3};
+0062     sz = varargin{4};
+0063 <span class="keyword">end</span>
+0064 
+0065 <span class="comment">%% create the scaling matrix</span>
+0066 trans = [<span class="keyword">...</span>
+0067     sx 0 0 center(1)*(1-sx);<span class="keyword">...</span>
+0068     0 sy 0 center(2)*(1-sy);<span class="keyword">...</span>
+0069     0 0 sz center(3)*(1-sz);<span class="keyword">...</span>
+0070     0 0 0 1];
+0071 
+0072 <span class="comment">%% Helper function</span>
+0073 <a name="_sub1" href="#_subfunctions" class="code">function [sx, sy, sz] = parseScalingFactors(var)</a>
+0074 
+0075 <span class="keyword">if</span> length(var)==1
+0076     <span class="comment">% same scaling factor in each direction</span>
+0077     sx = var;
+0078     sy = var;
+0079     sz = var;
+0080 <span class="keyword">elseif</span> length(var)==3
+0081     <span class="comment">% scaling is a vector, giving different scaling in each direction</span>
+0082     sx = var(1);
+0083     sy = var(2);
+0084     sz = var(3);
+0085 <span class="keyword">else</span>
+0086     error(<span class="string">'wrong size for first parameter of &quot;createScaling3d&quot;'</span>);
+0087 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of cubicBezierToPolyline</title>
+  <meta name="keywords" content="cubicBezierToPolyline">
+  <meta name="description" content="CUBICBEZIERTOPOLYLINE Compute equivalent polyline from bezier curve control.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; cubicBezierToPolyline.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>cubicBezierToPolyline
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CUBICBEZIERTOPOLYLINE Compute equivalent polyline from bezier curve control.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = cubicBezierToPolyline(points, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CUBICBEZIERTOPOLYLINE Compute equivalent polyline from bezier curve control.
+
+   POLY = cubicBezierToPolyline(POINTS, N)
+   Creates a polyline with N edges from the coordinates of the 4 control
+   points stored in POINTS. 
+   POINTS is either a 4-by-2 array (vertical concatenation of point
+   coordinates), or a 1-by-8 array (horizontal concatenation of point
+   coordinates). 
+   The result is a (N-1)-by-2 array.
+
+   POLY = cubicBezierToPolyline(POINTS)
+   Assumes N = 64 edges as default.
+
+   [X Y] = cubicBezierToPolyline(...)
+   Returns the result in two separate arrays for X and Y coordinates.
+
+
+   Example
+     poly = cubicBezierToPolyline([0 0;5 10;10 5;10 0], 100);
+     drawPolyline(poly, 'linewidth', 2, 'color', 'g');
+
+   See also
+     <a href="drawBezierCurve.html" class="code" title="function varargout = drawBezierCurve(points, varargin)">drawBezierCurve</a>, drawPolyline
+
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2011-10-06,    using Matlab 7.9.0.529 (R2009b)
+ Copyright 2011 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawBezierCurve.html" class="code" title="function varargout = drawBezierCurve(points, varargin)">drawBezierCurve</a>	DRAWBEZIERCURVE Draw a cubic bezier curve defined by 4 control points.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = cubicBezierToPolyline(points, varargin)</a>
+0002 <span class="comment">%CUBICBEZIERTOPOLYLINE Compute equivalent polyline from bezier curve control.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POLY = cubicBezierToPolyline(POINTS, N)</span>
+0005 <span class="comment">%   Creates a polyline with N edges from the coordinates of the 4 control</span>
+0006 <span class="comment">%   points stored in POINTS.</span>
+0007 <span class="comment">%   POINTS is either a 4-by-2 array (vertical concatenation of point</span>
+0008 <span class="comment">%   coordinates), or a 1-by-8 array (horizontal concatenation of point</span>
+0009 <span class="comment">%   coordinates).</span>
+0010 <span class="comment">%   The result is a (N-1)-by-2 array.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   POLY = cubicBezierToPolyline(POINTS)</span>
+0013 <span class="comment">%   Assumes N = 64 edges as default.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   [X Y] = cubicBezierToPolyline(...)</span>
+0016 <span class="comment">%   Returns the result in two separate arrays for X and Y coordinates.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   Example</span>
+0020 <span class="comment">%     poly = cubicBezierToPolyline([0 0;5 10;10 5;10 0], 100);</span>
+0021 <span class="comment">%     drawPolyline(poly, 'linewidth', 2, 'color', 'g');</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   See also</span>
+0024 <span class="comment">%     drawBezierCurve, drawPolyline</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">% ------</span>
+0028 <span class="comment">% Author: David Legland</span>
+0029 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0030 <span class="comment">% Created: 2011-10-06,    using Matlab 7.9.0.529 (R2009b)</span>
+0031 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0032 
+0033 <span class="comment">% default number of discretization steps</span>
+0034 N = 64;
+0035 
+0036 <span class="comment">% check if discretization step is specified</span>
+0037 <span class="keyword">if</span> ~isempty(varargin)
+0038     var = varargin{1};
+0039     <span class="keyword">if</span> length(var) == 1 &amp;&amp; isnumeric(var)
+0040         N = round(var);
+0041     <span class="keyword">end</span>
+0042 <span class="keyword">end</span>
+0043 
+0044 <span class="comment">% parametrization variable for bezier (use N+1 points to have N edges)</span>
+0045 t = linspace(0, 1, N+1)';
+0046 
+0047 <span class="comment">% rename points</span>
+0048 <span class="keyword">if</span> size(points, 2)==2
+0049     <span class="comment">% case of points given as a 4-by-2 array</span>
+0050     p1 = points(1,:);
+0051     c1 = points(2,:);
+0052     c2 = points(3,:);
+0053     p2 = points(4,:);
+0054 <span class="keyword">else</span>
+0055     <span class="comment">% case of points given as a 1-by-8 array, [X1 Y1 CX1 CX2..]</span>
+0056     p1 = points(1:2);
+0057     c1 = points(3:4);
+0058     c2 = points(5:6);
+0059     p2 = points(7:8);
+0060 <span class="keyword">end</span>    
+0061 
+0062 <span class="comment">% compute coefficients of Bezier Polynomial, using polyval ordering</span>
+0063 coef(4, 1) = p1(1);
+0064 coef(4, 2) = p1(2);
+0065 coef(3, 1) = 3 * c1(1) - 3 * p1(1);
+0066 coef(3, 2) = 3 * c1(2) - 3 * p1(2);
+0067 coef(2, 1) = 3 * p1(1) - 6 * c1(1) + 3 * c2(1);
+0068 coef(2, 2) = 3 * p1(2) - 6 * c1(2) + 3 * c2(2);
+0069 coef(1, 1) = p2(1) - 3 * c2(1) + 3 * c1(1) - p1(1);
+0070 coef(1, 2) = p2(2) - 3 * c2(2) + 3 * c1(2) - p1(2); 
+0071 
+0072 <span class="comment">% compute position of vertices</span>
+0073 x = polyval(coef(:, 1), t);
+0074 y = polyval(coef(:, 2), t);
+0075 
+0076 <span class="keyword">if</span> nargout &lt;= 1
+0077     varargout = {[x y]};
+0078 <span class="keyword">else</span>
+0079     varargout = {x, y};
+0080 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

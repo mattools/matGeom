@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of circles2d</title>
+  <meta name="keywords" content="circles2d">
+  <meta name="description" content="CIRCLES2D Description of functions operating on circles.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; circles2d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>circles2d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CIRCLES2D Description of functions operating on circles.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function circles2d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CIRCLES2D Description of functions operating on circles.
+
+   Circles are represented by their center and their radius:
+   C = [xc yc r];
+   One sometimes considers orientation of circle, by adding an extra
+   boolean value in 4-th position, with value TRUE for direct (i.e.
+   turning Counter-clockwise) circles.
+
+   Circle arcs are represented by their center, their radius, the starting
+   angle and the angle extent, both in degrees:
+   CA = [xc yc r theta0 dtheta];
+   
+   Ellipses are represented by their center, their 2 semi-axis length, and
+   their angle (in degrees) with Ox direction.
+   E = [xc yc A B theta];
+
+   See also:
+   <a href="ellipses2d.html" class="code" title="function ellipses2d(varargin)">ellipses2d</a>, <a href="createCircle.html" class="code" title="function circle = createCircle(varargin)">createCircle</a>, <a href="createDirectedCircle.html" class="code" title="function circle = createDirectedCircle(varargin)">createDirectedCircle</a>,
+   <a href="isPointInCircle.html" class="code" title="function b = isPointInCircle(point, circle, varargin)">isPointInCircle</a>, <a href="isPointOnCircle.html" class="code" title="function b = isPointOnCircle(point, circle, varargin)">isPointOnCircle</a>, <a href="enclosingCircle.html" class="code" title="function circle = enclosingCircle(pts)">enclosingCircle</a>, <a href="circumCircle.html" class="code" title="function varargout = circumCircle(varargin)">circumCircle</a>
+   <a href="intersectLineCircle.html" class="code" title="function points = intersectLineCircle(line, circle)">intersectLineCircle</a>, <a href="intersectCircles.html" class="code" title="function points = intersectCircles(circle1, circle2)">intersectCircles</a>, <a href="radicalAxis.html" class="code" title="function line = radicalAxis(circle1, circle2)">radicalAxis</a>
+   <a href="circleToPolygon.html" class="code" title="function varargout = circleToPolygon(circle, varargin)">circleToPolygon</a>, <a href="circleArcToPolyline.html" class="code" title="function varargout = circleArcToPolyline(arc, N)">circleArcToPolyline</a>
+   <a href="drawCircle.html" class="code" title="function varargout = drawCircle(varargin)">drawCircle</a>, <a href="drawCircleArc.html" class="code" title="function varargout = drawCircleArc(varargin)">drawCircleArc</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
+ Copyright 2010 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function circles2d(varargin)</a>
+0002 <span class="comment">%CIRCLES2D Description of functions operating on circles.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   Circles are represented by their center and their radius:</span>
+0005 <span class="comment">%   C = [xc yc r];</span>
+0006 <span class="comment">%   One sometimes considers orientation of circle, by adding an extra</span>
+0007 <span class="comment">%   boolean value in 4-th position, with value TRUE for direct (i.e.</span>
+0008 <span class="comment">%   turning Counter-clockwise) circles.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Circle arcs are represented by their center, their radius, the starting</span>
+0011 <span class="comment">%   angle and the angle extent, both in degrees:</span>
+0012 <span class="comment">%   CA = [xc yc r theta0 dtheta];</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   Ellipses are represented by their center, their 2 semi-axis length, and</span>
+0015 <span class="comment">%   their angle (in degrees) with Ox direction.</span>
+0016 <span class="comment">%   E = [xc yc A B theta];</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   See also:</span>
+0019 <span class="comment">%   ellipses2d, createCircle, createDirectedCircle,</span>
+0020 <span class="comment">%   isPointInCircle, isPointOnCircle, enclosingCircle, circumCircle</span>
+0021 <span class="comment">%   intersectLineCircle, intersectCircles, radicalAxis</span>
+0022 <span class="comment">%   circleToPolygon, circleArcToPolyline</span>
+0023 <span class="comment">%   drawCircle, drawCircleArc</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">% ------</span>
+0026 <span class="comment">% Author: David Legland</span>
+0027 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0028 <span class="comment">% Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)</span>
+0029 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0030 
+0031 help(<span class="string">'circles2d'</span>);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

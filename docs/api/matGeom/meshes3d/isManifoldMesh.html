@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of isManifoldMesh</title>
+  <meta name="keywords" content="isManifoldMesh">
+  <meta name="description" content="ISMANIFOLDMESH Check whether the input mesh may be considered as manifold.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; isManifoldMesh.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>isManifoldMesh
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ISMANIFOLDMESH Check whether the input mesh may be considered as manifold.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [b1, b2] = isManifoldMesh(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ISMANIFOLDMESH Check whether the input mesh may be considered as manifold.
+
+   B = isManifoldMesh(V, F)
+   B = isManifoldMesh(V, E, F)
+   Checks if the specified mesh is a manifold. When mesh is a manifold,
+   all edges are connected to either 2 or 1 faces.
+
+   [B, HASBORDER] = isManifoldMesh(V, E, F)
+   Also checks whether the mesh contains border faces. Border faces
+   contains at least one edge which is ajacent to only one face.
+
+   Example
+     [V, F] = createOctahedron;
+     isManifoldMesh(V, F)
+     ans =
+       logical
+        1
+
+   See also
+     meshes3d, <a href="ensureManifoldMesh.html" class="code" title="function varargout = ensureManifoldMesh(varargin)">ensureManifoldMesh</a>, <a href="trimMesh.html" class="code" title="function varargout = trimMesh(varargin)">trimMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>	MESHEDGES Computes array of edge vertex indices from face array.</li><li><a href="meshFaceEdges.html" class="code" title="function FE = meshFaceEdges(vertices, edges, faces)">meshFaceEdges</a>	MESHFACEEDGES Computes edge indices of each face.</li><li><a href="trimeshEdgeFaces.html" class="code" title="function edgeFaces = trimeshEdgeFaces(faces, varargin)">trimeshEdgeFaces</a>	TRIMESHEDGEFACES Compute index of faces adjacent to each edge of a triangular mesh.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [b1, b2] = isManifoldMesh(varargin)</a>
+0002 <span class="comment">%ISMANIFOLDMESH Check whether the input mesh may be considered as manifold.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   B = isManifoldMesh(V, F)</span>
+0005 <span class="comment">%   B = isManifoldMesh(V, E, F)</span>
+0006 <span class="comment">%   Checks if the specified mesh is a manifold. When mesh is a manifold,</span>
+0007 <span class="comment">%   all edges are connected to either 2 or 1 faces.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   [B, HASBORDER] = isManifoldMesh(V, E, F)</span>
+0010 <span class="comment">%   Also checks whether the mesh contains border faces. Border faces</span>
+0011 <span class="comment">%   contains at least one edge which is ajacent to only one face.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   Example</span>
+0014 <span class="comment">%     [V, F] = createOctahedron;</span>
+0015 <span class="comment">%     isManifoldMesh(V, F)</span>
+0016 <span class="comment">%     ans =</span>
+0017 <span class="comment">%       logical</span>
+0018 <span class="comment">%        1</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   See also</span>
+0021 <span class="comment">%     meshes3d, ensureManifoldMesh, trimMesh</span>
+0022  
+0023 <span class="comment">% ------</span>
+0024 <span class="comment">% Author: David Legland</span>
+0025 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0026 <span class="comment">% Created: 2019-01-31,    using Matlab 9.5.0.944444 (R2018b)</span>
+0027 <span class="comment">% Copyright 2019 INRA - Cepia Software Platform.</span>
+0028 
+0029 vertices = varargin{1};
+0030 faces = varargin{2};
+0031 
+0032 <span class="comment">% compute edge to vertex array</span>
+0033 <span class="keyword">if</span> nargin == 3
+0034     edges = faces;
+0035     faces = varargin{3};
+0036 <span class="keyword">else</span>
+0037     <span class="comment">% compute edge to vertex array</span>
+0038     edges = <a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>(faces);
+0039 <span class="keyword">end</span>
+0040 
+0041 
+0042 <span class="comment">% compute face to edge indices array</span>
+0043 <span class="comment">% as a nFaces-by-3 array (each face connected to exactly three edges)</span>
+0044 faceEdgeInds = <a href="meshFaceEdges.html" class="code" title="function FE = meshFaceEdges(vertices, edges, faces)">meshFaceEdges</a>(vertices, edges, faces);
+0045 
+0046 <span class="comment">% compute number of faces incident each edge</span>
+0047 edgeFaces = <a href="trimeshEdgeFaces.html" class="code" title="function edgeFaces = trimeshEdgeFaces(faces, varargin)">trimeshEdgeFaces</a>(faces);
+0048 edgeFaceDegrees = sum(edgeFaces &gt; 0, 2);
+0049 
+0050 <span class="comment">% for each face, concatenate the face degree of each edge</span>
+0051 faceEdgeDegrees = zeros(size(faces, 1), 3);
+0052 <span class="keyword">for</span> iFace = 1:size(faces, 1)
+0053     edgeInds = faceEdgeInds{iFace};
+0054     faceEdgeDegrees(iFace, :) = edgeFaceDegrees(edgeInds);
+0055 <span class="keyword">end</span>
+0056 
+0057 regFaces = sum(ismember(faceEdgeDegrees, [1 2]), 2) == 3;
+0058 innerFaces = sum(faceEdgeDegrees == 2, 2) == 3;
+0059 borderFaces = regFaces &amp; ~innerFaces;
+0060 
+0061 <span class="comment">% check if mesh is manifold: all faces are either regular or border</span>
+0062 b1 = all(regFaces);
+0063 
+0064 <span class="comment">% check if some faces are border</span>
+0065 b2 = any(borderFaces);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

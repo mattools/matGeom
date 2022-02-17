@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createBasisTransform3d</title>
+  <meta name="keywords" content="createBasisTransform3d">
+  <meta name="description" content="CREATEBASISTRANSFORM3D Compute matrix for transforming a basis into another basis.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; createBasisTransform3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createBasisTransform3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATEBASISTRANSFORM3D Compute matrix for transforming a basis into another basis.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function transfo = createBasisTransform3d(source, target) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATEBASISTRANSFORM3D Compute matrix for transforming a basis into another basis.
+
+   TRANSFO = createBasisTransform3d(SOURCE, TARGET) will create a 4-by-4
+   transformation matrix representing the transformation from SOURCE basis
+   to TARGET basis. 
+    SOURCE and TARGET are either standard 1-by-9 geom3d PLANE
+    representations of the form: [x0 y0 z0  ex1 ey1 ez1  ex2 ey2 ez2]
+     OR
+    SOURCE and TARGET may be any string such as 'global' or 'g' in which
+    case they represent the global plane [0 0 0 1 0 0 0 1 0].
+
+   The resulting TRANSFO matrix is such that a point expressed with
+   coordinates of the first basis will be represented by new coordinates
+   P2 = transformPoint3d(P1, TRANSFO) in the target basis.
+
+   Either (or both) SOURCE or TARGET may be an N-by-9 set of N planes. In
+   that case, TRANSFO will be a 4-by-4-by-N array of N transformation
+   matrices.
+
+   Example:
+     % Calculate local plane coords. of a point given in global coords.
+     plane = [10 10 10  1 0 0  0 1 0];
+     transfo = createBasisTransform3d('global', plane);
+     PT_IN_PLANE = transformPoint3d([3 8 2], transfo)
+     PT_IN_PLANE =
+         13  18  12
+
+   See also
+     <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>, <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>, createBasisTransform</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>	CROSSPRODUCT3D Vector cross product faster than inbuilt MATLAB cross.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/meshes3d/meshSilhouette.html" class="code" title="function silhouette = meshSilhouette(v, f, varargin)">meshSilhouette</a>	MESHSILHOUETTE Compute the 2D outline of a 3D mesh on an arbitrary plane.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function transfo = createBasisTransform3d(source, target)</a>
+0002 <span class="comment">%CREATEBASISTRANSFORM3D Compute matrix for transforming a basis into another basis.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   TRANSFO = createBasisTransform3d(SOURCE, TARGET) will create a 4-by-4</span>
+0005 <span class="comment">%   transformation matrix representing the transformation from SOURCE basis</span>
+0006 <span class="comment">%   to TARGET basis.</span>
+0007 <span class="comment">%    SOURCE and TARGET are either standard 1-by-9 geom3d PLANE</span>
+0008 <span class="comment">%    representations of the form: [x0 y0 z0  ex1 ey1 ez1  ex2 ey2 ez2]</span>
+0009 <span class="comment">%     OR</span>
+0010 <span class="comment">%    SOURCE and TARGET may be any string such as 'global' or 'g' in which</span>
+0011 <span class="comment">%    case they represent the global plane [0 0 0 1 0 0 0 1 0].</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   The resulting TRANSFO matrix is such that a point expressed with</span>
+0014 <span class="comment">%   coordinates of the first basis will be represented by new coordinates</span>
+0015 <span class="comment">%   P2 = transformPoint3d(P1, TRANSFO) in the target basis.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   Either (or both) SOURCE or TARGET may be an N-by-9 set of N planes. In</span>
+0018 <span class="comment">%   that case, TRANSFO will be a 4-by-4-by-N array of N transformation</span>
+0019 <span class="comment">%   matrices.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   Example:</span>
+0022 <span class="comment">%     % Calculate local plane coords. of a point given in global coords.</span>
+0023 <span class="comment">%     plane = [10 10 10  1 0 0  0 1 0];</span>
+0024 <span class="comment">%     transfo = createBasisTransform3d('global', plane);</span>
+0025 <span class="comment">%     PT_IN_PLANE = transformPoint3d([3 8 2], transfo)</span>
+0026 <span class="comment">%     PT_IN_PLANE =</span>
+0027 <span class="comment">%         13  18  12</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%   See also</span>
+0030 <span class="comment">%     transforms3d, transformPoint3d, planePosition, createBasisTransform</span>
+0031 
+0032 <span class="comment">% ------</span>
+0033 <span class="comment">% Author: David Legland</span>
+0034 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0035 <span class="comment">% Created: 2010-12-03,    using Matlab 7.9.0.529 (R2009b)</span>
+0036 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0037 
+0038 <span class="comment">% HISTORY</span>
+0039 <span class="comment">% 2013-07-03 added support for multiple inputs (Sven Holcombe)</span>
+0040 <span class="comment">% 2017-10-16 rewrite</span>
+0041 
+0042 <span class="comment">% size of input arguments</span>
+0043 srcSz = size(source, 1);
+0044 tgtSz = size(target, 1);
+0045 maxSz = max(srcSz, tgtSz);
+0046 
+0047 <span class="comment">% check case of multiple inputs</span>
+0048 <span class="keyword">if</span> maxSz &gt; 1
+0049     [t1, t2] = deal( bsxfun(@times, eye(4), ones(1,1,maxSz)) );
+0050     <span class="keyword">if</span> srcSz &gt; 1
+0051         source = permute(source, [3 2 1]);
+0052     <span class="keyword">end</span>
+0053     <span class="keyword">if</span> tgtSz &gt; 1
+0054         target = permute(target, [3 2 1]);
+0055     <span class="keyword">end</span>
+0056 <span class="keyword">else</span>
+0057     [t1, t2] = deal(eye(4));
+0058 <span class="keyword">end</span>
+0059 
+0060 <span class="comment">% Place source and target planes into t1 and t2 t-form matrices. If either</span>
+0061 <span class="comment">% input is non-numeric it is assumed to mean 'global', or identity t-form.</span>
+0062 <span class="keyword">if</span> isnumeric(source)
+0063     <span class="keyword">if</span> maxSz &gt; 1 &amp;&amp; srcSz == 1
+0064         source = bsxfun(@times, source, ones(1,1,maxSz));
+0065     <span class="keyword">end</span>
+0066     t1(1:3, 1, :) = source(1, 4:6, :);
+0067     t1(1:3, 2, :) = source(1, 7:9, :);
+0068     t1(1:3, 3, :) = <a href="crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>(source(1,4:6,:), source(1,7:9,:));
+0069     t1(1:3, 4, :) = source(1, 1:3, :);
+0070 <span class="keyword">end</span>
+0071 <span class="keyword">if</span> isnumeric(target)
+0072     <span class="keyword">if</span> maxSz &gt; 1 &amp;&amp; tgtSz == 1
+0073         target = bsxfun(@times, target, ones(1,1,maxSz));
+0074     <span class="keyword">end</span>
+0075     t2(1:3, 1, :) = target(1, 4:6, :);
+0076     t2(1:3, 2, :) = target(1, 7:9, :);
+0077     t2(1:3, 3, :) = <a href="crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>(target(1,4:6,:), target(1,7:9,:));
+0078     t2(1:3, 4, :) = target(1, 1:3, :);
+0079 <span class="keyword">end</span>
+0080 
+0081 
+0082 <span class="comment">% compute transform matrix</span>
+0083 transfo = zeros(4, 4, maxSz);
+0084 <span class="keyword">for</span> i = 1:maxSz
+0085     <span class="comment">% coordinate of four reference points in source basis</span>
+0086     po = t1(1:3, 4, i)';
+0087     px = po + t1(1:3, 1, i)';
+0088     py = po + t1(1:3, 2, i)';
+0089     pz = po + t1(1:3, 3, i)';
+0090     
+0091     <span class="comment">% express coordinates of reference points in the new basis</span>
+0092     t2i = inv(t2(:,:,i));
+0093     pot = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(po, t2i);
+0094     pxt = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(px, t2i);
+0095     pyt = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(py, t2i);
+0096     pzt = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(pz, t2i);
+0097     
+0098     <span class="comment">% compute direction vectors in new basis</span>
+0099     vx = pxt - pot;
+0100     vy = pyt - pot;
+0101     vz = pzt - pot;
+0102 
+0103     <span class="comment">% concatenate result in a 4-by-4 affine transform matrix</span>
+0104     transfo(:,:,i) = [vx' vy' vz' pot' ; 0 0 0 1];
+0105 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

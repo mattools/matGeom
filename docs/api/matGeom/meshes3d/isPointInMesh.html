@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of isPointInMesh</title>
+  <meta name="keywords" content="isPointInMesh">
+  <meta name="description" content="ISPOINTINMESH Check if a point is inside a 3D mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; isPointInMesh.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>isPointInMesh
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ISPOINTINMESH Check if a point is inside a 3D mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function res = isPointInMesh(point, v, f, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ISPOINTINMESH Check if a point is inside a 3D mesh.
+
+   B = isPointInMesh(PT, V, F)
+   Check if the point PT (given as a 1-by-3 array) is inside the mesh
+   defined by the vertices V and the face array F. The result is a
+   boolean.
+
+   If PT is a N-by-3 point array, the result is a N-by-1 array of logical.
+
+   Example
+     [v, f] = torusMesh([50 50 50 30 10 30 45]);
+     [x, y, z] = meshgrid(5:5:100, 5:5:100, 5:5:100);
+     res = false(size(x));
+     res(:) = isPointInMesh([x(:) y(:) z(:)], v, f);
+     figure; plot3(x(res), y(res), z(res), 'b.'); axis equal;
+
+   Algorithm:
+   The method computes the intersection with a ray starting from the
+   point(s) and with a random orientation. Some errors are possible if
+   rays crosses the mesh between two or three faces.
+
+   See also
+     meshes3d, <a href="intersectLineMesh3d.html" class="code" title="function [points, pos, faceInds, lineInds] = intersectLineMesh3d(line, vertices, varargin)">intersectLineMesh3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/createLine3d.html" class="code" title="function line = createLine3d(varargin)">createLine3d</a>	CREATELINE3D Create a line with various inputs.</li><li><a href="intersectLineMesh3d.html" class="code" title="function [points, pos, faceInds, lineInds] = intersectLineMesh3d(line, vertices, varargin)">intersectLineMesh3d</a>	Intersection points of a 3D line with a mesh.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function res = isPointInMesh(point, v, f, varargin)</a>
+0002 <span class="comment">%ISPOINTINMESH Check if a point is inside a 3D mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   B = isPointInMesh(PT, V, F)</span>
+0005 <span class="comment">%   Check if the point PT (given as a 1-by-3 array) is inside the mesh</span>
+0006 <span class="comment">%   defined by the vertices V and the face array F. The result is a</span>
+0007 <span class="comment">%   boolean.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   If PT is a N-by-3 point array, the result is a N-by-1 array of logical.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Example</span>
+0012 <span class="comment">%     [v, f] = torusMesh([50 50 50 30 10 30 45]);</span>
+0013 <span class="comment">%     [x, y, z] = meshgrid(5:5:100, 5:5:100, 5:5:100);</span>
+0014 <span class="comment">%     res = false(size(x));</span>
+0015 <span class="comment">%     res(:) = isPointInMesh([x(:) y(:) z(:)], v, f);</span>
+0016 <span class="comment">%     figure; plot3(x(res), y(res), z(res), 'b.'); axis equal;</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   Algorithm:</span>
+0019 <span class="comment">%   The method computes the intersection with a ray starting from the</span>
+0020 <span class="comment">%   point(s) and with a random orientation. Some errors are possible if</span>
+0021 <span class="comment">%   rays crosses the mesh between two or three faces.</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   See also</span>
+0024 <span class="comment">%     meshes3d, intersectLineMesh3d</span>
+0025  
+0026 <span class="comment">% ------</span>
+0027 <span class="comment">% Author: David Legland</span>
+0028 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0029 <span class="comment">% Created: 2018-01-26,    using Matlab 9.3.0.713579 (R2017b)</span>
+0030 <span class="comment">% Copyright 2018 INRA - Cepia Software Platform.</span>
+0031 
+0032 <span class="comment">% choose a random vector</span>
+0033 vect = rand(1, 3);
+0034 
+0035 <span class="comment">% initialize array for result</span>
+0036 np = size(point, 1);
+0037 res = false(np, 1);
+0038 
+0039 <span class="comment">% iterate over the various points</span>
+0040 <span class="keyword">for</span> i = 1:np
+0041 <span class="comment">%     disp(i);</span>
+0042     line = <a href="../../matGeom/geom3d/createLine3d.html" class="code" title="function line = createLine3d(varargin)">createLine3d</a>(point(i,:), vect);
+0043     
+0044     [inters, pos] = <a href="intersectLineMesh3d.html" class="code" title="function [points, pos, faceInds, lineInds] = intersectLineMesh3d(line, vertices, varargin)">intersectLineMesh3d</a>(line, v, f); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0045     
+0046     res(i) = mod(sum(pos &gt; 0), 2) &gt; 0;
+0047 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

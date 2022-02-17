@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createBasisTransform</title>
+  <meta name="keywords" content="createBasisTransform">
+  <meta name="description" content="CREATEBASISTRANSFORM Compute matrix for transforming a basis into another basis.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; createBasisTransform.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createBasisTransform
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATEBASISTRANSFORM Compute matrix for transforming a basis into another basis.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function transfo = createBasisTransform(source, target) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATEBASISTRANSFORM Compute matrix for transforming a basis into another basis.
+
+   TRANSFO = createBasisTransform(SOURCE, TARGET)
+   Both SOURCE and TARGET represent basis, in the following form:
+   [x0 y0  ex1 ey1  ex2 ey2]
+   [y0 y0] is the origin of the basis, [ex1 ey1] is the first direction
+   vector, and [ex2 ey2] is the second direction vector.
+
+   The result TRANSFO is a 3-by-3 matrix such that a point expressed with
+   coordinates of the first basis will be represented by new coordinates
+   P2 = transformPoint(P1, TRANSFO) in the target basis.
+   
+   TRANSFO = createBasisTransform(TARGET)
+   Assumes the source is the standard (Oij) basis, with origin at (0,0),
+   first direction vector equal to (1,0) and second direction  vector
+   equal to (0,1).
+
+
+   Example
+     % define source and target bases
+     src = [ 0 0   1  0    0  1];
+     tgt = [20 0  .5 .5  -.5 .5];
+     trans = createBasisTransform(src, tgt);
+     % create a polygon in source basis
+     poly = [10 10;30 10; 30 20; 20 20;20 40; 10 40];
+     figure;
+     subplot(121); drawPolygon(poly, 'b'); axis equal; axis([-10 50 -10 50]);
+     hold on; drawLine([0 0 1 0], 'k'); drawLine([0 0 0 1], 'k');
+     drawLine([20 0 1 1], 'r'); drawLine([20 0 -1 1], 'r');
+     t = -1:5; plot(t*5+20, t*5, 'r.'); plot(-t*5+20, t*5, 'r.');
+     % transform the polygon in target basis
+     poly2 = transformPoint(poly, trans);
+     subplot(122); drawPolygon(poly2, 'b'); axis equal; axis([-10 50 -10 50]);
+     hold on; drawLine([0 0 1 0], 'r'); drawLine([0 0 0 1], 'r');
+     t = -1:5; plot(t*10, zeros(size(t)), 'r.'); plot(zeros(size(t)), t*10, 'r.');
+
+   See also
+   <a href="transforms2d.html" class="code" title="function transforms2d(varargin)">transforms2d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>	Apply an affine transform to a point or a point set.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function transfo = createBasisTransform(source, target)</a>
+0002 <span class="comment">%CREATEBASISTRANSFORM Compute matrix for transforming a basis into another basis.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   TRANSFO = createBasisTransform(SOURCE, TARGET)</span>
+0005 <span class="comment">%   Both SOURCE and TARGET represent basis, in the following form:</span>
+0006 <span class="comment">%   [x0 y0  ex1 ey1  ex2 ey2]</span>
+0007 <span class="comment">%   [y0 y0] is the origin of the basis, [ex1 ey1] is the first direction</span>
+0008 <span class="comment">%   vector, and [ex2 ey2] is the second direction vector.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   The result TRANSFO is a 3-by-3 matrix such that a point expressed with</span>
+0011 <span class="comment">%   coordinates of the first basis will be represented by new coordinates</span>
+0012 <span class="comment">%   P2 = transformPoint(P1, TRANSFO) in the target basis.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   TRANSFO = createBasisTransform(TARGET)</span>
+0015 <span class="comment">%   Assumes the source is the standard (Oij) basis, with origin at (0,0),</span>
+0016 <span class="comment">%   first direction vector equal to (1,0) and second direction  vector</span>
+0017 <span class="comment">%   equal to (0,1).</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   Example</span>
+0021 <span class="comment">%     % define source and target bases</span>
+0022 <span class="comment">%     src = [ 0 0   1  0    0  1];</span>
+0023 <span class="comment">%     tgt = [20 0  .5 .5  -.5 .5];</span>
+0024 <span class="comment">%     trans = createBasisTransform(src, tgt);</span>
+0025 <span class="comment">%     % create a polygon in source basis</span>
+0026 <span class="comment">%     poly = [10 10;30 10; 30 20; 20 20;20 40; 10 40];</span>
+0027 <span class="comment">%     figure;</span>
+0028 <span class="comment">%     subplot(121); drawPolygon(poly, 'b'); axis equal; axis([-10 50 -10 50]);</span>
+0029 <span class="comment">%     hold on; drawLine([0 0 1 0], 'k'); drawLine([0 0 0 1], 'k');</span>
+0030 <span class="comment">%     drawLine([20 0 1 1], 'r'); drawLine([20 0 -1 1], 'r');</span>
+0031 <span class="comment">%     t = -1:5; plot(t*5+20, t*5, 'r.'); plot(-t*5+20, t*5, 'r.');</span>
+0032 <span class="comment">%     % transform the polygon in target basis</span>
+0033 <span class="comment">%     poly2 = transformPoint(poly, trans);</span>
+0034 <span class="comment">%     subplot(122); drawPolygon(poly2, 'b'); axis equal; axis([-10 50 -10 50]);</span>
+0035 <span class="comment">%     hold on; drawLine([0 0 1 0], 'r'); drawLine([0 0 0 1], 'r');</span>
+0036 <span class="comment">%     t = -1:5; plot(t*10, zeros(size(t)), 'r.'); plot(zeros(size(t)), t*10, 'r.');</span>
+0037 <span class="comment">%</span>
+0038 <span class="comment">%   See also</span>
+0039 <span class="comment">%   transforms2d</span>
+0040 <span class="comment">%</span>
+0041 
+0042 <span class="comment">% ------</span>
+0043 <span class="comment">% Author: David Legland</span>
+0044 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0045 <span class="comment">% Created: 2010-12-03,    using Matlab 7.9.0.529 (R2009b)</span>
+0046 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0047 
+0048 <span class="comment">% init basis transform to identity</span>
+0049 t1 = eye(3);
+0050 t2 = eye(3);
+0051 
+0052 <span class="keyword">if</span> nargin == 2
+0053     <span class="comment">% from source to reference basis</span>
+0054     t1(1:2, 1) = source(3:4);
+0055     t1(1:2, 2) = source(5:6);
+0056     t1(1:2, 3) = source(1:2);
+0057 <span class="keyword">else</span>
+0058     <span class="comment">% if only one input, use first input as target basis, and leave the</span>
+0059     <span class="comment">% first matrix to identity</span>
+0060     target = source;
+0061 <span class="keyword">end</span>
+0062 
+0063 <span class="comment">% from reference to target basis</span>
+0064 t2(1:2, 1) = target(3:4);
+0065 t2(1:2, 2) = target(5:6);
+0066 t2(1:2, 3) = target(1:2);
+0067 
+0068 <span class="comment">% compute transform matrix</span>
+0069 transfo = zeros(3, 3);
+0070 maxSz = 1;
+0071 <span class="keyword">for</span> i = 1:maxSz
+0072     <span class="comment">% coordinate of three reference points in source basis</span>
+0073     po = t1(1:2, 3, i)';
+0074     px = po + t1(1:2, 1, i)';
+0075     py = po + t1(1:2, 2, i)';
+0076     
+0077     <span class="comment">% express coordinates of reference points in the new basis</span>
+0078     t2i = inv(t2(:,:,i));
+0079     pot = <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(po, t2i);
+0080     pxt = <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(px, t2i);
+0081     pyt = <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(py, t2i);
+0082     
+0083     <span class="comment">% compute direction vectors in new basis</span>
+0084     vx = pxt - pot;
+0085     vy = pyt - pot;
+0086 
+0087     <span class="comment">% concatenate result in a 3-by-3 affine transform matrix</span>
+0088     transfo(:,:,i) = [vx' vy' pot' ; 0 0 1];
+0089 <span class="keyword">end</span>
+0090</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

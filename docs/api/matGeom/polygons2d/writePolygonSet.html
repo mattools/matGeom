@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of writePolygonSet</title>
+  <meta name="keywords" content="writePolygonSet">
+  <meta name="description" content="WRITEPOLYGONSET Write a set of simple polygons into a file.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; writePolygonSet.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>writePolygonSet
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>WRITEPOLYGONSET Write a set of simple polygons into a file.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function writePolygonSet(polys, filename) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">WRITEPOLYGONSET Write a set of simple polygons into a file.
+   
+   writePolygonSet(POLYS, FILENAME);
+   Writes the set of polygons in the file FILENAME.
+   Following format is used:
+     X11 X12 X13 ... X1N
+     Y11 Y12 Y13 ... Y1N
+     X21 X22 X23 ... X2N
+     Y21 Y22 Y23 ... Y2N
+   Each polygon may have a different number of vertices. 
+
+   See also:
+   polygons2d, <a href="readPolygonSet.html" class="code" title="function polys = readPolygonSet(filename)">readPolygonSet</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 14/01/2013.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function writePolygonSet(polys, filename)</a>
+0002 <span class="comment">%WRITEPOLYGONSET Write a set of simple polygons into a file.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   writePolygonSet(POLYS, FILENAME);</span>
+0005 <span class="comment">%   Writes the set of polygons in the file FILENAME.</span>
+0006 <span class="comment">%   Following format is used:</span>
+0007 <span class="comment">%     X11 X12 X13 ... X1N</span>
+0008 <span class="comment">%     Y11 Y12 Y13 ... Y1N</span>
+0009 <span class="comment">%     X21 X22 X23 ... X2N</span>
+0010 <span class="comment">%     Y21 Y22 Y23 ... Y2N</span>
+0011 <span class="comment">%   Each polygon may have a different number of vertices.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   See also:</span>
+0014 <span class="comment">%   polygons2d, readPolygonSet</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   ---------</span>
+0017 <span class="comment">%   author : David Legland</span>
+0018 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0019 <span class="comment">%   created the 14/01/2013.</span>
+0020 <span class="comment">%</span>
+0021 
+0022 
+0023 <span class="comment">% open file for reading</span>
+0024 fid = fopen(filename, <span class="string">'wt'</span>);
+0025 
+0026 <span class="keyword">for</span> i = 1:length(polys)
+0027     poly = polys{i};
+0028     n = size(poly, 1);
+0029     
+0030     <span class="comment">% precompute format</span>
+0031     format = [repmat(<span class="string">'%g '</span>, 1, n) <span class="string">'\n'</span>];
+0032     
+0033     <span class="comment">% write one line for x, then one line for y</span>
+0034     fprintf(fid, format, poly(:,1)');
+0035     fprintf(fid, format, poly(:,2)');    
+0036 <span class="keyword">end</span>
+0037 
+0038 <span class="comment">% close file</span>
+0039 fclose(fid);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

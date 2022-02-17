@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of fillSphericalTriangle</title>
+  <meta name="keywords" content="fillSphericalTriangle">
+  <meta name="description" content="FILLSPHERICALTRIANGLE Fill a triangle on a sphere.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; fillSphericalTriangle.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>fillSphericalTriangle
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>FILLSPHERICALTRIANGLE Fill a triangle on a sphere.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = fillSphericalTriangle(sphere, p1, p2, p3, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">FILLSPHERICALTRIANGLE Fill a triangle on a sphere.
+
+   fillSphericalTriangle(SPHERE, PT1, PT2, PT3);
+
+
+   See also
+   <a href="fillSphericalPolygon.html" class="code" title="function varargout = fillSphericalPolygon(sphere, poly, germ)">fillSphericalPolygon</a>, <a href="drawSphericalTriangle.html" class="code" title="function varargout = drawSphericalTriangle(sphere, p1, p2, p3, varargin)">drawSphericalTriangle</a>, <a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 22/02/2005</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>	INTERSECTLINEPLANE Intersection point between a 3D line and a plane.</li><li><a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>	NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.</li><li><a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>	PLANEPOSITION Compute position of a point on a plane.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="fillSphericalPolygon.html" class="code" title="function varargout = fillSphericalPolygon(sphere, poly, germ)">fillSphericalPolygon</a>	FILLSPHERICALPOLYGON  Fill a spherical polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = fillSphericalTriangle(sphere, p1, p2, p3, varargin)</a>
+0002 <span class="comment">%FILLSPHERICALTRIANGLE Fill a triangle on a sphere.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   fillSphericalTriangle(SPHERE, PT1, PT2, PT3);</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   See also</span>
+0008 <span class="comment">%   fillSphericalPolygon, drawSphericalTriangle, drawSphere</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   ---------</span>
+0011 <span class="comment">%   author : David Legland</span>
+0012 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0013 <span class="comment">%   created the 22/02/2005</span>
+0014 <span class="comment">%</span>
+0015 
+0016 <span class="comment">%   HISTORY</span>
+0017 <span class="comment">%   27/06/2007 manage spheres other than origin</span>
+0018 <span class="comment">%   30/10/2008 replace intersectPlaneLine by intersectLinePlane</span>
+0019 <span class="comment">%   2012-02-09 rename as fillSphericalTriangle</span>
+0020 
+0021 <span class="comment">% extract data of the sphere</span>
+0022 ori = sphere(:, 1:3);
+0023 r   = sphere(4);
+0024 
+0025 <span class="comment">% extract direction vectors for each point</span>
+0026 v1  = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p1 - ori);
+0027 v2  = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p2 - ori);
+0028 v3  = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p3 - ori);
+0029 
+0030 <span class="comment">% create a plane tangent to the sphere containing first point</span>
+0031 plane = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(v1, v1);
+0032 
+0033 <span class="comment">% position on the plane of the direction vectors</span>
+0034 pp2 = <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>(<a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>([ori v2], plane), plane);
+0035 pp3 = <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>(<a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>([ori v3], plane), plane);
+0036 
+0037 <span class="comment">% create rough parametrization with 2 variables</span>
+0038 nTri = 5;
+0039 s  = linspace(0, 1, nTri);
+0040 t  = linspace(0, 1, nTri);
+0041 ns = length(s);
+0042 nt = length(t);
+0043 s  = repmat(s, [nt, 1]);
+0044 t  = repmat(t', [1, ns]);
+0045 
+0046 <span class="comment">% convert to plane coordinates</span>
+0047 xp = s * pp2(1) + t .* (1-s) * pp3(1);
+0048 yp = s * pp2(2) + t .* (1-s) * pp3(2);
+0049 
+0050 <span class="comment">% convert to 3D coordinates (still on the 3D plane)</span>
+0051 x  = plane(1) * ones(size(xp)) + plane(4) * xp + plane(7) * yp - ori(1);
+0052 y  = plane(2) * ones(size(xp)) + plane(5) * xp + plane(8) * yp - ori(2);
+0053 z  = plane(3) * ones(size(xp)) + plane(6) * xp + plane(9) * yp - ori(3);
+0054 
+0055 <span class="comment">% project on the sphere</span>
+0056 norm = hypot(hypot(x, y), z);
+0057 xn = x ./ norm * r + ori(1);
+0058 yn = y ./ norm * r + ori(2);
+0059 zn = z ./ norm * r + ori(3);
+0060 
+0061 
+0062 <span class="keyword">if</span> nargout == 0
+0063     <span class="comment">% simply display the patch</span>
+0064     surf(xn, yn, zn, <span class="string">'FaceColor'</span>, <span class="string">'g'</span>, <span class="string">'EdgeColor'</span>, <span class="string">'none'</span>, varargin{:});
+0065     
+0066 <span class="keyword">elseif</span> nargout == 1
+0067     <span class="comment">% display the patch and return a handle</span>
+0068     h = surf(xn, yn, zn, <span class="string">'FaceColor'</span>, <span class="string">'g'</span>, <span class="string">'EdgeColor'</span>, <span class="string">'none'</span>, varargin{:});
+0069     varargout = {h};
+0070     
+0071 <span class="keyword">elseif</span> nargout == 3
+0072     <span class="comment">% If 3 outputs are required, return patch vertex coordinates</span>
+0073     varargout = {x, y, z};
+0074 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

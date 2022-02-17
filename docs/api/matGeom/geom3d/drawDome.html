@@ -1,0 +1,313 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawDome</title>
+  <meta name="keywords" content="drawDome">
+  <meta name="description" content="DRAWDOME Draw a dome (half-sphere, semi-sphere) as a mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; drawDome.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawDome
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWDOME Draw a dome (half-sphere, semi-sphere) as a mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawDome(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWDOME Draw a dome (half-sphere, semi-sphere) as a mesh.
+
+   drawDome(DOME)
+   Where DOME = [XC YC ZC R], draw the dome centered on the point with
+   coordinates [XC YC ZC] and with radius R, using a quad mesh.
+ 
+   drawDome(Dome, V)
+   Where DOME = [XC YC ZC R] and V is a vector in the direction of the top
+ 
+   drawDome(CENTER, R, V)
+   Where CENTER = [XC YC ZC], specifies the center and the radius with two
+   arguments and vector as third argument.
+ 
+   drawdrawDome(XC, YC, ZC, R, V)
+   Specifiy dome center, radius and vector as five arguments.
+
+   drawDome(..., NAME, VALUE);
+   Specifies one or several options using parameter name-value pairs.
+   Available options are usual drawing options, as well as:
+   'nPhi'    the number of arcs used for drawing the meridians
+   'nTheta'  the number of circles used for drawing the parallels
+
+   H = drawDome(...)
+   Return a handle to the graphical object created by the function.
+
+   [X Y Z] = drawdrawDome(...)
+   Return the coordinates of the vertices used by the dome. In this
+   case, the dome is not drawn.
+
+   Example
+   % Draw four domes with different centers
+     figure(1); clf; hold on;
+     drawDome([0 0 1 1], 'FaceColor', 'b', 'EdgeColor', 'k', 'LineStyle', ':');
+     drawDome([0 1 0 1], [0 1 0]);
+     drawDome([0 -1 0 0.5], [1 0 0]);
+     drawDome([0 -5 4 10], 'FaceAlpha', 0.5, 'EdgeColor', 'r', 'LineStyle', '-');
+     view([-30 20]); axis equal; l = light;
+
+   % Draw dome with different settings
+     figure(1); clf;
+     drawDome([10 20 30 10], [0 0 1], 'linestyle', ':', 'facecolor', 'r');
+     axis([0 50 0 50 0 50]); axis equal;
+     l = light;
+
+   % The same, but changes style using graphic handle
+     figure(1); clf;
+     h = drawDome([10 20 30 10], [1 0 0]);
+     set(h, 'linestyle', ':');
+     set(h, 'facecolor', 'r');
+     axis([0 50 0 50 0 50]); axis equal;
+     l = light;
+   
+   % Draw a dome with high resolution
+     figure(1); clf;
+     h = drawDome([10 20 30 10], 'nPhi', 360, 'nTheta', 180);
+     l = light; view(3);
+
+
+   See also
+   <a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawCapsule.html" class="code" title="function varargout = drawCapsule(varargin)">drawCapsule</a>	Draw a capsule.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawDome(varargin)</a>
+0002 <span class="comment">%DRAWDOME Draw a dome (half-sphere, semi-sphere) as a mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawDome(DOME)</span>
+0005 <span class="comment">%   Where DOME = [XC YC ZC R], draw the dome centered on the point with</span>
+0006 <span class="comment">%   coordinates [XC YC ZC] and with radius R, using a quad mesh.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   drawDome(Dome, V)</span>
+0009 <span class="comment">%   Where DOME = [XC YC ZC R] and V is a vector in the direction of the top</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   drawDome(CENTER, R, V)</span>
+0012 <span class="comment">%   Where CENTER = [XC YC ZC], specifies the center and the radius with two</span>
+0013 <span class="comment">%   arguments and vector as third argument.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   drawdrawDome(XC, YC, ZC, R, V)</span>
+0016 <span class="comment">%   Specifiy dome center, radius and vector as five arguments.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   drawDome(..., NAME, VALUE);</span>
+0019 <span class="comment">%   Specifies one or several options using parameter name-value pairs.</span>
+0020 <span class="comment">%   Available options are usual drawing options, as well as:</span>
+0021 <span class="comment">%   'nPhi'    the number of arcs used for drawing the meridians</span>
+0022 <span class="comment">%   'nTheta'  the number of circles used for drawing the parallels</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   H = drawDome(...)</span>
+0025 <span class="comment">%   Return a handle to the graphical object created by the function.</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   [X Y Z] = drawdrawDome(...)</span>
+0028 <span class="comment">%   Return the coordinates of the vertices used by the dome. In this</span>
+0029 <span class="comment">%   case, the dome is not drawn.</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%   Example</span>
+0032 <span class="comment">%   % Draw four domes with different centers</span>
+0033 <span class="comment">%     figure(1); clf; hold on;</span>
+0034 <span class="comment">%     drawDome([0 0 1 1], 'FaceColor', 'b', 'EdgeColor', 'k', 'LineStyle', ':');</span>
+0035 <span class="comment">%     drawDome([0 1 0 1], [0 1 0]);</span>
+0036 <span class="comment">%     drawDome([0 -1 0 0.5], [1 0 0]);</span>
+0037 <span class="comment">%     drawDome([0 -5 4 10], 'FaceAlpha', 0.5, 'EdgeColor', 'r', 'LineStyle', '-');</span>
+0038 <span class="comment">%     view([-30 20]); axis equal; l = light;</span>
+0039 <span class="comment">%</span>
+0040 <span class="comment">%   % Draw dome with different settings</span>
+0041 <span class="comment">%     figure(1); clf;</span>
+0042 <span class="comment">%     drawDome([10 20 30 10], [0 0 1], 'linestyle', ':', 'facecolor', 'r');</span>
+0043 <span class="comment">%     axis([0 50 0 50 0 50]); axis equal;</span>
+0044 <span class="comment">%     l = light;</span>
+0045 <span class="comment">%</span>
+0046 <span class="comment">%   % The same, but changes style using graphic handle</span>
+0047 <span class="comment">%     figure(1); clf;</span>
+0048 <span class="comment">%     h = drawDome([10 20 30 10], [1 0 0]);</span>
+0049 <span class="comment">%     set(h, 'linestyle', ':');</span>
+0050 <span class="comment">%     set(h, 'facecolor', 'r');</span>
+0051 <span class="comment">%     axis([0 50 0 50 0 50]); axis equal;</span>
+0052 <span class="comment">%     l = light;</span>
+0053 <span class="comment">%</span>
+0054 <span class="comment">%   % Draw a dome with high resolution</span>
+0055 <span class="comment">%     figure(1); clf;</span>
+0056 <span class="comment">%     h = drawDome([10 20 30 10], 'nPhi', 360, 'nTheta', 180);</span>
+0057 <span class="comment">%     l = light; view(3);</span>
+0058 <span class="comment">%</span>
+0059 <span class="comment">%</span>
+0060 <span class="comment">%   See also</span>
+0061 <span class="comment">%   drawSphere</span>
+0062 
+0063 <span class="comment">%   ---------</span>
+0064 <span class="comment">%   author: Moritz Schappler</span>
+0065 <span class="comment">%   created the 27/07/2013</span>
+0066 <span class="comment">%</span>
+0067 
+0068 <span class="comment">%   HISTORY</span>
+0069 <span class="comment">%   2013-07-27 initial version as copy of drawSphere with a few changes</span>
+0070 <span class="comment">%   2020-05-18 changes based on current version of geom3d</span>
+0071 
+0072 <span class="comment">% Check if axes handle is specified</span>
+0073 <span class="keyword">if</span> isAxisHandle(varargin{1})
+0074     hAx = varargin{1};
+0075     varargin(1)=[];
+0076 <span class="keyword">elseif</span> nargout ~= 3
+0077     hAx = gca;
+0078 <span class="keyword">end</span>
+0079 
+0080 <span class="comment">% process input options: when a string is found, assumes this is the</span>
+0081 <span class="comment">% beginning of options</span>
+0082 options = {<span class="string">'FaceColor'</span>, <span class="string">'g'</span>, <span class="string">'LineStyle'</span>, <span class="string">'none'</span>};
+0083 <span class="keyword">for</span> i = 1:length(varargin)
+0084     <span class="keyword">if</span> ischar(varargin{i})
+0085         <span class="keyword">if</span> length(varargin) == 1
+0086             options = {<span class="string">'FaceColor'</span>, varargin{1}, <span class="string">'LineStyle'</span>, <span class="string">'none'</span>};
+0087         <span class="keyword">else</span>
+0088             options = [options(1:end) varargin(i:end)];
+0089         <span class="keyword">end</span>
+0090         varargin = varargin(1:i-1);
+0091         <span class="keyword">break</span>;
+0092     <span class="keyword">end</span>
+0093 <span class="keyword">end</span>
+0094 
+0095 <span class="comment">% Parse the input (try to extract center coordinates and radius)</span>
+0096 <span class="keyword">if</span> isempty(varargin)
+0097     <span class="comment">% no input: assumes unit dome</span>
+0098     xc = 0;    yc = 0; zc = 0;
+0099     r = 1;
+0100     v = [0;0;1]; 
+0101 <span class="keyword">elseif</span> length(varargin) == 1
+0102     <span class="comment">% one argument: concatenates center and radius</span>
+0103     dome = varargin{1};
+0104     xc = dome(:,1);
+0105     yc = dome(:,2);
+0106     zc = dome(:,3);
+0107     r  = dome(:,4);
+0108     v = [0;0;1]; 
+0109 <span class="keyword">elseif</span> length(varargin) == 2
+0110     <span class="comment">% two arguments: concatenates center and radius with Rotation</span>
+0111     dome = varargin{1};
+0112     xc = dome(:,1);
+0113     yc = dome(:,2);
+0114     zc = dome(:,3);
+0115     r  = dome(:,4);
+0116     v = varargin{2}; 
+0117 <span class="keyword">elseif</span> length(varargin) == 3
+0118     <span class="comment">% three arguments, corresponding to center and radius and rotation</span>
+0119     center = varargin{1};
+0120     xc = center(1);
+0121     yc = center(2);
+0122     zc = center(3);
+0123     r  = varargin{2};
+0124     v  = varargin{3};
+0125 <span class="keyword">elseif</span> length(varargin) == 5
+0126     <span class="comment">% five arguments, corresponding to XC, YX, ZC, R and V</span>
+0127     xc = varargin{1};
+0128     yc = varargin{2};
+0129     zc = varargin{3};
+0130     r  = varargin{4};
+0131     v  = varargin{5};
+0132 <span class="keyword">else</span>
+0133     error(<span class="string">'drawDome: please specify center and radius'</span>);
+0134 <span class="keyword">end</span>
+0135 
+0136 <span class="comment">% Rotation given by z-Axis. Calculate rotation matrix</span>
+0137 v = v(:) / norm(v(:));
+0138 <span class="keyword">if</span> all(abs(v(:)-[0;0;1]) &lt; 1e-10)
+0139     RM = eye(3);
+0140 <span class="keyword">elseif</span> all(abs(v(:) - [0;0;-1]) &lt; 1e-10)
+0141     RM = [[1;0;0], [0; -1; 0], [0; 0; -1]];
+0142 <span class="keyword">else</span>
+0143     <span class="comment">% z-axis given by argument</span>
+0144     ez = v(:);
+0145     <span class="comment">% x-axis perpendicular</span>
+0146     ex = cross(ez, [0; 0; 1]); ex = ex/norm(ex);
+0147     <span class="comment">% y-axis to create right-handed coordinate system</span>
+0148     ey = cross(ez, ex);
+0149     RM = [ex, ey, ez];
+0150 <span class="keyword">end</span>
+0151 
+0152 <span class="comment">% number of meridians</span>
+0153 nPhi = 32;
+0154 ind = find(strcmpi(<span class="string">'nPhi'</span>, options(1:2:end)));
+0155 <span class="keyword">if</span> ~isempty(ind)
+0156     ind = ind(1);
+0157     nPhi = options{2*ind};
+0158     options(2*ind-1:2*ind) = [];
+0159 <span class="keyword">end</span>
+0160     
+0161 <span class="comment">% number of parallels</span>
+0162 nTheta  = 8;
+0163 ind = find(strcmpi(<span class="string">'nTheta'</span>, options(1:2:end)));
+0164 <span class="keyword">if</span> ~isempty(ind)
+0165     ind = ind(1);
+0166     nTheta = options{2*ind};
+0167     options(2*ind-1:2*ind) = [];
+0168 <span class="keyword">end</span>
+0169 
+0170 <span class="comment">% compute spherical coordinates</span>
+0171 theta   = linspace(0, pi/2, nTheta+1);
+0172 phi     = linspace(0, 2*pi, nPhi+1);
+0173 
+0174 <span class="comment">% convert to Cartesian coordinates and rotate</span>
+0175 <span class="comment">% Rotate the Dome</span>
+0176 x = zeros(nPhi+1, nTheta+1);
+0177 y = x;
+0178 z = x;
+0179 
+0180 sintheta = sin(theta);
+0181 dx = cos(phi')*sintheta*r;
+0182 dy = sin(phi')*sintheta*r;
+0183 dz = ones(length(phi),1)*cos(theta)*r;
+0184 
+0185 <span class="keyword">for</span> i = 1:nPhi+1
+0186     <span class="keyword">for</span> j = 1:nTheta+1
+0187         dxyz = RM*[dx(i, j);dy(i, j);dz(i, j)];
+0188         x(i, j) = xc + dxyz(1);
+0189         y(i, j) = yc + dxyz(2);    
+0190         z(i, j) = zc + dxyz(3);   
+0191     <span class="keyword">end</span>
+0192 <span class="keyword">end</span>
+0193 
+0194 <span class="comment">% Process output</span>
+0195 <span class="keyword">if</span> nargout == 0
+0196     <span class="comment">% no output: draw the dome</span>
+0197     surf(hAx, x, y, z, options{:});
+0198     
+0199 <span class="keyword">elseif</span> nargout == 1
+0200     <span class="comment">% one output: compute</span>
+0201     varargout{1} = surf(hAx, x, y, z, options{:});
+0202     
+0203 <span class="keyword">elseif</span> nargout == 3
+0204     varargout{1} = x; 
+0205     varargout{2} = y; 
+0206     varargout{3} = z; 
+0207 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of averageMesh</title>
+  <meta name="keywords" content="averageMesh">
+  <meta name="description" content="Compute average mesh from a list of meshes.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; averageMesh.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>averageMesh
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Compute average mesh from a list of meshes.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [refMesh, distListIters, refVerticesIters] = averageMesh(meshList, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Compute average mesh from a list of meshes.
+
+   AVG = averageMesh(MESHLIST)
+
+   Example
+   averageMesh
+
+   See also
+     meshes3d</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="smoothMesh.html" class="code" title="function varargout = smoothMesh(varargin)">smoothMesh</a>	SMOOTHMESH Smooth mesh by replacing each vertex by the average of its neighbors.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [refMesh, distListIters, refVerticesIters] = averageMesh(meshList, varargin)</a>
+0002 <span class="comment">% Compute average mesh from a list of meshes.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   AVG = averageMesh(MESHLIST)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   Example</span>
+0007 <span class="comment">%   averageMesh</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   See also</span>
+0010 <span class="comment">%     meshes3d</span>
+0011  
+0012 <span class="comment">% ------</span>
+0013 <span class="comment">% Author: David Legland</span>
+0014 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0015 <span class="comment">% INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0016 <span class="comment">% Created: 2020-01-31,    using Matlab 9.7.0.1247435 (R2019b) Update 2</span>
+0017 <span class="comment">% Copyright 2020 INRAE.</span>
+0018 
+0019 
+0020 <span class="comment">%% Parse input values</span>
+0021 
+0022 <span class="comment">% default values</span>
+0023 nIters = 10;
+0024 verbose = false;
+0025 
+0026 <span class="comment">% parse input arguments</span>
+0027 <span class="keyword">while</span> length(varargin) &gt; 1
+0028     name = varargin{1};
+0029     <span class="keyword">if</span> ~ischar(name)
+0030         error(<span class="string">'require parameter name-value pairs'</span>);
+0031     <span class="keyword">end</span>
+0032     
+0033     <span class="keyword">if</span> strcmpi(name, <span class="string">'verbose'</span>)
+0034         verbose = varargin{2};
+0035     <span class="keyword">elseif</span> strcmpi(name, <span class="string">'nIters'</span>)
+0036         nIters = varargin{2};
+0037     <span class="keyword">else</span>
+0038         error([<span class="string">'Unknown parameter name: '</span> name]);
+0039     <span class="keyword">end</span>
+0040     varargin(1:2) = [];
+0041 <span class="keyword">end</span>
+0042 
+0043 
+0044 <span class="comment">%% Initialisations</span>
+0045 
+0046 nMeshes = length(meshList);
+0047 
+0048 <span class="comment">% initialize kd-trees to accelerate nearest-neighbor searches</span>
+0049 treeList = cell(nMeshes, 1);
+0050 <span class="keyword">for</span> iMesh = 1:nMeshes
+0051     treeList{iMesh} = KDTreeSearcher(meshList{iMesh}.vertices);
+0052 <span class="keyword">end</span>
+0053 
+0054 <span class="comment">% choose arbitrary initial mesh</span>
+0055 refMesh = struct(<span class="string">'vertices'</span>, meshList{1}.vertices, <span class="string">'faces'</span>, meshList{1}.faces);
+0056 
+0057 refVerticesIters = cell(1, nIters);
+0058 distListIters = cell(1, nIters);
+0059 
+0060 
+0061 <span class="comment">%% Main iteration</span>
+0062 
+0063 <span class="keyword">for</span> iIter = 1:nIters
+0064     <span class="keyword">if</span> verbose
+0065         fprintf(<span class="string">'iter %d/%d\n'</span>, iIter, nIters);
+0066     <span class="keyword">end</span>
+0067     refMesh = <a href="smoothMesh.html" class="code" title="function varargout = smoothMesh(varargin)">smoothMesh</a>(refMesh);
+0068     
+0069     <span class="comment">% create new array for average vertices</span>
+0070     newVerts = zeros(size(refMesh.vertices));
+0071     distList = zeros(size(refMesh.vertices, 1), 1);
+0072     
+0073     <span class="comment">% iterate over all meshes</span>
+0074     <span class="keyword">for</span> iMesh = 1:nMeshes
+0075         <span class="keyword">if</span> verbose
+0076             fprintf(<span class="string">'    mesh %d/%d\n'</span>, iMesh, nMeshes);
+0077         <span class="keyword">end</span>
+0078         
+0079 <span class="comment">%         mesh = meshList{iMesh};</span>
+0080         inds = knnsearch(treeList{iMesh}, refMesh.vertices); 
+0081 
+0082 <span class="comment">%         closest = mesh.vertices(inds,:);</span>
+0083         closest = treeList{iMesh}.X(inds,:);
+0084         newVerts = newVerts + closest;
+0085         distList = distList + sum((closest - refMesh.vertices).^2, 2);
+0086     <span class="keyword">end</span>
+0087 
+0088     <span class="comment">% update new vertices</span>
+0089     newVerts = newVerts / nMeshes;
+0090     refVerticesIters{iIter} = newVerts;
+0091     refMesh.vertices = newVerts;
+0092     
+0093     <span class="comment">% keep list of distances</span>
+0094     distList = sqrt(distList / nMeshes);
+0095     distListIters{iIter} = distList;
+0096 <span class="keyword">end</span>
+0097 
+0098 
+0099 <span class="comment">% figure; drawMesh(refMesh, 'lineStyle', 'none', 'faceColor', [.5 .5 .5])</span>
+0100 <span class="comment">% axis equal; view(3); hold on; axis([-2.5 2.5 -2 2 -3.5 3.5]); light;</span>
+0101 <span class="comment">% lighting gouraud</span>
+0102 <span class="comment">% title('Average mesh');</span>
+0103 <span class="comment">% print(gcf, 'averageMesh_initial.png', '-dpng');</span>
+0104</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

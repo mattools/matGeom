@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of angles3d</title>
+  <meta name="keywords" content="angles3d">
+  <meta name="description" content="ANGLES3D Conventions for manipulating angles in 3D.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; angles3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>angles3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ANGLES3D Conventions for manipulating angles in 3D.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function angles3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ANGLES3D Conventions for manipulating angles in 3D.
+
+   The library uses both radians and degrees angles;
+   Results of angle computation between shapes usually returns angles in
+   radians.
+   Representation of 3D shapes use angles in degrees (easier to manipulate
+   and to save). 
+
+   Contrary to the plane, there are no oriented angles in 3D. Angles
+   between lines or between planes are comprised between 0 and PI.
+
+   Spherical angles
+   Spherical angles are defined by 2 angles:
+   * THETA, the colatitude, representing angle with Oz axis (between 0 and
+       PI)
+   * PHI, the azimut, representing angle with Ox axis of horizontal
+       projection of the direction (between 0 and 2*PI)
+
+   Spherical coordinates can be represented by THETA, PHI, and the
+   distance RHO to the origin.
+
+   Euler angles
+   Some functions for creating rotations use Euler angles. They follow the
+   ZYX convention in the global reference system, that is eqivalent to the
+   XYZ convention ine a local reference system. 
+   Euler angles are given by a triplet of angles [PHI THETA PSI] that
+   represents the succession of 3 rotations: 
+   * rotation around X by angle PSI    (&quot;roll&quot;)
+   * rotation around Y by angle THETA  (&quot;pitch&quot;)
+   * rotation around Z by angle PHI    (&quot;yaw&quot;)
+
+   In this library, euler angles are given in degrees. The functions that
+   use euler angles use the keyword 'Euler' in their name.
+
+
+   See also
+   <a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>, <a href="sph2cart2.html" class="code" title="function varargout = sph2cart2(theta, phi, rho)">sph2cart2</a>, <a href="cart2sph2d.html" class="code" title="function varargout = cart2sph2d(x, y, z)">cart2sph2d</a>, <a href="sph2cart2d.html" class="code" title="function varargout = sph2cart2d(theta, phi, rho)">sph2cart2d</a>
+   <a href="anglePoints3d.html" class="code" title="function alpha = anglePoints3d(varargin)">anglePoints3d</a>, <a href="angleSort3d.html" class="code" title="function varargout = angleSort3d(pts, varargin)">angleSort3d</a>, <a href="sphericalAngle.html" class="code" title="function alpha = sphericalAngle(p1, p2, p3)">sphericalAngle</a>, <a href="randomAngle3d.html" class="code" title="function varargout = randomAngle3d(varargin)">randomAngle3d</a>
+   <a href="dihedralAngle.html" class="code" title="function theta = dihedralAngle(plane1, plane2)">dihedralAngle</a>, <a href="polygon3dNormalAngle.html" class="code" title="function theta = polygon3dNormalAngle(points, ind)">polygon3dNormalAngle</a>, <a href="eulerAnglesToRotation3d.html" class="code" title="function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)">eulerAnglesToRotation3d</a>
+   <a href="rotation3dAxisAndAngle.html" class="code" title="function [axis, theta] = rotation3dAxisAndAngle(mat)">rotation3dAxisAndAngle</a>, <a href="rotation3dToEulerAngles.html" class="code" title="function varargout = rotation3dToEulerAngles(mat, varargin)">rotation3dToEulerAngles</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function angles3d(varargin)</a>
+0002 <span class="comment">%ANGLES3D Conventions for manipulating angles in 3D.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   The library uses both radians and degrees angles;</span>
+0005 <span class="comment">%   Results of angle computation between shapes usually returns angles in</span>
+0006 <span class="comment">%   radians.</span>
+0007 <span class="comment">%   Representation of 3D shapes use angles in degrees (easier to manipulate</span>
+0008 <span class="comment">%   and to save).</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Contrary to the plane, there are no oriented angles in 3D. Angles</span>
+0011 <span class="comment">%   between lines or between planes are comprised between 0 and PI.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   Spherical angles</span>
+0014 <span class="comment">%   Spherical angles are defined by 2 angles:</span>
+0015 <span class="comment">%   * THETA, the colatitude, representing angle with Oz axis (between 0 and</span>
+0016 <span class="comment">%       PI)</span>
+0017 <span class="comment">%   * PHI, the azimut, representing angle with Ox axis of horizontal</span>
+0018 <span class="comment">%       projection of the direction (between 0 and 2*PI)</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   Spherical coordinates can be represented by THETA, PHI, and the</span>
+0021 <span class="comment">%   distance RHO to the origin.</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   Euler angles</span>
+0024 <span class="comment">%   Some functions for creating rotations use Euler angles. They follow the</span>
+0025 <span class="comment">%   ZYX convention in the global reference system, that is eqivalent to the</span>
+0026 <span class="comment">%   XYZ convention ine a local reference system.</span>
+0027 <span class="comment">%   Euler angles are given by a triplet of angles [PHI THETA PSI] that</span>
+0028 <span class="comment">%   represents the succession of 3 rotations:</span>
+0029 <span class="comment">%   * rotation around X by angle PSI    (&quot;roll&quot;)</span>
+0030 <span class="comment">%   * rotation around Y by angle THETA  (&quot;pitch&quot;)</span>
+0031 <span class="comment">%   * rotation around Z by angle PHI    (&quot;yaw&quot;)</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">%   In this library, euler angles are given in degrees. The functions that</span>
+0034 <span class="comment">%   use euler angles use the keyword 'Euler' in their name.</span>
+0035 <span class="comment">%</span>
+0036 <span class="comment">%</span>
+0037 <span class="comment">%   See also</span>
+0038 <span class="comment">%   cart2sph2, sph2cart2, cart2sph2d, sph2cart2d</span>
+0039 <span class="comment">%   anglePoints3d, angleSort3d, sphericalAngle, randomAngle3d</span>
+0040 <span class="comment">%   dihedralAngle, polygon3dNormalAngle, eulerAnglesToRotation3d</span>
+0041 <span class="comment">%   rotation3dAxisAndAngle, rotation3dToEulerAngles</span>
+0042 <span class="comment">%</span>
+0043 
+0044 <span class="comment">% ------</span>
+0045 <span class="comment">% Author: David Legland</span>
+0046 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0047 <span class="comment">% Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)</span>
+0048 <span class="comment">% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

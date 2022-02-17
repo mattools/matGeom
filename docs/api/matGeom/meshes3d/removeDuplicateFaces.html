@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of removeDuplicateFaces</title>
+  <meta name="keywords" content="removeDuplicateFaces">
+  <meta name="description" content="REMOVEDUPLICATEFACES Remove duplicate faces in a face array.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; removeDuplicateFaces.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>removeDuplicateFaces
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>REMOVEDUPLICATEFACES Remove duplicate faces in a face array.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function faces2 = removeDuplicateFaces(faces, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">REMOVEDUPLICATEFACES Remove duplicate faces in a face array.
+
+   [V, F] = removeDuplicateFaces(V, F)
+
+   Example
+     faces = [1 2 3;2 3 4;3 4 5;2 3 4];
+     removeDuplicateFaces(faces)
+     ans =
+         1 2 3
+         2 3 4
+         2 3 5
+
+   See also</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="ensureManifoldMesh.html" class="code" title="function varargout = ensureManifoldMesh(varargin)">ensureManifoldMesh</a>	ENSUREMANIFOLDMESH Apply several simplification to obtain a manifold mesh.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function faces2 = removeDuplicateFaces(faces, varargin)</a>
+0002 <span class="comment">%REMOVEDUPLICATEFACES Remove duplicate faces in a face array.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V, F] = removeDuplicateFaces(V, F)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   Example</span>
+0007 <span class="comment">%     faces = [1 2 3;2 3 4;3 4 5;2 3 4];</span>
+0008 <span class="comment">%     removeDuplicateFaces(faces)</span>
+0009 <span class="comment">%     ans =</span>
+0010 <span class="comment">%         1 2 3</span>
+0011 <span class="comment">%         2 3 4</span>
+0012 <span class="comment">%         2 3 5</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   See also</span>
+0015 <span class="comment">%</span>
+0016  
+0017 <span class="comment">% ------</span>
+0018 <span class="comment">% Author: David Legland</span>
+0019 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0020 <span class="comment">% Created: 2019-01-08,    using Matlab 8.6.0.267246 (R2015b)</span>
+0021 <span class="comment">% Copyright 2019 INRA - Cepia Software Platform.</span>
+0022 
+0023 nFaces = size(faces, 1);
+0024 
+0025 removeFlag = false(nFaces, 1);
+0026 <span class="keyword">for</span> iFace = 1:nFaces
+0027     <span class="keyword">if</span> removeFlag(iFace)
+0028         <span class="keyword">continue</span>;
+0029     <span class="keyword">end</span>
+0030     
+0031     face = faces(iFace, :);
+0032     
+0033     inds = find(sum(ismember(faces, face), 2) == 3);
+0034     inds(inds &lt;= iFace) = [];
+0035     
+0036     <span class="keyword">if</span> ~isempty(inds)
+0037         removeFlag(inds) = true;
+0038     <span class="keyword">end</span>
+0039 <span class="keyword">end</span>
+0040 
+0041 faces2 = faces(~removeFlag, :);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

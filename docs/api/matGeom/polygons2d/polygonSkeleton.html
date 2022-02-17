@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polygonSkeleton</title>
+  <meta name="keywords" content="polygonSkeleton">
+  <meta name="description" content="Skeletonization of a polygon with a dense distribution of vertices.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; polygonSkeleton.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polygonSkeleton
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Skeletonization of a polygon with a dense distribution of vertices.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = polygonSkeleton(poly, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Skeletonization of a polygon with a dense distribution of vertices.
+
+   [V, ADJ] = polygonSkeleton(POLY)
+   POLY is given as a N-by-2 array of polygon vertex coordinates. The
+   result is given a Nv-by-2 array of skeleton vertex coordinates, and an
+   adjacency list, as a NV-by-1 cell array. Each cell contains indices of
+   vertices adjacent to the vertex indexed by the cell.
+
+   [V, ADJ, RAD] = polygonSkeleton(POLY)
+   Also returns the radius of each vertex, corresponding to the distance
+   between the vertex and the closest point of the original contour
+   polygon.
+
+   SKEL = polygonSkeleton(POLY)
+   Concatenates the results in a struct SKEL with following fields:
+   * vertices  the Nv-by-2 array of skeleton vertex coordinates
+   * adjList   the adjacency list of each vertex, as a Nv-by-1 cell array.
+   * radius    the Nv-by-1 array of radius for each vertex
+
+   Example
+     % start from a binary shape
+     img = imread('circles.png');
+     img = imFillHoles(img);
+     figure; imshow(img); hold on;
+     % compute a smooth contour
+     cntList = imContours(img);
+     cnts = smoothPolygon(cntList{1}, 5);
+     drawPolygon(cnts, 'g');
+     % compute skeleton
+     [vertices, adjList] = polygonSkeleton(poly);
+     % convert adjacency list to an edge array
+     edges = adjacencyListToEdges(adjList);
+     % draw the skeleton graph
+     drawGraphEdges(vertices, edges);
+
+   See also
+     graphs, adjacencyListToEdges</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = polygonSkeleton(poly, varargin)</a>
+0002 <span class="comment">% Skeletonization of a polygon with a dense distribution of vertices.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V, ADJ] = polygonSkeleton(POLY)</span>
+0005 <span class="comment">%   POLY is given as a N-by-2 array of polygon vertex coordinates. The</span>
+0006 <span class="comment">%   result is given a Nv-by-2 array of skeleton vertex coordinates, and an</span>
+0007 <span class="comment">%   adjacency list, as a NV-by-1 cell array. Each cell contains indices of</span>
+0008 <span class="comment">%   vertices adjacent to the vertex indexed by the cell.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   [V, ADJ, RAD] = polygonSkeleton(POLY)</span>
+0011 <span class="comment">%   Also returns the radius of each vertex, corresponding to the distance</span>
+0012 <span class="comment">%   between the vertex and the closest point of the original contour</span>
+0013 <span class="comment">%   polygon.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   SKEL = polygonSkeleton(POLY)</span>
+0016 <span class="comment">%   Concatenates the results in a struct SKEL with following fields:</span>
+0017 <span class="comment">%   * vertices  the Nv-by-2 array of skeleton vertex coordinates</span>
+0018 <span class="comment">%   * adjList   the adjacency list of each vertex, as a Nv-by-1 cell array.</span>
+0019 <span class="comment">%   * radius    the Nv-by-1 array of radius for each vertex</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   Example</span>
+0022 <span class="comment">%     % start from a binary shape</span>
+0023 <span class="comment">%     img = imread('circles.png');</span>
+0024 <span class="comment">%     img = imFillHoles(img);</span>
+0025 <span class="comment">%     figure; imshow(img); hold on;</span>
+0026 <span class="comment">%     % compute a smooth contour</span>
+0027 <span class="comment">%     cntList = imContours(img);</span>
+0028 <span class="comment">%     cnts = smoothPolygon(cntList{1}, 5);</span>
+0029 <span class="comment">%     drawPolygon(cnts, 'g');</span>
+0030 <span class="comment">%     % compute skeleton</span>
+0031 <span class="comment">%     [vertices, adjList] = polygonSkeleton(poly);</span>
+0032 <span class="comment">%     % convert adjacency list to an edge array</span>
+0033 <span class="comment">%     edges = adjacencyListToEdges(adjList);</span>
+0034 <span class="comment">%     % draw the skeleton graph</span>
+0035 <span class="comment">%     drawGraphEdges(vertices, edges);</span>
+0036 <span class="comment">%</span>
+0037 <span class="comment">%   See also</span>
+0038 <span class="comment">%     graphs, adjacencyListToEdges</span>
+0039  
+0040 <span class="comment">% ------</span>
+0041 <span class="comment">% Author: David Legland</span>
+0042 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0043 <span class="comment">% INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0044 <span class="comment">% Created: 2020-05-29,    using Matlab 9.8.0.1323502 (R2020a)</span>
+0045 <span class="comment">% Copyright 2020 INRAE.</span>
+0046 
+0047 
+0048 <span class="comment">%% Voronoi Diagram computation</span>
+0049 
+0050 <span class="comment">% Compute Voronoi Diagram, using polygon vertices as germs.</span>
+0051 [V, C] = voronoin(poly);
+0052 
+0053 <span class="comment">% compute number of elements of each array</span>
+0054 nVertices   = size(V, 1);
+0055 nCells      = size(C, 1);
+0056 
+0057 <span class="comment">% Detection of the vertices located inside the contour</span>
+0058 insideFlag = inpolygon(V(:,1), V(:,2), poly(:,1), poly(:,2));
+0059 innerVertices = V(insideFlag, :);
+0060 
+0061 <span class="comment">% indices of inner vertices</span>
+0062 indsInside = find(insideFlag);
+0063 nInnerVertices = length(indsInside);
+0064 
+0065 <span class="comment">% compute map between voronoi vertex indices and skeleton vertex indices.</span>
+0066 vertexIndexMap = zeros(nVertices, 1);
+0067 <span class="keyword">for</span> iVertex = 1:length(indsInside)
+0068     vertexIndexMap(indsInside(iVertex)) = iVertex;
+0069 <span class="keyword">end</span>
+0070 
+0071 
+0072 <span class="comment">%% Compute the topology of the skeleton</span>
+0073 <span class="comment">%</span>
+0074 <span class="comment">% Compute the topology as a list of adjacent vertex indices for each vertex</span>
+0075 <span class="comment">% inside the polygon.</span>
+0076 <span class="comment">% Need to convert between voronoi indices and skeleton indices.</span>
+0077 
+0078 <span class="comment">% allocate adjacncy list</span>
+0079 adjList = cell(nInnerVertices, 1);
+0080 vertexGermInds = zeros(nInnerVertices, 1);
+0081 
+0082 <span class="comment">% iterate on voronoi cells to compute skeleton by linking adjacent vertices</span>
+0083 <span class="comment">% (avoiding first cell which is located at infinity by convention)</span>
+0084 <span class="keyword">for</span> iGerm = 2:nCells
+0085     <span class="comment">% vertices of current cell</span>
+0086     cellVertices = C{iGerm};
+0087     nCellVertices = length(cellVertices);
+0088     
+0089     <span class="comment">% iterate on vertices of current cell</span>
+0090     <span class="keyword">for</span> k = 1:nCellVertices
+0091         <span class="comment">% index of current voronoi vertex</span>
+0092         iVertex = cellVertices(k);
+0093         
+0094         <span class="comment">% process only vertices within the contour</span>
+0095         <span class="keyword">if</span> insideFlag(iVertex) == 0
+0096             <span class="keyword">continue</span>;
+0097         <span class="keyword">end</span>
+0098         
+0099         <span class="comment">% convert voronoi vertex index to skeleton vertex index</span>
+0100         indV1 = vertexIndexMap(iVertex);
+0101         
+0102         <span class="comment">% update the reference germ associated to current skeleton vertex</span>
+0103         vertexGermInds(indV1) = iGerm;
+0104         
+0105         <span class="comment">% compute indices of adjacent vertices (in cell)</span>
+0106         iPrev = cellVertices(mod(k - 2, nCellVertices) + 1);
+0107         iNext = cellVertices(mod(k, nCellVertices) + 1);
+0108         
+0109         <span class="comment">% keep only the neighbors within the polygon</span>
+0110         <span class="keyword">if</span> insideFlag(iPrev) == 1
+0111             adjList{indV1} = [adjList{indV1} vertexIndexMap(iPrev)];
+0112         <span class="keyword">end</span>
+0113         <span class="keyword">if</span> insideFlag(iNext) == 1
+0114             adjList{indV1} = [adjList{indV1} vertexIndexMap(iNext)];
+0115         <span class="keyword">end</span>
+0116     <span class="keyword">end</span>
+0117 <span class="keyword">end</span>
+0118 
+0119 <span class="comment">% cleanup to avoid duplicate indices</span>
+0120 <span class="keyword">for</span> iVertex = 1:nInnerVertices
+0121     adjList{iVertex} = unique(adjList{iVertex});
+0122 <span class="keyword">end</span>
+0123 
+0124 
+0125 <span class="comment">%% Compute radius list</span>
+0126 
+0127 <span class="comment">% for each voronoi vertex inside the polygon, compute the distance to</span>
+0128 <span class="comment">% original polygon.</span>
+0129 <span class="comment">% Find indices of germs associated to each vertex.</span>
+0130 <span class="comment">% By construction, each vertex is the circumcenter of three germs.</span>
+0131 radiusList = zeros(nInnerVertices, 1);
+0132 <span class="keyword">for</span> iVertex = 1:nInnerVertices
+0133     radiusList(iVertex) = norm(poly(vertexGermInds(iVertex),:) - innerVertices(iVertex,:));
+0134 <span class="keyword">end</span>
+0135 
+0136 
+0137 <span class="comment">%% Format output</span>
+0138 
+0139 <span class="keyword">if</span> nargout &lt;= 1
+0140     <span class="comment">% format output to a struct</span>
+0141     varargout{1} = struct(<span class="string">'vertices'</span>, {innerVertices}, <span class="string">'adjList'</span>, {adjList}, <span class="string">'radius'</span>, {radiusList});
+0142 <span class="keyword">elseif</span> nargout == 2
+0143     varargout = {innerVertices, adjList};
+0144 <span class="keyword">elseif</span> nargout == 3
+0145     varargout = {innerVertices, adjList, radiusList};
+0146 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

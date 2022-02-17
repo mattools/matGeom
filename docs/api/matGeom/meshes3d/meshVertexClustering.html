@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of meshVertexClustering</title>
+  <meta name="keywords" content="meshVertexClustering">
+  <meta name="description" content="MESHVERTEXCLUSTERING Simplifies a mesh using vertex clustering.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; meshVertexClustering.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>meshVertexClustering
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MESHVERTEXCLUSTERING Simplifies a mesh using vertex clustering.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = meshVertexClustering(vertices, faces, spacing, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MESHVERTEXCLUSTERING Simplifies a mesh using vertex clustering.
+
+   [V2, F2] = meshVertexClustering(V, F, SPACING)
+   [V2, F2] = meshVertexClustering(MESH, SPACING)
+   MESH2 = meshVertexClustering(...)
+
+   Simplifies a mesh using vertex clustering. Input mesh is specified
+   either by a pair V, F containing the vertex coordinates and the faces
+   informations, or by a structure with fields 'vertices' and 'faces'.
+
+   The SPACING input defines the size of the grid. It can be either a
+   scalar (uniform grid) or a 1-by-3 row vector. 
+
+   The output is specified either in two outputs, or in a structure with
+   fields 'vertices' and 'faces'.
+
+   Example
+     [x, y, z]  = meshgrid(1:100, 1:100, 1:100);
+     img = hypot3(x-51.12, y-52.23, z-53.34);
+     [faces, vertices] = isosurface(img, 45);
+     [v2, f2] = meshVertexClustering(vertices, faces, 10);
+     figure; axis equal; axis([0 100 0 100 0 100]);
+     drawMesh(v2, f2);
+
+   See also
+     reducepatch, <a href="smoothMesh.html" class="code" title="function varargout = smoothMesh(varargin)">smoothMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>	TRIANGULATEFACES Convert face array to an array of triangular faces.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = meshVertexClustering(vertices, faces, spacing, varargin)</a>
+0002 <span class="comment">%MESHVERTEXCLUSTERING Simplifies a mesh using vertex clustering.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V2, F2] = meshVertexClustering(V, F, SPACING)</span>
+0005 <span class="comment">%   [V2, F2] = meshVertexClustering(MESH, SPACING)</span>
+0006 <span class="comment">%   MESH2 = meshVertexClustering(...)</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Simplifies a mesh using vertex clustering. Input mesh is specified</span>
+0009 <span class="comment">%   either by a pair V, F containing the vertex coordinates and the faces</span>
+0010 <span class="comment">%   informations, or by a structure with fields 'vertices' and 'faces'.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   The SPACING input defines the size of the grid. It can be either a</span>
+0013 <span class="comment">%   scalar (uniform grid) or a 1-by-3 row vector.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   The output is specified either in two outputs, or in a structure with</span>
+0016 <span class="comment">%   fields 'vertices' and 'faces'.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   Example</span>
+0019 <span class="comment">%     [x, y, z]  = meshgrid(1:100, 1:100, 1:100);</span>
+0020 <span class="comment">%     img = hypot3(x-51.12, y-52.23, z-53.34);</span>
+0021 <span class="comment">%     [faces, vertices] = isosurface(img, 45);</span>
+0022 <span class="comment">%     [v2, f2] = meshVertexClustering(vertices, faces, 10);</span>
+0023 <span class="comment">%     figure; axis equal; axis([0 100 0 100 0 100]);</span>
+0024 <span class="comment">%     drawMesh(v2, f2);</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%   See also</span>
+0027 <span class="comment">%     reducepatch, smoothMesh</span>
+0028  
+0029 <span class="comment">% ------</span>
+0030 <span class="comment">% Author: David Legland</span>
+0031 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0032 <span class="comment">% Created: 2019-01-28,    using Matlab 9.5.0.944444 (R2018b)</span>
+0033 <span class="comment">% Copyright 2019 INRA - Cepia Software Platform.</span>
+0034 
+0035 
+0036 <span class="comment">%% Initialisation</span>
+0037 
+0038 <span class="keyword">if</span> isstruct(vertices)
+0039     <span class="keyword">if</span> nargin &gt; 2
+0040         varargin = [{spacing} varargin(:)];
+0041     <span class="keyword">end</span>
+0042     spacing = faces;
+0043 
+0044     mesh = vertices;
+0045     vertices = mesh.vertices;
+0046     faces = mesh.faces;
+0047 <span class="keyword">end</span>
+0048 
+0049 <span class="comment">% ensure input mesh is a triangulation</span>
+0050 faces = <a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>(faces);
+0051 
+0052 <span class="comment">% ensure spacing is a 1-by-3 array</span>
+0053 <span class="keyword">if</span> isscalar(spacing)
+0054     spacing = [spacing spacing spacing];
+0055 <span class="keyword">end</span>
+0056 
+0057 <span class="comment">% extract grid origin</span>
+0058 origin = [0 0 0];
+0059 <span class="keyword">if</span> ~isempty(varargin)
+0060     origin = varargin{1};
+0061 <span class="keyword">end</span>
+0062 
+0063 
+0064 <span class="comment">%% Apply grid simplification</span>
+0065 
+0066 <span class="comment">% identify the vertices belonging to the same grid</span>
+0067 [v2, I, J] = unique(round(bsxfun(@rdivide, bsxfun(@minus, vertices, origin), spacing)), <span class="string">'rows'</span>);
+0068 
+0069 
+0070 <span class="comment">%% compute reduced vertex coordinates</span>
+0071 
+0072 <span class="comment">% compute coordinates of new vertices</span>
+0073 <span class="keyword">for</span> iVertex = 1:length(I)
+0074     gridVertices = vertices(J == iVertex, :);
+0075     v2(iVertex, :) = mean(gridVertices, 1);
+0076 <span class="keyword">end</span>
+0077 
+0078 
+0079 <span class="comment">%% Compute new faces</span>
+0080 
+0081 <span class="comment">% create empty array</span>
+0082 faces2 = zeros(0, 3);
+0083 
+0084 <span class="comment">% iterate over old faces, and keep only faces whose vertices belong to</span>
+0085 <span class="comment">% different cell grids</span>
+0086 nFaces = size(faces, 1);
+0087 <span class="keyword">for</span> iFace = 1:nFaces
+0088     <span class="comment">% current face</span>
+0089     face = faces(iFace, :);
+0090     
+0091     <span class="comment">% equivalent face with new vertices</span>
+0092     face2 = J(face)';
+0093     
+0094     <span class="comment">% some vertices may belong to same cell, so we need to adjust</span>
+0095     <span class="comment">% processing</span>
+0096     nInds = length(unique(face2));
+0097     <span class="keyword">if</span> nInds == 3
+0098         <span class="comment">% vertices belong to three different cells -&gt; create a new face</span>
+0099         
+0100         <span class="comment">% keep smaller vertex at first position</span>
+0101         [tmp, indMin] = min(face2); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0102         face2 = circshift(face2, [1-indMin 0]);
+0103         
+0104         <span class="comment">% append the new face to the array</span>
+0105         faces2 = [faces2 ; face2]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0106     <span class="keyword">end</span>
+0107 <span class="keyword">end</span>
+0108 
+0109 <span class="comment">% remove duplicate faces</span>
+0110 faces2 = unique(faces2, <span class="string">'rows'</span>);
+0111 
+0112 <span class="keyword">if</span> nargout == 1
+0113     varargout{1} = struct(<span class="string">'vertices'</span>, v2, <span class="string">'faces'</span>, faces2);
+0114 <span class="keyword">else</span>
+0115     varargout = {v2, faces2};
+0116 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

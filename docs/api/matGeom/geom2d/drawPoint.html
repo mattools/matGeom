@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawPoint</title>
+  <meta name="keywords" content="drawPoint">
+  <meta name="description" content="DRAWPOINT Draw the point on the axis.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; drawPoint.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawPoint
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWPOINT Draw the point on the axis.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function h = drawPoint(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWPOINT Draw the point on the axis.
+
+   drawPoint(X, Y);
+   Draws points defined by coordinates X and Y.
+   X and Y should be array the same size.
+
+   drawPoint(COORD);
+   Packs coordinates in a single N-by-2 array.
+
+   drawPoint(..., OPT);
+   Draws each point with given option. OPT is a series of arguments pairs
+   compatible with 'plot' model. Default drawing option is 'bo',
+   corresponding to blue circles.
+   If a format string is used then only the color is effective.
+   Markers can be set using the 'marker' property.
+   The property 'linestyle' cannot be set.
+
+   drawPoint(AX, ...);
+   Specifies the axis to draw the points in. AX should be a handle to a axis
+   object. By default, display on current axis.
+
+   H = drawPoint(...) also return a handle to each of the drawn points.
+
+   Example
+     % display a single point
+     figure;
+     drawPoint([10 10]);
+
+     % display several points forming a circle
+     t = linspace(0, 2*pi, 20)';
+     drawPoint([5*cos(t)+10 3*sin(t)+10], 'r+');
+     axis equal;
+
+   See also
+     <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="clipPoints.html" class="code" title="function points = clipPoints(points, box)">clipPoints</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function h = drawPoint(varargin)</a>
+0002 <span class="comment">%DRAWPOINT Draw the point on the axis.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawPoint(X, Y);</span>
+0005 <span class="comment">%   Draws points defined by coordinates X and Y.</span>
+0006 <span class="comment">%   X and Y should be array the same size.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   drawPoint(COORD);</span>
+0009 <span class="comment">%   Packs coordinates in a single N-by-2 array.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   drawPoint(..., OPT);</span>
+0012 <span class="comment">%   Draws each point with given option. OPT is a series of arguments pairs</span>
+0013 <span class="comment">%   compatible with 'plot' model. Default drawing option is 'bo',</span>
+0014 <span class="comment">%   corresponding to blue circles.</span>
+0015 <span class="comment">%   If a format string is used then only the color is effective.</span>
+0016 <span class="comment">%   Markers can be set using the 'marker' property.</span>
+0017 <span class="comment">%   The property 'linestyle' cannot be set.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   drawPoint(AX, ...);</span>
+0020 <span class="comment">%   Specifies the axis to draw the points in. AX should be a handle to a axis</span>
+0021 <span class="comment">%   object. By default, display on current axis.</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   H = drawPoint(...) also return a handle to each of the drawn points.</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   Example</span>
+0026 <span class="comment">%     % display a single point</span>
+0027 <span class="comment">%     figure;</span>
+0028 <span class="comment">%     drawPoint([10 10]);</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">%     % display several points forming a circle</span>
+0031 <span class="comment">%     t = linspace(0, 2*pi, 20)';</span>
+0032 <span class="comment">%     drawPoint([5*cos(t)+10 3*sin(t)+10], 'r+');</span>
+0033 <span class="comment">%     axis equal;</span>
+0034 <span class="comment">%</span>
+0035 <span class="comment">%   See also</span>
+0036 <span class="comment">%     points2d, clipPoints</span>
+0037 
+0038 <span class="comment">%   ---------</span>
+0039 <span class="comment">%   author : David Legland</span>
+0040 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0041 <span class="comment">%   created the 31/10/2003.</span>
+0042 <span class="comment">%</span>
+0043 
+0044 <span class="comment">%   HISTORY</span>
+0045 <span class="comment">%   23/02/2004 add more documentation. Manage different kind of inputs.</span>
+0046 <span class="comment">%     Does not draw points outside visible area.</span>
+0047 <span class="comment">%   26/02/2007 update processing of input arguments.</span>
+0048 <span class="comment">%   30/04/2009 remove clipping of points (use clipPoints if necessary)</span>
+0049 <span class="comment">%   2011-10-11 add management of axes handle</span>
+0050 <span class="comment">%   2018-31-06 fix the bug reported in https://savannah.gnu.org/bugs/index.php?53659</span>
+0051 
+0052 <span class="comment">% extract handle of axis to draw on</span>
+0053 <span class="keyword">if</span> isAxisHandle(varargin{1})
+0054     ax = varargin{1};
+0055     varargin(1) = [];
+0056 <span class="keyword">else</span>
+0057     ax = gca;
+0058 <span class="keyword">end</span>
+0059 
+0060 <span class="comment">% extract point(s) coordinates</span>
+0061 <span class="keyword">if</span> size(varargin{1}, 2) == 2
+0062     <span class="comment">% points packed in one array</span>
+0063     var = varargin{1};
+0064     px = var(:, 1);
+0065     py = var(:, 2);
+0066     varargin(1) = [];
+0067     
+0068 <span class="keyword">elseif</span> isvector(varargin{1})
+0069     <span class="comment">% points stored in separate arrays</span>
+0070     <span class="keyword">if</span> nargin == 1 || ~isnumeric(varargin{2})
+0071         error(<span class="string">'Missing array of y-coordinates'</span>);
+0072     <span class="keyword">end</span>
+0073     px = varargin{1};
+0074     py = varargin{2};
+0075     varargin(1:2) = [];
+0076     px = px(:);
+0077     py = py(:);
+0078     
+0079 <span class="keyword">else</span>
+0080     error(<span class="string">'Points should be two 1D arrays or one N-by-2 array'</span>);
+0081 <span class="keyword">end</span>
+0082 
+0083 <span class="keyword">if</span> length(varargin) &gt; 1
+0084     <span class="comment">% Check if linestyle is given</span>
+0085     char_opt = cellfun(@lower, varargin(cellfun(@ischar, varargin)), <span class="keyword">...</span>
+0086         <span class="string">'UniformOutput'</span>, false);
+0087     tf = ismember(<span class="string">'linestyle'</span>, char_opt);
+0088     <span class="keyword">if</span> tf
+0089         error(<span class="string">'Points cannot be draw with lines, use plot or drawPolygon instead'</span>);
+0090     <span class="keyword">end</span>
+0091     hh = plot(ax, px, py, <span class="string">'marker'</span>, <span class="string">'o'</span>, <span class="string">'linestyle'</span>, <span class="string">'none'</span>, varargin{:});
+0092     
+0093 <span class="keyword">elseif</span> length(varargin) == 1
+0094     <span class="comment">% use the specified single option (for example: 'b.', or 'k+')</span>
+0095     hh = plot(ax, px, py, varargin{1});
+0096 <span class="keyword">else</span>
+0097     <span class="comment">% use a default marker</span>
+0098     hh = plot(ax, px, py, <span class="string">'o'</span>);
+0099 <span class="keyword">end</span>
+0100 
+0101 <span class="keyword">if</span> nargout == 1
+0102     h = hh;
+0103 <span class="keyword">end</span>
+0104 
+0105 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

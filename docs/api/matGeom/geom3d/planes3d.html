@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of planes3d</title>
+  <meta name="keywords" content="planes3d">
+  <meta name="description" content="PLANES3D Description of functions operating on 3D planes.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; planes3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>planes3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>PLANES3D Description of functions operating on 3D planes.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function planes3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">PLANES3D Description of functions operating on 3D planes.
+
+   Planes are represented by a 3D point (the plane origin) and 2 direction
+   vectors, which should not be colinear.
+   PLANE = [X0 Y0 Z0  DX1 DY1 DZ1  DX2 DY2 DZ2];
+
+   See also
+   <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>, <a href="normalizePlane.html" class="code" title="function plane2 = normalizePlane(plane1)">normalizePlane</a>, <a href="medianPlane.html" class="code" title="function plane = medianPlane(p1, p2)">medianPlane</a>, <a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>, <a href="parallelPlane.html" class="code" title="function res = parallelPlane(plane, point)">parallelPlane</a>
+   <a href="distancePointPlane.html" class="code" title="function d = distancePointPlane(point, plane)">distancePointPlane</a>, <a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>, <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>, <a href="isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>
+   <a href="intersectPlanes.html" class="code" title="function line = intersectPlanes(plane1, plane2, varargin)">intersectPlanes</a>, <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>, <a href="intersectEdgePlane.html" class="code" title="function point = intersectEdgePlane(edge, plane, varargin)">intersectEdgePlane</a>
+   <a href="dihedralAngle.html" class="code" title="function theta = dihedralAngle(plane1, plane2)">dihedralAngle</a>, <a href="planesBisector.html" class="code" title="function out = planesBisector(plane1, plane2)">planesBisector</a>, polyhedronSlice, clipConvexPolyhedronHP
+   <a href="fitPlane.html" class="code" title="function plane = fitPlane(points)">fitPlane</a>, <a href="drawPlane3d.html" class="code" title="function h = drawPlane3d(plane, varargin)">drawPlane3d</a>, <a href="clipPlane.html" class="code" title="function poly = clipPlane(plane, box)">clipPlane</a>, <a href="transformPlane3d.html" class="code" title="function plane2 = transformPlane3d(plane, trans)">transformPlane3d</a>, <a href="isPlane.html" class="code" title="function d = isPlane(plane)">isPlane</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function planes3d(varargin)</a>
+0002 <span class="comment">%PLANES3D Description of functions operating on 3D planes.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   Planes are represented by a 3D point (the plane origin) and 2 direction</span>
+0005 <span class="comment">%   vectors, which should not be colinear.</span>
+0006 <span class="comment">%   PLANE = [X0 Y0 Z0  DX1 DY1 DZ1  DX2 DY2 DZ2];</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   See also</span>
+0009 <span class="comment">%   createPlane, normalizePlane, medianPlane, planeNormal, parallelPlane</span>
+0010 <span class="comment">%   distancePointPlane, projPointOnPlane, planePosition, isBelowPlane</span>
+0011 <span class="comment">%   intersectPlanes, intersectLinePlane, intersectEdgePlane</span>
+0012 <span class="comment">%   dihedralAngle, planesBisector, polyhedronSlice, clipConvexPolyhedronHP</span>
+0013 <span class="comment">%   fitPlane, drawPlane3d, clipPlane, transformPlane3d, isPlane</span>
+0014 <span class="comment">%</span>
+0015 
+0016 <span class="comment">% ------</span>
+0017 <span class="comment">% Author: David Legland</span>
+0018 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0019 <span class="comment">% Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)</span>
+0020 <span class="comment">% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0021 
+0022 help(<span class="string">'planes3d'</span>);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

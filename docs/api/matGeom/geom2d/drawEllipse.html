@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawEllipse</title>
+  <meta name="keywords" content="drawEllipse">
+  <meta name="description" content="DRAWELLIPSE Draw an ellipse on the current axis.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; drawEllipse.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawEllipse
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWELLIPSE Draw an ellipse on the current axis.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawEllipse(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWELLIPSE Draw an ellipse on the current axis.
+
+   drawEllipse(ELLI);
+   Draws the ellipse ELLI in the form [XC YC RA RB THETA], with center
+   (XC, YC), with main axis of half-length RA and RB, and orientation
+   THETA in degrees counted counter-clockwise.
+
+   drawEllipse(XC, YC, RA, RB);
+   drawEllipse(XC, YC, RA, RB, THETA);
+   Specifies ellipse parameters as separate arguments (old syntax).
+
+   drawEllipse(..., NAME, VALUE);
+   Specifies drawing style of ellipse, see the help of plot function.
+
+   H = drawEllipse(...);
+   Also returns handles to the created line objects.
+
+   -&gt; Parameters can also be arrays. In this case, all arrays are supposed 
+   to have the same size.
+
+   Example:
+   % Draw an ellipse centered in [50 50], with semi major axis length of
+   % 40, semi minor axis length of 20, and rotated by 30 degrees.
+     figure(1); clf; hold on;
+     drawEllipse([50 50 40 20 30]);
+     axis equal; axis([0 100 10 90])
+
+   % add another ellipse with different orientation and style
+     drawEllipse([50 50 40 20 -10], 'linewidth', 2, 'color', 'g');
+
+   See also:
+     <a href="ellipses2d.html" class="code" title="function ellipses2d(varargin)">ellipses2d</a>, <a href="drawCircle.html" class="code" title="function varargout = drawCircle(varargin)">drawCircle</a>, <a href="drawEllipseArc.html" class="code" title="function varargout = drawEllipseArc(varargin)">drawEllipseArc</a>, <a href="ellipseToPolygon.html" class="code" title="function varargout = ellipseToPolygon(ellipse, N)">ellipseToPolygon</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawEllipse(varargin)</a>
+0002 <span class="comment">%DRAWELLIPSE Draw an ellipse on the current axis.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawEllipse(ELLI);</span>
+0005 <span class="comment">%   Draws the ellipse ELLI in the form [XC YC RA RB THETA], with center</span>
+0006 <span class="comment">%   (XC, YC), with main axis of half-length RA and RB, and orientation</span>
+0007 <span class="comment">%   THETA in degrees counted counter-clockwise.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   drawEllipse(XC, YC, RA, RB);</span>
+0010 <span class="comment">%   drawEllipse(XC, YC, RA, RB, THETA);</span>
+0011 <span class="comment">%   Specifies ellipse parameters as separate arguments (old syntax).</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   drawEllipse(..., NAME, VALUE);</span>
+0014 <span class="comment">%   Specifies drawing style of ellipse, see the help of plot function.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   H = drawEllipse(...);</span>
+0017 <span class="comment">%   Also returns handles to the created line objects.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   -&gt; Parameters can also be arrays. In this case, all arrays are supposed</span>
+0020 <span class="comment">%   to have the same size.</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   Example:</span>
+0023 <span class="comment">%   % Draw an ellipse centered in [50 50], with semi major axis length of</span>
+0024 <span class="comment">%   % 40, semi minor axis length of 20, and rotated by 30 degrees.</span>
+0025 <span class="comment">%     figure(1); clf; hold on;</span>
+0026 <span class="comment">%     drawEllipse([50 50 40 20 30]);</span>
+0027 <span class="comment">%     axis equal; axis([0 100 10 90])</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%   % add another ellipse with different orientation and style</span>
+0030 <span class="comment">%     drawEllipse([50 50 40 20 -10], 'linewidth', 2, 'color', 'g');</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">%   See also:</span>
+0033 <span class="comment">%     ellipses2d, drawCircle, drawEllipseArc, ellipseToPolygon</span>
+0034 <span class="comment">%</span>
+0035 
+0036 <span class="comment">%   ---------</span>
+0037 <span class="comment">%   author : David Legland</span>
+0038 <span class="comment">%   e-mail: david.legland@inra.fr</span>
+0039 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0040 <span class="comment">%   created the 11/12/2003.</span>
+0041 <span class="comment">%</span>
+0042 
+0043 <span class="comment">%   HISTORY</span>
+0044 <span class="comment">%   2004-01-08 returns coord of points when 2 output args are asked</span>
+0045 <span class="comment">%   2004-01-08 fix bug in extraction of input parameters, theta was not</span>
+0046 <span class="comment">%       initialized in case of array of size 1*5</span>
+0047 <span class="comment">%   2005-08-13 uses radians instead of degrees</span>
+0048 <span class="comment">%   2008-02-21 add support for drawing styles, code cleanup</span>
+0049 <span class="comment">%   2011-03-30 use degrees instead of radians, remove [x y] = ... format</span>
+0050 <span class="comment">%   2011-10-11 add support for axis handle</span>
+0051 
+0052 
+0053 <span class="comment">%% Extract input arguments</span>
+0054 
+0055 <span class="comment">% extract handle of axis to draw on</span>
+0056 <span class="keyword">if</span> isAxisHandle(varargin{1})
+0057     ax = varargin{1};
+0058     varargin(1) = [];
+0059 <span class="keyword">else</span>
+0060     ax = gca;
+0061 <span class="keyword">end</span>
+0062 
+0063 <span class="comment">% extract dawing style strings</span>
+0064 styles = {};
+0065 <span class="keyword">for</span> i = 1:length(varargin)
+0066     <span class="keyword">if</span> ischar(varargin{i})
+0067         styles = varargin(i:end);
+0068         varargin(i:end) = [];
+0069         <span class="keyword">break</span>;
+0070     <span class="keyword">end</span>
+0071 <span class="keyword">end</span>
+0072 
+0073 <span class="comment">% extract ellipse parameters</span>
+0074 <span class="keyword">if</span> length(varargin) == 1
+0075     <span class="comment">% ellipse is given in a single array</span>
+0076     ellipse = varargin{1};
+0077     x0 = ellipse(:, 1);
+0078     y0 = ellipse(:, 2);
+0079     a  = ellipse(:, 3);
+0080     b  = ellipse(:, 4);
+0081     <span class="keyword">if</span> length(ellipse) &gt; 4
+0082         theta = ellipse(:, 5);
+0083     <span class="keyword">else</span>
+0084         theta = zeros(size(x0));
+0085     <span class="keyword">end</span>
+0086     
+0087 <span class="keyword">elseif</span> length(varargin) &gt;= 4
+0088     <span class="comment">% ellipse parameters given as separate arrays</span>
+0089     x0 = varargin{1};
+0090     y0 = varargin{2};
+0091     a  = varargin{3};
+0092     b  = varargin{4};
+0093     <span class="keyword">if</span> length(varargin) &gt; 4
+0094         theta = varargin{5};
+0095     <span class="keyword">else</span>
+0096         theta = zeros(size(x0));
+0097     <span class="keyword">end</span>
+0098     
+0099 <span class="keyword">else</span>
+0100     error(<span class="string">'drawEllipse: incorrect input arguments'</span>);
+0101 <span class="keyword">end</span>
+0102 
+0103 
+0104 <span class="comment">%% Process drawing of a set of ellipses</span>
+0105 
+0106 <span class="comment">% angular positions of vertices</span>
+0107 t = linspace(0, 2*pi, 145);
+0108 
+0109 <span class="comment">% compute position of points to draw each ellipse</span>
+0110 h = zeros(length(x0), 1);
+0111 <span class="keyword">for</span> i = 1:length(x0)
+0112     <span class="comment">% pre-compute rotation angles (given in degrees)</span>
+0113     cot = cosd(theta(i));
+0114     sit = sind(theta(i));
+0115     
+0116     <span class="comment">% compute position of points used to draw current ellipse</span>
+0117     xt = x0(i) + a(i) * cos(t) * cot - b(i) * sin(t) * sit;
+0118     yt = y0(i) + a(i) * cos(t) * sit + b(i) * sin(t) * cot;
+0119     
+0120     <span class="comment">% stores handle to graphic object</span>
+0121     h(i) = plot(ax, xt, yt, styles{:});
+0122 <span class="keyword">end</span>
+0123 
+0124 <span class="comment">% return handles if required</span>
+0125 <span class="keyword">if</span> nargout &gt; 0
+0126     varargout = {h};
+0127 <span class="keyword">end</span>
+0128</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

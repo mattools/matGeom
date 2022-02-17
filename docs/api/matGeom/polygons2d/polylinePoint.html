@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polylinePoint</title>
+  <meta name="keywords" content="polylinePoint">
+  <meta name="description" content="POLYLINEPOINT Extract a point from a polyline.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; polylinePoint.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polylinePoint
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYLINEPOINT Extract a point from a polyline.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function point = polylinePoint(poly, pos) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLYLINEPOINT Extract a point from a polyline.
+
+   POINT = polylinePoint(POLYLINE, POS)
+   POLYLINE is a N*2 array containing coordinate of polyline vertices
+   POS is comprised between 0 (first point of polyline) and Nv-1 (last
+   point of the polyline).
+   
+
+   Example
+   poly = [10 10;20 10;20 20;30 30];
+   polylinePoint(poly, 0)
+       [10 10]
+   polylinePoint(poly, 3)
+       [30 30]
+   polylinePoint(poly, 1.4)
+       [20 14]
+
+
+   See also
+   polygons2d
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)
+ Copyright 2009 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polylineSubcurve.html" class="code" title="function [res, inds] = polylineSubcurve(poly, t0, t1)">polylineSubcurve</a>	Extract a portion of a polyline.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function point = polylinePoint(poly, pos)</a>
+0002 <span class="comment">%POLYLINEPOINT Extract a point from a polyline.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POINT = polylinePoint(POLYLINE, POS)</span>
+0005 <span class="comment">%   POLYLINE is a N*2 array containing coordinate of polyline vertices</span>
+0006 <span class="comment">%   POS is comprised between 0 (first point of polyline) and Nv-1 (last</span>
+0007 <span class="comment">%   point of the polyline).</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Example</span>
+0011 <span class="comment">%   poly = [10 10;20 10;20 20;30 30];</span>
+0012 <span class="comment">%   polylinePoint(poly, 0)</span>
+0013 <span class="comment">%       [10 10]</span>
+0014 <span class="comment">%   polylinePoint(poly, 3)</span>
+0015 <span class="comment">%       [30 30]</span>
+0016 <span class="comment">%   polylinePoint(poly, 1.4)</span>
+0017 <span class="comment">%       [20 14]</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   See also</span>
+0021 <span class="comment">%   polygons2d</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">% ------</span>
+0024 <span class="comment">% Author: David Legland</span>
+0025 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0026 <span class="comment">% Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)</span>
+0027 <span class="comment">% Copyright 2009 INRA - Cepia Software Platform.</span>
+0028 
+0029 
+0030 <span class="comment">% number of points to compute</span>
+0031 Np = length(pos(:));
+0032 
+0033 <span class="comment">% number of vertices in polyline</span>
+0034 Nv = size(poly, 1);
+0035 
+0036 <span class="comment">% allocate memory results</span>
+0037 point = zeros(Np, 2);
+0038 
+0039 <span class="comment">% iterate on points</span>
+0040 <span class="keyword">for</span> i=1:Np
+0041     <span class="comment">% compute index of edge (between 0 and Nv)</span>
+0042     ind = floor(pos(i));
+0043     
+0044     <span class="comment">% special case of last point of polyline</span>
+0045     <span class="keyword">if</span> ind==Nv-1
+0046         point(i,:) = poly(<span class="keyword">end</span>,:);
+0047         <span class="keyword">continue</span>;
+0048     <span class="keyword">end</span>
+0049     
+0050     <span class="comment">% format index to ensure being on polyline</span>
+0051     ind = min(max(ind, 0), Nv-2);
+0052     
+0053     <span class="comment">% position on current edge</span>
+0054     t = min(max(pos(i)-ind, 0), 1);
+0055     
+0056     <span class="comment">% parameters of current edge</span>
+0057     x0 = poly(ind+1, 1);
+0058     y0 = poly(ind+1, 2);
+0059     dx = poly(ind+2,1)-x0;
+0060     dy = poly(ind+2,2)-y0;
+0061     
+0062     <span class="comment">% compute position of current point</span>
+0063     point(i, :) = [x0+t*dx, y0+t*dy];
+0064 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

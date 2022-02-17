@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createTranslation</title>
+  <meta name="keywords" content="createTranslation">
+  <meta name="description" content="CREATETRANSLATION Create the 3*3 matrix of a translation.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; createTranslation.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createTranslation
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATETRANSLATION Create the 3*3 matrix of a translation.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function trans = createTranslation(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATETRANSLATION Create the 3*3 matrix of a translation.
+
+   TRANS = createTranslation(DX, DY);
+   Returns the translation corresponding to DX and DY.
+   The returned matrix has the form :
+   [1 0 TX]
+   [0 1 TY]
+   [0 0  1]
+
+   TRANS = createTranslation(VECTOR);
+   Returns the matrix corresponding to a translation by the vector [x y].
+
+
+   See also:
+   <a href="transforms2d.html" class="code" title="function transforms2d(varargin)">transforms2d</a>, <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>, <a href="createRotation.html" class="code" title="function trans = createRotation(varargin)">createRotation</a>, <a href="createScaling.html" class="code" title="function trans = createScaling(varargin)">createScaling</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 06/04/2004.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createRotation90.html" class="code" title="function mat = createRotation90(varargin)">createRotation90</a>	CREATEROTATION90  Matrix of a rotation for 90 degrees multiples.</li><li><a href="drawParabola.html" class="code" title="function varargout = drawParabola(varargin)">drawParabola</a>	DRAWPARABOLA Draw a parabola on the current axis.</li><li><a href="../../matGeom/geom3d/orientedBox3d.html" class="code" title="function [box3d, rotMat] = orientedBox3d(pts)">orientedBox3d</a>	Object-oriented bounding box of a set of 3D points.</li><li><a href="../../matGeom/geom3d/revolutionSurface.html" class="code" title="function varargout = revolutionSurface(varargin)">revolutionSurface</a>	REVOLUTIONSURFACE Create a surface of revolution from a planar curve.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function trans = createTranslation(varargin)</a>
+0002 <span class="comment">%CREATETRANSLATION Create the 3*3 matrix of a translation.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   TRANS = createTranslation(DX, DY);</span>
+0005 <span class="comment">%   Returns the translation corresponding to DX and DY.</span>
+0006 <span class="comment">%   The returned matrix has the form :</span>
+0007 <span class="comment">%   [1 0 TX]</span>
+0008 <span class="comment">%   [0 1 TY]</span>
+0009 <span class="comment">%   [0 0  1]</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   TRANS = createTranslation(VECTOR);</span>
+0012 <span class="comment">%   Returns the matrix corresponding to a translation by the vector [x y].</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   See also:</span>
+0016 <span class="comment">%   transforms2d, transformPoint, createRotation, createScaling</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   ---------</span>
+0019 <span class="comment">%   author : David Legland</span>
+0020 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0021 <span class="comment">%   created the 06/04/2004.</span>
+0022 <span class="comment">%</span>
+0023 
+0024 <span class="comment">%   HISTORY</span>
+0025 <span class="comment">%   22/04/2009: rename as createTranslation</span>
+0026 
+0027 <span class="comment">% process input arguments</span>
+0028 <span class="keyword">if</span> isempty(varargin)
+0029     tx = 0;
+0030     ty = 0;
+0031 <span class="keyword">elseif</span> length(varargin)==1
+0032     var = varargin{1};
+0033     tx = var(1);
+0034     ty = var(2);
+0035 <span class="keyword">else</span>
+0036     tx = varargin{1};
+0037     ty = varargin{2};
+0038 <span class="keyword">end</span>
+0039 
+0040 <span class="comment">% create the matrix representing the translation</span>
+0041 trans = [1 0 tx ; 0 1 ty ; 0 0 1];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

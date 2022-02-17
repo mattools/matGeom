@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of meshVoronoiDiagram</title>
+  <meta name="keywords" content="meshVoronoiDiagram">
+  <meta name="description" content="Voronoi Diagram on the surface of a polygonal mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; meshVoronoiDiagram.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>meshVoronoiDiagram
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Voronoi Diagram on the surface of a polygonal mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [regions, distances] = meshVoronoiDiagram(vertices, faces, germInds) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Voronoi Diagram on the surface of a polygonal mesh.
+
+   REGIONS = meshVoronoiDiagram(V, F, GERM_INDS)
+   Computes the region associated to each vertex of the input mesh (V,F),
+   i.e. the index of the germ closest to the vertex.
+   V is a NV-by-3 array of vertx coordinates, and F is a NF-by-3 array
+   containing vertex indices of each face.
+   IGERMS is an array of vertex indices.
+   REGIONS is a column vector with as many rows as the number of vertices,
+   containing for each vertex the index of the closest germ. 
+   The regions are computed by propagating distances along edges.
+   
+   [REGIONS, DISTANCES] = meshVoronoiDiagram(V, F, GERM_INDS)
+   Also returns the (geodesic) distance from each vertex to the closest
+   germ. 
+   
+
+   Example
+     % Create a triangular mesh based on an icosahedron shape
+     [v, f] = createIcosahedron; v = v - mean(v); 
+     [v, f] = subdivideMesh(v, f, 10); v = normalizeVector3d(v);
+     figure; hold on; axis equal; view(3);
+     drawMesh(v, f, 'faceColor', [.7 .7 .7]);
+     % generate germs within the mesh (identify with indices)
+     nGerms = 10; 
+     inds = randperm(size(v, 1), nGerms);
+     drawPoint3d(v(inds,:), 'bo');
+     % Compute Voronoi Diagram
+     [regions, distances] = meshVoronoiDiagram(v, f, inds);
+     % Display regions
+     figure; hold on; axis equal; view(3);
+     cmap = jet(nGerms);
+     patch('Vertices', v, 'Faces', f, 'FaceVertexCData', cmap(regions, :), 'FaceColor', 'interp', 'LineStyle', 'none');
+     % Display distance maps
+     figure; hold on; axis equal; view(3);
+     patch('Vertices', v, 'Faces', f, 'FaceVertexCData', distances, 'FaceColor', 'interp', 'LineStyle', 'none');
+
+   See also
+     meshes3d, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>	DISTANCEPOINTS3D Compute euclidean distance between pairs of 3D Points.</li><li><a href="meshAdjacencyMatrix.html" class="code" title="function adj = meshAdjacencyMatrix(faces, varargin)">meshAdjacencyMatrix</a>	MESHADJACENCYMATRIX Compute adjacency matrix of a mesh from set of faces.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [regions, distances] = meshVoronoiDiagram(vertices, faces, germInds)</a>
+0002 <span class="comment">% Voronoi Diagram on the surface of a polygonal mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   REGIONS = meshVoronoiDiagram(V, F, GERM_INDS)</span>
+0005 <span class="comment">%   Computes the region associated to each vertex of the input mesh (V,F),</span>
+0006 <span class="comment">%   i.e. the index of the germ closest to the vertex.</span>
+0007 <span class="comment">%   V is a NV-by-3 array of vertx coordinates, and F is a NF-by-3 array</span>
+0008 <span class="comment">%   containing vertex indices of each face.</span>
+0009 <span class="comment">%   IGERMS is an array of vertex indices.</span>
+0010 <span class="comment">%   REGIONS is a column vector with as many rows as the number of vertices,</span>
+0011 <span class="comment">%   containing for each vertex the index of the closest germ.</span>
+0012 <span class="comment">%   The regions are computed by propagating distances along edges.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   [REGIONS, DISTANCES] = meshVoronoiDiagram(V, F, GERM_INDS)</span>
+0015 <span class="comment">%   Also returns the (geodesic) distance from each vertex to the closest</span>
+0016 <span class="comment">%   germ.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   Example</span>
+0020 <span class="comment">%     % Create a triangular mesh based on an icosahedron shape</span>
+0021 <span class="comment">%     [v, f] = createIcosahedron; v = v - mean(v);</span>
+0022 <span class="comment">%     [v, f] = subdivideMesh(v, f, 10); v = normalizeVector3d(v);</span>
+0023 <span class="comment">%     figure; hold on; axis equal; view(3);</span>
+0024 <span class="comment">%     drawMesh(v, f, 'faceColor', [.7 .7 .7]);</span>
+0025 <span class="comment">%     % generate germs within the mesh (identify with indices)</span>
+0026 <span class="comment">%     nGerms = 10;</span>
+0027 <span class="comment">%     inds = randperm(size(v, 1), nGerms);</span>
+0028 <span class="comment">%     drawPoint3d(v(inds,:), 'bo');</span>
+0029 <span class="comment">%     % Compute Voronoi Diagram</span>
+0030 <span class="comment">%     [regions, distances] = meshVoronoiDiagram(v, f, inds);</span>
+0031 <span class="comment">%     % Display regions</span>
+0032 <span class="comment">%     figure; hold on; axis equal; view(3);</span>
+0033 <span class="comment">%     cmap = jet(nGerms);</span>
+0034 <span class="comment">%     patch('Vertices', v, 'Faces', f, 'FaceVertexCData', cmap(regions, :), 'FaceColor', 'interp', 'LineStyle', 'none');</span>
+0035 <span class="comment">%     % Display distance maps</span>
+0036 <span class="comment">%     figure; hold on; axis equal; view(3);</span>
+0037 <span class="comment">%     patch('Vertices', v, 'Faces', f, 'FaceVertexCData', distances, 'FaceColor', 'interp', 'LineStyle', 'none');</span>
+0038 <span class="comment">%</span>
+0039 <span class="comment">%   See also</span>
+0040 <span class="comment">%     meshes3d, drawMesh</span>
+0041  
+0042 <span class="comment">% ------</span>
+0043 <span class="comment">% Author: David Legland</span>
+0044 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0045 <span class="comment">% INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0046 <span class="comment">% Created: 2020-04-16,    using Matlab 9.7.0.1247435 (R2019b) Update 2</span>
+0047 <span class="comment">% Copyright 2020 INRAE.</span>
+0048 
+0049 <span class="comment">% choose initial germ indices if input is a scalar</span>
+0050 nVertices = size(vertices, 1);
+0051 <span class="keyword">if</span> isscalar(germInds)
+0052     germInds = randperm(nVertices, germInds);
+0053 <span class="keyword">end</span>
+0054 nGerms = length(germInds);
+0055 
+0056 <span class="comment">% init info for vertices</span>
+0057 distances = inf * ones(nVertices, 1);
+0058 regions = zeros(nVertices, 1);
+0059 
+0060 <span class="comment">% initialize vertex data for each germ</span>
+0061 <span class="keyword">for</span> iGerm = 1:nGerms
+0062     ind = germInds(iGerm);
+0063     distances(ind) = 0;
+0064     regions(ind) = iGerm;
+0065 <span class="keyword">end</span>
+0066 
+0067 <span class="comment">% compute the adjacencey matrix, as a Nv-by-Nv sparse matrix of 0 and 1.</span>
+0068 adj = <a href="meshAdjacencyMatrix.html" class="code" title="function adj = meshAdjacencyMatrix(faces, varargin)">meshAdjacencyMatrix</a>(faces);
+0069 
+0070 
+0071 <span class="comment">% create the queue of vertex to process, initialized with germ indices.</span>
+0072 vertexQueue = germInds;
+0073 processed = false(nVertices, 1);
+0074 
+0075 <span class="comment">% process vertices in the queue, using distance as priority</span>
+0076 <span class="keyword">while</span> ~isempty(vertexQueue)
+0077     <span class="comment">% find the vertex with smallest distance</span>
+0078     [~, ind] = min(distances(vertexQueue));
+0079     iVertex = vertexQueue(ind);
+0080     vertexQueue(ind) = [];
+0081     
+0082     <span class="comment">% info for current vertex</span>
+0083     vertex = vertices(iVertex, :);
+0084     dist0 = distances(iVertex);
+0085     
+0086     <span class="comment">% neighbors of current vertex</span>
+0087     neighbors = find(adj(iVertex,:));
+0088     
+0089     <span class="comment">% keep only vertices not yet processed</span>
+0090     neighbors = neighbors(~processed(neighbors));
+0091     
+0092     <span class="keyword">for</span> iNeigh = 1:length(neighbors)
+0093         indNeigh = neighbors(iNeigh);
+0094         dist = dist0 + <a href="../../matGeom/geom3d/distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>(vertex, vertices(indNeigh, :));
+0095         
+0096         <span class="keyword">if</span> dist &lt; distances(indNeigh)
+0097             distances(indNeigh) = dist;
+0098             regions(indNeigh) = regions(iVertex);
+0099             vertexQueue = [vertexQueue indNeigh]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0100         <span class="keyword">end</span>
+0101     <span class="keyword">end</span>
+0102     
+0103     <span class="comment">% mark current vertex as processed</span>
+0104     processed(iVertex) = true;
+0105 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

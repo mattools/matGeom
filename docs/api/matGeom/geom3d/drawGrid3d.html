@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawGrid3d</title>
+  <meta name="keywords" content="drawGrid3d">
+  <meta name="description" content="DRAWGRID3D Draw a 3D grid on the current axis.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; drawGrid3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawGrid3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWGRID3D Draw a 3D grid on the current axis.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawGrid3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWGRID3D Draw a 3D grid on the current axis.
+
+   drawGrid3d
+   draws a 3D square grid, with origin (0,0,0) and spacing 1 in each
+   direction, with bounds corresponding to the bounds of current axis.
+
+   drawGrid3d(SPACING)
+   where spacing is either a scalar or a [1x3] matrix, specifies the size
+   of the unit cell.
+
+   drawGrid3d(ORIGIN, SPACING)
+   Also specify origin of grid. ORIGIN is a [1x3] array.
+
+   drawGrid3d(..., EDGE)
+   specifies whether function should draw edges touching edges of axis.
+   EDGE is a characheter string, which can be :
+   - 'OPEN' : each line start from one face of window to the opposite
+   face. This results in a 'spiky' grid.
+   - 'CLOSED' (default value) : each line stops at the last visible point
+   of the grid for this line. The result looks like a box (no free spikes
+   around the grid).
+
+   H = drawGrid3d(...);
+   return a vector of handles for each LINE object which was crated.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>	DRAWEDGE3D Draw 3D edge in the current axes.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawGrid3d(varargin)</a>
+0002 <span class="comment">%DRAWGRID3D Draw a 3D grid on the current axis.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawGrid3d</span>
+0005 <span class="comment">%   draws a 3D square grid, with origin (0,0,0) and spacing 1 in each</span>
+0006 <span class="comment">%   direction, with bounds corresponding to the bounds of current axis.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   drawGrid3d(SPACING)</span>
+0009 <span class="comment">%   where spacing is either a scalar or a [1x3] matrix, specifies the size</span>
+0010 <span class="comment">%   of the unit cell.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   drawGrid3d(ORIGIN, SPACING)</span>
+0013 <span class="comment">%   Also specify origin of grid. ORIGIN is a [1x3] array.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   drawGrid3d(..., EDGE)</span>
+0016 <span class="comment">%   specifies whether function should draw edges touching edges of axis.</span>
+0017 <span class="comment">%   EDGE is a characheter string, which can be :</span>
+0018 <span class="comment">%   - 'OPEN' : each line start from one face of window to the opposite</span>
+0019 <span class="comment">%   face. This results in a 'spiky' grid.</span>
+0020 <span class="comment">%   - 'CLOSED' (default value) : each line stops at the last visible point</span>
+0021 <span class="comment">%   of the grid for this line. The result looks like a box (no free spikes</span>
+0022 <span class="comment">%   around the grid).</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   H = drawGrid3d(...);</span>
+0025 <span class="comment">%   return a vector of handles for each LINE object which was crated.</span>
+0026 <span class="comment">%</span>
+0027 
+0028 <span class="comment">%   ------</span>
+0029 <span class="comment">%   Author: David Legland</span>
+0030 <span class="comment">%   e-mail: david.legland@grignon.inra.fr</span>
+0031 <span class="comment">%   Created: 2005-11-17</span>
+0032 <span class="comment">%   Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0033 
+0034 <span class="comment">%% initialize variables -----</span>
+0035 
+0036 <span class="comment">% default values</span>
+0037 closed = true;
+0038 origin = [0 0 0];
+0039 spacing = [1 1 1];
+0040 
+0041 <span class="comment">% check if grid is open or not</span>
+0042 str = <span class="string">''</span>;
+0043 <span class="keyword">if</span> ~isempty(varargin)
+0044     str = varargin{end};
+0045 <span class="keyword">end</span>
+0046 <span class="keyword">if</span> ischar(str)
+0047     <span class="keyword">if</span> strncmpi(str, <span class="string">'open'</span>, 4)
+0048         closed = false;
+0049     <span class="keyword">end</span>
+0050     varargin = varargin(1:end-1);
+0051 <span class="keyword">end</span>
+0052 
+0053 <span class="comment">% check origin and grid spacing</span>
+0054 <span class="keyword">if</span> length(varargin)==1
+0055     spacing = varargin{1};
+0056 <span class="keyword">elseif</span> length(varargin)==2
+0057     origin = varargin{1};
+0058     spacing = varargin{2};
+0059 <span class="keyword">end</span>
+0060 
+0061 <span class="comment">%% Compute internam data -----</span>
+0062 
+0063 <span class="comment">% get axis limits</span>
+0064 ax = axis;
+0065 x0 = ax(1); x1 = ax(2);
+0066 y0 = ax(3); y1 = ax(4);
+0067 z0 = ax(5); z1 = ax(6);
+0068 
+0069 <span class="comment">% get first and last coordinates of the grid in each direction</span>
+0070 dx = spacing(1); dy = spacing(2); dz = spacing(3);
+0071 xe = x0 + mod(origin(1) - x0, dx);
+0072 xf = x1 - mod(x1 - origin(1), dx);
+0073 ye = y0 + mod(origin(2) - y0, dy);
+0074 yf = y1 - mod(y1 - origin(2), dy);
+0075 ze = z0 + mod(origin(1) - z0, dz);
+0076 zf = z1 - mod(z1 - origin(1), dz);
+0077 
+0078 <span class="comment">% update first and last coordinate if grid is 'closed'</span>
+0079 <span class="keyword">if</span> closed
+0080     x0 = xe; x1 = xf;
+0081     y0 = ye; y1 = yf;
+0082     z0 = ze; z1 = zf;
+0083 <span class="keyword">end</span>
+0084 
+0085 
+0086 <span class="comment">%% Draw the grid -----</span>
+0087 
+0088 h = [];
+0089 <span class="comment">%TODO: rewrite code, avoiding loops</span>
+0090 
+0091 <span class="comment">% draw lines parallel to x axis</span>
+0092 <span class="keyword">for</span> y = ye:dy:yf
+0093     <span class="keyword">for</span> z = ze:dz:zf
+0094         h = [h; <a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>([x0 y z x1 y z])]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0095     <span class="keyword">end</span>
+0096 <span class="keyword">end</span>
+0097 
+0098 <span class="comment">% draw lines parallel to y axis</span>
+0099 <span class="keyword">for</span> x = xe:dx:xf
+0100     <span class="keyword">for</span> z = ze:dz:zf
+0101         h = [h; <a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>([x y0 z x y1 z])]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0102     <span class="keyword">end</span>
+0103 <span class="keyword">end</span>
+0104 
+0105 <span class="comment">% draw lines parallel to z axis</span>
+0106 <span class="keyword">for</span> x = xe:dx:xf
+0107     <span class="keyword">for</span> y = ye:dy:yf
+0108         h = [h; <a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>([x y z0 x y z1])]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0109     <span class="keyword">end</span>
+0110 <span class="keyword">end</span>
+0111 
+0112 
+0113 <span class="comment">%% Check output arguments -----</span>
+0114 
+0115 <span class="keyword">if</span> nargout&gt;0
+0116     varargout{1} = h;
+0117 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

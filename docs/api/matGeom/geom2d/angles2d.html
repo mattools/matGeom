@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of angles2d</title>
+  <meta name="keywords" content="angles2d">
+  <meta name="description" content="Description of functions for manipulating angles.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; angles2d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>angles2d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Description of functions for manipulating angles.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function angles2d </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Description of functions for manipulating angles.
+
+   Angles are normalized in an interval of width 2*PI. Most geom2d
+   functions return results in the [0 2*pi] interval, but it can be
+   convenient to consider the [-pi pi] interval as well. See the
+   normalizeAngle function to switch between conventions.
+
+   Angles are usually oriented. The default orientation is the CCW
+   (Counter-Clockwise) orientation.
+
+   See also:
+   <a href="normalizeAngle.html" class="code" title="function alpha = normalizeAngle(alpha, varargin)">normalizeAngle</a>, <a href="angleDiff.html" class="code" title="function dif = angleDiff(angle1, angle2)">angleDiff</a>, <a href="angleAbsDiff.html" class="code" title="function dif = angleAbsDiff(angle1, angle2)">angleAbsDiff</a>, <a href="angleSort.html" class="code" title="function varargout = angleSort(pts, varargin)">angleSort</a>
+   <a href="angle2Points.html" class="code" title="function theta = angle2Points(varargin)">angle2Points</a>, <a href="angle3Points.html" class="code" title="function theta = angle3Points(varargin)">angle3Points</a>, <a href="vectorAngle.html" class="code" title="function alpha = vectorAngle(v1, varargin)">vectorAngle</a>, <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>, <a href="edgeAngle.html" class="code" title="function theta = edgeAngle(edge)">edgeAngle</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function angles2d</a>
+0002 <span class="comment">% Description of functions for manipulating angles.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   Angles are normalized in an interval of width 2*PI. Most geom2d</span>
+0005 <span class="comment">%   functions return results in the [0 2*pi] interval, but it can be</span>
+0006 <span class="comment">%   convenient to consider the [-pi pi] interval as well. See the</span>
+0007 <span class="comment">%   normalizeAngle function to switch between conventions.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   Angles are usually oriented. The default orientation is the CCW</span>
+0010 <span class="comment">%   (Counter-Clockwise) orientation.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   See also:</span>
+0013 <span class="comment">%   normalizeAngle, angleDiff, angleAbsDiff, angleSort</span>
+0014 <span class="comment">%   angle2Points, angle3Points, vectorAngle, lineAngle, edgeAngle</span>
+0015 <span class="comment">%</span>
+0016 
+0017 <span class="comment">% ------</span>
+0018 <span class="comment">% Author: David Legland</span>
+0019 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0020 <span class="comment">% Created: 2010-03-31,    using Matlab 7.4.0.287 (R2007a)</span>
+0021 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0022 
+0023 
+0024 help(<span class="string">'angles2d'</span>);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

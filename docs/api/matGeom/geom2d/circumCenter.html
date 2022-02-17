@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of circumCenter</title>
+  <meta name="keywords" content="circumCenter">
+  <meta name="description" content="CIRCUMCENTER  Circumcenter of three points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; circumCenter.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>circumCenter
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CIRCUMCENTER  Circumcenter of three points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = circumCenter(a, b, c) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CIRCUMCENTER  Circumcenter of three points.
+
+   CC = circumCenter(P1, P2, P3)
+
+   Example
+     A = [10 10]; B = [30 10]; C = [10 20];
+     circumCenter(A, B, C)
+     ans =
+         20    15
+
+     % works also for multiple input points
+     circumCenter([A;A;A], [B;B;B], [C;C;C])
+     ans =
+         20    15
+         20    15
+         20    15
+
+
+   See also
+     <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="circumCircle.html" class="code" title="function varargout = circumCircle(varargin)">circumCircle</a>, <a href="centroid.html" class="code" title="function center = centroid(varargin)">centroid</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="circumCircle.html" class="code" title="function varargout = circumCircle(varargin)">circumCircle</a>	CIRCUMCIRCLE Circumscribed circle of three points.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = circumCenter(a, b, c)</a>
+0002 <span class="comment">%CIRCUMCENTER  Circumcenter of three points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   CC = circumCenter(P1, P2, P3)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   Example</span>
+0007 <span class="comment">%     A = [10 10]; B = [30 10]; C = [10 20];</span>
+0008 <span class="comment">%     circumCenter(A, B, C)</span>
+0009 <span class="comment">%     ans =</span>
+0010 <span class="comment">%         20    15</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%     % works also for multiple input points</span>
+0013 <span class="comment">%     circumCenter([A;A;A], [B;B;B], [C;C;C])</span>
+0014 <span class="comment">%     ans =</span>
+0015 <span class="comment">%         20    15</span>
+0016 <span class="comment">%         20    15</span>
+0017 <span class="comment">%         20    15</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   See also</span>
+0021 <span class="comment">%     points2d, circles2d, circumCircle, centroid</span>
+0022 <span class="comment">%</span>
+0023 
+0024 <span class="comment">% ------</span>
+0025 <span class="comment">% Author: David Legland</span>
+0026 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0027 <span class="comment">% Created: 2011-12-09,    using Matlab 7.9.0.529 (R2009b)</span>
+0028 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0029 
+0030 <span class="comment">% pre-compute some terms</span>
+0031 ah = sum(a .^ 2, 2);
+0032 bh = sum(b .^ 2, 2);
+0033 ch = sum(c .^ 2, 2);
+0034 
+0035 dab = a - b;
+0036 dbc = b - c;
+0037 dca = c - a;
+0038 
+0039 <span class="comment">% common denominator</span>
+0040 D  = .5 ./ (a(:,1) .* dbc(:,2) + b(:,1) .* dca(:,2) + c(:,1) .* dab(:,2));
+0041 
+0042 <span class="comment">% center coordinates</span>
+0043 xc =  (ah .* dbc(:,2) + bh .* dca(:,2) + ch .* dab(:,2) ) .* D;
+0044 yc = -(ah .* dbc(:,1) + bh .* dca(:,1) + ch .* dab(:,1) ) .* D;
+0045 
+0046 <span class="keyword">if</span> nargout &lt;= 1
+0047     varargout = {[xc yc]};
+0048 <span class="keyword">else</span>
+0049     varargout = {xc, yc};
+0050 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

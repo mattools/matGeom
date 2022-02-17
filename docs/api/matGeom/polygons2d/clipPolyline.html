@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of clipPolyline</title>
+  <meta name="keywords" content="clipPolyline">
+  <meta name="description" content="CLIPPOLYLINE Clip an open polyline with a rectangular box.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; clipPolyline.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>clipPolyline
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CLIPPOLYLINE Clip an open polyline with a rectangular box.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function res = clipPolyline(poly, box) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CLIPPOLYLINE Clip an open polyline with a rectangular box.
+
+   POLY2 = clipPolyline(POLY, BOX);
+   POLY is N-by-2 array of vertex coordinates.
+   BOX has the form: [XMIN XMAX YMIN YMAX].
+   Returns the set of polylines created by the intersection of the
+   polyline POLY and the bounding box BOX. The result is a cell array with
+   as many cells as the number of curve clips.
+
+
+   Example
+     circle = [5 5 6];
+     poly = circleToPolygon(circle, 200);
+     box = [0 10 0 10];
+     res = clipPolyline(poly, box);
+     figure;
+     hold on; axis equal; axis([-2 12 -2 12]);
+     drawCircle(circle, 'b:')
+     drawBox(box, 'k')
+     drawPolyline(res, 'linewidth', 2, 'color', 'b')
+ 
+   See also:
+     polygons2d, boxes2d, <a href="clipPolygon.html" class="code" title="function poly2 = clipPolygon(polygon, w)">clipPolygon</a>, clipEdge</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/clipEdge.html" class="code" title="function edge2 = clipEdge(edge, box)">clipEdge</a>	CLIPEDGE Clip an edge with a rectangular box.</li><li><a href="clipPolyline.html" class="code" title="function res = clipPolyline(poly, box)">clipPolyline</a>	CLIPPOLYLINE Clip an open polyline with a rectangular box.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="clipPolyline.html" class="code" title="function res = clipPolyline(poly, box)">clipPolyline</a>	CLIPPOLYLINE Clip an open polyline with a rectangular box.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function res = clipPolyline(poly, box)</a>
+0002 <span class="comment">%CLIPPOLYLINE Clip an open polyline with a rectangular box.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POLY2 = clipPolyline(POLY, BOX);</span>
+0005 <span class="comment">%   POLY is N-by-2 array of vertex coordinates.</span>
+0006 <span class="comment">%   BOX has the form: [XMIN XMAX YMIN YMAX].</span>
+0007 <span class="comment">%   Returns the set of polylines created by the intersection of the</span>
+0008 <span class="comment">%   polyline POLY and the bounding box BOX. The result is a cell array with</span>
+0009 <span class="comment">%   as many cells as the number of curve clips.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%     circle = [5 5 6];</span>
+0014 <span class="comment">%     poly = circleToPolygon(circle, 200);</span>
+0015 <span class="comment">%     box = [0 10 0 10];</span>
+0016 <span class="comment">%     res = clipPolyline(poly, box);</span>
+0017 <span class="comment">%     figure;</span>
+0018 <span class="comment">%     hold on; axis equal; axis([-2 12 -2 12]);</span>
+0019 <span class="comment">%     drawCircle(circle, 'b:')</span>
+0020 <span class="comment">%     drawBox(box, 'k')</span>
+0021 <span class="comment">%     drawPolyline(res, 'linewidth', 2, 'color', 'b')</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   See also:</span>
+0024 <span class="comment">%     polygons2d, boxes2d, clipPolygon, clipEdge</span>
+0025 <span class="comment">%</span>
+0026 
+0027 <span class="comment">% ---------</span>
+0028 <span class="comment">% author : David Legland</span>
+0029 <span class="comment">% created the 14/05/2005.</span>
+0030 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0031 
+0032 <span class="comment">%   HISTORY</span>
+0033 <span class="comment">%   2007/09/14 fix doc</span>
+0034 
+0035 <span class="comment">% check case of polylines stored in cell array</span>
+0036 <span class="keyword">if</span> iscell(poly)
+0037     res = cell(1, length(poly));
+0038     <span class="keyword">for</span> i = 1:length(poly)
+0039         res{i} = <a href="clipPolyline.html" class="code" title="function res = clipPolyline(poly, box)">clipPolyline</a>(poly{i}, box);
+0040     <span class="keyword">end</span>
+0041     <span class="keyword">return</span>;
+0042 <span class="keyword">end</span>
+0043 
+0044 <span class="comment">% check case of empty polylines</span>
+0045 N = size(poly, 1);
+0046 <span class="keyword">if</span> N == 0
+0047     res = cell(0, 0);
+0048     <span class="keyword">return</span>
+0049 <span class="keyword">end</span>
+0050 
+0051 <span class="comment">% create edges array of polyline</span>
+0052 edges = [poly(1:N-1, :) poly(2:N, :)];
+0053 
+0054 <span class="comment">% clip edges</span>
+0055 edges = <a href="../../matGeom/geom2d/clipEdge.html" class="code" title="function edge2 = clipEdge(edge, box)">clipEdge</a>(edges, box);
+0056 
+0057 <span class="comment">% select non empty edges, and get their vertices</span>
+0058 <span class="comment">% find clipped edges within box</span>
+0059 inds = sum(abs(edges), 2) &gt; 1e-14;
+0060 
+0061 <span class="comment">% find list of adjacent edges within box</span>
+0062 dinds = diff(inds);
+0063 inds0 = find(dinds == 1) + 1;
+0064 <span class="keyword">if</span> inds(1) == 1
+0065     inds0 = [1 inds0];
+0066 <span class="keyword">end</span>
+0067 inds1 = find(dinds == -1);
+0068 <span class="keyword">if</span> inds(end) == 1
+0069     inds1 = [inds1 N-1];
+0070 <span class="keyword">end</span>
+0071 
+0072 nClips = length(inds0);
+0073 res = cell(1, nClips);
+0074 <span class="keyword">for</span> iClip = 1:nClips
+0075     range = inds0(iClip):inds1(iClip);
+0076     poly2 = [edges(range, 1:2) ; edges(range(end), 3:4)];
+0077     res{iClip} = poly2;
+0078 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

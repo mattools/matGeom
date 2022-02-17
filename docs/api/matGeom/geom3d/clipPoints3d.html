@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of clipPoints3d</title>
+  <meta name="keywords" content="clipPoints3d">
+  <meta name="description" content="CLIPPOINTS3D Clip a set of points by a box or other 3d shapes.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; clipPoints3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>clipPoints3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CLIPPOINTS3D Clip a set of points by a box or other 3d shapes.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = clipPoints3d(points, shape, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CLIPPOINTS3D Clip a set of points by a box or other 3d shapes.
+
+   CLIP = clipPoints3d(POINTS, BOX);
+   Returns the set of points which are located inside of the box BOX.
+
+   [CLIP, IND] = clipPoints3d(POINTS, BOX);
+   Also returns the indices of clipped points.
+   
+   ... = clipPoints3d(..., 'shape', 'sphere') Specify the shape.
+   Default is 'box'. But it is also possible to use 'sphere' or 'plane'.
+   
+   ... = clipPoints3d(..., 'inside', false) returns the set of  
+   points outside the shape instead of inside.
+
+   See also
+   <a href="points3d.html" class="code" title="function points3d(varargin)">points3d</a>, <a href="boxes3d.html" class="code" title="function boxes3d(varargin)">boxes3d</a>, <a href="spheres.html" class="code" title="function spheres(varargin)">spheres</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>	DISTANCEPOINTS3D Compute euclidean distance between pairs of 3D Points.</li><li><a href="isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>	ISBELOWPLANE Test whether a point is below or above a plane.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/meshes3d/clipMeshVertices.html" class="code" title="function varargout = clipMeshVertices(v, f, b, varargin)">clipMeshVertices</a>	CLIPMESHVERTICES Clip vertices of a surfacic mesh and remove outer faces.</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function LI = clipPointsByBox(points, box)</a></li><li><a href="#_sub2" class="code">function LI = clipPointsByPlane(points, plane)</a></li><li><a href="#_sub3" class="code">function LI = clipPointsBySphere(points, sphere)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = clipPoints3d(points, shape, varargin)</a>
+0002 <span class="comment">%CLIPPOINTS3D Clip a set of points by a box or other 3d shapes.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   CLIP = clipPoints3d(POINTS, BOX);</span>
+0005 <span class="comment">%   Returns the set of points which are located inside of the box BOX.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   [CLIP, IND] = clipPoints3d(POINTS, BOX);</span>
+0008 <span class="comment">%   Also returns the indices of clipped points.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   ... = clipPoints3d(..., 'shape', 'sphere') Specify the shape.</span>
+0011 <span class="comment">%   Default is 'box'. But it is also possible to use 'sphere' or 'plane'.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   ... = clipPoints3d(..., 'inside', false) returns the set of</span>
+0014 <span class="comment">%   points outside the shape instead of inside.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   See also</span>
+0017 <span class="comment">%   points3d, boxes3d, spheres</span>
+0018 <span class="comment">%</span>
+0019 
+0020 <span class="comment">% ------</span>
+0021 <span class="comment">% Author: David Legland, oqilipo</span>
+0022 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0023 <span class="comment">% Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)</span>
+0024 <span class="comment">% Copyright 2008 INRA - BIA Nantes - MIAJ Jouy-en-Josas.</span>
+0025 
+0026 parser = inputParser;
+0027 validStrings = {<span class="string">'box'</span>, <span class="string">'sphere'</span>, <span class="string">'plane'</span>};
+0028 addParameter(parser, <span class="string">'shape'</span>, <span class="string">'box'</span>, @(x) any(validatestring(x, validStrings)));
+0029 addParameter(parser, <span class="string">'inside'</span>, true, @islogical);
+0030 parse(parser,varargin{:});
+0031 
+0032 <span class="keyword">switch</span> parser.Results.shape
+0033     <span class="keyword">case</span> <span class="string">'box'</span>
+0034         LI = <a href="#_sub1" class="code" title="subfunction LI = clipPointsByBox(points, box)">clipPointsByBox</a>(points, shape);
+0035     <span class="keyword">case</span> <span class="string">'plane'</span>
+0036         LI = <a href="#_sub2" class="code" title="subfunction LI = clipPointsByPlane(points, plane)">clipPointsByPlane</a>(points, shape);
+0037     <span class="keyword">case</span> <span class="string">'sphere'</span>
+0038         LI = <a href="#_sub3" class="code" title="subfunction LI = clipPointsBySphere(points, sphere)">clipPointsBySphere</a>(points, shape);
+0039 <span class="keyword">end</span>
+0040 
+0041 <span class="keyword">if</span> parser.Results.inside
+0042     <span class="comment">% keep points inside the shape</span>
+0043     ind = find(LI);
+0044 <span class="keyword">else</span>
+0045     <span class="comment">% keep points outside the shape</span>
+0046     ind = find(~LI);
+0047 <span class="keyword">end</span>
+0048 points = points(ind, :);
+0049 
+0050 <span class="comment">% process output arguments</span>
+0051 varargout{1} = points;
+0052 <span class="keyword">if</span> nargout == 2
+0053     varargout{2} = ind;
+0054 <span class="keyword">end</span>
+0055 
+0056     <a name="_sub1" href="#_subfunctions" class="code">function LI = clipPointsByBox(points, box)</a>
+0057         <span class="comment">% get bounding box limits</span>
+0058         xmin = box(1);
+0059         xmax = box(2);
+0060         ymin = box(3);
+0061         ymax = box(4);
+0062         zmin = box(5);
+0063         zmax = box(6);
+0064         
+0065         <span class="comment">% compute indices of points inside visible area</span>
+0066         xOk = points(:,1) &gt;= xmin &amp; points(:,1) &lt;= xmax;
+0067         yOk = points(:,2) &gt;= ymin &amp; points(:,2) &lt;= ymax;
+0068         zOk = points(:,3) &gt;= zmin &amp; points(:,3) &lt;= zmax;
+0069         
+0070         LI = xOk &amp; yOk &amp; zOk;
+0071     <span class="keyword">end</span>
+0072 
+0073     <a name="_sub2" href="#_subfunctions" class="code">function LI = clipPointsByPlane(points, plane)</a>
+0074         <span class="comment">% points inside and on the surface of the sphere</span>
+0075         LI = <a href="isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>(points, plane);
+0076     <span class="keyword">end</span>
+0077 
+0078     <a name="_sub3" href="#_subfunctions" class="code">function LI = clipPointsBySphere(points, sphere)</a>
+0079         <span class="comment">% points inside and on the surface of the sphere</span>
+0080         LI = <a href="distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>(points, sphere(1:3)) &lt;= sphere(4);
+0081     <span class="keyword">end</span>
+0082 
+0083 <span class="keyword">end</span>
+0084</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

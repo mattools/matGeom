@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of intersectPlanes</title>
+  <meta name="keywords" content="intersectPlanes">
+  <meta name="description" content="INTERSECTPLANES Return intersection line between 2 planes in space.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; intersectPlanes.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>intersectPlanes
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>INTERSECTPLANES Return intersection line between 2 planes in space.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function line = intersectPlanes(plane1, plane2, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">INTERSECTPLANES Return intersection line between 2 planes in space.
+
+   LINE = intersectPlanes(PLANE1, PLANE2)
+   Returns the straight line belonging to both planes.
+   PLANE:  [x0 y0 z0  dx1 dy1 dz1  dx2 dy2 dz2]
+   LINE:   [x0 y0 z0  dx dy dz]
+   In case of parallel planes, returns line with NaN values.
+
+   LINE = intersectPlanes(PLANE1, PLANE2, TOL)
+   Also specifies the tolerance for detecting parallel planes.
+
+   See also:
+   <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>, <a href="lines3d.html" class="code" title="function lines3d(varargin)">lines3d</a>, <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>	NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="planesBisector.html" class="code" title="function out = planesBisector(plane1, plane2)">planesBisector</a>	PLANESBISECTOR  Bisector plane between two other planes.</li><li><a href="sphericalVoronoiDomain.html" class="code" title="function poly = sphericalVoronoiDomain(refPoint, neighbors)">sphericalVoronoiDomain</a>	SPHERICALVORONOIDOMAIN Compute a spherical voronoi domain.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function line = intersectPlanes(plane1, plane2, varargin)</a>
+0002 <span class="comment">%INTERSECTPLANES Return intersection line between 2 planes in space.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   LINE = intersectPlanes(PLANE1, PLANE2)</span>
+0005 <span class="comment">%   Returns the straight line belonging to both planes.</span>
+0006 <span class="comment">%   PLANE:  [x0 y0 z0  dx1 dy1 dz1  dx2 dy2 dz2]</span>
+0007 <span class="comment">%   LINE:   [x0 y0 z0  dx dy dz]</span>
+0008 <span class="comment">%   In case of parallel planes, returns line with NaN values.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   LINE = intersectPlanes(PLANE1, PLANE2, TOL)</span>
+0011 <span class="comment">%   Also specifies the tolerance for detecting parallel planes.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   See also:</span>
+0014 <span class="comment">%   planes3d, lines3d, intersectLinePlane</span>
+0015 <span class="comment">%</span>
+0016 
+0017 <span class="comment">%   ---------</span>
+0018 <span class="comment">%   author : David Legland</span>
+0019 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0020 <span class="comment">%   created the 17/02/2005.</span>
+0021 <span class="comment">%</span>
+0022 
+0023 <span class="comment">%   HISTORY</span>
+0024 
+0025 tol = 1e-14;
+0026 <span class="keyword">if</span> ~isempty(varargin)
+0027     tol = varargin{1};
+0028 <span class="keyword">end</span>
+0029 
+0030 <span class="comment">% plane normal</span>
+0031 n1 = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(cross(plane1(:,4:6), plane1(:, 7:9), 2));
+0032 n2 = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(cross(plane2(:,4:6), plane2(:, 7:9), 2));
+0033 
+0034 <span class="comment">% test if planes are parallel</span>
+0035 <span class="keyword">if</span> abs(cross(n1, n2, 2)) &lt; tol
+0036     line = [NaN NaN NaN NaN NaN NaN];
+0037     <span class="keyword">return</span>;
+0038 <span class="keyword">end</span>
+0039 
+0040 <span class="comment">% Uses Hessian form, ie : N.p = d</span>
+0041 <span class="comment">% I this case, d can be found as : -N.p0, when N is normalized</span>
+0042 d1 = dot(n1, plane1(:,1:3), 2);
+0043 d2 = dot(n2, plane2(:,1:3), 2);
+0044 
+0045 <span class="comment">% compute dot products</span>
+0046 dot1 = dot(n1, n1, 2);
+0047 dot2 = dot(n2, n2, 2);
+0048 dot12 = dot(n1, n2, 2);
+0049 
+0050 <span class="comment">% intermediate computations</span>
+0051 det = dot1*dot2 - dot12*dot12;
+0052 c1  = (d1*dot2 - d2*dot12)./det;
+0053 c2  = (d2*dot1 - d1*dot12)./det;
+0054 
+0055 <span class="comment">% compute line origin and direction</span>
+0056 p0  = c1*n1 + c2*n2;
+0057 dp  = cross(n1, n2, 2);
+0058 
+0059 line = [p0 dp];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

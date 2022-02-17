@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of readMesh_off</title>
+  <meta name="keywords" content="readMesh_off">
+  <meta name="description" content="Read mesh data stored in OFF format.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; readMesh_off.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>readMesh_off
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Read mesh data stored in OFF format.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = readMesh_off(fileName) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Read mesh data stored in OFF format.
+
+   [VERTICES, FACES] = readMesh_off(FILENAME)
+   Read the data stored in file FILENAME and return the vertex and face
+   arrays as NV-by-3 array and NF-by-N array respectively, where NV is the
+   number of vertices and NF is the number of faces.
+
+   MESH = readMesh_off(FILENAME)
+   Read the data stored in file FILENAME and return the mesh into a struct
+   with fields 'vertices' and 'faces'.
+
+   Example
+     [v, f] = readMesh_off('mushroom.off');
+     figure; drawMesh(v, f, 'faceColor', [0 1 0], 'edgeColor', 'none')
+     view([5 80]); light; lighting gouraud
+
+   See also
+     meshes3d, <a href="readMesh.html" class="code" title="function varargout = readMesh(fileName)">readMesh</a>, <a href="writeMesh_off.html" class="code" title="function writeMesh_off(fileName, vertices, faces)">writeMesh_off</a>, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="readMesh.html" class="code" title="function varargout = readMesh(fileName)">readMesh</a>	Read a 3D mesh by inferring format from file name.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = readMesh_off(fileName)</a>
+0002 <span class="comment">% Read mesh data stored in OFF format.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [VERTICES, FACES] = readMesh_off(FILENAME)</span>
+0005 <span class="comment">%   Read the data stored in file FILENAME and return the vertex and face</span>
+0006 <span class="comment">%   arrays as NV-by-3 array and NF-by-N array respectively, where NV is the</span>
+0007 <span class="comment">%   number of vertices and NF is the number of faces.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   MESH = readMesh_off(FILENAME)</span>
+0010 <span class="comment">%   Read the data stored in file FILENAME and return the mesh into a struct</span>
+0011 <span class="comment">%   with fields 'vertices' and 'faces'.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   Example</span>
+0014 <span class="comment">%     [v, f] = readMesh_off('mushroom.off');</span>
+0015 <span class="comment">%     figure; drawMesh(v, f, 'faceColor', [0 1 0], 'edgeColor', 'none')</span>
+0016 <span class="comment">%     view([5 80]); light; lighting gouraud</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   See also</span>
+0019 <span class="comment">%     meshes3d, readMesh, writeMesh_off, drawMesh</span>
+0020 <span class="comment">%</span>
+0021 
+0022 <span class="comment">% ------</span>
+0023 <span class="comment">% Author: David Legland</span>
+0024 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0025 <span class="comment">% Created: 2011-12-20,    using Matlab 7.9.0.529 (R2009b)</span>
+0026 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0027 
+0028 
+0029 <span class="comment">%% Read header</span>
+0030 
+0031 <span class="comment">% open file</span>
+0032 f = fopen(fileName, <span class="string">'r'</span>);
+0033 <span class="keyword">if</span> f == -1 
+0034     error(<span class="string">'matGeom:readMesh_off:FileNotFound'</span>, <span class="keyword">...</span>
+0035         [<span class="string">'Could not find file: '</span> fileName]);
+0036 <span class="keyword">end</span>
+0037 
+0038 <span class="comment">% check format</span>
+0039 line = fgetl(f);   <span class="comment">% -1 if eof</span>
+0040 <span class="keyword">if</span> ~strcmp(line(1:3), <span class="string">'OFF'</span>)
+0041     error(<span class="string">'matGeom:readMesh_off:FileFormatError'</span>, <span class="keyword">...</span>
+0042         <span class="string">'Not a valid OFF file'</span>);    
+0043 <span class="keyword">end</span>
+0044 
+0045 <span class="comment">% number of faces and vertices</span>
+0046 line = fgetl(f);
+0047 vals = sscanf(line, <span class="string">'%d %d'</span>);
+0048 nVertices = vals(1);
+0049 nFaces = vals(2);
+0050 
+0051 
+0052 <span class="comment">%% Read vertex data</span>
+0053 [vertices, count] = fscanf(f, <span class="string">'%f '</span>, [3 nVertices]);
+0054 <span class="keyword">if</span> count ~= nVertices * 3
+0055     error(<span class="string">'matGeom:readMesh_off:FileFormatError'</span>, <span class="keyword">...</span>
+0056         [<span class="string">'Could not read all the '</span> num2str(nVertices) <span class="string">' vertices'</span>]);
+0057 <span class="keyword">end</span>
+0058 vertices = vertices';
+0059 
+0060 
+0061 <span class="comment">%% Read Face data</span>
+0062 <span class="comment">% First try to read faces as an homogeneous array. It if fails, start from</span>
+0063 <span class="comment">% face offset and parse each face individually. In the latter case, faces</span>
+0064 <span class="comment">% can have different number of vertices.</span>
+0065 
+0066 <span class="comment">% keep position of face info within file</span>
+0067 faceOffset = ftell(f);
+0068 
+0069 <span class="comment">% read first face to assess number of vertices per face</span>
+0070 line = fgetl(f);
+0071 <span class="keyword">if</span> line == -1
+0072     error(<span class="string">'matGeom:readMesh_off:FileFormatError'</span>, <span class="keyword">...</span>
+0073         <span class="string">'Unexpected end of file'</span>);
+0074 <span class="keyword">end</span>
+0075 tokens = split(line);
+0076 face1 = str2double(tokens(2:end))' + 1;
+0077 nv = length(face1);
+0078 
+0079 <span class="keyword">try</span> 
+0080     <span class="comment">% attenpt to read the remaining faces assuming they all have the same</span>
+0081     <span class="comment">% number of vertices</span>
+0082     pattern = [<span class="string">'%d'</span> repmat(<span class="string">' %d'</span>, 1, nv) <span class="string">'\n'</span>];
+0083     [faces, count] = fscanf(f, pattern, [(nv+1) (nFaces-1)]);
+0084     <span class="keyword">if</span> count ~= (nFaces-1) * (nv+1)
+0085         error(<span class="string">'matGeom:readMesh_off:FileFormatError'</span>, <span class="keyword">...</span>
+0086             <span class="string">'Could not read all the %d faces'</span>, nFaces);
+0087     <span class="keyword">end</span>
+0088 
+0089     <span class="comment">% transpose, remove first column, use 1-indexing, and concatenate with</span>
+0090     <span class="comment">% first face</span>
+0091     faces = [face1 ; faces(2:<span class="keyword">end</span>,:)'+1];
+0092 
+0093 <span class="keyword">catch</span>
+0094     <span class="comment">% if attempt failed, switch to slower face-by-face parsing</span>
+0095     disp(<span class="string">'readMesh_off: Inhomogeneous number of vertices per face, switching to face-per-face parsing'</span>);
+0096     
+0097     fseek(f, faceOffset, <span class="string">'bof'</span>);
+0098     
+0099     <span class="comment">% allocate cell array</span>
+0100     faces = cell(1, nFaces);
+0101     
+0102     <span class="comment">% iterate over faces</span>
+0103     <span class="keyword">for</span> iFace = 1:nFaces
+0104         <span class="comment">% read next line</span>
+0105         line = fgetl(f);
+0106         <span class="keyword">if</span> line == -1
+0107             error(<span class="string">'matGeom:readMesh_off:FileFormatError'</span>, <span class="keyword">...</span>
+0108                 <span class="string">'Unexpected end of file'</span>);
+0109         <span class="keyword">end</span>
+0110 
+0111         <span class="comment">% parse vertex indices for current face</span>
+0112         tokens = split(line);
+0113         faces{iFace} = str2double(tokens(2:end))' + 1;
+0114     <span class="keyword">end</span>
+0115 <span class="keyword">end</span>
+0116 
+0117 
+0118 <span class="comment">%% Post-processing</span>
+0119 
+0120 <span class="comment">% close the file</span>
+0121 fclose(f);
+0122 
+0123 <span class="comment">% format output arguments</span>
+0124 <span class="keyword">if</span> nargout &lt; 2
+0125     mesh.vertices = vertices;
+0126     mesh.faces = faces;
+0127     varargout = {mesh};
+0128 <span class="keyword">else</span>
+0129     varargout = {vertices, faces};
+0130 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

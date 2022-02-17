@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of trimMesh</title>
+  <meta name="keywords" content="trimMesh">
+  <meta name="description" content="TRIMMESH Reduce memory footprint of a polygonal mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; trimMesh.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>trimMesh
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>TRIMMESH Reduce memory footprint of a polygonal mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = trimMesh(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">TRIMMESH Reduce memory footprint of a polygonal mesh.
+
+   [V2, F2] = trimMesh(V, F)
+   Unreferenced vertices are removed.
+   Following functions are implemented only for numeric faces:
+       Duplicate vertices are removed.
+       Duplicate faces are removed.
+
+   Example
+     [V, F] = createIcosahedron;
+     F(13:20, :) = [];
+     [V2, F2] = trimMesh(V, F);
+     figure; drawMesh(V2, F2)
+     view(3); axis equal;
+     axis([-1 1 -1 1 0 2])
+
+   See also
+     meshes3d, <a href="clipMeshVertices.html" class="code" title="function varargout = clipMeshVertices(v, f, b, varargin)">clipMeshVertices</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>	REMOVEMESHFACES Remove faces from a mesh by face indices.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="clipMeshVertices.html" class="code" title="function varargout = clipMeshVertices(v, f, b, varargin)">clipMeshVertices</a>	CLIPMESHVERTICES Clip vertices of a surfacic mesh and remove outer faces.</li><li><a href="collapseEdgesWithManyFaces.html" class="code" title="function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargin)">collapseEdgesWithManyFaces</a>	removes mesh edges adjacent to more than two faces</li><li><a href="concatenateMeshes.html" class="code" title="function varargout = concatenateMeshes(varargin)">concatenateMeshes</a>	CONCATENATEMESHES Concatenate multiple meshes.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = trimMesh(varargin)</a>
+0002 <span class="comment">%TRIMMESH Reduce memory footprint of a polygonal mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V2, F2] = trimMesh(V, F)</span>
+0005 <span class="comment">%   Unreferenced vertices are removed.</span>
+0006 <span class="comment">%   Following functions are implemented only for numeric faces:</span>
+0007 <span class="comment">%       Duplicate vertices are removed.</span>
+0008 <span class="comment">%       Duplicate faces are removed.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Example</span>
+0011 <span class="comment">%     [V, F] = createIcosahedron;</span>
+0012 <span class="comment">%     F(13:20, :) = [];</span>
+0013 <span class="comment">%     [V2, F2] = trimMesh(V, F);</span>
+0014 <span class="comment">%     figure; drawMesh(V2, F2)</span>
+0015 <span class="comment">%     view(3); axis equal;</span>
+0016 <span class="comment">%     axis([-1 1 -1 1 0 2])</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   See also</span>
+0019 <span class="comment">%     meshes3d, clipMeshVertices</span>
+0020 
+0021 <span class="comment">% ------</span>
+0022 <span class="comment">% Author: David Legland, oqilipo</span>
+0023 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0024 <span class="comment">% Created: 2014-08-01,    using Matlab 8.3.0.532 (R2014a)</span>
+0025 <span class="comment">% Copyright 2014 INRA - Cepia Software Platform.</span>
+0026 
+0027 <span class="comment">% parse input data</span>
+0028 [vertices, faces] = parseMeshData(varargin{:});
+0029 
+0030 <span class="keyword">if</span> isnumeric(faces)
+0031     <span class="comment">% Delete duplicate vertices</span>
+0032     [tempVertices, ~, tempFaceVertexIdx] = unique(vertices, <span class="string">'rows'</span>);
+0033     tempFaces = tempFaceVertexIdx(faces);
+0034     <span class="comment">% Delete unindexed/unreferenced vertices</span>
+0035     usedVertexIdx = ismember(1:length(tempVertices),unique(tempFaces(:)));
+0036     newVertexIdx = cumsum(usedVertexIdx);
+0037     faceVertexIdx = 1:length(tempVertices);
+0038     faceVertexIdx(usedVertexIdx) = newVertexIdx(usedVertexIdx);
+0039     faceVertexIdx(~usedVertexIdx) = nan;
+0040     tempFaces2 = faceVertexIdx(tempFaces);
+0041     tempVertices2 = tempVertices(usedVertexIdx,:);
+0042     <span class="comment">% Delete duplicate faces</span>
+0043     [~, uniqueFaceIdx, ~] = unique(tempFaces2, <span class="string">'rows'</span>);
+0044     duplicateFaceIdx=~ismember(1:size(tempFaces2,1),uniqueFaceIdx);
+0045     [vertices2, faces2] = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(tempVertices2, tempFaces2, duplicateFaceIdx);
+0046 <span class="keyword">elseif</span> iscell(faces)
+0047     <span class="comment">% identify vertices referenced by a face</span>
+0048     vertexUsed = false(size(vertices, 1), 1);
+0049     <span class="keyword">for</span> iFace = 1:length(faces)
+0050         face = faces{iFace};
+0051         vertexUsed(face) = true;
+0052     <span class="keyword">end</span>
+0053     vertices2 = vertices(vertexUsed, :);
+0054     <span class="comment">% compute map from old index to new index</span>
+0055     inds = find(vertexUsed);
+0056     newInds = zeros(size(vertices, 1), 1);
+0057     <span class="keyword">for</span> iIndex = 1:length(inds)
+0058         newInds(inds(iIndex)) = iIndex;
+0059     <span class="keyword">end</span>
+0060     <span class="comment">% change labels of vertices referenced by faces</span>
+0061     faces2 = cell(1, length(faces));
+0062     <span class="keyword">for</span> iFace = 1:length(faces)
+0063         faces2{iFace} = newInds(faces{iFace});
+0064     <span class="keyword">end</span>
+0065 <span class="keyword">else</span>
+0066     error(<span class="string">'Unsupported format!'</span>)
+0067 <span class="keyword">end</span>
+0068 
+0069 <span class="comment">% format output arguments</span>
+0070 varargout = formatMeshOutput(nargout, vertices2, faces2);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

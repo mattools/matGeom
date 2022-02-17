@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of midPoint3d</title>
+  <meta name="keywords" content="midPoint3d">
+  <meta name="description" content="MIDPOINT3D Middle point of two 3D points or of a 3D edge.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; midPoint3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>midPoint3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MIDPOINT3D Middle point of two 3D points or of a 3D edge.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = midPoint3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MIDPOINT3D Middle point of two 3D points or of a 3D edge.
+
+   MID = midPoint3d(P1, P2)
+   Compute the middle point of the two points P1 and P2.
+
+   MID = midPoint3d(EDGE)
+   Compute the middle point of the edge given by EDGE.
+   EDGE has the format: [X1 Y1 Z1 X2 Y2 Z2], and MID has the format 
+   [XMID YMID ZMID], 
+   with XMID = (X1+X2)/2, YMID = (Y1+Y2)/2 and ZMID = (Z1+Z2)/2.
+
+   [MIDX MIDY] = midPoint3d(...)
+   Return the result as two separate variables or arrays.
+
+   Works also when EDGE is a N-by-6 array, in this case the result is a
+   N-by-3 array containing the midPoint3d of each edge.
+
+
+   Example
+   P1 = [10 20 30];
+   P2 = [30 40 50];
+   % edge input
+   midPoint3d([P1 P2])
+   ans =
+       20  30  40
+
+   % two points input
+   midPoint3d(P1, P2)
+   ans =
+       20  30  40
+
+   % three outputs
+   [xm ym zm] = midPoint3d(P1, P2)
+   xm =
+       20  
+   ym = 
+       30  
+   zm = 
+       40
+
+   See also
+     <a href="edges3d.html" class="code" title="function edges3d(varargin)">edges3d</a>, <a href="points3d.html" class="code" title="function points3d(varargin)">points3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = midPoint3d(varargin)</a>
+0002 <span class="comment">%MIDPOINT3D Middle point of two 3D points or of a 3D edge.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   MID = midPoint3d(P1, P2)</span>
+0005 <span class="comment">%   Compute the middle point of the two points P1 and P2.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   MID = midPoint3d(EDGE)</span>
+0008 <span class="comment">%   Compute the middle point of the edge given by EDGE.</span>
+0009 <span class="comment">%   EDGE has the format: [X1 Y1 Z1 X2 Y2 Z2], and MID has the format</span>
+0010 <span class="comment">%   [XMID YMID ZMID],</span>
+0011 <span class="comment">%   with XMID = (X1+X2)/2, YMID = (Y1+Y2)/2 and ZMID = (Z1+Z2)/2.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   [MIDX MIDY] = midPoint3d(...)</span>
+0014 <span class="comment">%   Return the result as two separate variables or arrays.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Works also when EDGE is a N-by-6 array, in this case the result is a</span>
+0017 <span class="comment">%   N-by-3 array containing the midPoint3d of each edge.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   Example</span>
+0021 <span class="comment">%   P1 = [10 20 30];</span>
+0022 <span class="comment">%   P2 = [30 40 50];</span>
+0023 <span class="comment">%   % edge input</span>
+0024 <span class="comment">%   midPoint3d([P1 P2])</span>
+0025 <span class="comment">%   ans =</span>
+0026 <span class="comment">%       20  30  40</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%   % two points input</span>
+0029 <span class="comment">%   midPoint3d(P1, P2)</span>
+0030 <span class="comment">%   ans =</span>
+0031 <span class="comment">%       20  30  40</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">%   % three outputs</span>
+0034 <span class="comment">%   [xm ym zm] = midPoint3d(P1, P2)</span>
+0035 <span class="comment">%   xm =</span>
+0036 <span class="comment">%       20</span>
+0037 <span class="comment">%   ym =</span>
+0038 <span class="comment">%       30</span>
+0039 <span class="comment">%   zm =</span>
+0040 <span class="comment">%       40</span>
+0041 <span class="comment">%</span>
+0042 <span class="comment">%   See also</span>
+0043 <span class="comment">%     edges3d, points3d</span>
+0044 <span class="comment">%</span>
+0045 
+0046 <span class="comment">% ------</span>
+0047 <span class="comment">% Author: David Legland</span>
+0048 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0049 <span class="comment">% Created: 2010-08-08,    using Matlab 7.9.0.529 (R2009b)</span>
+0050 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0051 
+0052 <span class="keyword">if</span> nargin == 1
+0053     <span class="comment">% input is a 3D edge</span>
+0054     edge = varargin{1};
+0055     mid = [mean(edge(:, [1 4]), 2) mean(edge(:, [2 5]), 2) mean(edge(:, [3 6]), 2)];
+0056     
+0057 <span class="keyword">elseif</span> nargin == 2
+0058     <span class="comment">% input are two points</span>
+0059     p1 = varargin{1};
+0060     p2 = varargin{2};
+0061     
+0062     <span class="comment">% assert inputs are equal</span>
+0063     n1 = size(p1, 1);
+0064     n2 = size(p2, 1);
+0065     <span class="keyword">if</span> n1&gt;1 &amp;&amp; n2==1
+0066         p2 = repmat(p2, n1, 1);
+0067     <span class="keyword">elseif</span> n2&gt;1 &amp;&amp; n1==1
+0068         p1 = repmat(p1, n2, 1);
+0069     <span class="keyword">elseif</span> n1~=n2
+0070         error(<span class="string">'geom3d:midPoint3d'</span>, <span class="keyword">...</span>
+0071             <span class="string">'Inputs must have same size, or one must have length 1'</span>);
+0072     <span class="keyword">end</span>
+0073     
+0074     <span class="comment">% compute middle point</span>
+0075     mid = (p1 + p2) / 2;
+0076 <span class="keyword">end</span>
+0077 
+0078 <span class="comment">% process output arguments</span>
+0079 <span class="keyword">if</span> nargout&lt;=1
+0080     varargout{1} = mid;
+0081 <span class="keyword">else</span>
+0082     varargout = {mid(:,1), mid(:,2), mid(:,3)};
+0083 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

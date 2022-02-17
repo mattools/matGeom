@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of lineFit</title>
+  <meta name="keywords" content="lineFit">
+  <meta name="description" content="LINEFIT Fit a straight line to a set of points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; lineFit.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>lineFit
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>LINEFIT Fit a straight line to a set of points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function line = lineFit(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">LINEFIT Fit a straight line to a set of points.
+
+   L = lineFit(X, Y)
+   Computes parametric line minimizing square error of all points (X,Y).
+   Result is a 4*1 array, containing coordinates of a point of the line,
+   and the direction vector of the line, that is  L=[x0 y0 dx dy];
+
+   L = lineFit(PTS) 
+   Gives coordinats of points in a single array.
+
+   L = lineFit(PT0, PTS);
+   L = lineFit(PT0, X, Y);
+   with PT0 = [x0 y0], imposes the line to contain point PT0.
+
+   Requires:
+   Optimiaztion toolbox
+
+   See also:
+   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, polyfit, polyfit2, lsqlin
+
+
+   -----
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 30/04/2004.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="cartesianLine.html" class="code" title="function line = cartesianLine(varargin)">cartesianLine</a>	CARTESIANLINE Create a straight line from cartesian equation coefficients.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function line = lineFit(varargin)</a>
+0002 <span class="comment">%LINEFIT Fit a straight line to a set of points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   L = lineFit(X, Y)</span>
+0005 <span class="comment">%   Computes parametric line minimizing square error of all points (X,Y).</span>
+0006 <span class="comment">%   Result is a 4*1 array, containing coordinates of a point of the line,</span>
+0007 <span class="comment">%   and the direction vector of the line, that is  L=[x0 y0 dx dy];</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   L = lineFit(PTS)</span>
+0010 <span class="comment">%   Gives coordinats of points in a single array.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   L = lineFit(PT0, PTS);</span>
+0013 <span class="comment">%   L = lineFit(PT0, X, Y);</span>
+0014 <span class="comment">%   with PT0 = [x0 y0], imposes the line to contain point PT0.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Requires:</span>
+0017 <span class="comment">%   Optimiaztion toolbox</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   See also:</span>
+0020 <span class="comment">%   lines2d, polyfit, polyfit2, lsqlin</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   -----</span>
+0024 <span class="comment">%   author : David Legland</span>
+0025 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0026 <span class="comment">%   created the 30/04/2004.</span>
+0027 <span class="comment">%</span>
+0028 
+0029 <span class="comment">%   HISTORY</span>
+0030 <span class="comment">%   09/12/2004 : update implementation</span>
+0031 
+0032 
+0033 
+0034 <span class="comment">% ---------------------------------------------</span>
+0035 <span class="comment">% extract input arguments</span>
+0036 
+0037 <span class="keyword">if</span> length(varargin)==1
+0038     <span class="comment">% argument is an array of points</span>
+0039     var = varargin{1};
+0040     x = var(:,1);
+0041     y = var(:,2);   
+0042 <span class="keyword">elseif</span> length(varargin)==2
+0043     var = varargin{1};
+0044     <span class="keyword">if</span> size(var, 1)==1
+0045         var = varargin{2};
+0046         x = var(:,1);
+0047         y = var(:,2);
+0048     <span class="keyword">else</span>
+0049         <span class="comment">% two arguments : x and y</span>
+0050         x = var;
+0051         y = varargin{2};
+0052     <span class="keyword">end</span>
+0053 <span class="keyword">elseif</span> length(varargin)==3
+0054     <span class="comment">% three arguments : ref point, x and y</span>
+0055     x = varargin{2};
+0056     y = varargin{3};
+0057 <span class="keyword">end</span>
+0058     
+0059 <span class="comment">% ---------------------------------------------</span>
+0060 <span class="comment">% Initializations :</span>
+0061 
+0062 
+0063 N = size(x, 1);
+0064 
+0065 <span class="comment">% ---------------------------------------------</span>
+0066 <span class="comment">% Main algorithm :</span>
+0067 
+0068 
+0069 <span class="comment">% main matrix of the problem</span>
+0070 X = [x y ones(N,1)];
+0071 
+0072 <span class="comment">% conditions initialisations</span>
+0073 A = zeros(0, 3);
+0074 b = [];
+0075 Aeq1 = [1 1 0];
+0076 beq1 = 1;
+0077 Aeq2 = [1 -1 0];
+0078 beq2 = 1;
+0079 
+0080 <span class="comment">% disable verbosity of optimisation</span>
+0081 opt = optimset(<span class="string">'lsqlin'</span>);
+0082 opt.LargeScale = <span class="string">'off'</span>;
+0083 opt.Display = <span class="string">'off'</span>;
+0084 
+0085 <span class="comment">% compute line coefficients [a;b;c] , in the form a*x + b*y + c = 0</span>
+0086 <span class="comment">% using linear regression</span>
+0087 <span class="comment">% Not very clean : I could not impose a*a+b*b=1, so I checked for both a=1</span>
+0088 <span class="comment">% and b=1, and I kept the result with lowest residual error....</span>
+0089 [coef1, res1] = lsqlin(X, zeros(N, 1), A, b, Aeq1, beq1, [], [], [], opt);
+0090 [coef2, res2] = lsqlin(X, zeros(N, 1), A, b, Aeq2, beq2, [], [], [], opt);
+0091 
+0092 <span class="comment">% choose the best line</span>
+0093 <span class="keyword">if</span> res1&lt;res2
+0094     coef = coef1;
+0095 <span class="keyword">else</span>
+0096     coef = coef2;
+0097 <span class="keyword">end</span>
+0098 
+0099 line = <a href="cartesianLine.html" class="code" title="function line = cartesianLine(varargin)">cartesianLine</a>(coef');</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

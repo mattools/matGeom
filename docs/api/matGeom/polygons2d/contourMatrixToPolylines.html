@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of contourMatrixToPolylines</title>
+  <meta name="keywords" content="contourMatrixToPolylines">
+  <meta name="description" content="CONTOURMATRIXTOPOLYLINES Converts a contour matrix array into a polyline set.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; contourMatrixToPolylines.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>contourMatrixToPolylines
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CONTOURMATRIXTOPOLYLINES Converts a contour matrix array into a polyline set.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function polys = contourMatrixToPolylines(C) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CONTOURMATRIXTOPOLYLINES Converts a contour matrix array into a polyline set.
+
+   POLYS = contourMatrixToPolylines(C)
+   Converts the contour matrix array, as given as the result of the
+   contourc function, into a set of polylines.
+
+   Example
+     img = imread('circles.png');
+     C = contourc(img, 1);
+     polys = contourMatrixToPolylines(C);
+     imshow(img); hold on;
+     drawPolyline(polys, 'Color', 'r', 'LineWidth', 2);
+
+   See also
+     polygons2d, contour, contourc</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function polys = contourMatrixToPolylines(C)</a>
+0002 <span class="comment">%CONTOURMATRIXTOPOLYLINES Converts a contour matrix array into a polyline set.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POLYS = contourMatrixToPolylines(C)</span>
+0005 <span class="comment">%   Converts the contour matrix array, as given as the result of the</span>
+0006 <span class="comment">%   contourc function, into a set of polylines.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Example</span>
+0009 <span class="comment">%     img = imread('circles.png');</span>
+0010 <span class="comment">%     C = contourc(img, 1);</span>
+0011 <span class="comment">%     polys = contourMatrixToPolylines(C);</span>
+0012 <span class="comment">%     imshow(img); hold on;</span>
+0013 <span class="comment">%     drawPolyline(polys, 'Color', 'r', 'LineWidth', 2);</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   See also</span>
+0016 <span class="comment">%     polygons2d, contour, contourc</span>
+0017 
+0018 <span class="comment">% ------</span>
+0019 <span class="comment">% Author: David Legland</span>
+0020 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0021 <span class="comment">% Created: 2013-08-22,    using Matlab 7.9.0.529 (R2009b)</span>
+0022 <span class="comment">% Copyright 2013 INRA - Cepia Software Platform.</span>
+0023 
+0024 <span class="comment">% size of the contour matrix array</span>
+0025 nCoords = size(C, 2);
+0026 
+0027 <span class="comment">% first, compute the number of contours</span>
+0028 nContours = 0;
+0029 offset = 1;
+0030 <span class="keyword">while</span> offset &lt; nCoords
+0031     nContours = nContours + 1;
+0032     offset = offset + C(2, offset) + 1;
+0033 <span class="keyword">end</span>
+0034 
+0035 <span class="comment">% extract each contour as a polygon or polyline</span>
+0036 polys = cell(nContours, 1);
+0037 offset = 1;
+0038 <span class="keyword">for</span> iContour = 1:nContours
+0039     nv = C(2, offset);
+0040     polys{iContour} = C(:, offset + (1:nv))';
+0041     offset = offset + nv + 1;
+0042 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

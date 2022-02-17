@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of projPointOnPolygon</title>
+  <meta name="keywords" content="projPointOnPolygon">
+  <meta name="description" content="PROJPOINTONPOLYGON  Compute position of a point projected on a polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; projPointOnPolygon.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>projPointOnPolygon
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>PROJPOINTONPOLYGON  Compute position of a point projected on a polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = projPointOnPolygon(point, poly, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">PROJPOINTONPOLYGON  Compute position of a point projected on a polygon.
+
+   POS = projPointOnPolygon(POINT, POLYGON)
+   Compute the position of the orthogonal projection of a point on a
+   polygon.
+   POINT is a 1-by-2 row vector containing point coordinates
+   POLYGON is a N-by-2 array containing coordinates of polygon vertices
+
+   When POINT is an array of points, returns a column vector with as many
+   rows as the number of points. 
+
+   [POS, DIST] = projPointOnPolygon(...)
+   Also returns the distance between POINT and POLYGON. The distance is
+   negative if the point is located inside of the polygon.
+
+   Example
+     poly = [10 10; 20 10;20 20;10 20];
+     projPointOnPolygon([15 0], poly)
+     ans =
+         0.5000
+     projPointOnPolygon([0 16], poly)
+     ans =
+         3.4000
+
+   See also
+   points2d, polygons2d, <a href="polygonPoint.html" class="code" title="function point = polygonPoint(poly, pos)">polygonPoint</a>, <a href="projPointOnPolyline.html" class="code" title="function varargout = projPointOnPolyline(point, poly, varargin)">projPointOnPolyline</a>
+   <a href="distancePointPolygon.html" class="code" title="function minDist = distancePointPolygon(point, poly)">distancePointpolygon</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="projPointOnPolyline.html" class="code" title="function varargout = projPointOnPolyline(point, poly, varargin)">projPointOnPolyline</a>	PROJPOINTONPOLYLINE Compute position of a point projected on a polyline.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = projPointOnPolygon(point, poly, varargin)</a>
+0002 <span class="comment">%PROJPOINTONPOLYGON  Compute position of a point projected on a polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POS = projPointOnPolygon(POINT, POLYGON)</span>
+0005 <span class="comment">%   Compute the position of the orthogonal projection of a point on a</span>
+0006 <span class="comment">%   polygon.</span>
+0007 <span class="comment">%   POINT is a 1-by-2 row vector containing point coordinates</span>
+0008 <span class="comment">%   POLYGON is a N-by-2 array containing coordinates of polygon vertices</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   When POINT is an array of points, returns a column vector with as many</span>
+0011 <span class="comment">%   rows as the number of points.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   [POS, DIST] = projPointOnPolygon(...)</span>
+0014 <span class="comment">%   Also returns the distance between POINT and POLYGON. The distance is</span>
+0015 <span class="comment">%   negative if the point is located inside of the polygon.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   Example</span>
+0018 <span class="comment">%     poly = [10 10; 20 10;20 20;10 20];</span>
+0019 <span class="comment">%     projPointOnPolygon([15 0], poly)</span>
+0020 <span class="comment">%     ans =</span>
+0021 <span class="comment">%         0.5000</span>
+0022 <span class="comment">%     projPointOnPolygon([0 16], poly)</span>
+0023 <span class="comment">%     ans =</span>
+0024 <span class="comment">%         3.4000</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%   See also</span>
+0027 <span class="comment">%   points2d, polygons2d, polygonPoint, projPointOnPolyline</span>
+0028 <span class="comment">%   distancePointpolygon</span>
+0029 <span class="comment">%</span>
+0030 
+0031 <span class="comment">% ------</span>
+0032 <span class="comment">% Author: David Legland</span>
+0033 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0034 <span class="comment">% Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)</span>
+0035 <span class="comment">% Copyright 2009 INRA - Cepia Software Platform.</span>
+0036 
+0037 
+0038 <span class="comment">% eventually copy first point at the end to ensure closed polygon</span>
+0039 <span class="keyword">if</span> sum(poly(<span class="keyword">end</span>, :) == poly(1,:)) ~= 2
+0040     poly = [poly; poly(1,:)];
+0041 <span class="keyword">end</span>
+0042 
+0043 <span class="comment">% compute position wrt outline</span>
+0044 [pos, minDist] = <a href="projPointOnPolyline.html" class="code" title="function varargout = projPointOnPolyline(point, poly, varargin)">projPointOnPolyline</a>(point, poly);
+0045 
+0046 <span class="comment">% process output arguments</span>
+0047 <span class="keyword">if</span> nargout &lt;= 1
+0048     varargout{1} = pos;
+0049 <span class="keyword">elseif</span> nargout == 2
+0050     varargout{1} = pos;
+0051     <span class="keyword">if</span> inpolygon(point(:,1), point(:,2), poly(:,1), poly(:,2))
+0052         minDist = -minDist;
+0053     <span class="keyword">end</span>
+0054     varargout{2} = minDist;
+0055 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

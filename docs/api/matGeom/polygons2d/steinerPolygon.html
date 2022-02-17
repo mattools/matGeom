@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of steinerPolygon</title>
+  <meta name="keywords" content="steinerPolygon">
+  <meta name="description" content="STEINERPOLYGON Create a Steiner polygon from a set of vectors.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; steinerPolygon.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>steinerPolygon
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>STEINERPOLYGON Create a Steiner polygon from a set of vectors.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function nodes = steinerPolygon(points) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">STEINERPOLYGON Create a Steiner polygon from a set of vectors.
+
+   NODES = steinerPolygon(VECTORS);
+   Builds the (convex) polygon which contains an edge for each one of the
+   vectors given by VECTORS.
+
+   Example
+   n = steinerPolygon([1 0;0 1;1 1]);
+   drawPolygon(n);
+
+   See also
+   polygons2d, <a href="drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2006-04-28
+ Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function nodes = steinerPolygon(points)</a>
+0002 <span class="comment">%STEINERPOLYGON Create a Steiner polygon from a set of vectors.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   NODES = steinerPolygon(VECTORS);</span>
+0005 <span class="comment">%   Builds the (convex) polygon which contains an edge for each one of the</span>
+0006 <span class="comment">%   vectors given by VECTORS.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Example</span>
+0009 <span class="comment">%   n = steinerPolygon([1 0;0 1;1 1]);</span>
+0010 <span class="comment">%   drawPolygon(n);</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   See also</span>
+0013 <span class="comment">%   polygons2d, drawPolygon</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">% ------</span>
+0016 <span class="comment">% Author: David Legland</span>
+0017 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0018 <span class="comment">% Created: 2006-04-28</span>
+0019 <span class="comment">% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0020 
+0021 nodes = [0 0];
+0022 <span class="keyword">for</span> i=1:length(points)
+0023     nodes = [nodes; nodes+repmat(points(i,:), [size(nodes, 1) 1])]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0024 <span class="keyword">end</span>
+0025 
+0026 K = convhull(nodes(:,1), nodes(:,2));
+0027 nodes = nodes(K, :);
+0028</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

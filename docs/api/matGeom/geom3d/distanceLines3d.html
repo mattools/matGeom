@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of distanceLines3d</title>
+  <meta name="keywords" content="distanceLines3d">
+  <meta name="description" content="DISTANCELINES3D Minimal distance between two 3D lines.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; distanceLines3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>distanceLines3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DISTANCELINES3D Minimal distance between two 3D lines.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [d, pt1, pt2] = distanceLines3d(line1, line2) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DISTANCELINES3D Minimal distance between two 3D lines.
+
+   D = distanceLines3d(LINE1, LINE2);
+   Returns the distance between line LINE1 and the line LINE2, given as:
+   LINE1 : [x0 y0 z0 dx dy dz] (or M-by-6 array)
+   LINE2 : [x0 y0 z0 dx dy dz] (or N-by-6 array)
+   D     : (positive) array M-by-N
+
+   [D, PT1, PT2] = distanceLines3d(LINE1, LINE2);
+   Also returns the points located on LINE1 and LINE2 corresponding to the
+   shortest distance. 
+   One should get the following:
+   distancePoints3d(PT1, PT2) - D == 0
+
+
+   Example
+     line1 = [2 3 4 0 1 0];
+     line2 = [8 8 8 0 0 1];
+     distanceLines3d(line1, line2)
+     ans = 
+         6.0000
+
+   See also:
+   <a href="lines3d.html" class="code" title="function lines3d(varargin)">lines3d</a>, <a href="distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>
+
+   ---------
+   authors: Brandon Baker, oqilipo, David Legland
+   created January 19, 2011</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>	VECTORNORM3D Norm of a 3D vector or of set of 3D vectors.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [d, pt1, pt2] = distanceLines3d(line1, line2)</a>
+0002 <span class="comment">%DISTANCELINES3D Minimal distance between two 3D lines.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   D = distanceLines3d(LINE1, LINE2);</span>
+0005 <span class="comment">%   Returns the distance between line LINE1 and the line LINE2, given as:</span>
+0006 <span class="comment">%   LINE1 : [x0 y0 z0 dx dy dz] (or M-by-6 array)</span>
+0007 <span class="comment">%   LINE2 : [x0 y0 z0 dx dy dz] (or N-by-6 array)</span>
+0008 <span class="comment">%   D     : (positive) array M-by-N</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   [D, PT1, PT2] = distanceLines3d(LINE1, LINE2);</span>
+0011 <span class="comment">%   Also returns the points located on LINE1 and LINE2 corresponding to the</span>
+0012 <span class="comment">%   shortest distance.</span>
+0013 <span class="comment">%   One should get the following:</span>
+0014 <span class="comment">%   distancePoints3d(PT1, PT2) - D == 0</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   Example</span>
+0018 <span class="comment">%     line1 = [2 3 4 0 1 0];</span>
+0019 <span class="comment">%     line2 = [8 8 8 0 0 1];</span>
+0020 <span class="comment">%     distanceLines3d(line1, line2)</span>
+0021 <span class="comment">%     ans =</span>
+0022 <span class="comment">%         6.0000</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   See also:</span>
+0025 <span class="comment">%   lines3d, distancePoints3d</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   ---------</span>
+0028 <span class="comment">%   authors: Brandon Baker, oqilipo, David Legland</span>
+0029 <span class="comment">%   created January 19, 2011</span>
+0030 <span class="comment">%</span>
+0031 
+0032 <span class="comment">% number of points of each array</span>
+0033 n1 = size(line1, 1);
+0034 n2 = size(line2, 1);
+0035 
+0036 <span class="keyword">if</span> nargout &lt;= 1
+0037     <span class="comment">% express line coordinate as n1-by-n2 arrays</span>
+0038     v1x = repmat(line1(:,4), [1 n2]);
+0039     v1y = repmat(line1(:,5), [1 n2]);
+0040     v1z = repmat(line1(:,6), [1 n2]);
+0041     p1x = repmat(line1(:,1), [1 n2]);
+0042     p1y = repmat(line1(:,2), [1 n2]);
+0043     p1z = repmat(line1(:,3), [1 n2]);
+0044 
+0045     v2x = repmat(line2(:,4)', [n1 1]);
+0046     v2y = repmat(line2(:,5)', [n1 1]);
+0047     v2z = repmat(line2(:,6)', [n1 1]);
+0048     p2x = repmat(line2(:,1)', [n1 1]);
+0049     p2y = repmat(line2(:,2)', [n1 1]);
+0050     p2z = repmat(line2(:,3)', [n1 1]);
+0051 
+0052     <span class="comment">% calculates distance for each set of lines</span>
+0053     vcross = cross([v1x(:) v1y(:) v1z(:)], [v2x(:) v2y(:) v2z(:)]);
+0054     num = ([p1x(:) p1y(:) p1z(:)] - [p2x(:) p2y(:) p2z(:)]) .* vcross;
+0055     t1 = sum(num,2);
+0056     d = abs(t1) ./ (<a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(vcross) + eps);
+0057     
+0058     <span class="comment">% returns result as n1-by-n2 array</span>
+0059     d = reshape(d, n1, n2);
+0060 
+0061 <span class="keyword">else</span>
+0062     <span class="comment">% check input dimension, as we need to be able to match each pair of</span>
+0063     <span class="comment">% lines</span>
+0064     <span class="keyword">if</span> n1 ~= n2
+0065         error(<span class="string">'geom3d:distanceLines3d:IllegalInputArgument'</span>, <span class="keyword">...</span>
+0066             <span class="string">'when output points are requested, number of lines should be the same'</span>);
+0067     <span class="keyword">end</span>
+0068     
+0069     p1 = line1(:, 1:3);
+0070     p2 = line2(:, 1:3);
+0071     dp = p2 - p1;
+0072     v1 = line1(:, 4:6);
+0073     v2 = line2(:, 4:6);
+0074 
+0075     <span class="comment">% compute distance</span>
+0076     vcross = cross(v1, v2, 2);
+0077     num = dp .* vcross;
+0078     t1 = sum(num, 2);
+0079     d = abs(t1) ./ (<a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(vcross) + eps);
+0080 
+0081     <span class="comment">% precomputations</span>
+0082     a = dot(v1, v1, 2);
+0083     b = dot(v1, v2, 2);
+0084     e = dot(v2, v2, 2);
+0085     den = a.*e - b.*b; <span class="comment">% 0, if lines are parallel</span>
+0086     
+0087     <span class="comment">% vector between origin of both lines</span>
+0088     r = line1(:,1:3) - line2(:,1:3);
+0089     
+0090     <span class="comment">% solve linear system</span>
+0091     c = dot(v1, r, 2);
+0092     f = dot(v2, r, 2);
+0093     s = (b .* f - c .* e) ./ den;
+0094     t = (a .* f - c .* b) ./ den;
+0095 
+0096     <span class="comment">% convert to coordinates of points on lines</span>
+0097     pt1 = line1(:,1:3) + v1 .* s;
+0098     pt2 = line2(:,1:3) + v2 .* t;
+0099 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

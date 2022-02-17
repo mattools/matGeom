@@ -1,6 +1,4 @@
 
-This is the content of the site.
+This is the documentation page for the MatGeom library.
 
-Will be converted to html !
-
-Link to [a sample page](api/distancePointPolygon.html)
+The html documentation of the function is provided on [this index page](api/index.html).

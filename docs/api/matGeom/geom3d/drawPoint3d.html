@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawPoint3d</title>
+  <meta name="keywords" content="drawPoint3d">
+  <meta name="description" content="DRAWPOINT3D Draw 3D point on the current axis.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; drawPoint3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawPoint3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWPOINT3D Draw 3D point on the current axis.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function h = drawPoint3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWPOINT3D Draw 3D point on the current axis.
+
+   drawPoint3d(X, Y, Z) 
+   will draw points defined by coordinates X, Y and Z. 
+   X, Y and Z are N*1 array, with N being number of points to be drawn.
+   
+   drawPoint3d(COORD) packs coordinates in a single [N*3] array.
+
+   drawPoint3d(..., OPT) will draw each point with given option. OPT is a 
+   string compatible with 'plot' model.
+
+   drawPoint3d(AX,...) plots into AX instead of GCA.
+
+   H = drawPoint3d(...) returns a handle H to the line object
+
+   Example
+     % generate points on a 3D circle
+     pts = circleToPolygon([40 30 20], 120);
+     mat = eulerAnglesToRotation3d([30 20 10]);
+     pts3d = transformPoint3d([pts zeros(120,1)],mat);
+     figure; drawPoint3d(pts3d, 'b.');
+     view(3); axis equal;
+
+   See also
+     <a href="points3d.html" class="code" title="function points3d(varargin)">points3d</a>, <a href="clipPoints3d.html" class="code" title="function varargout = clipPoints3d(points, shape, varargin)">clipPoints3d</a>, drawPoint</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function h = drawPoint3d(varargin)</a>
+0002 <span class="comment">%DRAWPOINT3D Draw 3D point on the current axis.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawPoint3d(X, Y, Z)</span>
+0005 <span class="comment">%   will draw points defined by coordinates X, Y and Z.</span>
+0006 <span class="comment">%   X, Y and Z are N*1 array, with N being number of points to be drawn.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   drawPoint3d(COORD) packs coordinates in a single [N*3] array.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   drawPoint3d(..., OPT) will draw each point with given option. OPT is a</span>
+0011 <span class="comment">%   string compatible with 'plot' model.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   drawPoint3d(AX,...) plots into AX instead of GCA.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   H = drawPoint3d(...) returns a handle H to the line object</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   Example</span>
+0018 <span class="comment">%     % generate points on a 3D circle</span>
+0019 <span class="comment">%     pts = circleToPolygon([40 30 20], 120);</span>
+0020 <span class="comment">%     mat = eulerAnglesToRotation3d([30 20 10]);</span>
+0021 <span class="comment">%     pts3d = transformPoint3d([pts zeros(120,1)],mat);</span>
+0022 <span class="comment">%     figure; drawPoint3d(pts3d, 'b.');</span>
+0023 <span class="comment">%     view(3); axis equal;</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   See also</span>
+0026 <span class="comment">%     points3d, clipPoints3d, drawPoint</span>
+0027 <span class="comment">%</span>
+0028 
+0029 <span class="comment">% ---------</span>
+0030 <span class="comment">% Author : David Legland</span>
+0031 <span class="comment">% INRA - TPV URPOI - BIA IMASTE</span>
+0032 <span class="comment">% created the 18/02/2005.</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">%   HISTORY</span>
+0035 <span class="comment">%   04/01/2007: remove unused variables, and enhance support for plot</span>
+0036 <span class="comment">%       options</span>
+0037 <span class="comment">%   12/02/2010 does not clip points anymore</span>
+0038 <span class="comment">%   12/01/2018 added axes handle input</span>
+0039 <span class="comment">%</span>
+0040 
+0041 <span class="keyword">if</span> isAxisHandle(varargin{1})
+0042     hAx = varargin{1};
+0043     varargin(1)=[];
+0044 <span class="keyword">else</span>
+0045     hAx = gca;
+0046 <span class="keyword">end</span>
+0047 
+0048 <span class="keyword">if</span> length(varargin) == 1 &amp;&amp; size(varargin{1}, 2) == 3
+0049     <span class="comment">% points are given as one single array with 3 columns</span>
+0050     px = varargin{1}(:,1);
+0051     py = varargin{1}(:,2);
+0052     pz = varargin{1}(:,3);
+0053     varargin = {};
+0054 <span class="keyword">elseif</span> length(varargin) == 2 &amp;&amp; size(varargin{1}, 2) == 3
+0055     <span class="comment">% points are given as one single array with 3 columns</span>
+0056     px = varargin{1}(:,1);
+0057     py = varargin{1}(:,2);
+0058     pz = varargin{1}(:,3);
+0059     varargin = varargin(2);
+0060 <span class="keyword">elseif</span> length(varargin) &gt;= 3 &amp;&amp; size(varargin{1}, 2) == 3
+0061     <span class="comment">% points are given as one single array with 3 columns</span>
+0062     px = varargin{1}(:,1);
+0063     py = varargin{1}(:,2);
+0064     pz = varargin{1}(:,3);
+0065     varargin = varargin(2:end);
+0066 <span class="keyword">elseif</span> length(varargin) == 3 &amp;&amp; numel(varargin{1})==numel(varargin{2}) &amp;&amp; numel(varargin{1})==numel(varargin{3})
+0067     <span class="comment">% points are given as 3 columns with equal lengths</span>
+0068     px = varargin{1};
+0069     py = varargin{2};
+0070     pz = varargin{3};
+0071     varargin = {};
+0072 <span class="keyword">elseif</span> length(varargin) &gt; 3
+0073     <span class="comment">% points are given as 3 columns with equal lengths</span>
+0074     px = varargin{1};
+0075     py = varargin{2};
+0076     pz = varargin{3};
+0077     varargin = varargin(4:end);
+0078 <span class="keyword">else</span>
+0079     error(<span class="string">'wrong number of arguments in drawPoint3d'</span>);
+0080 <span class="keyword">end</span>
+0081 
+0082 <span class="comment">% default draw style: no line, marker is 'o'</span>
+0083 <span class="keyword">if</span> length(varargin) ~= 1
+0084     varargin = [<span class="string">'linestyle'</span>, <span class="string">'none'</span>, <span class="string">'marker'</span>, <span class="string">'o'</span>, varargin];
+0085 <span class="keyword">end</span>
+0086 
+0087 <span class="comment">% plot only points inside the axis.</span>
+0088 hh = plot3(hAx, px, py, pz, varargin{:});
+0089 
+0090 <span class="keyword">if</span> nargout &gt; 0
+0091     h = hh;
+0092 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

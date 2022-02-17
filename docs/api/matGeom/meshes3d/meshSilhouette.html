@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of meshSilhouette</title>
+  <meta name="keywords" content="meshSilhouette">
+  <meta name="description" content="MESHSILHOUETTE Compute the 2D outline of a 3D mesh on an arbitrary plane.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; meshSilhouette.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>meshSilhouette
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MESHSILHOUETTE Compute the 2D outline of a 3D mesh on an arbitrary plane.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function silhouette = meshSilhouette(v, f, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MESHSILHOUETTE Compute the 2D outline of a 3D mesh on an arbitrary plane.
+
+   ATTENTION: Very slow brute force approach! Keep the number of faces as
+   low as possible.
+
+   SILHOUETTE = meshSilhouette(MESH, PLANE)
+   Calculates the silhouette (2D outline) of the MESH projected on the
+   PLANE.
+
+   SILHOUETTE = meshSilhouette(MESH) uses the x-y plane.
+
+   SILHOUETTE = meshSilhouette(V, F, ...)
+
+   SILHOUETTE = meshSilhouette(..., 'visu', 1) visualizes the results.
+   By default the results are not visualized.
+
+   Example:
+     v = [5, 2, 6, 0, 3;  0, 2, 4, 2, 1;  -5, -6, -6, -7, -9]';
+     f = [1, 2, 4; 1, 5, 4; 1, 2, 5; 2, 3, 5; 2, 4, 3; 3, 4, 5];
+     sil = meshSilhouette(v, f, rand(1,9),'visu',1);
+   
+   See also:
+     projPointOnPlane
+
+   Source:
+     Sean de Wolski - https://www.mathworks.com/matlabcentral/answers/68004</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/createBasisTransform3d.html" class="code" title="function transfo = createBasisTransform3d(source, target)">createBasisTransform3d</a>	CREATEBASISTRANSFORM3D Compute matrix for transforming a basis into another basis.</li><li><a href="../../matGeom/geom3d/drawPlane3d.html" class="code" title="function h = drawPlane3d(plane, varargin)">drawPlane3d</a>	Draw a plane clipped by the current axes.</li><li><a href="../../matGeom/geom3d/drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>	DRAWPOLYLINE3D Draw a 3D polyline specified by a list of vertex coords.</li><li><a href="../../matGeom/geom3d/isPlane.html" class="code" title="function d = isPlane(plane)">isPlane</a>	ISPLANE Check if input is a plane.</li><li><a href="../../matGeom/geom3d/planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>	PLANENORMAL Compute the normal to a plane.</li><li><a href="../../matGeom/geom3d/transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li><li><a href="../../matGeom/geom3d/vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>	VECTORNORM3D Norm of a 3D vector or of set of 3D vectors.</li><li><a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a>	Draw a 3D mesh defined by vertex and face arrays.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function silhouette = meshSilhouette(v, f, varargin)</a>
+0002 <span class="comment">%MESHSILHOUETTE Compute the 2D outline of a 3D mesh on an arbitrary plane.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   ATTENTION: Very slow brute force approach! Keep the number of faces as</span>
+0005 <span class="comment">%   low as possible.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   SILHOUETTE = meshSilhouette(MESH, PLANE)</span>
+0008 <span class="comment">%   Calculates the silhouette (2D outline) of the MESH projected on the</span>
+0009 <span class="comment">%   PLANE.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   SILHOUETTE = meshSilhouette(MESH) uses the x-y plane.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   SILHOUETTE = meshSilhouette(V, F, ...)</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   SILHOUETTE = meshSilhouette(..., 'visu', 1) visualizes the results.</span>
+0016 <span class="comment">%   By default the results are not visualized.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   Example:</span>
+0019 <span class="comment">%     v = [5, 2, 6, 0, 3;  0, 2, 4, 2, 1;  -5, -6, -6, -7, -9]';</span>
+0020 <span class="comment">%     f = [1, 2, 4; 1, 5, 4; 1, 2, 5; 2, 3, 5; 2, 4, 3; 3, 4, 5];</span>
+0021 <span class="comment">%     sil = meshSilhouette(v, f, rand(1,9),'visu',1);</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   See also:</span>
+0024 <span class="comment">%     projPointOnPlane</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%   Source:</span>
+0027 <span class="comment">%     Sean de Wolski - https://www.mathworks.com/matlabcentral/answers/68004</span>
+0028 
+0029 <span class="comment">% ---------</span>
+0030 <span class="comment">% Authors: oqilipo</span>
+0031 <span class="comment">% Created: 2020-07-29</span>
+0032 <span class="comment">% Copyright 2020</span>
+0033 
+0034 narginchk(1,5)
+0035 nargoutchk(0,1)
+0036 
+0037 <span class="comment">%% Parse inputs</span>
+0038 <span class="comment">% If first argument is a struct</span>
+0039 <span class="keyword">if</span> isstruct(v)
+0040     <span class="keyword">if</span> nargin &gt; 1
+0041         varargin=[{f} varargin{:}];
+0042     <span class="keyword">end</span>
+0043     mesh = v;
+0044     [v, f] = parseMeshData(v);
+0045 <span class="keyword">else</span>
+0046     mesh.vertices = v;
+0047     mesh.faces = f;
+0048 <span class="keyword">end</span>
+0049 
+0050 p = inputParser;
+0051 logParValidFunc = @(x) (islogical(x) || isequal(x,1) || isequal(x,0));
+0052 addOptional(p,<span class="string">'plane'</span>,[0 0 0 1 0 0 0 1 0],@<a href="../../matGeom/geom3d/isPlane.html" class="code" title="function d = isPlane(plane)">isPlane</a>)
+0053 addParameter(p,<span class="string">'visualization'</span>,false,logParValidFunc);
+0054 parse(p, varargin{:});
+0055 plane = p.Results.plane;
+0056 
+0057 <span class="comment">% Transform into the x-y plane</span>
+0058 TFM = <a href="../../matGeom/geom3d/createBasisTransform3d.html" class="code" title="function transfo = createBasisTransform3d(source, target)">createBasisTransform3d</a>(<span class="string">'g'</span>, plane);
+0059 v = <a href="../../matGeom/geom3d/transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(v,TFM);
+0060 
+0061 <span class="comment">% Initialize final polygon vectors</span>
+0062 [px, py] = boundary(polyshape(v(f(1,:),1) ,v(f(1,:),2), <span class="string">'Simplify'</span>,false));
+0063 <span class="keyword">for</span> i = 2:size(f,1)
+0064     A = polyshape(v(f(i,:),1), v(f(i,:),2), <span class="string">'Simplify'</span>,false);
+0065     B = polyshape(px, py, <span class="string">'Simplify'</span>,false);
+0066     [px, py] = boundary(union(A,B));
+0067 <span class="keyword">end</span>
+0068 
+0069 <span class="comment">% Transform back into the plane</span>
+0070 silhouette = <a href="../../matGeom/geom3d/transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>([px,py,zeros(size(px))], inv(TFM));
+0071 
+0072 <span class="keyword">if</span> p.Results.visualization
+0073     figure(<span class="string">'Color'</span>,<span class="string">'w'</span>); axH = axes(); axis(axH, <span class="string">'equal'</span>, <span class="string">'tight'</span>)
+0074     <a href="../../matGeom/geom3d/drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>(axH, silhouette,<span class="string">'Color'</span>,<span class="string">'r'</span>,<span class="string">'LineWidth'</span>,3)
+0075     <a href="../../matGeom/geom3d/drawPlane3d.html" class="code" title="function h = drawPlane3d(plane, varargin)">drawPlane3d</a>(axH, plane,<span class="string">'FaceAlpha'</span>,0.5)
+0076     <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a>(mesh,<span class="string">'FaceAlpha'</span>,0.5,<span class="string">'FaceColor'</span>,<span class="string">'none'</span>)
+0077     axis(axH, <span class="string">'equal'</span>)
+0078     camTar = nanmean(silhouette);
+0079     axH.CameraTarget = camTar;
+0080     axH.CameraPosition = camTar + <span class="keyword">...</span>
+0081         <a href="../../matGeom/geom3d/planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>(plane)*<a href="../../matGeom/geom3d/vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(axH.CameraPosition-axH.CameraTarget);
+0082     axH.CameraUpVector = plane(4:6);
+0083     xlabel(axH, <span class="string">'x'</span>); ylabel(axH, <span class="string">'y'</span>); zlabel(axH, <span class="string">'z'</span>);
+0084 <span class="keyword">end</span>
+0085 
+0086 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

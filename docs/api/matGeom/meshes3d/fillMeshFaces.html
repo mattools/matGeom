@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of fillMeshFaces</title>
+  <meta name="keywords" content="fillMeshFaces">
+  <meta name="description" content="Fill the faces of a mesh with the specified colors.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; fillMeshFaces.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>fillMeshFaces
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Fill the faces of a mesh with the specified colors.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = fillMeshFaces(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Fill the faces of a mesh with the specified colors.
+
+   fillMeshFaces(V, F, VERTEXCOLORS)
+   Colorizes a mesh by filling faces with an array of values. The colors
+   can be a NV-by-1 array of values, or a NV-by-3 array of values.
+   Face filling uses 'interp' coloring mode.
+
+   fillMeshFaces(V, F, FACECOLORS)
+   Colorizes the mesh by specifying the value or the color associated to
+   each face. Face filling uses 'flat' coloring mode.
+
+   fillMeshFaces(..., PNAME, PVALUE)
+   Specifies additional parameters that will be passed to the 'patch'
+   function.
+
+   Example
+     % Colorize mesh based on z-coordinate of vertices.
+     [v, f] = createIcosahedron;
+     values = v(:,3);
+     figure; axis equal; view(3);
+     fillMeshFaces(v, f, values);
+
+     % Colorize mesh using specific color for each face
+     [v, f] = createIcosahedron;
+     colors = jet(20);
+     figure; axis equal; view(3);
+     fillMeshFaces(v, f, colors);
+
+   See also
+     <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = fillMeshFaces(varargin)</a>
+0002 <span class="comment">% Fill the faces of a mesh with the specified colors.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   fillMeshFaces(V, F, VERTEXCOLORS)</span>
+0005 <span class="comment">%   Colorizes a mesh by filling faces with an array of values. The colors</span>
+0006 <span class="comment">%   can be a NV-by-1 array of values, or a NV-by-3 array of values.</span>
+0007 <span class="comment">%   Face filling uses 'interp' coloring mode.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   fillMeshFaces(V, F, FACECOLORS)</span>
+0010 <span class="comment">%   Colorizes the mesh by specifying the value or the color associated to</span>
+0011 <span class="comment">%   each face. Face filling uses 'flat' coloring mode.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   fillMeshFaces(..., PNAME, PVALUE)</span>
+0014 <span class="comment">%   Specifies additional parameters that will be passed to the 'patch'</span>
+0015 <span class="comment">%   function.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   Example</span>
+0018 <span class="comment">%     % Colorize mesh based on z-coordinate of vertices.</span>
+0019 <span class="comment">%     [v, f] = createIcosahedron;</span>
+0020 <span class="comment">%     values = v(:,3);</span>
+0021 <span class="comment">%     figure; axis equal; view(3);</span>
+0022 <span class="comment">%     fillMeshFaces(v, f, values);</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%     % Colorize mesh using specific color for each face</span>
+0025 <span class="comment">%     [v, f] = createIcosahedron;</span>
+0026 <span class="comment">%     colors = jet(20);</span>
+0027 <span class="comment">%     figure; axis equal; view(3);</span>
+0028 <span class="comment">%     fillMeshFaces(v, f, colors);</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">%   See also</span>
+0031 <span class="comment">%     drawMesh</span>
+0032  
+0033 <span class="comment">% ------</span>
+0034 <span class="comment">% Author: David Legland</span>
+0035 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0036 <span class="comment">% INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0037 <span class="comment">% Created: 2020-04-16,    using Matlab 9.7.0.1247435 (R2019b) Update 2</span>
+0038 <span class="comment">% Copyright 2020 INRAE.</span>
+0039 
+0040 <span class="comment">%% Parse input arguments</span>
+0041 
+0042 <span class="comment">% extract first argument</span>
+0043 var1 = varargin{1};
+0044 varargin(1) = [];
+0045 
+0046 <span class="comment">% Check if first input argument is an axes handle</span>
+0047 <span class="keyword">if</span> isAxisHandle(var1)
+0048     ax = var1;
+0049     var1 = varargin{1};
+0050     varargin(1) = [];
+0051 <span class="keyword">else</span>
+0052     ax = gca;
+0053 <span class="keyword">end</span>
+0054 
+0055 <span class="comment">% Check if the input is a mesh structure</span>
+0056 <span class="keyword">if</span> isstruct(var1)
+0057     <span class="comment">% extract data to display</span>
+0058     vertices = var1.vertices;
+0059     faces = var1.faces;
+0060 <span class="keyword">else</span>
+0061     <span class="comment">% assumes input is given with vertices+faces arrays</span>
+0062     vertices = var1;
+0063     faces = varargin{1};
+0064     varargin(1) = [];
+0065 <span class="keyword">end</span>
+0066 
+0067 <span class="comment">% next argument is face color</span>
+0068 colors = varargin{1};
+0069 varargin(1) = [];
+0070 
+0071 <span class="comment">% adapt the face color key value depending on the size of the &quot;color&quot; input</span>
+0072 <span class="comment">% argument</span>
+0073 faceColorMode = <span class="string">'interp'</span>;
+0074 <span class="keyword">if</span> size(colors, 1) == size(faces, 1)
+0075     faceColorMode = <span class="string">'flat'</span>;
+0076 <span class="keyword">end</span>
+0077 
+0078 <span class="comment">% array FACES is a NF-by-NV indices array, with NV number of vertices of</span>
+0079 <span class="comment">% each face, and NF number of faces</span>
+0080 h = patch(<span class="string">'Parent'</span>, ax, <span class="keyword">...</span>
+0081     <span class="string">'vertices'</span>, vertices, <span class="string">'faces'</span>, faces, <span class="string">'FaceVertexCData'</span>, colors, <span class="keyword">...</span>
+0082     <span class="string">'FaceColor'</span>, faceColorMode, varargin{:});
+0083 
+0084 
+0085 <span class="comment">%% Process output arguments</span>
+0086 
+0087 <span class="comment">% format output parameters</span>
+0088 <span class="keyword">if</span> nargout &gt; 0
+0089     varargout = {h};
+0090 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

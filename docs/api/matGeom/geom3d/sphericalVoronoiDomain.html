@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of sphericalVoronoiDomain</title>
+  <meta name="keywords" content="sphericalVoronoiDomain">
+  <meta name="description" content="SPHERICALVORONOIDOMAIN Compute a spherical voronoi domain.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; sphericalVoronoiDomain.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>sphericalVoronoiDomain
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>SPHERICALVORONOIDOMAIN Compute a spherical voronoi domain.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function poly = sphericalVoronoiDomain(refPoint, neighbors) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">SPHERICALVORONOIDOMAIN Compute a spherical voronoi domain.
+
+   POLY = sphericalVoronoiDomain(GERM, NEIGHBORS)
+   GERM is a 1-by-3 row vector representing cartesian coordinates of a
+   point on the unit sphere (in X, Y Z order)
+   NEIGHBORS is a N-by-3 array representing cartesian coordinates of the
+   germ neighbors. It is expected that NEIGHBORS contains only neighbors
+   that effectively contribute to the voronoi domain.
+
+   Example
+   sphericalVoronoiDomain
+
+   See also
+   <a href="drawSphericalPolygon.html" class="code" title="function varargout = drawSphericalPolygon(sphere, poly, varargin)">drawSphericalPolygon</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2010-11-17,    using Matlab 7.9.0.529 (R2009b)
+ Copyright 2010 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="intersectLineSphere.html" class="code" title="function points = intersectLineSphere(line, sphere, varargin)">intersectLineSphere</a>	INTERSECTLINESPHERE Return intersection points between a line and a sphere.</li><li><a href="intersectPlanes.html" class="code" title="function line = intersectPlanes(plane1, plane2, varargin)">intersectPlanes</a>	INTERSECTPLANES Return intersection line between 2 planes in space.</li><li><a href="medianPlane.html" class="code" title="function plane = medianPlane(p1, p2)">medianPlane</a>	MEDIANPLANE Create a plane in the middle of 2 points.</li><li><a href="normalizePlane.html" class="code" title="function plane2 = normalizePlane(plane1)">normalizePlane</a>	NORMALIZEPLANE Normalize parametric representation of a plane.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function poly = sphericalVoronoiDomain(refPoint, neighbors)</a>
+0002 <span class="comment">%SPHERICALVORONOIDOMAIN Compute a spherical voronoi domain.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POLY = sphericalVoronoiDomain(GERM, NEIGHBORS)</span>
+0005 <span class="comment">%   GERM is a 1-by-3 row vector representing cartesian coordinates of a</span>
+0006 <span class="comment">%   point on the unit sphere (in X, Y Z order)</span>
+0007 <span class="comment">%   NEIGHBORS is a N-by-3 array representing cartesian coordinates of the</span>
+0008 <span class="comment">%   germ neighbors. It is expected that NEIGHBORS contains only neighbors</span>
+0009 <span class="comment">%   that effectively contribute to the voronoi domain.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Example</span>
+0012 <span class="comment">%   sphericalVoronoiDomain</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   See also</span>
+0015 <span class="comment">%   drawSphericalPolygon</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">% ------</span>
+0018 <span class="comment">% Author: David Legland</span>
+0019 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0020 <span class="comment">% Created: 2010-11-17,    using Matlab 7.9.0.529 (R2009b)</span>
+0021 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0022 
+0023 <span class="comment">% reference sphere</span>
+0024 sphere = [0 0 0 1];
+0025 
+0026 <span class="comment">% number of neigbors, and number of sides of the domain</span>
+0027 nbSides = size(neighbors, 1);
+0028 
+0029 <span class="comment">% compute planes containing separating circles</span>
+0030 planes = zeros(nbSides, 9);
+0031 <span class="keyword">for</span> i = 1:nbSides
+0032     planes(i,1:9) = <a href="normalizePlane.html" class="code" title="function plane2 = normalizePlane(plane1)">normalizePlane</a>(<a href="medianPlane.html" class="code" title="function plane = medianPlane(p1, p2)">medianPlane</a>(refPoint, neighbors(i,:)));
+0033 <span class="keyword">end</span>
+0034 
+0035 <span class="comment">% allocate memory</span>
+0036 lines       = zeros(nbSides, 6);
+0037 intersects  = zeros(2 * nbSides, 3);
+0038 
+0039 <span class="comment">% compute circle-circle intersections</span>
+0040 <span class="keyword">for</span> i = 1:nbSides
+0041     ind2 = mod(i, nbSides) + 1;
+0042     lines(i,1:6) = <a href="intersectPlanes.html" class="code" title="function line = intersectPlanes(plane1, plane2, varargin)">intersectPlanes</a>(planes(i,:), planes(ind2,:));
+0043     intersects(2*i-1:2*i,1:3) = <a href="intersectLineSphere.html" class="code" title="function points = intersectLineSphere(line, sphere, varargin)">intersectLineSphere</a>(lines(i,:), sphere);
+0044 <span class="keyword">end</span>
+0045 
+0046 <span class="comment">% keep only points in the same direction than refPoint</span>
+0047 ind = dot(intersects, repmat(refPoint, [2 * nbSides 1]), 2) &gt; 0;
+0048 poly = intersects(ind,:);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of isPerpendicular3d</title>
+  <meta name="keywords" content="isPerpendicular3d">
+  <meta name="description" content="ISPERPENDICULAR3D Check orthogonality of two 3D vectors.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; isPerpendicular3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>isPerpendicular3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ISPERPENDICULAR3D Check orthogonality of two 3D vectors.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function b = isPerpendicular3d(v1, v2, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ISPERPENDICULAR3D Check orthogonality of two 3D vectors.
+
+   B = isPerpendicular3d(V1, V2)
+   where V1 and V2 are 2 [1x3] arrays, returns 1 if the vectors are
+   orthogonal, and 0 otherwise.
+
+   Also works when V1 and V2 are two [Nx3] arrays with same number of
+   rows. In this case, return a [Nx1] array containing 1 at the positions
+   of parallel vectors.
+
+   Also works when one of V1 or V2 is scalar and the other one is [Nx3]
+   array, in this case return [Nx1] results.
+
+   B = isPerpendicular3d(V1, V2, TOL)
+   Specifies the absolute tolerance (default is 1e-14).
+
+
+   Example
+   isPerpendicular3d([1 0 0], [0 1 0])
+   ans =
+       1
+
+   isPerpendicular3d([1 0 1], [1 0 0])
+   ans =
+       0
+
+   See also
+   <a href="vectors3d.html" class="code" title="function vectors3d(varargin)">vectors3d</a>, <a href="isParallel3d.html" class="code" title="function b = isParallel3d(v1, v2, varargin)">isParallel3d</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2006-04-25
+ Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function b = isPerpendicular3d(v1, v2, varargin)</a>
+0002 <span class="comment">%ISPERPENDICULAR3D Check orthogonality of two 3D vectors.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   B = isPerpendicular3d(V1, V2)</span>
+0005 <span class="comment">%   where V1 and V2 are 2 [1x3] arrays, returns 1 if the vectors are</span>
+0006 <span class="comment">%   orthogonal, and 0 otherwise.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Also works when V1 and V2 are two [Nx3] arrays with same number of</span>
+0009 <span class="comment">%   rows. In this case, return a [Nx1] array containing 1 at the positions</span>
+0010 <span class="comment">%   of parallel vectors.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Also works when one of V1 or V2 is scalar and the other one is [Nx3]</span>
+0013 <span class="comment">%   array, in this case return [Nx1] results.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   B = isPerpendicular3d(V1, V2, TOL)</span>
+0016 <span class="comment">%   Specifies the absolute tolerance (default is 1e-14).</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   Example</span>
+0020 <span class="comment">%   isPerpendicular3d([1 0 0], [0 1 0])</span>
+0021 <span class="comment">%   ans =</span>
+0022 <span class="comment">%       1</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   isPerpendicular3d([1 0 1], [1 0 0])</span>
+0025 <span class="comment">%   ans =</span>
+0026 <span class="comment">%       0</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%   See also</span>
+0029 <span class="comment">%   vectors3d, isParallel3d</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">% ------</span>
+0032 <span class="comment">% Author: David Legland</span>
+0033 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0034 <span class="comment">% Created: 2006-04-25</span>
+0035 <span class="comment">% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0036 
+0037 <span class="comment">% 2011.03.20 add support for tolerance, fix computation</span>
+0038 
+0039 <span class="comment">% check if tolerance is specified</span>
+0040 tol = 1e-14;
+0041 <span class="keyword">if</span> ~isempty(varargin)
+0042     tol = varargin{1};
+0043 <span class="keyword">end</span>
+0044 
+0045 <span class="comment">% compute perpendicularity test</span>
+0046 b = abs(sum(bsxfun(@times, v1, v2), 2)) &lt; tol;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

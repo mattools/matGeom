@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of circle3dPosition</title>
+  <meta name="keywords" content="circle3dPosition">
+  <meta name="description" content="CIRCLE3DPOSITION Return the angular position of a point on a 3D circle.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; circle3dPosition.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>circle3dPosition
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CIRCLE3DPOSITION Return the angular position of a point on a 3D circle.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function theta = circle3dPosition(point, circle) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CIRCLE3DPOSITION Return the angular position of a point on a 3D circle.
+
+   POS = circle3dPosition(POINT, CIRCLE)
+   Returns angular position of point on the circle, in degrees, between 0
+   and 360.
+   with POINT: [xp yp zp]
+   and CIRCLE: [X0 Y0 Z0 R THETA PHI] or [X0 Y0 Z0 R THETA PHI PSI]
+   (THETA being the colatitude, and PHI the azimut)
+
+   See also:
+   <a href="circles3d.html" class="code" title="function circles3d(varargin)">circles3d</a>, <a href="circle3dOrigin.html" class="code" title="function ori = circle3dOrigin(varargin)">circle3dOrigin</a>, <a href="circle3dPoint.html" class="code" title="function point = circle3dPoint(circle, pos)">circle3dPoint</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 21/02/2005</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="circle3dOrigin.html" class="code" title="function ori = circle3dOrigin(varargin)">circle3dOrigin</a>	CIRCLE3DORIGIN Return the first point of a 3D circle.</li><li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>	PLANEPOSITION Compute position of a point on a plane.</li><li><a href="sph2cart2d.html" class="code" title="function varargout = sph2cart2d(theta, phi, rho)">sph2cart2d</a>	SPH2CART2D Convert spherical coordinates to cartesian coordinates in degrees.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>	DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function theta = circle3dPosition(point, circle)</a>
+0002 <span class="comment">%CIRCLE3DPOSITION Return the angular position of a point on a 3D circle.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POS = circle3dPosition(POINT, CIRCLE)</span>
+0005 <span class="comment">%   Returns angular position of point on the circle, in degrees, between 0</span>
+0006 <span class="comment">%   and 360.</span>
+0007 <span class="comment">%   with POINT: [xp yp zp]</span>
+0008 <span class="comment">%   and CIRCLE: [X0 Y0 Z0 R THETA PHI] or [X0 Y0 Z0 R THETA PHI PSI]</span>
+0009 <span class="comment">%   (THETA being the colatitude, and PHI the azimut)</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   See also:</span>
+0012 <span class="comment">%   circles3d, circle3dOrigin, circle3dPoint</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   ---------</span>
+0015 <span class="comment">%   author : David Legland</span>
+0016 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0017 <span class="comment">%   created the 21/02/2005</span>
+0018 <span class="comment">%</span>
+0019 
+0020 <span class="comment">%   HISTORY</span>
+0021 <span class="comment">%   27/06/2007: change 3D angle convention</span>
+0022 <span class="comment">%   2011-06-21 use degrees for angles</span>
+0023 
+0024 
+0025 <span class="comment">% get center and radius</span>
+0026 xc = circle(:,1);
+0027 yc = circle(:,2);
+0028 zc = circle(:,3);
+0029 
+0030 <span class="comment">% get angle of normal</span>
+0031 theta   = circle(:,5);
+0032 phi     = circle(:,6);
+0033 
+0034 <span class="comment">% find origin of the circle</span>
+0035 ori     = <a href="circle3dOrigin.html" class="code" title="function ori = circle3dOrigin(varargin)">circle3dOrigin</a>(circle);
+0036 
+0037 <span class="comment">% normal vector of the supporting plane (cartesian coords)</span>
+0038 vn      = <a href="sph2cart2d.html" class="code" title="function varargout = sph2cart2d(theta, phi, rho)">sph2cart2d</a>([theta phi]);
+0039 
+0040 <span class="comment">% create plane containing the circle</span>
+0041 plane   = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>([xc yc zc], vn);
+0042 
+0043 <span class="comment">% find position of point on the circle plane</span>
+0044 pp0     = <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>(ori,    plane);
+0045 pp      = <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>(point,  plane);
+0046 
+0047 <span class="comment">% compute angles in the planes</span>
+0048 theta0  = mod(atan2(pp0(:,2), pp0(:,1)) + 2*pi, 2*pi);
+0049 theta   = mod(atan2(pp(:,2), pp(:,1)) + 2*pi - theta0, 2*pi);
+0050 
+0051 <span class="comment">% convert to degrees</span>
+0052 theta = theta * 180 / pi;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

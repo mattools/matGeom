@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of clipConvexPolyhedronHP</title>
+  <meta name="keywords" content="clipConvexPolyhedronHP">
+  <meta name="description" content="CLIPCONVEXPOLYHEDRONHP Clip a convex polyhedron by a plane.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; clipConvexPolyhedronHP.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>clipConvexPolyhedronHP
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CLIPCONVEXPOLYHEDRONHP Clip a convex polyhedron by a plane.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [nodes2, faces2] = clipConvexPolyhedronHP(nodes, faces, plane) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CLIPCONVEXPOLYHEDRONHP Clip a convex polyhedron by a plane.
+
+   [NODES2, FACES2] = clipConvexPolyhedronHP(NODES, FACES, PLANE)
+
+   return the new (convex) polyhedron whose vertices are 'below' the
+   specified plane, and with faces clipped accordingly. NODES2 contains
+   clipped vertices and new created vertices, FACES2 contains references
+   to NODES2 vertices.
+
+   Example
+     [N, F] = createCube;
+     P = createPlane([.5 .5 .5], [1 1 1]);
+     [N2, F2] = clipConvexPolyhedronHP(N, F, P);
+     figure('color','w'); view(3); axis equal
+     drawPolyhedron(N2, F2);
+ 
+     [v, f] = createSoccerBall;
+     p = createPlane([-.5 .5 -.5], [1 1 1]);
+     [v2, f2] = clipConvexPolyhedronHP(v, f, p);
+     figure('color','w'); view(3); axis equal
+     drawMesh(v, f, 'faceColor', 'none');
+     drawMesh(v2, f2);
+
+   See also
+     meshes3d, <a href="polyhedra.html" class="code" title="function polyhedra(varargin)">polyhedra</a>, planes3d</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/minDistancePoints.html" class="code" title="function varargout = minDistancePoints(p1, varargin)">minDistancePoints</a>	Minimal distance between several points.</li><li><a href="../../matGeom/geom3d/angleSort3d.html" class="code" title="function varargout = angleSort3d(pts, varargin)">angleSort3d</a>	ANGLESORT3D Sort 3D coplanar points according to their angles in plane.</li><li><a href="../../matGeom/geom3d/clipConvexPolygon3dHP.html" class="code" title="function poly2 = clipConvexPolygon3dHP(poly, plane)">clipConvexPolygon3dHP</a>	CLIPCONVEXPOLYGON3DHP Clip a convex 3D polygon with Half-space.</li><li><a href="../../matGeom/geom3d/isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>	ISBELOWPLANE Test whether a point is below or above a plane.</li><li><a href="../../matGeom/geom3d/planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>	PLANENORMAL Compute the normal to a plane.</li><li><a href="meshFaceNormals.html" class="code" title="function normals = meshFaceNormals(varargin)">meshFaceNormals</a>	MESHFACENORMALS Compute normal vector of faces in a 3D mesh.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createDurerPolyhedron.html" class="code" title="function varargout = createDurerPolyhedron(varargin)">createDurerPolyhedron</a>	CREATEDURERPOLYHEDRON  Create a mesh representing Durer's polyhedron .</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [nodes2, faces2] = clipConvexPolyhedronHP(nodes, faces, plane)</a>
+0002 <span class="comment">%CLIPCONVEXPOLYHEDRONHP Clip a convex polyhedron by a plane.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [NODES2, FACES2] = clipConvexPolyhedronHP(NODES, FACES, PLANE)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   return the new (convex) polyhedron whose vertices are 'below' the</span>
+0007 <span class="comment">%   specified plane, and with faces clipped accordingly. NODES2 contains</span>
+0008 <span class="comment">%   clipped vertices and new created vertices, FACES2 contains references</span>
+0009 <span class="comment">%   to NODES2 vertices.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Example</span>
+0012 <span class="comment">%     [N, F] = createCube;</span>
+0013 <span class="comment">%     P = createPlane([.5 .5 .5], [1 1 1]);</span>
+0014 <span class="comment">%     [N2, F2] = clipConvexPolyhedronHP(N, F, P);</span>
+0015 <span class="comment">%     figure('color','w'); view(3); axis equal</span>
+0016 <span class="comment">%     drawPolyhedron(N2, F2);</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%     [v, f] = createSoccerBall;</span>
+0019 <span class="comment">%     p = createPlane([-.5 .5 -.5], [1 1 1]);</span>
+0020 <span class="comment">%     [v2, f2] = clipConvexPolyhedronHP(v, f, p);</span>
+0021 <span class="comment">%     figure('color','w'); view(3); axis equal</span>
+0022 <span class="comment">%     drawMesh(v, f, 'faceColor', 'none');</span>
+0023 <span class="comment">%     drawMesh(v2, f2);</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   See also</span>
+0026 <span class="comment">%     meshes3d, polyhedra, planes3d</span>
+0027 <span class="comment">%</span>
+0028 
+0029 <span class="comment">% ------</span>
+0030 <span class="comment">% Author: David Legland</span>
+0031 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0032 <span class="comment">% Created: 2007-09-14,    using Matlab 7.4.0.287 (R2007a)</span>
+0033 <span class="comment">% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0034 
+0035 
+0036 <span class="comment">%% Preprocessing</span>
+0037 
+0038 <span class="comment">% used for identifying identical vertices</span>
+0039 tol = 1e-10;
+0040 
+0041 <span class="comment">% if faces is a numeric array, convert it to cell array</span>
+0042 <span class="keyword">if</span> isnumeric(faces)
+0043     faces2 = cell(size(faces, 1), 1);
+0044     <span class="keyword">for</span> f = 1:length(faces2)
+0045         faces2{f} = faces(f,:);
+0046     <span class="keyword">end</span>
+0047     faces = faces2;
+0048 <span class="keyword">end</span>
+0049 
+0050 <span class="comment">% find vertices below the plane</span>
+0051 b = <a href="../../matGeom/geom3d/isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>(nodes, plane);
+0052 
+0053 <span class="comment">% initialize results</span>
+0054 Nn  = size(nodes, 1);
+0055 nodes2 = zeros(0, 3);   <span class="comment">% list of new nodes</span>
+0056 faces2 = faces;         <span class="comment">% list of new faces. Start with initial list, and remove some of them</span>
+0057 
+0058 
+0059 <span class="comment">%% Main iteration on faces</span>
+0060 
+0061 <span class="comment">% iterate on each face, and test if either:</span>
+0062 <span class="comment">%   - all points below plane -&gt; keep all face</span>
+0063 <span class="comment">%   - all points up plane -&gt; remove face</span>
+0064 <span class="comment">%   - both -&gt; clip the polygon</span>
+0065 keep = true(length(faces), 1);
+0066 <span class="keyword">for</span> f = 1:length(faces)
+0067     <span class="comment">% current face</span>
+0068     face = faces{f};
+0069     bf = b(face);
+0070 
+0071     <span class="comment">% face totally above plane</span>
+0072     <span class="keyword">if</span> sum(bf) == 0
+0073         keep(f) = false;
+0074         <span class="keyword">continue</span>;
+0075     <span class="keyword">end</span>
+0076 
+0077     <span class="comment">% face totally below plane</span>
+0078     <span class="keyword">if</span> sum(bf == 1) == length(bf)
+0079         <span class="keyword">continue</span>;
+0080     <span class="keyword">end</span>
+0081 
+0082     <span class="comment">% clip polygon formed by face</span>
+0083     poly = nodes(face, :);
+0084     clipped = <a href="../../matGeom/geom3d/clipConvexPolygon3dHP.html" class="code" title="function poly2 = clipConvexPolygon3dHP(poly, plane)">clipConvexPolygon3dHP</a>(poly, plane);
+0085 
+0086     <span class="comment">% identify indices of polygon vertices</span>
+0087     inds = zeros(1, size(clipped, 1));
+0088     faceb = face(bf==1); <span class="comment">% indices of vertices still in clipped face</span>
+0089     [minDists, I] = <a href="../../matGeom/geom2d/minDistancePoints.html" class="code" title="function varargout = minDistancePoints(p1, varargin)">minDistancePoints</a>(nodes(faceb,:), clipped); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0090     <span class="keyword">for</span> i = 1:length(I)
+0091         inds(I(i)) = faceb(i);
+0092     <span class="keyword">end</span>
+0093 
+0094     <span class="comment">% indices of new points in clipped polygon</span>
+0095     indNews = find(inds == 0);
+0096     
+0097     <span class="keyword">if</span> size(nodes2, 1) &lt; 2
+0098         nodes2 = [nodes2; clipped(indNews, :)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0099         inds(indNews(1)) = Nn + 1;
+0100         inds(indNews(2)) = Nn + 2;
+0101         faces2{f} = inds;
+0102         <span class="keyword">continue</span>;
+0103     <span class="keyword">end</span>
+0104      
+0105     <span class="comment">% distances from new vertices to already added vertices</span>
+0106     [minDists, I] = <a href="../../matGeom/geom2d/minDistancePoints.html" class="code" title="function varargout = minDistancePoints(p1, varargin)">minDistancePoints</a>(clipped(indNews, :), nodes2);
+0107     
+0108     <span class="comment">% compute index of first vertex</span>
+0109     <span class="keyword">if</span> minDists(1) &lt; tol
+0110         inds(indNews(1)) = Nn + I(1);
+0111     <span class="keyword">else</span>
+0112         nodes2 = [nodes2; clipped(indNews(1), :)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0113         inds(indNews(1)) = Nn + size(nodes2, 1);
+0114     <span class="keyword">end</span>
+0115     
+0116     <span class="comment">% compute index of second vertex</span>
+0117     <span class="keyword">if</span> minDists(2) &lt; tol
+0118         inds(indNews(2)) = Nn + I(2);
+0119     <span class="keyword">else</span>
+0120         nodes2 = [nodes2; clipped(indNews(2), :)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0121         inds(indNews(2)) = Nn + size(nodes2, 1);
+0122     <span class="keyword">end</span>
+0123     
+0124     <span class="comment">% stores the modified face</span>
+0125     faces2{f} = inds;
+0126 <span class="keyword">end</span>
+0127 
+0128 
+0129 <span class="comment">%% Postprocessing</span>
+0130 
+0131 <span class="comment">% creates a new face formed by the added nodes</span>
+0132 [sortedNodes, I] = <a href="../../matGeom/geom3d/angleSort3d.html" class="code" title="function varargout = angleSort3d(pts, varargin)">angleSort3d</a>(nodes2);
+0133 
+0134 <span class="comment">% compute normal vector of new face, and reverse order if face points in</span>
+0135 <span class="comment">% the opposite direction as plane normal</span>
+0136 newFaceNormal = <a href="meshFaceNormals.html" class="code" title="function normals = meshFaceNormals(varargin)">meshFaceNormals</a>(sortedNodes, 1:length(sortedNodes));
+0137 <span class="keyword">if</span> dot(newFaceNormal, <a href="../../matGeom/geom3d/planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>(plane)) &lt; 0
+0138     I(2:end) = I(end:-1:2);
+0139 <span class="keyword">end</span>
+0140 
+0141 <span class="comment">% compute vertex indices of new face</span>
+0142 newFace = I' + Nn;
+0143 
+0144 <span class="comment">% remove faces outside plane and add the new face</span>
+0145 faces2 = {faces2{keep}, newFace};
+0146 
+0147 <span class="comment">% remove clipped nodes, and add new nodes to list of nodes</span>
+0148 N2 = size(nodes2, 1);
+0149 nodes2 = [nodes(b, :); nodes2];
+0150 
+0151 <span class="comment">% new nodes are inside half-space by definition</span>
+0152 b = [b; ones(N2, 1)];
+0153 
+0154 <span class="comment">% create look up table between old indices and new indices</span>
+0155 inds = zeros(size(nodes2, 1), 1);
+0156 indb = find(b);
+0157 <span class="keyword">for</span> i = 1:length(indb)
+0158     inds(indb(i)) = i;
+0159 <span class="keyword">end</span>
+0160 
+0161 <span class="comment">% update indices of faces</span>
+0162 <span class="keyword">for</span> f = 1:length(faces2)
+0163     face = faces2{f};
+0164     faces2{f} = inds(face)';
+0165 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

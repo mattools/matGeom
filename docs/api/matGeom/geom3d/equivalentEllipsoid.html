@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of equivalentEllipsoid</title>
+  <meta name="keywords" content="equivalentEllipsoid">
+  <meta name="description" content="Equivalent ellipsoid of a set of 3D points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; equivalentEllipsoid.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>equivalentEllipsoid
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Equivalent ellipsoid of a set of 3D points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function ell = equivalentEllipsoid(points) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Equivalent ellipsoid of a set of 3D points.
+
+   ELL = equivalentEllipsoid(PTS)
+   Compute the equivalent ellipsoid of the set of points PTS. The result
+   is an ellipsoid defined by:
+   ELL = [XC YC ZC  A B C  PHI THETA PSI]
+   where [XC YC ZY] is the center, [A B C] are the lengths of the
+   semi-axes (in decreasing order), and [PHI THETA PSI] are Euler angles
+   representing  the ellipsoid orientation, in degrees.
+
+   Example
+     pts = randn(300, 3);
+     pts = transformPoint3d(pts, createScaling3d([6 4 2]));
+     pts = transformPoint3d(pts, createRotationOx(pi/6));
+     pts = transformPoint3d(pts, createRotationOy(pi/4));
+     pts = transformPoint3d(pts, createRotationOz(pi/3));
+     pts = transformPoint3d(pts, createTranslation3d([5 4 3]));
+     elli = equivalentEllipsoid(pts);
+     figure; drawPoint3d(pts); axis equal;
+     hold on; drawEllipsoid(elli, ...
+         'drawEllipses', true, 'EllipseColor', 'b', 'EllipseWidth', 3);
+
+   See also
+     <a href="spheres.html" class="code" title="function spheres(varargin)">spheres</a>, <a href="drawEllipsoid.html" class="code" title="function varargout = drawEllipsoid(elli, varargin)">drawEllipsoid</a>, equivalentEllipse, principalAxes
+     principalAxesTransform, <a href="rotation3dToEulerAngles.html" class="code" title="function varargout = rotation3dToEulerAngles(mat, varargin)">rotation3dToEulerAngles</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="rotation3dToEulerAngles.html" class="code" title="function varargout = rotation3dToEulerAngles(mat, varargin)">rotation3dToEulerAngles</a>	ROTATION3DTOEULERANGLES Extract Euler angles from a rotation matrix.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function ell = equivalentEllipsoid(points)</a>
+0002 <span class="comment">% Equivalent ellipsoid of a set of 3D points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   ELL = equivalentEllipsoid(PTS)</span>
+0005 <span class="comment">%   Compute the equivalent ellipsoid of the set of points PTS. The result</span>
+0006 <span class="comment">%   is an ellipsoid defined by:</span>
+0007 <span class="comment">%   ELL = [XC YC ZC  A B C  PHI THETA PSI]</span>
+0008 <span class="comment">%   where [XC YC ZY] is the center, [A B C] are the lengths of the</span>
+0009 <span class="comment">%   semi-axes (in decreasing order), and [PHI THETA PSI] are Euler angles</span>
+0010 <span class="comment">%   representing  the ellipsoid orientation, in degrees.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%     pts = randn(300, 3);</span>
+0014 <span class="comment">%     pts = transformPoint3d(pts, createScaling3d([6 4 2]));</span>
+0015 <span class="comment">%     pts = transformPoint3d(pts, createRotationOx(pi/6));</span>
+0016 <span class="comment">%     pts = transformPoint3d(pts, createRotationOy(pi/4));</span>
+0017 <span class="comment">%     pts = transformPoint3d(pts, createRotationOz(pi/3));</span>
+0018 <span class="comment">%     pts = transformPoint3d(pts, createTranslation3d([5 4 3]));</span>
+0019 <span class="comment">%     elli = equivalentEllipsoid(pts);</span>
+0020 <span class="comment">%     figure; drawPoint3d(pts); axis equal;</span>
+0021 <span class="comment">%     hold on; drawEllipsoid(elli, ...</span>
+0022 <span class="comment">%         'drawEllipses', true, 'EllipseColor', 'b', 'EllipseWidth', 3);</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   See also</span>
+0025 <span class="comment">%     spheres, drawEllipsoid, equivalentEllipse, principalAxes</span>
+0026 <span class="comment">%     principalAxesTransform, rotation3dToEulerAngles</span>
+0027 
+0028 <span class="comment">% ------</span>
+0029 <span class="comment">% Author: David Legland</span>
+0030 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0031 <span class="comment">% Created: 2011-03-12,    using Matlab 7.9.0.529 (R2009b)</span>
+0032 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0033 
+0034 <span class="comment">% number of points</span>
+0035 n = size(points, 1);
+0036 
+0037 <span class="comment">% compute centroid</span>
+0038 center = mean(points);
+0039 
+0040 <span class="comment">% compute the covariance matrix</span>
+0041 covPts = cov(points)/n;
+0042 
+0043 <span class="comment">% perform a principal component analysis with 3 variables,</span>
+0044 <span class="comment">% to extract equivalent axes</span>
+0045 [U, S] = svd(covPts);
+0046 
+0047 <span class="comment">% extract length of each semi axis</span>
+0048 radii = sqrt(5) * sqrt(diag(S)*n)';
+0049 
+0050 <span class="comment">% sort axes from greater to lower</span>
+0051 [radii, ind] = sort(radii, <span class="string">'descend'</span>);
+0052 
+0053 <span class="comment">% format U to ensure first axis points to positive x direction</span>
+0054 U = U(ind, :);
+0055 <span class="keyword">if</span> U(1,1) &lt; 0
+0056     U = -U;
+0057     <span class="comment">% keep matrix determinant positive</span>
+0058     U(:,3) = -U(:,3);
+0059 <span class="keyword">end</span>
+0060 
+0061 <span class="comment">% convert axes rotation matrix to Euler angles</span>
+0062 angles = <a href="rotation3dToEulerAngles.html" class="code" title="function varargout = rotation3dToEulerAngles(mat, varargin)">rotation3dToEulerAngles</a>(U);
+0063 
+0064 <span class="comment">% concatenate result to form an ellipsoid object</span>
+0065 ell = [center, radii, angles];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

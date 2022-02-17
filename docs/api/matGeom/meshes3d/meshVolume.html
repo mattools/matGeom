@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of meshVolume</title>
+  <meta name="keywords" content="meshVolume">
+  <meta name="description" content="(Signed) volume of the space enclosed by a polygonal mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; meshVolume.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>meshVolume
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>(Signed) volume of the space enclosed by a polygonal mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function vol = meshVolume(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> (Signed) volume of the space enclosed by a polygonal mesh.
+
+   V = meshVolume(VERTS, FACES)
+   Computes the volume of the space enclosed by the polygonal mesh
+   represented by vertices VERTS (as a Nv-by-3 array of cooridnates) and
+   the array of faces FACES (either as a Nf-by-3 array of vertex indices,
+   or as a cell array of arrays of vertex indices).
+
+   The volume is computed as the sum of the signed volumes of tetrahedra
+   formed by triangular faces and the centroid of the mesh. Faces need to
+   be oriented such that normal points outwards the mesh. See:
+   http://stackoverflow.com/questions/1838401/general-formula-to-calculate-polyhedron-volume
+
+   Example
+     % computes the volume of a unit cube (should be equal to 1...)
+     [v f] = createCube;
+     meshVolume(v, f)
+     ans = 
+         1
+
+   See also
+   meshes3d, <a href="meshSurfaceArea.html" class="code" title="function area = meshSurfaceArea(varargin)">meshSurfaceArea</a>, <a href="tetrahedronVolume.html" class="code" title="function vol = tetrahedronVolume(vertices, varargin)">tetrahedronVolume</a>, <a href="meshComplement.html" class="code" title="function varargout = meshComplement(varargin)">meshComplement</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>	TRIANGULATEFACES Convert face array to an array of triangular faces.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="meshCurvatures.html" class="code" title="function [C1, C2, U1, U2, H, K, N] = meshCurvatures(vertices, faces, varargin)">meshCurvatures</a>	Compute principal curvatures on mesh vertices.</li><li><a href="splitMesh.html" class="code" title="function meshes = splitMesh(vertices, faces, varargin)">splitMesh</a>	SPLITMESH Return the connected components of a mesh.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function vol = meshVolume(varargin)</a>
+0002 <span class="comment">% (Signed) volume of the space enclosed by a polygonal mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   V = meshVolume(VERTS, FACES)</span>
+0005 <span class="comment">%   Computes the volume of the space enclosed by the polygonal mesh</span>
+0006 <span class="comment">%   represented by vertices VERTS (as a Nv-by-3 array of cooridnates) and</span>
+0007 <span class="comment">%   the array of faces FACES (either as a Nf-by-3 array of vertex indices,</span>
+0008 <span class="comment">%   or as a cell array of arrays of vertex indices).</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   The volume is computed as the sum of the signed volumes of tetrahedra</span>
+0011 <span class="comment">%   formed by triangular faces and the centroid of the mesh. Faces need to</span>
+0012 <span class="comment">%   be oriented such that normal points outwards the mesh. See:</span>
+0013 <span class="comment">%   http://stackoverflow.com/questions/1838401/general-formula-to-calculate-polyhedron-volume</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   Example</span>
+0016 <span class="comment">%     % computes the volume of a unit cube (should be equal to 1...)</span>
+0017 <span class="comment">%     [v f] = createCube;</span>
+0018 <span class="comment">%     meshVolume(v, f)</span>
+0019 <span class="comment">%     ans =</span>
+0020 <span class="comment">%         1</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   See also</span>
+0023 <span class="comment">%   meshes3d, meshSurfaceArea, tetrahedronVolume, meshComplement</span>
+0024 
+0025 <span class="comment">% ------</span>
+0026 <span class="comment">% Author: David Legland</span>
+0027 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0028 <span class="comment">% Created: 2012-10-01,    using Matlab 7.9.0.529 (R2009b)</span>
+0029 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
+0030 
+0031 <span class="comment">% HISTORY</span>
+0032 <span class="comment">% 2013-08-16 speed improvement by Sven Holcombe</span>
+0033 
+0034 <span class="comment">% parse input</span>
+0035 [vertices, faces] = parseMeshData(varargin{:});
+0036 
+0037 <span class="comment">% ensure mesh has triangle faces</span>
+0038 faces = <a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>(faces);
+0039 
+0040 <span class="comment">% initialize an array of volume</span>
+0041 nFaces = size(faces, 1);
+0042 vols = zeros(nFaces, 1);
+0043 
+0044 <span class="comment">% Shift all vertices to the mesh centroid</span>
+0045 vertices = bsxfun(@minus, vertices, mean(vertices,1));
+0046 
+0047 <span class="comment">% compute volume of each tetraedron</span>
+0048 <span class="keyword">for</span> i = 1:nFaces
+0049     <span class="comment">% consider the tetrahedron formed by face and mesh centroid</span>
+0050     tetra = vertices(faces(i, :), :);
+0051     
+0052     <span class="comment">% volume of current tetrahedron</span>
+0053     vols(i) = det(tetra) / 6;
+0054 <span class="keyword">end</span>
+0055 
+0056 vol = sum(vols);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

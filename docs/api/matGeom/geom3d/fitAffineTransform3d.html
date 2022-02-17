@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of fitAffineTransform3d</title>
+  <meta name="keywords" content="fitAffineTransform3d">
+  <meta name="description" content="Compute the affine transform that best register two 3D point sets.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; fitAffineTransform3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>fitAffineTransform3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Compute the affine transform that best register two 3D point sets.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function trans = fitAffineTransform3d(ref, src) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Compute the affine transform that best register two 3D point sets.
+
+   TRANS = fitAffineTransform3d(REF, SRC)
+   Returns the affine transform matrix that minimizes the distance between
+   the reference point set REF and the point set SRC after transformation.
+   Both REF and SRC must by N-by-3 arrays with the same number of rows,
+   and the points must be in correspondence.
+   The function minimizes the sum of the squared distances:
+   CRIT = sum(distancePoints3d(REF, transformPoint3d(PTS, TRANSFO)).^2);
+
+   Example
+     N = 50;
+     pts = rand(N, 3)*10;
+     trans = createRotationOx([5 4 3], pi/4);
+     pts2 = transformPoint3d(pts, trans);
+     pts3 = pts2 + randn(N, 3)*2;
+     fitted = fitAffineTransform3d(pts, pts2);
+   
+
+   See also
+     <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>, <a href="transformVector3d.html" class="code" title="function varargout = transformVector3d(varargin)">transformVector3d</a>,
+     fitAffineTransform2d, <a href="registerPoints3dAffine.html" class="code" title="function [trans, points] = registerPoints3dAffine(points, target, varargin)">registerPoints3dAffine</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="registerPoints3dAffine.html" class="code" title="function [trans, points] = registerPoints3dAffine(points, target, varargin)">registerPoints3dAffine</a>	Fit 3D affine transform using iterative algorithm.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function trans = fitAffineTransform3d(ref, src)</a>
+0002 <span class="comment">% Compute the affine transform that best register two 3D point sets.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   TRANS = fitAffineTransform3d(REF, SRC)</span>
+0005 <span class="comment">%   Returns the affine transform matrix that minimizes the distance between</span>
+0006 <span class="comment">%   the reference point set REF and the point set SRC after transformation.</span>
+0007 <span class="comment">%   Both REF and SRC must by N-by-3 arrays with the same number of rows,</span>
+0008 <span class="comment">%   and the points must be in correspondence.</span>
+0009 <span class="comment">%   The function minimizes the sum of the squared distances:</span>
+0010 <span class="comment">%   CRIT = sum(distancePoints3d(REF, transformPoint3d(PTS, TRANSFO)).^2);</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%     N = 50;</span>
+0014 <span class="comment">%     pts = rand(N, 3)*10;</span>
+0015 <span class="comment">%     trans = createRotationOx([5 4 3], pi/4);</span>
+0016 <span class="comment">%     pts2 = transformPoint3d(pts, trans);</span>
+0017 <span class="comment">%     pts3 = pts2 + randn(N, 3)*2;</span>
+0018 <span class="comment">%     fitted = fitAffineTransform3d(pts, pts2);</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See also</span>
+0022 <span class="comment">%     transforms3d, transformPoint3d, transformVector3d,</span>
+0023 <span class="comment">%     fitAffineTransform2d, registerPoints3dAffine</span>
+0024 <span class="comment">%</span>
+0025 
+0026 <span class="comment">% ------</span>
+0027 <span class="comment">% Author: David Legland</span>
+0028 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0029 <span class="comment">% Created: 2009-07-31,    using Matlab 7.7.0.471 (R2008b)</span>
+0030 <span class="comment">% Copyright 2009 INRAE - Cepia Software Platform.</span>
+0031 
+0032 
+0033 <span class="comment">% number of points</span>
+0034 N = size(src, 1);
+0035 <span class="keyword">if</span> size(ref, 1) ~= N
+0036     error(<span class="string">'Requires the same number of points for both arrays'</span>);
+0037 <span class="keyword">end</span>
+0038 
+0039 <span class="comment">% main matrix of the problem</span>
+0040 tmp = [src(:,1) src(:,2) src(:,3) ones(N,1)];
+0041 A = [<span class="keyword">...</span>
+0042     tmp zeros(N, 8) ; <span class="keyword">...</span>
+0043     zeros(N, 4) tmp zeros(N, 4) ; <span class="keyword">...</span>
+0044     zeros(N, 8) tmp ];
+0045 
+0046 <span class="comment">% conditions initialisations</span>
+0047 B = [ref(:,1) ; ref(:,2) ; ref(:,3)];
+0048 
+0049 <span class="comment">% compute coefficients using least square</span>
+0050 coefs = A\B;
+0051 
+0052 <span class="comment">% format to a matrix</span>
+0053 trans = [coefs(1:4)' ; coefs(5:8)'; coefs(9:12)'; 0 0 0 1];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

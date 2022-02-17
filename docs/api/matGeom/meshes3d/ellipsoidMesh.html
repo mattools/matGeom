@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of ellipsoidMesh</title>
+  <meta name="keywords" content="ellipsoidMesh">
+  <meta name="description" content="ELLIPSOIDMESH Convert a 3D ellipsoid to face-vertex mesh representation.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; ellipsoidMesh.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>ellipsoidMesh
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ELLIPSOIDMESH Convert a 3D ellipsoid to face-vertex mesh representation.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = ellipsoidMesh(elli, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ELLIPSOIDMESH Convert a 3D ellipsoid to face-vertex mesh representation.
+
+   [V, F] = ellipsoidMesh(ELLI)
+   ELLI is given by:
+   [XC YC ZC  A B C  PHI THETA PSI],
+   where (XC, YC, ZC) is the ellipsoid center, A, B and C are the half
+   lengths of the ellipsoid main axes, and PHI THETA PSI are Euler angles
+   representing ellipsoid orientation, in degrees.
+
+   Example
+     % compute mesh of an ellongated ellipsoid
+     elli = [50 50 50   50 30 10   30 20 10];
+     [v, f] = ellipsoidMesh(elli);
+     figure; hold on; axis equal; axis([0 100 0 100 0 100]); view(3);
+     drawMesh(v, f);
+
+   See also
+   meshes3d, drawEllipsoid, <a href="sphereMesh.html" class="code" title="function varargout = sphereMesh(sphere, varargin)">sphereMesh</a>, equivalentEllipsoid</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>	CREATEROTATIONOX Create the 4x4 matrix of a 3D rotation around x-axis.</li><li><a href="../../matGeom/geom3d/createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>	CREATEROTATIONOY Create the 4x4 matrix of a 3D rotation around y-axis.</li><li><a href="../../matGeom/geom3d/createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>	CREATEROTATIONOZ Create the 4x4 matrix of a 3D rotation around z-axis.</li><li><a href="../../matGeom/geom3d/createScaling3d.html" class="code" title="function trans = createScaling3d(varargin)">createScaling3d</a>	CREATESCALING3D Create the 4x4 matrix of a 3D scaling.</li><li><a href="../../matGeom/geom3d/createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>	CREATETRANSLATION3D Create the 4x4 matrix of a 3D translation.</li><li><a href="../../matGeom/geom3d/transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li><li><a href="surfToMesh.html" class="code" title="function varargout = surfToMesh(x, y, varargin)">surfToMesh</a>	Convert surface grids into face-vertex mesh.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = ellipsoidMesh(elli, varargin)</a>
+0002 <span class="comment">%ELLIPSOIDMESH Convert a 3D ellipsoid to face-vertex mesh representation.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V, F] = ellipsoidMesh(ELLI)</span>
+0005 <span class="comment">%   ELLI is given by:</span>
+0006 <span class="comment">%   [XC YC ZC  A B C  PHI THETA PSI],</span>
+0007 <span class="comment">%   where (XC, YC, ZC) is the ellipsoid center, A, B and C are the half</span>
+0008 <span class="comment">%   lengths of the ellipsoid main axes, and PHI THETA PSI are Euler angles</span>
+0009 <span class="comment">%   representing ellipsoid orientation, in degrees.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Example</span>
+0012 <span class="comment">%     % compute mesh of an ellongated ellipsoid</span>
+0013 <span class="comment">%     elli = [50 50 50   50 30 10   30 20 10];</span>
+0014 <span class="comment">%     [v, f] = ellipsoidMesh(elli);</span>
+0015 <span class="comment">%     figure; hold on; axis equal; axis([0 100 0 100 0 100]); view(3);</span>
+0016 <span class="comment">%     drawMesh(v, f);</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   See also</span>
+0019 <span class="comment">%   meshes3d, drawEllipsoid, sphereMesh, equivalentEllipsoid</span>
+0020 <span class="comment">%</span>
+0021 
+0022 <span class="comment">% ------</span>
+0023 <span class="comment">% Author: David Legland</span>
+0024 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0025 <span class="comment">% Created: 2011-03-12,    using Matlab 7.9.0.529 (R2009b)</span>
+0026 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0027 
+0028 
+0029 <span class="comment">%% Default values</span>
+0030 
+0031 <span class="comment">% number of meridians</span>
+0032 nPhi    = 32;
+0033 
+0034 <span class="comment">% number of parallels</span>
+0035 nTheta  = 16;
+0036 
+0037 
+0038 <span class="comment">%% Extract input arguments</span>
+0039 
+0040 <span class="comment">% Parse the input (try to extract center coordinates and radius)</span>
+0041 <span class="keyword">if</span> nargin == 0
+0042     <span class="comment">% no input: assumes ellipsoid with default shape</span>
+0043     elli = [0 0 0 5 4 3 0 0 0];
+0044 <span class="keyword">end</span>
+0045 
+0046 <span class="comment">% default set of options for drawing meshes</span>
+0047 options = {<span class="string">'FaceColor'</span>, <span class="string">'g'</span>, <span class="string">'linestyle'</span>, <span class="string">'none'</span>};
+0048 
+0049 <span class="keyword">while</span> length(varargin) &gt; 1
+0050     <span class="keyword">switch</span> lower(varargin{1})
+0051         <span class="keyword">case</span> <span class="string">'nphi'</span>
+0052             nPhi = varargin{2};
+0053             
+0054         <span class="keyword">case</span> <span class="string">'ntheta'</span>
+0055             nTheta = varargin{2};
+0056 
+0057         <span class="keyword">otherwise</span>
+0058             <span class="comment">% assumes this is drawing option</span>
+0059             options = [options varargin(1:2)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0060     <span class="keyword">end</span>
+0061 
+0062     varargin(1:2) = [];
+0063 <span class="keyword">end</span>
+0064 
+0065 
+0066 <span class="comment">%% Parse numerical inputs</span>
+0067 
+0068 <span class="comment">% Extract ellipsoid parameters</span>
+0069 xc  = elli(:,1);
+0070 yc  = elli(:,2);
+0071 zc  = elli(:,3);
+0072 a   = elli(:,4);
+0073 b   = elli(:,5);
+0074 c   = elli(:,6);
+0075 k   = pi / 180;
+0076 ellPhi   = elli(:,7) * k;
+0077 ellTheta = elli(:,8) * k;
+0078 ellPsi   = elli(:,9) * k;
+0079 
+0080 
+0081 <span class="comment">%% Coordinates computation</span>
+0082 
+0083 <span class="comment">% convert unit basis to ellipsoid basis</span>
+0084 sca     = <a href="../../matGeom/geom3d/createScaling3d.html" class="code" title="function trans = createScaling3d(varargin)">createScaling3d</a>(a, b, c);
+0085 rotZ    = <a href="../../matGeom/geom3d/createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(ellPhi);
+0086 rotY    = <a href="../../matGeom/geom3d/createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(ellTheta);
+0087 rotX    = <a href="../../matGeom/geom3d/createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(ellPsi);
+0088 tra     = <a href="../../matGeom/geom3d/createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>([xc yc zc]);
+0089 
+0090 <span class="comment">% concatenate transforms</span>
+0091 trans   = tra * rotZ * rotY * rotX * sca;
+0092 
+0093 
+0094 <span class="comment">%% parametrisation of ellipsoid</span>
+0095 
+0096 <span class="comment">% spherical coordinates</span>
+0097 theta   = linspace(0, pi, nTheta+1);
+0098 phi     = linspace(0, 2*pi, nPhi+1);
+0099 
+0100 <span class="comment">% convert to cartesian coordinates</span>
+0101 sintheta = sin(theta);
+0102 x = cos(phi') * sintheta;
+0103 y = sin(phi') * sintheta;
+0104 z = ones(length(phi),1) * cos(theta);
+0105 
+0106 <span class="comment">% transform mesh vertices</span>
+0107 [x, y, z] = <a href="../../matGeom/geom3d/transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(x, y, z, trans);
+0108 
+0109 <span class="comment">% convert to FV mesh</span>
+0110 [vertices, faces] = <a href="surfToMesh.html" class="code" title="function varargout = surfToMesh(x, y, varargin)">surfToMesh</a>(x, y, z, <span class="string">'xPeriodic'</span>, false, <span class="string">'yPeriodic'</span>, true);
+0111 
+0112 <span class="comment">% format output</span>
+0113 varargout = formatMeshOutput(nargout, vertices, faces);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

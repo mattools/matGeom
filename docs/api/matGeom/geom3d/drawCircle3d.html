@@ -1,0 +1,334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawCircle3d</title>
+  <meta name="keywords" content="drawCircle3d">
+  <meta name="description" content="Draw a 3D circle.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; drawCircle3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawCircle3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Draw a 3D circle.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawCircle3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Draw a 3D circle.
+
+   Possible calls for the function:
+   drawCircle3d([XC YC ZC R THETA PHI])
+   drawCircle3d([XC YC ZC R], [THETA PHI])
+
+   where XC, YC, ZY are coordinates of circle center, R is the circle
+   radius, PHI and THETA are 3D angles in degrees of the normal to the
+   plane containing the circle:
+   * THETA between 0 and 180 degrees, corresponding to the colatitude
+       (angle with Oz axis).
+   * PHI between 0 and 360 degrees corresponding to the longitude (angle
+       with Ox axis)
+   
+   drawCircle3d([XC YC ZC R THETA PHI PSI])
+   drawCircle3d([XC YC ZC R], [THETA PHI PSI])
+   drawCircle3d([XC YC ZC R], THETA, PHI)
+   drawCircle3d([XC YC ZC], R, THETA, PHI)
+   drawCircle3d([XC YC ZC R], THETA, PHI, PSI)
+   drawCircle3d([XC YC ZC], R, THETA, PHI, PSI)
+   drawCircle3d(XC, YC, ZC, R, THETA, PHI)
+   drawCircle3d(XC, YC, ZC, R, THETA, PHI, PSI)
+   Are other possible syntaxes for this function.
+   
+   H = drawCircle3d(...)
+   return handle on the created LINE object
+
+   Example
+     % display 3 mutually orthogonal 3D circles
+     figure; hold on; 
+     drawCircle3d([10 20 30 50  0  0], 'LineWidth', 2, 'Color', 'b');
+     drawCircle3d([10 20 30 50 90  0], 'LineWidth', 2, 'Color', 'r');
+     drawCircle3d([10 20 30 50 90 90], 'LineWidth', 2, 'Color', 'g');
+     axis equal;
+     axis([-50 100 -50 100 -50 100]);
+     view([-10 20])
+ 
+     % Draw several circles at once
+     center = [10 20 30];
+     circ1 = [center 50  0  0];
+     circ2 = [center 50 90  0];
+     circ3 = [center 50 90 90];
+     figure; hold on;
+     drawCircle3d([circ1 ; circ2 ; circ3]);
+     axis equal;
+
+   See also:
+     <a href="circles3d.html" class="code" title="function circles3d(varargin)">circles3d</a>, <a href="drawCircleArc3d.html" class="code" title="function varargout = drawCircleArc3d(arc, varargin)">drawCircleArc3d</a>, <a href="drawEllipse3d.html" class="code" title="function varargout = drawEllipse3d(varargin)">drawEllipse3d</a>, <a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>	DRAWPOLYLINE3D Draw a 3D polyline specified by a list of vertex coords.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawCircle3d(varargin)</a>
+0002 <span class="comment">% Draw a 3D circle.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   Possible calls for the function:</span>
+0005 <span class="comment">%   drawCircle3d([XC YC ZC R THETA PHI])</span>
+0006 <span class="comment">%   drawCircle3d([XC YC ZC R], [THETA PHI])</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   where XC, YC, ZY are coordinates of circle center, R is the circle</span>
+0009 <span class="comment">%   radius, PHI and THETA are 3D angles in degrees of the normal to the</span>
+0010 <span class="comment">%   plane containing the circle:</span>
+0011 <span class="comment">%   * THETA between 0 and 180 degrees, corresponding to the colatitude</span>
+0012 <span class="comment">%       (angle with Oz axis).</span>
+0013 <span class="comment">%   * PHI between 0 and 360 degrees corresponding to the longitude (angle</span>
+0014 <span class="comment">%       with Ox axis)</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   drawCircle3d([XC YC ZC R THETA PHI PSI])</span>
+0017 <span class="comment">%   drawCircle3d([XC YC ZC R], [THETA PHI PSI])</span>
+0018 <span class="comment">%   drawCircle3d([XC YC ZC R], THETA, PHI)</span>
+0019 <span class="comment">%   drawCircle3d([XC YC ZC], R, THETA, PHI)</span>
+0020 <span class="comment">%   drawCircle3d([XC YC ZC R], THETA, PHI, PSI)</span>
+0021 <span class="comment">%   drawCircle3d([XC YC ZC], R, THETA, PHI, PSI)</span>
+0022 <span class="comment">%   drawCircle3d(XC, YC, ZC, R, THETA, PHI)</span>
+0023 <span class="comment">%   drawCircle3d(XC, YC, ZC, R, THETA, PHI, PSI)</span>
+0024 <span class="comment">%   Are other possible syntaxes for this function.</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%   H = drawCircle3d(...)</span>
+0027 <span class="comment">%   return handle on the created LINE object</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%   Example</span>
+0030 <span class="comment">%     % display 3 mutually orthogonal 3D circles</span>
+0031 <span class="comment">%     figure; hold on;</span>
+0032 <span class="comment">%     drawCircle3d([10 20 30 50  0  0], 'LineWidth', 2, 'Color', 'b');</span>
+0033 <span class="comment">%     drawCircle3d([10 20 30 50 90  0], 'LineWidth', 2, 'Color', 'r');</span>
+0034 <span class="comment">%     drawCircle3d([10 20 30 50 90 90], 'LineWidth', 2, 'Color', 'g');</span>
+0035 <span class="comment">%     axis equal;</span>
+0036 <span class="comment">%     axis([-50 100 -50 100 -50 100]);</span>
+0037 <span class="comment">%     view([-10 20])</span>
+0038 <span class="comment">%</span>
+0039 <span class="comment">%     % Draw several circles at once</span>
+0040 <span class="comment">%     center = [10 20 30];</span>
+0041 <span class="comment">%     circ1 = [center 50  0  0];</span>
+0042 <span class="comment">%     circ2 = [center 50 90  0];</span>
+0043 <span class="comment">%     circ3 = [center 50 90 90];</span>
+0044 <span class="comment">%     figure; hold on;</span>
+0045 <span class="comment">%     drawCircle3d([circ1 ; circ2 ; circ3]);</span>
+0046 <span class="comment">%     axis equal;</span>
+0047 <span class="comment">%</span>
+0048 <span class="comment">%   See also:</span>
+0049 <span class="comment">%     circles3d, drawCircleArc3d, drawEllipse3d, drawSphere</span>
+0050 
+0051 <span class="comment">%</span>
+0052 <span class="comment">%   ------</span>
+0053 <span class="comment">%   Author: David Legland</span>
+0054 <span class="comment">%   e-mail: david.legland@inra.fr</span>
+0055 <span class="comment">%   Created: 2005-02-17</span>
+0056 <span class="comment">%   Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0057 
+0058 <span class="comment">%   HISTORY</span>
+0059 <span class="comment">%   14/12/2006 allows unspecified PHI and THETA</span>
+0060 <span class="comment">%   04/01/2007 update doc, add todo for angle convention</span>
+0061 <span class="comment">%   19/06/2009 use localToGlobal3d, add drawing options</span>
+0062 <span class="comment">%   08/03/2010 use drawPolyline3d</span>
+0063 <span class="comment">%   2011-06-20 use angles in degrees, support several circles, update doc</span>
+0064 
+0065 
+0066 <span class="comment">%   Possible calls for the function, with number of arguments :</span>
+0067 <span class="comment">%   drawCircle3d([XC YC ZC R THETA PHI])            1</span>
+0068 <span class="comment">%   drawCircle3d([XC YC ZC R THETA PHI PSI])        1</span>
+0069 <span class="comment">%   drawCircle3d([XC YC ZC R], [THETA PHI])         2</span>
+0070 <span class="comment">%   drawCircle3d([XC YC ZC R], [THETA PHI PSI])     2</span>
+0071 <span class="comment">%   drawCircle3d([XC YC ZC R], THETA, PHI)          3</span>
+0072 <span class="comment">%   drawCircle3d([XC YC ZC], R, THETA, PHI)         4</span>
+0073 <span class="comment">%   drawCircle3d([XC YC ZC R], THETA, PHI, PSI)     4</span>
+0074 <span class="comment">%   drawCircle3d([XC YC ZC], R, THETA, PHI, PSI)    5</span>
+0075 <span class="comment">%   drawCircle3d(XC, YC, ZC, R, THETA, PHI)         6</span>
+0076 <span class="comment">%   drawCircle3d(XC, YC, ZC, R, THETA, PHI, PSI)    7</span>
+0077 
+0078 <span class="comment">% parse axis handle</span>
+0079 hAx = gca;
+0080 <span class="keyword">if</span> isAxisHandle(varargin{1})
+0081     hAx = varargin{1};
+0082     varargin(1) = [];
+0083 <span class="keyword">end</span>
+0084 
+0085 <span class="comment">% extract drawing options</span>
+0086 <span class="keyword">if</span> verLessThan(<span class="string">'matlab'</span>, <span class="string">'7.8'</span>)
+0087     ind = find(cellfun(<span class="string">'isclass'</span>, varargin, <span class="string">'char'</span>), 1, <span class="string">'first'</span>);
+0088 <span class="keyword">else</span>
+0089     ind = find(cellfun(@ischar, varargin), 1, <span class="string">'first'</span>);
+0090 <span class="keyword">end</span>
+0091 options = {};
+0092 <span class="keyword">if</span> ~isempty(ind)
+0093     options = varargin(ind:end);
+0094     varargin(ind:end) = [];
+0095 <span class="keyword">end</span>
+0096 
+0097 <span class="comment">% Extract circle data</span>
+0098 <span class="keyword">if</span> length(varargin) == 1
+0099     <span class="comment">% get center and radius</span>
+0100     circle = varargin{1};
+0101     xc = circle(:,1);
+0102     yc = circle(:,2);
+0103     zc = circle(:,3);
+0104     r  = circle(:,4);
+0105     
+0106     <span class="comment">% get colatitude of normal</span>
+0107     <span class="keyword">if</span> size(circle, 2) &gt;= 5
+0108         theta = circle(:,5);
+0109     <span class="keyword">else</span>
+0110         theta = zeros(size(circle, 1), 1);
+0111     <span class="keyword">end</span>
+0112 
+0113     <span class="comment">% get azimut of normal</span>
+0114     <span class="keyword">if</span> size(circle, 2)&gt;=6
+0115         phi     = circle(:,6);
+0116     <span class="keyword">else</span>
+0117         phi = zeros(size(circle, 1), 1);
+0118     <span class="keyword">end</span>
+0119     
+0120     <span class="comment">% get roll</span>
+0121     <span class="keyword">if</span> size(circle, 2)==7
+0122         psi = circle(:,7);
+0123     <span class="keyword">else</span>
+0124         psi = zeros(size(circle, 1), 1);
+0125     <span class="keyword">end</span>
+0126     
+0127 <span class="keyword">elseif</span> length(varargin) == 2
+0128     <span class="comment">% get center and radius</span>
+0129     circle = varargin{1};
+0130     xc = circle(:,1);
+0131     yc = circle(:,2);
+0132     zc = circle(:,3);
+0133     r  = circle(:,4);
+0134     
+0135     <span class="comment">% get angle of normal</span>
+0136     angle   = varargin{2};
+0137     theta   = angle(:,1);
+0138     phi     = angle(:,2);
+0139     
+0140     <span class="comment">% get roll</span>
+0141     <span class="keyword">if</span> size(angle, 2)==3
+0142         psi = angle(:,3);
+0143     <span class="keyword">else</span>
+0144         psi = zeros(size(angle, 1), 1);
+0145     <span class="keyword">end</span>
+0146 
+0147 <span class="keyword">elseif</span> length(varargin) == 3    
+0148     <span class="comment">% get center and radius</span>
+0149     circle = varargin{1};
+0150     xc = circle(:,1);
+0151     yc = circle(:,2);
+0152     zc = circle(:,3);
+0153     r  = circle(:,4);
+0154     
+0155     <span class="comment">% get angle of normal and roll</span>
+0156     theta   = varargin{2};
+0157     phi     = varargin{3};
+0158     psi     = zeros(size(phi, 1), 1);
+0159     
+0160 <span class="keyword">elseif</span> length(varargin) == 4
+0161     <span class="comment">% get center and radius</span>
+0162     circle = varargin{1};
+0163     xc = circle(:,1);
+0164     yc = circle(:,2);
+0165     zc = circle(:,3);
+0166     
+0167     <span class="keyword">if</span> size(circle, 2)==4
+0168         r   = circle(:,4);
+0169         theta   = varargin{2};
+0170         phi     = varargin{3};
+0171         psi     = varargin{4};
+0172     <span class="keyword">else</span>
+0173         r   = varargin{2};
+0174         theta   = varargin{3};
+0175         phi     = varargin{4};
+0176         psi     = zeros(size(phi, 1), 1);
+0177     <span class="keyword">end</span>
+0178     
+0179 <span class="keyword">elseif</span> length(varargin) == 5
+0180     <span class="comment">% get center and radius</span>
+0181     circle = varargin{1};
+0182     xc = circle(:,1);
+0183     yc = circle(:,2);
+0184     zc = circle(:,3);
+0185     r  = varargin{2};
+0186     theta   = varargin{3};
+0187     phi     = varargin{4};
+0188     psi     = varargin{5};
+0189 
+0190 <span class="keyword">elseif</span> length(varargin) == 6
+0191     xc      = varargin{1};
+0192     yc      = varargin{2};
+0193     zc      = varargin{3};
+0194     r       = varargin{4};
+0195     theta   = varargin{5};
+0196     phi     = varargin{6};
+0197     psi     = zeros(size(phi, 1), 1);
+0198   
+0199 <span class="keyword">elseif</span> length(varargin) == 7   
+0200     xc      = varargin{1};
+0201     yc      = varargin{2};
+0202     zc      = varargin{3};
+0203     r       = varargin{4};
+0204     theta   = varargin{5};
+0205     phi     = varargin{6};
+0206     psi     = varargin{7};
+0207 
+0208 <span class="keyword">else</span>
+0209     error(<span class="string">'drawCircle3d: please specify center and radius'</span>);
+0210 <span class="keyword">end</span>
+0211 
+0212 <span class="comment">% circle parametrisation (by using N=60, some vertices are located at</span>
+0213 <span class="comment">% special angles like 45°, 30°...)</span>
+0214 Nt  = 60;
+0215 t   = linspace(0, 2*pi, Nt+1);
+0216 
+0217 nCircles = length(xc);
+0218 h = zeros(nCircles, 1);
+0219 
+0220 <span class="keyword">for</span> i = 1:nCircles
+0221     <span class="comment">% compute position of circle points</span>
+0222     x       = r(i) * cos(t)';
+0223     y       = r(i) * sin(t)';
+0224     z       = zeros(length(t), 1);
+0225     circle0 = [x y z];
+0226 
+0227     <span class="comment">% compute transformation from local basis to world basis</span>
+0228     trans   = localToGlobal3d(xc(i), yc(i), zc(i), theta(i), phi(i), psi(i));
+0229 
+0230     <span class="comment">% compute points of transformed circle</span>
+0231     circle  = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(circle0, trans);
+0232 
+0233     <span class="comment">% draw the curve of circle points</span>
+0234     h(i) = <a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>(hAx, circle, options{:});
+0235 <span class="keyword">end</span>
+0236 
+0237 
+0238 <span class="keyword">if</span> nargout &gt; 0
+0239     varargout = {h};
+0240 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

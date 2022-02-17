@@ -1,0 +1,297 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polylineSelfIntersections</title>
+  <meta name="keywords" content="polylineSelfIntersections">
+  <meta name="description" content="POLYLINESELFINTERSECTIONS Find self-intersection points of a polyline.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; polylineSelfIntersections.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polylineSelfIntersections
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYLINESELFINTERSECTIONS Find self-intersection points of a polyline.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = polylineSelfIntersections(poly, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLYLINESELFINTERSECTIONS Find self-intersection points of a polyline.
+
+   Computes self-intersections of a polyline, eventually specifying if
+   polyline is closed or open, and eventually returning position of
+   intersection points on polyline.
+   For common use cases, the intersectPolylines function may return the
+   desired result in a faster way.
+
+
+   PTS = polylineSelfIntersections(POLY);
+   Returns the position of self intersections of the given polyline.
+
+   PTS = polylineSelfIntersections(POLY, CLOSED);
+   Adds an options to specify if the polyline is closed (i.e., is a
+   polygon), or open (the default). CLOSED can be a boolean, or one of
+   'closed' or 'open'.
+
+   [PTS, POS1, POS2] = polylineSelfIntersections(POLY);
+   Also return the 2 positions of each intersection point (the position
+   when meeting point for first time, then position when meeting point
+   for the second time).
+
+   [...] = polylineSelfIntersections(POLY, 'tolerance', TOL)
+   Specifies an additional parameter to decide whether two intersection
+   points should be considered the same, based on their Euclidean
+   distance.  
+
+
+   Example
+       % use a gamma-shaped polyline
+       poly = [0 0;0 10;20 10;20 20;10 20;10 0];
+       polylineSelfIntersections(poly)
+       ans = 
+           10 10
+
+       % use a 'S'-shaped polyline
+       poly = [10 0;0 0;0 10;20 10;20 20;10 20];
+       polylineSelfIntersections(poly)
+       ans =
+           Empty matrix: 0-by-2
+       polylineSelfIntersections(poly, 'closed')
+       ans = 
+           10 10
+
+   See also
+   polygons2d, <a href="intersectPolylines.html" class="code" title="function pts = intersectPolylines(poly1, varargin)">intersectPolylines</a>, <a href="polygonSelfIntersections.html" class="code" title="function varargout = polygonSelfIntersections(poly, varargin)">polygonSelfIntersections</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>	DISTANCEPOINTS Compute distance between two points.</li><li><a href="../../matGeom/geom2d/edgePosition.html" class="code" title="function pos = edgePosition(point, edge)">edgePosition</a>	EDGEPOSITION Return position of a point on an edge.</li><li><a href="../../matGeom/geom2d/intersectEdges.html" class="code" title="function point = intersectEdges(edge1, edge2, varargin)">intersectEdges</a>	INTERSECTEDGES Return all intersections between two set of edges.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polygonSelfIntersections.html" class="code" title="function varargout = polygonSelfIntersections(poly, varargin)">polygonSelfIntersections</a>	POLYGONSELFINTERSECTIONS Find self-intersection points of a polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = polylineSelfIntersections(poly, varargin)</a>
+0002 <span class="comment">%POLYLINESELFINTERSECTIONS Find self-intersection points of a polyline.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   Computes self-intersections of a polyline, eventually specifying if</span>
+0005 <span class="comment">%   polyline is closed or open, and eventually returning position of</span>
+0006 <span class="comment">%   intersection points on polyline.</span>
+0007 <span class="comment">%   For common use cases, the intersectPolylines function may return the</span>
+0008 <span class="comment">%   desired result in a faster way.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   PTS = polylineSelfIntersections(POLY);</span>
+0012 <span class="comment">%   Returns the position of self intersections of the given polyline.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   PTS = polylineSelfIntersections(POLY, CLOSED);</span>
+0015 <span class="comment">%   Adds an options to specify if the polyline is closed (i.e., is a</span>
+0016 <span class="comment">%   polygon), or open (the default). CLOSED can be a boolean, or one of</span>
+0017 <span class="comment">%   'closed' or 'open'.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   [PTS, POS1, POS2] = polylineSelfIntersections(POLY);</span>
+0020 <span class="comment">%   Also return the 2 positions of each intersection point (the position</span>
+0021 <span class="comment">%   when meeting point for first time, then position when meeting point</span>
+0022 <span class="comment">%   for the second time).</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   [...] = polylineSelfIntersections(POLY, 'tolerance', TOL)</span>
+0025 <span class="comment">%   Specifies an additional parameter to decide whether two intersection</span>
+0026 <span class="comment">%   points should be considered the same, based on their Euclidean</span>
+0027 <span class="comment">%   distance.</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">%   Example</span>
+0031 <span class="comment">%       % use a gamma-shaped polyline</span>
+0032 <span class="comment">%       poly = [0 0;0 10;20 10;20 20;10 20;10 0];</span>
+0033 <span class="comment">%       polylineSelfIntersections(poly)</span>
+0034 <span class="comment">%       ans =</span>
+0035 <span class="comment">%           10 10</span>
+0036 <span class="comment">%</span>
+0037 <span class="comment">%       % use a 'S'-shaped polyline</span>
+0038 <span class="comment">%       poly = [10 0;0 0;0 10;20 10;20 20;10 20];</span>
+0039 <span class="comment">%       polylineSelfIntersections(poly)</span>
+0040 <span class="comment">%       ans =</span>
+0041 <span class="comment">%           Empty matrix: 0-by-2</span>
+0042 <span class="comment">%       polylineSelfIntersections(poly, 'closed')</span>
+0043 <span class="comment">%       ans =</span>
+0044 <span class="comment">%           10 10</span>
+0045 <span class="comment">%</span>
+0046 <span class="comment">%   See also</span>
+0047 <span class="comment">%   polygons2d, intersectPolylines, polygonSelfIntersections</span>
+0048 <span class="comment">%</span>
+0049 
+0050 <span class="comment">% ------</span>
+0051 <span class="comment">% Author: David Legland</span>
+0052 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0053 <span class="comment">% Created: 2009-06-15,    using Matlab 7.7.0.471 (R2008b)</span>
+0054 <span class="comment">% Copyright 2009 INRA - Cepia Software Platform.</span>
+0055 
+0056 <span class="comment">%   HISTORY</span>
+0057 <span class="comment">%   2009/06/18 check bounding boxes before computing intersections</span>
+0058 
+0059 
+0060 <span class="comment">%% Initialisations</span>
+0061 
+0062 <span class="comment">% flag indicating whether the polyline is closed (polygon) or not</span>
+0063 closed = false;
+0064 
+0065 <span class="comment">% the tolerance for comparing positions based on distances</span>
+0066 tol = 1e-14;
+0067 
+0068 <span class="comment">% determine whether the polyline is open or closed</span>
+0069 <span class="keyword">if</span> ~isempty(varargin)
+0070     closed = varargin{1};
+0071     <span class="keyword">if</span> ischar(closed)
+0072         <span class="keyword">if</span> strcmp(closed, <span class="string">'closed'</span>)
+0073             closed = true;
+0074             varargin(1) = [];
+0075         <span class="keyword">elseif</span> strcmp(closed, <span class="string">'open'</span>)
+0076             closed = false;
+0077             varargin(1) = [];
+0078         <span class="keyword">end</span>
+0079     <span class="keyword">end</span>
+0080 <span class="keyword">end</span>
+0081 
+0082 <span class="comment">% parse optional arguments</span>
+0083 <span class="keyword">while</span> length(varargin) &gt; 1
+0084     pname = varargin{1};
+0085     <span class="keyword">if</span> ~ischar(pname)
+0086         error(<span class="string">'Expect optional arguments as name-value pairs'</span>);
+0087     <span class="keyword">end</span>
+0088     
+0089     <span class="keyword">if</span> strcmpi(pname, <span class="string">'tolerance'</span>)
+0090         tol = varargin{2};
+0091     <span class="keyword">else</span>
+0092         error([<span class="string">'Unknown parameter name: '</span> pname]);
+0093     <span class="keyword">end</span>
+0094     varargin(1:2) = [];
+0095 <span class="keyword">end</span>
+0096 
+0097 <span class="comment">% if polyline is closed, ensure the last point equals the first one</span>
+0098 <span class="keyword">if</span> closed
+0099     <span class="keyword">if</span> sum(abs(poly(<span class="keyword">end</span>, :) - poly(1,:)) &lt; tol) ~= 2
+0100         poly = [poly; poly(1,:)];
+0101     <span class="keyword">end</span>
+0102 <span class="keyword">end</span>
+0103 
+0104 <span class="comment">% arrays for storing results</span>
+0105 points  = zeros(0, 2);
+0106 pos1    = zeros(0, 1);
+0107 pos2    = zeros(0, 1);
+0108 
+0109 <span class="comment">% number of edges</span>
+0110 nEdges = size(poly, 1) - 1;
+0111 
+0112 
+0113 <span class="comment">%% Main processing</span>
+0114 
+0115 <span class="comment">% index of current intersection</span>
+0116 ip = 0;
+0117 
+0118 <span class="comment">% iterate over each couple of edge ( (N-1)*(N-2)/2 iterations)</span>
+0119 <span class="keyword">for</span> iEdge1 = 1:nEdges-1
+0120     <span class="comment">% create first edge</span>
+0121     edge1 = [poly(iEdge1, :) poly(iEdge1+1, :)];
+0122     <span class="keyword">for</span> iEdge2 = iEdge1+2:nEdges
+0123         <span class="comment">% create second edge</span>
+0124         edge2 = [poly(iEdge2, :) poly(iEdge2+1, :)];
+0125 
+0126         <span class="comment">% check conditions on bounding boxes, to avoid computing the</span>
+0127         <span class="comment">% intersections</span>
+0128         <span class="keyword">if</span> min(edge1([1 3])) &gt; max(edge2([1 3]))
+0129             <span class="keyword">continue</span>;
+0130         <span class="keyword">end</span>
+0131         <span class="keyword">if</span> max(edge1([1 3])) &lt; min(edge2([1 3]))
+0132             <span class="keyword">continue</span>;
+0133         <span class="keyword">end</span>
+0134         <span class="keyword">if</span> min(edge1([2 4])) &gt; max(edge2([2 4]))
+0135             <span class="keyword">continue</span>;
+0136         <span class="keyword">end</span>
+0137         <span class="keyword">if</span> max(edge1([2 4])) &lt; min(edge2([2 4]))
+0138             <span class="keyword">continue</span>;
+0139         <span class="keyword">end</span>
+0140         
+0141         <span class="comment">% compute intersection point</span>
+0142         inter = <a href="../../matGeom/geom2d/intersectEdges.html" class="code" title="function point = intersectEdges(edge1, edge2, varargin)">intersectEdges</a>(edge1, edge2, tol);
+0143         
+0144         <span class="keyword">if</span> sum(isfinite(inter)) == 2
+0145             <span class="comment">% add point to the list</span>
+0146             ip = ip + 1;
+0147             points(ip, :) = inter;
+0148             
+0149             <span class="comment">% also compute positions on the polyline</span>
+0150             pos1(ip, 1) = iEdge1 - 1 + <a href="../../matGeom/geom2d/edgePosition.html" class="code" title="function pos = edgePosition(point, edge)">edgePosition</a>(inter, edge1);
+0151             pos2(ip, 1) = iEdge2 - 1 + <a href="../../matGeom/geom2d/edgePosition.html" class="code" title="function pos = edgePosition(point, edge)">edgePosition</a>(inter, edge2);
+0152         <span class="keyword">end</span>
+0153     <span class="keyword">end</span>
+0154 <span class="keyword">end</span>
+0155 
+0156 
+0157 <span class="comment">%% Post-processing</span>
+0158 
+0159 <span class="comment">% if polyline is closed, the first vertex was found as an intersection, so</span>
+0160 <span class="comment">% we need to remove it</span>
+0161 <span class="keyword">if</span> closed
+0162     <span class="comment">% identify the intersection between first and last edges using position</span>
+0163     <span class="comment">% indices (pos1 &lt; pos2 by construction)</span>
+0164     ind = pos1 == 0 &amp; pos2 == size(poly,1)-1;
+0165     points(ind,:) = [];
+0166     pos1(ind)   = [];
+0167     pos2(ind)   = [];
+0168 <span class="keyword">end</span>
+0169 
+0170 <span class="comment">% remove multiple intersections</span>
+0171 [points, I, J] = unique(points, <span class="string">'rows'</span>, <span class="string">'first'</span>); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0172 pos1 = pos1(I);
+0173 pos2 = pos2(I);
+0174 
+0175 <span class="comment">% remove multiple intersections, using tolerance on distance</span>
+0176 iInter = 0;
+0177 <span class="keyword">while</span> iInter &lt; size(points, 1) - 1
+0178     iInter = iInter + 1;
+0179 <span class="comment">% for iInter = 1:size(points, 1)-1</span>
+0180     <span class="comment">% determine distance between current point and remaining points</span>
+0181     inds = iInter+1:size(points, 1);
+0182     dists = <a href="../../matGeom/geom2d/distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(points(iInter,:), points(inds, :));
+0183     
+0184     <span class="comment">% identify index of other points located in a close neighborhood</span>
+0185     inds = inds(dists &lt; tol);
+0186     
+0187     <span class="comment">% remove redundant intersection points</span>
+0188     <span class="keyword">if</span> ~isempty(inds)
+0189         points(inds, :) = [];
+0190         pos1(inds) = [];
+0191         pos2(inds) = [];
+0192     <span class="keyword">end</span>
+0193 <span class="keyword">end</span>
+0194 
+0195 
+0196 <span class="comment">%% process output arguments</span>
+0197 
+0198 <span class="keyword">if</span> nargout &lt;= 1
+0199     varargout{1} = points;
+0200     
+0201 <span class="keyword">elseif</span> nargout == 3
+0202     varargout{1} = points;
+0203     varargout{2} = pos1;
+0204     varargout{3} = pos2;
+0205 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

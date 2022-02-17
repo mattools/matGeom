@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of medianLine</title>
+  <meta name="keywords" content="medianLine">
+  <meta name="description" content="MEDIANLINE Create a median line between two points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; medianLine.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>medianLine
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MEDIANLINE Create a median line between two points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function line = medianLine(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MEDIANLINE Create a median line between two points.
+
+   L = medianLine(P1, P2);
+   Create the median line of points P1 and P2, that is the line containing
+   all points located at equal distance of P1 and P2.
+
+   L = medianLine(PTS);
+   Creates the median line of 2 points, given as a 2*2 array. Array has
+   the form:
+   [ [ x1 y1 ] ; [ x2 y2 ] ]
+
+   L = medianLine(EDGE);
+   Creates the median of the edge. Edge is a 1*4 array, containing [X1 Y1]
+   coordinates of first point, and [X2 Y2], the coordinates of the second
+   point.
+  
+   Example
+   % Draw the median line of two points
+     P1 = [10 20];
+     P2 = [30 50];
+     med = medianLine(P1, P2);
+     figure; axis square; axis([0 100 0 100]);
+     drawEdge([P1 P2], 'linewidth', 2, 'color', 'k');
+     drawLine(med)
+
+   % Draw the median line of an edge
+     P1 = [50 60];
+     P2 = [80 30];
+     edge = createEdge(P1, P2);
+     figure; axis square; axis([0 100 0 100]);
+     drawEdge(edge, 'linewidth', 2)
+     med = medianLine(edge);
+     drawLine(med)
+
+
+   See also:
+   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>, <a href="orthogonalLine.html" class="code" title="function res = orthogonalLine(line, point)">orthogonalLine</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 31/10/2003.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createCircle.html" class="code" title="function circle = createCircle(varargin)">createCircle</a>	CREATECIRCLE Create a circle from 2 or 3 points.</li><li><a href="createDirectedCircle.html" class="code" title="function circle = createDirectedCircle(varargin)">createDirectedCircle</a>	CREATEDIRECTEDCIRCLE Create a directed circle.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function line = medianLine(varargin)</a>
+0002 <span class="comment">%MEDIANLINE Create a median line between two points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   L = medianLine(P1, P2);</span>
+0005 <span class="comment">%   Create the median line of points P1 and P2, that is the line containing</span>
+0006 <span class="comment">%   all points located at equal distance of P1 and P2.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   L = medianLine(PTS);</span>
+0009 <span class="comment">%   Creates the median line of 2 points, given as a 2*2 array. Array has</span>
+0010 <span class="comment">%   the form:</span>
+0011 <span class="comment">%   [ [ x1 y1 ] ; [ x2 y2 ] ]</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   L = medianLine(EDGE);</span>
+0014 <span class="comment">%   Creates the median of the edge. Edge is a 1*4 array, containing [X1 Y1]</span>
+0015 <span class="comment">%   coordinates of first point, and [X2 Y2], the coordinates of the second</span>
+0016 <span class="comment">%   point.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   Example</span>
+0019 <span class="comment">%   % Draw the median line of two points</span>
+0020 <span class="comment">%     P1 = [10 20];</span>
+0021 <span class="comment">%     P2 = [30 50];</span>
+0022 <span class="comment">%     med = medianLine(P1, P2);</span>
+0023 <span class="comment">%     figure; axis square; axis([0 100 0 100]);</span>
+0024 <span class="comment">%     drawEdge([P1 P2], 'linewidth', 2, 'color', 'k');</span>
+0025 <span class="comment">%     drawLine(med)</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   % Draw the median line of an edge</span>
+0028 <span class="comment">%     P1 = [50 60];</span>
+0029 <span class="comment">%     P2 = [80 30];</span>
+0030 <span class="comment">%     edge = createEdge(P1, P2);</span>
+0031 <span class="comment">%     figure; axis square; axis([0 100 0 100]);</span>
+0032 <span class="comment">%     drawEdge(edge, 'linewidth', 2)</span>
+0033 <span class="comment">%     med = medianLine(edge);</span>
+0034 <span class="comment">%     drawLine(med)</span>
+0035 <span class="comment">%</span>
+0036 <span class="comment">%</span>
+0037 <span class="comment">%   See also:</span>
+0038 <span class="comment">%   lines2d, createLine, orthogonalLine</span>
+0039 <span class="comment">%</span>
+0040 <span class="comment">%   ---------</span>
+0041 <span class="comment">%   author : David Legland</span>
+0042 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0043 <span class="comment">%   created the 31/10/2003.</span>
+0044 <span class="comment">%</span>
+0045 
+0046 <span class="comment">% history</span>
+0047 <span class="comment">% 2010-08-06 vectorize and change behaviour for N-by-4 inputs</span>
+0048 
+0049 nargs = length(varargin);
+0050 
+0051 <span class="keyword">if</span> nargs == 1
+0052     tab = varargin{1};
+0053     <span class="keyword">if</span> size(tab, 2)==2
+0054         <span class="comment">% input is an array of two points</span>
+0055         x0 = tab(1,1); 
+0056         y0 = tab(1,2);
+0057         dx = tab(2,1)-x0; 
+0058         dy = tab(2,2)-y0;
+0059     <span class="keyword">else</span>
+0060         <span class="comment">% input is an edge</span>
+0061         x0 = tab(:, 1); 
+0062         y0 = tab(:, 2);
+0063         dx = tab(:, 3) - tab(:, 1); 
+0064         dy = tab(:, 4) - tab(:, 2);
+0065     <span class="keyword">end</span>
+0066     
+0067 <span class="keyword">elseif</span> nargs==2
+0068     <span class="comment">% input is given as two points, or two point arrays</span>
+0069     p1 = varargin{1};
+0070     p2 = varargin{2};
+0071     x0 = p1(:, 1); 
+0072     y0 = p1(:, 2);
+0073     dx = bsxfun(@minus, p2(:, 1), x0); 
+0074     dy = bsxfun(@minus, p2(:, 2), y0);
+0075     
+0076 <span class="keyword">else</span>
+0077     error(<span class="string">'Too many input arguments'</span>);
+0078 <span class="keyword">end</span>
+0079 
+0080 <span class="comment">% compute median using middle point of the edge, and the direction vector</span>
+0081 <span class="comment">% rotated by 90 degrees counter-clockwise</span>
+0082 line = [bsxfun(@plus, x0, dx/2), bsxfun(@plus, y0, dy/2), -dy, dx];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

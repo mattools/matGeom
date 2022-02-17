@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of removeMultipleVertices</title>
+  <meta name="keywords" content="removeMultipleVertices">
+  <meta name="description" content="REMOVEMULTIPLEVERTICES Remove multiple vertices of a polygon or polyline.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; removeMultipleVertices.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>removeMultipleVertices
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>REMOVEMULTIPLEVERTICES Remove multiple vertices of a polygon or polyline.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function poly = removeMultipleVertices(poly, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">REMOVEMULTIPLEVERTICES Remove multiple vertices of a polygon or polyline.
+
+   POLY2 = removeMultipleVertices(POLY, EPS)
+   Remove adjacent vertices that are closer than the distance EPS to each
+   other and merge them to a unique vertex.
+
+   POLY2 = removeMultipleVertices(POLY, EPS, CLOSED)
+   If CLOSED is true, also check if first and last vertices need to be
+   merged. If not specified, CLOSED is false.
+
+   Example
+     poly = [10 10; 20 10;20 10;20 20;10 20; 10 10];
+     poly2 = removeMultipleVertices(poly, true);
+     size(poly2, 1)
+     ans = 
+         4
+
+   See also
+   polygons2d, mergeClosePoints</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function poly = removeMultipleVertices(poly, varargin)</a>
+0002 <span class="comment">%REMOVEMULTIPLEVERTICES Remove multiple vertices of a polygon or polyline.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POLY2 = removeMultipleVertices(POLY, EPS)</span>
+0005 <span class="comment">%   Remove adjacent vertices that are closer than the distance EPS to each</span>
+0006 <span class="comment">%   other and merge them to a unique vertex.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   POLY2 = removeMultipleVertices(POLY, EPS, CLOSED)</span>
+0009 <span class="comment">%   If CLOSED is true, also check if first and last vertices need to be</span>
+0010 <span class="comment">%   merged. If not specified, CLOSED is false.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%     poly = [10 10; 20 10;20 10;20 20;10 20; 10 10];</span>
+0014 <span class="comment">%     poly2 = removeMultipleVertices(poly, true);</span>
+0015 <span class="comment">%     size(poly2, 1)</span>
+0016 <span class="comment">%     ans =</span>
+0017 <span class="comment">%         4</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   See also</span>
+0020 <span class="comment">%   polygons2d, mergeClosePoints</span>
+0021 
+0022 <span class="comment">% ------</span>
+0023 <span class="comment">% Author: David Legland</span>
+0024 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0025 <span class="comment">% Created: 2013-10-04,    using Matlab 7.9.0.529 (R2009b)</span>
+0026 <span class="comment">% Copyright 2013 INRA - Cepia Software Platform.</span>
+0027 
+0028 <span class="comment">% default values</span>
+0029 eps = 1e-14;
+0030 closed = false;
+0031 
+0032 <span class="comment">% process input options</span>
+0033 <span class="keyword">while</span> ~isempty(varargin)
+0034     var = varargin{1};
+0035     <span class="keyword">if</span> islogical(var)
+0036         closed = var;
+0037     <span class="keyword">elseif</span> isnumeric(var)
+0038         eps = var;
+0039     <span class="keyword">else</span>
+0040         error(<span class="string">'MatGeom:removeMultipleVertices:IllegalArgument'</span>,<span class="keyword">...</span>
+0041             <span class="string">'Can not interpret optional argument'</span>);
+0042     <span class="keyword">end</span>
+0043     varargin(1) = [];
+0044 <span class="keyword">end</span>
+0045 
+0046 <span class="comment">% distance between adjacent vertices</span>
+0047 dist = sqrt(sum((poly(2:<span class="keyword">end</span>,:) - poly(1:end-1,:)).^2, 2));
+0048 multi = dist &lt; eps;
+0049 
+0050 <span class="comment">% process extremities</span>
+0051 <span class="keyword">if</span> closed
+0052     dist = sqrt(sum((poly(<span class="keyword">end</span>,:) - poly(1,:)).^2, 2));
+0053     multi = [multi ; dist &lt; eps];
+0054 <span class="keyword">else</span>
+0055     multi = [multi ; false];
+0056 <span class="keyword">end</span>
+0057 
+0058 <span class="comment">% remove multiple vertices</span>
+0059 poly(multi, :) = [];
+0060</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

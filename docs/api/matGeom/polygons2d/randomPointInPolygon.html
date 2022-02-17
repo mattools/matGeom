@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of randomPointInPolygon</title>
+  <meta name="keywords" content="randomPointInPolygon">
+  <meta name="description" content="RANDOMPOINTINPOLYGON Generate random point(s) in a polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; randomPointInPolygon.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>randomPointInPolygon
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>RANDOMPOINTINPOLYGON Generate random point(s) in a polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function points = randomPointInPolygon(poly, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">RANDOMPOINTINPOLYGON Generate random point(s) in a polygon.
+
+   POINT = randomPointInPolygon(POLY)
+   POINTS = randomPointInPolygon(POLY, NPTS)
+   Generate random point(s) within the specified polygon. If the number of
+   points is not specified, only one point is generated.
+   
+   POINT = randomPointInPolygon(POLY, NPTS, QRS)
+   Specifies a Quasi-random number generator QRS used to generate point.
+   coordinates (requires the statistics toolbox).
+
+   Example
+     % generate an ellipse-like polygon, and fill it with points
+     elli = [50 50 50 30 30];
+     poly = ellipseToPolygon(elli, 200);
+     pts = randomPointInPolygon(poly, 500);
+     figure; hold on;
+     drawPolygon(poly, 'k');
+     drawPoint(pts, 'b.');
+     axis equal; axis([0 100 0 100]);
+
+     % use halton sequence to distribute points within the polygon
+     qrs = haltonset(2, 'Skip', 1e3, 'Leap', 1e2);
+     pts = randomPointInPolygon(poly, 500, qrs);
+     figure; hold on;
+     drawPolygon(poly, 'k');
+     drawPoint(pts, 'b.');
+     axis equal; axis([0 100 0 100]);
+
+   See also
+     polygons2d, randomPointInBox, <a href="drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polygonBounds.html" class="code" title="function box = polygonBounds(polygon)">polygonBounds</a>	Computes the bounding box of a polygon.</li><li><a href="polygonContains.html" class="code" title="function varargout = polygonContains(poly, point)">polygonContains</a>	POLYGONCONTAINS Test if a point is contained in a multiply connected polygon.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function points = randomPointInPolygon(poly, varargin)</a>
+0002 <span class="comment">%RANDOMPOINTINPOLYGON Generate random point(s) in a polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POINT = randomPointInPolygon(POLY)</span>
+0005 <span class="comment">%   POINTS = randomPointInPolygon(POLY, NPTS)</span>
+0006 <span class="comment">%   Generate random point(s) within the specified polygon. If the number of</span>
+0007 <span class="comment">%   points is not specified, only one point is generated.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   POINT = randomPointInPolygon(POLY, NPTS, QRS)</span>
+0010 <span class="comment">%   Specifies a Quasi-random number generator QRS used to generate point.</span>
+0011 <span class="comment">%   coordinates (requires the statistics toolbox).</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   Example</span>
+0014 <span class="comment">%     % generate an ellipse-like polygon, and fill it with points</span>
+0015 <span class="comment">%     elli = [50 50 50 30 30];</span>
+0016 <span class="comment">%     poly = ellipseToPolygon(elli, 200);</span>
+0017 <span class="comment">%     pts = randomPointInPolygon(poly, 500);</span>
+0018 <span class="comment">%     figure; hold on;</span>
+0019 <span class="comment">%     drawPolygon(poly, 'k');</span>
+0020 <span class="comment">%     drawPoint(pts, 'b.');</span>
+0021 <span class="comment">%     axis equal; axis([0 100 0 100]);</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%     % use halton sequence to distribute points within the polygon</span>
+0024 <span class="comment">%     qrs = haltonset(2, 'Skip', 1e3, 'Leap', 1e2);</span>
+0025 <span class="comment">%     pts = randomPointInPolygon(poly, 500, qrs);</span>
+0026 <span class="comment">%     figure; hold on;</span>
+0027 <span class="comment">%     drawPolygon(poly, 'k');</span>
+0028 <span class="comment">%     drawPoint(pts, 'b.');</span>
+0029 <span class="comment">%     axis equal; axis([0 100 0 100]);</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%   See also</span>
+0032 <span class="comment">%     polygons2d, randomPointInBox, drawPolygon</span>
+0033 <span class="comment">%</span>
+0034  
+0035 <span class="comment">% ------</span>
+0036 <span class="comment">% Author: David Legland</span>
+0037 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0038 <span class="comment">% Created: 2017-08-28,    using Matlab 9.1.0.441655 (R2016b)</span>
+0039 <span class="comment">% Copyright 2017 INRA - Cepia Software Platform.</span>
+0040 
+0041 <span class="comment">% determine number of points to generate</span>
+0042 nPts = 1;
+0043 <span class="keyword">if</span> nargin &gt; 1
+0044     nPts = varargin{1};
+0045     varargin(1) = [];
+0046 <span class="keyword">end</span>
+0047 
+0048 <span class="comment">% if additional input arg is provided, use it as quasi-random generator</span>
+0049 stream = [];
+0050 <span class="keyword">if</span> ~isempty(varargin)
+0051     stream = qrandstream(varargin{1});
+0052 <span class="keyword">end</span>
+0053 
+0054 <span class="comment">% polygon extreme coordinates</span>
+0055 box = <a href="polygonBounds.html" class="code" title="function box = polygonBounds(polygon)">polygonBounds</a>(poly);
+0056 xmin = box(1);  xmax = box(2);
+0057 ymin = box(3);  ymax = box(4);
+0058 
+0059 <span class="comment">% compute size of box</span>
+0060 boxSizeX = xmax - xmin;
+0061 boxSizeY = ymax - ymin;
+0062 
+0063 <span class="comment">% allocate memory for result</span>
+0064 points = zeros(nPts, 2);
+0065 
+0066 <span class="comment">% contains indices of remaining points to process</span>
+0067 ind = (1:nPts)';
+0068 
+0069 <span class="comment">% iterate until all points have been sampled within the polygon</span>
+0070 <span class="keyword">if</span> isempty(stream)
+0071     <span class="comment">% use default random number generator</span>
+0072     <span class="keyword">while</span> ~isempty(ind)
+0073         NI = length(ind);
+0074         x = rand(NI, 1) * boxSizeX + xmin;
+0075         y = rand(NI, 1) * boxSizeY + ymin;
+0076         points(ind, :) = [x y];
+0077 
+0078         ind = ind(~<a href="polygonContains.html" class="code" title="function varargout = polygonContains(poly, point)">polygonContains</a>(poly, points(ind, :)));
+0079     <span class="keyword">end</span>
+0080 
+0081 <span class="keyword">else</span>
+0082     <span class="comment">% use specified quasi-random generator</span>
+0083     <span class="keyword">while</span> ~isempty(ind)
+0084         NI = length(ind);
+0085         pts = qrand(stream, NI);
+0086         x = pts(:, 1) * boxSizeX + xmin;
+0087         y = pts(:, 2) * boxSizeY + ymin;
+0088         points(ind, :) = [x y];
+0089 
+0090         ind = ind(~<a href="polygonContains.html" class="code" title="function varargout = polygonContains(poly, point)">polygonContains</a>(poly, points(ind, :)));
+0091     <span class="keyword">end</span>
+0092     
+0093 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

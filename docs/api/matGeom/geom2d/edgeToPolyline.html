@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of edgeToPolyline</title>
+  <meta name="keywords" content="edgeToPolyline">
+  <meta name="description" content="EDGETOPOLYLINE Convert an edge to a polyline with a given number of segments.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; edgeToPolyline.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>edgeToPolyline
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>EDGETOPOLYLINE Convert an edge to a polyline with a given number of segments.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function poly = edgeToPolyline(edge, N) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">EDGETOPOLYLINE Convert an edge to a polyline with a given number of segments.
+
+   POLY = edgeToPolyline(EDGE, N)
+   
+   Example
+     edge = [10 20 60 40];
+     poly = edgeToPolyline(edge, 10);
+     drawEdge(edge, 'lineWidth', 2);
+     hold on
+     drawPoint(poly);
+     axis equal;
+
+   See also
+     <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="drawEdge.html" class="code" title="function varargout = drawEdge(varargin)">drawEdge</a>, drawPolyline
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2011-11-25,    using Matlab 7.9.0.529 (R2009b)
+ Copyright 2011 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/polygons2d/densifyPolygon.html" class="code" title="function poly2 = densifyPolygon(poly, N)">densifyPolygon</a>	DENSIFYPOLYGON Add several points on each edge of the polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function poly = edgeToPolyline(edge, N)</a>
+0002 <span class="comment">%EDGETOPOLYLINE Convert an edge to a polyline with a given number of segments.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POLY = edgeToPolyline(EDGE, N)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   Example</span>
+0007 <span class="comment">%     edge = [10 20 60 40];</span>
+0008 <span class="comment">%     poly = edgeToPolyline(edge, 10);</span>
+0009 <span class="comment">%     drawEdge(edge, 'lineWidth', 2);</span>
+0010 <span class="comment">%     hold on</span>
+0011 <span class="comment">%     drawPoint(poly);</span>
+0012 <span class="comment">%     axis equal;</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   See also</span>
+0015 <span class="comment">%     edges2d, drawEdge, drawPolyline</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">% ------</span>
+0018 <span class="comment">% Author: David Legland</span>
+0019 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0020 <span class="comment">% Created: 2011-11-25,    using Matlab 7.9.0.529 (R2009b)</span>
+0021 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0022 
+0023 <span class="keyword">if</span> N &lt; 1
+0024     error(<span class="string">'number of segments must be greater than 1'</span>);
+0025 <span class="keyword">end</span>
+0026 
+0027 
+0028 <span class="keyword">if</span> length(edge) == 4
+0029     <span class="comment">% case of planar edges</span>
+0030     p1 = edge(1:2);
+0031     p2 = edge(3:4);
+0032     poly = [linspace(p1(1), p2(1), N+1)' linspace(p1(2), p2(2), N+1)'];
+0033     
+0034 <span class="keyword">else</span>
+0035     <span class="comment">% case of 3D edges</span>
+0036     p1 = edge(1:3);
+0037     p2 = edge(4:6);
+0038     poly = [<span class="keyword">...</span>
+0039         linspace(p1(1), p2(1), N+1)' <span class="keyword">...</span>
+0040         linspace(p1(2), p2(2), N+1)' <span class="keyword">...</span>
+0041         linspace(p1(3), p2(3), N+1)'];
+0042 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

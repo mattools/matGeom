@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of intersectEdgePlane</title>
+  <meta name="keywords" content="intersectEdgePlane">
+  <meta name="description" content="INTERSECTEDGEPLANE Return intersection point between a plane and a edge.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; intersectEdgePlane.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>intersectEdgePlane
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>INTERSECTEDGEPLANE Return intersection point between a plane and a edge.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function point = intersectEdgePlane(edge, plane, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">INTERSECTEDGEPLANE Return intersection point between a plane and a edge.
+
+   PT = intersectEdgePlane(edge, PLANE) return the intersection point of
+   the given edge and the given plane.
+   PLANE : [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2]
+   edge :  [x1 y1 z1 x2 y2 z2]
+   PT :    [xi yi zi]
+   If EDGE and PLANE are parallel, return [NaN NaN NaN].
+   If EDGE (or PLANE) is a matrix with 6 (or 9) columns and N rows, result
+   is an array of points with N rows and 3 columns.
+   
+   Example:
+   edge = [5 5 -1 5 5 1];
+   plane = [0 0 0 1 0 0 0 1 0];
+   intersectEdgePlane(edge, plane)     % should return [5 5 0].
+   ans =
+       5   5   0
+
+   See Also:
+   <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>, <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>, <a href="createLine3d.html" class="code" title="function line = createLine3d(varargin)">createLine3d</a>, <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>
+
+
+   ---------
+
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 24/04/2007 from <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createLine3d.html" class="code" title="function line = createLine3d(varargin)">createLine3d</a>	CREATELINE3D Create a line with various inputs.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/meshes3d/intersectPlaneMesh.html" class="code" title="function polys = intersectPlaneMesh(plane, v, f)">intersectPlaneMesh</a>	Compute the polygons resulting from plane-mesh intersection.</li><li><a href="../../matGeom/meshes3d/polyhedronSlice.html" class="code" title="function points = polyhedronSlice(nodes, faces, plane)">polyhedronSlice</a>	POLYHEDRONSLICE Intersect a convex polyhedron with a plane.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function point = intersectEdgePlane(edge, plane, varargin)</a>
+0002 <span class="comment">%INTERSECTEDGEPLANE Return intersection point between a plane and a edge.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PT = intersectEdgePlane(edge, PLANE) return the intersection point of</span>
+0005 <span class="comment">%   the given edge and the given plane.</span>
+0006 <span class="comment">%   PLANE : [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2]</span>
+0007 <span class="comment">%   edge :  [x1 y1 z1 x2 y2 z2]</span>
+0008 <span class="comment">%   PT :    [xi yi zi]</span>
+0009 <span class="comment">%   If EDGE and PLANE are parallel, return [NaN NaN NaN].</span>
+0010 <span class="comment">%   If EDGE (or PLANE) is a matrix with 6 (or 9) columns and N rows, result</span>
+0011 <span class="comment">%   is an array of points with N rows and 3 columns.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   Example:</span>
+0014 <span class="comment">%   edge = [5 5 -1 5 5 1];</span>
+0015 <span class="comment">%   plane = [0 0 0 1 0 0 0 1 0];</span>
+0016 <span class="comment">%   intersectEdgePlane(edge, plane)     % should return [5 5 0].</span>
+0017 <span class="comment">%   ans =</span>
+0018 <span class="comment">%       5   5   0</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   See Also:</span>
+0021 <span class="comment">%   planes3d, intersectLinePlane, createLine3d, createPlane</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   ---------</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%   author : David Legland</span>
+0027 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0028 <span class="comment">%   created the 24/04/2007 from intersectLinePlane.</span>
+0029 <span class="comment">%</span>
+0030 
+0031 <span class="comment">%   HISTORY</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">%   17/06/2011 E. J. Payton - fixed indexing error that caused incorrect</span>
+0034 <span class="comment">%              points to be returned</span>
+0035 
+0036 <span class="comment">% extract tolerance for determination of parallel edges and planes</span>
+0037 tol = 1e-14;
+0038 <span class="keyword">if</span> ~isempty(varargin)
+0039     tol = varargin{1};
+0040 <span class="keyword">end</span>
+0041 
+0042 <span class="comment">% number of planes and edges</span>
+0043 np = size(plane, 1);
+0044 ne = size(edge, 1);
+0045 
+0046 <span class="comment">% unify sizes of data</span>
+0047 <span class="keyword">if</span> np ~= ne
+0048     <span class="keyword">if</span> ne == 1
+0049         <span class="comment">% one edge and many planes</span>
+0050         edge = edge(ones(np, 1), :);
+0051     <span class="keyword">elseif</span> np == 1
+0052         <span class="comment">% one plane possible many edges</span>
+0053         plane = plane(ones(ne, 1), :);
+0054     <span class="keyword">else</span>
+0055         <span class="comment">% N planes and M edges, not allowed for now.</span>
+0056         error(<span class="string">'Should have the same number of planes and edges'</span>);
+0057     <span class="keyword">end</span>
+0058 <span class="keyword">end</span>
+0059 
+0060 <span class="comment">% initialize empty arrays</span>
+0061 point = zeros(size(plane, 1), 3);
+0062 t = zeros(size(plane,1),3);
+0063 
+0064 <span class="comment">% plane normal</span>
+0065 n = cross(plane(:,4:6), plane(:,7:9), 2);
+0066 
+0067 <span class="comment">% create line supporting edge</span>
+0068 line = <a href="createLine3d.html" class="code" title="function line = createLine3d(varargin)">createLine3d</a>(edge(:,1:3), edge(:,4:6));
+0069 
+0070 <span class="comment">% get indices of edge and plane which are parallel</span>
+0071 par = abs(dot(n, line(:,4:6), 2)) &lt; tol;
+0072 point(par,:) = NaN;
+0073 t(par) = NaN;
+0074 
+0075 <span class="comment">% difference between origins of plane and edge</span>
+0076 dp = plane(:, 1:3) - line(:, 1:3);
+0077 
+0078 <span class="comment">% relative position of intersection on line</span>
+0079 <span class="comment">%t = dot(n(~par,:), dp(~par,:), 2)./dot(n(~par,:), line(~par,4:6), 2);</span>
+0080 t(~par) = dot(n(~par,:), dp(~par,:), 2) ./ dot(n(~par,:), line(~par,4:6), 2);
+0081 
+0082 <span class="comment">% compute coord of intersection point</span>
+0083 <span class="comment">%point(~par, :) = line(~par,1:3) + repmat(t,1,3).*line(~par,4:6);</span>
+0084 point(~par, :) = line(~par,1:3) + repmat(t(~par),1,3) .* line(~par,4:6);
+0085 
+0086 <span class="comment">% set points outside of edge to [NaN NaN NaN]</span>
+0087 point(t&lt;0, :) = NaN;
+0088 point(t&gt;1, :) = NaN;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

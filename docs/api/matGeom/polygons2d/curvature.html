@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of curvature</title>
+  <meta name="keywords" content="curvature">
+  <meta name="description" content="CURVATURE Estimate curvature of a polyline defined by points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; curvature.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>curvature
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CURVATURE Estimate curvature of a polyline defined by points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function kappa = curvature(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CURVATURE Estimate curvature of a polyline defined by points.
+
+   KAPPA = curvature(T, PX, PY, METHOD, DEGREE)
+   First compute an approximation of the curve given by PX and PY, with
+   the parametrization T. METHOD used for approximation can be only:
+   'polynom', with specified degree
+   Further methods will be provided in a future version.
+   T, PX, and PY are N*1 array of the same length.
+   Then compute the curvature of approximated curve for each point.
+
+   For example:
+   KAPPA = curvature(t, px, py, 'polynom', 6)
+
+   KAPPA = curvature(T, POINTS, METHOD, DEGREE)
+   specify curve as a suite of points. POINTS is size [N*2].
+
+   KAPPA = curvature(PX, PY, METHOD, DEGREE)
+   KAPPA = curvature(POINTS, METHOD, DEGREE)
+   compute implicite normalization of the curve, based on euclidian
+   distance between 2 consecutive points, and normalized between 0 and 1.
+
+
+   See Also:
+   polygons2d, <a href="parametrize.html" class="code" title="function par = parametrize(varargin)">parametrize</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 07/04/2003.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="parametrize.html" class="code" title="function par = parametrize(varargin)">parametrize</a>	PARAMETRIZE Parametrization of a polyline, based on edges lengths.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function kappa = curvature(varargin)</a>
+0002 <span class="comment">%CURVATURE Estimate curvature of a polyline defined by points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   KAPPA = curvature(T, PX, PY, METHOD, DEGREE)</span>
+0005 <span class="comment">%   First compute an approximation of the curve given by PX and PY, with</span>
+0006 <span class="comment">%   the parametrization T. METHOD used for approximation can be only:</span>
+0007 <span class="comment">%   'polynom', with specified degree</span>
+0008 <span class="comment">%   Further methods will be provided in a future version.</span>
+0009 <span class="comment">%   T, PX, and PY are N*1 array of the same length.</span>
+0010 <span class="comment">%   Then compute the curvature of approximated curve for each point.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   For example:</span>
+0013 <span class="comment">%   KAPPA = curvature(t, px, py, 'polynom', 6)</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   KAPPA = curvature(T, POINTS, METHOD, DEGREE)</span>
+0016 <span class="comment">%   specify curve as a suite of points. POINTS is size [N*2].</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   KAPPA = curvature(PX, PY, METHOD, DEGREE)</span>
+0019 <span class="comment">%   KAPPA = curvature(POINTS, METHOD, DEGREE)</span>
+0020 <span class="comment">%   compute implicite normalization of the curve, based on euclidian</span>
+0021 <span class="comment">%   distance between 2 consecutive points, and normalized between 0 and 1.</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   See Also:</span>
+0025 <span class="comment">%   polygons2d, parametrize</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   ---------</span>
+0028 <span class="comment">%   author : David Legland</span>
+0029 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0030 <span class="comment">%   created the 07/04/2003.</span>
+0031 <span class="comment">%</span>
+0032 
+0033 
+0034 <span class="comment">% default values</span>
+0035 degree = 5;
+0036 t=0;                    <span class="comment">% parametrization of curve</span>
+0037 tc=0;                   <span class="comment">% indices of points wished for curvature</span>
+0038 
+0039 
+0040 <span class="comment">% =================================================================</span>
+0041 
+0042 <span class="comment">% Extract method and degree ------------------------------</span>
+0043 
+0044 nargin = length(varargin);
+0045 varN = varargin{nargin};
+0046 varN2 = varargin{nargin-1};
+0047 
+0048 <span class="keyword">if</span> ischar(varN2)
+0049     <span class="comment">% method and degree are specified</span>
+0050     method = varN2;
+0051     degree = varN;
+0052     varargin = varargin(1:nargin-2);
+0053 <span class="keyword">elseif</span> ischar(varN)
+0054     <span class="comment">% only method is specified, use degree 6 as default</span>
+0055     method = varN;
+0056     varargin = varargin{1:nargin-1};
+0057 <span class="keyword">else</span>
+0058     <span class="comment">% method and degree are implicit : use 'polynom' and 6</span>
+0059     method = <span class="string">'polynom'</span>;
+0060 <span class="keyword">end</span>
+0061 
+0062 <span class="comment">% extract input parametrization and curve. -----------------------</span>
+0063 nargin = length(varargin);
+0064 <span class="keyword">if</span> nargin==1
+0065     <span class="comment">% parameters are just the points -&gt; compute caracterization.</span>
+0066     var = varargin{1};
+0067     px = var(:,1);
+0068     py = var(:,2);
+0069 <span class="keyword">elseif</span> nargin==2
+0070     var = varargin{2};
+0071     <span class="keyword">if</span> size(var, 2)==2
+0072         <span class="comment">% parameters are t and POINTS</span>
+0073         px = var(:,1);
+0074         py = var(:,2);
+0075         t = varargin{1};
+0076     <span class="keyword">else</span>
+0077         <span class="comment">% parameters are px and py</span>
+0078         px = varargin{1};
+0079         py = var;
+0080     <span class="keyword">end</span>
+0081 <span class="keyword">elseif</span> nargin==3
+0082     var = varargin{2};
+0083     <span class="keyword">if</span> size(var, 2)==2
+0084         <span class="comment">% parameters are t, POINTS, and tc</span>
+0085         px = var(:,1);
+0086         py = var(:,2);
+0087         t = varargin{1};
+0088     <span class="keyword">else</span>
+0089         <span class="comment">% parameters are t, px and py</span>
+0090         t = varargin{1};
+0091         px = var;
+0092         py = varargin{3};
+0093     <span class="keyword">end</span>
+0094 <span class="keyword">elseif</span> nargin==4
+0095     <span class="comment">% parameters are t, px, py and tc</span>
+0096     t  = varargin{1};
+0097     px = varargin{2};
+0098     py = varargin{3};
+0099     tc = varargin{4};
+0100 <span class="keyword">end</span>
+0101 
+0102 <span class="comment">% compute implicit parameters --------------------------</span>
+0103 
+0104 <span class="comment">% if t and/or tc are not computed, use implicit definition</span>
+0105 <span class="keyword">if</span> t==0
+0106     t = <a href="parametrize.html" class="code" title="function par = parametrize(varargin)">parametrize</a>(px, py);
+0107     t = t/t(length(t)); <span class="comment">% normalize between 0 and 1</span>
+0108 <span class="keyword">end</span>
+0109 
+0110 <span class="comment">% if tc not defined, compute curvature for all points</span>
+0111 <span class="keyword">if</span> tc==0
+0112     tc = t;
+0113 <span class="keyword">else</span>
+0114     <span class="comment">% else convert from indices to parametrization values</span>
+0115     tc = t(tc);
+0116 <span class="keyword">end</span>
+0117 
+0118 
+0119 <span class="comment">% =================================================================</span>
+0120 <span class="comment">%    compute curvature for each point of the curve</span>
+0121 
+0122 <span class="keyword">if</span> strcmp(method, <span class="string">'polynom'</span>)
+0123     <span class="comment">% compute coefficients of interpolation functions</span>
+0124     x0 = polyfit(t, px, degree);
+0125     y0 = polyfit(t, py, degree);
+0126 
+0127     <span class="comment">% compute coefficients of first and second derivatives. In the case of a</span>
+0128     <span class="comment">% polynom, it is possible to compute coefficient of derivative by</span>
+0129     <span class="comment">% multiplying with a matrix.</span>
+0130     derive = diag(degree:-1:0);
+0131     xp = circshift(x0*derive, [0 1]);
+0132     yp = circshift(y0*derive, [0 1]);
+0133     xs = circshift(xp*derive, [0 1]);
+0134     ys = circshift(yp*derive, [0 1]);
+0135 
+0136     <span class="comment">% compute values of first and second derivatives for needed points</span>
+0137     xprime = polyval(xp, tc);
+0138     yprime = polyval(yp, tc);
+0139     xsec = polyval(xs, tc);
+0140     ysec = polyval(ys, tc);
+0141 
+0142     <span class="comment">% compute value of curvature</span>
+0143     kappa = (xprime.*ysec - xsec.*yprime)./ <span class="keyword">...</span>
+0144         power(xprime.*xprime + yprime.*yprime, 3/2);
+0145 <span class="keyword">else</span>
+0146     error(<span class="string">'unknown method'</span>);
+0147 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawCircleArc</title>
+  <meta name="keywords" content="drawCircleArc">
+  <meta name="description" content="DRAWCIRCLEARC Draw a circle arc on the current axis.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; drawCircleArc.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawCircleArc
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWCIRCLEARC Draw a circle arc on the current axis.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawCircleArc(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWCIRCLEARC Draw a circle arc on the current axis.
+
+   drawCircleArc(ARC);
+   Draws circle arc defined by ARC = [XC YC R START EXTENT], with (XC, YC)
+   being the circle center, R being the circle radius, starting from angle 
+   START, and with angular extent given by EXTENT. START and EXTENT angles
+   are given in degrees.
+
+   drawCircleArc(XC, YC, R, START, EXTENT);
+   Alternative syntax that seperates inputs.
+
+   drawCircleArc(..., PARAM, VALUE);
+   specifies plot properties by using one or several parameter name-value
+   pairs.
+
+   drawCircleArc(AX, ...);
+   Specifies handle of the axis to draw on.
+
+   H = drawCircleArc(...);
+   Returns a handle to the created line object.
+
+   Example
+     % Draw a red thick circle arc
+     arc = [10 20 30 -120 240];
+     figure;
+     axis([-50 100 -50 100]);
+     hold on
+     drawCircleArc(arc, 'LineWidth', 3, 'Color', 'r')
+
+   See also:
+   <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="drawCircle.html" class="code" title="function varargout = drawCircle(varargin)">drawCircle</a>, <a href="drawEllipse.html" class="code" title="function varargout = drawEllipse(varargin)">drawEllipse</a>, <a href="circleArcToPolyline.html" class="code" title="function varargout = circleArcToPolyline(arc, N)">circleArcToPolyline</a>
+
+   --------
+   author: David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 12/12/2003.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawCircleArc(varargin)</a>
+0002 <span class="comment">%DRAWCIRCLEARC Draw a circle arc on the current axis.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawCircleArc(ARC);</span>
+0005 <span class="comment">%   Draws circle arc defined by ARC = [XC YC R START EXTENT], with (XC, YC)</span>
+0006 <span class="comment">%   being the circle center, R being the circle radius, starting from angle</span>
+0007 <span class="comment">%   START, and with angular extent given by EXTENT. START and EXTENT angles</span>
+0008 <span class="comment">%   are given in degrees.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   drawCircleArc(XC, YC, R, START, EXTENT);</span>
+0011 <span class="comment">%   Alternative syntax that seperates inputs.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   drawCircleArc(..., PARAM, VALUE);</span>
+0014 <span class="comment">%   specifies plot properties by using one or several parameter name-value</span>
+0015 <span class="comment">%   pairs.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   drawCircleArc(AX, ...);</span>
+0018 <span class="comment">%   Specifies handle of the axis to draw on.</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   H = drawCircleArc(...);</span>
+0021 <span class="comment">%   Returns a handle to the created line object.</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   Example</span>
+0024 <span class="comment">%     % Draw a red thick circle arc</span>
+0025 <span class="comment">%     arc = [10 20 30 -120 240];</span>
+0026 <span class="comment">%     figure;</span>
+0027 <span class="comment">%     axis([-50 100 -50 100]);</span>
+0028 <span class="comment">%     hold on</span>
+0029 <span class="comment">%     drawCircleArc(arc, 'LineWidth', 3, 'Color', 'r')</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%   See also:</span>
+0032 <span class="comment">%   circles2d, drawCircle, drawEllipse, circleArcToPolyline</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">%   --------</span>
+0035 <span class="comment">%   author: David Legland</span>
+0036 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0037 <span class="comment">%   created the 12/12/2003.</span>
+0038 <span class="comment">%</span>
+0039 
+0040 <span class="comment">%   HISTORY</span>
+0041 <span class="comment">%   2004-05-03 angles are given as radians</span>
+0042 <span class="comment">%   2007-06-27 Now uses angle extent</span>
+0043 <span class="comment">%   2011-03-30 use angles in degrees</span>
+0044 <span class="comment">%   2011-06-09 add support for line styles</span>
+0045 <span class="comment">%   2011-10-11 add management of axes handle</span>
+0046 
+0047 <span class="keyword">if</span> nargin == 0
+0048     error(<span class="string">'Need to specify circle arc'</span>);
+0049 <span class="keyword">end</span>
+0050 
+0051 
+0052 <span class="comment">% extract handle of axis to draw on</span>
+0053 <span class="keyword">if</span> isAxisHandle(varargin{1})
+0054     ax = varargin{1};
+0055     varargin(1) = [];
+0056 <span class="keyword">else</span>
+0057     ax = gca;
+0058 <span class="keyword">end</span>
+0059 
+0060 circle = varargin{1};
+0061 <span class="keyword">if</span> size(circle, 2) == 5
+0062     x0  = circle(:,1);
+0063     y0  = circle(:,2);
+0064     r   = circle(:,3);
+0065     start   = circle(:,4);
+0066     extent  = circle(:,5);
+0067     varargin(1) = [];
+0068     
+0069 <span class="keyword">elseif</span> length(varargin) &gt;= 5
+0070     x0  = varargin{1};
+0071     y0  = varargin{2};
+0072     r   = varargin{3};
+0073     start   = varargin{4};
+0074     extent  = varargin{5};
+0075     varargin(1:5) = [];
+0076     
+0077 <span class="keyword">else</span>
+0078     error(<span class="string">'drawCircleArc: please specify center, radius and angles of circle arc'</span>);
+0079 <span class="keyword">end</span>
+0080 
+0081 <span class="comment">% convert angles in radians</span>
+0082 t0  = deg2rad(start);
+0083 t1  = t0 + deg2rad(extent);
+0084 
+0085 <span class="comment">% number of line segments</span>
+0086 N = 60;
+0087 
+0088 <span class="comment">% initialize handles vector</span>
+0089 h   = zeros(length(x0), 1);
+0090 
+0091 <span class="comment">% draw each circle arc individually</span>
+0092 <span class="keyword">for</span> i = 1:length(x0)
+0093     <span class="comment">% compute basis</span>
+0094     t = linspace(t0(i), t1(i), N+1)';
+0095 
+0096     <span class="comment">% compute vertices coordinates</span>
+0097     xt = x0(i) + r(i)*cos(t);
+0098     yt = y0(i) + r(i)*sin(t);
+0099     
+0100     <span class="comment">% draw the circle arc</span>
+0101     h(i) = plot(ax, xt, yt, varargin{:});
+0102 <span class="keyword">end</span>
+0103 
+0104 <span class="keyword">if</span> nargout &gt; 0
+0105     varargout = {h};
+0106 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

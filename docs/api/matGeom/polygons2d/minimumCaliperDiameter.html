@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of minimumCaliperDiameter</title>
+  <meta name="keywords" content="minimumCaliperDiameter">
+  <meta name="description" content="MINIMUMCALIPERDIAMETER Minimum caliper diameter of a set of points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; minimumCaliperDiameter.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>minimumCaliperDiameter
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MINIMUMCALIPERDIAMETER Minimum caliper diameter of a set of points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [min_width, min_angle] = minimumCaliperDiameter(points) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MINIMUMCALIPERDIAMETER Minimum caliper diameter of a set of points.
+
+   WIDTH = minimumCaliperDiameter(POINTS)
+   Computes the minimum width of a set of points. As polygons and
+   polylines are represented as point lists, this function works also for
+   polygons and polylines.
+
+   [WIDTH THETA] = minimumCaliperDiameter(POINTS)
+   Also returns the direction of minimum width. The direction corresponds
+   to the horizontal angle of the edge that minimizes the width. THETA is
+   given in radians, between 0 and PI.
+
+
+   Example
+   % Compute minimal caliper diameter, and check coords of rotated points
+   % have expected extent
+     points = randn(30, 2);
+     [width theta] = minimumCaliperDiameter(points);
+     points2 = transformPoint(points, createRotation(-theta));
+     diff = max(points2) - min(points2);
+     abs(width - diff(2)) &lt; 1e-10
+     ans =
+         1
+
+   References
+   Algorithms use rotating caliper. Implementation was based on that of
+   Wikipedia:
+   http://en.wikipedia.org/wiki/Rotating_calipers
+
+   See also
+   polygons2d, <a href="convexHull.html" class="code" title="function [hull, inds] = convexHull(points, varargin)">convexHull</a>, orientedBox</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>	CREATELINE Create a straight line from 2 points, or from other inputs.</li><li><a href="../../matGeom/geom2d/distancePointLine.html" class="code" title="function [dist, pos] = distancePointLine(point, line)">distancePointLine</a>	DISTANCEPOINTLINE Minimum distance between a point and a line.</li><li><a href="../../matGeom/geom2d/rotateVector.html" class="code" title="function vr = rotateVector(v, angle)">rotateVector</a>	ROTATEVECTOR Rotate a vector by a given angle.</li><li><a href="../../matGeom/geom2d/vectorAngle.html" class="code" title="function alpha = vectorAngle(v1, varargin)">vectorAngle</a>	Horizontal angle of a vector, or angle between 2 vectors.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [min_width, min_angle] = minimumCaliperDiameter(points)</a>
+0002 <span class="comment">%MINIMUMCALIPERDIAMETER Minimum caliper diameter of a set of points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   WIDTH = minimumCaliperDiameter(POINTS)</span>
+0005 <span class="comment">%   Computes the minimum width of a set of points. As polygons and</span>
+0006 <span class="comment">%   polylines are represented as point lists, this function works also for</span>
+0007 <span class="comment">%   polygons and polylines.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   [WIDTH THETA] = minimumCaliperDiameter(POINTS)</span>
+0010 <span class="comment">%   Also returns the direction of minimum width. The direction corresponds</span>
+0011 <span class="comment">%   to the horizontal angle of the edge that minimizes the width. THETA is</span>
+0012 <span class="comment">%   given in radians, between 0 and PI.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   Example</span>
+0016 <span class="comment">%   % Compute minimal caliper diameter, and check coords of rotated points</span>
+0017 <span class="comment">%   % have expected extent</span>
+0018 <span class="comment">%     points = randn(30, 2);</span>
+0019 <span class="comment">%     [width theta] = minimumCaliperDiameter(points);</span>
+0020 <span class="comment">%     points2 = transformPoint(points, createRotation(-theta));</span>
+0021 <span class="comment">%     diff = max(points2) - min(points2);</span>
+0022 <span class="comment">%     abs(width - diff(2)) &lt; 1e-10</span>
+0023 <span class="comment">%     ans =</span>
+0024 <span class="comment">%         1</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%   References</span>
+0027 <span class="comment">%   Algorithms use rotating caliper. Implementation was based on that of</span>
+0028 <span class="comment">%   Wikipedia:</span>
+0029 <span class="comment">%   http://en.wikipedia.org/wiki/Rotating_calipers</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%   See also</span>
+0032 <span class="comment">%   polygons2d, convexHull, orientedBox</span>
+0033 <span class="comment">%</span>
+0034 
+0035 <span class="comment">% ------</span>
+0036 <span class="comment">% Author: David Legland</span>
+0037 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0038 <span class="comment">% Created: 2011-04-08,    using Matlab 7.9.0.529 (R2009b)</span>
+0039 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0040 
+0041 <span class="comment">% first, compute convex hull of the polygon</span>
+0042 inds = convhull(points(:,1), points(:,2));
+0043 hull = points(inds, :);
+0044 
+0045 <span class="comment">% if first and last points are the same, remove the last one</span>
+0046 <span class="keyword">if</span> inds(1) == inds(end)
+0047     hull = hull(1:end-1, :);
+0048 <span class="keyword">end</span>
+0049 
+0050 <span class="comment">% number of hull vertices</span>
+0051 nV = size(hull, 1);
+0052 
+0053 <span class="comment">% default values</span>
+0054 rotated_angle = 0;
+0055 min_width = inf;
+0056 min_angle = 0;
+0057 
+0058 <span class="comment">% avoid degenerated cases</span>
+0059 <span class="keyword">if</span> nV &lt; 3
+0060     <span class="keyword">return</span>;
+0061 <span class="keyword">end</span>
+0062 
+0063 [tmp, p_a] = min(hull(:, 2)); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0064 [tmp, p_b] = max(hull(:, 2)); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0065 
+0066 caliper_a = [ 1 0];    <span class="comment">% Caliper A points along the positive x-axis</span>
+0067 caliper_b = [-1 0];    <span class="comment">% Caliper B points along the negative x-axis</span>
+0068 
+0069 <span class="keyword">while</span> rotated_angle &lt; pi
+0070     <span class="comment">% compute the direction vectors corresponding to each edge</span>
+0071     ind_a2 = mod(p_a, nV) + 1;
+0072     vector_a = hull(ind_a2, :) - hull(p_a, :);
+0073     
+0074     ind_b2 = mod(p_b, nV) + 1;
+0075     vector_b = hull(ind_b2, :) - hull(p_b, :);
+0076     
+0077     <span class="comment">% Determine the angle between each caliper and the next adjacent edge</span>
+0078     <span class="comment">% in the polygon</span>
+0079     angle_a = <a href="../../matGeom/geom2d/vectorAngle.html" class="code" title="function alpha = vectorAngle(v1, varargin)">vectorAngle</a>(caliper_a, vector_a);
+0080     angle_b = <a href="../../matGeom/geom2d/vectorAngle.html" class="code" title="function alpha = vectorAngle(v1, varargin)">vectorAngle</a>(caliper_b, vector_b);
+0081     
+0082     <span class="comment">% Determine the smallest of these angles</span>
+0083     minAngle = min(angle_a, angle_b);
+0084     
+0085     <span class="comment">% Rotate the calipers by the smallest angle</span>
+0086     caliper_a = <a href="../../matGeom/geom2d/rotateVector.html" class="code" title="function vr = rotateVector(v, angle)">rotateVector</a>(caliper_a, minAngle);
+0087     caliper_b = <a href="../../matGeom/geom2d/rotateVector.html" class="code" title="function vr = rotateVector(v, angle)">rotateVector</a>(caliper_b, minAngle);
+0088     
+0089     rotated_angle = rotated_angle + minAngle;
+0090     
+0091     <span class="comment">% compute current width, and update opposite vertex</span>
+0092     <span class="keyword">if</span> angle_a &lt; angle_b
+0093         line = <a href="../../matGeom/geom2d/createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(hull(p_a, :), hull(ind_a2, :));
+0094         width = <a href="../../matGeom/geom2d/distancePointLine.html" class="code" title="function [dist, pos] = distancePointLine(point, line)">distancePointLine</a>(hull(p_b, :), line);
+0095         p_a = mod(p_a, nV) + 1;
+0096     
+0097     <span class="keyword">else</span>
+0098         line = <a href="../../matGeom/geom2d/createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(hull(p_b, :), hull(ind_b2, :));
+0099         width = <a href="../../matGeom/geom2d/distancePointLine.html" class="code" title="function [dist, pos] = distancePointLine(point, line)">distancePointLine</a>(hull(p_a, :), line);
+0100         p_b = mod(p_b, nV) + 1;
+0101 
+0102     <span class="keyword">end</span>
+0103     
+0104     <span class="comment">% update minimum width and corresponding angle if needed</span>
+0105     <span class="keyword">if</span> width &lt; min_width
+0106         min_width = width;
+0107         min_angle = rotated_angle;
+0108     <span class="keyword">end</span>
+0109 
+0110 <span class="keyword">end</span>
+0111</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

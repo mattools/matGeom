@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of simplifyPolyline</title>
+  <meta name="keywords" content="simplifyPolyline">
+  <meta name="description" content="SIMPLIFYPOLYLINE Douglas-Peucker simplification of a polyline.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; simplifyPolyline.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>simplifyPolyline
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>SIMPLIFYPOLYLINE Douglas-Peucker simplification of a polyline.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [poly2, keepInds] = simplifyPolyline(poly, tol) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">SIMPLIFYPOLYLINE Douglas-Peucker simplification of a polyline.
+
+   POLY2 = simplifyPolyline(POLY, TOL)
+   Simplifies the input polyline using the Douglas-Peucker algorithm. 
+
+   Example
+     elli = [20 30 40 20 30];
+     poly = ellipseToPolygon(elli, 500);
+     poly2 = simplifyPolyline(poly, 1); % use a tolerance equal to 1
+     figure; hold on;
+     drawEllipse(elli);
+     drawPoint(poly2, 'mo');
+
+   See also
+   polygons2d, <a href="simplifyPolygon.html" class="code" title="function [poly, keepInds] = simplifyPolygon(poly, varargin)">simplifyPolygon</a>, <a href="resamplePolyline.html" class="code" title="function poly2 = resamplePolyline(poly, n)">resamplePolyline</a>, <a href="smoothPolyline.html" class="code" title="function res = smoothPolyline(poly, M)">smoothPolyline</a>
+
+   References
+   http://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/distancePointEdge.html" class="code" title="function [dist, pos] = distancePointEdge(point, edge)">distancePointEdge</a>	DISTANCEPOINTEDGE Minimum distance between a point and an edge.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="simplifyPolygon.html" class="code" title="function [poly, keepInds] = simplifyPolygon(poly, varargin)">simplifyPolygon</a>	SIMPLIFYPOLYGON  Douglas-Peucker simplification of a polygon.</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function innerInds = recurseSimplify(i0, i1)</a></li><li><a href="#_sub2" class="code">function ind = furthestPointIndex(i0, i1)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [poly2, keepInds] = simplifyPolyline(poly, tol)</a>
+0002 <span class="comment">%SIMPLIFYPOLYLINE Douglas-Peucker simplification of a polyline.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POLY2 = simplifyPolyline(POLY, TOL)</span>
+0005 <span class="comment">%   Simplifies the input polyline using the Douglas-Peucker algorithm.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   Example</span>
+0008 <span class="comment">%     elli = [20 30 40 20 30];</span>
+0009 <span class="comment">%     poly = ellipseToPolygon(elli, 500);</span>
+0010 <span class="comment">%     poly2 = simplifyPolyline(poly, 1); % use a tolerance equal to 1</span>
+0011 <span class="comment">%     figure; hold on;</span>
+0012 <span class="comment">%     drawEllipse(elli);</span>
+0013 <span class="comment">%     drawPoint(poly2, 'mo');</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   See also</span>
+0016 <span class="comment">%   polygons2d, simplifyPolygon, resamplePolyline, smoothPolyline</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   References</span>
+0019 <span class="comment">%   http://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm</span>
+0020 <span class="comment">%</span>
+0021 
+0022 <span class="comment">% ------</span>
+0023 <span class="comment">% Author: David Legland</span>
+0024 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0025 <span class="comment">% Created: 2012-05-04,    using Matlab 7.9.0.529 (R2009b)</span>
+0026 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
+0027 
+0028 <span class="comment">% number of vertices</span>
+0029 n = size(poly, 1);
+0030 
+0031 <span class="comment">% initial call to the recursive function</span>
+0032 keepInds = <a href="#_sub1" class="code" title="subfunction innerInds = recurseSimplify(i0, i1)">recurseSimplify</a>(1, n);
+0033 
+0034 <span class="comment">% keep first and last vertices</span>
+0035 keepInds = [1 keepInds n];
+0036 
+0037 <span class="comment">% create the resulting polyline</span>
+0038 poly2 = poly(keepInds, :);
+0039 
+0040 
+0041     <span class="comment">%% Inner function that is called recursively on polyline portions</span>
+0042     <a name="_sub1" href="#_subfunctions" class="code">function innerInds = recurseSimplify(i0, i1)</a>
+0043         
+0044         <span class="comment">% find the furthest vertex</span>
+0045         mid = <a href="#_sub2" class="code" title="subfunction ind = furthestPointIndex(i0, i1)">furthestPointIndex</a>(i0, i1);
+0046 
+0047         <span class="comment">% case of no further simplification</span>
+0048         <span class="keyword">if</span> isempty(mid)
+0049             innerInds = mid;
+0050             <span class="keyword">return</span>;
+0051         <span class="keyword">end</span>
+0052         
+0053         <span class="comment">% recursively subdivide each portion</span>
+0054         mid1 = <a href="#_sub1" class="code" title="subfunction innerInds = recurseSimplify(i0, i1)">recurseSimplify</a>(i0, mid);
+0055         mid2 = <a href="#_sub1" class="code" title="subfunction innerInds = recurseSimplify(i0, i1)">recurseSimplify</a>(mid, i1);
+0056         
+0057         <span class="comment">% concatenate indices of all portions</span>
+0058         innerInds = [mid1 mid mid2];
+0059     <span class="keyword">end</span>
+0060     
+0061 
+0062     <span class="comment">%% Inner function for finding index of furthest point in POLY</span>
+0063     <a name="_sub2" href="#_subfunctions" class="code">function ind = furthestPointIndex(i0, i1)</a>
+0064 
+0065         <span class="comment">% for single edges, return empty result</span>
+0066         <span class="keyword">if</span> i1 - i0 &lt; 2
+0067             ind = [];
+0068             <span class="keyword">return</span>;
+0069         <span class="keyword">end</span>
+0070         
+0071         <span class="comment">% vertices of the current edge</span>
+0072         v0 = poly(i0, :);
+0073         v1 = poly(i1, :);
+0074         
+0075         <span class="comment">% find vertex with the greatest distance</span>
+0076         dists = <a href="../../matGeom/geom2d/distancePointEdge.html" class="code" title="function [dist, pos] = distancePointEdge(point, edge)">distancePointEdge</a>(poly(i0+1:i1-1, :), [v0 v1]);
+0077         [maxi, ind] = max(dists);
+0078         
+0079         <span class="comment">% update index only if distance criterion is verified</span>
+0080         <span class="keyword">if</span> maxi &gt; tol
+0081             ind = i0 + ind;
+0082         <span class="keyword">else</span>
+0083             ind = [];
+0084         <span class="keyword">end</span>
+0085     <span class="keyword">end</span>
+0086 
+0087 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

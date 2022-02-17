@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of findClosestPoint</title>
+  <meta name="keywords" content="findClosestPoint">
+  <meta name="description" content="FINDCLOSESTPOINT Find index of closest point in an array.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; findClosestPoint.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>findClosestPoint
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>FINDCLOSESTPOINT Find index of closest point in an array.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [index, minDist] = findClosestPoint(coord, points) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">FINDCLOSESTPOINT Find index of closest point in an array.
+
+   INDEX = findClosestPoint(POINT, POINTARRAY)
+
+   [INDEX, MINDIST] = findClosestPoint(POINT, POINTARRAY)
+   Also returns the distance between POINT and closest point in
+   POINTARRAY.
+
+   Example
+     pts = rand(10, 2);
+     findClosestPoint(pts(4, :), pts)
+     ans =
+         4
+
+   See also
+    <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="minDistancePoints.html" class="code" title="function varargout = minDistancePoints(p1, varargin)">minDistancePoints</a>, <a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="registerICP.html" class="code" title="function [trans, points] = registerICP(points, target, varargin)">registerICP</a>	REGISTERICP Fit affine transform by Iterative Closest Point algorithm.</li><li><a href="../../matGeom/geom3d/registerPoints3dAffine.html" class="code" title="function [trans, points] = registerPoints3dAffine(points, target, varargin)">registerPoints3dAffine</a>	Fit 3D affine transform using iterative algorithm.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [index, minDist] = findClosestPoint(coord, points)</a>
+0002 <span class="comment">%FINDCLOSESTPOINT Find index of closest point in an array.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   INDEX = findClosestPoint(POINT, POINTARRAY)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   [INDEX, MINDIST] = findClosestPoint(POINT, POINTARRAY)</span>
+0007 <span class="comment">%   Also returns the distance between POINT and closest point in</span>
+0008 <span class="comment">%   POINTARRAY.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Example</span>
+0011 <span class="comment">%     pts = rand(10, 2);</span>
+0012 <span class="comment">%     findClosestPoint(pts(4, :), pts)</span>
+0013 <span class="comment">%     ans =</span>
+0014 <span class="comment">%         4</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   See also</span>
+0017 <span class="comment">%    points2d, minDistancePoints, distancePoints</span>
+0018 <span class="comment">%</span>
+0019  
+0020 <span class="comment">% ------</span>
+0021 <span class="comment">% Author: David Legland</span>
+0022 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0023 <span class="comment">% Created: 2015-02-24,    using Matlab 8.4.0.150421 (R2014b)</span>
+0024 <span class="comment">% Copyright 2015 INRA - Cepia Software Platform.</span>
+0025 <span class="comment">% number of points</span>
+0026 
+0027 <span class="comment">% number of point in first input to process</span>
+0028 np = size(coord, 1);
+0029 
+0030 <span class="comment">% allocate memory for result</span>
+0031 index = zeros(np, 1);
+0032 minDist = zeros(np, 1);
+0033 
+0034 <span class="keyword">for</span> i = 1:np
+0035     <span class="comment">% compute squared distance between current point and all point in array</span>
+0036     dist = sum(bsxfun(@minus, coord(i,:), points) .^ 2, 2);
+0037     
+0038     <span class="comment">% keep index of closest point</span>
+0039     [minDist(i), index(i)] = min(dist);
+0040 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

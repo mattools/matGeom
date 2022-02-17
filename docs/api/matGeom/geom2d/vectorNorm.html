@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of vectorNorm</title>
+  <meta name="keywords" content="vectorNorm">
+  <meta name="description" content="Compute norm of a vector, or of a set of vectors.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; vectorNorm.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>vectorNorm
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Compute norm of a vector, or of a set of vectors.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function n = vectorNorm(v, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Compute norm of a vector, or of a set of vectors.
+
+   N = vectorNorm(V);
+   Returns the euclidean norm of vector V.
+
+   N = vectorNorm(V, N);
+   Specifies the norm to use. N can be any value greater than 0. 
+   N=1 -&gt; city lock norm
+   N=2 -&gt; euclidean norm
+   N=inf -&gt; compute max coord.
+
+   When V is a MxN array, compute norm for each vector of the array.
+   Vector are given as rows. Result is then a [M*1] array.
+
+   Example
+   n1 = vectorNorm([3 4])
+   n1 =
+       5
+
+   n2 = vectorNorm([1, 10], inf)
+   n2 =
+       10
+
+   See Also:
+     <a href="vectors2d.html" class="code" title="function vectors2d">vectors2d</a>, <a href="vectorAngle.html" class="code" title="function alpha = vectorAngle(v1, varargin)">vectorAngle</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="isParallel.html" class="code" title="function b = isParallel(v1, v2, varargin)">isParallel</a>	ISPARALLEL Check parallelism of two vectors.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function n = vectorNorm(v, varargin)</a>
+0002 <span class="comment">% Compute norm of a vector, or of a set of vectors.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   N = vectorNorm(V);</span>
+0005 <span class="comment">%   Returns the euclidean norm of vector V.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   N = vectorNorm(V, N);</span>
+0008 <span class="comment">%   Specifies the norm to use. N can be any value greater than 0.</span>
+0009 <span class="comment">%   N=1 -&gt; city lock norm</span>
+0010 <span class="comment">%   N=2 -&gt; euclidean norm</span>
+0011 <span class="comment">%   N=inf -&gt; compute max coord.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   When V is a MxN array, compute norm for each vector of the array.</span>
+0014 <span class="comment">%   Vector are given as rows. Result is then a [M*1] array.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example</span>
+0017 <span class="comment">%   n1 = vectorNorm([3 4])</span>
+0018 <span class="comment">%   n1 =</span>
+0019 <span class="comment">%       5</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   n2 = vectorNorm([1, 10], inf)</span>
+0022 <span class="comment">%   n2 =</span>
+0023 <span class="comment">%       10</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   See Also:</span>
+0026 <span class="comment">%     vectors2d, vectorAngle</span>
+0027 <span class="comment">%</span>
+0028 
+0029 <span class="comment">%   ---------</span>
+0030 <span class="comment">%   author : David Legland</span>
+0031 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0032 <span class="comment">%   created the 21/02/2005.</span>
+0033 <span class="comment">%</span>
+0034 
+0035 <span class="comment">%   HISTORY</span>
+0036 <span class="comment">%   02/05/2006 manage several norms</span>
+0037 <span class="comment">%   18/09/2007 use 'isempty'</span>
+0038 <span class="comment">%   15/10/2008 add comments</span>
+0039 <span class="comment">%   22/05/2009 rename as vectorNorm</span>
+0040 <span class="comment">%   01/03/2010 fix bug for inf norm</span>
+0041 <span class="comment">%   03/01/2020 make it work for more dimensions</span>
+0042 
+0043 <span class="comment">% extract the type of norm to compute</span>
+0044 d = 2;
+0045 <span class="keyword">if</span> ~isempty(varargin)
+0046     d = varargin{1};
+0047 <span class="keyword">end</span>
+0048 
+0049 <span class="keyword">if</span> d==2
+0050     <span class="comment">% euclidean norm: sum of squared coordinates, and take square root</span>
+0051     n = sqrt(sum(v.*v, ndims(v)));
+0052     
+0053 <span class="keyword">elseif</span> d==1 
+0054     <span class="comment">% absolute norm: sum of absolute coordinates</span>
+0055     n = sum(abs(v), ndims(v));
+0056 
+0057 <span class="keyword">elseif</span> d==inf
+0058     <span class="comment">% infinite norm: uses the maximal corodinate</span>
+0059     n = max(v, [], ndims(v));
+0060 
+0061 <span class="keyword">else</span>
+0062     <span class="comment">% Other norms, use explicit but slower expression</span>
+0063     n = power(sum(power(v, d), ndims(v)), 1/d);
+0064     
+0065 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

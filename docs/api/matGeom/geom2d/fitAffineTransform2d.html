@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of fitAffineTransform2d</title>
+  <meta name="keywords" content="fitAffineTransform2d">
+  <meta name="description" content="Compute the affine transform that best register two point sets.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; fitAffineTransform2d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>fitAffineTransform2d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Compute the affine transform that best register two point sets.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function trans = fitAffineTransform2d(ref, src) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Compute the affine transform that best register two point sets.
+
+   TRANSFO = fitAffineTransform2d(REF, SRC)
+   Returns the affine transform matrix that minimizes the distance between
+   the reference point set REF and the point set SRC after transformation.
+   Both REF and SRC must by N-by-2 arrays with the same number of rows,
+   and the points must be in correspondence.
+   The function minimizes the sum of the squared distances:
+   CRIT = sum(distancePoints(REF, transformPoint(PTS, TRANSFO)).^2);
+
+   Example
+     % computes the transform the register two ellipses
+     % create the reference poitn set
+     elli = [50 50 40 20 30];
+     poly = resamplePolygonByLength(ellipseToPolygon(elli, 200), 5);
+     figure; axis equal; axis([0 100 0 100]); hold on;
+     drawPoint(poly, 'kx')
+     % create the point set to fit on the reference
+     trans0 = createRotation([20 60], -pi/8);
+     poly2 = transformPoint(poly, trans0);
+     poly2 = poly2 + randn(size(poly)) * 2;
+     drawPoint(poly2, 'b+');
+     % compute the transform that project poly2 onto poly.
+     transfo = fitAffineTransform2d(poly, poly2);
+     poly2t = transformPoint(poly2, transfo);
+     drawPoint(poly2t, 'mo')
+     legend('Reference', 'Initial', 'Transformed');
+
+   See also
+     <a href="transforms2d.html" class="code" title="function transforms2d(varargin)">transforms2d</a>, <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>, <a href="transformVector.html" class="code" title="function varargout = transformVector(varargin)">transformVector</a>,
+     <a href="fitPolynomialTransform2d.html" class="code" title="function coeffs = fitPolynomialTransform2d(pts, ptsRef, degree)">fitPolynomialTransform2d</a>, <a href="registerICP.html" class="code" title="function [trans, points] = registerICP(points, target, varargin)">registerICP</a>, fitAffineTransform3d</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="registerICP.html" class="code" title="function [trans, points] = registerICP(points, target, varargin)">registerICP</a>	REGISTERICP Fit affine transform by Iterative Closest Point algorithm.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function trans = fitAffineTransform2d(ref, src)</a>
+0002 <span class="comment">% Compute the affine transform that best register two point sets.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   TRANSFO = fitAffineTransform2d(REF, SRC)</span>
+0005 <span class="comment">%   Returns the affine transform matrix that minimizes the distance between</span>
+0006 <span class="comment">%   the reference point set REF and the point set SRC after transformation.</span>
+0007 <span class="comment">%   Both REF and SRC must by N-by-2 arrays with the same number of rows,</span>
+0008 <span class="comment">%   and the points must be in correspondence.</span>
+0009 <span class="comment">%   The function minimizes the sum of the squared distances:</span>
+0010 <span class="comment">%   CRIT = sum(distancePoints(REF, transformPoint(PTS, TRANSFO)).^2);</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%     % computes the transform the register two ellipses</span>
+0014 <span class="comment">%     % create the reference poitn set</span>
+0015 <span class="comment">%     elli = [50 50 40 20 30];</span>
+0016 <span class="comment">%     poly = resamplePolygonByLength(ellipseToPolygon(elli, 200), 5);</span>
+0017 <span class="comment">%     figure; axis equal; axis([0 100 0 100]); hold on;</span>
+0018 <span class="comment">%     drawPoint(poly, 'kx')</span>
+0019 <span class="comment">%     % create the point set to fit on the reference</span>
+0020 <span class="comment">%     trans0 = createRotation([20 60], -pi/8);</span>
+0021 <span class="comment">%     poly2 = transformPoint(poly, trans0);</span>
+0022 <span class="comment">%     poly2 = poly2 + randn(size(poly)) * 2;</span>
+0023 <span class="comment">%     drawPoint(poly2, 'b+');</span>
+0024 <span class="comment">%     % compute the transform that project poly2 onto poly.</span>
+0025 <span class="comment">%     transfo = fitAffineTransform2d(poly, poly2);</span>
+0026 <span class="comment">%     poly2t = transformPoint(poly2, transfo);</span>
+0027 <span class="comment">%     drawPoint(poly2t, 'mo')</span>
+0028 <span class="comment">%     legend('Reference', 'Initial', 'Transformed');</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">%   See also</span>
+0031 <span class="comment">%     transforms2d, transformPoint, transformVector,</span>
+0032 <span class="comment">%     fitPolynomialTransform2d, registerICP, fitAffineTransform3d</span>
+0033 <span class="comment">%</span>
+0034 
+0035 <span class="comment">% ------</span>
+0036 <span class="comment">% Author: David Legland</span>
+0037 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0038 <span class="comment">% Created: 2009-07-31,    using Matlab 7.7.0.471 (R2008b)</span>
+0039 <span class="comment">% Copyright 2009 INRAE - Cepia Software Platform.</span>
+0040 
+0041 <span class="comment">% check number of points are equal</span>
+0042 N = size(src, 1);
+0043 <span class="keyword">if</span> size(ref, 1) ~= N
+0044     error(<span class="string">'Requires the same number of points for both arrays'</span>);
+0045 <span class="keyword">end</span>
+0046 
+0047 <span class="comment">% main matrix of the problem</span>
+0048 A = [<span class="keyword">...</span>
+0049     src(:,1) src(:,2) ones(N,1) zeros(N, 3) ; <span class="keyword">...</span>
+0050     zeros(N, 3) src(:,1) src(:,2) ones(N,1)  ];
+0051 
+0052 <span class="comment">% conditions initialisations</span>
+0053 B = [ref(:,1) ; ref(:,2)];
+0054 
+0055 <span class="comment">% compute coefficients using least square</span>
+0056 coefs = A\B;
+0057 
+0058 <span class="comment">% format to a matrix</span>
+0059 trans = [coefs(1:3)' ; coefs(4:6)'; 0 0 1];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

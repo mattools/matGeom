@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of parallelPlane</title>
+  <meta name="keywords" content="parallelPlane">
+  <meta name="description" content="PARALLELPLANE Parallel to a plane through a point or at a given distance.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; parallelPlane.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>parallelPlane
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>PARALLELPLANE Parallel to a plane through a point or at a given distance.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function res = parallelPlane(plane, point) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">PARALLELPLANE Parallel to a plane through a point or at a given distance.
+
+   PL2 = parallelPlane(PL, PT)
+   Constructs the plane parallel to plane PL and containing the point PT.
+
+   PL2 = parallelPlane(PL, D)
+   Constructs the plane parallel to plane PL, and located at the given
+   signed distance D.
+
+   Example
+     % Create a plane normal to the 3D vector DIR
+     dir = [3 4 5];
+     plane = createPlane([3 4 5], dir);
+     % Create plane at a specific distance 
+     plane2 = parallelPlane(plane, 5);
+     % Create a line perpendicular to both planes
+     line = [2 4 1 3 4 5];
+     pi1 = intersectLinePlane(line, plane);
+     pi2 = intersectLinePlane(line, plane2);
+     % check the distance between intersection points
+     distancePoints3d(pi1, pi2)
+     ans = 
+         5
+
+   See also
+   geom3d, <a href="parallelLine3d.html" class="code" title="function res = parallelLine3d(line, point)">parallelLine3d</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2012-08-22,    using Matlab 7.9.0.529 (R2009b)
+ Copyright 2012 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>	NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.</li><li><a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>	PLANENORMAL Compute the normal to a plane.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function res = parallelPlane(plane, point)</a>
+0002 <span class="comment">%PARALLELPLANE Parallel to a plane through a point or at a given distance.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PL2 = parallelPlane(PL, PT)</span>
+0005 <span class="comment">%   Constructs the plane parallel to plane PL and containing the point PT.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   PL2 = parallelPlane(PL, D)</span>
+0008 <span class="comment">%   Constructs the plane parallel to plane PL, and located at the given</span>
+0009 <span class="comment">%   signed distance D.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Example</span>
+0012 <span class="comment">%     % Create a plane normal to the 3D vector DIR</span>
+0013 <span class="comment">%     dir = [3 4 5];</span>
+0014 <span class="comment">%     plane = createPlane([3 4 5], dir);</span>
+0015 <span class="comment">%     % Create plane at a specific distance</span>
+0016 <span class="comment">%     plane2 = parallelPlane(plane, 5);</span>
+0017 <span class="comment">%     % Create a line perpendicular to both planes</span>
+0018 <span class="comment">%     line = [2 4 1 3 4 5];</span>
+0019 <span class="comment">%     pi1 = intersectLinePlane(line, plane);</span>
+0020 <span class="comment">%     pi2 = intersectLinePlane(line, plane2);</span>
+0021 <span class="comment">%     % check the distance between intersection points</span>
+0022 <span class="comment">%     distancePoints3d(pi1, pi2)</span>
+0023 <span class="comment">%     ans =</span>
+0024 <span class="comment">%         5</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%   See also</span>
+0027 <span class="comment">%   geom3d, parallelLine3d</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">% ------</span>
+0030 <span class="comment">% Author: David Legland</span>
+0031 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0032 <span class="comment">% Created: 2012-08-22,    using Matlab 7.9.0.529 (R2009b)</span>
+0033 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
+0034 
+0035 <span class="keyword">if</span> size(point, 2) == 1
+0036     <span class="comment">% use a distance. Compute position of point located at distance DIST on</span>
+0037     <span class="comment">% the line normal to the plane.</span>
+0038     normal = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(<a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>(plane));
+0039     point = plane(:, 1:3) + bsxfun(@times, point, normal);
+0040 <span class="keyword">end</span>
+0041 
+0042 <span class="comment">% change origin, and keep direction vectors</span>
+0043 res = [point plane(:, 4:9)];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

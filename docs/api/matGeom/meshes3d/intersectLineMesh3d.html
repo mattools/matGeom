@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of intersectLineMesh3d</title>
+  <meta name="keywords" content="intersectLineMesh3d">
+  <meta name="description" content="Intersection points of a 3D line with a mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; intersectLineMesh3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>intersectLineMesh3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Intersection points of a 3D line with a mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [points, pos, faceInds, lineInds] = intersectLineMesh3d(line, vertices, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Intersection points of a 3D line with a mesh.
+
+   INTERS = intersectLineMesh3d(LINE, VERTICES, FACES)
+   Compute the intersection points between a 3D line and a 3D mesh defined
+   by vertices and faces. The mesh data is provided as a pair of arrays,
+   with VERTICES being a NV-by-3 array of vertex coordinates, and FACES
+   being a NF-by-3 or NF-by-4 array of face vertex indices.
+   The LINE data correspond to a 1-by-6 row vector concatenating the line
+   origin and direction. LINE can also be a NL-by-6 array representing a
+   collection of lines with various origins and directions.
+
+   INTERS = intersectLineMesh3d(LINE, MESH)
+   Provides the mesh data as a struct with the fields 'vertices' and
+   'faces'.
+
+   [INTERS, POS, IFACES] = intersectLineMesh3d(...)
+   Also returns the position of each intersection point on the input line,
+   and the index of the intersected faces.
+   If POS &gt; 0, the point is also on the ray corresponding to the line. 
+   
+   [INTERS, POS, IFACES, ILINES] = intersectLineMesh3d(...)
+   Also returns the index of the line each intersection point belong to.
+
+   Example
+     [V, F] = createCube;
+     line = [.2 .3 .4 1 0 0];
+     pts = intersectLineMesh3d(line, V, F)
+     pts =
+         1.0000    0.3000    0.4000
+              0    0.3000    0.4000
+
+   See also
+   meshes3d, <a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>, intersectLineTriangle3d</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>	CROSSPRODUCT3D Vector cross product faster than inbuilt MATLAB cross.</li><li><a href="../../matGeom/geom3d/vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>	VECTORNORM3D Norm of a 3D vector or of set of 3D vectors.</li><li><a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>	TRIANGULATEFACES Convert face array to an array of triangular faces.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="intersectEdgeMesh3d.html" class="code" title="function [points, pos, faceInds] = intersectEdgeMesh3d(edge, varargin)">intersectEdgeMesh3d</a>	Intersection points of a 3D edge with a mesh.</li><li><a href="isPointInMesh.html" class="code" title="function res = isPointInMesh(point, v, f, varargin)">isPointInMesh</a>	ISPOINTINMESH Check if a point is inside a 3D mesh.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [points, pos, faceInds, lineInds] = intersectLineMesh3d(line, vertices, varargin)</a>
+0002 <span class="comment">% Intersection points of a 3D line with a mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   INTERS = intersectLineMesh3d(LINE, VERTICES, FACES)</span>
+0005 <span class="comment">%   Compute the intersection points between a 3D line and a 3D mesh defined</span>
+0006 <span class="comment">%   by vertices and faces. The mesh data is provided as a pair of arrays,</span>
+0007 <span class="comment">%   with VERTICES being a NV-by-3 array of vertex coordinates, and FACES</span>
+0008 <span class="comment">%   being a NF-by-3 or NF-by-4 array of face vertex indices.</span>
+0009 <span class="comment">%   The LINE data correspond to a 1-by-6 row vector concatenating the line</span>
+0010 <span class="comment">%   origin and direction. LINE can also be a NL-by-6 array representing a</span>
+0011 <span class="comment">%   collection of lines with various origins and directions.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   INTERS = intersectLineMesh3d(LINE, MESH)</span>
+0014 <span class="comment">%   Provides the mesh data as a struct with the fields 'vertices' and</span>
+0015 <span class="comment">%   'faces'.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   [INTERS, POS, IFACES] = intersectLineMesh3d(...)</span>
+0018 <span class="comment">%   Also returns the position of each intersection point on the input line,</span>
+0019 <span class="comment">%   and the index of the intersected faces.</span>
+0020 <span class="comment">%   If POS &gt; 0, the point is also on the ray corresponding to the line.</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   [INTERS, POS, IFACES, ILINES] = intersectLineMesh3d(...)</span>
+0023 <span class="comment">%   Also returns the index of the line each intersection point belong to.</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   Example</span>
+0026 <span class="comment">%     [V, F] = createCube;</span>
+0027 <span class="comment">%     line = [.2 .3 .4 1 0 0];</span>
+0028 <span class="comment">%     pts = intersectLineMesh3d(line, V, F)</span>
+0029 <span class="comment">%     pts =</span>
+0030 <span class="comment">%         1.0000    0.3000    0.4000</span>
+0031 <span class="comment">%              0    0.3000    0.4000</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">%   See also</span>
+0034 <span class="comment">%   meshes3d, triangulateFaces, intersectLineTriangle3d</span>
+0035 <span class="comment">%</span>
+0036 
+0037 <span class="comment">% ------</span>
+0038 <span class="comment">% Author: David Legland</span>
+0039 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0040 <span class="comment">% Created: 2011-12-20,    using Matlab 7.9.0.529 (R2009b)</span>
+0041 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0042 
+0043 <span class="comment">% tolerance for detecting if a point is on line or within edge bounds</span>
+0044 tol = 1e-12;
+0045 
+0046 <span class="comment">% parsing</span>
+0047 <span class="keyword">if</span> ~isempty(varargin)
+0048     <span class="keyword">if</span> isscalar(varargin{1})
+0049         tol = varargin{1};
+0050         [vertices, faces] = parseMeshData(vertices);
+0051     <span class="keyword">else</span>
+0052         faces = varargin{1};
+0053         varargin(1) = [];
+0054         <span class="keyword">if</span> ~isempty(varargin)
+0055             tol = varargin{1};
+0056         <span class="keyword">end</span>
+0057     <span class="keyword">end</span>
+0058 <span class="keyword">else</span>
+0059     [vertices, faces] = parseMeshData(vertices);
+0060 <span class="keyword">end</span>
+0061 
+0062 <span class="comment">% ensure the mesh has triangular faces</span>
+0063 tri2Face = [];
+0064 <span class="keyword">if</span> iscell(faces) || size(faces, 2) ~= 3
+0065     [faces, tri2Face] = <a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>(faces);
+0066 <span class="keyword">end</span>
+0067 
+0068 <span class="comment">% find triangle edge vectors</span>
+0069 t0  = vertices(faces(:,1), :);
+0070 u   = vertices(faces(:,2), :) - t0;
+0071 v   = vertices(faces(:,3), :) - t0;
+0072 
+0073 <span class="comment">% triangle normal</span>
+0074 n   = <a href="../../matGeom/geom3d/crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>(u, v);
+0075 
+0076 <span class="comment">% direction vectors of lines and origins of lines</span>
+0077 dv = permute(line(:,4:6), [3 2 1]);
+0078 d0 = permute(line(:,1:3), [3 2 1]);
+0079 
+0080 <span class="comment">% vector between triangle origin and line origin</span>
+0081 w0 = d0 - t0;
+0082 
+0083 a = -sum(n .* w0, 2); <span class="comment">% negative dot product</span>
+0084 b = sum(n .* dv, 2);  <span class="comment">% dot product</span>
+0085 
+0086 valid = abs(b) &gt; tol &amp; <a href="../../matGeom/geom3d/vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(n) &gt; tol;
+0087 
+0088 <span class="comment">% compute intersection point of line with supporting plane</span>
+0089 <span class="comment">% If pos &lt; 0: point before ray</span>
+0090 <span class="comment">% IF pos &gt; |dir|: point after edge</span>
+0091 pos = a ./ b;
+0092 
+0093 <span class="comment">% coordinates of intersection point</span>
+0094 points = d0 + (pos .* dv);
+0095 
+0096 
+0097 <span class="comment">%% test if intersection point is inside triangle</span>
+0098 
+0099 <span class="comment">% normalize direction vectors of triangle edges</span>
+0100 uu  = dot(u, u, 2);
+0101 uv  = dot(u, v, 2);
+0102 vv  = dot(v, v, 2);
+0103 
+0104 <span class="comment">% coordinates of vector v in triangle basis</span>
+0105 w   = points - t0;
+0106 wu  = sum(w .* u, 2);
+0107 wv  = sum(w .* v, 2);
+0108 
+0109 <span class="comment">% normalization constant</span>
+0110 D = uv.^2 - uu .* vv;
+0111 
+0112 <span class="comment">% test first coordinate</span>
+0113 s = (uv .* wv - vv .* wu) ./ D;
+0114 ind1 = s &lt; -tol | s &gt; (1.0 + tol);
+0115 
+0116 <span class="comment">% test second coordinate, and third triangle edge</span>
+0117 t = (uv .* wu - uu .* wv) ./ D;
+0118 ind2 = t &lt; -tol | (s + t) &gt; (1.0 + tol);
+0119 
+0120 <span class="comment">% keep only interesting points</span>
+0121 inds = ~ind1 &amp; ~ind2 &amp; valid;
+0122 [faceInds, lineInds] = find(permute(inds, [1 3 2]));
+0123 
+0124 <span class="comment">% Bit of an indexing trick to get points in appropriate order</span>
+0125 points = points(sub2ind(size(points), <span class="keyword">...</span>
+0126     faceInds+[0 0 0], faceInds*0+(1:3), lineInds+[0 0 0]) );
+0127 
+0128 <span class="keyword">if</span> nargout &gt; 1
+0129     pos = pos(inds);
+0130     
+0131     <span class="comment">% convert to face indices of original mesh</span>
+0132     <span class="keyword">if</span> ~isempty(tri2Face)
+0133         faceInds = tri2Face(faceInds);
+0134     <span class="keyword">end</span>
+0135 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

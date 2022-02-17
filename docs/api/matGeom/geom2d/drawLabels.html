@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawLabels</title>
+  <meta name="keywords" content="drawLabels">
+  <meta name="description" content="Draw labels at specified positions.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; drawLabels.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawLabels
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Draw labels at specified positions.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawLabels(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Draw labels at specified positions.
+   
+   drawLabels(X, Y, LBL)
+   Draws labels LBL at positions given by X and Y.
+   LBL can be either a string array, or a number array. In this case,
+   string are created by using sprintf function, using the '%.2f' format.
+
+   drawLabels(POS, LBL)
+   Draws labels LBL at position specified by POS, where POS is a N-by-2
+   numeric array. 
+
+   drawLabels(..., NUMBERS, FORMAT)
+   Creates labels using sprintf function, with the mask given by FORMAT 
+   (e.g. '%03d' or '5.3f'), and the corresponding values.
+
+   drawLabels(..., PNAME, PVALUE)
+   Specifies additional parameters to the created labels. See 'text'
+   properties for available values.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawLabels(varargin)</a>
+0002 <span class="comment">% Draw labels at specified positions.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawLabels(X, Y, LBL)</span>
+0005 <span class="comment">%   Draws labels LBL at positions given by X and Y.</span>
+0006 <span class="comment">%   LBL can be either a string array, or a number array. In this case,</span>
+0007 <span class="comment">%   string are created by using sprintf function, using the '%.2f' format.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   drawLabels(POS, LBL)</span>
+0010 <span class="comment">%   Draws labels LBL at position specified by POS, where POS is a N-by-2</span>
+0011 <span class="comment">%   numeric array.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   drawLabels(..., NUMBERS, FORMAT)</span>
+0014 <span class="comment">%   Creates labels using sprintf function, with the mask given by FORMAT</span>
+0015 <span class="comment">%   (e.g. '%03d' or '5.3f'), and the corresponding values.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   drawLabels(..., PNAME, PVALUE)</span>
+0018 <span class="comment">%   Specifies additional parameters to the created labels. See 'text'</span>
+0019 <span class="comment">%   properties for available values.</span>
+0020 <span class="comment">%</span>
+0021 
+0022 <span class="comment">%   ---------</span>
+0023 <span class="comment">%   author : David Legland</span>
+0024 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0025 <span class="comment">%   created the 15/12/2003.</span>
+0026 <span class="comment">%</span>
+0027 
+0028 <span class="comment">%   HISTORY</span>
+0029 <span class="comment">%   09/03/2007: (re)implement it...</span>
+0030 <span class="comment">%   2011-10-11 add management of axes handle</span>
+0031 
+0032 <span class="comment">% check if enough inputs are given</span>
+0033 <span class="keyword">if</span> isempty(varargin)
+0034     error(<span class="string">'wrong number of arguments in drawLabels'</span>);
+0035 <span class="keyword">end</span>
+0036 
+0037 <span class="comment">% extract handle of axis to draw on</span>
+0038 <span class="keyword">if</span> isscalar(varargin{1}) &amp;&amp; ishandle(varargin{1})
+0039     ax = varargin{1};
+0040     varargin(1) = [];
+0041 <span class="keyword">else</span>
+0042     ax = gca;
+0043 <span class="keyword">end</span>
+0044 
+0045 <span class="comment">% process input parameters</span>
+0046 var = varargin{1};
+0047 <span class="keyword">if</span> size(var, 2) == 1
+0048     <span class="comment">% coordinates given as separate arguments</span>
+0049     <span class="keyword">if</span> length(varargin) &lt; 3
+0050         error(<span class="string">'wrong number of arguments in drawLabels'</span>);
+0051     <span class="keyword">end</span>
+0052     px  = var;
+0053     py  = varargin{2};
+0054     lbl = varargin{3};
+0055     varargin(1:3) = [];
+0056 <span class="keyword">else</span>
+0057     <span class="comment">% parameters given as a packed array</span>
+0058     <span class="keyword">if</span> length(varargin) &lt; 2
+0059         error(<span class="string">'wrong number of arguments in drawLabels'</span>);
+0060     <span class="keyword">end</span>
+0061     px  = var(:,1);
+0062     py  = var(:,2);
+0063     lbl = varargin{2};
+0064     varargin(1:2) = [];
+0065 <span class="keyword">end</span>
+0066 
+0067 <span class="comment">% format for displaying numeric values</span>
+0068 format = <span class="string">'%.2f'</span>;
+0069 <span class="keyword">if</span> ~isempty(varargin) 
+0070     var1 = varargin{1};
+0071     <span class="keyword">if</span> ischar(var1) &amp;&amp; var1(1) == <span class="string">'%'</span>
+0072         format = varargin{1};
+0073         varargin(1) = [];
+0074     <span class="keyword">end</span>
+0075 <span class="keyword">end</span>
+0076 <span class="keyword">if</span> size(format, 1) == 1 &amp;&amp; size(px, 1) &gt; 1
+0077     format = repmat(format, size(px, 1), 1);
+0078 <span class="keyword">end</span>
+0079 
+0080 <span class="comment">% compute the strings that have to be displayed</span>
+0081 labels = cell(length(px), 1);
+0082 <span class="keyword">if</span> isnumeric(lbl)
+0083     <span class="keyword">for</span> i = 1:length(px)
+0084         labels{i} = sprintf(format(i,:), lbl(i));
+0085     <span class="keyword">end</span>
+0086 <span class="keyword">elseif</span> ischar(lbl)
+0087     <span class="keyword">for</span> i = 1:length(px)
+0088         labels{i} = lbl(i,:);
+0089     <span class="keyword">end</span>
+0090 <span class="keyword">elseif</span> iscell(lbl)
+0091     labels = lbl;
+0092 <span class="keyword">end</span>
+0093 labels = char(labels);
+0094 
+0095 <span class="comment">% display the text</span>
+0096 h = text(px, py, labels, <span class="string">'parent'</span>, ax, varargin{:});
+0097 
+0098 <span class="comment">% format output</span>
+0099 <span class="keyword">if</span> nargout &gt; 0
+0100     varargout = {h};
+0101 <span class="keyword">end</span>
+0102</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

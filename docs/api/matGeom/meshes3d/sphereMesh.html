@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of sphereMesh</title>
+  <meta name="keywords" content="sphereMesh">
+  <meta name="description" content="Create a 3D mesh representing a sphere.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; sphereMesh.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>sphereMesh
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Create a 3D mesh representing a sphere.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = sphereMesh(sphere, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Create a 3D mesh representing a sphere.
+
+   [V, F] = sphereMesh(S)
+   Creates a 3D mesh representing the sphere S given by [xc yc zy r].
+
+   [V, F] = sphereMesh();
+   Assumes sphere is the unit sphere centered at the origin.
+
+   [V, F] = sphereMesh(S, 'nTheta', NT, 'nPhi', NP);
+   Specifies the number of discretisation steps for the meridians and the
+   parallels. Default values are nTheta = 16 and nPhi = 32.
+
+
+   Example
+     s = [10 20 30 40];
+     [v, f] = sphereMesh(s);
+     drawMesh(v, f);
+     view(3); axis equal; light; lighting gouraud;
+
+   See also
+     meshes3d, drawSphere, <a href="ellipsoidMesh.html" class="code" title="function varargout = ellipsoidMesh(elli, varargin)">ellipsoidMesh</a>, <a href="cylinderMesh.html" class="code" title="function varargout = cylinderMesh(cyl, varargin)">cylinderMesh</a>, <a href="surfToMesh.html" class="code" title="function varargout = surfToMesh(x, y, varargin)">surfToMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="surfToMesh.html" class="code" title="function varargout = surfToMesh(x, y, varargin)">surfToMesh</a>	Convert surface grids into face-vertex mesh.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = sphereMesh(sphere, varargin)</a>
+0002 <span class="comment">% Create a 3D mesh representing a sphere.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V, F] = sphereMesh(S)</span>
+0005 <span class="comment">%   Creates a 3D mesh representing the sphere S given by [xc yc zy r].</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   [V, F] = sphereMesh();</span>
+0008 <span class="comment">%   Assumes sphere is the unit sphere centered at the origin.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   [V, F] = sphereMesh(S, 'nTheta', NT, 'nPhi', NP);</span>
+0011 <span class="comment">%   Specifies the number of discretisation steps for the meridians and the</span>
+0012 <span class="comment">%   parallels. Default values are nTheta = 16 and nPhi = 32.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   Example</span>
+0016 <span class="comment">%     s = [10 20 30 40];</span>
+0017 <span class="comment">%     [v, f] = sphereMesh(s);</span>
+0018 <span class="comment">%     drawMesh(v, f);</span>
+0019 <span class="comment">%     view(3); axis equal; light; lighting gouraud;</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See also</span>
+0022 <span class="comment">%     meshes3d, drawSphere, ellipsoidMesh, cylinderMesh, surfToMesh</span>
+0023 <span class="comment">%</span>
+0024 
+0025 <span class="comment">% ------</span>
+0026 <span class="comment">% Author: David Legland</span>
+0027 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0028 <span class="comment">% Created: 2012-10-25,    using Matlab 7.9.0.529 (R2009b)</span>
+0029 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
+0030 
+0031 <span class="keyword">if</span> nargin == 0
+0032     sphere = [0 0 0 1];
+0033 <span class="keyword">end</span>
+0034 
+0035 <span class="comment">% number of meridians</span>
+0036 nPhi    = 32;
+0037     
+0038 <span class="comment">% number of parallels</span>
+0039 nTheta  = 16;
+0040 
+0041 <span class="comment">% process input arguments</span>
+0042 <span class="keyword">while</span> length(varargin) &gt; 1
+0043     paramName = varargin{1};
+0044     <span class="keyword">switch</span> lower(paramName)
+0045         <span class="keyword">case</span> <span class="string">'ntheta'</span>, nTheta = varargin{2};
+0046         <span class="keyword">case</span> <span class="string">'nphi'</span>, nPhi = varargin{2};
+0047         <span class="keyword">otherwise</span>
+0048             error([<span class="string">'Could not recognise parameter: '</span> paramName]);
+0049     <span class="keyword">end</span>
+0050     varargin(1:2) = [];
+0051 <span class="keyword">end</span>
+0052 
+0053 <span class="comment">% extract sphere data</span>
+0054 xc = sphere(:,1);
+0055 yc = sphere(:,2);
+0056 zc = sphere(:,3);
+0057 r  = sphere(:,4);
+0058 
+0059 
+0060 <span class="comment">% compute spherical coordinates</span>
+0061 theta   = linspace(0, pi, nTheta+1);
+0062 phi     = linspace(0, 2*pi, nPhi+1);
+0063 
+0064 <span class="comment">% convert to cartesian coordinates</span>
+0065 sintheta = sin(theta);
+0066 x = xc + cos(phi') * sintheta * r;
+0067 y = yc + sin(phi') * sintheta * r;
+0068 z = zc + ones(length(phi),1) * cos(theta) * r;
+0069 
+0070 <span class="comment">% convert to FV mesh</span>
+0071 [vertices, faces] = <a href="surfToMesh.html" class="code" title="function varargout = surfToMesh(x, y, varargin)">surfToMesh</a>(x, y, z, <span class="string">'yperiodic'</span>, true);
+0072 
+0073 <span class="comment">% format output</span>
+0074 varargout = formatMeshOutput(nargout, vertices, faces);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

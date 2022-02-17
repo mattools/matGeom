@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of projPointOnPlane</title>
+  <meta name="keywords" content="projPointOnPlane">
+  <meta name="description" content="PROJPOINTONPLANE Return the orthogonal projection of a point on a plane.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; projPointOnPlane.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>projPointOnPlane
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>PROJPOINTONPLANE Return the orthogonal projection of a point on a plane.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function point = projPointOnPlane(point, plane) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">PROJPOINTONPLANE Return the orthogonal projection of a point on a plane.
+
+   PT2 = projPointOnPlane(PT1, PLANE);
+   Compute the (orthogonal) projection of point PT1 onto the plane PLANE,
+   given as [X0 Y0 Z0  VX1 VY1 VZ1  VX2 VY2 VZ2] (origin point, first
+   direction vector, second directionvector).
+   
+   The function is fully vectorized, in that multiple points may be
+   projected onto multiple planes in a single call, returning multiple
+   points. With the exception of the second dimension (where
+   SIZE(PT1,2)==3, and SIZE(PLANE,2)==9), each dimension of PT1 and PLANE
+   must either be equal or one, similar to the requirements of BSXFUN. In
+   basic usage, point PT1 is a [N*3] array, and PLANE is a [N*9] array
+   (see createPlane for details). Result PT2 is a [N*3] array, containing
+   coordinates of orthogonal projections of PT1 onto planes PLANE. In
+   vectorised usage, PT1 is an [N*3*M*P...] matrix, and PLANE is an
+   [X*9*Y...] matrix, where (N,X), (M,Y), etc, are either equal pairs, or
+   one of the two is one.
+
+   See also:
+   <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>, <a href="points3d.html" class="code" title="function points3d(varargin)">points3d</a>, <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>, <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>	CROSSPRODUCT3D Vector cross product faster than inbuilt MATLAB cross.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="intersectPlaneSphere.html" class="code" title="function circle = intersectPlaneSphere(plane, sphere)">intersectPlaneSphere</a>	INTERSECTPLANESPHERE Return intersection circle between a plane and a sphere.</li><li><a href="intersectRayPolygon3d.html" class="code" title="function [inter, inside]= intersectRayPolygon3d(ray, poly)">intersectRayPolygon3d</a>	INTERSECTRAYPOLYGON3D Intersection point of a 3D ray and a 3D polygon.</li><li><a href="normalizePlane.html" class="code" title="function plane2 = normalizePlane(plane1)">normalizePlane</a>	NORMALIZEPLANE Normalize parametric representation of a plane.</li><li><a href="orientedBox3d.html" class="code" title="function [box3d, rotMat] = orientedBox3d(pts)">orientedBox3d</a>	Object-oriented bounding box of a set of 3D points.</li><li><a href="projLineOnPlane.html" class="code" title="function [newLine, isOrthogonal] = projLineOnPlane(line, plane)">projLineOnPlane</a>	PROJLINEONPLANE Return the orthogonal projection of a line on a plane.</li><li><a href="projPointOnCircle3d.html" class="code" title="function point2 = projPointOnCircle3d(point, circle)">projPointOnCircle3d</a>	PROJPOINTONCIRCLE3D Project a 3D point onto a 3D circle.</li><li><a href="sphericalAngle.html" class="code" title="function alpha = sphericalAngle(p1, p2, p3)">sphericalAngle</a>	SPHERICALANGLE Compute angle between points on the sphere.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function point = projPointOnPlane(point, plane)</a>
+0002 <span class="comment">%PROJPOINTONPLANE Return the orthogonal projection of a point on a plane.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PT2 = projPointOnPlane(PT1, PLANE);</span>
+0005 <span class="comment">%   Compute the (orthogonal) projection of point PT1 onto the plane PLANE,</span>
+0006 <span class="comment">%   given as [X0 Y0 Z0  VX1 VY1 VZ1  VX2 VY2 VZ2] (origin point, first</span>
+0007 <span class="comment">%   direction vector, second directionvector).</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   The function is fully vectorized, in that multiple points may be</span>
+0010 <span class="comment">%   projected onto multiple planes in a single call, returning multiple</span>
+0011 <span class="comment">%   points. With the exception of the second dimension (where</span>
+0012 <span class="comment">%   SIZE(PT1,2)==3, and SIZE(PLANE,2)==9), each dimension of PT1 and PLANE</span>
+0013 <span class="comment">%   must either be equal or one, similar to the requirements of BSXFUN. In</span>
+0014 <span class="comment">%   basic usage, point PT1 is a [N*3] array, and PLANE is a [N*9] array</span>
+0015 <span class="comment">%   (see createPlane for details). Result PT2 is a [N*3] array, containing</span>
+0016 <span class="comment">%   coordinates of orthogonal projections of PT1 onto planes PLANE. In</span>
+0017 <span class="comment">%   vectorised usage, PT1 is an [N*3*M*P...] matrix, and PLANE is an</span>
+0018 <span class="comment">%   [X*9*Y...] matrix, where (N,X), (M,Y), etc, are either equal pairs, or</span>
+0019 <span class="comment">%   one of the two is one.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See also:</span>
+0022 <span class="comment">%   planes3d, points3d, planePosition, intersectLinePlane</span>
+0023 
+0024 <span class="comment">%   ---------</span>
+0025 <span class="comment">%   author : David Legland</span>
+0026 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0027 <span class="comment">%   created the 18/02/2005.</span>
+0028 <span class="comment">%</span>
+0029 
+0030 <span class="comment">%   HISTORY</span>
+0031 <span class="comment">%   21/08/2006: debug support for multiple points or planes</span>
+0032 <span class="comment">%   22/04/2013: uses bsxfun for mult. pts/planes in all dimensions (Sven H)</span>
+0033 
+0034 <span class="comment">% Unpack the planes into origins and normals, keeping original shape</span>
+0035 plSize = size(plane);
+0036 plSize(2) = 3;
+0037 [origins, normals] = deal(zeros(plSize));
+0038 origins(:) = plane(:,1:3,:);
+0039 normals(:) = <a href="crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>(plane(:,4:6,:), plane(:, 7:9,:));
+0040 
+0041 <span class="comment">% difference between origins of plane and point</span>
+0042 dp = bsxfun(@minus, origins, point);
+0043 
+0044 <span class="comment">% relative position of point on normal's line</span>
+0045 t = bsxfun(@rdivide, sum(bsxfun(@times,normals,dp),2), sum(normals.^2,2));
+0046 
+0047 <span class="comment">% add relative difference to project point back to plane</span>
+0048 point = bsxfun(@plus, point, bsxfun(@times, t, normals));</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

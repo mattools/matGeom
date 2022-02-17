@@ -1,0 +1,331 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawCylinder</title>
+  <meta name="keywords" content="drawCylinder">
+  <meta name="description" content="Draw a cylinder.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; drawCylinder.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawCylinder
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Draw a cylinder.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawCylinder(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Draw a cylinder.
+
+   drawCylinder(CYL)
+   Draws the cylinder CYL on the current axis. 
+   CYL is a 1-by-7 row vector in the form [x1 y1 z1 x2 y2 z2 r] where:
+   * [x1 y1 z1] are the coordinates of starting point, 
+   * [x2 y2 z2] are the coordinates of ending point, 
+   * R is the radius of the cylinder
+
+   drawCylinder(CYL, N)
+   Uses N points for discretizating the circles of the cylinder. Default
+   value is 32. 
+
+   drawCylinder(..., OPT)
+   with OPT = 'open' (default) or 'closed', specify if the bases of the
+   cylinder should be drawn.
+
+   drawCylinder(..., 'FaceColor', COLOR)
+   Specifies the color of the cylinder. Any couple of parameters name and
+   value can be given as argument, and will be transfered to the 'surf'
+   matlab function
+
+   drawCylinder(..., 'FaceAlpha', ALPHA)
+   Specifies the transparency of the cylinder and of the optionnal caps.
+
+   drawCylinder(AX, ...)
+   Specifies the axis to draw on. AX should be a valid axis handle.
+
+   H = drawCylinder(...)
+   Returns a handle to the patch representing the cylinder.
+
+
+   Examples:
+   % basic example
+     figure; drawCylinder([0 0 0 10 20 30 5]);
+
+   % draw hollow cylinders
+     figure; drawCylinder([0 0 0 10 20 30 5], 'open');
+
+   % change cylinder color
+     figure; drawCylinder([0 0 0 10 20 30 5], 'FaceColor', 'r');
+
+   % change cylinder color using graphical handle
+     figure;
+     h = drawCylinder([0 0 0 10 20 30 5]);
+     set(h, 'facecolor', 'b');
+
+   % Draw three mutually intersecting cylinders
+     p0 = [10 10 10];
+     p1 = p0 + 80 * [1 0 0];
+     p2 = p0 + 80 * [0 1 0];
+     p3 = p0 + 80 * [0 0 1];
+     figure; axis equal; axis([0 100 0 100 0 100]); hold on
+     drawCylinder([p0 p1 10], 'FaceColor', 'r');
+     drawCylinder([p0 p2 10], 'FaceColor', 'g');
+     drawCylinder([p0 p3 10], 'FaceColor', 'b');
+     axis equal
+     set(gcf, 'renderer', 'opengl')
+     view([60 30]); light;
+
+   % draw cube skeleton
+     [v, e, f] = createCube;
+     figure; axis equal; axis([-0.2 1.2 -0.2 1.2 -0.2 1.2]); hold on; view(3);
+     cyls = [v(e(:,1), :) v(e(:,2),:) repmat(0.1, size(e, 1), 1)];
+     drawCylinder(cyls);
+     light
+
+   See Also:
+     cylinderMesh, <a href="drawEllipseCylinder.html" class="code" title="function varargout = drawEllipseCylinder(cyl, varargin)">drawEllipseCylinder</a>, <a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a>, <a href="drawLine3d.html" class="code" title="function h = drawLine3d(lin, varargin)">drawLine3d</a>, surf
+     <a href="intersectLineCylinder.html" class="code" title="function points = intersectLineCylinder(line, cylinder, varargin)">intersectLineCylinder</a>, <a href="cylinderSurfaceArea.html" class="code" title="function S = cylinderSurfaceArea(cyl)">cylinderSurfaceArea</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="cart2sph2d.html" class="code" title="function varargout = cart2sph2d(x, y, z)">cart2sph2d</a>	CART2SPH2D Convert cartesian coordinates to spherical coordinates in degrees.</li><li><a href="drawCylinder.html" class="code" title="function varargout = drawCylinder(varargin)">drawCylinder</a>	Draw a cylinder.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawCapsule.html" class="code" title="function varargout = drawCapsule(varargin)">drawCapsule</a>	Draw a capsule.</li><li><a href="drawCylinder.html" class="code" title="function varargout = drawCylinder(varargin)">drawCylinder</a>	Draw a cylinder.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawCylinder(varargin)</a>
+0002 <span class="comment">% Draw a cylinder.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawCylinder(CYL)</span>
+0005 <span class="comment">%   Draws the cylinder CYL on the current axis.</span>
+0006 <span class="comment">%   CYL is a 1-by-7 row vector in the form [x1 y1 z1 x2 y2 z2 r] where:</span>
+0007 <span class="comment">%   * [x1 y1 z1] are the coordinates of starting point,</span>
+0008 <span class="comment">%   * [x2 y2 z2] are the coordinates of ending point,</span>
+0009 <span class="comment">%   * R is the radius of the cylinder</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   drawCylinder(CYL, N)</span>
+0012 <span class="comment">%   Uses N points for discretizating the circles of the cylinder. Default</span>
+0013 <span class="comment">%   value is 32.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   drawCylinder(..., OPT)</span>
+0016 <span class="comment">%   with OPT = 'open' (default) or 'closed', specify if the bases of the</span>
+0017 <span class="comment">%   cylinder should be drawn.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   drawCylinder(..., 'FaceColor', COLOR)</span>
+0020 <span class="comment">%   Specifies the color of the cylinder. Any couple of parameters name and</span>
+0021 <span class="comment">%   value can be given as argument, and will be transfered to the 'surf'</span>
+0022 <span class="comment">%   matlab function</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   drawCylinder(..., 'FaceAlpha', ALPHA)</span>
+0025 <span class="comment">%   Specifies the transparency of the cylinder and of the optionnal caps.</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   drawCylinder(AX, ...)</span>
+0028 <span class="comment">%   Specifies the axis to draw on. AX should be a valid axis handle.</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">%   H = drawCylinder(...)</span>
+0031 <span class="comment">%   Returns a handle to the patch representing the cylinder.</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">%   Examples:</span>
+0035 <span class="comment">%   % basic example</span>
+0036 <span class="comment">%     figure; drawCylinder([0 0 0 10 20 30 5]);</span>
+0037 <span class="comment">%</span>
+0038 <span class="comment">%   % draw hollow cylinders</span>
+0039 <span class="comment">%     figure; drawCylinder([0 0 0 10 20 30 5], 'open');</span>
+0040 <span class="comment">%</span>
+0041 <span class="comment">%   % change cylinder color</span>
+0042 <span class="comment">%     figure; drawCylinder([0 0 0 10 20 30 5], 'FaceColor', 'r');</span>
+0043 <span class="comment">%</span>
+0044 <span class="comment">%   % change cylinder color using graphical handle</span>
+0045 <span class="comment">%     figure;</span>
+0046 <span class="comment">%     h = drawCylinder([0 0 0 10 20 30 5]);</span>
+0047 <span class="comment">%     set(h, 'facecolor', 'b');</span>
+0048 <span class="comment">%</span>
+0049 <span class="comment">%   % Draw three mutually intersecting cylinders</span>
+0050 <span class="comment">%     p0 = [10 10 10];</span>
+0051 <span class="comment">%     p1 = p0 + 80 * [1 0 0];</span>
+0052 <span class="comment">%     p2 = p0 + 80 * [0 1 0];</span>
+0053 <span class="comment">%     p3 = p0 + 80 * [0 0 1];</span>
+0054 <span class="comment">%     figure; axis equal; axis([0 100 0 100 0 100]); hold on</span>
+0055 <span class="comment">%     drawCylinder([p0 p1 10], 'FaceColor', 'r');</span>
+0056 <span class="comment">%     drawCylinder([p0 p2 10], 'FaceColor', 'g');</span>
+0057 <span class="comment">%     drawCylinder([p0 p3 10], 'FaceColor', 'b');</span>
+0058 <span class="comment">%     axis equal</span>
+0059 <span class="comment">%     set(gcf, 'renderer', 'opengl')</span>
+0060 <span class="comment">%     view([60 30]); light;</span>
+0061 <span class="comment">%</span>
+0062 <span class="comment">%   % draw cube skeleton</span>
+0063 <span class="comment">%     [v, e, f] = createCube;</span>
+0064 <span class="comment">%     figure; axis equal; axis([-0.2 1.2 -0.2 1.2 -0.2 1.2]); hold on; view(3);</span>
+0065 <span class="comment">%     cyls = [v(e(:,1), :) v(e(:,2),:) repmat(0.1, size(e, 1), 1)];</span>
+0066 <span class="comment">%     drawCylinder(cyls);</span>
+0067 <span class="comment">%     light</span>
+0068 <span class="comment">%</span>
+0069 <span class="comment">%   See Also:</span>
+0070 <span class="comment">%     cylinderMesh, drawEllipseCylinder, drawSphere, drawLine3d, surf</span>
+0071 <span class="comment">%     intersectLineCylinder, cylinderSurfaceArea</span>
+0072 <span class="comment">%</span>
+0073 
+0074 <span class="comment">%   ---------</span>
+0075 <span class="comment">%   author : David Legland</span>
+0076 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0077 <span class="comment">%   created the 17/09/2005</span>
+0078 <span class="comment">%</span>
+0079 
+0080 <span class="comment">%   HISTORY</span>
+0081 <span class="comment">%   2006/12/14 bug for coordinate conversion, vectorize transforms</span>
+0082 <span class="comment">%   04/01/2007 better input processing, manage end caps of cylinder</span>
+0083 <span class="comment">%   19/06/2009 use function localToGlobal3d, add docs</span>
+0084 <span class="comment">%   2011-06-29 use sph2cart2d, code cleanup</span>
+0085 <span class="comment">%   2018-01-02 add transparency managements</span>
+0086 
+0087 
+0088 <span class="comment">%% Input argument processing</span>
+0089 
+0090 <span class="comment">% parse axis handle</span>
+0091 <span class="keyword">if</span> isAxisHandle(varargin{1})
+0092     hAx = varargin{1};
+0093     varargin(1) = [];
+0094 <span class="keyword">else</span>
+0095     hAx = gca;
+0096 <span class="keyword">end</span>
+0097 
+0098 <span class="comment">% input argument representing cylinders</span>
+0099 cyl = varargin{1};
+0100 varargin(1) = [];
+0101 
+0102 <span class="comment">% process the case of multiple cylinders</span>
+0103 <span class="keyword">if</span> iscell(cyl)
+0104     hCyls = gobjects(length(cyl), 1);
+0105     <span class="keyword">for</span> i = 1:length(cyl)
+0106         hCyls(i) = <a href="drawCylinder.html" class="code" title="function varargout = drawCylinder(varargin)">drawCylinder</a>(hAx, cyl{i}, varargin{:});
+0107     <span class="keyword">end</span>
+0108     <span class="keyword">if</span> nargout &gt; 0
+0109         varargout{1} = hCyls;
+0110     <span class="keyword">end</span>    
+0111     <span class="keyword">return</span>;
+0112 <span class="keyword">elseif</span> size(cyl, 1) &gt; 1
+0113     hCyls = gobjects(size(cyl, 1), 1);
+0114     <span class="keyword">for</span> i = 1:size(cyl, 1)
+0115         hCyls(i) = <a href="drawCylinder.html" class="code" title="function varargout = drawCylinder(varargin)">drawCylinder</a>(hAx, cyl(i, :), varargin{:});
+0116     <span class="keyword">end</span>
+0117     
+0118     <span class="keyword">if</span> nargout &gt; 0
+0119         varargout{1} = hCyls;
+0120     <span class="keyword">end</span>    
+0121     <span class="keyword">return</span>;
+0122 <span class="keyword">end</span>
+0123 
+0124 <span class="comment">% default values</span>
+0125 N = 32;
+0126 closed = true;
+0127 
+0128 <span class="comment">% check number of discretization steps</span>
+0129 <span class="keyword">if</span> ~isempty(varargin)
+0130     var = varargin{1};
+0131     <span class="keyword">if</span> isnumeric(var)
+0132         N = var;
+0133         varargin = varargin(2:end);
+0134     <span class="keyword">end</span>
+0135 <span class="keyword">end</span>
+0136 
+0137 <span class="comment">% check if cylinder must be closed or open</span>
+0138 <span class="keyword">if</span> ~isempty(varargin)
+0139     var = varargin{1};
+0140     <span class="keyword">if</span> ischar(var)
+0141         <span class="keyword">if</span> strncmpi(var, <span class="string">'open'</span>, 4)
+0142             closed = false;
+0143             varargin = varargin(2:end);
+0144         <span class="keyword">elseif</span> strncmpi(var, <span class="string">'closed'</span>, 5)
+0145             closed = true;
+0146             varargin = varargin(2:end);
+0147         <span class="keyword">end</span>
+0148     <span class="keyword">end</span>
+0149 <span class="keyword">end</span>
+0150 
+0151 faceColor = <span class="string">'g'</span>;
+0152 ind = find(strcmpi(varargin, <span class="string">'FaceColor'</span>), 1, <span class="string">'last'</span>);
+0153 <span class="keyword">if</span> ~isempty(ind)
+0154     faceColor = varargin{ind+1};
+0155     varargin(ind:ind+1) = [];
+0156 <span class="keyword">end</span>
+0157 
+0158 <span class="comment">% extract transparency</span>
+0159 alpha = 1;
+0160 ind = find(strcmpi(varargin, <span class="string">'FaceAlpha'</span>), 1, <span class="string">'last'</span>);
+0161 <span class="keyword">if</span> ~isempty(ind)
+0162     alpha = varargin{ind+1};
+0163     varargin(ind:ind+1) = [];
+0164 <span class="keyword">end</span>
+0165 
+0166 <span class="comment">% add default drawing options</span>
+0167 varargin = [{<span class="string">'FaceColor'</span>, faceColor, <span class="string">'edgeColor'</span>, <span class="string">'none'</span>, <span class="string">'FaceAlpha'</span>, alpha} varargin];
+0168 
+0169 
+0170 <span class="comment">%% Computation of mesh coordinates</span>
+0171 
+0172 <span class="comment">% extreme points of cylinder</span>
+0173 p1 = cyl(1:3);
+0174 p2 = cyl(4:6);
+0175 
+0176 <span class="comment">% radius of cylinder</span>
+0177 r = cyl(7);
+0178 
+0179 <span class="comment">% compute orientation angle of cylinder</span>
+0180 [theta, phi, rho] = <a href="cart2sph2d.html" class="code" title="function varargout = cart2sph2d(x, y, z)">cart2sph2d</a>(p2 - p1);
+0181 dphi = linspace(0, 2*pi, N+1);
+0182 
+0183 <span class="comment">% generate a cylinder oriented upwards</span>
+0184 x = repmat(cos(dphi) * r, [2 1]);
+0185 y = repmat(sin(dphi) * r, [2 1]);
+0186 z = repmat([0 ; rho], [1 length(dphi)]);
+0187 
+0188 <span class="comment">% transform points</span>
+0189 trans   = localToGlobal3d(p1, theta, phi, 0);
+0190 pts     = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>([x(:) y(:) z(:)], trans);
+0191 
+0192 <span class="comment">% reshape transformed points</span>
+0193 x2 = reshape(pts(:,1), size(x));
+0194 y2 = reshape(pts(:,2), size(x));
+0195 z2 = reshape(pts(:,3), size(x));
+0196 
+0197 
+0198 <span class="comment">%% Display cylinder mesh</span>
+0199 
+0200 <span class="comment">% plot the cylinder as a surface</span>
+0201 hCyl(1) = surf(hAx, x2, y2, z2, varargin{:});
+0202 
+0203 <span class="comment">% eventually plot the ends of the cylinder</span>
+0204 <span class="keyword">if</span> closed
+0205     hCyl(2)=patch(hAx, x2(1,:)', y2(1,:)', z2(1,:)', faceColor, <span class="string">'edgeColor'</span>, <span class="string">'none'</span>, <span class="string">'FaceAlpha'</span>, alpha);
+0206     hCyl(3)=patch(hAx, x2(2,:)', y2(2,:)', z2(2,:)', faceColor, <span class="string">'edgeColor'</span>, <span class="string">'none'</span>, <span class="string">'FaceAlpha'</span>, alpha);
+0207     gh = hggroup(hAx);
+0208     set(hCyl,<span class="string">'Parent'</span>,gh)
+0209     hCyl = gh;
+0210 <span class="keyword">end</span>
+0211 
+0212 <span class="comment">% format ouptut</span>
+0213 <span class="keyword">if</span> nargout == 1
+0214     varargout{1} = hCyl;
+0215 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

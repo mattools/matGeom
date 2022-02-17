@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of medianPlane</title>
+  <meta name="keywords" content="medianPlane">
+  <meta name="description" content="MEDIANPLANE Create a plane in the middle of 2 points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; medianPlane.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>medianPlane
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MEDIANPLANE Create a plane in the middle of 2 points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function plane = medianPlane(p1, p2) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MEDIANPLANE Create a plane in the middle of 2 points.
+
+   PLANE = medianPlane(P1, P2)
+   Creates a plane in the middle of 2 points.
+   PLANE is perpendicular to line (P1 P2) and contains the midpoint of P1
+   and P2.
+   The direction of the normal of PLANE is the same as the vector from P1
+   to P2.
+
+   See also:
+   <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>, <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 18/02/2005.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="sphericalVoronoiDomain.html" class="code" title="function poly = sphericalVoronoiDomain(refPoint, neighbors)">sphericalVoronoiDomain</a>	SPHERICALVORONOIDOMAIN Compute a spherical voronoi domain.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function plane = medianPlane(p1, p2)</a>
+0002 <span class="comment">%MEDIANPLANE Create a plane in the middle of 2 points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PLANE = medianPlane(P1, P2)</span>
+0005 <span class="comment">%   Creates a plane in the middle of 2 points.</span>
+0006 <span class="comment">%   PLANE is perpendicular to line (P1 P2) and contains the midpoint of P1</span>
+0007 <span class="comment">%   and P2.</span>
+0008 <span class="comment">%   The direction of the normal of PLANE is the same as the vector from P1</span>
+0009 <span class="comment">%   to P2.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   See also:</span>
+0012 <span class="comment">%   planes3d, createPlane</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   ---------</span>
+0015 <span class="comment">%   author : David Legland</span>
+0016 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0017 <span class="comment">%   created the 18/02/2005.</span>
+0018 <span class="comment">%</span>
+0019 
+0020 <span class="comment">%   HISTORY</span>
+0021 <span class="comment">%   28/06/2007: add doc, and manage multiple inputs</span>
+0022 
+0023 <span class="comment">% unify data dimension</span>
+0024 <span class="keyword">if</span> size(p1, 1)==1
+0025     p1 = repmat(p1, [size(p2, 1) 1]);
+0026 <span class="keyword">elseif</span> size(p2, 1)==1
+0027     p2 = repmat(p2, [size(p1, 1) 1]);
+0028 <span class="keyword">elseif</span> size(p1, 1)~=size(p2, 1)    
+0029     error(<span class="string">'data should have same length, or one data should have length 1'</span>);
+0030 <span class="keyword">end</span>
+0031 
+0032 <span class="comment">% middle point</span>
+0033 p0  = (p1 + p2)/2;
+0034 
+0035 <span class="comment">% normal to plane</span>
+0036 n   = p2-p1;
+0037 
+0038 <span class="comment">% create plane from point and normal</span>
+0039 plane = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(p0, n);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

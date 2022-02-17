@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of cutMeshByPlane</title>
+  <meta name="keywords" content="cutMeshByPlane">
+  <meta name="description" content="CUTMESHBYPLANE Cut a mesh by a plane.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; cutMeshByPlane.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>cutMeshByPlane
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CUTMESHBYPLANE Cut a mesh by a plane.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = cutMeshByPlane(v, f, plane, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CUTMESHBYPLANE Cut a mesh by a plane.
+
+   [ABOVE, IN, BELOW] = cutMeshByPlane(MESH, PLANE)
+   where MESH, ABOVE, IN, BELOW are structs with the fields vertices and
+   faces, and PLANE is given as a row containing initial point and 2
+   direction vectors. ABOVE, IN, BELOW contain the corresponding parts of
+   the input mesh.
+
+   [ABOVE_V, ABOVE_F, IN_V, IN_F, BELOW_V,BELOW_F] = ...
+       cutMeshByPlane(V, F, PLANE) where V is a [NVx3] array containing
+   coordinates and F is a [NFx3] array containing indices of vertices of
+   the triangular faces.
+
+   BELOW = cutMeshByPlane(V, F, PLANE, 'part', 'below') BELOW is a struct
+   with the fields vertices and faces. Other options are:
+       'part'  -   'above': Faces above the plane
+               -   'in'   : Faces in the plane
+               -   'below': Faces below the plane
+
+   [BELOW_V, BELOW_F] = cutMeshByPlane(MESH, PLANE, 'part', 'below') is
+   possible, too.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>	ISBELOWPLANE Test whether a point is below or above a plane.</li><li><a href="../../matGeom/geom3d/isPlane.html" class="code" title="function d = isPlane(plane)">isPlane</a>	ISPLANE Check if input is a plane.</li><li><a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>	REMOVEMESHFACES Remove faces from a mesh by face indices.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = cutMeshByPlane(v, f, plane, varargin)</a>
+0002 <span class="comment">%CUTMESHBYPLANE Cut a mesh by a plane.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [ABOVE, IN, BELOW] = cutMeshByPlane(MESH, PLANE)</span>
+0005 <span class="comment">%   where MESH, ABOVE, IN, BELOW are structs with the fields vertices and</span>
+0006 <span class="comment">%   faces, and PLANE is given as a row containing initial point and 2</span>
+0007 <span class="comment">%   direction vectors. ABOVE, IN, BELOW contain the corresponding parts of</span>
+0008 <span class="comment">%   the input mesh.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   [ABOVE_V, ABOVE_F, IN_V, IN_F, BELOW_V,BELOW_F] = ...</span>
+0011 <span class="comment">%       cutMeshByPlane(V, F, PLANE) where V is a [NVx3] array containing</span>
+0012 <span class="comment">%   coordinates and F is a [NFx3] array containing indices of vertices of</span>
+0013 <span class="comment">%   the triangular faces.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   BELOW = cutMeshByPlane(V, F, PLANE, 'part', 'below') BELOW is a struct</span>
+0016 <span class="comment">%   with the fields vertices and faces. Other options are:</span>
+0017 <span class="comment">%       'part'  -   'above': Faces above the plane</span>
+0018 <span class="comment">%               -   'in'   : Faces in the plane</span>
+0019 <span class="comment">%               -   'below': Faces below the plane</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   [BELOW_V, BELOW_F] = cutMeshByPlane(MESH, PLANE, 'part', 'below') is</span>
+0022 <span class="comment">%   possible, too.</span>
+0023 <span class="comment">%</span>
+0024 
+0025 <span class="comment">% ---------</span>
+0026 <span class="comment">% Authors: oqilipo, David Legland</span>
+0027 <span class="comment">% Created: 2017-07-09</span>
+0028 <span class="comment">% Copyright 2017</span>
+0029 
+0030 narginchk(2,5)
+0031 nargoutchk(1,6)
+0032 
+0033 
+0034 <span class="comment">%% Parse inputs</span>
+0035 <span class="comment">% If first argument is a struct</span>
+0036 <span class="keyword">if</span> nargin == 2 || nargin == 4
+0037     <span class="keyword">if</span> ~isempty(varargin)
+0038         varargin = [{plane}, varargin(:)'];
+0039     <span class="keyword">end</span>
+0040     plane = f;
+0041     [v, f] = parseMeshData(v);
+0042 <span class="keyword">end</span>
+0043 
+0044 p = inputParser;
+0045 addRequired(p,<span class="string">'plane'</span>,@<a href="../../matGeom/geom3d/isPlane.html" class="code" title="function d = isPlane(plane)">isPlane</a>)
+0046 validStrings = {<span class="string">'above'</span>,<span class="string">'in'</span>,<span class="string">'below'</span>};
+0047 addParameter(p,<span class="string">'part'</span>,<span class="string">'above'</span>,@(x) any(validatestring(x, validStrings)))
+0048 parse(p, plane, varargin{:});
+0049 part=p.Results.part;
+0050 
+0051 
+0052 <span class="comment">%% Algorithm</span>
+0053 <span class="comment">% Logical index to the vertices below the plane</span>
+0054 VBPl_LI = <a href="../../matGeom/geom3d/isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>(v, plane);
+0055 
+0056 <span class="comment">% Logical index to three vertices of each face</span>
+0057 FBP_LI = VBPl_LI(f);
+0058 <span class="keyword">switch</span> nargout
+0059     <span class="keyword">case</span> {1, 2}
+0060         <span class="keyword">switch</span> part
+0061             <span class="keyword">case</span> <span class="string">'above'</span>
+0062                 <span class="comment">% Faces above the plane, all three vertices == 0 -&gt; sum has to be 0</span>
+0063                 above = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(v, f, ~(sum(FBP_LI, 2) == 0) );
+0064             <span class="keyword">case</span> <span class="string">'in'</span>
+0065                 <span class="comment">% Faces in the plane, 1 or 2 vertices == 0 -&gt; sum can be 1 or 2</span>
+0066                 inside = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(v, f, ~((sum(FBP_LI, 2) &gt; 0 &amp; sum(FBP_LI, 2) &lt; 3)));
+0067             <span class="keyword">case</span> <span class="string">'below'</span>
+0068                 <span class="comment">% Faces below the plane, all three vertices == 1 -&gt; sum has to be 3</span>
+0069                 below = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(v, f, ~(sum(FBP_LI, 2) == 3) );
+0070         <span class="keyword">end</span>
+0071     <span class="keyword">case</span> {3, 6}
+0072         <span class="comment">% Faces above the plane, all three vertices == 0 -&gt; sum has to be 0</span>
+0073         above = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(v, f, ~(sum(FBP_LI, 2) == 0) );
+0074         <span class="comment">% Faces in the plane, 1 or 2 vertices == 0 -&gt; sum can be 1 or 2</span>
+0075         inside = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(v, f, ~((sum(FBP_LI, 2) &gt; 0 &amp; sum(FBP_LI, 2) &lt; 3)));
+0076         <span class="comment">% Faces below the plane, all three vertices == 1 -&gt; sum has to be 3</span>
+0077         below = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(v, f, ~(sum(FBP_LI, 2) == 3) );
+0078     <span class="keyword">otherwise</span>
+0079         error(<span class="string">'Invalid number of output arguments'</span>)
+0080 <span class="keyword">end</span>
+0081 
+0082 
+0083 <span class="comment">%% Parse outputs</span>
+0084 <span class="keyword">switch</span> nargout
+0085     <span class="keyword">case</span> 1
+0086         <span class="keyword">switch</span> part
+0087             <span class="keyword">case</span> <span class="string">'above'</span>
+0088                 varargout{1}=above;
+0089             <span class="keyword">case</span> <span class="string">'in'</span>
+0090                 varargout{1}=inside;
+0091             <span class="keyword">case</span> <span class="string">'below'</span>
+0092                 varargout{1}=below;
+0093         <span class="keyword">end</span>
+0094     <span class="keyword">case</span> 2
+0095         <span class="keyword">switch</span> part
+0096             <span class="keyword">case</span> <span class="string">'above'</span>
+0097                 varargout{1}=above.vertices;
+0098                 varargout{2}=above.faces;
+0099             <span class="keyword">case</span> <span class="string">'in'</span>
+0100                 varargout{1}=inside.vertices;
+0101                 varargout{2}=inside.faces;
+0102             <span class="keyword">case</span> <span class="string">'below'</span>
+0103                 varargout{1}=below.vertices;
+0104                 varargout{2}=below.faces;
+0105         <span class="keyword">end</span>
+0106     <span class="keyword">case</span> 3
+0107         varargout{1}=above;
+0108         varargout{2}=inside;
+0109         varargout{3}=below;
+0110     <span class="keyword">case</span> 6
+0111         varargout{1}=above.vertices;
+0112         varargout{2}=above.faces;
+0113         varargout{3}=inside.vertices;
+0114         varargout{4}=inside.faces;
+0115         varargout{5}=below.vertices;
+0116         varargout{6}=below.faces;
+0117     <span class="keyword">otherwise</span>
+0118         error(<span class="string">'Invalid number of output arguments'</span>)
+0119 <span class="keyword">end</span>
+0120 
+0121 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

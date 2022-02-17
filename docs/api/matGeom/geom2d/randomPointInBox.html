@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of randomPointInBox</title>
+  <meta name="keywords" content="randomPointInBox">
+  <meta name="description" content="RANDOMPOINTINBOX Generate random point within a box.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; randomPointInBox.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>randomPointInBox
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>RANDOMPOINTINBOX Generate random point within a box.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function points = randomPointInBox(box, N, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">RANDOMPOINTINBOX Generate random point within a box.
+
+   PTS = randomPointInBox(BOX)
+   Generate a random point within the box BOX. The result is a 1-by-2 row
+   vector.
+
+   PTS = randomPointInBox(BOX, N)
+   Generates N points within the box. The result is a N-by-2 array.
+
+   BOX has the format:
+   BOX = [xmin xmax ymin ymax].
+
+   Example
+     % draw points within a box
+     box = [10 80 20 60];
+     pts =  randomPointInBox(box, 500);
+     figure(1); clf; hold on;
+     drawBox(box);
+     drawPoint(pts, '.');
+     axis('equal');
+     axis([0 100 0 100]);
+
+   See also
+     geom2d, <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="boxes2d.html" class="code" title="function boxes2d(varargin)">boxes2d</a>, randomPointInBox3d, randomPointInPolygon</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function points = randomPointInBox(box, N, varargin)</a>
+0002 <span class="comment">%RANDOMPOINTINBOX Generate random point within a box.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PTS = randomPointInBox(BOX)</span>
+0005 <span class="comment">%   Generate a random point within the box BOX. The result is a 1-by-2 row</span>
+0006 <span class="comment">%   vector.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   PTS = randomPointInBox(BOX, N)</span>
+0009 <span class="comment">%   Generates N points within the box. The result is a N-by-2 array.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   BOX has the format:</span>
+0012 <span class="comment">%   BOX = [xmin xmax ymin ymax].</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   Example</span>
+0015 <span class="comment">%     % draw points within a box</span>
+0016 <span class="comment">%     box = [10 80 20 60];</span>
+0017 <span class="comment">%     pts =  randomPointInBox(box, 500);</span>
+0018 <span class="comment">%     figure(1); clf; hold on;</span>
+0019 <span class="comment">%     drawBox(box);</span>
+0020 <span class="comment">%     drawPoint(pts, '.');</span>
+0021 <span class="comment">%     axis('equal');</span>
+0022 <span class="comment">%     axis([0 100 0 100]);</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   See also</span>
+0025 <span class="comment">%     geom2d, points2d, boxes2d, randomPointInBox3d, randomPointInPolygon</span>
+0026 <span class="comment">%</span>
+0027 
+0028 <span class="comment">% ------</span>
+0029 <span class="comment">% Author: David Legland</span>
+0030 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0031 <span class="comment">% Created: 2007-10-10,    using Matlab 7.4.0.287 (R2007a)</span>
+0032 <span class="comment">% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0033 
+0034 <span class="keyword">if</span> nargin &lt; 2
+0035     N = 1;
+0036 <span class="keyword">end</span>
+0037 
+0038 <span class="comment">% extract box bounds</span>
+0039 xmin = box(1);
+0040 xmax = box(2);
+0041 ymin = box(3);
+0042 ymax = box(4);
+0043 
+0044 <span class="comment">% compute size of box</span>
+0045 dx = xmax - xmin;
+0046 dy = ymax - ymin;
+0047 
+0048 <span class="comment">% compute point coordinates</span>
+0049 points = [rand(N, 1)*dx+xmin , rand(N, 1)*dy+ymin];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

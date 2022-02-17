@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of clipPlane</title>
+  <meta name="keywords" content="clipPlane">
+  <meta name="description" content="Compute the 3D polygon representing a clipped plane.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; clipPlane.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>clipPlane
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Compute the 3D polygon representing a clipped plane.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function poly = clipPlane(plane, box) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Compute the 3D polygon representing a clipped plane.
+
+   POLY = clipPlane(PLANE, BOUNDS)
+   Computes the vertices of the 3D polygon that represents the result of
+   the clipping of the plane by the given BOUNDS.
+   PLANE is given as [X0 Y0 Z0  DX1 DY1 DZ1   DX2 DY2 DZ2], 
+   BOUNDS is given as [XMIN XMAX  YMIN YMAX  ZMIN ZMAX].
+   The result POLY is given as N-by-3 numeric array representing the
+   coordinates of the polygon, or an emptyarray if the plane lies totally
+   outside of the bounds.
+
+
+   Example
+     plane = [5 5 5  1 0 0  0 1 0];
+     bounds = [0 10  0 10  0 10];
+     poly = clipPlane(plane, bounds)
+     poly =
+          0     0     5
+         10     0     5
+         10    10     5
+          0    10     5
+
+   See also
+     <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>, <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>, <a href="drawPlane3d.html" class="code" title="function h = drawPlane3d(plane, varargin)">drawPlane3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>	INTERSECTLINEPLANE Intersection point between a 3D line and a plane.</li><li><a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>	Return the position of a 3D point projected on a 3D line.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawPlane3d.html" class="code" title="function h = drawPlane3d(plane, varargin)">drawPlane3d</a>	Draw a plane clipped by the current axes.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function poly = clipPlane(plane, box)</a>
+0002 <span class="comment">% Compute the 3D polygon representing a clipped plane.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POLY = clipPlane(PLANE, BOUNDS)</span>
+0005 <span class="comment">%   Computes the vertices of the 3D polygon that represents the result of</span>
+0006 <span class="comment">%   the clipping of the plane by the given BOUNDS.</span>
+0007 <span class="comment">%   PLANE is given as [X0 Y0 Z0  DX1 DY1 DZ1   DX2 DY2 DZ2],</span>
+0008 <span class="comment">%   BOUNDS is given as [XMIN XMAX  YMIN YMAX  ZMIN ZMAX].</span>
+0009 <span class="comment">%   The result POLY is given as N-by-3 numeric array representing the</span>
+0010 <span class="comment">%   coordinates of the polygon, or an emptyarray if the plane lies totally</span>
+0011 <span class="comment">%   outside of the bounds.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   Example</span>
+0015 <span class="comment">%     plane = [5 5 5  1 0 0  0 1 0];</span>
+0016 <span class="comment">%     bounds = [0 10  0 10  0 10];</span>
+0017 <span class="comment">%     poly = clipPlane(plane, bounds)</span>
+0018 <span class="comment">%     poly =</span>
+0019 <span class="comment">%          0     0     5</span>
+0020 <span class="comment">%         10     0     5</span>
+0021 <span class="comment">%         10    10     5</span>
+0022 <span class="comment">%          0    10     5</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   See also</span>
+0025 <span class="comment">%     planes3d, createPlane, drawPlane3d</span>
+0026 <span class="comment">%</span>
+0027  
+0028 <span class="comment">% ------</span>
+0029 <span class="comment">% Author: David Legland</span>
+0030 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0031 <span class="comment">% INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0032 <span class="comment">% Created: 2021-11-09,    using Matlab 9.10.0.1684407 (R2021a) Update 3</span>
+0033 <span class="comment">% Copyright 2021 INRAE.</span>
+0034 
+0035 <span class="comment">% retrieve min/max coords</span>
+0036 xmin = box(1);
+0037 xmax = box(2);
+0038 ymin = box(1);
+0039 ymax = box(2);
+0040 zmin = box(1);
+0041 zmax = box(2);
+0042 
+0043 <span class="comment">% create lines corresponding to the edges of the bounding box</span>
+0044 lineX00 = [xmin ymin zmin 1 0 0];
+0045 lineX01 = [xmin ymin zmax 1 0 0];
+0046 lineX10 = [xmin ymax zmin 1 0 0];
+0047 lineX11 = [xmin ymax zmax 1 0 0];
+0048 
+0049 lineY00 = [xmin ymin zmin 0 1 0];
+0050 lineY01 = [xmin ymin zmax 0 1 0];
+0051 lineY10 = [xmax ymin zmin 0 1 0];
+0052 lineY11 = [xmax ymin zmax 0 1 0];
+0053 
+0054 lineZ00 = [xmin ymin zmin 0 0 1];
+0055 lineZ01 = [xmin ymax zmin 0 0 1];
+0056 lineZ10 = [xmax ymin zmin 0 0 1];
+0057 lineZ11 = [xmax ymax zmin 0 0 1];
+0058 
+0059 <span class="comment">% compute intersection point with each line</span>
+0060 piX00 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(lineX00, plane);
+0061 piX01 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(lineX01, plane);
+0062 piX10 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(lineX10, plane);
+0063 piX11 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(lineX11, plane);
+0064 piY00 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(lineY00, plane);
+0065 piY01 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(lineY01, plane);
+0066 piY10 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(lineY10, plane);
+0067 piY11 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(lineY11, plane);
+0068 piZ00 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(lineZ00, plane);
+0069 piZ01 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(lineZ01, plane);
+0070 piZ10 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(lineZ10, plane);
+0071 piZ11 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(lineZ11, plane);
+0072 
+0073 <span class="comment">% concatenate points into one array</span>
+0074 points = [<span class="keyword">...</span>
+0075     piX00;piX01;piX10;piX11; <span class="keyword">...</span>
+0076     piY00;piY01;piY10;piY11; <span class="keyword">...</span>
+0077     piZ00;piZ01;piZ10;piZ11;];
+0078 
+0079 <span class="comment">% check validity: keep only points inside window (with tolerance)</span>
+0080 ac = sqrt (eps);
+0081 ivx = points(:,1) &gt;= xmin-ac &amp; points(:,1) &lt;= xmax+ac;
+0082 ivy = points(:,2) &gt;= ymin-ac &amp; points(:,2) &lt;= ymax+ac;
+0083 ivz = points(:,3) &gt;= zmin-ac &amp; points(:,3) &lt;= zmax+ac;
+0084 valid = ivx &amp; ivy &amp; ivz;
+0085 points = unique(points(valid, :), <span class="string">'rows'</span>);
+0086 
+0087 <span class="comment">% If there is no intersection point, escape.</span>
+0088 <span class="keyword">if</span> size(points, 1) &lt; 3
+0089     poly = [];
+0090     <span class="keyword">return</span>;
+0091 <span class="keyword">end</span>
+0092 
+0093 <span class="comment">% the two spanning lines of the plane</span>
+0094 d1 = plane(:, [1:3 4:6]);
+0095 d2 = plane(:, [1:3 7:9]);
+0096 
+0097 <span class="comment">% position of intersection points in plane coordinates</span>
+0098 u1 = <a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>(points, d1);
+0099 u2 = <a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>(points, d2);
+0100 
+0101 <span class="comment">% reorder vertices in the correct order</span>
+0102 inds = convhull(u1, u2);
+0103 inds = inds(1:end-1);
+0104 
+0105 <span class="comment">% return the set of points that compose the polygon</span>
+0106 poly = points(inds, :);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

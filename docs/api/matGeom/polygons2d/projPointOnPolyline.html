@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of projPointOnPolyline</title>
+  <meta name="keywords" content="projPointOnPolyline">
+  <meta name="description" content="PROJPOINTONPOLYLINE Compute position of a point projected on a polyline.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; projPointOnPolyline.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>projPointOnPolyline
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>PROJPOINTONPOLYLINE Compute position of a point projected on a polyline.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = projPointOnPolyline(point, poly, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">PROJPOINTONPOLYLINE Compute position of a point projected on a polyline.
+
+   POS = projPointOnPolyline(POINT, POLYLINE)
+   Compute the position of the orthogonal projection of a point on a
+   polyline.
+   POINT is a 1-by-2 row vector containing point coordinates
+   POLYLINE is a N-by-2 array containing coordinates of polyline vertices
+   POS is the position of the point on the polyline, between 0 and the
+   number of vertices of the polyline. POS can be a non-integer value, in
+   this case, the integer part corresponds to the polyline edge index
+   (between 0 and Nv-1), and the floating-point part corresponds to the
+   relative position on i-th edge (between 0 and 1, 0: edge start, 1: edge
+   end).
+
+   When POINT is an array of points, returns a column vector with as many
+   rows as the number of points.
+
+   POS = projPointOnPolyline(POINT, POLYLINE, CLOSED)
+   Specifies if the polyline is closed or not. CLOSED can be one of:
+     'closed' -&gt; the polyline is closed
+     'open' -&gt; the polyline is open
+     a column vector of logical with the same number of elements as the
+       number of points -&gt; specify individually if each polyline is
+       closed (true=closed).
+
+   [POS, DIST] = projPointOnPolyline(...)
+   Also returns the distance between POINT and POLYLINE.
+
+   Example
+     poly = [10 10; 20 10;20 20;10 20];
+     projPointOnPolyline([15 0], poly)
+     ans =
+         0.5000
+     projPointOnPolyline([0 16], poly)
+     ans =
+         3.0000
+
+   See also
+   points2d, polygons2d, <a href="polylinePoint.html" class="code" title="function point = polylinePoint(poly, pos)">polylinePoint</a>, <a href="projPointOnPolygon.html" class="code" title="function varargout = projPointOnPolygon(point, poly, varargin)">projPointOnPolygon</a>
+   <a href="distancePointPolyline.html" class="code" title="function [minDist, pos] = distancePointPolyline(point, poly, varargin)">distancePointPolyline</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/distancePointEdge.html" class="code" title="function [dist, pos] = distancePointEdge(point, edge)">distancePointEdge</a>	DISTANCEPOINTEDGE Minimum distance between a point and an edge.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="projPointOnPolygon.html" class="code" title="function varargout = projPointOnPolygon(point, poly, varargin)">projPointOnPolygon</a>	PROJPOINTONPOLYGON  Compute position of a point projected on a polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = projPointOnPolyline(point, poly, varargin)</a>
+0002 <span class="comment">%PROJPOINTONPOLYLINE Compute position of a point projected on a polyline.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POS = projPointOnPolyline(POINT, POLYLINE)</span>
+0005 <span class="comment">%   Compute the position of the orthogonal projection of a point on a</span>
+0006 <span class="comment">%   polyline.</span>
+0007 <span class="comment">%   POINT is a 1-by-2 row vector containing point coordinates</span>
+0008 <span class="comment">%   POLYLINE is a N-by-2 array containing coordinates of polyline vertices</span>
+0009 <span class="comment">%   POS is the position of the point on the polyline, between 0 and the</span>
+0010 <span class="comment">%   number of vertices of the polyline. POS can be a non-integer value, in</span>
+0011 <span class="comment">%   this case, the integer part corresponds to the polyline edge index</span>
+0012 <span class="comment">%   (between 0 and Nv-1), and the floating-point part corresponds to the</span>
+0013 <span class="comment">%   relative position on i-th edge (between 0 and 1, 0: edge start, 1: edge</span>
+0014 <span class="comment">%   end).</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   When POINT is an array of points, returns a column vector with as many</span>
+0017 <span class="comment">%   rows as the number of points.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   POS = projPointOnPolyline(POINT, POLYLINE, CLOSED)</span>
+0020 <span class="comment">%   Specifies if the polyline is closed or not. CLOSED can be one of:</span>
+0021 <span class="comment">%     'closed' -&gt; the polyline is closed</span>
+0022 <span class="comment">%     'open' -&gt; the polyline is open</span>
+0023 <span class="comment">%     a column vector of logical with the same number of elements as the</span>
+0024 <span class="comment">%       number of points -&gt; specify individually if each polyline is</span>
+0025 <span class="comment">%       closed (true=closed).</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   [POS, DIST] = projPointOnPolyline(...)</span>
+0028 <span class="comment">%   Also returns the distance between POINT and POLYLINE.</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">%   Example</span>
+0031 <span class="comment">%     poly = [10 10; 20 10;20 20;10 20];</span>
+0032 <span class="comment">%     projPointOnPolyline([15 0], poly)</span>
+0033 <span class="comment">%     ans =</span>
+0034 <span class="comment">%         0.5000</span>
+0035 <span class="comment">%     projPointOnPolyline([0 16], poly)</span>
+0036 <span class="comment">%     ans =</span>
+0037 <span class="comment">%         3.0000</span>
+0038 <span class="comment">%</span>
+0039 <span class="comment">%   See also</span>
+0040 <span class="comment">%   points2d, polygons2d, polylinePoint, projPointOnPolygon</span>
+0041 <span class="comment">%   distancePointPolyline</span>
+0042 <span class="comment">%</span>
+0043 
+0044 <span class="comment">% ------</span>
+0045 <span class="comment">% Author: David Legland</span>
+0046 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0047 <span class="comment">% Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)</span>
+0048 <span class="comment">% Copyright 2009 INRA - Cepia Software Platform.</span>
+0049 
+0050 <span class="comment">% check if input polyline is closed or not</span>
+0051 closed = false;
+0052 <span class="keyword">if</span> ~isempty(varargin)
+0053     var = varargin{1};
+0054     <span class="keyword">if</span> strcmp(<span class="string">'closed'</span>, var)
+0055         closed = true;
+0056     <span class="keyword">elseif</span> strcmp(<span class="string">'open'</span>, var)
+0057         closed = false;
+0058     <span class="keyword">elseif</span> islogical(var)
+0059         closed = var;
+0060     <span class="keyword">end</span>
+0061 <span class="keyword">end</span>
+0062 
+0063 <span class="comment">% closes the polyline if necessary</span>
+0064 <span class="keyword">if</span> closed
+0065     poly = [poly ; poly(1,:)];
+0066 <span class="keyword">end</span>
+0067 
+0068 <span class="comment">% number of points</span>
+0069 Np = size(point, 1);
+0070 
+0071 <span class="comment">% allocate memory results</span>
+0072 pos     = zeros(Np, 1);
+0073 minDist = inf*ones(Np, 1);
+0074 
+0075 <span class="comment">% iterate on points</span>
+0076 <span class="keyword">for</span> p = 1:Np
+0077     <span class="comment">% build set of edges</span>
+0078     edges = [poly(1:end-1, :) poly(2:<span class="keyword">end</span>, :)];
+0079     
+0080     <span class="comment">% compute distance between current point and all edges</span>
+0081     [dist, edgePos] = <a href="../../matGeom/geom2d/distancePointEdge.html" class="code" title="function [dist, pos] = distancePointEdge(point, edge)">distancePointEdge</a>(point(p, :), edges);
+0082     
+0083     <span class="comment">% update distance and position if necessary</span>
+0084     [minDist(p), edgeIndex] = min(dist);
+0085     pos(p) = edgeIndex - 1 + edgePos(edgeIndex);   
+0086 <span class="keyword">end</span>
+0087 
+0088 <span class="comment">% process output arguments</span>
+0089 <span class="keyword">if</span> nargout &lt;= 1
+0090     varargout{1} = pos;
+0091 <span class="keyword">elseif</span> nargout == 2
+0092     varargout{1} = pos;
+0093     varargout{2} = minDist;
+0094 <span class="keyword">end</span>
+0095</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

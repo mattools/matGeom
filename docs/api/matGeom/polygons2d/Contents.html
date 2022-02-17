@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of Contents</title>
+  <meta name="keywords" content="Contents">
+  <meta name="description" content="POLYGONS Manipulation of planar polygons and polylines">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; Contents.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>Contents
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYGONS Manipulation of planar polygons and polylines</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>This is a script file. </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> POLYGONS Manipulation of planar polygons and polylines
+ Version 1.24 07-Jun-2018 .
+
+   The 'polygons' module contains functions operating on shapes composed
+   of a vertex list, like polygons or polylines.
+
+   We call 'polyline' the curve defined by a series of vertices.
+   A polyline can be either closed or open, depending on whether the last
+   vertex is connected to the first one or not. This can be given as an
+   option is some functions in the module.
+   A 'polygon' is the planar domain delimited by a closed polyline. We
+   sometimes want to consider 'complex polygons', whose boundary is
+   composed of several disjoint domains. The domain defined by a single
+   closed polyline is called 'simple polygon'.
+   We call 'curve' a polyline with many vertices, such that the polyline
+   can be considered as a discrete approximation of a &quot;real&quot; curve.
+
+   A simple polygon or polyline is represented by a N-by-2 array, each row
+   of the array representing the coordinates of a vertex. 
+   Simple polygons are assumed to be closed, so there is no need to repeat
+   the first vertex at the end. 
+   As both polygons and polylines can be represented by a list of vertex
+   coordinates, some functions also consider the vertex list itself. Such
+   functions are prefixed by 'pointSet'. Also, many functions prefixed by
+   'polygon' or 'polyline' works also on the other type of shape.
+
+   For multiple-connected polygons, the different connected boundaries are
+   separated by a row [NaN NaN].
+
+   For some functions, the orientation of the polygon can be relevant: CCW
+   stands for 'Conter-Clockwise' (positive orientation), CW stands for
+   'Clockwise'.
+
+   Polylines are parametrized in the following way:
+   * the i-th vertex is located at position i-1
+   * points of the i-th edge have positions ranging linearly from i-1 to i
+   The parametrization domain for an open polyline is from 0 to Nv-1, and
+   from 0 to Nv for a closed polyline (positions 0 and Nv correspond to
+   the same point).
+
+   Example:
+   % Simple polygon:
+   P1 = [1 1;2 1;2 2;1 2];
+   drawPolygon(P1);
+   axis([0 5 0 5]);
+   % Multiple polygon:
+   P2 = [10 10;40 10;40 40;10 40;NaN NaN;20 20;20 30;30 30;30 20];
+   figure;drawPolygon(P2); axis([0 50 0 50]);
+
+
+ Polylines
+   polylinePoint             - Extract a point from a polyline.
+   polylineLength            - Return length of a polyline given as a list of points.
+   polylineCentroid          - Computes the centroid of a curve defined by a series of points.
+   polylineSubcurve          - Extract a portion of a polyline.
+   resamplePolyline          - Distribute N points equally spaced on a polyline.
+   resamplePolylineByLength  - Resample a polyline with a fixed sampling step.
+   reversePolyline           - Reverse a polyline, by iterating vertices from the end.
+   isPointOnPolyline         - Test if a point belongs to a polyline.
+   projPointOnPolyline       - Compute position of a point projected on a polyline.
+   distancePointPolyline     - Compute shortest distance between a point and a polyline.
+   distancePolylines         - Compute the shortest distance between 2 polylines.
+   intersectLinePolyline     - Intersection points between a line and a polyline.
+   intersectPolylines        - Find the common points between 2 polylines.
+   clipPolyline              - Clip an open polyline with a rectangular box.
+   polylineSelfIntersections - Find self-intersection points of a polyline.
+   simplifyPolyline          - Douglas-Peucker simplification of a polyline.
+   smoothPolyline            - Smooth a polyline using local averaging.
+   removeMultipleVertices    - Remove multiple vertices of a polygon or polyline.
+
+ Polygon basic manipulation
+   reversePolygon            - Reverse a polygon, by iterating vertices from the end.
+   smoothPolygon             - Smooth a polygon using local averaging.
+   simplifyPolygon           - Douglas-Peucker simplification of a polygon.
+   projPointOnPolygon        - Compute position of a point projected on a polygon.
+   splitPolygons             - Convert a NaN separated polygon list to a cell array of polygons.
+   polygonLoops              - Divide a possibly self-intersecting polygon into a set of simple loops.
+   polygonPoint              - Extract a point from a polygon.
+   polygonSubcurve           - Extract a portion of a polygon.
+   polygonEdges              - Return the edges of a simple or multiple polygon.
+   polygonVertices           - Extract all vertices of a (multi-)polygon.
+
+ Polygon clipping and intersections
+   intersectLinePolygon      - Intersection points between a line and a polygon.
+   intersectRayPolygon       - Intersection points between a ray and a polygon.
+   intersectEdgePolygon      - Intersection point of an edge with a polygon.
+   polygonSelfIntersections  - Find self-intersection points of a polygon.
+   clipPolygon               - Clip a polygon with a rectangular box.
+   clipPolygonHP             - Clip a polygon with a Half-plane defined by a directed line.
+
+ Point Sets
+   pointSetsAverage          - Compute the average of several point sets.
+   minimumCaliperDiameter    - Minimum caliper diameter of a set of points.
+   findPoint                 - Find index of a point in an set from its coordinates.
+   convexHull                - Convex hull of a set of points.
+   randomPointInPolygon      - Generate random point(s) in a polygon.
+
+ Measures on Polygons
+   isPointInPolygon          - Test if a point is located inside a polygon.
+   polygonContains           - Test if a point is contained in a multiply connected polygon.
+   polygonCentroid           - Computes the centroid (center of mass) of a polygon.
+   polygonArea               - Compute the signed area of a polygon.
+   polygonEquivalentEllipse  - Compute equivalent ellipse with same second order moments as polygon.
+   polygonSecondAreaMoments  - Compute second-order area moments of a polygon.
+   polygonLength             - Perimeter of a polygon.
+   polygonNormalAngle        - Normal angle at each vertex of a polygon.
+   polygonBounds             - Computes the bounding box of a polygon.
+   polygonOuterNormal        - Outer normal vector for a given vertex(ices).
+   distancePointPolygon      - Shortest distance between a point and a polygon.
+   distancePolygons          - Compute the shortest distance between 2 polygons.
+   distancePolygonsNoCross   - Compute the shortest distance between 2 polygons.
+   polygonSignature          - Polar signature of a polygon (polar distance to origin).
+   signatureToPolygon        - Reconstruct a polygon from its polar signature.
+   polygonCurvature          - Estimate curvature on polygon vertices using polynomial fit.
+
+ More complex operations on polygons
+   resamplePolygon           - Distribute N points equally spaced on a polygon.
+   resamplePolygonByLength   - Resample a polygon with a fixed sampling step.
+   densifyPolygon            - Add several points on each edge of the polygon.
+   expandPolygon             - Expand a polygon by a given (signed) distance.
+   triangulatePolygon        - Computes a triangulation of the input polygon.
+   polygonSymmetryAxis       - Try to identify symmetry axis of polygon.
+   polygonSkeleton           - Skeletonization of a polygon with a dense distribution of vertices.
+   medialAxisConvex          - Compute medial axis of a convex polygon.
+
+ Curves (polylines with lot of vertices)
+   parametrize               - Parametrization of a polyline, based on edges lengths.
+   curvature                 - Estimate curvature of a polyline defined by points.
+   cart2geod                 - Convert cartesian coordinates to geodesic coord.
+   geod2cart                 - Convert geodesic coordinates to cartesian coord.
+   curveMoment               - Compute inertia moment of a 2D curve.
+   curveCMoment              - Compute centered inertia moment of a 2D curve.
+   curveCSMoment             - Compute centered scaled moment of a 2D curve.
+
+ Functions from stochastic geometry
+   steinerPoint              - Compute steiner point (weighted centroid) of a polygon.
+   steinerPolygon            - Create a Steiner polygon from a set of vectors.
+   supportFunction           - Compute support function of a polygon.
+   convexification           - Compute the convexification of a polygon.
+
+ Input, Output and conversions
+   polygonToRow              - Convert polygon coordinates to a row vector.
+   rowToPolygon              - Create a polygon from a row vector.
+   contourMatrixToPolylines  - Converts a contour matrix array into a polyline set.
+   readPolygonSet            - Read a set of simple polygons stored in a file.
+   writePolygonSet           - Write a set of simple polygons into a file.
+
+ Drawing functions
+   drawPolyline              - Draw a polyline specified by a list of points.
+   drawPolygon               - Draw a polygon specified by a list of points.
+   fillPolygon               - Fill a polygon specified by a list of points.
+   drawVertices              - Draw the vertices of a polygon or polyline.
+
+
+   Credits:
+   * function intersectPolylines uses the 'interX' contribution from &quot;NS&quot;
+       (file exchange 22441, called 'curve-intersections')
+
+ -----
+ Author: David Legland
+ e-mail: david.legland@inrae.fr
+ created the  07/11/2005.
+ Project homepage: http://github.com/mattools/matGeom
+ Copyright INRAE</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

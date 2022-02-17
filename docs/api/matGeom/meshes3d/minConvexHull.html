@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of minConvexHull</title>
+  <meta name="keywords" content="minConvexHull">
+  <meta name="description" content="MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; minConvexHull.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>minConvexHull
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function newFaces = minConvexHull(points, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.
+
+   FACES = minConvexHull(PTS)
+   NODES is a set of 3D points  (as a Nx3 array). The function computes
+   the convex hull, and merge contiguous coplanar faces. The result is a
+   set of polygonal faces, such that there are no coplanar faces.
+   FACES is a cell array, each cell containing the vector of indices of
+   nodes given in NODES for the corresponding face.
+
+   FACES = minConvexHull(PTS, PRECISION)
+   Adjust the threshold for deciding if two faces are coplanar or
+   parallel. Default value is 1e-14.
+
+   Example
+     % extract square faces from a cube
+     [n, e, f] = createCube;
+     f2 = minConvexHull(n);
+     drawMesh(n, f2);
+
+     % Subdivides and smooths a mesh rpresenting a cube
+     [n, e, f] = createCube;
+     [n2, f2] = subdivideMesh(n, triangulateFaces(f), 4);
+     [n3, f3] = smoothMesh(n2, f2);
+     figure; drawMesh(n3, f3);
+     axis equal; view(3);
+     % merge coplanar faces, making apparent the faces of the original cube
+     f4 = minConvexHull(n3);
+     figure; drawMesh(n3, f4);
+     axis equal; view(3);
+
+
+   See also
+   meshes3d, <a href="mergeCoplanarFaces.html" class="code" title="function varargout = mergeCoplanarFaces(nodes, varargin)">mergeCoplanarFaces</a>, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a>, convhull, convhulln</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>	CENTROID Compute centroid (center of mass) of a set of points.</li><li><a href="../../matGeom/geom3d/angleSort3d.html" class="code" title="function varargout = angleSort3d(pts, varargin)">angleSort3d</a>	ANGLESORT3D Sort 3D coplanar points according to their angles in plane.</li><li><a href="../../matGeom/geom3d/createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="../../matGeom/geom3d/isCoplanar.html" class="code" title="function copl = isCoplanar(x,y,z,tol)">isCoplanar</a>	ISCOPLANAR Tests input points for coplanarity in 3-space.</li><li><a href="../../matGeom/geom3d/planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>	PLANENORMAL Compute the normal to a plane.</li><li><a href="../../matGeom/geom3d/vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>	VECTORNORM3D Norm of a 3D vector or of set of 3D vectors.</li><li><a href="meshFaceCentroids.html" class="code" title="function centroids = meshFaceCentroids(varargin)">meshFaceCentroids</a>	MESHFACECENTROIDS Compute centroids of faces in a mesh.</li><li><a href="meshFaceNormals.html" class="code" title="function normals = meshFaceNormals(varargin)">meshFaceNormals</a>	MESHFACENORMALS Compute normal vector of faces in a 3D mesh.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createSoccerBall.html" class="code" title="function varargout = createSoccerBall()">createSoccerBall</a>	CREATESOCCERBALL Create a 3D mesh representing a soccer ball.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function newFaces = minConvexHull(points, varargin)</a>
+0002 <span class="comment">%MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   FACES = minConvexHull(PTS)</span>
+0005 <span class="comment">%   NODES is a set of 3D points  (as a Nx3 array). The function computes</span>
+0006 <span class="comment">%   the convex hull, and merge contiguous coplanar faces. The result is a</span>
+0007 <span class="comment">%   set of polygonal faces, such that there are no coplanar faces.</span>
+0008 <span class="comment">%   FACES is a cell array, each cell containing the vector of indices of</span>
+0009 <span class="comment">%   nodes given in NODES for the corresponding face.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   FACES = minConvexHull(PTS, PRECISION)</span>
+0012 <span class="comment">%   Adjust the threshold for deciding if two faces are coplanar or</span>
+0013 <span class="comment">%   parallel. Default value is 1e-14.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   Example</span>
+0016 <span class="comment">%     % extract square faces from a cube</span>
+0017 <span class="comment">%     [n, e, f] = createCube;</span>
+0018 <span class="comment">%     f2 = minConvexHull(n);</span>
+0019 <span class="comment">%     drawMesh(n, f2);</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%     % Subdivides and smooths a mesh rpresenting a cube</span>
+0022 <span class="comment">%     [n, e, f] = createCube;</span>
+0023 <span class="comment">%     [n2, f2] = subdivideMesh(n, triangulateFaces(f), 4);</span>
+0024 <span class="comment">%     [n3, f3] = smoothMesh(n2, f2);</span>
+0025 <span class="comment">%     figure; drawMesh(n3, f3);</span>
+0026 <span class="comment">%     axis equal; view(3);</span>
+0027 <span class="comment">%     % merge coplanar faces, making apparent the faces of the original cube</span>
+0028 <span class="comment">%     f4 = minConvexHull(n3);</span>
+0029 <span class="comment">%     figure; drawMesh(n3, f4);</span>
+0030 <span class="comment">%     axis equal; view(3);</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">%   See also</span>
+0034 <span class="comment">%   meshes3d, mergeCoplanarFaces, drawMesh, convhull, convhulln</span>
+0035 <span class="comment">%</span>
+0036 
+0037 
+0038 <span class="comment">% ------</span>
+0039 <span class="comment">% Author: David Legland</span>
+0040 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0041 <span class="comment">% Created: 2006-07-05</span>
+0042 <span class="comment">% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0043 
+0044 <span class="comment">% HISTORY</span>
+0045 <span class="comment">%   20/07/2006 add tolerance for coplanarity test</span>
+0046 <span class="comment">%   21/08/2006 fix small bug due to difference of methods to test</span>
+0047 <span class="comment">%       coplanarity, sometimes resulting in 3 points of a face being not</span>
+0048 <span class="comment">%       coplanar! Also add control on precision</span>
+0049 <span class="comment">%   18/09/2007 ensure faces are given as horizontal vectors</span>
+0050 
+0051 <span class="comment">% set up precision</span>
+0052 acc = 1e-14;
+0053 <span class="keyword">if</span> ~isempty(varargin)
+0054     acc = varargin{1};
+0055 <span class="keyword">end</span>
+0056 
+0057 <span class="comment">% triangulated convex hull. It is not uniquely defined.</span>
+0058 faces = convhulln(points);
+0059 
+0060 <span class="comment">% compute centroid of the nodes</span>
+0061 pointsCentroid = <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>(points);
+0062 
+0063 <span class="comment">% number of base triangular faces</span>
+0064 N = size(faces, 1);
+0065 
+0066 <span class="comment">% compute normals of given faces</span>
+0067 normals = <a href="../../matGeom/geom3d/planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>(<a href="../../matGeom/geom3d/createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(<span class="keyword">...</span>
+0068     points(faces(:,1),:), points(faces(:,2),:), points(faces(:,3),:)));
+0069 
+0070 <span class="comment">% initialize empty faces</span>
+0071 newFaces = {};
+0072 
+0073 
+0074 <span class="comment">% Processing flag for each triangle</span>
+0075 <span class="comment">% 1 : triangle to process, 0 : already processed</span>
+0076 <span class="comment">% in the beginning, every triangle face need to be processed</span>
+0077 flag = ones(N, 1);
+0078 
+0079 <span class="comment">% iterate on each triangular face of the convex hull</span>
+0080 <span class="keyword">for</span> iFace = 1:N
+0081     
+0082     <span class="comment">% check if face was already performed</span>
+0083     <span class="keyword">if</span> ~flag(iFace)
+0084         <span class="keyword">continue</span>;
+0085     <span class="keyword">end</span>
+0086 
+0087     <span class="comment">% indices of faces with same normal</span>
+0088     ind = find(abs(<a href="../../matGeom/geom3d/vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(cross(repmat(normals(iFace, :), [N 1]), normals)))&lt;acc);
+0089     ind = ind(ind~=iFace);
+0090     
+0091     <span class="comment">% keep only coplanar faces (test coplanarity of points in both face)</span>
+0092     ind2 = iFace;
+0093     <span class="keyword">for</span> j = 1:length(ind)
+0094         <span class="keyword">if</span> <a href="../../matGeom/geom3d/isCoplanar.html" class="code" title="function copl = isCoplanar(x,y,z,tol)">isCoplanar</a>(points([faces(iFace,:) faces(ind(j),:)], :), acc)
+0095             ind2 = [ind2 ind(j)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0096         <span class="keyword">end</span>
+0097     <span class="keyword">end</span>
+0098     
+0099     
+0100     <span class="comment">% compute order of the vertices in current face</span>
+0101     faceVertices = unique(faces(ind2, :));
+0102     [tmp, I]  = <a href="../../matGeom/geom3d/angleSort3d.html" class="code" title="function varargout = angleSort3d(pts, varargin)">angleSort3d</a>(points(faceVertices, :)); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0103     
+0104     <span class="comment">% create the new face, ensuring it is a row vector</span>
+0105     face = faceVertices(I);
+0106     face = face(:)';
+0107     
+0108     <span class="comment">% ensure face has normal pointing outwards</span>
+0109     outerNormal = <a href="meshFaceCentroids.html" class="code" title="function centroids = meshFaceCentroids(varargin)">meshFaceCentroids</a>(points, face) - pointsCentroid;
+0110     <span class="keyword">if</span> dot(<a href="meshFaceNormals.html" class="code" title="function normals = meshFaceNormals(varargin)">meshFaceNormals</a>(points, face), outerNormal, 2) &lt; 0
+0111         face = face([1 end:-1:2]);
+0112     <span class="keyword">end</span>
+0113     
+0114     <span class="comment">% add a new face to the list</span>
+0115     newFaces = [newFaces {face}]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0116     
+0117     <span class="comment">% mark processed faces</span>
+0118     flag(ind2) = 0;
+0119 <span class="keyword">end</span>
+0120</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

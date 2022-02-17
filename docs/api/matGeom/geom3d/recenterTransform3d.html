@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of recenterTransform3d</title>
+  <meta name="keywords" content="recenterTransform3d">
+  <meta name="description" content="RECENTERTRANSFORM3D Change the fixed point of an affine 3D transform.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; recenterTransform3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>recenterTransform3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>RECENTERTRANSFORM3D Change the fixed point of an affine 3D transform.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function res = recenterTransform3d(transfo, center) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">RECENTERTRANSFORM3D Change the fixed point of an affine 3D transform.
+
+   TRANSFO2 = recenterTransform3d(TRANSFO, CENTER)
+   where TRANSFO is a 4x4 transformation matrix, and CENTER is a 1x3 row
+   vector, computes the new transformations that uses the same linear part
+   (defined by the upper-left 3x3 corner of the transformation matrix) as
+   the initial transform, and that will leave the point CENTER unchanged.
+
+   
+
+   Example
+   % creating a re-centered rotation using:   
+   rot1 = createRotationOx(pi/3);
+   rot2 = recenterTransform3d(rot1, [3 4 5]);
+   % will give the same result as:
+   rot3 = createRotationOx([3 4 5], pi/3);
+   
+
+   See also
+   <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>, <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>, <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>
+   <a href="createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2010-07-27,    using Matlab 7.9.0.529 (R2009b)
+ Copyright 2010 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>	CREATETRANSLATION3D Create the 4x4 matrix of a 3D translation.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createRotation3dLineAngle.html" class="code" title="function mat = createRotation3dLineAngle(line, theta)">createRotation3dLineAngle</a>	CREATEROTATION3DLINEANGLE Create rotation around a line by an angle theta.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function res = recenterTransform3d(transfo, center)</a>
+0002 <span class="comment">%RECENTERTRANSFORM3D Change the fixed point of an affine 3D transform.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   TRANSFO2 = recenterTransform3d(TRANSFO, CENTER)</span>
+0005 <span class="comment">%   where TRANSFO is a 4x4 transformation matrix, and CENTER is a 1x3 row</span>
+0006 <span class="comment">%   vector, computes the new transformations that uses the same linear part</span>
+0007 <span class="comment">%   (defined by the upper-left 3x3 corner of the transformation matrix) as</span>
+0008 <span class="comment">%   the initial transform, and that will leave the point CENTER unchanged.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%   % creating a re-centered rotation using:</span>
+0014 <span class="comment">%   rot1 = createRotationOx(pi/3);</span>
+0015 <span class="comment">%   rot2 = recenterTransform3d(rot1, [3 4 5]);</span>
+0016 <span class="comment">%   % will give the same result as:</span>
+0017 <span class="comment">%   rot3 = createRotationOx([3 4 5], pi/3);</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   See also</span>
+0021 <span class="comment">%   transforms3d, createRotationOx, createRotationOy, createRotationOz</span>
+0022 <span class="comment">%   createTranslation3d</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">% ------</span>
+0025 <span class="comment">% Author: David Legland</span>
+0026 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0027 <span class="comment">% Created: 2010-07-27,    using Matlab 7.9.0.529 (R2009b)</span>
+0028 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0029 
+0030 <span class="comment">% remove former translation part</span>
+0031 res = eye(4);
+0032 res(1:3, 1:3) = transfo(1:3, 1:3);
+0033 
+0034 <span class="comment">% create translations</span>
+0035 t1 = <a href="createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>(-center);
+0036 t2 = <a href="createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>(center);
+0037 
+0038 <span class="comment">% compute translated transform</span>
+0039 res = t2*res*t1;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

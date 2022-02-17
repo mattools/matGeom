@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of clipLine3d</title>
+  <meta name="keywords" content="clipLine3d">
+  <meta name="description" content="CLIPLINE3D Clip a line with a box and return an edge.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; clipLine3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>clipLine3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CLIPLINE3D Clip a line with a box and return an edge.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function edge = clipLine3d(line, box) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CLIPLINE3D Clip a line with a box and return an edge.
+
+   EDGE = clipLine3d(LINE, BOX);
+   Clips the line LINE with the bounds given in BOX, and returns the
+   corresponding edge. 
+
+   If the line lies totally outside of the box, returns a 1-by-6 row array
+   containing only NaN's.
+
+   If LINE is a N-by-6 array, with one line by row, returns the clipped
+   edge coresponding to each line in a N-by-6 array.
+
+   See also:
+   <a href="lines3d.html" class="code" title="function lines3d(varargin)">lines3d</a>, <a href="edges3d.html" class="code" title="function edges3d(varargin)">edges3d</a>, <a href="createLine3d.html" class="code" title="function line = createLine3d(varargin)">createLine3d</a>, <a href="clipRay3d.html" class="code" title="function edge = clipRay3d(ray, box)">clipRay3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>	INTERSECTLINEPLANE Intersection point between a 3D line and a plane.</li><li><a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>	Return the position of a 3D point projected on a 3D line.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="clipEdge3d.html" class="code" title="function clipped = clipEdge3d(edge, box)">clipEdge3d</a>	CLIPEDGE3D Clip a 3D edge with a cuboid box.</li><li><a href="drawLine3d.html" class="code" title="function h = drawLine3d(lin, varargin)">drawLine3d</a>	DRAWLINE3D Draw a 3D line clipped by the current axes.</li><li><a href="drawRay3d.html" class="code" title="function h = drawRay3d(ray, varargin)">drawRay3d</a>	Draw a 3D ray on the current axis.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function edge = clipLine3d(line, box)</a>
+0002 <span class="comment">%CLIPLINE3D Clip a line with a box and return an edge.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   EDGE = clipLine3d(LINE, BOX);</span>
+0005 <span class="comment">%   Clips the line LINE with the bounds given in BOX, and returns the</span>
+0006 <span class="comment">%   corresponding edge.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   If the line lies totally outside of the box, returns a 1-by-6 row array</span>
+0009 <span class="comment">%   containing only NaN's.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   If LINE is a N-by-6 array, with one line by row, returns the clipped</span>
+0012 <span class="comment">%   edge coresponding to each line in a N-by-6 array.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   See also:</span>
+0015 <span class="comment">%   lines3d, edges3d, createLine3d, clipRay3d</span>
+0016 <span class="comment">%</span>
+0017 
+0018 <span class="comment">% ---------</span>
+0019 <span class="comment">% author : David Legland</span>
+0020 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0021 <span class="comment">% INRA - TPV URPOI - BIA IMASTE</span>
+0022 <span class="comment">% created the 30/10/2008 from drawLine3d</span>
+0023 
+0024 <span class="comment">%   HISTORY</span>
+0025 <span class="comment">%   30/10/2008 replace intersectPlaneLine by intersectLinePlane</span>
+0026 <span class="comment">%   25/11/2008 improve test for bounds, and use more explicit code</span>
+0027 <span class="comment">%   22/06/2009 fig bug, add support for several lines</span>
+0028 <span class="comment">%   16/11/2010 use middle point for checking edge bounds</span>
+0029 
+0030 <span class="comment">% get box limits</span>
+0031 xmin = box(1); xmax = box(2);
+0032 ymin = box(3); ymax = box(4);
+0033 zmin = box(5); zmax = box(6);
+0034 
+0035 <span class="comment">% extreme corners of the box</span>
+0036 p000 = [xmin ymin zmin];
+0037 p111 = [xmax ymax zmax];
+0038 
+0039 <span class="comment">% main vectors</span>
+0040 ex   = [1 0 0];
+0041 ey   = [0 1 0];
+0042 ez   = [0 0 1];
+0043 
+0044 <span class="comment">% box faces parallel to Oxy</span>
+0045 planeZ0 = [p000 ex ey];
+0046 planeZ1 = [p111 ex ey];
+0047 
+0048 <span class="comment">% box faces parallel to Oxz</span>
+0049 planeY0 = [p000 ex ez];
+0050 planeY1 = [p111 ex ez];
+0051 
+0052 <span class="comment">% box faces parallel to Oyz</span>
+0053 planeX0 = [p000 ey ez];
+0054 planeX1 = [p111 ey ez];
+0055 
+0056 <span class="comment">% number of lines</span>
+0057 nLines = size(line, 1);
+0058 
+0059 <span class="comment">% allocate memory for result</span>
+0060 edge = zeros(nLines, 6);
+0061 
+0062 <span class="comment">% iterate over lines to clip</span>
+0063 <span class="keyword">for</span> i = 1:nLines
+0064     
+0065     <span class="comment">% compute intersection point with each plane</span>
+0066     ipZ0 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(line(i,:), planeZ0);
+0067     ipZ1 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(line(i,:), planeZ1);
+0068     ipY0 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(line(i,:), planeY0);
+0069     ipY1 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(line(i,:), planeY1);
+0070     ipX1 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(line(i,:), planeX1);
+0071     ipX0 = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(line(i,:), planeX0);
+0072 
+0073     <span class="comment">% concatenate resulting points</span>
+0074     points  = [ipX0;ipX1;ipY0;ipY1;ipZ0;ipZ1];
+0075 
+0076     <span class="comment">% compute position of each point on the line</span>
+0077     pos     = <a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>(points, line(i,:));
+0078 
+0079     <span class="comment">% keep only defined points</span>
+0080     ind     = find(~isnan(pos));
+0081     pos     = pos(ind);
+0082     points  = points(ind,:);
+0083 
+0084     <span class="comment">% sort points with respect to their position</span>
+0085     [pos, ind] = sort(pos); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0086     points  = points(ind, :);
+0087 
+0088     <span class="comment">% keep median points wrt to position. These points define the limit of</span>
+0089     <span class="comment">% the clipped edge.</span>
+0090     nv      = length(ind)/2;
+0091 
+0092     <span class="comment">% create resulting edge.</span>
+0093     edge(i,:)   = [points(nv, :) points(nv+1, :)];
+0094 <span class="keyword">end</span>
+0095 
+0096 <span class="comment">% check that middle point of the edge is contained in the box</span>
+0097 midX = mean(edge(:, [1 4]), 2);
+0098 xOk  = xmin &lt;= midX &amp; midX &lt;= xmax;
+0099 midY = mean(edge(:, [2 5]), 2);
+0100 yOk  = ymin &lt;= midY &amp; midY &lt;= ymax;
+0101 midZ = mean(edge(:, [3 6]), 2);
+0102 zOk  = zmin &lt;= midZ &amp; midZ &lt;= zmax;
+0103 
+0104 <span class="comment">% if one of the bounding condition is not met, set edge to NaN</span>
+0105 edge (~(xOk &amp; yOk &amp; zOk), :) = NaN;
+0106</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

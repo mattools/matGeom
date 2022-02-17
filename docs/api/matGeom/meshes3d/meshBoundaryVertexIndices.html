@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of meshBoundaryVertexIndices</title>
+  <meta name="keywords" content="meshBoundaryVertexIndices">
+  <meta name="description" content="MESHBOUNDARYVERTEXINDICES Indices of boundary vertices of a mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; meshBoundaryVertexIndices.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>meshBoundaryVertexIndices
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MESHBOUNDARYVERTEXINDICES Indices of boundary vertices of a mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function inds = meshBoundaryVertexIndices(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MESHBOUNDARYVERTEXINDICES Indices of boundary vertices of a mesh.
+
+   INDS = meshBoundaryVertexIndices(V, F)
+   INDS = meshBoundaryVertexIndices(V, E, F)
+
+   Example
+     % create centered icosahedron
+     [v, f] = createIcosahedron;
+     v(:,3) = v(:,3) - mean(v(:,3));
+     % convert to simili-sphere
+     [v2, f2] = subdivideMesh(v, f, 3);
+     v3 = normalizeVector3d(v2);
+     % clip with plane
+     plane = createPlane([0 0 0], [-1 -2 3]);
+     [vc, fc] = clipMeshVertices(v3, f2, plane, 'shape', 'plane');
+     figure; drawMesh(vc, fc); axis equal; view(3);
+     % draw boundary vertices
+     inds = meshBoundaryVertexIndices(vc, fc);
+     hold on; drawPoint3d(vc(inds,:), 'k*');
+
+   See also
+     meshes3d, <a href="meshBoundary.html" class="code" title="function polyList = meshBoundary(varargin)">meshBoundary</a>, <a href="meshBoundaryEdgeIndices.html" class="code" title="function inds = meshBoundaryEdgeIndices(varargin)">meshBoundaryEdgeIndices</a>, <a href="meshEdgeFaces.html" class="code" title="function edgeFaces = meshEdgeFaces(vertices, edges, faces) %#ok<INUSL>">meshEdgeFaces</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="meshEdgeFaces.html" class="code" title="function edgeFaces = meshEdgeFaces(vertices, edges, faces) %#ok<INUSL>">meshEdgeFaces</a>	MESHEDGEFACES Compute index of faces adjacent to each edge of a mesh.</li><li><a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>	MESHEDGES Computes array of edge vertex indices from face array.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function inds = meshBoundaryVertexIndices(varargin)</a>
+0002 <span class="comment">%MESHBOUNDARYVERTEXINDICES Indices of boundary vertices of a mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   INDS = meshBoundaryVertexIndices(V, F)</span>
+0005 <span class="comment">%   INDS = meshBoundaryVertexIndices(V, E, F)</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   Example</span>
+0008 <span class="comment">%     % create centered icosahedron</span>
+0009 <span class="comment">%     [v, f] = createIcosahedron;</span>
+0010 <span class="comment">%     v(:,3) = v(:,3) - mean(v(:,3));</span>
+0011 <span class="comment">%     % convert to simili-sphere</span>
+0012 <span class="comment">%     [v2, f2] = subdivideMesh(v, f, 3);</span>
+0013 <span class="comment">%     v3 = normalizeVector3d(v2);</span>
+0014 <span class="comment">%     % clip with plane</span>
+0015 <span class="comment">%     plane = createPlane([0 0 0], [-1 -2 3]);</span>
+0016 <span class="comment">%     [vc, fc] = clipMeshVertices(v3, f2, plane, 'shape', 'plane');</span>
+0017 <span class="comment">%     figure; drawMesh(vc, fc); axis equal; view(3);</span>
+0018 <span class="comment">%     % draw boundary vertices</span>
+0019 <span class="comment">%     inds = meshBoundaryVertexIndices(vc, fc);</span>
+0020 <span class="comment">%     hold on; drawPoint3d(vc(inds,:), 'k*');</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   See also</span>
+0023 <span class="comment">%     meshes3d, meshBoundary, meshBoundaryEdgeIndices, meshEdgeFaces</span>
+0024  
+0025 <span class="comment">% ------</span>
+0026 <span class="comment">% Author: David Legland</span>
+0027 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0028 <span class="comment">% Created: 2019-05-01,    using Matlab 8.6.0.267246 (R2015b)</span>
+0029 <span class="comment">% Copyright 2019 INRA - Cepia Software Platform.</span>
+0030 
+0031 [vertices, edges, faces] = parseMeshData(varargin{:});
+0032 
+0033 <span class="comment">% Compute edge-vertex map if not specified</span>
+0034 <span class="keyword">if</span> isempty(edges)
+0035     edges = <a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>(vertices, faces);
+0036 <span class="keyword">end</span>
+0037 
+0038 <span class="comment">% compute edges to faces map</span>
+0039 edgeFaces = <a href="meshEdgeFaces.html" class="code" title="function edgeFaces = meshEdgeFaces(vertices, edges, faces) %#ok<INUSL>">meshEdgeFaces</a>(vertices, edges, faces);
+0040 
+0041 borderEdges = sum(edgeFaces == 0, 2) &gt; 0;
+0042 
+0043 inds = edges(borderEdges, :);
+0044 inds = unique(inds(:));</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

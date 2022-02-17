@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createRhombododecahedron</title>
+  <meta name="keywords" content="createRhombododecahedron">
+  <meta name="description" content="CREATERHOMBODODECAHEDRON Create a 3D mesh representing a rhombododecahedron.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; createRhombododecahedron.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createRhombododecahedron
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATERHOMBODODECAHEDRON Create a 3D mesh representing a rhombododecahedron.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = createRhombododecahedron() </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATERHOMBODODECAHEDRON Create a 3D mesh representing a rhombododecahedron.
+
+   [V, E, F] = createRhombododecahedron
+   V is a 14-by-3 array with vertex coordinate, 
+   E is a 12-by-2 array containing indices of neighbour vertices,
+   F is a 8-by-3 array containing vertices array of each face.
+
+   [V, F] = createRhombododecahedron;
+   Returns only the vertices and the face vertex indices.
+
+   MESH = createRhombododecahedron;
+   Returns the data as a mesh structure, with fields 'vertices', 'edges'
+   and 'faces'.
+
+   Example
+   [v, e, f] = createRhombododecahedron;
+   drawMesh(v, f);
+
+
+   See also
+   meshes3d, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = createRhombododecahedron()</a>
+0002 <span class="comment">%CREATERHOMBODODECAHEDRON Create a 3D mesh representing a rhombododecahedron.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V, E, F] = createRhombododecahedron</span>
+0005 <span class="comment">%   V is a 14-by-3 array with vertex coordinate,</span>
+0006 <span class="comment">%   E is a 12-by-2 array containing indices of neighbour vertices,</span>
+0007 <span class="comment">%   F is a 8-by-3 array containing vertices array of each face.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   [V, F] = createRhombododecahedron;</span>
+0010 <span class="comment">%   Returns only the vertices and the face vertex indices.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   MESH = createRhombododecahedron;</span>
+0013 <span class="comment">%   Returns the data as a mesh structure, with fields 'vertices', 'edges'</span>
+0014 <span class="comment">%   and 'faces'.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example</span>
+0017 <span class="comment">%   [v, e, f] = createRhombododecahedron;</span>
+0018 <span class="comment">%   drawMesh(v, f);</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See also</span>
+0022 <span class="comment">%   meshes3d, drawMesh</span>
+0023 
+0024 <span class="comment">%   ---------</span>
+0025 <span class="comment">%   author : David Legland</span>
+0026 <span class="comment">%   e-mail: david.legland@inra.fr</span>
+0027 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0028 <span class="comment">%   created the 10/02/2005.</span>
+0029 <span class="comment">%</span>
+0030 
+0031 <span class="comment">%   HISTORY</span>
+0032 <span class="comment">%   04/01/2007: remove unused variables</span>
+0033 
+0034 nodes = [0 0 2;<span class="keyword">...</span>
+0035     1 -1 1;1 1 1;-1 1 1;-1 -1 1;<span class="keyword">...</span>
+0036     2 0 0;0 2 0;-2 0 0;0 -2 0;<span class="keyword">...</span>
+0037     1 -1 -1;1 1 -1;-1 1 -1;-1 -1 -1;<span class="keyword">...</span>
+0038     0 0 -2];
+0039 
+0040 edges = [<span class="keyword">...</span>
+0041     1 2;1 3;1 4;1 5;<span class="keyword">...</span>
+0042     2 6;2 9;3 6;3 7;4 7;4 8;5 8;5 9;<span class="keyword">...</span>
+0043     6 10;6 11;7 11;7 12;8 12;8 13;9 10;9 13; <span class="keyword">...</span>
+0044     10 14;11 14;12 14;13 14];
+0045 
+0046 faces = [<span class="keyword">...</span>
+0047     1 2 6 3;<span class="keyword">...</span>
+0048     1 3 7 4;<span class="keyword">...</span>
+0049     1 4 8 5;<span class="keyword">...</span>
+0050     1 5 9 2;<span class="keyword">...</span>
+0051     2 9 10 6;<span class="keyword">...</span>
+0052     3 6 11 7;<span class="keyword">...</span>
+0053     4 7 12 8;<span class="keyword">...</span>
+0054     5 8 13 9;<span class="keyword">...</span>
+0055     6 10 14 11;<span class="keyword">...</span>
+0056     7 11 14 12;<span class="keyword">...</span>
+0057     8 12 14 13;<span class="keyword">...</span>
+0058     9 13 14 10];
+0059     
+0060 <span class="comment">% format output</span>
+0061 varargout = formatMeshOutput(nargout, nodes, edges, faces);
+0062</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

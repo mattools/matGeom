@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of isPointInCircle</title>
+  <meta name="keywords" content="isPointInCircle">
+  <meta name="description" content="ISPOINTINCIRCLE Test if a point is located inside a given circle.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; isPointInCircle.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>isPointInCircle
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ISPOINTINCIRCLE Test if a point is located inside a given circle.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function b = isPointInCircle(point, circle, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ISPOINTINCIRCLE Test if a point is located inside a given circle.
+
+   B = isPointInCircle(POINT, CIRCLE) 
+   Returns true if point is located inside the circle, i.e. if distance to
+   circle center is lower than the circle radius.
+
+   B = isPointInCircle(POINT, CIRCLE, TOL) 
+   Specifies the tolerance value
+
+   Example:
+   isPointInCircle([1 0], [0 0 1])
+   isPointInCircle([0 0], [0 0 1])
+   returns true, whereas
+   isPointInCircle([1 1], [0 0 1])
+   return false
+
+   See also:
+   <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="isPointOnCircle.html" class="code" title="function b = isPointOnCircle(point, circle, varargin)">isPointOnCircle</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 07/04/2004.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function b = isPointInCircle(point, circle, varargin)</a>
+0002 <span class="comment">%ISPOINTINCIRCLE Test if a point is located inside a given circle.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   B = isPointInCircle(POINT, CIRCLE)</span>
+0005 <span class="comment">%   Returns true if point is located inside the circle, i.e. if distance to</span>
+0006 <span class="comment">%   circle center is lower than the circle radius.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   B = isPointInCircle(POINT, CIRCLE, TOL)</span>
+0009 <span class="comment">%   Specifies the tolerance value</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Example:</span>
+0012 <span class="comment">%   isPointInCircle([1 0], [0 0 1])</span>
+0013 <span class="comment">%   isPointInCircle([0 0], [0 0 1])</span>
+0014 <span class="comment">%   returns true, whereas</span>
+0015 <span class="comment">%   isPointInCircle([1 1], [0 0 1])</span>
+0016 <span class="comment">%   return false</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   See also:</span>
+0019 <span class="comment">%   circles2d, isPointOnCircle</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   ---------</span>
+0022 <span class="comment">%   author : David Legland</span>
+0023 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0024 <span class="comment">%   created the 07/04/2004.</span>
+0025 <span class="comment">%</span>
+0026 
+0027 <span class="comment">%   HISTORY</span>
+0028 <span class="comment">%   22/05/2009 rename to isPointInCircle, add psb to specify tolerance</span>
+0029 
+0030 <span class="comment">% extract computation tolerance</span>
+0031 tol = 1e-14;
+0032 <span class="keyword">if</span> ~isempty(varargin)
+0033     tol = varargin{1};
+0034 <span class="keyword">end</span>
+0035 
+0036 d = sqrt(sum(power(point - circle(:,1:2), 2), 2));
+0037 b = d-circle(:,3)&lt;=tol;
+0038</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

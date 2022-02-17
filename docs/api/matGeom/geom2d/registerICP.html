@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of registerICP</title>
+  <meta name="keywords" content="registerICP">
+  <meta name="description" content="REGISTERICP Fit affine transform by Iterative Closest Point algorithm.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; registerICP.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>registerICP
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>REGISTERICP Fit affine transform by Iterative Closest Point algorithm.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [trans, points] = registerICP(points, target, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">REGISTERICP Fit affine transform by Iterative Closest Point algorithm.
+
+   TRANS = registerICP(POINTS, TARGET)
+   Computes the affine transform that maps the shape defines by POINTS
+   onto the shape defined by the points TARGET. Both POINTS and TARGET are
+   N-by-2 array of point coordinates, not necessarily the same size.
+   The result TRANS is a 3-by-3 affine transform.
+
+   TRANS = registerICP(POINTS, TARGET, NITER)
+   Specifies the number of iterations for the algorithm.
+
+   [TRANS, POINTS2] = registerICP(...)
+   Also returns the set of transformed points.
+
+   Example
+   registerICP
+
+   See also
+     <a href="transforms2d.html" class="code" title="function transforms2d(varargin)">transforms2d</a>, <a href="fitAffineTransform2d.html" class="code" title="function trans = fitAffineTransform2d(ref, src)">fitAffineTransform2d</a>, registerPoints3dAffine</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="findClosestPoint.html" class="code" title="function [index, minDist] = findClosestPoint(coord, points)">findClosestPoint</a>	FINDCLOSESTPOINT Find index of closest point in an array.</li><li><a href="fitAffineTransform2d.html" class="code" title="function trans = fitAffineTransform2d(ref, src)">fitAffineTransform2d</a>	Compute the affine transform that best register two point sets.</li><li><a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>	Apply an affine transform to a point or a point set.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [trans, points] = registerICP(points, target, varargin)</a>
+0002 <span class="comment">%REGISTERICP Fit affine transform by Iterative Closest Point algorithm.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   TRANS = registerICP(POINTS, TARGET)</span>
+0005 <span class="comment">%   Computes the affine transform that maps the shape defines by POINTS</span>
+0006 <span class="comment">%   onto the shape defined by the points TARGET. Both POINTS and TARGET are</span>
+0007 <span class="comment">%   N-by-2 array of point coordinates, not necessarily the same size.</span>
+0008 <span class="comment">%   The result TRANS is a 3-by-3 affine transform.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   TRANS = registerICP(POINTS, TARGET, NITER)</span>
+0011 <span class="comment">%   Specifies the number of iterations for the algorithm.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   [TRANS, POINTS2] = registerICP(...)</span>
+0014 <span class="comment">%   Also returns the set of transformed points.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example</span>
+0017 <span class="comment">%   registerICP</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   See also</span>
+0020 <span class="comment">%     transforms2d, fitAffineTransform2d, registerPoints3dAffine</span>
+0021 <span class="comment">%</span>
+0022  
+0023 <span class="comment">% ------</span>
+0024 <span class="comment">% Author: David Legland</span>
+0025 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0026 <span class="comment">% Created: 2015-02-24,    using Matlab 8.4.0.150421 (R2014b)</span>
+0027 <span class="comment">% Copyright 2015 INRA - Cepia Software Platform.</span>
+0028 
+0029 
+0030 nIter = 10;
+0031 <span class="keyword">if</span> ~isempty(varargin)
+0032     nIter = varargin{1};
+0033 <span class="keyword">end</span>
+0034 
+0035 <span class="comment">% keep original points to transform them at each</span>
+0036 trans = [1 0 0;0 1 0;0 0 1];
+0037 
+0038 <span class="keyword">for</span> i = 1:nIter
+0039     <span class="comment">% identify target points for each source point</span>
+0040     inds = <a href="findClosestPoint.html" class="code" title="function [index, minDist] = findClosestPoint(coord, points)">findClosestPoint</a>(points, target);
+0041     corrPoints = target(inds, :);
+0042     
+0043     <span class="comment">% compute transform for current iteration</span>
+0044     trans_i = <a href="fitAffineTransform2d.html" class="code" title="function trans = fitAffineTransform2d(ref, src)">fitAffineTransform2d</a>(points, corrPoints);
+0045 
+0046     <span class="comment">% apply transform, and update cumulated transform</span>
+0047     points = <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(points, trans_i);
+0048     trans = trans_i * trans;
+0049 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

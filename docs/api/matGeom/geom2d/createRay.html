@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createRay</title>
+  <meta name="keywords" content="createRay">
+  <meta name="description" content="CREATERAY Create a ray (half-line), from various inputs.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; createRay.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createRay
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATERAY Create a ray (half-line), from various inputs.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function ray = createRay(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATERAY Create a ray (half-line), from various inputs.
+
+   RAY = createRay(POINT, ANGLE)
+   POINT is a N*2 array giving starting point of the ray, and ANGLE is the
+   orientation of the ray.
+
+   RAY = createRay(X0, Y0, ANGLE)
+   Specify ray origin with 2 input arguments.
+
+   RAY = createRay(P1, P2)
+   Create a ray starting from point P1 and going in the direction of point
+   P2.
+
+   Ray is represented in a parametric form: [x0 y0 dx dy]
+   x = x0 + t*dx
+   y = y0 + t*dy;
+   for all t&gt;0
+
+   Example
+   origin  = [3 4];
+   theta   = pi/6;
+   ray = createRay(origin, theta);
+   figure(1); clf; hold on;
+   axis([0 10 0 10]);
+   drawRay(ray);
+
+   See also:
+   <a href="rays2d.html" class="code" title="function rays2d(varargin)">rays2d</a>, <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>, <a href="points2d.html" class="code" title="function points2d">points2d</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2007-10-18
+ Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function ray = createRay(varargin)</a>
+0002 <span class="comment">%CREATERAY Create a ray (half-line), from various inputs.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   RAY = createRay(POINT, ANGLE)</span>
+0005 <span class="comment">%   POINT is a N*2 array giving starting point of the ray, and ANGLE is the</span>
+0006 <span class="comment">%   orientation of the ray.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   RAY = createRay(X0, Y0, ANGLE)</span>
+0009 <span class="comment">%   Specify ray origin with 2 input arguments.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   RAY = createRay(P1, P2)</span>
+0012 <span class="comment">%   Create a ray starting from point P1 and going in the direction of point</span>
+0013 <span class="comment">%   P2.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   Ray is represented in a parametric form: [x0 y0 dx dy]</span>
+0016 <span class="comment">%   x = x0 + t*dx</span>
+0017 <span class="comment">%   y = y0 + t*dy;</span>
+0018 <span class="comment">%   for all t&gt;0</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   Example</span>
+0021 <span class="comment">%   origin  = [3 4];</span>
+0022 <span class="comment">%   theta   = pi/6;</span>
+0023 <span class="comment">%   ray = createRay(origin, theta);</span>
+0024 <span class="comment">%   figure(1); clf; hold on;</span>
+0025 <span class="comment">%   axis([0 10 0 10]);</span>
+0026 <span class="comment">%   drawRay(ray);</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%   See also:</span>
+0029 <span class="comment">%   rays2d, createLine, points2d</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">% ------</span>
+0032 <span class="comment">% Author: David Legland</span>
+0033 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0034 <span class="comment">% Created: 2007-10-18</span>
+0035 <span class="comment">% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0036 
+0037 <span class="keyword">if</span> length(varargin)==2
+0038     p0 = varargin{1};
+0039     arg = varargin{2};
+0040     <span class="keyword">if</span> size(arg, 2)==1
+0041         <span class="comment">% second input is the ray angle</span>
+0042         ray = [p0 cos(arg) sin(arg)];
+0043     <span class="keyword">else</span>
+0044         <span class="comment">% second input is another point</span>
+0045         ray = [p0 arg-p0];
+0046     <span class="keyword">end</span>
+0047     
+0048 <span class="keyword">elseif</span> length(varargin)==3   
+0049     x = varargin{1};
+0050     y = varargin{2};
+0051     theta = varargin{3};
+0052     ray = [x y cos(theta) sin(theta)];   
+0053 
+0054 <span class="keyword">else</span>
+0055     error(<span class="string">'Wrong number of arguments in ''createRay'' '</span>);
+0056 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

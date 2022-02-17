@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of boxToRect</title>
+  <meta name="keywords" content="boxToRect">
+  <meta name="description" content="BOXTORECT Convert box data to rectangle data.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; boxToRect.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>boxToRect
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>BOXTORECT Convert box data to rectangle data.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function rect = boxToRect(box) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">BOXTORECT Convert box data to rectangle data.
+
+   RECT = boxToRect(BOX)
+   Converts from boxrepresentation to rectangle representation.
+   BOX is given by [XMIN XMAX YMIN YMAX].
+   RECT is given by [X0 Y0 WIDTH HEIGHT], with WIDTH and HEIGHT &gt; 0
+
+   See also
+   <a href="boxes2d.html" class="code" title="function boxes2d(varargin)">boxes2d</a>, <a href="boxToPolygon.html" class="code" title="function poly = boxToPolygon(box)">boxToPolygon</a>, <a href="drawBox.html" class="code" title="function varargout = drawBox(box, varargin)">drawBox</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function rect = boxToRect(box)</a>
+0002 <span class="comment">%BOXTORECT Convert box data to rectangle data.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   RECT = boxToRect(BOX)</span>
+0005 <span class="comment">%   Converts from boxrepresentation to rectangle representation.</span>
+0006 <span class="comment">%   BOX is given by [XMIN XMAX YMIN YMAX].</span>
+0007 <span class="comment">%   RECT is given by [X0 Y0 WIDTH HEIGHT], with WIDTH and HEIGHT &gt; 0</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   See also</span>
+0010 <span class="comment">%   boxes2d, boxToPolygon, drawBox</span>
+0011 <span class="comment">%</span>
+0012 
+0013 <span class="comment">% ------</span>
+0014 <span class="comment">% Author: David Legland</span>
+0015 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0016 <span class="comment">% Created: 2012-08-23,    using Matlab 7.9.0.529 (R2009b)</span>
+0017 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
+0018 
+0019 rect = [box(:,1) box(:,3) box(:,2)-box(:,1) box(:,4)-box(:,3)];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

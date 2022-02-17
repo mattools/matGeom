@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of ellipsePerimeter</title>
+  <meta name="keywords" content="ellipsePerimeter">
+  <meta name="description" content="ELLIPSEPERIMETER Perimeter of an ellipse.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; ellipsePerimeter.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>ellipsePerimeter
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ELLIPSEPERIMETER Perimeter of an ellipse.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function perim = ellipsePerimeter(ellipse, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ELLIPSEPERIMETER Perimeter of an ellipse.
+
+   P = ellipsePerimeter(ELLI)
+   Computes the perimeter of an ellipse, using numerical integration.
+   ELLI is an ellipse, given using one of the following formats:
+   * a 1-by-5 row vector containing coordinates of center, length of
+       semi-axes, and orientation in degrees
+   * a 1-by-2 row vector containing only the lengths of the semi-axes.
+   The result
+
+   P = ellipsePerimeter(ELLI, TOL)
+   Specify the relative tolerance for numerical integration.
+
+
+   Example
+   P = ellipsePerimeter([30 40 30 10 15])
+   P = 
+       133.6489 
+
+   See also
+     <a href="ellipses2d.html" class="code" title="function ellipses2d(varargin)">ellipses2d</a>, <a href="drawEllipse.html" class="code" title="function varargout = drawEllipse(varargin)">drawEllipse</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function perim = ellipsePerimeter(ellipse, varargin)</a>
+0002 <span class="comment">%ELLIPSEPERIMETER Perimeter of an ellipse.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   P = ellipsePerimeter(ELLI)</span>
+0005 <span class="comment">%   Computes the perimeter of an ellipse, using numerical integration.</span>
+0006 <span class="comment">%   ELLI is an ellipse, given using one of the following formats:</span>
+0007 <span class="comment">%   * a 1-by-5 row vector containing coordinates of center, length of</span>
+0008 <span class="comment">%       semi-axes, and orientation in degrees</span>
+0009 <span class="comment">%   * a 1-by-2 row vector containing only the lengths of the semi-axes.</span>
+0010 <span class="comment">%   The result</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   P = ellipsePerimeter(ELLI, TOL)</span>
+0013 <span class="comment">%   Specify the relative tolerance for numerical integration.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example</span>
+0017 <span class="comment">%   P = ellipsePerimeter([30 40 30 10 15])</span>
+0018 <span class="comment">%   P =</span>
+0019 <span class="comment">%       133.6489</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See also</span>
+0022 <span class="comment">%     ellipses2d, drawEllipse</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%</span>
+0025 
+0026 <span class="comment">% ------</span>
+0027 <span class="comment">% Author: David Legland</span>
+0028 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0029 <span class="comment">% Created: 2012-02-20,    using Matlab 7.9.0.529 (R2009b)</span>
+0030 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
+0031 
+0032 <span class="comment">%% Parse input argument</span>
+0033 
+0034 <span class="keyword">if</span> size(ellipse, 2) == 5
+0035     ra = ellipse(:, 3);
+0036     rb = ellipse(:, 4);
+0037     
+0038 <span class="keyword">elseif</span> size(ellipse, 2) == 2
+0039     ra = ellipse(:, 1);
+0040     rb = ellipse(:, 2);
+0041     
+0042 <span class="keyword">elseif</span> size(ellipse, 2) == 1
+0043     ra = ellipse;
+0044     rb = varargin{1};
+0045     varargin(1) = [];
+0046     
+0047 <span class="keyword">end</span>
+0048 
+0049 <span class="comment">% relative tolerance</span>
+0050 tol = 1e-10;
+0051 <span class="keyword">if</span> ~isempty(varargin)
+0052     tol = varargin{1};
+0053 <span class="keyword">end</span>
+0054 
+0055 
+0056 <span class="comment">%% Numerical integration</span>
+0057 
+0058 n = length(ra);
+0059 
+0060 perim = zeros(n, 1);
+0061 
+0062 <span class="keyword">for</span> i = 1:n
+0063     <span class="comment">% function to integrate</span>
+0064     f = @(t) sqrt(ra(i) .^ 2 .* cos(t) .^ 2 + rb(i) .^ 2 .* sin(t) .^ 2) ;
+0065 
+0066     <span class="comment">% absolute tolerance from relative tolerance</span>
+0067     eps = tol * max(ra(i), rb(i));
+0068     
+0069     <span class="comment">% integrate on first quadrant</span>
+0070     <span class="keyword">if</span> verLessThan(<span class="string">'matlab'</span>, <span class="string">'7.14'</span>)
+0071         perim(i) = 4 * quad(f, 0, pi/2, eps); <span class="comment">%#ok&lt;DQUAD&gt;</span>
+0072     <span class="keyword">else</span>
+0073         perim(i) = 4 * integral(f, 0, pi/2, <span class="string">'AbsTol'</span>, eps);
+0074     <span class="keyword">end</span>
+0075 <span class="keyword">end</span>
+0076</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

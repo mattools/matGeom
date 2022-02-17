@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of subdivideMesh</title>
+  <meta name="keywords" content="subdivideMesh">
+  <meta name="description" content="SUBDIVIDEMESH Subdivides each face of the mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; subdivideMesh.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>subdivideMesh
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>SUBDIVIDEMESH Subdivides each face of the mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [vertices2, faces2] = subdivideMesh(vertices, faces, n) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">SUBDIVIDEMESH Subdivides each face of the mesh.
+
+   [V2 F2] = subdivideMesh(V, F, N)
+   Subdivides the mesh specified by (V,F) such that each face F is divided
+   into N^2 smaller faces.
+
+   Example
+     [v, f] = createOctahedron;
+     figure; drawMesh(v, f); view(3);
+     [v2, f2] = subdivideMesh(v, f, 4);
+     figure; drawMesh(v2, f2); view(3)
+
+   See also
+     meshes3d, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>	MESHEDGES Computes array of edge vertex indices from face array.</li><li><a href="meshFaceEdges.html" class="code" title="function FE = meshFaceEdges(vertices, edges, faces)">meshFaceEdges</a>	MESHFACEEDGES Computes edge indices of each face.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [vertices2, faces2] = subdivideMesh(vertices, faces, n)</a>
+0002 <span class="comment">%SUBDIVIDEMESH Subdivides each face of the mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V2 F2] = subdivideMesh(V, F, N)</span>
+0005 <span class="comment">%   Subdivides the mesh specified by (V,F) such that each face F is divided</span>
+0006 <span class="comment">%   into N^2 smaller faces.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Example</span>
+0009 <span class="comment">%     [v, f] = createOctahedron;</span>
+0010 <span class="comment">%     figure; drawMesh(v, f); view(3);</span>
+0011 <span class="comment">%     [v2, f2] = subdivideMesh(v, f, 4);</span>
+0012 <span class="comment">%     figure; drawMesh(v2, f2); view(3)</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   See also</span>
+0015 <span class="comment">%     meshes3d, drawMesh</span>
+0016 <span class="comment">%</span>
+0017 
+0018 <span class="comment">% ------</span>
+0019 <span class="comment">% Author: David Legland</span>
+0020 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0021 <span class="comment">% Created: 2013-08-22,    using Matlab 7.9.0.529 (R2009b)</span>
+0022 <span class="comment">% Copyright 2013 INRA - Cepia Software Platform.</span>
+0023 
+0024 
+0025 <span class="comment">%% Initialisations</span>
+0026 
+0027 edges = [];
+0028 faceEdgeIndices = [];
+0029 
+0030 <span class="keyword">if</span> isstruct(vertices)
+0031     <span class="comment">% get relevant inputs</span>
+0032     mesh = vertices;
+0033     n = faces;
+0034     
+0035     <span class="comment">% parse fields from a mesh structure</span>
+0036     vertices = mesh.vertices;
+0037     faces = mesh.faces;
+0038     <span class="keyword">if</span> isfield(mesh, <span class="string">'edges'</span>)
+0039         edges = mesh.edges;
+0040     <span class="keyword">end</span>
+0041     <span class="keyword">if</span> isfield(mesh, <span class="string">'faceEdges'</span>)
+0042         faceEdgeIndices = mesh.faceEdges;
+0043     <span class="keyword">end</span>
+0044     
+0045 <span class="keyword">end</span>
+0046 
+0047 <span class="keyword">if</span> ~isnumeric(faces) || size(faces, 2) ~= 3
+0048     error(<span class="string">'Requires a triangular mesh'</span>);
+0049 <span class="keyword">end</span>
+0050 
+0051 <span class="comment">% compute the edge array</span>
+0052 <span class="keyword">if</span> isempty(edges)
+0053     edges = <a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>(faces);
+0054 <span class="keyword">end</span>
+0055 nEdges = size(edges, 1);
+0056 
+0057 <span class="comment">% index of edges around each face</span>
+0058 <span class="keyword">if</span> isempty(faceEdgeIndices)
+0059     faceEdgeIndices = <a href="meshFaceEdges.html" class="code" title="function FE = meshFaceEdges(vertices, edges, faces)">meshFaceEdges</a>(vertices, edges, faces);
+0060 <span class="keyword">end</span>
+0061 
+0062 
+0063 <span class="comment">%% Create new vertices on edges</span>
+0064 
+0065 <span class="comment">% several interpolated positions</span>
+0066 t = linspace(0, 1, n + 1)';
+0067 coef2 = t(2:end-1);
+0068 coef1 = 1 - t(2:end-1);
+0069 
+0070 <span class="comment">% initialise the array of new vertices</span>
+0071 vertices2 = vertices;
+0072 
+0073 <span class="comment">% keep an array containing index of new vertices for each original edge</span>
+0074 edgeNewVertexIndices = zeros(nEdges, n-1);
+0075 
+0076 <span class="comment">% create new vertices on each edge</span>
+0077 <span class="keyword">for</span> iEdge = 1:nEdges
+0078     <span class="comment">% extract each extremity as a point</span>
+0079     v1 = vertices(edges(iEdge, 1), :);
+0080     v2 = vertices(edges(iEdge, 2), :);
+0081 
+0082     <span class="comment">% compute new points</span>
+0083     newPoints = coef1 * v1 + coef2 * v2;
+0084     
+0085     <span class="comment">% add new vertices, and keep their indices</span>
+0086     edgeNewVertexIndices(iEdge,:) = size(vertices2, 1) + (1:n-1);
+0087     vertices2 = [vertices2 ; newPoints]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0088 <span class="keyword">end</span>
+0089 
+0090 
+0091 <span class="comment">%% Process each face</span>
+0092 
+0093 faces2 = zeros(0, 3);
+0094 
+0095 nFaces = size(faces, 1);
+0096 <span class="keyword">for</span> iFace = 1:nFaces
+0097     <span class="comment">% compute index of each corner vertex</span>
+0098     face = faces(iFace, :);
+0099     iv1 = face(1);
+0100     iv2 = face(2);
+0101     iv3 = face(3);
+0102     
+0103     <span class="comment">% compute index of each edge</span>
+0104     faceEdges = faceEdgeIndices{iFace};
+0105     ie1 = faceEdges(1);
+0106     ie2 = faceEdges(2);
+0107     ie3 = faceEdges(3);
+0108     
+0109     <span class="comment">% indices of new vertices on edges</span>
+0110     edge1NewVertexIndices = edgeNewVertexIndices(ie1, :);
+0111     edge2NewVertexIndices = edgeNewVertexIndices(ie2, :);
+0112     edge3NewVertexIndices = edgeNewVertexIndices(ie3, :);
+0113     
+0114     <span class="comment">% keep vertex 1 as reference for edges 1 and 3</span>
+0115     <span class="keyword">if</span> edges(ie1, 1) ~= iv1
+0116         edge1NewVertexIndices = edge1NewVertexIndices(end:-1:1);
+0117     <span class="keyword">end</span>
+0118     <span class="keyword">if</span> edges(ie3, 1) ~= iv1
+0119         edge3NewVertexIndices = edge3NewVertexIndices(end:-1:1);
+0120     <span class="keyword">end</span>
+0121        
+0122     <span class="comment">% create the first new face, on 'top' of the original face</span>
+0123     topVertexInds = [edge1NewVertexIndices(1) edge3NewVertexIndices(1)];
+0124     newFace = [iv1 topVertexInds];
+0125     faces2 = [faces2; newFace]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0126         
+0127     <span class="comment">% iterate over middle strips</span>
+0128     <span class="keyword">for</span> iStrip = 2:n-1
+0129         <span class="comment">% index of extreme vertices of current row</span>
+0130         ivr1 = edge1NewVertexIndices(iStrip);
+0131         ivr2 = edge3NewVertexIndices(iStrip);
+0132         
+0133         <span class="comment">% extreme vertices as points</span>
+0134         v1 = vertices2(ivr1, :);
+0135         v2 = vertices2(ivr2, :);
+0136         
+0137         <span class="comment">% create additional vertices within the bottom row of the strip</span>
+0138         t = linspace(0, 1, iStrip+1)';
+0139         coef2 = t(2:end-1);
+0140         coef1 = 1 - t(2:end-1);
+0141         newPoints = coef1 * v1 + coef2 * v2;
+0142 
+0143         <span class="comment">% compute indices of new vertices in result array</span>
+0144         newInds = size(vertices2, 1) + (1:iStrip-1);
+0145         botVertexInds = [ivr1 newInds ivr2];
+0146         
+0147         <span class="comment">% add new vertices</span>
+0148         vertices2 = [vertices2 ; newPoints]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0149         
+0150         <span class="comment">% create top faces of current strip</span>
+0151         <span class="keyword">for</span> k = 1:iStrip-1
+0152             newFace = [topVertexInds(k) botVertexInds(k+1) topVertexInds(k+1)];
+0153             faces2 = [faces2; newFace]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0154         <span class="keyword">end</span>
+0155         
+0156         <span class="comment">% create bottom faces of current strip</span>
+0157         <span class="keyword">for</span> k = 1:iStrip
+0158             newFace = [topVertexInds(k) botVertexInds(k) botVertexInds(k+1)];
+0159             faces2 = [faces2; newFace]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0160         <span class="keyword">end</span>
+0161         
+0162         <span class="comment">% bottom vertices of current strip are top vertices of next strip</span>
+0163         topVertexInds = botVertexInds;
+0164     <span class="keyword">end</span>
+0165         
+0166     <span class="comment">% for edge 2, keep vertex 2 of the current face as reference</span>
+0167     <span class="keyword">if</span> edges(ie2, 1) ~= iv2
+0168         edge2NewVertexIndices = edge2NewVertexIndices(end:-1:1);
+0169     <span class="keyword">end</span>
+0170     
+0171     <span class="comment">% consider new vertices together with extremities</span>
+0172     botVertexInds = [iv2 edge2NewVertexIndices iv3];
+0173     
+0174     <span class="comment">% create top faces for last strip</span>
+0175     <span class="keyword">for</span> k = 1:n-1
+0176         newFace = [topVertexInds(k) botVertexInds(k+1) topVertexInds(k+1)];
+0177         faces2 = [faces2; newFace]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0178     <span class="keyword">end</span>
+0179     
+0180     <span class="comment">% create bottom faces for last strip</span>
+0181     <span class="keyword">for</span> k = 1:n
+0182         newFace = [topVertexInds(k) botVertexInds(k) botVertexInds(k+1)];
+0183         faces2 = [faces2; newFace]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0184     <span class="keyword">end</span>
+0185     
+0186 <span class="keyword">end</span>
+0187 
+0188 
+0189 
+0190 
+0191 
+0192 
+0193 
+0194 
+0195 
+0196 
+0197 
+0198 
+0199 
+0200 
+0201</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

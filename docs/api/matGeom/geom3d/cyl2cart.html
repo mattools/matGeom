@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of cyl2cart</title>
+  <meta name="keywords" content="cyl2cart">
+  <meta name="description" content="CYL2CART  Convert cylindrical to cartesian coordinates.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; cyl2cart.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>cyl2cart
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CYL2CART  Convert cylindrical to cartesian coordinates.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = cyl2cart(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CYL2CART  Convert cylindrical to cartesian coordinates.
+
+   CART = cyl2cart(CYL)
+   convert the 3D cylindrical coordinates of points CYL (given by 
+   [THETA R Z] where THETA, R, and Z have the same size) into cartesian
+   coordinates CART, given by [X Y Z]. 
+   The transforms is the following :
+   X = R*cos(THETA);
+   Y = R*sin(THETA);
+   Z remains inchanged.
+
+   CART = cyl2cart(THETA, R, Z)
+   provides coordinates as 3 different parameters
+
+   Example
+   cyl2cart([-1 0 2])
+   gives : 4.7124    1.0000     2.0000
+
+   See also <a href="angles3d.html" class="code" title="function angles3d(varargin)">angles3d</a>, cart2pol, <a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>, <a href="cart2cyl.html" class="code" title="function varargout = cart2cyl(varargin)">cart2cyl</a>
+
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@jouy.inra.fr
+ Created: 2006-03-23
+ Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="projPointOnCylinder.html" class="code" title="function ptProj = projPointOnCylinder(pt, cyl, varargin)">projPointOnCylinder</a>	PROJPOINTONCYLINDER Project a 3D point onto a cylinder.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = cyl2cart(varargin)</a>
+0002 <span class="comment">%CYL2CART  Convert cylindrical to cartesian coordinates.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   CART = cyl2cart(CYL)</span>
+0005 <span class="comment">%   convert the 3D cylindrical coordinates of points CYL (given by</span>
+0006 <span class="comment">%   [THETA R Z] where THETA, R, and Z have the same size) into cartesian</span>
+0007 <span class="comment">%   coordinates CART, given by [X Y Z].</span>
+0008 <span class="comment">%   The transforms is the following :</span>
+0009 <span class="comment">%   X = R*cos(THETA);</span>
+0010 <span class="comment">%   Y = R*sin(THETA);</span>
+0011 <span class="comment">%   Z remains inchanged.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   CART = cyl2cart(THETA, R, Z)</span>
+0014 <span class="comment">%   provides coordinates as 3 different parameters</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example</span>
+0017 <span class="comment">%   cyl2cart([-1 0 2])</span>
+0018 <span class="comment">%   gives : 4.7124    1.0000     2.0000</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   See also angles3d, cart2pol, cart2sph2, cart2cyl</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">% ------</span>
+0024 <span class="comment">% Author: David Legland</span>
+0025 <span class="comment">% e-mail: david.legland@jouy.inra.fr</span>
+0026 <span class="comment">% Created: 2006-03-23</span>
+0027 <span class="comment">% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0028 
+0029 <span class="comment">% process input parameters</span>
+0030 <span class="keyword">if</span> length(varargin)==1
+0031     var = varargin{1};
+0032     theta = var(:,1);
+0033     r = var(:,2);
+0034     z = var(:,3);
+0035 <span class="keyword">elseif</span> length(varargin)==3
+0036     theta = varargin{1};
+0037     r = varargin{2};
+0038     z = varargin{3};
+0039 <span class="keyword">end</span>
+0040 
+0041 <span class="comment">% convert coordinates</span>
+0042 dim = size(theta);
+0043 x = reshape(r(:).*cos(theta(:)), dim);
+0044 y = reshape(r(:).*sin(theta(:)), dim);
+0045 
+0046 <span class="comment">% process output parameters</span>
+0047 <span class="keyword">if</span> nargout==0 ||nargout==1
+0048     <span class="keyword">if</span> length(dim)&gt;2 || dim(2)&gt;1
+0049         varargout{1} = {x y z};
+0050     <span class="keyword">else</span>
+0051         varargout{1} = [x y z];
+0052     <span class="keyword">end</span>
+0053 <span class="keyword">elseif</span> nargout==3
+0054     varargout{1} = x;
+0055     varargout{2} = y;
+0056     varargout{3} = z;
+0057 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

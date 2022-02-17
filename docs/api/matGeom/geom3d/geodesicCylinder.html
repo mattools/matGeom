@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of geodesicCylinder</title>
+  <meta name="keywords" content="geodesicCylinder">
+  <meta name="description" content="GEODESICCYLINDER computes the geodesic between two points on a cylinder.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; geodesicCylinder.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>geodesicCylinder
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>GEODESICCYLINDER computes the geodesic between two points on a cylinder.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [geo, geoLength, conGeo, conGeoLength] = geodesicCylinder(pts, cyl, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">GEODESICCYLINDER computes the geodesic between two points on a cylinder.
+
+   [GEO, GEOLENGTH] = geodesicCylinder(PTS, CYL) computes the geodesic 
+   between the two points PTS projected onto the infinite cylinder CYL.  
+   PTS is a 2-by-3 array, and CYL is a 1-by-7 array. Result is the 
+   polyline GEO (500-by-3 array) [500 = default] containing the  
+   coordinates of the geodesic between two projected points. GEOLENGTH 
+   contains the analytical length of the geodesic.
+
+   [~, ~, CONGEO, CONGEOLENGTH] = geodesicCylinder(PTS, CYL) provides the
+   conjugate geodesic and its analytical length.
+
+   ... = geodesicCylinder(PTS, CYL, 'n', N) defines the number of points
+   representing the geodesic and conjugate geodesic.
+
+   Example
+       demoGeodesicCylinder
+
+   See also
+     <a href="drawCylinder.html" class="code" title="function varargout = drawCylinder(varargin)">drawCylinder</a>, <a href="projPointOnCylinder.html" class="code" title="function ptProj = projPointOnCylinder(pt, cyl, varargin)">projPointOnCylinder</a>
+
+   Source
+     Based on the script 'geodesic.m' by Lei Wang
+     https://mathworks.com/matlabcentral/fileexchange/6522</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="cart2cyl.html" class="code" title="function varargout = cart2cyl(varargin)">cart2cyl</a>	CART2CYL  Convert cartesian to cylindrical coordinates.</li><li><a href="createRotationVector3d.html" class="code" title="function ROT = createRotationVector3d(A,B)">createRotationVector3d</a>	CREATEROTATIONVECTOR3D Calculates the rotation between two vectors.</li><li><a href="createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>	CREATETRANSLATION3D Create the 4x4 matrix of a 3D translation.</li><li><a href="projPointOnCylinder.html" class="code" title="function ptProj = projPointOnCylinder(pt, cyl, varargin)">projPointOnCylinder</a>	PROJPOINTONCYLINDER Project a 3D point onto a cylinder.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function [geo, arcLength] = geoCurve(theta, r, z, n)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [geo, geoLength, conGeo, conGeoLength] = geodesicCylinder(pts, cyl, varargin)</a>
+0002 <span class="comment">%GEODESICCYLINDER computes the geodesic between two points on a cylinder.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [GEO, GEOLENGTH] = geodesicCylinder(PTS, CYL) computes the geodesic</span>
+0005 <span class="comment">%   between the two points PTS projected onto the infinite cylinder CYL.</span>
+0006 <span class="comment">%   PTS is a 2-by-3 array, and CYL is a 1-by-7 array. Result is the</span>
+0007 <span class="comment">%   polyline GEO (500-by-3 array) [500 = default] containing the</span>
+0008 <span class="comment">%   coordinates of the geodesic between two projected points. GEOLENGTH</span>
+0009 <span class="comment">%   contains the analytical length of the geodesic.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   [~, ~, CONGEO, CONGEOLENGTH] = geodesicCylinder(PTS, CYL) provides the</span>
+0012 <span class="comment">%   conjugate geodesic and its analytical length.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   ... = geodesicCylinder(PTS, CYL, 'n', N) defines the number of points</span>
+0015 <span class="comment">%   representing the geodesic and conjugate geodesic.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   Example</span>
+0018 <span class="comment">%       demoGeodesicCylinder</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   See also</span>
+0021 <span class="comment">%     drawCylinder, projPointOnCylinder</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   Source</span>
+0024 <span class="comment">%     Based on the script 'geodesic.m' by Lei Wang</span>
+0025 <span class="comment">%     https://mathworks.com/matlabcentral/fileexchange/6522</span>
+0026 <span class="comment">%</span>
+0027 
+0028 <span class="comment">% ---------</span>
+0029 <span class="comment">% Author: oqilipo</span>
+0030 <span class="comment">% Created: 2021-04-17, using R2020b</span>
+0031 <span class="comment">% Copyright 2021</span>
+0032 
+0033 parser = inputParser;
+0034 addRequired(parser, <span class="string">'pts'</span>, @(x) validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0035     {<span class="string">'size'</span>,[2 3],<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'nonnan'</span>}));
+0036 addRequired(parser, <span class="string">'cyl'</span>, @(x) validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0037     {<span class="string">'size'</span>,[1 7],<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'nonnan'</span>}));
+0038 addParameter(parser,<span class="string">'n'</span>,500, @(x) validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0039     {<span class="string">'scalar'</span>,<span class="string">'&gt;'</span>, 2,<span class="string">'&lt;='</span>, 1e5}));
+0040 parse(parser,pts,cyl,varargin{:});
+0041 pts = parser.Results.pts;
+0042 cyl = parser.Results.cyl;
+0043 n = parser.Results.n;
+0044 
+0045 <span class="comment">% Radius of the cylinder</span>
+0046 cylRadius = cyl(7);
+0047 
+0048 <span class="comment">% Project points onto the open (infinite) cylinder</span>
+0049 ptProj(1,:) = <a href="projPointOnCylinder.html" class="code" title="function ptProj = projPointOnCylinder(pt, cyl, varargin)">projPointOnCylinder</a>(pts(1,:), cyl, <span class="string">'open'</span>);
+0050 ptProj(2,:) = <a href="projPointOnCylinder.html" class="code" title="function ptProj = projPointOnCylinder(pt, cyl, varargin)">projPointOnCylinder</a>(pts(2,:), cyl, <span class="string">'open'</span>);
+0051 
+0052 <span class="comment">% Create a transformation for the points into the local cylinder coordinate</span>
+0053 <span class="comment">% system. Align the cylinder axis with the z axis and translate the</span>
+0054 <span class="comment">% starting point of the cylinder to the origin.</span>
+0055 TFM = <a href="createRotationVector3d.html" class="code" title="function ROT = createRotationVector3d(A,B)">createRotationVector3d</a>(cyl(4:6)-cyl(1:3), [0 0 1])*<a href="createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>(-cyl(1:3));
+0056 <span class="comment">% Transform the points.</span>
+0057 ptTfm = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(ptProj, TFM);
+0058 <span class="comment">% Convert the transformed points to cylindrical coordinates.</span>
+0059 [ptsTheta, ptsRadius, ptsHeight] = <a href="cart2cyl.html" class="code" title="function varargout = cart2cyl(varargin)">cart2cyl</a>(ptTfm);
+0060 assert(ismembertol(ptsRadius(1),ptsRadius(2)))
+0061 assert(ismembertol(ptsRadius(1),cylRadius))
+0062 
+0063 <span class="comment">% Copy thetas for the conjugate geodesic</span>
+0064 ptsTheta(:,:,2) = ptsTheta;
+0065 ptsTheta(1,1,2) = ptsTheta(1,1,2) + 2*pi;
+0066 
+0067 geoCyl = nan(n,3,size(ptsTheta,3));
+0068 arcLength = nan(1,size(ptsTheta,3));
+0069 <span class="keyword">for</span> t = 1:size(ptsTheta,3)
+0070     [geoCyl(:,:,t), arcLength(t)] = <a href="#_sub1" class="code" title="subfunction [geo, arcLength] = geoCurve(theta, r, z, n)">geoCurve</a>(ptsTheta(:,:,t), cylRadius, ptsHeight, n);
+0071 <span class="keyword">end</span>
+0072 
+0073 <span class="comment">% Select the shortest geodesic</span>
+0074 <span class="keyword">if</span> arcLength(1) &lt;= arcLength(2)
+0075     <span class="comment">% Transform the geodesics back to the global coordinate system</span>
+0076     geo = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(geoCyl(:,:,1), inv(TFM));
+0077     conGeo = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(geoCyl(:,:,2), inv(TFM));
+0078     geoLength = arcLength(1);
+0079     conGeoLength = arcLength(2);
+0080 <span class="keyword">else</span>
+0081     <span class="comment">% Transform the geodesics back to the global coordinate system</span>
+0082     geo = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(geoCyl(:,:,2), inv(TFM));
+0083     conGeo = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(geoCyl(:,:,1), inv(TFM));
+0084     geoLength = arcLength(2);
+0085     conGeoLength = arcLength(1);
+0086 <span class="keyword">end</span>
+0087 
+0088 <span class="keyword">end</span>
+0089 
+0090 <a name="_sub1" href="#_subfunctions" class="code">function [geo, arcLength] = geoCurve(theta, r, z, n)</a>
+0091 <span class="comment">% Parametric expression of the geodesic curve</span>
+0092 u = linspace(theta(1),theta(2),n)';
+0093 geo(:,1) = r*cos(u);
+0094 geo(:,2) = r*sin(u);
+0095 geo(:,3) = (z(2)-z(1))/(theta(2)-theta(1))*u + (z(1)*theta(2)-z(2)*theta(1))/(theta(2)-theta(1));
+0096 <span class="keyword">if</span> all(isnan(geo(:,3)))
+0097     geo(:,3) = linspace(z(1),z(2),n)';
+0098 <span class="keyword">end</span>
+0099 arcLength = sqrt(r^2*(theta(2)-theta(1))^2+(z(2)-z(1))^2);
+0100 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

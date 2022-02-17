@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of projPointOnCylinder</title>
+  <meta name="keywords" content="projPointOnCylinder">
+  <meta name="description" content="PROJPOINTONCYLINDER Project a 3D point onto a cylinder.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; projPointOnCylinder.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>projPointOnCylinder
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>PROJPOINTONCYLINDER Project a 3D point onto a cylinder.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function ptProj = projPointOnCylinder(pt, cyl, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">PROJPOINTONCYLINDER Project a 3D point onto a cylinder.
+
+   PTPROJ = projPointOnCircle3d(PT, CYLINDER).
+   Computes the projection of 3D point PT onto the CYLINDER. 
+   
+   Point PT is a 1-by-3 array, and CYLINDER is a 1-by-7 array.
+   Result PTPROJ is a 1-by-3 array, containing the coordinates of the
+   projection of PT onto the CYLINDER.
+
+   PTPROJ = projPointOnCircle3d(..., OPT)
+   with OPT = 'open' (0) (default) or 'closed' (1), specify if the bases 
+   of the cylinder should be included.
+
+   Example
+       demoProjPointOnCylinder
+
+   See also
+       <a href="projPointOnLine3d.html" class="code" title="function point = projPointOnLine3d(point, line)">projPointOnLine3d</a>, <a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>, <a href="projPointOnCircle3d.html" class="code" title="function point2 = projPointOnCircle3d(point, circle)">projPointOnCircle3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="cart2cyl.html" class="code" title="function varargout = cart2cyl(varargin)">cart2cyl</a>	CART2CYL  Convert cartesian to cylindrical coordinates.</li><li><a href="createRotationVector3d.html" class="code" title="function ROT = createRotationVector3d(A,B)">createRotationVector3d</a>	CREATEROTATIONVECTOR3D Calculates the rotation between two vectors.</li><li><a href="createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>	CREATETRANSLATION3D Create the 4x4 matrix of a 3D translation.</li><li><a href="cyl2cart.html" class="code" title="function varargout = cyl2cart(varargin)">cyl2cart</a>	CYL2CART  Convert cylindrical to cartesian coordinates.</li><li><a href="distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>	DISTANCEPOINTS3D Compute euclidean distance between pairs of 3D Points.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="geodesicCylinder.html" class="code" title="function [geo, geoLength, conGeo, conGeoLength] = geodesicCylinder(pts, cyl, varargin)">geodesicCylinder</a>	GEODESICCYLINDER computes the geodesic between two points on a cylinder.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function ptProj = projPointOnCylinder(pt, cyl, varargin)</a>
+0002 <span class="comment">%PROJPOINTONCYLINDER Project a 3D point onto a cylinder.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PTPROJ = projPointOnCircle3d(PT, CYLINDER).</span>
+0005 <span class="comment">%   Computes the projection of 3D point PT onto the CYLINDER.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   Point PT is a 1-by-3 array, and CYLINDER is a 1-by-7 array.</span>
+0008 <span class="comment">%   Result PTPROJ is a 1-by-3 array, containing the coordinates of the</span>
+0009 <span class="comment">%   projection of PT onto the CYLINDER.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   PTPROJ = projPointOnCircle3d(..., OPT)</span>
+0012 <span class="comment">%   with OPT = 'open' (0) (default) or 'closed' (1), specify if the bases</span>
+0013 <span class="comment">%   of the cylinder should be included.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   Example</span>
+0016 <span class="comment">%       demoProjPointOnCylinder</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   See also</span>
+0019 <span class="comment">%       projPointOnLine3d, projPointOnPlane, projPointOnCircle3d</span>
+0020 <span class="comment">%</span>
+0021 
+0022 <span class="comment">% ---------</span>
+0023 <span class="comment">% Author: oqilipo</span>
+0024 <span class="comment">% Created: 2021-04-17, using R2020b</span>
+0025 <span class="comment">% Copyright 2021</span>
+0026 
+0027 parser = inputParser;
+0028 addRequired(parser, <span class="string">'pt'</span>, @(x) validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0029     {<span class="string">'size'</span>,[1 3],<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'nonnan'</span>}));
+0030 addRequired(parser, <span class="string">'cyl'</span>, @(x) validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0031     {<span class="string">'size'</span>,[1 7],<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'nonnan'</span>}));
+0032 capParValidFunc = @(x) (islogical(x) <span class="keyword">...</span>
+0033     || isequal(x,1) || isequal(x,0) || any(validatestring(x, {<span class="string">'open'</span>,<span class="string">'closed'</span>})));
+0034 addOptional(parser,<span class="string">'cap'</span>,<span class="string">'open'</span>, capParValidFunc);
+0035 parse(parser,pt,cyl,varargin{:});
+0036 pt = parser.Results.pt;
+0037 cyl = parser.Results.cyl;
+0038 cap = lower(parser.Results.cap(1));
+0039 
+0040 <span class="comment">% Radius of the cylinder</span>
+0041 cylRadius = cyl(7);
+0042 <span class="comment">% Height of the cylinder</span>
+0043 cylBottom = -Inf;
+0044 cylHeight = Inf;
+0045 <span class="keyword">if</span> cap == <span class="string">'c'</span> || cap == 1
+0046     cylBottom = 0;
+0047     cylHeight = <a href="distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>(cyl(1:3),cyl(4:6));
+0048 <span class="keyword">end</span>
+0049 <span class="comment">% Create a transformation for the point into a local cylinder coordinate</span>
+0050 <span class="comment">% system. Align the cylinder axis with the z axis and translate the</span>
+0051 <span class="comment">% starting point of the cylinder to the origin.</span>
+0052 TFM = <a href="createRotationVector3d.html" class="code" title="function ROT = createRotationVector3d(A,B)">createRotationVector3d</a>(cyl(4:6)-cyl(1:3), [0 0 1])*<a href="createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>(-cyl(1:3));
+0053 <span class="comment">% cylTfm = [transformPoint3d(cyl(1:3), TFM) transformPoint3d(cyl(4:6), TFM) cylRadius];</span>
+0054 <span class="comment">% cylTfm2 = [0 0 0 0 0 cylHeight, cylRadius];</span>
+0055 <span class="comment">% assert(ismembertol(cylTfm,cylTfm2,'byRows',1,'DataScale',1e1))</span>
+0056 
+0057 <span class="comment">% Transform the point.</span>
+0058 ptTfm = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(pt,TFM);
+0059 <span class="comment">% Convert the transformed point to cylindrical coordinates.</span>
+0060 [ptTheta, ptRadius, ptHeight] = <a href="cart2cyl.html" class="code" title="function varargout = cart2cyl(varargin)">cart2cyl</a>(ptTfm);
+0061 
+0062 <span class="keyword">if</span> ptRadius &lt;= cylRadius &amp;&amp; (ptHeight &lt;= cylBottom || ptHeight &gt;= cylHeight)
+0063     <span class="comment">% If point is inside the radius of the cylinder but outside its height</span>
+0064     <span class="keyword">if</span> ptHeight &lt;= cylBottom
+0065         ptProj_cyl = [ptTheta, ptRadius, 0];
+0066     <span class="keyword">else</span>
+0067         ptProj_cyl = [ptTheta, ptRadius, cylHeight];
+0068     <span class="keyword">end</span>
+0069 <span class="keyword">elseif</span> ptRadius &gt; cylRadius &amp;&amp; (ptHeight &lt;= cylBottom || ptHeight &gt;= cylHeight)
+0070     <span class="comment">% If point is outside the cylinder's radius and height</span>
+0071     <span class="keyword">if</span> ptHeight &lt;= cylBottom
+0072         ptProj_cyl = [ptTheta, cylRadius, 0];
+0073     <span class="keyword">else</span>
+0074         ptProj_cyl = [ptTheta, cylRadius, cylHeight];
+0075     <span class="keyword">end</span>
+0076 <span class="keyword">elseif</span> ptRadius &lt; cylRadius &amp;&amp; (ptHeight &gt; cylBottom &amp;&amp; ptHeight &lt; cylHeight)
+0077     <span class="comment">% If point is inside the cylinder's radius and height</span>
+0078     deltaRadius = cylRadius - ptRadius;
+0079     deltaHeight = cylHeight - ptHeight;
+0080     <span class="keyword">if</span> (deltaRadius &lt; ptHeight &amp;&amp; deltaRadius &lt; deltaHeight) || isinf(cylBottom)
+0081         <span class="comment">% If the distance to the cylinder's surface is smaller than the</span>
+0082         <span class="comment">% distance to the top and bottom surfaces.</span>
+0083         ptProj_cyl = [ptTheta, cylRadius, ptHeight];
+0084     <span class="keyword">else</span>
+0085         <span class="keyword">if</span> ptHeight &lt; deltaHeight
+0086             ptProj_cyl = [ptTheta, ptRadius, 0];
+0087         <span class="keyword">else</span>
+0088             ptProj_cyl = [ptTheta, ptRadius, cylHeight];
+0089         <span class="keyword">end</span>
+0090     <span class="keyword">end</span>
+0091 <span class="keyword">elseif</span> ptRadius &gt;= cylRadius &amp;&amp; (ptHeight &gt; cylBottom &amp;&amp; ptHeight &lt; cylHeight)
+0092     <span class="comment">% If point is outside the radius of the cylinder and inside its height</span>
+0093     ptProj_cyl = [ptTheta, cylRadius, ptHeight];
+0094 <span class="keyword">end</span>
+0095 
+0096 <span class="comment">% Convert the projected point back to Cartesian coordinates</span>
+0097 ptProj_cart = <a href="cyl2cart.html" class="code" title="function varargout = cyl2cart(varargin)">cyl2cart</a>(ptProj_cyl);
+0098 <span class="comment">% Transform the projected point back to the global coordinate system</span>
+0099 ptProj = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(ptProj_cart,inv(TFM));
+0100 
+0101 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

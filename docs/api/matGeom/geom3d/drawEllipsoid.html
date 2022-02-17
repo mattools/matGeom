@@ -1,0 +1,307 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawEllipsoid</title>
+  <meta name="keywords" content="drawEllipsoid">
+  <meta name="description" content="DRAWELLIPSOID Draw a 3D ellipsoid.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; drawEllipsoid.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawEllipsoid
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWELLIPSOID Draw a 3D ellipsoid.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawEllipsoid(elli, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWELLIPSOID Draw a 3D ellipsoid.
+
+   drawEllipsoid(ELLI)
+   Displays a 3D ellipsoid on current axis. ELLI is given by:
+   [XC YC ZC A B C PHI THETA PSI],
+   where (XC, YC, ZC) is the ellipsoid center, A, B and C are the half
+   lengths of the ellipsoid main axes, and PHI THETA PSI are Euler angles
+   representing ellipsoid orientation, in degrees.
+
+   drawEllipsoid(..., 'drawEllipses', true)
+   Also displays the main 3D ellipses corresponding to XY, XZ and YZ
+   planes.
+
+
+   Example
+     figure; hold on;
+     drawEllipsoid([10 20 30   50 30 10   5 10 0]);
+     axis equal;
+
+     figure; hold on;
+     elli = [10 20 30   50 30 10   5 10 0];
+     drawEllipsoid(elli, 'FaceColor', 'r', ...
+         'drawEllipses', true, 'EllipseColor', 'b', 'EllipseWidth', 3);
+     axis equal;
+
+   See also
+   <a href="spheres.html" class="code" title="function spheres(varargin)">spheres</a>, <a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a>, <a href="equivalentEllipsoid.html" class="code" title="function ell = equivalentEllipsoid(points)">equivalentEllipsoid</a>, ellipsoid, <a href="drawTorus.html" class="code" title="function varargout = drawTorus(torus, varargin)">drawTorus</a>,
+   <a href="drawCuboid.html" class="code" title="function varargout = drawCuboid(cuboid, varargin)">drawCuboid</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>	CREATEROTATIONOX Create the 4x4 matrix of a 3D rotation around x-axis.</li><li><a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>	CREATEROTATIONOY Create the 4x4 matrix of a 3D rotation around y-axis.</li><li><a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>	CREATEROTATIONOZ Create the 4x4 matrix of a 3D rotation around z-axis.</li><li><a href="createScaling3d.html" class="code" title="function trans = createScaling3d(varargin)">createScaling3d</a>	CREATESCALING3D Create the 4x4 matrix of a 3D scaling.</li><li><a href="createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>	CREATETRANSLATION3D Create the 4x4 matrix of a 3D translation.</li><li><a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>	DRAWEDGE3D Draw 3D edge in the current axes.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawEllipsoid(elli, varargin)</a>
+0002 <span class="comment">%DRAWELLIPSOID Draw a 3D ellipsoid.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawEllipsoid(ELLI)</span>
+0005 <span class="comment">%   Displays a 3D ellipsoid on current axis. ELLI is given by:</span>
+0006 <span class="comment">%   [XC YC ZC A B C PHI THETA PSI],</span>
+0007 <span class="comment">%   where (XC, YC, ZC) is the ellipsoid center, A, B and C are the half</span>
+0008 <span class="comment">%   lengths of the ellipsoid main axes, and PHI THETA PSI are Euler angles</span>
+0009 <span class="comment">%   representing ellipsoid orientation, in degrees.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   drawEllipsoid(..., 'drawEllipses', true)</span>
+0012 <span class="comment">%   Also displays the main 3D ellipses corresponding to XY, XZ and YZ</span>
+0013 <span class="comment">%   planes.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example</span>
+0017 <span class="comment">%     figure; hold on;</span>
+0018 <span class="comment">%     drawEllipsoid([10 20 30   50 30 10   5 10 0]);</span>
+0019 <span class="comment">%     axis equal;</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%     figure; hold on;</span>
+0022 <span class="comment">%     elli = [10 20 30   50 30 10   5 10 0];</span>
+0023 <span class="comment">%     drawEllipsoid(elli, 'FaceColor', 'r', ...</span>
+0024 <span class="comment">%         'drawEllipses', true, 'EllipseColor', 'b', 'EllipseWidth', 3);</span>
+0025 <span class="comment">%     axis equal;</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   See also</span>
+0028 <span class="comment">%   spheres, drawSphere, equivalentEllipsoid, ellipsoid, drawTorus,</span>
+0029 <span class="comment">%   drawCuboid</span>
+0030 <span class="comment">%</span>
+0031 
+0032 <span class="comment">% ------</span>
+0033 <span class="comment">% Author: David Legland</span>
+0034 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0035 <span class="comment">% Created: 2011-03-12,    using Matlab 7.9.0.529 (R2009b)</span>
+0036 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0037 
+0038 
+0039 <span class="comment">%% Default values</span>
+0040 
+0041 <span class="comment">% number of meridians</span>
+0042 nPhi    = 32;
+0043 
+0044 <span class="comment">% number of parallels</span>
+0045 nTheta  = 16;
+0046 
+0047 <span class="comment">% settings for drawing ellipses</span>
+0048 drawEllipses = false;
+0049 ellipseColor = <span class="string">'k'</span>;
+0050 ellipseWidth = 1;
+0051 
+0052 drawAxes = false;
+0053 axesColor = <span class="string">'k'</span>;
+0054 axesWidth = 2;
+0055 
+0056 
+0057 <span class="comment">%% Extract input arguments</span>
+0058 
+0059 <span class="comment">% Parse the input (try to extract center coordinates and radius)</span>
+0060 <span class="keyword">if</span> nargin == 0
+0061     <span class="comment">% no input: assumes ellipsoid with default shape</span>
+0062     elli = [0 0 0 5 4 3 0 0 0];
+0063 <span class="keyword">end</span>
+0064 
+0065 <span class="comment">% default set of options for drawing meshes</span>
+0066 options = {<span class="string">'FaceColor'</span>, <span class="string">'g'</span>, <span class="string">'linestyle'</span>, <span class="string">'none'</span>};
+0067 
+0068 <span class="keyword">while</span> length(varargin) &gt; 1
+0069     <span class="keyword">switch</span> lower(varargin{1})
+0070         <span class="keyword">case</span> <span class="string">'nphi'</span>
+0071             nPhi = varargin{2};
+0072             
+0073         <span class="keyword">case</span> <span class="string">'ntheta'</span>
+0074             nTheta = varargin{2};
+0075 
+0076         <span class="keyword">case</span> <span class="string">'drawellipses'</span>
+0077             drawEllipses = varargin{2};
+0078             
+0079         <span class="keyword">case</span> <span class="string">'ellipsecolor'</span>
+0080             ellipseColor = varargin{2};
+0081             
+0082         <span class="keyword">case</span> <span class="string">'ellipsewidth'</span>
+0083             ellipseWidth = varargin{2};
+0084             
+0085         <span class="keyword">case</span> <span class="string">'drawaxes'</span>
+0086             drawAxes = varargin{2};
+0087             
+0088         <span class="keyword">case</span> <span class="string">'axescolor'</span>
+0089             axesColor = varargin{2};
+0090             
+0091         <span class="keyword">case</span> <span class="string">'axeswidth'</span>
+0092             axesWidth = varargin{2};
+0093             
+0094         <span class="keyword">otherwise</span>
+0095             <span class="comment">% assumes this is drawing option</span>
+0096             options = [options varargin(1:2)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0097     <span class="keyword">end</span>
+0098 
+0099     varargin(1:2) = [];
+0100 <span class="keyword">end</span>
+0101 
+0102 
+0103 <span class="comment">%% Parse numerical inputs</span>
+0104 
+0105 <span class="comment">% Extract ellipsoid parameters</span>
+0106 xc  = elli(:,1);
+0107 yc  = elli(:,2);
+0108 zc  = elli(:,3);
+0109 a   = elli(:,4);
+0110 b   = elli(:,5);
+0111 c   = elli(:,6);
+0112 k   = pi / 180;
+0113 ellPhi   = elli(:,7) * k;
+0114 ellTheta = elli(:,8) * k;
+0115 ellPsi   = elli(:,9) * k;
+0116 
+0117 
+0118 <span class="comment">%% Coordinates computation</span>
+0119 
+0120 <span class="comment">% convert unit basis to ellipsoid basis</span>
+0121 sca     = <a href="createScaling3d.html" class="code" title="function trans = createScaling3d(varargin)">createScaling3d</a>(a, b, c);
+0122 rotZ    = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(ellPhi);
+0123 rotY    = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(ellTheta);
+0124 rotX    = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(ellPsi);
+0125 tra     = <a href="createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>([xc yc zc]);
+0126 
+0127 <span class="comment">% concatenate transforms</span>
+0128 trans   = tra * rotZ * rotY * rotX * sca;
+0129 
+0130 
+0131 <span class="comment">%% parametrisation of ellipsoid</span>
+0132 
+0133 <span class="comment">% spherical coordinates</span>
+0134 theta   = linspace(0, pi, nTheta+1);
+0135 phi     = linspace(0, 2*pi, nPhi+1);
+0136 
+0137 <span class="comment">% convert to cartesian coordinates</span>
+0138 sintheta = sin(theta);
+0139 x = cos(phi') * sintheta;
+0140 y = sin(phi') * sintheta;
+0141 z = ones(length(phi),1) * cos(theta);
+0142 
+0143 <span class="comment">% transform mesh vertices</span>
+0144 [x, y, z] = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(x, y, z, trans);
+0145 
+0146 
+0147 <span class="comment">%% parametrisation of ellipses</span>
+0148 
+0149 <span class="keyword">if</span> drawEllipses
+0150     <span class="comment">% parametrisation for ellipses</span>
+0151     nVertices = 120;
+0152     t = linspace(0, 2*pi, nVertices+1);
+0153 
+0154     <span class="comment">% XY circle</span>
+0155     xc1 = cos(t');
+0156     yc1 = sin(t');
+0157     zc1 = zeros(size(t'));
+0158 
+0159     <span class="comment">% XZ circle</span>
+0160     xc2 = cos(t');
+0161     yc2 = zeros(size(t'));
+0162     zc2 = sin(t');
+0163 
+0164     <span class="comment">% YZ circle</span>
+0165     xc3 = zeros(size(t'));
+0166     yc3 = cos(t');
+0167     zc3 = sin(t');
+0168 
+0169     <span class="comment">% compute transformed ellipses</span>
+0170     [xc1, yc1, zc1] = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(xc1, yc1, zc1, trans);
+0171     [xc2, yc2, zc2] = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(xc2, yc2, zc2, trans);
+0172     [xc3, yc3, zc3] = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(xc3, yc3, zc3, trans);
+0173 <span class="keyword">end</span>
+0174 
+0175 <span class="comment">%% parametrisation of main axis edges</span>
+0176 
+0177 <span class="keyword">if</span> drawAxes
+0178     axesEndings = [-1 0 0; +1 0 0; 0 -1 0; 0 +1 0; 0 0 -1; 0 0 +1];
+0179     axesEndings = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(axesEndings, trans);
+0180 <span class="keyword">end</span>
+0181 
+0182 
+0183 <span class="comment">%% Drawing</span>
+0184 
+0185 ellipseOptions = {<span class="string">'color'</span>, ellipseColor, <span class="string">'LineWidth'</span>, ellipseWidth};
+0186 axesOptions = {<span class="string">'color'</span>, axesColor, <span class="string">'LineWidth'</span>, axesWidth};
+0187 
+0188 <span class="comment">% Process output</span>
+0189 <span class="keyword">if</span> nargout == 0
+0190     <span class="comment">% no output: draw the ellipsoid</span>
+0191     surf(x, y, z, options{:});
+0192 
+0193     <span class="keyword">if</span> drawEllipses
+0194         plot3(xc1, yc1, zc1, ellipseOptions{:});
+0195         plot3(xc2, yc2, zc2, ellipseOptions{:});
+0196         plot3(xc3, yc3, zc3, ellipseOptions{:});
+0197     <span class="keyword">end</span>
+0198     
+0199     <span class="keyword">if</span> drawAxes
+0200         <a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>([axesEndings(1,:), axesEndings(2,:)], axesOptions{:});
+0201         <a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>([axesEndings(3,:), axesEndings(4,:)], axesOptions{:});
+0202         <a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>([axesEndings(5,:), axesEndings(6,:)], axesOptions{:});
+0203     <span class="keyword">end</span>
+0204     
+0205 <span class="keyword">elseif</span> nargout == 1
+0206     <span class="comment">% one output: draw the ellipsoid and return handle</span>
+0207     varargout{1} = surf(x, y, z, options{:});
+0208     <span class="keyword">if</span> drawEllipses
+0209         plot3(xc1, yc1, zc1, ellipseOptions{:});
+0210         plot3(xc2, yc2, zc2, ellipseOptions{:});
+0211         plot3(xc3, yc3, zc3, ellipseOptions{:});
+0212     <span class="keyword">end</span>
+0213     
+0214 <span class="keyword">elseif</span> nargout == 3
+0215     <span class="comment">% 3 outputs: return computed coordinates</span>
+0216     varargout{1} = x; 
+0217     varargout{2} = y; 
+0218     varargout{3} = z; 
+0219     <span class="keyword">if</span> drawEllipses
+0220         plot3(xc1, yc1, zc1, ellipseOptions{:});
+0221         plot3(xc2, yc2, zc2, ellipseOptions{:});
+0222         plot3(xc3, yc3, zc3, ellipseOptions{:});
+0223     <span class="keyword">end</span>
+0224     
+0225 <span class="keyword">elseif</span> nargout == 4 &amp;&amp; drawEllipses
+0226     <span class="comment">% Also returns handles to ellipses</span>
+0227     varargout{1} = surf(x, y, z, options{:});
+0228     varargout{2} = plot3(xc1, yc1, zc1, ellipseOptions{:});
+0229     varargout{3} = plot3(xc2, yc2, zc2, ellipseOptions{:});
+0230     varargout{4} = plot3(xc3, yc3, zc3, ellipseOptions{:});
+0231     
+0232 <span class="keyword">end</span>
+0233</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

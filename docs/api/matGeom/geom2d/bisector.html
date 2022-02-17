@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of bisector</title>
+  <meta name="keywords" content="bisector">
+  <meta name="description" content="BISECTOR Return the bisector of two lines, or 3 points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; bisector.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>bisector
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>BISECTOR Return the bisector of two lines, or 3 points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function ray = bisector(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">BISECTOR Return the bisector of two lines, or 3 points.
+
+   RAY = bisector(LINE1, LINE2);
+   create the bisector of the two lines, given as [x0 y0 dx dy].
+
+   RAY = bisector(P1, P2, P3);
+   create the bisector of lines (P2 P1) and (P2 P3).
+
+   The result has the form [x0 y0 dx dy], with [x0 y0] being the origin
+   point ans [dx dy] being the direction vector, normalized to have unit
+   norm.
+   
+   See also:
+   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="rays2d.html" class="code" title="function rays2d(varargin)">rays2d</a>
+
+   ---------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ created the 31/10/2003.
+ Copyright 2010 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>	CREATELINE Create a straight line from 2 points, or from other inputs.</li><li><a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>	INTERSECTLINES Return all intersection points of N lines in 2D.</li><li><a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>	LINEANGLE Computes angle between two straight lines.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/polygons2d/medialAxisConvex.html" class="code" title="function [nodes, edges] = medialAxisConvex(points)">medialAxisConvex</a>	MEDIALAXISCONVEX Compute medial axis of a convex polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function ray = bisector(varargin)</a>
+0002 <span class="comment">%BISECTOR Return the bisector of two lines, or 3 points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   RAY = bisector(LINE1, LINE2);</span>
+0005 <span class="comment">%   create the bisector of the two lines, given as [x0 y0 dx dy].</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   RAY = bisector(P1, P2, P3);</span>
+0008 <span class="comment">%   create the bisector of lines (P2 P1) and (P2 P3).</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   The result has the form [x0 y0 dx dy], with [x0 y0] being the origin</span>
+0011 <span class="comment">%   point ans [dx dy] being the direction vector, normalized to have unit</span>
+0012 <span class="comment">%   norm.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   See also:</span>
+0015 <span class="comment">%   lines2d, rays2d</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   ---------</span>
+0018 <span class="comment">% Author: David Legland</span>
+0019 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0020 <span class="comment">% created the 31/10/2003.</span>
+0021 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0022 
+0023 <span class="comment">%   HISTORY</span>
+0024 <span class="comment">%   2005-07-07 add bisector of 3 points</span>
+0025 <span class="comment">%   2010-11-05 ode cleanup</span>
+0026 
+0027 <span class="keyword">if</span> length(varargin)==2
+0028     <span class="comment">% two lines</span>
+0029     line1 = varargin{1};
+0030     line2 = varargin{2};
+0031     
+0032     point = <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(line1, line2);    
+0033     
+0034 <span class="keyword">elseif</span> length(varargin)==3
+0035     <span class="comment">% three points</span>
+0036     p1 = varargin{1};
+0037     p2 = varargin{2};
+0038     p3 = varargin{3};
+0039 
+0040     line1 = <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(p2, p1);
+0041     line2 = <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(p2, p3);
+0042     point = p2;
+0043     
+0044 <span class="keyword">elseif</span> length(varargin)==1
+0045     <span class="comment">% three points, given in one array</span>
+0046     var = varargin{1};
+0047     p1 = var(1, :);
+0048     p2 = var(2, :);
+0049     p3 = var(3, :);
+0050 
+0051     line1 = <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(p2, p1);
+0052     line2 = <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(p2, p3);
+0053     point = p2;
+0054 <span class="keyword">end</span>
+0055 
+0056 <span class="comment">% compute line angles</span>
+0057 a1 = <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>(line1);
+0058 a2 = <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>(line2);
+0059 
+0060 <span class="comment">% compute bisector angle (angle of first line + half angle between lines)</span>
+0061 angle = mod(a1 + mod(a2-a1+2*pi, 2*pi)/2, pi*2);
+0062 
+0063 <span class="comment">% create the resulting ray</span>
+0064 ray = [point cos(angle) sin(angle)];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

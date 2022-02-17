@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polygonSecondAreaMoments</title>
+  <meta name="keywords" content="polygonSecondAreaMoments">
+  <meta name="description" content="POLYGONSECONDAREAMOMENTS Compute second-order area moments of a polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; polygonSecondAreaMoments.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polygonSecondAreaMoments
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYGONSECONDAREAMOMENTS Compute second-order area moments of a polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(poly) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLYGONSECONDAREAMOMENTS Compute second-order area moments of a polygon.
+
+   [IXX, IYY, IXY] = polygonSecondAreaMoments(POLY)
+   Compute the second-order inertia moments of a polygon. The polygon is
+   specified by the N-by-2 list of vertex coordinates.
+
+   Example
+   polygonSecondAreaMoments
+
+   References
+   * http://paulbourke.net/geometry/polygonmesh/
+   * https://en.wikipedia.org/wiki/Second_moment_of_area
+
+   See also
+     polygons2d, <a href="polygonEquivalentEllipse.html" class="code" title="function elli = polygonEquivalentEllipse(poly)">polygonEquivalentEllipse</a>, <a href="polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>, <a href="polygonCentroid.html" class="code" title="function [centroid, area] = polygonCentroid(varargin)">polygonCentroid</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>	CENTROID Compute centroid (center of mass) of a set of points.</li><li><a href="polygonCentroid.html" class="code" title="function [centroid, area] = polygonCentroid(varargin)">polygonCentroid</a>	Computes the centroid (center of mass) of a polygon.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polygonEquivalentEllipse.html" class="code" title="function elli = polygonEquivalentEllipse(poly)">polygonEquivalentEllipse</a>	Compute equivalent ellipse with same second order moments as polygon.</li><li><a href="polygonInertiaEllipse.html" class="code" title="function elli = polygonInertiaEllipse(poly)">polygonInertiaEllipse</a>	POLYGONINERTIAELLIPSE Compute ellipse with same inertia moments as polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(poly)</a>
+0002 <span class="comment">%POLYGONSECONDAREAMOMENTS Compute second-order area moments of a polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [IXX, IYY, IXY] = polygonSecondAreaMoments(POLY)</span>
+0005 <span class="comment">%   Compute the second-order inertia moments of a polygon. The polygon is</span>
+0006 <span class="comment">%   specified by the N-by-2 list of vertex coordinates.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Example</span>
+0009 <span class="comment">%   polygonSecondAreaMoments</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   References</span>
+0012 <span class="comment">%   * http://paulbourke.net/geometry/polygonmesh/</span>
+0013 <span class="comment">%   * https://en.wikipedia.org/wiki/Second_moment_of_area</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   See also</span>
+0016 <span class="comment">%     polygons2d, polygonEquivalentEllipse, polygonArea, polygonCentroid</span>
+0017  
+0018 <span class="comment">% ------</span>
+0019 <span class="comment">% Author: David Legland</span>
+0020 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0021 <span class="comment">% Created: 2017-09-08,    using Matlab 9.1.0.441655 (R2016b)</span>
+0022 <span class="comment">% Copyright 2017 INRA - Cepia Software Platform.</span>
+0023 
+0024 <span class="comment">% get vertex coordinates, and recenter polygon</span>
+0025 <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a> = <a href="polygonCentroid.html" class="code" title="function [centroid, area] = polygonCentroid(varargin)">polygonCentroid</a>(poly);
+0026 px = poly(:,1) - <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>(1);
+0027 py = poly(:,2) - <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>(2);
+0028 
+0029 <span class="comment">% vertex indices</span>
+0030 N = length(px);
+0031 iNext = [2:N 1];
+0032 
+0033 <span class="comment">% compute twice signed area of each triangle</span>
+0034 common = px .* py(iNext) - px(iNext) .* py;
+0035 
+0036 <span class="comment">% compute each term</span>
+0037 Ixx = sum( (py.^2 + py .* py(iNext) + py(iNext).^2) .* common) / 12;
+0038 Iyy = sum( (px.^2 + px .* px(iNext) + px(iNext).^2) .* common) / 12;
+0039 Ixy = sum( <span class="keyword">...</span>
+0040     (px .* py(iNext) + 2 * px .* py + 2 * px(iNext) .* py(iNext) <span class="keyword">...</span>
+0041     + px(iNext) .* py ) .* common) / 24;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

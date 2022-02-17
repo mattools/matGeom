@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polygonVertices</title>
+  <meta name="keywords" content="polygonVertices">
+  <meta name="description" content="POLYGONVERTICES Extract all vertices of a (multi-)polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; polygonVertices.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polygonVertices
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYGONVERTICES Extract all vertices of a (multi-)polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function vertices = polygonVertices(poly) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLYGONVERTICES Extract all vertices of a (multi-)polygon.
+
+   VERTS = polygonVertices(POLY)
+   Returns the set of verttices from the polygon POLY. POLY can be either:
+   * a N-by-2 array of vertices. In that case, POLY and VERTS are the
+       same.
+   * a N-by-2 array of vertices with pairs of NaN values separating two
+       rings of the polygon. In that case, the array VERTS corresponds to
+       the vertices of the polygon, without copying the NaN values.
+   * a cell array of loops. In that case, the functions recursively
+       process the polygons and populated the vertex array.
+
+
+   Example
+     % create a polygon with a hole, using NaN for separating rings
+     ring1 = [0 0 ; 50 0;50 50;0 50];
+     ring2 = [20 20;20 30;30 30;30 20];
+     poly = [ring1 ; NaN NaN ; ring2];
+     figure; drawPolygon(poly, 'b'); 
+     axis([-10 60 -10 60]); axis equal; hold on;
+     verts = polygonVertices(poly);
+     drawPoint(verts, 'bo');
+
+     % create a polygon with a hole, storing rings in cell array
+     ring1 = [0 0 ; 50 0;50 50;0 50];
+     ring2 = [20 20;20 30;30 30;30 20];
+     poly = {ring1, ring2};
+     figure; drawPolygon(poly, 'b'); 
+     axis([-10 60 -10 60]); axis equal; hold on;
+     verts = polygonVertices(poly);
+     drawPoint(verts, 'bo');
+
+   See also
+     polygons2d, <a href="polygonEdges.html" class="code" title="function edges = polygonEdges(poly)">polygonEdges</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polygonVertices.html" class="code" title="function vertices = polygonVertices(poly)">polygonVertices</a>	POLYGONVERTICES Extract all vertices of a (multi-)polygon.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polygonVertices.html" class="code" title="function vertices = polygonVertices(poly)">polygonVertices</a>	POLYGONVERTICES Extract all vertices of a (multi-)polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function vertices = polygonVertices(poly)</a>
+0002 <span class="comment">%POLYGONVERTICES Extract all vertices of a (multi-)polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   VERTS = polygonVertices(POLY)</span>
+0005 <span class="comment">%   Returns the set of verttices from the polygon POLY. POLY can be either:</span>
+0006 <span class="comment">%   * a N-by-2 array of vertices. In that case, POLY and VERTS are the</span>
+0007 <span class="comment">%       same.</span>
+0008 <span class="comment">%   * a N-by-2 array of vertices with pairs of NaN values separating two</span>
+0009 <span class="comment">%       rings of the polygon. In that case, the array VERTS corresponds to</span>
+0010 <span class="comment">%       the vertices of the polygon, without copying the NaN values.</span>
+0011 <span class="comment">%   * a cell array of loops. In that case, the functions recursively</span>
+0012 <span class="comment">%       process the polygons and populated the vertex array.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   Example</span>
+0016 <span class="comment">%     % create a polygon with a hole, using NaN for separating rings</span>
+0017 <span class="comment">%     ring1 = [0 0 ; 50 0;50 50;0 50];</span>
+0018 <span class="comment">%     ring2 = [20 20;20 30;30 30;30 20];</span>
+0019 <span class="comment">%     poly = [ring1 ; NaN NaN ; ring2];</span>
+0020 <span class="comment">%     figure; drawPolygon(poly, 'b');</span>
+0021 <span class="comment">%     axis([-10 60 -10 60]); axis equal; hold on;</span>
+0022 <span class="comment">%     verts = polygonVertices(poly);</span>
+0023 <span class="comment">%     drawPoint(verts, 'bo');</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%     % create a polygon with a hole, storing rings in cell array</span>
+0026 <span class="comment">%     ring1 = [0 0 ; 50 0;50 50;0 50];</span>
+0027 <span class="comment">%     ring2 = [20 20;20 30;30 30;30 20];</span>
+0028 <span class="comment">%     poly = {ring1, ring2};</span>
+0029 <span class="comment">%     figure; drawPolygon(poly, 'b');</span>
+0030 <span class="comment">%     axis([-10 60 -10 60]); axis equal; hold on;</span>
+0031 <span class="comment">%     verts = polygonVertices(poly);</span>
+0032 <span class="comment">%     drawPoint(verts, 'bo');</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">%   See also</span>
+0035 <span class="comment">%     polygons2d, polygonEdges</span>
+0036  
+0037 <span class="comment">% ------</span>
+0038 <span class="comment">% Author: David Legland</span>
+0039 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0040 <span class="comment">% Created: 2018-06-07,    using Matlab 9.4.0.813654 (R2018a)</span>
+0041 <span class="comment">% Copyright 2018 INRA - Cepia Software Platform.</span>
+0042 
+0043 
+0044 <span class="keyword">if</span> isnumeric(poly)
+0045     <span class="comment">% find NaN or infinite values</span>
+0046     inds = sum(isfinite(poly), 2) == 2;
+0047     
+0048     <span class="comment">% filter non-finite vertices if necessary</span>
+0049     <span class="keyword">if</span> any(~inds)
+0050         vertices = poly(inds, :);
+0051     <span class="keyword">else</span>
+0052         vertices = poly;
+0053     <span class="keyword">end</span>
+0054 <span class="keyword">elseif</span> iscell(poly)
+0055     <span class="comment">% process cell array</span>
+0056     vertices = zeros(0, 2);
+0057     <span class="keyword">for</span> i = 1:length(poly)
+0058         vertices = [vertices ; <a href="polygonVertices.html" class="code" title="function vertices = polygonVertices(poly)">polygonVertices</a>(poly{i})]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0059     <span class="keyword">end</span>
+0060 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

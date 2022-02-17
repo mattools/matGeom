@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of vectorNorm3d</title>
+  <meta name="keywords" content="vectorNorm3d">
+  <meta name="description" content="VECTORNORM3D Norm of a 3D vector or of set of 3D vectors.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; vectorNorm3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>vectorNorm3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>VECTORNORM3D Norm of a 3D vector or of set of 3D vectors.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function n = vectorNorm3d(v) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">VECTORNORM3D Norm of a 3D vector or of set of 3D vectors.
+
+   N = vectorNorm3d(V);
+   Returns the norm of vector V.
+
+   When V is a N-by-3 array, compute norm for each vector of the array.
+   Vectors are given as rows. Result is then a N-by-1 array.
+
+   NOTE: Computes only the Euclidean norm.
+
+   See also:
+     <a href="vectors3d.html" class="code" title="function vectors3d(varargin)">vectors3d</a>, <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>, <a href="vectorAngle3d.html" class="code" title="function theta = vectorAngle3d(v1, v2)">vectorAngle3d</a>, <a href="hypot3.html" class="code" title="function h = hypot3(dx, dy, dz)">hypot3</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="dihedralAngle.html" class="code" title="function theta = dihedralAngle(plane1, plane2)">dihedralAngle</a>	DIHEDRALANGLE Compute dihedral angle between 2 planes.</li><li><a href="distanceLines3d.html" class="code" title="function [d, pt1, pt2] = distanceLines3d(line1, line2)">distanceLines3d</a>	DISTANCELINES3D Minimal distance between two 3D lines.</li><li><a href="distancePointLine3d.html" class="code" title="function d = distancePointLine3d(point, line)">distancePointLine3d</a>	DISTANCEPOINTLINE3D Euclidean distance between 3D point and line.</li><li><a href="distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>	DISTANCEPOINTS3D Compute euclidean distance between pairs of 3D Points.</li><li><a href="intersectLineTriangle3d.html" class="code" title="function [point, pos, isInside] = intersectLineTriangle3d(line, triangle, varargin)">intersectLineTriangle3d</a>	INTERSECTLINETRIANGLE3D Intersection point of a 3D line and a 3D triangle.</li><li><a href="isParallel3d.html" class="code" title="function b = isParallel3d(v1, v2, varargin)">isParallel3d</a>	ISPARALLEL3D Check parallelism of two 3D vectors.</li><li><a href="isPointOnLine3d.html" class="code" title="function b = isPointOnLine3d(point, line, varargin)">isPointOnLine3d</a>	ISPOINTONLINE3D Test if a 3D point belongs to a 3D line.</li><li><a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>	PLANEPOSITION Compute position of a point on a plane.</li><li><a href="polygonArea3d.html" class="code" title="function area = polygonArea3d(poly, varargin)">polygonArea3d</a>	POLYGONAREA3D Area of a 3D polygon.</li><li><a href="triangleArea3d.html" class="code" title="function area = triangleArea3d(pt1, pt2, pt3)">triangleArea3d</a>	TRIANGLEAREA3D Area of a 3D triangle.</li><li><a href="vectorAngle3d.html" class="code" title="function theta = vectorAngle3d(v1, v2)">vectorAngle3d</a>	VECTORANGLE3D Angle between two 3D vectors.</li><li><a href="../../matGeom/meshes3d/intersectLineMesh3d.html" class="code" title="function [points, pos, faceInds, lineInds] = intersectLineMesh3d(line, vertices, varargin)">intersectLineMesh3d</a>	Intersection points of a 3D line with a mesh.</li><li><a href="../../matGeom/meshes3d/mergeCoplanarFaces.html" class="code" title="function varargout = mergeCoplanarFaces(nodes, varargin)">mergeCoplanarFaces</a>	MERGECOPLANARFACES Merge coplanar faces of a polyhedral mesh.</li><li><a href="../../matGeom/meshes3d/meshFaceAreas.html" class="code" title="function areas = meshFaceAreas(vertices, faces)">meshFaceAreas</a>	MESHFACEAREAS Surface area of each face of a mesh.</li><li><a href="../../matGeom/meshes3d/meshSilhouette.html" class="code" title="function silhouette = meshSilhouette(v, f, varargin)">meshSilhouette</a>	MESHSILHOUETTE Compute the 2D outline of a 3D mesh on an arbitrary plane.</li><li><a href="../../matGeom/meshes3d/minConvexHull.html" class="code" title="function newFaces = minConvexHull(points, varargin)">minConvexHull</a>	MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.</li><li><a href="../../matGeom/meshes3d/trimeshSurfaceArea.html" class="code" title="function area = trimeshSurfaceArea(v, e, f)">trimeshSurfaceArea</a>	TRIMESHSURFACEAREA Surface area of a triangular mesh.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function n = vectorNorm3d(v)</a>
+0002 <span class="comment">%VECTORNORM3D Norm of a 3D vector or of set of 3D vectors.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   N = vectorNorm3d(V);</span>
+0005 <span class="comment">%   Returns the norm of vector V.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   When V is a N-by-3 array, compute norm for each vector of the array.</span>
+0008 <span class="comment">%   Vectors are given as rows. Result is then a N-by-1 array.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   NOTE: Computes only the Euclidean norm.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   See also:</span>
+0013 <span class="comment">%     vectors3d, normalizeVector3d, vectorAngle3d, hypot3</span>
+0014 <span class="comment">%</span>
+0015 
+0016 <span class="comment">%   ---------</span>
+0017 <span class="comment">%   author : David Legland</span>
+0018 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0019 <span class="comment">%   created the 21/02/2005.</span>
+0020 
+0021 <span class="comment">%   HISTORY</span>
+0022 <span class="comment">%   19/06/2009 rename as vectorNorm3d</span>
+0023 
+0024 n = sqrt(sum(v.*v, ndims(v)));</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

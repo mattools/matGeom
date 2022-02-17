@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawVertices</title>
+  <meta name="keywords" content="drawVertices">
+  <meta name="description" content="DRAWVERTICES Draw the vertices of a polygon or polyline.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; drawVertices.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawVertices
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWVERTICES Draw the vertices of a polygon or polyline.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawVertices(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWVERTICES Draw the vertices of a polygon or polyline.
+
+   drawVertices(POLY)
+   Draws the vertices of the given polygon, using pre-defined style.
+   Default is to draw vertices as squares, with the first vertex filled. 
+
+   Example
+     poly = circleToPolygon([20 30 40], 16);
+     drawPolygon(poly); 
+     hold on; axis equal;
+     drawVertices(poly);
+
+   See also
+   drawPoint, <a href="drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a>, <a href="drawPolyline.html" class="code" title="function varargout = drawPolyline(varargin)">drawPolyline</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2011-12-11,    using Matlab 7.9.0.529 (R2009b)
+ Copyright 2011 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawVertices.html" class="code" title="function varargout = drawVertices(varargin)">drawVertices</a>	DRAWVERTICES Draw the vertices of a polygon or polyline.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawVertices.html" class="code" title="function varargout = drawVertices(varargin)">drawVertices</a>	DRAWVERTICES Draw the vertices of a polygon or polyline.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawVertices(varargin)</a>
+0002 <span class="comment">%DRAWVERTICES Draw the vertices of a polygon or polyline.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawVertices(POLY)</span>
+0005 <span class="comment">%   Draws the vertices of the given polygon, using pre-defined style.</span>
+0006 <span class="comment">%   Default is to draw vertices as squares, with the first vertex filled.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Example</span>
+0009 <span class="comment">%     poly = circleToPolygon([20 30 40], 16);</span>
+0010 <span class="comment">%     drawPolygon(poly);</span>
+0011 <span class="comment">%     hold on; axis equal;</span>
+0012 <span class="comment">%     drawVertices(poly);</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   See also</span>
+0015 <span class="comment">%   drawPoint, drawPolygon, drawPolyline</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">% ------</span>
+0018 <span class="comment">% Author: David Legland</span>
+0019 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0020 <span class="comment">% Created: 2011-12-11,    using Matlab 7.9.0.529 (R2009b)</span>
+0021 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0022 
+0023 <span class="comment">% extract handle of axis to draw on</span>
+0024 <span class="keyword">if</span> isAxisHandle(varargin{1})
+0025     ax = varargin{1};
+0026     varargin(1) = [];
+0027 <span class="keyword">else</span>
+0028     ax = gca;
+0029 <span class="keyword">end</span>
+0030 
+0031 var = varargin{1};
+0032 
+0033 
+0034 <span class="comment">%% Manage cell arrays of polygons / polylines</span>
+0035 
+0036 <span class="comment">% case of a set of polygons stored in a cell array</span>
+0037 <span class="keyword">if</span> iscell(var)
+0038     N = length(var);
+0039     h = zeros(N, 1);
+0040     <span class="keyword">for</span> i = 1:N
+0041         state = ishold(gca);
+0042         hold on;
+0043         <span class="comment">% check for empty polygons</span>
+0044         <span class="keyword">if</span> ~isempty(var{i})
+0045             h(i) = <a href="drawVertices.html" class="code" title="function varargout = drawVertices(varargin)">drawVertices</a>(ax, var{i}, varargin{2:end});
+0046         <span class="keyword">end</span>
+0047         <span class="keyword">if</span> ~state
+0048             hold off
+0049         <span class="keyword">end</span>
+0050     <span class="keyword">end</span>
+0051 
+0052     <span class="keyword">if</span> nargout &gt; 0
+0053         varargout = {h};
+0054     <span class="keyword">end</span>
+0055 
+0056     <span class="keyword">return</span>;
+0057 <span class="keyword">end</span>
+0058 
+0059 
+0060 <span class="comment">%% Parse coordinates and options</span>
+0061 
+0062 <span class="comment">% Extract coordinates of vertices</span>
+0063 <span class="keyword">if</span> size(var, 2) &gt; 1
+0064     <span class="comment">% first argument is a vertex array</span>
+0065     px = var(:, 1);
+0066     py = var(:, 2);
+0067     varargin(1) = [];
+0068     
+0069 <span class="keyword">elseif</span> length(varargin) &gt;= 2 &amp;&amp; isnumeric(varargin{1}) &amp;&amp; isnumeric(varargin{2})
+0070     <span class="comment">% arguments 1 and 2 correspond to x and y coordinate respectively</span>
+0071     px = varargin{1};
+0072     py = varargin{2};
+0073     varargin(1:2) = [];
+0074     
+0075 <span class="keyword">else</span>
+0076     <span class="comment">% unknow input format</span>
+0077     error(<span class="string">'Should specify either a N-by-2 array, or 2 N-by-1 vectors'</span>);
+0078 <span class="keyword">end</span>
+0079 
+0080 <span class="comment">% concatenate input argument(s) with default options</span>
+0081 defaults = {<span class="string">'MarkerSize'</span>, 6};
+0082 <span class="keyword">if</span> length(varargin) == 1
+0083     varargin = [varargin defaults];
+0084 <span class="keyword">else</span>
+0085     varargin = [{<span class="string">'ks'</span>} defaults varargin];
+0086 <span class="keyword">end</span>
+0087 
+0088 
+0089 <span class="comment">%% Draw the vertices</span>
+0090 
+0091 <span class="comment">% draw the vertices</span>
+0092 h = plot(ax, px, py, varargin{:});
+0093 
+0094 <span class="comment">% draw the first vertex with a different style</span>
+0095 plot(ax, px(1), py(1), <span class="string">'ks'</span>, <span class="string">'MarkerFaceColor'</span>, <span class="string">'k'</span>, <span class="string">'MarkerSize'</span>, 8);
+0096 
+0097 <span class="comment">% format output arg</span>
+0098 <span class="keyword">if</span> nargout &gt; 0
+0099     varargout = {h};
+0100 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

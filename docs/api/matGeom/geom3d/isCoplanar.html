@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of isCoplanar</title>
+  <meta name="keywords" content="isCoplanar">
+  <meta name="description" content="ISCOPLANAR Tests input points for coplanarity in 3-space.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; isCoplanar.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>isCoplanar
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ISCOPLANAR Tests input points for coplanarity in 3-space.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function copl = isCoplanar(x,y,z,tol) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ISCOPLANAR Tests input points for coplanarity in 3-space.
+
+ COPL = isCoplanar(PTS)
+ Tests the coplanarity of the input points in array PTS. Input array must
+ be 4-by-3, each row containing coordinate of one point.
+
+ COPL = isCoplanar(PTS, TOLERANCE)
+ Specifies the tolerance value used for checking coplanarity. Default is
+ zero.
+ 
+ 
+ Example: 
+   iscoplanar([1 2 -2; -3 1 -14; -1 2 -6; 1 -2 -8], eps)</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/meshes3d/mergeCoplanarFaces.html" class="code" title="function varargout = mergeCoplanarFaces(nodes, varargin)">mergeCoplanarFaces</a>	MERGECOPLANARFACES Merge coplanar faces of a polyhedral mesh.</li><li><a href="../../matGeom/meshes3d/minConvexHull.html" class="code" title="function newFaces = minConvexHull(points, varargin)">minConvexHull</a>	MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function copl = isCoplanar(x,y,z,tol)</a>
+0002 <span class="comment">%ISCOPLANAR Tests input points for coplanarity in 3-space.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">% COPL = isCoplanar(PTS)</span>
+0005 <span class="comment">% Tests the coplanarity of the input points in array PTS. Input array must</span>
+0006 <span class="comment">% be 4-by-3, each row containing coordinate of one point.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">% COPL = isCoplanar(PTS, TOLERANCE)</span>
+0009 <span class="comment">% Specifies the tolerance value used for checking coplanarity. Default is</span>
+0010 <span class="comment">% zero.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">% Example:</span>
+0014 <span class="comment">%   iscoplanar([1 2 -2; -3 1 -14; -1 2 -6; 1 -2 -8], eps)</span>
+0015 
+0016 <span class="comment">%</span>
+0017 <span class="comment">% Adapted from a function originally written by Brett Shoelson, Ph.D.</span>
+0018 <span class="comment">% brett.shoelson@joslin.harvard.edu</span>
+0019 <span class="comment">% https://fr.mathworks.com/matlabcentral/fileexchange/46-iscoplanar-m</span>
+0020 <span class="comment">%</span>
+0021 
+0022 <span class="keyword">if</span> nargin == 0
+0023     error(<span class="string">'Requires at least one input argument.'</span>); 
+0024     
+0025 <span class="keyword">elseif</span> nargin == 1
+0026     <span class="keyword">if</span> size(x,2) == 3
+0027         <span class="comment">% Matrix of all x,y,z is input</span>
+0028         pts = x;
+0029         tol = 0;
+0030     <span class="keyword">else</span>
+0031         error(<span class="string">'Invalid input.'</span>)
+0032     <span class="keyword">end</span>
+0033     
+0034 <span class="keyword">elseif</span> nargin == 2
+0035     <span class="keyword">if</span> size(x,2) == 3
+0036         <span class="comment">% Matrix of all x,y,z is input</span>
+0037         pts = x;
+0038         tol = y;
+0039     <span class="keyword">else</span>
+0040         error(<span class="string">'Invalid input.'</span>)
+0041     <span class="keyword">end</span>
+0042 <span class="keyword">elseif</span> nargin == 3
+0043     <span class="comment">% Compile a matrix of all x,y,z</span>
+0044     pts = [x y z];
+0045     tol = 0;
+0046 <span class="keyword">else</span>
+0047     pts = [x y z];
+0048 <span class="keyword">end</span>
+0049 
+0050 <span class="keyword">if</span> size(x, 1) &lt; 4
+0051     error(<span class="string">'Requires at least four points to compute coplanarity'</span>);
+0052 <span class="keyword">end</span>
+0053 
+0054 <span class="comment">% replace first point at the origin and compute SVD of the matrix</span>
+0055 sv = svd(bsxfun(@minus, pts(2:<span class="keyword">end</span>,:), pts(1,:)));
+0056 copl = sv(3) &lt;= tol * sv(1);
+0057 
+0058 <span class="comment">% % Alterantive version that computes the rank of the matrix</span>
+0059 <span class="comment">% rnk = rank(bsxfun(@minus, pts(2:end,:), pts(1,:)), tol);</span>
+0060 <span class="comment">% copl = rnk &lt;= size(pts, 2) - 1;</span>
+0061 
+0062 <span class="comment">% % Old version:</span>
+0063 <span class="comment">% %Compare all 4-tuples of point combinations; {P1:P4} are coplanar iff</span>
+0064 <span class="comment">% %det([x1 y1 z1 1;x2 y2 z2 1;x3 y3 z3 1;x4 y4 z4 1])==0</span>
+0065 <span class="comment">% tmp = nchoosek(1:size(pts,1),4);</span>
+0066 <span class="comment">% for ii = 1:size(tmp,1)</span>
+0067 <span class="comment">%     copl = abs(det([pts(tmp(ii, :), :) ones(4,1)])) &lt;= tolerance;</span>
+0068 <span class="comment">%     if ~copl</span>
+0069 <span class="comment">%         break</span>
+0070 <span class="comment">%     end</span>
+0071 <span class="comment">% end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

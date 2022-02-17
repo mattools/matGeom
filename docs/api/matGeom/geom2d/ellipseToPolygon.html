@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of ellipseToPolygon</title>
+  <meta name="keywords" content="ellipseToPolygon">
+  <meta name="description" content="ELLIPSETOPOLYGON Convert an ellipse into a series of points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; ellipseToPolygon.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>ellipseToPolygon
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ELLIPSETOPOLYGON Convert an ellipse into a series of points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = ellipseToPolygon(ellipse, N) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ELLIPSETOPOLYGON Convert an ellipse into a series of points.
+
+   P = ellipseToPolygon(ELL, N);
+   converts ELL given as [x0 y0 a b] or [x0 y0 a b theta] into a polygon
+   with N edges. The result P is a N-by-2 array containing the coordinates
+   of the N vertices of the polygon.
+
+   P = ellipseToPolygon(ELL);
+   Use a default number of edges equal to 72. This results in one point
+   for each 5 degrees.
+   
+   [X, Y] = ellipseToPolygon(...);
+   Return the coordinates of vertices in two separate arrays.
+
+   Example
+     poly = ellipseToPolygon([50 50 40 30 20], 60);
+     figure; hold on;
+     axis equal; axis([0 100 10 90]);
+     drawPolygon(poly, 'b');
+     drawPoint(poly, 'bo');
+
+   See also:
+   <a href="ellipses2d.html" class="code" title="function ellipses2d(varargin)">ellipses2d</a>, <a href="drawEllipse.html" class="code" title="function varargout = drawEllipse(varargin)">drawEllipse</a>, <a href="circleToPolygon.html" class="code" title="function varargout = circleToPolygon(circle, varargin)">circleToPolygon</a>, <a href="rectToPolygon.html" class="code" title="function [tx, ty] = rectToPolygon(rect)">rectToPolygon</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = ellipseToPolygon(ellipse, N)</a>
+0002 <span class="comment">%ELLIPSETOPOLYGON Convert an ellipse into a series of points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   P = ellipseToPolygon(ELL, N);</span>
+0005 <span class="comment">%   converts ELL given as [x0 y0 a b] or [x0 y0 a b theta] into a polygon</span>
+0006 <span class="comment">%   with N edges. The result P is a N-by-2 array containing the coordinates</span>
+0007 <span class="comment">%   of the N vertices of the polygon.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   P = ellipseToPolygon(ELL);</span>
+0010 <span class="comment">%   Use a default number of edges equal to 72. This results in one point</span>
+0011 <span class="comment">%   for each 5 degrees.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   [X, Y] = ellipseToPolygon(...);</span>
+0014 <span class="comment">%   Return the coordinates of vertices in two separate arrays.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example</span>
+0017 <span class="comment">%     poly = ellipseToPolygon([50 50 40 30 20], 60);</span>
+0018 <span class="comment">%     figure; hold on;</span>
+0019 <span class="comment">%     axis equal; axis([0 100 10 90]);</span>
+0020 <span class="comment">%     drawPolygon(poly, 'b');</span>
+0021 <span class="comment">%     drawPoint(poly, 'bo');</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   See also:</span>
+0024 <span class="comment">%   ellipses2d, drawEllipse, circleToPolygon, rectToPolygon</span>
+0025 <span class="comment">%</span>
+0026 
+0027 <span class="comment">%   ---------</span>
+0028 <span class="comment">%   author : David Legland</span>
+0029 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0030 <span class="comment">%   created the 06/04/2005.</span>
+0031 <span class="comment">%</span>
+0032 
+0033 <span class="comment">% HISTORY</span>
+0034 <span class="comment">% 2011-03-30 use angles in degrees, add default value for N</span>
+0035 <span class="comment">% 2011-12-09 rename to ellipseToPolygon</span>
+0036 <span class="comment">% 2017-08-31 returns N vertices instead of N+1</span>
+0037 
+0038 <span class="comment">% default value for N</span>
+0039 <span class="keyword">if</span> nargin &lt; 2
+0040     N = 72;
+0041 <span class="keyword">end</span>
+0042 
+0043 <span class="comment">% angle of ellipse</span>
+0044 theta = 0;
+0045 <span class="keyword">if</span> size(ellipse, 2) &gt; 4
+0046     theta = ellipse(:,5);
+0047 <span class="keyword">end</span>
+0048 
+0049 <span class="comment">% get ellipse parameters</span>
+0050 xc = ellipse(:,1);
+0051 yc = ellipse(:,2);
+0052 a  = ellipse(:,3);
+0053 b  = ellipse(:,4);
+0054 
+0055 <span class="comment">% create time basis</span>
+0056 t = linspace(0, 2*pi, N+1)';
+0057 t(end) = [];
+0058 
+0059 <span class="comment">% pre-compute trig functions (angles is in degrees)</span>
+0060 cot = cosd(theta);
+0061 sit = sind(theta);
+0062 
+0063 <span class="comment">% position of points</span>
+0064 x = xc + a * cos(t) * cot - b * sin(t) * sit;
+0065 y = yc + a * cos(t) * sit + b * sin(t) * cot;
+0066 
+0067 <span class="comment">% format output depending on number of a param.</span>
+0068 <span class="keyword">if</span> nargout == 1
+0069     varargout = {[x y]};
+0070 <span class="keyword">elseif</span> nargout == 2
+0071     varargout = {x, y};
+0072 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

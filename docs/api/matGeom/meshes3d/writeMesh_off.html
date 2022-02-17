@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of writeMesh_off</title>
+  <meta name="keywords" content="writeMesh_off">
+  <meta name="description" content="WRITEMESH_OFF Write a mesh into a text file in OFF format.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; writeMesh_off.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>writeMesh_off
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>WRITEMESH_OFF Write a mesh into a text file in OFF format.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function writeMesh_off(fileName, vertices, faces) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">WRITEMESH_OFF Write a mesh into a text file in OFF format.
+
+   writeMesh_off(FNAME, V, F)
+
+   Example
+   writeMesh_off
+
+   See also
+      meshes3d, <a href="writeMesh.html" class="code" title="function writeMesh(fileName, vertices, faces, varargin)">writeMesh</a>, <a href="readMesh_off.html" class="code" title="function varargout = readMesh_off(fileName)">readMesh_off</a>, <a href="writeMesh_ply.html" class="code" title="function writeMesh_ply(fileName, vertices, faces, varargin)">writeMesh_ply</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="writeMesh.html" class="code" title="function writeMesh(fileName, vertices, faces, varargin)">writeMesh</a>	Write 3D mesh data by inferring format from file name.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function writeMesh_off(fileName, vertices, faces)</a>
+0002 <span class="comment">%WRITEMESH_OFF Write a mesh into a text file in OFF format.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   writeMesh_off(FNAME, V, F)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   Example</span>
+0007 <span class="comment">%   writeMesh_off</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   See also</span>
+0010 <span class="comment">%      meshes3d, writeMesh, readMesh_off, writeMesh_ply</span>
+0011  
+0012 <span class="comment">% ------</span>
+0013 <span class="comment">% Author: David Legland</span>
+0014 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0015 <span class="comment">% Created: 2018-04-26,    using Matlab 9.4.0.813654 (R2018a)</span>
+0016 <span class="comment">% Copyright 2018 INRA - Cepia Software Platform.</span>
+0017 
+0018 <span class="keyword">if</span> ~ischar(fileName)
+0019     error(<span class="string">'First argument must contain the name of the file'</span>);
+0020 <span class="keyword">end</span>
+0021 
+0022 <span class="comment">% optionnaly parses data</span>
+0023 <span class="keyword">if</span> isstruct(vertices)
+0024     faces = vertices.faces;
+0025     vertices = vertices.vertices;
+0026 <span class="keyword">end</span>
+0027 
+0028 <span class="comment">% open file for writing text</span>
+0029 f = fopen(fileName, <span class="string">'wt'</span>);
+0030 <span class="keyword">if</span> (f == -1)
+0031     error(<span class="string">'Couldn''t open the file %s'</span>, fileName);
+0032 <span class="keyword">end</span>
+0033 
+0034 <span class="comment">% write the header line</span>
+0035 fprintf(f, <span class="string">'OFF\n'</span>);
+0036 
+0037 <span class="comment">% write number of vertices and of faces</span>
+0038 nVertices = size(vertices, 1);
+0039 nFaces = size(faces, 1);
+0040 <span class="keyword">if</span> iscell(faces)
+0041     nFaces = length(faces);
+0042 <span class="keyword">end</span>
+0043 fprintf(f, <span class="string">'%d %d 0\n'</span>, nVertices, nFaces);
+0044 
+0045 <span class="comment">% Write vertex info</span>
+0046 format = <span class="string">'%g %g %g\n'</span>;
+0047 <span class="keyword">for</span> iv = 1:nVertices
+0048     fprintf(f, format, vertices(iv, :));
+0049 <span class="keyword">end</span>
+0050 
+0051 <span class="comment">% Write face info</span>
+0052 <span class="keyword">if</span> isnumeric(faces)
+0053     <span class="comment">% simply write face vertex indices</span>
+0054     ns = size(faces, 2);
+0055     format = [<span class="string">'%d'</span> repmat(<span class="string">' %d'</span>, 1, ns) <span class="string">'\n'</span>];
+0056     <span class="keyword">for</span> iFace = 1:nFaces
+0057         fprintf(f, format, ns, faces(iFace, :)-1);
+0058     <span class="keyword">end</span>
+0059 <span class="keyword">else</span>
+0060     <span class="comment">% if faces are stored in a cell array, the number of vertices in each</span>
+0061     <span class="comment">% face may be different, and we need to process each face individually</span>
+0062     <span class="keyword">for</span> iFace = 1:nFaces
+0063         ns = length(faces{iFace});
+0064         format = [<span class="string">'%d'</span> repmat(<span class="string">' %d'</span>, 1, ns) <span class="string">'\n'</span>];
+0065         fprintf(f, format, ns, faces{iFace}-1);
+0066     <span class="keyword">end</span>
+0067 <span class="keyword">end</span>
+0068 
+0069 <span class="comment">% close the file</span>
+0070 fclose(f);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

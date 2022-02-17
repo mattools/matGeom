@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawSphericalEdge</title>
+  <meta name="keywords" content="drawSphericalEdge">
+  <meta name="description" content="DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; drawSphericalEdge.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawSphericalEdge
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawSphericalEdge(sphere, edge, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.
+
+   drawSphericalEdge(SPHERE, EDGE)
+   EDGE is given as a couple of 3D coordinates corresponding to edge
+   extremities. The shortest spherical edge joining the two extremities is
+   drawn on the current axes.
+
+   Example
+   drawSphericalEdge
+
+   See also
+   <a href="drawSphericalPolygon.html" class="code" title="function varargout = drawSphericalPolygon(sphere, poly, varargin)">drawSphericalPolygon</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2012-02-09,    using Matlab 7.9.0.529 (R2009b)
+ Copyright 2012 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="circle3dPosition.html" class="code" title="function theta = circle3dPosition(point, circle)">circle3dPosition</a>	CIRCLE3DPOSITION Return the angular position of a point on a 3D circle.</li><li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="drawCircleArc3d.html" class="code" title="function varargout = drawCircleArc3d(arc, varargin)">drawCircleArc3d</a>	Draw a 3D circle arc.</li><li><a href="intersectPlaneSphere.html" class="code" title="function circle = intersectPlaneSphere(plane, sphere)">intersectPlaneSphere</a>	INTERSECTPLANESPHERE Return intersection circle between a plane and a sphere.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawSphericalPolygon.html" class="code" title="function varargout = drawSphericalPolygon(sphere, poly, varargin)">drawSphericalPolygon</a>	DRAWSPHERICALPOLYGON  Draw a spherical polygon.</li><li><a href="drawSphericalTriangle.html" class="code" title="function varargout = drawSphericalTriangle(sphere, p1, p2, p3, varargin)">drawSphericalTriangle</a>	DRAWSPHERICALTRIANGLE Draw a triangle on a sphere.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawSphericalEdge(sphere, edge, varargin)</a>
+0002 <span class="comment">%DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawSphericalEdge(SPHERE, EDGE)</span>
+0005 <span class="comment">%   EDGE is given as a couple of 3D coordinates corresponding to edge</span>
+0006 <span class="comment">%   extremities. The shortest spherical edge joining the two extremities is</span>
+0007 <span class="comment">%   drawn on the current axes.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   Example</span>
+0010 <span class="comment">%   drawSphericalEdge</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   See also</span>
+0013 <span class="comment">%   drawSphericalPolygon</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">% ------</span>
+0016 <span class="comment">% Author: David Legland</span>
+0017 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0018 <span class="comment">% Created: 2012-02-09,    using Matlab 7.9.0.529 (R2009b)</span>
+0019 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
+0020 
+0021 
+0022 <span class="comment">% extract data of the sphere</span>
+0023 origin = sphere(:, 1:3);
+0024 
+0025 <span class="comment">% extremities of current edge</span>
+0026 point1  = edge(1:3);
+0027 point2  = edge(4:6);
+0028 
+0029 <span class="comment">% compute plane containing current edge</span>
+0030 plane   = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(origin, point1, point2);
+0031 
+0032 <span class="comment">% intersection of the plane with unit sphere</span>
+0033 circle  = <a href="intersectPlaneSphere.html" class="code" title="function circle = intersectPlaneSphere(plane, sphere)">intersectPlaneSphere</a>(plane, sphere);
+0034 
+0035 <span class="comment">% find the position (in degrees) of the 2 vertices on the circle</span>
+0036 angle1  = <a href="circle3dPosition.html" class="code" title="function theta = circle3dPosition(point, circle)">circle3dPosition</a>(point1, circle);
+0037 angle2  = <a href="circle3dPosition.html" class="code" title="function theta = circle3dPosition(point, circle)">circle3dPosition</a>(point2, circle);
+0038 
+0039 <span class="comment">% ensure angles are in right direction</span>
+0040 <span class="keyword">if</span> mod(angle2 - angle1 + 360, 360) &gt; 180
+0041     tmp     = angle1;
+0042     angle1  = angle2;
+0043     angle2  = tmp;
+0044 <span class="keyword">end</span>
+0045 
+0046 <span class="comment">% compute angle extent of the circle arc</span>
+0047 angleExtent = mod(angle2 - angle1 + 360, 360);
+0048 
+0049 <span class="comment">% create circle arc</span>
+0050 arc = [circle angle1 angleExtent];
+0051 
+0052 <span class="comment">% draw the arc</span>
+0053 h = <a href="drawCircleArc3d.html" class="code" title="function varargout = drawCircleArc3d(arc, varargin)">drawCircleArc3d</a>(arc, varargin{:});
+0054 
+0055 <span class="keyword">if</span> nargout &gt; 0
+0056     varargout = {h};
+0057 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

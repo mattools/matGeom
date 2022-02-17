@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of collapseEdgesWithManyFaces</title>
+  <meta name="keywords" content="collapseEdgesWithManyFaces">
+  <meta name="description" content="removes mesh edges adjacent to more than two faces">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; collapseEdgesWithManyFaces.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>collapseEdgesWithManyFaces
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>removes mesh edges adjacent to more than two faces</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> removes mesh edges adjacent to more than two faces
+
+   [V2, F2] = collapseEdgesWithManyFaces(V, F)
+   Count the number of faces adjacent to each edge, and collapse the edges
+   adjacent to more than two faces. 
+
+
+   Example
+   collapseEdgesWithManyFaces
+
+   See also
+       <a href="trimMesh.html" class="code" title="function varargout = trimMesh(varargin)">trimMesh</a>, <a href="isManifoldMesh.html" class="code" title="function [b1, b2] = isManifoldMesh(varargin)">isManifoldMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="mergeMeshVertices.html" class="code" title="function [vertices, faces] = mergeMeshVertices(vertices, faces, vertexInds, varargin)">mergeMeshVertices</a>	MERGEMESHVERTICES Merge two vertices and removes eventual degenerated faces.</li><li><a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>	MESHEDGES Computes array of edge vertex indices from face array.</li><li><a href="trimMesh.html" class="code" title="function varargout = trimMesh(varargin)">trimMesh</a>	TRIMMESH Reduce memory footprint of a polygonal mesh.</li><li><a href="trimeshEdgeFaces.html" class="code" title="function edgeFaces = trimeshEdgeFaces(faces, varargin)">trimeshEdgeFaces</a>	TRIMESHEDGEFACES Compute index of faces adjacent to each edge of a triangular mesh.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="ensureManifoldMesh.html" class="code" title="function varargout = ensureManifoldMesh(varargin)">ensureManifoldMesh</a>	ENSUREMANIFOLDMESH Apply several simplification to obtain a manifold mesh.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargin)</a>
+0002 <span class="comment">% removes mesh edges adjacent to more than two faces</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V2, F2] = collapseEdgesWithManyFaces(V, F)</span>
+0005 <span class="comment">%   Count the number of faces adjacent to each edge, and collapse the edges</span>
+0006 <span class="comment">%   adjacent to more than two faces.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   Example</span>
+0010 <span class="comment">%   collapseEdgesWithManyFaces</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   See also</span>
+0013 <span class="comment">%       trimMesh, isManifoldMesh</span>
+0014  
+0015 <span class="comment">% ------</span>
+0016 <span class="comment">% Author: David Legland</span>
+0017 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0018 <span class="comment">% Created: 2019-01-31,    using Matlab 9.5.0.944444 (R2018b)</span>
+0019 <span class="comment">% Copyright 2019 INRA - Cepia Software Platform.</span>
+0020 
+0021 verbose = false;
+0022 <span class="keyword">while</span> length(varargin) &gt; 1 &amp;&amp; ischar(varargin{1})
+0023     name = varargin{1};
+0024     <span class="keyword">if</span> strcmpi(name, <span class="string">'verbose'</span>)
+0025         verbose = varargin{2};
+0026     <span class="keyword">else</span>
+0027         error([<span class="string">'Unknown optional argument: '</span> name]);
+0028     <span class="keyword">end</span>
+0029     varargin(1:2) = [];
+0030 <span class="keyword">end</span>
+0031 
+0032 <span class="keyword">while</span> true
+0033     <span class="comment">% compute edge to vertex mapping</span>
+0034     edges = <a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>(faces);
+0035     
+0036     <span class="comment">% compute number of faces incident to each edge</span>
+0037     edgeFaces = <a href="trimeshEdgeFaces.html" class="code" title="function edgeFaces = trimeshEdgeFaces(faces, varargin)">trimeshEdgeFaces</a>(faces);
+0038     edgeFaceDegrees = sum(edgeFaces &gt; 0, 2);
+0039     
+0040     inds = find(edgeFaceDegrees &gt; 2);
+0041     
+0042     <span class="keyword">if</span> isempty(inds)
+0043         <span class="keyword">break</span>;
+0044     <span class="keyword">end</span>
+0045     
+0046     edge = edges(inds(1), :);
+0047     <span class="keyword">if</span> verbose
+0048         fprintf(<span class="string">'remove edge with index %d: (%d, %d)\n'</span>, inds(1), edge);
+0049     <span class="keyword">end</span>
+0050     [vertices, faces] = <a href="mergeMeshVertices.html" class="code" title="function [vertices, faces] = mergeMeshVertices(vertices, faces, vertexInds, varargin)">mergeMeshVertices</a>(vertices, faces, edge);
+0051 <span class="keyword">end</span>
+0052 
+0053 <span class="comment">% trim</span>
+0054 [vertices, faces] = <a href="trimMesh.html" class="code" title="function varargout = trimMesh(varargin)">trimMesh</a>(vertices, faces);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

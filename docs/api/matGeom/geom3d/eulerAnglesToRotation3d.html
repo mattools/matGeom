@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of eulerAnglesToRotation3d</title>
+  <meta name="keywords" content="eulerAnglesToRotation3d">
+  <meta name="description" content="EULERANGLESTOROTATION3D Convert 3D Euler angles to 3D rotation matrix.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; eulerAnglesToRotation3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>eulerAnglesToRotation3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>EULERANGLESTOROTATION3D Convert 3D Euler angles to 3D rotation matrix.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">EULERANGLESTOROTATION3D Convert 3D Euler angles to 3D rotation matrix.
+
+   MAT = eulerAnglesToRotation3d(PHI, THETA, PSI)
+   Creates a rotation matrix from the 3 euler angles PHI THETA and PSI,
+   given in degrees, using the 'XYZ' convention (local basis), or the
+   'ZYX' convention (global basis). The result MAT is a 4-by-4 rotation
+   matrix in homogeneous coordinates.
+
+   PHI:    rotation angle around Z-axis, in degrees, corresponding to the
+       'Yaw'. PHI is between -180 and +180.
+   THETA:  rotation angle around Y-axis, in degrees, corresponding to the
+       'Pitch'. THETA is between -90 and +90.
+   PSI:    rotation angle around X-axis, in degrees, corresponding to the
+       'Roll'. PSI is between -180 and +180.
+   These angles correspond to the &quot;Yaw-Pitch-Roll&quot; convention, also known
+   as &quot;Tait-Bryan angles&quot;.
+
+   The resulting rotation is equivalent to a rotation around X-axis by an
+   angle PSI, followed by a rotation around the Y-axis by an angle THETA,
+   followed by a rotation around the Z-axis by an angle PHI.
+   That is:
+       ROT = Rz * Ry * Rx;
+
+   MAT = eulerAnglesToRotation3d(ANGLES)
+   Concatenates all angles in a single 1-by-3 array.
+   
+   ... = eulerAnglesToRotation3d(ANGLES, CONVENTION)
+   CONVENTION specifies the axis rotation sequence. Default is 'ZYX'.
+   Supported conventions are: 
+       'ZYX','ZXY','YXZ','YZX','XYZ','XZY'
+       'ZYZ','ZXZ','YZY','YXY','XZX','XYX'
+
+   Example
+   [n e f] = createCube;
+   phi     = 20;
+   theta   = 30;
+   psi     = 10;
+   rot = eulerAnglesToRotation3d(phi, theta, psi);
+   n2 = transformPoint3d(n, rot);
+   drawPolyhedron(n2, f);
+
+   See also
+   <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>, <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>, <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>
+   <a href="rotation3dAxisAndAngle.html" class="code" title="function [axis, theta] = rotation3dAxisAndAngle(mat)">rotation3dAxisAndAngle</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>	CREATEROTATIONOX Create the 4x4 matrix of a 3D rotation around x-axis.</li><li><a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>	CREATEROTATIONOY Create the 4x4 matrix of a 3D rotation around y-axis.</li><li><a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>	CREATEROTATIONOZ Create the 4x4 matrix of a 3D rotation around z-axis.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="fitEllipse3d.html" class="code" title="function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin)">fitEllipse3d</a>	FITELLIPSE3D Fit an ellipse to a set of points.</li><li><a href="isPointInEllipsoid.html" class="code" title="function b = isPointInEllipsoid(point, elli, varargin)">isPointInEllipsoid</a>	Check if a point is located inside a 3D ellipsoid.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)</a>
+0002 <span class="comment">%EULERANGLESTOROTATION3D Convert 3D Euler angles to 3D rotation matrix.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   MAT = eulerAnglesToRotation3d(PHI, THETA, PSI)</span>
+0005 <span class="comment">%   Creates a rotation matrix from the 3 euler angles PHI THETA and PSI,</span>
+0006 <span class="comment">%   given in degrees, using the 'XYZ' convention (local basis), or the</span>
+0007 <span class="comment">%   'ZYX' convention (global basis). The result MAT is a 4-by-4 rotation</span>
+0008 <span class="comment">%   matrix in homogeneous coordinates.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   PHI:    rotation angle around Z-axis, in degrees, corresponding to the</span>
+0011 <span class="comment">%       'Yaw'. PHI is between -180 and +180.</span>
+0012 <span class="comment">%   THETA:  rotation angle around Y-axis, in degrees, corresponding to the</span>
+0013 <span class="comment">%       'Pitch'. THETA is between -90 and +90.</span>
+0014 <span class="comment">%   PSI:    rotation angle around X-axis, in degrees, corresponding to the</span>
+0015 <span class="comment">%       'Roll'. PSI is between -180 and +180.</span>
+0016 <span class="comment">%   These angles correspond to the &quot;Yaw-Pitch-Roll&quot; convention, also known</span>
+0017 <span class="comment">%   as &quot;Tait-Bryan angles&quot;.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   The resulting rotation is equivalent to a rotation around X-axis by an</span>
+0020 <span class="comment">%   angle PSI, followed by a rotation around the Y-axis by an angle THETA,</span>
+0021 <span class="comment">%   followed by a rotation around the Z-axis by an angle PHI.</span>
+0022 <span class="comment">%   That is:</span>
+0023 <span class="comment">%       ROT = Rz * Ry * Rx;</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   MAT = eulerAnglesToRotation3d(ANGLES)</span>
+0026 <span class="comment">%   Concatenates all angles in a single 1-by-3 array.</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%   ... = eulerAnglesToRotation3d(ANGLES, CONVENTION)</span>
+0029 <span class="comment">%   CONVENTION specifies the axis rotation sequence. Default is 'ZYX'.</span>
+0030 <span class="comment">%   Supported conventions are:</span>
+0031 <span class="comment">%       'ZYX','ZXY','YXZ','YZX','XYZ','XZY'</span>
+0032 <span class="comment">%       'ZYZ','ZXZ','YZY','YXY','XZX','XYX'</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">%   Example</span>
+0035 <span class="comment">%   [n e f] = createCube;</span>
+0036 <span class="comment">%   phi     = 20;</span>
+0037 <span class="comment">%   theta   = 30;</span>
+0038 <span class="comment">%   psi     = 10;</span>
+0039 <span class="comment">%   rot = eulerAnglesToRotation3d(phi, theta, psi);</span>
+0040 <span class="comment">%   n2 = transformPoint3d(n, rot);</span>
+0041 <span class="comment">%   drawPolyhedron(n2, f);</span>
+0042 <span class="comment">%</span>
+0043 <span class="comment">%   See also</span>
+0044 <span class="comment">%   transforms3d, createRotationOx, createRotationOy, createRotationOz</span>
+0045 <span class="comment">%   rotation3dAxisAndAngle</span>
+0046 <span class="comment">%</span>
+0047 
+0048 <span class="comment">% ------</span>
+0049 <span class="comment">% Author: David Legland</span>
+0050 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0051 <span class="comment">% Created: 2010-07-22,    using Matlab 7.9.0.529 (R2009b)</span>
+0052 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0053 
+0054 <span class="comment">%   HISTORY</span>
+0055 <span class="comment">%   2011-06-20 rename and use degrees</span>
+0056 
+0057 <span class="comment">% Process input arguments</span>
+0058 <span class="keyword">if</span> size(phi, 2) == 3
+0059     <span class="keyword">if</span> nargin &gt; 1
+0060         varargin{1} = theta;
+0061     <span class="keyword">end</span>
+0062     <span class="comment">% manages arguments given as one array</span>
+0063     psi     = phi(:, 3);
+0064     theta   = phi(:, 2);
+0065     phi     = phi(:, 1);
+0066 <span class="keyword">end</span>
+0067 
+0068 p = inputParser;
+0069 validStrings = {<span class="keyword">...</span>
+0070     <span class="string">'ZYX'</span>,<span class="string">'ZXY'</span>,<span class="string">'YXZ'</span>,<span class="string">'YZX'</span>,<span class="string">'XYZ'</span>,<span class="string">'XZY'</span>,<span class="keyword">...</span>
+0071     <span class="string">'ZYZ'</span>,<span class="string">'ZXZ'</span>,<span class="string">'YZY'</span>,<span class="string">'YXY'</span>,<span class="string">'XZX'</span>,<span class="string">'XYX'</span>};
+0072 addOptional(p,<span class="string">'convention'</span>,<span class="string">'ZYX'</span>,@(x) any(validatestring(x,validStrings)));
+0073 parse(p,varargin{:});
+0074 convention=p.Results.convention;
+0075 
+0076 <span class="comment">% create individual rotation matrices</span>
+0077 k = pi / 180;
+0078 
+0079 <span class="keyword">switch</span> convention
+0080     <span class="keyword">case</span> <span class="string">'ZYX'</span>
+0081         rot1 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(psi * k);
+0082         rot2 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(theta * k);
+0083         rot3 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(phi * k);
+0084     <span class="keyword">case</span> <span class="string">'ZXY'</span>
+0085         rot1 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(psi * k);
+0086         rot2 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(theta * k);
+0087         rot3 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(phi * k);
+0088     <span class="keyword">case</span> <span class="string">'YXZ'</span>
+0089         rot1 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(psi * k);
+0090         rot2 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(theta * k);
+0091         rot3 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(phi * k);
+0092     <span class="keyword">case</span> <span class="string">'YZX'</span>
+0093         rot1 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(psi * k);
+0094         rot2 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(theta * k);
+0095         rot3 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(phi * k);
+0096     <span class="keyword">case</span> <span class="string">'XYZ'</span>
+0097         rot1 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(psi * k);
+0098         rot2 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(theta * k);
+0099         rot3 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(phi * k);
+0100     <span class="keyword">case</span> <span class="string">'XZY'</span>
+0101         rot1 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(psi * k);
+0102         rot2 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(theta * k);
+0103         rot3 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(phi * k);
+0104     <span class="keyword">case</span> <span class="string">'ZYZ'</span>
+0105         rot1 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(psi * k);
+0106         rot2 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(theta * k);
+0107         rot3 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(phi * k);
+0108     <span class="keyword">case</span> <span class="string">'ZXZ'</span>
+0109         rot1 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(psi * k);
+0110         rot2 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(theta * k);
+0111         rot3 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(phi * k);
+0112     <span class="keyword">case</span> <span class="string">'YZY'</span>
+0113         rot1 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(psi * k);
+0114         rot2 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(theta * k);
+0115         rot3 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(phi * k);
+0116     <span class="keyword">case</span> <span class="string">'YXY'</span>
+0117         rot1 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(psi * k);
+0118         rot2 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(theta * k);
+0119         rot3 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(phi * k);
+0120     <span class="keyword">case</span> <span class="string">'XZX'</span>
+0121         rot1 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(psi * k);
+0122         rot2 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(theta * k);
+0123         rot3 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(phi * k);
+0124     <span class="keyword">case</span> <span class="string">'XYX'</span>
+0125         rot1 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(psi * k);
+0126         rot2 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(theta * k);
+0127         rot3 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(phi * k);
+0128 <span class="keyword">end</span>
+0129 
+0130 <span class="comment">% concatenate matrices</span>
+0131 mat = rot3 * rot2 * rot1;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

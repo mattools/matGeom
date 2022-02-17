@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of isPerpendicular</title>
+  <meta name="keywords" content="isPerpendicular">
+  <meta name="description" content="ISPERPENDICULAR Check orthogonality of two vectors.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; isPerpendicular.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>isPerpendicular
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ISPERPENDICULAR Check orthogonality of two vectors.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function b = isPerpendicular(v1, v2, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ISPERPENDICULAR Check orthogonality of two vectors.
+
+   B = isPerpendicular(V1, V2)
+   where V1 and V2 are two 1-by-2 row arrays, returns 1 if the vectors are
+   perpendicular, and 0 otherwise.
+
+   Also works when V1 and V2 are two N-by-2 arrays with same number of
+   rows. In this case, return a N-by-1 array containing 1 at the positions
+   of perpendicular vectors.
+
+   Also works when one of V1 or V2 is 1-by-2 and the other one is a N-by-2
+   array. In this case the result has size N-by-1.
+
+   B = isPerpendicular(V1, V2, ACCURACY)
+   specifies accuracy of numerical tests, default is 1e-14.
+
+
+   Example
+   isPerpendicular([1 2 1], [2 4 2])
+   ans =
+       1
+
+   isPerpendicular([1 2 1], [1 3 2])
+   ans =
+       0
+
+   See also
+   <a href="vectors2d.html" class="code" title="function vectors2d">vectors2d</a>, <a href="isParallel.html" class="code" title="function b = isParallel(v1, v2, varargin)">isParallel</a>, <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="normalizeVector.html" class="code" title="function vn = normalizeVector(v)">normalizeVector</a>	NORMALIZEVECTOR Normalize a vector to have norm equal to 1.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function b = isPerpendicular(v1, v2, varargin)</a>
+0002 <span class="comment">%ISPERPENDICULAR Check orthogonality of two vectors.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   B = isPerpendicular(V1, V2)</span>
+0005 <span class="comment">%   where V1 and V2 are two 1-by-2 row arrays, returns 1 if the vectors are</span>
+0006 <span class="comment">%   perpendicular, and 0 otherwise.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Also works when V1 and V2 are two N-by-2 arrays with same number of</span>
+0009 <span class="comment">%   rows. In this case, return a N-by-1 array containing 1 at the positions</span>
+0010 <span class="comment">%   of perpendicular vectors.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Also works when one of V1 or V2 is 1-by-2 and the other one is a N-by-2</span>
+0013 <span class="comment">%   array. In this case the result has size N-by-1.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   B = isPerpendicular(V1, V2, ACCURACY)</span>
+0016 <span class="comment">%   specifies accuracy of numerical tests, default is 1e-14.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   Example</span>
+0020 <span class="comment">%   isPerpendicular([1 2 1], [2 4 2])</span>
+0021 <span class="comment">%   ans =</span>
+0022 <span class="comment">%       1</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   isPerpendicular([1 2 1], [1 3 2])</span>
+0025 <span class="comment">%   ans =</span>
+0026 <span class="comment">%       0</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%   See also</span>
+0029 <span class="comment">%   vectors2d, isParallel, lines2d</span>
+0030 <span class="comment">%</span>
+0031 
+0032 <span class="comment">% ------</span>
+0033 <span class="comment">% Author: David Legland</span>
+0034 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0035 <span class="comment">% Created: 2006-04-25</span>
+0036 <span class="comment">% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0037 
+0038 <span class="comment">%   HISTORY</span>
+0039 <span class="comment">%   2007-09-18 copy from isPerpendicular, adapt to any dimension, and add</span>
+0040 <span class="comment">%       psb to specify precision</span>
+0041 <span class="comment">%   2009-09-21 fix bug for array of 3 vectors</span>
+0042 <span class="comment">%   2011-01-20 replace repmat by ones-indexing (faster)</span>
+0043 <span class="comment">%   2017-08-31 use normalized vectors</span>
+0044 
+0045 <span class="comment">% default accuracy</span>
+0046 acc = 1e-14;
+0047 <span class="keyword">if</span> ~isempty(varargin)
+0048     acc = abs(varargin{1});
+0049 <span class="keyword">end</span>
+0050 
+0051 <span class="comment">% normalize vectors</span>
+0052 v1 = <a href="normalizeVector.html" class="code" title="function vn = normalizeVector(v)">normalizeVector</a>(v1);
+0053 v2 = <a href="normalizeVector.html" class="code" title="function vn = normalizeVector(v)">normalizeVector</a>(v2);
+0054 
+0055 <span class="comment">% adapt size of inputs</span>
+0056 n1 = size(v1, 1);
+0057 n2 = size(v2, 1);
+0058 <span class="keyword">if</span> n1 ~= n2
+0059     <span class="keyword">if</span> n1 == 1
+0060         v1 = v1(ones(n2, 1), :);
+0061     <span class="keyword">elseif</span> n2==1
+0062         v2 = v2(ones(n1, 1), :);
+0063     <span class="keyword">else</span>
+0064         error(<span class="string">'Inputs must either have same size, or one must be scalar'</span>);
+0065     <span class="keyword">end</span>
+0066 <span class="keyword">end</span>
+0067 
+0068 <span class="comment">% performs test</span>
+0069 b = abs(dot(v1, v2, 2)) &lt; acc;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

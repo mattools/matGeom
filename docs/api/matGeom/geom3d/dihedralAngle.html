@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of dihedralAngle</title>
+  <meta name="keywords" content="dihedralAngle">
+  <meta name="description" content="DIHEDRALANGLE Compute dihedral angle between 2 planes.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; dihedralAngle.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>dihedralAngle
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DIHEDRALANGLE Compute dihedral angle between 2 planes.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function theta = dihedralAngle(plane1, plane2) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DIHEDRALANGLE Compute dihedral angle between 2 planes.
+
+   THETA = dihedralAngle(PLANE1, PLANE2)
+   PLANE1 and PLANE2 are plane representations given in the following
+   format:
+   [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2]
+   THETA is the angle between the two vectors given by plane normals,
+   given between 0 and PI.
+
+   References
+   http://en.wikipedia.org/wiki/Dihedral_angle
+   http://mathworld.wolfram.com/DihedralAngle.html
+
+   See also:
+   <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>, <a href="lines3d.html" class="code" title="function lines3d(varargin)">lines3d</a>, <a href="angles3d.html" class="code" title="function angles3d(varargin)">angles3d</a>, <a href="planesBisector.html" class="code" title="function out = planesBisector(plane1, plane2)">planesBisector</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 21/02/2005.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>	PLANENORMAL Compute the normal to a plane.</li><li><a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>	VECTORNORM3D Norm of a 3D vector or of set of 3D vectors.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function theta = dihedralAngle(plane1, plane2)</a>
+0002 <span class="comment">%DIHEDRALANGLE Compute dihedral angle between 2 planes.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   THETA = dihedralAngle(PLANE1, PLANE2)</span>
+0005 <span class="comment">%   PLANE1 and PLANE2 are plane representations given in the following</span>
+0006 <span class="comment">%   format:</span>
+0007 <span class="comment">%   [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2]</span>
+0008 <span class="comment">%   THETA is the angle between the two vectors given by plane normals,</span>
+0009 <span class="comment">%   given between 0 and PI.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   References</span>
+0012 <span class="comment">%   http://en.wikipedia.org/wiki/Dihedral_angle</span>
+0013 <span class="comment">%   http://mathworld.wolfram.com/DihedralAngle.html</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   See also:</span>
+0016 <span class="comment">%   planes3d, lines3d, angles3d, planesBisector</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   ---------</span>
+0019 <span class="comment">%   author : David Legland</span>
+0020 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0021 <span class="comment">%   created the 21/02/2005.</span>
+0022 <span class="comment">%</span>
+0023 
+0024 <span class="comment">% HISTORY</span>
+0025 <span class="comment">% 2009-06-19 change convention for dihedral angle</span>
+0026 <span class="comment">% 2011-03-20 improve computation precision</span>
+0027 
+0028 <span class="comment">% compute plane normals</span>
+0029 v1 = <a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>(plane1);
+0030 v2 = <a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>(plane2);
+0031 
+0032 <span class="comment">% number of vectors</span>
+0033 n1 = size(v1, 1);
+0034 n2 = size(v2, 1);
+0035 
+0036 <span class="comment">% ensures vectors have same dimension</span>
+0037 <span class="keyword">if</span> n1 ~= n2
+0038     <span class="keyword">if</span> n1 == 1
+0039         v1 = repmat(v1, [n2 1]);
+0040     <span class="keyword">elseif</span> n2 == 1
+0041         v2 = repmat(v2, [n1 1]);
+0042     <span class="keyword">else</span>
+0043         error(<span class="string">'Arguments V1 and V2 must have the same size'</span>);
+0044     <span class="keyword">end</span>
+0045 <span class="keyword">end</span>
+0046 
+0047 <span class="comment">% compute dihedral angle(s)</span>
+0048 theta = atan2(<a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(cross(v1, v2, 2)), dot(v1, v2, 2));
+0049 
+0050 <span class="comment">% % equivalent to following formula, but more precise for small angles:</span>
+0051 <span class="comment">% n1 = normalizeVector3d(planeNormal(plane1));</span>
+0052 <span class="comment">% n2 = normalizeVector3d(planeNormal(plane2));</span>
+0053 <span class="comment">% theta = acos(dot(n1, n2, 2));</span>
+0054</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

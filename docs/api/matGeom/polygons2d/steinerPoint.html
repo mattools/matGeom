@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of steinerPoint</title>
+  <meta name="keywords" content="steinerPoint">
+  <meta name="description" content="STEINERPOINT Compute steiner point (weighted centroid) of a polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; steinerPoint.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>steinerPoint
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>STEINERPOINT Compute steiner point (weighted centroid) of a polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function pt = steinerPoint(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">STEINERPOINT Compute steiner point (weighted centroid) of a polygon.
+
+   PT = steinerPoint(POINTS);
+   PT = steinerPoint(PTX, PTY);
+   Computes steiner point of a polygon defined by POINTS. POINTS is a
+   [N*2] array of double.
+
+   The steiner point is computed the same way as the polygon centroid,
+   except that a weight depending on the angle is given to each vertex.
+
+   See also:
+   polygons2d, <a href="polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>, <a href="polygonCentroid.html" class="code" title="function [centroid, area] = polygonCentroid(varargin)">polygonCentroid</a>, <a href="drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 11/11/2004.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>	Compute the signed area of a polygon.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function pt = steinerPoint(varargin)</a>
+0002 <span class="comment">%STEINERPOINT Compute steiner point (weighted centroid) of a polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PT = steinerPoint(POINTS);</span>
+0005 <span class="comment">%   PT = steinerPoint(PTX, PTY);</span>
+0006 <span class="comment">%   Computes steiner point of a polygon defined by POINTS. POINTS is a</span>
+0007 <span class="comment">%   [N*2] array of double.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   The steiner point is computed the same way as the polygon centroid,</span>
+0010 <span class="comment">%   except that a weight depending on the angle is given to each vertex.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   See also:</span>
+0013 <span class="comment">%   polygons2d, polygonArea, polygonCentroid, drawPolygon</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   ---------</span>
+0016 <span class="comment">%   author : David Legland</span>
+0017 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0018 <span class="comment">%   created the 11/11/2004.</span>
+0019 <span class="comment">%</span>
+0020 
+0021 
+0022 <span class="keyword">if</span> nargin==1
+0023     var = varargin{1};
+0024     px = var(:,1);
+0025     py = var(:,2);
+0026 <span class="keyword">elseif</span> nargin==2
+0027     px = varargin{1};
+0028     py = varargin{2};
+0029 <span class="keyword">end</span>
+0030 
+0031 <span class="comment">% Algorithme P. Bourke</span>
+0032 sx = 0;
+0033 sy = 0;
+0034 N = length(px);
+0035 <span class="keyword">for</span> i=1:N-1
+0036     sx = sx + (px(i)+px(i+1))*(px(i)*py(i+1) - px(i+1)*py(i));
+0037     sy = sy + (py(i)+py(i+1))*(px(i)*py(i+1) - px(i+1)*py(i));
+0038 <span class="keyword">end</span>
+0039 sx = sx + (px(N)+px(1))*(px(N)*py(1) - px(1)*py(N));
+0040 sy = sy + (py(N)+py(1))*(px(N)*py(1) - px(1)*py(N));
+0041 
+0042 pt = [sx sy]/6/<a href="polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>(px, py);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

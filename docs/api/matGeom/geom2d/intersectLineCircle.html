@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of intersectLineCircle</title>
+  <meta name="keywords" content="intersectLineCircle">
+  <meta name="description" content="Intersection point(s) of a line and a circle.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; intersectLineCircle.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>intersectLineCircle
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Intersection point(s) of a line and a circle.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function points = intersectLineCircle(line, circle) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Intersection point(s) of a line and a circle.
+
+   INTERS = intersectLineCircle(LINE, CIRCLE);
+   Returns a 2-by-2-by-N array, containing on each row the coordinates of
+   an intersection point for each line-circle pair, i.e. INTERS(:,:,k)
+   contains the intersections between LINE(k,:) and CIRCLE(k,:).
+
+   If a line-circle pair does not intersect, the corresponding results are
+   set to NaN. 
+
+   Example
+     % base point
+     center = [10 0];
+     % create vertical line
+     l1 = [center 0 1];
+     % circle
+     c1 = [center 5];
+     pts = intersectLineCircle(l1, c1)
+     pts =
+     10   -5
+     10    5
+     % draw the result
+     figure; clf; hold on;
+     axis([0 20 -10 10]);
+     drawLine(l1);
+     drawCircle(c1);
+     drawPoint(pts, 'rx');
+     axis equal;
+
+   See also
+   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>, <a href="intersectCircles.html" class="code" title="function points = intersectCircles(circle1, circle2)">intersectCircles</a>
+
+   References
+   http://local.wasp.uwa.edu.au/~pbourke/geometry/sphereline/
+   http://mathworld.wolfram.com/Circle-LineIntersection.html</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function points = intersectLineCircle(line, circle)</a>
+0002 <span class="comment">% Intersection point(s) of a line and a circle.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   INTERS = intersectLineCircle(LINE, CIRCLE);</span>
+0005 <span class="comment">%   Returns a 2-by-2-by-N array, containing on each row the coordinates of</span>
+0006 <span class="comment">%   an intersection point for each line-circle pair, i.e. INTERS(:,:,k)</span>
+0007 <span class="comment">%   contains the intersections between LINE(k,:) and CIRCLE(k,:).</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   If a line-circle pair does not intersect, the corresponding results are</span>
+0010 <span class="comment">%   set to NaN.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%     % base point</span>
+0014 <span class="comment">%     center = [10 0];</span>
+0015 <span class="comment">%     % create vertical line</span>
+0016 <span class="comment">%     l1 = [center 0 1];</span>
+0017 <span class="comment">%     % circle</span>
+0018 <span class="comment">%     c1 = [center 5];</span>
+0019 <span class="comment">%     pts = intersectLineCircle(l1, c1)</span>
+0020 <span class="comment">%     pts =</span>
+0021 <span class="comment">%     10   -5</span>
+0022 <span class="comment">%     10    5</span>
+0023 <span class="comment">%     % draw the result</span>
+0024 <span class="comment">%     figure; clf; hold on;</span>
+0025 <span class="comment">%     axis([0 20 -10 10]);</span>
+0026 <span class="comment">%     drawLine(l1);</span>
+0027 <span class="comment">%     drawCircle(c1);</span>
+0028 <span class="comment">%     drawPoint(pts, 'rx');</span>
+0029 <span class="comment">%     axis equal;</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%   See also</span>
+0032 <span class="comment">%   lines2d, circles2d, intersectLines, intersectCircles</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">%   References</span>
+0035 <span class="comment">%   http://local.wasp.uwa.edu.au/~pbourke/geometry/sphereline/</span>
+0036 <span class="comment">%   http://mathworld.wolfram.com/Circle-LineIntersection.html</span>
+0037 <span class="comment">%</span>
+0038 
+0039 <span class="comment">% ------</span>
+0040 <span class="comment">% Author: David Legland, david.legland@inrae.fr</span>
+0041 <span class="comment">% Author: JuanPi Carbajal &lt;ajuanpi+dev@gmail.com&gt;</span>
+0042 <span class="comment">% Created: 2011-01-14,    using Matlab 7.9.0.529 (R2009b)</span>
+0043 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0044 
+0045 <span class="comment">% HISTORY</span>
+0046 <span class="comment">% 2011-06-06 fix bug in delta test</span>
+0047 <span class="comment">% 2017-05-05 included some suggestions from code by JuanPi Carbajal &lt;ajuanpi+dev@gmail.com&gt;</span>
+0048 <span class="comment">% 2017-08-08 update doc</span>
+0049             
+0050 <span class="comment">% check size of inputs</span>
+0051 nLines = size(line, 1);
+0052 nCircles = size(circle, 1);
+0053 <span class="keyword">if</span> nLines ~= nCircles
+0054   error (<span class="string">'matGeom:geom3d:invalidArguments'</span>, <span class="keyword">...</span>
+0055       <span class="string">'Requires same number of lines and circles'</span>);
+0056 <span class="keyword">end</span>
+0057             
+0058 <span class="comment">% center parameters</span>
+0059 center = circle(:, 1:2);
+0060 radius = circle(:, 3);
+0061 
+0062 <span class="comment">% line parameters</span>
+0063 dp = line(:, 1:2) - center;
+0064 vl = line(:, 3:4);
+0065 
+0066 <span class="comment">% coefficients of second order equation</span>
+0067 a = sum(line(:, 3:4).^2, 2);
+0068 b = 2 * sum(dp .* vl, 2);
+0069 c = sum(dp.^2, 2) - radius.^2;
+0070 
+0071 <span class="comment">% discriminant</span>
+0072 delta = b .^ 2 - 4 * a .* c;
+0073 
+0074 points = nan(2, 2, nCircles);
+0075 
+0076 valid = delta &gt;= 0;
+0077 
+0078 <span class="keyword">if</span> any(valid)
+0079     <span class="comment">% compute roots (as a N-by-N-by-2 array)</span>
+0080     u = bsxfun(@plus, -b(valid), bsxfun(@times, [-1 1], sqrt(delta(valid))));
+0081     u = bsxfun(@rdivide, u, a(valid)) / 2;
+0082 
+0083     <span class="keyword">if</span> sum(valid) == 1
+0084         points = [<span class="keyword">...</span>
+0085             line(1:2) + u(:,1) .* line(3:4); <span class="keyword">...</span>
+0086             line(1:2) + u(:,2) .* line(3:4)];
+0087     <span class="keyword">else</span>
+0088         tmp = [<span class="keyword">...</span>
+0089             line(valid, 1:2) + u(:,1) .* line(valid, 3:4) <span class="keyword">...</span>
+0090             line(valid, 1:2) + u(:,2) .* line(valid, 3:4)].';
+0091         points(:, :, valid) = permute(reshape(tmp, [2, 2, nCircles]), [2 1 3]);
+0092     <span class="keyword">end</span>
+0093 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

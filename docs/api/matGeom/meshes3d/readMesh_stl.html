@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of readMesh_stl</title>
+  <meta name="keywords" content="readMesh_stl">
+  <meta name="description" content="READMESH_STL Read mesh data stored in STL format.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; readMesh_stl.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>readMesh_stl
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>READMESH_STL Read mesh data stored in STL format.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = readMesh_stl(fileName) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">READMESH_STL Read mesh data stored in STL format.
+
+   [VERTICES, FACES] = readMesh_stl(FNAME)
+
+   MESH = readMesh_stl(FNAME)
+
+   Example
+   readMesh_stl
+
+   References
+   Wrapper function for MATLAB's build-in stlread.
+
+   See also
+   meshes3d, <a href="readMesh.html" class="code" title="function varargout = readMesh(fileName)">readMesh</a>, <a href="readMesh_off.html" class="code" title="function varargout = readMesh_off(fileName)">readMesh_off</a>, <a href="readMesh_ply.html" class="code" title="function varargout = readMesh_ply(fileName)">readMesh_ply</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="readMesh.html" class="code" title="function varargout = readMesh(fileName)">readMesh</a>	Read a 3D mesh by inferring format from file name.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = readMesh_stl(fileName)</a>
+0002 <span class="comment">%READMESH_STL Read mesh data stored in STL format.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [VERTICES, FACES] = readMesh_stl(FNAME)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   MESH = readMesh_stl(FNAME)</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Example</span>
+0009 <span class="comment">%   readMesh_stl</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   References</span>
+0012 <span class="comment">%   Wrapper function for MATLAB's build-in stlread.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   See also</span>
+0015 <span class="comment">%   meshes3d, readMesh, readMesh_off, readMesh_ply</span>
+0016 
+0017 <span class="comment">% ------</span>
+0018 <span class="comment">% Author: oqilipo</span>
+0019 <span class="comment">% Created: 2021-02-12, using Matlab 9.9.0.1538559 (R2020b)</span>
+0020 <span class="comment">% Copyright 2021</span>
+0021 
+0022 TR = stlread(fileName);
+0023 vertices = TR.Points;
+0024 faces = TR.ConnectivityList;
+0025 
+0026 varargout = formatMeshOutput(nargout, vertices, faces);
+0027 
+0028 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of concatenateMeshes</title>
+  <meta name="keywords" content="concatenateMeshes">
+  <meta name="description" content="CONCATENATEMESHES Concatenate multiple meshes.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; concatenateMeshes.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>concatenateMeshes
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CONCATENATEMESHES Concatenate multiple meshes.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = concatenateMeshes(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> CONCATENATEMESHES Concatenate multiple meshes.
+
+   [V,F] = concatenateMeshes(V1,F1,V2,F2, ...)
+   Returns one mesh represented by vertices V and faces F by concatenating
+   the meshes defined by V1, V2, ... and F1, F2, ...
+
+   [V,F] = concatenateMeshes(MESH1, MESH2, ...)
+   where MESH1, MESH2, ... are structs or struct arrays with the fields  
+   vertices and faces
+
+   See also
+     <a href="splitMesh.html" class="code" title="function meshes = splitMesh(vertices, faces, varargin)">splitMesh</a>
+
+ ---------
+ Authors: oqilipo (parsing), Alec Jacobson (loop)
+ Created: 2017-09-12
+ Copyright 2017</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="trimMesh.html" class="code" title="function varargout = trimMesh(varargin)">trimMesh</a>	TRIMMESH Reduce memory footprint of a polygonal mesh.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="cylinderMesh.html" class="code" title="function varargout = cylinderMesh(cyl, varargin)">cylinderMesh</a>	Create a 3D mesh representing a cylinder.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = concatenateMeshes(varargin)</a>
+0002 <span class="comment">% CONCATENATEMESHES Concatenate multiple meshes.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V,F] = concatenateMeshes(V1,F1,V2,F2, ...)</span>
+0005 <span class="comment">%   Returns one mesh represented by vertices V and faces F by concatenating</span>
+0006 <span class="comment">%   the meshes defined by V1, V2, ... and F1, F2, ...</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   [V,F] = concatenateMeshes(MESH1, MESH2, ...)</span>
+0009 <span class="comment">%   where MESH1, MESH2, ... are structs or struct arrays with the fields</span>
+0010 <span class="comment">%   vertices and faces</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   See also</span>
+0013 <span class="comment">%     splitMesh</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">% ---------</span>
+0016 <span class="comment">% Authors: oqilipo (parsing), Alec Jacobson (loop)</span>
+0017 <span class="comment">% Created: 2017-09-12</span>
+0018 <span class="comment">% Copyright 2017</span>
+0019 
+0020 <span class="comment">%% parsing inputs</span>
+0021 assert(~isempty(varargin))
+0022 
+0023 <span class="keyword">if</span> isstruct(varargin{1})
+0024     VF_fields = {<span class="string">'vertices'</span>,<span class="string">'faces'</span>};
+0025     
+0026     errorStructFields=[<span class="string">'If the first input argument is a struct '</span><span class="keyword">...</span>
+0027         <span class="string">'with the fields vertices and faces the additonal '</span> <span class="keyword">...</span>
+0028         <span class="string">'arguments must have the same format'</span>];
+0029     <span class="comment">% Check, if all input arguments are structs</span>
+0030     assert(all(cellfun(@isstruct, varargin)), errorStructFields)
+0031     <span class="comment">% Check, if all structs contain the two fields vertices and faces</span>
+0032     assert(all(cellfun(@(x) all(ismember(fieldnames(x), <span class="keyword">...</span>
+0033         VF_fields)), varargin)), errorStructFields)
+0034     
+0035     <span class="keyword">if</span> length(varargin)==1
+0036         errorArgAndStructLength = [<span class="string">'If the input is only one struct '</span> <span class="keyword">...</span>
+0037             <span class="string">'it has to contain more than one mesh.'</span>];
+0038         assert(length(varargin{1})&gt;1, <span class="keyword">...</span>
+0039             errorArgAndStructLength)
+0040     <span class="keyword">end</span>
+0041     
+0042     <span class="comment">% Order of the fields: vertices, faces</span>
+0043     varargin = cellfun(@(x) orderfields(x, VF_fields),varargin, <span class="string">'UniformOutput'</span>,0);
+0044     
+0045     <span class="comment">% Convert the structs into one cell array</span>
+0046     varargin = <span class="keyword">...</span>
+0047         cellfun(@struct2cell, varargin, <span class="string">'UniformOutput'</span>, false);
+0048     varargin = cellfun(@squeeze, varargin, <span class="string">'UniformOutput'</span>,0);
+0049     varargin = reshape([varargin{:}],[],1)';
+0050 <span class="keyword">end</span>
+0051 
+0052 NoA = length(varargin);
+0053 assert(mod(NoA,2)==0);
+0054 
+0055 cellfun(@(x) validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0056     {<span class="string">'size'</span>,[NaN,3],<span class="string">'finite'</span>}), varargin(1:2:end))
+0057 cellfun(@(x) validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0058     {<span class="string">'integer'</span>}), varargin(2:2:end))
+0059 <span class="comment">% Check if all faces have the same number of columns</span>
+0060 errorFacesRows=<span class="string">'The faces of all meshes must have the same number of columns'</span>;
+0061 assert(numel(unique(cellfun(@(x) size(x,2), varargin(2:2:end))))==1, errorFacesRows)
+0062 
+0063 
+0064 <span class="comment">%% loop</span>
+0065 v=[];
+0066 f=[];
+0067 <span class="keyword">for</span> m = 1:NoA/2
+0068     vm = varargin{2*m-1};
+0069     fm = varargin{2*m};
+0070     f = [f; fm+size(v,1)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0071     v = [v; vm]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0072 <span class="keyword">end</span>
+0073 
+0074 
+0075 <span class="comment">%% parsing outputs</span>
+0076 [v, f] = <a href="trimMesh.html" class="code" title="function varargout = trimMesh(varargin)">trimMesh</a>(v, f);
+0077 
+0078 <span class="keyword">switch</span> nargout
+0079     <span class="keyword">case</span> 1
+0080         mesh.vertices=v;
+0081         mesh.faces=f;
+0082         varargout{1}=mesh;
+0083     <span class="keyword">case</span> 2
+0084         varargout{1}=v;
+0085         varargout{2}=f;
+0086 <span class="keyword">end</span>
+0087</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

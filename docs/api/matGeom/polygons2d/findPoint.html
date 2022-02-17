@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of findPoint</title>
+  <meta name="keywords" content="findPoint">
+  <meta name="description" content="FINDPOINT Find index of a point in an set from its coordinates.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; findPoint.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>findPoint
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>FINDPOINT Find index of a point in an set from its coordinates.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function index = findPoint(coord, points, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">FINDPOINT Find index of a point in an set from its coordinates.
+ 
+   IND = findPoint(POINT, ARRAY) 
+   Returns the index of point whose coordinates match the 1-by-2 row array
+   POINT in the N-by-2 array ARRAY. If the point is not found, returns 0.
+   If several points are found, keep only the first one.
+
+   If POINT is a M-by-2 array, the result is a M-by-1 array, containing
+   the index in the array of each point given by COORD, or 0 if the point
+   is not found.
+
+   IND = findPoint(POINT, ARRAY, TOL) 
+   use specified tolerance, to find point within a distance of TOL.
+   Default tolerance is zero.
+
+   See also
+    points2d, minDistancePoints, distancePoints, findClosestPoint</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function index = findPoint(coord, points, varargin)</a>
+0002 <span class="comment">%FINDPOINT Find index of a point in an set from its coordinates.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   IND = findPoint(POINT, ARRAY)</span>
+0005 <span class="comment">%   Returns the index of point whose coordinates match the 1-by-2 row array</span>
+0006 <span class="comment">%   POINT in the N-by-2 array ARRAY. If the point is not found, returns 0.</span>
+0007 <span class="comment">%   If several points are found, keep only the first one.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   If POINT is a M-by-2 array, the result is a M-by-1 array, containing</span>
+0010 <span class="comment">%   the index in the array of each point given by COORD, or 0 if the point</span>
+0011 <span class="comment">%   is not found.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   IND = findPoint(POINT, ARRAY, TOL)</span>
+0014 <span class="comment">%   use specified tolerance, to find point within a distance of TOL.</span>
+0015 <span class="comment">%   Default tolerance is zero.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   See also</span>
+0018 <span class="comment">%    points2d, minDistancePoints, distancePoints, findClosestPoint</span>
+0019 
+0020 <span class="comment">%   -----</span>
+0021 <span class="comment">%   author: David Legland</span>
+0022 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0023 <span class="comment">%   created the 17/07/2003.</span>
+0024 <span class="comment">%</span>
+0025 
+0026 <span class="comment">%   HISTORY</span>
+0027 <span class="comment">%   10/02/2004 documentation</span>
+0028 <span class="comment">%   09/08/2004 rewrite faster, and add support for multiple points</span>
+0029 
+0030 <span class="comment">% number of points</span>
+0031 np = size(coord, 1);
+0032 
+0033 <span class="comment">% allocate memory for result</span>
+0034 index = zeros(np, 1);
+0035 
+0036 <span class="comment">% specify the tolerance</span>
+0037 tol = 0;
+0038 <span class="keyword">if</span> ~isempty(varargin)
+0039     tol = varargin{1};
+0040 <span class="keyword">end</span>
+0041 
+0042 <span class="keyword">if</span> tol == 0
+0043     <span class="keyword">for</span> i = 1:np
+0044         <span class="comment">% indices of matches</span>
+0045         ind = find(points(:,1) == coord(i,1) &amp; points(:,2) == coord(i,2));
+0046         
+0047         <span class="comment">% format current result</span>
+0048         <span class="keyword">if</span> isempty(ind)
+0049             index(i) = 0;
+0050         <span class="keyword">else</span>
+0051             index(i) = ind(1);
+0052         <span class="keyword">end</span>
+0053     <span class="keyword">end</span>
+0054 <span class="keyword">else</span>
+0055     <span class="keyword">for</span> i = 1:np
+0056         <span class="comment">% indices of matches</span>
+0057         ind = find(sqrt(sum(bsxfun(@minus, points, coord) .^ 2, 2)) &lt;= tol);
+0058         
+0059         <span class="comment">% format current result</span>
+0060         <span class="keyword">if</span> isempty(ind)
+0061             index(i) = 0;
+0062         <span class="keyword">else</span>
+0063             index(i) = ind(1);
+0064         <span class="keyword">end</span>
+0065     <span class="keyword">end</span>
+0066 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

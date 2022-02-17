@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of parallelLine3d</title>
+  <meta name="keywords" content="parallelLine3d">
+  <meta name="description" content="PARALLELLINE3D  Create 3D line parallel to another one.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; parallelLine3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>parallelLine3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>PARALLELLINE3D  Create 3D line parallel to another one.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function res = parallelLine3d(line, point) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">PARALLELLINE3D  Create 3D line parallel to another one.
+
+   L2 = parallelLine3d(L, P)
+   Creates the 3D line L2, parallel to the line L, and containing the
+   point P.
+
+   Example
+
+   See also
+   geom3d, parallelLine, <a href="parallelPlane.html" class="code" title="function res = parallelPlane(plane, point)">parallelPlane</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2012-08-23,    using Matlab 7.9.0.529 (R2009b)
+ Copyright 2012 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function res = parallelLine3d(line, point)</a>
+0002 <span class="comment">%PARALLELLINE3D  Create 3D line parallel to another one.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   L2 = parallelLine3d(L, P)</span>
+0005 <span class="comment">%   Creates the 3D line L2, parallel to the line L, and containing the</span>
+0006 <span class="comment">%   point P.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Example</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   See also</span>
+0011 <span class="comment">%   geom3d, parallelLine, parallelPlane</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">% ------</span>
+0014 <span class="comment">% Author: David Legland</span>
+0015 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0016 <span class="comment">% Created: 2012-08-23,    using Matlab 7.9.0.529 (R2009b)</span>
+0017 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
+0018 
+0019 res = [point line(:, 4:6)];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

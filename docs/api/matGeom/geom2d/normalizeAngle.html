@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of normalizeAngle</title>
+  <meta name="keywords" content="normalizeAngle">
+  <meta name="description" content="NORMALIZEANGLE  Normalize an angle value within a 2*PI interval.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; normalizeAngle.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>normalizeAngle
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>NORMALIZEANGLE  Normalize an angle value within a 2*PI interval.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function alpha = normalizeAngle(alpha, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">NORMALIZEANGLE  Normalize an angle value within a 2*PI interval.
+
+   ALPHA2 = normalizeAngle(ALPHA);
+   ALPHA2 is the same as ALPHA modulo 2*PI and is positive.
+
+   ALPHA2 = normalizeAngle(ALPHA, CENTER);
+   Specifies the center of the angle interval.
+   If CENTER==0, the interval is [-pi ; +pi]
+   If CENTER==PI, the interval is [0 ; 2*pi] (default).
+
+   Example:
+   % normalization between 0 and 2*pi (default)
+   normalizeAngle(5*pi)
+   ans =
+       3.1416
+
+   % normalization between -pi and +pi
+   normalizeAngle(7*pi/2, 0)
+   ans =
+       -1.5708
+
+   See also
+   <a href="vectorAngle.html" class="code" title="function alpha = vectorAngle(v1, varargin)">vectorAngle</a>, <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="angleAbsDiff.html" class="code" title="function dif = angleAbsDiff(angle1, angle2)">angleAbsDiff</a>	ANGLEABSDIFF Absolute difference between two angles.</li><li><a href="angleDiff.html" class="code" title="function dif = angleDiff(angle1, angle2)">angleDiff</a>	ANGLEDIFF Difference between two angles.</li><li><a href="vectorAngle.html" class="code" title="function alpha = vectorAngle(v1, varargin)">vectorAngle</a>	Horizontal angle of a vector, or angle between 2 vectors.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function alpha = normalizeAngle(alpha, varargin)</a>
+0002 <span class="comment">%NORMALIZEANGLE  Normalize an angle value within a 2*PI interval.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   ALPHA2 = normalizeAngle(ALPHA);</span>
+0005 <span class="comment">%   ALPHA2 is the same as ALPHA modulo 2*PI and is positive.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   ALPHA2 = normalizeAngle(ALPHA, CENTER);</span>
+0008 <span class="comment">%   Specifies the center of the angle interval.</span>
+0009 <span class="comment">%   If CENTER==0, the interval is [-pi ; +pi]</span>
+0010 <span class="comment">%   If CENTER==PI, the interval is [0 ; 2*pi] (default).</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example:</span>
+0013 <span class="comment">%   % normalization between 0 and 2*pi (default)</span>
+0014 <span class="comment">%   normalizeAngle(5*pi)</span>
+0015 <span class="comment">%   ans =</span>
+0016 <span class="comment">%       3.1416</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   % normalization between -pi and +pi</span>
+0019 <span class="comment">%   normalizeAngle(7*pi/2, 0)</span>
+0020 <span class="comment">%   ans =</span>
+0021 <span class="comment">%       -1.5708</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   See also</span>
+0024 <span class="comment">%   vectorAngle, lineAngle</span>
+0025 <span class="comment">%</span>
+0026 
+0027 <span class="comment">% ------</span>
+0028 <span class="comment">% Author: David Legland</span>
+0029 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0030 <span class="comment">% Created: 2008-03-10,    using Matlab 7.4.0.287 (R2007a)</span>
+0031 <span class="comment">% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0032 
+0033 <span class="comment">% HISTORY</span>
+0034 <span class="comment">% 2010-03-31 rename as normalizeAngle, and add psb to specify interval</span>
+0035 <span class="comment">%   center</span>
+0036 
+0037 center = pi;
+0038 <span class="keyword">if</span> ~isempty(varargin)
+0039     center = varargin{1};
+0040 <span class="keyword">end</span>
+0041 
+0042 alpha = mod(alpha-center+pi, 2*pi) + center-pi;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

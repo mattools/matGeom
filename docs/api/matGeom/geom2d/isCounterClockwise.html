@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of isCounterClockwise</title>
+  <meta name="keywords" content="isCounterClockwise">
+  <meta name="description" content="Compute the relative orientation of 3 points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; isCounterClockwise.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>isCounterClockwise
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Compute the relative orientation of 3 points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function res = isCounterClockwise(p1, p2, p3, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Compute the relative orientation of 3 points.
+
+   CCW = isCounterClockwise(P1, P2, P3);
+   Computes the orientation of the 3 points. The returns is:
+   +1 if the path P1-&gt;P2-&gt;P3 turns Counter-Clockwise (i.e., the point P3
+       is located &quot;on the left&quot; of the line P1-P2)
+   -1 if the path turns Clockwise (i.e., the point P3 lies &quot;on the right&quot;
+       of the line P1-P2) 
+   0  if the point P3 is located on the line segment [P1 P2].
+
+   This function can be used in more complicated algorithms: detection of
+   line segment intersections, convex hulls, point in triangle...
+
+   CCW = isCounterClockwise(P1, P2, P3, EPS);
+   Specifies the threshold used for detecting colinearity of the 3 points.
+   Default value is 1e-12 (absolute).
+
+   Example
+   isCounterClockwise([0 0], [10 0], [10 10])
+   ans = 
+       1
+   isCounterClockwise([0 0], [0 10], [10 10])
+   ans = 
+       -1
+   isCounterClockwise([0 0], [10 0], [5 0])
+   ans = 
+       0
+
+   See also
+   <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="isPointOnLine.html" class="code" title="function b = isPointOnLine(point, line, varargin)">isPointOnLine</a>, <a href="isPointInTriangle.html" class="code" title="function b = isPointInTriangle(point, p1, p2, p3)">isPointInTriangle</a>, polygonArea
+
+   References
+     Algorithm adapated from Sedgewick's book.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="isPointInTriangle.html" class="code" title="function b = isPointInTriangle(point, p1, p2, p3)">isPointInTriangle</a>	ISPOINTINTRIANGLE Test if a point is located inside a triangle.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function res = isCounterClockwise(p1, p2, p3, varargin)</a>
+0002 <span class="comment">% Compute the relative orientation of 3 points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   CCW = isCounterClockwise(P1, P2, P3);</span>
+0005 <span class="comment">%   Computes the orientation of the 3 points. The returns is:</span>
+0006 <span class="comment">%   +1 if the path P1-&gt;P2-&gt;P3 turns Counter-Clockwise (i.e., the point P3</span>
+0007 <span class="comment">%       is located &quot;on the left&quot; of the line P1-P2)</span>
+0008 <span class="comment">%   -1 if the path turns Clockwise (i.e., the point P3 lies &quot;on the right&quot;</span>
+0009 <span class="comment">%       of the line P1-P2)</span>
+0010 <span class="comment">%   0  if the point P3 is located on the line segment [P1 P2].</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   This function can be used in more complicated algorithms: detection of</span>
+0013 <span class="comment">%   line segment intersections, convex hulls, point in triangle...</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   CCW = isCounterClockwise(P1, P2, P3, EPS);</span>
+0016 <span class="comment">%   Specifies the threshold used for detecting colinearity of the 3 points.</span>
+0017 <span class="comment">%   Default value is 1e-12 (absolute).</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   Example</span>
+0020 <span class="comment">%   isCounterClockwise([0 0], [10 0], [10 10])</span>
+0021 <span class="comment">%   ans =</span>
+0022 <span class="comment">%       1</span>
+0023 <span class="comment">%   isCounterClockwise([0 0], [0 10], [10 10])</span>
+0024 <span class="comment">%   ans =</span>
+0025 <span class="comment">%       -1</span>
+0026 <span class="comment">%   isCounterClockwise([0 0], [10 0], [5 0])</span>
+0027 <span class="comment">%   ans =</span>
+0028 <span class="comment">%       0</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">%   See also</span>
+0031 <span class="comment">%   points2d, isPointOnLine, isPointInTriangle, polygonArea</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">%   References</span>
+0034 <span class="comment">%     Algorithm adapated from Sedgewick's book.</span>
+0035 <span class="comment">%</span>
+0036 
+0037 <span class="comment">% ------</span>
+0038 <span class="comment">% Author: David Legland</span>
+0039 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0040 <span class="comment">% Created: 2010-04-09</span>
+0041 <span class="comment">% Copyright 2011 INRAE - Cepia Software Platform.</span>
+0042 
+0043 
+0044 <span class="comment">%   HISTORY</span>
+0045 <span class="comment">%   2011-05-16 change variable names, add support for point arrays</span>
+0046 
+0047 
+0048 <span class="comment">% get threshold value</span>
+0049 eps = 1e-12;
+0050 <span class="keyword">if</span> ~isempty(varargin)
+0051     eps = varargin{1};
+0052 <span class="keyword">end</span>
+0053 
+0054 <span class="comment">% ensure all data have same size</span>
+0055 np = max([size(p1, 1) size(p2, 1) size(p3,1)]);
+0056 <span class="keyword">if</span> np &gt; 1
+0057     <span class="keyword">if</span> size(p1,1) == 1
+0058         p1 = repmat(p1, np, 1);
+0059     <span class="keyword">end</span>
+0060     <span class="keyword">if</span> size(p2,1) == 1
+0061         p2 = repmat(p2, np, 1);
+0062     <span class="keyword">end</span>
+0063     <span class="keyword">if</span> size(p3,1) == 1
+0064         p3 = repmat(p3, np, 1);
+0065     <span class="keyword">end</span>    
+0066 <span class="keyword">end</span>
+0067 
+0068 <span class="comment">% init with 0</span>
+0069 res = zeros(np, 1);
+0070 
+0071 <span class="comment">% extract vector coordinates</span>
+0072 x0  = p1(:, 1);
+0073 y0  = p1(:, 2);
+0074 dx1 = p2(:, 1) - x0;
+0075 dy1 = p2(:, 2) - y0;
+0076 dx2 = p3(:, 1) - x0;
+0077 dy2 = p3(:, 2) - y0;
+0078 
+0079 <span class="comment">% check non colinear cases</span>
+0080 res(dx1 .* dy2 &gt; dy1 .* dx2) =  1;
+0081 res(dx1 .* dy2 &lt; dy1 .* dx2) = -1;
+0082 
+0083 <span class="comment">% case of colinear points</span>
+0084 ind = abs(dx1 .* dy2 - dy1 .* dx2) &lt; eps;
+0085 res(ind( (dx1(ind) .* dx2(ind) &lt; 0) | (dy1(ind) .* dy2(ind) &lt; 0) )) = -1;
+0086 res(ind(  hypot(dx1(ind), dy1(ind)) &lt;  hypot(dx2(ind), dy2(ind)) )) =  1;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

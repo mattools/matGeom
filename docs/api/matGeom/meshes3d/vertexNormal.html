@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of vertexNormal</title>
+  <meta name="keywords" content="vertexNormal">
+  <meta name="description" content="VERTEXNORMAL Compute normals to a mesh vertices.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; vertexNormal.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>vertexNormal
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>VERTEXNORMAL Compute normals to a mesh vertices.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function normals = vertexNormal(vertices, faces) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">VERTEXNORMAL Compute normals to a mesh vertices.
+
+   N = vertexNormal(V, F)
+   Computes vertex normals of the mesh given by vertices V and F. 
+   V is a vertex array with 3 columns, F is either a NF-by-3 or NF-by-4
+   index array, or a cell array with NF elements.
+
+   Example
+     % Draw the vertex normals of a sphere
+     s = [10 20 30 40];
+     [v f] = sphereMesh(s);
+     drawMesh(v, f);
+     view(3);axis equal; light; lighting gouraud;
+     normals = vertexNormal(v, f);
+     drawVector3d(v, normals);
+
+   See also
+     meshes3d, <a href="meshFaceNormals.html" class="code" title="function normals = meshFaceNormals(varargin)">meshFaceNormals</a>, <a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2011-12-19,    using Matlab 7.9.0.529 (R2009b)
+ Copyright 2011 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>	NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.</li><li><a href="meshFaceNormals.html" class="code" title="function normals = meshFaceNormals(varargin)">meshFaceNormals</a>	MESHFACENORMALS Compute normal vector of faces in a 3D mesh.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function normals = vertexNormal(vertices, faces)</a>
+0002 <span class="comment">%VERTEXNORMAL Compute normals to a mesh vertices.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   N = vertexNormal(V, F)</span>
+0005 <span class="comment">%   Computes vertex normals of the mesh given by vertices V and F.</span>
+0006 <span class="comment">%   V is a vertex array with 3 columns, F is either a NF-by-3 or NF-by-4</span>
+0007 <span class="comment">%   index array, or a cell array with NF elements.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   Example</span>
+0010 <span class="comment">%     % Draw the vertex normals of a sphere</span>
+0011 <span class="comment">%     s = [10 20 30 40];</span>
+0012 <span class="comment">%     [v f] = sphereMesh(s);</span>
+0013 <span class="comment">%     drawMesh(v, f);</span>
+0014 <span class="comment">%     view(3);axis equal; light; lighting gouraud;</span>
+0015 <span class="comment">%     normals = vertexNormal(v, f);</span>
+0016 <span class="comment">%     drawVector3d(v, normals);</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   See also</span>
+0019 <span class="comment">%     meshes3d, meshFaceNormals, triangulateFaces</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">% ------</span>
+0022 <span class="comment">% Author: David Legland</span>
+0023 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0024 <span class="comment">% Created: 2011-12-19,    using Matlab 7.9.0.529 (R2009b)</span>
+0025 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0026 
+0027 
+0028 nv = size(vertices, 1);
+0029 nf = size(faces, 1);
+0030 
+0031 <span class="comment">% unit normals to the faces</span>
+0032 faceNormals = <a href="../../matGeom/geom3d/normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(<a href="meshFaceNormals.html" class="code" title="function normals = meshFaceNormals(varargin)">meshFaceNormals</a>(vertices, faces));
+0033 
+0034 <span class="comment">% compute normal of each vertex: sum of normals to each face</span>
+0035 normals = zeros(nv, 3);
+0036 <span class="keyword">if</span> isnumeric(faces)
+0037     <span class="keyword">for</span> i = 1:nf
+0038         face = faces(i, :);
+0039         <span class="keyword">for</span> j = 1:length(face)
+0040             v = face(j);
+0041             normals(v, :) = normals(v,:) + faceNormals(i,:);
+0042         <span class="keyword">end</span>
+0043     <span class="keyword">end</span>
+0044 <span class="keyword">else</span>
+0045     <span class="keyword">for</span> i = 1:nf
+0046         face = faces{i};
+0047         <span class="keyword">for</span> j = 1:length(face)
+0048             v = face(j);
+0049             normals(v, :) = normals(v,:) + faceNormals(i,:);
+0050         <span class="keyword">end</span>
+0051     <span class="keyword">end</span>
+0052 <span class="keyword">end</span>
+0053 
+0054 <span class="comment">% normalize vertex normals to unit vectors</span>
+0055 normals = <a href="../../matGeom/geom3d/normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(normals);
+0056 
+0057</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

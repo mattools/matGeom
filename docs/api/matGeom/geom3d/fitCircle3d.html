@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of fitCircle3d</title>
+  <meta name="keywords" content="fitCircle3d">
+  <meta name="description" content="FITCIRCLE3D Fit a 3D circle to a set of points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; fitCircle3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>fitCircle3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>FITCIRCLE3D Fit a 3D circle to a set of points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [fittedCircle, circleNormal] = fitCircle3d(pts) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">FITCIRCLE3D Fit a 3D circle to a set of points.
+
+   [FITTEDCIRCLE, CIRCLENORMAL] = fitCircle3d(PTS)
+
+   Example
+     % points on a 2d circle with noise
+     nop = randi([5 50],1,1);
+     radius = randi([5 25],1,1);
+     points2d = circleToPolygon([0 0 radius], nop);
+     points2d(1,:) = [];
+     points2d = points2d + rand(size(points2d));
+     points2d(:,3)=rand(length(nop),1);
+     % apply random rotation and translation
+     [theta, phi] = randomAngle3d;
+     theta = rad2deg(theta);
+     phi = rad2deg(phi);
+     tfm = eulerAnglesToRotation3d(phi, theta, 0);
+     trans = randi([-250 250],3,1);
+     tfm(1:3,4)=trans;
+     points3d = awgn(transformPoint3d(points2d, tfm),1);
+     % fit 3d circle
+     [fittedCircle, circleNormal] = fitCircle3d(points3d);
+     % plot 3d points and 3d circle
+     figure('Color','w'); hold on; axis equal tight; view(3);
+     xlabel('X');ylabel('Y');zlabel('Z');
+     drawPoint3d(points3d)
+     drawCircle3d(fittedCircle, 'k')
+     drawVector3d(fittedCircle(1:3), circleNormal*fittedCircle(4))
+
+   See also
+   <a href="circle3dOrigin.html" class="code" title="function ori = circle3dOrigin(varargin)">circle3dOrigin</a>, <a href="circle3dPosition.html" class="code" title="function theta = circle3dPosition(point, circle)">circle3dPosition</a>, <a href="circle3dPoint.html" class="code" title="function point = circle3dPoint(circle, pos)">circle3dPoint</a>, <a href="intersectPlaneSphere.html" class="code" title="function circle = intersectPlaneSphere(plane, sphere)">intersectPlaneSphere</a>
+   <a href="drawCircle3d.html" class="code" title="function varargout = drawCircle3d(varargin)">drawCircle3d</a>, <a href="drawCircleArc3d.html" class="code" title="function varargout = drawCircleArc3d(arc, varargin)">drawCircleArc3d</a>, <a href="drawEllipse3d.html" class="code" title="function varargout = drawEllipse3d(varargin)">drawEllipse3d</a>
+
+ ------
+ Authors: oqilipo, David Legland
+ created: 2017-05-09</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>	CENTROID Compute centroid (center of mass) of a set of points.</li><li><a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>	CART2SPH2 Convert cartesian coordinates to spherical coordinates.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function Par = CircleFitByTaubin(XY)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [fittedCircle, circleNormal] = fitCircle3d(pts)</a>
+0002 <span class="comment">%FITCIRCLE3D Fit a 3D circle to a set of points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [FITTEDCIRCLE, CIRCLENORMAL] = fitCircle3d(PTS)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   Example</span>
+0007 <span class="comment">%     % points on a 2d circle with noise</span>
+0008 <span class="comment">%     nop = randi([5 50],1,1);</span>
+0009 <span class="comment">%     radius = randi([5 25],1,1);</span>
+0010 <span class="comment">%     points2d = circleToPolygon([0 0 radius], nop);</span>
+0011 <span class="comment">%     points2d(1,:) = [];</span>
+0012 <span class="comment">%     points2d = points2d + rand(size(points2d));</span>
+0013 <span class="comment">%     points2d(:,3)=rand(length(nop),1);</span>
+0014 <span class="comment">%     % apply random rotation and translation</span>
+0015 <span class="comment">%     [theta, phi] = randomAngle3d;</span>
+0016 <span class="comment">%     theta = rad2deg(theta);</span>
+0017 <span class="comment">%     phi = rad2deg(phi);</span>
+0018 <span class="comment">%     tfm = eulerAnglesToRotation3d(phi, theta, 0);</span>
+0019 <span class="comment">%     trans = randi([-250 250],3,1);</span>
+0020 <span class="comment">%     tfm(1:3,4)=trans;</span>
+0021 <span class="comment">%     points3d = awgn(transformPoint3d(points2d, tfm),1);</span>
+0022 <span class="comment">%     % fit 3d circle</span>
+0023 <span class="comment">%     [fittedCircle, circleNormal] = fitCircle3d(points3d);</span>
+0024 <span class="comment">%     % plot 3d points and 3d circle</span>
+0025 <span class="comment">%     figure('Color','w'); hold on; axis equal tight; view(3);</span>
+0026 <span class="comment">%     xlabel('X');ylabel('Y');zlabel('Z');</span>
+0027 <span class="comment">%     drawPoint3d(points3d)</span>
+0028 <span class="comment">%     drawCircle3d(fittedCircle, 'k')</span>
+0029 <span class="comment">%     drawVector3d(fittedCircle(1:3), circleNormal*fittedCircle(4))</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%   See also</span>
+0032 <span class="comment">%   circle3dOrigin, circle3dPosition, circle3dPoint, intersectPlaneSphere</span>
+0033 <span class="comment">%   drawCircle3d, drawCircleArc3d, drawEllipse3d</span>
+0034 <span class="comment">%</span>
+0035 <span class="comment">% ------</span>
+0036 <span class="comment">% Authors: oqilipo, David Legland</span>
+0037 <span class="comment">% created: 2017-05-09</span>
+0038 
+0039 <span class="comment">% Mean of all points</span>
+0040 meanPoint = mean(pts,1);
+0041 
+0042 <span class="comment">% Center points by subtracting the meanPoint</span>
+0043 centeredPoints = pts - repmat(meanPoint,size(pts,1),1);
+0044 
+0045 <span class="comment">% Project 3D data to a plane</span>
+0046 [~,~,V]=svd(centeredPoints);
+0047 tfmPoints = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(centeredPoints, V');
+0048 
+0049 <span class="comment">% Fit a circle to the points in the xy-plane</span>
+0050 circleParamter = <a href="#_sub1" class="code" title="subfunction Par = CircleFitByTaubin(XY)">CircleFitByTaubin</a>(tfmPoints(:,1:2));
+0051 center2d = circleParamter(1:2); 
+0052 radius=circleParamter(3);
+0053 center3d = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>([center2d, 0], [inv(V'), meanPoint']);
+0054 circleNormal = V(:,3)';
+0055 [theta, phi, ~] = <a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>(circleNormal);
+0056 fittedCircle = [center3d radius rad2deg(theta) rad2deg(phi) 0];
+0057 
+0058 <span class="keyword">end</span>
+0059 
+0060 <span class="comment">% Circle Fit (Taubin method)</span>
+0061 <span class="comment">% version 1.0 (2.24 KB) by Nikolai Chernov</span>
+0062 <span class="comment">% http://www.mathworks.com/matlabcentral/fileexchange/22678</span>
+0063 <a name="_sub1" href="#_subfunctions" class="code">function Par = CircleFitByTaubin(XY)</a>
+0064 
+0065 <span class="comment">%--------------------------------------------------------------------------</span>
+0066 <span class="comment">%</span>
+0067 <span class="comment">%     Circle fit by Taubin</span>
+0068 <span class="comment">%      G. Taubin, &quot;Estimation Of Planar Curves, Surfaces And Nonplanar</span>
+0069 <span class="comment">%                  Space Curves Defined By Implicit Equations, With</span>
+0070 <span class="comment">%                  Applications To Edge And Range Image Segmentation&quot;,</span>
+0071 <span class="comment">%      IEEE Trans. PAMI, Vol. 13, pages 1115-1138, (1991)</span>
+0072 <span class="comment">%</span>
+0073 <span class="comment">%     Input:  XY(n,2) is the array of coordinates of n points x(i)=XY(i,1), y(i)=XY(i,2)</span>
+0074 <span class="comment">%</span>
+0075 <span class="comment">%     Output: Par = [a b R] is the fitting circle:</span>
+0076 <span class="comment">%                           center (a,b) and radius R</span>
+0077 <span class="comment">%</span>
+0078 <span class="comment">%     Note: this fit does not use built-in matrix functions (except &quot;mean&quot;),</span>
+0079 <span class="comment">%           so it can be easily programmed in any programming language</span>
+0080 <span class="comment">%</span>
+0081 <span class="comment">%--------------------------------------------------------------------------</span>
+0082 
+0083 n = size(XY,1);      <span class="comment">% number of data points</span>
+0084 
+0085 <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a> = mean(XY);   <span class="comment">% the centroid of the data set</span>
+0086 
+0087 <span class="comment">%     computing moments (note: all moments will be normed, i.e. divided by n)</span>
+0088 
+0089 Mxx = 0; Myy = 0; Mxy = 0; Mxz = 0; Myz = 0; Mzz = 0;
+0090 
+0091 <span class="keyword">for</span> i=1:n
+0092     Xi = XY(i,1) - <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>(1);  <span class="comment">%  centering data</span>
+0093     Yi = XY(i,2) - <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>(2);  <span class="comment">%  centering data</span>
+0094     Zi = Xi*Xi + Yi*Yi;
+0095     Mxy = Mxy + Xi*Yi;
+0096     Mxx = Mxx + Xi*Xi;
+0097     Myy = Myy + Yi*Yi;
+0098     Mxz = Mxz + Xi*Zi;
+0099     Myz = Myz + Yi*Zi;
+0100     Mzz = Mzz + Zi*Zi;
+0101 <span class="keyword">end</span>
+0102 
+0103 Mxx = Mxx/n;
+0104 Myy = Myy/n;
+0105 Mxy = Mxy/n;
+0106 Mxz = Mxz/n;
+0107 Myz = Myz/n;
+0108 Mzz = Mzz/n;
+0109 
+0110 <span class="comment">%    computing the coefficients of the characteristic polynomial</span>
+0111 
+0112 Mz = Mxx + Myy;
+0113 Cov_xy = Mxx*Myy - Mxy*Mxy;
+0114 A3 = 4*Mz;
+0115 A2 = -3*Mz*Mz - Mzz;
+0116 A1 = Mzz*Mz + 4*Cov_xy*Mz - Mxz*Mxz - Myz*Myz - Mz*Mz*Mz;
+0117 A0 = Mxz*Mxz*Myy + Myz*Myz*Mxx - Mzz*Cov_xy - 2*Mxz*Myz*Mxy + Mz*Mz*Cov_xy;
+0118 A22 = A2 + A2;
+0119 A33 = A3 + A3 + A3;
+0120 
+0121 xnew = 0;
+0122 ynew = 1e+20;
+0123 epsilon = 1e-12;
+0124 IterMax = 20;
+0125 
+0126 <span class="comment">% Newton's method starting at x=0</span>
+0127 
+0128 <span class="keyword">for</span> iter=1:IterMax
+0129     yold = ynew;
+0130     ynew = A0 + xnew*(A1 + xnew*(A2 + xnew*A3));
+0131     <span class="keyword">if</span> abs(ynew) &gt; abs(yold)
+0132        disp(<span class="string">'Newton-Taubin goes wrong direction: |ynew| &gt; |yold|'</span>);
+0133        xnew = 0;
+0134        <span class="keyword">break</span>;
+0135     <span class="keyword">end</span>
+0136     Dy = A1 + xnew*(A22 + xnew*A33);
+0137     xold = xnew;
+0138     xnew = xold - ynew/Dy;
+0139     <span class="keyword">if</span> (abs((xnew-xold)/xnew) &lt; epsilon), <span class="keyword">break</span>, <span class="keyword">end</span>
+0140     <span class="keyword">if</span> (iter &gt;= IterMax)
+0141         disp(<span class="string">'Newton-Taubin will not converge'</span>);
+0142         xnew = 0;
+0143     <span class="keyword">end</span>
+0144     <span class="keyword">if</span> (xnew&lt;0.)
+0145         fprintf(1,<span class="string">'Newton-Taubin negative root:  x=%f\n'</span>,xnew);
+0146         xnew = 0;
+0147     <span class="keyword">end</span>
+0148 <span class="keyword">end</span>
+0149 
+0150 <span class="comment">%  computing the circle parameters</span>
+0151 
+0152 DET = xnew*xnew - xnew*Mz + Cov_xy;
+0153 Center = [Mxz*(Myy-xnew)-Myz*Mxy , Myz*(Mxx-xnew)-Mxz*Mxy]/DET/2;
+0154 
+0155 Par = [Center+<a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a> , sqrt(Center*Center'+Mz)];
+0156 
+0157 <span class="keyword">end</span>    <span class="comment">%    CircleFitByTaubin</span>
+0158</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

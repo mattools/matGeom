@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of cart2geod</title>
+  <meta name="keywords" content="cart2geod">
+  <meta name="description" content="CART2GEOD Convert cartesian coordinates to geodesic coord.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; cart2geod.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>cart2geod
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CART2GEOD Convert cartesian coordinates to geodesic coord.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function point = cart2geod(src, curve) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CART2GEOD Convert cartesian coordinates to geodesic coord.
+
+   PT2 = cart2geod(PT1, CURVE)
+   PT1 is the point to transform, in Cartesian coordinates (same system
+   used for the curve).
+   CURVE is a N-by-2 array which represents coordinates of curve vertices.
+
+   The function first compute the projection of PT1 on the curve. Then,
+   the first geodesic coordinate is the length of the curve to the
+   projected point, and the second geodesic coordinate is the 
+   distance between PT1 and it projection.
+
+
+   TODO : add processing of points not projected on the curve.
+   -&gt; use the closest end 
+
+   See also
+   polylines2d, <a href="geod2cart.html" class="code" title="function point = geod2cart(src, curve, normal)">geod2cart</a>, curveLength</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/minDistancePoints.html" class="code" title="function varargout = minDistancePoints(p1, varargin)">minDistancePoints</a>	Minimal distance between several points.</li><li><a href="parametrize.html" class="code" title="function par = parametrize(varargin)">parametrize</a>	PARAMETRIZE Parametrization of a polyline, based on edges lengths.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function point = cart2geod(src, curve)</a>
+0002 <span class="comment">%CART2GEOD Convert cartesian coordinates to geodesic coord.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PT2 = cart2geod(PT1, CURVE)</span>
+0005 <span class="comment">%   PT1 is the point to transform, in Cartesian coordinates (same system</span>
+0006 <span class="comment">%   used for the curve).</span>
+0007 <span class="comment">%   CURVE is a N-by-2 array which represents coordinates of curve vertices.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   The function first compute the projection of PT1 on the curve. Then,</span>
+0010 <span class="comment">%   the first geodesic coordinate is the length of the curve to the</span>
+0011 <span class="comment">%   projected point, and the second geodesic coordinate is the</span>
+0012 <span class="comment">%   distance between PT1 and it projection.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   TODO : add processing of points not projected on the curve.</span>
+0016 <span class="comment">%   -&gt; use the closest end</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   See also</span>
+0019 <span class="comment">%   polylines2d, geod2cart, curveLength</span>
+0020 <span class="comment">%</span>
+0021 
+0022 <span class="comment">% ---------</span>
+0023 <span class="comment">% Author: David Legland</span>
+0024 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0025 <span class="comment">% created the 08/04/2004.</span>
+0026 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0027 
+0028 <span class="comment">%   HISTORY</span>
+0029 <span class="comment">%   15/02/2007 replace minDistance by minDistancePoints</span>
+0030 
+0031 
+0032 <span class="comment">% parametrization approximation</span>
+0033 t = <a href="parametrize.html" class="code" title="function par = parametrize(varargin)">parametrize</a>(curve);
+0034 
+0035 <span class="comment">% compute distance between each src point and the curve</span>
+0036 [dist, ind] = <a href="../../matGeom/geom2d/minDistancePoints.html" class="code" title="function varargout = minDistancePoints(p1, varargin)">minDistancePoints</a>(src, curve);
+0037 
+0038 <span class="comment">% convert to 'geodesic' coordinate</span>
+0039 point = [t(ind) dist];
+0040 
+0041 <span class="comment">% Old version:</span>
+0042 <span class="comment">% for i=1:size(pt1, 1)</span>
+0043 <span class="comment">%     [dist, ind] = minDistance(src(i,:), curve);</span>
+0044 <span class="comment">%     point(i,:) = [t(ind) dist];</span>
+0045 <span class="comment">% end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of hausdorffDistance</title>
+  <meta name="keywords" content="hausdorffDistance">
+  <meta name="description" content="HAUSDORFFDISTANCE  Hausdorff distance between two point sets.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; hausdorffDistance.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>hausdorffDistance
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>HAUSDORFFDISTANCE  Hausdorff distance between two point sets.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [hd, ind1, ind2] = hausdorffDistance(pts1, pts2) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">HAUSDORFFDISTANCE  Hausdorff distance between two point sets.
+
+   HD = hausdorffDistance(PTS1, PTS2)
+   Computes the Hausdorff distance between the two point sets PTS1 and
+   PTS2. The Hausdorf distance can be used to compare two shapes. 
+
+   The distance between a point x and a set Y is given by:
+     d(x, Y) = inf { d(x,y) | y in Y }
+   The distance between two non empty sets X and Y is given by:
+     d(X, Y) = sup { d(x,Y) | x in X }
+   The Hausdorff distance between sets X and Y distance is defined as the
+   maximum of d(X,Y) and d(Y,X):
+     HD(X,Y) = max { d(X,Y), d(Y,X) }
+
+
+   Example
+   % Compute Hausdorff distance between an ellipse and a rectangle
+     % first define two shapes
+     rect = resamplePolygon(orientedBoxToPolygon([20 30 80 40 30]), 60);
+     poly = ellipseToPolygon([20 30 40 20 30], 500);
+     % display the shapes
+     figure; hold on
+     drawPolygon(poly, 'b');
+     drawPolygon(rect, 'g');
+     axis equal;
+     % compute hausdorff distance
+     [hd ind1 ind2] = hausdorffDistance(poly, rect);
+     p1h = poly(ind1, :);
+     p2h = rect(ind2, :);
+     drawPoint([p1h;p2h], 'mo');
+     drawEdge([p1h p2h], 'm')
+
+   See also
+     <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="minDistancePoints.html" class="code" title="function varargout = minDistancePoints(p1, varargin)">minDistancePoints</a>
+
+   References
+   http://en.wikipedia.org/wiki/Hausdorff_distance</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="minDistancePoints.html" class="code" title="function varargout = minDistancePoints(p1, varargin)">minDistancePoints</a>	Minimal distance between several points.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [hd, ind1, ind2] = hausdorffDistance(pts1, pts2)</a>
+0002 <span class="comment">%HAUSDORFFDISTANCE  Hausdorff distance between two point sets.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   HD = hausdorffDistance(PTS1, PTS2)</span>
+0005 <span class="comment">%   Computes the Hausdorff distance between the two point sets PTS1 and</span>
+0006 <span class="comment">%   PTS2. The Hausdorf distance can be used to compare two shapes.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   The distance between a point x and a set Y is given by:</span>
+0009 <span class="comment">%     d(x, Y) = inf { d(x,y) | y in Y }</span>
+0010 <span class="comment">%   The distance between two non empty sets X and Y is given by:</span>
+0011 <span class="comment">%     d(X, Y) = sup { d(x,Y) | x in X }</span>
+0012 <span class="comment">%   The Hausdorff distance between sets X and Y distance is defined as the</span>
+0013 <span class="comment">%   maximum of d(X,Y) and d(Y,X):</span>
+0014 <span class="comment">%     HD(X,Y) = max { d(X,Y), d(Y,X) }</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   Example</span>
+0018 <span class="comment">%   % Compute Hausdorff distance between an ellipse and a rectangle</span>
+0019 <span class="comment">%     % first define two shapes</span>
+0020 <span class="comment">%     rect = resamplePolygon(orientedBoxToPolygon([20 30 80 40 30]), 60);</span>
+0021 <span class="comment">%     poly = ellipseToPolygon([20 30 40 20 30], 500);</span>
+0022 <span class="comment">%     % display the shapes</span>
+0023 <span class="comment">%     figure; hold on</span>
+0024 <span class="comment">%     drawPolygon(poly, 'b');</span>
+0025 <span class="comment">%     drawPolygon(rect, 'g');</span>
+0026 <span class="comment">%     axis equal;</span>
+0027 <span class="comment">%     % compute hausdorff distance</span>
+0028 <span class="comment">%     [hd ind1 ind2] = hausdorffDistance(poly, rect);</span>
+0029 <span class="comment">%     p1h = poly(ind1, :);</span>
+0030 <span class="comment">%     p2h = rect(ind2, :);</span>
+0031 <span class="comment">%     drawPoint([p1h;p2h], 'mo');</span>
+0032 <span class="comment">%     drawEdge([p1h p2h], 'm')</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">%   See also</span>
+0035 <span class="comment">%     points2d, minDistancePoints</span>
+0036 <span class="comment">%</span>
+0037 <span class="comment">%   References</span>
+0038 <span class="comment">%   http://en.wikipedia.org/wiki/Hausdorff_distance</span>
+0039 <span class="comment">%</span>
+0040 
+0041 <span class="comment">% ------</span>
+0042 <span class="comment">% Author: David Legland</span>
+0043 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0044 <span class="comment">% Created: 2012-05-04,    using Matlab 7.9.0.529 (R2009b)</span>
+0045 <span class="comment">% Copyright 2012 INRAE - Cepia Software Platform.</span>
+0046 
+0047 <span class="comment">% distance from pts1 to pts2</span>
+0048 [dists1, ind12] = <a href="minDistancePoints.html" class="code" title="function varargout = minDistancePoints(p1, varargin)">minDistancePoints</a>(pts1, pts2);
+0049 [max1, ind11] = max(dists1);
+0050 
+0051 <span class="comment">% distance from pts2 to pts1</span>
+0052 [dists2, ind22] = <a href="minDistancePoints.html" class="code" title="function varargout = minDistancePoints(p1, varargin)">minDistancePoints</a>(pts2, pts1);
+0053 [max2, ind21] = max(dists2);
+0054 
+0055 <span class="comment">% keep the max of the two distances</span>
+0056 hd = max(max1, max2);
+0057 
+0058 <span class="comment">% keep the rigt indices</span>
+0059 <span class="keyword">if</span> max1 &gt; max2
+0060     ind1 = ind11;
+0061     ind2 = ind12(ind11);
+0062 <span class="keyword">else</span>
+0063     ind1 = ind22(ind21);
+0064     ind2 = ind21;
+0065 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

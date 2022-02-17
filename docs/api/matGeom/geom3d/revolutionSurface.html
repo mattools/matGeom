@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of revolutionSurface</title>
+  <meta name="keywords" content="revolutionSurface">
+  <meta name="description" content="REVOLUTIONSURFACE Create a surface of revolution from a planar curve.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; revolutionSurface.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>revolutionSurface
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>REVOLUTIONSURFACE Create a surface of revolution from a planar curve.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = revolutionSurface(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">REVOLUTIONSURFACE Create a surface of revolution from a planar curve.
+
+   usage 
+   [X Y Z] = revolutionSurface(C1, C2, N);
+   create the surface of revolution of parametrized function (xt, yt),
+   with N+1 equally spaced slices, around the Oz axis.
+   It assumed that C1 corresponds to the x coordinate, and that C2
+   corresponds to the Oz coordinate.
+
+   [X Y Z] = revolutionSurface(CURVE, N);
+   is the same, but generating curve is given in a single parameter CURVE,
+   which is a [Nx2] array of 2D points.
+
+   [X Y Z] = revolutionSurface(..., THETA)
+   where THETA is a vector, uses values of THETA for computing revolution
+   angles.
+
+   [X Y Z] = revolutionSurface(..., LINE);
+   where LINE is a 1x4 array, specifes the revolution axis in the
+   coordinate system of the curve. LINE is a row vector of 4 parameters,
+   containing [x0 y0 dx dy], where (x0,y0) is the origin of the line and
+   (dx,dy) is a direction vector of the line.
+   The resulting revolution surface still has Oz axis as symmetry axis. It
+   can be transformed using transformPoint3d function.
+   Surface can be displayed using :
+   H = surf(X, Y, Z);
+   H is a handle to the created patch.
+
+   revolutionSurface(...);
+   by itself, directly shows the created patch.
+
+   Example
+   % draws a piece of torus
+   circle = circleAsPolygon([10 0 3], 50);
+   [x y z] = revolutionSurface(circle, linspace(0, 4*pi/3, 50));
+   surf(x, y, z);
+   axis equal;
+
+
+
+   See also
+       surf, <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>, <a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a>, <a href="drawTorus.html" class="code" title="function varargout = drawTorus(torus, varargin)">drawTorus</a>, <a href="drawEllipsoid.html" class="code" title="function varargout = drawEllipsoid(elli, varargin)">drawEllipsoid</a>
+       surfature (on Matlab File Exchange)
+
+
+   ------
+   Author: David Legland
+   e-mail: david.legland@grignon.inra.fr
+   Created: 2004-04-09
+   Copyright 2005 INRA - CEPIA Nantes - MIAJ Jouy-en-Josas.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/createRotation.html" class="code" title="function trans = createRotation(varargin)">createRotation</a>	CREATEROTATION Create the 3*3 matrix of a rotation.</li><li><a href="../../matGeom/geom2d/createTranslation.html" class="code" title="function trans = createTranslation(varargin)">createTranslation</a>	CREATETRANSLATION Create the 3*3 matrix of a translation.</li><li><a href="../../matGeom/geom2d/lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>	LINEANGLE Computes angle between two straight lines.</li><li><a href="../../matGeom/geom2d/transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>	Apply an affine transform to a point or a point set.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawTorus.html" class="code" title="function varargout = drawTorus(torus, varargin)">drawTorus</a>	DRAWTORUS Draw a torus (3D ring).</li><li><a href="../../matGeom/meshes3d/torusMesh.html" class="code" title="function varargout = torusMesh(torus, varargin)">torusMesh</a>	Create a 3D mesh representing a torus.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = revolutionSurface(varargin)</a>
+0002 <span class="comment">%REVOLUTIONSURFACE Create a surface of revolution from a planar curve.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   usage</span>
+0005 <span class="comment">%   [X Y Z] = revolutionSurface(C1, C2, N);</span>
+0006 <span class="comment">%   create the surface of revolution of parametrized function (xt, yt),</span>
+0007 <span class="comment">%   with N+1 equally spaced slices, around the Oz axis.</span>
+0008 <span class="comment">%   It assumed that C1 corresponds to the x coordinate, and that C2</span>
+0009 <span class="comment">%   corresponds to the Oz coordinate.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   [X Y Z] = revolutionSurface(CURVE, N);</span>
+0012 <span class="comment">%   is the same, but generating curve is given in a single parameter CURVE,</span>
+0013 <span class="comment">%   which is a [Nx2] array of 2D points.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   [X Y Z] = revolutionSurface(..., THETA)</span>
+0016 <span class="comment">%   where THETA is a vector, uses values of THETA for computing revolution</span>
+0017 <span class="comment">%   angles.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   [X Y Z] = revolutionSurface(..., LINE);</span>
+0020 <span class="comment">%   where LINE is a 1x4 array, specifes the revolution axis in the</span>
+0021 <span class="comment">%   coordinate system of the curve. LINE is a row vector of 4 parameters,</span>
+0022 <span class="comment">%   containing [x0 y0 dx dy], where (x0,y0) is the origin of the line and</span>
+0023 <span class="comment">%   (dx,dy) is a direction vector of the line.</span>
+0024 <span class="comment">%   The resulting revolution surface still has Oz axis as symmetry axis. It</span>
+0025 <span class="comment">%   can be transformed using transformPoint3d function.</span>
+0026 <span class="comment">%   Surface can be displayed using :</span>
+0027 <span class="comment">%   H = surf(X, Y, Z);</span>
+0028 <span class="comment">%   H is a handle to the created patch.</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">%   revolutionSurface(...);</span>
+0031 <span class="comment">%   by itself, directly shows the created patch.</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">%   Example</span>
+0034 <span class="comment">%   % draws a piece of torus</span>
+0035 <span class="comment">%   circle = circleAsPolygon([10 0 3], 50);</span>
+0036 <span class="comment">%   [x y z] = revolutionSurface(circle, linspace(0, 4*pi/3, 50));</span>
+0037 <span class="comment">%   surf(x, y, z);</span>
+0038 <span class="comment">%   axis equal;</span>
+0039 <span class="comment">%</span>
+0040 <span class="comment">%</span>
+0041 <span class="comment">%</span>
+0042 <span class="comment">%   See also</span>
+0043 <span class="comment">%       surf, transformPoint3d, drawSphere, drawTorus, drawEllipsoid</span>
+0044 <span class="comment">%       surfature (on Matlab File Exchange)</span>
+0045 <span class="comment">%</span>
+0046 <span class="comment">%</span>
+0047 <span class="comment">%   ------</span>
+0048 <span class="comment">%   Author: David Legland</span>
+0049 <span class="comment">%   e-mail: david.legland@grignon.inra.fr</span>
+0050 <span class="comment">%   Created: 2004-04-09</span>
+0051 <span class="comment">%   Copyright 2005 INRA - CEPIA Nantes - MIAJ Jouy-en-Josas.</span>
+0052 
+0053 <span class="comment">%   based on function cylinder from matlab</span>
+0054 <span class="comment">%   31/06/2006 fix bug when passing 3 parameters</span>
+0055 <span class="comment">%   20/04/2007 rewrite processing of input parameters, add psb to specify</span>
+0056 <span class="comment">%       revolution axis</span>
+0057 <span class="comment">%   24/10/2008 fix angle vector</span>
+0058 <span class="comment">%   29/07/2010 doc update</span>
+0059 
+0060 
+0061 <span class="comment">%% Initialisations</span>
+0062 
+0063 <span class="comment">% default values</span>
+0064 
+0065 <span class="comment">% use revolution using the full unit circle, decomposed into 24 angular</span>
+0066 <span class="comment">% segments (thus, some vertices correspond to particular angles 30°,</span>
+0067 <span class="comment">% 45°...)</span>
+0068 theta = linspace(0, 2*pi, 25);
+0069 
+0070 <span class="comment">% use planar vertical axis as default revolution axis</span>
+0071 revol = [0 0 0 1];
+0072 
+0073 <span class="comment">% extract the generating curve</span>
+0074 var = varargin{1};
+0075 <span class="keyword">if</span> size(var, 2)==1
+0076     xt = var;
+0077     yt = varargin{2};
+0078     varargin(1:2) = [];
+0079 <span class="keyword">else</span>
+0080     xt = var(:,1);
+0081     yt = var(:,2);
+0082     varargin(1) = [];
+0083 <span class="keyword">end</span>
+0084 
+0085 <span class="comment">% extract optional parameters: angles, axis of revolution</span>
+0086 <span class="comment">% parameters are identified from their length</span>
+0087 <span class="keyword">while</span> ~isempty(varargin)
+0088     var = varargin{1};
+0089     
+0090     <span class="keyword">if</span> length(var) == 4
+0091         <span class="comment">% axis of rotation in the base plane</span>
+0092         revol = var;
+0093         
+0094     <span class="keyword">elseif</span> length(var) == 1
+0095         <span class="comment">% number of points -&gt; create row vector of angles</span>
+0096         theta = linspace(0, 2*pi, var);
+0097         
+0098     <span class="keyword">else</span>
+0099         <span class="comment">% use all specified angle values</span>
+0100         theta = var(:)';
+0101         
+0102     <span class="keyword">end</span>
+0103     varargin(1) = [];
+0104 <span class="keyword">end</span>
+0105 
+0106 
+0107 <span class="comment">%% Create revolution surface</span>
+0108 
+0109 <span class="comment">% ensure length is enough</span>
+0110 m = length(xt);
+0111 <span class="keyword">if</span> m==1
+0112     xt = [xt xt];
+0113 <span class="keyword">end</span>
+0114 
+0115 <span class="comment">% ensure x and y are vertical vectors</span>
+0116 xt = xt(:);
+0117 yt = yt(:);
+0118 
+0119 <span class="comment">% transform xt and yt to replace in the reference of the revolution axis</span>
+0120 tra = <a href="../../matGeom/geom2d/createTranslation.html" class="code" title="function trans = createTranslation(varargin)">createTranslation</a>(-revol(1:2));
+0121 rot = <a href="../../matGeom/geom2d/createRotation.html" class="code" title="function trans = createRotation(varargin)">createRotation</a>(pi/2 - <a href="../../matGeom/geom2d/lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>(revol));
+0122 [xt, yt] = <a href="../../matGeom/geom2d/transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(xt, yt, tra*rot);
+0123 
+0124 <span class="comment">% compute surface vertices</span>
+0125 x = xt * cos(theta);
+0126 y = xt * sin(theta);
+0127 z = yt * ones(size(theta));
+0128 
+0129 
+0130 <span class="comment">%% Process output arguments</span>
+0131 
+0132 <span class="comment">% format output depending on how many output parameters are required</span>
+0133 <span class="keyword">if</span> nargout == 0
+0134     <span class="comment">% draw the revolution surface</span>
+0135     surf(x, y, z);
+0136     
+0137 <span class="keyword">elseif</span> nargout == 1
+0138     <span class="comment">% draw the surface and return a handle to the shown structure</span>
+0139     h = surf(x, y, z);
+0140     varargout{1} = h;
+0141     
+0142 <span class="keyword">elseif</span> nargout == 3
+0143     <span class="comment">% return computed mesh</span>
+0144     varargout = {x, y, z};
+0145 <span class="keyword">end</span>
+0146 
+0147</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

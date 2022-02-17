@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createCubeOctahedron</title>
+  <meta name="keywords" content="createCubeOctahedron">
+  <meta name="description" content="CREATECUBEOCTAHEDRON Create a 3D mesh representing a cube-octahedron.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; createCubeOctahedron.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createCubeOctahedron
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATECUBEOCTAHEDRON Create a 3D mesh representing a cube-octahedron.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = createCubeOctahedron() </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATECUBEOCTAHEDRON Create a 3D mesh representing a cube-octahedron.
+
+   [V, E, F] = createCubeOctahedron;
+   Cubeoctahedron can be seen either as a truncated cube, or as a
+   truncated octahedron.
+   V is the 12-by-3 array of vertex coordinates
+   E is the 27-by-2 array of edge vertex indices
+   F is the 1-by-14 cell array of face vertex indices
+
+   [V, F] = createCubeOctahedron;
+   Returns only the vertices and the face vertex indices.
+
+   MESH = createCubeOctahedron;
+   Returns the data as a mesh structure, with fields 'vertices', 'edges'
+   and 'faces'.
+
+   Example
+   [n, e, f] = createCubeOctahedron;
+   drawMesh(n, f);
+   
+   See also
+   meshes3d, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a>, <a href="createCube.html" class="code" title="function varargout = createCube()">createCube</a>, <a href="createOctahedron.html" class="code" title="function varargout = createOctahedron()">createOctahedron</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = createCubeOctahedron()</a>
+0002 <span class="comment">%CREATECUBEOCTAHEDRON Create a 3D mesh representing a cube-octahedron.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V, E, F] = createCubeOctahedron;</span>
+0005 <span class="comment">%   Cubeoctahedron can be seen either as a truncated cube, or as a</span>
+0006 <span class="comment">%   truncated octahedron.</span>
+0007 <span class="comment">%   V is the 12-by-3 array of vertex coordinates</span>
+0008 <span class="comment">%   E is the 27-by-2 array of edge vertex indices</span>
+0009 <span class="comment">%   F is the 1-by-14 cell array of face vertex indices</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   [V, F] = createCubeOctahedron;</span>
+0012 <span class="comment">%   Returns only the vertices and the face vertex indices.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   MESH = createCubeOctahedron;</span>
+0015 <span class="comment">%   Returns the data as a mesh structure, with fields 'vertices', 'edges'</span>
+0016 <span class="comment">%   and 'faces'.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   Example</span>
+0019 <span class="comment">%   [n, e, f] = createCubeOctahedron;</span>
+0020 <span class="comment">%   drawMesh(n, f);</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   See also</span>
+0023 <span class="comment">%   meshes3d, drawMesh, createCube, createOctahedron</span>
+0024 <span class="comment">%</span>
+0025 
+0026 <span class="comment">%   ---------</span>
+0027 <span class="comment">%   author : David Legland</span>
+0028 <span class="comment">%   e-mail: david.legland@inra.fr</span>
+0029 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0030 <span class="comment">%   created the 10/02/2005.</span>
+0031 <span class="comment">%</span>
+0032 
+0033 <span class="comment">%   HISTORY</span>
+0034 <span class="comment">%   04/01/2007: remove unused variables</span>
+0035 
+0036 nodes = [<span class="keyword">...</span>
+0037     0 -1 1;1 0 1;0 1 1;-1 0 1; <span class="keyword">...</span>
+0038     1 -1 0;1 1 0;-1 1 0;-1 -1 0;<span class="keyword">...</span>
+0039     0 -1 -1;1 0 -1;0 1 -1;-1 0 -1];
+0040 
+0041 edges = [<span class="keyword">...</span>
+0042      1  2;  1  4; 1 5; 1 8; <span class="keyword">...</span>
+0043      2  3;  2  5; 2 6; <span class="keyword">...</span>
+0044      3  4;  3  6; 3 7; <span class="keyword">...</span>
+0045      4  7;  4  8; <span class="keyword">...</span>
+0046      5  9;  5 10; <span class="keyword">...</span>
+0047      6 10;  6 11; <span class="keyword">...</span>
+0048      7 11;  7 12; <span class="keyword">...</span>
+0049      8  9;  8 12; <span class="keyword">...</span>
+0050      9 10;  9 12; <span class="keyword">...</span>
+0051     10 11; 11 12];
+0052 
+0053 faces = {<span class="keyword">...</span>
+0054     [1 2 3 4], [1 5 2], [2 6 3], [3 7 4], [4 8 1], <span class="keyword">...</span>
+0055     [5 10 6 2], [3 6 11 7], [4 7 12 8], [1 8 9 5], <span class="keyword">...</span>
+0056     [5 9 10], [6 10 11], [7 11 12], [8 12 9], [9 12 11 10]};
+0057 
+0058 <span class="comment">% format output</span>
+0059 varargout = formatMeshOutput(nargout, nodes, edges, faces);
+0060</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

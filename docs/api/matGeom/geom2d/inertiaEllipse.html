@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of inertiaEllipse</title>
+  <meta name="keywords" content="inertiaEllipse">
+  <meta name="description" content="INERTIAELLIPSE Inertia ellipse of a set of points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; inertiaEllipse.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>inertiaEllipse
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>INERTIAELLIPSE Inertia ellipse of a set of points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function ell = inertiaEllipse(points) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">INERTIAELLIPSE Inertia ellipse of a set of points.
+
+   Note: Deprecated! Use equivalentEllipse instead.
+
+   ELL = inertiaEllipse(PTS);
+   where PTS is a N*2 array containing coordinates of N points, computes
+   the inertia ellipse of the set of points.
+
+   The result has the form:
+   ELL = [XC YC A B THETA],
+   with XC and YC being the center of mass of the point set, A and B are
+   the lengths of the inertia ellipse (see below), and THETA is the angle
+   of the main inertia axis with the horizontal (counted in degrees
+   between 0 and 180). 
+   A and B are the standard deviations of the point coordinates when
+   ellipse is aligned with the principal axes.
+
+   Example
+   pts = randn(100, 2);
+   pts = transformPoint(pts, createScaling(5, 2));
+   pts = transformPoint(pts, createRotation(pi/6));
+   pts = transformPoint(pts, createTranslation(3, 4));
+   ell = inertiaEllipse(pts);
+   figure(1); clf; hold on;
+   drawPoint(pts);
+   drawEllipse(ell, 'linewidth', 2, 'color', 'r');
+
+   See also
+     <a href="equivalentEllipse.html" class="code" title="function ell = equivalentEllipse(points)">equivalentEllipse</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function ell = inertiaEllipse(points)</a>
+0002 <span class="comment">%INERTIAELLIPSE Inertia ellipse of a set of points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   Note: Deprecated! Use equivalentEllipse instead.</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   ELL = inertiaEllipse(PTS);</span>
+0007 <span class="comment">%   where PTS is a N*2 array containing coordinates of N points, computes</span>
+0008 <span class="comment">%   the inertia ellipse of the set of points.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   The result has the form:</span>
+0011 <span class="comment">%   ELL = [XC YC A B THETA],</span>
+0012 <span class="comment">%   with XC and YC being the center of mass of the point set, A and B are</span>
+0013 <span class="comment">%   the lengths of the inertia ellipse (see below), and THETA is the angle</span>
+0014 <span class="comment">%   of the main inertia axis with the horizontal (counted in degrees</span>
+0015 <span class="comment">%   between 0 and 180).</span>
+0016 <span class="comment">%   A and B are the standard deviations of the point coordinates when</span>
+0017 <span class="comment">%   ellipse is aligned with the principal axes.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   Example</span>
+0020 <span class="comment">%   pts = randn(100, 2);</span>
+0021 <span class="comment">%   pts = transformPoint(pts, createScaling(5, 2));</span>
+0022 <span class="comment">%   pts = transformPoint(pts, createRotation(pi/6));</span>
+0023 <span class="comment">%   pts = transformPoint(pts, createTranslation(3, 4));</span>
+0024 <span class="comment">%   ell = inertiaEllipse(pts);</span>
+0025 <span class="comment">%   figure(1); clf; hold on;</span>
+0026 <span class="comment">%   drawPoint(pts);</span>
+0027 <span class="comment">%   drawEllipse(ell, 'linewidth', 2, 'color', 'r');</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%   See also</span>
+0030 <span class="comment">%     equivalentEllipse</span>
+0031 <span class="comment">%</span>
+0032 
+0033 <span class="comment">% ------</span>
+0034 <span class="comment">% Author: David Legland</span>
+0035 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0036 <span class="comment">% Created: 2008-02-21,    using Matlab 7.4.0.287 (R2007a)</span>
+0037 <span class="comment">% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0038 
+0039 <span class="comment">% HISTORY</span>
+0040 <span class="comment">% 2009-07-29 take into account ellipse orientation</span>
+0041 <span class="comment">% 2011-03-12 rewrite using inertia moments</span>
+0042 
+0043 <span class="comment">% deprecation warning</span>
+0044 warning(<span class="string">'geom2d:deprecated'</span>, <span class="keyword">...</span>
+0045     [mfilename <span class="string">' is deprecated, use ''equivalentEllipse'' instead'</span>]);
+0046 
+0047 <span class="comment">% ellipse center</span>
+0048 xc = mean(points(:,1));
+0049 yc = mean(points(:,2));
+0050 
+0051 <span class="comment">% recenter points</span>
+0052 x = points(:,1) - xc;
+0053 y = points(:,2) - yc;
+0054 
+0055 <span class="comment">% number of points</span>
+0056 n = size(points, 1);
+0057 
+0058 <span class="comment">% inertia parameters</span>
+0059 Ixx = sum(x.^2) / n;
+0060 Iyy = sum(y.^2) / n;
+0061 Ixy = sum(x.*y) / n;
+0062 
+0063 <span class="comment">% compute ellipse semi-axis lengths</span>
+0064 common = sqrt( (Ixx - Iyy)^2 + 4 * Ixy^2);
+0065 ra = sqrt(2) * sqrt(Ixx + Iyy + common);
+0066 rb = sqrt(2) * sqrt(Ixx + Iyy - common);
+0067 
+0068 <span class="comment">% compute ellipse angle in degrees</span>
+0069 theta = atan2(2 * Ixy, Ixx - Iyy) / 2;
+0070 theta = rad2deg(theta);
+0071 
+0072 <span class="comment">% create the resulting inertia ellipse</span>
+0073 ell = [xc yc ra rb theta];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of vectorCross3d</title>
+  <meta name="keywords" content="vectorCross3d">
+  <meta name="description" content="VECTORCROSS3D Vector cross product faster than inbuilt MATLAB cross.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; vectorCross3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>vectorCross3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>VECTORCROSS3D Vector cross product faster than inbuilt MATLAB cross.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function c = vectorCross3d(a,b) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">VECTORCROSS3D Vector cross product faster than inbuilt MATLAB cross.
+
+   C = vectorCross3d(A, B) 
+   returns the cross product of the 3D vectors A and B, that is: 
+       C = A x B
+   A and B must be N-by-3 element vectors. If either A or B is a 1-by-3
+   row vector, the result C will have the size of the other input and will
+   be the  concatenation of each row's cross product. 
+
+   Example
+     v1 = [2 0 0];
+     v2 = [0 3 0];
+     vectorCross3d(v1, v2)
+     ans =
+         0   0   6
+
+
+   Class support for inputs A,B:
+      float: double, single
+
+   See also DOT.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function c = vectorCross3d(a,b)</a>
+0002 <span class="comment">%VECTORCROSS3D Vector cross product faster than inbuilt MATLAB cross.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   C = vectorCross3d(A, B)</span>
+0005 <span class="comment">%   returns the cross product of the 3D vectors A and B, that is:</span>
+0006 <span class="comment">%       C = A x B</span>
+0007 <span class="comment">%   A and B must be N-by-3 element vectors. If either A or B is a 1-by-3</span>
+0008 <span class="comment">%   row vector, the result C will have the size of the other input and will</span>
+0009 <span class="comment">%   be the  concatenation of each row's cross product.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Example</span>
+0012 <span class="comment">%     v1 = [2 0 0];</span>
+0013 <span class="comment">%     v2 = [0 3 0];</span>
+0014 <span class="comment">%     vectorCross3d(v1, v2)</span>
+0015 <span class="comment">%     ans =</span>
+0016 <span class="comment">%         0   0   6</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   Class support for inputs A,B:</span>
+0020 <span class="comment">%      float: double, single</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   See also DOT.</span>
+0023 
+0024 <span class="comment">%   Sven Holcombe</span>
+0025 
+0026 <span class="comment">% needed_colons = max([3, length(size(a)), length(size(b))]) - 3;</span>
+0027 <span class="comment">% tmp_colon = {':'};</span>
+0028 <span class="comment">% clnSet = tmp_colon(ones(1, needed_colons));</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">% c = bsxfun(@times, a(:,[2 3 1],clnSet{:}), b(:,[3 1 2],clnSet{:})) - ...</span>
+0031 <span class="comment">%     bsxfun(@times, b(:,[2 3 1],clnSet{:}), a(:,[3 1 2],clnSet{:}));</span>
+0032 
+0033 <span class="comment">% deprecation warning</span>
+0034 warning(<span class="string">'geom3d:deprecated'</span>, <span class="keyword">...</span>
+0035     [mfilename <span class="string">' is deprecated, use ''crossProduct3d'' instead'</span>]);
+0036 
+0037 sza = size(a);
+0038 szb = size(b);
+0039 
+0040 <span class="comment">% Initialise c to the size of a or b, whichever has more dimensions. If</span>
+0041 <span class="comment">% they have the same dimensions, initialise to the larger of the two</span>
+0042 <span class="keyword">switch</span> sign(numel(sza) - numel(szb))
+0043     <span class="keyword">case</span> 1
+0044         c = zeros(sza);
+0045     <span class="keyword">case</span> -1
+0046         c = zeros(szb);
+0047     <span class="keyword">otherwise</span>
+0048         c = zeros(max(sza, szb));
+0049 <span class="keyword">end</span>
+0050 
+0051 c(:) =  bsxfun(@times, a(:,[2 3 1],:), b(:,[3 1 2],:)) - <span class="keyword">...</span>
+0052         bsxfun(@times, b(:,[2 3 1],:), a(:,[3 1 2],:));</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

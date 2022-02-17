@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of crossProduct3d</title>
+  <meta name="keywords" content="crossProduct3d">
+  <meta name="description" content="CROSSPRODUCT3D Vector cross product faster than inbuilt MATLAB cross.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; crossProduct3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>crossProduct3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CROSSPRODUCT3D Vector cross product faster than inbuilt MATLAB cross.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function c = crossProduct3d(a,b) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CROSSPRODUCT3D Vector cross product faster than inbuilt MATLAB cross.
+
+   C = crossProduct3d(A, B) 
+   returns the cross product of the two 3D vectors A and B, that is: 
+       C = A x B
+   A and B must be N-by-3 element vectors. If either A or B is a 1-by-3
+   row vector, the result C will have the size of the other input and will
+   be the  concatenation of each row's cross product. 
+
+   Example
+     v1 = [2 0 0];
+     v2 = [0 3 0];
+     crossProduct3d(v1, v2)
+     ans =
+         0   0   6
+
+
+   Class support for inputs A,B:
+      float: double, single
+
+   See also DOT.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createBasisTransform3d.html" class="code" title="function transfo = createBasisTransform3d(source, target)">createBasisTransform3d</a>	CREATEBASISTRANSFORM3D Compute matrix for transforming a basis into another basis.</li><li><a href="distancePointLine3d.html" class="code" title="function d = distancePointLine3d(point, line)">distancePointLine3d</a>	DISTANCEPOINTLINE3D Euclidean distance between 3D point and line.</li><li><a href="drawAngleBetweenVectors3d.html" class="code" title="function varargout = drawAngleBetweenVectors3d(o, v1, v2, r, varargin)">drawAngleBetweenVectors3d</a>	DRAWANGLEBETWEENVECTORS3D Draw an arc between 2 vectors.</li><li><a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>	INTERSECTLINEPLANE Intersection point between a 3D line and a plane.</li><li><a href="isParallel3d.html" class="code" title="function b = isParallel3d(v1, v2, varargin)">isParallel3d</a>	ISPARALLEL3D Check parallelism of two 3D vectors.</li><li><a href="isPointOnLine3d.html" class="code" title="function b = isPointOnLine3d(point, line, varargin)">isPointOnLine3d</a>	ISPOINTONLINE3D Test if a 3D point belongs to a 3D line.</li><li><a href="normalizePlane.html" class="code" title="function plane2 = normalizePlane(plane1)">normalizePlane</a>	NORMALIZEPLANE Normalize parametric representation of a plane.</li><li><a href="orientedBox3d.html" class="code" title="function [box3d, rotMat] = orientedBox3d(pts)">orientedBox3d</a>	Object-oriented bounding box of a set of 3D points.</li><li><a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>	PLANENORMAL Compute the normal to a plane.</li><li><a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>	PROJPOINTONPLANE Return the orthogonal projection of a point on a plane.</li><li><a href="vectorAngle3d.html" class="code" title="function theta = vectorAngle3d(v1, v2)">vectorAngle3d</a>	VECTORANGLE3D Angle between two 3D vectors.</li><li><a href="../../matGeom/meshes3d/intersectLineMesh3d.html" class="code" title="function [points, pos, faceInds, lineInds] = intersectLineMesh3d(line, vertices, varargin)">intersectLineMesh3d</a>	Intersection points of a 3D line with a mesh.</li><li><a href="../../matGeom/meshes3d/mergeCoplanarFaces.html" class="code" title="function varargout = mergeCoplanarFaces(nodes, varargin)">mergeCoplanarFaces</a>	MERGECOPLANARFACES Merge coplanar faces of a polyhedral mesh.</li><li><a href="../../matGeom/meshes3d/meshCurvatures.html" class="code" title="function [C1, C2, U1, U2, H, K, N] = meshCurvatures(vertices, faces, varargin)">meshCurvatures</a>	Compute principal curvatures on mesh vertices.</li><li><a href="../../matGeom/meshes3d/meshFaceAreas.html" class="code" title="function areas = meshFaceAreas(vertices, faces)">meshFaceAreas</a>	MESHFACEAREAS Surface area of each face of a mesh.</li><li><a href="../../matGeom/meshes3d/trimeshSurfaceArea.html" class="code" title="function area = trimeshSurfaceArea(v, e, f)">trimeshSurfaceArea</a>	TRIMESHSURFACEAREA Surface area of a triangular mesh.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function c = crossProduct3d(a,b)</a>
+0002 <span class="comment">%CROSSPRODUCT3D Vector cross product faster than inbuilt MATLAB cross.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   C = crossProduct3d(A, B)</span>
+0005 <span class="comment">%   returns the cross product of the two 3D vectors A and B, that is:</span>
+0006 <span class="comment">%       C = A x B</span>
+0007 <span class="comment">%   A and B must be N-by-3 element vectors. If either A or B is a 1-by-3</span>
+0008 <span class="comment">%   row vector, the result C will have the size of the other input and will</span>
+0009 <span class="comment">%   be the  concatenation of each row's cross product.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Example</span>
+0012 <span class="comment">%     v1 = [2 0 0];</span>
+0013 <span class="comment">%     v2 = [0 3 0];</span>
+0014 <span class="comment">%     crossProduct3d(v1, v2)</span>
+0015 <span class="comment">%     ans =</span>
+0016 <span class="comment">%         0   0   6</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   Class support for inputs A,B:</span>
+0020 <span class="comment">%      float: double, single</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   See also DOT.</span>
+0023 
+0024 <span class="comment">%   Sven Holcombe</span>
+0025 
+0026 <span class="comment">% HISTORY</span>
+0027 <span class="comment">% 2017-11-24 rename from vectorCross3d to crossProduct3d</span>
+0028 
+0029 <span class="comment">% size of inputs</span>
+0030 sizeA = size(a);
+0031 sizeB = size(b);
+0032 
+0033 <span class="comment">% Initialise c to the size of a or b, whichever has more dimensions. If</span>
+0034 <span class="comment">% they have the same dimensions, initialise to the larger of the two</span>
+0035 <span class="keyword">switch</span> sign(numel(sizeA) - numel(sizeB))
+0036     <span class="keyword">case</span> 1
+0037         c = zeros(sizeA);
+0038     <span class="keyword">case</span> -1
+0039         c = zeros(sizeB);
+0040     <span class="keyword">otherwise</span>
+0041         c = zeros(max(sizeA, sizeB));
+0042 <span class="keyword">end</span>
+0043 
+0044 c(:) = bsxfun(@times, a(:,[2 3 1],:), b(:,[3 1 2],:)) - <span class="keyword">...</span>
+0045        bsxfun(@times, b(:,[2 3 1],:), a(:,[3 1 2],:));</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

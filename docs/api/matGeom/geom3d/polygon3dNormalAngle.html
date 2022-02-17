@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polygon3dNormalAngle</title>
+  <meta name="keywords" content="polygon3dNormalAngle">
+  <meta name="description" content="POLYGON3DNORMALANGLE Normal angle at a vertex of the 3D polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; polygon3dNormalAngle.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polygon3dNormalAngle
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYGON3DNORMALANGLE Normal angle at a vertex of the 3D polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function theta = polygon3dNormalAngle(points, ind) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLYGON3DNORMALANGLE Normal angle at a vertex of the 3D polygon.
+
+   THETA = polygon3DNormalAngle(POLYGON, IND)
+   where POLYGON is a set of points, and IND is index of a point in
+   polygon. The function compute the angle of the normal cone localized at
+   this vertex.
+   If IND is a vector of indices, normal angle is computed for each vertex
+   specified by IND.
+
+   Example
+   % create an equilateral triangle in space
+   poly3d = [1 1 0;-1 0 1;0 -1 -1];
+   % compute each normal angle
+   theta = polygon3dNormalAngle(poly3d, 1:size(poly3d, 1));
+   % sum of normal angles must be equal to 2*PI for simple polygons
+   sum(theta)
+
+   IMPORTANT NOTE: works only for convex angles ! ! ! !
+
+   See also
+   <a href="polygons3d.html" class="code" title="function polygons3d(varargin)">polygons3d</a>, faceNormalAngle
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2005-11-30
+ Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="anglePoints3d.html" class="code" title="function alpha = anglePoints3d(varargin)">anglePoints3d</a>	ANGLEPOINTS3D Compute angle between three 3D points.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/meshes3d/polyhedronNormalAngle.html" class="code" title="function theta = polyhedronNormalAngle(varargin)">polyhedronNormalAngle</a>	POLYHEDRONNORMALANGLE Compute normal angle at a vertex of a 3D polyhedron.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function theta = polygon3dNormalAngle(points, ind)</a>
+0002 <span class="comment">%POLYGON3DNORMALANGLE Normal angle at a vertex of the 3D polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   THETA = polygon3DNormalAngle(POLYGON, IND)</span>
+0005 <span class="comment">%   where POLYGON is a set of points, and IND is index of a point in</span>
+0006 <span class="comment">%   polygon. The function compute the angle of the normal cone localized at</span>
+0007 <span class="comment">%   this vertex.</span>
+0008 <span class="comment">%   If IND is a vector of indices, normal angle is computed for each vertex</span>
+0009 <span class="comment">%   specified by IND.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Example</span>
+0012 <span class="comment">%   % create an equilateral triangle in space</span>
+0013 <span class="comment">%   poly3d = [1 1 0;-1 0 1;0 -1 -1];</span>
+0014 <span class="comment">%   % compute each normal angle</span>
+0015 <span class="comment">%   theta = polygon3dNormalAngle(poly3d, 1:size(poly3d, 1));</span>
+0016 <span class="comment">%   % sum of normal angles must be equal to 2*PI for simple polygons</span>
+0017 <span class="comment">%   sum(theta)</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   IMPORTANT NOTE: works only for convex angles ! ! ! !</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See also</span>
+0022 <span class="comment">%   polygons3d, faceNormalAngle</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">% ------</span>
+0025 <span class="comment">% Author: David Legland</span>
+0026 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0027 <span class="comment">% Created: 2005-11-30</span>
+0028 <span class="comment">% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0029 
+0030 
+0031 <span class="comment">% number of points</span>
+0032 np = size(points, 1);
+0033 
+0034 <span class="comment">% number of angles to compute</span>
+0035 nv = length(ind);
+0036 
+0037 theta = zeros(nv, 1);
+0038 
+0039 <span class="keyword">for</span> i=1:nv
+0040     p0 = points(ind(i), :);
+0041     
+0042     <span class="keyword">if</span> ind(i)==1
+0043         p1 = points(np, :);
+0044     <span class="keyword">else</span>
+0045         p1 = points(ind(i)-1, :);
+0046     <span class="keyword">end</span>
+0047     
+0048     <span class="keyword">if</span> ind(i)==np
+0049         p2 = points(1, :);
+0050     <span class="keyword">else</span>
+0051         p2 = points(ind(i)+1, :);
+0052     <span class="keyword">end</span>
+0053     
+0054     theta(i) = pi - <a href="anglePoints3d.html" class="code" title="function alpha = anglePoints3d(varargin)">anglePoints3d</a>(p1, p0, p2);
+0055 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

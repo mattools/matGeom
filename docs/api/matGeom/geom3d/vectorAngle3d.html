@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of vectorAngle3d</title>
+  <meta name="keywords" content="vectorAngle3d">
+  <meta name="description" content="VECTORANGLE3D Angle between two 3D vectors.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; vectorAngle3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>vectorAngle3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>VECTORANGLE3D Angle between two 3D vectors.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function theta = vectorAngle3d(v1, v2) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">VECTORANGLE3D Angle between two 3D vectors.
+
+   THETA = vectorAngle3d(V1, V2)
+   Computes the angle between the 2 3D vectors V1 and V2. The result THETA
+   is given in radians, between 0 and PI.
+
+
+   Example
+   % angle between 2 orthogonal vectors
+   vectorAngle3d([1 0 0], [0 1 0])
+   ans = 
+       1.5708
+
+   % angle between 2 parallel vectors
+   v0 = [3 4 5];
+   vectorAngle3d(3*v0, 5*v0)
+   ans = 
+       0
+
+   See also
+   <a href="vectors3d.html" class="code" title="function vectors3d(varargin)">vectors3d</a>, <a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>, <a href="crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>	CROSSPRODUCT3D Vector cross product faster than inbuilt MATLAB cross.</li><li><a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>	VECTORNORM3D Norm of a 3D vector or of set of 3D vectors.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawAngleBetweenVectors3d.html" class="code" title="function varargout = drawAngleBetweenVectors3d(o, v1, v2, r, varargin)">drawAngleBetweenVectors3d</a>	DRAWANGLEBETWEENVECTORS3D Draw an arc between 2 vectors.</li><li><a href="../../matGeom/meshes3d/meshDihedralAngles.html" class="code" title="function alpha = meshDihedralAngles(vertices, edges, faces)">meshDihedralAngles</a>	MESHDIHEDRALANGLES Dihedral at edges of a polyhedal mesh.</li><li><a href="../../matGeom/meshes3d/trimeshMeanBreadth.html" class="code" title="function mb = trimeshMeanBreadth(vertices, faces)">trimeshMeanBreadth</a>	TRIMESHMEANBREADTH Mean breadth of a triangular mesh.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function theta = vectorAngle3d(v1, v2)</a>
+0002 <span class="comment">%VECTORANGLE3D Angle between two 3D vectors.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   THETA = vectorAngle3d(V1, V2)</span>
+0005 <span class="comment">%   Computes the angle between the 2 3D vectors V1 and V2. The result THETA</span>
+0006 <span class="comment">%   is given in radians, between 0 and PI.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   Example</span>
+0010 <span class="comment">%   % angle between 2 orthogonal vectors</span>
+0011 <span class="comment">%   vectorAngle3d([1 0 0], [0 1 0])</span>
+0012 <span class="comment">%   ans =</span>
+0013 <span class="comment">%       1.5708</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   % angle between 2 parallel vectors</span>
+0016 <span class="comment">%   v0 = [3 4 5];</span>
+0017 <span class="comment">%   vectorAngle3d(3*v0, 5*v0)</span>
+0018 <span class="comment">%   ans =</span>
+0019 <span class="comment">%       0</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See also</span>
+0022 <span class="comment">%   vectors3d, vectorNorm3d, crossProduct3d</span>
+0023 <span class="comment">%</span>
+0024 
+0025 <span class="comment">% ------</span>
+0026 <span class="comment">% Author: David Legland</span>
+0027 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0028 <span class="comment">% Created: 2010-10-04,    using Matlab 7.9.0.529 (R2009b)</span>
+0029 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0030 
+0031 <span class="comment">% 2011-03-10 improve computation precision</span>
+0032 
+0033 <span class="comment">% compute angle using arc-tangent to get better precision for angles near</span>
+0034 <span class="comment">% zero, see the discussion in:</span>
+0035 <span class="comment">% http://www.mathworks.com/matlabcentral/newsreader/view_thread/151925#381952</span>
+0036 theta = atan2(<a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(<a href="crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>(v1, v2)), sum(bsxfun(@times, v1, v2),2));
+0037 
+0038 <span class="comment">% equivalent to:</span>
+0039 <span class="comment">% v1 = normalizeVector3d(v1);</span>
+0040 <span class="comment">% v2 = normalizeVector3d(v2);</span>
+0041 <span class="comment">% theta = acos(dot(v1, v2, 2));</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

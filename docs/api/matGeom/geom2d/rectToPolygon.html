@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of rectToPolygon</title>
+  <meta name="keywords" content="rectToPolygon">
+  <meta name="description" content="RECTTOPOLYGON Convert a rectangle into a polygon (set of vertices).">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; rectToPolygon.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>rectToPolygon
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>RECTTOPOLYGON Convert a rectangle into a polygon (set of vertices).</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [tx, ty] = rectToPolygon(rect) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">RECTTOPOLYGON Convert a rectangle into a polygon (set of vertices).
+
+   POLY = rectToPolygon(RECT);
+   Converts rectangle given as [X0 Y0 W H] or [X0 Y0 W H THETA] into a
+   4-by-2 array double, containing coordinate of rectangle vertices.
+   X0 and Y0 are the coordinates of the &quot;lower left&quot; vertex (before
+   applying rotation), W and H are the width and the height of the
+   rectangle, and THETA is the rotation angle around the first vertex, in
+   degrees.
+
+   See also:
+   <a href="orientedBoxToPolygon.html" class="code" title="function [tx, ty] = orientedBoxToPolygon(obox)">orientedBoxToPolygon</a>, <a href="ellipseToPolygon.html" class="code" title="function varargout = ellipseToPolygon(ellipse, N)">ellipseToPolygon</a>, <a href="drawRect.html" class="code" title="function varargout = drawRect(rect, varargin)">drawRect</a>, drawPolygon</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawRect.html" class="code" title="function varargout = drawRect(rect, varargin)">drawRect</a>	DRAWRECT Draw rectangle on the current axis.</li><li><a href="drawShape.html" class="code" title="function varargout = drawShape(type, param, varargin)">drawShape</a>	DRAWSHAPE Draw various types of shapes (circles, polygons...).</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [tx, ty] = rectToPolygon(rect)</a>
+0002 <span class="comment">%RECTTOPOLYGON Convert a rectangle into a polygon (set of vertices).</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POLY = rectToPolygon(RECT);</span>
+0005 <span class="comment">%   Converts rectangle given as [X0 Y0 W H] or [X0 Y0 W H THETA] into a</span>
+0006 <span class="comment">%   4-by-2 array double, containing coordinate of rectangle vertices.</span>
+0007 <span class="comment">%   X0 and Y0 are the coordinates of the &quot;lower left&quot; vertex (before</span>
+0008 <span class="comment">%   applying rotation), W and H are the width and the height of the</span>
+0009 <span class="comment">%   rectangle, and THETA is the rotation angle around the first vertex, in</span>
+0010 <span class="comment">%   degrees.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   See also:</span>
+0013 <span class="comment">%   orientedBoxToPolygon, ellipseToPolygon, drawRect, drawPolygon</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%</span>
+0016 
+0017 <span class="comment">% ---------</span>
+0018 <span class="comment">% Author: David Legland</span>
+0019 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0020 <span class="comment">% INRA - TPV URPOI - BIA IMASTE</span>
+0021 <span class="comment">% created the 06/04/2005.</span>
+0022 <span class="comment">%</span>
+0023 
+0024 <span class="comment">% HISTORY</span>
+0025 
+0026 <span class="comment">% extract rectangle parameters</span>
+0027 theta = 0;
+0028 x0  = rect(1);
+0029 y0  = rect(2);
+0030 w   = rect(3);
+0031 h   = rect(4);
+0032 <span class="keyword">if</span> length(rect) &gt; 4
+0033     theta = rect(5);
+0034 <span class="keyword">end</span>
+0035 
+0036 <span class="comment">% precompute angular quantities</span>
+0037 cot = cosd(theta);
+0038 sit = sind(theta);
+0039 
+0040 <span class="comment">% compute vertex coordinates</span>
+0041 tx = zeros(4, 1);
+0042 ty = zeros(4, 1);
+0043 tx(1) = x0;
+0044 ty(1) = y0;
+0045 tx(2) = x0 + w * cot;
+0046 ty(2) = y0 + w * sit;
+0047 tx(3) = x0 + w * cot - h * sit;
+0048 ty(3) = y0 + w * sit + h * cot;
+0049 tx(4) = x0 - h * sit;
+0050 ty(4) = y0 + h * cot;
+0051 
+0052 <span class="comment">% format output</span>
+0053 <span class="keyword">if</span> nargout &lt;= 1
+0054     tx = [tx ty];
+0055 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

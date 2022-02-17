@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of writeMesh_ply</title>
+  <meta name="keywords" content="writeMesh_ply">
+  <meta name="description" content="WRITEMESH_PLY Write a mesh into a file in PLY format.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; writeMesh_ply.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>writeMesh_ply
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>WRITEMESH_PLY Write a mesh into a file in PLY format.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function writeMesh_ply(fileName, vertices, faces, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">WRITEMESH_PLY Write a mesh into a file in PLY format.
+
+   writeMesh_ply(FNAME, VERTICES, FACES)
+
+   writeMesh_ply(FNAME, MESH)
+
+   writeMesh_ply(..., FORMAT) also specifies a file format for the written
+   file. FORMAT can be either 'binary' (default) or 'ascii'.
+
+   Example
+   mesh = createSoccerBall;
+   fileName = 'SoccerBall.ply';
+   writeMesh_ply(fileName, mesh, 'Bin');
+   mesh2 = readMesh(fileName);
+   drawMesh(mesh2); axis equal
+
+   See also
+   meshes3d, <a href="writeMesh.html" class="code" title="function writeMesh(fileName, vertices, faces, varargin)">writeMesh</a>, <a href="readMesh_ply.html" class="code" title="function varargout = readMesh_ply(fileName)">readMesh_ply</a>, <a href="writeMesh_off.html" class="code" title="function writeMesh_off(fileName, vertices, faces)">writeMesh_off</a>, <a href="writeMesh_stl.html" class="code" title="function writeMesh_stl(fileName, vertices, faces, varargin)">writeMesh_stl</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="writeMesh.html" class="code" title="function writeMesh(fileName, vertices, faces, varargin)">writeMesh</a>	Write 3D mesh data by inferring format from file name.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function writeMesh_ply(fileName, vertices, faces, varargin)</a>
+0002 <span class="comment">%WRITEMESH_PLY Write a mesh into a file in PLY format.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   writeMesh_ply(FNAME, VERTICES, FACES)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   writeMesh_ply(FNAME, MESH)</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   writeMesh_ply(..., FORMAT) also specifies a file format for the written</span>
+0009 <span class="comment">%   file. FORMAT can be either 'binary' (default) or 'ascii'.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Example</span>
+0012 <span class="comment">%   mesh = createSoccerBall;</span>
+0013 <span class="comment">%   fileName = 'SoccerBall.ply';</span>
+0014 <span class="comment">%   writeMesh_ply(fileName, mesh, 'Bin');</span>
+0015 <span class="comment">%   mesh2 = readMesh(fileName);</span>
+0016 <span class="comment">%   drawMesh(mesh2); axis equal</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   See also</span>
+0019 <span class="comment">%   meshes3d, writeMesh, readMesh_ply, writeMesh_off, writeMesh_stl</span>
+0020 
+0021 <span class="comment">% ------</span>
+0022 <span class="comment">% Author: David Legland, oqilipo</span>
+0023 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0024 <span class="comment">% Created: 2018-04-26,    using Matlab 9.4.0.813654 (R2018a)</span>
+0025 <span class="comment">% Copyright 2018 INRA - Cepia Software Platform.</span>
+0026 
+0027 
+0028 <span class="comment">%% Check inputs</span>
+0029 
+0030 <span class="comment">% optionnaly parses data</span>
+0031 <span class="keyword">if</span> isstruct(vertices)
+0032     <span class="keyword">if</span> nargin &gt; 2
+0033         varargin = [{faces} varargin{:}];
+0034     <span class="keyword">end</span>
+0035     faces = vertices.faces;
+0036     vertices = vertices.vertices;
+0037 <span class="keyword">end</span>
+0038 
+0039 <span class="comment">% Parsing</span>
+0040 p = inputParser;
+0041 addRequired(p,<span class="string">'fileName'</span>,@(x) validateattributes(x,{<span class="string">'char'</span>},{<span class="string">'nonempty'</span>}));
+0042 suppModes = {<span class="string">'ascii'</span>,<span class="string">'binary_little_endian'</span>};
+0043 addOptional(p,<span class="string">'mode'</span>,<span class="string">'binary_little_endian'</span>,@(x) any(validatestring(x,suppModes)));
+0044 parse(p,fileName,varargin{:});
+0045 fileName = p.Results.fileName;
+0046 mode = suppModes{startsWith(suppModes, p.Results.mode, <span class="string">'IgnoreCase'</span>,1)};
+0047 
+0048 <span class="comment">%% Initializations</span>
+0049 
+0050 <span class="comment">% number of vertices and faces</span>
+0051 nVertices = size(vertices, 1);
+0052 nFaces = size(faces, 1);
+0053 <span class="keyword">if</span> iscell(faces)
+0054     nFaces = length(faces);
+0055 <span class="keyword">end</span>
+0056 
+0057 <span class="comment">% open file for writing text</span>
+0058 f = fopen(fileName, <span class="string">'wt'</span>);
+0059 <span class="keyword">if</span> (f == -1)
+0060     error(<span class="string">'Couldn''t open the file %s'</span>, fileName);
+0061 <span class="keyword">end</span>
+0062 
+0063 
+0064 <span class="comment">%% Write Header</span>
+0065 
+0066 <span class="comment">% write the header line</span>
+0067 fprintf(f, <span class="string">'ply\n'</span>);
+0068 
+0069 <span class="comment">% write format (only ASCII supported)</span>
+0070 fprintf(f, <span class="string">'format %s 1.0\n'</span>, mode);
+0071 
+0072 <span class="comment">% some comments</span>
+0073 fprintf(f, <span class="string">'comment Created by MatGeom for MATLAB\n'</span>);
+0074 
+0075 <span class="comment">% write declaration for vertices</span>
+0076 fprintf(f, <span class="string">'element vertex %d\n'</span>, nVertices);
+0077 fprintf(f, <span class="string">'property double x\n'</span>);
+0078 fprintf(f, <span class="string">'property double y\n'</span>);
+0079 fprintf(f, <span class="string">'property double z\n'</span>);
+0080 
+0081 <span class="comment">% write declaration for faces</span>
+0082 fprintf(f, <span class="string">'element face %d\n'</span>, nFaces);
+0083 fprintf(f, <span class="string">'property list int int vertex_index\n'</span>);
+0084 
+0085 <span class="comment">% end of header</span>
+0086 fprintf(f, <span class="string">'end_header\n'</span>);
+0087 
+0088 <span class="comment">%% Write data</span>
+0089 
+0090 <span class="keyword">switch</span> mode
+0091     <span class="keyword">case</span> <span class="string">'ascii'</span>
+0092         <span class="comment">% write vertex info</span>
+0093         format = <span class="string">'%0.17f %0.17f %0.17f\n'</span>;
+0094         fprintf(f, format, vertices');
+0095         
+0096         <span class="comment">% write face info</span>
+0097         <span class="keyword">if</span> isnumeric(faces)
+0098             <span class="comment">% simply write face vertex indices</span>
+0099             ns = size(faces, 2);
+0100             plyFaces = [ns * ones(nFaces, 1) faces-1];
+0101             format = [<span class="string">'%d'</span> repmat(<span class="string">' %d'</span>, 1, ns) <span class="string">'\n'</span>];
+0102             fprintf(f, format, plyFaces');
+0103         <span class="keyword">else</span>
+0104             <span class="comment">% if faces are stored in a cell array, the number of vertices in each</span>
+0105             <span class="comment">% face may be different, and we need to process each face individually</span>
+0106             <span class="keyword">for</span> iFace = 1:nFaces
+0107                 ns = length(faces{iFace});
+0108                 format = [<span class="string">'%d'</span> repmat(<span class="string">' %d'</span>, 1, ns) <span class="string">'\n'</span>];
+0109                 fprintf(f, format, ns, faces{iFace} - 1);
+0110             <span class="keyword">end</span>
+0111         <span class="keyword">end</span>
+0112     <span class="keyword">case</span> <span class="string">'binary_little_endian'</span>
+0113         <span class="comment">% close the file</span>
+0114         fclose(f);
+0115         <span class="comment">% open file with little-endian format</span>
+0116         f = fopen(fileName,<span class="string">'a'</span>,<span class="string">'ieee-le'</span>);
+0117         <span class="comment">% write vertex info</span>
+0118         fwrite(f, vertices', <span class="string">'double'</span>);
+0119         
+0120         <span class="comment">% write face info</span>
+0121         <span class="keyword">if</span> isnumeric(faces)
+0122             <span class="comment">% simply write face vertex indices</span>
+0123             plyFaces = [size(faces, 2) * ones(nFaces, 1) faces-1];
+0124             fwrite(f, plyFaces', <span class="string">'int'</span>);
+0125         <span class="keyword">else</span>
+0126             <span class="comment">% if faces are stored in a cell array, the number of vertices in each</span>
+0127             <span class="comment">% face may be different, and we need to process each face individually</span>
+0128             <span class="keyword">for</span> iFace = 1:nFaces
+0129                 fwrite(f, [length(faces{iFace}), faces{iFace}-1], <span class="string">'int'</span>);
+0130             <span class="keyword">end</span>
+0131         <span class="keyword">end</span>
+0132     <span class="keyword">otherwise</span>
+0133         error([<span class="string">'Format '''</span> mode <span class="string">''' is not supported'</span>])
+0134 <span class="keyword">end</span>
+0135 
+0136 <span class="comment">% close the file</span>
+0137 fclose(f);
+0138 
+0139 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

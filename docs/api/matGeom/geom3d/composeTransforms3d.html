@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of composeTransforms3d</title>
+  <meta name="keywords" content="composeTransforms3d">
+  <meta name="description" content="COMPOSETRANSFORMS3D Concatenate several space transformations.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; composeTransforms3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>composeTransforms3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>COMPOSETRANSFORMS3D Concatenate several space transformations.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function trans = composeTransforms3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">COMPOSETRANSFORMS3D Concatenate several space transformations.
+
+   TRANS = composeTransforms3d(TRANS1, TRANS2, ...);
+   Computes the affine transform equivalent to performing successively
+   TRANS1, TRANS2, ...
+   
+   Example:
+   PTS  = rand(20, 3);
+   ROT1 = createRotationOx(pi/3);
+   ROT2 = createRotationOy(pi/4);
+   ROT3 = createRotationOz(pi/5);
+   ROTS = composeTransforms3d(ROT1, ROT2, ROT3);
+   Then:
+   PTS2 = transformPoint3d(PTS, ROTS);
+   will give the same result as:
+   PTS3 = transformPoint3d(transformPoint3d(transformPoint3d(PTS, ...
+       ROT1), ROT2), ROT3);
+
+   See also:
+   <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>
+
+   ---------
+
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 29/29/2006.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function trans = composeTransforms3d(varargin)</a>
+0002 <span class="comment">%COMPOSETRANSFORMS3D Concatenate several space transformations.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   TRANS = composeTransforms3d(TRANS1, TRANS2, ...);</span>
+0005 <span class="comment">%   Computes the affine transform equivalent to performing successively</span>
+0006 <span class="comment">%   TRANS1, TRANS2, ...</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Example:</span>
+0009 <span class="comment">%   PTS  = rand(20, 3);</span>
+0010 <span class="comment">%   ROT1 = createRotationOx(pi/3);</span>
+0011 <span class="comment">%   ROT2 = createRotationOy(pi/4);</span>
+0012 <span class="comment">%   ROT3 = createRotationOz(pi/5);</span>
+0013 <span class="comment">%   ROTS = composeTransforms3d(ROT1, ROT2, ROT3);</span>
+0014 <span class="comment">%   Then:</span>
+0015 <span class="comment">%   PTS2 = transformPoint3d(PTS, ROTS);</span>
+0016 <span class="comment">%   will give the same result as:</span>
+0017 <span class="comment">%   PTS3 = transformPoint3d(transformPoint3d(transformPoint3d(PTS, ...</span>
+0018 <span class="comment">%       ROT1), ROT2), ROT3);</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   See also:</span>
+0021 <span class="comment">%   transforms3d, transformPoint3d</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   ---------</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   author : David Legland</span>
+0026 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0027 <span class="comment">%   created the 29/29/2006.</span>
+0028 <span class="comment">%</span>
+0029 
+0030 trans = varargin{nargin};
+0031 <span class="keyword">for</span> i=length(varargin)-1:-1:1
+0032     trans = trans * varargin{i};
+0033 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

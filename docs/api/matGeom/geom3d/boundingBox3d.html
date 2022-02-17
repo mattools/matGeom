@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of boundingBox3d</title>
+  <meta name="keywords" content="boundingBox3d">
+  <meta name="description" content="BOUNDINGBOX3D Bounding box of a set of 3D points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; boundingBox3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>boundingBox3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>BOUNDINGBOX3D Bounding box of a set of 3D points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function box = boundingBox3d(points) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">BOUNDINGBOX3D Bounding box of a set of 3D points.
+
+   BOX = boundingBox3d(POINTS)
+   Returns the bounding box of the set of points POINTS. POINTS is a
+   N-by-3 array containing points coordinates. The result BOX is a 1-by-6 
+   array, containing:
+   [XMIN XMAX YMIN YMAX ZMIN ZMAX]
+
+   Example
+   % Draw bounding box of a cubeoctehedron
+     [v e f] = createCubeOctahedron;
+     box3d = boundingBox3d(v);
+     figure; hold on;
+     drawMesh(v, f);
+     drawBox3d(box3d);
+     set(gcf, 'renderer', 'opengl')
+     axis([-2 2 -2 2 -2 2]);
+     view(3)
+     
+   See also
+   <a href="boxes3d.html" class="code" title="function boxes3d(varargin)">boxes3d</a>, <a href="drawBox3d.html" class="code" title="function varargout = drawBox3d(box, varargin)">drawBox3d</a>
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2011-04-01,    using Matlab 7.9.0.529 (R2009b)
+ Copyright 2011 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/meshes3d/splitMesh.html" class="code" title="function meshes = splitMesh(vertices, faces, varargin)">splitMesh</a>	SPLITMESH Return the connected components of a mesh.</li><li><a href="../../matGeom/meshes3d/triangulatePolygonPair.html" class="code" title="function [vertices, faces] = triangulatePolygonPair(poly1, poly2, varargin)">triangulatePolygonPair</a>	Compute triangulation between a pair of 3D closed curves.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function box = boundingBox3d(points)</a>
+0002 <span class="comment">%BOUNDINGBOX3D Bounding box of a set of 3D points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   BOX = boundingBox3d(POINTS)</span>
+0005 <span class="comment">%   Returns the bounding box of the set of points POINTS. POINTS is a</span>
+0006 <span class="comment">%   N-by-3 array containing points coordinates. The result BOX is a 1-by-6</span>
+0007 <span class="comment">%   array, containing:</span>
+0008 <span class="comment">%   [XMIN XMAX YMIN YMAX ZMIN ZMAX]</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Example</span>
+0011 <span class="comment">%   % Draw bounding box of a cubeoctehedron</span>
+0012 <span class="comment">%     [v e f] = createCubeOctahedron;</span>
+0013 <span class="comment">%     box3d = boundingBox3d(v);</span>
+0014 <span class="comment">%     figure; hold on;</span>
+0015 <span class="comment">%     drawMesh(v, f);</span>
+0016 <span class="comment">%     drawBox3d(box3d);</span>
+0017 <span class="comment">%     set(gcf, 'renderer', 'opengl')</span>
+0018 <span class="comment">%     axis([-2 2 -2 2 -2 2]);</span>
+0019 <span class="comment">%     view(3)</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See also</span>
+0022 <span class="comment">%   boxes3d, drawBox3d</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">% ------</span>
+0025 <span class="comment">% Author: David Legland</span>
+0026 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0027 <span class="comment">% Created: 2011-04-01,    using Matlab 7.9.0.529 (R2009b)</span>
+0028 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0029 
+0030 <span class="comment">%   HISTORY</span>
+0031 <span class="comment">%   2011-04-08 add example</span>
+0032 <span class="comment">%   2011-12-09 rename to boundingBox3d</span>
+0033 
+0034 <span class="comment">% compute extreme x and y values</span>
+0035 xmin = min(points(:,1));
+0036 xmax = max(points(:,1));
+0037 ymin = min(points(:,2));
+0038 ymax = max(points(:,2));
+0039 box = [xmin xmax ymin ymax];
+0040 
+0041 <span class="comment">% process case of 3D points</span>
+0042 <span class="keyword">if</span> size(points, 2) &gt; 2
+0043     zmin = min(points(:,3));
+0044     zmax = max(points(:,3));
+0045     box = [xmin xmax ymin ymax zmin zmax];
+0046 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

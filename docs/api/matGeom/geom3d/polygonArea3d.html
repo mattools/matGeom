@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polygonArea3d</title>
+  <meta name="keywords" content="polygonArea3d">
+  <meta name="description" content="POLYGONAREA3D Area of a 3D polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; polygonArea3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polygonArea3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYGONAREA3D Area of a 3D polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function area = polygonArea3d(poly, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLYGONAREA3D Area of a 3D polygon.
+
+   AREA = polygonArea3d(POLY)
+   POLY is given as a N-by-3 array of vertex coordinates. The resulting
+   area is positive.
+   Works also for polygons given as a cell array of polygons.
+
+   Example
+     % area of a simple 3D square 
+     poly = [10 30 20;20 30 20;20 40 20;10 40 20];
+     polygonArea3d(poly)
+     ans =
+        100
+
+     % Area of a 3D mesh
+     [v f] = createCubeOctahedron;
+     polygons = meshFacePolygons(v, f);
+     areas = polygonArea3d(polygons);
+     sum(areas)
+     ans =
+         18.9282
+
+   See also
+     <a href="polygons3d.html" class="code" title="function polygons3d(varargin)">polygons3d</a>, <a href="triangleArea3d.html" class="code" title="function area = triangleArea3d(pt1, pt2, pt3)">triangleArea3d</a>, polygonArea, <a href="polygonCentroid3d.html" class="code" title="function centroid = polygonCentroid3d(varargin)">polygonCentroid3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polygonArea3d.html" class="code" title="function area = polygonArea3d(poly, varargin)">polygonArea3d</a>	POLYGONAREA3D Area of a 3D polygon.</li><li><a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>	VECTORNORM3D Norm of a 3D vector or of set of 3D vectors.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polygonArea3d.html" class="code" title="function area = polygonArea3d(poly, varargin)">polygonArea3d</a>	POLYGONAREA3D Area of a 3D polygon.</li><li><a href="../../matGeom/meshes3d/meshFaceAreas.html" class="code" title="function areas = meshFaceAreas(vertices, faces)">meshFaceAreas</a>	MESHFACEAREAS Surface area of each face of a mesh.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function area = polygonArea3d(poly, varargin)</a>
+0002 <span class="comment">%POLYGONAREA3D Area of a 3D polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   AREA = polygonArea3d(POLY)</span>
+0005 <span class="comment">%   POLY is given as a N-by-3 array of vertex coordinates. The resulting</span>
+0006 <span class="comment">%   area is positive.</span>
+0007 <span class="comment">%   Works also for polygons given as a cell array of polygons.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   Example</span>
+0010 <span class="comment">%     % area of a simple 3D square</span>
+0011 <span class="comment">%     poly = [10 30 20;20 30 20;20 40 20;10 40 20];</span>
+0012 <span class="comment">%     polygonArea3d(poly)</span>
+0013 <span class="comment">%     ans =</span>
+0014 <span class="comment">%        100</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%     % Area of a 3D mesh</span>
+0017 <span class="comment">%     [v f] = createCubeOctahedron;</span>
+0018 <span class="comment">%     polygons = meshFacePolygons(v, f);</span>
+0019 <span class="comment">%     areas = polygonArea3d(polygons);</span>
+0020 <span class="comment">%     sum(areas)</span>
+0021 <span class="comment">%     ans =</span>
+0022 <span class="comment">%         18.9282</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   See also</span>
+0025 <span class="comment">%     polygons3d, triangleArea3d, polygonArea, polygonCentroid3d</span>
+0026 
+0027 <span class="comment">% ------</span>
+0028 <span class="comment">% Author: David Legland</span>
+0029 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0030 <span class="comment">% Created: 2012-02-24,    using Matlab 7.9.0.529 (R2009b)</span>
+0031 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
+0032 
+0033 <span class="comment">%   HISTORY</span>
+0034 <span class="comment">%   2013-08-20 add support for multiple polygons</span>
+0035 
+0036 <span class="comment">% Check multiple polygons</span>
+0037 <span class="keyword">if</span> iscell(poly) || sum(sum(isnan(poly))) &gt; 0
+0038     <span class="comment">% split the polygons into a cell array</span>
+0039     polygons = splitPolygons3d(poly);
+0040     nPolys = length(polygons);
+0041     
+0042     <span class="comment">% compute area of each polygon</span>
+0043     area = zeros(nPolys, 1);
+0044     <span class="keyword">for</span>  i = 1:nPolys
+0045         area(i) = <a href="polygonArea3d.html" class="code" title="function area = polygonArea3d(poly, varargin)">polygonArea3d</a>(polygons{i});
+0046     <span class="keyword">end</span>
+0047     
+0048     <span class="keyword">return</span>;
+0049 <span class="keyword">end</span>
+0050 
+0051 <span class="comment">% put the first vertex at origin (reducing computation errors for polygons</span>
+0052 <span class="comment">% far from origin)</span>
+0053 v0 = poly(1, :);
+0054 poly = bsxfun(@minus, poly, v0);
+0055 
+0056 <span class="comment">% indices of next vertices</span>
+0057 N = size(poly, 1);
+0058 iNext = [2:N 1];
+0059 
+0060 <span class="comment">% compute cross-product of each elementary triangle formed by origin and</span>
+0061 <span class="comment">% two consecutive vertices</span>
+0062 cp = cross(poly, poly(iNext,:), 2);
+0063 
+0064 <span class="comment">% choose one of the triangles as reference for the normal direction</span>
+0065 vn = <a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(cp);
+0066 [tmp, ind] = max(vn); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0067 cpRef = cp(ind,:);
+0068 
+0069 <span class="comment">% compute the sign of the area of each triangle</span>
+0070 <span class="comment">% (need to compute the sign explicitely, as the norm of the cross product</span>
+0071 <span class="comment">% does not keep orientation within supporting plane)</span>
+0072 sign_i = sign(dot(cp, repmat(cpRef, N, 1), 2));
+0073 
+0074 <span class="comment">% compute area of each triangle, using sign correction</span>
+0075 area_i = <a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(cp) .* sign_i;
+0076 
+0077 <span class="comment">% sum up individual triangles area</span>
+0078 area = sum(area_i) / 2;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

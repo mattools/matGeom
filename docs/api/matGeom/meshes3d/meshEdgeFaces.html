@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of meshEdgeFaces</title>
+  <meta name="keywords" content="meshEdgeFaces">
+  <meta name="description" content="MESHEDGEFACES Compute index of faces adjacent to each edge of a mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; meshEdgeFaces.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>meshEdgeFaces
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MESHEDGEFACES Compute index of faces adjacent to each edge of a mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function edgeFaces = meshEdgeFaces(vertices, edges, faces) %#ok<INUSL> </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MESHEDGEFACES Compute index of faces adjacent to each edge of a mesh.
+
+   EF = meshEdgeFaces(V, E, F)
+   Compute index array of faces adjacent to each edge of a mesh.
+   V, E and F define the mesh: V is vertex array, E contains vertex
+   indices of edge extremities, and F contains vertex indices of each
+   face, either as a numerical array or as a cell array.
+   The result EF has as many rows as the number of edges, and two column.
+   The first column contains index of faces located on the left of the
+   corresponding edge, whereas the second column contains index of the
+   face located on the right. Some indices may be 0 if the mesh is not
+   'closed'.
+   
+   Note: a faster version is available for triangular meshes.
+
+   Example
+   meshEdgeFaces
+
+   See also
+   meshes3d, <a href="trimeshEdgeFaces.html" class="code" title="function edgeFaces = trimeshEdgeFaces(faces, varargin)">trimeshEdgeFaces</a>, <a href="meshDihedralAngles.html" class="code" title="function alpha = meshDihedralAngles(vertices, edges, faces)">meshDihedralAngles</a>, <a href="polyhedronMeanBreadth.html" class="code" title="function breadth = polyhedronMeanBreadth(vertices, edges, faces)">polyhedronMeanBreadth</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="checkMeshAdjacentFaces.html" class="code" title="function checkMeshAdjacentFaces(vertices, edges, faces)">checkMeshAdjacentFaces</a>	CHECKMESHADJACENTFACES Check if adjacent faces of a mesh have similar orientation.</li><li><a href="meshBoundaryEdgeIndices.html" class="code" title="function inds = meshBoundaryEdgeIndices(varargin)">meshBoundaryEdgeIndices</a>	MESHBOUNDARYEDGEINDICES Indices of boundary edges of a mesh.</li><li><a href="meshBoundaryVertexIndices.html" class="code" title="function inds = meshBoundaryVertexIndices(varargin)">meshBoundaryVertexIndices</a>	MESHBOUNDARYVERTEXINDICES Indices of boundary vertices of a mesh.</li><li><a href="meshDihedralAngles.html" class="code" title="function alpha = meshDihedralAngles(vertices, edges, faces)">meshDihedralAngles</a>	MESHDIHEDRALANGLES Dihedral at edges of a polyhedal mesh.</li><li><a href="meshFaceAdjacency.html" class="code" title="function adjList = meshFaceAdjacency(vertices, edges, faces)">meshFaceAdjacency</a>	MESHFACEADJACENCY Compute adjacency list of face around each face.</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function processFace(face, indFace)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function edgeFaces = meshEdgeFaces(vertices, edges, faces) </a><span class="comment">%#ok&lt;INUSL&gt;</span>
+0002 <span class="comment">%MESHEDGEFACES Compute index of faces adjacent to each edge of a mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   EF = meshEdgeFaces(V, E, F)</span>
+0005 <span class="comment">%   Compute index array of faces adjacent to each edge of a mesh.</span>
+0006 <span class="comment">%   V, E and F define the mesh: V is vertex array, E contains vertex</span>
+0007 <span class="comment">%   indices of edge extremities, and F contains vertex indices of each</span>
+0008 <span class="comment">%   face, either as a numerical array or as a cell array.</span>
+0009 <span class="comment">%   The result EF has as many rows as the number of edges, and two column.</span>
+0010 <span class="comment">%   The first column contains index of faces located on the left of the</span>
+0011 <span class="comment">%   corresponding edge, whereas the second column contains index of the</span>
+0012 <span class="comment">%   face located on the right. Some indices may be 0 if the mesh is not</span>
+0013 <span class="comment">%   'closed'.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   Note: a faster version is available for triangular meshes.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   Example</span>
+0018 <span class="comment">%   meshEdgeFaces</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   See also</span>
+0021 <span class="comment">%   meshes3d, trimeshEdgeFaces, meshDihedralAngles, polyhedronMeanBreadth</span>
+0022 
+0023 <span class="comment">% ------</span>
+0024 <span class="comment">% Author: David Legland</span>
+0025 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0026 <span class="comment">% Created: 2010-10-04,    using Matlab 7.9.0.529 (R2009b)</span>
+0027 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0028 
+0029 Ne = size(edges, 1);
+0030 
+0031 <span class="comment">% indices of faces adjacent to each edge</span>
+0032 edgeFaces = zeros(Ne, 2);
+0033 
+0034 <span class="comment">% different method for extracting current face depending if faces are</span>
+0035 <span class="comment">% stored as index 2D array or as cell array of 1D arrays.</span>
+0036 <span class="keyword">if</span> isnumeric(faces)
+0037     Nf = size(faces, 1);
+0038     <span class="keyword">for</span> i = 1:Nf
+0039         face = faces(i, :);
+0040         <a href="#_sub1" class="code" title="subfunction processFace(face, indFace)">processFace</a>(face, i)
+0041     <span class="keyword">end</span>
+0042 <span class="keyword">elseif</span> iscell(faces)
+0043     Nf = length(faces);
+0044     <span class="keyword">for</span> i = 1:Nf
+0045         face = faces{i};
+0046         <a href="#_sub1" class="code" title="subfunction processFace(face, indFace)">processFace</a>(face, i)
+0047     <span class="keyword">end</span>
+0048 <span class="keyword">end</span>
+0049 
+0050     <a name="_sub1" href="#_subfunctions" class="code">function processFace(face, indFace)</a>
+0051         <span class="comment">% iterate on face edges</span>
+0052         <span class="keyword">for</span> j = 1:length(face)
+0053             <span class="comment">% build edge: array of vertices</span>
+0054             j2 = mod(j, length(face)) + 1;
+0055             
+0056             <span class="comment">% do not process edges with same vertices</span>
+0057             <span class="keyword">if</span> face(j) == face(j2)
+0058                 <span class="keyword">continue</span>;
+0059             <span class="keyword">end</span>
+0060             
+0061             <span class="comment">% vertex indices of current edge</span>
+0062             currentEdge = [face(j) face(j2)];
+0063             
+0064             <span class="comment">% find index of current edge, assuming face is left-located</span>
+0065             b1 = ismember(edges, currentEdge, <span class="string">'rows'</span>);
+0066             indEdge = find(b1);
+0067             <span class="keyword">if</span> ~isempty(indEdge)
+0068                 <span class="keyword">if</span> edgeFaces(indEdge, 1) ~= 0
+0069                     error(<span class="string">'meshes3d:IllegalTopology'</span>, <span class="keyword">...</span>
+0070                         <span class="string">'Two faces were found on left side of edge %d '</span>, indEdge);
+0071                 <span class="keyword">end</span>
+0072                 
+0073                 edgeFaces(indEdge, 1) = indFace;
+0074                 <span class="keyword">continue</span>;
+0075             <span class="keyword">end</span>
+0076                 
+0077             <span class="comment">% otherwise, assume the face is right-located</span>
+0078             b2 = ismember(edges, currentEdge([2 1]), <span class="string">'rows'</span>);
+0079             indEdge = find(b2);
+0080             <span class="keyword">if</span> ~isempty(indEdge)
+0081                 <span class="keyword">if</span> edgeFaces(indEdge, 2) ~= 0
+0082                     error(<span class="string">'meshes3d:IllegalTopology'</span>, <span class="keyword">...</span>
+0083                         <span class="string">'Two faces were found on left side of edge %d '</span>, indEdge);
+0084                 <span class="keyword">end</span>
+0085                 
+0086                 edgeFaces(indEdge, 2) = indFace;
+0087                 <span class="keyword">continue</span>;
+0088             <span class="keyword">end</span>
+0089             
+0090             <span class="comment">% If face was neither left nor right, error</span>
+0091             warning(<span class="string">'meshes3d:IllegalTopology'</span>, <span class="keyword">...</span>
+0092                 <span class="string">'Edge %d of face %d was not found in edge array'</span>, <span class="keyword">...</span>
+0093                 j, indFace);
+0094             <span class="keyword">continue</span>;
+0095         <span class="keyword">end</span>
+0096     <span class="keyword">end</span>
+0097 
+0098 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

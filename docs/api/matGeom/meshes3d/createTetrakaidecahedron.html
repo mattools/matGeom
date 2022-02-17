@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createTetrakaidecahedron</title>
+  <meta name="keywords" content="createTetrakaidecahedron">
+  <meta name="description" content="CREATETETRAKAIDECAHEDRON Create a 3D mesh representing a tetrakaidecahedron.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; createTetrakaidecahedron.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createTetrakaidecahedron
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATETETRAKAIDECAHEDRON Create a 3D mesh representing a tetrakaidecahedron.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = createTetrakaidecahedron() </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATETETRAKAIDECAHEDRON Create a 3D mesh representing a tetrakaidecahedron.
+
+   [V, E, F] = createTetrakaidecahedron;
+   Create a mesh structure representing a tetrakaidecahedron, composed of
+   both square and hexagonal faces. Tetrakaidecahedron can be used to tile
+   the 3D Euclidean space.
+
+   V is a 24-by-3 array with vertex coordinates,
+   E is a 36-by-2 array containing indices of neighbour vertices,
+   F is a 14-by-1 cell array containing vertex indices array of each face.
+
+   [V, F] = createTetrakaidecahedron;
+   Returns only the vertices and the face vertex indices.
+
+   MESH = createTetrakaidecahedron;
+   Returns the data as a mesh structure, with fields 'vertices', 'edges'
+   and 'faces'.
+
+   Example
+   [n, e, f] = createTetrakaidecahedron;
+   drawMesh(n, f);
+   
+   See also
+   meshes3d, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = createTetrakaidecahedron()</a>
+0002 <span class="comment">%CREATETETRAKAIDECAHEDRON Create a 3D mesh representing a tetrakaidecahedron.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V, E, F] = createTetrakaidecahedron;</span>
+0005 <span class="comment">%   Create a mesh structure representing a tetrakaidecahedron, composed of</span>
+0006 <span class="comment">%   both square and hexagonal faces. Tetrakaidecahedron can be used to tile</span>
+0007 <span class="comment">%   the 3D Euclidean space.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   V is a 24-by-3 array with vertex coordinates,</span>
+0010 <span class="comment">%   E is a 36-by-2 array containing indices of neighbour vertices,</span>
+0011 <span class="comment">%   F is a 14-by-1 cell array containing vertex indices array of each face.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   [V, F] = createTetrakaidecahedron;</span>
+0014 <span class="comment">%   Returns only the vertices and the face vertex indices.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   MESH = createTetrakaidecahedron;</span>
+0017 <span class="comment">%   Returns the data as a mesh structure, with fields 'vertices', 'edges'</span>
+0018 <span class="comment">%   and 'faces'.</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   Example</span>
+0021 <span class="comment">%   [n, e, f] = createTetrakaidecahedron;</span>
+0022 <span class="comment">%   drawMesh(n, f);</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   See also</span>
+0025 <span class="comment">%   meshes3d, drawMesh</span>
+0026 
+0027 <span class="comment">%   ---------</span>
+0028 <span class="comment">%   author : David Legland</span>
+0029 <span class="comment">%   e-mail: david.legland@inra.fr</span>
+0030 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0031 <span class="comment">%   created the 10/02/2005.</span>
+0032 <span class="comment">%</span>
+0033 
+0034 <span class="comment">%   HISTORY</span>
+0035 <span class="comment">%   04/01/2007: remove unused variables</span>
+0036 
+0037 nodes = [<span class="keyword">...</span>
+0038     1 0 2;0 1 2;-1 0 2;0 -1 2;<span class="keyword">...</span>
+0039     2 0 1;0 2 1;-2 0 1;0 -2 1;<span class="keyword">...</span>
+0040     2 1 0;1 2 0;-1 2 0;-2 1 0;-2 -1 0;-1 -2 0;1 -2 0;2 -1 0;<span class="keyword">...</span>
+0041     2 0 -1;0 2 -1;-2 0 -1;0 -2 -1;<span class="keyword">...</span>
+0042     1 0 -2;0 1 -2;-1 0 -2;0 -1 -2];
+0043 
+0044 edges = [<span class="keyword">...</span>
+0045     1 2;1 4;1 5;2 3;2 6;3 4;3 7;4 8;<span class="keyword">...</span>
+0046     5 9;5 16;6 10;6 11;7 12;7 13;8 14;8 15;<span class="keyword">...</span>
+0047     9 10;9 17;10 18;11 12;11 18;12 19;13 14;13 19;14 20;15 16;15 20;16 17;<span class="keyword">...</span><span class="comment">.</span>
+0048     17 21;18 22;19 23;20 24;21 22;21 24;22 23;23 24];
+0049     
+0050     
+0051 faces = {<span class="keyword">...</span>
+0052     [1 2 3 4], <span class="keyword">...</span>
+0053     [1 4 8 15 16 5], [1 5 9 10 6 2], [2 6 11 12 7 3], [3 7 13 14 8 4],<span class="keyword">...</span>
+0054     [5 16 17 9], [6 10 18 11], [7 12 19 13], [8 14 20 15],<span class="keyword">...</span>
+0055     [9 17 21 22 18 10], [11 18 22 23 19 12], [13 19 23 24 20 14], [15 20 24 21 17 16], <span class="keyword">...</span>
+0056     [21 24 23 22]};
+0057 faces = faces';
+0058     
+0059 <span class="comment">% format output</span>
+0060 varargout = formatMeshOutput(nargout, nodes, edges, faces);
+0061</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

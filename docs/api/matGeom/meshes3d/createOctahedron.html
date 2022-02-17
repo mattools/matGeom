@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createOctahedron</title>
+  <meta name="keywords" content="createOctahedron">
+  <meta name="description" content="CREATEOCTAHEDRON Create a 3D mesh representing an octahedron.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; createOctahedron.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createOctahedron
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATEOCTAHEDRON Create a 3D mesh representing an octahedron.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = createOctahedron() </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATEOCTAHEDRON Create a 3D mesh representing an octahedron.
+
+   [V, E, F] = createOctahedron;
+   Create a 3D mesh representing an octahedron
+   V is a 6-by-3 array with vertices coordinate, E is a 12-by-2 array
+   containing indices of neighbour vertices, and F is a 8-by-3 array
+   containing array of vertex index for each face.
+
+   [V, F] = createOctahedron;
+   Returns only the vertices and the face vertex indices.
+
+   MESH = createOctahedron;
+   Returns the data as a mesh structure, with fields 'vertices', 'edges'
+   and 'faces'.
+
+   Vertices are located on grid vertices:
+    ( ±1,  0,  0 )
+    (  0, ±1,  0 )
+    (  0,  0, ±1 )
+
+   Edge length of returned octahedron is sqrt(2).
+   Surface area of octahedron is 2*sqrt(3)*a^2, approximately 6.9282 in
+   this case.
+   Volume of octahedron is sqrt(2)/3*a^3, approximately 1.3333 in this
+   case.
+
+   Example
+     [v, e, f] = createOctahedron;
+     drawMesh(v, f);
+
+   See also
+   meshes3d, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a>
+   <a href="createCube.html" class="code" title="function varargout = createCube()">createCube</a>, <a href="createIcosahedron.html" class="code" title="function varargout = createIcosahedron()">createIcosahedron</a>, <a href="createDodecahedron.html" class="code" title="function varargout = createDodecahedron()">createDodecahedron</a>, <a href="createTetrahedron.html" class="code" title="function varargout = createTetrahedron()">createTetrahedron</a>
+   <a href="createCubeOctahedron.html" class="code" title="function varargout = createCubeOctahedron()">createCubeOctahedron</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = createOctahedron()</a>
+0002 <span class="comment">%CREATEOCTAHEDRON Create a 3D mesh representing an octahedron.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V, E, F] = createOctahedron;</span>
+0005 <span class="comment">%   Create a 3D mesh representing an octahedron</span>
+0006 <span class="comment">%   V is a 6-by-3 array with vertices coordinate, E is a 12-by-2 array</span>
+0007 <span class="comment">%   containing indices of neighbour vertices, and F is a 8-by-3 array</span>
+0008 <span class="comment">%   containing array of vertex index for each face.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   [V, F] = createOctahedron;</span>
+0011 <span class="comment">%   Returns only the vertices and the face vertex indices.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   MESH = createOctahedron;</span>
+0014 <span class="comment">%   Returns the data as a mesh structure, with fields 'vertices', 'edges'</span>
+0015 <span class="comment">%   and 'faces'.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   Vertices are located on grid vertices:</span>
+0018 <span class="comment">%    ( ±1,  0,  0 )</span>
+0019 <span class="comment">%    (  0, ±1,  0 )</span>
+0020 <span class="comment">%    (  0,  0, ±1 )</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   Edge length of returned octahedron is sqrt(2).</span>
+0023 <span class="comment">%   Surface area of octahedron is 2*sqrt(3)*a^2, approximately 6.9282 in</span>
+0024 <span class="comment">%   this case.</span>
+0025 <span class="comment">%   Volume of octahedron is sqrt(2)/3*a^3, approximately 1.3333 in this</span>
+0026 <span class="comment">%   case.</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%   Example</span>
+0029 <span class="comment">%     [v, e, f] = createOctahedron;</span>
+0030 <span class="comment">%     drawMesh(v, f);</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">%   See also</span>
+0033 <span class="comment">%   meshes3d, drawMesh</span>
+0034 <span class="comment">%   createCube, createIcosahedron, createDodecahedron, createTetrahedron</span>
+0035 <span class="comment">%   createCubeOctahedron</span>
+0036 <span class="comment">%</span>
+0037 
+0038 <span class="comment">%   ---------</span>
+0039 <span class="comment">%   author : David Legland</span>
+0040 <span class="comment">%   e-mail: david.legland@inra.fr</span>
+0041 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0042 <span class="comment">%   created the 10/02/2005.</span>
+0043 <span class="comment">%</span>
+0044 
+0045 <span class="comment">%   HISTORY</span>
+0046 <span class="comment">%   04/01/2007: remove unused variables</span>
+0047 
+0048 nodes = [1 0 0;0 1 0;-1 0 0;0 -1 0;0 0 1;0 0 -1];
+0049 
+0050 edges = [1 2;1 4;1 5; 1 6;2 3;2 5;2 6;3 4;3 5;3 6;4 5;4 6];
+0051 
+0052 faces = [1 2 5;2 3 5;3 4 5;4 1 5;1 6 2;2 6 3;3 6 4;1 4 6];
+0053 
+0054 <span class="comment">% format output</span>
+0055 varargout = formatMeshOutput(nargout, nodes, edges, faces);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

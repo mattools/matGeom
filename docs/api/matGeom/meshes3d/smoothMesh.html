@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of smoothMesh</title>
+  <meta name="keywords" content="smoothMesh">
+  <meta name="description" content="SMOOTHMESH Smooth mesh by replacing each vertex by the average of its neighbors.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; smoothMesh.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>smoothMesh
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>SMOOTHMESH Smooth mesh by replacing each vertex by the average of its neighbors.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = smoothMesh(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">SMOOTHMESH Smooth mesh by replacing each vertex by the average of its neighbors.
+
+   V2 = smoothMesh(V, F)
+   [V2, F2] = smoothMesh(V, F)
+   Performs smoothing of the values given in V, by using adjacency
+   information given in F. 
+   V is a numeric array representing either vertex coordinate, or value
+   field associated to each vertex. F is an array of faces, given either
+   as a NF-by-3 or NF-by-4 numeric array, or as a cell array. 
+   Artifact adjacencies are added if faces have more than 4 vertices.
+
+   ... = smoothMesh(V, F, NITER)
+   Repeat the smoothing procedure NITER times. This is equivalent to
+   calling the smoothMesh function NITER times.
+
+
+   Example
+     [v f] = torusMesh([50 50 50 30 10 30 45]);
+     v = v + randn(size(v));
+     [v2 f] = smoothMesh(v, f, 3);
+     figure; drawMesh(v2, f);
+     l = light; lighting gouraud
+
+   See also
+     meshes3d, <a href="meshAdjacencyMatrix.html" class="code" title="function adj = meshAdjacencyMatrix(faces, varargin)">meshAdjacencyMatrix</a>, <a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="meshAdjacencyMatrix.html" class="code" title="function adj = meshAdjacencyMatrix(faces, varargin)">meshAdjacencyMatrix</a>	MESHADJACENCYMATRIX Compute adjacency matrix of a mesh from set of faces.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="averageMesh.html" class="code" title="function [refMesh, distListIters, refVerticesIters] = averageMesh(meshList, varargin)">averageMesh</a>	Compute average mesh from a list of meshes.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = smoothMesh(varargin)</a>
+0002 <span class="comment">%SMOOTHMESH Smooth mesh by replacing each vertex by the average of its neighbors.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   V2 = smoothMesh(V, F)</span>
+0005 <span class="comment">%   [V2, F2] = smoothMesh(V, F)</span>
+0006 <span class="comment">%   Performs smoothing of the values given in V, by using adjacency</span>
+0007 <span class="comment">%   information given in F.</span>
+0008 <span class="comment">%   V is a numeric array representing either vertex coordinate, or value</span>
+0009 <span class="comment">%   field associated to each vertex. F is an array of faces, given either</span>
+0010 <span class="comment">%   as a NF-by-3 or NF-by-4 numeric array, or as a cell array.</span>
+0011 <span class="comment">%   Artifact adjacencies are added if faces have more than 4 vertices.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   ... = smoothMesh(V, F, NITER)</span>
+0014 <span class="comment">%   Repeat the smoothing procedure NITER times. This is equivalent to</span>
+0015 <span class="comment">%   calling the smoothMesh function NITER times.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   Example</span>
+0019 <span class="comment">%     [v f] = torusMesh([50 50 50 30 10 30 45]);</span>
+0020 <span class="comment">%     v = v + randn(size(v));</span>
+0021 <span class="comment">%     [v2 f] = smoothMesh(v, f, 3);</span>
+0022 <span class="comment">%     figure; drawMesh(v2, f);</span>
+0023 <span class="comment">%     l = light; lighting gouraud</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   See also</span>
+0026 <span class="comment">%     meshes3d, meshAdjacencyMatrix, triangulateFaces, drawMesh</span>
+0027 <span class="comment">%</span>
+0028 
+0029 <span class="comment">% ------</span>
+0030 <span class="comment">% Author: David Legland</span>
+0031 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0032 <span class="comment">% Created: 2013-04-29,    using Matlab 7.9.0.529 (R2009b)</span>
+0033 <span class="comment">% Copyright 2013 INRA - Cepia Software Platform.</span>
+0034 
+0035 var1 = varargin{1};
+0036 <span class="keyword">if</span> isstruct(var1)
+0037     vertices = var1.vertices;
+0038     faces = var1.faces;
+0039     varargin(1) = [];
+0040 <span class="keyword">else</span>
+0041     vertices = varargin{1};
+0042     faces = varargin{2};
+0043     varargin(1:2) = [];
+0044 <span class="keyword">end</span>
+0045 
+0046 <span class="comment">% determine number of iterations</span>
+0047 nIter = 1;
+0048 <span class="keyword">if</span> ~isempty(varargin)
+0049     nIter = varargin{1};
+0050 <span class="keyword">end</span>
+0051 
+0052 <span class="comment">% compute adjacency matrix,</span>
+0053 <span class="comment">% result is a Nv-by-Nv matrix with zeros on the diagonal</span>
+0054 adj = <a href="meshAdjacencyMatrix.html" class="code" title="function adj = meshAdjacencyMatrix(faces, varargin)">meshAdjacencyMatrix</a>(faces);
+0055 
+0056 <span class="comment">% ensure the size of the matrix is Nv-by-Nv</span>
+0057 <span class="comment">% (this can not be the case if some vertices are not referenced)</span>
+0058 nv = size(vertices, 1);
+0059 <span class="keyword">if</span> size(adj, 1) &lt; nv
+0060     adj(nv, nv) = 0;
+0061 <span class="keyword">end</span>
+0062 
+0063 <span class="comment">% Add &quot;self adjacencies&quot;</span>
+0064 adj = adj + speye(nv);
+0065 
+0066 <span class="comment">% weight each vertex by the number of its neighbors</span>
+0067 w = spdiags(full(sum(adj, 2).^(-1)), 0, nv, nv);
+0068 adj = w * adj;
+0069 
+0070 <span class="comment">% do averaging to smooth the field</span>
+0071 v2 = vertices;
+0072 <span class="keyword">for</span> k = 1:nIter
+0073     v2 = adj * v2;
+0074 <span class="keyword">end</span>
+0075 
+0076 varargout = formatMeshOutput(nargout, v2, faces);
+0077 
+0078 <span class="comment">%% Old version</span>
+0079 <span class="comment">% % Compute vertex adjacencies</span>
+0080 <span class="comment">% edges = computeMeshEdges(faces);</span>
+0081 <span class="comment">% v2 = zeros(size(vertices));</span>
+0082 <span class="comment">%</span>
+0083 <span class="comment">% % apply several smoothing</span>
+0084 <span class="comment">% for iter = 1:nIter</span>
+0085 <span class="comment">%</span>
+0086 <span class="comment">%     % replace the coords of each vertex by the average coordinate in the</span>
+0087 <span class="comment">%     % neighborhood</span>
+0088 <span class="comment">%     for i = 1:size(vertices, 1)</span>
+0089 <span class="comment">%         edgeInds = sum(edges == i, 2) &gt; 0;</span>
+0090 <span class="comment">%         neighInds = unique(edges(edgeInds, :));</span>
+0091 <span class="comment">%         v2(i, :) = mean(vertices(neighInds, :));</span>
+0092 <span class="comment">%     end</span>
+0093 <span class="comment">%</span>
+0094 <span class="comment">%     % update for next iteration</span>
+0095 <span class="comment">%     vertices = v2;</span>
+0096 <span class="comment">% end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

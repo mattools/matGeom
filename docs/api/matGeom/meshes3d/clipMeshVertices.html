@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of clipMeshVertices</title>
+  <meta name="keywords" content="clipMeshVertices">
+  <meta name="description" content="CLIPMESHVERTICES Clip vertices of a surfacic mesh and remove outer faces.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; clipMeshVertices.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>clipMeshVertices
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CLIPMESHVERTICES Clip vertices of a surfacic mesh and remove outer faces.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = clipMeshVertices(v, f, b, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CLIPMESHVERTICES Clip vertices of a surfacic mesh and remove outer faces.
+
+   [V2, F2] = clipMeshVertices(V, F, B)
+   Clip a mesh represented by vertex array V and face array F, with the
+   box represented by B. The result is the set of vertices contained in
+   the box, and a new set of faces corresponding to original faces with
+   all vertices within the box.
+   
+   [V2, F2] = clipMeshVertices(..., 'shape', 'sphere') Specify the shape.
+   Default is 'box'. But it is also possible to use 'sphere' or 'plane'.
+   
+   [V2, F2] = clipMeshVertices(..., 'inside', false) removes the inner 
+   faces instead of the outer faces.
+
+   [V2, F2] = clipMeshVertices(..., 'trimMesh', TF)
+   Also specifies if the isolated vertices need to be removed (TF=true) ot
+   not (TF=false). Default is false.
+
+
+   Example
+     [v, f] = createSoccerBall;
+     f = triangulateFaces(f);
+     box = [0 2 -1 2 -.5 2];
+     [v2, f2] = clipMeshVertices(v, f, box, 'inside', false);
+     figure('color','w'); view(3); axis equal
+     drawMesh(v, f, 'faceColor', 'none', 'faceAlpha', .2);
+     drawBox3d(box)
+     drawMesh(v2, f2, 'faceAlpha', .7);
+
+   See also
+   meshes3d, clipPoints3d</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/clipPoints3d.html" class="code" title="function varargout = clipPoints3d(points, shape, varargin)">clipPoints3d</a>	CLIPPOINTS3D Clip a set of points by a box or other 3d shapes.</li><li><a href="trimMesh.html" class="code" title="function varargout = trimMesh(varargin)">trimMesh</a>	TRIMMESH Reduce memory footprint of a polygonal mesh.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = clipMeshVertices(v, f, b, varargin)</a>
+0002 <span class="comment">%CLIPMESHVERTICES Clip vertices of a surfacic mesh and remove outer faces.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V2, F2] = clipMeshVertices(V, F, B)</span>
+0005 <span class="comment">%   Clip a mesh represented by vertex array V and face array F, with the</span>
+0006 <span class="comment">%   box represented by B. The result is the set of vertices contained in</span>
+0007 <span class="comment">%   the box, and a new set of faces corresponding to original faces with</span>
+0008 <span class="comment">%   all vertices within the box.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   [V2, F2] = clipMeshVertices(..., 'shape', 'sphere') Specify the shape.</span>
+0011 <span class="comment">%   Default is 'box'. But it is also possible to use 'sphere' or 'plane'.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   [V2, F2] = clipMeshVertices(..., 'inside', false) removes the inner</span>
+0014 <span class="comment">%   faces instead of the outer faces.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   [V2, F2] = clipMeshVertices(..., 'trimMesh', TF)</span>
+0017 <span class="comment">%   Also specifies if the isolated vertices need to be removed (TF=true) ot</span>
+0018 <span class="comment">%   not (TF=false). Default is false.</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   Example</span>
+0022 <span class="comment">%     [v, f] = createSoccerBall;</span>
+0023 <span class="comment">%     f = triangulateFaces(f);</span>
+0024 <span class="comment">%     box = [0 2 -1 2 -.5 2];</span>
+0025 <span class="comment">%     [v2, f2] = clipMeshVertices(v, f, box, 'inside', false);</span>
+0026 <span class="comment">%     figure('color','w'); view(3); axis equal</span>
+0027 <span class="comment">%     drawMesh(v, f, 'faceColor', 'none', 'faceAlpha', .2);</span>
+0028 <span class="comment">%     drawBox3d(box)</span>
+0029 <span class="comment">%     drawMesh(v2, f2, 'faceAlpha', .7);</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%   See also</span>
+0032 <span class="comment">%   meshes3d, clipPoints3d</span>
+0033 <span class="comment">%</span>
+0034 
+0035 <span class="comment">% ------</span>
+0036 <span class="comment">% Author: David Legland, oqilipo</span>
+0037 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0038 <span class="comment">% Created: 2011-04-07,    using Matlab 7.9.0.529 (R2009b)</span>
+0039 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0040 
+0041 <span class="comment">% if input is given as a structure, parse fields</span>
+0042 <span class="keyword">if</span> isstruct(v)
+0043     <span class="keyword">if</span> nargin &gt; 2
+0044         varargin = [b, varargin]; 
+0045     <span class="keyword">end</span>
+0046     b = f;
+0047     f = v.faces;
+0048     v = v.vertices;
+0049 <span class="keyword">end</span>
+0050 
+0051 parser = inputParser;
+0052 validStrings = {<span class="string">'box'</span>, <span class="string">'sphere'</span>, <span class="string">'plane'</span>};
+0053 addParameter(parser, <span class="string">'shape'</span>, <span class="string">'box'</span>, @(x) any(validatestring(x, validStrings)));
+0054 addParameter(parser, <span class="string">'inside'</span>, true, @islogical);
+0055 addParameter(parser, <span class="string">'trimMesh'</span>, false, @islogical);
+0056 parse(parser, varargin{:});
+0057 
+0058 <span class="comment">% clip the vertices</span>
+0059 [v2, indVertices] = <a href="../../matGeom/geom3d/clipPoints3d.html" class="code" title="function varargout = clipPoints3d(points, shape, varargin)">clipPoints3d</a>(v, b,<span class="keyword">...</span>
+0060     <span class="string">'shape'</span>, parser.Results.shape, <span class="string">'inside'</span>, parser.Results.inside);
+0061 
+0062 <span class="comment">% create index array for face indices relabeling</span>
+0063 refInds = zeros(size(indVertices));
+0064 <span class="keyword">for</span> i = 1:length(indVertices)
+0065     refInds(indVertices(i)) = i;
+0066 <span class="keyword">end</span>
+0067 
+0068 <span class="comment">% select the faces with all vertices within the box</span>
+0069 <span class="keyword">if</span> isnumeric(f)
+0070     <span class="comment">% Faces given as numeric array</span>
+0071     indFaces = sum(~ismember(f, indVertices), 2) == 0;
+0072     f2 = refInds(f(indFaces, :));
+0073     
+0074 <span class="keyword">elseif</span> iscell(f)
+0075     <span class="comment">% Faces given as cell array</span>
+0076     nFaces = length(f);
+0077     indFaces = false(nFaces, 1);
+0078     <span class="keyword">for</span> i = 1:nFaces
+0079         indFaces(i) = sum(~ismember(f{i}, indVertices), 2) == 0;
+0080     <span class="keyword">end</span>
+0081     f2 = f(indFaces, :);
+0082     
+0083     <span class="comment">% re-label indices of face vertices (keeping horizontal index array)</span>
+0084     <span class="keyword">for</span> i = 1:length(f2)
+0085         f2{i} = refInds(f2{i})';
+0086     <span class="keyword">end</span>
+0087 <span class="keyword">end</span>
+0088 
+0089 <span class="keyword">if</span> parser.Results.trimMesh
+0090     [v2, f2] = <a href="trimMesh.html" class="code" title="function varargout = trimMesh(varargin)">trimMesh</a>(v2, f2);
+0091 <span class="keyword">end</span>
+0092 
+0093 varargout = formatMeshOutput(nargout, v2, f2);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

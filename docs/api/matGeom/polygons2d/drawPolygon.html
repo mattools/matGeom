@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawPolygon</title>
+  <meta name="keywords" content="drawPolygon">
+  <meta name="description" content="DRAWPOLYGON Draw a polygon specified by a list of points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; drawPolygon.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawPolygon
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWPOLYGON Draw a polygon specified by a list of points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawPolygon (px, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWPOLYGON Draw a polygon specified by a list of points.
+
+   drawPolygon(POLY);
+   Packs coordinates in a single N-by-2 array, with N the vertex number.
+
+   drawPolygon(PX, PY);
+   Specifies coordinates in separate arrays. Both array must be N-by-1,
+   with N the number of vertices.
+
+   drawPolygon(POLYS)
+   Packs coordinate of several polygons in a cell array. Each element of
+   the array is a Ni-by-2 double array.
+
+   drawPolygon(..., NAME, VALUE);
+   Specifies drawing options by using one or several parameter name-value
+   pairs, see the doc of plot function for details.
+
+   drawPolygon(AX, ...)
+   Specifies the axis to draw the polygon on.
+
+   H = drawPolygon(...);
+   Also return a handle to the list of line objects.
+
+   Example
+     % draw a red rectangle
+     poly = [10 10;40 10;40 30;10 30];
+     figure; drawPolygon(poly, 'r');
+     axis equal; axis([0 50 0 50]); 
+
+     % Draw two squares
+     px = [10 20 20 10 NaN 30 40 40 30]';
+     py = [10 10 20 20 NaN 10 10 20 20]';
+     figure; 
+     drawPolygon([px py], 'lineWidth', 2);
+     axis equal; axis([0 50 0 50]); 
+ 
+   See also:
+   polygons2d, <a href="drawPolyline.html" class="code" title="function varargout = drawPolyline(varargin)">drawPolyline</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a>	DRAWPOLYGON Draw a polygon specified by a list of points.</li><li><a href="splitPolygons.html" class="code" title="function polygons = splitPolygons(polygon)">splitPolygons</a>	SPLITPOLYGONS Convert a NaN separated polygon list to a cell array of polygons.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/drawRect.html" class="code" title="function varargout = drawRect(rect, varargin)">drawRect</a>	DRAWRECT Draw rectangle on the current axis.</li><li><a href="../../matGeom/geom2d/drawShape.html" class="code" title="function varargout = drawShape(type, param, varargin)">drawShape</a>	DRAWSHAPE Draw various types of shapes (circles, polygons...).</li><li><a href="drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a>	DRAWPOLYGON Draw a polygon specified by a list of points.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawPolygon (px, varargin)</a>
+0002 <span class="comment">%DRAWPOLYGON Draw a polygon specified by a list of points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawPolygon(POLY);</span>
+0005 <span class="comment">%   Packs coordinates in a single N-by-2 array, with N the vertex number.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   drawPolygon(PX, PY);</span>
+0008 <span class="comment">%   Specifies coordinates in separate arrays. Both array must be N-by-1,</span>
+0009 <span class="comment">%   with N the number of vertices.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   drawPolygon(POLYS)</span>
+0012 <span class="comment">%   Packs coordinate of several polygons in a cell array. Each element of</span>
+0013 <span class="comment">%   the array is a Ni-by-2 double array.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   drawPolygon(..., NAME, VALUE);</span>
+0016 <span class="comment">%   Specifies drawing options by using one or several parameter name-value</span>
+0017 <span class="comment">%   pairs, see the doc of plot function for details.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   drawPolygon(AX, ...)</span>
+0020 <span class="comment">%   Specifies the axis to draw the polygon on.</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   H = drawPolygon(...);</span>
+0023 <span class="comment">%   Also return a handle to the list of line objects.</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   Example</span>
+0026 <span class="comment">%     % draw a red rectangle</span>
+0027 <span class="comment">%     poly = [10 10;40 10;40 30;10 30];</span>
+0028 <span class="comment">%     figure; drawPolygon(poly, 'r');</span>
+0029 <span class="comment">%     axis equal; axis([0 50 0 50]);</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%     % Draw two squares</span>
+0032 <span class="comment">%     px = [10 20 20 10 NaN 30 40 40 30]';</span>
+0033 <span class="comment">%     py = [10 10 20 20 NaN 10 10 20 20]';</span>
+0034 <span class="comment">%     figure;</span>
+0035 <span class="comment">%     drawPolygon([px py], 'lineWidth', 2);</span>
+0036 <span class="comment">%     axis equal; axis([0 50 0 50]);</span>
+0037 <span class="comment">%</span>
+0038 <span class="comment">%   See also:</span>
+0039 <span class="comment">%   polygons2d, drawPolyline</span>
+0040 
+0041 <span class="comment">%   ---------</span>
+0042 <span class="comment">%   author : David Legland</span>
+0043 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0044 <span class="comment">%   created the 05/05/2004.</span>
+0045 <span class="comment">%</span>
+0046 
+0047 <span class="comment">%   HISTORY</span>
+0048 <span class="comment">%   2008/10/15 manage polygons with holes</span>
+0049 <span class="comment">%   2011-10-11 add management of axes handle</span>
+0050 <span class="comment">%   2016-05-26 Juanpi Carbajal reorganized the function for readability and</span>
+0051 <span class="comment">%              removed unnecessary variable arguemnts</span>
+0052 
+0053 <span class="comment">% Store hold state</span>
+0054 state = ishold(gca);
+0055 hold on;
+0056 
+0057 
+0058 <span class="comment">%% Check input</span>
+0059 <span class="keyword">if</span> nargin &lt; 1
+0060     error (<span class="string">'should specify at least one argument'</span>);
+0061 <span class="keyword">end</span>
+0062 
+0063 <span class="comment">% check for empty polygons</span>
+0064 <span class="keyword">if</span> isempty (px)
+0065     <span class="keyword">return</span>
+0066 <span class="keyword">end</span>
+0067 
+0068 <span class="comment">% extract handle of axis to draw on</span>
+0069 ax = gca;
+0070 <span class="keyword">if</span> isAxisHandle(px)
+0071     ax          = px;
+0072     px          = varargin{1};
+0073     varargin(1) = [];
+0074 <span class="keyword">end</span>
+0075 
+0076 
+0077 <span class="comment">%% Manage cell arrays of polygons</span>
+0078 
+0079 <span class="comment">% case of a set of polygons stored in a cell array</span>
+0080 <span class="keyword">if</span> iscell(px)
+0081     h   = cellfun(@(x) <a href="drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a>(ax, x, varargin{:}), px, <span class="string">'UniformOutput'</span>, 0);
+0082     h   = horzcat(h{:});
+0083     
+0084 <span class="keyword">else</span>
+0085     <span class="comment">% Check size vs number of arguments</span>
+0086     <span class="keyword">if</span> size(px, 2) == 2
+0087         <span class="comment">% Case of polygon specified as a N-by-2 array (most standard case)</span>
+0088         py = px(:, 2);
+0089         px = px(:, 1);
+0090         
+0091     <span class="keyword">elseif</span> size(px, 2) == 1
+0092         <span class="comment">% Case of polygon specified as two N-by-1 arrays with same length</span>
+0093         <span class="keyword">if</span> nargin &lt; 2 || nargin == 2 &amp;&amp; ~isnumeric(varargin{1})
+0094             error(<span class="string">'Matgeom:invalid_input_arg'</span>, <span class="keyword">...</span>
+0095                 <span class="string">'Should specify either a N-by-2 array, or 2 N-by-1 vectors'</span>);
+0096         <span class="keyword">end</span>
+0097         
+0098         <span class="comment">% Extract coordinates of polygon vertices</span>
+0099         py          = varargin{1};
+0100         varargin(1) = [];
+0101         
+0102         <span class="keyword">if</span> length(py) ~= length(px)
+0103             error(<span class="string">'Matgeom:invalid_input_arg'</span>, <span class="keyword">...</span>
+0104                 <span class="string">'X and Y coordinate arrays should have same lengths (%d,%d)'</span>, <span class="keyword">...</span>
+0105                 length(px), length(py)) 
+0106         <span class="keyword">end</span>
+0107         
+0108     <span class="keyword">else</span>
+0109         error(<span class="string">'Matgeom:invalid_input_arg'</span>, <span class="string">'Should specify a N-by-2 array'</span>);
+0110     <span class="keyword">end</span>
+0111     
+0112     <span class="comment">% set default line format</span>
+0113     <span class="keyword">if</span> isempty (varargin)
+0114         varargin = {<span class="string">'b-'</span>};
+0115     <span class="keyword">end</span>
+0116    
+0117     <span class="comment">% Check case of polygons with holes</span>
+0118     <span class="keyword">if</span> any (isnan (px(:)) )
+0119         polygons = <a href="splitPolygons.html" class="code" title="function polygons = splitPolygons(polygon)">splitPolygons</a> ([px py]);
+0120         h        = <a href="drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a> (ax, polygons, varargin{:});
+0121         
+0122     <span class="keyword">else</span>
+0123         <span class="comment">% ensure last point is the same as the first one</span>
+0124         px(end+1, :) = px(1,:);
+0125         py(end+1, :) = py(1,:);
+0126 
+0127         <span class="comment">% draw the polygon outline</span>
+0128         h = plot(ax, px, py, varargin{:});
+0129         
+0130     <span class="keyword">end</span> <span class="comment">% whether there where holes</span>
+0131     
+0132 <span class="keyword">end</span> <span class="comment">% whether input arg was a cell</span>
+0133 
+0134 <span class="keyword">if</span> ~state
+0135     hold off
+0136 <span class="keyword">end</span>
+0137 
+0138 <span class="comment">% avoid returning argument if not required</span>
+0139 <span class="keyword">if</span> nargout &gt; 0
+0140     varargout = {h};
+0141 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of circleArcToPolyline</title>
+  <meta name="keywords" content="circleArcToPolyline">
+  <meta name="description" content="CIRCLEARCTOPOLYLINE Convert a circle arc into a series of points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; circleArcToPolyline.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>circleArcToPolyline
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CIRCLEARCTOPOLYLINE Convert a circle arc into a series of points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = circleArcToPolyline(arc, N) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CIRCLEARCTOPOLYLINE Convert a circle arc into a series of points.
+
+   P = circleArcToPolyline(ARC, N);
+   convert the circle ARC into a series of N points. 
+   ARC is given in the format: [XC YC R THETA1 DTHETA]
+   where XC and YC define the center of the circle, R its radius, THETA1
+   is the start of the arc and DTHETA is the angle extent of the arc. Both
+   angles are given in degrees. 
+   N is the number of vertices of the resulting polyline, default is 65.
+
+   The result is a N-by-2 array containing coordinates of the N points. 
+
+   [X Y] = circleArcToPolyline(ARC, N);
+   Return the result in two separate arrays with N lines and 1 column.
+
+
+   See also:
+   <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="circleToPolygon.html" class="code" title="function varargout = circleToPolygon(circle, varargin)">circleToPolygon</a>, <a href="drawCircle.html" class="code" title="function varargout = drawCircle(varargin)">drawCircle</a>, drawPolygon
+
+
+ ---------
+ author : David Legland
+ created the 22/05/2006.
+ Copyright 2010 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = circleArcToPolyline(arc, N)</a>
+0002 <span class="comment">%CIRCLEARCTOPOLYLINE Convert a circle arc into a series of points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   P = circleArcToPolyline(ARC, N);</span>
+0005 <span class="comment">%   convert the circle ARC into a series of N points.</span>
+0006 <span class="comment">%   ARC is given in the format: [XC YC R THETA1 DTHETA]</span>
+0007 <span class="comment">%   where XC and YC define the center of the circle, R its radius, THETA1</span>
+0008 <span class="comment">%   is the start of the arc and DTHETA is the angle extent of the arc. Both</span>
+0009 <span class="comment">%   angles are given in degrees.</span>
+0010 <span class="comment">%   N is the number of vertices of the resulting polyline, default is 65.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   The result is a N-by-2 array containing coordinates of the N points.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   [X Y] = circleArcToPolyline(ARC, N);</span>
+0015 <span class="comment">%   Return the result in two separate arrays with N lines and 1 column.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   See also:</span>
+0019 <span class="comment">%   circles2d, circleToPolygon, drawCircle, drawPolygon</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">% ---------</span>
+0023 <span class="comment">% author : David Legland</span>
+0024 <span class="comment">% created the 22/05/2006.</span>
+0025 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0026 <span class="comment">%</span>
+0027 
+0028 <span class="comment">% HISTORY</span>
+0029 <span class="comment">% 2011-03-30 use angles in degrees, add default value for N</span>
+0030 <span class="comment">% 2011-12-09 rename to circleArcToPolyline</span>
+0031 
+0032 
+0033 <span class="comment">% default value for N</span>
+0034 <span class="keyword">if</span> nargin &lt; 2
+0035     N = 65;
+0036 <span class="keyword">end</span>
+0037 
+0038 <span class="comment">% vector of positions</span>
+0039 t0 = deg2rad(arc(4));
+0040 t1 = t0 + deg2rad(arc(5));
+0041 t = linspace(t0, t1, N)';
+0042 
+0043 <span class="comment">% compute coordinates of vertices</span>
+0044 x = arc(1) + arc(3) * cos(t);
+0045 y = arc(2) + arc(3) * sin(t);
+0046 
+0047 <span class="comment">% format output</span>
+0048 <span class="keyword">if</span> nargout &lt;= 1
+0049     varargout = {[x y]};
+0050 <span class="keyword">else</span>
+0051     varargout = {x, y};
+0052 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

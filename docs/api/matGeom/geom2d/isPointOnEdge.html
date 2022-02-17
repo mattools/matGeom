@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of isPointOnEdge</title>
+  <meta name="keywords" content="isPointOnEdge">
+  <meta name="description" content="ISPOINTONEDGE Test if a point belongs to an edge.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; isPointOnEdge.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>isPointOnEdge
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ISPOINTONEDGE Test if a point belongs to an edge.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function b = isPointOnEdge(point, edge, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ISPOINTONEDGE Test if a point belongs to an edge.
+
+   Usage
+   B = isPointOnEdge(POINT, EDGE)
+   B = isPointOnEdge(POINT, EDGE, TOL)
+
+   Description
+   B = isPointOnEdge(POINT, EDGE)
+   with POINT being [xp yp], and EDGE being [x1 y1 x2 y2], returns TRUE if
+   the point is located on the edge, and FALSE otherwise.
+
+   B = isPointOnEdge(POINT, EDGE, TOL)
+   Specify an optilonal tolerance value TOL. The tolerance is given as a
+   fraction of the norm of the edge direction vector. Default is 1e-14. 
+
+   B = isPointOnEdge(POINTARRAY, EDGE)
+   B = isPointOnEdge(POINT, EDGEARRAY)
+   When one of the inputs has several rows, return the result of the test
+   for each element of the array tested against the single parameter.
+
+   B = isPointOnEdge(POINTARRAY, EDGEARRAY)
+   When both POINTARRAY and EDGEARRAY have the same number of rows,
+   returns a column vector with the same number of rows.
+   When the number of rows are different and both greater than 1, returns
+   a Np-by-Ne matrix of booleans, containing the result for each couple of
+   point and edge.
+
+   Examples
+   % create a point array
+   points = [10 10;15 10; 30 10];
+   % create an edge array
+   vertices = [10 10;20 10;20 20;10 20];
+   edges = [vertices vertices([2:end 1], :)];
+
+   % Test one point and one edge
+   isPointOnEdge(points(1,:), edges(1,:))
+   ans = 
+       1
+   isPointOnEdge(points(3,:), edges(1,:))
+   ans = 
+       0
+
+   % Test one point and several edges
+   isPointOnEdge(points(1,:), edges)'
+   ans =
+        1     0     0     1
+
+   % Test several points and one edge
+   isPointOnEdge(points, edges(1,:))'
+   ans =
+        1     1     0
+
+   % Test N points and N edges
+   isPointOnEdge(points, edges(1:3,:))'
+   ans =
+        1     0     0
+
+   % Test NP points and NE edges
+   isPointOnEdge(points, edges)
+   ans =
+        1     0     0     1
+        1     0     0     0
+        0     0     0     0
+
+
+   See also
+   <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="isPointOnLine.html" class="code" title="function b = isPointOnLine(point, line, varargin)">isPointOnLine</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function b = isPointOnEdge(point, edge, varargin)</a>
+0002 <span class="comment">%ISPOINTONEDGE Test if a point belongs to an edge.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   Usage</span>
+0005 <span class="comment">%   B = isPointOnEdge(POINT, EDGE)</span>
+0006 <span class="comment">%   B = isPointOnEdge(POINT, EDGE, TOL)</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Description</span>
+0009 <span class="comment">%   B = isPointOnEdge(POINT, EDGE)</span>
+0010 <span class="comment">%   with POINT being [xp yp], and EDGE being [x1 y1 x2 y2], returns TRUE if</span>
+0011 <span class="comment">%   the point is located on the edge, and FALSE otherwise.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   B = isPointOnEdge(POINT, EDGE, TOL)</span>
+0014 <span class="comment">%   Specify an optilonal tolerance value TOL. The tolerance is given as a</span>
+0015 <span class="comment">%   fraction of the norm of the edge direction vector. Default is 1e-14.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   B = isPointOnEdge(POINTARRAY, EDGE)</span>
+0018 <span class="comment">%   B = isPointOnEdge(POINT, EDGEARRAY)</span>
+0019 <span class="comment">%   When one of the inputs has several rows, return the result of the test</span>
+0020 <span class="comment">%   for each element of the array tested against the single parameter.</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   B = isPointOnEdge(POINTARRAY, EDGEARRAY)</span>
+0023 <span class="comment">%   When both POINTARRAY and EDGEARRAY have the same number of rows,</span>
+0024 <span class="comment">%   returns a column vector with the same number of rows.</span>
+0025 <span class="comment">%   When the number of rows are different and both greater than 1, returns</span>
+0026 <span class="comment">%   a Np-by-Ne matrix of booleans, containing the result for each couple of</span>
+0027 <span class="comment">%   point and edge.</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%   Examples</span>
+0030 <span class="comment">%   % create a point array</span>
+0031 <span class="comment">%   points = [10 10;15 10; 30 10];</span>
+0032 <span class="comment">%   % create an edge array</span>
+0033 <span class="comment">%   vertices = [10 10;20 10;20 20;10 20];</span>
+0034 <span class="comment">%   edges = [vertices vertices([2:end 1], :)];</span>
+0035 <span class="comment">%</span>
+0036 <span class="comment">%   % Test one point and one edge</span>
+0037 <span class="comment">%   isPointOnEdge(points(1,:), edges(1,:))</span>
+0038 <span class="comment">%   ans =</span>
+0039 <span class="comment">%       1</span>
+0040 <span class="comment">%   isPointOnEdge(points(3,:), edges(1,:))</span>
+0041 <span class="comment">%   ans =</span>
+0042 <span class="comment">%       0</span>
+0043 <span class="comment">%</span>
+0044 <span class="comment">%   % Test one point and several edges</span>
+0045 <span class="comment">%   isPointOnEdge(points(1,:), edges)'</span>
+0046 <span class="comment">%   ans =</span>
+0047 <span class="comment">%        1     0     0     1</span>
+0048 <span class="comment">%</span>
+0049 <span class="comment">%   % Test several points and one edge</span>
+0050 <span class="comment">%   isPointOnEdge(points, edges(1,:))'</span>
+0051 <span class="comment">%   ans =</span>
+0052 <span class="comment">%        1     1     0</span>
+0053 <span class="comment">%</span>
+0054 <span class="comment">%   % Test N points and N edges</span>
+0055 <span class="comment">%   isPointOnEdge(points, edges(1:3,:))'</span>
+0056 <span class="comment">%   ans =</span>
+0057 <span class="comment">%        1     0     0</span>
+0058 <span class="comment">%</span>
+0059 <span class="comment">%   % Test NP points and NE edges</span>
+0060 <span class="comment">%   isPointOnEdge(points, edges)</span>
+0061 <span class="comment">%   ans =</span>
+0062 <span class="comment">%        1     0     0     1</span>
+0063 <span class="comment">%        1     0     0     0</span>
+0064 <span class="comment">%        0     0     0     0</span>
+0065 <span class="comment">%</span>
+0066 <span class="comment">%</span>
+0067 <span class="comment">%   See also</span>
+0068 <span class="comment">%   edges2d, points2d, isPointOnLine</span>
+0069 <span class="comment">%</span>
+0070 
+0071 <span class="comment">%   ---------</span>
+0072 <span class="comment">%   author : David Legland</span>
+0073 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0074 <span class="comment">%   created the 31/10/2003.</span>
+0075 <span class="comment">%</span>
+0076 
+0077 <span class="comment">%   HISTORY</span>
+0078 <span class="comment">%   11/03/2004 change input format: edge is [x1 y1 x2 y2].</span>
+0079 <span class="comment">%   17/01/2005 if test N edges with N points, return N boolean.</span>
+0080 <span class="comment">%   21/01/2005 normalize test for colinearity, so enhance precision</span>
+0081 <span class="comment">%   22/05/2009 rename to isPointOnEdge, add psb to specify tolerance</span>
+0082 <span class="comment">%   26/01/2010 fix bug in precision computation</span>
+0083 <span class="comment">%   04/10/2010 fix a bug, and clean up code</span>
+0084 <span class="comment">%   28/10/2010 fix bug to have N results when input is N points and N</span>
+0085 <span class="comment">%       edges, add support for arrays with different numbers of rows, and</span>
+0086 <span class="comment">%       update doc.</span>
+0087 <span class="comment">%   2011-06-15 rewrites by using less memory, and avoiding repmat when psb</span>
+0088 
+0089 
+0090 <span class="comment">% extract computation tolerance</span>
+0091 tol = 1e-14;
+0092 <span class="keyword">if</span> ~isempty(varargin)
+0093     tol = varargin{1};
+0094 <span class="keyword">end</span>
+0095 
+0096 <span class="comment">% number of edges and of points</span>
+0097 nPoints = size(point, 1);
+0098 nEdges = size(edge, 1);
+0099 
+0100 <span class="comment">% adapt size of inputs if needed, and extract elements for computation</span>
+0101 <span class="keyword">if</span> nPoints == nEdges
+0102     <span class="comment">% When the number of points and edges is the same, the one-to-one test</span>
+0103     <span class="comment">% will be computed, so there is no need to repeat matrices</span>
+0104     dx = edge(:,3) - edge(:,1);
+0105     dy = edge(:,4) - edge(:,2);
+0106     lx = point(:,1) - edge(:,1);
+0107     ly = point(:,2) - edge(:,2);
+0108     
+0109 <span class="keyword">elseif</span> nPoints == 1
+0110     <span class="comment">% one point, several edges</span>
+0111     dx = edge(:, 3) - edge(:, 1);
+0112     dy = edge(:, 4) - edge(:, 2);
+0113     lx = point(ones(nEdges, 1), 1) - edge(:, 1);
+0114     ly = point(ones(nEdges, 1), 2) - edge(:, 2);
+0115     
+0116 <span class="keyword">elseif</span> nEdges == 1
+0117     <span class="comment">% several points, one edge</span>
+0118     dx = (edge(3) - edge(1)) * ones(nPoints, 1);
+0119     dy = (edge(4) - edge(2)) * ones(nPoints, 1);
+0120     lx = point(:, 1) - edge(1);
+0121     ly = point(:, 2) - edge(2);
+0122 
+0123 <span class="keyword">else</span>
+0124     <span class="comment">% Np points and Ne edges:</span>
+0125     <span class="comment">% Create an array for each parameter, so that the result will be a</span>
+0126     <span class="comment">% Np-by-Ne matrix of booleans (requires more memory, and uses repmat)</span>
+0127 
+0128     x0 = repmat(edge(:, 1)', nPoints, 1);
+0129     y0 = repmat(edge(:, 2)', nPoints, 1);
+0130     dx = repmat(edge(:, 3)', nPoints,  1) - x0;
+0131     dy = repmat(edge(:, 4)', nPoints,  1) - y0;
+0132     
+0133     lx = repmat(point(:, 1), 1, nEdges) - x0;
+0134     ly = repmat(point(:, 2), 1, nEdges) - y0;
+0135 <span class="keyword">end</span>
+0136 
+0137 <span class="comment">% test if point is located on supporting line</span>
+0138 b1 = abs(lx.*dy - ly.*dx) ./ (dx.*dx + dy.*dy) &lt; tol;
+0139 
+0140 <span class="comment">% compute position of point with respect to edge bounds</span>
+0141 <span class="comment">% use different tests depending on line angle</span>
+0142 ind     = abs(dx) &gt; abs(dy);
+0143 t       = zeros(size(dx));
+0144 t(ind)  = lx( ind) ./ dx( ind);
+0145 t(~ind) = ly(~ind) ./ dy(~ind);
+0146 
+0147 <span class="comment">% check if point is located between edge bounds</span>
+0148 b = t &gt;- tol &amp; t-1 &lt; tol &amp; b1;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

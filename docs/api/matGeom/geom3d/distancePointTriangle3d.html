@@ -1,0 +1,295 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of distancePointTriangle3d</title>
+  <meta name="keywords" content="distancePointTriangle3d">
+  <meta name="description" content="DISTANCEPOINTTRIANGLE3D Minimum distance between a 3D point and a 3D triangle.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; distancePointTriangle3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>distancePointTriangle3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DISTANCEPOINTTRIANGLE3D Minimum distance between a 3D point and a 3D triangle.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [dist, proj] = distancePointTriangle3d(point, triangle) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DISTANCEPOINTTRIANGLE3D Minimum distance between a 3D point and a 3D triangle.
+
+   DIST = distancePointTriangle3d(PT, TRI);
+   Computes the minimum distance between the point PT and the triangle
+   TRI. The Point PT is given as a row vector of three coordinates. The
+   triangle TRI is given as a 3-by-3 array containing the coordinates of
+   each vertex in a row of the array:
+   TRI = [...
+      X1 Y1 Z1;...
+      X2 Y2 Z2;...
+      X3 Y3 Z3];
+
+   [DIST, PROJ] = distancePointTriangle3d(PT, TRI);
+   Also returns the coordinates of the projeced point.
+
+   Example
+      tri = [1 0 0; 0 1 0;0 0 1];
+      pt = [0 0 0];
+      dist = distancePointTriangle3d(pt, tri)
+      dist =
+           0.5774
+
+   See also
+   meshes3d, distancePointMesh, <a href="distancePointEdge3d.html" class="code" title="function [dist, t] = distancePointEdge3d(point, edge)">distancePointEdge3d</a>, <a href="distancePointPlane.html" class="code" title="function d = distancePointPlane(point, plane)">distancePointPlane</a>
+
+   Reference
+   * David Eberly (1999), &quot;Distance Between Point and Triangle in 3D&quot;
+   https://www.geometrictools.com/Documentation/DistancePoint3Triangle3.pdf
+   * see &lt;a href=&quot;matlab:
+     web('https://fr.mathworks.com/matlabcentral/fileexchange/22857-distance-between-a-point-and-a-triangle-in-3d')
+   &quot;&gt;Distance between a point and a triangle in 3d&lt;/a&gt;, by Gwendolyn Fischer.
+   (same algorithm, but different order of input argument)
+
+   * https://fr.mathworks.com/matlabcentral/fileexchange/22857-distance-between-a-point-and-a-triangle-in-3d</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/meshes3d/distancePointMesh.html" class="code" title="function [dist, proj] = distancePointMesh(point, vertices, faces, varargin)">distancePointMesh</a>	DISTANCEPOINTMESH  Shortest distance between a (3D) point and a triangle mesh.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [dist, proj] = distancePointTriangle3d(point, triangle)</a>
+0002 <span class="comment">%DISTANCEPOINTTRIANGLE3D Minimum distance between a 3D point and a 3D triangle.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   DIST = distancePointTriangle3d(PT, TRI);</span>
+0005 <span class="comment">%   Computes the minimum distance between the point PT and the triangle</span>
+0006 <span class="comment">%   TRI. The Point PT is given as a row vector of three coordinates. The</span>
+0007 <span class="comment">%   triangle TRI is given as a 3-by-3 array containing the coordinates of</span>
+0008 <span class="comment">%   each vertex in a row of the array:</span>
+0009 <span class="comment">%   TRI = [...</span>
+0010 <span class="comment">%      X1 Y1 Z1;...</span>
+0011 <span class="comment">%      X2 Y2 Z2;...</span>
+0012 <span class="comment">%      X3 Y3 Z3];</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   [DIST, PROJ] = distancePointTriangle3d(PT, TRI);</span>
+0015 <span class="comment">%   Also returns the coordinates of the projeced point.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   Example</span>
+0018 <span class="comment">%      tri = [1 0 0; 0 1 0;0 0 1];</span>
+0019 <span class="comment">%      pt = [0 0 0];</span>
+0020 <span class="comment">%      dist = distancePointTriangle3d(pt, tri)</span>
+0021 <span class="comment">%      dist =</span>
+0022 <span class="comment">%           0.5774</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   See also</span>
+0025 <span class="comment">%   meshes3d, distancePointMesh, distancePointEdge3d, distancePointPlane</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   Reference</span>
+0028 <span class="comment">%   * David Eberly (1999), &quot;Distance Between Point and Triangle in 3D&quot;</span>
+0029 <span class="comment">%   https://www.geometrictools.com/Documentation/DistancePoint3Triangle3.pdf</span>
+0030 <span class="comment">%   * see &lt;a href=&quot;matlab:</span>
+0031 <span class="comment">%     web('https://fr.mathworks.com/matlabcentral/fileexchange/22857-distance-between-a-point-and-a-triangle-in-3d')</span>
+0032 <span class="comment">%   &quot;&gt;Distance between a point and a triangle in 3d&lt;/a&gt;, by Gwendolyn Fischer.</span>
+0033 <span class="comment">%   (same algorithm, but different order of input argument)</span>
+0034 <span class="comment">%</span>
+0035 <span class="comment">%   * https://fr.mathworks.com/matlabcentral/fileexchange/22857-distance-between-a-point-and-a-triangle-in-3d</span>
+0036  
+0037 <span class="comment">% ------</span>
+0038 <span class="comment">% Author: David Legland</span>
+0039 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0040 <span class="comment">% Created: 2018-03-08,    using Matlab 9.3.0.713579 (R2017b)</span>
+0041 <span class="comment">% Copyright 2018 INRA - Cepia Software Platform.</span>
+0042 
+0043 <span class="comment">% triangle origin and vectors</span>
+0044 p1 = triangle(1,:);
+0045 v12 = triangle(2,:) - p1;
+0046 v13 = triangle(3,:) - p1;
+0047 
+0048 <span class="comment">% identify coefficients of second order equation</span>
+0049 a = dot(v12, v12, 2);
+0050 b = dot(v12, v13, 2);
+0051 c = dot(v13, v13, 2);
+0052 diffP = p1 - point;
+0053 d = dot(v12, diffP, 2);
+0054 e = dot(v13, diffP, 2);
+0055 <span class="comment">% f = dot(diffP, diffP, 2);</span>
+0056 
+0057 <span class="comment">% compute position of projected point in the plane of the triangle</span>
+0058 det = a * c - b * b ;
+0059 s = b * e - c * d ;
+0060 t = b * d - a * e ;
+0061 
+0062 <span class="comment">% switch depending on the region where the projection occur</span>
+0063 <span class="keyword">if</span> s + t &lt; det
+0064     <span class="keyword">if</span> s &lt; 0
+0065         <span class="keyword">if</span> t &lt; 0
+0066             <span class="comment">% region 4</span>
+0067             <span class="comment">% The minimum distance must occur</span>
+0068             <span class="comment">% * on the line t = 0</span>
+0069             <span class="comment">% * on the line s = 0 with t &gt;= 0</span>
+0070             <span class="comment">% * at the intersection of the two lines</span>
+0071             
+0072             <span class="keyword">if</span> d &lt; 0
+0073                 <span class="comment">% minimum on edge t = 0 with s &gt; 0.</span>
+0074                 t = 0;
+0075                 <span class="keyword">if</span> a &lt;= -d
+0076                     s = 1;
+0077                 <span class="keyword">else</span>
+0078                     s = -d / a;
+0079                 <span class="keyword">end</span>
+0080             <span class="keyword">else</span>
+0081                 <span class="comment">% minimum on edge s = 0</span>
+0082                 s = 0;
+0083                 <span class="keyword">if</span> e &gt;= 0
+0084                     t = 0;
+0085                 <span class="keyword">elseif</span> c &lt;= -e
+0086                     t = 1;
+0087                 <span class="keyword">else</span>
+0088                     t = -e / c;
+0089                 <span class="keyword">end</span>
+0090             <span class="keyword">end</span>
+0091         <span class="keyword">else</span>
+0092             <span class="comment">% region 3</span>
+0093             <span class="comment">% The minimum distance must occur on the line s = 0</span>
+0094             s = 0;
+0095             <span class="keyword">if</span> e &gt;= 0
+0096                 t = 0;
+0097             <span class="keyword">else</span>
+0098                 <span class="keyword">if</span> c &lt;= -e
+0099                     t = 1;
+0100                 <span class="keyword">else</span>
+0101                     t = -e / c;
+0102                 <span class="keyword">end</span>
+0103             <span class="keyword">end</span>
+0104         <span class="keyword">end</span>
+0105         
+0106     <span class="keyword">else</span>
+0107         <span class="keyword">if</span> t &lt; 0
+0108             <span class="comment">% region 5</span>
+0109             <span class="comment">% The minimum distance must occur on the line t = 0</span>
+0110             t = 0;
+0111             <span class="keyword">if</span> d &gt;= 0
+0112                 s = 0;
+0113             <span class="keyword">else</span>
+0114                 <span class="keyword">if</span> a &lt;= -d
+0115                     s = 1;
+0116                 <span class="keyword">else</span>
+0117                     s = -d / a;
+0118                 <span class="keyword">end</span>
+0119             <span class="keyword">end</span>
+0120         <span class="keyword">else</span>
+0121             <span class="comment">% region 0</span>
+0122             <span class="comment">% the minimum distance occurs inside the triangle</span>
+0123             s = s / det;
+0124             t = t / det;
+0125         <span class="keyword">end</span>
+0126     <span class="keyword">end</span>
+0127 <span class="keyword">else</span>
+0128     <span class="keyword">if</span> s &lt; 0
+0129         <span class="comment">% region 2</span>
+0130         <span class="comment">% The minimum distance must occur:</span>
+0131         <span class="comment">% * on the line s + t = 1</span>
+0132         <span class="comment">% * on the line s = 0 with t &lt;= 1</span>
+0133         <span class="comment">% * or at the intersection of the two (s=0; t=1)</span>
+0134         
+0135         tmp0 = b + d;
+0136         tmp1 = c + e;
+0137         
+0138         <span class="keyword">if</span> tmp1 &gt; tmp0
+0139             <span class="comment">% minimum on edge s+t = 1, with s &gt; 1</span>
+0140             numer = tmp1 - tmp0;
+0141             denom = a - 2 * b + c;
+0142             <span class="keyword">if</span> numer &gt;= denom
+0143                 s = 1;
+0144             <span class="keyword">else</span>
+0145                 s = numer / denom;
+0146             <span class="keyword">end</span>
+0147             t = 1 - s;
+0148         <span class="keyword">else</span>
+0149             <span class="comment">% minimum on edge s = 0, with t &lt;= 1</span>
+0150             s = 0;
+0151             <span class="keyword">if</span> tmp1 &lt;= 0
+0152                 t = 1;
+0153             <span class="keyword">elseif</span> e &gt;= 0
+0154                 t = 0;
+0155             <span class="keyword">else</span>
+0156                 t = -e / c;
+0157             <span class="keyword">end</span>
+0158         <span class="keyword">end</span>
+0159         
+0160     <span class="keyword">elseif</span> t &lt; 0
+0161         <span class="comment">% region 6</span>
+0162         <span class="comment">% The minimum distance must occur</span>
+0163         <span class="comment">% * on the line s + t = 1</span>
+0164         <span class="comment">% * on the line t = 0, with s &lt;= 1</span>
+0165         <span class="comment">% * at the intersection of the two lines</span>
+0166         tmp0 = b + e;
+0167         tmp1 = a + d;
+0168         
+0169         <span class="keyword">if</span> tmp1 &gt; tmp0 
+0170             <span class="comment">% minimum on edge s+t=1, with t &gt; 0</span>
+0171             numer = tmp1 - tmp0;
+0172             denom = a - 2 * b + c;
+0173             <span class="keyword">if</span> numer &gt; denom
+0174                 t = 1;
+0175             <span class="keyword">else</span>
+0176                 t = numer / denom;
+0177             <span class="keyword">end</span>
+0178             s = 1 - t;
+0179             
+0180         <span class="keyword">else</span>
+0181             <span class="comment">% minimum on edge t = 0 with s &lt;= 1</span>
+0182             t = 0;
+0183             <span class="keyword">if</span> tmp1 &lt;= 0
+0184                 s = 1;
+0185             <span class="keyword">elseif</span> d &gt;= 0
+0186                 s = 0;
+0187             <span class="keyword">else</span>
+0188                 s = -d / a;
+0189             <span class="keyword">end</span>
+0190         <span class="keyword">end</span>
+0191         
+0192     <span class="keyword">else</span>
+0193         <span class="comment">% region 1</span>
+0194         <span class="comment">% The minimum distance must occur on the line s + t = 1</span>
+0195         numer = (c + e) - (b + d);
+0196         <span class="keyword">if</span> numer &lt;= 0
+0197             s = 0;
+0198         <span class="keyword">else</span>
+0199             denom = a - 2 * b + c;
+0200             <span class="keyword">if</span> numer &gt;= denom
+0201                 s = 1;
+0202             <span class="keyword">else</span>
+0203                 s = numer / denom;
+0204             <span class="keyword">end</span>
+0205         <span class="keyword">end</span>
+0206         
+0207         t = 1 - s;
+0208     <span class="keyword">end</span>
+0209 <span class="keyword">end</span>
+0210 
+0211 <span class="comment">% compute coordinates of closest point on plane</span>
+0212 proj = p1 + s * v12 + t * v13;
+0213 
+0214 <span class="comment">% distance between point and closest point on plane</span>
+0215 dist = sqrt(sum((point - proj).^2));</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

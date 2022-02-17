@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polygonCentroid3d</title>
+  <meta name="keywords" content="polygonCentroid3d">
+  <meta name="description" content="POLYGONCENTROID3D Centroid (or center of mass) of a polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; polygonCentroid3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polygonCentroid3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYGONCENTROID3D Centroid (or center of mass) of a polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function centroid = polygonCentroid3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLYGONCENTROID3D Centroid (or center of mass) of a polygon.
+
+   PTC = polygonCentroid3d(POLY)
+   Computes center of mass of a polygon defined by POLY. POLY is a N-by-3
+   array of double containing coordinates of polygon vertices.
+
+   PTC = polygonCentroid3d(VX, VY, VZ)
+   Specifies vertex coordinates as three separate arrays.
+
+   Example
+     % compute centroid of a basic polygon
+     poly = [0 0 0; 10 0 10;10 10 20;0 10 10];
+     centro = polygonCentroid3d(poly)
+     centro =
+         5.0000    5.0000    10.0000
+
+   See also
+   <a href="polygons3d.html" class="code" title="function polygons3d(varargin)">polygons3d</a>, <a href="polygonArea3d.html" class="code" title="function area = polygonArea3d(poly, varargin)">polygonArea3d</a>, polygonCentroid</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>	CENTROID Compute centroid (center of mass) of a set of points.</li><li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="planePoint.html" class="code" title="function coord = planePoint(plane, point)">planePoint</a>	PLANEPOINT Compute 3D position of a point in a plane.</li><li><a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>	PLANEPOSITION Compute position of a point on a plane.</li><li><a href="../../matGeom/polygons2d/polygonCentroid.html" class="code" title="function [centroid, area] = polygonCentroid(varargin)">polygonCentroid</a>	Computes the centroid (center of mass) of a polygon.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/meshes3d/meshFaceCentroids.html" class="code" title="function centroids = meshFaceCentroids(varargin)">meshFaceCentroids</a>	MESHFACECENTROIDS Compute centroids of faces in a mesh.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function centroid = polygonCentroid3d(varargin)</a>
+0002 <span class="comment">%POLYGONCENTROID3D Centroid (or center of mass) of a polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PTC = polygonCentroid3d(POLY)</span>
+0005 <span class="comment">%   Computes center of mass of a polygon defined by POLY. POLY is a N-by-3</span>
+0006 <span class="comment">%   array of double containing coordinates of polygon vertices.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   PTC = polygonCentroid3d(VX, VY, VZ)</span>
+0009 <span class="comment">%   Specifies vertex coordinates as three separate arrays.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Example</span>
+0012 <span class="comment">%     % compute centroid of a basic polygon</span>
+0013 <span class="comment">%     poly = [0 0 0; 10 0 10;10 10 20;0 10 10];</span>
+0014 <span class="comment">%     centro = polygonCentroid3d(poly)</span>
+0015 <span class="comment">%     centro =</span>
+0016 <span class="comment">%         5.0000    5.0000    10.0000</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   See also</span>
+0019 <span class="comment">%   polygons3d, polygonArea3d, polygonCentroid</span>
+0020 <span class="comment">%</span>
+0021 
+0022 <span class="comment">% ------</span>
+0023 <span class="comment">% Author: David Legland</span>
+0024 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0025 <span class="comment">% Created: 2007-09-18</span>
+0026 <span class="comment">% Copyright 2007 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0027 
+0028 
+0029 <span class="keyword">if</span> nargin == 1
+0030     <span class="comment">% polygon is given as a single argument</span>
+0031     pts = varargin{1};
+0032     
+0033 <span class="keyword">elseif</span> nargin == 3
+0034     <span class="comment">% polygon is given as 3 coordinate arrays</span>
+0035     px = varargin{1};
+0036     py = varargin{2};
+0037     pz = varargin{3};
+0038     pts = [px py pz];
+0039 <span class="keyword">end</span>
+0040 
+0041 <span class="comment">% create supporting plane (assuming first 3 points are not colinear...)</span>
+0042 plane = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(pts(1:3, :));
+0043 
+0044 <span class="comment">% project points onto the plane</span>
+0045 pts = <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>(pts, plane);
+0046 
+0047 <span class="comment">% compute centroid in 2D</span>
+0048 centro2d = <a href="../../matGeom/polygons2d/polygonCentroid.html" class="code" title="function [centroid, area] = polygonCentroid(varargin)">polygonCentroid</a>(pts);
+0049 
+0050 <span class="comment">% project back in 3D</span>
+0051 <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a> = <a href="planePoint.html" class="code" title="function coord = planePoint(plane, point)">planePoint</a>(plane, centro2d);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

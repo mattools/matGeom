@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of intersectLinePolyline</title>
+  <meta name="keywords" content="intersectLinePolyline">
+  <meta name="description" content="INTERSECTLINEPOLYLINE Intersection points between a line and a polyline.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; intersectLinePolyline.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>intersectLinePolyline
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>INTERSECTLINEPOLYLINE Intersection points between a line and a polyline.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [intersects, edgeIndices] = intersectLinePolyline(line, poly, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">INTERSECTLINEPOLYLINE Intersection points between a line and a polyline.
+
+   P = intersectLinePolyline(LINE, POLY)
+   Returns the intersection points of the lines LINE with polyline POLY. 
+   LINE is a 1-by-4 row vector containing parametric representation of the
+   line (in the format [x0 y0 dx dy], see the function 'createLine' for
+   details). 
+   POLY is a NV-by-2 array containing coordinates of the polyline vertices
+   P is a K-by-2 array containing the coordinates of the K intersection
+   points.
+
+   P = intersectLinePolyline(LINE, POLY, TOL)
+   Specifies the tolerance for geometric tests. Default is 1e-14.
+
+   [P INDS] = intersectLinePolyline(...)
+   Also returns the indices of edges involved in intersections. INDS is a
+   K-by-1 column vector, such that P(i,:) corresponds to intersection of
+   the line with the i-th edge of the polyline. If the intersection occurs
+   at a polyline vertex, the index of only one of the two neighbor edges
+   is returned. 
+   Note that due to numerical approximations, the use of function
+   'isPointOnEdge' may give results not consistent with this function.
+
+
+   Examples
+   % compute intersections between a square and an horizontal line
+     poly = [0 0;10 0;10 10;0 10];
+     line = [5 5 1 0];
+     intersectLinePolyline(line, poly)
+     ans =
+           10     5
+     % also return indices of edges
+     [inters inds] = intersectLinePolyline(line, poly)
+     inters =
+           10     5
+     inds =
+           2
+      
+   % compute intersections between a square and a diagonal line
+     poly = [0 0;10 0;10 10;0 10];
+     line = [5 5 1 1];
+     intersectLinePolyline(line, poly)
+     ans =
+            0     0
+           10    10
+
+   See Also
+   lines2d, polylines2d, intersectLines, <a href="intersectLinePolygon.html" class="code" title="function [points, edgeInds, linePositions] = intersectLinePolygon(line, poly, varargin)">intersectLinePolygon</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/edgeToLine.html" class="code" title="function line = edgeToLine(edge)">edgeToLine</a>	EDGETOLINE Convert an edge to a straight line.</li><li><a href="../../matGeom/geom2d/intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>	INTERSECTLINES Return all intersection points of N lines in 2D.</li><li><a href="../../matGeom/geom2d/linePosition.html" class="code" title="function pos = linePosition(point, line, varargin)">linePosition</a>	LINEPOSITION Position of a point on a line.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [intersects, edgeIndices] = intersectLinePolyline(line, poly, varargin)</a>
+0002 <span class="comment">%INTERSECTLINEPOLYLINE Intersection points between a line and a polyline.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   P = intersectLinePolyline(LINE, POLY)</span>
+0005 <span class="comment">%   Returns the intersection points of the lines LINE with polyline POLY.</span>
+0006 <span class="comment">%   LINE is a 1-by-4 row vector containing parametric representation of the</span>
+0007 <span class="comment">%   line (in the format [x0 y0 dx dy], see the function 'createLine' for</span>
+0008 <span class="comment">%   details).</span>
+0009 <span class="comment">%   POLY is a NV-by-2 array containing coordinates of the polyline vertices</span>
+0010 <span class="comment">%   P is a K-by-2 array containing the coordinates of the K intersection</span>
+0011 <span class="comment">%   points.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   P = intersectLinePolyline(LINE, POLY, TOL)</span>
+0014 <span class="comment">%   Specifies the tolerance for geometric tests. Default is 1e-14.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   [P INDS] = intersectLinePolyline(...)</span>
+0017 <span class="comment">%   Also returns the indices of edges involved in intersections. INDS is a</span>
+0018 <span class="comment">%   K-by-1 column vector, such that P(i,:) corresponds to intersection of</span>
+0019 <span class="comment">%   the line with the i-th edge of the polyline. If the intersection occurs</span>
+0020 <span class="comment">%   at a polyline vertex, the index of only one of the two neighbor edges</span>
+0021 <span class="comment">%   is returned.</span>
+0022 <span class="comment">%   Note that due to numerical approximations, the use of function</span>
+0023 <span class="comment">%   'isPointOnEdge' may give results not consistent with this function.</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%   Examples</span>
+0027 <span class="comment">%   % compute intersections between a square and an horizontal line</span>
+0028 <span class="comment">%     poly = [0 0;10 0;10 10;0 10];</span>
+0029 <span class="comment">%     line = [5 5 1 0];</span>
+0030 <span class="comment">%     intersectLinePolyline(line, poly)</span>
+0031 <span class="comment">%     ans =</span>
+0032 <span class="comment">%           10     5</span>
+0033 <span class="comment">%     % also return indices of edges</span>
+0034 <span class="comment">%     [inters inds] = intersectLinePolyline(line, poly)</span>
+0035 <span class="comment">%     inters =</span>
+0036 <span class="comment">%           10     5</span>
+0037 <span class="comment">%     inds =</span>
+0038 <span class="comment">%           2</span>
+0039 <span class="comment">%</span>
+0040 <span class="comment">%   % compute intersections between a square and a diagonal line</span>
+0041 <span class="comment">%     poly = [0 0;10 0;10 10;0 10];</span>
+0042 <span class="comment">%     line = [5 5 1 1];</span>
+0043 <span class="comment">%     intersectLinePolyline(line, poly)</span>
+0044 <span class="comment">%     ans =</span>
+0045 <span class="comment">%            0     0</span>
+0046 <span class="comment">%           10    10</span>
+0047 <span class="comment">%</span>
+0048 <span class="comment">%   See Also</span>
+0049 <span class="comment">%   lines2d, polylines2d, intersectLines, intersectLinePolygon</span>
+0050 <span class="comment">%</span>
+0051 
+0052 <span class="comment">%   ---------</span>
+0053 <span class="comment">%   author : David Legland</span>
+0054 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0055 <span class="comment">%   created the 31/10/2003.</span>
+0056 <span class="comment">%</span>
+0057 
+0058 <span class="comment">%   HISTORY</span>
+0059 <span class="comment">%   2008-11-24 rename 'pi' as 'intersects', update doc</span>
+0060 <span class="comment">%   2009-07-23 removed forgotten occurence of 'pi' variable (thanks to Bala</span>
+0061 <span class="comment">%       Krishnamoorthy)</span>
+0062 <span class="comment">%   2010-01-26 rewrite using vectorisation</span>
+0063 <span class="comment">%   2011-05-20 returns unique results</span>
+0064 <span class="comment">%   2011-07-20 returns intersected edge indices</span>
+0065 <span class="comment">%   2012-11-33 add 'diag' option for linePosition</span>
+0066 
+0067 <span class="comment">% get computation tolerance</span>
+0068 tol = 1e-14;
+0069 <span class="keyword">if</span> ~isempty(varargin)
+0070     tol = varargin{1};
+0071 <span class="keyword">end</span>
+0072 
+0073 <span class="comment">% create the array of edges</span>
+0074 N = size(poly, 1);
+0075 edges = [poly(1:N-1, :) poly(2:N, :)];
+0076 
+0077 <span class="comment">% compute intersections with supporting lines of polyline edges</span>
+0078 supportLines = <a href="../../matGeom/geom2d/edgeToLine.html" class="code" title="function line = edgeToLine(edge)">edgeToLine</a>(edges);
+0079 intersects = <a href="../../matGeom/geom2d/intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(line, supportLines, tol);
+0080 
+0081 <span class="comment">% find edges that are not parallel to the input line</span>
+0082 inds = find(isfinite(intersects(:, 1)));
+0083 
+0084 <span class="comment">% compute position of intersection points on corresponding lines</span>
+0085 pos = <a href="../../matGeom/geom2d/linePosition.html" class="code" title="function pos = linePosition(point, line, varargin)">linePosition</a>(intersects(inds, :), supportLines(inds, :), <span class="string">'diag'</span>);
+0086 
+0087 <span class="comment">% and keep only intersection points located on edges</span>
+0088 b = pos &gt; -tol &amp; pos &lt; 1+tol;
+0089 inds = inds(b);
+0090 intersects = intersects(inds, :);
+0091 
+0092 <span class="comment">% remove multiple vertices (can occur for intersections located at polyline</span>
+0093 <span class="comment">% vertices)</span>
+0094 [intersects, I, J] = unique(intersects, <span class="string">'rows'</span>); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0095 
+0096 <span class="keyword">if</span> nargout &gt; 1
+0097     <span class="comment">% return indices of edges involved in intersection</span>
+0098     <span class="comment">% (in case of intersection located at a vertex, only one of the</span>
+0099     <span class="comment">% neighbor edges is returned)</span>
+0100     edgeIndices = inds(I);
+0101 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

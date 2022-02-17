@@ -1,0 +1,271 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawSphere</title>
+  <meta name="keywords" content="drawSphere">
+  <meta name="description" content="DRAWSPHERE Draw a sphere as a mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; drawSphere.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawSphere
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWSPHERE Draw a sphere as a mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawSphere(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWSPHERE Draw a sphere as a mesh.
+
+   drawSphere(SPHERE)
+   Where SPHERE = [XC YC ZC R], draw the sphere centered on the point with
+   coordinates [XC YC ZC] and with radius R, using a quad mesh.
+
+   drawSphere(CENTER, R)
+   Where CENTER = [XC YC ZC], specifies the center and the radius with two
+   arguments.
+
+   drawSphere(XC, YC, ZC, R)
+   Specifiy sphere center and radius as four arguments.
+
+   drawSphere(..., NAME, VALUE);
+   Specifies one or several options using parameter name-value pairs.
+   Available options are usual drawing options, as well as:
+   'nPhi'    the number of arcs used for drawing the meridians
+   'nTheta'  the number of circles used for drawing the parallels
+
+   H = drawSphere(...)
+   Return a handle to the graphical object created by the function.
+
+   [X Y Z] = drawSphere(...)
+   Return the coordinates of the vertices used by the sphere. In this
+   case, the sphere is not drawn.
+
+   Example
+   % Draw four spheres with different centers
+     figure(1); clf; hold on;
+     drawSphere([10 10 30 5]);
+     drawSphere([20 30 10 5]);
+     drawSphere([30 30 30 5]);
+     drawSphere([30 20 10 5]);
+     view([-30 20]); axis equal; l = light;
+
+   % Draw sphere with different settings
+     figure(1); clf;
+     drawSphere([10 20 30 10], 'linestyle', ':', 'facecolor', 'r');
+     axis([0 50 0 50 0 50]); axis equal;
+     l = light;
+
+   % The same, but changes style using graphic handle
+     figure(1); clf;
+     h = drawSphere([10 20 30 10]);
+     set(h, 'linestyle', ':');
+     set(h, 'facecolor', 'r');
+     axis([0 50 0 50 0 50]); axis equal;
+     l = light;
+   
+   % Draw a sphere with high resolution
+     figure(1); clf;
+     h = drawSphere([10 20 30 10], 'nPhi', 360, 'nTheta', 180);
+     l = light; view(3);
+
+
+   See also
+   <a href="spheres.html" class="code" title="function spheres(varargin)">spheres</a>, <a href="circles3d.html" class="code" title="function circles3d(varargin)">circles3d</a>, sphere, <a href="drawEllipsoid.html" class="code" title="function varargout = drawEllipsoid(elli, varargin)">drawEllipsoid</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawAxis3d.html" class="code" title="function varargout = drawAxis3d(varargin)">drawAxis3d</a>	DRAWAXIS3D Draw a coordinate system and an origin.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawSphere(varargin)</a>
+0002 <span class="comment">%DRAWSPHERE Draw a sphere as a mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawSphere(SPHERE)</span>
+0005 <span class="comment">%   Where SPHERE = [XC YC ZC R], draw the sphere centered on the point with</span>
+0006 <span class="comment">%   coordinates [XC YC ZC] and with radius R, using a quad mesh.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   drawSphere(CENTER, R)</span>
+0009 <span class="comment">%   Where CENTER = [XC YC ZC], specifies the center and the radius with two</span>
+0010 <span class="comment">%   arguments.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   drawSphere(XC, YC, ZC, R)</span>
+0013 <span class="comment">%   Specifiy sphere center and radius as four arguments.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   drawSphere(..., NAME, VALUE);</span>
+0016 <span class="comment">%   Specifies one or several options using parameter name-value pairs.</span>
+0017 <span class="comment">%   Available options are usual drawing options, as well as:</span>
+0018 <span class="comment">%   'nPhi'    the number of arcs used for drawing the meridians</span>
+0019 <span class="comment">%   'nTheta'  the number of circles used for drawing the parallels</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   H = drawSphere(...)</span>
+0022 <span class="comment">%   Return a handle to the graphical object created by the function.</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   [X Y Z] = drawSphere(...)</span>
+0025 <span class="comment">%   Return the coordinates of the vertices used by the sphere. In this</span>
+0026 <span class="comment">%   case, the sphere is not drawn.</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%   Example</span>
+0029 <span class="comment">%   % Draw four spheres with different centers</span>
+0030 <span class="comment">%     figure(1); clf; hold on;</span>
+0031 <span class="comment">%     drawSphere([10 10 30 5]);</span>
+0032 <span class="comment">%     drawSphere([20 30 10 5]);</span>
+0033 <span class="comment">%     drawSphere([30 30 30 5]);</span>
+0034 <span class="comment">%     drawSphere([30 20 10 5]);</span>
+0035 <span class="comment">%     view([-30 20]); axis equal; l = light;</span>
+0036 <span class="comment">%</span>
+0037 <span class="comment">%   % Draw sphere with different settings</span>
+0038 <span class="comment">%     figure(1); clf;</span>
+0039 <span class="comment">%     drawSphere([10 20 30 10], 'linestyle', ':', 'facecolor', 'r');</span>
+0040 <span class="comment">%     axis([0 50 0 50 0 50]); axis equal;</span>
+0041 <span class="comment">%     l = light;</span>
+0042 <span class="comment">%</span>
+0043 <span class="comment">%   % The same, but changes style using graphic handle</span>
+0044 <span class="comment">%     figure(1); clf;</span>
+0045 <span class="comment">%     h = drawSphere([10 20 30 10]);</span>
+0046 <span class="comment">%     set(h, 'linestyle', ':');</span>
+0047 <span class="comment">%     set(h, 'facecolor', 'r');</span>
+0048 <span class="comment">%     axis([0 50 0 50 0 50]); axis equal;</span>
+0049 <span class="comment">%     l = light;</span>
+0050 <span class="comment">%</span>
+0051 <span class="comment">%   % Draw a sphere with high resolution</span>
+0052 <span class="comment">%     figure(1); clf;</span>
+0053 <span class="comment">%     h = drawSphere([10 20 30 10], 'nPhi', 360, 'nTheta', 180);</span>
+0054 <span class="comment">%     l = light; view(3);</span>
+0055 <span class="comment">%</span>
+0056 <span class="comment">%</span>
+0057 <span class="comment">%   See also</span>
+0058 <span class="comment">%   spheres, circles3d, sphere, drawEllipsoid</span>
+0059 
+0060 <span class="comment">%   ---------</span>
+0061 <span class="comment">%   author: David Legland</span>
+0062 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0063 <span class="comment">%   created the 17/02/2005</span>
+0064 <span class="comment">%</span>
+0065 
+0066 <span class="comment">%   HISTORY</span>
+0067 <span class="comment">%   2006-05-19 use centered sphere with radius 1 when no input specified</span>
+0068 <span class="comment">%   2007-01-04 typo</span>
+0069 <span class="comment">%   2010-11-08 code cleanup, add doc</span>
+0070 
+0071 <span class="comment">% Check if axes handle is specified</span>
+0072 <span class="keyword">if</span> isAxisHandle(varargin{1})
+0073     hAx = varargin{1};
+0074     varargin(1)=[];
+0075 <span class="keyword">elseif</span> nargout ~= 3
+0076     hAx = gca;
+0077 <span class="keyword">end</span>
+0078 
+0079 <span class="comment">% process input options: when a string is found, assumes this is the</span>
+0080 <span class="comment">% beginning of options</span>
+0081 options = {<span class="string">'FaceColor'</span>, <span class="string">'g'</span>, <span class="string">'LineStyle'</span>, <span class="string">'none'</span>};
+0082 <span class="keyword">for</span> i = 1:length(varargin)
+0083     <span class="keyword">if</span> ischar(varargin{i})
+0084         <span class="keyword">if</span> length(varargin) == 1
+0085             options = {<span class="string">'FaceColor'</span>, varargin{1}, <span class="string">'LineStyle'</span>, <span class="string">'none'</span>};
+0086         <span class="keyword">else</span>
+0087             options = [options(1:end) varargin(i:end)];
+0088         <span class="keyword">end</span>
+0089         varargin = varargin(1:i-1);
+0090         <span class="keyword">break</span>;
+0091     <span class="keyword">end</span>
+0092 <span class="keyword">end</span>
+0093 
+0094 <span class="comment">% Parse the input (try to extract center coordinates and radius)</span>
+0095 <span class="keyword">if</span> isempty(varargin)
+0096     <span class="comment">% no input: assumes unit sphere</span>
+0097     xc = 0;    yc = 0; zc = 0;
+0098     r = 1;
+0099     
+0100 <span class="keyword">elseif</span> length(varargin) == 1
+0101     <span class="comment">% one argument: concatenates center and radius</span>
+0102     sphere = varargin{1};
+0103     xc = sphere(:,1);
+0104     yc = sphere(:,2);
+0105     zc = sphere(:,3);
+0106     r  = sphere(:,4);
+0107     
+0108 <span class="keyword">elseif</span> length(varargin) == 2
+0109     <span class="comment">% two arguments, corresponding to center and radius</span>
+0110     center = varargin{1};
+0111     xc = center(1);
+0112     yc = center(2);
+0113     zc = center(3);
+0114     r  = varargin{2};
+0115     
+0116 <span class="keyword">elseif</span> length(varargin) == 4
+0117     <span class="comment">% four arguments, corresponding to XC, YX, ZC and R</span>
+0118     xc = varargin{1};
+0119     yc = varargin{2};
+0120     zc = varargin{3};
+0121     r  = varargin{4};
+0122 <span class="keyword">else</span>
+0123     error(<span class="string">'drawSphere: please specify center and radius'</span>);
+0124 <span class="keyword">end</span>
+0125 
+0126 <span class="comment">% number of meridians</span>
+0127 nPhi    = 32;
+0128 ind = find(strcmpi(<span class="string">'nPhi'</span>, options(1:2:end)));
+0129 <span class="keyword">if</span> ~isempty(ind)
+0130     ind = ind(1);
+0131     nPhi = options{2*ind};
+0132     options(2*ind-1:2*ind) = [];
+0133 <span class="keyword">end</span>
+0134     
+0135 <span class="comment">% number of parallels</span>
+0136 nTheta  = 16;
+0137 ind = find(strcmpi(<span class="string">'nTheta'</span>, options(1:2:end)));
+0138 <span class="keyword">if</span> ~isempty(ind)
+0139     ind = ind(1);
+0140     nTheta = options{2*ind};
+0141     options(2*ind-1:2*ind) = [];
+0142 <span class="keyword">end</span>
+0143 
+0144 <span class="comment">% compute spherical coordinates</span>
+0145 theta   = linspace(0, pi, nTheta+1);
+0146 phi     = linspace(0, 2*pi, nPhi+1);
+0147 
+0148 <span class="comment">% convert to cartesian coordinates</span>
+0149 sintheta = sin(theta);
+0150 x = xc + cos(phi')*sintheta*r;
+0151 y = yc + sin(phi')*sintheta*r;
+0152 z = zc + ones(length(phi),1)*cos(theta)*r;
+0153 
+0154 <span class="comment">% Process output</span>
+0155 <span class="keyword">if</span> nargout == 0
+0156     <span class="comment">% no output: draw the sphere</span>
+0157     surf(hAx, x, y, z, options{:});
+0158     
+0159 <span class="keyword">elseif</span> nargout == 1
+0160     <span class="comment">% one output: compute</span>
+0161     varargout{1} = surf(hAx, x, y, z, options{:});
+0162     
+0163 <span class="keyword">elseif</span> nargout == 3
+0164     varargout{1} = x; 
+0165     varargout{2} = y; 
+0166     varargout{3} = z; 
+0167 <span class="keyword">end</span>
+0168</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

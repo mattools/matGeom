@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createLine</title>
+  <meta name="keywords" content="createLine">
+  <meta name="description" content="CREATELINE Create a straight line from 2 points, or from other inputs.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; createLine.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createLine
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATELINE Create a straight line from 2 points, or from other inputs.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function line = createLine(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATELINE Create a straight line from 2 points, or from other inputs.
+
+   Line is represented in a parametric form : [x0 y0 dx dy]
+   x = x0 + t*dx
+   y = y0 + t*dy;
+
+
+   L = createLine(p1, p2);
+   Returns the line going through the two given points.
+   
+   L = createLine(x0, y0, dx, dy);
+   Returns the line going through point (x0, y0) and with direction
+   vector(dx, dy).
+
+   L = createLine(LINE);
+   where LINE is an array of 4 values, creates the line going through the
+   point (LINE(1) LINE(2)), and with direction given by vector (LINE(3)
+   LINE(4)). 
+   
+   L = createLine(THETA);
+   Create a polar line originated at (0,0) and with angle THETA.
+
+   L = createLine(p, THETA);
+   Create a polar line originated at p and with angle THETA.
+
+   L = createLine(RHO, THETA);
+   Create a polar line with normal theta, and with min distance to origin
+   equal to rho. rho can be negative, in this case, the line is the same
+   as with CREATELINE(-rho, theta+pi), but the orientation is different.
+
+
+   Note: in all cases, parameters can be vertical arrays of the same
+   dimension. The result is then an array of lines, of dimensions [N*4].
+
+
+   See also:
+   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="createEdge.html" class="code" title="function edge = createEdge(varargin)">createEdge</a>, <a href="createRay.html" class="code" title="function ray = createRay(varargin)">createRay</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 31/10/2003.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="angle3Points.html" class="code" title="function theta = angle3Points(varargin)">angle3Points</a>	ANGLE3POINTS Compute oriented angle made by 3 points.</li><li><a href="bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>	BISECTOR Return the bisector of two lines, or 3 points.</li><li><a href="crackPattern.html" class="code" title="function edges = crackPattern(box, points, alpha, varargin)">crackPattern</a>	CRACKPATTERN Create a (bounded) crack pattern tessellation.</li><li><a href="crackPattern2.html" class="code" title="function edges = crackPattern2(box, points, alpha, varargin)">crackPattern2</a>	CRACKPATTERN2 Create a (bounded) crack pattern tessellation.</li><li><a href="edgeAngle.html" class="code" title="function theta = edgeAngle(edge)">edgeAngle</a>	EDGEANGLE Return angle of edge.</li><li><a href="orientedBox.html" class="code" title="function obox = orientedBox(points)">orientedBox</a>	ORIENTEDBOX Minimum-width oriented bounding box of a set of points.</li><li><a href="radicalAxis.html" class="code" title="function line = radicalAxis(circle1, circle2)">radicalAxis</a>	RADICALAXIS Compute the radical axis (or radical line) of 2 circles.</li><li><a href="transformLine.html" class="code" title="function dest = transformLine(line, trans)">transformLine</a>	TRANSFORMLINE Transform a line with an affine transform.</li><li><a href="../../matGeom/polygons2d/expandPolygon.html" class="code" title="function loops = expandPolygon(poly, dist, varargin)">expandPolygon</a>	EXPANDPOLYGON Expand a polygon by a given (signed) distance.</li><li><a href="../../matGeom/polygons2d/medialAxisConvex.html" class="code" title="function [nodes, edges] = medialAxisConvex(points)">medialAxisConvex</a>	MEDIALAXISCONVEX Compute medial axis of a convex polygon.</li><li><a href="../../matGeom/polygons2d/minimumCaliperDiameter.html" class="code" title="function [min_width, min_angle] = minimumCaliperDiameter(points)">minimumCaliperDiameter</a>	MINIMUMCALIPERDIAMETER Minimum caliper diameter of a set of points.</li><li><a href="../../matGeom/polygons2d/polygonSymmetryAxis.html" class="code" title="function axis = polygonSymmetryAxis(poly)">polygonSymmetryAxis</a>	POLYGONSYMMETRYAXIS Try to identify symmetry axis of polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function line = createLine(varargin)</a>
+0002 <span class="comment">%CREATELINE Create a straight line from 2 points, or from other inputs.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   Line is represented in a parametric form : [x0 y0 dx dy]</span>
+0005 <span class="comment">%   x = x0 + t*dx</span>
+0006 <span class="comment">%   y = y0 + t*dy;</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   L = createLine(p1, p2);</span>
+0010 <span class="comment">%   Returns the line going through the two given points.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   L = createLine(x0, y0, dx, dy);</span>
+0013 <span class="comment">%   Returns the line going through point (x0, y0) and with direction</span>
+0014 <span class="comment">%   vector(dx, dy).</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   L = createLine(LINE);</span>
+0017 <span class="comment">%   where LINE is an array of 4 values, creates the line going through the</span>
+0018 <span class="comment">%   point (LINE(1) LINE(2)), and with direction given by vector (LINE(3)</span>
+0019 <span class="comment">%   LINE(4)).</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   L = createLine(THETA);</span>
+0022 <span class="comment">%   Create a polar line originated at (0,0) and with angle THETA.</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   L = createLine(p, THETA);</span>
+0025 <span class="comment">%   Create a polar line originated at p and with angle THETA.</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   L = createLine(RHO, THETA);</span>
+0028 <span class="comment">%   Create a polar line with normal theta, and with min distance to origin</span>
+0029 <span class="comment">%   equal to rho. rho can be negative, in this case, the line is the same</span>
+0030 <span class="comment">%   as with CREATELINE(-rho, theta+pi), but the orientation is different.</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">%   Note: in all cases, parameters can be vertical arrays of the same</span>
+0034 <span class="comment">%   dimension. The result is then an array of lines, of dimensions [N*4].</span>
+0035 <span class="comment">%</span>
+0036 <span class="comment">%</span>
+0037 <span class="comment">%   See also:</span>
+0038 <span class="comment">%   lines2d, createEdge, createRay</span>
+0039 <span class="comment">%</span>
+0040 <span class="comment">%   ---------</span>
+0041 <span class="comment">%   author : David Legland</span>
+0042 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0043 <span class="comment">%   created the 31/10/2003.</span>
+0044 <span class="comment">%</span>
+0045 
+0046 <span class="comment">%   HISTORY :</span>
+0047 <span class="comment">%   18/02/2004 : add more possibilities to create lines (4 parameters,</span>
+0048 <span class="comment">%      all param in a single tab, and point + dx + dy.</span>
+0049 <span class="comment">%      Also add support for creation of arrays of lines.</span>
+0050 
+0051 <span class="comment">%   NOTE : A line can also be represented with a 1*5 array :</span>
+0052 <span class="comment">%   [x0 y0 dx dy t].</span>
+0053 <span class="comment">%   whith 't' being one of the following :</span>
+0054 <span class="comment">%   - t=0 : line is a singleton (x0,y0)</span>
+0055 <span class="comment">%   - t=1 : line is an edge segment, between points (x0,y0) and (x0+dx,</span>
+0056 <span class="comment">%   y0+dy).</span>
+0057 <span class="comment">%   - t=Inf : line is a Ray, originated from (x0,y0) and going to infinity</span>
+0058 <span class="comment">%   in the direction(dx,dy).</span>
+0059 <span class="comment">%   - t=-Inf : line is a Ray, originated from (x0,y0) and going to infinity</span>
+0060 <span class="comment">%   in the direction(-dx,-dy).</span>
+0061 <span class="comment">%   - t=NaN : line is a real straight line, and contains all points</span>
+0062 <span class="comment">%   verifying the above equation.</span>
+0063 <span class="comment">%   This seems us a convenient way to represent uniformly all kind of lines</span>
+0064 <span class="comment">%   (including edges, rays, and even point).</span>
+0065 <span class="comment">%</span>
+0066 
+0067 <span class="comment">%   NOTE2 : Any line object can be represented using a 1x6 array :</span>
+0068 <span class="comment">%   [x0 y0 dx dy t0 t1]</span>
+0069 <span class="comment">%   the first 4 parameters define the supporting line,</span>
+0070 <span class="comment">%   t0 represent the position of the first point on the line,</span>
+0071 <span class="comment">%   and t1 the position of the last point.</span>
+0072 <span class="comment">%   * for edges : t0 = 0, and t1=1</span>
+0073 <span class="comment">%   * for straight lines : t0 = -inf, t1=inf</span>
+0074 <span class="comment">%   * for rays : t0=0, t1=inf (or t0=-inf,t1=0 for inverted ray).</span>
+0075 <span class="comment">%   I propose to call these objects 'lineArc'</span>
+0076 
+0077 <span class="keyword">if</span> length(varargin)==1
+0078     <span class="comment">% Only one input parameter. It can be :</span>
+0079     <span class="comment">% - line angle</span>
+0080     <span class="comment">% - array of four parameters</span>
+0081     <span class="comment">% TODO : add control for arrays of lines.</span>
+0082     var = varargin{1};
+0083     
+0084     <span class="keyword">if</span> size(var, 2)==4
+0085         <span class="comment">% 4 parameters of the line in a single array.</span>
+0086         line = var;
+0087     <span class="keyword">elseif</span> size(var, 2)==1
+0088         <span class="comment">% 1 parameter : angle of the line, going through origin.</span>
+0089         line = [zeros(size(var)) zeros(size(var)) cos(var) sin(var)];
+0090     <span class="keyword">else</span>
+0091         error(<span class="string">'wrong number of dimension for arg1 : can be 1 or 4'</span>);
+0092     <span class="keyword">end</span>
+0093     
+0094 <span class="keyword">elseif</span> length(varargin)==2    
+0095     <span class="comment">% 2 input parameters. They can be :</span>
+0096     <span class="comment">% - line angle and signed distance to origin.</span>
+0097     <span class="comment">% - 2 points, then 2 arrays of 1*2 double.</span>
+0098     v1 = varargin{1};
+0099     v2 = varargin{2};
+0100     <span class="keyword">if</span> size(v1, 2)==2 &amp;&amp; size(v2, 2)==1
+0101         <span class="comment">% first param is point, and second param is angle of line</span>
+0102         line = [v1(:,1), v1(:,2) cos(v2) sin(v2)];
+0103     <span class="keyword">elseif</span> size(v1, 2)==1
+0104         <span class="comment">% first param is angle of line, and second param is signed distance</span>
+0105         <span class="comment">% to origin.</span>
+0106         line = [v1.*cos(v2) v1.*sin(v2) -sin(v2) cos(v2)];
+0107     <span class="keyword">elseif</span> size(v1, 2)==3 || size(v2, 2)==3
+0108         error(<span class="string">'The 1st or 2nd input argument has 3 columns. You may want to try createLine3d.'</span>);
+0109     <span class="keyword">else</span>
+0110         <span class="comment">% first input parameter is first point, and second input is the</span>
+0111         <span class="comment">% second point.</span>
+0112         line = [v1(:,1), v1(:,2), v2(:,1)-v1(:,1), v2(:,2)-v1(:,2)];    
+0113     <span class="keyword">end</span>
+0114     
+0115 <span class="keyword">elseif</span> length(varargin)==3
+0116     <span class="comment">% 3 input parameters :</span>
+0117     <span class="comment">% first one is a point belonging to the line,</span>
+0118     <span class="comment">% second and third ones are direction vector of the line (dx and dy).</span>
+0119     p = varargin{1};
+0120     line = [p(:,1) p(:,2) varargin{2} varargin{3}];
+0121    
+0122 <span class="keyword">elseif</span> length(varargin)==4
+0123     <span class="comment">% 4 input parameters :</span>
+0124     <span class="comment">% they are x0, y0 (point belongng to line) and dx, dy (direction vector</span>
+0125     <span class="comment">% of the line).</span>
+0126     <span class="comment">% All parameters should have the same size.</span>
+0127     line = [varargin{1} varargin{2} varargin{3} varargin{4}];
+0128 <span class="keyword">else</span>
+0129     error(<span class="string">'Wrong number of arguments in ''createLine'' '</span>);
+0130 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of isPointInEllipsoid</title>
+  <meta name="keywords" content="isPointInEllipsoid">
+  <meta name="description" content="Check if a point is located inside a 3D ellipsoid.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; isPointInEllipsoid.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>isPointInEllipsoid
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Check if a point is located inside a 3D ellipsoid.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function b = isPointInEllipsoid(point, elli, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Check if a point is located inside a 3D ellipsoid.
+
+   output = isPointInEllipsoid(input)
+
+   Example
+     % create an ellipsoid
+     elli = [10 20 30   50 30 10   5 10 0];
+     display it
+     figure; hold on;
+     drawEllipsoid(elli, 'FaceColor', 'g', 'FaceAlpha', .5, ...
+         'drawEllipses', true, 'EllipseColor', 'b', 'EllipseWidth', 3);
+     view(3); axis equal;
+     % check for a point inside the ellipsoid
+     p1 = [20 30 35];
+     b1 = isPointInEllipsoid(p1, elli)
+     ans = 
+         1
+     % check for a point outside the ellipsoid
+     p2 = [-20 10 25];
+     b2 = isPointInEllipsoid(p2, elli)
+     ans = 
+         0
+   
+
+   See also
+     <a href="equivalentEllipsoid.html" class="code" title="function ell = equivalentEllipsoid(points)">equivalentEllipsoid</a>, <a href="drawEllipsoid.html" class="code" title="function varargout = drawEllipsoid(elli, varargin)">drawEllipsoid</a>, isPointInEllipse</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createScaling3d.html" class="code" title="function trans = createScaling3d(varargin)">createScaling3d</a>	CREATESCALING3D Create the 4x4 matrix of a 3D scaling.</li><li><a href="eulerAnglesToRotation3d.html" class="code" title="function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)">eulerAnglesToRotation3d</a>	EULERANGLESTOROTATION3D Convert 3D Euler angles to 3D rotation matrix.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function b = isPointInEllipsoid(point, elli, varargin)</a>
+0002 <span class="comment">% Check if a point is located inside a 3D ellipsoid.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   output = isPointInEllipsoid(input)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   Example</span>
+0007 <span class="comment">%     % create an ellipsoid</span>
+0008 <span class="comment">%     elli = [10 20 30   50 30 10   5 10 0];</span>
+0009 <span class="comment">%     display it</span>
+0010 <span class="comment">%     figure; hold on;</span>
+0011 <span class="comment">%     drawEllipsoid(elli, 'FaceColor', 'g', 'FaceAlpha', .5, ...</span>
+0012 <span class="comment">%         'drawEllipses', true, 'EllipseColor', 'b', 'EllipseWidth', 3);</span>
+0013 <span class="comment">%     view(3); axis equal;</span>
+0014 <span class="comment">%     % check for a point inside the ellipsoid</span>
+0015 <span class="comment">%     p1 = [20 30 35];</span>
+0016 <span class="comment">%     b1 = isPointInEllipsoid(p1, elli)</span>
+0017 <span class="comment">%     ans =</span>
+0018 <span class="comment">%         1</span>
+0019 <span class="comment">%     % check for a point outside the ellipsoid</span>
+0020 <span class="comment">%     p2 = [-20 10 25];</span>
+0021 <span class="comment">%     b2 = isPointInEllipsoid(p2, elli)</span>
+0022 <span class="comment">%     ans =</span>
+0023 <span class="comment">%         0</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%   See also</span>
+0027 <span class="comment">%     equivalentEllipsoid, drawEllipsoid, isPointInEllipse</span>
+0028 <span class="comment">%</span>
+0029  
+0030 <span class="comment">% ------</span>
+0031 <span class="comment">% Author: David Legland</span>
+0032 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0033 <span class="comment">% INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0034 <span class="comment">% Created: 2020-11-19,    using Matlab 9.8.0.1323502 (R2020a)</span>
+0035 <span class="comment">% Copyright 2020 INRAE.</span>
+0036 
+0037 <span class="comment">% extract computation tolerance</span>
+0038 tol = 1e-14;
+0039 <span class="keyword">if</span> ~isempty(varargin)
+0040     tol = varargin{1};
+0041 <span class="keyword">end</span>
+0042 
+0043 <span class="comment">% compute ellipse to unit circle transform</span>
+0044 rot = <a href="eulerAnglesToRotation3d.html" class="code" title="function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)">eulerAnglesToRotation3d</a>(elli(7:9));
+0045 sca = <a href="createScaling3d.html" class="code" title="function trans = createScaling3d(varargin)">createScaling3d</a>(elli(4:6));
+0046 trans = inv(rot * sca);
+0047 
+0048 <span class="comment">% transform points to unit sphere basis</span>
+0049 pTrans = bsxfun(@minus, point, elli(1:3));
+0050 pTrans = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(pTrans, trans);
+0051 
+0052 <span class="comment">% test if norm is smaller than 1</span>
+0053 b = sqrt(sum(power(pTrans, 2), 2)) - 1 &lt;= tol;
+0054</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

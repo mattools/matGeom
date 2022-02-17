@@ -1,0 +1,417 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of meshCurvatures</title>
+  <meta name="keywords" content="meshCurvatures">
+  <meta name="description" content="Compute principal curvatures on mesh vertices.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; meshCurvatures.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>meshCurvatures
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Compute principal curvatures on mesh vertices.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [C1, C2, U1, U2, H, K, N] = meshCurvatures(vertices, faces, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Compute principal curvatures on mesh vertices.
+
+   [C1, C2] = meshCurvatures(VERTICES, FACES)
+   Computes the principal curvatures C1 and C2 for each vertex of the mesh
+   defined by VERTICES and FACES.
+
+   [C1, C2] = meshCurvatures(..., PNAME, PVALUE)
+   Provides additional input arguments based on a list of name-value pairs
+   of arguments. Parameter names can be:
+   * 'SmoothingSteps'      (integer, default: 3) 
+       Specifies the number of steps for smoothing vertex curvature
+       tensors.  
+   * 'Verbose'             (boolean, default: true) 
+       Displays details about algorithm processing. 
+   * 'ShowProgress'        (boolean, default: true) 
+       Displays a text-based progress bar.
+
+   Algorithm
+   The function is adapted from the &quot;compute_curvature&quot; function, in the
+   &quot;toolbox_graph&quot; fro Gabriel Peyre.
+   The basic idea is to define a curvature tensor for each edge, by
+   assigning a minimum curvature equal to zero along the edge, and a
+   maximum curvature equal to the dihedral angle across the edge.
+   Averaging around the neighbors of a vertex v yields a summation formula
+   over the neighbor edges to compute the curvature tensor of a vertex:
+           1
+   C(v) = ----     Sum       \beta(e) || e \cap A(v) || ebar ebar^t
+          A(v)  {e \in A(v)}
+   where:
+   * A(v) is the neighborhood region, usually defined as a 'ring' around
+       the vertex v
+   * beta(e) is the dihedral angle between the normals of the two faces
+       incident to edge e
+   * || e \cap A(v) || is the length of e (more exactly, the length of the
+       part of e contained within the neighborhood region
+   * ebar is the normalized edge
+
+   The curvature tensor is then decomposed into C = P D P^-1, with P
+   containing main direction vectors and normal, and D being a diagonal
+   matrix with the two main curvatures and zero along the diagonal.
+   
+   References
+   * David Cohen-Steiner and Jean-Marie Morvan (2003). 
+       &quot;Restricted Delaunay triangulations and normal cycle&quot;. 
+       In Proc. 19th Annual ACM Symposium on Computational Geometry, 
+       pages 237-246. 
+   * Pierre Alliez, David Cohen-Steiner, Olivier Devillers, Bruno Levy,
+       and Mathieu Desbrun (2003). &quot;Anisotropic Polygonal Remeshing&quot;. 
+       ACM Transactions on Graphics. 
+       (SIGGRAPH '2003 Conference Proceedings)
+   * Mario Botsch, Leif Kobbelt, M. Pauly, P. Alliez, B. Levy (2010).
+       &quot;Polygon Mesh Processing&quot;, Taylor and Francis Group, New York.
+   
+   Example
+     [v, f] = torusMesh;
+     f2 = triangulateFaces(f);
+     [c1, c2] = meshCurvatures(v, f2);
+     figure; hold on; axis equal; view(3);
+     drawMesh(v, f2, 'VertexColor', c1 .* c2);
+
+   See also
+     meshes3d, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a>, <a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>	CROSSPRODUCT3D Vector cross product faster than inbuilt MATLAB cross.</li><li><a href="meshFaceNormals.html" class="code" title="function normals = meshFaceNormals(varargin)">meshFaceNormals</a>	MESHFACENORMALS Compute normal vector of faces in a 3D mesh.</li><li><a href="meshVolume.html" class="code" title="function vol = meshVolume(varargin)">meshVolume</a>	(Signed) volume of the space enclosed by a polygonal mesh.</li><li><a href="smoothMeshFunction.html" class="code" title="function f = smoothMeshFunction(vertices, faces, f, varargin) %#ok<INUSL>">smoothMeshFunction</a>	Apply smoothing on a functions defines on mesh vertices.</li><li><a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>	TRIANGULATEFACES Convert face array to an array of triangular faces.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function displayProgress(n, N)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [C1, C2, U1, U2, H, K, N] = meshCurvatures(vertices, faces, varargin)</a>
+0002 <span class="comment">% Compute principal curvatures on mesh vertices.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [C1, C2] = meshCurvatures(VERTICES, FACES)</span>
+0005 <span class="comment">%   Computes the principal curvatures C1 and C2 for each vertex of the mesh</span>
+0006 <span class="comment">%   defined by VERTICES and FACES.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   [C1, C2] = meshCurvatures(..., PNAME, PVALUE)</span>
+0009 <span class="comment">%   Provides additional input arguments based on a list of name-value pairs</span>
+0010 <span class="comment">%   of arguments. Parameter names can be:</span>
+0011 <span class="comment">%   * 'SmoothingSteps'      (integer, default: 3)</span>
+0012 <span class="comment">%       Specifies the number of steps for smoothing vertex curvature</span>
+0013 <span class="comment">%       tensors.</span>
+0014 <span class="comment">%   * 'Verbose'             (boolean, default: true)</span>
+0015 <span class="comment">%       Displays details about algorithm processing.</span>
+0016 <span class="comment">%   * 'ShowProgress'        (boolean, default: true)</span>
+0017 <span class="comment">%       Displays a text-based progress bar.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   Algorithm</span>
+0020 <span class="comment">%   The function is adapted from the &quot;compute_curvature&quot; function, in the</span>
+0021 <span class="comment">%   &quot;toolbox_graph&quot; fro Gabriel Peyre.</span>
+0022 <span class="comment">%   The basic idea is to define a curvature tensor for each edge, by</span>
+0023 <span class="comment">%   assigning a minimum curvature equal to zero along the edge, and a</span>
+0024 <span class="comment">%   maximum curvature equal to the dihedral angle across the edge.</span>
+0025 <span class="comment">%   Averaging around the neighbors of a vertex v yields a summation formula</span>
+0026 <span class="comment">%   over the neighbor edges to compute the curvature tensor of a vertex:</span>
+0027 <span class="comment">%           1</span>
+0028 <span class="comment">%   C(v) = ----     Sum       \beta(e) || e \cap A(v) || ebar ebar^t</span>
+0029 <span class="comment">%          A(v)  {e \in A(v)}</span>
+0030 <span class="comment">%   where:</span>
+0031 <span class="comment">%   * A(v) is the neighborhood region, usually defined as a 'ring' around</span>
+0032 <span class="comment">%       the vertex v</span>
+0033 <span class="comment">%   * beta(e) is the dihedral angle between the normals of the two faces</span>
+0034 <span class="comment">%       incident to edge e</span>
+0035 <span class="comment">%   * || e \cap A(v) || is the length of e (more exactly, the length of the</span>
+0036 <span class="comment">%       part of e contained within the neighborhood region</span>
+0037 <span class="comment">%   * ebar is the normalized edge</span>
+0038 <span class="comment">%</span>
+0039 <span class="comment">%   The curvature tensor is then decomposed into C = P D P^-1, with P</span>
+0040 <span class="comment">%   containing main direction vectors and normal, and D being a diagonal</span>
+0041 <span class="comment">%   matrix with the two main curvatures and zero along the diagonal.</span>
+0042 <span class="comment">%</span>
+0043 <span class="comment">%   References</span>
+0044 <span class="comment">%   * David Cohen-Steiner and Jean-Marie Morvan (2003).</span>
+0045 <span class="comment">%       &quot;Restricted Delaunay triangulations and normal cycle&quot;.</span>
+0046 <span class="comment">%       In Proc. 19th Annual ACM Symposium on Computational Geometry,</span>
+0047 <span class="comment">%       pages 237-246.</span>
+0048 <span class="comment">%   * Pierre Alliez, David Cohen-Steiner, Olivier Devillers, Bruno Levy,</span>
+0049 <span class="comment">%       and Mathieu Desbrun (2003). &quot;Anisotropic Polygonal Remeshing&quot;.</span>
+0050 <span class="comment">%       ACM Transactions on Graphics.</span>
+0051 <span class="comment">%       (SIGGRAPH '2003 Conference Proceedings)</span>
+0052 <span class="comment">%   * Mario Botsch, Leif Kobbelt, M. Pauly, P. Alliez, B. Levy (2010).</span>
+0053 <span class="comment">%       &quot;Polygon Mesh Processing&quot;, Taylor and Francis Group, New York.</span>
+0054 <span class="comment">%</span>
+0055 <span class="comment">%   Example</span>
+0056 <span class="comment">%     [v, f] = torusMesh;</span>
+0057 <span class="comment">%     f2 = triangulateFaces(f);</span>
+0058 <span class="comment">%     [c1, c2] = meshCurvatures(v, f2);</span>
+0059 <span class="comment">%     figure; hold on; axis equal; view(3);</span>
+0060 <span class="comment">%     drawMesh(v, f2, 'VertexColor', c1 .* c2);</span>
+0061 <span class="comment">%</span>
+0062 <span class="comment">%   See also</span>
+0063 <span class="comment">%     meshes3d, drawMesh, triangulateFaces</span>
+0064 <span class="comment">%</span>
+0065  
+0066 <span class="comment">% ------</span>
+0067 <span class="comment">% Author: David Legland</span>
+0068 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0069 <span class="comment">% INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0070 <span class="comment">% Created: 2021-09-21,    using Matlab 9.10.0.1684407 (R2021a) Update 3</span>
+0071 <span class="comment">% Copyright 2021 INRAE.</span>
+0072 
+0073 
+0074 <span class="comment">%% Process input arguments</span>
+0075 
+0076 <span class="comment">% default values for options</span>
+0077 nIters = 3;
+0078 verbose = true;
+0079 showProgress = true;
+0080 
+0081 <span class="keyword">while</span> length(varargin) &gt; 1
+0082     name = varargin{1};
+0083     <span class="keyword">if</span> strcmpi(name, <span class="string">'SmoothingSteps'</span>)
+0084         nIters = varargin{2};
+0085     <span class="keyword">elseif</span> strcmpi(name, <span class="string">'Verbose'</span>)
+0086         verbose = varargin{2};
+0087     <span class="keyword">elseif</span> strcmpi(name, <span class="string">'ShowProgress'</span>)
+0088         showProgress = varargin{2};
+0089     <span class="keyword">else</span>
+0090         error(<span class="string">'Unknown option: %s'</span>, name);
+0091     <span class="keyword">end</span>
+0092     varargin(1:2) = [];
+0093 <span class="keyword">end</span>
+0094 
+0095 <span class="comment">% validate vertices</span>
+0096 <span class="keyword">if</span> ~isnumeric(vertices) || size(vertices, 2) ~= 3
+0097     error(<span class="string">'Requires vertices to be a N-by-3 numeric array'</span>);
+0098 <span class="keyword">end</span>
+0099 
+0100 <span class="comment">% ensure faces are triangular</span>
+0101 <span class="keyword">if</span> ~isnumeric(faces) || size(faces, 2) &gt; 3
+0102     warning(<span class="string">'requires triangle mesh, forces triangulation'</span>);
+0103     faces = <a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>(faces);
+0104 <span class="keyword">end</span>
+0105 
+0106 
+0107 <span class="comment">%% Retrieve adjacency relationships</span>
+0108 
+0109 <span class="keyword">if</span> verbose
+0110     disp(<span class="string">'compute adjacencies'</span>);
+0111 <span class="keyword">end</span>
+0112 
+0113 <span class="comment">% number of elements of each type</span>
+0114 nv = size(vertices, 1);
+0115 nf = size(faces, 1);
+0116 
+0117 <span class="comment">% ev1 and ev2 are indices of source and target vertex of each edge</span>
+0118 <span class="comment">% (recomputed later)</span>
+0119 ev1 = [faces(:,1); faces(:,2); faces(:,3)];
+0120 ev2 = [faces(:,2); faces(:,3); faces(:,1)];
+0121 
+0122 <span class="comment">% Compute sparse matrix representing edge-to-face adjacency</span>
+0123 s = [1:nf 1:nf 1:nf]';
+0124 A = sparse(ev1, ev2, s, nv, nv); 
+0125 
+0126 <span class="comment">% converts sparse matrix to indices of adjacent vertices and faces</span>
+0127 [~, ~, ef1] = find(A);         <span class="comment">% index of 'right' face</span>
+0128 [ev1, ev2, ef2] = find(A');    <span class="comment">% index of 'left' face, and of vertices</span>
+0129 
+0130 <span class="comment">% edges are consdered twice (one for each vertex)</span>
+0131 <span class="comment">% keep only the edge with lower source index</span>
+0132 inds = find(ev1 &lt; ev2);
+0133 ef1 = ef1(inds);
+0134 ef2 = ef2(inds);
+0135 ev1 = ev1(inds); 
+0136 ev2 = ev2(inds);
+0137 
+0138 <span class="comment">% number of edges</span>
+0139 ne = length(ev1);
+0140 
+0141 
+0142 <span class="comment">%% Compute geometry features</span>
+0143 
+0144 <span class="comment">% compute edge direction vectors</span>
+0145 edgeVectors = vertices(ev2,:) - vertices(ev1,:);
+0146 
+0147 <span class="comment">% normalize edge direction vecotrs</span>
+0148 d = sqrt(sum(edgeVectors.^2, 2));
+0149 edgeVectors = bsxfun(@rdivide, edgeVectors, d);
+0150 
+0151 <span class="comment">% avoid too large numerics</span>
+0152 d = d ./ mean(d);
+0153 
+0154 <span class="comment">% normals to faces</span>
+0155 normals = <a href="meshFaceNormals.html" class="code" title="function normals = meshFaceNormals(varargin)">meshFaceNormals</a>(vertices, faces);
+0156 
+0157 <span class="comment">% ensure normals point outward the mesh</span>
+0158 <span class="keyword">if</span> <a href="meshVolume.html" class="code" title="function vol = meshVolume(varargin)">meshVolume</a>(vertices, faces) &lt; 0
+0159     normals = -normals;
+0160 <span class="keyword">end</span>
+0161 
+0162 <span class="comment">% inner product of normals</span>
+0163 dp = sum(normals(ef1, :) .* normals(ef2, :), 2);
+0164 
+0165 <span class="comment">% compute the (unsigned) dihedral angle between the normals of the two</span>
+0166 <span class="comment">% faces incident to each edge</span>
+0167 beta = acos(min(max(dp, -1), 1));
+0168 
+0169 <span class="comment">% relatice orientation of face normals cross product and edge orientation</span>
+0170 cp = <a href="../../matGeom/geom3d/crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>(normals(ef1, :), normals(ef2, :));
+0171 si = sign(sum(cp .* edgeVectors, 2));
+0172 
+0173 <span class="comment">% compute signed dihedral angle</span>
+0174 beta = beta .* si;
+0175 
+0176 
+0177 <span class="comment">%% Compute tensors</span>
+0178 
+0179 <span class="keyword">if</span> verbose
+0180     disp(<span class="string">'compute edge tensors'</span>);
+0181 <span class="keyword">end</span>
+0182 
+0183 <span class="comment">% curvature tensor of each edge</span>
+0184 T = zeros(3, 3, ne);
+0185 <span class="keyword">for</span> i = 1:3
+0186     <span class="keyword">for</span> j = 1:i
+0187         T(i, j, :) = reshape(edgeVectors(:,i) .* edgeVectors(:,j), 1, 1, ne);
+0188         T(j, i, :) = T(i, j, :);
+0189     <span class="keyword">end</span>
+0190 <span class="keyword">end</span>
+0191 T = bsxfun(@times, T, reshape(d .* beta, [1 1 ne]));
+0192 
+0193 <span class="comment">% curvature tensor of each vertex by pooling edge tensors</span>
+0194 Tv = zeros(3, 3, nv);
+0195 w = zeros(1, 1, nv);
+0196 <span class="keyword">for</span> k = 1:ne
+0197     <span class="keyword">if</span> showProgress
+0198         <a href="#_sub1" class="code" title="subfunction displayProgress(n, N)">displayProgress</a>(k, ne);
+0199     <span class="keyword">end</span>
+0200     Tv(:,:,ev1(k)) = Tv(:,:,ev1(k)) + T(:,:,k);
+0201     Tv(:,:,ev2(k)) = Tv(:,:,ev2(k)) + T(:,:,k);
+0202     w(:,:,ev1(k)) = w(:,:,ev1(k)) + 1;
+0203     w(:,:,ev2(k)) = w(:,:,ev2(k)) + 1;
+0204 <span class="keyword">end</span>
+0205 w(w &lt; eps) = 1;
+0206 Tv = Tv ./ repmat(w, [3 3 1]);
+0207 
+0208 <span class="keyword">if</span> verbose
+0209     disp(<span class="string">'average vertex tensors'</span>);
+0210 <span class="keyword">end</span>
+0211 
+0212 <span class="comment">% apply smoothing on the tensor field</span>
+0213 <span class="keyword">for</span> i = 1:3
+0214     <span class="keyword">for</span> j = 1:3
+0215         a = Tv(i, j, :);
+0216         a = <a href="smoothMeshFunction.html" class="code" title="function f = smoothMeshFunction(vertices, faces, f, varargin) %#ok<INUSL>">smoothMeshFunction</a>(vertices, faces, a(:), nIters);
+0217         Tv(i, j, :) = reshape(a, [1 1 nv]);
+0218     <span class="keyword">end</span>
+0219 <span class="keyword">end</span>
+0220 
+0221 
+0222 <span class="comment">%% Retrieve curvatures and eigen vectors from tensors</span>
+0223 
+0224 <span class="keyword">if</span> verbose
+0225     disp(<span class="string">'retrieve curvatures'</span>);
+0226 <span class="keyword">end</span>
+0227 
+0228 <span class="comment">% allocate memory</span>
+0229 U = zeros(3, 3, nv);
+0230 D = zeros(3, nv);
+0231 
+0232 <span class="comment">% iterate over vertices</span>
+0233 <span class="keyword">for</span> k = 1:nv
+0234     <span class="comment">% display progress</span>
+0235     <span class="keyword">if</span> showProgress
+0236         <a href="#_sub1" class="code" title="subfunction displayProgress(n, N)">displayProgress</a>(k,nv);
+0237     <span class="keyword">end</span>
+0238     
+0239     <span class="comment">% extract eigenvectors and eigenvalues for current vertex</span>
+0240     [u, d] = eig(Tv(:,:,k));
+0241     d = real(diag(d));
+0242     
+0243     <span class="comment">% sort acording to [normal, min curv, max curv]</span>
+0244     [~, I] = sort(abs(d));    
+0245     D(:, k) = d(I);
+0246     U(:, :, k) = real(u(:,I));
+0247 <span class="keyword">end</span>
+0248 
+0249 <span class="comment">% retrieve main curvatures and associated directions</span>
+0250 C1 = D(2,:)';
+0251 C2 = D(3,:)';
+0252 U1 = squeeze(U(:,3,:))';
+0253 U2 = squeeze(U(:,2,:))';
+0254 
+0255 <span class="comment">% enforce C1 &lt; C2</span>
+0256 inds = find(C1 &gt; C2);
+0257 C1tmp = C1; 
+0258 U1tmp = U1;
+0259 C1(inds) = C2(inds); 
+0260 C2(inds) = C1tmp(inds);
+0261 U1(inds,:) = U2(inds,:); 
+0262 U2(inds,:) = U1tmp(inds,:);
+0263 
+0264 <span class="comment">% compute optional output arguments</span>
+0265 <span class="keyword">if</span> nargout &gt; 4
+0266     <span class="comment">% average and gaussian curvatures</span>
+0267     H = (C1 + C2) / 2;
+0268     K = C1 .* C2;
+0269     
+0270     <span class="keyword">if</span> nargout &gt; 6
+0271         <span class="comment">% normal vector for each vertex</span>
+0272         N = squeeze(U(:,1,:))';
+0273     <span class="keyword">end</span>
+0274 <span class="keyword">end</span>
+0275 
+0276 
+0277 <a name="_sub1" href="#_subfunctions" class="code">function displayProgress(n, N)</a>
+0278 <span class="comment">% Display the progress of current step using a text-based progress bar.</span>
+0279 <span class="comment">%</span>
+0280 <span class="comment">% based on the 'progressbar' function in G. Peyre's Graph Toolbox.</span>
+0281 
+0282 <span class="comment">% width of the progress bar</span>
+0283 w = 20;
+0284 
+0285 <span class="comment">% compute progress ratio as an integer betsween 0 and w</span>
+0286 p = min( floor(n/N*(w+1)), w);
+0287 
+0288 <span class="keyword">global</span> pprev;
+0289 <span class="keyword">if</span> isempty(pprev)
+0290     pprev = -1;
+0291 <span class="keyword">end</span>
+0292 
+0293 <span class="keyword">if</span> p ~= pprev
+0294     str1 = repmat(<span class="string">'*'</span>, 1, p);
+0295     str2 = repmat(<span class="string">'.'</span>, 1, w-p);
+0296     str = sprintf(<span class="string">'[%s%s]'</span>, str1, str2);
+0297     <span class="keyword">if</span> n &gt; 1
+0298         <span class="comment">% clear previous string</span>
+0299         fprintf(repmat(<span class="string">'\b'</span>, [1 length(str)]));
+0300     <span class="keyword">end</span>
+0301     fprintf(str);
+0302 <span class="keyword">end</span>
+0303 
+0304 pprev = p;
+0305 <span class="keyword">if</span> n == N
+0306     fprintf(<span class="string">'\n'</span>);
+0307 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

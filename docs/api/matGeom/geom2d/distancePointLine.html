@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of distancePointLine</title>
+  <meta name="keywords" content="distancePointLine">
+  <meta name="description" content="DISTANCEPOINTLINE Minimum distance between a point and a line.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; distancePointLine.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>distancePointLine
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DISTANCEPOINTLINE Minimum distance between a point and a line.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [dist, pos] = distancePointLine(point, line) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DISTANCEPOINTLINE Minimum distance between a point and a line.
+
+   D = distancePointLine(POINT, LINE)
+   Return the euclidean distance between line LINE and point POINT. 
+
+   LINE has the form: [x0 y0 dx dy], and POINT is [x y].
+
+   If LINE is N-by-4 array, result is N-by-1 array computes for each line.
+
+   If POINT is N-by-2, then result is computed for each point.
+
+   If both POINT and LINE are array, result is computed for each couple of
+   point and line, and is returned in a NP-by-NL array, where NP is the
+   number of points, and NL is the number of lines.
+
+
+   See also:
+   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>, <a href="distancePointEdge.html" class="code" title="function [dist, pos] = distancePointEdge(point, edge)">distancePointEdge</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="orientedBox.html" class="code" title="function obox = orientedBox(points)">orientedBox</a>	ORIENTEDBOX Minimum-width oriented bounding box of a set of points.</li><li><a href="../../matGeom/polygons2d/medialAxisConvex.html" class="code" title="function [nodes, edges] = medialAxisConvex(points)">medialAxisConvex</a>	MEDIALAXISCONVEX Compute medial axis of a convex polygon.</li><li><a href="../../matGeom/polygons2d/minimumCaliperDiameter.html" class="code" title="function [min_width, min_angle] = minimumCaliperDiameter(points)">minimumCaliperDiameter</a>	MINIMUMCALIPERDIAMETER Minimum caliper diameter of a set of points.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [dist, pos] = distancePointLine(point, line)</a>
+0002 <span class="comment">%DISTANCEPOINTLINE Minimum distance between a point and a line.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   D = distancePointLine(POINT, LINE)</span>
+0005 <span class="comment">%   Return the euclidean distance between line LINE and point POINT.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   LINE has the form: [x0 y0 dx dy], and POINT is [x y].</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   If LINE is N-by-4 array, result is N-by-1 array computes for each line.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   If POINT is N-by-2, then result is computed for each point.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   If both POINT and LINE are array, result is computed for each couple of</span>
+0014 <span class="comment">%   point and line, and is returned in a NP-by-NL array, where NP is the</span>
+0015 <span class="comment">%   number of points, and NL is the number of lines.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   See also:</span>
+0019 <span class="comment">%   lines2d, points2d, distancePoints, distancePointEdge</span>
+0020 <span class="comment">%</span>
+0021    
+0022 <span class="comment">% ------</span>
+0023 <span class="comment">% Author: David Legland</span>
+0024 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0025 <span class="comment">% Created: 2005-06-24</span>
+0026 <span class="comment">% Copyright 2016 INRA - BIA-BIBS.</span>
+0027 
+0028 <span class="comment">%   HISTORY:</span>
+0029 <span class="comment">%   2012-10-24 rewrite using bsxfun</span>
+0030 
+0031 <span class="comment">% direction vector of each line (row vectors)</span>
+0032 vx = line(:, 3)';
+0033 vy = line(:, 4)';
+0034 
+0035 <span class="comment">% squared norm of direction vectors, with a check of validity</span>
+0036 delta = (vx .* vx + vy .* vy);
+0037 invalidEdges = delta &lt; eps;
+0038 delta(invalidEdges) = 1; 
+0039 
+0040 <span class="comment">% difference of coordinates between point and line origins</span>
+0041 <span class="comment">% (NP-by-NE arrays)</span>
+0042 dx  = bsxfun(@minus, point(:, 1), line(:, 1)');
+0043 dy  = bsxfun(@minus, point(:, 2), line(:, 2)');
+0044 
+0045 <span class="comment">% compute position of points projected on the line, by using normalised dot</span>
+0046 <span class="comment">% product</span>
+0047 <span class="comment">% (result is a NP-by-NL array)</span>
+0048 pos = bsxfun(@rdivide, bsxfun(@times, dx, vx) + bsxfun(@times, dy, vy), delta);
+0049 
+0050 <span class="comment">% ensure degenerated lines are correclty processed (consider the line</span>
+0051 <span class="comment">% origin as closest point)</span>
+0052 pos(:, invalidEdges) = 0;
+0053 
+0054 <span class="comment">% compute distance between point and its projection on the line</span>
+0055 dist = hypot(bsxfun(@times, pos, vx) - dx, bsxfun(@times, pos, vy) - dy);
+0056 
+0057 
+0058 <span class="comment">% if size(line, 1)==1 &amp;&amp; size(point, 1)&gt;1</span>
+0059 <span class="comment">%     line = repmat(line, [size(point, 1) 1]);</span>
+0060 <span class="comment">% end</span>
+0061 <span class="comment">%</span>
+0062 <span class="comment">% if size(point, 1)==1 &amp;&amp; size(line, 1)&gt;1</span>
+0063 <span class="comment">%     point = repmat(point, [size(line, 1) 1]);</span>
+0064 <span class="comment">% end</span>
+0065 <span class="comment">%</span>
+0066 <span class="comment">% dx = line(:, 3);</span>
+0067 <span class="comment">% dy = line(:, 4);</span>
+0068 <span class="comment">%</span>
+0069 <span class="comment">% % compute position of points projected on line</span>
+0070 <span class="comment">% tp = ((point(:, 2) - line(:, 2)).*dy + (point(:, 1) - line(:, 1)).*dx) ./ (dx.*dx+dy.*dy);</span>
+0071 <span class="comment">% p0 = line(:, 1:2) + [tp tp].*[dx dy];</span>
+0072 <span class="comment">%</span>
+0073 <span class="comment">%</span>
+0074 <span class="comment">% % compute distances between points and their projections</span>
+0075 <span class="comment">% dx = point - p0;</span>
+0076 <span class="comment">% dist  = sqrt(sum(dx.*dx, 2));</span>
+0077 
+0078 
+0079</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of projPointOnLine3d</title>
+  <meta name="keywords" content="projPointOnLine3d">
+  <meta name="description" content="PROJPOINTONLINE3D Project a 3D point orthogonally onto a 3D line.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; projPointOnLine3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>projPointOnLine3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>PROJPOINTONLINE3D Project a 3D point orthogonally onto a 3D line.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function point = projPointOnLine3d(point, line) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">PROJPOINTONLINE3D Project a 3D point orthogonally onto a 3D line.
+
+   PT2 = projPointOnLine3d(PT, LINE).
+   Computes the (orthogonal) projection of 3D point PT onto the 3D line
+   LINE. 
+   
+   Function works also for multiple points and lines. In this case, it
+   returns multiple points.
+   Point PT1 is a N-by-3 array, and LINE is a N-by-6 array.
+   Result PT2 is a N-by-3 array, containing coordinates of orthogonal
+   projections of PT1 onto lines LINE. 
+
+
+   See also:
+   projPointOnLine, <a href="distancePointLine3d.html" class="code" title="function d = distancePointLine3d(point, line)">distancePointLine3d</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 2012-08-23.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function point = projPointOnLine3d(point, line)</a>
+0002 <span class="comment">%PROJPOINTONLINE3D Project a 3D point orthogonally onto a 3D line.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PT2 = projPointOnLine3d(PT, LINE).</span>
+0005 <span class="comment">%   Computes the (orthogonal) projection of 3D point PT onto the 3D line</span>
+0006 <span class="comment">%   LINE.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Function works also for multiple points and lines. In this case, it</span>
+0009 <span class="comment">%   returns multiple points.</span>
+0010 <span class="comment">%   Point PT1 is a N-by-3 array, and LINE is a N-by-6 array.</span>
+0011 <span class="comment">%   Result PT2 is a N-by-3 array, containing coordinates of orthogonal</span>
+0012 <span class="comment">%   projections of PT1 onto lines LINE.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   See also:</span>
+0016 <span class="comment">%   projPointOnLine, distancePointLine3d</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   ---------</span>
+0019 <span class="comment">%   author : David Legland</span>
+0020 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0021 <span class="comment">%   created the 2012-08-23.</span>
+0022 <span class="comment">%</span>
+0023 
+0024 <span class="comment">%   HISTORY</span>
+0025 
+0026 <span class="comment">% direction vector of the line</span>
+0027 vx = line(:, 4);
+0028 vy = line(:, 5);
+0029 vz = line(:, 6);
+0030 
+0031 <span class="comment">% difference of point with line origin</span>
+0032 dx = point(:,1) - line(:,1);
+0033 dy = point(:,2) - line(:,2);
+0034 dz = point(:,3) - line(:,3);
+0035 
+0036 <span class="comment">% Position of projection on line, using dot product</span>
+0037 delta = vx .* vx + vy .* vy + vz .* vz;
+0038 tp = (dx .* vx + dy .* vy + dz .* vz) ./ delta;
+0039 
+0040 <span class="comment">% convert position on line to cartesian coordinates</span>
+0041 point = [line(:,1) + tp .* vx, line(:,2) + tp .* vy, line(:,3) + tp .* vz];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

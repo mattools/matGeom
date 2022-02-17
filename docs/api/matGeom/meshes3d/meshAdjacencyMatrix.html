@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of meshAdjacencyMatrix</title>
+  <meta name="keywords" content="meshAdjacencyMatrix">
+  <meta name="description" content="MESHADJACENCYMATRIX Compute adjacency matrix of a mesh from set of faces.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; meshAdjacencyMatrix.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>meshAdjacencyMatrix
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MESHADJACENCYMATRIX Compute adjacency matrix of a mesh from set of faces.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function adj = meshAdjacencyMatrix(faces, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MESHADJACENCYMATRIX Compute adjacency matrix of a mesh from set of faces.
+
+   ADJMAT = meshAdjacencyMatrix(FACES)
+   Returns a sparse NV-by-NV matrix (NV being the largest vertex index)
+   containing vertex adjacency of the mesh represented by FACES.
+   FACES is either a NF-by-3, a NF-by-4 index array, or a Nf-by-1 cell
+   array.
+
+   Example
+     [v f] = createCube;
+     adj = meshAdjacencyMatrix(f);
+
+   See also
+     meshes3d, <a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>, <a href="smoothMesh.html" class="code" title="function varargout = smoothMesh(varargin)">smoothMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>	TRIANGULATEFACES Convert face array to an array of triangular faces.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="meshVoronoiDiagram.html" class="code" title="function [regions, distances] = meshVoronoiDiagram(vertices, faces, germInds)">meshVoronoiDiagram</a>	Voronoi Diagram on the surface of a polygonal mesh.</li><li><a href="smoothMesh.html" class="code" title="function varargout = smoothMesh(varargin)">smoothMesh</a>	SMOOTHMESH Smooth mesh by replacing each vertex by the average of its neighbors.</li><li><a href="smoothMeshFunction.html" class="code" title="function f = smoothMeshFunction(vertices, faces, f, varargin) %#ok<INUSL>">smoothMeshFunction</a>	Apply smoothing on a functions defines on mesh vertices.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function adj = meshAdjacencyMatrix(faces, varargin)</a>
+0002 <span class="comment">%MESHADJACENCYMATRIX Compute adjacency matrix of a mesh from set of faces.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   ADJMAT = meshAdjacencyMatrix(FACES)</span>
+0005 <span class="comment">%   Returns a sparse NV-by-NV matrix (NV being the largest vertex index)</span>
+0006 <span class="comment">%   containing vertex adjacency of the mesh represented by FACES.</span>
+0007 <span class="comment">%   FACES is either a NF-by-3, a NF-by-4 index array, or a Nf-by-1 cell</span>
+0008 <span class="comment">%   array.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Example</span>
+0011 <span class="comment">%     [v f] = createCube;</span>
+0012 <span class="comment">%     adj = meshAdjacencyMatrix(f);</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   See also</span>
+0015 <span class="comment">%     meshes3d, triangulateFaces, smoothMesh</span>
+0016 
+0017 <span class="comment">% ------</span>
+0018 <span class="comment">% Author: David Legland</span>
+0019 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0020 <span class="comment">% Created: 2013-04-30,    using Matlab 7.9.0.529 (R2009b)</span>
+0021 <span class="comment">% Copyright 2013 INRA - Cepia Software Platform.</span>
+0022 
+0023 <span class="comment">% Ensures faces is a N-by-3 or N-by-4 array</span>
+0024 <span class="keyword">if</span> iscell(faces) || (isnumeric(faces) &amp;&amp; size(faces, 2) &gt; 4)
+0025     faces = <a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>(faces);
+0026 <span class="keyword">end</span>
+0027 
+0028 <span class="comment">% forces faces to be floating point array, for sparse function</span>
+0029 <span class="keyword">if</span> ~isfloat(faces)
+0030     faces = double(faces);
+0031 <span class="keyword">end</span>
+0032 nv = max(faces(:));
+0033     
+0034 <span class="comment">% populate a sparse matrix</span>
+0035 <span class="keyword">if</span> size(faces, 2) == 3
+0036     adj = sparse(<span class="keyword">...</span>
+0037         [faces(:,1); faces(:,1); faces(:,2); faces(:,2); faces(:,3); faces(:,3)], <span class="keyword">...</span>
+0038         [faces(:,3); faces(:,2); faces(:,1); faces(:,3); faces(:,2); faces(:,1)], <span class="keyword">...</span>
+0039         1.0, nv, nv);
+0040 <span class="keyword">elseif</span> size(faces, 2) == 4
+0041     adj = sparse(<span class="keyword">...</span>
+0042         [faces(:,1); faces(:,1); faces(:,2); faces(:,2); faces(:,3); faces(:,3); faces(:,4); faces(:,4)], <span class="keyword">...</span>
+0043         [faces(:,4); faces(:,2); faces(:,1); faces(:,3); faces(:,2); faces(:,4); faces(:,3); faces(:,1)], <span class="keyword">...</span>
+0044         1.0, nv, nv);
+0045 <span class="keyword">end</span>
+0046    
+0047 <span class="comment">% remove double adjacencies</span>
+0048 adj = min(adj, 1);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

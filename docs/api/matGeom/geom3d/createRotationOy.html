@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createRotationOy</title>
+  <meta name="keywords" content="createRotationOy">
+  <meta name="description" content="CREATEROTATIONOY Create the 4x4 matrix of a 3D rotation around y-axis.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; createRotationOy.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createRotationOy
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATEROTATIONOY Create the 4x4 matrix of a 3D rotation around y-axis.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function trans = createRotationOy(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATEROTATIONOY Create the 4x4 matrix of a 3D rotation around y-axis.
+
+   TRANS = createRotationOy(THETA);
+   Returns the transform matrix corresponding to a rotation by the angle
+   THETA (in radians) around the Oy axis. A rotation by an angle of PI/2
+   would transform the vector [0 0 1] into the vector [1 0 0].
+
+   The returned matrix has the form:
+   [ cos(THETA)  0  sin(THETA)  0 ]
+   [    0        1       0      0 ]
+   [-sin(THETA)  0  cos(THETA)  0 ]
+   [    0        0       0      1 ]
+
+   TRANS = createRotationOy(ORIGIN, THETA);
+   TRANS = createRotationOy(X0, Y0, Z0, THETA);
+   Also specifies origin of rotation. The result is similar as performing
+   translation(-X0, -Y0, -Z0), rotation, and translation(X0, Y0, Z0).
+
+
+   See also:
+   <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>, <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>, <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawCube.html" class="code" title="function varargout = drawCube(cube, varargin)">drawCube</a>	Draw a 3D centered cube, eventually rotated.</li><li><a href="drawCuboid.html" class="code" title="function varargout = drawCuboid(cuboid, varargin)">drawCuboid</a>	Draw a 3D cuboid, eventually rotated.</li><li><a href="drawEllipsoid.html" class="code" title="function varargout = drawEllipsoid(elli, varargin)">drawEllipsoid</a>	DRAWELLIPSOID Draw a 3D ellipsoid.</li><li><a href="eulerAnglesToRotation3d.html" class="code" title="function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)">eulerAnglesToRotation3d</a>	EULERANGLESTOROTATION3D Convert 3D Euler angles to 3D rotation matrix.</li><li><a href="../../matGeom/meshes3d/createDurerPolyhedron.html" class="code" title="function varargout = createDurerPolyhedron(varargin)">createDurerPolyhedron</a>	CREATEDURERPOLYHEDRON  Create a mesh representing Durer's polyhedron .</li><li><a href="../../matGeom/meshes3d/curveToMesh.html" class="code" title="function [vertices, faces] = curveToMesh(curve, varargin)">curveToMesh</a>	Create a mesh surrounding a 3D curve.</li><li><a href="../../matGeom/meshes3d/ellipsoidMesh.html" class="code" title="function varargout = ellipsoidMesh(elli, varargin)">ellipsoidMesh</a>	ELLIPSOIDMESH Convert a 3D ellipsoid to face-vertex mesh representation.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function trans = createRotationOy(varargin)</a>
+0002 <span class="comment">%CREATEROTATIONOY Create the 4x4 matrix of a 3D rotation around y-axis.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   TRANS = createRotationOy(THETA);</span>
+0005 <span class="comment">%   Returns the transform matrix corresponding to a rotation by the angle</span>
+0006 <span class="comment">%   THETA (in radians) around the Oy axis. A rotation by an angle of PI/2</span>
+0007 <span class="comment">%   would transform the vector [0 0 1] into the vector [1 0 0].</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   The returned matrix has the form:</span>
+0010 <span class="comment">%   [ cos(THETA)  0  sin(THETA)  0 ]</span>
+0011 <span class="comment">%   [    0        1       0      0 ]</span>
+0012 <span class="comment">%   [-sin(THETA)  0  cos(THETA)  0 ]</span>
+0013 <span class="comment">%   [    0        0       0      1 ]</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   TRANS = createRotationOy(ORIGIN, THETA);</span>
+0016 <span class="comment">%   TRANS = createRotationOy(X0, Y0, Z0, THETA);</span>
+0017 <span class="comment">%   Also specifies origin of rotation. The result is similar as performing</span>
+0018 <span class="comment">%   translation(-X0, -Y0, -Z0), rotation, and translation(X0, Y0, Z0).</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See also:</span>
+0022 <span class="comment">%   transforms3d, transformPoint3d, createRotationOx, createRotationOz</span>
+0023 <span class="comment">%</span>
+0024 
+0025 <span class="comment">%   ---------</span>
+0026 <span class="comment">%   author : David Legland</span>
+0027 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0028 <span class="comment">%   created the 18/02/2005.</span>
+0029 <span class="comment">%</span>
+0030 
+0031 <span class="comment">%   HISTORY</span>
+0032 <span class="comment">%   2008/11/24 changed convention for angle</span>
+0033 <span class="comment">%   22/04/2009 rename as createcreateRotationOy</span>
+0034 
+0035 
+0036 <span class="comment">% default values</span>
+0037 dx = 0;
+0038 dy = 0;
+0039 dz = 0;
+0040 theta = 0;
+0041 
+0042 <span class="comment">% get input values</span>
+0043 <span class="keyword">if</span> length(varargin) == 1
+0044     <span class="comment">% only one argument -&gt; rotation angle</span>
+0045     theta = varargin{1};
+0046     
+0047 <span class="keyword">elseif</span> length(varargin) == 2
+0048     <span class="comment">% origin point (as array) and angle</span>
+0049     var = varargin{1};
+0050     dx = var(1);
+0051     dy = var(2);
+0052     dz = var(3);
+0053     theta = varargin{2};
+0054     
+0055 <span class="keyword">elseif</span> length(varargin) == 3
+0056     <span class="comment">% origin (x and y) and angle</span>
+0057     dx = varargin{1};
+0058     dy = varargin{2};
+0059     dz = 0;
+0060     theta = varargin{3};
+0061     
+0062 <span class="keyword">elseif</span> length(varargin) == 4
+0063     <span class="comment">% origin (x and y) and angle</span>
+0064     dx = varargin{1};
+0065     dy = varargin{2};
+0066     dz = varargin{3};
+0067     theta = varargin{4};
+0068 <span class="keyword">end</span>
+0069 
+0070 <span class="comment">% compute coefs</span>
+0071 cot = cos(theta);
+0072 sit = sin(theta);
+0073 
+0074 <span class="comment">% create transformation</span>
+0075 trans = [<span class="keyword">...</span>
+0076     cot  0  sit  0;<span class="keyword">...</span>
+0077     0    1    0  0;<span class="keyword">...</span>
+0078     -sit 0  cot  0;<span class="keyword">...</span>
+0079     0    0    0  1];
+0080 
+0081 <span class="comment">% add the translation part</span>
+0082 t = [1 0 0 dx;0 1 0 dy;0 0 1 dz;0 0 0 1];
+0083 trans = t * trans / t;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

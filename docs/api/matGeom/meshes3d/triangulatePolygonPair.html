@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of triangulatePolygonPair</title>
+  <meta name="keywords" content="triangulatePolygonPair">
+  <meta name="description" content="Compute triangulation between a pair of 3D closed curves.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; triangulatePolygonPair.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>triangulatePolygonPair
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Compute triangulation between a pair of 3D closed curves.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [vertices, faces] = triangulatePolygonPair(poly1, poly2, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Compute triangulation between a pair of 3D closed curves.
+
+   [V, F] = triangulatePolygonPair(POLY1, POLY2)
+
+   [V, F] = triangulatePolygonPair(..., 'recenter', FLAG)
+   Where FLAG is a boolean, specifies whether the second curve should be
+   translated to have the same centroid as the first curve. This can
+   improve mathcing of vertices. Default is true.
+
+
+   Example
+     % triangulate a surface patch between two ellipses
+     % create two sample curves
+     poly1 = ellipseToPolygon([50 50 40 20 0], 36);
+     poly2 = ellipseToPolygon([50 50 40 20 60], 36);
+     poly1 = poly1(1:end-1,:);
+     poly2 = poly2(1:end-1,:);
+     % transform to 3D polygons / curves
+     curve1 = [poly1 10*ones(size(poly1, 1), 1)];
+     curve2 = [poly2 20*ones(size(poly2, 1), 1)];
+     % draw as 3D curves
+     figure(1); clf; hold on;
+     drawPolygon3d(curve1, 'b'); drawPoint3d(curve1, 'bo');
+     drawPolygon3d(curve2, 'g'); drawPoint3d(curve2, 'go');
+     view(3); axis equal;
+     [vertices, faces] = triangulatePolygonPair(curve1, curve2);
+     % display the resulting mesh
+     figure(2); clf; hold on;
+     drawMesh(vertices, faces);
+     drawPolygon3d(curve1, 'color', 'b', 'linewidth', 2);
+     drawPolygon3d(curve2, 'color', 'g', 'linewidth', 2);
+     view(3); axis equal;
+
+   See also
+     meshes3D, <a href="triangulateCurvePair.html" class="code" title="function [vertices, facets] = triangulateCurvePair(curve1, curve2)">triangulateCurvePair</a>, <a href="meshSurfaceArea.html" class="code" title="function area = meshSurfaceArea(varargin)">meshSurfaceArea</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>	DISTANCEPOINTS Compute distance between two points.</li><li><a href="../../matGeom/geom2d/minDistancePoints.html" class="code" title="function varargout = minDistancePoints(p1, varargin)">minDistancePoints</a>	Minimal distance between several points.</li><li><a href="../../matGeom/geom3d/boundingBox3d.html" class="code" title="function box = boundingBox3d(points)">boundingBox3d</a>	BOUNDINGBOX3D Bounding box of a set of 3D points.</li><li><a href="../../matGeom/geom3d/createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>	CREATETRANSLATION3D Create the 4x4 matrix of a 3D translation.</li><li><a href="../../matGeom/geom3d/transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [vertices, faces] = triangulatePolygonPair(poly1, poly2, varargin)</a>
+0002 <span class="comment">% Compute triangulation between a pair of 3D closed curves.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V, F] = triangulatePolygonPair(POLY1, POLY2)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   [V, F] = triangulatePolygonPair(..., 'recenter', FLAG)</span>
+0007 <span class="comment">%   Where FLAG is a boolean, specifies whether the second curve should be</span>
+0008 <span class="comment">%   translated to have the same centroid as the first curve. This can</span>
+0009 <span class="comment">%   improve mathcing of vertices. Default is true.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%     % triangulate a surface patch between two ellipses</span>
+0014 <span class="comment">%     % create two sample curves</span>
+0015 <span class="comment">%     poly1 = ellipseToPolygon([50 50 40 20 0], 36);</span>
+0016 <span class="comment">%     poly2 = ellipseToPolygon([50 50 40 20 60], 36);</span>
+0017 <span class="comment">%     poly1 = poly1(1:end-1,:);</span>
+0018 <span class="comment">%     poly2 = poly2(1:end-1,:);</span>
+0019 <span class="comment">%     % transform to 3D polygons / curves</span>
+0020 <span class="comment">%     curve1 = [poly1 10*ones(size(poly1, 1), 1)];</span>
+0021 <span class="comment">%     curve2 = [poly2 20*ones(size(poly2, 1), 1)];</span>
+0022 <span class="comment">%     % draw as 3D curves</span>
+0023 <span class="comment">%     figure(1); clf; hold on;</span>
+0024 <span class="comment">%     drawPolygon3d(curve1, 'b'); drawPoint3d(curve1, 'bo');</span>
+0025 <span class="comment">%     drawPolygon3d(curve2, 'g'); drawPoint3d(curve2, 'go');</span>
+0026 <span class="comment">%     view(3); axis equal;</span>
+0027 <span class="comment">%     [vertices, faces] = triangulatePolygonPair(curve1, curve2);</span>
+0028 <span class="comment">%     % display the resulting mesh</span>
+0029 <span class="comment">%     figure(2); clf; hold on;</span>
+0030 <span class="comment">%     drawMesh(vertices, faces);</span>
+0031 <span class="comment">%     drawPolygon3d(curve1, 'color', 'b', 'linewidth', 2);</span>
+0032 <span class="comment">%     drawPolygon3d(curve2, 'color', 'g', 'linewidth', 2);</span>
+0033 <span class="comment">%     view(3); axis equal;</span>
+0034 <span class="comment">%</span>
+0035 <span class="comment">%   See also</span>
+0036 <span class="comment">%     meshes3D, triangulateCurvePair, meshSurfaceArea</span>
+0037 <span class="comment">%</span>
+0038  
+0039 <span class="comment">% ------</span>
+0040 <span class="comment">% Author: David Legland</span>
+0041 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0042 <span class="comment">% Created: 2017-05-18,    using Matlab 9.1.0.441655 (R2016b)</span>
+0043 <span class="comment">% Copyright 2017 INRA - Cepia Software Platform.</span>
+0044 
+0045 
+0046 <span class="comment">%% Settings</span>
+0047 
+0048 recenterFlag = true;
+0049 <span class="keyword">while</span> length(varargin) &gt; 1
+0050     pname = varargin{1};
+0051     <span class="keyword">if</span> strcmpi(pname, <span class="string">'recenter'</span>)
+0052         recenterFlag = varargin{2};
+0053     <span class="keyword">else</span>
+0054         error(<span class="string">'Unknown parameter name: %s'</span>, pname);
+0055     <span class="keyword">end</span>
+0056     varargin(1:2) = [];
+0057 <span class="keyword">end</span>
+0058 
+0059 
+0060 <span class="comment">%% Memory allocation</span>
+0061 
+0062 <span class="comment">% concatenate vertex coordinates for creating mesh</span>
+0063 vertices = [poly1 ; poly2];
+0064 
+0065 <span class="comment">% number of vertices on each polygon</span>
+0066 n1 = size(poly1, 1);
+0067 n2 = size(poly2, 1);
+0068 
+0069 <span class="comment">% allocate the array of facets (each edge of each polygon provides a facet)</span>
+0070 nFaces = n1 + n2;
+0071 faces = zeros(nFaces, 3);
+0072 
+0073 
+0074 <span class="comment">% Translate the second polygon such that the centroids of the bounding</span>
+0075 <span class="comment">% boxes coincide. This is expected to improve the matching of the two</span>
+0076 <span class="comment">% curves.</span>
+0077 <span class="keyword">if</span> recenterFlag
+0078     box1 = <a href="../../matGeom/geom3d/boundingBox3d.html" class="code" title="function box = boundingBox3d(points)">boundingBox3d</a>(poly1);
+0079     box2 = <a href="../../matGeom/geom3d/boundingBox3d.html" class="code" title="function box = boundingBox3d(points)">boundingBox3d</a>(poly2);
+0080     center1 = (box1(2:2:end) + box1(1:2:end-1)) / 2;
+0081     center2 = (box2(2:2:end) + box2(1:2:end-1)) / 2;
+0082     vecTrans = center1 - center2;
+0083     trans = <a href="../../matGeom/geom3d/createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>(vecTrans);
+0084     poly2 = <a href="../../matGeom/geom3d/transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(poly2, trans);
+0085 <span class="keyword">end</span>
+0086 
+0087 
+0088 <span class="comment">%% Init iteration</span>
+0089 
+0090 <span class="comment">% find the pair of points with smallest distance.</span>
+0091 <span class="comment">% This will be the current diagonal.</span>
+0092 [dists, inds] = <a href="../../matGeom/geom2d/minDistancePoints.html" class="code" title="function varargout = minDistancePoints(p1, varargin)">minDistancePoints</a>(poly1, poly2);
+0093 [dummy, ind1] = min(dists); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0094 ind2 = inds(ind1);
+0095 
+0096 <span class="comment">% consider two consecutive vertices on each polygon</span>
+0097 currentIndex1 = ind1;
+0098 currentIndex2 = ind2;
+0099 
+0100 
+0101 <span class="comment">%% Main iteration</span>
+0102 <span class="comment">% For each diagonal, consider the two possible facets (one for each 'next'</span>
+0103 <span class="comment">% vertex on each polygon), each create current facet according to the</span>
+0104 <span class="comment">% closest one.</span>
+0105 <span class="comment">% Then update current diagonal for next iteration.</span>
+0106 
+0107 <span class="keyword">for</span> iFace = 1:nFaces
+0108     nextIndex1 = mod(currentIndex1, n1) + 1;
+0109     nextIndex2 = mod(currentIndex2, n2) + 1;
+0110     
+0111     <span class="comment">% compute lengths of diagonals</span>
+0112     dist1 = <a href="../../matGeom/geom2d/distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(poly1(currentIndex1, :), poly2(nextIndex2,:));
+0113     dist2 = <a href="../../matGeom/geom2d/distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(poly1(nextIndex1, :), poly2(currentIndex2,:));
+0114     
+0115     <span class="keyword">if</span> dist1 &lt; dist2
+0116         <span class="comment">% keep current vertex of curve1, use next vertex on curve2</span>
+0117         face = [currentIndex1 currentIndex2+n1 nextIndex2+n1];
+0118         currentIndex2 = nextIndex2;
+0119     <span class="keyword">else</span>
+0120         <span class="comment">% keep current vertex of curve2, use next vertex on curve1</span>
+0121         face = [currentIndex1 currentIndex2+n1 nextIndex1];
+0122         currentIndex1 = nextIndex1;
+0123     <span class="keyword">end</span>
+0124     
+0125     <span class="comment">% create the facet</span>
+0126     faces(iFace, :) = face;
+0127 <span class="keyword">end</span>
+0128</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

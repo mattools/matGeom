@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of distancePolygons</title>
+  <meta name="keywords" content="distancePolygons">
+  <meta name="description" content="DISTANCEPOLYGONS Compute the shortest distance between 2 polygons.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; distancePolygons.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>distancePolygons
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DISTANCEPOLYGONS Compute the shortest distance between 2 polygons.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function dist = distancePolygons(poly1, poly2) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DISTANCEPOLYGONS Compute the shortest distance between 2 polygons.
+
+   DIST = distancePolygons(POLY1, POLY2)
+   Computes the shortest distance between the boundaries of the two
+   polygons. Each polygon is given by a N-by-2 array containing the vertex
+   coordinates.
+
+   In the case the two polygons are known not to intersect, the function
+   'distancePolygonsNoCross' may be used more efficiently (no test for
+   crossing is done).
+
+   Example
+     % Computes the distance between a square and a triangle
+     poly1 = [10 10;20 10;20 20;10 20];
+     poly2 = [30 20;50 20;40 45];
+     distancePolygons(poly1, poly2)
+     ans =
+         10
+
+   See also
+   polygons2d, <a href="distancePolygonsNoCross.html" class="code" title="function dist = distancePolygonsNoCross(poly1, poly2)">distancePolygonsNoCross</a>, <a href="distancePolylines.html" class="code" title="function dist = distancePolylines(poly1, poly2)">distancePolylines</a>,
+   <a href="distancePointPolygon.html" class="code" title="function minDist = distancePointPolygon(point, poly)">distancePointPolygon</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="distancePointPolygon.html" class="code" title="function minDist = distancePointPolygon(point, poly)">distancePointPolygon</a>	DISTANCEPOINTPOLYGON Shortest distance between a point and a polygon.</li><li><a href="intersectPolylines.html" class="code" title="function pts = intersectPolylines(poly1, varargin)">intersectPolylines</a>	INTERSECTPOLYLINES Find the common points between 2 polylines.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="expandPolygon.html" class="code" title="function loops = expandPolygon(poly, dist, varargin)">expandPolygon</a>	EXPANDPOLYGON Expand a polygon by a given (signed) distance.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function dist = distancePolygons(poly1, poly2)</a>
+0002 <span class="comment">%DISTANCEPOLYGONS Compute the shortest distance between 2 polygons.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   DIST = distancePolygons(POLY1, POLY2)</span>
+0005 <span class="comment">%   Computes the shortest distance between the boundaries of the two</span>
+0006 <span class="comment">%   polygons. Each polygon is given by a N-by-2 array containing the vertex</span>
+0007 <span class="comment">%   coordinates.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   In the case the two polygons are known not to intersect, the function</span>
+0010 <span class="comment">%   'distancePolygonsNoCross' may be used more efficiently (no test for</span>
+0011 <span class="comment">%   crossing is done).</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   Example</span>
+0014 <span class="comment">%     % Computes the distance between a square and a triangle</span>
+0015 <span class="comment">%     poly1 = [10 10;20 10;20 20;10 20];</span>
+0016 <span class="comment">%     poly2 = [30 20;50 20;40 45];</span>
+0017 <span class="comment">%     distancePolygons(poly1, poly2)</span>
+0018 <span class="comment">%     ans =</span>
+0019 <span class="comment">%         10</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See also</span>
+0022 <span class="comment">%   polygons2d, distancePolygonsNoCross, distancePolylines,</span>
+0023 <span class="comment">%   distancePointPolygon</span>
+0024 <span class="comment">%</span>
+0025 
+0026 <span class="comment">% ------</span>
+0027 <span class="comment">% Author: David Legland</span>
+0028 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0029 <span class="comment">% Created: 2009-06-17,    using Matlab 7.7.0.471 (R2008b)</span>
+0030 <span class="comment">% Copyright 2009 INRA - Cepia Software Platform.</span>
+0031 
+0032 <span class="comment">% cjeck if the two polygons intersect</span>
+0033 pts = <a href="intersectPolylines.html" class="code" title="function pts = intersectPolylines(poly1, varargin)">intersectPolylines</a>(poly1([1:end 1], :), poly2([1:end 1], :));
+0034 <span class="keyword">if</span> size(pts, 1) &gt; 0
+0035     dist = 0;
+0036     <span class="keyword">return</span>;
+0037 <span class="keyword">end</span>
+0038 
+0039 <span class="comment">% compute distance of each vertex of a polygon to the other polygon</span>
+0040 dist1   = min(<a href="distancePointPolygon.html" class="code" title="function minDist = distancePointPolygon(point, poly)">distancePointPolygon</a>(poly1, poly2));
+0041 dist2   = min(<a href="distancePointPolygon.html" class="code" title="function minDist = distancePointPolygon(point, poly)">distancePointPolygon</a>(poly2, poly1));
+0042 
+0043 <span class="comment">% keep the minimum of the two distances</span>
+0044 dist = min(dist1, dist2);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of curveToMesh</title>
+  <meta name="keywords" content="curveToMesh">
+  <meta name="description" content="Create a mesh surrounding a 3D curve.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; curveToMesh.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>curveToMesh
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Create a mesh surrounding a 3D curve.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [vertices, faces] = curveToMesh(curve, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Create a mesh surrounding a 3D curve.
+
+   [V, F] = curveToMesh(CURVE)
+   Computes the vertices and the faces of the mesh surrounding the
+   specified 3D curve.
+
+   [V, F] = curveToMesh(CURVE, THICKNESS)
+   Specifies the thickness of the mesh (distance between mesh vertices and
+   curve vertices). Default is 0.5.
+
+   [V, F] = curveToMesh(CURVE, THICKNESS, NCORNERS)
+   Also specifies the number of mesh vertices around each curve vertex.
+   Default is 8.
+
+
+   Example
+     % Creates a tubular mesh around a trefoil knot curve
+     t = linspace(0, 2*pi, 200)';
+     x = sin(t) + 2 * sin(2 * t);
+     y = cos(t) - 2 * cos(2 * t);
+     z = -sin(3 * t);
+     curve = [x, y, z];
+     [v2, f2] = curveToMesh(curve, .5, 16);
+     figure; 
+     drawMesh(v2, f2);
+     axis equal; view(3);
+     axis([-4 4 -4 4 -2 2]);
+  
+   See also
+     meshes3d, <a href="torusMesh.html" class="code" title="function varargout = torusMesh(torus, varargin)">torusMesh</a>, <a href="surfToMesh.html" class="code" title="function varargout = surfToMesh(x, y, varargin)">surfToMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>	CART2SPH2 Convert cartesian coordinates to spherical coordinates.</li><li><a href="../../matGeom/geom3d/createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>	CREATEROTATIONOY Create the 4x4 matrix of a 3D rotation around y-axis.</li><li><a href="../../matGeom/geom3d/createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>	CREATEROTATIONOZ Create the 4x4 matrix of a 3D rotation around z-axis.</li><li><a href="../../matGeom/geom3d/createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>	CREATETRANSLATION3D Create the 4x4 matrix of a 3D translation.</li><li><a href="../../matGeom/geom3d/normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>	NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.</li><li><a href="../../matGeom/geom3d/transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [vertices, faces] = curveToMesh(curve, varargin)</a>
+0002 <span class="comment">% Create a mesh surrounding a 3D curve.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V, F] = curveToMesh(CURVE)</span>
+0005 <span class="comment">%   Computes the vertices and the faces of the mesh surrounding the</span>
+0006 <span class="comment">%   specified 3D curve.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   [V, F] = curveToMesh(CURVE, THICKNESS)</span>
+0009 <span class="comment">%   Specifies the thickness of the mesh (distance between mesh vertices and</span>
+0010 <span class="comment">%   curve vertices). Default is 0.5.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   [V, F] = curveToMesh(CURVE, THICKNESS, NCORNERS)</span>
+0013 <span class="comment">%   Also specifies the number of mesh vertices around each curve vertex.</span>
+0014 <span class="comment">%   Default is 8.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   Example</span>
+0018 <span class="comment">%     % Creates a tubular mesh around a trefoil knot curve</span>
+0019 <span class="comment">%     t = linspace(0, 2*pi, 200)';</span>
+0020 <span class="comment">%     x = sin(t) + 2 * sin(2 * t);</span>
+0021 <span class="comment">%     y = cos(t) - 2 * cos(2 * t);</span>
+0022 <span class="comment">%     z = -sin(3 * t);</span>
+0023 <span class="comment">%     curve = [x, y, z];</span>
+0024 <span class="comment">%     [v2, f2] = curveToMesh(curve, .5, 16);</span>
+0025 <span class="comment">%     figure;</span>
+0026 <span class="comment">%     drawMesh(v2, f2);</span>
+0027 <span class="comment">%     axis equal; view(3);</span>
+0028 <span class="comment">%     axis([-4 4 -4 4 -2 2]);</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">%   See also</span>
+0031 <span class="comment">%     meshes3d, torusMesh, surfToMesh</span>
+0032  
+0033 <span class="comment">% ------</span>
+0034 <span class="comment">% Author: David Legland</span>
+0035 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0036 <span class="comment">% Created: 2015-01-07,    using Matlab 8.4.0.150421 (R2014b)</span>
+0037 <span class="comment">% Copyright 2015 INRA - Cepia Software Platform.</span>
+0038 
+0039 radius = .1;
+0040 <span class="keyword">if</span> nargin &gt; 1
+0041     radius = varargin{1};
+0042 <span class="keyword">end</span>
+0043 
+0044 nCorners = 8;
+0045 <span class="keyword">if</span> nargin &gt; 2
+0046     nCorners = varargin{2};
+0047 <span class="keyword">end</span>
+0048 
+0049 nNodes = size(curve, 1);
+0050 nVerts = nNodes * nCorners;
+0051 
+0052 vertices = zeros(nVerts, 3);
+0053 
+0054 <span class="comment">% create reference corners, that will be rotated and translated</span>
+0055 t = linspace(0, 2*pi, nCorners + 1)';
+0056 t(end) = [];
+0057 baseCorners = radius * [cos(t) sin(t) zeros(size(t))];
+0058 
+0059 <span class="keyword">for</span> iNode = 1:nNodes
+0060     <span class="comment">% coordinate of current node</span>
+0061     node = curve(iNode, :);
+0062     
+0063     <span class="comment">% compute local tangent vector</span>
+0064     iNext = mod(iNode, nNodes) + 1;
+0065     tangentVector = <a href="../../matGeom/geom3d/normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(curve(iNext, :) - node);
+0066 
+0067     <span class="comment">% convert to spherical coordinates</span>
+0068     [theta, phi, rho] = <a href="../../matGeom/geom3d/cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>(tangentVector); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0069     
+0070     <span class="comment">% apply transformation to place corners around current node</span>
+0071     rotY = <a href="../../matGeom/geom3d/createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(theta);
+0072     rotZ = <a href="../../matGeom/geom3d/createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(phi);
+0073     trans = <a href="../../matGeom/geom3d/createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>(node);
+0074     transformMatrix = trans * rotZ * rotY;
+0075     corners = <a href="../../matGeom/geom3d/transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(baseCorners, transformMatrix);
+0076     
+0077     <span class="comment">% concatenate with other corners</span>
+0078     vertices( (1:nCorners) + (iNode - 1) * nCorners, :) = corners;
+0079 <span class="keyword">end</span>
+0080 
+0081 <span class="comment">% indices of vertices</span>
+0082 inds = (1:nVerts)';
+0083 add1 = repmat([ones(nCorners-1, 1) ; 1-nCorners], nNodes, 1);
+0084 
+0085 <span class="comment">% generate faces</span>
+0086 faces = [inds <span class="keyword">...</span>
+0087     mod(inds + add1 - 1, nVerts) + 1 <span class="keyword">...</span>
+0088     mod(inds + nCorners + add1 - 1, nVerts) + 1 <span class="keyword">...</span>
+0089     mod(inds + nCorners - 1, nVerts) + 1];
+0090</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

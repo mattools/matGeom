@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of isPlane</title>
+  <meta name="keywords" content="isPlane">
+  <meta name="description" content="ISPLANE Check if input is a plane.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; isPlane.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>isPlane
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ISPLANE Check if input is a plane.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function d = isPlane(plane) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ISPLANE Check if input is a plane.
+
+   B = isPlane(PLANE) where PLANE should be a plane or multiple planes
+
+   Example
+     isPlane([...
+         0 0 0 1 0 0 0 1 0;...
+         0 0 0 1 0 0 -1 0 0;...
+         0 0 0 1i 0 0 -1 0 0;...
+         0 0 0 nan 0 0 0 1 0;...
+         0 0 0 inf 0 0 0 1 0])
+
+   See also
+   createPlane3d
+
+ ------
+ Author: oqilipo
+ Created: 2017-07-09
+ Copyright 2017</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="isParallel3d.html" class="code" title="function b = isParallel3d(v1, v2, varargin)">isParallel3d</a>	ISPARALLEL3D Check parallelism of two 3D vectors.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawPlane3d.html" class="code" title="function h = drawPlane3d(plane, varargin)">drawPlane3d</a>	Draw a plane clipped by the current axes.</li><li><a href="drawPlatform.html" class="code" title="function  varargout = drawPlatform(plane, siz, varargin)">drawPlatform</a>	DRAWPLATFORM Draw a rectangular platform with a given size.</li><li><a href="../../matGeom/meshes3d/cutMeshByPlane.html" class="code" title="function varargout = cutMeshByPlane(v, f, plane, varargin)">cutMeshByPlane</a>	CUTMESHBYPLANE Cut a mesh by a plane.</li><li><a href="../../matGeom/meshes3d/meshSilhouette.html" class="code" title="function silhouette = meshSilhouette(v, f, varargin)">meshSilhouette</a>	MESHSILHOUETTE Compute the 2D outline of a 3D mesh on an arbitrary plane.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function d = isPlane(plane)</a>
+0002 <span class="comment">%ISPLANE Check if input is a plane.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   B = isPlane(PLANE) where PLANE should be a plane or multiple planes</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   Example</span>
+0007 <span class="comment">%     isPlane([...</span>
+0008 <span class="comment">%         0 0 0 1 0 0 0 1 0;...</span>
+0009 <span class="comment">%         0 0 0 1 0 0 -1 0 0;...</span>
+0010 <span class="comment">%         0 0 0 1i 0 0 -1 0 0;...</span>
+0011 <span class="comment">%         0 0 0 nan 0 0 0 1 0;...</span>
+0012 <span class="comment">%         0 0 0 inf 0 0 0 1 0])</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   See also</span>
+0015 <span class="comment">%   createPlane3d</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">% ------</span>
+0018 <span class="comment">% Author: oqilipo</span>
+0019 <span class="comment">% Created: 2017-07-09</span>
+0020 <span class="comment">% Copyright 2017</span>
+0021 
+0022 narginchk(1,1)
+0023 
+0024 <span class="keyword">if</span> size(plane,2)~=9
+0025     d=false(size(plane,1),1);
+0026     <span class="keyword">return</span>
+0027 <span class="keyword">end</span>
+0028 
+0029 a = ~any(isnan(plane),2);
+0030 b = ~any(isinf(plane),2);
+0031 c = ~<a href="isParallel3d.html" class="code" title="function b = isParallel3d(v1, v2, varargin)">isParallel3d</a>(plane(:,4:6), plane(:,7:9));
+0032 
+0033 d = a &amp; b &amp; c;
+0034 
+0035 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

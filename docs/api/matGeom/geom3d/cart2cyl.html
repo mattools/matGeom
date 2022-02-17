@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of cart2cyl</title>
+  <meta name="keywords" content="cart2cyl">
+  <meta name="description" content="CART2CYL  Convert cartesian to cylindrical coordinates.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; cart2cyl.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>cart2cyl
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CART2CYL  Convert cartesian to cylindrical coordinates.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = cart2cyl(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CART2CYL  Convert cartesian to cylindrical coordinates.
+
+   CYL = cart2cyl(POINT)
+   convert the 3D cartesian coordinates of points POINT (given by [X Y Z]
+   where X, Y, Z have the same size) into cylindrical coordinates CYL,
+   given by [THETA R Z]. 
+   THETA is the arctangent of the ratio Y/X (between 0 and 2*PI)
+   R     can be computed using sqrt(X^2+Y^2)
+   Z     keeps the same value.
+   The size of THETA, and R is the same as the size of X, Y and Z.
+
+   CYL = cart2cyl(X, Y, Z)
+   provides coordinates as 3 different parameters
+
+   Example
+   cart2cyl([-1 0 2])
+   gives : 4.7124    1.0000     2.0000
+
+   See also agles3d, cart2pol, <a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>
+
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@jouy.inra.fr
+ Created: 2006-03-23
+ Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="geodesicCylinder.html" class="code" title="function [geo, geoLength, conGeo, conGeoLength] = geodesicCylinder(pts, cyl, varargin)">geodesicCylinder</a>	GEODESICCYLINDER computes the geodesic between two points on a cylinder.</li><li><a href="projPointOnCylinder.html" class="code" title="function ptProj = projPointOnCylinder(pt, cyl, varargin)">projPointOnCylinder</a>	PROJPOINTONCYLINDER Project a 3D point onto a cylinder.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = cart2cyl(varargin)</a>
+0002 <span class="comment">%CART2CYL  Convert cartesian to cylindrical coordinates.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   CYL = cart2cyl(POINT)</span>
+0005 <span class="comment">%   convert the 3D cartesian coordinates of points POINT (given by [X Y Z]</span>
+0006 <span class="comment">%   where X, Y, Z have the same size) into cylindrical coordinates CYL,</span>
+0007 <span class="comment">%   given by [THETA R Z].</span>
+0008 <span class="comment">%   THETA is the arctangent of the ratio Y/X (between 0 and 2*PI)</span>
+0009 <span class="comment">%   R     can be computed using sqrt(X^2+Y^2)</span>
+0010 <span class="comment">%   Z     keeps the same value.</span>
+0011 <span class="comment">%   The size of THETA, and R is the same as the size of X, Y and Z.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   CYL = cart2cyl(X, Y, Z)</span>
+0014 <span class="comment">%   provides coordinates as 3 different parameters</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example</span>
+0017 <span class="comment">%   cart2cyl([-1 0 2])</span>
+0018 <span class="comment">%   gives : 4.7124    1.0000     2.0000</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   See also agles3d, cart2pol, cart2sph2</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">% ------</span>
+0024 <span class="comment">% Author: David Legland</span>
+0025 <span class="comment">% e-mail: david.legland@jouy.inra.fr</span>
+0026 <span class="comment">% Created: 2006-03-23</span>
+0027 <span class="comment">% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0028 
+0029 <span class="comment">% process input parameters</span>
+0030 <span class="keyword">if</span> length(varargin)==1
+0031     var = varargin{1};
+0032     x = var(:,1);
+0033     y = var(:,2);
+0034     z = var(:,3);
+0035 <span class="keyword">elseif</span> length(varargin)==3
+0036     x = varargin{1};
+0037     y = varargin{2};
+0038     z = varargin{3};
+0039 <span class="keyword">end</span>
+0040 
+0041 <span class="comment">% convert coordinates</span>
+0042 dim = size(x);
+0043 theta = reshape(mod(atan2(y(:), x(:))+2*pi, 2*pi), dim);
+0044 r = reshape(sqrt(x(:).*x(:) + y(:).*y(:)), dim);
+0045 
+0046 <span class="comment">% process output parameters</span>
+0047 <span class="keyword">if</span> nargout==0 ||nargout==1
+0048     <span class="keyword">if</span> length(dim)&gt;2 || dim(2)&gt;1
+0049         varargout{1} = {theta r z};
+0050     <span class="keyword">else</span>
+0051         varargout{1} = [theta r z];
+0052     <span class="keyword">end</span>
+0053 <span class="keyword">elseif</span> nargout==3
+0054     varargout{1} = theta;
+0055     varargout{2} = r;
+0056     varargout{3} = z;
+0057 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

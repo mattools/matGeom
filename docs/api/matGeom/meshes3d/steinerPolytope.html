@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of steinerPolytope</title>
+  <meta name="keywords" content="steinerPolytope">
+  <meta name="description" content="STEINERPOLYTOPE Create a steiner polytope from a set of vectors.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; steinerPolytope.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>steinerPolytope
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>STEINERPOLYTOPE Create a steiner polytope from a set of vectors.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [vertices, faces] = steinerPolytope(vectors) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">STEINERPOLYTOPE Create a steiner polytope from a set of vectors.
+
+   [VERTICES FACES] = steinerPolygon(VECTORS)
+   Creates the Steiner polytope defined by the set of vectors VECTORS.
+
+   Example
+     % Creates and display a planar Steiner polytope (ie, a polygon)
+     [v f] = steinerPolytope([1 0;0 1;1 1]);
+     fillPolygon(v);
+
+     % Creates and display a 3D Steiner polytope 
+     [v f] = steinerPolytope([1 0 0;0 1 0;0 0 1;1 1 1]);
+     drawMesh(v, f);
+     view(3); axis vis3d
+
+   See also
+   meshes3d, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a>, steinerPolygon, <a href="mergeCoplanarFaces.html" class="code" title="function varargout = mergeCoplanarFaces(nodes, varargin)">mergeCoplanarFaces</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="mergeCoplanarFaces.html" class="code" title="function varargout = mergeCoplanarFaces(nodes, varargin)">mergeCoplanarFaces</a>	MERGECOPLANARFACES Merge coplanar faces of a polyhedral mesh.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [vertices, faces] = steinerPolytope(vectors)</a>
+0002 <span class="comment">%STEINERPOLYTOPE Create a steiner polytope from a set of vectors.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [VERTICES FACES] = steinerPolygon(VECTORS)</span>
+0005 <span class="comment">%   Creates the Steiner polytope defined by the set of vectors VECTORS.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   Example</span>
+0008 <span class="comment">%     % Creates and display a planar Steiner polytope (ie, a polygon)</span>
+0009 <span class="comment">%     [v f] = steinerPolytope([1 0;0 1;1 1]);</span>
+0010 <span class="comment">%     fillPolygon(v);</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%     % Creates and display a 3D Steiner polytope</span>
+0013 <span class="comment">%     [v f] = steinerPolytope([1 0 0;0 1 0;0 0 1;1 1 1]);</span>
+0014 <span class="comment">%     drawMesh(v, f);</span>
+0015 <span class="comment">%     view(3); axis vis3d</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   See also</span>
+0018 <span class="comment">%   meshes3d, drawMesh, steinerPolygon, mergeCoplanarFaces</span>
+0019 <span class="comment">%</span>
+0020 
+0021 <span class="comment">% ------</span>
+0022 <span class="comment">% Author: David Legland</span>
+0023 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0024 <span class="comment">% Created: 2006-04-28</span>
+0025 <span class="comment">% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0026 
+0027 <span class="comment">% History</span>
+0028 <span class="comment">% 2013-02-22 merge coplanar faces, add management of 2D case, update doc</span>
+0029 
+0030 
+0031 <span class="comment">% compute vectors dimension</span>
+0032 nd = size(vectors, 2);
+0033 
+0034 <span class="comment">% create candidate vertices</span>
+0035 vertices = zeros(1, size(vectors, 2));
+0036 <span class="keyword">for</span> i = 1:length(vectors)
+0037     nv = size(vertices, 1);
+0038     vertices = [vertices; vertices+repmat(vectors(i,:), [nv 1])]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0039 <span class="keyword">end</span>
+0040 
+0041 <span class="keyword">if</span> nd == 2
+0042     <span class="comment">% for planar case, use specific function convhull</span>
+0043     K = convhull(vertices(:,1), vertices(:,2));
+0044     vertices = vertices(K, :);
+0045     faces = 1:length(K);
+0046     
+0047 <span class="keyword">else</span> 
+0048     <span class="comment">% Process the general case (tested only for nd==3)</span>
+0049     
+0050     <span class="comment">% compute convex hull</span>
+0051     K = convhulln(vertices);
+0052     
+0053     <span class="comment">% keep only relevant points, and update faces indices</span>
+0054     ind = unique(K);
+0055     <span class="keyword">for</span> i = 1:length(ind)
+0056         K(K==ind(i)) = i;
+0057     <span class="keyword">end</span>
+0058     
+0059     <span class="comment">% return results</span>
+0060     vertices = vertices(ind, :);
+0061     faces = K;
+0062     
+0063     <span class="comment">% in case of 3D meshes, merge coplanar faces</span>
+0064     <span class="keyword">if</span> nd == 3
+0065         faces = <a href="mergeCoplanarFaces.html" class="code" title="function varargout = mergeCoplanarFaces(nodes, varargin)">mergeCoplanarFaces</a>(vertices, faces);
+0066     <span class="keyword">end</span>
+0067 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of crackPattern</title>
+  <meta name="keywords" content="crackPattern">
+  <meta name="description" content="CRACKPATTERN Create a (bounded) crack pattern tessellation.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; crackPattern.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>crackPattern
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CRACKPATTERN Create a (bounded) crack pattern tessellation.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function edges = crackPattern(box, points, alpha, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CRACKPATTERN Create a (bounded) crack pattern tessellation.
+
+   E = crackPattern(BOX, POINTS, ALPHA)
+   create a crack propagation pattern wit following parameters :
+   - pattern is bounded by area BOX given by [xmin xmax ymin ymax].
+   - each crack originates from points given in POINTS
+   - direction of each crack is given by array ALPHA
+   - a crack stop when it reaches another already created crack. 
+   - all cracks stop when they reach the border of the frame, given by box
+   (a serie of 4 points).
+   The result is a collection of edges, in the form [x1 y1 x2 y2].
+
+   E = crackPattern(BOX, POINTS, ALPHA, SPEED)
+   Also specify speed of propagation of each crack.
+
+
+   See the result with :
+     figure;
+     drawEdge(E);
+
+   See also
+     <a href="drawEdge.html" class="code" title="function varargout = drawEdge(varargin)">drawEdge</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>	CREATELINE Create a straight line from 2 points, or from other inputs.</li><li><a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>	INTERSECTLINES Return all intersection points of N lines in 2D.</li><li><a href="linePosition.html" class="code" title="function pos = linePosition(point, line, varargin)">linePosition</a>	LINEPOSITION Position of a point on a line.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function edges = crackPattern(box, points, alpha, varargin)</a>
+0002 <span class="comment">%CRACKPATTERN Create a (bounded) crack pattern tessellation.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   E = crackPattern(BOX, POINTS, ALPHA)</span>
+0005 <span class="comment">%   create a crack propagation pattern wit following parameters :</span>
+0006 <span class="comment">%   - pattern is bounded by area BOX given by [xmin xmax ymin ymax].</span>
+0007 <span class="comment">%   - each crack originates from points given in POINTS</span>
+0008 <span class="comment">%   - direction of each crack is given by array ALPHA</span>
+0009 <span class="comment">%   - a crack stop when it reaches another already created crack.</span>
+0010 <span class="comment">%   - all cracks stop when they reach the border of the frame, given by box</span>
+0011 <span class="comment">%   (a serie of 4 points).</span>
+0012 <span class="comment">%   The result is a collection of edges, in the form [x1 y1 x2 y2].</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   E = crackPattern(BOX, POINTS, ALPHA, SPEED)</span>
+0015 <span class="comment">%   Also specify speed of propagation of each crack.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   See the result with :</span>
+0019 <span class="comment">%     figure;</span>
+0020 <span class="comment">%     drawEdge(E);</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   See also</span>
+0023 <span class="comment">%     drawEdge</span>
+0024 <span class="comment">%</span>
+0025 
+0026 <span class="comment">%   ---------</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%   author : David Legland</span>
+0029 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0030 <span class="comment">%   created the 25/05/2004.</span>
+0031 <span class="comment">%</span>
+0032 
+0033 <span class="comment">%   HISTORY :</span>
+0034 
+0035 <span class="keyword">if</span> ~isempty(varargin)
+0036     speed = varargin{1};
+0037 <span class="keyword">else</span>
+0038     speed = ones(size(points, 1), 1);
+0039 <span class="keyword">end</span>
+0040 
+0041 <span class="comment">% Compute line equations for each initial crack.</span>
+0042 <span class="comment">% The two 'Inf' at the end correspond to the position of the limit.</span>
+0043 <span class="comment">% If an intersection point is found with another line, but whose position</span>
+0044 <span class="comment">% is after this value, this means that another crack stopped it before it</span>
+0045 <span class="comment">% reach the intersection point.</span>
+0046 <span class="comment">% There is one 'end position' for each side of the crack.</span>
+0047 lines = [points speed.*cos(alpha) speed.*sin(alpha) Inf*ones(size(points, 1), 2)];
+0048 
+0049 <span class="comment">% initialize lines for borders, but assign a very high speed, to be sure</span>
+0050 <span class="comment">% borders will stop all cracks.</span>
+0051 dx = (box([2 3 4 1],1)-box([1 2 3 4],1))*max(speed)*5;
+0052 dy = (box([2 3 4 1],2)-box([1 2 3 4],2))*max(speed)*5;
+0053 
+0054 <span class="comment">% add borders to the lines set</span>
+0055 lines = [lines ; <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(box, dx, dy) Inf*ones(4,2)];
+0056 
+0057 edges = zeros(0, 4);
+0058 
+0059 
+0060 <span class="keyword">while</span> true    
+0061     modif = 0;
+0062     
+0063     <span class="comment">% try to update each line</span>
+0064     <span class="keyword">for</span> i=1:size(points, 1)
+0065         
+0066         <span class="comment">% compute intersections with all other lines</span>
+0067         pi = <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(lines(i,:), lines);
+0068         
+0069         <span class="comment">% compute position of all intersection points on the current line</span>
+0070         pos = <a href="linePosition.html" class="code" title="function pos = linePosition(point, line, varargin)">linePosition</a>(pi, lines(i,:));
+0071         
+0072         <span class="comment">% consider points to the right (positive position), and sort them</span>
+0073         indr = find(pos&gt;=0 &amp; pos~=Inf);
+0074         [posr, indr2] = sort(pos(indr));
+0075         
+0076         
+0077         <span class="comment">% look for the closest intersection to the right</span>
+0078         <span class="keyword">for</span> i2=1:length(indr2)
+0079             
+0080             <span class="comment">% index of intersected line</span>
+0081             il = indr(indr2(i2));
+0082 
+0083             <span class="comment">% position of point relative to intersected line</span>
+0084             pos2 = <a href="linePosition.html" class="code" title="function pos = linePosition(point, line, varargin)">linePosition</a>(pi(il, :), lines(il, :));
+0085             
+0086             <span class="comment">% depending on the sign of position, tests if the line2 can</span>
+0087             <span class="comment">% stop the current line, or if it was stopped before</span>
+0088             <span class="keyword">if</span> pos2&gt;0
+0089                 <span class="keyword">if</span> pos2&lt;abs(posr(i2)) &amp;&amp; pos2&lt;lines(il, 5)
+0090                     <span class="keyword">if</span> lines(i, 5) ~= posr(i2)
+0091                         edges(i, 3:4) = pi(il,:);
+0092                         lines(i, 5) = posr(i2); 
+0093                         modif = 1;
+0094                     <span class="keyword">end</span>                                                           
+0095                     <span class="keyword">break</span>;
+0096                 <span class="keyword">end</span>
+0097             <span class="keyword">else</span>
+0098                  <span class="keyword">if</span> abs(pos2)&lt;abs(posr(i2)) &amp;&amp; abs(pos2)&lt;lines(il, 6)
+0099                     <span class="keyword">if</span> lines(i, 5) ~= posr(i2)
+0100                         edges(i, 3:4) = pi(il,:);
+0101                         lines(i, 5) = posr(i2);
+0102                         modif = 1;
+0103                     <span class="keyword">end</span>                    
+0104                     <span class="keyword">break</span>;
+0105                 <span class="keyword">end</span>
+0106             <span class="keyword">end</span>
+0107                 
+0108         <span class="keyword">end</span>   <span class="comment">% end processing of right points of the line</span>
+0109             
+0110         
+0111          <span class="comment">% consider points to the left (negative position), and sort them</span>
+0112         indl = find(pos&lt;=0 &amp;&amp; pos~=Inf);
+0113         [posl, indl2] = sort(abs(pos(indl)));        
+0114 
+0115         <span class="comment">% look for the closest intersection to the right</span>
+0116         <span class="keyword">for</span> i2 = 1:length(indl2)
+0117             <span class="comment">% index of intersected line</span>
+0118             il = indl(indl2(i2));
+0119             
+0120             <span class="comment">% position of point relative to intersected line</span>
+0121             pos2 = <a href="linePosition.html" class="code" title="function pos = linePosition(point, line, varargin)">linePosition</a>(pi(il, :), lines(il, :));
+0122     
+0123             <span class="comment">% depending on the sign of position, tests if the line2 can</span>
+0124             <span class="comment">% stop the current line, or if it was stopped before</span>
+0125             <span class="keyword">if</span> pos2&gt;0
+0126                 <span class="keyword">if</span> pos2&lt;abs(posl(i2)) &amp;&amp; pos2&lt;lines(il, 5)
+0127                     <span class="keyword">if</span> lines(i, 6) ~= abs(posl(i2))
+0128                         edges(i, 1:2) = pi(il, :);
+0129                         lines(i, 6) = abs(posl(i2));
+0130                         modif = 1;
+0131                     <span class="keyword">end</span>                    
+0132                     <span class="keyword">break</span>;
+0133                 <span class="keyword">end</span>
+0134             <span class="keyword">else</span>
+0135                  <span class="keyword">if</span> abs(pos2)&lt;abs(posl(i2)) &amp;&amp; abs(pos2)&lt;lines(il, 6)
+0136                     <span class="keyword">if</span> lines(i, 6) ~= abs(posl(i2))
+0137                         edges(i, 1:2) = pi(il, :);
+0138                         lines(i, 6) = abs(posl(i2));
+0139                         modif = 1;
+0140                     <span class="keyword">end</span>                    
+0141                     <span class="keyword">break</span>;
+0142                 <span class="keyword">end</span>
+0143             <span class="keyword">end</span>    
+0144             
+0145         <span class="keyword">end</span> <span class="comment">% end processing of left points of the line</span>
+0146         
+0147         
+0148     <span class="keyword">end</span> <span class="comment">% end processing of all lines</span>
+0149     
+0150     <span class="comment">% break the infinite loop if no more modification was made</span>
+0151     <span class="keyword">if</span> ~modif
+0152         <span class="keyword">break</span>;
+0153     <span class="keyword">end</span>
+0154 <span class="keyword">end</span>
+0155 
+0156 <span class="comment">% add edges of the surronding box.</span>
+0157 edges = [edges ; box(1,:) box(2,:) ; box(2,:) box(3,:); <span class="keyword">...</span>
+0158                  box(3,:) box(4,:) ; box(4,:) box(1,:)  ];
+0159</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of rotation3dToEulerAngles</title>
+  <meta name="keywords" content="rotation3dToEulerAngles">
+  <meta name="description" content="ROTATION3DTOEULERANGLES Extract Euler angles from a rotation matrix.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; rotation3dToEulerAngles.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>rotation3dToEulerAngles
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ROTATION3DTOEULERANGLES Extract Euler angles from a rotation matrix.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = rotation3dToEulerAngles(mat, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ROTATION3DTOEULERANGLES Extract Euler angles from a rotation matrix.
+
+   [PHI, THETA, PSI] = rotation3dToEulerAngles(MAT)
+   Computes Euler angles PHI, THETA and PSI (in degrees) from a 3D 4-by-4
+   or 3-by-3 rotation matrix.
+
+   ANGLES = rotation3dToEulerAngles(MAT)
+   Concatenates results in a single 1-by-3 row vector. This format is used
+   for representing some 3D shapes like ellipsoids.
+
+   ... = rotation3dToEulerAngles(MAT, CONVENTION)
+   CONVENTION specifies the axis rotation sequence. Default is 'ZYX'.
+   Supported conventions are: 
+       'ZYX','ZXY','YXZ','YZX','XYZ','XZY'
+       'ZYZ','ZXZ','YZY','YXY','XZX','XYX'
+
+   Example
+   rotation3dToEulerAngles
+
+   References
+   Code from '1994 - Shoemake - Graphics Gems IV: Euler Angle Conversion:
+   http://webdocs.cs.ualberta.ca/~graphics/books/GraphicsGems/gemsiv/euler_angle/EulerAngles.c
+   (see also rotm2eul, that is part of MATLAB's Robotics System Toolbox)
+   Modified using explanations in:
+   http://www.gregslabaugh.net/publications/euler.pdf
+   https://www.geometrictools.com/Documentation/EulerAngles.pdf
+
+   See also
+   <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="rotation3dAxisAndAngle.html" class="code" title="function [axis, theta] = rotation3dAxisAndAngle(mat)">rotation3dAxisAndAngle</a>, <a href="createRotation3dLineAngle.html" class="code" title="function mat = createRotation3dLineAngle(line, theta)">createRotation3dLineAngle</a>,
+   <a href="eulerAnglesToRotation3d.html" class="code" title="function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)">eulerAnglesToRotation3d</a>
+
+
+ ------
+ Authors: David Legland, oqilipo
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2010-08-11,    using Matlab 7.9.0.529 (R2009b)
+ Copyright 2010 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="isTransform3d.html" class="code" title="function a = isTransform3d(trans, varargin)">isTransform3d</a>	ISTRANSFORM3D Check if input is a affine transformation matrix.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawAngleBetweenVectors3d.html" class="code" title="function varargout = drawAngleBetweenVectors3d(o, v1, v2, r, varargin)">drawAngleBetweenVectors3d</a>	DRAWANGLEBETWEENVECTORS3D Draw an arc between 2 vectors.</li><li><a href="equivalentEllipsoid.html" class="code" title="function ell = equivalentEllipsoid(points)">equivalentEllipsoid</a>	Equivalent ellipsoid of a set of 3D points.</li><li><a href="fitEllipse3d.html" class="code" title="function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin)">fitEllipse3d</a>	FITELLIPSE3D Fit an ellipse to a set of points.</li><li><a href="orientedBox3d.html" class="code" title="function [box3d, rotMat] = orientedBox3d(pts)">orientedBox3d</a>	Object-oriented bounding box of a set of 3D points.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = rotation3dToEulerAngles(mat, varargin)</a>
+0002 <span class="comment">%ROTATION3DTOEULERANGLES Extract Euler angles from a rotation matrix.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [PHI, THETA, PSI] = rotation3dToEulerAngles(MAT)</span>
+0005 <span class="comment">%   Computes Euler angles PHI, THETA and PSI (in degrees) from a 3D 4-by-4</span>
+0006 <span class="comment">%   or 3-by-3 rotation matrix.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   ANGLES = rotation3dToEulerAngles(MAT)</span>
+0009 <span class="comment">%   Concatenates results in a single 1-by-3 row vector. This format is used</span>
+0010 <span class="comment">%   for representing some 3D shapes like ellipsoids.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   ... = rotation3dToEulerAngles(MAT, CONVENTION)</span>
+0013 <span class="comment">%   CONVENTION specifies the axis rotation sequence. Default is 'ZYX'.</span>
+0014 <span class="comment">%   Supported conventions are:</span>
+0015 <span class="comment">%       'ZYX','ZXY','YXZ','YZX','XYZ','XZY'</span>
+0016 <span class="comment">%       'ZYZ','ZXZ','YZY','YXY','XZX','XYX'</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   Example</span>
+0019 <span class="comment">%   rotation3dToEulerAngles</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   References</span>
+0022 <span class="comment">%   Code from '1994 - Shoemake - Graphics Gems IV: Euler Angle Conversion:</span>
+0023 <span class="comment">%   http://webdocs.cs.ualberta.ca/~graphics/books/GraphicsGems/gemsiv/euler_angle/EulerAngles.c</span>
+0024 <span class="comment">%   (see also rotm2eul, that is part of MATLAB's Robotics System Toolbox)</span>
+0025 <span class="comment">%   Modified using explanations in:</span>
+0026 <span class="comment">%   http://www.gregslabaugh.net/publications/euler.pdf</span>
+0027 <span class="comment">%   https://www.geometrictools.com/Documentation/EulerAngles.pdf</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%   See also</span>
+0030 <span class="comment">%   transforms3d, rotation3dAxisAndAngle, createRotation3dLineAngle,</span>
+0031 <span class="comment">%   eulerAnglesToRotation3d</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">% ------</span>
+0035 <span class="comment">% Authors: David Legland, oqilipo</span>
+0036 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0037 <span class="comment">% Created: 2010-08-11,    using Matlab 7.9.0.529 (R2009b)</span>
+0038 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0039 
+0040 p = inputParser;
+0041 validStrings = {<span class="keyword">...</span>
+0042     <span class="string">'ZYX'</span>,<span class="string">'ZXY'</span>,<span class="string">'YXZ'</span>,<span class="string">'YZX'</span>,<span class="string">'XYZ'</span>,<span class="string">'XZY'</span>,<span class="keyword">...</span>
+0043     <span class="string">'ZYZ'</span>,<span class="string">'ZXZ'</span>,<span class="string">'YZY'</span>,<span class="string">'YXY'</span>,<span class="string">'XZX'</span>,<span class="string">'XYX'</span>};
+0044 addOptional(p,<span class="string">'convention'</span>,<span class="string">'ZYX'</span>,@(x) any(validatestring(x,validStrings)));
+0045 logParValidFunc = @(x) (islogical(x) || isequal(x,1) || isequal(x,0));
+0046 addParameter(p,<span class="string">'IsRotation'</span>, 1, logParValidFunc);
+0047 valTol = @(x) validateattributes(x,{<span class="string">'numeric'</span>},{<span class="string">'scalar'</span>, <span class="string">'&gt;='</span>,eps(class(mat)), <span class="string">'&lt;='</span>,1});
+0048 addParameter(p,<span class="string">'tolerance'</span>, 1e-8, valTol);
+0049 parse(p,varargin{:});
+0050 convention=p.Results.convention;
+0051 isRotation = p.Results.IsRotation;
+0052 tolerance = p.Results.tolerance;
+0053 
+0054 <span class="keyword">if</span> isRotation
+0055     <span class="keyword">if</span> ~<a href="isTransform3d.html" class="code" title="function a = isTransform3d(trans, varargin)">isTransform3d</a>(mat(1:3,1:3), <span class="string">'rotation'</span>, 1, <span class="string">'tolerance'</span>, tolerance)
+0056         warning([<span class="string">'Rotation matrix contains reflection or scaling '</span> <span class="keyword">...</span>
+0057             <span class="string">'tested with a tolerance of '</span> num2str(tolerance) <span class="string">'.'</span> newline <span class="keyword">...</span>
+0058             <span class="string">'Calculation of euler angles might be incorrect.'</span>])
+0059     <span class="keyword">end</span>
+0060 <span class="keyword">end</span>
+0061 
+0062 <span class="keyword">switch</span> convention
+0063     <span class="keyword">case</span> <span class="string">'ZYX'</span>
+0064         <span class="comment">% extract |cos(theta)|</span>
+0065         cy = hypot(mat(1,1), mat(2,1));
+0066         <span class="comment">% avoid dividing by 0</span>
+0067         <span class="keyword">if</span> cy &gt; 16*eps
+0068             <span class="comment">% normal case: theta &lt;&gt; 0</span>
+0069             phi   = atan2( mat(2,1), mat(1,1));
+0070             theta = atan2(-mat(3,1), cy);
+0071             psi   = atan2( mat(3,2), mat(3,3));
+0072         <span class="keyword">else</span>
+0073             phi   = 0;
+0074             theta = atan2(-mat(3,1), cy);
+0075             psi   = atan2(-mat(2,3), mat(2,2));
+0076         <span class="keyword">end</span>
+0077     <span class="keyword">case</span> <span class="string">'ZXY'</span>
+0078         cy = hypot(mat(2,2), mat(1,2));
+0079         <span class="keyword">if</span> cy &gt; 16*eps
+0080             phi   = -atan2( mat(1,2), mat(2,2));
+0081             theta = -atan2(-mat(3,2), cy);
+0082             psi   = -atan2( mat(3,1), mat(3,3));
+0083         <span class="keyword">else</span>
+0084             phi   = 0;
+0085             theta = -atan2(-mat(3,2), cy);
+0086             psi   = -atan2(-mat(1,3), mat(1,1));
+0087         <span class="keyword">end</span>
+0088     <span class="keyword">case</span> <span class="string">'YXZ'</span>
+0089         cy = hypot(mat(3,3), mat(1,3));
+0090         <span class="keyword">if</span> cy &gt; 16*eps
+0091             phi   = atan2( mat(1,3), mat(3,3));
+0092             theta = atan2(-mat(2,3), cy);
+0093             psi   = atan2( mat(2,1), mat(2,2));
+0094         <span class="keyword">else</span>
+0095             phi   = 0;
+0096             theta = atan2(-mat(2,3), cy);
+0097             psi   = atan2(-mat(1,2), mat(1,1));
+0098         <span class="keyword">end</span>
+0099     <span class="keyword">case</span> <span class="string">'YZX'</span>
+0100         cy = hypot(mat(1,1), mat(3,1));
+0101         <span class="keyword">if</span> cy &gt; 16*eps
+0102             phi   = -atan2( mat(3,1), mat(1,1));
+0103             theta = -atan2(-mat(2,1), cy);
+0104             psi   = -atan2( mat(2,3), mat(2,2));
+0105         <span class="keyword">else</span>
+0106             phi   = 0;
+0107             theta = -atan2(-mat(2,1), cy);
+0108             psi   = -atan2(-mat(3,2), mat(3,3));
+0109         <span class="keyword">end</span>
+0110     <span class="keyword">case</span> <span class="string">'XYZ'</span>
+0111         cy = hypot(mat(3,3), mat(2,3));
+0112         <span class="keyword">if</span> cy &gt; 16*eps
+0113             phi   = -atan2( mat(2,3), mat(3,3));
+0114             theta = -atan2(-mat(1,3), cy);
+0115             psi   = -atan2( mat(1,2), mat(1,1));
+0116         <span class="keyword">else</span>
+0117             phi   = 0;
+0118             theta = -atan2(-mat(1,3), cy);
+0119             psi   = -atan2(-mat(2,1), mat(2,2));
+0120         <span class="keyword">end</span>
+0121     <span class="keyword">case</span> <span class="string">'XZY'</span>
+0122         cy = hypot(mat(2,2), mat(3,2));
+0123         <span class="keyword">if</span> cy &gt; 16*eps
+0124             phi   = atan2( mat(3,2), mat(2,2));
+0125             theta = atan2(-mat(1,2), cy);
+0126             psi   = atan2( mat(1,3), mat(1,1));
+0127         <span class="keyword">else</span>
+0128             phi   = 0;
+0129             theta = atan2(-mat(1,2), cy);
+0130             psi   = atan2(-mat(3,1), mat(3,3));
+0131         <span class="keyword">end</span>
+0132         
+0133     <span class="keyword">case</span> <span class="string">'ZYZ'</span>
+0134         cy = hypot(mat(3,2), mat(3,1));
+0135         <span class="keyword">if</span> cy &gt; 16*eps
+0136             phi   = -atan2(mat(2,3), -mat(1,3));
+0137             theta = -atan2(cy, mat(3,3));
+0138             psi   = -atan2(mat(3,2), mat(3,1));
+0139         <span class="keyword">else</span>
+0140             phi   = 0;
+0141             theta = -atan2(cy, mat(3,3));
+0142             psi   = -atan2(-mat(2,1), mat(2,2));
+0143         <span class="keyword">end</span>
+0144     <span class="keyword">case</span> <span class="string">'ZXZ'</span>
+0145         cy = hypot(mat(3,2), mat(3,1));
+0146         <span class="keyword">if</span> cy &gt; 16*eps
+0147             phi   = atan2(mat(1,3), -mat(2,3));
+0148             theta = atan2(cy, mat(3,3));
+0149             psi   = atan2(mat(3,1), mat(3,2));
+0150         <span class="keyword">else</span>
+0151             phi   = 0;
+0152             theta = atan2(cy, mat(3,3));
+0153             psi   = atan2(-mat(1,2), mat(1,1));
+0154         <span class="keyword">end</span>
+0155     <span class="keyword">case</span> <span class="string">'YZY'</span>
+0156         cy = hypot(mat(2,3), mat(2,1));
+0157         <span class="keyword">if</span> cy &gt; 16*eps
+0158             phi   = atan2(mat(3,2), -mat(1,2));
+0159             theta = atan2(cy, mat(2,2));
+0160             psi   = atan2(mat(2,3), mat(2,1));
+0161         <span class="keyword">else</span>
+0162             phi   = 0;
+0163             theta = atan2(cy, mat(2,2));
+0164             psi   = atan2(-mat(3,1), mat(3,3));
+0165         <span class="keyword">end</span>
+0166     <span class="keyword">case</span> <span class="string">'YXY'</span>
+0167         cy = hypot(mat(2,3), mat(2,1));
+0168         <span class="keyword">if</span> cy &gt; 16*eps
+0169             phi   = -atan2(mat(1,2), -mat(3,2));
+0170             theta = -atan2(cy, mat(2,2));
+0171             psi   = -atan2(mat(2,1), mat(2,3));
+0172         <span class="keyword">else</span>
+0173             phi   = 0;
+0174             theta = -atan2(cy, mat(2,2));
+0175             psi   = -atan2(-mat(1,3), mat(1,1));
+0176         <span class="keyword">end</span>
+0177     <span class="keyword">case</span> <span class="string">'XZX'</span>
+0178         cy = hypot(mat(1,3), mat(1,2));
+0179         <span class="keyword">if</span> cy &gt; 16*eps
+0180             phi   = -atan2(mat(3,1), -mat(2,1));
+0181             theta = -atan2(cy, mat(1,1));
+0182             psi   = -atan2(mat(1,3), mat(1,2));
+0183         <span class="keyword">else</span>
+0184             phi   = 0;
+0185             theta = -atan2(cy, mat(1,1));
+0186             psi   = -atan2(-mat(3,2), mat(3,3));
+0187         <span class="keyword">end</span>
+0188     <span class="keyword">case</span> <span class="string">'XYX'</span>
+0189         cy = hypot(mat(1,2), mat(1,3));
+0190         <span class="keyword">if</span> cy &gt; 16*eps
+0191             phi   = atan2(mat(2,1), -mat(3,1));
+0192             theta = atan2(cy, mat(1,1));
+0193             psi   = atan2(mat(1,2), mat(1,3));
+0194         <span class="keyword">else</span>
+0195             phi   = 0;
+0196             theta = atan2(cy, mat(1,1));
+0197             psi   = atan2(-mat(2,3), mat(2,2));
+0198         <span class="keyword">end</span>
+0199 <span class="keyword">end</span>
+0200 
+0201 <span class="comment">% format output arguments</span>
+0202 <span class="keyword">if</span> nargout &lt;= 1
+0203     <span class="comment">% one array</span>
+0204     varargout{1} = rad2deg([phi theta psi]);
+0205 <span class="keyword">else</span>
+0206     <span class="comment">% three separate arrays</span>
+0207     varargout = cellfun(@rad2deg, {phi theta psi},<span class="string">'uni'</span>,0);
+0208 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

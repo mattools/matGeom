@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of transforms3d</title>
+  <meta name="keywords" content="transforms3d">
+  <meta name="description" content="TRANSFORMS3D  Conventions for manipulating 3D affine transforms.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; transforms3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>transforms3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>TRANSFORMS3D  Conventions for manipulating 3D affine transforms.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function transforms3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">TRANSFORMS3D  Conventions for manipulating 3D affine transforms.
+
+   By 'transform' we mean an affine transform. A 3D affine transform
+   is represented by a 4*4 matrix. The last row of the matrix is equal to
+   [0 0 0 1].
+
+   
+
+   Example:
+   % create a translation by the vector [10 20 30]:
+   T = createTranslation3d([10 20 30]);
+   % Transform a basic point:
+   PT1 = [4 5 6];
+   PT2 = transformPoint3d(PT1, T)
+   % returns:
+   PT2 = 
+       14   25   36
+
+   See also
+   <a href="createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>, <a href="createScaling3d.html" class="code" title="function trans = createScaling3d(varargin)">createScaling3d</a>, , <a href="createBasisTransform3d.html" class="code" title="function transfo = createBasisTransform3d(source, target)">createBasisTransform3d</a>
+   <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>, <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>, <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>
+   <a href="rotation3dAxisAndAngle.html" class="code" title="function [axis, theta] = rotation3dAxisAndAngle(mat)">rotation3dAxisAndAngle</a>, <a href="rotation3dToEulerAngles.html" class="code" title="function varargout = rotation3dToEulerAngles(mat, varargin)">rotation3dToEulerAngles</a>,
+   <a href="createRotation3dLineAngle.html" class="code" title="function mat = createRotation3dLineAngle(line, theta)">createRotation3dLineAngle</a>, <a href="eulerAnglesToRotation3d.html" class="code" title="function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)">eulerAnglesToRotation3d</a>
+   <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>, <a href="transformVector3d.html" class="code" title="function varargout = transformVector3d(varargin)">transformVector3d</a>, <a href="transformLine3d.html" class="code" title="function res = transformLine3d(line, trans)">transformLine3d</a>, <a href="transformPlane3d.html" class="code" title="function plane2 = transformPlane3d(plane, trans)">transformPlane3d</a>
+   <a href="composeTransforms3d.html" class="code" title="function trans = composeTransforms3d(varargin)">composeTransforms3d</a>, <a href="recenterTransform3d.html" class="code" title="function res = recenterTransform3d(transfo, center)">recenterTransform3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function transforms3d(varargin)</a>
+0002 <span class="comment">%TRANSFORMS3D  Conventions for manipulating 3D affine transforms.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   By 'transform' we mean an affine transform. A 3D affine transform</span>
+0005 <span class="comment">%   is represented by a 4*4 matrix. The last row of the matrix is equal to</span>
+0006 <span class="comment">%   [0 0 0 1].</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Example:</span>
+0011 <span class="comment">%   % create a translation by the vector [10 20 30]:</span>
+0012 <span class="comment">%   T = createTranslation3d([10 20 30]);</span>
+0013 <span class="comment">%   % Transform a basic point:</span>
+0014 <span class="comment">%   PT1 = [4 5 6];</span>
+0015 <span class="comment">%   PT2 = transformPoint3d(PT1, T)</span>
+0016 <span class="comment">%   % returns:</span>
+0017 <span class="comment">%   PT2 =</span>
+0018 <span class="comment">%       14   25   36</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   See also</span>
+0021 <span class="comment">%   createTranslation3d, createScaling3d, , createBasisTransform3d</span>
+0022 <span class="comment">%   createRotationOx, createRotationOy, createRotationOz</span>
+0023 <span class="comment">%   rotation3dAxisAndAngle, rotation3dToEulerAngles,</span>
+0024 <span class="comment">%   createRotation3dLineAngle, eulerAnglesToRotation3d</span>
+0025 <span class="comment">%   transformPoint3d, transformVector3d, transformLine3d, transformPlane3d</span>
+0026 <span class="comment">%   composeTransforms3d, recenterTransform3d</span>
+0027 <span class="comment">%</span>
+0028 
+0029 <span class="comment">% ------</span>
+0030 <span class="comment">% Author: David Legland</span>
+0031 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0032 <span class="comment">% Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)</span>
+0033 <span class="comment">% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

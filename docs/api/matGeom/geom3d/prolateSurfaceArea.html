@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of prolateSurfaceArea</title>
+  <meta name="keywords" content="prolateSurfaceArea">
+  <meta name="description" content="PROLATESURFACEAREA  Approximated surface area of a prolate ellipsoid.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; prolateSurfaceArea.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>prolateSurfaceArea
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>PROLATESURFACEAREA  Approximated surface area of a prolate ellipsoid.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function S = prolateSurfaceArea(elli, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">PROLATESURFACEAREA  Approximated surface area of a prolate ellipsoid.
+
+   S = prolateSurfaceArea(R1,R2)
+
+   Example
+   prolateSurfaceArea
+
+   See also
+   geom3d, <a href="ellipsoidSurfaceArea.html" class="code" title="function s = ellipsoidSurfaceArea(elli)">ellipsoidSurfaceArea</a>, <a href="oblateSurfaceArea.html" class="code" title="function S = oblateSurfaceArea(elli, varargin)">oblateSurfaceArea</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function S = prolateSurfaceArea(elli, varargin)</a>
+0002 <span class="comment">%PROLATESURFACEAREA  Approximated surface area of a prolate ellipsoid.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   S = prolateSurfaceArea(R1,R2)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   Example</span>
+0007 <span class="comment">%   prolateSurfaceArea</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   See also</span>
+0010 <span class="comment">%   geom3d, ellipsoidSurfaceArea, oblateSurfaceArea</span>
+0011 <span class="comment">%</span>
+0012 
+0013 <span class="comment">% ------</span>
+0014 <span class="comment">% Author: David Legland</span>
+0015 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0016 <span class="comment">% Created: 2015-07-03,    using Matlab 7.9.0.529 (R2009b)</span>
+0017 <span class="comment">% Copyright 2015 INRA - Cepia Software Platform.</span>
+0018 
+0019 <span class="comment">%% Parse input argument</span>
+0020 
+0021 <span class="keyword">if</span> size(elli, 2) == 7
+0022     R1 = elli(:, 4);
+0023     R2 = elli(:, 5);
+0024     
+0025 <span class="keyword">elseif</span> size(elli, 2) == 1 &amp;&amp; ~isempty(varargin)
+0026     R1 = elli(:, 1);
+0027     R2 = varargin{1};
+0028 <span class="keyword">end</span>
+0029 
+0030 assert(R1 &gt; R2, <span class="string">'first radius must be larger than second radius'</span>);
+0031 
+0032 <span class="comment">% surface theorique d'un ellipsoide prolate</span>
+0033 <span class="comment">% cf http://fr.wikipedia.org/wiki/Ellipso%C3%AFde_de_r%C3%A9volution</span>
+0034 e = sqrt(R1.^2 - R2.^2) ./ R1;
+0035 S = 2 * pi * R2.^2 + 2 * pi * R1 .* R2 .* asin(e) ./ e;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

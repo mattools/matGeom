@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of lineToEdge3d</title>
+  <meta name="keywords" content="lineToEdge3d">
+  <meta name="description" content="LINETOEDGE3D Convert a 3D straight line to a 3D finite edge.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; lineToEdge3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>lineToEdge3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>LINETOEDGE3D Convert a 3D straight line to a 3D finite edge.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function edge = lineToEdge3d(line) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">LINETOEDGE3D Convert a 3D straight line to a 3D finite edge.
+
+   EDGE = lineToEdge3d(LINE)
+   Returns the edge with same origin as the line LINE, and with second
+   extremity corresponding to the addition of line origin and direction.
+   LINE is represented as [X0 Y0 Z0  DX DY DZ]
+   EDGE is represented as [X1 Y1 Z1  X2 Y2 Z2]
+
+   Example
+     line = [3 4 5  1 2 3];
+     edge = lineToEdge3d(line)
+     edge =
+          3   4   5   4   6   8
+
+   See also
+     <a href="lines3d.html" class="code" title="function lines3d(varargin)">lines3d</a>, <a href="edges3d.html" class="code" title="function edges3d(varargin)">edges3d</a>, <a href="edgeToLine3d.html" class="code" title="function line = edgeToLine3d(edge)">edgeToLine3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function edge = lineToEdge3d(line)</a>
+0002 <span class="comment">%LINETOEDGE3D Convert a 3D straight line to a 3D finite edge.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   EDGE = lineToEdge3d(LINE)</span>
+0005 <span class="comment">%   Returns the edge with same origin as the line LINE, and with second</span>
+0006 <span class="comment">%   extremity corresponding to the addition of line origin and direction.</span>
+0007 <span class="comment">%   LINE is represented as [X0 Y0 Z0  DX DY DZ]</span>
+0008 <span class="comment">%   EDGE is represented as [X1 Y1 Z1  X2 Y2 Z2]</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Example</span>
+0011 <span class="comment">%     line = [3 4 5  1 2 3];</span>
+0012 <span class="comment">%     edge = lineToEdge3d(line)</span>
+0013 <span class="comment">%     edge =</span>
+0014 <span class="comment">%          3   4   5   4   6   8</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   See also</span>
+0017 <span class="comment">%     lines3d, edges3d, edgeToLine3d</span>
+0018  
+0019 <span class="comment">% ------</span>
+0020 <span class="comment">% Author: David Legland</span>
+0021 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0022 <span class="comment">% Created: 2019-05-07,    using Matlab 9.6.0.1072779 (R2019a)</span>
+0023 <span class="comment">% Copyright 2019 INRA - Cepia Software Platform.</span>
+0024 
+0025 edge = [line(:, 1:3) line(:,1:3)+line(:,4:6)];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

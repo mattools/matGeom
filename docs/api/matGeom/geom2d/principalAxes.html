@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of principalAxes</title>
+  <meta name="keywords" content="principalAxes">
+  <meta name="description" content="PRINCIPALAXES Principal axes of a set of ND points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; principalAxes.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>principalAxes
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>PRINCIPALAXES Principal axes of a set of ND points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = principalAxes(points) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">PRINCIPALAXES Principal axes of a set of ND points.
+
+   [CENTER, ROTMAT] = principalAxes(PTS)
+   [CENTER, ROTMAT, SCALES] = principalAxes(PTS)
+   Computes the principal axes of a set of points given in a N-by-ND array
+   and returns the result in two or three outputs:
+   CENTER  is the centroid of the points, as a 1-by-ND row vector
+   ROTMAT  represents the orientation of the point cloud, as a ND-by-ND
+           rotation matrix
+   SCALES  is the scaling factor along each dimension, as a 1-by-ND row
+           vector.
+
+   Example
+     pts = randn(100, 2);
+     pts = transformPoint(pts, createScaling(5, 2));
+     pts = transformPoint(pts, createRotation(pi/6));
+     pts = transformPoint(pts, createTranslation(3, 4));
+     [center, rotMat] = principalAxes(pts);
+
+   See also
+     <a href="equivalentEllipse.html" class="code" title="function ell = equivalentEllipse(points)">equivalentEllipse</a>, equivalentEllipsoid, <a href="principalAxesTransform.html" class="code" title="function varargout = principalAxesTransform(pts)">principalAxesTransform</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="principalAxesTransform.html" class="code" title="function varargout = principalAxesTransform(pts)">principalAxesTransform</a>	Align a set of points along its principal axes.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = principalAxes(points)</a>
+0002 <span class="comment">%PRINCIPALAXES Principal axes of a set of ND points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [CENTER, ROTMAT] = principalAxes(PTS)</span>
+0005 <span class="comment">%   [CENTER, ROTMAT, SCALES] = principalAxes(PTS)</span>
+0006 <span class="comment">%   Computes the principal axes of a set of points given in a N-by-ND array</span>
+0007 <span class="comment">%   and returns the result in two or three outputs:</span>
+0008 <span class="comment">%   CENTER  is the centroid of the points, as a 1-by-ND row vector</span>
+0009 <span class="comment">%   ROTMAT  represents the orientation of the point cloud, as a ND-by-ND</span>
+0010 <span class="comment">%           rotation matrix</span>
+0011 <span class="comment">%   SCALES  is the scaling factor along each dimension, as a 1-by-ND row</span>
+0012 <span class="comment">%           vector.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   Example</span>
+0015 <span class="comment">%     pts = randn(100, 2);</span>
+0016 <span class="comment">%     pts = transformPoint(pts, createScaling(5, 2));</span>
+0017 <span class="comment">%     pts = transformPoint(pts, createRotation(pi/6));</span>
+0018 <span class="comment">%     pts = transformPoint(pts, createTranslation(3, 4));</span>
+0019 <span class="comment">%     [center, rotMat] = principalAxes(pts);</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See also</span>
+0022 <span class="comment">%     equivalentEllipse, equivalentEllipsoid, principalAxesTransform</span>
+0023 <span class="comment">%</span>
+0024  
+0025 <span class="comment">% ------</span>
+0026 <span class="comment">% Author: David Legland</span>
+0027 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0028 <span class="comment">% Created: 2019-08-12,    using Matlab 9.6.0.1072779 (R2019a)</span>
+0029 <span class="comment">% Copyright 2019 INRAE - Cepia Software Platform.</span>
+0030 
+0031 <span class="comment">% number and dimension of points</span>
+0032 n = size(points, 1);
+0033 nd = size(points, 2);
+0034 
+0035 <span class="comment">% compute centroid</span>
+0036 center = mean(points);
+0037 
+0038 <span class="comment">% compute the covariance matrix</span>
+0039 covPts = cov(points) / n;
+0040 
+0041 <span class="comment">% perform a principal component analysis to extract principal axes</span>
+0042 [rotMat, S] = svd(covPts);
+0043 
+0044 <span class="comment">% extract length of each semi axis</span>
+0045 radii = sqrt(diag(S) * n);
+0046 
+0047 <span class="comment">% sort axes from greater to lower</span>
+0048 [radii, ind] = sort(radii, <span class="string">'descend'</span>);
+0049 radii = radii';
+0050 
+0051 <span class="comment">% format U to ensure first axis points to positive x direction</span>
+0052 rotMat = rotMat(ind, :);
+0053 <span class="keyword">if</span> rotMat(1,1) &lt; 0 &amp;&amp; nd &gt; 2
+0054     rotMat = -rotMat;
+0055     <span class="comment">% keep matrix determinant positive</span>
+0056     rotMat(:,3) = -rotMat(:,3);
+0057 <span class="keyword">end</span>
+0058 
+0059 <span class="comment">% format output</span>
+0060 <span class="keyword">if</span> nargout == 2
+0061     varargout = {center, rotMat};
+0062 <span class="keyword">elseif</span> nargout == 3
+0063     varargout = {center, rotMat, radii};
+0064 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

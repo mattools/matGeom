@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of trimeshMeanBreadth</title>
+  <meta name="keywords" content="trimeshMeanBreadth">
+  <meta name="description" content="TRIMESHMEANBREADTH Mean breadth of a triangular mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; trimeshMeanBreadth.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>trimeshMeanBreadth
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>TRIMESHMEANBREADTH Mean breadth of a triangular mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function mb = trimeshMeanBreadth(vertices, faces) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">TRIMESHMEANBREADTH Mean breadth of a triangular mesh.
+
+   MB = trimeshMeanBreadth(VERTICES, FACES)
+   Computes the mean breadth (proporitonal to the integral of mean
+   curvature) of a triangular mesh.
+
+   Example
+     [V, F] = createCube;
+     F2 = triangulateFaces(F);
+     MB = trimeshMeanBreadth(V, F2)
+     MB = 
+         1.5000
+
+   See also
+   meshes3d, <a href="trimeshSurfaceArea.html" class="code" title="function area = trimeshSurfaceArea(v, e, f)">trimeshSurfaceArea</a>, <a href="trimeshEdgeFaces.html" class="code" title="function edgeFaces = trimeshEdgeFaces(faces, varargin)">trimeshEdgeFaces</a>, <a href="polyhedronMeanBreadth.html" class="code" title="function breadth = polyhedronMeanBreadth(vertices, edges, faces)">polyhedronMeanBreadth</a>
+
+   References
+   Stoyan D., Kendall W.S., Mecke J. (1995) &quot;Stochastic Geometry and its
+       Applications&quot;, John Wiley and Sons, p. 26
+   Ohser, J., Muescklich, F. (2000) &quot;Statistical Analysis of
+       Microstructures in Materials Sciences&quot;, John Wiley and Sons, p.352</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/vectorAngle3d.html" class="code" title="function theta = vectorAngle3d(v1, v2)">vectorAngle3d</a>	VECTORANGLE3D Angle between two 3D vectors.</li><li><a href="meshEdgeLength.html" class="code" title="function lengths = meshEdgeLength(vertices, edges, faces) %#ok<INUSD>">meshEdgeLength</a>	MESHEDGELENGTH Lengths of edges of a polygonal or polyhedral mesh.</li><li><a href="meshFaceNormals.html" class="code" title="function normals = meshFaceNormals(varargin)">meshFaceNormals</a>	MESHFACENORMALS Compute normal vector of faces in a 3D mesh.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function mb = trimeshMeanBreadth(vertices, faces)</a>
+0002 <span class="comment">%TRIMESHMEANBREADTH Mean breadth of a triangular mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   MB = trimeshMeanBreadth(VERTICES, FACES)</span>
+0005 <span class="comment">%   Computes the mean breadth (proporitonal to the integral of mean</span>
+0006 <span class="comment">%   curvature) of a triangular mesh.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Example</span>
+0009 <span class="comment">%     [V, F] = createCube;</span>
+0010 <span class="comment">%     F2 = triangulateFaces(F);</span>
+0011 <span class="comment">%     MB = trimeshMeanBreadth(V, F2)</span>
+0012 <span class="comment">%     MB =</span>
+0013 <span class="comment">%         1.5000</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   See also</span>
+0016 <span class="comment">%   meshes3d, trimeshSurfaceArea, trimeshEdgeFaces, polyhedronMeanBreadth</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   References</span>
+0019 <span class="comment">%   Stoyan D., Kendall W.S., Mecke J. (1995) &quot;Stochastic Geometry and its</span>
+0020 <span class="comment">%       Applications&quot;, John Wiley and Sons, p. 26</span>
+0021 <span class="comment">%   Ohser, J., Muescklich, F. (2000) &quot;Statistical Analysis of</span>
+0022 <span class="comment">%       Microstructures in Materials Sciences&quot;, John Wiley and Sons, p.352</span>
+0023  
+0024 <span class="comment">% ------</span>
+0025 <span class="comment">% Author: David Legland</span>
+0026 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0027 <span class="comment">% Created: 2015-08-19,    using Matlab 8.5.0.197613 (R2015a)</span>
+0028 <span class="comment">% Copyright 2015 INRA - Cepia Software Platform.</span>
+0029 
+0030 
+0031 <span class="comment">%% Check input validity</span>
+0032 
+0033 <span class="keyword">if</span> size(faces, 2) ~= 3
+0034     error(<span class="string">'meshes3d:trimeshMeanBreadth:NonTriangularMesh'</span>, <span class="keyword">...</span>
+0035         <span class="string">'Requires a triangular mesh as input'</span>);
+0036 <span class="keyword">end</span>
+0037     
+0038 <span class="comment">%% Compute edge and edgeFaces arrays</span>
+0039 <span class="comment">% Uses the same code as in trimeshEdgeFaces</span>
+0040 
+0041 <span class="comment">% compute vertex indices of each edge (in increasing index order)</span>
+0042 edges = sort([faces(:,[1 2]) ; faces(:,[2 3]) ; faces(:,[3 1])], 2);
+0043 
+0044 <span class="comment">% create an array to keep indices of faces &quot;creating&quot; each edge</span>
+0045 nFaces = size(faces, 1);
+0046 edgeFaceInds = repmat( (1:nFaces)', 3, 1);
+0047 
+0048 <span class="comment">% sort edges, keeping indices</span>
+0049 [edges, ia, ib] = unique(edges, <span class="string">'rows'</span>); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0050 nEdges = size(edges, 1);
+0051 
+0052 <span class="comment">% allocate memory for result</span>
+0053 edgeFaces = zeros(nEdges, 2);
+0054 
+0055 <span class="comment">% iterate over edges, to identify incident faces</span>
+0056 <span class="keyword">for</span> iEdge = 1:nEdges
+0057     inds = find(ib == iEdge);
+0058     edgeFaces(iEdge, 1:length(inds)) = edgeFaceInds(inds);
+0059 <span class="keyword">end</span>
+0060 
+0061 
+0062 <span class="comment">%% Compute dihedral angle for each edge</span>
+0063 
+0064 <span class="comment">% compute normal of each face</span>
+0065 normals = <a href="meshFaceNormals.html" class="code" title="function normals = meshFaceNormals(varargin)">meshFaceNormals</a>(vertices, faces);
+0066 
+0067 <span class="comment">% allocate memory for resulting angles</span>
+0068 alpha = zeros(nEdges, 1);
+0069 
+0070 <span class="comment">% iterate over edges</span>
+0071 <span class="keyword">for</span> iEdge = 1:nEdges
+0072     <span class="comment">% indices of adjacent faces</span>
+0073     indFace1 = edgeFaces(iEdge, 1);
+0074     indFace2 = edgeFaces(iEdge, 2);
+0075     
+0076     <span class="comment">% normal vector of adjacent faces</span>
+0077     normal1 = normals(indFace1, :);
+0078     normal2 = normals(indFace2, :);
+0079     
+0080     <span class="comment">% compute dihedral angle of two vectors</span>
+0081     alpha(iEdge) = <a href="../../matGeom/geom3d/vectorAngle3d.html" class="code" title="function theta = vectorAngle3d(v1, v2)">vectorAngle3d</a>(normal1, normal2);
+0082 <span class="keyword">end</span>
+0083 
+0084 
+0085 <span class="comment">%% Compute mean breadth</span>
+0086 <span class="comment">% integrate the dihedral angles weighted by the length of each edge</span>
+0087 
+0088 <span class="comment">% compute length of each edge</span>
+0089 lengths = <a href="meshEdgeLength.html" class="code" title="function lengths = meshEdgeLength(vertices, edges, faces) %#ok<INUSD>">meshEdgeLength</a>(vertices, edges);
+0090 
+0091 <span class="comment">% compute product of length by angles</span>
+0092 mb = sum(alpha .* lengths) / (4*pi);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

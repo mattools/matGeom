@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawEllipseArc</title>
+  <meta name="keywords" content="drawEllipseArc">
+  <meta name="description" content="DRAWELLIPSEARC Draw an ellipse arc on the current axis.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; drawEllipseArc.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawEllipseArc
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWELLIPSEARC Draw an ellipse arc on the current axis.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawEllipseArc(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWELLIPSEARC Draw an ellipse arc on the current axis.
+
+   drawEllipseArc(ARC) 
+   draw ellipse arc specified by ARC. ARC has the format:
+     ARC = [XC YC A B THETA T1 T2]
+   or:
+     ARC = [XC YC A B T1 T2] (isothetic ellipse)
+   with center (XC, YC), main axis of half-length A, second axis of
+   half-length B, and ellipse arc running from t1 to t2 (both in degrees,
+   in Counter-Clockwise orientation).
+
+   Parameters can also be arrays. In this case, all arrays are suposed to
+   have the same size...
+
+   drawEllipseArc(..., NAME, VALUE)
+   Specifies one or more parameters name-value pairs, as in the plot
+   function.
+
+   drawEllipseArc(AX, ...)
+   Sepcifies the handle of theaxis to draw on.
+
+   H = drawEllipseArc(...)
+   Returns handle(s) of the created graphic objects.
+
+   Example
+     % draw an ellipse arc: center = [10 20], radii = 50 and 30, theta = 45
+     arc = [10 20 50 30 45 -90 270];
+     figure;
+     axis([-50 100 -50 100]); axis equal;
+     hold on
+     drawEllipseArc(arc, 'color', 'r')
+
+     % draw another ellipse arc, between angles -60 and 70
+     arc = [10 20 50 30 45 -60 (60+70)];
+     figure;
+     axis([-50 100 -50 100]); axis equal;
+     hold on
+     drawEllipseArc(arc, 'LineWidth', 2);
+     ray1 = createRay([10 20], deg2rad(-60+45));
+     drawRay(ray1)
+     ray2 = createRay([10 20], deg2rad(70+45));
+     drawRay(ray2)
+
+   See also:
+   <a href="ellipses2d.html" class="code" title="function ellipses2d(varargin)">ellipses2d</a>, <a href="drawEllipse.html" class="code" title="function varargout = drawEllipse(varargin)">drawEllipse</a>, <a href="drawCircleArc.html" class="code" title="function varargout = drawCircleArc(varargin)">drawCircleArc</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 12/12/2003.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawEllipseArc(varargin)</a>
+0002 <span class="comment">%DRAWELLIPSEARC Draw an ellipse arc on the current axis.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawEllipseArc(ARC)</span>
+0005 <span class="comment">%   draw ellipse arc specified by ARC. ARC has the format:</span>
+0006 <span class="comment">%     ARC = [XC YC A B THETA T1 T2]</span>
+0007 <span class="comment">%   or:</span>
+0008 <span class="comment">%     ARC = [XC YC A B T1 T2] (isothetic ellipse)</span>
+0009 <span class="comment">%   with center (XC, YC), main axis of half-length A, second axis of</span>
+0010 <span class="comment">%   half-length B, and ellipse arc running from t1 to t2 (both in degrees,</span>
+0011 <span class="comment">%   in Counter-Clockwise orientation).</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   Parameters can also be arrays. In this case, all arrays are suposed to</span>
+0014 <span class="comment">%   have the same size...</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   drawEllipseArc(..., NAME, VALUE)</span>
+0017 <span class="comment">%   Specifies one or more parameters name-value pairs, as in the plot</span>
+0018 <span class="comment">%   function.</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   drawEllipseArc(AX, ...)</span>
+0021 <span class="comment">%   Sepcifies the handle of theaxis to draw on.</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   H = drawEllipseArc(...)</span>
+0024 <span class="comment">%   Returns handle(s) of the created graphic objects.</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%   Example</span>
+0027 <span class="comment">%     % draw an ellipse arc: center = [10 20], radii = 50 and 30, theta = 45</span>
+0028 <span class="comment">%     arc = [10 20 50 30 45 -90 270];</span>
+0029 <span class="comment">%     figure;</span>
+0030 <span class="comment">%     axis([-50 100 -50 100]); axis equal;</span>
+0031 <span class="comment">%     hold on</span>
+0032 <span class="comment">%     drawEllipseArc(arc, 'color', 'r')</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">%     % draw another ellipse arc, between angles -60 and 70</span>
+0035 <span class="comment">%     arc = [10 20 50 30 45 -60 (60+70)];</span>
+0036 <span class="comment">%     figure;</span>
+0037 <span class="comment">%     axis([-50 100 -50 100]); axis equal;</span>
+0038 <span class="comment">%     hold on</span>
+0039 <span class="comment">%     drawEllipseArc(arc, 'LineWidth', 2);</span>
+0040 <span class="comment">%     ray1 = createRay([10 20], deg2rad(-60+45));</span>
+0041 <span class="comment">%     drawRay(ray1)</span>
+0042 <span class="comment">%     ray2 = createRay([10 20], deg2rad(70+45));</span>
+0043 <span class="comment">%     drawRay(ray2)</span>
+0044 <span class="comment">%</span>
+0045 <span class="comment">%   See also:</span>
+0046 <span class="comment">%   ellipses2d, drawEllipse, drawCircleArc</span>
+0047 <span class="comment">%</span>
+0048 <span class="comment">%   ---------</span>
+0049 <span class="comment">%   author : David Legland</span>
+0050 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0051 <span class="comment">%   created the 12/12/2003.</span>
+0052 <span class="comment">%</span>
+0053 
+0054 
+0055 <span class="comment">%   HISTORY</span>
+0056 <span class="comment">%   2008/10/10 uses fixed number of points for arc.</span>
+0057 <span class="comment">%   2011-03-30 use angles in degrees</span>
+0058 <span class="comment">%   2011-10-11 add management of axes handle</span>
+0059 
+0060 <span class="comment">%% Extract input arguments</span>
+0061 
+0062 <span class="comment">% extract handle of axis to draw on</span>
+0063 <span class="keyword">if</span> isAxisHandle(varargin{1})
+0064     ax = varargin{1};
+0065     varargin(1) = [];
+0066 <span class="keyword">else</span>
+0067     ax = gca;
+0068 <span class="keyword">end</span>
+0069 
+0070 <span class="comment">% extract dawing style strings</span>
+0071 styles = {};
+0072 <span class="keyword">for</span> i = 1:length(varargin)
+0073     <span class="keyword">if</span> ischar(varargin{i})
+0074         styles = varargin(i:end);
+0075         varargin(i:end) = [];
+0076         <span class="keyword">break</span>;
+0077     <span class="keyword">end</span>
+0078 <span class="keyword">end</span>
+0079 
+0080 <span class="keyword">if</span> length(varargin)==1
+0081     ellipse = varargin{1};
+0082     x0 = ellipse(1);
+0083     y0 = ellipse(2);
+0084     a  = ellipse(3);
+0085     b  = ellipse(4);
+0086     <span class="keyword">if</span> size(ellipse, 2)&gt;6
+0087         theta   = ellipse(5);
+0088         start   = ellipse(6);
+0089         extent  = ellipse(7);
+0090     <span class="keyword">else</span>
+0091         theta   = zeros(size(x0));
+0092         start   = ellipse(5);
+0093         extent  = ellipse(6);
+0094     <span class="keyword">end</span>
+0095     
+0096 <span class="keyword">elseif</span> length(varargin)&gt;=6
+0097     x0 = varargin{1};
+0098     y0 = varargin{2};
+0099     a  = varargin{3};
+0100     b  = varargin{4};
+0101     <span class="keyword">if</span> length(varargin)&gt;6
+0102         theta   = varargin{5};
+0103         start   = varargin{6};
+0104         extent  = varargin{7};
+0105     <span class="keyword">else</span>
+0106         theta   = zeros(size(x0));
+0107         start   = varargin{5};
+0108         extent  = varargin{6};
+0109     <span class="keyword">end</span>
+0110     
+0111 <span class="keyword">else</span>
+0112     error(<span class="string">'drawEllipseArc: please specify center x, center y and radii a and b'</span>);
+0113 <span class="keyword">end</span>
+0114 
+0115 
+0116 <span class="comment">%% Drawing</span>
+0117 
+0118 <span class="comment">% allocate memory for handles</span>
+0119 h = zeros(size(x0));
+0120 
+0121 <span class="keyword">for</span> i = 1:length(x0)
+0122     <span class="comment">% start and end angles</span>
+0123     t1 = deg2rad(start);
+0124     t2 = t1 + deg2rad(extent);
+0125     
+0126     <span class="comment">% vertices of ellipse</span>
+0127     t = linspace(t1, t2, 60);
+0128     
+0129     <span class="comment">% convert angles to ellipse parametrisation</span>
+0130     sup = cos(t) &gt; 0;
+0131     t(sup)  = atan(a(i) / b(i) * tan(t(sup)));
+0132     t(~sup) = atan2(a(i) / b(i) * tan(2*pi - t(~sup)), -1);
+0133     t = mod(t, 2*pi);
+0134     
+0135     <span class="comment">% precompute cos and sin of theta (given in degrees)</span>
+0136     cot = cosd(theta(i));
+0137     sit = sind(theta(i));
+0138 
+0139     <span class="comment">% compute position of points</span>
+0140     xt = x0(i) + a(i)*cos(t)*cot - b(i)*sin(t)*sit;
+0141     yt = y0(i) + a(i)*cos(t)*sit + b(i)*sin(t)*cot;
+0142     
+0143     h(i) = plot(ax, xt, yt, styles{:});
+0144 <span class="keyword">end</span>
+0145 
+0146 
+0147 <span class="comment">%% Process output arguments</span>
+0148 
+0149 <span class="keyword">if</span> nargout &gt; 0
+0150     varargout = {h};
+0151 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

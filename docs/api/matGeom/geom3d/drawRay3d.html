@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawRay3d</title>
+  <meta name="keywords" content="drawRay3d">
+  <meta name="description" content="Draw a 3D ray on the current axis.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; drawRay3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawRay3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Draw a 3D ray on the current axis.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function h = drawRay3d(ray, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Draw a 3D ray on the current axis.
+
+   drawRay3d(RAY)
+   With RAY having the syntax: [x0 y0 z0 dx dy dz], draws the ray starting
+   from point (x0 y0 z0) and going to direction (dx dy dz), clipped with
+   the current window axis.
+
+   drawRay3d(RAY, PARAMS, VALUE)
+   Can specify parameter name-value pairs to change draw style.
+
+   H = drawRay3d(...)
+   Returns handle on line object
+
+   See also:
+   rays2d, drawLine
+
+   Example
+     % generate 50 random 3D rays
+     origin = [29 28 27];
+     v = rand(50, 3);
+     v = v - centroid(v);
+     ray = [repmat(origin, size(v,1),1) v];
+     % draw the rays in the current axis
+     figure; axis equal; axis([0 50 0 50 0 50]); hold on; view(3);
+     drawRay3d(ray);
+
+   See also
+     <a href="drawLine3d.html" class="code" title="function h = drawLine3d(lin, varargin)">drawLine3d</a>, <a href="clipRay3d.html" class="code" title="function edge = clipRay3d(ray, box)">clipRay3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="clipLine3d.html" class="code" title="function edge = clipLine3d(line, box)">clipLine3d</a>	CLIPLINE3D Clip a line with a box and return an edge.</li><li><a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>	DRAWEDGE3D Draw 3D edge in the current axes.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function h = drawRay3d(ray, varargin)</a>
+0002 <span class="comment">% Draw a 3D ray on the current axis.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawRay3d(RAY)</span>
+0005 <span class="comment">%   With RAY having the syntax: [x0 y0 z0 dx dy dz], draws the ray starting</span>
+0006 <span class="comment">%   from point (x0 y0 z0) and going to direction (dx dy dz), clipped with</span>
+0007 <span class="comment">%   the current window axis.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   drawRay3d(RAY, PARAMS, VALUE)</span>
+0010 <span class="comment">%   Can specify parameter name-value pairs to change draw style.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   H = drawRay3d(...)</span>
+0013 <span class="comment">%   Returns handle on line object</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   See also:</span>
+0016 <span class="comment">%   rays2d, drawLine</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   Example</span>
+0019 <span class="comment">%     % generate 50 random 3D rays</span>
+0020 <span class="comment">%     origin = [29 28 27];</span>
+0021 <span class="comment">%     v = rand(50, 3);</span>
+0022 <span class="comment">%     v = v - centroid(v);</span>
+0023 <span class="comment">%     ray = [repmat(origin, size(v,1),1) v];</span>
+0024 <span class="comment">%     % draw the rays in the current axis</span>
+0025 <span class="comment">%     figure; axis equal; axis([0 50 0 50 0 50]); hold on; view(3);</span>
+0026 <span class="comment">%     drawRay3d(ray);</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%   See also</span>
+0029 <span class="comment">%     drawLine3d, clipRay3d</span>
+0030  
+0031 <span class="comment">% ------</span>
+0032 <span class="comment">% Author: David Legland</span>
+0033 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0034 <span class="comment">% INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0035 <span class="comment">% Created: 2020-05-25,    using Matlab 9.8.0.1323502 (R2020a)</span>
+0036 <span class="comment">% Copyright 2020 INRAE.</span>
+0037 
+0038 <span class="comment">% extract handle of axis to draw in</span>
+0039 <span class="keyword">if</span> isAxisHandle(ray)
+0040     hAx = ray;
+0041     ray = varargin{1};
+0042     varargin(1) = [];
+0043 <span class="keyword">else</span>
+0044     hAx = gca;
+0045 <span class="keyword">end</span>
+0046 
+0047 <span class="comment">% get bounding box limits</span>
+0048 box = axis(hAx);
+0049 
+0050 <span class="comment">% clip the ray(s) with the limits of the current axis</span>
+0051 edge = <a href="clipLine3d.html" class="code" title="function edge = clipLine3d(line, box)">clipLine3d</a>(ray, box);
+0052 
+0053 <span class="comment">% identify valid edges</span>
+0054 inds = sum(isnan(edge), 2) == 0;
+0055 
+0056 <span class="comment">% draw the clipped line</span>
+0057 hh = [];
+0058 <span class="keyword">if</span> any(inds)
+0059     edge = edge(inds, :);
+0060     hh = <a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>(hAx, edge);
+0061     <span class="keyword">if</span> ~isempty(varargin)
+0062         set(hh, varargin{:});
+0063     <span class="keyword">end</span>
+0064 <span class="keyword">end</span>
+0065 
+0066 <span class="comment">% process output</span>
+0067 <span class="keyword">if</span> nargout &gt; 0
+0068     h = hh;
+0069 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

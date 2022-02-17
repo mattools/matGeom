@@ -1,0 +1,292 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawEllipse3d</title>
+  <meta name="keywords" content="drawEllipse3d">
+  <meta name="description" content="DRAWELLIPSE3D Draw a 3D ellipse.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; drawEllipse3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawEllipse3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWELLIPSE3D Draw a 3D ellipse.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawEllipse3d(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWELLIPSE3D Draw a 3D ellipse.
+
+   Possible calls for the function :
+   drawEllipse3d([XC YC ZC A B THETA PHI])
+   drawEllipse3d([XC YC ZC A B THETA PHI PSI])
+   drawEllipse3d([XC YC ZC A B], [THETA PHI])
+   drawEllipse3d([XC YC ZC A B], [THETA PHI PSI])
+   drawEllipse3d([XC YC ZC A B], THETA, PHI)
+   drawEllipse3d([XC YC ZC], A, B, THETA, PHI)
+   drawEllipse3d([XC YC ZC A B], THETA, PHI, PSI)
+   drawEllipse3d([XC YC ZC], A, B, THETA, PHI, PSI)
+   drawEllipse3d(XC, YC, ZC, A, B, THETA, PHI)
+   drawEllipse3d(XC, YC, ZC, A, B, THETA, PHI, PSI)
+
+   where XC, YC, ZY are coordinate of ellipse center, A and B are the
+   half-lengths of the major and minor axes of the ellipse,
+   PHI and THETA are 3D angle (in degrees) of the normal to the plane
+   containing the ellipse (PHI between 0 and 360 corresponding to
+   longitude, and THETA from 0 to 180, corresponding to angle with
+   vertical).
+   
+   H = drawEllipse3d(...)
+   return handle on the created LINE object
+   
+   Example
+     figure; axis([-10 10 -10 10 -10 10]); hold on;
+     ellXY = [0 0 0  8 5  0 0 0];
+     drawEllipse3d(ellXY, 'color', [.8 0 0], 'linewidth', 2)
+     ellXZ = [0 0 0  8 2  90 90 90];
+     drawEllipse3d(ellXZ, 'color', [0 .8 0], 'linewidth', 2)
+     ellYZ = [0 0 0  5 2  90 0 90];
+     drawEllipse3d(ellYZ, 'color', [0 0 .8], 'linewidth', 2)</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>	DRAWPOLYLINE3D Draw a 3D polyline specified by a list of vertex coords.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="fitEllipse3d.html" class="code" title="function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin)">fitEllipse3d</a>	FITELLIPSE3D Fit an ellipse to a set of points.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawEllipse3d(varargin)</a>
+0002 <span class="comment">%DRAWELLIPSE3D Draw a 3D ellipse.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   Possible calls for the function :</span>
+0005 <span class="comment">%   drawEllipse3d([XC YC ZC A B THETA PHI])</span>
+0006 <span class="comment">%   drawEllipse3d([XC YC ZC A B THETA PHI PSI])</span>
+0007 <span class="comment">%   drawEllipse3d([XC YC ZC A B], [THETA PHI])</span>
+0008 <span class="comment">%   drawEllipse3d([XC YC ZC A B], [THETA PHI PSI])</span>
+0009 <span class="comment">%   drawEllipse3d([XC YC ZC A B], THETA, PHI)</span>
+0010 <span class="comment">%   drawEllipse3d([XC YC ZC], A, B, THETA, PHI)</span>
+0011 <span class="comment">%   drawEllipse3d([XC YC ZC A B], THETA, PHI, PSI)</span>
+0012 <span class="comment">%   drawEllipse3d([XC YC ZC], A, B, THETA, PHI, PSI)</span>
+0013 <span class="comment">%   drawEllipse3d(XC, YC, ZC, A, B, THETA, PHI)</span>
+0014 <span class="comment">%   drawEllipse3d(XC, YC, ZC, A, B, THETA, PHI, PSI)</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   where XC, YC, ZY are coordinate of ellipse center, A and B are the</span>
+0017 <span class="comment">%   half-lengths of the major and minor axes of the ellipse,</span>
+0018 <span class="comment">%   PHI and THETA are 3D angle (in degrees) of the normal to the plane</span>
+0019 <span class="comment">%   containing the ellipse (PHI between 0 and 360 corresponding to</span>
+0020 <span class="comment">%   longitude, and THETA from 0 to 180, corresponding to angle with</span>
+0021 <span class="comment">%   vertical).</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   H = drawEllipse3d(...)</span>
+0024 <span class="comment">%   return handle on the created LINE object</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%   Example</span>
+0027 <span class="comment">%     figure; axis([-10 10 -10 10 -10 10]); hold on;</span>
+0028 <span class="comment">%     ellXY = [0 0 0  8 5  0 0 0];</span>
+0029 <span class="comment">%     drawEllipse3d(ellXY, 'color', [.8 0 0], 'linewidth', 2)</span>
+0030 <span class="comment">%     ellXZ = [0 0 0  8 2  90 90 90];</span>
+0031 <span class="comment">%     drawEllipse3d(ellXZ, 'color', [0 .8 0], 'linewidth', 2)</span>
+0032 <span class="comment">%     ellYZ = [0 0 0  5 2  90 0 90];</span>
+0033 <span class="comment">%     drawEllipse3d(ellYZ, 'color', [0 0 .8], 'linewidth', 2)</span>
+0034 <span class="comment">%</span>
+0035  
+0036 <span class="comment">%   ------</span>
+0037 <span class="comment">%   Author: David Legland</span>
+0038 <span class="comment">%   e-mail: david.legland@inra.fr</span>
+0039 <span class="comment">%   Created: 2008-05-07</span>
+0040 <span class="comment">%   Copyright 2008 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0041 
+0042 <span class="comment">%   HISTORY</span>
+0043 
+0044 <span class="comment">%   Possible calls for the function, with number of arguments :</span>
+0045 <span class="comment">%   drawEllipse3d([XC YC ZC A B THETA PHI])             1</span>
+0046 <span class="comment">%   drawEllipse3d([XC YC ZC A B THETA PHI PSI])         1</span>
+0047 <span class="comment">%   drawEllipse3d([XC YC ZC A B], [THETA PHI])          2</span>
+0048 <span class="comment">%   drawEllipse3d([XC YC ZC A B], [THETA PHI PSI])      2</span>
+0049 <span class="comment">%   drawEllipse3d([XC YC ZC A B], THETA, PHI)           3</span>
+0050 <span class="comment">%   drawEllipse3d([XC YC ZC A B], THETA, PHI, PSI)      4</span>
+0051 <span class="comment">%   drawEllipse3d([XC YC ZC], A, B, THETA, PHI)         5</span>
+0052 <span class="comment">%   drawEllipse3d([XC YC ZC], A, B, THETA, PHI, PSI)    6</span>
+0053 <span class="comment">%   drawEllipse3d(XC, YC, ZC, A, B, THETA, PHI)         7</span>
+0054 <span class="comment">%   drawEllipse3d(XC, YC, ZC, A, B, THETA, PHI, PSI)    8</span>
+0055 
+0056 
+0057 <span class="comment">% extract drawing options</span>
+0058 ind = find(cellfun(@ischar, varargin), 1, <span class="string">'first'</span>);
+0059 options = {};
+0060 <span class="keyword">if</span> ~isempty(ind)
+0061     options = varargin(ind:end);
+0062     varargin(ind:end) = [];
+0063 <span class="keyword">end</span>
+0064 
+0065 <span class="keyword">if</span> length(varargin)==1
+0066     <span class="comment">% get center and radius</span>
+0067     ellipse = varargin{1};
+0068     xc = ellipse(:,1);
+0069     yc = ellipse(:,2);
+0070     zc = ellipse(:,3);
+0071     a  = ellipse(:,4);
+0072     b  = ellipse(:,5);
+0073     
+0074     <span class="comment">% get colatitude of normal</span>
+0075     <span class="keyword">if</span> size(ellipse, 2)&gt;=6
+0076         theta = ellipse(:,6);
+0077     <span class="keyword">else</span>
+0078         theta = zeros(size(ellipse, 1), 1);
+0079     <span class="keyword">end</span>
+0080 
+0081     <span class="comment">% get azimut of normal</span>
+0082     <span class="keyword">if</span> size(ellipse, 2)&gt;=7
+0083         phi     = ellipse(:,7);
+0084     <span class="keyword">else</span>
+0085         phi = zeros(size(ellipse, 1), 1);
+0086     <span class="keyword">end</span>
+0087     
+0088     <span class="comment">% get roll</span>
+0089     <span class="keyword">if</span> size(ellipse, 2)==8
+0090         psi = ellipse(:,8);
+0091     <span class="keyword">else</span>
+0092         psi = zeros(size(ellipse, 1), 1);
+0093     <span class="keyword">end</span>
+0094     
+0095 <span class="keyword">elseif</span> length(varargin)==2
+0096     <span class="comment">% get center and radius</span>
+0097     ellipse = varargin{1};
+0098     xc = ellipse(:,1);
+0099     yc = ellipse(:,2);
+0100     zc = ellipse(:,3);
+0101     a  = ellipse(:,4);
+0102     b  = ellipse(:,5);
+0103     
+0104     <span class="comment">% get angle of normal</span>
+0105     angle = varargin{2};
+0106     theta   = angle(:,1);
+0107     phi     = angle(:,2);
+0108     
+0109     <span class="comment">% get roll</span>
+0110     <span class="keyword">if</span> size(angle, 2)==3
+0111         psi = angle(:,3);
+0112     <span class="keyword">else</span>
+0113         psi = zeros(size(angle, 1), 1);
+0114     <span class="keyword">end</span>
+0115 
+0116 <span class="keyword">elseif</span> length(varargin)==3    
+0117     <span class="comment">% get center and radius</span>
+0118     ellipse = varargin{1};
+0119     xc = ellipse(:,1);
+0120     yc = ellipse(:,2);
+0121     zc = ellipse(:,3);
+0122     a  = ellipse(:,4);
+0123     b  = ellipse(:,5);
+0124     
+0125     <span class="comment">% get angle of normal and roll</span>
+0126     theta   = varargin{2};
+0127     phi     = varargin{3};
+0128     psi     = zeros(size(phi, 1), 1);
+0129     
+0130 <span class="keyword">elseif</span> length(varargin)==4
+0131     <span class="comment">% get center and radius</span>
+0132     ellipse = varargin{1};
+0133     xc = ellipse(:,1);
+0134     yc = ellipse(:,2);
+0135     zc = ellipse(:,3);
+0136     
+0137     <span class="keyword">if</span> size(ellipse, 2)==5
+0138         a  = ellipse(:,4);
+0139         b  = ellipse(:,5);
+0140     <span class="keyword">end</span>
+0141     
+0142     theta   = varargin{2};
+0143     phi     = varargin{3};
+0144     psi     = varargin{4};
+0145     
+0146 <span class="keyword">elseif</span> length(varargin)==5
+0147     <span class="comment">% get center and radius</span>
+0148     ellipse = varargin{1};
+0149     xc      = ellipse(:,1);
+0150     yc      = ellipse(:,2);
+0151     zc      = ellipse(:,3);
+0152     a       = varargin{2};
+0153     b       = varargin{3};
+0154     theta   = varargin{4};
+0155     phi     = varargin{5};
+0156     psi     = zeros(size(phi, 1), 1);
+0157 
+0158 <span class="keyword">elseif</span> length(varargin)==6
+0159     ellipse = varargin{1};
+0160     xc      = ellipse(:,1);
+0161     yc      = ellipse(:,2);
+0162     zc      = ellipse(:,3);
+0163     a       = varargin{2};
+0164     b       = varargin{3};
+0165     theta   = varargin{4};
+0166     phi     = varargin{5};
+0167     psi     = varargin{6};
+0168   
+0169 <span class="keyword">elseif</span> length(varargin)==7   
+0170     xc      = varargin{1};
+0171     yc      = varargin{2};
+0172     zc      = varargin{3};
+0173     a       = varargin{4};
+0174     b       = varargin{5};
+0175     theta   = varargin{6};
+0176     phi     = varargin{7};
+0177     psi     = zeros(size(phi, 1), 1);
+0178     
+0179 <span class="keyword">elseif</span> length(varargin)==8   
+0180     xc      = varargin{1};
+0181     yc      = varargin{2};
+0182     zc      = varargin{3};
+0183     a       = varargin{4};
+0184     b       = varargin{5};
+0185     theta   = varargin{6};
+0186     phi     = varargin{7};
+0187     psi     = varargin{8};
+0188 
+0189 <span class="keyword">else</span>
+0190     error(<span class="string">'drawEllipse3d: please specify center and radius'</span>);
+0191 <span class="keyword">end</span>
+0192 
+0193 <span class="comment">% uses 60 intervals</span>
+0194 t = linspace(0, 2*pi, 61)';
+0195 
+0196 <span class="comment">% polyline approximation of ellipse, centered and parallel to main axes</span>
+0197 x       = a * cos(t);
+0198 y       = b * sin(t);
+0199 z       = zeros(length(t), 1);
+0200 base    = [x y z];
+0201 
+0202 <span class="comment">% compute transformation from local basis to world basis</span>
+0203 trans   = localToGlobal3d(xc, yc, zc, theta, phi, psi);
+0204 
+0205 <span class="comment">% transform points composing the ellipse</span>
+0206 ellipse = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(base, trans);
+0207 
+0208 <span class="comment">% draw the curve</span>
+0209 h = <a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>(ellipse, options{:});
+0210 
+0211 <span class="keyword">if</span> nargout &gt; 0
+0212     varargout = {h};
+0213 <span class="keyword">end</span>
+0214</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

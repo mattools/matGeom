@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of intersectCircles</title>
+  <meta name="keywords" content="intersectCircles">
+  <meta name="description" content="INTERSECTCIRCLES Intersection points of two circles.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; intersectCircles.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>intersectCircles
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>INTERSECTCIRCLES Intersection points of two circles.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function points = intersectCircles(circle1, circle2) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">INTERSECTCIRCLES Intersection points of two circles.
+
+   POINTS = intersectCircles(CIRCLE1, CIRCLE2)
+   Computes the intersetion point of the two circles CIRCLE1 and CIRCLE1.
+   Both circles are given with format: [XC YC R], with (XC,YC) being the
+   coordinates of the center and R being the radius.
+   POINTS is a 2-by-2 array, containing coordinate of an intersection
+   point on each row. 
+   In the case of tangent circles, the intersection is returned twice. It
+   can be simplified by using the 'unique' function.
+
+   Example
+     % intersection points of two distant circles
+     c1 = [0  0 10];
+     c2 = [10 0 10];
+     pts = intersectCircles(c1, c2)
+     pts =
+         5   -8.6603
+         5    8.6603
+
+     % intersection points of two tangent circles
+     c1 = [0  0 10];
+     c2 = [20 0 10];
+     pts = intersectCircles(c1, c2)
+     pts =
+         10    0
+         10    0
+     pts2 = unique(pts, 'rows')
+     pts2 = 
+         10    0
+
+   References
+   http://local.wasp.uwa.edu.au/~pbourke/geometry/2circle/
+   http://mathworld.wolfram.com/Circle-CircleIntersection.html
+
+   See also
+   <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="intersectLineCircle.html" class="code" title="function points = intersectLineCircle(line, circle)">intersectLineCircle</a>, <a href="radicalAxis.html" class="code" title="function line = radicalAxis(circle1, circle2)">radicalAxis</a>
+
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2011-01-20,    using Matlab 7.9.0.529 (R2009b)
+ Copyright 2011 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="angle2Points.html" class="code" title="function theta = angle2Points(varargin)">angle2Points</a>	ANGLE2POINTS Compute horizontal angle between 2 points.</li><li><a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>	DISTANCEPOINTS Compute distance between two points.</li><li><a href="polarPoint.html" class="code" title="function point = polarPoint(varargin)">polarPoint</a>	POLARPOINT Create a point from polar coordinates (rho + theta).</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function points = intersectCircles(circle1, circle2)</a>
+0002 <span class="comment">%INTERSECTCIRCLES Intersection points of two circles.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POINTS = intersectCircles(CIRCLE1, CIRCLE2)</span>
+0005 <span class="comment">%   Computes the intersetion point of the two circles CIRCLE1 and CIRCLE1.</span>
+0006 <span class="comment">%   Both circles are given with format: [XC YC R], with (XC,YC) being the</span>
+0007 <span class="comment">%   coordinates of the center and R being the radius.</span>
+0008 <span class="comment">%   POINTS is a 2-by-2 array, containing coordinate of an intersection</span>
+0009 <span class="comment">%   point on each row.</span>
+0010 <span class="comment">%   In the case of tangent circles, the intersection is returned twice. It</span>
+0011 <span class="comment">%   can be simplified by using the 'unique' function.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   Example</span>
+0014 <span class="comment">%     % intersection points of two distant circles</span>
+0015 <span class="comment">%     c1 = [0  0 10];</span>
+0016 <span class="comment">%     c2 = [10 0 10];</span>
+0017 <span class="comment">%     pts = intersectCircles(c1, c2)</span>
+0018 <span class="comment">%     pts =</span>
+0019 <span class="comment">%         5   -8.6603</span>
+0020 <span class="comment">%         5    8.6603</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%     % intersection points of two tangent circles</span>
+0023 <span class="comment">%     c1 = [0  0 10];</span>
+0024 <span class="comment">%     c2 = [20 0 10];</span>
+0025 <span class="comment">%     pts = intersectCircles(c1, c2)</span>
+0026 <span class="comment">%     pts =</span>
+0027 <span class="comment">%         10    0</span>
+0028 <span class="comment">%         10    0</span>
+0029 <span class="comment">%     pts2 = unique(pts, 'rows')</span>
+0030 <span class="comment">%     pts2 =</span>
+0031 <span class="comment">%         10    0</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">%   References</span>
+0034 <span class="comment">%   http://local.wasp.uwa.edu.au/~pbourke/geometry/2circle/</span>
+0035 <span class="comment">%   http://mathworld.wolfram.com/Circle-CircleIntersection.html</span>
+0036 <span class="comment">%</span>
+0037 <span class="comment">%   See also</span>
+0038 <span class="comment">%   circles2d, intersectLineCircle, radicalAxis</span>
+0039 <span class="comment">%</span>
+0040 <span class="comment">%</span>
+0041 <span class="comment">% ------</span>
+0042 <span class="comment">% Author: David Legland</span>
+0043 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0044 <span class="comment">% Created: 2011-01-20,    using Matlab 7.9.0.529 (R2009b)</span>
+0045 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0046 
+0047 <span class="comment">%   HISTORY</span>
+0048 <span class="comment">%   2011-06-06 add support for multiple inputs</span>
+0049 
+0050 
+0051 <span class="comment">% adapt sizes of inputs</span>
+0052 n1 = size(circle1, 1);
+0053 n2 = size(circle2, 1);
+0054 <span class="keyword">if</span> n1 ~= n2
+0055     <span class="keyword">if</span> n1 &gt; 1 &amp;&amp; n2 == 1
+0056         circle2 = repmat(circle2, n1, 1);
+0057     <span class="keyword">elseif</span> n2 &gt; 1 &amp;&amp; n1 == 1
+0058         circle1 = repmat(circle1, n2, 1);
+0059     <span class="keyword">else</span> 
+0060         error(<span class="string">'Both input should have same number of rows'</span>);
+0061     <span class="keyword">end</span>
+0062 <span class="keyword">end</span>
+0063    
+0064 <span class="comment">% extract center and radius of each circle</span>
+0065 center1 = circle1(:, 1:2);
+0066 center2 = circle2(:, 1:2);
+0067 r1 = circle1(:,3);
+0068 r2 = circle2(:,3);
+0069 
+0070 <span class="comment">% allocate memory for result</span>
+0071 nPoints = length(r1);
+0072 points = NaN * ones(2*nPoints, 2);
+0073 
+0074 <span class="comment">% distance between circle centers</span>
+0075 d12 = <a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(center1, center2, <span class="string">'diag'</span>);
+0076 
+0077 <span class="comment">% get indices of circle couples with intersections</span>
+0078 inds = d12 &gt;= abs(r1 - r2) &amp; d12 &lt;= (r1 + r2);
+0079 
+0080 <span class="keyword">if</span> sum(inds) == 0
+0081     <span class="keyword">return</span>;
+0082 <span class="keyword">end</span>
+0083 
+0084 <span class="comment">% angle of line from center1 to center2</span>
+0085 angle = <a href="angle2Points.html" class="code" title="function theta = angle2Points(varargin)">angle2Points</a>(center1(inds,:), center2(inds,:));
+0086 
+0087 <span class="comment">% position of intermediate point, located at the intersection of the</span>
+0088 <span class="comment">% radical axis with the line joining circle centers</span>
+0089 d1m  = d12(inds) / 2 + (r1(inds).^2 - r2(inds).^2) ./ (2 * d12(inds));
+0090 tmp = <a href="polarPoint.html" class="code" title="function point = polarPoint(varargin)">polarPoint</a>(center1(inds, :), d1m, angle);
+0091 
+0092 <span class="comment">% distance between intermediate point and each intersection point</span>
+0093 h   = sqrt(r1(inds).^2 - d1m.^2);
+0094 
+0095 <span class="comment">% indices of valid intersections</span>
+0096 inds2 = find(inds)*2;
+0097 inds1 = inds2 - 1;
+0098 
+0099 <span class="comment">% create intersection points</span>
+0100 points(inds1, :) = <a href="polarPoint.html" class="code" title="function point = polarPoint(varargin)">polarPoint</a>(tmp, h, angle - pi/2);
+0101 points(inds2, :) = <a href="polarPoint.html" class="code" title="function point = polarPoint(varargin)">polarPoint</a>(tmp, h, angle + pi/2);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

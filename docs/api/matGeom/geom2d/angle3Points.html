@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of angle3Points</title>
+  <meta name="keywords" content="angle3Points">
+  <meta name="description" content="ANGLE3POINTS Compute oriented angle made by 3 points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; angle3Points.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>angle3Points
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ANGLE3POINTS Compute oriented angle made by 3 points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function theta = angle3Points(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ANGLE3POINTS Compute oriented angle made by 3 points.
+
+   ALPHA = angle3Points(P1, P2, P3);
+   Computes the angle between the points P1, P2 and P3.
+   Pi are either [1*2] arrays, or [N*2] arrays, in this case ALPHA is a 
+   [N*1] array. The angle computed is the directed angle between line 
+   (P2P1) and line (P2P3).
+   Result is always given in radians, between 0 and 2*pi.
+
+   See Also:
+   <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="angles2d.html" class="code" title="function angles2d">angles2d</a>, <a href="angle2Points.html" class="code" title="function theta = angle2Points(varargin)">angle2points</a>
+
+
+   ---------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ created the 23/02/2004.
+ Copyright 2010 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>	CREATELINE Create a straight line from 2 points, or from other inputs.</li><li><a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>	LINEANGLE Computes angle between two straight lines.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createDirectedCircle.html" class="code" title="function circle = createDirectedCircle(varargin)">createDirectedCircle</a>	CREATEDIRECTEDCIRCLE Create a directed circle.</li><li><a href="../../matGeom/geom3d/sphericalAngle.html" class="code" title="function alpha = sphericalAngle(p1, p2, p3)">sphericalAngle</a>	SPHERICALANGLE Compute angle between points on the sphere.</li><li><a href="../../matGeom/polygons2d/polygonNormalAngle.html" class="code" title="function theta = polygonNormalAngle(poly, inds)">polygonNormalAngle</a>	Normal angle at each vertex of a polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function theta = angle3Points(varargin)</a>
+0002 <span class="comment">%ANGLE3POINTS Compute oriented angle made by 3 points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   ALPHA = angle3Points(P1, P2, P3);</span>
+0005 <span class="comment">%   Computes the angle between the points P1, P2 and P3.</span>
+0006 <span class="comment">%   Pi are either [1*2] arrays, or [N*2] arrays, in this case ALPHA is a</span>
+0007 <span class="comment">%   [N*1] array. The angle computed is the directed angle between line</span>
+0008 <span class="comment">%   (P2P1) and line (P2P3).</span>
+0009 <span class="comment">%   Result is always given in radians, between 0 and 2*pi.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   See Also:</span>
+0012 <span class="comment">%   points2d, angles2d, angle2points</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   ---------</span>
+0016 <span class="comment">% Author: David Legland</span>
+0017 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0018 <span class="comment">% created the 23/02/2004.</span>
+0019 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0020 
+0021 
+0022 <span class="comment">%   HISTORY :</span>
+0023 <span class="comment">%   25/09/2005 : enable single parameter</span>
+0024 
+0025 <span class="keyword">if</span> length(varargin)==3
+0026     p1 = varargin{1};
+0027     p2 = varargin{2};
+0028     p3 = varargin{3};
+0029 <span class="keyword">elseif</span> length(varargin)==1
+0030     var = varargin{1};
+0031     p1 = var(1,:);
+0032     p2 = var(2,:);
+0033     p3 = var(3,:);
+0034 <span class="keyword">end</span>    
+0035 
+0036 <span class="comment">% angle line (P2 P1)</span>
+0037 theta = <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>(<a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(p2, p1), <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(p2, p3));
+0038</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

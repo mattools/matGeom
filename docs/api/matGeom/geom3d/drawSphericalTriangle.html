@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawSphericalTriangle</title>
+  <meta name="keywords" content="drawSphericalTriangle">
+  <meta name="description" content="DRAWSPHERICALTRIANGLE Draw a triangle on a sphere.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; drawSphericalTriangle.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawSphericalTriangle
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWSPHERICALTRIANGLE Draw a triangle on a sphere.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawSphericalTriangle(sphere, p1, p2, p3, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWSPHERICALTRIANGLE Draw a triangle on a sphere.
+
+   drawSphericalTriangle(SPHERE, PT1, PT2, PT3);
+   Draws the spherical triangle defined by the three input 3D points and
+   the reference sphere. 
+   Points are given as 3D points, and are projected onto the sphere. The
+   order of the points is not relevant. 
+
+   drawSphericalTriangle(SPHERE, PT1, PT2, PT3, OPTIONS);
+   Allows to specify plot options for spherical edges, in the form of
+   parameter name-value pairs.
+
+   Example
+     % Draw a sphere and a spherical triangle on it
+     s = [0 0 0 2];
+     pts = [1 0 0;0 -1 0;0 0 1];
+     drawSphere(s); hold on;
+     drawSphericalTriangle(s, pts(1,:), pts(2,:), pts(3,:), 'linewidth', 2);
+     view(3); axis equal;
+
+   See also
+   <a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a>, <a href="fillSphericalTriangle.html" class="code" title="function varargout = fillSphericalTriangle(sphere, p1, p2, p3, varargin)">fillSphericalTriangle</a>, <a href="drawSphericalPolygon.html" class="code" title="function varargout = drawSphericalPolygon(sphere, poly, varargin)">drawSphericalPolygon</a>,
+   <a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>
+
+   ---------
+   author : David Legland
+   INRA - TPV URPOI - BIA IMASTE
+   created the 22/02/2005</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>	DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.</li><li><a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>	NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawSphericalTriangle(sphere, p1, p2, p3, varargin)</a>
+0002 <span class="comment">%DRAWSPHERICALTRIANGLE Draw a triangle on a sphere.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawSphericalTriangle(SPHERE, PT1, PT2, PT3);</span>
+0005 <span class="comment">%   Draws the spherical triangle defined by the three input 3D points and</span>
+0006 <span class="comment">%   the reference sphere.</span>
+0007 <span class="comment">%   Points are given as 3D points, and are projected onto the sphere. The</span>
+0008 <span class="comment">%   order of the points is not relevant.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   drawSphericalTriangle(SPHERE, PT1, PT2, PT3, OPTIONS);</span>
+0011 <span class="comment">%   Allows to specify plot options for spherical edges, in the form of</span>
+0012 <span class="comment">%   parameter name-value pairs.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   Example</span>
+0015 <span class="comment">%     % Draw a sphere and a spherical triangle on it</span>
+0016 <span class="comment">%     s = [0 0 0 2];</span>
+0017 <span class="comment">%     pts = [1 0 0;0 -1 0;0 0 1];</span>
+0018 <span class="comment">%     drawSphere(s); hold on;</span>
+0019 <span class="comment">%     drawSphericalTriangle(s, pts(1,:), pts(2,:), pts(3,:), 'linewidth', 2);</span>
+0020 <span class="comment">%     view(3); axis equal;</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   See also</span>
+0023 <span class="comment">%   drawSphere, fillSphericalTriangle, drawSphericalPolygon,</span>
+0024 <span class="comment">%   drawSphericalEdge</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%   ---------</span>
+0027 <span class="comment">%   author : David Legland</span>
+0028 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0029 <span class="comment">%   created the 22/02/2005</span>
+0030 <span class="comment">%</span>
+0031 
+0032 <span class="comment">%   HISTORY</span>
+0033 <span class="comment">%   2007-06-27 manage spheres other than origin</span>
+0034 <span class="comment">%   2008-10-30 replace intersectPlaneLine by intersectLinePlane</span>
+0035 <span class="comment">%   2012-02-09 put drawing code into the 'drawSphericalEdge' function</span>
+0036 <span class="comment">%   2012-10-24 add holding facility, updtate doc</span>
+0037 
+0038 
+0039 <span class="comment">% extract data of the sphere</span>
+0040 ori = sphere(:, 1:3);
+0041 
+0042 <span class="comment">% extract direction vectors for each point</span>
+0043 v1  = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p1 - ori);
+0044 v2  = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p2 - ori);
+0045 v3  = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p3 - ori);
+0046 
+0047 <span class="comment">% keep hold state of current axis</span>
+0048 h = ishold;
+0049 
+0050 <span class="comment">% draw each spherical edge</span>
+0051 hold on;
+0052 h1 = <a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>(sphere, [v1 v2], varargin{:});
+0053 h2 = <a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>(sphere, [v2 v3], varargin{:});
+0054 h3 = <a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>(sphere, [v3 v1], varargin{:});
+0055 
+0056 <span class="comment">% return to previous hold state if needed</span>
+0057 <span class="keyword">if</span> ~h
+0058     hold off;    
+0059 <span class="keyword">end</span>
+0060 
+0061 <span class="keyword">if</span> nargout &gt; 0
+0062     varargout = {h1, h2, h3};
+0063 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of projPointOnCircle3d</title>
+  <meta name="keywords" content="projPointOnCircle3d">
+  <meta name="description" content="PROJPOINTONCIRCLE3D Project a 3D point onto a 3D circle.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; projPointOnCircle3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>projPointOnCircle3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>PROJPOINTONCIRCLE3D Project a 3D point onto a 3D circle.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function point2 = projPointOnCircle3d(point, circle) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">PROJPOINTONCIRCLE3D Project a 3D point onto a 3D circle.
+
+   PT2 = projPointOnCircle3d(PT, CIRCLE).
+   Computes the projection of 3D point PT onto the 3D circle CIRCLE. 
+   
+   Point PT is a N-by-3 array, and CIRCLE is a 1-by-7 array.
+   Result PT2 is a N-by-3 array, containing coordinates of projections of
+   PT onto the circle CIRCLE. 
+
+   See also
+   <a href="projPointOnLine3d.html" class="code" title="function point = projPointOnLine3d(point, line)">projPointOnLine3d</a>, <a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>
+
+   Source
+   https://www.geometrictools.com/Documentation/DistanceToCircle3.pdf
+
+ ---------
+ Author: oqilipo
+ Created: 2020-10-12
+ Copyright 2020</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>	DISTANCEPOINTS3D Compute euclidean distance between pairs of 3D Points.</li><li><a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>	NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.</li><li><a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>	PROJPOINTONPLANE Return the orthogonal projection of a point on a plane.</li><li><a href="transformVector3d.html" class="code" title="function varargout = transformVector3d(varargin)">transformVector3d</a>	TRANSFORMVECTOR3D Transform a vector with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function point2 = projPointOnCircle3d(point, circle)</a>
+0002 <span class="comment">%PROJPOINTONCIRCLE3D Project a 3D point onto a 3D circle.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PT2 = projPointOnCircle3d(PT, CIRCLE).</span>
+0005 <span class="comment">%   Computes the projection of 3D point PT onto the 3D circle CIRCLE.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   Point PT is a N-by-3 array, and CIRCLE is a 1-by-7 array.</span>
+0008 <span class="comment">%   Result PT2 is a N-by-3 array, containing coordinates of projections of</span>
+0009 <span class="comment">%   PT onto the circle CIRCLE.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   See also</span>
+0012 <span class="comment">%   projPointOnLine3d, projPointOnPlane</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   Source</span>
+0015 <span class="comment">%   https://www.geometrictools.com/Documentation/DistanceToCircle3.pdf</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">% ---------</span>
+0018 <span class="comment">% Author: oqilipo</span>
+0019 <span class="comment">% Created: 2020-10-12</span>
+0020 <span class="comment">% Copyright 2020</span>
+0021 <span class="comment">%</span>
+0022 
+0023 center = circle(1:3);
+0024 radius = circle(4);
+0025 
+0026 <span class="comment">% Compute transformation from local basis to world basis</span>
+0027 TFM = localToGlobal3d(center, circle(5), circle(6), circle(7));
+0028 
+0029 <span class="comment">% Create circle plane</span>
+0030 circlePlaneNormal = <a href="transformVector3d.html" class="code" title="function varargout = transformVector3d(varargin)">transformVector3d</a>([0 0 1], TFM);
+0031 circlePlane = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(center, circlePlaneNormal);
+0032 
+0033 <span class="comment">% Project point on circle plane</span>
+0034 PTonCP = <a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>(point, circlePlane);
+0035 
+0036 <span class="comment">% Calculate vector from the projected point to the center of the circle</span>
+0037 PTtoCenter = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(circle(1:3) - PTonCP);
+0038 
+0039 <span class="comment">% Calculate final point</span>
+0040 point2 = PTonCP + PTtoCenter.*(<a href="distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>(PTonCP, center) - radius);
+0041 
+0042 <span class="comment">% Take an arbitrary point of the circle if the point is the center of the circle</span>
+0043 <span class="keyword">if</span> any(all(isnan(point2),2))
+0044     point2(all(isnan(point2),2),:) = center + <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(circlePlane(4:6))*radius;
+0045 <span class="keyword">end</span>
+0046 <span class="comment">% Take an arbitrary point of the circle if the point lies on the normal of the circle plane</span>
+0047 <span class="keyword">if</span> any(sum(PTtoCenter == 0,2) == 2)
+0048     point2(sum(PTtoCenter == 0,2) == 2,:) = center + <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(circlePlane(4:6))*radius;
+0049 <span class="keyword">end</span>
+0050 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

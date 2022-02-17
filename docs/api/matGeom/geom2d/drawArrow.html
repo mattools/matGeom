@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawArrow</title>
+  <meta name="keywords" content="drawArrow">
+  <meta name="description" content="DRAWARROW Draw an arrow on the current axis.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; drawArrow.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawArrow
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWARROW Draw an arrow on the current axis.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawArrow(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWARROW Draw an arrow on the current axis.
+   
+   drawArrow(x1, y1, x2, y2) 
+   draws an arrow between the points (x1 y1) and (x2 y2).
+
+   drawArrow([x1 y1 x2 y2])
+   gives argument as a single array.
+
+   drawArrow(..., L, W)
+   specifies length and width of the arrow.
+
+   drawArrow(..., L, W, TYPE)
+   also specifies arrow type. TYPE can be one of the following :
+   0: draw only two strokes
+   1: fill a triangle
+   .5: draw a half arrow (try it to see ...)
+   
+   Arguments can be single values or array of size N-by-1. In this case,
+   the function draws multiple arrows.
+
+   H = drawArrow(...) 
+   return handle(s) to created arrow elements.
+   The handles are returned in a structure with the fields
+   'body', 'wing' and 'head' containing the handles to the different
+   parts of the arrow(s).
+
+   Example
+     t = linspace(0, 2*pi, 200);
+     figure; hold on;
+     plot(t, sin(t)); 
+     drawArrow([2 -1 pi 0], .1, .05, .5)
+ 
+   See also
+     <a href="drawEdge.html" class="code" title="function varargout = drawEdge(varargin)">drawEdge</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawArrow(varargin)</a>
+0002 <span class="comment">%DRAWARROW Draw an arrow on the current axis.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawArrow(x1, y1, x2, y2)</span>
+0005 <span class="comment">%   draws an arrow between the points (x1 y1) and (x2 y2).</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   drawArrow([x1 y1 x2 y2])</span>
+0008 <span class="comment">%   gives argument as a single array.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   drawArrow(..., L, W)</span>
+0011 <span class="comment">%   specifies length and width of the arrow.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   drawArrow(..., L, W, TYPE)</span>
+0014 <span class="comment">%   also specifies arrow type. TYPE can be one of the following :</span>
+0015 <span class="comment">%   0: draw only two strokes</span>
+0016 <span class="comment">%   1: fill a triangle</span>
+0017 <span class="comment">%   .5: draw a half arrow (try it to see ...)</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   Arguments can be single values or array of size N-by-1. In this case,</span>
+0020 <span class="comment">%   the function draws multiple arrows.</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   H = drawArrow(...)</span>
+0023 <span class="comment">%   return handle(s) to created arrow elements.</span>
+0024 <span class="comment">%   The handles are returned in a structure with the fields</span>
+0025 <span class="comment">%   'body', 'wing' and 'head' containing the handles to the different</span>
+0026 <span class="comment">%   parts of the arrow(s).</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%   Example</span>
+0029 <span class="comment">%     t = linspace(0, 2*pi, 200);</span>
+0030 <span class="comment">%     figure; hold on;</span>
+0031 <span class="comment">%     plot(t, sin(t));</span>
+0032 <span class="comment">%     drawArrow([2 -1 pi 0], .1, .05, .5)</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">%   See also</span>
+0035 <span class="comment">%     drawEdge</span>
+0036 <span class="comment">%</span>
+0037 
+0038 <span class="comment">%   ---------</span>
+0039 <span class="comment">%   author : David Legland</span>
+0040 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0041 <span class="comment">%   created the 11/11/2004 from drawEdge</span>
+0042 <span class="comment">%</span>
+0043 
+0044 <span class="comment">%   HISTORY</span>
+0045 <span class="comment">%   2014-09-17 fix managment of handle values as suggested by Benoit Botton</span>
+0046 <span class="comment">%   2016-05-23 Improve codee and reduce calculations (by JuanPi Carbajal)</span>
+0047 
+0048 <span class="keyword">if</span> isempty (varargin)
+0049     error (<span class="string">'should specify at least one argument'</span>);
+0050 <span class="keyword">end</span>
+0051 
+0052 <span class="comment">% parse arrow coordinates</span>
+0053 var = varargin{1};
+0054 <span class="keyword">if</span> size (var, 2) == 4
+0055     x1 = var(:,1);
+0056     y1 = var(:,2);
+0057     x2 = var(:,3);
+0058     y2 = var(:,4);
+0059     varargin = varargin(2:end);
+0060 
+0061 <span class="keyword">elseif</span> length (varargin) &gt; 3
+0062     x1 = varargin{1};
+0063     y1 = varargin{2};
+0064     x2 = varargin{3};
+0065     y2 = varargin{4};
+0066     varargin = varargin(5:end);
+0067     
+0068 <span class="keyword">else</span>
+0069     error (<span class="string">'MatGeom:drawArrow:invalidArgumentNumber'</span>, <span class="keyword">...</span>
+0070         <span class="string">'wrong number of arguments, please read the doc'</span>);
+0071 <span class="keyword">end</span>
+0072 N     = size (x1, 1);
+0073 
+0074 <span class="comment">% default values</span>
+0075 l = 10  * ones (N, 1); <span class="comment">% Body length</span>
+0076 w = 5   * ones (N, 1); <span class="comment">% Head width</span>
+0077 r = 0.1 * ones (N, 1); <span class="comment">% Head to body ratio</span>
+0078 h = zeros (N, 1);      <span class="comment">% Head type</span>
+0079 
+0080 <span class="keyword">if</span> ~isempty (varargin)
+0081     <span class="comment">% Parse parameters</span>
+0082     k      = length (varargin);
+0083     vartxt = <span class="string">'lwrh'</span>;
+0084     cmd    = [<span class="string">'%s = varargin{%d}; %s = %s(:);'</span> <span class="keyword">...</span>
+0085               <span class="string">'if length (%s) &lt; N; %s = %s(1) * ones (N , 1); end'</span>];
+0086     <span class="keyword">for</span> i = 1:k
+0087         v = vartxt(i);
+0088         eval (sprintf (cmd, v, i, v, v, v, v, v));
+0089     <span class="keyword">end</span>
+0090 <span class="keyword">end</span>
+0091 
+0092 hold on;
+0093 oldHold = ishold (gca);
+0094 <span class="keyword">if</span> ~oldHold
+0095     hold on;
+0096 <span class="keyword">end</span>
+0097 axis equal;
+0098 
+0099 <span class="comment">% angle of the edge</span>
+0100 theta = atan2 (y2-y1, x2-x1);
+0101 
+0102 rl = r .* l;
+0103 rh = r .* h;
+0104 cT = cos (theta);
+0105 sT = sin (theta);
+0106 <span class="comment">% point on the 'left'</span>
+0107 xa1 = x2 - rl .* cT - w .* sT / 2;
+0108 ya1 = y2 - rl .* sT + w .* cT / 2;
+0109 <span class="comment">% point on the 'right'</span>
+0110 xa2 = x2 - rl .* cT + w .* sT / 2;
+0111 ya2 = y2 - rl .* sT - w .* cT / 2;
+0112 <span class="comment">% point on the middle of the arrow</span>
+0113 xa3 = x2 - rh .* cT;
+0114 ya3 = y2 - rh .* sT;
+0115 
+0116 <span class="comment">% draw main edge</span>
+0117 tmp         = line ([x1.'; x2.'], [y1.'; y2.'], <span class="string">'color'</span>, [0 0 1]);
+0118 handle.body = tmp;
+0119 
+0120 <span class="comment">% draw only 2 wings</span>
+0121 ind = find (h == 0);
+0122 <span class="keyword">if</span> ~isempty (ind)
+0123     tmp              = line ([xa1(ind).'; x2(ind).'], [ya1(ind).'; y2(ind).'], <span class="keyword">...</span>
+0124                              <span class="string">'color'</span>, [0 0 1]);
+0125     handle.wing(:,1) = tmp;
+0126 
+0127     tmp              = line ([xa2(ind).'; x2(ind).'], [ya2(ind).'; y2(ind).'], <span class="keyword">...</span>
+0128                              <span class="string">'color'</span>, [0 0 1]);
+0129     handle.wing(:,2) = tmp;
+0130 <span class="keyword">end</span>
+0131 
+0132 <span class="comment">% draw a full arrow</span>
+0133 ind = find (h ~= 0);
+0134 <span class="keyword">if</span> ~isempty (ind)
+0135     tmp         = patch ([x2(ind) xa1(ind) xa3(ind) xa2(ind) x2(ind)].', <span class="keyword">...</span>
+0136                          [y2(ind) ya1(ind) ya3(ind) ya2(ind) y2(ind)].', [0 0 1]);
+0137     handle.head = tmp;
+0138 <span class="keyword">end</span>
+0139 
+0140 <span class="comment">% format output arguments</span>
+0141 <span class="keyword">if</span> nargout &gt; 0
+0142     varargout{1} = handle;
+0143 <span class="keyword">end</span>
+0144 
+0145 <span class="keyword">if</span> ~oldHold
+0146     hold off;
+0147 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

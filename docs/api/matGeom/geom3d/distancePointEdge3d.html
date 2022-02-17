@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of distancePointEdge3d</title>
+  <meta name="keywords" content="distancePointEdge3d">
+  <meta name="description" content="DISTANCEPOINTEDGE3D Minimum distance between a 3D point and a 3D edge.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; distancePointEdge3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>distancePointEdge3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DISTANCEPOINTEDGE3D Minimum distance between a 3D point and a 3D edge.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [dist, t] = distancePointEdge3d(point, edge) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DISTANCEPOINTEDGE3D Minimum distance between a 3D point and a 3D edge.
+
+   DIST = distancePointEdge3d(POINT, EDGE);
+   Return the euclidean distance between edge EDGE and point POINT. 
+   EDGE has the form: [x1 y1 z1 x2 y2 z2], and POINT is [x y z].
+
+   If EDGE is N-by-6 array, result is N-by-1 array computed for each edge.
+   If POINT is a N-by-3 array, the result is computed for each point.
+   If both POINT and EDGE are array, they must have the same number of
+   rows, and the result is computed for each couple point(i,:);edge(i,:).
+
+   [DIST POS] = distancePointEdge3d(POINT, EDGE);
+   Also returns the position of closest point on the edge. POS is
+   comprised between 0 (first point) and 1 (last point).
+
+   See also:
+   <a href="edges3d.html" class="code" title="function edges3d(varargin)">edges3d</a>, <a href="points3d.html" class="code" title="function points3d(varargin)">points3d</a>, <a href="distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>, <a href="distancePointLine3d.html" class="code" title="function d = distancePointLine3d(point, line)">distancePointLine3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>	Return the position of a 3D point projected on a 3D line.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [dist, t] = distancePointEdge3d(point, edge)</a>
+0002 <span class="comment">%DISTANCEPOINTEDGE3D Minimum distance between a 3D point and a 3D edge.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   DIST = distancePointEdge3d(POINT, EDGE);</span>
+0005 <span class="comment">%   Return the euclidean distance between edge EDGE and point POINT.</span>
+0006 <span class="comment">%   EDGE has the form: [x1 y1 z1 x2 y2 z2], and POINT is [x y z].</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   If EDGE is N-by-6 array, result is N-by-1 array computed for each edge.</span>
+0009 <span class="comment">%   If POINT is a N-by-3 array, the result is computed for each point.</span>
+0010 <span class="comment">%   If both POINT and EDGE are array, they must have the same number of</span>
+0011 <span class="comment">%   rows, and the result is computed for each couple point(i,:);edge(i,:).</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   [DIST POS] = distancePointEdge3d(POINT, EDGE);</span>
+0014 <span class="comment">%   Also returns the position of closest point on the edge. POS is</span>
+0015 <span class="comment">%   comprised between 0 (first point) and 1 (last point).</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   See also:</span>
+0018 <span class="comment">%   edges3d, points3d, distancePoints3d, distancePointLine3d</span>
+0019 <span class="comment">%</span>
+0020 
+0021 <span class="comment">%   ---------</span>
+0022 <span class="comment">%   author : David Legland</span>
+0023 <span class="comment">%   INRA - CEPIA URPOI - MIA MathCell</span>
+0024 <span class="comment">%   created the 07/04/2004.</span>
+0025 <span class="comment">%</span>
+0026 
+0027 <span class="comment">%   HISTORY</span>
+0028 <span class="comment">%   2005-06-24 rename, and change arguments sequence</span>
+0029 <span class="comment">%   2009-04-30 add possibility to return position of closest point</span>
+0030 <span class="comment">%   2011-04-14 add checkup for degenerate edges, improve speed, update doc</span>
+0031 
+0032 <span class="comment">% direction vector of each edge</span>
+0033 vl = edge(:, 4:6) - edge(:, 1:3);
+0034 
+0035 <span class="comment">% compute position of points projected on the supporting line</span>
+0036 <span class="comment">% (Size of t is the max number of edges or points)</span>
+0037 t = <a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>(point, [edge(:,1:3) vl]);
+0038 
+0039 <span class="comment">% change position to ensure projected point is located on the edge</span>
+0040 t(t &lt; 0) = 0;
+0041 t(t &gt; 1) = 1;
+0042 
+0043 <span class="comment">% difference of coordinates between projected point and base point</span>
+0044 p0 = bsxfun(@plus, edge(:,1:3), [t .* vl(:,1) t .* vl(:,2) t .* vl(:,3)]);
+0045 p0 = bsxfun(@minus, point, p0);
+0046 
+0047 <span class="comment">% compute distance between point and its projection on the edge</span>
+0048 dist = sqrt(sum(p0 .* p0, 2));</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

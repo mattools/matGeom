@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of normalizeVector3d</title>
+  <meta name="keywords" content="normalizeVector3d">
+  <meta name="description" content="NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; normalizeVector3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>normalizeVector3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function vn = normalizeVector3d(v) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.
+
+   V2 = normalizeVector3d(V);
+   Returns the normalization of vector V, such that ||V|| = 1. Vector V is
+   given as a row vector.
+
+   If V is a N-by-3 array, normalization is performed for each row of the
+   input array.
+
+   If V is a M-by-N-by-3 array, normalization is performed along the last
+   dimension of the array.
+
+   See also:
+     <a href="vectors3d.html" class="code" title="function vectors3d(varargin)">vectors3d</a>, <a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="anglePoints3d.html" class="code" title="function alpha = anglePoints3d(varargin)">anglePoints3d</a>	ANGLEPOINTS3D Compute angle between three 3D points.</li><li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="createRotation3dLineAngle.html" class="code" title="function mat = createRotation3dLineAngle(line, theta)">createRotation3dLineAngle</a>	CREATEROTATION3DLINEANGLE Create rotation around a line by an angle theta.</li><li><a href="createRotationVector3d.html" class="code" title="function ROT = createRotationVector3d(A,B)">createRotationVector3d</a>	CREATEROTATIONVECTOR3D Calculates the rotation between two vectors.</li><li><a href="distancePointPlane.html" class="code" title="function d = distancePointPlane(point, plane)">distancePointPlane</a>	DISTANCEPOINTPLANE Signed distance betwen 3D point and plane.</li><li><a href="drawAngleBetweenVectors3d.html" class="code" title="function varargout = drawAngleBetweenVectors3d(o, v1, v2, r, varargin)">drawAngleBetweenVectors3d</a>	DRAWANGLEBETWEENVECTORS3D Draw an arc between 2 vectors.</li><li><a href="drawSphericalTriangle.html" class="code" title="function varargout = drawSphericalTriangle(sphere, p1, p2, p3, varargin)">drawSphericalTriangle</a>	DRAWSPHERICALTRIANGLE Draw a triangle on a sphere.</li><li><a href="fillSphericalTriangle.html" class="code" title="function varargout = fillSphericalTriangle(sphere, p1, p2, p3, varargin)">fillSphericalTriangle</a>	FILLSPHERICALTRIANGLE Fill a triangle on a sphere.</li><li><a href="intersectPlanes.html" class="code" title="function line = intersectPlanes(plane1, plane2, varargin)">intersectPlanes</a>	INTERSECTPLANES Return intersection line between 2 planes in space.</li><li><a href="intersectThreePlanes.html" class="code" title="function point = intersectThreePlanes(plane1, plane2, plane3)">intersectThreePlanes</a>	INTERSECTTHREEPLANES Return intersection point between 3 planes in space.</li><li><a href="normalizeLine3d.html" class="code" title="function line2 = normalizeLine3d(line)">normalizeLine3d</a>	NORMALIZELINE3D Normalizes the direction vector of a 3D line.</li><li><a href="normalizePlane.html" class="code" title="function plane2 = normalizePlane(plane1)">normalizePlane</a>	NORMALIZEPLANE Normalize parametric representation of a plane.</li><li><a href="orientedBox3d.html" class="code" title="function [box3d, rotMat] = orientedBox3d(pts)">orientedBox3d</a>	Object-oriented bounding box of a set of 3D points.</li><li><a href="parallelPlane.html" class="code" title="function res = parallelPlane(plane, point)">parallelPlane</a>	PARALLELPLANE Parallel to a plane through a point or at a given distance.</li><li><a href="projPointOnCircle3d.html" class="code" title="function point2 = projPointOnCircle3d(point, circle)">projPointOnCircle3d</a>	PROJPOINTONCIRCLE3D Project a 3D point onto a 3D circle.</li><li><a href="sphericalAngle.html" class="code" title="function alpha = sphericalAngle(p1, p2, p3)">sphericalAngle</a>	SPHERICALANGLE Compute angle between points on the sphere.</li><li><a href="../../matGeom/meshes3d/curveToMesh.html" class="code" title="function [vertices, faces] = curveToMesh(curve, varargin)">curveToMesh</a>	Create a mesh surrounding a 3D curve.</li><li><a href="../../matGeom/meshes3d/meshFaceNormals.html" class="code" title="function normals = meshFaceNormals(varargin)">meshFaceNormals</a>	MESHFACENORMALS Compute normal vector of faces in a 3D mesh.</li><li><a href="../../matGeom/meshes3d/meshSurfaceArea.html" class="code" title="function area = meshSurfaceArea(varargin)">meshSurfaceArea</a>	Surface area of a polyhedral mesh.</li><li><a href="../../matGeom/meshes3d/meshVertexNormals.html" class="code" title="function [normals, faceNormals] = meshVertexNormals(varargin)">meshVertexNormals</a>	MESHVERTEXNORMALS Compute normals to a mesh vertices.</li><li><a href="../../matGeom/meshes3d/vertexNormal.html" class="code" title="function normals = vertexNormal(vertices, faces)">vertexNormal</a>	VERTEXNORMAL Compute normals to a mesh vertices.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function vn = normalizeVector3d(v)</a>
+0002 <span class="comment">%NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   V2 = normalizeVector3d(V);</span>
+0005 <span class="comment">%   Returns the normalization of vector V, such that ||V|| = 1. Vector V is</span>
+0006 <span class="comment">%   given as a row vector.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   If V is a N-by-3 array, normalization is performed for each row of the</span>
+0009 <span class="comment">%   input array.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   If V is a M-by-N-by-3 array, normalization is performed along the last</span>
+0012 <span class="comment">%   dimension of the array.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   See also:</span>
+0015 <span class="comment">%     vectors3d, vectorNorm3d</span>
+0016 <span class="comment">%</span>
+0017 
+0018 <span class="comment">%   ---------</span>
+0019 <span class="comment">%   author : David Legland</span>
+0020 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0021 <span class="comment">%   created the 29/11/2004.</span>
+0022 <span class="comment">%</span>
+0023 
+0024 <span class="comment">% HISTORY</span>
+0025 <span class="comment">% 2005-11-30 correct a bug</span>
+0026 <span class="comment">% 2009-06-19 rename as normalizeVector3d</span>
+0027 <span class="comment">% 2010-11-16 use bsxfun (Thanks to Sven Holcombe)</span>
+0028 
+0029 <span class="keyword">if</span> ismatrix(v)
+0030     vn = bsxfun(@rdivide, v, sqrt(sum(v.^2, 2)));
+0031 <span class="keyword">else</span>
+0032     vn = bsxfun(@rdivide, v, sqrt(sum(v.^2, ndims(v))));
+0033 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of planeNormal</title>
+  <meta name="keywords" content="planeNormal">
+  <meta name="description" content="PLANENORMAL Compute the normal to a plane.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; planeNormal.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>planeNormal
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>PLANENORMAL Compute the normal to a plane.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function n = planeNormal(plane) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">PLANENORMAL Compute the normal to a plane.
+
+   N = planeNormal(PLANE) 
+   compute the normal of the given plane
+   PLANE : [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2]
+   N : [dx dy dz]
+   
+   See also
+   geom3d, <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>, <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>	CROSSPRODUCT3D Vector cross product faster than inbuilt MATLAB cross.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="dihedralAngle.html" class="code" title="function theta = dihedralAngle(plane1, plane2)">dihedralAngle</a>	DIHEDRALANGLE Compute dihedral angle between 2 planes.</li><li><a href="intersectPlaneSphere.html" class="code" title="function circle = intersectPlaneSphere(plane, sphere)">intersectPlaneSphere</a>	INTERSECTPLANESPHERE Return intersection circle between a plane and a sphere.</li><li><a href="isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>	ISBELOWPLANE Test whether a point is below or above a plane.</li><li><a href="normalizePlane.html" class="code" title="function plane2 = normalizePlane(plane1)">normalizePlane</a>	NORMALIZEPLANE Normalize parametric representation of a plane.</li><li><a href="parallelPlane.html" class="code" title="function res = parallelPlane(plane, point)">parallelPlane</a>	PARALLELPLANE Parallel to a plane through a point or at a given distance.</li><li><a href="planesBisector.html" class="code" title="function out = planesBisector(plane1, plane2)">planesBisector</a>	PLANESBISECTOR  Bisector plane between two other planes.</li><li><a href="../../matGeom/meshes3d/clipConvexPolyhedronHP.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronHP(nodes, faces, plane)">clipConvexPolyhedronHP</a>	CLIPCONVEXPOLYHEDRONHP Clip a convex polyhedron by a plane.</li><li><a href="../../matGeom/meshes3d/meshSilhouette.html" class="code" title="function silhouette = meshSilhouette(v, f, varargin)">meshSilhouette</a>	MESHSILHOUETTE Compute the 2D outline of a 3D mesh on an arbitrary plane.</li><li><a href="../../matGeom/meshes3d/minConvexHull.html" class="code" title="function newFaces = minConvexHull(points, varargin)">minConvexHull</a>	MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function n = planeNormal(plane)</a>
+0002 <span class="comment">%PLANENORMAL Compute the normal to a plane.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   N = planeNormal(PLANE)</span>
+0005 <span class="comment">%   compute the normal of the given plane</span>
+0006 <span class="comment">%   PLANE : [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2]</span>
+0007 <span class="comment">%   N : [dx dy dz]</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   See also</span>
+0010 <span class="comment">%   geom3d, planes3d, createPlane</span>
+0011 <span class="comment">%</span>
+0012 
+0013 <span class="comment">%   ---------</span>
+0014 <span class="comment">%   author : David Legland</span>
+0015 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0016 <span class="comment">%   created the 17/02/2005.</span>
+0017 <span class="comment">%</span>
+0018 
+0019 <span class="comment">%   HISTORY</span>
+0020 <span class="comment">%   15/04/2013 Extended to N-dim planes by Sven Holcombe</span>
+0021 
+0022 <span class="comment">% plane normal</span>
+0023 outSz = size(plane);
+0024 outSz(2) = 3;
+0025 n = zeros(outSz);
+0026 n(:) = <a href="crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>(plane(:,4:6,:), plane(:, 7:9,:));</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

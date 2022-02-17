@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of smoothMeshFunction</title>
+  <meta name="keywords" content="smoothMeshFunction">
+  <meta name="description" content="Apply smoothing on a functions defines on mesh vertices.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; smoothMeshFunction.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>smoothMeshFunction
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Apply smoothing on a functions defines on mesh vertices.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function f = smoothMeshFunction(vertices, faces, f, varargin) %#ok<INUSL> </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Apply smoothing on a functions defines on mesh vertices.
+
+   FS = smoothMeshFunction(VERTICES, FACES, F, NITERS)
+   Performs smoothing on the function F defined on vertices of the mesh.
+   The mesh is specified by VERTICES and FACES array. At each iteration,
+   the value for each vertex is obtained as the average of values obtained
+   from neighbor vertices.
+   NITERS is the number of times the iteration must be repeated. By
+   default it equals 3.
+
+   Example
+   smoothMeshFunction
+
+   See also
+     meshes3d, <a href="meshCurvatures.html" class="code" title="function [C1, C2, U1, U2, H, K, N] = meshCurvatures(vertices, faces, varargin)">meshCurvatures</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="meshAdjacencyMatrix.html" class="code" title="function adj = meshAdjacencyMatrix(faces, varargin)">meshAdjacencyMatrix</a>	MESHADJACENCYMATRIX Compute adjacency matrix of a mesh from set of faces.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="meshCurvatures.html" class="code" title="function [C1, C2, U1, U2, H, K, N] = meshCurvatures(vertices, faces, varargin)">meshCurvatures</a>	Compute principal curvatures on mesh vertices.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function f = smoothMeshFunction(vertices, faces, f, varargin) </a><span class="comment">%#ok&lt;INUSL&gt;</span>
+0002 <span class="comment">% Apply smoothing on a functions defines on mesh vertices.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   FS = smoothMeshFunction(VERTICES, FACES, F, NITERS)</span>
+0005 <span class="comment">%   Performs smoothing on the function F defined on vertices of the mesh.</span>
+0006 <span class="comment">%   The mesh is specified by VERTICES and FACES array. At each iteration,</span>
+0007 <span class="comment">%   the value for each vertex is obtained as the average of values obtained</span>
+0008 <span class="comment">%   from neighbor vertices.</span>
+0009 <span class="comment">%   NITERS is the number of times the iteration must be repeated. By</span>
+0010 <span class="comment">%   default it equals 3.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%   smoothMeshFunction</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   See also</span>
+0016 <span class="comment">%     meshes3d, meshCurvatures</span>
+0017  
+0018 <span class="comment">% ------</span>
+0019 <span class="comment">% Author: David Legland</span>
+0020 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0021 <span class="comment">% INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0022 <span class="comment">% Created: 2021-09-22,    using Matlab 9.10.0.1684407 (R2021a) Update 3</span>
+0023 <span class="comment">% Copyright 2021 INRAE.</span>
+0024 
+0025 <span class="comment">% determines number of iterations</span>
+0026 nIters = 3;
+0027 <span class="keyword">if</span> ~isempty(varargin)
+0028     nIters = varargin{1};
+0029 <span class="keyword">end</span>
+0030     
+0031 <span class="comment">% apply smoothing on scalar function</span>
+0032 nv = max(faces(:));
+0033 
+0034 <span class="comment">% compute normalized averaging matrix</span>
+0035 W = <a href="meshAdjacencyMatrix.html" class="code" title="function adj = meshAdjacencyMatrix(faces, varargin)">meshAdjacencyMatrix</a>(faces) + speye(nv);
+0036 D = spdiags(full(sum(W,2).^(-1)), 0, nv, nv);
+0037 W = D * W;
+0038 
+0039 <span class="comment">% do averaging to smooth the field</span>
+0040 <span class="keyword">for</span> j = 1:size(f, 2)
+0041     <span class="keyword">for</span> k = 1:nIters
+0042         f(:,j) = W * f(:,j);
+0043     <span class="keyword">end</span>
+0044 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

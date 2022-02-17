@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of edgeToLine3d</title>
+  <meta name="keywords" content="edgeToLine3d">
+  <meta name="description" content="EDGETOLINE3D Convert a 3D edge to a 3D straight line.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; edgeToLine3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>edgeToLine3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>EDGETOLINE3D Convert a 3D edge to a 3D straight line.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function line = edgeToLine3d(edge) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">EDGETOLINE3D Convert a 3D edge to a 3D straight line.
+
+   LINE = edgeToLine3d(EDGE)
+   Returns the 3D straight line containing the 3D edge EDGE.
+   EDGE is represented as [X1 Y1 Z1  X2 Y2 Z2]
+   LINE is represented as [X0 Y0 Z0  DX DY DZ]
+
+   Example
+       edge = [3 4 5  4 6 8];
+       line = edgeToLine3d(edge)
+       line = 
+            3   4   5   1   2   3
+
+   See also
+     <a href="lines3d.html" class="code" title="function lines3d(varargin)">lines3d</a>, <a href="edges3d.html" class="code" title="function edges3d(varargin)">edges3d</a>, edgeToLine, <a href="lineToEdge3d.html" class="code" title="function edge = lineToEdge3d(line)">lineToEdge3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="intersectEdgePolygon3d.html" class="code" title="function [inter, valid] = intersectEdgePolygon3d(edge, poly)">intersectEdgePolygon3d</a>	Intersection point of a 3D EDGE segment and a 3D polygon.</li><li><a href="isPointOnEdge3d.html" class="code" title="function b = isPointOnEdge3d(point, edge, varargin)">isPointOnEdge3d</a>	Test if a 3D point belongs to an edge.</li><li><a href="../../matGeom/meshes3d/intersectEdgeMesh3d.html" class="code" title="function [points, pos, faceInds] = intersectEdgeMesh3d(edge, varargin)">intersectEdgeMesh3d</a>	Intersection points of a 3D edge with a mesh.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function line = edgeToLine3d(edge)</a>
+0002 <span class="comment">%EDGETOLINE3D Convert a 3D edge to a 3D straight line.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   LINE = edgeToLine3d(EDGE)</span>
+0005 <span class="comment">%   Returns the 3D straight line containing the 3D edge EDGE.</span>
+0006 <span class="comment">%   EDGE is represented as [X1 Y1 Z1  X2 Y2 Z2]</span>
+0007 <span class="comment">%   LINE is represented as [X0 Y0 Z0  DX DY DZ]</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   Example</span>
+0010 <span class="comment">%       edge = [3 4 5  4 6 8];</span>
+0011 <span class="comment">%       line = edgeToLine3d(edge)</span>
+0012 <span class="comment">%       line =</span>
+0013 <span class="comment">%            3   4   5   1   2   3</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   See also</span>
+0016 <span class="comment">%     lines3d, edges3d, edgeToLine, lineToEdge3d</span>
+0017  
+0018 <span class="comment">% ------</span>
+0019 <span class="comment">% Author: David Legland</span>
+0020 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0021 <span class="comment">% Created: 2018-04-12,    using Matlab 9.3.0.713579 (R2017b)</span>
+0022 <span class="comment">% Copyright 2018 INRA - Cepia Software Platform.</span>
+0023 
+0024 line = [edge(:, 1:3) edge(:, 4:6)-edge(:, 1:3)];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

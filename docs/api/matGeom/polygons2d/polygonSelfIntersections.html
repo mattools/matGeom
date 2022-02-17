@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of polygonSelfIntersections</title>
+  <meta name="keywords" content="polygonSelfIntersections">
+  <meta name="description" content="POLYGONSELFINTERSECTIONS Find self-intersection points of a polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; polygonSelfIntersections.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>polygonSelfIntersections
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>POLYGONSELFINTERSECTIONS Find self-intersection points of a polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = polygonSelfIntersections(poly, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLYGONSELFINTERSECTIONS Find self-intersection points of a polygon.
+
+   PTS = polygonSelfIntersections(POLY)
+   Return the position of self intersection points
+
+   [PTS, POS1, POS2] = polygonSelfIntersections(POLY)
+   Also return the 2 positions of each intersection point (the position
+   when meeting point for first time, then position when meeting point
+   for the second time).
+
+   [...] = polygonSelfIntersections(POLY, 'tolerance', TOL)
+   Specifies an additional parameter to decide whether two intersection
+   points should be considered the same, based on their euclidean
+   distance.  
+
+
+   Example
+       % use a '8'-shaped polygon
+       poly = [10 0;0 0;0 10;20 10;20 20;10 20];
+       polygonSelfIntersections(poly)
+       ans = 
+           10 10
+
+   See also
+   polygons2d, <a href="polylineSelfIntersections.html" class="code" title="function varargout = polylineSelfIntersections(poly, varargin)">polylineSelfIntersections</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polylineSelfIntersections.html" class="code" title="function varargout = polylineSelfIntersections(poly, varargin)">polylineSelfIntersections</a>	POLYLINESELFINTERSECTIONS Find self-intersection points of a polyline.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="polygonLoops.html" class="code" title="function loops = polygonLoops(poly, varargin)">polygonLoops</a>	POLYGONLOOPS Divide a possibly self-intersecting polygon into a set of simple loops.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = polygonSelfIntersections(poly, varargin)</a>
+0002 <span class="comment">%POLYGONSELFINTERSECTIONS Find self-intersection points of a polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PTS = polygonSelfIntersections(POLY)</span>
+0005 <span class="comment">%   Return the position of self intersection points</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   [PTS, POS1, POS2] = polygonSelfIntersections(POLY)</span>
+0008 <span class="comment">%   Also return the 2 positions of each intersection point (the position</span>
+0009 <span class="comment">%   when meeting point for first time, then position when meeting point</span>
+0010 <span class="comment">%   for the second time).</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   [...] = polygonSelfIntersections(POLY, 'tolerance', TOL)</span>
+0013 <span class="comment">%   Specifies an additional parameter to decide whether two intersection</span>
+0014 <span class="comment">%   points should be considered the same, based on their euclidean</span>
+0015 <span class="comment">%   distance.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   Example</span>
+0019 <span class="comment">%       % use a '8'-shaped polygon</span>
+0020 <span class="comment">%       poly = [10 0;0 0;0 10;20 10;20 20;10 20];</span>
+0021 <span class="comment">%       polygonSelfIntersections(poly)</span>
+0022 <span class="comment">%       ans =</span>
+0023 <span class="comment">%           10 10</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   See also</span>
+0026 <span class="comment">%   polygons2d, polylineSelfIntersections</span>
+0027 <span class="comment">%</span>
+0028 
+0029 <span class="comment">% ------</span>
+0030 <span class="comment">% Author: David Legland</span>
+0031 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0032 <span class="comment">% Created: 2009-06-15,    using Matlab 7.7.0.471 (R2008b)</span>
+0033 <span class="comment">% Copyright 2009 INRA - Cepia Software Platform.</span>
+0034 
+0035 <span class="comment">%   HISTORY</span>
+0036 <span class="comment">%   2011-06-22 fix bug when removing origin vertex (thanks to Federico</span>
+0037 <span class="comment">%       Bonelli)</span>
+0038 
+0039 tol = 1e-14;
+0040 
+0041 <span class="comment">% parse optional arguments</span>
+0042 <span class="keyword">while</span> length(varargin) &gt; 1
+0043     pname = varargin{1};
+0044     <span class="keyword">if</span> ~ischar(pname)
+0045         error(<span class="string">'Expect optional arguments as name-value pairs'</span>);
+0046     <span class="keyword">end</span>
+0047     
+0048     <span class="keyword">if</span> strcmpi(pname, <span class="string">'tolerance'</span>)
+0049         tol = varargin{2};
+0050     <span class="keyword">else</span>
+0051         error([<span class="string">'Unknown parameter name: '</span> pname]);
+0052     <span class="keyword">end</span>
+0053     varargin(1:2) = [];
+0054 <span class="keyword">end</span>
+0055 
+0056 <span class="comment">% ensure the last point equals the first one</span>
+0057 <span class="keyword">if</span> sum(abs(poly(<span class="keyword">end</span>, :)-poly(1,:)) &lt; tol) ~= 2
+0058     poly = [poly; poly(1,:)];
+0059 <span class="keyword">end</span>
+0060 
+0061 <span class="comment">% compute intersections by calling algo for polylines</span>
+0062 [points, pos1, pos2] = <a href="polylineSelfIntersections.html" class="code" title="function varargout = polylineSelfIntersections(poly, varargin)">polylineSelfIntersections</a>(poly, <span class="string">'closed'</span>, <span class="string">'tolerance'</span>, tol);
+0063 
+0064 <span class="comment">% It may append that first vertex of polygon is detected as intersection,</span>
+0065 <span class="comment">% the following tries to detect this.</span>
+0066 <span class="comment">% (pos1 &lt; pos2 by construction)</span>
+0067 n = size(poly, 1) - 1;
+0068 inds = abs(pos1) &lt; tol &amp; abs(pos2 - n) &lt; tol;
+0069 points(inds, :) = [];
+0070 pos1(inds)   = [];
+0071 pos2(inds)   = [];
+0072 
+0073 
+0074 <span class="comment">%% Post-processing</span>
+0075 
+0076 <span class="comment">% process output arguments</span>
+0077 <span class="keyword">if</span> nargout &lt;= 1
+0078     varargout = {points};
+0079 <span class="keyword">elseif</span> nargout == 3
+0080     varargout = {points, pos1, pos2};
+0081 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

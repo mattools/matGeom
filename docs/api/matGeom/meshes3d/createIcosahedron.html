@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createIcosahedron</title>
+  <meta name="keywords" content="createIcosahedron">
+  <meta name="description" content="CREATEICOSAHEDRON Create a 3D mesh representing an Icosahedron.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; createIcosahedron.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createIcosahedron
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATEICOSAHEDRON Create a 3D mesh representing an Icosahedron.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = createIcosahedron() </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATEICOSAHEDRON Create a 3D mesh representing an Icosahedron.
+
+   MESH = createIcosahedron;
+   [V, E, F] = createIcosahedron;
+   Create a solid with 12 vertices, and 20 triangular faces. Faces are
+   oriented outwards of the mesh.
+
+   [V, F] = createIcosahedron;
+   Returns only the vertices and the face vertex indices.
+
+   MESH = createIcosahedron;
+   Returns the data as a mesh structure, with fields 'vertices', 'edges'
+   and 'faces'.
+
+   Example
+     [n, e, f] = createIcosahedron;
+     drawMesh(n, f);
+   
+   See also
+   meshes3d, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a>
+   <a href="createCube.html" class="code" title="function varargout = createCube()">createCube</a>, <a href="createOctahedron.html" class="code" title="function varargout = createOctahedron()">createOctahedron</a>, <a href="createDodecahedron.html" class="code" title="function varargout = createDodecahedron()">createDodecahedron</a>, <a href="createTetrahedron.html" class="code" title="function varargout = createTetrahedron()">createTetrahedron</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = createIcosahedron()</a>
+0002 <span class="comment">%CREATEICOSAHEDRON Create a 3D mesh representing an Icosahedron.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   MESH = createIcosahedron;</span>
+0005 <span class="comment">%   [V, E, F] = createIcosahedron;</span>
+0006 <span class="comment">%   Create a solid with 12 vertices, and 20 triangular faces. Faces are</span>
+0007 <span class="comment">%   oriented outwards of the mesh.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   [V, F] = createIcosahedron;</span>
+0010 <span class="comment">%   Returns only the vertices and the face vertex indices.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   MESH = createIcosahedron;</span>
+0013 <span class="comment">%   Returns the data as a mesh structure, with fields 'vertices', 'edges'</span>
+0014 <span class="comment">%   and 'faces'.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example</span>
+0017 <span class="comment">%     [n, e, f] = createIcosahedron;</span>
+0018 <span class="comment">%     drawMesh(n, f);</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   See also</span>
+0021 <span class="comment">%   meshes3d, drawMesh</span>
+0022 <span class="comment">%   createCube, createOctahedron, createDodecahedron, createTetrahedron</span>
+0023 <span class="comment">%</span>
+0024 
+0025 <span class="comment">%   ---------</span>
+0026 <span class="comment">%   author: David Legland</span>
+0027 <span class="comment">%   mail: david.legland@inra.fr</span>
+0028 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
+0029 <span class="comment">%   created the 21/03/2005.</span>
+0030 <span class="comment">%</span>
+0031 
+0032 <span class="comment">%   HISTORY</span>
+0033 <span class="comment">%   2007-01-04 remove unused variables</span>
+0034 <span class="comment">%   2010-12-06 format output, orient normals outwards</span>
+0035 
+0036 
+0037 <span class="comment">%% Initialisations</span>
+0038 
+0039 theta = 2*pi/5;
+0040 l = 1/sin(theta/2)/2;
+0041 z1 = sqrt(1-l*l);
+0042 
+0043 t1 = (0:2*pi/5:2*pi*(1-1/5))';
+0044 x1 = l*cos(t1);
+0045 y1 = l*sin(t1);
+0046 
+0047 t2 = t1 + 2*pi/10;
+0048 x2 = l*cos(t2);
+0049 y2 = l*sin(t2);
+0050 
+0051 h = sqrt(l*l-.5*.5);
+0052 z2 = sqrt(3/4 - (l-h)*(l-h));
+0053 
+0054 
+0055 <span class="comment">%% Create mesh data</span>
+0056 
+0057 nodes = [0 0 0;<span class="keyword">...</span>
+0058     [x1 y1 repmat(z1, [5 1])]; <span class="keyword">...</span>
+0059     [x2 y2 repmat(z1+z2, [5 1])]; <span class="keyword">...</span>
+0060     0 0 2*z1+z2];
+0061 
+0062 edges = [<span class="keyword">...</span>
+0063     1 2;1 3;1 4;1 5;1 6; <span class="keyword">...</span>
+0064     2 3;3 4;4 5;5 6;6 2; <span class="keyword">...</span>
+0065     2 7;7 3;3 8;8 4;4 9;9 5;5 10;10 6;6 11;11 2; <span class="keyword">...</span>
+0066     7 8;8 9;9 10;10 11;11 7; <span class="keyword">...</span>
+0067     7 12;8 12;9 12;10 12;11 12];
+0068     
+0069 <span class="comment">% faces are ordered to have normals pointing outside of the mesh</span>
+0070 faces = [<span class="keyword">...</span>
+0071     1 3  2 ; 1 4  3 ; 1  5  4 ;  1  6  5 ;  1 2  6;<span class="keyword">...</span>
+0072     2 3  7 ; 3 4  8 ; 4  5  9 ;  5  6 10 ;  6 2 11;<span class="keyword">...</span>
+0073     7 3  8 ; 8 4  9 ; 9  5 10 ; 10  6 11 ; 11 2  7;<span class="keyword">...</span>
+0074     7 8 12 ; 8 9 12 ; 9 10 12 ; 10 11 12 ; 11 7 12];
+0075 
+0076 <span class="comment">% format output</span>
+0077 varargout = formatMeshOutput(nargout, nodes, edges, faces);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of checkMeshAdjacentFaces</title>
+  <meta name="keywords" content="checkMeshAdjacentFaces">
+  <meta name="description" content="CHECKMESHADJACENTFACES Check if adjacent faces of a mesh have similar orientation.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; checkMeshAdjacentFaces.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>checkMeshAdjacentFaces
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CHECKMESHADJACENTFACES Check if adjacent faces of a mesh have similar orientation.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function checkMeshAdjacentFaces(vertices, edges, faces) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CHECKMESHADJACENTFACES Check if adjacent faces of a mesh have similar orientation.
+
+   checkMeshAdjacentFaces(VERTICES, EDGES, FACES)
+   The functions returns no output, but if two faces share a common edge
+   with the same direction (meaning that adjacent faces have normals in
+   opposite direction), a warning is displayed. 
+   
+   Example
+   [v e f] = createCube();
+   checkMeshAdjacentFaces(v, e, f);
+   % no output -&gt; all faces have normal outwards of the cube
+
+   v = [0 0 0; 10 0 0; 0 10 0; 10 10 0];
+   e = [1 2;1 3;2 3;2 4;3 4];
+   f = [1 2 3; 2 3 4];
+   checkMeshAdjacentFaces(v, e, f);
+      Warning: Faces 1 and 2 run through the edge 3 (2-3) in the same direction
+
+   See also
+     meshes3d, <a href="trimeshMeanBreadth.html" class="code" title="function mb = trimeshMeanBreadth(vertices, faces)">trimeshMeanBreadth</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="meshEdgeFaces.html" class="code" title="function edgeFaces = meshEdgeFaces(vertices, edges, faces) %#ok<INUSL>">meshEdgeFaces</a>	MESHEDGEFACES Compute index of faces adjacent to each edge of a mesh.</li><li><a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>	MESHEDGES Computes array of edge vertex indices from face array.</li><li><a href="meshFace.html" class="code" title="function face = meshFace(faces, index)">meshFace</a>	MESHFACE Return the vertex indices of a face in a mesh.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function checkMeshAdjacentFaces(vertices, edges, faces)</a>
+0002 <span class="comment">%CHECKMESHADJACENTFACES Check if adjacent faces of a mesh have similar orientation.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   checkMeshAdjacentFaces(VERTICES, EDGES, FACES)</span>
+0005 <span class="comment">%   The functions returns no output, but if two faces share a common edge</span>
+0006 <span class="comment">%   with the same direction (meaning that adjacent faces have normals in</span>
+0007 <span class="comment">%   opposite direction), a warning is displayed.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   Example</span>
+0010 <span class="comment">%   [v e f] = createCube();</span>
+0011 <span class="comment">%   checkMeshAdjacentFaces(v, e, f);</span>
+0012 <span class="comment">%   % no output -&gt; all faces have normal outwards of the cube</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   v = [0 0 0; 10 0 0; 0 10 0; 10 10 0];</span>
+0015 <span class="comment">%   e = [1 2;1 3;2 3;2 4;3 4];</span>
+0016 <span class="comment">%   f = [1 2 3; 2 3 4];</span>
+0017 <span class="comment">%   checkMeshAdjacentFaces(v, e, f);</span>
+0018 <span class="comment">%      Warning: Faces 1 and 2 run through the edge 3 (2-3) in the same direction</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   See also</span>
+0021 <span class="comment">%     meshes3d, trimeshMeanBreadth</span>
+0022 <span class="comment">%</span>
+0023 
+0024 <span class="comment">% ------</span>
+0025 <span class="comment">% Author: David Legland</span>
+0026 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0027 <span class="comment">% Created: 2010-10-06,    using Matlab 7.9.0.529 (R2009b)</span>
+0028 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0029 
+0030 <span class="comment">% the message pattern that is displayed when an inconsistency is encountered</span>
+0031 pattern = <span class="string">'Faces %d and %d run through the edge %d (%d-%d) in the same direction'</span>;
+0032 
+0033 <span class="comment">% If edges are not specified, compute them</span>
+0034 <span class="keyword">if</span> nargin == 2
+0035     faces = edges;
+0036     edges = <a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>(vertices, faces);
+0037 <span class="keyword">end</span>
+0038 
+0039 <span class="comment">% compute edges to faces map</span>
+0040 edgeFaces = <a href="meshEdgeFaces.html" class="code" title="function edgeFaces = meshEdgeFaces(vertices, edges, faces) %#ok<INUSL>">meshEdgeFaces</a>(vertices, edges, faces);
+0041 Ne = size(edgeFaces, 1);
+0042 
+0043 <span class="keyword">for</span> i = 1:Ne
+0044     <span class="comment">% indices of extreimty vertices</span>
+0045     v1 = edges(i, 1);
+0046     v2 = edges(i, 2);
+0047     
+0048     <span class="comment">% index of adjacent faces</span>
+0049     indF1 = edgeFaces(i, 1);
+0050     indF2 = edgeFaces(i, 2);
+0051     
+0052     <span class="comment">% if one of the faces has index 0, then the edge is at the boundary</span>
+0053     <span class="keyword">if</span> indF1 == 0 || indF2 == 0
+0054         <span class="keyword">continue</span>;
+0055     <span class="keyword">end</span>
+0056     <span class="comment">% vertices of adjacent faces</span>
+0057     face1 = <a href="meshFace.html" class="code" title="function face = meshFace(faces, index)">meshFace</a>(faces, indF1);
+0058     face2 = <a href="meshFace.html" class="code" title="function face = meshFace(faces, index)">meshFace</a>(faces, indF2);
+0059     
+0060     <span class="comment">% position of vertices in face vertex array</span>
+0061     ind11 = find(face1 == v1);
+0062     ind12 = find(face1 == v2);
+0063     ind21 = find(face2 == v1);
+0064     ind22 = find(face2 == v2);
+0065     
+0066     <span class="comment">% check if edge is traveled forward or backard</span>
+0067     direct1 = (ind12 == ind11+1) | (ind12 == 1 &amp; ind11 == length(face1));
+0068     direct2 = (ind22 == ind21+1) | (ind22 == 1 &amp; ind21 == length(face2));
+0069     
+0070     <span class="comment">% adjacent faces should travel the edge in opposite direction</span>
+0071     <span class="keyword">if</span> direct1 == direct2
+0072         warning(pattern, indF1, indF2, i, v1, v2); <span class="comment">%#ok&lt;WNTAG&gt;</span>
+0073     <span class="keyword">end</span>
+0074 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

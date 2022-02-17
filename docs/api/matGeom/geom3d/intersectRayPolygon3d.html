@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of intersectRayPolygon3d</title>
+  <meta name="keywords" content="intersectRayPolygon3d">
+  <meta name="description" content="INTERSECTRAYPOLYGON3D Intersection point of a 3D ray and a 3D polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; intersectRayPolygon3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>intersectRayPolygon3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>INTERSECTRAYPOLYGON3D Intersection point of a 3D ray and a 3D polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [inter, inside]= intersectRayPolygon3d(ray, poly) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">INTERSECTRAYPOLYGON3D Intersection point of a 3D ray and a 3D polygon.
+
+   INTER = intersectRayPolygon3d(RAY, POLY)
+   Compute coordinates of intersection point between the 3D ray RAY and
+   the 3D polygon POLY. RAY is a 1-by-6 row vector containing origin and
+   direction vector of the ray, POLY is a Np-by-3 array containing
+   coordinates of 3D polygon vertices.
+   INTER is a 1-by-3 row vector containing coordinates of intersection
+   point, or [NaN NaN NaN] if ray and polygon do not intersect.
+
+   INTERS = intersectRayPolygon3d(RAYS, POLY)
+   If RAYS is a N-by-6 array representing several rays, the result
+   INTERS is a N-by-3 array containing coordinates of intersection of each
+   ray with the polygon.
+
+   [INTER INSIDE] = intersectRayPolygon3d(RAY, POLY)
+   Also return a N-by-1 boolean array containing TRUE if both the polygon
+   and the corresponding ray contain the intersection point.
+
+   Example
+     % Compute intersection between a 3D ray and a 3D triangle
+     pts3d = [3 0 0; 0 6 0;0 0 9];
+     ray1 = [0 0 0 3 6 9];
+     inter = intersectRayPolygon3d(ray1, pts3d)
+     inter =
+           1   2   3
+
+     % keep only valid intersections with several rays
+     pts3d = [3 0 0; 0 6 0;0 0 9];
+     rays = [0 0 0 3 6 9;10 0 0 1 2 3;3 6 9 3 6 9];
+     [inter inside] = intersectRayPolygon3d(rays, pts3d);
+     inter(inside, :)
+     ans = 
+           1   2   3
+
+   See Also
+   intersectRayPolygon, <a href="intersectLinePolygon3d.html" class="code" title="function [inter, inside]= intersectLinePolygon3d(line, poly)">intersectLinePolygon3d</a>, <a href="intersectLineTriangle3d.html" class="code" title="function [point, pos, isInside] = intersectLineTriangle3d(line, triangle, varargin)">intersectLineTriangle3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>	INTERSECTLINEPLANE Intersection point between a 3D line and a plane.</li><li><a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>	Return the position of a 3D point projected on a 3D line.</li><li><a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>	PLANEPOSITION Compute position of a point on a plane.</li><li><a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>	PROJPOINTONPLANE Return the orthogonal projection of a point on a plane.</li><li><a href="../../matGeom/polygons2d/isPointInPolygon.html" class="code" title="function b = isPointInPolygon(point, poly)">isPointInPolygon</a>	ISPOINTINPOLYGON Test if a point is located inside a polygon.</li><li><a href="../../matGeom/polygons2d/polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>	Compute the signed area of a polygon.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [inter, inside]= intersectRayPolygon3d(ray, poly)</a>
+0002 <span class="comment">%INTERSECTRAYPOLYGON3D Intersection point of a 3D ray and a 3D polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   INTER = intersectRayPolygon3d(RAY, POLY)</span>
+0005 <span class="comment">%   Compute coordinates of intersection point between the 3D ray RAY and</span>
+0006 <span class="comment">%   the 3D polygon POLY. RAY is a 1-by-6 row vector containing origin and</span>
+0007 <span class="comment">%   direction vector of the ray, POLY is a Np-by-3 array containing</span>
+0008 <span class="comment">%   coordinates of 3D polygon vertices.</span>
+0009 <span class="comment">%   INTER is a 1-by-3 row vector containing coordinates of intersection</span>
+0010 <span class="comment">%   point, or [NaN NaN NaN] if ray and polygon do not intersect.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   INTERS = intersectRayPolygon3d(RAYS, POLY)</span>
+0013 <span class="comment">%   If RAYS is a N-by-6 array representing several rays, the result</span>
+0014 <span class="comment">%   INTERS is a N-by-3 array containing coordinates of intersection of each</span>
+0015 <span class="comment">%   ray with the polygon.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   [INTER INSIDE] = intersectRayPolygon3d(RAY, POLY)</span>
+0018 <span class="comment">%   Also return a N-by-1 boolean array containing TRUE if both the polygon</span>
+0019 <span class="comment">%   and the corresponding ray contain the intersection point.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   Example</span>
+0022 <span class="comment">%     % Compute intersection between a 3D ray and a 3D triangle</span>
+0023 <span class="comment">%     pts3d = [3 0 0; 0 6 0;0 0 9];</span>
+0024 <span class="comment">%     ray1 = [0 0 0 3 6 9];</span>
+0025 <span class="comment">%     inter = intersectRayPolygon3d(ray1, pts3d)</span>
+0026 <span class="comment">%     inter =</span>
+0027 <span class="comment">%           1   2   3</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%     % keep only valid intersections with several rays</span>
+0030 <span class="comment">%     pts3d = [3 0 0; 0 6 0;0 0 9];</span>
+0031 <span class="comment">%     rays = [0 0 0 3 6 9;10 0 0 1 2 3;3 6 9 3 6 9];</span>
+0032 <span class="comment">%     [inter inside] = intersectRayPolygon3d(rays, pts3d);</span>
+0033 <span class="comment">%     inter(inside, :)</span>
+0034 <span class="comment">%     ans =</span>
+0035 <span class="comment">%           1   2   3</span>
+0036 <span class="comment">%</span>
+0037 <span class="comment">%   See Also</span>
+0038 <span class="comment">%   intersectRayPolygon, intersectLinePolygon3d, intersectLineTriangle3d</span>
+0039 <span class="comment">%</span>
+0040 
+0041 <span class="comment">% ------</span>
+0042 <span class="comment">% Author: David Legland</span>
+0043 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0044 <span class="comment">% Created: 2011-05-22,    using Matlab 7.9.0.529 (R2009b)</span>
+0045 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0046 
+0047 <span class="comment">% supporting plane of polygon vertices</span>
+0048 plane   = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(poly(1:3, :));
+0049 
+0050 <span class="comment">% intersection of 3D ray with the plane</span>
+0051 inter   = <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>(ray, plane);
+0052 
+0053 <span class="comment">% project all points on reference plane</span>
+0054 pts2d   = <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>(<a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>(poly, plane), plane);
+0055 pInt2d  = <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>(<a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>(inter, plane), plane);
+0056 
+0057 <span class="comment">% need to check polygon orientation</span>
+0058 inPoly  = xor(<a href="../../matGeom/polygons2d/isPointInPolygon.html" class="code" title="function b = isPointInPolygon(point, poly)">isPointInPolygon</a>(pInt2d, pts2d), <a href="../../matGeom/polygons2d/polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>(pts2d) &lt; 0);
+0059 onRay   = <a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>(inter, ray) &gt;= 0;
+0060 inside  = inPoly &amp; onRay;
+0061 
+0062 <span class="comment">% intersection points outside the polygon are set to NaN</span>
+0063 inter(~inside, :) = NaN;</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

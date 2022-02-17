@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of circleToPolygon</title>
+  <meta name="keywords" content="circleToPolygon">
+  <meta name="description" content="CIRCLETOPOLYGON Convert a circle into a series of points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; circleToPolygon.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>circleToPolygon
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CIRCLETOPOLYGON Convert a circle into a series of points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = circleToPolygon(circle, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CIRCLETOPOLYGON Convert a circle into a series of points.
+
+   PTS = circleToPolygon(CIRC, N);
+   Converts the circle CIRC into a N-by-2 numeric array, containing the x
+   and y positions of vertices.
+   CIRC is given as [x0 y0 r], where x0 and y0 are coordinate of center,
+   and r is the radius.
+
+   If CIRC is a N-by-4 array, the fourth value is used as the angle (with
+   respect to the x axis) of the first vertex, in radians. Default value
+   is 0, corresponding to initial vertex with right-most position.
+ 
+
+   P = circleToPolygon(CIRC);
+   uses a default value of N=64 vertices.
+
+   Example
+     % simple example
+     poly = circleToPolygon([30 20 15], 16);
+     figure; hold on;
+     axis equal;axis([0 50 0 50]);
+     drawPolygon(poly, 'b');
+     drawPoint(poly, 'bo');
+
+     % add a rotation angle to the first vertex position
+     figure; hold on; axis equal; axis([-12 12 -12 12]);
+     poly = circleToPolygon([0 0 10 pi/4], 10);
+     drawPolygon(poly, 'b'); drawVertices(poly);
+
+   See also:
+     <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, polygons2d, <a href="circleArcToPolyline.html" class="code" title="function varargout = circleArcToPolyline(arc, N)">circleArcToPolyline</a>, <a href="ellipseToPolygon.html" class="code" title="function varargout = ellipseToPolygon(ellipse, N)">ellipseToPolygon</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawShape.html" class="code" title="function varargout = drawShape(type, param, varargin)">drawShape</a>	DRAWSHAPE Draw various types of shapes (circles, polygons...).</li><li><a href="../../matGeom/geom3d/drawTorus.html" class="code" title="function varargout = drawTorus(torus, varargin)">drawTorus</a>	DRAWTORUS Draw a torus (3D ring).</li><li><a href="../../matGeom/meshes3d/torusMesh.html" class="code" title="function varargout = torusMesh(torus, varargin)">torusMesh</a>	Create a 3D mesh representing a torus.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = circleToPolygon(circle, varargin)</a>
+0002 <span class="comment">%CIRCLETOPOLYGON Convert a circle into a series of points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PTS = circleToPolygon(CIRC, N);</span>
+0005 <span class="comment">%   Converts the circle CIRC into a N-by-2 numeric array, containing the x</span>
+0006 <span class="comment">%   and y positions of vertices.</span>
+0007 <span class="comment">%   CIRC is given as [x0 y0 r], where x0 and y0 are coordinate of center,</span>
+0008 <span class="comment">%   and r is the radius.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   If CIRC is a N-by-4 array, the fourth value is used as the angle (with</span>
+0011 <span class="comment">%   respect to the x axis) of the first vertex, in radians. Default value</span>
+0012 <span class="comment">%   is 0, corresponding to initial vertex with right-most position.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   P = circleToPolygon(CIRC);</span>
+0016 <span class="comment">%   uses a default value of N=64 vertices.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   Example</span>
+0019 <span class="comment">%     % simple example</span>
+0020 <span class="comment">%     poly = circleToPolygon([30 20 15], 16);</span>
+0021 <span class="comment">%     figure; hold on;</span>
+0022 <span class="comment">%     axis equal;axis([0 50 0 50]);</span>
+0023 <span class="comment">%     drawPolygon(poly, 'b');</span>
+0024 <span class="comment">%     drawPoint(poly, 'bo');</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%     % add a rotation angle to the first vertex position</span>
+0027 <span class="comment">%     figure; hold on; axis equal; axis([-12 12 -12 12]);</span>
+0028 <span class="comment">%     poly = circleToPolygon([0 0 10 pi/4], 10);</span>
+0029 <span class="comment">%     drawPolygon(poly, 'b'); drawVertices(poly);</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%   See also:</span>
+0032 <span class="comment">%     circles2d, polygons2d, circleArcToPolyline, ellipseToPolygon</span>
+0033 <span class="comment">%</span>
+0034 
+0035 <span class="comment">% ------</span>
+0036 <span class="comment">% Author: David Legland</span>
+0037 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0038 <span class="comment">% INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0039 <span class="comment">% Created: 2005-04-06</span>
+0040 <span class="comment">% Copyright 2022 INRAE.</span>
+0041 
+0042 <span class="comment">% HISTORY</span>
+0043 <span class="comment">% 2007-04-20 return a closed polygon with N+1 vertices, use default N=64</span>
+0044 <span class="comment">% 2011-12-09 rename to 'circleToPolygon'</span>
+0045 <span class="comment">% 2017-08-31 returns N vertices instead of N+1</span>
+0046 
+0047 <span class="comment">% check input size</span>
+0048 <span class="keyword">if</span> size(circle, 1) &gt; 1
+0049     error(<span class="string">'require circle to be 1-by-3 numeric array'</span>);
+0050 <span class="keyword">end</span>
+0051 
+0052 <span class="comment">% determines number of points</span>
+0053 N = 64;
+0054 <span class="keyword">if</span> ~isempty(varargin)
+0055     N = varargin{1};
+0056 <span class="keyword">end</span>
+0057 
+0058 <span class="comment">% angular shift for initial vertex</span>
+0059 t0 = 0;
+0060 <span class="keyword">if</span> size(circle, 2) &gt; 3
+0061     t0 = circle(1, 4);
+0062 <span class="keyword">end</span>
+0063 
+0064 <span class="comment">% create circle</span>
+0065 t = linspace(0, 2*pi, N+1)' + t0;
+0066 t(end) = [];
+0067 
+0068 <span class="comment">% coordinates of circle points</span>
+0069 x = circle(1) + circle(3) * cos(t);
+0070 y = circle(2) + circle(3) * sin(t);
+0071 
+0072 <span class="comment">% format output</span>
+0073 <span class="keyword">if</span> nargout == 1
+0074     varargout{1} = [x y];
+0075 <span class="keyword">elseif</span> nargout == 2
+0076     varargout{1} = x;
+0077     varargout{2} = y;    
+0078 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

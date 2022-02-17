@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of trimeshEdgeFaces</title>
+  <meta name="keywords" content="trimeshEdgeFaces">
+  <meta name="description" content="TRIMESHEDGEFACES Compute index of faces adjacent to each edge of a triangular mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; trimeshEdgeFaces.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>trimeshEdgeFaces
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>TRIMESHEDGEFACES Compute index of faces adjacent to each edge of a triangular mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function edgeFaces = trimeshEdgeFaces(faces, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">TRIMESHEDGEFACES Compute index of faces adjacent to each edge of a triangular mesh.
+
+   EF = trimeshEdgeFaces(FACES)
+   EF = trimeshEdgeFaces(VERTICES, FACES)
+   EF = trimeshEdgeFaces(VERTICES, EDGES, FACES)
+   Compute index array of faces adjacent to each edge of a mesh.
+   FACES is a NF-by-3 array containing vertex indices of each face. The
+   result EF is a NE-by-2 array containing the indices of the two faces
+   incident to each edge. If an edge belongs to only one face, the other
+   face index is ZERO.
+
+   The list of edges (as array of source and target vertex indices) can be
+   obtained from the function 'meshEdges'.
+
+   Note: faces are listed in increasing order for each edge, and no
+   information is kept about relative orientation of edge and face.
+
+   Example
+     % compute incidence list of each edge of an octahedron. For example,
+     % first edge is incident to faces 1 and 5. Second edge is incident to
+     % faces 4 and 8, and so on.
+     [v, f] = createOctahedron;
+     ef = trimeshEdgeFaces(v, f)
+     ef =
+          1     5
+          4     8
+          4     1
+          5     8
+          2     6
+          1     2
+          6     5
+          3     7
+          2     3
+          7     6
+          3     4
+          7     8
+
+   See also
+   meshes3d, <a href="meshEdgeFaces.html" class="code" title="function edgeFaces = meshEdgeFaces(vertices, edges, faces) %#ok<INUSL>">meshEdgeFaces</a>, <a href="trimeshMeanBreadth.html" class="code" title="function mb = trimeshMeanBreadth(vertices, faces)">trimeshMeanBreadth</a>, <a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="collapseEdgesWithManyFaces.html" class="code" title="function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargin)">collapseEdgesWithManyFaces</a>	removes mesh edges adjacent to more than two faces</li><li><a href="isManifoldMesh.html" class="code" title="function [b1, b2] = isManifoldMesh(varargin)">isManifoldMesh</a>	ISMANIFOLDMESH Check whether the input mesh may be considered as manifold.</li><li><a href="removeInvalidBorderFaces.html" class="code" title="function [vertices, faces] = removeInvalidBorderFaces(varargin)">removeInvalidBorderFaces</a>	REMOVEINVALIDBORDERFACES Remove faces whose edges are connected to 3, 3, and 1 faces.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function edgeFaces = trimeshEdgeFaces(faces, varargin)</a>
+0002 <span class="comment">%TRIMESHEDGEFACES Compute index of faces adjacent to each edge of a triangular mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   EF = trimeshEdgeFaces(FACES)</span>
+0005 <span class="comment">%   EF = trimeshEdgeFaces(VERTICES, FACES)</span>
+0006 <span class="comment">%   EF = trimeshEdgeFaces(VERTICES, EDGES, FACES)</span>
+0007 <span class="comment">%   Compute index array of faces adjacent to each edge of a mesh.</span>
+0008 <span class="comment">%   FACES is a NF-by-3 array containing vertex indices of each face. The</span>
+0009 <span class="comment">%   result EF is a NE-by-2 array containing the indices of the two faces</span>
+0010 <span class="comment">%   incident to each edge. If an edge belongs to only one face, the other</span>
+0011 <span class="comment">%   face index is ZERO.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   The list of edges (as array of source and target vertex indices) can be</span>
+0014 <span class="comment">%   obtained from the function 'meshEdges'.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Note: faces are listed in increasing order for each edge, and no</span>
+0017 <span class="comment">%   information is kept about relative orientation of edge and face.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   Example</span>
+0020 <span class="comment">%     % compute incidence list of each edge of an octahedron. For example,</span>
+0021 <span class="comment">%     % first edge is incident to faces 1 and 5. Second edge is incident to</span>
+0022 <span class="comment">%     % faces 4 and 8, and so on.</span>
+0023 <span class="comment">%     [v, f] = createOctahedron;</span>
+0024 <span class="comment">%     ef = trimeshEdgeFaces(v, f)</span>
+0025 <span class="comment">%     ef =</span>
+0026 <span class="comment">%          1     5</span>
+0027 <span class="comment">%          4     8</span>
+0028 <span class="comment">%          4     1</span>
+0029 <span class="comment">%          5     8</span>
+0030 <span class="comment">%          2     6</span>
+0031 <span class="comment">%          1     2</span>
+0032 <span class="comment">%          6     5</span>
+0033 <span class="comment">%          3     7</span>
+0034 <span class="comment">%          2     3</span>
+0035 <span class="comment">%          7     6</span>
+0036 <span class="comment">%          3     4</span>
+0037 <span class="comment">%          7     8</span>
+0038 <span class="comment">%</span>
+0039 <span class="comment">%   See also</span>
+0040 <span class="comment">%   meshes3d, meshEdgeFaces, trimeshMeanBreadth, meshEdges</span>
+0041  
+0042 <span class="comment">% ------</span>
+0043 <span class="comment">% Author: David Legland</span>
+0044 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0045 <span class="comment">% Created: 2015-08-19,    using Matlab 8.5.0.197613 (R2015a)</span>
+0046 <span class="comment">% Copyright 2015 INRA - Cepia Software Platform.</span>
+0047 
+0048 <span class="keyword">if</span> nargin == 2
+0049     faces = varargin{1};
+0050 <span class="keyword">elseif</span> nargin == 3
+0051     faces = varargin{2};
+0052 <span class="keyword">end</span>
+0053 
+0054 <span class="comment">% compute vertex indices of each edge (in increasing index order)</span>
+0055 edges = sort([faces(:,[1 2]) ; faces(:,[2 3]) ; faces(:,[3 1])], 2);
+0056 
+0057 <span class="comment">% create an array to keep indices of faces &quot;creating&quot; each edge</span>
+0058 nFaces = size(faces, 1);
+0059 edgeFaceInds = repmat( (1:nFaces)', 3, 1);
+0060 
+0061 <span class="comment">% sort edges, keeping indices</span>
+0062 [edges, ia, ib] = unique(edges, <span class="string">'rows'</span>); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0063 nEdges = size(edges, 1);
+0064 
+0065 <span class="comment">% allocate memory for result</span>
+0066 edgeFaces = zeros(nEdges, 2);
+0067 
+0068 <span class="comment">% iterate over edges, to identify incident faces</span>
+0069 <span class="keyword">for</span> iEdge = 1:nEdges
+0070     inds = find(ib == iEdge);
+0071     edgeFaces(iEdge, 1:length(inds)) = edgeFaceInds(inds);
+0072 <span class="keyword">end</span>
+0073</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

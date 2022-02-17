@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of intersectBoxes3d</title>
+  <meta name="keywords" content="intersectBoxes3d">
+  <meta name="description" content="INTERSECTBOXES3D Intersection of two 3D bounding boxes.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; intersectBoxes3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>intersectBoxes3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>INTERSECTBOXES3D Intersection of two 3D bounding boxes.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function box = intersectBoxes3d(box1, box2) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">INTERSECTBOXES3D Intersection of two 3D bounding boxes.
+
+   RES = intersectBoxes3d(BOX1, BOX2)
+
+   Example
+   box1 = [5 20 5 30 10 50];
+   box2 = [0 15 0 15 0 20];
+   intersectBoxes3d(box1, box2)
+   ans = 
+       5 15 5 15 10 20
+
+   See also
+   <a href="boxes3d.html" class="code" title="function boxes3d(varargin)">boxes3d</a>, <a href="drawBox3d.html" class="code" title="function varargout = drawBox3d(box, varargin)">drawBox3d</a>, <a href="mergeBoxes3d.html" class="code" title="function box = mergeBoxes3d(box1, box2)">mergeBoxes3d</a>
+
+
+ ------
+ Author: David Legland
+ e-mail: david.legland@grignon.inra.fr
+ Created: 2010-07-26,    using Matlab 7.9.0.529 (R2009b)
+ Copyright 2010 INRA - Cepia Software Platform.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function box = intersectBoxes3d(box1, box2)</a>
+0002 <span class="comment">%INTERSECTBOXES3D Intersection of two 3D bounding boxes.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   RES = intersectBoxes3d(BOX1, BOX2)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   Example</span>
+0007 <span class="comment">%   box1 = [5 20 5 30 10 50];</span>
+0008 <span class="comment">%   box2 = [0 15 0 15 0 20];</span>
+0009 <span class="comment">%   intersectBoxes3d(box1, box2)</span>
+0010 <span class="comment">%   ans =</span>
+0011 <span class="comment">%       5 15 5 15 10 20</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   See also</span>
+0014 <span class="comment">%   boxes3d, drawBox3d, mergeBoxes3d</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">% ------</span>
+0018 <span class="comment">% Author: David Legland</span>
+0019 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0020 <span class="comment">% Created: 2010-07-26,    using Matlab 7.9.0.529 (R2009b)</span>
+0021 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0022 
+0023 <span class="comment">% unify sizes of data</span>
+0024 <span class="keyword">if</span> size(box1,1) == 1
+0025     box1 = repmat(box1, size(box2,1), 1);
+0026 <span class="keyword">elseif</span> size(box2, 1) == 1
+0027     box2 = repmat(box2, size(box1,1), 1);
+0028 <span class="keyword">elseif</span> size(box1,1) ~= size(box2,1)
+0029     error(<span class="string">'Bad size for inputs'</span>);
+0030 <span class="keyword">end</span>
+0031 
+0032 <span class="comment">% compute extreme coords</span>
+0033 mini = min(box1(:,2:2:end), box2(:,2:2:end));
+0034 maxi = max(box1(:,1:2:end), box2(:,1:2:end));
+0035 
+0036 <span class="comment">% concatenate result into a new box structure</span>
+0037 box = [maxi(:,1) mini(:,1) maxi(:,2) mini(:,2) maxi(:,3) mini(:,3)];
+0038</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

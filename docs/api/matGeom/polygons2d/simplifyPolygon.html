@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of simplifyPolygon</title>
+  <meta name="keywords" content="simplifyPolygon">
+  <meta name="description" content="SIMPLIFYPOLYGON  Douglas-Peucker simplification of a polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; simplifyPolygon.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>simplifyPolygon
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>SIMPLIFYPOLYGON  Douglas-Peucker simplification of a polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [poly, keepInds] = simplifyPolygon(poly, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">SIMPLIFYPOLYGON  Douglas-Peucker simplification of a polygon.
+
+   POLY2 = simplifyPolygon(POLY, TOL)
+   Simplifies the input polygon using the Douglas-Peucker algorithm. 
+
+   Example
+     elli = [20 30 40 20 30];
+     poly = ellipseToPolygon(elli, 500);
+     poly2 = simplifyPolygon(poly, 1); % use a tolerance equal to 1.
+     figure; hold on;
+     drawEllipse(elli);
+     drawPoint(poly2, 'mo');
+
+   See also
+   polygons2d, <a href="smoothPolygon.html" class="code" title="function res = smoothPolygon(poly, M)">smoothPolygon</a>, <a href="simplifyPolyline.html" class="code" title="function [poly2, keepInds] = simplifyPolyline(poly, tol)">simplifyPolyline</a>, <a href="resamplePolygon.html" class="code" title="function poly2 = resamplePolygon(poly, n)">resamplePolygon</a>
+
+   References
+   http://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="simplifyPolyline.html" class="code" title="function [poly2, keepInds] = simplifyPolyline(poly, tol)">simplifyPolyline</a>	SIMPLIFYPOLYLINE Douglas-Peucker simplification of a polyline.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [poly, keepInds] = simplifyPolygon(poly, varargin)</a>
+0002 <span class="comment">%SIMPLIFYPOLYGON  Douglas-Peucker simplification of a polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POLY2 = simplifyPolygon(POLY, TOL)</span>
+0005 <span class="comment">%   Simplifies the input polygon using the Douglas-Peucker algorithm.</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%   Example</span>
+0008 <span class="comment">%     elli = [20 30 40 20 30];</span>
+0009 <span class="comment">%     poly = ellipseToPolygon(elli, 500);</span>
+0010 <span class="comment">%     poly2 = simplifyPolygon(poly, 1); % use a tolerance equal to 1.</span>
+0011 <span class="comment">%     figure; hold on;</span>
+0012 <span class="comment">%     drawEllipse(elli);</span>
+0013 <span class="comment">%     drawPoint(poly2, 'mo');</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   See also</span>
+0016 <span class="comment">%   polygons2d, smoothPolygon, simplifyPolyline, resamplePolygon</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   References</span>
+0019 <span class="comment">%   http://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm</span>
+0020 <span class="comment">%</span>
+0021 
+0022 <span class="comment">% ------</span>
+0023 <span class="comment">% Author: David Legland</span>
+0024 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0025 <span class="comment">% Created: 2013-03-14,    using Matlab 7.9.0.529 (R2009b)</span>
+0026 <span class="comment">% Copyright 2013 INRA - Cepia Software Platform.</span>
+0027 
+0028 <span class="comment">% call the simplifyPolyline function by ensuring the last vertex is present</span>
+0029 poly = poly([1:end 1], :);
+0030 [poly, keepInds] = <a href="simplifyPolyline.html" class="code" title="function [poly2, keepInds] = simplifyPolyline(poly, tol)">simplifyPolyline</a>(poly, varargin{:});
+0031 
+0032 <span class="comment">% remove last vertex</span>
+0033 poly(<span class="keyword">end</span>, :) = [];
+0034 keepInds(end) = [];</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>

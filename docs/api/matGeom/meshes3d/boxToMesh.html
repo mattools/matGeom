@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of boxToMesh</title>
+  <meta name="keywords" content="boxToMesh">
+  <meta name="description" content="BOXTOMESH Convert a box into a quad mesh with the same size.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; boxToMesh.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>boxToMesh
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>BOXTOMESH Convert a box into a quad mesh with the same size.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = boxToMesh(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> BOXTOMESH Convert a box into a quad mesh with the same size.
+
+   [V E F] = boxToMesh(BOX) 
+   Create a box as a polyhedra representation. The box is defined by its  
+   coordinate extents: BOX = [XMIN XMAX YMIN YMAX ZMIN ZMAX] 
+   The result has the form [V E F], where V is a 8-by-3 array with vertex
+   coordinates, E is a 12-by-2 array containing indices of neighbour
+   vertices, and F is a 6-by-4 array containing vertices array of each
+   face.
+
+   [V F] = boxToMesh(BOX)
+   Returns only the vertices and the face vertex indices.
+
+   MESH = boxToMesh(BOX)
+   Returns the data as a mesh structure, with fields 'vertices', 'edges'
+   and 'faces'.
+   
+   ... = boxToMesh()
+   Creates a unit cube
+
+   Example
+   [v, f] = boxToMesh([-2 -1 0 pi 2 3])
+   drawMesh(v, f);
+   
+   See also
+   meshes3d, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a>, <a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = boxToMesh(varargin)</a>
+0002 <span class="comment">% BOXTOMESH Convert a box into a quad mesh with the same size.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V E F] = boxToMesh(BOX)</span>
+0005 <span class="comment">%   Create a box as a polyhedra representation. The box is defined by its</span>
+0006 <span class="comment">%   coordinate extents: BOX = [XMIN XMAX YMIN YMAX ZMIN ZMAX]</span>
+0007 <span class="comment">%   The result has the form [V E F], where V is a 8-by-3 array with vertex</span>
+0008 <span class="comment">%   coordinates, E is a 12-by-2 array containing indices of neighbour</span>
+0009 <span class="comment">%   vertices, and F is a 6-by-4 array containing vertices array of each</span>
+0010 <span class="comment">%   face.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   [V F] = boxToMesh(BOX)</span>
+0013 <span class="comment">%   Returns only the vertices and the face vertex indices.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   MESH = boxToMesh(BOX)</span>
+0016 <span class="comment">%   Returns the data as a mesh structure, with fields 'vertices', 'edges'</span>
+0017 <span class="comment">%   and 'faces'.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   ... = boxToMesh()</span>
+0020 <span class="comment">%   Creates a unit cube</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   Example</span>
+0023 <span class="comment">%   [v, f] = boxToMesh([-2 -1 0 pi 2 3])</span>
+0024 <span class="comment">%   drawMesh(v, f);</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%   See also</span>
+0027 <span class="comment">%   meshes3d, drawMesh, triangulateFaces</span>
+0028 
+0029 <span class="comment">%   ---------</span>
+0030 <span class="comment">%   authors: David Legland, oqilipo</span>
+0031 <span class="comment">%   created the 22/09/2016.</span>
+0032 
+0033 p = inputParser;
+0034 boxDefault = [0 1 0 1 0 1];
+0035 boxDatatype = {<span class="string">'numeric'</span>};
+0036 boxAttribs = {<span class="string">'nonempty'</span>,<span class="string">'vector'</span>,<span class="string">'numel'</span>,6,<span class="string">'real'</span>,<span class="string">'finite'</span>};
+0037 addOptional(p,<span class="string">'box'</span>,boxDefault,@(x)validateattributes(x,boxDatatype,boxAttribs))
+0038 parse(p,varargin{:})
+0039 
+0040 xmin = p.Results.box(1);
+0041 xmax = p.Results.box(2);
+0042 ymin = p.Results.box(3);
+0043 ymax = p.Results.box(4);
+0044 zmin = p.Results.box(5);
+0045 zmax = p.Results.box(6);
+0046 
+0047 vertices = [<span class="keyword">...</span>
+0048     xmin, ymin, zmin; <span class="keyword">...</span>
+0049     xmax, ymin, zmin; <span class="keyword">...</span>
+0050     xmin, ymax, zmin; <span class="keyword">...</span>
+0051     xmax, ymax, zmin; <span class="keyword">...</span>
+0052     xmin, ymin, zmax; <span class="keyword">...</span>
+0053     xmax, ymin, zmax; <span class="keyword">...</span>
+0054     xmin, ymax, zmax; <span class="keyword">...</span>
+0055     xmax, ymax, zmax; <span class="keyword">...</span>
+0056     ];
+0057 
+0058 edges = [1 2;1 3;1 5;2 4;2 6;3 4;3 7;4 8;5 6;5 7;6 8;7 8];
+0059 
+0060 <span class="comment">% faces are oriented such that normals point outwards</span>
+0061 faces = [2 4 3 1;7 8 6 5;6 8 4 2;3 7 5 1;5 6 2 1;4 8 7 3];
+0062 
+0063 <span class="comment">% format output</span>
+0064 varargout = formatMeshOutput(nargout, vertices, edges, faces);</pre></div>
+<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+</body>
+</html>
