@@ -1,11 +1,14 @@
 # MatGeom
-Matlab geometry toolbox for 2D/3D geometric computing
+Matlab geometry toolbox for 2D/3D geometric computing.
 
 **MatGeom** is a library for geometric computing with Matlab in 2D and 3D. 
 It contains several hundreds of functions for the creation and manipulation 
 of 2D and 3D shapes such as point sets, lines, polygons, 3D meshes, ellipses... 
 
 The official homepage for the project is http://github.com/mattools/matGeom. A [user manual](https://github.com/mattools/matGeom/releases/download/v1.2.4/matGeom-manual-v1.2.4.pdf) is available.
+
+Starting from February 2022, the html pages of the functions (obtained with m2html)  are available [here](https://mattools.github.io/matGeom/api/index.html).
+
 Some help elements area also provided in the [MatGeom wiki](https://github.com/mattools/matGeom/wiki "MatGeom Wiki homepage")
 
 Package organization
