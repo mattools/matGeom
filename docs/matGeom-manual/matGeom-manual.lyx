@@ -3253,13 +3253,185 @@ Bezier Curve through four points
 \end_layout
 
 \begin_layout Section
-Polygonal shapes
+Boxes, rectangles and triangles
 \end_layout
 
 \begin_layout Standard
-This sections concerns simple polygons such as triangles, rectangles, and
- boxes.
- For polygons with an arbitrary number of vertices, see the Section
+This sections concerns simple polygonal shapes with a fixed number of vertices,
+ such as triangles, rectangles, and boxes.
+ 
+\end_layout
+
+\begin_layout Standard
+For rectangular shapes, several representations may be considered.
+ The following conventions are considered within the MatGeom library (See
+ also Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Boxes-And-Rectangles"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+):
+\end_layout
+
+\begin_layout Description
+boxes are defined from the extent along each dimension.
+\end_layout
+
+\begin_layout Description
+(axis-aligned)
+\begin_inset space ~
+\end_inset
+
+rectangles are defined from the lower-left corner and the dimensions.
+\end_layout
+
+\begin_layout Description
+oriented
+\begin_inset space ~
+\end_inset
+
+boxes also takes into account orientation, and refer to the center of the
+ rectangle instead of its corner.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/geom2d/box_def.png
+	width 30text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Box.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/geom2d/rectangle_def.png
+	width 30text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Rectangle.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/geom2d/orientedBox_def.png
+	width 30text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Oriented box
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Boxes-And-Rectangles"
+
+\end_inset
+
+Representation of boxes, rectangles, and oriented boxes.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+More general polygons defined from an arbitrary number of vertices are presented
+ in Chapter
 \begin_inset space ~
 \end_inset
 
@@ -3274,6 +3446,7 @@ noprefix "false"
 \end_inset
 
 .
+ Several functions allow for conversion between the different representations.
 \end_layout
 
 \begin_layout Subsection
@@ -3283,7 +3456,21 @@ Boxes
 \begin_layout Standard
 Boxes are used to represent bounds.
  They are represented by a four-element row vector containing the minimum
- and maximum coordinate along each dimension.
+ and maximum coordinate along each dimension (Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Boxes-And-Rectangles"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+-a).
 \end_layout
 
 \begin_layout Standard
@@ -3422,8 +3609,22 @@ Rectangles
 \end_layout
 
 \begin_layout Standard
-A rectangle is represented by the coordinates of the upper-left vertex,
- and by the dimensions of the rectangle.
+A rectangle is represented by the coordinates of the lower-left vertex,
+ and by the dimensions of the rectangle (Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Boxes-And-Rectangles"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+-b).
 \end_layout
 
 \begin_layout Standard
@@ -3442,16 +3643,10 @@ rect = [x0 y0 sizeX sizeY];
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-figure with box, rect , and oriented box
-\end_layout
-
-\end_inset
-
-
+Some functions allow to specify a fifth parameter specifying the orientation
+ of the rectangle (in degrees).
+ The resulting shape is obtained by rotating the rectangle around its lower-left
+ corner by the specified angle.
 \end_layout
 
 \begin_layout Minisec
@@ -3508,6 +3703,45 @@ drawRect
 Draws rectangle on the current axis.
 \end_layout
 
+\begin_layout Subsection
+Oriented boxes
+\end_layout
+
+\begin_layout Standard
+In some cases, it may be convenient to take into orientation of the box.
+ An oriented box is represented by the coordinates of the center, the dimensions
+ of the rectangle, and the orientation of the box (Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Boxes-And-Rectangles"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+-c).
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+obox = [xCenter yCenter length width theta];
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Minisec
 orientedBox
 \begin_inset Index idx
@@ -3523,7 +3757,7 @@ orientedBox
 \end_layout
 
 \begin_layout Standard
-Minimum-width oriented bounding box of a set of points.
+Computes the minimum-width oriented bounding box of a set of points.
 \end_layout
 
 \begin_layout Minisec
@@ -3559,7 +3793,7 @@ drawOrientedBox
 \end_layout
 
 \begin_layout Standard
-Draws centered oriented rectangle.
+Draws centered oriented box.
 \end_layout
 
 \begin_layout Subsection
@@ -4000,19 +4234,6 @@ Coefficients of polynomial transform between two point sets.
 
 \begin_layout Section
 Grids and tessellations
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-move to graphs?
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -5533,7 +5754,21 @@ smoothPolygon
 \end_layout
 
 \begin_layout Standard
-Smooths a polygon using local averaging.
+Smooths a polygon using local averaging, see Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Smooth-Simplify-Polygon"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Minisec
@@ -5559,12 +5794,71 @@ literal "false"
 
 \end_inset
 
+, see Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Smooth-Simplify-Polygon"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
 .
-\begin_inset Note Note
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-illustration...
+\align center
+\begin_inset Graphics
+	filename images/polygons2d/leafPoly_smoothM31_annot.png
+	lyxscale 50
+	width 45text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/polygons2d/leafPoly_simplifiedD5_annot.png
+	lyxscale 50
+	width 45text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Smooth-Simplify-Polygon"
+
+\end_inset
+
+Smoothing and simplification of a polygon.
+ After simplification by a distance equal to 5, the number if vertices drops
+ from 2235 to 60.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -5616,7 +5910,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -5679,7 +5973,41 @@ triangulatePolygon
 \end_layout
 
 \begin_layout Standard
-Computes a triangulation of the polygon.
+Computes a triangulation of the polygon (See Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Triangulation-Skeleton"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ The result is given as a 
+\begin_inset Formula $n_{t}\times3$
+\end_inset
+
+ array corresponding to triangles, and can be displayed using the drawMesh
+ function (section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fun:drawMesh"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Minisec
@@ -5707,21 +6035,67 @@ literal "false"
 \end_inset
 
 .
-\begin_inset Note Note
-status open
+ See Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Triangulation-Skeleton"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
 
 \begin_layout Plain Layout
-in polygons or in graph2d ?
+\align center
+\begin_inset Graphics
+	filename images/polygons2d/triangulatePolygon_leafDP5.png
+	lyxscale 50
+	width 45text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/polygons2d/demo_polygonSkeleton_leaf.png
+	lyxscale 50
+	width 45text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Triangulation-Skeleton"
+
+\end_inset
+
+Global operations on a polygon.
+ Left: triangulation (on a simplified version of the polygon).
+ Right: skeletonization (on a smoothed version of the polygon).
 \end_layout
 
 \end_inset
 
 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-add illustration figure...
 \end_layout
 
 \end_inset
@@ -5825,6 +6199,15 @@ contourMatrixToPolylines
 
 \begin_layout Standard
 Converts a contour matrix array into a polyline set.
+ Can be used to convert the result of the 
+\begin_inset Quotes eld
+\end_inset
+
+contours
+\begin_inset Quotes erd
+\end_inset
+
+ function.
 \end_layout
 
 \begin_layout Minisec
@@ -7734,8 +8117,12 @@ es).
 \end_layout
 
 \begin_layout Standard
-A 3D Line is represented by a 3D point (its origin) and a 3D vector (its
- direction): 
+A 3D line is represented by a 
+\begin_inset Formula $1\times6$
+\end_inset
+
+ numeric array resulting from the concatenation of a 3D point (its origin)
+ and a 3D vector (its direction): 
 \end_layout
 
 \begin_layout Standard
@@ -7751,6 +8138,25 @@ LINE = [X0 Y0 Z0 DX DY DZ];
 \end_inset
 
 A 3D ray is represented the same way as a line.
+ The difference in the management is performed by the call in different
+ functions (e.g.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+clipRay
+\begin_inset Quotes erd
+\end_inset
+
+ instead of 
+\begin_inset Quotes eld
+\end_inset
+
+clipLine
+\begin_inset Quotes erd
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -8722,7 +9128,7 @@ Polygons are represented by
 \end_layout
 
 \begin_layout Standard
-Some functions accept complex polygons, reprented by a series of polygonal
+Some functions accept complex polygons, represented by a series of polygonal
  contours.
 \end_layout
 
@@ -11068,6 +11474,12 @@ drawMesh
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "fun:drawMesh"
+
+\end_inset
+
 Draws a 3D mesh defined by vertex and face arrays (Fig.
 \begin_inset space ~
 \end_inset
