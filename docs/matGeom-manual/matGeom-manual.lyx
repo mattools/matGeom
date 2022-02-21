@@ -388,21 +388,47 @@ noprefix "false"
 
 \begin_layout Standard
 There are dependencies between modules.
- For examples, the polygons2d and the geom3d modules both depend on the
- geom2d module.
+ For examples, the 
+\series bold
+polygons2d
+\series default
+ and the 
+\series bold
+geom3d
+\series default
+ modules both depend on the 
+\series bold
+geom2d
+\series default
+ module.
  
 \end_layout
 
 \begin_layout Standard
-Two modules are also included within the library, but are less documented:
+Another module is included within the library, but is less documented:
 \end_layout
 
 \begin_layout Description
-graphs Manipulation of geometric graphs
+graphs Manipulation of geometric graphs (described in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Graphs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+)
 \end_layout
 
-\begin_layout Description
-polynomialCurves2d Representation of smooth polynomial curves
+\begin_layout Standard
+The 
+\series bold
+obsolete
+\series default
+ directory contains functions that were develop in previous versions of
+ the library, and that are kept to facilitate the transition from old versions.
 \end_layout
 
 \begin_layout Section
@@ -537,8 +563,8 @@ status open
 
 \begin_layout Plain Layout
 
-    algo adapted from P.
- Bourke web page
+      algo adapted from P.
+ Bourke web page.
 \end_layout
 
 \begin_layout Plain Layout
@@ -6251,6 +6277,16 @@ Module graphs
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Graphs"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 The aim of this module is to provide functions to easily create, modify
  and display geometric graphs (geometric in a sense the nodes are associated
  to geometric position in 2D or 3D).
@@ -6301,24 +6337,117 @@ The Graph module provides functionnalities for the processing of geometric
  graphs.
  Graphs are defined by a set of nodes (or vertices), and a relation operator
  that defines which nodes are neighbors.
- Geometric graphs associate each node to a position, as a 2D or 3D point.
+ Geometric graphs associate each node to a position, as a 2D or 3D point
+ (Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Sample-Graph"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
-Graphs are represented by two variables:
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/graphs/graph_def.png
+	lyxscale 50
+	width 33text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Sample-Graph"
+
+\end_inset
+
+Sample graph containing six vertices and seven edges.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Within MatGeom, graphs are represented by two variables:
 \end_layout
 
 \begin_layout Description
-nodes which contains coordinates of each vertex
+nodes which contains the coordinates of each vertex.
 \end_layout
 
 \begin_layout Description
-edges which contains indices of start and end vertex.
+edges which contains the indices of the start and end vertices.
 \end_layout
 
 \begin_layout Standard
 These two information can be manipulated individually, or be fields of a
  structure.
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+nodes = [10 10;20 10;10 20;20 20;28 15;33 22];
+\end_layout
+
+\begin_layout Plain Layout
+
+edges = [1 2;1 3;2 4;2 5;3 4;4 5;5 6];
+\end_layout
+
+\begin_layout Plain Layout
+
+drawGraph(nodes, edges); axis([0 40 0 30]);
+\end_layout
+
+\begin_layout Plain Layout
+
+% equivalent structure
+\end_layout
+
+\begin_layout Plain Layout
+
+graph = struct('nodes', nodes, 'edges', edges);
+\end_layout
+
+\begin_layout Plain Layout
+
+figure; drawGraph(graph); axis([0 40 0 30]);
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6339,8 +6468,21 @@ faces which contains indices of vertices of each face (either a double array,
 cells which contains indices of faces of each cell.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Graph creation
+\end_layout
+
+\begin_layout Standard
+Except for demonstration purpose, graphs are rarely created manually.
+ Several functions in MatGeom are provided for creating graphs from a set
+ of points.
 \end_layout
 
 \begin_layout Subsection
@@ -6367,6 +6509,110 @@ noprefix "false"
 .
 \end_layout
 
+\begin_layout Minisec
+delaunayGraph
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+delaunayGraph
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Graph associated to Delaunay triangulation
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://en.wikipedia.org/wiki/Delaunay_triangulation
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ of input points (Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Sample-Graphs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+-a).
+\end_layout
+
+\begin_layout Minisec
+euclideanMST
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+euclideanMST
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Build the euclidean minimal spanning tree (MST) of a set of points.
+ The minimal spanning tree is the graph with the smallest total length of
+ edges that connect all the nodes of the graph (Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Sample-Graphs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+-c).
+\end_layout
+
+\begin_layout Minisec
+prim_mst
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+mst
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes the minimal spanning tree by using Prim's algorithm.
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 wide false
@@ -6378,7 +6624,7 @@ status open
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -6400,10 +6646,6 @@ Delaunay Graph
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -6492,91 +6734,23 @@ Several graphs generated from a simple set of points.
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
 \end_layout
 
 \begin_layout Minisec
-delaunayGraph 
-\end_layout
-
-\begin_layout Standard
-Graph associated to Delaunay triangulation
-\begin_inset Foot
+knnGraph
+\begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-https://en.wikipedia.org/wiki/Delaunay_triangulation
+knnGraph
 \end_layout
 
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
- of input points (Fig.
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Sample-Graphs"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
--a).
-\end_layout
-
-\begin_layout Minisec
-euclideanMST 
-\end_layout
-
-\begin_layout Standard
-Build the euclidean minimal spanning tree (MST) of a set of points.
- The minimal spanning tree is the graph with the smallest total length of
- edges that connect all the nodes of the graph (Fig.
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Sample-Graphs"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
--c).
-\end_layout
-
-\begin_layout Minisec
-prim_mst 
-\end_layout
-
-\begin_layout Standard
-Computes the minimal spanning tree by using Prim's algorithm.
-\end_layout
-
-\begin_layout Minisec
-knnGraph 
 \end_layout
 
 \begin_layout Standard
@@ -6584,7 +6758,17 @@ Create the k-nearest neighbors graph of a set of points.
 \end_layout
 
 \begin_layout Minisec
-relativeNeighborhoodGraph 
+relativeNeighborhoodGraph
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+relativeNeighborhoodGraph
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6615,6 +6799,16 @@ https://en.wikipedia.org/wiki/Relative_neighborhood_graph
 
 \begin_layout Minisec
 gabrielGraph
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+gabrielGraph
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6675,11 +6869,29 @@ literal "false"
  diagram of a set of points.
  In particular, Centroidal Voronoi Diagrams (CVD), or Centroidal Voronoi
  Tesselations (CVT), correspond to the case where the germs of the diagram
- are located on the centroids of the Voronoi polygons.
+ are located on the centroids of the Voronoi polygons 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Du1999"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Minisec
-voronoi2d 
+voronoi2d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+voronoi2d
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6687,51 +6899,200 @@ Computes a voronoi diagram as a graph structure.
 \end_layout
 
 \begin_layout Minisec
-boundedVoronoi2d 
+boundedVoronoi2d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+boundedVoronoi2d
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Returns a bounded voronoi diagram as a graph structure.
+Computes the voronoi diagram constrained to a box of a set of germs, and
+ return the result as a graph structure (see Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Voronoi-Diagram"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Minisec
+centroidalVoronoi2d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+centroidalVoronoi2d
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Computes a centroidal Voronoi tesselation within a polygon.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Minisec
-centroidalVoronoi2d 
+boundedCentroidalVoronoi2d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+boundedCentroidalVoronoi2d
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Centroidal Voronoi tesselation within a polygon.
+Computes a centroidal Voronoi diagram (or tesselation) 
+\series bold
+constrained to a box
+\series default
+ of a set of germs, and return the result as a graph.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/graphs/voronoi/boundedVoronoi2d_demo_crop.png
+	lyxscale 50
+	width 35text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/graphs/voronoi/boundedCVD2d_demo_crop.png
+	lyxscale 50
+	width 35text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Voronoi-Diagram"
+
+\end_inset
+
+Voronoi diagram, and Centroidal Voronoi Diagram obtained after 50 iterations..
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Minisec
-centroidalVoronoi2d_MC 
+centroidalVoronoi2d_MC
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+centroidalVoronoi2d_MC
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Centroidal Voronoi tesselation by Monte-Carlo.
-\end_layout
-
-\begin_layout Minisec
-boundedCentroidalVoronoi2d 
-\end_layout
-
-\begin_layout Standard
-Create a 2D Centroidal Voronoi Tesselation in a box.
+Computes a centroidal Voronoi diagram (or tesselation) 
+\series bold
+constrained to a polygon
+\series default
+, by using a Monte-Carlo algorithm.
 \end_layout
 
 \begin_layout Minisec
 cvtUpdate
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+cvtUpdate
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Updates the germs of a CVT with given points.
+Updates the germs of a CVT with given points (used by function centroidalVoronoi
+2d_MC).
 \end_layout
 
 \begin_layout Minisec
-cvtIterate 
+cvtIterate
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+cvtIterate
+\end_layout
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
-Updates the germs of a CVT using random points with given density.
+Updates the germs of a CVT using random points with given density (used
+ by function centroidalVoronoi2d_MC).
 \end_layout
 
 \begin_layout Subsection
@@ -6747,6 +7108,16 @@ Some functions allows to generate graphs from a (usually binary) 2D or 3D
 
 \begin_layout Minisec
 imageGraph
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+imageGraph
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6754,7 +7125,17 @@ Create equivalent graph of a binary image.
 \end_layout
 
 \begin_layout Minisec
-boundaryGraph 
+boundaryGraph
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+boundaryGraph
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6763,6 +7144,16 @@ Get boundary of image as a graph.
 
 \begin_layout Minisec
 gcontour2d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+gcontour2d
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6770,7 +7161,17 @@ Creates contour graph of a 2D binary image.
 \end_layout
 
 \begin_layout Minisec
-gcontour3d 
+gcontour3d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+gcontour3d
+\end_layout
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
@@ -6793,7 +7194,17 @@ Graph processing (general applications)
 \end_layout
 
 \begin_layout Minisec
-adjacencyListToEdges 
+adjacencyListToEdges
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+adjacencyListToEdges
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6801,7 +7212,17 @@ Convert an adjacency list to an edge array.
 \end_layout
 
 \begin_layout Minisec
-pruneGraph 
+pruneGraph
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+pruneGraph
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6809,7 +7230,17 @@ Remove all edges with a terminal vertex.
 \end_layout
 
 \begin_layout Minisec
-mergeGraphs 
+mergeGraphs
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+mergeGraphs
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6817,7 +7248,17 @@ Merge two graphs, by adding nodes, edges and faces lists.
 \end_layout
 
 \begin_layout Minisec
-grMergeNodes 
+grMergeNodes
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grMergeNodes
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6825,7 +7266,17 @@ Merge two (or more) nodes in a graph.
 \end_layout
 
 \begin_layout Minisec
-grMergeMultipleNodes 
+grMergeMultipleNodes
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grMergeMultipleNodes
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6833,7 +7284,17 @@ Simplify a graph by merging multiple nodes.
 \end_layout
 
 \begin_layout Minisec
-grMergeMultipleEdges 
+grMergeMultipleEdges
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grMergeMultipleEdges
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6841,7 +7302,17 @@ Remove all edges sharing the same extremities.
 \end_layout
 
 \begin_layout Minisec
-grSimplifyBranches 
+grSimplifyBranches
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grSimplifyBranches
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6860,7 +7331,17 @@ These functions adapt morphological operators to operate on graphs data
 \end_layout
 
 \begin_layout Minisec
-grMean 
+grMean
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grMean
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6868,7 +7349,17 @@ Compute mean from neighbours.
 \end_layout
 
 \begin_layout Minisec
-grMedian 
+grMedian
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grMedian
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6876,7 +7367,17 @@ Compute median from neighbours.
 \end_layout
 
 \begin_layout Minisec
-grDilate 
+grDilate
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grDilate
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6885,6 +7386,16 @@ Morphological dilation on graph.
 
 \begin_layout Minisec
 grErode
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grErode
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6892,7 +7403,17 @@ Morphological erosion on graph.
 \end_layout
 
 \begin_layout Minisec
-grClose 
+grClose
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grClose
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6901,6 +7422,16 @@ Morphological closing on graph.
 
 \begin_layout Minisec
 grOpen
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grOpen
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6912,7 +7443,17 @@ Geodesic and shortest path operations
 \end_layout
 
 \begin_layout Minisec
-grShortestPath 
+grShortestPath
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grShortestPath
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6920,7 +7461,17 @@ Find a shortest path between two nodes in the graph.
 \end_layout
 
 \begin_layout Minisec
-grPropagateDistance 
+grPropagateDistance
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grPropagateDistance
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6928,7 +7479,17 @@ Propagates distances from a vertex to other vertices.
 \end_layout
 
 \begin_layout Minisec
-grVertexEccentricity 
+grVertexEccentricity
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grVertexEccentricity
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6936,7 +7497,17 @@ Eccentricity of vertices in the graph.
 \end_layout
 
 \begin_layout Minisec
-graphDiameter 
+graphDiameter
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+graphDiameter
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6945,6 +7516,16 @@ Diameter of a graph.
 
 \begin_layout Minisec
 graphPeripheralVertices
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+graphPeripheralVertices
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6952,7 +7533,17 @@ Peripheral vertices of a graph.
 \end_layout
 
 \begin_layout Minisec
-graphCenter 
+graphCenter
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+graphCenter
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6960,7 +7551,17 @@ Center of a graph.
 \end_layout
 
 \begin_layout Minisec
-graphRadius 
+graphRadius
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+graphRadius
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6968,7 +7569,17 @@ Radius of a graph.
 \end_layout
 
 \begin_layout Minisec
-grFindGeodesicPath 
+grFindGeodesicPath
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grFindGeodesicPath
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6976,7 +7587,17 @@ Find a geodesic path between two nodes in the graph.
 \end_layout
 
 \begin_layout Minisec
-grFindMaximalLengthPath 
+grFindMaximalLengthPath
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grFindMaximalLengthPath
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6988,7 +7609,17 @@ Operations for geometric graphs
 \end_layout
 
 \begin_layout Minisec
-grEdgeLengths 
+grEdgeLengths
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grEdgeLengths
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6996,7 +7627,17 @@ Compute length of edges in a geometric graph.
 \end_layout
 
 \begin_layout Minisec
-grMergeNodeClusters 
+grMergeNodeClusters
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grMergeNodeClusters
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7004,7 +7645,17 @@ Merge cluster of connected nodes in a graph.
 \end_layout
 
 \begin_layout Minisec
-grMergeNodesMedian 
+grMergeNodesMedian
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grMergeNodesMedian
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7012,7 +7663,17 @@ Replace several nodes by their median coordinate.
 \end_layout
 
 \begin_layout Minisec
-clipGraph 
+clipGraph
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+clipGraph
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7020,7 +7681,17 @@ Clip a graph with a rectangular area.
 \end_layout
 
 \begin_layout Minisec
-clipGraphPolygon 
+clipGraphPolygon
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+clipGraphPolygon
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7028,7 +7699,17 @@ Clip a graph with a polygon.
 \end_layout
 
 \begin_layout Minisec
-clipMesh2dPolygon 
+clipMesh2dPolygon
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+clipMesh2dPolygon
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7036,7 +7717,17 @@ Clip a planar mesh with a polygon.
 \end_layout
 
 \begin_layout Minisec
-addSquareFace 
+addSquareFace
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+addSquareFace
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7044,7 +7735,17 @@ Add a (square) face defined from its vertices to a graph.
 \end_layout
 
 \begin_layout Minisec
-grFaceToPolygon 
+grFaceToPolygon
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grFaceToPolygon
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7052,7 +7753,17 @@ Compute the polygon corresponding to a graph face.
 \end_layout
 
 \begin_layout Minisec
-graph2Contours 
+graph2Contours
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+graph2Contours
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7060,7 +7771,7 @@ Convert a graph to a set of contour curves.
 \end_layout
 
 \begin_layout Subsection
-Graph management (low level operations)
+Low level graph edition
 \end_layout
 
 \begin_layout Standard
@@ -7069,7 +7780,17 @@ Some functions for removing elements from a graph by maintaining the consistency
 \end_layout
 
 \begin_layout Minisec
-grRemoveNode 
+grRemoveNode
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grRemoveNode
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7077,7 +7798,17 @@ Remove a node in a graph.
 \end_layout
 
 \begin_layout Minisec
-grRemoveNodes 
+grRemoveNodes
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grRemoveNodes
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7085,7 +7816,17 @@ Remove several nodes in a graph.
 \end_layout
 
 \begin_layout Minisec
-grRemoveEdge 
+grRemoveEdge
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grRemoveEdge
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7093,7 +7834,17 @@ Remove an edge in a graph.
 \end_layout
 
 \begin_layout Minisec
-grRemoveEdges 
+grRemoveEdges
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grRemoveEdges
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7116,7 +7867,17 @@ Several functions to obtain quantitative information about a graph.
 \end_layout
 
 \begin_layout Minisec
-grNodeDegree 
+grNodeDegree
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grNodeDegree
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7124,7 +7885,17 @@ Degree of a node in a (undirected) graph.
 \end_layout
 
 \begin_layout Minisec
-grNodeInnerDegree 
+grNodeInnerDegree
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grNodeInnerDegree
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7132,7 +7903,17 @@ Inner degree of a node in a graph.
 \end_layout
 
 \begin_layout Minisec
-grNodeOuterDegree 
+grNodeOuterDegree
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grNodeOuterDegree
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7140,7 +7921,17 @@ Outer degree of a node in a graph.
 \end_layout
 
 \begin_layout Minisec
-grAdjacentNodes 
+grAdjacentNodes
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grAdjacentNodes
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7148,7 +7939,17 @@ Find list of nodes adjacent to a given node.
 \end_layout
 
 \begin_layout Minisec
-grAdjacentEdges 
+grAdjacentEdges
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grAdjacentEdges
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7156,7 +7957,17 @@ Find list of edges adjacent to a given node.
 \end_layout
 
 \begin_layout Minisec
-grOppositeNode 
+grOppositeNode
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grOppositeNode
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7164,7 +7975,17 @@ Return opposite node in an edge.
 \end_layout
 
 \begin_layout Minisec
-grLabel 
+grLabel
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grLabel
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7180,7 +8001,17 @@ Display a graph, or specific elements of a graph.
 \end_layout
 
 \begin_layout Minisec
-drawGraph 
+drawGraph
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+drawGraph
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7188,7 +8019,17 @@ Draw a graph, given as a set of vertices and edges.
 \end_layout
 
 \begin_layout Minisec
-drawGraphEdges 
+drawGraphEdges
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+drawGraphEdges
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7196,7 +8037,17 @@ Draw edges of a graph.
 \end_layout
 
 \begin_layout Minisec
-fillGraphFaces 
+fillGraphFaces
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+fillGraphFaces
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7204,7 +8055,17 @@ Fill faces of a graph with specified color.
 \end_layout
 
 \begin_layout Minisec
-drawDigraph 
+drawDigraph
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+drawDigraph
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7212,7 +8073,17 @@ Draw a directed graph, given as a set of vertices and edges.
 \end_layout
 
 \begin_layout Minisec
-drawDirectedEdges 
+drawDirectedEdges
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+drawDirectedEdges
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7220,7 +8091,17 @@ Draw edges with arrow indicating direction.
 \end_layout
 
 \begin_layout Minisec
-drawEdgeLabels 
+drawEdgeLabels
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+drawEdgeLabels
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7229,6 +8110,16 @@ Draw values associated to graph edges.
 
 \begin_layout Minisec
 drawNodeLabels
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+drawNodeLabels
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7237,6 +8128,16 @@ Draw values associated to graph nodes.
 
 \begin_layout Minisec
 drawSquareMesh
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+drawSquareMesh
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7244,7 +8145,17 @@ Draw a 3D square mesh given as a graph.
 \end_layout
 
 \begin_layout Minisec
-patchGraph 
+patchGraph
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+patchGraph
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7378,7 +8289,17 @@ Functions
 \end_layout
 
 \begin_layout Minisec
-readGraph 
+readGraph
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+readGraph
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7386,7 +8307,17 @@ Read a graph from a text file.
 \end_layout
 
 \begin_layout Minisec
-writeGraph 
+writeGraph
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+writeGraph
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
