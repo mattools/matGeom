@@ -611,17 +611,22 @@ The MatGeom library tries to follow standard conventions and practices both
 \end_layout
 
 \begin_layout Standard
-Function names follow the (lower) came case
+Function names follow the (lower) 
+\begin_inset Quotes eld
+\end_inset
+
+came case
 \begin_inset Quotes erd
 \end_inset
 
- convention, example: 
+ convention.
+ Example: 
 \family typewriter
-intersectLineCircle
+drawLine
 \family default
 .
  Functions start either by a verb at the infinitive, or by a noun (when
- returning the corresponding measure).
+ working on a specific data structure).
  Examples: 
 \family typewriter
 clipPolygon
@@ -4459,14 +4464,31 @@ open
 \series default
 , depending on whether the last vertex is connected to the first one or
  not.
- This can be given as an option is some functions in the module.
+ Open polylines are also called 
+\begin_inset Quotes eld
+\end_inset
+
+line strings
+\begin_inset Quotes erd
+\end_inset
+
+, and closed polylines may be called 
+\begin_inset Quotes eld
+\end_inset
+
+linear rings
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The openness can be given as an option is some functions in the module.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -4545,7 +4567,7 @@ name "fig:Polyline-and-Polygon"
 \end_inset
 
 Example of polyline and polygon.
- (a) A polyline defined by a series of vertices.
+ (a) An open polyline defined by a series of vertices.
  (b) The corresponding (counter-clockwise oriented) polygon, with interior
  coloured in light blue.
 \end_layout
@@ -4585,25 +4607,22 @@ noprefix "false"
 complex polygons
 \series default
 ', whose boundary is composed of several disjoint domains.
- The domain enclosed by a single closed polyline is called '
+ The domain enclosed by a single closed polyline (or linear ring) is called
+ '
 \series bold
 simple polygon
 \series default
 '.
- Its boundary is called a '
-\series bold
-linear ring
-\series default
-'.
+ 
 \end_layout
 
 \begin_layout Standard
-We call 
+Within MatGeom, a 
 \series bold
 curve
 \series default
- a polyline with many vertices, such that the polyline can be considered
- as a discrete approximation of a "real" curve.
+ has to be understood as a polyline with many vertices, such that the polyline
+ can be considered as a discrete approximation of a smooth curve.
 \end_layout
 
 \begin_layout Subsection
@@ -5874,8 +5893,8 @@ name "fig:Smooth-Simplify-Polygon"
 \end_inset
 
 Smoothing and simplification of a polygon.
- After simplification by a distance equal to 5, the number if vertices drops
- from 2235 to 60.
+ After simplification by a distance equal to 5 (arbitrary unit), the number
+ of vertices drops from 2235 (blue curve) to 60 (red line and squares).
 \end_layout
 
 \end_inset
@@ -6363,14 +6382,71 @@ status open
 
 \begin_layout Plain Layout
 \align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Graphics
-	filename images/graphs/graph_def.png
+	filename images/graphs/graph_def/graph_adj_list.png
 	lyxscale 50
-	width 33text%
+	width 15text%
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Adjacency list.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/graphs/graph_def/graph_def.png
+	lyxscale 50
+	width 35text%
+	rotateOrigin centerTop
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Graphical representation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Plain Layout
@@ -6384,6 +6460,9 @@ name "fig:Sample-Graph"
 \end_inset
 
 Sample graph containing six vertices and seven edges.
+ (a) Representation of the graph through an adjacency list.
+ (b) Graphical representation by associating vertices to positions on the
+ plane.
 \end_layout
 
 \end_inset
@@ -6397,7 +6476,7 @@ Sample graph containing six vertices and seven edges.
 \end_layout
 
 \begin_layout Standard
-Within MatGeom, graphs are represented by two variables:
+Within MatGeom, graphs are represented with two variables:
 \end_layout
 
 \begin_layout Description
