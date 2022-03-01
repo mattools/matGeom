@@ -11,7 +11,7 @@ that were distributed on the FileExchange. Distribution as a single library grea
 the interoperability of the functions.
 
 The official homepage for the project is http://github.com/mattools/matGeom. 
-A [user manual](https://github.com/mattools/matGeom/releases/download/v1.2.5/matGeom-manual-v1.2.5.pdf) is available.
+A [user manual](https://github.com/mattools/matGeom/releases/download/v1.2.5/matGeom-manual-1.2.5.pdf) is available.
 
 Starting from February 2022, the html pages of the functions (obtained with m2html) are available [here](https://mattools.github.io/matGeom/api/index.html).
 
