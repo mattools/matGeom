@@ -45,7 +45,7 @@
 %   axis([0 5 0 5]);
 %   % Multiple polygon:
 %   P2 = [10 10;40 10;40 40;10 40;NaN NaN;20 20;20 30;30 30;30 20];
-%   figure;drawPolygon(P2); axis([0 50 0 50]);
+%   figure; drawPolygon(P2); axis([0 50 0 50]);
 %
 %
 % Polylines
@@ -66,7 +66,9 @@
 %   polylineSelfIntersections - Find self-intersection points of a polyline.
 %   simplifyPolyline          - Douglas-Peucker simplification of a polyline.
 %   smoothPolyline            - Smooth a polyline using local averaging.
+%   polylineCurvature         - Estimate curvature on polyline vertices using polynomial fit.
 %   removeMultipleVertices    - Remove multiple vertices of a polygon or polyline.
+%   padPolyline               - Add vertices at each extremity of the polyline.
 %
 % Polygon basic manipulation
 %   reversePolygon            - Reverse a polygon, by iterating vertices from the end.
