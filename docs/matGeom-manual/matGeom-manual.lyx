@@ -6354,10 +6354,24 @@ quick tour
 \begin_layout Standard
 The Graph module provides functionnalities for the processing of geometric
  graphs.
- Graphs are defined by a set of nodes (or vertices), and a relation operator
- that defines which nodes are neighbors.
- Geometric graphs associate each node to a position, as a 2D or 3D point
- (Figure
+ 
+\series bold
+Graphs
+\series default
+ are defined by a set of 
+\series bold
+nodes
+\series default
+ (or 
+\series bold
+vertices
+\series default
+), and a relation operator that defines which nodes are neighbors.
+ 
+\series bold
+Geometric graphs
+\series default
+ additionally associate each node to a position, as a 2D or 3D point (Figure
 \begin_inset space ~
 \end_inset
 
@@ -6382,6 +6396,132 @@ status open
 
 \begin_layout Plain Layout
 \align center
+\begin_inset Graphics
+	filename images/graphs/graph_def/graph_def.png
+	lyxscale 50
+	width 40text%
+	rotateOrigin centerTop
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Sample-Graph"
+
+\end_inset
+
+Graphical representation of a sample graph composed of six vertices (red
+ dots) and seven edges (blue lines).
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Geometric graphs gather geometric information (through the position of vertices)
+ and topological information (through the vertex adjacency information).
+ The latter can be represented in different way:
+\end_layout
+
+\begin_layout Description
+adjacency
+\begin_inset space ~
+\end_inset
+
+list associates to each vertex, the list of adjacent vertices
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://en.wikipedia.org/wiki/Adjacency_list
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ (Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Graph-Representations"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+-a).
+\end_layout
+
+\begin_layout Description
+adjacency
+\begin_inset space ~
+\end_inset
+
+matrix is a square 
+\begin_inset Formula $n_{v}\times n_{v}$
+\end_inset
+
+ matrix (where 
+\begin_inset Formula $n_{v}$
+\end_inset
+
+ is the number of vertices) such that the coefficient 
+\begin_inset Formula $m_{ij}=1$
+\end_inset
+
+ if the vertex 
+\begin_inset Formula $i$
+\end_inset
+
+ is adjacent to the vertex 
+\begin_inset Formula $j$
+\end_inset
+
+, and 0 otherwise (Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Graph-Representations"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+-b).
+ Vertices may be considered adjacent to themselves, in that case the diagonal
+ elements of the matrix are set to 1.
 \begin_inset Float figure
 wide false
 sideways false
@@ -6389,11 +6529,54 @@ status open
 
 \begin_layout Plain Layout
 \align center
-\begin_inset Graphics
-	filename images/graphs/graph_def/graph_adj_list.png
-	lyxscale 50
-	width 15text%
+\begin_inset Float figure
+wide false
+sideways false
+status open
 
+\begin_layout Plain Layout
+\align center
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/graphs/graph_def/graph_adjacency_list.png
+	lyxscale 50
+	height 3.2cm
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
 \end_inset
 
 
@@ -6422,10 +6605,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/graphs/graph_def/graph_def.png
+	filename images/graphs/graph_def/graph_adjacency_matrix.png
 	lyxscale 50
-	width 35text%
-	rotateOrigin centerTop
+	height 3cm
 
 \end_inset
 
@@ -6436,17 +6618,121 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Graphical representation.
+Adjacency Matrix.
 \end_layout
 
 \end_inset
 
 
 \end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/graphs/graph_def/graph_edge_adjacencies.png
+	lyxscale 50
+	height 3.2cm
 
 \end_inset
 
  
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Edge Adjacency.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -6455,14 +6741,29 @@ Graphical representation.
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Sample-Graph"
+name "fig:Graph-Representations"
 
 \end_inset
 
-Sample graph containing six vertices and seven edges.
- (a) Representation of the graph through an adjacency list.
- (b) Graphical representation by associating vertices to positions on the
- plane.
+Several representations of the topological information within the sample
+ graph in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Sample-Graph"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ (a) Vertex adjacency list.
+ (b) Vertex adjacency matrix.
+ (c) Edge vertex adjacency.
 \end_layout
 
 \end_inset
@@ -6473,23 +6774,72 @@ Sample graph containing six vertices and seven edges.
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Within MatGeom, graphs are represented with two variables:
 \end_layout
 
 \begin_layout Description
-nodes which contains the coordinates of each vertex.
-\end_layout
+edge
+\begin_inset space ~
+\end_inset
 
-\begin_layout Description
-edges which contains the indices of the start and end vertices.
+adjacency (or more simply 
+\series bold
+edge list
+\series default
+) is a 
+\begin_inset Formula $n_{e}\times2$
+\end_inset
+
+ array containing for each edge, the indices of the two adjacent edges (Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Graph-Representations"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+-c).
+ In the case of undirected edges, it may be convenient to consider 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+ as the vertex with the lower index (the convention is used withn MatGeom).
 \end_layout
 
 \begin_layout Standard
-These two information can be manipulated individually, or be fields of a
- structure.
+Within MatGeom, most functions represent graphs using two variables 
+\begin_inset Quotes eld
+\end_inset
+
+
+\series bold
+nodes
+\series default
+
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+
+\series bold
+edges
+\series default
+
+\begin_inset Quotes erd
+\end_inset
+
+, where nodes contains the position of vertices, and edges corresponds to
+ the edge adjacency array.
+ These two information can be manipulated individually, or be fields of
+ a structure.
 \begin_inset listings
 inline false
 status open
@@ -6548,14 +6898,18 @@ cells which contains indices of faces of each cell.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage clearpage
-\end_inset
-
-
+Finally, 
+\series bold
+values
+\series default
+ may be associated to either graph vertices of edges.
+ For example, a weight may be associated to edges to compute shortest paths.
+ In that case, the value array is usually given as additional argument to
+ the computation function.
 \end_layout
 
 \begin_layout Section
-Graph creation
+Creation of graphs
 \end_layout
 
 \begin_layout Standard
@@ -7269,255 +7623,6 @@ Operators on graphs
 \end_layout
 
 \begin_layout Subsection
-Graph processing (general applications)
-\end_layout
-
-\begin_layout Minisec
-adjacencyListToEdges
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-adjacencyListToEdges
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Convert an adjacency list to an edge array.
-\end_layout
-
-\begin_layout Minisec
-pruneGraph
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-pruneGraph
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Remove all edges with a terminal vertex.
-\end_layout
-
-\begin_layout Minisec
-mergeGraphs
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-mergeGraphs
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Merge two graphs, by adding nodes, edges and faces lists.
-\end_layout
-
-\begin_layout Minisec
-grMergeNodes
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-grMergeNodes
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Merge two (or more) nodes in a graph.
-\end_layout
-
-\begin_layout Minisec
-grMergeMultipleNodes
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-grMergeMultipleNodes
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Simplify a graph by merging multiple nodes.
-\end_layout
-
-\begin_layout Minisec
-grMergeMultipleEdges
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-grMergeMultipleEdges
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Remove all edges sharing the same extremities.
-\end_layout
-
-\begin_layout Minisec
-grSimplifyBranches
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-grSimplifyBranches
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Replace branches of a graph by single edges.
-\end_layout
-
-\begin_layout Subsection
-Filtering operations on Graph
-\end_layout
-
-\begin_layout Standard
-These functions adapt morphological operators to operate on graphs data
- stucture.
- An array of values associated to the vertices must be provided to the functions.
- The new values are returned as result.
-\end_layout
-
-\begin_layout Minisec
-grMean
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-grMean
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Compute mean from neighbours.
-\end_layout
-
-\begin_layout Minisec
-grMedian
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-grMedian
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Compute median from neighbours.
-\end_layout
-
-\begin_layout Minisec
-grDilate
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-grDilate
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Morphological dilation on graph.
-\end_layout
-
-\begin_layout Minisec
-grErode
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-grErode
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Morphological erosion on graph.
-\end_layout
-
-\begin_layout Minisec
-grClose
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-grClose
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Morphological closing on graph.
-\end_layout
-
-\begin_layout Minisec
-grOpen
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-grOpen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Morphological opening on graph.
-\end_layout
-
-\begin_layout Subsection
 Geodesic and shortest path operations
 \end_layout
 
@@ -7681,6 +7786,125 @@ grFindMaximalLengthPath
 
 \begin_layout Standard
 Find a path that maximizes sum of edge weights.
+\end_layout
+
+\begin_layout Subsection
+Filtering operations on valued Graph
+\end_layout
+
+\begin_layout Standard
+These functions adapt classical filtering operators to operate on graphs
+ data stucture.
+ An array of values associated to the vertices must be provided to the functions.
+ The new values are returned as result.
+\end_layout
+
+\begin_layout Minisec
+grMean
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grMean
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Compute mean from neighbours.
+\end_layout
+
+\begin_layout Minisec
+grMedian
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grMedian
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Compute median from neighbours.
+\end_layout
+
+\begin_layout Minisec
+grDilate
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grDilate
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Morphological dilation on graph.
+\end_layout
+
+\begin_layout Minisec
+grErode
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grErode
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Morphological erosion on graph.
+\end_layout
+
+\begin_layout Minisec
+grClose
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grClose
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Morphological closing on graph.
+\end_layout
+
+\begin_layout Minisec
+grOpen
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grOpen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Morphological opening on graph.
 \end_layout
 
 \begin_layout Subsection
@@ -7849,87 +8073,6 @@ graph2Contours
 Convert a graph to a set of contour curves.
 \end_layout
 
-\begin_layout Subsection
-Low level graph edition
-\end_layout
-
-\begin_layout Standard
-Some functions for removing elements from a graph by maintaining the consistency
- of the informations.
-\end_layout
-
-\begin_layout Minisec
-grRemoveNode
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-grRemoveNode
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Remove a node in a graph.
-\end_layout
-
-\begin_layout Minisec
-grRemoveNodes
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-grRemoveNodes
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Remove several nodes in a graph.
-\end_layout
-
-\begin_layout Minisec
-grRemoveEdge
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-grRemoveEdge
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Remove an edge in a graph.
-\end_layout
-
-\begin_layout Minisec
-grRemoveEdges
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-grRemoveEdges
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Remove several edges from a graph.
-\end_layout
-
 \begin_layout Standard
 \begin_inset Newpage newpage
 \end_inset
@@ -7938,6 +8081,10 @@ Remove several edges from a graph.
 \end_layout
 
 \begin_layout Section
+Graph editing 
+\end_layout
+
+\begin_layout Subsection
 Graph information
 \end_layout
 
@@ -8069,6 +8216,217 @@ grLabel
 
 \begin_layout Standard
 Associate a label to each connected component of the graph.
+\end_layout
+
+\begin_layout Subsection
+Conversions and simplification
+\end_layout
+
+\begin_layout Minisec
+adjacencyListToEdges
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+adjacencyListToEdges
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Convert an adjacency list to an edge array.
+\end_layout
+
+\begin_layout Minisec
+pruneGraph
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+pruneGraph
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Remove all edges with a terminal vertex.
+\end_layout
+
+\begin_layout Minisec
+mergeGraphs
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+mergeGraphs
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Merge two graphs, by adding nodes, edges and faces lists.
+\end_layout
+
+\begin_layout Minisec
+grMergeNodes
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grMergeNodes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Merge two (or more) nodes in a graph.
+\end_layout
+
+\begin_layout Minisec
+grMergeMultipleNodes
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grMergeMultipleNodes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Simplify a graph by merging multiple nodes.
+\end_layout
+
+\begin_layout Minisec
+grMergeMultipleEdges
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grMergeMultipleEdges
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Remove all edges sharing the same extremities.
+\end_layout
+
+\begin_layout Minisec
+grSimplifyBranches
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grSimplifyBranches
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Replace branches of a graph by single edges.
+\end_layout
+
+\begin_layout Subsection
+Low level graph edition
+\end_layout
+
+\begin_layout Standard
+Some functions for removing elements from a graph by maintaining the consistency
+ of the informations.
+\end_layout
+
+\begin_layout Minisec
+grRemoveNode
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grRemoveNode
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Remove a node in a graph.
+\end_layout
+
+\begin_layout Minisec
+grRemoveNodes
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grRemoveNodes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Remove several nodes in a graph.
+\end_layout
+
+\begin_layout Minisec
+grRemoveEdge
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grRemoveEdge
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Remove an edge in a graph.
+\end_layout
+
+\begin_layout Minisec
+grRemoveEdges
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+grRemoveEdges
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Remove several edges from a graph.
 \end_layout
 
 \begin_layout Section
