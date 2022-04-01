@@ -40,13 +40,11 @@
 %
 % Create graph from images
 %   imageGraph                 - Create equivalent graph of a binary image.
-%   boundaryGraph              - Get boundary of image as a graph.
-%   gcontour2d                 - Creates contour graph of a 2D binary image.
-%   gcontour3d                 - Create contour graph of a 3D binary image.
+%   imageBoundaryGraph         - Convert boundary of a 2D/3D binary image into a graph or mesh.
 %
 % Voronoi Graphs
 %   voronoi2d                  - Compute a voronoi diagram as a graph structure.
-%   boundedVoronoi2d           - Return a bounded voronoi diagram as a graph structure.
+%   boundedVoronoi2d           - Comptues a bounded voronoi diagram as a graph structure.
 %   centroidalVoronoi2d        - Centroidal Voronoi tesselation within a polygon.
 %   centroidalVoronoi2d_MC     - Centroidal Voronoi tesselation by Monte-Carlo.
 %   boundedCentroidalVoronoi2d - Create a 2D Centroidal Voronoi Tesselation in a box.
@@ -144,10 +142,12 @@ help(mfilename);
 % Deprecated functions
 %   grSimplifyBranches_old     - Replace branches of a graph by single edges.
 %   grRemoveMultiplePoints     - Remove groups of close nodes in a graph.
+%   boundaryGraph              - Get boundary of image as a graph.
+%   gcontour2d                 - Creates contour graph of a 2D binary image.
+%   gcontour3d                 - Create contour graph of a 3D binary image.
 
 % Functions that requires further development
 %   quiverToGraph              - Converts quiver data to quad mesh.
 
 % Other functions
-%   polygonBoundedCVT2d        - BOUNDEDCENTROIDALVORONOI2D Create a 2D Centroidal Voronoi Tesselation in a box
 

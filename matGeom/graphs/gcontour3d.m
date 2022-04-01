@@ -1,7 +1,10 @@
 function [nodes, edges, faces] = gcontour3d(img)
 %GCONTOUR3D Create contour graph of a 3D binary image.
 %
+%   deprecated: use imageBoundaryGraph instead
 %
+%   See also:
+%     imageBoundaryGraph
 %
 %   ---------
 %
