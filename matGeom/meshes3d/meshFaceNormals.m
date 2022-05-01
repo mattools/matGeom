@@ -43,7 +43,7 @@ if isnumeric(faces)
     v2 = vertices(faces(:,3),1:3) - vertices(faces(:,1),1:3);
     
     % compute normals using cross product (nodes have same size)
-	normals = cross(v1, v2, 2);
+	normals = crossProduct3d(v1, v2);
 
 else
     % initialize empty array
@@ -56,7 +56,7 @@ else
         v2 = vertices(face(3),1:3) - vertices(face(1),1:3);
 
         % compute normals using cross product
-        normals(i, :) = cross(v1, v2, 2);
+        normals(i, :) = crossProduct3d(v1, v2);
     end
 end
 
