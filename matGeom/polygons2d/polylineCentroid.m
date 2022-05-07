@@ -1,9 +1,9 @@
 function center = polylineCentroid(varargin)
-%POLYLINECENTROID Compute centroid of a curve defined by a series of points.
+% Computes the centroid of a curve defined by a series of points.
 %
 %   PT = polylineCentroid(POINTS);
 %   Computes center of mass of a polyline defined by POINTS. POINTS is a
-%   [NxD] array of double, representing a set of N points in a
+%   N-by-D array of double, representing a set of N points in a
 %   D-dimensional space.
 %
 %   PT = polylineCentroid(PTX, PTY);
@@ -21,8 +21,9 @@ function center = polylineCentroid(varargin)
 %       [10 5]
 %
 %   See also:
-%   polygons2d, centroid, polygonCentroid, polylineLength
+%     polygons2d, centroid, polygonCentroid, polylineLength
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -40,7 +41,8 @@ if ischar(var)
     if strcmpi(var, 'closed')
         closed = true;
     end
-    varargin = varargin(1:end-1);
+    % remove last argument
+    varargin(end) = [];
 end
 
 % extract point coordinates
@@ -49,6 +51,9 @@ if length(varargin)==1
 elseif length(varargin)==2
     points = [varargin{1} varargin{2}];
 end
+
+
+%% Main computation
 
 % compute centers and lengths composing the curve
 if closed
@@ -61,5 +66,5 @@ end
 
 % centroid of edge centers weighted by edge length
 %weigths = repmat(lengths/sum(lengths), [1 size(points, 2)]); 
-center = sum(centers.*repmat(lengths, [1 size(points, 2)]), 1)/sum(lengths);
+center = sum(centers .* repmat(lengths, [1 size(points, 2)]), 1) / sum(lengths);
 

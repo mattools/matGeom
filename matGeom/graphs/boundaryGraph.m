@@ -1,6 +1,8 @@
 function varargout = boundaryGraph(img)
 %BOUNDARYGRAPH Get boundary of image as a graph.
 %
+%   deprecated: use imageBoundaryGraph instead
+%
 %   [NODES, EDGES] = boundaryGraph(IMG)         (2D)
 %   [NODES, EDGES, FACES] = boundaryGraph(IMG)  (3D)
 %   Create a graph on the boundary of binary image IMG. Each pixel is
@@ -14,8 +16,8 @@ function varargout = boundaryGraph(img)
 %   The resulting shell is open if the binary structure touches edges of
 %   image.
 %
-%   See also :
-%   imPatch, drawMesh
+%   See als:
+%     imageBoundaryGraph
 %
 
 %   ---------

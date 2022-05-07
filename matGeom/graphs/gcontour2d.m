@@ -1,7 +1,10 @@
 function [nodes, edges] = gcontour2d(img)
 %GCONTOUR2D Creates contour graph of a 2D binary image.
 %
+%   deprecated: use imageBoundaryGraph instead
 %
+%   See also:
+%     imageBoundaryGraph
 %
 %   ---------
 %

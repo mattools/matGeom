@@ -36,43 +36,39 @@ testCase.assertEqual(0, size(intersectRayPolygon(rayV2, poly), 1));
 function testDiamond(testCase)
 poly = [10 0;20 10;10 20;0 10];
 
-% touche lower corner
+% definition from 14/02/2022 do not intersect lower vertices
 rayH0 = [0 0 3 0];
-target = [10 0];
 intersects = intersectRayPolygon(rayH0, poly);
-testCase.assertTrue(ismember(target, intersects, 'rows'));
+testCase.assertTrue(isempty(intersects));
 
-% touches right corner (only once)
+% definition from 14/02/2022 do not intersect lower vertices
 rayH1 = [10 10 3 0];
 intersects = intersectRayPolygon(rayH1, poly);
 target = [20 10];
-testCase.assertTrue(ismember(target, intersects, 'rows'));
+testCase.assertEqual(intersects, target, 'AbsTol', 0.01);
 testCase.assertEqual(1, size(intersects, 1));
 
-% touches top corner
+% touches top corner twice
 rayH2 = [0 20 3 0];
 intersects = intersectRayPolygon(rayH2, poly);
-target = [10 20];
-testCase.assertEqual(1, size(intersects, 1));
-testCase.assertTrue(ismember(target, intersects, 'rows'));
+testCase.assertEqual(2, size(intersects, 1));
 
-% touches left corner
+% touches left corner twice
 rayV0 = [0 0 0 3];
-target = [0 10];
 intersects = intersectRayPolygon(rayV0, poly);
-testCase.assertTrue(ismember(target, intersects, 'rows'));
+testCase.assertEqual(2, size(intersects, 1));
 
-% touches left corner
+% intersects top corner
 rayV1 = [10 10 0 3];
 intersects = intersectRayPolygon(rayV1, poly);
 target = [10 20];
-testCase.assertTrue(ismember(target, intersects, 'rows'));
+testCase.assertEqual(intersects, target, 'AbsTol', 0.01);
 
 % touches right corner
 rayV2 = [20 0 0 3];
 intersects = intersectRayPolygon(rayV2, poly);
-target = [20 10];
-testCase.assertTrue(ismember(target, intersects, 'rows'));
+testCase.assertTrue(isempty(intersects));
+
 
 
 function testUniquePoints(testCase)

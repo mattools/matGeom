@@ -1,12 +1,12 @@
 function curv = polygonCurvature(poly, M)
-%POLYGONCURVATURE Estimate curvature on polygon vertices using polynomial fit.
+% Estimate curvature on polygon vertices using polynomial fit.
 %
 %   CURV = polygonCurvature(POLY, M)
 %   Estimate the curvature for each vertex of a polygon, using polynomial
-%   fit from the M verties located around current vertex. M is usually an
+%   fit from the M vertices located around current vertex. M is usually an
 %   odd value, resulting in a symmetric neighborhood.
 %
-%   Polynomial fitting is of degree 2 by default.
+%   Polynomial fitting is of degree 2.
 %   
 %
 %   Example
@@ -25,11 +25,11 @@ function curv = polygonCurvature(poly, M)
 %     figure(1); hold on; drawPoint(poly2(inds, :), 'g*')
 %
 %   See also
-%     polygons2d
+%     polygons2d, polylineCurvature
  
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2018-03-02,    using Matlab 9.3.0.713579 (R2017b)
 % Copyright 2018 INRA - Cepia Software Platform.
 

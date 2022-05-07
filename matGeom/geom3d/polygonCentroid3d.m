@@ -3,7 +3,11 @@ function centroid = polygonCentroid3d(varargin)
 %
 %   PTC = polygonCentroid3d(POLY)
 %   Computes center of mass of a polygon defined by POLY. POLY is a N-by-3
-%   array of double containing coordinates of polygon vertices.
+%   array of double containing coordinates of polygon vertices. The result
+%   PTC is given as a 1-by-3 numeric array.
+%   The algorithm assumes (1) that the vertices of the polygon are within
+%   the same plane and (2) that the planar projection of the polygon (on
+%   the embedding plane) do not self-intersect.
 %
 %   PTC = polygonCentroid3d(VX, VY, VZ)
 %   Specifies vertex coordinates as three separate arrays.
@@ -16,12 +20,12 @@ function centroid = polygonCentroid3d(varargin)
 %         5.0000    5.0000    10.0000
 %
 %   See also
-%   polygons3d, polygonArea3d, polygonCentroid
+%     polygons3d, polygonArea3d, polygonCentroid, planePosition, planePoint
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2007-09-18
 % Copyright 2007 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 

@@ -8,7 +8,7 @@ function varargout = boundedCentroidalVoronoi2d(germs, box, varargin)
 %   diagram.
 %
 %   [N, E, F] = boundedCentroidalVoronoi2d(GERMS, BOX, NITER)
-%   Specifies the number of iterations.
+%   Specifies the number of iterations. Default is 10.
 %
 %   [N, E, F, G] = boundedCentroidalVoronoi2d(...)
 %   also returns the positions of germs/centroids for each face. If the
@@ -26,7 +26,7 @@ function varargout = boundedCentroidalVoronoi2d(germs, box, varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2007-01-12
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 
