@@ -278,9 +278,9 @@ for i = 1:nPoints
     s(inds2) = 0;
     bool3 = e(inds2) >= 0;
     t(inds2(bool3)) = 0;
-    bool3 = e(inds2) < 0 & c(inds2) <= e(inds2);
+    bool3 = e(inds2) < 0 & c(inds2) <= -e(inds2);
     t(inds2(bool3)) = 1;
-    bool3 = e(inds2) < 0 & c(inds2) > e(inds2);
+    bool3 = e(inds2) < 0 & c(inds2) > -e(inds2);
     inds3 = inds2(bool3);
     t(inds3) = -e(inds3) ./ c(inds3);
     
