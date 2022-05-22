@@ -1,15 +1,17 @@
-function [dist, proj] = distancePointMesh(point, vertices, faces, varargin)
+function [dist, proj] = distancePointMesh(points, vertices, faces, varargin)
 %DISTANCEPOINTMESH  Shortest distance between a (3D) point and a triangle mesh.
 %
-%   DIST = distancePointMesh(POINT, VERTICES, FACES)
-%   Returns the shortest distance between the query point POINT and the
+%   DIST = distancePointMesh(POINTS, VERTICES, FACES)
+%   Returns the shortest distance between the query point(s) POINTS and the
 %   triangular mesh defined by the set of vertex coordinates VERTICES and
-%   the set of faces FACES. VERTICES is a NV-by-3 array, and FACES is a
-%   NF-by-3 array of vertex indices.
+%   the set of faces FACES. POINTS is a NP-by-3 array, VERTICES is a 
+%   NV-by-3 array, and FACES is a NF-by-3 array of vertex indices.
 %   If FACES is NF-by-4 array, it is converted to a (NF*2)-by-3 array.
+%   DIST is the NP-by-1 vector of distances.
 %
 %   [DIST, PROJ] = distancePointMesh(...)
-%   Also returns the projection of the query point on the triangular mesh.
+%   Also returns the NP-by-3 projection of the query point(s) on the 
+%   triangular mesh.
 %
 %   ... = distancePointMesh(..., 'algorithm', ALGO)
 %   Allows to choose the type of algorithm. Options are:
@@ -97,9 +99,9 @@ end
 % switch to vectorized algorithm if necessary
 if strcmpi(algo, 'vectorized')
     if nargout > 1
-        [dist, proj] = distancePointTrimesh_vectorized(point, vertices, faces);
+        [dist, proj] = distancePointTrimesh_vectorized(points, vertices, faces);
     else
-        dist = distancePointTrimesh_vectorized(point, vertices, faces);
+        dist = distancePointTrimesh_vectorized(points, vertices, faces);
     end
     return;
 end
@@ -109,18 +111,18 @@ end
 % For each point, iterates over the triangular faces
 
 % allocate memory for result
-nPoints = size(point, 1);
+nPoints = size(points, 1);
 dist = zeros(nPoints, 1);
 
 if nargout > 1
-    projPoints = zeros(nPoints, 3);
+    proj = zeros(nPoints, 3);
 end
 
 % iterate over points
 for i = 1:nPoints
     % % min distance and projection for current point
     minDist = inf;
-    proj = [0 0 0];
+    projp = [0 0 0];
     
     % iterate over faces
     for iFace = 1:nFaces
@@ -128,17 +130,17 @@ for i = 1:nPoints
         face = faces(iFace, :);
         triangle = vertices(face, :);
         
-        [distf, projf] = distancePointTriangle3d(point(i,:), triangle);
+        [distf, projf] = distancePointTriangle3d(points(i,:), triangle);
         
         if distf < minDist
             minDist = distf;
-            proj = projf;
+            projp = projf;
         end
     end
     
     dist(i) = minDist;
     if nargout > 1
-        projPoints(i,:) = proj;
+        proj(i,:) = projp;
     end
 end
 end
@@ -172,7 +174,7 @@ function [dist, proj] = distancePointTrimesh_vectorized(point, vertices, faces)
 %   b0 = 1 if s < 0, 0 otherwise
 %   b1 = 1 if t < 0, 0 otherwise
 %   b2 = 1 if s+t > 1, 0 otherwise
-% resulting ion the following region indices:
+% resulting in the following region indices:
 %        /\ t
 %        |
 %   \ R5 |
