@@ -6386,9 +6386,6 @@ noprefix "false"
 \end_inset
 
 ).
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -6478,50 +6475,6 @@ noprefix "false"
 \end_inset
 
 -a).
-\end_layout
-
-\begin_layout Description
-adjacency
-\begin_inset space ~
-\end_inset
-
-matrix is a square 
-\begin_inset Formula $n_{v}\times n_{v}$
-\end_inset
-
- matrix (where 
-\begin_inset Formula $n_{v}$
-\end_inset
-
- is the number of vertices) such that the coefficient 
-\begin_inset Formula $m_{ij}=1$
-\end_inset
-
- if the vertex 
-\begin_inset Formula $i$
-\end_inset
-
- is adjacent to the vertex 
-\begin_inset Formula $j$
-\end_inset
-
-, and 0 otherwise (Figure
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Graph-Representations"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
--b).
- Vertices may be considered adjacent to themselves, in that case the diagonal
- elements of the matrix are set to 1.
 \begin_inset Float figure
 wide false
 sideways false
@@ -6559,7 +6512,7 @@ status open
 \begin_inset Graphics
 	filename images/graphs/graph_def/graph_adjacency_list.png
 	lyxscale 50
-	height 3.2cm
+	height 4cm
 
 \end_inset
 
@@ -6679,7 +6632,7 @@ status open
 \begin_inset Graphics
 	filename images/graphs/graph_def/graph_edge_adjacencies.png
 	lyxscale 50
-	height 3.2cm
+	height 3.5cm
 
 \end_inset
 
@@ -6774,6 +6727,50 @@ noprefix "false"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Description
+adjacency
+\begin_inset space ~
+\end_inset
+
+matrix is a square 
+\begin_inset Formula $n_{v}\times n_{v}$
+\end_inset
+
+ matrix (where 
+\begin_inset Formula $n_{v}$
+\end_inset
+
+ is the number of vertices) such that the coefficient 
+\begin_inset Formula $m_{ij}=1$
+\end_inset
+
+ if the vertex 
+\begin_inset Formula $i$
+\end_inset
+
+ is adjacent to the vertex 
+\begin_inset Formula $j$
+\end_inset
+
+, and 0 otherwise (Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Graph-Representations"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+-b).
+ Vertices may be considered adjacent to themselves, in that case the diagonal
+ elements of the matrix are set to 1.
 \end_layout
 
 \begin_layout Description
@@ -6906,6 +6903,13 @@ values
  For example, a weight may be associated to edges to compute shortest paths.
  In that case, the value array is usually given as additional argument to
  the computation function.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -7529,7 +7533,7 @@ Updates the germs of a CVT using random points with given density (used
 \end_layout
 
 \begin_layout Subsection
-Create graph from images
+Creation of graphs from images
 \end_layout
 
 \begin_layout Standard
@@ -7539,6 +7543,140 @@ Some functions allows to generate graphs from a (usually binary) 2D or 3D
  image.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/graphs/images/sample_image_crop.png
+	width 25text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Image.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/graphs/images/imageGraph_2d_crop.png
+	width 25text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Adjacency graph.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/graphs/images/imageBoundaryGraph_2d_crop.png
+	width 25text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Boundary graph.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Image-Graphs-2d"
+
+\end_inset
+
+Creation of graphs from a binary image.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Minisec
 imageGraph
 \begin_inset Index idx
@@ -7554,16 +7692,30 @@ imageGraph
 \end_layout
 
 \begin_layout Standard
-Create equivalent graph of a binary image.
+Create equivalent graph of a binary image (Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Image-Graphs-2d"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+-b).
 \end_layout
 
 \begin_layout Minisec
-boundaryGraph
+imageBoundaryGraph
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-boundaryGraph
+imageBoundaryGraph
 \end_layout
 
 \end_inset
@@ -7572,8 +7724,26 @@ boundaryGraph
 \end_layout
 
 \begin_layout Standard
-Get boundary of image as a graph.
+Get boundary of image as a graph (Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Image-Graphs-2d"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+-c).
 \end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
 
 \begin_layout Minisec
 gcontour2d
@@ -7589,7 +7759,7 @@ gcontour2d
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Creates contour graph of a 2D binary image.
 \end_layout
 
@@ -7607,8 +7777,13 @@ gcontour3d
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Create contour graph of a 3D binary image.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
