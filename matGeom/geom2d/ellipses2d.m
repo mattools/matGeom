@@ -8,6 +8,7 @@ function ellipses2d(varargin)
 %   See also:
 %   circles2d, equivalentEllipse, isPointInEllipse, ellipsePerimeter
 %   ellipseToPolygon, drawEllipse, drawEllipseArc
+%   projPointOnEllipse, distancePointEllipse
 %
 
 % ------

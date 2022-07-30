@@ -118,6 +118,8 @@
 % Ellipses and Parabola
 %   ellipses2d               - Description of functions operating on ellipses.
 %   equivalentEllipse        - Equivalent ellipse of a set of points.
+%   distancePointEllipse     - Distance from a point to an ellipse.
+%   projPointOnEllipse       - Project of a point orthogonally onto an ellipse.
 %   isPointInEllipse         - Check if a point is located inside a given ellipse.
 %   ellipsePerimeter         - Perimeter of an ellipse.
 %   ellipseToPolygon         - Convert an ellipse into a series of points.
