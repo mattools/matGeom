@@ -18,7 +18,7 @@ function varargout = drawArrow3d(pos, vec, varargin)
 %       arrow stems 94% of the length and short, 6% cones as arrow heads.
 %       Values above 0 and below 1 are valid. Default is 0.75.
 %   'arrowRadius': changes the radius of the arrowstem. Percentage of the
-%       lenght of the arrow. Values between 0.01 and 0.01 are valid. 
+%       lenght of the arrow. Values between 0.01 and 0.1 are valid. 
 %       Default is 0.025.
 %   Uses the 'patch' function to plot the arrows. 'patch' properties can be  
 %   used to control the appearance of the arrows.
