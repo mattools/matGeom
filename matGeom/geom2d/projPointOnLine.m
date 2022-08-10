@@ -29,6 +29,14 @@ function point = projPointOnLine(point, line)
 %   2005-08-06 correct bug when several points were passed as param.
 %   2012-08-23 remove repmats
 
+% parse input arguments
+p = inputParser;
+addRequired(p, 'point', @(x)validateattributes(x,{'numeric'},...
+    {'size',[nan, 2],'nonnan','real','finite'}))
+addRequired(p, 'line', @(x)validateattributes(x,{'numeric'},...
+    {'size',[nan, 4],'nonnan','real','finite'}))
+parse(p, point, line)
+
 % direction vector of the line
 vx = line(:, 3);
 vy = line(:, 4);
