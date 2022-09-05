@@ -2933,6 +2933,16 @@ Ellipses and Parabola
 Ellipses are represented by a 1-by-5 array [xc yc a b theta], where xc and
  yc denote the ellipse center, a and b denote the lengths of the semi axes,
  and theta denotes the orientation of the first principal axis.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: figure
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -11138,7 +11148,7 @@ Draws a 3D ellipse.
 \end_layout
 
 \begin_layout Section
-Spheres and smooth surfaces
+Smooth surfaces
 \end_layout
 
 \begin_layout Standard
@@ -11864,448 +11874,52 @@ Draws a 3D surface patch, with 2 parametrized surfaces.
 \end_layout
 
 \begin_layout Section
-3D Transforms
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:3D-Transforms"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Transforms in 3D space are represented by 4-by-4 matrices in homogeneous
- coordinates:
-\begin_inset Formula 
-\begin{align}
-\left(\begin{array}{c}
-x'\\
-y'\\
-z'\\
-1
-\end{array}\right) & =\left(\begin{array}{cccc}
-m_{00} & m_{01} & m_{02} & m_{03}\\
-m_{10} & m_{11} & m_{12} & m_{13}\\
-m_{20} & m_{21} & m_{22} & m_{23}\\
-0 & 0 & 0 & 1
-\end{array}\right)\cdot\left(\begin{array}{c}
-x\\
-y\\
-z\\
-1
-\end{array}\right)
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The upper-left 
-\begin_inset Formula $3\times3$
-\end_inset
-
- square corresponds to the linear part of the transform, whereas the 
-\begin_inset Formula $m_{i3}$
-\end_inset
-
- elements correspond to the translation part.
-\end_layout
-
-\begin_layout Subsection
-Basic transforms
-\end_layout
-
-\begin_layout Standard
-Several functions allow to create classical 3D affine transforms.
- They return 4-by-4 matrices.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: add sketch of 3D rotation angles
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Minisec
-createTranslation3d
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-createTranslation3d
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Creates the 4x4 matrix of a 3D translation.
-\begin_inset Formula 
-\begin{align*}
-T(\boldsymbol{u}) & =\left[\begin{array}{cccc}
-1 & 0 & 0 & u_{x}\\
-0 & 1 & 0 & u_{y}\\
-0 & 0 & 1 & u_{z}\\
-0 & 0 & 0 & 1
-\end{array}\right]
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Minisec
-createScaling3d
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-createScaling3d
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Creates the 4x4 matrix of a 3D scaling.
- The scaling parameter can be either a scalar (uniform scaling), or a three-elem
-ent vector 
-\begin_inset Formula $\boldsymbol{s}=(s_{x},s_{y},s_{z})^{t}$
-\end_inset
-
- corresponding to the scaling along each dimension.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-S(\boldsymbol{s}) & =\left[\begin{array}{cccc}
-s_{x} & 0 & 0 & 0\\
-0 & s_{y} & 0 & 0\\
-0 & 0 & s_{z} & 0\\
-0 & 0 & 0 & 1
-\end{array}\right]
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Minisec
-createRotationOx
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-createRotationOx
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Creates the 4x4 matrix of a 3D rotation around x-axis, by an angle give
- n in radians.
-\begin_inset Formula 
-\begin{align*}
-R_{X}(\theta) & =\left[\begin{array}{cccc}
-1 & 0 & 0 & 0\\
-0 & \cos\theta & -\sin\theta & 0\\
-0 & \sin\theta & \cos\theta & 0\\
-0 & 0 & 0 & 1
-\end{array}\right]
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Minisec
-createRotationOy
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-createRotationOy
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Creates the 4x4 matrix of a 3D rotation around y-axis, by an angle give
- n in radians.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-R_{Y}(\theta) & =\left[\begin{array}{cccc}
-\cos\theta & 0 & \sin\theta & 0\\
-0 & 1 & 0 & 0\\
--\sin\theta & 0 & \cos\theta & 0\\
-0 & 0 & 0 & 1
-\end{array}\right]
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Minisec
-createRotationOz
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-createRotationOz
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Creates the 4x4 matrix of a 3D rotation around z-axis, by an angle give
- n in radians.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-R_{Z}(\theta) & =\left[\begin{array}{cccc}
-\cos\theta & -\sin\theta & 0 & 0\\
-\sin\theta & \cos\theta & 0 & 0\\
-0 & 0 & 1 & 0\\
-0 & 0 & 0 & 1
-\end{array}\right]
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Euler Angles and basis transforms
-\end_layout
-
-\begin_layout Standard
-Other functions for less common creation patterns.
-\end_layout
-
-\begin_layout Minisec
-createBasisTransform3d
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-createBasisTransform3d
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Computes matrix for transforming a basis into another basis.
-\end_layout
-
-\begin_layout Minisec
-eulerAnglesToRotation3d
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-eulerAnglesToRotation3d
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Converts 3D Euler angles to 3D rotation matrix.
-\end_layout
-
-\begin_layout Minisec
-rotation3dToEulerAngles
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-rotation3dToEulerAngles
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Extracts Euler angles from a rotation matrix.
-\end_layout
-
-\begin_layout Minisec
-createRotation3dLineAngle
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-createRotation3dLineAngle
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Creates rotation around a line by an angle theta.
-\end_layout
-
-\begin_layout Minisec
-rotation3dAxisAndAngle
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-rotation3dAxisAndAngle
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Determines axis and angle of a 3D rotation matrix.
-\end_layout
-
-\begin_layout Minisec
-createRotationVector3d
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-createRotationVector3d
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Calculates the rotation between two vectors.
-\end_layout
-
-\begin_layout Minisec
-createRotationVectorPoint3d
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-createRotationVectorPoint3d
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Calculates the rotation between two vectors.
-\end_layout
-
-\begin_layout Subsection
-Utility functions
-\end_layout
-
-\begin_layout Standard
-Some functions aim at combining or processing transform matrices.
-\end_layout
-
-\begin_layout Minisec
-recenterTransform3d
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-recenterTransform3d
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Changes the fixed point of an affine 3D transform.
-\end_layout
-
-\begin_layout Minisec
-composeTransforms3d
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-composeTransforms3d
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Concatenates several space transformations.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
 Angles and coordinate systems
 \end_layout
 
 \begin_layout Standard
-The library uses several coordinate systems for representing angles.
- The spherical coordinates can be useful for considering positions of dimensionl
-ess objects such as points.
- The Euler angles are more suited when considering the orientation of objects.
+A precise definition of the coordinate systems is necessary to further define
+ 3D transforms (in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:3D-Transforms"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Several of these coordinate systems are based on angles.
+ For eaxample the spherical coordinates can be useful for considering positions
+ of dimensionless objects such as points.
+ 
+\end_layout
+
+\begin_layout Standard
+Contrary to the planar case, several angles are often necessary to define
+ a coordinate system or a 3D transform.
+ Euler angles are a popular solution to represent arbitrary 3D rotations,
+ but several definitions exist.
+ They are presented in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Euler-Angles"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -12508,85 +12122,6 @@ Converts cylindrical to cartesian coordinates.
 \end_layout
 
 \begin_layout Subsection
-Euler Angles
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Euler-Angles"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Euler Angles are defined as follow:
-\end_layout
-
-\begin_layout Labeling
-\labelwidthstring 00.00.0000
-PHI is the azimut, i.e.
- the angle of the projection on horizontal plane with the Ox axis, with
- value beween 0 and 180 degrees.
-\end_layout
-
-\begin_layout Labeling
-\labelwidthstring 00.00.0000
-THETA is the latitude, i.e.
- the angle with the Oz axis, with value between -90 and +90 degrees.
-\end_layout
-
-\begin_layout Labeling
-\labelwidthstring 00.00.0000
-PSI is the 'roll', i.e.
- the rotation around the (PHI, THETA) direction, with value in degrees
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename images/geom3d/ellipsoid-angles.png
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Definition of 3D Euler angles.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
 Other functions for angles
 \end_layout
 
@@ -12660,6 +12195,624 @@ randomAngle3d
 
 \begin_layout Standard
 Returns a 3D angle uniformly distributed on unit sphere.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+3D Transforms
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:3D-Transforms"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Transforms in 3D space are represented by 4-by-4 matrices in homogeneous
+ coordinates:
+\begin_inset Formula 
+\begin{align}
+\left(\begin{array}{c}
+x'\\
+y'\\
+z'\\
+1
+\end{array}\right) & =\left(\begin{array}{cccc}
+m_{00} & m_{01} & m_{02} & m_{03}\\
+m_{10} & m_{11} & m_{12} & m_{13}\\
+m_{20} & m_{21} & m_{22} & m_{23}\\
+0 & 0 & 0 & 1
+\end{array}\right)\cdot\left(\begin{array}{c}
+x\\
+y\\
+z\\
+1
+\end{array}\right)
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The upper-left 
+\begin_inset Formula $3\times3$
+\end_inset
+
+ square corresponds to the linear part of the transform, whereas the 
+\begin_inset Formula $m_{i3}$
+\end_inset
+
+ elements correspond to the translation part.
+\end_layout
+
+\begin_layout Subsection
+Basic transforms
+\end_layout
+
+\begin_layout Standard
+Several functions allow to create classical 3D affine transforms.
+ They return 4-by-4 matrices.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: add sketch of 3D rotation angles
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Minisec
+createTranslation3d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+createTranslation3d
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Creates the 4x4 matrix of a 3D translation.
+\begin_inset Formula 
+\begin{align}
+T(\boldsymbol{u}) & =\left[\begin{array}{cccc}
+1 & 0 & 0 & u_{x}\\
+0 & 1 & 0 & u_{y}\\
+0 & 0 & 1 & u_{z}\\
+0 & 0 & 0 & 1
+\end{array}\right]
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Minisec
+createScaling3d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+createScaling3d
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Creates the 4x4 matrix of a 3D scaling.
+ The scaling parameter can be either a scalar (uniform scaling), or a three-elem
+ent vector 
+\begin_inset Formula $\boldsymbol{s}=(s_{x},s_{y},s_{z})^{t}$
+\end_inset
+
+ corresponding to the scaling along each dimension.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+S(\boldsymbol{s}) & =\left[\begin{array}{cccc}
+s_{x} & 0 & 0 & 0\\
+0 & s_{y} & 0 & 0\\
+0 & 0 & s_{z} & 0\\
+0 & 0 & 0 & 1
+\end{array}\right]
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Minisec
+createRotationOx
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+createRotationOx
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Creates the 4x4 matrix of a 3D rotation around x-axis, by an angle given
+ in radians.
+\begin_inset Formula 
+\begin{align}
+R_{X}(\theta) & =\left[\begin{array}{cccc}
+1 & 0 & 0 & 0\\
+0 & \cos\theta & -\sin\theta & 0\\
+0 & \sin\theta & \cos\theta & 0\\
+0 & 0 & 0 & 1
+\end{array}\right]
+\end{align}
+
+\end_inset
+
+A rotation around the 
+\begin_inset Formula $x$
+\end_inset
+
+-axis by 
+\begin_inset Formula $\pi/2$
+\end_inset
+
+ will map the 
+\begin_inset Formula $y$
+\end_inset
+
+-axis onto the 
+\begin_inset Formula $z$
+\end_inset
+
+-axis.
+\end_layout
+
+\begin_layout Minisec
+createRotationOy
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+createRotationOy
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Creates the 4x4 matrix of a 3D rotation around y-axis, by an angle given
+ in radians.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+R_{Y}(\theta) & =\left[\begin{array}{cccc}
+\cos\theta & 0 & \sin\theta & 0\\
+0 & 1 & 0 & 0\\
+-\sin\theta & 0 & \cos\theta & 0\\
+0 & 0 & 0 & 1
+\end{array}\right]
+\end{align}
+
+\end_inset
+
+A rotation around the 
+\begin_inset Formula $y$
+\end_inset
+
+-axis by 
+\begin_inset Formula $\pi/2$
+\end_inset
+
+ will map the 
+\begin_inset Formula $z$
+\end_inset
+
+-axis onto the 
+\begin_inset Formula $x$
+\end_inset
+
+-axis (
+\begin_inset Quotes eld
+\end_inset
+
+downwards rotation
+\begin_inset Quotes erd
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Minisec
+createRotationOz
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+createRotationOz
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Creates the 4x4 matrix of a 3D rotation around z-axis, by an angle given
+ in radians.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+R_{Z}(\theta) & =\left[\begin{array}{cccc}
+\cos\theta & -\sin\theta & 0 & 0\\
+\sin\theta & \cos\theta & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{array}\right]
+\end{align}
+
+\end_inset
+
+A rotation around the 
+\begin_inset Formula $z$
+\end_inset
+
+-axis by 
+\begin_inset Formula $\pi/2$
+\end_inset
+
+ will map the 
+\begin_inset Formula $x$
+\end_inset
+
+-axis onto the 
+\begin_inset Formula $y$
+\end_inset
+
+-axis.
+\end_layout
+
+\begin_layout Subsection
+Euler Angles
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Euler-Angles"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Euler Angles are defined by a series of three rotations along specific axes.
+ Several definitions of Euler angles exist.
+ The MatGeom library uses Euler angles defined as a series of three 
+\begin_inset Quotes eld
+\end_inset
+
+global
+\begin_inset Quotes erd
+\end_inset
+
+ rotations along the 
+\begin_inset Formula $x$
+\end_inset
+
+-axis first, then along the 
+\begin_inset Formula $y$
+\end_inset
+
+-axis, and finally along the 
+\begin_inset Formula $z$
+\end_inset
+
+-axis:
+\begin_inset Formula 
+\begin{align}
+R_{\varphi,\theta,\psi} & =R_{z}(\psi)\cdot R_{y}(\theta)\cdot R_{x}(\varphi)
+\end{align}
+
+\end_inset
+
+Note the within the library, Euler angles are usually given in the order
+ 
+\begin_inset Formula $(\varphi,\theta,\psi)$
+\end_inset
+
+, i.e.
+ in the reverse order to that they are applied.
+ Moreover, when used for describing the 3D rotation of a shape, they are
+ expressed in degrees.
+ 
+\end_layout
+
+\begin_layout Standard
+Euler angles may be interpreted as follow:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+PHI is the azimut, i.e.
+ the angle of the projection on horizontal plane with the Ox axis, with
+ value beween 0 and 180 degrees.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+THETA is the 
+\begin_inset Quotes eld
+\end_inset
+
+declination
+\begin_inset Quotes erd
+\end_inset
+
+, i.e.
+ the angle with the (xy) plane, with value between -90 and +90 degrees.
+ Note that a positive value of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ corresponds to a direction that points downwards.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+PSI is the 'roll', i.e.
+ the rotation around the (PHI, THETA) direction, with value in degrees
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/geom3d/ellipsoid-angles.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Definition of 3D Euler angles.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Euler Angles and basis transforms
+\end_layout
+
+\begin_layout Standard
+Other functions for less common creation patterns.
+\end_layout
+
+\begin_layout Minisec
+createBasisTransform3d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+createBasisTransform3d
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Computes matrix for transforming a basis into another basis.
+\end_layout
+
+\begin_layout Minisec
+eulerAnglesToRotation3d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+eulerAnglesToRotation3d
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Converts 3D Euler angles to 3D rotation matrix.
+\end_layout
+
+\begin_layout Minisec
+rotation3dToEulerAngles
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+rotation3dToEulerAngles
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Extracts Euler angles from a rotation matrix.
+\end_layout
+
+\begin_layout Minisec
+createRotation3dLineAngle
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+createRotation3dLineAngle
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Creates rotation around a line by an angle theta.
+\end_layout
+
+\begin_layout Minisec
+rotation3dAxisAndAngle
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+rotation3dAxisAndAngle
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Determines axis and angle of a 3D rotation matrix.
+\end_layout
+
+\begin_layout Minisec
+createRotationVector3d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+createRotationVector3d
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Calculates the rotation between two vectors.
+\end_layout
+
+\begin_layout Minisec
+createRotationVectorPoint3d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+createRotationVectorPoint3d
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Calculates the rotation between two vectors.
+\end_layout
+
+\begin_layout Subsection
+Utility functions
+\end_layout
+
+\begin_layout Standard
+Some functions aim at combining or processing transform matrices.
+\end_layout
+
+\begin_layout Minisec
+recenterTransform3d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+recenterTransform3d
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Changes the fixed point of an affine 3D transform.
+\end_layout
+
+\begin_layout Minisec
+composeTransforms3d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+composeTransforms3d
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Concatenates several space transformations.
 \end_layout
 
 \begin_layout Section
