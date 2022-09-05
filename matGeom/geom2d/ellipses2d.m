@@ -6,9 +6,10 @@ function ellipses2d(varargin)
 %   E = [XC YC A B THETA];
 %
 %   See also:
-%   circles2d, equivalentEllipse, isPointInEllipse, ellipsePerimeter
-%   ellipseToPolygon, drawEllipse, drawEllipseArc
-%   projPointOnEllipse, distancePointEllipse
+%   circles2d, equivalentEllipse, createEllipse, fitEllipse
+%   isPointInEllipse, ellipsePerimeter, ellipseCartesianCoefficients
+%   ellipseToPolygon, projPointOnEllipse, distancePointEllipse, 
+%   drawEllipse, drawEllipseArc
 %
 
 % ------
