@@ -11,10 +11,6 @@ function elli = fitEllipse(varargin)
 %     ellFit = fitEllipse(pts);
 %     drawEllipse(ellFit, 'b')
 %     
-%
-%   See also
-%     geom2d, ellipses2d, equivalentEllipse
-%
 %   This is a rewrite of an original function from the authors cited below.
 %   Changes from original submission include:
 %   * convert angle of result ellipse to degrees (to comply with MatGeom
@@ -37,6 +33,10 @@ function elli = fitEllipse(varargin)
 %   month = may,
 %   pages = "476--480"
 %  }
+%
+%   See also
+%     geom2d, ellipses2d, createEllipse, equivalentEllipse
+%
  
 % ------
 % Author: David Legland

@@ -1,5 +1,5 @@
 function varargout = drawEllipse(varargin)
-%DRAWELLIPSE Draw an ellipse on the current axis.
+% Draw an ellipse on the current axis.
 %
 %   drawEllipse(ELLI);
 %   Draws the ellipse ELLI in the form [XC YC RA RB THETA], with center
@@ -27,15 +27,17 @@ function varargout = drawEllipse(varargin)
 %     axis equal; axis([0 100 10 90])
 %
 %   % add another ellipse with different orientation and style
-%     drawEllipse([50 50 40 20 -10], 'linewidth', 2, 'color', 'g');
+%     drawEllipse([50 50 40 20 -10], 'LineWidth', 2, 'Color', 'g');
+%
 %
 %   See also:
 %     ellipses2d, drawCircle, drawEllipseArc, ellipseToPolygon
+%     fitEllipse, transformEllipse
 %
 
 %   ---------
 %   author : David Legland 
-%   e-mail: david.legland@inra.fr
+%   e-mail: david.legland@inrae.fr
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 11/12/2003.
 %
