@@ -16,12 +16,12 @@ function varargout = readMesh_off(fileName)
 %     view([5 80]); light; lighting gouraud
 %
 %   See also
-%     meshes3d, readMesh, writeMesh_off, drawMesh
+%     meshes3d, readMesh, writeMesh_off, readMesh_obj, drawMesh
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2011-12-20,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
@@ -32,7 +32,7 @@ function varargout = readMesh_off(fileName)
 f = fopen(fileName, 'r');
 if f == -1 
     error('matGeom:readMesh_off:FileNotFound', ...
-        ['Could not find file: ' fileName]);
+        ['Could not open input file: ' fileName]);
 end
 
 % check format
@@ -77,7 +77,7 @@ face1 = str2double(tokens(2:end))' + 1;
 nv = length(face1);
 
 try 
-    % attenpt to read the remaining faces assuming they all have the same
+    % attempt to read the remaining faces assuming they all have the same
     % number of vertices
     pattern = ['%d' repmat(' %d', 1, nv) '\n'];
     [faces, count] = fscanf(f, pattern, [(nv+1) (nFaces-1)]);
