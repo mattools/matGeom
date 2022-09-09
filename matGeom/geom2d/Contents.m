@@ -92,7 +92,7 @@
 % Relations between points and lines
 %   distancePointEdge        - Minimum distance between a point and an edge.
 %   distancePointLine        - Minimum distance between a point and a line.
-%   projPointOnLine          - Project of a point orthogonally onto a line.
+%   projPointOnLine          - Project a point orthogonally onto a line.
 %   pointOnLine              - Create a point on a line at a given position on the line.
 %   isPointOnLine            - Test if a point belongs to a line.
 %   isPointOnEdge            - Test if a point belongs to an edge.
@@ -118,11 +118,17 @@
 % Ellipses and Parabola
 %   ellipses2d               - Description of functions operating on ellipses.
 %   equivalentEllipse        - Equivalent ellipse of a set of points.
+%   fitEllipse               - Fit an ellipse to a set of 2D points.
+%   transformEllipse         - Apply an affine transformation to an ellipse.
+%   createEllipse            - Create an ellipse, from various input types.
 %   distancePointEllipse     - Distance from a point to an ellipse.
-%   projPointOnEllipse       - Project of a point orthogonally onto an ellipse.
+%   projPointOnEllipse       - Project a point orthogonally onto an ellipse.
 %   isPointInEllipse         - Check if a point is located inside a given ellipse.
+%   ellipseArea              - Area of an ellipse.
 %   ellipsePerimeter         - Perimeter of an ellipse.
 %   ellipseToPolygon         - Convert an ellipse into a series of points.
+%   ellipsePoint             - Coordinates of a point on an ellipse from parametric equation.
+%   ellipseCartesianCoefficients - Cartesian coefficients of an ellipse.
 %   drawEllipse              - Draw an ellipse on the current axis.
 %   drawEllipseArc           - Draw an ellipse arc on the current axis.
 %   drawParabola             - Draw a parabola on the current axis.

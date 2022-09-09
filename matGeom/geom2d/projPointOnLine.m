@@ -1,5 +1,5 @@
 function point = projPointOnLine(point, line)
-%PROJPOINTONLINE Project of a point orthogonally onto a line.
+% Project a point orthogonally onto a line.
 %
 %   PT2 = projPointOnLine(PT, LINE).
 %   Computes the (orthogonal) projection of point PT onto the line LINE.
@@ -17,13 +17,15 @@ function point = projPointOnLine(point, line)
 %          2   3
 %
 %   See also:
-%   lines2d, points2d, isPointOnLine, linePosition
+%     lines2d, points2d, isPointOnLine, linePosition, projPointOnEllipse
 %
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 07/04/2005.
-%
+
+% ------
+% Author: David Legland
+% e-mail: david.legland@inrae.fr
+% INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Created: 2005-07-04
+% Copyright 2022 INRAE.
 
 %   HISTORY
 %   2005-08-06 correct bug when several points were passed as param.

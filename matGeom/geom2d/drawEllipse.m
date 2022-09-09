@@ -32,7 +32,7 @@ function varargout = drawEllipse(varargin)
 %
 %   See also:
 %     ellipses2d, drawCircle, drawEllipseArc, ellipseToPolygon
-%     fitEllipse, transformEllipse
+%     fitEllipse, ellipsePoint, transformEllipse
 %
 
 %   ---------

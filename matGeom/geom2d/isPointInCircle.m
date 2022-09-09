@@ -1,5 +1,5 @@
 function b = isPointInCircle(point, circle, varargin)
-%ISPOINTINCIRCLE Test if a point is located inside a given circle.
+% Test if a point is located inside a given circle.
 %
 %   B = isPointInCircle(POINT, CIRCLE) 
 %   Returns true if point is located inside the circle, i.e. if distance to
@@ -16,8 +16,9 @@ function b = isPointInCircle(point, circle, varargin)
 %   return false
 %
 %   See also:
-%   circles2d, isPointOnCircle
+%     circles2d, isPointOnCircle, isPointInEllipse, isPointOnline
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE

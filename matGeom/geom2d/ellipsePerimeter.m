@@ -1,5 +1,5 @@
 function perim = ellipsePerimeter(ellipse, varargin)
-%ELLIPSEPERIMETER Perimeter of an ellipse.
+% Perimeter of an ellipse.
 %
 %   P = ellipsePerimeter(ELLI)
 %   Computes the perimeter of an ellipse, using numerical integration.
@@ -19,13 +19,13 @@ function perim = ellipsePerimeter(ellipse, varargin)
 %       133.6489 
 %
 %   See also
-%     ellipses2d, drawEllipse
+%     ellipses2d, ellipseArea, ellipseToPolygon, drawEllipse
 %
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2012-02-20,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 

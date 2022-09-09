@@ -1,5 +1,5 @@
 function circles2d(varargin)
-%CIRCLES2D Description of functions operating on circles.
+% Description of functions operating on circles.
 %
 %   Circles are represented by their center and their radius:
 %   C = [xc yc r];
@@ -22,9 +22,10 @@ function circles2d(varargin)
 %   circleToPolygon, circleArcToPolyline
 %   drawCircle, drawCircleArc
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2010 INRA - Cepia Software Platform.
 
