@@ -2683,6 +2683,10 @@ Construction of a circle from 3 points (blue curve), discretization into
 
 \end_layout
 
+\begin_layout Subsubsection*
+Functions
+\end_layout
+
 \begin_layout Minisec
 circles2d 
 \end_layout
@@ -2933,6 +2937,24 @@ Ellipses and Parabola
 Ellipses are represented by a 1-by-5 array [xc yc a b theta], where xc and
  yc denote the ellipse center, a and b denote the lengths of the semi axes,
  and theta denotes the orientation of the first principal axis.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+ELLI = [XC YC  A B  THETA];
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Note
 status open
 
@@ -2946,177 +2968,7 @@ TODO: figure
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename images/equivalentEllipse_demo.png
-	width 50text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Computation of equivalent ellipses to represent variance of groups within
- Fisher iris dataset.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Minisec
-ellipses2d 
-\end_layout
-
-\begin_layout Standard
-Description of functions operating on ellipses.
-\end_layout
-
-\begin_layout Minisec
-equivalentEllipse
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-equivalentEllipse
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Computes the equivalent ellipse with same moments up to the second order
- as a set of points.
-\end_layout
-
-\begin_layout Minisec
-isPointInEllipse
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-isPointInEllipse
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Checks if a point is located inside a given ellipse.
-\end_layout
-
-\begin_layout Minisec
-ellipsePerimeter
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-ellipsePerimeter
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Computes the perimeter of an ellipse.
-\end_layout
-
-\begin_layout Minisec
-ellipseToPolygon
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-ellipseToPolygon
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Converts an ellipse into a series of points.
-\end_layout
-
-\begin_layout Minisec
-drawEllipse
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawEllipse
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Draws an ellipse on the current axis.
-\end_layout
-
-\begin_layout Minisec
-drawEllipseArc
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawEllipseArc
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Draws an ellipse arc on the current axis.
-\end_layout
-
-\begin_layout Minisec
-drawParabola
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawParabola
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Draws a parabola on the current axis.
-\end_layout
-
-\begin_layout Standard
-A small example for ellipses is given in following script.
+A small example for working with ellipses is given in following script.
 \end_layout
 
 \begin_layout Standard
@@ -3179,6 +3031,314 @@ legend(hi, species([1 51 101]), 'Location', 'NorthWest');
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/equivalentEllipse_demo.png
+	width 50text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Computation of equivalent ellipses to represent variance of groups within
+ Fisher iris dataset.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Functions
+\end_layout
+
+\begin_layout Minisec
+ellipses2d 
+\end_layout
+
+\begin_layout Standard
+Description of functions operating on ellipses.
+\end_layout
+
+\begin_layout Minisec
+createEllipse
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+createEllipse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Create an ellipse, from various input types.
+\end_layout
+
+\begin_layout Minisec
+fitEllipse
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+fitEllipse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Fits an ellipse to a set of 2D points, using least-square method based on
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Fitzgibbon_1999_PAMI"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Minisec
+equivalentEllipse
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+equivalentEllipse
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Computes the equivalent ellipse with same moments up to the second order
+ as a set of points.
+\end_layout
+
+\begin_layout Minisec
+isPointInEllipse
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+isPointInEllipse
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Checks if a point is located inside a given ellipse.
+\end_layout
+
+\begin_layout Minisec
+ellipsePerimeter
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+ellipsePerimeter
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Computes the perimeter of an ellipse.
+\end_layout
+
+\begin_layout Minisec
+distancePointEllipse
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+distancePointEllipse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes the Euclidean distance between a point (or a point set) and an
+ ellipse.
+\end_layout
+
+\begin_layout Minisec
+ellipseToPolygon
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+ellipseToPolygon
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Converts an ellipse into a series of points.
+\end_layout
+
+\begin_layout Minisec
+projPointOnEllipse
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+projPointOnEllipse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes the (orthogonal) projection of a point (or a point set) onto an
+ ellipse.
+\end_layout
+
+\begin_layout Minisec
+ellipseCartesianCoefficients
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+ellipseCartesianCoefficients
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes the coefficients of the cartesian equation of an ellipse.
+ Can be used for computing result of affine transform applied on an ellipse.
+\end_layout
+
+\begin_layout Minisec
+\begin_inset CommandInset label
+LatexCommand label
+name "fun:transformEllipse"
+
+\end_inset
+
+transformEllipse
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+transformEllipse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes the result of an affine transform applied on an ellipse.
+\end_layout
+
+\begin_layout Minisec
+drawEllipse
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+drawEllipse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Draws an ellipse on the current axis.
+\end_layout
+
+\begin_layout Minisec
+drawEllipseArc
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+drawEllipseArc
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Draws an ellipse arc on the current axis.
+\end_layout
+
+\begin_layout Subsection
+Other conics
+\end_layout
+
+\begin_layout Standard
+Apart circles and ellipses, only parabola can be drawn with MatGeom.
+\end_layout
+
+\begin_layout Minisec
+drawParabola
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+drawParabola
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Draws a parabola on the current axis.
 \end_layout
 
 \begin_layout Standard
