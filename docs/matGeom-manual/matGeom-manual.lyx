@@ -3181,6 +3181,30 @@ Computes the perimeter of an ellipse.
 \end_layout
 
 \begin_layout Minisec
+ellipseArea
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+ellipseArea
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Computes the area of an ellipse, as the product of the semi-axis lengths
+ multiplied by 
+\begin_inset Formula $\pi$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Minisec
 distancePointEllipse
 \begin_inset Index idx
 status collapsed
@@ -3215,6 +3239,24 @@ ellipseToPolygon
 
 \begin_layout Standard
 Converts an ellipse into a series of points.
+\end_layout
+
+\begin_layout Minisec
+ellipsePoint
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+ellipsePoint
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Computes coordinates of a point from its parametric position.
 \end_layout
 
 \begin_layout Minisec
