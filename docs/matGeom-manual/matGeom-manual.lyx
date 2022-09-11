@@ -2564,12 +2564,11 @@ Difference between two angles.
 \end_layout
 
 \begin_layout Section
-Smooth curves
+Circles and ellipses
 \end_layout
 
 \begin_layout Standard
-Smooth curves comprises simple curves such as circles, ellipses, or other
- conics, as well as more generic curves such as Bezier curves.
+Circles and ellipses are the simplest examples of smooth curves.
 \end_layout
 
 \begin_layout Subsection
@@ -2929,8 +2928,15 @@ drawCircleArc
 Draws a circle arc on the current axis.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
-Ellipses and Parabola
+Ellipses
 \end_layout
 
 \begin_layout Standard
@@ -2965,6 +2971,584 @@ TODO: figure
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection*
+Creation functions
+\end_layout
+
+\begin_layout Minisec
+ellipses2d 
+\end_layout
+
+\begin_layout Standard
+Description of functions operating on ellipses.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/geom2d/fitEllipseToPoints.png
+	width 6cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fit ellipse to points.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/geom2d/pointSetEquivalentEllipse.png
+	width 6cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Equivalent inertia ellipse.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Creation-of-Ellipses"
+
+\end_inset
+
+Creation of ellipses.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Minisec
+createEllipse
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+createEllipse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Create an ellipse, from various input types.
+\end_layout
+
+\begin_layout Minisec
+fitEllipse
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+fitEllipse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Fits an ellipse to a set of 2D points, using least-square method based on
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Fitzgibbon_1999_PAMI"
+literal "false"
+
+\end_inset
+
+ (Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Creation-of-Ellipses"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+-A).
+\end_layout
+
+\begin_layout Minisec
+equivalentEllipse
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+equivalentEllipse
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Computes the equivalent ellipse with same moments up to the second order
+ as a set of points (Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Creation-of-Ellipses"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+-B).
+\end_layout
+
+\begin_layout Subsubsection*
+Computation functions
+\end_layout
+
+\begin_layout Minisec
+isPointInEllipse
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+isPointInEllipse
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Checks if a point is located inside a given ellipse.
+\end_layout
+
+\begin_layout Minisec
+distancePointEllipse
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+distancePointEllipse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes the Euclidean distance between a point (or a point set) and an
+ ellipse (see Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ProjPoint-On-Ellipse"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Minisec
+projPointOnEllipse
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+projPointOnEllipse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes the (orthogonal) projection of a point (or a point set) onto an
+ ellipse (see Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ProjPoint-On-Ellipse"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+elli = [50 50  40 20  30];                         % reference ellipse
+\end_layout
+
+\begin_layout Plain Layout
+
+figure; hold on; axis equal; axis([0 100 0 100]);  % create display
+\end_layout
+
+\begin_layout Plain Layout
+
+drawEllipse(elli, 'LineWidth', 2, 'Color', 'k');
+\end_layout
+
+\begin_layout Plain Layout
+
+pts = [90 50 ; 50 90 ; 10 70];
+\end_layout
+
+\begin_layout Plain Layout
+
+drawPoint(pts, 'bo');                              % draw points
+\end_layout
+
+\begin_layout Plain Layout
+
+proj = projPointOnEllipse(pts, elli);              % compute projections
+\end_layout
+
+\begin_layout Plain Layout
+
+drawPoint(proj, 'ko');
+\end_layout
+
+\begin_layout Plain Layout
+
+drawEdge([pts proj], 'b');                         % draw connection between
+ points
+\end_layout
+
+\begin_layout Plain Layout
+
+dist = distancePointEllipse(pts, elli);            % compute distances to
+ ellipse
+\end_layout
+
+\begin_layout Plain Layout
+
+mid = midPoint(pts, proj);	        		     % display distances as labels
+\end_layout
+
+\begin_layout Plain Layout
+
+drawLabels(mid + [1 2], dist);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/geom2d/projPointOnEllipse.png
+	width 6cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ProjPoint-On-Ellipse"
+
+\end_inset
+
+Creation of ellipses.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Minisec
+ellipseToPolygon
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+ellipseToPolygon
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Converts an ellipse into a series of points.
+\end_layout
+
+\begin_layout Minisec
+ellipsePoint
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+ellipsePoint
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Computes the coordinates of a point on an ellipse from its parametric position.
+\end_layout
+
+\begin_layout Minisec
+\begin_inset CommandInset label
+LatexCommand label
+name "fun:transformEllipse"
+
+\end_inset
+
+transformEllipse
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+transformEllipse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes the result of an affine transform applied on an ellipse.
+\end_layout
+
+\begin_layout Subsubsection*
+Description functions
+\end_layout
+
+\begin_layout Minisec
+ellipsePerimeter
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+ellipsePerimeter
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Computes the perimeter of an ellipse.
+\end_layout
+
+\begin_layout Minisec
+ellipseArea
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+ellipseArea
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Computes the area of an ellipse, as the product of the semi-axis lengths
+ multiplied by 
+\begin_inset Formula $\pi$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Minisec
+ellipseCartesianCoefficients
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+ellipseCartesianCoefficients
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes the coefficients of the cartesian equation of an ellipse.
+ Can be used for computing result of affine transform applied on an ellipse.
+\end_layout
+
+\begin_layout Subsubsection*
+Drawing functions
+\end_layout
+
+\begin_layout Minisec
+drawEllipse
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+drawEllipse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Draws an ellipse on the current axis.
+\end_layout
+
+\begin_layout Minisec
+drawEllipseAxes
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+drawEllipseAxes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Draws the main axes of an ellipse as line segments.
+\end_layout
+
+\begin_layout Minisec
+drawEllipseArc
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+drawEllipseArc
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Draws an ellipse arc on the current axis.
+\end_layout
+
+\begin_layout Subsubsection*
+Application for statistical display
 \end_layout
 
 \begin_layout Standard
@@ -3068,297 +3652,19 @@ Computation of equivalent ellipses to represent variance of groups within
 
 \end_layout
 
-\begin_layout Subsubsection*
-Functions
-\end_layout
-
-\begin_layout Minisec
-ellipses2d 
-\end_layout
-
 \begin_layout Standard
-Description of functions operating on ellipses.
-\end_layout
-
-\begin_layout Minisec
-createEllipse
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-createEllipse
-\end_layout
-
+\begin_inset Newpage newpage
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
-Create an ellipse, from various input types.
-\end_layout
-
-\begin_layout Minisec
-fitEllipse
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-fitEllipse
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Fits an ellipse to a set of 2D points, using least-square method based on
- 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Fitzgibbon_1999_PAMI"
-literal "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Minisec
-equivalentEllipse
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-equivalentEllipse
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Computes the equivalent ellipse with same moments up to the second order
- as a set of points.
-\end_layout
-
-\begin_layout Minisec
-isPointInEllipse
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-isPointInEllipse
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Checks if a point is located inside a given ellipse.
-\end_layout
-
-\begin_layout Minisec
-ellipsePerimeter
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-ellipsePerimeter
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Computes the perimeter of an ellipse.
-\end_layout
-
-\begin_layout Minisec
-ellipseArea
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-ellipseArea
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Computes the area of an ellipse, as the product of the semi-axis lengths
- multiplied by 
-\begin_inset Formula $\pi$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Minisec
-distancePointEllipse
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-distancePointEllipse
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Computes the Euclidean distance between a point (or a point set) and an
- ellipse.
-\end_layout
-
-\begin_layout Minisec
-ellipseToPolygon
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-ellipseToPolygon
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Converts an ellipse into a series of points.
-\end_layout
-
-\begin_layout Minisec
-ellipsePoint
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-ellipsePoint
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Computes coordinates of a point from its parametric position.
-\end_layout
-
-\begin_layout Minisec
-projPointOnEllipse
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-projPointOnEllipse
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Computes the (orthogonal) projection of a point (or a point set) onto an
- ellipse.
-\end_layout
-
-\begin_layout Minisec
-ellipseCartesianCoefficients
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-ellipseCartesianCoefficients
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Computes the coefficients of the cartesian equation of an ellipse.
- Can be used for computing result of affine transform applied on an ellipse.
-\end_layout
-
-\begin_layout Minisec
-\begin_inset CommandInset label
-LatexCommand label
-name "fun:transformEllipse"
-
-\end_inset
-
-transformEllipse
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-transformEllipse
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Computes the result of an affine transform applied on an ellipse.
-\end_layout
-
-\begin_layout Minisec
-drawEllipse
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawEllipse
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Draws an ellipse on the current axis.
-\end_layout
-
-\begin_layout Minisec
-drawEllipseArc
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-drawEllipseArc
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Draws an ellipse arc on the current axis.
+\begin_layout Section
+Other Curves 
 \end_layout
 
 \begin_layout Subsection
-Other conics
+Parabola
 \end_layout
 
 \begin_layout Standard
@@ -3381,13 +3687,6 @@ drawParabola
 
 \begin_layout Standard
 Draws a parabola on the current axis.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
