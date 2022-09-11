@@ -34,8 +34,10 @@ nPoints = 100;
 ti = rand(nPoints, 1) * 2 * pi;
 pts = ellipsePoint(elli0, ti) + randn(nPoints, 2) * 2;
 
+% fit the ellipse to the set of points
 elli = fitEllipse(pts);
 
+% display points and fit result
 figure; hold on; axis square; axis([0 100 0 100]);
 drawPoint(pts, 'linewidth', 1, 'color', 'b');
 drawEllipse(elli, 'lineWidth', 2, 'color', 'm');
@@ -43,7 +45,8 @@ drawEllipse(elli, 'lineWidth', 2, 'color', 'm');
 
 %% Equivalent ellipse from a set of points
 
-% generate points within the ellipse
+% generate random points within the ellipse, 
+% with a density equal to 1 (1 point per unit square on average)
 nPoints = round(ellipseArea(elli));
 pts0 = zeros(nPoints, 2);
 for iPoint = 1:nPoints
@@ -56,17 +59,11 @@ for iPoint = 1:nPoints
     end
 end
 
-% % compute transform according to ellipse parameterisation
-% tra = createTranslation(center);
-% rot = createRotation(deg2rad(theta));
-% sca = createScaling(radii);
-% transfo = tra * rot * sca;
-% 
-% % transform points
-% pts = transformPoint(pts0, transfo);
-
+% computes equivalent ellipse
 elli = equivalentEllipse(pts);
 
+% display result
 figure; hold on; axis square; axis([0 100 0 100]);
 drawPoint(pts, 'b.');
 drawEllipse(elli, 'lineWidth', 2, 'color', 'm');
+drawEllipseAxes(elli, 'lineWidth', 2, 'color', 'm');
