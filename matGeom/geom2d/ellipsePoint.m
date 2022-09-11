@@ -6,9 +6,14 @@ function point = ellipsePoint(elli, pos)
 %   ellipse. POS is contained within [0, 2*PI].
 %
 %   Example
-%     ellipsePoint
+%     elli = [50 50  40 20  30];
+%     pts = ellipsePoint(elli, linspace(0, pi, 12));
+%     figure; drawEllipse(elli, 'b'); hold on;
+%     axis equal; axis([0 100 0 100]);
+%     drawPoint(pts, 'bo');
 %
 %   See also
+%     ellipses2d, drawEllipse, projPointOnEllipse, ellipseToPolygon
 %
  
 % ------

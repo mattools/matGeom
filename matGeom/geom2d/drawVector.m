@@ -1,10 +1,15 @@
 function varargout = drawVector(pos, vect, varargin)
-%DRAWVECTOR Draw vector at a given position.
+% Draw vector at a given position.
 %
 %   drawVector(POS, VECT)
+%   Draws the 2D or 3D vector VECT at the position POS.
 %   POS should be a N-by-2 or N-by-3 array containing position of vector
 %   origins, and VECT should be a N-by-2 or N-by-3 array containing the
 %   direction of the vectors.
+%
+%   drawVector(POS, VECT, OPTS)
+%   Specifies additional drawing options that will be provided to the
+%   'quiver' or 'quiver3' function.
 %
 %   Example
 %     figure; hold on;
@@ -15,9 +20,10 @@ function varargout = drawVector(pos, vect, varargin)
 %   See also
 %     quiver, drawVector3d
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2013-03-18,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2013 INRA - Cepia Software Platform.
 

@@ -1,5 +1,5 @@
 function varargout = ellipseToPolygon(ellipse, N)
-%ELLIPSETOPOLYGON Convert an ellipse into a series of points.
+% Convert an ellipse into a series of points.
 %
 %   P = ellipseToPolygon(ELL, N);
 %   converts ELL given as [x0 y0 a b] or [x0 y0 a b theta] into a polygon
@@ -21,7 +21,7 @@ function varargout = ellipseToPolygon(ellipse, N)
 %     drawPoint(poly, 'bo');
 %
 %   See also:
-%   ellipses2d, drawEllipse, circleToPolygon, rectToPolygon
+%   ellipses2d, drawEllipse, circleToPolygon, rectToPolygon, ellipsePoint
 %
 
 %   ---------

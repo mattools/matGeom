@@ -130,6 +130,7 @@
 %   ellipsePoint             - Coordinates of a point on an ellipse from parametric equation.
 %   ellipseCartesianCoefficients - Cartesian coefficients of an ellipse.
 %   drawEllipse              - Draw an ellipse on the current axis.
+%   drawEllipseAxes          - Draw the main axes of an ellipse as line segments.
 %   drawEllipseArc           - Draw an ellipse arc on the current axis.
 %   drawParabola             - Draw a parabola on the current axis.
 %
