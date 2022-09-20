@@ -37,7 +37,7 @@ function h = drawPlane3d(plane, varargin)
 % e-mail: david.legland@inrae.fr
 % INRA - TPV URPOI - BIA IMASTE
 % created the 17/02/2005.
-%
+
 %   HISTORY
 %   2008-10-30 replace intersectPlaneLine by intersectLinePlane, add doc
 %   2010-10-04 fix a bug for planes touching box by one corner

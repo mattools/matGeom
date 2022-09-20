@@ -1,5 +1,5 @@
-function varargout = drawEllipseCylinder(cyl, varargin)
-%DRAWELLIPSECYLINDER Draw a cylinder with ellipse cross-section.
+function varargout = drawEllipseCylinder(varargin)
+% Draw a cylinder with ellipse cross-section.
 %
 %   drawEllipseCylinder(CYL)
 %   draws the cylinder CYL on the current axis.
@@ -52,7 +52,7 @@ function varargout = drawEllipseCylinder(cyl, varargin)
 %     view([60 30]); light;
 %
 %   See Also:
-%   drawCylinder, drawSphere, cylinderMesh, drawLine3d, surf
+%     drawCylinder, drawSphere, cylinderMesh, drawLine3d, surf
 
 %   ---------
 %   author : David Legland 
@@ -65,10 +65,21 @@ function varargout = drawEllipseCylinder(cyl, varargin)
 
 %% Input argument processing
 
+% Check if axes handle is specified
+if isAxisHandle(varargin{1})
+    hAx = varargin{1};
+    varargin(1) = [];
+else
+    hAx = gca;
+end
+
+cyl = varargin{1};
+varargin(1) = [];
+
 if iscell(cyl)
     res = zeros(length(cyl), 1);
     for i = 1:length(cyl)
-        res(i) = drawEllipseCylinder(cyl{i}, varargin{:});
+        res(i) = drawEllipseCylinder(hAx, cyl{i}, varargin{:});
     end
     
     if nargout > 0
@@ -144,7 +155,7 @@ z2 = reshape(pts(:,3), size(x));
 varargin = [{'FaceColor', 'g', 'edgeColor', 'none'} varargin];
 
 % plot the cylinder as a surface
-hSurf = surf(x2, y2, z2, varargin{:});
+hSurf = surf(hAx, x2, y2, z2, varargin{:});
 
 % eventually plot the ends of the cylinder
 if closed
@@ -155,8 +166,8 @@ if closed
         color = varargin{ind+1};
     end
 
-    patch(x2(1,:)', y2(1,:)', z2(1,:)', color, 'edgeColor', 'none');
-    patch(x2(2,:)', y2(2,:)', z2(2,:)', color, 'edgeColor', 'none');
+    patch(hAx, x2(1,:)', y2(1,:)', z2(1,:)', color, 'edgeColor', 'none');
+    patch(hAx, x2(2,:)', y2(2,:)', z2(2,:)', color, 'edgeColor', 'none');
 end
 
 % format ouptut

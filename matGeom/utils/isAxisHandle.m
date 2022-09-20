@@ -1,5 +1,5 @@
 function b = isAxisHandle(arg)
-%ISAXISHANDLE Check if the input corresponds to a valid axis handle.
+% Check if the input corresponds to a valid axis handle.
 %
 %   B = isAxisHandle(VAR)
 %   If the value of VAR is scalar, corresponds to a valid matlab handle,
@@ -14,11 +14,12 @@ function b = isAxisHandle(arg)
 %         1
 %
 %   See also
-%   drawPoint, drawLine, drawEdge
+%     drawPoint, drawLine, drawEdge
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2012-09-21,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 

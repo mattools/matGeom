@@ -1,5 +1,5 @@
-function varargout = drawSphericalEdge(sphere, edge, varargin)
-%DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.
+function varargout = drawSphericalEdge(varargin)
+% Draw an edge on the surface of a sphere.
 %
 %   drawSphericalEdge(SPHERE, EDGE)
 %   EDGE is given as a couple of 3D coordinates corresponding to edge
@@ -7,17 +7,31 @@ function varargout = drawSphericalEdge(sphere, edge, varargin)
 %   drawn on the current axes.
 %
 %   Example
-%   drawSphericalEdge
+%     figure; hold on; axis equal; drawSphere([0 0 0 1]); view(3);
+%     p1 = [0 -1 0];  p2 = [0 0 1];
+%     drawSphericalEdge([0 0 0 1], [p1 p2], 'LineWidth', 2)
 %
 %   See also
-%   drawSphericalPolygon
+%     drawSphericalPolygon, drawSphere, drawCircleArc3d
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2012-02-09,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
+% Check if axes handle is specified
+if isAxisHandle(varargin{1})
+    hAx = varargin{1};
+    varargin(1) = [];
+else
+    hAx = gca;
+end
+
+sphere = varargin{1};
+edge = varargin{2};
+varargin(1:2) = [];
 
 % extract data of the sphere
 origin = sphere(:, 1:3);
@@ -50,7 +64,7 @@ angleExtent = mod(angle2 - angle1 + 360, 360);
 arc = [circle angle1 angleExtent];
 
 % draw the arc
-h = drawCircleArc3d(arc, varargin{:});
+h = drawCircleArc3d(hAx, arc, varargin{:});
 
 if nargout > 0
     varargout = {h};

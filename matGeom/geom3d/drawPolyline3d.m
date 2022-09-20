@@ -43,6 +43,7 @@ function varargout = drawPolyline3d(varargin)
 
 %% Process input arguments
 
+% Check if axes handle is specified
 if isAxisHandle(varargin{1})
     hAx = varargin{1};
     varargin(1) = [];

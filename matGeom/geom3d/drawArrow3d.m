@@ -1,5 +1,5 @@
 function varargout = drawArrow3d(pos, vec, varargin)
-%DRAWARROW3D plot a quiver of 3D arrows.
+% Plot a quiver of 3D arrows.
 %
 %   drawArrow3d(pos, vec) 
 %   Plots 3D arrows given the (pos)ition array [x1 y1 z1; x2 y2 z2; ...] 

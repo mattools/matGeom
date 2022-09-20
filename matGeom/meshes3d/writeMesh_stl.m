@@ -1,5 +1,5 @@
 function writeMesh_stl(fileName, vertices, faces, varargin)
-%WRITEMESH_STL Write mesh data in the STL format.
+% Write mesh data in the STL format.
 %
 %   writeMesh_stl(FNAME, VERTICES, FACES)
 %
@@ -16,7 +16,7 @@ function writeMesh_stl(fileName, vertices, faces, varargin)
 %   Wrapper function for MATLAB's build-in stlwrite.
 %
 %   See also
-%   meshes3d, writeMesh, writeMesh_off, writeMesh_ply
+%     meshes3d, writeMesh, writeMesh_off, writeMesh_ply, readMaesh_stl
 
 % ------
 % Author: oqilipo

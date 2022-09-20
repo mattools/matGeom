@@ -35,15 +35,11 @@ function varargout = drawCube(cube, varargin)
 % Copyright 2011 INRA - Cepia Software Platform.
 
 % Parse and check inputs
-hAx = gca;
-if nargin > 0
-    if isAxisHandle(cube)
-        hAx = cube;
-        if ~isempty(varargin)
-            cube = varargin{1};
-            varargin(1) = [];
-        end
-    end
+if isAxisHandle(varargin{1})
+    hAx = varargin{1};
+    varargin(1) = [];
+else
+    hAx = gca;
 end
 
 % default values

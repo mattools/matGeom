@@ -37,6 +37,15 @@ function varargout = drawCuboid(cuboid, varargin)
 % Created: 2011-06-29,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
+if isAxisHandle(cuboid)
+    hAx = cuboid;
+    cuboid = varargin{1};
+    varargin(1) = [];
+else
+    hAx = gca;
+end
+
+% default orientation
 phi   = 0;
 theta = 0;
 psi   = 0;
@@ -87,11 +96,11 @@ trans   = tra * rotZ * rotY * rotX * sca;
 %% Process output
 if nargout == 0
     % no output: draw the cuboid
-    drawMesh([x y z], f, varargin{:});
+    drawMesh(hAx, [x y z], f, varargin{:});
     
 elseif nargout == 1
     % one output: draw the cuboid and return handle 
-    varargout{1} = drawMesh([x y z], f, varargin{:});
+    varargout{1} = drawMesh(hAx, [x y z], f, varargin{:});
     
 elseif nargout == 3
     % 3 outputs: return computed coordinates

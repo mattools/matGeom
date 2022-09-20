@@ -1,4 +1,4 @@
-function varargout = drawCircleArc3d(arc, varargin)
+function varargout = drawCircleArc3d(varargin)
 % Draw a 3D circle arc.
 %
 %   drawCircleArc3d([XC YC ZC R THETA PHI PSI START EXTENT])
@@ -28,12 +28,15 @@ function varargout = drawCircleArc3d(arc, varargin)
 %   2011-06-21 use angles in degrees
 
 % parse axis handle
-hAx = gca;
-if isAxisHandle(arc)
-    hAx = arc;
-    arc = varargin{1};
+if isAxisHandle(varargin{1})
+    hAx = varargin{1};
     varargin(1) = [];
+else
+    hAx = gca;
 end
+
+arc = varargin{1};
+varargin(1) = [];
 
 if iscell(arc)
     h = [];

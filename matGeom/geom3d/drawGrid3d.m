@@ -1,5 +1,5 @@
 function varargout = drawGrid3d(varargin)
-%DRAWGRID3D Draw a 3D grid on the current axis.
+% Draw a 3D grid on the current axis.
 %
 %   drawGrid3d
 %   draws a 3D square grid, with origin (0,0,0) and spacing 1 in each
@@ -24,14 +24,30 @@ function varargout = drawGrid3d(varargin)
 %   H = drawGrid3d(...);
 %   return a vector of handles for each LINE object which was crated.
 %
+%
+%   Example
+%     figure; hold on; axis equal; axis([-5 65 -5 45 -5 45]); view(3);
+%     drawGrid3d([0 0 0], [20 20 20]);
+%
+%
+%   See Also
+%     drawLine3d, drawEdge3d, clipLine3d, draw
 
 %   ------
 %   Author: David Legland
-%   e-mail: david.legland@grignon.inra.fr
+%   e-mail: david.legland@inrae.fr
 %   Created: 2005-11-17
 %   Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
 %% initialize variables -----
+
+% Check if axes handle is specified
+if isAxisHandle(varargin{1})
+    hAx = varargin{1};
+    varargin(1) = [];
+else
+    hAx = gca;
+end
 
 % default values
 closed = true;
@@ -61,7 +77,7 @@ end
 %% Compute internam data -----
 
 % get axis limits
-ax = axis;
+ax = axis(hAx);
 x0 = ax(1); x1 = ax(2);
 y0 = ax(3); y1 = ax(4);
 z0 = ax(5); z1 = ax(6);
@@ -91,21 +107,21 @@ h = [];
 % draw lines parallel to x axis
 for y = ye:dy:yf
     for z = ze:dz:zf
-        h = [h; drawEdge3d([x0 y z x1 y z])]; %#ok<AGROW>
+        h = [h; drawEdge3d(hAx, [x0 y z x1 y z])]; %#ok<AGROW>
     end
 end
 
 % draw lines parallel to y axis
 for x = xe:dx:xf
     for z = ze:dz:zf
-        h = [h; drawEdge3d([x y0 z x y1 z])]; %#ok<AGROW>
+        h = [h; drawEdge3d(hAx, [x y0 z x y1 z])]; %#ok<AGROW>
     end
 end
 
 % draw lines parallel to z axis
 for x = xe:dx:xf
     for y = ye:dy:yf
-        h = [h; drawEdge3d([x y z0 x y z1])]; %#ok<AGROW>
+        h = [h; drawEdge3d(hAx, [x y z0 x y z1])]; %#ok<AGROW>
     end
 end
 

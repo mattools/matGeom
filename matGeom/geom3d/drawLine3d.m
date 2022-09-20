@@ -1,5 +1,5 @@
-function h = drawLine3d(lin, varargin)
-%DRAWLINE3D Draw a 3D line clipped by the current axes.
+function h = drawLine3d(varargin)
+% Draw a 3D line clipped by the current axes.
 %
 %   drawLine3d(LINE) draws the line LINE on the current axis, by clipping 
 %   with the current axis.
@@ -32,7 +32,6 @@ function h = drawLine3d(lin, varargin)
 % author : David Legland 
 % INRA - TPV URPOI - BIA IMASTE
 % created the 17/02/2005.
-
 
 % Parse and check inputs
 isLine3d = @(x) validateattributes(x,{'numeric'},...

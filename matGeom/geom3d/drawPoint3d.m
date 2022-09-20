@@ -1,5 +1,5 @@
 function h = drawPoint3d(varargin)
-%DRAWPOINT3D Draw 3D point on the current axis.
+% Draw 3D point on the current axis.
 %
 %   drawPoint3d(X, Y, Z) 
 %   will draw points defined by coordinates X, Y and Z. 
@@ -30,7 +30,7 @@ function h = drawPoint3d(varargin)
 % Author : David Legland 
 % INRA - TPV URPOI - BIA IMASTE
 % created the 18/02/2005.
-%
+
 %   HISTORY
 %   04/01/2007: remove unused variables, and enhance support for plot
 %       options

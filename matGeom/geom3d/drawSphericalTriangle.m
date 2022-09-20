@@ -1,4 +1,4 @@
-function varargout = drawSphericalTriangle(sphere, p1, p2, p3, varargin)
+function varargout = drawSphericalTriangle(varargin)
 %DRAWSPHERICALTRIANGLE Draw a triangle on a sphere.
 %
 %   drawSphericalTriangle(SPHERE, PT1, PT2, PT3);
@@ -23,6 +23,7 @@ function varargout = drawSphericalTriangle(sphere, p1, p2, p3, varargin)
 %   drawSphere, fillSphericalTriangle, drawSphericalPolygon,
 %   drawSphericalEdge
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -36,6 +37,21 @@ function varargout = drawSphericalTriangle(sphere, p1, p2, p3, varargin)
 %   2012-10-24 add holding facility, updtate doc
 
 
+
+% Check if axes handle is specified
+if isAxisHandle(varargin{1})
+    hAx = varargin{1};
+    varargin(1) = [];
+else
+    hAx = gca;
+end
+
+sphere = varargin{1};
+p1 = varargin{2};
+p2 = varargin{3};
+p3 = varargin{4};
+varargin(1:4) = [];
+
 % extract data of the sphere
 ori = sphere(:, 1:3);
 
@@ -45,17 +61,17 @@ v2  = normalizeVector3d(p2 - ori);
 v3  = normalizeVector3d(p3 - ori);
 
 % keep hold state of current axis
-h = ishold;
+h = ishold(hAx);
 
 % draw each spherical edge
-hold on;
-h1 = drawSphericalEdge(sphere, [v1 v2], varargin{:});
-h2 = drawSphericalEdge(sphere, [v2 v3], varargin{:});
-h3 = drawSphericalEdge(sphere, [v3 v1], varargin{:});
+hold(hAx, 'on');
+h1 = drawSphericalEdge(hAx, sphere, [v1 v2], varargin{:});
+h2 = drawSphericalEdge(hAx, sphere, [v2 v3], varargin{:});
+h3 = drawSphericalEdge(hAx, sphere, [v3 v1], varargin{:});
 
 % return to previous hold state if needed
 if ~h
-    hold off;    
+    hold(hAx, 'off');
 end
 
 if nargout > 0

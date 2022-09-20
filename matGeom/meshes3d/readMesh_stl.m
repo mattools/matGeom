@@ -1,5 +1,5 @@
 function varargout = readMesh_stl(fileName)
-%READMESH_STL Read mesh data stored in STL format.
+% Read mesh data stored in STL format.
 %
 %   [VERTICES, FACES] = readMesh_stl(FNAME)
 %
@@ -12,7 +12,7 @@ function varargout = readMesh_stl(fileName)
 %   Wrapper function for MATLAB's build-in stlread.
 %
 %   See also
-%   meshes3d, readMesh, readMesh_off, readMesh_ply
+%     meshes3d, readMesh, readMesh_off, readMesh_ply, writeMesh_stl
 
 % ------
 % Author: oqilipo

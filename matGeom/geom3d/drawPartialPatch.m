@@ -1,7 +1,7 @@
 function drawPartialPatch(u, v, z, varargin)
-%DRAWPARTIALPATCH draw surface patch, with 2 parametrized surfaces.
+% Draw surface patch, with 2 parametrized surfaces.
 %
-%   usage :
+%   usage:
 %   drawSurfPatch(u, v, zuv)
 %   where u, v, and zuv are three matrices the same size, u and
 %   corresponding to each parameter, and zuv being equal to a function of u
@@ -12,6 +12,10 @@ function drawPartialPatch(u, v, z, varargin)
 %   the surface
 %
 %
+%   See Also
+%     drawPolyline3d
+%
+
 %   ---------
 %
 %   author : David Legland 

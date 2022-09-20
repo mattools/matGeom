@@ -76,10 +76,11 @@ function varargout = drawCircle3d(varargin)
 %   drawCircle3d(XC, YC, ZC, R, THETA, PHI, PSI)    7
 
 % parse axis handle
-hAx = gca;
 if isAxisHandle(varargin{1})
     hAx = varargin{1};
     varargin(1) = [];
+else
+    hAx = gca;
 end
 
 % extract drawing options

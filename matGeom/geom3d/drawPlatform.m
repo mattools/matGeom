@@ -1,5 +1,5 @@
 function  varargout = drawPlatform(plane, siz, varargin)
-%DRAWPLATFORM Draw a rectangular platform with a given size.
+% Draw a rectangular platform with a given size.
 %
 %   drawPlatform(PLANE, SIZ) draws a rectangular platform with the
 %   dimensions specified by SIZ. If SIZ contains only one value instead of 

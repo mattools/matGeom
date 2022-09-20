@@ -1,5 +1,5 @@
 function varargout = drawEdge3d(varargin)
-%DRAWEDGE3D Draw 3D edge in the current axes.
+% Draw 3D edge in the current axes.
 %
 %   drawEdge3d(EDGE) draws the edge EDGE on the current axis. 
 %   EDGE has the form: [x1 y1 z1 x2 y2 z2]. No clipping is performed.
@@ -20,8 +20,9 @@ function varargout = drawEdge3d(varargin)
 %     drawEdge3d(p1(1), p1(2), p1(3),p3(1), p3(2), p3(3),'Color','r','Marker','x');
 %
 %   See also
-%   drawLine3d, clipLine3d, drawEdge
-%   
+%     drawLine3d, clipLine3d, drawEdge
+%
+
 % ---------
 % author : David Legland 
 % INRA - TPV URPOI - BIA IMASTE

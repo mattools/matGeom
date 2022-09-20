@@ -1,5 +1,5 @@
 function varargout = drawVector3d(pos, vect, varargin)
-%DRAWVECTOR3D Draw vector at a given position.
+% Draw vector at a given position.
 %
 %   drawVector3d(POS, VECT)
 %   Draws the vector VECT starting at the position POS. Both VECT and POS
@@ -17,12 +17,12 @@ function varargout = drawVector3d(pos, vect, varargin)
 %     view(3);
 %
 %   See also
-%   vectors3d, quiver3
+%     vectors3d, quiver3
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2011-12-19,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 

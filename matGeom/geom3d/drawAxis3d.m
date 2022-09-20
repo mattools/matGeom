@@ -1,5 +1,5 @@
 function varargout = drawAxis3d(varargin)
-%DRAWAXIS3D Draw a coordinate system and an origin.
+% Draw a coordinate system and an origin.
 %
 %   drawAxis3d
 %	Adds three 3D arrows to the current axis, corresponding to the 
@@ -24,21 +24,22 @@ function varargout = drawAxis3d(varargin)
 %   xlabel X; ylabel Y; zlabel Z
 %
 %   See also
-%   drawAxisCube
+%     drawAxisCube
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2007-08-14,    using Matlab 7.4.0.287 (R2007a)
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 
+
 % Check if axes handle is specified
-hAx = gca;
-if ~isempty(varargin)
-    if isAxisHandle(varargin{1})
-        hAx = varargin{1};
-        varargin(1)=[];
-    end
+if isAxisHandle(varargin{1})
+    hAx = varargin{1};
+    varargin(1) = [];
+else
+    hAx = gca;
 end
 
 % Parsing

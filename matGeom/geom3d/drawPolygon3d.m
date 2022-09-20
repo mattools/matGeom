@@ -1,5 +1,5 @@
 function varargout = drawPolygon3d(varargin)
-%DRAWPOLYGON3D Draw a 3D polygon specified by a list of vertex coords.
+% Draw a 3D polygon specified by a list of vertex coords.
 %
 %   drawPolygon3d(POLY);
 %   packs coordinates in a single N-by-3 array.
@@ -18,8 +18,10 @@ function varargout = drawPolygon3d(varargin)
 %     t = linspace(0, 2*pi, 100)';
 %     xt = 10 * cos(t);
 %     yt = 5 * sin(t);
-%     zt = zeros(1,100);
-%     figure; drawPolygon3d(xt, yt, zt, 'b');
+%     zt = zeros(100,1);
+%     poly = [xt yt zt];
+%     figure; hold on; axis equal; fillPolygon3d(poly, 'c'); 
+%     drawPolygon3d(poly, 'linewidth', 2, 'color', 'k');
 % 
 %   See Also:
 %   polygons3d, fillPolygon3d, drawPolyline3d
@@ -27,22 +29,22 @@ function varargout = drawPolygon3d(varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2011-08-17 from drawPolyline3d, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
 % HISTORY
-% 2019-02-02 add support for multiple polygons 
+%   2019-02-02 add support for multiple polygons 
 
 
 %% Process input arguments 
 
-% extract handle of axis to draw on
-ax = gca;
-var1 = varargin{1};
-if isAxisHandle (var1)
-    ax          = var1;
+% Check if axes handle is specified
+if isAxisHandle(varargin{1})
+    hAx = varargin{1};
     varargin(1) = [];
+else
+    hAx = gca;
 end
 
 % check case we want to draw several curves, stored in a cell array
@@ -51,7 +53,7 @@ if iscell(var1)
     hold on;
     h = [];
     for i = 1:length(var1(:))
-        h = [h; drawPolygon3d(ax, var1{i}, varargin{2:end})]; %#ok<AGROW>
+        h = [h; drawPolygon3d(hAx, var1{i}, varargin{2:end})]; %#ok<AGROW>
     end
     if nargout > 0
         varargout{1} = h;
@@ -90,7 +92,7 @@ if px(1) ~= px(end) || py(1) ~= py(end) || pz(1) ~= pz(end)
 end
 
 % draw the closed curve
-h = plot3(ax, px, py, pz, varargin{:});
+h = plot3(hAx, px, py, pz, varargin{:});
 
 
 %% Format output

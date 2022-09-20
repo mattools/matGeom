@@ -181,21 +181,5 @@ for iFace = 1:nFaces
     for k = 1:n
         newFace = [topVertexInds(k) botVertexInds(k) botVertexInds(k+1)];
         faces2 = [faces2; newFace]; %#ok<AGROW>
-    end
-    
+    end    
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

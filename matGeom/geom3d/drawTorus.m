@@ -1,5 +1,5 @@
-function varargout = drawTorus(torus, varargin)
-%DRAWTORUS Draw a torus (3D ring).
+function varargout = drawTorus(varargin)
+% Draw a torus (3D ring).
 %
 %   drawTorus(TORUS)
 %   Draws the torus on the current axis. TORUS is given by:
@@ -28,7 +28,7 @@ function varargout = drawTorus(torus, varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2011-06-22,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
@@ -42,6 +42,17 @@ nTheta  = 60;
 
 
 %% Extract input arguments
+
+% Check if axes handle is specified
+if isAxisHandle(varargin{1})
+    hAx = varargin{1};
+    varargin(1) = [];
+else
+    hAx = gca;
+end
+
+torus = varargin{1};
+varargin(1) = [];
 
 center = torus(1:3);
 r1 = torus(4);
@@ -83,7 +94,7 @@ trans = localToGlobal3d([center normal]);
 [x, y, z] = transformPoint3d(x, y, z, trans);
 
 % draw the surface
-hs = surf(x, y, z, options{:});
+hs = surf(hAx, x, y, z, options{:});
 
 
 %% Process output arguments
