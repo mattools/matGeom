@@ -1,5 +1,5 @@
-function varargout = drawShape(type, param, varargin)
-%DRAWSHAPE Draw various types of shapes (circles, polygons...).
+function varargout = drawShape(varargin)
+% Draw various types of shapes (circles, polygons...).
 %
 %   drawShape(TYPE, PARAM)
 %   Draw the shape of type TYPE, specified by given parameter PARAM. TYPE
@@ -7,7 +7,7 @@ function varargout = drawShape(type, param, varargin)
 %   PARAM depend on the type. For example, if TYPE is 'circle', PARAM will
 %   contain [x0 y0 R].
 %
-%   Examples :
+%   Examples:
 %   drawShape('circle', [20 10 30]);
 %   Draw circle centered on [20 10] with radius 10.
 %   drawShape('rect', [20 20 40 10 pi/3]);
@@ -19,14 +19,28 @@ function varargout = drawShape(type, param, varargin)
 %   also specifies drawing options. OPTION can be 'draw' (default) or
 %   'fill'.
 %
+
 %   ---------
-%
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
 %   created the 07/04/2005.
 %
 
 %   HISTORY
+
+% extract handle of axis to draw on
+if isAxisHandle(varargin{1})
+    ax = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
+end
+
+% extract type and representation of shape
+type = varargin{1};
+param = varargin{2};
+varargin(1:2) = [];
+
 
 if ~iscell(type)
     type = {type};
@@ -45,6 +59,10 @@ if ~isempty(varargin)
     var = varargin{1};
     if strcmpi(var, 'fill')
         option = 'fill';
+        varargin(1) = [];
+    elseif strcmpi(var, 'draw')
+        option = 'draw';
+        varargin(1) = [];
     end
 end
 
@@ -67,15 +85,15 @@ hold on;
 h = zeros(length(shape), 1);
 if strcmp(option, 'draw')
     for i = 1:length(shape)
-        h(i) = drawPolygon(shape{i});
+        h(i) = drawPolygon(ax, shape{i}, varargin{:});
     end
 else
     for i = 1:length(shape)
-        h(i) = fillPolygon(shape{i});
+        h(i) = fillPolygon(ax, shape{i}, varargin{:});
     end
 end
 
-% foramt output
+% format output
 if nargout > 0
     varargout = {h};
 end

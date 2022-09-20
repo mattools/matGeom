@@ -1,5 +1,5 @@
 function varargout = drawOrientedBox(box, varargin)
-%DRAWORIENTEDBOX Draw centered oriented rectangle.
+% Draw centered oriented rectangle.
 %   
 %   Syntax
 %   drawOrientedBox(BOX)
@@ -34,11 +34,12 @@ function varargout = drawOrientedBox(box, varargin)
 %     axis equal;
 %
 %   See also
-%   orientedBox, drawPolygon, drawRect, drawBox, drawCenteredEdge
+%     orientedBox, drawPolygon, drawRect, drawBox, drawCenteredEdge
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2011-05-09,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 

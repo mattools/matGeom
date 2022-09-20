@@ -1,5 +1,5 @@
 function varargout = drawCircleArc(varargin)
-%DRAWCIRCLEARC Draw a circle arc on the current axis.
+% Draw a circle arc on the current axis.
 %
 %   drawCircleArc(ARC);
 %   Draws circle arc defined by ARC = [XC YC R START EXTENT], with (XC, YC)
@@ -29,8 +29,9 @@ function varargout = drawCircleArc(varargin)
 %     drawCircleArc(arc, 'LineWidth', 3, 'Color', 'r')
 %
 %   See also:
-%   circles2d, drawCircle, drawEllipse, circleArcToPolyline
+%     circles2d, drawCircle, drawEllipse, circleArcToPolyline
 %
+
 %   --------
 %   author: David Legland 
 %   INRA - TPV URPOI - BIA IMASTE

@@ -1,4 +1,4 @@
-function varargout = drawVector(pos, vect, varargin)
+function varargout = drawVector(varargin)
 % Draw vector at a given position.
 %
 %   drawVector(POS, VECT)
@@ -27,6 +27,19 @@ function varargout = drawVector(pos, vect, varargin)
 % Created: 2013-03-18,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2013 INRA - Cepia Software Platform.
 
+% extract handle of axis to draw on
+if isAxisHandle(varargin{1})
+    ax = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
+end
+
+% retrieve position and direction of vector
+pos = varargin{1};
+vect = varargin{2};
+varargin(1:2) = [];
+
 % check input dimension
 nd = size(pos, 2);
 if size(vect, 2) ~= nd
@@ -35,11 +48,11 @@ end
 
 if nd == 2
     % Display 2D vectors
-    h = quiver(pos(:, 1), pos(:, 2), vect(:, 1), vect(:, 2), 0, varargin{:});
+    h = quiver(ax, pos(:, 1), pos(:, 2), vect(:, 1), vect(:, 2), 0, varargin{:});
     
 elseif nd == 3
     % Display 3D vectors
-    h = quiver3(pos(:, 1), pos(:, 2), pos(:, 3), ...
+    h = quiver3(ax, pos(:, 1), pos(:, 2), pos(:, 3), ...
         vect(:, 1), vect(:, 2), vect(:, 3), 0, varargin{:});
     
 else

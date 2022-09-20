@@ -1,5 +1,5 @@
 function h = drawPoint(varargin)
-%DRAWPOINT Draw the point on the axis.
+% Draw the point on the axis.
 %
 %   drawPoint(X, Y);
 %   Draws points defined by coordinates X and Y.

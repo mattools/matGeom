@@ -1,5 +1,5 @@
-function varargout = drawLine(lin, varargin)
-%DRAWLINE Draw a straight line clipped by the current axis.
+function varargout = drawLine(varargin)
+% Draw a straight line clipped by the current axis.
 %
 %   drawLine(LINE);
 %   Draws the line LINE on the current axis, by using current axis to clip
@@ -20,8 +20,9 @@ function varargout = drawLine(lin, varargin)
 %     drawLine([-30 140 10 20]);
 %
 %   See also:
-%   lines2d, createLine, drawEdge
+%     lines2d, createLine, drawEdge, clipLine
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE
@@ -35,14 +36,17 @@ function varargout = drawLine(lin, varargin)
 %   04/08/2010 rewrite using clipLine
 %   2011-10-11 add management of axes handle
 
-% extract handle of axis to draw in
-if isAxisHandle(lin)
-    ax = lin;
-    lin = varargin{1};
+% extract handle of axis to draw on
+if isAxisHandle(varargin{1})
+    ax = varargin{1};
     varargin(1) = [];
 else
     ax = gca;
 end
+
+% retrieve line
+lin = varargin{1};
+varargin(1) = [];
 
 % default style for drawing lines
 if length(varargin) ~= 1

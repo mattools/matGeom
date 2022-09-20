@@ -1,5 +1,5 @@
 function varargout = drawBox(box, varargin)
-%DRAWBOX Draw a box defined by coordinate extents.
+% Draw a box defined by coordinate extents.
 %   
 %   drawBox(BOX)
 %   Draws a box defined by its extent: BOX = [XMIN XMAX YMIN YMAX].
@@ -21,8 +21,9 @@ function varargout = drawBox(box, varargin)
 %     axis([0 60 0 60]);
 %
 %   See Also:
-%   drawOrientedBox, drawRect
+%     drawOrientedBox, drawRect
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE

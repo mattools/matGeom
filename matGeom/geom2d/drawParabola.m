@@ -1,5 +1,5 @@
 function varargout = drawParabola(varargin)
-%DRAWPARABOLA Draw a parabola on the current axis.
+% Draw a parabola on the current axis.
 %
 %   drawParabola(PARABOLA);
 %   Draws a vertical parabola, defined by its vertex and its parameter.
@@ -59,7 +59,7 @@ function varargout = drawParabola(varargin)
 
 % Extract parabola
 if nargin < 1
-    error('geom2d:drawParabola:IllegalArgument', ...
+    error('MatGeom:geom2d:drawParabola:IllegalArgument', ...
         'Please specify parabola representation');
 end
 

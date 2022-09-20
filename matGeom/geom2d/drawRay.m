@@ -1,5 +1,5 @@
 function varargout = drawRay(ray, varargin)
-%DRAWRAY Draw a ray on the current axis.
+% Draw a ray on the current axis.
 %
 %   drawRay(RAY)
 %   With RAY having the syntax: [x0 y0 dx dy], draws the ray starting from
@@ -13,8 +13,9 @@ function varargout = drawRay(ray, varargin)
 %   Returns handle on line object
 %
 %   See also:
-%   rays2d, drawLine
+%     rays2d, drawLine, clipRay
 %
+
 %   ---------
 %
 %   author : David Legland 

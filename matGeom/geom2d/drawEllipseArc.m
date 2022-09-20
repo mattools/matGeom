@@ -1,5 +1,5 @@
 function varargout = drawEllipseArc(varargin)
-%DRAWELLIPSEARC Draw an ellipse arc on the current axis.
+% Draw an ellipse arc on the current axis.
 %
 %   drawEllipseArc(ARC) 
 %   draw ellipse arc specified by ARC. ARC has the format:
@@ -43,8 +43,9 @@ function varargout = drawEllipseArc(varargin)
 %     drawRay(ray2)
 %
 %   See also:
-%   ellipses2d, drawEllipse, drawCircleArc
+%     ellipses2d, drawEllipse, drawEllipseAxes, drawCircleArc
 %
+
 %   ---------
 %   author : David Legland 
 %   INRA - TPV URPOI - BIA IMASTE

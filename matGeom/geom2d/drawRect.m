@@ -1,5 +1,5 @@
 function varargout = drawRect(rect, varargin)
-%DRAWRECT Draw rectangle on the current axis.
+% Draw rectangle on the current axis.
 %   
 %   drawRect(RECT)
 %   draws the rectangles defined by RECT = [X0 Y0 W H].
@@ -22,7 +22,7 @@ function varargout = drawRect(rect, varargin)
 %   Returns handle of the created graphic objects.
 %
 %   See Also:
-%   drawOrientedBox, drawBox, rectToPolygon
+%     drawOrientedBox, drawBox, rectToPolygon
 %
 
 %   ---------
