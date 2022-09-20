@@ -232,6 +232,10 @@ TODO:
 \end_layout
 
 \begin_layout Itemize
+Quick tour
+\end_layout
+
+\begin_layout Itemize
 add bibliography
 \end_layout
 
@@ -246,16 +250,16 @@ Ilya Belevich
 
 \end_deeper
 \begin_layout Itemize
-Quick tour
-\end_layout
-
-\begin_layout Itemize
 Developer info?
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-inner functions
+coding conventions
+\end_layout
+
+\begin_layout Itemize
+util functions: isAxisHandle; parseDrawInputs
 \end_layout
 
 \end_deeper
@@ -297,6 +301,167 @@ http://github.com/mattools/matGeom
 \end_layout
 
 \begin_layout Section
+Usage principles
+\end_layout
+
+\begin_layout Standard
+MatGeom is a colelction of functions for geometric processing.
+ The general idea is to represent each geometry with numeric arrays.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+Simple
+\begin_inset Quotes erd
+\end_inset
+
+ geometries such as points, lines, circles...
+ are represented with a single row vector.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+PNT = [20 30 40];                        % create a 3D point 
+\end_layout
+
+\begin_layout Plain Layout
+
+EDGE = [0 0  50 30];                     % create a line segment between
+ (0,0) and (50,30)
+\end_layout
+
+\begin_layout Plain Layout
+
+CIRCLE = [50 50 10];                     % create a circle, center (50,50)
+ and radius 10
+\end_layout
+
+\begin_layout Plain Layout
+
+ELLI = [50 50  40 20  30];               % ellipse with center (50,50),
+ radius lengths 40 and 20, 
+\end_layout
+
+\begin_layout Plain Layout
+
+                                         % and an orientation 30 degreees.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Simple geometry data may be concatenated to represent an array of geometries:
+ each row of the array represents one geometry.
+\end_layout
+
+\begin_layout Standard
+Geometries involving a variable number of vertices such as polygons and
+ polylines are represented with the array of vertex coordinates: 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+POLY = [0 0;10 0;10 10;0 10];            % create a polygon or polyline
+ with four vertices
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+More complex geometries such as graphs or meshes are represented by a list
+ of variables.
+ 
+\end_layout
+
+\begin_layout Standard
+Functions operate on inputs usually describes within the name:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+D = distancePointLine(P1, L2);           % compute distance between a point
+ a line
+\end_layout
+
+\begin_layout Plain Layout
+
+POLY2 = simplifyPolygon(POLY, 5);        % compute a simplified version
+ of a polygon
+\end_layout
+
+\begin_layout Plain Layout
+
+RINGS = intersectPlaneMesh(PLN, MESH);   % compute intersection between
+ a plane and a mesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A number of drawing functions is provided to display the geometric data.
+ The name pattern is 
+\begin_inset Quotes eld
+\end_inset
+
+drawXXX
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+fillXXX
+\begin_inset Quotes erd
+\end_inset
+
+, where XXX is the geometry to display: drawEllipse, fillPolygon, drawMesh...
+ They usually accept the geometry representation as first input argument,
+ and optional arguments for specifying the drawing style.
+ The axis object containing the display may also be specified as optional
+ first argument, in a similar way to Matlab's drawing functions, and a handle
+ to the created graphical object may be returned.
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+drawLine(L1, 'LineWidth', 2);            % draw a line, specifying drawing
+ options
+\end_layout
+
+\begin_layout Plain Layout
+
+HC = drawCircle(AX, C1, 'Color', 'b');   % draw a circle on specific axis
+ and return handle
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Installation
 \end_layout
 
@@ -305,7 +470,7 @@ There are several possibilities for installing the MatGeom library.
 \end_layout
 
 \begin_layout Standard
-You can download the latest version of the toolbox as 
+The latest version of the toolbox can be downloaded as a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -601,6 +766,16 @@ help geom2d
 
 \begin_layout Section
 General conventions
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:General-conventions"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -946,7 +1121,7 @@ drawPoint
 \end_layout
 
 \begin_layout Standard
-Draws the point on the axis.
+Draws the point(s) on the axis.
 \end_layout
 
 \begin_layout Subsection
@@ -2989,14 +3164,14 @@ Description of functions operating on ellipses.
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -6467,10 +6642,6 @@ noprefix "false"
 wide false
 sideways false
 status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \align center
@@ -15963,6 +16134,11 @@ distancePointMesh
 
 \begin_layout Standard
 Shortest distance between a (3D) point and a triangle mesh.
+ Non triangular meshes can be converted via the 
+\family typewriter
+triangulateFaces
+\family default
+ function.
 \end_layout
 
 \begin_layout Standard
@@ -16437,6 +16613,380 @@ writeMesh_ply
 
 \begin_layout Standard
 Writes a mesh into a text file in PLY format.
+\end_layout
+
+\begin_layout Subsection
+STL format 
+\end_layout
+
+\begin_layout Standard
+The STL format (for "Standard Triangle Language" ) is a file format native
+ to the stereolithography CAD software created by 3D Systems
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://en.wikipedia.org/wiki/STL_(file_format)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ It is widely used for 3D printing and computer-aided design.
+\end_layout
+
+\begin_layout Standard
+Matlab provides support for STL file format through the 
+\family typewriter
+stlread
+\family default
+ and 
+\family typewriter
+stlwrite
+\family default
+ functions.
+ The functions below are simply wrappers to Matlab's native functions, that
+ convert the result to the data structure used within MatGeom.
+\end_layout
+
+\begin_layout Minisec
+readMesh_stl
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+readMesh_stl
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Reads mesh data stored in STL format.
+\end_layout
+
+\begin_layout Minisec
+writeMesh_stl
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+writeMesh_stl
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Writes a mesh into a text file in STL format.
+\end_layout
+
+\begin_layout Subsection
+OBJ format
+\end_layout
+
+\begin_layout Standard
+The OBJ file format is an open file format for representing geometries that
+ was orginally developepd by Wavefront Technologies for its Advanced Visualizer
+ animation package
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://en.wikipedia.org/wiki/Wavefront_.obj_file
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ The file format has been adopted by other 3D graphics application vendors.
+\end_layout
+
+\begin_layout Minisec
+readMesh_obj
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+readMesh_obj
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Read mesh data stored in OBJ format.
+\end_layout
+
+\begin_layout Chapter
+Developer's side
+\end_layout
+
+\begin_layout Standard
+This chapter gathers information for people wanting to contribute new features
+ to the library.
+\end_layout
+
+\begin_layout Section
+Versioning
+\end_layout
+
+\begin_layout Standard
+The project is hosted on GitHub
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/mattools/matGeom
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ The content under version control comprise the source for the library,
+ the tests, and most of the documentation (demonstration scripts, user manual...).
+\end_layout
+
+\begin_layout Standard
+The project arborescence is as follow:
+\end_layout
+
+\begin_layout Description
+checks scripts used to visually check specific parts.
+ Mostly outdated.
+\end_layout
+
+\begin_layout Description
+demos demo scripts used for illustrating specific topics.
+\end_layout
+
+\begin_layout Description
+docs mostly the source for the user manual (this document).
+\end_layout
+
+\begin_layout Description
+matGeom the source code for the main part of the library.
+\end_layout
+
+\begin_layout Description
+tests the scripts used for testing the library.
+ Matlab's unit testing framework is used.
+\end_layout
+
+\begin_layout Section
+Conventions
+\end_layout
+
+\begin_layout Standard
+The general conventions are presented in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:General-conventions"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+New functions are expected to contain the following elements:
+\end_layout
+
+\begin_layout Itemize
+the function line containign function name, and input and output arguments
+\end_layout
+
+\begin_layout Itemize
+the 
+\begin_inset Quotes eld
+\end_inset
+
+H1
+\begin_inset Quotes erd
+\end_inset
+
+ header line that summarizes the role of the function
+\end_layout
+
+\begin_layout Itemize
+several sections describing usage, input/output arguments
+\end_layout
+
+\begin_layout Itemize
+if possible some exame of use
+\end_layout
+
+\begin_layout Itemize
+a 
+\begin_inset Quotes eld
+\end_inset
+
+See Also
+\begin_inset Quotes erd
+\end_inset
+
+ section relating to similar functions
+\end_layout
+
+\begin_layout Itemize
+some information, seperated from the main header, related to author and
+ date of creation.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Quotes eld
+\end_inset
+
+tedit
+\begin_inset Quotes erd
+\end_inset
+
+ contribution by Peter Bodin may be used for the creation of new files
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://fr.mathworks.com/matlabcentral/fileexchange/8532-tedit
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Utility functions
+\end_layout
+
+\begin_layout Standard
+Some utility functions have been created for repetitive tasks.
+ They are located either within the 
+\begin_inset Quotes eld
+\end_inset
+
+utils
+\begin_inset Quotes erd
+\end_inset
+
+ directory of the MatGeom toolbox, or within 
+\begin_inset Quotes eld
+\end_inset
+
+private
+\begin_inset Quotes erd
+\end_inset
+
+ directories within the modules.
+\end_layout
+
+\begin_layout Minisec
+isAxisHandle
+\end_layout
+
+\begin_layout Standard
+Checks if the input corresponds to a valid axis handle.
+ Typical use:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+% retrieve handle to axis object used for drawing
+\end_layout
+
+\begin_layout Plain Layout
+
+if isAxisHandle(varargin{1})
+\end_layout
+
+\begin_layout Plain Layout
+
+    hAx = varargin{1};
+\end_layout
+
+\begin_layout Plain Layout
+
+    varargin(1) = [];
+\end_layout
+
+\begin_layout Plain Layout
+
+else
+\end_layout
+
+\begin_layout Plain Layout
+
+    hAx = gca;
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Minisec
+parseDrawInput
+\end_layout
+
+\begin_layout Standard
+Retrieve the various elements necessary to draw a geometric primitive: the
+ axis handle, the geometric primitive data, and the optional drawing arguments.
 \end_layout
 
 \begin_layout Standard
