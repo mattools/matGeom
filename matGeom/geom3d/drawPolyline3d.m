@@ -42,10 +42,12 @@ function varargout = drawPolyline3d(varargin)
 
 
 %% Process input arguments
-hAx = gca;
+
 if isAxisHandle(varargin{1})
     hAx = varargin{1};
     varargin(1) = [];
+else
+    hAx = gca;
 end
 
 % check case we want to draw several curves, stored in a cell array
