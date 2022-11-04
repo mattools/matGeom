@@ -1,4 +1,4 @@
-function h = drawLine3d(varargin)
+function h = drawLine3d(lin, varargin)
 % Draw a 3D line clipped by the current axes.
 %
 %   drawLine3d(LINE) draws the line LINE on the current axis, by clipping 
