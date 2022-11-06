@@ -1,5 +1,5 @@
 function varargout = drawAxis3d(varargin)
-% Draw a coordinate system and an origin.
+%DRAWAXIS3D Draw a coordinate system and an origin.
 %
 %   drawAxis3d
 %	Adds three 3D arrows to the current axis, corresponding to the 

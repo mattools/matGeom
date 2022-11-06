@@ -1,5 +1,5 @@
 function varargout = drawCapsule(varargin)
-% Draw a capsule.
+%DRAWCAPSULE Draw a capsule.
 %
 %   drawCapsule(CAP)
 %   Draws the capsule CAP on the current axis. 

@@ -1,5 +1,5 @@
 function p = drawAxisCube(varargin)
-% Draw a colored cube representing axis orientation.
+%DRAWAXISCUBE Draw a colored cube representing axis orientation.
 %
 %   output = drawAxisCube(input)
 %
