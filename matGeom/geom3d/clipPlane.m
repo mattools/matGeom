@@ -1,5 +1,5 @@
 function poly = clipPlane(plane, box)
-% Compute the 3D polygon representing a clipped plane.
+%CLIPPLANE Compute the 3D polygon representing a clipped plane.
 %
 %   POLY = clipPlane(PLANE, BOUNDS)
 %   Computes the vertices of the 3D polygon that represents the result of
@@ -35,10 +35,10 @@ function poly = clipPlane(plane, box)
 % retrieve min/max coords
 xmin = box(1);
 xmax = box(2);
-ymin = box(1);
-ymax = box(2);
-zmin = box(1);
-zmax = box(2);
+ymin = box(3);
+ymax = box(4);
+zmin = box(5);
+zmax = box(6);
 
 % create lines corresponding to the edges of the bounding box
 lineX00 = [xmin ymin zmin 1 0 0];
@@ -74,7 +74,7 @@ piZ11 = intersectLinePlane(lineZ11, plane);
 points = [...
     piX00;piX01;piX10;piX11; ...
     piY00;piY01;piY10;piY11; ...
-    piZ00;piZ01;piZ10;piZ11;];
+    piZ00;piZ01;piZ10;piZ11;]
 
 % check validity: keep only points inside window (with tolerance)
 ac = sqrt (eps);
