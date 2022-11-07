@@ -27,5 +27,6 @@ drawPoint3d(points,'r.')
 drawCircle3d(circle,'g')
 drawPoint3d(circle(1:3),'g.')
 drawPoint3d(points2,'b.')
+view(3)
 
 end
