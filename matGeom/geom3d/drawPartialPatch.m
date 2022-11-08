@@ -1,5 +1,5 @@
 function drawPartialPatch(u, v, z, varargin)
-% Draw surface patch, with 2 parametrized surfaces.
+%DRAWPARTIALPATCH Draw surface patch, with 2 parametrized surfaces.
 %
 %   usage:
 %   drawSurfPatch(u, v, zuv)

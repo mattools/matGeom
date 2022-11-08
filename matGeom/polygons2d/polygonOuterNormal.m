@@ -1,5 +1,5 @@
 function vect = polygonOuterNormal(poly, iVertex)
-% Outer normal vector for a given vertex(ices).
+%POLYGONOUTERNORMAL Outer normal vector for a given vertex(ices).
 %
 %   NV = polygonOuterNormal(POLY, VIND)
 %   Where POLY is a polygon and VIND is the index of a vertex, returns the

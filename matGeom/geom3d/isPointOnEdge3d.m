@@ -1,5 +1,5 @@
 function b = isPointOnEdge3d(point, edge, varargin)
-% Test if a 3D point belongs to an edge.
+%ISPOINTONEDGE3D Test if a 3D point belongs to an edge.
 %
 %   Usage
 %   B = isPointOnEdge3d(POINT, EDGE)

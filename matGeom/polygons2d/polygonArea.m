@@ -1,5 +1,5 @@
 function area = polygonArea(poly, varargin)
-% Compute the signed area of a polygon.
+%POLYGONAREA Compute the signed area of a polygon.
 %
 %   A = polygonArea(POINTS);
 %   Compute area of a polygon defined by POINTS. POINTS is a N-by-2 array

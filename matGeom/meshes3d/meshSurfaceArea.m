@@ -1,5 +1,5 @@
 function area = meshSurfaceArea(varargin)
-% Surface area of a polyhedral mesh.
+%MESHSURFACEAREA Surface area of a polyhedral mesh.
 %
 %   S = meshSurfaceArea(V, F)
 %   S = meshSurfaceArea(V, E, F)

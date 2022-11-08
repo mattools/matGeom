@@ -1,5 +1,5 @@
 function area = ellipseArea(elli)
-% Area of an ellipse.
+%ELLIPSEAREA Area of an ellipse.
 %
 %   AREA = ellipseArea(ELLI)
 %   Computes he area of the ellipse ELLI, by taking the product of the semi

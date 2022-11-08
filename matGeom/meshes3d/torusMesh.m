@@ -1,5 +1,5 @@
 function varargout = torusMesh(torus, varargin)
-% Create a 3D mesh representing a torus.
+%TORUSMESH Create a 3D mesh representing a torus.
 %
 %   [V, F] = torusMesh(TORUS)
 %   Converts the torus in TORUS into a face-vertex quadrangular mesh.

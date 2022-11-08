@@ -1,5 +1,5 @@
 function ell = equivalentEllipsoid(points)
-% Equivalent ellipsoid of a set of 3D points.
+%EQUIVALENTELLIPSOID Equivalent ellipsoid of a set of 3D points.
 %
 %   ELL = equivalentEllipsoid(PTS)
 %   Compute the equivalent ellipsoid of the set of points PTS. The result

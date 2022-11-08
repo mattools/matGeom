@@ -1,5 +1,5 @@
 function poly2 = padPolyline(poly, M, varargin)
-% Add vertices at each extremity of the polyline.
+%PADPOLYLINE Add vertices at each extremity of the polyline.
 %
 %   POLY2 = padPolyline(POLY, M)
 %   where M is a scalar, adds M vertices at the beginning and at the end of

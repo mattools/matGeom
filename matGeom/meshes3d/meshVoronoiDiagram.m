@@ -1,5 +1,5 @@
 function [regions, distances] = meshVoronoiDiagram(vertices, faces, germInds)
-% Voronoi Diagram on the surface of a polygonal mesh.
+%MESHVORONOIDIAGRAM Voronoi Diagram on the surface of a polygonal mesh.
 %
 %   REGIONS = meshVoronoiDiagram(V, F, GERM_INDS)
 %   Computes the region associated to each vertex of the input mesh (V,F),

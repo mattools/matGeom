@@ -1,5 +1,5 @@
 function varargout = drawTorus(varargin)
-% Draw a torus (3D ring).
+%DRAWTORUS Draw a torus (3D ring).
 %
 %   drawTorus(TORUS)
 %   Draws the torus on the current axis. TORUS is given by:

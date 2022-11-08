@@ -1,5 +1,5 @@
 function varargout = drawCircleArc(varargin)
-% Draw a circle arc on the current axis.
+%DRAWCIRCLEARC Draw a circle arc on the current axis.
 %
 %   drawCircleArc(ARC);
 %   Draws circle arc defined by ARC = [XC YC R START EXTENT], with (XC, YC)

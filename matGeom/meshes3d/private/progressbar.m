@@ -1,6 +1,5 @@
 function progressbar(n,N,w)
-
-% progressbar - display a progress bar
+%PROGRESSBAR Display a progress bar.
 %
 %    progressbar(n,N,w);
 %

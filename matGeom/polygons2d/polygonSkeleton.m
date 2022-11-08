@@ -1,5 +1,5 @@
 function varargout = polygonSkeleton(poly, varargin)
-% Skeletonization of a polygon with a dense distribution of vertices.
+%POLYGONSKELETON Skeletonization of a polygon with a dense distribution of vertices.
 %
 %   [V, ADJ] = polygonSkeleton(POLY)
 %   POLY is given as a N-by-2 array of polygon vertex coordinates. The

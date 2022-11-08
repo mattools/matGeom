@@ -1,5 +1,5 @@
 function varargout = imageBoundaryGraph(img)
-% Convert boundary of a 2D/3D binary image into a graph or mesh.
+%IMAGEBOUNDARYGRAPH Convert boundary of a 2D/3D binary image into a graph or mesh.
 %
 %   [NODES, EDGES] = imageBoundaryGraph(IMG)         (2D)
 %   [NODES, EDGES, FACES] = imageBoundaryGraph(IMG)  (3D)

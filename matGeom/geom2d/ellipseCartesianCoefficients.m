@@ -1,5 +1,5 @@
 function coeffs = ellipseCartesianCoefficients(elli)
-% Cartesian coefficients of an ellipse.
+%ELLIPSECARTESIANCOEFFICIENTS Cartesian coefficients of an ellipse.
 %
 %   COEFFS = ellipseCartesianCoefficients(ELLI)
 %   Computes the cartesian coefficients of the ellipse ELLI, given by:

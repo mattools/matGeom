@@ -1,5 +1,5 @@
 function varargout = drawRect(rect, varargin)
-% Draw rectangle on the current axis.
+%DRAWRECT Draw rectangle on the current axis.
 %   
 %   drawRect(RECT)
 %   draws the rectangles defined by RECT = [X0 Y0 W H].

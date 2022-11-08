@@ -1,5 +1,5 @@
 function perim = ellipsePerimeter(ellipse, varargin)
-% Perimeter of an ellipse.
+%ELLIPSEPERIMETER Perimeter of an ellipse.
 %
 %   P = ellipsePerimeter(ELLI)
 %   Computes the perimeter of an ellipse, using numerical integration.

@@ -1,5 +1,5 @@
 function theta = polygonNormalAngle(poly, inds)
-% Normal angle at each vertex of a polygon.
+%POLYGONNORMALANGLE Normal angle at each vertex of a polygon.
 %
 %   THETA = polygonNormalAngle(POLY);
 %   where POLY is a N-by-2 array representing vertex coordinates, computes

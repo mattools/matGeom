@@ -1,5 +1,5 @@
 function [res, inds] = polylineSubcurve(poly, t0, t1)
-% Extract a portion of a polyline.
+%POLYLINESUBCURVE Extract a portion of a polyline.
 %
 %   POLY2 = polylineSubcurve(POLYLINE, POS0, POS1)
 %   Create a new polyline, by keeping vertices located between positions

@@ -1,5 +1,5 @@
 function varargout = grMedian(varargin)
-% Compute median value from neighbour nodes.
+%GRMEDIAN Compute median value from neighbour nodes.
 %
 %   VALS2 = grMedian(EDGES, VALS)
 %   new value for each node of the graph is computed as the median of the

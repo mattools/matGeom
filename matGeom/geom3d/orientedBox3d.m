@@ -1,5 +1,5 @@
 function [box3d, rotMat] = orientedBox3d(pts)
-% Object-oriented bounding box of a set of 3D points.
+%ORIENTEDBOX3D Object-oriented bounding box of a set of 3D points.
 %
 %   OOBB = orientedBox3d(PTS)
 %   REturns the oriented bounding box of the collection of points in the

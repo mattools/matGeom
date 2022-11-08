@@ -1,5 +1,5 @@
 function varargout = drawDome(varargin)
-% Draw a dome (half-sphere, semi-sphere) as a mesh.
+%DRAWDOME Draw a dome (half-sphere, semi-sphere) as a mesh.
 %
 %   drawDome(DOME)
 %   Where DOME = [XC YC ZC R], draw the dome centered on the point with

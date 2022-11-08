@@ -1,5 +1,5 @@
 function res = isCounterClockwise(p1, p2, p3, varargin)
-% Compute the relative orientation of 3 points.
+%ISCOUNTERCLOCKWISE Compute the relative orientation of 3 points.
 %
 %   CCW = isCounterClockwise(P1, P2, P3);
 %   Computes the orientation of the 3 points. The returns is:

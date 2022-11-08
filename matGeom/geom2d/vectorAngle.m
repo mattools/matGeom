@@ -1,5 +1,5 @@
 function alpha = vectorAngle(v1, varargin)
-% Horizontal angle of a vector, or angle between 2 vectors.
+%VECTORANGLE Horizontal angle of a vector, or angle between 2 vectors.
 %
 %   A = vectorAngle(V);
 %   Returns angle between Ox axis and vector direction, in radians, in

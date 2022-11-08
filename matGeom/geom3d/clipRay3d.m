@@ -1,5 +1,5 @@
 function edge = clipRay3d(ray, box)
-% Clip a 3D ray with a box and return a 3D edge.
+%CLIPRAY3D Clip a 3D ray with a box and return a 3D edge.
 %
 %   EDGE = clipRay3d(RAY, BOX)
 %   Clips the ray RAY with the bounds given in BOX, and returns the

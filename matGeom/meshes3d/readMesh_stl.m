@@ -1,5 +1,5 @@
 function varargout = readMesh_stl(fileName)
-% Read mesh data stored in STL format.
+%READMESH_STL Read mesh data stored in STL format.
 %
 %   [VERTICES, FACES] = readMesh_stl(FNAME)
 %

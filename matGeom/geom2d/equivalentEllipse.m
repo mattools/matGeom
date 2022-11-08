@@ -1,5 +1,5 @@
 function ell = equivalentEllipse(points)
-% Equivalent ellipse of a set of points.
+%EQUIVALENTELLIPSE Equivalent ellipse of a set of points.
 %
 %   ELL = equivalentEllipse(PTS);
 %   Computes the ellips with the same moments up to the second order as the

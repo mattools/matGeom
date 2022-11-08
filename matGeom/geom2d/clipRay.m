@@ -1,5 +1,5 @@
 function [edge, isInside] = clipRay(ray, bb)
-% Clip a ray with a box.
+%CLIPRAY Clip a ray with a box.
 %
 %   EDGE = clipRay(RAY, BOX);
 %   RAY is a straight ray given as a 4 element row vector: [x0 y0 dx dy],

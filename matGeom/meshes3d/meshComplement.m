@@ -1,5 +1,5 @@
 function varargout = meshComplement(varargin)
-% Reverse the normal of each face in the mesh.
+%MESHCOMPLEMENT Reverse the normal of each face in the mesh.
 %
 %   [V2, F2] = meshComplement(V, F)
 %

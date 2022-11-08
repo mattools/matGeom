@@ -1,5 +1,5 @@
 function b = isPointInEllipsoid(point, elli, varargin)
-% Check if a point is located inside a 3D ellipsoid.
+%ISPOINTINELLIPSOID Check if a point is located inside a 3D ellipsoid.
 %
 %   output = isPointInEllipsoid(input)
 %
@@ -51,4 +51,3 @@ pTrans = transformPoint3d(pTrans, trans);
 
 % test if norm is smaller than 1
 b = sqrt(sum(power(pTrans, 2), 2)) - 1 <= tol;
-    

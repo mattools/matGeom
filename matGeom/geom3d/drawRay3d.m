@@ -1,5 +1,5 @@
 function h = drawRay3d(ray, varargin)
-% Draw a 3D ray on the current axis.
+%DRAWRAY3D Draw a 3D ray on the current axis.
 %
 %   drawRay3d(RAY)
 %   With RAY having the syntax: [x0 y0 z0 dx dy dz], draws the ray starting

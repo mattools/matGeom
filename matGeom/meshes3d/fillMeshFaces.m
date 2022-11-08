@@ -1,5 +1,5 @@
 function varargout = fillMeshFaces(varargin)
-% Fill the faces of a mesh with the specified colors.
+%FILLMESHFACES Fill the faces of a mesh with the specified colors.
 %
 %   fillMeshFaces(V, F, VERTEXCOLORS)
 %   Colorizes a mesh by filling faces with an array of values. The colors
