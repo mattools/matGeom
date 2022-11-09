@@ -1,5 +1,5 @@
 function b = isPointInEllipse(point, ellipse, varargin)
-% Check if a point is located inside a given ellipse.
+%ISPOINTINELLIPSE Check if a point is located inside a given ellipse.
 %
 %   B = isPointInEllipse(POINT, ELLIPSE) 
 %   Returns true if point is located inside the given ellipse.
@@ -50,4 +50,3 @@ pTrans = transformPoint(pTrans, trans);
 
 % test if distance to origin smaller than 1
 b = sqrt(sum(power(pTrans, 2), 2)) - 1 <= tol;
-    

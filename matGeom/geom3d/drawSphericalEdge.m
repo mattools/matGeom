@@ -1,5 +1,5 @@
 function varargout = drawSphericalEdge(varargin)
-% Draw an edge on the surface of a sphere.
+%DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.
 %
 %   drawSphericalEdge(SPHERE, EDGE)
 %   EDGE is given as a couple of 3D coordinates corresponding to edge

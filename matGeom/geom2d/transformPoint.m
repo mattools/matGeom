@@ -1,5 +1,5 @@
 function varargout = transformPoint(varargin)
-% Apply an affine transform to a point or a point set.
+%TRANSFORMPOINT Apply an affine transform to a point or a point set.
 %
 %   PT2 = transformPoint(PT1, TRANSFO);
 %   Returns the result of the transformation TRANSFO applied to the point

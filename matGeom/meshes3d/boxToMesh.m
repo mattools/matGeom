@@ -1,5 +1,5 @@
 function varargout = boxToMesh(varargin)
-% BOXTOMESH Convert a box into a quad mesh with the same size.
+%BOXTOMESH BOXTOMESH Convert a box into a quad mesh with the same size.
 %
 %   [V E F] = boxToMesh(BOX) 
 %   Create a box as a polyhedra representation. The box is defined by its  

@@ -1,5 +1,5 @@
 function drawSurfPatch(varargin)
-% Draw a 3D surface patch, with 2 parametrized surfaces.
+%DRAWSURFPATCH Draw a 3D surface patch, with 2 parametrized surfaces.
 %
 %   usage:
 %   drawSurfPatch(u, v, zuv)

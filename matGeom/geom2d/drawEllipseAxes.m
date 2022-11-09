@@ -1,5 +1,5 @@
 function varargout = drawEllipseAxes(varargin)
-% Draw the main axes of an ellipse as line segments.
+%DRAWELLIPSEAXES Draw the main axes of an ellipse as line segments.
 %
 %   drawEllipseAxes(ELLI)
 %   drawEllipseAxes(..., STYLE)

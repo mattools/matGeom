@@ -1,5 +1,5 @@
 function varargout = drawArrow(varargin)
-% Draw an arrow on the current axis.
+%DRAWARROW Draw an arrow on the current axis.
 %   
 %   drawArrow(x1, y1, x2, y2) 
 %   draws an arrow between the points (x1 y1) and (x2 y2).

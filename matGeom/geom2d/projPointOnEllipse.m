@@ -1,5 +1,5 @@
 function proj = projPointOnEllipse(point, elli)
-% Project a point orthogonally onto an ellipse.
+%PROJPOINTONELLIPSE Project a point orthogonally onto an ellipse.
 %
 %   PROJ = projPointOnEllipse(PT, ELLI)
 %   Computes the (orthogonal) projection of point PT onto the ellipse given

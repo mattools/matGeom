@@ -1,5 +1,5 @@
 function [C1, C2, U1, U2, H, K, N] = meshCurvatures(vertices, faces, varargin)
-% Compute principal curvatures on mesh vertices.
+%MESHCURVATURES Compute principal curvatures on mesh vertices.
 %
 %   [C1, C2] = meshCurvatures(VERTICES, FACES)
 %   Computes the principal curvatures C1 and C2 for each vertex of the mesh

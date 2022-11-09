@@ -1,5 +1,5 @@
 function energy = meshEnergy(vertices, faces)
-% Computes the energy of a tesselation, as the sum of second area moments.
+%MESHENERGY Computes the energy of a tesselation, as the sum of second area moments.
 %
 %   This function can be used to check that the total energy of Centroidal
 %   Voronoi Tesselation (CVT) decreases with the iterations of the Lloyd

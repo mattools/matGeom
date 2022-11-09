@@ -1,5 +1,5 @@
 function writeMesh(fileName, vertices, faces, varargin)
-% Write 3D mesh data by inferring format from file name.
+%WRITEMESH Write 3D mesh data by inferring format from file name.
 %
 %   writeMesh(FNAME, V, F)
 %

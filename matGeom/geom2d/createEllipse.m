@@ -1,5 +1,5 @@
 function elli = createEllipse(type, varargin)
-% Create an ellipse, from various input types.
+%CREATEELLIPSE Create an ellipse, from various input types.
 %
 %   ELLI = createEllipse('CartesianCoefficients', COEFFS)
 %   ELLI = createEllipse(COEFFS)

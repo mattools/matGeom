@@ -1,5 +1,5 @@
 function elli = fitEllipse(varargin)
-% Fit an ellipse to a set of 2D points.
+%FITELLIPSE Fit an ellipse to a set of 2D points.
 %
 %   ELLI = fitEllipse(PTS)
 %

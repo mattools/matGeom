@@ -1,5 +1,5 @@
 function varargout = surfToMesh(x, y, varargin)
-% Convert surface grids into face-vertex mesh.
+%SURFTOMESH Convert surface grids into face-vertex mesh.
 %
 %   [V, F] = surfToMesh(X, Y)
 %   [V, F] = surfToMesh(X, Y, Z)

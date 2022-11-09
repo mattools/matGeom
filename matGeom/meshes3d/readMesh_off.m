@@ -1,5 +1,5 @@
 function varargout = readMesh_off(fileName)
-% Read mesh data stored in OFF format.
+%READMESH_OFF Read mesh data stored in OFF format.
 %
 %   [VERTICES, FACES] = readMesh_off(FILENAME)
 %   Read the data stored in file FILENAME and return the vertex and face

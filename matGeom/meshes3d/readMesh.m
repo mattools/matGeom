@@ -1,5 +1,5 @@
 function varargout = readMesh(fileName)
-% Read a 3D mesh by inferring format from file name.
+%READMESH Read a 3D mesh by inferring format from file name.
 %
 %   Usage:
 %   [V, F] = readMesh(FILENAME)

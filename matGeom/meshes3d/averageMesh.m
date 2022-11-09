@@ -1,5 +1,5 @@
 function [refMesh, distListIters, refVerticesIters] = averageMesh(meshList, varargin)
-% Compute average mesh from a list of meshes.
+%AVERAGEMESH Compute average mesh from a list of meshes.
 %
 %   AVG = averageMesh(MESHLIST)
 %

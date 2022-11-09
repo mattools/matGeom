@@ -1,5 +1,5 @@
 function f = smoothMeshFunction(vertices, faces, f, varargin) %#ok<INUSL>
-% Apply smoothing on a functions defines on mesh vertices.
+%SMOOTHMESHFUNCTION Apply smoothing on a functions defines on mesh vertices.
 %
 %   FS = smoothMeshFunction(VERTICES, FACES, F, NITERS)
 %   Performs smoothing on the function F defined on vertices of the mesh.

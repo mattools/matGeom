@@ -1,5 +1,5 @@
 function b = isPointInCircle(point, circle, varargin)
-% Test if a point is located inside a given circle.
+%ISPOINTINCIRCLE Test if a point is located inside a given circle.
 %
 %   B = isPointInCircle(POINT, CIRCLE) 
 %   Returns true if point is located inside the circle, i.e. if distance to
@@ -36,4 +36,3 @@ end
 
 d = sqrt(sum(power(point - circle(:,1:2), 2), 2));
 b = d-circle(:,3)<=tol;
-    

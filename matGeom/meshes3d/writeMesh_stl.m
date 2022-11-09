@@ -1,5 +1,5 @@
 function writeMesh_stl(fileName, vertices, faces, varargin)
-% Write mesh data in the STL format.
+%WRITEMESH_STL Write mesh data in the STL format.
 %
 %   writeMesh_stl(FNAME, VERTICES, FACES)
 %

@@ -1,5 +1,5 @@
 function elli = polygonEquivalentEllipse(poly)
-% Compute equivalent ellipse with same second order moments as polygon.
+%POLYGONEQUIVALENTELLIPSE Compute equivalent ellipse with same second order moments as polygon.
 %
 %   ELLI = polygonEquivalentEllipse(POLY)
 %

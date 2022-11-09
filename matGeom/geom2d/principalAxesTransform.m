@@ -1,5 +1,5 @@
 function varargout = principalAxesTransform(pts)
-% Align a set of points along its principal axes.
+%PRINCIPALAXESTRANSFORM Align a set of points along its principal axes.
 %
 %   TRANSFO = principalAxesTransform(PTS)
 %   Computes the affine transform that will transform the input array PTS

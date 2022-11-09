@@ -1,5 +1,5 @@
 function res = transformEllipse(elli, transfo)
-% Apply an affine transformation to an ellipse.
+%TRANSFORMELLIPSE Apply an affine transformation to an ellipse.
 %
 %   ELLI2 = transformEllipse(ELLI, TRANSFO)
 %

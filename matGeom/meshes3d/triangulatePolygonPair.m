@@ -1,5 +1,5 @@
 function [vertices, faces] = triangulatePolygonPair(poly1, poly2, varargin)
-% Compute triangulation between a pair of 3D closed curves.
+%TRIANGULATEPOLYGONPAIR Compute triangulation between a pair of 3D closed curves.
 %
 %   [V, F] = triangulatePolygonPair(POLY1, POLY2)
 %

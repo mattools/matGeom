@@ -1,5 +1,5 @@
 function varargout = drawEllipsoid(varargin)
-% Draw a 3D ellipsoid.
+%DRAWELLIPSOID Draw a 3D ellipsoid.
 %
 %   drawEllipsoid(ELLI)
 %   Displays a 3D ellipsoid on current axis. ELLI is given by:

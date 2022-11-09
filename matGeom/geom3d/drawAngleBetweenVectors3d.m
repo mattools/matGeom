@@ -1,5 +1,5 @@
 function varargout = drawAngleBetweenVectors3d(o, v1, v2, r, varargin)
-% Draw an arc between 2 vectors.
+%DRAWANGLEBETWEENVECTORS3D Draw an arc between 2 vectors.
 %
 %   drawAngleBetweenVectors3d(ORIGIN, VECTOR1, VECTOR2, RADIUS) 
 %   draws the arc between VECTOR1 and VECTOR2.

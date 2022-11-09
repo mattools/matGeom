@@ -1,5 +1,5 @@
 function ray = createRay3d(p1, p2)
-% Create a 3D ray.
+%CREATERAY3D Create a 3D ray.
 %
 %   RAY = createRay3d(P1, P2)
 %   Create a ray starting from point P1 and going in the direction of point

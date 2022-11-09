@@ -1,5 +1,5 @@
 function out = planesBisector(plane1, plane2)
-% PLANESBISECTOR  Bisector plane between two other planes.
+%PLANESBISECTOR PLANESBISECTOR  Bisector plane between two other planes.
 % 
 %   BIS = planesBisector(PL1, PL2);
 %   Returns the planes that contains the intersection line between PL1 and

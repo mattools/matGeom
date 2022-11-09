@@ -1,5 +1,5 @@
 function ellipses2d(varargin)
-% Description of functions operating on ellipses.
+%ELLIPSES2D Description of functions operating on ellipses.
 %   
 %   Ellipses are represented by their center, the length of their 2
 %   semi-axes length, and their angle from the Ox direction (in degrees). 

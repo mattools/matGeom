@@ -1,5 +1,5 @@
 function trans = fitAffineTransform2d(ref, src)
-% Compute the affine transform that best register two point sets.
+%FITAFFINETRANSFORM2D Compute the affine transform that best register two point sets.
 %
 %   TRANSFO = fitAffineTransform2d(REF, SRC)
 %   Returns the affine transform matrix that minimizes the distance between

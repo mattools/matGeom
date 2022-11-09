@@ -1,5 +1,5 @@
 function varargout = grMean(varargin)
-% Compute mean value from neighbour nodes.
+%GRMEAN Compute mean value from neighbour nodes.
 %
 %   LBL2 = grMean(EDGES, LBL1)
 %   new label for each node of the graph is computed as the mean of the

@@ -1,5 +1,5 @@
 function varargout = drawSphericalPolygon(varargin)
-% Draw a spherical polygon.
+%DRAWSPHERICALPOLYGON Draw a spherical polygon.
 %
 %   output = drawSphericalPolygon(input)
 %

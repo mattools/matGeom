@@ -1,5 +1,5 @@
 function point = ellipsePoint(elli, pos)
-% Coordinates of a point on an ellipse from parametric equation.
+%ELLIPSEPOINT Coordinates of a point on an ellipse from parametric equation.
 %
 %   POINT = ellipsePoint(ELLI, POS)
 %   Computes the coordinates of the point with parameter value POS on the

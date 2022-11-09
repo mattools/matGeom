@@ -1,5 +1,5 @@
 function mesh = readMesh_obj(fileName)
-% Read mesh data stored in OBJ format.
+%READMESH_OBJ Read mesh data stored in OBJ format.
 %
 %   MESH = readMesh_obj(FILENAME)
 %   Read the data stored in file FILENAME and return the mesh into a struct

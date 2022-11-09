@@ -1,5 +1,5 @@
 function [points, pos, faceInds] = intersectEdgeMesh3d(edge, varargin)
-% Intersection points of a 3D edge with a mesh.
+%INTERSECTEDGEMESH3D Intersection points of a 3D edge with a mesh.
 %
 %   INTERS = intersectEdgeMesh3d(EDGE, VERTICES, FACES)
 %   Compute the intersection points between a 3D edge and a 3D mesh defined

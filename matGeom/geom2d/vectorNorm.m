@@ -1,5 +1,5 @@
 function n = vectorNorm(v, varargin)
-% Compute norm of a vector, or of a set of vectors.
+%VECTORNORM Compute norm of a vector, or of a set of vectors.
 %
 %   N = vectorNorm(V);
 %   Returns the euclidean norm of vector V.

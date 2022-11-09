@@ -1,5 +1,5 @@
 function [dist, proj] = distancePointEllipse(point, elli)
-% Distance from a point to an ellipse.
+%DISTANCEPOINTELLIPSE Distance from a point to an ellipse.
 %
 %   DIST = distancePointEllipse(POINT, ELLI)
 %   Computes the Euclidean distance between the point POINT and the ellipse

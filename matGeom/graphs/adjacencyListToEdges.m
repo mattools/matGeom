@@ -1,5 +1,5 @@
 function edges = adjacencyListToEdges(adjList)
-% Convert an adjacency list to an edge array.
+%ADJACENCYLISTTOEDGES Convert an adjacency list to an edge array.
 %
 %   EDGES = adjacencyListToEdges(ADJ)
 %   Converts the adjacency list ADJ, given as a cell array of adjacent
