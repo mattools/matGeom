@@ -14,12 +14,12 @@ function plane2 = normalizePlane(plane1)
 %   
 %   See also:
 %   planes3d, createPlane
-%
-%   ---------
-%   author: David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 21/02/2005.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-21.
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   21/08/2009 compute origin after computation of vectors (more precise)

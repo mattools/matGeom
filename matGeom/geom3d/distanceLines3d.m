@@ -23,11 +23,12 @@ function [d, pt1, pt2] = distanceLines3d(line1, line2)
 %
 %   See also:
 %   lines3d, distancePoints3d
-%
-%   ---------
-%   authors: Brandon Baker, oqilipo, David Legland
-%   created January 19, 2011
-%
+
+% ------
+% Authors: Brandon Baker, oqilipo, David Legland
+% e-mail: david.legland@inrae.fr
+% Created: 2011-01-19
+% Copyright 2011
 
 % number of points of each array
 n1 = size(line1, 1);

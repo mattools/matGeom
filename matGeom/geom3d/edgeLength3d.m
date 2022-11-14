@@ -15,7 +15,7 @@ function len = edgeLength3d(edge, varargin)
 %   
 %   See also
 %     edges3d, createEdge3d, drawEdge3d
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr

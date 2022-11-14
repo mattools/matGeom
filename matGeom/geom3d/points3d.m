@@ -12,7 +12,7 @@ function points3d(varargin)
 %   sph2cart2, cart2sph2, cart2cyl, cyl2cart
 %   transformPoint3d, clipPoints3d
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

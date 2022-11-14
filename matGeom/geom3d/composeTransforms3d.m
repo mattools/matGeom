@@ -19,13 +19,12 @@ function trans = composeTransforms3d(varargin)
 %
 %   See also:
 %   transforms3d, transformPoint3d
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 29/29/2006.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2006-09-29.
+% Copyright 2006 INRA - TPV URPOI - BIA IMASTE
 
 trans = varargin{nargin};
 for i=length(varargin)-1:-1:1

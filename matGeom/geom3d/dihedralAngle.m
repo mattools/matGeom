@@ -14,12 +14,12 @@ function theta = dihedralAngle(plane1, plane2)
 %
 %   See also:
 %   planes3d, lines3d, angles3d, planesBisector
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 21/02/2005.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-21.
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 % HISTORY
 % 2009-06-19 change convention for dihedral angle

@@ -19,7 +19,7 @@ function point = circle3dPoint(circle, pos)
 %
 %   See also
 %   circles3d, circle3dPosition
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

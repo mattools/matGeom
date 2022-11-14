@@ -10,11 +10,11 @@ function n = planeNormal(plane)
 %   geom3d, planes3d, createPlane
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 17/02/2005.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-17.
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   15/04/2013 Extended to N-dim planes by Sven Holcombe

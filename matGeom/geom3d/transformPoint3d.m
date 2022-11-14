@@ -36,11 +36,11 @@ function varargout = transformPoint3d(pts, transfo, varargin)
 %     createRotationOx, createRotationOy, createRotationOz, createScaling
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 10/02/2005.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-10.
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   23/03/2006 add support for non vector point data
 %   26/10/2006 better support for large data handling: iterate on points

@@ -20,9 +20,10 @@ function ROT = createRotationVector3d(A,B)
 %
 %   Source
 %     https://math.stackexchange.com/a/897677
-%
-% ---------
+
+% ------
 % Author: oqilipo
+% e-mail: N/A
 % Created: 2017-08-07
 % Copyright 2017
 

@@ -20,9 +20,10 @@ function [newLine, isOrthogonal] = projLineOnPlane(line, plane)
 %
 %   See also:
 %   planes3d, lines3d, intersectLinePlane, projPointOnPlane
-%
-% ---------
+
+% ------
 % Author: oqilipo 
+% e-mail: N/A
 % Created: 2017-08-06
 % Copyright 2017
 

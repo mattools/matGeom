@@ -29,7 +29,6 @@ function centroid = polygonCentroid3d(varargin)
 % Created: 2007-09-18
 % Copyright 2007 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
-
 if nargin == 1
     % polygon is given as a single argument
     pts = varargin{1};

@@ -9,7 +9,7 @@ function varargout = fillSphericalPolygon(sphere, poly, germ)
 %
 %   See also
 %   drawSphericalPolygon, fillSphericalTriangle, drawSphere
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

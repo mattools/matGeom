@@ -18,9 +18,8 @@ function varargout = drawCircleArc3d(varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% INRA - TPV URPOI - BIA IMASTE
-% created the 21/02/2005
-%
+% Created: 2005-02-21
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2007-06-27 change 3D angle convention

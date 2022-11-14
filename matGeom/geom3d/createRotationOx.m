@@ -21,11 +21,11 @@ function trans = createRotationOx(varargin)
 %   transforms3d, transformPoint3d, createRotationOy, createRotationOz
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 18/02/2005.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-18.
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   24/11/2008 changed convention for angle

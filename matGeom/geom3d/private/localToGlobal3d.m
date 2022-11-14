@@ -32,7 +32,7 @@ function trans = localToGlobal3d(varargin)
 %
 %   See also
 %   transforms3d, eulerAnglesToRotation3d
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

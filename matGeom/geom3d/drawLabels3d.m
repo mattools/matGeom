@@ -16,11 +16,11 @@ function varargout = drawLabels3d(varargin)
 %     drawLabels
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/01/2019.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2019-01-31.
+% Copyright 2019 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2019-01-31 write 3D version from drawLabels

@@ -15,7 +15,7 @@ function edge = lineToEdge3d(line)
 %
 %   See also
 %     lines3d, edges3d, edgeToLine3d
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr

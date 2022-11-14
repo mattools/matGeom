@@ -10,12 +10,12 @@ function theta = circle3dPosition(point, circle)
 %
 %   See also:
 %   circles3d, circle3dOrigin, circle3dPoint
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 21/02/2005
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-21
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   27/06/2007: change 3D angle convention

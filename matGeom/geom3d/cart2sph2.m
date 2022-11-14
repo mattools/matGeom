@@ -22,11 +22,11 @@ function varargout = cart2sph2(varargin)
 %     angles3d, sph2cart2, cart2sph, cart2sph2d
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 18/02/2005.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-18.
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   02/11/2006: update doc, and manage case RHO is empty

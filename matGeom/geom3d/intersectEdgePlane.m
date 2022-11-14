@@ -20,13 +20,12 @@ function point = intersectEdgePlane(edge, plane, varargin)
 %   See Also:
 %   planes3d, intersectLinePlane, createLine3d, createPlane
 %
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 24/04/2007 from intersectLinePlane.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2007-04-24 from intersectLinePlane.
+% Copyright 2007 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %

@@ -16,12 +16,11 @@ function drawPartialPatch(u, v, z, varargin)
 %     drawPolyline3d
 %
 
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 24/05/2005.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-05-24.
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2005-06-08 add doc.

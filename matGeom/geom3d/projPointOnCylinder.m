@@ -19,8 +19,9 @@ function ptProj = projPointOnCylinder(pt, cyl, varargin)
 %       projPointOnLine3d, projPointOnPlane, projPointOnCircle3d
 %
 
-% ---------
+% ------
 % Author: oqilipo
+% e-mail: N/A
 % Created: 2021-04-17, using R2020b
 % Copyright 2021
 

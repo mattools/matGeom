@@ -13,7 +13,7 @@ function box = intersectBoxes3d(box1, box2)
 %   See also
 %   boxes3d, drawBox3d, mergeBoxes3d
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

@@ -13,7 +13,7 @@ function poly2 = clipConvexPolygon3dHP(poly, plane)
 %
 %   See also:
 %   polygons3d, polyhedra
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

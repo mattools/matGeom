@@ -17,7 +17,7 @@ function res = transformLine3d(line, trans)
 %
 %   See also:
 %   lines3d, transforms3d, transformPoint3d, transformVector3d
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

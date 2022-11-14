@@ -20,13 +20,12 @@ function varargout = angleSort3d(pts, varargin)
 %
 %   See also:
 %   points3d, angles3d, angleSort
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2005-11-24
 % Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
-
 
 %   HISTORY :
 %   04/01/2007: remove unused variables

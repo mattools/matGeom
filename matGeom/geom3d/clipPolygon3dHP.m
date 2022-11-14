@@ -23,13 +23,12 @@ function poly2 = clipPolygon3dHP(poly, plane)
 %
 %   See also:
 %   poygons3d, polyhedra, clipConvexPolygon3dHP
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 02/08/2005.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-08-02.
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2007-01-04 add todo flag

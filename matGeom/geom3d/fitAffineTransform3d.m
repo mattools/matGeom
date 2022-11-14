@@ -29,7 +29,6 @@ function trans = fitAffineTransform3d(ref, src)
 % Created: 2009-07-31,    using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRAE - Cepia Software Platform.
 
-
 % number of points 
 N = size(src, 1);
 if size(ref, 1) ~= N

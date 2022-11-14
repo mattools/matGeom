@@ -31,7 +31,7 @@ function varargout = drawPolyline3d(varargin)
 %   polygons3d, drawPolygon3d, fillPolygon3d
 %
 
-% ---------
+% ------
 % Author : David Legland 
 % e-mail: david.legland@inra.fr
 % Created: 2005-02-15

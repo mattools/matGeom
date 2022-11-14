@@ -9,7 +9,7 @@ function line = reverseLine3d(line)
 %   See also:
 %   reverseLine, reversePlane
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

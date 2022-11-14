@@ -26,7 +26,7 @@ function b = isParallel3d(v1, v2, varargin)
 %
 %   See also
 %   vectors3d, isPerpendicular3d
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

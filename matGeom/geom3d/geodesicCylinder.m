@@ -25,8 +25,9 @@ function [geo, geoLength, conGeo, conGeoLength] = geodesicCylinder(pts, cyl, var
 %     https://mathworks.com/matlabcentral/fileexchange/6522
 %
 
-% ---------
+% ------
 % Author: oqilipo
+% e-mail: N/A
 % Created: 2021-04-17, using R2020b
 % Copyright 2021
 

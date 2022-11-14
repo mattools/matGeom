@@ -13,13 +13,12 @@ function kappa = surfaceCurvature(kappa1, kappa2, theta)
 %   K = surfaceCurvature(KAPPA1, KAPPA2, 0) returns KAPPA1.
 %   K = surfaceCurvature(KAPPA1, KAPPA2, pi/2) returns KAPPA2.
 %
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 07/04/2004.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-04-07.
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   20/04/2004 change name and add doc.

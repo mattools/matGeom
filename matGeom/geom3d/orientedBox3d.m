@@ -28,7 +28,7 @@ function [box3d, rotMat] = orientedBox3d(pts)
 %
 %   See also
 %     meshes3d, drawCuboid, rotation3dToEulerAngles
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr

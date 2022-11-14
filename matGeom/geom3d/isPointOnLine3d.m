@@ -16,12 +16,11 @@ function b = isPointOnLine3d(point, line, varargin)
 %   lines3d, distancePointLine3d, linePosition3d, isPointOnLine
 %
 
-% ---------
-% author : David Legland 
+% ------
+% Author: David Legland 
 % e-mail: david.legland@inra.fr
-% INRA - TPV URPOI - BIA IMASTE
-% created the 31/10/2003.
-%
+% Created: 2003-10-31.
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   17/12/2013 create from isPointOnLine

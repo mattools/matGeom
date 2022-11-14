@@ -16,7 +16,7 @@ function boxes3d(varargin)
 %   boundingBox3d, box3dVolume, drawBox3d
 %   intersectBoxes3d, mergeBoxes3d, randomPointInBox3d
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

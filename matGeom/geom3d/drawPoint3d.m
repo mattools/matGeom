@@ -26,10 +26,11 @@ function h = drawPoint3d(varargin)
 %     points3d, clipPoints3d, drawPoint
 %
 
-% ---------
+% ------
 % Author : David Legland 
-% INRA - TPV URPOI - BIA IMASTE
-% created the 18/02/2005.
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-18.
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   04/01/2007: remove unused variables, and enhance support for plot

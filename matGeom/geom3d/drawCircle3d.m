@@ -47,13 +47,13 @@ function varargout = drawCircle3d(varargin)
 %
 %   See also:
 %     circles3d, drawCircleArc3d, drawEllipse3d, drawSphere
-
 %
-%   ------
-%   Author: David Legland
-%   e-mail: david.legland@inra.fr
-%   Created: 2005-02-17
-%   Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
+
+% ------
+% Author: David Legland
+% e-mail: david.legland@inra.fr
+% Created: 2005-02-17
+% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
 %   HISTORY
 %   14/12/2006 allows unspecified PHI and THETA

@@ -27,13 +27,12 @@ function h = drawRay3d(ray, varargin)
 %
 %   See also
 %     drawLine3d, clipRay3d
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
 % Created: 2020-05-25,    using Matlab 9.8.0.1323502 (R2020a)
-% Copyright 2020 INRAE.
+% Copyright 2020 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % extract handle of axis to draw in
 if isAxisHandle(ray)

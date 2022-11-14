@@ -9,7 +9,7 @@ function res = parallelLine3d(line, point)
 %
 %   See also
 %   geom3d, parallelLine, parallelPlane
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

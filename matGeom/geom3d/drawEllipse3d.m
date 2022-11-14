@@ -32,12 +32,12 @@ function varargout = drawEllipse3d(varargin)
 %     ellYZ = [0 0 0  5 2  90 0 90];
 %     drawEllipse3d(ellYZ, 'color', [0 0 .8], 'linewidth', 2)
 % 
- 
-%   ------
-%   Author: David Legland
-%   e-mail: david.legland@inra.fr
-%   Created: 2008-05-07
-%   Copyright 2008 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
+
+% ------
+% Author: David Legland
+% e-mail: david.legland@inra.fr
+% Created: 2008-05-07
+% Copyright 2008 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
 %   HISTORY
 

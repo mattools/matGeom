@@ -13,12 +13,12 @@ function point2 = projPointOnCircle3d(point, circle)
 %
 %   Source
 %   https://www.geometrictools.com/Documentation/DistanceToCircle3.pdf
-%
-% ---------
+
+% ------
 % Author: oqilipo
+% e-mail: N/A
 % Created: 2020-10-12
 % Copyright 2020
-%
 
 center = circle(1:3);
 radius = circle(4);

@@ -9,9 +9,10 @@ function TFM = createRotationAboutPoint3d(ROT, point)
 %   transforms3d, transformPoint3d, createRotationOx, createRotationOy, 
 %   createRotationOz, createRotation3dLineAngle, createRotationVector3d,
 %   createRotationVectorPoint3d
-%
-% ---------
+
+% ------
 % Author: oqilipo
+% e-mail: N/A
 % Created: 2021-01-31
 % Copyright 2021
 

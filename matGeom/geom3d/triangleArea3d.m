@@ -23,7 +23,7 @@ function area = triangleArea3d(pt1, pt2, pt3)
 %
 %   See also
 %   polygons3d, polygonArea3d
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

@@ -16,7 +16,7 @@ function below = isBelowPlane(point, varargin)
 %
 %   See also
 %   planes3d, points3d, linePosition3d, planePosition
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

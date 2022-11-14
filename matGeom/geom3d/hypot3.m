@@ -18,7 +18,7 @@ function h = hypot3(dx, dy, dz)
 %          
 %   See also
 %   hypot, vectorNorm3d
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

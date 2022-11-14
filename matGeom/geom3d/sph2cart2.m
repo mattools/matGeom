@@ -39,9 +39,8 @@ function varargout = sph2cart2(theta, phi, rho)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% created the 18/02/2005.
-%
+% Created: 2005-02-18.
+% Copyright 2005 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 %   HISTORY
 %   22/03/2005: make test for 2 args, and add radius if not specified for

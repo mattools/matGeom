@@ -20,12 +20,12 @@ function pos = linePosition3d(point, line)
 %
 %   See also:
 %   lines3d, createLine3d, distancePointLine3d, projPointOnLine3d
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 17/02/2005.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-17.
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   05/01/2007 update doc
