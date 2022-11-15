@@ -15,11 +15,11 @@ function edge = clipLine3d(line, box)
 %   lines3d, edges3d, createLine3d, clipRay3d
 %
 
-% ---------
-% author : David Legland 
+% ------
+% Author: David Legland 
 % e-mail: david.legland@inra.fr
-% INRA - TPV URPOI - BIA IMASTE
-% created the 30/10/2008 from drawLine3d
+% Created: 2008-10-30, from drawLine3d
+% Copyright 2008 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   30/10/2008 replace intersectPlaneLine by intersectLinePlane
@@ -103,4 +103,3 @@ zOk  = zmin <= midZ & midZ <= zmax;
 
 % if one of the bounding condition is not met, set edge to NaN
 edge (~(xOk & yOk & zOk), :) = NaN;
-

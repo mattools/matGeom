@@ -31,7 +31,7 @@ function [axis, theta] = rotation3dAxisAndAngle(mat)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2010-08-11,    using Matlab 7.9.0.529 (R2009b)
+% Created: 2010-08-11, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform.
 
 % extract the linear part of the rotation matrix

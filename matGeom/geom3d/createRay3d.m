@@ -14,7 +14,7 @@ function ray = createRay3d(p1, p2)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Created: 2020-05-25,    using Matlab 9.8.0.1323502 (R2020a)
+% Created: 2020-05-25, using Matlab 9.8.0.1323502 (R2020a)
 % Copyright 2020 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 ray = [p1 (p2-p1)];

@@ -39,7 +39,7 @@ function varargout = sph2cart2(theta, phi, rho)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Created: 2005-02-18.
+% Created: 2005-02-18
 % Copyright 2005 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 %   HISTORY

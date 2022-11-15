@@ -29,8 +29,8 @@ function varargout = randomAngle3d(varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2005-02-18.
-% Copyright INRA - Cepia Software platform
+% Created: 2005-02-18
+% Copyright 2005 INRA - Cepia Software platform
 
 %   HISTORY
 %   2007-01-04 change angle order, update doc

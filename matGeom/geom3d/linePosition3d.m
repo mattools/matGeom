@@ -24,7 +24,7 @@ function pos = linePosition3d(point, line)
 % ------
 % Author: David Legland 
 % e-mail: david.legland@inrae.fr
-% Created: 2005-02-17.
+% Created: 2005-02-17
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY

@@ -30,7 +30,7 @@ function varargout = drawAxis3d(varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Created: 2007-08-14,    using Matlab 7.4.0.287 (R2007a)
+% Created: 2007-08-14, using Matlab 7.4.0.287 (R2007a)
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 
 % Check if axes handle is specified

@@ -33,13 +33,13 @@ function varargout = drawGrid3d(varargin)
 %   See Also
 %     drawLine3d, drawEdge3d, clipLine3d, draw
 
-%   ------
-%   Author: David Legland
-%   e-mail: david.legland@inrae.fr
-%   Created: 2005-11-17
-%   Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
+% ------
+% Author: David Legland
+% e-mail: david.legland@inrae.fr
+% Created: 2005-11-17
+% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
-%% initialize variables -----
+%% initialize variables
 
 % Check if axes handle is specified
 if isAxisHandle(varargin{1})
@@ -74,7 +74,7 @@ elseif length(varargin)==2
     spacing = varargin{2};
 end
 
-%% Compute internam data -----
+%% Compute internam data
 
 % get axis limits
 ax = axis(hAx);
@@ -99,7 +99,7 @@ if closed
 end
 
 
-%% Draw the grid -----
+%% Draw the grid
 
 h = [];
 %TODO: rewrite code, avoiding loops
@@ -126,7 +126,7 @@ for x = xe:dx:xf
 end
 
 
-%% Check output arguments -----
+%% Check output arguments
 
 if nargout>0
     varargout{1} = h;

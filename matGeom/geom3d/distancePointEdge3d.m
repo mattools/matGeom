@@ -21,7 +21,7 @@ function [dist, t] = distancePointEdge3d(point, edge)
 % ------
 % Author: David Legland 
 % e-mail: david.legland@inrae.fr
-% Created: 2004-04-07.
+% Created: 2004-04-07
 % Copyright 2004 INRA - CEPIA URPOI - MIA MathCell
 
 %   HISTORY

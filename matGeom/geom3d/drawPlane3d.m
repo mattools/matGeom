@@ -35,8 +35,8 @@ function h = drawPlane3d(plane, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% INRA - TPV URPOI - BIA IMASTE
-% created the 17/02/2005.
+% Created: 2005-02-17
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2008-10-30 replace intersectPlaneLine by intersectLinePlane, add doc

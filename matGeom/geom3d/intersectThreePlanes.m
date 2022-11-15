@@ -15,7 +15,7 @@ function point = intersectThreePlanes(plane1, plane2, plane3)
 % ------
 % Author: Roozbeh Geraili Mikola
 % e-mail: roozbehg@berkeley.edu or roozbehg@live.com
-% Created: 2017-09-20.
+% Created: 2017-09-20
 % Copyright 2017
 
 %   HISTORY

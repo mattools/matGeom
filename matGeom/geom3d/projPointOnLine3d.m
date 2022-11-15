@@ -18,7 +18,7 @@ function point = projPointOnLine3d(point, line)
 % ------
 % Author: David Legland 
 % e-mail: david.legland@inrae.fr
-% Created: 2012-08-23.
+% Created: 2012-08-23
 % Copyright 2012 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY

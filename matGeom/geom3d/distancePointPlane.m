@@ -14,7 +14,7 @@ function d = distancePointPlane(point, plane)
 % ------
 % Author: David Legland 
 % e-mail: david.legland@inrae.fr
-% Created: 2005-02-18.
+% Created: 2005-02-18
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY

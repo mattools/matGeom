@@ -48,7 +48,7 @@ function varargout = revolutionSurface(varargin)
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2004-04-09
-% Copyright 2005 INRA - CEPIA Nantes - MIAJ Jouy-en-Josas.
+% Copyright 2004 INRA - CEPIA Nantes - MIAJ Jouy-en-Josas.
 
 %   based on function cylinder from matlab
 %   31/06/2006 fix bug when passing 3 parameters

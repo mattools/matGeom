@@ -27,7 +27,7 @@ function area = polygonArea3d(poly, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2012-02-24,    using Matlab 7.9.0.529 (R2009b)
+% Created: 2012-02-24, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
 %   HISTORY

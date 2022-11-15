@@ -24,7 +24,7 @@ function varargout = drawBox3d(box, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Created: 2010-02-22.
+% Created: 2010-02-22
 % Copyright 2010 INRA - TPV URPOI - BIA IMASTE
 
 % Parse and check inputs

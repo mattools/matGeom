@@ -39,7 +39,7 @@ function varargout = transformPoint3d(pts, transfo, varargin)
 % ------
 % Author: David Legland 
 % e-mail: david.legland@inrae.fr
-% Created: 2005-02-10.
+% Created: 2005-02-10
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   23/03/2006 add support for non vector point data

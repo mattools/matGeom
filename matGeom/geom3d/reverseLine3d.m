@@ -13,7 +13,7 @@ function line = reverseLine3d(line)
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2012-05-24,    using Matlab 7.9.0.529 (R2009b)
+% Created: 2012-05-24, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform.
 
 line(:, 4:6) = -line(:, 4:6);

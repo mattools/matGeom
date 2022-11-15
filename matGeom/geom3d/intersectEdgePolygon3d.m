@@ -41,7 +41,7 @@ function [inter, valid] = intersectEdgePolygon3d(edge, poly)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Created: 2011-05-22,    using Matlab 7.9.0.529 (R2009b)
+% Created: 2011-05-22, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
 % supporting plane of polygon vertices

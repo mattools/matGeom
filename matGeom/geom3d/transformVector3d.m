@@ -27,7 +27,7 @@ function varargout = transformVector3d(varargin)
 % ------
 % Author: David Legland 
 % e-mail: david.legland@inrae.fr
-% Created: 2008-11-25 from transformPoint3d
+% Created: 2008-11-25, from transformPoint3d
 % Copyright 2008 INRA - TPV URPOI - BIA IMASTE
 
 if nargin~=2 && nargin~=4

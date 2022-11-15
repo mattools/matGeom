@@ -18,7 +18,7 @@ function vn = normalizeVector3d(v)
 % ------
 % Author: David Legland 
 % e-mail: david.legland@inrae.fr
-% Created: 2004-11-29.
+% Created: 2004-11-29
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 % HISTORY
