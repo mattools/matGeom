@@ -15,7 +15,7 @@ clearvars; close all; clc; %function checkHeader
 % Created: 2022-11-08, using MATLAB 9.13.0.2080170 (R2022b) Update 1
 % Copyright 2022
 
-mFiles = dir('../matGeom/**/*.m');
+mFiles = dir('../matGeom/geom3d/**/*.m');
 % Exclude the Contents.m files
 mFiles(strcmp({mFiles.name}','Contents.m'))=[];
 
@@ -79,7 +79,7 @@ for f=1:length(mFiles)
         S(aSec1Idx+1) = regexprep(S(aSec1Idx+1),'% +','% ');
     end
 
-    %% "E-mail" line
+    %% "e-mail" line
     if ~contains(S(aSec1Idx+2),'mail','IgnoreCase',1)
         if contains(S(aSec1Idx+2),'created','IgnoreCase',1)
             if contains(S(aSec1Idx+1),'David Legland')
@@ -126,13 +126,22 @@ for f=1:length(mFiles)
             else
                 continue
             end
+        elseif isempty(S{aSec1Idx+5})
+            creationYear = regexp(S(aSec1Idx+4), '20\d\d','match');
+            if ~isempty(creationYear)
+                S(aSec1Idx+5) = "% Copyright " + creationYear + " " + S{aSec1Idx+3}(coIdx:end);
+                S = [S(1:aSec1Idx+5); ''; S(aSec1Idx+6:end)];
+                S(aSec1Idx+3) = [];
+            else
+                continue
+            end
         end
     end
 
     %% "Created" line
     if contains(S(aSec1Idx+3),'created the') && ~contains(S(aSec1Idx+3),'Created')
         S(aSec1Idx+3) = regexprep(S(aSec1Idx+3),'% +created the +','% Created: ');
-    elseif contains(S(aSec1Idx+3),'created')
+    elseif contains(S(aSec1Idx+3),'created ')
         S(aSec1Idx+3) = regexprep(S(aSec1Idx+3),'% +created +','% Created: ');
     elseif contains(S(aSec1Idx+3),'  Created') && ~startsWith(S(aSec1Idx+3), '% Created')
         S(aSec1Idx+3) = regexprep(S(aSec1Idx+3),'% +','% ');
@@ -143,7 +152,7 @@ for f=1:length(mFiles)
     % Standardize creation date
     dateIdxS = regexp(S(aSec1Idx+3),'% Created: ','end') + 1;
     if any(dateIdxS) && length(dateIdxS) == 1
-        dateIdxE = regexp(S(aSec1Idx+3), '( from|, +using|\.$)') - 1;
+        dateIdxE = regexp(S(aSec1Idx+3), '( by | from|, by |, from|, +using|\.$)') - 1;
         if isempty(dateIdxE)
             dateIdxE = length(S{aSec1Idx+3});
             if length(S{aSec1Idx+3}(dateIdxS:dateIdxE)) >= 10
@@ -188,6 +197,12 @@ for f=1:length(mFiles)
         % Remove leading spaces before the header words
         S(aSec1Idx:aSec1Idx+4) = arrayfun(@(x) regexprep(x,'% +','% '), S(aSec1Idx:aSec1Idx+4));
     end
+
+    % Created year and copyright year should be the same
+    copyrightYear = regexp(S(aSec1Idx+4), '20\d\d','match');
+    if ~isequal(creationYear{1}, copyrightYear{1})
+        continue
+    end
     
     aSecLIs = [...
         startsWith(S(aSec1Idx-2), '%') ...
@@ -215,6 +230,17 @@ for f=1:length(mFiles)
     else
         continue
     end
+
+    % No dot after creation date
+    if regexp(S(aSec1Idx+3), '% Created: 20\d\d\-\d\d\-\d\d\.','start') == 1
+        S(aSec1Idx+3) = regexprep(S(aSec1Idx+3),'\. *$','');
+    end
+    % Remove multiple spaces after creation date
+    S(aSec1Idx+3) = regexprep(S(aSec1Idx+3),' +',' ');
+    % If text follows the creation date seperate it by a comma
+    if regexp(S(aSec1Idx+3), '% Created: 20\d\d\-\d\d\-\d\d\ .','start') == 1
+        S(aSec1Idx+3) = [S{aSec1Idx+3}(1:21) ',' S{aSec1Idx+3}(22:end)];
+    end
     
     if aSec1Idx+6 < length(S)
         while isempty(S{aSec1Idx+6})
@@ -230,10 +256,11 @@ end
 % Display remaining invalid files
 mFileNames = {mFiles.name}';
 validHeaders = {mFiles.validHeader}';
-invalidFiles = mFileNames(cellfun(@(x) ~isempty(x) && x==0,validHeaders));
+invalidFilesIdx = cellfun(@(x) ~isempty(x) && x==0, validHeaders);
+invalidFiles = mFileNames(invalidFilesIdx);
 NoIF = length(invalidFiles);
 if isempty(invalidFiles)
     invalidFiles='none';
 end
 disp([num2str(NoIF) ' files with invalid header:'])
-disp(invalidFiles)
+disp([num2cell(find(invalidFilesIdx)), invalidFiles])
