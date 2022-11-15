@@ -19,13 +19,13 @@ function trans = createScaling3d(varargin)
 %   See also:
 %   transforms3d, transformPoint3d, transformVector3d, createTranslation3d,
 %   createRotationOx, createRotationOy, createRotationOz
+%
 
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 20/04/2006.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2006-04-20.
+% Copyright 2006 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   25/11/2008 rename from scale3d to scaling3d

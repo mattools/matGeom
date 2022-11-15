@@ -18,11 +18,11 @@ function [dist, t] = distancePointEdge3d(point, edge)
 %   edges3d, points3d, distancePoints3d, distancePointLine3d
 %   
 
-%   ---------
-%   author : David Legland 
-%   INRA - CEPIA URPOI - MIA MathCell
-%   created the 07/04/2004.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-04-07.
+% Copyright 2004 INRA - CEPIA URPOI - MIA MathCell
 
 %   HISTORY
 %   2005-06-24 rename, and change arguments sequence

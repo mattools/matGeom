@@ -18,7 +18,7 @@ function S = cylinderSurfaceArea(cyl)
 %
 %   See also
 %     geom3d, ellipsoidSurfaceArea, intersectLineCylinder
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr

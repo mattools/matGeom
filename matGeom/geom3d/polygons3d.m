@@ -11,7 +11,7 @@ function polygons3d(varargin)
 %   intersectLinePolygon3d, intersectLineTriangle3d, intersectRayPolygon3d
 %   clipConvexPolygon3dHP
 %   drawPolygon3d, drawPolyline3d, fillPolygon3d
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

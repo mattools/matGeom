@@ -9,13 +9,12 @@ function sphere = createSphere(varargin)
 %
 %   See also
 %   spheres, circles3d
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 22/03/2005.
-%
 
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-03-22.
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 if length(varargin)==4
     pts = [varargin{1};varargin{2};varargin{3};varargin{4}];

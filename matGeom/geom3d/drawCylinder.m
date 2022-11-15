@@ -71,11 +71,11 @@ function varargout = drawCylinder(varargin)
 %     intersectLineCylinder, cylinderSurfaceArea
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 17/09/2005
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-09-17
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2006/12/14 bug for coordinate conversion, vectorize transforms

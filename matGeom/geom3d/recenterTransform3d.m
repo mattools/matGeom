@@ -20,7 +20,7 @@ function res = recenterTransform3d(transfo, center)
 %   See also
 %   transforms3d, createRotationOx, createRotationOy, createRotationOz
 %   createTranslation3d
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

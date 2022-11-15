@@ -16,13 +16,12 @@ function dist = distancePoints3d(p1, p2, varargin)
 %
 %   See also:
 %   points3d, minDistancePoints, distancePoints
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 18/02/2005.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-18.
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   21/02/2005: add different norms

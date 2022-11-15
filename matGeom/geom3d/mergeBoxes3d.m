@@ -14,7 +14,7 @@ function box = mergeBoxes3d(box1, box2)
 %   See also
 %   boxes3d, drawBox3d, intersectBoxes3d
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -36,4 +36,3 @@ maxi = max(box1(:,2:2:end), box2(:,2:2:end));
 
 % concatenate result into a new box structure
 box = [mini(:,1) maxi(:,1) mini(:,2) maxi(:,2) mini(:,3) maxi(:,3)];
-

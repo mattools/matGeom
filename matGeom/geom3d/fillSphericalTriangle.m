@@ -6,12 +6,12 @@ function varargout = fillSphericalTriangle(sphere, p1, p2, p3, varargin)
 %
 %   See also
 %   fillSphericalPolygon, drawSphericalTriangle, drawSphere
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 22/02/2005
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-22
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   27/06/2007 manage spheres other than origin

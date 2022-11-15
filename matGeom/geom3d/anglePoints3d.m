@@ -12,12 +12,12 @@ function alpha = anglePoints3d(varargin)
 %
 %   See also
 %   points3d, angles3d
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 21/02/2005.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-21.
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   20/09/2005: add case of single argument for all points

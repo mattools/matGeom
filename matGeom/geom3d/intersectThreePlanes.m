@@ -11,12 +11,12 @@ function point = intersectThreePlanes(plane1, plane2, plane3)
 %
 %   See also:
 %   planes3d, intersectPlanes, intersectLinePlane
-%
-%   ---------
-%   author : Roozbeh Geraili Mikola
-%   email  : roozbehg@berkeley.edu or roozbehg@live.com
-%   created the 09/20/2017.
-%
+
+% ------
+% Author: Roozbeh Geraili Mikola
+% e-mail: roozbehg@berkeley.edu or roozbehg@live.com
+% Created: 2017-09-20.
+% Copyright 2017
 
 %   HISTORY
 

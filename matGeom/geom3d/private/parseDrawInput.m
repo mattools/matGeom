@@ -10,9 +10,10 @@ function [hAx, prim, varargin] = parseDrawInput(prim, valFun, type, defOpts, var
 %   OUTPUT:
 %       HAX: The current or specified axes for drawing
 %       PRIM: validated PRIM
-%
+
 % ------
 % Author: oqilipo
+% e-mail: N/A
 % Created: 2017-10-13, using R2017b
 % Copyright 2017
 

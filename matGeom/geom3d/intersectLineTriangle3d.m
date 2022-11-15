@@ -41,7 +41,6 @@ function [point, pos, isInside] = intersectLineTriangle3d(line, triangle, vararg
 % Created: 2011-04-08,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
-
 %% Default values
 
 % default return value

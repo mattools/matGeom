@@ -13,7 +13,7 @@ function poly = sphericalVoronoiDomain(refPoint, neighbors)
 %
 %   See also
 %   drawSphericalPolygon
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

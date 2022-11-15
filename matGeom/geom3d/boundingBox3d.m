@@ -20,7 +20,7 @@ function box = boundingBox3d(points)
 %     
 %   See also
 %   boxes3d, drawBox3d
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

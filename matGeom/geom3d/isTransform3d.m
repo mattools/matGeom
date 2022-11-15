@@ -23,9 +23,10 @@ function a = isTransform3d(trans, varargin)
 %   See also
 %   composeTransforms3d, createBasisTransform3d, recenterTransform3d,
 %   transformPoint3d
-%
+
 % ------
 % Author: oqilipo
+% e-mail: N/A
 % Created: 2018-07-08
 % Copyright 2018
 

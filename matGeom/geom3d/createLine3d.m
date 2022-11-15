@@ -31,13 +31,12 @@ function line = createLine3d(varargin)
 %
 %   See also:
 %   lines3d
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 17/02/2005.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-17.
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   30/11/2005 add more cases

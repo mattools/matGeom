@@ -14,11 +14,11 @@ function d = distancePointLine3d(point, line)
 %   References
 %   http://mathworld.wolfram.com/Point-LineDistance3-Dimensional.html
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 23/05/2005.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-05-23.
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   15/01/2007 unify size of input data

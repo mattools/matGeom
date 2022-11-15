@@ -77,10 +77,11 @@ function varargout = drawCapsule(varargin)
 %     crawCylinder, drawDome, drawSphere
 %
 
-%   ---------
-%   author: Moritz Schappler
-%   created the 27/07/2013
-%
+% ------
+% Author: Moritz Schappler
+% e-mail: N/A
+% Created: 2013-07-27
+% Copyright 2013
 
 %   HISTORY
 %   2013-07-27 initial version as copy of drawCylinder

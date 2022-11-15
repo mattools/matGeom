@@ -54,11 +54,11 @@ function varargout = drawEllipseCylinder(varargin)
 %   See Also:
 %     drawCylinder, drawSphere, cylinderMesh, drawLine3d, surf
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 27/02/2014
-
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2014-02-27
+% Copyright 2014 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 

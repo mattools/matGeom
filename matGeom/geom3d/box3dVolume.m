@@ -16,7 +16,7 @@ function vol = box3dVolume(box)
 %
 %   See also
 %   boxes3d, boundingBox3d
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

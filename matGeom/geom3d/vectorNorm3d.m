@@ -13,10 +13,11 @@ function n = vectorNorm3d(v)
 %     vectors3d, normalizeVector3d, vectorAngle3d, hypot3
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 21/02/2005.
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-21.
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   19/06/2009 rename as vectorNorm3d

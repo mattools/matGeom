@@ -39,11 +39,11 @@ function alpha = sphericalAngle(p1, p2, p3)
 %   See also:
 %   geom3d, angles3d, spheres, sph2cart
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 21/02/2005.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-21.
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   23-05-2006 fix bug for points with angle from center > pi/2

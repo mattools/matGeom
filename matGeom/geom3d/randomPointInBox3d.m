@@ -24,7 +24,7 @@ function points = randomPointInBox3d(box, N, varargin)
 %
 %   See also
 %   points3d, boxes3d
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

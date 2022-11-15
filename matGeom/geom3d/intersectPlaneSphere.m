@@ -20,12 +20,12 @@ function circle = intersectPlaneSphere(plane, sphere)
 %   
 %   See Also:
 %   planes3d, spheres, circles3d, intersectLinePlane, intersectLineSphere
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 18/02/2005.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-18.
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   27/06/2007: change output format of circle, add support for multiple

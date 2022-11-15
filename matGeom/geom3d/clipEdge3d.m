@@ -8,7 +8,7 @@ function clipped = clipEdge3d(edge, box)
 %
 %   See also
 %     lines3d, edges3d, clipLine3d
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr

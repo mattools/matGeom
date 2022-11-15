@@ -19,9 +19,10 @@ function TFM = createRotationVectorPoint3d(A,B,P)
 %
 %   See also
 %   transformPoint3d, createRotationVector3d
-%
-% ---------
+
+% ------
 % Author: oqilipo
+% e-mail: N/A
 % Created: 2017-08-07
 % Copyright 2017
 

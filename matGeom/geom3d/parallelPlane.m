@@ -25,7 +25,7 @@ function res = parallelPlane(plane, point)
 %
 %   See also
 %   geom3d, parallelLine3d
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr

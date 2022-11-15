@@ -36,7 +36,6 @@ function varargout = fillPolygon3d(varargin)
 % Created: 2007-01-05
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
 
-
 % Check if axes handle is specified
 if isAxisHandle(varargin{1})
     hAx = varargin{1};

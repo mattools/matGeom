@@ -8,12 +8,12 @@ function ori = circle3dOrigin(varargin)
 %
 %   See also:
 %   circles3d, points3d, circle3dPosition
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 21/02/2005
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-21
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 

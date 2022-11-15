@@ -13,9 +13,10 @@ function d = isPlane(plane)
 %
 %   See also
 %   createPlane3d
-%
+
 % ------
 % Author: oqilipo
+% e-mail: N/A
 % Created: 2017-07-09
 % Copyright 2017
 

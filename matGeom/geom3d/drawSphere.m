@@ -57,11 +57,11 @@ function varargout = drawSphere(varargin)
 %   See also
 %   spheres, circles3d, sphere, drawEllipsoid
 
-%   ---------
-%   author: David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 17/02/2005
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-17
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2006-05-19 use centered sphere with radius 1 when no input specified

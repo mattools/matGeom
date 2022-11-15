@@ -26,13 +26,12 @@ function b = isPointInEllipsoid(point, elli, varargin)
 %   See also
 %     equivalentEllipsoid, drawEllipsoid, isPointInEllipse
 %
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
 % Created: 2020-11-19,    using Matlab 9.8.0.1323502 (R2020a)
-% Copyright 2020 INRAE.
+% Copyright 2020 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % extract computation tolerance
 tol = 1e-14;

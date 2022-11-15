@@ -30,9 +30,10 @@ function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin)
 %   Source
 %     Nested functions are part of the quadfit toolbox by Levente Hunyadi
 %     https://mathworks.com/matlabcentral/fileexchange/45356
-%
-% ---------
+
+% ------
 % Author: oqilipo
+% e-mail: N/A
 % Created: 2017-08-11
 % Copyright 2017
 

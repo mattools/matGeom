@@ -30,7 +30,7 @@ function varargout = rotation3dToEulerAngles(mat, varargin)
 %   transforms3d, rotation3dAxisAndAngle, createRotation3dLineAngle,
 %   eulerAnglesToRotation3d
 %
-%
+
 % ------
 % Authors: David Legland, oqilipo
 % e-mail: david.legland@grignon.inra.fr

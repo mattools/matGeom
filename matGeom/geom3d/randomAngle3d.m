@@ -25,11 +25,11 @@ function varargout = randomAngle3d(varargin)
 %
 %   See also:
 %   angles3d, sph2cart2, cart2sph2
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% created the 18/02/2005.
+% Created: 2005-02-18.
 % Copyright INRA - Cepia Software platform
 
 %   HISTORY

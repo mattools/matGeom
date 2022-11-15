@@ -24,8 +24,9 @@ function varargout = drawAngleBetweenVectors3d(o, v1, v2, r, varargin)
 %   See also
 %     drawCircleArc3d
 
-% ---------
+% ------
 % Author: oqilipo
+% e-mail: N/A
 % Created: 2020-02-02
 % Copyright 2020
 

@@ -33,7 +33,7 @@ function [dist, proj] = distancePointTriangle3d(point, triangle)
 %   (same algorithm, but different order of input argument)
 %
 %   * https://fr.mathworks.com/matlabcentral/fileexchange/22857-distance-between-a-point-and-a-triangle-in-3d
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
