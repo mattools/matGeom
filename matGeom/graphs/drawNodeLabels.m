@@ -10,12 +10,12 @@ function varargout = drawNodeLabels(nodes, value, varargin)
 %   H = drawNodeLabels(...) 
 %   Returns array of handles to each text structure, making it possible to
 %   change font, color, size 
-%
-%   -----
-%   author: David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 10/02/2003.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-02-10
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   10/03/2004 included into lib/graph library

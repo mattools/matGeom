@@ -20,12 +20,12 @@ function varargout = circleAsPolygon(circle, varargin)
 %   See also:
 %   circles2d, circleToPolygon
 %
-%
-% ---------
-% author : David Legland 
-% created the 06/04/2005.
-% Copyright 2010 INRA - Cepia Software Platform.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-04-06
+% Copyright 2005 INRA - Cepia Software Platform
 
 %   HISTORY
 %   20/04/2007: return a closed polygon with N+1 vertices, use default N=64

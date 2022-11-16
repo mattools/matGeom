@@ -14,12 +14,12 @@ function energy = meshEnergy(vertices, faces)
 %
 %   See also
 %     centroidalVoronoi2d, cvtUpdate, polygonSecondAreaMoments
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2017-09-01,    using Matlab 9.1.0.441655 (R2016b)
-% Copyright 2017 INRA - Cepia Software Platform.
+% Created: 2017-09-01, using Matlab 9.1.0.441655 (R2016b)
+% Copyright 2017 INRA - Cepia Software Platform
 
 nFaces = meshFaceNumber(vertices, faces);
 

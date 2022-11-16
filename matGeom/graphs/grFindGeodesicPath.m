@@ -10,12 +10,12 @@ function path = grFindGeodesicPath(nodes, edges, ind0, ind1, edgeWeights)
 %
 %   See also
 %   grFindMaximalLengthPath
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2011-05-22,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% Created: 2011-05-22, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011 INRA - Cepia Software Platform
 
 % ensure weights are defined
 if ~exist('edgeWeights', 'var')

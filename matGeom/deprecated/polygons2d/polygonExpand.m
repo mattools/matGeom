@@ -20,11 +20,11 @@ function poly2 = polygonExpand(polygon, dist)
 %   polygons2d
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 14/05/2005.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-05-14
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY :
 %   31/07/2005 : change algo for negative distance : use clipping of

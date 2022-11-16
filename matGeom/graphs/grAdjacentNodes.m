@@ -26,11 +26,11 @@ function nodes2 = grAdjacentNodes(edges, node)
 %   See Also
 %     grAdjacentEdges
 
-%   -----
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 16/08/2004.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-08-16
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   10/02/2004 documentation

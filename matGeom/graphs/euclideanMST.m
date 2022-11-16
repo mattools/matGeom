@@ -27,8 +27,8 @@ function varargout = euclideanMST(points)
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2007-07-27,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% Created: 2007-07-27, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % dimension
 D   = size(points, 2);

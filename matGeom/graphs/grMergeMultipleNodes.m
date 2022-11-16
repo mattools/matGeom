@@ -10,14 +10,12 @@ function varargout = grMergeMultipleNodes(varargin)
 %   * first remove multiple nodes. find all nodes with same coords, and
 %       keep only one
 %   * remove edges that link same nodes
-%
-%   -----
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 09/08/2004.
-%
 
-
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-08-09
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 %% process input arguments
 

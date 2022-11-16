@@ -16,7 +16,7 @@ function [nodes, edges, faces] = voronoi2d(germs)
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % Created: 2007-01-12
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % compute generic Voronoi diagram
 [V, C] = voronoin(germs);

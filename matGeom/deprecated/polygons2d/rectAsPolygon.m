@@ -15,12 +15,11 @@ function [tx, ty] = rectAsPolygon(rect)
 %   polygons2d, drawRect, drawOrientedBox, drawPolygon
 %
 
-% ---------
+% ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
-% INRA - TPV URPOI - BIA IMASTE
-% created the 06/04/2005.
-%
+% Created: 2005-04-06
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2016: Simplify by JuanPi Carbajal

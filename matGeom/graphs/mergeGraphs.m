@@ -4,11 +4,11 @@ function varargout = mergeGraphs(varargin)
 %   
 %
 
-%   -----
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 09/08/2004.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-08-09
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 simplify = false;
 

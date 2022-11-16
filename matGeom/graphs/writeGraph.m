@@ -11,13 +11,12 @@ function writeGraph(nodes, edges, fileName)
 %
 %   See also
 %     readGraph
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2014-01-20,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2014 INRA - Cepia Software Platform.
-
+% Created: 2014-01-20, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2014 INRA - Cepia Software Platform
 
 %% File creation and init
 

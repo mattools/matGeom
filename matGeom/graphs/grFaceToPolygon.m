@@ -17,12 +17,12 @@ function pts2 = grFaceToPolygon(varargin)
 %
 %   The number of columns of PTS2 is the same as for NODES.
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2005-11-30
-% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
+% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 %   HISTORY
 %   27/07/2007: cleanup code

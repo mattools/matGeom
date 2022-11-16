@@ -31,8 +31,8 @@ function [nodes2, edges2, faces2] = clipMesh2dPolygon(nodes, edges, faces, poly)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2012-02-24,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% Created: 2012-02-24, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012 INRA - Cepia Software Platform
 
 % Algorithm summary:
 % * For each edge not outside do:

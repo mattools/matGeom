@@ -30,12 +30,12 @@ function varargout = drawCurve(varargin)
 %
 %   See Also:
 %   polygons2d, drawPolyline
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 06/04/2004.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-04-06
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   03/01/2007 better processing of input, and update doc (drawing

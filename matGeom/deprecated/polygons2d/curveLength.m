@@ -21,13 +21,12 @@ function len = curveLength(varargin)
 %
 %   See also:
 %   polygons2d, curveCentroid
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 14/06/2004
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-06-14
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   22/05/2006 manage any dimension for points, closed and open curves, 

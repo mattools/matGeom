@@ -9,13 +9,12 @@ function varargout = grClose(varargin)
 %
 %   See also
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2006-01-20
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
-
+% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 if length(varargin) == 2
     edges   = varargin{1};
