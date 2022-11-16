@@ -46,12 +46,11 @@ function varargout = drawEllipseArc(varargin)
 %     ellipses2d, drawEllipse, drawEllipseAxes, drawCircleArc
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 12/12/2003.
-%
-
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-12-12
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2008/10/10 uses fixed number of points for arc.

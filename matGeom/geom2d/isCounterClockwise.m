@@ -38,8 +38,7 @@ function res = isCounterClockwise(p1, p2, p3, varargin)
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
 % Created: 2010-04-09
-% Copyright 2011 INRAE - Cepia Software Platform.
-
+% Copyright 2010 INRAE - Cepia Software Platform
 
 %   HISTORY
 %   2011-05-16 change variable names, add support for point arrays

@@ -13,10 +13,11 @@ function b = isLeftOriented(point, line)
 %   lines2d, points2d, isCounterClockwise, isPointOnLine, distancePointLine
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/07/2005.
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-07-31
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2017-09-04 uses bsxfun

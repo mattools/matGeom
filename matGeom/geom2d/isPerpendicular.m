@@ -33,7 +33,7 @@ function b = isPerpendicular(v1, v2, varargin)
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % Created: 2006-04-25
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
+% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 %   HISTORY
 %   2007-09-18 copy from isPerpendicular, adapt to any dimension, and add

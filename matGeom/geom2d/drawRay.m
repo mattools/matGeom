@@ -16,12 +16,11 @@ function varargout = drawRay(ray, varargin)
 %     rays2d, drawLine, clipRay
 %
 
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2005-07-06 add support for multiple rays

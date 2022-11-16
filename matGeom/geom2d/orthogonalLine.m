@@ -21,12 +21,12 @@ function res = orthogonalLine(line, point)
 % 
 %   See also:
 %   lines2d, parallelLine, intersectLines
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   19/02/2004 added control for multiple lines and/or points

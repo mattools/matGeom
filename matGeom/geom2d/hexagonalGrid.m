@@ -11,12 +11,11 @@ function varargout = hexagonalGrid(bounds, origin, size, varargin)
 %   TODO: add possibility to use rotated grid
 %
 
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 06/08/2005.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-08-06
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 size = size(1);
 dx = 3*size;

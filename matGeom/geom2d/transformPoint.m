@@ -25,11 +25,11 @@ function varargout = transformPoint(varargin)
 %     points2d, transforms2d, translation, rotation
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 06/04/2004.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-04-06
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   25/04/2005 : support for 2D arrays of points (px, py, trans).

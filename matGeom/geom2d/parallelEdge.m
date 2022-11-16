@@ -18,12 +18,12 @@ function res = parallelEdge(edge, dist)
 %
 %   See also
 %     edges2d, parallelLine, drawEdge, centeredEdgeToEdge, edgeToLine
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2012-07-31,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% Created: 2012-07-31, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012 INRA - Cepia Software Platform
 
 % compute the line parallel to the supporting line of edge
 line = parallelLine(edgeToLine(edge), dist);

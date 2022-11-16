@@ -27,12 +27,12 @@ function point = intersectLines(line1, line2, varargin)
 %   See also
 %   lines2d, edges2d, intersectEdges, intersectLineEdge
 %   intersectLineCircle
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2004-02-19 add support for multiple lines.

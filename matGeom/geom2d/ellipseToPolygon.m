@@ -24,11 +24,11 @@ function varargout = ellipseToPolygon(ellipse, N)
 %   ellipses2d, drawEllipse, circleToPolygon, rectToPolygon, ellipsePoint
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 06/04/2005.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-04-06
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 % HISTORY
 % 2011-03-30 use angles in degrees, add default value for N

@@ -14,13 +14,12 @@ function varargout = squareGrid(bounds, origin, size)
 %
 %
 %   TODO: add possibility to use rotated grid
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 06/08/2005.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-08-06
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 % find all x coordinate
 x1 = bounds(1) + mod(origin(1)-bounds(1), size(1));

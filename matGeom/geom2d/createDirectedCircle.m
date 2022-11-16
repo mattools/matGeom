@@ -15,12 +15,12 @@ function circle = createDirectedCircle(varargin)
 %
 %   See also:
 %   circles2d, createCircle
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 12/01/2005.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-01-12
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 if nargin == 2
     % inputs are the center and a point on the circle

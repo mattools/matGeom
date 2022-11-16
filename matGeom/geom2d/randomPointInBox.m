@@ -28,8 +28,8 @@ function points = randomPointInBox(box, N, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2007-10-10,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% Created: 2007-10-10, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 if nargin < 2
     N = 1;

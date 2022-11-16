@@ -27,12 +27,12 @@ function mat = createRotation90(varargin)
 %
 %   See also
 %   transforms2d, createRotation
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2012-06-20,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% Created: 2012-06-20, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012 INRA - Cepia Software Platform
 
 % default values
 num = 1;

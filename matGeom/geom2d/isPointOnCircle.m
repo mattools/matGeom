@@ -16,12 +16,12 @@ function b = isPointOnCircle(point, circle, varargin)
 %
 %   See also:
 %   circles2d, isPointInCircle
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 07/04/2004.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-04-07
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   22/05/2009 rename to isPointOnCircle, add psb to specify tolerance

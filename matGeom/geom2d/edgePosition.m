@@ -34,8 +34,7 @@ function pos = edgePosition(point, edge)
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
 % Created: 2004-05-25
-% Copyright 2009 INRA - Cepia Software Platform.
-%
+% Copyright 2004 INRA - Cepia Software Platform
 
 %   HISTORY:
 %   06/12/2009 created from linePosition

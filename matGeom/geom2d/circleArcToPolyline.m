@@ -18,12 +18,12 @@ function varargout = circleArcToPolyline(arc, N)
 %   See also:
 %   circles2d, circleToPolygon, drawCircle, drawPolygon
 %
-%
-% ---------
-% author : David Legland 
-% created the 22/05/2006.
-% Copyright 2010 INRA - Cepia Software Platform.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2006-05-22
+% Copyright 2006 INRA - Cepia Software Platform
 
 % HISTORY
 % 2011-03-30 use angles in degrees, add default value for N

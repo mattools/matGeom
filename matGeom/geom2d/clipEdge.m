@@ -16,11 +16,11 @@ function edge2 = clipEdge(edge, box)
 %   edges2d, boxes2d, clipLine
 %
 
-% ---------
-% author : David Legland 
+% ------
+% Author: David Legland 
 % e-mail: david.legland@inra.fr
-% created: the 14/05/2005.
-% Copyright 2010 INRA - Cepia Software Platform.
+% Created: 2005-05-14
+% Copyright 2005 INRA - Cepia Software Platform
 
 %   HISTORY
 %   2007-01-08 sort points according to position on edge, not to x coord

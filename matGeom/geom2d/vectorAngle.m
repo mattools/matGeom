@@ -34,7 +34,7 @@ function alpha = vectorAngle(v1, varargin)
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
 % Created: 2007-10-18
-% Copyright 2011 INRA - Cepia Software Platform.
+% Copyright 2007 INRA - Cepia Software Platform
 
 %   HISTORY
 %   2010-04-16 add psb to specify center interval

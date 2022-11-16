@@ -7,13 +7,12 @@ function line = cartesianLine(varargin)
 %
 %   See also:
 %   lines2d, createLine
-%
-%   ---------
+
+% ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% created the 25/05/2004.
-% Copyright 2010 INRA - Cepia Software Platform.
-
+% Created: 2004-05-25
+% Copyright 2004 INRA - Cepia Software Platform
 
 if length(varargin)==1
     var = varargin{1};

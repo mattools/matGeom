@@ -22,14 +22,12 @@ function varargout = drawEllipseAxes(varargin)
 %   See also
 %     ellipses2d, drawEllipse, drawEllipseArc
 %
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% Created: 2022-09-11,    using Matlab 9.9.0.1570001 (R2020b) Update 4
-% Copyright 2022 INRAE.
-
+% Created: 2022-09-11, using Matlab 9.9.0.1570001 (R2020b) Update 4
+% Copyright 2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 %% Extract input arguments
 

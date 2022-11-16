@@ -33,8 +33,8 @@ function box = boundingBox(points)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2011-04-01,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% Created: 2011-04-01, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011 INRA - Cepia Software Platform
 
 % HISTORY
 % 2011-04-08 add example

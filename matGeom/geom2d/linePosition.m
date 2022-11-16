@@ -34,13 +34,12 @@ function pos = linePosition(point, line, varargin)
 %
 %   See also:
 %   lines2d, createLine, projPointOnLine, isPointOnLine
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 25/05/2004.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-05-25
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2005-07-07 manage multiple input

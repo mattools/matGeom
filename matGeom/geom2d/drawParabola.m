@@ -46,11 +46,11 @@ function varargout = drawParabola(varargin)
 %   drawCircle, drawEllipse
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 02/06/2006.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2006-06-02
+% Copyright 2006 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2010-11-17 rewrite, change parametrisation, update doc

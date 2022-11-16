@@ -38,11 +38,11 @@ function varargout = drawCircle(varargin)
 %   circles2d, drawCircleArc, drawEllipse, circleToPolygon
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   02/11/2004: add possibility to draw multiple circles in one call

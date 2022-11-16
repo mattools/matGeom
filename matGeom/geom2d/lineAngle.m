@@ -12,12 +12,12 @@ function theta = lineAngle(varargin)
 %
 %   See also
 %   lines2d, angles2d, createLine, normalizeAngle
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2004-02-19 added support for multiple lines.

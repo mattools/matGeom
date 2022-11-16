@@ -17,12 +17,12 @@ function theta = edgeAngle(edge)
 %
 %   See also
 %   edges2d, angles2d, edgeAngle, lineAngle, edgeLength
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 06/04/2003.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-04-06
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 line = createLine(edge(:,1:2), edge(:,3:4));
 theta = lineAngle(line);

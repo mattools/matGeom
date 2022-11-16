@@ -72,9 +72,8 @@ function varargout = minDistancePoints(p1, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Copyright 2009 INRAE - Cepia Software Platform.
-% created the 15/06/2004.
-
+% Created: 2004-06-15
+% Copyright 2004 INRAE - Cepia Software Platform
 
 % HISTORY:
 % 22/06/2005 compute sqrt only at the end (faster), and change behaviour

@@ -10,13 +10,12 @@ function varargout = triangleGrid(bounds, origin, size, varargin)
 %   triangles. 
 %
 %   TODO: add possibility to use rotated grid
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 06/08/2005.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-08-06
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 dx = size(1);
 dy = size(1)*sqrt(3);

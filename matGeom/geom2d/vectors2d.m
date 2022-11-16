@@ -13,11 +13,11 @@ function vectors2d
 %   vectorNorm, vectorAngle, isPerpendicular, isParallel
 %   normalizeVector, transformVector, rotateVector
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 help('vectors2d');

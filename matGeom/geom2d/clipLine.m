@@ -30,8 +30,8 @@ function edge = clipLine(line, box, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2007-08-27,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2010 INRA - Cepia Software Platform.
+% Created: 2007-08-27, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2007 INRA - Cepia Software Platform
 
 % HISTORY
 % 2010-05-16 rewrite using intersectLines, add precision management

@@ -8,12 +8,12 @@ function line = reverseLine(line)
 %
 %   See also:
 %   lines2d, createLine
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 20/01/2004.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-01-20
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   30/06/2009 rename as reverseLine

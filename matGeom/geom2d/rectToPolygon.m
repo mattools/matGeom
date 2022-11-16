@@ -14,12 +14,11 @@ function [tx, ty] = rectToPolygon(rect)
 %
 %
 
-% ---------
+% ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
-% INRA - TPV URPOI - BIA IMASTE
-% created the 06/04/2005.
-%
+% Created: 2005-04-06
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 % HISTORY
 

@@ -35,9 +35,8 @@ function varargout = circleToPolygon(circle, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
 % Created: 2005-04-06
-% Copyright 2022 INRAE.
+% Copyright 2005 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % HISTORY
 % 2007-04-20 return a closed polygon with N+1 vertices, use default N=64
