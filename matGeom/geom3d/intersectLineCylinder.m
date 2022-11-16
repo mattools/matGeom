@@ -47,10 +47,11 @@ function points = intersectLineCylinder(line, cylinder, varargin)
 %   http://www.gamedev.net/community/forums/topic.asp?topic_id=467789
 %
 
-% ---
+% ------
 % Author: David Legland, from a file written by Daniel Trauth (RWTH)
 % e-mail: david.legland@inra.fr
 % Created: 2007-01-27
+% Copyright 2007
 
 % HISTORY
 % 2010-10-21 change cylinder argument convention, add bounds check and doc

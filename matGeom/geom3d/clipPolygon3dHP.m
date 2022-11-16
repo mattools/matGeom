@@ -27,7 +27,7 @@ function poly2 = clipPolygon3dHP(poly, plane)
 % ------
 % Author: David Legland 
 % e-mail: david.legland@inrae.fr
-% Created: 2005-08-02.
+% Created: 2005-08-02
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY

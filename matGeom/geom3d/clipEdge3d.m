@@ -12,7 +12,7 @@ function clipped = clipEdge3d(edge, box)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2018-04-12,    using Matlab 9.3.0.713579 (R2017b)
+% Created: 2018-04-12, using Matlab 9.3.0.713579 (R2017b)
 % Copyright 2018 INRA - Cepia Software Platform.
 
 % compute supporting line of edge

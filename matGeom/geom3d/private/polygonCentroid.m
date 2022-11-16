@@ -29,7 +29,7 @@ function [centroid, area] = polygonCentroid(varargin)
 % ------
 % Author: David Legland 
 % e-mail: david.legland@inrae.fr
-% Created: 2004-05-05.
+% Created: 2004-05-05
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 % Algorithme P. Bourke, vectorized version

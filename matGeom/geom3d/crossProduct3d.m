@@ -21,7 +21,9 @@ function c = crossProduct3d(a,b)
 %
 %   See also DOT.
 
-%   Sven Holcombe
+% ------
+% Author: Sven Holcombe
+% e-mail: N/A
 
 % HISTORY
 % 2017-11-24 rename from vectorCross3d to crossProduct3d

@@ -21,7 +21,7 @@ function trans = createTranslation3d(varargin)
 % ------
 % Author: David Legland 
 % e-mail: david.legland@inrae.fr
-% Created: 2004-04-06.
+% Created: 2004-04-06
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY

@@ -39,8 +39,11 @@ function varargout = drawArrow3d(pos, vec, varargin)
 
 % ------
 % Authors: Shawn Arseneau, oqilipo
+% e-mail: N/A
+% Created: 2006-09-14, by Shawn Arseneau
+% Copyright 2006
+
 % History:
-%   Created: 2006-09-14 by Shawn Arseneau
 %   Updated: 2020-02-08 by oqilipo
 
 % Check if first argument is an axes handle

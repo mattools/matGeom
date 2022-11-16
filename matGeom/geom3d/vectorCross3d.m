@@ -21,7 +21,8 @@ function c = vectorCross3d(a,b)
 %
 %   See also DOT.
 
-%   Sven Holcombe
+% ------
+% Author: Sven Holcombe
 
 % needed_colons = max([3, length(size(a)), length(size(b))]) - 3;
 % tmp_colon = {':'};

@@ -24,7 +24,7 @@ function box = boundingBox3d(points)
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2011-04-01,    using Matlab 7.9.0.529 (R2009b)
+% Created: 2011-04-01, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
 %   HISTORY

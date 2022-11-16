@@ -23,11 +23,12 @@ function varargout = drawEdge3d(varargin)
 %     drawLine3d, clipLine3d, drawEdge
 %
 
-% ---------
-% author : David Legland 
-% INRA - TPV URPOI - BIA IMASTE
-% created the 18/02/2005.
-%   
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-18
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+
 %   HISTORY
 %   04/01/2007 remove unused variables
 %   15/12/2009 "reprecate", and add processing of input arguments

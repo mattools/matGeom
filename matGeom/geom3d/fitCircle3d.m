@@ -31,10 +31,12 @@ function [fittedCircle, circleNormal] = fitCircle3d(pts)
 %   See also
 %   circle3dOrigin, circle3dPosition, circle3dPoint, intersectPlaneSphere
 %   drawCircle3d, drawCircleArc3d, drawEllipse3d
-%
+
 % ------
 % Authors: oqilipo, David Legland
-% created: 2017-05-09
+% e-mail: david.legland@inrae.fr
+% Created: 2017-05-09
+% Copyright 2017
 
 % Mean of all points
 meanPoint = mean(pts,1);
@@ -62,7 +64,7 @@ end
 % http://www.mathworks.com/matlabcentral/fileexchange/22678
 function Par = CircleFitByTaubin(XY)
 
-%--------------------------------------------------------------------------
+%__________________________________________________________________________
 %  
 %     Circle fit by Taubin
 %      G. Taubin, "Estimation Of Planar Curves, Surfaces And Nonplanar
@@ -78,7 +80,7 @@ function Par = CircleFitByTaubin(XY)
 %     Note: this fit does not use built-in matrix functions (except "mean"),
 %           so it can be easily programmed in any programming language
 %
-%--------------------------------------------------------------------------
+%__________________________________________________________________________
 
 n = size(XY,1);      % number of data points
 

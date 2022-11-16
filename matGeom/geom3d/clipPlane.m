@@ -28,7 +28,7 @@ function poly = clipPlane(plane, box)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Created: 2021-11-09,    using Matlab 9.10.0.1684407 (R2021a) Update 3
+% Created: 2021-11-09, using Matlab 9.10.0.1684407 (R2021a) Update 3
 % Copyright 2021 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % retrieve min/max coords
