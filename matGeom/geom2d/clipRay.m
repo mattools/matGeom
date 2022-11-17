@@ -21,8 +21,8 @@ function [edge, isInside] = clipRay(ray, bb)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Created: 2010-05-13,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2010 INRA - Cepia Software Platform.
+% Created: 2010-05-13, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2010 INRA - Cepia Software Platform
 
 %   HISTORY
 %   2010-05-13 create from clipLine

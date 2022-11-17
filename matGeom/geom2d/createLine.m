@@ -36,12 +36,12 @@ function line = createLine(varargin)
 %
 %   See also:
 %   lines2d, createEdge, createRay
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY :
 %   18/02/2004 : add more possibilities to create lines (4 parameters,

@@ -25,13 +25,12 @@ function res = parallelLine(line, point)
 %
 %   See also:
 %   lines2d, orthogonalLine, distancePointLine, parallelEdge
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   31/07/2005 add usage of distance

@@ -37,10 +37,10 @@ function points = intersectLineCircle(line, circle)
 %
 
 % ------
-% Author: David Legland, david.legland@inrae.fr
-% Author: JuanPi Carbajal <ajuanpi+dev@gmail.com>
-% Created: 2011-01-14,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% Authors: David Legland, JuanPi Carbajal
+% e-mail: david.legland@inrae.fr, ajuanpi+dev@gmail.com
+% Created: 2011-01-14, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011 INRA - Cepia Software Platform
 
 % HISTORY
 % 2011-06-06 fix bug in delta test

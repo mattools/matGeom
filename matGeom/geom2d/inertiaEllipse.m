@@ -33,8 +33,8 @@ function ell = inertiaEllipse(points)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2008-02-21,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% Created: 2008-02-21, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % HISTORY
 % 2009-07-29 take into account ellipse orientation

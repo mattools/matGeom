@@ -17,12 +17,12 @@ function dest = transformLine(line, trans)
 %
 %   See also:
 %   lines2d, transforms2d, transformPoint
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 06/04/2004.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-04-06
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   02/03/2007: rewrite function

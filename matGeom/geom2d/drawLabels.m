@@ -19,11 +19,11 @@ function varargout = drawLabels(varargin)
 %   properties for available values.
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 15/12/2003.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-12-15
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   09/03/2007: (re)implement it...

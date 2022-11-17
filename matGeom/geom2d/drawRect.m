@@ -25,11 +25,11 @@ function varargout = drawRect(rect, varargin)
 %     drawOrientedBox, drawBox, rectToPolygon
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 10/12/2003.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-12-10
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2003-12-12 add support for multiple rectangles

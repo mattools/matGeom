@@ -18,12 +18,12 @@ function [dist, pos] = distancePointLine(point, line)
 %   See also:
 %   lines2d, points2d, distancePoints, distancePointEdge
 %
-   
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
 % Created: 2005-06-24
-% Copyright 2016 INRA - BIA-BIBS.
+% Copyright 2005 INRA - BIA-BIBS
 
 %   HISTORY:
 %   2012-10-24 rewrite using bsxfun

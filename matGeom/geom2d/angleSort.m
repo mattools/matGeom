@@ -22,13 +22,12 @@ function varargout = angleSort(pts, varargin)
 %   See Also:
 %   points2d, angles2d, angle2points, normalizeAngle
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2005-11-24
-% Copyright 2010 INRA - Cepia Software Platform.
-
+% Copyright 2005 INRA - Cepia Software Platform
 
 %   HISTORY :
 

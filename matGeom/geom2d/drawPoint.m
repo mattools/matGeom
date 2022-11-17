@@ -35,11 +35,11 @@ function h = drawPoint(varargin)
 %   See also
 %     points2d, clipPoints
 
-%   ---------
-%   author : David Legland
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
+% ------
+% Author: David Legland
+% e-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   23/02/2004 add more documentation. Manage different kind of inputs.

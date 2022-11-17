@@ -22,13 +22,12 @@ function varargout = transformVector(varargin)
 %
 %   See also:
 %   vectors2d, transforms2d, rotateVector, transformPoint
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 12/03/2007.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2007-03-12
+% Copyright 2007 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 

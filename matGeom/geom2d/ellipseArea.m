@@ -23,12 +23,11 @@ function area = ellipseArea(elli)
 %   See also
 %     ellipses2d, ellipsePerimeter, ellipseToPolygon
 %
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% Created: 2022-09-09,    using Matlab 9.12.0.1884302 (R2022a)
-% Copyright 2022 INRAE.
+% Created: 2022-09-09, using Matlab 9.12.0.1884302 (R2022a)
+% Copyright 2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 area = elli(:,3) .* elli(:,4) * pi;

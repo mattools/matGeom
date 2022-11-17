@@ -45,8 +45,7 @@ function [dist, pos] = distancePointEdge(point, edge)
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
 % Created: 2004-04-07
-% Copyright 2016 INRA - BIA-BIBS.
-%
+% Copyright 2004 INRA - BIA-BIBS
 
 %   HISTORY
 %   2005-06-24 rename, and change arguments sequence

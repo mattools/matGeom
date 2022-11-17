@@ -17,13 +17,12 @@ function line = radicalAxis(circle1, circle2)
 %   Ref:
 %   http://mathworld.wolfram.com/RadicalLine.html
 %   http://en.wikipedia.org/wiki/Radical_axis
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2007-05-15,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
-%
+% Created: 2007-05-15, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % extract circles parameters
 x1 = circle1(:,1);

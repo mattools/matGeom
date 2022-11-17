@@ -21,13 +21,12 @@ function edges = crackPattern2(box, points, alpha, varargin)
 %     drawEdge(E);
 %
 %   See also drawEdge
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 25/05/2004.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-05-25
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY :
 

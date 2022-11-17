@@ -28,9 +28,8 @@ function point = intersectEdges(edge1, edge2, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
-% INRA - Cepia Software Platform
-% created the 31/10/2003.
-%
+% Created: 2003-10-31
+% Copyright 2003 INRA - Cepia Software Platform
 
 %   HISTORY
 %   19/02/2004 add support for multiple edges.

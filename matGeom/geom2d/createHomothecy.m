@@ -22,12 +22,11 @@ function T = createHomothecy(point, ratio)
 %      axis tight equal
 %
 
-% ---------
+% ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% INRA - TPV URPOI - BIA IMASTE
-% created the 20/01/2005.
-
+% Created: 2005-01-20
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   22/04/2009: rename as createHomothecy

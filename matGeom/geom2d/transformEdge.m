@@ -16,11 +16,12 @@ function dest = transformEdge(edge, trans)
 %
 %   See also:
 %   edges2d, transforms2d, transformPoint, translation, rotation
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 06/04/2004.
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-04-06
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 % 14/08/2017 Updated by Juanpi Carbajal <ajuanpi+dev@gmail.com>
 

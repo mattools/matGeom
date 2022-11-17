@@ -44,11 +44,11 @@ function varargout = drawCenteredEdge(varargin)
 %     edges2d, drawOrientedBox, drawEllipse, centeredEdgeToEdge, drawEdge
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 05/08/2005.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-08-05
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2007-06-15 update doc, clean up code

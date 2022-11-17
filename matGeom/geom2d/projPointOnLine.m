@@ -23,9 +23,8 @@ function point = projPointOnLine(point, line)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
 % Created: 2005-07-04
-% Copyright 2022 INRAE.
+% Copyright 2005 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 %   HISTORY
 %   2005-08-06 correct bug when several points were passed as param.

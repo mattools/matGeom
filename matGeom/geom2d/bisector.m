@@ -13,12 +13,12 @@ function ray = bisector(varargin)
 %   
 %   See also:
 %   lines2d, rays2d
-%
-%   ---------
+
+% ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% created the 31/10/2003.
-% Copyright 2010 INRA - Cepia Software Platform.
+% Created: 2003-10-31
+% Copyright 2003 INRA - Cepia Software Platform
 
 %   HISTORY
 %   2005-07-07 add bisector of 3 points

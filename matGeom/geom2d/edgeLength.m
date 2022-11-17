@@ -11,13 +11,12 @@ function len = edgeLength(varargin)
 %
 %   See also:
 %   edges2d, edgeAngle
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 19/02/2004
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-02-19
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   15/04/2005 changes definition for edge, uses [x1 y1 x2 y2] instead of

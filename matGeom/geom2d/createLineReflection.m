@@ -9,12 +9,12 @@ function trans = createLineReflection(line)
 %   See also:
 %   lines2d, transforms2d, transformPoint, 
 %   createTranslation, createHomothecy, createScaling
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 19/01/2005.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-01-19
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   22/04/2009: rename as createLineReflection

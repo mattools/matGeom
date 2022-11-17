@@ -10,12 +10,12 @@ function theta = angle2Points(varargin)
 %   See Also:
 %   points2d, angles2d, angle3points, normalizeAngle, vectorAngle
 %
-%
-% ---------
+
+% ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% created the 02/03/2007.
-% Copyright 2010 INRA - Cepia Software Platform.
+% Created: 2007-03-02
+% Copyright 2007 INRA - Cepia Software Platform
 
 %   HISTORY:
 %   2011-01-11 use bsxfun

@@ -35,11 +35,11 @@ function varargout = drawArrow(varargin)
 %     drawEdge
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 11/11/2004 from drawEdge
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-11-11, from drawEdge
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2014-09-17 fix managment of handle values as suggested by Benoit Botton

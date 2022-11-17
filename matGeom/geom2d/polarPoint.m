@@ -19,14 +19,12 @@ function point = polarPoint(varargin)
 %
 %   See Also:
 %   points2d
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 03/05/2004
-%
 
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-05-03
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 % default values
 x0 = 0; y0=0;

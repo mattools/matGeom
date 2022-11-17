@@ -16,11 +16,11 @@ function b = isPointOnLine(point, line, varargin)
 %   lines2d, points2d, isPointOnEdge, isPointOnRay, isLeftOriented
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   11/03/2004 support for multiple inputs

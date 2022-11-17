@@ -11,13 +11,12 @@ function theta = angle3Points(varargin)
 %   See Also:
 %   points2d, angles2d, angle2points
 %
-%
-%   ---------
+
+% ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% created the 23/02/2004.
-% Copyright 2010 INRA - Cepia Software Platform.
-
+% Created: 2004-02-23
+% Copyright 2004 INRA - Cepia Software Platform
 
 %   HISTORY :
 %   25/09/2005 : enable single parameter

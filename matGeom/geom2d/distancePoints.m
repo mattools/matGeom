@@ -23,9 +23,8 @@ function dist = distancePoints(p1, p2, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
-% Copyright 2009 INRA - Cepia Software Platform.
-% created the 24/02/2004.
-%
+% Created: 2004-02-24
+% Copyright 2004 INRA - Cepia Software Platform
 
 %   HISTORY :
 %   25/05/2004: manage 2 array of points

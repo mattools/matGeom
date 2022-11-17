@@ -26,7 +26,7 @@ function circles2d(varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2010 INRA - Cepia Software Platform.
+% Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2008 INRA - Cepia Software Platform
 
 help('circles2d');

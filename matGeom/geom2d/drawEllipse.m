@@ -35,12 +35,11 @@ function varargout = drawEllipse(varargin)
 %     fitEllipse, ellipseToPolygon, ellipsePoint, transformEllipse
 %
 
-%   ---------
-%   author : David Legland 
-%   e-mail: david.legland@inrae.fr
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 11/12/2003.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-12-11
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2004-01-08 returns coord of points when 2 output args are asked

@@ -32,11 +32,11 @@ function varargout = drawCircleArc(varargin)
 %     circles2d, drawCircle, drawEllipse, circleArcToPolyline
 %
 
-%   --------
-%   author: David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 12/12/2003.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-12-12
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2004-05-03 angles are given as radians

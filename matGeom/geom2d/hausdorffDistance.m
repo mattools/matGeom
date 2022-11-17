@@ -41,8 +41,8 @@ function [hd, ind1, ind2] = hausdorffDistance(pts1, pts2)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Created: 2012-05-04,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRAE - Cepia Software Platform.
+% Created: 2012-05-04, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012 INRAE - Cepia Software Platform
 
 % distance from pts1 to pts2
 [dists1, ind12] = minDistancePoints(pts1, pts2);

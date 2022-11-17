@@ -24,8 +24,8 @@ function varargout = drawVector(varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Created: 2013-03-18,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2013 INRA - Cepia Software Platform.
+% Created: 2013-03-18, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2013 INRA - Cepia Software Platform
 
 % extract handle of axis to draw on
 if isAxisHandle(varargin{1})

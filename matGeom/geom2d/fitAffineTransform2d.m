@@ -35,8 +35,8 @@ function trans = fitAffineTransform2d(ref, src)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Created: 2009-07-31,    using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRAE - Cepia Software Platform.
+% Created: 2009-07-31, using Matlab 7.7.0.471 (R2008b)
+% Copyright 2009 INRAE - Cepia Software Platform
 
 % check number of points are equal
 N = size(src, 1);

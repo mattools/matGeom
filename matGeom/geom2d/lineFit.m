@@ -19,21 +19,17 @@ function line = lineFit(varargin)
 %   See also:
 %   lines2d, polyfit, polyfit2, lsqlin
 %
-%
-%   -----
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 30/04/2004.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-04-30
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   09/12/2004 : update implementation
 
-
-
-% ---------------------------------------------
-% extract input arguments
-
+%% Extract input arguments
 if length(varargin)==1
     % argument is an array of points
     var = varargin{1};
@@ -56,16 +52,10 @@ elseif length(varargin)==3
     y = varargin{3};
 end
     
-% ---------------------------------------------
-% Initializations :
-
-
+%% Initializations:
 N = size(x, 1);
 
-% ---------------------------------------------
-% Main algorithm :
-
-
+%% Main algorithm:
 % main matrix of the problem
 X = [x y ones(N,1)];
 

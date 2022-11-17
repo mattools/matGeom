@@ -10,14 +10,12 @@ function point = pointOnLine(line, pos)
 %
 %   See also:
 %   lines2d, points2d, onLine, onLine, linePosition
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 07/04/2004.
-%
 
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-04-07
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 angle = lineAngle(line);
 point = [line(:,1) + pos .* cos(angle), line(:,2) + pos .* sin(angle)];

@@ -11,12 +11,12 @@ function vr = rotateVector(v, angle)
 %
 %   See also
 %   vectors2d, transformVector, createRotation
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2011-04-14,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% Created: 2011-04-14, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011 INRA - Cepia Software Platform
 
 % precomputes angles
 cot = cos(angle);
