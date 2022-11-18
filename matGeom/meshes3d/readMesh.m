@@ -19,13 +19,12 @@ function varargout = readMesh(fileName)
 %   See also
 %     meshes3d, writeMesh, readMesh_off, readMesh_ply, readMesh_stl
 %
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% Created: 2020-11-20,    using Matlab 9.8.0.1323502 (R2020a)
-% Copyright 2020 INRAE.
+% Created: 2020-11-20, using Matlab 9.8.0.1323502 (R2020a)
+% Copyright 2020 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 [~, ~, ext] = fileparts(fileName);
 switch lower(ext)

@@ -27,12 +27,11 @@ function varargout = createDodecahedron()
 %   createCube, createOctahedron, createIcosahedron, createTetrahedron
 %
 
-%   ---------
-%   author : David Legland 
-%   e-mail: david.legland@inra.fr
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 29/07/2010.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inra.fr
+% Created: 2010-07-29
+% Copyright 2010 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 

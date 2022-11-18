@@ -25,8 +25,8 @@ function vol = meshVolume(varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Created: 2012-10-01,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% Created: 2012-10-01, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012 INRA - Cepia Software Platform
 
 % HISTORY
 % 2013-08-16 speed improvement by Sven Holcombe

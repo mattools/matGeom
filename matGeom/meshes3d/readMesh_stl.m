@@ -16,6 +16,7 @@ function varargout = readMesh_stl(fileName)
 
 % ------
 % Author: oqilipo
+% e-mail: N/A
 % Created: 2021-02-12, using Matlab 9.9.0.1538559 (R2020b)
 % Copyright 2021
 

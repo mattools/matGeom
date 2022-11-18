@@ -11,12 +11,12 @@ function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargi
 %
 %   See also
 %       trimMesh, isManifoldMesh
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2019-01-31,    using Matlab 9.5.0.944444 (R2018b)
-% Copyright 2019 INRA - Cepia Software Platform.
+% Created: 2019-01-31, using Matlab 9.5.0.944444 (R2018b)
+% Copyright 2019 INRA - Cepia Software Platform
 
 verbose = false;
 while length(varargin) > 1 && ischar(varargin{1})

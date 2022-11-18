@@ -18,14 +18,12 @@ function mesh = readMesh_obj(fileName)
 %   See also
 %     meshes3d, readMesh, readMesh_off, drawMesh
 %
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% Created: 2022-09-08,    using Matlab 9.9.0.1570001 (R2020b) Update 4
-% Copyright 2022 INRAE.
-
+% Created: 2022-09-08, using Matlab 9.9.0.1570001 (R2020b) Update 4
+% Copyright 2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 %% initialisations
 

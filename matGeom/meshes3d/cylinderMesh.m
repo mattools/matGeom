@@ -43,8 +43,8 @@ function varargout = cylinderMesh(cyl, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2012-10-25,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% Created: 2012-10-25, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012 INRA - Cepia Software Platform
 
 parser = inputParser;
 addRequired(parser, 'cyl', @(x) validateattributes(x, {'numeric'},...

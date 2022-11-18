@@ -26,8 +26,9 @@ function silhouette = meshSilhouette(v, f, varargin)
 %   Source:
 %     Sean de Wolski - https://www.mathworks.com/matlabcentral/answers/68004
 
-% ---------
+% ------
 % Authors: oqilipo
+% e-mail: N/A
 % Created: 2020-07-29
 % Copyright 2020
 

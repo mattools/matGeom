@@ -35,9 +35,10 @@ function meshes = splitMesh(vertices, faces, varargin)
 %   Source
 %     Local functions are part of the gptoolbox of Alec Jacobson
 %     https://github.com/alecjacobson/gptoolbox
-%
-% ---------
+
+% ------
 % Author: oqilipo
+% e-mail: N/A
 % Created: 2017-09-17
 % Copyright 2017
 

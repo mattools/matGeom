@@ -17,8 +17,8 @@ function adj = meshAdjacencyMatrix(faces, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2013-04-30,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2013 INRA - Cepia Software Platform.
+% Created: 2013-04-30, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2013 INRA - Cepia Software Platform
 
 % Ensures faces is a N-by-3 or N-by-4 array
 if iscell(faces) || (isnumeric(faces) && size(faces, 2) > 4)

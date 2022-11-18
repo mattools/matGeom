@@ -17,13 +17,12 @@ function normals = vertexNormal(vertices, faces)
 %
 %   See also
 %     meshes3d, meshFaceNormals, triangulateFaces
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2011-12-19,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
-
+% Created: 2011-12-19, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011 INRA - Cepia Software Platform
 
 nv = size(vertices, 1);
 nf = size(faces, 1);

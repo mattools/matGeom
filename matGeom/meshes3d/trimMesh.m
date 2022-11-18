@@ -21,8 +21,8 @@ function varargout = trimMesh(varargin)
 % ------
 % Author: David Legland, oqilipo
 % e-mail: david.legland@inra.fr
-% Created: 2014-08-01,    using Matlab 8.3.0.532 (R2014a)
-% Copyright 2014 INRA - Cepia Software Platform.
+% Created: 2014-08-01, using Matlab 8.3.0.532 (R2014a)
+% Copyright 2014 INRA - Cepia Software Platform
 
 % parse input data
 [vertices, faces] = parseMeshData(varargin{:});

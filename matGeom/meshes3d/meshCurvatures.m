@@ -62,14 +62,12 @@ function [C1, C2, U1, U2, H, K, N] = meshCurvatures(vertices, faces, varargin)
 %   See also
 %     meshes3d, drawMesh, triangulateFaces
 %
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% Created: 2021-09-21,    using Matlab 9.10.0.1684407 (R2021a) Update 3
-% Copyright 2021 INRAE.
-
+% Created: 2021-09-21, using Matlab 9.10.0.1684407 (R2021a) Update 3
+% Copyright 2021 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 %% Process input arguments
 

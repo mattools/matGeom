@@ -29,9 +29,8 @@ function [nodes2, faces2] = clipConvexPolyhedronHP(nodes, faces, plane)
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
-% Created: 2007-09-14,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
-
+% Created: 2007-09-14, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 %% Preprocessing
 

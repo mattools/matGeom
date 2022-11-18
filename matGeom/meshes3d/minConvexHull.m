@@ -34,12 +34,11 @@ function newFaces = minConvexHull(points, varargin)
 %   meshes3d, mergeCoplanarFaces, drawMesh, convhull, convhulln
 %
 
-
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % Created: 2006-07-05
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
+% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % HISTORY
 %   20/07/2006 add tolerance for coplanarity test

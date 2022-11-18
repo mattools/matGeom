@@ -19,13 +19,12 @@ function varargout = drawPolyhedron(nodes, faces, varargin)
 %
 %   See also:
 %   polyhedra, drawMesh, drawPolygon
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 10/02/2005.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-10
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   07/11/2005 update doc.

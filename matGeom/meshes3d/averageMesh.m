@@ -8,14 +8,12 @@ function [refMesh, distListIters, refVerticesIters] = averageMesh(meshList, vara
 %
 %   See also
 %     meshes3d
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% Created: 2020-01-31,    using Matlab 9.7.0.1247435 (R2019b) Update 2
-% Copyright 2020 INRAE.
-
+% Created: 2020-01-31, using Matlab 9.7.0.1247435 (R2019b) Update 2
+% Copyright 2020 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 %% Parse input values
 
