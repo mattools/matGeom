@@ -50,8 +50,8 @@ function varargout = polylineSelfIntersections(poly, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2009-06-15,    using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRA - Cepia Software Platform.
+% Created: 2009-06-15, using Matlab 7.7.0.471 (R2008b)
+% Copyright 2009 INRA - Cepia Software Platform
 
 %   HISTORY
 %   2009/06/18 check bounding boxes before computing intersections

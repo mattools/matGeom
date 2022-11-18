@@ -11,13 +11,12 @@ function pt = steinerPoint(varargin)
 %
 %   See also:
 %   polygons2d, polygonArea, polygonCentroid, drawPolygon
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 11/11/2004.
-%
 
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-11-11
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 if nargin==1
     var = varargin{1};

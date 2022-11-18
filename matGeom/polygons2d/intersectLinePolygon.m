@@ -73,8 +73,8 @@ function [points, edgeInds, linePositions] = intersectLinePolygon(line, poly, va
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Created: 2003-10-31,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% Created: 2003-10-31, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2003 INRA - Cepia Software Platform
 
 % 2022-02-14: new algorithm, more robust to numerical issues, but that can
 % change behaviour compared to previous implementation

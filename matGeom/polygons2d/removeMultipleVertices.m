@@ -22,8 +22,8 @@ function poly = removeMultipleVertices(poly, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2013-10-04,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2013 INRA - Cepia Software Platform.
+% Created: 2013-10-04, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2013 INRA - Cepia Software Platform
 
 % default values
 eps = 1e-14;

@@ -21,9 +21,8 @@ function varargout = polygonContains(poly, point)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2007-10-11,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
-
+% Created: 2007-10-11, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % transform as a cell array of simple polygons
 polygons = splitPolygons(poly);

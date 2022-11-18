@@ -27,12 +27,12 @@ function elli = polygonInertiaEllipse(poly)
 %     polygons2d, polygonSecondAreaMoments, polygonCentroid, inertiaEllipse
 %     ellipseToPolygon
 %
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2017-09-08,    using Matlab 9.1.0.441655 (R2016b)
-% Copyright 2017 INRA - Cepia Software Platform.
+% Created: 2017-09-08, using Matlab 9.1.0.441655 (R2016b)
+% Copyright 2017 INRA - Cepia Software Platform
 
 warning('MatGeom:deprecated', ...
     'function ''polygonInertiaEllipse'' is obsolete, use ''polygonEquivalentEllipse'' instead');

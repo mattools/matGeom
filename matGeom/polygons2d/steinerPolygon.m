@@ -11,12 +11,12 @@ function nodes = steinerPolygon(points)
 %
 %   See also
 %   polygons2d, drawPolygon
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2006-04-28
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
+% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 nodes = [0 0];
 for i=1:length(points)

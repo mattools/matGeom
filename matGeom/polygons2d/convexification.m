@@ -17,12 +17,12 @@ function co = convexification(varargin)
 %
 %   See also
 %   polygons2d, supportFunction 
-%
-% ---------
-% author: David Legland 
-% created the 12/01/2005.
-% Copyright 2010 INRA - Cepia Software Platform.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-01-12
+% Copyright 2005 INRA - Cepia Software Platform
 
 %   HISTORY
 %   13/06/2007: clean up code

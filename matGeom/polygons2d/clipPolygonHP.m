@@ -8,12 +8,12 @@ function poly2 = clipPolygonHP(poly, line)
 %
 %   See also:
 %   polygons2d, clipPolygon
-%
-% ---------
-% author : David Legland 
-% created the 31/07/2005.
-% Copyright 2010 INRA - Cepia Software Platform.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-07-31
+% Copyright 2005 INRA - Cepia Software Platform
 
 %   HISTORY
 %   15/08/2005 add test to avoid empty polygons 

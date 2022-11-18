@@ -32,8 +32,8 @@ function tri = triangulatePolygon(poly)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Created: 2011-11-25,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% Created: 2011-11-25, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011 INRA - Cepia Software Platform
 
 % compute constraints
 nv = size(poly, 1);
