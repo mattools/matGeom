@@ -33,7 +33,7 @@ function [box3d, rotMat] = orientedBox3d(pts)
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
 % Created: 2015-12-01, using Matlab 8.6.0.267246 (R2015b)
-% Copyright 2015 INRA - Cepia Software Platform.
+% Copyright 2015 INRA - Cepia Software Platform
 
 tri = convhulln(pts);
 nFaces = size(tri, 1);

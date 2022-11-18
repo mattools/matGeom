@@ -53,7 +53,7 @@ function varargout = drawCircle3d(varargin)
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % Created: 2005-02-17
-% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
+% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 %   HISTORY
 %   14/12/2006 allows unspecified PHI and THETA

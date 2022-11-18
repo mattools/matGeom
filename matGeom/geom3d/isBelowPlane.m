@@ -21,7 +21,7 @@ function below = isBelowPlane(point, varargin)
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2007-01-05
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 if length(varargin)==1
     plane = varargin{1};

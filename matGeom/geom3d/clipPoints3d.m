@@ -21,7 +21,7 @@ function varargout = clipPoints3d(points, shape, varargin)
 % Author: David Legland, oqilipo
 % e-mail: david.legland@inra.fr
 % Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA Nantes - MIAJ Jouy-en-Josas.
+% Copyright 2008 INRA - BIA Nantes - MIAJ Jouy-en-Josas
 
 parser = inputParser;
 validStrings = {'box', 'sphere', 'plane'};

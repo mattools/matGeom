@@ -16,6 +16,6 @@ function edges3d(varargin)
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % Created: 2018-04-12, using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2018 INRA - Cepia Software Platform.
+% Copyright 2018 INRA - Cepia Software Platform
 
 help('edges3d');

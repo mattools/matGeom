@@ -13,7 +13,7 @@ function p = drawAxisCube(varargin)
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
 % Created: 2010-07-22, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform.
+% Copyright 2010 INRA - Cepia Software Platform
 
 if nargin > 0 && isAxisHandle(varargin{1})
     hAx = varargin{1};

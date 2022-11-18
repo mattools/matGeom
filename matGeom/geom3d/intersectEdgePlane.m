@@ -24,7 +24,7 @@ function point = intersectEdgePlane(edge, plane, varargin)
 % ------
 % Author: David Legland 
 % e-mail: david.legland@inrae.fr
-% Created: 2007-04-24, from intersectLinePlane.
+% Created: 2007-04-24, from intersectLinePlane
 % Copyright 2007 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY

@@ -25,7 +25,7 @@ function varargout = cart2cyl(varargin)
 % Author: David Legland
 % e-mail: david.legland@jouy.inra.fr
 % Created: 2006-03-23
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
+% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % process input parameters
 if length(varargin)==1

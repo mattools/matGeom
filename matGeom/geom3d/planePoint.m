@@ -20,7 +20,7 @@ function coord = planePoint(plane, point)
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2007-09-18, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 %   HISTORY
 %   2013-10-09 remove repmat
