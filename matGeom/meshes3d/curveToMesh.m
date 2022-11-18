@@ -29,12 +29,12 @@ function [vertices, faces] = curveToMesh(curve, varargin)
 %  
 %   See also
 %     meshes3d, torusMesh, surfToMesh
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2015-01-07,    using Matlab 8.4.0.150421 (R2014b)
-% Copyright 2015 INRA - Cepia Software Platform.
+% Created: 2015-01-07, using Matlab 8.4.0.150421 (R2014b)
+% Copyright 2015 INRA - Cepia Software Platform
 
 radius = .1;
 if nargin > 1

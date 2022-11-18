@@ -38,12 +38,12 @@ function edgeFaces = trimeshEdgeFaces(faces, varargin)
 %
 %   See also
 %   meshes3d, meshEdgeFaces, trimeshMeanBreadth, meshEdges
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
-% Created: 2015-08-19,    using Matlab 8.5.0.197613 (R2015a)
-% Copyright 2015 INRA - Cepia Software Platform.
+% Created: 2015-08-19, using Matlab 8.5.0.197613 (R2015a)
+% Copyright 2015 INRA - Cepia Software Platform
 
 if nargin == 2
     faces = varargin{1};

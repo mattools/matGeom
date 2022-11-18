@@ -17,11 +17,11 @@ function index = findPoint(coord, points, varargin)
 %   See also
 %    points2d, minDistancePoints, distancePoints, findClosestPoint
 
-%   -----
-%   author: David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 17/07/2003.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-07-17
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   10/02/2004 documentation

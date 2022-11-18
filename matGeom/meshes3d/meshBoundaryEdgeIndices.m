@@ -23,12 +23,12 @@ function inds = meshBoundaryEdgeIndices(varargin)
 %
 %   See also
 %     meshes3d, meshBoundary, meshBoundaryVertexIndices, meshEdgeFaces
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2019-05-01,    using Matlab 8.6.0.267246 (R2015b)
-% Copyright 2019 INRA - Cepia Software Platform.
+% Created: 2019-05-01, using Matlab 8.6.0.267246 (R2015b)
+% Copyright 2019 INRA - Cepia Software Platform
 
 [vertices, edges, faces] = parseMeshData(varargin{:});
 

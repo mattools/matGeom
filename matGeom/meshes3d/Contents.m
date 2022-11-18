@@ -1,4 +1,4 @@
-% MESHES3D 3D Surface Meshes
+%CONTENTS MESHES3D 3D Surface Meshes
 % Version 1.22 06-Jun-2018 .
 %
 %   Creation, visualization, and manipulation of 3D surface meshes or
@@ -146,10 +146,10 @@
 %
 
 % ------
-% Initial author/maintainer: David Legland
+% Author: David Legland
 % e-mail: david.legland@inrae.fr
 % Created: 2005-11-07
-% Project homepage: http://github.com/mattools/matGeom
+% Copyright 2005 INRAE
 
 help(mfilename);
 

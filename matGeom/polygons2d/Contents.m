@@ -1,4 +1,4 @@
-% POLYGONS Manipulation of planar polygons and polylines
+%CONTENTS POLYGONS Manipulation of planar polygons and polylines
 % Version 1.24 07-Jun-2018 .
 %
 %   The 'polygons' module contains functions operating on shapes composed
@@ -157,13 +157,12 @@
 %   Credits:
 %   * function intersectPolylines uses the 'interX' contribution from "NS"
 %       (file exchange 22441, called 'curve-intersections')
-%
-% -----
+
+% ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% created the  07/11/2005.
-% Project homepage: http://github.com/mattools/matGeom
-% Copyright INRAE
+% Created: 2005-11-07
+% Copyright 2005 INRAE
 
 help(mfilename);
 

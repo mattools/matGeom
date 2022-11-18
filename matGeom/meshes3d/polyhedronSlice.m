@@ -20,8 +20,8 @@ function points = polyhedronSlice(nodes, faces, plane)
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
-% Created: 2007-09-18,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% Created: 2007-09-18, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % if faces is a numeric array, convert it to cell array
 if isnumeric(faces)

@@ -24,7 +24,7 @@ function [trans, points] = registerPoints3dAffine(points, target, varargin)
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % Created: 2015-02-24, using Matlab 8.4.0.150421 (R2014b)
-% Copyright 2015 INRA - Cepia Software Platform.
+% Copyright 2015 INRA - Cepia Software Platform
 
 nIters = 10;
 if ~isempty(varargin)

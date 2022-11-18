@@ -14,12 +14,12 @@ function varargout = transformMesh(varargin)
 %   See also
 %     meshes3d, transformPoint3d, drawMesh
 %
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2019-08-08,    using Matlab 9.6.0.1072779 (R2019a)
-% Copyright 2019 INRA - Cepia Software Platform.
+% Created: 2019-08-08, using Matlab 9.6.0.1072779 (R2019a)
+% Copyright 2019 INRA - Cepia Software Platform
 
 % parses input arguments
 [vertices, edges, faces] = parseMeshData(varargin{1:end-1});

@@ -36,12 +36,10 @@ function [minDist, pos] = distancePointPolyline(point, poly, varargin)
 %
 
 % ------
-% Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
-% Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRA - Cepia Software Platform.
-% Author: Juan Pablo Carbajal
-% e-mail: ajuanpi+dev@gmail.com
+% Author: David Legland, Juan Pablo Carbajal
+% e-mail: david.legland@nantes.inra.fr, ajuanpi+dev@gmail.com
+% Created: 2009-04-30, using Matlab 7.7.0.471 (R2008b)
+% Copyright 2009 INRA - Cepia Software Platform
 
 %   HISTORY
 %   2009-06-23 compute all distances in one call

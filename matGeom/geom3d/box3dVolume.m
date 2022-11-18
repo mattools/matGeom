@@ -21,6 +21,6 @@ function vol = box3dVolume(box)
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2010-07-26, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform.
+% Copyright 2010 INRA - Cepia Software Platform
 
 vol = prod(box(:, 2:2:end) - box(:, 1:2:end), 2);

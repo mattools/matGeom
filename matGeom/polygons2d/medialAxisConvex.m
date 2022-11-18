@@ -20,12 +20,12 @@ function [nodes, edges] = medialAxisConvex(points)
 %
 %   See also:
 %   polygons2d, bisector
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 07/07/2005.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-07-07
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   18/04/2007: fix some typos, note the function to be unimplemented
@@ -82,9 +82,7 @@ events = sortrows([ (1:N)' [2:N 1]' pint ti], 5);
 % initialize edges
 edges = zeros(0, 2);
 
-
-% -------------------
-% process each event until there is no more
+%% process each event until there is no more
 
 % start after index of last vertex, and process N-3 intermediate rays
 for i = N+1:2*N-3

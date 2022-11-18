@@ -25,8 +25,8 @@ function varargout = sphereMesh(sphere, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2012-10-25,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% Created: 2012-10-25, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012 INRA - Cepia Software Platform
 
 if nargin == 0
     sphere = [0 0 0 1];

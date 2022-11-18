@@ -14,7 +14,7 @@ function varargout = fillSphericalPolygon(sphere, poly, germ)
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2012-02-09, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% Copyright 2012 INRA - Cepia Software Platform
 
 nv = size(poly, 1);
 

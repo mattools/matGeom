@@ -33,13 +33,12 @@ function vertices = polygonVertices(poly)
 %
 %   See also
 %     polygons2d, polygonEdges
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2018-06-07,    using Matlab 9.4.0.813654 (R2018a)
-% Copyright 2018 INRA - Cepia Software Platform.
-
+% Created: 2018-06-07, using Matlab 9.4.0.813654 (R2018a)
+% Copyright 2018 INRA - Cepia Software Platform
 
 if isnumeric(poly)
     % find NaN or infinite values

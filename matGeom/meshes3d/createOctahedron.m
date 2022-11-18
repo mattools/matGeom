@@ -35,12 +35,11 @@ function varargout = createOctahedron()
 %   createCubeOctahedron
 %
 
-%   ---------
-%   author : David Legland 
-%   e-mail: david.legland@inra.fr
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 10/02/2005.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inra.fr
+% Created: 2005-02-10
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   04/01/2007: remove unused variables

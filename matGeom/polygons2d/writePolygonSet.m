@@ -12,13 +12,12 @@ function writePolygonSet(polys, filename)
 %
 %   See also:
 %   polygons2d, readPolygonSet
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 14/01/2013.
-%
 
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2013-01-14
+% Copyright 2013 INRA - TPV URPOI - BIA IMASTE
 
 % open file for reading
 fid = fopen(filename, 'wt');

@@ -37,7 +37,7 @@ function varargout = drawGrid3d(varargin)
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
 % Created: 2005-11-17
-% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
+% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 %% initialize variables
 

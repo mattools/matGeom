@@ -18,7 +18,7 @@ function varargout = createSoccerBall()
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % Created: 2006-08-09
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
+% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 %   HISTORY
 %   2007-01-04 remove unused variables, enhance output processing

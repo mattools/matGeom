@@ -20,13 +20,12 @@ function mb = trimeshMeanBreadth(vertices, faces)
 %       Applications", John Wiley and Sons, p. 26
 %   Ohser, J., Muescklich, F. (2000) "Statistical Analysis of
 %       Microstructures in Materials Sciences", John Wiley and Sons, p.352
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2015-08-19,    using Matlab 8.5.0.197613 (R2015a)
-% Copyright 2015 INRA - Cepia Software Platform.
-
+% Created: 2015-08-19, using Matlab 8.5.0.197613 (R2015a)
+% Copyright 2015 INRA - Cepia Software Platform
 
 %% Check input validity
 

@@ -13,10 +13,11 @@ function poly2 = clipPolygon(polygon, w)
 %     polygons2d, boxes2d, clipPolygonHP, clipPolyline
 %
 
-% ---------
-% author : David Legland 
-% created the 14/05/2005.
-% Copyright 2010 INRA - Cepia Software Platform.
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-05-14
+% Copyright 2005 INRA - Cepia Software Platform
 
 %   HISTORY
 %   2007/09/14 fix doc

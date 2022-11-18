@@ -30,12 +30,12 @@ function curv = polylineCurvature(poly, M)
 %
 %   See also
 %     polygons2d, polygonCurvature, padPolyline
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Created: 2022-04-01,    using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2018 INRA - Cepia Software Platform.
+% Created: 2022-04-01, using Matlab 9.3.0.713579 (R2017b)
+% Copyright 2022 INRA - Cepia Software Platform
 
 % number of vertices of polyline
 n = size(poly, 1);

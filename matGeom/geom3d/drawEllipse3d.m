@@ -37,7 +37,7 @@ function varargout = drawEllipse3d(varargin)
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % Created: 2008-05-07
-% Copyright 2008 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
+% Copyright 2008 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 %   HISTORY
 

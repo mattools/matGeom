@@ -22,8 +22,9 @@ function varargout = cutMeshByPlane(v, f, plane, varargin)
 %   possible, too.
 %
 
-% ---------
+% ------
 % Authors: oqilipo, David Legland
+% e-mail: david.legland@inrae.fr
 % Created: 2017-07-09
 % Copyright 2017
 

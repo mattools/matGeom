@@ -24,7 +24,7 @@ function plane2 = transformPlane3d(plane, trans)
 % Author: David Legland, oqilipo
 % e-mail: david.legland@inra.fr
 % Created: 2017-07-09
-% Copyright 2017 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% Copyright 2017 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 plane2 = [...
     transformPoint3d( plane(:,1:3), trans) ...  % transform origin point

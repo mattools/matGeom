@@ -18,12 +18,12 @@ function vol = tetrahedronVolume(vertices, varargin)
 %
 %   See also
 %   meshes3d, createTetrahedron, meshVolume
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2012-04-05,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% Created: 2012-04-05, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012 INRA - Cepia Software Platform
 
 if nargin == 2
     tetras = varargin{1};

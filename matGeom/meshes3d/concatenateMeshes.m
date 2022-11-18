@@ -11,9 +11,10 @@ function varargout = concatenateMeshes(varargin)
 %
 %   See also
 %     splitMesh
-%   
-% ---------
+
+% ------
 % Authors: oqilipo (parsing), Alec Jacobson (loop)
+% e-mail: N/A
 % Created: 2017-09-12
 % Copyright 2017
 

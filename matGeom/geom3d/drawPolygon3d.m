@@ -31,7 +31,7 @@ function varargout = drawPolygon3d(varargin)
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
 % Created: 2011-08-17, from drawPolyline3d, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% Copyright 2011 INRA - Cepia Software Platform
 
 % HISTORY
 %   2019-02-02 add support for multiple polygons 

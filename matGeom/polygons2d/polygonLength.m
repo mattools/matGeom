@@ -16,11 +16,11 @@ function len = polygonLength(poly, varargin)
 %   polygons2d, polygonCentroid, polygonArea, drawPolygon, polylineLength
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 11/05/2005.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-05-11
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2011-03-31 add control for empty polygons, code cleanup

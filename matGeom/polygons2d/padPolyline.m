@@ -25,14 +25,12 @@ function poly2 = padPolyline(poly, M, varargin)
 %   See also
 %     polygons2d, smoothPolyline, polylineCurvature
 %
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% Created: 2022-03-31,    using Matlab 9.12.0.1884302 (R2022a)
-% Copyright 2022 INRAE.
-
+% Created: 2022-03-31, using Matlab 9.12.0.1884302 (R2022a)
+% Copyright 2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 %% Input argument management
 

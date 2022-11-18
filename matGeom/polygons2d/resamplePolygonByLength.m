@@ -26,8 +26,8 @@ function poly2 = resamplePolygonByLength(poly, step)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2011-12-09,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% Created: 2011-12-09, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011 INRA - Cepia Software Platform
 
 poly2 = resamplePolylineByLength(poly([1:end 1],:), step);
 poly2(end, :) = [];

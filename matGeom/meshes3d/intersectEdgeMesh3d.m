@@ -26,8 +26,8 @@ function [points, pos, faceInds] = intersectEdgeMesh3d(edge, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Created: 2021-02-24,    using Matlab 9.9.0.1570001 (R2020b) Update 4
-% Copyright 2021 INRA - Cepia Software Platform.
+% Created: 2021-02-24, using Matlab 9.9.0.1570001 (R2020b) Update 4
+% Copyright 2021 INRA - Cepia Software Platform
 
 % perform computation on supporting line
 line = edgeToLine3d(edge);

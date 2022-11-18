@@ -16,12 +16,12 @@ function point = geod2cart(src, curve, normal)
 %
 %   See also
 %   polylines2d, cart2geod, curveLength
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 08/04/2004.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-04-08
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 t = parametrize(curve);
 N = size(src, 1);

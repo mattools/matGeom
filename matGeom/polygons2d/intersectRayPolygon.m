@@ -18,8 +18,8 @@ function [intersects, edgeIndices] = intersectRayPolygon(ray, poly, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% created the 26/01/2010
-
+% Created: 2010-01-26
+% Copyright 2010
 
 %   HISTORY
 %   2010/01/26 creation from intersectLinePolygon

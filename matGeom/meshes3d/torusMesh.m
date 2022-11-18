@@ -29,8 +29,8 @@ function varargout = torusMesh(torus, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Created: 2012-10-25,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% Created: 2012-10-25, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012 INRA - Cepia Software Platform
 
 %   HISTORY
 %   2013-04-30 add support for empty argument

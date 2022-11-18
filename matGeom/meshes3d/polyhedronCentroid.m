@@ -24,8 +24,8 @@ function centroid = polyhedronCentroid(vertices, faces) %#ok<INUSD>
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
-% Created: 2012-04-05,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% Created: 2012-04-05, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012 INRA - Cepia Software Platform
 
 % 2015.11.13 use delaunayTriangulation instead of delaunayn (strange bug
 %       with icosahedron...)

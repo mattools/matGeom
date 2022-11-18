@@ -25,13 +25,12 @@ function theta = polyhedronNormalAngle(varargin)
 %
 %   See also
 %   polyhedra, polygon3dNormalAngle
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2005-11-30
-% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
-
+% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 if length(varargin)==4
     nodes = varargin{1};

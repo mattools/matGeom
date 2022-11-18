@@ -14,12 +14,12 @@ function m = curveCMoment(curve, p, q)
 %   Dongmin Zhao and Jie Chen
 %   Pattern Recognition, 1997, vol. 30, pp. 865-901
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2009-03-25,    using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRA - Cepia Software Platform.
+% Created: 2009-03-25, using Matlab 7.7.0.471 (R2008b)
+% Copyright 2009 INRA - Cepia Software Platform
 
 % compute curve centroid
 centroid = polylineCentroid(curve);

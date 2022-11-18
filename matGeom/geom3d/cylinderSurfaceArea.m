@@ -23,7 +23,7 @@ function S = cylinderSurfaceArea(cyl)
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % Created: 2017-11-02, using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2017 INRA - Cepia Software Platform.
+% Copyright 2017 INRA - Cepia Software Platform
 
 H = distancePoints3d(cyl(:, 1:3), cyl(:, 4:6));
 R = cyl(:,7);

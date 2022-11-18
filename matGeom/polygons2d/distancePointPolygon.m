@@ -23,8 +23,8 @@ function minDist = distancePointPolygon(point, poly)
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
-% Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRA - Cepia Software Platform.
+% Created: 2009-04-30, using Matlab 7.7.0.471 (R2008b)
+% Copyright 2009 INRA - Cepia Software Platform
 
 % eventually copy first point at the end to ensure closed polygon
 if sum(poly(end, :) == poly(1,:)) ~= 2

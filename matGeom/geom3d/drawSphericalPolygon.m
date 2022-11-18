@@ -18,7 +18,7 @@ function varargout = drawSphericalPolygon(varargin)
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
 % Created: 2012-02-09, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% Copyright 2012 INRA - Cepia Software Platform
 
 % Check if axes handle is specified
 if isAxisHandle(varargin{1})

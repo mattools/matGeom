@@ -16,12 +16,12 @@ function varargout = removeMeshVertices(vertices, faces, indsToRemove)
 %
 %   See also
 %     meshes3d, trimMesh
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
-% Created: 2016-02-03,    using Matlab 8.6.0.267246 (R2015b)
-% Copyright 2016 INRA - Cepia Software Platform.
+% Created: 2016-02-03, using Matlab 8.6.0.267246 (R2015b)
+% Copyright 2016 INRA - Cepia Software Platform
 
 % parse inputs
 if nargin == 2

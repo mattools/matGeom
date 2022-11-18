@@ -17,12 +17,12 @@ function poly2 = densifyPolygon(poly, N)
 %   See also
 %     drawPolygon, edgeToPolyline
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2011-11-25,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% Created: 2011-11-25, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011 INRA - Cepia Software Platform
 
 % number of vertices, and of edges
 Nv = size(poly, 1);

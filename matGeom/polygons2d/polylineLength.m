@@ -23,13 +23,12 @@ function len = polylineLength(poly, varargin)
 %
 %   See also:
 %   polygons2d, polylineCentroid, polygonLength
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRA - Cepia Software Platform.
-
+% Created: 2009-04-30, using Matlab 7.7.0.471 (R2008b)
+% Copyright 2009 INRA - Cepia Software Platform
 
 %   HISTORY
 %   2006-05-22 manage any dimension for points, closed and open curves, 

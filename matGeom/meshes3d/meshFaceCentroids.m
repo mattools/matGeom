@@ -24,7 +24,7 @@ function centroids = meshFaceCentroids(varargin)
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % Created: 2006-07-05
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
+% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % HISTORY
 % 2007-09-18 fix: worked only for 2D case, now works also for 3D

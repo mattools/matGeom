@@ -24,8 +24,8 @@ function [res, inds] = polylineSubcurve(poly, t0, t1)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRAE - Cepia Software Platform.
+% Created: 2009-04-30, using Matlab 7.7.0.471 (R2008b)
+% Copyright 2009 INRAE - Cepia Software Platform
 
 % number of vertices
 Nv = size(poly, 1);

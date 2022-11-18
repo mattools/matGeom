@@ -14,12 +14,12 @@ function varargout = removeMeshEars(varargin)
 %   See also
 %     meshes3d, ensureManifoldMesh
 %
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2019-01-08,    using Matlab 8.6.0.267246 (R2015b)
-% Copyright 2019 INRA - Cepia Software Platform.
+% Created: 2019-01-08, using Matlab 8.6.0.267246 (R2015b)
+% Copyright 2019 INRA - Cepia Software Platform
 
 [vertices, faces] = parseMeshData(varargin{:});
 

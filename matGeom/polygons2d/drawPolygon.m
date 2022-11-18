@@ -38,11 +38,11 @@ function varargout = drawPolygon (px, varargin)
 %   See also:
 %   polygons2d, drawPolyline
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 05/05/2004.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-05-05
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   2008/10/15 manage polygons with holes

@@ -19,12 +19,12 @@ function axis = polygonSymmetryAxis(poly)
 %
 %   See also
 %   transforms2d, transformPoint, distancePointPolygon
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
-% Created: 2015-04-28,    using Matlab 8.4.0.150421 (R2014b)
-% Copyright 2015 INRA - Cepia Software Platform.
+% Created: 2015-04-28, using Matlab 8.4.0.150421 (R2014b)
+% Copyright 2015 INRA - Cepia Software Platform
 
 % start by centering the polygon
 center = polygonCentroid(poly);

@@ -33,7 +33,7 @@ function transfo = createBasisTransform3d(source, target)
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % Created: 2010-12-03, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform.
+% Copyright 2010 INRA - Cepia Software Platform
 
 % HISTORY
 % 2013-07-03 added support for multiple inputs (Sven Holcombe)
