@@ -17,11 +17,11 @@ function [dist, varargout] = minDistance(p, curve)
 %
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 23/02/2004.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-02-23
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY :
 %   18/03/2004 : can also return index of closest point

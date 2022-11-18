@@ -21,8 +21,8 @@ function lengths = grEdgeLengths(nodes, edges, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2014-01-13,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2014 INRA - Cepia Software Platform.
+% Created: 2014-01-13, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2014 INRA - Cepia Software Platform
 
 nEdges = size(edges, 1);
 lengths = zeros(nEdges, 1);

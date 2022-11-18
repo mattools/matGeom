@@ -35,7 +35,7 @@ function [degree, node] = grNodeDegree(node, edges)
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2003-08-13
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
+% Copyright 2003 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 %   HISTORY
 %   10/02/2004 documentation

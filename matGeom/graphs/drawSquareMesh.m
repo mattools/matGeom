@@ -7,12 +7,12 @@ function varargout = drawSquareMesh(nodes, edges, faces, varargin) %#ok<INUSL>
 %
 %   See Also
 %   boundaryGraph, drawGraph
-%
-%   ---------
-%   author: David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 28/06/2004.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-06-28
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 % input size check up
 if size(faces, 2) ~= 4

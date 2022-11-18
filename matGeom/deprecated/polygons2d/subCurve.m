@@ -18,12 +18,12 @@ function res = subCurve(curve, P1, P2, varargin)
 %
 %   See also
 %   polygons2d
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2007-08-23,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% Created: 2007-08-23, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % deprecation warning
 warning('geom2d:deprecated', ...

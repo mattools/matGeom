@@ -20,11 +20,11 @@ function varargout = boundaryGraph(img)
 %     imageBoundaryGraph
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 28/06/2004.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-06-28
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   05/08/2004 : change name and add 2D case.

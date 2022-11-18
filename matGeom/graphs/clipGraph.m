@@ -30,8 +30,7 @@ function varargout = clipGraph(nodes, edges, varargin)
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % Created: 2007-01-18
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
-
+% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 %% Format inputs
 

@@ -14,11 +14,11 @@ function [nodes2, edges2] = grMergeNodeClusters(nodes, edges)
 %   grMergeNodesMedian
 %
 
-%   -----
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 13/08/2003.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-08-13
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 

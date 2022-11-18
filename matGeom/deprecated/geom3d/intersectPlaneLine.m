@@ -11,13 +11,12 @@ function point = intersectPlaneLine(plane, line)
 %
 %  Songbai Ji (6/23/2006). Bug fixed; also allow one plane, many lines; 
 % many planes one line; or N planes and N lines configuration in the input.
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 17/02/2005.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-17
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   24/11/2005 add support for multiple input

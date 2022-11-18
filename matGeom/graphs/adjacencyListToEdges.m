@@ -19,13 +19,12 @@ function edges = adjacencyListToEdges(adjList)
 %
 %   See also
 %     graphs, polygonSkeletonGraph
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% Created: 2020-06-02,    using Matlab 9.8.0.1323502 (R2020a)
-% Copyright 2020 INRAE.
+% Created: 2020-06-02, using Matlab 9.8.0.1323502 (R2020a)
+% Copyright 2020 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % TODO: allocate memory
 

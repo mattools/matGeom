@@ -16,12 +16,12 @@ function [nodes2, edges2] = pruneGraph(nodes, edges)
 %
 %   See also
 %   graphs
- 
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2015-02-19,    using Matlab 8.4.0.150421 (R2014b)
-% Copyright 2015 INRA - Cepia Software Platform.
+% Created: 2015-02-19, using Matlab 8.4.0.150421 (R2014b)
+% Copyright 2015 INRA - Cepia Software Platform
 
 nNodes = size(nodes, 1);
 degs = grNodeDegree(1:nNodes, edges)';

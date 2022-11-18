@@ -18,12 +18,12 @@ function box = point3dBounds(points)
 %
 %   See also
 %   points3d, boundingBox, boxes3d
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2010-07-26,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform.
+% Created: 2010-07-26, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2010 INRA - Cepia Software Platform
 
 warning('matgeom:geom3d:deprecated', ...
     'point3dBounds is deprecated, use boundingBox3d instead');

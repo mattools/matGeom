@@ -30,11 +30,11 @@ function varargout = vectorize(img)
 %     drawGraph, grMergeMultipleNodes, grSimplifyBranches
 %
 
-%   -----
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 17/07/2003.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-07-17
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   21/07/2003 : uses only one loop to detect nodes and edges

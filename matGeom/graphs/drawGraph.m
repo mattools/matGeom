@@ -39,11 +39,11 @@ function varargout = drawGraph(varargin)
 %   graphs, drawGraphEdges, fillGraphFaces, clipGraph, clipGraphPolygon
 %
 
-%   -----
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 17/07/2003.
-%
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-07-17
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 %   10/02/2004 : documentation
@@ -85,7 +85,6 @@ if nargin == 0
     return;
 end
 
-% ---------------------------------------------------------------
 % First extract the graph structure
 
 var = varargin{1};
@@ -154,9 +153,9 @@ end
 hold on;
 
 if size(n, 2) == 2
-    % Draw a 2 dimensional graph ----------------------
+    % Draw a 2 dimensional graph
 
-    % Draw faces of the graph ------------
+    % Draw faces of the graph
     if ~strcmp(sf{1}, 'none') && ~isempty(f)
         if iscell(f)
             % each face is contained in a cell.
@@ -171,24 +170,24 @@ if size(n, 2) == 2
         end
     end
     
-    % Draw 2D Edges ----------------------
+    % Draw 2D Edges
     if ~strcmp(se{1}, 'none') && size(e, 1) > 0
         he = plot([n(e(:,1),1) n(e(:,2),1)]', [n(e(:,1),2) n(e(:,2),2)]', se{:});
     end
 
-    % Draw 2D nodes ----------------------
+    % Draw 2D nodes
     if ~strcmp(sn{1}, 'none')
         hn = plot(n(:,1), n(:,2), sn{:});
     end
     
     
 elseif size(n, 2)==3
-    % Draw a 3 dimensional graph ----------------------
+    % Draw a 3 dimensional graph
 
     % use a zbuffer to avoid display pbms.
     set(gcf, 'renderer', 'zbuffer');
 
-    % Draw 3D Faces ----------------------
+    % Draw 3D Faces
     if ~strcmp(sf{1}, 'none')
         if iscell(f)
             % each face is contained in a cell.
@@ -203,7 +202,7 @@ elseif size(n, 2)==3
         end
     end
        
-    % Draw 3D edges ----------------------
+    % Draw 3D edges
     if ~strcmp(se{1}, 'none') && size(e, 1) > 0
         he = line(...
             [n(e(:,1),1) n(e(:,2),1)]', ...
@@ -212,7 +211,7 @@ elseif size(n, 2)==3
             se{:});
     end
     
-    % Draw 3D nodes ----------------------
+    % Draw 3D nodes
     if ~strcmp(sn{1}, 'none')
         hn = plot3(n(:,1), n(:,2), n(:,3), sn{:});
     end

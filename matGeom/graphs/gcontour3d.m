@@ -5,13 +5,12 @@ function [nodes, edges, faces] = gcontour3d(img)
 %
 %   See also:
 %     imageBoundaryGraph
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 28/06/2004.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-06-28
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 nodes = zeros([0 3]);   % 3 coordinates vertices
 edges = zeros([0 2]);   % first node and second nodes

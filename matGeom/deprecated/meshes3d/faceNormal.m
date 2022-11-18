@@ -28,7 +28,7 @@ function normals = faceNormal(nodes, faces)
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2006-07-05
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
+% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % deprecation warning
 warning('geom3d:deprecated', ...

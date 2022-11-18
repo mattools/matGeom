@@ -20,13 +20,12 @@ function varargout = drawDirectedEdges(p, e, varargin)
 %   lines created.
 %
 %   TODO: now only style 'arrow' is implemented ...
-%
-%   -----
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 12/03/2003.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-03-12
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 %   HISTORY
 

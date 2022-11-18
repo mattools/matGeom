@@ -12,13 +12,12 @@ function degree = grNodeInnerDegree(node, edges)
 %   See Also:
 %   grNodeDegree, grNodeOuterDegree
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
 % Created: 2006-01-17
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
-%
+% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 %   HISTORY
 %   2008-08-07 pre-allocate memory, update doc
