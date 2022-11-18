@@ -1,4 +1,4 @@
-% GRAPHS Simple Toolbox for manipulating Geometric Graphs
+%CONTENTS GRAPHS Simple Toolbox for manipulating Geometric Graphs
 % Version 0.6 04-Sep-2017 .
 %
 %   The aim of this package is to provide functions to easily create,  
@@ -120,13 +120,12 @@
 % Input/Output
 %   readGraph                  - Read a graph from a text file.
 %   writeGraph                 - Write a graph to an ascii file.
-%
-% -----
+
+% ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Project homepage: http://github.com/mattools/matGeom
-% created the  07/11/2005.
-% Copyright INRA - Cepia Software Platform.
+% Created: 2005-11-07
+% Copyright 2005 INRA - Cepia Software Platform
 
 help(mfilename);
 

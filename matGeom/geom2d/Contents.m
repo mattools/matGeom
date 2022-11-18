@@ -1,4 +1,4 @@
-% GEOM2D Geometry 2D Toolbox
+%CONTENTS GEOM2D Geometry 2D Toolbox
 % Version 1.24 07-Jun-2018 .
 %
 % 	Library to handle and visualize geometric primitives such as points,
@@ -197,14 +197,12 @@
 %   Credits:
 %   * function 'enclosingCircle' rewritten from a file from Yazan Ahed
 %       (yash78@gmail.com), available on Matlab File Exchange
-%
-% -----
+
+% ------
 % Author: David Legland
 % e-mail: david.legland@inrae.fr
 % Created: 2005-11-07
-% Copyright INRA - Cepia Software Platform.
-% Project homepage: http://github.com/mattools/matGeom
-% http://www.pfl-cepia.inra.fr/index.php?page=geom2d
+% Copyright 2005 INRA - Cepia Software Platform
 
 help(mfilename);
 
