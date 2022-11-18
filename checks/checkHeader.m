@@ -1,9 +1,13 @@
-clearvars; close all; clc; %function checkHeader
+function checkHeader
 %CHECKHEADER Checks the header of the m-files of matGeom.
 %
 %   checkHeader()
-%   At the moment only the beginning of the first header line is checked
-%   and corrected. Additional checks could be added.
+%   At the moment only the beginning of the first header line and the 
+%   author section is checked and corrected. Additional checks could be 
+%   added.
+%   
+%   Todo
+%       Standardize e-mail adress to "david.legland@inrae.fr"
 %
 %   See also
 %     codingConventions
@@ -15,9 +19,9 @@ clearvars; close all; clc; %function checkHeader
 % Created: 2022-11-08, using MATLAB 9.13.0.2080170 (R2022b) Update 1
 % Copyright 2022
 
-mFiles = dir('../matGeom/geom3d/**/*.m');
+mFiles = dir('../matGeom/**/*.m');
 % Exclude the Contents.m files
-mFiles(strcmp({mFiles.name}','Contents.m'))=[];
+% mFiles(strcmp({mFiles.name}','Contents.m'))=[];
 
 for f=1:length(mFiles)
     % Full path of the m-file
@@ -52,12 +56,14 @@ for f=1:length(mFiles)
         end
     end
     
-    %% First line of the header's author section
+    %% AUTHOR SECTION
+    % First line of the header's author section
     % Find the 1st line of the header's author section
     aSec1Idx = find(contains(S,'-----'));
     if isempty(aSec1Idx)
         continue
     elseif length(aSec1Idx) ~= 1
+        display(['No line contains or multiple lines contain: ''-----'' in: ' mFileName])
         continue
     end
     
@@ -70,7 +76,7 @@ for f=1:length(mFiles)
         S(aSec1Idx+1) = [];
     end
     
-    %% "Author" line
+    % "Author" line
     % Fix the beginning of the author line
     if contains(S(aSec1Idx+1),'author') && ~contains(S(aSec1Idx+1),'Author')
         S(aSec1Idx+1) = regexprep(S(aSec1Idx+1),'% +author *:','% Author:');
@@ -79,7 +85,7 @@ for f=1:length(mFiles)
         S(aSec1Idx+1) = regexprep(S(aSec1Idx+1),'% +','% ');
     end
 
-    %% "e-mail" line
+    % "e-mail" line
     if ~contains(S(aSec1Idx+2),'mail','IgnoreCase',1)
         if contains(S(aSec1Idx+2),'created','IgnoreCase',1)
             if contains(S(aSec1Idx+1),'David Legland')
@@ -138,7 +144,7 @@ for f=1:length(mFiles)
         end
     end
 
-    %% "Created" line
+    % "Created" line
     if contains(S(aSec1Idx+3),'created the') && ~contains(S(aSec1Idx+3),'Created')
         S(aSec1Idx+3) = regexprep(S(aSec1Idx+3),'% +created the +','% Created: ');
     elseif contains(S(aSec1Idx+3),'created ')
@@ -178,7 +184,7 @@ for f=1:length(mFiles)
         end
     end
 
-    %% "Copyright" line
+    % "Copyright" line
     % Extract the year of creation for the copyright
     creationYear = regexp(S(aSec1Idx+3), '20\d\d','match');
     if isempty(S{aSec1Idx+4}) && ~isempty(creationYear)
@@ -201,6 +207,7 @@ for f=1:length(mFiles)
     % Created year and copyright year should be the same
     copyrightYear = regexp(S(aSec1Idx+4), '20\d\d','match');
     if ~isequal(creationYear{1}, copyrightYear{1})
+        display(['Creation and copyright year are inconsistent in: ' mFileName])
         continue
     end
     
@@ -217,13 +224,12 @@ for f=1:length(mFiles)
         mFiles(f).validHeader = true;
     elseif all(aSecLIs == [1 0 1 1 1 1 1])
         S(aSec1Idx-1) = '';
-        saveHeader = 1;
     elseif all(aSecLIs == [0 0 1 1 1 1 1])
         if isempty(S{aSec1Idx-2})
             S(aSec1Idx-2) = '%';
             S(aSec1Idx-1) = '';
         end
-    elseif all(aSecLIs == [1 0 1 1 1 1 0])
+    elseif all(aSecLIs == [1 0 1 1 1 1 0]) || all(aSecLIs == [1 1 1 1 1 1 0])
         if regexp(S(aSec1Idx+5), '^% *$') == 1
             S([aSec1Idx-1, aSec1Idx+5]) = '';
         end
@@ -241,13 +247,21 @@ for f=1:length(mFiles)
     if regexp(S(aSec1Idx+3), '% Created: 20\d\d\-\d\d\-\d\d\ .','start') == 1
         S(aSec1Idx+3) = [S{aSec1Idx+3}(1:21) ',' S{aSec1Idx+3}(22:end)];
     end
+    % Remove dots at the end of the Created and Copyright line
+    if endsWith(S(aSec1Idx+3), '.')
+        S(aSec1Idx+3) = S{aSec1Idx+3}(1:end-1);
+    end
+    if endsWith(S(aSec1Idx+4), '.')
+        S(aSec1Idx+4) = S{aSec1Idx+4}(1:end-1);
+    end
     
     if aSec1Idx+6 < length(S)
         while isempty(S{aSec1Idx+6})
             S(aSec1Idx+6) = [];
         end
     end
-    
+
+    %% Save file if changes were performed
     if ~isequal(S, S_BU)
         writelines(S, mFile);
     end
