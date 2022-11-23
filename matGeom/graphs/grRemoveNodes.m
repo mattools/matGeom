@@ -29,11 +29,6 @@ function [nodes2, edges2] = grRemoveNodes(nodes, edges, rmNodes)
 % Created: 2003-08-13
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   10/02/2004 doc
-%   07/03/2014 rewrite using clearer algorithm
-
-
 %% edges processing
 
 % remove all edges connected to one of the nodes to remove

@@ -37,11 +37,6 @@ function varargout = drawCurve(varargin)
 % Created: 2004-04-06
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   03/01/2007 better processing of input, and update doc (drawing
-%       options and CLOSE option)
-%   03/03/2010 add deprecation warning
-
 % deprecation warning
 warning('geom2d:deprecated', ...
     '''drawCurve'' is deprecated, use ''drawPolyline'' instead');

@@ -28,11 +28,6 @@ function varargout = createIcosahedron()
 % Created: 2005-03-21
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2007-01-04 remove unused variables
-%   2010-12-06 format output, orient normals outwards
-
-
 %% Initialisations
 
 theta = 2*pi/5;

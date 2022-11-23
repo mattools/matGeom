@@ -42,10 +42,6 @@ function points = intersectLineCircle(line, circle)
 % Created: 2011-01-14, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform
 
-% HISTORY
-% 2011-06-06 fix bug in delta test
-% 2017-05-05 included some suggestions from code by JuanPi Carbajal <ajuanpi+dev@gmail.com>
-% 2017-08-08 update doc
   		  
 % check size of inputs
 nLines = size(line, 1);

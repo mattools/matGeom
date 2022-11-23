@@ -21,10 +21,6 @@ function trans = scaling(varargin)
 % Created: 2004-04-07
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   04/01/2007: rename as scaling
-%   22/04/2009: copy to createScaling and deprecate
-
 % deprecation warning
 warning('geom2d:deprecated', ...
     '''scaling'' is deprecated, use ''createScaling'' instead');

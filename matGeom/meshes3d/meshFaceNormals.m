@@ -31,9 +31,6 @@ function normals = meshFaceNormals(varargin)
 % Created: 2006-07-05
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-% HISTORY
-% 2011-11-24 rename from faceNormal to meshFaceNormals
-
 % parse input data
 [vertices, faces] = parseMeshData(varargin{:});
 

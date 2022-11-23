@@ -21,10 +21,6 @@ function [intersects, edgeIndices] = intersectRayPolygon(ray, poly, varargin)
 % Created: 2010-01-26
 % Copyright 2010
 
-%   HISTORY
-%   2010/01/26 creation from intersectLinePolygon
-%   2013-02-11 also returns edgeIndices
-
 % compute intersections with supporting line
 [intersects, edgeIndices, pos] = intersectLinePolygon(ray, poly, varargin{:});
 

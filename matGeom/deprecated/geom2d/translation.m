@@ -21,9 +21,6 @@ function trans = translation(varargin)
 % Created: 2004-04-06
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   22/04/2009: copy to createTranslation and deprecate
-
 % deprecation warning
 warning('geom2d:deprecated', ...
     '''translation'' is deprecated, use ''createTranslation'' instead');

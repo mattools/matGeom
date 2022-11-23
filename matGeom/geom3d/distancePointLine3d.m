@@ -20,11 +20,6 @@ function d = distancePointLine3d(point, line)
 % Created: 2005-05-23
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   15/01/2007 unify size of input data
-%   31/01/2007 typo in data formatting, and replace norm by vecnorm3d
-%   12/12/2010 changed to bsxfun implementation - Sven Holcombe
-
 % cf. Mathworld (distance point line 3d)  for formula
 d = bsxfun(@rdivide, vectorNorm3d( ...
         crossProduct3d(line(:,4:6), bsxfun(@minus, line(:,1:3), point)) ), ...

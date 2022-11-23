@@ -28,11 +28,6 @@ function len = curveLength(varargin)
 % Created: 2004-06-14
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   22/05/2006 manage any dimension for points, closed and open curves, 
-%       and update doc accordingly.
-%   30/06/2009 deprecate and replace by 'polylineLength'.
-
 % deprecation warning
 warning('geom2d:deprecated', ...
     '''curveLength'' is deprecated, use ''polylineLength'' instead');

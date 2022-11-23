@@ -21,10 +21,6 @@ function theta = dihedralAngle(plane1, plane2)
 % Created: 2005-02-21
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-% HISTORY
-% 2009-06-19 change convention for dihedral angle
-% 2011-03-20 improve computation precision
-
 % compute plane normals
 v1 = planeNormal(plane1);
 v2 = planeNormal(plane2);

@@ -26,11 +26,6 @@ function trans = scaling3d(varargin)
 % Created: 2006-04-20
 % Copyright 2006 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   25/11/2008 rename from scale3d to scaling3d
-%   HISTORY
-%   30/04/2009 deprecate: use createScaling3d instead
-
 % deprecation warning
 warning('geom3d:deprecated', ...
     [mfilename ' is deprecated, use ''createScaling3d'' instead']);

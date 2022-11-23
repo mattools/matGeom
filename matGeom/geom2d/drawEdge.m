@@ -31,14 +31,6 @@ function varargout = drawEdge(varargin)
 % Created: 2003-10-31
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   19/02/2004 add support for arrays of edges.
-%   31/03/2004 change format of edges to [P1 P2] and variants.
-%   28/11/2004 add support for 3D edges
-%   01/08/2005 add support for drawing options
-%   31/05/2007 update doc, and code makeup
-%   03/08/2010 re-organize code
-
 % separate edge and optional arguments
 [ax, edge, options] = parseInputArguments(varargin{:});
 

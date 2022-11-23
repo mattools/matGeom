@@ -35,9 +35,6 @@ function poly = rowToPolygon(row, varargin)
 % Created: 2010-07-23, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform
 
-%   HISTORY
-%   2014-01-29 add support for multiple rows
-
 type = 'interlaced';
 if ~isempty(varargin)
     type = varargin{1};

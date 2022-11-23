@@ -14,8 +14,6 @@ function edge = clipLineRect(line, rect)
 % Created: 2006-07-24
 % Copyright 2006 INRA - Cepia Software Platform
 
-%   HISTORY
-
 if size(line, 1)==1
     line = repmat(line, size(rect, 1), 1);
 elseif size(rect, 1)==1

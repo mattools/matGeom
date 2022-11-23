@@ -35,10 +35,6 @@ function transfo = createBasisTransform3d(source, target)
 % Created: 2010-12-03, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2010 INRA - Cepia Software Platform
 
-% HISTORY
-% 2013-07-03 added support for multiple inputs (Sven Holcombe)
-% 2017-10-16 rewrite
-
 % size of input arguments
 srcSz = size(source, 1);
 tgtSz = size(target, 1);

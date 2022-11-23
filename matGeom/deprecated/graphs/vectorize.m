@@ -36,14 +36,6 @@ function varargout = vectorize(img)
 % Created: 2003-07-17
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   21/07/2003 : uses only one loop to detect nodes and edges
-%   26/01/2004 : reverse direction of searching pixels in array : faster
-%   10/02/2004 : documentation
-%   11/02/2004 : supprime calcul du temps execution
-%   18/01/2006 : rewrite by using a label for each point, making it working
-%   faster
-
 warning('matGeom:deprecated', ...
     '"vectorize" function is deprecated, use "imBinaryToGraph" from MatImage library instead');
 

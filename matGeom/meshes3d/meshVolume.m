@@ -28,9 +28,6 @@ function vol = meshVolume(varargin)
 % Created: 2012-10-01, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012 INRA - Cepia Software Platform
 
-% HISTORY
-% 2013-08-16 speed improvement by Sven Holcombe
-
 % parse input
 [vertices, faces] = parseMeshData(varargin{:});
 

@@ -15,8 +15,6 @@ function ori = circle3dOrigin(varargin)
 % Created: 2005-02-21
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-
 % get center and radius
 circle = varargin{1};
 xc = circle(:,1);

@@ -55,14 +55,6 @@ function varargout = drawCircle3d(varargin)
 % Created: 2005-02-17
 % Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-%   HISTORY
-%   14/12/2006 allows unspecified PHI and THETA
-%   04/01/2007 update doc, add todo for angle convention
-%   19/06/2009 use localToGlobal3d, add drawing options
-%   08/03/2010 use drawPolyline3d
-%   2011-06-20 use angles in degrees, support several circles, update doc
-
-
 %   Possible calls for the function, with number of arguments :
 %   drawCircle3d([XC YC ZC R THETA PHI])            1
 %   drawCircle3d([XC YC ZC R THETA PHI PSI])        1

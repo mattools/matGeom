@@ -23,9 +23,6 @@ function trans = translation3d(varargin)
 % Created: 2004-04-06
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   30/04/2009 deprecate: use createTranslation instead
-
 % deprecation warning
 warning('geom3d:deprecated', ...
     [mfilename ' is deprecated, use ''createTranslation3d'' instead']);

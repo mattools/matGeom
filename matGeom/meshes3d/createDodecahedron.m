@@ -33,8 +33,6 @@ function varargout = createDodecahedron()
 % Created: 2010-07-29
 % Copyright 2010 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-
 % golden ratio
 phi = (1+sqrt(5))/2;
 

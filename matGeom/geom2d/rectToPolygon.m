@@ -20,8 +20,6 @@ function [tx, ty] = rectToPolygon(rect)
 % Created: 2005-04-06
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-% HISTORY
-
 % extract rectangle parameters
 theta = 0;
 x0  = rect(1);

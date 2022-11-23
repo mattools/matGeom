@@ -30,10 +30,6 @@ function alpha = normalizeAngle(alpha, varargin)
 % Created: 2008-03-10, using Matlab 7.4.0.287 (R2007a)
 % Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
-% HISTORY
-% 2010-03-31 rename as normalizeAngle, and add psb to specify interval
-%   center
-
 center = pi;
 if ~isempty(varargin)
     center = varargin{1};

@@ -31,8 +31,6 @@ function b = isPointInEllipse(point, ellipse, varargin)
 % Created: 2011-03-11
 % Copyright 2011 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-
 % extract computation tolerance
 tol = 1e-14;
 if ~isempty(varargin)

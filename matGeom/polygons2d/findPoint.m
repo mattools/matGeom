@@ -23,10 +23,6 @@ function index = findPoint(coord, points, varargin)
 % Created: 2003-07-17
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   10/02/2004 documentation
-%   09/08/2004 rewrite faster, and add support for multiple points
-
 % number of points
 np = size(coord, 1);
 

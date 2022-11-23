@@ -24,9 +24,6 @@ function pts2 = grFaceToPolygon(varargin)
 % Created: 2005-11-30
 % Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-%   HISTORY
-%   27/07/2007: cleanup code
-
 if length(varargin)==2
     % argument is a graph structure
     graph = varargin{1};

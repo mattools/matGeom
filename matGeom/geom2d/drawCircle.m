@@ -44,13 +44,6 @@ function varargout = drawCircle(varargin)
 % Created: 2003-10-31
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   02/11/2004: add possibility to draw multiple circles in one call
-%   12/01/2005: allow more than 3 parameters
-%   26/02/2007: add possibility to specify plot options, number of
-%       discretization steps, and circle as center+radius.
-%   2011-10-11 add support for axis handle
-
 % extract handle of axis to draw on
 if isAxisHandle(varargin{1})
     ax = varargin{1};

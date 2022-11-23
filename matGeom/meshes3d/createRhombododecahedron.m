@@ -27,9 +27,6 @@ function varargout = createRhombododecahedron()
 % Created: 2005-02-10
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   04/01/2007: remove unused variables
-
 nodes = [0 0 2;...
     1 -1 1;1 1 1;-1 1 1;-1 -1 1;...
     2 0 0;0 2 0;-2 0 0;0 -2 0;...

@@ -45,10 +45,6 @@ function points = intersectLineSphere(line, sphere, varargin)
 % Created: 2005-02-18
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2011-06-21 bug for tangent lines, add tolerance
-
-
 %% Process input arguments
 
 % check if user-defined tolerance is given

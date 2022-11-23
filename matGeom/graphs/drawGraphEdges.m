@@ -25,9 +25,6 @@ function varargout = drawGraphEdges(varargin)
 % Created: 2005-11-24
 % Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-%   HISTORY
-
-
 %% Input argument processing
 
 % initialisations

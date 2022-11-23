@@ -31,9 +31,6 @@ function varargout = transformPoint(varargin)
 % Created: 2004-04-06
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   25/04/2005 : support for 2D arrays of points (px, py, trans).
-
 % parse input arguments
 if length(varargin) == 2
     var = varargin{1};

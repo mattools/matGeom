@@ -49,8 +49,8 @@ function [dist, proj] = distancePointMesh(points, vertices, faces, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2018-03-08,    using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2018 INRA - Cepia Software Platform.
+% Created: 2018-03-08, using Matlab 9.3.0.713579 (R2017b)
+% Copyright 2018 INRA - Cepia Software Platform
 
 
 %% Parses input arguments
@@ -163,8 +163,8 @@ function [dist, proj] = distancePointTrimesh_vectorized(point, vertices, faces)
 % ------
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2018-03-08,    using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2018 INRA - Cepia Software Platform.
+% Created: 2018-03-08, using Matlab 9.3.0.713579 (R2017b)
+% Copyright 2018 INRA - Cepia Software Platform
 
 % Regions are not numbered as in the original paper of D. Eberly to allow
 % automated computation of regions from the 3 conditions on lines.

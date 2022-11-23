@@ -22,12 +22,6 @@ function b = isPointOnLine(point, line, varargin)
 % Created: 2003-10-31
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   11/03/2004 support for multiple inputs
-%   08/12/2004 complete implementation, add doc
-%   22/05/2009 rename to isPointOnLine, add psb to specify tolerance
-%   17/12/2013 replace repmat by bsxfun (faster)
-
 % extract computation tolerance
 tol = 1e-14;
 if ~isempty(varargin)

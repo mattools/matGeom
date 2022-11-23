@@ -22,9 +22,6 @@ function coord = planePoint(plane, point)
 % Created: 2007-09-18, using Matlab 7.4.0.287 (R2007a)
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
-%   HISTORY
-%   2013-10-09 remove repmat
-
 % size of input arguments
 npl = size(plane, 1);
 npt = size(point, 1);

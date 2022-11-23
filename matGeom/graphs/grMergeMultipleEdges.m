@@ -11,10 +11,6 @@ function varargout = grMergeMultipleEdges(nodes, edges)
 % Created: 2003-08-13
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   10/02/2004 doc
-%   2011-05-18 rename to grMergeMultipleEdges
-
 rmedge = [];
 for e = 1:length(edges)
     edge = edges(e, :);

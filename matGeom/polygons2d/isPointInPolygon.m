@@ -34,9 +34,6 @@ function b = isPointInPolygon(point, poly)
 % Created: 2009-06-19, using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform
 
-%   HISTORY
-%   2013-04-24 add support for multiply connected polygons
-
 % In case of a multiple polygon, decompose into a set of contours, and
 % performs test for each contour
 if iscell(poly) || any(isnan(poly(:)))

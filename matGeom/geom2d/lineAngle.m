@@ -19,10 +19,6 @@ function theta = lineAngle(varargin)
 % Created: 2003-10-31
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2004-02-19 added support for multiple lines.
-%   2011-01-20 use bsxfun
-
 nargs = length(varargin);
 if nargs == 1
     % angle of one line with horizontal

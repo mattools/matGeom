@@ -26,9 +26,6 @@ function line = lineFit(varargin)
 % Created: 2004-04-30
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   09/12/2004 : update implementation
-
 %% Extract input arguments
 if length(varargin)==1
     % argument is an array of points

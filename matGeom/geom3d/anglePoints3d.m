@@ -19,12 +19,6 @@ function alpha = anglePoints3d(varargin)
 % Created: 2005-02-21
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   20/09/2005: add case of single argument for all points
-%   04/01/2007: check typo
-%   27/05/2014: adjust known vector sizes n1, n0, n2 once corrected for
-
-
 p2 = [0 0 0];
 if length(varargin) == 1
     pts = varargin{1};

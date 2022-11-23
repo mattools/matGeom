@@ -23,9 +23,6 @@ function b = isPointOnCircle(point, circle, varargin)
 % Created: 2004-04-07
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   22/05/2009 rename to isPointOnCircle, add psb to specify tolerance
-
 tol = 1e-14;
 if ~isempty(varargin)
     tol = varargin{1};

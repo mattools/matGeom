@@ -32,14 +32,6 @@ function n = vectorNorm(v, varargin)
 % Created: 2005-02-21
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   02/05/2006 manage several norms
-%   18/09/2007 use 'isempty'
-%   15/10/2008 add comments
-%   22/05/2009 rename as vectorNorm
-%   01/03/2010 fix bug for inf norm
-%   03/01/2020 make it work for more dimensions
-
 % extract the type of norm to compute
 d = 2;
 if ~isempty(varargin)

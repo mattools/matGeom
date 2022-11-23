@@ -60,9 +60,6 @@ function varargout = drawEllipseCylinder(varargin)
 % Created: 2014-02-27
 % Copyright 2014 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-
-
 %% Input argument processing
 
 % Check if axes handle is specified

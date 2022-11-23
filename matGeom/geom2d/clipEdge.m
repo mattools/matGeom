@@ -22,13 +22,6 @@ function edge2 = clipEdge(edge, box)
 % Created: 2005-05-14
 % Copyright 2005 INRA - Cepia Software Platform
 
-%   HISTORY
-%   2007-01-08 sort points according to position on edge, not to x coord
-%       -> this allows to return edges with same orientation a source, and
-%       to keep first or end points at the same position if their are not
-%       clipped.
-%   01/10/2010 fix bug due to precision, thanks to Reto Zingg.
-
 % process data input
 if size(box, 1) == 2
     box = box';

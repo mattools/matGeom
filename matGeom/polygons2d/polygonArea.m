@@ -52,11 +52,6 @@ function area = polygonArea(poly, varargin)
 % Created: 2004-05-05
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   25/04/2005: add support for multiple polygons
-%   12/10/2007: update doc
-
-
 %% Process special cases
 
 % in case of polygon sets, computes the sum of polygon areas

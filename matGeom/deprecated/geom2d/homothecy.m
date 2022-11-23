@@ -13,9 +13,6 @@ function trans = homothecy(point, ratio)
 % Created: 2005-01-20
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   22/04/2009: copy to createHomothecy and deprecate
-
 % deprecation warning
 warning('geom2d:deprecated', ...
     '''homothecy'' is deprecated, use ''createHomothecy'' instead');

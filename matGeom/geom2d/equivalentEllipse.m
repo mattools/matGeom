@@ -35,10 +35,6 @@ function ell = equivalentEllipse(points)
 % Created: 2008-02-21, using Matlab 7.4.0.287 (R2007a)
 % Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
-% HISTORY
-% 2009-07-29 take into account ellipse orientation
-% 2011-03-12 rewrite using equivalent moments
-
 % ellipse center
 xc = mean(points(:,1));
 yc = mean(points(:,2));

@@ -25,9 +25,6 @@ function b = isPointInCircle(point, circle, varargin)
 % Created: 2004-04-07
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   22/05/2009 rename to isPointInCircle, add psb to specify tolerance
-
 % extract computation tolerance
 tol = 1e-14;
 if ~isempty(varargin)

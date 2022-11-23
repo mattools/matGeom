@@ -12,10 +12,6 @@ function [nodes2, edges2] = grRemoveNode(nodes, edges, node)
 % Created: 2003-08-13
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   10/02/2004: doc
-
-
 % remove all edges connected to the node 
 neighbours = grAdjacentEdges(edges, node);
 [nodes2, edges2] = grRemoveEdges(nodes, edges, neighbours); %#ok<ASGLU>

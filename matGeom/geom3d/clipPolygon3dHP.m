@@ -30,12 +30,6 @@ function poly2 = clipPolygon3dHP(poly, plane)
 % Created: 2005-08-02
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2007-01-04 add todo flag
-%   2011-08-17 rewrite algo, that works for convex polygons, but is slower
-%       than function clipConvexPolgon3dHP
-
-
 %% Pre-Processing
 
 % ensure last point is the same as the first one (makes computation easier)

@@ -19,9 +19,6 @@ function varargout = createMengerSponge()
 % Created: 2007-10-18
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
-%   HISTORY
-%   2008-10-17 finishes implementation
-
 nodes =[...
     ... % main cube corners (1->8)
     0 0 0; ...

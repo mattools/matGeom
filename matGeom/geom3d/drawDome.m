@@ -66,10 +66,6 @@ function varargout = drawDome(varargin)
 % Created: 2013-07-27
 % Copyright 2013
 
-%   HISTORY
-%   2013-07-27 initial version as copy of drawSphere with a few changes
-%   2020-05-18 changes based on current version of geom3d
-
 % Check if axes handle is specified
 if isAxisHandle(varargin{1})
     hAx = varargin{1};

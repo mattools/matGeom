@@ -31,11 +31,6 @@ function varargout = drawRect(rect, varargin)
 % Created: 2003-12-10
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2003-12-12 add support for multiple rectangles
-%   2011-10-09 rewrite using rectToPolygon, add support for drawing options
-%   2011-10-11 add management of axes handle
-
 % extract handle of axis to draw on
 if isAxisHandle(rect)
     ax = rect;

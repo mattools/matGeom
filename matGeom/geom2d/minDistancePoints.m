@@ -75,19 +75,6 @@ function varargout = minDistancePoints(p1, varargin)
 % Created: 2004-06-15
 % Copyright 2004 INRAE - Cepia Software Platform
 
-% HISTORY:
-% 22/06/2005 compute sqrt only at the end (faster), and change behaviour
-%   for 2 inputs: compute min distance for each point in PTS1. 
-%   Also add support for different norms.
-% 15/08/2005 make difference when 1 array or 2 arrays of points
-% 25/10/2006 also returns indices of closest points
-% 30/10/2006 generalize to points of any dimension
-% 28/08/2007 code cleanup, add comments and help
-% 01/02/2017 complete re-write by JuanPi Carbajal
-% 01/02/2017 fix bugs, update code, fix MLInt Warning (D. Legland)
-% 01/02/2017 remove use of vech
-
-
 %% Initialisations
 
 % default norm (euclidean)

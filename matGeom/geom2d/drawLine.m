@@ -29,13 +29,6 @@ function varargout = drawLine(varargin)
 % Created: 2003-10-31
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   25/05/2004 add support for multiple lines (loop)
-%   23/05/2005 add support for arguments
-%   03/08/2010 bug for lines outside box (thanks to Reto Zingg)
-%   04/08/2010 rewrite using clipLine
-%   2011-10-11 add management of axes handle
-
 % extract handle of axis to draw on
 if isAxisHandle(varargin{1})
     ax = varargin{1};

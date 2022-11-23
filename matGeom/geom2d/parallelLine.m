@@ -32,11 +32,6 @@ function res = parallelLine(line, point)
 % Created: 2003-10-31
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   31/07/2005 add usage of distance
-%   15/06/2009 change convention for distance sign
-%   31/09/2012 adapt for multiple lines
-
 if size(point, 2) == 1
     % use a distance. Compute position of point located at distance DIST on
     % the line orthogonal to the first one.

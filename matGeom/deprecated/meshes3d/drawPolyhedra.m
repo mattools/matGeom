@@ -26,15 +26,6 @@ function varargout = drawPolyhedra(varargin)
 % Created: 2005-02-10
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   07/11/2005 update doc.
-%   04/01/2007 typo
-%   18/01/2007 add support for 2D polyhedra ("nodes" is N-by-2 array), and
-%       make 'cnodes' a list of points instead of a list of indices
-%   14/08/2007 add comment, add support for NaN in faces (complex polygons)
-%   17/10/2008 deprecate and add warning
-
-
 warning('IMAEL:deprecatedFunction', ...
     'This function is deprecated, use ''drawPolyhedron'' instead');
 

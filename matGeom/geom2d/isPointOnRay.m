@@ -36,12 +36,6 @@ function b = isPointOnRay(point, ray, varargin)
 % Created: 2003-10-31
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   07/07/2005 normalize condition to test if on the line and add support
-%       of multiple rays or points
-%   22/05/2009 rename to isPointOnRay, add psb to specify tolerance
-%   26/01/2010 was drawing a line before making test
-
 % extract computation tolerance
 tol = 1e-14;
 if ~isempty(varargin)

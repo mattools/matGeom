@@ -21,12 +21,6 @@ function edge = clipLine3d(line, box)
 % Created: 2008-10-30, from drawLine3d
 % Copyright 2008 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   30/10/2008 replace intersectPlaneLine by intersectLinePlane
-%   25/11/2008 improve test for bounds, and use more explicit code
-%   22/06/2009 fig bug, add support for several lines
-%   16/11/2010 use middle point for checking edge bounds 
-
 % get box limits
 xmin = box(1); xmax = box(2);
 ymin = box(3); ymax = box(4);

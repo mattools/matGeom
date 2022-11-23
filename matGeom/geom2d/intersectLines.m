@@ -34,12 +34,6 @@ function point = intersectLines(line1, line2, varargin)
 % Created: 2003-10-31
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2004-02-19 add support for multiple lines.
-%   2007-03-08 update doc
-%   2011-10-07 code cleanup
-
-
 %% Process input arguments
 
 % extract tolerance

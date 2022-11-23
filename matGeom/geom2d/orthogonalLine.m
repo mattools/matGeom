@@ -28,10 +28,6 @@ function res = orthogonalLine(line, point)
 % Created: 2003-10-31
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   19/02/2004 added control for multiple lines and/or points
-%   31/12/2013 added example
-
 N = max(size(point, 1), size(line, 1));
 
 if size(point, 1)>1

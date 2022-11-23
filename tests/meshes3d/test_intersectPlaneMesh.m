@@ -2,7 +2,7 @@ function test_suite = test_intersectPlaneMesh
 %TEST_INTERSECTPLANEMESH  Test case for the file intersectPlaneMesh
 %
 %   Test case for the file intersectPlaneMesh
-
+%
 %   Example
 %   test_intersectPlaneMesh
 %

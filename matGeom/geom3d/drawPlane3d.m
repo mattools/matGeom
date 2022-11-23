@@ -38,12 +38,6 @@ function h = drawPlane3d(plane, varargin)
 % Created: 2005-02-17
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2008-10-30 replace intersectPlaneLine by intersectLinePlane, add doc
-%   2010-10-04 fix a bug for planes touching box by one corner
-%   2011-07-19 fix a bug for param by Xin KANG (Ben)
-% 
-
 % add support for drawing multiple planes at once
 if size(plane, 1) > 1
     nPlanes = size(plane, 1);

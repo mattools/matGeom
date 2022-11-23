@@ -30,11 +30,6 @@ function varargout = drawBox(box, varargin)
 % Created: 2003-12-10
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2010-02-22 creation
-%   2011-04-01 add support for drawing option, fix bug for several boxes
-%   2011-10-11 add management of axes handle
-
 % extract handle of axis to draw on
 if isAxisHandle(box)
     ax = box;

@@ -26,10 +26,6 @@ function point = projPointOnLine(point, line)
 % Created: 2005-07-04
 % Copyright 2005 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
-%   HISTORY
-%   2005-08-06 correct bug when several points were passed as param.
-%   2012-08-23 remove repmats
-
 % parse input arguments
 p = inputParser;
 addRequired(p, 'point', @(x)validateattributes(x,{'numeric'},...

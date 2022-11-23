@@ -15,8 +15,6 @@ function node2 = grOppositeNode(edges, node)
 % Created: 2010-09-07
 % Copyright 2010 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-%   HISTORY
-
 % allocate memory for result
 Ne = size(edges, 1);
 node2 = zeros(Ne, 1);

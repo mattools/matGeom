@@ -17,9 +17,6 @@ function d = distancePointPlane(point, plane)
 % Created: 2005-02-18
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-
-
 % normalized plane normal
 n = normalizeVector3d(cross(plane(:,4:6), plane(:, 7:9), 2));
 

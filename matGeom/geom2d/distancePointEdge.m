@@ -47,12 +47,6 @@ function [dist, pos] = distancePointEdge(point, edge)
 % Created: 2004-04-07
 % Copyright 2004 INRA - BIA-BIBS
 
-%   HISTORY
-%   2005-06-24 rename, and change arguments sequence
-%   2009-04-30 add possibility to return position of closest point
-%   2011-04-14 add checkup for degenerate edges, improve speed, update doc
-
-
 % direction vector of each edge (row vectors)
 vx = (edge(:, 3) - edge(:,1))';
 vy = (edge(:, 4) - edge(:,2))';

@@ -28,11 +28,6 @@ function varargout = cart2sph2(varargin)
 % Created: 2005-02-18
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   02/11/2006: update doc, and manage case RHO is empty
-%   03/11/2006: change convention for angle : uses order [THETA PHI RHO]
-%   27/06/2007: manage 2 output arguments
-
 % parse input angles based on input argument number
 if length(varargin) == 1
     xyz = varargin{1};

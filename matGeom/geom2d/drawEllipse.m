@@ -41,16 +41,6 @@ function varargout = drawEllipse(varargin)
 % Created: 2003-12-11
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2004-01-08 returns coord of points when 2 output args are asked
-%   2004-01-08 fix bug in extraction of input parameters, theta was not
-%       initialized in case of array of size 1*5
-%   2005-08-13 uses radians instead of degrees
-%   2008-02-21 add support for drawing styles, code cleanup
-%   2011-03-30 use degrees instead of radians, remove [x y] = ... format
-%   2011-10-11 add support for axis handle
-
-
 %% Extract input arguments
 
 % extract handle of axis to draw on

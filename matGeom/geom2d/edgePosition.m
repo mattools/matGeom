@@ -36,9 +36,6 @@ function pos = edgePosition(point, edge)
 % Created: 2004-05-25
 % Copyright 2004 INRA - Cepia Software Platform
 
-%   HISTORY:
-%   06/12/2009 created from linePosition
-
 % number of points and of edges
 nEdges = size(edge, 1);
 nPoints = size(point, 1);

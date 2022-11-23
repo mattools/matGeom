@@ -83,11 +83,6 @@ function varargout = drawCapsule(varargin)
 % Created: 2013-07-27
 % Copyright 2013
 
-%   HISTORY
-%   2013-07-27 initial version as copy of drawCylinder
-%   2020-05-18 changes based on current version of geom3d
-
-
 %% Input argument processing
 
 % parse axis handle

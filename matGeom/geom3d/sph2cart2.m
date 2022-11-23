@@ -42,11 +42,6 @@ function varargout = sph2cart2(theta, phi, rho)
 % Created: 2005-02-18
 % Copyright 2005 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
-%   HISTORY
-%   22/03/2005: make test for 2 args, and add radius if not specified for
-%       1 arg.
-%   03/11/2006: change convention for angle: uses order [THETA PHI RHO]
-
 % Process input arguments
 if nargin == 1
     phi     = theta(:, 2);

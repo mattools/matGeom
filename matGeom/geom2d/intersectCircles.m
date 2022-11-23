@@ -44,10 +44,6 @@ function points = intersectCircles(circle1, circle2)
 % Created: 2011-01-20, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform
 
-%   HISTORY
-%   2011-06-06 add support for multiple inputs
-
-
 % adapt sizes of inputs
 n1 = size(circle1, 1);
 n2 = size(circle2, 1);

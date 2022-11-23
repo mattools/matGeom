@@ -13,11 +13,6 @@ function varargout = fillSphericalTriangle(sphere, p1, p2, p3, varargin)
 % Created: 2005-02-22
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   27/06/2007 manage spheres other than origin
-%   30/10/2008 replace intersectPlaneLine by intersectLinePlane
-%   2012-02-09 rename as fillSphericalTriangle
-
 % extract data of the sphere
 ori = sphere(:, 1:3);
 r   = sphere(4);

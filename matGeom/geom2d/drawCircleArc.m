@@ -38,13 +38,6 @@ function varargout = drawCircleArc(varargin)
 % Created: 2003-12-12
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2004-05-03 angles are given as radians
-%   2007-06-27 Now uses angle extent
-%   2011-03-30 use angles in degrees
-%   2011-06-09 add support for line styles
-%   2011-10-11 add management of axes handle
-
 if nargin == 0
     error('Need to specify circle arc');
 end

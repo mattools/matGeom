@@ -26,17 +26,6 @@ function varargout = drawPolyhedron(nodes, faces, varargin)
 % Created: 2005-02-10
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   07/11/2005 update doc.
-%   04/01/2007 typo
-%   18/01/2007 add support for 2D polyhedra ("nodes" is N-by-2 array), and
-%       make 'cnodes' a list of points instead of a list of indices
-%   14/08/2007 add comment, add support for NaN in faces (complex polygons)
-%   14/09/2007 rename as drawPolyhedron
-%   16/10/2008 better support for colors
-%   27/07/2010 copy to 'drawMesh'
-
-
 %% Initialisations
 
 

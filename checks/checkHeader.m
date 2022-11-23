@@ -193,7 +193,7 @@ for f=1:length(mFiles)
         S(aSec1Idx+4) = "% Copyright " + creationYear;
     end
     
-    %% General checks
+    % General checks
     containsHeaderWords = arrayfun(@(x,y) contains(x,y), ...
         S(aSec1Idx:aSec1Idx+4), ["% ------"; "Author"; "e-mail"; "Created"; "Copyright"]);
     if ~all(containsHeaderWords)
@@ -260,6 +260,20 @@ for f=1:length(mFiles)
             S(aSec1Idx+6) = [];
         end
     end
+
+    %% HISTORY Section
+     if ~isempty(cell2mat(regexp(lower(S), '^% *history')))
+         histSIdx = find(contains(lower(S),'history'));
+         if length(histSIdx) ~=1
+             display(['Multiple ''History'' sections found in: ' mFileName])
+             continue
+         end
+         histLines = 1;
+         while startsWith(S(histSIdx+histLines),'% ')
+             histLines = histLines+1;
+         end
+         S(histSIdx:histSIdx+histLines-1) = [];
+     end
 
     %% Save file if changes were performed
     if ~isequal(S, S_BU)

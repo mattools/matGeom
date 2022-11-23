@@ -24,10 +24,6 @@ function [edge, isInside] = clipRay(ray, bb)
 % Created: 2010-05-13, using Matlab 7.4.0.287 (R2007a)
 % Copyright 2010 INRA - Cepia Software Platform
 
-%   HISTORY
-%   2010-05-13 create from clipLine
-%   2017-09-21 simplify code
-
 % adjust size of two input arguments
 if size(ray, 1) == 1
     ray = repmat(ray, size(bb, 1), 1);

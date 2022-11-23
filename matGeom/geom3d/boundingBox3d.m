@@ -27,10 +27,6 @@ function box = boundingBox3d(points)
 % Created: 2011-04-01, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform
 
-%   HISTORY
-%   2011-04-08 add example
-%   2011-12-09 rename to boundingBox3d
-
 % compute extreme x and y values
 xmin = min(points(:,1));
 xmax = max(points(:,1));

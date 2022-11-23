@@ -17,10 +17,6 @@ function vn = normalize3d(v)
 % Created: 2004-11-29
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   30/11/2005 correct a bug
-%   19/06/2009 deprecate and replace by normalizeVector3d
-
 % deprecation warning
 warning('geom3d:deprecated', ...
     '''normalize3d'' is deprecated, use ''normalizeVector3d'' instead');

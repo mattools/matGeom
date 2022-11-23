@@ -27,10 +27,6 @@ function point = projPointOnPlane(point, plane)
 % Created: 2005-02-18
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   21/08/2006: debug support for multiple points or planes
-%   22/04/2013: uses bsxfun for mult. pts/planes in all dimensions (Sven H)
-
 % Unpack the planes into origins and normals, keeping original shape
 plSize = size(plane);
 plSize(2) = 3;

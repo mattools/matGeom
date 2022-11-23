@@ -31,16 +31,6 @@ function point = intersectEdges(edge1, edge2, varargin)
 % Created: 2003-10-31
 % Copyright 2003 INRA - Cepia Software Platform
 
-%   HISTORY
-%   19/02/2004 add support for multiple edges.
-%   15/08/2005 rewrite a lot, and create unit tests
-%   08/03/2007 update doc
-%   21/09/2009 fix bug for edge arrays (thanks to Miquel Cubells)
-%   03/08/2010 fix another bug for edge arrays (thanks to Reto Zingg)
-%   20/02/2013 fix bug for management of parallel edges (thanks to Nicolaj
-%   Kirchhof)
-%   19/07/2016 add support for tolerance
-
 % tolerance for precision
 tol = 1e-14;
 

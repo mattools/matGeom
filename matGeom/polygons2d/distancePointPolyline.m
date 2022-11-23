@@ -41,10 +41,6 @@ function [minDist, pos] = distancePointPolyline(point, poly, varargin)
 % Created: 2009-04-30, using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform
 
-%   HISTORY
-%   2009-06-23 compute all distances in one call
-%   2016-02-04 Vectorize
-
 % check if input polyline is closed or not
 closed = false;
 if ~isempty(varargin)

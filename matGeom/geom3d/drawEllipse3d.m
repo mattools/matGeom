@@ -39,8 +39,6 @@ function varargout = drawEllipse3d(varargin)
 % Created: 2008-05-07
 % Copyright 2008 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-%   HISTORY
-
 %   Possible calls for the function, with number of arguments :
 %   drawEllipse3d([XC YC ZC A B THETA PHI])             1
 %   drawEllipse3d([XC YC ZC A B THETA PHI PSI])         1

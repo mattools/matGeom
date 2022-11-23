@@ -13,9 +13,6 @@ function varargout = grSimplifyBranches_old(nodes, edges)
 % Created: 2003-08-13
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   10/02/2004 doc
-
 n = 1;
 while n < length(nodes)
     neigh = grAdjacentNodes(edges, n);

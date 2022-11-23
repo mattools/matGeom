@@ -19,7 +19,4 @@ function n = vectorNorm3d(v)
 % Created: 2005-02-21
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   19/06/2009 rename as vectorNorm3d
-
 n = sqrt(sum(v.*v, ndims(v)));

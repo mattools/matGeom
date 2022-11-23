@@ -16,9 +16,6 @@ function n = planeNormal(plane)
 % Created: 2005-02-17
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   15/04/2013 Extended to N-dim planes by Sven Holcombe
-
 % plane normal
 outSz = size(plane);
 outSz(2) = 3;

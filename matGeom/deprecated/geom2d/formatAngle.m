@@ -17,9 +17,6 @@ function alpha = formatAngle(alpha)
 % Created: 2008-03-10, using Matlab 7.4.0.287 (R2007a)
 % Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
-% HISTORY
-% 2010-03-31 deprecate and replace by function 'normalizeAngle'
-
 % deprecation warning
 warning('geom2d:deprecated', ...
     '''formatAngle'' is deprecated, use ''normalizeAngle'' instead');

@@ -27,9 +27,6 @@ function varargout = circleAsPolygon(circle, varargin)
 % Created: 2005-04-06
 % Copyright 2005 INRA - Cepia Software Platform
 
-%   HISTORY
-%   20/04/2007: return a closed polygon with N+1 vertices, use default N=64
-
 warning('matGeom:deprecated', ...
     'function "circleAsPolygon" is deprecated, use "circleToPolygon" instead');
 

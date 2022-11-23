@@ -16,9 +16,6 @@ function trans = createLineReflection(line)
 % Created: 2005-01-19
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   22/04/2009: rename as createLineReflection
-
 % extract line parameters
 x0 = line(:,1);
 y0 = line(:,2);
