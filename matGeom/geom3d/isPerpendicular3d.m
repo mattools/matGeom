@@ -34,8 +34,6 @@ function b = isPerpendicular3d(v1, v2, varargin)
 % Created: 2006-04-25
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-% 2011.03.20 add support for tolerance, fix computation
-
 % check if tolerance is specified
 tol = 1e-14;
 if ~isempty(varargin)

@@ -1,4 +1,4 @@
-%CONTENTS MESHES3D 3D Surface Meshes
+%CONTENTS MESHES3D 3D Surface Meshes.
 % Version 1.22 06-Jun-2018 .
 %
 %   Creation, visualization, and manipulation of 3D surface meshes or

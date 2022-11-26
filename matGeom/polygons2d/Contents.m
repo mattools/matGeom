@@ -1,4 +1,4 @@
-%CONTENTS POLYGONS Manipulation of planar polygons and polylines
+%CONTENTS POLYGONS Manipulation of planar polygons and polylines.
 % Version 1.24 07-Jun-2018 .
 %
 %   The 'polygons' module contains functions operating on shapes composed

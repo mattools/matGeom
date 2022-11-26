@@ -1,4 +1,4 @@
-%CONTENTS GEOM3D Geometry 3D Toolbox
+%CONTENTS GEOM3D Geometry 3D Toolbox.
 % Version 1.22 06-Jun-2018 .
 %
 %   Creation, transformations, algorithms and visualization of geometrical

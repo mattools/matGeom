@@ -1,4 +1,4 @@
-%CONTENTS GRAPHS Simple Toolbox for manipulating Geometric Graphs
+%CONTENTS GRAPHS Simple Toolbox for manipulating Geometric Graphs.
 % Version 0.6 04-Sep-2017 .
 %
 %   The aim of this package is to provide functions to easily create,  
