@@ -27,11 +27,6 @@ function trans = createScaling3d(varargin)
 % Created: 2006-04-20
 % Copyright 2006 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   25/11/2008 rename from scale3d to scaling3d
-%   30/04/2009 rename to createScaling3d
-
-
 %% default arguments
 sx = 1;
 sy = 1;

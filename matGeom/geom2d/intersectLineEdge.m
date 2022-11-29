@@ -30,10 +30,6 @@ function point = intersectLineEdge(line, edge, varargin)
 % Created: 2003-10-31
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   19/02/2004: add support for multiple lines.
-%   08/03/2007: update doc
-
 % extract tolerance option
 tol = 1e-14;
 if ~isempty(varargin)

@@ -24,9 +24,6 @@ function co = convexification(varargin)
 % Created: 2005-01-12
 % Copyright 2005 INRA - Cepia Software Platform
 
-%   HISTORY
-%   13/06/2007: clean up code
-
 if ~isempty(varargin)>0
     var = varargin{1};
     if size(var, 2)==1

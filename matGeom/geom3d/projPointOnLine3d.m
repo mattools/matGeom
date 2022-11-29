@@ -21,8 +21,6 @@ function point = projPointOnLine3d(point, line)
 % Created: 2012-08-23
 % Copyright 2012 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-
 % direction vector of the line
 vx = line(:, 4);
 vy = line(:, 5);

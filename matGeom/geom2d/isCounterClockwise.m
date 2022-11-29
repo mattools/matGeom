@@ -40,10 +40,6 @@ function res = isCounterClockwise(p1, p2, p3, varargin)
 % Created: 2010-04-09
 % Copyright 2010 INRAE - Cepia Software Platform
 
-%   HISTORY
-%   2011-05-16 change variable names, add support for point arrays
-
-
 % get threshold value
 eps = 1e-12;
 if ~isempty(varargin)

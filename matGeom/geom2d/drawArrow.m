@@ -41,10 +41,6 @@ function varargout = drawArrow(varargin)
 % Created: 2004-11-11, from drawEdge
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2014-09-17 fix managment of handle values as suggested by Benoit Botton
-%   2016-05-23 Improve codee and reduce calculations (by JuanPi Carbajal)
-
 % extract handle of axis to draw on
 if isAxisHandle(varargin{1})
     ax = varargin{1};

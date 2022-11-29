@@ -11,11 +11,6 @@ function varargout = grSimplifyBranches(nodes, edges)
 % Created: 2003-08-13
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY :
-%   10/02/2004 : doc
-%   17/01/2006 : uses faster method to find neighbour edges
-%   18/01/2006 : replace call to subfunctions by inlining -> faster
-
 Mnodes = [];    % size Nn*2 -> nodes coordinates
 Sedges = [];    % size Ne*2 -> indices of nodes
 Mpoints = [];   % size Nn*1 -> indices of Multiple points 

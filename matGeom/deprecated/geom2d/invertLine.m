@@ -15,9 +15,6 @@ function line = invertLine(var)
 % Created: 2004-01-20
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   30/06/2009 deprecate and replace by 'reverseLine'.
-
 % deprecation warning
 warning('geom2d:deprecated', ...
     '''invertLine'' is deprecated, use ''reverseLine'' instead');

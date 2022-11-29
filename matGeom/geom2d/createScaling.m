@@ -26,10 +26,6 @@ function trans = createScaling(varargin)
 % Created: 2004-04-07
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   04/01/2007: rename as scaling
-%   22/04/2009: rename as createScaling
-
 % defined default arguments
 sx = 1;
 sy = 1;

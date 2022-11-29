@@ -21,10 +21,6 @@ function plane2 = normalizePlane(plane1)
 % Created: 2005-02-21
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   21/08/2009 compute origin after computation of vectors (more precise)
-%       and add support for several planes.
-
 % compute first direction vector
 d1  = normalizeVector3d(plane1(:,4:6));
 

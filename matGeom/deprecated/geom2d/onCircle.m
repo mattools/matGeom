@@ -19,9 +19,6 @@ function b = onCircle(point, circle)
 % Created: 2004-04-07
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   22/05/2009 deprecate
-
 % deprecation warning
 warning('geom2d:deprecated', ...
     '''onCircle'' is deprecated, use ''isPointOnCircle'' instead');

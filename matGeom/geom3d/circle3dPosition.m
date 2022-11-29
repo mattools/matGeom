@@ -17,11 +17,6 @@ function theta = circle3dPosition(point, circle)
 % Created: 2005-02-21
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   27/06/2007: change 3D angle convention
-%   2011-06-21 use degrees for angles
-
-
 % get center and radius
 xc = circle(:,1);
 yc = circle(:,2);

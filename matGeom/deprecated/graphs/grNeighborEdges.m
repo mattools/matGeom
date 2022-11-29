@@ -17,11 +17,6 @@ function neigh = grNeighborEdges(edges, node)
 % Created: 2003-08-13
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   10/02/2004 : documentation
-%   13/07/2004 : faster algorithm
-%   17/01/2006 : rename and change implementation
-
 warning('MatGeom:graphs:deprecated', ...
     'function grNeighborEdges is obsolete, use grAdjacentEdges instead');
 

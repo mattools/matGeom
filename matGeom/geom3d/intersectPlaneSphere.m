@@ -27,11 +27,6 @@ function circle = intersectPlaneSphere(plane, sphere)
 % Created: 2005-02-18
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   27/06/2007: change output format of circle, add support for multiple
-%       data
-%   2011-06-21 use degrees for angles
-
 % number of inputs of each type
 Ns = size(sphere, 1);
 Np = size(plane, 1);

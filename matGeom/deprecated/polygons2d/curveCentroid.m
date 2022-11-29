@@ -23,9 +23,6 @@ function center = curveCentroid(varargin)
 % Created: 2006-05-22
 % Copyright 2006 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   23/07/2009 deprecate and replace by 'reverseLine'.
-
 % deprecation warning
 warning('geom2d:deprecated', ...
     '''curveCentroid'' is deprecated, use ''polylineCentroid'' instead');

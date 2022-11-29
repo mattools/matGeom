@@ -35,13 +35,6 @@ function b = isPerpendicular(v1, v2, varargin)
 % Created: 2006-04-25
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-%   HISTORY
-%   2007-09-18 copy from isPerpendicular, adapt to any dimension, and add
-%       psb to specify precision
-%   2009-09-21 fix bug for array of 3 vectors
-%   2011-01-20 replace repmat by ones-indexing (faster)
-%   2017-08-31 use normalized vectors
-
 % default accuracy
 acc = 1e-14;
 if ~isempty(varargin)

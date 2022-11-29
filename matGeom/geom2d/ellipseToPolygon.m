@@ -30,11 +30,6 @@ function varargout = ellipseToPolygon(ellipse, N)
 % Created: 2005-04-06
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-% HISTORY
-% 2011-03-30 use angles in degrees, add default value for N
-% 2011-12-09 rename to ellipseToPolygon
-% 2017-08-31 returns N vertices instead of N+1
-
 % default value for N
 if nargin < 2
     N = 72;

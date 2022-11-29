@@ -27,9 +27,6 @@ function varargout = drawDirectedEdges(p, e, varargin)
 % Created: 2003-03-12
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-
-
 b=1;
 
 if ~isempty(varargin)

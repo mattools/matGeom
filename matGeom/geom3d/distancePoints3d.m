@@ -23,10 +23,6 @@ function dist = distancePoints3d(p1, p2, varargin)
 % Created: 2005-02-18
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   21/02/2005: add different norms
-%   28/08/2007: deprecate
-
 norm = 2;
 if length(varargin)==1
     norm = varargin{1};

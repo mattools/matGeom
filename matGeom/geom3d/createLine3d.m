@@ -38,10 +38,6 @@ function line = createLine3d(varargin)
 % Created: 2005-02-17
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   30/11/2005 add more cases
-%   04/01/2007 remove unused variables
-
 %   NOTE : A 3d line can also be represented with a 1*7 array : 
 %   [x0 y0 z0 dx dy dz t].
 %   whith 't' being one of the following : 

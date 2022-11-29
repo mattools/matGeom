@@ -17,9 +17,6 @@ function plane = medianPlane(p1, p2)
 % Created: 2005-02-18
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   28/06/2007: add doc, and manage multiple inputs
-
 % unify data dimension
 if size(p1, 1)==1
     p1 = repmat(p1, [size(p2, 1) 1]);

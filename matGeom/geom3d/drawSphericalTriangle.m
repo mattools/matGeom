@@ -30,14 +30,6 @@ function varargout = drawSphericalTriangle(varargin)
 % Created: 2005-02-22
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2007-06-27 manage spheres other than origin
-%   2008-10-30 replace intersectPlaneLine by intersectLinePlane
-%   2012-02-09 put drawing code into the 'drawSphericalEdge' function
-%   2012-10-24 add holding facility, updtate doc
-
-
-
 % Check if axes handle is specified
 if isAxisHandle(varargin{1})
     hAx = varargin{1};

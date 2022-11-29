@@ -16,9 +16,6 @@ function varargout = drawCurve3d(varargin)
 % Created: 2005-02-18
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-% HISTORY
-% 2010-03-08 rename to drawPolyline3d
-
 % deprecation warning
 warning('geom3d:deprecated', ...
     '''drawCurve3d'' is deprecated, use ''drawPolyline3d'' instead');

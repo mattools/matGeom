@@ -25,10 +25,6 @@ function point = cart2geod(src, curve)
 % Created: 2004-04-08
 % Copyright 2004 INRA - Cepia Software Platform
 
-%   HISTORY
-%   15/02/2007 replace minDistance by minDistancePoints
-
-
 % parametrization approximation
 t = parametrize(curve);
 

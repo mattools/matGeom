@@ -21,11 +21,6 @@ function varargout = drawCircleArc3d(varargin)
 % Created: 2005-02-21
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2007-06-27 change 3D angle convention
-%   2010-03-08 use drawPolyline3d
-%   2011-06-21 use angles in degrees
-
 % parse axis handle
 if isAxisHandle(varargin{1})
     hAx = varargin{1};

@@ -24,10 +24,6 @@ function dest = transformLine(line, trans)
 % Created: 2004-04-06
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   02/03/2007: rewrite function
-
-
 % isolate points
 points1 = line(:, 1:2);
 points2 = line(:, 1:2) + line(:, 3:4);

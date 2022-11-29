@@ -24,10 +24,6 @@ function [vertices, faces] = steinerPolytope(vectors)
 % Created: 2006-04-28
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-% History
-% 2013-02-22 merge coplanar faces, add management of 2D case, update doc
-
-
 % compute vectors dimension
 nd = size(vectors, 2);
 

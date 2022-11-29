@@ -20,8 +20,6 @@ function line = intersectPlanes(plane1, plane2, varargin)
 % Created: 2005-02-17
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-
 tol = 1e-14;
 if ~isempty(varargin)
     tol = varargin{1};

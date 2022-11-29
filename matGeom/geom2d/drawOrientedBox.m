@@ -43,11 +43,6 @@ function varargout = drawOrientedBox(box, varargin)
 % Created: 2011-05-09, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform
 
-% HISTORY
-%   2011-07-22 simplifies code
-%   2011-10-11 add management of axes handle
-
-
 %% Parses input arguments
 
 % extract handle of axis to draw on

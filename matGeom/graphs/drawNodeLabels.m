@@ -17,9 +17,6 @@ function varargout = drawNodeLabels(nodes, value, varargin)
 % Created: 2003-02-10
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   10/03/2004 included into lib/graph library
-
 % extract handle of axis to draw on
 if isAxisHandle(nodes)
     ax = nodes;

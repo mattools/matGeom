@@ -41,12 +41,6 @@ function pos = linePosition(point, line, varargin)
 % Created: 2004-05-25
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2005-07-07 manage multiple input
-%   2011-06-15 avoid the use of repmat when possible
-%   2012-10-24 rewrite using bsxfun
-%   2012-11-22 add support for the diag option
-
 % if diag is true, we need only to compute position of i-th point with i-th
 % line.
 diag = ~isempty(varargin) && ischar(varargin{1}) && strcmpi(varargin{1}, 'diag');

@@ -17,9 +17,6 @@ function varargout = imageGraph(img, varargin)
 % Created: 2004-06-28
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-
-
 %% Initialisations
 
 nodes = [];

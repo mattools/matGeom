@@ -52,11 +52,6 @@ function varargout = drawEllipseArc(varargin)
 % Created: 2003-12-12
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2008/10/10 uses fixed number of points for arc.
-%   2011-03-30 use angles in degrees
-%   2011-10-11 add management of axes handle
-
 %% Extract input arguments
 
 % extract handle of axis to draw on

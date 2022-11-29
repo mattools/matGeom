@@ -44,12 +44,6 @@ function varargout = drawPolygon (px, varargin)
 % Created: 2004-05-05
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2008/10/15 manage polygons with holes
-%   2011-10-11 add management of axes handle
-%   2016-05-26 Juanpi Carbajal reorganized the function for readability and
-%              removed unnecessary variable arguemnts
-
 % Store hold state
 state = ishold(gca);
 hold on;

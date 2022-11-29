@@ -37,13 +37,6 @@ function varargout = drawPolyline(varargin)
 % Created: 2004-04-06
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   03/01/2007: better processing of input, and update doc (drawing
-%       options and CLOSE option)
-%   30/04/2009 rename as drawPolyline.
-%   2011-10-11 add management of axes handle
-
-
 % extract handle of axis to draw on
 if isAxisHandle(varargin{1})
     ax = varargin{1};

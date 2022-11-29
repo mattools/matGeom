@@ -21,9 +21,6 @@ function [tx, ty] = rectAsPolygon(rect)
 % Created: 2005-04-06
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2016: Simplify by JuanPi Carbajal
-
 warning('matGeom:deprecated', ...
     'function "rectAsPolygon" is deprecated, use "orientedBoxToPolygon" instead');
 

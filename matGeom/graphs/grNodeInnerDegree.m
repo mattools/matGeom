@@ -19,9 +19,6 @@ function degree = grNodeInnerDegree(node, edges)
 % Created: 2006-01-17
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-%   HISTORY
-%   2008-08-07 pre-allocate memory, update doc
-
 % allocate memory
 N = size(node, 1);
 degree = zeros(N, 1);

@@ -26,8 +26,6 @@ function varargout = drawShape(varargin)
 % Created: 2005-04-07
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-
 % extract handle of axis to draw on
 if isAxisHandle(varargin{1})
     ax = varargin{1};

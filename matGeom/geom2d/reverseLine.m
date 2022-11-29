@@ -15,10 +15,6 @@ function line = reverseLine(line)
 % Created: 2004-01-20
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   30/06/2009 rename as reverseLine
-%   15/03/2011 simplify code
-
 line(:, 3:4) = -line(:, 3:4);
 
     

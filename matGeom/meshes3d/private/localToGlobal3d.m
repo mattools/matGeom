@@ -39,10 +39,6 @@ function trans = localToGlobal3d(varargin)
 % Created: 2009-06-19, using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform
 
-%   HISTORY
-%   19/08/2009 fix bug in parsing center with 4 args
-%   2011-06-21 use degrees
-
 % extract the components of the transform
 if nargin == 1
     % all components are bundled in  the first argument

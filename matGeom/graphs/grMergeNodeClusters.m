@@ -20,9 +20,6 @@ function [nodes2, edges2] = grMergeNodeClusters(nodes, edges)
 % Created: 2003-08-13
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-
-
 %% Initialization
 
 % intialize result 

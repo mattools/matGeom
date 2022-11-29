@@ -29,9 +29,6 @@ function varargout = createCubeOctahedron()
 % Created: 2005-02-10
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   04/01/2007: remove unused variables
-
 nodes = [...
     0 -1 1;1 0 1;0 1 1;-1 0 1; ...
     1 -1 0;1 1 0;-1 1 0;-1 -1 0;...

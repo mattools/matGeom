@@ -37,11 +37,6 @@ function edge = createEdge(varargin)
 % Created: 2003-10-31
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   18/02/2004 : add more possibilities to create edges, not only from 2
-%   points. Also add support for arrays.
-%   31/03/2004 : convert to [P1 P2] format
-
 if nargin == 1
     % Only one input parameter. It can be :
     % - line angle

@@ -30,9 +30,6 @@ function res = clipPolyline(poly, box)
 % Created: 2005-05-14
 % Copyright 2005 INRA - Cepia Software Platform
 
-%   HISTORY
-%   2007/09/14 fix doc
-
 % check case of polylines stored in cell array
 if iscell(poly)
     res = cell(1, length(poly));

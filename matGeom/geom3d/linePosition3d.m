@@ -27,11 +27,6 @@ function pos = linePosition3d(point, line)
 % Created: 2005-02-17
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   05/01/2007 update doc
-%   28/10/2010 change to bsxfun calculation for arbitrary input sizes
-%       (Thanks to Sven Holcombe)
-
 % size of input arguments
 np = size(point, 1);
 nl = size(line, 1);

@@ -18,9 +18,6 @@ function theta = angle3Points(varargin)
 % Created: 2004-02-23
 % Copyright 2004 INRA - Cepia Software Platform
 
-%   HISTORY :
-%   25/09/2005 : enable single parameter
-
 if length(varargin)==3
     p1 = varargin{1};
     p2 = varargin{2};

@@ -11,10 +11,6 @@ function [nodes2, edges2] = grRemoveEdges(nodes, edges, rmEdges)
 % Created: 2003-08-13
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY :
-%   10/02/2004 : doc
-
-
 rmEdges = sort(rmEdges);
 
 % do not change the node list

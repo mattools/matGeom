@@ -28,11 +28,6 @@ function trans = createRotationOz(varargin)
 % Created: 2004-04-06
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2008/11/24 changed convention for angle
-%   22/04/2009 rename as createcreateRotationOz
-
-
 % default values
 dx = 0;
 dy = 0;

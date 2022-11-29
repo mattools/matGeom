@@ -26,10 +26,6 @@ function centroids = meshFaceCentroids(varargin)
 % Created: 2006-07-05
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-% HISTORY
-% 2007-09-18 fix: worked only for 2D case, now works also for 3D
-% 2017-11-24 rename from faceCentroids to meshFaceCentroids
-
 % parse input data
 [vertices, faces] = parseMeshData(varargin{:});
 

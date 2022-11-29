@@ -53,10 +53,6 @@ function varargout = polylineSelfIntersections(poly, varargin)
 % Created: 2009-06-15, using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform
 
-%   HISTORY
-%   2009/06/18 check bounding boxes before computing intersections
-
-
 %% Initialisations
 
 % flag indicating whether the polyline is closed (polygon) or not

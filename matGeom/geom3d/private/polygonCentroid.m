@@ -34,8 +34,6 @@ function [centroid, area] = polygonCentroid(varargin)
 
 % Algorithme P. Bourke, vectorized version
 
-% HISTORY
-% 2012.02.24 vectorize code
 
 
 % parse input arguments

@@ -32,10 +32,6 @@ function varargout = polygonSelfIntersections(poly, varargin)
 % Created: 2009-06-15, using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform
 
-%   HISTORY
-%   2011-06-22 fix bug when removing origin vertex (thanks to Federico
-%       Bonelli)
-
 tol = 1e-14;
 
 % parse optional arguments

@@ -77,14 +77,6 @@ function varargout = drawCylinder(varargin)
 % Created: 2005-09-17
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2006/12/14 bug for coordinate conversion, vectorize transforms
-%   04/01/2007 better input processing, manage end caps of cylinder
-%   19/06/2009 use function localToGlobal3d, add docs
-%   2011-06-29 use sph2cart2d, code cleanup
-%   2018-01-02 add transparency managements
-
-
 %% Input argument processing
 
 % parse axis handle

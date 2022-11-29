@@ -41,14 +41,6 @@ function h = drawPoint(varargin)
 % Created: 2003-10-31
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   23/02/2004 add more documentation. Manage different kind of inputs.
-%     Does not draw points outside visible area.
-%   26/02/2007 update processing of input arguments.
-%   30/04/2009 remove clipping of points (use clipPoints if necessary)
-%   2011-10-11 add management of axes handle
-%   2018-31-06 fix the bug reported in https://savannah.gnu.org/bugs/index.php?53659
-
 % extract handle of axis to draw on
 if isAxisHandle(varargin{1})
     ax = varargin{1};

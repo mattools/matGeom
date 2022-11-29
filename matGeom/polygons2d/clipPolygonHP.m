@@ -15,12 +15,6 @@ function poly2 = clipPolygonHP(poly, line)
 % Created: 2005-07-31
 % Copyright 2005 INRA - Cepia Software Platform
 
-%   HISTORY
-%   15/08/2005 add test to avoid empty polygons 
-%   13/06/2007 deprecate
-%   10/10/2008 'reprecate'
-
-
 % avoid to process empty polygons
 if size(poly, 1)<3
     poly2 = zeros([0 2]);

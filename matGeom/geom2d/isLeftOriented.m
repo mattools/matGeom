@@ -19,9 +19,6 @@ function b = isLeftOriented(point, line)
 % Created: 2005-07-31
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2017-09-04 uses bsxfun
-
 % equivalent to:
 % b = (xp-x0).*dy-(yp-y0).*dx < 0;
 b = bsxfun(@minus, ...

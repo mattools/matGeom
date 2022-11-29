@@ -14,9 +14,6 @@ function varargout = drawGraphFaces(varargin)
 % Created: 2005-11-24
 % Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-%   HISTORY
-%   2017-09-04 code cleanup
-
 warning('matGeom:deprecated', ...
     'function drawGraphFaces is obsolete, use fillGraphFaces instead');
 

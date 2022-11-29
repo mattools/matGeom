@@ -29,10 +29,6 @@ function varargout = drawEdge3d(varargin)
 % Created: 2005-02-18
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   04/01/2007 remove unused variables
-%   15/12/2009 "reprecate", and add processing of input arguments
-
 % Parse and check inputs
 if isAxisHandle(varargin{1})
     hAx = varargin{1};

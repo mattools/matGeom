@@ -25,10 +25,6 @@ function varargout = fillPolygon(varargin)
 % Created: 2005-04-07
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2008-05-07 add psb to specify drawing options
-%   2008/10/15 add psb to draw polygons with holes
-
 % check input
 if isempty(varargin)
     error('need to specify a polygon');

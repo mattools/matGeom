@@ -13,11 +13,6 @@ function varargout = grRemoveMultiplePoints(nodes, edges)
 % Created: 2003-08-13
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   10/02/2004 doc
-%   27/04/2005 function was not working, due to mergeNode modification.
-
-
 % TODO: accelerate function, by limiting action on nodes with degree>2
 % TODO: algo does not work, it can forget some groups.
 

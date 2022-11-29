@@ -26,10 +26,6 @@ function varargout = ellipseAsPolygon(ellipse, N)
 % Created: 2005-04-06
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2011-03-30 use angles in degrees, add default value for N
-%   2011-12-09 deprecate
-
 warning('matGeom:deprecated', ...
     'function "ellipseAsCurve" is deprecated, use "ellipseToPolygon" instead');
 

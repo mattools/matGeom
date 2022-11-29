@@ -26,9 +26,6 @@ function centroids = faceCentroids(nodes, faces)
 % Created: 2006-07-05
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-%   HISTORY
-%   2007/09/18 fix: worked only for 2D case, now works also for 3D
-
 % deprecation warning
 warning('geom3d:deprecated', ...
     [mfilename ' is deprecated, use ''meshFaceCentroids'' instead']);

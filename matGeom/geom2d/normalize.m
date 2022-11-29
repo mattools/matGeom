@@ -18,10 +18,6 @@ function vn = normalize(v)
 % Created: 2004-11-29
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   14/01/2005 : correct bug
-
-
 dim = size(v);
 
 if dim(1)==1 || dim(2)==1

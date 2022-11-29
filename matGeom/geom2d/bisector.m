@@ -20,10 +20,6 @@ function ray = bisector(varargin)
 % Created: 2003-10-31
 % Copyright 2003 INRA - Cepia Software Platform
 
-%   HISTORY
-%   2005-07-07 add bisector of 3 points
-%   2010-11-05 ode cleanup
-
 if length(varargin)==2
     % two lines
     line1 = varargin{1};

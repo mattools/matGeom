@@ -27,11 +27,6 @@ function trans = createRotationOx(varargin)
 % Created: 2005-02-18
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   24/11/2008 changed convention for angle
-%   22/04/2009 rename as createRotationOx
-
-
 % default values
 dx = 0;
 dy = 0;

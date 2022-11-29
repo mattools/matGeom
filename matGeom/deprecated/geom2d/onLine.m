@@ -18,11 +18,6 @@ function b = onLine(point, line)
 % Created: 2003-10-31
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   11/03/2004 : support for multiple inputs
-%   08/12/2004 : complete implementation, add doc
-%   22/05/2009 deprecate
-
 % deprecation warning
 warning('geom2d:deprecated', ...
     '''onLine'' is deprecated, use ''isPointOnLine'' instead');

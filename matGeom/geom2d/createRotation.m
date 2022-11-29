@@ -33,9 +33,6 @@ function trans = createRotation(varargin)
 % Created: 2004-04-06
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   22/04/2009: rename as createRotation
-
 % default values
 cx = 0;
 cy = 0;

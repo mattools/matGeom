@@ -19,11 +19,6 @@ function drawSurfPatch(varargin)
 % Created: 2005-05-24
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2005-06-08 add doc.
-%   2007-01-04 remove unused variables and change function name
-%   2010-03-08 code cleanup, use drawPolyline3d
-
 % Check if axes handle is specified
 if isAxisHandle(varargin{1})
     hAx = varargin{1};

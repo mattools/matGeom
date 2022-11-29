@@ -31,9 +31,6 @@ function varargout = createCube()
 % Created: 2005-02-10
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   04/01/2007: remove unused variables
-
 x0 = 0; dx= 1;
 y0 = 0; dy= 1;
 z0 = 0; dz= 1;

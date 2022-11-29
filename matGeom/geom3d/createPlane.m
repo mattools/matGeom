@@ -37,11 +37,6 @@ function plane = createPlane(varargin)
 % Created: 2005-02-18
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   24/11/2005 add possibility to pack points for plane creation
-%   21/08/2006 return normalized planes
-%   06/11/2006 update doc for planes created from normal
-
 if length(varargin) == 1
     var = varargin{1};
     

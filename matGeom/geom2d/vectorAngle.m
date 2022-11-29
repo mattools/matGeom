@@ -36,11 +36,6 @@ function alpha = vectorAngle(v1, varargin)
 % Created: 2007-10-18
 % Copyright 2007 INRA - Cepia Software Platform
 
-%   HISTORY
-%   2010-04-16 add psb to specify center interval
-%   2011-04-10 add support for angle between two vectors
-
-
 %% Initializations
 
 % default values

@@ -40,13 +40,6 @@ function newFaces = minConvexHull(points, varargin)
 % Created: 2006-07-05
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-% HISTORY
-%   20/07/2006 add tolerance for coplanarity test
-%   21/08/2006 fix small bug due to difference of methods to test
-%       coplanarity, sometimes resulting in 3 points of a face being not
-%       coplanar! Also add control on precision
-%   18/09/2007 ensure faces are given as horizontal vectors
-
 % set up precision
 acc = 1e-14;
 if ~isempty(varargin)

@@ -22,12 +22,6 @@ function varargout = drawRay(ray, varargin)
 % Created: 2003-10-31
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2005-07-06 add support for multiple rays
-%   2007-10-18 add support for drawing options
-%   2011-03-12 rewrite using clipRay
-%   2011-10-11 add management of axes handle
-
 % extract handle of axis to draw in
 if isAxisHandle(ray)
     ax = ray;

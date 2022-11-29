@@ -22,9 +22,6 @@ function b = isPointOnLine3d(point, line, varargin)
 % Created: 2003-10-31
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   17/12/2013 create from isPointOnLine
-
 % extract computation tolerance
 tol = 1e-14;
 if ~isempty(varargin)

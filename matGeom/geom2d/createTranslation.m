@@ -21,9 +21,6 @@ function trans = createTranslation(varargin)
 % Created: 2004-04-06
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   22/04/2009: rename as createTranslation
-
 % process input arguments
 if isempty(varargin)
     tx = 0;

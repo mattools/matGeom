@@ -18,14 +18,6 @@ function point = intersectPlaneLine(plane, line)
 % Created: 2005-02-17
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   24/11/2005 add support for multiple input
-%   23/06/2006 correction from Songbai Ji
-%   14/12/2006 correction for parallel lines and plane normals
-%   05/01/2007 fixup for parallel lines and plane normals
-%   17/10/2008 add warning for deprecation
-
-
 warning('IMAEL:deprecatedFunction', ...
     'This function is deprecated, use ''intersectLinePlane'' instead');
 

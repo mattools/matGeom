@@ -43,9 +43,6 @@ function line = medianLine(varargin)
 % Created: 2003-10-31
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-% history
-% 2010-08-06 vectorize and change behaviour for N-by-4 inputs
-
 nargs = length(varargin);
 
 if nargs == 1

@@ -32,11 +32,6 @@ function h = drawPoint3d(varargin)
 % Created: 2005-02-18
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   04/01/2007: remove unused variables, and enhance support for plot
-%       options
-%   12/02/2010 does not clip points anymore
-%   12/01/2018 added axes handle input
 %
 
 if isAxisHandle(varargin{1})

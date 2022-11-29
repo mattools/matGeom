@@ -39,10 +39,6 @@ function loops = expandPolygon(poly, dist, varargin)
 % Created: 2005-05-14
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY:
-%   31-07-2005 change algo for negative distance: use clipping of polygon
-%   by half-planes 
-
 % default options
 cleanupLoops = false;
 

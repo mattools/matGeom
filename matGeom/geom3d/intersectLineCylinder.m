@@ -53,11 +53,6 @@ function points = intersectLineCylinder(line, cylinder, varargin)
 % Created: 2007-01-27
 % Copyright 2007
 
-% HISTORY
-% 2010-10-21 change cylinder argument convention, add bounds check and doc
-% 2010-10-21 add check for points on cylinders, update doc
-
-
 %% Parse input arguments
 
 % default arguments

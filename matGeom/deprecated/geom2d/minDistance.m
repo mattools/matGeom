@@ -23,10 +23,6 @@ function [dist, varargout] = minDistance(p, curve)
 % Created: 2004-02-23
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY :
-%   18/03/2004 : can also return index of closest point
-%   08/04/2004 : return vertical array when input multiple points
-
 % allocate memory for result
 nPoints = size(p, 1);
 dist = zeros(nPoints, 1);

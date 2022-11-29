@@ -27,9 +27,6 @@ function [nodes, edges] = medialAxisConvex(points)
 % Created: 2005-07-07
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   18/04/2007: fix some typos, note the function to be unimplemented
-
 %   TODO: is not fully implemented, need to finish it
 
 % eventually remove the last point if it is the same as the first one

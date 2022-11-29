@@ -37,10 +37,6 @@ function varargout = drawPolyline3d(varargin)
 % Created: 2005-02-15
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-% HISTORY
-% 2010-03-08 rename to drawPolyline3d
-
-
 %% Process input arguments
 
 % Check if axes handle is specified

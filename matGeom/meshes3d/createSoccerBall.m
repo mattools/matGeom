@@ -20,11 +20,6 @@ function varargout = createSoccerBall()
 % Created: 2006-08-09
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-%   HISTORY
-%   2007-01-04 remove unused variables, enhance output processing
-%   2010-12-07 clean up edges, uses formatMeshOutput
-
-
 % get vertices and adjacency matrix of the buckyball
 [b, n] = bucky;
 

@@ -29,10 +29,6 @@ function [tx, ty] = orientedBoxToPolygon(obox)
 % Created: 2005-04-06
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2011-10-09 rewrite from rectAsPolygon to orientedBoxToPolygon
-%   2016: Simplify by JuanPi Carbajal
-
 % extract box parameters
 theta = 0;
 x = obox(1);

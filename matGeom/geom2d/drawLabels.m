@@ -25,10 +25,6 @@ function varargout = drawLabels(varargin)
 % Created: 2003-12-15
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   09/03/2007: (re)implement it...
-%   2011-10-11 add management of axes handle
-
 % check if enough inputs are given
 if isempty(varargin)
     error('wrong number of arguments in drawLabels');

@@ -25,11 +25,6 @@ function varargout = circleArcToPolyline(arc, N)
 % Created: 2006-05-22
 % Copyright 2006 INRA - Cepia Software Platform
 
-% HISTORY
-% 2011-03-30 use angles in degrees, add default value for N
-% 2011-12-09 rename to circleArcToPolyline
-
-
 % default value for N
 if nargin < 2
     N = 65;

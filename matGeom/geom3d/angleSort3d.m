@@ -27,9 +27,6 @@ function varargout = angleSort3d(pts, varargin)
 % Created: 2005-11-24
 % Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-%   HISTORY :
-%   04/01/2007: remove unused variables
-
 % default values
 pt0     = mean(pts, 1);
 pt1     = pts(1,:);

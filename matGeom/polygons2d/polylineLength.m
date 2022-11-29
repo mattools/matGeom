@@ -30,12 +30,6 @@ function len = polylineLength(poly, varargin)
 % Created: 2009-04-30, using Matlab 7.7.0.471 (R2008b)
 % Copyright 2009 INRA - Cepia Software Platform
 
-%   HISTORY
-%   2006-05-22 manage any dimension for points, closed and open curves, 
-%       and update doc accordingly.
-%   2009-04-30 rename as polylineLength
-%   2011-03-31 add control for empty polylines
-
 % check there are enough points
 if size(poly, 1) < 2
     len = 0;

@@ -31,12 +31,6 @@ function center = centroid(varargin)
 % Created: 2003-04-07
 % Copyright 2003 INRA - Cepia Software Platform
 
-%   HISTORY
-%   2009-06-22 support for 3D points
-%   2010-04-12 fix bug in weighted centroid
-%   2010-12-06 update doc
-
-
 %% extract input arguments
 
 % use empty mass by default

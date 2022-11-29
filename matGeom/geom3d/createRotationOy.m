@@ -28,11 +28,6 @@ function trans = createRotationOy(varargin)
 % Created: 2005-02-18
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2008/11/24 changed convention for angle
-%   22/04/2009 rename as createcreateRotationOy
-
-
 % default values
 dx = 0;
 dy = 0;

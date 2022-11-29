@@ -30,11 +30,6 @@ function varargout = boundedCentroidalVoronoi2d(germs, box, varargin)
 % Created: 2007-01-12
 % Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
-% HISTORY
-% 27/07/2007 add doc, and psb to specify number of iterations
-% 18/09/2007 add psb to return germs of tessellation
-% 23/02/2012 rename from centroidalVoronoi2d to boundedCentroidalVoronoi2d
-
 % number of iteration
 nIter = 10;
 if ~isempty(varargin)

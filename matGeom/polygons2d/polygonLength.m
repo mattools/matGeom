@@ -22,10 +22,6 @@ function len = polygonLength(poly, varargin)
 % Created: 2005-05-11
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2011-03-31 add control for empty polygons, code cleanup
-%   2011-05-27 fix bugs
-
 % If first argument is a cell array, this is a multi-polygon, and we simply
 % add the lengths of individual polygons
 if iscell(poly)

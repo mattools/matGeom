@@ -18,9 +18,6 @@ function n = vecnorm3d(v)
 % Created: 2005-02-21
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   19/06/2009 deprecate and replace by vectorNorm3d
-
 % deprecation warning
 warning('geom3d:deprecated', ...
     '''vecnorm3d'' is deprecated, use ''vectorNorm3d'' instead');

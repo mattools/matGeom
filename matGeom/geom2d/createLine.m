@@ -43,11 +43,6 @@ function line = createLine(varargin)
 % Created: 2003-10-31
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY :
-%   18/02/2004 : add more possibilities to create lines (4 parameters,
-%      all param in a single tab, and point + dx + dy.
-%      Also add support for creation of arrays of lines.
-
 %   NOTE : A line can also be represented with a 1*5 array : 
 %   [x0 y0 dx dy t].
 %   whith 't' being one of the following : 

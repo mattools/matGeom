@@ -63,11 +63,6 @@ function varargout = drawSphere(varargin)
 % Created: 2005-02-17
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2006-05-19 use centered sphere with radius 1 when no input specified
-%   2007-01-04 typo
-%   2010-11-08 code cleanup, add doc
-
 % Check if axes handle is specified
 if isAxisHandle(varargin{1})
     hAx = varargin{1};

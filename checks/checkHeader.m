@@ -1,5 +1,5 @@
 function checkHeader
-%CHECKHEADER Checks the header of the m-files of matGeom.
+%CHECKHEADER checks the header of the m-files of matGeom.
 %
 %   checkHeader()
 %   At the moment only the beginning of the first header line and the 
@@ -8,9 +8,10 @@ function checkHeader
 %   
 %   Todo
 %       Standardize e-mail adress to "david.legland@inrae.fr"
+%       Capitalize "e-mail" to "E-mail"
 %
-%   See also
-%     codingConventions
+%   See also 
+%       codingConventions
 %
 
 % ------
@@ -55,8 +56,12 @@ for f=1:length(mFiles)
             S{H1_Idx} = strrep(S{H1_Idx}, '% ', ['%' upper(mFileName) ' ']);
         end
     end
+
+    if ~endsWith(S(H1_Idx), '.')
+        S(H1_Idx) = S{H1_Idx} + ".";
+    end
     
-    %% AUTHOR SECTION
+    %% AUTHOR section
     % First line of the header's author section
     % Find the 1st line of the header's author section
     aSec1Idx = find(contains(S,'-----'));
@@ -193,7 +198,7 @@ for f=1:length(mFiles)
         S(aSec1Idx+4) = "% Copyright " + creationYear;
     end
     
-    %% General checks
+    % General checks
     containsHeaderWords = arrayfun(@(x,y) contains(x,y), ...
         S(aSec1Idx:aSec1Idx+4), ["% ------"; "Author"; "e-mail"; "Created"; "Copyright"]);
     if ~all(containsHeaderWords)
@@ -259,6 +264,30 @@ for f=1:length(mFiles)
         while isempty(S{aSec1Idx+6})
             S(aSec1Idx+6) = [];
         end
+    end
+
+    %% SEE ALSO section
+
+
+    %% HISTORY section
+    if ~isempty(cell2mat(regexp(lower(S), '^% *history')))
+        histSIdx = find(contains(lower(S),'history'));
+        if length(histSIdx) ~=1
+            display(['Multiple ''History'' sections found in: ' mFileName])
+            continue
+        end
+        histLines = 1;
+        while startsWith(S(histSIdx+histLines),'% ')
+            histLines = histLines+1;
+        end
+        S(histSIdx:histSIdx+histLines-1) = [];
+    end
+
+    %% TODO section
+    % There should not be a to-do section. To-dos should be adressed using
+    % GitHub Issues.
+    if ~isempty(cell2mat(regexp(lower(S), '^%.*(todo|to-do)')))
+        display(['''To-do(s)'' found in: ' mFileName])
     end
 
     %% Save file if changes were performed

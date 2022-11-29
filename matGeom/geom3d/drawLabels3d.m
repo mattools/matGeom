@@ -22,10 +22,6 @@ function varargout = drawLabels3d(varargin)
 % Created: 2019-01-31
 % Copyright 2019 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2019-01-31 write 3D version from drawLabels
-
-
 %% Parse input arguments
 
 % check if enough inputs are given

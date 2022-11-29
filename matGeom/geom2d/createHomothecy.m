@@ -28,10 +28,6 @@ function T = createHomothecy(point, ratio)
 % Created: 2005-01-20
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   22/04/2009: rename as createHomothecy
-%   05/04/2017: improved code by JuanPi Carbajal <ajuanpi+dev@gmail.com>
-
 point = point(:);
 if length (point) > 2
     error('Only one point accepted.');

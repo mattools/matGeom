@@ -15,10 +15,6 @@ function edges = meshEdges(faces, varargin)
 % Created: 2011-06-28, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform
 
-%   HISTORY
-%   2013-08-22 rename from computeMeshEdges to meshEdges, add more control
-%       on inputs
-
 %% Process input arguments
 
 if isstruct(faces) && isfield(faces, 'faces')

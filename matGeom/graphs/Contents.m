@@ -1,4 +1,4 @@
-%CONTENTS GRAPHS Simple Toolbox for manipulating Geometric Graphs
+%CONTENTS GRAPHS Simple Toolbox for manipulating Geometric Graphs.
 % Version 0.6 04-Sep-2017 .
 %
 %   The aim of this package is to provide functions to easily create,  
@@ -130,13 +130,6 @@
 help(mfilename);
 
   
-% HISTORY
-% 25/07/2007 remove old functions
-% 27/07/2007 integrate headers of other functions
-% 27/07/2007 add MST by prim algo, and EuclideanMST
-% 24/08/2010 code cleanup
-% 07/09/2010 add functions for computing geodesic distances 
-% 18/05/2011 code re-organisation, add to MatGeom library
 
 % Deprecated functions
 %   grSimplifyBranches_old     - Replace branches of a graph by single edges.

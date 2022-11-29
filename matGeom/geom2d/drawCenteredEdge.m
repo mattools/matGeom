@@ -50,12 +50,6 @@ function varargout = drawCenteredEdge(varargin)
 % Created: 2005-08-05
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2007-06-15 update doc, clean up code
-%   2011-05-18 use angle in degrees, cleanup code and doc
-%   2011-10-11 add management of axes handle
-
-
 %% process input variables
 
 if nargin < 1

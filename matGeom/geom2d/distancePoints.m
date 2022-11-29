@@ -26,14 +26,6 @@ function dist = distancePoints(p1, p2, varargin)
 % Created: 2004-02-24
 % Copyright 2004 INRA - Cepia Software Platform
 
-%   HISTORY :
-%   25/05/2004: manage 2 array of points
-%   07/04/2004: add option for computing only diagonal.
-%   30/10/2006: generalize to any dimension, and manage different norms
-%   03/01/2007: bug for arbitrary norm, and update doc
-%   28/08/2007: fix bug for norms 2 and infinite, in diagonal case
-
-
 %% Setup options
 
 % default values

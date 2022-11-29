@@ -45,20 +45,6 @@ function varargout = drawGraph(varargin)
 % Created: 2003-07-17
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   10/02/2004 : documentation
-%   06/04/2004 : change name
-%   09/07/2004 : add faces
-%   05/08/2004 : correct bug when drawing 2D graph
-%   06/08/2004 : small bug for drawing poins (length instead of size(.,1))
-%   09/08/2004 : rewrite code (separate 2D and 3D, use of plot instead of
-%       line, manage faces if present in 2D and 3D, ...), add style
-%       management, various input types, and documentation
-%   22/09/2004 : correct bug in drawing faces
-%   11/11/2005 : forgot a loop index for faces stored as cells
-%   22/05/2009 add more drawing options
-
-
 %% initialisations
 
 % uses empty arrays by default for edges and faces

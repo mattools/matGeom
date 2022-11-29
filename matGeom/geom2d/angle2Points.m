@@ -17,9 +17,6 @@ function theta = angle2Points(varargin)
 % Created: 2007-03-02
 % Copyright 2007 INRA - Cepia Software Platform
 
-%   HISTORY:
-%   2011-01-11 use bsxfun
-
 % process input arguments
 if length(varargin)==2
     p1 = varargin{1};

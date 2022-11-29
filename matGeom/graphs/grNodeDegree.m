@@ -37,11 +37,6 @@ function [degree, node] = grNodeDegree(node, edges)
 % Created: 2003-08-13
 % Copyright 2003 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-%   HISTORY
-%   10/02/2004 documentation
-%   17/01/2006 change name, reimplement, and rewrite doc.
-%   13/01/2014 add psb to compute degree of all nodes
-
 % If only edge array is given, assume we want the degree of each node
 if nargin == 1
     edges = node;

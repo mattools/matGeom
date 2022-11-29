@@ -29,8 +29,6 @@ function edges = crackPattern(box, points, alpha, varargin)
 % Created: 2004-05-25
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY :
-
 if ~isempty(varargin)
     speed = varargin{1};
 else

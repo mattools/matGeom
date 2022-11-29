@@ -24,11 +24,6 @@ function [dist, t] = distancePointEdge3d(point, edge)
 % Created: 2004-04-07
 % Copyright 2004 INRA - CEPIA URPOI - MIA MathCell
 
-%   HISTORY
-%   2005-06-24 rename, and change arguments sequence
-%   2009-04-30 add possibility to return position of closest point
-%   2011-04-14 add checkup for degenerate edges, improve speed, update doc
-
 % direction vector of each edge
 vl = edge(:, 4:6) - edge(:, 1:3);
 

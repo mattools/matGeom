@@ -27,10 +27,6 @@ function trans = rotationOz(varargin)
 % Created: 2004-04-06
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2008/11/24 changed convention for angle
-%   30/04/2009 deprecate: use createRotationOz instead
-
 % deprecation warning
 warning('geom3d:deprecated', ...
     [mfilename ' is deprecated, use ''createRotationOz'' instead']);

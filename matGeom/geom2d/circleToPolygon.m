@@ -38,11 +38,6 @@ function varargout = circleToPolygon(circle, varargin)
 % Created: 2005-04-06
 % Copyright 2005 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
-% HISTORY
-% 2007-04-20 return a closed polygon with N+1 vertices, use default N=64
-% 2011-12-09 rename to 'circleToPolygon'
-% 2017-08-31 returns N vertices instead of N+1
-
 % check input size
 if size(circle, 1) > 1
     error('require circle to be 1-by-3 numeric array');

@@ -18,10 +18,6 @@ function len = edgeLength(varargin)
 % Created: 2004-02-19
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   15/04/2005 changes definition for edge, uses [x1 y1 x2 y2] instead of
-%       [x0 y0 dx dy].
-
 if nargin == 1
     % input is an edge [X1 Y1 X2 Y2]
     edge = varargin{1};

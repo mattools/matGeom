@@ -52,11 +52,6 @@ function varargout = drawParabola(varargin)
 % Created: 2006-06-02
 % Copyright 2006 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2010-11-17 rewrite, change parametrisation, update doc
-%   2011-03-30 use degrees for angle
-%   2011-10-11 add management of axes handle
-
 % Extract parabola
 if nargin < 1
     error('MatGeom:geom2d:drawParabola:IllegalArgument', ...

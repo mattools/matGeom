@@ -32,11 +32,6 @@ function varargout = randomAngle3d(varargin)
 % Created: 2005-02-18
 % Copyright 2005 INRA - Cepia Software platform
 
-%   HISTORY
-%   2007-01-04 change angle order, update doc
-%   2011-06-27 fix bug in input parsing, add doc
-
-
 N = 1;
 if ~isempty(varargin)
     N = varargin{1};

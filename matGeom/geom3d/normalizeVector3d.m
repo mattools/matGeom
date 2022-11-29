@@ -21,11 +21,6 @@ function vn = normalizeVector3d(v)
 % Created: 2004-11-29
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-% HISTORY
-% 2005-11-30 correct a bug
-% 2009-06-19 rename as normalizeVector3d
-% 2010-11-16 use bsxfun (Thanks to Sven Holcombe)
-
 if ismatrix(v)
     vn = bsxfun(@rdivide, v, sqrt(sum(v.^2, 2)));
 else

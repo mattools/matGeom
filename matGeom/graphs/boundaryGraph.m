@@ -26,10 +26,6 @@ function varargout = boundaryGraph(img)
 % Created: 2004-06-28
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   05/08/2004 : change name and add 2D case.
-
-
 dim = size(img);
 nd = length(dim);
 if nd==2 && (dim(1)==1 || dim(2)==1)

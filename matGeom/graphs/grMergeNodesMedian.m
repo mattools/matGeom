@@ -15,10 +15,6 @@ function [nodes2, edges2] = grMergeNodesMedian(nodes, edges, mnodes)
 % Created: 2003-08-13
 % Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   10/02/2004 : documentation
-
-
 % coordinates of reference node
 x = median(nodes(mnodes, 1));
 y = median(nodes(mnodes, 2));

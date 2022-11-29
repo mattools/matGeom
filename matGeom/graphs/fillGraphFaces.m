@@ -35,10 +35,6 @@ function varargout = fillGraphFaces(varargin)
 % Created: 2005-11-24
 % Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-%   HISTORY
-%   2017-09-04 code cleanup, rename from drawGraphFaces to fillGraphFaces
-
-
 %% Initialisations
 
 % drawing style for filling faces. Default is cyan.
