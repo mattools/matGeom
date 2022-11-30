@@ -11,15 +11,15 @@ function varargout = drawSphericalEdge(varargin)
 %     p1 = [0 -1 0];  p2 = [0 0 1];
 %     drawSphericalEdge([0 0 0 1], [p1 p2], 'LineWidth', 2)
 %
-%   See also
+%   See also 
 %     drawSphericalPolygon, drawSphere, drawCircleArc3d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2012-02-09, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform
+% Copyright 2012-2022 INRA - Cepia Software Platform
 
 % Check if axes handle is specified
 if isAxisHandle(varargin{1})

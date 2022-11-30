@@ -22,15 +22,15 @@ function h = drawPoint3d(varargin)
 %     figure; drawPoint3d(pts3d, 'b.');
 %     view(3); axis equal;
 %
-%   See also
+%   See also 
 %     points3d, clipPoints3d, drawPoint
 %
 
 % ------
 % Author : David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-18
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 %
 

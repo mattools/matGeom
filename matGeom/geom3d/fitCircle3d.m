@@ -28,15 +28,15 @@ function [fittedCircle, circleNormal] = fitCircle3d(pts)
 %     drawCircle3d(fittedCircle, 'k')
 %     drawVector3d(fittedCircle(1:3), circleNormal*fittedCircle(4))
 %
-%   See also
+%   See also 
 %   circle3dOrigin, circle3dPosition, circle3dPoint, intersectPlaneSphere
 %   drawCircle3d, drawCircleArc3d, drawEllipse3d
 
 % ------
 % Authors: oqilipo, David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2017-05-09
-% Copyright 2017
+% Copyright 2017-2022
 
 % Mean of all points
 meanPoint = mean(pts,1);

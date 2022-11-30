@@ -28,15 +28,15 @@ function point = intersectLinePlane(line, plane, varargin)
 %     ans = 
 %       NaN  NaN  NaN
 %
-%   See also:
+%   See also 
 %   lines3d, planes3d, points3d, clipLine3d
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-17
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % extract tolerance if needed
 tol = 1e-14;

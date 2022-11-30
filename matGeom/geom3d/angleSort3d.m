@@ -18,14 +18,14 @@ function varargout = angleSort3d(pts, varargin)
 %   [PTS2, I] = angleSort3d(...);
 %   Also return in I the indices of PTS, such that PTS2 = PTS(I, :);
 %
-%   See also:
+%   See also 
 %   points3d, angles3d, angleSort
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2005-11-24
-% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2005-2022 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % default values
 pt0     = mean(pts, 1);

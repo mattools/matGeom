@@ -31,15 +31,15 @@ function varargout = cart2sph2d(x, y, z)
 %     ans =
 %         30.0000   40.0000    5.0000
 %
-%   See also:
+%   See also 
 %     angles3d, sph2cart2d, cart2sph, cart2sph2
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2011-06-29, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform
+% Copyright 2011-2022 INRA - Cepia Software Platform
 
 % if data are grouped, extract each coordinate
 if nargin == 1

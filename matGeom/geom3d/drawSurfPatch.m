@@ -15,9 +15,9 @@ function drawSurfPatch(varargin)
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-05-24
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % Check if axes handle is specified
 if isAxisHandle(varargin{1})

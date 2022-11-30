@@ -11,14 +11,14 @@ function d = isPlane(plane)
 %         0 0 0 nan 0 0 0 1 0;...
 %         0 0 0 inf 0 0 0 1 0])
 %
-%   See also
+%   See also 
 %   createPlane3d
 
 % ------
 % Author: oqilipo
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2017-07-09
-% Copyright 2017
+% Copyright 2017-2022
 
 narginchk(1,1)
 

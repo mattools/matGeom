@@ -18,17 +18,15 @@ function theta = vectorAngle3d(v1, v2)
 %   ans = 
 %       0
 %
-%   See also
+%   See also 
 %   vectors3d, vectorNorm3d, crossProduct3d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2010-10-04, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform
-
-% 2011-03-10 improve computation precision
+% Copyright 2010-2022 INRA - Cepia Software Platform
 
 % compute angle using arc-tangent to get better precision for angles near
 % zero, see the discussion in: 

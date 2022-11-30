@@ -15,15 +15,15 @@ function ptProj = projPointOnCylinder(pt, cyl, varargin)
 %   Example
 %       demoProjPointOnCylinder
 %
-%   See also
+%   See also 
 %       projPointOnLine3d, projPointOnPlane, projPointOnCircle3d
 %
 
 % ------
 % Author: oqilipo
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2021-04-17, using R2020b
-% Copyright 2021
+% Copyright 2021-2022
 
 parser = inputParser;
 addRequired(parser, 'pt', @(x) validateattributes(x, {'numeric'},...

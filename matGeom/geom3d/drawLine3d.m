@@ -24,15 +24,15 @@ function h = drawLine3d(lin, varargin)
 %     light;
 %
 %
-%   See also:
+%   See also 
 %     lines3d, createLine3d, clipLine3d, drawRay3d, drawEdge3d
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-17
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % Parse and check inputs
 isLine3d = @(x) validateattributes(x,{'numeric'},...

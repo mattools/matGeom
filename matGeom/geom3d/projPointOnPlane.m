@@ -18,14 +18,14 @@ function point = projPointOnPlane(point, plane)
 %   [X*9*Y...] matrix, where (N,X), (M,Y), etc, are either equal pairs, or
 %   one of the two is one.
 %
-%   See also:
+%   See also 
 %   planes3d, points3d, planePosition, intersectLinePlane
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-18
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % Unpack the planes into origins and normals, keeping original shape
 plSize = size(plane);

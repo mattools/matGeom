@@ -12,14 +12,14 @@ function theta = dihedralAngle(plane1, plane2)
 %   http://en.wikipedia.org/wiki/Dihedral_angle
 %   http://mathworld.wolfram.com/DihedralAngle.html
 %
-%   See also:
+%   See also 
 %   planes3d, lines3d, angles3d, planesBisector
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-21
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % compute plane normals
 v1 = planeNormal(plane1);

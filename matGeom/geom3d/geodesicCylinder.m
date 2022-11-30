@@ -17,7 +17,7 @@ function [geo, geoLength, conGeo, conGeoLength] = geodesicCylinder(pts, cyl, var
 %   Example
 %       demoGeodesicCylinder
 %
-%   See also
+%   See also 
 %     drawCylinder, projPointOnCylinder
 %
 %   Source
@@ -27,9 +27,9 @@ function [geo, geoLength, conGeo, conGeoLength] = geodesicCylinder(pts, cyl, var
 
 % ------
 % Author: oqilipo
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2021-04-17, using R2020b
-% Copyright 2021
+% Copyright 2021-2022
 
 parser = inputParser;
 addRequired(parser, 'pts', @(x) validateattributes(x, {'numeric'},...

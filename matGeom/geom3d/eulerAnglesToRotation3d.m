@@ -40,16 +40,16 @@ function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)
 %   n2 = transformPoint3d(n, rot);
 %   drawPolyhedron(n2, f);
 %
-%   See also
+%   See also 
 %   transforms3d, createRotationOx, createRotationOy, createRotationOz
 %   rotation3dAxisAndAngle
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2010-07-22, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform
+% Copyright 2010-2022 INRA - Cepia Software Platform
 
 % Process input arguments
 if size(phi, 2) == 3

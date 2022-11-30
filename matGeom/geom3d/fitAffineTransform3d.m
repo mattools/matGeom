@@ -18,16 +18,16 @@ function trans = fitAffineTransform3d(ref, src)
 %     fitted = fitAffineTransform3d(pts, pts2);
 %   
 %
-%   See also
+%   See also 
 %     transforms3d, transformPoint3d, transformVector3d,
 %     fitAffineTransform2d, registerPoints3dAffine
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2009-07-31, using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRAE - Cepia Software Platform
+% Copyright 2009-2022 INRAE - Cepia Software Platform
 
 % number of points 
 N = size(src, 1);

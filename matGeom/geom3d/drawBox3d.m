@@ -17,15 +17,15 @@ function varargout = drawBox3d(box, varargin)
 %     axis([-2 2 -2 2 -2 2]);
 %     view(3)
 %
-%   See Also:
+%   See also 
 %     boxes3d, boundingBox3d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2010-02-22
-% Copyright 2010 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2010-2022 INRA - TPV URPOI - BIA IMASTE
 
 % Parse and check inputs
 isBox3d = @(x) validateattributes(x,{'numeric'},...

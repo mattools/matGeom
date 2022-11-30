@@ -35,15 +35,15 @@ function points = intersectLineSphere(line, sphere, varargin)
 %     pts2 = intersectLineSphere(lines2, sphere);
 %     drawPoint3d(pts, 'rx');
 %
-%   See also
+%   See also 
 %   spheres, circles3d, intersectPlaneSphere
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-18
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 %% Process input arguments
 

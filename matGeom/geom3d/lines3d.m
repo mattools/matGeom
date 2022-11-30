@@ -5,7 +5,7 @@ function lines3d(varargin)
 %   (its origin) and a 3D vector (its direction):
 %   LINE = [X0 Y0 Z0 DX DY DZ];
 %
-%   See also:
+%   See also 
 %   createLine3d, distancePointLine3d, isPointOnLine3d, linePosition3d 
 %   intersectLinePlane, distanceLines3d, parallelLine3d, projPointOnLine3d
 %   clipLine3d, fitLine3d, drawLine3d, transformLine3d
@@ -14,8 +14,8 @@ function lines3d(varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2008-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 help('lines3d');

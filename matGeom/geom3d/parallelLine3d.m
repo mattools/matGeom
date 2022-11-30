@@ -7,13 +7,13 @@ function res = parallelLine3d(line, point)
 %
 %   Example
 %
-%   See also
+%   See also 
 %   geom3d, parallelLine, parallelPlane
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2012-08-23, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform
+% Copyright 2012-2022 INRA - Cepia Software Platform
 
 res = [point line(:, 4:6)];

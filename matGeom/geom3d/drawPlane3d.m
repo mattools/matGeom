@@ -29,14 +29,14 @@ function h = drawPlane3d(plane, varargin)
 %     vn = crossProduct3d(v1, v2);
 %     drawVector3d(p0, vn);
 %
-%   See also
+%   See also 
 %     planes3d, createPlane, clipPlane, patch
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-17
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % add support for drawing multiple planes at once
 if size(plane, 1) > 1

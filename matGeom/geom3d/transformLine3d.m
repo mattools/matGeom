@@ -15,14 +15,14 @@ function res = transformLine3d(line, trans)
 %   drawLine3d(L, 'b');
 %   drawLine3d(L2, 'm');
 %
-%   See also:
+%   See also 
 %   lines3d, transforms3d, transformPoint3d, transformVector3d
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2008-11-25, using Matlab 7.7.0.471 (R2008b)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2008-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 res = [...
     transformPoint3d(line(:, 1:3), trans) ...   % transform origin point

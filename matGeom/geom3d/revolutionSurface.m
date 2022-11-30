@@ -37,26 +37,16 @@ function varargout = revolutionSurface(varargin)
 %   surf(x, y, z);
 %   axis equal;
 %
-%
-%
-%   See also
+%   See also 
 %       surf, transformPoint3d, drawSphere, drawTorus, drawEllipsoid
 %       surfature (on Matlab File Exchange)
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2004-04-09
-% Copyright 2004 INRA - CEPIA Nantes - MIAJ Jouy-en-Josas
-
-%   based on function cylinder from matlab
-%   31/06/2006 fix bug when passing 3 parameters
-%   20/04/2007 rewrite processing of input parameters, add psb to specify
-%       revolution axis
-%   24/10/2008 fix angle vector
-%   29/07/2010 doc update
-
+% Copyright 2004-2022 INRA - CEPIA Nantes - MIAJ Jouy-en-Josas
 
 %% Initialisations
 

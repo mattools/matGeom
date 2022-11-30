@@ -16,7 +16,7 @@ function s = ellipsoidSurfaceArea(elli)
 %   Example
 %   ellipsoidSurfaceArea
 %
-%   See also
+%   See also 
 %   geom3d, ellipsePerimeter, oblateSurfaceArea, prolateSurfaceArea
 %
 %   References
@@ -26,9 +26,9 @@ function s = ellipsoidSurfaceArea(elli)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2012-02-24, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform
+% Copyright 2012-2022 INRA - Cepia Software Platform
 
 %% Parse input argument
 

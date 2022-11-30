@@ -18,14 +18,14 @@ function pos = linePosition3d(point, line)
 %   If POINTS is an array of NP points, return NP positions, corresponding
 %   to each point.
 %
-%   See also:
+%   See also 
 %   lines3d, createLine3d, distancePointLine3d, projPointOnLine3d
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-17
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % size of input arguments
 np = size(point, 1);

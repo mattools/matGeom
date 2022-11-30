@@ -19,15 +19,15 @@ function centroid = polygonCentroid3d(varargin)
 %     centro =
 %         5.0000    5.0000    10.0000
 %
-%   See also
+%   See also 
 %     polygons3d, polygonArea3d, polygonCentroid, planePosition, planePoint
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2007-09-18
-% Copyright 2007 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2007-2022 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 if nargin == 1
     % polygon is given as a single argument

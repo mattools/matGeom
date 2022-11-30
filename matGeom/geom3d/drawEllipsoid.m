@@ -24,16 +24,16 @@ function varargout = drawEllipsoid(varargin)
 %         'drawEllipses', true, 'EllipseColor', 'b', 'EllipseWidth', 3);
 %     axis equal;
 %
-%   See also
+%   See also 
 %   spheres, drawSphere, equivalentEllipsoid, ellipsoid, drawTorus, 
 %   drawCuboid 
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2011-03-12, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform
+% Copyright 2011-2022 INRA - Cepia Software Platform
 
 %% Default values
 

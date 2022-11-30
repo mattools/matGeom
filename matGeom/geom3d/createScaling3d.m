@@ -16,16 +16,16 @@ function trans = createScaling3d(varargin)
 %   [ 0  0 SZ  0]
 %   [ 0  0  0  0]
 %
-%   See also:
+%   See also 
 %   transforms3d, transformPoint3d, transformVector3d, createTranslation3d,
 %   createRotationOx, createRotationOy, createRotationOz
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2006-04-20
-% Copyright 2006 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2006-2022 INRA - TPV URPOI - BIA IMASTE
 
 %% default arguments
 sx = 1;

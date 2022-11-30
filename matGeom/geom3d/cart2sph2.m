@@ -18,15 +18,15 @@ function varargout = cart2sph2(varargin)
 %   cart2sph2([1 1 0])  returns [pi/2 pi/4 sqrt(2)];
 %   cart2sph2([0 0 1])  returns [0 0 1];
 %
-%   See also:
+%   See also 
 %     angles3d, sph2cart2, cart2sph, cart2sph2d
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-18
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % parse input angles based on input argument number
 if length(varargin) == 1

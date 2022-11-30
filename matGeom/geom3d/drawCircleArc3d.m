@@ -11,15 +11,15 @@ function varargout = drawCircleArc3d(varargin)
 %   
 %   Drawing options can be specified, as for the plot command.
 %
-%   See also
+%   See also 
 %     angles3d, circles3d, drawCircle3d, drawCircleArc
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-21
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % parse axis handle
 if isAxisHandle(varargin{1})

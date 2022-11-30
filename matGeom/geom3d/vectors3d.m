@@ -8,7 +8,7 @@ function vectors3d(varargin)
 %   of each vector on a row.
 %
 %
-%   See also
+%   See also 
 %   vectorNorm3d, normalizeVector3d, crossProduct3d, vectorAngle3d
 %   isParallel3d, isPerpendicular3d, createTranslation3d
 %   drawVector3d
@@ -16,6 +16,6 @@ function vectors3d(varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2008-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas

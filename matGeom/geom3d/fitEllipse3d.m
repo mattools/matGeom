@@ -24,7 +24,7 @@ function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin)
 %     fpoints = transformPoint3d([fx, fy, zeros(n,1)], fTFM);
 %     drawEllipse3d(fE,'k')
 %   
-%   See also
+%   See also 
 %     drawEllipse3d, ellipseToPolygon
 %
 %   Source
@@ -33,9 +33,9 @@ function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin)
 
 % ------
 % Author: oqilipo
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2017-08-11
-% Copyright 2017
+% Copyright 2017-2022
 
 parser = inputParser;
 addRequired(parser, 'points', @(x) validateattributes(x, {'numeric'},...
@@ -252,7 +252,6 @@ end
     function varargout = ellipse_im2ex(varargin)
         % Cast ellipse defined with implicit parameter vector to explicit form.
         %
-        % See also: ellipse_ex2im
         
         % Copyright 2011 Levente Hunyadi
         

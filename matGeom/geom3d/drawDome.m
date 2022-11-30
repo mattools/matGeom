@@ -57,14 +57,14 @@ function varargout = drawDome(varargin)
 %     l = light; view(3);
 %
 %
-%   See also
+%   See also 
 %   drawSphere
 
 % ------
 % Author: Moritz Schappler
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2013-07-27
-% Copyright 2013
+% Copyright 2013-2022
 
 % Check if axes handle is specified
 if isAxisHandle(varargin{1})

@@ -16,15 +16,15 @@ function [trans, points] = registerPoints3dAffine(points, target, varargin)
 %   Example
 %     registerPoints3dAffine
 %
-%   See also
+%   See also 
 %     transforms3d, fitAffineTransform3d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2015-02-24, using Matlab 8.4.0.150421 (R2014b)
-% Copyright 2015 INRA - Cepia Software Platform
+% Copyright 2015-2022 INRA - Cepia Software Platform
 
 nIters = 10;
 if ~isempty(varargin)

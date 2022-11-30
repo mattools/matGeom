@@ -66,16 +66,16 @@ function varargout = drawCylinder(varargin)
 %     drawCylinder(cyls);
 %     light
 %
-%   See Also:
+%   See also 
 %     cylinderMesh, drawEllipseCylinder, drawSphere, drawLine3d, surf
 %     intersectLineCylinder, cylinderSurfaceArea
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-09-17
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 %% Input argument processing
 

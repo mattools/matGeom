@@ -73,15 +73,15 @@ function varargout = drawCapsule(varargin)
 %     l = light; view(3);
 %     
 %
-%   See Also:
+%   See also 
 %     crawCylinder, drawDome, drawSphere
 %
 
 % ------
 % Author: Moritz Schappler
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2013-07-27
-% Copyright 2013
+% Copyright 2013-2022
 
 %% Input argument processing
 

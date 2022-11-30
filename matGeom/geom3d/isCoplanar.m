@@ -18,9 +18,9 @@ function copl = isCoplanar(x,y,z,tol)
 
 % ------
 % Author: Brett Shoelson, David Legland
-% e-mail: brett.shoelson@joslin.harvard.edu, david.legland@inrae.fr
+% E-mail: brett.shoelson@joslin.harvard.edu, david.legland@inrae.fr
 % Created: 2001-10-06
-% Copyright 2001
+% Copyright 2001-2022
 
 if nargin == 0
 	error('Requires at least one input argument.'); 

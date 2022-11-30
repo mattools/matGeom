@@ -51,14 +51,14 @@ function varargout = drawEllipseCylinder(varargin)
 %     set(gcf, 'renderer', 'opengl')
 %     view([60 30]); light;
 %
-%   See Also:
+%   See also 
 %     drawCylinder, drawSphere, cylinderMesh, drawLine3d, surf
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2014-02-27
-% Copyright 2014 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2014-2022 INRA - TPV URPOI - BIA IMASTE
 
 %% Input argument processing
 

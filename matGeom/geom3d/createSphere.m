@@ -7,14 +7,14 @@ function sphere = createSphere(varargin)
 %   Ref: P. Bourke
 %   http://astronomy.swin.edu.au/~pbourke/geometry/spherefrom4/
 %
-%   See also
+%   See also 
 %   spheres, circles3d
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-03-22
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 if length(varargin)==4
     pts = [varargin{1};varargin{2};varargin{3};varargin{4}];

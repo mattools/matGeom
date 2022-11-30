@@ -7,15 +7,15 @@ function edges3d(varargin)
 %   A set of 3D edges is represented by a N-by-6 array, each row
 %   representing an edge.
 %
-%   See also
+%   See also 
 %   lines3d, edges2d, createEdge3d, edgeLength3d
 %   intersectEdgePlane, edgeToLine3d, edgeToLine3d, clipEdge3d, midPoint3d
 %   distancePointEdge3d, drawEdge3d, drawSphericalEdge
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2018-04-12, using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2018 INRA - Cepia Software Platform
+% Copyright 2018-2022 INRA - Cepia Software Platform
 
 help('edges3d');

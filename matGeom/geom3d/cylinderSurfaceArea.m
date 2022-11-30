@@ -16,14 +16,14 @@ function S = cylinderSurfaceArea(cyl)
 %        12.5664
 %     % equals to 4*pi
 %
-%   See also
+%   See also 
 %     geom3d, ellipsoidSurfaceArea, intersectLineCylinder
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2017-11-02, using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2017 INRA - Cepia Software Platform
+% Copyright 2017-2022 INRA - Cepia Software Platform
 
 H = distancePoints3d(cyl(:, 1:3), cyl(:, 4:6));
 R = cyl(:,7);
