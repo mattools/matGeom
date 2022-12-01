@@ -20,14 +20,14 @@ function elli = createEllipse(type, varargin)
 %   References
 %   https://en.wikipedia.org/wiki/Ellipse#Standard_parametric_representation
 %
-%   See also
+%   See also 
 %     ellipses2d, equivalentEllipse, fitEllipse,
 %     ellipseCartesianCoefficients
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2022-09-05, using Matlab 9.12.0.1884302 (R2022a)
 % Copyright 2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 

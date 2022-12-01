@@ -9,14 +9,14 @@ function len = edgeLength(varargin)
 %   N-by-4 array, containing parametric representation of each edge, and
 %   output is a N-by-1 array containing length of each edge.
 %
-%   See also:
+%   See also 
 %   edges2d, edgeAngle
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-02-19
-% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
 
 if nargin == 1
     % input is an edge [X1 Y1 X2 Y2]

@@ -12,13 +12,13 @@ function point = ellipsePoint(elli, pos)
 %     axis equal; axis([0 100 0 100]);
 %     drawPoint(pts, 'bo');
 %
-%   See also
+%   See also 
 %     ellipses2d, drawEllipse, projPointOnEllipse, ellipseToPolygon
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2022-09-09, using Matlab 9.12.0.1884302 (R2022a)
 % Copyright 2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 

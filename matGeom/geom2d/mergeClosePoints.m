@@ -15,14 +15,14 @@ function points = mergeClosePoints(points, varargin)
 %     figure; drawPoint(pts, '.');
 %     hold on; drawPoint(pts2, 'mo');
 %
-%   See also
+%   See also 
 %     points2d, removeMultipleVertices
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2013-10-04, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2013 INRA - Cepia Software Platform
+% Copyright 2013-2022 INRA - Cepia Software Platform
 
 % default values
 minDist = 1e-14;

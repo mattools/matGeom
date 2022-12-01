@@ -12,7 +12,7 @@ function points2d
 %   Example
 %   P = [5 6];
 %
-%   See also:
+%   See also 
 %   centroid, midPoint, boundingBox, polarPoint
 %   distancePoints, minDistancePoints, nndist, circumCenter
 %   isCounterClockwise, angle2Points, angle3Points, angleSort
@@ -21,8 +21,8 @@ function points2d
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2008-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 help('points2d');

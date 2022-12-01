@@ -16,15 +16,15 @@ function dist = distancePoints(p1, p2, varargin)
 %   D = distancePoints(..., 'diag')
 %   compute only distances between P1(i,:) and P2(i,:).
 %
-%   See also:
+%   See also 
 %   points2d, minDistancePoints, nndist, hausdorffDistance
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@nantes.inra.fr
 % Created: 2004-02-24
-% Copyright 2004 INRA - Cepia Software Platform
+% Copyright 2004-2022 INRA - Cepia Software Platform
 
 %% Setup options
 

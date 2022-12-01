@@ -42,15 +42,15 @@ function varargout = drawParabola(varargin)
 %     drawParabola([50 50 .2 30], [-3 3], 'color', 'r', 'linewidth', 2);
 %   
 %
-%   See Also:
+%   See also 
 %   drawCircle, drawEllipse
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2006-06-02
-% Copyright 2006 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2006-2022 INRA - TPV URPOI - BIA IMASTE
 
 % Extract parabola
 if nargin < 1

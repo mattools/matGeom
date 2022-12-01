@@ -9,15 +9,15 @@ function angles2d
 %   Angles are usually oriented. The default orientation is the CCW
 %   (Counter-Clockwise) orientation.
 %
-%   See also:
+%   See also 
 %   normalizeAngle, angleDiff, angleAbsDiff, angleSort
 %   angle2Points, angle3Points, vectorAngle, lineAngle, edgeAngle
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2010-03-31, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2010 INRA - Cepia Software Platform
+% Copyright 2010-2022 INRA - Cepia Software Platform
 
 help('angles2d');

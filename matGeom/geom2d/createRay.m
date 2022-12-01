@@ -25,14 +25,14 @@ function ray = createRay(varargin)
 %   axis([0 10 0 10]);
 %   drawRay(ray);
 %
-%   See also:
+%   See also 
 %   rays2d, createLine, points2d
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2007-10-18
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2007-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 if length(varargin)==2
     p0 = varargin{1};

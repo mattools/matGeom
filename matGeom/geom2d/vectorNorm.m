@@ -22,15 +22,15 @@ function n = vectorNorm(v, varargin)
 %   n2 =
 %       10
 %
-%   See Also:
+%   See also 
 %     vectors2d, vectorAngle
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-21
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % extract the type of norm to compute
 d = 2;

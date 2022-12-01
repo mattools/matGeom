@@ -17,15 +17,15 @@ function varargout = drawVector(varargin)
 %     drawVector([1 2], [-2 3]);
 %     axis equal;
 %
-%   See also
+%   See also 
 %     quiver, drawVector3d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2013-03-18, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2013 INRA - Cepia Software Platform
+% Copyright 2013-2022 INRA - Cepia Software Platform
 
 % extract handle of axis to draw on
 if isAxisHandle(varargin{1})

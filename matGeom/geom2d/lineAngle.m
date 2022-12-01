@@ -10,14 +10,14 @@ function theta = lineAngle(varargin)
 %   Returns the directed angle between the two lines. Angle is given in
 %   radians between 0 and 2*pi, in counter-clockwise direction.
 %
-%   See also
+%   See also 
 %   lines2d, angles2d, createLine, normalizeAngle
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-10-31
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 nargs = length(varargin);
 if nargs == 1

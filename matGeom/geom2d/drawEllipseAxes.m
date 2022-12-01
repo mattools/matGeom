@@ -19,13 +19,13 @@ function varargout = drawEllipseAxes(varargin)
 %     drawEllipse(elli, 'LineWidth', 2, 'Color', 'b')
 %     drawEllipseAxes(elli, 'k')
 %
-%   See also
+%   See also 
 %     ellipses2d, drawEllipse, drawEllipseArc
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2022-09-11, using Matlab 9.9.0.1570001 (R2020b) Update 4
 % Copyright 2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 

@@ -19,15 +19,15 @@ function [tx, ty] = orientedBoxToPolygon(obox)
 %         -20  10 
 %
 %
-%   See also:
+%   See also 
 %   polygons2d, orientedBox, drawOrientedBox, rectToPolygon
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@nantes.inra.fr
 % Created: 2005-04-06
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % extract box parameters
 theta = 0;

@@ -16,15 +16,15 @@ function obox = orientedBox(points)
 %     drawEllipse(elli);
 %     drawOrientedBox(obox, 'm');
 %
-%   See also
+%   See also 
 %   drawOrientedBox, orientedBoxToPolygon
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@nantes.inra.fr
 % Created: 2012-03-29, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform
+% Copyright 2012-2022 INRA - Cepia Software Platform
 
 %% initialisations
 

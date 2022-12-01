@@ -6,15 +6,15 @@ function trans = createLineReflection(line)
 %   corresponding to the desired line reflection
 %
 %
-%   See also:
+%   See also 
 %   lines2d, transforms2d, transformPoint, 
 %   createTranslation, createHomothecy, createScaling
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-01-19
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % extract line parameters
 x0 = line(:,1);

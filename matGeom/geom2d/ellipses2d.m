@@ -5,7 +5,7 @@ function ellipses2d(varargin)
 %   semi-axes length, and their angle from the Ox direction (in degrees). 
 %   E = [XC YC A B THETA];
 %
-%   See also:
+%   See also 
 %   circles2d, equivalentEllipse, createEllipse, fitEllipse
 %   isPointInEllipse, ellipsePerimeter, ellipseCartesianCoefficients
 %   ellipseToPolygon, projPointOnEllipse, distancePointEllipse, 
@@ -14,8 +14,8 @@ function ellipses2d(varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - Cepia Software Platform
+% Copyright 2008-2022 INRA - Cepia Software Platform
 
 help('ellipses2d');

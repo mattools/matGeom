@@ -21,15 +21,15 @@ function varargout = drawRect(rect, varargin)
 %   H = drawRect(...) 
 %   Returns handle of the created graphic objects.
 %
-%   See Also:
+%   See also 
 %     drawOrientedBox, drawBox, rectToPolygon
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-12-10
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 % extract handle of axis to draw on
 if isAxisHandle(rect)

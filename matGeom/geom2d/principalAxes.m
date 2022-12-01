@@ -18,15 +18,15 @@ function varargout = principalAxes(points)
 %     pts = transformPoint(pts, createTranslation(3, 4));
 %     [center, rotMat] = principalAxes(pts);
 %
-%   See also
+%   See also 
 %     equivalentEllipse, equivalentEllipsoid, principalAxesTransform
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2019-08-12, using Matlab 9.6.0.1072779 (R2019a)
-% Copyright 2019 INRAE - Cepia Software Platform
+% Copyright 2019-2022 INRAE - Cepia Software Platform
 
 % number and dimension of points
 n = size(points, 1);

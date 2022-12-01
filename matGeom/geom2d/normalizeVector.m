@@ -19,15 +19,15 @@ function vn = normalizeVector(v)
 %   ans =
 %       1
 %
-%   See Also:
+%   See also 
 %     vectors2d, vectorNorm
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-11-29
-% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
 
 if ismatrix(v)
     vn = bsxfun(@rdivide, v, sqrt(sum(v.^2, 2)));

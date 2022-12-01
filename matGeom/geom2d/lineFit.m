@@ -16,15 +16,15 @@ function line = lineFit(varargin)
 %   Requires:
 %   Optimiaztion toolbox
 %
-%   See also:
+%   See also 
 %   lines2d, polyfit, polyfit2, lsqlin
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-04-30
-% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
 
 %% Extract input arguments
 if length(varargin)==1

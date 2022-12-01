@@ -7,15 +7,15 @@ function theta = angle2Points(varargin)
 %   (P1 P2)
 %   Result is always given in radians, between 0 and 2*pi.
 %
-%   See Also:
+%   See also 
 %   points2d, angles2d, angle3points, normalizeAngle, vectorAngle
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2007-03-02
-% Copyright 2007 INRA - Cepia Software Platform
+% Copyright 2007-2022 INRA - Cepia Software Platform
 
 % process input arguments
 if length(varargin)==2

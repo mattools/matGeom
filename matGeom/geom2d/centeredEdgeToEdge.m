@@ -13,14 +13,14 @@ function edge = centeredEdgeToEdge(cedge)
 %         10    25    50    55
 %
 %
-%   See also
+%   See also 
 %     edges2d, drawCenteredEdge, drawOrientedBox
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2012-07-31, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform
+% Copyright 2012-2022 INRA - Cepia Software Platform
 
 % length and orientation
 len = cedge(:,3);

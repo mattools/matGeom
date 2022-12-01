@@ -21,15 +21,15 @@ function varargout = transformPoint(varargin)
 %   which has the same size as (PX1 PY1). 
 %
 %
-%   See also:
+%   See also 
 %     points2d, transforms2d, translation, rotation
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-04-06
-% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
 
 % parse input arguments
 if length(varargin) == 2

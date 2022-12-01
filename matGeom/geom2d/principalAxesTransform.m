@@ -11,15 +11,15 @@ function varargout = principalAxesTransform(pts)
 %   Example
 %   principalAxesTransform
 %
-%   See also
+%   See also 
 %     principalAxes, equivalentEllipse, equivalentEllipsoid
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2020-03-06, using Matlab 8.6.0.267246 (R2015b)
-% Copyright 2020 INRAE - Cepia Software Platform
+% Copyright 2020-2022 INRAE - Cepia Software Platform
 
 % computes principal axes
 [center, rotMat] = principalAxes(pts);

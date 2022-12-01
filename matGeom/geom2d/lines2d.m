@@ -14,7 +14,7 @@ function lines2d(varargin)
 %       y = y0 + t*dy;
 %   for all t between -infinity and +infinity.
 %
-%   See also:
+%   See also 
 %   points2d, vectors2d, edges2d, rays2d
 %   createLine, cartesianLine, medianLine, edgeToLine, lineToEdge
 %   orthogonalLine, parallelLine, bisector, radicalAxis
@@ -26,8 +26,8 @@ function lines2d(varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2008-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 help('lines2d');

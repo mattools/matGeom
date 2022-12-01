@@ -20,15 +20,15 @@ function varargout = cubicBezierToPolyline(points, varargin)
 %     poly = cubicBezierToPolyline([0 0;5 10;10 5;10 0], 100);
 %     drawPolyline(poly, 'linewidth', 2, 'color', 'g');
 %
-%   See also
+%   See also 
 %     drawBezierCurve, drawPolyline
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2011-10-06, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform
+% Copyright 2011-2022 INRA - Cepia Software Platform
 
 % default number of discretization steps
 N = 64;

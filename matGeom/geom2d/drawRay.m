@@ -12,15 +12,15 @@ function varargout = drawRay(ray, varargin)
 %   H = drawRay(...)
 %   Returns handle on line object
 %
-%   See also:
+%   See also 
 %     rays2d, drawLine, clipRay
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-10-31
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 % extract handle of axis to draw in
 if isAxisHandle(ray)

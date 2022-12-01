@@ -40,15 +40,15 @@ function varargout = drawCenteredEdge(varargin)
 %     edges = [center 2*r1 theta ; center 2*r2 theta+90];
 %     drawCenteredEdge(edges, 'linewidth', 2, 'color', 'g');
 % 
-%   See also:
+%   See also 
 %     edges2d, drawOrientedBox, drawEllipse, centeredEdgeToEdge, drawEdge
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-08-05
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 %% process input variables
 
