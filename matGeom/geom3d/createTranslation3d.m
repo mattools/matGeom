@@ -14,15 +14,15 @@ function trans = createTranslation3d(varargin)
 %   return the translation corresponding to the given vector [x y z].
 %
 %
-%   See also:
+%   See also 
 %   transforms3d, transformPoint3d, transformVector3d, 
 %   createRotationOx, createRotationOy, createRotationOz, createScaling3d
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-04-06
-% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
 
 if isempty(varargin)
     % assert translation with null vector

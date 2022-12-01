@@ -39,7 +39,7 @@ function points = intersectLineCylinder(line, cylinder, varargin)
 %           67.8690   35.7380   23.6069
 %
 %   
-%   See also
+%   See also 
 %   lines3d, intersectLinePlane, drawCylinder, cylinderSurfaceArea
 %
 %   References
@@ -49,9 +49,9 @@ function points = intersectLineCylinder(line, cylinder, varargin)
 
 % ------
 % Author: David Legland, from a file written by Daniel Trauth (RWTH)
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2007-01-27
-% Copyright 2007
+% Copyright 2007-2022
 
 %% Parse input arguments
 

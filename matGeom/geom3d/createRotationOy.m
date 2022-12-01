@@ -18,15 +18,15 @@ function trans = createRotationOy(varargin)
 %   translation(-X0, -Y0, -Z0), rotation, and translation(X0, Y0, Z0).
 %
 %
-%   See also:
+%   See also 
 %   transforms3d, transformPoint3d, createRotationOx, createRotationOz
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-18
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % default values
 dx = 0;

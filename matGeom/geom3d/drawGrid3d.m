@@ -30,14 +30,14 @@ function varargout = drawGrid3d(varargin)
 %     drawGrid3d([0 0 0], [20 20 20]);
 %
 %
-%   See Also
+%   See also 
 %     drawLine3d, drawEdge3d, clipLine3d, draw
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-11-17
-% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2005-2022 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 %% initialize variables
 

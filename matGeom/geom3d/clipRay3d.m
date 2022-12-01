@@ -22,14 +22,14 @@ function edge = clipRay3d(ray, box)
 %     drawBox3d(box);
 %     drawEdge3d(edges, 'g');
 %
-%   See also
+%   See also 
 %     clipLine3d
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2020-05-25, using Matlab 9.8.0.1323502 (R2020a)
-% Copyright 2020 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2020-2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % get box limits
 xmin = box(1); xmax = box(2);

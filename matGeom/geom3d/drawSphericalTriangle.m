@@ -19,16 +19,16 @@ function varargout = drawSphericalTriangle(varargin)
 %     drawSphericalTriangle(s, pts(1,:), pts(2,:), pts(3,:), 'linewidth', 2);
 %     view(3); axis equal;
 %
-%   See also
+%   See also 
 %   drawSphere, fillSphericalTriangle, drawSphericalPolygon,
 %   drawSphericalEdge
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-22
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % Check if axes handle is specified
 if isAxisHandle(varargin{1})

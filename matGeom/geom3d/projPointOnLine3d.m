@@ -12,14 +12,14 @@ function point = projPointOnLine3d(point, line)
 %   projections of PT1 onto lines LINE. 
 %
 %
-%   See also:
+%   See also 
 %   projPointOnLine, distancePointLine3d
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2012-08-23
-% Copyright 2012 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2012-2022 INRA - TPV URPOI - BIA IMASTE
 
 % direction vector of the line
 vx = line(:, 4);

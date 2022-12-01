@@ -12,15 +12,15 @@ function b = isPointOnLine3d(point, line, varargin)
 %   B = isPointOnLine3d(POINT, LINE, TOL)
 %   Specifies the tolerance used for testing location on 3D line.
 %
-%   See also: 
+%   See also 
 %   lines3d, distancePointLine3d, linePosition3d, isPointOnLine
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2003-10-31
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 % extract computation tolerance
 tol = 1e-14;

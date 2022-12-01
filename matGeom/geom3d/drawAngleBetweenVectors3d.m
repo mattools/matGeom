@@ -21,14 +21,14 @@ function varargout = drawAngleBetweenVectors3d(o, v1, v2, r, varargin)
 %     drawVector3d(o, v2, 'g')
 %     drawAngleBetweenVectors3d(o, v1, v2, r,'Color','m','LineWidth', 3)
 %
-%   See also
+%   See also 
 %     drawCircleArc3d
 
 % ------
 % Author: oqilipo
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2020-02-02
-% Copyright 2020
+% Copyright 2020-2022
 
 % parse axis handle
 hAx = gca;

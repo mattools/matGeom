@@ -18,14 +18,14 @@ function [newLine, isOrthogonal] = projLineOnPlane(line, plane)
 %     drawPlane3d(plane)
 %     drawLine3d(newLines(~isOrthogonal,:), 'r')
 %
-%   See also:
+%   See also 
 %   planes3d, lines3d, intersectLinePlane, projPointOnPlane
 
 % ------
 % Author: oqilipo 
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2017-08-06
-% Copyright 2017
+% Copyright 2017-2022
 
 p1 = projPointOnPlane(line(:,1:3), plane);
 p2 = projPointOnPlane(line(:,1:3)+line(:,4:6), plane);

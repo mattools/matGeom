@@ -11,15 +11,15 @@ function edge = clipLine3d(line, box)
 %   If LINE is a N-by-6 array, with one line by row, returns the clipped
 %   edge coresponding to each line in a N-by-6 array.
 %
-%   See also:
+%   See also 
 %   lines3d, edges3d, createLine3d, clipRay3d
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2008-10-30, from drawLine3d
-% Copyright 2008 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2008-2022 INRA - TPV URPOI - BIA IMASTE
 
 % get box limits
 xmin = box(1); xmax = box(2);

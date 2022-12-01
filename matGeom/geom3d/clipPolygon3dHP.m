@@ -21,14 +21,14 @@ function poly2 = clipPolygon3dHP(poly, plane)
 %   * in the case of one polygon as return decide what to return
 %   * and rename this function to 'clipPolygon3d'
 %
-%   See also:
+%   See also 
 %   poygons3d, polyhedra, clipConvexPolygon3dHP
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-08-02
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 %% Pre-Processing
 

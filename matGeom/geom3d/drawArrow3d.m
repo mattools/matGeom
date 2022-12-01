@@ -39,9 +39,9 @@ function varargout = drawArrow3d(pos, vec, varargin)
 
 % ------
 % Authors: Shawn Arseneau, oqilipo
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2006-09-14, by Shawn Arseneau
-% Copyright 2006
+% Copyright 2006-2022
 
 % Check if first argument is an axes handle
 if numel(pos) == 1 && ishghandle(pos, 'axes')

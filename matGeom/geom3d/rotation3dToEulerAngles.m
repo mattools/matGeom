@@ -21,21 +21,21 @@ function varargout = rotation3dToEulerAngles(mat, varargin)
 %   References
 %   Code from '1994 - Shoemake - Graphics Gems IV: Euler Angle Conversion:
 %   http://webdocs.cs.ualberta.ca/~graphics/books/GraphicsGems/gemsiv/euler_angle/EulerAngles.c
-%   (see also rotm2eul, that is part of MATLAB's Robotics System Toolbox)
+%   (see rotm2eul, that is part of MATLAB's Robotics System Toolbox)
 %   Modified using explanations in:
 %   http://www.gregslabaugh.net/publications/euler.pdf
 %   https://www.geometrictools.com/Documentation/EulerAngles.pdf
 %
-%   See also
+%   See also 
 %   transforms3d, rotation3dAxisAndAngle, createRotation3dLineAngle,
 %   eulerAnglesToRotation3d
 %
 
 % ------
 % Authors: David Legland, oqilipo
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2010-08-11, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform
+% Copyright 2010-2022 INRA - Cepia Software Platform
 
 p = inputParser;
 validStrings = {...

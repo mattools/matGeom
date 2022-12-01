@@ -17,15 +17,15 @@ function line = fitLine3d(points)
 %     line = fitLine3d(pts);
 %     drawLine3d(line, 'color', 'm', 'LineWidth', 4);
 %
-%   See also
+%   See also 
 %     lines3d, equivalentEllipsoid, fitPlane
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2012-11-11, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform
+% Copyright 2012-2022 INRA - Cepia Software Platform
 
 % number of points
 n = size(points, 1);

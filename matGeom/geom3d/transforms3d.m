@@ -17,7 +17,7 @@ function transforms3d(varargin)
 %   PT2 = 
 %       14   25   36
 %
-%   See also
+%   See also 
 %   createTranslation3d, createScaling3d, , createBasisTransform3d
 %   createRotationOx, createRotationOy, createRotationOz
 %   rotation3dAxisAndAngle, rotation3dToEulerAngles,
@@ -28,6 +28,6 @@ function transforms3d(varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2008-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas

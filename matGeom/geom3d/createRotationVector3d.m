@@ -15,7 +15,7 @@ function ROT = createRotationVector3d(A,B)
 %     drawVector3d(O, B,'g');
 %     drawVector3d(O, C,'r');
 %
-%   See also
+%   See also 
 %   transformPoint3d, createRotationOx, createRotationOy, createRotationOz
 %
 %   Source
@@ -23,9 +23,9 @@ function ROT = createRotationVector3d(A,B)
 
 % ------
 % Author: oqilipo
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2017-08-07
-% Copyright 2017
+% Copyright 2017-2022
 
 if isParallel3d(A,B)
     if A*B'>0

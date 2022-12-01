@@ -14,14 +14,14 @@ function dist = distancePoints3d(p1, p2, varargin)
 %   and Inf to maximum difference in each coordinate.
 %
 %
-%   See also:
+%   See also 
 %   points3d, minDistancePoints, distancePoints
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-18
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 norm = 2;
 if length(varargin)==1

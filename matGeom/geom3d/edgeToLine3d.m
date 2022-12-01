@@ -12,13 +12,13 @@ function line = edgeToLine3d(edge)
 %       line = 
 %            3   4   5   1   2   3
 %
-%   See also
+%   See also 
 %     lines3d, edges3d, edgeToLine, lineToEdge3d
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2018-04-12, using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2018 INRA - Cepia Software Platform
+% Copyright 2018-2022 INRA - Cepia Software Platform
 
 line = [edge(:, 1:3) edge(:, 4:6)-edge(:, 1:3)];

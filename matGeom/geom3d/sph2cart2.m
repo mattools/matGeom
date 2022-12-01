@@ -32,15 +32,15 @@ function varargout = sph2cart2(theta, phi, rho)
 %     ans =
 %         0.7000    0.8000    5.0000
 %
-%   See also:
+%   See also 
 %     angles3d, cart2sph2, sph2cart, sph2cart2d, eulerAnglesToRotation3d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-18
-% Copyright 2005 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2005-2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % Process input arguments
 if nargin == 1

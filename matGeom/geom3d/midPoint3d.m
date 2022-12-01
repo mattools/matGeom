@@ -39,15 +39,15 @@ function varargout = midPoint3d(varargin)
 %   zm = 
 %       40
 %
-%   See also
+%   See also 
 %     edges3d, points3d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2010-08-08, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform
+% Copyright 2010-2022 INRA - Cepia Software Platform
 
 if nargin == 1
     % input is a 3D edge

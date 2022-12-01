@@ -10,10 +10,7 @@ function h = drawRay3d(ray, varargin)
 %   Can specify parameter name-value pairs to change draw style.
 %
 %   H = drawRay3d(...)
-%   Returns handle on line object
-%
-%   See also:
-%   rays2d, drawLine
+%   Returns the handle of the line object.
 %
 %   Example
 %     % generate 50 random 3D rays
@@ -25,14 +22,14 @@ function h = drawRay3d(ray, varargin)
 %     figure; axis equal; axis([0 50 0 50 0 50]); hold on; view(3);
 %     drawRay3d(ray);
 %
-%   See also
+%   See also 
 %     drawLine3d, clipRay3d
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2020-05-25, using Matlab 9.8.0.1323502 (R2020a)
-% Copyright 2020 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2020-2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % extract handle of axis to draw in
 if isAxisHandle(ray)

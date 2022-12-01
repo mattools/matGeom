@@ -34,15 +34,15 @@ function [pos, zp] = planePosition(point, plane)
 %          3     2
 %
 %
-%   See also:
+%   See also 
 %     geom3d, planes3d, points3d, planePoint
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-21
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % size of input arguments
 npl = size(plane, 1);

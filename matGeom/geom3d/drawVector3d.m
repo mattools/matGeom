@@ -16,15 +16,15 @@ function varargout = drawVector3d(pos, vect, varargin)
 %     drawVector3d([2 3 4], [0 0 1]);
 %     view(3);
 %
-%   See also
+%   See also 
 %     vectors3d, quiver3
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2011-12-19, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform
+% Copyright 2011-2022 INRA - Cepia Software Platform
 
 if isAxisHandle(pos)
     hAx = pos;

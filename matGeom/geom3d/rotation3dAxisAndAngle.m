@@ -24,15 +24,15 @@ function [axis, theta] = rotation3dAxisAndAngle(mat)
 %     angle2 =
 %           1.0472
 %
-%   See also
+%   See also 
 %   transforms3d, vectors3d, angles3d, eulerAnglesToRotation3d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2010-08-11, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform
+% Copyright 2010-2022 INRA - Cepia Software Platform
 
 % extract the linear part of the rotation matrix
 A = mat(1:3, 1:3);

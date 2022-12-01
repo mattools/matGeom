@@ -14,16 +14,16 @@ function mat = createRotation3dLineAngle(line, theta)
 %     angle2 =
 %           1.0472
 %
-%   See also
+%   See also 
 %   transforms3d, rotation3dAxisAndAngle, rotation3dToEulerAngles,
 %   eulerAnglesToRotation3d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2010-08-11, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform
+% Copyright 2010-2022 INRA - Cepia Software Platform
 
 % determine rotation center and direction
 center = [0 0 0];

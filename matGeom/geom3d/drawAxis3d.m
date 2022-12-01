@@ -23,15 +23,15 @@ function varargout = drawAxis3d(varargin)
 %   view([135,15]); lighting('phong'); camlight('head'); axis('equal')
 %   xlabel X; ylabel Y; zlabel Z
 %
-%   See also
+%   See also 
 %     drawAxisCube
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2007-08-14, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2007-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % Check if axes handle is specified
 if isAxisHandle(varargin{1})

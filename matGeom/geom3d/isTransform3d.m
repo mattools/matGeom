@@ -20,15 +20,15 @@ function a = isTransform3d(trans, varargin)
 %     trans = rot*createTranslation3d(rand(1,3));
 %     isTransform3d(trans, 'rot', true)
 %
-%   See also
+%   See also 
 %   composeTransforms3d, createBasisTransform3d, recenterTransform3d,
 %   transformPoint3d
 
 % ------
 % Author: oqilipo
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2018-07-08
-% Copyright 2018
+% Copyright 2018-2022
 
 narginchk(1,5)
 

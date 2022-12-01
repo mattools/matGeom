@@ -5,15 +5,15 @@ function line2 = normalizeLine3d(line)
 %   Returns the normalization of the direction vector of the line, such 
 %   that ||LINE2(4:6)|| = 1. 
 %
-%   See also:
+%   See also 
 %     normalizePlane, normalizeVector3d
 %
 
 % ------
 % Author: oqilipo
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2020-03-13
-% Copyright 2020
+% Copyright 2020-2022
 
 isLine3d = @(x) validateattributes(x,{'numeric'},...
     {'nonempty','nonnan','real','finite','size',[nan,6]});

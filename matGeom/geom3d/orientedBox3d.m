@@ -26,14 +26,14 @@ function [box3d, rotMat] = orientedBox3d(pts)
 %     axis equal; xlabel('x'); ylabel('y'); zlabel('z');
 %     drawCuboid(box3d, 'FaceColor', 'none');
 %
-%   See also
+%   See also 
 %     meshes3d, drawCuboid, rotation3dToEulerAngles
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2015-12-01, using Matlab 8.6.0.267246 (R2015b)
-% Copyright 2015 INRA - Cepia Software Platform
+% Copyright 2015-2022 INRA - Cepia Software Platform
 
 tri = convhulln(pts);
 nFaces = size(tri, 1);

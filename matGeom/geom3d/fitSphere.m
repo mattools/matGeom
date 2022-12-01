@@ -25,7 +25,7 @@ function [sphere, residuals] = fitSphere(x,y,z)
 %     drawPoint3d(x,y,z)
 %     drawSphere(sphere,'FaceAlpha',0.5)
 %   
-%   See also:
+%   See also 
 %     createSphere, drawSphere, intersectLineSphere, intersectPlaneSphere
 %
 %   Source:
@@ -34,9 +34,9 @@ function [sphere, residuals] = fitSphere(x,y,z)
 
 % ------
 % Author: Levente Hunyadi, oqilipo (minor adaptions for matGeom)
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2010
-% Copyright 2010 Levente Hunyadi
+% Copyright 2010-2022 Levente Hunyadi
 
 narginchk(1,3);
 

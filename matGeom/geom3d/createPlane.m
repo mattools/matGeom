@@ -28,14 +28,14 @@ function plane = createPlane(varargin)
 %   - (DX2, DY2, DZ2) is a second direction vector
 %   The 2 direction vectors are normalized and orthogonal.
 %
-%   See also:
+%   See also 
 %   planes3d, medianPlane
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-18
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 if length(varargin) == 1
     var = varargin{1};

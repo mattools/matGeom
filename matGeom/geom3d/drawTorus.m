@@ -22,15 +22,15 @@ function varargout = drawTorus(varargin)
 %     drawTorus([50 50 50 30 10 30 45]);
 %     axis equal; view([95 10]); light;
 %
-%   See also
+%   See also 
 %   drawEllipsoid, revolutionSurface, torusMesh
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2011-06-22, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform
+% Copyright 2011-2022 INRA - Cepia Software Platform
 
 %% Default values
 

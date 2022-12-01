@@ -19,15 +19,15 @@ function varargout = drawEdge3d(varargin)
 %     drawEdge3d(gca, [p1 p2; p2 p3],'g');
 %     drawEdge3d(p1(1), p1(2), p1(3),p3(1), p3(2), p3(3),'Color','r','Marker','x');
 %
-%   See also
+%   See also 
 %     drawLine3d, clipLine3d, drawEdge
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-18
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % Parse and check inputs
 if isAxisHandle(varargin{1})

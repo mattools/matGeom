@@ -21,15 +21,15 @@ function poly = clipPlane(plane, box)
 %         10    10     5
 %          0    10     5
 %
-%   See also
+%   See also 
 %     planes3d, createPlane, drawPlane3d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2021-11-09, using Matlab 9.10.0.1684407 (R2021a) Update 3
-% Copyright 2021 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2021-2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % retrieve min/max coords
 xmin = box(1);

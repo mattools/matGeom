@@ -6,7 +6,7 @@ function points3d(varargin)
 %
 %   Arrays of points consist in N*3 arrays, each row being a point.
 %
-%   See also
+%   See also 
 %   isCoplanar, distancePoints, boundingBox3d
 %   anglePoints3d, angleSort3d, sphericalAngle
 %   sph2cart2, cart2sph2, cart2cyl, cyl2cart
@@ -15,6 +15,6 @@ function points3d(varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2008-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas

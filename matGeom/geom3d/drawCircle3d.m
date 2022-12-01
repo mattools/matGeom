@@ -45,15 +45,15 @@ function varargout = drawCircle3d(varargin)
 %     drawCircle3d([circ1 ; circ2 ; circ3]);
 %     axis equal;
 %
-%   See also:
+%   See also 
 %     circles3d, drawCircleArc3d, drawEllipse3d, drawSphere
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2005-02-17
-% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2005-2022 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 %   Possible calls for the function, with number of arguments :
 %   drawCircle3d([XC YC ZC R THETA PHI])            1

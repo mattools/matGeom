@@ -17,14 +17,14 @@ function trans = composeTransforms3d(varargin)
 %   PTS3 = transformPoint3d(transformPoint3d(transformPoint3d(PTS, ...
 %       ROT1), ROT2), ROT3);
 %
-%   See also:
+%   See also 
 %   transforms3d, transformPoint3d
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2006-09-29
-% Copyright 2006 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2006-2022 INRA - TPV URPOI - BIA IMASTE
 
 trans = varargin{nargin};
 for i=length(varargin)-1:-1:1

@@ -27,15 +27,15 @@ function varargout = drawPolyline3d(varargin)
 %     zt = zeros(1,100);
 %     figure; drawPolyline3d(xt, yt, zt, 'b');
 % 
-%   See Also:
+%   See also 
 %   polygons3d, drawPolygon3d, fillPolygon3d
 %
 
 % ------
 % Author : David Legland 
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2005-02-15
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 %% Process input arguments
 

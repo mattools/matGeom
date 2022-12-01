@@ -18,14 +18,14 @@ function circle = intersectPlaneSphere(plane, sphere)
 %   kept for compatibility with other functions). All angles are given in
 %   degrees.
 %   
-%   See Also:
+%   See also 
 %   planes3d, spheres, circles3d, intersectLinePlane, intersectLineSphere
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-18
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % number of inputs of each type
 Ns = size(sphere, 1);

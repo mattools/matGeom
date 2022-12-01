@@ -8,14 +8,14 @@ function d = distancePointPlane(point, plane)
 %   PLANE : [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2]
 %   D     : scalar  
 %   
-%   See also:
+%   See also 
 %   planes3d, points3d, intersectLinePlane
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-18
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % normalized plane normal
 n = normalizeVector3d(cross(plane(:,4:6), plane(:, 7:9), 2));

@@ -31,24 +31,16 @@ function varargout = transformPoint3d(pts, transfo, varargin)
 %   (It is recommended to use the function 'transformMesh', within the
 %   "meshes3d" module). 
 %
-%   See also:
+%   See also 
 %     points3d, transforms3d, transformMesh, createTranslation3d
 %     createRotationOx, createRotationOy, createRotationOz, createScaling
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-10
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
-
-%   23/03/2006 add support for non vector point data
-%   26/10/2006 better support for large data handling: iterate on points
-%       in the case of a memory lack.
-%   20/04/2007 add link to rotationXX functions
-%   29/09/2010 fix bug in catch case
-%   12/03/2011 slightly reduce memory usage
-
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 %% Parse input arguments
 

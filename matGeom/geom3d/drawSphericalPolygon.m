@@ -10,15 +10,15 @@ function varargout = drawSphericalPolygon(varargin)
 %     figure; hold on; axis equal; drawSphere([0 0 0 1]); view(3);
 %     drawSphericalPolygon(sphere, poly, 'LineWidth', 2, 'color', 'b')
 %
-%   See also
+%   See also 
 %     drawSphere, drawSphericalTriangle, drawSphericalEdge
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2012-02-09, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform
+% Copyright 2012-2022 INRA - Cepia Software Platform
 
 % Check if axes handle is specified
 if isAxisHandle(varargin{1})

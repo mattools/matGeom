@@ -14,15 +14,15 @@ function [dist, t] = distancePointEdge3d(point, edge)
 %   Also returns the position of closest point on the edge. POS is
 %   comprised between 0 (first point) and 1 (last point).
 %
-%   See also:
+%   See also 
 %   edges3d, points3d, distancePoints3d, distancePointLine3d
 %   
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-04-07
-% Copyright 2004 INRA - CEPIA URPOI - MIA MathCell
+% Copyright 2004-2022 INRA - CEPIA URPOI - MIA MathCell
 
 % direction vector of each edge
 vl = edge(:, 4:6) - edge(:, 1:3);

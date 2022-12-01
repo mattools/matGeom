@@ -29,14 +29,14 @@ function line = createLine3d(varargin)
 %   Note : in all cases, parameters can be vertical arrays of the same
 %   dimension. The result is then an array of lines, of dimensions [N*6].
 %
-%   See also:
+%   See also 
 %   lines3d
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-17
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 %   NOTE : A 3d line can also be represented with a 1*7 array : 
 %   [x0 y0 z0 dx dy dz t].

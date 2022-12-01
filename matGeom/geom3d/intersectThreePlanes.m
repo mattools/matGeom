@@ -9,14 +9,14 @@ function point = intersectThreePlanes(plane1, plane2, plane3)
 %   Rank of the augmented matrix r2 = 3 return point
 %   Otherwise returns point with NaN values.
 %
-%   See also:
+%   See also 
 %   planes3d, intersectPlanes, intersectLinePlane
 
 % ------
 % Author: Roozbeh Geraili Mikola
-% e-mail: roozbehg@berkeley.edu or roozbehg@live.com
+% E-mail: roozbehg@berkeley.edu or roozbehg@live.com
 % Created: 2017-09-20
-% Copyright 2017
+% Copyright 2017-2022
 
 % plane normal
 n1 = normalizeVector3d(cross(plane1(:,4:6), plane1(:, 7:9), 2));

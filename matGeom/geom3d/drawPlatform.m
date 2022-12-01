@@ -23,14 +23,14 @@ function  varargout = drawPlatform(plane, siz, varargin)
 %     drawPlatform(plane, [7,3])
 %     set(gcf, 'renderer', 'zbuffer');
 %
-%   See also
+%   See also 
 %   planes3d, createPlane, patch
 
 % ------
 % Author: oqilipo
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2018-08-09
-% Copyright 2018
+% Copyright 2018-2022
 
 %% Parse inputs
 

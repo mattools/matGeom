@@ -9,14 +9,14 @@ function n = vectorNorm3d(v)
 %
 %   NOTE: Computes only the Euclidean norm.
 %
-%   See also:
+%   See also 
 %     vectors3d, normalizeVector3d, vectorAngle3d, hypot3
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-21
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 n = sqrt(sum(v.*v, ndims(v)));

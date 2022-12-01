@@ -10,14 +10,17 @@ function alpha = anglePoints3d(varargin)
 %   ALPHA = anglePoints3d(PTS)
 %   PTS is a 3x3 or 2x3 array containing coordinate of points.
 %
-%   See also
+%   Example
+%       rad2deg(anglePoints3d([0 0 1],[1 1 0]))
+%
+%   See also 
 %   points3d, angles3d
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-21
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 p2 = [0 0 0];
 if length(varargin) == 1

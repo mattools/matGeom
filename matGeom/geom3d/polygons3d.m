@@ -6,7 +6,7 @@ function polygons3d(varargin)
 %   Several functions are provided for computing basic geometrical
 %   parameters (centroid, angles), or intersections with lines or planes.
 %
-%   See also:
+%   See also 
 %   polygonArea3d, triangleArea3d, polygonCentroid3d, polygon3dNormalAngle 
 %   intersectLinePolygon3d, intersectLineTriangle3d, intersectRayPolygon3d
 %   clipConvexPolygon3dHP
@@ -14,6 +14,6 @@ function polygons3d(varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2008-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas

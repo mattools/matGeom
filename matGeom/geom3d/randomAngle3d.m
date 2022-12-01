@@ -23,14 +23,14 @@ function varargout = randomAngle3d(varargin)
 %     drawPoint3d(pts, '.');
 %     axis equal;
 %
-%   See also:
+%   See also 
 %   angles3d, sph2cart2, cart2sph2
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2005-02-18
-% Copyright 2005 INRA - Cepia Software platform
+% Copyright 2005-2022 INRA - Cepia Software platform
 
 N = 1;
 if ~isempty(varargin)

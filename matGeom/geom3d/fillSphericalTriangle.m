@@ -4,14 +4,14 @@ function varargout = fillSphericalTriangle(sphere, p1, p2, p3, varargin)
 %   fillSphericalTriangle(SPHERE, PT1, PT2, PT3);
 %
 %
-%   See also
+%   See also 
 %   fillSphericalPolygon, drawSphericalTriangle, drawSphere
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-22
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % extract data of the sphere
 ori = sphere(:, 1:3);
