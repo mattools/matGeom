@@ -17,14 +17,14 @@ function [vertices, facets] = triangulateCurvePair(curve1, curve2)
 %     figure; drawMesh(v, f, 'linestyle', 'none');
 %     view(3); axis equal
 %
-%   See also
+%   See also 
 %     meshes3D, triangulatePolygonPair, meshSurfaceArea
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2017-05-18, using Matlab 9.1.0.441655 (R2016b)
-% Copyright 2017 INRA - Cepia Software Platform
+% Copyright 2017-2022 INRA - Cepia Software Platform
 
 %% Memory allocation
 

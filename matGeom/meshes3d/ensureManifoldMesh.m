@@ -13,14 +13,14 @@ function varargout = ensureManifoldMesh(varargin)
 %   Example
 %   ensureManifoldMesh
 %
-%   See also
+%   See also 
 %    meshes3d, isManifoldMesh
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2019-02-01, using Matlab 9.5.0.944444 (R2018b)
-% Copyright 2019 INRA - Cepia Software Platform
+% Copyright 2019-2022 INRA - Cepia Software Platform
 
 %% Parse input arguments
 

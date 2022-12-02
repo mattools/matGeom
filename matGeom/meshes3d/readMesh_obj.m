@@ -15,13 +15,13 @@ function mesh = readMesh_obj(fileName)
 %   (https://www.mathworks.com/matlabcentral/fileexchange/18957-readobj),
 %   MATLAB Central File Exchange. Retrieved September 8, 2022.  
 %
-%   See also
+%   See also 
 %     meshes3d, readMesh, readMesh_off, drawMesh
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2022-09-08, using Matlab 9.9.0.1570001 (R2020b) Update 4
 % Copyright 2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 

@@ -20,7 +20,7 @@ function silhouette = meshSilhouette(v, f, varargin)
 %     f = [1, 2, 4; 1, 5, 4; 1, 2, 5; 2, 3, 5; 2, 4, 3; 3, 4, 5];
 %     sil = meshSilhouette(v, f, rand(1,9),'visu',1);
 %   
-%   See also:
+%   See also 
 %     projPointOnPlane
 %
 %   Source:
@@ -28,9 +28,9 @@ function silhouette = meshSilhouette(v, f, varargin)
 
 % ------
 % Authors: oqilipo
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2020-07-29
-% Copyright 2020
+% Copyright 2020-2022
 
 narginchk(1,5)
 nargoutchk(0,1)

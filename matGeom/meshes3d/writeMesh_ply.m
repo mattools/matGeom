@@ -15,14 +15,14 @@ function writeMesh_ply(fileName, vertices, faces, varargin)
 %   mesh2 = readMesh(fileName);
 %   drawMesh(mesh2); axis equal
 %
-%   See also
+%   See also 
 %   meshes3d, writeMesh, readMesh_ply, writeMesh_off, writeMesh_stl
 
 % ------
 % Author: David Legland, oqilipo
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2018-04-26, using Matlab 9.4.0.813654 (R2018a)
-% Copyright 2018 INRA - Cepia Software Platform
+% Copyright 2018-2022 INRA - Cepia Software Platform
 
 %% Check inputs
 

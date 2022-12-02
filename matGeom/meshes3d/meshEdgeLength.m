@@ -6,14 +6,14 @@ function lengths = meshEdgeLength(varargin)
 %   Example
 %   meshEdgeLength
 %
-%   See also
+%   See also 
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2010-10-04, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform
+% Copyright 2010-2022 INRA - Cepia Software Platform
 
 % parse input arguments
 [vertices, edges, faces] = parseMeshData(varargin{:});

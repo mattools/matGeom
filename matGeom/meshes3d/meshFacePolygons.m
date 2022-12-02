@@ -12,14 +12,14 @@ function polys = meshFacePolygons(varargin)
 %     ans =
 %         18.9282
 %
-%   See also
+%   See also 
 %     meshes3d, meshFace, polygonArea3d
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2013-08-20, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2013 INRA - Cepia Software Platform
+% Copyright 2013-2022 INRA - Cepia Software Platform
 
 % extract vertices and faces
 [v, f] = parseMeshData(varargin{:});

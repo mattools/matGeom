@@ -12,14 +12,14 @@ function f = smoothMeshFunction(vertices, faces, f, varargin) %#ok<INUSL>
 %   Example
 %   smoothMeshFunction
 %
-%   See also
+%   See also 
 %     meshes3d, meshCurvatures
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2021-09-22, using Matlab 9.10.0.1684407 (R2021a) Update 3
-% Copyright 2021 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2021-2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % determines number of iterations
 nIters = 3;

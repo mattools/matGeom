@@ -28,15 +28,15 @@ function varargout = clipMeshVertices(v, f, b, varargin)
 %     drawBox3d(box)
 %     drawMesh(v2, f2, 'faceAlpha', .7);
 %
-%   See also
+%   See also 
 %   meshes3d, clipPoints3d
 %
 
 % ------
 % Author: David Legland, oqilipo
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2011-04-07, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform
+% Copyright 2011-2022 INRA - Cepia Software Platform
 
 % if input is given as a structure, parse fields
 if isstruct(v)

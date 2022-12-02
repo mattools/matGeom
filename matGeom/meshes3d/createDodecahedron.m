@@ -22,16 +22,16 @@ function varargout = createDodecahedron()
 %   http://local.wasp.uwa.edu.au/~pbourke/geometry/platonic/
 %   faces are re-oriented to have normals pointing outwards.
 %
-%   See also
+%   See also 
 %   meshes3d, drawMesh
 %   createCube, createOctahedron, createIcosahedron, createTetrahedron
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2010-07-29
-% Copyright 2010 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2010-2022 INRA - TPV URPOI - BIA IMASTE
 
 % golden ratio
 phi = (1+sqrt(5))/2;

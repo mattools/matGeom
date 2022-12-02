@@ -9,15 +9,15 @@ function varargout = createMengerSponge()
 %   [n, e, f] = createMengerSponge;
 %   drawMesh(n, f);
 %   
-%   See also
+%   See also 
 %   meshes3d, drawMesh
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2007-10-18
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2007-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 nodes =[...
     ... % main cube corners (1->8)

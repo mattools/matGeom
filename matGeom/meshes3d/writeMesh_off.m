@@ -6,14 +6,14 @@ function writeMesh_off(fileName, vertices, faces)
 %   Example
 %   writeMesh_off
 %
-%   See also
+%   See also 
 %      meshes3d, writeMesh, readMesh_off, writeMesh_ply
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2018-04-26, using Matlab 9.4.0.813654 (R2018a)
-% Copyright 2018 INRA - Cepia Software Platform
+% Copyright 2018-2022 INRA - Cepia Software Platform
 
 if ~ischar(fileName)
     error('First argument must contain the name of the file');

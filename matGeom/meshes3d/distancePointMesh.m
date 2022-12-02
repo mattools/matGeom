@@ -33,7 +33,7 @@ function [dist, proj] = distancePointMesh(points, vertices, faces, varargin)
 %     drawPoint3d(PROJ, 'm*');
 %     drawEdge3d([P PROJ], 'linewidth', 2, 'color', 'b');
 %
-%   See also
+%   See also 
 %     distancePointTriangle3d
 %
 %   References
@@ -50,7 +50,7 @@ function [dist, proj] = distancePointMesh(points, vertices, faces, varargin)
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % Created: 2018-03-08, using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2018 INRA - Cepia Software Platform
+% Copyright 2018-2022 INRA - Cepia Software Platform
 
 
 %% Parses input arguments
@@ -156,8 +156,6 @@ function [dist, proj] = distancePointTrimesh_vectorized(point, vertices, faces)
 %
 %   Example
 %   distancePointTrimesh
-%
-%   See also
 %
 
 % ------

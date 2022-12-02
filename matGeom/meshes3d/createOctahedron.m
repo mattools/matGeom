@@ -29,7 +29,7 @@ function varargout = createOctahedron()
 %     [v, e, f] = createOctahedron;
 %     drawMesh(v, f);
 %
-%   See also
+%   See also 
 %   meshes3d, drawMesh
 %   createCube, createIcosahedron, createDodecahedron, createTetrahedron
 %   createCubeOctahedron
@@ -37,9 +37,9 @@ function varargout = createOctahedron()
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2005-02-10
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 nodes = [1 0 0;0 1 0;-1 0 0;0 -1 0;0 0 1;0 0 -1];
 

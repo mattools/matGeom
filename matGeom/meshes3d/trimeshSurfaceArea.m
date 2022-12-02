@@ -22,14 +22,14 @@ function area = trimeshSurfaceArea(v, e, f)
 %     ans =
 %         6
 %
-%   See also
+%   See also 
 %   meshes3d, meshSurfaceArea, trimeshMeanBreadth, triangulateFaces
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2011-08-26, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform
+% Copyright 2011-2022 INRA - Cepia Software Platform
 
 % check input number
 if nargin == 2

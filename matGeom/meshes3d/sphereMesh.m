@@ -18,15 +18,15 @@ function varargout = sphereMesh(sphere, varargin)
 %     drawMesh(v, f);
 %     view(3); axis equal; light; lighting gouraud;
 %
-%   See also
+%   See also 
 %     meshes3d, drawSphere, ellipsoidMesh, cylinderMesh, surfToMesh
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2012-10-25, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform
+% Copyright 2012-2022 INRA - Cepia Software Platform
 
 if nargin == 0
     sphere = [0 0 0 1];

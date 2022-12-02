@@ -37,14 +37,14 @@ function varargout = cylinderMesh(cyl, varargin)
 %       view(3); axis equal
 %       set(gcf, 'renderer', 'opengl')
 %  
-%   See also
+%   See also 
 %     drawCylinder, torusMesh, sphereMesh
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2012-10-25, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform
+% Copyright 2012-2022 INRA - Cepia Software Platform
 
 parser = inputParser;
 addRequired(parser, 'cyl', @(x) validateattributes(x, {'numeric'},...

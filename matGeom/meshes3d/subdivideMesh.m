@@ -11,15 +11,15 @@ function [vertices2, faces2] = subdivideMesh(vertices, faces, n)
 %     [v2, f2] = subdivideMesh(v, f, 4);
 %     figure; drawMesh(v2, f2); view(3)
 %
-%   See also
+%   See also 
 %     meshes3d, drawMesh
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2013-08-22, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2013 INRA - Cepia Software Platform
+% Copyright 2013-2022 INRA - Cepia Software Platform
 
 %% Initialisations
 

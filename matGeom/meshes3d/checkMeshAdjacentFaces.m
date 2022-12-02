@@ -17,15 +17,15 @@ function checkMeshAdjacentFaces(vertices, edges, faces)
 %   checkMeshAdjacentFaces(v, e, f);
 %      Warning: Faces 1 and 2 run through the edge 3 (2-3) in the same direction
 %
-%   See also
+%   See also 
 %     meshes3d, trimeshMeanBreadth
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2010-10-06, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform
+% Copyright 2010-2022 INRA - Cepia Software Platform
 
 % the message pattern that is displayed when an inconsistency is encountered
 pattern = 'Faces %d and %d run through the edge %d (%d-%d) in the same direction';

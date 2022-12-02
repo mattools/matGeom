@@ -15,15 +15,15 @@ function [normals, faceNormals] = meshVertexNormals(varargin)
 %     normals = meshVertexNormals(v, f);
 %     drawVector3d(v, normals*2);
 %
-%   See also
+%   See also 
 %     meshes3d, meshFaceNormals, triangulateFaces
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2011-12-19, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform
+% Copyright 2011-2022 INRA - Cepia Software Platform
 
 [vertices, faces] = parseMeshData(varargin{:});
 
