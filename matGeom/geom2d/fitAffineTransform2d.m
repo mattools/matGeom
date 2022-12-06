@@ -27,16 +27,16 @@ function trans = fitAffineTransform2d(ref, src)
 %     drawPoint(poly2t, 'mo')
 %     legend('Reference', 'Initial', 'Transformed');
 %
-%   See also
+%   See also 
 %     transforms2d, transformPoint, transformVector,
 %     fitPolynomialTransform2d, registerICP, fitAffineTransform3d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2009-07-31, using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRAE - Cepia Software Platform
+% Copyright 2009-2022 INRAE - Cepia Software Platform
 
 % check number of points are equal
 N = size(src, 1);

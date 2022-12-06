@@ -28,7 +28,7 @@ function points = intersectLineCircle(line, circle)
 %     drawPoint(pts, 'rx');
 %     axis equal;
 %
-%   See also
+%   See also 
 %   lines2d, circles2d, intersectLines, intersectCircles
 %
 %   References
@@ -38,9 +38,9 @@ function points = intersectLineCircle(line, circle)
 
 % ------
 % Authors: David Legland, JuanPi Carbajal
-% e-mail: david.legland@inrae.fr, ajuanpi+dev@gmail.com
+% E-mail: david.legland@inrae.fr, ajuanpi+dev@gmail.com
 % Created: 2011-01-14, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform
+% Copyright 2011-2022 INRA - Cepia Software Platform
 
   		  
 % check size of inputs

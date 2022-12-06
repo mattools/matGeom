@@ -19,14 +19,14 @@ function proj = projPointOnEllipse(point, elli)
 %     drawEdge([pt proj], 'b');
 %     drawPoint(proj, 'k*');
 %
-%   See also
+%   See also 
 %     ellipses2d, distancePointEllipse, projPointOnLine, ellipsePoint
 %     drawEllipse
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2022-07-17, using Matlab 9.12.0.1884302 (R2022a)
 % Copyright 2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 

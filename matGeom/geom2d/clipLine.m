@@ -22,16 +22,16 @@ function edge = clipLine(line, box, varargin)
 %   res = 
 %       0 40 100 40
 %
-%   See also:
+%   See also 
 %   lines2d, boxes2d, edges2d
 %   clipEdge, clipRay, clipLine3d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2007-08-27, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - Cepia Software Platform
+% Copyright 2007-2022 INRA - Cepia Software Platform
 
 % adjust size of two input arguments
 nLines = size(line, 1);

@@ -19,15 +19,15 @@ function varargout = drawLine(varargin)
 %     drawLine([30 40 20 -10], 'Color', 'm', 'LineWidth', 2);
 %     drawLine([-30 140 10 20]);
 %
-%   See also:
+%   See also 
 %     lines2d, createLine, drawEdge, clipLine
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-10-31
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 % extract handle of axis to draw on
 if isAxisHandle(varargin{1})

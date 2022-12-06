@@ -26,15 +26,15 @@ function alpha = vectorAngle(v1, varargin)
 %   ans =
 %       270
 %        
-%   See also:
+%   See also 
 %     vectors2d, angles2d, normalizeAngle
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2007-10-18
-% Copyright 2007 INRA - Cepia Software Platform
+% Copyright 2007-2022 INRA - Cepia Software Platform
 
 %% Initializations
 

@@ -28,15 +28,15 @@ function varargout = drawCircleArc(varargin)
 %     hold on
 %     drawCircleArc(arc, 'LineWidth', 3, 'Color', 'r')
 %
-%   See also:
+%   See also 
 %     circles2d, drawCircle, drawEllipse, circleArcToPolyline
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-12-12
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 if nargin == 0
     error('Need to specify circle arc');

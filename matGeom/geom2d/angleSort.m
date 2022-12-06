@@ -19,15 +19,15 @@ function varargout = angleSort(pts, varargin)
 %   [PTS2, I, ANGLES] = angleSort(...);
 %   Also returns the ANGLES in corresponding order to PTS2.
 %
-%   See Also:
+%   See also 
 %   points2d, angles2d, angle2points, normalizeAngle
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2005-11-24
-% Copyright 2005 INRA - Cepia Software Platform
+% Copyright 2005-2022 INRA - Cepia Software Platform
 
 % default values
 pt0 = [0 0];

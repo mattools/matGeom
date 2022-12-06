@@ -15,15 +15,15 @@ function varargout = circleArcToPolyline(arc, N)
 %   Return the result in two separate arrays with N lines and 1 column.
 %
 %
-%   See also:
+%   See also 
 %   circles2d, circleToPolygon, drawCircle, drawPolygon
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2006-05-22
-% Copyright 2006 INRA - Cepia Software Platform
+% Copyright 2006-2022 INRA - Cepia Software Platform
 
 % default value for N
 if nargin < 2

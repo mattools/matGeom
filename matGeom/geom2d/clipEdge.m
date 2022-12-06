@@ -12,15 +12,15 @@ function edge2 = clipEdge(edge, box)
 %   if EDGE is a N-by-4 array, return an N-by-4 array, corresponding to
 %   each clipped edge.
 %
-%   See also
+%   See also 
 %   edges2d, boxes2d, clipLine
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2005-05-14
-% Copyright 2005 INRA - Cepia Software Platform
+% Copyright 2005-2022 INRA - Cepia Software Platform
 
 % process data input
 if size(box, 1) == 2

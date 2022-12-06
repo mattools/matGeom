@@ -11,14 +11,14 @@ function ray = bisector(varargin)
 %   point ans [dx dy] being the direction vector, normalized to have unit
 %   norm.
 %   
-%   See also:
+%   See also 
 %   lines2d, rays2d
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2003-10-31
-% Copyright 2003 INRA - Cepia Software Platform
+% Copyright 2003-2022 INRA - Cepia Software Platform
 
 if length(varargin)==2
     % two lines

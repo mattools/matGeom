@@ -15,15 +15,15 @@ function rays2d(varargin)
 %   However, as rays and lines have the same representation, some functions
 %   working on lines are also working on rays (like 'transformLine').
 %
-%   See also:
+%   See also 
 %   points2d, vectors2d, lines2d
 %   createRay, bisector, isPointOnRay
 %   clipRay, drawRay
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2008-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 help('rays2d');

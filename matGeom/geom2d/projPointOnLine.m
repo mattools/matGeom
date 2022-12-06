@@ -16,15 +16,15 @@ function point = projPointOnLine(point, line)
 %     ans = 
 %          2   3
 %
-%   See also:
+%   See also 
 %     lines2d, points2d, isPointOnLine, linePosition, projPointOnEllipse
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-07-04
-% Copyright 2005 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2005-2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % parse input arguments
 p = inputParser;

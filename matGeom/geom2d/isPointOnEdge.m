@@ -64,15 +64,15 @@ function b = isPointOnEdge(point, edge, varargin)
 %        0     0     0     0
 %
 %
-%   See also
+%   See also 
 %   edges2d, points2d, isPointOnLine
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-10-31
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 % extract computation tolerance
 tol = 1e-14;

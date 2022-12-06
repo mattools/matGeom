@@ -2,13 +2,20 @@ function checkHeader
 %CHECKHEADER checks the header of the m-files of matGeom.
 %
 %   checkHeader()
-%   At the moment only the beginning of the first header line and the 
-%   author section is checked and corrected. Additional checks could be 
-%   added.
+%   Checks and corrects:
+%   - the beginning of the first header line 
+%   - the "author" section is checked and corrected
+%   - the "see also" section
+%   Looks for:
+%   - to-dos
+%   Removes:
+%   - the "history" section
+%   Additional checks could be added.
 %   
 %   Todo
-%       Standardize e-mail adress to "david.legland@inrae.fr"
-%       Capitalize "e-mail" to "E-mail"
+%       - Standardize E-mail adress to "david.legland@inrae.fr"?
+%       - Add additional checks for the "See also" section: No
+%       self-reference, references, indentations of the references.
 %
 %   See also 
 %       codingConventions
@@ -16,7 +23,7 @@ function checkHeader
 
 % ------
 % Author: oqilipo
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2022-11-08, using MATLAB 9.13.0.2080170 (R2022b) Update 1
 % Copyright 2022
 
@@ -38,7 +45,8 @@ for f=1:length(mFiles)
 
     % Assume that the header is invalid
     mFiles(f).validHeader = false;
-
+    
+    %% First header line
     % If the 1st or 2nd line of the file is empty the header is not valid
     if isempty(S{1}) || isempty(S{2})
         continue
@@ -90,13 +98,13 @@ for f=1:length(mFiles)
         S(aSec1Idx+1) = regexprep(S(aSec1Idx+1),'% +','% ');
     end
 
-    % "e-mail" line
+    % "E-mail" line
     if ~contains(S(aSec1Idx+2),'mail','IgnoreCase',1)
         if contains(S(aSec1Idx+2),'created','IgnoreCase',1)
             if contains(S(aSec1Idx+1),'David Legland')
-                S = [S(1:aSec1Idx+1); "% e-mail: david.legland@inrae.fr"; S(aSec1Idx+2:end)];
+                S = [S(1:aSec1Idx+1); "% E-mail: david.legland@inrae.fr"; S(aSec1Idx+2:end)];
             else
-                S = [S(1:aSec1Idx+1); "% e-mail: N/A"; S(aSec1Idx+2:end)];
+                S = [S(1:aSec1Idx+1); "% E-mail: N/A"; S(aSec1Idx+2:end)];
             end
         elseif contains(S(aSec1Idx+3),'created','IgnoreCase',1)
             coIdx = regexp(S(aSec1Idx+2), 'INRA');
@@ -113,15 +121,17 @@ for f=1:length(mFiles)
                     continue
                 end
                 if contains(S(aSec1Idx+1),'David Legland')
-                    S(aSec1Idx+2) = "% e-mail: david.legland@inrae.fr";
+                    S(aSec1Idx+2) = "% E-mail: david.legland@inrae.fr";
                 else
-                    S(aSec1Idx+2) = "% e-mail: N/A";
+                    S(aSec1Idx+2) = "% E-mail: N/A";
                 end
             else
                 continue
             end
         end
     end
+    % Change e-mail to E-Mail
+    S(aSec1Idx+2) = regexprep(S(aSec1Idx+2), '% e-mail:', '% E-mail:');
     
     % Move affiliation to the copyright line if necesarry
     if contains(S(aSec1Idx+3),'INRA') && contains(S(aSec1Idx+4),'created','IgnoreCase',1)
@@ -192,15 +202,44 @@ for f=1:length(mFiles)
     % "Copyright" line
     % Extract the year of creation for the copyright
     creationYear = regexp(S(aSec1Idx+3), '20\d\d','match');
-    if isempty(S{aSec1Idx+4}) && ~isempty(creationYear)
+    if ~isempty(creationYear)
+        creationYear = creationYear(1);
+    else
+        continue
+    end
+    if isempty(S{aSec1Idx+4})
         S = [S(1:aSec1Idx+3); "% Copyright " + creationYear; S(aSec1Idx+4:end)];
     elseif regexp(S(aSec1Idx+4), '^% *$') == 1
         S(aSec1Idx+4) = "% Copyright " + creationYear;
     end
+
+    % Add current year to the copyright or change it to the current year
+    copyrightSYear = regexp(S(aSec1Idx+4), '20\d\d','match');
+    copyrightSYear = copyrightSYear{1};
+    % Created year and copyright year should be the same
+    if ~isequal(copyrightSYear,creationYear{1})
+        display(['Creation and copyright year are inconsistent in: ' mFileName])
+        continue
+    end
+    currentYear = char(datetime('today','Format','yyyy'));
+    if regexp(S(aSec1Idx+4), '% Copyright 20\d\d( |$)') == 1
+        if ~isequal(copyrightSYear, currentYear)
+            S(aSec1Idx+4) = regexprep(S(aSec1Idx+4), '% Copyright 20\d\d', ...
+                ['% Copyright ' copyrightSYear '-' currentYear]);
+        end
+    elseif regexp(S(aSec1Idx+4), '% Copyright 20\d\d-20\d\d( |$)') == 1
+        copyrightEYear = S{aSec1Idx+4}(18:21);
+        if ~isequal(copyrightEYear, currentYear)
+            S(aSec1Idx+4) = regexprep(S(aSec1Idx+4), '% Copyright 20\d\d-20\d\d', ...
+                ['% Copyright ' copyrightSYear '-' currentYear]);
+        end
+    else 
+        continue
+    end
     
     % General checks
     containsHeaderWords = arrayfun(@(x,y) contains(x,y), ...
-        S(aSec1Idx:aSec1Idx+4), ["% ------"; "Author"; "e-mail"; "Created"; "Copyright"]);
+        S(aSec1Idx:aSec1Idx+4), ["% ------"; "Author"; "E-mail"; "Created"; "Copyright"]);
     if ~all(containsHeaderWords)
         continue
     end
@@ -208,19 +247,12 @@ for f=1:length(mFiles)
         % Remove leading spaces before the header words
         S(aSec1Idx:aSec1Idx+4) = arrayfun(@(x) regexprep(x,'% +','% '), S(aSec1Idx:aSec1Idx+4));
     end
-
-    % Created year and copyright year should be the same
-    copyrightYear = regexp(S(aSec1Idx+4), '20\d\d','match');
-    if ~isequal(creationYear{1}, copyrightYear{1})
-        display(['Creation and copyright year are inconsistent in: ' mFileName])
-        continue
-    end
     
     aSecLIs = [...
         startsWith(S(aSec1Idx-2), '%') ...
         isempty(S{aSec1Idx-1}) ...
         startsWith(S(aSec1Idx+1), '% Author') ...
-        startsWith(S(aSec1Idx+2), '% e-mail: ') ...
+        startsWith(S(aSec1Idx+2), '% E-mail: ') ...
         startsWith(S(aSec1Idx+3), '% Created: ')...
         startsWith(S(aSec1Idx+4), '% Copyright ')...
         isempty(S{aSec1Idx+5}) ...
@@ -267,7 +299,14 @@ for f=1:length(mFiles)
     end
 
     %% SEE ALSO section
-
+    if ~isempty(cell2mat(regexp(lower(S), '^% *see also')))
+        saSIdx = find(contains(lower(S),'see also'));
+        if length(saSIdx) ~=1
+            display(['Multiple ''See also'' lines found in: ' mFileName])
+            continue
+        end
+        S(saSIdx) = regexprep(S(saSIdx), '^% *[sS]ee [aA]lso *:* *', '%   See also ');
+    end
 
     %% HISTORY section
     if ~isempty(cell2mat(regexp(lower(S), '^% *history')))
@@ -281,6 +320,10 @@ for f=1:length(mFiles)
             histLines = histLines+1;
         end
         S(histSIdx:histSIdx+histLines-1) = [];
+    end
+    if ~isempty(cell2mat(regexp(S([1:aSec1Idx,aSec1Idx+5:end]), '^%.*20\d\d.')))
+        display(['Suspicous date found in: ' mFileName])
+        continue
     end
 
     %% TODO section

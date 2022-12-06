@@ -34,15 +34,15 @@ function varargout = drawCircle(varargin)
 %     drawCircle([15 15 40], 'color', 'r', 'linewidth', 2);
 %     axis equal;
 %
-%   See also
+%   See also 
 %   circles2d, drawCircleArc, drawEllipse, circleToPolygon
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-10-31
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 % extract handle of axis to draw on
 if isAxisHandle(varargin{1})

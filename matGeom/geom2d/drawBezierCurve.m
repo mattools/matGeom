@@ -22,15 +22,15 @@ function varargout = drawBezierCurve(varargin)
 %     drawBezierCurve([0 0;5 10;10 5;10 0]);
 %     drawBezierCurve([0 0;5 10;10 5;10 0], 'linewidth', 2, 'color', 'g');
 %
-%   See also
+%   See also 
 %     drawPolyline, cubicBezierToPolyline
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2011-03-16, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform
+% Copyright 2011-2022 INRA - Cepia Software Platform
 
 % extract handle of axis to draw on
 if isAxisHandle(varargin{1})

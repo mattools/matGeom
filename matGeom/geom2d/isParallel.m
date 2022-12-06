@@ -25,15 +25,15 @@ function b = isParallel(v1, v2, varargin)
 %   ans =
 %       0
 %
-%   See also
+%   See also 
 %   vectors2d, isPerpendicular, lines2d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2006-04-25
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2006-2022 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % default accuracy
 acc = 1e-14;

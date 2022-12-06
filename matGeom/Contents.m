@@ -1,5 +1,5 @@
 %CONTENTS MATGEOM Geometric Computing Toolbox.
-% Version 1.0 26-07-2017 .
+% Version 1.0 26-07-2017.
 %
 %   MatGeom Provides low-level functions for geometric computing. It is
 %   possible to create, display, compute intersections... of various

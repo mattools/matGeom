@@ -31,7 +31,7 @@ function [hd, ind1, ind2] = hausdorffDistance(pts1, pts2)
 %     drawPoint([p1h;p2h], 'mo');
 %     drawEdge([p1h p2h], 'm')
 %
-%   See also
+%   See also 
 %     points2d, minDistancePoints
 %
 %   References
@@ -40,9 +40,9 @@ function [hd, ind1, ind2] = hausdorffDistance(pts1, pts2)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2012-05-04, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRAE - Cepia Software Platform
+% Copyright 2012-2022 INRAE - Cepia Software Platform
 
 % distance from pts1 to pts2
 [dists1, ind12] = minDistancePoints(pts1, pts2);

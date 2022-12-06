@@ -5,14 +5,14 @@ function coeffs = fitPolynomialTransform2d(pts, ptsRef, degree)
 %
 %   Example
 %  
-%   See also
+%   See also 
 %     polynomialTransform2d, fitAffineTransform2d
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@nantes.inra.fr
 % Created: 2013-11-05, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2013 INRA - Cepia Software Platform
+% Copyright 2013-2022 INRA - Cepia Software Platform
 
 %% Extract data
 

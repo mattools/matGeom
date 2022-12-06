@@ -30,16 +30,16 @@ function varargout = drawEllipse(varargin)
 %     drawEllipse([50 50 40 20 -10], 'LineWidth', 2, 'Color', 'g');
 %
 %
-%   See also:
+%   See also 
 %     ellipses2d, drawCircle, drawEllipseArc, drawEllipseAxes
 %     fitEllipse, ellipseToPolygon, ellipsePoint, transformEllipse
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-12-11
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 %% Extract input arguments
 

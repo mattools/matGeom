@@ -5,14 +5,14 @@ function line = cartesianLine(varargin)
 %   Create a line verifying the Cartesian equation:
 %   A*x + B*x + C = 0;
 %
-%   See also:
+%   See also 
 %   lines2d, createLine
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2004-05-25
-% Copyright 2004 INRA - Cepia Software Platform
+% Copyright 2004-2022 INRA - Cepia Software Platform
 
 if length(varargin)==1
     var = varargin{1};

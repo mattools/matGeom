@@ -42,15 +42,15 @@ function varargout = drawEllipseArc(varargin)
 %     ray2 = createRay([10 20], deg2rad(70+45));
 %     drawRay(ray2)
 %
-%   See also:
+%   See also 
 %     ellipses2d, drawEllipse, drawEllipseAxes, drawCircleArc
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-12-12
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 %% Extract input arguments
 

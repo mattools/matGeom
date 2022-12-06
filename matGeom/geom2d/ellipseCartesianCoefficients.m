@@ -14,13 +14,13 @@ function coeffs = ellipseCartesianCoefficients(elli)
 %     elli2 =
 %        30.0000   20.0000   40.0000   20.0000   30.0000
 %
-%   See also
+%   See also 
 %     ellipses2d, createEllipse, equivalentEllipse
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2022-09-05, using Matlab 9.12.0.1884302 (R2022a)
 % Copyright 2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 

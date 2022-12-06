@@ -32,7 +32,6 @@ function varargout = minDistancePoints(p1, varargin)
 %   DIST(I) = distancePoints(PTS1(I,:), PTS2(J,:));
 %   for I comprised between 1 and the number of rows in PTS1.
 %
-%
 %   Examples:
 %   % minimal distance between random planar points
 %       points = rand(20,2)*100;
@@ -65,15 +64,15 @@ function varargout = minDistancePoints(p1, varargin)
 %     drawEdge([pts poly(inds,:)], 'k')
 %   
 %
-%   See Also
+%   See also 
 %     points2d, distancePoints, nndist, findClosestPoint, hausdorffDistance
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-06-15
-% Copyright 2004 INRAE - Cepia Software Platform
+% Copyright 2004-2022 INRAE - Cepia Software Platform
 
 %% Initialisations
 
@@ -203,8 +202,6 @@ function [r, c] = ind2sub_tril (N, idx)
 % when idx is a row or column matrix of linear indeces then r and
 % c have the same shape as idx.
 %
-% See also
-%   ind2sub
 
 endofrow = 0.5 * (1:N) .* (2*N:-1:N + 1);
 c = zeros(size(endofrow));

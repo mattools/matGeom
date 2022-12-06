@@ -28,15 +28,15 @@ function varargout = circleToPolygon(circle, varargin)
 %     poly = circleToPolygon([0 0 10 pi/4], 10);
 %     drawPolygon(poly, 'b'); drawVertices(poly);
 %
-%   See also:
+%   See also 
 %     circles2d, polygons2d, circleArcToPolyline, ellipseToPolygon
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-04-06
-% Copyright 2005 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2005-2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % check input size
 if size(circle, 1) > 1

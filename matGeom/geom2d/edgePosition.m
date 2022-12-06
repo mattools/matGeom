@@ -26,15 +26,15 @@ function pos = edgePosition(point, edge)
 %   return an array of [NP NE] position, corresponding to each couple
 %   point-edge.
 %
-%   See also:
+%   See also 
 %   edges2d, createEdge, isPointOnEdge
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@nantes.inra.fr
 % Created: 2004-05-25
-% Copyright 2004 INRA - Cepia Software Platform
+% Copyright 2004-2022 INRA - Cepia Software Platform
 
 % number of points and of edges
 nEdges = size(edge, 1);

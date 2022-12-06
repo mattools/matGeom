@@ -10,14 +10,14 @@ function dif = angleAbsDiff(angle1, angle2)
 %     A = 
 %         0.5236   % equal to pi/6
 %
-%   See also
+%   See also 
 %   angles2d, angleDiff
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2011-07-27, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform
+% Copyright 2011-2022 INRA - Cepia Software Platform
 
 % first, normalization
 angle1 = normalizeAngle(angle1);

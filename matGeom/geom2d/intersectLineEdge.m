@@ -20,15 +20,15 @@ function point = intersectLineEdge(line, edge, varargin)
 %   Specifies the tolerance option for determining if a point belongs to an
 %   edge and if lines are parallel.
 %
-%   See also:
+%   See also 
 %   lines2d, edges2d, intersectEdges, intersectLines
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-10-31
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 % extract tolerance option
 tol = 1e-14;

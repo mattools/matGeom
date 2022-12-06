@@ -26,15 +26,15 @@ function ell = inertiaEllipse(points)
 %   drawPoint(pts);
 %   drawEllipse(ell, 'linewidth', 2, 'color', 'r');
 %
-%   See also
+%   See also 
 %     equivalentEllipse
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2008-02-21, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2008-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % deprecation warning
 warning('geom2d:deprecated', ...

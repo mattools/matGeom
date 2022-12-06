@@ -34,15 +34,15 @@ function points = intersectCircles(circle1, circle2)
 %   http://local.wasp.uwa.edu.au/~pbourke/geometry/2circle/
 %   http://mathworld.wolfram.com/Circle-CircleIntersection.html
 %
-%   See also
+%   See also 
 %   circles2d, intersectLineCircle, radicalAxis
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2011-01-20, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform
+% Copyright 2011-2022 INRA - Cepia Software Platform
 
 % adapt sizes of inputs
 n1 = size(circle1, 1);

@@ -14,7 +14,7 @@ function edges2d(varargin)
 %   an edge.
 %
 %
-%   See also:
+%   See also 
 %   lines2d, rays2d, points2d, createEdge, parallelEdge, 
 %   edgeAngle, edgeLength, midPoint, edgeToLine, lineToEdge
 %   intersectEdges, intersectLineEdge, isPointOnEdge, edgeToPolyline
@@ -24,8 +24,8 @@ function edges2d(varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2008-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 help('edges2d');

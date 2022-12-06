@@ -34,14 +34,14 @@ function line = createLine(varargin)
 %   dimension. The result is then an array of lines, of dimensions [N*4].
 %
 %
-%   See also:
+%   See also 
 %   lines2d, createEdge, createRay
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-10-31
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 %   NOTE : A line can also be represented with a 1*5 array : 
 %   [x0 y0 dx dy t].

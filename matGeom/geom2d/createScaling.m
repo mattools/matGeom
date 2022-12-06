@@ -16,15 +16,15 @@ function trans = createScaling(varargin)
 %   Specifies the center of the scaling transform. The argument CENTER
 %   should be a 1-by-2 array representing coordinates of center.
 %
-%   See also:
+%   See also 
 %   transforms2d, transformPoint, createTranslation, createRotation
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-04-07
-% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
 
 % defined default arguments
 sx = 1;

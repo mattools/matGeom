@@ -23,15 +23,15 @@ function trans = createRotation(varargin)
 %     drawPolygon(poly, 'k');
 %     drawPolygon(polyT, 'b');
 %
-%   See also:
+%   See also 
 %   transforms2d, transformPoint, createRotation90, createTranslation
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-04-06
-% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
 
 % default values
 cx = 0;

@@ -20,15 +20,15 @@ function alpha = normalizeAngle(alpha, varargin)
 %   ans =
 %       -1.5708
 %
-%   See also
+%   See also 
 %   vectorAngle, lineAngle
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@nantes.inra.fr
 % Created: 2008-03-10, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2008-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 center = pi;
 if ~isempty(varargin)

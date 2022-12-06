@@ -34,14 +34,14 @@ function line = medianLine(varargin)
 %     drawLine(med)
 %
 %
-%   See also:
+%   See also 
 %   lines2d, createLine, orthogonalLine
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-10-31
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 nargs = length(varargin);
 

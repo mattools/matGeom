@@ -20,15 +20,15 @@ function varargout = ellipseToPolygon(ellipse, N)
 %     drawPolygon(poly, 'b');
 %     drawPoint(poly, 'bo');
 %
-%   See also:
+%   See also 
 %   ellipses2d, drawEllipse, circleToPolygon, rectToPolygon, ellipsePoint
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-04-06
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % default value for N
 if nargin < 2

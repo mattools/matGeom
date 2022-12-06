@@ -21,14 +21,14 @@ function circle = createCircle(varargin)
 %     drawPoint([p1 ; p2; p3]);
 %     drawCircle(circle);
 %
-%   See also:
+%   See also 
 %   circles2d, createDirectedCircle
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-10-31
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 if nargin == 2
     % inputs are the center and a point on the circle

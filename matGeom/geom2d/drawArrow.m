@@ -31,15 +31,15 @@ function varargout = drawArrow(varargin)
 %     plot(t, sin(t)); 
 %     drawArrow([2 -1 pi 0], .1, .05, .5)
 % 
-%   See also
+%   See also 
 %     drawEdge
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-11-11, from drawEdge
-% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
 
 % extract handle of axis to draw on
 if isAxisHandle(varargin{1})
