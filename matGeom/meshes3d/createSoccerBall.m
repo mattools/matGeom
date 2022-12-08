@@ -11,14 +11,14 @@ function varargout = createSoccerBall()
 %   [v, f] = createSoccerBall;
 %   drawMesh(v, f);
 %
-%   See also
+%   See also 
 %   meshes, drawMesh, bucky
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2006-08-09
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2006-2022 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % get vertices and adjacency matrix of the buckyball
 [b, n] = bucky;

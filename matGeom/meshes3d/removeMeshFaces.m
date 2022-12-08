@@ -25,14 +25,14 @@ function varargout = removeMeshFaces(v, f, fI)
 %     drawMesh(v2, f2, 'faceAlpha', .7);
 %     view(3); axis equal
 %   
-%   See also
+%   See also 
 %   meshes3d, drawMesh
 
 % ------
 % Authors: oqilipo, David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2017-07-04
-% Copyright 2017
+% Copyright 2017-2022
 
 % parse inputs
 narginchk(2,3)

@@ -19,14 +19,14 @@ function inds = meshBoundaryVertexIndices(varargin)
 %     inds = meshBoundaryVertexIndices(vc, fc);
 %     hold on; drawPoint3d(vc(inds,:), 'k*');
 %
-%   See also
+%   See also 
 %     meshes3d, meshBoundary, meshBoundaryEdgeIndices, meshEdgeFaces
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2019-05-01, using Matlab 8.6.0.267246 (R2015b)
-% Copyright 2019 INRA - Cepia Software Platform
+% Copyright 2019-2022 INRA - Cepia Software Platform
 
 [vertices, edges, faces] = parseMeshData(varargin{:});
 

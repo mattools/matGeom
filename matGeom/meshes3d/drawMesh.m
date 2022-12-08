@@ -41,15 +41,15 @@ function varargout = drawMesh(varargin)
 %     figure; hold on; axis equal; view(3);
 %     drawMesh(v, f, 'VertexColor', v(:,1), 'LineStyle', 'none');
 %
-%   See also:
+%   See also 
 %     meshes3d, polyhedra, patch
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-10
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 %% Parse input arguments
 

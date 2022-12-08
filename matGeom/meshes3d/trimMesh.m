@@ -15,14 +15,14 @@ function varargout = trimMesh(varargin)
 %     view(3); axis equal;
 %     axis([-1 1 -1 1 0 2])
 %
-%   See also
+%   See also 
 %     meshes3d, clipMeshVertices
 
 % ------
 % Author: David Legland, oqilipo
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2014-08-01, using Matlab 8.3.0.532 (R2014a)
-% Copyright 2014 INRA - Cepia Software Platform
+% Copyright 2014-2022 INRA - Cepia Software Platform
 
 % parse input data
 [vertices, faces] = parseMeshData(varargin{:});

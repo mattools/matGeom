@@ -20,17 +20,17 @@ function theta = polyhedronNormalAngle(varargin)
 %   % sum of normal angles should be equal to 4*pi :
 %   sum(theta)
 %
+%   To-do
+%       Works only for polyhedra with convex faces!!!
 %
-%   TODO works only for polyhedra with convex faces ! ! !
-%
-%   See also
+%   See also 
 %   polyhedra, polygon3dNormalAngle
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2005-11-30
-% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2005-2022 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 if length(varargin)==4
     nodes = varargin{1};

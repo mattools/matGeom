@@ -10,14 +10,14 @@ function varargout = readMesh_ply(fileName)
 %   Wrapper function for Gabriel Peyré's read_ply that is a wrapper
 %   function of Pascal Getreuer's plyread.
 %
-%   See also
-%   meshes3d, readMesh, readMesh_off, readMesh_stl
+%   See also 
+%       meshes3d, readMesh, readMesh_off, readMesh_stl
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2018-04-26, using Matlab 9.4.0.813654 (R2018a)
-% Copyright 2018 INRA - Cepia Software Platform
+% Copyright 2018-2022 INRA - Cepia Software Platform
 
 %% open file
 f = fopen(fileName, 'r');
@@ -81,7 +81,6 @@ function [Elements,varargout] = plyread(Path,Str)
 %   trisurf(Tri,Pts(:,1),Pts(:,2),Pts(:,3));
 %   colormap(gray); axis equal;
 %
-%   See also: PLYWRITE
 
 % Pascal Getreuer 2004
 

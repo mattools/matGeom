@@ -29,15 +29,15 @@ function [tri, inds] = triangulateFaces(faces)
 %     figure;
 %     patch('vertices', n, 'faces', tri, 'facecolor', 'r');
 %
-%   See also
+%   See also 
 %     meshes3d, drawMesh, mergeCoplanarFaces
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2008-09-08, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2008-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 %% Tri mesh case: return original set of faces
 

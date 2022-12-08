@@ -12,7 +12,7 @@ function mb = trimeshMeanBreadth(vertices, faces)
 %     MB = 
 %         1.5000
 %
-%   See also
+%   See also 
 %   meshes3d, trimeshSurfaceArea, trimeshEdgeFaces, polyhedronMeanBreadth
 %
 %   References
@@ -23,9 +23,9 @@ function mb = trimeshMeanBreadth(vertices, faces)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2015-08-19, using Matlab 8.5.0.197613 (R2015a)
-% Copyright 2015 INRA - Cepia Software Platform
+% Copyright 2015-2022 INRA - Cepia Software Platform
 
 %% Check input validity
 

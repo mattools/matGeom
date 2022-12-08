@@ -19,14 +19,14 @@ function vol = meshVolume(varargin)
 %     ans = 
 %         1
 %
-%   See also
+%   See also 
 %   meshes3d, meshSurfaceArea, tetrahedronVolume, meshComplement
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2012-10-01, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform
+% Copyright 2012-2022 INRA - Cepia Software Platform
 
 % parse input
 [vertices, faces] = parseMeshData(varargin{:});

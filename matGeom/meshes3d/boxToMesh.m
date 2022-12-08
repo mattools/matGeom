@@ -23,14 +23,14 @@ function varargout = boxToMesh(varargin)
 %   [v, f] = boxToMesh([-2 -1 0 pi 2 3])
 %   drawMesh(v, f);
 %   
-%   See also
+%   See also 
 %   meshes3d, drawMesh, triangulateFaces
 
 % ------
 % Authors: David Legland, oqilipo
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2016-09-22
-% Copyright 2016
+% Copyright 2016-2022
 
 p = inputParser;
 boxDefault = [0 1 0 1 0 1];

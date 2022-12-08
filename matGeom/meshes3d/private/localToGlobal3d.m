@@ -30,14 +30,14 @@ function trans = localToGlobal3d(varargin)
 %   Example
 %   localToGlobal3d
 %
-%   See also
+%   See also 
 %   transforms3d, createEulerAnglesRotation
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2009-06-19, using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRA - Cepia Software Platform
+% Copyright 2009-2022 INRA - Cepia Software Platform
 
 % extract the components of the transform
 if nargin == 1

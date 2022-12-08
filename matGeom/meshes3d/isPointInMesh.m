@@ -20,14 +20,14 @@ function res = isPointInMesh(point, v, f, varargin)
 %   point(s) and with a random orientation. Some errors are possible if
 %   rays crosses the mesh between two or three faces.
 %
-%   See also
+%   See also 
 %     meshes3d, intersectLineMesh3d
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2018-01-26, using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2018 INRA - Cepia Software Platform
+% Copyright 2018-2022 INRA - Cepia Software Platform
 
 % choose a random vector
 vect = rand(1, 3);

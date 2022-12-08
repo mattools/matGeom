@@ -6,14 +6,14 @@ function edges = meshEdges(faces, varargin)
 %   Example
 %     meshEdges
 %
-%   See also
+%   See also 
 %     meshes3d, meshEdgeFaces, meshFaceEdges
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2011-06-28, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform
+% Copyright 2011-2022 INRA - Cepia Software Platform
 
 %% Process input arguments
 

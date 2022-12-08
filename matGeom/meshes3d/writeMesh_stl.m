@@ -15,14 +15,14 @@ function writeMesh_stl(fileName, vertices, faces, varargin)
 %   References
 %   Wrapper function for MATLAB's build-in stlwrite.
 %
-%   See also
+%   See also 
 %     meshes3d, writeMesh, writeMesh_off, writeMesh_ply, readMaesh_stl
 
 % ------
 % Author: oqilipo
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2021-02-13, using Matlab 9.9.0.1538559 (R2020b)
-% Copyright 2021
+% Copyright 2021-2022
 
 %% Check inputs
 if ~ischar(fileName)

@@ -14,14 +14,14 @@ function varargout = removeMeshVertices(vertices, faces, indsToRemove)
 %     drawMesh(v2, f2);
 %     axis equal; hold on;
 %
-%   See also
+%   See also 
 %     meshes3d, trimMesh
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@nantes.inra.fr
 % Created: 2016-02-03, using Matlab 8.6.0.267246 (R2015b)
-% Copyright 2016 INRA - Cepia Software Platform
+% Copyright 2016-2022 INRA - Cepia Software Platform
 
 % parse inputs
 if nargin == 2

@@ -11,15 +11,15 @@ function varargout = transformMesh(varargin)
 %     mesh2 = transformMesh(mesh1, transfo);
 %     figure; axis equal; hold on; drawMesh(mesh2, 'faceColor', 'g'); view(3);
 %
-%   See also
+%   See also 
 %     meshes3d, transformPoint3d, drawMesh
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2019-08-08, using Matlab 9.6.0.1072779 (R2019a)
-% Copyright 2019 INRA - Cepia Software Platform
+% Copyright 2019-2022 INRA - Cepia Software Platform
 
 % parses input arguments
 [vertices, edges, faces] = parseMeshData(varargin{1:end-1});

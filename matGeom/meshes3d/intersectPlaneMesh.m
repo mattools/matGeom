@@ -41,15 +41,15 @@ function polys = intersectPlaneMesh(plane, v, f)
 %     drawPolygon3d(polySet, 'lineWidth', 2, 'color', 'k')
 %
 %
-%   See also
+%   See also 
 %     meshes3d, intersectPlanes, intersectEdgePlane
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2012-07-31, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform
+% Copyright 2012-2022 INRA - Cepia Software Platform
 
 e = [];
 if isstruct(v)

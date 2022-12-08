@@ -18,14 +18,14 @@ function face = meshFace(faces, index)
 %     ans =
 %          1     5     2
 %
-%   See also
+%   See also 
 %     meshes3d, meshFaceCentroid, meshFaceNormals, meshFaceAreas
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2010-10-06, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform
+% Copyright 2010-2022 INRA - Cepia Software Platform
 
 % process mesh given as structure
 if isstruct(faces)

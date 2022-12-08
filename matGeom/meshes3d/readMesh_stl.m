@@ -11,14 +11,14 @@ function varargout = readMesh_stl(fileName)
 %   References
 %   Wrapper function for MATLAB's build-in stlread.
 %
-%   See also
+%   See also 
 %     meshes3d, readMesh, readMesh_off, readMesh_ply, writeMesh_stl
 
 % ------
 % Author: oqilipo
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2021-02-12, using Matlab 9.9.0.1538559 (R2020b)
-% Copyright 2021
+% Copyright 2021-2022
 
 TR = stlread(fileName);
 vertices = TR.Points;

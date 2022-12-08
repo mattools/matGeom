@@ -16,15 +16,15 @@ function varargout = readMesh(fileName)
 %     figure; drawMesh(mesh);
 %     view([180 -70]); axis equal;
 %
-%   See also
+%   See also 
 %     meshes3d, writeMesh, readMesh_off, readMesh_ply, readMesh_stl
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2020-11-20, using Matlab 9.8.0.1323502 (R2020a)
-% Copyright 2020 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2020-2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 [~, ~, ext] = fileparts(fileName);
 switch lower(ext)

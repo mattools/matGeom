@@ -29,7 +29,7 @@ function meshes = splitMesh(vertices, faces, varargin)
 %         drawMesh(meshes(m), cmap(m,:))
 %     end
 %
-%   See also
+%   See also 
 %     concatenateMeshes
 %
 %   Source
@@ -38,9 +38,9 @@ function meshes = splitMesh(vertices, faces, varargin)
 
 % ------
 % Author: oqilipo
-% e-mail: N/A
+% E-mail: N/A
 % Created: 2017-09-17
-% Copyright 2017
+% Copyright 2017-2022
 
 % input parsing
 if isstruct(vertices)
@@ -116,8 +116,6 @@ function [A] = adjacency_matrix(E)
 %   T  #F by 4 tet list
 % Outputs:
 %   A  #V by #V adjacency matrix (#V = max(E(:)))
-%
-% See also: facet_adjacency_matrix
 %
 
 if size(E,2)>2

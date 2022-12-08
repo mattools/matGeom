@@ -17,14 +17,14 @@ function [b1, b2] = isManifoldMesh(varargin)
 %       logical
 %        1
 %
-%   See also
+%   See also 
 %     meshes3d, ensureManifoldMesh, trimMesh
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2019-01-31, using Matlab 9.5.0.944444 (R2018b)
-% Copyright 2019 INRA - Cepia Software Platform
+% Copyright 2019-2022 INRA - Cepia Software Platform
 
 vertices = varargin{1};
 faces = varargin{2};

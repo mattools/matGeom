@@ -13,14 +13,14 @@ function varargout = meshComplement(varargin)
 %     ans =
 %        -1.3333
 %
-%   See also
+%   See also 
 %     meshes3d, meshVolume
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2020-01-22, using Matlab 9.7.0.1247435 (R2019b) Update 2
-% Copyright 2020 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2020-2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % extract mesh data
 mesh = parseMeshData(varargin{:});

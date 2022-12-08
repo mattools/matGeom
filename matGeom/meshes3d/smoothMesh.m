@@ -22,15 +22,15 @@ function varargout = smoothMesh(varargin)
 %     figure; drawMesh(v2, f);
 %     l = light; lighting gouraud
 %
-%   See also
+%   See also 
 %     meshes3d, meshAdjacencyMatrix, triangulateFaces, drawMesh
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2013-04-29, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2013 INRA - Cepia Software Platform
+% Copyright 2013-2022 INRA - Cepia Software Platform
 
 var1 = varargin{1};
 if isstruct(var1)

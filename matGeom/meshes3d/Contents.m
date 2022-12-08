@@ -1,5 +1,5 @@
 %CONTENTS MESHES3D 3D Surface Meshes.
-% Version 1.22 06-Jun-2018 .
+% Version 1.22 06-Jun-2018.
 %
 %   Creation, visualization, and manipulation of 3D surface meshes or
 %   polyhedra.
@@ -147,9 +147,9 @@
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-11-07
-% Copyright 2005 INRAE
+% Copyright 2005-2022 INRAE
 
 help(mfilename);
 
