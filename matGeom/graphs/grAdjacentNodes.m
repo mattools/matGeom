@@ -32,7 +32,7 @@ function nodes2 = grAdjacentNodes(edges, node)
 % Created: 2004-08-16
 % Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
-[i, j] = find(ismember(edges, node)); %#ok<NASGU>
+[i, j] = find(ismember(edges, node)); %#ok<ASGLU> 
 nodes2 = edges(i,1:2);
 nodes2 = unique(nodes2(:));
 nodes2 = sort(nodes2(~ismember(nodes2, node)));
