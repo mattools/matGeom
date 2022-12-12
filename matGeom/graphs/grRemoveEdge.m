@@ -7,9 +7,9 @@ function [nodes, edges2] = grRemoveEdge(nodes, edges, edge)
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-08-13
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 dim = size(edges);
 edges2 = zeros(dim(1)-1, 2);

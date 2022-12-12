@@ -14,15 +14,15 @@ function varargout = imageBoundaryGraph(img)
 %   The resulting shell is open if the binary structure touches edges of
 %   image.
 %
-%   See also:
+%   See also 
 %     patch, drawMesh
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-06-28
-% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
 
 %% Initialisations
 

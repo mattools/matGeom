@@ -35,15 +35,15 @@ function varargout = drawGraph(varargin)
 %   [HN, HE, HF] = drawGraph(...)   
 %   Also returns handle to the set of faces.
 %   
-%   See Also
+%   See also 
 %   graphs, drawGraphEdges, fillGraphFaces, clipGraph, clipGraphPolygon
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-07-17
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 %% initialisations
 

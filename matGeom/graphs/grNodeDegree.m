@@ -28,14 +28,14 @@ function [degree, node] = grNodeDegree(node, edges)
 %     ans =
 %          2     3     3     2
 %
-%   See Also: grNodeInnerDegree, grNodeOuterDegree
+%   See also grNodeInnerDegree, grNodeOuterDegree
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2003-08-13
-% Copyright 2003 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2003-2022 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % If only edge array is given, assume we want the degree of each node
 if nargin == 1

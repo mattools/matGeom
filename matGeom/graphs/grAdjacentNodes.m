@@ -23,14 +23,14 @@ function nodes2 = grAdjacentNodes(edges, node)
 %         4
 %         5
 %
-%   See Also
+%   See also 
 %     grAdjacentEdges
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-08-16
-% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
 
 [i, j] = find(ismember(edges, node)); %#ok<ASGLU> 
 nodes2 = edges(i,1:2);

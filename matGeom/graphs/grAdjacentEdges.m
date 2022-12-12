@@ -6,13 +6,13 @@ function neigh = grAdjacentEdges(edges, node)
 %   NODE   index of the node
 %   NEIGHS the indices of edges containing the node index
 %
-%   See also
+%   See also 
 %     grAdjacentNodes
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-08-13
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 neigh = find(edges(:,1) == node | edges(:,2) == node);

@@ -3,14 +3,14 @@ function [nodes, edges] = gcontour2d(img)
 %
 %   deprecated: use imageBoundaryGraph instead
 %
-%   See also:
+%   See also 
 %     imageBoundaryGraph
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-06-25
-% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
 
 nodes = zeros([0 2]);
 edges = zeros([0 2]);

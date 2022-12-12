@@ -24,15 +24,15 @@ function [nodes2, edges2, faces2] = clipMesh2dPolygon(nodes, edges, faces, poly)
 %     drawGraphEdges(n2, e2);
 %     fillGraphFaces(n2, f2);
 %
-%   See also
+%   See also 
 %     graphs, drawGraph, clipGraph
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2012-02-24, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform
+% Copyright 2012-2022 INRA - Cepia Software Platform
 
 % Algorithm summary:
 % * For each edge not outside do:

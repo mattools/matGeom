@@ -14,15 +14,15 @@ function [gnodes, gedges] = relativeNeighborhoodGraph(points)
 %     edges = relativeNeighborhoodGraph(nodes);
 %     figure; drawGraph(nodes, edges);
 %
-%   See also
+%   See also 
 %     gabrielGraph, euclideanMST
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@nantes.inra.fr
 % Created: 2016-03-02, using Matlab 8.6.0.267246 (R2015b)
-% Copyright 2016 INRA - Cepia Software Platform
+% Copyright 2016-2022 INRA - Cepia Software Platform
 
 % first compute Delaunay triangulation to reduce further computations
 DT = delaunayTriangulation(points);

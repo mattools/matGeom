@@ -9,9 +9,9 @@ function varargout = prim_mst(edges, vals)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2007-07-27, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2007-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % isolate vertices index
 nodes   = unique(edges(:));

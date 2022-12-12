@@ -9,15 +9,15 @@ function degree = grNodeInnerDegree(node, edges)
 % 
 %   Note: Also works when node is a vector of indices
 %
-%   See Also:
+%   See also 
 %   grNodeDegree, grNodeOuterDegree
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2006-01-17
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2006-2022 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % allocate memory
 N = size(node, 1);

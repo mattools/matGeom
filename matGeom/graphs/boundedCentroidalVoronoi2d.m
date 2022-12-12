@@ -20,15 +20,15 @@ function varargout = boundedCentroidalVoronoi2d(germs, box, varargin)
 %   [n, e, f] = boundedCentroidalVoronoi2d(rand(20, 2)*100, [0 100 0 100]);
 %   drawGraph(n, e, f);
 %
-%   See also
+%   See also 
 %     graphs, boundedVoronoi2d, centroidalVoronoi2d, clipGraph
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2007-01-12
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2007-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % number of iteration
 nIter = 10;
