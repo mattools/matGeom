@@ -19,7 +19,7 @@ function labels = grLabel(nodes, edges)
 %       2   
 %
 %   See also
-%   getNeighborNodes
+%       grAdjacentNodes
 %
 
 % ------

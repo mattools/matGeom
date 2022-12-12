@@ -14,6 +14,7 @@ function checkHeader
 %   
 %   Todo
 %       - Standardize E-mail adress to "david.legland@inrae.fr"?
+%       - Add checks for "Example" section.
 %       - Add additional checks for the "See also" section: No
 %       self-reference, references, indentations of the references.
 %
@@ -26,6 +27,8 @@ function checkHeader
 % E-mail: N/A
 % Created: 2022-11-08, using MATLAB 9.13.0.2080170 (R2022b) Update 1
 % Copyright 2022
+
+cd(strrep(mfilename('fullpath'),mfilename,''))
 
 mFiles = dir('../matGeom/**/*.m');
 % Exclude the Contents.m files
@@ -321,9 +324,9 @@ for f=1:length(mFiles)
         end
         S(histSIdx:histSIdx+histLines-1) = [];
     end
-    if ~isempty(cell2mat(regexp(S([1:aSec1Idx,aSec1Idx+5:end]), '^%.*20\d\d.')))
+    % Check for dates that appear after the header and may be part of a of a "history"
+    if ~isempty(cell2mat(regexp(S(aSec1Idx+5:end), '^%.*20\d\d.')))
         display(['Suspicous date found in: ' mFileName])
-        continue
     end
 
     %% TODO section
