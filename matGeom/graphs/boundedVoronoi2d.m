@@ -9,14 +9,14 @@ function [nodes, edges, faces] = boundedVoronoi2d(box, germs)
 %   [n, e, f] = boundedVoronoi2d([0 100 0 100], rand(100, 2)*100);
 %   drawGraph(n, e);
 %
-%   See also
+%   See also 
 %     graphs, boundedCentroidalVoronoi2d, clipGraph, clipGraphPolygon
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2007-01-12
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2007-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % uniformize input for box.
 box = box';

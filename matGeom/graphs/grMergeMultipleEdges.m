@@ -7,9 +7,9 @@ function varargout = grMergeMultipleEdges(nodes, edges)
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-08-13
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 rmedge = [];
 for e = 1:length(edges)

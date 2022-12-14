@@ -9,14 +9,14 @@ function writeGraph(nodes, edges, fileName)
 %     edges = [1 2;1 3;2 4;2 5;3 4;4 5];
 %     writeGraph(nodes, edges, 'simpleGraph.txt');
 %
-%   See also
+%   See also 
 %     readGraph
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2014-01-20, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2014 INRA - Cepia Software Platform
+% Copyright 2014-2022 INRA - Cepia Software Platform
 
 %% File creation and init
 

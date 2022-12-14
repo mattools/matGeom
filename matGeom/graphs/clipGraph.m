@@ -22,15 +22,15 @@ function varargout = clipGraph(nodes, edges, varargin)
 %     [n2, e2] = clipGraph(n, e, box);
 %     drawGraphEdges(n2, e2, 'color', 'b', 'linewidth', 2);
 %     
-%   See also
+%   See also 
 %     graphs, drawGraph, clipGraphPolygon
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2007-01-18
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2007-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 %% Format inputs
 

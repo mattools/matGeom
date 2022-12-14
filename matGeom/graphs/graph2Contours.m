@@ -16,9 +16,9 @@ function varargout = graph2Contours(nodes, edges) %#ok<INUSL>
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-08-05
-% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
 
 curves = {};
 c = 0;

@@ -8,15 +8,15 @@ function varargout = grOpen(varargin)
 %   Example
 %   grOpen
 %
-%   See also
+%   See also 
 %   grClose, grErode, grDilate
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2006-01-20
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2006-2022 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 if length(varargin) == 2
     edges   = varargin{1};

@@ -20,9 +20,9 @@ function pts2 = grFaceToPolygon(varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2005-11-30
-% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2005-2022 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 if length(varargin)==2
     % argument is a graph structure
