@@ -24,14 +24,14 @@ function curv = polygonCurvature(poly, M)
 %     inds = round(centroids(:,2));
 %     figure(1); hold on; drawPoint(poly2(inds, :), 'g*')
 %
-%   See also
+%   See also 
 %     polygons2d, polylineCurvature
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2018-03-02, using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2018 INRA - Cepia Software Platform
+% Copyright 2018-2022 INRA - Cepia Software Platform
 
 % number of vertices of polygon
 n = size(poly, 1);

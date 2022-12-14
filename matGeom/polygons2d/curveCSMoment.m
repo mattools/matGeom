@@ -5,7 +5,7 @@ function m = curveCSMoment(curve, p, q)
 %   Example
 %   curveCSMoment
 %
-%   See also
+%   See also 
 %   polygons2d, curveMoment, curveCMoment
 %
 %   Reference
@@ -16,9 +16,9 @@ function m = curveCSMoment(curve, p, q)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2009-03-25, using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRA - Cepia Software Platform
+% Copyright 2009-2022 INRA - Cepia Software Platform
 
 % compute curve centroid
 centroid = polylineCentroid(curve);

@@ -18,14 +18,14 @@ function res = isPointOnPolyline(point, poly, varargin)
 %            0
 %            1
 %
-%   See also
+%   See also 
 %   points2d, polygons2d
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2009-06-19, using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRA - Cepia Software Platform
+% Copyright 2009-2022 INRA - Cepia Software Platform
 
 % extract computation tolerance
 tol = 1e-14;

@@ -26,15 +26,15 @@ function pts = intersectPolylines(poly1, varargin)
 %   FileExchange:
 %   https://fr.mathworks.com/matlabcentral/fileexchange/22441-curve-intersections
 %   
-%   See also
+%   See also 
 %   polygons2d, polylineSelfIntersections, intersectLinePolygon
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2009-06-15, using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRA - Cepia Software Platform
+% Copyright 2009-2022 INRA - Cepia Software Platform
 
 % The code is a slight rewritting of the interX function, consisting in
 % avoiding argument transposition in the begining of the function. Comment

@@ -28,12 +28,12 @@ function curv = polylineCurvature(poly, M)
 %     inds = round(centroids(:,2));
 %     figure(1); hold on; drawPoint(poly2(inds, :), 'g*')
 %
-%   See also
+%   See also 
 %     polygons2d, polygonCurvature, padPolyline
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2022-04-01, using Matlab 9.3.0.713579 (R2017b)
 % Copyright 2022 INRA - Cepia Software Platform
 

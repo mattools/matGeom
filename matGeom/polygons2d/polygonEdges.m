@@ -17,14 +17,14 @@ function edges = polygonEdges(poly)
 %         60    20    50    20
 %         50    20    50    10
 %
-%   See also
+%   See also 
 %     polygons2d, polygonVertices
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2017-08-29, using Matlab 9.1.0.441655 (R2016b)
-% Copyright 2017 INRA - Cepia Software Platform
+% Copyright 2017-2022 INRA - Cepia Software Platform
 
 % test presence of NaN values
 if isnumeric(poly) && any(isnan(poly(:)))

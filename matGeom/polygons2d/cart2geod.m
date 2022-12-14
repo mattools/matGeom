@@ -15,15 +15,15 @@ function point = cart2geod(src, curve)
 %   TODO : add processing of points not projected on the curve.
 %   -> use the closest end 
 %
-%   See also
+%   See also 
 %   polylines2d, geod2cart, curveLength
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2004-04-08
-% Copyright 2004 INRA - Cepia Software Platform
+% Copyright 2004-2022 INRA - Cepia Software Platform
 
 % parametrization approximation
 t = parametrize(curve);

@@ -32,15 +32,15 @@ function theta = polygonNormalAngle(poly, inds)
 %     ans =
 %         6.2832
 %
-%   See also:
+%   See also 
 %     polygons2d, polygonOuterNormal, normalizeAngle
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2005-11-30
-% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2005-2022 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % number of polygon  vertices
 np = size(poly, 1);

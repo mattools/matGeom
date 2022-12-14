@@ -9,15 +9,15 @@ function poly2 = clipPolygon(polygon, w)
 %
 %   Note: Works only for convex polygons at the moment.
 %
-%   See also:
+%   See also 
 %     polygons2d, boxes2d, clipPolygonHP, clipPolyline
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-05-14
-% Copyright 2005 INRA - Cepia Software Platform
+% Copyright 2005-2022 INRA - Cepia Software Platform
 
 % check case of polygons stored in cell array
 if iscell(polygon)

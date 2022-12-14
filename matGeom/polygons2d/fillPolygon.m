@@ -16,14 +16,14 @@ function varargout = fillPolygon(varargin)
 %   Also returns a handle to the created patch
 %
 %
-%   See also:
+%   See also 
 %     polygons2d, drawCurve, drawPolygon
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-04-07
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % check input
 if isempty(varargin)

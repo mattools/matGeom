@@ -14,14 +14,14 @@ function polys = readPolygonSet(filename)
 %   cell array of polygon, each cell containing a N-by-2 array representing
 %   the vertex coordinates.
 %
-%   See also:
+%   See also 
 %   polygons2d
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-04-11
-% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
 
 % the set of polygons (no pre-allocation, as we do not know how many
 % polygons are stored)

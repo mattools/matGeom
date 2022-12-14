@@ -34,14 +34,14 @@ function varargout = polygonSkeleton(poly, varargin)
 %     % draw the skeleton graph
 %     drawGraphEdges(vertices, edges);
 %
-%   See also
+%   See also 
 %     graphs, adjacencyListToEdges
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2020-05-29, using Matlab 9.8.0.1323502 (R2020a)
-% Copyright 2020 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2020-2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 %% Voronoi Diagram computation
 

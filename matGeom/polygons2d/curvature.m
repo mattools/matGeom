@@ -21,14 +21,14 @@ function kappa = curvature(varargin)
 %   distance between 2 consecutive points, and normalized between 0 and 1.
 %
 %
-%   See Also:
+%   See also 
 %   polygons2d, parametrize
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-04-07
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 % default values
 degree = 5;

@@ -29,15 +29,15 @@ function loops = expandPolygon(poly, dist, varargin)
 %     hold on; drawPolygon(poly2, 'm')
 %     axis equal; axis([0 40 0 40]);
 %
-%   See also:
+%   See also 
 %   polygons2d, polygonLoops, polygonSelfIntersections 
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-05-14
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 % default options
 cleanupLoops = false;

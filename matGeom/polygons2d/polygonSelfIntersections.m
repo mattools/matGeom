@@ -22,15 +22,15 @@ function varargout = polygonSelfIntersections(poly, varargin)
 %       ans = 
 %           10 10
 %
-%   See also
+%   See also 
 %   polygons2d, polylineSelfIntersections
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@nantes.inra.fr
 % Created: 2009-06-15, using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRA - Cepia Software Platform
+% Copyright 2009-2022 INRA - Cepia Software Platform
 
 tol = 1e-14;
 

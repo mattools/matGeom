@@ -23,15 +23,15 @@ function vect = polygonOuterNormal(poly, iVertex)
 %     vect = polygonOuterNormal(poly, inds);
 %     drawVector(pts, vect*10, 'b');
 %
-%   See also
+%   See also 
 %     polygons2d, polygonPoint, polygonNormalAngle
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2017-11-23, using Matlab 8.6.0.267246 (R2015b)
-% Copyright 2017 INRA - Cepia Software Platform
+% Copyright 2017-2022 INRA - Cepia Software Platform
 
 % number of vertices
 nv = size(poly, 1);

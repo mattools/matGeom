@@ -33,15 +33,15 @@ function [hull, inds] = convexHull(points, varargin)
 %     hold on; axis equal;
 %     drawPolygon(hull, 'm');
 %
-%   See also
+%   See also 
 %   polygons2d, convhull
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@nantes.inra.fr
 % Created: 2011-04-08, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform
+% Copyright 2011-2022 INRA - Cepia Software Platform
 
 % checkup on array size
 if size(points, 1) < 3

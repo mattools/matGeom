@@ -18,15 +18,15 @@ function poly2 = resamplePolygon(poly, n)
 %     drawPoint(poly2, 'mo');
 %     axis equal; axis([-20 60 0 60]);
 %
-%   See also
+%   See also 
 %     polygons2d, resamplePolygonByLength, smoothPolygon, resamplePolyline
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2011-12-09, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform
+% Copyright 2011-2022 INRA - Cepia Software Platform
 
 poly2 = resamplePolyline(poly([1:end 1],:), n+1);
 poly2(end, :) = [];

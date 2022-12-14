@@ -14,14 +14,14 @@ function point = geod2cart(src, curve, normal)
 %   TODO : add processing of points not projected on the curve.
 %   -> use the closest end 
 %
-%   See also
+%   See also 
 %   polylines2d, cart2geod, curveLength
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-04-08
-% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
 
 t = parametrize(curve);
 N = size(src, 1);
