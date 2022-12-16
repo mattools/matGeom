@@ -30,16 +30,16 @@ function [minDist, pos] = distancePointPolyline(point, poly, varargin)
 %           10
 %            5
 %
-%   See also
+%   See also 
 %   polygons2d, points2d
 %   distancePointEdge, distancePointPolygon, projPointOnPolyline
 %
 
 % ------
 % Author: David Legland, Juan Pablo Carbajal
-% e-mail: david.legland@nantes.inra.fr, ajuanpi+dev@gmail.com
+% E-mail: david.legland@nantes.inra.fr, ajuanpi+dev@gmail.com
 % Created: 2009-04-30, using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRA - Cepia Software Platform
+% Copyright 2009-2022 INRA - Cepia Software Platform
 
 % check if input polyline is closed or not
 closed = false;

@@ -24,15 +24,15 @@ function b = isPointInPolygon(point, poly)
 %          0
 %
 %
-%   See also
+%   See also 
 %   points2d, polygons2d, inpolygon, isPointInTriangle
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2009-06-19, using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRA - Cepia Software Platform
+% Copyright 2009-2022 INRA - Cepia Software Platform
 
 % In case of a multiple polygon, decompose into a set of contours, and
 % performs test for each contour

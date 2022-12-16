@@ -45,15 +45,15 @@ function [intersects, edgeIndices] = intersectLinePolyline(line, poly, varargin)
 %            0     0
 %           10    10
 %
-%   See Also
+%   See also 
 %   lines2d, polylines2d, intersectLines, intersectLinePolygon
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-10-31
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 % get computation tolerance
 tol = 1e-14;

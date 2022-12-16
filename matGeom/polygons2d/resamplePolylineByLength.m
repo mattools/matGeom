@@ -16,15 +16,15 @@ function poly2 = resamplePolylineByLength(poly, step)
 %     axis equal; axis([-10 30 -10 20]);
 %     legend('Original polyline', 'Resampled polyline');
 %
-%   See also
+%   See also 
 %     polygons2d, drawPolyline, resamplePolygon
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2011-12-09, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform
+% Copyright 2011-2022 INRA - Cepia Software Platform
 
 % parametrisation of the curve
 s = parametrize(poly);

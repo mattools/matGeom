@@ -9,14 +9,14 @@ function pt = steinerPoint(varargin)
 %   The steiner point is computed the same way as the polygon centroid,
 %   except that a weight depending on the angle is given to each vertex.
 %
-%   See also:
+%   See also 
 %   polygons2d, polygonArea, polygonCentroid, drawPolygon
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-11-11
-% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
 
 if nargin==1
     var = varargin{1};

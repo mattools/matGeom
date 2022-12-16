@@ -18,14 +18,14 @@ function [nodes, edges] = medialAxisConvex(points)
 %   - Complexity is not optimal: this algorithm is O(n*log n), but linear
 %   algorithms exist.
 %
-%   See also:
+%   See also 
 %   polygons2d, bisector
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-07-07
-% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
 
 %   TODO: is not fully implemented, need to finish it
 

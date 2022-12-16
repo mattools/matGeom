@@ -17,15 +17,15 @@ function [res, inds] = polylineSubcurve(poly, t0, t1)
 %     poly2 = polylineSubcurve(poly, 15, 65);
 %     drawCurve(poly2);
 %
-%   See also
+%   See also 
 %     polygons2d, polygonSubCurve
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2009-04-30, using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRAE - Cepia Software Platform
+% Copyright 2009-2022 INRAE - Cepia Software Platform
 
 % number of vertices
 Nv = size(poly, 1);

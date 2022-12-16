@@ -20,15 +20,15 @@ function [intersects, inds] = intersectEdgePolygon(edge, poly, varargin)
 %     ans =
 %         10   4
 %
-%   See also
+%   See also 
 %     edges2d, polygons2d, intersectLinePolygon, intersectRayPolygon
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2012-02-24, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform
+% Copyright 2012-2022 INRA - Cepia Software Platform
 
 % get computation tolerance
 tol = 1e-14;

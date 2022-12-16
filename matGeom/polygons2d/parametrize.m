@@ -23,14 +23,14 @@ function par = parametrize(varargin)
 %     ans = 
 %         6.2829
 %
-%   See also:
+%   See also 
 %   polygons2d, polylineLength
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-04-06
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 %% Process inputs
 

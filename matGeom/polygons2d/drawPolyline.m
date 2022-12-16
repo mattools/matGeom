@@ -28,14 +28,14 @@ function varargout = drawPolyline(varargin)
 %   % The same, with different drawing options
 %   drawPolyline([px py], 'closed', 'lineWidth', 2, 'lineStyle', '--');
 %
-%   See Also:
+%   See also 
 %   polygons2d, drawPolygon
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-04-06
-% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
 
 % extract handle of axis to draw on
 if isAxisHandle(varargin{1})

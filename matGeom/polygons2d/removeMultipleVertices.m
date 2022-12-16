@@ -16,14 +16,14 @@ function poly = removeMultipleVertices(poly, varargin)
 %     ans = 
 %         4
 %
-%   See also
+%   See also 
 %   polygons2d, mergeClosePoints
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2013-10-04, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2013 INRA - Cepia Software Platform
+% Copyright 2013-2022 INRA - Cepia Software Platform
 
 % default values
 eps = 1e-14;

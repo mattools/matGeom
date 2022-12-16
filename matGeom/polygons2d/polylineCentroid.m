@@ -20,15 +20,15 @@ function center = polylineCentroid(varargin)
 %   ans = 
 %       [10 5]
 %
-%   See also:
+%   See also 
 %     polygons2d, centroid, polygonCentroid, polylineLength
 %
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2006-05-22
-% Copyright 2006 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2006-2022 INRA - TPV URPOI - BIA IMASTE
 
 %% process input arguments
 

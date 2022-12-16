@@ -6,14 +6,14 @@ function poly2 = clipPolygonHP(poly, line)
 %   The result POLY2 is also an array of points, sometimes smaller than
 %   poly, and that can be [0x2] (empty polygon).
 %
-%   See also:
+%   See also 
 %   polygons2d, clipPolygon
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-07-31
-% Copyright 2005 INRA - Cepia Software Platform
+% Copyright 2005-2022 INRA - Cepia Software Platform
 
 % avoid to process empty polygons
 if size(poly, 1)<3

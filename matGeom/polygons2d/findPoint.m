@@ -14,14 +14,14 @@ function index = findPoint(coord, points, varargin)
 %   use specified tolerance, to find point within a distance of TOL.
 %   Default tolerance is zero.
 %
-%   See also
+%   See also 
 %    points2d, minDistancePoints, distancePoints, findClosestPoint
 
 % ------
 % Author: David Legland 
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-07-17
-% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
 
 % number of points
 np = size(coord, 1);

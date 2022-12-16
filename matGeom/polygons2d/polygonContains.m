@@ -15,14 +15,14 @@ function varargout = polygonContains(poly, point)
 %        1
 %        0
 %
-%   See also
+%   See also 
 %   polygons2d, inpolygon, isPointInPolygon
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2007-10-11, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2007-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % transform as a cell array of simple polygons
 polygons = splitPolygons(poly);

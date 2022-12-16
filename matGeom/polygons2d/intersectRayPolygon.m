@@ -11,15 +11,15 @@ function [intersects, edgeIndices] = intersectRayPolygon(ray, poly, varargin)
 %   Also returns index of polygon intersected edge(s). See
 %   intersectLinePolygon for details.
 %
-%   See also
+%   See also 
 %     rays2d, polygons2d, intersectLinePolygon
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2010-01-26
-% Copyright 2010
+% Copyright 2010-2022
 
 % compute intersections with supporting line
 [intersects, edgeIndices, pos] = intersectLinePolygon(ray, poly, varargin{:});

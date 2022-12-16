@@ -8,13 +8,13 @@ function rev = reversePolygon(poly)
 %   Example
 %   reversePolygon
 %
-%   See also
+%   See also 
 %   polygons2d, reversePolyline
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@grignon.inra.fr
 % Created: 2009-06-30, using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRA - Cepia Software Platform
+% Copyright 2009-2022 INRA - Cepia Software Platform
 
 rev = poly([1 end:-1:2], :);

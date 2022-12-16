@@ -7,14 +7,14 @@ function poly = signatureToPolygon(signature, varargin)
 %   Example
 %   signatureToPolygon
 %
-%   See also
+%   See also 
 %     polygonSignature
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@nantes.inra.fr
 % Created: 2015-04-28, using Matlab 8.4.0.150421 (R2014b)
-% Copyright 2015 INRA - Cepia Software Platform
+% Copyright 2015-2022 INRA - Cepia Software Platform
 
 nAngles = length(signature);
 

@@ -66,18 +66,15 @@ function [points, edgeInds, linePositions] = intersectLinePolygon(line, poly, va
 %     https://web.cs.ucdavis.edu/~ma/ECS175_S00/Notes/0411_b.pdf
 %     https://alienryderflex.com/polygon_fill/
 %
-%   See Also
+%   See also 
 %   lines2d, polygons2d, intersectLines, intersectRayPolygon, polygonEdges
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2003-10-31, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2003 INRA - Cepia Software Platform
-
-% 2022-02-14: new algorithm, more robust to numerical issues, but that can
-% change behaviour compared to previous implementation
+% Copyright 2003-2022 INRA - Cepia Software Platform
 
 % line origin and angle
 ox = line(1);
@@ -137,7 +134,6 @@ end
 if ~isempty(linePositions)
     points = [linePositions zeros(size(linePositions))];
     points = transformPoint(points, inv(transfo));
-    linePositions = linePositions;
 else
     points = [];
 end

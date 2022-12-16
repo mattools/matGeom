@@ -23,16 +23,16 @@ function elli = polygonEquivalentEllipse(poly)
 %     drawEllipse(elli, 'color', 'g', 'linewidth', 2);
 %
 %
-%   See also
+%   See also 
 %     polygons2d, polygonSecondAreaMoments, polygonCentroid,
 %     equivalentEllipse, ellipseToPolygon
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2017-09-08, using Matlab 9.1.0.441655 (R2016b)
-% Copyright 2017 INRA - Cepia Software Platform
+% Copyright 2017-2022 INRA - Cepia Software Platform
 
 % first re-center the polygon
 centroid = polygonCentroid(poly);
@@ -41,14 +41,14 @@ poly = bsxfun(@minus, poly, centroid);
 % compute non-normalized inertia moments
 [Ix, Iy, Ixy] = polygonSecondAreaMoments(poly);
 
-% noralaize with polygon area
+% normalize with polygon area
 area = polygonArea(poly);
 Ix = Ix / area;
 Iy = Iy / area;
 Ixy = Ixy / area;
 
 % compute ellipse semi-axis lengths
-common = sqrt( (Ix - Iy)^2 + 4 * Ixy^2);
+common = sqrt((Ix - Iy)^2 + 4 * Ixy^2);
 ra = sqrt(2) * sqrt(Ix + Iy + common);
 rb = sqrt(2) * sqrt(Ix + Iy - common);
 
