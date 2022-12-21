@@ -233,9 +233,9 @@
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inra.fr
 % Created: 2005-11-07
-% Copyright 2005 INRA
+% Copyright 2005-2022 INRA
 
 help(mfilename);
 
