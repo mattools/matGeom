@@ -34,11 +34,12 @@ function varargout = drawAxis3d(varargin)
 % Copyright 2007-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % Check if axes handle is specified
-if isAxisHandle(varargin{1})
-    hAx = varargin{1};
-    varargin(1) = [];
-else
-    hAx = gca;
+hAx = gca;
+if ~isempty(varargin)
+    if isAxisHandle(varargin{1})
+        hAx = varargin{1};
+        varargin(1) = [];
+    end
 end
 
 % Parsing

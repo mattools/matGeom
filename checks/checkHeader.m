@@ -32,7 +32,7 @@ cd(strrep(mfilename('fullpath'),mfilename,''))
 
 mFiles = dir('../matGeom/**/*.m');
 % Exclude the Contents.m files
-% mFiles(strcmp({mFiles.name}','Contents.m'))=[];
+mFiles(contains({mFiles.folder}','deprecated'))=[];
 
 for f=1:length(mFiles)
     % Full path of the m-file

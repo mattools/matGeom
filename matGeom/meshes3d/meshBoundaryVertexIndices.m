@@ -36,9 +36,14 @@ if isempty(edges)
 end
 
 % compute edges to faces map
-edgeFaces = meshEdgeFaces(vertices, edges, faces);
+% tic
+% edgeFaces = meshEdgeFaces(vertices, edges, faces);
+% borderEdges = sum(edgeFaces == 0, 2) > 0;
+% Inds = edges(borderEdges, :);
+% toc
 
-borderEdges = sum(edgeFaces == 0, 2) > 0;
+inds = meshBoundaryEdges(vertices, faces);
 
-inds = edges(borderEdges, :);
+% assert(isequal(be, inds))
+
 inds = unique(inds(:));
