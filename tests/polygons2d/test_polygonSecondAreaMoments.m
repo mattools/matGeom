@@ -6,8 +6,8 @@ function test_suite = test_polygonSecondAreaMoments
 %
 %   References
 %       https://en.wikipedia.org/wiki/List_of_second_moments_of_area
-%       https://wp.optics.arizona.edu/optomech/wp-content/uploads/
-%           sites/53/2016/10/OPTI_222_W61.pdf
+%       2020 - Bedford & Liechti - Mechanics of Materials
+%           DOI: 10.1007/978-3-030-22082-2
 %
 
 % ------
@@ -59,13 +59,14 @@ xNegLine = createLine(-theta/2);
 semiCircle = closePolygon(clipPolygonHP(circle, xPosLine));
 circularSector = closePolygon(clipPolygonHP(semiCircle, xNegLine));
 
-[Ixx, Iyy, Ixy] = polygonSecondAreaMoments(circularSector); %#ok<ASGLU> 
+[Ixx, Iyy, Ixy] = polygonSecondAreaMoments(circularSector); 
 Ixx_exp = (theta-sin(theta))*r^4/8;
-% Iyy_exp = ?;
-% Ixy_exp = ?;
+Iyy_exp = (theta+sin(theta))*r^4/8;
+Ixy_exp = 0;
 
 testCase.assertEqual(Ixx, Ixx_exp, 'AbsTol',1e-1);
-
+testCase.assertEqual(Iyy, Iyy_exp, 'AbsTol',1e-1);
+testCase.assertEqual(Ixy, Ixy_exp, 'AbsTol',1e-7);
 
 function testCenteredSemiCircle(testCase)
 r = randi([1 100]);
@@ -73,27 +74,28 @@ circle = circleToPolygon([0 0 r], round(2*pi*r*1e2));
 semiCircle = closePolygon(clipPolygonHP(circle, [0 0 1 0]));
 centeredSemiCircle = semiCircle - polygonCentroid(semiCircle);
 
-[Ixx, Iyy, Ixy] = polygonSecondAreaMoments(centeredSemiCircle); %#ok<ASGLU> 
+[Ixx, Iyy, Ixy] = polygonSecondAreaMoments(centeredSemiCircle); 
 Ixx_exp = (pi/8-8/(9*pi))*r^4;
 Iyy_exp = pi/8*r^4;
-% Ixy_exp = ?
+Ixy_exp = 0;
 
 testCase.assertEqual(Ixx, Ixx_exp, 'AbsTol',2*1e-1);
 testCase.assertEqual(Iyy, Iyy_exp, 'AbsTol',2*1e-1);
-
+testCase.assertEqual(Ixy, Ixy_exp, 'AbsTol',1e-7);
 
 function testSemiCircle(testCase)
 r = randi([1 100]);
 circle = circleToPolygon([0 0 r], round(2*pi*r*1e2));
 semiCircle = closePolygon(clipPolygonHP(circle, [0 0 1 0]));
 
-[Ixx, Iyy, Ixy] = polygonSecondAreaMoments(semiCircle); %#ok<ASGLU> 
+[Ixx, Iyy, Ixy] = polygonSecondAreaMoments(semiCircle); 
 Ixx_exp = pi/8*r^4;
 Iyy_exp = Ixx_exp;
-% Ixy_exp = ?
+Ixy_exp = 0;
 
 testCase.assertEqual(Ixx, Ixx_exp, 'AbsTol',2*1e-1);
 testCase.assertEqual(Iyy, Iyy_exp, 'AbsTol',2*1e-1);
+testCase.assertEqual(Ixy, Ixy_exp, 'AbsTol',1e-7);
 
 
 function testQuarterCircle(testCase)
