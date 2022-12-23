@@ -21,10 +21,8 @@ function [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(poly)
 % Created: 2017-09-08, using Matlab 9.1.0.441655 (R2016b)
 % Copyright 2017-2022 INRA - Cepia Software Platform
 
-% get vertex coordinates, and recenter polygon
-centroid = polygonCentroid(poly);
-px = poly(:,1) - centroid(1);
-py = poly(:,2) - centroid(2);
+px = poly(:,1);
+py = poly(:,2);
 
 % vertex indices
 N = length(px);
