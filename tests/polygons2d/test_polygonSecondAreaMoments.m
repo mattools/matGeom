@@ -240,10 +240,3 @@ testCase.assertEqual(Ixx, Ixx_exp, 'AbsTol',1e-8);
 testCase.assertEqual(Iyy, Iyy_exp, 'AbsTol',1e-8);
 testCase.assertEqual(Ixy, Ixy_exp, 'AbsTol',1e-8);
 
-
-%% Helper Function
-function poly = closePolygon(poly)
-
-if ~isequal(poly(1,:),poly(end,:))
-    poly(end+1,:) = poly(1,:);
-end
