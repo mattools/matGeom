@@ -5,6 +5,7 @@ function test_suite = test_polygonSecondAreaMoments
 %       runtests('test_polygonSecondAreaMoments.m')
 %
 %   References
+%       Expected (_exp) values are taken from:
 %       https://en.wikipedia.org/wiki/List_of_second_moments_of_area
 %       2020 - Bedford & Liechti - Mechanics of Materials
 %           DOI: 10.1007/978-3-030-22082-2

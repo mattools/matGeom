@@ -1,4 +1,4 @@
-function centroid = polygonCentroid3d(varargin)
+function [centroid, area] = polygonCentroid3d(varargin)
 %POLYGONCENTROID3D Centroid (or center of mass) of a polygon.
 %
 %   PTC = polygonCentroid3d(POLY)
@@ -41,14 +41,14 @@ elseif nargin == 3
     pts = [px py pz];
 end
 
-% create supporting plane (assuming first 3 points are not colinear...)
-plane = createPlane(pts(1:3, :));
+% create supporting plane
+plane = fitPlane(pts);
 
 % project points onto the plane
 pts = planePosition(pts, plane);
 
 % compute centroid in 2D
-centro2d = polygonCentroid(pts);
+[centro2d, area] = polygonCentroid(pts);
 
 % project back in 3D
 centroid = planePoint(plane, centro2d);

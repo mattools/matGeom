@@ -52,9 +52,9 @@ iNext = [2:N 1];
 
 % compute cross products
 common = px .* py(iNext) - px(iNext) .* py;
-sx = sum((px + px(iNext)) .* common);
-sy = sum((py + py(iNext)) .* common);
+Sx = 1/6*sum((py + py(iNext)) .* common);
+Sy = 1/6*sum((px + px(iNext)) .* common);
 
 % area and centroid
 area = sum(common) / 2;
-centroid = [sx sy] / 6 / area;
+centroid = [Sy Sx] / area;
