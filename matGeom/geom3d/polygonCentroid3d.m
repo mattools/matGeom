@@ -40,6 +40,8 @@ elseif nargin == 3
     pts = [px py pz];
 end
 
+pts = parsePolygon(pts, 'repetition');
+
 % create supporting plane
 plane = fitPlane(pts);
 
