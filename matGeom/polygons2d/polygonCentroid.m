@@ -34,15 +34,13 @@ function [centroid, area, Sx, Sy] = polygonCentroid(varargin)
 
 % parse input arguments
 if nargin == 1
-    var = varargin{1};
-    px = var(:,1);
-    py = var(:,2);
+    poly = varargin{1};
 elseif nargin == 2
-    px = varargin{1};
-    py = varargin{2};
+    poly(:,1) = varargin{1};
+    poly(:,2) = varargin{2};
 end
+poly = parsePolygon(poly, 'repetition');
 
-poly = parsePolygon([px, py], 'repetition');
 px = poly(:,1);
 py = poly(:,2);
 
