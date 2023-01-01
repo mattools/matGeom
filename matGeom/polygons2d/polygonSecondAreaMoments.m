@@ -21,6 +21,8 @@ function [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(poly)
 % Created: 2017-09-08, using Matlab 9.1.0.441655 (R2016b)
 % Copyright 2017-2022 INRA - Cepia Software Platform
 
+poly = parsePolygon(poly, 'repetition');
+
 px = poly(:,1);
 py = poly(:,2);
 

@@ -36,9 +36,9 @@ testCase.assertEqual(Ixy, Ixy_exp, 'AbsTol',1e-1);
 function testAnnulus(testCase)
 r2 = randi([50 100]);
 r1 = r2 - randi([1 49]);
-outerCircle = closePolygon(circleToPolygon([0 0 r2], round(2*pi*r2*1e2)));
-innerCircle = flipud(closePolygon(circleToPolygon([0 0 r1], round(2*pi*r1*1e2))));
-annulus = [outerCircle; innerCircle];
+outerCircle = circleToPolygon([0 0 r2], round(2*pi*r2*1e2));
+innerCircle = flipud(circleToPolygon([0 0 r1], round(2*pi*r1*1e2)));
+annulus = {outerCircle; innerCircle};
 
 [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(annulus);
 Ixx_exp = pi/4*(r2^4-r1^4);
@@ -57,8 +57,8 @@ theta = (pi/2-0.2)*rand+0.1;
 xPosLine = reverseLine(createLine(theta/2));
 xNegLine = createLine(-theta/2);
 
-semiCircle = closePolygon(clipPolygonHP(circle, xPosLine));
-circularSector = closePolygon(clipPolygonHP(semiCircle, xNegLine));
+semiCircle = clipPolygonHP(circle, xPosLine);
+circularSector = clipPolygonHP(semiCircle, xNegLine);
 
 [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(circularSector); 
 Ixx_exp = (theta-sin(theta))*r^4/8;
@@ -72,7 +72,7 @@ testCase.assertEqual(Ixy, Ixy_exp, 'AbsTol',1e-7);
 function testCenteredSemiCircle(testCase)
 r = randi([1 100]);
 circle = circleToPolygon([0 0 r], round(2*pi*r*1e2));
-semiCircle = closePolygon(clipPolygonHP(circle, [0 0 1 0]));
+semiCircle = clipPolygonHP(circle, [0 0 1 0]);
 centeredSemiCircle = semiCircle - polygonCentroid(semiCircle);
 
 [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(centeredSemiCircle); 
@@ -87,7 +87,7 @@ testCase.assertEqual(Ixy, Ixy_exp, 'AbsTol',1e-7);
 function testSemiCircle(testCase)
 r = randi([1 100]);
 circle = circleToPolygon([0 0 r], round(2*pi*r*1e2));
-semiCircle = closePolygon(clipPolygonHP(circle, [0 0 1 0]));
+semiCircle = clipPolygonHP(circle, [0 0 1 0]);
 
 [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(semiCircle); 
 Ixx_exp = pi/8*r^4;
@@ -102,8 +102,8 @@ testCase.assertEqual(Ixy, Ixy_exp, 'AbsTol',1e-7);
 function testQuarterCircle(testCase)
 r = randi([1 100]);
 circle = circleToPolygon([0 0 r], round(2*pi*r*1e2));
-semiCircle = closePolygon(clipPolygonHP(circle, [0 0 1 0]));
-quarterCircle = closePolygon(clipPolygonHP(semiCircle, [0 0 0 -1]));
+semiCircle = clipPolygonHP(circle, [0 0 1 0]);
+quarterCircle = clipPolygonHP(semiCircle, [0 0 0 -1]);
 
 [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(quarterCircle);
 Ixx_exp = pi/16*r^4;
@@ -118,8 +118,8 @@ testCase.assertEqual(Ixy, Ixy_exp, 'AbsTol',1e-1);
 function testCenteredQuarterCircle(testCase)
 r = randi([1 100]);
 circle = circleToPolygon([0 0 r], round(2*pi*r*1e2));
-semiCircle = closePolygon(clipPolygonHP(circle, [0 0 1 0]));
-quarterCircle = closePolygon(clipPolygonHP(semiCircle, [0 0 0 -1]));
+semiCircle = clipPolygonHP(circle, [0 0 1 0]);
+quarterCircle = clipPolygonHP(semiCircle, [0 0 0 -1]);
 centeredQuarterCircle = quarterCircle - polygonCentroid(quarterCircle);
 
 [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(centeredQuarterCircle); %#ok<ASGLU> 
@@ -183,7 +183,7 @@ b1 = b - randi([10 20]);
 h1 = h - randi([1 8]);
 outerRectangle = [b/2 -h/2; b/2 h/2; -b/2 h/2; -b/2 -h/2];
 innerRectangle = [-b1/2 -h1/2; -b1/2 h1/2; b1/2 h1/2; b1/2 -h1/2];
-hollowRectangle = [closePolygon(outerRectangle); closePolygon(innerRectangle)];
+hollowRectangle = {outerRectangle; innerRectangle};
 
 [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(hollowRectangle);
 Ixx_exp = (b*h^3 - b1*h1^3)/12;

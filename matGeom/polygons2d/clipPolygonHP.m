@@ -134,7 +134,9 @@ switch method
         varargout{1} = poly2; 
 
     case 'polyshape'
+        warning('off','MATLAB:polyshape:repairedBySimplify')
         polyShape = polygonToPolyshape(poly, 'debugVisu',0);
+        warning('on','MATLAB:polyshape:repairedBySimplify')
         [bblim(1:2), bblim(3:4)] = boundingbox(polyShape);
         bbXdist = bblim(2)-bblim(1);
         bbYdist = bblim(4)-bblim(3);
@@ -152,24 +154,36 @@ switch method
         lineRev = [line(1:2) -line(3:4)];
         BB_R = clipPolygonHP(BB, lineRev);
         [PS_L, PS_Lid] = subtract(polyShape, polyshape(BB_R));
+        lineSeg = clipLine(line, bblim);
+        lineSeg = [lineSeg(1:2); lineSeg(3:4)];
+        % Intersection edges
+        itsEdges = intersect(polyShape,lineSeg);
+        itsEdges(2:end+1, 3:4) = itsEdges;
+        itsEdges(1,3:4) = nan;
+        itsEdges(end,1:2) = nan; 
+        itsEdges(any(isnan(itsEdges),2),:) = [];
+
 
         if debugVisu
             figure('color','w','numbertitle','off', ...
                 'name', ['Debug Figure: ' mfilename ...
                 '.m, Method: ' method]);
             axis equal tight; hold on; xlabel('x'); ylabel('y')
-            plot(PS_R,'FaceColor','g','EdgeColor','none')
-            plot(PS_L,'FaceColor','b','EdgeColor','none')
+            plot(PS_R,'FaceColor','g','EdgeColor','k')
+            plot(PS_L,'FaceColor','b','EdgeColor','k')
             [PS_R_centroid(1), PS_R_centroid(2)] = centroid(PS_R);
             drawLabels(PS_R_centroid,' R','HorizontalAlignment','Left')
             scatter(PS_R_centroid(1), PS_R_centroid(2),[],'g','filled')
             [PS_L_centroid(1), PS_L_centroid(2)] = centroid(PS_L);
             drawLabels(PS_L_centroid,'L ','HorizontalAlignment','Right')
             scatter(PS_L_centroid(1), PS_L_centroid(2),[],'b','filled')
+            drawEdge(itsEdges,'LineStyle','-','LineWidth',2,'Color','k')
         end
 
         varargout{1} = splitPolygons(PS_L.Vertices);
         varargout{2} = splitPolygons(PS_R.Vertices);
+        varargout{3} = itsEdges;
+
 end
         
         

@@ -32,7 +32,6 @@ function [centroid, area] = polygonCentroid3d(varargin)
 if nargin == 1
     % polygon is given as a single argument
     pts = varargin{1};
-    
 elseif nargin == 3
     % polygon is given as 3 coordinate arrays
     px = varargin{1};

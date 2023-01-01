@@ -25,17 +25,7 @@ addParameter(parser,'debugVisualization', false, logParValidFunc);
 parse(parser, varargin{:});
 debugVisu = parser.Results.debugVisualization;
 
-if iscell(poly)
-    polyShape = polyshape(poly{1});
-    NoP = length(poly);
-    if NoP > 1
-        for p=2:NoP
-            polyShape = addboundary(polyShape, poly{p});
-        end
-    end
-else
-    polyShape = polyshape(poly);
-end
+polyShape = parsePolygon(poly, 'polyshape');
 
 if debugVisu
     figure('color','w','numbertitle','off', ...
