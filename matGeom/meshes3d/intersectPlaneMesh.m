@@ -25,20 +25,22 @@ function polys = intersectPlaneMesh(plane, v, f)
 %     % Intersect a torus by a set of planes, and draw the results
 %     % first creates a torus slightly shifted and rotated
 %     torus = [.5 .6 .7   30 10   3 4];
-%     figure; drawTorus(torus, 'nTheta', 180, 'nPhi', 180);
-%     hold on; view (3); axis equal; light;
+%     figure('color','w');
 %     % convert to mesh representation
 %     [v, f] = torusMesh(torus, 'nTheta', 64, 'nPhi', 64);
+%     f = triangulateFaces(f);
+%     drawMesh(v, f);
+%     hold on; view (3); axis equal; light;
 %     % compute intersections with collection of planes
 %     xList = -50:5:50;
 %     polySet = cell(length(xList), 1);
 %     for i = 1:length(xList)
 %         x0 = xList(i);
 %         plane = createPlane([x0 .5 .5], [1 .2 .3]);
-%         polySet{i} = intersectPlaneMesh2(plane, v, f);
+%         polySet{i} = intersectPlaneMesh(plane, v, f);
 %     end
 %     % draw the resulting 3D polygons
-%     drawPolygon3d(polySet, 'lineWidth', 2, 'color', 'k')
+%     drawPolygon3d(polySet, 'lineWidth', 2, 'color', 'y')
 %
 %
 %   See also 

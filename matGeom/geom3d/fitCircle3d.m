@@ -28,7 +28,7 @@ function [fittedCircle, circleNormal, residuals] = fitCircle3d(pts, varargin)
 %     drawCircle3d(fittedCircle, 'k')
 %     drawVector3d(fittedCircle(1:3), circleNormal*fittedCircle(4))
 %
-%   See also
+%   See also 
 %   circle3dOrigin, circle3dPosition, circle3dPoint, intersectPlaneSphere
 %   drawCircle3d, drawCircleArc3d, drawEllipse3d
 

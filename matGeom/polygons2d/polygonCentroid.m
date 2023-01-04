@@ -1,4 +1,4 @@
-function [centroid, area] = polygonCentroid(varargin)
+function [centroid, area, Sx, Sy] = polygonCentroid(varargin)
 %POLYGONCENTROID Computes the centroid (center of mass) of a polygon.
 %
 %   CENTROID = polygonCentroid(POLY)
@@ -20,7 +20,7 @@ function [centroid, area] = polygonCentroid(varargin)
 %     drawPoint(centro, 'bo');
 % 
 %   References
-%     algo adapted from P. Bourke web page.
+%     Algorithm adapted from P. Bourke's web page.
 %
 %   See also 
 %     polygons2d, polygonArea, polygonSecondAreaMoments, drawPolygon
@@ -32,19 +32,17 @@ function [centroid, area] = polygonCentroid(varargin)
 % Created: 2004-05-05
 % Copyright 2004-2022
 
-% Algorithme P. Bourke, vectorized version
-
-
-
 % parse input arguments
 if nargin == 1
-    var = varargin{1};
-    px = var(:,1);
-    py = var(:,2);
+    poly = varargin{1};
 elseif nargin == 2
-    px = varargin{1};
-    py = varargin{2};
+    poly(:,1) = varargin{1};
+    poly(:,2) = varargin{2};
 end
+poly = parsePolygon(poly, 'repetition');
+
+px = poly(:,1);
+py = poly(:,2);
 
 % vertex indices
 N = length(px);
@@ -52,9 +50,9 @@ iNext = [2:N 1];
 
 % compute cross products
 common = px .* py(iNext) - px(iNext) .* py;
-sx = sum((px + px(iNext)) .* common);
-sy = sum((py + py(iNext)) .* common);
+Sx = 1/6*sum((py + py(iNext)) .* common);
+Sy = 1/6*sum((px + px(iNext)) .* common);
 
 % area and centroid
 area = sum(common) / 2;
-centroid = [sx sy] / 6 / area;
+centroid = [Sy Sx] / area;

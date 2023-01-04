@@ -19,10 +19,10 @@ function line = createLine(varargin)
 %   LINE(4)). 
 %   
 %   L = createLine(THETA);
-%   Create a polar line originated at (0,0) and with angle THETA.
+%   Create a polar line originated at (0,0) and with angle THETA in radians.
 %
 %   L = createLine(p, THETA);
-%   Create a polar line originated at p and with angle THETA.
+%   Create a polar line originated at p and with angle THETA in radians.
 %
 %   L = createLine(RHO, THETA);
 %   Create a polar line with normal theta, and with min distance to origin

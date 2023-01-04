@@ -18,7 +18,7 @@ function varargout = drawArrow3d(pos, vec, varargin)
 %       arrow stems 94% of the length and short, 6% cones as arrow heads.
 %       Values above 0 and below 1 are valid. Default is 0.75.
 %   'arrowRadius': changes the radius of the arrowstem. Percentage of the
-%       lenght of the arrow. Values between 0.01 and 0.1 are valid. 
+%       lenght of the arrow. Values between 0.01 and 0.3 are valid. 
 %       Default is 0.025.
 %   Uses the 'patch' function to plot the arrows. 'patch' properties can be  
 %   used to control the appearance of the arrows.
@@ -69,7 +69,7 @@ addRequired(p,'vec',isPointArray3d);
 addOptional(p,'color', 'k', @(x) validateColor(x, numArrows));
 isStemRatio = @(x) validateattributes(x,{'numeric'},{'vector','>', 0, '<', 1});
 addParameter(p,'stemRatio', 0.75, isStemRatio);
-isArrowRadius = @(x) validateattributes(x,{'numeric'},{'scalar','>=', 0.01, '<=', 0.1});
+isArrowRadius = @(x) validateattributes(x,{'numeric'},{'scalar','>=', 0.01, '<=', 0.3});
 addParameter(p,'arrowRadius',0.025, isArrowRadius);
 
 parse(p,pos,vec,varargin{:});
