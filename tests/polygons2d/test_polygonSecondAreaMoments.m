@@ -1,5 +1,5 @@
 function test_suite = test_polygonSecondAreaMoments
-%TEST_POLYGONSECONDAREAMOMENTS Tests for polygonSecondAreaMoments.m
+%TEST_POLYGONSECONDAREAMOMENTS Tests for polygonSecondAreaMoments.
 %
 %   Example
 %       runtests('test_polygonSecondAreaMoments.m')

@@ -31,7 +31,6 @@ function polyOut = parsePolygon(poly, format, varargin)
 
 % Parsing
 p = inputParser;
-% logParValidFunc=@(x) (islogical(x) || isequal(x,1) || isequal(x,0));
 addRequired(p,'format',...
     @(x) any(validatestring(x,{'cell','nan','repetition','polyshape'})));
 parse(p,format,varargin{:});

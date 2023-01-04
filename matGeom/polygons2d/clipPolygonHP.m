@@ -150,10 +150,10 @@ switch method
             bblim(2) bblim(4); bblim(1) bblim(4)];
         % Clip the bounding box by the line
         BB_L = clipPolygonHP(BB, line);
-        [PS_R, PS_Rid] = subtract(polyShape, polyshape(BB_L));
+        PS_R = subtract(polyShape, polyshape(BB_L));
         lineRev = [line(1:2) -line(3:4)];
         BB_R = clipPolygonHP(BB, lineRev);
-        [PS_L, PS_Lid] = subtract(polyShape, polyshape(BB_R));
+        PS_L = subtract(polyShape, polyshape(BB_R));
         lineSeg = clipLine(line, bblim);
         lineSeg = [lineSeg(1:2); lineSeg(3:4)];
         % Intersection edges
