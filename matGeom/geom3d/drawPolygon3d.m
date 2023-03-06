@@ -77,6 +77,11 @@ else
     varargin = varargin(2:end);
 end
 
+if any(isnan(px))
+    varargout{1} = drawPolygon3d(splitPolygons([px py pz]), varargin{:});
+    return;
+end
+
 
 %% draw the polygon
 
