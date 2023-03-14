@@ -33,7 +33,8 @@ function [vertices, faces] = triangulatePolygonPair(poly1, poly2, varargin)
 %     view(3); axis equal;
 %
 %   See also 
-%     meshes3D, triangulateCurvePair, meshSurfaceArea
+%     meshes3D, triangulatePolygonPair3d, triangulateCurvePair,
+%     meshSurfaceArea 
 %
 
 % ------

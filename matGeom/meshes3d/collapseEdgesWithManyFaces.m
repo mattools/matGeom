@@ -1,5 +1,5 @@
 function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargin)
-%COLLAPSEEDGESWITHMANYFACES removes mesh edges adjacent to more than two faces.
+%COLLAPSEEDGESWITHMANYFACES Remove mesh edges adjacent to more than two faces.
 %
 %   [V2, F2] = collapseEdgesWithManyFaces(V, F)
 %   Count the number of faces adjacent to each edge, and collapse the edges
@@ -14,7 +14,7 @@ function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargi
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2019-01-31, using Matlab 9.5.0.944444 (R2018b)
 % Copyright 2019-2022 INRA - Cepia Software Platform
 

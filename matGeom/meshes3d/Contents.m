@@ -98,11 +98,12 @@
 %   removeDuplicateFaces       - Remove duplicate faces in a face array.
 %   removeMeshEars             - Remove vertices that are connected to only one face.
 %   removeInvalidBorderFaces   - Remove faces whose edges are connected to 3, 3, and 1 faces.
-%   collapseEdgesWithManyFaces - removes mesh edges adjacent to more than two faces
+%   collapseEdgesWithManyFaces - Remove mesh edges adjacent to more than two faces.
 %
 % Creation and conversion
 %   surfToMesh                 - Convert surface grids into face-vertex mesh.
 %   triangulateCurvePair       - Compute triangulation between a pair of 3D open curves.
+%   triangulatePolygonPair3d   - Compute a triangulation between a pair of 3D polygons.
 %   triangulatePolygonPair     - Compute triangulation between a pair of 3D closed curves.
 %   cylinderMesh               - Create a 3D mesh representing a cylinder.
 %   sphereMesh                 - Create a 3D mesh representing a sphere.
