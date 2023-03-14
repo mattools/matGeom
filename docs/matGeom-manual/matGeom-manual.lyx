@@ -14566,6 +14566,24 @@ reference "fig:CurveToMesh"
 ).
 \end_layout
 
+\begin_layout Minisec
+surfToMesh
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+surfToMesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Converts surface grids into face-vertex mesh.
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 wide false
@@ -14633,6 +14651,10 @@ ellipsoid torus knot]
 Other creation functions
 \end_layout
 
+\begin_layout Standard
+Various utilities to create meshes from various kind of inputs arguments.
+\end_layout
+
 \begin_layout Minisec
 boxToMesh
 \begin_inset Index idx
@@ -14652,39 +14674,35 @@ Converts a box into a quad mesh with the same size.
 \end_layout
 
 \begin_layout Minisec
-surfToMesh
+triangulatePolygonPair3d
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-surfToMesh
+triangulatePolygonPair3d
 \end_layout
 
 \end_inset
 
-
+ 
 \end_layout
 
 \begin_layout Standard
-Converts surface grids into face-vertex mesh.
-\end_layout
-
-\begin_layout Minisec
-triangulateCurvePair
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-triangulateCurvePair
-\end_layout
-
+Computes triangulation between a pair of 3D polygons (See Fig.
+\begin_inset space ~
 \end_inset
 
 
-\end_layout
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Other-Mesh-Creation"
+plural "false"
+caps "false"
+noprefix "false"
 
-\begin_layout Standard
-Computes triangulation between a pair of 3D open curves.
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Minisec
@@ -14703,6 +14721,25 @@ triangulatePolygonPair
 
 \begin_layout Standard
 Computes triangulation between a pair of 3D closed curves.
+ Corresponds to an older version of the triangulatePolygonPair3d function.
+\end_layout
+
+\begin_layout Minisec
+triangulateCurvePair
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+triangulateCurvePair
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes triangulation between a pair of 3D open curves (polylines).
 \end_layout
 
 \begin_layout Minisec
@@ -14768,7 +14805,7 @@ Creates a steiner polytope from a set of vectors.
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Steiner-Polytope"
+reference "fig:Other-Mesh-Creation"
 plural "false"
 caps "false"
 noprefix "false"
@@ -14809,9 +14846,17 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
+	filename images/meshes3d/triangulatePolygonPair3d_square_star.png
+	lyxscale 60
+	width 40text%
+
+\end_inset
+
+
+\begin_inset Graphics
 	filename images/meshes3d/steinerPolytope.png
 	lyxscale 50
-	width 50text%
+	width 40text%
 
 \end_inset
 
@@ -14824,11 +14869,12 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Steiner-Polytope"
+name "fig:Other-Mesh-Creation"
 
 \end_inset
 
-Computation of the Steiner polytope obtained from four 3D vectors.
+Other mesh creation functions: triangulation of polygon pairs, computation
+ of the Steiner polytope obtained from four 3D vectors.
 \end_layout
 
 \end_inset
@@ -15477,27 +15523,8 @@ Mesh repairing
 \end_layout
 
 \begin_layout Standard
-Some functions for removing topological inconsistencies and trying to obtain
- a manifold mesh.
-\end_layout
-
-\begin_layout Minisec
-trimMesh
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-trimMesh
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Reduces the memory footprint of a polygonal mesh by removing vertices that
- are not referenced by any face, and recomputing indices of remaining vertices.
+Some (low-level) functions for removing topological inconsistencies and
+ trying to obtain a manifold mesh.
 \end_layout
 
 \begin_layout Minisec
@@ -15571,7 +15598,7 @@ removeMeshEars
 \end_layout
 
 \begin_layout Standard
-Removes vertices that are connected to only one face.
+Removes the vertices that are connected to only one face.
 \end_layout
 
 \begin_layout Minisec
@@ -15670,6 +15697,25 @@ removeMeshFaces
 
 \begin_layout Standard
 Removes faces from a mesh by face indices.
+\end_layout
+
+\begin_layout Minisec
+trimMesh
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+trimMesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Reduces the memory footprint of a polygonal mesh by removing vertices that
+ are not referenced by any face, and recomputing indices of remaining vertices.
 \end_layout
 
 \begin_layout Standard
