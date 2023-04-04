@@ -180,8 +180,16 @@ MatGeom library user manual
 \end_layout
 
 \begin_layout Abstract
-The MatGeom library provides a collection of functions for geometric computing
- within the Matab environment.
+The MatGeom (for 
+\begin_inset Quotes eld
+\end_inset
+
+Matlab Geometry
+\begin_inset Quotes erd
+\end_inset
+
+) library provides a collection of functions for geometric computing within
+ the Matab environment.
  It is organised in several modules, devoted to generic computations in
  2D or 3D, polylines and polygons operators, 3D meshes operators, or geometric
  graphs operators.
@@ -232,7 +240,7 @@ TODO:
 \end_layout
 
 \begin_layout Itemize
-Quick tour
+Quick tours
 \end_layout
 
 \begin_layout Itemize
@@ -249,33 +257,17 @@ Ilya Belevich
 \end_layout
 
 \end_deeper
-\begin_layout Itemize
-Developer info?
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-coding conventions
-\end_layout
-
-\begin_layout Itemize
-util functions: isAxisHandle; parseDrawInputs
-\end_layout
-
-\end_deeper
 \end_inset
 
 
 \end_layout
 
 \begin_layout Chapter
-Introduction
+Overview
 \end_layout
 
 \begin_layout Standard
 MatGeom is a library for geometric computing with Matlab in 2D and 3D.
- It contains several hundreds of functions for the creation and manipulation
- of 2D and 3D shapes such as point sets, lines, polygons, 3D meshes, ellipses...
  The official homepage for the project is hosted on GitHub
 \begin_inset Foot
 status collapsed
@@ -297,7 +289,607 @@ http://github.com/mattools/matGeom
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+MatGeom is a 
+\begin_inset Quotes eld
+\end_inset
+
+function-based
+\begin_inset Quotes erd
+\end_inset
+
+ library: it contains several hundreds of functions for the creation, the
+ manipulation and the display of 2D and 3D shapes such as point sets, lines,
+ polygons, 3D meshes, ellipses...
+ The following sections provide a quick overview of the features in the
+ library.
+\end_layout
+
+\begin_layout Section
+Simple geometries
+\end_layout
+
+\begin_layout Standard
+Basic functionalities comprise creation of simple geometries such as points,
+ lines, ellipses...
+ An example is provided in figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:geom2d-Demo"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, based on the following script.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+% load data
+\end_layout
+
+\begin_layout Plain Layout
+
+data = load('fisheriris');
+\end_layout
+
+\begin_layout Plain Layout
+
+pts = data.meas(:, [3 1]);
+\end_layout
+
+\begin_layout Plain Layout
+
+% display
+\end_layout
+
+\begin_layout Plain Layout
+
+figure; axis equal; hold on; axis([0 8 3 9]);
+\end_layout
+
+\begin_layout Plain Layout
+
+drawPoint(pts, 'bx');
+\end_layout
+
+\begin_layout Plain Layout
+
+% Fit line
+\end_layout
+
+\begin_layout Plain Layout
+
+line = fitLine(pts);
+\end_layout
+
+\begin_layout Plain Layout
+
+drawLine(line, 'color', 'k', 'linewidth', 2);
+\end_layout
+
+\begin_layout Plain Layout
+
+% Draw oriented box
+\end_layout
+
+\begin_layout Plain Layout
+
+obox = orientedBox(pts);
+\end_layout
+
+\begin_layout Plain Layout
+
+drawOrientedBox(obox, 'color', 'k', 'linewidth', 1);
+\end_layout
+
+\begin_layout Plain Layout
+
+% identifiy species index
+\end_layout
+
+\begin_layout Plain Layout
+
+[labels, ~, inds]= unique(str.species);
+\end_layout
+
+\begin_layout Plain Layout
+
+% for ech species, compute equivalent ellipse and display with axes
+\end_layout
+
+\begin_layout Plain Layout
+
+colors = [1 0 0; 0 0.8 0; 0 0 1];
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:3
+\end_layout
+
+\begin_layout Plain Layout
+
+    pts_i = pts(inds == i, :);
+\end_layout
+
+\begin_layout Plain Layout
+
+    drawPoint(pts_i, 'marker', 'x', 'color', colors(i,:), 'linewidth', 2);
+\end_layout
+
+\begin_layout Plain Layout
+
+    elli = equivalentEllipse(pts_i);
+\end_layout
+
+\begin_layout Plain Layout
+
+    drawEllipse(elli, 'color', colors(i,:), 'linewidth', 2)
+\end_layout
+
+\begin_layout Plain Layout
+
+    drawEllipseAxes(elli, 'color', colors(i,:), 'linewidth', 2)
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/geom2d/demo_geom2d_iris.png
+	width 48text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Equivalent ellipse and line fitting.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/polygons2d/leafPoly_variousOps.png
+	width 48text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Polygon geometry pocessing
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:geom2d-Demo"
+
+\end_inset
+
+Illustration of geometry processing in 2D.
+ (a) Computation of equivalent ellipses, of enclosing oriented box, and
+ line fitting.
+ (b) Summary of polygon processing operations: smoothing, simplification,
+ convex hull, intersection with lines.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Polygon processing
+\end_layout
+
+\begin_layout Standard
+The polygons modules provides a variety of functions for manipulation and
+ processing of polygons.
+ Common operations comprise smoothing, simplification (retaining only a
+ selection of vertices), computation of convex hull or of intersections
+ with other geometric primitives.
+ A summary of typical operations in presented in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:geom2d-Demo"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+-b.
+\end_layout
+
+\begin_layout Standard
+The listing of the script used for generating the figure is given below.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+% read polygon data as a numeric N-by-2 array
+\end_layout
+
+\begin_layout Plain Layout
+
+poly = load('leaf_poly.txt');
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% dislay the polygon using basic color option
+\end_layout
+
+\begin_layout Plain Layout
+
+figure; axis equal; hold on; axis([0 600 0 400]);
+\end_layout
+
+\begin_layout Plain Layout
+
+drawPolygon(poly, 'k');
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Bounding box of the polygon
+\end_layout
+
+\begin_layout Plain Layout
+
+poly_bnd = boundingBox(poly);
+\end_layout
+
+\begin_layout Plain Layout
+
+drawBox(poly_bnd, 'k');
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% computes convex hull of polygon vertices
+\end_layout
+
+\begin_layout Plain Layout
+
+poly_hull = convexHull(poly);
+\end_layout
+
+\begin_layout Plain Layout
+
+drawPolygon(poly_hull, 'LineWidth', 2, 'Color', 'k');
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% applies smoothing to the original polygon.
+\end_layout
+
+\begin_layout Plain Layout
+
+poly_smooth = smoothPolygon(poly, 51);
+\end_layout
+
+\begin_layout Plain Layout
+
+drawPolygon(poly_smooth, 'color', 'b', 'linewidth', 2);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Computes a simplified version of the polygon
+\end_layout
+
+\begin_layout Plain Layout
+
+poly_simpl = simplifyPolygon(poly, 20);
+\end_layout
+
+\begin_layout Plain Layout
+
+drawPolygon(poly_simpl, 'color', 'r', 'linewidth', 2);
+\end_layout
+
+\begin_layout Plain Layout
+
+drawVertices(poly_simpl, 'Color', 'k', 'Marker', 's', 'MarkerFaceColor',
+ 'w');
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% compute intersections with an arbitrary line
+\end_layout
+
+\begin_layout Plain Layout
+
+line = createLine([0 250], [600 350]);
+\end_layout
+
+\begin_layout Plain Layout
+
+drawLine(line, 'k');
+\end_layout
+
+\begin_layout Plain Layout
+
+inters = intersectLinePolygon(line, poly_simpl);
+\end_layout
+
+\begin_layout Plain Layout
+
+drawPoint(inters, 'Color', 'r', 'Marker', 'o', 'MarkerFaceColor', 'w', 'linewidt
+h', 2);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Installation and principles
+\end_layout
+
+\begin_layout Section
+Installation
+\end_layout
+
+\begin_layout Standard
+There are several possibilities for installing the MatGeom library.
+\end_layout
+
+\begin_layout Standard
+The latest version of the toolbox can be downloaded as a 
+\begin_inset Quotes eld
+\end_inset
+
+.mltx
+\begin_inset Quotes erd
+\end_inset
+
+ file.
+ When executing the file from Matlab, the toolbox is automatically installed.
+\end_layout
+
+\begin_layout Standard
+If you prefere to get the latest version, you can clone the project from
+ the project homepage
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://github.com/mattools/matGeom
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Organisation
+\end_layout
+
+\begin_layout Standard
+The library is organised into several modules:
+\end_layout
+
+\begin_layout Description
+geom2d General functions in euclidean plane (described in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:geom2d"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Description
+polygons2d Functions operating on point lists (described in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:polygons2d"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Description
+geom3d General functions in 3D euclidean space (described in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:geom3d"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Description
+meshes3d Manipulation of 3D polygonal meshes (described in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:meshes3d"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+There are dependencies between modules.
+ For examples, the 
+\series bold
+polygons2d
+\series default
+ and the 
+\series bold
+geom3d
+\series default
+ modules both depend on the 
+\series bold
+geom2d
+\series default
+ module.
  
+\end_layout
+
+\begin_layout Standard
+Another module is included within the library, but is less documented:
+\end_layout
+
+\begin_layout Description
+graphs Manipulation of geometric graphs (described in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Graphs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+obsolete
+\series default
+ directory contains functions that were develop in previous versions of
+ the library, and that are kept to facilitate the transition from old versions.
 \end_layout
 
 \begin_layout Section
@@ -305,8 +897,7 @@ Usage principles
 \end_layout
 
 \begin_layout Standard
-MatGeom is a colelction of functions for geometric processing.
- The general idea is to represent each geometry with numeric arrays.
+The general idea is to represent each geometry with numeric arrays.
  
 \begin_inset Quotes eld
 \end_inset
@@ -459,141 +1050,6 @@ HC = drawCircle(AX, C1, 'Color', 'b');   % draw a circle on specific axis
 \end_inset
 
 
-\end_layout
-
-\begin_layout Section
-Installation
-\end_layout
-
-\begin_layout Standard
-There are several possibilities for installing the MatGeom library.
-\end_layout
-
-\begin_layout Standard
-The latest version of the toolbox can be downloaded as a 
-\begin_inset Quotes eld
-\end_inset
-
-.mltx
-\begin_inset Quotes erd
-\end_inset
-
- file.
- When executing the file from Matlab, the toolbox is automatically installed.
-\end_layout
-
-\begin_layout Standard
-If you prefere to get the latest version, you can clone the project from
- the project homepage.
-\end_layout
-
-\begin_layout Section
-Organisation
-\end_layout
-
-\begin_layout Standard
-The library is organised into several modules:
-\end_layout
-
-\begin_layout Description
-geom2d General functions in euclidean plane (described in chapter 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:geom2d"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-)
-\end_layout
-
-\begin_layout Description
-polygons2d Functions operating on point lists (described in chapter 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:polygons2d"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-)
-\end_layout
-
-\begin_layout Description
-geom3d General functions in 3D euclidean space (described in chapter 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:geom3d"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-)
-\end_layout
-
-\begin_layout Description
-meshes3d Manipulation of 3D polygonal meshes (described in chapter 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:meshes3d"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-)
-\end_layout
-
-\begin_layout Standard
-There are dependencies between modules.
- For examples, the 
-\series bold
-polygons2d
-\series default
- and the 
-\series bold
-geom3d
-\series default
- modules both depend on the 
-\series bold
-geom2d
-\series default
- module.
- 
-\end_layout
-
-\begin_layout Standard
-Another module is included within the library, but is less documented:
-\end_layout
-
-\begin_layout Description
-graphs Manipulation of geometric graphs (described in chapter 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:Graphs"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-)
-\end_layout
-
-\begin_layout Standard
-The 
-\series bold
-obsolete
-\series default
- directory contains functions that were develop in previous versions of
- the library, and that are kept to facilitate the transition from old versions.
 \end_layout
 
 \begin_layout Section
@@ -1741,6 +2197,58 @@ rays emanate from a point, and are unbounded in one direction
 \end_layout
 
 \begin_layout Standard
+They all can be represented by a parametric equation of the form:
+\begin_inset Formula 
+\[
+\mathbf{x}=\mathbf{x}_{0}+t\mathbf{v}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbf{x}_{0}=(x_{0,x},x_{0,y})$
+\end_inset
+
+ is the origin of the linear geometry, 
+\begin_inset Formula $\mathbf{v}=(v_{x},v_{y})$
+\end_inset
+
+ is its direction vector, and 
+\begin_inset Formula $t$
+\end_inset
+
+ is the parameter, with 
+\begin_inset Formula $t\in[0,1]$
+\end_inset
+
+ for line segments, 
+\begin_inset Formula $t\in\mathbb{R}^{+}$
+\end_inset
+
+ for ray, and 
+\begin_inset Formula $t\in\mathbb{R}$
+\end_inset
+
+ for straight lines.
+ An example of each of these three shapes is represented on Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Line-Shape-Examples"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -1787,21 +2295,7 @@ Three examples of linear shapes: line segment, ray, and straight line.
 \end_layout
 
 \begin_layout Standard
-An example of each of these three shapes is represented on Fig.
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Line-Shape-Examples"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
+The following sections describe the functions related to each geometry family.
 \end_layout
 
 \begin_layout Subsection
@@ -1820,6 +2314,23 @@ name "subsec:Straight-Line"
 
 \begin_layout Standard
 Straight lines are infinite in each direction.
+ They are represented by a 1-by-4 row vector concatenating the origin and
+ the direction vector:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+LINE = [X0 Y0  DX DY];
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Minisec
@@ -1846,6 +2357,24 @@ createLine
 
 \begin_layout Standard
 Creates a straight line from 2 points, or from other inputs.
+\end_layout
+
+\begin_layout Minisec
+fitLine
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+fitLine
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Fits a straight line to a set of points.
 \end_layout
 
 \begin_layout Minisec
@@ -1975,24 +2504,6 @@ Position of a point on a line.
 \end_layout
 
 \begin_layout Minisec
-lineFit
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-lineFit
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Fits a straight line to a set of points.
-\end_layout
-
-\begin_layout Minisec
 clipLine
 \begin_inset Index idx
 status collapsed
@@ -2089,6 +2600,23 @@ edge
 \end_inset
 
  is used interchangeably with line segment.
+ They are represented by a 1-by-4 row vector concatenating the coordinates
+ of the first and last points:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+EDGE = [X1 Y1  X2 Y2];
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Minisec
@@ -2403,6 +2931,27 @@ name "subsec:Ray"
 
 \begin_layout Standard
 Rays emanate from a point, and are unbounded in one direction.
+ They are represented the same way as (straight) lines, by a 1-by-4 row
+ vector concatenating the origin and the direction vector:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+RAY = [X0 Y0  DX DY];
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The difference of behavior is managed within the functions.
 \end_layout
 
 \begin_layout Minisec
@@ -2858,7 +3407,7 @@ Construction of a circle from 3 points (blue curve), discretization into
 \end_layout
 
 \begin_layout Subsubsection*
-Functions
+Creation functions
 \end_layout
 
 \begin_layout Minisec
@@ -2903,6 +3452,46 @@ createDirectedCircle
 
 \begin_layout Standard
 Creates a directed circle.
+\end_layout
+
+\begin_layout Minisec
+enclosingCircle
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+enclosingCircle
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finds the minimum circle enclosing a set of points.
+\end_layout
+
+\begin_layout Minisec
+circumCircle
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+circumCircle
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Circumscribed circle of three points.
+\end_layout
+
+\begin_layout Subsubsection*
+Processing functions
 \end_layout
 
 \begin_layout Minisec
@@ -3014,42 +3603,6 @@ Tests if a point is located on a given circle.
 \end_layout
 
 \begin_layout Minisec
-enclosingCircle
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-enclosingCircle
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Finds the minimum circle enclosing a set of points.
-\end_layout
-
-\begin_layout Minisec
-circumCircle
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-circumCircle
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Circumscribed circle of three points.
-\end_layout
-
-\begin_layout Minisec
 radicalAxis
 \begin_inset Index idx
 status collapsed
@@ -3065,6 +3618,10 @@ radicalAxis
 
 \begin_layout Standard
 Computes the radical axis (or radical line) of 2 circles
+\end_layout
+
+\begin_layout Subsubsection*
+Display functions
 \end_layout
 
 \begin_layout Minisec
@@ -4522,7 +5079,7 @@ Triangles are simply represented by a
 \begin_inset Formula $3\times2$
 \end_inset
 
- array of three points.
+ numeric array containing the coordinates of the three vertex points.
 \end_layout
 
 \begin_layout Minisec
@@ -4613,7 +5170,11 @@ where the
 \begin_inset Formula $1\times2$
 \end_inset
 
- row vectors, the transform matrix is represented as in eq.
+ row vectors, the transform is represented as the 
+\begin_inset Formula $3\times3$
+\end_inset
+
+ matrix in eq.
 \begin_inset space ~
 \end_inset
 
@@ -5070,23 +5631,6 @@ polygons2d
  module contains functions operating on shapes composed of a vertex list,
  like polygons or polylines.
  
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Find some example polygons and polylines:
-\end_layout
-
-\begin_layout Itemize
-outline of leaf image from Eric
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -5837,7 +6381,17 @@ polygonCentroid
 
 \begin_layout Standard
 Computes the centroid (center of mass) of a polygon.
- 
+ It is in general different from the vertex-based centroid, as obtained
+ by the 
+\begin_inset Quotes eld
+\end_inset
+
+centroid
+\begin_inset Quotes erd
+\end_inset
+
+ function, and from the centroid of its boundary, as obtained by the polylineCen
+troid function.
 \end_layout
 
 \begin_layout Minisec
@@ -6553,7 +7107,7 @@ status open
 \begin_inset Graphics
 	filename images/polygons2d/leafPoly_smoothM31_annot.png
 	lyxscale 50
-	width 45text%
+	width 48text%
 
 \end_inset
 
@@ -6561,7 +7115,7 @@ status open
 \begin_inset Graphics
 	filename images/polygons2d/leafPoly_simplifiedD5_annot.png
 	lyxscale 50
-	width 45text%
+	width 48text%
 
 \end_inset
 
@@ -6592,6 +7146,13 @@ Smoothing and simplification of a polygon.
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
 \end_inset
 
 
@@ -6641,14 +7202,14 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
 	filename images/polygons2d/expandPolygon_OuterAndInner_crop.png
 	lyxscale 50
-	height 5cm
+	height 4.5cm
 
 \end_inset
 
@@ -6737,6 +7298,57 @@ noprefix "false"
 ).
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/polygons2d/triangulatePolygon_leafDP5.png
+	lyxscale 50
+	width 48text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/polygons2d/demo_polygonSkeleton_leaf.png
+	lyxscale 50
+	width 48text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Triangulation-Skeleton"
+
+\end_inset
+
+Global operations on a polygon.
+ Left: triangulation (on a simplified version of the polygon).
+ Right: skeletonization (on a smoothed version of the polygon).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Minisec
 polygonSkeleton
 \begin_inset Index idx
@@ -6777,57 +7389,24 @@ noprefix "false"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename images/polygons2d/triangulatePolygon_leafDP5.png
-	lyxscale 50
-	width 45text%
-
+ The result is given as a pair of arguments, containing the coordinates
+ of the skeletong vertices, and the edges as pairs of indices to adjacent
+ skeleton vertices.
+ See the chapter on graphs for manipulation of such data (chapter
+\begin_inset space ~
 \end_inset
 
 
-\begin_inset Graphics
-	filename images/polygons2d/demo_polygonSkeleton_leaf.png
-	lyxscale 50
-	width 45text%
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Graphs"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Triangulation-Skeleton"
-
-\end_inset
-
-Global operations on a polygon.
- Left: triangulation (on a simplified version of the polygon).
- Right: skeletonization (on a smoothed version of the polygon).
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+).
 \end_layout
 
 \begin_layout Minisec
