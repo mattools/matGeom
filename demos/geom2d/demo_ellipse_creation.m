@@ -1,9 +1,9 @@
 % Demo script on various ways to create an ellipse.
 %
-%   output = create_ellipse_demo(input)
+%   output = demo_ellipse_creation(input)
 %
 %   Example
-%   create_ellipse_demo
+%   demo_ellipse_creation
 %
 %   See also
 %
