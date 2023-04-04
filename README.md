@@ -47,7 +47,7 @@ An example is provided in the following script.
         drawEllipseAxes(elli, 'color', colors(i,:), 'linewidth', 2)
     end
 
-![Computation of equivalent ellipses, oriented box, and fitting line from set of points](https://github.com/mattools/matGeom/blob/master/doc/images/demo_geom2d_iris.png)
+![Computation of equivalent ellipses, oriented box, and fitting line from set of points](https://github.com/mattools/matGeom/blob/master/docs/images/demo_geom2d_iris.png)
 
 It is possible to work with more complex shapes such as polygonal lines ("polylines") or polygons.
 Common operations comprise smoothing, simplification (retaining only a selection of vertices), 
@@ -84,7 +84,7 @@ A summary of typical operations in presented in the following script.
     inters = intersectLinePolygon(line, poly_simpl);
     drawPoint(inters, 'Color', 'r', 'Marker', 'o', 'MarkerFaceColor', 'w', 'linewidth', 2);
 
-![Summary of polygon processing operations: smoothing, simplification, convex hull, intersection with lines.](https://github.com/mattools/matGeom/blob/master/doc/images/leafPoly_variousOps.png)
+![Summary of polygon processing operations: smoothing, simplification, convex hull, intersection with lines.](https://github.com/mattools/matGeom/blob/master/docs/images/leafPoly_variousOps.png)
 
 
 ## Package organization
