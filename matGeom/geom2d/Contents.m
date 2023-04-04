@@ -49,6 +49,7 @@
 % Straight lines
 %   lines2d                  - Description of functions operating on planar lines.
 %   createLine               - Create a straight line from 2 points, or from other inputs.
+%   fitLine                  - Fit a straight line to a set of points.
 %   medianLine               - Create a median line between two points.
 %   cartesianLine            - Create a straight line from cartesian equation coefficients.
 %   orthogonalLine           - Create a line orthogonal to another one through a point.
@@ -56,7 +57,6 @@
 %   intersectLines           - Return all intersection points of N lines in 2D.
 %   lineAngle                - Computes angle between two straight lines.
 %   linePosition             - Position of a point on a line.
-%   lineFit                  - Fit a straight line to a set of points.
 %   clipLine                 - Clip a line with a box.
 %   reverseLine              - Return same line but with opposite orientation.
 %   transformLine            - Transform a line with an affine transform.

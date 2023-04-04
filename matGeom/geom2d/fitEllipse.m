@@ -35,7 +35,7 @@ function elli = fitEllipse(varargin)
 %  }
 %
 %   See also 
-%     geom2d, ellipses2d, createEllipse, equivalentEllipse
+%     geom2d, ellipses2d, createEllipse, equivalentEllipse, fitLine
 %
 
 % ------
@@ -152,4 +152,5 @@ Rv = -wCentre ./ Avv;
 Ru = sqrt(abs(Ru)) .* sign(Ru);
 Rv = sqrt(abs(Rv)) .* sign(Rv);
 
+% create row vector representing ellipse
 elli = [uCentre, vCentre, Ru, Rv, rad2deg(theta)];

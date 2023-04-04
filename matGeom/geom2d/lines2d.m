@@ -17,16 +17,15 @@ function lines2d(varargin)
 %   See also 
 %   points2d, vectors2d, edges2d, rays2d
 %   createLine, cartesianLine, medianLine, edgeToLine, lineToEdge
-%   orthogonalLine, parallelLine, bisector, radicalAxis
+%   orthogonalLine, parallelLine, bisector, radicalAxis, fitLine
 %   lineAngle, linePosition, projPointOnLine
 %   isPointOnLine, distancePointLine, isLeftOriented
 %   intersectLines, intersectLineEdge, clipLine
 %   reverseLine, transformLine, drawLine
-%   lineFit
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
 % Copyright 2008-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 

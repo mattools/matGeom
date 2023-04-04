@@ -18,12 +18,12 @@ function line = fitLine3d(points)
 %     drawLine3d(line, 'color', 'm', 'LineWidth', 4);
 %
 %   See also 
-%     lines3d, equivalentEllipsoid, fitPlane
+%     lines3d, equivalentEllipsoid, fitPlane, fitLine
 %
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2012-11-11, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012-2022 INRA - Cepia Software Platform
 
@@ -51,4 +51,5 @@ if U(1,1) < 0
     U(:,3) = -U(:,3);
 end
 
+% create row vector representing the line
 line = [center U(:,1)'];
