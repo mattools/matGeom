@@ -14,9 +14,8 @@ function varargout = clipMeshVertices(v, f, b, varargin)
 %   faces instead of the outer faces.
 %
 %   [V2, F2] = clipMeshVertices(..., 'trimMesh', TF)
-%   Also specifies if the isolated vertices need to be removed (TF=true) ot
+%   Also specifies if the isolated vertices need to be removed (TF=true) or
 %   not (TF=false). Default is false.
-%
 %
 %   Example
 %     [v, f] = createSoccerBall;
