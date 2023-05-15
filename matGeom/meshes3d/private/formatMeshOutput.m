@@ -59,6 +59,5 @@ switch nbArgs
         res{3} = faces;
         
     otherwise
-        error('Can not manage more than 3 outputs');
+        error('Cannot manage more than 3 outputs');
 end
-

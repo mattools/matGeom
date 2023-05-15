@@ -15,6 +15,9 @@ function runAllTests(varargin)
 % Created: 2011-07-20,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
+% Change the directory 
+cd(fileparts(mfilename('fullpath')))
+
 % Add matGeom to path
 addpath(genpath(strrep(mfilename('fullpath'),['tests' filesep mfilename],'matGeom')))
 
@@ -34,5 +37,3 @@ for i = 1:length(directories)
     runtests;
     cd('..');
 end
-
-    
