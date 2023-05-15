@@ -44,7 +44,7 @@ switch lower(ext)
     case '.stl'
         mesh = readMesh_stl(fileName);
     otherwise
-        error('readMesh.m does not support %s files', upper(ext(2:end)));
+        error('readMesh.m does not support %s files.', upper(ext(2:end)));
 end
 
 if parser.Results.trimMesh
