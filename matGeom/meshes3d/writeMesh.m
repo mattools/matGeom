@@ -23,7 +23,7 @@ if ~ischar(fileName)
     error('First argument must contain the name of the file');
 end
 
-% optionnaly parses data
+% optionaly parses data
 if isstruct(vertices)
     if nargin > 2
         varargin = [{faces} varargin{:}];

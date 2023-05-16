@@ -28,17 +28,8 @@ function inds = meshBoundaryVertexIndices(varargin)
 % Created: 2019-05-01, using Matlab 8.6.0.267246 (R2015b)
 % Copyright 2019-2022 INRA - Cepia Software Platform
 
-[vertices, edges, faces] = parseMeshData(varargin{:});
+[vertices, faces] = parseMeshData(varargin{:});
 
-% Compute edge-vertex map if not specified
-if isempty(edges)
-    edges = meshEdges(vertices, faces);
-end
+BE = meshBoundaryEdges(vertices, faces);
 
-% compute edges to faces map
-edgeFaces = meshEdgeFaces(vertices, edges, faces);
-
-borderEdges = sum(edgeFaces == 0, 2) > 0;
-
-inds = edges(borderEdges, :);
-inds = unique(inds(:));
+inds = unique(BE(:));

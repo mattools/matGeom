@@ -29,8 +29,7 @@ function varargout = trimMesh(varargin)
 
 if isnumeric(faces)
     % Delete duplicate vertices
-    [tempVertices, ~, tempFaceVertexIdx] = unique(vertices, 'rows');
-    tempFaces = tempFaceVertexIdx(faces);
+    [tempVertices, tempFaces] = removeDuplicateVertices(vertices, faces);
     % Delete unindexed/unreferenced vertices
     usedVertexIdx = ismember(1:length(tempVertices),unique(tempFaces(:)));
     newVertexIdx = cumsum(usedVertexIdx);
@@ -41,7 +40,7 @@ if isnumeric(faces)
     tempVertices2 = tempVertices(usedVertexIdx,:);
     % Delete duplicate faces
     [~, uniqueFaceIdx, ~] = unique(tempFaces2, 'rows');
-    duplicateFaceIdx=~ismember(1:size(tempFaces2,1),uniqueFaceIdx);
+    duplicateFaceIdx = ~ismember(1:size(tempFaces2,1), uniqueFaceIdx);
     [vertices2, faces2] = removeMeshFaces(tempVertices2, tempFaces2, duplicateFaceIdx);
 elseif iscell(faces)
     % identify vertices referenced by a face

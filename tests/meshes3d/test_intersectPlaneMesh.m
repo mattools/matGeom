@@ -17,57 +17,46 @@ function test_suite = test_intersectPlaneMesh
 
 test_suite = functiontests(localfunctions);
 
-
-function test_cube_horizPlane(testCase) %#ok<*DEFNU>
-% Test call of function without argument
-
+function test_cube_horizPlane(testCase)
 plane = createPlane([5 5 5], [0 0 1]);
 [v, f] = createCube;
+f = triangulateFaces(f);
 v = v * 10;
-
 polys = intersectPlaneMesh(plane, v, f);
+
 testCase.assertTrue(iscell(polys));
 testCase.assertEqual(1, length(polys));
-testCase.assertEqual(4, size(polys{1}, 1));
-
+testCase.assertEqual(8, size(polys{1}, 1));
 
 
 function test_cube_diagPlane(testCase)
-% Test call of function without argument
-
 plane = createPlane([1 1 1], [3 4 5]);
 [v, f] = createCube;
+f = triangulateFaces(f);
 v = v * 5;
-
 polys = intersectPlaneMesh(plane, v, f);
 
 testCase.assertTrue(iscell(polys));
 testCase.assertEqual(1, length(polys));
-testCase.assertEqual(3, size(polys{1}, 1));
-
+testCase.assertEqual(6, size(polys{1}, 1));
 
 
 function test_cube_planeOutside(testCase)
-% Test call of function without argument
-
 plane = createPlane([15 15 15], [0 0 1]);
 [v, f] = createCube;
+f = triangulateFaces(f);
 v = v * 5;
-
 polys = intersectPlaneMesh(plane, v, f);
 
 testCase.assertTrue(iscell(polys));
 testCase.assertEqual(0, length(polys));
 
-function test_torus(testCase)
 
+function test_torus(testCase)
 torus = [0 0 0  30 10 0 0];
 [v, f] = torusMesh(torus);
-
+f = triangulateFaces(f);
 plane = [0 0 0  1 0 0  0 0 1];
-
 polys = intersectPlaneMesh(plane, v, f);
 
 testCase.assertEqual(2, length(polys));
-
-
