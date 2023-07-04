@@ -53,6 +53,8 @@ testCase.assertEqual(0, length(polys));
 
 
 function test_torus(testCase)
+% expect two polygons as intersection
+
 torus = [0 0 0  30 10 0 0];
 [v, f] = torusMesh(torus);
 f = triangulateFaces(f);
@@ -60,3 +62,33 @@ plane = [0 0 0  1 0 0  0 0 1];
 polys = intersectPlaneMesh(plane, v, f);
 
 testCase.assertEqual(2, length(polys));
+
+
+function test_verticalTriangle(testCase)
+% Expect a single polyline as output.
+
+v = [0 0 0; 10 0 0;0 0 10];
+f = [1 2 3];
+plane = [0 0 5  1 0 0  0 1 0];
+
+[rings, curves] = intersectPlaneMesh(plane, v, f);
+
+assertEqual(testCase, 0, length(rings));
+assertEqual(testCase, 1, length(curves));
+assertEqual(testCase, [2 3], size(curves{1}));
+
+
+function test_openCube(testCase)
+% Intersect plane with a cube with two opposite faces removed.
+% expect two open polylines as output.
+
+[v, f] = createCube;
+f = triangulateFaces(f(1:4, :));
+plane = [0 0 0.5  1 0 0  0 1 0];
+
+[rings, curves] = intersectPlaneMesh(plane, v, f);
+
+assertEqual(testCase, 0, length(rings));
+assertEqual(testCase, 2, length(curves));
+assertEqual(testCase, [3 3], size(curves{1}));
+assertEqual(testCase, [3 3], size(curves{2}));
