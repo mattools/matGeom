@@ -17,7 +17,7 @@ function writePolygonSet(polys, filename)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2013-01-14
-% Copyright 2013-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2013-2023 INRA - TPV URPOI - BIA IMASTE
 
 % open file for reading
 fid = fopen(filename, 'wt');

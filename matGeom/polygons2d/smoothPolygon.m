@@ -20,9 +20,9 @@ function res = smoothPolygon(poly, M)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2015-02-17, using Matlab 8.4.0.150421 (R2014b)
-% Copyright 2015-2022 INRA - Cepia Software Platform
+% Copyright 2015-2023 INRA - Cepia Software Platform
 
 % compute the number of elements before and after
 M1 = floor((M - 1) / 2);

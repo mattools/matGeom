@@ -14,9 +14,9 @@ function nodes = steinerPolygon(points)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2006-04-28
-% Copyright 2006-2022 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2006-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 nodes = [0 0];
 for i=1:length(points)

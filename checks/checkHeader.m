@@ -13,7 +13,6 @@ function checkHeader
 %   Additional checks could be added.
 %   
 %   Todo
-%       - Standardize E-mail adress to "david.legland@inrae.fr"?
 %       - Add checks for "Example" section.
 %       - Add additional checks for the "See also" section: No
 %       self-reference, references, indentations of the references.
@@ -26,11 +25,12 @@ function checkHeader
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2022-11-08, using MATLAB 9.13.0.2080170 (R2022b) Update 1
-% Copyright 2022
+% Copyright 2022-2023
 
 cd(strrep(mfilename('fullpath'),mfilename,''))
 
-mFiles = dir('../matGeom/**/*.m');
+% mFiles = dir('../matGeom/**/*.m');
+mFiles = dir('../matGeom/utils/*.m');
 % Exclude the Contents.m files
 mFiles(contains({mFiles.folder}','deprecated'))=[];
 
@@ -133,8 +133,11 @@ for f=1:length(mFiles)
             end
         end
     end
+
     % Change e-mail to E-Mail
     S(aSec1Idx+2) = regexprep(S(aSec1Idx+2), '% e-mail:', '% E-mail:');
+    % Standardize E-Mail of David Legland to david.legland@inrae.fr
+    S(aSec1Idx+2) = regexprep(S(aSec1Idx+2), 'david.legland@([a-zA-Z0-9._-])+\.([a-zA-Z]{2,4})', 'david.legland@inrae.fr');
     
     % Move affiliation to the copyright line if necesarry
     if contains(S(aSec1Idx+3),'INRA') && contains(S(aSec1Idx+4),'created','IgnoreCase',1)

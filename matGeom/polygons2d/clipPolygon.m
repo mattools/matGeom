@@ -17,7 +17,7 @@ function poly2 = clipPolygon(polygon, w)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-05-14
-% Copyright 2005-2022 INRA - Cepia Software Platform
+% Copyright 2005-2023 INRA - Cepia Software Platform
 
 % check case of polygons stored in cell array
 if iscell(polygon)

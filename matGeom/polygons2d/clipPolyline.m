@@ -28,7 +28,7 @@ function res = clipPolyline(poly, box)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-05-14
-% Copyright 2005-2022 INRA - Cepia Software Platform
+% Copyright 2005-2023 INRA - Cepia Software Platform
 
 % check case of polylines stored in cell array
 if iscell(poly)

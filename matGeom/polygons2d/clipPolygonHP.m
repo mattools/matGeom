@@ -35,7 +35,7 @@ function varargout = clipPolygonHP(poly, line, varargin)
 % Author: David Legland, oqilipo
 % E-mail: david.legland@inrae.fr
 % Created: 2005-07-31
-% Copyright 2005-2022 INRA - Cepia Software Platform
+% Copyright 2005-2023 INRA - Cepia Software Platform
 
 % Parsing
 p = inputParser;

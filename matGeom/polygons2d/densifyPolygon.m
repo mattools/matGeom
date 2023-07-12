@@ -20,9 +20,9 @@ function poly2 = densifyPolygon(poly, N)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2011-11-25, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011-2022 INRA - Cepia Software Platform
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 % number of vertices, and of edges
 Nv = size(poly, 1);

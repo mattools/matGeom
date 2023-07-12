@@ -22,7 +22,7 @@ function co = convexification(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-01-12
-% Copyright 2005-2022 INRA - Cepia Software Platform
+% Copyright 2005-2023 INRA - Cepia Software Platform
 
 if ~isempty(varargin)>0
     var = varargin{1};

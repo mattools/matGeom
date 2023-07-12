@@ -22,9 +22,9 @@ function [res, thetaList] = polygonSignature(poly, varargin)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2013-03-14, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2013-2022 INRA - Cepia Software Platform
+% Copyright 2013-2023 INRA - Cepia Software Platform
 
 % default angle list
 thetaList = 0:359;

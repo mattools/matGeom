@@ -25,7 +25,7 @@ function [nodes, edges] = medialAxisConvex(points)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-07-07
-% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 %   TODO: is not fully implemented, need to finish it
 
