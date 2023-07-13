@@ -17,7 +17,7 @@ function polyShape = polygonToPolyshape(poly, varargin)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2022-12-31, using MATLAB 9.13.0.2080170 (R2022b) Update 1
-% Copyright 2022
+% Copyright 2022-2023
 
 parser = inputParser;
 logParValidFunc = @(x) (islogical(x) || isequal(x,1) || isequal(x,0));

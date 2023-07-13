@@ -162,7 +162,7 @@
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2005-11-07
-% Copyright 2005-2022 INRAE
+% Copyright 2005-2023 INRAE
 
 help(mfilename);
 

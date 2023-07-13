@@ -16,7 +16,7 @@ function pt = steinerPoint(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2004-11-11
-% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 if nargin==1
     var = varargin{1};

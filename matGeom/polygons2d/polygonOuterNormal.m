@@ -31,7 +31,7 @@ function vect = polygonOuterNormal(poly, iVertex)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2017-11-23, using Matlab 8.6.0.267246 (R2015b)
-% Copyright 2017-2022 INRA - Cepia Software Platform
+% Copyright 2017-2023 INRA - Cepia Software Platform
 
 % number of vertices
 nv = size(poly, 1);

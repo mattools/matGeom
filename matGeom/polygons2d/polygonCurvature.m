@@ -31,7 +31,7 @@ function curv = polygonCurvature(poly, M)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2018-03-02, using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2018-2022 INRA - Cepia Software Platform
+% Copyright 2018-2023 INRA - Cepia Software Platform
 
 % number of vertices of polygon
 n = size(poly, 1);

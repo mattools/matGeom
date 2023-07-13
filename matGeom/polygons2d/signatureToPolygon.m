@@ -12,9 +12,9 @@ function poly = signatureToPolygon(signature, varargin)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2015-04-28, using Matlab 8.4.0.150421 (R2014b)
-% Copyright 2015-2022 INRA - Cepia Software Platform
+% Copyright 2015-2023 INRA - Cepia Software Platform
 
 nAngles = length(signature);
 

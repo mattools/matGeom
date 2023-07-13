@@ -21,7 +21,7 @@ function point = geod2cart(src, curve, normal)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2004-04-08
-% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 t = parametrize(curve);
 N = size(src, 1);

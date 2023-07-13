@@ -19,7 +19,7 @@ function box = polygonBounds(polygon)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2007-10-12, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007-2022 INRA - Cepia software platform
+% Copyright 2007-2023 INRA - Cepia software platform
 
 % transform as a cell array of simple polygons
 polygons = splitPolygons(polygon);
