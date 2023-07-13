@@ -1,15 +1,20 @@
-function [rings, openPolys] = intersectPlaneMesh(plane, v, f)
+function [polys, closedFlag] = intersectPlaneMesh(plane, v, f)
 %INTERSECTPLANEMESH Compute the polylines resulting from plane-mesh intersection.
 %
-%   RINGS = intersectPlaneMesh(P, V, F)
-%   [RINGS, CURVES] = intersectPlaneMesh(P, V, F)
+%   PLOYS = intersectPlaneMesh(P, V, F)
+%   [POLYS, CLOSED] = intersectPlaneMesh(P, V, F)
 %   Computes the intersection between a plane and a mesh. 
 %   The plane P is given as:
 %   P = [X0 Y0 Z0  DX1 DY1 DZ1  DX2 DY2 DZ2]
 %   The mesh is given as numeric array V of vertex coordinates and an array
 %   of (triangular) face vertex indices.
-%   The first output is a cell array of closed polylines, the second output
-%   is a cell array of open polylines ("line strings"). 
+%   The output POLYS is a cell array of polylines, where ech cell contains
+%   a N-by-3 numeric array of coordinates. The (optional) output CLOSED is
+%   a logical array the same size as the POLYS, indicating whether the
+%   corresponding polylines are closed (true), or open (false). Use the
+%   functions 'drawPolygon3d' to display closed polylines, and
+%   'drawPolyline3d' to display open polylines.
+%
 %
 %   Example
 %     % Intersect a cube by a plane
@@ -44,7 +49,7 @@ function [rings, openPolys] = intersectPlaneMesh(plane, v, f)
 %     drawPolygon3d(polySet, 'lineWidth', 2, 'color', 'y')
 %
 %     % Demonstrate ability to draw open mesh intersections
-%     poly = circleArcToPolyline([10 0 5 0 180], 33);
+%     poly = circleArcToPolyline([10 0 5 90 180], 33);
 %     [x, y, z] = revolutionSurface(poly, linspace(-pi, pi, 65));
 %     [v, f] = surfToMesh(x, y, z);
 %     f = triangulateFaces(f);
@@ -53,8 +58,8 @@ function [rings, openPolys] = intersectPlaneMesh(plane, v, f)
 %     drawMesh(v, f, 'linestyle', 'none', 'facecolor', [0.0 0.8 0.0], 'faceAlpha', 0.7);
 %     drawPlane3d(plane, 'facecolor', 'm', 'faceAlpha', 0.5);
 %     % compute and display intersection
-%     [curves1, curves2] = intersectPlaneMesh(plane, v, f);
-%     drawPolyline3d(curves2, 'linewidth', 2, 'color', 'b')
+%     [curves, closed] = intersectPlaneMesh(plane, v, f);
+%     drawPolyline3d(curves(~closed), 'linewidth', 2, 'color', 'b')
 %
 %
 %   See also 
@@ -240,3 +245,8 @@ while any(remainingCrossEdges)
     poly = intersectionPoints(polyEdgeInds, :);
     rings = [rings, {poly}]; %#ok<AGROW>
 end
+
+
+%% Format output array
+polys = [rings, openPolys];
+closedFlag = [true(1, length(rings)), false(1, length(openPolys))];
