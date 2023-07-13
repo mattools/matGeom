@@ -12,7 +12,7 @@ function varargout = removeDuplicateVertices(v,varargin)
 %       TOL = 1     -> Integer match
 %
 %   [VIDX, V2IDX] = removeDuplicateVertices(V, F, TOL, 'indexOutput', true)
-%   Gives the indices instead instead of the final mesh. This means:
+%   Gives the indices instead of the final mesh. This means:
 %       V2 = V(VIDX,:)
 %       F2 = V2IDX(F)
 %       V = V2(V2IDX,:)
@@ -70,7 +70,7 @@ if indexOutput
 else
     % Output is the final mesh
     v2 = v(vIdx,:);
-    f2 = reshape(v2Idx(f),size(f));
+    f2 = v2Idx(f);
     varargout = formatMeshOutput(nargout, v2, f2);
 end
 
