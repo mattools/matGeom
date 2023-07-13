@@ -1,15 +1,21 @@
 function varargout = removeDuplicateVertices(v,varargin)
 % REMOVEDUPLICATEVERTICES Remove duplicate vertices of a mesh.
 %
-%   [V, F] = removeDuplicateVertices(V, F) 
+%   [V2, F2] = removeDuplicateVertices(V, F) 
 %   Remove duplicate vertices of a mesh defined by the vertices V and 
 %   faces F.
 %
-%   [V, F] = removeDuplicateVertices(V, F, TOL)
+%   [V2, F2] = removeDuplicateVertices(V, F, TOL)
 %   Remove duplicate vertices with the tolerance TOL:
 %       TOL = 0     -> Exact match
 %       TOL = 1e-1  -> Match up to first decimal
 %       TOL = 1     -> Integer match
+%
+%   [VIDX, V2IDX] = removeDuplicateVertices(V, F, TOL, 'indexOutput', true)
+%   Gives the indices instead instead of the final mesh. This means:
+%       V2 = V(VIDX,:)
+%       F2 = V2IDX(F)
+%       V = V2(V2IDX,:)
 %
 %   Example:
 %     v = [6-1e-6,0,-5;4,2,-2*pi;0,2,-7;6,0,-5;3,1,-9;0,2,-7;...
@@ -51,7 +57,6 @@ tol = parser.Results.tol;
 indexOutput = parser.Results.indexOutput;
 
 %% Remove duplicate vertices
-% v2 = v(vIdx,:) and v = v2(v2Idx,:)
 if tol == 0
     [~, vIdx, v2Idx] = unique(v,'rows','stable');
 else
