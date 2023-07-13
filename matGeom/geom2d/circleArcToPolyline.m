@@ -23,7 +23,7 @@ function varargout = circleArcToPolyline(arc, N)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2006-05-22
-% Copyright 2006-2022 INRA - Cepia Software Platform
+% Copyright 2006-2023 INRA - Cepia Software Platform
 
 % default value for N
 if nargin < 2

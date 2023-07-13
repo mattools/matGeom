@@ -19,7 +19,7 @@ function varargout = squareGrid(bounds, origin, size)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-08-06
-% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % find all x coordinate
 x1 = bounds(1) + mod(origin(1)-bounds(1), size(1));

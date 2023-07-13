@@ -22,9 +22,9 @@ function dist = distancePoints(p1, p2, varargin)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-02-24
-% Copyright 2004-2022 INRA - Cepia Software Platform
+% Copyright 2004-2023 INRA - Cepia Software Platform
 
 %% Setup options
 

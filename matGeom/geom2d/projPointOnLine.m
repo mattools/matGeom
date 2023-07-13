@@ -24,7 +24,7 @@ function point = projPointOnLine(point, line)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2005-07-04
-% Copyright 2005-2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2005-2023 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % parse input arguments
 p = inputParser;

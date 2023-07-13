@@ -10,9 +10,9 @@ function coeffs = fitPolynomialTransform2d(pts, ptsRef, degree)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2013-11-05, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2013-2022 INRA - Cepia Software Platform
+% Copyright 2013-2023 INRA - Cepia Software Platform
 
 %% Extract data
 

@@ -27,7 +27,7 @@ function vn = normalizeVector(v)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2004-11-29
-% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 if ismatrix(v)
     vn = bsxfun(@rdivide, v, sqrt(sum(v.^2, 2)));

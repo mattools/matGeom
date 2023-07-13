@@ -22,7 +22,7 @@ function theta = edgeAngle(edge)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2003-04-06
-% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 line = createLine(edge(:,1:2), edge(:,3:4));
 theta = lineAngle(line);

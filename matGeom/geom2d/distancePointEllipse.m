@@ -33,7 +33,7 @@ function [dist, proj] = distancePointEllipse(point, elli)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2022-07-17, using Matlab 9.12.0.1884302 (R2022a)
-% Copyright 2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2022-2023 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 proj = projPointOnEllipse(point, elli);
 

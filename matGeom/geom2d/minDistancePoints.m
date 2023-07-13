@@ -72,7 +72,7 @@ function varargout = minDistancePoints(p1, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2004-06-15
-% Copyright 2004-2022 INRAE - Cepia Software Platform
+% Copyright 2004-2023 INRAE - Cepia Software Platform
 
 %% Initialisations
 

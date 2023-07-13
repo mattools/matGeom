@@ -34,7 +34,7 @@ function alpha = vectorAngle(v1, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2007-10-18
-% Copyright 2007-2022 INRA - Cepia Software Platform
+% Copyright 2007-2023 INRA - Cepia Software Platform
 
 %% Initializations
 

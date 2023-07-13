@@ -14,8 +14,8 @@ function boxes2d(varargin)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008-2022 INRA - Cepia Software Platform
+% Copyright 2008-2023 INRA - Cepia Software Platform
 
 help('boxes2d');

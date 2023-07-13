@@ -26,7 +26,7 @@ function res = orthogonalLine(line, point)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2003-10-31
-% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 N = max(size(point, 1), size(line, 1));
 

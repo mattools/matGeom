@@ -20,9 +20,9 @@ function res = polynomialTransform2d(pts, coeffs)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2013-09-04, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2013-2022 INRA - Cepia Software Platform
+% Copyright 2013-2023 INRA - Cepia Software Platform
 
 x = pts(:,1);
 y = pts(:,2);

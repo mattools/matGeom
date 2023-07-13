@@ -1,9 +1,9 @@
 function varargout = removeDuplicateVertices(v,varargin)
-% REMOVEDUPLICATEVERTICES Remove duplicate vertices of a mesh
+% REMOVEDUPLICATEVERTICES Remove duplicate vertices of a mesh.
 %
 %   [V, F] = removeDuplicateVertices(V, F) 
-%   Remove duplicate vertices of a mesh defined by the vertices V and faces
-%   F.
+%   Remove duplicate vertices of a mesh defined by the vertices V and 
+%   faces F.
 %
 %   [V, F] = removeDuplicateVertices(V, F, TOL)
 %   Remove duplicate vertices with the tolerance TOL:
@@ -31,7 +31,7 @@ function varargout = removeDuplicateVertices(v,varargin)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2023-05-14, using Matlab 9.13.0.2080170 (R2022b) Update 1
-% Copyright 2021-2023
+% Copyright 2023
 
 
 %% Parse input
@@ -43,21 +43,30 @@ else
 end
 
 parser = inputParser;
+logParValidFunc = @(x) (islogical(x) || isequal(x,1) || isequal(x,0));
 addOptional(parser, 'tol', 0, @(x) validateattributes(x, {'numeric'}, {'scalar', '>=',0, '<=',1}));
+addParameter(parser, 'indexOutput', false, logParValidFunc);
 parse(parser, varargin{:});
 tol = parser.Results.tol;
+indexOutput = parser.Results.indexOutput;
 
 %% Remove duplicate vertices
+% v2 = v(vIdx,:) and v = v2(v2Idx,:)
 if tol == 0
     [~, vIdx, v2Idx] = unique(v,'rows','stable');
 else
     [~, vIdx, v2Idx] = unique(round(v/(tol)),'rows','stable');
 end
-v2 = v(vIdx,:);
-
-f2 = reshape(v2Idx(f),size(f));
 
 %% Parse output
-varargout = formatMeshOutput(nargout, v2, f2);
+if indexOutput
+    % If indices are requested
+    varargout = {vIdx, v2Idx};
+else
+    % Output is the final mesh
+    v2 = v(vIdx,:);
+    f2 = reshape(v2Idx(f),size(f));
+    varargout = formatMeshOutput(nargout, v2, f2);
+end
 
 end

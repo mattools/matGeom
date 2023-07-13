@@ -21,9 +21,9 @@ function poly = boxToPolygon(box)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2017-09-10, using Matlab 8.6.0.267246 (R2015b)
-% Copyright 2017-2022 INRA - Cepia Software Platform
+% Copyright 2017-2023 INRA - Cepia Software Platform
 
 % extreme coordinates
 xmin = box(1);  

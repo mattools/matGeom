@@ -29,7 +29,7 @@ function point = intersectEdges(edge1, edge2, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2003-10-31
-% Copyright 2003-2022 INRA - Cepia Software Platform
+% Copyright 2003-2023 INRA - Cepia Software Platform
 
 % tolerance for precision
 tol = 1e-14;
