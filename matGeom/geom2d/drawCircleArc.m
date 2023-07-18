@@ -36,7 +36,7 @@ function varargout = drawCircleArc(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2003-12-12
-% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 if nargin == 0
     error('Need to specify circle arc');

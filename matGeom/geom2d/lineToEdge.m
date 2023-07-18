@@ -18,8 +18,8 @@ function edge = lineToEdge(line)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2019-05-07, using Matlab 9.6.0.1072779 (R2019a)
-% Copyright 2019-2022 INRA - Cepia Software Platform
+% Copyright 2019-2023 INRA - Cepia Software Platform
 
 edge = [line(:, 1:2) line(:,1:2)+line(:,3:4)];

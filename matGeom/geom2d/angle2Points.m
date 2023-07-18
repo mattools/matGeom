@@ -13,9 +13,9 @@ function theta = angle2Points(varargin)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2007-03-02
-% Copyright 2007-2022 INRA - Cepia Software Platform
+% Copyright 2007-2023 INRA - Cepia Software Platform
 
 % process input arguments
 if length(varargin)==2

@@ -29,8 +29,7 @@ function checkHeader
 
 cd(strrep(mfilename('fullpath'),mfilename,''))
 
-% mFiles = dir('../matGeom/**/*.m');
-mFiles = dir('../matGeom/utils/*.m');
+mFiles = dir('../matGeom/**/*.m');
 % Exclude the Contents.m files
 mFiles(contains({mFiles.folder}','deprecated'))=[];
 

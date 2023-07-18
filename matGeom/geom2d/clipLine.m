@@ -29,9 +29,9 @@ function edge = clipLine(line, box, varargin)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2007-08-27, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007-2022 INRA - Cepia Software Platform
+% Copyright 2007-2023 INRA - Cepia Software Platform
 
 % adjust size of two input arguments
 nLines = size(line, 1);

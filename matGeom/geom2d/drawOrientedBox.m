@@ -41,7 +41,7 @@ function varargout = drawOrientedBox(box, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2011-05-09, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011-2022 INRA - Cepia Software Platform
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 %% Parses input arguments
 

@@ -40,7 +40,7 @@ function points = intersectLineCircle(line, circle)
 % Authors: David Legland, JuanPi Carbajal
 % E-mail: david.legland@inrae.fr, ajuanpi+dev@gmail.com
 % Created: 2011-01-14, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011-2022 INRA - Cepia Software Platform
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
   		  
 % check size of inputs

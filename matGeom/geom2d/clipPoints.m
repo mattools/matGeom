@@ -11,9 +11,9 @@ function points = clipPoints(points, box)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008-2022 INRA - Cepia Software Platform
+% Copyright 2008-2023 INRA - Cepia Software Platform
 
 % get bounding box limits
 xmin = box(1);

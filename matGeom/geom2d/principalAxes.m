@@ -26,7 +26,7 @@ function varargout = principalAxes(points)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2019-08-12, using Matlab 9.6.0.1072779 (R2019a)
-% Copyright 2019-2022 INRAE - Cepia Software Platform
+% Copyright 2019-2023 INRAE - Cepia Software Platform
 
 % number and dimension of points
 n = size(points, 1);

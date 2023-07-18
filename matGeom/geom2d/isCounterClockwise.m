@@ -38,7 +38,7 @@ function res = isCounterClockwise(p1, p2, p3, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2010-04-09
-% Copyright 2010-2022 INRAE - Cepia Software Platform
+% Copyright 2010-2023 INRAE - Cepia Software Platform
 
 % get threshold value
 eps = 1e-12;

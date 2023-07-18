@@ -28,8 +28,7 @@ function [line, res] = fitLine(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2004-04-30
-% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
-
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 %% Extract input arguments
 if length(varargin)==1

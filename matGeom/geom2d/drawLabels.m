@@ -23,7 +23,7 @@ function varargout = drawLabels(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2003-12-15
-% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 % check if enough inputs are given
 if isempty(varargin)

@@ -22,8 +22,8 @@ function rays2d(varargin)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2008-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 help('rays2d');

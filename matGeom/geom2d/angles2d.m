@@ -18,6 +18,6 @@ function angles2d
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2010-03-31, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2010-2022 INRA - Cepia Software Platform
+% Copyright 2010-2023 INRA - Cepia Software Platform
 
 help('angles2d');

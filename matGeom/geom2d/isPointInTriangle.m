@@ -43,9 +43,9 @@ function b = isPointInTriangle(point, p1, p2, p3)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2011-05-16, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011-2022 INRA - Cepia Software Platform
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 % if triangle vertices are given as a single array, extract vertices
 if nargin == 2

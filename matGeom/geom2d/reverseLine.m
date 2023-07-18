@@ -13,7 +13,7 @@ function line = reverseLine(line)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2004-01-20
-% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 line(:, 3:4) = -line(:, 3:4);
 

@@ -1,15 +1,21 @@
 function varargout = removeDuplicateVertices(v,varargin)
-% REMOVEDUPLICATEVERTICES Remove duplicate vertices of a mesh
+% REMOVEDUPLICATEVERTICES Remove duplicate vertices of a mesh.
 %
-%   [V, F] = removeDuplicateVertices(V, F) 
-%   Remove duplicate vertices of a mesh defined by the vertices V and faces
-%   F.
+%   [V2, F2] = removeDuplicateVertices(V, F) 
+%   Remove duplicate vertices of a mesh defined by the vertices V and 
+%   faces F.
 %
-%   [V, F] = removeDuplicateVertices(V, F, TOL)
+%   [V2, F2] = removeDuplicateVertices(V, F, TOL)
 %   Remove duplicate vertices with the tolerance TOL:
 %       TOL = 0     -> Exact match
 %       TOL = 1e-1  -> Match up to first decimal
 %       TOL = 1     -> Integer match
+%
+%   [VIDX, V2IDX] = removeDuplicateVertices(V, F, TOL, 'indexOutput', true)
+%   Gives the indices instead of the final mesh. This means:
+%       V2 = V(VIDX,:)
+%       F2 = V2IDX(F)
+%       V = V2(V2IDX,:)
 %
 %   Example:
 %     v = [6-1e-6,0,-5;4,2,-2*pi;0,2,-7;6,0,-5;3,1,-9;0,2,-7;...
@@ -31,7 +37,7 @@ function varargout = removeDuplicateVertices(v,varargin)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2023-05-14, using Matlab 9.13.0.2080170 (R2022b) Update 1
-% Copyright 2021-2023
+% Copyright 2023
 
 
 %% Parse input
@@ -43,9 +49,12 @@ else
 end
 
 parser = inputParser;
+logParValidFunc = @(x) (islogical(x) || isequal(x,1) || isequal(x,0));
 addOptional(parser, 'tol', 0, @(x) validateattributes(x, {'numeric'}, {'scalar', '>=',0, '<=',1}));
+addParameter(parser, 'indexOutput', false, logParValidFunc);
 parse(parser, varargin{:});
 tol = parser.Results.tol;
+indexOutput = parser.Results.indexOutput;
 
 %% Remove duplicate vertices
 if tol == 0
@@ -53,11 +62,16 @@ if tol == 0
 else
     [~, vIdx, v2Idx] = unique(round(v/(tol)),'rows','stable');
 end
-v2 = v(vIdx,:);
-
-f2 = reshape(v2Idx(f),size(f));
 
 %% Parse output
-varargout = formatMeshOutput(nargout, v2, f2);
+if indexOutput
+    % If indices are requested
+    varargout = {vIdx, v2Idx};
+else
+    % Output is the final mesh
+    v2 = v(vIdx,:);
+    f2 = v2Idx(f);
+    varargout = formatMeshOutput(nargout, v2, f2);
+end
 
 end

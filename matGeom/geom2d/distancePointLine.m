@@ -21,9 +21,9 @@ function [dist, pos] = distancePointLine(point, line)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-06-24
-% Copyright 2005-2022 INRA - BIA-BIBS
+% Copyright 2005-2023 INRA - BIA-BIBS
 
 % direction vector of each line (row vectors)
 vx = line(:, 3)';

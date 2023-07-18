@@ -25,9 +25,9 @@ function [tx, ty] = orientedBoxToPolygon(obox)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-04-06
-% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % extract box parameters
 theta = 0;

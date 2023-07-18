@@ -27,7 +27,7 @@ function perim = ellipsePerimeter(ellipse, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2012-02-20, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012-2022 INRA - Cepia Software Platform
+% Copyright 2012-2023 INRA - Cepia Software Platform
 
 %% Parse input argument
 
