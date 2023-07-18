@@ -36,7 +36,7 @@ function [sphere, residuals] = fitSphere(x,y,z)
 % Author: Levente Hunyadi, oqilipo (minor adaptions for matGeom)
 % E-mail: N/A
 % Created: 2010
-% Copyright 2010-2022 Levente Hunyadi
+% Copyright 2010-2023 Levente Hunyadi
 
 narginchk(1,3);
 

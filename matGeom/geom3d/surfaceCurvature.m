@@ -18,6 +18,6 @@ function kappa = surfaceCurvature(kappa1, kappa2, theta)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2004-04-07
-% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 kappa = kappa1 * cos(theta).^2 + kappa2 * sin(theta).^2;

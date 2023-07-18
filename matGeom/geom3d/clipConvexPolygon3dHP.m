@@ -16,9 +16,9 @@ function poly2 = clipConvexPolygon3dHP(poly, plane)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2007-01-05
-% Copyright 2007-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2007-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % ensure last point is the same as the first one
 if sum(poly(end, :) == poly(1,:)) ~= 3

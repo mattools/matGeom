@@ -43,7 +43,7 @@ function alpha = sphericalAngle(p1, p2, p3)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-02-21
-% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % test if points are given as matlab spherical coordinates
 if size(p1, 2) == 2

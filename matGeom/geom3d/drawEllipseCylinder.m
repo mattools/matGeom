@@ -58,7 +58,7 @@ function varargout = drawEllipseCylinder(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2014-02-27
-% Copyright 2014-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2014-2023 INRA - TPV URPOI - BIA IMASTE
 
 %% Input argument processing
 

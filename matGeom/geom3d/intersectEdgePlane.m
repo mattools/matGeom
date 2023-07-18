@@ -25,7 +25,7 @@ function point = intersectEdgePlane(edge, plane, varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2007-04-24, from intersectLinePlane
-% Copyright 2007-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2007-2023 INRA - TPV URPOI - BIA IMASTE
 
 % extract tolerance for determination of parallel edges and planes
 tol = 1e-14;

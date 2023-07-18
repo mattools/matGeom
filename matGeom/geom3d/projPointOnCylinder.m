@@ -23,7 +23,7 @@ function ptProj = projPointOnCylinder(pt, cyl, varargin)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2021-04-17, using R2020b
-% Copyright 2021-2022
+% Copyright 2021-2023
 
 parser = inputParser;
 addRequired(parser, 'pt', @(x) validateattributes(x, {'numeric'},...

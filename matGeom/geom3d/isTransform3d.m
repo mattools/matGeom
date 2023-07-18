@@ -28,7 +28,7 @@ function a = isTransform3d(trans, varargin)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2018-07-08
-% Copyright 2018-2022
+% Copyright 2018-2023
 
 narginchk(1,5)
 

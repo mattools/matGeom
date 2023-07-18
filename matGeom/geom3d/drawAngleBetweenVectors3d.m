@@ -28,7 +28,7 @@ function varargout = drawAngleBetweenVectors3d(o, v1, v2, r, varargin)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2020-02-02
-% Copyright 2020-2022
+% Copyright 2020-2023
 
 % parse axis handle
 hAx = gca;

@@ -20,7 +20,7 @@ function tfmPoly = transformPolygon3d(poly, tfm)
 %     figure('color','w'); axis equal; view(3)
 %     drawPolygon3d(tfmPoly, 'r')
 %
-%   See also
+%   See also 
 %     transforms3d, transformPoint3d, createTranslation3d
 %     createRotationOx, createRotationOy, createRotationOz, createScaling
 %

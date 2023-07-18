@@ -15,7 +15,6 @@ function c = vectorCross3d(a,b)
 %     ans =
 %         0   0   6
 %
-%
 %   Class support for inputs A,B:
 %      float: double, single
 %
@@ -23,13 +22,9 @@ function c = vectorCross3d(a,b)
 
 % ------
 % Author: Sven Holcombe
-
-% needed_colons = max([3, length(size(a)), length(size(b))]) - 3;
-% tmp_colon = {':'};
-% clnSet = tmp_colon(ones(1, needed_colons));
-% 
-% c = bsxfun(@times, a(:,[2 3 1],clnSet{:}), b(:,[3 1 2],clnSet{:})) - ...
-%     bsxfun(@times, b(:,[2 3 1],clnSet{:}), a(:,[3 1 2],clnSet{:}));
+% E-mail: N/A
+% Created: ?
+% Copyright ?
 
 % deprecation warning
 warning('geom3d:deprecated', ...
