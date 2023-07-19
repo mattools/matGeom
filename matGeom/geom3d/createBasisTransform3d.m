@@ -31,9 +31,9 @@ function transfo = createBasisTransform3d(source, target)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2010-12-03, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010-2022 INRA - Cepia Software Platform
+% Copyright 2010-2023 INRA - Cepia Software Platform
 
 % size of input arguments
 srcSz = size(source, 1);

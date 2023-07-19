@@ -22,9 +22,9 @@ function varargout = cyl2cart(varargin)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@jouy.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2006-03-23
-% Copyright 2006-2022 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2006-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % process input parameters
 if length(varargin)==1

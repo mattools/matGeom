@@ -18,7 +18,7 @@ function d = isPlane(plane)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2017-07-09
-% Copyright 2017-2022
+% Copyright 2017-2023
 
 narginchk(1,1)
 

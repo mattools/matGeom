@@ -30,7 +30,7 @@ function  varargout = drawPlatform(plane, siz, varargin)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2018-08-09
-% Copyright 2018-2022
+% Copyright 2018-2023
 
 %% Parse inputs
 

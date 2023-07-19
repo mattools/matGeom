@@ -4,7 +4,7 @@ function point = circle3dPoint(circle, pos)
 %   output = circle3dPoint(input)
 %
 %   Example
-%   % Draw some points on a 3D circle
+%     % Draw some points on a 3D circle
 %     figure('color','w'); hold on; view(130,-10);
 %     circle = [10 20 30 50 90 45 0];
 %     drawCircle3d(circle)
@@ -22,9 +22,9 @@ function point = circle3dPoint(circle, pos)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2011-06-21, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011-2022 INRA - Cepia Software Platform
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 pos=pos(:);
 

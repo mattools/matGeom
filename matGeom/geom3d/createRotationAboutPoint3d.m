@@ -14,7 +14,7 @@ function TFM = createRotationAboutPoint3d(ROT, point)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2021-01-31
-% Copyright 2021-2022
+% Copyright 2021-2023
 
 % Extract only the rotation
 ROT = [ROT(1:3,1:3), [0 0 0]'; [0 0 0 1]];

@@ -28,7 +28,7 @@ function varargout = transformVector3d(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2008-11-25, from transformPoint3d
-% Copyright 2008-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2008-2023 INRA - TPV URPOI - BIA IMASTE
 
 if nargin~=2 && nargin~=4
     error('Invalid number of input arguments. Type ''help transformVector3d'' for details.');

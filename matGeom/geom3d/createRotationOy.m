@@ -26,7 +26,7 @@ function trans = createRotationOy(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-02-18
-% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % default values
 dx = 0;

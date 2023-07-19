@@ -25,7 +25,7 @@ function point = projPointOnPlane(point, plane)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-02-18
-% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % Unpack the planes into origins and normals, keeping original shape
 plSize = size(plane);

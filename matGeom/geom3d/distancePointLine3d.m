@@ -18,7 +18,7 @@ function d = distancePointLine3d(point, line)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-05-23
-% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % cf. Mathworld (distance point line 3d)  for formula
 d = bsxfun(@rdivide, vectorNorm3d( ...

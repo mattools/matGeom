@@ -15,18 +15,14 @@ function c = crossProduct3d(a,b)
 %     ans =
 %         0   0   6
 %
+%   See also
 %
-%   Class support for inputs A,B:
-%      float: double, single
-%
-%   See also DOT.
 
 % ------
 % Author: Sven Holcombe
-% e-mail: N/A
-
-% HISTORY
-% 2017-11-24 rename from vectorCross3d to crossProduct3d
+% E-mail: N/A
+% Created: ?
+% Copyright ?
 
 % size of inputs
 sizeA = size(a);

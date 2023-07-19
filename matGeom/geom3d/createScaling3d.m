@@ -25,7 +25,7 @@ function trans = createScaling3d(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2006-04-20
-% Copyright 2006-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2006-2023 INRA - TPV URPOI - BIA IMASTE
 
 %% default arguments
 sx = 1;

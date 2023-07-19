@@ -31,7 +31,7 @@ function b = isPointInEllipsoid(point, elli, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2020-11-19, using Matlab 9.8.0.1323502 (R2020a)
-% Copyright 2020-2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2020-2023 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % extract computation tolerance
 tol = 1e-14;

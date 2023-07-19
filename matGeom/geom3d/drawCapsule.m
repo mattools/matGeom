@@ -81,7 +81,7 @@ function varargout = drawCapsule(varargin)
 % Author: Moritz Schappler
 % E-mail: N/A
 % Created: 2013-07-27
-% Copyright 2013-2022
+% Copyright 2013-2023
 
 %% Input argument processing
 

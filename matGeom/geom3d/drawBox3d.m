@@ -25,7 +25,7 @@ function varargout = drawBox3d(box, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2010-02-22
-% Copyright 2010-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2010-2023 INRA - TPV URPOI - BIA IMASTE
 
 % Parse and check inputs
 isBox3d = @(x) validateattributes(x,{'numeric'},...

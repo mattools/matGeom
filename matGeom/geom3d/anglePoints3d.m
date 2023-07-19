@@ -20,7 +20,7 @@ function alpha = anglePoints3d(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-02-21
-% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 p2 = [0 0 0];
 if length(varargin) == 1

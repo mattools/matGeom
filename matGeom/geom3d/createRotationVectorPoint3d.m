@@ -24,7 +24,7 @@ function TFM = createRotationVectorPoint3d(A,B,P)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2017-08-07
-% Copyright 2017-2022
+% Copyright 2017-2023
 
 P = reshape(P,3,1);
 

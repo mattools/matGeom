@@ -64,7 +64,7 @@ function varargout = drawDome(varargin)
 % Author: Moritz Schappler
 % E-mail: N/A
 % Created: 2013-07-27
-% Copyright 2013-2022
+% Copyright 2013-2023
 
 % Check if axes handle is specified
 if isAxisHandle(varargin{1})

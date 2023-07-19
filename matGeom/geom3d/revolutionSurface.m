@@ -44,9 +44,9 @@ function varargout = revolutionSurface(varargin)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2004-04-09
-% Copyright 2004-2022 INRA - CEPIA Nantes - MIAJ Jouy-en-Josas
+% Copyright 2004-2023 INRA - CEPIA Nantes - MIAJ Jouy-en-Josas
 
 %% Initialisations
 
