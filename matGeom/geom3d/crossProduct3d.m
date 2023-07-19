@@ -15,14 +15,14 @@ function c = crossProduct3d(a,b)
 %     ans =
 %         0   0   6
 %
-%   See also
+%   See also 
 %
 
 % ------
 % Author: Sven Holcombe
 % E-mail: N/A
-% Created: ?
-% Copyright ?
+% Created: 2011
+% Copyright 2011-2023
 
 % size of inputs
 sizeA = size(a);
