@@ -257,6 +257,10 @@ Ilya Belevich
 \end_layout
 
 \end_deeper
+\begin_layout Itemize
+add sample shapes (sedgewick, meshes...)
+\end_layout
+
 \end_inset
 
 
@@ -1327,7 +1331,8 @@ Points and vectors
 \end_layout
 
 \begin_layout Standard
-Both points and vectors are defined by their two cartesian coordinates,
+Points and vectors are the most elementary geometric entities.
+ Both points and vectors are defined by their two cartesian coordinates,
  stored into a row vector of 2 elements: 
 \begin_inset listings
 inline false
@@ -4594,13 +4599,28 @@ Bezier Curve through four points
 \end_layout
 
 \begin_layout Section
-Boxes, rectangles and triangles
+Simple polygons
 \end_layout
 
 \begin_layout Standard
 This sections concerns simple polygonal shapes with a fixed number of vertices,
  such as triangles, rectangles, and boxes.
- 
+ More general polygons (i.e.
+ defined from an arbitrary number of vertices) are described in chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:polygons2d"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -4768,26 +4788,6 @@ Representation of boxes, rectangles, and oriented boxes.
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-More general polygons defined from an arbitrary number of vertices are presented
- in Chapter
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:polygons2d"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- Several functions allow for conversion between the different representations.
 \end_layout
 
 \begin_layout Subsection
@@ -5233,7 +5233,11 @@ where the
 \end_inset
 
  correspond to the translation part.
- Note that in MatGeom, while points are represented as 
+ 
+\end_layout
+
+\begin_layout Standard
+Note that in MatGeom, while points are represented as 
 \begin_inset Formula $1\times2$
 \end_inset
 
@@ -5256,10 +5260,20 @@ noprefix "false"
 \end_inset
 
 .
+ Applying a transform to a point or a point array requires transposing one
+ of the arrays, and taking care of conversion between cartesian and homogeneous
+ coordinates.
+ The transformPoint function (as well as related ones) automatically performs
+ the necessary conversions.
 \end_layout
 
 \begin_layout Subsection
 Creation of basic transforms
+\end_layout
+
+\begin_layout Standard
+This sections list the functions that creates classical affine transforms
+ (rotations, translations...).
 \end_layout
 
 \begin_layout Minisec
@@ -5505,6 +5519,11 @@ Creates the the 3-by-3 matrix of a line reflection.
 Fit transforms
 \end_layout
 
+\begin_layout Standard
+Some functions also allow computing the geometric transform that matches
+ two point sets.
+\end_layout
+
 \begin_layout Minisec
 fitAffineTransform2d
 \begin_inset Index idx
@@ -5538,7 +5557,16 @@ registerICP
 \end_layout
 
 \begin_layout Standard
-Fits an affine transform by using Iterative Closest Point (ICP) algorithm.
+Fits an affine transform between two point sets by using Iterative Closest
+ Point (ICP) algorithm 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Besl_1992_PAMI"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Minisec
@@ -5557,6 +5585,43 @@ polynomialTransform2d
 
 \begin_layout Standard
 Applies a polynomial transform to a set of points.
+ The polynomial transform is represented by a row vector containing the
+ coefficients applied to each monomial, in increasing order of degree and
+ starting with largest degree of 
+\begin_inset Formula $x$
+\end_inset
+
+ coordinate.
+ For example, a second order transform is represented by the following vector:
+\begin_inset Formula 
+\[
+[a_{00},b_{00},a_{10},b_{10},a_{01},b_{01},a_{20},b_{20},a_{11},b_{11},a_{02},b_{02}]
+\]
+
+\end_inset
+
+, leading to the transform:
+\begin_inset Formula 
+\begin{align*}
+\left(\begin{array}{c}
+x'\\
+y'
+\end{array}\right) & =\left(\begin{array}{cccccc}
+a_{00} & a_{10} & a_{01} & a_{20} & a_{11} & a_{02}\\
+b_{00} & b_{10} & b_{01} & b_{20} & b_{11} & b_{02}
+\end{array}\right)\cdot\left(\begin{array}{c}
+1\\
+x\\
+y\\
+x^{2}\\
+xy\\
+y^{2}
+\end{array}\right)
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Minisec
@@ -5574,7 +5639,9 @@ fitPolynomialTransform2d
 \end_layout
 
 \begin_layout Standard
-Coefficients of polynomial transform between two point sets.
+Computes the coefficients of the polynomial transform that matches two point
+ sets.
+ Note that using large degrees may result in degenerated transforms.
 \end_layout
 
 \begin_layout Section
@@ -13829,7 +13896,7 @@ A rotation around the
 \end_layout
 
 \begin_layout Subsection
-Euler Angles
+Euler Angles and basis transforms
 \end_layout
 
 \begin_layout Standard
@@ -13955,12 +14022,8 @@ Definition of 3D Euler angles.
 
 \end_layout
 
-\begin_layout Subsection
-Euler Angles and basis transforms
-\end_layout
-
-\begin_layout Standard
-Other functions for less common creation patterns.
+\begin_layout Subsubsection*
+Transform conversion functions
 \end_layout
 
 \begin_layout Minisec
@@ -14015,6 +14078,15 @@ rotation3dToEulerAngles
 
 \begin_layout Standard
 Extracts Euler angles from a rotation matrix.
+ Computation are based on 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Slabaugh_1999"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Minisec
@@ -14324,19 +14396,6 @@ status open
 
 \begin_layout Plain Layout
 add a quick tour
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-add a list of demo meshes (mushroom, +?)
 \end_layout
 
 \end_inset
@@ -14834,6 +14893,13 @@ reference "fig:Platonic-Solids"
 -e).
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Other classical polyhedra
 \end_layout
@@ -15293,6 +15359,13 @@ ellipsoid torus knot]
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Other creation functions
 \end_layout
@@ -15349,6 +15422,17 @@ noprefix "false"
 \end_inset
 
 ).
+ Useful to reconstruct 3D meshes from polygon delineated from parallel serial
+ sections.
+ Algorithm is based on 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Fuchs_1977_GIP"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Minisec
@@ -16857,12 +16941,21 @@ distancePointMesh
 \end_layout
 
 \begin_layout Standard
-Shortest distance between a (3D) point and a triangle mesh.
+Computes the shortest distance between a (3D) point and a triangle mesh.
  Non triangular meshes can be converted via the 
 \family typewriter
 triangulateFaces
 \family default
  function.
+ Uses algorithm presented in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Eberly_1999"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -17466,6 +17559,466 @@ readMesh_obj
 
 \begin_layout Standard
 Read mesh data stored in OBJ format.
+\end_layout
+
+\begin_layout Section
+Sample meshes
+\end_layout
+
+\begin_layout Standard
+Several sample meshes are provided within the MatGeom library.
+ They are used to illustrate and quickly check some algorithms.
+ They are listed in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Sample-meshes"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+file name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+vertices
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+faces
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+size
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+comment
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+apple.ply
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+867
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1704
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+52 ko
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+cube
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1 ko
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+square faces
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+dodecahedron.obj
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+36
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2 ko
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+The 12 faces have been triangulated
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+dodecahedron.ply
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1 ko
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+icosahedron.ply
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1 ko
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+mushroom.off
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+226
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+448
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13 ko
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+teapot.obj
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+530
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1024
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+53 ko
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Sample-meshes"
+
+\end_inset
+
+Sample meshes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
