@@ -25,7 +25,7 @@ function varargout = gabrielGraph(pts)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2012-01-22, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012-2022 INRA - Cepia Software Platform
+% Copyright 2012-2023 INRA - Cepia Software Platform
 
 % compute Delaunay triangulation
 if verLessThan('matlab', '8.1')

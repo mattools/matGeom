@@ -19,7 +19,7 @@ function [nodes, edges, faces] = boundedVoronoi2d(box, germs)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2007-01-12
-% Copyright 2007-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2007-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % uniformize input for box.
 box = box';

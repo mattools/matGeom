@@ -15,7 +15,7 @@ function [nodes, edges, faces] = addSquareFace(nodes, edges, faces, faceNodes)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2004-06-28
-% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 n1 = faceNodes(1,:);
 n2 = faceNodes(2,:);

@@ -28,9 +28,9 @@ function [nodePath, edgePath] = grShortestPath(nodes, edges, ind0, ind1, edgeWei
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2011-05-22, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011-2022 INRA - Cepia Software Platform
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 % process the case where several node indices are specified in first arg.
 if length(ind0) > 1

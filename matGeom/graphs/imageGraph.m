@@ -15,7 +15,7 @@ function varargout = imageGraph(img, varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2004-06-28
-% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 %% Initialisations
 
