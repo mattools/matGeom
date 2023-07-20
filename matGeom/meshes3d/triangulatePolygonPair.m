@@ -39,9 +39,9 @@ function [vertices, faces] = triangulatePolygonPair(poly1, poly2, varargin)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2017-05-18, using Matlab 9.1.0.441655 (R2016b)
-% Copyright 2017-2022 INRA - Cepia Software Platform
+% Copyright 2017-2023 INRA - Cepia Software Platform
 
 %% Settings
 

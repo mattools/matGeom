@@ -14,9 +14,9 @@ function areas = meshFaceAreas(vertices, faces)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2018-06-21, using Matlab 9.4.0.813654 (R2018a)
-% Copyright 2018-2022 INRA - Cepia Software Platform
+% Copyright 2018-2023 INRA - Cepia Software Platform
 
 if isnumeric(faces)
     % trimesh or quadmesh

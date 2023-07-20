@@ -5,7 +5,7 @@ function varargout = readMesh_stl(fName)
 %
 %   MESH = readMesh_stl(FNAME)
 %
-%   See also
+%   See also 
 %     meshes3d, readMesh, readMesh_off, readMesh_ply, writeMesh_stl
 %
 %   Source

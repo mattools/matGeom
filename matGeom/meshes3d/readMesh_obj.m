@@ -23,7 +23,7 @@ function mesh = readMesh_obj(fileName)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2022-09-08, using Matlab 9.9.0.1570001 (R2020b) Update 4
-% Copyright 2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2022-2023 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 %% initialisations
 

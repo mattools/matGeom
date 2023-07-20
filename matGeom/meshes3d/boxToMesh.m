@@ -30,7 +30,7 @@ function varargout = boxToMesh(varargin)
 % Authors: David Legland, oqilipo
 % E-mail: david.legland@inrae.fr
 % Created: 2016-09-22
-% Copyright 2016-2022
+% Copyright 2016-2023
 
 p = inputParser;
 boxDefault = [0 1 0 1 0 1];

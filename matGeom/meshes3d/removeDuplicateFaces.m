@@ -16,9 +16,9 @@ function faces2 = removeDuplicateFaces(faces, varargin)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2019-01-08, using Matlab 8.6.0.267246 (R2015b)
-% Copyright 2019-2022 INRA - Cepia Software Platform
+% Copyright 2019-2023 INRA - Cepia Software Platform
 
 nFaces = size(faces, 1);
 

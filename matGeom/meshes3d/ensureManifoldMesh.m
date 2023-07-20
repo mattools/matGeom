@@ -18,9 +18,9 @@ function varargout = ensureManifoldMesh(varargin)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2019-02-01, using Matlab 9.5.0.944444 (R2018b)
-% Copyright 2019-2022 INRA - Cepia Software Platform
+% Copyright 2019-2023 INRA - Cepia Software Platform
 
 %% Parse input arguments
 

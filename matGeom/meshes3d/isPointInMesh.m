@@ -25,9 +25,9 @@ function res = isPointInMesh(point, v, f, varargin)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2018-01-26, using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2018-2022 INRA - Cepia Software Platform
+% Copyright 2018-2023 INRA - Cepia Software Platform
 
 % choose a random vector
 vect = rand(1, 3);

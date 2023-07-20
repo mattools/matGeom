@@ -39,9 +39,9 @@ function varargout = createDurerPolyhedron(varargin)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2012-07-31, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012-2022 INRA - Cepia Software Platform
+% Copyright 2012-2023 INRA - Cepia Software Platform
 
 % start from a cube basis
 [v, f] = createCube;

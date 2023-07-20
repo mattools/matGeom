@@ -32,7 +32,7 @@ function varargout = removeMeshFaces(v, f, fI)
 % Authors: oqilipo, David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2017-07-04
-% Copyright 2017-2022
+% Copyright 2017-2023
 
 % parse inputs
 narginchk(2,3)

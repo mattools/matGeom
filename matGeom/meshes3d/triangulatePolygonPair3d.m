@@ -1,5 +1,5 @@
 function [tri, weight] = triangulatePolygonPair3d(poly1, poly2, varargin)
-% TRIANGULATEPOLYGONPAIR3D Compute a triangulation between a pair of 3D polygons.
+%TRIANGULATEPOLYGONPAIR3D Compute a triangulation between a pair of 3D polygons.
 %
 %   TRI = triangulatePolygonPair3d(POLY1, POLY2)
 %   Computes a triangulation between vertices of the two input polygons.
@@ -42,17 +42,15 @@ function [tri, weight] = triangulatePolygonPair3d(poly1, poly2, varargin)
 %   Fuchs, H., Kedem, Z. M., Uselton, S.P., 1977, Graphics and Image
 %   Processing, 20(10), 693-702.
 %
-%   See also
+%   See also 
 %     triangulatePolygonPair, triangleArea3d, meshSurfaceArea
 %
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% Created: 2022-01-14,    using Matlab 9.10.0.1739362 (R2021a) Update 5
-% Copyright 2022 INRAE.
-
+% E-mail: david.legland@inrae.fr
+% Created: 2022-01-14, using Matlab 9.10.0.1739362 (R2021a) Update 5
+% Copyright 2022-2023 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 %% Init
 
@@ -132,23 +130,10 @@ end
 
 
 function [path, pathWeight] = computePath(i10, weightsH, weightsV)
-% Computes a minimal path within an unfolded toroidal graph.
+%COMPUTEPATH Computes a minimal path within an unfolded toroidal graph.
 %
 %   PATH = computePath(INITROW, HWEIGHTS, VWEIGHTS);
 %
-%   Example
-%   computePath
-%
-%   See also
-%
- 
-% ------
-% Author: David Legland
-% e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% Created: 2022-01-14,    using Matlab 9.10.0.1739362 (R2021a) Update 5
-% Copyright 2022 INRAE.
-
 
 %% retrieve info
 

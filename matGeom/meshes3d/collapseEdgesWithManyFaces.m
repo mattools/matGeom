@@ -16,7 +16,7 @@ function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargi
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2019-01-31, using Matlab 9.5.0.944444 (R2018b)
-% Copyright 2019-2022 INRA - Cepia Software Platform
+% Copyright 2019-2023 INRA - Cepia Software Platform
 
 verbose = false;
 while length(varargin) > 1 && ischar(varargin{1})

@@ -20,9 +20,9 @@ function varargout = trimMesh(varargin)
 
 % ------
 % Author: David Legland, oqilipo
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2014-08-01, using Matlab 8.3.0.532 (R2014a)
-% Copyright 2014-2022 INRA - Cepia Software Platform
+% Copyright 2014-2023 INRA - Cepia Software Platform
 
 % parse input data
 [vertices, faces] = parseMeshData(varargin{:});
@@ -31,13 +31,7 @@ if isnumeric(faces)
     % Delete duplicate vertices
     [tempVertices, tempFaces] = removeDuplicateVertices(vertices, faces);
     % Delete unindexed/unreferenced vertices
-    usedVertexIdx = ismember(1:length(tempVertices),unique(tempFaces(:)));
-    newVertexIdx = cumsum(usedVertexIdx);
-    faceVertexIdx = 1:length(tempVertices);
-    faceVertexIdx(usedVertexIdx) = newVertexIdx(usedVertexIdx);
-    faceVertexIdx(~usedVertexIdx) = nan;
-    tempFaces2 = faceVertexIdx(tempFaces);
-    tempVertices2 = tempVertices(usedVertexIdx,:);
+    [tempVertices2, tempFaces2] = removeUnreferencedVertices(tempVertices, tempFaces);
     % Delete duplicate faces
     [~, uniqueFaceIdx, ~] = unique(tempFaces2, 'rows');
     duplicateFaceIdx = ~ismember(1:size(tempFaces2,1), uniqueFaceIdx);

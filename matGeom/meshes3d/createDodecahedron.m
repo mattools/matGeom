@@ -29,9 +29,9 @@ function varargout = createDodecahedron()
 
 % ------
 % Author: David Legland 
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2010-07-29
-% Copyright 2010-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2010-2023 INRA - TPV URPOI - BIA IMASTE
 
 % golden ratio
 phi = (1+sqrt(5))/2;

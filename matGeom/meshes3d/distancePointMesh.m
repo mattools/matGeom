@@ -1,5 +1,5 @@
 function [dist, proj] = distancePointMesh(points, vertices, faces, varargin)
-%DISTANCEPOINTMESH  Shortest distance between a (3D) point and a triangle mesh.
+%DISTANCEPOINTMESH Shortest distance between a (3D) point and a triangle mesh.
 %
 %   DIST = distancePointMesh(POINTS, VERTICES, FACES)
 %   Returns the shortest distance between the query point(s) POINTS and the
@@ -37,21 +37,18 @@ function [dist, proj] = distancePointMesh(points, vertices, faces, varargin)
 %     distancePointTriangle3d
 %
 %   References
-%   * "Distance Between Point and Triangle in 3D", David Eberly (1999)
-%   https://www.geometrictools.com/Documentation/DistancePoint3Triangle3.pdf
-%   * <a href="matlab:
-%     web('https://fr.mathworks.com/matlabcentral/fileexchange/22857-distance-between-a-point-and-a-triangle-in-3d')
-%   ">Distance between a point and a triangle in 3d</a>, by Gwendolyn Fischer.
-%   * <a href="matlab:
-%     web('https://fr.mathworks.com/matlabcentral/fileexchange/52882-point2trimesh------distance%C2%A0between-point-and-triangulated-surface')
-%   ">Distance Between Point and Triangulated Surface</a>, by Daniel Frisch.
- 
+%   * "Distance Between Point and Triangle in 3D", David Eberly
+%       https://www.geometrictools.com/Documentation/DistancePoint3Triangle3.pdf
+%   * "Distance between a point and a triangle in 3d", by Gwendolyn Fischer
+%       https://mathworks.com/matlabcentral/fileexchange/22857
+%   * "Distance Between Point and Triangulated Surface", by Daniel Frisch
+%       https://www.mathworks.com/matlabcentral/fileexchange/52882
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2018-03-08, using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2018-2022 INRA - Cepia Software Platform
-
+% Copyright 2018-2023 INRA - Cepia Software Platform
 
 %% Parses input arguments
 
@@ -158,7 +155,7 @@ function [dist, proj] = distancePointTrimesh_vectorized(point, vertices, faces)
 %   distancePointTrimesh
 %
 
-% ------
+% ­­­­­‒­­­­‒­­­­‒­­­­‒­­­­‒­­­­‒­­­­­
 % Author: David Legland
 % e-mail: david.legland@inra.fr
 % Created: 2018-03-08, using Matlab 9.3.0.713579 (R2017b)
@@ -188,7 +185,7 @@ function [dist, proj] = distancePointTrimesh_vectorized(point, vertices, faces)
 %        | R0 \ 
 %        |     \ 
 %        | P1   \ P2
-%  ------*-------*------> s
+%  ­­­­–­­­–­­­–­­­–­­­–­­­–*–­­­–­­­–­­­–­­­–­­­––*–­­­–­­­–­­­–­­­–­­­–> s
 %        |        \   
 %   R3   |   R2    \   R6 
 
