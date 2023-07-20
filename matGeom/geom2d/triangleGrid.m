@@ -9,7 +9,6 @@ function varargout = triangleGrid(bounds, origin, size, varargin)
 %   SIZE is constant and is equals to the length of the sides of each
 %   triangles. 
 %
-%   TODO: add possibility to use rotated grid
 
 % ------
 % Author: David Legland 
@@ -29,6 +28,6 @@ pts = [pts1;pts2];
 
 
 % process output
-if nargout>0
+if nargout > 0
     varargout{1} = pts;
 end

@@ -3,7 +3,7 @@ function varargout = squareGrid(bounds, origin, size)
 %
 %   usage
 %   PTS = squareGrid(BOUNDS, ORIGIN, SIZE)
-%   generate points, lying in the window defined by BOUNDS (=[xmin ymin
+%   Generate points, lying in the window defined by BOUNDS (=[xmin ymin
 %   xmax ymax]), starting from origin with a constant step equal to size.
 %   
 %   Example
@@ -12,8 +12,6 @@ function varargout = squareGrid(bounds, origin, size)
 %   [3 1;7 1;3 3;7 3;3 5;7 5;3 7;7 7;3 9;7 9];
 %
 %
-%
-%   TODO: add possibility to use rotated grid
 
 % ------
 % Author: David Legland 
@@ -38,12 +36,12 @@ np = nx*ny;
 
 % create points
 pts = zeros(np, 2);
-for i=1:ny
+for i = 1:ny
     pts( (1:nx)'+(i-1)*nx, 1) = lx;
     pts( (1:nx)'+(i-1)*nx, 2) = ly(i);
 end    
 
 % process output
-if nargout>0
+if nargout > 0
     varargout{1} = pts;
 end

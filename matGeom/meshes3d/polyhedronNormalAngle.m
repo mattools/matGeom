@@ -8,8 +8,8 @@ function theta = polyhedronNormalAngle(varargin)
 %   vertex whose index is given by IND.
 %
 %   THETA = polyhedraNormalAngle(GRAPH, IND);
-%   Uses a graph structure. GRAPH should contain at least fields : 'nodes'
-%   and 'faces'.
+%   Uses a graph structure for definineg polyhedron. GRAPH structure should
+%   contain at least two fields : 'nodes' and 'faces'.
 %
 %   Example :
 %   % create a simple (irregular) tetrahedra
@@ -20,15 +20,14 @@ function theta = polyhedronNormalAngle(varargin)
 %   % sum of normal angles should be equal to 4*pi :
 %   sum(theta)
 %
-%   To-do
-%       Works only for polyhedra with convex faces!!!
+%   Note: works only for polyhedra with convex faces!
 %
 %   See also 
 %   polyhedra, polygon3dNormalAngle
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-11-30
 % Copyright 2005-2022 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
@@ -56,14 +55,14 @@ end
 na = length(ind);
 
 theta = zeros(na, 1);
-for i=1:na
+for i = 1:na
     
     thetaf = [];
     
     % find faces containing given vertex,
     % and compute normal angle at each face containing vertex
     if iscell(faces)
-        for j=1:length(faces)
+        for j = 1:length(faces)
             if ismember(ind(i), faces{j})
                 % create 3D polygon
                 face = nodes(faces{j}, :);
@@ -79,7 +78,7 @@ for i=1:na
         indf = find(sum(ismember(faces, ind(i)), 2));
         
         thetaf = zeros(length(indf), 1);
-        for j=1:length(indf)
+        for j = 1:length(indf)
             ind2 = faces(indf(j), :);
             face = nodes(ind2, :);
             indp = find(ind2==ind(i));
@@ -87,8 +86,6 @@ for i=1:na
         end
     end
     
-
     % compute normal angle of polyhedron, by use of angle defect formula
     theta(i) = 2*pi - sum(thetaf);
-    
 end

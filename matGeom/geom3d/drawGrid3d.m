@@ -31,7 +31,7 @@ function varargout = drawGrid3d(varargin)
 %
 %
 %   See also 
-%     drawLine3d, drawEdge3d, clipLine3d, draw
+%     drawLine3d, drawEdge3d, clipLine3d
 
 % ------
 % Author: David Legland
@@ -74,7 +74,7 @@ elseif length(varargin)==2
     spacing = varargin{2};
 end
 
-%% Compute internam data
+%% Compute internal data
 
 % get axis limits
 ax = axis(hAx);
@@ -101,8 +101,8 @@ end
 
 %% Draw the grid
 
+% header array, one header for each line segment
 h = [];
-%TODO: rewrite code, avoiding loops
 
 % draw lines parallel to x axis
 for y = ye:dy:yf
@@ -128,6 +128,6 @@ end
 
 %% Check output arguments
 
-if nargout>0
+if nargout > 0
     varargout{1} = h;
 end
