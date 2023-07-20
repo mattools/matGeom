@@ -87,7 +87,7 @@ if nargin == 1
     % specify only one array of points, not the norm
     p2 = p1;
 elseif nargin == 2
-    if isscalar (varargin{1})
+    if isscalar(varargin{1})
         % specify array of points and the norm
         n   = varargin{1};
         p2  = p1;
@@ -106,17 +106,17 @@ else
 end
 
 % number of points in each array
-n1  = size (p1, 1);
-n2  = size (p2, 1);
+n1  = size(p1, 1);
+n2  = size(p2, 1);
 
 % dimensionality of points
-d   = size (p1, 2);
+d   = size(p1, 2);
 
 
 %% Computation of distances
 
 % allocate memory
-dist = zeros (n1, n2);
+dist = zeros(n1, n2);
 
 % Compute difference of coordinate for each pair of point (n1-by-n2 array)
 % and for each dimension. -> dist is a n1-by-n2 array.
@@ -125,32 +125,32 @@ if n == inf
     % infinite norm corresponds to maximum absolute value of differences
     % in 2D: dist = max(abs(dx) + max(abs(dy));
     for i = 1:d
-        dist = max (dist, abs(bsxfun (@minus, p1(:,i), p2(:,i).')));
+        dist = max(dist, abs(bsxfun(@minus, p1(:,i), p2(:,i)')));
     end
 else
     for i = 1:d
-        dist = dist + abs (bsxfun (@minus, p1(:,i), p2(:,i).')).^n;
+        dist = dist + abs(bsxfun(@minus, p1(:,i), p2(:,i)')).^n;
     end
 end
-% TODO the previous could be optimized when a single array  is given (maybe!)
 
+% compute minimum distance, and indices
 if ~one_array
     % If two array of points where given
-    [minSqDist, ind]    = min (dist, [], 2);
-    minDist             = power (minSqDist, 1/n);
-    [ind2, ind1]        = ind2sub ([n1 n2], ind);
+    [minSqDist, ind]    = min(dist, [], 2);
+    minDist             = power(minSqDist, 1/n);
+    [ind2, ind1]        = ind2sub([n1 n2], ind);
     
 else
     % A single array was given
-    dist                = dist + diag (inf (n1,1)); % remove zeros from diagonal
-    dist                = dist (tril(true(n1, n1)));
-    [minSqDist, ind]    = min (dist); % index on packed lower triangular matrix
-    minDist             = power (minSqDist, 1/n);
+    dist                = dist + diag(inf(n1,1)); % remove zeros from diagonal
+    dist                = dist(tril(true(n1, n1)));
+    [minSqDist, ind]    = min(dist); % index on packed lower triangular matrix
+    minDist             = power(minSqDist, 1/n);
     
-    [ind2, ind1]        = ind2sub_tril (n1, ind);
+    [ind2, ind1]        = ind2sub_tril(n1, ind);
     ind2 = ind2(1);
     ind1 = ind1(1);
-    ind                 = sub2ind ([n1 n1], ind2, ind1);
+    ind                 = sub2ind([n1 n1], ind2, ind1);
 end
 
 
@@ -177,8 +177,9 @@ end
 end
 
 function [r, c] = ind2sub_tril (N, idx)
+% Convert a linear index to subscripts of a triangular matrix.
+%
 % [r, c] = ind2sub_tril (N, idx)
-% Convert a linear index to subscripts of a trinagular matrix.
 %
 % An example of triangular matrix linearly indexed follows
 %
@@ -203,16 +204,16 @@ function [r, c] = ind2sub_tril (N, idx)
 % c have the same shape as idx.
 %
 
-endofrow = 0.5 * (1:N) .* (2*N:-1:N + 1);
-c = zeros(size(endofrow));
-for i = 1:length(endofrow)
-    ind = find(endofrow <= idx - 1, 1, 'last') + 1;
+endOfRow = 0.5 * (1:N) .* (2*N:-1:N + 1);
+c = zeros(size(endOfRow));
+for i = 1:length(endOfRow)
+    ind = find(endOfRow <= idx - 1, 1, 'last') + 1;
     if isempty(ind) 
         ind = 1;
     end
     c(i) = ind;
-% c        = lookup (endofrow, idx - 1) + 1;
 end
-r        = N - endofrow(c) + idx ;
+
+r = N - endOfRow(c) + idx ;
 
 end

@@ -11,8 +11,6 @@ function poly2 = clipPolygon3dHP(poly, plane)
 %   POLY2 = clipPolygon3dHP(POLY, PT0, NORMAL)
 %   uses plane with normal NORMAL and containing point PT0.
 %
-%   TODO: not yet implemented
-%
 %   There is a problem for non-convex polygons, as they can be clipped in
 %   several polygons. Possible solutions:
 %   * create another function 'clipConvexPolygon3dPlane' or

@@ -26,15 +26,25 @@ function edges = adjacencyListToEdges(adjList)
 % Created: 2020-06-02, using Matlab 9.8.0.1323502 (R2020a)
 % Copyright 2020-2023 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
-% TODO: allocate memory
+% count total number of edges
+ne = 0;
+for iVertex = 1:length(adjList)
+    ne = ne + length(adjList{iVertex});
+end
 
-% create the connectivity array
-edges = zeros([0 2]);
+% allocate memory
+edges = zeros([ne 2]);
+
+% create edges by iterating on vertices
+ie = 0;
 for iVertex = 1:length(adjList)
     neighs = adjList{iVertex};
     for iNeigh = 1:length(neighs)
         edge = sort([iVertex neighs(iNeigh)]);
-        edges = [edges ; edge]; %#ok<AGROW>
+        ie = ie + 1;
+        edges(ie,:) = edge;
     end
 end
+
+% sort edges
 edges = unique(edges, 'rows');

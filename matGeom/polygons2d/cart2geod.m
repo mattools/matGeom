@@ -12,9 +12,6 @@ function point = cart2geod(src, curve)
 %   distance between PT1 and it projection.
 %
 %
-%   TODO : add processing of points not projected on the curve.
-%   -> use the closest end 
-%
 %   See also 
 %   polylines2d, geod2cart, curveLength
 %
