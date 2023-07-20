@@ -19,7 +19,7 @@ function varargout = drawEdgeLabels(p, e, value)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2003-02-10
-% Copyright 2003-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 if length(p) > 1 && length(e) > 1
     h = zeros(length(e), 1);

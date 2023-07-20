@@ -17,7 +17,7 @@ function varargout = drawDigraph(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2004-08-17
-% Copyright 2004-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 %% Initialisations
 

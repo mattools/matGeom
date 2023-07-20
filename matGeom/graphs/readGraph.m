@@ -17,9 +17,9 @@ function [nodes, edges] = readGraph(fileName)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2014-01-21, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2014-2022 INRA - Cepia Software Platform
+% Copyright 2014-2023 INRA - Cepia Software Platform
 
 %% Open file and read header
 

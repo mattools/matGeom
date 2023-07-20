@@ -17,9 +17,9 @@ function energy = meshEnergy(vertices, faces)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2017-09-01, using Matlab 9.1.0.441655 (R2016b)
-% Copyright 2017-2022 INRA - Cepia Software Platform
+% Copyright 2017-2023 INRA - Cepia Software Platform
 
 nFaces = meshFaceNumber(vertices, faces);
 
