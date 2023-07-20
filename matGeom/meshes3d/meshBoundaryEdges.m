@@ -1,5 +1,5 @@
 function BE = meshBoundaryEdges(varargin)
-%MESHBOUNDARYEDGES MESHBOUNDARYEDGES Determine the boundary edges of a mesh.
+%MESHBOUNDARYEDGES Determine the boundary edges of a mesh.
 %
 %   BE = meshBoundaryEdges(V, F)
 %   Determine for each edge of the mesh if it is a boundary edge of the 
