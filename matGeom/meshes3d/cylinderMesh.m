@@ -23,19 +23,19 @@ function varargout = cylinderMesh(cyl, varargin)
 %     view(3); axis equal;
 %
 %     % Draw three mutually intersecting cylinders
-%       p0 = [30 30 30];
-%       p1 = [90 30 30];
-%       p2 = [30 90 30];
-%       p3 = [30 30 90];
-%       [v1 f1] = cylinderMesh([p0 p1 25]);
-%       [v2 f2] = cylinderMesh([p0 p2 25]);
-%       [v3 f3] = cylinderMesh([p0 p3 25],'closed','nPeri',40,'nRho',20);
-%       figure; hold on;
-%       drawMesh(v1, f1, 'FaceColor', 'r');
-%       drawMesh(v2, f2, 'FaceColor', 'g');
-%       drawMesh(v3, f3, 'FaceColor', 'b');
-%       view(3); axis equal
-%       set(gcf, 'renderer', 'opengl')
+%     p0 = [30 30 30];
+%     p1 = [90 30 30];
+%     p2 = [30 90 30];
+%     p3 = [30 30 90];
+%     [v1, f1] = cylinderMesh([p0 p1 25]);
+%     [v2, f2] = cylinderMesh([p0 p2 25]);
+%     [v3, f3] = cylinderMesh([p0 p3 25],'closed','nPeri',40,'nRho',20);
+%     figure; hold on;
+%     drawMesh(v1, f1, 'FaceColor', 'r');
+%     drawMesh(v2, f2, 'FaceColor', 'g');
+%     drawMesh(v3, f3, 'FaceColor', 'b');
+%     view(3); axis equal
+%     set(gcf, 'renderer', 'opengl')
 %  
 %   See also 
 %     drawCylinder, torusMesh, sphereMesh
