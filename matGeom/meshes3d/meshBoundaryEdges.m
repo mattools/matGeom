@@ -1,5 +1,5 @@
 function BE = meshBoundaryEdges(varargin)
-% MESHBOUNDARYEDGES Determine the boundary edges of a mesh.
+%MESHBOUNDARYEDGES Determine the boundary edges of a mesh.
 %
 %   BE = meshBoundaryEdges(V, F)
 %   Determine for each edge of the mesh if it is a boundary edge of the 
@@ -30,7 +30,7 @@ function BE = meshBoundaryEdges(varargin)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2023-05-15, using Matlab 9.13.0.2080170 (R2022b) Update 1
-% Copyright 2021-2023
+% Copyright 2023
 
 [V, E, F] = parseMeshData(varargin{:});
 

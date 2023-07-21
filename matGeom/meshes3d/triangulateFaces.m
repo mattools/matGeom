@@ -35,9 +35,9 @@ function [tri, inds] = triangulateFaces(faces)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2008-09-08, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008-2022 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2008-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 %% Tri mesh case: return original set of faces
 

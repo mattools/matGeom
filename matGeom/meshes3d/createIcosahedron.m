@@ -24,9 +24,9 @@ function varargout = createIcosahedron()
 
 % ------
 % Author: David Legland 
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-03-21
-% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 %% Initialisations
 

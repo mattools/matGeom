@@ -27,9 +27,9 @@ function varargout = createCube()
 
 % ------
 % Author: David Legland 
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-02-10
-% Copyright 2005-2022 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 x0 = 0; dx= 1;
 y0 = 0; dy= 1;

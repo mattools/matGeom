@@ -16,7 +16,7 @@ function varargout = concatenateMeshes(varargin)
 % Authors: oqilipo (parsing), Alec Jacobson (loop)
 % E-mail: N/A
 % Created: 2017-09-12
-% Copyright 2017-2022
+% Copyright 2017-2023
 
 %% parsing inputs
 assert(~isempty(varargin))

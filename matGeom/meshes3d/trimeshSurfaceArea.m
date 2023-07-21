@@ -27,9 +27,9 @@ function area = trimeshSurfaceArea(v, e, f)
 
 % ------
 % Author: David Legland
-% E-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2011-08-26, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011-2022 INRA - Cepia Software Platform
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 % check input number
 if nargin == 2

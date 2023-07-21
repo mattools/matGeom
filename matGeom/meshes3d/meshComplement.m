@@ -20,7 +20,7 @@ function varargout = meshComplement(varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2020-01-22, using Matlab 9.7.0.1247435 (R2019b) Update 2
-% Copyright 2020-2022 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2020-2023 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % extract mesh data
 mesh = parseMeshData(varargin{:});

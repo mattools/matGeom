@@ -40,7 +40,7 @@ function meshes = splitMesh(vertices, faces, varargin)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2017-09-17
-% Copyright 2017-2022
+% Copyright 2017-2023
 
 % input parsing
 if isstruct(vertices)
