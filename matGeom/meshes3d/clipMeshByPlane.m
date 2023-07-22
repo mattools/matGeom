@@ -37,7 +37,7 @@ function [v2, f2, bE] = clipMeshByPlane(v, f, plane, varargin)
 %     axis equal; view(3);
 %     drawMesh(v2, f2, 'FaceAlpha', 0.5);
 %     drawPlane3d(plane)
-%     drawEdge3d([v2(bE(:,1),:),v2(bE(:,2),:)],'Color','g','LineWidth',2)
+%     drawEdge3d([v2(bE(:,1),:),v2(bE(:,2),:)],'Color','g','LineWidth',4)
 %   
 %   See also 
 %     cutMeshByPlane, intersectPlaneMesh
