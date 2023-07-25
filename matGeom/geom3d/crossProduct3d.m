@@ -16,7 +16,7 @@ function c = crossProduct3d(a,b)
 %         0   0   6
 %
 %   See also 
-%
+%   vectorAngle3d
 
 % ------
 % Author: Sven Holcombe

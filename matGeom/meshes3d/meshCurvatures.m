@@ -18,7 +18,7 @@ function [C1, C2, U1, U2, H, K, N] = meshCurvatures(vertices, faces, varargin)
 %
 %   Algorithm
 %   The function is adapted from the "compute_curvature" function, in the
-%   "toolbox_graph" fro Gabriel Peyre.
+%   "toolbox_graph" from Gabriel Peyre.
 %   The basic idea is to define a curvature tensor for each edge, by
 %   assigning a minimum curvature equal to zero along the edge, and a
 %   maximum curvature equal to the dihedral angle across the edge.
@@ -193,7 +193,7 @@ Tv = zeros(3, 3, nv);
 w = zeros(1, 1, nv);
 for k = 1:ne
     if showProgress
-        displayProgress(k, ne);
+        progressbar(k, ne);
     end
     Tv(:,:,ev1(k)) = Tv(:,:,ev1(k)) + T(:,:,k);
     Tv(:,:,ev2(k)) = Tv(:,:,ev2(k)) + T(:,:,k);
@@ -231,7 +231,7 @@ D = zeros(3, nv);
 for k = 1:nv
     % display progress
     if showProgress
-        displayProgress(k,nv);
+        progressbar(k,nv);
     end
     
     % extract eigenvectors and eigenvalues for current vertex
@@ -269,37 +269,4 @@ if nargout > 4
         % normal vector for each vertex
         N = squeeze(U(:,1,:))';
     end
-end
-
-
-function displayProgress(n, N)
-% Display the progress of current step using a text-based progress bar.
-%
-% based on the 'progressbar' function in G. Peyre's Graph Toolbox.
-
-% width of the progress bar
-w = 20;
-
-% compute progress ratio as an integer betsween 0 and w
-p = min( floor(n/N*(w+1)), w);
-
-global pprev;
-if isempty(pprev)
-    pprev = -1;
-end
-
-if p ~= pprev
-    str1 = repmat('*', 1, p);
-    str2 = repmat('.', 1, w-p);
-    str = sprintf('[%s%s]', str1, str2);
-    if n > 1
-        % clear previous string
-        fprintf(repmat('\b', [1 length(str)]));
-    end
-    fprintf(str);
-end
-
-pprev = p;
-if n == N
-    fprintf('\n');
 end
