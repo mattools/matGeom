@@ -1,5 +1,5 @@
 function d = distancePointPlane(point, plane)
-%DISTANCEPOINTPLANE Signed distance betwen 3D point and plane.
+%DISTANCEPOINTPLANE Signed distance between 3D point and plane.
 %
 %   D = distancePointPlane(POINT, PLANE)
 %   Returns the euclidean distance between point POINT and the plane PLANE,
@@ -19,7 +19,6 @@ function d = distancePointPlane(point, plane)
 
 % normalized plane normal
 n = normalizeVector3d(cross(plane(:,4:6), plane(:, 7:9), 2));
-
 
 % Uses Hessian form, ie : N.p = d
 % I this case, d can be found as : -N.p0, when N is normalized
