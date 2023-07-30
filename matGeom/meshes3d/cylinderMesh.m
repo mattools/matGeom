@@ -12,7 +12,7 @@ function varargout = cylinderMesh(cyl, varargin)
 %   [V, F] = cylinderMesh(..., NAME, VALUE);
 %   Specifies one or several options using parameter name-value pairs.
 %   Available options are:
-%   'nPerimeter' the number of circles represeting the perimeter
+%   'nPerimeter' the number of points represeting the perimeter
 %   'nRho' the number of circles along the hight
 %
 %   Example
@@ -71,7 +71,7 @@ r  = cyl(:, 7);
 [theta, phi, rho] = cart2sph2d(p2 - p1);
 
 % parametrisation on x
-t = linspace(0, 2*pi, NoPP);
+t = linspace(0, 2*pi, NoPP+1);
 lx = r * cos(t);
 ly = r * sin(t);
 
@@ -92,16 +92,19 @@ trans = localToGlobal3d(p1, theta, phi, 0);
 
 % Close cylinder
 if cap == 'c' || cap == 1
-    toe.vertices = [x(1,1:NoPP-1); y(1,1:NoPP-1); z(1,1:NoPP-1)]';
-    toe.vertices(NoPP,:) = transformPoint3d([0 0 0], trans);
-    toe.faces = [repmat(NoPP, 1, NoPP-1); [2:NoPP-1 1]; 1:NoPP-1]';
-    
-    top.vertices = [x(end,1:NoPP-1); y(end,1:NoPP-1); z(end,1:NoPP-1)]';
-    top.vertices(NoPP,:) = transformPoint3d([0 0 rho], trans);
-    top.faces = fliplr(toe.faces);
-    
-    [vertices, faces] = concatenateMeshes(vertices, triangulateFaces(faces), ...
-        toe.vertices, toe.faces, top.vertices, top.faces);
+    nR = round(r/(rho/(nRho-1)));
+    % Base at p1
+    P1 = circleMesh([0 0 0 r 0 0 0], 'nP',NoPP, 'nR',nR);
+    P1 = transformMesh(P1, trans);
+    P1.faces = fliplr(P1.faces);
+    % Base at p2
+    P2 = circleMesh([transformPoint3d(p2, inv(trans)) r 0 0 0], 'nP',NoPP, 'nR',nR);
+    P2 = transformMesh(P2, trans);
+    % Triangulate the lateral surface of the mesh
+    latSurf.vertices = vertices;
+    latSurf.faces = triangulateFaces(faces);
+    mesh = concatenateMeshes(latSurf, P1, P2);
+    [vertices, faces] = removeDuplicateVertices(mesh, 1e-8);
 end
 
 % format output
