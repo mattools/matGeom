@@ -38,10 +38,11 @@ function varargout = drawCircleArc(varargin)
 % Created: 2003-12-12
 % Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
+%% Parse input arguments
+
 if nargin == 0
     error('Need to specify circle arc');
 end
-
 
 % extract handle of axis to draw on
 if isAxisHandle(varargin{1})
@@ -72,6 +73,9 @@ else
     error('drawCircleArc: please specify center, radius and angles of circle arc');
 end
 
+
+%% Pre-processing
+
 % convert angles in radians
 t0  = deg2rad(start);
 t1  = t0 + deg2rad(extent);
@@ -81,6 +85,13 @@ N = 60;
 
 % initialize handles vector
 h   = zeros(length(x0), 1);
+
+% save hold state
+holdState = ishold(ax);
+hold(ax, 'on');
+
+
+%% Display each circle arc
 
 % draw each circle arc individually
 for i = 1:length(x0)
@@ -93,6 +104,14 @@ for i = 1:length(x0)
     
     % draw the circle arc
     h(i) = plot(ax, xt, yt, varargin{:});
+end
+
+
+%% post-processing
+
+% restore hold state
+if ~holdState
+    hold(ax, 'off');
 end
 
 if nargout > 0

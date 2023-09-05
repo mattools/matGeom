@@ -119,6 +119,10 @@ x2 = xc + len .* cot / 2;
 y1 = yc - len .* sit / 2;
 y2 = yc + len .* sit / 2;
 
+% save hold state
+holdState = ishold(ax);
+hold(ax, 'on');
+
 
 % draw the edges
 h = zeros(N, 1);
@@ -135,6 +139,11 @@ end
 
 
 %% Format output
+
+% restore hold state
+if ~holdState
+    hold(ax, 'off');
+end
 
 % process output arguments
 if nargout > 0

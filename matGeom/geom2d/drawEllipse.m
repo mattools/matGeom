@@ -97,8 +97,16 @@ end
 % angular positions of vertices
 t = linspace(0, 2*pi, 145);
 
-% compute position of points to draw each ellipse
+% empty array for graphic handles
 h = zeros(length(x0), 1);
+
+% save hold state
+holdState = ishold(ax);
+hold(ax, 'on');
+
+
+%% Display each ellipse
+
 for i = 1:length(x0)
     % pre-compute rotation angles (given in degrees)
     cot = cosd(theta(i));
@@ -110,6 +118,14 @@ for i = 1:length(x0)
     
     % stores handle to graphic object
     h(i) = plot(ax, xt, yt, styles{:});
+end
+
+
+%% post-processing
+
+% restore hold state
+if ~holdState
+    hold(ax, 'off');
 end
 
 % return handles if required

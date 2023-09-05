@@ -122,7 +122,7 @@ for i = 1:length(x0)
 end
 
 
-%% post-processing
+%% Post-processing
 
 % restore hold state
 if ~holdState

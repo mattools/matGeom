@@ -43,16 +43,25 @@ end
 % number of rectangles to draw
 n = size(rect, 1);
 
+% save hold state
+holdState = ishold(ax);
+hold(ax, 'on');
+
 % display each rectangle
-r = zeros(n, 1);
+h = zeros(n, 1);
 for i = 1:n
     % compute vertex corodinates
     poly = rectToPolygon(rect(i, :));
     % display resulting polygon
-    r(i) = drawPolygon(ax, poly, varargin{:});
+    h(i) = drawPolygon(ax, poly, varargin{:});
+end
+
+% restore hold state
+if ~holdState
+    hold(ax, 'off');
 end
 
 % process output
 if nargout > 0
-    varargout = {r};
+    varargout = {h};
 end

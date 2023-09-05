@@ -73,10 +73,17 @@ else
 end
 
 
-%% Draw each box
+%% Pre-processing
 
 % allocate memory for graphical handle
 hr = zeros(length(cx), 1);
+
+% save hold state
+holdState = ishold(ax);
+hold(ax, 'on');
+
+
+%% Draw each box
 
 % iterate on oriented boxes
 for i = 1:length(cx)
@@ -99,8 +106,14 @@ for i = 1:length(cx)
 end
 
 
-%% Format output
+%% Post-processing
 
+% restore hold state
+if ~holdState
+    hold(ax, 'off');
+end
+
+% Format output
 if nargout > 0
     varargout = {hr};
 end

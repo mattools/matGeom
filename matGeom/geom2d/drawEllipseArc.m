@@ -72,20 +72,20 @@ for i = 1:length(varargin)
     end
 end
 
-if length(varargin)==1
+if length(varargin) == 1
     ellipse = varargin{1};
-    x0 = ellipse(1);
-    y0 = ellipse(2);
-    a  = ellipse(3);
-    b  = ellipse(4);
+    x0 = ellipse(:,1);
+    y0 = ellipse(:,2);
+    a  = ellipse(:,3);
+    b  = ellipse(:,4);
     if size(ellipse, 2)>6
-        theta   = ellipse(5);
-        start   = ellipse(6);
-        extent  = ellipse(7);
+        theta   = ellipse(:,5);
+        start   = ellipse(:,6);
+        extent  = ellipse(:,7);
     else
         theta   = zeros(size(x0));
-        start   = ellipse(5);
-        extent  = ellipse(6);
+        start   = ellipse(:,5);
+        extent  = ellipse(:,6);
     end
     
 elseif length(varargin)>=6
@@ -108,15 +108,22 @@ else
 end
 
 
-%% Drawing
+%% Initialisation
 
 % allocate memory for handles
 h = zeros(size(x0));
 
+% save hold state
+holdState = ishold(ax);
+hold(ax, 'on');
+
+
+%% Drawing
+
 for i = 1:length(x0)
     % start and end angles
-    t1 = deg2rad(start);
-    t2 = t1 + deg2rad(extent);
+    t1 = deg2rad(start(i));
+    t2 = t1 + deg2rad(extent(i));
     
     % vertices of ellipse
     t = linspace(t1, t2, 60);
@@ -139,8 +146,14 @@ for i = 1:length(x0)
 end
 
 
-%% Process output arguments
+%% Post-processing
 
+% restore hold state
+if ~holdState
+    hold(ax, 'off');
+end
+
+% process output argument
 if nargout > 0
     varargout = {h};
 end
