@@ -44,6 +44,9 @@ function varargout = drawCircle(varargin)
 % Created: 2003-10-31
 % Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
+
+%% Parse input arguments
+
 % extract handle of axis to draw on
 if isAxisHandle(varargin{1})
     ax = varargin{1};
@@ -75,11 +78,6 @@ else
     error('bad format for input in drawCircle');
 end
 
-% ensure each parameter is column vector
-x0 = x0(:);
-y0 = y0(:);
-r = r(:);
-
 % default number of discretization steps
 N = 72;
 
@@ -92,6 +90,14 @@ if ~isempty(varargin)
     end
 end
 
+
+%% Pre-processing
+
+% ensure each parameter is column vector
+x0 = x0(:);
+y0 = y0(:);
+r = r(:);
+
 % parametrization variable for circle (use N+1 as first point counts twice)
 t = linspace(0, 2*pi, N+1);
 cot = cos(t);
@@ -100,12 +106,27 @@ sit = sin(t);
 % empty array for graphic handles
 h = zeros(size(x0));
 
+% save hold state
+holdState = ishold(ax);
+hold(ax, 'on');
+
+
+%% Display each circle
+
 % compute discretization of each circle
 for i = 1:length(x0)
     xt = x0(i) + r(i) * cot;
     yt = y0(i) + r(i) * sit;
 
     h(i) = plot(ax, xt, yt, varargin{:});
+end
+
+
+%% post-processing
+
+% restore hold state
+if ~holdState
+    hold(ax, 'off');
 end
 
 if nargout > 0
