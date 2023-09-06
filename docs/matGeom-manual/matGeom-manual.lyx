@@ -2723,24 +2723,6 @@ Create a new edge parallel to another edge.
 \end_layout
 
 \begin_layout Minisec
-centeredEdgeToEdge
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-centeredEdgeToEdge
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Converts a centered edge to a two-points edge.
-\end_layout
-
-\begin_layout Minisec
 midPoint
 \begin_inset Index idx
 status collapsed
@@ -2900,6 +2882,50 @@ drawEdge
 
 \begin_layout Standard
 Draws an edge given by 2 points.
+\end_layout
+
+\begin_layout Subsection
+Centered Edges
+\end_layout
+
+\begin_layout Standard
+Centered edges have same shape as edges (line segments), but are represented
+ in a different way.
+ They are defined by the coordinates of edge center, the length of the edge,
+ and the orientation (in degrees):
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+CEDG = [XC YC  L  ORI];
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Minisec
+centeredEdgeToEdge
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+centeredEdgeToEdge
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Converts a centered edge to a two-points edge.
 \end_layout
 
 \begin_layout Minisec
@@ -3217,6 +3243,8 @@ Angles are expressed in radians, counter-clockwise, with
 \end_inset
 
  domain.
+ Representation of geometric shapes usually consider angles in degrees,
+ as this is often more intuitive.
 \end_layout
 
 \begin_layout Minisec
@@ -5241,7 +5269,11 @@ Note that in MatGeom, while points are represented as
 \begin_inset Formula $1\times2$
 \end_inset
 
- row vectors, the transform is represented as the 
+ row vectors (or 
+\begin_inset Formula $n_{p}\times2$
+\end_inset
+
+ arrays), the transform is represented as the 
 \begin_inset Formula $3\times3$
 \end_inset
 
@@ -13327,7 +13359,7 @@ The two spherical angles used by MatGeom are 1) the colatitude, corresponding
 
 -axis, and 2) the azimut.
  The last coordinate is the distance to the origin.
- Note that a different convention that standard Matlab was used: A discussion
+ Note that a different convention from standard Matlab was used: A discussion
  can be found here
 \begin_inset Foot
 status collapsed
@@ -13641,6 +13673,10 @@ The upper-left
 \end_inset
 
  elements correspond to the translation part.
+ As for 2D transforms, 3D transforms consider points in column vectors,
+ while they are represented as row vectors within the library.
+ The transform functions (such as transformPoint3d) manage the necessary
+ transposition.
 \end_layout
 
 \begin_layout Subsection
@@ -14207,6 +14243,10 @@ Concatenates several space transformations.
 
 \begin_layout Section
 Drawing functions
+\end_layout
+
+\begin_layout Standard
+Several functions allow to display common geometric shapes.
 \end_layout
 
 \begin_layout Subsection
