@@ -56,42 +56,41 @@ while true
     % parse element type
     type = sscanf(line, '%s', 1);
     
-    switch type
-        case 'v'
-            % parse vertex
-            v = [v; sscanf(line(2:end), '%f')']; %#ok<AGROW>
+    if strcmp(type, 'v')
+        % parse vertex
+        v = [v; sscanf(line(2:end), '%f')']; %#ok<AGROW>
             
-        case 'vt'
-            % parse texture coordinate
-            vt = [vt; sscanf(line(3:end), '%f')']; %#ok<AGROW>
+    elseif strcmp(type, 'vt')
+        % parse texture coordinate
+        vt = [vt; sscanf(line(3:end), '%f')']; %#ok<AGROW>
             
-        case 'vn'
-            % parse normal coordinates
-            vn = [vn; sscanf(line(3:end), '%f')']; %#ok<AGROW>
+    elseif strcmp(type, 'vn')
+        % parse normal coordinates
+        vn = [vn; sscanf(line(3:end), '%f')']; %#ok<AGROW>
             
-        case 'f'
-            % parse face data
-            
-            % transform current line into a 3-by-nt matrix of tokens
-            str = textscan(line(2:end), '%s');
-            tokenMatrix = split(str{1}, '/');
-            
-            % parse vertex indices (first column of matrix)
-            fv = [fv ; str2double(tokenMatrix(:,1)')]; %#ok<AGROW>
-            
-            % parse texture coordinates (second column of matrix)
-            if size(tokenMatrix, 2) > 1 && ~isempty(tokenMatrix{1,2})
-                fvt = [fvt ; str2double(tokenMatrix(:,2)')]; %#ok<AGROW>
-            end
-            
-            % parse normal coordinates (third column of matrix)
-            if size(tokenMatrix, 2) > 2 && ~isempty(tokenMatrix{1,3})
-                fvn = [fvn ; str2double(tokenMatrix(:,3)')]; %#ok<AGROW>
-            end
+    elseif strcmp(type, 'f')
+        % parse face data
+        
+        % transform current line into a 3-by-nt matrix of tokens
+        str = textscan(line(2:end), '%s');
+        tokenMatrix = split(str{1}, '/');
+        
+        % parse vertex indices (first column of matrix)
+        fv = [fv ; str2double(tokenMatrix(:,1)')]; %#ok<AGROW>
+        
+        % parse texture coordinates (second column of matrix)
+        if size(tokenMatrix, 2) > 1 && ~isempty(tokenMatrix{1,2})
+            fvt = [fvt ; str2double(tokenMatrix(:,2)')]; %#ok<AGROW>
+        end
+        
+        % parse normal coordinates (third column of matrix)
+        if size(tokenMatrix, 2) > 2 && ~isempty(tokenMatrix{1,3})
+            fvn = [fvn ; str2double(tokenMatrix(:,3)')]; %#ok<AGROW>
+        end
 
-            % The following code is slightly faster, but does not manage
-            % all possible cases (in particular when face texture is empty)
-            % and is more complicated to maintain.
+        % The following code is slightly faster, but does not manage
+        % all possible cases (in particular when face texture is empty)
+        % and is more complicated to maintain.
 %             str = textscan(line(2:end), '%s'); 
 %             str = str{1};
 %             fvi = []; fvti = []; fvni = [];
@@ -124,16 +123,16 @@ while true
 %                 fvn = [fvn; fvni]; %#ok<AGROW>
 %             end
             
-        case {'g', 'o', 's', 'usemtl'}
-            warning('matGeom:readMesh_obj:UnsupportedElement', ......
-                'Element %s at line %d is not (yet) managed', type, lineIndex);
+    elseif any(strcmp(type, {'g', 'o', 's', 'usemtl'}))
+        warning('matGeom:readMesh_obj:UnsupportedElement', ......
+            'Element %s at line %d is not (yet) managed', type, lineIndex);
             
-        case {'#', '', ' '}
-            % do nothing
+    elseif isempty(type) || any(strcmp(type(1), {'#', ' '}))
+        % commnent or empty line -> do nothing
             
-        otherwise
-            warning('matGeom:readMesh_obj:UnknownElement', ......
-                'Unknown element type at line %d: %s', lineIndex, type);
+    else
+        warning('matGeom:readMesh_obj:UnknownElement', ......
+            'Unknown element type at line %d: %s', lineIndex, type);
     end
 end
 
