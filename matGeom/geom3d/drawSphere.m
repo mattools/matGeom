@@ -63,13 +63,8 @@ function varargout = drawSphere(varargin)
 % Created: 2005-02-17
 % Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
-% Check if axes handle is specified
-if isAxisHandle(varargin{1})
-    hAx = varargin{1};
-    varargin(1)=[];
-elseif nargout ~= 3
-    hAx = gca;
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
 % process input options: when a string is found, assumes this is the
 % beginning of options

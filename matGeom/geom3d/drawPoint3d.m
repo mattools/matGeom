@@ -32,14 +32,8 @@ function h = drawPoint3d(varargin)
 % Created: 2005-02-18
 % Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
-%
-
-if isAxisHandle(varargin{1})
-    hAx = varargin{1};
-    varargin(1)=[];
-else
-    hAx = gca;
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
 if length(varargin) == 1 && size(varargin{1}, 2) == 3
     % points are given as one single array with 3 columns

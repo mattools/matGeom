@@ -1,4 +1,4 @@
-function  varargout = drawPlatform(plane, siz, varargin)
+function  varargout = drawPlatform(varargin)
 %DRAWPLATFORM Draw a rectangular platform with a given size.
 %
 %   drawPlatform(PLANE, SIZ) draws a rectangular platform with the
@@ -34,15 +34,13 @@ function  varargout = drawPlatform(plane, siz, varargin)
 
 %% Parse inputs
 
-% extract axis handle
-if isAxisHandle(plane)
-    hAx = plane;
-    plane = siz;
-    siz = varargin{1};
-    varargin(1) = [];
-else
-    hAx = gca;
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
+
+% retrieve plane and size
+plane = varargin{1};
+siz = varargin{2};
+varargin(1:2) = [];
 
 % parse optional arguments
 p = inputParser;

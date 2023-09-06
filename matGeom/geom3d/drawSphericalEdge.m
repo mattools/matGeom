@@ -6,6 +6,10 @@ function varargout = drawSphericalEdge(varargin)
 %   extremities. The shortest spherical edge joining the two extremities is
 %   drawn on the current axes.
 %
+%   drawSphericalEdge(AX, ...)
+%   Specifies the handle of the axis to use for drawing.
+%
+%
 %   Example
 %     figure; hold on; axis equal; drawSphere([0 0 0 1]); view(3);
 %     p1 = [0 -1 0];  p2 = [0 0 1];
@@ -21,13 +25,8 @@ function varargout = drawSphericalEdge(varargin)
 % Created: 2012-02-09, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012-2023 INRA - Cepia Software Platform
 
-% Check if axes handle is specified
-if isAxisHandle(varargin{1})
-    hAx = varargin{1};
-    varargin(1) = [];
-else
-    hAx = gca;
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
 sphere = varargin{1};
 edge = varargin{2};

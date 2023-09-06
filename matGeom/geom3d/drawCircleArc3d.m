@@ -21,13 +21,8 @@ function varargout = drawCircleArc3d(varargin)
 % Created: 2005-02-21
 % Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
-% parse axis handle
-if isAxisHandle(varargin{1})
-    hAx = varargin{1};
-    varargin(1) = [];
-else
-    hAx = gca;
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
 arc = varargin{1};
 varargin(1) = [];

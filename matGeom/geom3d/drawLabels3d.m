@@ -30,12 +30,7 @@ if isempty(varargin)
 end
 
 % extract handle of axis to draw on
-if isAxisHandle(varargin{1})
-    axH = varargin{1};
-    varargin(1) = [];
-else
-    axH = gca;
-end
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
 % process input parameters
 var = varargin{1};
@@ -94,7 +89,7 @@ labels = char(labels);
 
 
 %% display the text
-h = text(axH, px, py, pz, labels, varargin{:});
+h = text(hAx, px, py, pz, labels, varargin{:});
 
 
 %% format output

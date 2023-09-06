@@ -1,4 +1,4 @@
-function varargout = drawCube(cube, varargin)
+function varargout = drawCube(varargin)
 %DRAWCUBE Draw a 3D centered cube, eventually rotated.
 %
 %   drawCube(CUBE)
@@ -34,13 +34,11 @@ function varargout = drawCube(cube, varargin)
 % Created: 2011-06-29, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011-2023 INRA - Cepia Software Platform
 
-% Parse and check inputs
-if isAxisHandle(varargin{1})
-    hAx = varargin{1};
-    varargin(1) = [];
-else
-    hAx = gca;
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
+
+cube = varargin{1};
+varargin(1) = [];
 
 % default values
 xc    = 0;
@@ -52,7 +50,7 @@ phi   = 0;
 psi   = 0;
 
 %% Parses the input
-if nargin > 0 && ~isAxisHandle(cube)
+if nargin > 0
     % one argument: parses elements
     xc  = cube(:,1);
     yc  = cube(:,2);

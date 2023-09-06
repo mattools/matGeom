@@ -12,7 +12,7 @@ function varargout = drawDome(varargin)
 %   Where CENTER = [XC YC ZC], specifies the center and the radius with two
 %   arguments and vector as third argument.
 % 
-%   drawdrawDome(XC, YC, ZC, R, V)
+%   drawDome(XC, YC, ZC, R, V)
 %   Specifiy dome center, radius and vector as five arguments.
 %
 %   drawDome(..., NAME, VALUE);
@@ -24,7 +24,7 @@ function varargout = drawDome(varargin)
 %   H = drawDome(...)
 %   Return a handle to the graphical object created by the function.
 %
-%   [X Y Z] = drawdrawDome(...)
+%   [X Y Z] = drawDome(...)
 %   Return the coordinates of the vertices used by the dome. In this
 %   case, the dome is not drawn.
 %

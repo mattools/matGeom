@@ -1,4 +1,4 @@
-function varargout = drawCuboid(cuboid, varargin)
+function varargout = drawCuboid(varargin)
 %DRAWCUBOID Draw a 3D cuboid, eventually rotated.
 %
 %   drawCuboid(CUBOID)
@@ -37,13 +37,11 @@ function varargout = drawCuboid(cuboid, varargin)
 % Created: 2011-06-29, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011-2023 INRA - Cepia Software Platform
 
-if isAxisHandle(cuboid)
-    hAx = cuboid;
-    cuboid = varargin{1};
-    varargin(1) = [];
-else
-    hAx = gca;
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
+
+cuboid = varargin{1};
+varargin(1) = [];
 
 % default orientation
 phi   = 0;

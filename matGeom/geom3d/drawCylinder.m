@@ -79,13 +79,8 @@ function varargout = drawCylinder(varargin)
 
 %% Input argument processing
 
-% parse axis handle
-if isAxisHandle(varargin{1})
-    hAx = varargin{1};
-    varargin(1) = [];
-else
-    hAx = gca;
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
 % input argument representing cylinders
 cyl = varargin{1};

@@ -8,13 +8,16 @@ function b = isAxisHandle(arg)
 %   This function is used to check if first argument of drawing functions
 %   corresponds to data or to axis handle to draw in.
 %
+%   Note that the 'parseAxisHandle' function performs a similar task, but
+%   provinding a single-line interface.
+%
 %   Example
 %     isAxisHandle(gca)
 %     ans =
 %         1
 %
 %   See also 
-%     drawPoint, drawLine, drawEdge
+%     parseAxisHandle, drawPoint, drawLine, drawEdge
 %
 
 % ------

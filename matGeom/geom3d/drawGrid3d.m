@@ -41,13 +41,8 @@ function varargout = drawGrid3d(varargin)
 
 %% initialize variables
 
-% Check if axes handle is specified
-if isAxisHandle(varargin{1})
-    hAx = varargin{1};
-    varargin(1) = [];
-else
-    hAx = gca;
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
 % default values
 closed = true;

@@ -62,14 +62,10 @@ function varargout = drawEllipseCylinder(varargin)
 
 %% Input argument processing
 
-% Check if axes handle is specified
-if isAxisHandle(varargin{1})
-    hAx = varargin{1};
-    varargin(1) = [];
-else
-    hAx = gca;
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
+% retrieve cylinder
 cyl = varargin{1};
 varargin(1) = [];
 

@@ -8,7 +8,7 @@ function [ax, varargin] = parseAxisHandle(varargin)
 %   parseAxisHandle
 %
 %   See also
-%
+%     isAxisHandle
  
 % ------
 % Author: David Legland

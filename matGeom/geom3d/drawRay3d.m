@@ -1,4 +1,4 @@
-function h = drawRay3d(ray, varargin)
+function h = drawRay3d(varargin)
 %DRAWRAY3D Draw a 3D ray on the current axis.
 %
 %   drawRay3d(RAY)
@@ -31,14 +31,11 @@ function h = drawRay3d(ray, varargin)
 % Created: 2020-05-25, using Matlab 9.8.0.1323502 (R2020a)
 % Copyright 2020-2023 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
-% extract handle of axis to draw in
-if isAxisHandle(ray)
-    hAx = ray;
-    ray = varargin{1};
-    varargin(1) = [];
-else
-    hAx = gca;
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
+
+ray = varargin{1};
+varargin(1) = [];
 
 % get bounding box limits
 box = axis(hAx);

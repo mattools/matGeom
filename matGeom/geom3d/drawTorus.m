@@ -43,13 +43,8 @@ nTheta  = 60;
 
 %% Extract input arguments
 
-% Check if axes handle is specified
-if isAxisHandle(varargin{1})
-    hAx = varargin{1};
-    varargin(1) = [];
-else
-    hAx = gca;
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
 torus = varargin{1};
 varargin(1) = [];

@@ -67,13 +67,8 @@ function varargout = drawCircle3d(varargin)
 %   drawCircle3d(XC, YC, ZC, R, THETA, PHI)         6
 %   drawCircle3d(XC, YC, ZC, R, THETA, PHI, PSI)    7
 
-% parse axis handle
-if isAxisHandle(varargin{1})
-    hAx = varargin{1};
-    varargin(1) = [];
-else
-    hAx = gca;
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
 % extract drawing options
 if verLessThan('matlab', '7.8')

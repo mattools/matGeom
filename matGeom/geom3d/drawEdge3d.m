@@ -29,13 +29,8 @@ function varargout = drawEdge3d(varargin)
 % Created: 2005-02-18
 % Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
-% Parse and check inputs
-if isAxisHandle(varargin{1})
-    hAx = varargin{1};
-    varargin(1) = [];
-else
-    hAx = gca;
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
 % extract edges from input arguments
 nCol = size(varargin{1}, 2);

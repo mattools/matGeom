@@ -51,6 +51,8 @@ function varargout = drawEllipse3d(varargin)
 %   drawEllipse3d(XC, YC, ZC, A, B, THETA, PHI)         7
 %   drawEllipse3d(XC, YC, ZC, A, B, THETA, PHI, PSI)    8
 
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
 % extract drawing options
 ind = find(cellfun(@ischar, varargin), 1, 'first');
@@ -204,7 +206,7 @@ trans   = localToGlobal3d(xc, yc, zc, theta, phi, psi);
 ellipse = transformPoint3d(base, trans);
 
 % draw the curve
-h = drawPolyline3d(ellipse, options{:});
+h = drawPolyline3d(hAx, ellipse, options{:});
 
 if nargout > 0
     varargout = {h};
