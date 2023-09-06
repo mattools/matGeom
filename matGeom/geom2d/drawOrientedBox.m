@@ -1,4 +1,4 @@
-function varargout = drawOrientedBox(box, varargin)
+function varargout = drawOrientedBox(varargin)
 %DRAWORIENTEDBOX Draw centered oriented rectangle.
 %   
 %   Syntax
@@ -46,13 +46,11 @@ function varargout = drawOrientedBox(box, varargin)
 %% Parses input arguments
 
 % extract handle of axis to draw on
-if isAxisHandle(box)
-    ax = box;
-    box = varargin{1};
-    varargin(1) = [];
-else
-    ax = gca;
-end
+[ax, varargin] = parseAxisHandle(varargin{:});
+
+% extract shape primitive
+box = varargin{1};
+varargin(1) = [];
 
 if length(varargin) > 4 && sum(cellfun(@isnumeric, varargin(1:4))) == 4
     % input given as separate arguments

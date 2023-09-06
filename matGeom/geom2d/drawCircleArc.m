@@ -40,17 +40,8 @@ function varargout = drawCircleArc(varargin)
 
 %% Parse input arguments
 
-if nargin == 0
-    error('Need to specify circle arc');
-end
-
 % extract handle of axis to draw on
-if isAxisHandle(varargin{1})
-    ax = varargin{1};
-    varargin(1) = [];
-else
-    ax = gca;
-end
+[ax, varargin] = parseAxisHandle(varargin{:});
 
 circle = varargin{1};
 if size(circle, 2) == 5

@@ -41,13 +41,8 @@ function h = drawPoint(varargin)
 % Created: 2003-10-31
 % Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
-% extract handle of axis to draw on
-if isAxisHandle(varargin{1})
-    ax = varargin{1};
-    varargin(1) = [];
-else
-    ax = gca;
-end
+% extract handle of axis to draw in
+[ax, varargin] = parseAxisHandle(varargin{:});
 
 % extract point(s) coordinates
 if size(varargin{1}, 2) == 2

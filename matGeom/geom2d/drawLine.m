@@ -30,12 +30,7 @@ function varargout = drawLine(varargin)
 % Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 % extract handle of axis to draw on
-if isAxisHandle(varargin{1})
-    ax = varargin{1};
-    varargin(1) = [];
-else
-    ax = gca;
-end
+[ax, varargin] = parseAxisHandle(varargin{:});
 
 % retrieve line
 lin = varargin{1};

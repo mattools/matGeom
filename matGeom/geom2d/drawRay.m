@@ -1,4 +1,4 @@
-function varargout = drawRay(ray, varargin)
+function varargout = drawRay(varargin)
 %DRAWRAY Draw a ray on the current axis.
 %
 %   drawRay(RAY)
@@ -22,14 +22,12 @@ function varargout = drawRay(ray, varargin)
 % Created: 2003-10-31
 % Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
-% extract handle of axis to draw in
-if isAxisHandle(ray)
-    ax = ray;
-    ray = varargin{1};
-    varargin(1) = [];
-else
-    ax = gca;
-end
+% extract handle of axis to draw on
+[ax, varargin] = parseAxisHandle(varargin{:});
+
+% extract shape primitive
+ray = varargin{1};
+varargin(1) = [];
 
 % get bounding box limits
 box = axis(ax);

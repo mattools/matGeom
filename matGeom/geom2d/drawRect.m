@@ -1,4 +1,4 @@
-function varargout = drawRect(rect, varargin)
+function varargout = drawRect(varargin)
 %DRAWRECT Draw rectangle on the current axis.
 %   
 %   drawRect(RECT)
@@ -32,13 +32,10 @@ function varargout = drawRect(rect, varargin)
 % Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 % extract handle of axis to draw on
-if isAxisHandle(rect)
-    ax = rect;
-    rect = varargin{1};
-    varargin(1) = [];
-else
-    ax = gca;
-end
+[ax, varargin] = parseAxisHandle(varargin{:});
+
+rect = varargin{1};
+varargin(1) = [];
 
 % number of rectangles to draw
 n = size(rect, 1);
