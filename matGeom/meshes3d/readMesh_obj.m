@@ -25,6 +25,7 @@ function mesh = readMesh_obj(fileName)
 % Created: 2022-09-08, using Matlab 9.9.0.1570001 (R2020b) Update 4
 % Copyright 2022-2023 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
+
 %% initialisations
 
 % open file
@@ -34,9 +35,15 @@ if fid == -1
         ['Could not open input file: ' fileName]);
 end
 
-% prepare data accumulators
-v = []; vt = []; vn = []; 
-fv = []; fvt = []; fvn = [];
+% create result arrays for vertices
+v = [];     % vertices
+vt = [];    % vertex textures
+vn = [];    % vertex normals
+% create result arrays for faces 
+% (uses cell arrays as face may have variable number of vertices)
+fv = {};    % face vertices
+fvt = {};   % face texture coordinates
+fvn = {};   % face normals
 
 
 %% File parsing
@@ -71,18 +78,19 @@ while true
     elseif strcmp(type, 'f')
         % parse face data
         
-        % transform current line into a 3-by-nt matrix of tokens
+        % transform current line into a matrix of tokens with as many rows
+        % as face vertices, and as many columns as face data type        
         str = textscan(line(2:end), '%s');
         tokenMatrix = split(str{1}, '/');
         
         % parse vertex indices (first column of matrix)
-        fv = [fv ; str2double(tokenMatrix(:,1)')]; %#ok<AGROW>
+        fv = [fv; {str2double(tokenMatrix(:,1))'}]; %#ok<AGROW>
         
         % parse texture coordinates (second column of matrix)
         if size(tokenMatrix, 2) > 1 && ~isempty(tokenMatrix{1,2})
-            fvt = [fvt ; str2double(tokenMatrix(:,2)')]; %#ok<AGROW>
+            fvt = [fvt; {str2double(tokenMatrix(:,2))'}]; %#ok<AGROW>
         end
-        
+
         % parse normal coordinates (third column of matrix)
         if size(tokenMatrix, 2) > 2 && ~isempty(tokenMatrix{1,3})
             fvn = [fvn ; str2double(tokenMatrix(:,3)')]; %#ok<AGROW>
@@ -128,7 +136,7 @@ while true
             'Element %s at line %d is not (yet) managed', type, lineIndex);
             
     elseif isempty(type) || any(strcmp(type(1), {'#', ' '}))
-        % commnent or empty line -> do nothing
+        % comment or empty line -> do nothing
             
     else
         warning('matGeom:readMesh_obj:UnknownElement', ......
@@ -153,7 +161,6 @@ if ~isempty(vt)
     mesh.vertexTexture = vt;
 end
 
-% face vertex indices
 mesh.faces = fv;
 
 % add optional face data
@@ -163,3 +170,17 @@ end
 if ~isempty(fvt)
     mesh.faceVertexTexture = fvt;
 end
+
+% if faces have all the same number of vertices, convert to numeric arrays
+nvf = cellfun(@length, fv);
+if all(nvf == nvf(1))
+    mesh.faces = cell2mat(mesh.faces(:));
+
+    if ~isempty(fvn)
+        mesh.faceVertexNormals = cell2mat(fvn(:));
+    end
+    if ~isempty(fvt)
+        mesh.faceVertexTexture = cell2mat(fvt(:));
+    end
+end
+
