@@ -7,11 +7,6 @@ function varargout = readMesh(fileName, varargin)
 %   arrays as NV-by-3 array and NF-by-N array respectively, where NV is the
 %   number of vertices and NF is the number of faces.
 %
-%   [V, F] = readMesh(FILENAME, 'trimMesh', false)
-%   By default the memory footprint of the mesh is reduced by deleting
-%   duplicate vertices and faces, and unreferenced vertices. Set this
-%   option to 'false' if this data should be preserved.
-%
 %   MESH = readMesh(FILENAME)
 %   Read the data stored in file FILENAME and return the mesh into a struct
 %   with fields 'vertices' and 'faces'.
@@ -49,9 +44,5 @@ switch lower(ext)
         error('readMesh.m function does not support %s files.', upper(ext(2:end)));
 end
 
-if parser.Results.trimMesh
-    mesh = trimMesh(mesh);
-end
-    
 % format output arguments
 varargout = formatMeshOutput(nargout, mesh.vertices, mesh.faces);
