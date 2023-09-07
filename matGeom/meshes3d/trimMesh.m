@@ -53,7 +53,7 @@ elseif iscell(faces)
     % change labels of vertices referenced by faces
     faces2 = cell(1, length(faces));
     for iFace = 1:length(faces)
-        faces2{iFace} = newInds(faces{iFace});
+        faces2{iFace} = newInds(faces{iFace})';
     end
 else
     error('Unsupported format!')
