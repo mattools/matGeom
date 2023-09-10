@@ -43,32 +43,41 @@ ymax = box(:,4);
 zmin = box(:,5);
 zmax = box(:,6);
 
+% save hold state
+holdState = ishold(hAx);
+hold(hAx, 'on');
+
 nBoxes = size(box, 1);
 
-gh=zeros(nBoxes,1);
-for i=1:nBoxes
+gh = zeros(nBoxes,1);
+for i = 1:nBoxes
     % lower face (z=zmin)
-    sh(1) =drawEdge3d(hAx, [xmin(i) ymin(i) zmin(i)   xmax(i) ymin(i) zmin(i)], varargin{:});
-    sh(2) =drawEdge3d(hAx, [xmin(i) ymin(i) zmin(i)   xmin(i) ymax(i) zmin(i)], varargin{:});
-    sh(3) =drawEdge3d(hAx, [xmax(i) ymin(i) zmin(i)   xmax(i) ymax(i) zmin(i)], varargin{:});
-    sh(4) =drawEdge3d(hAx, [xmin(i) ymax(i) zmin(i)   xmax(i) ymax(i) zmin(i)], varargin{:});
+    sh(1) = drawEdge3d(hAx, [xmin(i) ymin(i) zmin(i)   xmax(i) ymin(i) zmin(i)], varargin{:});
+    sh(2) = drawEdge3d(hAx, [xmin(i) ymin(i) zmin(i)   xmin(i) ymax(i) zmin(i)], varargin{:});
+    sh(3) = drawEdge3d(hAx, [xmax(i) ymin(i) zmin(i)   xmax(i) ymax(i) zmin(i)], varargin{:});
+    sh(4) = drawEdge3d(hAx, [xmin(i) ymax(i) zmin(i)   xmax(i) ymax(i) zmin(i)], varargin{:});
  
     % front face (y=ymin)
-    sh(5) =drawEdge3d(hAx, [xmin(i) ymin(i) zmin(i)   xmin(i) ymin(i) zmax(i)], varargin{:});
-    sh(6) =drawEdge3d(hAx, [xmax(i) ymin(i) zmin(i)   xmax(i) ymin(i) zmax(i)], varargin{:});
-    sh(7) =drawEdge3d(hAx, [xmin(i) ymin(i) zmax(i)   xmax(i) ymin(i) zmax(i)], varargin{:});
+    sh(5) = drawEdge3d(hAx, [xmin(i) ymin(i) zmin(i)   xmin(i) ymin(i) zmax(i)], varargin{:});
+    sh(6) = drawEdge3d(hAx, [xmax(i) ymin(i) zmin(i)   xmax(i) ymin(i) zmax(i)], varargin{:});
+    sh(7) = drawEdge3d(hAx, [xmin(i) ymin(i) zmax(i)   xmax(i) ymin(i) zmax(i)], varargin{:});
 
     % left face (x=xmin)
-    sh(8) =drawEdge3d(hAx, [xmin(i) ymax(i) zmin(i)   xmin(i) ymax(i) zmax(i)], varargin{:});
-    sh(9) =drawEdge3d(hAx, [xmin(i) ymin(i) zmax(i)   xmin(i) ymax(i) zmax(i)], varargin{:});
+    sh(8) = drawEdge3d(hAx, [xmin(i) ymax(i) zmin(i)   xmin(i) ymax(i) zmax(i)], varargin{:});
+    sh(9) = drawEdge3d(hAx, [xmin(i) ymin(i) zmax(i)   xmin(i) ymax(i) zmax(i)], varargin{:});
 
     % the last 3 remaining edges
-    sh(10)=drawEdge3d(hAx, [xmin(i) ymax(i) zmax(i)   xmax(i) ymax(i) zmax(i)], varargin{:});
-    sh(11)=drawEdge3d(hAx, [xmax(i) ymax(i) zmin(i)   xmax(i) ymax(i) zmax(i)], varargin{:});
-    sh(12)=drawEdge3d(hAx, [xmax(i) ymin(i) zmax(i)   xmax(i) ymax(i) zmax(i)], varargin{:});
+    sh(10) = drawEdge3d(hAx, [xmin(i) ymax(i) zmax(i)   xmax(i) ymax(i) zmax(i)], varargin{:});
+    sh(11) = drawEdge3d(hAx, [xmax(i) ymax(i) zmin(i)   xmax(i) ymax(i) zmax(i)], varargin{:});
+    sh(12) = drawEdge3d(hAx, [xmax(i) ymin(i) zmax(i)   xmax(i) ymax(i) zmax(i)], varargin{:});
     
     gh(i) = hggroup(hAx);
-    set(sh,'Parent',gh(i))
+    set(sh, 'Parent', gh(i))
+end
+
+% restore hold state
+if ~holdState
+    hold(hAx, 'off');
 end
 
 if nargout > 0

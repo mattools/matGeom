@@ -205,6 +205,11 @@ t   = linspace(0, 2*pi, Nt+1);
 nCircles = length(xc);
 h = zeros(nCircles, 1);
 
+% save hold state
+holdState = ishold(hAx);
+hold(hAx, 'on');
+
+% iterate over circles to draw
 for i = 1:nCircles
     % compute position of circle points
     x       = r(i) * cos(t)';
@@ -222,6 +227,10 @@ for i = 1:nCircles
     h(i) = drawPolyline3d(hAx, circle, options{:});
 end
 
+% restore hold state
+if ~holdState
+    hold(hAx, 'off');
+end
 
 if nargout > 0
     varargout = {h};

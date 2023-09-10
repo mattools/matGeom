@@ -35,36 +35,52 @@ varargin(1:2) = [];
 % extract data of the sphere
 origin = sphere(:, 1:3);
 
-% extremities of current edge
-point1  = edge(1:3);
-point2  = edge(4:6);
+% allocate array of handles
+nEdges = size(edge, 1);
+he = gobjects(1, nEdges);
 
-% compute plane containing current edge
-plane   = createPlane(origin, point1, point2);
+% save hold state
+holdState = ishold(hAx);
+hold(hAx, 'on');
 
-% intersection of the plane with unit sphere
-circle  = intersectPlaneSphere(plane, sphere);
+% iterate over edges
+for iEdge = 1:nEdges
+    % extremities of current edge
+    point1  = edge(iEdge, 1:3);
+    point2  = edge(iEdge, 4:6);
+    
+    % compute plane containing current edge
+    plane   = createPlane(origin, point1, point2);
+    
+    % intersection of the plane with unit sphere
+    circle  = intersectPlaneSphere(plane, sphere);
 
-% find the position (in degrees) of the 2 vertices on the circle
-angle1  = circle3dPosition(point1, circle);
-angle2  = circle3dPosition(point2, circle);
+    % find the position (in degrees) of the 2 vertices on the circle
+    angle1  = circle3dPosition(point1, circle);
+    angle2  = circle3dPosition(point2, circle);
 
-% ensure angles are in right direction
-if mod(angle2 - angle1 + 360, 360) > 180
-    tmp     = angle1;
-    angle1  = angle2;
-    angle2  = tmp;
+    % ensure angles are in right direction
+    if mod(angle2 - angle1 + 360, 360) > 180
+        tmp     = angle1;
+        angle1  = angle2;
+        angle2  = tmp;
+    end
+
+    % compute angle extent of the circle arc
+    angleExtent = mod(angle2 - angle1 + 360, 360);
+
+    % create circle arc
+    arc = [circle angle1 angleExtent];
+
+    % draw the arc
+    he(iEdge) = drawCircleArc3d(hAx, arc, varargin{:});
 end
 
-% compute angle extent of the circle arc
-angleExtent = mod(angle2 - angle1 + 360, 360);
-
-% create circle arc
-arc = [circle angle1 angleExtent];
-
-% draw the arc
-h = drawCircleArc3d(hAx, arc, varargin{:});
+% restore hold state
+if ~holdState
+    hold(hAx, 'off');
+end
 
 if nargout > 0
-    varargout = {h};
+    varargout = {he};
 end

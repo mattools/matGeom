@@ -30,6 +30,11 @@ varargin(1:2) = [];
 nv = size(poly, 1);
 
 h = zeros(nv, 1);
+
+% save hold state
+holdState = ishold(hAx);
+hold(hAx, 'on');
+
 for i = 1:nv
     v1 = poly(i, :);
     v2 = poly(mod(i, nv) + 1, :);
@@ -37,6 +42,10 @@ for i = 1:nv
     h(i) = drawSphericalEdge(hAx, sphere, [v1 v2], varargin{:});
 end
 
+% restore hold state
+if ~holdState
+    hold(hAx, 'off');
+end
 
 if nargout > 0
     varargout = {h};

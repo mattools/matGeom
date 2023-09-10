@@ -1,4 +1,4 @@
-function varargout = drawAngleBetweenVectors3d(o, v1, v2, r, varargin)
+function varargout = drawAngleBetweenVectors3d(varargin)
 %DRAWANGLEBETWEENVECTORS3D Draw an arc between 2 vectors.
 %
 %   drawAngleBetweenVectors3d(ORIGIN, VECTOR1, VECTOR2, RADIUS) 
@@ -30,41 +30,44 @@ function varargout = drawAngleBetweenVectors3d(o, v1, v2, r, varargin)
 % Created: 2020-02-02
 % Copyright 2020-2023
 
-% parse axis handle
-hAx = gca;
-if isAxisHandle(o)
-    hAx = o;
-    o = v1;
-    v1 = v2;
-    v2 = r;
-    r = varargin{1};
-    varargin(1) = [];
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
+% retrieve inputs
+if length(varargin) < 4
+    error('Requires at least four input arguments');
+end
+o = varargin{1};
+v1 = varargin{2};
+v2 = varargin{3};
+r = varargin{4};
+varargin(1:4) = [];
+
+% parse optional arguments
 p = inputParser;
 p.KeepUnmatched = true;
-logParValidFunc=@(x) (islogical(x) || isequal(x,1) || isequal(x,0));
-addParameter(p,'ConjugateAngle',false,logParValidFunc);
+logParValidFunc = @(x) (islogical(x) || isequal(x,1) || isequal(x,0));
+addParameter(p, 'ConjugateAngle', false, logParValidFunc);
 parse(p, varargin{:});
-conjugate=p.Results.ConjugateAngle;
-drawOptions=p.Unmatched;
+conjugate = p.Results.ConjugateAngle;
+drawOptions = p.Unmatched;
 
 % Normal of the two vectors
-normal=normalizeVector3d(crossProduct3d(v1, v2));
+normal = normalizeVector3d(crossProduct3d(v1, v2));
 % Align normal with the z axis.
 ROT = createRotationVector3d(normal,[0 0 1]);
 % Align first vector with x axis
 ROTv1 = createRotationVector3d(transformVector3d(v1,ROT),[1 0 0]);
 % Get Euler angles of the arc. 
 % The arc is an flat object. Hence, use the 'ZYZ' convention.
-[PHI, THETA, PSI] = rotation3dToEulerAngles((ROTv1*ROT)','ZYZ');
+[PHI, THETA, PSI] = rotation3dToEulerAngles((ROTv1*ROT)', 'ZYZ');
 % Get angle between the vectors
-angle=rad2deg(vectorAngle3d(v1, v2));
+angle = rad2deg(vectorAngle3d(v1, v2));
 % Draw the arc
 if ~conjugate
-    h = drawCircleArc3d(hAx, [o r [THETA PHI PSI] 0 angle],drawOptions);
+    h = drawCircleArc3d(hAx, [o r [THETA PHI PSI] 0 angle], drawOptions);
 else
-    h = drawCircleArc3d(hAx, [o r [THETA PHI PSI] 0 angle-360],drawOptions);
+    h = drawCircleArc3d(hAx, [o r [THETA PHI PSI] 0 angle-360], drawOptions);
 end
 
 % Format output
