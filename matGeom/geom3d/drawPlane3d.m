@@ -70,27 +70,36 @@ lim = get(hAx, 'zlim');
 zmin = lim(1);
 zmax = lim(2);
 
-poly = clipPlane(plane, [xmin xmax ymin ymax zmin zmax]);
+% allocate array of handles
+nPlanes = size(plane, 1);
+hp = gobjects(1, nPlanes);
 
-% If there is no intersection point, escape.
-if isempty(poly)
-    disp('plane is outside the drawing window');
-    if nargout > 0
-        h = [];
+% save hold state
+holdState = ishold(hAx);
+hold(hAx, 'on');
+
+% iterate over planes
+for iPlane = 1:nPlanes
+    % clip plane with current axis bounds
+    poly = clipPlane(plane(iPlane,:), [xmin xmax ymin ymax zmin zmax]);
+    
+    % draw only non-empty intersections
+    if ~isempty(poly)
+        hp(iPlane) = patch( ...
+            'XData', poly(:, 1), ...
+            'YData', poly(:, 2), ...
+            'ZData', poly(:, 3), ...
+            'Parent', hAx, varargin{:});
     end
-    return;
 end
 
-% draw the patch
-htmp = patch( ...
-    'XData', poly(:, 1), ...
-    'YData', poly(:, 2), ...
-    'ZData', poly(:, 3), ...
-    'Parent', hAx, varargin{:});
+% restore hold state
+if ~holdState
+    hold(hAx, 'off');
+end
 
 % Do not return axis if not requested
 % avoids output when called without semicolon
 if nargout > 0
-    h = htmp;
+    h = hp;
 end
-

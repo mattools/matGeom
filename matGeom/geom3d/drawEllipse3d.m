@@ -64,42 +64,42 @@ end
 
 if length(varargin)==1
     % get center and radius
-    ellipse = varargin{1};
-    xc = ellipse(:,1);
-    yc = ellipse(:,2);
-    zc = ellipse(:,3);
-    a  = ellipse(:,4);
-    b  = ellipse(:,5);
+    elli3d = varargin{1};
+    xc = elli3d(:,1);
+    yc = elli3d(:,2);
+    zc = elli3d(:,3);
+    a  = elli3d(:,4);
+    b  = elli3d(:,5);
     
     % get colatitude of normal
-    if size(ellipse, 2)>=6
-        theta = ellipse(:,6);
+    if size(elli3d, 2)>=6
+        theta = elli3d(:,6);
     else
-        theta = zeros(size(ellipse, 1), 1);
+        theta = zeros(size(elli3d, 1), 1);
     end
 
     % get azimut of normal
-    if size(ellipse, 2)>=7
-        phi     = ellipse(:,7);
+    if size(elli3d, 2)>=7
+        phi     = elli3d(:,7);
     else
-        phi = zeros(size(ellipse, 1), 1);
+        phi = zeros(size(elli3d, 1), 1);
     end
     
     % get roll
-    if size(ellipse, 2)==8
-        psi = ellipse(:,8);
+    if size(elli3d, 2)==8
+        psi = elli3d(:,8);
     else
-        psi = zeros(size(ellipse, 1), 1);
+        psi = zeros(size(elli3d, 1), 1);
     end
     
 elseif length(varargin)==2
     % get center and radius
-    ellipse = varargin{1};
-    xc = ellipse(:,1);
-    yc = ellipse(:,2);
-    zc = ellipse(:,3);
-    a  = ellipse(:,4);
-    b  = ellipse(:,5);
+    elli3d = varargin{1};
+    xc = elli3d(:,1);
+    yc = elli3d(:,2);
+    zc = elli3d(:,3);
+    a  = elli3d(:,4);
+    b  = elli3d(:,5);
     
     % get angle of normal
     angle = varargin{2};
@@ -115,12 +115,12 @@ elseif length(varargin)==2
 
 elseif length(varargin)==3    
     % get center and radius
-    ellipse = varargin{1};
-    xc = ellipse(:,1);
-    yc = ellipse(:,2);
-    zc = ellipse(:,3);
-    a  = ellipse(:,4);
-    b  = ellipse(:,5);
+    elli3d = varargin{1};
+    xc = elli3d(:,1);
+    yc = elli3d(:,2);
+    zc = elli3d(:,3);
+    a  = elli3d(:,4);
+    b  = elli3d(:,5);
     
     % get angle of normal and roll
     theta   = varargin{2};
@@ -129,14 +129,14 @@ elseif length(varargin)==3
     
 elseif length(varargin)==4
     % get center and radius
-    ellipse = varargin{1};
-    xc = ellipse(:,1);
-    yc = ellipse(:,2);
-    zc = ellipse(:,3);
+    elli3d = varargin{1};
+    xc = elli3d(:,1);
+    yc = elli3d(:,2);
+    zc = elli3d(:,3);
     
-    if size(ellipse, 2)==5
-        a  = ellipse(:,4);
-        b  = ellipse(:,5);
+    if size(elli3d, 2)==5
+        a  = elli3d(:,4);
+        b  = elli3d(:,5);
     end
     
     theta   = varargin{2};
@@ -145,10 +145,10 @@ elseif length(varargin)==4
     
 elseif length(varargin)==5
     % get center and radius
-    ellipse = varargin{1};
-    xc      = ellipse(:,1);
-    yc      = ellipse(:,2);
-    zc      = ellipse(:,3);
+    elli3d = varargin{1};
+    xc      = elli3d(:,1);
+    yc      = elli3d(:,2);
+    zc      = elli3d(:,3);
     a       = varargin{2};
     b       = varargin{3};
     theta   = varargin{4};
@@ -156,10 +156,10 @@ elseif length(varargin)==5
     psi     = zeros(size(phi, 1), 1);
 
 elseif length(varargin)==6
-    ellipse = varargin{1};
-    xc      = ellipse(:,1);
-    yc      = ellipse(:,2);
-    zc      = ellipse(:,3);
+    elli3d = varargin{1};
+    xc      = elli3d(:,1);
+    yc      = elli3d(:,2);
+    zc      = elli3d(:,3);
     a       = varargin{2};
     b       = varargin{3};
     theta   = varargin{4};
@@ -193,21 +193,36 @@ end
 % uses 60 intervals
 t = linspace(0, 2*pi, 61)';
 
-% polyline approximation of ellipse, centered and parallel to main axes
-x       = a * cos(t);
-y       = b * sin(t);
-z       = zeros(length(t), 1);
-base    = [x y z];
+nElli = size(xc, 1);
 
-% compute transformation from local basis to world basis
-trans   = localToGlobal3d(xc, yc, zc, theta, phi, psi);
+% save hold state
+holdState = ishold(hAx);
+hold(hAx, 'on');
 
-% transform points composing the ellipse
-ellipse = transformPoint3d(base, trans);
+% iterate over ellipses to draw
+for i = 1:nElli
+    % polyline approximation of ellipse, centered and parallel to main axes
+    xt = a(i) * cos(t);
+    yt = b(i) * sin(t);
+    zt = zeros(length(t), 1);
+    elli2d = [xt yt zt];
+    
+    % compute transformation from local basis to world basis
+    trans = localToGlobal3d(xc(i), yc(i), zc(i), theta(i), phi(i), psi(i));
+    
+    % transform points composing the ellipse
+    elli3d = transformPoint3d(elli2d, trans);
+    
+    % draw the curve
+    h = drawPolyline3d(hAx, elli3d, options{:});
+end
 
-% draw the curve
-h = drawPolyline3d(hAx, ellipse, options{:});
+% restore hold state
+if ~holdState
+    hold(hAx, 'off');
+end
 
+% format output arguments
 if nargout > 0
     varargout = {h};
 end

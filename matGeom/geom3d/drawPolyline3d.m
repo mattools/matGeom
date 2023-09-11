@@ -46,8 +46,9 @@ function varargout = drawPolyline3d(varargin)
 var = varargin{1};
 if iscell(var)
     hold on;
-    h = zeros(length(var(:)), 1);
-    for i = 1:length(var(:))
+    nPolys = length(var(:));
+    h = gobjects(1, nPolys);
+    for i = 1:nPolys
         h(i) = drawPolyline3d(hAx, var{i}, varargin{2:end});
     end
     if nargout > 0
@@ -56,7 +57,7 @@ if iscell(var)
     return;
 end
 
-% extract curve coordinates
+% extract vertex coordinates
 if min(size(var)) == 1
     % if first argument is a vector (either row or column), then assumes
     % first argument contains x coords, second argument contains y coords
@@ -83,7 +84,7 @@ else
     varargin(1) = [];
 end
 
-% check if curve is closed or open (default is open)
+% check if polyline is closed or open (default is open)
 closed = false;
 if ~isempty(varargin)
     var = varargin{1};
@@ -107,7 +108,7 @@ if ~isempty(varargin)
 end
 
 
-%% draw the curve
+%% draw the polyline curve
 
 % for closed curve, add the first point at the end to close curve
 if closed

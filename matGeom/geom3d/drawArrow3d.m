@@ -1,4 +1,4 @@
-function varargout = drawArrow3d(pos, vec, varargin)
+function varargout = drawArrow3d(varargin)
 %DRAWARROW3D Plot a quiver of 3D arrows.
 %
 %   drawArrow3d(pos, vec) 
@@ -43,15 +43,13 @@ function varargout = drawArrow3d(pos, vec, varargin)
 % Created: 2006-09-14, by Shawn Arseneau
 % Copyright 2006-2023
 
-% Check if first argument is an axes handle
-if numel(pos) == 1 && ishghandle(pos, 'axes')
-    hAx = pos;
-    pos=vec;
-    vec=varargin{1};
-    varargin(1)=[];
-else
-    hAx = gca;
-end
+% extract handle of axis to draw on
+[ax, varargin] = parseAxisHandle(varargin{:});
+
+% retrieve positions and vectors
+pos = varargin{1};
+vec = varargin{2};
+varargin(1:2) = [];
 
 numArrows = size(pos,1);
 if numArrows ~= size(vec,1)
@@ -80,14 +78,23 @@ stemRatio = p.Results.stemRatio;
 if numel(stemRatio) == 1; stemRatio = repmat(stemRatio,numArrows,1); end
 arrowRadius = p.Results.arrowRadius;
 if numel(arrowRadius) == 1; arrowRadius = repmat(arrowRadius,numArrows,1); end
-drawOptions=p.Unmatched;
+drawOptions = p.Unmatched;
+
+% save hold state
+holdState = ishold(ax);
+hold(ax, 'on');
+
 
 %% Loop through all arrows and plot in 3D
-hold(hAx,'on')
-qHandle=gobjects(numArrows,1);
-for i=1:numArrows
-    qHandle(i) = drawSingleVector3d(hAx, pos(i,:), vec(i,:), color(i,:), ...
-        stemRatio(i),arrowRadius(i),drawOptions);
+qHandle = gobjects(numArrows,1);
+for i = 1:numArrows
+    qHandle(i) = drawSingleVector3d(ax, pos(i,:), vec(i,:), color(i,:), ...
+        stemRatio(i), arrowRadius(i), drawOptions);
+end
+
+% restore hold state
+if ~holdState
+    hold(ax, 'off');
 end
 
 if nargout > 0
@@ -96,19 +103,19 @@ end
 
 end
 
-function [valid, color]=validateColor(color,numArrows)
-valid=true;
+function [valid, color] = validateColor(color, numArrows)
+valid = true;
 [arrowRow, arrowCol] = size(color);
-if arrowRow==1
+if arrowRow == 1
     if ischar(color) %in ShortName or LongName color format
-        color=repmat(color,numArrows,1);
+        color = repmat(color,numArrows,1);
     else
-        if arrowCol~=3
+        if arrowCol ~= 3
             error('color in RGBvalue must be of the form 1x3.');
         end
-        color=repmat(color,numArrows,1);
+        color = repmat(color, numArrows, 1);
     end
-elseif arrowRow~=numArrows
+elseif arrowRow ~= numArrows
     error('color in RGBvalue must be of the form Nx3.');
 end
 
@@ -132,16 +139,16 @@ CZ = CZ.*cylinderLength; % lengthen
 % Rotate Cylinder
 [row, col] = size(CX); % initial rotation to coincide with x-axis
 
-newEll = transformPoint3d([CX(:), CY(:), CZ(:)],createRotationVector3d([1 0 0],[0 0 -1]));
-CX = reshape(newEll(:,1), row, col);
-CY = reshape(newEll(:,2), row, col);
-CZ = reshape(newEll(:,3), row, col);
+newCyl = transformPoint3d([CX(:), CY(:), CZ(:)], createRotationVector3d([1 0 0],[0 0 -1]));
+CX = reshape(newCyl(:,1), row, col);
+CY = reshape(newCyl(:,2), row, col);
+CZ = reshape(newCyl(:,3), row, col);
 
 [row, col] = size(CX);
-newEll = transformPoint3d([CX(:), CY(:), CZ(:)],createRotationVector3d([1 0 0],vec));
-stemX = reshape(newEll(:,1), row, col);
-stemY = reshape(newEll(:,2), row, col);
-stemZ = reshape(newEll(:,3), row, col);
+newCyl = transformPoint3d([CX(:), CY(:), CZ(:)], createRotationVector3d([1 0 0],vec));
+stemX = reshape(newCyl(:,1), row, col);
+stemY = reshape(newCyl(:,2), row, col);
+stemZ = reshape(newCyl(:,3), row, col);
 
 % Translate cylinder
 stemX = stemX + X;
@@ -159,30 +166,30 @@ coneZ = coneZ.*coneLength;
 
 % Rotate cone
 [row, col] = size(coneX);
-newEll = transformPoint3d([coneX(:), coneY(:), coneZ(:)],createRotationVector3d([1 0 0],[0 0 -1]));
-coneX = reshape(newEll(:,1), row, col);
-coneY = reshape(newEll(:,2), row, col);
-coneZ = reshape(newEll(:,3), row, col);
+newCyl = transformPoint3d([coneX(:), coneY(:), coneZ(:)], createRotationVector3d([1 0 0], [0 0 -1]));
+coneX = reshape(newCyl(:,1), row, col);
+coneY = reshape(newCyl(:,2), row, col);
+coneZ = reshape(newCyl(:,3), row, col);
 
-newEll = transformPoint3d([coneX(:), coneY(:), coneZ(:)],createRotationVector3d([1 0 0],vec));
-headX = reshape(newEll(:,1), row, col);
-headY = reshape(newEll(:,2), row, col);
-headZ = reshape(newEll(:,3), row, col);
+newCyl = transformPoint3d([coneX(:), coneY(:), coneZ(:)], createRotationVector3d([1 0 0], vec));
+headX = reshape(newCyl(:,1), row, col);
+headY = reshape(newCyl(:,2), row, col);
+headZ = reshape(newCyl(:,3), row, col);
 
 % Translate cone
 % centerline for cylinder: the multiplier is to set the cone 'on the rim' of the cylinder
 V = [0, 0, srho*stemRatio];
-Vp = transformPoint3d(V,createRotationVector3d([1 0 0],[0 0 -1]));
-Vp = transformPoint3d(Vp,createRotationVector3d([1 0 0],vec));
+Vp = transformPoint3d(V, createRotationVector3d([1 0 0], [0 0 -1]));
+Vp = transformPoint3d(Vp, createRotationVector3d([1 0 0], vec));
 headX = headX + Vp(1) + X;
 headY = headY + Vp(2) + Y;
 headZ = headZ + Vp(3) + Z;
 
 % Draw cylinder & cone
 hStem = patch(hAx, surf2patch(stemX, stemY, stemZ), 'FaceColor', color, 'EdgeColor', 'none', drawOptions);
-hold(hAx,'on')
+% hold(hAx,'on')
 hHead = patch(hAx, surf2patch(headX, headY, headZ), 'FaceColor', color, 'EdgeColor', 'none', drawOptions);
 arrowHandle = hggroup(hAx);
-set([hStem, hHead],'Parent',arrowHandle);
+set([hStem, hHead], 'Parent', arrowHandle);
 
 end

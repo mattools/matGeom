@@ -14701,6 +14701,35 @@ f
 e
 \family default
  is the array of edge vertex indices.
+ Number of vertices, faces and edges for each polyhedron are given in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Polyhedra-Data"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ (p.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand pageref
+reference "tab:Polyhedra-Data"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Minisec
@@ -14946,6 +14975,35 @@ Other classical polyhedra
 
 \begin_layout Standard
 Other classical (non platonic) polyhedra can be easily generated.
+ For some of them, number of vertices, faces and edges are given in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Polyhedra-Data"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ (p.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand pageref
+reference "tab:Polyhedra-Data"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Minisec
@@ -15202,7 +15260,663 @@ meshes3d
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage clearpage
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="11" columns="6">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+polyhedon
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+#vertices
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+#faces
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+#edges
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+#vertex per face
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+comment
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+tetrahedron
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Platonic
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+cube
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Platonic
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+octahedron
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Platonic
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+icosahedron
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Platonic
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+dodecahedron
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Platonic
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+soccer ball
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+60
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+32
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+90
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5 or 6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+cube-octahedron
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+24
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3 or 4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+tetrakaidecahedron
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+24
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+36
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4 or 6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+rhombododecahedron
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+24
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Durer polyhedron
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+18
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3 or 6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Polyhedra-Data"
+
+\end_inset
+
+Number of vertices and faces of polyhedra provided by MatGeom.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 
@@ -15679,6 +16393,8 @@ Filtering of meshes
 
 \begin_layout Standard
 Several functions allows for smoothing or simplifying meshes.
+ In general, resulting meshes may be returned either as a pair of vertices-faces
+ output arguments, or as a Matlab structure encapsulating these two data.
 \end_layout
 
 \begin_layout Minisec
@@ -15696,7 +16412,7 @@ smoothMesh
 \end_layout
 
 \begin_layout Standard
-Smoothes mesh by replacing each vertex by the average of its neighbors .
+Smoothes mesh by replacing each vertex by the average of its neighbors.
 \end_layout
 
 \begin_layout Standard
@@ -15706,7 +16422,17 @@ status open
 
 \begin_layout Plain Layout
 
-[V2, F2] = smoothMesh(V, F);
+[v2, f2] = smoothMesh(v, f);
+\end_layout
+
+\begin_layout Plain Layout
+
+[v2, f2] = smoothMesh(mesh);
+\end_layout
+
+\begin_layout Plain Layout
+
+mesh2 = smoothMesh(...);
 \end_layout
 
 \end_inset
@@ -15739,7 +16465,17 @@ status open
 
 \begin_layout Plain Layout
 
-[V2, F2] = meshVertexClustering(V, F, SPACING);
+[v2, f2] = meshVertexClustering(v, f, spacing);
+\end_layout
+
+\begin_layout Plain Layout
+
+[v2, f2] = meshVertexClustering(mesh, spacing);
+\end_layout
+
+\begin_layout Plain Layout
+
+mesh2 = meshVertexClustering(...);
 \end_layout
 
 \end_inset
@@ -15860,6 +16596,16 @@ status open
 [v2, f2] = subdivideMesh(v, f, nDivs);
 \end_layout
 
+\begin_layout Plain Layout
+
+[v2, f2] = subdivideMesh(mesh, nDivs);
+\end_layout
+
+\begin_layout Plain Layout
+
+mesh2 = subdivideMesh(...);
+\end_layout
+
 \end_inset
 
 
@@ -15881,6 +16627,15 @@ triangulateFaces
 
 \begin_layout Standard
 Converts face array to an array of triangular faces.
+ Input face array may be either a 
+\begin_inset Formula $n_{f}\times3$
+\end_inset
+
+ numeric array, a 
+\begin_inset Formula $n_{f}\times4$
+\end_inset
+
+ numeric array, or a cell array or row vectors.
  
 \end_layout
 
@@ -15953,6 +16708,25 @@ meshComplement
 
 \begin_layout Standard
 Reverses the normal of each face in the mesh.
+\end_layout
+
+\begin_layout Minisec
+trimMesh
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+trimMesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Reduces the memory footprint of a polygonal mesh by removing vertices that
+ are not referenced by any face, and recomputing indices of remaining vertices.
 \end_layout
 
 \begin_layout Subsection
@@ -16368,6 +17142,42 @@ Applies several simplification to obtain a manifold mesh.
 \end_layout
 
 \begin_layout Minisec
+removeDuplicateVertices
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+removeDuplicateVertices
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Remove duplicate vertices of a mesh.
+\end_layout
+
+\begin_layout Minisec
+removeUnreferencedVertices
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+removeUnreferencedVertices
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Remove unreferenced vertices of a mesh.
+\end_layout
+
+\begin_layout Minisec
 removeDuplicateFaces
 \begin_inset Index idx
 status collapsed
@@ -16499,25 +17309,6 @@ removeMeshFaces
 
 \begin_layout Standard
 Removes faces from a mesh by face indices.
-\end_layout
-
-\begin_layout Minisec
-trimMesh
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-trimMesh
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Reduces the memory footprint of a polygonal mesh by removing vertices that
- are not referenced by any face, and recomputing indices of remaining vertices.
 \end_layout
 
 \begin_layout Standard
@@ -18052,10 +18843,6 @@ Sample meshes
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -18071,7 +18858,7 @@ This chapter gathers information for people wanting to contribute new features
 \end_layout
 
 \begin_layout Section
-Versioning
+Project organization
 \end_layout
 
 \begin_layout Standard
@@ -18122,12 +18909,25 @@ matGeom the source code for the main part of the library.
 \end_layout
 
 \begin_layout Description
-tests the scripts used for testing the library.
- Matlab's unit testing framework is used.
+tests the scripts used for testing the library, see Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Unit-tests"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
-Conventions
+Coding conventions
 \end_layout
 
 \begin_layout Standard
@@ -18222,6 +19022,192 @@ https://fr.mathworks.com/matlabcentral/fileexchange/8532-tedit
 \end_layout
 
 \begin_layout Section
+Unit tests
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Unit-tests"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A large number of functions are covered by unit tests, using the testing
+ framework provided by Matlab.
+ Unit tests are located in the 
+\begin_inset Quotes eld
+\end_inset
+
+tests
+\begin_inset Quotes erd
+\end_inset
+
+ directory.
+ Each unit test file contains the test(s) associated to a function, each
+ test case being implemented as a function.
+ Unit test files are named after the functions they are testing (e.g.
+ the file 
+\begin_inset Quotes eld
+\end_inset
+
+test_drawCircle
+\begin_inset Quotes erd
+\end_inset
+
+ contains the tests for the function 
+\begin_inset Quotes eld
+\end_inset
+
+drawCircle
+\begin_inset Quotes erd
+\end_inset
+
+), and are organized the same way as the library.
+ 
+\end_layout
+
+\begin_layout Standard
+When contributing a new functions, providing a set of corresponding unit
+ tests is strongly encouraged.
+\end_layout
+
+\begin_layout Subsection
+Unit test pattern
+\end_layout
+
+\begin_layout Standard
+Unit tests usually follow the 
+\begin_inset Quotes eld
+\end_inset
+
+Arrange-Act-Assert
+\begin_inset Quotes erd
+\end_inset
+
+ pattern.
+ Example:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+% arrange data for test
+\end_layout
+
+\begin_layout Plain Layout
+
+pt1 = [10 10];
+\end_layout
+
+\begin_layout Plain Layout
+
+pt2 = [10 20];
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% 
+\begin_inset Quotes eld
+\end_inset
+
+act
+\begin_inset Quotes erd
+\end_inset
+
+: perform computation
+\end_layout
+
+\begin_layout Plain Layout
+
+dist = distancePoints(pt1, pt2);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% assert validity of result
+\end_layout
+
+\begin_layout Plain Layout
+
+assertEqual(testCase, dist, 10, 'AbsTol', 0.01);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Unit test of drawing functions
+\end_layout
+
+\begin_layout Standard
+When testing functions that draw geometries, it is necessary to delete the
+ figure displayed during test.
+ Example:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+circ = [40 30  10];
+\end_layout
+
+\begin_layout Plain Layout
+
+hf = figure(); clf;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+hc = drawCircle(circ);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+assertTrue(testCase, ishghandle(hc));
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+close(hf);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Utility functions
 \end_layout
 
@@ -18290,6 +19276,28 @@ else
 \begin_layout Plain Layout
 
 end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Minisec
+parseAxisHandle
+\end_layout
+
+\begin_layout Standard
+Retrieve an handle to an axis handle from a list of input arguments, and
+ returns the remaining input arguments as a second output.
+ Typical use:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+[ax, varargin] = parseAxisHandle(varargin{:});
 \end_layout
 
 \end_inset

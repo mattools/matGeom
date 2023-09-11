@@ -30,3 +30,17 @@ assertTrue(testCase, ishandle(h));
 
 close(hFig);
 
+
+function test_Many(testCase) %#ok<*DEFNU>
+% Test call of function without argument.
+
+hFig = figure;
+edges = [0 -1 0  0 0 1 ; 1 0 0   0 1 0];
+
+he = drawSphericalEdge([0 0 0 1], edges, 'LineWidth', 2);
+
+assertEqual(testCase, length(he), 2);
+assertTrue(testCase, all(ishghandle(he)));
+
+close(hFig);
+

@@ -48,16 +48,16 @@ v2  = normalizeVector3d(p2 - ori);
 v3  = normalizeVector3d(p3 - ori);
 
 % keep hold state of current axis
-h = ishold(hAx);
+holdState = ishold(hAx);
+hold(hAx, 'on');
 
 % draw each spherical edge
-hold(hAx, 'on');
 h1 = drawSphericalEdge(hAx, sphere, [v1 v2], varargin{:});
 h2 = drawSphericalEdge(hAx, sphere, [v2 v3], varargin{:});
 h3 = drawSphericalEdge(hAx, sphere, [v3 v1], varargin{:});
 
 % return to previous hold state if needed
-if ~h
+if ~holdState
     hold(hAx, 'off');
 end
 

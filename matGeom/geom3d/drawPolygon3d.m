@@ -42,9 +42,10 @@ function varargout = drawPolygon3d(varargin)
 var1 = varargin{1};
 if iscell(var1)
     hold on;
-    h = [];
+    nPolys = length(var1);
+    h = gobjects(1, nPolys);
     for i = 1:length(var1(:))
-        h = [h; drawPolygon3d(hAx, var1{i}, varargin{2:end})]; %#ok<AGROW>
+        h(i) = drawPolygon3d(hAx, var1{i}, varargin{2:end});
     end
     if nargout > 0
         varargout{1} = h;

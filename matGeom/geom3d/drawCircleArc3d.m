@@ -28,9 +28,16 @@ arc = varargin{1};
 varargin(1) = [];
 
 if iscell(arc)
+    % save hold state
+    holdState = ishold(hAx);
+    hold(hAx, 'on');
     h = [];
     for i = 1:length(arc)
         h = [h drawCircleArc3d(hAx, arc{i}, varargin{:})]; %#ok<AGROW>
+    end
+    % restore hold state
+    if ~holdState
+        hold(hAx, 'off');
     end
     if nargout > 0
         varargout = {h};
@@ -39,9 +46,16 @@ if iscell(arc)
 end
 
 if size(arc, 1) > 1
+    % save hold state
+    holdState = ishold(hAx);
+    hold(hAx, 'on');
     h = [];
     for i = 1:size(arc, 1)
         h = [h drawCircleArc3d(hAx, arc(i,:), varargin{:})]; %#ok<AGROW>
+    end
+    % restore hold state
+    if ~holdState
+        hold(hAx, 'off');
     end
     if nargout > 0
         varargout = {h};

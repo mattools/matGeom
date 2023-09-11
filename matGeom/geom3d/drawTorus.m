@@ -49,13 +49,14 @@ nTheta  = 60;
 torus = varargin{1};
 varargin(1) = [];
 
-center = torus(1:3);
-r1 = torus(4);
-r2 = torus(5);
+center = torus(:, 1:3);
+r1 = torus(:, 4);
+r2 = torus(:, 5);
+nTorus = size(center, 1);
 
-normal = [0 0];
+normal = zeros(nTorus, 2);
 if size(torus, 2) >= 7
-    normal = torus(6:7);
+    normal = torus(:, 6:7);
 end
 
 % default set of options for drawing meshes
@@ -80,16 +81,31 @@ end
 
 %% Draw the torus
 
-% create base torus
-circle = circleToPolygon([r1 0 r2], nTheta);
-[x, y, z] = revolutionSurface(circle, linspace(0, 2*pi, nPhi));
+% allocate array of handles
+hs = gobjects(1, nTorus);
 
-% transform torus
-trans = localToGlobal3d([center normal]);
-[x, y, z] = transformPoint3d(x, y, z, trans);
+% save hold state
+holdState = ishold(hAx);
+hold(hAx, 'on');
 
-% draw the surface
-hs = surf(hAx, x, y, z, options{:});
+% iteate over torusses
+for i = 1:nTorus
+    % create base torus
+    circle = circleToPolygon([r1(i) 0 r2(i)], nTheta);
+    [x, y, z] = revolutionSurface(circle, linspace(0, 2*pi, nPhi));
+    
+    % transform torus
+    trans = localToGlobal3d([center(i,:) normal(i,:)]);
+    [x, y, z] = transformPoint3d(x, y, z, trans);
+    
+    % draw the surface
+    hs(i) = surf(hAx, x, y, z, options{:});
+end
+
+% restore hold state
+if ~holdState
+    hold(hAx, 'off');
+end
 
 
 %% Process output arguments

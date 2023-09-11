@@ -1,4 +1,4 @@
-function [vertices2, faces2] = subdivideMesh(vertices, faces, n)
+function varargout = subdivideMesh(vertices, faces, n)
 %SUBDIVIDEMESH Subdivides each face of the mesh.
 %
 %   [V2 F2] = subdivideMesh(V, F, N)
@@ -21,11 +21,18 @@ function [vertices2, faces2] = subdivideMesh(vertices, faces, n)
 % Created: 2013-08-22, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2013-2023 INRA - Cepia Software Platform
 
+
 %% Initialisations
 
+% vertex to vertex edges, will be computed if not provided within mesh
+% structure
 edges = [];
+
+% The face-to-edge adjacency information is necessary for associating new
+% faces to vertices (will be computed if not found)
 faceEdgeIndices = [];
 
+% if mesh is provided as structure, retrieve all possible data
 if isstruct(vertices)
     % get relevant inputs
     mesh = vertices;
@@ -37,10 +44,10 @@ if isstruct(vertices)
     if isfield(mesh, 'edges')
         edges = mesh.edges;
     end
+
     if isfield(mesh, 'faceEdges')
         faceEdgeIndices = mesh.faceEdges;
     end
-    
 end
 
 if ~isnumeric(faces) || size(faces, 2) ~= 3
@@ -59,7 +66,8 @@ if isempty(faceEdgeIndices)
 end
 
 
-%% Create new vertices on edges
+%% Process vertices
+% Create new vertices on existing edges, and inside faces
 
 % several interpolated positions
 t = linspace(0, 1, n + 1)';
@@ -87,8 +95,9 @@ for iEdge = 1:nEdges
 end
 
 
-%% Process each face
+%% Process faces
 
+% create result array (will grow during face iteration)
 faces2 = zeros(0, 3);
 
 nFaces = size(faces, 1);
@@ -182,3 +191,9 @@ for iFace = 1:nFaces
         faces2 = [faces2; newFace]; %#ok<AGROW>
     end    
 end
+
+
+%% Post-processing
+
+% setup output arguments
+varargout = formatMeshOutput(nargout, vertices2, faces2);

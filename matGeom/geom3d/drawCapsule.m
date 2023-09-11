@@ -24,7 +24,7 @@ function varargout = drawCapsule(varargin)
 %   Specifies one or several options using parameter name-value pairs.
 %   Available options are usual drawing options, as well as:
 %   'nPhi'    the number of arcs used for drawing the meridians
-%             (for the semi-spheres and the cylinder(
+%             (for the semi-spheres and the cylinder)
 %   'nTheta'  the number of circles used for drawing the parallels
 %             (only for the semi-spheres at the ends of the capsule)
 %
@@ -85,13 +85,8 @@ function varargout = drawCapsule(varargin)
 
 %% Input argument processing
 
-% parse axis handle
-if isAxisHandle(varargin{1})
-    hAx = varargin{1};
-    varargin(1) = [];
-else
-    hAx = gca;
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
 % input argument representing capsules
 cap = varargin{1};
@@ -152,16 +147,24 @@ if ~isempty(ind)
     options_cyl(ind:ind+1) = [];
 end
 
-hold on
+% save hold state
+holdState = ishold(hAx);
+hold(hAx, 'on');
+
 if all(cap(1:3) == cap(4:6))
-  % the capsule is only a sphere. take arbitrary axis to be able to plot
-  cap(4:6) = cap(1:3)+eps*([0 0 1]);
-  h1 = 0;
+    % the capsule is only a sphere. take arbitrary axis to be able to plot
+    cap(4:6) = cap(1:3)+eps*([0 0 1]);
+    h1 = 0;
 else
-  h1 = drawCylinder(cap, options_cyl{:});
+    h1 = drawCylinder(cap, options_cyl{:});
 end
 h2 = drawDome(cap([1:3,7]),  (cap(1:3)-cap(4:6)), varargin{:});
 h3 = drawDome(cap([4:6,7]), -(cap(1:3)-cap(4:6)), varargin{:});
+
+% restore hold state
+if ~holdState
+    hold(hAx, 'off');
+end
 
 % return handles
 if nargout == 1
