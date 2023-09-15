@@ -39,7 +39,7 @@ line12 = createLine3d(p1, p2);
 edge13 = [p1 p3];
 
 % prepare a figure for drawing
-figure(1); clf; hold on;
+figure(1); clf; hold on
 axis equal;
 axis([0 100 0 100 0 100]);
 set(gcf, 'renderer', 'opengl');
@@ -99,3 +99,6 @@ pointProps.MarkerFaceColor='c';
 pointProps.MarkerEdgeColor='k';
 drawPoint3d(inter2,pointProps);
 
+%% Draw circles
+circles = [50 50 50 10 10 20 30; 60 60 60 15 15 25 35];
+drawCircle3d(circles)

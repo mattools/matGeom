@@ -21,7 +21,6 @@ function varargout = subdivideMesh(vertices, faces, n)
 % Created: 2013-08-22, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2013-2023 INRA - Cepia Software Platform
 
-
 %% Initialisations
 
 % vertex to vertex edges, will be computed if not provided within mesh

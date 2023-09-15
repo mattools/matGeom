@@ -187,7 +187,6 @@ headZ = headZ + Vp(3) + Z;
 
 % Draw cylinder & cone
 hStem = patch(hAx, surf2patch(stemX, stemY, stemZ), 'FaceColor', color, 'EdgeColor', 'none', drawOptions);
-% hold(hAx,'on')
 hHead = patch(hAx, surf2patch(headX, headY, headZ), 'FaceColor', color, 'EdgeColor', 'none', drawOptions);
 arrowHandle = hggroup(hAx);
 set([hStem, hHead], 'Parent', arrowHandle);

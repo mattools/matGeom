@@ -44,7 +44,6 @@ function varargout = drawCircle(varargin)
 % Created: 2003-10-31
 % Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
-
 %% Parse input arguments
 
 % extract handle of axis to draw on

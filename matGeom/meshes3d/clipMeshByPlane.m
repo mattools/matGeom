@@ -1,15 +1,15 @@
 function [v2, f2, bE] = clipMeshByPlane(v, f, plane, varargin)
 %CLIPMESHBYPLANE Clip a mesh by a plane.
 %
-%   [V2, F2] = cutMeshByPlane(V, F, PLANE)
+%   [V2, F2] = clipMeshByPlane(V, F, PLANE)
 %   Clip a mesh defined by the vertices V and faces F by a PLANE and return
 %   the part of the mesh (V2, F2) above the plane.
 %
-%   [V2, F2, ENEW] = cutMeshByPlane(V, F, PLANE)
+%   [V2, F2, ENEW] = clipMeshByPlane(V, F, PLANE)
 %   Additonally returns the new boundary edges created by the clipping of
 %   the mesh.
 %
-%   [...] = cutMeshByPlane(V, F, PLANE, 'part', 'below')
+%   [...] = clipMeshByPlane(V, F, PLANE, 'part', 'below')
 %   Gives the part of the mesh below the plane. The options are:
 %       'part','above': Mesh above the plane [default]
 %       'part','below': Mesh below the plane

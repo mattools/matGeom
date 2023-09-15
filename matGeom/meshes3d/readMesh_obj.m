@@ -25,7 +25,6 @@ function mesh = readMesh_obj(fileName)
 % Created: 2022-09-08, using Matlab 9.9.0.1570001 (R2020b) Update 4
 % Copyright 2022-2023 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
-
 %% initialisations
 
 % open file
