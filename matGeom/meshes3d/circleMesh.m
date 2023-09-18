@@ -19,7 +19,7 @@ function varargout = circleMesh(circle, varargin)
 %     drawCircle3d(c,'LineWidth',2, 'Color','g');
 %     view(3); axis equal;
 %
-%   See also
+%   See also 
 %   cylinderMesh, circles3d
 
 % ------

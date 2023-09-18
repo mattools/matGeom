@@ -1,5 +1,5 @@
 function [ax, varargin] = parseAxisHandle(varargin)
-%PARSEAXISHANDLE  Parse handle to axis, or return current axis.
+%PARSEAXISHANDLE Parse handle to axis, or return current axis.
 %
 %   Usage:
 %   [ax, varargin] = parseAxisHandle(varargin{:});
@@ -7,15 +7,14 @@ function [ax, varargin] = parseAxisHandle(varargin)
 %   Example
 %   parseAxisHandle
 %
-%   See also
+%   See also 
 %     isAxisHandle
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% Created: 2023-09-05,    using Matlab 9.14.0.2206163 (R2023a)
-% Copyright 2023 INRAE.
+% E-mail: david.legland@inrae.fr
+% Created: 2023-09-05, using Matlab 9.14.0.2206163 (R2023a)
+% Copyright 2023 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % varargin can not be empty
 if isempty(varargin)

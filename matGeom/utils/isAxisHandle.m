@@ -2,14 +2,14 @@ function b = isAxisHandle(arg)
 %ISAXISHANDLE Check if the input corresponds to a valid axis handle.
 %
 %   B = isAxisHandle(VAR)
-%   If the value of VAR is scalar, corresponds to a valid matlab handle,
+%   If the value of VAR is scalar, corresponds to a valid MATLAB handle,
 %   and has type equal to 'axis', then returns TRUE. Otherwise, returns
-%   false.
+%   FALSE.
 %   This function is used to check if first argument of drawing functions
 %   corresponds to data or to axis handle to draw in.
 %
-%   Note that the 'parseAxisHandle' function performs a similar task, but
-%   provinding a single-line interface.
+%   NOTE: The 'parseAxisHandle' function performs a similar task, but
+%   provides a single line interface.
 %
 %   Example
 %     isAxisHandle(gca)
