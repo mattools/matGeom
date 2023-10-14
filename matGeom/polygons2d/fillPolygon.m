@@ -11,9 +11,16 @@ function varargout = fillPolygon(varargin)
 %   fillPolygon(PX, PY);
 %   Specifies coordinates of the polygon in separate arrays.
 %
-%
 %   H = fillPolygon(...);
 %   Also returns a handle to the created patch
+%
+%   Example
+%     oRectangle = [0 0;10 0;10 10;0 10];
+%     iRectangle = flipud(0.5*[0 0;10 0;10 10;0 10]+1);
+%     pol = {oRectangle, iRectangle};
+%     figure('color','w')
+%     fillPolygon(pol,'g')
+%     drawPolygon(pol,'r')
 %
 %
 %   See also 
