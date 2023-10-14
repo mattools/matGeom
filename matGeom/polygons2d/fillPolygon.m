@@ -20,71 +20,42 @@ function varargout = fillPolygon(varargin)
 %     polygons2d, drawCurve, drawPolygon
 
 % ------
-% Author: David Legland 
+% Author: David Legland, oqilipo
 % E-mail: david.legland@inrae.fr
 % Created: 2005-04-07
 % Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
-% check input
+% Check input
 if isempty(varargin)
-    error('need to specify a polygon');
+    error('Not enough input arguments.');
 end
 
-% case of a set of polygons stored in a cell array
-var = varargin{1};
-if iscell(var)
-    N = length(var);
-    h = zeros(N, 1);
-    for i = 1:N
-        % check for empty polygons
-        if ~isempty(var{i})
-            h(i) = fillPolygon(var{i}, varargin{2:end});
-        end
+% Check if the polygon is given in two separate arrays.
+if numel(varargin) > 1
+    if isnumeric(varargin{2})
+        varargin{2} = [varargin{1}, varargin{2}];
+        varargin(1)=[];
     end
-
-    % setup output values
-    if nargout > 0
-        varargout{1} = h;
-    end
-    return;
 end
 
-% Extract coordinates of polygon vertices
-if size(var, 2) > 1
-    % first argument is a polygon array
-    px = var(:, 1);
-    py = var(:, 2);
-    varargin(1) = [];
-else
-    % arguments 1 and 2 correspond to x and y coordinate respectively
-    if length(varargin) < 2
-        error('should specify either a N*2 array, or 2 N*1 vectors');
-    end
-    
-    px = varargin{1};
-    py = varargin{2};
-    varargin(1:2) = [];
-end
+% Convert into a polyShape
+polyShape = parsePolygon(varargin{1}, 'polyshape');
+varargin(1)=[];
 
-
-% Find position of breaks, and copies first point of each loop at the end
-inds = find(isnan(px(:)));
-i1 = [inds ; length(px)+1];
-i0 = [1 ; inds+1];
-px(i1, :) = px(i0, :);
-py(i1, :) = py(i0, :);
-
-
-% set default line format
+% Set default color format if no color is given.
 if isempty(varargin)
-    varargin = {'b'};
+    varargin = {'FaceColor', 'b'};
 end
 
+if ~mod(numel(varargin), 2) == 0
+    % Assume only the color was given.
+    varargin = ['FaceColor', varargin];
+end
 
-% fill the polygon with desired style
-h = fill(px, py, varargin{:}, 'lineStyle', 'none');
+% Fill the polygon with desired style.
+h = plot(polyShape, varargin{:}, 'LineStyle', 'none');
 
-% output
+% Output
 if nargout > 0
     varargout{1} = h;
 end
