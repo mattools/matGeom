@@ -16,7 +16,7 @@ function varargout = fillPolygon(varargin)
 %
 %   Example
 %     oRectangle = [0 0;10 0;10 10;0 10];
-%     iRectangle = flipud(0.5*[0 0;10 0;10 10;0 10]+1);
+%     iRectangle = flipud(0.5*oRectangle+1);
 %     pol = {oRectangle, iRectangle};
 %     figure('color','w')
 %     fillPolygon(pol,'g')
