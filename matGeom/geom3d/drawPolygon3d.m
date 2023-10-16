@@ -19,9 +19,10 @@ function varargout = drawPolygon3d(varargin)
 %     xt = 10 * cos(t);
 %     yt = 5 * sin(t);
 %     zt = zeros(100,1);
-%     poly = [xt yt zt];
-%     figure; hold on; axis equal; fillPolygon3d(poly, 'c'); 
-%     drawPolygon3d(poly, 'linewidth', 2, 'color', 'k');
+%     pol = [xt yt zt];
+%     figure; hold on; axis equal;
+%     fillPolygon3d(pol, 'c'); 
+%     drawPolygon3d(pol, 'linewidth', 2, 'color', 'k');
 % 
 %   See also 
 %   polygons3d, fillPolygon3d, drawPolyline3d
