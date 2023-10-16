@@ -4,6 +4,7 @@ function polyList = meshBoundary(varargin)
 %   CURVES = meshBoundary(V, F)
 %
 %   Example
+%     % Example 1
 %     % create centered icosahedron
 %     [v, f] = createIcosahedron;
 %     v(:,3) = v(:,3) - mean(v(:,3));
@@ -17,6 +18,14 @@ function polyList = meshBoundary(varargin)
 %     % draw mesh boundary
 %     curves = meshBoundary(vc, fc);
 %     hold on; drawPolygon3d(curves{1}, 'linewidth', 2, 'color', 'b');
+%
+%     % Example 2
+%     mesh = readMesh('mushroom.off');
+%     plane = createPlane([0 0 0.7], [-1 -2 3]);
+%     mesh = clipMeshVertices(mesh, plane, 'shape', 'plane');
+%     curves = meshBoundary(mesh);
+%     figure; drawMesh(mesh); axis equal; view(3);
+%     cellfun(@(x) drawPolygon3d(x, 'linewidth', 2, 'color', 'b'), curves)
 %
 %   See also 
 %     meshes3d, meshBoundaryEdgeIndices, meshBoundaryVertexIndices
