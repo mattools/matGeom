@@ -21,7 +21,7 @@ function poly2 = clipConvexPolygon3dHP(poly, plane)
 % Copyright 2007-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 warning('MatGeom:deprecation', ...
-    'Deprecated function, use ''clipPolygon3dHP'' instead');
+    'Deprecated function, use ''clipPolygonByPlane3d'' instead');
 
 % ensure last point is the same as the first one
 if sum(poly(end, :) == poly(1,:)) ~= 3

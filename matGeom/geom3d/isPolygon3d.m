@@ -19,7 +19,7 @@ function a = isPolygon3d(pol, varargin)
 %     disp(['Is 3d polygon?: ' num2str(isPolygon3d(pol3d))])
 %     disp('2d polygon, not 3d')
 %     disp(['Is 3d polygon?: ' num2str(isPolygon3d(pol))])
-%     pol3d2 = pol3d; pol3d2(12) = pol3d2(12)+1e-6;
+%     pol3d2 = pol3d; pol3d2(12) = pol3d2(12)+1e-12;
 %     disp('Not all points in same plane')
 %     disp(['Is 3d polygon?: ' num2str(isPolygon3d(pol3d2))])
 %     disp('Not real, contains complex elements')
@@ -38,7 +38,7 @@ function a = isPolygon3d(pol, varargin)
 narginchk(1,2)
 
 parser = inputParser;
-addOptional(parser,'tolerance',1e-8, ...
+addOptional(parser,'tolerance',1e-14, ...
     @(x) validateattributes(x,{'numeric'},{'scalar','>',0,'<',1}))
 parse(parser, varargin{:});
 TOL = parser.Results.tolerance;

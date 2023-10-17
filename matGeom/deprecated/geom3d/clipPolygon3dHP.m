@@ -40,48 +40,12 @@ function poly2 = clipPolygon3dHP(poly, plane, varargin)
 %   poygons3d, intersectLinePolygon3d
 
 % ------
-% Author: David Legland, oqilipo 
+% Author: David Legland, oqilipo
 % E-mail: david.legland@inrae.fr
 % Created: 2005-08-02
 % Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
-p = inputParser;
-addRequired(p, 'poly', @isPolygon3d)
-addRequired(p, 'plane', @isPlane)
-parse(p, poly, plane, varargin{:});
+warning('MatGeom:deprecation', ...
+    'Deprecated function, use ''clipPolygonByPlane3d'' instead');
 
-[poly, inputFormat] = parsePolygon(poly, 'repetition');
-
-% Check for each point of the polygon if it's above or below the plane.
-below = isBelowPlane(poly, plane);
-
-% In the case of a polygon totally over the plane, return empty array
-if sum(below) == 0
-    poly2 = zeros(0, 3);
-    return;
-end
-
-% In the case of a polygon totally below the plane, return original polygon
-if sum(~below) == 0
-    poly2 = poly;
-    return;
-end
-
-% Transform into 2D
-basisTFM = createBasisTransform3d('global', fitPlane(poly));
-poly2d = transformPoint3d(poly, basisTFM);
-
-% Intersection line between polygon and plane
-itsLine = intersectPlanes([0 0 0 1 0 0 0 1 0], ...
-    transformPlane3d(plane, basisTFM));
-poly2dNan = parsePolygon(poly2d,'nan');
-
-% Clip the 2d polygon by the intersection line
-poly22d = clipPolygonHP(poly2dNan(:,1:2), [itsLine(1:2) itsLine(4:5)],...
-    'method', 'polyshape');
-
-% Transform the 2d polygon back to 3d
-poly2 = transformPolygon3d(poly22d, inv(basisTFM));
-poly2 = parsePolygon(poly2, inputFormat);
-
-end
+poly2 = clipPolygonByPlane3d(poly, plane, varargin{:});

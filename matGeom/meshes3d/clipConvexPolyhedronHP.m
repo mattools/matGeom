@@ -80,7 +80,7 @@ for f = 1:length(faces)
 
     % clip polygon formed by face
     poly = nodes(face, :);
-    clipped = clipConvexPolygon3dHP(poly, plane);
+    clipped = clipPolygonByPlane3d(poly, plane);
 
     % identify indices of polygon vertices
     inds = zeros(1, size(clipped, 1));
