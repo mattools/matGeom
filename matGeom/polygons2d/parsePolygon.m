@@ -1,4 +1,4 @@
-function polyOut = parsePolygon(poly, format, varargin)
+function [polyOut, inputFormat] = parsePolygon(poly, format, varargin)
 %PARSEPOLYGON Conversion between different polygon formats.
 %
 %   POLYOUT = parsePolygon(POLY, FORMAT)
@@ -40,6 +40,7 @@ format = p.Results.format;
 % If polygon is a polyshape object
 if isa(poly,'polyshape')
     polyOut = parsePolygon(poly.Vertices, format);
+    inputFormat = 'polyshape';
     return
 end
 
@@ -58,11 +59,13 @@ if iscell(poly)
     if any(cellfun(@(x) any(isnan(x(:))), poly))
         error('Non-supported polygon cell format. Polygons in cell format should not contain NaN values!')
     end
+    inputFormat = 'cell';
 end
 
 if ~iscell(poly) && any(isnan(poly(:)))
     % If polygon contains nan
     polyCell = splitPolygons(poly)';
+    inputFormat = 'nan';
 elseif ~iscell(poly)
     % If polygon contains vertex repetitions
     polyBackup = poly;
@@ -85,6 +88,7 @@ elseif ~iscell(poly)
             poly(1:repIdx(2),:) = [];
         end
     end
+    inputFormat = 'repetition';
 end
 
 % Convert to output format
