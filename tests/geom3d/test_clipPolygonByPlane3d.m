@@ -1,10 +1,10 @@
-function test_suite = test_clipConvexPolygon3dHP
-%TEST_clipConvexPolygon3dHP  Test case for the file clipConvexPolygon3dHP
+function test_suite = test_clipPolygonByPlane3d
+%TEST_CLIPPOLYGONBYPLANE3D Test case for the file clipPolygonByPlane3d
 %
-%   Test case for the file clipConvexPolygon3dHP
+%   Test case for the file clipPolygonByPlane3d
 
 %   Example
-%   test_clipConvexPolygon3dHP
+%   test_clipPolygonByPlane3d
 %
 %   See also
 %
@@ -24,13 +24,12 @@ poly = [...
     12.0680 18.2066 37.4846; ...
     12.1988 17.9510 37.4621];
 plane = createPlane([0 0 0], [deg2rad(-75) deg2rad(0)]);
-clipped = clipConvexPolygon3dHP(poly, plane) ;
+clipped = clipPolygonByPlane3d(poly, plane) ;
 
 testCase.assertEqual(4, size(clipped, 1));
 
-
 poly = poly([1:end 1], :);
-clipped = clipConvexPolygon3dHP(poly, plane) ;
+clipped = clipPolygonByPlane3d(poly, plane) ;
 testCase.assertEqual(4, size(clipped, 1));
 
 
@@ -42,12 +41,12 @@ poly = [...
     12.1519 14.0046 58.5201 ];
 
 plane = createPlane([0 0 0], [deg2rad(-75) deg2rad(0)]);
-clipped = clipConvexPolygon3dHP(poly, plane) ;
+clipped = clipPolygonByPlane3d(poly, plane) ;
 
 testCase.assertEqual(4, size(clipped, 1));
 
 poly = poly([1:end 1], :);
-clipped = clipConvexPolygon3dHP(poly, plane) ;
+clipped = clipPolygonByPlane3d(poly, plane) ;
 testCase.assertEqual(4, size(clipped, 1));
 
 
@@ -59,12 +58,12 @@ poly = [...
     12.0680 18.2066 37.4846];
 
 plane = createPlane([0 0 0], [deg2rad(-75) deg2rad(0)]);
-clipped = clipConvexPolygon3dHP(poly, plane) ;
+clipped = clipPolygonByPlane3d(poly, plane) ;
 
 testCase.assertEqual(4, size(clipped, 1));
 
 poly = poly([1:end 1], :);
-clipped = clipConvexPolygon3dHP(poly, plane) ;
+clipped = clipPolygonByPlane3d(poly, plane) ;
 testCase.assertEqual(4, size(clipped, 1));
 
 
@@ -79,7 +78,7 @@ poly = [...
 
 plane = createPlane([30 60 30], [1 0 0]);
 
-clipped = clipConvexPolygon3dHP(poly, plane) ;
+clipped = clipPolygonByPlane3d(poly, plane) ;
 testCase.assertEqual(4, size(clipped, 1));
 
 
@@ -94,7 +93,7 @@ poly = [...
 
 plane = createPlane([30 60 30], [1 0 0]);
 
-clipped = clipConvexPolygon3dHP(poly, plane) ;
+clipped = clipPolygonByPlane3d(poly, plane) ;
 testCase.assertEqual(4, size(clipped, 1));
 
 
@@ -109,5 +108,5 @@ poly = [...
 
 plane = createPlane([30 60 30], [1 0 0]);
 
-clipped = clipConvexPolygon3dHP(poly, plane) ;
+clipped = clipPolygonByPlane3d(poly, plane) ;
 testCase.assertEqual(4, size(clipped, 1));

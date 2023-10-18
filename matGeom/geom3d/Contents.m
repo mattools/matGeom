@@ -127,7 +127,7 @@
 %   polygon3dNormalAngle        - Normal angle at a vertex of the 3D polygon.
 %   intersectLinePolygon3d      - Intersection point of a 3D line and a 3D polygon.
 %   intersectRayPolygon3d       - Intersection point of a 3D ray and a 3D polygon.
-%   clipConvexPolygon3dHP       - Clip a convex 3D polygon with Half-space.
+%   clipPolygonByPlane3d        - Clip a 3D polygon with a plane.
 %   drawPolygon3d               - Draw a 3D polygon specified by a list of vertex coords.
 %   drawPolyline3d              - Draw a 3D polyline specified by a list of vertex coords.
 %   fillPolygon3d               - Fill a 3D polygon specified by a list of vertex coords.
@@ -240,5 +240,4 @@
 help(mfilename);
 
 % In development:
-%   clipPolygon3dHP             - clip a 3D polygon with Half-space.
 %   drawPartialPatch            - draw surface patch, with 2 parametrized surfaces.

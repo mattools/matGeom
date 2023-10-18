@@ -38,5 +38,5 @@ if size(plane, 1)==1
 end
     
 % compute position of point projected on 3D line corresponding to plane
-% normal, and returns true for points locatd below the plane (pos<=0).
+% normal, and returns true for points located below the plane (pos<=0).
 below = linePosition3d(point, [plane(:, 1:3) planeNormal(plane)]) <= 0;

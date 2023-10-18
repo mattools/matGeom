@@ -9,7 +9,7 @@ function polygons3d(varargin)
 %   See also 
 %   polygonArea3d, triangleArea3d, polygonCentroid3d, polygon3dNormalAngle 
 %   intersectLinePolygon3d, intersectLineTriangle3d, intersectRayPolygon3d
-%   clipConvexPolygon3dHP
+%   clipPolygonByPlane3d
 %   drawPolygon3d, drawPolyline3d, fillPolygon3d
 
 % ------
