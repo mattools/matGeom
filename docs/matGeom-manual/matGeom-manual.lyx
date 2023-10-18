@@ -824,6 +824,20 @@ noprefix "false"
 \end_layout
 
 \begin_layout Description
+graphs Manipulation of geometric graphs (described in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Graphs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Description
 geom3d General functions in 3D euclidean space (described in chapter 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -867,24 +881,6 @@ geom2d
 \series default
  module.
  
-\end_layout
-
-\begin_layout Standard
-Another module is included within the library, but is less documented:
-\end_layout
-
-\begin_layout Description
-graphs Manipulation of geometric graphs (described in chapter 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:Graphs"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-)
 \end_layout
 
 \begin_layout Standard
@@ -5823,10 +5819,6 @@ minitoc
 \end_layout
 
 \begin_layout Section
-Data representation
-\end_layout
-
-\begin_layout Subsection
 Definitions
 \end_layout
 
@@ -6021,8 +6013,8 @@ curve
  can be considered as a discrete approximation of a smooth curve.
 \end_layout
 
-\begin_layout Subsection
-Data structures
+\begin_layout Section
+Data representation
 \end_layout
 
 \begin_layout Standard
@@ -6105,6 +6097,29 @@ figure; drawPolygon(P2); axis([0 50 0 50]);
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Note that Matlab also provides the 
+\begin_inset Quotes eld
+\end_inset
+
+polyshape
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+polyshape
+\end_layout
+
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ class, that gives access to many features, and that is used internally
+ by some functions of MatGeom.
 \end_layout
 
 \begin_layout Standard
@@ -7620,6 +7635,34 @@ Some conversion functions, and I/O utilities.
 \end_layout
 
 \begin_layout Minisec
+polygonToPolyshape
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+polygonToPolyshape
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Converts a MatGeom polygon to a MATLAB polyshape
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+polyshape
+\end_layout
+
+\end_inset
+
+ object.
+\end_layout
+
+\begin_layout Minisec
 polygonToRow
 \begin_inset Index idx
 status collapsed
@@ -7634,7 +7677,7 @@ polygonToRow
 \end_layout
 
 \begin_layout Standard
-Convert polygon coordinates to a row vector.
+Converts polygon coordinates to a row vector.
 \end_layout
 
 \begin_layout Minisec
@@ -7652,7 +7695,7 @@ rowToPolygon
 \end_layout
 
 \begin_layout Standard
-Create a polygon from a row vector.
+Creates a polygon from a row vector.
 \end_layout
 
 \begin_layout Minisec
@@ -7697,7 +7740,7 @@ readPolygonSet
 \end_layout
 
 \begin_layout Standard
-Read a set of simple polygons stored in a file.
+Reads a set of simple polygons stored in a file.
 \end_layout
 
 \begin_layout Minisec
@@ -7715,7 +7758,7 @@ writePolygonSet
 \end_layout
 
 \begin_layout Standard
-Write a set of simple polygons into a file.
+Writes a set of simple polygons into a file.
 \end_layout
 
 \begin_layout Chapter
@@ -7762,7 +7805,7 @@ minitoc
 \end_layout
 
 \begin_layout Section
-Data representation
+Definitions
 \end_layout
 
 \begin_layout Standard
@@ -7856,10 +7899,15 @@ Graphical representation of a sample graph composed of six vertices (red
 
 \end_layout
 
+\begin_layout Section
+Data representation
+\end_layout
+
 \begin_layout Standard
 Geometric graphs gather geometric information (through the position of vertices)
  and topological information (through the vertex adjacency information).
- The latter can be represented in different way:
+ Vertex positions are stored as a numeric array (like a point set).
+ The topology of the graph can be represented in different way:
 \end_layout
 
 \begin_layout Description
@@ -12103,7 +12151,12 @@ Some functions accept complex polygons, represented by a series of polygonal
 \end_layout
 
 \begin_layout Subsection
-Computing intersections
+Operations
+\end_layout
+
+\begin_layout Standard
+Comprises geometric operations such as computing intersections, of applying
+ geometric transform.
 \end_layout
 
 \begin_layout Minisec
@@ -12158,6 +12211,24 @@ clipConvexPolygon3dHP
 
 \begin_layout Standard
 Clips a convex 3D polygon with Half-space.
+\end_layout
+
+\begin_layout Minisec
+transformPolygon3d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+transformPolygon3d
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Transform a polygon with a 3D affine transform.
 \end_layout
 
 \begin_layout Subsection
@@ -12216,6 +12287,31 @@ polygon3dNormalAngle
 
 \begin_layout Standard
 Normal angle at a vertex of the 3D polygon.
+\end_layout
+
+\begin_layout Minisec
+isPolygon3d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+isPolygon3d
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Check if the input is a 3D polygon.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -12323,6 +12419,13 @@ intersectLineTriangle3d
 Computes the intersection point of a 3D line and a 3D triangle.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 3D curves
 \end_layout
@@ -12414,6 +12517,42 @@ fitCircle3d
 
 \begin_layout Standard
 Fits a 3D circle to a set of points.
+\end_layout
+
+\begin_layout Minisec
+distancePointCircle3d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+distancePointCircle3d
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Returns the distance between 3D points and 3D circle.
+\end_layout
+
+\begin_layout Minisec
+transformCircle3d
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+transformCircle3d
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Transforms a 3D circle with a 3D affine transformation.
 \end_layout
 
 \begin_layout Minisec
@@ -15968,6 +16107,24 @@ Creates a 3D mesh representing a sphere.
 \end_layout
 
 \begin_layout Minisec
+circleMesh
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+circleMesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Create a mesh defined by a 3D circle.
+\end_layout
+
+\begin_layout Minisec
 ellipsoidMesh
 \begin_inset Index idx
 status collapsed
@@ -17071,6 +17228,24 @@ cutMeshByPlane
 
 \end_layout
 
+\begin_layout Minisec
+clipMeshByPlane
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+clipMeshByPlane
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Clip a mesh by a plane.
+\end_layout
+
 \begin_layout Subsection
 Generic operations
 \end_layout
@@ -17492,6 +17667,24 @@ checkMeshAdjacentFaces
 
 \begin_layout Standard
 Checks if adjacent faces of a mesh have similar orientation.
+\end_layout
+
+\begin_layout Minisec
+meshBoundaryEdges
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+meshBoundaryEdges
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Determines the boundary edges of a mesh.
 \end_layout
 
 \begin_layout Subsection
