@@ -1,4 +1,4 @@
-function varargout = drawLine(varargin)
+function varargout = drawLine(lin, varargin)
 %DRAWLINE Draw a straight line clipped by the current axis.
 %
 %   drawLine(LINE);
@@ -29,17 +29,11 @@ function varargout = drawLine(varargin)
 % Created: 2003-10-31
 % Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
-% extract handle of axis to draw on
-[ax, varargin] = parseAxisHandle(varargin{:});
-
-% retrieve line
-lin = varargin{1};
-varargin(1) = [];
-
-% default style for drawing lines
-if length(varargin) ~= 1
-    varargin = [{'color', 'b'}, varargin];
-end
+isLine3d = @(x) validateattributes(x,{'numeric'},...
+    {'nonempty','nonnan','real','finite','size',[nan,4]});
+defOpts.Color = 'b';
+[ax, lin, varargin] = ...
+    parseDrawInput(lin, isLine3d, 'line', defOpts, varargin{:});
 
 % extract bounding box of the current axis
 xlim = get(ax, 'xlim');

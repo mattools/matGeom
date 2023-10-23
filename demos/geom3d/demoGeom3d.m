@@ -39,7 +39,7 @@ line12 = createLine3d(p1, p2);
 edge13 = [p1 p3];
 
 % prepare a figure for drawing
-figure(1); clf; hold on
+figure('color','w'); clf; hold on
 axis equal;
 axis([0 100 0 100 0 100]);
 set(gcf, 'renderer', 'opengl');
