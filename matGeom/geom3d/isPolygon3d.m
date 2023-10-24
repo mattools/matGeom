@@ -38,7 +38,7 @@ function a = isPolygon3d(pol, varargin)
 narginchk(1,2)
 
 parser = inputParser;
-addOptional(parser,'tolerance',1e-14, ...
+addOptional(parser,'tolerance',1e-12, ...
     @(x) validateattributes(x,{'numeric'},{'scalar','>',0,'<',1}))
 parse(parser, varargin{:});
 TOL = parser.Results.tolerance;

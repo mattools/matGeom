@@ -14,7 +14,7 @@ function points = polyhedronSlice(nodes, faces, plane)
 %   polyhedronSlice
 %
 %   See also 
-%   polyhedra, clipConvexPolyhedronHP, intersectPlaneMesh
+%   polyhedra, clipConvexPolyhedronByPlane, intersectPlaneMesh
 %
 
 % ------

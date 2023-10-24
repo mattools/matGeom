@@ -31,7 +31,7 @@ function normals = faceNormal(nodes, faces)
 % Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % deprecation warning
-warning('geom3d:deprecated', ...
+warning('matGeom:deprecated', ...
     [mfilename ' is deprecated, use ''meshFaceNormals'' instead']);
 
 if isnumeric(faces)

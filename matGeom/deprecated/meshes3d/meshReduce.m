@@ -43,8 +43,7 @@ function varargout = meshReduce(nodes, varargin)
 % 2011-01-14 code clean up
 % 2013-02-22 deprecate and rename to mergeCoplanarFaces
 
-
-warning('MatGeom:meshes3d:deprecated', ...
+warning('matGeom:deprecated', ...
     'Function ''meshReduce'' is deprecated, should use ''mergeCoplanarFaces'' instead');
 
 %% Process input arguments

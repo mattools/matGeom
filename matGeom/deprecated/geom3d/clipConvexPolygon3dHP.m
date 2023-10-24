@@ -20,7 +20,7 @@ function poly2 = clipConvexPolygon3dHP(poly, plane)
 % Created: 2007-01-05
 % Copyright 2007-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
-warning('MatGeom:deprecation', ...
+warning('matGeom:deprecated', ...
     'Deprecated function, use ''clipPolygonByPlane3d'' instead');
 
 % ensure last point is the same as the first one

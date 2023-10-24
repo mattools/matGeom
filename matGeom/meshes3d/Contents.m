@@ -50,7 +50,7 @@
 %   intersectPlaneMesh         - Compute the polygons resulting from plane-mesh intersection.
 %   polyhedronSlice            - Intersect a convex polyhedron with a plane.
 %   clipMeshVertices           - Clip vertices of a surfacic mesh and remove outer faces.
-%   clipConvexPolyhedronHP     - Clip a convex polyhedron by a plane.
+%   clipConvexPolyhedronByPlane- Clip a convex polyhedron by a plane.
 %   cutMeshByPlane             - Cut a mesh by a plane.
 %   concatenateMeshes          - Concatenate multiple meshes.
 %   splitMesh                  - Return the connected components of a mesh.
@@ -153,11 +153,3 @@
 % Copyright 2005-2023 INRAE
 
 help(mfilename);
-
-% Deprecated:
-
-%   drawPolyhedron             - Draw polyhedron defined by vertices and faces.
-%   vertexNormal               - Compute normals to a mesh vertices.
-
-% Others
-

@@ -17,7 +17,7 @@ function varargout = drawCurve3d(varargin)
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 % deprecation warning
-warning('geom3d:deprecated', ...
+warning('matGeom:deprecated', ...
     '''drawCurve3d'' is deprecated, use ''drawPolyline3d'' instead');
 
 % default value for closed or open curve

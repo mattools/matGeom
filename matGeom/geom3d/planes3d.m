@@ -9,8 +9,9 @@ function planes3d(varargin)
 %   createPlane, normalizePlane, medianPlane, planeNormal, parallelPlane
 %   distancePointPlane, projPointOnPlane, planePosition, isBelowPlane
 %   intersectPlanes, intersectLinePlane, intersectEdgePlane
-%   dihedralAngle, planesBisector, polyhedronSlice, clipConvexPolyhedronHP
-%   fitPlane, drawPlane3d, clipPlane, transformPlane3d, isPlane
+%   dihedralAngle, planesBisector, polyhedronSlice, fitPlane, drawPlane3d
+%   clipConvexPolyhedronByPlane, clipPlane, transformPlane3d, isPlane
+%   clipMeshByPlane
 %
 
 % ------
