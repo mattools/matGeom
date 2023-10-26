@@ -45,7 +45,7 @@ function poly2 = clipPolygon3dHP(poly, plane, varargin)
 % Created: 2005-08-02
 % Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
-warning('MatGeom:deprecation', ...
+warning('matGeom:deprecated', ...
     'Deprecated function, use ''clipPolygonByPlane3d'' instead');
 
 poly2 = clipPolygonByPlane3d(poly, plane, varargin{:});

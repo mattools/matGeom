@@ -35,7 +35,7 @@ function ell = inertiaEllipsoid(points)
 % Copyright 2011 INRA - Cepia Software Platform
 
 % deprecation warning
-warning('geom3d:deprecated', ...
+warning('matGeom:deprecated', ...
     [mfilename ' is deprecated, use ''equivalentEllipsoid'' instead']);
 
 % number of points

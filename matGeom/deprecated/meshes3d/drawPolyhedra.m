@@ -26,7 +26,7 @@ function varargout = drawPolyhedra(varargin)
 % Created: 2005-02-10
 % Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
-warning('IMAEL:deprecatedFunction', ...
+warning('matGeom:deprecated', ...
     'This function is deprecated, use ''drawPolyhedron'' instead');
 
 

@@ -60,9 +60,9 @@ z1 = zmax - d;
 
 % clip by two horizontal planes
 plane1  = createPlane([0 0 z1], [0 0 1]);
-[v, f]   = clipConvexPolyhedronHP(v, f, plane1);
+[v, f]   = clipConvexPolyhedronByPlane(v, f, plane1);
 plane2  = createPlane([0 0 -z1], [0 0 -1]);
-[v, f]   = clipConvexPolyhedronHP(v, f, plane2);
+[v, f]   = clipConvexPolyhedronByPlane(v, f, plane2);
 
 % complete with edge information
 e = meshEdges(f);
