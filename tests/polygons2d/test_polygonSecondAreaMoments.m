@@ -57,8 +57,8 @@ theta = (pi/2-0.2)*rand+0.1;
 xPosLine = reverseLine(createLine(theta/2));
 xNegLine = createLine(-theta/2);
 
-semiCircle = clipPolygonHP(circle, xPosLine);
-circularSector = clipPolygonHP(semiCircle, xNegLine);
+semiCircle = clipPolygonByLine(circle, xPosLine);
+circularSector = clipPolygonByLine(semiCircle, xNegLine);
 
 [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(circularSector); 
 Ixx_exp = (theta-sin(theta))*r^4/8;
@@ -72,7 +72,7 @@ testCase.assertEqual(Ixy, Ixy_exp, 'AbsTol',1e-7);
 function testCenteredSemiCircle(testCase)
 r = randi([1 100]);
 circle = circleToPolygon([0 0 r], round(2*pi*r*1e2));
-semiCircle = clipPolygonHP(circle, [0 0 1 0]);
+semiCircle = clipPolygonByLine(circle, [0 0 1 0]);
 centeredSemiCircle = semiCircle - polygonCentroid(semiCircle);
 
 [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(centeredSemiCircle); 
@@ -87,7 +87,7 @@ testCase.assertEqual(Ixy, Ixy_exp, 'AbsTol',1e-7);
 function testSemiCircle(testCase)
 r = randi([1 100]);
 circle = circleToPolygon([0 0 r], round(2*pi*r*1e2));
-semiCircle = clipPolygonHP(circle, [0 0 1 0]);
+semiCircle = clipPolygonByLine(circle, [0 0 1 0]);
 
 [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(semiCircle); 
 Ixx_exp = pi/8*r^4;
@@ -102,8 +102,8 @@ testCase.assertEqual(Ixy, Ixy_exp, 'AbsTol',1e-7);
 function testQuarterCircle(testCase)
 r = randi([1 100]);
 circle = circleToPolygon([0 0 r], round(2*pi*r*1e2));
-semiCircle = clipPolygonHP(circle, [0 0 1 0]);
-quarterCircle = clipPolygonHP(semiCircle, [0 0 0 -1]);
+semiCircle = clipPolygonByLine(circle, [0 0 1 0]);
+quarterCircle = clipPolygonByLine(semiCircle, [0 0 0 -1]);
 
 [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(quarterCircle);
 Ixx_exp = pi/16*r^4;
@@ -118,8 +118,8 @@ testCase.assertEqual(Ixy, Ixy_exp, 'AbsTol',1e-1);
 function testCenteredQuarterCircle(testCase)
 r = randi([1 100]);
 circle = circleToPolygon([0 0 r], round(2*pi*r*1e2));
-semiCircle = clipPolygonHP(circle, [0 0 1 0]);
-quarterCircle = clipPolygonHP(semiCircle, [0 0 0 -1]);
+semiCircle = clipPolygonByLine(circle, [0 0 1 0]);
+quarterCircle = clipPolygonByLine(semiCircle, [0 0 0 -1]);
 centeredQuarterCircle = quarterCircle - polygonCentroid(quarterCircle);
 
 [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(centeredQuarterCircle); %#ok<ASGLU> 
