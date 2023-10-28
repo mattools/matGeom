@@ -58,6 +58,8 @@ TOL = parser.Results.tolerance;
 [~, dist] = planePosition(unique(pol,'rows'), plane);
 if all(dist<TOL)
         poly2 = poly;
+        warning(['The polygon''s plane is the same as the clipping plane! ' ...
+            'Returning the input polygon!']);
     return;
 end
 
@@ -86,7 +88,7 @@ itsLine = intersectPlanes([0 0 0 1 0 0 0 1 0], ...
 poly2dNan = parsePolygon(poly2d,'nan');
 
 % Clip the 2d polygon by the intersection line
-poly22d = clipPolygonHP(poly2dNan(:,1:2), [itsLine(1:2) itsLine(4:5)],...
+poly22d = clipPolygonByLine(poly2dNan(:,1:2), [itsLine(1:2) itsLine(4:5)],...
     'method', 'polyshape');
 
 % Transform the 2d polygon back to 3d
