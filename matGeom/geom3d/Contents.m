@@ -90,6 +90,7 @@
 %   lineToEdge3d                - Convert a 3D straight line to a 3D finite edge.
 %   edgeToLine3d                - Convert a 3D edge to a 3D straight line.
 %   distancePointEdge3d         - Minimum distance between a 3D point and a 3D edge.
+%   isPointOnEdge3d             - Test if a 3D point belongs to an edge.
 %   drawEdge3d                  - Draw 3D edge in the current axes.
 %   createRay3d                 - Create a 3D ray.
 %   clipRay3d                   - Clip a 3D ray with a box and return a 3D edge.
@@ -98,6 +99,7 @@
 % Planes
 %   planes3d                    - Description of functions operating on 3D planes.
 %   createPlane                 - Create a plane in parametrized form.
+%   clipPlane                   - Compute the 3D polygon representing a clipped plane.
 %   fitPlane                    - Fit a 3D plane to a set of points.
 %   normalizePlane              - Normalize parametric representation of a plane.
 %   parallelPlane               - Parallel to a plane through a point or at a given distance.
@@ -122,15 +124,18 @@
 %
 % 3D Polygons and curves
 %   polygons3d                  - Description of functions operating on 3D polygons.
+%   isPolygon3d                 - Check if input is a 3d polygon.
 %   polygonCentroid3d           - Centroid (or center of mass) of a polygon.
 %   polygonArea3d               - Area of a 3D polygon.
 %   polygon3dNormalAngle        - Normal angle at a vertex of the 3D polygon.
+%   intersectEdgePolygon3d      - Intersection point of a 3D edge segment and a 3D polygon.
 %   intersectLinePolygon3d      - Intersection point of a 3D line and a 3D polygon.
 %   intersectRayPolygon3d       - Intersection point of a 3D ray and a 3D polygon.
 %   clipPolygonByPlane3d        - Clip a 3D polygon with a plane.
 %   drawPolygon3d               - Draw a 3D polygon specified by a list of vertex coords.
 %   drawPolyline3d              - Draw a 3D polyline specified by a list of vertex coords.
 %   fillPolygon3d               - Fill a 3D polygon specified by a list of vertex coords.
+%   transformPolygon3d          - Transform a polygon with a 3D affine transform.
 %
 % 3D Triangles
 %   triangleArea3d              - Area of a 3D triangle.
@@ -144,10 +149,12 @@
 %   circle3dPosition            - Return the angular position of a point on a 3D circle.
 %   circle3dPoint               - Coordinates of a point on a 3D circle from its position.
 %   circle3dOrigin              - Return the first point of a 3D circle.
+%   distancePointCircle3d       - Distance between 3D points and 3D circle.
 %   drawCircle3d                - Draw a 3D circle.
 %   drawCircleArc3d             - Draw a 3D circle arc.
 %   drawEllipse3d               - Draw a 3D ellipse.
 %   projPointOnCircle3d         - Project a 3D point onto a 3D circle.
+%   transformCircle3d           - Transform a 3D circle with a 3D affine transformation.
 %
 % Spheres
 %   spheres                     - Description of functions operating on 3D spheres.
@@ -170,7 +177,9 @@
 %   oblateSurfaceArea           - Approximated surface area of an oblate ellipsoid.
 %   prolateSurfaceArea          - Approximated surface area of a prolate ellipsoid.
 %   cylinderSurfaceArea         - Surface area of a cylinder.
+%   geodesicCylinder            - Computes the geodesic between two points on a cylinder.
 %   intersectLineCylinder       - Compute intersection points between a line and a cylinder.
+%   projPointOnCylinder         - Project a 3D point onto a cylinder.
 %   revolutionSurface           - Create a surface of revolution from a planar curve.
 %   surfaceCurvature            - Curvature on a surface from angle and principal curvatures.
 %   drawEllipsoid               - Draw a 3D ellipsoid.

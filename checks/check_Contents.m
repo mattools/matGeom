@@ -34,7 +34,11 @@ for c=1:length(cFiles)
     % Find the m-file in Contents.m
     isInC = cell(length(mFiles),1);
     for f=1:length(mFiles)
-        isInC{f,1} = find(contains(C,erase(mFileNames{f}, '.m')));
+        isInC{f,1} = find(contains(C,['%   ' erase(mFileNames{f}, '.m') ' ']));
+        if length(isInC{f,1})>1
+            disp([mFileNames{f} ' appears more then once in ' ...
+                fullfile(cFolder, cFiles(c).name)])
+        end
     end
     
     disp(['Missing in ' fullfile(cFolder, cFiles(c).name) ':'])
