@@ -5856,7 +5856,11 @@ open
 \begin_inset Quotes eld
 \end_inset
 
+
+\series bold
 line strings
+\series default
+
 \begin_inset Quotes erd
 \end_inset
 
@@ -5864,7 +5868,11 @@ line strings
 \begin_inset Quotes eld
 \end_inset
 
+
+\series bold
 linear rings
+\series default
+
 \begin_inset Quotes erd
 \end_inset
 
@@ -5990,17 +5998,48 @@ noprefix "false"
 \end_inset
 
 -a).
- We sometimes want to consider '
+ We sometimes want to consider 
+\begin_inset Quotes eld
+\end_inset
+
+
 \series bold
-complex polygons
+multiple polygons
 \series default
-', whose boundary is composed of several disjoint domains.
+
+\begin_inset Quotes erd
+\end_inset
+
+ (or complex polygons), whose boundary is composed of several disjoint domains
+ (Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Multiple-Polygon"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
  The domain enclosed by a single closed polyline (or linear ring) is called
- '
+ 
+\begin_inset Quotes eld
+\end_inset
+
+
 \series bold
 simple polygon
 \series default
-'.
+
+\begin_inset Quotes erd
+\end_inset
+
+.
  
 \end_layout
 
@@ -6011,6 +6050,49 @@ curve
 \series default
  has to be understood as a polyline with many vertices, such that the polyline
  can be considered as a discrete approximation of a smooth curve.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/polygons2d/def/multiple_polygon.png
+	width 75text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Multiple-Polygon"
+
+\end_inset
+
+Example of a multiple polygon.
+ The polygon is composed of three connected components, one of them presents
+ a hole.
+ The boundary is composed of four linear rings.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -6034,8 +6116,8 @@ s, some functions also consider the vertex list itself.
 \end_layout
 
 \begin_layout Standard
-For multiple-connected polygons, the different connected boundaries are
- separated by a row [NaN NaN].
+For multiple polygons, the different connected boundaries are separated
+ by a row [NaN NaN].
  For some functions, the orientation of the polygon can be relevant: CCW
  stands for 'Counter-Clockwise' (positive orientation), CW stands for 'Clockwise
 '.
@@ -6118,15 +6200,65 @@ polyshape
 \begin_inset Quotes erd
 \end_inset
 
- class, that gives access to many features, and that is used internally
- by some functions of MatGeom.
+ class, that gives access to many features, and is used internally by some
+ functions of MatGeom.
+\end_layout
+
+\begin_layout Subsection
+Parametrization
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage clearpage
+Polylines and polygons are parametrized in the following way:
+\end_layout
+
+\begin_layout Itemize
+the i-th vertex is located at position i-1
+\end_layout
+
+\begin_layout Itemize
+points of the i-th edge have positions ranging linearly from i-1 to i
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+add figure
+\end_layout
+
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The parametrization domain for an open polyline is from 
+\begin_inset Formula $0$
+\end_inset
+
+ to 
+\begin_inset Formula $N_{v}-1$
+\end_inset
+
+, and from 
+\begin_inset Formula $0$
+\end_inset
+
+ to 
+\begin_inset Formula $N_{v}$
+\end_inset
+
+ for a closed polyline (in the latter case, positions 
+\begin_inset Formula $0$
+\end_inset
+
+ and 
+\begin_inset Formula $Nv$
+\end_inset
+
+ correspond to the same point).
 \end_layout
 
 \begin_layout Section
@@ -6273,56 +6405,8 @@ Parametrization
 \end_layout
 
 \begin_layout Standard
-Polylines and polygons are parametrized in the following way:
-\end_layout
-
-\begin_layout Itemize
-the i-th vertex is located at position i-1
-\end_layout
-
-\begin_layout Itemize
-points of the i-th edge have positions ranging linearly from i-1 to i
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-add figure
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The parametrization domain for an open polyline is from 
-\begin_inset Formula $0$
-\end_inset
-
- to 
-\begin_inset Formula $N_{v}-1$
-\end_inset
-
-, and from 
-\begin_inset Formula $0$
-\end_inset
-
- to 
-\begin_inset Formula $N_{v}$
-\end_inset
-
- for a closed polyline (in the latter case, positions 
-\begin_inset Formula $0$
-\end_inset
-
- and 
-\begin_inset Formula $Nv$
-\end_inset
-
- correspond to the same point).
+The functions described here allow for converting between points on the
+ geometries and their parametric position.
 \end_layout
 
 \begin_layout Minisec
@@ -6376,7 +6460,8 @@ polygonSubcurve
 \end_layout
 
 \begin_layout Standard
-Extracts a portion of a polygon, and returns a polyline.
+Extracts the portion of a polygon located between two positions, and returns
+ a polyline.
 \end_layout
 
 \begin_layout Minisec
@@ -6394,7 +6479,7 @@ polylineSubcurve
 \end_layout
 
 \begin_layout Standard
-Extracts a portion of a polyline.
+Extracts the portion of a polyline located between two positions.
 \end_layout
 
 \begin_layout Subsection
@@ -6756,6 +6841,13 @@ polygonCurvature
 Estimates the curvature on polygon vertices using polynomial fit.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Clipping and intersections
 \end_layout
@@ -6802,12 +6894,12 @@ Clips an open polyline with a rectangular box.
 \end_layout
 
 \begin_layout Minisec
-clipPolygonHP
+clipPolygonByLine
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-clipPolygonHP
+clipPolygonByLine
 \end_layout
 
 \end_inset
@@ -6816,7 +6908,7 @@ clipPolygonHP
 \end_layout
 
 \begin_layout Standard
-Clips a polygon with a Half-plane defined by a directed line.
+Clips a polygon with the half-plane defined by a directed line.
 \end_layout
 
 \begin_layout Standard
@@ -7112,7 +7204,7 @@ Smoothing and filtering
 \end_layout
 
 \begin_layout Standard
-Simplification of a polygon or a polyline.
+Several functions for the simplification of a polygon or a polyline.
 \end_layout
 
 \begin_layout Minisec
@@ -12196,12 +12288,12 @@ Intersection point of a 3D ray and a 3D polygon.
 \end_layout
 
 \begin_layout Minisec
-clipConvexPolygon3dHP
+clipPolygonByPlane3d
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-clipConvexPolygon3dHP
+clipPolygonByPlane3d
 \end_layout
 
 \end_inset
@@ -12210,7 +12302,32 @@ clipConvexPolygon3dHP
 \end_layout
 
 \begin_layout Standard
-Clips a convex 3D polygon with Half-space.
+\begin_inset CommandInset label
+LatexCommand label
+name "fun:clipPolygonByPlane3d"
+
+\end_inset
+
+Clips a convex 3D polygon with a 
+\begin_inset Quotes eld
+\end_inset
+
+half-space
+\begin_inset Quotes erd
+\end_inset
+
+ defined by a 3D plane.
+ See also the function clipConvexPolyhedronByPlane 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fun:clipConvexPolyhedronByPlane"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Minisec
@@ -17079,12 +17196,12 @@ Clips vertices of a surface mesh and remove outer faces.
 \end_layout
 
 \begin_layout Minisec
-clipConvexPolyhedronHP
+clipConvexPolyhedronByPlane
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-clipConvexPolyhedronHP
+clipConvexPolyhedronByPlane
 \end_layout
 
 \end_inset
@@ -17093,7 +17210,24 @@ clipConvexPolyhedronHP
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "fun:clipConvexPolyhedronByPlane"
+
+\end_inset
+
 Clips a convex polyhedron by a plane.
+ See also the function clipPolygonByPlane3d 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fun:clipPolygonByPlane3d"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Minisec
