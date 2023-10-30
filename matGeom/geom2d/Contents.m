@@ -205,10 +205,3 @@
 % Copyright 2005-2023 INRA - Cepia Software Platform
 
 help(mfilename);
-
-%%   Deprecated functions
-%   normalize                - Normalize a vector.
-%   inertiaEllipse           - Inertia ellipse of a set of points.
-
-%% Others...
-

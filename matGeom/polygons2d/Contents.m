@@ -167,11 +167,3 @@
 % Copyright 2005-2023 INRAE
 
 help(mfilename);
-
-%% Deprecated
-%   polygonInertiaEllipse     - Compute ellipse with same inertia moments as polygon.
-
-%% Requires further development
-
-%% Others...
-
