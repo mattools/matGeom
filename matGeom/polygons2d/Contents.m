@@ -88,7 +88,7 @@
 %   intersectEdgePolygon      - Intersection point of an edge with a polygon.
 %   polygonSelfIntersections  - Find self-intersection points of a polygon.
 %   clipPolygon               - Clip a polygon with a rectangular box.
-%   clipPolygonHP             - Clip a polygon with a Half-plane defined by a directed line.
+%   clipPolygonByLine         - Clip a polygon with a directed line.
 %
 % Point Sets
 %   pointSetsAverage          - Compute the average of several point sets.

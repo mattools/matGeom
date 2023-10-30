@@ -1,22 +1,26 @@
-function varargout = clipPolygonHP(poly, line, varargin)
-%CLIPPOLYGONHP Clip a polygon with a half-plane defined by a directed line.
+function varargout = clipPolygonByLine(poly, line, varargin)
+%CLIPPOLYGONBYLINE Clip a polygon by a directed line.
 %
-%   POLY2 = clipPolygonHP(POLY, LINE)
+%   POLY2 = clipPolygonByLine(POLY, LINE)
 %   POLY is a [Nx2] array of points, and LINE is given as [x0 y0 dx dy].
-%   The result POLY2 is also an array of points, sometimes smaller than
-%   poly, and that can be [0x2] (empty polygon). POLY2 contains the part of
-%   POLY on the left side of the directed line.
+%   The result POLY2:
+%    - Represents the part of the polygon on the left side of the directed 
+%      line, the left half-plane, if the line intersects the polygon.
+%    - Is the same as POLY if the polygon is on the left side of the 
+%      directed line and the line does not intersect the polygon.
+%    - Is an empty polygon [0x2] if the polygon on the right side of the 
+%      directed line and the line does not intersect the polygon.
 %   
-%   [POLY_L, POLY_R] = clipPolygonHP(POLY, LINE, 'method', 'polyshape')
+%   [POLY_L, POLY_R] = clipPolygonByLine(POLY, LINE, 'method', 'polyshape')
 %   Uses MATLAB polyshape objects and functions to clip the polygon by the
-%   line. Returns the right part POLY_R in addition to the left part 
-%   POLY_L in the polygon cell format.
+%   line. Returns the right part POLY_R (right half-plane) in addition to 
+%   the left part POLY_L (left half-plane) in the polygon cell format.
 %
 %   Example
 %     line = [0.4 0 1 1];
 %     r = [2.5, 2, 1];
 %     poly = flipud(circleToPolygon([0 0 r(1)], round(2*pi*r(1))));
-%     poly2 = clipPolygonHP(poly, line);
+%     poly2 = clipPolygonByLine(poly, line);
 %     figure('color','w','numbertitle','off','name','Method: legland')
 %     axis equal tight; hold on; xlabel('x'); ylabel('y')
 %     fillPolygon(poly2)
@@ -26,7 +30,7 @@ function varargout = clipPolygonHP(poly, line, varargin)
 %     midCircle = circleToPolygon([0 0 r(2)], round(2*pi*r(2)));
 %     innerCircle = flipud(circleToPolygon([0 0 r(3)], round(2*pi*r(3))));
 %     poly = {poly, midCircle, innerCircle};
-%     clipPolygonHP(poly, line, 'method','polyshape','debug',1);
+%     clipPolygonByLine(poly, line, 'method','polyshape','debug',1);
 %
 %   See also 
 %   clipPolygon
@@ -149,10 +153,10 @@ switch method
         BB = [bblim(1) bblim(3); bblim(2) bblim(3); ...
             bblim(2) bblim(4); bblim(1) bblim(4)];
         % Clip the bounding box by the line
-        BB_L = clipPolygonHP(BB, line);
+        BB_L = clipPolygonByLine(BB, line);
         PS_R = subtract(polyShape, polyshape(BB_L));
         lineRev = [line(1:2) -line(3:4)];
-        BB_R = clipPolygonHP(BB, lineRev);
+        BB_R = clipPolygonByLine(BB, lineRev);
         PS_L = subtract(polyShape, polyshape(BB_R));
         lineSeg = clipLine(line, bblim);
         lineSeg = [lineSeg(1:2); lineSeg(3:4)];

@@ -10,7 +10,7 @@ function poly2 = clipPolygon(polygon, w)
 %   Note: Works only for convex polygons at the moment.
 %
 %   See also 
-%     polygons2d, boxes2d, clipPolygonHP, clipPolyline
+%     polygons2d, boxes2d, clipPolygonByLine, clipPolyline
 %
 
 % ------
