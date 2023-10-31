@@ -1,5 +1,5 @@
 function [geo, geoLength, conGeo, conGeoLength] = geodesicCylinder(pts, cyl, varargin)
-%GEODESICCYLINDER computes the geodesic between two points on a cylinder.
+%GEODESICCYLINDER Computes the geodesic between two points on a cylinder.
 %
 %   [GEO, GEOLENGTH] = geodesicCylinder(PTS, CYL) computes the geodesic 
 %   between the two points PTS projected onto the infinite cylinder CYL.  

@@ -141,9 +141,11 @@
 %   convexification           - Compute the convexification of a polygon.
 %
 % Input, Output and conversions
+%   contourMatrixToPolylines  - Converts a contour matrix array into a polyline set.
+%   parsePolygon              - Conversion between different polygon formats.
+%   polygonToPolyshape        - Convert a matGeom polygon to a MATLAB polyshape object.
 %   polygonToRow              - Convert polygon coordinates to a row vector.
 %   rowToPolygon              - Create a polygon from a row vector.
-%   contourMatrixToPolylines  - Converts a contour matrix array into a polyline set.
 %   readPolygonSet            - Read a set of simple polygons stored in a file.
 %   writePolygonSet           - Write a set of simple polygons into a file.
 %
@@ -165,11 +167,3 @@
 % Copyright 2005-2023 INRAE
 
 help(mfilename);
-
-%% Deprecated
-%   polygonInertiaEllipse     - Compute ellipse with same inertia moments as polygon.
-
-%% Requires further development
-
-%% Others...
-

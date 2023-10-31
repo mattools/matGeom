@@ -31,9 +31,6 @@ function poly2 = clipPolygonByPlane3d(poly, plane, varargin)
 %     drawPolygon3d(pol3d2, 'linewidth', 2, 'color', 'b');
 %     drawArrow3d(polygonCentroid3d(pol3d), ...
 %         normalizeVector3d(planeNormal(plane))*3,'g')
-%   
-%   Todo
-%   * If plane is same as polygon plane?
 %
 %   See also 
 %   poygons3d, intersectLinePolygon3d

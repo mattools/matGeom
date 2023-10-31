@@ -1,5 +1,5 @@
 function [inter, valid] = intersectEdgePolygon3d(edge, poly)
-%INTERSECTEDGEPOLYGON3D Intersection point of a 3D EDGE segment and a 3D polygon.
+%INTERSECTEDGEPOLYGON3D Intersection point of a 3D edge segment and a 3D polygon.
 %
 %   INTER = intersectEdgePolygon3d(EDGE, POLY)
 %   Compute coordinates of intersection point between the 3D edge EDGE and
