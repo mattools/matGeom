@@ -24,6 +24,9 @@ function normals = vertexNormal(vertices, faces)
 % Created: 2011-12-19, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011-2023 INRA - Cepia Software Platform
 
+warning('matGeom:deprecated', ...
+    'The function ''vertexNormal'' is deprecated. Use ''meshVertexNormals'' instead.');
+
 nv = size(vertices, 1);
 nf = size(faces, 1);
 
