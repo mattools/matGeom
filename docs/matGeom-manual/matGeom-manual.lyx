@@ -19271,12 +19271,16 @@ noprefix "false"
 .
 \end_layout
 
+\begin_layout Subsection
+File headers
+\end_layout
+
 \begin_layout Standard
 New functions are expected to contain the following elements:
 \end_layout
 
 \begin_layout Itemize
-the function line containign function name, and input and output arguments
+the function line containing function name, and input and output arguments
 \end_layout
 
 \begin_layout Itemize
@@ -19348,6 +19352,55 @@ https://fr.mathworks.com/matlabcentral/fileexchange/8532-tedit
 .
 \end_layout
 
+\begin_layout Subsection
+Error messages
+\end_layout
+
+\begin_layout Standard
+Error messages follow the Matlab convention.
+ Error message starts with capital letter and ends with a dot.
+ It is recommended to use the 
+\begin_inset Quotes eld
+\end_inset
+
+MatGeom
+\begin_inset Quotes erd
+\end_inset
+
+ identifier before the error message:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+error('MatGeom:theFunction', 'A problem was encountered.');
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is also possible to include parameters into error message:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+error('MatGeom:theFunction', 'The value %d is invalid.', value);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Unit tests
 \end_layout
@@ -19415,7 +19468,27 @@ Arrange-Act-Assert
 \begin_inset Quotes erd
 \end_inset
 
- pattern.
+ pattern
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://java-design-patterns.com/patterns/arrange-act-assert/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
  Example:
 \begin_inset listings
 inline false
