@@ -28,21 +28,17 @@ function varargout = principalAxes(points)
 % Created: 2019-08-12, using Matlab 9.6.0.1072779 (R2019a)
 % Copyright 2019-2023 INRAE - Cepia Software Platform
 
-% number and dimension of points
-n = size(points, 1);
-nd = size(points, 2);
-
-% compute centroid
+% compute centroid of points to estimate center
 center = mean(points);
 
 % compute the covariance matrix
-covPts = cov(points) / n;
+covPts = cov(points);
 
 % perform a principal component analysis to extract principal axes
 [rotMat, S] = svd(covPts);
 
 % extract length of each semi axis
-radii = sqrt(diag(S) * n);
+radii = sqrt(diag(S));
 
 % sort axes from greater to lower
 [radii, ind] = sort(radii, 'descend');
@@ -50,7 +46,7 @@ radii = radii';
 
 % format U to ensure first axis points to positive x direction
 rotMat = rotMat(ind, :);
-if rotMat(1,1) < 0 && nd > 2
+if rotMat(1,1) < 0 && size(points, 2) > 2
     rotMat = -rotMat;
     % keep matrix determinant positive
     rotMat(:,3) = -rotMat(:,3);
