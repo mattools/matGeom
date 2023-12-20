@@ -249,10 +249,6 @@ add bibliography
 
 \begin_deeper
 \begin_layout Itemize
-Greg Slabaugh
-\end_layout
-
-\begin_layout Itemize
 Ilya Belevich
 \end_layout
 
@@ -4648,47 +4644,6 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-For rectangular shapes, several representations may be considered.
- The following conventions are considered within the MatGeom library (See
- also Figure
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Boxes-And-Rectangles"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-):
-\end_layout
-
-\begin_layout Description
-boxes are defined from the extent along each dimension.
-\end_layout
-
-\begin_layout Description
-(axis-aligned)
-\begin_inset space ~
-\end_inset
-
-rectangles are defined from the lower-left corner and the dimensions.
-\end_layout
-
-\begin_layout Description
-oriented
-\begin_inset space ~
-\end_inset
-
-boxes also takes into account orientation, and refer to the center of the
- rectangle instead of its corner.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -4814,12 +4769,97 @@ Representation of boxes, rectangles, and oriented boxes.
 
 \end_layout
 
+\begin_layout Standard
+For rectangular shapes, several representations may be considered.
+ The following conventions are considered within the MatGeom library (See
+ also Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Boxes-And-Rectangles"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+):
+\end_layout
+
+\begin_layout Description
+boxes are defined from the extent along each dimension.
+ Functions operating on boxes are described in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Boxes"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+(axis-aligned)
+\begin_inset space ~
+\end_inset
+
+rectangles are defined from the lower-left corner and the dimensions.
+ Functions operating on rectangles are described in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Rectangles"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+oriented
+\begin_inset space ~
+\end_inset
+
+boxes are also defined based on their dimensions, but also takes into account
+ the orientation (angle with horizontal).
+ The reference point is the center of the rectangle instead of its corner.
+ Functions operating on oriented boxes are described in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Oriented-Boxes"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsection
 Boxes
 \end_layout
 
 \begin_layout Standard
-Boxes are used to represent bounds.
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Boxes"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Boxes are used to represent bounds of geometric shapes.
  They are represented by a four-element row vector containing the minimum
  and maximum coordinate along each dimension (Figure
 \begin_inset space ~
@@ -4876,7 +4916,9 @@ intersectBoxes
 \end_layout
 
 \begin_layout Standard
-Intersection of two bounding boxes.
+Computes the intersection of two bounding boxes, as the largest box contained
+ within the two input boxes.
+ 
 \end_layout
 
 \begin_layout Minisec
@@ -4895,6 +4937,7 @@ mergeBoxes
 
 \begin_layout Standard
 Merges two boxes, by computing their greatest extent.
+ The result corresponds to the smallest box containing the two input boxes.
 \end_layout
 
 \begin_layout Minisec
@@ -4974,6 +5017,16 @@ Rectangles
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Rectangles"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 A rectangle is represented by the coordinates of the lower-left vertex,
  and by the dimensions of the rectangle (Figure
 \begin_inset space ~
@@ -4990,6 +5043,7 @@ noprefix "false"
 \end_inset
 
 -b).
+ 
 \end_layout
 
 \begin_layout Standard
@@ -5008,7 +5062,8 @@ rect = [x0 y0 sizeX sizeY];
 \end_layout
 
 \begin_layout Standard
-Some functions allow to specify a fifth parameter specifying the orientation
+By default, the edges of the rectangle are aligned with the main axes.
+ Some functions allow to specify a fifth parameter specifying the orientation
  of the rectangle (in degrees).
  The resulting shape is obtained by rotating the rectangle around its lower-left
  corner by the specified angle.
@@ -5073,7 +5128,18 @@ Oriented boxes
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Oriented-Boxes"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 In some cases, it may be convenient to take into orientation of the box.
+ For example, minimum-width bounding boxes are oriented.
  An oriented box is represented by the coordinates of the center, the dimensions
  of the rectangle, and the orientation of the box (Figure
 \begin_inset space ~
@@ -5166,11 +5232,12 @@ Triangles
 \end_layout
 
 \begin_layout Standard
-Triangles are simply represented by a 
+Utility functions are also provided for working on triangles.
+ Triangles are simply represented by a 
 \begin_inset Formula $3\times2$
 \end_inset
 
- numeric array containing the coordinates of the three vertex points.
+ numeric array containing the coordinates of the three vertices.
 \end_layout
 
 \begin_layout Minisec
@@ -5207,6 +5274,13 @@ triangleArea
 
 \begin_layout Standard
 Computes the signed area of a triangle.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -5327,7 +5401,57 @@ createTranslation
 \end_layout
 
 \begin_layout Standard
-Creates the 3-by-3 matrix of a translation.
+Creates the 3-by-3 matrix of a translation, given the components of the
+ translation vector.
+ If the translation vector is given by 
+\begin_inset Formula $\mathbf{v}$
+\end_inset
+
+, the resulting matrix is given by:
+\begin_inset Formula 
+\[
+T_{\mathbf{v}}=\left(\begin{array}{ccc}
+1 & 0 & v_{x}\\
+0 & 1 & v_{y}\\
+0 & 0 & 1
+\end{array}\right)
+\]
+
+\end_inset
+
+Example:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+>> createTranslation([5 4])
+\end_layout
+
+\begin_layout Plain Layout
+
+ans =
+\end_layout
+
+\begin_layout Plain Layout
+
+     1     0     5
+\end_layout
+
+\begin_layout Plain Layout
+
+     0     1     4
+\end_layout
+
+\begin_layout Plain Layout
+
+     0     0     1
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Minisec
@@ -5412,12 +5536,16 @@ createRotation90
 
 \begin_layout Standard
 Matrix of a rotation around the origin by multiples of 90 degrees.
- Matrix values are therefore only 
+ Matrix components values are therefore only 
 \begin_inset Formula $0$
 \end_inset
 
+, 
+\begin_inset Formula $+1$
+\end_inset
+
  or 
-\begin_inset Formula $\pm1$
+\begin_inset Formula $-1$
 \end_inset
 
 .
@@ -5540,7 +5668,7 @@ createLineReflection
 \end_layout
 
 \begin_layout Standard
-Creates the the 3-by-3 matrix of a line reflection.
+Computes the the 3-by-3 transformation matrix corresponding to a line reflection.
 \end_layout
 
 \begin_layout Subsection
@@ -5597,25 +5725,21 @@ literal "false"
 .
 \end_layout
 
-\begin_layout Minisec
-polynomialTransform2d
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polynomialTransform2d
-\end_layout
-
+\begin_layout Standard
+\begin_inset Newpage newpage
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Subsection
+Polynomial transforms
 \end_layout
 
 \begin_layout Standard
-Applies a polynomial transform to a set of points.
- The polynomial transform is represented by a row vector containing the
- coefficients applied to each monomial, in increasing order of degree and
- starting with largest degree of 
+A polynomial transform is represented by a row vector containing the coefficient
+s applied to each monomial, in increasing order of degree and starting with
+ largest degree of 
 \begin_inset Formula $x$
 \end_inset
 
@@ -5650,6 +5774,25 @@ y^{2}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Minisec
+polynomialTransform2d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+polynomialTransform2d
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Applies a polynomial transform to a set of points.
+ 
 \end_layout
 
 \begin_layout Minisec
@@ -6124,36 +6267,29 @@ For multiple polygons, the different connected boundaries are separated
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
 Example:
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset listings
 inline false
 status open
 
 \begin_layout Plain Layout
 
-% Simple polygon:
+% Simple polygon (square shape)
 \end_layout
 
 \begin_layout Plain Layout
 
-P1 = [1 1;2 1;2 2;1 2];
+poly1 = [1 1; 2 1; 2 2; 1 2];
 \end_layout
 
 \begin_layout Plain Layout
 
-drawPolygon(P1);
+figure; hold on; axis equal; axis([0 5 0 5]);
 \end_layout
 
 \begin_layout Plain Layout
 
-axis([0 5 0 5]);
+drawPolygon(poly1);
 \end_layout
 
 \begin_layout Plain Layout
@@ -6163,17 +6299,17 @@ axis([0 5 0 5]);
 
 \begin_layout Plain Layout
 
-P2 = [10 10;40 10;40 40;10 40;NaN NaN;20 20;20 30;30 30;30 20];
+poly2 = [10 10;40 10; 40 40;10 40;NaN NaN;20 20;20 30;30 30;30 20];
 \end_layout
 
 \begin_layout Plain Layout
 
-figure; drawPolygon(P2); axis([0 50 0 50]);
+figure; hold on; axis equal; axis([0 50 0 50]);
 \end_layout
 
-\end_inset
+\begin_layout Plain Layout
 
-
+fillPolygon(poly2, 'y'); drawPolygon(poly2, 'b');
 \end_layout
 
 \end_inset
@@ -6209,7 +6345,9 @@ Parametrization
 \end_layout
 
 \begin_layout Standard
-Polylines and polygons are parametrized in the following way:
+Parametrization associates a position to each point of a polyline, or of
+ a polygon boundary.
+ Polylines and polygons are parametrized in the following way:
 \end_layout
 
 \begin_layout Itemize
@@ -6259,6 +6397,13 @@ The parametrization domain for an open polyline is from
 \end_inset
 
  correspond to the same point).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -6480,6 +6625,13 @@ polylineSubcurve
 
 \begin_layout Standard
 Extracts the portion of a polyline located between two positions.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -6792,12 +6944,72 @@ polygonSignature
 \end_layout
 
 \begin_layout Standard
-Polar signature of a polygon (polar distance to origin).
-\begin_inset Note Note
+Polar signature of a polygon, defined as the polar distance of a polygon
+ point to the origin or to a reference point.
+ See the Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Polar-Signature-Polygon"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for an example.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-figure?
+\align center
+\begin_inset Graphics
+	filename images/polygons2d/polygonSignature/polygonSignature_rectangle_init.png
+	lyxscale 50
+	width 45text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/polygons2d/polygonSignature/polygonSignature_rectangle_signature.png
+	lyxscale 50
+	width 45text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Polar-Signature-Polygon"
+
+\end_inset
+
+Polar signature of a polygon.
+ Example on a rectangle polygon.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -6839,13 +7051,6 @@ polygonCurvature
 
 \begin_layout Standard
 Estimates the curvature on polygon vertices using polynomial fit.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
@@ -12657,7 +12862,7 @@ Returns the distance between 3D points and 3D circle.
 \begin_layout Minisec
 transformCircle3d
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 transformCircle3d
@@ -14683,7 +14888,16 @@ tri-mesh
 \end_inset
 
 ), or have faces with variable number of vertices.
- 
+ The term 
+\begin_inset Quotes eld
+\end_inset
+
+polyhedron
+\begin_inset Quotes erd
+\end_inset
+
+ is sometimes used to denote functions that expect as input a 3D mesh that
+ is convex and with a low number of faces.
 \end_layout
 
 \begin_layout Standard
@@ -16659,6 +16873,15 @@ Operations on meshes
 \begin_layout Standard
 Most functions in this section transform a mesh into another mesh, or into
  another geometric data structure.
+ Some of the functions have been adapted from the GP Toolbox library 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gptoolbox"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -17377,7 +17600,7 @@ clipMeshByPlane
 \end_layout
 
 \begin_layout Standard
-Clip a mesh by a plane.
+Clips a mesh by a plane.
 \end_layout
 
 \begin_layout Subsection
@@ -17833,6 +18056,24 @@ Several functions allows to measure 3D intrinsic volumes, corresponding
 \end_layout
 
 \begin_layout Minisec
+polyhedronCentroid
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+polyhedronCentroid
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Computes the centroid of a 3D convex polyhedron.
+\end_layout
+
+\begin_layout Minisec
 meshSurfaceArea
 \begin_inset Index idx
 status collapsed
@@ -17878,6 +18119,90 @@ meshSurfaceArea
 \end_layout
 
 \begin_layout Minisec
+meshVolume
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+meshVolume
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Volume of the space enclosed by a polygonal mesh.
+\end_layout
+
+\begin_layout Minisec
+tetrahedronVolume
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+tetrahedronVolume
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Computes the signed volume of a tetrahedron.
+ 
+\end_layout
+
+\begin_layout Minisec
+polyhedronMeanBreadth
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+polyhedronMeanBreadth
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Mean breadth of a convex polyhedron.
+\end_layout
+
+\begin_layout Minisec
+trimeshMeanBreadth
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+trimeshMeanBreadth
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Mean breadth of a triangular mesh.
+\end_layout
+
+\begin_layout Subsection
+Geometric measures for mesh elements
+\end_layout
+
+\begin_layout Standard
+Functions described here provides geometric measurements for mesh vertices,
+ faces, or edges.
+ In most cases, the index of the query elements can be specified.
+ Otherwise, measure is computed for all elements within the mesh.
+\end_layout
+
+\begin_layout Minisec
 meshFaceAreas
 \begin_inset Index idx
 status collapsed
@@ -17896,21 +18221,39 @@ Surface area of each face of a mesh.
 \end_layout
 
 \begin_layout Minisec
-meshVolume
+meshFaceNormals
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-meshVolume
+meshFaceNormals
 \end_layout
 
 \end_inset
 
- 
+
 \end_layout
 
 \begin_layout Standard
-Volume of the space enclosed by a polygonal mesh.
+Computes the normal vector of faces in a 3D mesh.
+\end_layout
+
+\begin_layout Minisec
+meshVertexNormals
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+meshVertexNormals
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes the normals to a mesh vertices.
 \end_layout
 
 \begin_layout Minisec
@@ -17968,42 +18311,6 @@ Returns the set of polygons that constitutes a mesh.
 \end_layout
 
 \begin_layout Minisec
-polyhedronCentroid
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polyhedronCentroid
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Computes the centroid of a 3D convex polyhedron.
-\end_layout
-
-\begin_layout Minisec
-tetrahedronVolume
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-tetrahedronVolume
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Signed volume of a tetrahedron.
-\end_layout
-
-\begin_layout Minisec
 polyhedronNormalAngle
 \begin_inset Index idx
 status collapsed
@@ -18021,40 +18328,11 @@ polyhedronNormalAngle
 Computes the normal angle at a vertex of a 3D polyhedron.
 \end_layout
 
-\begin_layout Minisec
-polyhedronMeanBreadth
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-polyhedronMeanBreadth
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
 \begin_layout Standard
-Mean breadth of a convex polyhedron.
-\end_layout
-
-\begin_layout Minisec
-trimeshMeanBreadth
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-trimeshMeanBreadth
-\end_layout
-
+\begin_inset Newpage newpage
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Mean breadth of a triangular mesh.
 \end_layout
 
 \begin_layout Subsection
@@ -18114,6 +18392,52 @@ literal "false"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/meshes3d/distancePointMesh/distancePointMesh_dodecahedron_view3d.png
+	lyxscale 50
+	width 60text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Computation of distances between points and mesh.
+ For each point within the horizontal slice, the closest distance to the
+ polyhedron (here a dodecahedron) is computed, and represented with color
+ code.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
