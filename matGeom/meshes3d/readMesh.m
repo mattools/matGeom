@@ -1,4 +1,4 @@
-function varargout = readMesh(fileName, varargin)
+function varargout = readMesh(filePath, varargin)
 %READMESH Read a 3D mesh by inferring format from file name.
 %
 %   Usage:
@@ -10,6 +10,10 @@ function varargout = readMesh(fileName, varargin)
 %   MESH = readMesh(FILENAME)
 %   Read the data stored in file FILENAME and return the mesh into a struct
 %   with fields 'vertices' and 'faces'.
+%   The struct also comprises two fields "name" and "fileName":
+%   * "name" corresponds to the base name of the file (without path and
+%       extension)
+%   * "filePath" corresponds to the full (relative) path name of the file. 
 %
 %   Example
 %     mesh = readMesh('apple.ply');
@@ -30,19 +34,25 @@ parser = inputParser;
 addParameter(parser, 'trimMesh', true, @islogical);
 parse(parser, varargin{:});
 
-[~, ~, ext] = fileparts(fileName);
+[~, baseName, ext] = fileparts(filePath);
 switch lower(ext)
     case '.off'
-        mesh = readMesh_off(fileName);
+        mesh = readMesh_off(filePath);
     case '.ply'
-        mesh = readMesh_ply(fileName);
+        mesh = readMesh_ply(filePath);
     case '.stl'
-        mesh = readMesh_stl(fileName);
+        mesh = readMesh_stl(filePath);
     case '.obj'
-        mesh = readMesh_obj(fileName);
+        mesh = readMesh_obj(filePath);
     otherwise
         error('readMesh.m function does not support %s files.', upper(ext(2:end)));
 end
 
 % format output arguments
 varargout = formatMeshOutput(nargout, mesh.vertices, mesh.faces);
+
+% in case of mesh returned as a struct, also include the file name as field
+if isstruct(varargout{1})
+    varargout{1}.name = baseName;
+    varargout{1}.filePath = filePath;
+end
