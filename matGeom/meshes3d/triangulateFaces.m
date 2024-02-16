@@ -12,7 +12,7 @@ function [tri, inds] = triangulateFaces(faces)
 %       and returns the union of all triangles. Faces are assumed to be
 %       convex.
 %
-%   [TRI INDS] = triangulateFaces(FACES)
+%   [TRI, INDS] = triangulateFaces(FACES)
 %   Also returns original face index of each new triangular face. INDS has
 %   the same number of rows as TRI, and has values between 1 and the
 %   number of rows of the original FACES array.
@@ -20,17 +20,17 @@ function [tri, inds] = triangulateFaces(faces)
 %
 %   Example
 %     % create a basic shape
-%     [n e f] = createCubeOctahedron;
+%     [n, e, f] = createCubeOctahedron;
 %     % draw with plain faces
-%     figure;
+%     figure; hold on; axis equal; view(3);
 %     drawMesh(n, f);
 %     % draw as a triangulation
 %     tri = triangulateFaces(f);
-%     figure;
-%     patch('vertices', n, 'faces', tri, 'facecolor', 'r');
+%     figure; hold on; axis equal; view(3);
+%     drawMesh(n, tri, 'facecolor', 'r'); 
 %
 %   See also 
-%     meshes3d, drawMesh, mergeCoplanarFaces
+%     meshes3d, triangulateMesh, drawMesh, mergeCoplanarFaces
 %
 
 % ------
