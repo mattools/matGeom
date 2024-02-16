@@ -16867,7 +16867,7 @@ Other mesh creation functions: triangulation of polygon pairs, computation
 \end_layout
 
 \begin_layout Section
-Operations on meshes
+Mesh processing functions
 \end_layout
 
 \begin_layout Standard
@@ -17109,6 +17109,43 @@ mesh2 = subdivideMesh(...);
 \end_layout
 
 \begin_layout Minisec
+triangulateMesh
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+triangulateMesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Converts a non-triangle mesh into a triangle mesh.
+ Simple wrapper for the triangulateFaces function, but uses mesh data structure
+ as input and output.
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+mesh = createCube;
+\end_layout
+
+\begin_layout Plain Layout
+
+mesh2 = triangulateMesh(mesh);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Minisec
 triangulateFaces
 \begin_inset Index idx
 status collapsed
@@ -17123,7 +17160,7 @@ triangulateFaces
 \end_layout
 
 \begin_layout Standard
-Converts face array to an array of triangular faces.
+Converts non triangular face array into an array of triangular faces.
  Input face array may be either a 
 \begin_inset Formula $n_{f}\times3$
 \end_inset
@@ -17133,7 +17170,11 @@ Converts face array to an array of triangular faces.
 \end_inset
 
  numeric array, or a cell array or row vectors.
- 
+ The result is a 
+\begin_inset Formula $n_{f}\times3$
+\end_inset
+
+ numeric array.
 \end_layout
 
 \begin_layout Standard
@@ -17843,19 +17884,12 @@ removeMeshFaces
 Removes faces from a mesh by face indices.
 \end_layout
 
-\begin_layout Standard
-\begin_inset Newpage clearpage
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section
-Measures on meshes
+Information on meshes
 \end_layout
 
 \begin_layout Subsection
-Query functions 
+Mesh topology
 \end_layout
 
 \begin_layout Standard
@@ -19076,7 +19110,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="8" columns="5">
+<lyxtabular version="3" rows="10" columns="5">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -19141,7 +19175,7 @@ comment
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -19150,7 +19184,7 @@ apple.ply
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -19159,7 +19193,7 @@ apple.ply
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -19168,7 +19202,7 @@ apple.ply
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -19177,11 +19211,105 @@ apple.ply
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+bunny_F1k.ply
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+502
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29 ko
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+a simplified version of classical bunny mesh
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+bunny_F5k.ply
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2505
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5006
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+94 ko
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+a simplified version of classical bunny mesh
 \end_layout
 
 \end_inset
