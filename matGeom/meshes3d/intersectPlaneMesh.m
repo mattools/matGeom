@@ -1,24 +1,24 @@
 function [polys, closedFlag] = intersectPlaneMesh(plane, v, f)
 %INTERSECTPLANEMESH Compute the polylines resulting from plane-mesh intersection.
 %
-%   PLOYS = intersectPlaneMesh(P, V, F)
+%   POLYS = intersectPlaneMesh(P, V, F)
 %   [POLYS, CLOSED] = intersectPlaneMesh(P, V, F)
 %   Computes the intersection between a plane and a mesh. 
 %   The plane P is given as:
 %   P = [X0 Y0 Z0  DX1 DY1 DZ1  DX2 DY2 DZ2]
 %   The mesh is given as numeric array V of vertex coordinates and an array
 %   of (triangular) face vertex indices.
-%   The output POLYS is a cell array of polylines, where ech cell contains
-%   a N-by-3 numeric array of coordinates. The (optional) output CLOSED is
+%   The output POLYS is a cell array of polylines, where each cell contains
+%   a NV-by-3 numeric array of coordinates. The (optional) output CLOSED is
 %   a logical array the same size as the POLYS, indicating whether the
-%   corresponding polylines are closed (true), or open (false). Use the
-%   functions 'drawPolygon3d' to display closed polylines, and
+%   corresponding polylines are closed (true), or open (false). 
+%   Use the functions 'drawPolygon3d' to display closed polylines, and
 %   'drawPolyline3d' to display open polylines.
 %
 %
 %   Example
 %     % Intersect a cube by a plane
-%     [v f] = createCube; v = v * 10;
+%     [v, f] = createCube; v = v * 10;
 %     plane = createPlane([5 5 5], [3 4 5]);
 %     % draw the primitives
 %     figure; hold on; set(gcf, 'renderer', 'opengl');
