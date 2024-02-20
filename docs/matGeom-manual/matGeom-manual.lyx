@@ -18904,8 +18904,31 @@ Stanford triangle format
 \begin_inset Quotes erd
 \end_inset
 
-, is more general and more widely used than the OFF format.
- Partial support is provided by MatGeom.
+, is more general and more widely used than the OFF format
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://en.wikipedia.org/wiki/PLY_(file_format)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ It allows to store a variety of properties such as face color or transparency,
+ surface normals, texture coordinates...
+ MatGeom supports reading and writing only vertex coordinates and face vertex
+ data.
 \end_layout
 
 \begin_layout Standard
@@ -19058,6 +19081,16 @@ readMesh_ply
 
 \begin_layout Standard
 Reads mesh data stored in PLY (Stanford triangle) format.
+ Based on previous work by Pascal Getreuer and Gabriel Peyré 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Peyre_2024"
+literal "false"
+
+\end_inset
+
+.
+ Supports ascii and binary formats.
 \end_layout
 
 \begin_layout Minisec
@@ -19076,6 +19109,7 @@ writeMesh_ply
 
 \begin_layout Standard
 Writes a mesh into a text file in PLY format.
+ Supports ascii and binary formats.
 \end_layout
 
 \begin_layout Subsection
