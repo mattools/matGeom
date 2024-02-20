@@ -2,13 +2,21 @@ function varargout = readMesh_ply(fileName)
 %READMESH_PLY Read mesh data stored in PLY (Stanford triangle) format.
 %
 %   [V, F] = readMesh_ply(FNAME)
+%   V is a NV-by-3 numeric array containing vertex coordinates,
+%   F is a NF-by-3 or NF-by-4 array containg vertex indices of each face.
+%
+%   MESH = readMesh_ply(FNAME)
+%   Returns mesh vertex and face information into a single structure with
+%   fields 'vertices' and 'faces'.
 %
 %   Example
-%   readMesh_ply
+%     [v, f] = readMesh_ply('bunny_F1k.ply');
+%     trisurf(f, v(:,1),v(:,2),v(:,3));
+%     colormap(gray); axis equal;
 %
 %   References
-%   Wrapper function for Gabriel Peyré's read_ply that is a wrapper
-%   function of Pascal Getreuer's plyread.
+%   Adapted from Gabriel Peyré's "read_ply" function, that is was a wrapper
+%   for the "plyread" function written by Pascal Getreuer.
 %
 %   See also 
 %       meshes3d, readMesh, readMesh_off, readMesh_stl
@@ -19,403 +27,375 @@ function varargout = readMesh_ply(fileName)
 % Created: 2018-04-26, using Matlab 9.4.0.813654 (R2018a)
 % Copyright 2018-2023 INRA - Cepia Software Platform
 
-%% open file
-f = fopen(fileName, 'r');
-if f == -1
+
+%% Open file
+
+% check existence of file
+if ~exist(fileName, 'file')
     error('matGeom:readMesh_ply:FileNotFound', ...
         ['Could not find file: ' fileName]);
 end
 
-[vertices, faces] = read_ply(fileName);
-varargout = formatMeshOutput(nargout, vertices, faces);
+% open file in read text mode
+[fid, msg] = fopen(fileName, 'rt'); 
 
+% check file was properly open
+if fid == -1
+    error(msg); 
 end
 
-function [vertex,face,d,c] = read_ply(filename)
-% read_ply - read data from PLY file.
-%
-%   [vertex,face] = read_ply(filename);
-%
-%   'vertex' is a 'nb.vert x 3' array specifying the position of the vertices.
-%   'face' is a 'nb.face x 3' array specifying the connectivity of the mesh.
-%
-%   Copyright (c) 2003 Gabriel Peyré
-
-possibleFacePropertyNames = ...
-    {'vertex_indices','vertex_indexes','vertex_index','indices','indexes'};
-
-[d,c] = plyread(filename);
-facePropertyNameIdx = find(matches(possibleFacePropertyNames, fieldnames(d.face)));
-assert(length(facePropertyNameIdx) == 1)
-vi = d.face.(possibleFacePropertyNames{facePropertyNameIdx});
-lengths = cellfun('length',vi);
-maxLength = max(lengths);
-if all(maxLength == lengths)
-    face = cell2mat(vi)+1;
-else
-    face = cellfun(@(x) x+1, vi, 'uni',0);
-end
-vertex = [d.vertex.x, d.vertex.y, d.vertex.z];
-
-end
-
-
-function [Elements,varargout] = plyread(Path,Str)
-%PLYREAD   Read a PLY 3D data file.
-%   [DATA,COMMENTS] = PLYREAD(FILENAME) reads a version 1.0 PLY file
-%   FILENAME and returns a structure DATA.  The fields in this structure
-%   are defined by the PLY header; each element type is a field and each
-%   element property is a subfield.  If the file contains any comments,
-%   they are returned in a cell string array COMMENTS.
-%
-%   [TRI,PTS] = PLYREAD(FILENAME,'tri') or
-%   [TRI,PTS,DATA,COMMENTS] = PLYREAD(FILENAME,'tri') converts vertex
-%   and face data into triangular connectivity and vertex arrays.  The
-%   mesh can then be displayed using the TRISURF command.
-%
-%   Note: This function is slow for large mesh files (+50K faces),
-%   especially when reading data with list type properties.
-%
-%   Example:
-%   [Tri,Pts] = PLYREAD('cow.ply','tri');
-%   trisurf(Tri,Pts(:,1),Pts(:,2),Pts(:,3));
-%   colormap(gray); axis equal;
-%
-
-% Pascal Getreuer 2004
-
-[fid,Msg] = fopen(Path,'rt'); % open file in read text mode
-
-if fid == -1, error(Msg); end
-
-Buf = fscanf(fid,'%s',1);
-if ~strcmp(Buf,'ply')
+% check file format marker
+buf = fscanf(fid, '%s', 1);
+if ~strcmp(buf, 'ply')
     fclose(fid);
     error('Not a PLY file.');
 end
 
-%% read header
-ftell(fid);
-Format = '';
-NumComments = 0;
-Comments = {};      % for storing any file comments
-NumElements = 0;
-NumProperties = 0;
-Elements = [];      % structure for holding the element data
-ElementCount = [];  % number of each type of element in file
-PropertyTypes = []; % corresponding structure recording property types
-ElementNames = {};  % list of element names in the order they are stored in the file
-PropertyNames = [];	% structure of lists of property names
 
-while 1
-    Buf = fgetl(fid); % read one line from file
-    Token = split(Buf); % split line into tokens
-    Count = length(Token); % count tokens
+%% Read header
+
+% initialize empty fields
+ftell(fid);
+dataFormat = '';
+numComments = 0;
+comments = {};      % for storing any file comments
+numElements = 0;
+numProperties = 0;
+elements = [];      % structure for holding the element data
+elementCount = [];  % number of each type of element in file
+propertyTypes = []; % corresponding structure recording property types
+elementNames = {};  % list of element names in the order they are stored in the file
+propertyNames = [];	% structure of lists of property names
+
+% iterate over the lines of the file until we find the "end_header" line
+while true
+    buf = fgetl(fid); % read one line from file
+    tokens = split(buf); % split line into tokens
+    nToks = length(tokens); % count tokens
     
-    if Count % parse line
-        switch lower(Token{1})
-            case 'format' % read data format
-                if Count >= 2
-                    Format = lower(Token{2});
-                    if Count == 3 && ~strcmp(Token{3},'1.0')
-                        fclose(fid);
-                        error('Only PLY format version 1.0 supported.');
-                    end
-                end
-            case 'comment' % read file comment
-                NumComments = NumComments + 1;
-                Comments{NumComments} = ''; %#ok<AGROW>
-                for i = 2:Count
-                    Comments{NumComments} = [Comments{NumComments},Token{i},' '];
-                end
-            case 'element' % element name
-                if Count >= 3
-                    if isfield(Elements,Token{2})
-                        fclose(fid);
-                        error(['Duplicate element name, ''',Token{2},'''.']);
-                    end
-                    
-                    NumElements = NumElements + 1;
-                    NumProperties = 0;
-                    Elements.(Token{2}) = [];
-                    PropertyTypes.(Token{2}) =[];
-                    ElementNames{NumElements} = Token{2}; %#ok<AGROW>
-                    PropertyNames.(Token{2}) = {};
-                    CurElement = Token{2};
-                    ElementCount(NumElements) = str2double(Token{3}); %#ok<AGROW>
-                    
-                    if isnan(ElementCount(NumElements))
-                        fclose(fid);
-                        error(['Bad element definition: ',Buf]);
-                    end
-                else
-                    error(['Bad element definition: ',Buf]);
-                end
-            case 'property'	% element property
-                if ~isempty(CurElement) && Count >= 3
-                    NumProperties = NumProperties + 1;
-                    
-                    if isfield(Elements.(CurElement),Token{Count})
-                        fclose(fid);
-                        error(['Duplicate property name, ''',CurElement,'.',Token{2},'''.']);
-                    end
-                    
-                    % add property subfield to Elements
-                    Elements.(CurElement).(Token{Count}) = [];
-                    % add property subfield to PropertyTypes and save type
-                    PropertyTypes.(CurElement).(Token{Count}) = Token(2:Count-1);
-                    % record property name order
-                    PropertyNames.(CurElement){NumProperties} = Token{Count};
-                else
+    if nToks == 0
+        continue;
+    end
+
+    % At the beginning of an element, the first token indicates the nature
+    % of the element
+    switch lower(tokens{1})
+        case 'format'
+            % read data format (ascii or binary)
+            if nToks >= 2
+                dataFormat = lower(tokens{2});
+                if nToks == 3 && ~strcmp(tokens{3},'1.0')
                     fclose(fid);
-                    if isempty(CurElement)
-                        error(['Property definition without element definition: ',Buf]);
-                    else
-                        error(['Bad property definition: ',Buf]);
-                    end
+                    error('Only PLY format version 1.0 supported.');
                 end
-            case 'end_header' % end of header, break from while loop
-                break;
-        end
+            end
+
+        case 'comment'
+            % read file comments
+            numComments = numComments + 1;
+            comments{numComments} = ''; %#ok<AGROW>
+            for i = 2:nToks
+                comments{numComments} = [comments{numComments}, tokens{i}, ' '];
+            end
+
+        case 'element'
+            % element name
+            if nToks >= 3
+                % check element was not already initialized
+                if isfield(elements,tokens{2})
+                    fclose(fid);
+                    error(['Duplicate element name, ''',tokens{2},'''.']);
+                end
+
+                numElements = numElements + 1;
+                numProperties = 0;
+                elements.(tokens{2}) = [];
+                propertyTypes.(tokens{2}) =[];
+                elementNames{numElements} = tokens{2}; %#ok<AGROW>
+                propertyNames.(tokens{2}) = {};
+                CurElement = tokens{2};
+                elementCount(numElements) = str2double(tokens{3}); %#ok<AGROW>
+
+                if isnan(elementCount(numElements))
+                    fclose(fid);
+                    error(['Bad element definition: ', buf]);
+                end
+            else
+                error(['Bad element definition: ', buf]);
+            end
+
+        case 'property'
+        	% element property
+            if ~isempty(CurElement) && nToks >= 3
+                numProperties = numProperties + 1;
+
+                if isfield(elements.(CurElement), tokens{nToks})
+                    fclose(fid);
+                    error(['Duplicate property name, ''',CurElement,'.',tokens{2},'''.']);
+                end
+
+                % add property subfield to Elements
+                elements.(CurElement).(tokens{nToks}) = [];
+                % add property subfield to PropertyTypes and save type
+                propertyTypes.(CurElement).(tokens{nToks}) = tokens(2:nToks-1);
+                % record property name order
+                propertyNames.(CurElement){numProperties} = tokens{nToks};
+            else
+                fclose(fid);
+                if isempty(CurElement)
+                    error(['Property definition without element definition: ', buf]);
+                else
+                    error(['Bad property definition: ', buf]);
+                end
+            end
+
+        case 'end_header' 
+            % end of header, break infinite loop
+            break;
     end
 end
 
-%% set reading for specified data format
-if isempty(Format)
+
+%% Set reading for specified data format
+if isempty(dataFormat)
     warning('Data format unspecified, assuming ASCII.');
-    Format = 'ascii';
+    dataFormat = 'ascii';
 end
 
-switch Format
+switch dataFormat
     case 'ascii'
-        Format = 0;
+        dataFormat = 0;
     case 'binary_little_endian'
-        Format = 1;
+        dataFormat = 1;
     case 'binary_big_endian'
-        Format = 2;
+        dataFormat = 2;
     otherwise
         fclose(fid);
-        error(['Data format ''',Format,''' not supported.']);
+        error('Data format ''%s'' not supported.', dataFormat);
 end
 
-if ~Format
-    Buf = fscanf(fid,'%f'); % read the rest of the file as ASCII data
+if dataFormat == 0
+    % read the rest of the file as ASCII data
+    buf = fscanf(fid,'%f');
     BufOff = 1;
 else
     % reopen the file in read binary mode
     fclose(fid);
     
-    if Format == 1
-        fid = fopen(Path,'r','ieee-le.l64'); % little endian
+    if dataFormat == 1
+        fid = fopen(fileName, 'r', 'ieee-le.l64'); % little endian
     else
-        fid = fopen(Path,'r','ieee-be.l64'); % big endian
+        fid = fopen(fileName, 'r', 'ieee-be.l64'); % big endian
     end
     
     % find the end of the header again (using ftell on the old handle doesn't give the correct position)
     BufSize = 8192;
-    Buf = [blanks(10),char(fread(fid,BufSize,'uchar')')];
+    buf = [blanks(10),char(fread(fid,BufSize,'uchar')')];
     i = [];
     tmp = -11;
     
     while isempty(i)
-        i = strfind(Buf,['end_header',13,10]);              % look for end_header + CR/LF
-        i = [i,strfind(Buf,['end_header',10])]; %#ok<AGROW> % look for end_header + LF
+        i = strfind(buf,['end_header',13,10]);              % look for end_header + CR/LF
+        i = [i,strfind(buf,['end_header',10])]; %#ok<AGROW> % look for end_header + LF
         
         if isempty(i)
             tmp = tmp + BufSize;
-            Buf = [Buf(BufSize+1:BufSize+10),char(fread(fid,BufSize,'uchar')')];
+            buf = [buf(BufSize+1:BufSize+10),char(fread(fid,BufSize,'uchar')')];
         end
     end
     
     % seek to just after the line feed
-    fseek(fid,i + tmp + 11 + (Buf(i + 10) == 13),-1);
+    fseek(fid,i + tmp + 11 + (buf(i + 10) == 13),-1);
 end
 
 
-%% read element data
-% PLY and MATLAB data types (for fread)
-PlyTypeNames = {'char','uchar','short','ushort','int','uint','float','double', ...
-    'char8','uchar8','short16','ushort16','int32','uint32','float32','double64'};
-MatlabTypeNames = {'schar','uchar','int16','uint16','int32','uint32','single','double'};
-SizeOf = [1,1,2,2,4,4,4,8];	% size in bytes of each type
+%% Read element data
 
-for i = 1:NumElements
+% PLY and MATLAB data types (for fread)
+plyTypeNames = {'char','uchar','short','ushort','int','uint','float','double', ...
+    'char8','uchar8','short16','ushort16','int32','uint32','float32','double64'};
+matlabTypeNames = {'schar','uchar','int16','uint16','int32','uint32','single','double'};
+dataTypeSizes = [1,1,2,2,4,4,4,8];	% size in bytes of each type
+
+% iterate over element types
+for i = 1:numElements
     % get current element property information
-    CurPropertyNames = PropertyNames.(ElementNames{i});
-    CurPropertyTypes = PropertyTypes.(ElementNames{i});
-    NumProperties = size(CurPropertyNames,2);
+    CurPropertyNames = propertyNames.(elementNames{i});
+    CurPropertyTypes = propertyTypes.(elementNames{i});
+    numProperties = size(CurPropertyNames,2);
     
     % fprintf('Reading %s...\n',ElementNames{i});
     
-    %% read ASCII data
-    if ~Format
-        Type = zeros(1,NumProperties);
-        for j = 1:NumProperties
-            Token = CurPropertyTypes.(CurPropertyNames{j});
+    if dataFormat == 0
+        % read ASCII data
+        type = zeros(1, numProperties);
+        for j = 1:numProperties
+            tokens = CurPropertyTypes.(CurPropertyNames{j});
             
-            if strcmpi(Token{1},'list')
-                Type(j) = 1;
+            if strcmpi(tokens{1},'list')
+                type(j) = 1;
             end
         end
         
         % parse buffer
-        if ~any(Type)
+        if ~any(type)
             % no list types
-            Data = reshape(Buf(BufOff:BufOff+ElementCount(i)*NumProperties-1),NumProperties,ElementCount(i))';
-            BufOff = BufOff + ElementCount(i)*NumProperties;
+            rawData = reshape(buf(BufOff:BufOff+elementCount(i)*numProperties-1),numProperties,elementCount(i))';
+            BufOff = BufOff + elementCount(i)*numProperties;
         else
-            ListData = cell(NumProperties,1);
+            ListData = cell(numProperties,1);
             
-            for k = 1:NumProperties
-                ListData{k} = cell(ElementCount(i),1);
+            for k = 1:numProperties
+                ListData{k} = cell(elementCount(i),1);
             end
             
             % list type
-            for j = 1:ElementCount(i)
-                for k = 1:NumProperties
-                    if ~Type(k)
-                        Data(j,k) = Buf(BufOff);
+            for j = 1:elementCount(i)
+                for k = 1:numProperties
+                    if ~type(k)
+                        rawData(j,k) = buf(BufOff);
                         BufOff = BufOff + 1;
                     else
-                        tmp = Buf(BufOff);
-                        ListData{k}{j} = Buf(BufOff+(1:tmp))';
+                        tmp = buf(BufOff);
+                        ListData{k}{j} = buf(BufOff+(1:tmp))';
                         BufOff = BufOff + tmp + 1;
                     end
                 end
             end
         end
     else
-        %% read binary data
+        % read binary data
         % translate PLY data type names to MATLAB data type names
-        ListFlag = 0; % = 1 if there is a list type
-        SameFlag = 1; % = 1 if all types are the same
+        listFlag = 0; % = 1 if there is a list type
+        sameFlag = 1; % = 1 if all types are the same
         
-        Type = cell(1,NumProperties);
-        Type2 = Type;
-        TypeSize = zeros(1,NumProperties);
-        TypeSize2 = TypeSize;
-        for j = 1:NumProperties
-            Token = CurPropertyTypes.(CurPropertyNames{j});
+        type = cell(1,numProperties);
+        type2 = type;
+        typeSize = zeros(1,numProperties);
+        typeSize2 = typeSize;
+        for j = 1:numProperties
+            tokens = CurPropertyTypes.(CurPropertyNames{j});
             
-            if ~strcmp(Token{1},'list')	% non-list type
-                tmp = rem(find(matches(PlyTypeNames,Token{1}))-1,8)+1;
+            if ~strcmp(tokens{1}, 'list')	% non-list type
+                tmp = rem(find(matches(plyTypeNames,tokens{1}))-1,8)+1;
                 
                 if ~isempty(tmp)
-                    TypeSize(j) = SizeOf(tmp);
-                    Type{j} = MatlabTypeNames{tmp};
-                    TypeSize2(j) = 0;
-                    Type2{j} = '';
+                    typeSize(j) = dataTypeSizes(tmp);
+                    type{j} = matlabTypeNames{tmp};
+                    typeSize2(j) = 0;
+                    type2{j} = '';
                     
-                    SameFlag = SameFlag & strcmp(Type{1},Type{j});
+                    sameFlag = sameFlag & strcmp(type{1},type{j});
                 else
                     fclose(fid);
-                    error(['Unknown property data type, ''',Token{1},''', in ', ...
-                        ElementNames{i},'.',CurPropertyNames{j},'.']);
+                    error(['Unknown property data type, ''',tokens{1},''', in ', ...
+                        elementNames{i},'.',CurPropertyNames{j},'.']);
                 end
             else % list type
-                if length(Token) == 3
-                    ListFlag = 1;
-                    SameFlag = 0;
-                    tmp = rem(find(matches(PlyTypeNames,Token{2}))-1,8)+1;
-                    tmp2 = rem(find(matches(PlyTypeNames,Token{3}))-1,8)+1;
+                if length(tokens) == 3
+                    listFlag = 1;
+                    sameFlag = 0;
+                    tmp = rem(find(matches(plyTypeNames,tokens{2}))-1,8)+1;
+                    tmp2 = rem(find(matches(plyTypeNames,tokens{3}))-1,8)+1;
                     
                     if ~isempty(tmp) && ~isempty(tmp2)
-                        TypeSize(j) = SizeOf(tmp);
-                        Type{j} = MatlabTypeNames{tmp};
-                        TypeSize2(j) = SizeOf(tmp2);
-                        Type2{j} = MatlabTypeNames{tmp2};
+                        typeSize(j) = dataTypeSizes(tmp);
+                        type{j} = matlabTypeNames{tmp};
+                        typeSize2(j) = dataTypeSizes(tmp2);
+                        type2{j} = matlabTypeNames{tmp2};
                     else
                         fclose(fid);
-                        error(['Unknown property data type, ''list ',Token{2},' ',Token{3},''', in ', ...
-                            ElementNames{i},'.',CurPropertyNames{j},'.']);
+                        error(['Unknown property data type, ''list ',tokens{2},' ',tokens{3},''', in ', ...
+                            elementNames{i},'.',CurPropertyNames{j},'.']);
                     end
                 else
                     fclose(fid);
-                    error(['Invalid list syntax in ',ElementNames{i},'.',CurPropertyNames{j},'.']);
+                    error(['Invalid list syntax in ',elementNames{i},'.',CurPropertyNames{j},'.']);
                 end
             end
         end
         
         % read file
-        if ~ListFlag
-            if SameFlag
+        if ~listFlag
+            if sameFlag
                 % no list types, all the same type (fast)
-                Data = fread(fid,[NumProperties,ElementCount(i)],Type{1})';
+                rawData = fread(fid,[numProperties,elementCount(i)],type{1})';
             else
                 % no list types, mixed type
-                Data = zeros(ElementCount(i),NumProperties);
+                rawData = zeros(elementCount(i),numProperties);
                 
-                for j = 1:ElementCount(i)
-                    for k = 1:NumProperties
-                        Data(j,k) = fread(fid,1,Type{k});
+                for j = 1:elementCount(i)
+                    for k = 1:numProperties
+                        rawData(j,k) = fread(fid,1,type{k});
                     end
                 end
             end
         else
-            ListData = cell(NumProperties,1);
+            ListData = cell(numProperties,1);
             
-            for k = 1:NumProperties
-                ListData{k} = cell(ElementCount(i),1);
+            for k = 1:numProperties
+                ListData{k} = cell(elementCount(i),1);
             end
             
-            if NumProperties == 1
+            if numProperties == 1
                 BufSize = 512;
-                SkipNum = 4;
+                numSkip = 4;
                 j = 0;
                 
                 % list type, one property (fast if lists are usually the same length)
-                while j < ElementCount(i)
+                while j < elementCount(i)
                     Position = ftell(fid);
                     % read in BufSize count values, assuming all counts = SkipNum
-                    [Buf,BufSize] = fread(fid,BufSize,Type{1},SkipNum*TypeSize2(1));
-                    Miss = find(Buf ~= SkipNum); % find first count that is not SkipNum
-                    fseek(fid,Position + TypeSize(1),-1); % seek back to after first count
+                    [buf,BufSize] = fread(fid,BufSize,type{1},numSkip*typeSize2(1));
+                    miss = find(buf ~= numSkip); % find first count that is not SkipNum
+                    fseek(fid,Position + typeSize(1),-1); % seek back to after first count
                     
-                    if isempty(Miss) % all counts are SkipNum
-                        Buf = fread(fid,[SkipNum,BufSize],[int2str(SkipNum),'*',Type2{1}],TypeSize(1))';
-                        fseek(fid,-TypeSize(1),0); % undo last skip
+                    if isempty(miss) % all counts are SkipNum
+                        buf = fread(fid,[numSkip,BufSize],[int2str(numSkip),'*',type2{1}],typeSize(1))';
+                        fseek(fid,-typeSize(1),0); % undo last skip
                         
                         for k = 1:BufSize
-                            ListData{1}{j+k} = Buf(k,:);
+                            ListData{1}{j+k} = buf(k,:);
                         end
                         
                         j = j + BufSize;
                         BufSize = floor(1.5*BufSize);
                     else
-                        if Miss(1) > 1 % some counts are SkipNum
-                            Buf2 = fread(fid,[SkipNum,Miss(1)-1],[int2str(SkipNum),'*',Type2{1}],TypeSize(1));
+                        if miss(1) > 1 % some counts are numSkip
+                            Buf2 = fread(fid,[numSkip,miss(1)-1],[int2str(numSkip),'*',type2{1}],typeSize(1));
                             Buf2 = Buf2';
                             
-                            for k = 1:Miss(1)-1
+                            for k = 1:miss(1)-1
                                 ListData{1}{j+k} = Buf2(k,:);
                             end
                             
                             j = j + k;
                         end
+
                         % Alec: check if done and rewind one step
-                        if j >= ElementCount(i)
+                        if j >= elementCount(i)
                             fseek(fid,-1,0);
                             break;
                         end
                         
                         % read in the list with the missed count
-                        SkipNum = Buf(Miss(1));
+                        numSkip = buf(miss(1));
                         j = j + 1;
-                        ListData{1}{j} = fread(fid,[1,SkipNum],Type2{1});
+                        ListData{1}{j} = fread(fid,[1,numSkip],type2{1});
                         BufSize = ceil(0.6*BufSize);
                     end
                 end
             else
                 % list type(s), multiple properties (slow)
-                Data = zeros(ElementCount(i),NumProperties);
+                rawData = zeros(elementCount(i),numProperties);
                 
-                for j = 1:ElementCount(i)
-                    for k = 1:NumProperties
-                        if isempty(Type2{k})
-                            Data(j,k) = fread(fid,1,Type{k});
+                for j = 1:elementCount(i)
+                    for k = 1:numProperties
+                        if isempty(type2{k})
+                            rawData(j,k) = fread(fid,1,type{k});
                         else
-                            tmp = fread(fid,1,Type{k});
-                            ListData{k}{j} = fread(fid,[1,tmp],Type2{k});
+                            tmp = fread(fid,1,type{k});
+                            ListData{k}{j} = fread(fid,[1,tmp],type2{k});
                         end
                     end
                 end
@@ -424,84 +404,45 @@ for i = 1:NumElements
     end
     
     % put data into Elements structure
-    for k = 1:NumProperties
-        if (~Format && ~Type(k)) || (Format && isempty(Type2{k}))
-            Elements.(ElementNames{i}).(CurPropertyNames{k}) = Data(:,k);
+    for k = 1:numProperties
+        if (~dataFormat && ~type(k)) || (dataFormat && isempty(type2{k}))
+            elements.(elementNames{i}).(CurPropertyNames{k}) = rawData(:,k);
         else
-            Elements.(ElementNames{i}).(CurPropertyNames{k}) = ListData{k};
+            elements.(elementNames{i}).(CurPropertyNames{k}) = ListData{k};
         end
     end
 end
 
-clear Data ListData;
+clear rawData ListData;
 fclose(fid);
 
-if (nargin > 1 && strcmpi(Str,'Tri')) || nargout > 2
-    % find vertex element field
-    Name = {'vertex','Vertex','point','Point','pts','Pts'};
-    Names = [];
-    
-    for i = 1:length(Name)
-        if any(strcmp(ElementNames,Name{i}))
-            Names = PropertyNames.(Name{i});
-            Name = Name{i};
-            break;
-        end
-    end
-    
-    if any(strcmp(Names,'x')) && any(strcmp(Names,'y')) && any(strcmp(Names,'z'))
-        varargout{1} = [Elements.(Name).x, Elements.(Name).y, Elements.(Name).z];
-    else
-        varargout{1} = zeros(1,3);
-    end
-    
-    varargout{2} = Elements;
-    varargout{3} = Comments;
-    Elements = [];
-    
-    % find face element field
-    Name = {'face','Face','poly','Poly','tri','Tri'};
-    Names = [];
-    
-    for i = 1:length(Name)
-        if any(strcmp(ElementNames,Name{i}))
-            Names = PropertyNames.(Name{i});
-            Name = Name{i};
-            break;
-        end
-    end
-    
-    if ~isempty(Names)
-        % find vertex indices property subfield
-        PropertyName = {'vertex_indices','vertex_indexes','vertex_index','indices','indexes'};
-        
-        for i = 1:length(PropertyName)
-            if any(strcmp(Names,PropertyName{i}))
-                PropertyName = PropertyName{i};
-                break;
-            end
-        end
-        
-        if ~iscell(PropertyName)
-            % convert face index lists to triangular connectivity
-            FaceIndices = varargout{2}.(Name).PropertyName;
-            N = length(FaceIndices);
-            Elements = zeros(N*2,3);
-            Extra = 0;
-            
-            for k = 1:N
-                Elements(k,:) = FaceIndices{k}(1:3);
-                
-                for j = 4:length(FaceIndices{k})
-                    Extra = Extra + 1;
-                    Elements(N + Extra,:) = [Elements(k,[1,j-1]),FaceIndices{k}(j)];
-                end
-            end
-            Elements = Elements(1:N+Extra,:) + 1;
-        end
-    end
+
+%% Post-processing
+
+% find the index of the element corresponding to face vertex indices
+possibleFacePropertyNames = ...
+    {'vertex_indices', 'vertex_indexes', 'vertex_index', 'indices', 'indexes'};
+facePropertyNameIdx = find(matches(possibleFacePropertyNames, fieldnames(elements.face)));
+assert(length(facePropertyNameIdx) == 1)
+
+% retrieve face vertex data
+faces = elements.face.(possibleFacePropertyNames{facePropertyNameIdx});
+
+% convert face array from 0-indexing into 1-indexing,
+% and attempt to convert cell array into numeric array,
+lengths = cellfun(@length, faces);
+maxLength = max(lengths);
+if all(maxLength == lengths)
+    faces = cell2mat(faces)+1;
 else
-    varargout{1} = Comments;
+    faces = cellfun(@(x) x+1, faces, 'uni', 0);
 end
 
+% retrieve vertex data
+vertices = [elements.vertex.x, elements.vertex.y, elements.vertex.z];
+
+% format output arguments
+varargout = formatMeshOutput(nargout, vertices, faces);
+if nargout == 1
+    varargout{1}.comment = comments;
 end
