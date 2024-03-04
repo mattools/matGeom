@@ -21,6 +21,7 @@ function varargout = subdivideMesh(vertices, faces, n)
 % Created: 2013-08-22, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2013-2023 INRA - Cepia Software Platform
 
+
 %% Initialisations
 
 % vertex to vertex edges, will be computed if not provided within mesh
@@ -44,6 +45,9 @@ if isstruct(vertices)
         edges = mesh.edges;
     end
 
+    % The face-to-edge adjacency information is necessary for associating
+    % new faces to vertices
+    % (will be computed if not found)
     if isfield(mesh, 'faceEdges')
         faceEdgeIndices = mesh.faceEdges;
     end
@@ -59,16 +63,17 @@ if isempty(edges)
 end
 nEdges = size(edges, 1);
 
-% index of edges around each face
+% compute index of edges around each face if not already provided
 if isempty(faceEdgeIndices)
     faceEdgeIndices = meshFaceEdges(vertices, edges, faces);
 end
 
 
-%% Process vertices
-% Create new vertices on existing edges, and inside faces
+%% Process Edges
+% Create new vertices on existing edges. Each edge is subdivided into n new
+% edges, creating (n-1) new vertices.
 
-% several interpolated positions
+% positions to interpolate vertex positions
 t = linspace(0, 1, n + 1)';
 coef2 = t(2:end-1);
 coef1 = 1 - t(2:end-1);
@@ -95,10 +100,13 @@ end
 
 
 %% Process faces
+% Subdivide each face, by processing 'strips' on parallel faces. Each strip
+% rely on two vertices of two edges of the original mesh.
 
 % create result array (will grow during face iteration)
 faces2 = zeros(0, 3);
 
+% iterate on faces of original mesh
 nFaces = size(faces, 1);
 for iFace = 1:nFaces
     % compute index of each corner vertex
