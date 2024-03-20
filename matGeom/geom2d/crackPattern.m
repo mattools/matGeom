@@ -23,14 +23,11 @@ function edges = crackPattern(box, points, alpha, varargin)
 %     drawEdge
 %
 
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 25/05/2004.
-%
-
-%   HISTORY :
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-05-25
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 if ~isempty(varargin)
     speed = varargin{1};

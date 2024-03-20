@@ -18,33 +18,58 @@ function pos = linePosition3d(point, line)
 %   If POINTS is an array of NP points, return NP positions, corresponding
 %   to each point.
 %
-%   See also:
+%   See also 
 %   lines3d, createLine3d, distancePointLine3d, projPointOnLine3d
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 17/02/2005.
-%
 
-%   HISTORY
-%   05/01/2007 update doc
-%   28/10/2010 change to bsxfun calculation for arbitrary input sizes
-%       (Thanks to Sven Holcombe)
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-17
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
-% vector from line origin to point
-dp = bsxfun(@minus, point, line(:,1:3));
+% size of input arguments
+np = size(point, 1);
+nl = size(line, 1);
 
-% direction vector of the line
-vl = line(:, 4:6);
+if np == 1 || nl == 1 || np == nl
+    % standard case where result is either scalar or vector
+    
+    % vector from line origin to point
+    dp = bsxfun(@minus, point, line(:,1:3));
+    
+    % direction vector of the line
+    vl = line(:, 4:6);
+    
+    % precompute and check validity of denominator
+    denom = sum(vl.^2, 2);
+    invalidLine = denom < eps;
+    denom(invalidLine) = 1;
+    
+    % compute position using dot product normalized with norm of line vector.
+    pos = bsxfun(@rdivide, sum(bsxfun(@times, dp, vl), 2), denom);
+    
+    % position on a degenerated line is set to 0
+    pos(invalidLine) = 0;
 
-% precompute and check validity of denominator
-denom = sum(vl.^2, 2);
-invalidLine = denom < eps;
-denom(invalidLine) = 1;
-
-% compute position using dot product normalized with norm of line vector.
-pos = bsxfun(@rdivide, sum(bsxfun(@times, dp, vl), 2), denom);
-
-% position on a degenerated line is set to 0
-pos(invalidLine) = 0;
+else
+    % reshape input 
+    point = reshape(point, [np 1 3]);
+    line = reshape(line, [1 nl 6]);
+    
+    % vector from line origin to point
+    dp = bsxfun(@minus, point, line(:,:,1:3));
+    
+    % direction vector of the line
+    vl = line(:, :, 4:6);
+    
+    % precompute and check validity of denominator
+    denom = sum(vl.^2, 3);
+    invalidLine = denom < eps;
+    denom(invalidLine) = 1;
+    
+    % compute position using dot product normalized with norm of line vector.
+    pos = bsxfun(@rdivide, sum(bsxfun(@times, dp, vl), 3), denom);
+    
+    % position on a degenerated line is set to 0
+    pos(invalidLine) = 0;
+end

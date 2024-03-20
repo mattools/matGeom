@@ -17,14 +17,14 @@ function res = smoothPolyline(poly, M)
 %     poly2 = smoothPolyline(poly, 21);
 %     drawPolygon(poly2, 'm');
 %
-%   See also
+%   See also 
 %     polygons2d, smoothPolygon, simplifyPolyline, resamplePolyline
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2015-02-17,    using Matlab 8.4.0.150421 (R2014b)
-% Copyright 2015 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2015-02-17, using Matlab 8.4.0.150421 (R2014b)
+% Copyright 2015-2023 INRA - Cepia Software Platform
 
 % compute the number of elements before and after
 M1 = floor((M - 1) / 2);

@@ -15,15 +15,15 @@ function nFaces = meshFaceNumber(varargin)
 %     ans =
 %         6
 %
-%   See also
+%   See also 
 %     meshes3d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2013-08-22,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2013 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2013-08-22, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2013-2023 INRA - Cepia Software Platform
 
 [vertices, faces] = parseMeshData(varargin{:}); %#ok<ASGLU>
 

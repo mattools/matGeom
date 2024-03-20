@@ -18,19 +18,18 @@ function polyhedra(varargin)
 %   drawMesh(n, f, 'faceColor', 'g', 'linewidth', 2);
 %   axis equal;
 %
-%   See also
+%   See also 
 %   meshes3d
 %   createCube, createCubeOctahedron, createIcosahedron, createOctahedron
 %   createRhombododecahedron, createTetrahedron, createTetrakaidecahedron
 %   createDodecahedron, createSoccerBall, createMengerSponge
-%   steinerPolytope, minConvexHull
+%   steinerPolytope, minConvexHull, drawPolyhedron
 %   polyhedronNormalAngle, polyhedronMeanBreadth
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% E-mail: david.legland@inrae.fr
+% Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2008-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
-% HISTORY 

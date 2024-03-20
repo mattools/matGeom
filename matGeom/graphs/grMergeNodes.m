@@ -16,13 +16,12 @@ function [nodes, edges] = grMergeNodes(nodes, edges, mnodes)
 %   [2 3]
 %   [3 4]
 %   
-%
-%   -----
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 30/06/2004.
-%
+
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-06-30
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 refNode = mnodes(1);
 mnodes = mnodes(2:length(mnodes));

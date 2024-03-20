@@ -7,14 +7,12 @@ function edge = clipLineRect(line, rect)
 %   first point, wr and hr are width and height of rectangle)
 %   
 %   Deprecated: use function clipLine instead
-%
-% ---------
-% author : David Legland 
-% created the 24/07/2006.
-% Copyright 2010 INRA - Cepia Software Platform.
-%
 
-%   HISTORY
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2006-07-24
+% Copyright 2006 INRA - Cepia Software Platform
 
 if size(line, 1)==1
     line = repmat(line, size(rect, 1), 1);

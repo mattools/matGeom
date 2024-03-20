@@ -11,14 +11,14 @@ function h = supportFunction(polygon, varargin)
 %   where V is a vector, uses vector V of angles to compute support
 %   function.
 %   
-%   See also:
+%   See also 
 %   polygons2d, convexification
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 20/12/2004.
-%
+
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-12-20
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 N = 24;
 u = 0:2*pi/N:2*pi*(1-1/N);

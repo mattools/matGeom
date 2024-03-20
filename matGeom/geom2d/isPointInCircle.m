@@ -15,17 +15,15 @@ function b = isPointInCircle(point, circle, varargin)
 %   isPointInCircle([1 1], [0 0 1])
 %   return false
 %
-%   See also:
-%   circles2d, isPointOnCircle
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 07/04/2004.
+%   See also 
+%     circles2d, isPointOnCircle, isPointInEllipse, isPointOnline
 %
 
-%   HISTORY
-%   22/05/2009 rename to isPointInCircle, add psb to specify tolerance
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-04-07
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 % extract computation tolerance
 tol = 1e-14;
@@ -35,4 +33,3 @@ end
 
 d = sqrt(sum(power(point - circle(:,1:2), 2), 2));
 b = d-circle(:,3)<=tol;
-    

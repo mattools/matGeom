@@ -7,7 +7,7 @@ function varargout = gabrielGraph(pts)
 %   edges whose circumcircle does not contain any other input point than
 %   the edge extremities.
 %
-%   [NODES EDGES] = gabrielGraph(PTS)
+%   [NODES, EDGES] = gabrielGraph(PTS)
 %   Also returns the initial set of points;
 %
 %   Example
@@ -17,15 +17,15 @@ function varargout = gabrielGraph(pts)
 %     hold on; axis([0 1 0 1]); axis equal;
 %     drawGraph(pts, edges);
 %
-%   See also
-%     drawGraph, delaunayGraph
+%   See also 
+%     graphs, drawGraph, delaunayGraph
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2012-01-22,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2012-01-22, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012-2023 INRA - Cepia Software Platform
 
 % compute Delaunay triangulation
 if verLessThan('matlab', '8.1')
@@ -39,7 +39,7 @@ end
 % extract edges (N-by-2 array)
 eds = dt.edges();
 
-% radius of the circule circumscribed to each edge
+% radius of the circle circumscribed to each edge
 rads = edgeLength([pts(eds(:,1), :) pts(eds(:,2), :)]) / 2;
 
 % extract middle point of each edge
@@ -56,6 +56,7 @@ tol = max(max(pts) - min(pts)) * eps;
 keep = dists >= rads - tol;
 edges = eds(keep, :);
 
+% format output depending on number of output arguments
 if nargout < 2
     varargout = {edges};
 else

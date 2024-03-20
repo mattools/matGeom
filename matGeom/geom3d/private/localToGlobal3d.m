@@ -7,7 +7,7 @@ function trans = localToGlobal3d(varargin)
 %   This is a low-level function, used by several drawing functions.
 %
 %   The transform is defined by:
-%   - CENTER: the position of the local origin into the World coordinate
+%   - CENTER: the position of the local origin into the world coordinate
 %       system
 %   - THETA: colatitude, defined as the angle with the Oz axis (between 0
 %       and 180 degrees), positive in the direction of the of Oy axis.
@@ -17,7 +17,7 @@ function trans = localToGlobal3d(varargin)
 %       around the direction vector, between 0 and 360 degrees
 %
 %   The resulting transform is obtained by applying (in that order):
-%   - Rotation by PSI   around he Z-axis
+%   - Rotation by PSI   around the Z-axis
 %   - Rotation by THETA around the Y-axis
 %   - Rotation by PHI   around the Z-axis
 %   - Translation by vector CENTER
@@ -30,18 +30,14 @@ function trans = localToGlobal3d(varargin)
 %   Example
 %   localToGlobal3d
 %
-%   See also
-%   transforms3d, createEulerAnglesRotation
-%
+%   See also 
+%   transforms3d, eulerAnglesToRotation3d
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2009-06-19,    using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRA - Cepia Software Platform.
-
-%   HISTORY
-%   19/08/2009 fix bug in parsing center with 4 args
-%   2011-06-21 use degrees
+% E-mail: david.legland@inrae.fr
+% Created: 2009-06-19, using Matlab 7.7.0.471 (R2008b)
+% Copyright 2009-2023 INRA - Cepia Software Platform
 
 % extract the components of the transform
 if nargin == 1

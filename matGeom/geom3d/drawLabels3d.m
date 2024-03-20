@@ -16,15 +16,11 @@ function varargout = drawLabels3d(varargin)
 %     drawLabels
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/01/2019.
-%
-
-%   HISTORY
-%   2019-01-31 write 3D version from drawLabels
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2019-01-31
+% Copyright 2019-2023 INRA - TPV URPOI - BIA IMASTE
 
 %% Parse input arguments
 
@@ -34,12 +30,7 @@ if isempty(varargin)
 end
 
 % extract handle of axis to draw on
-if isscalar(varargin{1}) && ishandle(varargin{1})
-    ax = varargin{1};
-    varargin(1) = [];
-else
-    ax = gca;
-end
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
 % process input parameters
 var = varargin{1};
@@ -71,7 +62,10 @@ end
 % parse format for displaying numeric values
 format = '%.2f';
 if ~isempty(varargin)
-    format = varargin{1};
+    if varargin{1}(1) == '%'
+        format = varargin{1};
+        varargin(1)=[];
+    end
 end
 if size(format, 1) == 1 && size(px, 1) > 1
     format = repmat(format, size(px, 1), 1);
@@ -95,7 +89,7 @@ labels = char(labels);
 
 
 %% display the text
-h = text(px, py, pz, labels, 'parent', ax);
+h = text(hAx, px, py, pz, labels, varargin{:});
 
 
 %% format output

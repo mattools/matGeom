@@ -1,12 +1,12 @@
 function varargout = sph2cart2d(theta, phi, rho)
 %SPH2CART2D Convert spherical coordinates to cartesian coordinates in degrees.
 %
-%   C = SPH2CART2(THETA, PHI, RHO)
-%   C = SPH2CART2(THETA, PHI)       (assume rho = 1)
-%   C = SPH2CART2(S)
-%   [X, Y, Z] = SPH2CART2(THETA, PHI, RHO);
+%   C = SPH2CART2D(THETA, PHI, RHO)
+%   C = SPH2CART2D(THETA, PHI)       (assume rho = 1)
+%   C = SPH2CART2D(S)
+%   [X, Y, Z] = SPH2CART2D(THETA, PHI, RHO);
 %
-%   S = [phi theta rho] (spherical coordinate).
+%   S = [theta phi rho] (spherical coordinate).
 %   C = [X Y Z]  (cartesian coordinate)
 %
 %   The following convention is used:
@@ -18,14 +18,29 @@ function varargout = sph2cart2d(theta, phi, rho)
 %   Discussion on choice for convention can be found at:
 %   http://www.physics.oregonstate.edu/bridge/papers/spherical.pdf
 %
-%   See also:
-%   angles3d, cart2sph2d, sph2cart2
+%   Example
+%     xyz = sph2cart2d(90, 0, 10)
+%     xyz =
+%        10    0    0
 %
+%     xyz = sph2cart2d(90, 90, 10)
+%     xyz =
+%         0   10    0
+%
+%     % check consistency with cart2sph2d
+%     cart2sph2d(sph2cart2d(30, 40, 5))
+%     ans =
+%        30.0000   40.0000    5.0000
+%
+%   See also 
+%     angles3d, cart2sph2d, sph2cart2, eulerAnglesToRotation3d
+%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2011-06-29,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2011-06-29, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 % Process input arguments
 if nargin == 1

@@ -6,14 +6,14 @@ function clipped = clipEdge3d(edge, box)
 %   Example
 %   clipEdge3d
 %
-%   See also
+%   See also 
 %     lines3d, edges3d, clipLine3d
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2018-04-12,    using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2018 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2018-04-12, using Matlab 9.3.0.713579 (R2017b)
+% Copyright 2018-2023 INRA - Cepia Software Platform
 
 % compute supporting line of edge
 line = [edge(:, 1:3) edge(:,4:6)-edge(:,1:3)];

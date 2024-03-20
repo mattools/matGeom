@@ -26,8 +26,10 @@ function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)
 %   Concatenates all angles in a single 1-by-3 array.
 %   
 %   ... = eulerAnglesToRotation3d(ANGLES, CONVENTION)
-%   CONVENTION specifies the axis rotation sequence. 
-%   Supported conventions are: 'ZYX', 'ZYZ'. Default is 'ZYX'.
+%   CONVENTION specifies the axis rotation sequence. Default is 'ZYX'.
+%   Supported conventions are: 
+%       'ZYX','ZXY','YXZ','YZX','XYZ','XZY'
+%       'ZYZ','ZXZ','YZY','YXY','XZX','XYX'
 %
 %   Example
 %   [n e f] = createCube;
@@ -38,33 +40,35 @@ function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)
 %   n2 = transformPoint3d(n, rot);
 %   drawPolyhedron(n2, f);
 %
-%   See also
+%   See also 
 %   transforms3d, createRotationOx, createRotationOy, createRotationOz
 %   rotation3dAxisAndAngle
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2010-07-22,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform.
-
-%   HISTORY
-%   2011-06-20 rename and use degrees
-
-p = inputParser;
-validStrings = {'ZYX','ZYZ'};
-addOptional(p,'convention','ZYX',@(x) any(validatestring(x,validStrings)));
-parse(p,varargin{:});
-convention=p.Results.convention;
+% E-mail: david.legland@inrae.fr
+% Created: 2010-07-22, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2010-2023 INRA - Cepia Software Platform
 
 % Process input arguments
 if size(phi, 2) == 3
+    if nargin > 1
+        varargin{1} = theta;
+    end
     % manages arguments given as one array
     psi     = phi(:, 3);
     theta   = phi(:, 2);
     phi     = phi(:, 1);
 end
+
+p = inputParser;
+validStrings = {...
+    'ZYX','ZXY','YXZ','YZX','XYZ','XZY',...
+    'ZYZ','ZXZ','YZY','YXY','XZX','XYX'};
+addOptional(p,'convention','ZYX',@(x) any(validatestring(x,validStrings)));
+parse(p,varargin{:});
+convention=p.Results.convention;
 
 % create individual rotation matrices
 k = pi / 180;
@@ -74,10 +78,50 @@ switch convention
         rot1 = createRotationOx(psi * k);
         rot2 = createRotationOy(theta * k);
         rot3 = createRotationOz(phi * k);
+    case 'ZXY'
+        rot1 = createRotationOy(psi * k);
+        rot2 = createRotationOx(theta * k);
+        rot3 = createRotationOz(phi * k);
+    case 'YXZ'
+        rot1 = createRotationOz(psi * k);
+        rot2 = createRotationOx(theta * k);
+        rot3 = createRotationOy(phi * k);
+    case 'YZX'
+        rot1 = createRotationOx(psi * k);
+        rot2 = createRotationOz(theta * k);
+        rot3 = createRotationOy(phi * k);
+    case 'XYZ'
+        rot1 = createRotationOz(psi * k);
+        rot2 = createRotationOy(theta * k);
+        rot3 = createRotationOx(phi * k);
+    case 'XZY'
+        rot1 = createRotationOy(psi * k);
+        rot2 = createRotationOz(theta * k);
+        rot3 = createRotationOx(phi * k);
     case 'ZYZ'
         rot1 = createRotationOz(psi * k);
         rot2 = createRotationOy(theta * k);
         rot3 = createRotationOz(phi * k);
+    case 'ZXZ'
+        rot1 = createRotationOz(psi * k);
+        rot2 = createRotationOx(theta * k);
+        rot3 = createRotationOz(phi * k);
+    case 'YZY'
+        rot1 = createRotationOy(psi * k);
+        rot2 = createRotationOz(theta * k);
+        rot3 = createRotationOy(phi * k);
+    case 'YXY'
+        rot1 = createRotationOy(psi * k);
+        rot2 = createRotationOx(theta * k);
+        rot3 = createRotationOy(phi * k);
+    case 'XZX'
+        rot1 = createRotationOx(psi * k);
+        rot2 = createRotationOz(theta * k);
+        rot3 = createRotationOx(phi * k);
+    case 'XYX'
+        rot1 = createRotationOx(psi * k);
+        rot2 = createRotationOy(theta * k);
+        rot3 = createRotationOx(phi * k);
 end
 
 % concatenate matrices

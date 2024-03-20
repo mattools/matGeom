@@ -19,16 +19,12 @@ function varargout = ellipseAsPolygon(ellipse, N)
 %
 %   See also:
 %   ellipses2d, circleAsPolygon, rectAsPolygon, drawEllipse
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 06/04/2005.
-%
 
-%   HISTORY
-%   2011-03-30 use angles in degrees, add default value for N
-%   2011-12-09 deprecate
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-04-06
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 warning('matGeom:deprecated', ...
     'function "ellipseAsCurve" is deprecated, use "ellipseToPolygon" instead');

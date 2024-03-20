@@ -14,14 +14,14 @@ function [nodes2, edges2] = pruneGraph(nodes, edges)
 %     subplot(2, 1, 2); drawGraph(nodes2, edges2); 
 %     axis equal; axis([0 110 10 50]);
 %
-%   See also
+%   See also 
 %   graphs
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2015-02-19,    using Matlab 8.4.0.150421 (R2014b)
-% Copyright 2015 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2015-02-19, using Matlab 8.4.0.150421 (R2014b)
+% Copyright 2015-2023 INRA - Cepia Software Platform
 
 nNodes = size(nodes, 1);
 degs = grNodeDegree(1:nNodes, edges)';

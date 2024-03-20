@@ -26,19 +26,15 @@ function box = boundingBox(points)
 %     axis([-2 2 -2 2 -2 2]);
 %     view(3)
 %     
-%   See also
+%   See also 
 %   polygonBounds, drawBox
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2011-04-01,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
-
-% HISTORY
-% 2011-04-08 add example
-% 2011-12-09 rename to boundingBox
+% E-mail: david.legland@inrae.fr
+% Created: 2011-04-01, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 % compute extreme x and y values
 xmin = min(points(:,1));

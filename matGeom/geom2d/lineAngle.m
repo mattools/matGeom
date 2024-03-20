@@ -3,25 +3,21 @@ function theta = lineAngle(varargin)
 %
 %   A = lineAngle(LINE);
 %   Returns the angle between horizontal, right-axis and the given line.
-%   Angle is fiven in radians, between 0 and 2*pi, in counter-clockwise
+%   Angle is given in radians, between 0 and 2*pi, in counter-clockwise
 %   direction.
 %
 %   A = lineAngle(LINE1, LINE2);
 %   Returns the directed angle between the two lines. Angle is given in
 %   radians between 0 and 2*pi, in counter-clockwise direction.
 %
-%   See also
+%   See also 
 %   lines2d, angles2d, createLine, normalizeAngle
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
 
-%   HISTORY
-%   2004-02-19 added support for multiple lines.
-%   2011-01-20 use bsxfun
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 nargs = length(varargin);
 if nargs == 1

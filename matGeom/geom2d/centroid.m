@@ -22,21 +22,14 @@ function center = centroid(varargin)
 %   ans =
 %        4     3
 %
-%   See Also:
+%   See also 
 %   points2d, polygonCentroid
-%   
-% ---------
+
+% ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% created the 07/04/2003.
-% Copyright 2010 INRA - Cepia Software Platform.
-%
-
-%   HISTORY
-%   2009-06-22 support for 3D points
-%   2010-04-12 fix bug in weighted centroid
-%   2010-12-06 update doc
-
+% E-mail: david.legland@inrae.fr
+% Created: 2003-04-07
+% Copyright 2003-2023 INRA - Cepia Software Platform
 
 %% extract input arguments
 

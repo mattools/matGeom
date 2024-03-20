@@ -28,15 +28,15 @@ function [min_width, min_angle] = minimumCaliperDiameter(points)
 %   Wikipedia:
 %   http://en.wikipedia.org/wiki/Rotating_calipers
 %
-%   See also
+%   See also 
 %   polygons2d, convexHull, orientedBox
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2011-04-08,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2011-04-08, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 % first, compute convex hull of the polygon
 inds = convhull(points(:,1), points(:,2));

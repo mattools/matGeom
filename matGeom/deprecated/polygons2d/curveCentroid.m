@@ -16,18 +16,15 @@ function center = curveCentroid(varargin)
 %
 %   See also :
 %   polygons2d, centroid, polygonCentroid, curveLength
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 22/05/2006.
-%
 
-%   HISTORY
-%   23/07/2009 deprecate and replace by 'reverseLine'.
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2006-05-22
+% Copyright 2006 INRA - TPV URPOI - BIA IMASTE
 
 % deprecation warning
-warning('geom2d:deprecated', ...
+warning('matGeom:polygons2d:deprecated', ...
     '''curveCentroid'' is deprecated, use ''polylineCentroid'' instead');
 
 

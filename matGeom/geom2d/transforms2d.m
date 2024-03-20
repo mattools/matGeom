@@ -22,17 +22,17 @@ function transforms2d(varargin)
 %     drawPolygon(polyT, 'b');
 %
 %
-%   See also:
+%   See also 
 %   createTranslation, createRotation, createRotation90, createScaling
 %   createHomothecy, createLineReflection, createBasisTransform
 %   transformPoint, transformVector, transformLine, transformEdge
-%   rotateVector, fitAffineTransform2d
+%   rotateVector, principalAxesTransform, fitAffineTransform2d
 %   polynomialTransform2d, fitPolynomialTransform2d
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% E-mail: david.legland@inrae.fr
+% Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2008-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 help('transforms2d');

@@ -1,5 +1,5 @@
-function vol = meshVolume(vertices, edges, faces)
-%MESHVOLUME Volume of the space enclosed by a polygonal mesh.
+function vol = meshVolume(varargin)
+%MESHVOLUME (Signed) volume of the space enclosed by a polygonal mesh.
 %
 %   V = meshVolume(VERTS, FACES)
 %   Computes the volume of the space enclosed by the polygonal mesh
@@ -19,22 +19,17 @@ function vol = meshVolume(vertices, edges, faces)
 %     ans = 
 %         1
 %
-%   See also
-%   meshes3d, meshSurfaceArea, tetrahedronVolume
+%   See also 
+%   meshes3d, meshSurfaceArea, tetrahedronVolume, meshComplement
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
-% Created: 2012-10-01,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2012-10-01, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012-2023 INRA - Cepia Software Platform
 
-% HISTORY
-% 2013-08-16 speed improvement by Sven Holcombe
-
-% check input number
-if nargin == 2
-    faces = edges;
-end
+% parse input
+[vertices, faces] = parseMeshData(varargin{:});
 
 % ensure mesh has triangle faces
 faces = triangulateFaces(faces);

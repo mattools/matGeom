@@ -21,17 +21,15 @@ function b = isPointInEllipse(point, ellipse, varargin)
 %   ans =
 %       1
 %
-%   See also:
+%   See also 
 %     ellipses2d, isPointInCircle
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 11/03/2011
-%
-
-%   HISTORY
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2011-03-11
+% Copyright 2011-2023 INRA - TPV URPOI - BIA IMASTE
 
 % extract computation tolerance
 tol = 1e-14;
@@ -50,4 +48,3 @@ pTrans = transformPoint(pTrans, trans);
 
 % test if distance to origin smaller than 1
 b = sqrt(sum(power(pTrans, 2), 2)) - 1 <= tol;
-    

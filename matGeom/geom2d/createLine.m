@@ -19,10 +19,10 @@ function line = createLine(varargin)
 %   LINE(4)). 
 %   
 %   L = createLine(THETA);
-%   Create a polar line originated at (0,0) and with angle THETA.
+%   Create a polar line originated at (0,0) and with angle THETA in radians.
 %
 %   L = createLine(p, THETA);
-%   Create a polar line originated at p and with angle THETA.
+%   Create a polar line originated at p and with angle THETA in radians.
 %
 %   L = createLine(RHO, THETA);
 %   Create a polar line with normal theta, and with min distance to origin
@@ -34,19 +34,14 @@ function line = createLine(varargin)
 %   dimension. The result is then an array of lines, of dimensions [N*4].
 %
 %
-%   See also:
+%   See also 
 %   lines2d, createEdge, createRay
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
 
-%   HISTORY :
-%   18/02/2004 : add more possibilities to create lines (4 parameters,
-%      all param in a single tab, and point + dx + dy.
-%      Also add support for creation of arrays of lines.
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 %   NOTE : A line can also be represented with a 1*5 array : 
 %   [x0 y0 dx dy t].
@@ -104,6 +99,8 @@ elseif length(varargin)==2
         % first param is angle of line, and second param is signed distance
         % to origin.
         line = [v1.*cos(v2) v1.*sin(v2) -sin(v2) cos(v2)];
+    elseif size(v1, 2)==3 || size(v2, 2)==3
+        error('The 1st or 2nd input argument has 3 columns. You may want to try createLine3d.');
     else
         % first input parameter is first point, and second input is the
         % second point.

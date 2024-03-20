@@ -25,10 +25,7 @@ function P = InterX(L1,varargin)
 %       r2 = sin(8*t)+2;  x2 = r2.*cos(t); y2 = r2.*sin(t);
 %       P = InterX([x1;y1],[x2;y2]);
 %       plot(x1,y1,x2,y2,P(1,:),P(2,:),'ro')
-
-%   Author : NS
-%   Version: 3.0, 21 Sept. 2010
-
+%
 %   Two words about the algorithm: Most of the code is self-explanatory.
 %   The only trick lies in the calculation of C1 and C2. To be brief, this
 %   is essentially the two-dimensional analog of the condition that needs
@@ -41,6 +38,15 @@ function P = InterX(L1,varargin)
 %   Each factor of the 'C' arrays is essentially a matrix containing 
 %   the numerators of the signed distances between points of one curve
 %   and line segments of the other.
+%
+%   Source
+%   https://mathworks.com/matlabcentral/fileexchange/22441
+
+% ------
+% Author: NS
+% E-mail: N/A
+% Created: 2010-09-21
+% Copyright 2010-2023
 
     %...Argument checks and assignment of L2
     narginchk(1,2);

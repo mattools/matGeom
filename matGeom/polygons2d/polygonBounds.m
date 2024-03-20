@@ -1,5 +1,5 @@
 function box = polygonBounds(polygon)
-%POLYGONBOUNDS Compute the bounding box of a polygon.
+%POLYGONBOUNDS Computes the bounding box of a polygon.
 %
 %   BOX = polygonBounds(POLY);
 %   Returns the bounding box of the polygon. 
@@ -11,16 +11,15 @@ function box = polygonBounds(polygon)
 %   vertex coordinates, or by using a cell array, each cell containing the
 %   vertex coordinates of a polygon loop. 
 %
-%   See also
+%   See also 
 %   polygons2d, boxes2d, boundingBox
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
-% Created: 2007-10-12,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - Cepia software platform
-
+% E-mail: david.legland@inrae.fr
+% Created: 2007-10-12, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2007-2023 INRA - Cepia software platform
 
 % transform as a cell array of simple polygons
 polygons = splitPolygons(polygon);

@@ -30,7 +30,7 @@ function varargout = createDurerPolyhedron(varargin)
 %     axis equal; axis([-1 1 -1 1 -1 1]);
 %     view(3)
 %
-%   See also
+%   See also 
 %     meshes3d, createCube, createOctahedron
 %
 %   References
@@ -39,9 +39,9 @@ function varargout = createDurerPolyhedron(varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2012-07-31,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2012-07-31, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012-2023 INRA - Cepia Software Platform
 
 % start from a cube basis
 [v, f] = createCube;
@@ -60,9 +60,9 @@ z1 = zmax - d;
 
 % clip by two horizontal planes
 plane1  = createPlane([0 0 z1], [0 0 1]);
-[v, f]   = clipConvexPolyhedronHP(v, f, plane1);
+[v, f]   = clipConvexPolyhedronByPlane(v, f, plane1);
 plane2  = createPlane([0 0 -z1], [0 0 -1]);
-[v, f]   = clipConvexPolyhedronHP(v, f, plane2);
+[v, f]   = clipConvexPolyhedronByPlane(v, f, plane2);
 
 % complete with edge information
 e = meshEdges(f);

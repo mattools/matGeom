@@ -11,14 +11,14 @@ function varargout = drawVertices(varargin)
 %     hold on; axis equal;
 %     drawVertices(poly);
 %
-%   See also
+%   See also 
 %   drawPoint, drawPolygon, drawPolyline
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2011-12-11,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2011-12-11, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 % extract handle of axis to draw on
 if isAxisHandle(varargin{1})

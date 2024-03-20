@@ -1,5 +1,5 @@
 function varargout = drawEdge(varargin)
-%DRAWEDGE Draw an edge given by 2 points.
+%DRAWEDGE Draw an edge defined by its two extremities.
 %   
 %   drawEdge(x1, y1, x2, y2);
 %   draw an edge between the points (x1 y1) and  (x2 y2).
@@ -21,23 +21,15 @@ function varargout = drawEdge(varargin)
 %
 %   H = drawEdge(...) return handle(s) to created edges(s)
 %
-%   See also:
+%   See also 
 %   edges2d, drawCenteredEdge, drawLine
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
-
-%   HISTORY
-%   19/02/2004 add support for arrays of edges.
-%   31/03/2004 change format of edges to [P1 P2] and variants.
-%   28/11/2004 add support for 3D edges
-%   01/08/2005 add support for drawing options
-%   31/05/2007 update doc, and code makeup
-%   03/08/2010 re-organize code
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 % separate edge and optional arguments
 [ax, edge, options] = parseInputArguments(varargin{:});
@@ -93,12 +85,7 @@ end
 function [ax, edge, options] = parseInputArguments(varargin)
 
 % extract handle of axis to draw on
-if isAxisHandle(varargin{1})
-    ax = varargin{1};
-    varargin(1) = [];
-else
-    ax = gca;
-end
+[ax, varargin] = parseAxisHandle(varargin{:});
 
 % find the number of arguments defining edges
 nbVal = 0;

@@ -1,0 +1,200 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>demo_ellipse_creation</title><meta name="generator" content="MATLAB 9.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-04-04"><meta name="DC.source" content="demo_ellipse_creation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Use explicit representation</a></li><li><a href="#3">Fit an ellipse to a set of points</a></li><li><a href="#4">Equivalent ellipse from a set of points</a></li></ul></div><pre class="codeinput"><span class="comment">% Demo script on various ways to create an ellipse.</span>
+<span class="comment">%</span>
+<span class="comment">%   output = demo_ellipse_creation(input)</span>
+<span class="comment">%</span>
+<span class="comment">%   Example</span>
+<span class="comment">%   demo_ellipse_creation</span>
+<span class="comment">%</span>
+<span class="comment">%   See also</span>
+<span class="comment">%</span>
+
+<span class="comment">% ------</span>
+<span class="comment">% Author: David Legland</span>
+<span class="comment">% e-mail: david.legland@inrae.fr</span>
+<span class="comment">% INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+<span class="comment">% Created: 2022-09-09,    using Matlab 9.12.0.1884302 (R2022a)</span>
+<span class="comment">% Copyright 2022 INRAE.</span>
+</pre><h2 id="2">Use explicit representation</h2><pre class="codeinput">center = [50 50];
+radii = [40 20];
+theta = 30;
+elli0 = [center radii theta];
+
+figure; hold <span class="string">on</span>; axis <span class="string">square</span>; axis([0 100 0 100]);
+drawEllipse(elli0, <span class="string">'lineWidth'</span>, 2, <span class="string">'color'</span>, <span class="string">'b'</span>);
+</pre><img vspace="5" hspace="5" src="demo_ellipse_creation_01.png" alt=""> <h2 id="3">Fit an ellipse to a set of points</h2><pre class="codeinput"><span class="comment">% choose several points on the ellipse, and add some noise</span>
+nPoints = 100;
+ti = rand(nPoints, 1) * 2 * pi;
+pts = ellipsePoint(elli0, ti) + randn(nPoints, 2) * 2;
+
+<span class="comment">% fit the ellipse to the set of points</span>
+elli = fitEllipse(pts);
+
+<span class="comment">% display points and fit result</span>
+figure; hold <span class="string">on</span>; axis <span class="string">square</span>; axis([0 100 0 100]);
+drawPoint(pts, <span class="string">'linewidth'</span>, 1, <span class="string">'color'</span>, <span class="string">'b'</span>);
+drawEllipse(elli, <span class="string">'lineWidth'</span>, 2, <span class="string">'color'</span>, <span class="string">'m'</span>);
+</pre><img vspace="5" hspace="5" src="demo_ellipse_creation_02.png" alt=""> <h2 id="4">Equivalent ellipse from a set of points</h2><pre class="codeinput"><span class="comment">% generate random points within the ellipse,</span>
+<span class="comment">% with a density equal to 1 (1 point per unit square on average)</span>
+nPoints = round(ellipseArea(elli));
+pts0 = zeros(nPoints, 2);
+<span class="keyword">for</span> iPoint = 1:nPoints
+    <span class="keyword">while</span> true
+        pt = rand([1 2]) * 100;
+        <span class="keyword">if</span> isPointInEllipse(pt, elli0)
+            pts(iPoint,:) = pt;
+            <span class="keyword">break</span>;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">% computes equivalent ellipse</span>
+elli = equivalentEllipse(pts);
+
+<span class="comment">% display result</span>
+figure; hold <span class="string">on</span>; axis <span class="string">square</span>; axis([0 100 0 100]);
+drawPoint(pts, <span class="string">'b.'</span>);
+drawEllipse(elli, <span class="string">'lineWidth'</span>, 2, <span class="string">'color'</span>, <span class="string">'m'</span>);
+drawEllipseAxes(elli, <span class="string">'lineWidth'</span>, 2, <span class="string">'color'</span>, <span class="string">'m'</span>);
+</pre><img vspace="5" hspace="5" src="demo_ellipse_creation_03.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+% Demo script on various ways to create an ellipse.
+%
+%   output = demo_ellipse_creation(input)
+%
+%   Example
+%   demo_ellipse_creation
+%
+%   See also
+%
+ 
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% Author: David Legland
+% e-mail: david.legland@inrae.fr
+% INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Created: 2022-09-09,    using Matlab 9.12.0.1884302 (R2022a)
+% Copyright 2022 INRAE.
+
+
+%% Use explicit representation
+
+center = [50 50];
+radii = [40 20];
+theta = 30;
+elli0 = [center radii theta];
+
+figure; hold on; axis square; axis([0 100 0 100]);
+drawEllipse(elli0, 'lineWidth', 2, 'color', 'b');
+
+
+%% Fit an ellipse to a set of points
+
+% choose several points on the ellipse, and add some noise
+nPoints = 100;
+ti = rand(nPoints, 1) * 2 * pi;
+pts = ellipsePoint(elli0, ti) + randn(nPoints, 2) * 2;
+
+% fit the ellipse to the set of points
+elli = fitEllipse(pts);
+
+% display points and fit result
+figure; hold on; axis square; axis([0 100 0 100]);
+drawPoint(pts, 'linewidth', 1, 'color', 'b');
+drawEllipse(elli, 'lineWidth', 2, 'color', 'm');
+
+
+%% Equivalent ellipse from a set of points
+
+% generate random points within the ellipse, 
+% with a density equal to 1 (1 point per unit square on average)
+nPoints = round(ellipseArea(elli));
+pts0 = zeros(nPoints, 2);
+for iPoint = 1:nPoints
+    while true
+        pt = rand([1 2]) * 100;
+        if isPointInEllipse(pt, elli0)
+            pts(iPoint,:) = pt;
+            break;
+        end
+    end
+end
+
+% computes equivalent ellipse
+elli = equivalentEllipse(pts);
+
+% display result
+figure; hold on; axis square; axis([0 100 0 100]);
+drawPoint(pts, 'b.');
+drawEllipse(elli, 'lineWidth', 2, 'color', 'm');
+drawEllipseAxes(elli, 'lineWidth', 2, 'color', 'm');
+
+##### SOURCE END #####
+--></body></html>

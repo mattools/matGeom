@@ -16,24 +16,15 @@ function dist = distancePoints(p1, p2, varargin)
 %   D = distancePoints(..., 'diag')
 %   compute only distances between P1(i,:) and P2(i,:).
 %
-%   See also:
+%   See also 
 %   points2d, minDistancePoints, nndist, hausdorffDistance
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
-% Copyright 2009 INRA - Cepia Software Platform.
-% created the 24/02/2004.
-%
-
-%   HISTORY :
-%   25/05/2004: manage 2 array of points
-%   07/04/2004: add option for computing only diagonal.
-%   30/10/2006: generalize to any dimension, and manage different norms
-%   03/01/2007: bug for arbitrary norm, and update doc
-%   28/08/2007: fix bug for norms 2 and infinite, in diagonal case
-
+% E-mail: david.legland@inrae.fr
+% Created: 2004-02-24
+% Copyright 2004-2023 INRA - Cepia Software Platform
 
 %% Setup options
 

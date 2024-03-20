@@ -1,14 +1,16 @@
 function progressbar(n,N,w)
+%PROGRESSBAR Display a progress bar.
+%
+%   progressbar(n,N,w);
+%   Displays the progress of n out of N. n should start at 1. w is the 
+%   width of the bar (default w=20).
+% 
 
-% progressbar - display a progress bar
-%
-%    progressbar(n,N,w);
-%
-% displays the progress of n out of N.
-% n should start at 1.
-% w is the width of the bar (default w=20).
-%
-%   Copyright (c) Gabriel Peyré 2006
+% ------
+% Author: Gabriel Peyré
+% E-mail: gabriel.peyre@ens.fr
+% Created: 2006
+% Copyright 2006-2023
 
 if nargin<3
     w = 20;

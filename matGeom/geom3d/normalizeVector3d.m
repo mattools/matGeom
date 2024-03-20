@@ -8,19 +8,21 @@ function vn = normalizeVector3d(v)
 %   If V is a N-by-3 array, normalization is performed for each row of the
 %   input array.
 %
-%   See also:
-%   vectors3d, vectorNorm3d
+%   If V is a M-by-N-by-3 array, normalization is performed along the last
+%   dimension of the array.
+%
+%   See also 
+%     vectors3d, vectorNorm3d
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 29/11/2004.
-%
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-11-29
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
-% HISTORY
-% 2005-11-30 correct a bug
-% 2009-06-19 rename as normalizeVector3d
-% 2010-11-16 use bsxfun (Thanks to Sven Holcombe)
-
-vn   = bsxfun(@rdivide, v, sqrt(sum(v.^2, 2)));
+if ismatrix(v)
+    vn = bsxfun(@rdivide, v, sqrt(sum(v.^2, 2)));
+else
+    vn = bsxfun(@rdivide, v, sqrt(sum(v.^2, ndims(v))));
+end

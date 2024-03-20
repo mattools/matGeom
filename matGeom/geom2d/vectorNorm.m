@@ -22,26 +22,15 @@ function n = vectorNorm(v, varargin)
 %   n2 =
 %       10
 %
-%   See Also:
-%   vectors2d, vectorAngle
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 21/02/2005.
+%   See also 
+%     vectors2d, vectorAngle
 %
 
-%   HISTORY
-%   02/05/2006 manage several norms
-%   18/09/2007 use 'isempty'
-%   15/10/2008 add comments
-%   22/05/2009 rename as vectorNorm
-%   01/03/2010 fix bug for inf norm
-
-
-% size of vector
-dim = size(v);
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-21
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % extract the type of norm to compute
 d = 2;
@@ -51,30 +40,18 @@ end
 
 if d==2
     % euclidean norm: sum of squared coordinates, and take square root
-    if dim(1)==1 || dim(2)==1
-        n = sqrt(sum(v.*v));
-    else
-        n = sqrt(sum(v.*v, 2));
-    end
+    n = sqrt(sum(v.*v, ndims(v)));
+    
 elseif d==1 
     % absolute norm: sum of absolute coordinates
-    if dim(1)==1 || dim(2)==1
-        n = sum(abs(v));
-    else
-        n = sum(abs(v), 2);
-    end
+    n = sum(abs(v), ndims(v));
+
 elseif d==inf
     % infinite norm: uses the maximal corodinate
-    if dim(1)==1 || dim(2)==1
-        n = max(v);
-    else
-        n = max(v, [], 2);
-    end
+    n = max(v, [], ndims(v));
+
 else
     % Other norms, use explicit but slower expression  
-    if dim(1)==1 || dim(2)==1
-        n = power(sum(power(v, d)), 1/d);
-    else
-        n = power(sum(power(v, d), 2), 1/d);
-    end
+    n = power(sum(power(v, d), ndims(v)), 1/d);
+    
 end

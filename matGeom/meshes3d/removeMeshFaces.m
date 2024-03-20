@@ -25,12 +25,14 @@ function varargout = removeMeshFaces(v, f, fI)
 %     drawMesh(v2, f2, 'faceAlpha', .7);
 %     view(3); axis equal
 %   
-%   See also
+%   See also 
 %   meshes3d, drawMesh
-%   
-% ---------
+
+% ------
 % Authors: oqilipo, David Legland
+% E-mail: david.legland@inrae.fr
 % Created: 2017-07-04
+% Copyright 2017-2023
 
 % parse inputs
 narginchk(2,3)
@@ -43,7 +45,7 @@ end
 
 p = inputParser;
 isIndexToFaces = @(x) ...
-    (islogical(x) && isequal(length(fI), size(f,1))) || ...
+    (islogical(x) && isequal(length(x), size(f,1))) || ...
     (all(floor(x)==x) && min(x)>=1 && max(x)<=size(f,1));
 addRequired(p,'fI',isIndexToFaces)
 parse(p, fI);

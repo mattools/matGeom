@@ -21,14 +21,14 @@ function res = formatMeshOutput(nbArgs, vertices, edges, faces)
 % 
 %     varargout = formatMeshOutput(nargout, v, e, f);
 %
-%   See also
+%   See also 
 %   meshes3d, parseMeshData
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2010-12-06,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2010-12-06, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2010-2023 INRA - Cepia Software Platform
 
 if nargin < 4
     faces = edges;
@@ -59,6 +59,5 @@ switch nbArgs
         res{3} = faces;
         
     otherwise
-        error('Can not manage more than 3 outputs');
+        error('Cannot manage more than 3 outputs');
 end
-

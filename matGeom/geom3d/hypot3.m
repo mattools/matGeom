@@ -16,13 +16,13 @@ function h = hypot3(dx, dy, dz)
 %     ans = 
 %         7.0711
 %          
-%   See also
+%   See also 
 %   hypot, vectorNorm3d
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2012-04-29,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2012-04-29, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012-2023 INRA - Cepia Software Platform
 
 h = hypot(hypot(dx, dy), dz);

@@ -5,7 +5,7 @@ function m = curveCSMoment(curve, p, q)
 %   Example
 %   curveCSMoment
 %
-%   See also
+%   See also 
 %   polygons2d, curveMoment, curveCMoment
 %
 %   Reference
@@ -13,12 +13,12 @@ function m = curveCSMoment(curve, p, q)
 %   "Affine curve moment invariants for shape recognition"
 %   Dongmin Zhao and Jie Chen
 %   Pattern Recognition, 1997, vol. 30, pp. 865-901
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2009-03-25,    using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2009-03-25, using Matlab 7.7.0.471 (R2008b)
+% Copyright 2009-2023 INRA - Cepia Software Platform
 
 % compute curve centroid
 centroid = polylineCentroid(curve);

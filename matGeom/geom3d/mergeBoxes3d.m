@@ -11,15 +11,15 @@ function box = mergeBoxes3d(box1, box2)
 %       0 20 0 30 0 50
 %
 %
-%   See also
+%   See also 
 %   boxes3d, drawBox3d, intersectBoxes3d
 %
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2010-07-26,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2010-07-26, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2010-2023 INRA - Cepia Software Platform
 
 % unify sizes of data
 if size(box1,1) == 1
@@ -36,4 +36,3 @@ maxi = max(box1(:,2:2:end), box2(:,2:2:end));
 
 % concatenate result into a new box structure
 box = [mini(:,1) maxi(:,1) mini(:,2) maxi(:,2) mini(:,3) maxi(:,3)];
-

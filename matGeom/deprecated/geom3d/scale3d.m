@@ -21,15 +21,12 @@ function trans = scale3d(varargin)
 %
 %   See also :
 %   scaling3d, transforms3d, transformPoint3d
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 20/04/2006.
-%
 
-%   HISTORY
-%   25/11/2008 deprecate
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2006-04-20
+% Copyright 2006 INRA - TPV URPOI - BIA IMASTE
 
 warning('geom3d:deprecated', ...
     'deprecated: call ''scaling3d'' instead');

@@ -10,18 +10,15 @@ function [nodes2, edges2] = grMergeNodeClusters(nodes, edges)
 %   skeletonization and vectorization.
 %
 %
-%   See Also
+%   See also 
 %   grMergeNodesMedian
 %
 
-%   -----
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 13/08/2003.
-%
-
-%   HISTORY
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-08-13
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 %% Initialization
 

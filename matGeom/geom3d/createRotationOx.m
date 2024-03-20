@@ -17,20 +17,15 @@ function trans = createRotationOx(varargin)
 %   Also specifies origin of rotation. The result is similar as performing
 %   translation(-X0, -Y0, -Z0), rotation, and translation(X0, Y0, Z0).
 %
-%   See also:
+%   See also 
 %   transforms3d, transformPoint3d, createRotationOy, createRotationOz
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 18/02/2005.
-%
-
-%   HISTORY
-%   24/11/2008 changed convention for angle
-%   22/04/2009 rename as createRotationOx
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-18
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % default values
 dx = 0;

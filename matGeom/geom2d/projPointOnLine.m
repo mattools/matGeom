@@ -1,5 +1,5 @@
 function point = projPointOnLine(point, line)
-%PROJPOINTONLINE Project of a point orthogonally onto a line.
+%PROJPOINTONLINE Project a point orthogonally onto a line.
 %
 %   PT2 = projPointOnLine(PT, LINE).
 %   Computes the (orthogonal) projection of point PT onto the line LINE.
@@ -16,18 +16,23 @@ function point = projPointOnLine(point, line)
 %     ans = 
 %          2   3
 %
-%   See also:
-%   lines2d, points2d, isPointOnLine, linePosition
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 07/04/2005.
+%   See also 
+%     lines2d, points2d, isPointOnLine, linePosition, projPointOnEllipse
 %
 
-%   HISTORY
-%   2005-08-06 correct bug when several points were passed as param.
-%   2012-08-23 remove repmats
+% ------
+% Author: David Legland
+% E-mail: david.legland@inrae.fr
+% Created: 2005-07-04
+% Copyright 2005-2023 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+
+% parse input arguments
+p = inputParser;
+addRequired(p, 'point', @(x)validateattributes(x,{'numeric'},...
+    {'size',[nan, 2],'nonnan','real','finite'}))
+addRequired(p, 'line', @(x)validateattributes(x,{'numeric'},...
+    {'size',[nan, 4],'nonnan','real','finite'}))
+parse(p, point, line)
 
 % direction vector of the line
 vx = line(:, 3);

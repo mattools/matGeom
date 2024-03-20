@@ -17,16 +17,14 @@ function point = polarPoint(varargin)
 %   will give a result of [40 20].
 %   
 %
-%   See Also:
+%   See also 
 %   points2d
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 03/05/2004
-%
 
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-05-03
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 % default values
 x0 = 0; y0=0;

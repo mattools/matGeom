@@ -6,15 +6,12 @@ function trans = homothecy(point, ratio)
 %
 %   See also:
 %   transforms2d, transformPoint, createTranslation
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 20/01/2005.
-%
 
-%   HISTORY
-%   22/04/2009: copy to createHomothecy and deprecate
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-01-20
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 % deprecation warning
 warning('geom2d:deprecated', ...

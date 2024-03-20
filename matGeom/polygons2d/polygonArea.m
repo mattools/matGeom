@@ -42,20 +42,15 @@ function area = polygonArea(poly, varargin)
 %   algo adapted from P. Bourke web page
 %   http://paulbourke.net/geometry/polygonmesh/
 %
-%   See also:
+%   See also 
 %   polygons2d, polygonCentroid, polygonSecondAreaMoments, triangleArea
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 05/05/2004.
-%
-
-%   HISTORY
-%   25/04/2005: add support for multiple polygons
-%   12/10/2007: update doc
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-05-05
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 %% Process special cases
 

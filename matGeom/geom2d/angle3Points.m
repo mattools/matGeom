@@ -8,19 +8,15 @@ function theta = angle3Points(varargin)
 %   (P2P1) and line (P2P3).
 %   Result is always given in radians, between 0 and 2*pi.
 %
-%   See Also:
+%   See also 
 %   points2d, angles2d, angle2points
 %
-%
-%   ---------
+
+% ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% created the 23/02/2004.
-% Copyright 2010 INRA - Cepia Software Platform.
-
-
-%   HISTORY :
-%   25/09/2005 : enable single parameter
+% E-mail: david.legland@inrae.fr
+% Created: 2004-02-23
+% Copyright 2004-2023 INRA - Cepia Software Platform
 
 if length(varargin)==3
     p1 = varargin{1};

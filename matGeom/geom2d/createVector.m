@@ -15,14 +15,14 @@ function vect = createVector(p1, p2)
 %
 %   Example
 %
-%   See also
+%   See also 
 %   vectors2d, vectors3d, points2d
 %
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2010-12-07,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2010-12-07, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2010-2023 INRA - Cepia Software Platform
 
 vect = bsxfun(@minus, p2, p1);

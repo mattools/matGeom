@@ -25,19 +25,15 @@ function varargout = fillGraphFaces(varargin)
 %   H = fillGraphFaces(...) 
 %   return handle to the set of faces.
 %   
-%   See also
+%   See also 
 %   graphs, drawGraph, drawGraphEdges
 %   
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-11-24
-% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
-
-%   HISTORY
-%   2017-09-04 code cleanup, rename from drawGraphFaces to fillGraphFaces
-
+% Copyright 2005-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 %% Initialisations
 

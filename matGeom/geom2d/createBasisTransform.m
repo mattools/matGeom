@@ -35,15 +35,15 @@ function transfo = createBasisTransform(source, target)
 %     hold on; drawLine([0 0 1 0], 'r'); drawLine([0 0 0 1], 'r');
 %     t = -1:5; plot(t*10, zeros(size(t)), 'r.'); plot(zeros(size(t)), t*10, 'r.');
 %
-%   See also
+%   See also 
 %   transforms2d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2010-12-03,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2010-12-03, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2010-2023 INRA - Cepia Software Platform
 
 % init basis transform to identity
 t1 = eye(3);

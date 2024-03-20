@@ -1,5 +1,5 @@
 function [vertices, faces] = triangulatePolygonPair(poly1, poly2, varargin)
-% Compute triangulation between a pair of 3D closed curves.
+%TRIANGULATEPOLYGONPAIR Compute triangulation between a pair of 3D closed curves.
 %
 %   [V, F] = triangulatePolygonPair(POLY1, POLY2)
 %
@@ -32,16 +32,16 @@ function [vertices, faces] = triangulatePolygonPair(poly1, poly2, varargin)
 %     drawPolygon3d(curve2, 'color', 'g', 'linewidth', 2);
 %     view(3); axis equal;
 %
-%   See also
-%     meshes3D, triangulateCurvePair, meshSurfaceArea
+%   See also 
+%     meshes3D, triangulatePolygonPair3d, triangulateCurvePair,
+%     meshSurfaceArea 
 %
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2017-05-18,    using Matlab 9.1.0.441655 (R2016b)
-% Copyright 2017 INRA - Cepia Software Platform.
-
+% E-mail: david.legland@inrae.fr
+% Created: 2017-05-18, using Matlab 9.1.0.441655 (R2016b)
+% Copyright 2017-2023 INRA - Cepia Software Platform
 
 %% Settings
 

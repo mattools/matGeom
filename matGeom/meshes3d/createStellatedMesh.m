@@ -8,14 +8,14 @@ function varargout = createStellatedMesh(vertices, faces, varargin)
 %     [v2, f2] = createStellatedMesh(v, f);
 %     figure; drawMesh(v2, f2); axis equal; view(3);
 %
-%   See also
+%   See also 
 %     meshes3d, drawMesh
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2018-11-27,    using Matlab 9.5.0.944444 (R2018b)
-% Copyright 2018 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2018-11-27, using Matlab 9.5.0.944444 (R2018b)
+% Copyright 2018-2023 INRA - Cepia Software Platform
 
 % properties of mesh
 nVertices = size(vertices, 1);

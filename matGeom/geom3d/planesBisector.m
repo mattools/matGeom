@@ -1,11 +1,11 @@
-function out = planesBisector(plane1, plane2)
-% PLANESBISECTOR  Bisector plane between two other planes.
+function bis = planesBisector(plane1, plane2)
+%PLANESBISECTOR Bisector plane between two other planes.
 % 
-%   BIS = planesBisector(PL1, PL2);
-%   Returns the planes that contains the intersection line between PL1 and
-%   PL2 and that bisect the dihedral angle of PL1 and PL2. 
-%   Note that computing the bisector of PL2 and PL1 (in that order) returns
-%   the same plane but with opposite orientation.
+%   BIS = planesBisector(PLANE1, PLANE2);
+%   Returns the planes that contains the intersection line between PLANE1 
+%   and PLANE2 and that bisect the dihedral angle of PLANE1 and PLANE2. 
+%   Note that computing the bisector of PLANE2 and PLANE1 (in that order) 
+%   returns the same plane but with opposite orientation.
 %
 %   Example
 %     % Draw two planes together with their bisector
@@ -25,12 +25,12 @@ function out = planesBisector(plane1, plane2)
 %   See also
 %   planes3d, dihedralAngle, intersectPlanes
 %
-%   Author: Ben X. Kang
-%   Dept. Orthopaedics & Traumatology
-%   Li Ka Shing Faculty of Medicine
-%   The University of Hong Kong
-%   Pok Fu Lam, Hong Kong
-%
+
+% ------
+% Author: Ben X. Kang
+% E-mail: N/A
+% Created: ?
+% Copyright ?
 
 % Let the two planes be defined by equations
 % 
@@ -58,25 +58,18 @@ function out = planesBisector(plane1, plane2)
 % supplementary obtuse dihedral angle, between the two given planes.   
 
 
-P1 = plane1(1:3);			% a point on the plane
+p1 = plane1(1:3);			% a point on the plane
 n1 = planeNormal(plane1);	% the normal of the plane
-% d1 = -dot(n1, P1);		% for line equation
 
-P2 = plane2(1:3);
+p2 = plane2(1:3);
 n2 = planeNormal(plane2);
-% d2 = -dot(n2, P2);
 
-if ~isequal(P1(1:3), P2(1:3))
+if ~isequal(p1(1:3), p2(1:3))
 	L = intersectPlanes(plane1, plane2);	% intersection of the given two planes
-	Pt = L(1:3);							% a point on the line intersection
-% 	v2 = cross(n1-n2, L(4:6));				% another vector lie on the bisect plane
-% 	out = [v1, v2]';
+	pt = L(1:3);							% a point on the line intersection
 else
-	Pt = P1(1:3);
+	pt = p1(1:3);
 end
 
 % use column-wise vector
-out = createPlane(Pt, n1 - n2);
-
-
-%%  EOF  %%
+bis = createPlane(pt, n1 - n2);

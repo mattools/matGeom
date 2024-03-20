@@ -11,15 +11,15 @@ function box = mergeBoxes(box1, box2)
 %       0 20 0 30
 %
 %
-%   See also
+%   See also 
 %   boxes2d, drawBox, intersectBoxes
 %
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2010-07-26,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2010-07-26, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2010-2023 INRA - Cepia Software Platform
 
 % unify sizes of data
 if size(box1,1) == 1

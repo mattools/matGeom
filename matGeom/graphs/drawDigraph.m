@@ -12,14 +12,12 @@ function varargout = drawDigraph(varargin)
 %   H = drawDigraph(...) 
 %   return handle to the set of edges.
 %   
-%   
-%   -----
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 17/08/2004.
-%
 
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-08-17
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 %% Initialisations
 
@@ -60,22 +58,22 @@ hold on;
 nodes = [n1 ; n2];
 e(:,2) = e(:,2)+length(n1);
 
-% Draw a 2 dimensional directed graph ----------------------
+% Draw a 2 dimensional directed graph
 
     
-% Draw 2D Edges ----------------------
+% Draw 2D Edges
 %if ~strcmp(se, 'none') & size(e, 1)>0
 %    he = plot([n1(e(:,1),1) n2(e(:,2),1)]', [n1(e(:,1),2) n2(e(:,2),2)]', se);
 %end
 he = drawDirectedEdges(nodes, e);
 
 hn = [];
-% Draw 2D nodes ----------------------
+% Draw 2D nodes
 if ~strcmp(sn1, 'none')
     hn = plot(n1(:,1), n1(:,2), sn1);   
 end
 
- % Draw 2D nodes ----------------------
+ % Draw 2D nodes
 if ~strcmp(sn2, 'none')
     hn = plot(n2(:,1), n2(:,2), sn2);   
 end

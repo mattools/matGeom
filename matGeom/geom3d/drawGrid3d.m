@@ -24,14 +24,25 @@ function varargout = drawGrid3d(varargin)
 %   H = drawGrid3d(...);
 %   return a vector of handles for each LINE object which was crated.
 %
+%
+%   Example
+%     figure; hold on; axis equal; axis([-5 65 -5 45 -5 45]); view(3);
+%     drawGrid3d([0 0 0], [20 20 20]);
+%
+%
+%   See also 
+%     drawLine3d, drawEdge3d, clipLine3d
 
-%   ------
-%   Author: David Legland
-%   e-mail: david.legland@grignon.inra.fr
-%   Created: 2005-11-17
-%   Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
+% ------
+% Author: David Legland
+% E-mail: david.legland@inrae.fr
+% Created: 2005-11-17
+% Copyright 2005-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
-%% initialize variables -----
+%% initialize variables
+
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
 % default values
 closed = true;
@@ -58,10 +69,10 @@ elseif length(varargin)==2
     spacing = varargin{2};
 end
 
-%% Compute internam data -----
+%% Compute internal data
 
 % get axis limits
-ax = axis;
+ax = axis(hAx);
 x0 = ax(1); x1 = ax(2);
 y0 = ax(3); y1 = ax(4);
 z0 = ax(5); z1 = ax(6);
@@ -83,35 +94,35 @@ if closed
 end
 
 
-%% Draw the grid -----
+%% Draw the grid
 
+% header array, one header for each line segment
 h = [];
-%TODO: rewrite code, avoiding loops
 
 % draw lines parallel to x axis
 for y = ye:dy:yf
     for z = ze:dz:zf
-        h = [h; drawEdge3d([x0 y z x1 y z])]; %#ok<AGROW>
+        h = [h; drawEdge3d(hAx, [x0 y z x1 y z])]; %#ok<AGROW>
     end
 end
 
 % draw lines parallel to y axis
 for x = xe:dx:xf
     for z = ze:dz:zf
-        h = [h; drawEdge3d([x y0 z x y1 z])]; %#ok<AGROW>
+        h = [h; drawEdge3d(hAx, [x y0 z x y1 z])]; %#ok<AGROW>
     end
 end
 
 % draw lines parallel to z axis
 for x = xe:dx:xf
     for y = ye:dy:yf
-        h = [h; drawEdge3d([x y z0 x y z1])]; %#ok<AGROW>
+        h = [h; drawEdge3d(hAx, [x y z0 x y z1])]; %#ok<AGROW>
     end
 end
 
 
-%% Check output arguments -----
+%% Check output arguments
 
-if nargout>0
+if nargout > 0
     varargout{1} = h;
 end

@@ -6,16 +6,14 @@ function ori = circle3dOrigin(varargin)
 %   Returns the origin point of the circle, i.e. the first point used for
 %   drawing circle.
 %
-%   See also:
+%   See also 
 %   circles3d, points3d, circle3dPosition
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 21/02/2005
-%
 
-%   HISTORY
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-21
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % get center and radius
 circle = varargin{1};

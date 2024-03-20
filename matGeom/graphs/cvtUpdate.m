@@ -10,7 +10,7 @@ function varargout = cvtUpdate(germs, points)
 %   P = randPointDiscUnif(10000);
 %   G2 = cvtUpdate(G, P);
 %
-%   See also
+%   See also 
 %
 %
 %   Rewritten from programs found in
@@ -24,10 +24,9 @@ function varargout = cvtUpdate(germs, points)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2007-10-10,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
-
+% E-mail: david.legland@inrae.fr
+% Created: 2007-10-10, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2007-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 %% Init
 

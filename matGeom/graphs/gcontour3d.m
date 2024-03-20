@@ -1,14 +1,16 @@
 function [nodes, edges, faces] = gcontour3d(img)
 %GCONTOUR3D Create contour graph of a 3D binary image.
 %
+%   deprecated: use imageBoundaryGraph instead
 %
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 28/06/2004.
-%
+%   See also 
+%     imageBoundaryGraph
+
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-06-28
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 nodes = zeros([0 3]);   % 3 coordinates vertices
 edges = zeros([0 2]);   % first node and second nodes

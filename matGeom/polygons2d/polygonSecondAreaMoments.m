@@ -12,19 +12,19 @@ function [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(poly)
 %   * http://paulbourke.net/geometry/polygonmesh/
 %   * https://en.wikipedia.org/wiki/Second_moment_of_area
 %
-%   See also
+%   See also 
 %     polygons2d, polygonEquivalentEllipse, polygonArea, polygonCentroid
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2017-09-08,    using Matlab 9.1.0.441655 (R2016b)
-% Copyright 2017 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2017-09-08, using Matlab 9.1.0.441655 (R2016b)
+% Copyright 2017-2023 INRA - Cepia Software Platform
 
-% get vertex coordinates, and recenter polygon
-centroid = polygonCentroid(poly);
-px = poly(:,1) - centroid(1);
-py = poly(:,2) - centroid(2);
+poly = parsePolygon(poly, 'repetition');
+
+px = poly(:,1);
+py = poly(:,2);
 
 % vertex indices
 N = length(px);

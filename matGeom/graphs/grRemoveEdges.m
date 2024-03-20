@@ -4,17 +4,12 @@ function [nodes2, edges2] = grRemoveEdges(nodes, edges, rmEdges)
 %   [NODES2 EDGES2] = grRemoveEdges(NODES, EDGES, EDGES2REMOVE)
 %   Remove some edges in the edges list, and return the modified graph.
 %   The NODES array is not modified.
-%
-%   -----
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 13/08/2003.
-%
 
-%   HISTORY :
-%   10/02/2004 : doc
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-08-13
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 rmEdges = sort(rmEdges);
 

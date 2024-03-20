@@ -20,15 +20,15 @@ function varargout = euclideanMST(points)
 %     edges = euclideanMST(pts);
 %     drawGraph(pts, edges)
 %
-%   See also
+%   See also 
 %   prim_mst, distancePoints, delaunayn
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2007-07-27,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% E-mail: david.legland@inrae.fr
+% Created: 2007-07-27, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2007-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % dimension
 D   = size(points, 2);

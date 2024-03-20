@@ -8,16 +8,14 @@ function point = pointOnLine(line, pos)
 %   LINE and D should have the same number N of rows. The result will have
 %   N rows ans 2 column (x and y positions).
 %
-%   See also:
+%   See also 
 %   lines2d, points2d, onLine, onLine, linePosition
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 07/04/2004.
-%
 
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-04-07
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 angle = lineAngle(line);
 point = [line(:,1) + pos .* cos(angle), line(:,2) + pos .* sin(angle)];

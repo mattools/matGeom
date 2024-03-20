@@ -13,14 +13,14 @@ function len = edgeLength3d(edge, varargin)
 %     ans =
 %         5.3852
 %   
-%   See also
+%   See also 
 %     edges3d, createEdge3d, drawEdge3d
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2018-08-29,    using Matlab 9.4.0.813654 (R2018a)
-% Copyright 2018 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2018-08-29, using Matlab 9.4.0.813654 (R2018a)
+% Copyright 2018-2023 INRA - Cepia Software Platform
 
 if nargin == 1
     dp = edge(:, 4:6) - edge(:, 1:3);

@@ -1,4 +1,4 @@
-function varargout = drawEllipseCylinder(cyl, varargin)
+function varargout = drawEllipseCylinder(varargin)
 %DRAWELLIPSECYLINDER Draw a cylinder with ellipse cross-section.
 %
 %   drawEllipseCylinder(CYL)
@@ -27,17 +27,17 @@ function varargout = drawEllipseCylinder(cyl, varargin)
 %
 %
 %   Example:
-%   figure;drawEllipseCylinder([0 0 0 10 20 30 5]);
+%     figure; drawEllipseCylinder([0 0 0 10 20 30 5 2]);
 %
-%   figure;drawEllipseCylinder([0 0 0 10 20 30 5], 'open');
+%     figure; drawEllipseCylinder([0 0 0 10 20 30 5 2], 'open');
 %
-%   figure;drawEllipseCylinder([0 0 0 10 20 30 5], 'FaceColor', 'r');
+%     figure; drawEllipseCylinder([0 0 0 10 20 30 5 2], 'FaceColor', 'r');
 %
-%   figure;
-%   h = drawEllipseCylinder([0 0 0 10 20 30 5]);
-%   set(h, 'facecolor', 'b');
+%     figure;
+%     h = drawEllipseCylinder([0 0 0 10 20 30 5 2]);
+%     set(h, 'facecolor', 'b');
 %
-%   % Draw three mutually intersecting elliptic cylinders
+%     % Draw three mutually intersecting elliptic cylinders
 %     p1 = [30 0 0];
 %     p2 = [0 30 0];
 %     p3 = [0 0 30];
@@ -51,24 +51,28 @@ function varargout = drawEllipseCylinder(cyl, varargin)
 %     set(gcf, 'renderer', 'opengl')
 %     view([60 30]); light;
 %
-%   See Also:
-%   drawCylinder, drawSphere, cylinderMesh, drawLine3d, surf
+%   See also 
+%     drawCylinder, drawSphere, cylinderMesh, drawLine3d, surf
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 27/02/2014
-
-
-%   HISTORY
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2014-02-27
+% Copyright 2014-2023 INRA - TPV URPOI - BIA IMASTE
 
 %% Input argument processing
+
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
+
+% retrieve cylinder
+cyl = varargin{1};
+varargin(1) = [];
 
 if iscell(cyl)
     res = zeros(length(cyl), 1);
     for i = 1:length(cyl)
-        res(i) = drawEllipseCylinder(cyl{i}, varargin{:});
+        res(i) = drawEllipseCylinder(hAx, cyl{i}, varargin{:});
     end
     
     if nargout > 0
@@ -144,7 +148,7 @@ z2 = reshape(pts(:,3), size(x));
 varargin = [{'FaceColor', 'g', 'edgeColor', 'none'} varargin];
 
 % plot the cylinder as a surface
-hSurf = surf(x2, y2, z2, varargin{:});
+hSurf = surf(hAx, x2, y2, z2, varargin{:});
 
 % eventually plot the ends of the cylinder
 if closed
@@ -155,8 +159,8 @@ if closed
         color = varargin{ind+1};
     end
 
-    patch(x2(1,:)', y2(1,:)', z2(1,:)', color, 'edgeColor', 'none');
-    patch(x2(2,:)', y2(2,:)', z2(2,:)', color, 'edgeColor', 'none');
+    patch(hAx, x2(1,:)', y2(1,:)', z2(1,:)', color, 'edgeColor', 'none');
+    patch(hAx, x2(2,:)', y2(2,:)', z2(2,:)', color, 'edgeColor', 'none');
 end
 
 % format ouptut

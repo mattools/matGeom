@@ -23,20 +23,14 @@ function res = parallelLine(line, point)
 %     L2 = parallelLine(L1, P);
 %     drawLine(L2, 'Color', 'b');
 %
-%   See also:
+%   See also 
 %   lines2d, orthogonalLine, distancePointLine, parallelEdge
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
 
-%   HISTORY
-%   31/07/2005 add usage of distance
-%   15/06/2009 change convention for distance sign
-%   31/09/2012 adapt for multiple lines
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 if size(point, 2) == 1
     % use a distance. Compute position of point located at distance DIST on

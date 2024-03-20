@@ -18,33 +18,32 @@ function varargout = cart2sph2(varargin)
 %   cart2sph2([1 1 0])  returns [pi/2 pi/4 sqrt(2)];
 %   cart2sph2([0 0 1])  returns [0 0 1];
 %
-%   See also:
-%   angles3d, sph2cart2, cart2sph, cart2sph2d
+%   See also 
+%     angles3d, sph2cart2, cart2sph, cart2sph2d
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 18/02/2005.
-%
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-18
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   02/11/2006: update doc, and manage case RHO is empty
-%   03/11/2006: change convention for angle : uses order [THETA PHI RHO]
-%   27/06/2007: manage 2 output arguments
-
-if length(varargin)==1
-    var = varargin{1};
-elseif length(varargin)==3
-    var = [varargin{1} varargin{2} varargin{3}];
+% parse input angles based on input argument number
+if length(varargin) == 1
+    xyz = varargin{1};
+elseif length(varargin) == 3
+    xyz = [varargin{1} varargin{2} varargin{3}];
 end
 
-if size(var, 2)==2
-    var(:,3)=1;
+% ensure z coordinate is specified
+if size(xyz, 2) == 2
+    xyz(:,3) = 1;
 end
 
-[p, t, r] = cart2sph(var(:,1), var(:,2), var(:,3));
+% convert to spherical coordinates
+[p, t, r] = cart2sph(xyz(:,1), xyz(:,2), xyz(:,3));
 
+% format output arguments
 if nargout == 1 || nargout == 0
     varargout{1} = [pi/2-t p r];
 elseif nargout==2

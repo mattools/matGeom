@@ -22,14 +22,14 @@ function points = randomPointInBox3d(box, N, varargin)
 %     axis([0 100 0 100 0 100]);
 %     view(3);
 %
-%   See also
+%   See also 
 %   points3d, boxes3d
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2011-06-27,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2011-06-27, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 if nargin < 2
     N = 1;

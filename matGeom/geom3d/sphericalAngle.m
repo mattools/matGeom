@@ -36,19 +36,14 @@ function alpha = sphericalAngle(p1, p2, p3)
 %         1.5708
 % 
 %
-%   See also:
+%   See also 
 %   geom3d, angles3d, spheres, sph2cart
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 21/02/2005.
-%
-
-%   HISTORY
-%   23-05-2006 fix bug for points with angle from center > pi/2
-%   05-06-2013 fix bug for points given as spherical coordinates, better
-%       support for multiple inputs
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-21
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % test if points are given as matlab spherical coordinates
 if size(p1, 2) == 2

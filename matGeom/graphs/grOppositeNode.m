@@ -8,14 +8,12 @@ function node2 = grOppositeNode(edges, node)
 %   Works also if EDGE is a N-by-2 array of source and target vertex
 %   indices, in this case the result NODE2 has as many rows as the number
 %   of edges.
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2010-09-07
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
-
-%   HISTORY
+% Copyright 2010-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % allocate memory for result
 Ne = size(edges, 1);

@@ -4,9 +4,9 @@ function varargout = angleSort3d(pts, varargin)
 %   PTS2 = angleSort3d(PTS);
 %   Considers all points are located on the same plane, and sort them
 %   according to the angle on plane. PTS is a [Nx2] array. Note that the
-%   result depend on plane orientation: points can be in reverse order
-%   compared to expected. The reference plane is computed besed on the 3
-%   first points.
+%   result depends on the plane orientation: points can be in reverse order
+%   compared to expected. The reference plane is computed based on the
+%   first three points.
 %
 %   PTS2 = angleSort3d(PTS, PTS0);
 %   Computes angles between each point of PTS and PT0. By default, uses
@@ -18,18 +18,14 @@ function varargout = angleSort3d(pts, varargin)
 %   [PTS2, I] = angleSort3d(...);
 %   Also return in I the indices of PTS, such that PTS2 = PTS(I, :);
 %
-%   See also:
+%   See also 
 %   points3d, angles3d, angleSort
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-11-24
-% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
-
-
-%   HISTORY :
-%   04/01/2007: remove unused variables
+% Copyright 2005-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % default values
 pt0     = mean(pts, 1);

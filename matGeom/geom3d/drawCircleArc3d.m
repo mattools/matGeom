@@ -1,4 +1,4 @@
-function varargout = drawCircleArc3d(arc, varargin)
+function varargout = drawCircleArc3d(varargin)
 %DRAWCIRCLEARC3D Draw a 3D circle arc.
 %
 %   drawCircleArc3d([XC YC ZC R THETA PHI PSI START EXTENT])
@@ -11,26 +11,33 @@ function varargout = drawCircleArc3d(arc, varargin)
 %   
 %   Drawing options can be specified, as for the plot command.
 %
-%   See also
-%   angles3, circles3d, drawCircle3d, drawCircleArc
-%
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 21/02/2005
+%   See also 
+%     angles3d, circles3d, drawCircle3d, drawCircleArc
 %
 
-%   HISTORY
-%   2007-06-27 change 3D angle convention
-%   2010-03-08 use drawPolyline3d
-%   2011-06-21 use angles in degrees
+% ------
+% Author: David Legland
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-21
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
+
+arc = varargin{1};
+varargin(1) = [];
 
 if iscell(arc)
+    % save hold state
+    holdState = ishold(hAx);
+    hold(hAx, 'on');
     h = [];
     for i = 1:length(arc)
-        h = [h drawCircleArc3d(arc{i}, varargin{:})]; %#ok<AGROW>
+        h = [h drawCircleArc3d(hAx, arc{i}, varargin{:})]; %#ok<AGROW>
+    end
+    % restore hold state
+    if ~holdState
+        hold(hAx, 'off');
     end
     if nargout > 0
         varargout = {h};
@@ -39,9 +46,16 @@ if iscell(arc)
 end
 
 if size(arc, 1) > 1
+    % save hold state
+    holdState = ishold(hAx);
+    hold(hAx, 'on');
     h = [];
     for i = 1:size(arc, 1)
-        h = [h drawCircleArc3d(arc(i,:), varargin{:})]; %#ok<AGROW>
+        h = [h drawCircleArc3d(hAx, arc(i,:), varargin{:})]; %#ok<AGROW>
+    end
+    % restore hold state
+    if ~holdState
+        hold(hAx, 'off');
     end
     if nargout > 0
         varargout = {h};
@@ -81,7 +95,7 @@ trans   = localToGlobal3d(xc, yc, zc, theta, phi, psi);
 curve   = transformPoint3d(curve, trans);
 
 % draw the curve with specified options
-h = drawPolyline3d(curve, varargin{:});
+h = drawPolyline3d(hAx, curve, varargin{:});
 
 if nargout > 0
     varargout = {h};

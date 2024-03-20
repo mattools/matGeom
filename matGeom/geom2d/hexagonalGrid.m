@@ -8,21 +8,18 @@ function varargout = hexagonalGrid(bounds, origin, size, varargin)
 %   SIZE is constant and is equals to the length of the sides of each
 %   hexagon. 
 %
-%   TODO: add possibility to use rotated grid
-%
 
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 06/08/2005.
-%
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-08-06
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 size = size(1);
 dx = 3*size;
 dy = size*sqrt(3);
 
-% consider two square grids with different centers
+% consider two rectangular grids with shifted centers
 pts1 = squareGrid(bounds, origin + [0 0],        [dx dy], varargin{:});
 pts2 = squareGrid(bounds, origin + [dx/3 0],     [dx dy], varargin{:});
 pts3 = squareGrid(bounds, origin + [dx/2 dy/2],  [dx dy], varargin{:});
@@ -33,7 +30,6 @@ pts = [pts1;pts2;pts3;pts4];
 
 
 % eventually compute also edges, clipped by bounds
-% TODO : manage generation of edges 
 if nargout > 1
     edges = zeros([0 4]);
     x0 = origin(1);
@@ -44,7 +40,7 @@ if nargout > 1
     x2 = bounds(3) - mod(bounds(3)-x0, dx);
     lx = (x1:dx:x2)';
 
-    % horizontal edges : first find y's
+    % horizontal edges: first find y's
     y1 = bounds(2) + mod(y0-bounds(2), dy);
     y2 = bounds(4) - mod(bounds(4)-y0, dy);
     ly = (y1:dy:y2)';

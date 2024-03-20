@@ -20,18 +20,14 @@ function varargout = transformVector(varargin)
 %   (vx2, vy2), which is the same size as (vx1 vy1).
 %
 %
-%   See also:
+%   See also 
 %   vectors2d, transforms2d, rotateVector, transformPoint
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 12/03/2007.
-%
 
-%   HISTORY
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2007-03-12
+% Copyright 2007-2023 INRA - TPV URPOI - BIA IMASTE
 
 if length(varargin)==2
     var = varargin{1};

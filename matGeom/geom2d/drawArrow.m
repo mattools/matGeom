@@ -14,7 +14,7 @@ function varargout = drawArrow(varargin)
 %   also specifies arrow type. TYPE can be one of the following :
 %   0: draw only two strokes
 %   1: fill a triangle
-%   .5: draw a half arrow (try it to see ...)
+%   0.5: draw a half arrow (try it to see ...)
 %   
 %   Arguments can be single values or array of size N-by-1. In this case,
 %   the function draws multiple arrows.
@@ -31,19 +31,23 @@ function varargout = drawArrow(varargin)
 %     plot(t, sin(t)); 
 %     drawArrow([2 -1 pi 0], .1, .05, .5)
 % 
-%   See also
+%   See also 
 %     drawEdge
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 11/11/2004 from drawEdge
-%
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-11-11, from drawEdge
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2014-09-17 fix managment of handle values as suggested by Benoit Botton
-%   2016-05-23 Improve codee and reduce calculations (by JuanPi Carbajal)
+% extract handle of axis to draw on
+if isAxisHandle(varargin{1})
+    ax = varargin{1};
+    varargin(1) = [];
+else
+    ax = gca;
+end
 
 if isempty (varargin)
     error ('should specify at least one argument');
@@ -90,14 +94,14 @@ if ~isempty (varargin)
 end
 
 hold on;
-oldHold = ishold (gca);
+oldHold = ishold(ax);
 if ~oldHold
     hold on;
 end
 axis equal;
 
 % angle of the edge
-theta = atan2 (y2-y1, x2-x1);
+theta = atan2(y2-y1, x2-x1);
 
 rl = r .* l;
 rh = r .* h;
@@ -114,7 +118,7 @@ xa3 = x2 - rh .* cT;
 ya3 = y2 - rh .* sT;
 
 % draw main edge
-tmp         = line ([x1.'; x2.'], [y1.'; y2.'], 'color', [0 0 1]);
+tmp         = line(ax, [x1.'; x2.'], [y1.'; y2.'], 'color', [0 0 1]);
 handle.body = tmp;
 
 % draw only 2 wings
@@ -131,9 +135,10 @@ end
 
 % draw a full arrow
 ind = find (h ~= 0);
-if ~isempty (ind)
-    tmp         = patch ([x2(ind) xa1(ind) xa3(ind) xa2(ind) x2(ind)].', ...
-                         [y2(ind) ya1(ind) ya3(ind) ya2(ind) y2(ind)].', [0 0 1]);
+if ~isempty(ind)
+    tmp         = patch (ax, ...
+        [x2(ind) xa1(ind) xa3(ind) xa2(ind) x2(ind)].', ...
+        [y2(ind) ya1(ind) ya3(ind) ya2(ind) y2(ind)].', [0 0 1]);
     handle.head = tmp;
 end
 

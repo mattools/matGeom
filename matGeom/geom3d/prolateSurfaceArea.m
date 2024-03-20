@@ -6,15 +6,15 @@ function S = prolateSurfaceArea(elli, varargin)
 %   Example
 %   prolateSurfaceArea
 %
-%   See also
+%   See also 
 %   geom3d, ellipsoidSurfaceArea, oblateSurfaceArea
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2015-07-03,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2015 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2015-07-03, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2015-2023 INRA - Cepia Software Platform
 
 %% Parse input argument
 

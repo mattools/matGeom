@@ -21,25 +21,21 @@ function kappa = curvature(varargin)
 %   distance between 2 consecutive points, and normalized between 0 and 1.
 %
 %
-%   See Also:
+%   See also 
 %   polygons2d, parametrize
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 07/04/2003.
-%
 
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-04-07
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 % default values
 degree = 5;
 t=0;                    % parametrization of curve
 tc=0;                   % indices of points wished for curvature
 
-
-% ================================================================= 
-
-% Extract method and degree ------------------------------
+% Extract method and degree
 
 nargin = length(varargin);
 varN = varargin{nargin};
@@ -59,7 +55,7 @@ else
     method = 'polynom';
 end
 
-% extract input parametrization and curve. -----------------------
+% extract input parametrization and curve
 nargin = length(varargin);
 if nargin==1
     % parameters are just the points -> compute caracterization.
@@ -99,7 +95,7 @@ elseif nargin==4
     tc = varargin{4};
 end
 
-% compute implicit parameters --------------------------
+% compute implicit parameters
 
 % if t and/or tc are not computed, use implicit definition
 if t==0
@@ -114,10 +110,8 @@ else
     % else convert from indices to parametrization values
     tc = t(tc);
 end
-
-
-% ================================================================= 
-%    compute curvature for each point of the curve
+ 
+%% compute curvature for each point of the curve
 
 if strcmp(method, 'polynom')
     % compute coefficients of interpolation functions

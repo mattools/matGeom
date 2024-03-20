@@ -6,15 +6,15 @@ function polygons = splitPolygons(polygon)
 %   The functions separates each component separated by NaN values, and
 %   returns a cell array of polygons.
 %
-%   See also:
+%   See also 
 %   polygons2d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2007-10-12,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% E-mail: david.legland@inrae.fr
+% Created: 2007-10-12, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2007-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 if iscell(polygon)
     % case of a cell array

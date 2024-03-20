@@ -42,20 +42,15 @@ function varargout = drawEllipseArc(varargin)
 %     ray2 = createRay([10 20], deg2rad(70+45));
 %     drawRay(ray2)
 %
-%   See also:
-%   ellipses2d, drawEllipse, drawCircleArc
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 12/12/2003.
+%   See also 
+%     ellipses2d, drawEllipse, drawEllipseAxes, drawCircleArc
 %
 
-
-%   HISTORY
-%   2008/10/10 uses fixed number of points for arc.
-%   2011-03-30 use angles in degrees
-%   2011-10-11 add management of axes handle
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-12-12
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 %% Extract input arguments
 
@@ -77,20 +72,20 @@ for i = 1:length(varargin)
     end
 end
 
-if length(varargin)==1
+if length(varargin) == 1
     ellipse = varargin{1};
-    x0 = ellipse(1);
-    y0 = ellipse(2);
-    a  = ellipse(3);
-    b  = ellipse(4);
+    x0 = ellipse(:,1);
+    y0 = ellipse(:,2);
+    a  = ellipse(:,3);
+    b  = ellipse(:,4);
     if size(ellipse, 2)>6
-        theta   = ellipse(5);
-        start   = ellipse(6);
-        extent  = ellipse(7);
+        theta   = ellipse(:,5);
+        start   = ellipse(:,6);
+        extent  = ellipse(:,7);
     else
         theta   = zeros(size(x0));
-        start   = ellipse(5);
-        extent  = ellipse(6);
+        start   = ellipse(:,5);
+        extent  = ellipse(:,6);
     end
     
 elseif length(varargin)>=6
@@ -113,15 +108,22 @@ else
 end
 
 
-%% Drawing
+%% Initialisation
 
 % allocate memory for handles
 h = zeros(size(x0));
 
+% save hold state
+holdState = ishold(ax);
+hold(ax, 'on');
+
+
+%% Drawing
+
 for i = 1:length(x0)
     % start and end angles
-    t1 = deg2rad(start);
-    t2 = t1 + deg2rad(extent);
+    t1 = deg2rad(start(i));
+    t2 = t1 + deg2rad(extent(i));
     
     % vertices of ellipse
     t = linspace(t1, t2, 60);
@@ -144,8 +146,14 @@ for i = 1:length(x0)
 end
 
 
-%% Process output arguments
+%% Post-processing
 
+% restore hold state
+if ~holdState
+    hold(ax, 'off');
+end
+
+% process output argument
 if nargout > 0
     varargout = {h};
 end

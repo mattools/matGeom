@@ -28,7 +28,7 @@ function points = intersectLineCircle(line, circle)
 %     drawPoint(pts, 'rx');
 %     axis equal;
 %
-%   See also
+%   See also 
 %   lines2d, circles2d, intersectLines, intersectCircles
 %
 %   References
@@ -37,15 +37,11 @@ function points = intersectLineCircle(line, circle)
 %
 
 % ------
-% Author: David Legland, david.legland@inra.fr
-% Author: JuanPi Carbajal <ajuanpi+dev@gmail.com>
-% Created: 2011-01-14,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% Authors: David Legland, JuanPi Carbajal
+% E-mail: david.legland@inrae.fr, ajuanpi+dev@gmail.com
+% Created: 2011-01-14, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
-% HISTORY
-% 2011-06-06 fix bug in delta test
-% 2017-05-05 included some suggestions from code by JuanPi Carbajal <ajuanpi+dev@gmail.com>
-% 2017-08-08 update doc
   		  
 % check size of inputs
 nLines = size(line, 1);
@@ -63,9 +59,9 @@ radius = circle(:, 3);
 dp = line(:, 1:2) - center;
 vl = line(:, 3:4);
 
-% coefficient of second order equation
+% coefficients of second order equation
 a = sum(line(:, 3:4).^2, 2);
-b = 2*sum(dp .* vl, 2);
+b = 2 * sum(dp .* vl, 2);
 c = sum(dp.^2, 2) - radius.^2;
 
 % discriminant
@@ -76,11 +72,11 @@ points = nan(2, 2, nCircles);
 valid = delta >= 0;
 
 if any(valid)
-    % compute roots
+    % compute roots (as a N-by-N-by-2 array)
     u = bsxfun(@plus, -b(valid), bsxfun(@times, [-1 1], sqrt(delta(valid))));
     u = bsxfun(@rdivide, u, a(valid)) / 2;
 
-    if nCircles == 1
+    if sum(valid) == 1
         points = [...
             line(1:2) + u(:,1) .* line(3:4); ...
             line(1:2) + u(:,2) .* line(3:4)];

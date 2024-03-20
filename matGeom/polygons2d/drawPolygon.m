@@ -35,20 +35,14 @@ function varargout = drawPolygon (px, varargin)
 %     drawPolygon([px py], 'lineWidth', 2);
 %     axis equal; axis([0 50 0 50]); 
 % 
-%   See also:
+%   See also 
 %   polygons2d, drawPolyline
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 05/05/2004.
-%
-
-%   HISTORY
-%   2008/10/15 manage polygons with holes
-%   2011-10-11 add management of axes handle
-%   2016-05-26 Juanpi Carbajal reorganized the function for readability and
-%              removed unnecessary variable arguemnts
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-05-05
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 % Store hold state
 state = ishold(gca);

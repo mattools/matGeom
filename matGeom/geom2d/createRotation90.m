@@ -25,14 +25,14 @@ function mat = createRotation90(varargin)
 %     poly3 = transformPoint(poly, rot);
 %     drawPolygon(poly3, 'g');
 %
-%   See also
+%   See also 
 %   transforms2d, createRotation
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2012-06-20,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2012-06-20, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012-2023 INRA - Cepia Software Platform
 
 % default values
 num = 1;

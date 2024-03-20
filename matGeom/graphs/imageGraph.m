@@ -11,14 +11,11 @@ function varargout = imageGraph(img, varargin)
 %   This functions uses only 4 neighbors in 2D, and 6 neighbors in 3D.
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 28/06/2004.
-%
-
-%   HISTORY
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-06-28
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 %% Initialisations
 

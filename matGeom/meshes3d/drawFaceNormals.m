@@ -16,15 +16,15 @@ function varargout = drawFaceNormals(varargin)
 %     drawFaceNormals(v, f)
 %     view(3);
 %
-%   See also
+%   See also 
 %   meshes3d, drawMesh, drawVector3d, meshFaceNormals, meshFaceCentroids
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2010-10-06,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2010-10-06, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2010-2023 INRA - Cepia Software Platform
 
 % extract vertices and faces
 mesh = parseMeshData(varargin{:});

@@ -29,19 +29,15 @@ function loops = expandPolygon(poly, dist, varargin)
 %     hold on; drawPolygon(poly2, 'm')
 %     axis equal; axis([0 40 0 40]);
 %
-%   See also:
+%   See also 
 %   polygons2d, polygonLoops, polygonSelfIntersections 
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 14/05/2005.
-%
-
-%   HISTORY:
-%   31-07-2005 change algo for negative distance: use clipping of polygon
-%   by half-planes 
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-05-14
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % default options
 cleanupLoops = false;

@@ -30,23 +30,15 @@ function newFaces = minConvexHull(points, varargin)
 %     axis equal; view(3);
 %
 %
-%   See also
+%   See also 
 %   meshes3d, mergeCoplanarFaces, drawMesh, convhull, convhulln
 %
 
-
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2006-07-05
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
-
-% HISTORY
-%   20/07/2006 add tolerance for coplanarity test
-%   21/08/2006 fix small bug due to difference of methods to test
-%       coplanarity, sometimes resulting in 3 points of a face being not
-%       coplanar! Also add control on precision
-%   18/09/2007 ensure faces are given as horizontal vectors
+% Copyright 2006-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % set up precision
 acc = 1e-14;

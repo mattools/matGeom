@@ -9,14 +9,14 @@ function [nodes, edges, faces] = voronoi2d(germs)
 %   [n e f] = voronoi2d(rand(100, 2)*100);
 %   drawGraph(n, e);
 %
-%   See also
+%   See also 
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2007-01-12
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% Copyright 2007-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % compute generic Voronoi diagram
 [V, C] = voronoin(germs);

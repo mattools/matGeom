@@ -34,30 +34,20 @@ function varargout = drawCircle(varargin)
 %     drawCircle([15 15 40], 'color', 'r', 'linewidth', 2);
 %     axis equal;
 %
-%   See also
+%   See also 
 %   circles2d, drawCircleArc, drawEllipse, circleToPolygon
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   02/11/2004: add possibility to draw multiple circles in one call
-%   12/01/2005: allow more than 3 parameters
-%   26/02/2007: add possibility to specify plot options, number of
-%       discretization steps, and circle as center+radius.
-%   2011-10-11 add support for axis handle
+%% Parse input arguments
 
 % extract handle of axis to draw on
-if isAxisHandle(varargin{1})
-    ax = varargin{1};
-    varargin(1) = [];
-else
-    ax = gca;
-end
+[ax, varargin] = parseAxisHandle(varargin{:});
 
 % process input parameters
 var = varargin{1};
@@ -82,11 +72,6 @@ else
     error('bad format for input in drawCircle');
 end
 
-% ensure each parameter is column vector
-x0 = x0(:);
-y0 = y0(:);
-r = r(:);
-
 % default number of discretization steps
 N = 72;
 
@@ -99,6 +84,14 @@ if ~isempty(varargin)
     end
 end
 
+
+%% Pre-processing
+
+% ensure each parameter is column vector
+x0 = x0(:);
+y0 = y0(:);
+r = r(:);
+
 % parametrization variable for circle (use N+1 as first point counts twice)
 t = linspace(0, 2*pi, N+1);
 cot = cos(t);
@@ -107,12 +100,27 @@ sit = sin(t);
 % empty array for graphic handles
 h = zeros(size(x0));
 
+% save hold state
+holdState = ishold(ax);
+hold(ax, 'on');
+
+
+%% Display each circle
+
 % compute discretization of each circle
 for i = 1:length(x0)
     xt = x0(i) + r(i) * cot;
     yt = y0(i) + r(i) * sit;
 
     h(i) = plot(ax, xt, yt, varargin{:});
+end
+
+
+%% Post-processing
+
+% restore hold state
+if ~holdState
+    hold(ax, 'off');
 end
 
 if nargout > 0

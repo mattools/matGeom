@@ -64,28 +64,15 @@ function b = isPointOnEdge(point, edge, varargin)
 %        0     0     0     0
 %
 %
-%   See also
+%   See also 
 %   edges2d, points2d, isPointOnLine
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
-
-%   HISTORY
-%   11/03/2004 change input format: edge is [x1 y1 x2 y2].
-%   17/01/2005 if test N edges with N points, return N boolean.
-%   21/01/2005 normalize test for colinearity, so enhance precision
-%   22/05/2009 rename to isPointOnEdge, add psb to specify tolerance
-%   26/01/2010 fix bug in precision computation
-%   04/10/2010 fix a bug, and clean up code
-%   28/10/2010 fix bug to have N results when input is N points and N
-%       edges, add support for arrays with different numbers of rows, and
-%       update doc.
-%   2011-06-15 rewrites by using less memory, and avoiding repmat when psb
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 % extract computation tolerance
 tol = 1e-14;

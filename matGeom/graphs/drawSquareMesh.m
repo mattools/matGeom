@@ -5,14 +5,14 @@ function varargout = drawSquareMesh(nodes, edges, faces, varargin) %#ok<INUSL>
 %   Draw the mesh defined by NODES, EDGES and FACES. FACES must be a N-by-4
 %   array of vertex indices.
 %
-%   See Also
+%   See also 
 %   boundaryGraph, drawGraph
-%
-%   ---------
-%   author: David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 28/06/2004.
-%
+
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-06-28
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 % input size check up
 if size(faces, 2) ~= 4

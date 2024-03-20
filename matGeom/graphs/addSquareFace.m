@@ -7,18 +7,15 @@ function [nodes, edges, faces] = addSquareFace(nodes, edges, faces, faceNodes)
 %   Edges of the face are also added, if they are not already present in
 %   the edge list.
 %
-%   See Also
+%   See also 
 %   patchGraph, boundaryGraph
 %
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 28/06/2004.
-%
 
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-06-28
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 n1 = faceNodes(1,:);
 n2 = faceNodes(2,:);

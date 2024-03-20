@@ -24,15 +24,15 @@ function h = drawLine3d(lin, varargin)
 %     light;
 %
 %
-%   See also:
-%     lines3d, createLine3d, clipLine3d
+%   See also 
+%     lines3d, createLine3d, clipLine3d, drawRay3d, drawEdge3d
 %
 
-% ---------
-% author : David Legland 
-% INRA - TPV URPOI - BIA IMASTE
-% created the 17/02/2005.
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-17
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % Parse and check inputs
 isLine3d = @(x) validateattributes(x,{'numeric'},...
@@ -42,7 +42,7 @@ defOpts.Color = 'b';
     parseDrawInput(lin, isLine3d, 'line', defOpts, varargin{:});
 
 % extract limits of the bounding box
-box = [get(gca, 'xlim') get(gca, 'ylim') get(gca, 'zlim')];
+box = [get(hAx, 'xlim') get(hAx, 'ylim') get(hAx, 'zlim')];
 
 % clip the line with the limits of the current axis
 edge = clipLine3d(lin, box);

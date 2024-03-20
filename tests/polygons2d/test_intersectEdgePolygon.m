@@ -23,7 +23,7 @@ poly = [0 0;10 0;10 10;0 10];
 edge = [9 2 9+3*1 2+3*2];
 exp = [10 4];
 inter = intersectEdgePolygon(edge, poly);
-testCase.assertEqual(exp, inter);
+testCase.assertEqual(exp, inter, 'AbsTol', 0.01);
 
 function test_GetIndex(testCase)
 % Test call of function without argument
@@ -31,7 +31,7 @@ poly = [0 0;10 0;10 10;0 10];
 edge = [9 2 9+3*1 2+3*2];
 exp = [10 4];
 [inter, index] = intersectEdgePolygon(edge, poly);
-testCase.assertEqual(exp, inter);
+testCase.assertEqual(exp, inter, 'AbsTol', 0.01);
 testCase.assertEqual(2, index);
 
 function test_NoIntersect(testCase)

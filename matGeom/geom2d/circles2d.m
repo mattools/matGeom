@@ -15,17 +15,18 @@ function circles2d(varargin)
 %   their angle (in degrees) with Ox direction.
 %   E = [xc yc A B theta];
 %
-%   See also:
+%   See also 
 %   ellipses2d, createCircle, createDirectedCircle, 
 %   isPointInCircle, isPointOnCircle, enclosingCircle, circumCircle
 %   intersectLineCircle, intersectCircles, radicalAxis
 %   circleToPolygon, circleArcToPolyline
 %   drawCircle, drawCircleArc
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2010 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2008-2023 INRA - Cepia Software Platform
 
 help('circles2d');

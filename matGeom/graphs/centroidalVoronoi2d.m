@@ -34,7 +34,7 @@ function [germs, germPaths] = centroidalVoronoi2d(germs, poly, varargin)
 %     [n2, e2] = clipGraphPolygon(n, e, poly);
 %     drawGraphEdges(n2, e2, 'b');
 %
-%   See also
+%   See also 
 %   graphs, boundedVoronoi2d, centroidalVoronoi2d_MC
 %
 %   Rewritten from programs found in
@@ -48,10 +48,9 @@ function [germs, germPaths] = centroidalVoronoi2d(germs, poly, varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2012-02-23,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
-
+% E-mail: david.legland@inrae.fr
+% Created: 2012-02-23, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012-2023 INRA - Cepia Software Platform
 
 %% Parse input arguments
 

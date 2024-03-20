@@ -11,21 +11,15 @@ function edge = clipLine3d(line, box)
 %   If LINE is a N-by-6 array, with one line by row, returns the clipped
 %   edge coresponding to each line in a N-by-6 array.
 %
-%   See also:
-%   lines3d, edges3d, createLine3d
+%   See also 
+%   lines3d, edges3d, createLine3d, clipRay3d
 %
 
-% ---------
-% author : David Legland 
-% e-mail: david.legland@inra.fr
-% INRA - TPV URPOI - BIA IMASTE
-% created the 30/10/2008 from drawLine3d
-
-%   HISTORY
-%   30/10/2008 replace intersectPlaneLine by intersectLinePlane
-%   25/11/2008 improve test for bounds, and use more explicit code
-%   22/06/2009 fig bug, add support for several lines
-%   16/11/2010 use middle point for checking edge bounds 
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2008-10-30, from drawLine3d
+% Copyright 2008-2023 INRA - TPV URPOI - BIA IMASTE
 
 % get box limits
 xmin = box(1); xmax = box(2);
@@ -103,4 +97,3 @@ zOk  = zmin <= midZ & midZ <= zmax;
 
 % if one of the bounding condition is not met, set edge to NaN
 edge (~(xOk & yOk & zOk), :) = NaN;
-

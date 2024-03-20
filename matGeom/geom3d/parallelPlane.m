@@ -23,14 +23,14 @@ function res = parallelPlane(plane, point)
 %     ans = 
 %         5
 %
-%   See also
+%   See also 
 %   geom3d, parallelLine3d
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2012-08-22,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2012-08-22, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012-2023 INRA - Cepia Software Platform
 
 if size(point, 2) == 1
     % use a distance. Compute position of point located at distance DIST on

@@ -28,7 +28,21 @@ figure(hf); clf;
 hr = drawRect([x0 y0 w h]);
 xth = [x0 x0+w x0+w x0 x0];
 yth = [y0 y0 y0+h y0+h y0];
-testCase.assertEqual(xth, get(hr, 'XData'), 'AbsTol', .01);
-testCase.assertEqual(yth, get(hr, 'YData'), 'AbsTol', .01);
+assertEqual(testCase, xth, get(hr, 'XData'), 'AbsTol', .01);
+assertEqual(testCase, yth, get(hr, 'YData'), 'AbsTol', .01);
+
+close(hf);
+
+
+function test_drawMany(testCase) %#ok<*DEFNU>
+
+rects = [20 30 40 50; 50 40 70 70];
+
+hf = 101;
+figure(hf); clf;
+hr = drawRect(rects);
+
+assertTrue(testCase, all(ishghandle(hr)));
+assertEqual(testCase, length(hr), 2);
 
 close(hf);

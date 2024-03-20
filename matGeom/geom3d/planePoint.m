@@ -13,17 +13,14 @@ function coord = planePoint(plane, point)
 %     pt = 
 %           13  24   34
 %
-%   See also
+%   See also 
 %   geom3d, planes3d, planePosition
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2007-09-18,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
-
-%   HISTORY
-%   2013-10-09 remove repmat
+% E-mail: david.legland@inrae.fr
+% Created: 2007-09-18, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2007-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % size of input arguments
 npl = size(plane, 1);

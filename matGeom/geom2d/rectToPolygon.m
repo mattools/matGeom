@@ -9,19 +9,16 @@ function [tx, ty] = rectToPolygon(rect)
 %   rectangle, and THETA is the rotation angle around the first vertex, in
 %   degrees.
 %
-%   See also:
+%   See also 
 %   orientedBoxToPolygon, ellipseToPolygon, drawRect, drawPolygon
 %
 %
 
-% ---------
+% ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
-% INRA - TPV URPOI - BIA IMASTE
-% created the 06/04/2005.
-%
-
-% HISTORY
+% E-mail: david.legland@inrae.fr
+% Created: 2005-04-06
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % extract rectangle parameters
 theta = 0;

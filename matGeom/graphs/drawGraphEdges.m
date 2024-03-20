@@ -13,20 +13,17 @@ function varargout = drawGraphEdges(varargin)
 %
 %
 %   H = drawGraphEdges(...) 
-%   return handle to the set of edges.
+%   Returns handle to the set of edges.
 %   
 %   See also 
-%   graphs, drawGraph, fillGraphFaces
+%     graphs, drawGraph, fillGraphFaces
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-11-24
-% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
-
-%   HISTORY
-
+% Copyright 2005-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 %% Input argument processing
 

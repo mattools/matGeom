@@ -1,4 +1,4 @@
-function varargout = drawRect(rect, varargin)
+function varargout = drawRect(varargin)
 %DRAWRECT Draw rectangle on the current axis.
 %   
 %   drawRect(RECT)
@@ -21,43 +21,44 @@ function varargout = drawRect(rect, varargin)
 %   H = drawRect(...) 
 %   Returns handle of the created graphic objects.
 %
-%   See Also:
-%   drawOrientedBox, drawBox, rectToPolygon
+%   See also 
+%     drawOrientedBox, drawBox, rectToPolygon
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 10/12/2003.
-%
-
-%   HISTORY
-%   2003-12-12 add support for multiple rectangles
-%   2011-10-09 rewrite using rectToPolygon, add support for drawing options
-%   2011-10-11 add management of axes handle
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-12-10
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 % extract handle of axis to draw on
-if isAxisHandle(rect)
-    ax = rect;
-    rect = varargin{1};
-    varargin(1) = [];
-else
-    ax = gca;
-end
+[ax, varargin] = parseAxisHandle(varargin{:});
+
+rect = varargin{1};
+varargin(1) = [];
 
 % number of rectangles to draw
 n = size(rect, 1);
 
+% save hold state
+holdState = ishold(ax);
+hold(ax, 'on');
+
 % display each rectangle
-r = zeros(n, 1);
+h = zeros(n, 1);
 for i = 1:n
     % compute vertex corodinates
     poly = rectToPolygon(rect(i, :));
     % display resulting polygon
-    r(i) = drawPolygon(ax, poly, varargin{:});
+    h(i) = drawPolygon(ax, poly, varargin{:});
+end
+
+% restore hold state
+if ~holdState
+    hold(ax, 'off');
 end
 
 % process output
 if nargout > 0
-    varargout = {r};
+    varargout = {h};
 end

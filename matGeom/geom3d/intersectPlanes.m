@@ -10,17 +10,15 @@ function line = intersectPlanes(plane1, plane2, varargin)
 %   LINE = intersectPlanes(PLANE1, PLANE2, TOL)
 %   Also specifies the tolerance for detecting parallel planes.
 %
-%   See also:
+%   See also 
 %   planes3d, lines3d, intersectLinePlane
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 17/02/2005.
-%
-
-%   HISTORY
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-17
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 tol = 1e-14;
 if ~isempty(varargin)

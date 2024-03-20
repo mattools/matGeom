@@ -1,14 +1,16 @@
 function [nodes, edges] = gcontour2d(img)
 %GCONTOUR2D Creates contour graph of a 2D binary image.
 %
+%   deprecated: use imageBoundaryGraph instead
 %
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 25/06/2004.
-%
+%   See also 
+%     imageBoundaryGraph
+
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-06-25
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 nodes = zeros([0 2]);
 edges = zeros([0 2]);

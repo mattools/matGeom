@@ -1,4 +1,4 @@
-function varargout = drawBezierCurve(points, varargin)
+function varargout = drawBezierCurve(varargin)
 %DRAWBEZIERCURVE Draw a cubic bezier curve defined by 4 control points.
 %
 %   drawBezierCurve(POINTS)
@@ -22,26 +22,26 @@ function varargout = drawBezierCurve(points, varargin)
 %     drawBezierCurve([0 0;5 10;10 5;10 0]);
 %     drawBezierCurve([0 0;5 10;10 5;10 0], 'linewidth', 2, 'color', 'g');
 %
-%   See also
+%   See also 
 %     drawPolyline, cubicBezierToPolyline
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2011-03-16,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
-
-%   HISTORY
-%   2011-10-11 add management of axes handle
+% E-mail: david.legland@inrae.fr
+% Created: 2011-03-16, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 % extract handle of axis to draw on
-if isAxisHandle(points)
-    ax = points;
-    points = varargin{1};
+if isAxisHandle(varargin{1})
+    ax = varargin{1};
     varargin(1) = [];
 else
     ax = gca;
 end
+
+points = varargin{1};
+varargin(1) = [];
 
 % default number of discretization steps
 N = 64;

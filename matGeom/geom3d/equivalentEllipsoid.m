@@ -1,5 +1,5 @@
 function ell = equivalentEllipsoid(points)
-% Equivalent ellipsoid of a set of 3D points.
+%EQUIVALENTELLIPSOID Equivalent ellipsoid of a set of 3D points.
 %
 %   ELL = equivalentEllipsoid(PTS)
 %   Compute the equivalent ellipsoid of the set of points PTS. The result
@@ -21,15 +21,15 @@ function ell = equivalentEllipsoid(points)
 %     hold on; drawEllipsoid(elli, ...
 %         'drawEllipses', true, 'EllipseColor', 'b', 'EllipseWidth', 3);
 %
-%   See also
+%   See also 
 %     spheres, drawEllipsoid, equivalentEllipse, principalAxes
-%     rotation3dToEulerAngles
+%     principalAxesTransform, rotation3dToEulerAngles
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2011-03-12,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2011-03-12, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 % number of points
 n = size(points, 1);
@@ -40,7 +40,7 @@ center = mean(points);
 % compute the covariance matrix
 covPts = cov(points)/n;
 
-% perform a principal component analysis with 2 variables, 
+% perform a principal component analysis with 3 variables, 
 % to extract equivalent axes
 [U, S] = svd(covPts);
 

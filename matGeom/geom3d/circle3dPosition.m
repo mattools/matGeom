@@ -8,19 +8,14 @@ function theta = circle3dPosition(point, circle)
 %   and CIRCLE: [X0 Y0 Z0 R THETA PHI] or [X0 Y0 Z0 R THETA PHI PSI]
 %   (THETA being the colatitude, and PHI the azimut)
 %
-%   See also:
+%   See also 
 %   circles3d, circle3dOrigin, circle3dPoint
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 21/02/2005
-%
 
-%   HISTORY
-%   27/06/2007: change 3D angle convention
-%   2011-06-21 use degrees for angles
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-21
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % get center and radius
 xc = circle(:,1);

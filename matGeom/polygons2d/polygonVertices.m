@@ -31,15 +31,14 @@ function vertices = polygonVertices(poly)
 %     verts = polygonVertices(poly);
 %     drawPoint(verts, 'bo');
 %
-%   See also
+%   See also 
 %     polygons2d, polygonEdges
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2018-06-07,    using Matlab 9.4.0.813654 (R2018a)
-% Copyright 2018 INRA - Cepia Software Platform.
-
+% E-mail: david.legland@inrae.fr
+% Created: 2018-06-07, using Matlab 9.4.0.813654 (R2018a)
+% Copyright 2018-2023 INRA - Cepia Software Platform
 
 if isnumeric(poly)
     % find NaN or infinite values

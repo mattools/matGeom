@@ -17,22 +17,16 @@ function varargout = createIcosahedron()
 %     [n, e, f] = createIcosahedron;
 %     drawMesh(n, f);
 %   
-%   See also
+%   See also 
 %   meshes3d, drawMesh
 %   createCube, createOctahedron, createDodecahedron, createTetrahedron
 %
 
-%   ---------
-%   author: David Legland 
-%   mail: david.legland@inra.fr
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 21/03/2005.
-%
-
-%   HISTORY
-%   2007-01-04 remove unused variables
-%   2010-12-06 format output, orient normals outwards
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-03-21
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 %% Initialisations
 

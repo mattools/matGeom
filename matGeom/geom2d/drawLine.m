@@ -19,35 +19,21 @@ function varargout = drawLine(lin, varargin)
 %     drawLine([30 40 20 -10], 'Color', 'm', 'LineWidth', 2);
 %     drawLine([-30 140 10 20]);
 %
-%   See also:
-%   lines2d, createLine, drawEdge
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
+%   See also 
+%     lines2d, createLine, drawEdge, clipLine
 %
 
-%   HISTORY
-%   25/05/2004 add support for multiple lines (loop)
-%   23/05/2005 add support for arguments
-%   03/08/2010 bug for lines outside box (thanks to Reto Zingg)
-%   04/08/2010 rewrite using clipLine
-%   2011-10-11 add management of axes handle
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
-% extract handle of axis to draw in
-if isAxisHandle(lin)
-    ax = lin;
-    lin = varargin{1};
-    varargin(1) = [];
-else
-    ax = gca;
-end
-
-% default style for drawing lines
-if length(varargin) ~= 1
-    varargin = [{'color', 'b'}, varargin];
-end
+isLine3d = @(x) validateattributes(x,{'numeric'},...
+    {'nonempty','nonnan','real','finite','size',[nan,4]});
+defOpts.Color = 'b';
+[ax, lin, varargin] = ...
+    parseDrawInput(lin, isLine3d, 'line', defOpts, varargin{:});
 
 % extract bounding box of the current axis
 xlim = get(ax, 'xlim');

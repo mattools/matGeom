@@ -12,15 +12,12 @@ function b = onCircle(point, circle)
 %
 %   See also:
 %   circles2d, inCircle
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 07/04/2004.
-%
 
-%   HISTORY
-%   22/05/2009 deprecate
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-04-07
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 % deprecation warning
 warning('geom2d:deprecated', ...
@@ -28,4 +25,3 @@ warning('geom2d:deprecated', ...
 
 d = sqrt(sum(power(point - circle(:,1:2), 2), 2));
 b = abs(d-circle(:,3))<1e-12;
-    

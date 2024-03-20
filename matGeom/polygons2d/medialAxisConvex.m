@@ -18,19 +18,14 @@ function [nodes, edges] = medialAxisConvex(points)
 %   - Complexity is not optimal: this algorithm is O(n*log n), but linear
 %   algorithms exist.
 %
-%   See also:
+%   See also 
 %   polygons2d, bisector
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 07/07/2005.
-%
 
-%   HISTORY
-%   18/04/2007: fix some typos, note the function to be unimplemented
-
-%   TODO: is not fully implemented, need to finish it
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-07-07
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % eventually remove the last point if it is the same as the first one
 if points(1,:) == points(end, :)
@@ -82,9 +77,7 @@ events = sortrows([ (1:N)' [2:N 1]' pint ti], 5);
 % initialize edges
 edges = zeros(0, 2);
 
-
-% -------------------
-% process each event until there is no more
+%% process each event until there is no more
 
 % start after index of last vertex, and process N-3 intermediate rays
 for i = N+1:2*N-3

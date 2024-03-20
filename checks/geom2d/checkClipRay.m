@@ -1,5 +1,5 @@
 function checkClipRay(varargin)
-%CHECKCLIPRAY  One-line description here, please.
+%CHECKCLIPRAY One-line description here, please.
 %   output = checkClipRay(input)
 %
 %   Example
@@ -7,7 +7,7 @@ function checkClipRay(varargin)
 %
 %   See also
 %
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
@@ -22,18 +22,19 @@ directions = [cos(theta) sin(theta)];
 rays = [origins directions];
 
 % create new figure
-figure(1); clf;
+figure('color','w'); clf;
 axis([-50 150 -50 150]);
-hold on;
+box on; hold on;
 
 % draw all rays
 drawRay(rays);
 
 % clip rays
-box = [0 100 0 100];
-clipped = clipRay(rays, box);
+bbox = [0 100 0 100];
+clipped = clipRay(rays, bbox);
 
 % draw clipped edges
-drawBox(box);
+drawBox(bbox);
 drawEdge(clipped, 'linewidth', 2);
-drawPoint(origins, 'bo');
+oH = drawPoint(origins, 'bo');
+legend(oH, 'Origins of the rays')

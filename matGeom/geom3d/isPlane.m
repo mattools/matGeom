@@ -11,13 +11,14 @@ function d = isPlane(plane)
 %         0 0 0 nan 0 0 0 1 0;...
 %         0 0 0 inf 0 0 0 1 0])
 %
-%   See also
+%   See also 
 %   createPlane3d
-%
+
 % ------
-% Author: oqilipo, David Legland
+% Author: oqilipo
+% E-mail: N/A
 % Created: 2017-07-09
-% Copyright 2017
+% Copyright 2017-2023
 
 narginchk(1,1)
 
@@ -30,4 +31,6 @@ a = ~any(isnan(plane),2);
 b = ~any(isinf(plane),2);
 c = ~isParallel3d(plane(:,4:6), plane(:,7:9));
 
-d=a & b & c;
+d = a & b & c;
+
+end

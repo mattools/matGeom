@@ -1,26 +1,39 @@
-function box3d = orientedBox3d(pts)
+function [box3d, rotMat] = orientedBox3d(pts)
 %ORIENTEDBOX3D Object-oriented bounding box of a set of 3D points.
 %
 %   OOBB = orientedBox3d(PTS)
+%   REturns the oriented bounding box of the collection of points in the
+%   N-by-3 array PTS. The result is given as:
+%   [XC YC ZC  L W H  PHI THETA PSI]
+%   where (XC,YC,ZC) corresponds to the center of the box, (L,W,H)
+%   corresponds to the length, width, and depth of the box, and (PHI,
+%   THETA, PSI) is the orientation of the box as Euler angles.
+%
+%   [OOBB, ROT] = orientedBox3d(PTS)
+%   Also returns the rotation matrix of the point cloud, as a 3-by-3
+%   numeric array.
 %
 %   Example
 %     [v, f] = sphereMesh;
-%     rotMat = eulerAnglesToRotation3d(30, 20, 10);
-%     pts = transformPoint3d(bsxfun(@times, v, [5 3 1]), rotMat);
+%     phi=-360+720*rand; theta=-360+720*rand; psi=-360+720*rand;
+%     angles = [phi, theta, psi];
+%     rotMat = eulerAnglesToRotation3d(angles);
+%     rotMat(1:3,4) = randi([-100,100],3,1);
+%     scale = [randi([7,9],1,1), randi([4,6],1,1), randi([1,3],1,1)];
+%     pts = transformPoint3d(bsxfun(@times, v, scale), rotMat);
 %     box3d = orientedBox3d(pts);
-%     figure; drawPoint3d(pts, '.'); hold on;
-%     axis equal; axis([-6 6 -6 6 -5 5]);
-%     h = drawCuboid(box3d);
-%     set(h, 'facecolor', 'none');
+%     figure; drawPoint3d(pts, '.'); 
+%     axis equal; xlabel('x'); ylabel('y'); zlabel('z');
+%     drawCuboid(box3d, 'FaceColor', 'none');
 %
-%   See also
-%     meshes3d, drawCuboid
- 
+%   See also 
+%     meshes3d, drawCuboid, rotation3dToEulerAngles
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
-% Created: 2015-12-01,    using Matlab 8.6.0.267246 (R2015b)
-% Copyright 2015 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2015-12-01, using Matlab 8.6.0.267246 (R2015b)
+% Copyright 2015-2023 INRA - Cepia Software Platform
 
 tri = convhulln(pts);
 nFaces = size(tri, 1);

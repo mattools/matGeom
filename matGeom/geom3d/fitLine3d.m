@@ -10,22 +10,22 @@ function line = fitLine3d(points)
 %     pts = transformPoint3d(pts, createRotationOy(pi/4));
 %     pts = transformPoint3d(pts, createRotationOz(pi/3));
 %     pts = transformPoint3d(pts, createTranslation3d([5 4 3]));
-%     elli = inertiaEllipsoid(pts);
+%     elli = equivalentEllipsoid(pts);
 %     figure; drawPoint3d(pts); axis equal;
 %     hold on; drawEllipsoid(elli, ...
 %         'drawEllipses', true, 'EllipseColor', 'b', 'EllipseWidth', 3);
 %     line = fitLine3d(pts);
 %     drawLine3d(line, 'color', 'm', 'LineWidth', 4);
 %
-%   See also
-%     lines3d, inertiaEllipsoid, fitPlane
+%   See also 
+%     lines3d, equivalentEllipsoid, fitPlane, fitLine
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2012-11-11,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2012-11-11, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012-2023 INRA - Cepia Software Platform
 
 % number of points
 n = size(points, 1);
@@ -51,4 +51,5 @@ if U(1,1) < 0
     U(:,3) = -U(:,3);
 end
 
+% create row vector representing the line
 line = [center U(:,1)'];

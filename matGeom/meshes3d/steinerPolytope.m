@@ -14,19 +14,15 @@ function [vertices, faces] = steinerPolytope(vectors)
 %     drawMesh(v, f);
 %     view(3); axis vis3d
 %
-%   See also
+%   See also 
 %   meshes3d, drawMesh, steinerPolygon, mergeCoplanarFaces
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2006-04-28
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
-
-% History
-% 2013-02-22 merge coplanar faces, add management of 2D case, update doc
-
+% Copyright 2006-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % compute vectors dimension
 nd = size(vectors, 2);

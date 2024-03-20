@@ -45,22 +45,15 @@ function varargout = drawCircle3d(varargin)
 %     drawCircle3d([circ1 ; circ2 ; circ3]);
 %     axis equal;
 %
-%   See also:
-%   circles3d, drawCircleArc3d, drawEllipse3d, drawSphere
+%   See also 
+%     circles3d, drawCircleArc3d, drawEllipse3d, drawSphere
 %
-%   ------
-%   Author: David Legland
-%   e-mail: david.legland@grignon.inra.fr
-%   Created: 2005-02-17
-%   Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
 
-%   HISTORY
-%   14/12/2006 allows unspecified PHI and THETA
-%   04/01/2007 update doc, add todo for angle convention
-%   19/06/2009 use localToGlobal3d, add drawing options
-%   08/03/2010 use drawPolyline3d
-%   2011-06-20 use angles in degrees, support several circles, update doc
-
+% ------
+% Author: David Legland
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-17
+% Copyright 2005-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 %   Possible calls for the function, with number of arguments :
 %   drawCircle3d([XC YC ZC R THETA PHI])            1
@@ -74,6 +67,8 @@ function varargout = drawCircle3d(varargin)
 %   drawCircle3d(XC, YC, ZC, R, THETA, PHI)         6
 %   drawCircle3d(XC, YC, ZC, R, THETA, PHI, PSI)    7
 
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
 % extract drawing options
 if verLessThan('matlab', '7.8')
@@ -210,6 +205,11 @@ t   = linspace(0, 2*pi, Nt+1);
 nCircles = length(xc);
 h = zeros(nCircles, 1);
 
+% save hold state
+holdState = ishold(hAx);
+hold(hAx, 'on');
+
+% iterate over circles to draw
 for i = 1:nCircles
     % compute position of circle points
     x       = r(i) * cos(t)';
@@ -224,9 +224,13 @@ for i = 1:nCircles
     circle  = transformPoint3d(circle0, trans);
 
     % draw the curve of circle points
-    h(i) = drawPolyline3d(circle, options{:});
+    h(i) = drawPolyline3d(hAx, circle, options{:});
 end
 
+% restore hold state
+if ~holdState
+    hold(hAx, 'off');
+end
 
 if nargout > 0
     varargout = {h};

@@ -14,15 +14,12 @@ function trans = translation(varargin)
 %
 %   See also:
 %   transforms2d, transformPoint, rotation, scaling
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 06/04/2004.
-%
 
-%   HISTORY
-%   22/04/2009: copy to createTranslation and deprecate
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-04-06
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 % deprecation warning
 warning('geom2d:deprecated', ...

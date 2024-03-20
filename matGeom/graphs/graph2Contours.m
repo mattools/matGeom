@@ -13,14 +13,12 @@ function varargout = graph2Contours(nodes, edges) %#ok<INUSL>
 %
 %   NOTE : contours are not oriented. To manage contour orientation, edges
 %   also need to be oriented. So we must precise generation of edges.
-%
-%   -----
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 05/08/2004.
-%
 
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-08-05
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 curves = {};
 c = 0;

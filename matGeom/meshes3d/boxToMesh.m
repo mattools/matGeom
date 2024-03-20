@@ -1,5 +1,5 @@
 function varargout = boxToMesh(varargin)
-% BOXTOMESH Convert a box into a quad mesh with the same size.
+%BOXTOMESH Convert a box into a quad mesh with the same size.
 %
 %   [V E F] = boxToMesh(BOX) 
 %   Create a box as a polyhedra representation. The box is defined by its  
@@ -23,12 +23,14 @@ function varargout = boxToMesh(varargin)
 %   [v, f] = boxToMesh([-2 -1 0 pi 2 3])
 %   drawMesh(v, f);
 %   
-%   See also
+%   See also 
 %   meshes3d, drawMesh, triangulateFaces
 
-%   ---------
-%   authors: David Legland, oqilipo
-%   created the 22/09/2016.
+% ------
+% Authors: David Legland, oqilipo
+% E-mail: david.legland@inrae.fr
+% Created: 2016-09-22
+% Copyright 2016-2023
 
 p = inputParser;
 boxDefault = [0 1 0 1 0 1];
@@ -58,7 +60,7 @@ vertices = [...
 edges = [1 2;1 3;1 5;2 4;2 6;3 4;3 7;4 8;5 6;5 7;6 8;7 8];
 
 % faces are oriented such that normals point outwards
-faces = [1 3 4 2;5 6 8 7;2 4 8 6;1 5 7 3;1 2 6 5;3 7 8 4];
+faces = [2 4 3 1;7 8 6 5;6 8 4 2;3 7 5 1;5 6 2 1;4 8 7 3];
 
 % format output
 varargout = formatMeshOutput(nargout, vertices, edges, faces);

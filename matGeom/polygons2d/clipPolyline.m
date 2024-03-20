@@ -20,17 +20,15 @@ function res = clipPolyline(poly, box)
 %     drawBox(box, 'k')
 %     drawPolyline(res, 'linewidth', 2, 'color', 'b')
 % 
-%   See also:
+%   See also 
 %     polygons2d, boxes2d, clipPolygon, clipEdge
 %
 
-% ---------
-% author : David Legland 
-% created the 14/05/2005.
-% Copyright 2010 INRA - Cepia Software Platform.
-
-%   HISTORY
-%   2007/09/14 fix doc
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-05-14
+% Copyright 2005-2023 INRA - Cepia Software Platform
 
 % check case of polylines stored in cell array
 if iscell(poly)

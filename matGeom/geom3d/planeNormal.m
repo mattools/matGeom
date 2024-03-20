@@ -6,18 +6,15 @@ function n = planeNormal(plane)
 %   PLANE : [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2]
 %   N : [dx dy dz]
 %   
-%   See also
+%   See also 
 %   geom3d, planes3d, createPlane
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 17/02/2005.
-%
-
-%   HISTORY
-%   15/04/2013 Extended to N-dim planes by Sven Holcombe
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-17
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % plane normal
 outSz = size(plane);

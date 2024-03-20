@@ -1,15 +1,17 @@
-function [dist, proj] = distancePointMesh(point, vertices, faces, varargin)
-%DISTANCEPOINTMESH  Shortest distance between a (3D) point and a triangle mesh.
+function [dist, proj] = distancePointMesh(points, vertices, faces, varargin)
+%DISTANCEPOINTMESH Shortest distance between a (3D) point and a triangle mesh.
 %
-%   DIST = distancePointMesh(POINT, VERTICES, FACES)
-%   Returns the shortest distance between the query point POINT and the
+%   DIST = distancePointMesh(POINTS, VERTICES, FACES)
+%   Returns the shortest distance between the query point(s) POINTS and the
 %   triangular mesh defined by the set of vertex coordinates VERTICES and
-%   the set of faces FACES. VERTICES is a NV-by-3 array, and FACES is a
-%   NF-by-3 array of vertex indices.
+%   the set of faces FACES. POINTS is a NP-by-3 array, VERTICES is a 
+%   NV-by-3 array, and FACES is a NF-by-3 array of vertex indices.
 %   If FACES is NF-by-4 array, it is converted to a (NF*2)-by-3 array.
+%   DIST is the NP-by-1 vector of distances.
 %
 %   [DIST, PROJ] = distancePointMesh(...)
-%   Also returns the projection of the query point on the triangular mesh.
+%   Also returns the NP-by-3 projection of the query point(s) on the 
+%   triangular mesh.
 %
 %   ... = distancePointMesh(..., 'algorithm', ALGO)
 %   Allows to choose the type of algorithm. Options are:
@@ -31,25 +33,22 @@ function [dist, proj] = distancePointMesh(point, vertices, faces, varargin)
 %     drawPoint3d(PROJ, 'm*');
 %     drawEdge3d([P PROJ], 'linewidth', 2, 'color', 'b');
 %
-%   See also
+%   See also 
 %     distancePointTriangle3d
 %
 %   References
-%   * "Distance Between Point and Triangle in 3D", David Eberly (1999)
-%   https://www.geometrictools.com/Documentation/DistancePoint3Triangle3.pdf
-%   * <a href="matlab:
-%     web('https://fr.mathworks.com/matlabcentral/fileexchange/22857-distance-between-a-point-and-a-triangle-in-3d')
-%   ">Distance between a point and a triangle in 3d</a>, by Gwendolyn Fischer.
-%   * <a href="matlab:
-%     web('https://fr.mathworks.com/matlabcentral/fileexchange/52882-point2trimesh------distance%C2%A0between-point-and-triangulated-surface')
-%   ">Distance Between Point and Triangulated Surface</a>, by Daniel Frisch.
- 
+%   * "Distance Between Point and Triangle in 3D", David Eberly
+%       https://www.geometrictools.com/Documentation/DistancePoint3Triangle3.pdf
+%   * "Distance between a point and a triangle in 3d", by Gwendolyn Fischer
+%       https://mathworks.com/matlabcentral/fileexchange/22857
+%   * "Distance Between Point and Triangulated Surface", by Daniel Frisch
+%       https://www.mathworks.com/matlabcentral/fileexchange/52882
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2018-03-08,    using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2018 INRA - Cepia Software Platform.
-
+% E-mail: david.legland@inrae.fr
+% Created: 2018-03-08, using Matlab 9.3.0.713579 (R2017b)
+% Copyright 2018-2023 INRA - Cepia Software Platform
 
 %% Parses input arguments
 
@@ -97,9 +96,9 @@ end
 % switch to vectorized algorithm if necessary
 if strcmpi(algo, 'vectorized')
     if nargout > 1
-        [dist, proj] = distancePointTrimesh_vectorized(point, vertices, faces);
+        [dist, proj] = distancePointTrimesh_vectorized(points, vertices, faces);
     else
-        dist = distancePointTrimesh_vectorized(point, vertices, faces);
+        dist = distancePointTrimesh_vectorized(points, vertices, faces);
     end
     return;
 end
@@ -109,18 +108,18 @@ end
 % For each point, iterates over the triangular faces
 
 % allocate memory for result
-nPoints = size(point, 1);
+nPoints = size(points, 1);
 dist = zeros(nPoints, 1);
 
 if nargout > 1
-    projPoints = zeros(nPoints, 3);
+    proj = zeros(nPoints, 3);
 end
 
 % iterate over points
 for i = 1:nPoints
     % % min distance and projection for current point
     minDist = inf;
-    proj = [0 0 0];
+    projp = [0 0 0];
     
     % iterate over faces
     for iFace = 1:nFaces
@@ -128,17 +127,17 @@ for i = 1:nPoints
         face = faces(iFace, :);
         triangle = vertices(face, :);
         
-        [distf, projf] = distancePointTriangle3d(point(i,:), triangle);
+        [distf, projf] = distancePointTriangle3d(points(i,:), triangle);
         
         if distf < minDist
             minDist = distf;
-            proj = projf;
+            projp = projf;
         end
     end
     
     dist(i) = minDist;
     if nargout > 1
-        projPoints(i,:) = proj;
+        proj(i,:) = projp;
     end
 end
 end
@@ -155,14 +154,12 @@ function [dist, proj] = distancePointTrimesh_vectorized(point, vertices, faces)
 %   Example
 %   distancePointTrimesh
 %
-%   See also
-%
 
-% ------
+% ­­­­­‒­­­­‒­­­­‒­­­­‒­­­­‒­­­­‒­­­­­
 % Author: David Legland
 % e-mail: david.legland@inra.fr
-% Created: 2018-03-08,    using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2018 INRA - Cepia Software Platform.
+% Created: 2018-03-08, using Matlab 9.3.0.713579 (R2017b)
+% Copyright 2018 INRA - Cepia Software Platform
 
 % Regions are not numbered as in the original paper of D. Eberly to allow
 % automated computation of regions from the 3 conditions on lines.
@@ -172,7 +169,7 @@ function [dist, proj] = distancePointTrimesh_vectorized(point, vertices, faces)
 %   b0 = 1 if s < 0, 0 otherwise
 %   b1 = 1 if t < 0, 0 otherwise
 %   b2 = 1 if s+t > 1, 0 otherwise
-% resulting ion the following region indices:
+% resulting in the following region indices:
 %        /\ t
 %        |
 %   \ R5 |
@@ -188,7 +185,7 @@ function [dist, proj] = distancePointTrimesh_vectorized(point, vertices, faces)
 %        | R0 \ 
 %        |     \ 
 %        | P1   \ P2
-%  ------*-------*------> s
+%  ­­­­–­­­–­­­–­­­–­­­–­­­–*–­­­–­­­–­­­–­­­–­­­––*–­­­–­­­–­­­–­­­–­­­–> s
 %        |        \   
 %   R3   |   R2    \   R6 
 
@@ -278,9 +275,9 @@ for i = 1:nPoints
     s(inds2) = 0;
     bool3 = e(inds2) >= 0;
     t(inds2(bool3)) = 0;
-    bool3 = e(inds2) < 0 & c(inds2) <= e(inds2);
+    bool3 = e(inds2) < 0 & c(inds2) <= -e(inds2);
     t(inds2(bool3)) = 1;
-    bool3 = e(inds2) < 0 & c(inds2) > e(inds2);
+    bool3 = e(inds2) < 0 & c(inds2) > -e(inds2);
     inds3 = inds2(bool3);
     t(inds3) = -e(inds3) ./ c(inds3);
     

@@ -22,28 +22,18 @@ function h = drawPoint3d(varargin)
 %     figure; drawPoint3d(pts3d, 'b.');
 %     view(3); axis equal;
 %
-%   See also
+%   See also 
 %     points3d, clipPoints3d, drawPoint
 %
 
-% ---------
+% ------
 % Author : David Legland 
-% INRA - TPV URPOI - BIA IMASTE
-% created the 18/02/2005.
-%
-%   HISTORY
-%   04/01/2007: remove unused variables, and enhance support for plot
-%       options
-%   12/02/2010 does not clip points anymore
-%   12/01/2018 added axes handle input
-%
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-18
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
-if numel(varargin{1}) == 1 && ishghandle(varargin{1}, 'axes')
-    hAx = varargin{1};
-    varargin(1)=[];
-else
-    hAx = gca;
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
 if length(varargin) == 1 && size(varargin{1}, 2) == 3
     % points are given as one single array with 3 columns

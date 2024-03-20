@@ -13,15 +13,15 @@ function points = polyhedronSlice(nodes, faces, plane)
 %   Example
 %   polyhedronSlice
 %
-%   See also
-%   polyhedra, clipConvexPolyhedronHP, intersectPlaneMesh
+%   See also 
+%   polyhedra, clipConvexPolyhedronByPlane, intersectPlaneMesh
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
-% Created: 2007-09-18,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% E-mail: david.legland@inrae.fr
+% Created: 2007-09-18, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2007-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % if faces is a numeric array, convert it to cell array
 if isnumeric(faces)

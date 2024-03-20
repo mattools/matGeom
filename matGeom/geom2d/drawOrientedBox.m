@@ -1,4 +1,4 @@
-function varargout = drawOrientedBox(box, varargin)
+function varargout = drawOrientedBox(varargin)
 %DRAWORIENTEDBOX Draw centered oriented rectangle.
 %   
 %   Syntax
@@ -33,30 +33,24 @@ function varargout = drawOrientedBox(box, varargin)
 %     drawOrientedBox(box, 'color', 'k');
 %     axis equal;
 %
-%   See also
-%   orientedBox, drawPolygon, drawRect, drawBox, drawCenteredEdge
+%   See also 
+%     orientedBox, drawPolygon, drawRect, drawBox, drawCenteredEdge
 %
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2011-05-09,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
-
-% HISTORY
-%   2011-07-22 simplifies code
-%   2011-10-11 add management of axes handle
-
+% E-mail: david.legland@inrae.fr
+% Created: 2011-05-09, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 %% Parses input arguments
 
 % extract handle of axis to draw on
-if isAxisHandle(box)
-    ax = box;
-    box = varargin{1};
-    varargin(1) = [];
-else
-    ax = gca;
-end
+[ax, varargin] = parseAxisHandle(varargin{:});
+
+% extract shape primitive
+box = varargin{1};
+varargin(1) = [];
 
 if length(varargin) > 4 && sum(cellfun(@isnumeric, varargin(1:4))) == 4
     % input given as separate arguments
@@ -77,10 +71,17 @@ else
 end
 
 
-%% Draw each box
+%% Pre-processing
 
 % allocate memory for graphical handle
 hr = zeros(length(cx), 1);
+
+% save hold state
+holdState = ishold(ax);
+hold(ax, 'on');
+
+
+%% Draw each box
 
 % iterate on oriented boxes
 for i = 1:length(cx)
@@ -103,8 +104,14 @@ for i = 1:length(cx)
 end
 
 
-%% Format output
+%% Post-processing
 
+% restore hold state
+if ~holdState
+    hold(ax, 'off');
+end
+
+% Format output
 if nargout > 0
     varargout = {hr};
 end

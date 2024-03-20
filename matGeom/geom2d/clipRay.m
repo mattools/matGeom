@@ -1,5 +1,5 @@
 function [edge, isInside] = clipRay(ray, bb)
-% Clip a ray with a box.
+%CLIPRAY Clip a ray with a box.
 %
 %   EDGE = clipRay(RAY, BOX);
 %   RAY is a straight ray given as a 4 element row vector: [x0 y0 dx dy],
@@ -14,19 +14,15 @@ function [edge, isInside] = clipRay(ray, bb)
 %   if both RAY and BOX are N-by-4 arrays. In these cases, EDGE is a N-by-4
 %   array.
 %      
-%   See also:
+%   See also 
 %     rays2d, boxes2d, edges2d, clipLine, drawRay
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2010-05-13,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2010 INRA - Cepia Software Platform.
-
-%   HISTORY
-%   2010-05-13 create from clipLine
-%   2017-09-21 simplify code
+% E-mail: david.legland@inrae.fr
+% Created: 2010-05-13, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2010-2023 INRA - Cepia Software Platform
 
 % adjust size of two input arguments
 if size(ray, 1) == 1
@@ -44,8 +40,8 @@ edge = clipLine(ray, bb);
 inds = find(isfinite(edge(:, 1)));
 
 % compute position of edge extremities relative to the ray
-pos1 = linePosition(edge(inds,1:2), ray(inds,:));
-pos2 = linePosition(edge(inds,3:4), ray(inds,:));
+pos1 = linePosition(edge(inds,1:2), ray(inds,:), 'diag');
+pos2 = linePosition(edge(inds,3:4), ray(inds,:), 'diag');
 
 % if first point is before ray origin, replace by origin
 edge(inds(pos1 < 0), 1:2) = ray(inds(pos1 < 0), 1:2);

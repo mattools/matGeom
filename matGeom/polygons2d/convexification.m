@@ -15,17 +15,14 @@ function co = convexification(varargin)
 %   
 %   CAUTION: The result will be valid only for convex polygons.
 %
-%   See also
+%   See also 
 %   polygons2d, supportFunction 
-%
-% ---------
-% author: David Legland 
-% created the 12/01/2005.
-% Copyright 2010 INRA - Cepia Software Platform.
-%
 
-%   HISTORY
-%   13/06/2007: clean up code
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-01-12
+% Copyright 2005-2023 INRA - Cepia Software Platform
 
 if ~isempty(varargin)>0
     var = varargin{1};

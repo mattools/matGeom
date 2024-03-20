@@ -34,15 +34,15 @@ function [inter, inside]= intersectLinePolygon3d(line, poly)
 %     ans = 
 %           1   2   3
 %
-%   See Also
+%   See also 
 %   intersectLinePolygon, intersectRayPolygon3d, intersectLinePlane
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2011-05-22,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2011-05-22, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 % supporting plane of polygon vertices
 plane = createPlane(poly(1:3, :));

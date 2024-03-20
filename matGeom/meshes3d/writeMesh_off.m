@@ -1,19 +1,19 @@
 function writeMesh_off(fileName, vertices, faces)
-%WRITEMESH_OFF Writes a mesh into a text file in OFF format.
+%WRITEMESH_OFF Write a mesh into a text file in OFF format.
 %
 %   writeMesh_off(FNAME, V, F)
 %
 %   Example
 %   writeMesh_off
 %
-%   See also
-%      meshes3d, readMesh_off, writeMesh_ply
- 
+%   See also 
+%      meshes3d, writeMesh, readMesh_off, writeMesh_ply
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2018-04-26,    using Matlab 9.4.0.813654 (R2018a)
-% Copyright 2018 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2018-04-26, using Matlab 9.4.0.813654 (R2018a)
+% Copyright 2018-2023 INRA - Cepia Software Platform
 
 if ~ischar(fileName)
     error('First argument must contain the name of the file');
@@ -40,7 +40,7 @@ nFaces = size(faces, 1);
 if iscell(faces)
     nFaces = length(faces);
 end
-fprintf(f, '%d %d\n', nVertices, nFaces);
+fprintf(f, '%d %d 0\n', nVertices, nFaces);
 
 % Write vertex info
 format = '%g %g %g\n';

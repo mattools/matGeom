@@ -19,15 +19,15 @@ function g = grVertexEccentricity(v, e, l, inds)
 %     G = grVertexEccentricity(nodes, edges);
 %     drawNodeLabels(nodes+2, G);
 %
-%   See Also
+%   See also 
 %   graphRadius, graphCenter, graphDiameter, graphPeripheralVertices
 %   grPropagateDistance
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2010-09-07,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2010-09-07, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2010-2023 INRA - Cepia Software Platform
 
 % init result
 Nv = size(v, 1);

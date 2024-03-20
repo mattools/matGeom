@@ -8,17 +8,14 @@ function plane = medianPlane(p1, p2)
 %   The direction of the normal of PLANE is the same as the vector from P1
 %   to P2.
 %
-%   See also:
+%   See also 
 %   planes3d, createPlane
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 18/02/2005.
-%
 
-%   HISTORY
-%   28/06/2007: add doc, and manage multiple inputs
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-18
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % unify data dimension
 if size(p1, 1)==1

@@ -12,21 +12,15 @@ function b = isPointOnLine(point, line, varargin)
 %   B = isPointOnLine(POINT, LINE, TOL)
 %   Specifies the tolerance used for testing location on 3D line. Default value is 1e-14.
 %
-%   See also: 
+%   See also 
 %   lines2d, points2d, isPointOnEdge, isPointOnRay, isLeftOriented
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
-
-%   HISTORY
-%   11/03/2004 support for multiple inputs
-%   08/12/2004 complete implementation, add doc
-%   22/05/2009 rename to isPointOnLine, add psb to specify tolerance
-%   17/12/2013 replace repmat by bsxfun (faster)
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 % extract computation tolerance
 tol = 1e-14;

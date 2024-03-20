@@ -6,18 +6,14 @@ function line = reverseLine(line)
 %   LINE has the format [x0 y0 dx dy], then INVLINE will have following
 %   parameters: [x0 y0 -dx -dy].
 %
-%   See also:
+%   See also 
 %   lines2d, createLine
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 20/01/2004.
-%
 
-%   HISTORY
-%   30/06/2009 rename as reverseLine
-%   15/03/2011 simplify code
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-01-20
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 line(:, 3:4) = -line(:, 3:4);
 

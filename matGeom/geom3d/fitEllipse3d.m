@@ -24,24 +24,24 @@ function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin)
 %     fpoints = transformPoint3d([fx, fy, zeros(n,1)], fTFM);
 %     drawEllipse3d(fE,'k')
 %   
-%   See also
+%   See also 
 %     drawEllipse3d, ellipseToPolygon
 %
 %   Source
-%     Nested functions are part of the quadfit toolbox of Levente Hunyadi
-%     https://de.mathworks.com/matlabcentral/fileexchange/45356
-%
-% ---------
+%     Nested functions are part of the quadfit toolbox by Levente Hunyadi
+%     https://mathworks.com/matlabcentral/fileexchange/45356
+
+% ------
 % Author: oqilipo
+% E-mail: N/A
 % Created: 2017-08-11
-% Copyright 2017
+% Copyright 2017-2023
 
 parser = inputParser;
 addRequired(parser, 'points', @(x) validateattributes(x, {'numeric'},...
     {'ncols',3,'real','finite','nonnan'}));
 addOptional(parser,'visualization',false,@islogical);
 parse(parser,points,varargin{:});
-
 points=parser.Results.points;
 
 % Mean of all points
@@ -83,7 +83,7 @@ end
 fittedEllipse3d=[center A B THETA PHI PSI];
 
 %% Visualization
-if parser.Results.visualization == true
+if parser.Results.visualization
     
     figure('Color','w'); axis equal tight; hold on; view(3)
     xlabel('x'); ylabel('y'); zlabel('z');
@@ -252,7 +252,6 @@ end
     function varargout = ellipse_im2ex(varargin)
         % Cast ellipse defined with implicit parameter vector to explicit form.
         %
-        % See also: ellipse_ex2im
         
         % Copyright 2011 Levente Hunyadi
         

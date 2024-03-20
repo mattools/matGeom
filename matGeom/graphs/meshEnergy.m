@@ -1,19 +1,25 @@
 function energy = meshEnergy(vertices, faces)
-%MESHENERGY  One-line description here, please.
+%MESHENERGY Computes the energy of a tesselation, as the sum of second area moments.
 %
-%   output = meshEnergy(input)
+%   This function can be used to check that the total energy of Centroidal
+%   Voronoi Tesselation (CVT) decreases with the iterations of the Lloyd
+%   algorithm.
+%
+%   E = meshEnergy(V, F)
+%   V is the list of mesh vertices, and F are faces, as a cell array of
+%   vertex indices.
 %
 %   Example
 %   meshEnergy
 %
-%   See also
-%
- 
+%   See also 
+%     centroidalVoronoi2d, cvtUpdate, polygonSecondAreaMoments
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2017-09-01,    using Matlab 9.1.0.441655 (R2016b)
-% Copyright 2017 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2017-09-01, using Matlab 9.1.0.441655 (R2016b)
+% Copyright 2017-2023 INRA - Cepia Software Platform
 
 nFaces = meshFaceNumber(vertices, faces);
 

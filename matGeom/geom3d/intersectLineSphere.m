@@ -35,19 +35,15 @@ function points = intersectLineSphere(line, sphere, varargin)
 %     pts2 = intersectLineSphere(lines2, sphere);
 %     drawPoint3d(pts, 'rx');
 %
-%   See also
+%   See also 
 %   spheres, circles3d, intersectPlaneSphere
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 18/02/2005.
-%
-
-%   HISTORY
-%   2011-06-21 bug for tangent lines, add tolerance
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-18
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 %% Process input arguments
 

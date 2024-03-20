@@ -1,5 +1,5 @@
 function ell = equivalentEllipse(points)
-% Equivalent ellipse of a set of points.
+%EQUIVALENTELLIPSE Equivalent ellipse of a set of points.
 %
 %   ELL = equivalentEllipse(PTS);
 %   Computes the ellips with the same moments up to the second order as the
@@ -24,19 +24,16 @@ function ell = equivalentEllipse(points)
 %     drawPoint(pts);
 %     drawEllipse(ell, 'linewidth', 2, 'color', 'r');
 %
-%   See also
-%     ellipses2d, drawEllipse, equivalentEllipsoid, principalAxes
+%   See also 
+%     ellipses2d, drawEllipse, equivalentEllipsoid, principalAxes,
+%     principalAxesTransform 
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2008-02-21,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
-
-% HISTORY
-% 2009-07-29 take into account ellipse orientation
-% 2011-03-12 rewrite using equivalent moments
+% E-mail: david.legland@inrae.fr
+% Created: 2008-02-21, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2008-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % ellipse center
 xc = mean(points(:,1));

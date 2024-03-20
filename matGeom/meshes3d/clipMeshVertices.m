@@ -14,9 +14,8 @@ function varargout = clipMeshVertices(v, f, b, varargin)
 %   faces instead of the outer faces.
 %
 %   [V2, F2] = clipMeshVertices(..., 'trimMesh', TF)
-%   Also specifies if the isolated vertices need to be removed (TF=true) ot
+%   Also specifies if the isolated vertices need to be removed (TF=true) or
 %   not (TF=false). Default is false.
-%
 %
 %   Example
 %     [v, f] = createSoccerBall;
@@ -28,15 +27,15 @@ function varargout = clipMeshVertices(v, f, b, varargin)
 %     drawBox3d(box)
 %     drawMesh(v2, f2, 'faceAlpha', .7);
 %
-%   See also
+%   See also 
 %   meshes3d, clipPoints3d
 %
 
 % ------
 % Author: David Legland, oqilipo
-% e-mail: david.legland@inra.fr
-% Created: 2011-04-07,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2011-04-07, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 % if input is given as a structure, parse fields
 if isstruct(v)

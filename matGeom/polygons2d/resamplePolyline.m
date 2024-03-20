@@ -14,15 +14,15 @@ function poly2 = resamplePolyline(poly, n)
 %     drawPolyline(poly2, 'bo');
 %     axis equal; axis([-10 30 -10 20]);
 %
-%   See also
+%   See also 
 %     polygons2d, drawPolyline, resamplePolygon, resamplePolylineByLength
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2011-12-09,    using Matlab 7.9.0.529 (R2009b)
-% Copyrightf 2011 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2011-12-09, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 % parametrisation of the curve
 s = parametrize(poly);

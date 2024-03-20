@@ -15,18 +15,15 @@ function [dist, pos] = distancePointLine(point, line)
 %   number of points, and NL is the number of lines.
 %
 %
-%   See also:
+%   See also 
 %   lines2d, points2d, distancePoints, distancePointEdge
 %
-   
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-06-24
-% Copyright 2016 INRA - BIA-BIBS.
-
-%   HISTORY:
-%   2012-10-24 rewrite using bsxfun
+% Copyright 2005-2023 INRA - BIA-BIBS
 
 % direction vector of each line (row vectors)
 vx = line(:, 3)';

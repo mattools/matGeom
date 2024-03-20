@@ -10,15 +10,12 @@ function varargout = drawNodeLabels(nodes, value, varargin)
 %   H = drawNodeLabels(...) 
 %   Returns array of handles to each text structure, making it possible to
 %   change font, color, size 
-%
-%   -----
-%   author: David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 10/02/2003.
-%
 
-%   HISTORY
-%   10/03/2004 included into lib/graph library
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-02-10
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 % extract handle of axis to draw on
 if isAxisHandle(nodes)

@@ -1,4 +1,4 @@
-function varargout = drawCuboid(cuboid, varargin)
+function varargout = drawCuboid(varargin)
 %DRAWCUBOID Draw a 3D cuboid, eventually rotated.
 %
 %   drawCuboid(CUBOID)
@@ -27,16 +27,23 @@ function varargout = drawCuboid(cuboid, varargin)
 %     view(3); axis equal;
 %     set(gcf, 'renderer', 'opengl')
 %
-%   See also
-%   meshes3d, polyhedra, createCube, drawEllipsoid, drawCube
+%   See also 
+%     meshes3d, polyhedra, createCube, drawEllipsoid, drawCube
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2011-06-29,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2011-06-29, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
+
+cuboid = varargin{1};
+varargin(1) = [];
+
+% default orientation
 phi   = 0;
 theta = 0;
 psi   = 0;
@@ -87,11 +94,11 @@ trans   = tra * rotZ * rotY * rotX * sca;
 %% Process output
 if nargout == 0
     % no output: draw the cuboid
-    drawMesh([x y z], f, varargin{:});
+    drawMesh(hAx, [x y z], f, varargin{:});
     
 elseif nargout == 1
     % one output: draw the cuboid and return handle 
-    varargout{1} = drawMesh([x y z], f, varargin{:});
+    varargout{1} = drawMesh(hAx, [x y z], f, varargin{:});
     
 elseif nargout == 3
     % 3 outputs: return computed coordinates

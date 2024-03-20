@@ -45,24 +45,15 @@ function [intersects, edgeIndices] = intersectLinePolyline(line, poly, varargin)
 %            0     0
 %           10    10
 %
-%   See Also
+%   See also 
 %   lines2d, polylines2d, intersectLines, intersectLinePolygon
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
-
-%   HISTORY
-%   2008-11-24 rename 'pi' as 'intersects', update doc
-%   2009-07-23 removed forgotten occurence of 'pi' variable (thanks to Bala
-%       Krishnamoorthy)
-%   2010-01-26 rewrite using vectorisation
-%   2011-05-20 returns unique results
-%   2011-07-20 returns intersected edge indices
-%   2012-11-33 add 'diag' option for linePosition
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 % get computation tolerance
 tol = 1e-14;

@@ -12,19 +12,15 @@ function len = polygonLength(poly, varargin)
 %     ans =
 %         6.2829
 %
-%   See also:
+%   See also 
 %   polygons2d, polygonCentroid, polygonArea, drawPolygon, polylineLength
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 11/05/2005.
-%
-
-%   HISTORY
-%   2011-03-31 add control for empty polygons, code cleanup
-%   2011-05-27 fix bugs
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-05-11
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % If first argument is a cell array, this is a multi-polygon, and we simply
 % add the lengths of individual polygons

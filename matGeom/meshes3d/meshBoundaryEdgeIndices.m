@@ -21,14 +21,14 @@ function inds = meshBoundaryEdgeIndices(varargin)
 %     edges = [vc(ec(inds, 1), :) vc(ec(inds, 2), :)];
 %     hold on; drawEdge3d(edges, 'linewidth', 2, 'color', 'b');
 %
-%   See also
+%   See also 
 %     meshes3d, meshBoundary, meshBoundaryVertexIndices, meshEdgeFaces
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2019-05-01,    using Matlab 8.6.0.267246 (R2015b)
-% Copyright 2019 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2019-05-01, using Matlab 8.6.0.267246 (R2015b)
+% Copyright 2019-2023 INRA - Cepia Software Platform
 
 [vertices, edges, faces] = parseMeshData(varargin{:});
 

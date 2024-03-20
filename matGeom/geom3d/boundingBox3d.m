@@ -8,7 +8,7 @@ function box = boundingBox3d(points)
 %   [XMIN XMAX YMIN YMAX ZMIN ZMAX]
 %
 %   Example
-%   % Draw bounding box of a cubeoctehedron
+%     % Draw bounding box of a cubeoctehedron
 %     [v e f] = createCubeOctahedron;
 %     box3d = boundingBox3d(v);
 %     figure; hold on;
@@ -18,18 +18,24 @@ function box = boundingBox3d(points)
 %     axis([-2 2 -2 2 -2 2]);
 %     view(3)
 %     
-%   See also
+%   See also 
 %   boxes3d, drawBox3d
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2011-04-01,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2011-04-01, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
-%   HISTORY
-%   2011-04-08 add example
-%   2011-12-09 rename to boundingBox3d
+% Parse input
+if isstruct(points)
+    if isfield(points, 'vertices')
+    points = points.vertices;
+    else
+        error(['If a struct is passed to boundingBox3d, it must have ' ...
+            'the field ''vertices''!'])
+    end
+end
 
 % compute extreme x and y values
 xmin = min(points(:,1));

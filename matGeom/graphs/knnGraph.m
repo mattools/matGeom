@@ -8,14 +8,14 @@ function edges = knnGraph(nodes, varargin)
 %   edges = knnGraph(nodes);
 %   drawGraph(nodes, edges);
 %
-%   See also
+%   See also 
 %     graphs
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
-% Created: 2008-07-28,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% E-mail: david.legland@inrae.fr
+% Created: 2008-07-28, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2008-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % get number of neighbors for each node
 k = 2;

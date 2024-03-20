@@ -2,7 +2,7 @@ function test_suite = test_meshFaceNormals
 %TEST_FACENORMAL  Test case for the file meshFaceNormals
 %
 %   Test case for the file meshFaceNormals
-
+%
 %   Example
 %   test_meshFaceNormals
 %

@@ -21,26 +21,15 @@ function point = intersectEdges(edge1, edge2, varargin)
 %   performed on the relative position of the intersection point over the
 %   edge, that should lie within [-TOL; 1+TOL]. 
 %
-%   See also:
+%   See also 
 %   edges2d, intersectLines
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
-% INRA - Cepia Software Platform
-% created the 31/10/2003.
-%
-
-%   HISTORY
-%   19/02/2004 add support for multiple edges.
-%   15/08/2005 rewrite a lot, and create unit tests
-%   08/03/2007 update doc
-%   21/09/2009 fix bug for edge arrays (thanks to Miquel Cubells)
-%   03/08/2010 fix another bug for edge arrays (thanks to Reto Zingg)
-%   20/02/2013 fix bug for management of parallel edges (thanks to Nicolaj
-%   Kirchhof)
-%   19/07/2016 add support for tolerance
+% E-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003-2023 INRA - Cepia Software Platform
 
 % tolerance for precision
 tol = 1e-14;
@@ -90,37 +79,41 @@ y0(par & ~col) = NaN;
 %% Process colinear edges
 
 % colinear edges may have 0, 1 or infinite intersection
+% Setup result intersection point as follow:
+% * no intersection -> [NaN NaN]
+% * partial overlap -> [Inf Inf]
+% * touches at extremity -> extremity coordinates
 % Discrimnation based on position of edge2 vertices on edge1
 if sum(col) > 0
     % array for storing results of colinear edges
     resCol = Inf * ones(size(col));
+    colInds = find(col);
 
     % compute position of edge2 vertices wrt edge1
-    t1 = edgePosition(edge2(col, 1:2), edge1(col, :));
-    t2 = edgePosition(edge2(col, 3:4), edge1(col, :));
+    t1 = edgePosition(edge2(col, 1:2), edge1(col, :), 'diag');
+    t2 = edgePosition(edge2(col, 3:4), edge1(col, :), 'diag');
     
     % control location of vertices: we want t1<t2
-    if t1 > t2
-        tmp = t1;
-        t1  = t2;
-        t2  = tmp;
-    end
-    
+    swap = t1 > t2;
+    tmp = t1(swap);
+    t1(swap) = t2(swap);
+    t2(swap) = tmp;
+
     % edge totally before first vertex or totally after last vertex
-    resCol(col(t2 < -tol))  = NaN;
-    resCol(col(t1 > 1+tol)) = NaN;
-        
+    resCol(colInds(t2 < -tol))  = NaN;
+    resCol(colInds(t1 > 1+tol)) = NaN;
+    
     % set up result into point coordinate
     x0(col) = resCol(col);
     y0(col) = resCol(col);
     
     % touches on first point of first edge
-    touch = col(abs(t2) < tol);
+    touch = colInds(abs(t2) < tol);
     x0(touch) = edge1(touch, 1);
     y0(touch) = edge1(touch, 2);
 
     % touches on second point of first edge
-    touch = col(abs(t1-1) < tol);
+    touch = colInds(abs(t1-1) < tol);
     x0(touch) = edge1(touch, 3);
     y0(touch) = edge1(touch, 4);
 end

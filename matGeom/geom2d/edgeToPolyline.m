@@ -11,14 +11,14 @@ function poly = edgeToPolyline(edge, N)
 %     drawPoint(poly);
 %     axis equal;
 %
-%   See also
+%   See also 
 %     edges2d, drawEdge, drawPolyline   
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2011-11-25,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2011-11-25, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 if N < 1
     error('number of segments must be greater than 1');

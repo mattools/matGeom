@@ -23,23 +23,16 @@ function nodes2 = grAdjacentNodes(edges, node)
 %         4
 %         5
 %
-%   See Also
+%   See also 
 %     grAdjacentEdges
 
-%   -----
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 16/08/2004.
-%
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-08-16
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   10/02/2004 documentation
-%   13/07/2004 faster algorithm
-%   03/10/2007 can specify several input nodes
-%   20/01/2013 rename from grNeighborNodes to grAdjacentNodes
-
-
-[i, j] = find(ismember(edges, node)); %#ok<NASGU>
+[i, j] = find(ismember(edges, node)); %#ok<ASGLU> 
 nodes2 = edges(i,1:2);
 nodes2 = unique(nodes2(:));
 nodes2 = sort(nodes2(~ismember(nodes2, node)));

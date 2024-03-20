@@ -1,27 +1,29 @@
 function varargout = drawLabels(varargin)
 %DRAWLABELS Draw labels at specified positions.
 %   
-%   DRAWLABELS(X, Y, LBL) draw labels LBL at position X and Y.
+%   drawLabels(X, Y, LBL)
+%   Draws labels LBL at positions given by X and Y.
 %   LBL can be either a string array, or a number array. In this case,
-%   string are created by using sprintf function, with '%.2f' mask.
+%   string are created by using sprintf function, using the '%.2f' format.
 %
-%   DRAWLABELS(POS, LBL) draw labels LBL at position specified by POS,.
-%   where POS is a N*2 int array.
+%   drawLabels(POS, LBL)
+%   Draws labels LBL at position specified by POS, where POS is a N-by-2
+%   numeric array. 
 %
-%   DRAWLABELS(..., NUMBERS, FORMAT) create labels using sprintf function,.
-%   with the mask given by FORMAT (e. g. '%03d' or '5.3f'), and the
-%   corresponding values.
+%   drawLabels(..., NUMBERS, FORMAT)
+%   Creates labels using sprintf function, with the mask given by FORMAT 
+%   (e.g. '%03d' or '5.3f'), and the corresponding values.
 %
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 15/12/2003.
+%   drawLabels(..., PNAME, PVALUE)
+%   Specifies additional parameters to the created labels. See 'text'
+%   properties for available values.
 %
 
-%   HISTORY
-%   09/03/2007: (re)implement it...
-%   2011-10-11 add management of axes handle
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-12-15
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 % check if enough inputs are given
 if isempty(varargin)
@@ -29,7 +31,7 @@ if isempty(varargin)
 end
 
 % extract handle of axis to draw on
-if isscalar(varargin{1}) && ishandle(varargin{1})
+if isAxisHandle(varargin{1})
     ax = varargin{1};
     varargin(1) = [];
 else
@@ -60,8 +62,12 @@ end
 
 % format for displaying numeric values
 format = '%.2f';
-if ~isempty(varargin)
-    format = varargin{1};
+if ~isempty(varargin) 
+    var1 = varargin{1};
+    if ischar(var1) && var1(1) == '%'
+        format = varargin{1};
+        varargin(1) = [];
+    end
 end
 if size(format, 1) == 1 && size(px, 1) > 1
     format = repmat(format, size(px, 1), 1);
@@ -83,7 +89,7 @@ end
 labels = char(labels);
 
 % display the text
-h = text(px, py, labels, 'parent', ax);
+h = text(px, py, labels, 'parent', ax, varargin{:});
 
 % format output
 if nargout > 0

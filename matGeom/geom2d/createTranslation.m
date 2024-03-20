@@ -12,17 +12,14 @@ function trans = createTranslation(varargin)
 %   Returns the matrix corresponding to a translation by the vector [x y].
 %
 %
-%   See also:
+%   See also 
 %   transforms2d, transformPoint, createRotation, createScaling
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 06/04/2004.
-%
 
-%   HISTORY
-%   22/04/2009: rename as createTranslation
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-04-06
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 % process input arguments
 if isempty(varargin)

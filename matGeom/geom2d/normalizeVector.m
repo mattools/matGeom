@@ -5,8 +5,11 @@ function vn = normalizeVector(v)
 %   Returns the normalization of vector V, such that ||V|| = 1. V can be
 %   either a row or a column vector.
 %
-%   When V is a MxN array, normalization is performed for each row of the
-%   array.
+%   When V is a M-by-N array, normalization is performed for each row of
+%   the array.
+%
+%   When V is a M-by-N-by-2 array, normalization is performed along the
+%   last dimension of the array.
 %
 %   Example:
 %   vn = normalizeVector([3 4])
@@ -16,29 +19,18 @@ function vn = normalizeVector(v)
 %   ans =
 %       1
 %
-%   See Also:
-%   vectors2d, vectorNorm
-%
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 29/11/2004.
+%   See also 
+%     vectors2d, vectorNorm
 %
 
-%   HISTORY
-%   2005-01-14 correct bug
-%   2009-05-22 rename as normalizeVector
-%   2011-01-20 use bsxfun
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-11-29
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
-dim = size(v);
-
-if dim(1)==1 || dim(2)==1
-    % in case of one vector, the norm is a scalar
-    vn = v / sqrt(sum(v.^2));
-else
-    % for several vectors, need to adapt size of norm
+if ismatrix(v)
     vn = bsxfun(@rdivide, v, sqrt(sum(v.^2, 2)));
-    %same as: vn = v./repmat(sqrt(sum(v.*v, 2)), [1 dim(2)]);
+else
+    vn = bsxfun(@rdivide, v, sqrt(sum(v.^2, ndims(v))));
 end

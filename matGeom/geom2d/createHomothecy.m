@@ -22,16 +22,11 @@ function T = createHomothecy(point, ratio)
 %      axis tight equal
 %
 
-% ---------
+% ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% INRA - TPV URPOI - BIA IMASTE
-% created the 20/01/2005.
-
-
-%   HISTORY
-%   22/04/2009: rename as createHomothecy
-%   05/04/2017: improved code by JuanPi Carbajal <ajuanpi+dev@gmail.com>
+% E-mail: david.legland@inrae.fr
+% Created: 2005-01-20
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 point = point(:);
 if length (point) > 2

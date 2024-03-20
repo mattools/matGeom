@@ -27,30 +27,29 @@ function varargout = drawPolyline3d(varargin)
 %     zt = zeros(1,100);
 %     figure; drawPolyline3d(xt, yt, zt, 'b');
 % 
-%   See Also:
+%   See also 
 %   polygons3d, drawPolygon3d, fillPolygon3d
 %
 
-%   ---------
-%   author : David Legland 
-% e-mail: david.legland@inra.fr
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 18/02/2005.
-%
-
-% HISTORY
-% 2010-03-08 rename as drawPolyline3d
-
+% ------
+% Author : David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-15
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 %% Process input arguments
+
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
 % check case we want to draw several curves, stored in a cell array
 var = varargin{1};
 if iscell(var)
     hold on;
-    h = [];
-    for i = 1:length(var(:))
-        h = [h; drawPolyline3d(var{i}, varargin{2:end})]; %#ok<AGROW>
+    nPolys = length(var(:));
+    h = gobjects(1, nPolys);
+    for i = 1:nPolys
+        h(i) = drawPolyline3d(hAx, var{i}, varargin{2:end});
     end
     if nargout > 0
         varargout = {h};
@@ -58,7 +57,7 @@ if iscell(var)
     return;
 end
 
-% extract curve coordinates
+% extract vertex coordinates
 if min(size(var)) == 1
     % if first argument is a vector (either row or column), then assumes
     % first argument contains x coords, second argument contains y coords
@@ -67,19 +66,25 @@ if min(size(var)) == 1
     if length(varargin) < 3
         error('geom3d:drawPolyline3d:Wrong number of arguments in drawPolyline3d');
     end
-    py = varargin{2};
-    pz = varargin{3};
-    varargin = varargin(4:end);
-    
+    if  isnumeric(varargin{2}) && isnumeric(varargin{3})
+        py = varargin{2};
+        pz = varargin{3};
+        varargin(1:3) = [];
+    else
+        px = var(:, 1);
+        py = var(:, 2);
+        pz = var(:, 3);
+        varargin(1) = [];
+    end
 else
     % all coordinates are grouped in the first argument
     px = var(:, 1);
     py = var(:, 2);
     pz = var(:, 3);
-    varargin = varargin(2:end);
+    varargin(1) = [];
 end
 
-% check if curve is closed or open (default is open)
+% check if polyline is closed or open (default is open)
 closed = false;
 if ~isempty(varargin)
     var = varargin{1};
@@ -103,7 +108,7 @@ if ~isempty(varargin)
 end
 
 
-%% draw the curve
+%% draw the polyline curve
 
 % for closed curve, add the first point at the end to close curve
 if closed
@@ -112,7 +117,7 @@ if closed
     pz = [pz(:); pz(1)];
 end
 
-h = plot3(px, py, pz, varargin{:});
+h = plot3(hAx, px, py, pz, varargin{:});
 
 if nargout > 0
     varargout = {h};

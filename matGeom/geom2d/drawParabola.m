@@ -42,24 +42,19 @@ function varargout = drawParabola(varargin)
 %     drawParabola([50 50 .2 30], [-3 3], 'color', 'r', 'linewidth', 2);
 %   
 %
-%   See Also:
+%   See also 
 %   drawCircle, drawEllipse
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 02/06/2006.
-%
-
-%   HISTORY
-%   2010-11-17 rewrite, change parametrisation, update doc
-%   2011-03-30 use degrees for angle
-%   2011-10-11 add management of axes handle
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2006-06-02
+% Copyright 2006-2023 INRA - TPV URPOI - BIA IMASTE
 
 % Extract parabola
 if nargin < 1
-    error('geom2d:drawParabola:IllegalArgument', ...
+    error('MatGeom:geom2d:drawParabola:IllegalArgument', ...
         'Please specify parabola representation');
 end
 

@@ -6,18 +6,12 @@ function b = onEdge(point, edge)
 %
 %   See also:
 %   edges2d, points2d, onLine
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
 
-% HISTORY
-% 11/03/2004 : change input format : edge is [x1 y1 x2 y2].
-% 17/01/2005 : if test N edges with N points, return N boolean.
-% 21/01/2005 : normalize test for colinearity, so enhance precision
-%   22/05/2009 deprecate
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003 INRA - TPV URPOI - BIA IMASTE
 
 % deprecation warning
 warning('geom2d:deprecated', ...

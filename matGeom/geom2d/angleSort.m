@@ -16,18 +16,18 @@ function varargout = angleSort(pts, varargin)
 %   [PTS2, I] = angleSort(...);
 %   Also returns in I the indices of PTS, such that PTS2 = PTS(I, :);
 %
-%   See Also:
+%   [PTS2, I, ANGLES] = angleSort(...);
+%   Also returns the ANGLES in corresponding order to PTS2.
+%
+%   See also 
 %   points2d, angles2d, angle2points, normalizeAngle
 %
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2005-11-24
-% Copyright 2010 INRA - Cepia Software Platform.
-
-
-%   HISTORY :
+% Copyright 2005-2023 INRA - Cepia Software Platform
 
 % default values
 pt0 = [0 0];
@@ -52,14 +52,19 @@ pts2 = pts - repmat(pt0, [n 1]);
 angle = lineAngle([zeros(n, 2) pts2]);
 angle = mod(angle - theta0 + 2*pi, 2*pi);
 
-[dummy, I] = sort(angle); %#ok<ASGLU>
+[angles, I] = sort(angle); 
 
 % format output
-if nargout<2
-    varargout{1} = pts(I, :);
-elseif nargout==2
-    varargout{1} = pts(I, :);
-    varargout{2} = I;
+switch nargout
+    case 1
+        varargout{1} = pts(I, :);
+    case 2
+        varargout{1} = pts(I, :);
+        varargout{2} = I;
+    case 3
+        varargout{1} = pts(I, :);
+        varargout{2} = I;
+        varargout{3} = angles;
 end
 
         

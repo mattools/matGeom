@@ -12,15 +12,21 @@ function runAllTests(varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2011-07-20,    using Matlab 7.9.0.529 (R2009b)
+% Created: 2011-07-20, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
+
+% Change the directory 
+cd(fileparts(mfilename('fullpath')))
+
+% Add matGeom to path
+addpath(genpath(strrep(mfilename('fullpath'),['tests' filesep mfilename],'matGeom')))
 
 directories = {...
     'geom2d', ...
-    'polygons2d', ...
-    'graphs', ...
     'geom3d', ...
+    'graphs', ...
     'meshes3d', ...
+    'polygons2d', ...
     };
 
 for i = 1:length(directories)
@@ -29,7 +35,7 @@ for i = 1:length(directories)
     
     cd(name);
     runtests;
+    disp('Press any key to continue ...')
+    pause
     cd('..');
 end
-
-    

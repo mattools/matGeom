@@ -25,15 +25,11 @@ function varargout = createTetrahedron()
 %   meshes3d, drawMesh
 %   createCube, createOctahedron, createDodecahedron, createIcosahedron
 
-%   ---------
-%   author : David Legland 
-%   e-mail: david.legland@inra.fr
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 21/03/2005.
-%
-
-%   HISTORY
-%   04/01/2007: remove unused variables
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-03-21
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 x0 = 0; dx= 1;
 y0 = 0; dy= 1;

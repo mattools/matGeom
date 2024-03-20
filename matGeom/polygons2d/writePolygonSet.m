@@ -10,15 +10,14 @@ function writePolygonSet(polys, filename)
 %     Y21 Y22 Y23 ... Y2N
 %   Each polygon may have a different number of vertices. 
 %
-%   See also:
+%   See also 
 %   polygons2d, readPolygonSet
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 14/01/2013.
-%
 
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2013-01-14
+% Copyright 2013-2023 INRA - TPV URPOI - BIA IMASTE
 
 % open file for reading
 fid = fopen(filename, 'wt');

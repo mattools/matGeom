@@ -17,15 +17,14 @@ function point = polylinePoint(poly, pos)
 %       [20 14]
 %
 %
-%   See also
+%   See also 
 %   polygons2d
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009 INRA - Cepia Software Platform.
-
+% E-mail: david.legland@inrae.fr
+% Created: 2009-04-30, using Matlab 7.7.0.471 (R2008b)
+% Copyright 2009-2023 INRA - Cepia Software Platform
 
 % number of points to compute
 Np = length(pos(:));

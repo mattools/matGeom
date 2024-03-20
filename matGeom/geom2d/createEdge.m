@@ -27,20 +27,15 @@ function edge = createEdge(varargin)
 %   dimension. The result is then an array of edges, of dimensions N-by-4.
 %
 %
-%   See also:
+%   See also 
 %   edges2d, lines2d, drawEdge, clipEdge, createLine
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
-
-%   HISTORY
-%   18/02/2004 : add more possibilities to create edges, not only from 2
-%   points. Also add support for arrays.
-%   31/03/2004 : convert to [P1 P2] format
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 if nargin == 1
     % Only one input parameter. It can be :

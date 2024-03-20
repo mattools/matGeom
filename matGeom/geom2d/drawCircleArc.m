@@ -28,34 +28,20 @@ function varargout = drawCircleArc(varargin)
 %     hold on
 %     drawCircleArc(arc, 'LineWidth', 3, 'Color', 'r')
 %
-%   See also:
-%   circles2d, drawCircle, drawEllipse, circleArcToPolyline
-%
-%   --------
-%   author: David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 12/12/2003.
+%   See also 
+%     circles2d, drawCircle, drawEllipse, circleArcToPolyline
 %
 
-%   HISTORY
-%   2004-05-03 angles are given as radians
-%   2007-06-27 Now uses angle extent
-%   2011-03-30 use angles in degrees
-%   2011-06-09 add support for line styles
-%   2011-10-11 add management of axes handle
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-12-12
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
-if nargin == 0
-    error('Need to specify circle arc');
-end
-
+%% Parse input arguments
 
 % extract handle of axis to draw on
-if isAxisHandle(varargin{1})
-    ax = varargin{1};
-    varargin(1) = [];
-else
-    ax = gca;
-end
+[ax, varargin] = parseAxisHandle(varargin{:});
 
 circle = varargin{1};
 if size(circle, 2) == 5
@@ -78,6 +64,9 @@ else
     error('drawCircleArc: please specify center, radius and angles of circle arc');
 end
 
+
+%% Pre-processing
+
 % convert angles in radians
 t0  = deg2rad(start);
 t1  = t0 + deg2rad(extent);
@@ -87,6 +76,13 @@ N = 60;
 
 % initialize handles vector
 h   = zeros(length(x0), 1);
+
+% save hold state
+holdState = ishold(ax);
+hold(ax, 'on');
+
+
+%% Display each circle arc
 
 % draw each circle arc individually
 for i = 1:length(x0)
@@ -99,6 +95,14 @@ for i = 1:length(x0)
     
     % draw the circle arc
     h(i) = plot(ax, xt, yt, varargin{:});
+end
+
+
+%% post-processing
+
+% restore hold state
+if ~holdState
+    hold(ax, 'off');
 end
 
 if nargout > 0

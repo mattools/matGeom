@@ -11,21 +11,12 @@ function point = intersectPlaneLine(plane, line)
 %
 %  Songbai Ji (6/23/2006). Bug fixed; also allow one plane, many lines; 
 % many planes one line; or N planes and N lines configuration in the input.
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 17/02/2005.
-%
 
-%   HISTORY
-%   24/11/2005 add support for multiple input
-%   23/06/2006 correction from Songbai Ji
-%   14/12/2006 correction for parallel lines and plane normals
-%   05/01/2007 fixup for parallel lines and plane normals
-%   17/10/2008 add warning for deprecation
-
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-17
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 warning('IMAEL:deprecatedFunction', ...
     'This function is deprecated, use ''intersectLinePlane'' instead');

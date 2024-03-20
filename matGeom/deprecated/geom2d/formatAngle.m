@@ -10,15 +10,12 @@ function alpha = formatAngle(alpha)
 %
 %   See also
 %   vectorAngle, lineAngle
-%
+
 % ------
 % Author: David Legland
 % e-mail: david.legland@nantes.inra.fr
-% Created: 2008-03-10,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
-
-% HISTORY
-% 2010-03-31 deprecate and replace by function 'normalizeAngle'
+% Created: 2008-03-10, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % deprecation warning
 warning('geom2d:deprecated', ...

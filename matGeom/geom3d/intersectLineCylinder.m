@@ -39,7 +39,7 @@ function points = intersectLineCylinder(line, cylinder, varargin)
 %           67.8690   35.7380   23.6069
 %
 %   
-%   See also
+%   See also 
 %   lines3d, intersectLinePlane, drawCylinder, cylinderSurfaceArea
 %
 %   References
@@ -47,15 +47,11 @@ function points = intersectLineCylinder(line, cylinder, varargin)
 %   http://www.gamedev.net/community/forums/topic.asp?topic_id=467789
 %
 
-% ---
+% ------
 % Author: David Legland, from a file written by Daniel Trauth (RWTH)
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2007-01-27
-
-% HISTORY
-% 2010-10-21 change cylinder argument convention, add bounds check and doc
-% 2010-10-21 add check for points on cylinders, update doc
-
+% Copyright 2007-2023
 
 %% Parse input arguments
 

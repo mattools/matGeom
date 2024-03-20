@@ -54,27 +54,17 @@ function varargout = drawSphere(varargin)
 %     l = light; view(3);
 %
 %
-%   See also
+%   See also 
 %   spheres, circles3d, sphere, drawEllipsoid
 
-%   ---------
-%   author: David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 17/02/2005
-%
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-17
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
-%   HISTORY
-%   2006-05-19 use centered sphere with radius 1 when no input specified
-%   2007-01-04 typo
-%   2010-11-08 code cleanup, add doc
-
-% Check if axes handle is specified
-if numel(varargin{1}) == 1 && ishghandle(varargin{1}, 'axes')
-    hAx = varargin{1};
-    varargin(1)=[];
-else
-    hAx = gca;
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
 
 % process input options: when a string is found, assumes this is the
 % beginning of options

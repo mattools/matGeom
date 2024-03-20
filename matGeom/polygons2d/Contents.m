@@ -1,4 +1,4 @@
-% POLYGONS Manipulation of planar polygons and polylines
+%CONTENTS POLYGONS Manipulation of planar polygons and polylines.
 % Version 1.24 07-Jun-2018 .
 %
 %   The 'polygons' module contains functions operating on shapes composed
@@ -45,13 +45,13 @@
 %   axis([0 5 0 5]);
 %   % Multiple polygon:
 %   P2 = [10 10;40 10;40 40;10 40;NaN NaN;20 20;20 30;30 30;30 20];
-%   figure;drawPolygon(P2); axis([0 50 0 50]);
+%   figure; drawPolygon(P2); axis([0 50 0 50]);
 %
 %
 % Polylines
 %   polylinePoint             - Extract a point from a polyline.
 %   polylineLength            - Return length of a polyline given as a list of points.
-%   polylineCentroid          - Compute centroid of a curve defined by a series of points.
+%   polylineCentroid          - Computes the centroid of a curve defined by a series of points.
 %   polylineSubcurve          - Extract a portion of a polyline.
 %   resamplePolyline          - Distribute N points equally spaced on a polyline.
 %   resamplePolylineByLength  - Resample a polyline with a fixed sampling step.
@@ -66,7 +66,9 @@
 %   polylineSelfIntersections - Find self-intersection points of a polyline.
 %   simplifyPolyline          - Douglas-Peucker simplification of a polyline.
 %   smoothPolyline            - Smooth a polyline using local averaging.
+%   polylineCurvature         - Estimate curvature on polyline vertices using polynomial fit.
 %   removeMultipleVertices    - Remove multiple vertices of a polygon or polyline.
+%   padPolyline               - Add vertices at each extremity of the polyline.
 %
 % Polygon basic manipulation
 %   reversePolygon            - Reverse a polygon, by iterating vertices from the end.
@@ -86,7 +88,7 @@
 %   intersectEdgePolygon      - Intersection point of an edge with a polygon.
 %   polygonSelfIntersections  - Find self-intersection points of a polygon.
 %   clipPolygon               - Clip a polygon with a rectangular box.
-%   clipPolygonHP             - Clip a polygon with a Half-plane defined by a directed line.
+%   clipPolygonByLine         - Clip a polygon with a directed line.
 %
 % Point Sets
 %   pointSetsAverage          - Compute the average of several point sets.
@@ -98,13 +100,13 @@
 % Measures on Polygons
 %   isPointInPolygon          - Test if a point is located inside a polygon.
 %   polygonContains           - Test if a point is contained in a multiply connected polygon.
-%   polygonCentroid           - Compute the centroid (center of mass) of a polygon.
+%   polygonCentroid           - Computes the centroid (center of mass) of a polygon.
 %   polygonArea               - Compute the signed area of a polygon.
 %   polygonEquivalentEllipse  - Compute equivalent ellipse with same second order moments as polygon.
 %   polygonSecondAreaMoments  - Compute second-order area moments of a polygon.
 %   polygonLength             - Perimeter of a polygon.
-%   polygonNormalAngle        - Compute the normal angle at a vertex of the polygon.
-%   polygonBounds             - Compute the bounding box of a polygon.
+%   polygonNormalAngle        - Normal angle at each vertex of a polygon.
+%   polygonBounds             - Computes the bounding box of a polygon.
 %   polygonOuterNormal        - Outer normal vector for a given vertex(ices).
 %   distancePointPolygon      - Shortest distance between a point and a polygon.
 %   distancePolygons          - Compute the shortest distance between 2 polygons.
@@ -118,8 +120,9 @@
 %   resamplePolygonByLength   - Resample a polygon with a fixed sampling step.
 %   densifyPolygon            - Add several points on each edge of the polygon.
 %   expandPolygon             - Expand a polygon by a given (signed) distance.
-%   triangulatePolygon        - Compute a triangulation of the polygon.
+%   triangulatePolygon        - Computes a triangulation of the input polygon.
 %   polygonSymmetryAxis       - Try to identify symmetry axis of polygon.
+%   polygonSkeleton           - Skeletonization of a polygon with a dense distribution of vertices.
 %   medialAxisConvex          - Compute medial axis of a convex polygon.
 %
 % Curves (polylines with lot of vertices)
@@ -138,9 +141,11 @@
 %   convexification           - Compute the convexification of a polygon.
 %
 % Input, Output and conversions
+%   contourMatrixToPolylines  - Converts a contour matrix array into a polyline set.
+%   parsePolygon              - Conversion between different polygon formats.
+%   polygonToPolyshape        - Convert a matGeom polygon to a MATLAB polyshape object.
 %   polygonToRow              - Convert polygon coordinates to a row vector.
 %   rowToPolygon              - Create a polygon from a row vector.
-%   contourMatrixToPolylines  - Converts a contour matrix array into a polyline set.
 %   readPolygonSet            - Read a set of simple polygons stored in a file.
 %   writePolygonSet           - Write a set of simple polygons into a file.
 %
@@ -154,21 +159,11 @@
 %   Credits:
 %   * function intersectPolylines uses the 'interX' contribution from "NS"
 %       (file exchange 22441, called 'curve-intersections')
-%
-% -----
+
+% ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% created the  07/11/2005.
-% Project homepage: http://github.com/mattools/matGeom
-% http://www.pfl-cepia.inra.fr/index.php?page=geom2d
-% Copyright INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2005-11-07
+% Copyright 2005-2023 INRAE
 
 help(mfilename);
-
-%% Deprecated
-%   polygonInertiaEllipse     - Compute ellipse with same inertia moments as polygon.
-
-%% Requires further development
-
-%% Others...
-

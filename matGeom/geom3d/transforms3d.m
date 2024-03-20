@@ -17,17 +17,19 @@ function transforms3d(varargin)
 %   PT2 = 
 %       14   25   36
 %
-%   See also
-%   createTranslation3d, createScaling3d, , createBasisTransform3d
-%   createRotationOx, createRotationOy, createRotationOz
-%   rotation3dAxisAndAngle, rotation3dToEulerAngles,
-%   createRotation3dLineAngle, eulerAnglesToRotation3d
-%   transformPoint3d, transformVector3d, transformLine3d, transformPlane3d
-%   composeTransforms3d, recenterTransform3d
+%   See also 
+%   composeTransforms3d, createBasisTransform3d, createRotation3dLineAngle,
+%   createRotationAboutPoint3d, createRotationOx, createRotationOy, 
+%   createRotationOz, createRotationVector3d, createRotationVectorPoint3d, 
+%   createScaling3d, createTranslation3d, eulerAnglesToRotation3d, 
+%   fitAffineTransform3d, isTransform3d, recenterTransform3d, 
+%   rotation3dAxisAndAngle, rotation3dToEulerAngles
+%   transformCircle3d, transformLine3d, transformPlane3d, transformPoint3d, 
+%   transformPolygon3d, transformVector3d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% E-mail: david.legland@inrae.fr
+% Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2008-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas

@@ -1,4 +1,4 @@
-function varargout = drawEllipsoid(elli, varargin)
+function varargout = drawEllipsoid(varargin)
 %DRAWELLIPSOID Draw a 3D ellipsoid.
 %
 %   drawEllipsoid(ELLI)
@@ -19,21 +19,21 @@ function varargout = drawEllipsoid(elli, varargin)
 %     axis equal;
 %
 %     figure; hold on;
-%     elli = [[10 20 30   50 30 10   5 10 0];
+%     elli = [10 20 30   50 30 10   5 10 0];
 %     drawEllipsoid(elli, 'FaceColor', 'r', ...
 %         'drawEllipses', true, 'EllipseColor', 'b', 'EllipseWidth', 3);
 %     axis equal;
 %
-%   See also
-%   spheres, drawSphere, inertiaEllipsoid, ellipsoid, drawTorus, drawCuboid 
+%   See also 
+%   spheres, drawSphere, equivalentEllipsoid, ellipsoid, drawTorus, 
+%   drawCuboid 
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2011-03-12,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011 INRA - Cepia Software Platform.
-
+% E-mail: david.legland@inrae.fr
+% Created: 2011-03-12, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2011-2023 INRA - Cepia Software Platform
 
 %% Default values
 
@@ -55,11 +55,12 @@ axesWidth = 2;
 
 %% Extract input arguments
 
-% Parse the input (try to extract center coordinates and radius)
-if nargin == 0
-    % no input: assumes ellipsoid with default shape
-    elli = [0 0 0 5 4 3 0 0 0];
-end
+% extract handle of axis to draw on
+[hAx, varargin] = parseAxisHandle(varargin{:});
+
+% retrieve parameters of ellipsoid
+elli = varargin{1};
+varargin(1) = [];
 
 % default set of options for drawing meshes
 options = {'FaceColor', 'g', 'linestyle', 'none'};
@@ -190,24 +191,24 @@ if nargout == 0
     surf(x, y, z, options{:});
 
     if drawEllipses
-        plot3(xc1, yc1, zc1, ellipseOptions{:});
-        plot3(xc2, yc2, zc2, ellipseOptions{:});
-        plot3(xc3, yc3, zc3, ellipseOptions{:});
+        plot3(hAx, xc1, yc1, zc1, ellipseOptions{:});
+        plot3(hAx, xc2, yc2, zc2, ellipseOptions{:});
+        plot3(hAx, xc3, yc3, zc3, ellipseOptions{:});
     end
     
     if drawAxes
-        drawEdge3d([axesEndings(1,:), axesEndings(2,:)], axesOptions{:});
-        drawEdge3d([axesEndings(3,:), axesEndings(4,:)], axesOptions{:});
-        drawEdge3d([axesEndings(5,:), axesEndings(6,:)], axesOptions{:});
+        drawEdge3d(hAx, [axesEndings(1,:), axesEndings(2,:)], axesOptions{:});
+        drawEdge3d(hAx, [axesEndings(3,:), axesEndings(4,:)], axesOptions{:});
+        drawEdge3d(hAx, [axesEndings(5,:), axesEndings(6,:)], axesOptions{:});
     end
     
 elseif nargout == 1
     % one output: draw the ellipsoid and return handle 
     varargout{1} = surf(x, y, z, options{:});
     if drawEllipses
-        plot3(xc1, yc1, zc1, ellipseOptions{:});
-        plot3(xc2, yc2, zc2, ellipseOptions{:});
-        plot3(xc3, yc3, zc3, ellipseOptions{:});
+        plot3(hAx, xc1, yc1, zc1, ellipseOptions{:});
+        plot3(hAx, xc2, yc2, zc2, ellipseOptions{:});
+        plot3(hAx, xc3, yc3, zc3, ellipseOptions{:});
     end
     
 elseif nargout == 3
@@ -216,17 +217,17 @@ elseif nargout == 3
     varargout{2} = y; 
     varargout{3} = z; 
     if drawEllipses
-        plot3(xc1, yc1, zc1, ellipseOptions{:});
-        plot3(xc2, yc2, zc2, ellipseOptions{:});
-        plot3(xc3, yc3, zc3, ellipseOptions{:});
+        plot3(hAx, xc1, yc1, zc1, ellipseOptions{:});
+        plot3(hAx, xc2, yc2, zc2, ellipseOptions{:});
+        plot3(hAx, xc3, yc3, zc3, ellipseOptions{:});
     end
     
 elseif nargout == 4 && drawEllipses
     % Also returns handles to ellipses
-    varargout{1} = surf(x, y, z, options{:});
-    varargout{2} = plot3(xc1, yc1, zc1, ellipseOptions{:});
-    varargout{3} = plot3(xc2, yc2, zc2, ellipseOptions{:});
-    varargout{4} = plot3(xc3, yc3, zc3, ellipseOptions{:});
+    varargout{1} = surf(hAx, x, y, z, options{:});
+    varargout{2} = plot3(hAx, xc1, yc1, zc1, ellipseOptions{:});
+    varargout{3} = plot3(hAx, xc2, yc2, zc2, ellipseOptions{:});
+    varargout{4} = plot3(hAx, xc3, yc3, zc3, ellipseOptions{:});
     
 end
 

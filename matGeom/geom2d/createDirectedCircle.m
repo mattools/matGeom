@@ -13,14 +13,14 @@ function circle = createDirectedCircle(varargin)
 %   Works also when input are point arrays the same size, in this case the
 %   result has as many lines as the point arrays.
 %
-%   See also:
+%   See also 
 %   circles2d, createCircle
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 12/01/2005.
-%
+
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-01-12
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 if nargin == 2
     % inputs are the center and a point on the circle

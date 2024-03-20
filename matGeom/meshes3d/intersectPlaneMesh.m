@@ -1,17 +1,24 @@
-function polys = intersectPlaneMesh(plane, v, f)
-% Compute the polygons resulting from plane-mesh intersection.
+function [polys, closedFlag] = intersectPlaneMesh(plane, v, f)
+%INTERSECTPLANEMESH Compute the polylines resulting from plane-mesh intersection.
 %
 %   POLYS = intersectPlaneMesh(P, V, F)
-%   Computes the interection between a plane and a mesh given by vertex and
-%   face lists. The result is a cell array of polygons.
-%
-%   The function currently returns at most one polygon in the cell array
-%   POLYS.
+%   [POLYS, CLOSED] = intersectPlaneMesh(P, V, F)
+%   Computes the intersection between a plane and a mesh. 
+%   The plane P is given as:
+%   P = [X0 Y0 Z0  DX1 DY1 DZ1  DX2 DY2 DZ2]
+%   The mesh is given as numeric array V of vertex coordinates and an array
+%   of (triangular) face vertex indices.
+%   The output POLYS is a cell array of polylines, where each cell contains
+%   a NV-by-3 numeric array of coordinates. The (optional) output CLOSED is
+%   a logical array the same size as the POLYS, indicating whether the
+%   corresponding polylines are closed (true), or open (false). 
+%   Use the functions 'drawPolygon3d' to display closed polylines, and
+%   'drawPolyline3d' to display open polylines.
 %
 %
 %   Example
 %     % Intersect a cube by a plane
-%     [v f] = createCube; v = v * 10;
+%     [v, f] = createCube; v = v * 10;
 %     plane = createPlane([5 5 5], [3 4 5]);
 %     % draw the primitives
 %     figure; hold on; set(gcf, 'renderer', 'opengl');
@@ -24,31 +31,46 @@ function polys = intersectPlaneMesh(plane, v, f)
 %     % Intersect a torus by a set of planes, and draw the results
 %     % first creates a torus slightly shifted and rotated
 %     torus = [.5 .6 .7   30 10   3 4];
-%     figure; drawTorus(torus, 'nTheta', 180, 'nPhi', 180);
-%     hold on; view (3); axis equal; light;
+%     figure('color','w');
 %     % convert to mesh representation
 %     [v, f] = torusMesh(torus, 'nTheta', 64, 'nPhi', 64);
+%     f = triangulateFaces(f);
+%     drawMesh(v, f);
+%     hold on; view (3); axis equal; light;
 %     % compute intersections with collection of planes
 %     xList = -50:5:50;
 %     polySet = cell(length(xList), 1);
 %     for i = 1:length(xList)
 %         x0 = xList(i);
 %         plane = createPlane([x0 .5 .5], [1 .2 .3]);
-%         polySet{i} = intersectPlaneMesh2(plane, v, f);
+%         polySet{i} = intersectPlaneMesh(plane, v, f);
 %     end
 %     % draw the resulting 3D polygons
-%     drawPolygon3d(polySet, 'lineWidth', 2, 'color', 'k')
+%     drawPolygon3d(polySet, 'lineWidth', 2, 'color', 'y')
+%
+%     % Demonstrate ability to draw open mesh intersections
+%     poly = circleArcToPolyline([10 0 5 90 180], 33);
+%     [x, y, z] = revolutionSurface(poly, linspace(-pi, pi, 65));
+%     [v, f] = surfToMesh(x, y, z);
+%     f = triangulateFaces(f);
+%     plane = createPlane([0 0 0], [5 2 -4]);
+%     figure; hold on; axis equal; view(3);
+%     drawMesh(v, f, 'linestyle', 'none', 'facecolor', [0.0 0.8 0.0], 'faceAlpha', 0.7);
+%     drawPlane3d(plane, 'facecolor', 'm', 'faceAlpha', 0.5);
+%     % compute and display intersection
+%     [curves, closed] = intersectPlaneMesh(plane, v, f);
+%     drawPolyline3d(curves(~closed), 'linewidth', 2, 'color', 'b')
 %
 %
-%   See also
+%   See also 
 %     meshes3d, intersectPlanes, intersectEdgePlane
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2012-07-31,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2012-07-31, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012-2023 INRA - Cepia Software Platform
 
 e = [];
 if isstruct(v)
@@ -86,19 +108,22 @@ intersectionPoints = intersectEdgePlane(edges(edgeCrossInds, :), plane);
 nFaces = length(f);
 faceEdges = cell(1, nFaces);
 nCrossEdges = length(edgeCrossInds);
-crossEdgeFaces = zeros(nCrossEdges, 2);
+crossEdgeFaces = cell(nCrossEdges, 1);
 
 for iEdge = 1:length(edgeCrossInds)
+    % identify index of faces adjacent to edge
     edge = e(edgeCrossInds(iEdge), :);
     indFaces = find(sum(ismember(f, edge), 2) == 2);
     
-    if length(indFaces) ~= 2
+    % assert mesh is manifold (no edge connected to more than three faces)
+    if length(indFaces) > 2
         error('crossing edge %d (%d,%d) is associated to %d faces', ...
             iEdge, edge(1), edge(2), length(indFaces));
     end
     
-    crossEdgeFaces(iEdge, :) = indFaces;
+    crossEdgeFaces{iEdge} = indFaces;
     
+    % add current edge to list of edges associated to each face
     for iFace = 1:length(indFaces)
         indEdges = faceEdges{indFaces(iFace)};
         indEdges = [indEdges iEdge]; %#ok<AGROW>
@@ -106,15 +131,76 @@ for iEdge = 1:length(edgeCrossInds)
     end
 end
 
-
-%% Iterate on edges and faces to form polygons
-
-% initialize an array indicating which indices need to be processed
+% initialize an array indicating which edges need to be processed
 nCrossEdges = length(edgeCrossInds);
 remainingCrossEdges = true(nCrossEdges, 1);
 
+
+%% Iterate on edges and faces to form open poylines
+
+% create empty cell array of open polylines
+openPolys = {};
+
+% identify crossing edges at extremity of open polylines
+extremityEdgeInds = find(cellfun(@length, crossEdgeFaces) == 1);
+remainingExtremities = true(length(extremityEdgeInds), 1);
+
+% iterate while there are remaining extremity crossing edges
+while any(remainingExtremities)
+    % start from arbitrary remaining extremity
+    extremityIndex = find(remainingExtremities, 1, 'first');
+    remainingExtremities(extremityIndex) = false;
+
+    % use extremity as current edge
+    startEdgeIndex = extremityEdgeInds(extremityIndex);
+    currentEdgeIndex = startEdgeIndex;
+    
+    % mark current edge as processed
+    remainingCrossEdges(currentEdgeIndex) = false;
+    
+    % initialize new set of edge indices
+    polyEdgeInds = currentEdgeIndex;
+
+    % find the unique face adjacent to current edge
+    edgeFaces = crossEdgeFaces{currentEdgeIndex};
+    currentFace = edgeFaces(1);
+
+    % iterate along current face-edge couples until back to first edge
+    while true
+        % find the index of next crossing edge
+        inds = faceEdges{currentFace};
+        currentEdgeIndex = inds(inds ~= currentEdgeIndex);
+        
+        % add index of current edge
+        polyEdgeInds = [polyEdgeInds currentEdgeIndex]; %#ok<AGROW>
+
+        % mark current edge as processed
+        remainingCrossEdges(currentEdgeIndex) = false;
+    
+        % find the index of the other face containing current edge
+        inds = crossEdgeFaces{currentEdgeIndex};
+
+        % check if we found an extremity edge
+        if length(inds) == 1
+            ind = extremityEdgeInds == currentEdgeIndex;
+            remainingExtremities(ind) = false;
+            break;
+        end
+
+        % switch to next face
+        currentFace = inds(inds ~= currentFace);
+    end
+    
+    % create polygon, and add it to list of polygons
+    poly = intersectionPoints(polyEdgeInds, :);
+    openPolys = [openPolys, {poly}]; %#ok<AGROW>
+end
+
+
+%% Iterate on edges and faces to form closed polylines
+
 % create empty cell array of polygons
-polys = {};
+rings = {};
 
 % iterate while there are some crossing edges to process
 while any(remainingCrossEdges)
@@ -130,7 +216,8 @@ while any(remainingCrossEdges)
     polyEdgeInds = currentEdgeIndex;
 
     % choose one of the two faces around the edge
-    currentFace = crossEdgeFaces(currentEdgeIndex, 1);
+    edgeFaces = crossEdgeFaces{currentEdgeIndex};
+    currentFace = edgeFaces(1);
 
     % iterate along current face-edge couples until back to first edge
     while true
@@ -141,10 +228,6 @@ while any(remainingCrossEdges)
         % mark current edge as processed
         remainingCrossEdges(currentEdgeIndex) = false;
     
-        % find the index of the other face containing current edge
-        inds = crossEdgeFaces(currentEdgeIndex, :);
-        currentFace = inds(inds ~= currentFace);
-    
         % check end of current loop
         if currentEdgeIndex == startEdgeIndex
             break;
@@ -152,9 +235,18 @@ while any(remainingCrossEdges)
         
         % add index of current edge
         polyEdgeInds = [polyEdgeInds currentEdgeIndex]; %#ok<AGROW>
+
+        % find the index of the other face containing current edge
+        inds = crossEdgeFaces{currentEdgeIndex};
+        currentFace = inds(inds ~= currentFace);
     end
     
     % create polygon, and add it to list of polygons
     poly = intersectionPoints(polyEdgeInds, :);
-    polys = [polys, {poly}]; %#ok<AGROW>
+    rings = [rings, {poly}]; %#ok<AGROW>
 end
+
+
+%% Format output array
+polys = [rings, openPolys];
+closedFlag = [true(1, length(rings)), false(1, length(openPolys))];

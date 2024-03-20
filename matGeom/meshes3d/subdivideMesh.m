@@ -1,4 +1,4 @@
-function [vertices2, faces2] = subdivideMesh(vertices, faces, n)
+function varargout = subdivideMesh(vertices, faces, n)
 %SUBDIVIDEMESH Subdivides each face of the mesh.
 %
 %   [V2 F2] = subdivideMesh(V, F, N)
@@ -6,39 +6,74 @@ function [vertices2, faces2] = subdivideMesh(vertices, faces, n)
 %   into N^2 smaller faces.
 %
 %   Example
-%     [v f] = createOctahedron;
+%     [v, f] = createOctahedron;
 %     figure; drawMesh(v, f); view(3);
-%     [v2 f2] = subdivideMesh(v, f, 4);
+%     [v2, f2] = subdivideMesh(v, f, 4);
 %     figure; drawMesh(v2, f2); view(3)
 %
-%   See also
+%   See also 
 %     meshes3d, drawMesh
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2013-08-22,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2013 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2013-08-22, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2013-2023 INRA - Cepia Software Platform
 
 
 %% Initialisations
+
+% vertex to vertex edges, will be computed if not provided within mesh
+% structure
+edges = [];
+
+% The face-to-edge adjacency information is necessary for associating new
+% faces to vertices (will be computed if not found)
+faceEdgeIndices = [];
+
+% if mesh is provided as structure, retrieve all possible data
+if isstruct(vertices)
+    % get relevant inputs
+    mesh = vertices;
+    n = faces;
+    
+    % parse fields from a mesh structure
+    vertices = mesh.vertices;
+    faces = mesh.faces;
+    if isfield(mesh, 'edges')
+        edges = mesh.edges;
+    end
+
+    % The face-to-edge adjacency information is necessary for associating
+    % new faces to vertices
+    % (will be computed if not found)
+    if isfield(mesh, 'faceEdges')
+        faceEdgeIndices = mesh.faceEdges;
+    end
+end
 
 if ~isnumeric(faces) || size(faces, 2) ~= 3
     error('Requires a triangular mesh');
 end
 
 % compute the edge array
-edges = meshEdges(faces);
+if isempty(edges)
+    edges = meshEdges(faces);
+end
 nEdges = size(edges, 1);
 
-% index of edges around each face
-faceEdgeIndices = meshFaceEdges(vertices, edges, faces);
+% compute index of edges around each face if not already provided
+if isempty(faceEdgeIndices)
+    faceEdgeIndices = meshFaceEdges(vertices, edges, faces);
+end
 
 
-%% Create new vertices on edges
+%% Process Edges
+% Create new vertices on existing edges. Each edge is subdivided into n new
+% edges, creating (n-1) new vertices.
 
-% several interpolated positions
+% positions to interpolate vertex positions
 t = linspace(0, 1, n + 1)';
 coef2 = t(2:end-1);
 coef1 = 1 - t(2:end-1);
@@ -64,10 +99,14 @@ for iEdge = 1:nEdges
 end
 
 
-%% Process each face
+%% Process faces
+% Subdivide each face, by processing 'strips' on parallel faces. Each strip
+% rely on two vertices of two edges of the original mesh.
 
+% create result array (will grow during face iteration)
 faces2 = zeros(0, 3);
 
+% iterate on faces of original mesh
 nFaces = size(faces, 1);
 for iFace = 1:nFaces
     % compute index of each corner vertex
@@ -157,21 +196,11 @@ for iFace = 1:nFaces
     for k = 1:n
         newFace = [topVertexInds(k) botVertexInds(k) botVertexInds(k+1)];
         faces2 = [faces2; newFace]; %#ok<AGROW>
-    end
-    
+    end    
 end
 
 
+%% Post-processing
 
-
-
-
-
-
-
-
-
-
-
-
-
+% setup output arguments
+varargout = formatMeshOutput(nargout, vertices2, faces2);

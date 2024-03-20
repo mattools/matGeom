@@ -9,7 +9,10 @@ function meshes = splitMesh(vertices, faces, varargin)
 %   possible
 %   
 %   ... = splitMesh(..., 'mostVertices') returns only the component with
-%   the most vertices
+%   the most vertices. Other options are 'all' (default),
+%   'maxBoundingBox' that returns the component with the largest bounding 
+%   box, and 'maxVolume' returns the component with the largest volume.
+%
 %
 %   Example
 %     [v1, f1] = boxToMesh([1 0 -1 0 -1 0]);
@@ -26,17 +29,18 @@ function meshes = splitMesh(vertices, faces, varargin)
 %         drawMesh(meshes(m), cmap(m,:))
 %     end
 %
-%   See also
+%   See also 
 %     concatenateMeshes
 %
 %   Source
 %     Local functions are part of the gptoolbox of Alec Jacobson
 %     https://github.com/alecjacobson/gptoolbox
-%
-% ---------
+
+% ------
 % Author: oqilipo
+% E-mail: N/A
 % Created: 2017-09-17
-% Copyright 2017
+% Copyright 2017-2023
 
 % input parsing
 if isstruct(vertices)
@@ -45,9 +49,10 @@ if isstruct(vertices)
 end
 
 parser = inputParser;
-validStrings = {'all','mostVertices'};
+validStrings = {'all','mostVertices','maxBoundingBox','maxVolume'};
 addOptional(parser,'components','all',@(x) any(validatestring(x, validStrings)));
 parse(parser,varargin{:});
+outputComp = validatestring(parser.Results.components, validStrings);
 
 % algorithm
 CC = connected_components(faces);
@@ -59,9 +64,15 @@ for cc=b
 end
 
 % output parsing
-switch parser.Results.components
+switch outputComp
     case 'mostVertices'
         meshes=meshes(end);
+    case 'maxBoundingBox'
+        [~,sortingIndices] = sort(arrayfun(@(x) box3dVolume(boundingBox3d(x.vertices)), meshes));
+        meshes = meshes(sortingIndices(end));
+    case 'maxVolume'
+        [~,sortingIndices] = sort(arrayfun(@(x) meshVolume(x.vertices, x.faces), meshes));
+        meshes = meshes(sortingIndices(end));
 end
 
 end
@@ -105,8 +116,6 @@ function [A] = adjacency_matrix(E)
 %   T  #F by 4 tet list
 % Outputs:
 %   A  #V by #V adjacency matrix (#V = max(E(:)))
-%
-% See also: facet_adjacency_matrix
 %
 
 if size(E,2)>2

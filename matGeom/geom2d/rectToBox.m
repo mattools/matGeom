@@ -9,13 +9,13 @@ function box = rectToBox(rect)
 %   Example
 %   rectToBox
 %
-%   See also
+%   See also 
 %   boxToRect, drawBox, drawRect
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2012-08-23,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2012-08-23, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012-2023 INRA - Cepia Software Platform
 
 box = [rect(:,1) rect(:,1)+rect(:,3) rect(:,2) rect(:,2)+rect(:,4)];

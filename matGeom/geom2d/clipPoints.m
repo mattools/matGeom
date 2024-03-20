@@ -5,15 +5,15 @@ function points = clipPoints(points, box)
 %   Returns the set of points which are located inside of the box BOX.
 %
 %
-%   See also
+%   See also 
 %   points2d, boxes2d, clipLine, drawPoint
 %
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2010 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2008-2023 INRA - Cepia Software Platform
 
 % get bounding box limits
 xmin = box(1);

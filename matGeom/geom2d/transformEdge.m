@@ -14,16 +14,14 @@ function dest = transformEdge(edge, trans)
 %   Also wotk when EDGES is a [N*4] array of double. In this case, EDGE2
 %   has the same size as EDGE. 
 %
-%   See also:
+%   See also 
 %   edges2d, transforms2d, transformPoint, translation, rotation
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 06/04/2004.
 
-% 14/08/2017 Updated by Juanpi Carbajal <ajuanpi+dev@gmail.com>
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-04-06
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 % allocate memory
 dest = zeros(size(edge));

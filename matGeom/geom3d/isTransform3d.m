@@ -20,21 +20,26 @@ function a = isTransform3d(trans, varargin)
 %     trans = rot*createTranslation3d(rand(1,3));
 %     isTransform3d(trans, 'rot', true)
 %
-%   See also
+%   See also 
 %   composeTransforms3d, createBasisTransform3d, recenterTransform3d,
 %   transformPoint3d
-%
+
 % ------
 % Author: oqilipo
+% E-mail: N/A
 % Created: 2018-07-08
-% Copyright 2018
+% Copyright 2018-2023
 
-narginchk(1,3)
+narginchk(1,5)
 
 p = inputParser;
-addParameter(p,'rotation',false,@islogical);
+logParValidFunc = @(x) (islogical(x) || isequal(x,1) || isequal(x,0));
+addParameter(p,'rotation', 0, logParValidFunc);
+valTol = @(x) validateattributes(x,{'numeric'},{'scalar', '>=',eps(class(trans)), '<=',1});
+addParameter(p,'tolerance', 1e-8, valTol);
 parse(p,varargin{:});
 rotation = p.Results.rotation;
+tolerance = p.Results.tolerance;
 
 % eventually add null translation
 if size(trans, 2) == 3
@@ -80,13 +85,13 @@ end
 
 if rotation
     % transpose(trans(1:3,1:3)) * trans(1:3,1:3) has to be eye(3)
-    if any(abs(eye(3) - (trans(1:3,1:3)'*trans(1:3,1:3))) > eps*1e8)
+    if any(abs(eye(3) - (trans(1:3,1:3)'*trans(1:3,1:3))) > tolerance)
         a = false;
         return;
     end
     
     % determinant of trans(1:3) has to be one
-    if abs(1-det(trans)) > eps*1e8
+    if abs(1-det(trans)) > tolerance
         a = false;
         return
     end

@@ -19,21 +19,17 @@ function varargout = createCube()
 %   [n, e, f] = createCube;
 %   drawMesh(n, f);
 %   
-%   See also
+%   See also 
 %   meshes3d, drawMesh
 %   createOctahedron, createTetrahedron, createDodecahedron
 %   createIcosahedron, createCubeOctahedron
 %
 
-% ---------
-% author : David Legland 
-% e-mail: david.legland@inra.fr
-% INRA - TPV URPOI - BIA IMASTE
-% created the 10/02/2005.
-
-
-%   HISTORY
-%   04/01/2007: remove unused variables
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-10
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 x0 = 0; dx= 1;
 y0 = 0; dy= 1;

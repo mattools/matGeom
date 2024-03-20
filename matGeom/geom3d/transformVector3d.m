@@ -21,25 +21,23 @@ function varargout = transformVector3d(varargin)
 %   Returns the coordinates of the transformed vector separately.
 %
 %
-%   See also:
+%   See also 
 %   vectors3d, transforms3d, transformPoint3d
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 25/11/2008 from transformPoint3d
-%
 
-if length(varargin)==2      % func(PTS_XYZ, PLANE) syntax
-    vIds = 1:2; 
-elseif length(varargin)==4  % func(X, Y, Z, PLANE) syntax
-    vIds = 1:3;
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2008-11-25, from transformPoint3d
+% Copyright 2008-2023 INRA - TPV URPOI - BIA IMASTE
+
+if nargin~=2 && nargin~=4
+    error('Invalid number of input arguments. Type ''help transformVector3d'' for details.');
 end
 
 % Extract only the linear part of the affine transform
-trans = varargin{vIds(end)};
-trans(1:4, 4) = [0; 0; 0; 1];
+trans = varargin{end};
+trans(1:4,4) = [0; 0; 0; 1];
 
 % Call transformPoint3d using equivalent output arguments
 varargout = cell(1, max(1,nargout));
-[varargout{:}] = transformPoint3d(varargin{vIds(1:end-1)}, trans);
+[varargout{:}] = transformPoint3d(varargin{1:end-1}, trans);

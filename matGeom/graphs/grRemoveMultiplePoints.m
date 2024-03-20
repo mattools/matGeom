@@ -7,19 +7,11 @@ function varargout = grRemoveMultiplePoints(nodes, edges)
 %   skeletonization and vectorization.
 %
 
-%   -----
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 13/08/2003.
-%
-
-%   HISTORY
-%   10/02/2004 doc
-%   27/04/2005 function was not working, due to mergeNode modification.
-
-
-% TODO: accelerate function, by limiting action on nodes with degree>2
-% TODO: algo does not work, it can forget some groups.
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-08-13
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 n = 1;
 while n <= length(nodes)

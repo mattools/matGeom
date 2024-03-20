@@ -1,4 +1,4 @@
-function varargout = drawRay(ray, varargin)
+function varargout = drawRay(varargin)
 %DRAWRAY Draw a ray on the current axis.
 %
 %   drawRay(RAY)
@@ -12,30 +12,22 @@ function varargout = drawRay(ray, varargin)
 %   H = drawRay(...)
 %   Returns handle on line object
 %
-%   See also:
-%   rays2d, drawLine
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
+%   See also 
+%     rays2d, drawLine, clipRay
 %
 
-%   HISTORY
-%   2005-07-06 add support for multiple rays
-%   2007-10-18 add support for drawing options
-%   2011-03-12 rewrite using clipRay
-%   2011-10-11 add management of axes handle
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
-% extract handle of axis to draw in
-if isAxisHandle(ray)
-    ax = ray;
-    ray = varargin{1};
-    varargin(1) = [];
-else
-    ax = gca;
-end
+% extract handle of axis to draw on
+[ax, varargin] = parseAxisHandle(varargin{:});
+
+% extract shape primitive
+ray = varargin{1};
+varargin(1) = [];
 
 % get bounding box limits
 box = axis(ax);

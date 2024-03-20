@@ -10,7 +10,7 @@ function spheres(varargin)
 %   decreasing order), and [PHI THETA PSI] are euler angles representing
 %   the ellipsoid orientation.
 %
-%   See also
+%   See also 
 %   createSphere, equivalentEllipsoid
 %   intersectLineSphere, intersectPlaneSphere, sphericalVoronoiDomain
 %   drawSphere, drawEllipsoid, fillSphericalTriangle, fillSphericalPolygon
@@ -19,6 +19,6 @@ function spheres(varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% E-mail: david.legland@inrae.fr
+% Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2008-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas

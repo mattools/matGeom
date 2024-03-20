@@ -1,5 +1,5 @@
 function [trans, points] = registerPoints3dAffine(points, target, varargin)
-% Fit 3D affine transform using iterative algorithm.
+%REGISTERPOINTS3DAFFINE Fit 3D affine transform using iterative algorithm.
 %
 %   TRANS = registerPoints3dAffine(POINTS, TARGET)
 %   Computes the affine transform that maps the shape defines by POINTS
@@ -16,16 +16,15 @@ function [trans, points] = registerPoints3dAffine(points, target, varargin)
 %   Example
 %     registerPoints3dAffine
 %
-%   See also
+%   See also 
 %     transforms3d, fitAffineTransform3d
 %
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2015-02-24,    using Matlab 8.4.0.150421 (R2014b)
-% Copyright 2015 INRA - Cepia Software Platform.
-
+% E-mail: david.legland@inrae.fr
+% Created: 2015-02-24, using Matlab 8.4.0.150421 (R2014b)
+% Copyright 2015-2023 INRA - Cepia Software Platform
 
 nIters = 10;
 if ~isempty(varargin)

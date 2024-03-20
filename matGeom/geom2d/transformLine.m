@@ -15,18 +15,14 @@ function dest = transformLine(line, trans)
 %   Also work when LINES is a [N*4] array of double. In this case, LINE2
 %   has the same size as LINE. 
 %
-%   See also:
+%   See also 
 %   lines2d, transforms2d, transformPoint
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 06/04/2004.
-%
 
-%   HISTORY
-%   02/03/2007: rewrite function
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-04-06
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 % isolate points
 points1 = line(:, 1:2);

@@ -21,17 +21,14 @@ function area = polygonArea3d(poly, varargin)
 %     ans =
 %         18.9282
 %
-%   See also
+%   See also 
 %     polygons3d, triangleArea3d, polygonArea, polygonCentroid3d
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2012-02-24,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012 INRA - Cepia Software Platform.
-
-%   HISTORY
-%   2013-08-20 add support for multiple polygons
+% E-mail: david.legland@inrae.fr
+% Created: 2012-02-24, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2012-2023 INRA - Cepia Software Platform
 
 % Check multiple polygons
 if iscell(poly) || sum(sum(isnan(poly))) > 0

@@ -32,21 +32,14 @@ function pos = linePosition(point, line, varargin)
 %   ans =
 %       .5
 %
-%   See also:
+%   See also 
 %   lines2d, createLine, projPointOnLine, isPointOnLine
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 25/05/2004.
-%
 
-%   HISTORY
-%   2005-07-07 manage multiple input
-%   2011-06-15 avoid the use of repmat when possible
-%   2012-10-24 rewrite using bsxfun
-%   2012-11-22 add support for the diag option
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-05-25
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 % if diag is true, we need only to compute position of i-th point with i-th
 % line.

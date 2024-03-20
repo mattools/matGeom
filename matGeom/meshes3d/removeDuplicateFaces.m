@@ -11,14 +11,14 @@ function faces2 = removeDuplicateFaces(faces, varargin)
 %         2 3 4
 %         2 3 5
 %
-%   See also
-%
- 
+%   See also 
+%     ensureManifoldMesh
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2019-01-08,    using Matlab 8.6.0.267246 (R2015b)
-% Copyright 2019 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2019-01-08, using Matlab 8.6.0.267246 (R2015b)
+% Copyright 2019-2023 INRA - Cepia Software Platform
 
 nFaces = size(faces, 1);
 

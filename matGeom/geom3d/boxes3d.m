@@ -12,13 +12,13 @@ function boxes3d(varargin)
 %   drawBox3d(point3dBounds(n))
 %
 %
-%   See also
+%   See also 
 %   boundingBox3d, box3dVolume, drawBox3d
 %   intersectBoxes3d, mergeBoxes3d, randomPointInBox3d
 %
-%
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2010-07-26,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2010-07-26, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2010-2023 INRA - Cepia Software Platform

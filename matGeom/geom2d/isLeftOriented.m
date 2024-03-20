@@ -9,17 +9,15 @@ function b = isLeftOriented(point, line)
 %   is a NP-by-NL array containing the result for each point-line
 %   combination.
 %
-%   See also:
+%   See also 
 %   lines2d, points2d, isCounterClockwise, isPointOnLine, distancePointLine
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/07/2005.
-
-%   HISTORY
-%   2017-09-04 uses bsxfun
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-07-31
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % equivalent to:
 % b = (xp-x0).*dy-(yp-y0).*dx < 0;

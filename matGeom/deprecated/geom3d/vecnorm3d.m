@@ -11,15 +11,12 @@ function n = vecnorm3d(v)
 %
 %   See Also
 %   vectors3d, normalize3d
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 21/02/2005.
-%
 
-%   HISTORY
-%   19/06/2009 deprecate and replace by vectorNorm3d
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2005-02-21
+% Copyright 2005 INRA - TPV URPOI - BIA IMASTE
 
 % deprecation warning
 warning('geom3d:deprecated', ...

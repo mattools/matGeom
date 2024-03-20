@@ -1,7 +1,7 @@
-function [fittedCircle, circleNormal] = fitCircle3d(pts)
+function [fittedCircle, circleNormal, residuals] = fitCircle3d(pts, varargin)
 %FITCIRCLE3D Fit a 3D circle to a set of points.
 %
-%   [FITTEDCIRCLE, CIRCLENORMAL] = fitCircle3d(PTS)
+%   [FITTEDCIRCLE, CIRCLENORMAL, RESIDUALS] = fitCircle3d(PTS)
 %
 %   Example
 %     % points on a 2d circle with noise
@@ -28,13 +28,23 @@ function [fittedCircle, circleNormal] = fitCircle3d(pts)
 %     drawCircle3d(fittedCircle, 'k')
 %     drawVector3d(fittedCircle(1:3), circleNormal*fittedCircle(4))
 %
-%   See also
+%   See also 
 %   circle3dOrigin, circle3dPosition, circle3dPoint, intersectPlaneSphere
 %   drawCircle3d, drawCircleArc3d, drawEllipse3d
-%
+
 % ------
-% Authors: oqilipo, David Legland
-% created: 2017-05-09
+% Authors: oqilipo
+% E-mail: N/A
+% Created: 2017-05-09
+% Copyright 2017-2023
+
+parser = inputParser;
+addRequired(parser, 'pts', @(x) validateattributes(x, {'numeric'},...
+    {'ncols',3,'real','finite','nonnan'}));
+addOptional(parser,'verbose',true,@islogical);
+parse(parser,pts,varargin{:});
+pts = parser.Results.pts;
+verbose = parser.Results.verbose;
 
 % Mean of all points
 meanPoint = mean(pts,1);
@@ -47,26 +57,28 @@ centeredPoints = pts - repmat(meanPoint,size(pts,1),1);
 tfmPoints = transformPoint3d(centeredPoints, V');
 
 % Fit a circle to the points in the xy-plane
-circleParamter = CircleFitByTaubin(tfmPoints(:,1:2));
-center2d = circleParamter(1:2); 
+circleParamter = CircleFitByTaubin(tfmPoints(:,1:2), verbose);
+center2d = circleParamter(1:2);
 radius=circleParamter(3);
 center3d = transformPoint3d([center2d, 0], [inv(V'), meanPoint']);
 circleNormal = V(:,3)';
 [theta, phi, ~] = cart2sph2(circleNormal);
 fittedCircle = [center3d radius rad2deg(theta) rad2deg(phi) 0];
 
+% Residuals
+residuals = radius - distancePoints(tfmPoints(:,1:2),center2d);
+
 end
 
 % Circle Fit (Taubin method)
 % version 1.0 (2.24 KB) by Nikolai Chernov
 % http://www.mathworks.com/matlabcentral/fileexchange/22678
-function Par = CircleFitByTaubin(XY)
-
-%--------------------------------------------------------------------------
-%  
+function Par = CircleFitByTaubin(XY, varargin)
+%__________________________________________________________________________
+%
 %     Circle fit by Taubin
 %      G. Taubin, "Estimation Of Planar Curves, Surfaces And Nonplanar
-%                  Space Curves Defined By Implicit Equations, With 
+%                  Space Curves Defined By Implicit Equations, With
 %                  Applications To Edge And Range Image Segmentation",
 %      IEEE Trans. PAMI, Vol. 13, pages 1115-1138, (1991)
 %
@@ -78,14 +90,21 @@ function Par = CircleFitByTaubin(XY)
 %     Note: this fit does not use built-in matrix functions (except "mean"),
 %           so it can be easily programmed in any programming language
 %
-%--------------------------------------------------------------------------
+%__________________________________________________________________________
 
-n = size(XY,1);      % number of data points
+parser = inputParser;
+addRequired(parser, 'XY', @(x) validateattributes(x, {'numeric'},...
+    {'ncols',2,'real','finite','nonnan'}));
+addOptional(parser,'verbose',true,@islogical);
+parse(parser,XY,varargin{:});
+XY=parser.Results.XY;
+verbose = parser.Results.verbose;
 
-centroid = mean(XY);   % the centroid of the data set
+n = size(XY,1);  % number of data points
+
+centroid = mean(XY); % the centroid of the data set
 
 %     computing moments (note: all moments will be normed, i.e. divided by n)
-
 Mxx = 0; Myy = 0; Mxy = 0; Mxz = 0; Myz = 0; Mzz = 0;
 
 for i=1:n
@@ -107,8 +126,7 @@ Mxz = Mxz/n;
 Myz = Myz/n;
 Mzz = Mzz/n;
 
-%    computing the coefficients of the characteristic polynomial
-
+% computing the coefficients of the characteristic polynomial
 Mz = Mxx + Myy;
 Cov_xy = Mxx*Myy - Mxy*Mxy;
 A3 = 4*Mz;
@@ -124,35 +142,38 @@ epsilon = 1e-12;
 IterMax = 20;
 
 % Newton's method starting at x=0
-
 for iter=1:IterMax
     yold = ynew;
     ynew = A0 + xnew*(A1 + xnew*(A2 + xnew*A3));
     if abs(ynew) > abs(yold)
-       disp('Newton-Taubin goes wrong direction: |ynew| > |yold|');
-       xnew = 0;
-       break;
+        if verbose
+            disp('Newton-Taubin goes wrong direction: |ynew| > |yold|');
+        end
+        xnew = 0;
+        break;
     end
     Dy = A1 + xnew*(A22 + xnew*A33);
     xold = xnew;
     xnew = xold - ynew/Dy;
     if (abs((xnew-xold)/xnew) < epsilon), break, end
     if (iter >= IterMax)
-        disp('Newton-Taubin will not converge');
+        if verbose
+            disp('Newton-Taubin will not converge');
+        end
         xnew = 0;
     end
     if (xnew<0.)
-        fprintf(1,'Newton-Taubin negative root:  x=%f\n',xnew);
+        if verbose
+            fprintf(1,'Newton-Taubin negative root:  x=%f\n',xnew);
+        end
         xnew = 0;
     end
 end
 
-%  computing the circle parameters
-
+% computing the circle parameters
 DET = xnew*xnew - xnew*Mz + Cov_xy;
 Center = [Mxz*(Myy-xnew)-Myz*Mxy , Myz*(Mxx-xnew)-Mxz*Mxy]/DET/2;
 
 Par = [Center+centroid , sqrt(Center*Center'+Mz)];
 
-end    %    CircleFitByTaubin
-
+end

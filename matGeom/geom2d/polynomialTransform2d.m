@@ -15,14 +15,14 @@ function res = polynomialTransform2d(pts, coeffs)
 %   drawPoint(pts);
 %   drawPoint(pts2, 'g');
 %
-%   See also
+%   See also 
 %     transformPoint, fitPolynomialTransform2d
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2013-09-04,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2013 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2013-09-04, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2013-2023 INRA - Cepia Software Platform
 
 x = pts(:,1);
 y = pts(:,2);

@@ -5,15 +5,11 @@ function varargout = grMergeMultipleEdges(nodes, edges)
 %   Remove configuration with two edges sharing the same 2 nodes.
 %
 
-%   -----
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 13/08/2003.
-%
-
-%   HISTORY
-%   10/02/2004 doc
-%   2011-05-18 rename to grMergeMultipleEdges
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-08-13
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 rmedge = [];
 for e = 1:length(edges)

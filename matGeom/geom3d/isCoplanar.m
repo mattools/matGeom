@@ -12,12 +12,15 @@ function copl = isCoplanar(x,y,z,tol)
 % 
 % Example: 
 %   iscoplanar([1 2 -2; -3 1 -14; -1 2 -6; 1 -2 -8], eps)
+%
+% Source:
+%   https://fr.mathworks.com/matlabcentral/fileexchange/46-iscoplanar-m
 
-%
-% Adapted from a function originally written by Brett Shoelson, Ph.D.
-% brett.shoelson@joslin.harvard.edu
-% https://fr.mathworks.com/matlabcentral/fileexchange/46-iscoplanar-m
-%
+% ------
+% Author: Brett Shoelson, David Legland
+% E-mail: brett.shoelson@joslin.harvard.edu, david.legland@inrae.fr
+% Created: 2001-10-06
+% Copyright 2001-2023
 
 if nargin == 0
 	error('Requires at least one input argument.'); 

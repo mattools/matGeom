@@ -12,18 +12,14 @@ function plane2 = normalizePlane(plane1)
 %   - (DX1 DY1 DZ1) has norm equal to 1
 %   - (DX2 DY2 DZ2) has norm equal to 1 and is orthogonal to (DX1 DY1 DZ1)
 %   
-%   See also:
+%   See also 
 %   planes3d, createPlane
-%
-%   ---------
-%   author: David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 21/02/2005.
-%
 
-%   HISTORY
-%   21/08/2009 compute origin after computation of vectors (more precise)
-%       and add support for several planes.
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-02-21
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % compute first direction vector
 d1  = normalizeVector3d(plane1(:,4:6));

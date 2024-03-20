@@ -25,24 +25,15 @@ function b = isParallel(v1, v2, varargin)
 %   ans =
 %       0
 %
-%   See also
+%   See also 
 %   vectors2d, isPerpendicular, lines2d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2006-04-25
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
-
-%   HISTORY
-%   2007-09-18 copy from isParallel3d, adapt to any dimension, and add psb
-%       to specify precision
-%   2007-01-16 fix bug
-%   2009-09-21 fix bug for array of 3 vectors
-%   2011-01-20 replace repmat by ones-indexing (faster)
-%   2011-06-16 use direct computation (faster)
-%   2017-08-31 use normalized vectors
+% Copyright 2006-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % default accuracy
 acc = 1e-14;

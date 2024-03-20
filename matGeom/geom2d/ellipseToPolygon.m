@@ -20,20 +20,15 @@ function varargout = ellipseToPolygon(ellipse, N)
 %     drawPolygon(poly, 'b');
 %     drawPoint(poly, 'bo');
 %
-%   See also:
-%   ellipses2d, drawEllipse, circleToPolygon, rectToPolygon
+%   See also 
+%   ellipses2d, drawEllipse, circleToPolygon, rectToPolygon, ellipsePoint
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 06/04/2005.
-%
-
-% HISTORY
-% 2011-03-30 use angles in degrees, add default value for N
-% 2011-12-09 rename to ellipseToPolygon
-% 2017-08-31 returns N vertices instead of N+1
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-04-06
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 % default value for N
 if nargin < 2

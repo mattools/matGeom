@@ -10,37 +10,54 @@ function varargout = rotation3dToEulerAngles(mat, varargin)
 %   for representing some 3D shapes like ellipsoids.
 %
 %   ... = rotation3dToEulerAngles(MAT, CONVENTION)
-%   CONVENTION specifies the axis rotation sequence. 
-%   Supported conventions are: 'ZYX', 'ZYZ'. Default is 'ZYX'
+%   CONVENTION specifies the axis rotation sequence. Default is 'ZYX'.
+%   Supported conventions are: 
+%       'ZYX','ZXY','YXZ','YZX','XYZ','XZY'
+%       'ZYZ','ZXZ','YZY','YXY','XZX','XYX'
 %
 %   Example
 %   rotation3dToEulerAngles
 %
 %   References
-%   Code from Graphics Gems IV on euler angles
-%   http://tog.acm.org/resources/GraphicsGems/gemsiv/euler_angle/EulerAngles.c
+%   Code from '1994 - Shoemake - Graphics Gems IV: Euler Angle Conversion:
+%   http://webdocs.cs.ualberta.ca/~graphics/books/GraphicsGems/gemsiv/euler_angle/EulerAngles.c
+%   (see rotm2eul, that is part of MATLAB's Robotics System Toolbox)
 %   Modified using explanations in:
-%   http://www.gregslabaugh.name/publications/euler.pdf
+%   http://www.gregslabaugh.net/publications/euler.pdf
+%   https://www.geometrictools.com/Documentation/EulerAngles.pdf
 %
-%   See also
+%   See also 
 %   transforms3d, rotation3dAxisAndAngle, createRotation3dLineAngle,
 %   eulerAnglesToRotation3d
 %
-%
+
 % ------
-% Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2010-08-11,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform.
+% Authors: David Legland, oqilipo
+% E-mail: david.legland@inrae.fr
+% Created: 2010-08-11, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2010-2023 INRA - Cepia Software Platform
 
 p = inputParser;
-validStrings = {'ZYX','ZYZ'};
+validStrings = {...
+    'ZYX','ZXY','YXZ','YZX','XYZ','XZY',...
+    'ZYZ','ZXZ','YZY','YXY','XZX','XYX'};
 addOptional(p,'convention','ZYX',@(x) any(validatestring(x,validStrings)));
+logParValidFunc = @(x) (islogical(x) || isequal(x,1) || isequal(x,0));
+addParameter(p,'IsRotation', 1, logParValidFunc);
+valTol = @(x) validateattributes(x,{'numeric'},{'scalar', '>=',eps(class(mat)), '<=',1});
+addParameter(p,'tolerance', 1e-8, valTol);
 parse(p,varargin{:});
 convention=p.Results.convention;
+isRotation = p.Results.IsRotation;
+tolerance = p.Results.tolerance;
 
-% conversion from radians to degrees
-k = 180 / pi;
+if isRotation
+    if ~isTransform3d(mat(1:3,1:3), 'rotation', 1, 'tolerance', tolerance)
+        warning(['Rotation matrix contains reflection or scaling ' ...
+            'tested with a tolerance of ' num2str(tolerance) '.' newline ...
+            'Calculation of euler angles might be incorrect.'])
+    end
+end
 
 switch convention
     case 'ZYX'
@@ -49,33 +66,143 @@ switch convention
         % avoid dividing by 0
         if cy > 16*eps
             % normal case: theta <> 0
-            phi   = k * atan2( mat(2,1), mat(1,1));
-            theta = k * atan2(-mat(3,1), cy);
-            psi   = k * atan2( mat(3,2), mat(3,3));
+            phi   = atan2( mat(2,1), mat(1,1));
+            theta = atan2(-mat(3,1), cy);
+            psi   = atan2( mat(3,2), mat(3,3));
         else
-            % 
             phi   = 0;
-            theta = k * atan2(-mat(3,1), cy);
-            psi   = k * atan2(-mat(2,3), mat(2,2));
+            theta = atan2(-mat(3,1), cy);
+            psi   = atan2(-mat(2,3), mat(2,2));
         end
+    case 'ZXY'
+        cy = hypot(mat(2,2), mat(1,2));
+        if cy > 16*eps
+            phi   = -atan2( mat(1,2), mat(2,2));
+            theta = -atan2(-mat(3,2), cy);
+            psi   = -atan2( mat(3,1), mat(3,3));
+        else
+            phi   = 0;
+            theta = -atan2(-mat(3,2), cy);
+            psi   = -atan2(-mat(1,3), mat(1,1));
+        end
+    case 'YXZ'
+        cy = hypot(mat(3,3), mat(1,3));
+        if cy > 16*eps
+            phi   = atan2( mat(1,3), mat(3,3));
+            theta = atan2(-mat(2,3), cy);
+            psi   = atan2( mat(2,1), mat(2,2));
+        else
+            phi   = 0;
+            theta = atan2(-mat(2,3), cy);
+            psi   = atan2(-mat(1,2), mat(1,1));
+        end
+    case 'YZX'
+        cy = hypot(mat(1,1), mat(3,1));
+        if cy > 16*eps
+            phi   = -atan2( mat(3,1), mat(1,1));
+            theta = -atan2(-mat(2,1), cy);
+            psi   = -atan2( mat(2,3), mat(2,2));
+        else
+            phi   = 0;
+            theta = -atan2(-mat(2,1), cy);
+            psi   = -atan2(-mat(3,2), mat(3,3));
+        end
+    case 'XYZ'
+        cy = hypot(mat(3,3), mat(2,3));
+        if cy > 16*eps
+            phi   = -atan2( mat(2,3), mat(3,3));
+            theta = -atan2(-mat(1,3), cy);
+            psi   = -atan2( mat(1,2), mat(1,1));
+        else
+            phi   = 0;
+            theta = -atan2(-mat(1,3), cy);
+            psi   = -atan2(-mat(2,1), mat(2,2));
+        end
+    case 'XZY'
+        cy = hypot(mat(2,2), mat(3,2));
+        if cy > 16*eps
+            phi   = atan2( mat(3,2), mat(2,2));
+            theta = atan2(-mat(1,2), cy);
+            psi   = atan2( mat(1,3), mat(1,1));
+        else
+            phi   = 0;
+            theta = atan2(-mat(1,2), cy);
+            psi   = atan2(-mat(3,1), mat(3,3));
+        end
+        
     case 'ZYZ'
         cy = hypot(mat(3,2), mat(3,1));
         if cy > 16*eps
-            phi   = k * -atan2(mat(2,3), -mat(1,3));
-            theta = k * -atan2(cy, mat(3,3));
-            psi   = k * -atan2(mat(3,2), mat(3,1));
+            phi   = -atan2(mat(2,3), -mat(1,3));
+            theta = -atan2(cy, mat(3,3));
+            psi   = -atan2(mat(3,2), mat(3,1));
         else
             phi   = 0;
-            theta = k * atan2(cy, mat(3,3));
-            psi   = k * atan2(mat(2,1), mat(2,2));
+            theta = -atan2(cy, mat(3,3));
+            psi   = -atan2(-mat(2,1), mat(2,2));
+        end
+    case 'ZXZ'
+        cy = hypot(mat(3,2), mat(3,1));
+        if cy > 16*eps
+            phi   = atan2(mat(1,3), -mat(2,3));
+            theta = atan2(cy, mat(3,3));
+            psi   = atan2(mat(3,1), mat(3,2));
+        else
+            phi   = 0;
+            theta = atan2(cy, mat(3,3));
+            psi   = atan2(-mat(1,2), mat(1,1));
+        end
+    case 'YZY'
+        cy = hypot(mat(2,3), mat(2,1));
+        if cy > 16*eps
+            phi   = atan2(mat(3,2), -mat(1,2));
+            theta = atan2(cy, mat(2,2));
+            psi   = atan2(mat(2,3), mat(2,1));
+        else
+            phi   = 0;
+            theta = atan2(cy, mat(2,2));
+            psi   = atan2(-mat(3,1), mat(3,3));
+        end
+    case 'YXY'
+        cy = hypot(mat(2,3), mat(2,1));
+        if cy > 16*eps
+            phi   = -atan2(mat(1,2), -mat(3,2));
+            theta = -atan2(cy, mat(2,2));
+            psi   = -atan2(mat(2,1), mat(2,3));
+        else
+            phi   = 0;
+            theta = -atan2(cy, mat(2,2));
+            psi   = -atan2(-mat(1,3), mat(1,1));
+        end
+    case 'XZX'
+        cy = hypot(mat(1,3), mat(1,2));
+        if cy > 16*eps
+            phi   = -atan2(mat(3,1), -mat(2,1));
+            theta = -atan2(cy, mat(1,1));
+            psi   = -atan2(mat(1,3), mat(1,2));
+        else
+            phi   = 0;
+            theta = -atan2(cy, mat(1,1));
+            psi   = -atan2(-mat(3,2), mat(3,3));
+        end
+    case 'XYX'
+        cy = hypot(mat(1,2), mat(1,3));
+        if cy > 16*eps
+            phi   = atan2(mat(2,1), -mat(3,1));
+            theta = atan2(cy, mat(1,1));
+            psi   = atan2(mat(1,2), mat(1,3));
+        else
+            phi   = 0;
+            theta = atan2(cy, mat(1,1));
+            psi   = atan2(-mat(2,3), mat(2,2));
         end
 end
 
 % format output arguments
 if nargout <= 1
     % one array
-    varargout{1} = [phi theta psi];
+    varargout{1} = rad2deg([phi theta psi]);
 else
     % three separate arrays
-    varargout = {phi, theta, psi};
+    varargout = cellfun(@rad2deg, {phi theta psi},'uni',0);
 end

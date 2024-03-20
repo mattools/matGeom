@@ -13,7 +13,7 @@ function varargout = cvtIterate(germs, funcPtr, funcArgs, N)
 %   P2 = cvtIterate(P, @randPointDiscUnif, [], 1000);
 %   P3 = cvtIterate(P2, @randPointDiscUnif, [], 1000);
 %
-%   See also
+%   See also 
 %
 %
 %   Rewritten from programs found in
@@ -27,10 +27,9 @@ function varargout = cvtIterate(germs, funcPtr, funcArgs, N)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
-% Created: 2007-10-10,    using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
-
+% E-mail: david.legland@inrae.fr
+% Created: 2007-10-10, using Matlab 7.4.0.287 (R2007a)
+% Copyright 2007-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 %% Init
 

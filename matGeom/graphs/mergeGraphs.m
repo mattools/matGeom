@@ -1,14 +1,14 @@
 function varargout = mergeGraphs(varargin)
-%MERGEGRAPHS Merge two graphs, by adding nodes, edges and faces lists. .
+%MERGEGRAPHS Merge two graphs, by adding nodes, edges and faces lists.
 %
 %   
 %
 
-%   -----
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 09/08/2004.
-%
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-08-09
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 simplify = false;
 
@@ -20,7 +20,7 @@ faces = {}; faces2 = {};
 % extract simplify tag
 var = varargin{nargin};
 if ischar(var)
-	if strcmp(var, 'simplify');
+	if strcmp(var, 'simplify')
         simplify = true;
         varargin = varargin(1:length(varargin)-1);
 	end

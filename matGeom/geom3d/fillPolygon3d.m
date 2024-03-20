@@ -21,27 +21,36 @@ function varargout = fillPolygon3d(varargin)
 %     t = linspace(0, 2*pi, 100)';
 %     xt = 10 * cos(t);
 %     yt = 5 * sin(t);
-%     zt = zeros(1,100);
-%     figure; fillPolygon3d(xt, yt, zt, 'c');
+%     zt = zeros(100,1);
+%     poly = [xt yt zt];
+%     figure; hold on; axis equal; fillPolygon3d(poly, 'c'); 
+%     drawPolygon3d(poly, 'linewidth', 2, 'color', 'k');
 % 
-%   See Also:
+%   See also 
 %   polygons3d, drawPolygon3d, drawPolyline3d
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2007-01-05
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
+% Copyright 2007-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
-    
+% Check if axes handle is specified
+if isAxisHandle(varargin{1})
+    hAx = varargin{1};
+    varargin(1) = [];
+else
+    hAx = gca;
+end
+
 % check case we want to draw several curves, stored in a cell array
 var1 = varargin{1};
 if iscell(var1)
     hold on;
     h = [];
     for i = 1:length(var1(:))
-        h = [h; fillPolygon3d(var1{i}, varargin{2:end})]; %#ok<AGROW>
+        h = [h; fillPolygon3d(hAx, var1{i}, varargin{2:end})]; %#ok<AGROW>
     end
     if nargout>0
         varargout{1}=h;
@@ -78,7 +87,7 @@ else
 end
 
 % fill the polygon
-h = fill3(px, py, pz, color, varargin{:});
+h = fill3(hAx, px, py, pz, color, varargin{:});
 
 if nargout>0
     varargout{1}=h;

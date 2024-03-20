@@ -8,7 +8,7 @@ function varargout = boundedCentroidalVoronoi2d(germs, box, varargin)
 %   diagram.
 %
 %   [N, E, F] = boundedCentroidalVoronoi2d(GERMS, BOX, NITER)
-%   Specifies the number of iterations.
+%   Specifies the number of iterations. Default is 10.
 %
 %   [N, E, F, G] = boundedCentroidalVoronoi2d(...)
 %   also returns the positions of germs/centroids for each face. If the
@@ -20,20 +20,15 @@ function varargout = boundedCentroidalVoronoi2d(germs, box, varargin)
 %   [n, e, f] = boundedCentroidalVoronoi2d(rand(20, 2)*100, [0 100 0 100]);
 %   drawGraph(n, e, f);
 %
-%   See also
+%   See also 
 %     graphs, boundedVoronoi2d, centroidalVoronoi2d, clipGraph
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2007-01-12
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
-
-% HISTORY
-% 27/07/2007 add doc, and psb to specify number of iterations
-% 18/09/2007 add psb to return germs of tessellation
-% 23/02/2012 rename from centroidalVoronoi2d to boundedCentroidalVoronoi2d
+% Copyright 2007-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % number of iteration
 nIter = 10;

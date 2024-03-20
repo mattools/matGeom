@@ -21,7 +21,7 @@ function [dist, proj] = distancePointTriangle3d(point, triangle)
 %      dist =
 %           0.5774
 %
-%   See also
+%   See also 
 %   meshes3d, distancePointMesh, distancePointEdge3d, distancePointPlane
 %
 %   Reference
@@ -33,12 +33,12 @@ function [dist, proj] = distancePointTriangle3d(point, triangle)
 %   (same algorithm, but different order of input argument)
 %
 %   * https://fr.mathworks.com/matlabcentral/fileexchange/22857-distance-between-a-point-and-a-triangle-in-3d
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2018-03-08,    using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2018 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2018-03-08, using Matlab 9.3.0.713579 (R2017b)
+% Copyright 2018-2023 INRA - Cepia Software Platform
 
 % triangle origin and vectors
 p1 = triangle(1,:);

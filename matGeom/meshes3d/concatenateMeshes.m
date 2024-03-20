@@ -1,5 +1,5 @@
 function varargout = concatenateMeshes(varargin)
-% CONCATENATEMESHES Concatenate multiple meshes.
+%CONCATENATEMESHES Concatenate multiple meshes.
 %
 %   [V,F] = concatenateMeshes(V1,F1,V2,F2, ...)
 %   Returns one mesh represented by vertices V and faces F by concatenating
@@ -9,13 +9,14 @@ function varargout = concatenateMeshes(varargin)
 %   where MESH1, MESH2, ... are structs or struct arrays with the fields  
 %   vertices and faces
 %
-%   See also
+%   See also 
 %     splitMesh
-%   
-% ---------
+
+% ------
 % Authors: oqilipo (parsing), Alec Jacobson (loop)
+% E-mail: N/A
 % Created: 2017-09-12
-% Copyright 2017
+% Copyright 2017-2023
 
 %% parsing inputs
 assert(~isempty(varargin))

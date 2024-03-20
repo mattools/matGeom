@@ -17,21 +17,15 @@ function point = intersectEdgePlane(edge, plane, varargin)
 %   ans =
 %       5   5   0
 %
-%   See Also:
+%   See also 
 %   planes3d, intersectLinePlane, createLine3d, createPlane
 %
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 24/04/2007 from intersectLinePlane.
-%
 
-%   HISTORY
-%
-%   17/06/2011 E. J. Payton - fixed indexing error that caused incorrect
-%              points to be returned
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2007-04-24, from intersectLinePlane
+% Copyright 2007-2023 INRA - TPV URPOI - BIA IMASTE
 
 % extract tolerance for determination of parallel edges and planes
 tol = 1e-14;

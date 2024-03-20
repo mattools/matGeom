@@ -19,18 +19,14 @@ function res = orthogonalLine(line, point)
 %     perp = orthogonalLine(refLine, pt);
 %     drawLine(perp, 'color', 'r');
 % 
-%   See also:
+%   See also 
 %   lines2d, parallelLine, intersectLines
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 31/10/2003.
-%
 
-%   HISTORY
-%   19/02/2004 added control for multiple lines and/or points
-%   31/12/2013 added example
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-10-31
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 N = max(size(point, 1), size(line, 1));
 

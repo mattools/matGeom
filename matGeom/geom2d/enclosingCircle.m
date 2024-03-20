@@ -12,16 +12,15 @@ function circle = enclosingCircle(pts)
 %   which was rewritten from a Java applet by Shripad Thite:
 %   http://heyoka.cs.uiuc.edu/~thite/mincircle/
 %
-%   See also:
+%   See also 
 %   circles2d, points2d, boxes2d, circumCircle
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@nantes.inra.fr
-% created the 07/07/2005.
-% Copyright 2012 INRA - Cepia Software Platform.
-
+% E-mail: david.legland@inrae.fr
+% Created: 2005-07-07
+% Copyright 2005-2023 INRA - Cepia Software Platform
 
 % works on convex hull: it is faster
 pts = pts(convhull(pts(:,1), pts(:,2)), :);

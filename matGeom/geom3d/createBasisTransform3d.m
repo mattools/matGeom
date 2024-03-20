@@ -19,25 +19,21 @@ function transfo = createBasisTransform3d(source, target)
 %   matrices.
 %
 %   Example:
-%     % Calculate local plane coords. of a point given in global coords
-%     Plane = [10 10 10  1 0 0  0 1 0];
-%     Tform = createBasisTransform3d('global', Plane);
-%     PT_IN_PLANE = transformPoint3d([3 8 2], Tform)
+%     % Calculate local plane coords. of a point given in global coords.
+%     plane = [10 10 10  1 0 0  0 1 0];
+%     transfo = createBasisTransform3d('global', plane);
+%     PT_IN_PLANE = transformPoint3d([3 8 2], transfo)
 %     PT_IN_PLANE =
 %         13  18  12
 %
-%   See also
+%   See also 
 %     transforms3d, transformPoint3d, planePosition, createBasisTransform
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2010-12-03,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010 INRA - Cepia Software Platform.
-
-% HISTORY
-% 2013-07-03 added support for multiple inputs (Sven Holcombe)
-% 2017-10-16 rewrite
+% E-mail: david.legland@inrae.fr
+% Created: 2010-12-03, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2010-2023 INRA - Cepia Software Platform
 
 % size of input arguments
 srcSz = size(source, 1);

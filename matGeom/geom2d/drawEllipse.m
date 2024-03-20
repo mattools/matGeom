@@ -27,28 +27,19 @@ function varargout = drawEllipse(varargin)
 %     axis equal; axis([0 100 10 90])
 %
 %   % add another ellipse with different orientation and style
-%     drawEllipse([50 50 40 20 -10], 'linewidth', 2, 'color', 'g');
+%     drawEllipse([50 50 40 20 -10], 'LineWidth', 2, 'Color', 'g');
 %
-%   See also:
-%     ellipses2d, drawCircle, drawEllipseArc, ellipseToPolygon
 %
-
-%   ---------
-%   author : David Legland 
-%   e-mail: david.legland@inra.fr
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 11/12/2003.
+%   See also 
+%     ellipses2d, drawCircle, drawEllipseArc, drawEllipseAxes
+%     fitEllipse, ellipseToPolygon, ellipsePoint, transformEllipse
 %
 
-%   HISTORY
-%   2004-01-08 returns coord of points when 2 output args are asked
-%   2004-01-08 fix bug in extraction of input parameters, theta was not
-%       initialized in case of array of size 1*5
-%   2005-08-13 uses radians instead of degrees
-%   2008-02-21 add support for drawing styles, code cleanup
-%   2011-03-30 use degrees instead of radians, remove [x y] = ... format
-%   2011-10-11 add support for axis handle
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-12-11
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 %% Extract input arguments
 
@@ -106,8 +97,16 @@ end
 % angular positions of vertices
 t = linspace(0, 2*pi, 145);
 
-% compute position of points to draw each ellipse
+% empty array for graphic handles
 h = zeros(length(x0), 1);
+
+% save hold state
+holdState = ishold(ax);
+hold(ax, 'on');
+
+
+%% Display each ellipse
+
 for i = 1:length(x0)
     % pre-compute rotation angles (given in degrees)
     cot = cosd(theta(i));
@@ -119,6 +118,14 @@ for i = 1:length(x0)
     
     % stores handle to graphic object
     h(i) = plot(ax, xt, yt, styles{:});
+end
+
+
+%% post-processing
+
+% restore hold state
+if ~holdState
+    hold(ax, 'off');
 end
 
 % return handles if required

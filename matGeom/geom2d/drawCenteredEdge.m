@@ -40,20 +40,15 @@ function varargout = drawCenteredEdge(varargin)
 %     edges = [center 2*r1 theta ; center 2*r2 theta+90];
 %     drawCenteredEdge(edges, 'linewidth', 2, 'color', 'g');
 % 
-%   See also:
-%   edges2d, drawOrientedBox, drawEllipse, centeredEdgeToEdge, drawEdge
-%
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 05/08/2005.
+%   See also 
+%     edges2d, drawOrientedBox, drawEllipse, centeredEdgeToEdge, drawEdge
 %
 
-%   HISTORY
-%   2007-06-15 update doc, clean up code
-%   2011-05-18 use angle in degrees, cleanup code and doc
-%   2011-10-11 add management of axes handle
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2005-08-05
+% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
 
 %% process input variables
 
@@ -124,6 +119,10 @@ x2 = xc + len .* cot / 2;
 y1 = yc - len .* sit / 2;
 y2 = yc + len .* sit / 2;
 
+% save hold state
+holdState = ishold(ax);
+hold(ax, 'on');
+
 
 % draw the edges
 h = zeros(N, 1);
@@ -140,6 +139,11 @@ end
 
 
 %% Format output
+
+% restore hold state
+if ~holdState
+    hold(ax, 'off');
+end
 
 % process output arguments
 if nargout > 0

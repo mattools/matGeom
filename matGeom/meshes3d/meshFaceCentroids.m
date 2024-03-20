@@ -16,19 +16,15 @@ function centroids = meshFaceCentroids(varargin)
 %     drawVector3d(centros1, normals1);
 %
 %
-%   See also:
+%   See also 
 %     meshes3d, drawMesh, meshFaceNormals, meshFaceAreas, convhull
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2006-07-05
-% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).
-
-% HISTORY
-% 2007-09-18 fix: worked only for 2D case, now works also for 3D
-% 2017-11-24 rename from faceCentroids to meshFaceCentroids
+% Copyright 2006-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % parse input data
 [vertices, faces] = parseMeshData(varargin{:});

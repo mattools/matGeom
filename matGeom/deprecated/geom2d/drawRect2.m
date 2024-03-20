@@ -17,13 +17,12 @@ function varargout = drawRect2(varargin)
 %
 %   See Also :
 %   drawRect
-%
-%   ---------
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 04/05/2004.
-%
+
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2004-05-04
+% Copyright 2004 INRA - TPV URPOI - BIA IMASTE
 
 warning('polygons2d:deprecated', ...
     'This function is deprecated, use "drawOrientedBox" instead');

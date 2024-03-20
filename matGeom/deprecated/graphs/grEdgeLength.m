@@ -14,8 +14,8 @@ function lengths = grEdgeLength(nodes, edges, varargin)
 % ------
 % Author: David Legland
 % e-mail: david.legland@grignon.inra.fr
-% Created: 2014-01-13,    using Matlab 7.9.0.529 (R2009b)
-% Copyright 2014 INRA - Cepia Software Platform.
+% Created: 2014-01-13, using Matlab 7.9.0.529 (R2009b)
+% Copyright 2014 INRA - Cepia Software Platform
 
 warning('MatGeom:graphs:deprecated', ...
     'function grEdgeLength is obsolete, use grEdgeLengths instead');

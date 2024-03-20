@@ -4,18 +4,12 @@ function varargout = grSimplifyBranches(nodes, edges)
 %   [NODES2 EDGES2] = grSimplifyBranches(NODES, EDGES)
 %   renvoie une version simplifiee d'un graphe, en ne gardant que les 
 %   points multiples et les aretes reliant les points multiples.
-%
-%   -----
-%
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 13/08/2003.
-%
 
-%   HISTORY :
-%   10/02/2004 : doc
-%   17/01/2006 : uses faster method to find neighbour edges
-%   18/01/2006 : replace call to subfunctions by inlining -> faster
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2003-08-13
+% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
 
 Mnodes = [];    % size Nn*2 -> nodes coordinates
 Sedges = [];    % size Ne*2 -> indices of nodes

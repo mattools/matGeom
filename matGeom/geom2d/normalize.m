@@ -8,19 +8,15 @@ function vn = normalize(v)
 %   When V is a MxN array, normalization is performed for each row of the
 %   array.
 %
-%   See Also:
+%   See also 
 %   vectors2d, normalizeVector, vectorNorm
 %
 
-%   ---------
-%   author : David Legland 
-%   INRA - TPV URPOI - BIA IMASTE
-%   created the 29/11/2004.
-%
-
-%   HISTORY
-%   14/01/2005 : correct bug
-
+% ------
+% Author: David Legland 
+% E-mail: david.legland@inrae.fr
+% Created: 2004-11-29
+% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
 
 dim = size(v);
 

@@ -6,14 +6,14 @@ function [vertices, faces] = mergeMeshVertices(vertices, faces, vertexInds, vara
 %   Example
 %   mergeMeshVertices
 %
-%   See also
+%   See also 
 %
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
-% Created: 2019-01-31,    using Matlab 9.5.0.944444 (R2018b)
-% Copyright 2019 INRA - Cepia Software Platform.
+% E-mail: david.legland@inrae.fr
+% Created: 2019-01-31, using Matlab 9.5.0.944444 (R2018b)
+% Copyright 2019-2023 INRA - Cepia Software Platform
 
 newPos = vertices(vertexInds(1), :);
 if nargin > 3

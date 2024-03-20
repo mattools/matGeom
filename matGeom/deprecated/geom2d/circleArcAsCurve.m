@@ -3,17 +3,12 @@ function varargout = circleArcAsCurve(arc, N)
 %
 %   deprecated: replaced by circleArcToPolyline
 %
-%
-% ---------
-% author : David Legland 
-% created the 22/05/2006.
-% Copyright 2010 INRA - Cepia Software Platform.
-%
 
-% HISTORY
-% 2011-03-30 use angles in degrees, add default value for N
-% 2011-12-09 deprecate
-
+% ------
+% Author: David Legland 
+% e-mail: david.legland@inrae.fr
+% Created: 2006-05-22
+% Copyright 2006 INRA - Cepia Software Platform
 
 warning('matGeom:deprecated', ...
     'function "circleArcAsCurve" is deprecated, use "circleArcToPolygon" instead');

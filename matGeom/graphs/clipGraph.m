@@ -22,16 +22,15 @@ function varargout = clipGraph(nodes, edges, varargin)
 %     [n2, e2] = clipGraph(n, e, box);
 %     drawGraphEdges(n2, e2, 'color', 'b', 'linewidth', 2);
 %     
-%   See also
+%   See also 
 %     graphs, drawGraph, clipGraphPolygon
 %
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% E-mail: david.legland@inrae.fr
 % Created: 2007-01-18
-% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.
-
+% Copyright 2007-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 %% Format inputs
 
@@ -124,7 +123,7 @@ for e = 1:size(edges, 1)
     edge = clipEdge(edge, [box(1) box(2); box(3) box(4)]);
     
     % display debug info
-    %disp(sprintf('clip edge n°%2d, from %2d to %2d', e, edges(e,1), edges(e,2)));
+    % disp(sprintf('clip edge n°%2d, from %2d to %2d', e, edges(e,1), edges(e,2)));
     
     % Node for first vertex
     if ~in1
