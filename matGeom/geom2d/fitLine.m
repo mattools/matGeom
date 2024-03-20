@@ -1,31 +1,31 @@
 function [line, res] = fitLine(varargin)
-%LINEFIT Fit a straight line to a set of points.
+%FITLINE Fit a straight line to a set of points.
 %
-%   LIN = lineFit(X, Y)
+%   LIN = fitLine(X, Y)
 %   Computes parametric line minimizing square error of all points (X,Y).
 %   Result is a 4*1 array, containing coordinates of a point of the line,
 %   and the direction vector of the line, that is  L=[x0 y0 dx dy];
 %
-%   LIN = lineFit(PTS) 
+%   LIN = fitLine(PTS)
 %   Gives coordinats of points in a single array.
 %
-%   LIN = lineFit(PT0, PTS);
-%   LIN = lineFit(PT0, X, Y);
+%   LIN = fitLine(PT0, PTS);
+%   LIN = fitLine(PT0, X, Y);
 %   with PT0 = [x0 y0], imposes the line to contain point PT0.
 %
-%   [LIN, RES] = lineFit(...)
+%   [LIN, RES] = fitLine(...)
 %   Also returns the residual error.
 %
 %
 %   Requires:
 %   Optimization toolbox
 %
-%   See also 
+%   See also
 %     lines2d, fitEllipse, polyfit, polyfit2, lsqlin
 %
 
 % ------
-% Author: David Legland 
+% Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2004-04-30
 % Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
@@ -35,7 +35,7 @@ if length(varargin)==1
     % argument is an array of points
     var = varargin{1};
     x = var(:,1);
-    y = var(:,2);   
+    y = var(:,2);
 elseif length(varargin)==2
     var = varargin{1};
     if size(var, 1)==1

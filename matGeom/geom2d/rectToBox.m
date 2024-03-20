@@ -1,10 +1,10 @@
 function box = rectToBox(rect)
 %RECTTOBOX Convert rectangle data to box data.
 %
-%   RECT = rectToBox(BOX)
+%   BOX = rectToBox(RECT)
 %   Converts from rectangle representation to box representation.
-%   BOX is given by [XMIN XMAX YMIN YMAX].
 %   RECT is given by [X0 Y0 WIDTH HEIGHT], with WIDTH and HEIGHT > 0
+%   BOX is given by [XMIN XMAX YMIN YMAX].
 %
 %   Example
 %   rectToBox

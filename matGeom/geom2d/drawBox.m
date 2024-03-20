@@ -14,7 +14,7 @@ function varargout = drawBox(box, varargin)
 %   Example
 %     % define some points, compute their box, display everything
 %     points = [10 30; 20 50; 20 20; 30 10;40 30;50 20];
-%     box = pointSetBounds(points);
+%     box = boundingBox(points);
 %     figure; hold on;
 %     drawPoint(points, 's');
 %     drawBox(box);
