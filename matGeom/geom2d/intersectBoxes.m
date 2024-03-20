@@ -2,12 +2,15 @@ function box = intersectBoxes(box1, box2)
 %INTERSECTBOXES Intersection of two bounding boxes.
 %
 %   RES = intersectBoxes(BOX1, BOX2)
-%
+%   BOX1 = [XMIN1 XMAX1 YMIN1 YMAX1]
+%   BOX2 = [XMIN2 XMAX2 YMIN2 YMAX2]
+%   RES = intersectBoxes(BOX1,BOX2) = [XMIN3 XMAX3 YMIN3 YMAX3]
+
 %   Example
 %   box1 = [5 20 5 30];
 %   box2 = [0 15 0 15];
-%   intersectBoxes(box1, box2)
-%   ans = 
+%   res=intersectBoxes(box1, box2)
+%   res = 
 %       5 15 5 15
 %
 %   See also 

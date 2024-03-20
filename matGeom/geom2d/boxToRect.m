@@ -2,7 +2,7 @@ function rect = boxToRect(box)
 %BOXTORECT Convert box data to rectangle data.
 %
 %   RECT = boxToRect(BOX)
-%   Converts from boxrepresentation to rectangle representation.
+%   Converts from box representation to rectangle representation.
 %   BOX is given by [XMIN XMAX YMIN YMAX].
 %   RECT is given by [X0 Y0 WIDTH HEIGHT], with WIDTH and HEIGHT > 0
 %

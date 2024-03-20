@@ -3,7 +3,7 @@ function circle = createCircle(varargin)
 %
 %   C = createCircle(P1, P2, P3);
 %   Creates the circle passing through the 3 given points. 
-%   C is a 1*3 array of the form: [XC YX R].
+%   C is a 1*3 array of the form: [XC YC R].
 %
 %   C = createCircle(P1, P2);
 %   Creates the circle whith center P1 and passing throuh the point P2.
