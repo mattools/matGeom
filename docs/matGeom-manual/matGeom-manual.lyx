@@ -244,6 +244,12 @@ TODO:
 Quick tours
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+one for 3D? 
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 add bibliography
 \end_layout
@@ -746,8 +752,47 @@ Installation
 There are several possibilities for installing the MatGeom library.
 \end_layout
 
+\begin_layout Subsection
+Install as Add-On
+\end_layout
+
 \begin_layout Standard
-The latest version of the toolbox can be downloaded as a 
+This is the simplest method.
+ Simply open the 
+\begin_inset Quotes eld
+\end_inset
+
+Add-Ons
+\begin_inset Quotes erd
+\end_inset
+
+ button from the toolbar of the main Matlab frame, and look for 
+\begin_inset Quotes eld
+\end_inset
+
+MatGeom
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Select the library, and click on 
+\begin_inset Quotes eld
+\end_inset
+
+Install
+\begin_inset Quotes erd
+\end_inset
+
+.
+ That's it!
+\end_layout
+
+\begin_layout Subsection
+Install as Toolbox manually 
+\end_layout
+
+\begin_layout Standard
+The latest version of the toolbox can also be downloaded manually as a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -757,6 +802,29 @@ The latest version of the toolbox can be downloaded as a
 
  file.
  When executing the file from Matlab, the toolbox is automatically installed.
+\end_layout
+
+\begin_layout Subsection
+Download zip archive
+\end_layout
+
+\begin_layout Standard
+Most versions provide an archive of the whole library in a zip file.
+ The library an be installed by decompressing the archive, and running the
+ 
+\begin_inset Quotes eld
+\end_inset
+
+setupMatGeom.m
+\begin_inset Quotes erd
+\end_inset
+
+ script.
+ You also have access to unit tests and demonstration scripts.
+\end_layout
+
+\begin_layout Subsection
+Latest development version (for developers)
 \end_layout
 
 \begin_layout Standard
@@ -782,10 +850,20 @@ http://github.com/mattools/matGeom
 \end_inset
 
 .
+ A basic knowledge of the Git system is required.
+ An advantage of this method is that it is possible to synchronize with
+ latest development, while keeping local modifications.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
-Organisation
+Library organisation
 \end_layout
 
 \begin_layout Standard
@@ -877,7 +955,16 @@ geom3d
 geom2d
 \series default
  module.
- 
+ Several fucntions of the 
+\series bold
+graphs 
+\series default
+module depend on the geom2d module.
+ The 
+\series bold
+meshes 
+\series default
+module depends on both the geom3d and the graphs module.
 \end_layout
 
 \begin_layout Standard
@@ -885,8 +972,31 @@ The
 \series bold
 obsolete
 \series default
- directory contains functions that were develop in previous versions of
- the library, and that are kept to facilitate the transition from old versions.
+ directory contains functions that were developped in previous versions
+ of the library, and that are kept to facilitate the transition from older
+ versions.
+\end_layout
+
+\begin_layout Standard
+See also the organization of the project in the developer section (chapter
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Developer-Side"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -904,7 +1014,7 @@ Simple
 \end_inset
 
  geometries such as points, lines, circles...
- are represented with a single row vector.
+ are represented by concatenating parameters within a single row vector.
  
 \end_layout
 
@@ -1044,6 +1154,13 @@ HC = drawCircle(AX, C1, 'Color', 'b');   % draw a circle on specific axis
  and return handle
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
 \end_inset
 
 
@@ -20047,6 +20164,12 @@ Developer's side
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Developer-Side"
+
+\end_inset
+
 This chapter gathers information for people wanting to contribute new features
  to the library.
 \end_layout
