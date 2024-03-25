@@ -25,7 +25,7 @@
 function subdir_paths = __matgeom_package_register__ (loading = 0)
 
   subdirlist = {"utils", "geom2d", "polygons2d", "graphs",...
-                "geom3d","meshes3d","polynomialCurves2d"};
+                "geom3d","meshes3d"};
   ## Get full path, with luck we can retreive the package name from here
   base_pkg_path = fileparts (make_absolute_filename (mfilename ("fullpath")));
 
