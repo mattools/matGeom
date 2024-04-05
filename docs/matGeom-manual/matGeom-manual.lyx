@@ -14202,6 +14202,26 @@ T(\boldsymbol{u}) & =\left[\begin{array}{cccc}
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+transfo = createTranslation3d(vect);
+\end_layout
+
+\begin_layout Plain Layout
+
+transfo = createTranslation3d([vx vy vz]);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Minisec
 createScaling3d
 \begin_inset Index idx
@@ -14236,6 +14256,23 @@ s_{x} & 0 & 0 & 0\\
 0 & 0 & 0 & 1
 \end{array}\right]
 \end{align}
+
+\end_inset
+
+
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+transfo = createScaling3d(s);
+\end_layout
+
+\begin_layout Plain Layout
+
+transfo = createScaling3d([sx sy sz]);
+\end_layout
 
 \end_inset
 
@@ -14288,6 +14325,46 @@ A rotation around the
 \end_inset
 
 -axis.
+ More generally, if the main axes are numbered such that 
+\begin_inset Formula $e_{0}=e_{x}$
+\end_inset
+
+, 
+\begin_inset Formula $e_{1}=e_{y}$
+\end_inset
+
+, 
+\begin_inset Formula $e_{2}=e_{z}$
+\end_inset
+
+, then a rotation around axis 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ will map the axis 
+\begin_inset Formula $e_{(i+1)\text{mod}3}$
+\end_inset
+
+ onto the axis 
+\begin_inset Formula $e_{(i+2)\text{mod}3}$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+transfo = createRotationOx(theta);
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Minisec
@@ -14350,6 +14427,21 @@ downwards rotation
 ).
 \end_layout
 
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+transfo = createRotationOy(theta);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Minisec
 createRotationOz
 \begin_inset Index idx
@@ -14401,8 +14493,48 @@ A rotation around the
 -axis.
 \end_layout
 
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+transfo = createRotationOz(theta);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
-Euler Angles and basis transforms
+Euler Angles and 3D rotations
+\end_layout
+
+\begin_layout Standard
+Several different conventions exist for considering 3D rotations.
+ One possibility is to consider the 
+\begin_inset Formula $4\times4$
+\end_inset
+
+ matrix of affine coefficients, but this requires to stores severla coefficients
+, and there is not warranty that the transform actually corresponds to a
+ rotation.
+ A common way to summarize a 3D rotation is to represent it by a succession
+ of three rotations along main axes, leading to Euler Angles.
+ An alternative is to consider rotation around a 3D line by a specific angle.
+\end_layout
+
+\begin_layout Subsubsection
+Euler Angles
 \end_layout
 
 \begin_layout Standard
@@ -14446,7 +14578,7 @@ R_{\varphi,\theta,\psi} & =R_{z}(\psi)\cdot R_{y}(\theta)\cdot R_{x}(\varphi)
 
 \end_inset
 
-Note the within the library, Euler angles are usually given in the order
+Note that within the library, Euler angles are usually given in the order
  
 \begin_inset Formula $(\varphi,\theta,\psi)$
 \end_inset
@@ -14459,7 +14591,61 @@ Note the within the library, Euler angles are usually given in the order
 \end_layout
 
 \begin_layout Standard
-Euler angles may be interpreted as follow:
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/geom3d/ellipsoid-angles.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Euler-Angles-Definitions"
+
+\end_inset
+
+Definition of 3D Euler angles.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Euler angles may be interpreted as follow (see also Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Euler-Angles-Definitions"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+):
 \end_layout
 
 \begin_layout Labeling
@@ -14492,62 +14678,6 @@ declination
 \labelwidthstring 00.00.0000
 PSI is the 'roll', i.e.
  the rotation around the (PHI, THETA) direction, with value in degrees
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename images/geom3d/ellipsoid-angles.png
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Definition of 3D Euler angles.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection*
-Transform conversion functions
-\end_layout
-
-\begin_layout Minisec
-createBasisTransform3d
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-createBasisTransform3d
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Computes matrix for transforming a basis into another basis.
 \end_layout
 
 \begin_layout Minisec
@@ -14595,6 +14725,18 @@ literal "false"
 .
 \end_layout
 
+\begin_layout Subsubsection
+Axis-Angle rotation
+\end_layout
+
+\begin_layout Standard
+An alternative representation for a 3D representation is to consider a 3D
+ direction (such as the direction vector of a 3D line), and the rotation
+ angle around this axis.
+ Within MatGeom, the position of the line is also taken into account to
+ initialize the translation parameters.
+\end_layout
+
 \begin_layout Minisec
 createRotation3dLineAngle
 \begin_inset Index idx
@@ -14629,6 +14771,53 @@ rotation3dAxisAndAngle
 
 \begin_layout Standard
 Determines axis and angle of a 3D rotation matrix.
+\end_layout
+
+\begin_layout Subsubsection
+Other transform conversion functions
+\end_layout
+
+\begin_layout Standard
+Several functions are provided to convert between the different 3D rotations
+ representations.
+ 
+\end_layout
+
+\begin_layout Minisec
+createBasisTransform3d
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+createBasisTransform3d
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Computes matrix for transforming a basis into another basis.
+ Basis can be used to represent the position and the orientation of a 3D
+ shape or of a 3D coordinate system different from the canonical one.
+ A 3D basis is defined by an origin point (as a 
+\begin_inset Formula $1\times3$
+\end_inset
+
+ row vector) and two direction vectors (each given as a 
+\begin_inset Formula $1\times3$
+\end_inset
+
+ row vector).
+ The basis is represented by concatenating origin point and direction vectors
+ into a single 
+\begin_inset Formula $A\times9$
+\end_inset
+
+ row vector.
+ Direction vectors are expected to be orthogonal.
+ 
 \end_layout
 
 \begin_layout Minisec
@@ -14680,6 +14869,16 @@ Calculates the rotation between two vectors.
 
 \begin_layout Minisec
 registerPoints3d_icp
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+icp
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -14690,7 +14889,7 @@ name "fun:registerPoints3d_icp"
 \end_inset
 
 Computes the rigid transform (composed of a translation and a rotation)
- that project a set of points onto another one using the Iterated Closest
+ that projects a set of points onto another one using the Iterated Closest
  Point (ICP) algorithm 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -14736,6 +14935,34 @@ noprefix "false"
 \end_inset
 
 ).
+ See an example on Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ICP-Example"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Syntax:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+transfo = registerPoints3d_icp(srcPts, tgtPts, nIters);
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -14764,6 +14991,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ICP-Example"
+
+\end_inset
+
 Example of 3D rigid registration using ICP algorithm.
 \end_layout
 
@@ -14779,6 +15012,24 @@ Example of 3D rigid registration using ICP algorithm.
 \end_inset
 
 
+\end_layout
+
+\begin_layout Minisec
+registerPoints3dAffine
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+registerPoints3dAffine
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Fits a 3D affine transform betwen two point sets using iterative algorithm.
 \end_layout
 
 \begin_layout Subsection
