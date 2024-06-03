@@ -98,7 +98,6 @@ oldHold = ishold(ax);
 if ~oldHold
     hold on;
 end
-axis equal;
 
 % angle of the edge
 theta = atan2(y2-y1, x2-x1);
