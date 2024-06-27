@@ -26,18 +26,12 @@ function [b1, b2] = isManifoldMesh(varargin)
 % Created: 2019-01-31, using Matlab 9.5.0.944444 (R2018b)
 % Copyright 2019-2023 INRA - Cepia Software Platform
 
-vertices = varargin{1};
-faces = varargin{2};
+[vertices, edges, faces] = parseMeshData(varargin{:});
 
-% compute edge to vertex array
-if nargin == 3
-    edges = faces;
-    faces = varargin{3};
-else
-    % compute edge to vertex array
+% ensure edge to vertex data is computed
+if isempty(edges)
     edges = meshEdges(faces);
-end
-
+end    
 
 % compute face to edge indices array
 % as a nFaces-by-3 array (each face connected to exactly three edges)

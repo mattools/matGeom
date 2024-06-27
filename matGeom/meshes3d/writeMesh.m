@@ -1,12 +1,13 @@
 function writeMesh(fileName, vertices, faces, varargin)
 %WRITEMESH Write 3D mesh data by inferring format from file name.
 %
+%   Usage:
 %   writeMesh(FNAME, V, F)
-%
 %   writeMesh(FNAME, MESH)
 %
 %   Example
-%   writeMesh
+%     [v, f] = createCubeOctahedron;
+%     writeMesh('myMesh.off', v, f);
 %
 %   See also 
 %     meshes3d, readMesh, writeMesh_off, writeMesh_ply, writeMesh_stl
@@ -41,5 +42,5 @@ switch lower(ext)
     case '.stl'
         writeMesh_stl(fileName, vertices, faces, varargin{:});
     otherwise
-        error('Unrecognized file format for rezading mesh: %s', ext);
+        error('Unrecognized file format for reading mesh: %s', ext);
 end
