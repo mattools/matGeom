@@ -13,22 +13,23 @@ function polyList = meshBoundary(varargin)
 %     v3 = normalizeVector3d(v2);
 %     % clip with plane
 %     plane = createPlane([0 0 0], [-1 -2 3]);
-%     [vc, fc] = clipMeshVertices(v3, f2, plane, 'shape', 'plane');
-%     figure; drawMesh(vc, fc); axis equal; view(3);
+%     [vc, fc] = clipMeshByPlane(v3, f2, plane);
+%     figure; drawMesh(vc, fc); axis equal; view([80 -10]);
 %     % draw mesh boundary
 %     curves = meshBoundary(vc, fc);
-%     hold on; drawPolygon3d(curves{1}, 'linewidth', 2, 'color', 'b');
+%     hold on; drawPolygon3d(curves, 'linewidth', 2, 'color', 'b');
 %
 %     % Example 2
 %     mesh = readMesh('mushroom.off');
-%     plane = createPlane([0 0 0.7], [-1 -2 3]);
-%     mesh = clipMeshVertices(mesh, plane, 'shape', 'plane');
-%     curves = meshBoundary(mesh);
-%     figure; drawMesh(mesh); axis equal; view(3);
-%     cellfun(@(x) drawPolygon3d(x, 'linewidth', 2, 'color', 'b'), curves)
+%     plane = createPlane([0 0 0.7], [1 2 -3]);
+%     [vc, fc] = clipMeshByPlane(mesh, plane);
+%     bnd = meshBoundary(vc, fc);
+%     figure; drawMesh(vc, fc); axis equal; view([-40 50]);
+%     drawPolygon3d(bnd, 'linewidth', 2, 'color', 'b');
 %
 %   See also 
-%     meshes3d, meshBoundaryEdgeIndices, meshBoundaryVertexIndices
+%     meshes3d, meshBoundaryEdgeIndices, meshBoundaryVertexIndices,
+%     clipMeshByPlane, clipMeshVertices
 %
 
 % ------
