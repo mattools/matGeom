@@ -1,0 +1,375 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>demo_meshProcessing_bunny1k</title>
+<meta name="generator" content="MATLAB 24.1">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2024-06-28">
+<meta name="DC.source" content="demo_meshProcessing_bunny1k.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<h2>Contents</h2>
+<div>
+<ul>
+<li>
+<a href="#2">Read data</a>
+</li>
+<li>
+<a href="#3">Display face normals</a>
+</li>
+<li>
+<a href="#4">Distance point mesh</a>
+</li>
+<li>
+<a href="#5">Curvature map</a>
+</li>
+<li>
+<a href="#6">Plane intersection</a>
+</li>
+<li>
+<a href="#7">Clip mesh with a plane</a>
+</li>
+</ul>
+</div>
+<pre class="codeinput">
+<span class="comment">%DEMO_MESHPROCESSING_BUNNY1K  One-line description here, please.</span>
+<span class="comment">%</span>
+<span class="comment">%   output = demo_meshProcessing_bunny1k(input)</span>
+<span class="comment">%</span>
+<span class="comment">%   Example</span>
+<span class="comment">%   demo_meshProcessing_bunny1k</span>
+<span class="comment">%</span>
+<span class="comment">%   See also</span>
+<span class="comment">%</span>
+
+<span class="comment">% ------</span>
+<span class="comment">% Author: David Legland</span>
+<span class="comment">% e-mail: david.legland@inrae.fr</span>
+<span class="comment">% INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+<span class="comment">% Created: 2024-06-27,    using Matlab 24.1.0.2628055 (R2024a) Update 4</span>
+<span class="comment">% Copyright 2024 INRAE.</span>
+</pre>
+<h2 id="2">Read data</h2>
+<pre class="codeinput">
+<span class="comment">% read sample mesh</span>
+mesh = readMesh(<span class="string">'bunny_F1k.ply'</span>);
+
+<span class="comment">% display mesh using equal-scale axes</span>
+figure; hold <span class="string">on</span>; axis <span class="string">equal</span>; view(3);
+drawMesh(mesh, <span class="string">'faceColor'</span>, [.7 .7 .7]);
+axis([-8 10 -6 8 -8 10]);
+view(15, 20);
+</pre>
+<img vspace="5" hspace="5" src="demo_meshProcessing_bunny1k_01.png" alt=""> <h2 id="3">Display face normals</h2>
+<pre class="codeinput">normals = meshFaceNormals(mesh);
+centros = meshFaceCentroids(mesh);
+
+figure; hold <span class="string">on</span>; axis <span class="string">equal</span>; view(3);
+drawMesh(mesh, <span class="string">'faceColor'</span>, [.7 .7 .7]);
+axis([-8 10 -6 8 -8 10]);
+view(15, 20);
+drawArrow3d(centros, normals);
+</pre>
+<img vspace="5" hspace="5" src="demo_meshProcessing_bunny1k_02.png" alt=""> <h2 id="4">Distance point mesh</h2>
+<pre class="codeinput">
+<span class="comment">% compute distance between some arbitrary poitns and mesh</span>
+point = [8 -3 8;2 -5 8;-6 -4 -4];
+[dist, proj] = distancePointMesh(point, mesh);
+
+<span class="comment">% also compute a distance map for a vertical slice intersecting the mesh</span>
+lx = linspace(-8, 10, 181);
+lz = linspace(-8, 10, 181);
+[x, z] = meshgrid(lx, lz);
+y = ones(size(x)) * 3;
+pts = [x(:) y(:) z(:)];
+dists = distancePointMesh(pts, mesh);
+distMap = reshape(dists, size(x));
+
+<span class="comment">% display mesh</span>
+figure; hold <span class="string">on</span>; axis <span class="string">equal</span>; view(3);
+drawMesh(mesh, <span class="string">'faceColor'</span>, [.7 .7 .7]);
+axis([-8 10 -6 8 -8 10]);
+view(15, 20);
+
+<span class="comment">% display the distance map</span>
+surf(x, y, z, distMap, <span class="string">'linestyle'</span>, <span class="string">'none'</span>);
+
+<span class="comment">% display point-to-mesh distances</span>
+drawPoint3d(point, <span class="string">'ko'</span>);
+drawPoint3d(proj, <span class="string">'k*'</span>);
+drawEdge3d([point proj], <span class="string">'color'</span>, <span class="string">'k'</span>, <span class="string">'linewidth'</span>, 2)
+</pre>
+<img vspace="5" hspace="5" src="demo_meshProcessing_bunny1k_03.png" alt=""> <h2 id="5">Curvature map</h2>
+<pre class="codeinput">
+<span class="comment">% compute the two main curvatures on each vertex of the mesh</span>
+[k1, k2] = meshCurvatures(mesh.vertices, mesh.faces);
+
+<span class="comment">% displauy the Gaussian curvature, equal to the product of the main</span>
+<span class="comment">% curvatures</span>
+figure; hold <span class="string">on</span>; axis <span class="string">equal</span>; view(3);
+drawMesh(mesh, <span class="string">'VertexColor'</span>, k1 .* k2);
+axis([-8 10 -6 8 -8 10]);
+view(15, 20);
+set(gca, <span class="string">'clim'</span>, [-0.01 0.01]);
+colormap <span class="string">jet</span>;
+</pre>
+<pre class="codeoutput">compute adjacencies
+compute edge tensors
+[********************]
+average vertex tensors
+retrieve curvatures
+[********************]
+</pre>
+<img vspace="5" hspace="5" src="demo_meshProcessing_bunny1k_04.png" alt=""> <h2 id="6">Plane intersection</h2>
+<pre class="codeinput">
+<span class="comment">% plane direction vector</span>
+direction = normalizeVector3d([2 -1 1]);
+
+<span class="comment">% choose several parallel planes</span>
+positions = -10:2:10;
+
+figure; hold <span class="string">on</span>; axis <span class="string">equal</span>; view(3);
+drawMesh(mesh, <span class="string">'faceColor'</span>, [.7 .7 .7]);
+axis([-8 10 -6 8 -8 10]);
+view(15, 20);
+
+<span class="comment">% iterate over planes</span>
+<span class="keyword">for</span> iPos = 1:length(positions)
+    <span class="comment">% create supporting plane as 1-by-9 rowvector</span>
+    planeOrigin = [0 0 0] + positions(iPos) * direction;
+    plane = createPlane(planeOrigin, direction);
+
+    <span class="comment">% compute intersections</span>
+    polys = intersectPlaneMesh(plane, mesh);
+
+    <span class="comment">% display intersectinos</span>
+    drawPolygon3d(polys, <span class="string">'lineWidth'</span>, 2, <span class="string">'color'</span>, <span class="string">'m'</span>);
+<span class="keyword">end</span>
+</pre>
+<img vspace="5" hspace="5" src="demo_meshProcessing_bunny1k_05.png" alt=""> <h2 id="7">Clip mesh with a plane</h2>
+<pre class="codeinput">
+<span class="comment">% create a plane, a result of clipping</span>
+plane = createPlane([0 0 0], [-5 5 3]);
+[v2, f2] = clipMeshByPlane(mesh, plane);
+
+<span class="comment">% display result</span>
+figure; hold <span class="string">on</span>; axis <span class="string">equal</span>; view(3);
+axis([-8 10 -6 8 -8 10]);
+drawMesh(v2, f2, <span class="string">'faceColor'</span>, [.7 .7 .7]);
+view(15, 20);
+
+<span class="comment">% also draw the boundary</span>
+boundary = meshBoundary(v2, f2);
+drawPolygon3d(boundary, <span class="string">'linewidth'</span>, 2, <span class="string">'color'</span>, <span class="string">'m'</span>);
+</pre>
+<img vspace="5" hspace="5" src="demo_meshProcessing_bunny1k_06.png" alt=""> <p class="footer">
+<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2024a</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+%DEMO_MESHPROCESSING_BUNNY1K  One-line description here, please.
+%
+%   output = demo_meshProcessing_bunny1k(input)
+%
+%   Example
+%   demo_meshProcessing_bunny1k
+%
+%   See also
+%
+ 
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% Author: David Legland
+% e-mail: david.legland@inrae.fr
+% INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Created: 2024-06-27,    using Matlab 24.1.0.2628055 (R2024a) Update 4
+% Copyright 2024 INRAE.
+
+
+%% Read data
+
+% read sample mesh
+mesh = readMesh('bunny_F1k.ply');
+
+% display mesh using equal-scale axes
+figure; hold on; axis equal; view(3);
+drawMesh(mesh, 'faceColor', [.7 .7 .7]);
+axis([-8 10 -6 8 -8 10]);
+view(15, 20);
+
+
+%% Display face normals
+
+normals = meshFaceNormals(mesh);
+centros = meshFaceCentroids(mesh);
+
+figure; hold on; axis equal; view(3);
+drawMesh(mesh, 'faceColor', [.7 .7 .7]);
+axis([-8 10 -6 8 -8 10]);
+view(15, 20);
+drawArrow3d(centros, normals);
+
+
+%% Distance point mesh
+
+% compute distance between some arbitrary poitns and mesh
+point = [8 -3 8;2 -5 8;-6 -4 -4];
+[dist, proj] = distancePointMesh(point, mesh);
+
+% also compute a distance map for a vertical slice intersecting the mesh
+lx = linspace(-8, 10, 181);
+lz = linspace(-8, 10, 181);
+[x, z] = meshgrid(lx, lz);
+y = ones(size(x)) * 3;
+pts = [x(:) y(:) z(:)];
+dists = distancePointMesh(pts, mesh);
+distMap = reshape(dists, size(x));
+
+% display mesh
+figure; hold on; axis equal; view(3);
+drawMesh(mesh, 'faceColor', [.7 .7 .7]);
+axis([-8 10 -6 8 -8 10]);
+view(15, 20);
+
+% display the distance map
+surf(x, y, z, distMap, 'linestyle', 'none');
+
+% display point-to-mesh distances
+drawPoint3d(point, 'ko');
+drawPoint3d(proj, 'k*');
+drawEdge3d([point proj], 'color', 'k', 'linewidth', 2)
+
+
+
+%% Curvature map
+
+% compute the two main curvatures on each vertex of the mesh
+[k1, k2] = meshCurvatures(mesh.vertices, mesh.faces);
+
+% displauy the Gaussian curvature, equal to the product of the main
+% curvatures
+figure; hold on; axis equal; view(3);
+drawMesh(mesh, 'VertexColor', k1 .* k2);
+axis([-8 10 -6 8 -8 10]);
+view(15, 20);
+set(gca, 'clim', [-0.01 0.01]);
+colormap jet;
+
+
+%% Plane intersection
+
+% plane direction vector
+direction = normalizeVector3d([2 -1 1]);
+
+% choose several parallel planes
+positions = -10:2:10;
+
+figure; hold on; axis equal; view(3);
+drawMesh(mesh, 'faceColor', [.7 .7 .7]);
+axis([-8 10 -6 8 -8 10]);
+view(15, 20);
+
+% iterate over planes
+for iPos = 1:length(positions)
+    % create supporting plane as 1-by-9 rowvector
+    planeOrigin = [0 0 0] + positions(iPos) * direction;
+    plane = createPlane(planeOrigin, direction);
+
+    % compute intersections
+    polys = intersectPlaneMesh(plane, mesh);
+
+    % display intersectinos
+    drawPolygon3d(polys, 'lineWidth', 2, 'color', 'm');
+end
+
+
+%% Clip mesh with a plane
+
+% create a plane, a result of clipping
+plane = createPlane([0 0 0], [-5 5 3]);
+[v2, f2] = clipMeshByPlane(mesh, plane);
+
+% display result
+figure; hold on; axis equal; view(3);
+axis([-8 10 -6 8 -8 10]);
+drawMesh(v2, f2, 'faceColor', [.7 .7 .7]);
+view(15, 20);
+
+% also draw the boundary
+boundary = meshBoundary(v2, f2);
+drawPolygon3d(boundary, 'linewidth', 2, 'color', 'm');
+
+##### SOURCE END #####
+-->
+</body>
+</html>
