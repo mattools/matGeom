@@ -1,8 +1,8 @@
 function point = polylinePoint(poly, pos)
-%POLYLINEPOINT Extract a point from a polyline.
+%POLYLINEPOINT Extract a point from a 2D or 3D polyline.
 %
 %   POINT = polylinePoint(POLYLINE, POS)
-%   POLYLINE is a N*2 array containing coordinate of polyline vertices
+%   POLYLINE is a N*2 or N*3 array containing coordinate of polyline vertices
 %   POS is comprised between 0 (first point of polyline) and Nv-1 (last
 %   point of the polyline).
 %   
@@ -33,7 +33,7 @@ Np = length(pos(:));
 Nv = size(poly, 1);
 
 % allocate memory results
-point = zeros(Np, 2);
+point = zeros(Np, size(poly,2));
 
 % iterate on points
 for i=1:Np
@@ -57,7 +57,14 @@ for i=1:Np
     y0 = poly(ind+1, 2);
     dx = poly(ind+2,1)-x0;
     dy = poly(ind+2,2)-y0;
-    
-    % compute position of current point
-    point(i, :) = [x0+t*dx, y0+t*dy];
+    if size(poly,2)>2
+        z0 = poly(ind+1, 3);
+        dz = poly(ind+2,3)-z0;
+    end
+    % compute position of current point    
+    if size(poly,2)>2
+        point(i, :) = [x0+t*dx, y0+t*dy, z0+t*dz];
+    else
+        point(i, :) = [x0+t*dx, y0+t*dy];
+    end
 end
