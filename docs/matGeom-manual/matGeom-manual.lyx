@@ -119,6 +119,7 @@
 \bibtex_command default
 \index_command default
 \float_placement h
+\float_alignment class
 \paperfontsize default
 \spacing single
 \use_hyperref true
@@ -147,7 +148,7 @@
 \cite_engine_type authoryear
 \biblio_style plainnat
 \use_bibtopic false
-\use_indices false
+\use_indices true
 \paperorientation portrait
 \suppress_date false
 \justification true
@@ -155,8 +156,12 @@
 \use_formatted_ref 0
 \use_minted 0
 \use_lineno 0
-\index Index
+\index Index of functions
 \shortcut idx
+\color #008000
+\end_index
+\index General index
+\shortcut gen
 \color #008000
 \end_index
 \secnumdepth 3
@@ -2329,6 +2334,18 @@ vectorAngle
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status open
+
+\begin_layout Plain Layout
+angle!vector
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2872,6 +2889,18 @@ lineAngle
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+angle!line
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2912,6 +2941,18 @@ clipLine
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+clipping!line
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3084,6 +3125,18 @@ edgeAngle
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+angle!line segment
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3179,6 +3232,18 @@ status collapsed
 
 \begin_layout Plain Layout
 clipEdge
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+clipping!line segment
 \end_layout
 
 \end_inset
@@ -3549,6 +3614,18 @@ distancePointLine
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status open
+
+\begin_layout Plain Layout
+distance!point to line
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3814,6 +3891,21 @@ nolink "false"
 
 \begin_layout Subsection
 Circles
+\end_layout
+
+\begin_layout Standard
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+circle
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4181,6 +4273,21 @@ Draws a circle on the current axis.
 
 \begin_layout Subsection
 Ellipses
+\end_layout
+
+\begin_layout Standard
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+ellipse
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5070,6 +5177,21 @@ Draws an ellipse arc on the current axis.
 
 \begin_layout Subsection
 Parabola
+\end_layout
+
+\begin_layout Standard
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+parabola
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6738,6 +6860,18 @@ A
 \series bold
 polyline
 \series default
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+polyline
+\end_layout
+
+\end_inset
+
  is the curve defined by a series of vertices (Figure
 \begin_inset space ~
 \end_inset
@@ -6902,6 +7036,18 @@ A
 \series bold
  polygon
 \series default
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+polygon
+\end_layout
+
+\end_inset
+
  is the planar domain delimited by a closed polyline (Figure
 \begin_inset space ~
 \end_inset
@@ -7539,6 +7685,18 @@ polylineCentroid
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status open
+
+\begin_layout Plain Layout
+centroid!polyline
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7631,6 +7789,18 @@ polygonCentroid
 \end_inset
 
 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+centroid!polygon
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7663,6 +7833,18 @@ polygonArea
 \end_inset
 
 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+area!polygon
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7685,6 +7867,18 @@ polygonEquivalentEllipse
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+ellipse!polygon equivalent
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7725,6 +7919,18 @@ polygonNormalAngle
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+angle!polygon normal
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7765,6 +7971,18 @@ distancePolygons
 \end_inset
 
 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+distance!polygons
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7788,6 +8006,18 @@ status collapsed
 
 \begin_layout Plain Layout
 polygonSignature
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+polar signature
 \end_layout
 
 \end_inset
@@ -7906,6 +8136,18 @@ polygonCurvature
 \end_inset
 
 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+curvature!polygon
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7930,6 +8172,18 @@ status collapsed
 
 \begin_layout Plain Layout
 clipPolygon
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+clipping!polygon
 \end_layout
 
 \end_inset
@@ -8273,6 +8527,18 @@ distancePointPolyline
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+distance!point to polyline
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -8288,6 +8554,18 @@ status collapsed
 
 \begin_layout Plain Layout
 distancePointPolygon
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+distance!point to polygon
 \end_layout
 
 \end_inset
@@ -8421,6 +8699,18 @@ smoothPolygon
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+smoothing!polygon
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -8457,6 +8747,18 @@ simplifyPolygon
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+simplification!polygon
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -8764,6 +9066,18 @@ status collapsed
 
 \begin_layout Plain Layout
 polygonSkeleton
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+skeleton
 \end_layout
 
 \end_inset
@@ -10680,6 +10994,18 @@ graphDiameter
 \end_inset
 
 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+diameter!graph
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -10755,6 +11081,18 @@ status collapsed
 
 \begin_layout Plain Layout
 grFindGeodesicPath
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+geodesic
 \end_layout
 
 \end_inset
@@ -12281,6 +12619,18 @@ vectorAngle3d
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+angle
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -12752,6 +13102,18 @@ fitLine3d
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status open
+
+\begin_layout Plain Layout
+fitting!line 3D
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -12848,6 +13210,18 @@ distancePointLine3d
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+distance!point to line
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -13147,6 +13521,21 @@ Planes
 \end_layout
 
 \begin_layout Standard
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+plane
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Planes are represented by a 3D point (the plane origin) and 2 direction vectors,
  which should not be colinear.
  
@@ -13261,6 +13650,18 @@ fitPlane
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+fitting!plane
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -13541,6 +13942,18 @@ distancePointPlane
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+distance!point to plane
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -13645,6 +14058,18 @@ dihedralAngle
 \end_inset
 
 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+angle!dihedral
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -13723,6 +14148,17 @@ Representation
 \end_layout
 
 \begin_layout Standard
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+polygon (3D)
+\end_layout
+
+\end_inset
+
 Polygons are represented by 
 \begin_inset Formula $N\times3$
 \end_inset
@@ -13799,6 +14235,18 @@ clipPolygonByPlane3d
 \end_inset
 
 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+clipping!polygon (3D)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -13869,6 +14317,18 @@ polygonCentroid3d
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+centroid!polygon 3D
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -13889,6 +14349,18 @@ polygonArea3d
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+area!polygon (3D)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -13991,6 +14463,21 @@ Fills a 3D polygon specified by a list of vertex coords.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+triangle (3D)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 A 3D triangle is simply defined by a triplet of 3D points.
  Within MatGeom,
  it is usually represented either as a 1-by-9 row vector,
@@ -14012,6 +14499,18 @@ triangleArea3d
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+area!triangle (3D)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -14032,6 +14531,18 @@ distancePointTriangle3d
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+distance!point to triangle (3D)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -14119,6 +14630,21 @@ Draws a 3D polyline specified by a list of vertex coordinates.
 
 \begin_layout Subsection
 Circles
+\end_layout
+
+\begin_layout Standard
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+circle!3D
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -14307,6 +14833,21 @@ Ellipses
 \end_layout
 
 \begin_layout Standard
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+ellipse!3D
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Ellipses in 3D are represented by a 1-by-9 row vector containing the coordinates of the centroid,
  the length of the three semi-axes,
  and three Euler angles describing the orientation of the ellipse.
@@ -14378,6 +14919,21 @@ Several geometric surfaces can be manipulated within MatGeom.
 
 \begin_layout Subsection
 Spheres
+\end_layout
+
+\begin_layout Standard
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+sphere
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -14617,6 +15173,21 @@ Ellipsoids
 \end_layout
 
 \begin_layout Standard
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+ellipsoid
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Ellipsoids are a generalization of spheres,
  that are defined by a center,
  three radius,
@@ -14767,6 +15338,18 @@ ellipsoidSurfaceArea
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+area!ellipsoid
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -14858,6 +15441,21 @@ Cylinders
 \end_layout
 
 \begin_layout Standard
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+cylinder
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 A cylinder is defined by two end-points and a radius.
  It is represented as a 
 \begin_inset Formula $1\times7$
@@ -14893,6 +15491,18 @@ cylinderSurfaceArea
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+area!cylinder
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -14966,6 +15576,22 @@ Other smooth surfaces
 
 \begin_layout Standard
 Other functions allow to create and draw more general surfaces.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO:
+ Figure to display more sample surface (capsule,
+ dome,
+ torus...)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -15061,6 +15687,18 @@ surfaceCurvature
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+curvature
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -15081,6 +15719,18 @@ drawTorus
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+torus
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -15162,6 +15812,17 @@ Angles and coordinate systems
 \end_layout
 
 \begin_layout Standard
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+angle
+\end_layout
+
+\end_inset
+
 A precise definition of the coordinate systems is necessary to further define 3D transforms (in section
 \begin_inset space ~
 \end_inset
@@ -15440,6 +16101,18 @@ anglePoints3d
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status open
+
+\begin_layout Plain Layout
+angle!3D
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -15460,6 +16133,18 @@ sphericalAngle
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+angle!spherical
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -15706,6 +16391,18 @@ createRotationOx
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+rotation!(3D)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -15964,6 +16661,18 @@ Euler Angles
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Euler-Angles"
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+angle!Euler
+\end_layout
 
 \end_inset
 
@@ -16551,6 +17260,21 @@ Several functions allow to display common geometric shapes.
 
 \begin_layout Subsection
 Polygonal shapes
+\end_layout
+
+\begin_layout Standard
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+cube
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Minisec
@@ -17305,6 +18029,18 @@ createCube
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+cube
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -17337,6 +18073,18 @@ createOctahedron
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+octahedron
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -18545,6 +19293,18 @@ cylinderMesh
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+cylinder!mesh
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -18560,6 +19320,18 @@ status collapsed
 
 \begin_layout Plain Layout
 sphereMesh
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+sphere!mesh
 \end_layout
 
 \end_inset
@@ -18604,7 +19376,19 @@ ellipsoidMesh
 
 \end_inset
 
- 
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+ellipsoid!mesh
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -18625,6 +19409,18 @@ torusMesh
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+torus!mesh
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -18883,6 +19679,18 @@ minConvexHull
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+convex hull
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -19074,6 +19882,18 @@ status collapsed
 
 \begin_layout Plain Layout
 smoothMesh
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+smoothing!mesh
 \end_layout
 
 \end_inset
@@ -19683,6 +20503,18 @@ clipMeshVertices
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+clipping!mesh
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -19889,6 +20721,18 @@ status collapsed
 
 \begin_layout Plain Layout
 clipMeshByPlane
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+clipping!mesh
 \end_layout
 
 \end_inset
@@ -20426,6 +21270,18 @@ meshSurfaceArea
 \end_inset
 
 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+area!mesh
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -20446,6 +21302,18 @@ trimeshSurfaceArea
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+area!triangle mesh
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -20649,10 +21517,68 @@ meshDihedralAngles
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+angle!mesh edge
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 Dihedral angle at edges of a polyhedal mesh.
+\end_layout
+
+\begin_layout Minisec
+meshCurvatures
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+meshCurvatures
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+curvature!mesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes the principal curvatures for each vertex of a mesh.
 \end_layout
 
 \begin_layout Minisec
@@ -20689,6 +21615,18 @@ polyhedronNormalAngle
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+angle!mesh vertex
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -20744,6 +21682,18 @@ distancePointMesh
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+distance!mesh
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -22645,6 +23595,32 @@ private
 
 \begin_layout Minisec
 isAxisHandle
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+isAxisHandle
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -22696,6 +23672,32 @@ end
 
 \begin_layout Minisec
 parseAxisHandle
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+parseAxisHandle
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -22719,6 +23721,32 @@ status open
 
 \begin_layout Minisec
 parseDrawInput
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+parseDrawInput
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -22731,8 +23759,16 @@ Retrieve the various elements necessary to draw a geometric primitive:
 \begin_layout Standard
 \begin_inset CommandInset index_print
 LatexCommand printindex
+type "gen"
+name "General index"
+
+\end_inset
+
+
+\begin_inset CommandInset index_print
+LatexCommand printindex
 type "idx"
-name "Index"
+name "Index of functions"
 
 \end_inset
 
