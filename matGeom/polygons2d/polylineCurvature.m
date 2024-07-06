@@ -35,7 +35,7 @@ function curv = polylineCurvature(poly, M)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2022-04-01, using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2022-2023 INRA - Cepia Software Platform
+% Copyright 2022-2024 INRA - Cepia Software Platform
 
 % number of vertices of polyline
 n = size(poly, 1);

@@ -27,7 +27,7 @@ function dist = distancePolygonsNoCross(poly1, poly2)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2009-06-17, using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009-2023 INRA - Cepia Software Platform
+% Copyright 2009-2024 INRA - Cepia Software Platform
 
 % compute distance of each vertex of a polygon to the other polygon
 dist1   = min(distancePointPolygon(poly1, poly2));

@@ -29,7 +29,7 @@ function tfmPoly = transformPolygon3d(poly, tfm)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2023-01-05, using MATLAB 9.13.0.2080170 (R2022b) Update 1
-% Copyright 2023
+% Copyright 2023-2024
 
 if isnumeric(poly)
     c = size(poly,2);

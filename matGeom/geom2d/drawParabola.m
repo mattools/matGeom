@@ -50,7 +50,7 @@ function varargout = drawParabola(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2006-06-02
-% Copyright 2006-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2006-2024 INRA - TPV URPOI - BIA IMASTE
 
 % Extract parabola
 if nargin < 1

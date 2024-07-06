@@ -13,7 +13,7 @@ function line2 = normalizeLine3d(line)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2020-03-13
-% Copyright 2020-2023
+% Copyright 2020-2024
 
 isLine3d = @(x) validateattributes(x,{'numeric'},...
     {'nonempty','nonnan','real','finite','size',[nan,6]});

@@ -30,7 +30,7 @@ function BE = meshBoundaryEdges(varargin)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2023-05-15, using Matlab 9.13.0.2080170 (R2022b) Update 1
-% Copyright 2023
+% Copyright 2023-2024
 
 [V, E, F] = parseMeshData(varargin{:});
 

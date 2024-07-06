@@ -21,7 +21,7 @@ function [index, minDist] = findClosestPoint(coord, points)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2015-02-24, using Matlab 8.4.0.150421 (R2014b)
-% Copyright 2015-2023 INRA - Cepia Software Platform
+% Copyright 2015-2024 INRA - Cepia Software Platform
 
 % number of points
 % number of point in first input to process

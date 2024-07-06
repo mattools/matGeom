@@ -23,7 +23,7 @@ function path = grFindMaximalLengthPath(nodes, edges, edgeWeights)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2011-05-22, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011-2023 INRA - Cepia Software Platform
+% Copyright 2011-2024 INRA - Cepia Software Platform
 
 % ensure weights are defined
 if ~exist('edgeWeights', 'var')

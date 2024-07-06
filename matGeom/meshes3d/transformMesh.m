@@ -19,7 +19,7 @@ function varargout = transformMesh(varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2019-08-08, using Matlab 9.6.0.1072779 (R2019a)
-% Copyright 2019-2023 INRA - Cepia Software Platform
+% Copyright 2019-2024 INRA - Cepia Software Platform
 
 % parses input arguments
 [vertices, edges, faces] = parseMeshData(varargin{1:end-1});

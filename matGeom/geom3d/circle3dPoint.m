@@ -16,7 +16,6 @@ function point = circle3dPoint(circle, pos)
 %     % Draw point opposite to origin
 %     drawPoint3d(circle3dPoint(circle, 180), 'k*')
 %   
-%
 %   See also 
 %   circles3d, circle3dPosition
 
@@ -24,7 +23,7 @@ function point = circle3dPoint(circle, pos)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2011-06-21, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011-2023 INRA - Cepia Software Platform
+% Copyright 2011-2024 INRA - Cepia Software Platform
 
 pos=pos(:);
 

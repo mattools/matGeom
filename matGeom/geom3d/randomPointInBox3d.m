@@ -29,7 +29,7 @@ function points = randomPointInBox3d(box, N, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2011-06-27, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011-2023 INRA - Cepia Software Platform
+% Copyright 2011-2024 INRA - Cepia Software Platform
 
 if nargin < 2
     N = 1;

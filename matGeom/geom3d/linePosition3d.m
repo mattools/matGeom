@@ -25,7 +25,7 @@ function pos = linePosition3d(point, line)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-02-17
-% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
 % size of input arguments
 np = size(point, 1);

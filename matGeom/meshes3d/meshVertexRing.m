@@ -12,16 +12,15 @@ function ring = meshVertexRing(vertices, faces, indV)
 %     poly = mesh.vertices(inds, :);
 %     drawPolygon3d(poly, 'color', 'b', 'linewidth', 2);
 %
-%   See also
+%   See also 
 %     meshes3d, meshVertexNormals
 %
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% Created: 2024-02-19,    using Matlab 9.14.0.2206163 (R2023a)
-% Copyright 2024 INRAE.
+% E-mail: david.legland@inrae.fr
+% Created: 2024-02-19, using Matlab 9.14.0.2206163 (R2023a)
+% Copyright 2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 if isstruct(vertices)
     indV = faces;

@@ -20,7 +20,7 @@ function point = ellipsePoint(elli, pos)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2022-09-09, using Matlab 9.12.0.1884302 (R2022a)
-% Copyright 2022-2023 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2022-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % make sure pos is column vector
 pos = pos(:);

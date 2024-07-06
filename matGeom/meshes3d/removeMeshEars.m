@@ -19,7 +19,7 @@ function varargout = removeMeshEars(varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2019-01-08, using Matlab 8.6.0.267246 (R2015b)
-% Copyright 2019-2023 INRA - Cepia Software Platform
+% Copyright 2019-2024 INRA - Cepia Software Platform
 
 [vertices, faces] = parseMeshData(varargin{:});
 

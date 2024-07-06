@@ -24,7 +24,7 @@ function [b1, b2] = isManifoldMesh(varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2019-01-31, using Matlab 9.5.0.944444 (R2018b)
-% Copyright 2019-2023 INRA - Cepia Software Platform
+% Copyright 2019-2024 INRA - Cepia Software Platform
 
 [vertices, edges, faces] = parseMeshData(varargin{:});
 

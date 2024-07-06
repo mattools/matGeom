@@ -26,7 +26,7 @@ function varargout = principalAxes(points)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2019-08-12, using Matlab 9.6.0.1072779 (R2019a)
-% Copyright 2019-2023 INRAE - Cepia Software Platform
+% Copyright 2019-2024 INRAE - Cepia Software Platform
 
 % compute centroid of points to estimate center
 center = mean(points);

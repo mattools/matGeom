@@ -28,7 +28,7 @@ function varargout = boundedCentroidalVoronoi2d(germs, box, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2007-01-12
-% Copyright 2007-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2007-2024 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % number of iteration
 nIter = 10;

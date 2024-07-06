@@ -29,7 +29,7 @@ function [geo, geoLength, conGeo, conGeoLength] = geodesicCylinder(pts, cyl, var
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2021-04-17, using MATLAB R2022b
-% Copyright 2021-2023
+% Copyright 2021-2024
 
 parser = inputParser;
 addRequired(parser, 'pts', @(x) validateattributes(x, {'numeric'},...

@@ -43,7 +43,7 @@ function edgeFaces = trimeshEdgeFaces(faces, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2015-08-19, using Matlab 8.5.0.197613 (R2015a)
-% Copyright 2015-2023 INRA - Cepia Software Platform
+% Copyright 2015-2024 INRA - Cepia Software Platform
 
 if nargin == 2
     faces = varargin{1};

@@ -36,7 +36,7 @@ function line = createLine3d(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-02-17
-% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
 %   NOTE : A 3d line can also be represented with a 1*7 array : 
 %   [x0 y0 z0 dx dy dz t].

@@ -14,7 +14,7 @@ function varargout = triangleGrid(bounds, origin, size, varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-08-06
-% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
 dx = size(1);
 dy = size(1)*sqrt(3);

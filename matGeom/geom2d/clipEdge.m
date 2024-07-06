@@ -20,7 +20,7 @@ function edge2 = clipEdge(edge, box)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-05-14
-% Copyright 2005-2023 INRA - Cepia Software Platform
+% Copyright 2005-2024 INRA - Cepia Software Platform
 
 % process data input
 if size(box, 1) == 2

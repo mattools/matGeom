@@ -9,7 +9,7 @@ function varargout = grSimplifyBranches(nodes, edges)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2003-08-13
-% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE
 
 Mnodes = [];    % size Nn*2 -> nodes coordinates
 Sedges = [];    % size Ne*2 -> indices of nodes

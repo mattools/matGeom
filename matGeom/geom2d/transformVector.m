@@ -27,7 +27,7 @@ function varargout = transformVector(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2007-03-12
-% Copyright 2007-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2007-2024 INRA - TPV URPOI - BIA IMASTE
 
 if length(varargin)==2
     var = varargin{1};

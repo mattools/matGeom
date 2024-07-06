@@ -26,7 +26,7 @@ function r = graphRadius(v, e, l)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2010-09-07, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010-2023 INRA - Cepia Software Platform
+% Copyright 2010-2024 INRA - Cepia Software Platform
 
 % ensure there is a valid length array
 if nargin<3

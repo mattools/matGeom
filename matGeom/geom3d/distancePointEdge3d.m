@@ -22,7 +22,7 @@ function [dist, t] = distancePointEdge3d(point, edge)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2004-04-07
-% Copyright 2004-2023 INRA - CEPIA URPOI - MIA MathCell
+% Copyright 2004-2024 INRA - CEPIA URPOI - MIA MathCell
 
 % direction vector of each edge
 vl = edge(:, 4:6) - edge(:, 1:3);

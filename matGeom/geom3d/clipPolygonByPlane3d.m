@@ -39,7 +39,7 @@ function poly2 = clipPolygonByPlane3d(poly, plane, varargin)
 % Author: David Legland, oqilipo 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-08-02
-% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
 parser = inputParser;
 addRequired(parser, 'poly', @isPolygon3d)

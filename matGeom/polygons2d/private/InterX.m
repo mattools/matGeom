@@ -46,7 +46,7 @@ function P = InterX(L1,varargin)
 % Author: NS
 % E-mail: N/A
 % Created: 2010-09-21
-% Copyright 2010-2023
+% Copyright 2010-2024
 
     %...Argument checks and assignment of L2
     narginchk(1,2);

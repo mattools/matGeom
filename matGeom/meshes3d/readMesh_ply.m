@@ -25,8 +25,7 @@ function varargout = readMesh_ply(fileName)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2018-04-26, using Matlab 9.4.0.813654 (R2018a)
-% Copyright 2018-2023 INRA - Cepia Software Platform
-
+% Copyright 2018-2024 INRA - Cepia Software Platform
 
 %% Open file
 

@@ -45,7 +45,7 @@ function [dist, pos] = distancePointEdge(point, edge)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2004-04-07
-% Copyright 2004-2023 INRA - BIA-BIBS
+% Copyright 2004-2024 INRA - BIA-BIBS
 
 % direction vector of each edge (row vectors)
 vx = (edge(:, 3) - edge(:,1))';

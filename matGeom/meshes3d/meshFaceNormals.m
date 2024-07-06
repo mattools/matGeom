@@ -29,7 +29,7 @@ function normals = meshFaceNormals(varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2006-07-05
-% Copyright 2006-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2006-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % parse input data
 [vertices, faces] = parseMeshData(varargin{:});

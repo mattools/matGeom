@@ -31,7 +31,7 @@ function b = isParallel3d(v1, v2, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2006-04-25
-% Copyright 2006-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2006-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % check if tolerance is specified
 tol = 1e-14;

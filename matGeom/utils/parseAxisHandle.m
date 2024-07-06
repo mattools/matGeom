@@ -14,7 +14,7 @@ function [ax, varargin] = parseAxisHandle(varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2023-09-05, using Matlab 9.14.0.2206163 (R2023a)
-% Copyright 2023 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2023-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % varargin can not be empty
 if isempty(varargin)

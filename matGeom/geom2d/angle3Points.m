@@ -16,7 +16,7 @@ function theta = angle3Points(varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2004-02-23
-% Copyright 2004-2023 INRA - Cepia Software Platform
+% Copyright 2004-2024 INRA - Cepia Software Platform
 
 if length(varargin)==3
     p1 = varargin{1};

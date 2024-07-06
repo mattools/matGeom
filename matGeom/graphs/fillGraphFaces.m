@@ -33,7 +33,7 @@ function varargout = fillGraphFaces(varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2005-11-24
-% Copyright 2005-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2005-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 %% Initialisations
 

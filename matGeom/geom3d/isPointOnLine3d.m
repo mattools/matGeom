@@ -20,7 +20,7 @@ function b = isPointOnLine3d(point, line, varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2003-10-31
-% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE
 
 % extract computation tolerance
 tol = 1e-14;

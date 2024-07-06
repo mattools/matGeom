@@ -30,7 +30,7 @@ function varargout = randomAngle3d(varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2005-02-18
-% Copyright 2005-2023 INRA - Cepia Software platform
+% Copyright 2005-2024 INRA - Cepia Software platform
 
 N = 1;
 if ~isempty(varargin)

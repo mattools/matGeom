@@ -30,7 +30,7 @@ function res = parallelLine(line, point)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2003-10-31
-% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE
 
 if size(point, 2) == 1
     % use a distance. Compute position of point located at distance DIST on

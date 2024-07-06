@@ -28,7 +28,7 @@ function varargout = drawAngleBetweenVectors3d(varargin)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2020-02-02
-% Copyright 2020-2023
+% Copyright 2020-2024
 
 % extract handle of axis to draw on
 [hAx, varargin] = parseAxisHandle(varargin{:});

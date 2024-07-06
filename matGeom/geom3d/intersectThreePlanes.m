@@ -16,7 +16,7 @@ function point = intersectThreePlanes(plane1, plane2, plane3)
 % Author: Roozbeh Geraili Mikola
 % E-mail: roozbehg@berkeley.edu or roozbehg@live.com
 % Created: 2017-09-20
-% Copyright 2017-2023
+% Copyright 2017-2024
 
 % plane normal
 n1 = normalizeVector3d(cross(plane1(:,4:6), plane1(:, 7:9), 2));

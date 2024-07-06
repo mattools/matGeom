@@ -23,7 +23,7 @@ function [poly, keepInds] = simplifyPolygon(poly, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2013-03-14, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2013-2023 INRA - Cepia Software Platform
+% Copyright 2013-2024 INRA - Cepia Software Platform
 
 % call the simplifyPolyline function by ensuring the last vertex is present
 poly = poly([1:end 1], :);

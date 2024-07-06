@@ -28,7 +28,7 @@ function varargout = drawSphericalTriangle(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-02-22
-% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
 % extract handle of axis to draw on
 [hAx, varargin] = parseAxisHandle(varargin{:});

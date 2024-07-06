@@ -19,7 +19,7 @@ function plane2 = normalizePlane(plane1)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-02-21
-% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
 % compute first direction vector
 d1  = normalizeVector3d(plane1(:,4:6));

@@ -39,7 +39,7 @@ function [minDist, pos] = distancePointPolyline(point, poly, varargin)
 % Author: David Legland, Juan Pablo Carbajal
 % E-mail: david.legland@inrae.fr, ajuanpi+dev@gmail.com
 % Created: 2009-04-30, using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009-2023 INRA - Cepia Software Platform
+% Copyright 2009-2024 INRA - Cepia Software Platform
 
 % check if input polyline is closed or not
 closed = false;

@@ -26,7 +26,7 @@ function poly2 = resamplePolygon(poly, n)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2011-12-09, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011-2023 INRA - Cepia Software Platform
+% Copyright 2011-2024 INRA - Cepia Software Platform
 
 poly2 = resamplePolyline(poly([1:end 1],:), n+1);
 poly2(end, :) = [];

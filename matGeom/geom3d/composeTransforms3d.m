@@ -24,7 +24,7 @@ function trans = composeTransforms3d(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2006-09-29
-% Copyright 2006-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2006-2024 INRA - TPV URPOI - BIA IMASTE
 
 trans = varargin{nargin};
 for i=length(varargin)-1:-1:1

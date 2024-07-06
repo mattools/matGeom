@@ -27,7 +27,7 @@ function [centroid, area] = polygonCentroid3d(varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2007-09-18
-% Copyright 2007-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2007-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 if nargin == 1
     % polygon is given as a single argument

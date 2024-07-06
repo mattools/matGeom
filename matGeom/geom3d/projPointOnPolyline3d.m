@@ -36,15 +36,16 @@ function varargout = projPointOnPolyline3d(point, poly, varargin)
 %     ans =
 %         
 %
-%   See also
+%   See also 
 %   points2d, polygons2d, polylinePoint, projPointOnPolygon
 %   distancePointPolyline
 %
 
 % ------
 % Author: Guilherme Froes Silva
-% e-mail: g.froessilva@qut.edu.au
+% E-mail: g.froessilva@qut.edu.au
 % Created: 2022-09-12, using Matlab 9.12.0.1927505 (R2022a) Update 1
+% Copyright 2022-2024
 
 % check if input polyline is closed or not
 closed = false;

@@ -24,7 +24,7 @@ function axis = polygonSymmetryAxis(poly)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2015-04-28, using Matlab 8.4.0.150421 (R2014b)
-% Copyright 2015-2023 INRA - Cepia Software Platform
+% Copyright 2015-2024 INRA - Cepia Software Platform
 
 % start by centering the polygon
 center = polygonCentroid(poly);

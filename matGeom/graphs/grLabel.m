@@ -26,7 +26,7 @@ function labels = grLabel(nodes, edges)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2007-08-14, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2007-2024 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % init
 Nn = size(nodes, 1);

@@ -43,7 +43,7 @@ function [regions, distances] = meshVoronoiDiagram(vertices, faces, germInds)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2020-04-16, using Matlab 9.7.0.1247435 (R2019b) Update 2
-% Copyright 2020-2023 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2020-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % choose initial germ indices if input is a scalar
 nVertices = size(vertices, 1);

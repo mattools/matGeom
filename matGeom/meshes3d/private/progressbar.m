@@ -10,7 +10,7 @@ function progressbar(n,N,w)
 % Author: Gabriel Peyré
 % E-mail: gabriel.peyre@ens.fr
 % Created: 2006
-% Copyright 2006-2023
+% Copyright 2006-2024
 
 if nargin<3
     w = 20;

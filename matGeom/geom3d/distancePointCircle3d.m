@@ -30,7 +30,7 @@ function d = distancePointCircle3d(points, circle)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2023-07-25, using Matlab 9.13.0.2080170 (R2022b) Update 1
-% Copyright 2023
+% Copyright 2023-2024
 
 % Project the points on the circle
 pointsProj2Circle = projPointOnCircle3d(points, circle);

@@ -28,7 +28,7 @@ function kappa = curvature(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2003-04-07
-% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE
 
 % default values
 degree = 5;

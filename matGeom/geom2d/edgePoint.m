@@ -6,24 +6,23 @@ function point = edgePoint(edge, pos)
 %   POS is comprised between 0 (first point of edge) and 1 (last
 %   point of the edge).
 %
-%
 %   Example
-%   edge = [10 10 20 10];
-%   edgePoint(edge, 0)
+%       edge = [10 10 20 10];
+%       edgePoint(edge, 0)
 %       [10 10]
-%   edgePoint(edge, 0.5)
+%       edgePoint(edge, 0.5)
 %       [15 15]
-%   edgePoint(edge, 1)
+%       edgePoint(edge, 1)
 %       [20 20]
 %
-%
-%   See also
+%   See also 
 %   edges2d distancePointEdge
-%
+
 % ------
 % Author: Guilherme Froes Silva
-% e-mail: g.froessilva@qut.edu.au
-% Created: 2022-09-12, 9.12.0.1927505 (R2022a) Update 1
+% E-mail: g.froessilva@qut.edu.au
+% Created: 2022-09-12, using MATLAB 9.12.0.1927505 (R2022a) Update 1
+% Copyright 2022-2024
 
 % number of points to compute
 Np = size(pos,1);

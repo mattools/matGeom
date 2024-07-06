@@ -53,7 +53,7 @@ function varargout = drawCircle3d(varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2005-02-17
-% Copyright 2005-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2005-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 %   Possible calls for the function, with number of arguments :
 %   drawCircle3d([XC YC ZC R THETA PHI])            1

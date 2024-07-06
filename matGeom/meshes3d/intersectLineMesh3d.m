@@ -38,7 +38,7 @@ function [points, pos, faceInds, lineInds] = intersectLineMesh3d(line, vertices,
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2011-12-20, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011-2023 INRA - Cepia Software Platform
+% Copyright 2011-2024 INRA - Cepia Software Platform
 
 % tolerance for detecting if a point is on line or within edge bounds
 tol = 1e-12;

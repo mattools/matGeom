@@ -43,7 +43,7 @@ function varargout = drawGraph(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2003-07-17
-% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE
 
 %% initialisations
 

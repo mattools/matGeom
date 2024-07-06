@@ -36,7 +36,7 @@ function [min_width, min_angle] = minimumCaliperDiameter(points)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2011-04-08, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011-2023 INRA - Cepia Software Platform
+% Copyright 2011-2024 INRA - Cepia Software Platform
 
 % first, compute convex hull of the polygon
 inds = convhull(points(:,1), points(:,2));

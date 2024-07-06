@@ -12,7 +12,7 @@ function line = cartesianLine(varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2004-05-25
-% Copyright 2004-2023 INRA - Cepia Software Platform
+% Copyright 2004-2024 INRA - Cepia Software Platform
 
 if length(varargin)==1
     var = varargin{1};

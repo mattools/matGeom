@@ -27,7 +27,7 @@ function [nodes2, edges2] = grRemoveNodes(nodes, edges, rmNodes)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2003-08-13
-% Copyright 2003-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE
 
 %% edges processing
 
