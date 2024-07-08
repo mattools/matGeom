@@ -35,7 +35,7 @@ function varargout = clipMeshVertices(v, f, b, varargin)
 % Author: David Legland, oqilipo
 % E-mail: david.legland@inrae.fr
 % Created: 2011-04-07, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011-2023 INRA - Cepia Software Platform
+% Copyright 2011-2024 INRA - Cepia Software Platform
 
 % if input is given as a structure, parse fields
 if isstruct(v)

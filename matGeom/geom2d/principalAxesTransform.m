@@ -19,7 +19,7 @@ function varargout = principalAxesTransform(pts)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2020-03-06, using Matlab 8.6.0.267246 (R2015b)
-% Copyright 2020-2023 INRAE - Cepia Software Platform
+% Copyright 2020-2024 INRAE - Cepia Software Platform
 
 % computes principal axes
 [center, rotMat] = principalAxes(pts);

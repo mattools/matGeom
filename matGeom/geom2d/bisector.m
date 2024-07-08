@@ -18,7 +18,7 @@ function ray = bisector(varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2003-10-31
-% Copyright 2003-2023 INRA - Cepia Software Platform
+% Copyright 2003-2024 INRA - Cepia Software Platform
 
 if length(varargin)==2
     % two lines

@@ -39,7 +39,7 @@ function varargout = createOctahedron()
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-02-10
-% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
 nodes = [1 0 0;0 1 0;-1 0 0;0 -1 0;0 0 1;0 0 -1];
 

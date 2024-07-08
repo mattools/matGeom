@@ -30,7 +30,7 @@ function nodes2 = grAdjacentNodes(edges, node)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2004-08-16
-% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE
 
 [i, j] = find(ismember(edges, node)); %#ok<ASGLU> 
 nodes2 = edges(i,1:2);

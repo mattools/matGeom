@@ -15,7 +15,7 @@ function plane = medianPlane(p1, p2)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-02-18
-% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
 % unify data dimension
 if size(p1, 1)==1

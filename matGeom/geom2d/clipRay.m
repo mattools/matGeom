@@ -22,7 +22,7 @@ function [edge, isInside] = clipRay(ray, bb)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2010-05-13, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2010-2023 INRA - Cepia Software Platform
+% Copyright 2010-2024 INRA - Cepia Software Platform
 
 % adjust size of two input arguments
 if size(ray, 1) == 1

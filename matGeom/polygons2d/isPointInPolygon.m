@@ -32,7 +32,7 @@ function b = isPointInPolygon(point, poly)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2009-06-19, using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009-2023 INRA - Cepia Software Platform
+% Copyright 2009-2024 INRA - Cepia Software Platform
 
 % In case of a multiple polygon, decompose into a set of contours, and
 % performs test for each contour

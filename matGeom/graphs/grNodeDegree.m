@@ -35,7 +35,7 @@ function [degree, node] = grNodeDegree(node, edges)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2003-08-13
-% Copyright 2003-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2003-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % If only edge array is given, assume we want the degree of each node
 if nargin == 1

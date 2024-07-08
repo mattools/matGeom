@@ -22,7 +22,7 @@ function res = transformLine3d(line, trans)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2008-11-25, using Matlab 7.7.0.471 (R2008b)
-% Copyright 2008-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2008-2024 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 res = [...
     transformPoint3d(line(:, 1:3), trans) ...   % transform origin point

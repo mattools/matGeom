@@ -22,7 +22,7 @@ function [vertices, faces] = steinerPolytope(vectors)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2006-04-28
-% Copyright 2006-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2006-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % compute vectors dimension
 nd = size(vectors, 2);

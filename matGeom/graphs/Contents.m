@@ -125,7 +125,7 @@
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2005-11-07
-% Copyright 2005-2023 INRA - Cepia Software Platform
+% Copyright 2005-2024 INRA - Cepia Software Platform
 
 help(mfilename);
 

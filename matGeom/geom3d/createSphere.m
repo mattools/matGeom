@@ -14,7 +14,7 @@ function sphere = createSphere(varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-03-22
-% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
 if length(varargin)==4
     pts = [varargin{1};varargin{2};varargin{3};varargin{4}];

@@ -30,7 +30,7 @@ function silhouette = meshSilhouette(v, f, varargin)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2020-07-29
-% Copyright 2020-2023
+% Copyright 2020-2024
 
 narginchk(1,5)
 nargoutchk(0,1)

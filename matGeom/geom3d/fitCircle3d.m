@@ -36,7 +36,7 @@ function [fittedCircle, circleNormal, residuals] = fitCircle3d(pts, varargin)
 % Authors: oqilipo
 % E-mail: N/A
 % Created: 2017-05-09
-% Copyright 2017-2023
+% Copyright 2017-2024
 
 parser = inputParser;
 addRequired(parser, 'pts', @(x) validateattributes(x, {'numeric'},...

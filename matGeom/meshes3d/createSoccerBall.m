@@ -18,7 +18,7 @@ function varargout = createSoccerBall()
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2006-08-09
-% Copyright 2006-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2006-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % get vertices and adjacency matrix of the buckyball
 [b, n] = bucky;

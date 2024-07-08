@@ -51,7 +51,7 @@ function points = intersectLineCylinder(line, cylinder, varargin)
 % Author: David Legland, from a file written by Daniel Trauth (RWTH)
 % E-mail: david.legland@inrae.fr
 % Created: 2007-01-27
-% Copyright 2007-2023
+% Copyright 2007-2024
 
 %% Parse input arguments
 

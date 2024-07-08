@@ -20,6 +20,6 @@ function edge = lineToEdge3d(line)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2019-05-07, using Matlab 9.6.0.1072779 (R2019a)
-% Copyright 2019-2023 INRA - Cepia Software Platform
+% Copyright 2019-2024 INRA - Cepia Software Platform
 
 edge = [line(:, 1:3) line(:,1:3)+line(:,4:6)];

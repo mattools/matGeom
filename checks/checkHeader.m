@@ -25,7 +25,7 @@ function checkHeader
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2022-11-08, using MATLAB 9.13.0.2080170 (R2022b) Update 1
-% Copyright 2022-2023
+% Copyright 2022-2024
 
 cd(strrep(mfilename('fullpath'),mfilename,''))
 

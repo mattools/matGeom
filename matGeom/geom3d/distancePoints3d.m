@@ -21,7 +21,7 @@ function dist = distancePoints3d(p1, p2, varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-02-18
-% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
 norm = 2;
 if length(varargin)==1

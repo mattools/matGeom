@@ -25,7 +25,7 @@ function [newLine, isOrthogonal] = projLineOnPlane(line, plane)
 % Author: oqilipo 
 % E-mail: N/A
 % Created: 2017-08-06
-% Copyright 2017-2023
+% Copyright 2017-2024
 
 p1 = projPointOnPlane(line(:,1:3), plane);
 p2 = projPointOnPlane(line(:,1:3)+line(:,4:6), plane);

@@ -29,7 +29,7 @@ function varargout = createTetrahedron()
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-03-21
-% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
 x0 = 0; dx= 1;
 y0 = 0; dy= 1;

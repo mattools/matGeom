@@ -27,7 +27,7 @@ function varargout = angleSort(pts, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2005-11-24
-% Copyright 2005-2023 INRA - Cepia Software Platform
+% Copyright 2005-2024 INRA - Cepia Software Platform
 
 % default values
 pt0 = [0 0];

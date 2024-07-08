@@ -38,7 +38,7 @@ function [dist, proj] = distancePointTriangle3d(point, triangle)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2018-03-08, using Matlab 9.3.0.713579 (R2017b)
-% Copyright 2018-2023 INRA - Cepia Software Platform
+% Copyright 2018-2024 INRA - Cepia Software Platform
 
 % triangle origin and vectors
 p1 = triangle(1,:);

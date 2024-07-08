@@ -17,7 +17,7 @@ function b = isLeftOriented(point, line)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-07-31
-% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
 % equivalent to:
 % b = (xp-x0).*dy-(yp-y0).*dx < 0;

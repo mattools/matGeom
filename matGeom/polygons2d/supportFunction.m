@@ -18,7 +18,7 @@ function h = supportFunction(polygon, varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2004-12-20
-% Copyright 2004-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE
 
 N = 24;
 u = 0:2*pi/N:2*pi*(1-1/N);

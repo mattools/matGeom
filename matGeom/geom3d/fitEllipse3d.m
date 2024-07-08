@@ -35,7 +35,7 @@ function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2017-08-11
-% Copyright 2017-2023
+% Copyright 2017-2024
 
 parser = inputParser;
 addRequired(parser, 'points', @(x) validateattributes(x, {'numeric'},...

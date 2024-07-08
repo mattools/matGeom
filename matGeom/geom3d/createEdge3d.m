@@ -23,7 +23,7 @@ function edge = createEdge3d(varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2018-08-29, using Matlab 9.4.0.813654 (R2018a)
-% Copyright 2018-2023 INRA - Cepia Software Platform
+% Copyright 2018-2024 INRA - Cepia Software Platform
 
 if nargin == 1
     % Only one input parameter. Assumes it corresponds to a 3D line with

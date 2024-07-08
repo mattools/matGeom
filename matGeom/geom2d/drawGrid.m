@@ -11,15 +11,14 @@ function varargout = drawGrid(varargin)
 %     lx = -2:.5:2; ly = -1.5:.5:1.5;
 %     drawGrid(lx, ly, 'k');
 %
-%   See also
+%   See also 
 %
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% Created: 2024-06-28,    using Matlab 24.1.0.2628055 (R2024a) Update 4
-% Copyright 2024 INRAE.
+% E-mail: david.legland@inrae.fr
+% Created: 2024-06-28, using Matlab 24.1.0.2628055 (R2024a) Update 4
+% Copyright 2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 %% Extract input arguments
 % extract handle of axis to draw on

@@ -32,13 +32,12 @@ function varargout = triangulateMesh(varargin)
 %   See also 
 %     meshes3d, triangulateFaces, drawMesh
 %
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% Created: 2024-02-16,    using Matlab 23.2.0.2459199 (R2023b) Update 5
-% Copyright 2024 INRAE.
+% E-mail: david.legland@inrae.fr
+% Created: 2024-02-16, using Matlab 23.2.0.2459199 (R2023b) Update 5
+% Copyright 2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 [vertices, faces] = parseMeshData(varargin{:});
 

@@ -20,7 +20,7 @@ function circle = enclosingCircle(pts)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2005-07-07
-% Copyright 2005-2023 INRA - Cepia Software Platform
+% Copyright 2005-2024 INRA - Cepia Software Platform
 
 % works on convex hull: it is faster
 pts = pts(convhull(pts(:,1), pts(:,2)), :);

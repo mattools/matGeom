@@ -29,7 +29,7 @@ function b = isPointInEllipse(point, ellipse, varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2011-03-11
-% Copyright 2011-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2011-2024 INRA - TPV URPOI - BIA IMASTE
 
 % extract computation tolerance
 tol = 1e-14;

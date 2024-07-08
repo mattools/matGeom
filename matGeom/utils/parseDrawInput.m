@@ -15,7 +15,7 @@ function [hAx, prim, varargin] = parseDrawInput(prim, valFun, type, defOpts, var
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2017-10-13, using R2017b
-% Copyright 2017-2023
+% Copyright 2017-2024
 
 % Check if first input argument is an axes handle
 if isAxisHandle(prim)

@@ -14,7 +14,7 @@ function S = prolateSurfaceArea(elli, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2015-07-03, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2015-2023 INRA - Cepia Software Platform
+% Copyright 2015-2024 INRA - Cepia Software Platform
 
 %% Parse input argument
 

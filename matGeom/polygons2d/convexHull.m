@@ -41,7 +41,7 @@ function [hull, inds] = convexHull(points, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2011-04-08, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011-2023 INRA - Cepia Software Platform
+% Copyright 2011-2024 INRA - Cepia Software Platform
 
 % checkup on array size
 if size(points, 1) < 3

@@ -23,6 +23,6 @@ function h = hypot3(dx, dy, dz)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2012-04-29, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012-2023 INRA - Cepia Software Platform
+% Copyright 2012-2024 INRA - Cepia Software Platform
 
 h = hypot(hypot(dx, dy), dz);

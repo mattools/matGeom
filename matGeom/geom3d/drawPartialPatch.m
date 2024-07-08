@@ -20,7 +20,7 @@ function drawPartialPatch(u, v, z, varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-05-24
-% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
 % prepare figure
 hold on;

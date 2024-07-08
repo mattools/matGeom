@@ -20,7 +20,7 @@ function len = polygonLength(poly, varargin)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2005-05-11
-% Copyright 2005-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
 % If first argument is a cell array, this is a multi-polygon, and we simply
 % add the lengths of individual polygons

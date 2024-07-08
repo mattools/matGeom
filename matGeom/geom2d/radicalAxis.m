@@ -22,7 +22,7 @@ function line = radicalAxis(circle1, circle2)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2007-05-15, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2007-2024 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 % extract circles parameters
 x1 = circle1(:,1);

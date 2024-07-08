@@ -36,7 +36,7 @@ function varargout = circleToPolygon(circle, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2005-04-06
-% Copyright 2005-2023 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2005-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % check input size
 if size(circle, 1) > 1

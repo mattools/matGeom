@@ -21,7 +21,7 @@ function circle2 = transformCircle3d(circle, tfm)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2022-12-03, using MATLAB 9.13.0.2080170 (R2022b) Update 1
-% Copyright 2022-2023
+% Copyright 2022-2024
 
 parser = inputParser;
 addRequired(parser, 'circle', @(x) validateattributes(x, {'numeric'},...

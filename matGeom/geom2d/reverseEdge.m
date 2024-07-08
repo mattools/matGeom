@@ -13,6 +13,6 @@ function res = reverseEdge(edge)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2010-05-13, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010-2023 INRA - Cepia Software Platform
+% Copyright 2010-2024 INRA - Cepia Software Platform
 
 res = [edge(:,3:4) edge(:,1:2)];

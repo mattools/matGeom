@@ -22,7 +22,7 @@ function c = crossProduct3d(a,b)
 % Author: Sven Holcombe
 % E-mail: N/A
 % Created: 2011
-% Copyright 2011-2023
+% Copyright 2011-2024
 
 % size of inputs
 sizeA = size(a);

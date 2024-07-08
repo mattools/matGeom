@@ -41,7 +41,7 @@ function varargout = drawArrow3d(varargin)
 % Authors: Shawn Arseneau, oqilipo
 % E-mail: N/A
 % Created: 2006-09-14, by Shawn Arseneau
-% Copyright 2006-2023
+% Copyright 2006-2024
 
 % extract handle of axis to draw on
 [ax, varargin] = parseAxisHandle(varargin{:});

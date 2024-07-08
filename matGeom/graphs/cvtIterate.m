@@ -29,7 +29,7 @@ function varargout = cvtIterate(germs, funcPtr, funcArgs, N)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2007-10-10, using Matlab 7.4.0.287 (R2007a)
-% Copyright 2007-2023 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
+% Copyright 2007-2024 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
 %% Init
 

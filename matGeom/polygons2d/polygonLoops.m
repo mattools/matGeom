@@ -22,7 +22,7 @@ function loops = polygonLoops(poly, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2009-06-15, using Matlab 7.7.0.471 (R2008b)
-% Copyright 2009-2023 INRA - Cepia Software Platform
+% Copyright 2009-2024 INRA - Cepia Software Platform
 
 % tolerance for detecting two vertices as equal
 tol = 1e-14;

@@ -23,7 +23,7 @@ facilitates the interoperability of the functions.
 
 If you use matGeom, you might cite it as follows:
 ```
-David Legland et al. (2023) "MatGeom library for geometric computing with MATLAB" DOI: 10.5281/zenodo.7799184
+David Legland et al. (2024) "MatGeom library for geometric computing with MATLAB" DOI: 10.5281/zenodo.7799184
 ```
 
 ## Package organization
@@ -100,7 +100,3 @@ A summary of typical operations in presented in the following script.
     drawPoint(inters, 'Color', 'r', 'Marker', 'o', 'MarkerFaceColor', 'w', 'linewidth', 2);
 
 ![Summary of polygon processing operations: smoothing, simplification, convex hull, intersection with lines.](https://github.com/mattools/matGeom/blob/master/docs/images/leafPoly_variousOps.png)
-
-
-
-

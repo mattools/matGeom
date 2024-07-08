@@ -72,7 +72,7 @@ function b = isPointOnEdge3d(point, edge, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2021-02-24, using Matlab 9.9.0.1570001 (R2020b) Update 4
-% Copyright 2021-2023 INRAE - BIA-BIBS
+% Copyright 2021-2024 INRAE - BIA-BIBS
 
 % extract computation tolerance
 tol = 1e-14;

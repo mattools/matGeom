@@ -74,7 +74,7 @@ function [points, edgeInds, linePositions] = intersectLinePolygon(line, poly, va
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2003-10-31, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2003-2023 INRA - Cepia Software Platform
+% Copyright 2003-2024 INRA - Cepia Software Platform
 
 % line origin and angle
 ox = line(1);

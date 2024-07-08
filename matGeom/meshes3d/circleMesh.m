@@ -26,7 +26,7 @@ function varargout = circleMesh(circle, varargin)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2023-07-30, using Matlab 9.13.0.2080170 (R2022b) Update 1
-% Copyright 2023
+% Copyright 2023-2024
 
 parser = inputParser;
 addParameter(parser, 'nP', 60, @(x) validateattributes(x,{'numeric'},...

@@ -25,7 +25,7 @@ function ROT = createRotationVector3d(A,B)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2017-08-07
-% Copyright 2017-2023
+% Copyright 2017-2024
 
 if isParallel3d(A,B)
     if A*B'>0

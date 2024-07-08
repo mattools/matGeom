@@ -38,7 +38,7 @@ function [transfo, pt, ER, t] = registerPoints3d_icp(p, q, varargin)
 %   Example
 %   registerPoints3d_icp
 %
-%   See also
+%   See also 
 %     transforms3d, registerPoints3dAffine, pcregistericp
 %
 % Rewritten from the "icp" function, by Martin Kjer and Jakob Wilm,
@@ -54,11 +54,9 @@ function [transfo, pt, ER, t] = registerPoints3d_icp(p, q, varargin)
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% Created: 2023-05-30,    using Matlab 9.14.0.2206163 (R2023a)
-% Copyright 2023 INRAE.
-
+% E-mail: david.legland@inrae.fr
+% Created: 2023-05-30, using Matlab 9.14.0.2206163 (R2023a)
+% Copyright 2023-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 %% Parse input arguments
 % parse input arguments using an instance of InputParser class
@@ -231,18 +229,18 @@ end
 
 minDist = sqrt(minDist);
 
-% ----------------------------------------------------------------
+%%
 function [inds, minDist] = matchPoints_Delaunay(p, DT)
 
 inds = nearestNeighbor(DT, p);
 minDist = sqrt(sum((p - DT.Points(inds,:)).^2, 1));
 
-% ----------------------------------------------------------------
+%%
 function [inds, minDist] = matchPoints_kDtree(p, kdTree)
 
 [inds, minDist] = knnsearch(kdTree, p);
 
-% ----------------------------------------------------------------
+%%
 function [R, T] = eq_point(q, p, weights)
 
 % retrieve size of data points
@@ -272,7 +270,7 @@ R = V*diag([1 1 det(U*V')]) * U';
 T = q_bar - p_bar * R';
 
 
-% ----------------------------------------------------------------
+%%
 function [R, T] = eq_plane(q, p, n, weights)
 
 n = n .* repmat(weights, 1, 3);
@@ -302,7 +300,7 @@ R = [cy*cz cz*sx*sy-cx*sz cx*cz*sy+sx*sz;
 T = X(4:6)';
 
 
-% ----------------------------------------------------------------
+%%
 function [R, T] = eq_lmaPoint(q, p)
 % Fit Rotation and Translation using Levenberg-Marquard minimization.
 
@@ -330,7 +328,7 @@ R = Rot(x(1:3));
 T = x(4:6);
 
 
-% ----------------------------------------------------------------
+%%
 function ER = rmse(p1, p2)
 % Determine the RMS error between two point equally sized point clouds with
 % point correspondance.
@@ -340,7 +338,7 @@ sqDist = sum((p1 - p2).^2, 2);
 ER = sqrt(mean(sqDist));
 
 
-% ----------------------------------------------------------------
+%%
 function n = estimateVertexNormals(p, k)
 % Least squares normal estimation from point clouds using PCA.
 %
@@ -378,5 +376,3 @@ for i = 1:m
     % return the corresponding eigenvector
     n(i,:) = V(:,idx)';
 end
-
- 

@@ -19,7 +19,7 @@ function edge = clipLine3d(line, box)
 % Author: David Legland 
 % E-mail: david.legland@inrae.fr
 % Created: 2008-10-30, from drawLine3d
-% Copyright 2008-2023 INRA - TPV URPOI - BIA IMASTE
+% Copyright 2008-2024 INRA - TPV URPOI - BIA IMASTE
 
 % get box limits
 xmin = box(1); xmax = box(2);

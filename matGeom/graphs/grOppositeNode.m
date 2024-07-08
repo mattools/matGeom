@@ -13,7 +13,7 @@ function node2 = grOppositeNode(edges, node)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2010-09-07
-% Copyright 2010-2023 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
+% Copyright 2010-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % allocate memory for result
 Ne = size(edges, 1);

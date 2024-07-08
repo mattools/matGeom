@@ -36,7 +36,7 @@ function points = randomPointInPolygon(poly, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2017-08-28, using Matlab 9.1.0.441655 (R2016b)
-% Copyright 2017-2023 INRA - Cepia Software Platform
+% Copyright 2017-2024 INRA - Cepia Software Platform
 
 % determine number of points to generate
 nPts = 1;

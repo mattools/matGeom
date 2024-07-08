@@ -22,7 +22,7 @@ function writeMesh_stl(fileName, vertices, faces, varargin)
 % Author: oqilipo
 % E-mail: N/A
 % Created: 2021-02-13, using Matlab 9.9.0.1538559 (R2020b)
-% Copyright 2021-2023
+% Copyright 2021-2024
 
 %% Check inputs
 if ~ischar(fileName)
