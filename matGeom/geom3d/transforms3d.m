@@ -5,9 +5,7 @@ function transforms3d(varargin)
 %   is represented by a 4*4 matrix. The last row of the matrix is equal to
 %   [0 0 0 1].
 %
-%   
-%
-%   Example:
+%   Example
 %   % create a translation by the vector [10 20 30]:
 %   T = createTranslation3d([10 20 30]);
 %   % Transform a basic point:

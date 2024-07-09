@@ -62,7 +62,7 @@ function [transfo, pt, ER, t] = registerPoints3d_icp(p, q, varargin)
 % parse input arguments using an instance of InputParser class
 
 parser = inputParser;
-
+parser.KeepUnmatched = true;
 % require source and target points sets, as N-by-3 and M-by-3 numeric arrays 
 parser.addRequired('p', @(x) isreal(x) && size(x,2) == 3);
 parser.addRequired('q', @(x) isreal(x) && size(x,2) == 3);
@@ -71,7 +71,6 @@ parser.addRequired('q', @(x) isreal(x) && size(x,2) == 3);
 parser.addOptional('nIters', 10, @ (x) x > 0 && x < 10^5);
 
 % parse parameters as name-value pairs.
-
 % the algorithm to match transformed source to target
 validMatching = {'bruteForce', 'Delaunay', 'kDtree'};
 parser.addParameter('Matching', 'bruteForce', @(x) any(strcmpi(x, validMatching)));
@@ -84,21 +83,11 @@ parser.addParameter('Minimize', 'point', @(x) any(strcmpi(x,validMinimize)));
 % minimization)
 parser.addParameter('Normals', [], @(x) isreal(x) && size(x,2) == 3);
 
-parser.addParameter('NormalsData', [], @(x) isreal(x) && size(x,2) == 3);
-
-% should the function returns the list of transforms (one for each iter)
-parser.addParameter('ReturnAll', false, @(x) islogical(x));
-
 % If Delaunay matching is used, the triangulation can be pre-computed
 parser.addParameter('Triangulation', [], @(x) isreal(x) && size(x,2) == 3);
 
-% Verbosity option
-parser.addParameter('Verbose', false, @(x) islogical(x));
-
 % Weights associated to the points
 parser.addParameter('Weight', @(x) ones(length(x),1), @(x) isa(x,'function_handle'));
-
-parser.addParameter('WorstRejection', 0, @(x) isscalar(x) && x > 0 && x < 1);
 
 parser.parse(p, q, varargin{:});
 args = parser.Results;

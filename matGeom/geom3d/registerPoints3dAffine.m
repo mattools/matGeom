@@ -7,7 +7,7 @@ function [trans, points] = registerPoints3dAffine(points, target, varargin)
 %   N-by-3 array of point coordinates, not necessarily the same size.
 %   The result TRANS is a 4-by-4 affine transform.
 %
-%   TRANS = registerPoints3dAffine(POINTS, TARGET, NITER)
+%   TRANS = registerPoints3dAffine(POINTS, TARGET, NITERS)
 %   Specifies the number of iterations for the algorithm.
 %
 %   [TRANS, POINTS2] = registerPoints3dAffine(...)
