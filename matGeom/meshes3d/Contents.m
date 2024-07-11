@@ -61,6 +61,7 @@
 %   trimeshSurfaceArea          - Surface area of a triangular mesh.
 %   meshFaceAreas               - Surface area of each face of a mesh.
 %   meshVolume                  - (Signed) volume of the space enclosed by a polygonal mesh.
+%   meshCentroid                - Compute the centroid of the input mesh.
 %   meshCurvatures              - Compute principal curvatures on mesh vertices.
 %   meshEdgeLength              - Lengths of edges of a polygonal or polyhedral mesh.
 %   meshDihedralAngles          - Dihedral at edges of a polyhedal mesh.

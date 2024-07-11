@@ -20,7 +20,7 @@ function vol = meshVolume(varargin)
 %         1
 %
 %   See also 
-%   meshes3d, meshSurfaceArea, tetrahedronVolume, meshComplement
+%   meshes3d, meshSurfaceArea, tetrahedronVolume, meshCentroid
 
 % ------
 % Author: David Legland

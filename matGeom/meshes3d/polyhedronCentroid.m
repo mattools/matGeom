@@ -4,7 +4,8 @@ function centroid = polyhedronCentroid(vertices, faces) %#ok<INUSD>
 %   CENTRO = polyhedronCentroid(V, F)
 %   Computes the centroid (center of mass) of the polyhedron defined by
 %   vertices V and faces F.
-%   The polyhedron is assumed to be convex.
+%   The polyhedron is assumed to be convex. See the 'meshCentroid' function
+%   to cumpute the centroid of non-convex meshes.
 %
 %   Example
 %     % Creates a polyhedron centered on origin, and add an arbitrary
@@ -18,7 +19,7 @@ function centroid = polyhedronCentroid(vertices, faces) %#ok<INUSD>
 %
 %
 %   See also 
-%   meshes3d, meshVolume, meshSurfaceArea, polyhedronMeanBreadth
+%   meshes3d, meshCentroid, meshVolume, meshSurfaceArea
 %
 
 % ------
@@ -43,7 +44,7 @@ for i = 1:nT
     % coordinates of tetrahedron vertices
     tetra = vertices(T(i, :), :);
     
-    % centroid is the average of vertices. 
+    % computes approximated centroid as the average of mesh vertices.
     centi = mean(tetra);
     
     % compute volume of tetrahedron
