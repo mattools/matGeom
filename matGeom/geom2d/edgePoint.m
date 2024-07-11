@@ -2,7 +2,7 @@ function point = edgePoint(edge, pos)
 %EDGEPOINT Extract a point from an edge.
 %
 %   POINT = edgePoint(EDGE, POS)
-%   EDGE is a N*4 array containing N edges
+%   EDGE is a N-by-4 array containing the edges
 %   POS is comprised between 0 (first point of edge) and 1 (last
 %   point of the edge).
 %
@@ -16,7 +16,7 @@ function point = edgePoint(edge, pos)
 %       [20 20]
 %
 %   See also 
-%   edges2d distancePointEdge
+%     edges2d, distancePointEdge
 
 % ------
 % Author: Guilherme Froes Silva

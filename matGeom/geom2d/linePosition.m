@@ -33,7 +33,7 @@ function pos = linePosition(point, line, varargin)
 %       .5
 %
 %   See also 
-%   lines2d, createLine, projPointOnLine, isPointOnLine
+%     lines2d, linePoint, projPointOnLine, isPointOnLine, createLine
 
 % ------
 % Author: David Legland 

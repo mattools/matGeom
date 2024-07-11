@@ -6,9 +6,10 @@ function point = projPointOnLine(point, line)
 %   
 %   Function works also for multiple points and lines. In this case, it
 %   returns multiple points.
-%   Point PT1 is a [N*2] array, and LINE is a [N*4] array (see createLine
-%   for details). Result PT2 is a [N*2] array, containing coordinates of
-%   orthogonal projections of PT1 onto lines LINE.
+%   Point PT1 is a N-by-2 array, and LINE is a N-by-4 array (see the
+%   createLine function for details). Result PT2 is a N-by-2 array,
+%   containing the coordinates of orthogonal projections of points PT1 onto
+%   lines LINE.
 %
 %   Example
 %     line = [0 2  2 1];

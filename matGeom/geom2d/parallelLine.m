@@ -35,7 +35,7 @@ function res = parallelLine(line, point)
 if size(point, 2) == 1
     % use a distance. Compute position of point located at distance DIST on
     % the line orthogonal to the first one.
-    point = pointOnLine([line(:,1) line(:,2) line(:,4) -line(:,3)], point);
+    point = line(:,1:2) + point .* normalizeVector([line(:,4) -line(:,3)]);
 end
 
 % normal case: compute line through a point with given direction

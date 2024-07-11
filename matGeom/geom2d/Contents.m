@@ -56,6 +56,7 @@
 %   parallelLine             - Create a line parallel to another one.
 %   intersectLines           - Return all intersection points of N lines in 2D.
 %   lineAngle                - Computes angle between two straight lines.
+%   linePoint                - Coordinates of a point on a line from its position.
 %   linePosition             - Position of a point on a line.
 %   clipLine                 - Clip a line with a box.
 %   reverseLine              - Return same line but with opposite orientation.
@@ -71,6 +72,7 @@
 %   parallelEdge             - Edge parallel to another edge.
 %   centeredEdgeToEdge       - Convert a centered edge to a two-points edge.
 %   midPoint                 - Middle point of two points or of an edge.
+%   edgePoint                - Extract a point from an edge.
 %   edgePosition             - Return position of a point on an edge.
 %   clipEdge                 - Clip an edge with a rectangular box.
 %   reverseEdge              - Intervert the source and target vertices of edge.
@@ -93,8 +95,6 @@
 %   distancePointEdge        - Minimum distance between a point and an edge.
 %   distancePointLine        - Minimum distance between a point and a line.
 %   projPointOnLine          - Project a point orthogonally onto a line.
-%   pointOnLine              - Create a point on a line at a given position on the line.
-%   edgePoint                - Extract a point from an edge.
 %   isPointOnLine            - Test if a point belongs to a line.
 %   isPointOnEdge            - Test if a point belongs to an edge.
 %   isPointOnRay             - Test if a point belongs to a ray.
@@ -205,5 +205,8 @@
 % E-mail: david.legland@inrae.fr
 % Created: 2005-11-07
 % Copyright 2005-2024 INRA - Cepia Software Platform
+
+% deprecated
+%   pointOnLine              - Create a point on a line at a given position on the line.
 
 help(mfilename);
