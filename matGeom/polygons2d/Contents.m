@@ -49,7 +49,7 @@
 %
 %
 % Polylines
-%   polylinePoint             - Extract a point from a polyline.
+%   polylinePoint             - Extract a point from a 2D or 3D polyline.
 %   polylineLength            - Return length of a polyline given as a list of points.
 %   polylineCentroid          - Computes the centroid of a curve defined by a series of points.
 %   polylineSubcurve          - Extract a portion of a polyline.
@@ -88,7 +88,7 @@
 %   intersectEdgePolygon      - Intersection point of an edge with a polygon.
 %   polygonSelfIntersections  - Find self-intersection points of a polygon.
 %   clipPolygon               - Clip a polygon with a rectangular box.
-%   clipPolygonByLine         - Clip a polygon with a directed line.
+%   clipPolygonByLine         - Clip a polygon by a directed line.
 %
 % Point Sets
 %   pointSetsAverage          - Compute the average of several point sets.

@@ -79,7 +79,7 @@
 %   transformEdge            - Transform an edge with an affine transform.
 %   edgeToLine               - Convert an edge to a straight line.
 %   edgeToPolyline           - Convert an edge to a polyline with a given number of segments.
-%   drawEdge                 - Draw an edge given by 2 points.
+%   drawEdge                 - Draw an edge defined by its two extremities.
 %   drawCenteredEdge         - Draw an edge centered on a point.
 %
 % Rays
@@ -94,6 +94,7 @@
 %   distancePointLine        - Minimum distance between a point and a line.
 %   projPointOnLine          - Project a point orthogonally onto a line.
 %   pointOnLine              - Create a point on a line at a given position on the line.
+%   edgePoint                - Extract a point from an edge.
 %   isPointOnLine            - Test if a point belongs to a line.
 %   isPointOnEdge            - Test if a point belongs to an edge.
 %   isPointOnRay             - Test if a point belongs to a ray.
@@ -184,6 +185,7 @@
 %   drawVector               - Draw vector at a given position.
 %   drawArrow                - Draw an arrow on the current axis.
 %   drawLabels               - Draw labels at specified positions.
+%   drawGrid                 - Draw a grid defined by vertex positions along each axis.
 %   drawShape                - Draw various types of shapes (circles, polygons...).
 %
 % Other shapes

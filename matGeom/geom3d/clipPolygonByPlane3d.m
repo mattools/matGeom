@@ -1,5 +1,5 @@
 function poly2 = clipPolygonByPlane3d(poly, plane, varargin)
-%CLIPPOLYGONBYPLANE3D clip a 3d polygon by a plane.
+%CLIPPOLYGONBYPLANE3D Clip a 3D polygon with a plane.
 %
 %   POLY2 = clipPolygonByPlane3d(POLY, PLANE)
 %   The 3d polygon POLY is clipped by the PLANE. The result POLY2:
@@ -101,3 +101,4 @@ if size(poly2, 1) - size(unique(poly2, 'rows'), 1) == 1 && ...
 end
 
 end
+

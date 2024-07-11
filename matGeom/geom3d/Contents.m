@@ -112,7 +112,7 @@
 %   intersectThreePlanes        - Return intersection point between 3 planes in space.
 %   intersectLinePlane          - Intersection point between a 3D line and a plane.
 %   intersectEdgePlane          - Return intersection point between a plane and a edge.
-%   distancePointPlane          - Signed distance betwen 3D point and plane.
+%   distancePointPlane          - Signed distance between 3D point and plane.
 %   projLineOnPlane             - Return the orthogonal projection of a line on a plane.
 %   isBelowPlane                - Test whether a point is below or above a plane.
 %   medianPlane                 - Create a plane in the middle of 2 points.
@@ -128,6 +128,7 @@
 %   polygonCentroid3d           - Centroid (or center of mass) of a polygon.
 %   polygonArea3d               - Area of a 3D polygon.
 %   polygon3dNormalAngle        - Normal angle at a vertex of the 3D polygon.
+%   projPointOnPolyline3d       - Compute position of a 3D point projected on a 3D polyline.
 %   intersectEdgePolygon3d      - Intersection point of a 3D edge segment and a 3D polygon.
 %   intersectLinePolygon3d      - Intersection point of a 3D line and a 3D polygon.
 %   intersectRayPolygon3d       - Intersection point of a 3D ray and a 3D polygon.
@@ -203,6 +204,8 @@
 % Geometric transforms
 %   transforms3d                - Conventions for manipulating 3D affine transforms.
 %   fitAffineTransform3d        - Compute the affine transform that best register two 3D point sets.
+%   registerPoints3d            - Computes a rigid transform between two 3D point sets.
+%   registerPoints3d_icp        - Computes rigid transform between two 3D point sets.
 %   registerPoints3dAffine      - Fit 3D affine transform using iterative algorithm.
 %   createTranslation3d         - Create the 4x4 matrix of a 3D translation.
 %   createScaling3d             - Create the 4x4 matrix of a 3D scaling.
@@ -229,7 +232,7 @@
 %   drawCuboid                  - Draw a 3D cuboid, eventually rotated.
 %   drawPlatform                - Draw a rectangular platform with a given size.
 %   drawLabels3d                - Draw text labels at specified 3D positions.
-%   drawArrow3d                 - plot a quiver of 3D arrows.
+%   drawArrow3d                 - Plot a quiver of 3D arrows.
 %   drawAngleBetweenVectors3d   - Draw an arc between 2 vectors.
 %
 %
@@ -249,4 +252,4 @@
 help(mfilename);
 
 % In development:
-%   drawPartialPatch            - draw surface patch, with 2 parametrized surfaces.
+%   drawPartialPatch            - Draw surface patch, with 2 parametrized surfaces.

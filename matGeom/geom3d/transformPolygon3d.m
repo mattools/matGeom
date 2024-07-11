@@ -1,7 +1,7 @@
 function tfmPoly = transformPolygon3d(poly, tfm)
-%TRANSFORMPOINT3D Transform a polygon with a 3D affine transform.
+%TRANSFORMPOLYGON3D Transform a polygon with a 3D affine transform.
 %
-%   TFMPOLY = transformPoint3d(POLY, TFM);
+%   TFMPOLY = transformPolygon3d(POLY, TFM);
 %   returns the polygon TFMPOLY by transforming POLY according to the
 %   affine transform specified by TFM. POLY can be either 2D or 3D. If POLY
 %   is 2D, zeros are added as third dimension, before the transformation is

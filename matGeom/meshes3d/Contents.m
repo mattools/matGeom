@@ -32,6 +32,7 @@
 %   smoothMesh                  - Smooth mesh by replacing each vertex by the average of its neighbors.
 %   subdivideMesh               - Subdivides each face of the mesh.
 %   meshVertexClustering        - Simplifies a mesh using vertex clustering.
+%   triangulateMesh             - Convert a non-triangle mesh into a triangle mesh.
 %   triangulateFaces            - Convert face array to an array of triangular faces.
 %   transformMesh               - Applies a 3D affine transform to a mesh.
 %   mergeCoplanarFaces          - Merge coplanar faces of a polyhedral mesh.
@@ -43,11 +44,12 @@
 %   averageMesh                 - Compute average mesh from a list of meshes.
 %   meshSilhouette              - Compute the 2D outline of a 3D mesh on an arbitrary plane.
 %   meshVoronoiDiagram          - Voronoi Diagram on the surface of a polygonal mesh.
+%   meshVertexRing              - Compute the ring around the vertex of a mesh.
 %
 % Intersections and clipping
 %   intersectLineMesh3d         - Intersection points of a 3D line with a mesh.
 %   intersectEdgeMesh3d         - Intersection points of a 3D edge with a mesh.
-%   intersectPlaneMesh          - Compute the polygons resulting from plane-mesh intersection.
+%   intersectPlaneMesh          - Compute the polylines resulting from plane-mesh intersection.
 %   polyhedronSlice             - Intersect a convex polyhedron with a plane.
 %   clipMeshByPlane             - Clip a mesh by a plane.
 %   clipMeshVertices            - Clip vertices of a surfacic mesh and remove outer faces.
