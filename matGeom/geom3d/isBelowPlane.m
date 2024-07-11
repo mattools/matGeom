@@ -23,7 +23,7 @@ function below = isBelowPlane(point, varargin)
 % Created: 2007-01-05
 % Copyright 2007-2024 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas
 
-if length(varargin)==1
+if isscalar(varargin)
     plane = varargin{1};
 elseif length(varargin)==2
     plane = createPlane(varargin{1}, varargin{2});
@@ -39,4 +39,4 @@ end
     
 % compute position of point projected on 3D line corresponding to plane
 % normal, and returns true for points located below the plane (pos<=0).
-below = linePosition3d(point, [plane(:, 1:3) planeNormal(plane)]) <= 0;
+below = line3dPosition(point, [plane(:, 1:3) planeNormal(plane)]) <= 0;

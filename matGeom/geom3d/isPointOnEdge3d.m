@@ -87,7 +87,7 @@ line = edgeToLine3d(edge);
 onLine = isPointOnLine3d(point, line, tol);
 
 % check if position is within the [0 1] bounds
-pos = linePosition3d(point, line);
+pos = line3dPosition(point, line);
 withinBounds = pos > -tol & pos < 1+tol;
 
 b = onLine & withinBounds;

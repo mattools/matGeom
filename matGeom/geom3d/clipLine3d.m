@@ -68,7 +68,7 @@ for i = 1:nLines
     points  = [ipX0;ipX1;ipY0;ipY1;ipZ0;ipZ1];
 
     % compute position of each point on the line
-    pos     = linePosition3d(points, line(i,:));
+    pos     = line3dPosition(points, line(i,:));
 
     % keep only defined points
     ind     = find(~isnan(pos));

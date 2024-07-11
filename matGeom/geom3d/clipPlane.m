@@ -94,8 +94,8 @@ d1 = plane(:, [1:3 4:6]);
 d2 = plane(:, [1:3 7:9]);
 
 % position of intersection points in plane coordinates
-u1 = linePosition3d(points, d1);
-u2 = linePosition3d(points, d2);
+u1 = line3dPosition(points, d1);
+u2 = line3dPosition(points, d2);
 
 % reorder vertices in the correct order
 inds = convhull(u1, u2);

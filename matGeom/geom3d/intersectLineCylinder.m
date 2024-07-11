@@ -151,7 +151,7 @@ end
 axis = [c1 dc];
 
 % compute position on axis
-ts = linePosition3d(points, axis);
+ts = line3dPosition(points, axis);
 
 % check bounds for open cylinder
 % (keep only intersection points whose projection is between the two

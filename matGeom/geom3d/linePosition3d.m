@@ -1,6 +1,8 @@
 function pos = linePosition3d(point, line)
 %LINEPOSITION3D Return the position of a 3D point projected on a 3D line.
 %
+%   Note: deprecated, replaced by 'line3dPosition'
+%
 %   T = linePosition3d(POINT, LINE)
 %   Computes position of point POINT on the line LINE, relative to origin
 %   point and direction vector of the line.
@@ -26,6 +28,10 @@ function pos = linePosition3d(point, line)
 % E-mail: david.legland@inrae.fr
 % Created: 2005-02-17
 % Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
+
+% deprecation warning
+warning('geom3d:deprecated', ...
+    '''linePosition3d'' is deprecated, use ''line3dPosition'' instead');
 
 % size of input arguments
 np = size(point, 1);

@@ -29,7 +29,7 @@ vl = edge(:, 4:6) - edge(:, 1:3);
 
 % compute position of points projected on the supporting line
 % (Size of t is the max number of edges or points)
-t = linePosition3d(point, [edge(:,1:3) vl]);
+t = line3dPosition(point, [edge(:,1:3) vl]);
 
 % change position to ensure projected point is located on the edge
 t(t < 0) = 0;

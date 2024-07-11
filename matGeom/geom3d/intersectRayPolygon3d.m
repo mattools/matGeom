@@ -56,7 +56,7 @@ pInt2d  = planePosition(projPointOnPlane(inter, plane), plane);
 
 % need to check polygon orientation
 inPoly  = xor(isPointInPolygon(pInt2d, pts2d), polygonArea(pts2d) < 0);
-onRay   = linePosition3d(inter, ray) >= 0;
+onRay   = line3dPosition(inter, ray) >= 0;
 inside  = inPoly & onRay;
 
 % intersection points outside the polygon are set to NaN
