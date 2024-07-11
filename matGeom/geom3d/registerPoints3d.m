@@ -45,7 +45,7 @@ function [tfm, pts, varargout] = registerPoints3d(source, target, varargin)
 %     inv(TFM)-tfm
 %   
 %   See also 
-%   transforms3d
+%   transforms3d, registerPoints3d_icp, registerPoints3d_affine
 
 % ------
 % Author: oqilipo
@@ -67,7 +67,7 @@ algorithm = parser.Results.algorithm;
 
 switch algorithm
     case 'affine'
-        [tfm, pts] = registerPoints3dAffine(source, target, varargin{:});
+        [tfm, pts] = registerPoints3d_affine(source, target, varargin{:});
     case 'icp'
         [tfm, pts, err, tm] = registerPoints3d_icp(source, target, varargin{:});
         varargout{1} = err;

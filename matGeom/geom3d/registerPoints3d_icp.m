@@ -39,7 +39,7 @@ function [transfo, pt, ER, t] = registerPoints3d_icp(p, q, varargin)
 %   registerPoints3d_icp
 %
 %   See also 
-%     transforms3d, registerPoints3dAffine, pcregistericp
+%     transforms3d, registerPoints3d_affine, registerICP, pcregistericp
 %
 % Rewritten from the "icp" function, by Martin Kjer and Jakob Wilm,
 % Technical University of Denmark, 2012.
