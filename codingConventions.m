@@ -14,7 +14,7 @@
 %
 %   Name of functions
 %
-%   Java convention for file names must be used:
+%   CamelCase convention for file names must be used:
 %   * Each function name must be written in lower case, using english
 %       denomination.
 %   * For compound function names, the first letter of each component after
@@ -33,20 +33,24 @@
 %       development, but new functions will try to conform to it.
 %   * Conversion functions use 'To' between radicals. Ex:
 %       ellipseToPolygon, edgeToLine, circleArcToPolyline...
+%   * Some functions use a underscore to help identify between different
+%       algorithms or formats: 'readMesh_ply', 'readMesh_off'...
 %
 %   Function header
 %
 %   * First line of documentation must contain the name of the function,
-%   followed by a short description. Name and function may be separated by
-%   colon. Name must be capitalized, without punctuation before
+%   followed by a short description, and terminated by a dot. The name of
+%   the function must be capitalized, without punctuation before the
 %   description (to remain valid with matlab documentation tools). 
-%   Ex:'SLICER interactive visualization of 3D images'
+%   Ex: 
+%   '%DISTANCEPOINTLINE Minimum distance between a point and a line.'
 %
 %   * Main part of header describes usage of function/script with various
-%   parameters. Function name should be the real name. Variable names
-%   should be capitalized. This does not follow MATLAB's standard, but
-%   allows to copy-paste pieces of code.
-%   Ex: 'RES = myBasicFunction(PARAM1, PARAM2, OPTION);'
+%   parameters. Function name should be the real name. Variable names may
+%   be capitalized. This does not follow MATLAB's standard, but allows to
+%   copy-paste code snippets. 
+%   Ex:
+%     'RES = myBasicFunction(PARAM1, PARAM2, OPTION);'
 %
 %   * The description of each calling syntax should be written using
 %   conjugated verbs.
@@ -54,7 +58,7 @@
 %   * The end of header should contain the name of the author, e-mail of  
 %   the author, date of creation, MATLAB version used for creation, year 
 %   of copyright, and affiliation. See below for the exact format. See also 
-%   the function checkHeader.m
+%   the function checkHeader.m (in 'checks' directory).
 %
 %   Function code
 %
