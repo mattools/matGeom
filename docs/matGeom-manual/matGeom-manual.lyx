@@ -2065,7 +2065,19 @@ clipPoints
 
 \end_inset
 
- 
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+clipping!points
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2075,6 +2087,18 @@ Clips a set of points by a box.
 \begin_layout Minisec
 centroid
 \begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+centroid
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
 range none
 pageformat default
 status collapsed
@@ -2768,7 +2792,19 @@ fitLine
 
 \end_inset
 
- 
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+fitting!line
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2905,6 +2941,26 @@ angle!line
 
 \begin_layout Standard
 Computes angle between two straight lines.
+\end_layout
+
+\begin_layout Minisec
+linePoint
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+linePoint
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Creates a point at a given position on a line.
 \end_layout
 
 \begin_layout Minisec
@@ -3200,7 +3256,29 @@ midPoint
 \end_layout
 
 \begin_layout Standard
-Middle point of two points or of an edge.
+Computes the middle point of two points,
+ or the middle point of an edge,
+ depending on size of input argument(s).
+\end_layout
+
+\begin_layout Minisec
+edgePoint
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+edgePoint
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Creates a point at a given position on an edge.
 \end_layout
 
 \begin_layout Minisec
@@ -3617,7 +3695,7 @@ distancePointLine
 \begin_inset Index gen
 range none
 pageformat default
-status open
+status collapsed
 
 \begin_layout Plain Layout
 distance!point to line
@@ -3645,31 +3723,23 @@ projPointOnLine
 
 \end_inset
 
- 
-\end_layout
 
-\begin_layout Standard
-Projects of a point orthogonally onto a line.
-\end_layout
-
-\begin_layout Minisec
-pointOnLine
-\begin_inset Index idx
+\begin_inset Index gen
 range none
 pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-pointOnLine
+projection!on line
 \end_layout
 
 \end_inset
 
- 
+
 \end_layout
 
 \begin_layout Standard
-Creates a point on a line at a given position on the line.
+Projects of a point orthogonally onto a line.
 \end_layout
 
 \begin_layout Minisec
@@ -3760,6 +3830,18 @@ Angles
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Angles"
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+angle
+\end_layout
 
 \end_inset
 
@@ -4474,6 +4556,18 @@ fitEllipse
 \end_inset
 
 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+fitting!ellipse
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4607,6 +4701,18 @@ status collapsed
 
 \begin_layout Plain Layout
 projPointOnEllipse
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+projection!on ellipse
 \end_layout
 
 \end_inset
@@ -5232,6 +5338,32 @@ Other Curves
 
 \begin_layout Subsection
 Splines
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+spline
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6504,15 +6636,28 @@ registerICP
 \end_inset
 
  
-\end_layout
-
-\begin_layout Standard
 \begin_inset CommandInset label
 LatexCommand label
 name "fun:registerICP"
 
 \end_inset
 
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+registration
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Fits an affine transform between two point sets by using Iterative Closest Point (ICP) algorithm 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -7688,7 +7833,7 @@ polylineCentroid
 \begin_inset Index gen
 range none
 pageformat default
-status open
+status collapsed
 
 \begin_layout Plain Layout
 centroid!polyline
@@ -8251,7 +8396,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Intersection points between a line and a polygon.
+Intersection points between a line and a polygon + clipping of a polygon.
 \end_layout
 
 \end_inset
@@ -8487,6 +8632,18 @@ projPointOnPolyline
 \end_inset
 
 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+projection!on polyline
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -8502,6 +8659,18 @@ status collapsed
 
 \begin_layout Plain Layout
 projPointOnPolygon
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+projection!on polygon
 \end_layout
 
 \end_inset
@@ -8955,6 +9124,18 @@ status collapsed
 
 \begin_layout Plain Layout
 triangulatePolygon
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+triangulation!polygon
 \end_layout
 
 \end_inset
@@ -10954,6 +11135,30 @@ grPropagateDistance
 \end_inset
 
 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+distance!geodesic
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+geodesic!distance
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -12458,6 +12663,18 @@ distancePoints3d
 \end_inset
 
 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+distance!points 3D
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -12477,7 +12694,19 @@ clipPoints3d
 
 \end_inset
 
- 
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+clipping!points (3D)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -12618,14 +12847,14 @@ vectorAngle3d
 
 \end_inset
 
- 
+
 \begin_inset Index gen
 range none
 pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-angle
+angle!vectors (3D)
 \end_layout
 
 \end_inset
@@ -13105,7 +13334,7 @@ fitLine3d
 \begin_inset Index gen
 range none
 pageformat default
-status open
+status collapsed
 
 \begin_layout Plain Layout
 fitting!line 3D
@@ -13216,7 +13445,7 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-distance!point to line
+distance!point to line (3D)
 \end_layout
 
 \end_inset
@@ -13262,6 +13491,18 @@ projPointOnLine3d
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+projection!on line (3D)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -13289,14 +13530,34 @@ Minimum distance between a 3D point and a 3D edge.
 \end_layout
 
 \begin_layout Minisec
-linePosition3d
+line3dPoint
 \begin_inset Index idx
 range none
 pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-linePosition3d
+line3dPoint
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Creates a 3D point at a given position on a 3D line.
+\end_layout
+
+\begin_layout Minisec
+line3dPosition
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+line3dPosition
 \end_layout
 
 \end_inset
@@ -13313,7 +13574,7 @@ Clipping and conversion
 \end_layout
 
 \begin_layout Standard
-This functions compute the intersection of a linear geometry with a 3D bounding box.
+These functions compute the intersection of a linear geometry with a 3D bounding box.
 \end_layout
 
 \begin_layout Minisec
@@ -13329,7 +13590,19 @@ clipLine3d
 
 \end_inset
 
- 
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+clipping!line (3D)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -13437,7 +13710,9 @@ midPoint3d
 \end_layout
 
 \begin_layout Standard
-Middle point of two 3D points or of a 3D edge.
+Computes the middle point of two 3D points,
+ or of a 3D edge,
+ depending on size of input argument(s).
 \end_layout
 
 \begin_layout Subsection
@@ -13922,6 +14197,18 @@ projPointOnPlane
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+projection!on plane
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -14299,6 +14586,52 @@ transformPolygon3d
 Transform a polygon with a 3D affine transform.
 \end_layout
 
+\begin_layout Minisec
+projPointOnPolyline3d
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+projPointOnPolyline3d
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+projection!on polyline 3D
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes the position of a 3D point projected on a 3D polyline.
+\end_layout
+
 \begin_layout Subsection
 Measurements
 \end_layout
@@ -14316,14 +14649,14 @@ polygonCentroid3d
 
 \end_inset
 
- 
+
 \begin_inset Index gen
 range none
 pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-centroid!polygon 3D
+centroid!polygon (3D)
 \end_layout
 
 \end_inset
@@ -14384,7 +14717,7 @@ polygon3dNormalAngle
 \end_layout
 
 \begin_layout Standard
-Normal angle at a vertex of the 3D polygon.
+Computes the normal angle at a vertex of the 3D polygon.
 \end_layout
 
 \begin_layout Minisec
@@ -14404,7 +14737,7 @@ isPolygon3d
 \end_layout
 
 \begin_layout Standard
-Check if the input is a 3D polygon.
+Checks if the input is a 3D polygon.
 \end_layout
 
 \begin_layout Standard
@@ -14826,6 +15159,13 @@ drawCircleArc3d
 
 \begin_layout Standard
 Draws a 3D circle arc.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -15818,7 +16158,7 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-angle
+angle!3D
 \end_layout
 
 \end_inset
@@ -16104,10 +16444,10 @@ anglePoints3d
 \begin_inset Index gen
 range none
 pageformat default
-status open
+status collapsed
 
 \begin_layout Plain Layout
-angle!3D
+angle!three points (3D)
 \end_layout
 
 \end_inset
@@ -16390,14 +16730,14 @@ createRotationOx
 
 \end_inset
 
- 
+
 \begin_inset Index gen
 range none
 pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-rotation!(3D)
+rotation!rotation 3D
 \end_layout
 
 \end_inset
@@ -16671,7 +17011,7 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-angle!Euler
+angle!Euler angles
 \end_layout
 
 \end_inset
@@ -16926,12 +17266,7 @@ Determines axis and angle of a 3D rotation matrix.
 \end_layout
 
 \begin_layout Subsubsection
-Other transform conversion functions
-\end_layout
-
-\begin_layout Standard
-Several functions are provided to convert between the different 3D rotations representations.
- 
+Other 3D rotations
 \end_layout
 
 \begin_layout Minisec
@@ -16988,7 +17323,7 @@ createRotationVector3d
 \end_layout
 
 \begin_layout Standard
-Calculates the rotation between two vectors.
+Computes the transform matrix corresponding to the rotation between two vectors.
 \end_layout
 
 \begin_layout Minisec
@@ -17008,7 +17343,8 @@ createRotationVectorPoint3d
 \end_layout
 
 \begin_layout Standard
-Calculates the rotation between two vectors.
+Computes the transform matrix corresponding to the rotation between two vectors,
+ around a specified point.
 \end_layout
 
 \begin_layout Standard
@@ -17022,15 +17358,80 @@ Calculates the rotation between two vectors.
 3D registration
 \end_layout
 
+\begin_layout Standard
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+registration
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Minisec
-registerPoints3d_icp
+registerPoints3d
 \begin_inset Index idx
 range none
 pageformat default
 status collapsed
 
 \begin_layout Plain Layout
+registerPoints3d
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes the transformation matrix that will match one 3D point set onto another one.
+ Two different algorithms can be chosen:
+ 
+\begin_inset Quotes eld
+\end_inset
+
 icp
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+affine
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Minisec
+registerPoints3d_icp
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+Iterated Closest Point
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+registerPoints3d_icp
 \end_layout
 
 \end_inset
@@ -17176,14 +17577,14 @@ Example of 3D rigid registration using ICP algorithm.
 \end_layout
 
 \begin_layout Minisec
-registerPoints3dAffine
+registerPoints3d_affine
 \begin_inset Index idx
 range none
 pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-registerPoints3dAffine
+registerPoints3d_affine
 \end_layout
 
 \end_inset
@@ -17193,6 +17594,29 @@ registerPoints3dAffine
 
 \begin_layout Standard
 Fits a 3D affine transform betwen two point sets using iterative algorithm.
+ Syntax is similar to that of registerPoints3d_icp,
+ but provides less optional arguments:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+transfo = registerPoints3d_affine(srcPts,
+ tgtPts,
+ nIters);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -17241,13 +17665,6 @@ composeTransforms3d
 
 \begin_layout Standard
 Concatenates several space transformations.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
@@ -19947,6 +20364,18 @@ meshVertexClustering
 \end_inset
 
 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+simplification!mesh
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -20136,6 +20565,18 @@ status collapsed
 
 \begin_layout Plain Layout
 triangulateMesh
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+triangulation!mesh
 \end_layout
 
 \end_inset
@@ -20380,6 +20821,12 @@ intersectLineMesh3d
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "intersectLineMesh3d"
+
+\end_inset
+
 Intersection points of a 3D line with a mesh (Fig.
 \begin_inset space ~
 \end_inset
@@ -21237,6 +21684,53 @@ Several functions allows to measure 3D intrinsic volumes,
 \end_layout
 
 \begin_layout Minisec
+meshCentroid
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+meshCentroid
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+centroid!mesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes the centroid of the input mesh.
+ The mesh is not necessarily convex.
+\end_layout
+
+\begin_layout Minisec
 polyhedronCentroid
 \begin_inset Index idx
 range none
@@ -21614,7 +22108,7 @@ polyhedronNormalAngle
 
 \end_inset
 
- 
+
 \begin_inset Index gen
 range none
 pageformat default
@@ -21631,13 +22125,6 @@ angle!mesh vertex
 
 \begin_layout Standard
 Computes the normal angle at a vertex of a 3D polyhedron.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -21681,14 +22168,14 @@ distancePointMesh
 
 \end_inset
 
- 
+
 \begin_inset Index gen
 range none
 pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-distance!mesh
+distance!point to mesh
 \end_layout
 
 \end_inset
@@ -22415,6 +22902,13 @@ readMesh_obj
 
 \begin_layout Standard
 Read mesh data stored in OBJ format.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
