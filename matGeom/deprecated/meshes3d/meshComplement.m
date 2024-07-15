@@ -1,6 +1,8 @@
 function varargout = meshComplement(varargin)
 %MESHCOMPLEMENT Reverse the normal of each face in the mesh.
 %
+%   Note: deprecated, use reverseMeshFaceOrientation instead.
+%
 %   [V2, F2] = meshComplement(V, F)
 %
 %   Example
@@ -21,6 +23,10 @@ function varargout = meshComplement(varargin)
 % E-mail: david.legland@inrae.fr
 % Created: 2020-01-22, using Matlab 9.7.0.1247435 (R2019b) Update 2
 % Copyright 2020-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+
+warning('matgeom:meshes3d:deprecated', ...
+    'meshComplement is deprecated, use reverseMeshFaceOrientation instead');
+
 
 % extract mesh data
 mesh = parseMeshData(varargin{:});
