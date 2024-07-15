@@ -3,6 +3,10 @@ function ring = meshVertexRing(vertices, faces, indV)
 %
 %   INDS = meshVertexRing(MESH, INDV)
 %   INDS = meshVertexRing(V, F, INDV)
+%   Computes the ring around the vertex of a mesh, i.e. the indices of the
+%   vertex that are connected to that vertex. For regular vertices, the
+%   vertex ring forms either a loop or an open polyline (for vertices
+%   located on the boundary of the mesh).   
 %
 %   Example
 %     mesh = subdivideMesh(createIcosahedron, 2);

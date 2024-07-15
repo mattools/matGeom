@@ -14,7 +14,23 @@ function [trans, points] = registerPoints3d_affine(points, target, varargin)
 %   Also returns the set of transformed points.
 %
 %   Example
-%     registerPoints3d_affine
+%     % read 3D data points
+%     [v, ~] = readMesh('bunny_F5k.ply');
+%     % initialize an arbitrary affine transform
+%     rot = eulerAnglesToRotation3d([5 4 3]);
+%     tra = createTranslation3d([0.8 0.6 0.4]);
+%     sca1 = createScaling3d([0.97 1.02 0.99]);
+%     sca2 = createScaling3d([1.01 0.98 1.02]);
+%     transfo0 = tra * sca2 * rot * sca1;
+%     % compute transformed (target) points, adding some noise
+%     v2 = transformPoint3d(v, transfo0) + randn(size(v)) * 0.1;
+%     % try to retrieve the affine affine transform
+%     transfo = registerPoints3d_affine(v, v2);
+%     vt = transformPoint3d(v, transfo);
+%     % show results
+%     figure; hold on; axis equal; axis([-10 10 -6 8 -8 12]); view([20 20]);
+%     drawPoint3d(v, 'k.'); drawPoint3d(v2, 'b.'); drawPoint3d(vt, 'm.');
+%     legend({'Original', 'Target', 'Registered'}, 'Location', 'NorthEast');
 %
 %   See also 
 %     transforms3d, registerPoints3d_icp, fitAffineTransform3d

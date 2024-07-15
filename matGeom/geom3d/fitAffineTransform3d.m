@@ -20,7 +20,7 @@ function trans = fitAffineTransform3d(ref, src)
 %
 %   See also 
 %     transforms3d, transformPoint3d, transformVector3d,
-%     fitAffineTransform2d, registerPoints3dAffine
+%     fitAffineTransform2d, registerPoints3d_affine
 %
 
 % ------
