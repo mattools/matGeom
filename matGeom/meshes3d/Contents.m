@@ -40,7 +40,6 @@
 %   meshFaceCentroids           - Compute centroids of faces in a mesh.
 %   meshFaceNormals             - Compute normal vector of faces in a 3D mesh.
 %   meshVertexNormals           - Compute normals to a mesh vertices.
-%   meshComplement              - Reverse the normal of each face in the mesh.
 %   averageMesh                 - Compute average mesh from a list of meshes.
 %   meshSilhouette              - Compute the 2D outline of a 3D mesh on an arbitrary plane.
 %   meshVoronoiDiagram          - Voronoi Diagram on the surface of a polygonal mesh.
@@ -64,6 +63,7 @@
 %   meshFaceAreas               - Surface area of each face of a mesh.
 %   meshVolume                  - (Signed) volume of the space enclosed by a polygonal mesh.
 %   meshCentroid                - Compute the centroid of the input mesh.
+%   meshEquivalentEllipsoid     - Equivalent ellipsoid with same moments as the given mesh.
 %   meshCurvatures              - Compute principal curvatures on mesh vertices.
 %   meshEdgeLength              - Lengths of edges of a polygonal or polyhedral mesh.
 %   meshDihedralAngles          - Dihedral at edges of a polyhedal mesh.
@@ -85,18 +85,21 @@
 %   meshFaceAdjacency           - Compute adjacency list of face around each face.
 %   meshAdjacencyMatrix         - Compute adjacency matrix of a mesh from set of faces.
 %   checkMeshAdjacentFaces      - Check if adjacent faces of a mesh have similar orientation.
+%   reverseMeshFaceOrientation  - Reverse the normal of each face in the mesh.
+%   smoothMeshFunction          - Apply smoothing on a functions defines on mesh vertices.
+%
+% Boundary edges and vertices
 %   meshBoundary                - Boundary of a mesh as a collection of 3D line strings.
 %   meshBoundaryEdges           - Determine the boundary edges of a mesh.
 %   meshBoundaryEdgeIndices     - Indices of boundary edges of a mesh.
 %   meshBoundaryVertexIndices   - Indices of boundary vertices of a mesh.
-%   smoothMeshFunction          - Apply smoothing on a functions defines on mesh vertices.
 %
 % Basic edition on meshes
 %   removeMeshVertices          - Remove vertices and associated faces from a mesh.
 %   mergeMeshVertices           - Merge two vertices and removes eventual degenerated faces.
 %   removeMeshFaces             - Remove faces from a mesh by face indices.
 %
-% Mesh cleanup
+% Mesh cleanup and repairing
 %   trimMesh                    - Reduce memory footprint of a polygonal mesh.
 %   isManifoldMesh              - Check whether the input mesh may be considered as manifold.
 %   ensureManifoldMesh          - Apply several simplification to obtain a manifold mesh.

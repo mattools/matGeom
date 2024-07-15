@@ -14,7 +14,7 @@ function centroid = meshCentroid(varargin)
 %         0.6496   -0.1670   -0.7924
 %
 %   See also
-%     centroid, meshVolume, meshSurfaceArea, boundingBox3d
+%     centroid, meshEquivalentEllipsoid, meshVolume, boundingBox3d
  
 % ------
 % Author: David Legland
