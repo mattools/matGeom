@@ -1257,8 +1257,8 @@ fillXXX
  They usually accept the geometry representation as first input argument,
  and optional arguments for specifying the drawing style.
  The axis object containing the display may also be specified as optional first argument,
- in a similar way to Matlab's drawing functions,
- and a handle to the created graphical object may be returned.
+ in a similar way to Matlab's drawing functions.
+ A handle to the resulting graphical object may be returned as output argument.
 \begin_inset listings
 inline false
 status open
@@ -1804,7 +1804,19 @@ distancePoints
 
 \end_inset
 
- 
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+distance!points
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2104,15 +2116,8 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-centroid
+centroid!points
 \end_layout
-
-\end_inset
-
-
-\begin_inset CommandInset label
-LatexCommand label
-name "fun:centroid"
 
 \end_inset
 
@@ -2120,7 +2125,13 @@ name "fun:centroid"
 \end_layout
 
 \begin_layout Standard
-Computes centroid (center of mass) of a set of points.
+\begin_inset CommandInset label
+LatexCommand label
+name "fun:centroid"
+
+\end_inset
+
+Computes the centroid (center of mass) of a set of points.
 \end_layout
 
 \begin_layout Minisec
@@ -2221,6 +2232,18 @@ minDistancePoints
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+distance!points
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2281,6 +2304,18 @@ nndist
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+nearest neighbor
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2361,7 +2396,7 @@ vectorAngle
 \begin_inset Index gen
 range none
 pageformat default
-status open
+status collapsed
 
 \begin_layout Plain Layout
 angle!vector
@@ -4611,7 +4646,19 @@ equivalentEllipse
 
 \end_inset
 
- 
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+moments!points
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -8039,6 +8086,18 @@ status collapsed
 
 \begin_layout Plain Layout
 polygonSecondAreaMoments
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+moments!polygon
 \end_layout
 
 \end_inset
@@ -12666,10 +12725,10 @@ distancePoints3d
 \begin_inset Index gen
 range none
 pageformat default
-status collapsed
+status open
 
 \begin_layout Plain Layout
-distance!points 3D
+distance!points (3D)
 \end_layout
 
 \end_inset
@@ -13997,6 +14056,18 @@ reversePlane
 \end_inset
 
 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+orientation!plane
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -14620,7 +14691,7 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-projection!on polyline 3D
+projection!on polyline (3D)
 \end_layout
 
 \end_inset
@@ -15242,6 +15313,12 @@ drawEllipse3d
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "fun:drawEllipse3d"
+
+\end_inset
+
 Draws a 3D ellipse.
 \end_layout
 
@@ -15578,6 +15655,18 @@ equivalentEllipsoid
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+moments!points (3D)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -15731,7 +15820,7 @@ oblateSurfaceArea
 \end_layout
 
 \begin_layout Standard
-Approximated surface area of an oblate ellipsoid,
+Computes the approximated surface area of an oblate ellipsoid,
  given its largest and smallest radiusses.
 \end_layout
 
@@ -15752,7 +15841,7 @@ prolateSurfaceArea
 \end_layout
 
 \begin_layout Standard
-Approximated surface area of a prolate ellipsoid,
+Computes the approximated surface area of a prolate ellipsoid,
  given its largest and smallest radiusses.
 \end_layout
 
@@ -15774,6 +15863,24 @@ drawEllipsoid
 
 \begin_layout Standard
 Draws a 3D ellipsoid.
+ It is possible to specify color or transparency of the ellipsoid surface.
+ The three orthogonal reference 3D ellipses can also be displayed.
+ See also the drawEllipse3d function (p.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand pageref
+reference "fun:drawEllipse3d"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Subsection
@@ -15907,7 +16014,28 @@ drawEllipseCylinder
 \end_layout
 
 \begin_layout Standard
-Draws a cylinder with ellipse cross-section.
+\begin_inset CommandInset label
+LatexCommand label
+name "fun:drawEllipseCylinder"
+
+\end_inset
+
+Draws a cylinder with an ellipse cross-section.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO:
+ Figure to display more sample surface (cylinder,
+ capsule,
+ dome,
+ torus...)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -17203,7 +17331,7 @@ rotation3dToEulerAngles
 
 \begin_layout Standard
 Extracts Euler angles from a rotation matrix.
- Computation are based on 
+ Computations are based on 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Slabaugh_1999"
@@ -17927,7 +18055,7 @@ Quick tour
 \begin_layout Standard
 The meshes3d module provides functions for the manipulation of 3D surface meshes,
  also known as polygonal meshes.
- The library support triangular meshes,
+ The library supports triangular meshes,
  quadrangular meshes,
  as well as meshes with arbitrary number of face vertices for some functions.
 \end_layout
@@ -17947,7 +18075,7 @@ placement document
 alignment document
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -18113,9 +18241,9 @@ Examples of mesh processing operations.
 
 \begin_layout Standard
 A large family of operations is provided,
- together with utlity functions for reading,
+ together with utility functions for reading,
  writing,
- displaying meshes.
+ visualizing meshes.
  An overview of mesh processing operations if provided on Figure
 \begin_inset space ~
 \end_inset
@@ -18135,7 +18263,7 @@ nolink "false"
 \end_layout
 
 \begin_layout Section
-Mesh representation
+Mesh data representation
 \end_layout
 
 \begin_layout Subsection
@@ -18147,8 +18275,8 @@ Geometric processing of 3D polygonal meshes requires to take into account both t
  the position of the vertices) and the topological information (i.e.
  the vertex and face adjacency).
  Moreover,
- mesh faces can be triangle,
- quadrilateral,
+ mesh faces can be triangles,
+ quadrilaterals,
  or more complex polygons.
  Hence,
  several abstract data types have been proposed to efficiently represent such data 
@@ -18162,7 +18290,22 @@ literal "false"
 .
  One of the simplest ones is the face-vertex data structure:
  a first array contains vertex coordinates,
- second array contains the indices of each face vertices.
+ second array contains the indices of each face vertices (Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand pageref
+reference "fig:Polygon-mesh-representation."
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -18611,6 +18754,12 @@ face
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Polygon-mesh-representation."
+
+\end_inset
+
 Polygon mesh representation.
 \end_layout
 
@@ -18720,7 +18869,7 @@ Add illustration of triangular mesh with vertex ring + boundary edges ;
 \end_layout
 
 \begin_layout Section
-Display functions
+Mesh visualization
 \end_layout
 
 \begin_layout Standard
@@ -20796,7 +20945,7 @@ Other mesh creation functions:
 \end_layout
 
 \begin_layout Section
-Mesh processing functions
+Mesh processing 
 \end_layout
 
 \begin_layout Standard
@@ -21742,6 +21891,54 @@ Generic operations
 \end_layout
 
 \begin_layout Minisec
+reverseMeshFaceOrientation
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+reverseMeshFaceOrientation
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+orientation!mesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Reverses the normal of each face within the mesh.
+ In case of boundary-free mesh,
+ the volume enclosed by the resulting mesh becomes the opposite of that of the original mesh.
+\end_layout
+
+\begin_layout Minisec
 averageMesh
 \begin_inset Index idx
 range none
@@ -22012,7 +22209,11 @@ Mesh topology
 \end_layout
 
 \begin_layout Standard
-Low level functions for investigating topology of meshes.
+Low level functions for investigating the topology of meshes.
+\end_layout
+
+\begin_layout Subsubsection
+Elements adjacency
 \end_layout
 
 \begin_layout Minisec
@@ -22033,7 +22234,7 @@ meshFace
 
 \begin_layout Standard
 Returns the vertex indices of a face in a mesh.
- Can be used to work on meshes with triangular or polygonal faces in a more unified way.
+ Can be used to work on meshes with triangular or polygonal faces in a more consistent way.
 \end_layout
 
 \begin_layout Minisec
@@ -22197,14 +22398,37 @@ Checks if adjacent faces of a mesh have similar orientation.
 \end_layout
 
 \begin_layout Minisec
-meshBoundaryEdges
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
 
 \begin_layout Plain Layout
-meshBoundaryEdges
+\align center
+\begin_inset Graphics
+	filename images/meshes3d/def/mesh_boundary_vertexRing.png
+	width 50text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Boundary_VertexRing"
+
+\end_inset
+
+Topological information about a mesh.
+ Mesh boundary edges (thick blue).
+ Vertex Ring of the red vertex (thick red).
 \end_layout
 
 \end_inset
@@ -22212,24 +22436,9 @@ meshBoundaryEdges
 
 \end_layout
 
-\begin_layout Standard
-Determines the boundary edges of a mesh.
- Boundary edges are adjacent to only one face of the mesh (See Fig.
-\begin_inset space ~
 \end_inset
 
 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Boundary_VertexRing"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-).
 \end_layout
 
 \begin_layout Minisec
@@ -22285,42 +22494,87 @@ nolink "false"
  the vertex ring forms either a loop or an open polyline (for vertices located on the boundary of the mesh).
 \end_layout
 
+\begin_layout Subsubsection
+Mesh boundary
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+boundary!mesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
-\begin_inset Float figure
-placement document
-alignment document
-wide false
-sideways false
+The boundary of a mesh corresponds to the set of edges that are adjacent to only one face of the mesh (See Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Boundary_VertexRing"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
+ A mesh does not necessarily have a boundary (e.g.
+ all the meshes that completely enclose a bounded volume).
+\end_layout
+
+\begin_layout Minisec
+meshBoundaryEdges
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+meshBoundaryEdges
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Determines the boundary edges of a mesh.
+ Returns the results as a collection of 3D line strings.
+ Rewritten from function is_boundary_facet.m by Alec Jacobson
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
 status open
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename images/meshes3d/def/mesh_boundary_vertexRing.png
-	width 60text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Boundary_VertexRing"
-
-\end_inset
-
-Topological information about a mesh.
- Mesh boundary edges (thick blue).
- Vertex Ring of the red vertex (thick red).
+https://github.com/alecjacobson/gptoolbox
 \end_layout
 
 \end_inset
@@ -22328,26 +22582,87 @@ Topological information about a mesh.
 
 \end_layout
 
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Minisec
+meshBoundaryEdgeIndices
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
 \begin_layout Plain Layout
 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+meshBoundaryEdgeIndices
 \end_layout
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection
-Geometric measures
 \end_layout
 
 \begin_layout Standard
-Several functions allows to measure 3D intrinsic volumes,
- corresponding to volume,
- surface area,
- Euler number,
- or mean breadth (proportionnal to the integral of mean curvature along mesh).
- Some functions are dedicated to specific mesh types.
+Returns the indices of boundary edges of a mesh.
+\end_layout
+
+\begin_layout Minisec
+meshBoundaryVertexIndices
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+meshBoundaryVertexIndices
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Returns the indices of boundary vertices of a mesh.
+\end_layout
+
+\begin_layout Subsection
+Summary geometries
+\end_layout
+
+\begin_layout Standard
+It is often useful to consider a simpler shape that summarizes some of the features of the mesh.
+ Note that summary geometries may also be computed on the point set corresponding to mesh vertices.
 \end_layout
 
 \begin_layout Minisec
@@ -22415,6 +22730,77 @@ polyhedronCentroid
 
 \begin_layout Standard
 Computes the centroid of a 3D convex polyhedron.
+\end_layout
+
+\begin_layout Minisec
+meshEquivalentEllipsoid
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+meshEquivalentEllipsoid
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+ellipsoid!of a mesh
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+moments!mesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Comptes the equivalent ellipsoid with same moments as the given mesh.
+\end_layout
+
+\begin_layout Subsection
+Geometric measures
+\end_layout
+
+\begin_layout Standard
+Several functions allows to measure 3D intrinsic volumes,
+ corresponding to volume,
+ surface area,
+ Euler number,
+ or mean breadth (proportionnal to the integral of mean curvature along mesh).
+ Some functions are dedicated to specific mesh types.
 \end_layout
 
 \begin_layout Minisec
@@ -22792,13 +23178,6 @@ angle!mesh vertex
 
 \begin_layout Standard
 Computes the normal angle at a vertex of a 3D polyhedron.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -24537,7 +24916,7 @@ name "sec:Unit-tests"
 \begin_layout Standard
 A large number of functions are covered by unit tests,
  using the testing framework provided by Matlab.
- Unit tests are located in the 
+ Unit tests are located within the 
 \begin_inset Quotes eld
 \end_inset
 
