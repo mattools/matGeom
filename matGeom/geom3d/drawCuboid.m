@@ -6,7 +6,7 @@ function varargout = drawCuboid(varargin)
 %   [XC YC ZC L W D YAW PITCH ROLL],
 %   where (XC, YC, ZC) is the cuboid center, L, W and H are the lengths of
 %   the cuboid main axes, and YAW PITCH ROLL are Euler angles representing
-%   the cuboid orientation, in degrees. 
+%   the cuboid orientation, in degrees (see file angles3d.m).
 %
 %   If cuboid is axis-aligned, it can be specified using only center and
 %   side lengths:
@@ -28,7 +28,7 @@ function varargout = drawCuboid(varargin)
 %     set(gcf, 'renderer', 'opengl')
 %
 %   See also 
-%     meshes3d, polyhedra, createCube, drawEllipsoid, drawCube
+%     angles3d, meshes3d, polyhedra, createCube, drawEllipsoid, drawCube
 %
 
 % ------

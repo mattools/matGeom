@@ -206,7 +206,7 @@
 %   fitAffineTransform3d        - Compute the affine transform that best register two 3D point sets.
 %   registerPoints3d            - Computes a rigid transform between two 3D point sets.
 %   registerPoints3d_icp        - Computes rigid transform between two 3D point sets.
-%   registerPoints3dAffine      - Fit 3D affine transform using iterative algorithm.
+%   registerPoints3d_affine      - Fit 3D affine transform using iterative algorithm.
 %   createTranslation3d         - Create the 4x4 matrix of a 3D translation.
 %   createScaling3d             - Create the 4x4 matrix of a 3D scaling.
 %   createRotationOx            - Create the 4x4 matrix of a 3D rotation around x-axis.
@@ -236,12 +236,13 @@
 %   drawAngleBetweenVectors3d   - Draw an arc between 2 vectors.
 %
 %
-%   Credits:
+%   Credits
 %   * Several functions contributed by Sven Holcombe
 %   * function isCoplanar was originally written by Brett Shoelson.
 %   * Songbai Ji enhanced file intersectPlaneLine (6/23/2006).
 %   * several functions contributed by oqilipo
-%
+%   * registerPoints3d_icp rewritten from the "icp" function, by Martin
+%       Kjer and Jakob Wilm.
 
 % ------
 % Author: David Legland

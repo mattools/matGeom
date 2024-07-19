@@ -6,7 +6,8 @@ function varargout = drawEllipsoid(varargin)
 %   [XC YC ZC A B C PHI THETA PSI],
 %   where (XC, YC, ZC) is the ellipsoid center, A, B and C are the half
 %   lengths of the ellipsoid main axes, and PHI THETA PSI are Euler angles
-%   representing ellipsoid orientation, in degrees.
+%   representing ellipsoid orientation, in degrees (type 'help angles3d'
+%   for more details).
 %
 %   drawEllipsoid(..., 'drawEllipses', true)
 %   Also displays the main 3D ellipses corresponding to XY, XZ and YZ
@@ -25,8 +26,8 @@ function varargout = drawEllipsoid(varargin)
 %     axis equal;
 %
 %   See also 
-%   spheres, drawSphere, equivalentEllipsoid, ellipsoid, drawTorus, 
-%   drawCuboid 
+%   spheres, equivalentEllipsoid, ellipsoid, angles3d
+%   drawSphere, drawCuboid, drawTorus, drawCylinder
 %
 
 % ------

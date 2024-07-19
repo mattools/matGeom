@@ -12,7 +12,8 @@ function varargout = drawCircle3d(varargin)
 %       (angle with Oz axis).
 %   * PHI between 0 and 360 degrees corresponding to the longitude (angle
 %       with Ox axis)
-%   
+%   See also the 'angles3d' file for more details.
+%
 %   drawCircle3d([XC YC ZC R THETA PHI PSI])
 %   drawCircle3d([XC YC ZC R], [THETA PHI PSI])
 %   drawCircle3d([XC YC ZC R], THETA, PHI)
@@ -46,7 +47,7 @@ function varargout = drawCircle3d(varargin)
 %     axis equal;
 %
 %   See also 
-%     circles3d, drawCircleArc3d, drawEllipse3d, drawSphere
+%     circles3d, drawCircleArc3d, drawEllipse3d, drawSphere, angles3d
 %
 
 % ------

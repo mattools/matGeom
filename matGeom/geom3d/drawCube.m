@@ -8,10 +8,10 @@ function varargout = drawCube(varargin)
 %   main sides, and THETA PHI PSI are angles representing the cube
 %   orientation, in degrees. THETA is the colatitude of the cube, between 0
 %   and 90 degrees, PHI is the azimut, and PSI is the rotation angle
-%   around the axis of the normal.
+%   around the axis of the normal (see file angles3d.m).
 %
-%   CUBE can be axis aligned, in this case it should only contain center
-%   and side information:
+%   CUBE can be axis-aligned (also called 'isothetic cube'). In this case
+%   it should only contain center and side information:
 %   CUBE = [XC YC ZC SIDE]
 %
 %   The function drawCuboid is closely related, but uses a different angle
@@ -25,7 +25,7 @@ function varargout = drawCube(varargin)
 %     view(3);
 %
 %   See also 
-%   meshes3d, polyhedra, createCube, drawCuboid
+%   angles3d, meshes3d, polyhedra, createCube, drawCuboid
 %
 
 % ------

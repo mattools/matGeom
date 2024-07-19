@@ -9,6 +9,7 @@ function circles3d(varargin)
 %   PSI is the proper rotation of the circle around the normal, between 0
 %       and 360 degrees
 %   The parameter PSI is used to locate a point on the 3D circle.
+%   See also the file angles3d.m.
 %
 %   See also 
 %   circle3dOrigin, circle3dPosition, circle3dPoint, intersectPlaneSphere
