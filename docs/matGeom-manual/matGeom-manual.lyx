@@ -15670,6 +15670,24 @@ circle!3D
 Circles in 3D are represented by a 1-by-7 row vector containing the coordinates of the centroid,
  the radius,
  and three Euler angles describing the orientation of the circle.
+ The three angles correspond to colatitude,
+ azimut,
+ and rotation around normal angle (see section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Orientation-3D-Shapes"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -15679,7 +15697,7 @@ status open
 
 \begin_layout Plain Layout
 
-circle = [x0 y0 z0 R PHI THETA PSI];
+circle = [x0 y0 z0 R THETA PHI PSI];
 \end_layout
 
 \end_inset
@@ -15877,13 +15895,31 @@ ellipse!3D
 Ellipses in 3D are represented by a 1-by-9 row vector containing the coordinates of the centroid,
  the length of the three semi-axes,
  and three Euler angles describing the orientation of the ellipse.
+ The three angles correspond to colatitude,
+ azimut,
+ and rotation around normal angle (see section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Orientation-3D-Shapes"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
 \begin_inset listings
 inline false
 status open
 
 \begin_layout Plain Layout
 
-elli = [x0 y0 z0  A B C  PHI THETA PSI];
+elli = [x0 y0 z0  A B C  THETA PHI PSI];
 \end_layout
 
 \end_inset
@@ -16298,11 +16334,7 @@ nolink "false"
 \end_inset
 
 ).
- Note that it 
-\series bold
-does not 
-\series default
-correspond to the inertia ellipsoid as defined from mechanical conventions.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -16479,7 +16511,33 @@ drawEllipsoid
 \begin_layout Standard
 Draws a 3D ellipsoid.
  It is possible to specify color or transparency of the ellipsoid surface.
- The three orthogonal reference 3D ellipses can also be displayed.
+ The three orthogonal reference 3D ellipses
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ellipse!3D
+\end_layout
+
+\end_inset
+
+ can also be displayed.
  See also the drawEllipse3d function (p.
 \begin_inset space ~
 \end_inset
@@ -16626,6 +16684,18 @@ drawEllipseCylinder
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+ellipse
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -16637,20 +16707,6 @@ name "fun:drawEllipseCylinder"
 
 Draws a cylinder with an ellipse cross-section.
  
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO:
- Figure to display more sample surface (cylinder,
- capsule,
- dome,
- torus...)
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -16659,22 +16715,6 @@ Other smooth surfaces
 
 \begin_layout Standard
 Other functions allow to create and draw more general surfaces.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO:
- Figure to display more sample surface (capsule,
- dome,
- torus...)
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -16688,9 +16728,25 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/demoRevolutionSurface_01.png
+	filename images/geom3d/torus.png
 	lyxscale 50
-	width 60text%
+	width 32text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/geom3d/capsule.png
+	lyxscale 50
+	width 32text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/geom3d/dome.png
+	lyxscale 50
+	width 32text%
 
 \end_inset
 
@@ -16703,11 +16759,11 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Revolution-Surface"
+name "fig:Smooth-Shapes-3D"
 
 \end_inset
 
-3D revolution surface
+3D representation of shapes with smooth boundary.
 \end_layout
 
 \end_inset
@@ -16718,6 +16774,128 @@ name "fig:Revolution-Surface"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Minisec
+drawTorus
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+drawTorus
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+torus
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Draws a torus (3D ring).
+ See Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Smooth-Shapes-3D"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Minisec
+drawCapsule
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+drawCapsule
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Draws a 3D capsule,
+ composed of a cylinder and two domes at the extremities.
+ See Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Smooth-Shapes-3D"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Minisec
+drawDome
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+drawDome
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Draws a 3D dome,
+ or half-sphere.
+ See Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Smooth-Shapes-3D"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Minisec
@@ -16734,6 +16912,18 @@ revolutionSurface
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+revolution surface
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -16789,80 +16979,6 @@ Curvature on a surface from angle and principal curvatures.
 \end_layout
 
 \begin_layout Minisec
-drawTorus
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-drawTorus
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Index gen
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-torus
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Draws a torus (3D ring).
-\end_layout
-
-\begin_layout Minisec
-drawCapsule
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-drawCapsule
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Draws a 3D capsule,
- composed of a cylinder and two domes at the extremities.
-\end_layout
-
-\begin_layout Minisec
-drawDome
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-drawDome
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Draws a 3D dome,
- or half-sphere.
-\end_layout
-
-\begin_layout Minisec
 drawSurfPatch
 \begin_inset Index idx
 range none
@@ -16881,6 +16997,49 @@ drawSurfPatch
 \begin_layout Standard
 Draws a 3D surface patch,
  with 2 parametrized surfaces.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/demoRevolutionSurface_01.png
+	lyxscale 50
+	width 60text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Revolution-Surface"
+
+\end_inset
+
+3D revolution surface
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -18044,21 +18203,6 @@ Several functions allow to display common geometric shapes.
 Polygonal shapes
 \end_layout
 
-\begin_layout Standard
-\begin_inset Index gen
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-cube
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Minisec
 drawCube
 \begin_inset Index idx
@@ -18073,6 +18217,18 @@ drawCube
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+cube
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
