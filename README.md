@@ -1,7 +1,7 @@
 # MatGeom
 MATLAB geometry processing library in 2D/3D.
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7799184.svg)](https://doi.org/10.5281/zenodo.7799184)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7799184.svg)](https://doi.org/10.5281/zenodo.5768192)
 
 **MatGeom** is a library for geometry processing / geometric computing with MATLAB in 2D and 3D. 
 MatGeom is a “function-based” library: it contains several hundreds of functions for the creation,
@@ -9,7 +9,7 @@ manipulation and display of 2D and 3D shapes such as point sets, lines, ellipses
 3D polygonal meshes, ...
 The official homepage for the project is http://github.com/mattools/matGeom. 
 
-A [user manual](https://github.com/mattools/matGeom/releases/download/v1.2.7/matGeom-manual-1.2.7.pdf) 
+A [user manual](https://github.com/mattools/matGeom/releases/download/v1.2.8/matGeom-manual-1.2.8.pdf) 
 containing a large number of illustrations and examples is available.
 Starting from February 2022, the HTML pages of the functions (obtained with m2html) are available 
 [here](https://mattools.github.io/matGeom/api/index.html).
@@ -23,7 +23,7 @@ facilitates the interoperability of the functions.
 
 If you use matGeom, you might cite it as follows:
 ```
-David Legland et al. (2024) "MatGeom library for geometric computing with MATLAB" DOI: 10.5281/zenodo.7799184
+David Legland et al. (2024) "MatGeom library for geometric computing with MATLAB" DOI: 10.5281/zenodo.5768192
 ```
 
 ## Package organization
