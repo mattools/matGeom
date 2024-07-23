@@ -10,7 +10,7 @@ It contains several hundreds of functions for the creation, the manipulation and
 The official homepage for the project is hosted on GitHub:
 http://github.com/mattools/matGeom.</param.description>
     <param.screenshot>D:\dlegland\dev\matlab\geometry\matGeom\dists\matgeom\matGeom-logo_w135.png</param.screenshot>
-    <param.version>1.2.7</param.version>
+    <param.version>1.2.8</param.version>
     <param.output>${PROJECT_ROOT}\MatGeom.mltbx</param.output>
     <param.products.name />
     <param.products.id />
@@ -169,6 +169,24 @@ docs/*</param.exclude.filters>
          &lt;file type="image"&gt;/demos/meshes3d/html/demoVoronoiCell_02.png&lt;/file&gt;
          &lt;file type="image"&gt;/demos/meshes3d/html/demoVoronoiCell_03.png&lt;/file&gt;
       &lt;/example&gt;
+      &lt;example name="demo_intersectPlaneMesh_bunny" type="html"&gt;
+         &lt;file type="source"&gt;/demos/meshes3d/html/demo_intersectPlaneMesh_bunny.html&lt;/file&gt;
+         &lt;file type="main"&gt;/demos/meshes3d/demo_intersectPlaneMesh_bunny.m&lt;/file&gt;
+         &lt;file type="thumbnail"&gt;/demos/meshes3d/html/demo_intersectPlaneMesh_bunny.png&lt;/file&gt;
+         &lt;file type="image"&gt;/demos/meshes3d/html/demo_intersectPlaneMesh_bunny_01.png&lt;/file&gt;
+         &lt;file type="image"&gt;/demos/meshes3d/html/demo_intersectPlaneMesh_bunny_02.png&lt;/file&gt;
+      &lt;/example&gt;
+      &lt;example name="demo_meshProcessing_bunny1k" type="html"&gt;
+         &lt;file type="source"&gt;/demos/meshes3d/html/demo_meshProcessing_bunny1k.html&lt;/file&gt;
+         &lt;file type="main"&gt;/demos/meshes3d/demo_meshProcessing_bunny1k.m&lt;/file&gt;
+         &lt;file type="thumbnail"&gt;/demos/meshes3d/html/demo_meshProcessing_bunny1k.png&lt;/file&gt;
+         &lt;file type="image"&gt;/demos/meshes3d/html/demo_meshProcessing_bunny1k_01.png&lt;/file&gt;
+         &lt;file type="image"&gt;/demos/meshes3d/html/demo_meshProcessing_bunny1k_02.png&lt;/file&gt;
+         &lt;file type="image"&gt;/demos/meshes3d/html/demo_meshProcessing_bunny1k_03.png&lt;/file&gt;
+         &lt;file type="image"&gt;/demos/meshes3d/html/demo_meshProcessing_bunny1k_04.png&lt;/file&gt;
+         &lt;file type="image"&gt;/demos/meshes3d/html/demo_meshProcessing_bunny1k_05.png&lt;/file&gt;
+         &lt;file type="image"&gt;/demos/meshes3d/html/demo_meshProcessing_bunny1k_06.png&lt;/file&gt;
+      &lt;/example&gt;
    &lt;/exampleCategory&gt;
    &lt;exampleCategory name="geom2d"&gt;
       &lt;example name="demo_ellipse_creation" type="html"&gt;
@@ -242,6 +260,14 @@ docs/*</param.exclude.filters>
          &lt;file type="thumbnail"&gt;/demos/geom3d/html/demoRevolutionSurface.png&lt;/file&gt;
          &lt;file type="image"&gt;/demos/geom3d/html/demoRevolutionSurface_01.png&lt;/file&gt;
          &lt;file type="image"&gt;/demos/geom3d/html/demoRevolutionSurface_02.png&lt;/file&gt;
+      &lt;/example&gt;
+      &lt;example name="demo_registerPoints3d_icp_bunny" type="html"&gt;
+         &lt;file type="source"&gt;/demos/geom3d/html/demo_registerPoints3d_icp_bunny.html&lt;/file&gt;
+         &lt;file type="main"&gt;/demos/geom3d/demo_registerPoints3d_icp_bunny.m&lt;/file&gt;
+         &lt;file type="thumbnail"&gt;/demos/geom3d/html/demo_registerPoints3d_icp_bunny.png&lt;/file&gt;
+         &lt;file type="image"&gt;/demos/geom3d/html/demo_registerPoints3d_icp_bunny_01.png&lt;/file&gt;
+         &lt;file type="image"&gt;/demos/geom3d/html/demo_registerPoints3d_icp_bunny_02.png&lt;/file&gt;
+         &lt;file type="image"&gt;/demos/geom3d/html/demo_registerPoints3d_icp_bunny_03.png&lt;/file&gt;
       &lt;/example&gt;
       &lt;example name="drawSoccerBall" type="html"&gt;
          &lt;file type="source"&gt;/demos/geom3d/html/drawSoccerBall.html&lt;/file&gt;
@@ -359,7 +385,7 @@ docs/*</param.exclude.filters>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2023b</root>
+      <root>C:\Program Files\MATLAB\R2024a</root>
       <toolboxes />
     </matlab>
     <platform>
