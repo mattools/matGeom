@@ -84,7 +84,7 @@ if ~isempty(ind)
 end
 
 % Extract circle data
-if length(varargin) == 1
+if isscalar(varargin)
     % get center and radius
     circle = varargin{1};
     xc = circle(:,1);

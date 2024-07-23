@@ -74,7 +74,7 @@ function varargout = drawCapsule(varargin)
 %     
 %
 %   See also 
-%     crawCylinder, drawDome, drawSphere
+%     drawCylinder, drawDome, drawSphere
 %
 
 % ------

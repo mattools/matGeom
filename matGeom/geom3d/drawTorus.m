@@ -92,6 +92,8 @@ hold(hAx, 'on');
 for i = 1:nTorus
     % create base torus
     circle = circleToPolygon([r1(i) 0 r2(i)], nTheta);
+    % duplicate last vertex to manage mesh periodicity
+    circle = circle([1:end 1], :);
     [x, y, z] = revolutionSurface(circle, linspace(0, 2*pi, nPhi));
     
     % transform torus
