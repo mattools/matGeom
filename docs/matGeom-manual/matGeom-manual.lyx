@@ -12590,6 +12590,621 @@ Add Euler angles convention?
 \end_layout
 
 \begin_layout Section
+Angles and coordinate systems
+\end_layout
+
+\begin_layout Standard
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+angle!3D
+\end_layout
+
+\end_inset
+
+A precise definition of the coordinate systems is necessary to further define 3D transforms (in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:3D-Transforms"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
+ Several of these coordinate systems are based on angles.
+ For example the spherical coordinates can be useful for considering positions of dimensionless objects such as points.
+ 
+\end_layout
+
+\begin_layout Standard
+Contrary to the planar case,
+ several angles are often necessary to define a coordinate system or a 3D transform.
+ Euler angles are a popular solution to represent arbitrary 3D rotations,
+ but several definitions exist.
+ They are presented in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Euler-Angles"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Spherical coordinates
+\end_layout
+
+\begin_layout Standard
+Spherical coordinates comprise three components:
+ two angular coordinates on the surface of the sphere,
+ and the distance to origin.
+ They can be useful for considering positions of dimensionless objects such as points.
+ 
+\end_layout
+
+\begin_layout Standard
+The two spherical angles used by MatGeom are 1) the colatitude,
+ corresponding to the angle with the 
+\begin_inset Formula $z$
+\end_inset
+
+-axis,
+ and 2) the azimut (See Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Coordinates-systems"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
+ The last coordinate is the distance to the origin.
+ Note that a different convention from standard Matlab was used:
+ a discussion can be found here
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://www.physics.oregonstate.edu/bridge/papers/spherical.pdf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/geom3d/spherical-angles.png
+	width 45text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/geom3d/cylindrical_coordinates.png
+	width 45text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Coordinates-systems"
+
+\end_inset
+
+Definition of spherical and cylindrincal coordinates.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Minisec
+sph2cart2
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+sph2cart2
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Converts spherical coordinates to cartesian coordinates.
+\end_layout
+
+\begin_layout Minisec
+cart2sph2
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+cart2sph2
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Converts cartesian coordinates to spherical coordinates.
+\end_layout
+
+\begin_layout Minisec
+cart2sph2d
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+cart2sph2d
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Converts cartesian coordinates to spherical coordinates in degrees.
+\end_layout
+
+\begin_layout Minisec
+sph2cart2d
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+sph2cart2d
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Converts spherical coordinates to cartesian coordinates in degrees.
+\end_layout
+
+\begin_layout Subsection
+Cylindrical coordinates
+\end_layout
+
+\begin_layout Standard
+Cylindrical coordinates comprise three components:
+ the azimut angle,
+ the distance to the 
+\begin_inset Formula $z$
+\end_inset
+
+-axis,
+ and the altitude (See Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Coordinates-systems"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Minisec
+cart2cyl
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+cart2cyl
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Converts cartesian to cylindrical coordinates.
+\end_layout
+
+\begin_layout Minisec
+cyl2cart
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+cyl2cart
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Converts cylindrical to cartesian coordinates.
+\end_layout
+
+\begin_layout Subsection
+Other functions for angles
+\end_layout
+
+\begin_layout Minisec
+anglePoints3d
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+anglePoints3d
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+angle!three points (3D)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes angle between three 3D points.
+\end_layout
+
+\begin_layout Minisec
+sphericalAngle
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+sphericalAngle
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+angle!spherical
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes angle between points on the sphere.
+\end_layout
+
+\begin_layout Minisec
+angleSort3d
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+angleSort3d
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Sorts 3D coplanar points according to their angles in plane.
+\end_layout
+
+\begin_layout Minisec
+randomAngle3d
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+randomAngle3d
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Returns a 3D angle uniformly distributed on unit sphere.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Orientation of shapes
+\end_layout
+
+\begin_layout Standard
+The orientation of 3D shapes (ellipsoids,
+ cuboids,
+ 3D circles...) can be represented by a combination of rotation angles around reference axes.
+ Two different conventions are used to represent the orientation,
+ depending on the type of the shape:
+ 
+\end_layout
+
+\begin_layout Itemize
+elongated or "solid" shapes (ellipsoids,
+ cuboids,
+ cylinders...) consider two angles for representing the direction of the main axis of the shape,
+ and one angle to represent the rotation of the shape around that axis.
+ The direction is given by a (azimut,
+ elevation) pair (see Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Orientation-3D-Shapes"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
+ This results in a "yaw-pitch-roll" triplet of angles (
+\begin_inset Formula $\varphi$
+\end_inset
+
+,
+ 
+\begin_inset Formula $\theta$
+\end_inset
+
+,
+ 
+\begin_inset Formula $\psi$
+\end_inset
+
+),
+ corresponding to XYZ Euler angles (see also section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Euler-Angles"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Itemize
+flat objects (3D ellipses or discs),
+ or shapes organized around a symmetry axis consider two spherical angles for representing the main direction (usually that of the normal angle of the supporting plane),
+ and one angle for representing the rotation around the normal axis.
+ Spherical angle uses a (colatitude,azimut) pair (see Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Orientation-3D-Shapes"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
+ This results in a triplet (
+\begin_inset Formula $\theta$
+\end_inset
+
+,
+ 
+\begin_inset Formula $\varphi$
+\end_inset
+
+,
+ 
+\begin_inset Formula $\psi$
+\end_inset
+
+) of three angles:
+ 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is the colatitude,
+ 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is the azimut,
+ and 
+\begin_inset Formula $\psi$
+\end_inset
+
+ is the rotation angle around axis.
+ This corresponds to Euler angles with the "ZYZ" convention.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/geom3d/cylinder_angles.png
+	width 45text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/geom3d/ellipse3d_angles.png
+	width 45text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Orientation-3D-Shapes"
+
+\end_inset
+
+Orientation of 3D shapes.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Orientation angles of 3D shapes are always given in degrees.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Points and Vectors
 \end_layout
 
@@ -16276,397 +16891,6 @@ Draws a 3D surface patch,
 \end_layout
 
 \begin_layout Section
-Angles and coordinate systems
-\end_layout
-
-\begin_layout Standard
-\begin_inset Index gen
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-angle!3D
-\end_layout
-
-\end_inset
-
-A precise definition of the coordinate systems is necessary to further define 3D transforms (in section
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:3D-Transforms"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-).
- Several of these coordinate systems are based on angles.
- For eaxample the spherical coordinates can be useful for considering positions of dimensionless objects such as points.
- 
-\end_layout
-
-\begin_layout Standard
-Contrary to the planar case,
- several angles are often necessary to define a coordinate system or a 3D transform.
- Euler angles are a popular solution to represent arbitrary 3D rotations,
- but several definitions exist.
- They are presented in section
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Euler-Angles"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsection
-Spherical coordinates
-\end_layout
-
-\begin_layout Standard
-Spherical coordinates comprise three components:
- two angular coordinates on the surface of the sphere,
- and the distance to origin.
- They can be useful for considering positions of dimensionless objects such as points.
- 
-\end_layout
-
-\begin_layout Standard
-The two spherical angles used by MatGeom are 1) the colatitude,
- corresponding to the angle with the 
-\begin_inset Formula $z$
-\end_inset
-
--axis,
- and 2) the azimut.
- The last coordinate is the distance to the origin.
- Note that a different convention from standard Matlab was used:
- A discussion can be found here
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-http://www.physics.oregonstate.edu/bridge/papers/spherical.pdf
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement document
-alignment document
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename images/geom3d/spherical-angles.png
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Definition of spherical coordinates.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Minisec
-sph2cart2
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-sph2cart2
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Converts spherical coordinates to cartesian coordinates.
-\end_layout
-
-\begin_layout Minisec
-cart2sph2
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-cart2sph2
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Converts cartesian coordinates to spherical coordinates.
-\end_layout
-
-\begin_layout Minisec
-cart2sph2d
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-cart2sph2d
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Converts cartesian coordinates to spherical coordinates in degrees.
-\end_layout
-
-\begin_layout Minisec
-sph2cart2d
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-sph2cart2d
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Converts spherical coordinates to cartesian coordinates in degrees.
-\end_layout
-
-\begin_layout Subsection
-Cylindrical coordinates
-\end_layout
-
-\begin_layout Standard
-Cylindrical coordinates comprise three components:
- the azimut angle,
- the distance to the 
-\begin_inset Formula $z$
-\end_inset
-
--axis,
- and the altitude.
-\end_layout
-
-\begin_layout Minisec
-cart2cyl
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-cart2cyl
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Converts cartesian to cylindrical coordinates.
-\end_layout
-
-\begin_layout Minisec
-cyl2cart
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-cyl2cart
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Converts cylindrical to cartesian coordinates.
-\end_layout
-
-\begin_layout Subsection
-Other functions for angles
-\end_layout
-
-\begin_layout Minisec
-anglePoints3d
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-anglePoints3d
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Index gen
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-angle!three points (3D)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Computes angle between three 3D points.
-\end_layout
-
-\begin_layout Minisec
-sphericalAngle
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-sphericalAngle
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Index gen
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-angle!spherical
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Computes angle between points on the sphere.
-\end_layout
-
-\begin_layout Minisec
-angleSort3d
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-angleSort3d
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Sorts 3D coplanar points according to their angles in plane.
-\end_layout
-
-\begin_layout Minisec
-randomAngle3d
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-randomAngle3d
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Returns a 3D angle uniformly distributed on unit sphere.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
 3D Transforms
 \end_layout
 
@@ -17108,6 +17332,16 @@ Euler Angles and 3D rotations
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Euler-Angles"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Several different conventions exist for considering 3D rotations.
  One possibility is to consider the 
 \begin_inset Formula $4\times4$
@@ -17126,13 +17360,6 @@ Euler Angles
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Euler-Angles"
-
-\end_inset
-
-
 \begin_inset Index gen
 range none
 pageformat default
@@ -17149,8 +17376,14 @@ angle!Euler angles
 
 \begin_layout Standard
 Euler Angles are defined by a series of three rotations along specific axes.
- Several definitions of Euler angles exist.
- The MatGeom library uses Euler angles defined as a series of three 
+ Several definitions of Euler angles exist,
+ depending on the axes and on the order rotations are performed,
+ and if the rotation are performed in the global coordinate system,
+ or in the coordinate system of the reference object after rotation.
+\end_layout
+
+\begin_layout Standard
+The MatGeom library usually uses Euler angles defined as a series of three 
 \begin_inset Quotes eld
 \end_inset
 
@@ -17175,23 +17408,12 @@ global
 -axis:
 \begin_inset Formula 
 \begin{align}
-R_{\varphi,\theta,\psi} & =R_{z}(\psi)\cdot R_{y}(\theta)\cdot R_{x}(\varphi)
+R_{\varphi,\theta,\psi} & =R_{z}(\varphi)\cdot R_{y}(\theta)\cdot R_{x}(\psi)
 \end{align}
 
 \end_inset
 
-Note that within the library,
- Euler angles are usually given in the order 
-\begin_inset Formula $(\varphi,\theta,\psi)$
-\end_inset
 
-,
- i.e.
- in the reverse order to that they are applied.
- Moreover,
- when used for describing the 3D rotation of a shape,
- they are expressed in degrees.
- 
 \end_layout
 
 \begin_layout Standard
@@ -17291,6 +17513,21 @@ PSI is the 'roll',
  the rotation around the (PHI,
  THETA) direction,
  with value in degrees
+\end_layout
+
+\begin_layout Standard
+Note that within the MatGeom library,
+ Euler angles are usually given in the order 
+\begin_inset Formula $(\varphi,\theta,\psi)$
+\end_inset
+
+,
+ i.e.
+ in the reverse order to that they are applied.
+ Moreover,
+ when used for describing the 3D rotation of a shape,
+ they are expressed in degrees.
+ 
 \end_layout
 
 \begin_layout Minisec
@@ -18282,7 +18519,7 @@ Geometric processing of 3D polygonal meshes requires to take into account both t
  several abstract data types have been proposed to efficiently represent such data 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "Bieri_1991,Chen_1996,DeBerg_2000"
+key "Bieri_1991,Chen_1996,DeBerg_2000,Botsch_2010"
 literal "false"
 
 \end_inset
@@ -18852,20 +19089,6 @@ faces
  vertex normals,
  edge-to-face relationships...
  that maybe useful or necessary for some functions.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Add illustration of triangular mesh with vertex ring + boundary edges ;
- also simple 3D quad mesh
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
@@ -21360,6 +21583,54 @@ f2 = triangulateFaces(f);
 \end_layout
 
 \begin_layout Minisec
+reverseMeshFaceOrientation
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+reverseMeshFaceOrientation
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+orientation!mesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Reverses the normal of each face within the mesh.
+ In case of boundary-free mesh,
+ the volume enclosed by the resulting mesh becomes the opposite of that of the original mesh.
+\end_layout
+
+\begin_layout Minisec
 mergeCoplanarFaces
 \begin_inset Index idx
 range none
@@ -21395,26 +21666,6 @@ status open
 \end_inset
 
 
-\end_layout
-
-\begin_layout Minisec
-meshComplement
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-meshComplement
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Reverses the normal of each face in the mesh.
 \end_layout
 
 \begin_layout Minisec
@@ -21888,54 +22139,6 @@ Clips a mesh by a plane.
 
 \begin_layout Subsection
 Generic operations
-\end_layout
-
-\begin_layout Minisec
-reverseMeshFaceOrientation
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-reverseMeshFaceOrientation
-\end_layout
-
-\end_inset
-
-
-\begin_inset Index gen
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-orientation!mesh
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Reverses the normal of each face within the mesh.
- In case of boundary-free mesh,
- the volume enclosed by the resulting mesh becomes the opposite of that of the original mesh.
 \end_layout
 
 \begin_layout Minisec
