@@ -93,6 +93,7 @@
 \author{D. Legland}
 \date{\today}
 \end_preamble
+\options idxtotoc
 \use_default_options true
 \maintain_unincluded_children no
 \language english
