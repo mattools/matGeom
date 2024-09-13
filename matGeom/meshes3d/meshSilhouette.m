@@ -76,7 +76,7 @@ if p.Results.visualization
     drawPlane3d(axH, plane,'FaceAlpha',0.5)
     drawMesh(mesh,'FaceAlpha',0.5,'FaceColor','none')
     axis(axH, 'equal')
-    camTar = nanmean(silhouette);
+    camTar = mean(silhouette, "omitnan");
     axH.CameraTarget = camTar;
     axH.CameraPosition = camTar + ...
         planeNormal(plane)*vectorNorm3d(axH.CameraPosition-axH.CameraTarget);

@@ -34,7 +34,7 @@ dz = 0;
 theta = 0;
 
 % get input values
-if length(varargin) == 1
+if isscalar(varargin)
     % only one argument -> rotation angle
     theta = varargin{1};
     

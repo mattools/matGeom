@@ -47,7 +47,7 @@ end
 
 if iscell(faces)
     % faces is a cell array
-    if length(indf)==1
+    if isscalar(indf)
         face = faces{indf};
         pts2 = nodes(face, :);
     else
@@ -59,7 +59,7 @@ if iscell(faces)
     end
 else
     % faces is an indices array: all faces have same number of vertices
-    if length(indf)==1
+    if isscalar(indf)
         face = faces(indf, :);
         pts2 = nodes(face, :);
     else

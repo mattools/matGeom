@@ -74,7 +74,7 @@ function varargout = drawDome(varargin)
 options = {'FaceColor', 'g', 'LineStyle', 'none'};
 for i = 1:length(varargin)
     if ischar(varargin{i})
-        if length(varargin) == 1
+        if isscalar(varargin)
             options = {'FaceColor', varargin{1}, 'LineStyle', 'none'};
         else
             options = [options(1:end) varargin(i:end)];
@@ -90,7 +90,7 @@ if isempty(varargin)
     xc = 0;	yc = 0; zc = 0;
     r = 1;
     v = [0;0;1]; 
-elseif length(varargin) == 1
+elseif isscalar(varargin)
     % one argument: concatenates center and radius
     dome = varargin{1};
     xc = dome(:,1);

@@ -23,9 +23,9 @@ function h = supportFunction(polygon, varargin)
 N = 24;
 u = 0:2*pi/N:2*pi*(1-1/N);
     
-if length(varargin)==1
+if isscalar(varargin)
     var = varargin{1};
-    if length(var)==1
+    if isscalar(var)
         N = var;
         u = 0:2*pi/N:2*pi*(1-1/N);
     else

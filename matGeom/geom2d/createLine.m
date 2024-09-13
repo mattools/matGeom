@@ -69,7 +69,7 @@ function line = createLine(varargin)
 %   * for rays : t0=0, t1=inf (or t0=-inf,t1=0 for inverted ray).
 %   I propose to call these objects 'lineArc'
 
-if length(varargin)==1
+if isscalar(varargin)
     % Only one input parameter. It can be :
     % - line angle
     % - array of four parameters

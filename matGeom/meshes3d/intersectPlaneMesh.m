@@ -181,7 +181,7 @@ while any(remainingExtremities)
         inds = crossEdgeFaces{currentEdgeIndex};
 
         % check if we found an extremity edge
-        if length(inds) == 1
+        if isscalar(inds)
             ind = extremityEdgeInds == currentEdgeIndex;
             remainingExtremities(ind) = false;
             break;

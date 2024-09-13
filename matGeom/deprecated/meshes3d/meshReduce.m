@@ -296,12 +296,12 @@ function nodes2 = getNeighbourNodes(node, edges)
 %   13/07/2004 faster algorithm
 %   03/10/2007 can specify several input nodes
 
-[i, j] = find(ismember(edges, node));
+[i, ~] = find(ismember(edges, node));
 nodes2 = edges(i,1:2);
 nodes2 = unique(nodes2(:));
 nodes2 = sort(nodes2(~ismember(nodes2, node)));
 
-function curves = graph2Contours(nodes, edges)
+function curves = graph2Contours(~, edges)
 %GRAPH2CONTOURS convert a graph to a set of contour curves
 % 
 %   CONTOURS = GRAPH2CONTOURS(NODES, EDGES)

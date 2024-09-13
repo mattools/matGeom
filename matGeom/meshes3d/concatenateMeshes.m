@@ -33,7 +33,7 @@ if isstruct(varargin{1})
     assert(all(cellfun(@(x) all(ismember(fieldnames(x), ...
         VF_fields)), varargin)), errorStructFields)
     
-    if length(varargin)==1
+    if isscalar(varargin)
         errorArgAndStructLength = ['If the input is only one struct ' ...
             'it has to contain more than one mesh.'];
         assert(length(varargin{1})>1, ...
@@ -59,7 +59,7 @@ cellfun(@(x) validateattributes(x, {'numeric'},...
     {'integer'}), varargin(2:2:end))
 % Check if all faces have the same number of columns
 errorFacesRows='The faces of all meshes must have the same number of columns';
-assert(numel(unique(cellfun(@(x) size(x,2), varargin(2:2:end))))==1, errorFacesRows)
+assert(isscalar(unique(cellfun(@(x) size(x,2), varargin(2:2:end)))), errorFacesRows)
 
 
 %% loop

@@ -106,7 +106,7 @@ for i = 1:length(ind)
     
     % if one of the center points is inside box, then the according edge
     % segment is indide box
-    if length(inside) == 1
+    if isscalar(inside)
          % restore same direction of edge
         if iedge(1) > iedge(3) || (iedge(1) == iedge(3) && iedge(2) > iedge(4))
             edge2(ind(i), :) = [points(inside+1,:) points(inside,:)];

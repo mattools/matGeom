@@ -32,7 +32,7 @@ rho = 1;
 theta =0;
 
 % process input parameters
-if length(varargin)==1
+if isscalar(varargin)
     theta = varargin{1};
 elseif length(varargin)==2
     rho = varargin{1};

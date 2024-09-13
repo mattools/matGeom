@@ -62,7 +62,7 @@ for i = 1:length(varargin)
 end
 
 % extract ellipse parameters
-if length(varargin) == 1
+if isscalar(varargin)
     % ellipse is given in a single array
     ellipse = varargin{1};
     x0 = ellipse(:, 1);

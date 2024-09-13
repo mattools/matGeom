@@ -39,7 +39,7 @@ if nCol == 6
     edges = varargin{1};
     varargin(1) = [];
 elseif nCol == 3
-    if isequal(size(varargin{1}), [2 3]) && length(varargin) == 1
+    if isequal(size(varargin{1}), [2 3]) && isscalar(varargin)
         % parameters are two points given as 2x3
         edges = [varargin{1}(1,:) varargin{1}(2,:)];
     elseif isequal(size(varargin{1}), [2 3]) && ~isnumeric(varargin{2})

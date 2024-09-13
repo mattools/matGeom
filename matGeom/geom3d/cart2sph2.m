@@ -29,7 +29,7 @@ function varargout = cart2sph2(varargin)
 % Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
 % parse input angles based on input argument number
-if length(varargin) == 1
+if isscalar(varargin)
     xyz = varargin{1};
 elseif length(varargin) == 3
     xyz = [varargin{1} varargin{2} varargin{3}];

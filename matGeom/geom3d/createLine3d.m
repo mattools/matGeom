@@ -58,7 +58,7 @@ function line = createLine3d(varargin)
 %   with t1 and t2 giving first and last position of the edge on the
 %   supporting straight line, and with t2>t1.
 
-if length(varargin)==1    
+if isscalar(varargin)    
     error('Wrong number of arguments in ''createLine'' ');
     
 elseif length(varargin)==2    

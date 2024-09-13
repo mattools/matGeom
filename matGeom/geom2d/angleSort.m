@@ -33,7 +33,7 @@ function varargout = angleSort(pts, varargin)
 pt0 = [0 0];
 theta0 = 0;
 
-if length(varargin)==1
+if isscalar(varargin)
     var = varargin{1};
     if size(var, 2)==1
         % specify angle

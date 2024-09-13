@@ -102,7 +102,7 @@ end
 options = varargin(nbVal+1:end);
 
 % ensure drawing options have correct format
-if length(options) == 1
+if isscalar(options)
     options = [{'color'}, options];
 end
 

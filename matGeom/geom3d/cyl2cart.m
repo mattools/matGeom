@@ -27,7 +27,7 @@ function varargout = cyl2cart(varargin)
 % Copyright 2006-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % process input parameters
-if length(varargin)==1
+if isscalar(varargin)
     var = varargin{1};
     theta = var(:,1);
     r = var(:,2);

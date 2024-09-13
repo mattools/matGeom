@@ -113,10 +113,10 @@ dx2 = diff(x2); dy2 = diff(y2);
 S1 = dx1 .* y1(1:end-1) - dy1 .* x1(1:end-1);
 S2 = dx2 .* y2(1:end-1) - dy2 .* x2(1:end-1);
 
-C1 = feval(hF, D(bsxfun(@times,dx1,y2) - bsxfun(@times,dy1,x2), S1), 0);
-C2 = feval(hF, D((bsxfun(@times,y1,dx2) - bsxfun(@times,x1,dy2))', S2'), 0)';
+C1 = hF(D(bsxfun(@times,dx1,y2) - bsxfun(@times,dy1,x2), S1), 0);
+C2 = hF(D((bsxfun(@times,y1,dx2) - bsxfun(@times,x1,dy2))', S2'), 0)';
 
-% Obtain the segments where an intersection is expected
+% retrieve the segments where an intersection is expected
 [i, j] = find(C1 & C2); 
 
 % Process case of no intersection
@@ -138,7 +138,7 @@ L = L(L~=0);
 res = [dx2(j).*S1(i) - dx1(i).*S2(j), dy2(j).*S1(i) - dy1(i).*S2(j)] ./ [L L];
 pts = unique(res, 'rows');
 
-% Innre function computing a kind of cross-product
+% Inner function computing a kind of cross-product
 function u = D(x,y)
     u = bsxfun(@minus, x(:,1:end-1), y) .* bsxfun(@minus, x(:,2:end), y);
 end

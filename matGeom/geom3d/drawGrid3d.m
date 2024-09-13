@@ -62,7 +62,7 @@ if ischar(str)
 end
 
 % check origin and grid spacing
-if length(varargin)==1
+if isscalar(varargin)
     spacing = varargin{1};
 elseif length(varargin)==2
     origin = varargin{1};

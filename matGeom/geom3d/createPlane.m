@@ -37,7 +37,7 @@ function plane = createPlane(varargin)
 % Created: 2005-02-18
 % Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
-if length(varargin) == 1
+if isscalar(varargin)
     % If a single input is provided, it can be:
     % * an array of three points belonging to the plane
     % * a cell array -> one plane per array element is created

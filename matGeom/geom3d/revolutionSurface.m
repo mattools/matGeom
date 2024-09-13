@@ -2,21 +2,21 @@ function varargout = revolutionSurface(varargin)
 %REVOLUTIONSURFACE Create a surface of revolution from a planar curve.
 %
 %   usage 
-%   [X Y Z] = revolutionSurface(C1, C2, N);
+%   [X, Y, Z] = revolutionSurface(C1, C2, N);
 %   create the surface of revolution of parametrized function (xt, yt),
 %   with N+1 equally spaced slices, around the Oz axis.
 %   It assumed that C1 corresponds to the x coordinate, and that C2
 %   corresponds to the Oz coordinate.
 %
-%   [X Y Z] = revolutionSurface(CURVE, N);
+%   [X, Y, Z] = revolutionSurface(CURVE, N);
 %   is the same, but generating curve is given in a single parameter CURVE,
 %   which is a [Nx2] array of 2D points.
 %
-%   [X Y Z] = revolutionSurface(..., THETA)
+%   [X, Y, Z] = revolutionSurface(..., THETA)
 %   where THETA is a vector, uses values of THETA for computing revolution
 %   angles.
 %
-%   [X Y Z] = revolutionSurface(..., LINE);
+%   [X, Y, Z] = revolutionSurface(..., LINE);
 %   where LINE is a 1x4 array, specifes the revolution axis in the
 %   coordinate system of the curve. LINE is a row vector of 4 parameters,
 %   containing [x0 y0 dx dy], where (x0,y0) is the origin of the line and
@@ -81,7 +81,7 @@ while ~isempty(varargin)
         % axis of rotation in the base plane
         revol = var;
         
-    elseif length(var) == 1
+    elseif isscalar(var)
         % number of points -> create row vector of angles
         theta = linspace(0, 2*pi, var);
         
@@ -97,8 +97,7 @@ end
 %% Create revolution surface
 
 % ensure length is enough
-m = length(xt);
-if m==1
+if isscalar(xt)
     xt = [xt xt];
 end
 
@@ -133,5 +132,3 @@ elseif nargout == 3
     % return computed mesh
     varargout = {x, y, z};
 end
-
-

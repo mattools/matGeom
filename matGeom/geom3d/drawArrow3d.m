@@ -75,9 +75,9 @@ pos = p.Results.pos;
 vec = p.Results.vec;
 [~, color] = validateColor(p.Results.color, numArrows);
 stemRatio = p.Results.stemRatio;
-if numel(stemRatio) == 1; stemRatio = repmat(stemRatio,numArrows,1); end
+if isscalar(stemRatio); stemRatio = repmat(stemRatio,numArrows,1); end
 arrowRadius = p.Results.arrowRadius;
-if numel(arrowRadius) == 1; arrowRadius = repmat(arrowRadius,numArrows,1); end
+if isscalar(arrowRadius); arrowRadius = repmat(arrowRadius,numArrows,1); end
 drawOptions = p.Unmatched;
 
 % save hold state

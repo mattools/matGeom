@@ -1,4 +1,4 @@
-function P = InterX(L1,varargin)
+function P = InterX(L1, varargin)
 %INTERX Intersection of curves.
 %   P = INTERX(L1,L2) returns the intersection points of two curves L1 
 %   and L2. The curves L1,L2 can be either closed or open and are described
@@ -68,12 +68,15 @@ function P = InterX(L1,varargin)
     S1 = dx1.*y1(1:end-1) - dy1.*x1(1:end-1);
     S2 = dx2.*y2(1:end-1) - dy2.*x2(1:end-1);
     
-    C1 = feval(hF,D(bsxfun(@times,dx1,y2)-bsxfun(@times,dy1,x2),S1),0);
-    C2 = feval(hF,D((bsxfun(@times,y1,dx2)-bsxfun(@times,x1,dy2))',S2'),0)';
+    C1 = hF(D(bsxfun(@times,dx1,y2) - bsxfun(@times,dy1,x2), S1), 0);
+    C2 = hF(D((bsxfun(@times,y1,dx2) - bsxfun(@times,x1,dy2))', S2'), 0)';
 
     %...Obtain the segments where an intersection is expected
     [i,j] = find(C1 & C2); 
-    if isempty(i),P = zeros(2,0);return; end;
+    if isempty(i)
+        P = zeros(2,0);
+        return; 
+    end
     
     %...Transpose and prepare for output
     i=i'; dx2=dx2'; dy2=dy2'; S2 = S2';

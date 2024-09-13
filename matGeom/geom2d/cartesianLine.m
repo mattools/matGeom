@@ -14,7 +14,7 @@ function line = cartesianLine(varargin)
 % Created: 2004-05-25
 % Copyright 2004-2024 INRA - Cepia Software Platform
 
-if length(varargin)==1
+if isscalar(varargin)
     var = varargin{1};
     a = var(:,1);
     b = var(:,2);

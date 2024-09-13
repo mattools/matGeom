@@ -89,10 +89,10 @@ end
 % default color for drawing mesh
 faceColor = [1 0 0];
 
-% combine defualt face color with varargin
+% combine default face color with varargin
 if isempty(varargin)
     varargin = [{'FaceColor'}, faceColor];
-elseif length(varargin) == 1
+elseif isscalar(varargin)
     % if only one optional argument is provided, it is assumed to be color
     faceColor = varargin{1};
     varargin = [{'FaceColor'}, varargin];

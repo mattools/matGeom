@@ -50,7 +50,7 @@ addRequired(p, 'siz', @(x)validateattributes(x,{'numeric'},...
 parse(p, plane, siz)
 
 if ~isempty(varargin)
-    if length(varargin) == 1
+    if isscalar(varargin)
         if isstruct(varargin{1})
             % if options are specified as struct, need to convert to 
             % parameter name-value pairs
@@ -67,7 +67,7 @@ else
     varargin = {'FaceColor', 'm'};
 end
 
-if numel(siz) == 1
+if isscalar(siz)
     siz(2) = siz(1);
 end
 

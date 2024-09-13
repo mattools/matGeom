@@ -23,7 +23,7 @@ function alpha = anglePoints3d(varargin)
 % Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
 p2 = [0 0 0];
-if length(varargin) == 1
+if isscalar(varargin)
     pts = varargin{1};
     if size(pts, 1)==2
         p1 = pts(1,:);

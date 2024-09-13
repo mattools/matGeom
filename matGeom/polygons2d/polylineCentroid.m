@@ -44,7 +44,7 @@ if ischar(var)
 end
 
 % extract point coordinates
-if length(varargin)==1
+if isscalar(varargin)
     points = varargin{1};
 elseif length(varargin)==2
     points = [varargin{1} varargin{2}];

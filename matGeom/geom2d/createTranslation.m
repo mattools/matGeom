@@ -25,7 +25,7 @@ function trans = createTranslation(varargin)
 if isempty(varargin)
     tx = 0;
     ty = 0;
-elseif length(varargin)==1
+elseif isscalar(varargin)
     var = varargin{1};
     tx = var(1);
     ty = var(2);

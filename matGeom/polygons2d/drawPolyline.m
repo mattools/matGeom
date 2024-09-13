@@ -63,7 +63,7 @@ end
 if size(var, 2) == 1
     % first argument contains x coord, second argument contains y coord
     px = var;
-    if length(varargin) == 1
+    if isscalar(varargin)
         error('Wrong number of arguments in drawPolyline');
     end
     py = varargin{2};

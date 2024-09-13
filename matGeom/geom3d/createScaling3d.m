@@ -67,7 +67,7 @@ trans = [...
 %% Helper function
 function [sx, sy, sz] = parseScalingFactors(var)
 
-if length(var)==1
+if isscalar(var)
     % same scaling factor in each direction
     sx = var;
     sy = var;

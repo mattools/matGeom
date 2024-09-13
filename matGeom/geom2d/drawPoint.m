@@ -77,7 +77,7 @@ if length(varargin) > 1
     end
     hh = plot(ax, px, py, 'marker', 'o', 'linestyle', 'none', varargin{:});
     
-elseif length(varargin) == 1
+elseif isscalar(varargin)
     % use the specified single option (for example: 'b.', or 'k+')
     hh = plot(ax, px, py, varargin{1});
 else

@@ -28,7 +28,7 @@ function varargout = cart2cyl(varargin)
 % Copyright 2006-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)
 
 % process input parameters
-if length(varargin)==1
+if isscalar(varargin)
     var = varargin{1};
     x = var(:,1);
     y = var(:,2);

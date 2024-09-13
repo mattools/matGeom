@@ -72,7 +72,7 @@ for i = 1:length(varargin)
     end
 end
 
-if length(varargin) == 1
+if isscalar(varargin)
     ellipse = varargin{1};
     x0 = ellipse(:,1);
     y0 = ellipse(:,2);

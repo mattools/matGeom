@@ -21,7 +21,7 @@ function theta = angle2Points(varargin)
 if length(varargin)==2
     p1 = varargin{1};
     p2 = varargin{2};
-elseif length(varargin)==1
+elseif isscalar(varargin)
     var = varargin{1};
     p1 = var(1,:);
     p2 = var(2,:);

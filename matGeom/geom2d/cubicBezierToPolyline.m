@@ -36,7 +36,7 @@ N = 64;
 % check if discretization step is specified
 if ~isempty(varargin)
     var = varargin{1};
-    if length(var) == 1 && isnumeric(var)
+    if isscalar(var) && isnumeric(var)
         N = round(var);
     end
 end

@@ -39,7 +39,7 @@ cy = 0;
 theta = 0;
 
 % get input values
-if length(varargin)==1
+if isscalar(varargin)
     % only angle
     theta = varargin{1};
 elseif length(varargin)==2

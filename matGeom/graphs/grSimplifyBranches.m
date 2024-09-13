@@ -1,7 +1,7 @@
 function varargout = grSimplifyBranches(nodes, edges)
 %GRSIMPLIFYBRANCHES Replace branches of a graph by single edges.
 %
-%   [NODES2 EDGES2] = grSimplifyBranches(NODES, EDGES)
+%   [NODES2, EDGES2] = grSimplifyBranches(NODES, EDGES)
 %   renvoie une version simplifiee d'un graphe, en ne gardant que les 
 %   points multiples et les aretes reliant les points multiples.
 
@@ -106,7 +106,7 @@ while b < length(branch)
         % add the multiple point to the list of points
         %disp('add point');
         Nn = Nn+1;
-        Mnodes(Nn, 1:2) = nodes(node, 1:2); %#ok<AGROW>
+        Mnodes(Nn, 1:2) = nodes(node, 1:2);
         index = Nn;
         Mpoints(Nn) = node; %#ok<AGROW>
         

@@ -37,7 +37,7 @@ elseif length(varargin)==3
     line2 = createLine(p2, p3);
     point = p2;
     
-elseif length(varargin)==1
+elseif isscalar(varargin)
     % three points, given in one array
     var = varargin{1};
     p1 = var(1, :);

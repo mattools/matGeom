@@ -18,7 +18,7 @@ function sphere = createSphere(varargin)
 
 if length(varargin)==4
     pts = [varargin{1};varargin{2};varargin{3};varargin{4}];
-elseif length(varargin)==1
+elseif isscalar(varargin)
     pts = varargin{1};
 else
     error('wrong number of arguments in createSphere');

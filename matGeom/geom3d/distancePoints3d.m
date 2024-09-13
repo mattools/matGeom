@@ -24,7 +24,7 @@ function dist = distancePoints3d(p1, p2, varargin)
 % Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
 norm = 2;
-if length(varargin)==1
+if isscalar(varargin)
     norm = varargin{1};
 end
 

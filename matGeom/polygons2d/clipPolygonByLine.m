@@ -51,7 +51,7 @@ parse(p,varargin{:});
 method = p.Results.method;
 debugVisu = p.Results.debugVisu;
 
-if iscell(poly) && numel(poly)==1
+if iscell(poly) && isscalar(poly)
     poly = poly{1};
 elseif iscell(poly) && length(poly) > 1
     method = 'polyshape';

@@ -22,7 +22,7 @@ function nodes2 = grNeighborNodes(edges, node)
 warning('MatGeom:deprecated', ...
     'function grNeighborNodes is obsolete, use grAdjacentNodes instead');
 
-[i, j] = find(ismember(edges, node)); %#ok<NASGU>
+[i, ~] = find(ismember(edges, node)); %#ok<NASGU>
 nodes2 = edges(i,1:2);
 nodes2 = unique(nodes2(:));
 nodes2 = sort(nodes2(~ismember(nodes2, node)));

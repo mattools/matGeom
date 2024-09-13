@@ -79,7 +79,7 @@ end
 
 % concatenate input argument(s) with default options
 defaults = {'MarkerSize', 6};
-if length(varargin) == 1
+if isscalar(varargin)
     varargin = [varargin defaults];
 else
     varargin = [{'ks'} defaults varargin];

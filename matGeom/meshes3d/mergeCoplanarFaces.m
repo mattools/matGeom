@@ -41,14 +41,14 @@ function varargout = mergeCoplanarFaces(nodes, varargin)
 acc = 1e-5;
 if ~isempty(varargin)
     var = varargin{end};
-    if length(var) == 1
+    if isscalar(var)
         acc = var;
         varargin(end) = [];
     end
 end
 
 % extract faces and edges
-if length(varargin) == 1
+if isscalar(varargin)
     faces = varargin{1};
 else
     faces = varargin{2};

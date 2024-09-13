@@ -31,7 +31,7 @@ function varargout = angleSort3d(pts, varargin)
 pt0     = mean(pts, 1);
 pt1     = pts(1,:);
 
-if length(varargin)==1
+if isscalar(varargin)
     pt0 = varargin{1};
 elseif length(varargin)==2
     pt0 = varargin{1};

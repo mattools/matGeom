@@ -31,7 +31,7 @@ function [line, res] = fitLine(varargin)
 % Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE
 
 %% Extract input arguments
-if length(varargin)==1
+if isscalar(varargin)
     % argument is an array of points
     var = varargin{1};
     x = var(:,1);

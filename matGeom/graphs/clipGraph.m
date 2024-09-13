@@ -36,7 +36,7 @@ function varargout = clipGraph(nodes, edges, varargin)
 
 % extract input arguments
 faces = [];
-if length(varargin)==1
+if isscalar(varargin)
     box     = varargin{1};
 elseif length(varargin)==2
     faces   = varargin{1};

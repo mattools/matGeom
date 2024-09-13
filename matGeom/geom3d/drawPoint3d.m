@@ -35,7 +35,7 @@ function h = drawPoint3d(varargin)
 % extract handle of axis to draw on
 [hAx, varargin] = parseAxisHandle(varargin{:});
 
-if length(varargin) == 1 && size(varargin{1}, 2) == 3
+if isscalar(varargin) && size(varargin{1}, 2) == 3
     % points are given as one single array with 3 columns
     px = varargin{1}(:,1);
     py = varargin{1}(:,2);

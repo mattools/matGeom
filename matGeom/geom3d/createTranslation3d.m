@@ -29,7 +29,7 @@ if isempty(varargin)
     dx = 0;
     dy = 0;
     dz = 0;
-elseif length(varargin)==1
+elseif isscalar(varargin)
     % translation vector given in a single argument
     var = varargin{1};
     dx = var(1);
