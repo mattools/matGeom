@@ -80,7 +80,7 @@ if ~all(all(ismembertol(TFM3D_test(1:3,1:3), TFM3D_ROT)))
 end
 
 % matGeom format
-fittedEllipse3d=[center A B THETA PHI PSI];
+fittedEllipse3d = [center A B THETA PHI PSI];
 
 %% Visualization
 if parser.Results.visualization
@@ -152,38 +152,7 @@ end
         C(2,2) = 1;
         C(3,1) = -2;
         
-        if 1
-            p = ellipsefit_robust(S,-C);
-        elseif 0
-            % solve eigensystem
-            [gevec, geval] = eig(S,C);
-            geval = diag(geval);
-            
-            % extract eigenvector corresponding to unique negative (nonpositive) eigenvalue
-            p = gevec(:,geval < 0 & ~isinf(geval));
-            r = geval(geval < 0 & ~isinf(geval));
-        elseif 0
-            % formulation as convex optimization problem
-            gamma = 0; %#ok<*UNRCH>
-            cvx_begin sdp
-            variable('gamma');
-            variable('lambda');
-            
-            maximize(gamma);
-            lambda >= 0; %#ok<*VUNUS>
-            %[ S + lambda*C,       zeros(size(S,1),1) ...
-            %; zeros(1,size(S,2)), lambda - gamma ...
-            %] >= 0;
-            S + lambda*C >= 0;
-            lambda - gamma >= 0;
-            cvx_end
-            
-            % recover primal optimal values from dual
-            [evec, eval] = eig(S + lambda*C);
-            eval = diag(eval);
-            [~,ix] = min(abs(eval));
-            p = evec(:,ix);
-        end
+        p = ellipsefit_robust(S,-C);
         
         % unnormalize
         p(:) = ...
@@ -260,22 +229,22 @@ end
             for k = 1 : 6
                 validateattributes(varargin{k}, {'numeric'}, {'real','scalar'});
             end
-            [c1,c2,a,b,phi] = ellipse_explicit(varargin{:});
+            elli = ellipse_explicit(varargin{:});
         else
             narginchk(1,1);
             p = varargin{1};
             validateattributes(p, {'numeric'}, {'real','vector'});
             p = p(:);
             validateattributes(p, {'numeric'}, {'size',[6 1]});
-            [c1,c2,a,b,phi] = ellipse_explicit(p(1), 0.5*p(2), p(3), 0.5*p(4), 0.5*p(5), p(6));
+            elli = ellipse_explicit(p(1), 0.5*p(2), p(3), 0.5*p(4), 0.5*p(5), p(6));
         end
         if nargout > 1
-            varargout = num2cell([c1,c2,a,b,phi]);
+            varargout = num2cell(elli);
         else
-            varargout{1} = [c1,c2,a,b,phi];
+            varargout{1} = elli;
         end
         
-        function [c1,c2,semia,semib,phi] = ellipse_explicit(a,b,c,d,f,g)
+        function elli = ellipse_explicit(a,b,c,d,f,g)
             % Cast ellipse defined with explicit parameter vector to implicit form.
             
             % helper quantities
@@ -296,9 +265,9 @@ end
             % angle of tilt
             if b ~= 0
                 if abs(a) < abs(c)
-                    phi = 0.5*acot((a-c)/(2*b));
+                    phi = 0.5 * acot((a-c)/(2*b));
                 else
-                    phi = 0.5*pi+0.5*acot((a-c)/(2*b));
+                    phi = 0.5 * pi + 0.5 * acot((a-c)/(2*b));
                 end
             else
                 if abs(a) < abs(c)
@@ -307,6 +276,8 @@ end
                     phi = 0.5*pi;
                 end
             end
+
+            elli = [c1,c2,semia,semib,phi];
         end
     end
 end
