@@ -56,15 +56,15 @@ end
 % initialize empty fields
 ftell(fid);
 dataFormat = '';
-numComments = 0;
+nComments = 0;
 comments = {};      % for storing any file comments
-numElements = 0;
-numProperties = 0;
+nElements = 0;
 elements = [];      % structure for holding the element data
-elementCount = [];  % number of each type of element in file
-propertyTypes = []; % corresponding structure recording property types
+elementCounts = []; % number of each type of element in file
 elementNames = {};  % list of element names in the order they are stored in the file
+nProperties = 0;
 propertyNames = [];	% structure of lists of property names
+propertyTypes = []; % corresponding structure recording property types
 
 % iterate over the lines of the file until we find the "end_header" line
 while true
@@ -91,10 +91,10 @@ while true
 
         case 'comment'
             % read file comments
-            numComments = numComments + 1;
-            comments{numComments} = ''; %#ok<AGROW>
+            nComments = nComments + 1;
+            comments{nComments} = ''; %#ok<AGROW>
             for i = 2:nToks
-                comments{numComments} = [comments{numComments}, tokens{i}, ' '];
+                comments{nComments} = [comments{nComments}, tokens{i}, ' '];
             end
 
         case 'element'
@@ -106,16 +106,16 @@ while true
                     error(['Duplicate element name, ''',tokens{2},'''.']);
                 end
 
-                numElements = numElements + 1;
-                numProperties = 0;
+                nElements = nElements + 1;
+                nProperties = 0;
                 elements.(tokens{2}) = [];
                 propertyTypes.(tokens{2}) =[];
-                elementNames{numElements} = tokens{2}; %#ok<AGROW>
+                elementNames{nElements} = tokens{2}; %#ok<AGROW>
                 propertyNames.(tokens{2}) = {};
-                CurElement = tokens{2};
-                elementCount(numElements) = str2double(tokens{3}); %#ok<AGROW>
+                element = tokens{2};
+                elementCounts(nElements) = str2double(tokens{3}); %#ok<AGROW>
 
-                if isnan(elementCount(numElements))
+                if isnan(elementCounts(nElements))
                     fclose(fid);
                     error(['Bad element definition: ', buf]);
                 end
@@ -125,23 +125,23 @@ while true
 
         case 'property'
         	% element property
-            if ~isempty(CurElement) && nToks >= 3
-                numProperties = numProperties + 1;
+            if ~isempty(element) && nToks >= 3
+                nProperties = nProperties + 1;
 
-                if isfield(elements.(CurElement), tokens{nToks})
+                if isfield(elements.(element), tokens{nToks})
                     fclose(fid);
-                    error(['Duplicate property name, ''',CurElement,'.',tokens{2},'''.']);
+                    error(['Duplicate property name, ''',element,'.',tokens{2},'''.']);
                 end
 
-                % add property subfield to Elements
-                elements.(CurElement).(tokens{nToks}) = [];
+                % add property subfield to elements
+                elements.(element).(tokens{nToks}) = [];
                 % add property subfield to PropertyTypes and save type
-                propertyTypes.(CurElement).(tokens{nToks}) = tokens(2:nToks-1);
+                propertyTypes.(element).(tokens{nToks}) = tokens(2:nToks-1);
                 % record property name order
-                propertyNames.(CurElement){numProperties} = tokens{nToks};
+                propertyNames.(element){nProperties} = tokens{nToks};
             else
                 fclose(fid);
-                if isempty(CurElement)
+                if isempty(element)
                     error(['Property definition without element definition: ', buf]);
                 else
                     error(['Bad property definition: ', buf]);
@@ -176,7 +176,7 @@ end
 if dataFormat == 0
     % read the rest of the file as ASCII data
     buf = fscanf(fid,'%f');
-    BufOff = 1;
+    offset = 1;
 else
     % reopen the file in read binary mode
     fclose(fid);
@@ -188,23 +188,25 @@ else
     end
     
     % find the end of the header again (using ftell on the old handle doesn't give the correct position)
-    BufSize = 8192;
-    buf = [blanks(10),char(fread(fid,BufSize,'uchar')')];
+    bufferSize = 8192;
+    buf = [blanks(10),char(fread(fid,bufferSize,'uchar')')];
     i = [];
     tmp = -11;
     
     while isempty(i)
-        i = strfind(buf,['end_header',13,10]);              % look for end_header + CR/LF
-        i = [i,strfind(buf,['end_header',10])]; %#ok<AGROW> % look for end_header + LF
+        % look for end_header + CR/LF
+        i = strfind(buf, ['end_header', 13, 10]);
+        % look for end_header + LF
+        i = [i, strfind(buf, ['end_header', 10])]; %#ok<AGROW>
         
         if isempty(i)
-            tmp = tmp + BufSize;
-            buf = [buf(BufSize+1:BufSize+10),char(fread(fid,BufSize,'uchar')')];
+            tmp = tmp + bufferSize;
+            buf = [buf(bufferSize+1:bufferSize+10), char(fread(fid,bufferSize,'uchar')')];
         end
     end
     
     % seek to just after the line feed
-    fseek(fid,i + tmp + 11 + (buf(i + 10) == 13),-1);
+    fseek(fid, i + tmp + 11 + (buf(i + 10) == 13), -1);
 end
 
 
@@ -217,19 +219,19 @@ matlabTypeNames = {'schar','uchar','int16','uint16','int32','uint32','single','d
 dataTypeSizes = [1,1,2,2,4,4,4,8];	% size in bytes of each type
 
 % iterate over element types
-for i = 1:numElements
+for i = 1:nElements
     % get current element property information
-    CurPropertyNames = propertyNames.(elementNames{i});
-    CurPropertyTypes = propertyTypes.(elementNames{i});
-    numProperties = size(CurPropertyNames,2);
+    currPropNames = propertyNames.(elementNames{i});
+    currPropTypes = propertyTypes.(elementNames{i});
+    nProperties = size(currPropNames,2);
     
     % fprintf('Reading %s...\n',ElementNames{i});
     
     if dataFormat == 0
         % read ASCII data
-        type = zeros(1, numProperties);
-        for j = 1:numProperties
-            tokens = CurPropertyTypes.(CurPropertyNames{j});
+        type = zeros(1, nProperties);
+        for j = 1:nProperties
+            tokens = currPropTypes.(currPropNames{j});
             
             if strcmpi(tokens{1},'list')
                 type(j) = 1;
@@ -239,25 +241,25 @@ for i = 1:numElements
         % parse buffer
         if ~any(type)
             % no list types
-            rawData = reshape(buf(BufOff:BufOff+elementCount(i)*numProperties-1),numProperties,elementCount(i))';
-            BufOff = BufOff + elementCount(i)*numProperties;
+            rawData = reshape(buf(offset:offset+elementCounts(i)*nProperties-1),nProperties,elementCounts(i))';
+            offset = offset + elementCounts(i)*nProperties;
         else
-            ListData = cell(numProperties,1);
+            allData = cell(nProperties,1);
             
-            for k = 1:numProperties
-                ListData{k} = cell(elementCount(i),1);
+            for k = 1:nProperties
+                allData{k} = cell(elementCounts(i),1);
             end
             
             % list type
-            for j = 1:elementCount(i)
-                for k = 1:numProperties
+            for j = 1:elementCounts(i)
+                for k = 1:nProperties
                     if ~type(k)
-                        rawData(j,k) = buf(BufOff);
-                        BufOff = BufOff + 1;
+                        rawData(j,k) = buf(offset);
+                        offset = offset + 1;
                     else
-                        tmp = buf(BufOff);
-                        ListData{k}{j} = buf(BufOff+(1:tmp))';
-                        BufOff = BufOff + tmp + 1;
+                        tmp = buf(offset);
+                        allData{k}{j} = buf(offset+(1:tmp))';
+                        offset = offset + tmp + 1;
                     end
                 end
             end
@@ -268,12 +270,12 @@ for i = 1:numElements
         listFlag = 0; % = 1 if there is a list type
         sameFlag = 1; % = 1 if all types are the same
         
-        type = cell(1,numProperties);
+        type = cell(1,nProperties);
         type2 = type;
-        typeSize = zeros(1,numProperties);
+        typeSize = zeros(1,nProperties);
         typeSize2 = typeSize;
-        for j = 1:numProperties
-            tokens = CurPropertyTypes.(CurPropertyNames{j});
+        for j = 1:nProperties
+            tokens = currPropTypes.(currPropNames{j});
             
             if ~strcmp(tokens{1}, 'list')	% non-list type
                 tmp = rem(find(matches(plyTypeNames,tokens{1}))-1,8)+1;
@@ -288,7 +290,7 @@ for i = 1:numElements
                 else
                     fclose(fid);
                     error(['Unknown property data type, ''',tokens{1},''', in ', ...
-                        elementNames{i},'.',CurPropertyNames{j},'.']);
+                        elementNames{i},'.',currPropNames{j},'.']);
                 end
             else % list type
                 if length(tokens) == 3
@@ -305,11 +307,11 @@ for i = 1:numElements
                     else
                         fclose(fid);
                         error(['Unknown property data type, ''list ',tokens{2},' ',tokens{3},''', in ', ...
-                            elementNames{i},'.',CurPropertyNames{j},'.']);
+                            elementNames{i},'.',currPropNames{j},'.']);
                     end
                 else
                     fclose(fid);
-                    error(['Invalid list syntax in ',elementNames{i},'.',CurPropertyNames{j},'.']);
+                    error(['Invalid list syntax in ',elementNames{i},'.',currPropNames{j},'.']);
                 end
             end
         end
@@ -318,83 +320,83 @@ for i = 1:numElements
         if ~listFlag
             if sameFlag
                 % no list types, all the same type (fast)
-                rawData = fread(fid,[numProperties,elementCount(i)],type{1})';
+                rawData = fread(fid,[nProperties,elementCounts(i)],type{1})';
             else
                 % no list types, mixed type
-                rawData = zeros(elementCount(i),numProperties);
+                rawData = zeros(elementCounts(i),nProperties);
                 
-                for j = 1:elementCount(i)
-                    for k = 1:numProperties
+                for j = 1:elementCounts(i)
+                    for k = 1:nProperties
                         rawData(j,k) = fread(fid,1,type{k});
                     end
                 end
             end
         else
-            ListData = cell(numProperties,1);
+            allData = cell(nProperties,1);
             
-            for k = 1:numProperties
-                ListData{k} = cell(elementCount(i),1);
+            for k = 1:nProperties
+                allData{k} = cell(elementCounts(i),1);
             end
             
-            if numProperties == 1
-                BufSize = 512;
-                numSkip = 4;
+            if nProperties == 1
+                bufferSize = 512;
+                nSkip = 4;
                 j = 0;
                 
                 % list type, one property (fast if lists are usually the same length)
-                while j < elementCount(i)
+                while j < elementCounts(i)
                     Position = ftell(fid);
-                    % read in BufSize count values, assuming all counts = SkipNum
-                    [buf,BufSize] = fread(fid,BufSize,type{1},numSkip*typeSize2(1));
-                    miss = find(buf ~= numSkip); % find first count that is not SkipNum
+                    % read in BufSize count values, assuming all counts = nSkip
+                    [buf,bufferSize] = fread(fid,bufferSize,type{1},nSkip*typeSize2(1));
+                    miss = find(buf ~= nSkip); % find first count that is not nSkip
                     fseek(fid,Position + typeSize(1),-1); % seek back to after first count
                     
-                    if isempty(miss) % all counts are SkipNum
-                        buf = fread(fid,[numSkip,BufSize],[int2str(numSkip),'*',type2{1}],typeSize(1))';
+                    if isempty(miss) % all counts are nSkip
+                        buf = fread(fid,[nSkip,bufferSize],[int2str(nSkip),'*',type2{1}],typeSize(1))';
                         fseek(fid,-typeSize(1),0); % undo last skip
                         
-                        for k = 1:BufSize
-                            ListData{1}{j+k} = buf(k,:);
+                        for k = 1:bufferSize
+                            allData{1}{j+k} = buf(k,:);
                         end
                         
-                        j = j + BufSize;
-                        BufSize = floor(1.5*BufSize);
+                        j = j + bufferSize;
+                        bufferSize = floor(1.5*bufferSize);
                     else
                         if miss(1) > 1 % some counts are numSkip
-                            Buf2 = fread(fid,[numSkip,miss(1)-1],[int2str(numSkip),'*',type2{1}],typeSize(1));
+                            Buf2 = fread(fid,[nSkip,miss(1)-1],[int2str(nSkip),'*',type2{1}],typeSize(1));
                             Buf2 = Buf2';
                             
                             for k = 1:miss(1)-1
-                                ListData{1}{j+k} = Buf2(k,:);
+                                allData{1}{j+k} = Buf2(k,:);
                             end
                             
                             j = j + k;
                         end
 
                         % Alec: check if done and rewind one step
-                        if j >= elementCount(i)
+                        if j >= elementCounts(i)
                             fseek(fid,-1,0);
                             break;
                         end
                         
                         % read in the list with the missed count
-                        numSkip = buf(miss(1));
+                        nSkip = buf(miss(1));
                         j = j + 1;
-                        ListData{1}{j} = fread(fid,[1,numSkip],type2{1});
-                        BufSize = ceil(0.6*BufSize);
+                        allData{1}{j} = fread(fid,[1,nSkip],type2{1});
+                        bufferSize = ceil(0.6*bufferSize);
                     end
                 end
             else
                 % list type(s), multiple properties (slow)
-                rawData = zeros(elementCount(i),numProperties);
+                rawData = zeros(elementCounts(i),nProperties);
                 
-                for j = 1:elementCount(i)
-                    for k = 1:numProperties
+                for j = 1:elementCounts(i)
+                    for k = 1:nProperties
                         if isempty(type2{k})
                             rawData(j,k) = fread(fid,1,type{k});
                         else
                             tmp = fread(fid,1,type{k});
-                            ListData{k}{j} = fread(fid,[1,tmp],type2{k});
+                            allData{k}{j} = fread(fid,[1,tmp],type2{k});
                         end
                     end
                 end
@@ -402,17 +404,17 @@ for i = 1:numElements
         end
     end
     
-    % put data into Elements structure
-    for k = 1:numProperties
+    % put data into 'elements' structure
+    for k = 1:nProperties
         if (~dataFormat && ~type(k)) || (dataFormat && isempty(type2{k}))
-            elements.(elementNames{i}).(CurPropertyNames{k}) = rawData(:,k);
+            elements.(elementNames{i}).(currPropNames{k}) = rawData(:,k);
         else
-            elements.(elementNames{i}).(CurPropertyNames{k}) = ListData{k};
+            elements.(elementNames{i}).(currPropNames{k}) = allData{k};
         end
     end
 end
 
-clear rawData ListData;
+clear rawData allData;
 fclose(fid);
 
 
@@ -422,7 +424,7 @@ fclose(fid);
 possibleFacePropertyNames = ...
     {'vertex_indices', 'vertex_indexes', 'vertex_index', 'indices', 'indexes'};
 facePropertyNameIdx = find(matches(possibleFacePropertyNames, fieldnames(elements.face)));
-assert(length(facePropertyNameIdx) == 1)
+assert(isscalar(facePropertyNameIdx))
 
 % retrieve face vertex data
 faces = elements.face.(possibleFacePropertyNames{facePropertyNameIdx});
