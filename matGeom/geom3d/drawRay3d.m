@@ -41,7 +41,7 @@ varargin(1) = [];
 box = axis(hAx);
 
 % clip the ray(s) with the limits of the current axis
-edge = clipLine3d(ray, box);
+edge = clipRay3d(ray, box);
 
 % identify valid edges
 inds = sum(isnan(edge), 2) == 0;
