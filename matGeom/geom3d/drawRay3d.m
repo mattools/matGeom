@@ -1,4 +1,4 @@
-function h = drawRay3d(varargin)
+function h = drawRay3d(ray, varargin)
 %DRAWRAY3D Draw a 3D ray on the current axis.
 %
 %   drawRay3d(RAY)
@@ -31,22 +31,23 @@ function h = drawRay3d(varargin)
 % Created: 2020-05-25, using Matlab 9.8.0.1323502 (R2020a)
 % Copyright 2020-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
-% extract handle of axis to draw on
-[hAx, varargin] = parseAxisHandle(varargin{:});
-
-ray = varargin{1};
-varargin(1) = [];
+% Parse and check inputs
+isRay3d = @(x) validateattributes(x,{'numeric'},...
+    {'nonempty','nonnan','real','finite','size',[nan,6]});
+defOpts.Color = 'b';
+[hAx, ray, varargin] = ...
+    parseDrawInput(ray, isRay3d, 'line', defOpts, varargin{:});
 
 % get bounding box limits
-box = axis(hAx);
+bounds = axis(hAx);
 
 % clip the ray(s) with the limits of the current axis
-edge = clipRay3d(ray, box);
+edge = clipRay3d(ray, bounds);
 
 % identify valid edges
 inds = sum(isnan(edge), 2) == 0;
 
-% draw the clipped line
+% draw the clipped ray
 hh = [];
 if any(inds)
     edge = edge(inds, :);

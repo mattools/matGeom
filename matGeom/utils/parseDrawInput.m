@@ -27,13 +27,13 @@ else
 end
 
 % Check if the primitive is valid
-p=inputParser;
-addRequired(p,'prim',valFun)
-parse(p,prim)
+p = inputParser;
+addRequired(p, 'prim', valFun)
+parse(p, prim)
 
 % parse input arguments if there are any
 if ~isempty(varargin)
-    if length(varargin) == 1
+    if isscalar(varargin)
         if isstruct(varargin{1})
             % if options are specified as struct, need to convert to 
             % parameter name-value pairs
@@ -53,6 +53,4 @@ else
     % If no arguments are given, use the default options
     varargin = [fieldnames(defOpts) struct2cell(defOpts)]';
     varargin = varargin(:)';
-end
-
 end

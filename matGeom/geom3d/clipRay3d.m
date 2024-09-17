@@ -77,7 +77,7 @@ for i = 1:nRays
     points  = [ipX0;ipX1;ipY0;ipY1;ipZ0;ipZ1];
 
     % compute position of each point on the ray
-    pos     = linePosition3d(points, ray(i,:));
+    pos     = line3dPosition(points, ray(i,:));
 
     % keep only defined points
     ind     = find(~isnan(pos));
