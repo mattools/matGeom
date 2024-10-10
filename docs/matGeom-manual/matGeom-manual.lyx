@@ -9060,6 +9060,43 @@ intersectPolylines
 
 \begin_layout Standard
 Identifies the common points between 2 polylines.
+ Based on the 
+\begin_inset Quotes eld
+\end_inset
+
+interX
+\begin_inset Quotes erd
+\end_inset
+
+ function written by 
+\begin_inset Quotes eld
+\end_inset
+
+NS
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://fr.mathworks.com/matlabcentral/fileexchange/22441-curve-intersections
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Minisec
@@ -17031,7 +17068,37 @@ fitEllipse3d
 \end_layout
 
 \begin_layout Standard
-Fits a 3D ellipse to a set of points.
+Fits a 3D ellipse to a set of points,
+ using a numerically stable least-square fitting approach 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Halir_Flusser_1998,Fitzgibbon_1999_PAMI"
+literal "false"
+
+\end_inset
+
+.
+ Include code from Levente Hunyadi
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://mathworks.com/matlabcentral/fileexchange/45356
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Minisec
