@@ -10,10 +10,14 @@ function varargout = readMesh(filePath, varargin)
 %   MESH = readMesh(FILENAME)
 %   Read the data stored in file FILENAME and return the mesh into a struct
 %   with fields 'vertices' and 'faces'.
-%   The struct also comprises two fields "name" and "fileName":
-%   * "name" corresponds to the base name of the file (without path and
-%       extension)
-%   * "filePath" corresponds to the full (relative) path name of the file. 
+%
+%   MESH = readMesh(FILENAME, 'nameAndPath', true)
+%   By setting this name-value pair to true, two fields are added to the 
+%   struct called "name" and "fileName":
+%       - "name" corresponds to the base name of the file (without path and
+%         extension)
+%       * "filePath" corresponds to the full (relative) path name of the 
+%         file. 
 %
 %   Example
 %     mesh = readMesh('apple.ply');
@@ -31,8 +35,10 @@ function varargout = readMesh(filePath, varargin)
 % Copyright 2020-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 parser = inputParser;
-addParameter(parser, 'trimMesh', true, @islogical);
+logParValidFunc=@(x) (islogical(x) || isequal(x,1) || isequal(x,0));
+addParameter(parser, 'nameAndPath', false, logParValidFunc);
 parse(parser, varargin{:});
+nameAndPath = parser.Results.nameAndPath;
 
 [~, baseName, ext] = fileparts(filePath);
 switch lower(ext)
@@ -52,7 +58,7 @@ end
 varargout = formatMeshOutput(nargout, mesh.vertices, mesh.faces);
 
 % in case of mesh returned as a struct, also include the file name as field
-if isstruct(varargout{1})
+if isstruct(varargout{1}) && nameAndPath
     varargout{1}.name = baseName;
     varargout{1}.filePath = filePath;
 end
