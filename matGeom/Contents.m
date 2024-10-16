@@ -9,7 +9,6 @@
 %   geom2d              - General function in euclidean plane
 %   polygons2d          - Functions operating on point lists 
 %   graphs              - Manipulation of geometric graphs
-%   polynomialCurves2d  - Representation of smooth polynomial curves
 %   geom3d              - General function in 3D euclidean space
 %   meshes3d            - Manipulation of 3D surfacic meshes
 %
