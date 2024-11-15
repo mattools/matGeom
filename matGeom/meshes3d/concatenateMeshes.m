@@ -9,6 +9,12 @@ function varargout = concatenateMeshes(varargin)
 %   where MESH1, MESH2, ... are structs or struct arrays with the fields  
 %   vertices and faces
 %
+%   Example
+%     apple = readMesh('apple.ply');
+%     apple.vertices = apple.vertices*100;
+%     bunny = readMesh('bunny_F1k.ply');
+%     drawMesh(concatenateMeshes(apple, bunny))
+%
 %   See also 
 %     splitMesh
 
