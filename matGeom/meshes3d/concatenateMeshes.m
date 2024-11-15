@@ -1,19 +1,13 @@
 function varargout = concatenateMeshes(varargin)
 %CONCATENATEMESHES Concatenate multiple meshes.
 %
-%   [V,F] = concatenateMeshes(V1,F1,V2,F2, ...)
+%   [V, F] = concatenateMeshes(V1, F1, V2, F2, ...)
 %   Returns one mesh represented by vertices V and faces F by concatenating
 %   the meshes defined by V1, V2, ... and F1, F2, ...
 %
-%   [V,F] = concatenateMeshes(MESH1, MESH2, ...)
+%   [V, F] = concatenateMeshes(MESH1, MESH2, ...)
 %   where MESH1, MESH2, ... are structs or struct arrays with the fields  
 %   vertices and faces
-%
-%   Example
-%     apple = readMesh('apple.ply');
-%     apple.vertices = apple.vertices*100;
-%     bunny = readMesh('bunny_F1k.ply');
-%     drawMesh(concatenateMeshes(apple, bunny))
 %
 %   See also 
 %     splitMesh
@@ -36,15 +30,8 @@ if isstruct(varargin{1})
     % Check, if all input arguments are structs
     assert(all(cellfun(@isstruct, varargin)), errorStructFields)
     % Check, if all structs contain the two fields vertices and faces
-    assert(all(cellfun(@(x) sum(ismember(fieldnames(x), ...
-        VF_fields)), varargin) == 2), errorStructFields)
-    
-    % Delete all fields except vertices and faces
-    for s = 1:length(varargin)
-        delFields = fieldnames(varargin{s});
-        delFields(ismember(fieldnames(varargin{s}), VF_fields))=[];
-        varargin{s} = rmfield(varargin{s}, delFields);
-    end
+    assert(all(cellfun(@(x) all(ismember(VF_fields, ...
+        fieldnames(x))), varargin)), errorStructFields)
     
     if isscalar(varargin)
         errorArgAndStructLength = ['If the input is only one struct ' ...
@@ -53,14 +40,15 @@ if isstruct(varargin{1})
             errorArgAndStructLength)
     end
     
-    % Order of the fields: vertices, faces
-    varargin = cellfun(@(x) orderfields(x, VF_fields),varargin, 'UniformOutput',0);
-    
     % Convert the structs into one cell array
-    varargin = ...
-        cellfun(@struct2cell, varargin, 'UniformOutput', false);
-    varargin = cellfun(@squeeze, varargin, 'UniformOutput',0);
-    varargin = reshape([varargin{:}],[],1)';
+    tmp = cell(1, 2 * length(varargin));
+    for i = 1:length(varargin)
+        mesh = varargin{i};
+        tmp{2*i-1} = mesh.vertices;
+        tmp{2*i} = mesh.faces;
+    end
+    varargin = tmp;
+    clear mesh;
 end
 
 NoA = length(varargin);
@@ -76,12 +64,12 @@ assert(isscalar(unique(cellfun(@(x) size(x,2), varargin(2:2:end)))), errorFacesR
 
 
 %% loop
-v=[];
-f=[];
+v = [];
+f = [];
 for m = 1:NoA/2
     vm = varargin{2*m-1};
     fm = varargin{2*m};
-    f = [f; fm + size(v,1)]; %#ok<AGROW>
+    f = [f; fm+size(v,1)]; %#ok<AGROW>
     v = [v; vm]; %#ok<AGROW>
 end
 
@@ -98,4 +86,3 @@ switch nargout
         varargout{1} = v;
         varargout{2} = f;
 end
-
