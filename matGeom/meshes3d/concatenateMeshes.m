@@ -9,6 +9,12 @@ function varargout = concatenateMeshes(varargin)
 %   where MESH1, MESH2, ... are structs or struct arrays with the fields  
 %   vertices and faces
 %
+%   Example
+%     apple = readMesh('apple.ply');
+%     apple.vertices = apple.vertices*100;
+%     bunny = readMesh('bunny_F1k.ply');
+%     drawMesh(concatenateMeshes(apple, bunny))
+%
 %   See also 
 %     splitMesh
 
@@ -30,8 +36,15 @@ if isstruct(varargin{1})
     % Check, if all input arguments are structs
     assert(all(cellfun(@isstruct, varargin)), errorStructFields)
     % Check, if all structs contain the two fields vertices and faces
-    assert(all(cellfun(@(x) all(ismember(fieldnames(x), ...
-        VF_fields)), varargin)), errorStructFields)
+    assert(all(cellfun(@(x) sum(ismember(fieldnames(x), ...
+        VF_fields)), varargin) == 2), errorStructFields)
+    
+    % Delete all fields except vertices and faces
+    for s = 1:length(varargin)
+        delFields = fieldnames(varargin{s});
+        delFields(ismember(fieldnames(varargin{s}), VF_fields))=[];
+        varargin{s} = rmfield(varargin{s}, delFields);
+    end
     
     if isscalar(varargin)
         errorArgAndStructLength = ['If the input is only one struct ' ...
@@ -68,7 +81,7 @@ f=[];
 for m = 1:NoA/2
     vm = varargin{2*m-1};
     fm = varargin{2*m};
-    f = [f; fm+size(v,1)]; %#ok<AGROW>
+    f = [f; fm + size(v,1)]; %#ok<AGROW>
     v = [v; vm]; %#ok<AGROW>
 end
 
@@ -78,11 +91,11 @@ end
 
 switch nargout
     case 1
-        mesh.vertices=v;
-        mesh.faces=f;
-        varargout{1}=mesh;
+        mesh.vertices = v;
+        mesh.faces = f;
+        varargout{1} = mesh;
     case 2
-        varargout{1}=v;
-        varargout{2}=f;
+        varargout{1} = v;
+        varargout{2} = f;
 end
 
