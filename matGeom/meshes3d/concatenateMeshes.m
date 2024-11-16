@@ -11,9 +11,13 @@ function varargout = concatenateMeshes(varargin)
 %
 %   Example
 %     apple = readMesh('apple.ply');
-%     apple.vertices = apple.vertices*100;
+%     apple.vertices = apple.vertices*50;
+%     apple = transformMesh(apple, ...
+%         createTranslation3d([-7 -6 0])*createRotationOx(pi/2));
 %     bunny = readMesh('bunny_F1k.ply');
-%     drawMesh(concatenateMeshes(apple, bunny))
+%     bunnyEatsApple = concatenateMeshes(bunny, apple);
+%     drawMesh(bunnyEatsApple)
+%     view(3)
 %
 %   See also 
 %     splitMesh
