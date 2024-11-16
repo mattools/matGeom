@@ -38,6 +38,7 @@ logParValidFunc = @(x) (islogical(x) || isequal(x,1) || isequal(x,0));
 addParameter(parser, 'trimMesh', true, logParValidFunc);
 parse(parser, varargin{:});
 
+% extract base name and file extension
 [~, baseName, ext] = fileparts(filePath);
 switch lower(ext)
     case '.off'
@@ -50,6 +51,11 @@ switch lower(ext)
         mesh = readMesh_obj(filePath);
     otherwise
         error('readMesh.m function does not support %s files.', upper(ext(2:end)));
+end
+
+% trim mesh
+if parser.Results.trimMesh
+    mesh = trimMesh(mesh);
 end
 
 % format output arguments
