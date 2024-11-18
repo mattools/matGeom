@@ -67,7 +67,7 @@ addRequired(p,'plane',@isPlane)
 validStrings = {'above','below'};
 addParameter(p,'part','above',@(x) any(validatestring(x, validStrings)))
 parse(p, plane, varargin{:});
-part=p.Results.part;
+part = p.Results.part;
 
 p = plane(1:3);
 switch part

@@ -2,7 +2,7 @@ function [box3d, rotMat] = orientedBox3d(pts)
 %ORIENTEDBOX3D Object-oriented bounding box of a set of 3D points.
 %
 %   OOBB = orientedBox3d(PTS)
-%   REturns the oriented bounding box of the collection of points in the
+%   Returns the oriented bounding box of the collection of points in the
 %   N-by-3 array PTS. The result is given as:
 %   [XC YC ZC  L W H  PHI THETA PSI]
 %   where (XC,YC,ZC) corresponds to the center of the box, (L,W,H)

@@ -19,13 +19,12 @@ function varargout = reverseMeshFaceOrientation(varargin)
 %   See also 
 %     meshes3d, meshVolume
 %
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% Created: 2024-07-15,    using Matlab 24.1.0.2628055 (R2024a) Update 4
-% Copyright 2024 INRAE.
+% E-mail: david.legland@inrae.fr
+% Created: 2024-07-15, using Matlab 24.1.0.2628055 (R2024a) Update 4
+% Copyright 2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 % extract mesh data
 mesh = parseMeshData(varargin{:});
