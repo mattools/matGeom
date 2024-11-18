@@ -1,19 +1,18 @@
 function varargout = readMesh(filePath, varargin)
-%READMESH Read a 3D mesh by inferring format from file name.
+%READMESH Read a 3D mesh by inferring the format from the file extension.
 %
-%   Usage:
-%   [V, F] = readMesh(FILENAME)
-%   Read the data stored in file FILENAME and return the vertex and face
+%   [V, F] = readMesh(FILEPATH)
+%   Read the data stored in file FILEPATH and return the vertex and face
 %   arrays as NV-by-3 array and NF-by-N array respectively, where NV is the
 %   number of vertices and NF is the number of faces.
 %
-%   MESH = readMesh(FILENAME)
-%   Read the data stored in file FILENAME and return the mesh into a struct
-%   with fields 'vertices' and 'faces'.
-%   The struct also comprises two fields "name" and "fileName":
-%   * "name" corresponds to the base name of the file (without path and
-%       extension)
-%   * "filePath" corresponds to the full (relative) path name of the file. 
+%   MESH = readMesh(FILEPATH)
+%   Read the data stored in file FILEPATH and return the mesh into a struct
+%   with the fields 'vertices' and 'faces'.
+%   In addition, the struct contains the fields 'name' and 'filePath':
+%       'name' corresponds to the base name of the file (without path and
+%              extension)
+%       'filePath' corresponds to the full (relative) path of the file
 %
 %   Example
 %     mesh = readMesh('apple.ply');
@@ -30,10 +29,7 @@ function varargout = readMesh(filePath, varargin)
 % Created: 2020-11-20, using Matlab 9.8.0.1323502 (R2020a)
 % Copyright 2020-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
-parser = inputParser;
-addParameter(parser, 'trimMesh', true, @islogical);
-parse(parser, varargin{:});
-
+% extract base name and file extension
 [~, baseName, ext] = fileparts(filePath);
 switch lower(ext)
     case '.off'

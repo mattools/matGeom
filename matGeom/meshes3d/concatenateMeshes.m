@@ -9,6 +9,16 @@ function varargout = concatenateMeshes(varargin)
 %   where MESH1, MESH2, ... are structs or struct arrays with the fields  
 %   vertices and faces
 %
+%   Example
+%     apple = readMesh('apple.ply');
+%     apple.vertices = apple.vertices*50;
+%     apple = transformMesh(apple, ...
+%         createTranslation3d([-7 -6 0])*createRotationOx(pi/2));
+%     bunny = readMesh('bunny_F1k.ply');
+%     bunnyEatsApple = concatenateMeshes(bunny, apple);
+%     drawMesh(bunnyEatsApple)
+%     view(3)
+%
 %   See also 
 %     splitMesh
 
@@ -32,6 +42,14 @@ if isstruct(varargin{1})
     % Check, if all structs contain the two fields vertices and faces
     assert(all(cellfun(@(x) all(ismember(VF_fields, ...
         fieldnames(x))), varargin)), errorStructFields)
+
+    % Delete all fields except vertices and faces
+    for s = 1:length(varargin)
+        delFields = fieldnames(varargin{s});
+        delFields(ismember(fieldnames(varargin{s}), VF_fields))=[];
+        varargin{s} = rmfield(varargin{s}, delFields);
+    end
+    
     
     if isscalar(varargin)
         errorArgAndStructLength = ['If the input is only one struct ' ...
@@ -40,15 +58,13 @@ if isstruct(varargin{1})
             errorArgAndStructLength)
     end
     
+    % Order of the fields: vertices, faces
+    varargin = cellfun(@(x) orderfields(x, VF_fields),varargin, 'UniformOutput',0);
+    
     % Convert the structs into one cell array
-    tmp = cell(1, 2 * length(varargin));
-    for i = 1:length(varargin)
-        mesh = varargin{i};
-        tmp{2*i-1} = mesh.vertices;
-        tmp{2*i} = mesh.faces;
-    end
-    varargin = tmp;
-    clear mesh;
+    varargin = cellfun(@struct2cell, varargin, 'UniformOutput', false);
+    varargin = cellfun(@squeeze, varargin, 'UniformOutput',0);
+    varargin = reshape([varargin{:}],[],1)';
 end
 
 NoA = length(varargin);
@@ -86,4 +102,3 @@ switch nargout
         varargout{1} = v;
         varargout{2} = f;
 end
-
