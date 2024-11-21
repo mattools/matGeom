@@ -72,11 +72,12 @@ points = nan(2, 2, nCircles);
 valid = delta >= 0;
 
 if any(valid)
+    nValids = sum(valid);
     % compute roots (as a N-by-N-by-2 array)
     u = bsxfun(@plus, -b(valid), bsxfun(@times, [-1 1], sqrt(delta(valid))));
     u = bsxfun(@rdivide, u, a(valid)) / 2;
 
-    if sum(valid) == 1
+    if nValids == 1
         points = [...
             line(1:2) + u(:,1) .* line(3:4); ...
             line(1:2) + u(:,2) .* line(3:4)];
@@ -84,6 +85,6 @@ if any(valid)
         tmp = [...
             line(valid, 1:2) + u(:,1) .* line(valid, 3:4) ...
             line(valid, 1:2) + u(:,2) .* line(valid, 3:4)].';
-	    points(:, :, valid) = permute(reshape(tmp, [2, 2, nCircles]), [2 1 3]);
+	    points(:, :, valid) = permute(reshape(tmp, [2, 2, nValids]), [2 1 3]);
     end
 end

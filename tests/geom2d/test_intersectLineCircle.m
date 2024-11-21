@@ -68,6 +68,39 @@ pts = intersectLineCircle(lines, circles);
 assertEqual(testCase, size(pts), [2 2 2]);
 
 
+function test_ManyLines_ManyCircles_2(testCase) %#ok<*DEFNU>
+% Some of the lines do not intersect some of the circles
+
+lines    = [ 0 0 1 0; 0 0 0 1; 0 0 1 0];
+circles = [ 0 0 1 ; 0 0 1; 4 3 2];
+intersectLineCircle (lines, circles);
+
+pts = intersectLineCircle(lines, circles);
+
+assertEqual(testCase, size(pts), [2 2 3]);
+assertTrue(testCase, ismember([ 1 0], pts(:,:,1), 'rows'));
+assertTrue(testCase, ismember([-1 0], pts(:,:,1), 'rows'));
+assertTrue(testCase, ismember([0  1], pts(:,:,2), 'rows'));
+assertTrue(testCase, ismember([0 -1], pts(:,:,2), 'rows'));
+
+
+function test_ManyLines_ManyCircles_3(testCase) %#ok<*DEFNU>
+% Some of the lines do not intersect some of the circles
+
+% order : valid, invalid, valid, invalid
+lines    = [ 0 0 1 0; 0 0 1 0; 0 0 0 1; 0 0 1 0];
+circles = [ 0 0 1; 4 3 2; 0 0 1; 4 3 2];
+intersectLineCircle (lines, circles);
+
+pts = intersectLineCircle(lines, circles);
+
+assertEqual(testCase, size(pts), [2 2 4]);
+assertTrue(testCase, ismember([ 1 0], pts(:,:,1), 'rows'));
+assertTrue(testCase, ismember([-1 0], pts(:,:,1), 'rows'));
+assertTrue(testCase, ismember([0  1], pts(:,:,3), 'rows'));
+assertTrue(testCase, ismember([0 -1], pts(:,:,3), 'rows'));
+
+
 function test_ManyLines_ManyCircles_Tangents(testCase) %#ok<*DEFNU>
 
 lines    = [ 0 0 1 0; 2 2 1 0];
