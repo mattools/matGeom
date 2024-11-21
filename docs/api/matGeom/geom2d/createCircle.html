@@ -31,7 +31,7 @@
 
    C = createCircle(P1, P2, P3);
    Creates the circle passing through the 3 given points. 
-   C is a 1*3 array of the form: [XC YX R].
+   C is a 1*3 array of the form: [XC YC R].
 
    C = createCircle(P1, P2);
    Creates the circle whith center P1 and passing throuh the point P2.
@@ -49,13 +49,8 @@
      drawPoint([p1 ; p2; p3]);
      drawCircle(circle);
 
-   See also:
-   <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="createDirectedCircle.html" class="code" title="function circle = createDirectedCircle(varargin)">createDirectedCircle</a>
-
-   ---------
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 31/10/2003.</pre></div>
+   See also
+   <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="createDirectedCircle.html" class="code" title="function circle = createDirectedCircle(varargin)">createDirectedCircle</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -75,7 +70,7 @@ This function is called by:
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   C = createCircle(P1, P2, P3);</span>
 0005 <span class="comment">%   Creates the circle passing through the 3 given points.</span>
-0006 <span class="comment">%   C is a 1*3 array of the form: [XC YX R].</span>
+0006 <span class="comment">%   C is a 1*3 array of the form: [XC YC R].</span>
 0007 <span class="comment">%</span>
 0008 <span class="comment">%   C = createCircle(P1, P2);</span>
 0009 <span class="comment">%   Creates the circle whith center P1 and passing throuh the point P2.</span>
@@ -93,43 +88,42 @@ This function is called by:
 0021 <span class="comment">%     drawPoint([p1 ; p2; p3]);</span>
 0022 <span class="comment">%     drawCircle(circle);</span>
 0023 <span class="comment">%</span>
-0024 <span class="comment">%   See also:</span>
+0024 <span class="comment">%   See also</span>
 0025 <span class="comment">%   circles2d, createDirectedCircle</span>
-0026 <span class="comment">%</span>
-0027 <span class="comment">%   ---------</span>
-0028 <span class="comment">%   author : David Legland</span>
-0029 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0030 <span class="comment">%   created the 31/10/2003.</span>
-0031 <span class="comment">%</span>
+0026 
+0027 <span class="comment">% ------</span>
+0028 <span class="comment">% Author: David Legland</span>
+0029 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0030 <span class="comment">% Created: 2003-10-31</span>
+0031 <span class="comment">% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0032 
-0033 
-0034 <span class="keyword">if</span> nargin == 2
-0035     <span class="comment">% inputs are the center and a point on the circle</span>
-0036     p1 = varargin{1};
-0037     p2 = varargin{2};
-0038     x0 = p1(:,1);
-0039     y0 = p1(:,2);
-0040     r = hypot((p2(:,1)-x0), (p2(:,2)-y0));
-0041     
-0042 <span class="keyword">elseif</span> nargin == 3
-0043     <span class="comment">% inputs are three points on the circle</span>
-0044     p1 = varargin{1};
-0045     p2 = varargin{2};
-0046     p3 = varargin{3};
-0047 
-0048     <span class="comment">% compute circle center</span>
-0049     line1 = <a href="medianLine.html" class="code" title="function line = medianLine(varargin)">medianLine</a>(p1, p2);
-0050     line2 = <a href="medianLine.html" class="code" title="function line = medianLine(varargin)">medianLine</a>(p1, p3);
-0051     point = <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(line1, line2);
-0052     x0 = point(:, 1); 
-0053     y0 = point(:, 2);
-0054     
-0055     <span class="comment">% circle radius</span>
-0056     r = hypot((p1(:,1)-x0), (p1(:,2)-y0));
-0057 <span class="keyword">end</span>
-0058     
-0059 <span class="comment">% create array for returning result</span>
-0060 circle = [x0 y0 r];</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0033 <span class="keyword">if</span> nargin == 2
+0034     <span class="comment">% inputs are the center and a point on the circle</span>
+0035     p1 = varargin{1};
+0036     p2 = varargin{2};
+0037     x0 = p1(:,1);
+0038     y0 = p1(:,2);
+0039     r = hypot((p2(:,1)-x0), (p2(:,2)-y0));
+0040     
+0041 <span class="keyword">elseif</span> nargin == 3
+0042     <span class="comment">% inputs are three points on the circle</span>
+0043     p1 = varargin{1};
+0044     p2 = varargin{2};
+0045     p3 = varargin{3};
+0046 
+0047     <span class="comment">% compute circle center</span>
+0048     line1 = <a href="medianLine.html" class="code" title="function line = medianLine(varargin)">medianLine</a>(p1, p2);
+0049     line2 = <a href="medianLine.html" class="code" title="function line = medianLine(varargin)">medianLine</a>(p1, p3);
+0050     point = <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(line1, line2);
+0051     x0 = point(:, 1); 
+0052     y0 = point(:, 2);
+0053     
+0054     <span class="comment">% circle radius</span>
+0055     r = hypot((p1(:,1)-x0), (p1(:,2)-y0));
+0056 <span class="keyword">end</span>
+0057     
+0058 <span class="comment">% create array for returning result</span>
+0059 circle = [x0 y0 r];</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of grSimplifyBranches</title>
+  <meta name="keywords" content="grSimplifyBranches">
+  <meta name="description" content="GRSIMPLIFYBRANCHES Replace branches of a graph by single edges.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; grSimplifyBranches.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>grSimplifyBranches
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>GRSIMPLIFYBRANCHES Replace branches of a graph by single edges.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = grSimplifyBranches(nodes, edges) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">GRSIMPLIFYBRANCHES Replace branches of a graph by single edges.
+
+   [NODES2, EDGES2] = grSimplifyBranches(NODES, EDGES)
+   renvoie une version simplifiee d'un graphe, en ne gardant que les 
+   points multiples et les aretes reliant les points multiples.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="mergeGraphs.html" class="code" title="function varargout = mergeGraphs(varargin)">mergeGraphs</a>	MERGEGRAPHS Merge two graphs, by adding nodes, edges and faces lists.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = grSimplifyBranches(nodes, edges)</a>
+0002 <span class="comment">%GRSIMPLIFYBRANCHES Replace branches of a graph by single edges.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [NODES2, EDGES2] = grSimplifyBranches(NODES, EDGES)</span>
+0005 <span class="comment">%   renvoie une version simplifiee d'un graphe, en ne gardant que les</span>
+0006 <span class="comment">%   points multiples et les aretes reliant les points multiples.</span>
+0007 
+0008 <span class="comment">% ------</span>
+0009 <span class="comment">% Author: David Legland</span>
+0010 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0011 <span class="comment">% Created: 2003-08-13</span>
+0012 <span class="comment">% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0013 
+0014 Mnodes = [];    <span class="comment">% size Nn*2 -&gt; nodes coordinates</span>
+0015 Sedges = [];    <span class="comment">% size Ne*2 -&gt; indices of nodes</span>
+0016 Mpoints = [];   <span class="comment">% size Nn*1 -&gt; indices of Multiple points</span>
+0017                 <span class="comment">%     in nodes input array</span>
+0018 
+0019 branch = [];    <span class="comment">% size Nb*2 (variable)</span>
+0020 
+0021 Nn = 0;
+0022 Ne = 0;
+0023 Nb = 0;
+0024 
+0025 <span class="comment">% look for the first multiple point</span>
+0026 p = 1;
+0027 <span class="keyword">while</span> length(find(edges(:,1) == p | edges(:,2) == p)) &lt; 3
+0028     p = p + 1;
+0029 <span class="keyword">end</span>
+0030 
+0031 Mpoints(1) = p;
+0032 Mnodes(1, 1:2) = nodes(p, 1:2);
+0033 Nn = Nn + 1;
+0034 
+0035 <span class="comment">% add the branches of the first multiple point</span>
+0036 neighbours = find(edges(:,1)==p | edges(:,2)==p);
+0037 <span class="keyword">for</span> b = 1:length(neighbours)
+0038     Nb = Nb+1;
+0039     edge = edges(neighbours(b),:);
+0040     <span class="keyword">if</span> edge(1) == p
+0041         branch(Nb, 1:2) = [p edge(2)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0042     <span class="keyword">else</span>
+0043         branch(Nb, 1:2) = [p edge(1)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0044     <span class="keyword">end</span>
+0045 <span class="keyword">end</span>
+0046 
+0047 <span class="comment">% process each branch, until there is no more branch to process.</span>
+0048 <span class="comment">% b is index of current branch</span>
+0049 b = 0;
+0050 <span class="keyword">while</span> b &lt; length(branch)
+0051     b = b+1;
+0052     
+0053     <span class="comment">% check if the branch is valid</span>
+0054     <span class="keyword">if</span> branch(b, 1) == 0
+0055         <span class="keyword">continue</span>;
+0056     <span class="keyword">end</span>
+0057     
+0058     <span class="comment">% initialize iteration</span>
+0059     pNode = branch(b, 1);
+0060     node = branch(b,2);
+0061     neighbours = find(edges(:,1) == node | edges(:,2) == node);
+0062     
+0063 <span class="comment">%     disp(sprintf('node %3d (%03d ; %03d) -&gt; %3d (%03d ; %03d)', ...</span>
+0064 <span class="comment">%         Mnode, nodes(Mnode, 1), nodes(Mnode, 2), ...</span>
+0065 <span class="comment">%         node, nodes(node, 1), nodes(node, 2)));</span>
+0066     
+0067     <span class="keyword">while</span> length(neighbours) &lt; 3
+0068         <span class="comment">% look for the next point on the current branch</span>
+0069         next = 0;
+0070         <span class="keyword">for</span> n = 1:length(neighbours)
+0071             edge = edges(neighbours(n), :);
+0072             <span class="keyword">if</span> edge(1)~= node &amp;&amp; edge(1)~= pNode
+0073                 next = edge(1);
+0074                 <span class="keyword">break</span>;
+0075             <span class="keyword">end</span>
+0076             <span class="keyword">if</span> edge(2)~= node &amp;&amp; edge(2)~= pNode
+0077                 next = edge(2);
+0078                 <span class="keyword">break</span>;
+0079             <span class="keyword">end</span>
+0080         <span class="keyword">end</span>
+0081         
+0082         pNode = node;
+0083         node = next;
+0084         neighbours = find(edges(:,1) == node | edges(:,2) == node);
+0085     <span class="keyword">end</span>
+0086     
+0087     <span class="comment">% node is now  the next multiple point, and pNode contains the last</span>
+0088     <span class="comment">% point of the branch.</span>
+0089     
+0090     <span class="comment">% check if the multiple point has already been processed</span>
+0091     index = find(Mpoints==node);
+0092     <span class="keyword">if</span> ~isempty(index)
+0093         <span class="comment">% find the branch starting with node, and with pNode has</span>
+0094         <span class="comment">% second point, and set it to [0 0] to avoid it to be</span>
+0095         <span class="comment">% processed again</span>
+0096         <span class="comment">%disp('remove branch');</span>
+0097         <span class="keyword">for</span> b2 = 1:Nb
+0098             <span class="keyword">if</span> branch(b2, 1) == node &amp;&amp; branch(b2, 2) == pNode
+0099                 <span class="comment">%disp('find branch');</span>
+0100                 branch(b2, 1:2) = 0; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0101                 <span class="keyword">break</span>;
+0102             <span class="keyword">end</span>
+0103         <span class="keyword">end</span>
+0104         
+0105     <span class="keyword">else</span>
+0106         <span class="comment">% add the multiple point to the list of points</span>
+0107         <span class="comment">%disp('add point');</span>
+0108         Nn = Nn+1;
+0109         Mnodes(Nn, 1:2) = nodes(node, 1:2);
+0110         index = Nn;
+0111         Mpoints(Nn) = node; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0112         
+0113         <span class="comment">% add each neighbour of the new multiple point (but not</span>
+0114         <span class="comment">% the neighbour containing pNode) to the list of branches</span>
+0115         <span class="keyword">for</span> n = 1:length(neighbours)
+0116             edge = edges(neighbours(n), :);
+0117             <span class="keyword">if</span> edge(1) ~= pNode &amp;&amp; edge(2) ~= pNode
+0118                 <span class="comment">%disp('add a branch');</span>
+0119                 Nb = Nb + 1;
+0120                 <span class="keyword">if</span> edge(1) == node
+0121                     branch(Nb, 1:2) = [node edge(2)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0122                 <span class="keyword">else</span>
+0123                     branch(Nb, 1:2) = [node edge(1)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0124                 <span class="keyword">end</span>
+0125             <span class="keyword">end</span>
+0126         <span class="keyword">end</span>
+0127     <span class="keyword">end</span>
+0128     
+0129     <span class="comment">%disp('add new Edge');</span>
+0130     Ne = Ne + 1;
+0131     Sedges(Ne, 1:2) = [find(Mpoints == branch(b,1)), index]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0132 <span class="keyword">end</span>
+0133 
+0134 
+0135 <span class="comment">% process output depending on how many arguments are needed</span>
+0136 <span class="keyword">if</span> nargout == 1
+0137     out{1} = Mnodes;
+0138     out{2} = Sedges;
+0139     varargout{1} = out;
+0140 <span class="keyword">end</span>
+0141 
+0142 <span class="keyword">if</span> nargout == 2
+0143     varargout{1} = Mnodes;
+0144     varargout{2} = Sedges;
+0145 <span class="keyword">end</span>
+0146 
+0147 <span class="keyword">return</span>;
+0148</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

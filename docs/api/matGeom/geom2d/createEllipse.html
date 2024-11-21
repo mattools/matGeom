@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of createEllipse</title>
+  <meta name="keywords" content="createEllipse">
+  <meta name="description" content="CREATEELLIPSE Create an ellipse, from various input types.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; createEllipse.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>createEllipse
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CREATEELLIPSE Create an ellipse, from various input types.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function elli = createEllipse(type, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CREATEELLIPSE Create an ellipse, from various input types.
+
+   ELLI = createEllipse('CartesianCoefficients', COEFFS)
+   ELLI = createEllipse(COEFFS)
+   Where COEFFS are the cartesian coefficients of the ellipse:
+     COEFFS = [A B C D E F] 
+   such that the points on the ellipse follow:
+     A*X^2 + B*X*Y + C*Y^2 + D*X + E*Y + F = 0
+   
+
+   Example
+     elli = [30 20 40 20 30];
+     coeffs = ellipseCartesianCoefficients(elli)
+     elli2 = createEllipse(coeffs)
+     elli2 =
+        30.0000   20.0000   40.0000   20.0000   30.0000
+
+
+   References
+   https://en.wikipedia.org/wiki/Ellipse#Standard_parametric_representation
+
+   See also
+     <a href="ellipses2d.html" class="code" title="function ellipses2d(varargin)">ellipses2d</a>, <a href="equivalentEllipse.html" class="code" title="function ell = equivalentEllipse(points)">equivalentEllipse</a>, <a href="fitEllipse.html" class="code" title="function elli = fitEllipse(varargin)">fitEllipse</a>,
+     <a href="ellipseCartesianCoefficients.html" class="code" title="function coeffs = ellipseCartesianCoefficients(elli)">ellipseCartesianCoefficients</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="transformEllipse.html" class="code" title="function res = transformEllipse(elli, transfo)">transformEllipse</a>	TRANSFORMELLIPSE Apply an affine transformation to an ellipse.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function elli = createEllipse(type, varargin)</a>
+0002 <span class="comment">%CREATEELLIPSE Create an ellipse, from various input types.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   ELLI = createEllipse('CartesianCoefficients', COEFFS)</span>
+0005 <span class="comment">%   ELLI = createEllipse(COEFFS)</span>
+0006 <span class="comment">%   Where COEFFS are the cartesian coefficients of the ellipse:</span>
+0007 <span class="comment">%     COEFFS = [A B C D E F]</span>
+0008 <span class="comment">%   such that the points on the ellipse follow:</span>
+0009 <span class="comment">%     A*X^2 + B*X*Y + C*Y^2 + D*X + E*Y + F = 0</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%     elli = [30 20 40 20 30];</span>
+0014 <span class="comment">%     coeffs = ellipseCartesianCoefficients(elli)</span>
+0015 <span class="comment">%     elli2 = createEllipse(coeffs)</span>
+0016 <span class="comment">%     elli2 =</span>
+0017 <span class="comment">%        30.0000   20.0000   40.0000   20.0000   30.0000</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   References</span>
+0021 <span class="comment">%   https://en.wikipedia.org/wiki/Ellipse#Standard_parametric_representation</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   See also</span>
+0024 <span class="comment">%     ellipses2d, equivalentEllipse, fitEllipse,</span>
+0025 <span class="comment">%     ellipseCartesianCoefficients</span>
+0026 <span class="comment">%</span>
+0027 
+0028 <span class="comment">% ------</span>
+0029 <span class="comment">% Author: David Legland</span>
+0030 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0031 <span class="comment">% Created: 2022-09-05, using Matlab 9.12.0.1884302 (R2022a)</span>
+0032 <span class="comment">% Copyright 2022-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0033 
+0034 <span class="keyword">if</span> nargin == 1 &amp;&amp; isnumeric(type)
+0035     varargin = {type};
+0036     type = <span class="string">'CartesianCoefficients'</span>;
+0037 <span class="keyword">end</span>
+0038 
+0039 <span class="keyword">if</span> strcmpi(type, <span class="string">'CartesianCoefficients'</span>)
+0040     <span class="comment">% retrieve coefficients</span>
+0041     coeffs = varargin{1};
+0042     <span class="keyword">if</span> ~isnumeric(coeffs) || any(size(coeffs) ~= [1 6])
+0043         error(<span class="string">'Conversion from cartesian coefficients expects a 1-by-6 numeric array'</span>);
+0044     <span class="keyword">end</span>
+0045 
+0046     <span class="comment">% call coefficients with their usual names</span>
+0047     A = coeffs(1); B = coeffs(2); C = coeffs(3);
+0048     D = coeffs(4); E = coeffs(5); F = coeffs(6);
+0049 
+0050     <span class="comment">% retrieve center</span>
+0051     delta = B * B - 4 * A * C;
+0052     xc = (2 * C * D - B * E) / delta;
+0053     yc = (2 * A * E - B * D) / delta;
+0054 
+0055     <span class="comment">% find orientation</span>
+0056     theta = 0.5 * atan(B / (A - C));
+0057 
+0058     <span class="comment">% retrieve length of semi-axes</span>
+0059     common = 2 * (A * E^2 + C * D^2 - B * D * E + delta * F);
+0060     root = sqrt((A - C)^2 + B^2);
+0061     a1 = -sqrt(common * ((A + C) + root)) / delta;
+0062     a2 = -sqrt(common * ((A + C) - root)) / delta;
+0063 
+0064     elli = [xc yc a1 a2 rad2deg(theta)];
+0065 
+0066 <span class="keyword">else</span>
+0067     error(<span class="string">'Unknown representation type: '</span> + type);
+0068 <span class="keyword">end</span>
+0069</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

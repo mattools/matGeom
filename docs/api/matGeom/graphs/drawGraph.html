@@ -1,0 +1,343 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawGraph</title>
+  <meta name="keywords" content="drawGraph">
+  <meta name="description" content="DRAWGRAPH Draw a graph, given as a set of vertices and edges.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; drawGraph.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawGraph
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWGRAPH Draw a graph, given as a set of vertices and edges.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawGraph(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWGRAPH Draw a graph, given as a set of vertices and edges.
+
+   drawGraph(NODES, EDGES) 
+   Draws a graph specified by a set of nodes (array N-by-2 or N-by-3,
+   corresponding to coordinate of each node), and a set of edges (an array
+   NE-by-2, containing for each edge the first and the second node).
+   Default drawing is a red circle for nodes and a blue line for edges.
+
+   drawGraph(NODES, EDGES, FACES)
+   Also draws faces of the graph as patches.
+
+   drawGraph(GRAPH)
+   Passes argument in a srtucture with at least 2 fields named 'nodes' and
+   'edges', and possibly one field 'faces', corresponding to previously
+   described parameters.
+   GRAPH can also be a cell array, whose first element is node array,
+   second element is edges array, and third element, if present, is faces
+   array.
+
+
+   drawGraph(..., SNODES)
+   drawGraph(..., SNODES, SEDGES)
+   drawGraph(..., SNODES, SEDGES, SFACES)
+   Specifies the draw mode for each element, as in the classical 'plot'
+   function. To not display some elements, uses 'none'.
+
+
+   H = drawGraph(...) 
+   Returns handle to the set of edges.
+   
+   [HN, HE] = drawGraph(...) 
+   Returns handle to the set of nodes and to the set of edges.
+
+   [HN, HE, HF] = drawGraph(...)   
+   Also returns handle to the set of faces.
+   
+   See also
+   graphs, <a href="drawGraphEdges.html" class="code" title="function varargout = drawGraphEdges(varargin)">drawGraphEdges</a>, <a href="fillGraphFaces.html" class="code" title="function varargout = fillGraphFaces(varargin)">fillGraphFaces</a>, <a href="clipGraph.html" class="code" title="function varargout = clipGraph(nodes, edges, varargin)">clipGraph</a>, <a href="clipGraphPolygon.html" class="code" title="function [nodes2, edges2] = clipGraphPolygon(nodes, edges, poly)">clipGraphPolygon</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawGraph.html" class="code" title="function varargout = drawGraph(varargin)">drawGraph</a>	DRAWGRAPH Draw a graph, given as a set of vertices and edges.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawGraph.html" class="code" title="function varargout = drawGraph(varargin)">drawGraph</a>	DRAWGRAPH Draw a graph, given as a set of vertices and edges.</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function res = concatArguments(in1, in2)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawGraph(varargin)</a>
+0002 <span class="comment">%DRAWGRAPH Draw a graph, given as a set of vertices and edges.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawGraph(NODES, EDGES)</span>
+0005 <span class="comment">%   Draws a graph specified by a set of nodes (array N-by-2 or N-by-3,</span>
+0006 <span class="comment">%   corresponding to coordinate of each node), and a set of edges (an array</span>
+0007 <span class="comment">%   NE-by-2, containing for each edge the first and the second node).</span>
+0008 <span class="comment">%   Default drawing is a red circle for nodes and a blue line for edges.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   drawGraph(NODES, EDGES, FACES)</span>
+0011 <span class="comment">%   Also draws faces of the graph as patches.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   drawGraph(GRAPH)</span>
+0014 <span class="comment">%   Passes argument in a srtucture with at least 2 fields named 'nodes' and</span>
+0015 <span class="comment">%   'edges', and possibly one field 'faces', corresponding to previously</span>
+0016 <span class="comment">%   described parameters.</span>
+0017 <span class="comment">%   GRAPH can also be a cell array, whose first element is node array,</span>
+0018 <span class="comment">%   second element is edges array, and third element, if present, is faces</span>
+0019 <span class="comment">%   array.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   drawGraph(..., SNODES)</span>
+0023 <span class="comment">%   drawGraph(..., SNODES, SEDGES)</span>
+0024 <span class="comment">%   drawGraph(..., SNODES, SEDGES, SFACES)</span>
+0025 <span class="comment">%   Specifies the draw mode for each element, as in the classical 'plot'</span>
+0026 <span class="comment">%   function. To not display some elements, uses 'none'.</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%   H = drawGraph(...)</span>
+0030 <span class="comment">%   Returns handle to the set of edges.</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">%   [HN, HE] = drawGraph(...)</span>
+0033 <span class="comment">%   Returns handle to the set of nodes and to the set of edges.</span>
+0034 <span class="comment">%</span>
+0035 <span class="comment">%   [HN, HE, HF] = drawGraph(...)</span>
+0036 <span class="comment">%   Also returns handle to the set of faces.</span>
+0037 <span class="comment">%</span>
+0038 <span class="comment">%   See also</span>
+0039 <span class="comment">%   graphs, drawGraphEdges, fillGraphFaces, clipGraph, clipGraphPolygon</span>
+0040 <span class="comment">%</span>
+0041 
+0042 <span class="comment">% ------</span>
+0043 <span class="comment">% Author: David Legland</span>
+0044 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0045 <span class="comment">% Created: 2003-07-17</span>
+0046 <span class="comment">% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0047 
+0048 <span class="comment">%% initialisations</span>
+0049 
+0050 <span class="comment">% uses empty arrays by default for edges and faces</span>
+0051 e = [];
+0052 f = [];
+0053 
+0054 <span class="comment">% default styles for nodes, edges, and faces</span>
+0055 
+0056 <span class="comment">% nodes are drawn as red circles</span>
+0057 sn = {<span class="string">'linestyle'</span>, <span class="string">'none'</span>, <span class="string">'color'</span>, <span class="string">'r'</span>, <span class="string">'marker'</span>, <span class="string">'o'</span>};
+0058 
+0059 <span class="comment">% edges are drawn as blue lines</span>
+0060 se = {<span class="string">'linestyle'</span>, <span class="string">'-'</span>, <span class="string">'color'</span>, <span class="string">'b'</span>};
+0061 
+0062 <span class="comment">% faces are cyan, their edges are not drawn</span>
+0063 sf = {<span class="string">'EdgeColor'</span>, <span class="string">'none'</span>, <span class="string">'Facecolor'</span>, <span class="string">'c'</span>};
+0064 
+0065 
+0066 <span class="comment">%% Process input arguments</span>
+0067 
+0068 <span class="comment">% case of a call without arguments</span>
+0069 <span class="keyword">if</span> nargin == 0
+0070     help <a href="drawGraph.html" class="code" title="function varargout = drawGraph(varargin)">drawGraph</a>;
+0071     <span class="keyword">return</span>;
+0072 <span class="keyword">end</span>
+0073 
+0074 <span class="comment">% First extract the graph structure</span>
+0075 
+0076 var = varargin{1};
+0077 <span class="keyword">if</span> iscell(var)
+0078     <span class="comment">% graph is stored as a cell array: first cell is nodes, second one is</span>
+0079     <span class="comment">% edges, and third is faces</span>
+0080     n = var{1};
+0081     <span class="keyword">if</span> length(var)&gt;1
+0082         e = var{2};
+0083     <span class="keyword">end</span>
+0084     <span class="keyword">if</span> length(var)&gt;2
+0085         f = var{3};
+0086     <span class="keyword">end</span>
+0087     varargin(1) = [];
+0088 <span class="keyword">elseif</span> isstruct(var)
+0089     <span class="comment">% graph is stored as a structure, with fields 'nodes', 'edges', and</span>
+0090     <span class="comment">% eventually 'faces'.</span>
+0091     n = var.nodes;
+0092     e = var.edges;
+0093     <span class="keyword">if</span> isfield(var, <span class="string">'faces'</span>)
+0094         f = var.faces;
+0095     <span class="keyword">end</span>
+0096     varargin(1) = [];
+0097 <span class="keyword">else</span>
+0098     <span class="comment">% graph is stored as set of variables: nodes, edges, and eventually</span>
+0099     <span class="comment">% faces</span>
+0100     n = varargin{1};
+0101     e = varargin{2};
+0102     varargin(1:2) = [];
+0103     
+0104     <span class="keyword">if</span> ~isempty(varargin)
+0105         var = varargin{1};
+0106         <span class="keyword">if</span> isnumeric(var)
+0107             <span class="comment">% faces are stored in a numeric array of indices</span>
+0108             f = var;
+0109             varargin(1) = [];
+0110         <span class="keyword">elseif</span> iscell(var)
+0111             <span class="keyword">if</span> ~ischar(var{1})
+0112                 <span class="comment">% faces are stored in a cell array, each cell containing a</span>
+0113                 <span class="comment">% row vector of indices</span>
+0114                 f = var;
+0115                 varargin(1) = [];
+0116             <span class="keyword">end</span>
+0117         <span class="keyword">end</span>
+0118     <span class="keyword">end</span>
+0119 <span class="keyword">end</span>
+0120 
+0121 <span class="comment">% extract drawing style</span>
+0122 
+0123 <span class="keyword">if</span> ~isempty(varargin)
+0124     sn = <a href="#_sub1" class="code" title="subfunction res = concatArguments(in1, in2)">concatArguments</a>(sn, varargin{1});
+0125 <span class="keyword">end</span>
+0126 
+0127 <span class="keyword">if</span> length(varargin)&gt;1
+0128     se = <a href="#_sub1" class="code" title="subfunction res = concatArguments(in1, in2)">concatArguments</a>(se, varargin{2});
+0129 <span class="keyword">end</span>
+0130 
+0131 <span class="keyword">if</span> length(varargin)&gt;2
+0132     sf = <a href="#_sub1" class="code" title="subfunction res = concatArguments(in1, in2)">concatArguments</a>(sf, varargin{3});
+0133 <span class="keyword">end</span>
+0134 
+0135 
+0136 
+0137 <span class="comment">%% Main drawing processing</span>
+0138 
+0139 hold on;
+0140 
+0141 <span class="keyword">if</span> size(n, 2) == 2
+0142     <span class="comment">% Draw a 2 dimensional graph</span>
+0143 
+0144     <span class="comment">% Draw faces of the graph</span>
+0145     <span class="keyword">if</span> ~strcmp(sf{1}, <span class="string">'none'</span>) &amp;&amp; ~isempty(f)
+0146         <span class="keyword">if</span> iscell(f)
+0147             <span class="comment">% each face is contained in a cell.</span>
+0148             hf = zeros(size(f));
+0149             <span class="keyword">for</span> fi = 1:length(f)
+0150                 hf(fi) = patch(<span class="string">'Faces'</span>, f{fi}, <span class="string">'Vertices'</span>, n, sf{:}); 
+0151             <span class="keyword">end</span>
+0152         <span class="keyword">else</span>
+0153             <span class="comment">% process faces as an Nf*N array. Nf is the number of faces,</span>
+0154             <span class="comment">% and all faces have the same number of vertices (nodes).</span>
+0155             hf = patch(<span class="string">'Faces'</span>, f, <span class="string">'Vertices'</span>, n, sf{:}); 
+0156         <span class="keyword">end</span>
+0157     <span class="keyword">end</span>
+0158     
+0159     <span class="comment">% Draw 2D Edges</span>
+0160     <span class="keyword">if</span> ~strcmp(se{1}, <span class="string">'none'</span>) &amp;&amp; size(e, 1) &gt; 0
+0161         he = plot([n(e(:,1),1) n(e(:,2),1)]', [n(e(:,1),2) n(e(:,2),2)]', se{:});
+0162     <span class="keyword">end</span>
+0163 
+0164     <span class="comment">% Draw 2D nodes</span>
+0165     <span class="keyword">if</span> ~strcmp(sn{1}, <span class="string">'none'</span>)
+0166         hn = plot(n(:,1), n(:,2), sn{:});
+0167     <span class="keyword">end</span>
+0168     
+0169     
+0170 <span class="keyword">elseif</span> size(n, 2)==3
+0171     <span class="comment">% Draw a 3 dimensional graph</span>
+0172 
+0173     <span class="comment">% use a zbuffer to avoid display pbms.</span>
+0174     set(gcf, <span class="string">'renderer'</span>, <span class="string">'zbuffer'</span>);
+0175 
+0176     <span class="comment">% Draw 3D Faces</span>
+0177     <span class="keyword">if</span> ~strcmp(sf{1}, <span class="string">'none'</span>)
+0178         <span class="keyword">if</span> iscell(f)
+0179             <span class="comment">% each face is contained in a cell.</span>
+0180             hf = zeros(size(f));
+0181             <span class="keyword">for</span> fi = 1:length(f)
+0182                 hf(fi) = patch(<span class="string">'Faces'</span>, f{fi}, <span class="string">'Vertices'</span>, n, sf{:}); 
+0183             <span class="keyword">end</span>
+0184         <span class="keyword">else</span>
+0185             <span class="comment">% process faces as an Nf*N array. Nf i the number of faces,</span>
+0186             <span class="comment">% and all faces have the same number of vertices (nodes).</span>
+0187             hf = patch(<span class="string">'Faces'</span>, f, <span class="string">'Vertices'</span>, n, sf{:}); 
+0188         <span class="keyword">end</span>
+0189     <span class="keyword">end</span>
+0190        
+0191     <span class="comment">% Draw 3D edges</span>
+0192     <span class="keyword">if</span> ~strcmp(se{1}, <span class="string">'none'</span>) &amp;&amp; size(e, 1) &gt; 0
+0193         he = line(<span class="keyword">...</span>
+0194             [n(e(:,1),1) n(e(:,2),1)]', <span class="keyword">...</span>
+0195             [n(e(:,1),2) n(e(:,2),2)]', <span class="keyword">...</span>
+0196             [n(e(:,1),3) n(e(:,2),3)]', <span class="keyword">...</span>
+0197             se{:});
+0198     <span class="keyword">end</span>
+0199     
+0200     <span class="comment">% Draw 3D nodes</span>
+0201     <span class="keyword">if</span> ~strcmp(sn{1}, <span class="string">'none'</span>)
+0202         hn = plot3(n(:,1), n(:,2), n(:,3), sn{:});
+0203     <span class="keyword">end</span>
+0204     
+0205 <span class="keyword">end</span>
+0206 
+0207 
+0208 <span class="comment">%% Format output arguments</span>
+0209 
+0210 <span class="comment">% return handle to edges</span>
+0211 <span class="keyword">if</span> nargout==1
+0212     varargout{1} = he;
+0213 <span class="keyword">end</span>
+0214 
+0215 <span class="comment">% return handle to nodes and edges</span>
+0216 <span class="keyword">if</span> nargout==2
+0217     varargout{1} = hn;
+0218     varargout{2} = he;
+0219 <span class="keyword">end</span>
+0220 
+0221 <span class="comment">% return handle to nodes, edges and faces</span>
+0222 <span class="keyword">if</span> nargout==3
+0223     varargout{1} = hn;
+0224     varargout{2} = he;
+0225     varargout{3} = hf;
+0226 <span class="keyword">end</span>
+0227 
+0228 
+0229 
+0230 <span class="keyword">end</span>
+0231 
+0232 <a name="_sub1" href="#_subfunctions" class="code">function res = concatArguments(in1, in2)</a>
+0233 <span class="comment">% in1 is a cell array already initialized</span>
+0234 <span class="comment">% in2 is an argument that can be:</span>
+0235 <span class="comment">%   - empty</span>
+0236 <span class="comment">%   - the string 'none'</span>
+0237 <span class="comment">%   - another cell array</span>
+0238 
+0239 <span class="keyword">if</span> isempty(in2)
+0240     res = in1;
+0241     <span class="keyword">return</span>;
+0242 <span class="keyword">end</span>
+0243 
+0244 <span class="keyword">if</span> ischar(in2)
+0245     <span class="keyword">if</span> strcmp(<span class="string">'none'</span>, in2)
+0246         res = {<span class="string">'none'</span>};
+0247         <span class="keyword">return</span>;
+0248     <span class="keyword">end</span>
+0249 <span class="keyword">end</span>
+0250 
+0251 <span class="keyword">if</span> iscell(in1)
+0252     res = [in1(:)' in2(:)'];
+0253 <span class="keyword">else</span>
+0254     res = [{in1} in2(:)];
+0255 <span class="keyword">end</span>
+0256 
+0257 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

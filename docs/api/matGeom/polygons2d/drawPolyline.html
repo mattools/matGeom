@@ -56,13 +56,8 @@
    % The same, with different drawing options
    drawPolyline([px py], 'closed', 'lineWidth', 2, 'lineStyle', '--');
 
-   See Also:
-   polygons2d, <a href="drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a>
-
-   ---------
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 06/04/2004.</pre></div>
+   See also
+   polygons2d, <a href="drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -71,7 +66,7 @@ This function calls:
 <li><a href="drawPolyline.html" class="code" title="function varargout = drawPolyline(varargin)">drawPolyline</a>	DRAWPOLYLINE Draw a polyline specified by a list of points.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="../../matGeom/geom2d/drawBezierCurve.html" class="code" title="function varargout = drawBezierCurve(points, varargin)">drawBezierCurve</a>	DRAWBEZIERCURVE Draw a cubic bezier curve defined by 4 control points.</li><li><a href="drawPolyline.html" class="code" title="function varargout = drawPolyline(varargin)">drawPolyline</a>	DRAWPOLYLINE Draw a polyline specified by a list of points.</li></ul>
+<li><a href="../../matGeom/geom2d/drawBezierCurve.html" class="code" title="function varargout = drawBezierCurve(varargin)">drawBezierCurve</a>	DRAWBEZIERCURVE Draw a cubic bezier curve defined by 4 control points.</li><li><a href="drawPolyline.html" class="code" title="function varargout = drawPolyline(varargin)">drawPolyline</a>	DRAWPOLYLINE Draw a polyline specified by a list of points.</li></ul>
 <!-- crossreference -->
 
 
@@ -107,86 +102,79 @@ This function is called by:
 0028 <span class="comment">%   % The same, with different drawing options</span>
 0029 <span class="comment">%   drawPolyline([px py], 'closed', 'lineWidth', 2, 'lineStyle', '--');</span>
 0030 <span class="comment">%</span>
-0031 <span class="comment">%   See Also:</span>
+0031 <span class="comment">%   See also</span>
 0032 <span class="comment">%   polygons2d, drawPolygon</span>
-0033 <span class="comment">%</span>
-0034 <span class="comment">%   ---------</span>
-0035 <span class="comment">%   author : David Legland</span>
-0036 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0037 <span class="comment">%   created the 06/04/2004.</span>
-0038 <span class="comment">%</span>
+0033 
+0034 <span class="comment">% ------</span>
+0035 <span class="comment">% Author: David Legland</span>
+0036 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0037 <span class="comment">% Created: 2004-04-06</span>
+0038 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0039 
-0040 <span class="comment">%   HISTORY</span>
-0041 <span class="comment">%   03/01/2007: better processing of input, and update doc (drawing</span>
-0042 <span class="comment">%       options and CLOSE option)</span>
-0043 <span class="comment">%   30/04/2009 rename as drawPolyline.</span>
-0044 <span class="comment">%   2011-10-11 add management of axes handle</span>
-0045 
-0046 
-0047 <span class="comment">% extract handle of axis to draw on</span>
-0048 <span class="keyword">if</span> isAxisHandle(varargin{1})
-0049     ax = varargin{1};
-0050     varargin(1) = [];
-0051 <span class="keyword">else</span>
-0052     ax = gca;
-0053 <span class="keyword">end</span>
-0054 
-0055 <span class="comment">% If first argument is a cell array, draw each curve individually,</span>
-0056 <span class="comment">% and eventually returns handle of each plot.</span>
-0057 var = varargin{1};
-0058 <span class="keyword">if</span> iscell(var)
-0059     h = [];
-0060     <span class="keyword">for</span> i = 1:length(var(:))
-0061         h = [h ; <a href="drawPolyline.html" class="code" title="function varargout = drawPolyline(varargin)">drawPolyline</a>(ax, var{i}, varargin{2:end})]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0062     <span class="keyword">end</span>
-0063     <span class="keyword">if</span> nargout &gt; 0
-0064         varargout = {h};
-0065     <span class="keyword">end</span>
-0066     <span class="keyword">return</span>;
-0067 <span class="keyword">end</span>
-0068 
-0069 <span class="comment">% extract curve coordinate</span>
-0070 <span class="keyword">if</span> size(var, 2) == 1
-0071     <span class="comment">% first argument contains x coord, second argument contains y coord</span>
-0072     px = var;
-0073     <span class="keyword">if</span> length(varargin) == 1
-0074         error(<span class="string">'Wrong number of arguments in drawPolyline'</span>);
-0075     <span class="keyword">end</span>
-0076     py = varargin{2};
-0077     varargin = varargin(3:end);
-0078 <span class="keyword">else</span>
-0079     <span class="comment">% first argument contains both coordinate</span>
-0080     px = var(:, 1);
-0081     py = var(:, 2);
-0082     varargin = varargin(2:end);
-0083 <span class="keyword">end</span>
-0084 
-0085 <span class="comment">% check if curve is closed or open</span>
-0086 closed = false;
-0087 <span class="keyword">if</span> ~isempty(varargin)
-0088     var = varargin{1};
-0089     <span class="keyword">if</span> strncmpi(var, <span class="string">'close'</span>, 5)
-0090         closed = true;
-0091         varargin = varargin(2:end);
-0092     <span class="keyword">elseif</span> strncmpi(var, <span class="string">'open'</span>, 4)
-0093         closed = false;
-0094         varargin = varargin(2:end);
-0095     <span class="keyword">end</span>
-0096 <span class="keyword">end</span>
-0097 
-0098 <span class="comment">% if curve is closed, add first point at the end of the list</span>
-0099 <span class="keyword">if</span> closed
-0100     px = [px; px(1)];
-0101     py = [py; py(1)];
-0102 <span class="keyword">end</span>
-0103 
-0104 <span class="comment">% plot the curve, with eventually optional parameters</span>
-0105 h = plot(ax, px, py, varargin{:});
-0106 
-0107 <span class="comment">% format output arguments</span>
-0108 <span class="keyword">if</span> nargout &gt; 0
-0109     varargout = {h};
-0110 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0040 <span class="comment">% extract handle of axis to draw on</span>
+0041 <span class="keyword">if</span> isAxisHandle(varargin{1})
+0042     ax = varargin{1};
+0043     varargin(1) = [];
+0044 <span class="keyword">else</span>
+0045     ax = gca;
+0046 <span class="keyword">end</span>
+0047 
+0048 <span class="comment">% If first argument is a cell array, draw each curve individually,</span>
+0049 <span class="comment">% and eventually returns handle of each plot.</span>
+0050 var = varargin{1};
+0051 <span class="keyword">if</span> iscell(var)
+0052     h = [];
+0053     <span class="keyword">for</span> i = 1:length(var(:))
+0054         h = [h ; <a href="drawPolyline.html" class="code" title="function varargout = drawPolyline(varargin)">drawPolyline</a>(ax, var{i}, varargin{2:end})]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0055     <span class="keyword">end</span>
+0056     <span class="keyword">if</span> nargout &gt; 0
+0057         varargout = {h};
+0058     <span class="keyword">end</span>
+0059     <span class="keyword">return</span>;
+0060 <span class="keyword">end</span>
+0061 
+0062 <span class="comment">% extract curve coordinate</span>
+0063 <span class="keyword">if</span> size(var, 2) == 1
+0064     <span class="comment">% first argument contains x coord, second argument contains y coord</span>
+0065     px = var;
+0066     <span class="keyword">if</span> isscalar(varargin)
+0067         error(<span class="string">'Wrong number of arguments in drawPolyline'</span>);
+0068     <span class="keyword">end</span>
+0069     py = varargin{2};
+0070     varargin = varargin(3:end);
+0071 <span class="keyword">else</span>
+0072     <span class="comment">% first argument contains both coordinate</span>
+0073     px = var(:, 1);
+0074     py = var(:, 2);
+0075     varargin = varargin(2:end);
+0076 <span class="keyword">end</span>
+0077 
+0078 <span class="comment">% check if curve is closed or open</span>
+0079 closed = false;
+0080 <span class="keyword">if</span> ~isempty(varargin)
+0081     var = varargin{1};
+0082     <span class="keyword">if</span> strncmpi(var, <span class="string">'close'</span>, 5)
+0083         closed = true;
+0084         varargin = varargin(2:end);
+0085     <span class="keyword">elseif</span> strncmpi(var, <span class="string">'open'</span>, 4)
+0086         closed = false;
+0087         varargin = varargin(2:end);
+0088     <span class="keyword">end</span>
+0089 <span class="keyword">end</span>
+0090 
+0091 <span class="comment">% if curve is closed, add first point at the end of the list</span>
+0092 <span class="keyword">if</span> closed
+0093     px = [px; px(1)];
+0094     py = [py; py(1)];
+0095 <span class="keyword">end</span>
+0096 
+0097 <span class="comment">% plot the curve, with eventually optional parameters</span>
+0098 h = plot(ax, px, py, varargin{:});
+0099 
+0100 <span class="comment">% format output arguments</span>
+0101 <span class="keyword">if</span> nargout &gt; 0
+0102     varargout = {h};
+0103 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

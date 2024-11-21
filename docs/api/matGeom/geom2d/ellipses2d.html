@@ -33,9 +33,11 @@
    semi-axes length, and their angle from the Ox direction (in degrees). 
    E = [XC YC A B THETA];
 
-   See also:
-   <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="equivalentEllipse.html" class="code" title="function ell = equivalentEllipse(points)">equivalentEllipse</a>, <a href="isPointInEllipse.html" class="code" title="function b = isPointInEllipse(point, ellipse, varargin)">isPointInEllipse</a>, <a href="ellipsePerimeter.html" class="code" title="function perim = ellipsePerimeter(ellipse, varargin)">ellipsePerimeter</a>
-   <a href="ellipseToPolygon.html" class="code" title="function varargout = ellipseToPolygon(ellipse, N)">ellipseToPolygon</a>, <a href="drawEllipse.html" class="code" title="function varargout = drawEllipse(varargin)">drawEllipse</a>, <a href="drawEllipseArc.html" class="code" title="function varargout = drawEllipseArc(varargin)">drawEllipseArc</a></pre></div>
+   See also
+   <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="equivalentEllipse.html" class="code" title="function ell = equivalentEllipse(points)">equivalentEllipse</a>, <a href="createEllipse.html" class="code" title="function elli = createEllipse(type, varargin)">createEllipse</a>, <a href="fitEllipse.html" class="code" title="function elli = fitEllipse(varargin)">fitEllipse</a>
+   <a href="isPointInEllipse.html" class="code" title="function b = isPointInEllipse(point, ellipse, varargin)">isPointInEllipse</a>, <a href="ellipsePerimeter.html" class="code" title="function perim = ellipsePerimeter(ellipse, varargin)">ellipsePerimeter</a>, <a href="ellipseCartesianCoefficients.html" class="code" title="function coeffs = ellipseCartesianCoefficients(elli)">ellipseCartesianCoefficients</a>
+   <a href="ellipseToPolygon.html" class="code" title="function varargout = ellipseToPolygon(ellipse, N)">ellipseToPolygon</a>, <a href="projPointOnEllipse.html" class="code" title="function proj = projPointOnEllipse(point, elli)">projPointOnEllipse</a>, <a href="distancePointEllipse.html" class="code" title="function [dist, proj] = distancePointEllipse(point, elli)">distancePointEllipse</a>,
+   <a href="transformEllipse.html" class="code" title="function res = transformEllipse(elli, transfo)">transformEllipse</a>, <a href="drawEllipse.html" class="code" title="function varargout = drawEllipse(varargin)">drawEllipse</a>, <a href="drawEllipseArc.html" class="code" title="function varargout = drawEllipseArc(varargin)">drawEllipseArc</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -57,18 +59,20 @@ This function is called by:
 0005 <span class="comment">%   semi-axes length, and their angle from the Ox direction (in degrees).</span>
 0006 <span class="comment">%   E = [XC YC A B THETA];</span>
 0007 <span class="comment">%</span>
-0008 <span class="comment">%   See also:</span>
-0009 <span class="comment">%   circles2d, equivalentEllipse, isPointInEllipse, ellipsePerimeter</span>
-0010 <span class="comment">%   ellipseToPolygon, drawEllipse, drawEllipseArc</span>
-0011 <span class="comment">%</span>
-0012 
-0013 <span class="comment">% ------</span>
-0014 <span class="comment">% Author: David Legland</span>
-0015 <span class="comment">% e-mail: david.legland@inra.fr</span>
-0016 <span class="comment">% Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)</span>
-0017 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
-0018 
-0019 help(<span class="string">'ellipses2d'</span>);</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0008 <span class="comment">%   See also</span>
+0009 <span class="comment">%   circles2d, equivalentEllipse, createEllipse, fitEllipse</span>
+0010 <span class="comment">%   isPointInEllipse, ellipsePerimeter, ellipseCartesianCoefficients</span>
+0011 <span class="comment">%   ellipseToPolygon, projPointOnEllipse, distancePointEllipse,</span>
+0012 <span class="comment">%   transformEllipse, drawEllipse, drawEllipseArc</span>
+0013 <span class="comment">%</span>
+0014 
+0015 <span class="comment">% ------</span>
+0016 <span class="comment">% Author: David Legland</span>
+0017 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0018 <span class="comment">% Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)</span>
+0019 <span class="comment">% Copyright 2008-2024 INRA - Cepia Software Platform</span>
+0020 
+0021 help(<span class="string">'ellipses2d'</span>);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

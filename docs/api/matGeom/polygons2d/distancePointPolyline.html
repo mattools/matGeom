@@ -113,55 +113,49 @@ This function is called by:
 0036 <span class="comment">%</span>
 0037 
 0038 <span class="comment">% ------</span>
-0039 <span class="comment">% Author: David Legland</span>
-0040 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
-0041 <span class="comment">% Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)</span>
-0042 <span class="comment">% Copyright 2009 INRA - Cepia Software Platform.</span>
-0043 <span class="comment">% Author: Juan Pablo Carbajal</span>
-0044 <span class="comment">% e-mail: ajuanpi+dev@gmail.com</span>
-0045 
-0046 <span class="comment">%   HISTORY</span>
-0047 <span class="comment">%   2009-06-23 compute all distances in one call</span>
-0048 <span class="comment">%   2016-02-04 Vectorize</span>
-0049 
-0050 <span class="comment">% check if input polyline is closed or not</span>
-0051 closed = false;
-0052 <span class="keyword">if</span> ~isempty(varargin)
-0053     c = varargin{1};
-0054     <span class="keyword">if</span> strcmp(<span class="string">'closed'</span>, c)
-0055         closed = true;
-0056     <span class="keyword">elseif</span> strcmp(<span class="string">'open'</span>, c)
-0057         closed = false;
-0058     <span class="keyword">elseif</span> islogical(c)
-0059         closed = c;
-0060     <span class="keyword">end</span>
-0061 <span class="keyword">end</span>
-0062 
-0063 <span class="comment">% closes the polyline if necessary</span>
-0064 <span class="keyword">if</span> closed
-0065     poly = [poly; poly(1,:)];
-0066 <span class="keyword">end</span>
+0039 <span class="comment">% Author: David Legland, Juan Pablo Carbajal</span>
+0040 <span class="comment">% E-mail: david.legland@inrae.fr, ajuanpi+dev@gmail.com</span>
+0041 <span class="comment">% Created: 2009-04-30, using Matlab 7.7.0.471 (R2008b)</span>
+0042 <span class="comment">% Copyright 2009-2024 INRA - Cepia Software Platform</span>
+0043 
+0044 <span class="comment">% check if input polyline is closed or not</span>
+0045 closed = false;
+0046 <span class="keyword">if</span> ~isempty(varargin)
+0047     c = varargin{1};
+0048     <span class="keyword">if</span> strcmp(<span class="string">'closed'</span>, c)
+0049         closed = true;
+0050     <span class="keyword">elseif</span> strcmp(<span class="string">'open'</span>, c)
+0051         closed = false;
+0052     <span class="keyword">elseif</span> islogical(c)
+0053         closed = c;
+0054     <span class="keyword">end</span>
+0055 <span class="keyword">end</span>
+0056 
+0057 <span class="comment">% closes the polyline if necessary</span>
+0058 <span class="keyword">if</span> closed
+0059     poly = [poly; poly(1,:)];
+0060 <span class="keyword">end</span>
+0061 
+0062 <span class="comment">% number of points</span>
+0063 Np = size(point, 1);
+0064 
+0065 <span class="comment">% construct the set of edges</span>
+0066 edges = [poly(1:end-1, :) poly(2:<span class="keyword">end</span>, :)];
 0067 
-0068 <span class="comment">% number of points</span>
-0069 Np = size(point, 1);
-0070 
-0071 <span class="comment">% construct the set of edges</span>
-0072 edges = [poly(1:end-1, :) poly(2:<span class="keyword">end</span>, :)];
-0073 
-0074 <span class="comment">% compute distance between current each point and all edges, and also</span>
-0075 <span class="comment">% returns the position of projection on corresponding edge, between 0 and 1</span>
-0076 [dist, edgePos] = <a href="../../matGeom/geom2d/distancePointEdge.html" class="code" title="function [dist, pos] = distancePointEdge(point, edge)">distancePointEdge</a>(point, edges);
-0077 
-0078 <span class="comment">% get the minimum distance, and index of edge providing minimum distance</span>
-0079 [minDist, edgeIndex] = min(dist, [], 2);
-0080 
-0081 <span class="comment">% if required, compute projections</span>
-0082 pos = [];
-0083 <span class="keyword">if</span> nargout == 2
-0084     Ne = size(edgePos, 2);
-0085     j  = sub2ind([Np, Ne], (1:Np)', edgeIndex);
-0086     pos = edgeIndex - 1 + edgePos(j);
-0087 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0068 <span class="comment">% compute distance between current each point and all edges, and also</span>
+0069 <span class="comment">% returns the position of projection on corresponding edge, between 0 and 1</span>
+0070 [dist, edgePos] = <a href="../../matGeom/geom2d/distancePointEdge.html" class="code" title="function [dist, pos] = distancePointEdge(point, edge)">distancePointEdge</a>(point, edges);
+0071 
+0072 <span class="comment">% get the minimum distance, and index of edge providing minimum distance</span>
+0073 [minDist, edgeIndex] = min(dist, [], 2);
+0074 
+0075 <span class="comment">% if required, compute projections</span>
+0076 pos = [];
+0077 <span class="keyword">if</span> nargout == 2
+0078     Ne = size(edgePos, 2);
+0079     j  = sub2ind([Np, Ne], (1:Np)', edgeIndex);
+0080     pos = edgeIndex - 1 + edgePos(j);
+0081 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

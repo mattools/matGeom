@@ -4,7 +4,7 @@
 <head>
   <title>Description of polylineSubcurve</title>
   <meta name="keywords" content="polylineSubcurve">
-  <meta name="description" content="Extract a portion of a polyline.">
+  <meta name="description" content="POLYLINESUBCURVE Extract a portion of a polyline.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Extract a portion of a polyline.</strong></div>
+<div class="box"><strong>POLYLINESUBCURVE Extract a portion of a polyline.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function [res, inds] = polylineSubcurve(poly, t0, t1) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Extract a portion of a polyline.
+<div class="fragment"><pre class="comment">POLYLINESUBCURVE Extract a portion of a polyline.
 
    POLY2 = polylineSubcurve(POLYLINE, POS0, POS1)
    Create a new polyline, by keeping vertices located between positions
@@ -52,7 +52,7 @@
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="polylinePoint.html" class="code" title="function point = polylinePoint(poly, pos)">polylinePoint</a>	POLYLINEPOINT Extract a point from a polyline.</li></ul>
+<li><a href="polylinePoint.html" class="code" title="function point = polylinePoint(poly, pos)">polylinePoint</a>	POLYLINEPOINT Extract a point from a 2D or 3D polyline.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 <li><a href="polylineLength.html" class="code" title="function len = polylineLength(poly, varargin)">polylineLength</a>	POLYLINELENGTH Return length of a polyline given as a list of points.</li></ul>
@@ -62,7 +62,7 @@ This function is called by:
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [res, inds] = polylineSubcurve(poly, t0, t1)</a>
-0002 <span class="comment">% Extract a portion of a polyline.</span>
+0002 <span class="comment">%POLYLINESUBCURVE Extract a portion of a polyline.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   POLY2 = polylineSubcurve(POLYLINE, POS0, POS1)</span>
 0005 <span class="comment">%   Create a new polyline, by keeping vertices located between positions</span>
@@ -86,9 +86,9 @@ This function is called by:
 0023 
 0024 <span class="comment">% ------</span>
 0025 <span class="comment">% Author: David Legland</span>
-0026 <span class="comment">% e-mail: david.legland@inrae.fr</span>
-0027 <span class="comment">% Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)</span>
-0028 <span class="comment">% Copyright 2009 INRAE - Cepia Software Platform.</span>
+0026 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0027 <span class="comment">% Created: 2009-04-30, using Matlab 7.7.0.471 (R2008b)</span>
+0028 <span class="comment">% Copyright 2009-2024 INRAE - Cepia Software Platform</span>
 0029 
 0030 <span class="comment">% number of vertices</span>
 0031 Nv = size(poly, 1);
@@ -122,6 +122,6 @@ This function is called by:
 0059     res = [res; <a href="polylinePoint.html" class="code" title="function point = polylinePoint(poly, pos)">polylinePoint</a>(poly, t1)];
 0060 <span class="keyword">end</span>
 0061</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

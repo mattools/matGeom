@@ -4,7 +4,7 @@
 <head>
   <title>Description of intersectPlaneMesh</title>
   <meta name="keywords" content="intersectPlaneMesh">
-  <meta name="description" content="Compute the polygons resulting from plane-mesh intersection.">
+  <meta name="description" content="INTERSECTPLANEMESH Compute the polylines resulting from plane-mesh intersection.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,26 +21,32 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Compute the polygons resulting from plane-mesh intersection.</strong></div>
+<div class="box"><strong>INTERSECTPLANEMESH Compute the polylines resulting from plane-mesh intersection.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function polys = intersectPlaneMesh(plane, v, f) </strong></div>
+<div class="box"><strong>function [polys, closedFlag] = intersectPlaneMesh(plane, v, f) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Compute the polygons resulting from plane-mesh intersection.
+<div class="fragment"><pre class="comment">INTERSECTPLANEMESH Compute the polylines resulting from plane-mesh intersection.
 
    POLYS = intersectPlaneMesh(P, V, F)
-   Computes the intersection between a plane and a mesh. The result is a
-   cell array of polygons. 
+   [POLYS, CLOSED] = intersectPlaneMesh(P, V, F)
+   Computes the intersection between a plane and a mesh. 
    The plane P is given as:
    P = [X0 Y0 Z0  DX1 DY1 DZ1  DX2 DY2 DZ2]
    The mesh is given as numeric array V of vertex coordinates and an array
    of (triangular) face vertex indices.
+   The output POLYS is a cell array of polylines, where each cell contains
+   a NV-by-3 numeric array of coordinates. The (optional) output CLOSED is
+   a logical array the same size as the POLYS, indicating whether the
+   corresponding polylines are closed (true), or open (false). 
+   Use the functions 'drawPolygon3d' to display closed polylines, and
+   'drawPolyline3d' to display open polylines.
 
 
    Example
      % Intersect a cube by a plane
-     [v f] = createCube; v = v * 10;
+     [v, f] = createCube; v = v * 10;
      plane = createPlane([5 5 5], [3 4 5]);
      % draw the primitives
      figure; hold on; set(gcf, 'renderer', 'opengl');
@@ -53,20 +59,35 @@
      % Intersect a torus by a set of planes, and draw the results
      % first creates a torus slightly shifted and rotated
      torus = [.5 .6 .7   30 10   3 4];
-     figure; drawTorus(torus, 'nTheta', 180, 'nPhi', 180);
-     hold on; view (3); axis equal; light;
+     figure('color','w');
      % convert to mesh representation
      [v, f] = torusMesh(torus, 'nTheta', 64, 'nPhi', 64);
+     f = triangulateFaces(f);
+     drawMesh(v, f);
+     hold on; view (3); axis equal; light;
      % compute intersections with collection of planes
      xList = -50:5:50;
      polySet = cell(length(xList), 1);
      for i = 1:length(xList)
          x0 = xList(i);
          plane = createPlane([x0 .5 .5], [1 .2 .3]);
-         polySet{i} = intersectPlaneMesh2(plane, v, f);
+         polySet{i} = intersectPlaneMesh(plane, v, f);
      end
      % draw the resulting 3D polygons
-     drawPolygon3d(polySet, 'lineWidth', 2, 'color', 'k')
+     drawPolygon3d(polySet, 'lineWidth', 2, 'color', 'y')
+
+     % Demonstrate ability to draw open mesh intersections
+     poly = circleArcToPolyline([10 0 5 90 180], 33);
+     [x, y, z] = revolutionSurface(poly, linspace(-pi, pi, 65));
+     [v, f] = surfToMesh(x, y, z);
+     f = triangulateFaces(f);
+     plane = createPlane([0 0 0], [5 2 -4]);
+     figure; hold on; axis equal; view(3);
+     drawMesh(v, f, 'linestyle', 'none', 'facecolor', [0.0 0.8 0.0], 'faceAlpha', 0.7);
+     drawPlane3d(plane, 'facecolor', 'm', 'faceAlpha', 0.5);
+     % compute and display intersection
+     [curves, closed] = intersectPlaneMesh(plane, v, f);
+     drawPolyline3d(curves(~closed), 'linewidth', 2, 'color', 'b')
 
 
    See also
@@ -85,167 +106,258 @@ This function is called by:
 
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function polys = intersectPlaneMesh(plane, v, f)</a>
-0002 <span class="comment">% Compute the polygons resulting from plane-mesh intersection.</span>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [polys, closedFlag] = intersectPlaneMesh(plane, v, f)</a>
+0002 <span class="comment">%INTERSECTPLANEMESH Compute the polylines resulting from plane-mesh intersection.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   POLYS = intersectPlaneMesh(P, V, F)</span>
-0005 <span class="comment">%   Computes the intersection between a plane and a mesh. The result is a</span>
-0006 <span class="comment">%   cell array of polygons.</span>
+0005 <span class="comment">%   [POLYS, CLOSED] = intersectPlaneMesh(P, V, F)</span>
+0006 <span class="comment">%   Computes the intersection between a plane and a mesh.</span>
 0007 <span class="comment">%   The plane P is given as:</span>
 0008 <span class="comment">%   P = [X0 Y0 Z0  DX1 DY1 DZ1  DX2 DY2 DZ2]</span>
 0009 <span class="comment">%   The mesh is given as numeric array V of vertex coordinates and an array</span>
 0010 <span class="comment">%   of (triangular) face vertex indices.</span>
-0011 <span class="comment">%</span>
-0012 <span class="comment">%</span>
-0013 <span class="comment">%   Example</span>
-0014 <span class="comment">%     % Intersect a cube by a plane</span>
-0015 <span class="comment">%     [v f] = createCube; v = v * 10;</span>
-0016 <span class="comment">%     plane = createPlane([5 5 5], [3 4 5]);</span>
-0017 <span class="comment">%     % draw the primitives</span>
-0018 <span class="comment">%     figure; hold on; set(gcf, 'renderer', 'opengl');</span>
-0019 <span class="comment">%     axis([-10 20 -10 20 -10 20]); view(3);</span>
-0020 <span class="comment">%     drawMesh(v, f); drawPlane3d(plane);</span>
-0021 <span class="comment">%     % compute intersection polygon</span>
-0022 <span class="comment">%     polys = intersectPlaneMesh(plane, v, f);</span>
-0023 <span class="comment">%     drawPolygon3d(polys, 'LineWidth', 2);</span>
-0024 <span class="comment">%</span>
-0025 <span class="comment">%     % Intersect a torus by a set of planes, and draw the results</span>
-0026 <span class="comment">%     % first creates a torus slightly shifted and rotated</span>
-0027 <span class="comment">%     torus = [.5 .6 .7   30 10   3 4];</span>
-0028 <span class="comment">%     figure; drawTorus(torus, 'nTheta', 180, 'nPhi', 180);</span>
-0029 <span class="comment">%     hold on; view (3); axis equal; light;</span>
-0030 <span class="comment">%     % convert to mesh representation</span>
-0031 <span class="comment">%     [v, f] = torusMesh(torus, 'nTheta', 64, 'nPhi', 64);</span>
-0032 <span class="comment">%     % compute intersections with collection of planes</span>
-0033 <span class="comment">%     xList = -50:5:50;</span>
-0034 <span class="comment">%     polySet = cell(length(xList), 1);</span>
-0035 <span class="comment">%     for i = 1:length(xList)</span>
-0036 <span class="comment">%         x0 = xList(i);</span>
-0037 <span class="comment">%         plane = createPlane([x0 .5 .5], [1 .2 .3]);</span>
-0038 <span class="comment">%         polySet{i} = intersectPlaneMesh2(plane, v, f);</span>
-0039 <span class="comment">%     end</span>
-0040 <span class="comment">%     % draw the resulting 3D polygons</span>
-0041 <span class="comment">%     drawPolygon3d(polySet, 'lineWidth', 2, 'color', 'k')</span>
-0042 <span class="comment">%</span>
-0043 <span class="comment">%</span>
-0044 <span class="comment">%   See also</span>
-0045 <span class="comment">%     meshes3d, intersectPlanes, intersectEdgePlane</span>
-0046 <span class="comment">%</span>
-0047 
-0048 <span class="comment">% ------</span>
-0049 <span class="comment">% Author: David Legland</span>
-0050 <span class="comment">% e-mail: david.legland@inra.fr</span>
-0051 <span class="comment">% Created: 2012-07-31,    using Matlab 7.9.0.529 (R2009b)</span>
-0052 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
-0053 
-0054 e = [];
-0055 <span class="keyword">if</span> isstruct(v)
-0056     f = v.faces;
-0057     <span class="keyword">if</span> isfield(v, <span class="string">'edges'</span>)
-0058         e = v.edges;
-0059     <span class="keyword">end</span>
-0060     v = v.vertices;
-0061 <span class="keyword">end</span>
-0062 
-0063 
-0064 <span class="comment">%% Computation of crossing edges</span>
-0065 
-0066 <span class="comment">% compute the edge list</span>
-0067 <span class="keyword">if</span> isempty(e)
-0068     e = <a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>(f);
-0069 <span class="keyword">end</span>
-0070 edges = [ v(e(:,1), :) v(e(:,2), :) ];
-0071 
-0072 <span class="comment">% identify which edges cross the mesh</span>
-0073 inds = <a href="../../matGeom/geom3d/isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>(v, plane);
-0074 edgeCrossInds = find(sum(inds(e), 2) == 1);
-0075 
-0076 <span class="comment">% compute one intersection point for each edge</span>
-0077 intersectionPoints = <a href="../../matGeom/geom3d/intersectEdgePlane.html" class="code" title="function point = intersectEdgePlane(edge, plane, varargin)">intersectEdgePlane</a>(edges(edgeCrossInds, :), plane);
-0078 
-0079 
-0080 
-0081 <span class="comment">%% mapping edges &lt;-&gt; faces</span>
-0082 <span class="comment">% identify for each face the indices of edges that intersect the plane, as</span>
-0083 <span class="comment">% well as for each edge, the indices of the two faces around it.</span>
-0084 <span class="comment">% We expect each face to contain either 0 or 2 intersecting edges.</span>
-0085 <span class="comment">%</span>
+0011 <span class="comment">%   The output POLYS is a cell array of polylines, where each cell contains</span>
+0012 <span class="comment">%   a NV-by-3 numeric array of coordinates. The (optional) output CLOSED is</span>
+0013 <span class="comment">%   a logical array the same size as the POLYS, indicating whether the</span>
+0014 <span class="comment">%   corresponding polylines are closed (true), or open (false).</span>
+0015 <span class="comment">%   Use the functions 'drawPolygon3d' to display closed polylines, and</span>
+0016 <span class="comment">%   'drawPolyline3d' to display open polylines.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   Example</span>
+0020 <span class="comment">%     % Intersect a cube by a plane</span>
+0021 <span class="comment">%     [v, f] = createCube; v = v * 10;</span>
+0022 <span class="comment">%     plane = createPlane([5 5 5], [3 4 5]);</span>
+0023 <span class="comment">%     % draw the primitives</span>
+0024 <span class="comment">%     figure; hold on; set(gcf, 'renderer', 'opengl');</span>
+0025 <span class="comment">%     axis([-10 20 -10 20 -10 20]); view(3);</span>
+0026 <span class="comment">%     drawMesh(v, f); drawPlane3d(plane);</span>
+0027 <span class="comment">%     % compute intersection polygon</span>
+0028 <span class="comment">%     polys = intersectPlaneMesh(plane, v, f);</span>
+0029 <span class="comment">%     drawPolygon3d(polys, 'LineWidth', 2);</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%     % Intersect a torus by a set of planes, and draw the results</span>
+0032 <span class="comment">%     % first creates a torus slightly shifted and rotated</span>
+0033 <span class="comment">%     torus = [.5 .6 .7   30 10   3 4];</span>
+0034 <span class="comment">%     figure('color','w');</span>
+0035 <span class="comment">%     % convert to mesh representation</span>
+0036 <span class="comment">%     [v, f] = torusMesh(torus, 'nTheta', 64, 'nPhi', 64);</span>
+0037 <span class="comment">%     f = triangulateFaces(f);</span>
+0038 <span class="comment">%     drawMesh(v, f);</span>
+0039 <span class="comment">%     hold on; view (3); axis equal; light;</span>
+0040 <span class="comment">%     % compute intersections with collection of planes</span>
+0041 <span class="comment">%     xList = -50:5:50;</span>
+0042 <span class="comment">%     polySet = cell(length(xList), 1);</span>
+0043 <span class="comment">%     for i = 1:length(xList)</span>
+0044 <span class="comment">%         x0 = xList(i);</span>
+0045 <span class="comment">%         plane = createPlane([x0 .5 .5], [1 .2 .3]);</span>
+0046 <span class="comment">%         polySet{i} = intersectPlaneMesh(plane, v, f);</span>
+0047 <span class="comment">%     end</span>
+0048 <span class="comment">%     % draw the resulting 3D polygons</span>
+0049 <span class="comment">%     drawPolygon3d(polySet, 'lineWidth', 2, 'color', 'y')</span>
+0050 <span class="comment">%</span>
+0051 <span class="comment">%     % Demonstrate ability to draw open mesh intersections</span>
+0052 <span class="comment">%     poly = circleArcToPolyline([10 0 5 90 180], 33);</span>
+0053 <span class="comment">%     [x, y, z] = revolutionSurface(poly, linspace(-pi, pi, 65));</span>
+0054 <span class="comment">%     [v, f] = surfToMesh(x, y, z);</span>
+0055 <span class="comment">%     f = triangulateFaces(f);</span>
+0056 <span class="comment">%     plane = createPlane([0 0 0], [5 2 -4]);</span>
+0057 <span class="comment">%     figure; hold on; axis equal; view(3);</span>
+0058 <span class="comment">%     drawMesh(v, f, 'linestyle', 'none', 'facecolor', [0.0 0.8 0.0], 'faceAlpha', 0.7);</span>
+0059 <span class="comment">%     drawPlane3d(plane, 'facecolor', 'm', 'faceAlpha', 0.5);</span>
+0060 <span class="comment">%     % compute and display intersection</span>
+0061 <span class="comment">%     [curves, closed] = intersectPlaneMesh(plane, v, f);</span>
+0062 <span class="comment">%     drawPolyline3d(curves(~closed), 'linewidth', 2, 'color', 'b')</span>
+0063 <span class="comment">%</span>
+0064 <span class="comment">%</span>
+0065 <span class="comment">%   See also</span>
+0066 <span class="comment">%     meshes3d, intersectPlanes, intersectEdgePlane</span>
+0067 <span class="comment">%</span>
+0068 
+0069 <span class="comment">% ------</span>
+0070 <span class="comment">% Author: David Legland</span>
+0071 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0072 <span class="comment">% Created: 2012-07-31, using Matlab 7.9.0.529 (R2009b)</span>
+0073 <span class="comment">% Copyright 2012-2024 INRA - Cepia Software Platform</span>
+0074 
+0075 e = [];
+0076 <span class="keyword">if</span> isstruct(v)
+0077     f = v.faces;
+0078     <span class="keyword">if</span> isfield(v, <span class="string">'edges'</span>)
+0079         e = v.edges;
+0080     <span class="keyword">end</span>
+0081     v = v.vertices;
+0082 <span class="keyword">end</span>
+0083 
+0084 
+0085 <span class="comment">%% Computation of crossing edges</span>
 0086 
-0087 nFaces = length(f);
-0088 faceEdges = cell(1, nFaces);
-0089 nCrossEdges = length(edgeCrossInds);
-0090 crossEdgeFaces = zeros(nCrossEdges, 2);
-0091 
-0092 <span class="keyword">for</span> iEdge = 1:length(edgeCrossInds)
-0093     edge = e(edgeCrossInds(iEdge), :);
-0094     indFaces = find(sum(ismember(f, edge), 2) == 2);
-0095     
-0096     <span class="keyword">if</span> length(indFaces) ~= 2
-0097         error(<span class="string">'crossing edge %d (%d,%d) is associated to %d faces'</span>, <span class="keyword">...</span>
-0098             iEdge, edge(1), edge(2), length(indFaces));
-0099     <span class="keyword">end</span>
-0100     
-0101     crossEdgeFaces(iEdge, :) = indFaces;
-0102     
-0103     <span class="keyword">for</span> iFace = 1:length(indFaces)
-0104         indEdges = faceEdges{indFaces(iFace)};
-0105         indEdges = [indEdges iEdge]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0106         faceEdges{indFaces(iFace)} = indEdges;
-0107     <span class="keyword">end</span>
-0108 <span class="keyword">end</span>
-0109 
-0110 
-0111 <span class="comment">%% Iterate on edges and faces to form polygons</span>
+0087 <span class="comment">% compute the edge list</span>
+0088 <span class="keyword">if</span> isempty(e)
+0089     e = <a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>(f);
+0090 <span class="keyword">end</span>
+0091 edges = [ v(e(:,1), :) v(e(:,2), :) ];
+0092 
+0093 <span class="comment">% identify which edges cross the mesh</span>
+0094 inds = <a href="../../matGeom/geom3d/isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>(v, plane);
+0095 edgeCrossInds = find(sum(inds(e), 2) == 1);
+0096 
+0097 <span class="comment">% compute one intersection point for each edge</span>
+0098 intersectionPoints = <a href="../../matGeom/geom3d/intersectEdgePlane.html" class="code" title="function point = intersectEdgePlane(edge, plane, varargin)">intersectEdgePlane</a>(edges(edgeCrossInds, :), plane);
+0099 
+0100 
+0101 
+0102 <span class="comment">%% mapping edges &lt;-&gt; faces</span>
+0103 <span class="comment">% identify for each face the indices of edges that intersect the plane, as</span>
+0104 <span class="comment">% well as for each edge, the indices of the two faces around it.</span>
+0105 <span class="comment">% We expect each face to contain either 0 or 2 intersecting edges.</span>
+0106 <span class="comment">%</span>
+0107 
+0108 nFaces = length(f);
+0109 faceEdges = cell(1, nFaces);
+0110 nCrossEdges = length(edgeCrossInds);
+0111 crossEdgeFaces = cell(nCrossEdges, 1);
 0112 
-0113 <span class="comment">% initialize an array indicating which indices need to be processed</span>
-0114 nCrossEdges = length(edgeCrossInds);
-0115 remainingCrossEdges = true(nCrossEdges, 1);
-0116 
-0117 <span class="comment">% create empty cell array of polygons</span>
-0118 polys = {};
-0119 
-0120 <span class="comment">% iterate while there are some crossing edges to process</span>
-0121 <span class="keyword">while</span> any(remainingCrossEdges)
-0122     
-0123     <span class="comment">% start at any edge, mark it as current</span>
-0124     startEdgeIndex = find(remainingCrossEdges, 1, <span class="string">'first'</span>);
-0125     currentEdgeIndex = startEdgeIndex;
-0126     
-0127     <span class="comment">% mark current edge as processed</span>
-0128     remainingCrossEdges(currentEdgeIndex) = false;
-0129     
-0130     <span class="comment">% initialize new set of edge indices</span>
-0131     polyEdgeInds = currentEdgeIndex;
-0132 
-0133     <span class="comment">% choose one of the two faces around the edge</span>
-0134     currentFace = crossEdgeFaces(currentEdgeIndex, 1);
-0135 
-0136     <span class="comment">% iterate along current face-edge couples until back to first edge</span>
-0137     <span class="keyword">while</span> true
-0138         <span class="comment">% find the index of next crossing edge</span>
-0139         inds = faceEdges{currentFace};
-0140         currentEdgeIndex = inds(inds ~= currentEdgeIndex);
-0141      
-0142         <span class="comment">% mark current edge as processed</span>
-0143         remainingCrossEdges(currentEdgeIndex) = false;
-0144     
-0145         <span class="comment">% find the index of the other face containing current edge</span>
-0146         inds = crossEdgeFaces(currentEdgeIndex, :);
-0147         currentFace = inds(inds ~= currentFace);
-0148     
-0149         <span class="comment">% check end of current loop</span>
-0150         <span class="keyword">if</span> currentEdgeIndex == startEdgeIndex
-0151             <span class="keyword">break</span>;
-0152         <span class="keyword">end</span>
-0153         
-0154         <span class="comment">% add index of current edge</span>
-0155         polyEdgeInds = [polyEdgeInds currentEdgeIndex]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0156     <span class="keyword">end</span>
+0113 <span class="keyword">for</span> iEdge = 1:length(edgeCrossInds)
+0114     <span class="comment">% identify index of faces adjacent to edge</span>
+0115     edge = e(edgeCrossInds(iEdge), :);
+0116     indFaces = find(sum(ismember(f, edge), 2) == 2);
+0117     
+0118     <span class="comment">% assert mesh is manifold (no edge connected to more than three faces)</span>
+0119     <span class="keyword">if</span> length(indFaces) &gt; 2
+0120         error(<span class="string">'crossing edge %d (%d,%d) is associated to %d faces'</span>, <span class="keyword">...</span>
+0121             iEdge, edge(1), edge(2), length(indFaces));
+0122     <span class="keyword">end</span>
+0123     
+0124     crossEdgeFaces{iEdge} = indFaces;
+0125     
+0126     <span class="comment">% add current edge to list of edges associated to each face</span>
+0127     <span class="keyword">for</span> iFace = 1:length(indFaces)
+0128         indEdges = faceEdges{indFaces(iFace)};
+0129         indEdges = [indEdges iEdge]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0130         faceEdges{indFaces(iFace)} = indEdges;
+0131     <span class="keyword">end</span>
+0132 <span class="keyword">end</span>
+0133 
+0134 <span class="comment">% initialize an array indicating which edges need to be processed</span>
+0135 nCrossEdges = length(edgeCrossInds);
+0136 remainingCrossEdges = true(nCrossEdges, 1);
+0137 
+0138 
+0139 <span class="comment">%% Iterate on edges and faces to form open poylines</span>
+0140 
+0141 <span class="comment">% create empty cell array of open polylines</span>
+0142 openPolys = {};
+0143 
+0144 <span class="comment">% identify crossing edges at extremity of open polylines</span>
+0145 extremityEdgeInds = find(cellfun(@length, crossEdgeFaces) == 1);
+0146 remainingExtremities = true(length(extremityEdgeInds), 1);
+0147 
+0148 <span class="comment">% iterate while there are remaining extremity crossing edges</span>
+0149 <span class="keyword">while</span> any(remainingExtremities)
+0150     <span class="comment">% start from arbitrary remaining extremity</span>
+0151     extremityIndex = find(remainingExtremities, 1, <span class="string">'first'</span>);
+0152     remainingExtremities(extremityIndex) = false;
+0153 
+0154     <span class="comment">% use extremity as current edge</span>
+0155     startEdgeIndex = extremityEdgeInds(extremityIndex);
+0156     currentEdgeIndex = startEdgeIndex;
 0157     
-0158     <span class="comment">% create polygon, and add it to list of polygons</span>
-0159     poly = intersectionPoints(polyEdgeInds, :);
-0160     polys = [polys, {poly}]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0161 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0158     <span class="comment">% mark current edge as processed</span>
+0159     remainingCrossEdges(currentEdgeIndex) = false;
+0160     
+0161     <span class="comment">% initialize new set of edge indices</span>
+0162     polyEdgeInds = currentEdgeIndex;
+0163 
+0164     <span class="comment">% find the unique face adjacent to current edge</span>
+0165     edgeFaces = crossEdgeFaces{currentEdgeIndex};
+0166     currentFace = edgeFaces(1);
+0167 
+0168     <span class="comment">% iterate along current face-edge couples until back to first edge</span>
+0169     <span class="keyword">while</span> true
+0170         <span class="comment">% find the index of next crossing edge</span>
+0171         inds = faceEdges{currentFace};
+0172         currentEdgeIndex = inds(inds ~= currentEdgeIndex);
+0173         
+0174         <span class="comment">% add index of current edge</span>
+0175         polyEdgeInds = [polyEdgeInds currentEdgeIndex]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0176 
+0177         <span class="comment">% mark current edge as processed</span>
+0178         remainingCrossEdges(currentEdgeIndex) = false;
+0179     
+0180         <span class="comment">% find the index of the other face containing current edge</span>
+0181         inds = crossEdgeFaces{currentEdgeIndex};
+0182 
+0183         <span class="comment">% check if we found an extremity edge</span>
+0184         <span class="keyword">if</span> isscalar(inds)
+0185             ind = extremityEdgeInds == currentEdgeIndex;
+0186             remainingExtremities(ind) = false;
+0187             <span class="keyword">break</span>;
+0188         <span class="keyword">end</span>
+0189 
+0190         <span class="comment">% switch to next face</span>
+0191         currentFace = inds(inds ~= currentFace);
+0192     <span class="keyword">end</span>
+0193     
+0194     <span class="comment">% create polygon, and add it to list of polygons</span>
+0195     poly = intersectionPoints(polyEdgeInds, :);
+0196     openPolys = [openPolys, {poly}]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0197 <span class="keyword">end</span>
+0198 
+0199 
+0200 <span class="comment">%% Iterate on edges and faces to form closed polylines</span>
+0201 
+0202 <span class="comment">% create empty cell array of polygons</span>
+0203 rings = {};
+0204 
+0205 <span class="comment">% iterate while there are some crossing edges to process</span>
+0206 <span class="keyword">while</span> any(remainingCrossEdges)
+0207     
+0208     <span class="comment">% start at any edge, mark it as current</span>
+0209     startEdgeIndex = find(remainingCrossEdges, 1, <span class="string">'first'</span>);
+0210     currentEdgeIndex = startEdgeIndex;
+0211     
+0212     <span class="comment">% mark current edge as processed</span>
+0213     remainingCrossEdges(currentEdgeIndex) = false;
+0214     
+0215     <span class="comment">% initialize new set of edge indices</span>
+0216     polyEdgeInds = currentEdgeIndex;
+0217 
+0218     <span class="comment">% choose one of the two faces around the edge</span>
+0219     edgeFaces = crossEdgeFaces{currentEdgeIndex};
+0220     currentFace = edgeFaces(1);
+0221 
+0222     <span class="comment">% iterate along current face-edge couples until back to first edge</span>
+0223     <span class="keyword">while</span> true
+0224         <span class="comment">% find the index of next crossing edge</span>
+0225         inds = faceEdges{currentFace};
+0226         currentEdgeIndex = inds(inds ~= currentEdgeIndex);
+0227      
+0228         <span class="comment">% mark current edge as processed</span>
+0229         remainingCrossEdges(currentEdgeIndex) = false;
+0230     
+0231         <span class="comment">% check end of current loop</span>
+0232         <span class="keyword">if</span> currentEdgeIndex == startEdgeIndex
+0233             <span class="keyword">break</span>;
+0234         <span class="keyword">end</span>
+0235         
+0236         <span class="comment">% add index of current edge</span>
+0237         polyEdgeInds = [polyEdgeInds currentEdgeIndex]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0238 
+0239         <span class="comment">% find the index of the other face containing current edge</span>
+0240         inds = crossEdgeFaces{currentEdgeIndex};
+0241         currentFace = inds(inds ~= currentFace);
+0242     <span class="keyword">end</span>
+0243     
+0244     <span class="comment">% create polygon, and add it to list of polygons</span>
+0245     poly = intersectionPoints(polyEdgeInds, :);
+0246     rings = [rings, {poly}]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0247 <span class="keyword">end</span>
+0248 
+0249 
+0250 <span class="comment">%% Format output array</span>
+0251 polys = [rings, openPolys];
+0252 closedFlag = [true(1, length(rings)), false(1, length(openPolys))];</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

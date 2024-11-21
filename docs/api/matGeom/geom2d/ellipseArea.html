@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of ellipseArea</title>
+  <meta name="keywords" content="ellipseArea">
+  <meta name="description" content="ELLIPSEAREA Area of an ellipse.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; ellipseArea.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>ellipseArea
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ELLIPSEAREA Area of an ellipse.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function area = ellipseArea(elli) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ELLIPSEAREA Area of an ellipse.
+
+   AREA = ellipseArea(ELLI)
+   Computes he area of the ellipse ELLI, by taking the product of the semi
+   axis length and multiplying by PI:
+      AREA = PI * RA * RB 
+
+   Example
+     % area of a simple ellipse
+     elli =  [50 50   40 20  30];
+     ellipseArea(elli)
+     ans =
+        2.5133e+03
+     % when scaling by K, area is scaled by K^2:
+     transfo = createScaling(.2);
+     elliT = transformEllipse(elli, transfo);
+     ellipseArea(elliT)
+     ans =
+       100.5310
+
+
+   See also
+     <a href="ellipses2d.html" class="code" title="function ellipses2d(varargin)">ellipses2d</a>, <a href="ellipsePerimeter.html" class="code" title="function perim = ellipsePerimeter(ellipse, varargin)">ellipsePerimeter</a>, <a href="ellipseToPolygon.html" class="code" title="function varargout = ellipseToPolygon(ellipse, N)">ellipseToPolygon</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function area = ellipseArea(elli)</a>
+0002 <span class="comment">%ELLIPSEAREA Area of an ellipse.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   AREA = ellipseArea(ELLI)</span>
+0005 <span class="comment">%   Computes he area of the ellipse ELLI, by taking the product of the semi</span>
+0006 <span class="comment">%   axis length and multiplying by PI:</span>
+0007 <span class="comment">%      AREA = PI * RA * RB</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   Example</span>
+0010 <span class="comment">%     % area of a simple ellipse</span>
+0011 <span class="comment">%     elli =  [50 50   40 20  30];</span>
+0012 <span class="comment">%     ellipseArea(elli)</span>
+0013 <span class="comment">%     ans =</span>
+0014 <span class="comment">%        2.5133e+03</span>
+0015 <span class="comment">%     % when scaling by K, area is scaled by K^2:</span>
+0016 <span class="comment">%     transfo = createScaling(.2);</span>
+0017 <span class="comment">%     elliT = transformEllipse(elli, transfo);</span>
+0018 <span class="comment">%     ellipseArea(elliT)</span>
+0019 <span class="comment">%     ans =</span>
+0020 <span class="comment">%       100.5310</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   See also</span>
+0024 <span class="comment">%     ellipses2d, ellipsePerimeter, ellipseToPolygon</span>
+0025 <span class="comment">%</span>
+0026 
+0027 <span class="comment">% ------</span>
+0028 <span class="comment">% Author: David Legland</span>
+0029 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0030 <span class="comment">% Created: 2022-09-09, using Matlab 9.12.0.1884302 (R2022a)</span>
+0031 <span class="comment">% Copyright 2022-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0032 
+0033 area = elli(:,3) .* elli(:,4) * pi;</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

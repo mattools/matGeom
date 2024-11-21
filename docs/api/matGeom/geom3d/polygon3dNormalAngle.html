@@ -47,13 +47,7 @@
    IMPORTANT NOTE: works only for convex angles ! ! ! !
 
    See also
-   <a href="polygons3d.html" class="code" title="function polygons3d(varargin)">polygons3d</a>, faceNormalAngle
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- Created: 2005-11-30
- Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</pre></div>
+   <a href="polygons3d.html" class="code" title="function polygons3d(varargin)">polygons3d</a>, faceNormalAngle</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -90,39 +84,38 @@ This function is called by:
 0020 <span class="comment">%</span>
 0021 <span class="comment">%   See also</span>
 0022 <span class="comment">%   polygons3d, faceNormalAngle</span>
-0023 <span class="comment">%</span>
+0023 
 0024 <span class="comment">% ------</span>
 0025 <span class="comment">% Author: David Legland</span>
-0026 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0026 <span class="comment">% E-mail: david.legland@inrae.fr</span>
 0027 <span class="comment">% Created: 2005-11-30</span>
-0028 <span class="comment">% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0028 <span class="comment">% Copyright 2005-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)</span>
 0029 
-0030 
-0031 <span class="comment">% number of points</span>
-0032 np = size(points, 1);
-0033 
-0034 <span class="comment">% number of angles to compute</span>
-0035 nv = length(ind);
-0036 
-0037 theta = zeros(nv, 1);
-0038 
-0039 <span class="keyword">for</span> i=1:nv
-0040     p0 = points(ind(i), :);
-0041     
-0042     <span class="keyword">if</span> ind(i)==1
-0043         p1 = points(np, :);
-0044     <span class="keyword">else</span>
-0045         p1 = points(ind(i)-1, :);
-0046     <span class="keyword">end</span>
-0047     
-0048     <span class="keyword">if</span> ind(i)==np
-0049         p2 = points(1, :);
-0050     <span class="keyword">else</span>
-0051         p2 = points(ind(i)+1, :);
-0052     <span class="keyword">end</span>
-0053     
-0054     theta(i) = pi - <a href="anglePoints3d.html" class="code" title="function alpha = anglePoints3d(varargin)">anglePoints3d</a>(p1, p0, p2);
-0055 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0030 <span class="comment">% number of points</span>
+0031 np = size(points, 1);
+0032 
+0033 <span class="comment">% number of angles to compute</span>
+0034 nv = length(ind);
+0035 
+0036 theta = zeros(nv, 1);
+0037 
+0038 <span class="keyword">for</span> i=1:nv
+0039     p0 = points(ind(i), :);
+0040     
+0041     <span class="keyword">if</span> ind(i)==1
+0042         p1 = points(np, :);
+0043     <span class="keyword">else</span>
+0044         p1 = points(ind(i)-1, :);
+0045     <span class="keyword">end</span>
+0046     
+0047     <span class="keyword">if</span> ind(i)==np
+0048         p2 = points(1, :);
+0049     <span class="keyword">else</span>
+0050         p2 = points(ind(i)+1, :);
+0051     <span class="keyword">end</span>
+0052     
+0053     theta(i) = pi - <a href="anglePoints3d.html" class="code" title="function alpha = anglePoints3d(varargin)">anglePoints3d</a>(p1, p0, p2);
+0054 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

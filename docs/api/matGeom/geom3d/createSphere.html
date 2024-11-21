@@ -36,12 +36,7 @@
    http://astronomy.swin.edu.au/~pbourke/geometry/spherefrom4/
 
    See also
-   <a href="spheres.html" class="code" title="function spheres(varargin)">spheres</a>, <a href="circles3d.html" class="code" title="function circles3d(varargin)">circles3d</a>
-
-   ---------
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 22/03/2005.</pre></div>
+   <a href="spheres.html" class="code" title="function spheres(varargin)">spheres</a>, <a href="circles3d.html" class="code" title="function circles3d(varargin)">circles3d</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -67,37 +62,36 @@ This function is called by:
 0009 <span class="comment">%</span>
 0010 <span class="comment">%   See also</span>
 0011 <span class="comment">%   spheres, circles3d</span>
-0012 <span class="comment">%</span>
-0013 <span class="comment">%   ---------</span>
-0014 <span class="comment">%   author : David Legland</span>
-0015 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0016 <span class="comment">%   created the 22/03/2005.</span>
-0017 <span class="comment">%</span>
+0012 
+0013 <span class="comment">% ------</span>
+0014 <span class="comment">% Author: David Legland</span>
+0015 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0016 <span class="comment">% Created: 2005-03-22</span>
+0017 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0018 
-0019 
-0020 <span class="keyword">if</span> length(varargin)==4
-0021     pts = [varargin{1};varargin{2};varargin{3};varargin{4}];
-0022 <span class="keyword">elseif</span> length(varargin)==1
-0023     pts = varargin{1};
-0024 <span class="keyword">else</span>
-0025     error(<span class="string">'wrong number of arguments in createSphere'</span>);
-0026 <span class="keyword">end</span>
+0019 <span class="keyword">if</span> length(varargin)==4
+0020     pts = [varargin{1};varargin{2};varargin{3};varargin{4}];
+0021 <span class="keyword">elseif</span> isscalar(varargin)
+0022     pts = varargin{1};
+0023 <span class="keyword">else</span>
+0024     error(<span class="string">'wrong number of arguments in createSphere'</span>);
+0025 <span class="keyword">end</span>
+0026 
 0027 
-0028 
-0029 m1 = det([pts ones(4,1)]);
-0030 s2 = sum(pts.*pts, 2);
-0031 m2 = det([s2 pts(:,2) pts(:,3) ones(4,1)]);
-0032 m3 = det([pts(:,1) s2 pts(:,3) ones(4,1)]);
-0033 m4 = det([pts(:,1) pts(:,2) s2 ones(4,1)]);
-0034 
-0035 m5 = det([s2 pts]);
-0036 
-0037 x0 = m2*.5/m1;
-0038 y0 = m3*.5/m1;
-0039 z0 = m4*.5/m1;
-0040 r  = sqrt(x0*x0 + y0*y0 + z0*z0 - m5/m1);
-0041 
-0042 sphere = [x0 y0 z0 r];</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0028 m1 = det([pts ones(4,1)]);
+0029 s2 = sum(pts.*pts, 2);
+0030 m2 = det([s2 pts(:,2) pts(:,3) ones(4,1)]);
+0031 m3 = det([pts(:,1) s2 pts(:,3) ones(4,1)]);
+0032 m4 = det([pts(:,1) pts(:,2) s2 ones(4,1)]);
+0033 
+0034 m5 = det([s2 pts]);
+0035 
+0036 x0 = m2*.5/m1;
+0037 y0 = m3*.5/m1;
+0038 z0 = m4*.5/m1;
+0039 r  = sqrt(x0*x0 + y0*y0 + z0*z0 - m5/m1);
+0040 
+0041 sphere = [x0 y0 z0 r];</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

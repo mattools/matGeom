@@ -86,59 +86,53 @@ This function is called by:
 0022 <span class="comment">%   createCube, createOctahedron, createDodecahedron, createTetrahedron</span>
 0023 <span class="comment">%</span>
 0024 
-0025 <span class="comment">%   ---------</span>
-0026 <span class="comment">%   author: David Legland</span>
-0027 <span class="comment">%   mail: david.legland@inra.fr</span>
-0028 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0029 <span class="comment">%   created the 21/03/2005.</span>
-0030 <span class="comment">%</span>
-0031 
-0032 <span class="comment">%   HISTORY</span>
-0033 <span class="comment">%   2007-01-04 remove unused variables</span>
-0034 <span class="comment">%   2010-12-06 format output, orient normals outwards</span>
-0035 
+0025 <span class="comment">% ------</span>
+0026 <span class="comment">% Author: David Legland</span>
+0027 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0028 <span class="comment">% Created: 2005-03-21</span>
+0029 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0030 
+0031 <span class="comment">%% Initialisations</span>
+0032 
+0033 theta = 2*pi/5;
+0034 l = 1/sin(theta/2)/2;
+0035 z1 = sqrt(1-l*l);
 0036 
-0037 <span class="comment">%% Initialisations</span>
-0038 
-0039 theta = 2*pi/5;
-0040 l = 1/sin(theta/2)/2;
-0041 z1 = sqrt(1-l*l);
-0042 
-0043 t1 = (0:2*pi/5:2*pi*(1-1/5))';
-0044 x1 = l*cos(t1);
-0045 y1 = l*sin(t1);
-0046 
-0047 t2 = t1 + 2*pi/10;
-0048 x2 = l*cos(t2);
-0049 y2 = l*sin(t2);
+0037 t1 = (0:2*pi/5:2*pi*(1-1/5))';
+0038 x1 = l*cos(t1);
+0039 y1 = l*sin(t1);
+0040 
+0041 t2 = t1 + 2*pi/10;
+0042 x2 = l*cos(t2);
+0043 y2 = l*sin(t2);
+0044 
+0045 h = sqrt(l*l-.5*.5);
+0046 z2 = sqrt(3/4 - (l-h)*(l-h));
+0047 
+0048 
+0049 <span class="comment">%% Create mesh data</span>
 0050 
-0051 h = sqrt(l*l-.5*.5);
-0052 z2 = sqrt(3/4 - (l-h)*(l-h));
-0053 
-0054 
-0055 <span class="comment">%% Create mesh data</span>
-0056 
-0057 nodes = [0 0 0;<span class="keyword">...</span>
-0058     [x1 y1 repmat(z1, [5 1])]; <span class="keyword">...</span>
-0059     [x2 y2 repmat(z1+z2, [5 1])]; <span class="keyword">...</span>
-0060     0 0 2*z1+z2];
-0061 
-0062 edges = [<span class="keyword">...</span>
-0063     1 2;1 3;1 4;1 5;1 6; <span class="keyword">...</span>
-0064     2 3;3 4;4 5;5 6;6 2; <span class="keyword">...</span>
-0065     2 7;7 3;3 8;8 4;4 9;9 5;5 10;10 6;6 11;11 2; <span class="keyword">...</span>
-0066     7 8;8 9;9 10;10 11;11 7; <span class="keyword">...</span>
-0067     7 12;8 12;9 12;10 12;11 12];
-0068     
-0069 <span class="comment">% faces are ordered to have normals pointing outside of the mesh</span>
-0070 faces = [<span class="keyword">...</span>
-0071     1 3  2 ; 1 4  3 ; 1  5  4 ;  1  6  5 ;  1 2  6;<span class="keyword">...</span>
-0072     2 3  7 ; 3 4  8 ; 4  5  9 ;  5  6 10 ;  6 2 11;<span class="keyword">...</span>
-0073     7 3  8 ; 8 4  9 ; 9  5 10 ; 10  6 11 ; 11 2  7;<span class="keyword">...</span>
-0074     7 8 12 ; 8 9 12 ; 9 10 12 ; 10 11 12 ; 11 7 12];
-0075 
-0076 <span class="comment">% format output</span>
-0077 varargout = formatMeshOutput(nargout, nodes, edges, faces);</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0051 nodes = [0 0 0;<span class="keyword">...</span>
+0052     [x1 y1 repmat(z1, [5 1])]; <span class="keyword">...</span>
+0053     [x2 y2 repmat(z1+z2, [5 1])]; <span class="keyword">...</span>
+0054     0 0 2*z1+z2];
+0055 
+0056 edges = [<span class="keyword">...</span>
+0057     1 2;1 3;1 4;1 5;1 6; <span class="keyword">...</span>
+0058     2 3;3 4;4 5;5 6;6 2; <span class="keyword">...</span>
+0059     2 7;7 3;3 8;8 4;4 9;9 5;5 10;10 6;6 11;11 2; <span class="keyword">...</span>
+0060     7 8;8 9;9 10;10 11;11 7; <span class="keyword">...</span>
+0061     7 12;8 12;9 12;10 12;11 12];
+0062     
+0063 <span class="comment">% faces are ordered to have normals pointing outside of the mesh</span>
+0064 faces = [<span class="keyword">...</span>
+0065     1 3  2 ; 1 4  3 ; 1  5  4 ;  1  6  5 ;  1 2  6;<span class="keyword">...</span>
+0066     2 3  7 ; 3 4  8 ; 4  5  9 ;  5  6 10 ;  6 2 11;<span class="keyword">...</span>
+0067     7 3  8 ; 8 4  9 ; 9  5 10 ; 10  6 11 ; 11 2  7;<span class="keyword">...</span>
+0068     7 8 12 ; 8 9 12 ; 9 10 12 ; 10 11 12 ; 11 7 12];
+0069 
+0070 <span class="comment">% format output</span>
+0071 varargout = formatMeshOutput(nargout, nodes, edges, faces);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

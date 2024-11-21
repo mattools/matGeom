@@ -46,13 +46,8 @@
    kept for compatibility with other functions). All angles are given in
    degrees.
    
-   See Also:
-   <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>, <a href="spheres.html" class="code" title="function spheres(varargin)">spheres</a>, <a href="circles3d.html" class="code" title="function circles3d(varargin)">circles3d</a>, <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>, <a href="intersectLineSphere.html" class="code" title="function points = intersectLineSphere(line, sphere, varargin)">intersectLineSphere</a>
-
-   ---------
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 18/02/2005.</pre></div>
+   See also
+   <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>, <a href="spheres.html" class="code" title="function spheres(varargin)">spheres</a>, <a href="circles3d.html" class="code" title="function circles3d(varargin)">circles3d</a>, <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>, <a href="intersectLineSphere.html" class="code" title="function points = intersectLineSphere(line, sphere, varargin)">intersectLineSphere</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -61,7 +56,7 @@ This function calls:
 <li><a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>	CART2SPH2 Convert cartesian coordinates to spherical coordinates.</li><li><a href="distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>	DISTANCEPOINTS3D Compute euclidean distance between pairs of 3D Points.</li><li><a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>	PLANENORMAL Compute the normal to a plane.</li><li><a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>	PROJPOINTONPLANE Return the orthogonal projection of a point on a plane.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>	DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.</li></ul>
+<li><a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(varargin)">drawSphericalEdge</a>	DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.</li></ul>
 <!-- crossreference -->
 
 
@@ -87,62 +82,57 @@ This function is called by:
 0018 <span class="comment">%   kept for compatibility with other functions). All angles are given in</span>
 0019 <span class="comment">%   degrees.</span>
 0020 <span class="comment">%</span>
-0021 <span class="comment">%   See Also:</span>
+0021 <span class="comment">%   See also</span>
 0022 <span class="comment">%   planes3d, spheres, circles3d, intersectLinePlane, intersectLineSphere</span>
-0023 <span class="comment">%</span>
-0024 <span class="comment">%   ---------</span>
-0025 <span class="comment">%   author : David Legland</span>
-0026 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0027 <span class="comment">%   created the 18/02/2005.</span>
-0028 <span class="comment">%</span>
+0023 
+0024 <span class="comment">% ------</span>
+0025 <span class="comment">% Author: David Legland</span>
+0026 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0027 <span class="comment">% Created: 2005-02-18</span>
+0028 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0029 
-0030 <span class="comment">%   HISTORY</span>
-0031 <span class="comment">%   27/06/2007: change output format of circle, add support for multiple</span>
-0032 <span class="comment">%       data</span>
-0033 <span class="comment">%   2011-06-21 use degrees for angles</span>
-0034 
-0035 <span class="comment">% number of inputs of each type</span>
-0036 Ns = size(sphere, 1);
-0037 Np = size(plane, 1);
-0038 
-0039 <span class="comment">% unify data dimension</span>
-0040 <span class="keyword">if</span> Ns ~= Np 
-0041     <span class="keyword">if</span> Ns == 1
-0042         sphere = sphere(ones(Np, 1), :);
-0043     <span class="keyword">elseif</span> Np == 1
-0044         plane = plane(ones(Ns, 1), :);
-0045     <span class="keyword">else</span>
-0046         error(<span class="string">'data should have same length, or one data should have length 1'</span>);
-0047     <span class="keyword">end</span>
-0048 <span class="keyword">end</span>
-0049 <span class="comment">% center of the spheres</span>
-0050 center  = sphere(:,1:3);
-0051 
-0052 <span class="comment">% radius of spheres</span>
-0053 <span class="keyword">if</span> size(sphere, 2) == 4
-0054     Rs  = sphere(:,4);
-0055 <span class="keyword">else</span>
-0056     <span class="comment">% assume default radius equal to 1</span>
-0057     Rs  = ones(size(sphere, 1), 1);
-0058 <span class="keyword">end</span>
-0059 
-0060 <span class="comment">% projection of sphere center on plane -&gt; gives circle center</span>
-0061 circle0 = <a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>(center, plane);
-0062 
-0063 <span class="comment">% radius of circles</span>
-0064 d   = <a href="distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>(center, circle0);
-0065 Rc  = sqrt(Rs.*Rs - d.*d);
-0066 
-0067 <span class="comment">% normal of planes = normal of circles</span>
-0068 nor = <a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>(plane);
-0069 
-0070 <span class="comment">% convert to angles</span>
-0071 [theta, phi] = <a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>(nor(:,1), nor(:,2), nor(:,3));
-0072 psi = zeros(Np, 1);
-0073 
-0074 <span class="comment">% create structure for circle</span>
-0075 k = 180 / pi;
-0076 circle = [circle0 Rc [theta phi psi]*k];</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0030 <span class="comment">% number of inputs of each type</span>
+0031 Ns = size(sphere, 1);
+0032 Np = size(plane, 1);
+0033 
+0034 <span class="comment">% unify data dimension</span>
+0035 <span class="keyword">if</span> Ns ~= Np 
+0036     <span class="keyword">if</span> Ns == 1
+0037         sphere = sphere(ones(Np, 1), :);
+0038     <span class="keyword">elseif</span> Np == 1
+0039         plane = plane(ones(Ns, 1), :);
+0040     <span class="keyword">else</span>
+0041         error(<span class="string">'data should have same length, or one data should have length 1'</span>);
+0042     <span class="keyword">end</span>
+0043 <span class="keyword">end</span>
+0044 <span class="comment">% center of the spheres</span>
+0045 center  = sphere(:,1:3);
+0046 
+0047 <span class="comment">% radius of spheres</span>
+0048 <span class="keyword">if</span> size(sphere, 2) == 4
+0049     Rs  = sphere(:,4);
+0050 <span class="keyword">else</span>
+0051     <span class="comment">% assume default radius equal to 1</span>
+0052     Rs  = ones(size(sphere, 1), 1);
+0053 <span class="keyword">end</span>
+0054 
+0055 <span class="comment">% projection of sphere center on plane -&gt; gives circle center</span>
+0056 circle0 = <a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>(center, plane);
+0057 
+0058 <span class="comment">% radius of circles</span>
+0059 d   = <a href="distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>(center, circle0);
+0060 Rc  = sqrt(Rs.*Rs - d.*d);
+0061 
+0062 <span class="comment">% normal of planes = normal of circles</span>
+0063 nor = <a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>(plane);
+0064 
+0065 <span class="comment">% convert to angles</span>
+0066 [theta, phi] = <a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>(nor(:,1), nor(:,2), nor(:,3));
+0067 psi = zeros(Np, 1);
+0068 
+0069 <span class="comment">% create structure for circle</span>
+0070 k = 180 / pi;
+0071 circle = [circle0 Rc [theta phi psi]*k];</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

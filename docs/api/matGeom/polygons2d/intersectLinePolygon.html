@@ -4,7 +4,7 @@
 <head>
   <title>Description of intersectLinePolygon</title>
   <meta name="keywords" content="intersectLinePolygon">
-  <meta name="description" content="Intersection points between a line and a polygon.">
+  <meta name="description" content="INTERSECTLINEPOLYGON Intersection points between a line and a polygon.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Intersection points between a line and a polygon.</strong></div>
+<div class="box"><strong>INTERSECTLINEPOLYGON Intersection points between a line and a polygon.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function [points, edgeInds, linePositions] = intersectLinePolygon(line, poly, varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Intersection points between a line and a polygon.
+<div class="fragment"><pre class="comment">INTERSECTLINEPOLYGON Intersection points between a line and a polygon.
 
    P = intersectLinePolygon(LINE, POLY)
    Returns the intersection points of the lines LINE with polygon POLY. 
@@ -94,24 +94,24 @@
      https://web.cs.ucdavis.edu/~ma/ECS175_S00/Notes/0411_b.pdf
      https://alienryderflex.com/polygon_fill/
 
-   See Also
+   See also
    lines2d, polygons2d, intersectLines, <a href="intersectRayPolygon.html" class="code" title="function [intersects, edgeIndices] = intersectRayPolygon(ray, poly, varargin)">intersectRayPolygon</a>, <a href="polygonEdges.html" class="code" title="function edges = polygonEdges(poly)">polygonEdges</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="../../matGeom/geom2d/transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>	Apply an affine transform to a point or a point set.</li></ul>
+<li><a href="../../matGeom/geom2d/transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>	TRANSFORMPOINT Apply an affine transform to a point or a point set.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="intersectEdgePolygon.html" class="code" title="function [intersects, inds] = intersectEdgePolygon(edge, poly, varargin)">intersectEdgePolygon</a>	INTERSECTEDGEPOLYGON  Intersection point of an edge with a polygon.</li><li><a href="intersectRayPolygon.html" class="code" title="function [intersects, edgeIndices] = intersectRayPolygon(ray, poly, varargin)">intersectRayPolygon</a>	Intersection points between a ray and a polygon.</li></ul>
+<li><a href="intersectEdgePolygon.html" class="code" title="function [intersects, inds] = intersectEdgePolygon(edge, poly, varargin)">intersectEdgePolygon</a>	INTERSECTEDGEPOLYGON  Intersection point of an edge with a polygon.</li><li><a href="intersectRayPolygon.html" class="code" title="function [intersects, edgeIndices] = intersectRayPolygon(ray, poly, varargin)">intersectRayPolygon</a>	INTERSECTRAYPOLYGON Intersection points between a ray and a polygon.</li></ul>
 <!-- crossreference -->
 
 
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [points, edgeInds, linePositions] = intersectLinePolygon(line, poly, varargin)</a>
-0002 <span class="comment">% Intersection points between a line and a polygon.</span>
+0002 <span class="comment">%INTERSECTLINEPOLYGON Intersection points between a line and a polygon.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   P = intersectLinePolygon(LINE, POLY)</span>
 0005 <span class="comment">%   Returns the intersection points of the lines LINE with polygon POLY.</span>
@@ -178,81 +178,77 @@ This function is called by:
 0066 <span class="comment">%     https://web.cs.ucdavis.edu/~ma/ECS175_S00/Notes/0411_b.pdf</span>
 0067 <span class="comment">%     https://alienryderflex.com/polygon_fill/</span>
 0068 <span class="comment">%</span>
-0069 <span class="comment">%   See Also</span>
+0069 <span class="comment">%   See also</span>
 0070 <span class="comment">%   lines2d, polygons2d, intersectLines, intersectRayPolygon, polygonEdges</span>
 0071 <span class="comment">%</span>
 0072 
 0073 <span class="comment">% ------</span>
 0074 <span class="comment">% Author: David Legland</span>
-0075 <span class="comment">% e-mail: david.legland@inrae.fr</span>
-0076 <span class="comment">% Created: 2003-10-31,    using Matlab 7.9.0.529 (R2009b)</span>
-0077 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
+0075 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0076 <span class="comment">% Created: 2003-10-31, using Matlab 7.9.0.529 (R2009b)</span>
+0077 <span class="comment">% Copyright 2003-2024 INRA - Cepia Software Platform</span>
 0078 
-0079 <span class="comment">% 2022-02-14: new algorithm, more robust to numerical issues, but that can</span>
-0080 <span class="comment">% change behaviour compared to previous implementation</span>
-0081 
-0082 <span class="comment">% line origin and angle</span>
-0083 ox = line(1);
-0084 oy = line(2);
-0085 dx = line(3);
-0086 dy = line(4);
-0087 
-0088 <span class="comment">% create transform matrix that project line onto the horizontal axis</span>
-0089 <span class="comment">% (then, computation of intersections rely only on the y-coordinate)</span>
-0090 theta = atan2(dy, dx);
-0091 s = hypot(dx, dy);
-0092 cot = cos(theta) / s;
-0093 sit = sin(theta) / s;
-0094 transfo = [cot sit 0; -sit cot 0; 0 0 1] * [1 0 -ox; 0 1 -oy; 0 0 1];
+0079 <span class="comment">% line origin and angle</span>
+0080 ox = line(1);
+0081 oy = line(2);
+0082 dx = line(3);
+0083 dy = line(4);
+0084 
+0085 <span class="comment">% create transform matrix that project line onto the horizontal axis</span>
+0086 <span class="comment">% (then, computation of intersections rely only on the y-coordinate)</span>
+0087 theta = atan2(dy, dx);
+0088 s = hypot(dx, dy);
+0089 cot = cos(theta) / s;
+0090 sit = sin(theta) / s;
+0091 transfo = [cot sit 0; -sit cot 0; 0 0 1] * [1 0 -ox; 0 1 -oy; 0 0 1];
+0092 
+0093 <span class="comment">% number of vertices in polygon</span>
+0094 nVertices = size(poly, 1);
 0095 
-0096 <span class="comment">% number of vertices in polygon</span>
-0097 nVertices = size(poly, 1);
-0098 
-0099 <span class="comment">%  create arrays for storing x-coordinates and edge inds of intersections</span>
-0100 linePositions = [];
-0101 edgeInds = [];
-0102 
-0103 <span class="comment">% retrieve previous vertex and its y-coordinate</span>
-0104 ivp = nVertices;
-0105 previousVertex = <a href="../../matGeom/geom2d/transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(poly(ivp,:), transfo);
-0106 yvp = previousVertex(2);
-0107 
-0108 <span class="comment">% iterate over indices of first edge vertex</span>
-0109 <span class="keyword">for</span> iv = 1:nVertices
-0110     <span class="comment">% current vertex and its y-coordinate</span>
-0111     currentVertex = <a href="../../matGeom/geom2d/transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(poly(iv,:), transfo);
-0112     yv = currentVertex(2);
-0113     
-0114     <span class="comment">% check conditions for intersection</span>
-0115     <span class="comment">% either if:</span>
-0116     <span class="comment">% 1) previous vertex is above or on, and current vertex is strictly below</span>
-0117     <span class="comment">% 2) previous vertex is strictly below, and current vertex is above or on</span>
-0118     <span class="keyword">if</span>  yvp &gt;= 0 &amp;&amp; yv &lt; 0 || yvp &lt; 0 &amp;&amp; yv &gt;= 0
-0119         <span class="comment">% slope of current edge (dy cannot be zero due to above condition)</span>
-0120         edgeDx = currentVertex(1) - previousVertex(1);
-0121         edgeDy = currentVertex(2) - previousVertex(2);
-0122         <span class="comment">% position of intersection on the horizontal line</span>
-0123         currentPos = currentVertex(1) - yv * edgeDx / edgeDy ;
-0124         <span class="comment">% add to list of intersections</span>
-0125         linePositions = [linePositions ; currentPos]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0126         <span class="comment">% keep list if edge indices</span>
-0127         edgeInds = [edgeInds ; ivp]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0128     <span class="keyword">end</span>
-0129     
-0130     <span class="comment">% switch current vertex to previous vertex</span>
-0131     previousVertex = currentVertex;
-0132     ivp = iv; <span class="comment">% keep edge index for optional output</span>
-0133     yvp = yv;
-0134 <span class="keyword">end</span>
-0135 
-0136 <span class="comment">% format output result into a N-by-2 array of points</span>
-0137 <span class="keyword">if</span> ~isempty(linePositions)
-0138     points = [linePositions zeros(size(linePositions))];
-0139     points = <a href="../../matGeom/geom2d/transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(points, inv(transfo));
-0140     linePositions = linePositions;
-0141 <span class="keyword">else</span>
-0142     points = [];
-0143 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0096 <span class="comment">%  create arrays for storing x-coordinates and edge inds of intersections</span>
+0097 linePositions = [];
+0098 edgeInds = [];
+0099 
+0100 <span class="comment">% retrieve previous vertex and its y-coordinate</span>
+0101 ivp = nVertices;
+0102 previousVertex = <a href="../../matGeom/geom2d/transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(poly(ivp,:), transfo);
+0103 yvp = previousVertex(2);
+0104 
+0105 <span class="comment">% iterate over indices of first edge vertex</span>
+0106 <span class="keyword">for</span> iv = 1:nVertices
+0107     <span class="comment">% current vertex and its y-coordinate</span>
+0108     currentVertex = <a href="../../matGeom/geom2d/transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(poly(iv,:), transfo);
+0109     yv = currentVertex(2);
+0110     
+0111     <span class="comment">% check conditions for intersection</span>
+0112     <span class="comment">% either if:</span>
+0113     <span class="comment">% 1) previous vertex is above or on, and current vertex is strictly below</span>
+0114     <span class="comment">% 2) previous vertex is strictly below, and current vertex is above or on</span>
+0115     <span class="keyword">if</span>  yvp &gt;= 0 &amp;&amp; yv &lt; 0 || yvp &lt; 0 &amp;&amp; yv &gt;= 0
+0116         <span class="comment">% slope of current edge (dy cannot be zero due to above condition)</span>
+0117         edgeDx = currentVertex(1) - previousVertex(1);
+0118         edgeDy = currentVertex(2) - previousVertex(2);
+0119         <span class="comment">% position of intersection on the horizontal line</span>
+0120         currentPos = currentVertex(1) - yv * edgeDx / edgeDy ;
+0121         <span class="comment">% add to list of intersections</span>
+0122         linePositions = [linePositions ; currentPos]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0123         <span class="comment">% keep list if edge indices</span>
+0124         edgeInds = [edgeInds ; ivp]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0125     <span class="keyword">end</span>
+0126     
+0127     <span class="comment">% switch current vertex to previous vertex</span>
+0128     previousVertex = currentVertex;
+0129     ivp = iv; <span class="comment">% keep edge index for optional output</span>
+0130     yvp = yv;
+0131 <span class="keyword">end</span>
+0132 
+0133 <span class="comment">% format output result into a N-by-2 array of points</span>
+0134 <span class="keyword">if</span> ~isempty(linePositions)
+0135     points = [linePositions zeros(size(linePositions))];
+0136     points = <a href="../../matGeom/geom2d/transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(points, inv(transfo));
+0137 <span class="keyword">else</span>
+0138     points = [];
+0139 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

@@ -42,13 +42,8 @@
    isPointOnCircle([1 1], [0 0 1])
    return false
 
-   See also:
-   <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="isPointInCircle.html" class="code" title="function b = isPointInCircle(point, circle, varargin)">isPointInCircle</a>
-
-   ---------
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 07/04/2004.</pre></div>
+   See also
+   <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="isPointInCircle.html" class="code" title="function b = isPointInCircle(point, circle, varargin)">isPointInCircle</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -79,26 +74,23 @@ This function is called by:
 0014 <span class="comment">%   isPointOnCircle([1 1], [0 0 1])</span>
 0015 <span class="comment">%   return false</span>
 0016 <span class="comment">%</span>
-0017 <span class="comment">%   See also:</span>
+0017 <span class="comment">%   See also</span>
 0018 <span class="comment">%   circles2d, isPointInCircle</span>
-0019 <span class="comment">%</span>
-0020 <span class="comment">%   ---------</span>
-0021 <span class="comment">%   author : David Legland</span>
-0022 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0023 <span class="comment">%   created the 07/04/2004.</span>
-0024 <span class="comment">%</span>
+0019 
+0020 <span class="comment">% ------</span>
+0021 <span class="comment">% Author: David Legland</span>
+0022 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0023 <span class="comment">% Created: 2004-04-07</span>
+0024 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0025 
-0026 <span class="comment">%   HISTORY</span>
-0027 <span class="comment">%   22/05/2009 rename to isPointOnCircle, add psb to specify tolerance</span>
-0028 
-0029 tol = 1e-14;
-0030 <span class="keyword">if</span> ~isempty(varargin)
-0031     tol = varargin{1};
-0032 <span class="keyword">end</span>
-0033 
-0034 d = sqrt(sum(power(point - circle(:,1:2), 2), 2));
-0035 b = abs(d-circle(:,3))&lt;tol;
-0036</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0026 tol = 1e-14;
+0027 <span class="keyword">if</span> ~isempty(varargin)
+0028     tol = varargin{1};
+0029 <span class="keyword">end</span>
+0030 
+0031 d = sqrt(sum(power(point - circle(:,1:2), 2), 2));
+0032 b = abs(d-circle(:,3))&lt;tol;
+0033</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

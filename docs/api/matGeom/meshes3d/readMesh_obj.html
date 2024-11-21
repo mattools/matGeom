@@ -1,0 +1,249 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of readMesh_obj</title>
+  <meta name="keywords" content="readMesh_obj">
+  <meta name="description" content="READMESH_OBJ Read mesh data stored in OBJ format.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; readMesh_obj.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>readMesh_obj
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>READMESH_OBJ Read mesh data stored in OBJ format.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function mesh = readMesh_obj(fileName) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">READMESH_OBJ Read mesh data stored in OBJ format.
+
+   MESH = readMesh_obj(FILENAME)
+   Read the data stored in file FILENAME and return the mesh into a struct
+   with fields 'vertices' and 'faces'.
+
+   Example
+     mesh = readMesh_obj('teapot.obj');
+     figure; drawMesh(mesh, 'facecolor', [.5 .5 .5]);
+     axis equal; light;
+
+   References
+   Adapted from Bernard Abayowa (2022). readObj
+   (https://www.mathworks.com/matlabcentral/fileexchange/18957-readobj),
+   MATLAB Central File Exchange. Retrieved September 8, 2022.  
+
+   See also
+     meshes3d, <a href="readMesh.html" class="code" title="function varargout = readMesh(filePath, varargin)">readMesh</a>, <a href="readMesh_off.html" class="code" title="function varargout = readMesh_off(fileName)">readMesh_off</a>, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="readMesh.html" class="code" title="function varargout = readMesh(filePath, varargin)">readMesh</a>	READMESH Read a 3D mesh by inferring the format from the file extension.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function mesh = readMesh_obj(fileName)</a>
+0002 <span class="comment">%READMESH_OBJ Read mesh data stored in OBJ format.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   MESH = readMesh_obj(FILENAME)</span>
+0005 <span class="comment">%   Read the data stored in file FILENAME and return the mesh into a struct</span>
+0006 <span class="comment">%   with fields 'vertices' and 'faces'.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Example</span>
+0009 <span class="comment">%     mesh = readMesh_obj('teapot.obj');</span>
+0010 <span class="comment">%     figure; drawMesh(mesh, 'facecolor', [.5 .5 .5]);</span>
+0011 <span class="comment">%     axis equal; light;</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   References</span>
+0014 <span class="comment">%   Adapted from Bernard Abayowa (2022). readObj</span>
+0015 <span class="comment">%   (https://www.mathworks.com/matlabcentral/fileexchange/18957-readobj),</span>
+0016 <span class="comment">%   MATLAB Central File Exchange. Retrieved September 8, 2022.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   See also</span>
+0019 <span class="comment">%     meshes3d, readMesh, readMesh_off, drawMesh</span>
+0020 <span class="comment">%</span>
+0021 
+0022 <span class="comment">% ------</span>
+0023 <span class="comment">% Author: David Legland</span>
+0024 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0025 <span class="comment">% Created: 2022-09-08, using Matlab 9.9.0.1570001 (R2020b) Update 4</span>
+0026 <span class="comment">% Copyright 2022-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0027 
+0028 <span class="comment">%% initialisations</span>
+0029 
+0030 <span class="comment">% open file</span>
+0031 fid = fopen(fileName);
+0032 <span class="keyword">if</span> fid == -1 
+0033     error(<span class="string">'matGeom:readMesh_obj:FileNotFound'</span>, <span class="keyword">...</span>
+0034         [<span class="string">'Could not open input file: '</span> fileName]);
+0035 <span class="keyword">end</span>
+0036 
+0037 <span class="comment">% create result arrays for vertices</span>
+0038 v = [];     <span class="comment">% vertices</span>
+0039 vt = [];    <span class="comment">% vertex textures</span>
+0040 vn = [];    <span class="comment">% vertex normals</span>
+0041 <span class="comment">% create result arrays for faces</span>
+0042 <span class="comment">% (uses cell arrays as face may have variable number of vertices)</span>
+0043 fv = {};    <span class="comment">% face vertices</span>
+0044 fvt = {};   <span class="comment">% face texture coordinates</span>
+0045 fvn = {};   <span class="comment">% face normals</span>
+0046 
+0047 
+0048 <span class="comment">%% File parsing</span>
+0049 
+0050 <span class="comment">% parse lines of OBJ file within infinite loop</span>
+0051 lineIndex = 0;
+0052 <span class="keyword">while</span> true
+0053     <span class="comment">% read current line</span>
+0054     line = fgetl(fid);
+0055     lineIndex = lineIndex + 1;
+0056     
+0057     <span class="comment">% check end of file to break the loop</span>
+0058     <span class="keyword">if</span> ~ischar(line)
+0059         <span class="keyword">break</span>;
+0060     <span class="keyword">end</span>  
+0061     
+0062     <span class="comment">% parse element type</span>
+0063     type = sscanf(line, <span class="string">'%s'</span>, 1);
+0064     
+0065     <span class="keyword">if</span> strcmp(type, <span class="string">'v'</span>)
+0066         <span class="comment">% parse vertex</span>
+0067         v = [v; sscanf(line(2:end), <span class="string">'%f'</span>)']; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0068             
+0069     <span class="keyword">elseif</span> strcmp(type, <span class="string">'vt'</span>)
+0070         <span class="comment">% parse texture coordinate</span>
+0071         vt = [vt; sscanf(line(3:end), <span class="string">'%f'</span>)']; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0072             
+0073     <span class="keyword">elseif</span> strcmp(type, <span class="string">'vn'</span>)
+0074         <span class="comment">% parse normal coordinates</span>
+0075         vn = [vn; sscanf(line(3:end), <span class="string">'%f'</span>)']; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0076             
+0077     <span class="keyword">elseif</span> strcmp(type, <span class="string">'f'</span>)
+0078         <span class="comment">% parse face data</span>
+0079         
+0080         <span class="comment">% transform current line into a matrix of tokens with as many rows</span>
+0081         <span class="comment">% as face vertices, and as many columns as face data type</span>
+0082         str = textscan(line(2:end), <span class="string">'%s'</span>);
+0083         tokenMatrix = split(str{1}, <span class="string">'/'</span>);
+0084         
+0085         <span class="comment">% parse vertex indices (first column of matrix)</span>
+0086         fv = [fv; {str2double(tokenMatrix(:,1))'}]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0087         
+0088         <span class="comment">% parse texture coordinates (second column of matrix)</span>
+0089         <span class="keyword">if</span> size(tokenMatrix, 2) &gt; 1 &amp;&amp; ~isempty(tokenMatrix{1,2})
+0090             fvt = [fvt; {str2double(tokenMatrix(:,2))'}]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0091         <span class="keyword">end</span>
+0092 
+0093         <span class="comment">% parse normal coordinates (third column of matrix)</span>
+0094         <span class="keyword">if</span> size(tokenMatrix, 2) &gt; 2 &amp;&amp; ~isempty(tokenMatrix{1,3})
+0095             fvn = [fvn ; str2double(tokenMatrix(:,3)')]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0096         <span class="keyword">end</span>
+0097 
+0098         <span class="comment">% The following code is slightly faster, but does not manage</span>
+0099         <span class="comment">% all possible cases (in particular when face texture is empty)</span>
+0100         <span class="comment">% and is more complicated to maintain.</span>
+0101 <span class="comment">%             str = textscan(line(2:end), '%s');</span>
+0102 <span class="comment">%             str = str{1};</span>
+0103 <span class="comment">%             fvi = []; fvti = []; fvni = [];</span>
+0104 <span class="comment">%</span>
+0105 <span class="comment">%             % number of fields with this face vertices</span>
+0106 <span class="comment">%             nf = length(strfind(str{1}, '/'));</span>
+0107 <span class="comment">%</span>
+0108 <span class="comment">%             % vertex indices</span>
+0109 <span class="comment">%             [tok, str] = strtok(str, '//'); %#ok&lt;STTOK&gt;</span>
+0110 <span class="comment">%             for k = 1:length(tok)</span>
+0111 <span class="comment">%                 fvi = [fvi str2double(tok{k})]; %#ok&lt;AGROW&gt;</span>
+0112 <span class="comment">%             end</span>
+0113 <span class="comment">%             fv = [fv; fvi];    %#ok&lt;AGROW&gt;</span>
+0114 <span class="comment">%</span>
+0115 <span class="comment">%             % vertex texture coordinates</span>
+0116 <span class="comment">%             if nf &gt; 0</span>
+0117 <span class="comment">%                 [tok, str] = strtok(str, '//'); %#ok&lt;STTOK&gt;</span>
+0118 <span class="comment">%                 for k = 1:length(tok)</span>
+0119 <span class="comment">%                     fvti = [fvti str2double(tok{k})]; %#ok&lt;AGROW&gt;</span>
+0120 <span class="comment">%                 end</span>
+0121 <span class="comment">%                 fvt = [fvt; fvti]; %#ok&lt;AGROW&gt;</span>
+0122 <span class="comment">%             end</span>
+0123 <span class="comment">%</span>
+0124 <span class="comment">%             % vertex normal coordinates</span>
+0125 <span class="comment">%             if nf &gt; 1</span>
+0126 <span class="comment">%                 tok = strtok(str, '//');</span>
+0127 <span class="comment">%                 for k = 1:length(tok)</span>
+0128 <span class="comment">%                     fvni = [fvni str2double(tok{k})]; %#ok&lt;AGROW&gt;</span>
+0129 <span class="comment">%                 end</span>
+0130 <span class="comment">%                 fvn = [fvn; fvni]; %#ok&lt;AGROW&gt;</span>
+0131 <span class="comment">%             end</span>
+0132             
+0133     <span class="keyword">elseif</span> any(strcmp(type, {<span class="string">'g'</span>, <span class="string">'o'</span>, <span class="string">'s'</span>, <span class="string">'usemtl'</span>}))
+0134         warning(<span class="string">'matGeom:readMesh_obj:UnsupportedElement'</span>, <span class="keyword">...</span><span class="comment">...</span>
+0135             <span class="string">'Element %s at line %d is not (yet) managed'</span>, type, lineIndex);
+0136             
+0137     <span class="keyword">elseif</span> isempty(type) || any(strcmp(type(1), {<span class="string">'#'</span>, <span class="string">' '</span>}))
+0138         <span class="comment">% comment or empty line -&gt; do nothing</span>
+0139             
+0140     <span class="keyword">else</span>
+0141         warning(<span class="string">'matGeom:readMesh_obj:UnknownElement'</span>, <span class="keyword">...</span><span class="comment">...</span>
+0142             <span class="string">'Unknown element type at line %d: %s'</span>, lineIndex, type);
+0143     <span class="keyword">end</span>
+0144 <span class="keyword">end</span>
+0145 
+0146 <span class="comment">% close file</span>
+0147 fclose(fid);
+0148 
+0149 
+0150 <span class="comment">%% Format output</span>
+0151 
+0152 <span class="comment">% create mesh structure</span>
+0153 mesh = struct(<span class="string">'vertices'</span>, v);
+0154 
+0155 <span class="comment">% add optional vertex data</span>
+0156 <span class="keyword">if</span> ~isempty(vn)
+0157     mesh.vertexNormals = vn;
+0158 <span class="keyword">end</span>
+0159 <span class="keyword">if</span> ~isempty(vt)
+0160     mesh.vertexTexture = vt;
+0161 <span class="keyword">end</span>
+0162 
+0163 mesh.faces = fv;
+0164 
+0165 <span class="comment">% add optional face data</span>
+0166 <span class="keyword">if</span> ~isempty(fvn)
+0167     mesh.faceVertexNormals = fvn;
+0168 <span class="keyword">end</span>
+0169 <span class="keyword">if</span> ~isempty(fvt)
+0170     mesh.faceVertexTexture = fvt;
+0171 <span class="keyword">end</span>
+0172 
+0173 <span class="comment">% if faces have all the same number of vertices, convert to numeric arrays</span>
+0174 nvf = cellfun(@length, fv);
+0175 <span class="keyword">if</span> all(nvf == nvf(1))
+0176     mesh.faces = cell2mat(mesh.faces(:));
+0177 
+0178     <span class="keyword">if</span> ~isempty(fvn)
+0179         mesh.faceVertexNormals = cell2mat(fvn(:));
+0180     <span class="keyword">end</span>
+0181     <span class="keyword">if</span> ~isempty(fvt)
+0182         mesh.faceVertexTexture = cell2mat(fvt(:));
+0183     <span class="keyword">end</span>
+0184 <span class="keyword">end</span>
+0185</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

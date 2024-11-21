@@ -4,7 +4,7 @@
 <head>
   <title>Description of Contents</title>
   <meta name="keywords" content="Contents">
-  <meta name="description" content="GEOM3D Geometry 3D Toolbox">
+  <meta name="description" content="CONTENTS GEOM3D Geometry 3D Toolbox.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>GEOM3D Geometry 3D Toolbox</strong></div>
+<div class="box"><strong>CONTENTS GEOM3D Geometry 3D Toolbox.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>This is a script file. </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> GEOM3D Geometry 3D Toolbox
+<div class="fragment"><pre class="comment">CONTENTS GEOM3D Geometry 3D Toolbox.
  Version 1.22 06-Jun-2018 .
 
    Creation, transformations, algorithms and visualization of geometrical
@@ -78,7 +78,7 @@
    <a href="vectorAngle3d.html" class="code" title="function theta = vectorAngle3d(v1, v2)">vectorAngle3d</a>               - Angle between two 3D vectors.
    <a href="isParallel3d.html" class="code" title="function b = isParallel3d(v1, v2, varargin)">isParallel3d</a>                - Check parallelism of two 3D vectors.
    <a href="isPerpendicular3d.html" class="code" title="function b = isPerpendicular3d(v1, v2, varargin)">isPerpendicular3d</a>           - Check orthogonality of two 3D vectors.
-   <a href="drawVector3d.html" class="code" title="function varargout = drawVector3d(pos, vect, varargin)">drawVector3d</a>                - Draw vector at a given position.
+   <a href="drawVector3d.html" class="code" title="function varargout = drawVector3d(varargin)">drawVector3d</a>                - Draw vector at a given position.
 
  Angles
    <a href="angles3d.html" class="code" title="function angles3d(varargin)">angles3d</a>                    - Conventions for manipulating angles in 3D.
@@ -119,6 +119,7 @@
    <a href="lineToEdge3d.html" class="code" title="function edge = lineToEdge3d(line)">lineToEdge3d</a>                - Convert a 3D straight line to a 3D finite edge.
    <a href="edgeToLine3d.html" class="code" title="function line = edgeToLine3d(edge)">edgeToLine3d</a>                - Convert a 3D edge to a 3D straight line.
    <a href="distancePointEdge3d.html" class="code" title="function [dist, t] = distancePointEdge3d(point, edge)">distancePointEdge3d</a>         - Minimum distance between a 3D point and a 3D edge.
+   <a href="isPointOnEdge3d.html" class="code" title="function b = isPointOnEdge3d(point, edge, varargin)">isPointOnEdge3d</a>             - Test if a 3D point belongs to an edge.
    <a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>                  - Draw 3D edge in the current axes.
    <a href="createRay3d.html" class="code" title="function ray = createRay3d(p1, p2)">createRay3d</a>                 - Create a 3D ray.
    <a href="clipRay3d.html" class="code" title="function edge = clipRay3d(ray, box)">clipRay3d</a>                   - Clip a 3D ray with a box and return a 3D edge.
@@ -127,39 +128,44 @@
  Planes
    <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>                    - Description of functions operating on 3D planes.
    <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>                 - Create a plane in parametrized form.
+   <a href="clipPlane.html" class="code" title="function poly = clipPlane(plane, box)">clipPlane</a>                   - Compute the 3D polygon representing a clipped plane.
    <a href="fitPlane.html" class="code" title="function plane = fitPlane(points)">fitPlane</a>                    - Fit a 3D plane to a set of points.
    <a href="normalizePlane.html" class="code" title="function plane2 = normalizePlane(plane1)">normalizePlane</a>              - Normalize parametric representation of a plane.
    <a href="parallelPlane.html" class="code" title="function res = parallelPlane(plane, point)">parallelPlane</a>               - Parallel to a plane through a point or at a given distance.
    <a href="reversePlane.html" class="code" title="function plane = reversePlane(plane)">reversePlane</a>                - Return same 3D plane but with opposite orientation.
    <a href="isPlane.html" class="code" title="function d = isPlane(plane)">isPlane</a>                     - Check if input is a plane.
    <a href="transformPlane3d.html" class="code" title="function plane2 = transformPlane3d(plane, trans)">transformPlane3d</a>            - Transform a 3D plane with a 3D affine transform.
-   <a href="planesBisector.html" class="code" title="function out = planesBisector(plane1, plane2)">planesBisector</a>              - Bisector plane between two other planes.
+   <a href="planesBisector.html" class="code" title="function bis = planesBisector(plane1, plane2)">planesBisector</a>              - Bisector plane between two other planes.
    <a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>            - Return the orthogonal projection of a point on a plane.
    <a href="intersectPlanes.html" class="code" title="function line = intersectPlanes(plane1, plane2, varargin)">intersectPlanes</a>             - Return intersection line between 2 planes in space.
    <a href="intersectThreePlanes.html" class="code" title="function point = intersectThreePlanes(plane1, plane2, plane3)">intersectThreePlanes</a>        - Return intersection point between 3 planes in space.
    <a href="intersectLinePlane.html" class="code" title="function point = intersectLinePlane(line, plane, varargin)">intersectLinePlane</a>          - Intersection point between a 3D line and a plane.
    <a href="intersectEdgePlane.html" class="code" title="function point = intersectEdgePlane(edge, plane, varargin)">intersectEdgePlane</a>          - Return intersection point between a plane and a edge.
-   <a href="distancePointPlane.html" class="code" title="function d = distancePointPlane(point, plane)">distancePointPlane</a>          - Signed distance betwen 3D point and plane.
+   <a href="distancePointPlane.html" class="code" title="function d = distancePointPlane(point, plane)">distancePointPlane</a>          - Signed distance between 3D point and plane.
    <a href="projLineOnPlane.html" class="code" title="function [newLine, isOrthogonal] = projLineOnPlane(line, plane)">projLineOnPlane</a>             - Return the orthogonal projection of a line on a plane.
    <a href="isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>                - Test whether a point is below or above a plane.
    <a href="medianPlane.html" class="code" title="function plane = medianPlane(p1, p2)">medianPlane</a>                 - Create a plane in the middle of 2 points.
    <a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>                 - Compute the normal to a plane.
-   <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>               - Compute position of a point on a plane.
+   <a href="planePosition.html" class="code" title="function [pos, zp] = planePosition(point, plane)">planePosition</a>               - Compute position of a point on a plane.
    <a href="planePoint.html" class="code" title="function coord = planePoint(plane, point)">planePoint</a>                  - Compute 3D position of a point in a plane.
    <a href="dihedralAngle.html" class="code" title="function theta = dihedralAngle(plane1, plane2)">dihedralAngle</a>               - Compute dihedral angle between 2 planes.
    <a href="drawPlane3d.html" class="code" title="function h = drawPlane3d(plane, varargin)">drawPlane3d</a>                 - Draw a plane clipped by the current axes.
 
  3D Polygons and curves
    <a href="polygons3d.html" class="code" title="function polygons3d(varargin)">polygons3d</a>                  - Description of functions operating on 3D polygons.
-   <a href="polygonCentroid3d.html" class="code" title="function centroid = polygonCentroid3d(varargin)">polygonCentroid3d</a>           - Centroid (or center of mass) of a polygon.
+   <a href="isPolygon3d.html" class="code" title="function a = isPolygon3d(pol, varargin)">isPolygon3d</a>                 - Check if input is a 3d polygon.
+   <a href="polygonCentroid3d.html" class="code" title="function [centroid, area] = polygonCentroid3d(varargin)">polygonCentroid3d</a>           - Centroid (or center of mass) of a polygon.
    <a href="polygonArea3d.html" class="code" title="function area = polygonArea3d(poly, varargin)">polygonArea3d</a>               - Area of a 3D polygon.
    <a href="polygon3dNormalAngle.html" class="code" title="function theta = polygon3dNormalAngle(points, ind)">polygon3dNormalAngle</a>        - Normal angle at a vertex of the 3D polygon.
+   <a href="projPointOnPolyline3d.html" class="code" title="function varargout = projPointOnPolyline3d(point, poly, varargin)">projPointOnPolyline3d</a>       - Compute position of a 3D point projected on a 3D polyline.
+   <a href="intersectEdgePolygon3d.html" class="code" title="function [inter, valid] = intersectEdgePolygon3d(edge, poly)">intersectEdgePolygon3d</a>      - Intersection point of a 3D edge segment and a 3D polygon.
    <a href="intersectLinePolygon3d.html" class="code" title="function [inter, inside]= intersectLinePolygon3d(line, poly)">intersectLinePolygon3d</a>      - Intersection point of a 3D line and a 3D polygon.
    <a href="intersectRayPolygon3d.html" class="code" title="function [inter, inside]= intersectRayPolygon3d(ray, poly)">intersectRayPolygon3d</a>       - Intersection point of a 3D ray and a 3D polygon.
-   <a href="clipConvexPolygon3dHP.html" class="code" title="function poly2 = clipConvexPolygon3dHP(poly, plane)">clipConvexPolygon3dHP</a>       - Clip a convex 3D polygon with Half-space.
+   <a href="clipPolygonByPlane3d.html" class="code" title="function poly2 = clipPolygonByPlane3d(poly, plane, varargin)">clipPolygonByPlane3d</a>        - Clip a 3D polygon with a plane.
    <a href="drawPolygon3d.html" class="code" title="function varargout = drawPolygon3d(varargin)">drawPolygon3d</a>               - Draw a 3D polygon specified by a list of vertex coords.
    <a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>              - Draw a 3D polyline specified by a list of vertex coords.
    <a href="fillPolygon3d.html" class="code" title="function varargout = fillPolygon3d(varargin)">fillPolygon3d</a>               - Fill a 3D polygon specified by a list of vertex coords.
+   <a href="transformPolygon3d.html" class="code" title="function tfmPoly = transformPolygon3d(poly, tfm)">transformPolygon3d</a>          - Transform a polygon with a 3D affine transform.
 
  3D Triangles
    <a href="triangleArea3d.html" class="code" title="function area = triangleArea3d(pt1, pt2, pt3)">triangleArea3d</a>              - Area of a 3D triangle.
@@ -168,15 +174,17 @@
 
  3D circles and ellipses
    <a href="circles3d.html" class="code" title="function circles3d(varargin)">circles3d</a>                   - Description of functions operating on 3D circles.
-   <a href="fitCircle3d.html" class="code" title="function [fittedCircle, circleNormal] = fitCircle3d(pts)">fitCircle3d</a>                 - Fit a 3D circle to a set of points.
+   <a href="fitCircle3d.html" class="code" title="function [fittedCircle, circleNormal, residuals] = fitCircle3d(pts, varargin)">fitCircle3d</a>                 - Fit a 3D circle to a set of points.
    <a href="fitEllipse3d.html" class="code" title="function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin)">fitEllipse3d</a>                - Fit an ellipse to a set of points.
    <a href="circle3dPosition.html" class="code" title="function theta = circle3dPosition(point, circle)">circle3dPosition</a>            - Return the angular position of a point on a 3D circle.
    <a href="circle3dPoint.html" class="code" title="function point = circle3dPoint(circle, pos)">circle3dPoint</a>               - Coordinates of a point on a 3D circle from its position.
    <a href="circle3dOrigin.html" class="code" title="function ori = circle3dOrigin(varargin)">circle3dOrigin</a>              - Return the first point of a 3D circle.
+   <a href="distancePointCircle3d.html" class="code" title="function d = distancePointCircle3d(points, circle)">distancePointCircle3d</a>       - Distance between 3D points and 3D circle.
    <a href="drawCircle3d.html" class="code" title="function varargout = drawCircle3d(varargin)">drawCircle3d</a>                - Draw a 3D circle.
-   <a href="drawCircleArc3d.html" class="code" title="function varargout = drawCircleArc3d(arc, varargin)">drawCircleArc3d</a>             - Draw a 3D circle arc.
+   <a href="drawCircleArc3d.html" class="code" title="function varargout = drawCircleArc3d(varargin)">drawCircleArc3d</a>             - Draw a 3D circle arc.
    <a href="drawEllipse3d.html" class="code" title="function varargout = drawEllipse3d(varargin)">drawEllipse3d</a>               - Draw a 3D ellipse.
    <a href="projPointOnCircle3d.html" class="code" title="function point2 = projPointOnCircle3d(point, circle)">projPointOnCircle3d</a>         - Project a 3D point onto a 3D circle.
+   <a href="transformCircle3d.html" class="code" title="function circle2 = transformCircle3d(circle, tfm)">transformCircle3d</a>           - Transform a 3D circle with a 3D affine transformation.
 
  <a href="spheres.html" class="code" title="function spheres(varargin)">Spheres</a>
    <a href="spheres.html" class="code" title="function spheres(varargin)">spheres</a>                     - Description of functions operating on 3D <a href="spheres.html" class="code" title="function spheres(varargin)">spheres</a>.
@@ -185,10 +193,10 @@
    <a href="intersectLineSphere.html" class="code" title="function points = intersectLineSphere(line, sphere, varargin)">intersectLineSphere</a>         - Return intersection points between a line and a sphere.
    <a href="intersectPlaneSphere.html" class="code" title="function circle = intersectPlaneSphere(plane, sphere)">intersectPlaneSphere</a>        - Return intersection circle between a plane and a sphere.
    <a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a>                  - Draw a sphere as a mesh.
-   <a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>           - Draw an edge on the surface of a sphere.
-   <a href="drawSphericalTriangle.html" class="code" title="function varargout = drawSphericalTriangle(sphere, p1, p2, p3, varargin)">drawSphericalTriangle</a>       - Draw a triangle on a sphere.
+   <a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(varargin)">drawSphericalEdge</a>           - Draw an edge on the surface of a sphere.
+   <a href="drawSphericalTriangle.html" class="code" title="function varargout = drawSphericalTriangle(varargin)">drawSphericalTriangle</a>       - Draw a triangle on a sphere.
    <a href="fillSphericalTriangle.html" class="code" title="function varargout = fillSphericalTriangle(sphere, p1, p2, p3, varargin)">fillSphericalTriangle</a>       - Fill a triangle on a sphere.
-   <a href="drawSphericalPolygon.html" class="code" title="function varargout = drawSphericalPolygon(sphere, poly, varargin)">drawSphericalPolygon</a>        - Draw a spherical polygon.
+   <a href="drawSphericalPolygon.html" class="code" title="function varargout = drawSphericalPolygon(varargin)">drawSphericalPolygon</a>        - Draw a spherical polygon.
    <a href="fillSphericalPolygon.html" class="code" title="function varargout = fillSphericalPolygon(sphere, poly, germ)">fillSphericalPolygon</a>        - Fill a spherical polygon.
    <a href="sphericalVoronoiDomain.html" class="code" title="function poly = sphericalVoronoiDomain(refPoint, neighbors)">sphericalVoronoiDomain</a>      - Compute a spherical voronoi domain.
 
@@ -199,16 +207,18 @@
    <a href="oblateSurfaceArea.html" class="code" title="function S = oblateSurfaceArea(elli, varargin)">oblateSurfaceArea</a>           - Approximated surface area of an oblate ellipsoid.
    <a href="prolateSurfaceArea.html" class="code" title="function S = prolateSurfaceArea(elli, varargin)">prolateSurfaceArea</a>          - Approximated surface area of a prolate ellipsoid.
    <a href="cylinderSurfaceArea.html" class="code" title="function S = cylinderSurfaceArea(cyl)">cylinderSurfaceArea</a>         - Surface area of a cylinder.
+   <a href="geodesicCylinder.html" class="code" title="function [geo, geoLength, conGeo, conGeoLength] = geodesicCylinder(pts, cyl, varargin)">geodesicCylinder</a>            - Computes the geodesic between two points on a cylinder.
    <a href="intersectLineCylinder.html" class="code" title="function points = intersectLineCylinder(line, cylinder, varargin)">intersectLineCylinder</a>       - Compute intersection points between a line and a cylinder.
+   <a href="projPointOnCylinder.html" class="code" title="function ptProj = projPointOnCylinder(pt, cyl, varargin)">projPointOnCylinder</a>         - Project a 3D point onto a cylinder.
    <a href="revolutionSurface.html" class="code" title="function varargout = revolutionSurface(varargin)">revolutionSurface</a>           - Create a surface of revolution from a planar curve.
    <a href="surfaceCurvature.html" class="code" title="function kappa = surfaceCurvature(kappa1, kappa2, theta)">surfaceCurvature</a>            - Curvature on a surface from angle and principal curvatures.
-   <a href="drawEllipsoid.html" class="code" title="function varargout = drawEllipsoid(elli, varargin)">drawEllipsoid</a>               - Draw a 3D ellipsoid.
-   <a href="drawTorus.html" class="code" title="function varargout = drawTorus(torus, varargin)">drawTorus</a>                   - Draw a torus (3D ring).
+   <a href="drawEllipsoid.html" class="code" title="function varargout = drawEllipsoid(varargin)">drawEllipsoid</a>               - Draw a 3D ellipsoid.
+   <a href="drawTorus.html" class="code" title="function varargout = drawTorus(varargin)">drawTorus</a>                   - Draw a torus (3D ring).
    <a href="drawCylinder.html" class="code" title="function varargout = drawCylinder(varargin)">drawCylinder</a>                - Draw a cylinder.
-   <a href="drawEllipseCylinder.html" class="code" title="function varargout = drawEllipseCylinder(cyl, varargin)">drawEllipseCylinder</a>         - Draw a cylinder with ellipse cross-section.
+   <a href="drawEllipseCylinder.html" class="code" title="function varargout = drawEllipseCylinder(varargin)">drawEllipseCylinder</a>         - Draw a cylinder with ellipse cross-section.
    <a href="drawCapsule.html" class="code" title="function varargout = drawCapsule(varargin)">drawCapsule</a>                 - Draw a capsule.
    <a href="drawDome.html" class="code" title="function varargout = drawDome(varargin)">drawDome</a>                    - Draw a dome (half-sphere, semi-sphere) as a mesh.
-   <a href="drawSurfPatch.html" class="code" title="function drawSurfPatch(u, v, z, varargin)">drawSurfPatch</a>               - Draw a 3D surface patch, with 2 parametrized surfaces.
+   <a href="drawSurfPatch.html" class="code" title="function drawSurfPatch(varargin)">drawSurfPatch</a>               - Draw a 3D surface patch, with 2 parametrized surfaces.
 
  Bounding boxes management
    <a href="boxes3d.html" class="code" title="function boxes3d(varargin)">boxes3d</a>                     - Description of functions operating on 3D boxes.
@@ -223,7 +233,9 @@
  Geometric transforms
    <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>                - Conventions for manipulating 3D affine transforms.
    <a href="fitAffineTransform3d.html" class="code" title="function trans = fitAffineTransform3d(ref, src)">fitAffineTransform3d</a>        - Compute the affine transform that best register two 3D point sets.
-   <a href="registerPoints3dAffine.html" class="code" title="function [trans, points] = registerPoints3dAffine(points, target, varargin)">registerPoints3dAffine</a>      - Fit 3D affine transform using iterative algorithm.
+   <a href="registerPoints3d.html" class="code" title="function [tfm, pts, varargout] = registerPoints3d(source, target, varargin)">registerPoints3d</a>            - Computes a rigid transform between two 3D point sets.
+   <a href="registerPoints3d_icp.html" class="code" title="function [transfo, pt, ER, t] = registerPoints3d_icp(p, q, varargin)">registerPoints3d_icp</a>        - Computes rigid transform between two 3D point sets.
+   <a href="registerPoints3d_affine.html" class="code" title="function [trans, points] = registerPoints3d_affine(points, target, varargin)">registerPoints3d_affine</a>      - Fit 3D affine transform using iterative algorithm.
    <a href="createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>         - Create the 4x4 matrix of a 3D translation.
    <a href="createScaling3d.html" class="code" title="function trans = createScaling3d(varargin)">createScaling3d</a>             - Create the 4x4 matrix of a 3D scaling.
    <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>            - Create the 4x4 matrix of a 3D rotation around x-axis.
@@ -245,28 +257,21 @@
    <a href="drawGrid3d.html" class="code" title="function varargout = drawGrid3d(varargin)">drawGrid3d</a>                  - Draw a 3D grid on the current axis.
    <a href="drawAxis3d.html" class="code" title="function varargout = drawAxis3d(varargin)">drawAxis3d</a>                  - Draw a coordinate system and an origin.
    <a href="drawAxisCube.html" class="code" title="function p = drawAxisCube(varargin)">drawAxisCube</a>                - Draw a colored cube representing axis orientation.
-   <a href="drawCube.html" class="code" title="function varargout = drawCube(cube, varargin)">drawCube</a>                    - Draw a 3D centered cube, eventually rotated.
-   <a href="drawCuboid.html" class="code" title="function varargout = drawCuboid(cuboid, varargin)">drawCuboid</a>                  - Draw a 3D cuboid, eventually rotated.
-   <a href="drawPlatform.html" class="code" title="function  varargout = drawPlatform(plane, siz, varargin)">drawPlatform</a>                - Draw a rectangular platform with a given size.
+   <a href="drawCube.html" class="code" title="function varargout = drawCube(varargin)">drawCube</a>                    - Draw a 3D centered cube, eventually rotated.
+   <a href="drawCuboid.html" class="code" title="function varargout = drawCuboid(varargin)">drawCuboid</a>                  - Draw a 3D cuboid, eventually rotated.
+   <a href="drawPlatform.html" class="code" title="function  varargout = drawPlatform(varargin)">drawPlatform</a>                - Draw a rectangular platform with a given size.
    <a href="drawLabels3d.html" class="code" title="function varargout = drawLabels3d(varargin)">drawLabels3d</a>                - Draw text labels at specified 3D positions.
-   <a href="drawArrow3d.html" class="code" title="function varargout = drawArrow3d(pos, vec, varargin)">drawArrow3d</a>                 - plot a quiver of 3D arrows.
-   <a href="drawAngleBetweenVectors3d.html" class="code" title="function varargout = drawAngleBetweenVectors3d(o, v1, v2, r, varargin)">drawAngleBetweenVectors3d</a>   - Draw an arc between 2 vectors.
+   <a href="drawArrow3d.html" class="code" title="function varargout = drawArrow3d(varargin)">drawArrow3d</a>                 - Plot a quiver of 3D arrows.
+   <a href="drawAngleBetweenVectors3d.html" class="code" title="function varargout = drawAngleBetweenVectors3d(varargin)">drawAngleBetweenVectors3d</a>   - Draw an arc between 2 vectors.
 
 
-   Credits:
+   Credits
    * Several functions contributed by Sven Holcombe
    * function <a href="isCoplanar.html" class="code" title="function copl = isCoplanar(x,y,z,tol)">isCoplanar</a> was originally written by Brett Shoelson.
    * Songbai Ji enhanced file intersectPlaneLine (6/23/2006).
    * several functions contributed by oqilipo
-
-
- ------
- Author: David Legland
- e-mail: david.legland@inra.fr
- Created: 2005-11-07
- Homepage: http://github.com/mattools/matGeom
- http://www.pfl-cepia.inra.fr/index.php?page=geom3d
- Copyright 2005 INRA</pre></div>
+   * <a href="registerPoints3d_icp.html" class="code" title="function [transfo, pt, ER, t] = registerPoints3d_icp(p, q, varargin)">registerPoints3d_icp</a> rewritten from the &quot;icp&quot; function, by Martin
+       Kjer and Jakob Wilm.</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -281,6 +286,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

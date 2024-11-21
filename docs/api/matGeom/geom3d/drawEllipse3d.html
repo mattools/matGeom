@@ -58,7 +58,10 @@
      ellXZ = [0 0 0  8 2  90 90 90];
      drawEllipse3d(ellXZ, 'color', [0 .8 0], 'linewidth', 2)
      ellYZ = [0 0 0  5 2  90 0 90];
-     drawEllipse3d(ellYZ, 'color', [0 0 .8], 'linewidth', 2)</pre></div>
+     drawEllipse3d(ellYZ, 'color', [0 0 .8], 'linewidth', 2)
+ 
+   See also
+   geom3d, <a href="angles3d.html" class="code" title="function angles3d(varargin)">angles3d</a>, <a href="drawCircle3d.html" class="code" title="function varargout = drawCircle3d(varargin)">drawCircle3d</a>, <a href="drawEllipsoid.html" class="code" title="function varargout = drawEllipsoid(varargin)">drawEllipsoid</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -107,186 +110,204 @@ This function is called by:
 0032 <span class="comment">%     ellYZ = [0 0 0  5 2  90 0 90];</span>
 0033 <span class="comment">%     drawEllipse3d(ellYZ, 'color', [0 0 .8], 'linewidth', 2)</span>
 0034 <span class="comment">%</span>
-0035  
-0036 <span class="comment">%   ------</span>
-0037 <span class="comment">%   Author: David Legland</span>
-0038 <span class="comment">%   e-mail: david.legland@inra.fr</span>
-0039 <span class="comment">%   Created: 2008-05-07</span>
-0040 <span class="comment">%   Copyright 2008 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
-0041 
-0042 <span class="comment">%   HISTORY</span>
-0043 
-0044 <span class="comment">%   Possible calls for the function, with number of arguments :</span>
-0045 <span class="comment">%   drawEllipse3d([XC YC ZC A B THETA PHI])             1</span>
-0046 <span class="comment">%   drawEllipse3d([XC YC ZC A B THETA PHI PSI])         1</span>
-0047 <span class="comment">%   drawEllipse3d([XC YC ZC A B], [THETA PHI])          2</span>
-0048 <span class="comment">%   drawEllipse3d([XC YC ZC A B], [THETA PHI PSI])      2</span>
-0049 <span class="comment">%   drawEllipse3d([XC YC ZC A B], THETA, PHI)           3</span>
-0050 <span class="comment">%   drawEllipse3d([XC YC ZC A B], THETA, PHI, PSI)      4</span>
-0051 <span class="comment">%   drawEllipse3d([XC YC ZC], A, B, THETA, PHI)         5</span>
-0052 <span class="comment">%   drawEllipse3d([XC YC ZC], A, B, THETA, PHI, PSI)    6</span>
-0053 <span class="comment">%   drawEllipse3d(XC, YC, ZC, A, B, THETA, PHI)         7</span>
-0054 <span class="comment">%   drawEllipse3d(XC, YC, ZC, A, B, THETA, PHI, PSI)    8</span>
-0055 
+0035 <span class="comment">%   See also</span>
+0036 <span class="comment">%   geom3d, angles3d, drawCircle3d, drawEllipsoid</span>
+0037 <span class="comment">%</span>
+0038 
+0039 <span class="comment">% ------</span>
+0040 <span class="comment">% Author: David Legland</span>
+0041 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0042 <span class="comment">% Created: 2008-05-07</span>
+0043 <span class="comment">% Copyright 2008-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)</span>
+0044 
+0045 <span class="comment">%   Possible calls for the function, with number of arguments :</span>
+0046 <span class="comment">%   drawEllipse3d([XC YC ZC A B THETA PHI])             1</span>
+0047 <span class="comment">%   drawEllipse3d([XC YC ZC A B THETA PHI PSI])         1</span>
+0048 <span class="comment">%   drawEllipse3d([XC YC ZC A B], [THETA PHI])          2</span>
+0049 <span class="comment">%   drawEllipse3d([XC YC ZC A B], [THETA PHI PSI])      2</span>
+0050 <span class="comment">%   drawEllipse3d([XC YC ZC A B], THETA, PHI)           3</span>
+0051 <span class="comment">%   drawEllipse3d([XC YC ZC A B], THETA, PHI, PSI)      4</span>
+0052 <span class="comment">%   drawEllipse3d([XC YC ZC], A, B, THETA, PHI)         5</span>
+0053 <span class="comment">%   drawEllipse3d([XC YC ZC], A, B, THETA, PHI, PSI)    6</span>
+0054 <span class="comment">%   drawEllipse3d(XC, YC, ZC, A, B, THETA, PHI)         7</span>
+0055 <span class="comment">%   drawEllipse3d(XC, YC, ZC, A, B, THETA, PHI, PSI)    8</span>
 0056 
-0057 <span class="comment">% extract drawing options</span>
-0058 ind = find(cellfun(@ischar, varargin), 1, <span class="string">'first'</span>);
-0059 options = {};
-0060 <span class="keyword">if</span> ~isempty(ind)
-0061     options = varargin(ind:end);
-0062     varargin(ind:end) = [];
-0063 <span class="keyword">end</span>
-0064 
-0065 <span class="keyword">if</span> length(varargin)==1
-0066     <span class="comment">% get center and radius</span>
-0067     ellipse = varargin{1};
-0068     xc = ellipse(:,1);
-0069     yc = ellipse(:,2);
-0070     zc = ellipse(:,3);
-0071     a  = ellipse(:,4);
-0072     b  = ellipse(:,5);
-0073     
-0074     <span class="comment">% get colatitude of normal</span>
-0075     <span class="keyword">if</span> size(ellipse, 2)&gt;=6
-0076         theta = ellipse(:,6);
-0077     <span class="keyword">else</span>
-0078         theta = zeros(size(ellipse, 1), 1);
-0079     <span class="keyword">end</span>
-0080 
-0081     <span class="comment">% get azimut of normal</span>
-0082     <span class="keyword">if</span> size(ellipse, 2)&gt;=7
-0083         phi     = ellipse(:,7);
-0084     <span class="keyword">else</span>
-0085         phi = zeros(size(ellipse, 1), 1);
-0086     <span class="keyword">end</span>
-0087     
-0088     <span class="comment">% get roll</span>
-0089     <span class="keyword">if</span> size(ellipse, 2)==8
-0090         psi = ellipse(:,8);
-0091     <span class="keyword">else</span>
-0092         psi = zeros(size(ellipse, 1), 1);
-0093     <span class="keyword">end</span>
-0094     
-0095 <span class="keyword">elseif</span> length(varargin)==2
-0096     <span class="comment">% get center and radius</span>
-0097     ellipse = varargin{1};
-0098     xc = ellipse(:,1);
-0099     yc = ellipse(:,2);
-0100     zc = ellipse(:,3);
-0101     a  = ellipse(:,4);
-0102     b  = ellipse(:,5);
-0103     
-0104     <span class="comment">% get angle of normal</span>
-0105     angle = varargin{2};
-0106     theta   = angle(:,1);
-0107     phi     = angle(:,2);
-0108     
-0109     <span class="comment">% get roll</span>
-0110     <span class="keyword">if</span> size(angle, 2)==3
-0111         psi = angle(:,3);
-0112     <span class="keyword">else</span>
-0113         psi = zeros(size(angle, 1), 1);
-0114     <span class="keyword">end</span>
-0115 
-0116 <span class="keyword">elseif</span> length(varargin)==3    
-0117     <span class="comment">% get center and radius</span>
-0118     ellipse = varargin{1};
-0119     xc = ellipse(:,1);
-0120     yc = ellipse(:,2);
-0121     zc = ellipse(:,3);
-0122     a  = ellipse(:,4);
-0123     b  = ellipse(:,5);
-0124     
-0125     <span class="comment">% get angle of normal and roll</span>
-0126     theta   = varargin{2};
-0127     phi     = varargin{3};
-0128     psi     = zeros(size(phi, 1), 1);
-0129     
-0130 <span class="keyword">elseif</span> length(varargin)==4
-0131     <span class="comment">% get center and radius</span>
-0132     ellipse = varargin{1};
-0133     xc = ellipse(:,1);
-0134     yc = ellipse(:,2);
-0135     zc = ellipse(:,3);
-0136     
-0137     <span class="keyword">if</span> size(ellipse, 2)==5
-0138         a  = ellipse(:,4);
-0139         b  = ellipse(:,5);
-0140     <span class="keyword">end</span>
-0141     
-0142     theta   = varargin{2};
-0143     phi     = varargin{3};
-0144     psi     = varargin{4};
-0145     
-0146 <span class="keyword">elseif</span> length(varargin)==5
-0147     <span class="comment">% get center and radius</span>
-0148     ellipse = varargin{1};
-0149     xc      = ellipse(:,1);
-0150     yc      = ellipse(:,2);
-0151     zc      = ellipse(:,3);
-0152     a       = varargin{2};
-0153     b       = varargin{3};
-0154     theta   = varargin{4};
-0155     phi     = varargin{5};
-0156     psi     = zeros(size(phi, 1), 1);
-0157 
-0158 <span class="keyword">elseif</span> length(varargin)==6
-0159     ellipse = varargin{1};
-0160     xc      = ellipse(:,1);
-0161     yc      = ellipse(:,2);
-0162     zc      = ellipse(:,3);
-0163     a       = varargin{2};
-0164     b       = varargin{3};
-0165     theta   = varargin{4};
-0166     phi     = varargin{5};
-0167     psi     = varargin{6};
-0168   
-0169 <span class="keyword">elseif</span> length(varargin)==7   
-0170     xc      = varargin{1};
-0171     yc      = varargin{2};
-0172     zc      = varargin{3};
-0173     a       = varargin{4};
-0174     b       = varargin{5};
-0175     theta   = varargin{6};
-0176     phi     = varargin{7};
-0177     psi     = zeros(size(phi, 1), 1);
-0178     
-0179 <span class="keyword">elseif</span> length(varargin)==8   
-0180     xc      = varargin{1};
-0181     yc      = varargin{2};
-0182     zc      = varargin{3};
-0183     a       = varargin{4};
-0184     b       = varargin{5};
-0185     theta   = varargin{6};
-0186     phi     = varargin{7};
-0187     psi     = varargin{8};
-0188 
-0189 <span class="keyword">else</span>
-0190     error(<span class="string">'drawEllipse3d: please specify center and radius'</span>);
-0191 <span class="keyword">end</span>
-0192 
-0193 <span class="comment">% uses 60 intervals</span>
-0194 t = linspace(0, 2*pi, 61)';
+0057 <span class="comment">% extract handle of axis to draw on</span>
+0058 [hAx, varargin] = parseAxisHandle(varargin{:});
+0059 
+0060 <span class="comment">% extract drawing options</span>
+0061 ind = find(cellfun(@ischar, varargin), 1, <span class="string">'first'</span>);
+0062 options = {};
+0063 <span class="keyword">if</span> ~isempty(ind)
+0064     options = varargin(ind:end);
+0065     varargin(ind:end) = [];
+0066 <span class="keyword">end</span>
+0067 
+0068 <span class="keyword">if</span> isscalar(varargin)
+0069     <span class="comment">% get center and radius</span>
+0070     elli3d = varargin{1};
+0071     xc = elli3d(:,1);
+0072     yc = elli3d(:,2);
+0073     zc = elli3d(:,3);
+0074     a  = elli3d(:,4);
+0075     b  = elli3d(:,5);
+0076     
+0077     <span class="comment">% get colatitude of normal</span>
+0078     <span class="keyword">if</span> size(elli3d, 2)&gt;=6
+0079         theta = elli3d(:,6);
+0080     <span class="keyword">else</span>
+0081         theta = zeros(size(elli3d, 1), 1);
+0082     <span class="keyword">end</span>
+0083 
+0084     <span class="comment">% get azimut of normal</span>
+0085     <span class="keyword">if</span> size(elli3d, 2)&gt;=7
+0086         phi     = elli3d(:,7);
+0087     <span class="keyword">else</span>
+0088         phi = zeros(size(elli3d, 1), 1);
+0089     <span class="keyword">end</span>
+0090     
+0091     <span class="comment">% get roll</span>
+0092     <span class="keyword">if</span> size(elli3d, 2)==8
+0093         psi = elli3d(:,8);
+0094     <span class="keyword">else</span>
+0095         psi = zeros(size(elli3d, 1), 1);
+0096     <span class="keyword">end</span>
+0097     
+0098 <span class="keyword">elseif</span> length(varargin)==2
+0099     <span class="comment">% get center and radius</span>
+0100     elli3d = varargin{1};
+0101     xc = elli3d(:,1);
+0102     yc = elli3d(:,2);
+0103     zc = elli3d(:,3);
+0104     a  = elli3d(:,4);
+0105     b  = elli3d(:,5);
+0106     
+0107     <span class="comment">% get angle of normal</span>
+0108     angle = varargin{2};
+0109     theta   = angle(:,1);
+0110     phi     = angle(:,2);
+0111     
+0112     <span class="comment">% get roll</span>
+0113     <span class="keyword">if</span> size(angle, 2)==3
+0114         psi = angle(:,3);
+0115     <span class="keyword">else</span>
+0116         psi = zeros(size(angle, 1), 1);
+0117     <span class="keyword">end</span>
+0118 
+0119 <span class="keyword">elseif</span> length(varargin)==3    
+0120     <span class="comment">% get center and radius</span>
+0121     elli3d = varargin{1};
+0122     xc = elli3d(:,1);
+0123     yc = elli3d(:,2);
+0124     zc = elli3d(:,3);
+0125     a  = elli3d(:,4);
+0126     b  = elli3d(:,5);
+0127     
+0128     <span class="comment">% get angle of normal and roll</span>
+0129     theta   = varargin{2};
+0130     phi     = varargin{3};
+0131     psi     = zeros(size(phi, 1), 1);
+0132     
+0133 <span class="keyword">elseif</span> length(varargin)==4
+0134     <span class="comment">% get center and radius</span>
+0135     elli3d = varargin{1};
+0136     xc = elli3d(:,1);
+0137     yc = elli3d(:,2);
+0138     zc = elli3d(:,3);
+0139     
+0140     <span class="keyword">if</span> size(elli3d, 2)==5
+0141         a  = elli3d(:,4);
+0142         b  = elli3d(:,5);
+0143     <span class="keyword">end</span>
+0144     
+0145     theta   = varargin{2};
+0146     phi     = varargin{3};
+0147     psi     = varargin{4};
+0148     
+0149 <span class="keyword">elseif</span> length(varargin)==5
+0150     <span class="comment">% get center and radius</span>
+0151     elli3d = varargin{1};
+0152     xc      = elli3d(:,1);
+0153     yc      = elli3d(:,2);
+0154     zc      = elli3d(:,3);
+0155     a       = varargin{2};
+0156     b       = varargin{3};
+0157     theta   = varargin{4};
+0158     phi     = varargin{5};
+0159     psi     = zeros(size(phi, 1), 1);
+0160 
+0161 <span class="keyword">elseif</span> length(varargin)==6
+0162     elli3d = varargin{1};
+0163     xc      = elli3d(:,1);
+0164     yc      = elli3d(:,2);
+0165     zc      = elli3d(:,3);
+0166     a       = varargin{2};
+0167     b       = varargin{3};
+0168     theta   = varargin{4};
+0169     phi     = varargin{5};
+0170     psi     = varargin{6};
+0171   
+0172 <span class="keyword">elseif</span> length(varargin)==7   
+0173     xc      = varargin{1};
+0174     yc      = varargin{2};
+0175     zc      = varargin{3};
+0176     a       = varargin{4};
+0177     b       = varargin{5};
+0178     theta   = varargin{6};
+0179     phi     = varargin{7};
+0180     psi     = zeros(size(phi, 1), 1);
+0181     
+0182 <span class="keyword">elseif</span> length(varargin)==8   
+0183     xc      = varargin{1};
+0184     yc      = varargin{2};
+0185     zc      = varargin{3};
+0186     a       = varargin{4};
+0187     b       = varargin{5};
+0188     theta   = varargin{6};
+0189     phi     = varargin{7};
+0190     psi     = varargin{8};
+0191 
+0192 <span class="keyword">else</span>
+0193     error(<span class="string">'drawEllipse3d: please specify center and radius'</span>);
+0194 <span class="keyword">end</span>
 0195 
-0196 <span class="comment">% polyline approximation of ellipse, centered and parallel to main axes</span>
-0197 x       = a * cos(t);
-0198 y       = b * sin(t);
-0199 z       = zeros(length(t), 1);
-0200 base    = [x y z];
-0201 
-0202 <span class="comment">% compute transformation from local basis to world basis</span>
-0203 trans   = localToGlobal3d(xc, yc, zc, theta, phi, psi);
+0196 <span class="comment">% uses 60 intervals</span>
+0197 t = linspace(0, 2*pi, 61)';
+0198 
+0199 nElli = size(xc, 1);
+0200 
+0201 <span class="comment">% save hold state</span>
+0202 holdState = ishold(hAx);
+0203 hold(hAx, <span class="string">'on'</span>);
 0204 
-0205 <span class="comment">% transform points composing the ellipse</span>
-0206 ellipse = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(base, trans);
-0207 
-0208 <span class="comment">% draw the curve</span>
-0209 h = <a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>(ellipse, options{:});
-0210 
-0211 <span class="keyword">if</span> nargout &gt; 0
-0212     varargout = {h};
-0213 <span class="keyword">end</span>
-0214</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0205 <span class="comment">% iterate over ellipses to draw</span>
+0206 <span class="keyword">for</span> i = 1:nElli
+0207     <span class="comment">% polyline approximation of ellipse, centered and parallel to main axes</span>
+0208     xt = a(i) * cos(t);
+0209     yt = b(i) * sin(t);
+0210     zt = zeros(length(t), 1);
+0211     elli2d = [xt yt zt];
+0212     
+0213     <span class="comment">% compute transformation from local basis to world basis</span>
+0214     trans = localToGlobal3d(xc(i), yc(i), zc(i), theta(i), phi(i), psi(i));
+0215     
+0216     <span class="comment">% transform points composing the ellipse</span>
+0217     elli3d = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(elli2d, trans);
+0218     
+0219     <span class="comment">% draw the curve</span>
+0220     h = <a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>(hAx, elli3d, options{:});
+0221 <span class="keyword">end</span>
+0222 
+0223 <span class="comment">% restore hold state</span>
+0224 <span class="keyword">if</span> ~holdState
+0225     hold(hAx, <span class="string">'off'</span>);
+0226 <span class="keyword">end</span>
+0227 
+0228 <span class="comment">% format output arguments</span>
+0229 <span class="keyword">if</span> nargout &gt; 0
+0230     varargout = {h};
+0231 <span class="keyword">end</span>
+0232</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

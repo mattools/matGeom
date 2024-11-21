@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of grNodeOuterDegree</title>
+  <meta name="keywords" content="grNodeOuterDegree">
+  <meta name="description" content="GRNODEOUTERDEGREE Outer degree of a node in a graph.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; grNodeOuterDegree.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>grNodeOuterDegree
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>GRNODEOUTERDEGREE Outer degree of a node in a graph.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function degree = grNodeOuterDegree(node, edges) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">GRNODEOUTERDEGREE Outer degree of a node in a graph.
+
+   DEG = grNodeOuterDegree(NODE, EDGES);
+   Returns the outer degree of a node in the given edge list, i.e. the
+   number of edges emanating from it.
+   NODE is the index of the node, and EDGES is a liste of couples of
+   indices (origin and destination node).   
+ 
+   Note: Also works when node is a vector of indices
+
+   See also
+   <a href="grNodeDegree.html" class="code" title="function [degree, node] = grNodeDegree(node, edges)">grNodeDegree</a>, <a href="grNodeInnerDegree.html" class="code" title="function degree = grNodeInnerDegree(node, edges)">grNodeInnerDegree</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function degree = grNodeOuterDegree(node, edges)</a>
+0002 <span class="comment">%GRNODEOUTERDEGREE Outer degree of a node in a graph.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   DEG = grNodeOuterDegree(NODE, EDGES);</span>
+0005 <span class="comment">%   Returns the outer degree of a node in the given edge list, i.e. the</span>
+0006 <span class="comment">%   number of edges emanating from it.</span>
+0007 <span class="comment">%   NODE is the index of the node, and EDGES is a liste of couples of</span>
+0008 <span class="comment">%   indices (origin and destination node).</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Note: Also works when node is a vector of indices</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   See also</span>
+0013 <span class="comment">%   grNodeDegree, grNodeInnerDegree</span>
+0014 <span class="comment">%</span>
+0015 
+0016 <span class="comment">% ------</span>
+0017 <span class="comment">% Author: David Legland</span>
+0018 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0019 <span class="comment">% Created: 2006-01-17</span>
+0020 <span class="comment">% Copyright 2006-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)</span>
+0021 
+0022 <span class="comment">% allocate memory</span>
+0023 N = size(node, 1);
+0024 degree = zeros(N, 1);
+0025 
+0026 <span class="comment">% compute outer degree of each vertex</span>
+0027 <span class="keyword">for</span> i=1:N
+0028     degree(i) = sum(edges(:,1)==node(i));
+0029 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

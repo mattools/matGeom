@@ -4,7 +4,7 @@
 <head>
   <title>Description of geodesicCylinder</title>
   <meta name="keywords" content="geodesicCylinder">
-  <meta name="description" content="GEODESICCYLINDER computes the geodesic between two points on a cylinder.">
+  <meta name="description" content="GEODESICCYLINDER Computes the geodesic between two points on a cylinder.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>GEODESICCYLINDER computes the geodesic between two points on a cylinder.</strong></div>
+<div class="box"><strong>GEODESICCYLINDER Computes the geodesic between two points on a cylinder.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function [geo, geoLength, conGeo, conGeoLength] = geodesicCylinder(pts, cyl, varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment">GEODESICCYLINDER computes the geodesic between two points on a cylinder.
+<div class="fragment"><pre class="comment">GEODESICCYLINDER Computes the geodesic between two points on a cylinder.
 
    [GEO, GEOLENGTH] = geodesicCylinder(PTS, CYL) computes the geodesic 
    between the two points PTS projected onto the infinite cylinder CYL.  
@@ -68,7 +68,7 @@ This function is called by:
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [geo, geoLength, conGeo, conGeoLength] = geodesicCylinder(pts, cyl, varargin)</a>
-0002 <span class="comment">%GEODESICCYLINDER computes the geodesic between two points on a cylinder.</span>
+0002 <span class="comment">%GEODESICCYLINDER Computes the geodesic between two points on a cylinder.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   [GEO, GEOLENGTH] = geodesicCylinder(PTS, CYL) computes the geodesic</span>
 0005 <span class="comment">%   between the two points PTS projected onto the infinite cylinder CYL.</span>
@@ -94,79 +94,80 @@ This function is called by:
 0025 <span class="comment">%     https://mathworks.com/matlabcentral/fileexchange/6522</span>
 0026 <span class="comment">%</span>
 0027 
-0028 <span class="comment">% ---------</span>
+0028 <span class="comment">% ------</span>
 0029 <span class="comment">% Author: oqilipo</span>
-0030 <span class="comment">% Created: 2021-04-17, using R2020b</span>
-0031 <span class="comment">% Copyright 2021</span>
-0032 
-0033 parser = inputParser;
-0034 addRequired(parser, <span class="string">'pts'</span>, @(x) validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
-0035     {<span class="string">'size'</span>,[2 3],<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'nonnan'</span>}));
-0036 addRequired(parser, <span class="string">'cyl'</span>, @(x) validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
-0037     {<span class="string">'size'</span>,[1 7],<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'nonnan'</span>}));
-0038 addParameter(parser,<span class="string">'n'</span>,500, @(x) validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
-0039     {<span class="string">'scalar'</span>,<span class="string">'&gt;'</span>, 2,<span class="string">'&lt;='</span>, 1e5}));
-0040 parse(parser,pts,cyl,varargin{:});
-0041 pts = parser.Results.pts;
-0042 cyl = parser.Results.cyl;
-0043 n = parser.Results.n;
-0044 
-0045 <span class="comment">% Radius of the cylinder</span>
-0046 cylRadius = cyl(7);
-0047 
-0048 <span class="comment">% Project points onto the open (infinite) cylinder</span>
-0049 ptProj(1,:) = <a href="projPointOnCylinder.html" class="code" title="function ptProj = projPointOnCylinder(pt, cyl, varargin)">projPointOnCylinder</a>(pts(1,:), cyl, <span class="string">'open'</span>);
-0050 ptProj(2,:) = <a href="projPointOnCylinder.html" class="code" title="function ptProj = projPointOnCylinder(pt, cyl, varargin)">projPointOnCylinder</a>(pts(2,:), cyl, <span class="string">'open'</span>);
-0051 
-0052 <span class="comment">% Create a transformation for the points into the local cylinder coordinate</span>
-0053 <span class="comment">% system. Align the cylinder axis with the z axis and translate the</span>
-0054 <span class="comment">% starting point of the cylinder to the origin.</span>
-0055 TFM = <a href="createRotationVector3d.html" class="code" title="function ROT = createRotationVector3d(A,B)">createRotationVector3d</a>(cyl(4:6)-cyl(1:3), [0 0 1])*<a href="createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>(-cyl(1:3));
-0056 <span class="comment">% Transform the points.</span>
-0057 ptTfm = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(ptProj, TFM);
-0058 <span class="comment">% Convert the transformed points to cylindrical coordinates.</span>
-0059 [ptsTheta, ptsRadius, ptsHeight] = <a href="cart2cyl.html" class="code" title="function varargout = cart2cyl(varargin)">cart2cyl</a>(ptTfm);
-0060 assert(ismembertol(ptsRadius(1),ptsRadius(2)))
-0061 assert(ismembertol(ptsRadius(1),cylRadius))
-0062 
-0063 <span class="comment">% Copy thetas for the conjugate geodesic</span>
-0064 ptsTheta(:,:,2) = ptsTheta;
-0065 ptsTheta(1,1,2) = ptsTheta(1,1,2) + 2*pi;
-0066 
-0067 geoCyl = nan(n,3,size(ptsTheta,3));
-0068 arcLength = nan(1,size(ptsTheta,3));
-0069 <span class="keyword">for</span> t = 1:size(ptsTheta,3)
-0070     [geoCyl(:,:,t), arcLength(t)] = <a href="#_sub1" class="code" title="subfunction [geo, arcLength] = geoCurve(theta, r, z, n)">geoCurve</a>(ptsTheta(:,:,t), cylRadius, ptsHeight, n);
-0071 <span class="keyword">end</span>
-0072 
-0073 <span class="comment">% Select the shortest geodesic</span>
-0074 <span class="keyword">if</span> arcLength(1) &lt;= arcLength(2)
-0075     <span class="comment">% Transform the geodesics back to the global coordinate system</span>
-0076     geo = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(geoCyl(:,:,1), inv(TFM));
-0077     conGeo = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(geoCyl(:,:,2), inv(TFM));
-0078     geoLength = arcLength(1);
-0079     conGeoLength = arcLength(2);
-0080 <span class="keyword">else</span>
-0081     <span class="comment">% Transform the geodesics back to the global coordinate system</span>
-0082     geo = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(geoCyl(:,:,2), inv(TFM));
-0083     conGeo = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(geoCyl(:,:,1), inv(TFM));
-0084     geoLength = arcLength(2);
-0085     conGeoLength = arcLength(1);
-0086 <span class="keyword">end</span>
-0087 
-0088 <span class="keyword">end</span>
-0089 
-0090 <a name="_sub1" href="#_subfunctions" class="code">function [geo, arcLength] = geoCurve(theta, r, z, n)</a>
-0091 <span class="comment">% Parametric expression of the geodesic curve</span>
-0092 u = linspace(theta(1),theta(2),n)';
-0093 geo(:,1) = r*cos(u);
-0094 geo(:,2) = r*sin(u);
-0095 geo(:,3) = (z(2)-z(1))/(theta(2)-theta(1))*u + (z(1)*theta(2)-z(2)*theta(1))/(theta(2)-theta(1));
-0096 <span class="keyword">if</span> all(isnan(geo(:,3)))
-0097     geo(:,3) = linspace(z(1),z(2),n)';
-0098 <span class="keyword">end</span>
-0099 arcLength = sqrt(r^2*(theta(2)-theta(1))^2+(z(2)-z(1))^2);
-0100 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0030 <span class="comment">% E-mail: N/A</span>
+0031 <span class="comment">% Created: 2021-04-17, using MATLAB R2022b</span>
+0032 <span class="comment">% Copyright 2021-2024</span>
+0033 
+0034 parser = inputParser;
+0035 addRequired(parser, <span class="string">'pts'</span>, @(x) validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0036     {<span class="string">'size'</span>,[2 3],<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'nonnan'</span>}));
+0037 addRequired(parser, <span class="string">'cyl'</span>, @(x) validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0038     {<span class="string">'size'</span>,[1 7],<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'nonnan'</span>}));
+0039 addParameter(parser,<span class="string">'n'</span>,500, @(x) validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0040     {<span class="string">'scalar'</span>,<span class="string">'&gt;'</span>, 2,<span class="string">'&lt;='</span>, 1e5}));
+0041 parse(parser,pts,cyl,varargin{:});
+0042 pts = parser.Results.pts;
+0043 cyl = parser.Results.cyl;
+0044 n = parser.Results.n;
+0045 
+0046 <span class="comment">% Radius of the cylinder</span>
+0047 cylRadius = cyl(7);
+0048 
+0049 <span class="comment">% Project points onto the open (infinite) cylinder</span>
+0050 ptProj(1,:) = <a href="projPointOnCylinder.html" class="code" title="function ptProj = projPointOnCylinder(pt, cyl, varargin)">projPointOnCylinder</a>(pts(1,:), cyl, <span class="string">'open'</span>);
+0051 ptProj(2,:) = <a href="projPointOnCylinder.html" class="code" title="function ptProj = projPointOnCylinder(pt, cyl, varargin)">projPointOnCylinder</a>(pts(2,:), cyl, <span class="string">'open'</span>);
+0052 
+0053 <span class="comment">% Create a transformation for the points into the local cylinder coordinate</span>
+0054 <span class="comment">% system. Align the cylinder axis with the z axis and translate the</span>
+0055 <span class="comment">% starting point of the cylinder to the origin.</span>
+0056 TFM = <a href="createRotationVector3d.html" class="code" title="function ROT = createRotationVector3d(A,B)">createRotationVector3d</a>(cyl(4:6)-cyl(1:3), [0 0 1])*<a href="createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>(-cyl(1:3));
+0057 <span class="comment">% Transform the points.</span>
+0058 ptTfm = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(ptProj, TFM);
+0059 <span class="comment">% Convert the transformed points to cylindrical coordinates.</span>
+0060 [ptsTheta, ptsRadius, ptsHeight] = <a href="cart2cyl.html" class="code" title="function varargout = cart2cyl(varargin)">cart2cyl</a>(ptTfm);
+0061 assert(ismembertol(ptsRadius(1),ptsRadius(2)))
+0062 assert(ismembertol(ptsRadius(1),cylRadius))
+0063 
+0064 <span class="comment">% Copy thetas for the conjugate geodesic</span>
+0065 ptsTheta(:,:,2) = ptsTheta;
+0066 ptsTheta(1,1,2) = ptsTheta(1,1,2) + 2*pi;
+0067 
+0068 geoCyl = nan(n,3,size(ptsTheta,3));
+0069 arcLength = nan(1,size(ptsTheta,3));
+0070 <span class="keyword">for</span> t = 1:size(ptsTheta,3)
+0071     [geoCyl(:,:,t), arcLength(t)] = <a href="#_sub1" class="code" title="subfunction [geo, arcLength] = geoCurve(theta, r, z, n)">geoCurve</a>(ptsTheta(:,:,t), cylRadius, ptsHeight, n);
+0072 <span class="keyword">end</span>
+0073 
+0074 <span class="comment">% Select the shortest geodesic</span>
+0075 <span class="keyword">if</span> arcLength(1) &lt;= arcLength(2)
+0076     <span class="comment">% Transform the geodesics back to the global coordinate system</span>
+0077     geo = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(geoCyl(:,:,1), inv(TFM));
+0078     conGeo = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(geoCyl(:,:,2), inv(TFM));
+0079     geoLength = arcLength(1);
+0080     conGeoLength = arcLength(2);
+0081 <span class="keyword">else</span>
+0082     <span class="comment">% Transform the geodesics back to the global coordinate system</span>
+0083     geo = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(geoCyl(:,:,2), inv(TFM));
+0084     conGeo = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(geoCyl(:,:,1), inv(TFM));
+0085     geoLength = arcLength(2);
+0086     conGeoLength = arcLength(1);
+0087 <span class="keyword">end</span>
+0088 
+0089 <span class="keyword">end</span>
+0090 
+0091 <a name="_sub1" href="#_subfunctions" class="code">function [geo, arcLength] = geoCurve(theta, r, z, n)</a>
+0092 <span class="comment">% Parametric expression of the geodesic curve</span>
+0093 u = linspace(theta(1),theta(2),n)';
+0094 geo(:,1) = r*cos(u);
+0095 geo(:,2) = r*sin(u);
+0096 geo(:,3) = (z(2)-z(1))/(theta(2)-theta(1))*u + (z(1)*theta(2)-z(2)*theta(1))/(theta(2)-theta(1));
+0097 <span class="keyword">if</span> all(isnan(geo(:,3)))
+0098     geo(:,3) = linspace(z(1),z(2),n)';
+0099 <span class="keyword">end</span>
+0100 arcLength = sqrt(r^2*(theta(2)-theta(1))^2+(z(2)-z(1))^2);
+0101 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

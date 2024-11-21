@@ -24,7 +24,7 @@
 <div class="box"><strong>DRAWTORUS Draw a torus (3D ring).</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function varargout = drawTorus(torus, varargin) </strong></div>
+<div class="box"><strong>function varargout = drawTorus(varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre class="comment">DRAWTORUS Draw a torus (3D ring).
@@ -51,7 +51,7 @@
      axis equal; view([95 10]); light;
 
    See also
-   <a href="drawEllipsoid.html" class="code" title="function varargout = drawEllipsoid(elli, varargin)">drawEllipsoid</a>, <a href="revolutionSurface.html" class="code" title="function varargout = revolutionSurface(varargin)">revolutionSurface</a>, torusMesh</pre></div>
+   <a href="drawEllipsoid.html" class="code" title="function varargout = drawEllipsoid(varargin)">drawEllipsoid</a>, <a href="revolutionSurface.html" class="code" title="function varargout = revolutionSurface(varargin)">revolutionSurface</a>, torusMesh</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -66,7 +66,7 @@ This function is called by:
 
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawTorus(torus, varargin)</a>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawTorus(varargin)</a>
 0002 <span class="comment">%DRAWTORUS Draw a torus (3D ring).</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   drawTorus(TORUS)</span>
@@ -96,9 +96,9 @@ This function is called by:
 0028 
 0029 <span class="comment">% ------</span>
 0030 <span class="comment">% Author: David Legland</span>
-0031 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0032 <span class="comment">% Created: 2011-06-22,    using Matlab 7.9.0.529 (R2009b)</span>
-0033 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0031 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0032 <span class="comment">% Created: 2011-06-22, using Matlab 7.9.0.529 (R2009b)</span>
+0033 <span class="comment">% Copyright 2011-2024 INRA - Cepia Software Platform</span>
 0034 
 0035 <span class="comment">%% Default values</span>
 0036 
@@ -111,54 +111,78 @@ This function is called by:
 0043 
 0044 <span class="comment">%% Extract input arguments</span>
 0045 
-0046 center = torus(1:3);
-0047 r1 = torus(4);
-0048 r2 = torus(5);
-0049 
-0050 normal = [0 0];
-0051 <span class="keyword">if</span> size(torus, 2) &gt;= 7
-0052     normal = torus(6:7);
-0053 <span class="keyword">end</span>
-0054 
-0055 <span class="comment">% default set of options for drawing meshes</span>
-0056 options = {<span class="string">'FaceColor'</span>, <span class="string">'g'</span>, <span class="string">'linestyle'</span>, <span class="string">'none'</span>};
-0057 
-0058 <span class="keyword">while</span> length(varargin) &gt; 1
-0059     <span class="keyword">switch</span> lower(varargin{1})
-0060         <span class="keyword">case</span> <span class="string">'nphi'</span>
-0061             nPhi = varargin{2};
-0062             
-0063         <span class="keyword">case</span> <span class="string">'ntheta'</span>
-0064             nTheta = varargin{2};
-0065 
-0066         <span class="keyword">otherwise</span>
-0067             <span class="comment">% assumes this is drawing option</span>
-0068             options = [options varargin(1:2)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0069     <span class="keyword">end</span>
-0070 
-0071     varargin(1:2) = [];
-0072 <span class="keyword">end</span>
-0073 
-0074 
-0075 <span class="comment">%% Draw the torus</span>
-0076 
-0077 <span class="comment">% create base torus</span>
-0078 circle = <a href="../../matGeom/geom2d/circleToPolygon.html" class="code" title="function varargout = circleToPolygon(circle, varargin)">circleToPolygon</a>([r1 0 r2], nTheta);
-0079 [x, y, z] = <a href="revolutionSurface.html" class="code" title="function varargout = revolutionSurface(varargin)">revolutionSurface</a>(circle, linspace(0, 2*pi, nPhi));
+0046 <span class="comment">% extract handle of axis to draw on</span>
+0047 [hAx, varargin] = parseAxisHandle(varargin{:});
+0048 
+0049 torus = varargin{1};
+0050 varargin(1) = [];
+0051 
+0052 center = torus(:, 1:3);
+0053 r1 = torus(:, 4);
+0054 r2 = torus(:, 5);
+0055 nTorus = size(center, 1);
+0056 
+0057 normal = zeros(nTorus, 2);
+0058 <span class="keyword">if</span> size(torus, 2) &gt;= 7
+0059     normal = torus(:, 6:7);
+0060 <span class="keyword">end</span>
+0061 
+0062 <span class="comment">% default set of options for drawing meshes</span>
+0063 options = {<span class="string">'FaceColor'</span>, <span class="string">'g'</span>, <span class="string">'linestyle'</span>, <span class="string">'none'</span>};
+0064 
+0065 <span class="keyword">while</span> length(varargin) &gt; 1
+0066     <span class="keyword">switch</span> lower(varargin{1})
+0067         <span class="keyword">case</span> <span class="string">'nphi'</span>
+0068             nPhi = varargin{2};
+0069             
+0070         <span class="keyword">case</span> <span class="string">'ntheta'</span>
+0071             nTheta = varargin{2};
+0072 
+0073         <span class="keyword">otherwise</span>
+0074             <span class="comment">% assumes this is drawing option</span>
+0075             options = [options varargin(1:2)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0076     <span class="keyword">end</span>
+0077 
+0078     varargin(1:2) = [];
+0079 <span class="keyword">end</span>
 0080 
-0081 <span class="comment">% transform torus</span>
-0082 trans = localToGlobal3d([center normal]);
-0083 [x, y, z] = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(x, y, z, trans);
-0084 
-0085 <span class="comment">% draw the surface</span>
-0086 hs = surf(x, y, z, options{:});
-0087 
-0088 
-0089 <span class="comment">%% Process output arguments</span>
+0081 
+0082 <span class="comment">%% Draw the torus</span>
+0083 
+0084 <span class="comment">% allocate array of handles</span>
+0085 hs = gobjects(1, nTorus);
+0086 
+0087 <span class="comment">% save hold state</span>
+0088 holdState = ishold(hAx);
+0089 hold(hAx, <span class="string">'on'</span>);
 0090 
-0091 <span class="keyword">if</span> nargout &gt; 0
-0092     varargout = {hs};
-0093 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0091 <span class="comment">% iteate over torusses</span>
+0092 <span class="keyword">for</span> i = 1:nTorus
+0093     <span class="comment">% create base torus</span>
+0094     circle = <a href="../../matGeom/geom2d/circleToPolygon.html" class="code" title="function varargout = circleToPolygon(circle, varargin)">circleToPolygon</a>([r1(i) 0 r2(i)], nTheta);
+0095     <span class="comment">% duplicate last vertex to manage mesh periodicity</span>
+0096     circle = circle([1:end 1], :);
+0097     [x, y, z] = <a href="revolutionSurface.html" class="code" title="function varargout = revolutionSurface(varargin)">revolutionSurface</a>(circle, linspace(0, 2*pi, nPhi));
+0098     
+0099     <span class="comment">% transform torus</span>
+0100     trans = localToGlobal3d([center(i,:) normal(i,:)]);
+0101     [x, y, z] = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(x, y, z, trans);
+0102     
+0103     <span class="comment">% draw the surface</span>
+0104     hs(i) = surf(hAx, x, y, z, options{:});
+0105 <span class="keyword">end</span>
+0106 
+0107 <span class="comment">% restore hold state</span>
+0108 <span class="keyword">if</span> ~holdState
+0109     hold(hAx, <span class="string">'off'</span>);
+0110 <span class="keyword">end</span>
+0111 
+0112 
+0113 <span class="comment">%% Process output arguments</span>
+0114 
+0115 <span class="keyword">if</span> nargout &gt; 0
+0116     varargout = {hs};
+0117 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

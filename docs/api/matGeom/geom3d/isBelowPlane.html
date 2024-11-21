@@ -43,22 +43,16 @@
        0
 
    See also
-   <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>, <a href="points3d.html" class="code" title="function points3d(varargin)">points3d</a>, <a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>, <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- Created: 2007-01-05
- Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</pre></div>
+   <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>, <a href="points3d.html" class="code" title="function points3d(varargin)">points3d</a>, <a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>, <a href="planePosition.html" class="code" title="function [pos, zp] = planePosition(point, plane)">planePosition</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>	Return the position of a 3D point projected on a 3D line.</li><li><a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>	PLANENORMAL Compute the normal to a plane.</li></ul>
+<li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="line3dPosition.html" class="code" title="function pos = line3dPosition(point, line)">line3dPosition</a>	LINEPOSITION3D Return the position of a 3D point projected on a 3D line.</li><li><a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>	PLANENORMAL Compute the normal to a plane.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="clipConvexPolygon3dHP.html" class="code" title="function poly2 = clipConvexPolygon3dHP(poly, plane)">clipConvexPolygon3dHP</a>	CLIPCONVEXPOLYGON3DHP Clip a convex 3D polygon with Half-space.</li><li><a href="clipPoints3d.html" class="code" title="function varargout = clipPoints3d(points, shape, varargin)">clipPoints3d</a>	CLIPPOINTS3D Clip a set of points by a box or other 3d shapes.</li><li><a href="clipPolygon3dHP.html" class="code" title="function poly2 = clipPolygon3dHP(poly, plane)">clipPolygon3dHP</a>	CLIPPOLYGON3DHP clip a 3D polygon with Half-space.</li><li><a href="../../matGeom/meshes3d/clipConvexPolyhedronHP.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronHP(nodes, faces, plane)">clipConvexPolyhedronHP</a>	CLIPCONVEXPOLYHEDRONHP Clip a convex polyhedron by a plane.</li><li><a href="../../matGeom/meshes3d/cutMeshByPlane.html" class="code" title="function varargout = cutMeshByPlane(v, f, plane, varargin)">cutMeshByPlane</a>	CUTMESHBYPLANE Cut a mesh by a plane.</li><li><a href="../../matGeom/meshes3d/intersectPlaneMesh.html" class="code" title="function polys = intersectPlaneMesh(plane, v, f)">intersectPlaneMesh</a>	Compute the polygons resulting from plane-mesh intersection.</li></ul>
+<li><a href="clipPoints3d.html" class="code" title="function varargout = clipPoints3d(points, shape, varargin)">clipPoints3d</a>	CLIPPOINTS3D Clip a set of points by a box or other 3d shapes.</li><li><a href="clipPolygonByPlane3d.html" class="code" title="function poly2 = clipPolygonByPlane3d(poly, plane, varargin)">clipPolygonByPlane3d</a>	CLIPPOLYGONBYPLANE3D Clip a 3D polygon with a plane.</li><li><a href="../../matGeom/meshes3d/clipConvexPolyhedronByPlane.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronByPlane(nodes, faces, plane)">clipConvexPolyhedronByPlane</a>	CLIPCONVEXPOLYHEDRONBYPLANE Clip a convex polyhedron by a plane.</li><li><a href="../../matGeom/meshes3d/cutMeshByPlane.html" class="code" title="function varargout = cutMeshByPlane(v, f, plane, varargin)">cutMeshByPlane</a>	CUTMESHBYPLANE Cut a mesh by a plane.</li><li><a href="../../matGeom/meshes3d/intersectPlaneMesh.html" class="code" title="function [polys, closedFlag] = intersectPlaneMesh(plane, v, f)">intersectPlaneMesh</a>	INTERSECTPLANEMESH Compute the polylines resulting from plane-mesh intersection.</li></ul>
 <!-- crossreference -->
 
 
@@ -82,14 +76,14 @@ This function is called by:
 0016 <span class="comment">%</span>
 0017 <span class="comment">%   See also</span>
 0018 <span class="comment">%   planes3d, points3d, linePosition3d, planePosition</span>
-0019 <span class="comment">%</span>
+0019 
 0020 <span class="comment">% ------</span>
 0021 <span class="comment">% Author: David Legland</span>
-0022 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0022 <span class="comment">% E-mail: david.legland@inrae.fr</span>
 0023 <span class="comment">% Created: 2007-01-05</span>
-0024 <span class="comment">% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0024 <span class="comment">% Copyright 2007-2024 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas</span>
 0025 
-0026 <span class="keyword">if</span> length(varargin)==1
+0026 <span class="keyword">if</span> isscalar(varargin)
 0027     plane = varargin{1};
 0028 <span class="keyword">elseif</span> length(varargin)==2
 0029     plane = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(varargin{1}, varargin{2});
@@ -104,8 +98,8 @@ This function is called by:
 0038 <span class="keyword">end</span>
 0039     
 0040 <span class="comment">% compute position of point projected on 3D line corresponding to plane</span>
-0041 <span class="comment">% normal, and returns true for points locatd below the plane (pos&lt;=0).</span>
-0042 below = <a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>(point, [plane(:, 1:3) <a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>(plane)]) &lt;= 0;</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0041 <span class="comment">% normal, and returns true for points located below the plane (pos&lt;=0).</span>
+0042 below = <a href="line3dPosition.html" class="code" title="function pos = line3dPosition(point, line)">line3dPosition</a>(point, [plane(:, 1:3) <a href="planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>(plane)]) &lt;= 0;</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

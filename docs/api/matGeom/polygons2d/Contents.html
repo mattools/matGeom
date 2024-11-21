@@ -4,7 +4,7 @@
 <head>
   <title>Description of Contents</title>
   <meta name="keywords" content="Contents">
-  <meta name="description" content="POLYGONS Manipulation of planar polygons and polylines">
+  <meta name="description" content="CONTENTS POLYGONS Manipulation of planar polygons and polylines.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>POLYGONS Manipulation of planar polygons and polylines</strong></div>
+<div class="box"><strong>CONTENTS POLYGONS Manipulation of planar polygons and polylines.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>This is a script file. </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> POLYGONS Manipulation of planar polygons and polylines
+<div class="fragment"><pre class="comment">CONTENTS POLYGONS Manipulation of planar polygons and polylines.
  Version 1.24 07-Jun-2018 .
 
    The 'polygons' module contains functions operating on shapes composed
@@ -74,11 +74,11 @@
    axis([0 5 0 5]);
    % Multiple polygon:
    P2 = [10 10;40 10;40 40;10 40;NaN NaN;20 20;20 30;30 30;30 20];
-   figure;drawPolygon(P2); axis([0 50 0 50]);
+   figure; drawPolygon(P2); axis([0 50 0 50]);
 
 
  Polylines
-   polylinePoint             - Extract a point from a polyline.
+   polylinePoint             - Extract a point from a 2D or 3D polyline.
    polylineLength            - Return length of a polyline given as a list of points.
    polylineCentroid          - Computes the centroid of a curve defined by a series of points.
    polylineSubcurve          - Extract a portion of a polyline.
@@ -95,7 +95,9 @@
    polylineSelfIntersections - Find self-intersection points of a polyline.
    simplifyPolyline          - Douglas-Peucker simplification of a polyline.
    smoothPolyline            - Smooth a polyline using local averaging.
+   polylineCurvature         - Estimate curvature on polyline vertices using polynomial fit.
    removeMultipleVertices    - Remove multiple vertices of a polygon or polyline.
+   padPolyline               - Add vertices at each extremity of the polyline.
 
  Polygon basic manipulation
    reversePolygon            - Reverse a polygon, by iterating vertices from the end.
@@ -115,7 +117,7 @@
    intersectEdgePolygon      - Intersection point of an edge with a polygon.
    polygonSelfIntersections  - Find self-intersection points of a polygon.
    clipPolygon               - Clip a polygon with a rectangular box.
-   clipPolygonHP             - Clip a polygon with a Half-plane defined by a directed line.
+   clipPolygonByLine         - Clip a polygon by a directed line.
 
  Point Sets
    pointSetsAverage          - Compute the average of several point sets.
@@ -168,9 +170,11 @@
    convexification           - Compute the convexification of a polygon.
 
  Input, Output and conversions
+   contourMatrixToPolylines  - Converts a contour matrix array into a polyline set.
+   parsePolygon              - Conversion between different polygon formats.
+   polygonToPolyshape        - Convert a matGeom polygon to a MATLAB polyshape object.
    polygonToRow              - Convert polygon coordinates to a row vector.
    rowToPolygon              - Create a polygon from a row vector.
-   contourMatrixToPolylines  - Converts a contour matrix array into a polyline set.
    readPolygonSet            - Read a set of simple polygons stored in a file.
    writePolygonSet           - Write a set of simple polygons into a file.
 
@@ -183,14 +187,7 @@
 
    Credits:
    * function intersectPolylines uses the 'interX' contribution from &quot;NS&quot;
-       (file exchange 22441, called 'curve-intersections')
-
- -----
- Author: David Legland
- e-mail: david.legland@inrae.fr
- created the  07/11/2005.
- Project homepage: http://github.com/mattools/matGeom
- Copyright INRAE</pre></div>
+       (file exchange 22441, called 'curve-intersections')</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -205,6 +202,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

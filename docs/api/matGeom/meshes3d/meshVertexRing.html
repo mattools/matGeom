@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of meshVertexRing</title>
+  <meta name="keywords" content="meshVertexRing">
+  <meta name="description" content="MESHVERTEXRING Compute the ring around the vertex of a mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; meshVertexRing.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>meshVertexRing
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MESHVERTEXRING Compute the ring around the vertex of a mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [ring, closed] = meshVertexRing(vertices, faces, indV) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MESHVERTEXRING Compute the ring around the vertex of a mesh.
+
+   INDS = meshVertexRing(MESH, INDV)
+   INDS = meshVertexRing(V, F, INDV)
+   Computes the ring around the vertex of a mesh, i.e. the indices of the
+   vertex that are connected to that vertex. For regular vertices, the
+   vertex ring forms either a loop or an open polyline (for vertices
+   located on the boundary of the mesh).   
+
+   [INDS, CLOSED] = meshVertexRing(...)
+   Also returns a boolean CLOSED, that indicates whether the ring is a
+   closed polyline (for inner vertices) or an open polyline for boundary
+   vertices).
+
+   Example
+     mesh = subdivideMesh(createIcosahedron, 2);
+     figure; hold on; axis equal; axis([-1 1 -1 1 0 2]);
+     drawMesh(mesh, 'facecolor', [.7 .7 .7]);
+     inds = meshVertexRing(mesh, 41);
+     poly = mesh.vertices(inds, :);
+     drawPolygon3d(poly, 'color', 'b', 'linewidth', 2);
+
+   See also
+     meshes3d, <a href="meshVertexNormals.html" class="code" title="function [normals, faceNormals] = meshVertexNormals(varargin)">meshVertexNormals</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [ring, closed] = meshVertexRing(vertices, faces, indV)</a>
+0002 <span class="comment">%MESHVERTEXRING Compute the ring around the vertex of a mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   INDS = meshVertexRing(MESH, INDV)</span>
+0005 <span class="comment">%   INDS = meshVertexRing(V, F, INDV)</span>
+0006 <span class="comment">%   Computes the ring around the vertex of a mesh, i.e. the indices of the</span>
+0007 <span class="comment">%   vertex that are connected to that vertex. For regular vertices, the</span>
+0008 <span class="comment">%   vertex ring forms either a loop or an open polyline (for vertices</span>
+0009 <span class="comment">%   located on the boundary of the mesh).</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   [INDS, CLOSED] = meshVertexRing(...)</span>
+0012 <span class="comment">%   Also returns a boolean CLOSED, that indicates whether the ring is a</span>
+0013 <span class="comment">%   closed polyline (for inner vertices) or an open polyline for boundary</span>
+0014 <span class="comment">%   vertices).</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example</span>
+0017 <span class="comment">%     mesh = subdivideMesh(createIcosahedron, 2);</span>
+0018 <span class="comment">%     figure; hold on; axis equal; axis([-1 1 -1 1 0 2]);</span>
+0019 <span class="comment">%     drawMesh(mesh, 'facecolor', [.7 .7 .7]);</span>
+0020 <span class="comment">%     inds = meshVertexRing(mesh, 41);</span>
+0021 <span class="comment">%     poly = mesh.vertices(inds, :);</span>
+0022 <span class="comment">%     drawPolygon3d(poly, 'color', 'b', 'linewidth', 2);</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   See also</span>
+0025 <span class="comment">%     meshes3d, meshVertexNormals</span>
+0026 <span class="comment">%</span>
+0027 
+0028 <span class="comment">% ------</span>
+0029 <span class="comment">% Author: David Legland</span>
+0030 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0031 <span class="comment">% Created: 2024-02-19, using Matlab 9.14.0.2206163 (R2023a)</span>
+0032 <span class="comment">% Copyright 2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0033 
+0034 <span class="keyword">if</span> isstruct(vertices)
+0035     indV = faces;
+0036     faces = vertices.faces;
+0037     vertices = vertices.vertices; <span class="comment">%#ok&lt;NASGU&gt;</span>
+0038 <span class="keyword">end</span>
+0039 
+0040 <span class="keyword">if</span> size(faces, 2) ~= 3
+0041     error(<span class="string">'Requires triangle mesh as input'</span>);
+0042 <span class="keyword">end</span>
+0043 
+0044 <span class="comment">% select faces incident to query vertex</span>
+0045 faces2 = faces(any(ismember(faces, indV), 2), :);
+0046 
+0047 <span class="comment">% count occurence of each vertex index within adjacent faces.</span>
+0048 <span class="comment">% For boundary vertices, one should find two vertices appearing only once.</span>
+0049 inds = unique(faces2(faces2 ~= indV));
+0050 counts = zeros(length(inds), 1);
+0051 <span class="keyword">for</span> i = 1:length(inds)
+0052     counts(i) = sum(faces2(:) == inds(i)); 
+0053 <span class="keyword">end</span>
+0054 
+0055 <span class="keyword">if</span> sum(counts ~= 2) == 0
+0056     <span class="comment">% case of inner vertices: all adjacent edges belong to two faces</span>
+0057     closed = true;
+0058 
+0059     <span class="comment">% find index of current vertices</span>
+0060     ifc = 1;
+0061     face = faces2(ifc,:);
+0062     face(face == indV) = [];
+0063     iv0 = face(ifc, 1);
+0064     ivc = face(ifc, 2);
+0065     
+0066     <span class="comment">% initialize result</span>
+0067     ring = iv0;
+0068     
+0069     <span class="comment">% iterate over faces until we come back at initial vertex</span>
+0070     <span class="keyword">while</span> ivc ~= iv0
+0071         ring = [ring ivc]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0072     
+0073         <span class="comment">% we expect two faces containing next vertex</span>
+0074         inds = find(any(ismember(faces2, ivc), 2));
+0075         <span class="comment">% keep the face different from current one</span>
+0076         ifc = inds(inds~=ifc);
+0077     
+0078         <span class="comment">% find next vertex</span>
+0079         face = faces2(ifc,:);
+0080         ivc = face(~ismember(face, [indV ivc]));
+0081     <span class="keyword">end</span>
+0082 
+0083 <span class="keyword">elseif</span> sum(counts == 1) == 2
+0084     <span class="comment">% case of boundary vertices.</span>
+0085     closed = false;
+0086 
+0087     <span class="comment">% choose one of the vertices appearing only once in adjacent faces</span>
+0088     iv0 = inds(find(counts==1, 1, &quot;first&quot;));
+0089     ivf = inds(find(counts==1, 1, &quot;last&quot;));
+0090 
+0091     <span class="comment">% start with face containing both initial and reference vertex</span>
+0092     ifc = find(sum(ismember(faces2, [indV iv0]), 2) == 2);
+0093     face = faces2(ifc,:);
+0094     ivc = face(~ismember(face, [indV iv0]));
+0095     
+0096     <span class="comment">% initialize result</span>
+0097     ring = [iv0 ivc];
+0098     
+0099     <span class="comment">% iterate over faces until we come back at initial vertex</span>
+0100     <span class="keyword">while</span> ivc ~= ivf
+0101         <span class="comment">% we expect two faces containing next vertex</span>
+0102         inds = find(any(ismember(faces2, ivc), 2));
+0103         <span class="comment">% keep the face different from current one</span>
+0104         ifc = inds(inds~=ifc);
+0105     
+0106         <span class="comment">% find next vertex</span>
+0107         face = faces2(ifc,:);
+0108         ivc = face(~ismember(face, [indV ivc]));
+0109 
+0110         ring = [ring ivc]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0111     <span class="keyword">end</span>
+0112 
+0113 <span class="keyword">else</span>
+0114     error(<span class="string">'number of adjacent vertices appearing in adjacent faces must equal either 2 or 0'</span>);
+0115 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

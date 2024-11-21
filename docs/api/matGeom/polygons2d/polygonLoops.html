@@ -49,7 +49,7 @@
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="polygonSelfIntersections.html" class="code" title="function varargout = polygonSelfIntersections(poly, varargin)">polygonSelfIntersections</a>	POLYGONSELFINTERSECTIONS Find self-intersection points of a polygon.</li><li><a href="polygonSubcurve.html" class="code" title="function [res, inds] = polygonSubcurve(poly, t0, t1)">polygonSubcurve</a>	Extract a portion of a polygon.</li></ul>
+<li><a href="polygonSelfIntersections.html" class="code" title="function varargout = polygonSelfIntersections(poly, varargin)">polygonSelfIntersections</a>	POLYGONSELFINTERSECTIONS Find self-intersection points of a polygon.</li><li><a href="polygonSubcurve.html" class="code" title="function [res, inds] = polygonSubcurve(poly, t0, t1)">polygonSubcurve</a>	POLYGONSUBCURVE Extract a portion of a polygon.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 <li><a href="expandPolygon.html" class="code" title="function loops = expandPolygon(poly, dist, varargin)">expandPolygon</a>	EXPANDPOLYGON Expand a polygon by a given (signed) distance.</li></ul>
@@ -80,153 +80,152 @@ This function is called by:
 0020 
 0021 <span class="comment">% ------</span>
 0022 <span class="comment">% Author: David Legland</span>
-0023 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
-0024 <span class="comment">% Created: 2009-06-15,    using Matlab 7.7.0.471 (R2008b)</span>
-0025 <span class="comment">% Copyright 2009 INRA - Cepia Software Platform.</span>
+0023 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0024 <span class="comment">% Created: 2009-06-15, using Matlab 7.7.0.471 (R2008b)</span>
+0025 <span class="comment">% Copyright 2009-2024 INRA - Cepia Software Platform</span>
 0026 
-0027 
-0028 <span class="comment">% tolerance for detecting two vertices as equal</span>
-0029 tol = 1e-14;
-0030 
-0031 <span class="comment">% parse optional arguments</span>
-0032 <span class="keyword">while</span> length(varargin) &gt; 1
-0033     pname = varargin{1};
-0034     <span class="keyword">if</span> ~ischar(pname)
-0035         error(<span class="string">'Expect optional arguments as name-value pairs'</span>);
-0036     <span class="keyword">end</span>
-0037     
-0038     <span class="keyword">if</span> strcmpi(pname, <span class="string">'tolerance'</span>)
-0039         tol = varargin{2};
-0040     <span class="keyword">else</span>
-0041         error([<span class="string">'Unknown parameter name: '</span> pname]);
-0042     <span class="keyword">end</span>
-0043     varargin(1:2) = [];
-0044 <span class="keyword">end</span>
+0027 <span class="comment">% tolerance for detecting two vertices as equal</span>
+0028 tol = 1e-14;
+0029 
+0030 <span class="comment">% parse optional arguments</span>
+0031 <span class="keyword">while</span> length(varargin) &gt; 1
+0032     pname = varargin{1};
+0033     <span class="keyword">if</span> ~ischar(pname)
+0034         error(<span class="string">'Expect optional arguments as name-value pairs'</span>);
+0035     <span class="keyword">end</span>
+0036     
+0037     <span class="keyword">if</span> strcmpi(pname, <span class="string">'tolerance'</span>)
+0038         tol = varargin{2};
+0039     <span class="keyword">else</span>
+0040         error([<span class="string">'Unknown parameter name: '</span> pname]);
+0041     <span class="keyword">end</span>
+0042     varargin(1:2) = [];
+0043 <span class="keyword">end</span>
+0044 
 0045 
-0046 
-0047 <span class="comment">%% Initialisations</span>
-0048 
-0049 <span class="comment">% compute intersections</span>
-0050 [inters, pos1, pos2] = <a href="polygonSelfIntersections.html" class="code" title="function varargout = polygonSelfIntersections(poly, varargin)">polygonSelfIntersections</a>(poly, <span class="string">'tolerance'</span>, tol);
-0051 
-0052 <span class="comment">% case of a polygon without self-intersection</span>
-0053 <span class="keyword">if</span> isempty(inters)
-0054     loops = {poly};
-0055     <span class="keyword">return</span>;
-0056 <span class="keyword">end</span>
-0057 
-0058 <span class="comment">% array for storing loops</span>
-0059 loops = cell(0, 1);
-0060 
-0061 <span class="comment">% sort intersection points with respect to their position on the polygon</span>
-0062 [positions, order] = sortrows([pos1 pos2 ; pos2 pos1]);
-0063 inters = [inters ; inters];
-0064 inters = inters(order, :);
+0046 <span class="comment">%% Initialisations</span>
+0047 
+0048 <span class="comment">% compute intersections</span>
+0049 [inters, pos1, pos2] = <a href="polygonSelfIntersections.html" class="code" title="function varargout = polygonSelfIntersections(poly, varargin)">polygonSelfIntersections</a>(poly, <span class="string">'tolerance'</span>, tol);
+0050 
+0051 <span class="comment">% case of a polygon without self-intersection</span>
+0052 <span class="keyword">if</span> isempty(inters)
+0053     loops = {poly};
+0054     <span class="keyword">return</span>;
+0055 <span class="keyword">end</span>
+0056 
+0057 <span class="comment">% array for storing loops</span>
+0058 loops = cell(0, 1);
+0059 
+0060 <span class="comment">% sort intersection points with respect to their position on the polygon</span>
+0061 [positions, order] = sortrows([pos1 pos2 ; pos2 pos1]);
+0062 inters = [inters ; inters];
+0063 inters = inters(order, :);
+0064 
 0065 
-0066 
-0067 <span class="comment">%% First loop</span>
-0068 
-0069 <span class="comment">% initialize the beginning of the loop</span>
-0070 pos0 = 0;
-0071 loop = <a href="polygonSubcurve.html" class="code" title="function [res, inds] = polygonSubcurve(poly, t0, t1)">polygonSubcurve</a>(poly, pos0, positions(1, 1));
-0072 loop(<span class="keyword">end</span>, :) = inters(1,:);
-0073 vertex = inters(1,:);
-0074 
-0075 <span class="comment">% prepare iteration on positions</span>
-0076 pos = positions(1, 2);
-0077 positions(1, :) = [];
-0078 inters(1,:) = [];
-0079 
-0080 <span class="keyword">while</span> true
-0081     <span class="comment">% index of next intersection point</span>
-0082     ind = find(positions(:,1) &gt; pos, 1, <span class="string">'first'</span>);
-0083     
-0084     <span class="comment">% if not index is found, the current loop is complete</span>
-0085     <span class="keyword">if</span> isempty(ind)
-0086         <span class="keyword">break</span>;
-0087     <span class="keyword">end</span>
-0088 
-0089     <span class="comment">% compute the portion of curve between the two intersection points</span>
-0090     portion = <a href="polygonSubcurve.html" class="code" title="function [res, inds] = polygonSubcurve(poly, t0, t1)">polygonSubcurve</a>(poly, pos, positions(ind, 1));
-0091     
-0092     <span class="comment">% ensure extremities have been computed only once</span>
-0093     portion(1, :) = vertex;
-0094     vertex = inters(ind, :);
-0095     portion(<span class="keyword">end</span>, :) = vertex;
-0096     
-0097     <span class="comment">% add the current portion of curve</span>
-0098     loop = [loop; portion]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0099     
-0100     <span class="comment">% update current position on the polygon</span>
-0101     pos = positions(ind, 2);
-0102     
-0103     <span class="comment">% remove processed intersection</span>
-0104     positions(ind, :) = [];
-0105     inters(ind,:) = [];
-0106 <span class="keyword">end</span>
-0107 
-0108 <span class="comment">% append the last portion of curve</span>
-0109 loop = [loop ; <a href="polygonSubcurve.html" class="code" title="function [res, inds] = polygonSubcurve(poly, t0, t1)">polygonSubcurve</a>(poly, pos, pos0)];
-0110 
-0111 <span class="comment">% remove redundant vertices</span>
-0112 loop(sum(loop(1:end-1,:) == loop(2:<span class="keyword">end</span>,:) ,2)==2, :) = [];
-0113 <span class="keyword">if</span> sum(diff(loop([1 end], :)) == 0) == 2
-0114     loop(<span class="keyword">end</span>, :) = [];
-0115 <span class="keyword">end</span>
-0116 
-0117 <span class="comment">% add current loop to the list of loops</span>
-0118 loops{1} = loop;
+0066 <span class="comment">%% First loop</span>
+0067 
+0068 <span class="comment">% initialize the beginning of the loop</span>
+0069 pos0 = 0;
+0070 loop = <a href="polygonSubcurve.html" class="code" title="function [res, inds] = polygonSubcurve(poly, t0, t1)">polygonSubcurve</a>(poly, pos0, positions(1, 1));
+0071 loop(<span class="keyword">end</span>, :) = inters(1,:);
+0072 vertex = inters(1,:);
+0073 
+0074 <span class="comment">% prepare iteration on positions</span>
+0075 pos = positions(1, 2);
+0076 positions(1, :) = [];
+0077 inters(1,:) = [];
+0078 
+0079 <span class="keyword">while</span> true
+0080     <span class="comment">% index of next intersection point</span>
+0081     ind = find(positions(:,1) &gt; pos, 1, <span class="string">'first'</span>);
+0082     
+0083     <span class="comment">% if not index is found, the current loop is complete</span>
+0084     <span class="keyword">if</span> isempty(ind)
+0085         <span class="keyword">break</span>;
+0086     <span class="keyword">end</span>
+0087 
+0088     <span class="comment">% compute the portion of curve between the two intersection points</span>
+0089     portion = <a href="polygonSubcurve.html" class="code" title="function [res, inds] = polygonSubcurve(poly, t0, t1)">polygonSubcurve</a>(poly, pos, positions(ind, 1));
+0090     
+0091     <span class="comment">% ensure extremities have been computed only once</span>
+0092     portion(1, :) = vertex;
+0093     vertex = inters(ind, :);
+0094     portion(<span class="keyword">end</span>, :) = vertex;
+0095     
+0096     <span class="comment">% add the current portion of curve</span>
+0097     loop = [loop; portion]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0098     
+0099     <span class="comment">% update current position on the polygon</span>
+0100     pos = positions(ind, 2);
+0101     
+0102     <span class="comment">% remove processed intersection</span>
+0103     positions(ind, :) = [];
+0104     inters(ind,:) = [];
+0105 <span class="keyword">end</span>
+0106 
+0107 <span class="comment">% append the last portion of curve</span>
+0108 loop = [loop ; <a href="polygonSubcurve.html" class="code" title="function [res, inds] = polygonSubcurve(poly, t0, t1)">polygonSubcurve</a>(poly, pos, pos0)];
+0109 
+0110 <span class="comment">% remove redundant vertices</span>
+0111 loop(sum(loop(1:end-1,:) == loop(2:<span class="keyword">end</span>,:) ,2)==2, :) = [];
+0112 <span class="keyword">if</span> sum(diff(loop([1 end], :)) == 0) == 2
+0113     loop(<span class="keyword">end</span>, :) = [];
+0114 <span class="keyword">end</span>
+0115 
+0116 <span class="comment">% add current loop to the list of loops</span>
+0117 loops{1} = loop;
+0118 
 0119 
-0120 
-0121 <span class="comment">%% Other loops</span>
-0122 
-0123 Nl = 1;
-0124 <span class="keyword">while</span> ~isempty(positions)
-0125 
-0126     <span class="comment">% initialize the next loop</span>
-0127     loop    = [];
-0128     pos0    = positions(1, 2);
-0129     pos     = positions(1, 2);
-0130     vertex  = inters(1,:);
-0131     
-0132     <span class="keyword">while</span> true
-0133         <span class="comment">% index of next intersection point</span>
-0134         ind = find(positions(:,1) &gt; pos, 1, <span class="string">'first'</span>);
-0135 
-0136         <span class="comment">% compute the portion of curve between the two intersection points</span>
-0137         portion = <a href="polygonSubcurve.html" class="code" title="function [res, inds] = polygonSubcurve(poly, t0, t1)">polygonSubcurve</a>(poly, pos, positions(ind, 1));
-0138         
-0139         <span class="comment">% ensure extremities have been computed only once</span>
-0140         portion(1, :) = vertex;
-0141         vertex = inters(ind, :);
-0142         portion(<span class="keyword">end</span>, :) = vertex;
-0143         
-0144         <span class="comment">% append the current portion of curve</span>
-0145         loop = [loop ; portion]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0146 
-0147         <span class="comment">% update current position on the polygon</span>
-0148         pos = positions(ind, 2);
-0149 
-0150         <span class="comment">% remove processed intersection</span>
-0151         positions(ind, :) = [];
-0152         inters(ind,:) = [];
-0153 
-0154         <span class="comment">% if not found, current loop is processed</span>
-0155         <span class="keyword">if</span> pos == pos0
-0156             <span class="keyword">break</span>;
-0157         <span class="keyword">end</span>
-0158     <span class="keyword">end</span>
-0159 
-0160     <span class="comment">% remove redundant vertices</span>
-0161     loop(sum(loop(1:end-1,:) == loop(2:<span class="keyword">end</span>,:) ,2)==2, :) = []; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0162     <span class="keyword">if</span> sum(diff(loop([1 end], :))==0) == 2
-0163         loop(<span class="keyword">end</span>, :) = []; 
-0164     <span class="keyword">end</span>
-0165 
-0166     <span class="comment">% add current loop to the list of loops</span>
-0167     Nl = Nl + 1;
-0168     loops{Nl} = loop;
-0169 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0120 <span class="comment">%% Other loops</span>
+0121 
+0122 Nl = 1;
+0123 <span class="keyword">while</span> ~isempty(positions)
+0124 
+0125     <span class="comment">% initialize the next loop</span>
+0126     loop    = [];
+0127     pos0    = positions(1, 2);
+0128     pos     = positions(1, 2);
+0129     vertex  = inters(1,:);
+0130     
+0131     <span class="keyword">while</span> true
+0132         <span class="comment">% index of next intersection point</span>
+0133         ind = find(positions(:,1) &gt; pos, 1, <span class="string">'first'</span>);
+0134 
+0135         <span class="comment">% compute the portion of curve between the two intersection points</span>
+0136         portion = <a href="polygonSubcurve.html" class="code" title="function [res, inds] = polygonSubcurve(poly, t0, t1)">polygonSubcurve</a>(poly, pos, positions(ind, 1));
+0137         
+0138         <span class="comment">% ensure extremities have been computed only once</span>
+0139         portion(1, :) = vertex;
+0140         vertex = inters(ind, :);
+0141         portion(<span class="keyword">end</span>, :) = vertex;
+0142         
+0143         <span class="comment">% append the current portion of curve</span>
+0144         loop = [loop ; portion]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0145 
+0146         <span class="comment">% update current position on the polygon</span>
+0147         pos = positions(ind, 2);
+0148 
+0149         <span class="comment">% remove processed intersection</span>
+0150         positions(ind, :) = [];
+0151         inters(ind,:) = [];
+0152 
+0153         <span class="comment">% if not found, current loop is processed</span>
+0154         <span class="keyword">if</span> pos == pos0
+0155             <span class="keyword">break</span>;
+0156         <span class="keyword">end</span>
+0157     <span class="keyword">end</span>
+0158 
+0159     <span class="comment">% remove redundant vertices</span>
+0160     loop(sum(loop(1:end-1,:) == loop(2:<span class="keyword">end</span>,:) ,2)==2, :) = []; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0161     <span class="keyword">if</span> sum(diff(loop([1 end], :))==0) == 2
+0162         loop(<span class="keyword">end</span>, :) = []; 
+0163     <span class="keyword">end</span>
+0164 
+0165     <span class="comment">% add current loop to the list of loops</span>
+0166     Nl = Nl + 1;
+0167     loops{Nl} = loop;
+0168 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

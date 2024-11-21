@@ -1,0 +1,394 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of clipMesh2dPolygon</title>
+  <meta name="keywords" content="clipMesh2dPolygon">
+  <meta name="description" content="CLIPMESH2DPOLYGON  Clip a planar mesh with a polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; clipMesh2dPolygon.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>clipMesh2dPolygon
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CLIPMESH2DPOLYGON  Clip a planar mesh with a polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [nodes2, edges2, faces2] = clipMesh2dPolygon(nodes, edges, faces, poly) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CLIPMESH2DPOLYGON  Clip a planar mesh with a polygon.
+
+   [NODES2, EDGES2, FACES2] = clipMesh2dPolygon(NODES, EDGES, FACES, POLY)
+   Clips the graph defined by nodes NODES and edges EDGES with the polygon
+   given in POLY. POLY is a N-by-2 array of vertices.
+   The result is a new graph containing nodes inside the polygon, as well
+   as nodes created by the intersection of edges with the polygon.
+
+   Important: it is assumed that no edge crosses the polygon twice. This
+   is the case if the polygon is convex (or nearly convex) and if the
+   edges are small compared to the polygon.
+
+   Example
+     elli = [50 50 40 20 30];
+     figure; hold on;
+     drawEllipse(elli, 'k');
+     poly = ellipseToPolygon(elli, 200);
+     box = polygonBounds(poly);
+     germs = randomPointInPolygon(poly, 100);
+     drawPoint(germs, 'b.');
+     [n, e, f] = boundedVoronoi2d(box, germs);
+     [n2, e2, f2] = clipMesh2dPolygon(n, e, f, poly);
+     drawGraphEdges(n2, e2);
+     fillGraphFaces(n2, f2);
+
+   See also
+     graphs, <a href="drawGraph.html" class="code" title="function varargout = drawGraph(varargin)">drawGraph</a>, <a href="clipGraph.html" class="code" title="function varargout = clipGraph(nodes, edges, varargin)">clipGraph</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>	DISTANCEPOINTS Compute distance between two points.</li><li><a href="../../matGeom/meshes3d/meshFaceEdges.html" class="code" title="function FE = meshFaceEdges(vertices, edges, faces)">meshFaceEdges</a>	MESHFACEEDGES Computes edge indices of each face.</li><li><a href="../../matGeom/meshes3d/meshFaceNumber.html" class="code" title="function nFaces = meshFaceNumber(varargin)">meshFaceNumber</a>	MESHFACENUMBER Returns the number of faces in this mesh.</li><li><a href="../../matGeom/polygons2d/intersectEdgePolygon.html" class="code" title="function [intersects, inds] = intersectEdgePolygon(edge, poly, varargin)">intersectEdgePolygon</a>	INTERSECTEDGEPOLYGON  Intersection point of an edge with a polygon.</li><li><a href="../../matGeom/polygons2d/isPointInPolygon.html" class="code" title="function b = isPointInPolygon(point, poly)">isPointInPolygon</a>	ISPOINTINPOLYGON Test if a point is located inside a polygon.</li><li><a href="../../matGeom/polygons2d/polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>	POLYGONAREA Compute the signed area of a polygon.</li><li><a href="../../matGeom/polygons2d/polygonSubcurve.html" class="code" title="function [res, inds] = polygonSubcurve(poly, t0, t1)">polygonSubcurve</a>	POLYGONSUBCURVE Extract a portion of a polygon.</li><li><a href="../../matGeom/polygons2d/polylineLength.html" class="code" title="function len = polylineLength(poly, varargin)">polylineLength</a>	POLYLINELENGTH Return length of a polyline given as a list of points.</li><li><a href="../../matGeom/polygons2d/projPointOnPolygon.html" class="code" title="function varargout = projPointOnPolygon(point, poly, varargin)">projPointOnPolygon</a>	PROJPOINTONPOLYGON  Compute position of a point projected on a polygon.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="centroidalVoronoi2d.html" class="code" title="function [germs, germPaths] = centroidalVoronoi2d(germs, poly, varargin)">centroidalVoronoi2d</a>	CENTROIDALVORONOI2D Centroidal Voronoi tesselation within a polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [nodes2, edges2, faces2] = clipMesh2dPolygon(nodes, edges, faces, poly)</a>
+0002 <span class="comment">%CLIPMESH2DPOLYGON  Clip a planar mesh with a polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [NODES2, EDGES2, FACES2] = clipMesh2dPolygon(NODES, EDGES, FACES, POLY)</span>
+0005 <span class="comment">%   Clips the graph defined by nodes NODES and edges EDGES with the polygon</span>
+0006 <span class="comment">%   given in POLY. POLY is a N-by-2 array of vertices.</span>
+0007 <span class="comment">%   The result is a new graph containing nodes inside the polygon, as well</span>
+0008 <span class="comment">%   as nodes created by the intersection of edges with the polygon.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Important: it is assumed that no edge crosses the polygon twice. This</span>
+0011 <span class="comment">%   is the case if the polygon is convex (or nearly convex) and if the</span>
+0012 <span class="comment">%   edges are small compared to the polygon.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   Example</span>
+0015 <span class="comment">%     elli = [50 50 40 20 30];</span>
+0016 <span class="comment">%     figure; hold on;</span>
+0017 <span class="comment">%     drawEllipse(elli, 'k');</span>
+0018 <span class="comment">%     poly = ellipseToPolygon(elli, 200);</span>
+0019 <span class="comment">%     box = polygonBounds(poly);</span>
+0020 <span class="comment">%     germs = randomPointInPolygon(poly, 100);</span>
+0021 <span class="comment">%     drawPoint(germs, 'b.');</span>
+0022 <span class="comment">%     [n, e, f] = boundedVoronoi2d(box, germs);</span>
+0023 <span class="comment">%     [n2, e2, f2] = clipMesh2dPolygon(n, e, f, poly);</span>
+0024 <span class="comment">%     drawGraphEdges(n2, e2);</span>
+0025 <span class="comment">%     fillGraphFaces(n2, f2);</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%   See also</span>
+0028 <span class="comment">%     graphs, drawGraph, clipGraph</span>
+0029 <span class="comment">%</span>
+0030 
+0031 <span class="comment">% ------</span>
+0032 <span class="comment">% Author: David Legland</span>
+0033 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0034 <span class="comment">% Created: 2012-02-24, using Matlab 7.9.0.529 (R2009b)</span>
+0035 <span class="comment">% Copyright 2012-2024 INRA - Cepia Software Platform</span>
+0036 
+0037 <span class="comment">% Algorithm summary:</span>
+0038 <span class="comment">% * For each edge not outside do:</span>
+0039 <span class="comment">%    * clip edge with poly</span>
+0040 <span class="comment">%    * if no inter</span>
+0041 <span class="comment">%    *    add current edge (same vertex indices)</span>
+0042 <span class="comment">%    *    continue</span>
+0043 <span class="comment">%    * end</span>
+0044 <span class="comment">%    * add intersections to list, compute their indices</span>
+0045 <span class="comment">%    * create the new edge(s)</span>
+0046 
+0047 <span class="comment">%% Pre-processing</span>
+0048 
+0049 <span class="comment">% number of nodes, edges and faces</span>
+0050 nNodes = size(nodes, 1);
+0051 nEdges = size(edges, 1);
+0052 nFaces = <a href="../../matGeom/meshes3d/meshFaceNumber.html" class="code" title="function nFaces = meshFaceNumber(varargin)">meshFaceNumber</a>(nodes, faces);
+0053 
+0054 <span class="comment">% associate each face to the list of its incident edge</span>
+0055 faceEdgeInds = <a href="../../matGeom/meshes3d/meshFaceEdges.html" class="code" title="function FE = meshFaceEdges(vertices, edges, faces)">meshFaceEdges</a>(nodes, edges, faces);
+0056 
+0057 
+0058 <span class="comment">%% Clip the nodes</span>
+0059 
+0060 <span class="comment">% find index of nodes inside clipping window</span>
+0061 nodeInside = <a href="../../matGeom/polygons2d/isPointInPolygon.html" class="code" title="function b = isPointInPolygon(point, poly)">isPointInPolygon</a>(nodes, poly);
+0062 
+0063 innerNodeInds = find(nodeInside);
+0064 
+0065 <span class="comment">% create correspondance between original nodes and inside nodes</span>
+0066 nodeIndsMap = zeros(nNodes, 1);
+0067 <span class="keyword">for</span> i = 1:length(innerNodeInds)
+0068     nodeIndsMap(innerNodeInds(i)) = i;
+0069 <span class="keyword">end</span>
+0070 
+0071 <span class="comment">% select clipped nodes</span>
+0072 nodes2 = nodes(innerNodeInds, :);
+0073 
+0074 
+0075 <span class="comment">%% Prepare edge clipping</span>
+0076 <span class="comment">% Need to compute with edges will be kept. This includes (1) edges totally</span>
+0077 <span class="comment">% inside the original polygon and (2) edges clipped by the polygon.</span>
+0078 
+0079 <span class="comment">% array of boolean flag for each end vertex of each edge</span>
+0080 insideEnds = nodeInside(edges);
+0081 
+0082 <span class="comment">% find index of edges totally inside polygon</span>
+0083 <span class="comment">% (do not test intersections with polygon edges)</span>
+0084 edgeInsideFlag = sum(insideEnds, 2) == 2;
+0085 innerEdgeInds = find(edgeInsideFlag);
+0086 
+0087 <span class="comment">% Create correspondance map between original edges and new edges.</span>
+0088 innerEdgeIndsMap = zeros(nEdges, 1);
+0089 <span class="keyword">for</span> i = 1:length(innerEdgeInds)
+0090     innerEdgeIndsMap(innerEdgeInds(i)) = i;
+0091 <span class="keyword">end</span>
+0092 
+0093 <span class="comment">% create correspondance map between old edges and new edges</span>
+0094 <span class="comment">% Use a cell array, as each edge may be clip into several edges.</span>
+0095 <span class="comment">% The map is initialized with inner edges indices, but may contain indices</span>
+0096 <span class="comment">% of clipped edges in later processing</span>
+0097 edgeIndsMap = cell(nEdges, 1);
+0098 <span class="keyword">for</span> i = 1:length(innerEdgeInds)
+0099     edgeIndsMap{innerEdgeInds(i)} = i;
+0100 <span class="keyword">end</span>
+0101 
+0102 
+0103 <span class="comment">% find edges either totally inside polygon, or with one intersection with</span>
+0104 <span class="comment">% the polygon</span>
+0105 keepEdgeFlag = sum(insideEnds, 2) &gt; 0;
+0106 
+0107 <span class="comment">% allocate memory for edges to keep (with at least one vertex inside)</span>
+0108 nEdges2 = sum(keepEdgeFlag);
+0109 edges2 = zeros(nEdges2, 2);
+0110 
+0111 
+0112 <span class="comment">% create correspondance map between new edges and original edge(s)</span>
+0113 <span class="comment">% Use a cell array, as each edge may be clip into several edges.</span>
+0114 <span class="comment">% The map is initialized with inner edges indices, but may contain indices</span>
+0115 <span class="comment">% of clipped edges in later processing</span>
+0116 edgeIndsMap2 = cell(nEdges2, 1);
+0117 
+0118 
+0119 <span class="comment">%% Determine clipped edges</span>
+0120 
+0121 <span class="comment">% index of next edge</span>
+0122 <span class="comment">% index of next edge to add to the list</span>
+0123 <span class="comment">% iEdge2 = 1;</span>
+0124 iEdge2 = length(innerEdgeInds) + 1;
+0125 
+0126 <span class="comment">% index of next vertex</span>
+0127 iNode2 = size(nodes2, 1) + 1;
+0128 
+0129 <span class="comment">% iterate over all edges</span>
+0130 <span class="keyword">for</span> iEdge = 1:nEdges
+0131     <span class="comment">% index of edge vertices</span>
+0132     v1 = edges(iEdge, 1);
+0133     v2 = edges(iEdge, 2);
+0134     
+0135     <span class="comment">% compute intersection(s) of current edge with polygon boundary</span>
+0136     edge0 = [nodes(v1,:) nodes(v2,:)]; 
+0137     intersects = <a href="../../matGeom/polygons2d/intersectEdgePolygon.html" class="code" title="function [intersects, inds] = intersectEdgePolygon(edge, poly, varargin)">intersectEdgePolygon</a>(edge0, poly);
+0138     
+0139     <span class="comment">% If current edge do not cross polygon boundary, it is either totally</span>
+0140     <span class="comment">% inside or totally outside</span>
+0141     <span class="keyword">if</span> isempty(intersects)
+0142         <span class="comment">% check if edge is totally inside the polygon</span>
+0143         <span class="keyword">if</span> nodeInside(v1) &amp;&amp; nodeInside(v2)
+0144             <span class="comment">% create new edge by converting node indices</span>
+0145             newEdge = nodeIndsMap([v1 v2])';
+0146             
+0147             <span class="comment">% add the new edge to the list of new edges</span>
+0148             ind = innerEdgeIndsMap(iEdge);
+0149             edges2(ind,:) = newEdge;
+0150             
+0151             <span class="comment">% keep index correspondance new-&gt;old</span>
+0152             edgeIndsMap2{ind} = iEdge;
+0153         <span class="keyword">end</span>
+0154         <span class="keyword">continue</span>;
+0155     <span class="keyword">end</span>
+0156     
+0157     <span class="comment">% add intersection(s) to the vertex array</span>
+0158     nInters = size(intersects, 1);
+0159     intersectInds = iNode2:iNode2+nInters-1;
+0160     nodes2(intersectInds,:) = intersects;
+0161     iNode2 = iNode2 + nInters;
+0162     
+0163     <span class="comment">% concatenate vertex indices with indices of extremities inside poly</span>
+0164     <span class="keyword">if</span> nodeInside(v1)
+0165         intersectInds = [nodeIndsMap(v1) intersectInds]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0166     <span class="keyword">end</span>
+0167     <span class="keyword">if</span> nodeInside(v2)
+0168         intersectInds = [intersectInds nodeIndsMap(v2)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0169     <span class="keyword">end</span>
+0170 
+0171     <span class="comment">% determine the number of edges corresponding to the clipped edge</span>
+0172     <span class="comment">% (usually only one)</span>
+0173     nNewEdges = (nInters + 1) / 2;
+0174     <span class="keyword">if</span> nNewEdges ~= round(nNewEdges)
+0175         warning(<span class="string">'matGeom:graphs:AlgorithmicError'</span>, <span class="keyword">...</span>
+0176             <span class="string">'edge %d has odd number of intersects'</span>, iEdge);
+0177     <span class="keyword">end</span>
+0178 
+0179     <span class="comment">% compute list of indices of the new edges</span>
+0180     newEdgeInds = (1:nNewEdges) + iEdge2 - 1;
+0181 
+0182     <span class="comment">% associate new edge indices to the current edge</span>
+0183     edgeIndsMap{iEdge} = newEdgeInds;
+0184     
+0185     <span class="comment">% create a new edge for each pair of contiguous intersections</span>
+0186     <span class="keyword">while</span> length(intersectInds) &gt; 1
+0187         edges2(iEdge2, :) = intersectInds(1:2);
+0188         edgeIndsMap2{iEdge2} = iEdge;
+0189         intersectInds(1:2) = [];
+0190         iEdge2 = iEdge2 + 1;
+0191     <span class="keyword">end</span>
+0192     
+0193     <span class="keyword">if</span> ~isempty(intersectInds)
+0194         warning(<span class="string">'matGeom:graphs:AlgorithmicError'</span>, <span class="keyword">...</span>
+0195             <span class="string">'edge %d has odd number of intersects'</span>, iEdge);
+0196     <span class="keyword">end</span>
+0197 <span class="keyword">end</span>
+0198 
+0199 
+0200 <span class="comment">%% Clip faces</span>
+0201 
+0202 <span class="comment">% initialize new array of faces</span>
+0203 faces2 = cell(0, 0);
+0204 iFace2 = 1;
+0205 
+0206 <span class="keyword">for</span> iFace = 1:nFaces
+0207     <span class="comment">% get edge indices of current face</span>
+0208     edgeInds = faceEdgeInds{iFace};
+0209     nodeInds = unique(edges(edgeInds, :));
+0210     
+0211     <span class="comment">% check which edges of current face are inside</span>
+0212     insideFlags = nodeInside(nodeInds);
+0213     
+0214     <span class="comment">% do not consider faces whose all vertices are outside polygon</span>
+0215     <span class="comment">% (for the moment)</span>
+0216     <span class="keyword">if</span> all(~insideFlags)
+0217         <span class="keyword">continue</span>;
+0218     <span class="keyword">end</span>
+0219     
+0220     <span class="comment">% check if face is totally within the polygon or if we need to clip the</span>
+0221     <span class="comment">% face with the polygon boundary</span>
+0222     <span class="keyword">if</span> all(insideFlags)
+0223         <span class="comment">% convert edge indices</span>
+0224         edgeInds2 = [];
+0225         <span class="keyword">for</span> iEdge = 1:length(edgeInds)
+0226             edgeInds2 = [edgeInds2 edgeIndsMap{edgeInds(iEdge)}]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0227         <span class="keyword">end</span>
+0228         
+0229         <span class="comment">% convert edge indices to list of vertices</span>
+0230         faceEdges = edges2(edgeInds2, :);
+0231         newFace = faceEdges(1, :);
+0232         nextInd = newFace(2);
+0233 
+0234         faceEdges(1,:) = [];
+0235         <span class="keyword">while</span> size(faceEdges, 1) &gt; 1
+0236             ind = find(sum(faceEdges == nextInd, 2));
+0237             nodeInds = faceEdges(ind, :);
+0238             nextInd = nodeInds(nodeInds ~= nextInd);
+0239             newFace = [newFace nextInd]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0240             faceEdges(ind, :) = [];
+0241         <span class="keyword">end</span>
+0242         
+0243     <span class="keyword">else</span>    
+0244         <span class="comment">% process case of clipped faces</span>
+0245         
+0246         <span class="comment">% get indices of clipped edges</span>
+0247         keepFlags = keepEdgeFlag(edgeInds);
+0248         edgeInds = edgeInds(keepFlags);
+0249 
+0250         <span class="comment">% convert edge indices</span>
+0251         edgeInds2 = [];
+0252         <span class="keyword">for</span> iEdge = 1:length(edgeInds)
+0253             edgeInds2 = [edgeInds2 edgeIndsMap{edgeInds(iEdge)}]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0254         <span class="keyword">end</span>
+0255 
+0256         <span class="comment">% convert edge indices to list of vertices</span>
+0257         faceEdges = edges2(edgeInds2, :);
+0258 
+0259         <span class="comment">% find a vertex existing only once</span>
+0260         indices = unique(faceEdges(:));
+0261         <span class="keyword">for</span> i = 1:length(indices)
+0262             <span class="keyword">if</span> sum(faceEdges(:) == indices(i)) == 1
+0263                 ind0 = indices(i);
+0264                 <span class="keyword">break</span>;
+0265             <span class="keyword">end</span>
+0266         <span class="keyword">end</span>
+0267 
+0268         <span class="comment">% initialize new face from single vertex</span>
+0269         nextInd = ind0;
+0270         newFace = nextInd;
+0271 
+0272         <span class="comment">% iterate over edges until other single vertex</span>
+0273         <span class="keyword">while</span> size(faceEdges, 1) &gt; 0
+0274             ind = find(sum(faceEdges == nextInd, 2));
+0275             nodeInds = faceEdges(ind, :);
+0276             nextInd = nodeInds(nodeInds ~= nextInd);
+0277             newFace = [newFace nextInd]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0278             faceEdges(ind, :) = [];
+0279         <span class="keyword">end</span>
+0280 
+0281         <span class="comment">% crop the clipping polygon into two polylines</span>
+0282         node0 = nodes2(ind0, :);
+0283         pos0 = <a href="../../matGeom/polygons2d/projPointOnPolygon.html" class="code" title="function varargout = projPointOnPolygon(point, poly, varargin)">projPointOnPolygon</a>(node0, poly);
+0284         pos1 = <a href="../../matGeom/polygons2d/projPointOnPolygon.html" class="code" title="function varargout = projPointOnPolygon(point, poly, varargin)">projPointOnPolygon</a>(nodes2(nextInd, :), poly);
+0285         sub1 = <a href="../../matGeom/polygons2d/polygonSubcurve.html" class="code" title="function [res, inds] = polygonSubcurve(poly, t0, t1)">polygonSubcurve</a>(poly, pos0, pos1);
+0286         sub2 = <a href="../../matGeom/polygons2d/polygonSubcurve.html" class="code" title="function [res, inds] = polygonSubcurve(poly, t0, t1)">polygonSubcurve</a>(poly, pos1, pos0);
+0287 
+0288         <span class="comment">% keep only the smallest polyline</span>
+0289         <span class="keyword">if</span> <a href="../../matGeom/polygons2d/polylineLength.html" class="code" title="function len = polylineLength(poly, varargin)">polylineLength</a>(sub1) &lt; <a href="../../matGeom/polygons2d/polylineLength.html" class="code" title="function len = polylineLength(poly, varargin)">polylineLength</a>(sub2)
+0290             sub = sub1;
+0291         <span class="keyword">else</span>
+0292             sub = sub2;
+0293         <span class="keyword">end</span>
+0294 
+0295         <span class="comment">% eventually add polygon vertices contained within subcurve extremities</span>
+0296         dists = <a href="../../matGeom/geom2d/distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(sub([1 end],:), node0);
+0297         <span class="keyword">if</span> dists(1) &lt; dists(2)
+0298             newNodes = sub(end-1:-1:2, :);
+0299         <span class="keyword">else</span>
+0300             newNodes = sub(2:end-1, :);
+0301         <span class="keyword">end</span>
+0302 
+0303         newNodeInds = (1:size(newNodes, 1)) + size(nodes2, 1);
+0304         nodes2 = [nodes2; newNodes]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0305         newFace = [newFace newNodeInds]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0306 
+0307         <span class="comment">% add new edges</span>
+0308         newEdges = [[nextInd newNodeInds]' [newNodeInds ind0]'];
+0309         edges2 = [edges2 ; newEdges]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0310     <span class="keyword">end</span>
+0311     
+0312     <span class="comment">% ensure new face is CCW-oriented</span>
+0313     <span class="keyword">if</span> <a href="../../matGeom/polygons2d/polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>(nodes2(newFace, :)) &lt; 0
+0314         newFace = newFace([1 end:-1:2]);
+0315     <span class="keyword">end</span>
+0316     
+0317     <span class="comment">% add the new face to the set of new faces</span>
+0318     faces2{iFace2} = newFace;
+0319     iFace2 = iFace2 + 1;
+0320 <span class="keyword">end</span>
+0321</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

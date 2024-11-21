@@ -1,0 +1,344 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of centroidalVoronoi2d_MC</title>
+  <meta name="keywords" content="centroidalVoronoi2d_MC">
+  <meta name="description" content="CENTROIDALVORONOI2D_MC Centroidal Voronoi tesselation by Monte-Carlo.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; centroidalVoronoi2d_MC.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>centroidalVoronoi2d_MC
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CENTROIDALVORONOI2D_MC Centroidal Voronoi tesselation by Monte-Carlo.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [germs, germPaths] = centroidalVoronoi2d_MC(germs, poly, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CENTROIDALVORONOI2D_MC Centroidal Voronoi tesselation by Monte-Carlo.
+
+   PTS = centroidalVoronoi2d_MC(NPTS, POLY)
+   Generate points in a polygon based on centroidal voronoi tesselation.
+   Centroidal germs can be computed by using the Llyod's algorithm:
+   1) initial germs are chosen at random within polygon
+   2) voronoi polygon of the germs is computed
+   3) the centroids of each domain are computed, and used as germs of the
+   next iteration
+
+   This version uses a Monte-Carlo version of Llyod's algorithm. The
+   centroids are not computed explicitly, but approximated by sampling N
+   points within the bounding polygon. 
+
+   [PTS, PATHLIST] = centroidalVoronoi2d_MC(NPTS, POLY)
+   Also returns the path of each germs at each iteration. The result
+   PATHLIST is a cell array with as many cells as the number of germs,
+   containing in each cell the successive positions of the germ.
+
+   PTS = centroidalVoronoi2d_MC(.., PARAM, VALUE)
+   Specify one or several optional arguments. PARAM can be one of:
+   * 'nIter'   specifies the number of iterations of the algorithm
+       (default is 50)
+   * 'nPoints' number of points for updating positions of germs at each
+       iteration. Default is 200 times the number of germs.
+   * 'verbose' display iteration number. Default is false.
+
+   Example
+     poly = ellipseToPolygon([50 50 40 30 20], 200);
+     nGerms = 100;
+     germs = centroidalVoronoi2d(nGerms, poly);
+     figure; hold on;
+     drawPolygon(poly, 'k');
+     drawPoint(germs, 'bo');
+     axis equal; axis([0 100 10 90]);
+     % extract regions of the CVD
+     box = polygonBounds(poly);
+     [n, e] = boundedVoronoi2d(box, germs);
+     [n2, e2] = clipGraphPolygon(n, e, poly);
+     drawGraphEdges(n2, e2, 'b');
+
+   See also
+   graphs, <a href="boundedVoronoi2d.html" class="code" title="function [nodes, edges, faces] = boundedVoronoi2d(box, germs)">boundedVoronoi2d</a>, <a href="centroidalVoronoi2d.html" class="code" title="function [germs, germPaths] = centroidalVoronoi2d(germs, poly, varargin)">centroidalVoronoi2d</a>
+
+   Rewritten from programs found in
+   http://people.scs.fsu.edu/~burkardt/m_src/cvt/cvt.html
+
+   Reference:
+    Qiang Du, Vance Faber, and Max Gunzburger,
+    Centroidal Voronoi Tessellations: Applications and Algorithms,
+    SIAM Review, Volume 41, 1999, pages 637-676.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>	CENTROID Compute centroid (center of mass) of a set of points.</li><li><a href="../../matGeom/polygons2d/polygonBounds.html" class="code" title="function box = polygonBounds(polygon)">polygonBounds</a>	POLYGONBOUNDS Computes the bounding box of a polygon.</li><li><a href="../../matGeom/polygons2d/polygonContains.html" class="code" title="function varargout = polygonContains(poly, point)">polygonContains</a>	POLYGONCONTAINS Test if a point is contained in a multiply connected polygon.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function pts = generatePointsInPoly(nPts)</a></li><li><a href="#_sub2" class="code">function pts = generateQRandPointsInPoly(nPts)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [germs, germPaths] = centroidalVoronoi2d_MC(germs, poly, varargin)</a>
+0002 <span class="comment">%CENTROIDALVORONOI2D_MC Centroidal Voronoi tesselation by Monte-Carlo.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PTS = centroidalVoronoi2d_MC(NPTS, POLY)</span>
+0005 <span class="comment">%   Generate points in a polygon based on centroidal voronoi tesselation.</span>
+0006 <span class="comment">%   Centroidal germs can be computed by using the Llyod's algorithm:</span>
+0007 <span class="comment">%   1) initial germs are chosen at random within polygon</span>
+0008 <span class="comment">%   2) voronoi polygon of the germs is computed</span>
+0009 <span class="comment">%   3) the centroids of each domain are computed, and used as germs of the</span>
+0010 <span class="comment">%   next iteration</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   This version uses a Monte-Carlo version of Llyod's algorithm. The</span>
+0013 <span class="comment">%   centroids are not computed explicitly, but approximated by sampling N</span>
+0014 <span class="comment">%   points within the bounding polygon.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   [PTS, PATHLIST] = centroidalVoronoi2d_MC(NPTS, POLY)</span>
+0017 <span class="comment">%   Also returns the path of each germs at each iteration. The result</span>
+0018 <span class="comment">%   PATHLIST is a cell array with as many cells as the number of germs,</span>
+0019 <span class="comment">%   containing in each cell the successive positions of the germ.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   PTS = centroidalVoronoi2d_MC(.., PARAM, VALUE)</span>
+0022 <span class="comment">%   Specify one or several optional arguments. PARAM can be one of:</span>
+0023 <span class="comment">%   * 'nIter'   specifies the number of iterations of the algorithm</span>
+0024 <span class="comment">%       (default is 50)</span>
+0025 <span class="comment">%   * 'nPoints' number of points for updating positions of germs at each</span>
+0026 <span class="comment">%       iteration. Default is 200 times the number of germs.</span>
+0027 <span class="comment">%   * 'verbose' display iteration number. Default is false.</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%   Example</span>
+0030 <span class="comment">%     poly = ellipseToPolygon([50 50 40 30 20], 200);</span>
+0031 <span class="comment">%     nGerms = 100;</span>
+0032 <span class="comment">%     germs = centroidalVoronoi2d(nGerms, poly);</span>
+0033 <span class="comment">%     figure; hold on;</span>
+0034 <span class="comment">%     drawPolygon(poly, 'k');</span>
+0035 <span class="comment">%     drawPoint(germs, 'bo');</span>
+0036 <span class="comment">%     axis equal; axis([0 100 10 90]);</span>
+0037 <span class="comment">%     % extract regions of the CVD</span>
+0038 <span class="comment">%     box = polygonBounds(poly);</span>
+0039 <span class="comment">%     [n, e] = boundedVoronoi2d(box, germs);</span>
+0040 <span class="comment">%     [n2, e2] = clipGraphPolygon(n, e, poly);</span>
+0041 <span class="comment">%     drawGraphEdges(n2, e2, 'b');</span>
+0042 <span class="comment">%</span>
+0043 <span class="comment">%   See also</span>
+0044 <span class="comment">%   graphs, boundedVoronoi2d, centroidalVoronoi2d</span>
+0045 <span class="comment">%</span>
+0046 <span class="comment">%   Rewritten from programs found in</span>
+0047 <span class="comment">%   http://people.scs.fsu.edu/~burkardt/m_src/cvt/cvt.html</span>
+0048 <span class="comment">%</span>
+0049 <span class="comment">%   Reference:</span>
+0050 <span class="comment">%    Qiang Du, Vance Faber, and Max Gunzburger,</span>
+0051 <span class="comment">%    Centroidal Voronoi Tessellations: Applications and Algorithms,</span>
+0052 <span class="comment">%    SIAM Review, Volume 41, 1999, pages 637-676.</span>
+0053 <span class="comment">%</span>
+0054 
+0055 <span class="comment">% ------</span>
+0056 <span class="comment">% Author: David Legland</span>
+0057 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0058 <span class="comment">% Created: 2012-02-23, using Matlab 7.9.0.529 (R2009b)</span>
+0059 <span class="comment">% Copyright 2012-2024 INRA - Cepia Software Platform</span>
+0060 
+0061 <span class="comment">%% Parse input arguments</span>
+0062 
+0063 <span class="comment">% number of germs</span>
+0064 <span class="keyword">if</span> isscalar(germs)
+0065     nGerms = germs;
+0066     germs = [];
+0067 <span class="keyword">else</span>
+0068     nGerms = size(germs, 1);
+0069 <span class="keyword">end</span>
+0070 
+0071 <span class="comment">% random point generator</span>
+0072 <span class="comment">% Should be either empty (-&gt; use random generator) or be an instance of</span>
+0073 <span class="comment">% quasi-random sequence generator sucha as haltonset or sobolset.</span>
+0074 generator = [];
+0075 
+0076 <span class="comment">% Number of points</span>
+0077 nPts = 200 * nGerms;
+0078 
+0079 <span class="comment">% Number of iterations</span>
+0080 nIter = 50;
+0081 
+0082 verbose = false;
+0083 
+0084 keepPaths = nargout &gt; 1;
+0085 
+0086 <span class="keyword">while</span> length(varargin) &gt; 1
+0087     paramName = varargin{1};
+0088     <span class="keyword">switch</span> lower(paramName)
+0089         <span class="keyword">case</span> <span class="string">'verbose'</span>
+0090             verbose = varargin{2};
+0091         <span class="keyword">case</span> <span class="string">'niter'</span>
+0092             nIter = varargin{2};
+0093         <span class="keyword">case</span> <span class="string">'npoints'</span>
+0094             nPts = varargin{2};
+0095         <span class="keyword">case</span> <span class="string">'generator'</span>
+0096             generator = varargin{2};
+0097 
+0098             <span class="comment">% ensure generator is a stream</span>
+0099             <span class="keyword">if</span> isa(generator, <span class="string">'qrandset'</span>)
+0100                 generator = qrandstream(generator);
+0101             <span class="keyword">elseif</span> isa(generator, <span class="string">'qrandstream'</span>)
+0102                 <span class="comment">% ok, nothing to do...</span>
+0103             <span class="keyword">else</span>
+0104                 error(<span class="string">'quasi-random generator is not properly specified'</span>);
+0105             <span class="keyword">end</span>
+0106             
+0107         <span class="keyword">otherwise</span>
+0108             error([<span class="string">'Unknown parameter name: '</span> paramName]);
+0109     <span class="keyword">end</span>
+0110 
+0111     varargin(1:2) = [];
+0112 <span class="keyword">end</span>
+0113 
+0114 
+0115 <span class="comment">%% Initialisations</span>
+0116 
+0117 <span class="comment">% bounding box of polygon</span>
+0118 box = <a href="../../matGeom/polygons2d/polygonBounds.html" class="code" title="function box = polygonBounds(polygon)">polygonBounds</a>(poly);
+0119 
+0120 <span class="comment">% init germs if needed</span>
+0121 <span class="keyword">if</span> isempty(germs)
+0122     <span class="keyword">if</span> isempty(generator)
+0123         germs = <a href="#_sub1" class="code" title="subfunction pts = generatePointsInPoly(nPts)">generatePointsInPoly</a>(nGerms);
+0124     <span class="keyword">else</span>
+0125         germs = <a href="#_sub2" class="code" title="subfunction pts = generateQRandPointsInPoly(nPts)">generateQRandPointsInPoly</a>(nGerms);
+0126     <span class="keyword">end</span>
+0127 <span class="keyword">end</span>
+0128 germIters = cell(nIter, 1);
+0129 
+0130 
+0131 <span class="comment">%% Iteration of the Lloyd algorithm</span>
+0132 
+0133 <span class="keyword">for</span> i = 1:nIter
+0134      <span class="keyword">if</span> verbose
+0135         disp(sprintf(<span class="string">'Iteration: %d/%d'</span>, i, nIter)); <span class="comment">%#ok&lt;DSPS&gt;</span>
+0136     <span class="keyword">end</span>
+0137     
+0138     <span class="keyword">if</span> keepPaths
+0139         germIters{i} = germs;
+0140     <span class="keyword">end</span>
+0141     
+0142     <span class="comment">% random uniform points in polygon</span>
+0143     <span class="keyword">if</span> verbose
+0144         disp(<span class="string">'  generate points'</span>);
+0145     <span class="keyword">end</span>
+0146     <span class="keyword">if</span> isempty(generator)
+0147         points = <a href="#_sub1" class="code" title="subfunction pts = generatePointsInPoly(nPts)">generatePointsInPoly</a>(nPts);
+0148     <span class="keyword">else</span>
+0149         points = <a href="#_sub2" class="code" title="subfunction pts = generateQRandPointsInPoly(nPts)">generateQRandPointsInPoly</a>(nPts);
+0150     <span class="keyword">end</span>
+0151     
+0152     <span class="comment">% for each point, determines index of the closest germ</span>
+0153     <span class="keyword">if</span> verbose
+0154         disp(<span class="string">'  find closest germ'</span>);
+0155     <span class="keyword">end</span>
+0156     ind = zeros(nPts, 1);
+0157     <span class="keyword">for</span> iPoint = 1:nPts
+0158         x0 = points(iPoint, 1);
+0159         y0 = points(iPoint, 2);
+0160         [tmp, ind(iPoint)] = min((germs(:,1)-x0).^2 + (germs(:,2)-y0).^2); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0161     <span class="keyword">end</span>
+0162 
+0163     <span class="comment">% update the position of each germ</span>
+0164     <span class="keyword">if</span> verbose
+0165         disp(<span class="string">'  update germ position'</span>);
+0166     <span class="keyword">end</span>
+0167     <span class="keyword">for</span> iGerm = 1:nGerms
+0168         germs(iGerm,:) = <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>(points(ind == iGerm, :));
+0169     <span class="keyword">end</span>
+0170     
+0171 <span class="keyword">end</span>
+0172 
+0173 
+0174 <span class="comment">%% Evenutally compute germs trajectories</span>
+0175 
+0176 <span class="keyword">if</span> nargout &gt; 1
+0177     <span class="comment">% init</span>
+0178     germPaths = cell(nGerms, 1);
+0179     path = zeros(nIter+1, 2);
+0180     
+0181     <span class="comment">% Iteration on germs</span>
+0182     <span class="keyword">for</span> i = 1:nGerms
+0183         
+0184         <span class="comment">% create path corresponding to germ</span>
+0185         <span class="keyword">for</span> j = 1:nIter
+0186             pts = germIters{j};
+0187             path(j,:) = pts(i,:);
+0188         <span class="keyword">end</span>
+0189         path(nIter+1, :) = germs(i,:);
+0190         
+0191         germPaths{i} = path;
+0192     <span class="keyword">end</span>
+0193 <span class="keyword">end</span>
+0194 
+0195 <a name="_sub1" href="#_subfunctions" class="code">function pts = generatePointsInPoly(nPts)</a>
+0196     <span class="comment">% extreme coordinates</span>
+0197     xmin = box(1);  xmax = box(2);
+0198     ymin = box(3);  ymax = box(4);
+0199     
+0200     <span class="comment">% compute size of box</span>
+0201     dx = xmax - xmin;
+0202     dy = ymax - ymin;
+0203     
+0204     <span class="comment">% allocate memory for result</span>
+0205     pts = zeros(nPts, 2);
+0206 
+0207     <span class="comment">% iterate until all points have been sampled within the polygon</span>
+0208     ind = (1:nPts)';
+0209     <span class="keyword">while</span> ~isempty(ind)
+0210         NI = length(ind);
+0211         x = rand(NI, 1) * dx + xmin;
+0212         y = rand(NI, 1) * dy + ymin;
+0213         pts(ind, :) = [x y];
+0214         
+0215         ind = ind(~<a href="../../matGeom/polygons2d/polygonContains.html" class="code" title="function varargout = polygonContains(poly, point)">polygonContains</a>(poly, pts(ind, :)));
+0216     <span class="keyword">end</span>
+0217 <span class="keyword">end</span>
+0218 
+0219 <a name="_sub2" href="#_subfunctions" class="code">function pts = generateQRandPointsInPoly(nPts)</a>
+0220     <span class="comment">% extreme coordinates</span>
+0221     xmin = box(1);  xmax = box(2);
+0222     ymin = box(3);  ymax = box(4);
+0223     
+0224     <span class="comment">% compute size of box</span>
+0225     dx = xmax - xmin;
+0226     dy = ymax - ymin;
+0227     
+0228     <span class="comment">% allocate memory for result</span>
+0229     pts = zeros(nPts, 2);
+0230 
+0231     <span class="comment">% iterate until all points have been sampled within the polygon</span>
+0232     ind = (1:nPts)';
+0233     <span class="keyword">while</span> ~isempty(ind)
+0234         NI = length(ind);
+0235         pts0 = qrand(generator, NI);
+0236         x = pts0(:, 1) * dx + xmin;
+0237         y = pts0(:, 2) * dy + ymin;
+0238         pts(ind, :) = [x y];
+0239         
+0240         ind = ind(~<a href="../../matGeom/polygons2d/polygonContains.html" class="code" title="function varargout = polygonContains(poly, point)">polygonContains</a>(poly, pts(ind, :)));
+0241     <span class="keyword">end</span>
+0242 <span class="keyword">end</span>
+0243 
+0244 <span class="keyword">end</span>
+0245</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

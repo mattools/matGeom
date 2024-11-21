@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of edgePoint</title>
+  <meta name="keywords" content="edgePoint">
+  <meta name="description" content="EDGEPOINT Extract a point from an edge.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; edgePoint.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>edgePoint
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>EDGEPOINT Extract a point from an edge.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function point = edgePoint(edge, pos) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">EDGEPOINT Extract a point from an edge.
+
+   POINT = edgePoint(EDGE, POS)
+   EDGE is a N-by-4 array containing the edges
+   POS is comprised between 0 (first point of edge) and 1 (last
+   point of the edge).
+
+   Example
+       edge = [10 10 20 10];
+       edgePoint(edge, 0)
+       [10 10]
+       edgePoint(edge, 0.5)
+       [15 15]
+       edgePoint(edge, 1)
+       [20 20]
+
+   See also
+     <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="distancePointEdge.html" class="code" title="function [dist, pos] = distancePointEdge(point, edge)">distancePointEdge</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function point = edgePoint(edge, pos)</a>
+0002 <span class="comment">%EDGEPOINT Extract a point from an edge.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POINT = edgePoint(EDGE, POS)</span>
+0005 <span class="comment">%   EDGE is a N-by-4 array containing the edges</span>
+0006 <span class="comment">%   POS is comprised between 0 (first point of edge) and 1 (last</span>
+0007 <span class="comment">%   point of the edge).</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   Example</span>
+0010 <span class="comment">%       edge = [10 10 20 10];</span>
+0011 <span class="comment">%       edgePoint(edge, 0)</span>
+0012 <span class="comment">%       [10 10]</span>
+0013 <span class="comment">%       edgePoint(edge, 0.5)</span>
+0014 <span class="comment">%       [15 15]</span>
+0015 <span class="comment">%       edgePoint(edge, 1)</span>
+0016 <span class="comment">%       [20 20]</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%   See also</span>
+0019 <span class="comment">%     edges2d, distancePointEdge</span>
+0020 
+0021 <span class="comment">% ------</span>
+0022 <span class="comment">% Author: Guilherme Froes Silva</span>
+0023 <span class="comment">% E-mail: g.froessilva@qut.edu.au</span>
+0024 <span class="comment">% Created: 2022-09-12, using MATLAB 9.12.0.1927505 (R2022a) Update 1</span>
+0025 <span class="comment">% Copyright 2022-2024</span>
+0026 
+0027 <span class="comment">% number of points to compute</span>
+0028 Np = size(pos,1);
+0029 
+0030 <span class="comment">% % number of vertices in polyline</span>
+0031 Ne = size(edge, 1);
+0032 
+0033 <span class="comment">% allocate memory results</span>
+0034 point = cell(Np, Ne);
+0035 
+0036 <span class="comment">% iterate on points</span>
+0037 <span class="keyword">for</span> i=1:Np
+0038     <span class="keyword">for</span> j = 1:Ne
+0039         <span class="comment">% compute index of edge (between 0 and 1)</span>
+0040         ind = floor(pos(i,j));
+0041 
+0042         <span class="comment">% special case of last point of edge</span>
+0043         <span class="keyword">if</span> ind==1            
+0044             <span class="keyword">if</span> size(edge,2)&gt;4
+0045                 point{i,j} = edge(j,4:6);
+0046             <span class="keyword">else</span>
+0047                 point{i,j} = edge(j,3:4);
+0048             <span class="keyword">end</span>
+0049             <span class="keyword">continue</span>;
+0050         <span class="keyword">elseif</span> pos(i,j)==0
+0051             <span class="keyword">if</span> size(edge,2)&gt;4
+0052                 point{i,j} = edge(j,1:3);
+0053             <span class="keyword">else</span>
+0054                 point{i,j} = edge(j,1:2);
+0055             <span class="keyword">end</span>
+0056             <span class="keyword">continue</span>;
+0057         <span class="keyword">end</span>
+0058 
+0059         <span class="comment">% format index to ensure being on polyline</span>
+0060 <span class="comment">%         ind = min(max(ind, 0), 1);</span>
+0061 
+0062         <span class="comment">% position on current edge j</span>
+0063         t = pos(i,j);
+0064 
+0065         <span class="comment">% parameters of current edge j</span>
+0066         x0 = edge(j, 1);
+0067         y0 = edge(j, 2);
+0068         dx = edge(j, 3) - x0;
+0069         dy = edge(j, 4) - y0;
+0070         <span class="keyword">if</span> size(edge,2)&gt;4
+0071             z0 = edge(j, 5);
+0072             dz = edge(j, 6) - z0;
+0073         <span class="keyword">end</span>
+0074         <span class="comment">% compute position of current point</span>
+0075         <span class="keyword">if</span> size(edge,2)&gt;4
+0076             point{i, j} = [x0+t*dx, y0+t*dy, z0+t*dz];
+0077         <span class="keyword">else</span>
+0078             point{i, j} = [x0+t*dx, y0+t*dy];
+0079         <span class="keyword">end</span>
+0080     <span class="keyword">end</span>
+0081 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

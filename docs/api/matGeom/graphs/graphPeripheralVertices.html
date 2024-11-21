@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of graphPeripheralVertices</title>
+  <meta name="keywords" content="graphPeripheralVertices">
+  <meta name="description" content="GRAPHPERIPHERALVERTICES Peripheral vertices of a graph.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; graphPeripheralVertices.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>graphPeripheralVertices
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>GRAPHPERIPHERALVERTICES Peripheral vertices of a graph.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function inds = graphPeripheralVertices(v, e, l) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">GRAPHPERIPHERALVERTICES Peripheral vertices of a graph.
+
+   INDS = graphPeripheralVertices(V, E)
+   Return indices of peripheral vertices, that is, vertices whose
+   eccentricity is maximal and equal to the diameter of the graph.
+
+   INDS = graphPeripheralVertices(V, E, L)
+   Specify length of each edge. Default is 1 for each edge.
+
+
+   Example
+     nodes = [20 20;20 50;20 80;50 50;80 20;80 50;80 80];
+     edges = [1 2;2 3;2 4;4 6;5 6;6 7];
+     figure; drawGraph(nodes, edges);
+     axis([0 100 0 100]); axis equal; hold on
+     INDP = graphPeripheralVertices(nodes, edges);
+     INDP = 
+         1
+         3
+         5
+         7
+         
+
+   See also
+   <a href="grPropagateDistance.html" class="code" title="function d = grPropagateDistance(v, e, v0, l)">grPropagateDistance</a>, <a href="grVertexEccentricity.html" class="code" title="function g = grVertexEccentricity(v, e, l, inds)">grVertexEccentricity</a>
+   <a href="graphCenter.html" class="code" title="function center = graphCenter(v, e, l)">graphCenter</a>, <a href="graphDiameter.html" class="code" title="function diam = graphDiameter(v, e, l)">graphDiameter</a>, <a href="graphRadius.html" class="code" title="function r = graphRadius(v, e, l)">graphRadius</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="grVertexEccentricity.html" class="code" title="function g = grVertexEccentricity(v, e, l, inds)">grVertexEccentricity</a>	GRVERTEXECCENTRICITY Eccentricity of vertices in the graph.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="grFindMaximalLengthPath.html" class="code" title="function path = grFindMaximalLengthPath(nodes, edges, edgeWeights)">grFindMaximalLengthPath</a>	GRFINDMAXIMALLENGTHPATH Find a path that maximizes sum of edge weights.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function inds = graphPeripheralVertices(v, e, l)</a>
+0002 <span class="comment">%GRAPHPERIPHERALVERTICES Peripheral vertices of a graph.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   INDS = graphPeripheralVertices(V, E)</span>
+0005 <span class="comment">%   Return indices of peripheral vertices, that is, vertices whose</span>
+0006 <span class="comment">%   eccentricity is maximal and equal to the diameter of the graph.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   INDS = graphPeripheralVertices(V, E, L)</span>
+0009 <span class="comment">%   Specify length of each edge. Default is 1 for each edge.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%     nodes = [20 20;20 50;20 80;50 50;80 20;80 50;80 80];</span>
+0014 <span class="comment">%     edges = [1 2;2 3;2 4;4 6;5 6;6 7];</span>
+0015 <span class="comment">%     figure; drawGraph(nodes, edges);</span>
+0016 <span class="comment">%     axis([0 100 0 100]); axis equal; hold on</span>
+0017 <span class="comment">%     INDP = graphPeripheralVertices(nodes, edges);</span>
+0018 <span class="comment">%     INDP =</span>
+0019 <span class="comment">%         1</span>
+0020 <span class="comment">%         3</span>
+0021 <span class="comment">%         5</span>
+0022 <span class="comment">%         7</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   See also</span>
+0026 <span class="comment">%   grPropagateDistance, grVertexEccentricity</span>
+0027 <span class="comment">%   graphCenter, graphDiameter, graphRadius</span>
+0028 
+0029 <span class="comment">% ------</span>
+0030 <span class="comment">% Author: David Legland</span>
+0031 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0032 <span class="comment">% Created: 2010-09-07, using Matlab 7.9.0.529 (R2009b)</span>
+0033 <span class="comment">% Copyright 2010-2024 INRA - Cepia Software Platform</span>
+0034 
+0035 <span class="comment">% ensure there is a valid length array</span>
+0036 <span class="keyword">if</span> nargin&lt;3
+0037     l = ones(size(e,1), 1);
+0038 <span class="keyword">end</span>
+0039 
+0040 g = <a href="grVertexEccentricity.html" class="code" title="function g = grVertexEccentricity(v, e, l, inds)">grVertexEccentricity</a>(v, e, l);
+0041 
+0042 inds = find(g==max(g));</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

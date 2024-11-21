@@ -37,19 +37,14 @@
    The steiner point is computed the same way as the polygon centroid,
    except that a weight depending on the angle is given to each vertex.
 
-   See also:
-   polygons2d, <a href="polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>, <a href="polygonCentroid.html" class="code" title="function [centroid, area] = polygonCentroid(varargin)">polygonCentroid</a>, <a href="drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a>
-
-   ---------
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 11/11/2004.</pre></div>
+   See also
+   polygons2d, <a href="polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>, <a href="polygonCentroid.html" class="code" title="function [centroid, area, Sx, Sy] = polygonCentroid(varargin)">polygonCentroid</a>, <a href="drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>	Compute the signed area of a polygon.</li></ul>
+<li><a href="polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>	POLYGONAREA Compute the signed area of a polygon.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 </ul>
@@ -69,37 +64,36 @@ This function is called by:
 0009 <span class="comment">%   The steiner point is computed the same way as the polygon centroid,</span>
 0010 <span class="comment">%   except that a weight depending on the angle is given to each vertex.</span>
 0011 <span class="comment">%</span>
-0012 <span class="comment">%   See also:</span>
+0012 <span class="comment">%   See also</span>
 0013 <span class="comment">%   polygons2d, polygonArea, polygonCentroid, drawPolygon</span>
-0014 <span class="comment">%</span>
-0015 <span class="comment">%   ---------</span>
-0016 <span class="comment">%   author : David Legland</span>
-0017 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0018 <span class="comment">%   created the 11/11/2004.</span>
-0019 <span class="comment">%</span>
+0014 
+0015 <span class="comment">% ------</span>
+0016 <span class="comment">% Author: David Legland</span>
+0017 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0018 <span class="comment">% Created: 2004-11-11</span>
+0019 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0020 
-0021 
-0022 <span class="keyword">if</span> nargin==1
-0023     var = varargin{1};
-0024     px = var(:,1);
-0025     py = var(:,2);
-0026 <span class="keyword">elseif</span> nargin==2
-0027     px = varargin{1};
-0028     py = varargin{2};
-0029 <span class="keyword">end</span>
-0030 
-0031 <span class="comment">% Algorithme P. Bourke</span>
-0032 sx = 0;
-0033 sy = 0;
-0034 N = length(px);
-0035 <span class="keyword">for</span> i=1:N-1
-0036     sx = sx + (px(i)+px(i+1))*(px(i)*py(i+1) - px(i+1)*py(i));
-0037     sy = sy + (py(i)+py(i+1))*(px(i)*py(i+1) - px(i+1)*py(i));
-0038 <span class="keyword">end</span>
-0039 sx = sx + (px(N)+px(1))*(px(N)*py(1) - px(1)*py(N));
-0040 sy = sy + (py(N)+py(1))*(px(N)*py(1) - px(1)*py(N));
-0041 
-0042 pt = [sx sy]/6/<a href="polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>(px, py);</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0021 <span class="keyword">if</span> nargin==1
+0022     var = varargin{1};
+0023     px = var(:,1);
+0024     py = var(:,2);
+0025 <span class="keyword">elseif</span> nargin==2
+0026     px = varargin{1};
+0027     py = varargin{2};
+0028 <span class="keyword">end</span>
+0029 
+0030 <span class="comment">% Algorithme P. Bourke</span>
+0031 sx = 0;
+0032 sy = 0;
+0033 N = length(px);
+0034 <span class="keyword">for</span> i=1:N-1
+0035     sx = sx + (px(i)+px(i+1))*(px(i)*py(i+1) - px(i+1)*py(i));
+0036     sy = sy + (py(i)+py(i+1))*(px(i)*py(i+1) - px(i+1)*py(i));
+0037 <span class="keyword">end</span>
+0038 sx = sx + (px(N)+px(1))*(px(N)*py(1) - px(1)*py(N));
+0039 sy = sy + (py(N)+py(1))*(px(N)*py(1) - px(1)*py(N));
+0040 
+0041 pt = [sx sy]/6/<a href="polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>(px, py);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

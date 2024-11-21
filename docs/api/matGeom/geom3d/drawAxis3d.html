@@ -52,19 +52,13 @@
    xlabel X; ylabel Y; zlabel Z
 
    See also
-   <a href="drawAxisCube.html" class="code" title="function p = drawAxisCube(varargin)">drawAxisCube</a>
-
- ------
- Author: David Legland
- e-mail: david.legland@nantes.inra.fr
- Created: 2007-08-14,    using Matlab 7.4.0.287 (R2007a)
- Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</pre></div>
+     <a href="drawAxisCube.html" class="code" title="function p = drawAxisCube(varargin)">drawAxisCube</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="drawArrow3d.html" class="code" title="function varargout = drawArrow3d(pos, vec, varargin)">drawArrow3d</a>	DRAWARROW3D plot a quiver of 3D arrows.</li><li><a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a>	DRAWSPHERE Draw a sphere as a mesh.</li><li><a href="isTransform3d.html" class="code" title="function a = isTransform3d(trans, varargin)">isTransform3d</a>	ISTRANSFORM3D Check if input is a affine transformation matrix.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li><li><a href="transformVector3d.html" class="code" title="function varargout = transformVector3d(varargin)">transformVector3d</a>	TRANSFORMVECTOR3D Transform a vector with a 3D affine transform.</li></ul>
+<li><a href="drawArrow3d.html" class="code" title="function varargout = drawArrow3d(varargin)">drawArrow3d</a>	DRAWARROW3D Plot a quiver of 3D arrows.</li><li><a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a>	DRAWSPHERE Draw a sphere as a mesh.</li><li><a href="isTransform3d.html" class="code" title="function a = isTransform3d(trans, varargin)">isTransform3d</a>	ISTRANSFORM3D Check if input is a affine transformation matrix.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li><li><a href="transformVector3d.html" class="code" title="function varargout = transformVector3d(varargin)">transformVector3d</a>	TRANSFORMVECTOR3D Transform a vector with a 3D affine transform.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 </ul>
@@ -99,57 +93,62 @@ This function is called by:
 0024 <span class="comment">%   xlabel X; ylabel Y; zlabel Z</span>
 0025 <span class="comment">%</span>
 0026 <span class="comment">%   See also</span>
-0027 <span class="comment">%   drawAxisCube</span>
+0027 <span class="comment">%     drawAxisCube</span>
 0028 <span class="comment">%</span>
-0029 <span class="comment">% ------</span>
-0030 <span class="comment">% Author: David Legland</span>
-0031 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
-0032 <span class="comment">% Created: 2007-08-14,    using Matlab 7.4.0.287 (R2007a)</span>
-0033 <span class="comment">% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
-0034 
-0035 <span class="comment">% Check if axes handle is specified</span>
-0036 hAx = gca;
-0037 <span class="keyword">if</span> ~isempty(varargin)
-0038     <span class="keyword">if</span> isAxisHandle(varargin{1})
-0039         hAx = varargin{1};
-0040         varargin(1)=[];
-0041     <span class="keyword">end</span>
-0042 <span class="keyword">end</span>
-0043 
-0044 <span class="comment">% Parsing</span>
-0045 p = inputParser;
-0046 addOptional(p,<span class="string">'L'</span>,1, @(x)validateattributes(x,{<span class="string">'numeric'</span>},<span class="keyword">...</span>
-0047     {<span class="string">'scalar'</span>,<span class="string">'nonempty'</span>,<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'positive'</span>,<span class="string">'nonnan'</span>}));
-0048 addOptional(p,<span class="string">'R'</span>,[], @(x)validateattributes(x,{<span class="string">'numeric'</span>},<span class="keyword">...</span>
-0049     {<span class="string">'scalar'</span>,<span class="string">'nonempty'</span>,<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'positive'</span>,<span class="string">'nonnan'</span>}));
-0050 addParameter(p,<span class="string">'TFM'</span>,eye(4), @<a href="isTransform3d.html" class="code" title="function a = isTransform3d(trans, varargin)">isTransform3d</a>);
-0051 parse(p,varargin{:});
-0052 
-0053 L = p.Results.L;
-0054 R = p.Results.R;
-0055 <span class="keyword">if</span> isempty(R)
-0056     R=L/10;
-0057 <span class="keyword">elseif</span> R/L &gt; 0.1
-0058     R = (0.1-eps)*L;
-0059     warning(<span class="string">'Value of R is invalid and was ignored!'</span>)
-0060 <span class="keyword">end</span>
-0061 TFM = p.Results.TFM;
-0062 
-0063 <span class="comment">% geometrical data</span>
-0064 origin = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(zeros(3,3), TFM);
-0065 vector = <a href="transformVector3d.html" class="code" title="function varargout = transformVector3d(varargin)">transformVector3d</a>(eye(3,3), TFM);
-0066 color = eye(3,3);
+0029 
+0030 <span class="comment">% ------</span>
+0031 <span class="comment">% Author: David Legland</span>
+0032 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0033 <span class="comment">% Created: 2007-08-14, using Matlab 7.4.0.287 (R2007a)</span>
+0034 <span class="comment">% Copyright 2007-2024 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas</span>
+0035 
+0036 <span class="comment">% extract handle of axis to draw on</span>
+0037 <span class="keyword">if</span> isempty(varargin)
+0038     hAx = gca;
+0039 <span class="keyword">else</span>
+0040     <span class="keyword">if</span> isAxisHandle(varargin{1})
+0041         hAx = varargin{1};
+0042         varargin(1) = [];
+0043     <span class="keyword">else</span>
+0044         hAx = gca;
+0045     <span class="keyword">end</span>
+0046 <span class="keyword">end</span>
+0047     
+0048 
+0049 <span class="comment">% Parsing</span>
+0050 p = inputParser;
+0051 addOptional(p, <span class="string">'L'</span>, 1, @(x)validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0052     {<span class="string">'scalar'</span>,<span class="string">'nonempty'</span>,<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'positive'</span>,<span class="string">'nonnan'</span>}));
+0053 addOptional(p, <span class="string">'R'</span>, [], @(x)validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0054     {<span class="string">'scalar'</span>,<span class="string">'nonempty'</span>,<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'positive'</span>,<span class="string">'nonnan'</span>}));
+0055 addParameter(p, <span class="string">'TFM'</span>, eye(4), @<a href="isTransform3d.html" class="code" title="function a = isTransform3d(trans, varargin)">isTransform3d</a>);
+0056 parse(p,varargin{:});
+0057 
+0058 L = p.Results.L;
+0059 R = p.Results.R;
+0060 <span class="keyword">if</span> isempty(R)
+0061     R = L/10;
+0062 <span class="keyword">elseif</span> R/L &gt; 0.1
+0063     R = (0.1-eps)*L;
+0064     warning(<span class="string">'Value of R is invalid and was ignored!'</span>)
+0065 <span class="keyword">end</span>
+0066 TFM = p.Results.TFM;
 0067 
-0068 <span class="comment">% draw three arrows and a ball</span>
-0069 hold on;
-0070 sh=<a href="drawArrow3d.html" class="code" title="function varargout = drawArrow3d(pos, vec, varargin)">drawArrow3d</a>(hAx, origin, vector*L, color, <span class="string">'arrowRadius'</span>, R/L);
-0071 sh(4)=<a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a>(hAx,[origin(1,:) 2*R], <span class="string">'faceColor'</span>, <span class="string">'black'</span>);
-0072 gh = hggroup(hAx);
-0073 set(sh,<span class="string">'Parent'</span>,gh)
-0074 
-0075 <span class="keyword">if</span> nargout &gt; 0
-0076     varargout = {gh};
-0077 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0068 <span class="comment">% geometrical data</span>
+0069 origin = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(zeros(3,3), TFM);
+0070 vector = <a href="transformVector3d.html" class="code" title="function varargout = transformVector3d(varargin)">transformVector3d</a>(eye(3,3), TFM);
+0071 color = eye(3,3);
+0072 
+0073 <span class="comment">% draw three arrows and a ball</span>
+0074 hold on;
+0075 sh = <a href="drawArrow3d.html" class="code" title="function varargout = drawArrow3d(varargin)">drawArrow3d</a>(hAx, origin, vector*L, color, <span class="string">'arrowRadius'</span>, R/L);
+0076 sh(4) = <a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a>(hAx, [origin(1,:) 2*R], <span class="string">'faceColor'</span>, <span class="string">'black'</span>);
+0077 gh = hggroup(hAx);
+0078 set(sh, <span class="string">'Parent'</span>, gh)
+0079 
+0080 <span class="keyword">if</span> nargout &gt; 0
+0081     varargout = {gh};
+0082 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

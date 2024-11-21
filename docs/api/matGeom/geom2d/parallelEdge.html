@@ -45,13 +45,7 @@
      drawEdge(parallelEdge(edge2, -50), 'LineWidth', 2, 'color', 'k');
 
    See also
-     <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="parallelLine.html" class="code" title="function res = parallelLine(line, point)">parallelLine</a>, <a href="drawEdge.html" class="code" title="function varargout = drawEdge(varargin)">drawEdge</a>, <a href="centeredEdgeToEdge.html" class="code" title="function edge = centeredEdgeToEdge(cedge)">centeredEdgeToEdge</a>, <a href="edgeToLine.html" class="code" title="function line = edgeToLine(edge)">edgeToLine</a>
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- Created: 2012-07-31,    using Matlab 7.9.0.529 (R2009b)
- Copyright 2012 INRA - Cepia Software Platform.</pre></div>
+     <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="parallelLine.html" class="code" title="function res = parallelLine(line, point)">parallelLine</a>, <a href="drawEdge.html" class="code" title="function varargout = drawEdge(varargin)">drawEdge</a>, <a href="centeredEdgeToEdge.html" class="code" title="function edge = centeredEdgeToEdge(cedge)">centeredEdgeToEdge</a>, <a href="edgeToLine.html" class="code" title="function line = edgeToLine(edge)">edgeToLine</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -86,18 +80,18 @@ This function is called by:
 0018 <span class="comment">%</span>
 0019 <span class="comment">%   See also</span>
 0020 <span class="comment">%     edges2d, parallelLine, drawEdge, centeredEdgeToEdge, edgeToLine</span>
-0021 <span class="comment">%</span>
+0021 
 0022 <span class="comment">% ------</span>
 0023 <span class="comment">% Author: David Legland</span>
-0024 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0025 <span class="comment">% Created: 2012-07-31,    using Matlab 7.9.0.529 (R2009b)</span>
-0026 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
+0024 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0025 <span class="comment">% Created: 2012-07-31, using Matlab 7.9.0.529 (R2009b)</span>
+0026 <span class="comment">% Copyright 2012-2024 INRA - Cepia Software Platform</span>
 0027 
 0028 <span class="comment">% compute the line parallel to the supporting line of edge</span>
 0029 line = <a href="parallelLine.html" class="code" title="function res = parallelLine(line, point)">parallelLine</a>(<a href="edgeToLine.html" class="code" title="function line = edgeToLine(edge)">edgeToLine</a>(edge), dist);
 0030 
 0031 <span class="comment">% result edge is given by line positions 0 and 1.</span>
 0032 res = [line(:, 1:2) line(:, 1:2)+line(:, 3:4)];</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

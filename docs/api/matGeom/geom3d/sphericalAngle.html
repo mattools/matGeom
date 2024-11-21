@@ -64,14 +64,14 @@
          1.5708
  
 
-   See also:
+   See also
    geom3d, <a href="angles3d.html" class="code" title="function angles3d(varargin)">angles3d</a>, <a href="spheres.html" class="code" title="function spheres(varargin)">spheres</a>, sph2cart</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="../../matGeom/geom2d/angle3Points.html" class="code" title="function theta = angle3Points(varargin)">angle3Points</a>	ANGLE3POINTS Compute oriented angle made by 3 points.</li><li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>	NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.</li><li><a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>	PLANEPOSITION Compute position of a point on a plane.</li><li><a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>	PROJPOINTONPLANE Return the orthogonal projection of a point on a plane.</li></ul>
+<li><a href="../../matGeom/geom2d/angle3Points.html" class="code" title="function theta = angle3Points(varargin)">angle3Points</a>	ANGLE3POINTS Compute oriented angle made by 3 points.</li><li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>	NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.</li><li><a href="planePosition.html" class="code" title="function [pos, zp] = planePosition(point, plane)">planePosition</a>	PLANEPOSITION Compute position of a point on a plane.</li><li><a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>	PROJPOINTONPLANE Return the orthogonal projection of a point on a plane.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 </ul>
@@ -118,46 +118,41 @@ This function is called by:
 0036 <span class="comment">%         1.5708</span>
 0037 <span class="comment">%</span>
 0038 <span class="comment">%</span>
-0039 <span class="comment">%   See also:</span>
+0039 <span class="comment">%   See also</span>
 0040 <span class="comment">%   geom3d, angles3d, spheres, sph2cart</span>
 0041 
-0042 <span class="comment">%   ---------</span>
-0043 <span class="comment">%   author : David Legland</span>
-0044 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0045 <span class="comment">%   created the 21/02/2005.</span>
-0046 <span class="comment">%</span>
+0042 <span class="comment">% ------</span>
+0043 <span class="comment">% Author: David Legland</span>
+0044 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0045 <span class="comment">% Created: 2005-02-21</span>
+0046 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0047 
-0048 <span class="comment">%   HISTORY</span>
-0049 <span class="comment">%   23-05-2006 fix bug for points with angle from center &gt; pi/2</span>
-0050 <span class="comment">%   05-06-2013 fix bug for points given as spherical coordinates, better</span>
-0051 <span class="comment">%       support for multiple inputs</span>
-0052 
-0053 <span class="comment">% test if points are given as matlab spherical coordinates</span>
-0054 <span class="keyword">if</span> size(p1, 2) == 2
-0055     [x, y, z] = sph2cart(p1(:,1), p1(:,2), ones(size(p1,1), 1));
-0056     p1 = [x y z];
-0057     [x, y, z] = sph2cart(p2(:,1), p2(:,2), ones(size(p2,1), 1));
-0058     p2 = [x y z];
-0059     [x, y, z] = sph2cart(p3(:,1), p3(:,2), ones(size(p3,1), 1));
-0060     p3 = [x y z];
-0061 <span class="keyword">end</span>
+0048 <span class="comment">% test if points are given as matlab spherical coordinates</span>
+0049 <span class="keyword">if</span> size(p1, 2) == 2
+0050     [x, y, z] = sph2cart(p1(:,1), p1(:,2), ones(size(p1,1), 1));
+0051     p1 = [x y z];
+0052     [x, y, z] = sph2cart(p2(:,1), p2(:,2), ones(size(p2,1), 1));
+0053     p2 = [x y z];
+0054     [x, y, z] = sph2cart(p3(:,1), p3(:,2), ones(size(p3,1), 1));
+0055     p3 = [x y z];
+0056 <span class="keyword">end</span>
+0057 
+0058 <span class="comment">% normalize points</span>
+0059 p1  = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p1);
+0060 p2  = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p2);
+0061 p3  = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p3);
 0062 
-0063 <span class="comment">% normalize points</span>
-0064 p1  = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p1);
-0065 p2  = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p2);
-0066 p3  = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p3);
-0067 
-0068 <span class="comment">% create the plane tangent to the unit sphere and containing central point</span>
-0069 plane = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(p2, p2);
-0070 
-0071 <span class="comment">% project the two other points on the plane</span>
-0072 pp1 = <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>(<a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>(p1, plane), plane);
-0073 pp3 = <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>(<a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>(p3, plane), plane);
-0074 
-0075 <span class="comment">% compute angle on the tangent plane</span>
-0076 pp2 = zeros(max(size(pp1, 1), size(pp3,1)), 2);
-0077 alpha = <a href="../../matGeom/geom2d/angle3Points.html" class="code" title="function theta = angle3Points(varargin)">angle3Points</a>(pp1, pp2, pp3);
-0078</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0063 <span class="comment">% create the plane tangent to the unit sphere and containing central point</span>
+0064 plane = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(p2, p2);
+0065 
+0066 <span class="comment">% project the two other points on the plane</span>
+0067 pp1 = <a href="planePosition.html" class="code" title="function [pos, zp] = planePosition(point, plane)">planePosition</a>(<a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>(p1, plane), plane);
+0068 pp3 = <a href="planePosition.html" class="code" title="function [pos, zp] = planePosition(point, plane)">planePosition</a>(<a href="projPointOnPlane.html" class="code" title="function point = projPointOnPlane(point, plane)">projPointOnPlane</a>(p3, plane), plane);
+0069 
+0070 <span class="comment">% compute angle on the tangent plane</span>
+0071 pp2 = zeros(max(size(pp1, 1), size(pp3,1)), 2);
+0072 alpha = <a href="../../matGeom/geom2d/angle3Points.html" class="code" title="function theta = angle3Points(varargin)">angle3Points</a>(pp1, pp2, pp3);
+0073</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

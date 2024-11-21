@@ -4,7 +4,7 @@
 <head>
   <title>Description of drawSphericalPolygon</title>
   <meta name="keywords" content="drawSphericalPolygon">
-  <meta name="description" content="DRAWSPHERICALPOLYGON  Draw a spherical polygon.">
+  <meta name="description" content="DRAWSPHERICALPOLYGON Draw a spherical polygon.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,33 +21,31 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>DRAWSPHERICALPOLYGON  Draw a spherical polygon.</strong></div>
+<div class="box"><strong>DRAWSPHERICALPOLYGON Draw a spherical polygon.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function varargout = drawSphericalPolygon(sphere, poly, varargin) </strong></div>
+<div class="box"><strong>function varargout = drawSphericalPolygon(varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment">DRAWSPHERICALPOLYGON  Draw a spherical polygon.
+<div class="fragment"><pre class="comment">DRAWSPHERICALPOLYGON Draw a spherical polygon.
 
    output = drawSphericalPolygon(input)
 
    Example
-   drawSphericalPolygon
+     % Draw a non convex spherical polygon on the surface of a sphere
+     sphere = [0 0 0 1];
+     poly = [0 -1 0;0 0 1; [-1 0 1]/sqrt(2); [-1 -1 1]/sqrt(3); [-1 -1 0]/sqrt(2)];
+     figure; hold on; axis equal; drawSphere([0 0 0 1]); view(3);
+     drawSphericalPolygon(sphere, poly, 'LineWidth', 2, 'color', 'b')
 
    See also
-
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- Created: 2012-02-09,    using Matlab 7.9.0.529 (R2009b)
- Copyright 2012 INRA - Cepia Software Platform.</pre></div>
+     <a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a>, <a href="drawSphericalTriangle.html" class="code" title="function varargout = drawSphericalTriangle(varargin)">drawSphericalTriangle</a>, <a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(varargin)">drawSphericalEdge</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>	DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.</li></ul>
+<li><a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(varargin)">drawSphericalEdge</a>	DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 </ul>
@@ -56,37 +54,58 @@ This function is called by:
 
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawSphericalPolygon(sphere, poly, varargin)</a>
-0002 <span class="comment">%DRAWSPHERICALPOLYGON  Draw a spherical polygon.</span>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawSphericalPolygon(varargin)</a>
+0002 <span class="comment">%DRAWSPHERICALPOLYGON Draw a spherical polygon.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   output = drawSphericalPolygon(input)</span>
 0005 <span class="comment">%</span>
 0006 <span class="comment">%   Example</span>
-0007 <span class="comment">%   drawSphericalPolygon</span>
-0008 <span class="comment">%</span>
-0009 <span class="comment">%   See also</span>
-0010 <span class="comment">%</span>
-0011 <span class="comment">%</span>
-0012 <span class="comment">% ------</span>
-0013 <span class="comment">% Author: David Legland</span>
-0014 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0015 <span class="comment">% Created: 2012-02-09,    using Matlab 7.9.0.529 (R2009b)</span>
-0016 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
-0017 
-0018 nv = size(poly, 1);
-0019 
-0020 h = zeros(nv, 1);
-0021 <span class="keyword">for</span> i = 1:nv
-0022     v1 = poly(i, :);
-0023     v2 = poly(mod(i, nv) + 1, :);
-0024 
-0025     h(i) = <a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>(sphere, [v1 v2], varargin{:});
-0026 <span class="keyword">end</span>
-0027 
-0028 
-0029 <span class="keyword">if</span> nargout &gt; 0
-0030     varargout = {h};
-0031 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0007 <span class="comment">%     % Draw a non convex spherical polygon on the surface of a sphere</span>
+0008 <span class="comment">%     sphere = [0 0 0 1];</span>
+0009 <span class="comment">%     poly = [0 -1 0;0 0 1; [-1 0 1]/sqrt(2); [-1 -1 1]/sqrt(3); [-1 -1 0]/sqrt(2)];</span>
+0010 <span class="comment">%     figure; hold on; axis equal; drawSphere([0 0 0 1]); view(3);</span>
+0011 <span class="comment">%     drawSphericalPolygon(sphere, poly, 'LineWidth', 2, 'color', 'b')</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   See also</span>
+0014 <span class="comment">%     drawSphere, drawSphericalTriangle, drawSphericalEdge</span>
+0015 <span class="comment">%</span>
+0016 
+0017 <span class="comment">% ------</span>
+0018 <span class="comment">% Author: David Legland</span>
+0019 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0020 <span class="comment">% Created: 2012-02-09, using Matlab 7.9.0.529 (R2009b)</span>
+0021 <span class="comment">% Copyright 2012-2024 INRA - Cepia Software Platform</span>
+0022 
+0023 <span class="comment">% extract handle of axis to draw on</span>
+0024 [hAx, varargin] = parseAxisHandle(varargin{:});
+0025 
+0026 sphere = varargin{1};
+0027 poly = varargin{2};
+0028 varargin(1:2) = [];
+0029 
+0030 nv = size(poly, 1);
+0031 
+0032 h = zeros(nv, 1);
+0033 
+0034 <span class="comment">% save hold state</span>
+0035 holdState = ishold(hAx);
+0036 hold(hAx, <span class="string">'on'</span>);
+0037 
+0038 <span class="keyword">for</span> i = 1:nv
+0039     v1 = poly(i, :);
+0040     v2 = poly(mod(i, nv) + 1, :);
+0041 
+0042     h(i) = <a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(varargin)">drawSphericalEdge</a>(hAx, sphere, [v1 v2], varargin{:});
+0043 <span class="keyword">end</span>
+0044 
+0045 <span class="comment">% restore hold state</span>
+0046 <span class="keyword">if</span> ~holdState
+0047     hold(hAx, <span class="string">'off'</span>);
+0048 <span class="keyword">end</span>
+0049 
+0050 <span class="keyword">if</span> nargout &gt; 0
+0051     varargout = {h};
+0052 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

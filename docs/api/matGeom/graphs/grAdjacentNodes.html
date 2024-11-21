@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of grAdjacentNodes</title>
+  <meta name="keywords" content="grAdjacentNodes">
+  <meta name="description" content="GRADJACENTNODES Find list of nodes adjacent to a given node.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; grAdjacentNodes.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>grAdjacentNodes
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>GRADJACENTNODES Find list of nodes adjacent to a given node.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function nodes2 = grAdjacentNodes(edges, node) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">GRADJACENTNODES Find list of nodes adjacent to a given node.
+
+   NEIGHS = grAdjacentNodes(EDGES, NODE)
+   EDGES: the complete edges list (containing indices of neighbor nodes)
+   NODE: index of the node
+   NEIGHS: the nodes adjacent to the given node.
+
+   NODE can also be a vector of node indices, in this case the result is
+   the set of neighbors of any input node, excluding the input nodes.
+
+   Example
+     % create a basic graph and display it
+     nodes = [10 10;20 10;10 20;20 20;27 15];
+     edges = [1 2;1 3;2 4;2 5;3 4;4 5];
+     figure; drawGraph(nodes, edges);
+     hold on; drawNodeLabels(nodes, 1:5)
+     axis equal; axis([0 40 0 30]);
+     % compute list of nodes adjacent to node with index 2
+     grAdjacentNodes(edges, 2)
+     ans =
+         1
+         4
+         5
+
+   See also
+     <a href="grAdjacentEdges.html" class="code" title="function neigh = grAdjacentEdges(edges, node)">grAdjacentEdges</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="grClose.html" class="code" title="function varargout = grClose(varargin)">grClose</a>	GRCLOSE Morphological closing on graph.</li><li><a href="grDilate.html" class="code" title="function varargout = grDilate(varargin)">grDilate</a>	GRDILATE Morphological dilation on graph.</li><li><a href="grErode.html" class="code" title="function varargout = grErode(varargin)">grErode</a>	GRERODE Morphological erosion on graph.</li><li><a href="grFindGeodesicPath.html" class="code" title="function path = grFindGeodesicPath(nodes, edges, ind0, ind1, edgeWeights)">grFindGeodesicPath</a>	GRFINDGEODESICPATH Find a geodesic path between two nodes in the graph.</li><li><a href="grFindMaximalLengthPath.html" class="code" title="function path = grFindMaximalLengthPath(nodes, edges, edgeWeights)">grFindMaximalLengthPath</a>	GRFINDMAXIMALLENGTHPATH Find a path that maximizes sum of edge weights.</li><li><a href="grLabel.html" class="code" title="function labels = grLabel(nodes, edges)">grLabel</a>	GRLABEL Associate a label to each connected component of the graph.</li><li><a href="grMean.html" class="code" title="function varargout = grMean(varargin)">grMean</a>	GRMEAN Compute mean value from neighbour nodes.</li><li><a href="grMedian.html" class="code" title="function varargout = grMedian(varargin)">grMedian</a>	GRMEDIAN Compute median value from neighbour nodes.</li><li><a href="grMergeNodesMedian.html" class="code" title="function [nodes2, edges2] = grMergeNodesMedian(nodes, edges, mnodes)">grMergeNodesMedian</a>	GRMERGENODESMEDIAN Replace several nodes by their median coordinate.</li><li><a href="grOpen.html" class="code" title="function varargout = grOpen(varargin)">grOpen</a>	GROPEN Morphological opening on graph.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function nodes2 = grAdjacentNodes(edges, node)</a>
+0002 <span class="comment">%GRADJACENTNODES Find list of nodes adjacent to a given node.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   NEIGHS = grAdjacentNodes(EDGES, NODE)</span>
+0005 <span class="comment">%   EDGES: the complete edges list (containing indices of neighbor nodes)</span>
+0006 <span class="comment">%   NODE: index of the node</span>
+0007 <span class="comment">%   NEIGHS: the nodes adjacent to the given node.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   NODE can also be a vector of node indices, in this case the result is</span>
+0010 <span class="comment">%   the set of neighbors of any input node, excluding the input nodes.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%     % create a basic graph and display it</span>
+0014 <span class="comment">%     nodes = [10 10;20 10;10 20;20 20;27 15];</span>
+0015 <span class="comment">%     edges = [1 2;1 3;2 4;2 5;3 4;4 5];</span>
+0016 <span class="comment">%     figure; drawGraph(nodes, edges);</span>
+0017 <span class="comment">%     hold on; drawNodeLabels(nodes, 1:5)</span>
+0018 <span class="comment">%     axis equal; axis([0 40 0 30]);</span>
+0019 <span class="comment">%     % compute list of nodes adjacent to node with index 2</span>
+0020 <span class="comment">%     grAdjacentNodes(edges, 2)</span>
+0021 <span class="comment">%     ans =</span>
+0022 <span class="comment">%         1</span>
+0023 <span class="comment">%         4</span>
+0024 <span class="comment">%         5</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%   See also</span>
+0027 <span class="comment">%     grAdjacentEdges</span>
+0028 
+0029 <span class="comment">% ------</span>
+0030 <span class="comment">% Author: David Legland</span>
+0031 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0032 <span class="comment">% Created: 2004-08-16</span>
+0033 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0034 
+0035 [i, j] = find(ismember(edges, node)); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0036 nodes2 = edges(i,1:2);
+0037 nodes2 = unique(nodes2(:));
+0038 nodes2 = sort(nodes2(~ismember(nodes2, node)));</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

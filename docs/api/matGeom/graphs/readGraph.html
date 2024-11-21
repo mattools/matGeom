@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of readGraph</title>
+  <meta name="keywords" content="readGraph">
+  <meta name="description" content="READGRAPH Read a graph from a text file.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; readGraph.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>readGraph
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>READGRAPH Read a graph from a text file.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [nodes, edges] = readGraph(fileName) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">READGRAPH Read a graph from a text file.
+
+   [NODES EDGES] = readGraph(FILENAME)
+
+   Example
+     % create a basic graph, save it to a file, and read it again
+     nodes = [10 10;20 10;10 20;20 20;27 15];
+     edges = [1 2;1 3;2 4;2 5;3 4;4 5];
+     writeGraph(nodes, edges, 'simpleGraph.txt');
+     [n2 e2] = readGraph('simpleGraph.txt');
+     figure; drawGraph(n2, e2); axis equal; axis([0 40 0 30]);
+
+   See also
+     <a href="writeGraph.html" class="code" title="function writeGraph(nodes, edges, fileName)">writeGraph</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [nodes, edges] = readGraph(fileName)</a>
+0002 <span class="comment">%READGRAPH Read a graph from a text file.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [NODES EDGES] = readGraph(FILENAME)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   Example</span>
+0007 <span class="comment">%     % create a basic graph, save it to a file, and read it again</span>
+0008 <span class="comment">%     nodes = [10 10;20 10;10 20;20 20;27 15];</span>
+0009 <span class="comment">%     edges = [1 2;1 3;2 4;2 5;3 4;4 5];</span>
+0010 <span class="comment">%     writeGraph(nodes, edges, 'simpleGraph.txt');</span>
+0011 <span class="comment">%     [n2 e2] = readGraph('simpleGraph.txt');</span>
+0012 <span class="comment">%     figure; drawGraph(n2, e2); axis equal; axis([0 40 0 30]);</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   See also</span>
+0015 <span class="comment">%     writeGraph</span>
+0016 <span class="comment">%</span>
+0017 
+0018 <span class="comment">% ------</span>
+0019 <span class="comment">% Author: David Legland</span>
+0020 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0021 <span class="comment">% Created: 2014-01-21, using Matlab 7.9.0.529 (R2009b)</span>
+0022 <span class="comment">% Copyright 2014-2024 INRA - Cepia Software Platform</span>
+0023 
+0024 <span class="comment">%% Open file and read header</span>
+0025 
+0026 <span class="comment">% open file for reading in text mode</span>
+0027 f = fopen(fileName, <span class="string">'rt'</span>);
+0028 <span class="keyword">if</span> f == -1
+0029     error([<span class="string">'could not open file for reading: '</span> fileName]);
+0030 <span class="keyword">end</span>
+0031 
+0032 <span class="comment">% check header</span>
+0033 line = fgetl(f);
+0034 <span class="keyword">if</span> ~ischar(line) 
+0035     error([<span class="string">'can not read graph from empty file: '</span> fileName]);
+0036 <span class="keyword">end</span>
+0037 <span class="keyword">if</span> ~strcmpi(strtrim(line(2:end)), <span class="string">'graph'</span>)
+0038     error([<span class="string">'Wrong header line in file:'</span> fileName]);
+0039 <span class="keyword">end</span>
+0040 
+0041 
+0042 <span class="comment">%% read node section</span>
+0043 
+0044 <span class="comment">% check sub-header</span>
+0045 line = fgetl(f);
+0046 <span class="keyword">if</span> ~strcmpi(strtrim(line(2:end)), <span class="string">'nodes'</span>)
+0047     error([<span class="string">'Could not interpret node section in file:'</span> fileName]);
+0048 <span class="keyword">end</span>
+0049 
+0050 <span class="comment">% read the number of nodes</span>
+0051 line = fgetl(f);
+0052 [nNodesStr, line] = strtok(line);
+0053 nNodes = str2double(nNodesStr);
+0054 
+0055 <span class="comment">% read number of dimension, assumes 2 by default if not specified</span>
+0056 nDims = 2;
+0057 <span class="keyword">if</span> ~isempty(line)
+0058     nDims = str2double(strtok(line));
+0059 <span class="keyword">end</span>
+0060 
+0061 <span class="comment">% read node coordinates</span>
+0062 [nodes, nRead] = fscanf(f, <span class="string">'%g'</span>, [nDims nNodes]);
+0063 assert(nRead == nNodes * nDims, <span class="keyword">...</span>
+0064     <span class="string">'Could not read all node info in file %s'</span>, fileName);
+0065 nodes = nodes';
+0066 
+0067 <span class="comment">% terminate the reading of current line</span>
+0068 fgetl(f);
+0069 
+0070 
+0071 <span class="comment">%% read edge section</span>
+0072 
+0073 <span class="comment">% check sub-header</span>
+0074 line = fgetl(f);
+0075 <span class="keyword">if</span> ~strcmpi(strtrim(line(2:end)), <span class="string">'edges'</span>)
+0076     error([<span class="string">'Could not interpret edge section in file:'</span> fileName]);
+0077 <span class="keyword">end</span>
+0078 
+0079 <span class="comment">% read the number of nodes</span>
+0080 line = fgetl(f);
+0081 nEdgesStr = strtok(line);
+0082 nEdges = str2double(nEdgesStr);
+0083 
+0084 <span class="comment">% read node indices of each edge</span>
+0085 [edges, nRead] = fscanf(f, <span class="string">'%d %d\n'</span>, [2 nEdges]);
+0086 assert(nRead == nEdges * 2, <span class="keyword">...</span>
+0087     <span class="string">'Could not read all edge info in file %s'</span>, fileName);
+0088 edges = edges';
+0089 
+0090 
+0091 <span class="comment">%% Clean up</span>
+0092 
+0093 fclose(f);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

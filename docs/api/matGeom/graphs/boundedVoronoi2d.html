@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of boundedVoronoi2d</title>
+  <meta name="keywords" content="boundedVoronoi2d">
+  <meta name="description" content="BOUNDEDVORONOI2D Computes a bounded voronoi diagram as a graph structure.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; boundedVoronoi2d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>boundedVoronoi2d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>BOUNDEDVORONOI2D Computes a bounded voronoi diagram as a graph structure.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [nodes, edges, faces] = boundedVoronoi2d(box, germs) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">BOUNDEDVORONOI2D Computes a bounded voronoi diagram as a graph structure.
+   
+   [NODES, EDGES, FACES] = boundedVoronoi2d(BOX, GERMS)
+   GERMS an array of points with dimension 2
+   NODES, EDGES, FACES: usual graph representation, FACES as cell array
+
+   Example
+     % clip a graph with
+     box = [0 100 0 100];
+     [n, e, f] = boundedVoronoi2d(box, rand(100, 2)*100);
+     [n, e, f] = clipGraph(n, e, f, box);
+     drawGraph(n, e);
+
+   See also
+     graphs, <a href="boundedCentroidalVoronoi2d.html" class="code" title="function varargout = boundedCentroidalVoronoi2d(germs, box, varargin)">boundedCentroidalVoronoi2d</a>, <a href="clipGraph.html" class="code" title="function varargout = clipGraph(nodes, edges, varargin)">clipGraph</a>, <a href="clipGraphPolygon.html" class="code" title="function [nodes2, edges2] = clipGraphPolygon(nodes, edges, poly)">clipGraphPolygon</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="centroidalVoronoi2d.html" class="code" title="function [germs, germPaths] = centroidalVoronoi2d(germs, poly, varargin)">centroidalVoronoi2d</a>	CENTROIDALVORONOI2D Centroidal Voronoi tesselation within a polygon.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [nodes, edges, faces] = boundedVoronoi2d(box, germs)</a>
+0002 <span class="comment">%BOUNDEDVORONOI2D Computes a bounded voronoi diagram as a graph structure.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [NODES, EDGES, FACES] = boundedVoronoi2d(BOX, GERMS)</span>
+0005 <span class="comment">%   GERMS an array of points with dimension 2</span>
+0006 <span class="comment">%   NODES, EDGES, FACES: usual graph representation, FACES as cell array</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Example</span>
+0009 <span class="comment">%     % clip a graph with</span>
+0010 <span class="comment">%     box = [0 100 0 100];</span>
+0011 <span class="comment">%     [n, e, f] = boundedVoronoi2d(box, rand(100, 2)*100);</span>
+0012 <span class="comment">%     [n, e, f] = clipGraph(n, e, f, box);</span>
+0013 <span class="comment">%     drawGraph(n, e);</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   See also</span>
+0016 <span class="comment">%     graphs, boundedCentroidalVoronoi2d, clipGraph, clipGraphPolygon</span>
+0017 
+0018 <span class="comment">% ------</span>
+0019 <span class="comment">% Author: David Legland</span>
+0020 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0021 <span class="comment">% Created: 2007-01-12</span>
+0022 <span class="comment">% Copyright 2007-2024 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas</span>
+0023 
+0024 <span class="comment">% uniformize input for box.</span>
+0025 box = box';
+0026 box = box(:);
+0027 
+0028 <span class="comment">% add points far enough</span>
+0029 boxSizeX  = box(2) - box(1);
+0030 boxSizeY  = box(4) - box(3);
+0031 farPoints = [<span class="keyword">...</span>
+0032     box(2)+2*boxSizeX  box(4)+3*boxSizeY;<span class="keyword">...</span>
+0033     box(1)-3*boxSizeX  box(4)+2*boxSizeY;<span class="keyword">...</span>
+0034     box(1)-2*boxSizeX  box(3)-3*boxSizeY;<span class="keyword">...</span>
+0035     box(2)+3*boxSizeX  box(3)-2*boxSizeY;<span class="keyword">...</span>
+0036     ];
+0037 
+0038 <span class="comment">% extract voronoi vertices and face structure</span>
+0039 [V, C] = voronoin([germs ; farPoints]);
+0040 
+0041 <span class="comment">% initialize graph structure, without edges and without faces</span>
+0042 nodes = V(2:<span class="keyword">end</span>, :);
+0043 edges = zeros(0, 2);
+0044 faces = cell(1, size(germs, 1));
+0045 
+0046 <span class="comment">% for each cell associated to a germ, we retrieve the nodes of the Voronoi</span>
+0047 <span class="comment">% diagram, remove 1 because first vertex at infinity is removed, keep the</span>
+0048 <span class="comment">% list of vertices that constitute the face, and generate the set of edges</span>
+0049 <span class="comment">% around face.</span>
+0050 <span class="keyword">for</span> i = 1:size(germs, 1)   
+0051     face = C{i};
+0052     face = face-1;
+0053     faces{i} = face;
+0054     edges = [edges; sort([face' face([2:end 1])'], 2)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0055 <span class="keyword">end</span>
+0056 
+0057 <span class="comment">% remove duplicate edges as they were created twice (once for each face)</span>
+0058 edges = unique(edges, <span class="string">'rows'</span>);
+0059</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

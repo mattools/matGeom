@@ -34,7 +34,7 @@
    The functions separates each component separated by NaN values, and
    returns a cell array of polygons.
 
-   See also:
+   See also
    polygons2d</pre></div>
 
 <!-- crossreference -->
@@ -44,7 +44,7 @@ This function calls:
 </ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a>	DRAWPOLYGON Draw a polygon specified by a list of points.</li><li><a href="isPointInPolygon.html" class="code" title="function b = isPointInPolygon(point, poly)">isPointInPolygon</a>	ISPOINTINPOLYGON Test if a point is located inside a polygon.</li><li><a href="polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>	Compute the signed area of a polygon.</li><li><a href="polygonBounds.html" class="code" title="function box = polygonBounds(polygon)">polygonBounds</a>	Computes the bounding box of a polygon.</li><li><a href="polygonContains.html" class="code" title="function varargout = polygonContains(poly, point)">polygonContains</a>	POLYGONCONTAINS Test if a point is contained in a multiply connected polygon.</li><li><a href="polygonEdges.html" class="code" title="function edges = polygonEdges(poly)">polygonEdges</a>	POLYGONEDGES Return the edges of a simple or multiple polygon.</li></ul>
+<li><a href="../../matGeom/geom3d/drawPolygon3d.html" class="code" title="function varargout = drawPolygon3d(varargin)">drawPolygon3d</a>	DRAWPOLYGON3D Draw a 3D polygon specified by a list of vertex coords.</li><li><a href="clipPolygonByLine.html" class="code" title="function varargout = clipPolygonByLine(poly, line, varargin)">clipPolygonByLine</a>	CLIPPOLYGONBYLINE Clip a polygon by a directed line.</li><li><a href="drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a>	DRAWPOLYGON Draw a polygon specified by a list of points.</li><li><a href="isPointInPolygon.html" class="code" title="function b = isPointInPolygon(point, poly)">isPointInPolygon</a>	ISPOINTINPOLYGON Test if a point is located inside a polygon.</li><li><a href="parsePolygon.html" class="code" title="function [polyOut, inputFormat] = parsePolygon(poly, format, varargin)">parsePolygon</a>	PARSEPOLYGON Conversion between different polygon formats.</li><li><a href="polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>	POLYGONAREA Compute the signed area of a polygon.</li><li><a href="polygonBounds.html" class="code" title="function box = polygonBounds(polygon)">polygonBounds</a>	POLYGONBOUNDS Computes the bounding box of a polygon.</li><li><a href="polygonContains.html" class="code" title="function varargout = polygonContains(poly, point)">polygonContains</a>	POLYGONCONTAINS Test if a point is contained in a multiply connected polygon.</li><li><a href="polygonEdges.html" class="code" title="function edges = polygonEdges(poly)">polygonEdges</a>	POLYGONEDGES Return the edges of a simple or multiple polygon.</li></ul>
 <!-- crossreference -->
 
 
@@ -58,15 +58,15 @@ This function is called by:
 0006 <span class="comment">%   The functions separates each component separated by NaN values, and</span>
 0007 <span class="comment">%   returns a cell array of polygons.</span>
 0008 <span class="comment">%</span>
-0009 <span class="comment">%   See also:</span>
+0009 <span class="comment">%   See also</span>
 0010 <span class="comment">%   polygons2d</span>
 0011 <span class="comment">%</span>
 0012 
 0013 <span class="comment">% ------</span>
 0014 <span class="comment">% Author: David Legland</span>
-0015 <span class="comment">% e-mail: david.legland@inra.fr</span>
-0016 <span class="comment">% Created: 2007-10-12,    using Matlab 7.4.0.287 (R2007a)</span>
-0017 <span class="comment">% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0015 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0016 <span class="comment">% Created: 2007-10-12, using Matlab 7.4.0.287 (R2007a)</span>
+0017 <span class="comment">% Copyright 2007-2024 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas</span>
 0018 
 0019 <span class="keyword">if</span> iscell(polygon)
 0020     <span class="comment">% case of a cell array</span>
@@ -90,6 +90,6 @@ This function is called by:
 0038         polygons{i} = polygon((inds(i)+1):(inds(i+1)-1), :);    
 0039     <span class="keyword">end</span>
 0040 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

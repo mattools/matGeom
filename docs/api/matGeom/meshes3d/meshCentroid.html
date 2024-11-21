@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of meshCentroid</title>
+  <meta name="keywords" content="meshCentroid">
+  <meta name="description" content="MESHCENTROID Compute the centroid of the input mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; meshCentroid.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>meshCentroid
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MESHCENTROID Compute the centroid of the input mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function centroid = meshCentroid(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MESHCENTROID Compute the centroid of the input mesh.
+
+   CENTROID = meshCentroid(V, F)
+   CENTROID = meshCentroid(MESH)
+   Computes the centroid of the input mesh.
+   The resulting centroid is usually different from he centroid computed
+   on the vertices (from the 'centroid' function, for example).
+
+   Example
+     mesh = readMesh('bunny_F1k.ply');
+     meshCentroid(mesh)
+     ans =
+         0.6496   -0.1670   -0.7924
+
+   See also
+     centroid, <a href="meshEquivalentEllipsoid.html" class="code" title="function ellipsoid = meshEquivalentEllipsoid(vertices, faces, varargin)">meshEquivalentEllipsoid</a>, <a href="meshVolume.html" class="code" title="function vol = meshVolume(varargin)">meshVolume</a>, boundingBox3d</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>	CENTROID Compute centroid (center of mass) of a set of points.</li><li><a href="../../matGeom/geom3d/crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>	CROSSPRODUCT3D Vector cross product faster than inbuilt MATLAB cross.</li><li><a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>	TRIANGULATEFACES Convert face array to an array of triangular faces.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function centroid = meshCentroid(varargin)</a>
+0002 <span class="comment">%MESHCENTROID Compute the centroid of the input mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   CENTROID = meshCentroid(V, F)</span>
+0005 <span class="comment">%   CENTROID = meshCentroid(MESH)</span>
+0006 <span class="comment">%   Computes the centroid of the input mesh.</span>
+0007 <span class="comment">%   The resulting centroid is usually different from he centroid computed</span>
+0008 <span class="comment">%   on the vertices (from the 'centroid' function, for example).</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Example</span>
+0011 <span class="comment">%     mesh = readMesh('bunny_F1k.ply');</span>
+0012 <span class="comment">%     meshCentroid(mesh)</span>
+0013 <span class="comment">%     ans =</span>
+0014 <span class="comment">%         0.6496   -0.1670   -0.7924</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   See also</span>
+0017 <span class="comment">%     centroid, meshEquivalentEllipsoid, meshVolume, boundingBox3d</span>
+0018 
+0019 <span class="comment">% ------</span>
+0020 <span class="comment">% Author: David Legland</span>
+0021 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0022 <span class="comment">% Created: 2024-07-11, using Matlab 24.1.0.2628055 (R2024a) Update 4</span>
+0023 <span class="comment">% Copyright 2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0024 
+0025 [vertices, faces] = parseMeshData(varargin{:});
+0026 
+0027 <span class="comment">% ensure mesh has triangle faces</span>
+0028 faces = <a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>(faces);
+0029 
+0030 <span class="comment">% coordinates of each face vertex</span>
+0031 V1 = vertices(faces(:,1),:);
+0032 V2 = vertices(faces(:,2),:);
+0033 V3 = vertices(faces(:,3),:);
+0034 
+0035 <span class="comment">% Area-weighted face normals (magnitude = 2 x triangle area)</span>
+0036 normals = <a href="../../matGeom/geom3d/crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>(V2-V1, V3-V1);
+0037 
+0038 <span class="comment">% Zero-th order moment (same as volume enclosed by the mesh)</span>
+0039 C = (V1 + V2 + V3) / 3;
+0040 m000 = sum(sum(normals.*C, 2)) / 6;
+0041 <span class="keyword">if</span> m000 &lt; eps
+0042     warning(<span class="string">'Mesh has negative volume, indicating that face normal orientations are reversed (i.e., pointing into the surface).'</span>)
+0043 <span class="keyword">end</span>
+0044 
+0045 <span class="comment">% normalize the normals by the volume</span>
+0046 <span class="comment">% This avoids to normalize by m000 in the computation of centroid</span>
+0047 normals = normals / m000;
+0048 
+0049 <span class="comment">% extract coordinates of each face vertex</span>
+0050 x1 = V1(:,1); y1=V1(:,2); z1=V1(:,3);
+0051 x2 = V2(:,1); y2=V2(:,2); z2=V2(:,3);
+0052 x3 = V3(:,1); y3=V3(:,2); z3=V3(:,3);
+0053 
+0054 <span class="comment">% First order moments</span>
+0055 <span class="comment">% (together they specify the centroid of the region  enclosed by the mesh)</span>
+0056 mxx = ((x1+x2).*(x2+x3) + x1.^2 + x3.^2) / 12;
+0057 myy = ((y1+y2).*(y2+y3) + y1.^2 + y3.^2) / 12;
+0058 mzz = ((z1+z2).*(z2+z3) + z1.^2 + z3.^2) / 12;
+0059 
+0060 mxy = ((x1+x2+x3).*(y1+y2+y3) + x1.*y1 + x2.*y2 + x3.*y3) / 24;
+0061 mxz = ((x1+x2+x3).*(z1+z2+z3) + x1.*z1 + x2.*z2 + x3.*z3) / 24;
+0062 myz = ((y1+y2+y3).*(z1+z2+z3) + y1.*z1 + y2.*z2 + y3.*z3) / 24;
+0063 
+0064 m100 = sum(sum(normals .* [mxx 2*mxy 2*mxz], 2)) / 6;
+0065 m010 = sum(sum(normals .* [2*mxy myy 2*myz], 2)) / 6;
+0066 m001 = sum(sum(normals .* [2*mxz 2*myz mzz], 2)) / 6;
+0067 
+0068 <span class="comment">% concatenate results</span>
+0069 <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a> = [m100 m010 m001];</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

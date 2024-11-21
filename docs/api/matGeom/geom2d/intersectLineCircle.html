@@ -4,7 +4,7 @@
 <head>
   <title>Description of intersectLineCircle</title>
   <meta name="keywords" content="intersectLineCircle">
-  <meta name="description" content="Intersection point(s) of a line and a circle.">
+  <meta name="description" content="INTERSECTLINECIRCLE Intersection point(s) of a line and a circle.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Intersection point(s) of a line and a circle.</strong></div>
+<div class="box"><strong>INTERSECTLINECIRCLE Intersection point(s) of a line and a circle.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function points = intersectLineCircle(line, circle) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Intersection point(s) of a line and a circle.
+<div class="fragment"><pre class="comment">INTERSECTLINECIRCLE Intersection point(s) of a line and a circle.
 
    INTERS = intersectLineCircle(LINE, CIRCLE);
    Returns a 2-by-2-by-N array, containing on each row the coordinates of
@@ -77,7 +77,7 @@ This function is called by:
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function points = intersectLineCircle(line, circle)</a>
-0002 <span class="comment">% Intersection point(s) of a line and a circle.</span>
+0002 <span class="comment">%INTERSECTLINECIRCLE Intersection point(s) of a line and a circle.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   INTERS = intersectLineCircle(LINE, CIRCLE);</span>
 0005 <span class="comment">%   Returns a 2-by-2-by-N array, containing on each row the coordinates of</span>
@@ -115,60 +115,57 @@ This function is called by:
 0037 <span class="comment">%</span>
 0038 
 0039 <span class="comment">% ------</span>
-0040 <span class="comment">% Author: David Legland, david.legland@inrae.fr</span>
-0041 <span class="comment">% Author: JuanPi Carbajal &lt;ajuanpi+dev@gmail.com&gt;</span>
-0042 <span class="comment">% Created: 2011-01-14,    using Matlab 7.9.0.529 (R2009b)</span>
-0043 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0040 <span class="comment">% Authors: David Legland, JuanPi Carbajal</span>
+0041 <span class="comment">% E-mail: david.legland@inrae.fr, ajuanpi+dev@gmail.com</span>
+0042 <span class="comment">% Created: 2011-01-14, using Matlab 7.9.0.529 (R2009b)</span>
+0043 <span class="comment">% Copyright 2011-2024 INRA - Cepia Software Platform</span>
 0044 
-0045 <span class="comment">% HISTORY</span>
-0046 <span class="comment">% 2011-06-06 fix bug in delta test</span>
-0047 <span class="comment">% 2017-05-05 included some suggestions from code by JuanPi Carbajal &lt;ajuanpi+dev@gmail.com&gt;</span>
-0048 <span class="comment">% 2017-08-08 update doc</span>
-0049             
-0050 <span class="comment">% check size of inputs</span>
-0051 nLines = size(line, 1);
-0052 nCircles = size(circle, 1);
-0053 <span class="keyword">if</span> nLines ~= nCircles
-0054   error (<span class="string">'matGeom:geom3d:invalidArguments'</span>, <span class="keyword">...</span>
-0055       <span class="string">'Requires same number of lines and circles'</span>);
-0056 <span class="keyword">end</span>
-0057             
-0058 <span class="comment">% center parameters</span>
-0059 center = circle(:, 1:2);
-0060 radius = circle(:, 3);
+0045             
+0046 <span class="comment">% check size of inputs</span>
+0047 nLines = size(line, 1);
+0048 nCircles = size(circle, 1);
+0049 <span class="keyword">if</span> nLines ~= nCircles
+0050   error (<span class="string">'matGeom:geom3d:invalidArguments'</span>, <span class="keyword">...</span>
+0051       <span class="string">'Requires same number of lines and circles'</span>);
+0052 <span class="keyword">end</span>
+0053             
+0054 <span class="comment">% center parameters</span>
+0055 center = circle(:, 1:2);
+0056 radius = circle(:, 3);
+0057 
+0058 <span class="comment">% line parameters</span>
+0059 dp = line(:, 1:2) - center;
+0060 vl = line(:, 3:4);
 0061 
-0062 <span class="comment">% line parameters</span>
-0063 dp = line(:, 1:2) - center;
-0064 vl = line(:, 3:4);
-0065 
-0066 <span class="comment">% coefficients of second order equation</span>
-0067 a = sum(line(:, 3:4).^2, 2);
-0068 b = 2 * sum(dp .* vl, 2);
-0069 c = sum(dp.^2, 2) - radius.^2;
-0070 
-0071 <span class="comment">% discriminant</span>
-0072 delta = b .^ 2 - 4 * a .* c;
+0062 <span class="comment">% coefficients of second order equation</span>
+0063 a = sum(line(:, 3:4).^2, 2);
+0064 b = 2 * sum(dp .* vl, 2);
+0065 c = sum(dp.^2, 2) - radius.^2;
+0066 
+0067 <span class="comment">% discriminant</span>
+0068 delta = b .^ 2 - 4 * a .* c;
+0069 
+0070 points = nan(2, 2, nCircles);
+0071 
+0072 valid = delta &gt;= 0;
 0073 
-0074 points = nan(2, 2, nCircles);
-0075 
-0076 valid = delta &gt;= 0;
-0077 
-0078 <span class="keyword">if</span> any(valid)
-0079     <span class="comment">% compute roots (as a N-by-N-by-2 array)</span>
-0080     u = bsxfun(@plus, -b(valid), bsxfun(@times, [-1 1], sqrt(delta(valid))));
-0081     u = bsxfun(@rdivide, u, a(valid)) / 2;
-0082 
-0083     <span class="keyword">if</span> sum(valid) == 1
-0084         points = [<span class="keyword">...</span>
-0085             line(1:2) + u(:,1) .* line(3:4); <span class="keyword">...</span>
-0086             line(1:2) + u(:,2) .* line(3:4)];
-0087     <span class="keyword">else</span>
-0088         tmp = [<span class="keyword">...</span>
-0089             line(valid, 1:2) + u(:,1) .* line(valid, 3:4) <span class="keyword">...</span>
-0090             line(valid, 1:2) + u(:,2) .* line(valid, 3:4)].';
-0091         points(:, :, valid) = permute(reshape(tmp, [2, 2, nCircles]), [2 1 3]);
-0092     <span class="keyword">end</span>
-0093 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0074 <span class="keyword">if</span> any(valid)
+0075     nValids = sum(valid);
+0076     <span class="comment">% compute roots (as a N-by-N-by-2 array)</span>
+0077     u = bsxfun(@plus, -b(valid), bsxfun(@times, [-1 1], sqrt(delta(valid))));
+0078     u = bsxfun(@rdivide, u, a(valid)) / 2;
+0079 
+0080     <span class="keyword">if</span> nValids == 1
+0081         points = [<span class="keyword">...</span>
+0082             line(1:2) + u(:,1) .* line(3:4); <span class="keyword">...</span>
+0083             line(1:2) + u(:,2) .* line(3:4)];
+0084     <span class="keyword">else</span>
+0085         tmp = [<span class="keyword">...</span>
+0086             line(valid, 1:2) + u(:,1) .* line(valid, 3:4) <span class="keyword">...</span>
+0087             line(valid, 1:2) + u(:,2) .* line(valid, 3:4)].';
+0088         points(:, :, valid) = permute(reshape(tmp, [2, 2, nValids]), [2 1 3]);
+0089     <span class="keyword">end</span>
+0090 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

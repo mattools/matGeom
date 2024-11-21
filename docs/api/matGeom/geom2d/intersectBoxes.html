@@ -30,23 +30,9 @@
 <div class="fragment"><pre class="comment">INTERSECTBOXES Intersection of two bounding boxes.
 
    RES = intersectBoxes(BOX1, BOX2)
-
-   Example
-   box1 = [5 20 5 30];
-   box2 = [0 15 0 15];
-   intersectBoxes(box1, box2)
-   ans = 
-       5 15 5 15
-
-   See also
-   <a href="boxes2d.html" class="code" title="function boxes2d(varargin)">boxes2d</a>, <a href="drawBox.html" class="code" title="function varargout = drawBox(box, varargin)">drawBox</a>, <a href="mergeBoxes.html" class="code" title="function box = mergeBoxes(box1, box2)">mergeBoxes</a>
-
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- Created: 2010-07-26,    using Matlab 7.9.0.529 (R2009b)
- Copyright 2010 INRA - Cepia Software Platform.</pre></div>
+   BOX1 = [XMIN1 XMAX1 YMIN1 YMAX1]
+   BOX2 = [XMIN2 XMAX2 YMIN2 YMAX2]
+   RES = intersectBoxes(BOX1,BOX2) = [XMIN3 XMAX3 YMIN3 YMAX3]</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -65,39 +51,42 @@ This function is called by:
 0002 <span class="comment">%INTERSECTBOXES Intersection of two bounding boxes.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   RES = intersectBoxes(BOX1, BOX2)</span>
-0005 <span class="comment">%</span>
-0006 <span class="comment">%   Example</span>
-0007 <span class="comment">%   box1 = [5 20 5 30];</span>
-0008 <span class="comment">%   box2 = [0 15 0 15];</span>
-0009 <span class="comment">%   intersectBoxes(box1, box2)</span>
-0010 <span class="comment">%   ans =</span>
-0011 <span class="comment">%       5 15 5 15</span>
-0012 <span class="comment">%</span>
-0013 <span class="comment">%   See also</span>
-0014 <span class="comment">%   boxes2d, drawBox, mergeBoxes</span>
+0005 <span class="comment">%   BOX1 = [XMIN1 XMAX1 YMIN1 YMAX1]</span>
+0006 <span class="comment">%   BOX2 = [XMIN2 XMAX2 YMIN2 YMAX2]</span>
+0007 <span class="comment">%   RES = intersectBoxes(BOX1,BOX2) = [XMIN3 XMAX3 YMIN3 YMAX3]</span>
+0008 
+0009 <span class="comment">%   Example</span>
+0010 <span class="comment">%   box1 = [5 20 5 30];</span>
+0011 <span class="comment">%   box2 = [0 15 0 15];</span>
+0012 <span class="comment">%   res=intersectBoxes(box1, box2)</span>
+0013 <span class="comment">%   res =</span>
+0014 <span class="comment">%       5 15 5 15</span>
 0015 <span class="comment">%</span>
-0016 <span class="comment">%</span>
-0017 <span class="comment">% ------</span>
-0018 <span class="comment">% Author: David Legland</span>
-0019 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0020 <span class="comment">% Created: 2010-07-26,    using Matlab 7.9.0.529 (R2009b)</span>
-0021 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
-0022 
-0023 <span class="comment">% unify sizes of data</span>
-0024 <span class="keyword">if</span> size(box1,1) == 1
-0025     box1 = repmat(box1, size(box2,1), 1);
-0026 <span class="keyword">elseif</span> size(box2, 1) == 1
-0027     box2 = repmat(box2, size(box1,1), 1);
-0028 <span class="keyword">elseif</span> size(box1,1) ~= size(box2,1)
-0029     error(<span class="string">'Bad size for inputs'</span>);
-0030 <span class="keyword">end</span>
-0031 
-0032 <span class="comment">% compute extreme coords</span>
-0033 mini = min(box1(:,[2 4]), box2(:,[2 4]));
-0034 maxi = max(box1(:,[1 3]), box2(:,[1 3]));
-0035 
-0036 <span class="comment">% concatenate result into a new box structure</span>
-0037 box = [maxi(:,1) mini(:,1) maxi(:,2) mini(:,2)];</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0016 <span class="comment">%   See also</span>
+0017 <span class="comment">%   boxes2d, drawBox, mergeBoxes</span>
+0018 <span class="comment">%</span>
+0019 
+0020 <span class="comment">% ------</span>
+0021 <span class="comment">% Author: David Legland</span>
+0022 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0023 <span class="comment">% Created: 2010-07-26, using Matlab 7.9.0.529 (R2009b)</span>
+0024 <span class="comment">% Copyright 2010-2024 INRA - Cepia Software Platform</span>
+0025 
+0026 <span class="comment">% unify sizes of data</span>
+0027 <span class="keyword">if</span> size(box1,1) == 1
+0028     box1 = repmat(box1, size(box2,1), 1);
+0029 <span class="keyword">elseif</span> size(box2, 1) == 1
+0030     box2 = repmat(box2, size(box1,1), 1);
+0031 <span class="keyword">elseif</span> size(box1,1) ~= size(box2,1)
+0032     error(<span class="string">'Bad size for inputs'</span>);
+0033 <span class="keyword">end</span>
+0034 
+0035 <span class="comment">% compute extreme coords</span>
+0036 mini = min(box1(:,[2 4]), box2(:,[2 4]));
+0037 maxi = max(box1(:,[1 3]), box2(:,[1 3]));
+0038 
+0039 <span class="comment">% concatenate result into a new box structure</span>
+0040 box = [maxi(:,1) mini(:,1) maxi(:,2) mini(:,2)];</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

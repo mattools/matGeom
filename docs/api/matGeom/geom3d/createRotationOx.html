@@ -45,7 +45,7 @@
    Also specifies origin of rotation. The result is similar as performing
    translation(-X0, -Y0, -Z0), rotation, and translation(X0, Y0, Z0).
 
-   See also:
+   See also
    <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>, <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>, <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a></pre></div>
 
 <!-- crossreference -->
@@ -55,7 +55,7 @@ This function calls:
 </ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="drawCuboid.html" class="code" title="function varargout = drawCuboid(cuboid, varargin)">drawCuboid</a>	Draw a 3D cuboid, eventually rotated.</li><li><a href="drawEllipsoid.html" class="code" title="function varargout = drawEllipsoid(elli, varargin)">drawEllipsoid</a>	DRAWELLIPSOID Draw a 3D ellipsoid.</li><li><a href="eulerAnglesToRotation3d.html" class="code" title="function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)">eulerAnglesToRotation3d</a>	EULERANGLESTOROTATION3D Convert 3D Euler angles to 3D rotation matrix.</li><li><a href="../../matGeom/meshes3d/ellipsoidMesh.html" class="code" title="function varargout = ellipsoidMesh(elli, varargin)">ellipsoidMesh</a>	ELLIPSOIDMESH Convert a 3D ellipsoid to face-vertex mesh representation.</li></ul>
+<li><a href="drawCuboid.html" class="code" title="function varargout = drawCuboid(varargin)">drawCuboid</a>	DRAWCUBOID Draw a 3D cuboid, eventually rotated.</li><li><a href="drawEllipsoid.html" class="code" title="function varargout = drawEllipsoid(varargin)">drawEllipsoid</a>	DRAWELLIPSOID Draw a 3D ellipsoid.</li><li><a href="eulerAnglesToRotation3d.html" class="code" title="function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)">eulerAnglesToRotation3d</a>	EULERANGLESTOROTATION3D Convert 3D Euler angles to 3D rotation matrix.</li><li><a href="../../matGeom/meshes3d/ellipsoidMesh.html" class="code" title="function varargout = ellipsoidMesh(elli, varargin)">ellipsoidMesh</a>	ELLIPSOIDMESH Convert a 3D ellipsoid to face-vertex mesh representation.</li></ul>
 <!-- crossreference -->
 
 
@@ -80,62 +80,57 @@ This function is called by:
 0017 <span class="comment">%   Also specifies origin of rotation. The result is similar as performing</span>
 0018 <span class="comment">%   translation(-X0, -Y0, -Z0), rotation, and translation(X0, Y0, Z0).</span>
 0019 <span class="comment">%</span>
-0020 <span class="comment">%   See also:</span>
+0020 <span class="comment">%   See also</span>
 0021 <span class="comment">%   transforms3d, transformPoint3d, createRotationOy, createRotationOz</span>
 0022 <span class="comment">%</span>
 0023 
-0024 <span class="comment">%   ---------</span>
-0025 <span class="comment">%   author : David Legland</span>
-0026 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0027 <span class="comment">%   created the 18/02/2005.</span>
-0028 <span class="comment">%</span>
+0024 <span class="comment">% ------</span>
+0025 <span class="comment">% Author: David Legland</span>
+0026 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0027 <span class="comment">% Created: 2005-02-18</span>
+0028 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0029 
-0030 <span class="comment">%   HISTORY</span>
-0031 <span class="comment">%   24/11/2008 changed convention for angle</span>
-0032 <span class="comment">%   22/04/2009 rename as createRotationOx</span>
-0033 
-0034 
-0035 <span class="comment">% default values</span>
-0036 dx = 0;
-0037 dy = 0;
-0038 dz = 0;
-0039 theta = 0;
-0040 
-0041 <span class="comment">% get input values</span>
-0042 <span class="keyword">if</span> length(varargin) == 1
-0043     <span class="comment">% only one argument -&gt; rotation angle</span>
-0044     theta = varargin{1};
-0045     
-0046 <span class="keyword">elseif</span> length(varargin) == 2
-0047     <span class="comment">% origin point (as array) and angle</span>
-0048     var = varargin{1};
-0049     dx = var(1);
-0050     dy = var(2);
-0051     dz = var(3);
-0052     theta = varargin{2};
-0053     
-0054 <span class="keyword">elseif</span> length(varargin) == 4
-0055     <span class="comment">% origin (x and y) and angle</span>
-0056     dx = varargin{1};
-0057     dy = varargin{2};
-0058     dz = varargin{3};
-0059     theta = varargin{4};
-0060 <span class="keyword">end</span>
-0061 
-0062 <span class="comment">% compute coefs</span>
-0063 cot = cos(theta);
-0064 sit = sin(theta);
-0065 
-0066 <span class="comment">% create transformation</span>
-0067 trans = [<span class="keyword">...</span>
-0068     1 0 0 0;<span class="keyword">...</span>
-0069     0 cot -sit 0;<span class="keyword">...</span>
-0070     0 sit cot 0;<span class="keyword">...</span>
-0071     0 0 0 1];
-0072 
-0073 <span class="comment">% add the translation part</span>
-0074 t = [1 0 0 dx;0 1 0 dy;0 0 1 dz;0 0 0 1];
-0075 trans = t * trans / t;</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0030 <span class="comment">% default values</span>
+0031 dx = 0;
+0032 dy = 0;
+0033 dz = 0;
+0034 theta = 0;
+0035 
+0036 <span class="comment">% get input values</span>
+0037 <span class="keyword">if</span> isscalar(varargin)
+0038     <span class="comment">% only one argument -&gt; rotation angle</span>
+0039     theta = varargin{1};
+0040     
+0041 <span class="keyword">elseif</span> length(varargin) == 2
+0042     <span class="comment">% origin point (as array) and angle</span>
+0043     var = varargin{1};
+0044     dx = var(1);
+0045     dy = var(2);
+0046     dz = var(3);
+0047     theta = varargin{2};
+0048     
+0049 <span class="keyword">elseif</span> length(varargin) == 4
+0050     <span class="comment">% origin (x and y) and angle</span>
+0051     dx = varargin{1};
+0052     dy = varargin{2};
+0053     dz = varargin{3};
+0054     theta = varargin{4};
+0055 <span class="keyword">end</span>
+0056 
+0057 <span class="comment">% compute coefs</span>
+0058 cot = cos(theta);
+0059 sit = sin(theta);
+0060 
+0061 <span class="comment">% create transformation</span>
+0062 trans = [<span class="keyword">...</span>
+0063     1 0 0 0;<span class="keyword">...</span>
+0064     0 cot -sit 0;<span class="keyword">...</span>
+0065     0 sit cot 0;<span class="keyword">...</span>
+0066     0 0 0 1];
+0067 
+0068 <span class="comment">% add the translation part</span>
+0069 t = [1 0 0 dx;0 1 0 dy;0 0 1 dz;0 0 0 1];
+0070 trans = t * trans / t;</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

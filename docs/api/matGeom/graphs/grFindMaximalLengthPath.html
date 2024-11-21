@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of grFindMaximalLengthPath</title>
+  <meta name="keywords" content="grFindMaximalLengthPath">
+  <meta name="description" content="GRFINDMAXIMALLENGTHPATH Find a path that maximizes sum of edge weights.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; grFindMaximalLengthPath.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>grFindMaximalLengthPath
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>GRFINDMAXIMALLENGTHPATH Find a path that maximizes sum of edge weights.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function path = grFindMaximalLengthPath(nodes, edges, edgeWeights) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">GRFINDMAXIMALLENGTHPATH Find a path that maximizes sum of edge weights.
+
+   PATH = grFindMaximalLengthPath(NODES, EDGES, EDGE_WEIGHTS);
+   Finds a greatest geodesic path in the graph. A path between two nodes
+   is a succession of adjacent edges that link the first and last nodes.
+   the length of the path is the sum of weights of edges that constitute
+   the path.
+   A geodesic path is a path that minimizes the length of the path among
+   the set of paths between the nodes.
+   A maximal length path maximizes the length of the geodesic path between
+   couples of nodes in the graph
+
+   The result PATH is the list of edge indices that constitutes the path.
+
+   PATH = grFindMaximalLengthPath(NODES, EDGES);
+   Assumes each edge has a weight equal to 1.
+
+   See also
+   <a href="grFindGeodesicPath.html" class="code" title="function path = grFindGeodesicPath(nodes, edges, ind0, ind1, edgeWeights)">grFindGeodesicPath</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="grAdjacentNodes.html" class="code" title="function nodes2 = grAdjacentNodes(edges, node)">grAdjacentNodes</a>	GRADJACENTNODES Find list of nodes adjacent to a given node.</li><li><a href="grPropagateDistance.html" class="code" title="function d = grPropagateDistance(v, e, v0, l)">grPropagateDistance</a>	GRPROPAGATEDISTANCE Propagates distances from a vertex to other vertices.</li><li><a href="graphPeripheralVertices.html" class="code" title="function inds = graphPeripheralVertices(v, e, l)">graphPeripheralVertices</a>	GRAPHPERIPHERALVERTICES Peripheral vertices of a graph.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function path = grFindMaximalLengthPath(nodes, edges, edgeWeights)</a>
+0002 <span class="comment">%GRFINDMAXIMALLENGTHPATH Find a path that maximizes sum of edge weights.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PATH = grFindMaximalLengthPath(NODES, EDGES, EDGE_WEIGHTS);</span>
+0005 <span class="comment">%   Finds a greatest geodesic path in the graph. A path between two nodes</span>
+0006 <span class="comment">%   is a succession of adjacent edges that link the first and last nodes.</span>
+0007 <span class="comment">%   the length of the path is the sum of weights of edges that constitute</span>
+0008 <span class="comment">%   the path.</span>
+0009 <span class="comment">%   A geodesic path is a path that minimizes the length of the path among</span>
+0010 <span class="comment">%   the set of paths between the nodes.</span>
+0011 <span class="comment">%   A maximal length path maximizes the length of the geodesic path between</span>
+0012 <span class="comment">%   couples of nodes in the graph</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   The result PATH is the list of edge indices that constitutes the path.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   PATH = grFindMaximalLengthPath(NODES, EDGES);</span>
+0017 <span class="comment">%   Assumes each edge has a weight equal to 1.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   See also</span>
+0020 <span class="comment">%   grFindGeodesicPath</span>
+0021 
+0022 <span class="comment">% ------</span>
+0023 <span class="comment">% Author: David Legland</span>
+0024 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0025 <span class="comment">% Created: 2011-05-22, using Matlab 7.9.0.529 (R2009b)</span>
+0026 <span class="comment">% Copyright 2011-2024 INRA - Cepia Software Platform</span>
+0027 
+0028 <span class="comment">% ensure weights are defined</span>
+0029 <span class="keyword">if</span> ~exist(<span class="string">'edgeWeights'</span>, <span class="string">'var'</span>)
+0030     edgeWeights = ones(size(edges, 1), 1);
+0031 <span class="keyword">end</span>
+0032 
+0033 <span class="comment">% find an extremity vertex</span>
+0034 inds = <a href="graphPeripheralVertices.html" class="code" title="function inds = graphPeripheralVertices(v, e, l)">graphPeripheralVertices</a>(nodes, edges, edgeWeights);
+0035 ind0 = inds(end);
+0036 
+0037 <span class="comment">% find a vertex opposite to the first extremity</span>
+0038 dists = <a href="grPropagateDistance.html" class="code" title="function d = grPropagateDistance(v, e, v0, l)">grPropagateDistance</a>(nodes, edges, ind0, edgeWeights);
+0039 ind1 = find(dists == max(dists), 1, <span class="string">'first'</span>);
+0040 
+0041 <span class="comment">% iterate on neighbors of current node: choose next neighbor with smallest</span>
+0042 <span class="comment">% cumulated weight, until we are back on source node</span>
+0043 path = [];
+0044 <span class="keyword">while</span> true
+0045     <span class="comment">% find neighbor with lowest cumulated distance</span>
+0046     neighs = <a href="grAdjacentNodes.html" class="code" title="function nodes2 = grAdjacentNodes(edges, node)">grAdjacentNodes</a>(edges, ind1);
+0047     neighDists = dists(neighs);
+0048     indN = find(neighDists == min(neighDists), 1);
+0049     ind2 = neighs(indN);
+0050     
+0051     <span class="comment">% add edge index to the path</span>
+0052     indE = find(sum(ismember(edges, [ind1 ind2]), 2) == 2, 1);
+0053     path = [path indE]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0054     
+0055     <span class="comment">% test if path is finished or not</span>
+0056     <span class="keyword">if</span> ind2 == ind0
+0057         <span class="keyword">break</span>;
+0058     <span class="keyword">end</span>
+0059     ind1 = ind2;
+0060 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

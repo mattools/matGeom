@@ -24,7 +24,7 @@
 <div class="box"><strong>DRAWRECT Draw rectangle on the current axis.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function varargout = drawRect(rect, varargin) </strong></div>
+<div class="box"><strong>function varargout = drawRect(varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre class="comment">DRAWRECT Draw rectangle on the current axis.
@@ -49,8 +49,8 @@
    H = drawRect(...) 
    Returns handle of the created graphic objects.
 
-   See Also:
-   <a href="drawOrientedBox.html" class="code" title="function varargout = drawOrientedBox(box, varargin)">drawOrientedBox</a>, <a href="drawBox.html" class="code" title="function varargout = drawBox(box, varargin)">drawBox</a>, <a href="rectToPolygon.html" class="code" title="function [tx, ty] = rectToPolygon(rect)">rectToPolygon</a></pre></div>
+   See also
+     <a href="drawOrientedBox.html" class="code" title="function varargout = drawOrientedBox(varargin)">drawOrientedBox</a>, <a href="drawBox.html" class="code" title="function varargout = drawBox(box, varargin)">drawBox</a>, <a href="rectToPolygon.html" class="code" title="function [tx, ty] = rectToPolygon(rect)">rectToPolygon</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -65,7 +65,7 @@ This function is called by:
 
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawRect(rect, varargin)</a>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawRect(varargin)</a>
 0002 <span class="comment">%DRAWRECT Draw rectangle on the current axis.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   drawRect(RECT)</span>
@@ -88,46 +88,47 @@ This function is called by:
 0021 <span class="comment">%   H = drawRect(...)</span>
 0022 <span class="comment">%   Returns handle of the created graphic objects.</span>
 0023 <span class="comment">%</span>
-0024 <span class="comment">%   See Also:</span>
-0025 <span class="comment">%   drawOrientedBox, drawBox, rectToPolygon</span>
+0024 <span class="comment">%   See also</span>
+0025 <span class="comment">%     drawOrientedBox, drawBox, rectToPolygon</span>
 0026 <span class="comment">%</span>
 0027 
-0028 <span class="comment">%   ---------</span>
-0029 <span class="comment">%   author : David Legland</span>
-0030 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0031 <span class="comment">%   created the 10/12/2003.</span>
-0032 <span class="comment">%</span>
+0028 <span class="comment">% ------</span>
+0029 <span class="comment">% Author: David Legland</span>
+0030 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0031 <span class="comment">% Created: 2003-12-10</span>
+0032 <span class="comment">% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0033 
-0034 <span class="comment">%   HISTORY</span>
-0035 <span class="comment">%   2003-12-12 add support for multiple rectangles</span>
-0036 <span class="comment">%   2011-10-09 rewrite using rectToPolygon, add support for drawing options</span>
-0037 <span class="comment">%   2011-10-11 add management of axes handle</span>
-0038 
-0039 <span class="comment">% extract handle of axis to draw on</span>
-0040 <span class="keyword">if</span> isAxisHandle(rect)
-0041     ax = rect;
-0042     rect = varargin{1};
-0043     varargin(1) = [];
-0044 <span class="keyword">else</span>
-0045     ax = gca;
-0046 <span class="keyword">end</span>
-0047 
-0048 <span class="comment">% number of rectangles to draw</span>
-0049 n = size(rect, 1);
-0050 
-0051 <span class="comment">% display each rectangle</span>
-0052 r = zeros(n, 1);
-0053 <span class="keyword">for</span> i = 1:n
-0054     <span class="comment">% compute vertex corodinates</span>
-0055     poly = <a href="rectToPolygon.html" class="code" title="function [tx, ty] = rectToPolygon(rect)">rectToPolygon</a>(rect(i, :));
-0056     <span class="comment">% display resulting polygon</span>
-0057     r(i) = <a href="../../matGeom/polygons2d/drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a>(ax, poly, varargin{:});
-0058 <span class="keyword">end</span>
-0059 
-0060 <span class="comment">% process output</span>
-0061 <span class="keyword">if</span> nargout &gt; 0
-0062     varargout = {r};
-0063 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0034 <span class="comment">% extract handle of axis to draw on</span>
+0035 [ax, varargin] = parseAxisHandle(varargin{:});
+0036 
+0037 rect = varargin{1};
+0038 varargin(1) = [];
+0039 
+0040 <span class="comment">% number of rectangles to draw</span>
+0041 n = size(rect, 1);
+0042 
+0043 <span class="comment">% save hold state</span>
+0044 holdState = ishold(ax);
+0045 hold(ax, <span class="string">'on'</span>);
+0046 
+0047 <span class="comment">% display each rectangle</span>
+0048 h = zeros(n, 1);
+0049 <span class="keyword">for</span> i = 1:n
+0050     <span class="comment">% compute vertex corodinates</span>
+0051     poly = <a href="rectToPolygon.html" class="code" title="function [tx, ty] = rectToPolygon(rect)">rectToPolygon</a>(rect(i, :));
+0052     <span class="comment">% display resulting polygon</span>
+0053     h(i) = <a href="../../matGeom/polygons2d/drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a>(ax, poly, varargin{:});
+0054 <span class="keyword">end</span>
+0055 
+0056 <span class="comment">% restore hold state</span>
+0057 <span class="keyword">if</span> ~holdState
+0058     hold(ax, <span class="string">'off'</span>);
+0059 <span class="keyword">end</span>
+0060 
+0061 <span class="comment">% process output</span>
+0062 <span class="keyword">if</span> nargout &gt; 0
+0063     varargout = {h};
+0064 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

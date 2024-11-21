@@ -33,14 +33,8 @@
    Create a line verifying the Cartesian equation:
    A*x + B*x + C = 0;
 
-   See also:
-   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>
-
-   ---------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- created the 25/05/2004.
- Copyright 2010 INRA - Cepia Software Platform.</pre></div>
+   See also
+   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -49,7 +43,7 @@ This function calls:
 </ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="lineFit.html" class="code" title="function line = lineFit(varargin)">lineFit</a>	LINEFIT Fit a straight line to a set of points.</li></ul>
+<li><a href="fitLine.html" class="code" title="function [line, res] = fitLine(varargin)">fitLine</a>	FITLINE Fit a straight line to a set of points.</li></ul>
 <!-- crossreference -->
 
 
@@ -62,37 +56,36 @@ This function is called by:
 0005 <span class="comment">%   Create a line verifying the Cartesian equation:</span>
 0006 <span class="comment">%   A*x + B*x + C = 0;</span>
 0007 <span class="comment">%</span>
-0008 <span class="comment">%   See also:</span>
+0008 <span class="comment">%   See also</span>
 0009 <span class="comment">%   lines2d, createLine</span>
-0010 <span class="comment">%</span>
-0011 <span class="comment">%   ---------</span>
+0010 
+0011 <span class="comment">% ------</span>
 0012 <span class="comment">% Author: David Legland</span>
-0013 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0014 <span class="comment">% created the 25/05/2004.</span>
-0015 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0013 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0014 <span class="comment">% Created: 2004-05-25</span>
+0015 <span class="comment">% Copyright 2004-2024 INRA - Cepia Software Platform</span>
 0016 
-0017 
-0018 <span class="keyword">if</span> length(varargin)==1
-0019     var = varargin{1};
-0020     a = var(:,1);
-0021     b = var(:,2);
-0022     c = var(:,3);
-0023 <span class="keyword">elseif</span> length(varargin)==3
-0024     a = varargin{1};
-0025     b = varargin{2};
-0026     c = varargin{3};
-0027 <span class="keyword">end</span>
-0028 
-0029 <span class="comment">% normalisation factor</span>
-0030 d = a.*a + b.*b;
-0031 
-0032 x0 = -a.*c./d;
-0033 y0 = -b.*c./d;
-0034 theta = atan2(-a, b);
-0035 dx = cos(theta);
-0036 dy = sin(theta);
-0037 
-0038 line = [x0 y0 dx dy];</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0017 <span class="keyword">if</span> isscalar(varargin)
+0018     var = varargin{1};
+0019     a = var(:,1);
+0020     b = var(:,2);
+0021     c = var(:,3);
+0022 <span class="keyword">elseif</span> length(varargin)==3
+0023     a = varargin{1};
+0024     b = varargin{2};
+0025     c = varargin{3};
+0026 <span class="keyword">end</span>
+0027 
+0028 <span class="comment">% normalisation factor</span>
+0029 d = a.*a + b.*b;
+0030 
+0031 x0 = -a.*c./d;
+0032 y0 = -b.*c./d;
+0033 theta = atan2(-a, b);
+0034 dx = cos(theta);
+0035 dy = sin(theta);
+0036 
+0037 line = [x0 y0 dx dy];</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

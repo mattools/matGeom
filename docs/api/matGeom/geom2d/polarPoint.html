@@ -45,14 +45,8 @@
    will give a result of [40 20].
    
 
-   See Also:
-   <a href="points2d.html" class="code" title="function points2d">points2d</a>
-
-   ---------
-
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 03/05/2004</pre></div>
+   See also
+   <a href="points2d.html" class="code" title="function points2d">points2d</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -86,43 +80,41 @@ This function is called by:
 0017 <span class="comment">%   will give a result of [40 20].</span>
 0018 <span class="comment">%</span>
 0019 <span class="comment">%</span>
-0020 <span class="comment">%   See Also:</span>
+0020 <span class="comment">%   See also</span>
 0021 <span class="comment">%   points2d</span>
-0022 <span class="comment">%</span>
-0023 <span class="comment">%   ---------</span>
-0024 <span class="comment">%</span>
-0025 <span class="comment">%   author : David Legland</span>
-0026 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0027 <span class="comment">%   created the 03/05/2004</span>
-0028 <span class="comment">%</span>
-0029 
-0030 
-0031 <span class="comment">% default values</span>
-0032 x0 = 0; y0=0;
-0033 rho = 1;
-0034 theta =0;
-0035 
-0036 <span class="comment">% process input parameters</span>
-0037 <span class="keyword">if</span> length(varargin)==1
-0038     theta = varargin{1};
-0039 <span class="keyword">elseif</span> length(varargin)==2
-0040     rho = varargin{1};
-0041     theta = varargin{2};
-0042 <span class="keyword">elseif</span> length(varargin)==3
-0043     var = varargin{1};
-0044     x0 = var(:,1);
-0045     y0 = var(:,2);
-0046     rho = varargin{2};
-0047     theta = varargin{3};
-0048 <span class="keyword">elseif</span> length(varargin)==4
-0049     x0 = varargin{1};
-0050     y0 = varargin{2};
-0051     rho = varargin{3};
-0052     theta = varargin{4};
-0053 <span class="keyword">end</span>
-0054 
-0055 
-0056 point = [x0 + rho.*cos(theta) , y0+rho.*sin(theta)];</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0022 
+0023 <span class="comment">% ------</span>
+0024 <span class="comment">% Author: David Legland</span>
+0025 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0026 <span class="comment">% Created: 2004-05-03</span>
+0027 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0028 
+0029 <span class="comment">% default values</span>
+0030 x0 = 0; y0=0;
+0031 rho = 1;
+0032 theta =0;
+0033 
+0034 <span class="comment">% process input parameters</span>
+0035 <span class="keyword">if</span> isscalar(varargin)
+0036     theta = varargin{1};
+0037 <span class="keyword">elseif</span> length(varargin)==2
+0038     rho = varargin{1};
+0039     theta = varargin{2};
+0040 <span class="keyword">elseif</span> length(varargin)==3
+0041     var = varargin{1};
+0042     x0 = var(:,1);
+0043     y0 = var(:,2);
+0044     rho = varargin{2};
+0045     theta = varargin{3};
+0046 <span class="keyword">elseif</span> length(varargin)==4
+0047     x0 = varargin{1};
+0048     y0 = varargin{2};
+0049     rho = varargin{3};
+0050     theta = varargin{4};
+0051 <span class="keyword">end</span>
+0052 
+0053 
+0054 point = [x0 + rho.*cos(theta) , y0+rho.*sin(theta)];</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

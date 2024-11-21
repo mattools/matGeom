@@ -44,7 +44,7 @@
    D = distancePoints(..., 'diag')
    compute only distances between P1(i,:) and P2(i,:).
 
-   See also:
+   See also
    <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="minDistancePoints.html" class="code" title="function varargout = minDistancePoints(p1, varargin)">minDistancePoints</a>, <a href="nndist.html" class="code" title="function [dists, neighInds] = nndist(points)">nndist</a>, <a href="hausdorffDistance.html" class="code" title="function [hd, ind1, ind2] = hausdorffDistance(pts1, pts2)">hausdorffDistance</a></pre></div>
 
 <!-- crossreference -->
@@ -54,7 +54,7 @@ This function calls:
 </ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="circumCircle.html" class="code" title="function varargout = circumCircle(varargin)">circumCircle</a>	CIRCUMCIRCLE Circumscribed circle of three points.</li><li><a href="enclosingCircle.html" class="code" title="function circle = enclosingCircle(pts)">enclosingCircle</a>	ENCLOSINGCIRCLE Find the minimum circle enclosing a set of points.</li><li><a href="intersectCircles.html" class="code" title="function points = intersectCircles(circle1, circle2)">intersectCircles</a>	INTERSECTCIRCLES Intersection points of two circles.</li><li><a href="mergeClosePoints.html" class="code" title="function points = mergeClosePoints(points, varargin)">mergeClosePoints</a>	MERGECLOSEPOINTS Merge points that are closer than a given distance.</li><li><a href="nndist.html" class="code" title="function [dists, neighInds] = nndist(points)">nndist</a>	NNDIST Nearest-neighbor distances of each point in a set.</li><li><a href="../../matGeom/meshes3d/triangulateCurvePair.html" class="code" title="function [vertices, facets] = triangulateCurvePair(curve1, curve2)">triangulateCurvePair</a>	TRIANGULATECURVEPAIR Compute triangulation between a pair of 3D open curves.</li><li><a href="../../matGeom/meshes3d/triangulatePolygonPair.html" class="code" title="function [vertices, faces] = triangulatePolygonPair(poly1, poly2, varargin)">triangulatePolygonPair</a>	Compute triangulation between a pair of 3D closed curves.</li><li><a href="../../matGeom/polygons2d/convexification.html" class="code" title="function co = convexification(varargin)">convexification</a>	CONVEXIFICATION Compute the convexification of a polygon.</li><li><a href="../../matGeom/polygons2d/polygonSignature.html" class="code" title="function [res, thetaList] = polygonSignature(poly, varargin)">polygonSignature</a>	POLYGONSIGNATURE Polar signature of a polygon (polar distance to origin).</li><li><a href="../../matGeom/polygons2d/polylineSelfIntersections.html" class="code" title="function varargout = polylineSelfIntersections(poly, varargin)">polylineSelfIntersections</a>	POLYLINESELFINTERSECTIONS Find self-intersection points of a polyline.</li></ul>
+<li><a href="circumCircle.html" class="code" title="function varargout = circumCircle(varargin)">circumCircle</a>	CIRCUMCIRCLE Circumscribed circle of three points.</li><li><a href="distancePointEllipse.html" class="code" title="function [dist, proj] = distancePointEllipse(point, elli)">distancePointEllipse</a>	DISTANCEPOINTELLIPSE Distance from a point to an ellipse.</li><li><a href="enclosingCircle.html" class="code" title="function circle = enclosingCircle(pts)">enclosingCircle</a>	ENCLOSINGCIRCLE Find the minimum circle enclosing a set of points.</li><li><a href="intersectCircles.html" class="code" title="function points = intersectCircles(circle1, circle2)">intersectCircles</a>	INTERSECTCIRCLES Intersection points of two circles.</li><li><a href="mergeClosePoints.html" class="code" title="function points = mergeClosePoints(points, varargin)">mergeClosePoints</a>	MERGECLOSEPOINTS Merge points that are closer than a given distance.</li><li><a href="nndist.html" class="code" title="function [dists, neighInds] = nndist(points)">nndist</a>	NNDIST Nearest-neighbor distances of each point in a set.</li><li><a href="../../matGeom/geom3d/fitCircle3d.html" class="code" title="function [fittedCircle, circleNormal, residuals] = fitCircle3d(pts, varargin)">fitCircle3d</a>	FITCIRCLE3D Fit a 3D circle to a set of points.</li><li><a href="../../matGeom/graphs/clipMesh2dPolygon.html" class="code" title="function [nodes2, edges2, faces2] = clipMesh2dPolygon(nodes, edges, faces, poly)">clipMesh2dPolygon</a>	CLIPMESH2DPOLYGON  Clip a planar mesh with a polygon.</li><li><a href="../../matGeom/graphs/euclideanMST.html" class="code" title="function varargout = euclideanMST(points)">euclideanMST</a>	EUCLIDEANMST Build euclidean minimal spanning tree of a set of points.</li><li><a href="../../matGeom/graphs/knnGraph.html" class="code" title="function edges = knnGraph(nodes, varargin)">knnGraph</a>	KNNGRAPH Create the k-nearest neighbors graph of a set of points.</li><li><a href="../../matGeom/graphs/relativeNeighborhoodGraph.html" class="code" title="function [gnodes, gedges] = relativeNeighborhoodGraph(points)">relativeNeighborhoodGraph</a>	RELATIVENEIGHBORHOODGRAPH Relative Neighborhood Graph of a set of points.</li><li><a href="../../matGeom/meshes3d/triangulateCurvePair.html" class="code" title="function [vertices, facets] = triangulateCurvePair(curve1, curve2)">triangulateCurvePair</a>	TRIANGULATECURVEPAIR Compute triangulation between a pair of 3D open curves.</li><li><a href="../../matGeom/meshes3d/triangulatePolygonPair.html" class="code" title="function [vertices, faces] = triangulatePolygonPair(poly1, poly2, varargin)">triangulatePolygonPair</a>	TRIANGULATEPOLYGONPAIR Compute triangulation between a pair of 3D closed curves.</li><li><a href="../../matGeom/polygons2d/convexification.html" class="code" title="function co = convexification(varargin)">convexification</a>	CONVEXIFICATION Compute the convexification of a polygon.</li><li><a href="../../matGeom/polygons2d/polygonSignature.html" class="code" title="function [res, thetaList] = polygonSignature(poly, varargin)">polygonSignature</a>	POLYGONSIGNATURE Polar signature of a polygon (polar distance to origin).</li><li><a href="../../matGeom/polygons2d/polylineSelfIntersections.html" class="code" title="function varargout = polylineSelfIntersections(poly, varargin)">polylineSelfIntersections</a>	POLYLINESELFINTERSECTIONS Find self-intersection points of a polyline.</li></ul>
 <!-- crossreference -->
 
 
@@ -78,116 +78,107 @@ This function is called by:
 0016 <span class="comment">%   D = distancePoints(..., 'diag')</span>
 0017 <span class="comment">%   compute only distances between P1(i,:) and P2(i,:).</span>
 0018 <span class="comment">%</span>
-0019 <span class="comment">%   See also:</span>
+0019 <span class="comment">%   See also</span>
 0020 <span class="comment">%   points2d, minDistancePoints, nndist, hausdorffDistance</span>
 0021 <span class="comment">%</span>
 0022 
 0023 <span class="comment">% ------</span>
 0024 <span class="comment">% Author: David Legland</span>
-0025 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
-0026 <span class="comment">% Copyright 2009 INRA - Cepia Software Platform.</span>
-0027 <span class="comment">% created the 24/02/2004.</span>
-0028 <span class="comment">%</span>
-0029 
-0030 <span class="comment">%   HISTORY :</span>
-0031 <span class="comment">%   25/05/2004: manage 2 array of points</span>
-0032 <span class="comment">%   07/04/2004: add option for computing only diagonal.</span>
-0033 <span class="comment">%   30/10/2006: generalize to any dimension, and manage different norms</span>
-0034 <span class="comment">%   03/01/2007: bug for arbitrary norm, and update doc</span>
-0035 <span class="comment">%   28/08/2007: fix bug for norms 2 and infinite, in diagonal case</span>
-0036 
-0037 
-0038 <span class="comment">%% Setup options</span>
-0039 
-0040 <span class="comment">% default values</span>
-0041 diag = false;
-0042 norm = 2;
-0043 
-0044 <span class="comment">% check first argument: norm or diag</span>
-0045 <span class="keyword">if</span> ~isempty(varargin)
-0046     var = varargin{1};
-0047     <span class="keyword">if</span> isnumeric(var)
-0048         norm = var;
-0049     <span class="keyword">elseif</span> strncmp(<span class="string">'diag'</span>, var, 4)
+0025 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0026 <span class="comment">% Created: 2004-02-24</span>
+0027 <span class="comment">% Copyright 2004-2024 INRA - Cepia Software Platform</span>
+0028 
+0029 <span class="comment">%% Setup options</span>
+0030 
+0031 <span class="comment">% default values</span>
+0032 diag = false;
+0033 norm = 2;
+0034 
+0035 <span class="comment">% check first argument: norm or diag</span>
+0036 <span class="keyword">if</span> ~isempty(varargin)
+0037     var = varargin{1};
+0038     <span class="keyword">if</span> isnumeric(var)
+0039         norm = var;
+0040     <span class="keyword">elseif</span> strncmp(<span class="string">'diag'</span>, var, 4)
+0041         diag = true;
+0042     <span class="keyword">end</span>
+0043     varargin(1) = [];
+0044 <span class="keyword">end</span>
+0045 
+0046 <span class="comment">% check last argument: diag</span>
+0047 <span class="keyword">if</span> ~isempty(varargin)
+0048     var = varargin{1};
+0049     <span class="keyword">if</span> strncmp(<span class="string">'diag'</span>, var, 4)
 0050         diag = true;
 0051     <span class="keyword">end</span>
-0052     varargin(1) = [];
-0053 <span class="keyword">end</span>
+0052 <span class="keyword">end</span>
+0053 
 0054 
-0055 <span class="comment">% check last argument: diag</span>
-0056 <span class="keyword">if</span> ~isempty(varargin)
-0057     var = varargin{1};
-0058     <span class="keyword">if</span> strncmp(<span class="string">'diag'</span>, var, 4)
-0059         diag = true;
-0060     <span class="keyword">end</span>
-0061 <span class="keyword">end</span>
-0062 
-0063 
-0064 <span class="comment">% number of points in each array and their dimension</span>
-0065 n1  = size(p1, 1);
-0066 n2  = size(p2, 1);
-0067 d   = size(p1, 2);
-0068 
-0069 <span class="keyword">if</span> diag
-0070     <span class="comment">% compute distance only for apparied couples of pixels</span>
-0071     dist = zeros(n1, 1);
-0072     
-0073     <span class="keyword">if</span> norm == 2
-0074         <span class="comment">% Compute euclidian distance. this is the default case</span>
-0075         <span class="comment">% Compute difference of coordinate for each pair of point</span>
-0076         <span class="comment">% and for each dimension. -&gt; dist is a [n1*n2] array.</span>
-0077         <span class="keyword">for</span> i = 1:d
-0078             dist = dist + (p2(:,i)-p1(:,i)).^2;
-0079         <span class="keyword">end</span>
-0080         dist = sqrt(dist);
-0081         
-0082     <span class="keyword">elseif</span> norm == inf
-0083         <span class="comment">% infinite norm corresponds to maximal difference of coordinate</span>
-0084         <span class="keyword">for</span> i = 1:d
-0085             dist = max(dist, abs(p2(:,i)-p1(:,i)));
-0086         <span class="keyword">end</span>
-0087         
-0088     <span class="keyword">else</span>
-0089         <span class="comment">% compute distance using the specified norm.</span>
-0090         <span class="keyword">for</span> i = 1:d
-0091             dist = dist + power((abs(p2(:,i)-p1(:,i))), norm);
-0092         <span class="keyword">end</span>
-0093         dist = power(dist, 1/norm);
-0094     <span class="keyword">end</span>
-0095 <span class="keyword">else</span>
-0096     <span class="comment">% compute distance for all couples of pixels</span>
-0097     dist = zeros(n1, n2);
-0098     
-0099     <span class="keyword">if</span> norm == 2
-0100         <span class="comment">% Compute euclidian distance. This is the default case.</span>
-0101         <span class="comment">% Compute difference of coordinate for each pair of point</span>
-0102         <span class="comment">% and for each dimension. -&gt; dist is a [n1*n2] array.</span>
-0103         <span class="keyword">for</span> i = 1:d
-0104             <span class="comment">% equivalent to:</span>
-0105             <span class="comment">% dist = dist + ...</span>
-0106             <span class="comment">%   (repmat(p1(:,i), [1 n2])-repmat(p2(:,i)', [n1 1])).^2;</span>
-0107             dist = dist + bsxfun (@minus, p1(:,i), p2(:, i)').^2;
-0108         <span class="keyword">end</span>
-0109         dist = sqrt(dist);
-0110         
-0111     <span class="keyword">elseif</span> norm == inf
-0112         <span class="comment">% infinite norm corresponds to maximal difference of coordinate</span>
-0113         <span class="keyword">for</span> i = 1:d
-0114             dist = max(dist, abs(bsxfun (@minus, p1(:,i), p2(:, i)')));
+0055 <span class="comment">% number of points in each array and their dimension</span>
+0056 n1  = size(p1, 1);
+0057 n2  = size(p2, 1);
+0058 d   = size(p1, 2);
+0059 
+0060 <span class="keyword">if</span> diag
+0061     <span class="comment">% compute distance only for apparied couples of pixels</span>
+0062     dist = zeros(n1, 1);
+0063     
+0064     <span class="keyword">if</span> norm == 2
+0065         <span class="comment">% Compute euclidian distance. this is the default case</span>
+0066         <span class="comment">% Compute difference of coordinate for each pair of point</span>
+0067         <span class="comment">% and for each dimension. -&gt; dist is a [n1*n2] array.</span>
+0068         <span class="keyword">for</span> i = 1:d
+0069             dist = dist + (p2(:,i)-p1(:,i)).^2;
+0070         <span class="keyword">end</span>
+0071         dist = sqrt(dist);
+0072         
+0073     <span class="keyword">elseif</span> norm == inf
+0074         <span class="comment">% infinite norm corresponds to maximal difference of coordinate</span>
+0075         <span class="keyword">for</span> i = 1:d
+0076             dist = max(dist, abs(p2(:,i)-p1(:,i)));
+0077         <span class="keyword">end</span>
+0078         
+0079     <span class="keyword">else</span>
+0080         <span class="comment">% compute distance using the specified norm.</span>
+0081         <span class="keyword">for</span> i = 1:d
+0082             dist = dist + power((abs(p2(:,i)-p1(:,i))), norm);
+0083         <span class="keyword">end</span>
+0084         dist = power(dist, 1/norm);
+0085     <span class="keyword">end</span>
+0086 <span class="keyword">else</span>
+0087     <span class="comment">% compute distance for all couples of pixels</span>
+0088     dist = zeros(n1, n2);
+0089     
+0090     <span class="keyword">if</span> norm == 2
+0091         <span class="comment">% Compute euclidian distance. This is the default case.</span>
+0092         <span class="comment">% Compute difference of coordinate for each pair of point</span>
+0093         <span class="comment">% and for each dimension. -&gt; dist is a [n1*n2] array.</span>
+0094         <span class="keyword">for</span> i = 1:d
+0095             <span class="comment">% equivalent to:</span>
+0096             <span class="comment">% dist = dist + ...</span>
+0097             <span class="comment">%   (repmat(p1(:,i), [1 n2])-repmat(p2(:,i)', [n1 1])).^2;</span>
+0098             dist = dist + bsxfun (@minus, p1(:,i), p2(:, i)').^2;
+0099         <span class="keyword">end</span>
+0100         dist = sqrt(dist);
+0101         
+0102     <span class="keyword">elseif</span> norm == inf
+0103         <span class="comment">% infinite norm corresponds to maximal difference of coordinate</span>
+0104         <span class="keyword">for</span> i = 1:d
+0105             dist = max(dist, abs(bsxfun (@minus, p1(:,i), p2(:, i)')));
+0106         <span class="keyword">end</span>
+0107         
+0108     <span class="keyword">else</span>
+0109         <span class="comment">% compute distance using the specified norm.</span>
+0110         <span class="keyword">for</span> i = 1:d
+0111             <span class="comment">% equivalent to:</span>
+0112             <span class="comment">% dist = dist + power((abs(repmat(p1(:,i), [1 n2]) - ...</span>
+0113             <span class="comment">%     repmat(p2(:,i)', [n1 1]))), norm);</span>
+0114             dist = dist + power(abs(bsxfun(@minus, p1(:,i), p2(:, i)')), norm);
 0115         <span class="keyword">end</span>
-0116         
-0117     <span class="keyword">else</span>
-0118         <span class="comment">% compute distance using the specified norm.</span>
-0119         <span class="keyword">for</span> i = 1:d
-0120             <span class="comment">% equivalent to:</span>
-0121             <span class="comment">% dist = dist + power((abs(repmat(p1(:,i), [1 n2]) - ...</span>
-0122             <span class="comment">%     repmat(p2(:,i)', [n1 1]))), norm);</span>
-0123             dist = dist + power(abs(bsxfun(@minus, p1(:,i), p2(:, i)')), norm);
-0124         <span class="keyword">end</span>
-0125         dist = power(dist, 1/norm);
-0126     <span class="keyword">end</span>
-0127 <span class="keyword">end</span>
-0128</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0116         dist = power(dist, 1/norm);
+0117     <span class="keyword">end</span>
+0118 <span class="keyword">end</span>
+0119</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

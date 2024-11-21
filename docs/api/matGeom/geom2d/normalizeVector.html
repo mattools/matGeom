@@ -47,7 +47,7 @@
    ans =
        1
 
-   See Also:
+   See also
      <a href="vectors2d.html" class="code" title="function vectors2d">vectors2d</a>, <a href="vectorNorm.html" class="code" title="function n = vectorNorm(v, varargin)">vectorNorm</a></pre></div>
 
 <!-- crossreference -->
@@ -57,7 +57,7 @@ This function calls:
 </ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="isParallel.html" class="code" title="function b = isParallel(v1, v2, varargin)">isParallel</a>	ISPARALLEL Check parallelism of two vectors.</li><li><a href="isPerpendicular.html" class="code" title="function b = isPerpendicular(v1, v2, varargin)">isPerpendicular</a>	ISPERPENDICULAR Check orthogonality of two vectors.</li></ul>
+<li><a href="isParallel.html" class="code" title="function b = isParallel(v1, v2, varargin)">isParallel</a>	ISPARALLEL Check parallelism of two vectors.</li><li><a href="isPerpendicular.html" class="code" title="function b = isPerpendicular(v1, v2, varargin)">isPerpendicular</a>	ISPERPENDICULAR Check orthogonality of two vectors.</li><li><a href="parallelLine.html" class="code" title="function res = parallelLine(line, point)">parallelLine</a>	PARALLELLINE Create a line parallel to another one.</li></ul>
 <!-- crossreference -->
 
 
@@ -84,26 +84,21 @@ This function is called by:
 0019 <span class="comment">%   ans =</span>
 0020 <span class="comment">%       1</span>
 0021 <span class="comment">%</span>
-0022 <span class="comment">%   See Also:</span>
+0022 <span class="comment">%   See also</span>
 0023 <span class="comment">%     vectors2d, vectorNorm</span>
 0024 <span class="comment">%</span>
 0025 
-0026 <span class="comment">%   ---------</span>
-0027 <span class="comment">%   author : David Legland</span>
-0028 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0029 <span class="comment">%   created the 29/11/2004.</span>
-0030 <span class="comment">%</span>
+0026 <span class="comment">% ------</span>
+0027 <span class="comment">% Author: David Legland</span>
+0028 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0029 <span class="comment">% Created: 2004-11-29</span>
+0030 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0031 
-0032 <span class="comment">%   HISTORY</span>
-0033 <span class="comment">%   2005-01-14 correct bug</span>
-0034 <span class="comment">%   2009-05-22 rename as normalizeVector</span>
-0035 <span class="comment">%   2011-01-20 use bsxfun</span>
-0036 
-0037 <span class="keyword">if</span> ismatrix(v)
-0038     vn = bsxfun(@rdivide, v, sqrt(sum(v.^2, 2)));
-0039 <span class="keyword">else</span>
-0040     vn = bsxfun(@rdivide, v, sqrt(sum(v.^2, ndims(v))));
-0041 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0032 <span class="keyword">if</span> ismatrix(v)
+0033     vn = bsxfun(@rdivide, v, sqrt(sum(v.^2, 2)));
+0034 <span class="keyword">else</span>
+0035     vn = bsxfun(@rdivide, v, sqrt(sum(v.^2, ndims(v))));
+0036 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

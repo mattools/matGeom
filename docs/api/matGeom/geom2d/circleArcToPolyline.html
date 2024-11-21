@@ -43,14 +43,8 @@
    Return the result in two separate arrays with N lines and 1 column.
 
 
-   See also:
-   <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="circleToPolygon.html" class="code" title="function varargout = circleToPolygon(circle, varargin)">circleToPolygon</a>, <a href="drawCircle.html" class="code" title="function varargout = drawCircle(varargin)">drawCircle</a>, drawPolygon
-
-
- ---------
- author : David Legland
- created the 22/05/2006.
- Copyright 2010 INRA - Cepia Software Platform.</pre></div>
+   See also
+   <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="circleToPolygon.html" class="code" title="function varargout = circleToPolygon(circle, varargin)">circleToPolygon</a>, <a href="drawCircle.html" class="code" title="function varargout = drawCircle(varargin)">drawCircle</a>, drawPolygon</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -82,41 +76,36 @@ This function is called by:
 0015 <span class="comment">%   Return the result in two separate arrays with N lines and 1 column.</span>
 0016 <span class="comment">%</span>
 0017 <span class="comment">%</span>
-0018 <span class="comment">%   See also:</span>
+0018 <span class="comment">%   See also</span>
 0019 <span class="comment">%   circles2d, circleToPolygon, drawCircle, drawPolygon</span>
 0020 <span class="comment">%</span>
-0021 <span class="comment">%</span>
-0022 <span class="comment">% ---------</span>
-0023 <span class="comment">% author : David Legland</span>
-0024 <span class="comment">% created the 22/05/2006.</span>
-0025 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
-0026 <span class="comment">%</span>
+0021 
+0022 <span class="comment">% ------</span>
+0023 <span class="comment">% Author: David Legland</span>
+0024 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0025 <span class="comment">% Created: 2006-05-22</span>
+0026 <span class="comment">% Copyright 2006-2024 INRA - Cepia Software Platform</span>
 0027 
-0028 <span class="comment">% HISTORY</span>
-0029 <span class="comment">% 2011-03-30 use angles in degrees, add default value for N</span>
-0030 <span class="comment">% 2011-12-09 rename to circleArcToPolyline</span>
-0031 
+0028 <span class="comment">% default value for N</span>
+0029 <span class="keyword">if</span> nargin &lt; 2
+0030     N = 65;
+0031 <span class="keyword">end</span>
 0032 
-0033 <span class="comment">% default value for N</span>
-0034 <span class="keyword">if</span> nargin &lt; 2
-0035     N = 65;
-0036 <span class="keyword">end</span>
+0033 <span class="comment">% vector of positions</span>
+0034 t0 = deg2rad(arc(4));
+0035 t1 = t0 + deg2rad(arc(5));
+0036 t = linspace(t0, t1, N)';
 0037 
-0038 <span class="comment">% vector of positions</span>
-0039 t0 = deg2rad(arc(4));
-0040 t1 = t0 + deg2rad(arc(5));
-0041 t = linspace(t0, t1, N)';
-0042 
-0043 <span class="comment">% compute coordinates of vertices</span>
-0044 x = arc(1) + arc(3) * cos(t);
-0045 y = arc(2) + arc(3) * sin(t);
-0046 
-0047 <span class="comment">% format output</span>
-0048 <span class="keyword">if</span> nargout &lt;= 1
-0049     varargout = {[x y]};
-0050 <span class="keyword">else</span>
-0051     varargout = {x, y};
-0052 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0038 <span class="comment">% compute coordinates of vertices</span>
+0039 x = arc(1) + arc(3) * cos(t);
+0040 y = arc(2) + arc(3) * sin(t);
+0041 
+0042 <span class="comment">% format output</span>
+0043 <span class="keyword">if</span> nargout &lt;= 1
+0044     varargout = {[x y]};
+0045 <span class="keyword">else</span>
+0046     varargout = {x, y};
+0047 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

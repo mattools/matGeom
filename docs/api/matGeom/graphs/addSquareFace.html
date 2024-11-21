@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of addSquareFace</title>
+  <meta name="keywords" content="addSquareFace">
+  <meta name="description" content="ADDSQUAREFACE Add a (square) face defined from its vertices to a graph.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; addSquareFace.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>addSquareFace
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ADDSQUAREFACE Add a (square) face defined from its vertices to a graph.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [nodes, edges, faces] = addSquareFace(nodes, edges, faces, faceNodes) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ADDSQUAREFACE Add a (square) face defined from its vertices to a graph.
+
+   [N2 E2 F2] = addSquareFace(N, E, F, FN)
+   Add a new face, defined by the nodes indices FN, to the graph defined
+   by node list N, edge list E, and face list F.
+   Edges of the face are also added, if they are not already present in
+   the edge list.
+
+   See also
+   <a href="patchGraph.html" class="code" title="function varargout = patchGraph(nodes, edges, faces) %#ok<INUSL>">patchGraph</a>, <a href="boundaryGraph.html" class="code" title="function varargout = boundaryGraph(img)">boundaryGraph</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [nodes, edges, faces] = addSquareFace(nodes, edges, faces, faceNodes)</a>
+0002 <span class="comment">%ADDSQUAREFACE Add a (square) face defined from its vertices to a graph.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [N2 E2 F2] = addSquareFace(N, E, F, FN)</span>
+0005 <span class="comment">%   Add a new face, defined by the nodes indices FN, to the graph defined</span>
+0006 <span class="comment">%   by node list N, edge list E, and face list F.</span>
+0007 <span class="comment">%   Edges of the face are also added, if they are not already present in</span>
+0008 <span class="comment">%   the edge list.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   See also</span>
+0011 <span class="comment">%   patchGraph, boundaryGraph</span>
+0012 <span class="comment">%</span>
+0013 
+0014 <span class="comment">% ------</span>
+0015 <span class="comment">% Author: David Legland</span>
+0016 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0017 <span class="comment">% Created: 2004-06-28</span>
+0018 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0019 
+0020 n1 = faceNodes(1,:);
+0021 n2 = faceNodes(2,:);
+0022 n3 = faceNodes(3,:);
+0023 n4 = faceNodes(4,:);
+0024 
+0025 <span class="comment">% search indices of each nodes</span>
+0026 ind1 = find(ismember(nodes, n1, <span class="string">'rows'</span>));       
+0027 ind2 = find(ismember(nodes, n2, <span class="string">'rows'</span>));
+0028 ind3 = find(ismember(nodes, n3, <span class="string">'rows'</span>));       
+0029 ind4 = find(ismember(nodes, n4, <span class="string">'rows'</span>));
+0030 
+0031 <span class="comment">% if nodes are not in the list, we add them</span>
+0032 <span class="keyword">if</span> isempty(ind1)
+0033     nodes = [nodes; n1];
+0034     ind1 = size(nodes, 1);
+0035 <span class="keyword">end</span>
+0036 <span class="keyword">if</span> isempty(ind2)
+0037     nodes = [nodes; n2];
+0038     ind2 = size(nodes, 1);
+0039 <span class="keyword">end</span>
+0040 <span class="keyword">if</span> isempty(ind3)
+0041     nodes = [nodes; n3];
+0042     ind3 = size(nodes, 1);
+0043 <span class="keyword">end</span>
+0044 <span class="keyword">if</span> isempty(ind4)
+0045     nodes = [nodes; n4];
+0046     ind4 = size(nodes, 1);
+0047 <span class="keyword">end</span>
+0048 
+0049 <span class="comment">% add current face to the list</span>
+0050 faces(size(faces, 1)+1, 1:4) = [ind1(1) ind2(1) ind3(1) ind4(1)];
+0051 
+0052 <span class="comment">% create edges of the face</span>
+0053 <span class="comment">% (first index is the smallest one, by convention)</span>
+0054 e1 = [min(ind1, ind2) max(ind1, ind2)];
+0055 e2 = [min(ind2, ind3) max(ind2, ind3)];
+0056 e3 = [min(ind3, ind4) max(ind3, ind4)];
+0057 e4 = [min(ind4, ind1) max(ind4, ind1)];
+0058 
+0059 <span class="comment">% search edge indices in the list</span>
+0060 <span class="comment">% if nodes are not in the list</span>
+0061 <span class="keyword">if</span> isempty(ismember(edges, e1, <span class="string">'rows'</span>))
+0062     edges = [edges; e1];
+0063 <span class="keyword">end</span>
+0064 <span class="keyword">if</span> isempty(ismember(edges, e2, <span class="string">'rows'</span>))
+0065     edges = [edges; e2];
+0066 <span class="keyword">end</span>
+0067 <span class="keyword">if</span> isempty(ismember(edges, e3, <span class="string">'rows'</span>))
+0068     edges = [edges; e3];
+0069 <span class="keyword">end</span>
+0070 <span class="keyword">if</span> isempty(ismember(edges, e4, <span class="string">'rows'</span>))
+0071     edges = [edges; e4];
+0072 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

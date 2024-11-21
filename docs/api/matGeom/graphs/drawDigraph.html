@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawDigraph</title>
+  <meta name="keywords" content="drawDigraph">
+  <meta name="description" content="DRAWDIGRAPH Draw a directed graph, given as a set of vertices and edges.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; drawDigraph.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawDigraph
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWDIGRAPH Draw a directed graph, given as a set of vertices and edges.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawDigraph(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWDIGRAPH Draw a directed graph, given as a set of vertices and edges.
+
+   drawDigraph(NODES1, NODES2, EDGES) 
+   NODES1 are originating vertices
+   NODES2 are destination vertices
+   EDGES is an array, with first column containing index of origin vertex
+   (index in NODES1), and second column containing index of destination
+   vertex (index in NODES2).
+   Edges are drawn with arrows.
+
+   H = drawDigraph(...) 
+   return handle to the set of edges.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawDigraph.html" class="code" title="function varargout = drawDigraph(varargin)">drawDigraph</a>	DRAWDIGRAPH Draw a directed graph, given as a set of vertices and edges.</li><li><a href="drawDirectedEdges.html" class="code" title="function varargout = drawDirectedEdges(nodes, edges, varargin)">drawDirectedEdges</a>	DRAWDIRECTEDEDGES Draw edges with arrow indicating direction.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="drawDigraph.html" class="code" title="function varargout = drawDigraph(varargin)">drawDigraph</a>	DRAWDIGRAPH Draw a directed graph, given as a set of vertices and edges.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawDigraph(varargin)</a>
+0002 <span class="comment">%DRAWDIGRAPH Draw a directed graph, given as a set of vertices and edges.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawDigraph(NODES1, NODES2, EDGES)</span>
+0005 <span class="comment">%   NODES1 are originating vertices</span>
+0006 <span class="comment">%   NODES2 are destination vertices</span>
+0007 <span class="comment">%   EDGES is an array, with first column containing index of origin vertex</span>
+0008 <span class="comment">%   (index in NODES1), and second column containing index of destination</span>
+0009 <span class="comment">%   vertex (index in NODES2).</span>
+0010 <span class="comment">%   Edges are drawn with arrows.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   H = drawDigraph(...)</span>
+0013 <span class="comment">%   return handle to the set of edges.</span>
+0014 <span class="comment">%</span>
+0015 
+0016 <span class="comment">% ------</span>
+0017 <span class="comment">% Author: David Legland</span>
+0018 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0019 <span class="comment">% Created: 2004-08-17</span>
+0020 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0021 
+0022 <span class="comment">%% Initialisations</span>
+0023 
+0024 <span class="comment">% check number of arguments</span>
+0025 <span class="keyword">if</span> nargin &lt; 3
+0026     help <a href="drawDigraph.html" class="code" title="function varargout = drawDigraph(varargin)">drawDigraph</a>;
+0027     <span class="keyword">return</span>;
+0028 <span class="keyword">end</span>
+0029 
+0030 <span class="comment">% initialisations</span>
+0031 sn1 = <span class="string">'bo'</span>;     <span class="comment">% nodes are red circles</span>
+0032 sn2 = <span class="string">'ro'</span>;     <span class="comment">% nodes are red circles</span>
+0033 
+0034 
+0035 <span class="comment">%% process input arguments</span>
+0036 
+0037 
+0038 <span class="comment">% First extract the graph structure</span>
+0039 n1 = varargin{1};
+0040 n2 = varargin{2};
+0041 e  = varargin{3};
+0042 varargin = varargin(4:length(varargin));
+0043 
+0044 <span class="comment">% extract drawing style</span>
+0045 <span class="keyword">if</span> ~isempty(varargin)
+0046     sn1 = varargin{1};
+0047 <span class="keyword">end</span>
+0048 
+0049 <span class="keyword">if</span> length(varargin)&gt;1
+0050     sn2 = varargin{2};
+0051 <span class="keyword">end</span>
+0052 
+0053 
+0054 <span class="comment">%% main drawing processing</span>
+0055 
+0056 hold on;
+0057 
+0058 nodes = [n1 ; n2];
+0059 e(:,2) = e(:,2)+length(n1);
+0060 
+0061 <span class="comment">% Draw a 2 dimensional directed graph</span>
+0062 
+0063     
+0064 <span class="comment">% Draw 2D Edges</span>
+0065 <span class="comment">%if ~strcmp(se, 'none') &amp; size(e, 1)&gt;0</span>
+0066 <span class="comment">%    he = plot([n1(e(:,1),1) n2(e(:,2),1)]', [n1(e(:,1),2) n2(e(:,2),2)]', se);</span>
+0067 <span class="comment">%end</span>
+0068 he = <a href="drawDirectedEdges.html" class="code" title="function varargout = drawDirectedEdges(nodes, edges, varargin)">drawDirectedEdges</a>(nodes, e);
+0069 
+0070 hn = [];
+0071 <span class="comment">% Draw 2D nodes</span>
+0072 <span class="keyword">if</span> ~strcmp(sn1, <span class="string">'none'</span>)
+0073     hn = plot(n1(:,1), n1(:,2), sn1);   
+0074 <span class="keyword">end</span>
+0075 
+0076  <span class="comment">% Draw 2D nodes</span>
+0077 <span class="keyword">if</span> ~strcmp(sn2, <span class="string">'none'</span>)
+0078     hn = plot(n2(:,1), n2(:,2), sn2);   
+0079 <span class="keyword">end</span>
+0080     
+0081    
+0082 <span class="comment">%% format output arguments</span>
+0083 
+0084 <span class="keyword">if</span> nargout==1
+0085     varargout{1} = he;
+0086 <span class="keyword">end</span>
+0087 
+0088 <span class="keyword">if</span> nargout==2
+0089     varargout{1} = hn;
+0090     varargout{2} = he;
+0091 <span class="keyword">end</span>
+0092</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

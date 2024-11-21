@@ -40,7 +40,7 @@
        and returns the union of all triangles. Faces are assumed to be
        convex.
 
-   [TRI INDS] = triangulateFaces(FACES)
+   [TRI, INDS] = triangulateFaces(FACES)
    Also returns original face index of each new triangular face. INDS has
    the same number of rows as TRI, and has values between 1 and the
    number of rows of the original FACES array.
@@ -48,17 +48,17 @@
 
    Example
      % create a basic shape
-     [n e f] = createCubeOctahedron;
+     [n, e, f] = createCubeOctahedron;
      % draw with plain faces
-     figure;
+     figure; hold on; axis equal; view(3);
      drawMesh(n, f);
      % draw as a triangulation
      tri = triangulateFaces(f);
-     figure;
-     patch('vertices', n, 'faces', tri, 'facecolor', 'r');
+     figure; hold on; axis equal; view(3);
+     drawMesh(n, tri, 'facecolor', 'r'); 
 
    See also
-     meshes3d, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a>, <a href="mergeCoplanarFaces.html" class="code" title="function varargout = mergeCoplanarFaces(nodes, varargin)">mergeCoplanarFaces</a></pre></div>
+     meshes3d, <a href="triangulateMesh.html" class="code" title="function varargout = triangulateMesh(varargin)">triangulateMesh</a>, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a>, <a href="mergeCoplanarFaces.html" class="code" title="function varargout = mergeCoplanarFaces(nodes, varargin)">mergeCoplanarFaces</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -67,7 +67,7 @@ This function calls:
 </ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="cylinderMesh.html" class="code" title="function varargout = cylinderMesh(cyl, varargin)">cylinderMesh</a>	Create a 3D mesh representing a cylinder.</li><li><a href="distancePointMesh.html" class="code" title="function [dist, proj] = distancePointMesh(point, vertices, faces, varargin)">distancePointMesh</a>	DISTANCEPOINTMESH  Shortest distance between a (3D) point and a triangle mesh.</li><li><a href="intersectLineMesh3d.html" class="code" title="function [points, pos, faceInds, lineInds] = intersectLineMesh3d(line, vertices, varargin)">intersectLineMesh3d</a>	Intersection points of a 3D line with a mesh.</li><li><a href="meshAdjacencyMatrix.html" class="code" title="function adj = meshAdjacencyMatrix(faces, varargin)">meshAdjacencyMatrix</a>	MESHADJACENCYMATRIX Compute adjacency matrix of a mesh from set of faces.</li><li><a href="meshCurvatures.html" class="code" title="function [C1, C2, U1, U2, H, K, N] = meshCurvatures(vertices, faces, varargin)">meshCurvatures</a>	Compute principal curvatures on mesh vertices.</li><li><a href="meshVertexClustering.html" class="code" title="function varargout = meshVertexClustering(vertices, faces, spacing, varargin)">meshVertexClustering</a>	MESHVERTEXCLUSTERING Simplifies a mesh using vertex clustering.</li><li><a href="meshVolume.html" class="code" title="function vol = meshVolume(varargin)">meshVolume</a>	(Signed) volume of the space enclosed by a polygonal mesh.</li></ul>
+<li><a href="cylinderMesh.html" class="code" title="function varargout = cylinderMesh(cyl, varargin)">cylinderMesh</a>	CYLINDERMESH Create a 3D mesh representing a cylinder.</li><li><a href="distancePointMesh.html" class="code" title="function [dist, proj] = distancePointMesh(points, vertices, faces, varargin)">distancePointMesh</a>	DISTANCEPOINTMESH Shortest distance between a (3D) point and a triangle mesh.</li><li><a href="intersectLineMesh3d.html" class="code" title="function [points, pos, faceInds, lineInds] = intersectLineMesh3d(line, vertices, varargin)">intersectLineMesh3d</a>	INTERSECTLINEMESH3D Intersection points of a 3D line with a mesh.</li><li><a href="meshAdjacencyMatrix.html" class="code" title="function adj = meshAdjacencyMatrix(faces, varargin)">meshAdjacencyMatrix</a>	MESHADJACENCYMATRIX Compute adjacency matrix of a mesh from set of faces.</li><li><a href="meshCentroid.html" class="code" title="function centroid = meshCentroid(varargin)">meshCentroid</a>	MESHCENTROID Compute the centroid of the input mesh.</li><li><a href="meshCurvatures.html" class="code" title="function [C1, C2, U1, U2, H, K, N] = meshCurvatures(vertices, faces, varargin)">meshCurvatures</a>	MESHCURVATURES Compute principal curvatures on mesh vertices.</li><li><a href="meshEquivalentEllipsoid.html" class="code" title="function ellipsoid = meshEquivalentEllipsoid(vertices, faces, varargin)">meshEquivalentEllipsoid</a>	MESHEQUIVALENTELLIPSOID Equivalent ellipsoid with same moments as the given mesh.</li><li><a href="meshVertexClustering.html" class="code" title="function varargout = meshVertexClustering(vertices, faces, spacing, varargin)">meshVertexClustering</a>	MESHVERTEXCLUSTERING Simplifies a mesh using vertex clustering.</li><li><a href="meshVolume.html" class="code" title="function vol = meshVolume(varargin)">meshVolume</a>	MESHVOLUME (Signed) volume of the space enclosed by a polygonal mesh.</li><li><a href="triangulateMesh.html" class="code" title="function varargout = triangulateMesh(varargin)">triangulateMesh</a>	TRIANGULATEMESH Convert a non-triangle mesh into a triangle mesh.</li></ul>
 <!-- crossreference -->
 
 
@@ -87,7 +87,7 @@ This function is called by:
 0012 <span class="comment">%       and returns the union of all triangles. Faces are assumed to be</span>
 0013 <span class="comment">%       convex.</span>
 0014 <span class="comment">%</span>
-0015 <span class="comment">%   [TRI INDS] = triangulateFaces(FACES)</span>
+0015 <span class="comment">%   [TRI, INDS] = triangulateFaces(FACES)</span>
 0016 <span class="comment">%   Also returns original face index of each new triangular face. INDS has</span>
 0017 <span class="comment">%   the same number of rows as TRI, and has values between 1 and the</span>
 0018 <span class="comment">%   number of rows of the original FACES array.</span>
@@ -95,24 +95,24 @@ This function is called by:
 0020 <span class="comment">%</span>
 0021 <span class="comment">%   Example</span>
 0022 <span class="comment">%     % create a basic shape</span>
-0023 <span class="comment">%     [n e f] = createCubeOctahedron;</span>
+0023 <span class="comment">%     [n, e, f] = createCubeOctahedron;</span>
 0024 <span class="comment">%     % draw with plain faces</span>
-0025 <span class="comment">%     figure;</span>
+0025 <span class="comment">%     figure; hold on; axis equal; view(3);</span>
 0026 <span class="comment">%     drawMesh(n, f);</span>
 0027 <span class="comment">%     % draw as a triangulation</span>
 0028 <span class="comment">%     tri = triangulateFaces(f);</span>
-0029 <span class="comment">%     figure;</span>
-0030 <span class="comment">%     patch('vertices', n, 'faces', tri, 'facecolor', 'r');</span>
+0029 <span class="comment">%     figure; hold on; axis equal; view(3);</span>
+0030 <span class="comment">%     drawMesh(n, tri, 'facecolor', 'r');</span>
 0031 <span class="comment">%</span>
 0032 <span class="comment">%   See also</span>
-0033 <span class="comment">%     meshes3d, drawMesh, mergeCoplanarFaces</span>
+0033 <span class="comment">%     meshes3d, triangulateMesh, drawMesh, mergeCoplanarFaces</span>
 0034 <span class="comment">%</span>
 0035 
 0036 <span class="comment">% ------</span>
 0037 <span class="comment">% Author: David Legland</span>
-0038 <span class="comment">% e-mail: david.legland@inra.fr</span>
-0039 <span class="comment">% Created: 2008-09-08,    using Matlab 7.4.0.287 (R2007a)</span>
-0040 <span class="comment">% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0038 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0039 <span class="comment">% Created: 2008-09-08, using Matlab 7.4.0.287 (R2007a)</span>
+0040 <span class="comment">% Copyright 2008-2024 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas</span>
 0041 
 0042 <span class="comment">%% Tri mesh case: return original set of faces</span>
 0043 
@@ -188,6 +188,6 @@ This function is called by:
 0113     <span class="keyword">end</span>
 0114 <span class="keyword">end</span>
 0115</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

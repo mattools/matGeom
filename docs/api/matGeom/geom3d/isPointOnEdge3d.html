@@ -4,7 +4,7 @@
 <head>
   <title>Description of isPointOnEdge3d</title>
   <meta name="keywords" content="isPointOnEdge3d">
-  <meta name="description" content="Test if a 3D point belongs to an edge.">
+  <meta name="description" content="ISPOINTONEDGE3D Test if a 3D point belongs to an edge.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Test if a 3D point belongs to an edge.</strong></div>
+<div class="box"><strong>ISPOINTONEDGE3D Test if a 3D point belongs to an edge.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function b = isPointOnEdge3d(point, edge, varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Test if a 3D point belongs to an edge.
+<div class="fragment"><pre class="comment">ISPOINTONEDGE3D Test if a 3D point belongs to an edge.
 
    Usage
    B = isPointOnEdge3d(POINT, EDGE)
@@ -99,17 +99,17 @@
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="edgeToLine3d.html" class="code" title="function line = edgeToLine3d(edge)">edgeToLine3d</a>	EDGETOLINE3D Convert a 3D edge to a 3D straight line.</li><li><a href="isPointOnLine3d.html" class="code" title="function b = isPointOnLine3d(point, line, varargin)">isPointOnLine3d</a>	ISPOINTONLINE3D Test if a 3D point belongs to a 3D line.</li><li><a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>	Return the position of a 3D point projected on a 3D line.</li></ul>
+<li><a href="edgeToLine3d.html" class="code" title="function line = edgeToLine3d(edge)">edgeToLine3d</a>	EDGETOLINE3D Convert a 3D edge to a 3D straight line.</li><li><a href="isPointOnLine3d.html" class="code" title="function b = isPointOnLine3d(point, line, varargin)">isPointOnLine3d</a>	ISPOINTONLINE3D Test if a 3D point belongs to a 3D line.</li><li><a href="line3dPosition.html" class="code" title="function pos = line3dPosition(point, line)">line3dPosition</a>	LINEPOSITION3D Return the position of a 3D point projected on a 3D line.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="intersectEdgePolygon3d.html" class="code" title="function [inter, valid] = intersectEdgePolygon3d(edge, poly)">intersectEdgePolygon3d</a>	Intersection point of a 3D EDGE segment and a 3D polygon.</li></ul>
+<li><a href="intersectEdgePolygon3d.html" class="code" title="function [inter, valid] = intersectEdgePolygon3d(edge, poly)">intersectEdgePolygon3d</a>	INTERSECTEDGEPOLYGON3D Intersection point of a 3D edge segment and a 3D polygon.</li></ul>
 <!-- crossreference -->
 
 
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function b = isPointOnEdge3d(point, edge, varargin)</a>
-0002 <span class="comment">% Test if a 3D point belongs to an edge.</span>
+0002 <span class="comment">%ISPOINTONEDGE3D Test if a 3D point belongs to an edge.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   Usage</span>
 0005 <span class="comment">%   B = isPointOnEdge3d(POINT, EDGE)</span>
@@ -178,25 +178,29 @@ This function is called by:
 0068 <span class="comment">%   edges3d, points3d, isPointOnLine3d</span>
 0069 <span class="comment">%</span>
 0070 
-0071 
-0072 
-0073 <span class="comment">% extract computation tolerance</span>
-0074 tol = 1e-14;
-0075 <span class="keyword">if</span> ~isempty(varargin)
-0076     tol = varargin{1};
-0077 <span class="keyword">end</span>
-0078 
-0079 <span class="comment">% supporting line of the edge</span>
-0080 line = <a href="edgeToLine3d.html" class="code" title="function line = edgeToLine3d(edge)">edgeToLine3d</a>(edge);
-0081 
-0082 <span class="comment">% check if point belong to supporting line</span>
-0083 onLine = <a href="isPointOnLine3d.html" class="code" title="function b = isPointOnLine3d(point, line, varargin)">isPointOnLine3d</a>(point, line, tol);
-0084 
-0085 <span class="comment">% check if position is within the [0 1] bounds</span>
-0086 pos = <a href="linePosition3d.html" class="code" title="function pos = linePosition3d(point, line)">linePosition3d</a>(point, line);
-0087 withinBounds = pos &gt; -tol &amp; pos &lt; 1+tol;
+0071 <span class="comment">% ------</span>
+0072 <span class="comment">% Author: David Legland</span>
+0073 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0074 <span class="comment">% Created: 2021-02-24, using Matlab 9.9.0.1570001 (R2020b) Update 4</span>
+0075 <span class="comment">% Copyright 2021-2024 INRAE - BIA-BIBS</span>
+0076 
+0077 <span class="comment">% extract computation tolerance</span>
+0078 tol = 1e-14;
+0079 <span class="keyword">if</span> ~isempty(varargin)
+0080     tol = varargin{1};
+0081 <span class="keyword">end</span>
+0082 
+0083 <span class="comment">% supporting line of the edge</span>
+0084 line = <a href="edgeToLine3d.html" class="code" title="function line = edgeToLine3d(edge)">edgeToLine3d</a>(edge);
+0085 
+0086 <span class="comment">% check if point belong to supporting line</span>
+0087 onLine = <a href="isPointOnLine3d.html" class="code" title="function b = isPointOnLine3d(point, line, varargin)">isPointOnLine3d</a>(point, line, tol);
 0088 
-0089 b = onLine &amp; withinBounds;</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0089 <span class="comment">% check if position is within the [0 1] bounds</span>
+0090 pos = <a href="line3dPosition.html" class="code" title="function pos = line3dPosition(point, line)">line3dPosition</a>(point, line);
+0091 withinBounds = pos &gt; -tol &amp; pos &lt; 1+tol;
+0092 
+0093 b = onLine &amp; withinBounds;</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

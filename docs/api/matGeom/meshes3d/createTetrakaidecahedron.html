@@ -91,41 +91,37 @@ This function is called by:
 0024 <span class="comment">%   See also</span>
 0025 <span class="comment">%   meshes3d, drawMesh</span>
 0026 
-0027 <span class="comment">%   ---------</span>
-0028 <span class="comment">%   author : David Legland</span>
-0029 <span class="comment">%   e-mail: david.legland@inra.fr</span>
-0030 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0031 <span class="comment">%   created the 10/02/2005.</span>
-0032 <span class="comment">%</span>
-0033 
-0034 <span class="comment">%   HISTORY</span>
-0035 <span class="comment">%   04/01/2007: remove unused variables</span>
-0036 
-0037 nodes = [<span class="keyword">...</span>
-0038     1 0 2;0 1 2;-1 0 2;0 -1 2;<span class="keyword">...</span>
-0039     2 0 1;0 2 1;-2 0 1;0 -2 1;<span class="keyword">...</span>
-0040     2 1 0;1 2 0;-1 2 0;-2 1 0;-2 -1 0;-1 -2 0;1 -2 0;2 -1 0;<span class="keyword">...</span>
-0041     2 0 -1;0 2 -1;-2 0 -1;0 -2 -1;<span class="keyword">...</span>
-0042     1 0 -2;0 1 -2;-1 0 -2;0 -1 -2];
-0043 
-0044 edges = [<span class="keyword">...</span>
-0045     1 2;1 4;1 5;2 3;2 6;3 4;3 7;4 8;<span class="keyword">...</span>
-0046     5 9;5 16;6 10;6 11;7 12;7 13;8 14;8 15;<span class="keyword">...</span>
-0047     9 10;9 17;10 18;11 12;11 18;12 19;13 14;13 19;14 20;15 16;15 20;16 17;<span class="keyword">...</span><span class="comment">.</span>
-0048     17 21;18 22;19 23;20 24;21 22;21 24;22 23;23 24];
-0049     
-0050     
-0051 faces = {<span class="keyword">...</span>
-0052     [1 2 3 4], <span class="keyword">...</span>
-0053     [1 4 8 15 16 5], [1 5 9 10 6 2], [2 6 11 12 7 3], [3 7 13 14 8 4],<span class="keyword">...</span>
-0054     [5 16 17 9], [6 10 18 11], [7 12 19 13], [8 14 20 15],<span class="keyword">...</span>
-0055     [9 17 21 22 18 10], [11 18 22 23 19 12], [13 19 23 24 20 14], [15 20 24 21 17 16], <span class="keyword">...</span>
-0056     [21 24 23 22]};
-0057 faces = faces';
-0058     
-0059 <span class="comment">% format output</span>
-0060 varargout = formatMeshOutput(nargout, nodes, edges, faces);
-0061</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0027 <span class="comment">% ------</span>
+0028 <span class="comment">% Author: David Legland</span>
+0029 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0030 <span class="comment">% Created: 2005-02-10</span>
+0031 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0032 
+0033 nodes = [<span class="keyword">...</span>
+0034     1 0 2;0 1 2;-1 0 2;0 -1 2;<span class="keyword">...</span>
+0035     2 0 1;0 2 1;-2 0 1;0 -2 1;<span class="keyword">...</span>
+0036     2 1 0;1 2 0;-1 2 0;-2 1 0;-2 -1 0;-1 -2 0;1 -2 0;2 -1 0;<span class="keyword">...</span>
+0037     2 0 -1;0 2 -1;-2 0 -1;0 -2 -1;<span class="keyword">...</span>
+0038     1 0 -2;0 1 -2;-1 0 -2;0 -1 -2];
+0039 
+0040 edges = [<span class="keyword">...</span>
+0041     1 2;1 4;1 5;2 3;2 6;3 4;3 7;4 8;<span class="keyword">...</span>
+0042     5 9;5 16;6 10;6 11;7 12;7 13;8 14;8 15;<span class="keyword">...</span>
+0043     9 10;9 17;10 18;11 12;11 18;12 19;13 14;13 19;14 20;15 16;15 20;16 17;<span class="keyword">...</span><span class="comment">.</span>
+0044     17 21;18 22;19 23;20 24;21 22;21 24;22 23;23 24];
+0045     
+0046     
+0047 faces = {<span class="keyword">...</span>
+0048     [1 2 3 4], <span class="keyword">...</span>
+0049     [1 4 8 15 16 5], [1 5 9 10 6 2], [2 6 11 12 7 3], [3 7 13 14 8 4],<span class="keyword">...</span>
+0050     [5 16 17 9], [6 10 18 11], [7 12 19 13], [8 14 20 15],<span class="keyword">...</span>
+0051     [9 17 21 22 18 10], [11 18 22 23 19 12], [13 19 23 24 20 14], [15 20 24 21 17 16], <span class="keyword">...</span>
+0052     [21 24 23 22]};
+0053 faces = faces';
+0054     
+0055 <span class="comment">% format output</span>
+0056 varargout = formatMeshOutput(nargout, nodes, edges, faces);
+0057</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

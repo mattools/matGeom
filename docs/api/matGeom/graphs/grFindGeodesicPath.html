@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of grFindGeodesicPath</title>
+  <meta name="keywords" content="grFindGeodesicPath">
+  <meta name="description" content="GRFINDGEODESICPATH Find a geodesic path between two nodes in the graph.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; grFindGeodesicPath.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>grFindGeodesicPath
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>GRFINDGEODESICPATH Find a geodesic path between two nodes in the graph.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function path = grFindGeodesicPath(nodes, edges, ind0, ind1, edgeWeights) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">GRFINDGEODESICPATH Find a geodesic path between two nodes in the graph.
+
+   PATH = grFindGeodesicPath(NODES, EDGES, NODE1, NODE2, WEIGHTS)
+   NODES and EDGES defines the graph, NODE1 and NODE2 are indices of the
+   node extremities, and WEIGHTS is the set of weights associated to each
+   edge.
+   The function returns a set of edge indices.
+
+
+   See also
+   <a href="grFindMaximalLengthPath.html" class="code" title="function path = grFindMaximalLengthPath(nodes, edges, edgeWeights)">grFindMaximalLengthPath</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="grAdjacentNodes.html" class="code" title="function nodes2 = grAdjacentNodes(edges, node)">grAdjacentNodes</a>	GRADJACENTNODES Find list of nodes adjacent to a given node.</li><li><a href="grPropagateDistance.html" class="code" title="function d = grPropagateDistance(v, e, v0, l)">grPropagateDistance</a>	GRPROPAGATEDISTANCE Propagates distances from a vertex to other vertices.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function path = grFindGeodesicPath(nodes, edges, ind0, ind1, edgeWeights)</a>
+0002 <span class="comment">%GRFINDGEODESICPATH Find a geodesic path between two nodes in the graph.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PATH = grFindGeodesicPath(NODES, EDGES, NODE1, NODE2, WEIGHTS)</span>
+0005 <span class="comment">%   NODES and EDGES defines the graph, NODE1 and NODE2 are indices of the</span>
+0006 <span class="comment">%   node extremities, and WEIGHTS is the set of weights associated to each</span>
+0007 <span class="comment">%   edge.</span>
+0008 <span class="comment">%   The function returns a set of edge indices.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   See also</span>
+0012 <span class="comment">%   grFindMaximalLengthPath</span>
+0013 
+0014 <span class="comment">% ------</span>
+0015 <span class="comment">% Author: David Legland</span>
+0016 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0017 <span class="comment">% Created: 2011-05-22, using Matlab 7.9.0.529 (R2009b)</span>
+0018 <span class="comment">% Copyright 2011-2024 INRA - Cepia Software Platform</span>
+0019 
+0020 <span class="comment">% ensure weights are defined</span>
+0021 <span class="keyword">if</span> ~exist(<span class="string">'edgeWeights'</span>, <span class="string">'var'</span>)
+0022     edgeWeights = ones(size(edges, 1), 1);
+0023 <span class="keyword">end</span>
+0024 
+0025 <span class="comment">% check indices limits</span>
+0026 nNodes = size(nodes, 1);
+0027 <span class="keyword">if</span> max(ind0) &gt; nNodes
+0028     error(<span class="string">'Start index exceed number of nodes in the graph'</span>);
+0029 <span class="keyword">end</span>
+0030 <span class="keyword">if</span> max(ind1) &gt; nNodes
+0031     error(<span class="string">'End index exceed number of nodes in the graph'</span>);
+0032 <span class="keyword">end</span>
+0033 
+0034 <span class="comment">% find a vertex opposite to the first extremity</span>
+0035 dists = <a href="grPropagateDistance.html" class="code" title="function d = grPropagateDistance(v, e, v0, l)">grPropagateDistance</a>(nodes, edges, ind0, edgeWeights);
+0036 
+0037 <span class="comment">% iterate on neighbors of current node: choose next neighbor with smallest</span>
+0038 <span class="comment">% cumulated weight, until we are back on source node</span>
+0039 path = [];
+0040 <span class="keyword">while</span> true
+0041     <span class="comment">% find neighbor with lowest cumulated distance</span>
+0042     neighs = <a href="grAdjacentNodes.html" class="code" title="function nodes2 = grAdjacentNodes(edges, node)">grAdjacentNodes</a>(edges, ind1);
+0043     neighDists = dists(neighs);
+0044     indN = find(neighDists == min(neighDists), 1);
+0045     ind2 = neighs(indN);
+0046 
+0047     <span class="keyword">if</span> isempty(ind2)
+0048         warning(<span class="string">'graphs:grFindGeodesicPath'</span>, <span class="keyword">...</span>
+0049             <span class="string">'No neighbor node found for node %d, graph may be not connected'</span>, ind1);
+0050         <span class="keyword">break</span>;
+0051     <span class="keyword">end</span>
+0052 
+0053     <span class="comment">% add edge index to the path</span>
+0054     indE = find(sum(ismember(edges, [ind1 ind2]), 2) == 2, 1);
+0055     path = [path indE]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0056     
+0057     <span class="comment">% test if path is finished or not</span>
+0058     <span class="keyword">if</span> ind2 == ind0
+0059         <span class="keyword">break</span>;
+0060     <span class="keyword">end</span>
+0061     ind1 = ind2;
+0062 <span class="keyword">end</span>
+0063 
+0064 <span class="comment">% reverse path direction</span>
+0065 path = path(end:-1:1);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of fitLine</title>
+  <meta name="keywords" content="fitLine">
+  <meta name="description" content="FITLINE Fit a straight line to a set of points.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; fitLine.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>fitLine
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>FITLINE Fit a straight line to a set of points.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [line, res] = fitLine(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">FITLINE Fit a straight line to a set of points.
+
+   LIN = fitLine(X, Y)
+   Computes parametric line minimizing square error of all points (X,Y).
+   Result is a 4*1 array, containing coordinates of a point of the line,
+   and the direction vector of the line, that is  L=[x0 y0 dx dy];
+
+   LIN = fitLine(PTS)
+   Gives coordinats of points in a single array.
+
+   LIN = fitLine(PT0, PTS);
+   LIN = fitLine(PT0, X, Y);
+   with PT0 = [x0 y0], imposes the line to contain point PT0.
+
+   [LIN, RES] = fitLine(...)
+   Also returns the residual error.
+
+
+   Requires:
+   Optimization toolbox
+
+   See also
+     <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="fitEllipse.html" class="code" title="function elli = fitEllipse(varargin)">fitEllipse</a>, polyfit, polyfit2, lsqlin</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="cartesianLine.html" class="code" title="function line = cartesianLine(varargin)">cartesianLine</a>	CARTESIANLINE Create a straight line from cartesian equation coefficients.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [line, res] = fitLine(varargin)</a>
+0002 <span class="comment">%FITLINE Fit a straight line to a set of points.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   LIN = fitLine(X, Y)</span>
+0005 <span class="comment">%   Computes parametric line minimizing square error of all points (X,Y).</span>
+0006 <span class="comment">%   Result is a 4*1 array, containing coordinates of a point of the line,</span>
+0007 <span class="comment">%   and the direction vector of the line, that is  L=[x0 y0 dx dy];</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   LIN = fitLine(PTS)</span>
+0010 <span class="comment">%   Gives coordinats of points in a single array.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   LIN = fitLine(PT0, PTS);</span>
+0013 <span class="comment">%   LIN = fitLine(PT0, X, Y);</span>
+0014 <span class="comment">%   with PT0 = [x0 y0], imposes the line to contain point PT0.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   [LIN, RES] = fitLine(...)</span>
+0017 <span class="comment">%   Also returns the residual error.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   Requires:</span>
+0021 <span class="comment">%   Optimization toolbox</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   See also</span>
+0024 <span class="comment">%     lines2d, fitEllipse, polyfit, polyfit2, lsqlin</span>
+0025 <span class="comment">%</span>
+0026 
+0027 <span class="comment">% ------</span>
+0028 <span class="comment">% Author: David Legland</span>
+0029 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0030 <span class="comment">% Created: 2004-04-30</span>
+0031 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0032 
+0033 <span class="comment">%% Extract input arguments</span>
+0034 <span class="keyword">if</span> isscalar(varargin)
+0035     <span class="comment">% argument is an array of points</span>
+0036     var = varargin{1};
+0037     x = var(:,1);
+0038     y = var(:,2);
+0039 <span class="keyword">elseif</span> length(varargin)==2
+0040     var = varargin{1};
+0041     <span class="keyword">if</span> size(var, 1)==1
+0042         var = varargin{2};
+0043         x = var(:,1);
+0044         y = var(:,2);
+0045     <span class="keyword">else</span>
+0046         <span class="comment">% two arguments : x and y</span>
+0047         x = var;
+0048         y = varargin{2};
+0049     <span class="keyword">end</span>
+0050 <span class="keyword">elseif</span> length(varargin)==3
+0051     <span class="comment">% three arguments : ref point, x and y</span>
+0052     x = varargin{2};
+0053     y = varargin{3};
+0054 <span class="keyword">end</span>
+0055 
+0056 
+0057 <span class="comment">%% Main algorithm</span>
+0058 
+0059 <span class="comment">% Initializations:</span>
+0060 N = size(x, 1);
+0061 
+0062 <span class="comment">% main matrix of the problem</span>
+0063 X = [x y ones(N,1)];
+0064 
+0065 <span class="comment">% conditions initialisations</span>
+0066 A = zeros(0, 3);
+0067 b = [];
+0068 Aeq1 = [1 1 0];
+0069 beq1 = 1;
+0070 Aeq2 = [1 -1 0];
+0071 beq2 = 1;
+0072 
+0073 <span class="comment">% disable verbosity of optimisation</span>
+0074 opt = optimset(<span class="string">'lsqlin'</span>);
+0075 opt.LargeScale = <span class="string">'off'</span>;
+0076 opt.Display = <span class="string">'off'</span>;
+0077 
+0078 <span class="comment">% compute line coefficients [a;b;c] , in the form a*x + b*y + c = 0</span>
+0079 <span class="comment">% using linear regression</span>
+0080 <span class="comment">% Check for both a=1 and b=1, such that we keep the result with lowest</span>
+0081 <span class="comment">% residual error</span>
+0082 [coef1, res1] = lsqlin(X, zeros(N, 1), A, b, Aeq1, beq1, [], [], [], opt);
+0083 [coef2, res2] = lsqlin(X, zeros(N, 1), A, b, Aeq2, beq2, [], [], [], opt);
+0084 
+0085 <span class="comment">% choose the regression model with lowest remaining residual error</span>
+0086 <span class="keyword">if</span> res1 &lt; res2
+0087     coef = coef1;
+0088     res = res1;
+0089 <span class="keyword">else</span>
+0090     coef = coef2;
+0091     res = res2;
+0092 <span class="keyword">end</span>
+0093 
+0094 
+0095 <span class="comment">% convert coefficients to [X0 Y0 DX DY] format</span>
+0096 line = <a href="cartesianLine.html" class="code" title="function line = cartesianLine(varargin)">cartesianLine</a>(coef');</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of line3dPoint</title>
+  <meta name="keywords" content="line3dPoint">
+  <meta name="description" content="LINE3DPOINT Coordinates of a 3D point on a 3D line from its position.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; line3dPoint.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>line3dPoint
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>LINE3DPOINT Coordinates of a 3D point on a 3D line from its position.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function point = line3dPoint(line, pos) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">LINE3DPOINT Coordinates of a 3D point on a 3D line from its position.
+
+   POINT = line3dPoint(LINE, POS)
+   Retrieves the coordinates of the point located on the line LINE, at the
+   position given by POS. 
+   LINE should be a 1-by-6 row vector, and POS a scalar corresponding to
+   parametric position on the line. The result POINT is a N-by-3 array
+   corresponding to point coordinates.
+   Also supports array processing: either LINE or POS can be an array with
+   N rows and the other argument is a scalar, or both LINE and POS have N
+   rows. In all cases, the result is a N-by-3 array of point coordinates.
+
+   Example
+     line = createLine3d([10 20 30], [30 90 60]);
+     point = line3dPoint(line, 0.7);
+     line3dPosition(point, line)
+     ans =
+         0.7000
+
+   See also
+     <a href="lines3d.html" class="code" title="function lines3d(varargin)">lines3d</a>, <a href="line3dPosition.html" class="code" title="function pos = line3dPosition(point, line)">line3dPosition</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function point = line3dPoint(line, pos)</a>
+0002 <span class="comment">%LINE3DPOINT Coordinates of a 3D point on a 3D line from its position.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POINT = line3dPoint(LINE, POS)</span>
+0005 <span class="comment">%   Retrieves the coordinates of the point located on the line LINE, at the</span>
+0006 <span class="comment">%   position given by POS.</span>
+0007 <span class="comment">%   LINE should be a 1-by-6 row vector, and POS a scalar corresponding to</span>
+0008 <span class="comment">%   parametric position on the line. The result POINT is a N-by-3 array</span>
+0009 <span class="comment">%   corresponding to point coordinates.</span>
+0010 <span class="comment">%   Also supports array processing: either LINE or POS can be an array with</span>
+0011 <span class="comment">%   N rows and the other argument is a scalar, or both LINE and POS have N</span>
+0012 <span class="comment">%   rows. In all cases, the result is a N-by-3 array of point coordinates.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   Example</span>
+0015 <span class="comment">%     line = createLine3d([10 20 30], [30 90 60]);</span>
+0016 <span class="comment">%     point = line3dPoint(line, 0.7);</span>
+0017 <span class="comment">%     line3dPosition(point, line)</span>
+0018 <span class="comment">%     ans =</span>
+0019 <span class="comment">%         0.7000</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See also</span>
+0022 <span class="comment">%     lines3d, line3dPosition</span>
+0023 
+0024 <span class="comment">% ------</span>
+0025 <span class="comment">% Author: David Legland</span>
+0026 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0027 <span class="comment">% Created: 2024-07-11, using Matlab 24.1.0.2628055 (R2024a) Update 4</span>
+0028 <span class="comment">% Copyright 2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0029 
+0030 x = line(:,1) + pos(:) .* line(:,4);
+0031 y = line(:,2) + pos(:) .* line(:,5);
+0032 z = line(:,3) + pos(:) .* line(:,6);
+0033 point = [x(:) y(:) z(:)];</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

@@ -48,7 +48,7 @@
      drawBox(box, 'k')
      drawPolyline(res, 'linewidth', 2, 'color', 'b')
  
-   See also:
+   See also
      polygons2d, boxes2d, <a href="clipPolygon.html" class="code" title="function poly2 = clipPolygon(polygon, w)">clipPolygon</a>, clipEdge</pre></div>
 
 <!-- crossreference -->
@@ -86,62 +86,60 @@ This function is called by:
 0020 <span class="comment">%     drawBox(box, 'k')</span>
 0021 <span class="comment">%     drawPolyline(res, 'linewidth', 2, 'color', 'b')</span>
 0022 <span class="comment">%</span>
-0023 <span class="comment">%   See also:</span>
+0023 <span class="comment">%   See also</span>
 0024 <span class="comment">%     polygons2d, boxes2d, clipPolygon, clipEdge</span>
 0025 <span class="comment">%</span>
 0026 
-0027 <span class="comment">% ---------</span>
-0028 <span class="comment">% author : David Legland</span>
-0029 <span class="comment">% created the 14/05/2005.</span>
-0030 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
-0031 
-0032 <span class="comment">%   HISTORY</span>
-0033 <span class="comment">%   2007/09/14 fix doc</span>
-0034 
-0035 <span class="comment">% check case of polylines stored in cell array</span>
-0036 <span class="keyword">if</span> iscell(poly)
-0037     res = cell(1, length(poly));
-0038     <span class="keyword">for</span> i = 1:length(poly)
-0039         res{i} = <a href="clipPolyline.html" class="code" title="function res = clipPolyline(poly, box)">clipPolyline</a>(poly{i}, box);
-0040     <span class="keyword">end</span>
-0041     <span class="keyword">return</span>;
-0042 <span class="keyword">end</span>
-0043 
-0044 <span class="comment">% check case of empty polylines</span>
-0045 N = size(poly, 1);
-0046 <span class="keyword">if</span> N == 0
-0047     res = cell(0, 0);
-0048     <span class="keyword">return</span>
-0049 <span class="keyword">end</span>
-0050 
-0051 <span class="comment">% create edges array of polyline</span>
-0052 edges = [poly(1:N-1, :) poly(2:N, :)];
-0053 
-0054 <span class="comment">% clip edges</span>
-0055 edges = <a href="../../matGeom/geom2d/clipEdge.html" class="code" title="function edge2 = clipEdge(edge, box)">clipEdge</a>(edges, box);
-0056 
-0057 <span class="comment">% select non empty edges, and get their vertices</span>
-0058 <span class="comment">% find clipped edges within box</span>
-0059 inds = sum(abs(edges), 2) &gt; 1e-14;
-0060 
-0061 <span class="comment">% find list of adjacent edges within box</span>
-0062 dinds = diff(inds);
-0063 inds0 = find(dinds == 1) + 1;
-0064 <span class="keyword">if</span> inds(1) == 1
-0065     inds0 = [1 inds0];
-0066 <span class="keyword">end</span>
-0067 inds1 = find(dinds == -1);
-0068 <span class="keyword">if</span> inds(end) == 1
-0069     inds1 = [inds1 N-1];
-0070 <span class="keyword">end</span>
-0071 
-0072 nClips = length(inds0);
-0073 res = cell(1, nClips);
-0074 <span class="keyword">for</span> iClip = 1:nClips
-0075     range = inds0(iClip):inds1(iClip);
-0076     poly2 = [edges(range, 1:2) ; edges(range(end), 3:4)];
-0077     res{iClip} = poly2;
-0078 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0027 <span class="comment">% ------</span>
+0028 <span class="comment">% Author: David Legland</span>
+0029 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0030 <span class="comment">% Created: 2005-05-14</span>
+0031 <span class="comment">% Copyright 2005-2024 INRA - Cepia Software Platform</span>
+0032 
+0033 <span class="comment">% check case of polylines stored in cell array</span>
+0034 <span class="keyword">if</span> iscell(poly)
+0035     res = cell(1, length(poly));
+0036     <span class="keyword">for</span> i = 1:length(poly)
+0037         res{i} = <a href="clipPolyline.html" class="code" title="function res = clipPolyline(poly, box)">clipPolyline</a>(poly{i}, box);
+0038     <span class="keyword">end</span>
+0039     <span class="keyword">return</span>;
+0040 <span class="keyword">end</span>
+0041 
+0042 <span class="comment">% check case of empty polylines</span>
+0043 N = size(poly, 1);
+0044 <span class="keyword">if</span> N == 0
+0045     res = cell(0, 0);
+0046     <span class="keyword">return</span>
+0047 <span class="keyword">end</span>
+0048 
+0049 <span class="comment">% create edges array of polyline</span>
+0050 edges = [poly(1:N-1, :) poly(2:N, :)];
+0051 
+0052 <span class="comment">% clip edges</span>
+0053 edges = <a href="../../matGeom/geom2d/clipEdge.html" class="code" title="function edge2 = clipEdge(edge, box)">clipEdge</a>(edges, box);
+0054 
+0055 <span class="comment">% select non empty edges, and get their vertices</span>
+0056 <span class="comment">% find clipped edges within box</span>
+0057 inds = sum(abs(edges), 2) &gt; 1e-14;
+0058 
+0059 <span class="comment">% find list of adjacent edges within box</span>
+0060 dinds = diff(inds);
+0061 inds0 = find(dinds == 1) + 1;
+0062 <span class="keyword">if</span> inds(1) == 1
+0063     inds0 = [1 inds0];
+0064 <span class="keyword">end</span>
+0065 inds1 = find(dinds == -1);
+0066 <span class="keyword">if</span> inds(end) == 1
+0067     inds1 = [inds1 N-1];
+0068 <span class="keyword">end</span>
+0069 
+0070 nClips = length(inds0);
+0071 res = cell(1, nClips);
+0072 <span class="keyword">for</span> iClip = 1:nClips
+0073     range = inds0(iClip):inds1(iClip);
+0074     poly2 = [edges(range, 1:2) ; edges(range(end), 3:4)];
+0075     res{iClip} = poly2;
+0076 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

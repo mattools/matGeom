@@ -24,7 +24,7 @@
 <div class="box"><strong>EDGEPOSITION Return position of a point on an edge.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function pos = edgePosition(point, edge) </strong></div>
+<div class="box"><strong>function pos = edgePosition(point, edge, varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre class="comment">EDGEPOSITION Return position of a point on an edge.
@@ -33,13 +33,13 @@
    Computes position of point POINT on the edge EDGE, relative to the
    position of edge vertices.
    EDGE has the form [x1 y1 x2 y2],
-   POINT has the form [x y], and is assumed to belong to edge.
-   The result POS has the following meaning:
+   POINT has the form [x y], and is assumed to belong to edge supporting
+   line. The result POS has the following meaning:
      POS &lt; 0:      POINT is located before the first vertex
      POS = 0:      POINT is located on the first vertex
      0 &lt; POS &lt; 1:  POINT is located between the 2 vertices (on the edge)
      POS = 1:      POINT is located on the second vertex
-     POS &lt; 0:      POINT is located after the second vertex
+     POS &gt; 1:      POINT is located after the second vertex
 
    POS = edgePosition(POINT, EDGES);
    If EDGES is an array of NL edges, return NE positions, corresponding to
@@ -54,8 +54,12 @@
    return an array of [NP NE] position, corresponding to each couple
    point-edge.
 
-   See also:
-   <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="createEdge.html" class="code" title="function edge = createEdge(varargin)">createEdge</a>, <a href="isPointOnEdge.html" class="code" title="function b = isPointOnEdge(point, edge, varargin)">isPointOnEdge</a></pre></div>
+   POS = edgePosition(POINTS, EDGES, 'diag');
+   When POINTS and EDGES are two arrays with same number of rows, returns
+   single column vector corresponding to each pair of point-edge.
+
+   See also
+     <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="createEdge.html" class="code" title="function edge = createEdge(varargin)">createEdge</a>, <a href="isPointOnEdge.html" class="code" title="function b = isPointOnEdge(point, edge, varargin)">isPointOnEdge</a>, <a href="edgeToLine.html" class="code" title="function line = edgeToLine(edge)">edgeToLine</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -70,20 +74,20 @@ This function is called by:
 
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function pos = edgePosition(point, edge)</a>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function pos = edgePosition(point, edge, varargin)</a>
 0002 <span class="comment">%EDGEPOSITION Return position of a point on an edge.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   POS = edgePosition(POINT, EDGE);</span>
 0005 <span class="comment">%   Computes position of point POINT on the edge EDGE, relative to the</span>
 0006 <span class="comment">%   position of edge vertices.</span>
 0007 <span class="comment">%   EDGE has the form [x1 y1 x2 y2],</span>
-0008 <span class="comment">%   POINT has the form [x y], and is assumed to belong to edge.</span>
-0009 <span class="comment">%   The result POS has the following meaning:</span>
+0008 <span class="comment">%   POINT has the form [x y], and is assumed to belong to edge supporting</span>
+0009 <span class="comment">%   line. The result POS has the following meaning:</span>
 0010 <span class="comment">%     POS &lt; 0:      POINT is located before the first vertex</span>
 0011 <span class="comment">%     POS = 0:      POINT is located on the first vertex</span>
 0012 <span class="comment">%     0 &lt; POS &lt; 1:  POINT is located between the 2 vertices (on the edge)</span>
 0013 <span class="comment">%     POS = 1:      POINT is located on the second vertex</span>
-0014 <span class="comment">%     POS &lt; 0:      POINT is located after the second vertex</span>
+0014 <span class="comment">%     POS &gt; 1:      POINT is located after the second vertex</span>
 0015 <span class="comment">%</span>
 0016 <span class="comment">%   POS = edgePosition(POINT, EDGES);</span>
 0017 <span class="comment">%   If EDGES is an array of NL edges, return NE positions, corresponding to</span>
@@ -98,40 +102,46 @@ This function is called by:
 0026 <span class="comment">%   return an array of [NP NE] position, corresponding to each couple</span>
 0027 <span class="comment">%   point-edge.</span>
 0028 <span class="comment">%</span>
-0029 <span class="comment">%   See also:</span>
-0030 <span class="comment">%   edges2d, createEdge, isPointOnEdge</span>
-0031 <span class="comment">%</span>
-0032 
-0033 <span class="comment">% ------</span>
-0034 <span class="comment">% Author: David Legland</span>
-0035 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
-0036 <span class="comment">% Created: 2004-05-25</span>
-0037 <span class="comment">% Copyright 2009 INRA - Cepia Software Platform.</span>
-0038 <span class="comment">%</span>
-0039 
-0040 <span class="comment">%   HISTORY:</span>
-0041 <span class="comment">%   06/12/2009 created from linePosition</span>
+0029 <span class="comment">%   POS = edgePosition(POINTS, EDGES, 'diag');</span>
+0030 <span class="comment">%   When POINTS and EDGES are two arrays with same number of rows, returns</span>
+0031 <span class="comment">%   single column vector corresponding to each pair of point-edge.</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">%   See also</span>
+0034 <span class="comment">%     edges2d, createEdge, isPointOnEdge, edgeToLine</span>
+0035 <span class="comment">%</span>
+0036 
+0037 <span class="comment">% ------</span>
+0038 <span class="comment">% Author: David Legland</span>
+0039 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0040 <span class="comment">% Created: 2004-05-25</span>
+0041 <span class="comment">% Copyright 2004-2024 INRA - Cepia Software Platform</span>
 0042 
-0043 <span class="comment">% number of points and of edges</span>
-0044 nEdges = size(edge, 1);
-0045 nPoints = size(point, 1);
-0046 
-0047 <span class="keyword">if</span> nPoints == nEdges
-0048     dxe = (edge(:, 3) - edge(:,1))';
-0049     dye = (edge(:, 4) - edge(:,2))';
-0050     dxp = point(:, 1) - edge(:, 1);
-0051     dyp = point(:, 2) - edge(:, 2);
+0043 <span class="comment">% parse input options</span>
+0044 diag = false;
+0045 <span class="keyword">if</span> ~isempty(varargin) &amp;&amp; strcmp(varargin{1}, <span class="string">'diag'</span>)
+0046     diag = true;
+0047 <span class="keyword">end</span>
+0048 
+0049 <span class="comment">% number of points and of edges</span>
+0050 nEdges = size(edge, 1);
+0051 nPoints = size(point, 1);
 0052 
-0053 <span class="keyword">else</span>
-0054     <span class="comment">% expand one of the arrays to have the same size</span>
-0055     dxe = (edge(:,3) - edge(:,1))';
-0056     dye = (edge(:,4) - edge(:,2))';
-0057     dxp = bsxfun(@minus, point(:,1), edge(:,1)');
-0058     dyp = bsxfun(@minus, point(:,2), edge(:,2)');
-0059 
-0060 <span class="keyword">end</span>
-0061 
-0062 pos = (dxp .* dxe + dyp .* dye) ./ (dxe .* dxe + dye .* dye);</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0053 <span class="keyword">if</span> nPoints == nEdges &amp;&amp; diag
+0054     <span class="comment">% reshape into N-by-1 arrays</span>
+0055     dxe = (edge(:,3) - edge(:,1));
+0056     dye = (edge(:,4) - edge(:,2));
+0057     dxp = point(:,1) - edge(:,1);
+0058     dyp = point(:,2) - edge(:,2);
+0059 <span class="keyword">else</span>
+0060     <span class="comment">% reshape arrays to result in NP-by-NE arrays</span>
+0061     dxe = (edge(:,3) - edge(:,1))';
+0062     dye = (edge(:,4) - edge(:,2))';
+0063     dxp = bsxfun(@minus, point(:,1), edge(:,1)');
+0064     dyp = bsxfun(@minus, point(:,2), edge(:,2)');
+0065 <span class="keyword">end</span>
+0066 
+0067 <span class="comment">% compute position</span>
+0068 pos = (dxp .* dxe + dyp .* dye) ./ (dxe .* dxe + dye .* dye);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

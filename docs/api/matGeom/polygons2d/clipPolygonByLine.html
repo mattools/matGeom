@@ -1,0 +1,275 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of clipPolygonByLine</title>
+  <meta name="keywords" content="clipPolygonByLine">
+  <meta name="description" content="CLIPPOLYGONBYLINE Clip a polygon by a directed line.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">polygons2d</a> &gt; clipPolygonByLine.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\polygons2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>clipPolygonByLine
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CLIPPOLYGONBYLINE Clip a polygon by a directed line.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = clipPolygonByLine(poly, line, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CLIPPOLYGONBYLINE Clip a polygon by a directed line.
+
+   POLY2 = clipPolygonByLine(POLY, LINE)
+   POLY is a [Nx2] array of points, and LINE is given as [x0 y0 dx dy].
+   The result POLY2:
+    - Represents the part of the polygon on the left side of the directed 
+      line, the left half-plane, if the line intersects the polygon.
+    - Is the same as POLY if the polygon is on the left side of the 
+      directed line and the line does not intersect the polygon.
+    - Is an empty polygon [0x2] if the polygon on the right side of the 
+      directed line and the line does not intersect the polygon.
+   
+   [POLY_L, POLY_R] = clipPolygonByLine(POLY, LINE, 'method', 'polyshape')
+   Uses MATLAB polyshape objects and functions to clip the polygon by the
+   line. Returns the right part POLY_R (right half-plane) in addition to 
+   the left part POLY_L (left half-plane) in the polygon cell format.
+
+   Example
+     line = [0.4 0 1 1];
+     r = [2.5, 2, 1];
+     poly = flipud(circleToPolygon([0 0 r(1)], round(2*pi*r(1))));
+     poly2 = clipPolygonByLine(poly, line);
+     figure('color','w','numbertitle','off','name','Method: legland')
+     axis equal tight; hold on; xlabel('x'); ylabel('y')
+     fillPolygon(poly2)
+     poly2_centroid = polygonCentroid(poly2);
+     drawLabels(poly2_centroid,'L ','HorizontalAlignment','Right')
+     scatter(poly2_centroid(1), poly2_centroid(2),[],'k','filled')
+     midCircle = circleToPolygon([0 0 r(2)], round(2*pi*r(2)));
+     innerCircle = flipud(circleToPolygon([0 0 r(3)], round(2*pi*r(3))));
+     poly = {poly, midCircle, innerCircle};
+     clipPolygonByLine(poly, line, 'method','polyshape','debug',1);
+
+   See also
+   <a href="clipPolygon.html" class="code" title="function poly2 = clipPolygon(polygon, w)">clipPolygon</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>	CENTROID Compute centroid (center of mass) of a set of points.</li><li><a href="../../matGeom/geom2d/clipLine.html" class="code" title="function edge = clipLine(line, box, varargin)">clipLine</a>	CLIPLINE Clip a line with a box.</li><li><a href="../../matGeom/geom2d/drawEdge.html" class="code" title="function varargout = drawEdge(varargin)">drawEdge</a>	DRAWEDGE Draw an edge defined by its two extremities.</li><li><a href="../../matGeom/geom2d/drawLabels.html" class="code" title="function varargout = drawLabels(varargin)">drawLabels</a>	DRAWLABELS Draw labels at specified positions.</li><li><a href="../../matGeom/geom2d/intersectLineEdge.html" class="code" title="function point = intersectLineEdge(line, edge, varargin)">intersectLineEdge</a>	INTERSECTLINEEDGE Return intersection between a line and an edge.</li><li><a href="../../matGeom/geom2d/isLeftOriented.html" class="code" title="function b = isLeftOriented(point, line)">isLeftOriented</a>	ISLEFTORIENTED Test if a point is on the left side of a line.</li><li><a href="clipPolygonByLine.html" class="code" title="function varargout = clipPolygonByLine(poly, line, varargin)">clipPolygonByLine</a>	CLIPPOLYGONBYLINE Clip a polygon by a directed line.</li><li><a href="fillPolygon.html" class="code" title="function varargout = fillPolygon(varargin)">fillPolygon</a>	FILLPOLYGON Fill a polygon specified by a list of points.</li><li><a href="polygonCentroid.html" class="code" title="function [centroid, area, Sx, Sy] = polygonCentroid(varargin)">polygonCentroid</a>	POLYGONCENTROID Computes the centroid (center of mass) of a polygon.</li><li><a href="polygonToPolyshape.html" class="code" title="function polyShape = polygonToPolyshape(poly, varargin)">polygonToPolyshape</a>	POLYGONTOPOLYSHAPE Convert a matGeom polygon to a MATLAB polyshape object.</li><li><a href="splitPolygons.html" class="code" title="function polygons = splitPolygons(polygon)">splitPolygons</a>	SPLITPOLYGONS Convert a NaN separated polygon list to a cell array of polygons.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/clipPolygonByPlane3d.html" class="code" title="function poly2 = clipPolygonByPlane3d(poly, plane, varargin)">clipPolygonByPlane3d</a>	CLIPPOLYGONBYPLANE3D Clip a 3D polygon with a plane.</li><li><a href="clipPolygonByLine.html" class="code" title="function varargout = clipPolygonByLine(poly, line, varargin)">clipPolygonByLine</a>	CLIPPOLYGONBYLINE Clip a polygon by a directed line.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = clipPolygonByLine(poly, line, varargin)</a>
+0002 <span class="comment">%CLIPPOLYGONBYLINE Clip a polygon by a directed line.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POLY2 = clipPolygonByLine(POLY, LINE)</span>
+0005 <span class="comment">%   POLY is a [Nx2] array of points, and LINE is given as [x0 y0 dx dy].</span>
+0006 <span class="comment">%   The result POLY2:</span>
+0007 <span class="comment">%    - Represents the part of the polygon on the left side of the directed</span>
+0008 <span class="comment">%      line, the left half-plane, if the line intersects the polygon.</span>
+0009 <span class="comment">%    - Is the same as POLY if the polygon is on the left side of the</span>
+0010 <span class="comment">%      directed line and the line does not intersect the polygon.</span>
+0011 <span class="comment">%    - Is an empty polygon [0x2] if the polygon on the right side of the</span>
+0012 <span class="comment">%      directed line and the line does not intersect the polygon.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   [POLY_L, POLY_R] = clipPolygonByLine(POLY, LINE, 'method', 'polyshape')</span>
+0015 <span class="comment">%   Uses MATLAB polyshape objects and functions to clip the polygon by the</span>
+0016 <span class="comment">%   line. Returns the right part POLY_R (right half-plane) in addition to</span>
+0017 <span class="comment">%   the left part POLY_L (left half-plane) in the polygon cell format.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   Example</span>
+0020 <span class="comment">%     line = [0.4 0 1 1];</span>
+0021 <span class="comment">%     r = [2.5, 2, 1];</span>
+0022 <span class="comment">%     poly = flipud(circleToPolygon([0 0 r(1)], round(2*pi*r(1))));</span>
+0023 <span class="comment">%     poly2 = clipPolygonByLine(poly, line);</span>
+0024 <span class="comment">%     figure('color','w','numbertitle','off','name','Method: legland')</span>
+0025 <span class="comment">%     axis equal tight; hold on; xlabel('x'); ylabel('y')</span>
+0026 <span class="comment">%     fillPolygon(poly2)</span>
+0027 <span class="comment">%     poly2_centroid = polygonCentroid(poly2);</span>
+0028 <span class="comment">%     drawLabels(poly2_centroid,'L ','HorizontalAlignment','Right')</span>
+0029 <span class="comment">%     scatter(poly2_centroid(1), poly2_centroid(2),[],'k','filled')</span>
+0030 <span class="comment">%     midCircle = circleToPolygon([0 0 r(2)], round(2*pi*r(2)));</span>
+0031 <span class="comment">%     innerCircle = flipud(circleToPolygon([0 0 r(3)], round(2*pi*r(3))));</span>
+0032 <span class="comment">%     poly = {poly, midCircle, innerCircle};</span>
+0033 <span class="comment">%     clipPolygonByLine(poly, line, 'method','polyshape','debug',1);</span>
+0034 <span class="comment">%</span>
+0035 <span class="comment">%   See also</span>
+0036 <span class="comment">%   clipPolygon</span>
+0037 
+0038 <span class="comment">% ------</span>
+0039 <span class="comment">% Author: David Legland, oqilipo</span>
+0040 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0041 <span class="comment">% Created: 2005-07-31</span>
+0042 <span class="comment">% Copyright 2005-2024 INRA - Cepia Software Platform</span>
+0043 
+0044 <span class="comment">% Parsing</span>
+0045 p = inputParser;
+0046 logParValidFunc=@(x) (islogical(x) || isequal(x,1) || isequal(x,0));
+0047 addParameter(p,<span class="string">'method'</span>,<span class="string">'legland'</span>,@(x) any(validatestring(x,{<span class="string">'legland'</span>,<span class="string">'polyshape'</span>})));
+0048 addParameter(p,<span class="string">'debugVisu'</span>,false,logParValidFunc);
+0049 parse(p,varargin{:});
+0050 
+0051 method = p.Results.method;
+0052 debugVisu = p.Results.debugVisu;
+0053 
+0054 <span class="keyword">if</span> iscell(poly) &amp;&amp; isscalar(poly)
+0055     poly = poly{1};
+0056 <span class="keyword">elseif</span> iscell(poly) &amp;&amp; length(poly) &gt; 1
+0057     method = <span class="string">'polyshape'</span>;
+0058 <span class="keyword">end</span>
+0059 
+0060 <span class="keyword">if</span> ~iscell(poly) &amp;&amp; any(isnan(poly(:)))
+0061     poly = <a href="splitPolygons.html" class="code" title="function polygons = splitPolygons(polygon)">splitPolygons</a>(poly);
+0062     method = <span class="string">'polyshape'</span>;
+0063 <span class="keyword">end</span>
+0064 
+0065 <span class="keyword">switch</span> method
+0066     <span class="keyword">case</span> <span class="string">'legland'</span>
+0067         <span class="comment">% avoid to process empty polygons</span>
+0068         <span class="keyword">if</span> size(poly, 1)&lt;3
+0069             varargout{1} = zeros([0 2]);
+0070             <span class="keyword">return</span>;
+0071         <span class="keyword">end</span>
+0072 
+0073         <span class="comment">% ensure the last point is the same as the first one</span>
+0074         <span class="keyword">if</span> sum(poly(<span class="keyword">end</span>, :)==poly(1,:))~=2
+0075             poly = [poly; poly(1,:)];
+0076         <span class="keyword">end</span>
+0077 
+0078         N = size(poly, 1);
+0079         edges = [poly([N 1:N-1], :) poly];
+0080 
+0081         b = <a href="../../matGeom/geom2d/isLeftOriented.html" class="code" title="function b = isLeftOriented(point, line)">isLeftOriented</a>(poly, line);
+0082 
+0083         <span class="comment">% case of totally clipped polygon</span>
+0084         <span class="keyword">if</span> sum(b)==0
+0085             varargout{1} = zeros(0, 2);
+0086             <span class="keyword">return</span>;
+0087         <span class="keyword">end</span>
+0088 
+0089         poly2 = zeros(0, 2);
+0090 
+0091         i=1;
+0092         <span class="keyword">while</span> i&lt;=N
+0093             <span class="keyword">if</span> <a href="../../matGeom/geom2d/isLeftOriented.html" class="code" title="function b = isLeftOriented(point, line)">isLeftOriented</a>(poly(i,:), line)
+0094                 <span class="comment">% keep all points located on the right side of line</span>
+0095                 poly2 = [poly2; poly(i,:)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0096             <span class="keyword">else</span>
+0097                 <span class="comment">% compute of preceeding edge with line</span>
+0098                 <span class="keyword">if</span> i&gt;1
+0099                     poly2 = [poly2; <a href="../../matGeom/geom2d/intersectLineEdge.html" class="code" title="function point = intersectLineEdge(line, edge, varargin)">intersectLineEdge</a>(line, edges(i, :))]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0100                 <span class="keyword">end</span>
+0101                 <span class="comment">% go to the next point on the left side</span>
+0102                 i=i+1;
+0103                 <span class="keyword">while</span> i&lt;=N
+0104 
+0105                     <span class="comment">% find the next point on the right side</span>
+0106                     <span class="keyword">if</span> <a href="../../matGeom/geom2d/isLeftOriented.html" class="code" title="function b = isLeftOriented(point, line)">isLeftOriented</a>(poly(i,:), line)
+0107                         <span class="comment">% add intersection of previous edge</span>
+0108                         poly2 = [poly2; <a href="../../matGeom/geom2d/intersectLineEdge.html" class="code" title="function point = intersectLineEdge(line, edge, varargin)">intersectLineEdge</a>(line, edges(i, :))]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0109 
+0110                         <span class="comment">% add current point</span>
+0111                         poly2 = [poly2; poly(i,:)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0112 
+0113                         <span class="comment">% exit the second loop</span>
+0114                         <span class="keyword">break</span>;
+0115                     <span class="keyword">end</span>
+0116                     i=i+1;
+0117                 <span class="keyword">end</span>
+0118             <span class="keyword">end</span>
+0119             i=i+1;
+0120         <span class="keyword">end</span>
+0121 
+0122         <span class="comment">% remove last point if it is the same as the first one</span>
+0123         <span class="keyword">if</span> sum(poly2(<span class="keyword">end</span>, :)==poly(1,:))==2
+0124             poly2 = poly2(1:end-1, :);
+0125         <span class="keyword">end</span>
+0126 
+0127         <span class="keyword">if</span> debugVisu
+0128             figure(<span class="string">'color'</span>,<span class="string">'w'</span>,<span class="string">'numbertitle'</span>,<span class="string">'off'</span>, <span class="keyword">...</span>
+0129                 <span class="string">'name'</span>, [<span class="string">'Debug Figure: '</span> mfilename <span class="keyword">...</span>
+0130                 <span class="string">'.m, Method: '</span> method]);
+0131             axis equal tight; hold on; xlabel(<span class="string">'x'</span>); ylabel(<span class="string">'y'</span>)
+0132             <a href="fillPolygon.html" class="code" title="function varargout = fillPolygon(varargin)">fillPolygon</a>(poly2,<span class="string">'g'</span>)
+0133             poly2_centroid = <a href="polygonCentroid.html" class="code" title="function [centroid, area, Sx, Sy] = polygonCentroid(varargin)">polygonCentroid</a>(poly2);
+0134             <a href="../../matGeom/geom2d/drawLabels.html" class="code" title="function varargout = drawLabels(varargin)">drawLabels</a>(poly2_centroid,<span class="string">'L '</span>,<span class="string">'HorizontalAlignment'</span>,<span class="string">'Right'</span>)
+0135             scatter(poly2_centroid(1), poly2_centroid(2),[],<span class="string">'k'</span>,<span class="string">'filled'</span>)
+0136         <span class="keyword">end</span>
+0137         
+0138         varargout{1} = poly2; 
+0139 
+0140     <span class="keyword">case</span> <span class="string">'polyshape'</span>
+0141         warning(<span class="string">'off'</span>,<span class="string">'MATLAB:polyshape:repairedBySimplify'</span>)
+0142         polyShape = <a href="polygonToPolyshape.html" class="code" title="function polyShape = polygonToPolyshape(poly, varargin)">polygonToPolyshape</a>(poly, <span class="string">'debugVisu'</span>,0);
+0143         warning(<span class="string">'on'</span>,<span class="string">'MATLAB:polyshape:repairedBySimplify'</span>)
+0144         [bblim(1:2), bblim(3:4)] = boundingbox(polyShape);
+0145         bbXdist = bblim(2)-bblim(1);
+0146         bbYdist = bblim(4)-bblim(3);
+0147         <span class="comment">% Increase the bounding box a little bit</span>
+0148         bblim(1) = bblim(1)-0.01*bbXdist;
+0149         bblim(2) = bblim(2)+0.01*bbXdist;
+0150         bblim(3) = bblim(3)-0.01*bbYdist;
+0151         bblim(4) = bblim(4)+0.01*bbYdist;
+0152         <span class="comment">% Bounding box</span>
+0153         BB = [bblim(1) bblim(3); bblim(2) bblim(3); <span class="keyword">...</span>
+0154             bblim(2) bblim(4); bblim(1) bblim(4)];
+0155         <span class="comment">% Clip the bounding box by the line</span>
+0156         BB_L = <a href="clipPolygonByLine.html" class="code" title="function varargout = clipPolygonByLine(poly, line, varargin)">clipPolygonByLine</a>(BB, line);
+0157         PS_R = subtract(polyShape, polyshape(BB_L));
+0158         lineRev = [line(1:2) -line(3:4)];
+0159         BB_R = <a href="clipPolygonByLine.html" class="code" title="function varargout = clipPolygonByLine(poly, line, varargin)">clipPolygonByLine</a>(BB, lineRev);
+0160         PS_L = subtract(polyShape, polyshape(BB_R));
+0161         lineSeg = <a href="../../matGeom/geom2d/clipLine.html" class="code" title="function edge = clipLine(line, box, varargin)">clipLine</a>(line, bblim);
+0162         lineSeg = [lineSeg(1:2); lineSeg(3:4)];
+0163         <span class="comment">% Intersection edges</span>
+0164         itsEdges = intersect(polyShape,lineSeg);
+0165         itsEdges(2:end+1, 3:4) = itsEdges;
+0166         itsEdges(1,3:4) = nan;
+0167         itsEdges(<span class="keyword">end</span>,1:2) = nan; 
+0168         itsEdges(any(isnan(itsEdges),2),:) = [];
+0169 
+0170 
+0171         <span class="keyword">if</span> debugVisu
+0172             figure(<span class="string">'color'</span>,<span class="string">'w'</span>,<span class="string">'numbertitle'</span>,<span class="string">'off'</span>, <span class="keyword">...</span>
+0173                 <span class="string">'name'</span>, [<span class="string">'Debug Figure: '</span> mfilename <span class="keyword">...</span>
+0174                 <span class="string">'.m, Method: '</span> method]);
+0175             axis equal tight; hold on; xlabel(<span class="string">'x'</span>); ylabel(<span class="string">'y'</span>)
+0176             plot(PS_R,<span class="string">'FaceColor'</span>,<span class="string">'g'</span>,<span class="string">'EdgeColor'</span>,<span class="string">'k'</span>)
+0177             plot(PS_L,<span class="string">'FaceColor'</span>,<span class="string">'b'</span>,<span class="string">'EdgeColor'</span>,<span class="string">'k'</span>)
+0178             [PS_R_centroid(1), PS_R_centroid(2)] = <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>(PS_R);
+0179             <a href="../../matGeom/geom2d/drawLabels.html" class="code" title="function varargout = drawLabels(varargin)">drawLabels</a>(PS_R_centroid,<span class="string">' R'</span>,<span class="string">'HorizontalAlignment'</span>,<span class="string">'Left'</span>)
+0180             scatter(PS_R_centroid(1), PS_R_centroid(2),[],<span class="string">'g'</span>,<span class="string">'filled'</span>)
+0181             [PS_L_centroid(1), PS_L_centroid(2)] = <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>(PS_L);
+0182             <a href="../../matGeom/geom2d/drawLabels.html" class="code" title="function varargout = drawLabels(varargin)">drawLabels</a>(PS_L_centroid,<span class="string">'L '</span>,<span class="string">'HorizontalAlignment'</span>,<span class="string">'Right'</span>)
+0183             scatter(PS_L_centroid(1), PS_L_centroid(2),[],<span class="string">'b'</span>,<span class="string">'filled'</span>)
+0184             <a href="../../matGeom/geom2d/drawEdge.html" class="code" title="function varargout = drawEdge(varargin)">drawEdge</a>(itsEdges,<span class="string">'LineStyle'</span>,<span class="string">'-'</span>,<span class="string">'LineWidth'</span>,2,<span class="string">'Color'</span>,<span class="string">'k'</span>)
+0185         <span class="keyword">end</span>
+0186 
+0187         varargout{1} = <a href="splitPolygons.html" class="code" title="function polygons = splitPolygons(polygon)">splitPolygons</a>(PS_L.Vertices);
+0188         varargout{2} = <a href="splitPolygons.html" class="code" title="function polygons = splitPolygons(polygon)">splitPolygons</a>(PS_R.Vertices);
+0189         varargout{3} = itsEdges;
+0190 
+0191 <span class="keyword">end</span>
+0192         
+0193         
+0194 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

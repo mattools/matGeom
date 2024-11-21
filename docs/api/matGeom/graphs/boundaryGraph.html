@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of boundaryGraph</title>
+  <meta name="keywords" content="boundaryGraph">
+  <meta name="description" content="BOUNDARYGRAPH Get boundary of image as a graph.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; boundaryGraph.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>boundaryGraph
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>BOUNDARYGRAPH Get boundary of image as a graph.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = boundaryGraph(img) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">BOUNDARYGRAPH Get boundary of image as a graph.
+
+   deprecated: use imageBoundaryGraph instead
+
+   [NODES, EDGES] = boundaryGraph(IMG)         (2D)
+   [NODES, EDGES, FACES] = boundaryGraph(IMG)  (3D)
+   Create a graph on the boundary of binary image IMG. Each pixel is
+   considered as a unit square (or cube), centered on integer coordinates. 
+   Boundary of the shape is selected as a graph.
+
+   Result is a set of nodes with (x,y) or (x,y,z) coordinates, a set of
+   edges linking two neighbour nodes, and in 3D also a set of square
+   faces, containing reference to each 4-tuple of nodes.
+   
+   The resulting shell is open if the binary structure touches edges of
+   image.
+
+   See als:
+     imageBoundaryGraph</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = boundaryGraph(img)</a>
+0002 <span class="comment">%BOUNDARYGRAPH Get boundary of image as a graph.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   deprecated: use imageBoundaryGraph instead</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   [NODES, EDGES] = boundaryGraph(IMG)         (2D)</span>
+0007 <span class="comment">%   [NODES, EDGES, FACES] = boundaryGraph(IMG)  (3D)</span>
+0008 <span class="comment">%   Create a graph on the boundary of binary image IMG. Each pixel is</span>
+0009 <span class="comment">%   considered as a unit square (or cube), centered on integer coordinates.</span>
+0010 <span class="comment">%   Boundary of the shape is selected as a graph.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Result is a set of nodes with (x,y) or (x,y,z) coordinates, a set of</span>
+0013 <span class="comment">%   edges linking two neighbour nodes, and in 3D also a set of square</span>
+0014 <span class="comment">%   faces, containing reference to each 4-tuple of nodes.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   The resulting shell is open if the binary structure touches edges of</span>
+0017 <span class="comment">%   image.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   See als:</span>
+0020 <span class="comment">%     imageBoundaryGraph</span>
+0021 <span class="comment">%</span>
+0022 
+0023 <span class="comment">% ------</span>
+0024 <span class="comment">% Author: David Legland</span>
+0025 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0026 <span class="comment">% Created: 2004-06-28</span>
+0027 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0028 
+0029 dim = size(img);
+0030 nd = length(dim);
+0031 <span class="keyword">if</span> nd==2 &amp;&amp; (dim(1)==1 || dim(2)==1)
+0032     nd=1;
+0033 <span class="keyword">end</span>
+0034 
+0035 
+0036 nodes = zeros([0 nd]);  <span class="comment">% coordinates of vertices</span>
+0037 edges = zeros([0 2]);   <span class="comment">% first node and second nodes</span>
+0038 faces = zeros([0 4]);   <span class="comment">% indices of 4 corners of each square face</span>
+0039 
+0040 <span class="keyword">if</span> nd == 1
+0041     img = img(:)&gt;0;
+0042     D1 = size(img,1);
+0043     nodes = find(img(1:D1-1)~=img(2:D1))+.5;
+0044     
+0045     <span class="keyword">if</span> nargout==1
+0046         varargout{1} = nodes;
+0047     <span class="keyword">end</span>
+0048     <span class="keyword">return</span>
+0049     
+0050 <span class="keyword">elseif</span> nd == 2
+0051     D1 = size(img, 1);
+0052     D2 = size(img, 2);
+0053     
+0054     px = [];
+0055     py = [];
+0056     
+0057     ind = find(img(1:D1-1, :)~=img(2:D1, :));
+0058     [x, y] = ind2sub([D1-1 D2], ind);
+0059     px = [px; reshape([x+.5 x+.5]', length(x)*2,1)];
+0060     py = [py; reshape([y-.5 y+.5]', length(x)*2,1)];
+0061     
+0062     ind = find(img(:, 1:D2-1)~=img(:, 2:D2));
+0063     [x, y] = ind2sub([D1 D2-1], ind);
+0064     px = [px; reshape([x-.5 x+.5]', length(x)*2,1)];
+0065     py = [py; reshape([y+.5 y+.5]', length(x)*2,1)];    
+0066     
+0067     [nodes, i, j] = unique([py px], <span class="string">'rows'</span>); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0068     
+0069 
+0070     ne = floor(size(px, 1)/2);
+0071     edges = repmat(1:2, [ne 1]) + repmat((0:2:2*ne-1)', [1 2]);
+0072     
+0073     <span class="keyword">for</span> i=1:length(edges(:))
+0074         edges(i) = j(edges(i));
+0075     <span class="keyword">end</span>
+0076     edges = unique(sort(edges, 2), <span class="string">'rows'</span>);
+0077     
+0078 <span class="keyword">elseif</span> nd==3
+0079     D1 = size(img, 1);
+0080     D2 = size(img, 2);
+0081     D3 = size(img, 3);
+0082     
+0083     px = [];
+0084     py = [];
+0085     pz = [];
+0086     
+0087     ind = find(img(1:D1-1, :, :)~=img(2:D1, :, :));
+0088     [x, y, z] = ind2sub([D1-1 D2 D3], ind);
+0089     px = [px; reshape([x+.5 x+.5 x+.5 x+.5]', length(x)*4,1)];
+0090     py = [py; reshape([y-.5 y+.5 y+.5 y-.5]', length(x)*4,1)];
+0091     pz = [pz; reshape([z-.5 z-.5 z+.5 z+.5]', length(x)*4,1)];
+0092     
+0093     
+0094     ind = find(img(:, 1:D2-1, :)~=img(:, 2:D2, :));
+0095     [x, y, z] = ind2sub([D1 D2-1 D3], ind);
+0096     px = [px; reshape([x-.5 x-.5 x+.5 x+.5]', length(x)*4,1)];
+0097     py = [py; reshape([y+.5 y+.5 y+.5 y+.5]', length(x)*4,1)];
+0098     pz = [pz; reshape([z-.5 z+.5 z+.5 z-.5]', length(x)*4,1)];
+0099     
+0100     ind = find(img(:, :, 1:D3-1)~=img(:, :, 2:D3));
+0101     [x, y, z] = ind2sub([D1 D2 D3-1], ind);
+0102     px = [px; reshape([x-.5 x+.5 x+.5 x-.5]', length(x)*4,1)];
+0103     py = [py; reshape([y-.5 y-.5 y+.5 y+.5]', length(x)*4,1)];
+0104     pz = [pz; reshape([z+.5 z+.5 z+.5 z+.5]', length(x)*4,1)];
+0105     
+0106     
+0107     [nodes, i, j] = unique([py px pz], <span class="string">'rows'</span>); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0108     
+0109     nf = floor(size(px, 1)/4);
+0110     faces = repmat(1:4, [nf 1]) + repmat((0:4:4*nf-1)', [1 4]);
+0111     
+0112     <span class="keyword">for</span> i=1:length(faces(:))
+0113         faces(i) = j(faces(i));
+0114     <span class="keyword">end</span>
+0115     
+0116     edges = [edges ; [faces(:,1) faces(:,2)]];
+0117     edges = [edges ; [faces(:,2) faces(:,3)]];
+0118     edges = [edges ; [faces(:,3) faces(:,4)]];
+0119     edges = [edges ; [faces(:,4) faces(:,1)]];
+0120     edges = unique(sort(edges, 2), <span class="string">'rows'</span>);
+0121 <span class="keyword">end</span>
+0122 
+0123 
+0124 <span class="comment">% format output arguments</span>
+0125 
+0126 <span class="keyword">if</span> nargout==3
+0127     varargout{1} = nodes;
+0128     varargout{2} = edges;
+0129     varargout{3} = faces;
+0130 <span class="keyword">elseif</span> nargout==2
+0131     varargout{1} = nodes;
+0132     varargout{2} = edges;
+0133 <span class="keyword">elseif</span> nargout==1
+0134     graph.nodes = nodes;
+0135     graph.edges = edges;
+0136     graph.faces = faces;
+0137     varargout{1} = graph;
+0138 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

@@ -60,7 +60,7 @@ This function calls:
 <li><a href="../../matGeom/geom3d/normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>	NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="clipConvexPolyhedronHP.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronHP(nodes, faces, plane)">clipConvexPolyhedronHP</a>	CLIPCONVEXPOLYHEDRONHP Clip a convex polyhedron by a plane.</li><li><a href="createStellatedMesh.html" class="code" title="function varargout = createStellatedMesh(vertices, faces, varargin)">createStellatedMesh</a>	CREATESTELLATEDMESH  Replaces each face of a mesh by a pyramid.</li><li><a href="drawFaceNormals.html" class="code" title="function varargout = drawFaceNormals(varargin)">drawFaceNormals</a>	DRAWFACENORMALS Draw normal vector of each face in a mesh.</li><li><a href="mergeCoplanarFaces.html" class="code" title="function varargout = mergeCoplanarFaces(nodes, varargin)">mergeCoplanarFaces</a>	MERGECOPLANARFACES Merge coplanar faces of a polyhedral mesh.</li><li><a href="meshCurvatures.html" class="code" title="function [C1, C2, U1, U2, H, K, N] = meshCurvatures(vertices, faces, varargin)">meshCurvatures</a>	Compute principal curvatures on mesh vertices.</li><li><a href="meshDihedralAngles.html" class="code" title="function alpha = meshDihedralAngles(vertices, edges, faces)">meshDihedralAngles</a>	MESHDIHEDRALANGLES Dihedral at edges of a polyhedal mesh.</li><li><a href="meshSurfaceArea.html" class="code" title="function area = meshSurfaceArea(varargin)">meshSurfaceArea</a>	Surface area of a polyhedral mesh.</li><li><a href="meshVertexNormals.html" class="code" title="function [normals, faceNormals] = meshVertexNormals(varargin)">meshVertexNormals</a>	MESHVERTEXNORMALS Compute normals to a mesh vertices.</li><li><a href="minConvexHull.html" class="code" title="function newFaces = minConvexHull(points, varargin)">minConvexHull</a>	MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.</li><li><a href="trimeshMeanBreadth.html" class="code" title="function mb = trimeshMeanBreadth(vertices, faces)">trimeshMeanBreadth</a>	TRIMESHMEANBREADTH Mean breadth of a triangular mesh.</li><li><a href="vertexNormal.html" class="code" title="function normals = vertexNormal(vertices, faces)">vertexNormal</a>	VERTEXNORMAL Compute normals to a mesh vertices.</li></ul>
+<li><a href="clipConvexPolyhedronByPlane.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronByPlane(nodes, faces, plane)">clipConvexPolyhedronByPlane</a>	CLIPCONVEXPOLYHEDRONBYPLANE Clip a convex polyhedron by a plane.</li><li><a href="clipMeshByBox.html" class="code" title="function varargout = clipMeshByBox(varargin)">clipMeshByBox</a>	CLIPMESHBYBOX Clip a mesh by a box.</li><li><a href="createStellatedMesh.html" class="code" title="function varargout = createStellatedMesh(vertices, faces, varargin)">createStellatedMesh</a>	CREATESTELLATEDMESH  Replaces each face of a mesh by a pyramid.</li><li><a href="drawFaceNormals.html" class="code" title="function varargout = drawFaceNormals(varargin)">drawFaceNormals</a>	DRAWFACENORMALS Draw normal vector of each face in a mesh.</li><li><a href="mergeCoplanarFaces.html" class="code" title="function varargout = mergeCoplanarFaces(nodes, varargin)">mergeCoplanarFaces</a>	MERGECOPLANARFACES Merge coplanar faces of a polyhedral mesh.</li><li><a href="meshCurvatures.html" class="code" title="function [C1, C2, U1, U2, H, K, N] = meshCurvatures(vertices, faces, varargin)">meshCurvatures</a>	MESHCURVATURES Compute principal curvatures on mesh vertices.</li><li><a href="meshDihedralAngles.html" class="code" title="function alpha = meshDihedralAngles(vertices, edges, faces)">meshDihedralAngles</a>	MESHDIHEDRALANGLES Dihedral at edges of a polyhedal mesh.</li><li><a href="meshSurfaceArea.html" class="code" title="function area = meshSurfaceArea(varargin)">meshSurfaceArea</a>	MESHSURFACEAREA Surface area of a polyhedral mesh.</li><li><a href="meshVertexNormals.html" class="code" title="function [normals, faceNormals] = meshVertexNormals(varargin)">meshVertexNormals</a>	MESHVERTEXNORMALS Compute normals to a mesh vertices.</li><li><a href="minConvexHull.html" class="code" title="function newFaces = minConvexHull(points, varargin)">minConvexHull</a>	MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.</li><li><a href="trimeshMeanBreadth.html" class="code" title="function mb = trimeshMeanBreadth(vertices, faces)">trimeshMeanBreadth</a>	TRIMESHMEANBREADTH Mean breadth of a triangular mesh.</li></ul>
 <!-- crossreference -->
 
 
@@ -95,40 +95,37 @@ This function is called by:
 0027 
 0028 <span class="comment">% ------</span>
 0029 <span class="comment">% Author: David Legland</span>
-0030 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0030 <span class="comment">% E-mail: david.legland@inrae.fr</span>
 0031 <span class="comment">% Created: 2006-07-05</span>
-0032 <span class="comment">% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0032 <span class="comment">% Copyright 2006-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)</span>
 0033 
-0034 <span class="comment">% HISTORY</span>
-0035 <span class="comment">% 2011-11-24 rename from faceNormal to meshFaceNormals</span>
+0034 <span class="comment">% parse input data</span>
+0035 [vertices, faces] = parseMeshData(varargin{:});
 0036 
-0037 <span class="comment">% parse input data</span>
-0038 [vertices, faces] = parseMeshData(varargin{:});
-0039 
-0040 <span class="keyword">if</span> isnumeric(faces)
-0041     <span class="comment">% compute vector of first edges</span>
-0042     v1 = vertices(faces(:,2),1:3) - vertices(faces(:,1),1:3);
-0043     v2 = vertices(faces(:,3),1:3) - vertices(faces(:,1),1:3);
-0044     
-0045     <span class="comment">% compute normals using cross product (nodes have same size)</span>
-0046     normals = cross(v1, v2, 2);
-0047 
-0048 <span class="keyword">else</span>
-0049     <span class="comment">% initialize empty array</span>
-0050     normals = zeros(length(faces), 3);
-0051     
-0052     <span class="keyword">for</span> i = 1:length(faces)
-0053         face = faces{i};
-0054         <span class="comment">% compute vector of first edges</span>
-0055         v1 = vertices(face(2),1:3) - vertices(face(1),1:3);
-0056         v2 = vertices(face(3),1:3) - vertices(face(1),1:3);
-0057 
-0058         <span class="comment">% compute normals using cross product</span>
-0059         normals(i, :) = cross(v1, v2, 2);
-0060     <span class="keyword">end</span>
-0061 <span class="keyword">end</span>
-0062 
-0063 normals = <a href="../../matGeom/geom3d/normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(normals);</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0037 <span class="keyword">if</span> isnumeric(faces)
+0038     <span class="comment">% compute vector of first edges</span>
+0039     v1 = vertices(faces(:,2),1:3) - vertices(faces(:,1),1:3);
+0040     v2 = vertices(faces(:,3),1:3) - vertices(faces(:,1),1:3);
+0041     
+0042     <span class="comment">% compute normals using cross product (nodes have same size)</span>
+0043     normals = cross(v1, v2, 2);
+0044 
+0045 <span class="keyword">else</span>
+0046     <span class="comment">% initialize empty array</span>
+0047     normals = zeros(length(faces), 3);
+0048     
+0049     <span class="keyword">for</span> i = 1:length(faces)
+0050         face = faces{i};
+0051         <span class="comment">% compute vector of first edges</span>
+0052         v1 = vertices(face(2),1:3) - vertices(face(1),1:3);
+0053         v2 = vertices(face(3),1:3) - vertices(face(1),1:3);
+0054 
+0055         <span class="comment">% compute normals using cross product</span>
+0056         normals(i, :) = cross(v1, v2, 2);
+0057     <span class="keyword">end</span>
+0058 <span class="keyword">end</span>
+0059 
+0060 normals = <a href="../../matGeom/geom3d/normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(normals);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

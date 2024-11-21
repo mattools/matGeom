@@ -62,18 +62,13 @@
 
    Source
      Local functions are part of the gptoolbox of Alec Jacobson
-     https://github.com/alecjacobson/gptoolbox
-
- ---------
- Author: oqilipo
- Created: 2017-09-17
- Copyright 2017</pre></div>
+     https://github.com/alecjacobson/gptoolbox</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="../../matGeom/geom3d/boundingBox3d.html" class="code" title="function box = boundingBox3d(points)">boundingBox3d</a>	BOUNDINGBOX3D Bounding box of a set of 3D points.</li><li><a href="../../matGeom/geom3d/box3dVolume.html" class="code" title="function vol = box3dVolume(box)">box3dVolume</a>	BOX3DVOLUME Volume of a 3-dimensional box.</li><li><a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>	MESHEDGES Computes array of edge vertex indices from face array.</li><li><a href="meshVolume.html" class="code" title="function vol = meshVolume(varargin)">meshVolume</a>	(Signed) volume of the space enclosed by a polygonal mesh.</li><li><a href="removeMeshVertices.html" class="code" title="function varargout = removeMeshVertices(vertices, faces, indsToRemove)">removeMeshVertices</a>	REMOVEMESHVERTICES Remove vertices and associated faces from a mesh.</li></ul>
+<li><a href="../../matGeom/geom3d/boundingBox3d.html" class="code" title="function box = boundingBox3d(points)">boundingBox3d</a>	BOUNDINGBOX3D Bounding box of a set of 3D points.</li><li><a href="../../matGeom/geom3d/box3dVolume.html" class="code" title="function vol = box3dVolume(box)">box3dVolume</a>	BOX3DVOLUME Volume of a 3-dimensional box.</li><li><a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>	MESHEDGES Computes array of edge vertex indices from face array.</li><li><a href="meshVolume.html" class="code" title="function vol = meshVolume(varargin)">meshVolume</a>	MESHVOLUME (Signed) volume of the space enclosed by a polygonal mesh.</li><li><a href="removeMeshVertices.html" class="code" title="function varargout = removeMeshVertices(vertices, faces, indsToRemove)">removeMeshVertices</a>	REMOVEMESHVERTICES Remove vertices and associated faces from a mesh.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 </ul>
@@ -121,119 +116,118 @@ This function is called by:
 0035 <span class="comment">%   Source</span>
 0036 <span class="comment">%     Local functions are part of the gptoolbox of Alec Jacobson</span>
 0037 <span class="comment">%     https://github.com/alecjacobson/gptoolbox</span>
-0038 <span class="comment">%</span>
-0039 <span class="comment">% ---------</span>
+0038 
+0039 <span class="comment">% ------</span>
 0040 <span class="comment">% Author: oqilipo</span>
-0041 <span class="comment">% Created: 2017-09-17</span>
-0042 <span class="comment">% Copyright 2017</span>
-0043 
-0044 <span class="comment">% input parsing</span>
-0045 <span class="keyword">if</span> isstruct(vertices)
-0046     <span class="keyword">if</span> nargin &gt; 1; varargin = [faces, varargin]; <span class="keyword">end</span>
-0047     [vertices, faces]=parseMeshData(vertices);
-0048 <span class="keyword">end</span>
-0049 
-0050 parser = inputParser;
-0051 validStrings = {<span class="string">'all'</span>,<span class="string">'mostVertices'</span>,<span class="string">'maxBoundingBox'</span>,<span class="string">'maxVolume'</span>};
-0052 addOptional(parser,<span class="string">'components'</span>,<span class="string">'all'</span>,@(x) any(validatestring(x, validStrings)));
-0053 parse(parser,varargin{:});
-0054 outputComp = validatestring(parser.Results.components, validStrings);
-0055 
-0056 <span class="comment">% algorithm</span>
-0057 CC = <a href="#_sub1" class="code" title="subfunction C = connected_components(F)">connected_components</a>(faces);
-0058 [a,~]=hist(CC,unique(CC));
-0059 [~,b] = sort(a);
-0060 meshes=repmat(struct(<span class="string">'vertices'</span>,[],<span class="string">'faces'</span>,[]),length(b),1);
-0061 <span class="keyword">for</span> cc=b
-0062     meshes(cc)=<a href="removeMeshVertices.html" class="code" title="function varargout = removeMeshVertices(vertices, faces, indsToRemove)">removeMeshVertices</a>(vertices, faces, ~(CC'==b(cc)));
-0063 <span class="keyword">end</span>
-0064 
-0065 <span class="comment">% output parsing</span>
-0066 <span class="keyword">switch</span> outputComp
-0067     <span class="keyword">case</span> <span class="string">'mostVertices'</span>
-0068         meshes=meshes(end);
-0069     <span class="keyword">case</span> <span class="string">'maxBoundingBox'</span>
-0070         [~,sortingIndices] = sort(arrayfun(@(x) <a href="../../matGeom/geom3d/box3dVolume.html" class="code" title="function vol = box3dVolume(box)">box3dVolume</a>(<a href="../../matGeom/geom3d/boundingBox3d.html" class="code" title="function box = boundingBox3d(points)">boundingBox3d</a>(x.vertices)), meshes));
-0071         meshes = meshes(sortingIndices(end));
-0072     <span class="keyword">case</span> <span class="string">'maxVolume'</span>
-0073         [~,sortingIndices] = sort(arrayfun(@(x) <a href="meshVolume.html" class="code" title="function vol = meshVolume(varargin)">meshVolume</a>(x.vertices, x.faces), meshes));
-0074         meshes = meshes(sortingIndices(end));
-0075 <span class="keyword">end</span>
-0076 
-0077 <span class="keyword">end</span>
-0078 
+0041 <span class="comment">% E-mail: N/A</span>
+0042 <span class="comment">% Created: 2017-09-17</span>
+0043 <span class="comment">% Copyright 2017-2024</span>
+0044 
+0045 <span class="comment">% input parsing</span>
+0046 <span class="keyword">if</span> isstruct(vertices)
+0047     <span class="keyword">if</span> nargin &gt; 1; varargin = [faces, varargin]; <span class="keyword">end</span>
+0048     [vertices, faces]=parseMeshData(vertices);
+0049 <span class="keyword">end</span>
+0050 
+0051 parser = inputParser;
+0052 validStrings = {<span class="string">'all'</span>,<span class="string">'mostVertices'</span>,<span class="string">'maxBoundingBox'</span>,<span class="string">'maxVolume'</span>};
+0053 addOptional(parser,<span class="string">'components'</span>,<span class="string">'all'</span>,@(x) any(validatestring(x, validStrings)));
+0054 parse(parser,varargin{:});
+0055 outputComp = validatestring(parser.Results.components, validStrings);
+0056 
+0057 <span class="comment">% algorithm</span>
+0058 CC = <a href="#_sub1" class="code" title="subfunction C = connected_components(F)">connected_components</a>(faces);
+0059 [a,~]=hist(CC,unique(CC));
+0060 [~,b] = sort(a);
+0061 meshes=repmat(struct(<span class="string">'vertices'</span>,[],<span class="string">'faces'</span>,[]),length(b),1);
+0062 <span class="keyword">for</span> cc=b
+0063     meshes(cc)=<a href="removeMeshVertices.html" class="code" title="function varargout = removeMeshVertices(vertices, faces, indsToRemove)">removeMeshVertices</a>(vertices, faces, ~(CC'==b(cc)));
+0064 <span class="keyword">end</span>
+0065 
+0066 <span class="comment">% output parsing</span>
+0067 <span class="keyword">switch</span> outputComp
+0068     <span class="keyword">case</span> <span class="string">'mostVertices'</span>
+0069         meshes=meshes(end);
+0070     <span class="keyword">case</span> <span class="string">'maxBoundingBox'</span>
+0071         [~,sortingIndices] = sort(arrayfun(@(x) <a href="../../matGeom/geom3d/box3dVolume.html" class="code" title="function vol = box3dVolume(box)">box3dVolume</a>(<a href="../../matGeom/geom3d/boundingBox3d.html" class="code" title="function box = boundingBox3d(points)">boundingBox3d</a>(x.vertices)), meshes));
+0072         meshes = meshes(sortingIndices(end));
+0073     <span class="keyword">case</span> <span class="string">'maxVolume'</span>
+0074         [~,sortingIndices] = sort(arrayfun(@(x) <a href="meshVolume.html" class="code" title="function vol = meshVolume(varargin)">meshVolume</a>(x.vertices, x.faces), meshes));
+0075         meshes = meshes(sortingIndices(end));
+0076 <span class="keyword">end</span>
+0077 
+0078 <span class="keyword">end</span>
 0079 
-0080 <span class="comment">%% Local functions are part of the gptoolbox by Alec Jacobson</span>
-0081 <a name="_sub1" href="#_subfunctions" class="code">function C = connected_components(F)</a>
-0082 <span class="comment">% CONNECTED_COMPONENTS Determine the connected components of a mesh</span>
-0083 <span class="comment">% described by the simplex list F. Components are determined with respect</span>
-0084 <span class="comment">% to the edges of the mesh. That is, a single component may contain</span>
-0085 <span class="comment">% non-manifold edges and vertices.</span>
-0086 <span class="comment">%</span>
-0087 <span class="comment">% C = connected_components(F)</span>
-0088 <span class="comment">%</span>
-0089 <span class="comment">% Inputs:</span>
-0090 <span class="comment">%   F  #F by simplex-size list of simplices</span>
-0091 <span class="comment">% Outputs:</span>
-0092 <span class="comment">%   C  #V list of ids for each CC</span>
-0093 <span class="comment">%</span>
-0094 <span class="comment">% Examples:</span>
-0095 <span class="comment">%  trisurf(F,V(:,1),V(:,2),V(:,3), ...</span>
-0096 <span class="comment">%    connected_components([F;repmat(size(V,1),1,3)]));</span>
-0097 
-0098 <span class="comment">% build adjacency list</span>
-0099 A = <a href="#_sub2" class="code" title="subfunction [A] = adjacency_matrix(E)">adjacency_matrix</a>(F);
-0100 [~,C] = <a href="#_sub3" class="code" title="subfunction [S,C] = conncomp(G)">conncomp</a>(A);
-0101 <span class="keyword">end</span>
-0102 
-0103 <a name="_sub2" href="#_subfunctions" class="code">function [A] = adjacency_matrix(E)</a>
-0104 <span class="comment">% ADJACENCY_MATRIX Build sparse adjacency matrix from edge list or face list</span>
-0105 <span class="comment">%</span>
-0106 <span class="comment">% [A] = adjacency_matrix(E)</span>
-0107 <span class="comment">% [A] = adjacency_matrix(F)</span>
-0108 <span class="comment">% [A] = adjacency_matrix(T)</span>
-0109 <span class="comment">%</span>
-0110 <span class="comment">% Inputs:</span>
-0111 <span class="comment">%   E  #E by 2 edges list</span>
-0112 <span class="comment">%   or</span>
-0113 <span class="comment">%   F  #F by 3 triangle list</span>
-0114 <span class="comment">%   or</span>
-0115 <span class="comment">%   T  #F by 4 tet list</span>
-0116 <span class="comment">% Outputs:</span>
-0117 <span class="comment">%   A  #V by #V adjacency matrix (#V = max(E(:)))</span>
-0118 <span class="comment">%</span>
-0119 <span class="comment">% See also: facet_adjacency_matrix</span>
-0120 <span class="comment">%</span>
-0121 
-0122 <span class="keyword">if</span> size(E,2)&gt;2
-0123     F = E;
-0124     E = <a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>(F);
-0125 <span class="keyword">end</span>
-0126 
-0127 A = sparse([E(:,1) E(:,2)],[E(:,2) E(:,1)],1);
-0128 <span class="keyword">end</span>
-0129 
-0130 <a name="_sub3" href="#_subfunctions" class="code">function [S,C] = conncomp(G)</a>
-0131 <span class="comment">% CONNCOMP Drop in replacement for graphconncomp.m from the bioinformatics</span>
-0132 <span class="comment">% toobox. G is an n by n adjacency matrix, then this identifies the S</span>
-0133 <span class="comment">% connected components C. This is also an order of magnitude faster.</span>
-0134 <span class="comment">%</span>
-0135 <span class="comment">% [S,C] = conncomp(G)</span>
-0136 <span class="comment">%</span>
-0137 <span class="comment">% Inputs:</span>
-0138 <span class="comment">%   G  n by n adjacency matrix</span>
-0139 <span class="comment">% Outputs:</span>
-0140 <span class="comment">%   S  scalar number of connected components</span>
-0141 <span class="comment">%   C</span>
-0142 
-0143 <span class="comment">% Transpose to match graphconncomp</span>
-0144 G = G';
-0145 
-0146 [p,~,r] = dmperm(G+speye(size(G)));
-0147 S = numel(r)-1;
-0148 C = cumsum(full(sparse(1,r(1:end-1),1,1,size(G,1))));
-0149 C(p) = C;
-0150 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0080 
+0081 <span class="comment">%% Local functions are part of the gptoolbox by Alec Jacobson</span>
+0082 <a name="_sub1" href="#_subfunctions" class="code">function C = connected_components(F)</a>
+0083 <span class="comment">% CONNECTED_COMPONENTS Determine the connected components of a mesh</span>
+0084 <span class="comment">% described by the simplex list F. Components are determined with respect</span>
+0085 <span class="comment">% to the edges of the mesh. That is, a single component may contain</span>
+0086 <span class="comment">% non-manifold edges and vertices.</span>
+0087 <span class="comment">%</span>
+0088 <span class="comment">% C = connected_components(F)</span>
+0089 <span class="comment">%</span>
+0090 <span class="comment">% Inputs:</span>
+0091 <span class="comment">%   F  #F by simplex-size list of simplices</span>
+0092 <span class="comment">% Outputs:</span>
+0093 <span class="comment">%   C  #V list of ids for each CC</span>
+0094 <span class="comment">%</span>
+0095 <span class="comment">% Examples:</span>
+0096 <span class="comment">%  trisurf(F,V(:,1),V(:,2),V(:,3), ...</span>
+0097 <span class="comment">%    connected_components([F;repmat(size(V,1),1,3)]));</span>
+0098 
+0099 <span class="comment">% build adjacency list</span>
+0100 A = <a href="#_sub2" class="code" title="subfunction [A] = adjacency_matrix(E)">adjacency_matrix</a>(F);
+0101 [~,C] = <a href="#_sub3" class="code" title="subfunction [S,C] = conncomp(G)">conncomp</a>(A);
+0102 <span class="keyword">end</span>
+0103 
+0104 <a name="_sub2" href="#_subfunctions" class="code">function [A] = adjacency_matrix(E)</a>
+0105 <span class="comment">% ADJACENCY_MATRIX Build sparse adjacency matrix from edge list or face list</span>
+0106 <span class="comment">%</span>
+0107 <span class="comment">% [A] = adjacency_matrix(E)</span>
+0108 <span class="comment">% [A] = adjacency_matrix(F)</span>
+0109 <span class="comment">% [A] = adjacency_matrix(T)</span>
+0110 <span class="comment">%</span>
+0111 <span class="comment">% Inputs:</span>
+0112 <span class="comment">%   E  #E by 2 edges list</span>
+0113 <span class="comment">%   or</span>
+0114 <span class="comment">%   F  #F by 3 triangle list</span>
+0115 <span class="comment">%   or</span>
+0116 <span class="comment">%   T  #F by 4 tet list</span>
+0117 <span class="comment">% Outputs:</span>
+0118 <span class="comment">%   A  #V by #V adjacency matrix (#V = max(E(:)))</span>
+0119 <span class="comment">%</span>
+0120 
+0121 <span class="keyword">if</span> size(E,2)&gt;2
+0122     F = E;
+0123     E = <a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>(F);
+0124 <span class="keyword">end</span>
+0125 
+0126 A = sparse([E(:,1) E(:,2)],[E(:,2) E(:,1)],1);
+0127 <span class="keyword">end</span>
+0128 
+0129 <a name="_sub3" href="#_subfunctions" class="code">function [S,C] = conncomp(G)</a>
+0130 <span class="comment">% CONNCOMP Drop in replacement for graphconncomp.m from the bioinformatics</span>
+0131 <span class="comment">% toobox. G is an n by n adjacency matrix, then this identifies the S</span>
+0132 <span class="comment">% connected components C. This is also an order of magnitude faster.</span>
+0133 <span class="comment">%</span>
+0134 <span class="comment">% [S,C] = conncomp(G)</span>
+0135 <span class="comment">%</span>
+0136 <span class="comment">% Inputs:</span>
+0137 <span class="comment">%   G  n by n adjacency matrix</span>
+0138 <span class="comment">% Outputs:</span>
+0139 <span class="comment">%   S  scalar number of connected components</span>
+0140 <span class="comment">%   C</span>
+0141 
+0142 <span class="comment">% Transpose to match graphconncomp</span>
+0143 G = G';
+0144 
+0145 [p,~,r] = dmperm(G+speye(size(G)));
+0146 S = numel(r)-1;
+0147 C = cumsum(full(sparse(1,r(1:end-1),1,1,size(G,1))));
+0148 C(p) = C;
+0149 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

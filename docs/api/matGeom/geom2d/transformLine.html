@@ -43,19 +43,14 @@
    Also work when LINES is a [N*4] array of double. In this case, LINE2
    has the same size as LINE. 
 
-   See also:
-   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="transforms2d.html" class="code" title="function transforms2d(varargin)">transforms2d</a>, <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>
-
-   ---------
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 06/04/2004.</pre></div>
+   See also
+   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="transforms2d.html" class="code" title="function transforms2d(varargin)">transforms2d</a>, <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>	CREATELINE Create a straight line from 2 points, or from other inputs.</li><li><a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>	Apply an affine transform to a point or a point set.</li></ul>
+<li><a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>	CREATELINE Create a straight line from 2 points, or from other inputs.</li><li><a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>	TRANSFORMPOINT Apply an affine transform to a point or a point set.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 </ul>
@@ -81,28 +76,24 @@ This function is called by:
 0015 <span class="comment">%   Also work when LINES is a [N*4] array of double. In this case, LINE2</span>
 0016 <span class="comment">%   has the same size as LINE.</span>
 0017 <span class="comment">%</span>
-0018 <span class="comment">%   See also:</span>
+0018 <span class="comment">%   See also</span>
 0019 <span class="comment">%   lines2d, transforms2d, transformPoint</span>
-0020 <span class="comment">%</span>
-0021 <span class="comment">%   ---------</span>
-0022 <span class="comment">%   author : David Legland</span>
-0023 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0024 <span class="comment">%   created the 06/04/2004.</span>
-0025 <span class="comment">%</span>
+0020 
+0021 <span class="comment">% ------</span>
+0022 <span class="comment">% Author: David Legland</span>
+0023 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0024 <span class="comment">% Created: 2004-04-06</span>
+0025 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0026 
-0027 <span class="comment">%   HISTORY</span>
-0028 <span class="comment">%   02/03/2007: rewrite function</span>
-0029 
+0027 <span class="comment">% isolate points</span>
+0028 points1 = line(:, 1:2);
+0029 points2 = line(:, 1:2) + line(:, 3:4);
 0030 
-0031 <span class="comment">% isolate points</span>
-0032 points1 = line(:, 1:2);
-0033 points2 = line(:, 1:2) + line(:, 3:4);
+0031 <span class="comment">% transform points</span>
+0032 points1 = <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(points1, trans);
+0033 points2 = <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(points2, trans);
 0034 
-0035 <span class="comment">% transform points</span>
-0036 points1 = <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(points1, trans);
-0037 points2 = <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(points2, trans);
-0038 
-0039 dest = <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(points1, points2);</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0035 dest = <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(points1, points2);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

@@ -65,7 +65,7 @@
          3    6    7    4
 
 
-   See also:
+   See also
    <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>, <a href="distancePointLine.html" class="code" title="function [dist, pos] = distancePointLine(point, line)">distancePointLine</a></pre></div>
 
 <!-- crossreference -->
@@ -120,51 +120,44 @@ This function is called by:
 0037 <span class="comment">%         3    6    7    4</span>
 0038 <span class="comment">%</span>
 0039 <span class="comment">%</span>
-0040 <span class="comment">%   See also:</span>
+0040 <span class="comment">%   See also</span>
 0041 <span class="comment">%   edges2d, points2d, distancePoints, distancePointLine</span>
 0042 <span class="comment">%</span>
 0043 
 0044 <span class="comment">% ------</span>
 0045 <span class="comment">% Author: David Legland</span>
-0046 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
+0046 <span class="comment">% E-mail: david.legland@inrae.fr</span>
 0047 <span class="comment">% Created: 2004-04-07</span>
-0048 <span class="comment">% Copyright 2016 INRA - BIA-BIBS.</span>
-0049 <span class="comment">%</span>
-0050 
-0051 <span class="comment">%   HISTORY</span>
-0052 <span class="comment">%   2005-06-24 rename, and change arguments sequence</span>
-0053 <span class="comment">%   2009-04-30 add possibility to return position of closest point</span>
-0054 <span class="comment">%   2011-04-14 add checkup for degenerate edges, improve speed, update doc</span>
-0055 
-0056 
-0057 <span class="comment">% direction vector of each edge (row vectors)</span>
-0058 vx = (edge(:, 3) - edge(:,1))';
-0059 vy = (edge(:, 4) - edge(:,2))';
-0060 
-0061 <span class="comment">% squared length of edges, with a check of validity</span>
-0062 delta = vx .* vx + vy .* vy;
-0063 invalidEdges = delta &lt; eps;
-0064 delta(invalidEdges) = 1; 
-0065 
-0066 <span class="comment">% difference of coordinates between point and edge first vertex</span>
-0067 <span class="comment">% (NP-by-NE arrays)</span>
-0068 dx  = bsxfun(@minus, point(:, 1), edge(:, 1)');
-0069 dy  = bsxfun(@minus, point(:, 2), edge(:, 2)');
-0070 
-0071 <span class="comment">% compute position of points projected on the supporting line, by using</span>
-0072 <span class="comment">% normalised dot product (NP-by-NE array)</span>
-0073 pos = bsxfun(@rdivide, bsxfun(@times, dx, vx) + bsxfun(@times, dy, vy), delta);
-0074 
-0075 <span class="comment">% ensure degenerated edges are correclty processed (consider the first</span>
-0076 <span class="comment">% vertex is the closest)</span>
-0077 pos(:, invalidEdges) = 0;
-0078 
-0079 <span class="comment">% change position to ensure projected point is located on the edge</span>
-0080 pos(pos &lt; 0) = 0;
-0081 pos(pos &gt; 1) = 1;
-0082 
-0083 <span class="comment">% compute distance between point and its projection on the edge</span>
-0084 dist = hypot(bsxfun(@times, pos, vx) - dx, bsxfun(@times, pos, vy) - dy);</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0048 <span class="comment">% Copyright 2004-2024 INRA - BIA-BIBS</span>
+0049 
+0050 <span class="comment">% direction vector of each edge (row vectors)</span>
+0051 vx = (edge(:, 3) - edge(:,1))';
+0052 vy = (edge(:, 4) - edge(:,2))';
+0053 
+0054 <span class="comment">% squared length of edges, with a check of validity</span>
+0055 delta = vx .* vx + vy .* vy;
+0056 invalidEdges = delta &lt; eps;
+0057 delta(invalidEdges) = 1; 
+0058 
+0059 <span class="comment">% difference of coordinates between point and edge first vertex</span>
+0060 <span class="comment">% (NP-by-NE arrays)</span>
+0061 dx  = bsxfun(@minus, point(:, 1), edge(:, 1)');
+0062 dy  = bsxfun(@minus, point(:, 2), edge(:, 2)');
+0063 
+0064 <span class="comment">% compute position of points projected on the supporting line, by using</span>
+0065 <span class="comment">% normalised dot product (NP-by-NE array)</span>
+0066 pos = bsxfun(@rdivide, bsxfun(@times, dx, vx) + bsxfun(@times, dy, vy), delta);
+0067 
+0068 <span class="comment">% ensure degenerated edges are correclty processed (consider the first</span>
+0069 <span class="comment">% vertex is the closest)</span>
+0070 pos(:, invalidEdges) = 0;
+0071 
+0072 <span class="comment">% change position to ensure projected point is located on the edge</span>
+0073 pos(pos &lt; 0) = 0;
+0074 pos(pos &gt; 1) = 1;
+0075 
+0076 <span class="comment">% compute distance between point and its projection on the edge</span>
+0077 dist = hypot(bsxfun(@times, pos, vx) - dx, bsxfun(@times, pos, vy) - dy);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

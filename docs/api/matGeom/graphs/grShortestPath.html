@@ -1,0 +1,244 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of grShortestPath</title>
+  <meta name="keywords" content="grShortestPath">
+  <meta name="description" content="GRSHORTESTPATH Find a shortest path between two nodes in the graph.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; grShortestPath.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>grShortestPath
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>GRSHORTESTPATH Find a shortest path between two nodes in the graph.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [nodePath, edgePath] = grShortestPath(nodes, edges, ind0, ind1, edgeWeights) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">GRSHORTESTPATH Find a shortest path between two nodes in the graph.
+
+   PATH = grShortestPath(NODES, EDGES, NODE1, NODE2, WEIGHTS)
+   NODES and EDGES defines the graph, NODE1 and NODE2 are indices of the
+   node extremities, and WEIGHTS is the set of weights associated to each
+   edge.
+   The function returns a set of node indices.
+
+   PATH = grShortestPath(NODES, EDGES, NODEINDS, WEIGHTS)
+   Specifies two or more points that must be traversed by the path, in the
+   specified order.
+
+   % Create a simple tree graph, and compute shortest path
+     [x y] = meshgrid([10 20 30], [10 20 30]);
+     nodes = [x(:) y(:)];
+     edges = [1 2;2 3;2 5;3 6; 4 5;4 7;5 8; 8 9];
+     drawGraph(nodes, edges)
+     axis equal; axis([0 40 0 40]);
+     drawNodeLabels(nodes, 1:9)
+     path = grShortestPath(nodes, edges, 1, 9);
+     % same as:
+     path = grShortestPath(nodes, edges, [1 9]);
+
+   See also
+     graphs, <a href="grFindMaximalLengthPath.html" class="code" title="function path = grFindMaximalLengthPath(nodes, edges, edgeWeights)">grFindMaximalLengthPath</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="grAdjacentEdges.html" class="code" title="function neigh = grAdjacentEdges(edges, node)">grAdjacentEdges</a>	GRADJACENTEDGES Find list of edges adjacent to a given node.</li><li><a href="grShortestPath.html" class="code" title="function [nodePath, edgePath] = grShortestPath(nodes, edges, ind0, ind1, edgeWeights)">grShortestPath</a>	GRSHORTESTPATH Find a shortest path between two nodes in the graph.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="grShortestPath.html" class="code" title="function [nodePath, edgePath] = grShortestPath(nodes, edges, ind0, ind1, edgeWeights)">grShortestPath</a>	GRSHORTESTPATH Find a shortest path between two nodes in the graph.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [nodePath, edgePath] = grShortestPath(nodes, edges, ind0, ind1, edgeWeights)</a>
+0002 <span class="comment">%GRSHORTESTPATH Find a shortest path between two nodes in the graph.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PATH = grShortestPath(NODES, EDGES, NODE1, NODE2, WEIGHTS)</span>
+0005 <span class="comment">%   NODES and EDGES defines the graph, NODE1 and NODE2 are indices of the</span>
+0006 <span class="comment">%   node extremities, and WEIGHTS is the set of weights associated to each</span>
+0007 <span class="comment">%   edge.</span>
+0008 <span class="comment">%   The function returns a set of node indices.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   PATH = grShortestPath(NODES, EDGES, NODEINDS, WEIGHTS)</span>
+0011 <span class="comment">%   Specifies two or more points that must be traversed by the path, in the</span>
+0012 <span class="comment">%   specified order.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   % Create a simple tree graph, and compute shortest path</span>
+0015 <span class="comment">%     [x y] = meshgrid([10 20 30], [10 20 30]);</span>
+0016 <span class="comment">%     nodes = [x(:) y(:)];</span>
+0017 <span class="comment">%     edges = [1 2;2 3;2 5;3 6; 4 5;4 7;5 8; 8 9];</span>
+0018 <span class="comment">%     drawGraph(nodes, edges)</span>
+0019 <span class="comment">%     axis equal; axis([0 40 0 40]);</span>
+0020 <span class="comment">%     drawNodeLabels(nodes, 1:9)</span>
+0021 <span class="comment">%     path = grShortestPath(nodes, edges, 1, 9);</span>
+0022 <span class="comment">%     % same as:</span>
+0023 <span class="comment">%     path = grShortestPath(nodes, edges, [1 9]);</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   See also</span>
+0026 <span class="comment">%     graphs, grFindMaximalLengthPath</span>
+0027 <span class="comment">%</span>
+0028 
+0029 <span class="comment">% ------</span>
+0030 <span class="comment">% Author: David Legland</span>
+0031 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0032 <span class="comment">% Created: 2011-05-22, using Matlab 7.9.0.529 (R2009b)</span>
+0033 <span class="comment">% Copyright 2011-2024 INRA - Cepia Software Platform</span>
+0034 
+0035 <span class="comment">% process the case where several node indices are specified in first arg.</span>
+0036 <span class="keyword">if</span> length(ind0) &gt; 1
+0037     <span class="comment">% following optional argument is edge values</span>
+0038     <span class="keyword">if</span> exist(<span class="string">'ind1'</span>, <span class="string">'var'</span>)
+0039         edgeWeights = ind1;
+0040     <span class="keyword">else</span>
+0041         edgeWeights = ones(size(edges, 1), 1);
+0042     <span class="keyword">end</span>
+0043     
+0044     <span class="comment">% concatenate path pieces</span>
+0045     nodePath = ind0(1);
+0046     edgePath = size(0, 2);
+0047     <span class="keyword">for</span> i = 2:length(ind0)
+0048         [node0, edge0] = <a href="grShortestPath.html" class="code" title="function [nodePath, edgePath] = grShortestPath(nodes, edges, ind0, ind1, edgeWeights)">grShortestPath</a>(nodes, edges, ind0(i-1), ind0(i), edgeWeights);
+0049         nodePath = [nodePath ; node0(2:end)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0050         edgePath = [edgePath ; edge0]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0051     <span class="keyword">end</span>
+0052     
+0053     <span class="keyword">return</span>;
+0054 <span class="keyword">end</span>
+0055 
+0056 <span class="comment">% ensure weights are defined</span>
+0057 <span class="keyword">if</span> ~exist(<span class="string">'edgeWeights'</span>, <span class="string">'var'</span>)
+0058     edgeWeights = ones(size(edges, 1), 1);
+0059 <span class="keyword">end</span>
+0060 
+0061 
+0062 <span class="comment">% check indices limits</span>
+0063 nNodes = size(nodes, 1);
+0064 <span class="keyword">if</span> max(ind0) &gt; nNodes
+0065     error(<span class="string">'Start index exceed number of nodes in the graph'</span>);
+0066 <span class="keyword">end</span>
+0067 <span class="keyword">if</span> max(ind1) &gt; nNodes
+0068     error(<span class="string">'End index exceed number of nodes in the graph'</span>);
+0069 <span class="keyword">end</span>
+0070 
+0071 
+0072 <span class="comment">%% Initialisations</span>
+0073 
+0074 <span class="comment">% consider infinite distance for all nodes</span>
+0075 dists = inf * ones(nNodes, 1);
+0076 
+0077 <span class="comment">% initial node is at distance 0 by definition</span>
+0078 dists(ind0) = 0;
+0079 
+0080 <span class="comment">% create an array of indices for the predessor of each node</span>
+0081 preds = zeros(nNodes, 1);
+0082 preds(ind0) = 0;
+0083 
+0084 <span class="comment">% allocate memory to store the subgraph, which is a tree</span>
+0085 edges2 = zeros(nNodes-1, 2);
+0086 
+0087 <span class="comment">% create an array of node flags</span>
+0088 unprocessedNodeInds = 1:nNodes;
+0089 
+0090 edgeCount = 0;
+0091 
+0092 
+0093 <span class="comment">%% Iterate until all nodes are flagged to 1</span>
+0094 
+0095 <span class="keyword">while</span> ~isempty(unprocessedNodeInds)
+0096     <span class="comment">% choose unprocessed node with lowest distance</span>
+0097     [tmp, ind] = min(dists(unprocessedNodeInds)); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0098     ind = unprocessedNodeInds(ind);
+0099     ind = ind(1);
+0100 
+0101     <span class="comment">% mark current node as processed</span>
+0102     unprocessedNodeInds(unprocessedNodeInds == ind) = [];
+0103     
+0104     <span class="comment">% if the current node is the target, it is not necessary to continue...</span>
+0105     <span class="keyword">if</span> ind == ind1
+0106         <span class="keyword">break</span>;
+0107     <span class="keyword">end</span>
+0108     
+0109     <span class="comment">% find the index list of edges incident to current node</span>
+0110     adjEdgeInds = <a href="grAdjacentEdges.html" class="code" title="function neigh = grAdjacentEdges(edges, node)">grAdjacentEdges</a>(edges, ind);
+0111     
+0112     <span class="comment">% select edges whose opposite node has not yet been processed</span>
+0113     inds2 = sum(ismember(edges(adjEdgeInds, :), unprocessedNodeInds), 2) &gt; 0;
+0114     adjEdgeInds = adjEdgeInds(inds2);
+0115     
+0116     <span class="comment">% iterate over incident edges to update adjacent nodes</span>
+0117     <span class="keyword">for</span> iNeigh = 1:length(adjEdgeInds)
+0118         <span class="comment">% extract index of current adjacent node</span>
+0119         edge = edges(adjEdgeInds(iNeigh), :);
+0120         adjNodeInd = edge(~ismember(edge, ind));
+0121         
+0122         newDist = dists(ind) + edgeWeights(adjEdgeInds(iNeigh));
+0123 <span class="comment">%         dists(adjNodeInd) = min(dists(adjNodeInd), newDist);</span>
+0124         <span class="keyword">if</span> newDist &lt; dists(adjNodeInd)
+0125             dists(adjNodeInd) = newDist;
+0126             preds(adjNodeInd) = ind;
+0127         <span class="keyword">end</span>
+0128     <span class="keyword">end</span>
+0129 
+0130     <span class="comment">% find the list of adjacent nodes</span>
+0131     adjNodeInds = unique(edges(adjEdgeInds, :));
+0132     adjNodeInds(adjNodeInds == ind) = [];
+0133     
+0134     <span class="comment">% choose the adjacent nodes with lowest distance, and add the</span>
+0135     <span class="comment">% corresponding edges to the subgraph</span>
+0136     <span class="keyword">if</span> ~isempty(adjNodeInds)
+0137         minDist = min(dists(adjNodeInds));
+0138         closestNodeInds = adjNodeInds(dists(adjNodeInds) &lt;= minDist);
+0139         <span class="keyword">for</span> iCloseNode = 1:length(closestNodeInds)
+0140             edgeCount = edgeCount + 1;
+0141             edges2(edgeCount, :) = [ind closestNodeInds(iCloseNode)];
+0142         <span class="keyword">end</span>
+0143     <span class="keyword">end</span>
+0144 <span class="keyword">end</span>
+0145 
+0146 
+0147 <span class="comment">%% Path creation</span>
+0148 
+0149 <span class="comment">% create the path: start from end index, and identify successive set of</span>
+0150 <span class="comment">% neighbor edges and nodes</span>
+0151 
+0152 nodeInd = ind1;
+0153 nodePath = nodeInd;
+0154 edgePath = [];
+0155 
+0156 <span class="comment">% find predecessors until we reach ind0 node</span>
+0157 <span class="keyword">while</span> nodeInd ~= ind0
+0158     newNodeInd = preds(nodeInd);
+0159     nodePath = [nodePath ; newNodeInd]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0160 
+0161     <span class="comment">% search the edge (both directions) in the list of edges</span>
+0162     e_tmp                 = [nodeInd newNodeInd];
+0163     [~,edgeInd]           = ismember ([e_tmp; e_tmp(end:-1:1)], edges, <span class="string">'rows'</span>);
+0164     edgeInd(edgeInd == 0) = []; <span class="comment">% erase the one that isn't there</span>
+0165     edgePath = [edgePath ; edgeInd]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0166 
+0167     nodeInd = newNodeInd;
+0168 <span class="keyword">end</span>
+0169     
+0170 <span class="comment">% reverse the path</span>
+0171 nodePath = nodePath(end:-1:1);
+0172 edgePath = edgePath(end:-1:1);
+0173</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

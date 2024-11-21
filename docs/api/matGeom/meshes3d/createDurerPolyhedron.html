@@ -69,7 +69,7 @@
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="../../matGeom/geom3d/createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="../../matGeom/geom3d/createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>	CREATEROTATIONOY Create the 4x4 matrix of a 3D rotation around y-axis.</li><li><a href="../../matGeom/geom3d/createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>	CREATEROTATIONOZ Create the 4x4 matrix of a 3D rotation around z-axis.</li><li><a href="../../matGeom/geom3d/createScaling3d.html" class="code" title="function trans = createScaling3d(varargin)">createScaling3d</a>	CREATESCALING3D Create the 4x4 matrix of a 3D scaling.</li><li><a href="../../matGeom/geom3d/transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li><li><a href="clipConvexPolyhedronHP.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronHP(nodes, faces, plane)">clipConvexPolyhedronHP</a>	CLIPCONVEXPOLYHEDRONHP Clip a convex polyhedron by a plane.</li><li><a href="createCube.html" class="code" title="function varargout = createCube()">createCube</a>	CREATECUBE Create a 3D mesh representing the unit cube.</li><li><a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>	MESHEDGES Computes array of edge vertex indices from face array.</li></ul>
+<li><a href="../../matGeom/geom3d/createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="../../matGeom/geom3d/createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>	CREATEROTATIONOY Create the 4x4 matrix of a 3D rotation around y-axis.</li><li><a href="../../matGeom/geom3d/createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>	CREATEROTATIONOZ Create the 4x4 matrix of a 3D rotation around z-axis.</li><li><a href="../../matGeom/geom3d/createScaling3d.html" class="code" title="function trans = createScaling3d(varargin)">createScaling3d</a>	CREATESCALING3D Create the 4x4 matrix of a 3D scaling.</li><li><a href="../../matGeom/geom3d/transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li><li><a href="clipConvexPolyhedronByPlane.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronByPlane(nodes, faces, plane)">clipConvexPolyhedronByPlane</a>	CLIPCONVEXPOLYHEDRONBYPLANE Clip a convex polyhedron by a plane.</li><li><a href="createCube.html" class="code" title="function varargout = createCube()">createCube</a>	CREATECUBE Create a 3D mesh representing the unit cube.</li><li><a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>	MESHEDGES Computes array of edge vertex indices from face array.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 </ul>
@@ -119,9 +119,9 @@ This function is called by:
 0039 
 0040 <span class="comment">% ------</span>
 0041 <span class="comment">% Author: David Legland</span>
-0042 <span class="comment">% e-mail: david.legland@inra.fr</span>
-0043 <span class="comment">% Created: 2012-07-31,    using Matlab 7.9.0.529 (R2009b)</span>
-0044 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
+0042 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0043 <span class="comment">% Created: 2012-07-31, using Matlab 7.9.0.529 (R2009b)</span>
+0044 <span class="comment">% Copyright 2012-2024 INRA - Cepia Software Platform</span>
 0045 
 0046 <span class="comment">% start from a cube basis</span>
 0047 [v, f] = <a href="createCube.html" class="code" title="function varargout = createCube()">createCube</a>;
@@ -140,15 +140,15 @@ This function is called by:
 0060 
 0061 <span class="comment">% clip by two horizontal planes</span>
 0062 plane1  = <a href="../../matGeom/geom3d/createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>([0 0 z1], [0 0 1]);
-0063 [v, f]   = <a href="clipConvexPolyhedronHP.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronHP(nodes, faces, plane)">clipConvexPolyhedronHP</a>(v, f, plane1);
+0063 [v, f]   = <a href="clipConvexPolyhedronByPlane.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronByPlane(nodes, faces, plane)">clipConvexPolyhedronByPlane</a>(v, f, plane1);
 0064 plane2  = <a href="../../matGeom/geom3d/createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>([0 0 -z1], [0 0 -1]);
-0065 [v, f]   = <a href="clipConvexPolyhedronHP.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronHP(nodes, faces, plane)">clipConvexPolyhedronHP</a>(v, f, plane2);
+0065 [v, f]   = <a href="clipConvexPolyhedronByPlane.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronByPlane(nodes, faces, plane)">clipConvexPolyhedronByPlane</a>(v, f, plane2);
 0066 
 0067 <span class="comment">% complete with edge information</span>
 0068 e = <a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>(f);
 0069 
 0070 <span class="comment">% format output</span>
 0071 varargout = formatMeshOutput(nargout, v, e, f);</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

@@ -40,13 +40,8 @@
    projections of PT1 onto lines LINE. 
 
 
-   See also:
-   projPointOnLine, <a href="distancePointLine3d.html" class="code" title="function d = distancePointLine3d(point, line)">distancePointLine3d</a>
-
-   ---------
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 2012-08-23.</pre></div>
+   See also
+   projPointOnLine, <a href="distancePointLine3d.html" class="code" title="function d = distancePointLine3d(point, line)">distancePointLine3d</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -75,33 +70,31 @@ This function is called by:
 0012 <span class="comment">%   projections of PT1 onto lines LINE.</span>
 0013 <span class="comment">%</span>
 0014 <span class="comment">%</span>
-0015 <span class="comment">%   See also:</span>
+0015 <span class="comment">%   See also</span>
 0016 <span class="comment">%   projPointOnLine, distancePointLine3d</span>
-0017 <span class="comment">%</span>
-0018 <span class="comment">%   ---------</span>
-0019 <span class="comment">%   author : David Legland</span>
-0020 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0021 <span class="comment">%   created the 2012-08-23.</span>
-0022 <span class="comment">%</span>
+0017 
+0018 <span class="comment">% ------</span>
+0019 <span class="comment">% Author: David Legland</span>
+0020 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0021 <span class="comment">% Created: 2012-08-23</span>
+0022 <span class="comment">% Copyright 2012-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0023 
-0024 <span class="comment">%   HISTORY</span>
-0025 
-0026 <span class="comment">% direction vector of the line</span>
-0027 vx = line(:, 4);
-0028 vy = line(:, 5);
-0029 vz = line(:, 6);
-0030 
-0031 <span class="comment">% difference of point with line origin</span>
-0032 dx = point(:,1) - line(:,1);
-0033 dy = point(:,2) - line(:,2);
-0034 dz = point(:,3) - line(:,3);
-0035 
-0036 <span class="comment">% Position of projection on line, using dot product</span>
-0037 delta = vx .* vx + vy .* vy + vz .* vz;
-0038 tp = (dx .* vx + dy .* vy + dz .* vz) ./ delta;
-0039 
-0040 <span class="comment">% convert position on line to cartesian coordinates</span>
-0041 point = [line(:,1) + tp .* vx, line(:,2) + tp .* vy, line(:,3) + tp .* vz];</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0024 <span class="comment">% direction vector of the line</span>
+0025 vx = line(:, 4);
+0026 vy = line(:, 5);
+0027 vz = line(:, 6);
+0028 
+0029 <span class="comment">% difference of point with line origin</span>
+0030 dx = point(:,1) - line(:,1);
+0031 dy = point(:,2) - line(:,2);
+0032 dz = point(:,3) - line(:,3);
+0033 
+0034 <span class="comment">% Position of projection on line, using dot product</span>
+0035 delta = vx .* vx + vy .* vy + vz .* vz;
+0036 tp = (dx .* vx + dy .* vy + dz .* vz) ./ delta;
+0037 
+0038 <span class="comment">% convert position on line to cartesian coordinates</span>
+0039 point = [line(:,1) + tp .* vx, line(:,2) + tp .* vy, line(:,3) + tp .* vz];</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

@@ -47,15 +47,8 @@
    [PTS2, I, ANGLES] = angleSort(...);
    Also returns the ANGLES in corresponding order to PTS2.
 
-   See Also:
-   <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="angles2d.html" class="code" title="function angles2d">angles2d</a>, <a href="angle2Points.html" class="code" title="function theta = angle2Points(varargin)">angle2points</a>, <a href="normalizeAngle.html" class="code" title="function alpha = normalizeAngle(alpha, varargin)">normalizeAngle</a>
-
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- Created: 2005-11-24
- Copyright 2010 INRA - Cepia Software Platform.</pre></div>
+   See also
+   <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="angles2d.html" class="code" title="function angles2d">angles2d</a>, <a href="angle2Points.html" class="code" title="function theta = angle2Points(varargin)">angle2points</a>, <a href="normalizeAngle.html" class="code" title="function alpha = normalizeAngle(alpha, varargin)">normalizeAngle</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -64,7 +57,7 @@ This function calls:
 <li><a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>	LINEANGLE Computes angle between two straight lines.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-</ul>
+<li><a href="../../matGeom/graphs/clipGraph.html" class="code" title="function varargout = clipGraph(nodes, edges, varargin)">clipGraph</a>	CLIPGRAPH Clip a graph with a rectangular area.</li></ul>
 <!-- crossreference -->
 
 
@@ -91,58 +84,55 @@ This function is called by:
 0019 <span class="comment">%   [PTS2, I, ANGLES] = angleSort(...);</span>
 0020 <span class="comment">%   Also returns the ANGLES in corresponding order to PTS2.</span>
 0021 <span class="comment">%</span>
-0022 <span class="comment">%   See Also:</span>
+0022 <span class="comment">%   See also</span>
 0023 <span class="comment">%   points2d, angles2d, angle2points, normalizeAngle</span>
 0024 <span class="comment">%</span>
-0025 <span class="comment">%</span>
+0025 
 0026 <span class="comment">% ------</span>
 0027 <span class="comment">% Author: David Legland</span>
-0028 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0028 <span class="comment">% E-mail: david.legland@inrae.fr</span>
 0029 <span class="comment">% Created: 2005-11-24</span>
-0030 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0030 <span class="comment">% Copyright 2005-2024 INRA - Cepia Software Platform</span>
 0031 
-0032 
-0033 <span class="comment">%   HISTORY :</span>
-0034 
-0035 <span class="comment">% default values</span>
-0036 pt0 = [0 0];
-0037 theta0 = 0;
-0038 
-0039 <span class="keyword">if</span> length(varargin)==1
-0040     var = varargin{1};
-0041     <span class="keyword">if</span> size(var, 2)==1
-0042         <span class="comment">% specify angle</span>
-0043         theta0 = var;
-0044     <span class="keyword">else</span>
-0045         pt0 = var;
-0046     <span class="keyword">end</span>
-0047 <span class="keyword">elseif</span> length(varargin)==2
-0048     pt0 = varargin{1};
-0049     theta0 = varargin{2};
-0050 <span class="keyword">end</span>
-0051 
-0052 
-0053 n = size(pts, 1);
-0054 pts2 = pts - repmat(pt0, [n 1]);
-0055 angle = <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>([zeros(n, 2) pts2]);
-0056 angle = mod(angle - theta0 + 2*pi, 2*pi);
-0057 
-0058 [angles, I] = sort(angle); 
-0059 
-0060 <span class="comment">% format output</span>
-0061 <span class="keyword">switch</span> nargout
-0062     <span class="keyword">case</span> 1
-0063         varargout{1} = pts(I, :);
-0064     <span class="keyword">case</span> 2
+0032 <span class="comment">% default values</span>
+0033 pt0 = [0 0];
+0034 theta0 = 0;
+0035 
+0036 <span class="keyword">if</span> isscalar(varargin)
+0037     var = varargin{1};
+0038     <span class="keyword">if</span> size(var, 2)==1
+0039         <span class="comment">% specify angle</span>
+0040         theta0 = var;
+0041     <span class="keyword">else</span>
+0042         pt0 = var;
+0043     <span class="keyword">end</span>
+0044 <span class="keyword">elseif</span> length(varargin)==2
+0045     pt0 = varargin{1};
+0046     theta0 = varargin{2};
+0047 <span class="keyword">end</span>
+0048 
+0049 
+0050 n = size(pts, 1);
+0051 pts2 = pts - repmat(pt0, [n 1]);
+0052 angle = <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>([zeros(n, 2) pts2]);
+0053 angle = mod(angle - theta0 + 2*pi, 2*pi);
+0054 
+0055 [angles, I] = sort(angle); 
+0056 
+0057 <span class="comment">% format output</span>
+0058 <span class="keyword">switch</span> nargout
+0059     <span class="keyword">case</span> 1
+0060         varargout{1} = pts(I, :);
+0061     <span class="keyword">case</span> 2
+0062         varargout{1} = pts(I, :);
+0063         varargout{2} = I;
+0064     <span class="keyword">case</span> 3
 0065         varargout{1} = pts(I, :);
 0066         varargout{2} = I;
-0067     <span class="keyword">case</span> 3
-0068         varargout{1} = pts(I, :);
-0069         varargout{2} = I;
-0070         varargout{3} = angles;
-0071 <span class="keyword">end</span>
-0072 
-0073</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0067         varargout{3} = angles;
+0068 <span class="keyword">end</span>
+0069 
+0070</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

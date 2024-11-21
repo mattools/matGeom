@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of transformCircle3d</title>
+  <meta name="keywords" content="transformCircle3d">
+  <meta name="description" content="TRANSFORMCIRCLE3D Transform a 3D circle with a 3D affine transformation.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; transformCircle3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>transformCircle3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>TRANSFORMCIRCLE3D Transform a 3D circle with a 3D affine transformation.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function circle2 = transformCircle3d(circle, tfm) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">TRANSFORMCIRCLE3D Transform a 3D circle with a 3D affine transformation.
+
+   CIRCLE2 = transformPlane3d(CIRCLE, TFM)
+
+   Example
+     circle = [1 1 1 2 45 45 0];
+     tfm = createRotationOz(pi);
+     circle2 = transformCircle3d(circle, tfm);
+     figure('color','w'); hold on; axis equal tight; view(-10,25);
+     xlabel('x'); ylabel('y'); zlabel('z');
+     drawCircle3d(circle,'r'); drawPoint3d(circle(1:3),'r+')
+     drawCircle3d(circle2,'g'); drawPoint3d(circle2(1:3),'g+')
+
+   See also
+     <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>, <a href="transformVector3d.html" class="code" title="function varargout = transformVector3d(varargin)">transformVector3d</a>, <a href="transformLine3d.html" class="code" title="function res = transformLine3d(line, trans)">transformLine3d</a>,
+     <a href="transformPlane3d.html" class="code" title="function plane2 = transformPlane3d(plane, trans)">transformPlane3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="isTransform3d.html" class="code" title="function a = isTransform3d(trans, varargin)">isTransform3d</a>	ISTRANSFORM3D Check if input is a affine transformation matrix.</li><li><a href="rotation3dToEulerAngles.html" class="code" title="function varargout = rotation3dToEulerAngles(mat, varargin)">rotation3dToEulerAngles</a>	ROTATION3DTOEULERANGLES Extract Euler angles from a rotation matrix.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function circle2 = transformCircle3d(circle, tfm)</a>
+0002 <span class="comment">%TRANSFORMCIRCLE3D Transform a 3D circle with a 3D affine transformation.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   CIRCLE2 = transformPlane3d(CIRCLE, TFM)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   Example</span>
+0007 <span class="comment">%     circle = [1 1 1 2 45 45 0];</span>
+0008 <span class="comment">%     tfm = createRotationOz(pi);</span>
+0009 <span class="comment">%     circle2 = transformCircle3d(circle, tfm);</span>
+0010 <span class="comment">%     figure('color','w'); hold on; axis equal tight; view(-10,25);</span>
+0011 <span class="comment">%     xlabel('x'); ylabel('y'); zlabel('z');</span>
+0012 <span class="comment">%     drawCircle3d(circle,'r'); drawPoint3d(circle(1:3),'r+')</span>
+0013 <span class="comment">%     drawCircle3d(circle2,'g'); drawPoint3d(circle2(1:3),'g+')</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   See also</span>
+0016 <span class="comment">%     transforms3d, transformPoint3d, transformVector3d, transformLine3d,</span>
+0017 <span class="comment">%     transformPlane3d</span>
+0018 <span class="comment">%</span>
+0019 
+0020 <span class="comment">% ------</span>
+0021 <span class="comment">% Author: oqilipo</span>
+0022 <span class="comment">% E-mail: N/A</span>
+0023 <span class="comment">% Created: 2022-12-03, using MATLAB 9.13.0.2080170 (R2022b) Update 1</span>
+0024 <span class="comment">% Copyright 2022-2024</span>
+0025 
+0026 parser = inputParser;
+0027 addRequired(parser, <span class="string">'circle'</span>, @(x) validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0028     {<span class="string">'ncols'</span>,7,<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'nonnan'</span>}));
+0029 addRequired(parser, <span class="string">'tfm'</span>, @<a href="isTransform3d.html" class="code" title="function a = isTransform3d(trans, varargin)">isTransform3d</a>);
+0030 parse(parser, circle, tfm);
+0031 circle = parser.Results.circle;
+0032 tfm = parser.Results.tfm;
+0033 
+0034 <span class="comment">% Compute transformation from local basis to world basis</span>
+0035 initialTfm = localToGlobal3d(circle(1:3), circle(5), circle(6), circle(7));
+0036 <span class="comment">% Add the additional transformation</span>
+0037 newTfm = tfm*initialTfm;
+0038 
+0039 <span class="comment">% Convert to Euler angles</span>
+0040 [phi, theta, psi] = <a href="rotation3dToEulerAngles.html" class="code" title="function varargout = rotation3dToEulerAngles(mat, varargin)">rotation3dToEulerAngles</a>(newTfm, <span class="string">'ZYZ'</span>);
+0041 
+0042 <span class="comment">% Create transformed circle</span>
+0043 circle2 = [<a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(circle(1:3), tfm), circle(4), theta, phi, psi];</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

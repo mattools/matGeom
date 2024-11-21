@@ -68,13 +68,8 @@
      edges = [center 2*r1 theta ; center 2*r2 theta+90];
      drawCenteredEdge(edges, 'linewidth', 2, 'color', 'g');
  
-   See also:
-   <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="drawOrientedBox.html" class="code" title="function varargout = drawOrientedBox(box, varargin)">drawOrientedBox</a>, <a href="drawEllipse.html" class="code" title="function varargout = drawEllipse(varargin)">drawEllipse</a>, <a href="centeredEdgeToEdge.html" class="code" title="function edge = centeredEdgeToEdge(cedge)">centeredEdgeToEdge</a>, <a href="drawEdge.html" class="code" title="function varargout = drawEdge(varargin)">drawEdge</a>
-
-   ---------
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 05/08/2005.</pre></div>
+   See also
+     <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="drawOrientedBox.html" class="code" title="function varargout = drawOrientedBox(varargin)">drawOrientedBox</a>, <a href="drawEllipse.html" class="code" title="function varargout = drawEllipse(varargin)">drawEllipse</a>, <a href="centeredEdgeToEdge.html" class="code" title="function edge = centeredEdgeToEdge(cedge)">centeredEdgeToEdge</a>, <a href="drawEdge.html" class="code" title="function varargout = drawEdge(varargin)">drawEdge</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -131,111 +126,115 @@ This function is called by:
 0040 <span class="comment">%     edges = [center 2*r1 theta ; center 2*r2 theta+90];</span>
 0041 <span class="comment">%     drawCenteredEdge(edges, 'linewidth', 2, 'color', 'g');</span>
 0042 <span class="comment">%</span>
-0043 <span class="comment">%   See also:</span>
-0044 <span class="comment">%   edges2d, drawOrientedBox, drawEllipse, centeredEdgeToEdge, drawEdge</span>
+0043 <span class="comment">%   See also</span>
+0044 <span class="comment">%     edges2d, drawOrientedBox, drawEllipse, centeredEdgeToEdge, drawEdge</span>
 0045 <span class="comment">%</span>
-0046 <span class="comment">%   ---------</span>
-0047 <span class="comment">%   author : David Legland</span>
-0048 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0049 <span class="comment">%   created the 05/08/2005.</span>
-0050 <span class="comment">%</span>
-0051 
-0052 <span class="comment">%   HISTORY</span>
-0053 <span class="comment">%   2007-06-15 update doc, clean up code</span>
-0054 <span class="comment">%   2011-05-18 use angle in degrees, cleanup code and doc</span>
-0055 <span class="comment">%   2011-10-11 add management of axes handle</span>
-0056 
-0057 
-0058 <span class="comment">%% process input variables</span>
-0059 
-0060 <span class="keyword">if</span> nargin &lt; 1
-0061     error(<span class="string">'Function requires an input argument'</span>);
-0062 <span class="keyword">end</span>
-0063 
-0064 <span class="comment">% extract handle of axis to draw on</span>
-0065 <span class="keyword">if</span> isAxisHandle(varargin{1})
-0066     ax = varargin{1};
-0067     varargin(1) = [];
-0068 <span class="keyword">else</span>
-0069     ax = gca;
-0070 <span class="keyword">end</span>
-0071 
-0072 var = varargin{1};
-0073 <span class="keyword">if</span> size(var, 2) == 4
-0074     <span class="comment">% manage edge in single parameter</span>
-0075     len     = var(:, 3);
-0076     theta   = var(:, 4);
-0077     center  = var(:, 1:2);
-0078 
-0079     N = size(center, 1);    
-0080     varargin(1) = [];
-0081 
-0082 <span class="keyword">elseif</span> length(varargin) &gt;= 3
-0083     <span class="comment">% parameters given in different arguments</span>
-0084     
-0085     <span class="comment">% size of data</span>
-0086     center  = varargin{1};
-0087     len     = varargin{2};
-0088     theta   = varargin{3};
-0089     varargin(1:3) = [];
-0090 
-0091     <span class="comment">% ensure all data have same size</span>
-0092     NP = size(center, 1);
-0093     NL = size(len, 1);
-0094     ND = size(theta, 1);
-0095     N  = max([NP NL ND]);
-0096     <span class="keyword">if</span> N &gt; 1
-0097         <span class="keyword">if</span> NP == 1, center = repmat(center, [N 1]); <span class="keyword">end</span>
-0098         <span class="keyword">if</span> NL == 1, len = repmat(len, [N 1]); <span class="keyword">end</span>
-0099         <span class="keyword">if</span> ND == 1, theta = repmat(theta, [N 1]); <span class="keyword">end</span>
-0100     <span class="keyword">end</span>
-0101     
-0102 <span class="keyword">end</span>
-0103 
-0104 <span class="comment">% extract drawing options</span>
-0105 options = varargin(:);
-0106 
-0107 
-0108 <span class="comment">%% Draw edges</span>
-0109 
-0110 <span class="comment">% coordinates of center point</span>
-0111 xc = center(:, 1);
-0112 yc = center(:, 2);
-0113 
-0114 <span class="comment">% convert angle to radians</span>
-0115 theta = theta * pi / 180;
-0116 
-0117 <span class="comment">% computation shortcuts</span>
-0118 cot = cos(theta);
-0119 sit = sin(theta);
-0120 
-0121 <span class="comment">% compute starting and ending points</span>
-0122 x1 = xc - len .* cot / 2;
-0123 x2 = xc + len .* cot / 2;
-0124 y1 = yc - len .* sit / 2;
-0125 y2 = yc + len .* sit / 2;
+0046 
+0047 <span class="comment">% ------</span>
+0048 <span class="comment">% Author: David Legland</span>
+0049 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0050 <span class="comment">% Created: 2005-08-05</span>
+0051 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0052 
+0053 <span class="comment">%% process input variables</span>
+0054 
+0055 <span class="keyword">if</span> nargin &lt; 1
+0056     error(<span class="string">'Function requires an input argument'</span>);
+0057 <span class="keyword">end</span>
+0058 
+0059 <span class="comment">% extract handle of axis to draw on</span>
+0060 <span class="keyword">if</span> isAxisHandle(varargin{1})
+0061     ax = varargin{1};
+0062     varargin(1) = [];
+0063 <span class="keyword">else</span>
+0064     ax = gca;
+0065 <span class="keyword">end</span>
+0066 
+0067 var = varargin{1};
+0068 <span class="keyword">if</span> size(var, 2) == 4
+0069     <span class="comment">% manage edge in single parameter</span>
+0070     len     = var(:, 3);
+0071     theta   = var(:, 4);
+0072     center  = var(:, 1:2);
+0073 
+0074     N = size(center, 1);    
+0075     varargin(1) = [];
+0076 
+0077 <span class="keyword">elseif</span> length(varargin) &gt;= 3
+0078     <span class="comment">% parameters given in different arguments</span>
+0079     
+0080     <span class="comment">% size of data</span>
+0081     center  = varargin{1};
+0082     len     = varargin{2};
+0083     theta   = varargin{3};
+0084     varargin(1:3) = [];
+0085 
+0086     <span class="comment">% ensure all data have same size</span>
+0087     NP = size(center, 1);
+0088     NL = size(len, 1);
+0089     ND = size(theta, 1);
+0090     N  = max([NP NL ND]);
+0091     <span class="keyword">if</span> N &gt; 1
+0092         <span class="keyword">if</span> NP == 1, center = repmat(center, [N 1]); <span class="keyword">end</span>
+0093         <span class="keyword">if</span> NL == 1, len = repmat(len, [N 1]); <span class="keyword">end</span>
+0094         <span class="keyword">if</span> ND == 1, theta = repmat(theta, [N 1]); <span class="keyword">end</span>
+0095     <span class="keyword">end</span>
+0096     
+0097 <span class="keyword">end</span>
+0098 
+0099 <span class="comment">% extract drawing options</span>
+0100 options = varargin(:);
+0101 
+0102 
+0103 <span class="comment">%% Draw edges</span>
+0104 
+0105 <span class="comment">% coordinates of center point</span>
+0106 xc = center(:, 1);
+0107 yc = center(:, 2);
+0108 
+0109 <span class="comment">% convert angle to radians</span>
+0110 theta = theta * pi / 180;
+0111 
+0112 <span class="comment">% computation shortcuts</span>
+0113 cot = cos(theta);
+0114 sit = sin(theta);
+0115 
+0116 <span class="comment">% compute starting and ending points</span>
+0117 x1 = xc - len .* cot / 2;
+0118 x2 = xc + len .* cot / 2;
+0119 y1 = yc - len .* sit / 2;
+0120 y2 = yc + len .* sit / 2;
+0121 
+0122 <span class="comment">% save hold state</span>
+0123 holdState = ishold(ax);
+0124 hold(ax, <span class="string">'on'</span>);
+0125 
 0126 
-0127 
-0128 <span class="comment">% draw the edges</span>
-0129 h = zeros(N, 1);
-0130 <span class="keyword">for</span> i = 1:N
-0131     h(i) = plot(ax, [x1(i) x2(i)], [y1(i) y2(i)]);
-0132 <span class="keyword">end</span>
-0133 
-0134 <span class="comment">% apply style to edges</span>
-0135 <span class="keyword">if</span> ~isempty(options) &gt; 0
-0136     <span class="keyword">for</span> i = 1:N
-0137         set(h(i), options{:});
-0138     <span class="keyword">end</span>
-0139 <span class="keyword">end</span>
+0127 <span class="comment">% draw the edges</span>
+0128 h = zeros(N, 1);
+0129 <span class="keyword">for</span> i = 1:N
+0130     h(i) = plot(ax, [x1(i) x2(i)], [y1(i) y2(i)]);
+0131 <span class="keyword">end</span>
+0132 
+0133 <span class="comment">% apply style to edges</span>
+0134 <span class="keyword">if</span> ~isempty(options) &gt; 0
+0135     <span class="keyword">for</span> i = 1:N
+0136         set(h(i), options{:});
+0137     <span class="keyword">end</span>
+0138 <span class="keyword">end</span>
+0139 
 0140 
-0141 
-0142 <span class="comment">%% Format output</span>
-0143 
-0144 <span class="comment">% process output arguments</span>
-0145 <span class="keyword">if</span> nargout &gt; 0
-0146     varargout = {h};
-0147 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0141 <span class="comment">%% Format output</span>
+0142 
+0143 <span class="comment">% restore hold state</span>
+0144 <span class="keyword">if</span> ~holdState
+0145     hold(ax, <span class="string">'off'</span>);
+0146 <span class="keyword">end</span>
+0147 
+0148 <span class="comment">% process output arguments</span>
+0149 <span class="keyword">if</span> nargout &gt; 0
+0150     varargout = {h};
+0151 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

@@ -24,7 +24,7 @@
 <div class="box"><strong>DRAWVECTOR3D Draw vector at a given position.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function varargout = drawVector3d(pos, vect, varargin) </strong></div>
+<div class="box"><strong>function varargout = drawVector3d(varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre class="comment">DRAWVECTOR3D Draw vector at a given position.
@@ -45,7 +45,7 @@
      view(3);
 
    See also
-   <a href="vectors3d.html" class="code" title="function vectors3d(varargin)">vectors3d</a>, quiver3</pre></div>
+     <a href="vectors3d.html" class="code" title="function vectors3d(varargin)">vectors3d</a>, quiver3</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -60,7 +60,7 @@ This function is called by:
 
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawVector3d(pos, vect, varargin)</a>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawVector3d(varargin)</a>
 0002 <span class="comment">%DRAWVECTOR3D Draw vector at a given position.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   drawVector3d(POS, VECT)</span>
@@ -79,24 +79,24 @@ This function is called by:
 0017 <span class="comment">%     view(3);</span>
 0018 <span class="comment">%</span>
 0019 <span class="comment">%   See also</span>
-0020 <span class="comment">%   vectors3d, quiver3</span>
+0020 <span class="comment">%     vectors3d, quiver3</span>
 0021 <span class="comment">%</span>
 0022 
 0023 <span class="comment">% ------</span>
 0024 <span class="comment">% Author: David Legland</span>
-0025 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
-0026 <span class="comment">% Created: 2011-12-19,    using Matlab 7.9.0.529 (R2009b)</span>
-0027 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0025 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0026 <span class="comment">% Created: 2011-12-19, using Matlab 7.9.0.529 (R2009b)</span>
+0027 <span class="comment">% Copyright 2011-2024 INRA - Cepia Software Platform</span>
 0028 
-0029 <span class="keyword">if</span> isAxisHandle(pos)
-0030     hAx = pos;
-0031     pos = vect;
-0032     vect = varargin{1};
-0033     varargin(1) = [];
-0034 <span class="keyword">else</span>
-0035     hAx = gca;
-0036 <span class="keyword">end</span>
-0037 
+0029 <span class="comment">% extract handle of axis to draw on</span>
+0030 [hAx, varargin] = parseAxisHandle(varargin{:});
+0031 
+0032 <span class="comment">% retrieve geometric data</span>
+0033 pos = varargin{1};
+0034 vect = varargin{2};
+0035 varargin(1:2) = [];
+0036 
+0037 <span class="comment">% draw the vectors using the quiver3 function</span>
 0038 h = quiver3(hAx, pos(:, 1), pos(:, 2), pos(:, 3), <span class="keyword">...</span>
 0039     vect(:, 1), vect(:, 2), vect(:, 3), 0, varargin{:});
 0040 
@@ -104,6 +104,6 @@ This function is called by:
 0042 <span class="keyword">if</span> nargout &gt; 0
 0043     varargout{1} = h;
 0044 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

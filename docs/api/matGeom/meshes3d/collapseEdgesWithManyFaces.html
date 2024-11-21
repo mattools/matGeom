@@ -4,7 +4,7 @@
 <head>
   <title>Description of collapseEdgesWithManyFaces</title>
   <meta name="keywords" content="collapseEdgesWithManyFaces">
-  <meta name="description" content="removes mesh edges adjacent to more than two faces">
+  <meta name="description" content="COLLAPSEEDGESWITHMANYFACES Remove mesh edges adjacent to more than two faces.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>removes mesh edges adjacent to more than two faces</strong></div>
+<div class="box"><strong>COLLAPSEEDGESWITHMANYFACES Remove mesh edges adjacent to more than two faces.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> removes mesh edges adjacent to more than two faces
+<div class="fragment"><pre class="comment">COLLAPSEEDGESWITHMANYFACES Remove mesh edges adjacent to more than two faces.
 
    [V2, F2] = collapseEdgesWithManyFaces(V, F)
    Count the number of faces adjacent to each edge, and collapse the edges
@@ -54,7 +54,7 @@ This function is called by:
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargin)</a>
-0002 <span class="comment">% removes mesh edges adjacent to more than two faces</span>
+0002 <span class="comment">%COLLAPSEEDGESWITHMANYFACES Remove mesh edges adjacent to more than two faces.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   [V2, F2] = collapseEdgesWithManyFaces(V, F)</span>
 0005 <span class="comment">%   Count the number of faces adjacent to each edge, and collapse the edges</span>
@@ -66,12 +66,12 @@ This function is called by:
 0011 <span class="comment">%</span>
 0012 <span class="comment">%   See also</span>
 0013 <span class="comment">%       trimMesh, isManifoldMesh</span>
-0014  
+0014 
 0015 <span class="comment">% ------</span>
 0016 <span class="comment">% Author: David Legland</span>
-0017 <span class="comment">% e-mail: david.legland@inra.fr</span>
-0018 <span class="comment">% Created: 2019-01-31,    using Matlab 9.5.0.944444 (R2018b)</span>
-0019 <span class="comment">% Copyright 2019 INRA - Cepia Software Platform.</span>
+0017 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0018 <span class="comment">% Created: 2019-01-31, using Matlab 9.5.0.944444 (R2018b)</span>
+0019 <span class="comment">% Copyright 2019-2024 INRA - Cepia Software Platform</span>
 0020 
 0021 verbose = false;
 0022 <span class="keyword">while</span> length(varargin) &gt; 1 &amp;&amp; ischar(varargin{1})
@@ -107,6 +107,6 @@ This function is called by:
 0052 
 0053 <span class="comment">% trim</span>
 0054 [vertices, faces] = <a href="trimMesh.html" class="code" title="function varargout = trimMesh(varargin)">trimMesh</a>(vertices, faces);</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

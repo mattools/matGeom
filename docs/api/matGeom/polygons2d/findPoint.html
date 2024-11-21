@@ -52,7 +52,7 @@ This function calls:
 </ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-</ul>
+<li><a href="../../matGeom/graphs/grMergeNodesMedian.html" class="code" title="function [nodes2, edges2] = grMergeNodesMedian(nodes, edges, mnodes)">grMergeNodesMedian</a>	GRMERGENODESMEDIAN Replace several nodes by their median coordinate.</li><li><a href="../../matGeom/graphs/grRemoveMultiplePoints.html" class="code" title="function varargout = grRemoveMultiplePoints(nodes, edges)">grRemoveMultiplePoints</a>	GRREMOVEMULTIPLEPOINTS Remove groups of close nodes in a graph.</li></ul>
 <!-- crossreference -->
 
 
@@ -77,53 +77,49 @@ This function is called by:
 0017 <span class="comment">%   See also</span>
 0018 <span class="comment">%    points2d, minDistancePoints, distancePoints, findClosestPoint</span>
 0019 
-0020 <span class="comment">%   -----</span>
-0021 <span class="comment">%   author: David Legland</span>
-0022 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0023 <span class="comment">%   created the 17/07/2003.</span>
-0024 <span class="comment">%</span>
+0020 <span class="comment">% ------</span>
+0021 <span class="comment">% Author: David Legland</span>
+0022 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0023 <span class="comment">% Created: 2003-07-17</span>
+0024 <span class="comment">% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0025 
-0026 <span class="comment">%   HISTORY</span>
-0027 <span class="comment">%   10/02/2004 documentation</span>
-0028 <span class="comment">%   09/08/2004 rewrite faster, and add support for multiple points</span>
-0029 
-0030 <span class="comment">% number of points</span>
-0031 np = size(coord, 1);
-0032 
-0033 <span class="comment">% allocate memory for result</span>
-0034 index = zeros(np, 1);
-0035 
-0036 <span class="comment">% specify the tolerance</span>
-0037 tol = 0;
-0038 <span class="keyword">if</span> ~isempty(varargin)
-0039     tol = varargin{1};
-0040 <span class="keyword">end</span>
-0041 
-0042 <span class="keyword">if</span> tol == 0
-0043     <span class="keyword">for</span> i = 1:np
-0044         <span class="comment">% indices of matches</span>
-0045         ind = find(points(:,1) == coord(i,1) &amp; points(:,2) == coord(i,2));
-0046         
-0047         <span class="comment">% format current result</span>
-0048         <span class="keyword">if</span> isempty(ind)
-0049             index(i) = 0;
-0050         <span class="keyword">else</span>
-0051             index(i) = ind(1);
-0052         <span class="keyword">end</span>
-0053     <span class="keyword">end</span>
-0054 <span class="keyword">else</span>
-0055     <span class="keyword">for</span> i = 1:np
-0056         <span class="comment">% indices of matches</span>
-0057         ind = find(sqrt(sum(bsxfun(@minus, points, coord) .^ 2, 2)) &lt;= tol);
-0058         
-0059         <span class="comment">% format current result</span>
-0060         <span class="keyword">if</span> isempty(ind)
-0061             index(i) = 0;
-0062         <span class="keyword">else</span>
-0063             index(i) = ind(1);
-0064         <span class="keyword">end</span>
-0065     <span class="keyword">end</span>
-0066 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0026 <span class="comment">% number of points</span>
+0027 np = size(coord, 1);
+0028 
+0029 <span class="comment">% allocate memory for result</span>
+0030 index = zeros(np, 1);
+0031 
+0032 <span class="comment">% specify the tolerance</span>
+0033 tol = 0;
+0034 <span class="keyword">if</span> ~isempty(varargin)
+0035     tol = varargin{1};
+0036 <span class="keyword">end</span>
+0037 
+0038 <span class="keyword">if</span> tol == 0
+0039     <span class="keyword">for</span> i = 1:np
+0040         <span class="comment">% indices of matches</span>
+0041         ind = find(points(:,1) == coord(i,1) &amp; points(:,2) == coord(i,2));
+0042         
+0043         <span class="comment">% format current result</span>
+0044         <span class="keyword">if</span> isempty(ind)
+0045             index(i) = 0;
+0046         <span class="keyword">else</span>
+0047             index(i) = ind(1);
+0048         <span class="keyword">end</span>
+0049     <span class="keyword">end</span>
+0050 <span class="keyword">else</span>
+0051     <span class="keyword">for</span> i = 1:np
+0052         <span class="comment">% indices of matches</span>
+0053         ind = find(sqrt(sum(bsxfun(@minus, points, coord) .^ 2, 2)) &lt;= tol);
+0054         
+0055         <span class="comment">% format current result</span>
+0056         <span class="keyword">if</span> isempty(ind)
+0057             index(i) = 0;
+0058         <span class="keyword">else</span>
+0059             index(i) = ind(1);
+0060         <span class="keyword">end</span>
+0061     <span class="keyword">end</span>
+0062 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

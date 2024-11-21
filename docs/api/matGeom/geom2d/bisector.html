@@ -39,14 +39,8 @@
    point ans [dx dy] being the direction vector, normalized to have unit
    norm.
    
-   See also:
-   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="rays2d.html" class="code" title="function rays2d(varargin)">rays2d</a>
-
-   ---------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- created the 31/10/2003.
- Copyright 2010 INRA - Cepia Software Platform.</pre></div>
+   See also
+   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="rays2d.html" class="code" title="function rays2d(varargin)">rays2d</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -74,57 +68,53 @@ This function is called by:
 0011 <span class="comment">%   point ans [dx dy] being the direction vector, normalized to have unit</span>
 0012 <span class="comment">%   norm.</span>
 0013 <span class="comment">%</span>
-0014 <span class="comment">%   See also:</span>
+0014 <span class="comment">%   See also</span>
 0015 <span class="comment">%   lines2d, rays2d</span>
-0016 <span class="comment">%</span>
-0017 <span class="comment">%   ---------</span>
+0016 
+0017 <span class="comment">% ------</span>
 0018 <span class="comment">% Author: David Legland</span>
-0019 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0020 <span class="comment">% created the 31/10/2003.</span>
-0021 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0019 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0020 <span class="comment">% Created: 2003-10-31</span>
+0021 <span class="comment">% Copyright 2003-2024 INRA - Cepia Software Platform</span>
 0022 
-0023 <span class="comment">%   HISTORY</span>
-0024 <span class="comment">%   2005-07-07 add bisector of 3 points</span>
-0025 <span class="comment">%   2010-11-05 ode cleanup</span>
-0026 
-0027 <span class="keyword">if</span> length(varargin)==2
-0028     <span class="comment">% two lines</span>
-0029     line1 = varargin{1};
-0030     line2 = varargin{2};
-0031     
-0032     point = <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(line1, line2);    
-0033     
-0034 <span class="keyword">elseif</span> length(varargin)==3
-0035     <span class="comment">% three points</span>
-0036     p1 = varargin{1};
-0037     p2 = varargin{2};
-0038     p3 = varargin{3};
-0039 
-0040     line1 = <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(p2, p1);
-0041     line2 = <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(p2, p3);
-0042     point = p2;
-0043     
-0044 <span class="keyword">elseif</span> length(varargin)==1
-0045     <span class="comment">% three points, given in one array</span>
-0046     var = varargin{1};
-0047     p1 = var(1, :);
-0048     p2 = var(2, :);
-0049     p3 = var(3, :);
-0050 
-0051     line1 = <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(p2, p1);
-0052     line2 = <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(p2, p3);
-0053     point = p2;
-0054 <span class="keyword">end</span>
+0023 <span class="keyword">if</span> length(varargin)==2
+0024     <span class="comment">% two lines</span>
+0025     line1 = varargin{1};
+0026     line2 = varargin{2};
+0027     
+0028     point = <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(line1, line2);    
+0029     
+0030 <span class="keyword">elseif</span> length(varargin)==3
+0031     <span class="comment">% three points</span>
+0032     p1 = varargin{1};
+0033     p2 = varargin{2};
+0034     p3 = varargin{3};
+0035 
+0036     line1 = <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(p2, p1);
+0037     line2 = <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(p2, p3);
+0038     point = p2;
+0039     
+0040 <span class="keyword">elseif</span> isscalar(varargin)
+0041     <span class="comment">% three points, given in one array</span>
+0042     var = varargin{1};
+0043     p1 = var(1, :);
+0044     p2 = var(2, :);
+0045     p3 = var(3, :);
+0046 
+0047     line1 = <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(p2, p1);
+0048     line2 = <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(p2, p3);
+0049     point = p2;
+0050 <span class="keyword">end</span>
+0051 
+0052 <span class="comment">% compute line angles</span>
+0053 a1 = <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>(line1);
+0054 a2 = <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>(line2);
 0055 
-0056 <span class="comment">% compute line angles</span>
-0057 a1 = <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>(line1);
-0058 a2 = <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>(line2);
-0059 
-0060 <span class="comment">% compute bisector angle (angle of first line + half angle between lines)</span>
-0061 angle = mod(a1 + mod(a2-a1+2*pi, 2*pi)/2, pi*2);
-0062 
-0063 <span class="comment">% create the resulting ray</span>
-0064 ray = [point cos(angle) sin(angle)];</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0056 <span class="comment">% compute bisector angle (angle of first line + half angle between lines)</span>
+0057 angle = mod(a1 + mod(a2-a1+2*pi, 2*pi)/2, pi*2);
+0058 
+0059 <span class="comment">% create the resulting ray</span>
+0060 ray = [point cos(angle) sin(angle)];</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

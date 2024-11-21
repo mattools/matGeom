@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of grRemoveMultiplePoints</title>
+  <meta name="keywords" content="grRemoveMultiplePoints">
+  <meta name="description" content="GRREMOVEMULTIPLEPOINTS Remove groups of close nodes in a graph.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; grRemoveMultiplePoints.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>grRemoveMultiplePoints
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>GRREMOVEMULTIPLEPOINTS Remove groups of close nodes in a graph.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = grRemoveMultiplePoints(nodes, edges) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">GRREMOVEMULTIPLEPOINTS Remove groups of close nodes in a graph.
+
+   grRemoveMultiplePoints(nodes, edges)
+   Detects groups of nodes that belongs to the same global node.
+   This function is intended to be used as filter after a binary image
+   skeletonization and vectorization.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="grMergeNodes.html" class="code" title="function [nodes, edges] = grMergeNodes(nodes, edges, mnodes)">grMergeNodes</a>	GRMERGENODES Merge two (or more) nodes in a graph.</li><li><a href="../../matGeom/polygons2d/findPoint.html" class="code" title="function index = findPoint(coord, points, varargin)">findPoint</a>	FINDPOINT Find index of a point in an set from its coordinates.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = grRemoveMultiplePoints(nodes, edges)</a>
+0002 <span class="comment">%GRREMOVEMULTIPLEPOINTS Remove groups of close nodes in a graph.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   grRemoveMultiplePoints(nodes, edges)</span>
+0005 <span class="comment">%   Detects groups of nodes that belongs to the same global node.</span>
+0006 <span class="comment">%   This function is intended to be used as filter after a binary image</span>
+0007 <span class="comment">%   skeletonization and vectorization.</span>
+0008 <span class="comment">%</span>
+0009 
+0010 <span class="comment">% ------</span>
+0011 <span class="comment">% Author: David Legland</span>
+0012 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0013 <span class="comment">% Created: 2003-08-13</span>
+0014 <span class="comment">% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0015 
+0016 n = 1;
+0017 <span class="keyword">while</span> n &lt;= length(nodes)
+0018     
+0019     x = nodes(n, 1);
+0020     y = nodes(n, 2);
+0021     
+0022     p1 = <a href="../../matGeom/polygons2d/findPoint.html" class="code" title="function index = findPoint(coord, points, varargin)">findPoint</a>([x-1, y], nodes);
+0023     p2 = <a href="../../matGeom/polygons2d/findPoint.html" class="code" title="function index = findPoint(coord, points, varargin)">findPoint</a>([x+1, y], nodes);
+0024     p3 = <a href="../../matGeom/polygons2d/findPoint.html" class="code" title="function index = findPoint(coord, points, varargin)">findPoint</a>([x, y-1], nodes);
+0025     p4 = <a href="../../matGeom/polygons2d/findPoint.html" class="code" title="function index = findPoint(coord, points, varargin)">findPoint</a>([x, y+1], nodes);
+0026     
+0027     p = [p1 p2 p3 p4];
+0028     p = p(p ~= 0);
+0029         
+0030     <span class="keyword">if</span> length(p) &gt; 1
+0031         [nodes, edges] = <a href="grMergeNodes.html" class="code" title="function [nodes, edges] = grMergeNodes(nodes, edges, mnodes)">grMergeNodes</a>(nodes, edges, [n p]);
+0032     <span class="keyword">end</span>
+0033     
+0034     n = n+1;
+0035 <span class="keyword">end</span>
+0036 
+0037 <span class="comment">% renumerate edges</span>
+0038 b = unique(edges(:));
+0039 <span class="keyword">for</span> i = 1:length(b)
+0040     edges(edges == b(i)) = i;
+0041 <span class="keyword">end</span>
+0042 
+0043 <span class="comment">% remove extra nodes</span>
+0044 nodes = nodes(b, :);
+0045 
+0046 
+0047 <span class="comment">% process output depending on how many arguments are needed</span>
+0048 <span class="keyword">if</span> nargout == 1
+0049     out{1} = nodes;
+0050     out{2} = edges;
+0051     varargout{1} = out;
+0052 <span class="keyword">end</span>
+0053 
+0054 <span class="keyword">if</span> nargout == 2
+0055     varargout{1} = nodes;
+0056     varargout{2} = edges;
+0057 <span class="keyword">end</span>
+0058</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

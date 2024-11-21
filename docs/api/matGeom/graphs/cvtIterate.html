@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of cvtIterate</title>
+  <meta name="keywords" content="cvtIterate">
+  <meta name="description" content="CVTITERATE Update germs of a CVT using random points with given density.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; cvtIterate.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>cvtIterate
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CVTITERATE Update germs of a CVT using random points with given density.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = cvtIterate(germs, funcPtr, funcArgs, N) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CVTITERATE Update germs of a CVT using random points with given density.
+
+   G2 = cvtIterate(G, FPTR, FARGS, N)
+   G: inital germs 
+   FPTR: pointer to a function which accept a scalar M and return M random
+       points with a given distribution
+   FARGS: arguments to be given to the FPTR function (can be empty)
+   N: number of random points to generate
+
+   Example
+   P = randPointDiscUnif(50);
+   P2 = cvtIterate(P, @randPointDiscUnif, [], 1000);
+   P3 = cvtIterate(P2, @randPointDiscUnif, [], 1000);
+
+   See also
+
+
+   Rewritten from programs found in
+   http://people.scs.fsu.edu/~burkardt/m_src/cvt/cvt.html
+
+  Reference:
+    Qiang Du, Vance Faber, and Max Gunzburger,
+    Centroidal Voronoi Tessellations: Applications and Algorithms,
+    SIAM Review, Volume 41, 1999, pages 637-676.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/minDistancePoints.html" class="code" title="function varargout = minDistancePoints(p1, varargin)">minDistancePoints</a>	MINDISTANCEPOINTS Minimal distance between several points.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = cvtIterate(germs, funcPtr, funcArgs, N)</a>
+0002 <span class="comment">%CVTITERATE Update germs of a CVT using random points with given density.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   G2 = cvtIterate(G, FPTR, FARGS, N)</span>
+0005 <span class="comment">%   G: inital germs</span>
+0006 <span class="comment">%   FPTR: pointer to a function which accept a scalar M and return M random</span>
+0007 <span class="comment">%       points with a given distribution</span>
+0008 <span class="comment">%   FARGS: arguments to be given to the FPTR function (can be empty)</span>
+0009 <span class="comment">%   N: number of random points to generate</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Example</span>
+0012 <span class="comment">%   P = randPointDiscUnif(50);</span>
+0013 <span class="comment">%   P2 = cvtIterate(P, @randPointDiscUnif, [], 1000);</span>
+0014 <span class="comment">%   P3 = cvtIterate(P2, @randPointDiscUnif, [], 1000);</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   See also</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   Rewritten from programs found in</span>
+0020 <span class="comment">%   http://people.scs.fsu.edu/~burkardt/m_src/cvt/cvt.html</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%  Reference:</span>
+0023 <span class="comment">%    Qiang Du, Vance Faber, and Max Gunzburger,</span>
+0024 <span class="comment">%    Centroidal Voronoi Tessellations: Applications and Algorithms,</span>
+0025 <span class="comment">%    SIAM Review, Volume 41, 1999, pages 637-676.</span>
+0026 <span class="comment">%</span>
+0027 
+0028 <span class="comment">% ------</span>
+0029 <span class="comment">% Author: David Legland</span>
+0030 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0031 <span class="comment">% Created: 2007-10-10, using Matlab 7.4.0.287 (R2007a)</span>
+0032 <span class="comment">% Copyright 2007-2024 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas</span>
+0033 
+0034 <span class="comment">%% Init</span>
+0035 
+0036 <span class="comment">% format input</span>
+0037 <span class="keyword">if</span> isempty(funcArgs)
+0038     funcArgs = {};
+0039 <span class="keyword">end</span>
+0040 
+0041 <span class="comment">% number of germs</span>
+0042 Ng = size(germs, 1);
+0043 
+0044 <span class="comment">% initialize centroids with values of germs</span>
+0045 centroids = germs;
+0046 
+0047 <span class="comment">% number of updates of each centroid</span>
+0048 count = ones(Ng, 1);
+0049 
+0050 
+0051 <span class="comment">%% random points</span>
+0052 
+0053 <span class="comment">% generate N random points</span>
+0054 pts = feval(funcPtr, N, funcArgs{:});
+0055 
+0056 <span class="comment">% for each point, determines which germ is the closest ones</span>
+0057 [dist, ind] = <a href="../../matGeom/geom2d/minDistancePoints.html" class="code" title="function varargout = minDistancePoints(p1, varargin)">minDistancePoints</a>(pts, germs); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0058 
+0059 h = zeros(Ng, 1);
+0060 <span class="keyword">for</span> i = 1:Ng
+0061     h(i) = sum(ind==i);
+0062 <span class="keyword">end</span>
+0063 
+0064 
+0065 <span class="comment">%% Centroids update</span>
+0066 
+0067 <span class="comment">% add coordinate of each point to closest centroid</span>
+0068 energy = 0;
+0069 <span class="keyword">for</span> j = 1:N
+0070     centroids(ind(j), :) = centroids(ind(j), :) + pts(j, :);
+0071     energy = energy + sum ( ( centroids(ind(j), :) - pts(j, :) ).^2);
+0072     count(ind(j)) = count(ind(j)) + 1;
+0073 <span class="keyword">end</span>
+0074 
+0075 <span class="comment">% estimate coordinate by dividing by number of counts</span>
+0076 centroids = centroids ./ repmat(count, 1, size(germs, 2));
+0077 
+0078 <span class="comment">% normalizes energy by number of sample points</span>
+0079 energy = energy / N;
+0080 
+0081 
+0082 <span class="comment">%% format output</span>
+0083 
+0084 varargout{1} = centroids;
+0085 <span class="keyword">if</span> nargout &gt; 1
+0086     varargout{2} = energy;
+0087 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

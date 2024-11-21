@@ -70,7 +70,7 @@
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="meshDihedralAngles.html" class="code" title="function alpha = meshDihedralAngles(vertices, edges, faces)">meshDihedralAngles</a>	MESHDIHEDRALANGLES Dihedral at edges of a polyhedal mesh.</li><li><a href="meshEdgeLength.html" class="code" title="function lengths = meshEdgeLength(vertices, edges, faces) %#ok<INUSD>">meshEdgeLength</a>	MESHEDGELENGTH Lengths of edges of a polygonal or polyhedral mesh.</li></ul>
+<li><a href="meshDihedralAngles.html" class="code" title="function alpha = meshDihedralAngles(vertices, edges, faces)">meshDihedralAngles</a>	MESHDIHEDRALANGLES Dihedral at edges of a polyhedal mesh.</li><li><a href="meshEdgeLength.html" class="code" title="function lengths = meshEdgeLength(varargin)">meshEdgeLength</a>	MESHEDGELENGTH Lengths of edges of a polygonal or polyhedral mesh.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 </ul>
@@ -121,19 +121,18 @@ This function is called by:
 0040 
 0041 <span class="comment">% ------</span>
 0042 <span class="comment">% Author: David Legland</span>
-0043 <span class="comment">% e-mail: david.legland@inra.fr</span>
-0044 <span class="comment">% Created: 2010-10-04,    using Matlab 7.9.0.529 (R2009b)</span>
-0045 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0043 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0044 <span class="comment">% Created: 2010-10-04, using Matlab 7.9.0.529 (R2009b)</span>
+0045 <span class="comment">% Copyright 2010-2024 INRA - Cepia Software Platform</span>
 0046 
-0047 
-0048 <span class="comment">% compute dihedral angle of each edge</span>
-0049 alpha = <a href="meshDihedralAngles.html" class="code" title="function alpha = meshDihedralAngles(vertices, edges, faces)">meshDihedralAngles</a>(vertices, edges, faces);
-0050 
-0051 <span class="comment">% compute length of each edge</span>
-0052 lengths = <a href="meshEdgeLength.html" class="code" title="function lengths = meshEdgeLength(vertices, edges, faces) %#ok<INUSD>">meshEdgeLength</a>(vertices, edges);
-0053 
-0054 <span class="comment">% compute product of length by angles</span>
-0055 breadth = sum(alpha.*lengths)/(4*pi);</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0047 <span class="comment">% compute dihedral angle of each edge</span>
+0048 alpha = <a href="meshDihedralAngles.html" class="code" title="function alpha = meshDihedralAngles(vertices, edges, faces)">meshDihedralAngles</a>(vertices, edges, faces);
+0049 
+0050 <span class="comment">% compute length of each edge</span>
+0051 lengths = <a href="meshEdgeLength.html" class="code" title="function lengths = meshEdgeLength(varargin)">meshEdgeLength</a>(vertices, edges);
+0052 
+0053 <span class="comment">% compute product of length by angles</span>
+0054 breadth = sum(alpha.*lengths)/(4*pi);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

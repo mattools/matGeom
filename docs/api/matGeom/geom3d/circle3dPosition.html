@@ -36,22 +36,17 @@
    and CIRCLE: [X0 Y0 Z0 R THETA PHI] or [X0 Y0 Z0 R THETA PHI PSI]
    (THETA being the colatitude, and PHI the azimut)
 
-   See also:
-   <a href="circles3d.html" class="code" title="function circles3d(varargin)">circles3d</a>, <a href="circle3dOrigin.html" class="code" title="function ori = circle3dOrigin(varargin)">circle3dOrigin</a>, <a href="circle3dPoint.html" class="code" title="function point = circle3dPoint(circle, pos)">circle3dPoint</a>
-
-   ---------
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 21/02/2005</pre></div>
+   See also
+   <a href="circles3d.html" class="code" title="function circles3d(varargin)">circles3d</a>, <a href="circle3dOrigin.html" class="code" title="function ori = circle3dOrigin(varargin)">circle3dOrigin</a>, <a href="circle3dPoint.html" class="code" title="function point = circle3dPoint(circle, pos)">circle3dPoint</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="circle3dOrigin.html" class="code" title="function ori = circle3dOrigin(varargin)">circle3dOrigin</a>	CIRCLE3DORIGIN Return the first point of a 3D circle.</li><li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>	PLANEPOSITION Compute position of a point on a plane.</li><li><a href="sph2cart2d.html" class="code" title="function varargout = sph2cart2d(theta, phi, rho)">sph2cart2d</a>	SPH2CART2D Convert spherical coordinates to cartesian coordinates in degrees.</li></ul>
+<li><a href="circle3dOrigin.html" class="code" title="function ori = circle3dOrigin(varargin)">circle3dOrigin</a>	CIRCLE3DORIGIN Return the first point of a 3D circle.</li><li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="planePosition.html" class="code" title="function [pos, zp] = planePosition(point, plane)">planePosition</a>	PLANEPOSITION Compute position of a point on a plane.</li><li><a href="sph2cart2d.html" class="code" title="function varargout = sph2cart2d(theta, phi, rho)">sph2cart2d</a>	SPH2CART2D Convert spherical coordinates to cartesian coordinates in degrees.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>	DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.</li></ul>
+<li><a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(varargin)">drawSphericalEdge</a>	DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.</li></ul>
 <!-- crossreference -->
 
 
@@ -67,48 +62,43 @@ This function is called by:
 0008 <span class="comment">%   and CIRCLE: [X0 Y0 Z0 R THETA PHI] or [X0 Y0 Z0 R THETA PHI PSI]</span>
 0009 <span class="comment">%   (THETA being the colatitude, and PHI the azimut)</span>
 0010 <span class="comment">%</span>
-0011 <span class="comment">%   See also:</span>
+0011 <span class="comment">%   See also</span>
 0012 <span class="comment">%   circles3d, circle3dOrigin, circle3dPoint</span>
-0013 <span class="comment">%</span>
-0014 <span class="comment">%   ---------</span>
-0015 <span class="comment">%   author : David Legland</span>
-0016 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0017 <span class="comment">%   created the 21/02/2005</span>
-0018 <span class="comment">%</span>
+0013 
+0014 <span class="comment">% ------</span>
+0015 <span class="comment">% Author: David Legland</span>
+0016 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0017 <span class="comment">% Created: 2005-02-21</span>
+0018 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0019 
-0020 <span class="comment">%   HISTORY</span>
-0021 <span class="comment">%   27/06/2007: change 3D angle convention</span>
-0022 <span class="comment">%   2011-06-21 use degrees for angles</span>
-0023 
+0020 <span class="comment">% get center and radius</span>
+0021 xc = circle(:,1);
+0022 yc = circle(:,2);
+0023 zc = circle(:,3);
 0024 
-0025 <span class="comment">% get center and radius</span>
-0026 xc = circle(:,1);
-0027 yc = circle(:,2);
-0028 zc = circle(:,3);
-0029 
-0030 <span class="comment">% get angle of normal</span>
-0031 theta   = circle(:,5);
-0032 phi     = circle(:,6);
-0033 
-0034 <span class="comment">% find origin of the circle</span>
-0035 ori     = <a href="circle3dOrigin.html" class="code" title="function ori = circle3dOrigin(varargin)">circle3dOrigin</a>(circle);
-0036 
-0037 <span class="comment">% normal vector of the supporting plane (cartesian coords)</span>
-0038 vn      = <a href="sph2cart2d.html" class="code" title="function varargout = sph2cart2d(theta, phi, rho)">sph2cart2d</a>([theta phi]);
-0039 
-0040 <span class="comment">% create plane containing the circle</span>
-0041 plane   = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>([xc yc zc], vn);
-0042 
-0043 <span class="comment">% find position of point on the circle plane</span>
-0044 pp0     = <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>(ori,    plane);
-0045 pp      = <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>(point,  plane);
-0046 
-0047 <span class="comment">% compute angles in the planes</span>
-0048 theta0  = mod(atan2(pp0(:,2), pp0(:,1)) + 2*pi, 2*pi);
-0049 theta   = mod(atan2(pp(:,2), pp(:,1)) + 2*pi - theta0, 2*pi);
-0050 
-0051 <span class="comment">% convert to degrees</span>
-0052 theta = theta * 180 / pi;</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0025 <span class="comment">% get angle of normal</span>
+0026 theta   = circle(:,5);
+0027 phi     = circle(:,6);
+0028 
+0029 <span class="comment">% find origin of the circle</span>
+0030 ori     = <a href="circle3dOrigin.html" class="code" title="function ori = circle3dOrigin(varargin)">circle3dOrigin</a>(circle);
+0031 
+0032 <span class="comment">% normal vector of the supporting plane (cartesian coords)</span>
+0033 vn      = <a href="sph2cart2d.html" class="code" title="function varargout = sph2cart2d(theta, phi, rho)">sph2cart2d</a>([theta phi]);
+0034 
+0035 <span class="comment">% create plane containing the circle</span>
+0036 plane   = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>([xc yc zc], vn);
+0037 
+0038 <span class="comment">% find position of point on the circle plane</span>
+0039 pp0     = <a href="planePosition.html" class="code" title="function [pos, zp] = planePosition(point, plane)">planePosition</a>(ori,    plane);
+0040 pp      = <a href="planePosition.html" class="code" title="function [pos, zp] = planePosition(point, plane)">planePosition</a>(point,  plane);
+0041 
+0042 <span class="comment">% compute angles in the planes</span>
+0043 theta0  = mod(atan2(pp0(:,2), pp0(:,1)) + 2*pi, 2*pi);
+0044 theta   = mod(atan2(pp(:,2), pp(:,1)) + 2*pi - theta0, 2*pi);
+0045 
+0046 <span class="comment">% convert to degrees</span>
+0047 theta = theta * 180 / pi;</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

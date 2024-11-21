@@ -102,42 +102,35 @@ This function is called by:
 0031 
 0032 <span class="comment">% ------</span>
 0033 <span class="comment">% Author: David Legland</span>
-0034 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0034 <span class="comment">% E-mail: david.legland@inrae.fr</span>
 0035 <span class="comment">% Created: 2006-04-25</span>
-0036 <span class="comment">% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0036 <span class="comment">% Copyright 2006-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)</span>
 0037 
-0038 <span class="comment">%   HISTORY</span>
-0039 <span class="comment">%   2007-09-18 copy from isPerpendicular, adapt to any dimension, and add</span>
-0040 <span class="comment">%       psb to specify precision</span>
-0041 <span class="comment">%   2009-09-21 fix bug for array of 3 vectors</span>
-0042 <span class="comment">%   2011-01-20 replace repmat by ones-indexing (faster)</span>
-0043 <span class="comment">%   2017-08-31 use normalized vectors</span>
-0044 
-0045 <span class="comment">% default accuracy</span>
-0046 acc = 1e-14;
-0047 <span class="keyword">if</span> ~isempty(varargin)
-0048     acc = abs(varargin{1});
-0049 <span class="keyword">end</span>
-0050 
-0051 <span class="comment">% normalize vectors</span>
-0052 v1 = <a href="normalizeVector.html" class="code" title="function vn = normalizeVector(v)">normalizeVector</a>(v1);
-0053 v2 = <a href="normalizeVector.html" class="code" title="function vn = normalizeVector(v)">normalizeVector</a>(v2);
-0054 
-0055 <span class="comment">% adapt size of inputs</span>
-0056 n1 = size(v1, 1);
-0057 n2 = size(v2, 1);
-0058 <span class="keyword">if</span> n1 ~= n2
-0059     <span class="keyword">if</span> n1 == 1
-0060         v1 = v1(ones(n2, 1), :);
-0061     <span class="keyword">elseif</span> n2==1
-0062         v2 = v2(ones(n1, 1), :);
-0063     <span class="keyword">else</span>
-0064         error(<span class="string">'Inputs must either have same size, or one must be scalar'</span>);
-0065     <span class="keyword">end</span>
-0066 <span class="keyword">end</span>
-0067 
-0068 <span class="comment">% performs test</span>
-0069 b = abs(dot(v1, v2, 2)) &lt; acc;</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0038 <span class="comment">% default accuracy</span>
+0039 acc = 1e-14;
+0040 <span class="keyword">if</span> ~isempty(varargin)
+0041     acc = abs(varargin{1});
+0042 <span class="keyword">end</span>
+0043 
+0044 <span class="comment">% normalize vectors</span>
+0045 v1 = <a href="normalizeVector.html" class="code" title="function vn = normalizeVector(v)">normalizeVector</a>(v1);
+0046 v2 = <a href="normalizeVector.html" class="code" title="function vn = normalizeVector(v)">normalizeVector</a>(v2);
+0047 
+0048 <span class="comment">% adapt size of inputs</span>
+0049 n1 = size(v1, 1);
+0050 n2 = size(v2, 1);
+0051 <span class="keyword">if</span> n1 ~= n2
+0052     <span class="keyword">if</span> n1 == 1
+0053         v1 = v1(ones(n2, 1), :);
+0054     <span class="keyword">elseif</span> n2==1
+0055         v2 = v2(ones(n1, 1), :);
+0056     <span class="keyword">else</span>
+0057         error(<span class="string">'Inputs must either have same size, or one must be scalar'</span>);
+0058     <span class="keyword">end</span>
+0059 <span class="keyword">end</span>
+0060 
+0061 <span class="comment">% performs test</span>
+0062 b = abs(dot(v1, v2, 2)) &lt; acc;</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

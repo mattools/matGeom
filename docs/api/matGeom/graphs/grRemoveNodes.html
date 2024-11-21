@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of grRemoveNodes</title>
+  <meta name="keywords" content="grRemoveNodes">
+  <meta name="description" content="GRREMOVENODES Remove several nodes in a graph.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; grRemoveNodes.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>grRemoveNodes
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>GRREMOVENODES Remove several nodes in a graph.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [nodes2, edges2] = grRemoveNodes(nodes, edges, rmNodes) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">GRREMOVENODES Remove several nodes in a graph.
+
+   usage:
+   [NODES2 EDGES2] = grRemoveNodes(NODES, EDGES, NODES2REMOVE)
+   remove the nodes with indices NODE2REMOVE from array NODES, and also
+   remove edges containing the nodes NODE2REMOVE.
+
+   Example
+     nodes = [...
+         10 10; 20 10; 30 10; ...
+         10 20; 20 20; 30 20];
+     edges = [...
+         1 2; 1 4; 1 5; ...
+         2 3; 2 5; 2 6; ...
+         3 6; 4 5; 5 6];
+     toRemove = [3 4];
+     [nodes2 edges2] = grRemoveNodes(nodes, edges, toRemove);
+     drawGraph(nodes2, edges2);
+     axis equal; axis([0 40 0 30]);
+
+   See also
+     <a href="grRemoveEdges.html" class="code" title="function [nodes2, edges2] = grRemoveEdges(nodes, edges, rmEdges)">grRemoveEdges</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="pruneGraph.html" class="code" title="function [nodes2, edges2] = pruneGraph(nodes, edges)">pruneGraph</a>	PRUNEGRAPH Remove all edges with a terminal vertex.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [nodes2, edges2] = grRemoveNodes(nodes, edges, rmNodes)</a>
+0002 <span class="comment">%GRREMOVENODES Remove several nodes in a graph.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   usage:</span>
+0005 <span class="comment">%   [NODES2 EDGES2] = grRemoveNodes(NODES, EDGES, NODES2REMOVE)</span>
+0006 <span class="comment">%   remove the nodes with indices NODE2REMOVE from array NODES, and also</span>
+0007 <span class="comment">%   remove edges containing the nodes NODE2REMOVE.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   Example</span>
+0010 <span class="comment">%     nodes = [...</span>
+0011 <span class="comment">%         10 10; 20 10; 30 10; ...</span>
+0012 <span class="comment">%         10 20; 20 20; 30 20];</span>
+0013 <span class="comment">%     edges = [...</span>
+0014 <span class="comment">%         1 2; 1 4; 1 5; ...</span>
+0015 <span class="comment">%         2 3; 2 5; 2 6; ...</span>
+0016 <span class="comment">%         3 6; 4 5; 5 6];</span>
+0017 <span class="comment">%     toRemove = [3 4];</span>
+0018 <span class="comment">%     [nodes2 edges2] = grRemoveNodes(nodes, edges, toRemove);</span>
+0019 <span class="comment">%     drawGraph(nodes2, edges2);</span>
+0020 <span class="comment">%     axis equal; axis([0 40 0 30]);</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   See also</span>
+0023 <span class="comment">%     grRemoveEdges</span>
+0024 <span class="comment">%</span>
+0025 
+0026 <span class="comment">% ------</span>
+0027 <span class="comment">% Author: David Legland</span>
+0028 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0029 <span class="comment">% Created: 2003-08-13</span>
+0030 <span class="comment">% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0031 
+0032 <span class="comment">%% edges processing</span>
+0033 
+0034 <span class="comment">% remove all edges connected to one of the nodes to remove</span>
+0035 edges2 = edges(~any(ismember(edges, rmNodes), 2), :);
+0036 
+0037 <span class="comment">% change edges information, due to the node index shift</span>
+0038 <span class="keyword">for</span> i = 1:length(rmNodes)
+0039     inds = edges2 &gt; (rmNodes(i) - i + 1);
+0040     edges2(inds) = edges2(inds) - 1;
+0041 <span class="keyword">end</span>
+0042 
+0043 
+0044 <span class="comment">%% nodes processing</span>
+0045 
+0046 <span class="comment">% number of nodes</span>
+0047 N   = size(nodes, 1);
+0048 NR  = length(rmNodes);
+0049 N2  = N-NR;
+0050 
+0051 <span class="comment">% allocate memory</span>
+0052 nodes2 = zeros(N2, 2);
+0053 
+0054 <span class="comment">% process the first node</span>
+0055 nodes2(1:rmNodes(1)-1,:) = nodes(1:rmNodes(1)-1,:);
+0056 
+0057 <span class="keyword">for</span> i = 2:NR
+0058     inds = rmNodes(i-1)+1:rmNodes(i)-1;
+0059     <span class="keyword">if</span> isempty(inds)
+0060         <span class="keyword">continue</span>;
+0061     <span class="keyword">end</span>
+0062     nodes2(inds - i + 1, :) = nodes(inds, :);
+0063 <span class="keyword">end</span>
+0064 
+0065 <span class="comment">% process the last node</span>
+0066 nodes2(rmNodes(NR)-NR+1:N2, :) = nodes(rmNodes(NR)+1:N, :);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

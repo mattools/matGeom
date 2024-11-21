@@ -29,10 +29,13 @@
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre class="comment">DRAWAXISCUBE Draw a colored cube representing axis orientation.
 
-   output = drawAxisCube(input)
+   Usage:
+     drawAxisCube();
+   Display a 3D unit cube with one corner located at position (0,0,0), and
+   face colored according to the direction of their normal.
 
    Example
-   drawAxisCube
+     drawAxisCube
 
    See also
      <a href="drawAxis3d.html" class="code" title="function varargout = drawAxis3d(varargin)">drawAxis3d</a>, createCube, patch</pre></div>
@@ -53,34 +56,48 @@ This function is called by:
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function p = drawAxisCube(varargin)</a>
 0002 <span class="comment">%DRAWAXISCUBE Draw a colored cube representing axis orientation.</span>
 0003 <span class="comment">%</span>
-0004 <span class="comment">%   output = drawAxisCube(input)</span>
-0005 <span class="comment">%</span>
-0006 <span class="comment">%   Example</span>
-0007 <span class="comment">%   drawAxisCube</span>
+0004 <span class="comment">%   Usage:</span>
+0005 <span class="comment">%     drawAxisCube();</span>
+0006 <span class="comment">%   Display a 3D unit cube with one corner located at position (0,0,0), and</span>
+0007 <span class="comment">%   face colored according to the direction of their normal.</span>
 0008 <span class="comment">%</span>
-0009 <span class="comment">%   See also</span>
-0010 <span class="comment">%     drawAxis3d, createCube, patch</span>
-0011 
-0012 <span class="comment">% ------</span>
-0013 <span class="comment">% Author: David Legland</span>
-0014 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0015 <span class="comment">% Created: 2010-07-22,    using Matlab 7.9.0.529 (R2009b)</span>
-0016 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
-0017 
-0018 [n, e, f] = <a href="../../matGeom/meshes3d/createCube.html" class="code" title="function varargout = createCube()">createCube</a>; <span class="comment">%#ok&lt;ASGLU&gt;</span>
-0019 
-0020 faceColors = [ <span class="keyword">...</span>
-0021     1 1 0; <span class="keyword">...</span>
-0022     0 0 1; <span class="keyword">...</span>
-0023     1 0 0; <span class="keyword">...</span>
-0024     0 1 1; <span class="keyword">...</span>
-0025     1 0 1; <span class="keyword">...</span>
-0026     0 1 0; <span class="keyword">...</span>
-0027     ];
-0028 
-0029 p = patch(<span class="string">'vertices'</span>, n, <span class="string">'faces'</span>, f, <span class="keyword">...</span>
-0030     <span class="string">'facecolor'</span>, <span class="string">'flat'</span>, <span class="string">'FaceVertexCData'</span>, faceColors);
-0031</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0009 <span class="comment">%   Example</span>
+0010 <span class="comment">%     drawAxisCube</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   See also</span>
+0013 <span class="comment">%     drawAxis3d, createCube, patch</span>
+0014 
+0015 <span class="comment">% ------</span>
+0016 <span class="comment">% Author: David Legland</span>
+0017 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0018 <span class="comment">% Created: 2010-07-22, using Matlab 7.9.0.529 (R2009b)</span>
+0019 <span class="comment">% Copyright 2010-2024 INRA - Cepia Software Platform</span>
+0020 
+0021 <span class="comment">% extract handle of axis to draw on</span>
+0022 <span class="keyword">if</span> isempty(varargin)
+0023     hAx = gca;
+0024 <span class="keyword">else</span>
+0025     <span class="keyword">if</span> isAxisHandle(varargin{1})
+0026         hAx = varargin{1};
+0027     <span class="keyword">else</span>
+0028         error(<span class="string">'If first argument is specified, it must be an axis handle'</span>);
+0029     <span class="keyword">end</span>
+0030 <span class="keyword">end</span>
+0031 
+0032 [n, e, f] = <a href="../../matGeom/meshes3d/createCube.html" class="code" title="function varargout = createCube()">createCube</a>; <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0033 
+0034 faceColors = [ <span class="keyword">...</span>
+0035     1 1 0; <span class="keyword">...</span>
+0036     0 0 1; <span class="keyword">...</span>
+0037     1 0 0; <span class="keyword">...</span>
+0038     0 1 1; <span class="keyword">...</span>
+0039     1 0 1; <span class="keyword">...</span>
+0040     0 1 0; <span class="keyword">...</span>
+0041     ];
+0042 
+0043 p = patch(hAx, <span class="string">'vertices'</span>, n, <span class="string">'faces'</span>, f, <span class="keyword">...</span>
+0044     <span class="string">'facecolor'</span>, <span class="string">'flat'</span>, <span class="string">'FaceVertexCData'</span>, faceColors);
+0045</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

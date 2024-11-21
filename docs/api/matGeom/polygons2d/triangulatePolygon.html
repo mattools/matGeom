@@ -4,7 +4,7 @@
 <head>
   <title>Description of triangulatePolygon</title>
   <meta name="keywords" content="triangulatePolygon">
-  <meta name="description" content="Computes a triangulation of the input polygon.">
+  <meta name="description" content="TRIANGULATEPOLYGON Computes a triangulation of the input polygon.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Computes a triangulation of the input polygon.</strong></div>
+<div class="box"><strong>TRIANGULATEPOLYGON Computes a triangulation of the input polygon.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function tri = triangulatePolygon(poly) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Computes a triangulation of the input polygon.
+<div class="fragment"><pre class="comment">TRIANGULATEPOLYGON Computes a triangulation of the input polygon.
 
    TRI = triangulatePolygon(POLY)
    Computes a triangulation TRI of the polygon defined by POLY
@@ -70,7 +70,7 @@ This function is called by:
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function tri = triangulatePolygon(poly)</a>
-0002 <span class="comment">% Computes a triangulation of the input polygon.</span>
+0002 <span class="comment">%TRIANGULATEPOLYGON Computes a triangulation of the input polygon.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   TRI = triangulatePolygon(POLY)</span>
 0005 <span class="comment">%   Computes a triangulation TRI of the polygon defined by POLY</span>
@@ -102,9 +102,9 @@ This function is called by:
 0031 
 0032 <span class="comment">% ------</span>
 0033 <span class="comment">% Author: David Legland</span>
-0034 <span class="comment">% e-mail: david.legland@inrae.fr</span>
-0035 <span class="comment">% Created: 2011-11-25,    using Matlab 7.9.0.529 (R2009b)</span>
-0036 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0034 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0035 <span class="comment">% Created: 2011-11-25, using Matlab 7.9.0.529 (R2009b)</span>
+0036 <span class="comment">% Copyright 2011-2024 INRA - Cepia Software Platform</span>
 0037 
 0038 <span class="comment">% compute constraints</span>
 0039 nv = size(poly, 1);
@@ -139,6 +139,6 @@ This function is called by:
 0068     <span class="comment">% tri = dt.Triangulation(inds, :);</span>
 0069     tri = dt.ConnectivityList(inds, :);
 0070 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

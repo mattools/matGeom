@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of projPointOnEllipse</title>
+  <meta name="keywords" content="projPointOnEllipse">
+  <meta name="description" content="PROJPOINTONELLIPSE Project a point orthogonally onto an ellipse.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; projPointOnEllipse.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>projPointOnEllipse
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>PROJPOINTONELLIPSE Project a point orthogonally onto an ellipse.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function proj = projPointOnEllipse(point, elli) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">PROJPOINTONELLIPSE Project a point orthogonally onto an ellipse.
+
+   PROJ = projPointOnEllipse(PT, ELLI)
+   Computes the (orthogonal) projection of point PT onto the ellipse given
+   by ELLI.
+
+
+   Example
+     % create an ellipse and a point
+     elli = [50 50 40 20 30];
+     pt = [60 10];
+     % display reference figures
+     figure; hold on; drawEllipse(elli, 'b');
+     axis equal; axis([0 100 0 100]);
+     drawPoint(pt, 'bo');
+     % compute projected point
+     proj = projPointOnEllipse(pt, elli);
+     drawEdge([pt proj], 'b');
+     drawPoint(proj, 'k*');
+
+   See also
+     <a href="ellipses2d.html" class="code" title="function ellipses2d(varargin)">ellipses2d</a>, <a href="distancePointEllipse.html" class="code" title="function [dist, proj] = distancePointEllipse(point, elli)">distancePointEllipse</a>, <a href="projPointOnLine.html" class="code" title="function point = projPointOnLine(point, line)">projPointOnLine</a>, <a href="ellipsePoint.html" class="code" title="function point = ellipsePoint(elli, pos)">ellipsePoint</a>
+     <a href="drawEllipse.html" class="code" title="function varargout = drawEllipse(varargin)">drawEllipse</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createRotation.html" class="code" title="function trans = createRotation(varargin)">createRotation</a>	CREATEROTATION Create the 3*3 matrix of a rotation.</li><li><a href="createTranslation.html" class="code" title="function trans = createTranslation(varargin)">createTranslation</a>	CREATETRANSLATION Create the 3*3 matrix of a translation.</li><li><a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>	TRANSFORMPOINT Apply an affine transform to a point or a point set.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="distancePointEllipse.html" class="code" title="function [dist, proj] = distancePointEllipse(point, elli)">distancePointEllipse</a>	DISTANCEPOINTELLIPSE Distance from a point to an ellipse.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function proj = projPointOnEllipse(point, elli)</a>
+0002 <span class="comment">%PROJPOINTONELLIPSE Project a point orthogonally onto an ellipse.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   PROJ = projPointOnEllipse(PT, ELLI)</span>
+0005 <span class="comment">%   Computes the (orthogonal) projection of point PT onto the ellipse given</span>
+0006 <span class="comment">%   by ELLI.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   Example</span>
+0010 <span class="comment">%     % create an ellipse and a point</span>
+0011 <span class="comment">%     elli = [50 50 40 20 30];</span>
+0012 <span class="comment">%     pt = [60 10];</span>
+0013 <span class="comment">%     % display reference figures</span>
+0014 <span class="comment">%     figure; hold on; drawEllipse(elli, 'b');</span>
+0015 <span class="comment">%     axis equal; axis([0 100 0 100]);</span>
+0016 <span class="comment">%     drawPoint(pt, 'bo');</span>
+0017 <span class="comment">%     % compute projected point</span>
+0018 <span class="comment">%     proj = projPointOnEllipse(pt, elli);</span>
+0019 <span class="comment">%     drawEdge([pt proj], 'b');</span>
+0020 <span class="comment">%     drawPoint(proj, 'k*');</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   See also</span>
+0023 <span class="comment">%     ellipses2d, distancePointEllipse, projPointOnLine, ellipsePoint</span>
+0024 <span class="comment">%     drawEllipse</span>
+0025 <span class="comment">%</span>
+0026 
+0027 <span class="comment">% ------</span>
+0028 <span class="comment">% Author: David Legland</span>
+0029 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0030 <span class="comment">% Created: 2022-07-17, using Matlab 9.12.0.1884302 (R2022a)</span>
+0031 <span class="comment">% Copyright 2022-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0032 
+0033 <span class="comment">% defaults</span>
+0034 nMaxIters = 4;
+0035 
+0036 <span class="comment">% compute transform to centered axis-aligned ellipse</span>
+0037 center = elli(1:2);
+0038 theta = deg2rad(elli(5));
+0039 transfo = <a href="createRotation.html" class="code" title="function trans = createRotation(varargin)">createRotation</a>(-theta) * <a href="createTranslation.html" class="code" title="function trans = createTranslation(varargin)">createTranslation</a>(-center);
+0040 pointT = <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(point, transfo);
+0041 
+0042 <span class="comment">% retrieve ellipse semi axis lengths</span>
+0043 a = elli(3);
+0044 b = elli(4);
+0045 
+0046 <span class="comment">% keep absolute values</span>
+0047 px = abs(pointT(:,1));
+0048 py = abs(pointT(:,2));
+0049 
+0050 <span class="comment">% initial guess of solution</span>
+0051 tx = 0.707;
+0052 ty = 0.707;
+0053 
+0054 <span class="comment">% iterate</span>
+0055 <span class="keyword">for</span> i = 1:nMaxIters
+0056     x = a * tx;
+0057     y = b * ty;
+0058 
+0059     ex = (a*a - b*b) * power(tx, 3) / a;
+0060     ey = (b*b - a*a) * power(ty, 3) / b;
+0061 
+0062     rx = x - ex;
+0063     ry = y - ey;
+0064 
+0065     qx = px - ex;
+0066     qy = py - ey;
+0067 
+0068     r = hypot(ry, rx);
+0069     q = hypot(qy, qx);
+0070 
+0071     tx = min(1, max(0, (qx .* r ./ q + ex) / a));
+0072     ty = min(1, max(0, (qy .* r ./ q + ey) / b));
+0073     t = hypot(ty, tx);
+0074     tx = tx ./ t;
+0075     ty = ty ./ t;
+0076 
+0077 <span class="keyword">end</span>
+0078 
+0079 <span class="comment">% computes coordinates of projection</span>
+0080 projX = a * tx;
+0081 projY = b * ty;
+0082 
+0083 <span class="comment">% fix sign</span>
+0084 projX(pointT(:,1) &lt; 0) = -projX(pointT(:,1) &lt; 0);
+0085 projY(pointT(:,2) &lt; 0) = -projY(pointT(:,2) &lt; 0);
+0086 
+0087 <span class="comment">% project pack to basis of original ellipse</span>
+0088 proj = <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>([projX projY], inv(transfo));</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

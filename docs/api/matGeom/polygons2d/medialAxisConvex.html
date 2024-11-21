@@ -46,13 +46,8 @@
    - Complexity is not optimal: this algorithm is O(n*log n), but linear
    algorithms exist.
 
-   See also:
-   polygons2d, bisector
-
-   ---------
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 07/07/2005.</pre></div>
+   See also
+   polygons2d, bisector</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -87,121 +82,114 @@ This function is called by:
 0018 <span class="comment">%   - Complexity is not optimal: this algorithm is O(n*log n), but linear</span>
 0019 <span class="comment">%   algorithms exist.</span>
 0020 <span class="comment">%</span>
-0021 <span class="comment">%   See also:</span>
+0021 <span class="comment">%   See also</span>
 0022 <span class="comment">%   polygons2d, bisector</span>
-0023 <span class="comment">%</span>
-0024 <span class="comment">%   ---------</span>
-0025 <span class="comment">%   author : David Legland</span>
-0026 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0027 <span class="comment">%   created the 07/07/2005.</span>
-0028 <span class="comment">%</span>
+0023 
+0024 <span class="comment">% ------</span>
+0025 <span class="comment">% Author: David Legland</span>
+0026 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0027 <span class="comment">% Created: 2005-07-07</span>
+0028 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0029 
-0030 <span class="comment">%   HISTORY</span>
-0031 <span class="comment">%   18/04/2007: fix some typos, note the function to be unimplemented</span>
-0032 
-0033 <span class="comment">%   TODO: is not fully implemented, need to finish it</span>
-0034 
-0035 <span class="comment">% eventually remove the last point if it is the same as the first one</span>
-0036 <span class="keyword">if</span> points(1,:) == points(<span class="keyword">end</span>, :)
-0037     nodes = points(1:end-1, :);
-0038 <span class="keyword">else</span>
-0039     nodes = points;
-0040 <span class="keyword">end</span>
-0041 
-0042 <span class="comment">% special case of triangles:</span>
-0043 <span class="comment">% compute directly the gravity center, and simplify computation.</span>
-0044 <span class="keyword">if</span> size(nodes, 1)==3
-0045     nodes = [nodes; mean(nodes, 1)];
-0046     edges = [1 4;2 4;3 4];
-0047     <span class="keyword">return</span>
-0048 <span class="keyword">end</span>
-0049 
-0050 <span class="comment">% number of nodes, and also of initial rays</span>
-0051 N = size(nodes, 1);
-0052 
-0053 <span class="comment">% create ray of each vertex</span>
-0054 rays = zeros(N, 4);
-0055 rays(1, 1:4) = <a href="../../matGeom/geom2d/bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>(nodes([2 1 N], :));
-0056 rays(N, 1:4) = <a href="../../matGeom/geom2d/bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>(nodes([1 N N-1], :));
-0057 <span class="keyword">for</span> i=2:N-1
-0058     rays(i, 1:4) = <a href="../../matGeom/geom2d/bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>(nodes([i+1, i, i-1], :));
-0059 <span class="keyword">end</span>
-0060 
-0061 <span class="comment">% add indices of edges producing rays (indices of first vertex, second</span>
-0062 <span class="comment">% vertex is obtained by adding one modulo N).</span>
-0063 rayEdges = [[N (1:N-1)]' (1:N)'];
-0064 
-0065 pint = <a href="../../matGeom/geom2d/intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(rays, rays([2:N 1], :));
-0066 
-0067 <span class="comment">% compute the distance between each intersection point and the closest</span>
-0068 <span class="comment">% edge. This distance is used as marker to propagate processing front.</span>
-0069 ti = zeros(N, 1);
-0070 <span class="keyword">for</span> i = 1:N
-0071     line = <a href="../../matGeom/geom2d/createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(points(mod(i-2, N)+1, :), points(i, :));
-0072     ti(i) = abs(<a href="../../matGeom/geom2d/distancePointLine.html" class="code" title="function [dist, pos] = distancePointLine(point, line)">distancePointLine</a>(pint(i,:), line));
-0073 <span class="keyword">end</span>
-0074 
-0075 <span class="comment">% create list of events.</span>
-0076 <span class="comment">% terms are : R1 R2 X Y t0</span>
-0077 <span class="comment">% R1 and R2 are indices of involved rays</span>
-0078 <span class="comment">% X and Y is coordinate of intersection point</span>
-0079 <span class="comment">% t0 is position of point on rays</span>
-0080 events = sortrows([ (1:N)' [2:N 1]' pint ti], 5);
+0030 <span class="comment">% eventually remove the last point if it is the same as the first one</span>
+0031 <span class="keyword">if</span> points(1,:) == points(<span class="keyword">end</span>, :)
+0032     nodes = points(1:end-1, :);
+0033 <span class="keyword">else</span>
+0034     nodes = points;
+0035 <span class="keyword">end</span>
+0036 
+0037 <span class="comment">% special case of triangles:</span>
+0038 <span class="comment">% compute directly the gravity center, and simplify computation.</span>
+0039 <span class="keyword">if</span> size(nodes, 1)==3
+0040     nodes = [nodes; mean(nodes, 1)];
+0041     edges = [1 4;2 4;3 4];
+0042     <span class="keyword">return</span>
+0043 <span class="keyword">end</span>
+0044 
+0045 <span class="comment">% number of nodes, and also of initial rays</span>
+0046 N = size(nodes, 1);
+0047 
+0048 <span class="comment">% create ray of each vertex</span>
+0049 rays = zeros(N, 4);
+0050 rays(1, 1:4) = <a href="../../matGeom/geom2d/bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>(nodes([2 1 N], :));
+0051 rays(N, 1:4) = <a href="../../matGeom/geom2d/bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>(nodes([1 N N-1], :));
+0052 <span class="keyword">for</span> i=2:N-1
+0053     rays(i, 1:4) = <a href="../../matGeom/geom2d/bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>(nodes([i+1, i, i-1], :));
+0054 <span class="keyword">end</span>
+0055 
+0056 <span class="comment">% add indices of edges producing rays (indices of first vertex, second</span>
+0057 <span class="comment">% vertex is obtained by adding one modulo N).</span>
+0058 rayEdges = [[N (1:N-1)]' (1:N)'];
+0059 
+0060 pint = <a href="../../matGeom/geom2d/intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(rays, rays([2:N 1], :));
+0061 
+0062 <span class="comment">% compute the distance between each intersection point and the closest</span>
+0063 <span class="comment">% edge. This distance is used as marker to propagate processing front.</span>
+0064 ti = zeros(N, 1);
+0065 <span class="keyword">for</span> i = 1:N
+0066     line = <a href="../../matGeom/geom2d/createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(points(mod(i-2, N)+1, :), points(i, :));
+0067     ti(i) = abs(<a href="../../matGeom/geom2d/distancePointLine.html" class="code" title="function [dist, pos] = distancePointLine(point, line)">distancePointLine</a>(pint(i,:), line));
+0068 <span class="keyword">end</span>
+0069 
+0070 <span class="comment">% create list of events.</span>
+0071 <span class="comment">% terms are : R1 R2 X Y t0</span>
+0072 <span class="comment">% R1 and R2 are indices of involved rays</span>
+0073 <span class="comment">% X and Y is coordinate of intersection point</span>
+0074 <span class="comment">% t0 is position of point on rays</span>
+0075 events = sortrows([ (1:N)' [2:N 1]' pint ti], 5);
+0076 
+0077 <span class="comment">% initialize edges</span>
+0078 edges = zeros(0, 2);
+0079 
+0080 <span class="comment">%% process each event until there is no more</span>
 0081 
-0082 <span class="comment">% initialize edges</span>
-0083 edges = zeros(0, 2);
-0084 
-0085 
-0086 <span class="comment">% -------------------</span>
-0087 <span class="comment">% process each event until there is no more</span>
-0088 
-0089 <span class="comment">% start after index of last vertex, and process N-3 intermediate rays</span>
-0090 <span class="keyword">for</span> i = N+1:2*N-3
-0091     <span class="comment">% add new node at the rays intersection</span>
-0092     nodes(i,:) = events(1, 3:4);
+0082 <span class="comment">% start after index of last vertex, and process N-3 intermediate rays</span>
+0083 <span class="keyword">for</span> i = N+1:2*N-3
+0084     <span class="comment">% add new node at the rays intersection</span>
+0085     nodes(i,:) = events(1, 3:4);
+0086     
+0087     <span class="comment">% add new couple of edges</span>
+0088     edges = [edges; events(1,1) i; events(1,2) i]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0089             
+0090     <span class="comment">% find the two edges creating the new emanating ray</span>
+0091     n1 = rayEdges(events(1, 1), 1);
+0092     n2 = rayEdges(events(1, 2), 2);    
 0093     
-0094     <span class="comment">% add new couple of edges</span>
-0095     edges = [edges; events(1,1) i; events(1,2) i]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0096             
-0097     <span class="comment">% find the two edges creating the new emanating ray</span>
-0098     n1 = rayEdges(events(1, 1), 1);
-0099     n2 = rayEdges(events(1, 2), 2);    
-0100     
-0101     <span class="comment">% create the new ray</span>
-0102     line1 = <a href="../../matGeom/geom2d/createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(nodes(n1, :), nodes(mod(n1,N)+1, :));
-0103     line2 = <a href="../../matGeom/geom2d/createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(nodes(mod(n2,N)+1, :), nodes(n2, :));
-0104     ray0 = <a href="../../matGeom/geom2d/bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>(line1, line2);
+0094     <span class="comment">% create the new ray</span>
+0095     line1 = <a href="../../matGeom/geom2d/createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(nodes(n1, :), nodes(mod(n1,N)+1, :));
+0096     line2 = <a href="../../matGeom/geom2d/createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(nodes(mod(n2,N)+1, :), nodes(n2, :));
+0097     ray0 = <a href="../../matGeom/geom2d/bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>(line1, line2);
+0098     
+0099     <span class="comment">% set its origin to emanating point</span>
+0100     ray0(1:2) = nodes(i, :);
+0101 
+0102     <span class="comment">% add the new ray to the list</span>
+0103     rays = [rays; ray0]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0104     rayEdges(size(rayEdges, 1)+1, 1:2) = [n1 n2];
 0105     
-0106     <span class="comment">% set its origin to emanating point</span>
-0107     ray0(1:2) = nodes(i, :);
-0108 
-0109     <span class="comment">% add the new ray to the list</span>
-0110     rays = [rays; ray0]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0111     rayEdges(size(rayEdges, 1)+1, 1:2) = [n1 n2];
-0112     
-0113     <span class="comment">% find the two neighbour rays</span>
-0114     ind = sum(ismember(events(:,1:2), events(1, 1:2)), 2) ~= 0;
-0115     ir = unique(events(ind, 1:2));
-0116     ir = ir(~ismember(ir, events(1,1:2)));
-0117     
-0118     <span class="comment">% create new intersections</span>
-0119     pint = <a href="../../matGeom/geom2d/intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(ray0, rays(ir, :));
-0120     ti = abs(<a href="../../matGeom/geom2d/distancePointLine.html" class="code" title="function [dist, pos] = distancePointLine(point, line)">distancePointLine</a>(pint, line1));
-0121     
-0122     <span class="comment">% remove all events involving old intersected rays</span>
-0123     ind = sum(ismember(events(:,1:2), events(1, 1:2)), 2) == 0;
-0124     events = events(ind, :);
-0125     
-0126     <span class="comment">% add the newly formed events</span>
-0127     events = [events; ir(1) i pint(1,:) ti(1); ir(2) i pint(2,:) ti(2)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0128 
-0129     <span class="comment">% and sort them according to 'position' parameter</span>
-0130     events = sortrows(events, 5);
-0131 <span class="keyword">end</span>
-0132 
-0133 <span class="comment">% centroid computation for last 3 rays</span>
-0134 nodes = [nodes; mean(events(:, 3:4))];
-0135 edges = [edges; [unique(events(:,1:2)) ones(3, 1)*(2*N-2)]];</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0106     <span class="comment">% find the two neighbour rays</span>
+0107     ind = sum(ismember(events(:,1:2), events(1, 1:2)), 2) ~= 0;
+0108     ir = unique(events(ind, 1:2));
+0109     ir = ir(~ismember(ir, events(1,1:2)));
+0110     
+0111     <span class="comment">% create new intersections</span>
+0112     pint = <a href="../../matGeom/geom2d/intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(ray0, rays(ir, :));
+0113     ti = abs(<a href="../../matGeom/geom2d/distancePointLine.html" class="code" title="function [dist, pos] = distancePointLine(point, line)">distancePointLine</a>(pint, line1));
+0114     
+0115     <span class="comment">% remove all events involving old intersected rays</span>
+0116     ind = sum(ismember(events(:,1:2), events(1, 1:2)), 2) == 0;
+0117     events = events(ind, :);
+0118     
+0119     <span class="comment">% add the newly formed events</span>
+0120     events = [events; ir(1) i pint(1,:) ti(1); ir(2) i pint(2,:) ti(2)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0121 
+0122     <span class="comment">% and sort them according to 'position' parameter</span>
+0123     events = sortrows(events, 5);
+0124 <span class="keyword">end</span>
+0125 
+0126 <span class="comment">% centroid computation for last 3 rays</span>
+0127 nodes = [nodes; mean(events(:, 3:4))];
+0128 edges = [edges; [unique(events(:,1:2)) ones(3, 1)*(2*N-2)]];</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

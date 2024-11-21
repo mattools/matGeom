@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of gcontour3d</title>
+  <meta name="keywords" content="gcontour3d">
+  <meta name="description" content="GCONTOUR3D Create contour graph of a 3D binary image.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; gcontour3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>gcontour3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>GCONTOUR3D Create contour graph of a 3D binary image.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [nodes, edges, faces] = gcontour3d(img) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">GCONTOUR3D Create contour graph of a 3D binary image.
+
+   deprecated: use imageBoundaryGraph instead
+
+   See also
+     <a href="imageBoundaryGraph.html" class="code" title="function varargout = imageBoundaryGraph(img)">imageBoundaryGraph</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function [nodes, edges, faces] = addFace(nodes, edges, faces, faceNodes)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [nodes, edges, faces] = gcontour3d(img)</a>
+0002 <span class="comment">%GCONTOUR3D Create contour graph of a 3D binary image.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   deprecated: use imageBoundaryGraph instead</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   See also</span>
+0007 <span class="comment">%     imageBoundaryGraph</span>
+0008 
+0009 <span class="comment">% ------</span>
+0010 <span class="comment">% Author: David Legland</span>
+0011 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0012 <span class="comment">% Created: 2004-06-28</span>
+0013 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0014 
+0015 nodes = zeros([0 3]);   <span class="comment">% 3 coordinates vertices</span>
+0016 edges = zeros([0 2]);   <span class="comment">% first node and second nodes</span>
+0017 faces = zeros([0 4]);   <span class="comment">% indices of 4 corners of each square face</span>
+0018 
+0019 D1 = size(img, 1);
+0020 D2 = size(img, 2);
+0021 D3 = size(img, 3);
+0022 
+0023 <span class="comment">% first direction for image</span>
+0024 <span class="keyword">for</span> y = 1:D2  
+0025     <span class="keyword">for</span> z = 1:D3
+0026         <span class="comment">% find transitions between the two phases</span>
+0027         ind = find(img(1:D1-1, y, z)~=img(2:D1, y, z));
+0028     
+0029         <span class="comment">% process each transition in direction 1</span>
+0030         <span class="keyword">for</span> i2 = 1:length(ind)
+0031         
+0032             <span class="comment">% coordinates of each node</span>
+0033             n1 = [ind(i2)+.5 y-.5 z-.5];
+0034             n2 = [ind(i2)+.5 y-.5 z+.5];
+0035             n3 = [ind(i2)+.5 y+.5 z+.5];
+0036             n4 = [ind(i2)+.5 y+.5 z-.5];
+0037         
+0038             <span class="comment">% add the face (and edges) with the 4 given nodes</span>
+0039             [nodes, edges, faces] = <a href="#_sub1" class="code" title="subfunction [nodes, edges, faces] = addFace(nodes, edges, faces, faceNodes)">addFace</a>(nodes, edges, faces, [n1; n2; n3; n4]);
+0040         <span class="keyword">end</span>        
+0041     <span class="keyword">end</span>
+0042 <span class="keyword">end</span>
+0043 
+0044 <span class="comment">% second direction for image</span>
+0045 <span class="keyword">for</span> x=1:D1  
+0046     <span class="keyword">for</span> z=1:D3
+0047         <span class="comment">% find transitions between the two phases</span>
+0048         ind = find(img(x, 1:D2-1, z)~=img(x, 2:D2, z));
+0049     
+0050         <span class="comment">% process each transition in direction 1</span>
+0051         <span class="keyword">for</span> i2 = 1:length(ind)
+0052         
+0053             <span class="comment">% coordinates of each node</span>
+0054             n1 = [x-.5 ind(i2)+.5 z-.5];
+0055             n2 = [x-.5 ind(i2)+.5 z+.5];
+0056             n3 = [x+.5 ind(i2)+.5 z+.5];
+0057             n4 = [x+.5 ind(i2)+.5 z-.5];           
+0058         
+0059             <span class="comment">% add the face (and edges) with the 4 given nodes</span>
+0060             [nodes, edges, faces] = <a href="#_sub1" class="code" title="subfunction [nodes, edges, faces] = addFace(nodes, edges, faces, faceNodes)">addFace</a>(nodes, edges, faces, [n1; n2; n3; n4]);
+0061         <span class="keyword">end</span>        
+0062     <span class="keyword">end</span>
+0063 <span class="keyword">end</span>
+0064 
+0065 <span class="comment">% third direction for image</span>
+0066 <span class="keyword">for</span> x=1:D1  
+0067     <span class="keyword">for</span> y=1:D2
+0068         <span class="comment">% find transitions between the two phases</span>
+0069         ind = find(img(x, y, 1:D3-1)~=img(x, y, 2:D3));
+0070     
+0071         <span class="comment">% process each transition in direction 1</span>
+0072         <span class="keyword">for</span> i2 = 1:length(ind)
+0073         
+0074             <span class="comment">% coordinates of each node</span>
+0075             n1 = [x-.5 y-.5 ind(i2)+.5];
+0076             n2 = [x-.5 y+.5 ind(i2)+.5];
+0077             n3 = [x+.5 y+.5 ind(i2)+.5];
+0078             n4 = [x+.5 y-.5 ind(i2)+.5];
+0079         
+0080             <span class="comment">% add the face (and edges) with the 4 given nodes</span>
+0081             [nodes, edges, faces] = <a href="#_sub1" class="code" title="subfunction [nodes, edges, faces] = addFace(nodes, edges, faces, faceNodes)">addFace</a>(nodes, edges, faces, [n1; n2; n3; n4]);
+0082         <span class="keyword">end</span>        
+0083     <span class="keyword">end</span>
+0084 <span class="keyword">end</span>
+0085 
+0086 
+0087 
+0088 <span class="keyword">return</span>;
+0089 
+0090 
+0091 
+0092 <a name="_sub1" href="#_subfunctions" class="code">function [nodes, edges, faces] = addFace(nodes, edges, faces, faceNodes)</a>
+0093 <span class="comment">% add given nodes and coresponding face to the graph.</span>
+0094 
+0095 
+0096 n1 = faceNodes(1,:);
+0097 n2 = faceNodes(2,:);
+0098 n3 = faceNodes(3,:);
+0099 n4 = faceNodes(4,:);
+0100 
+0101 <span class="comment">% search indices of each nodes</span>
+0102 ind1 = find(ismember(nodes, n1, <span class="string">'rows'</span>));       
+0103 ind2 = find(ismember(nodes, n2, <span class="string">'rows'</span>));
+0104 ind3 = find(ismember(nodes, n3, <span class="string">'rows'</span>));       
+0105 ind4 = find(ismember(nodes, n4, <span class="string">'rows'</span>));
+0106 
+0107 <span class="comment">% if nodes are not in the list, we add them</span>
+0108 <span class="keyword">if</span> isempty(ind1)
+0109     nodes = [nodes; n1];
+0110     ind1 = size(nodes, 1);
+0111 <span class="keyword">end</span>
+0112 <span class="keyword">if</span> isempty(ind2)
+0113     nodes = [nodes; n2];
+0114     ind2 = size(nodes, 1);
+0115 <span class="keyword">end</span>
+0116 <span class="keyword">if</span> isempty(ind3)
+0117     nodes = [nodes; n3];
+0118     ind3 = size(nodes, 1);
+0119 <span class="keyword">end</span>
+0120 <span class="keyword">if</span> isempty(ind4)
+0121     nodes = [nodes; n4];
+0122     ind4 = size(nodes, 1);
+0123 <span class="keyword">end</span>
+0124 
+0125 <span class="comment">% add current face to the list</span>
+0126 faces(size(faces, 1)+1, 1:4) = [ind1(1) ind2(1) ind3(1) ind4(1)];
+0127 
+0128 <span class="comment">% create edges of the face</span>
+0129 <span class="comment">% (first index is the smallest one, by convention)</span>
+0130 e1 = [min(ind1, ind2) max(ind1, ind2)];
+0131 e2 = [min(ind2, ind3) max(ind2, ind3)];
+0132 e3 = [min(ind3, ind4) max(ind3, ind4)];
+0133 e4 = [min(ind4, ind1) max(ind4, ind1)];
+0134 
+0135  <span class="comment">% if nodes are not in the list, we add them</span>
+0136 <span class="keyword">if</span> isempty(find(ismember(edges, e1, <span class="string">'rows'</span>), 1))
+0137     edges = [edges; e1];
+0138 <span class="keyword">end</span>
+0139 <span class="keyword">if</span> isempty(find(ismember(edges, e2, <span class="string">'rows'</span>), 1))
+0140     edges = [edges; e2];
+0141 <span class="keyword">end</span>
+0142 <span class="keyword">if</span> isempty(find(ismember(edges, e3, <span class="string">'rows'</span>), 1))
+0143     edges = [edges; e3];
+0144 <span class="keyword">end</span>
+0145 <span class="keyword">if</span> isempty(find(ismember(edges, e4, <span class="string">'rows'</span>), 1))
+0146     edges = [edges; e4];
+0147 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

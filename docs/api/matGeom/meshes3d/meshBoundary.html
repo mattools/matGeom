@@ -32,6 +32,7 @@
    CURVES = meshBoundary(V, F)
 
    Example
+     % Example 1
      % create centered icosahedron
      [v, f] = createIcosahedron;
      v(:,3) = v(:,3) - mean(v(:,3));
@@ -40,14 +41,23 @@
      v3 = normalizeVector3d(v2);
      % clip with plane
      plane = createPlane([0 0 0], [-1 -2 3]);
-     [vc, fc] = clipMeshVertices(v3, f2, plane, 'shape', 'plane');
-     figure; drawMesh(vc, fc); axis equal; view(3);
+     [vc, fc] = clipMeshByPlane(v3, f2, plane);
+     figure; drawMesh(vc, fc); axis equal; view([80 -10]);
      % draw mesh boundary
      curves = meshBoundary(vc, fc);
-     hold on; drawPolygon3d(curves{1}, 'linewidth', 2, 'color', 'b');
+     hold on; drawPolygon3d(curves, 'linewidth', 2, 'color', 'b');
+
+     % Example 2
+     mesh = readMesh('mushroom.off');
+     plane = createPlane([0 0 0.7], [1 2 -3]);
+     [vc, fc] = clipMeshByPlane(mesh, plane);
+     bnd = meshBoundary(vc, fc);
+     figure; drawMesh(vc, fc); axis equal; view([-40 50]);
+     drawPolygon3d(bnd, 'linewidth', 2, 'color', 'b');
 
    See also
-     meshes3d, <a href="meshBoundaryEdgeIndices.html" class="code" title="function inds = meshBoundaryEdgeIndices(varargin)">meshBoundaryEdgeIndices</a>, <a href="meshBoundaryVertexIndices.html" class="code" title="function inds = meshBoundaryVertexIndices(varargin)">meshBoundaryVertexIndices</a></pre></div>
+     meshes3d, <a href="meshBoundaryEdgeIndices.html" class="code" title="function inds = meshBoundaryEdgeIndices(varargin)">meshBoundaryEdgeIndices</a>, <a href="meshBoundaryVertexIndices.html" class="code" title="function inds = meshBoundaryVertexIndices(varargin)">meshBoundaryVertexIndices</a>,
+     <a href="clipMeshByPlane.html" class="code" title="function [v2, f2, bE] = clipMeshByPlane(v, f, plane, varargin)">clipMeshByPlane</a>, <a href="clipMeshVertices.html" class="code" title="function varargout = clipMeshVertices(v, f, b, varargin)">clipMeshVertices</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -68,95 +78,105 @@ This function is called by:
 0004 <span class="comment">%   CURVES = meshBoundary(V, F)</span>
 0005 <span class="comment">%</span>
 0006 <span class="comment">%   Example</span>
-0007 <span class="comment">%     % create centered icosahedron</span>
-0008 <span class="comment">%     [v, f] = createIcosahedron;</span>
-0009 <span class="comment">%     v(:,3) = v(:,3) - mean(v(:,3));</span>
-0010 <span class="comment">%     % convert to simili-sphere</span>
-0011 <span class="comment">%     [v2, f2] = subdivideMesh(v, f, 3);</span>
-0012 <span class="comment">%     v3 = normalizeVector3d(v2);</span>
-0013 <span class="comment">%     % clip with plane</span>
-0014 <span class="comment">%     plane = createPlane([0 0 0], [-1 -2 3]);</span>
-0015 <span class="comment">%     [vc, fc] = clipMeshVertices(v3, f2, plane, 'shape', 'plane');</span>
-0016 <span class="comment">%     figure; drawMesh(vc, fc); axis equal; view(3);</span>
-0017 <span class="comment">%     % draw mesh boundary</span>
-0018 <span class="comment">%     curves = meshBoundary(vc, fc);</span>
-0019 <span class="comment">%     hold on; drawPolygon3d(curves{1}, 'linewidth', 2, 'color', 'b');</span>
-0020 <span class="comment">%</span>
-0021 <span class="comment">%   See also</span>
-0022 <span class="comment">%     meshes3d, meshBoundaryEdgeIndices, meshBoundaryVertexIndices</span>
-0023 <span class="comment">%</span>
-0024  
-0025 <span class="comment">% ------</span>
-0026 <span class="comment">% Author: David Legland</span>
-0027 <span class="comment">% e-mail: david.legland@inra.fr</span>
-0028 <span class="comment">% Created: 2019-05-01,    using Matlab 8.6.0.267246 (R2015b)</span>
-0029 <span class="comment">% Copyright 2019 INRA - Cepia Software Platform.</span>
-0030 
-0031 [vertices, edges, faces] = parseMeshData(varargin{:});
-0032 
-0033 <span class="comment">% Compute edge-vertex map if not specified</span>
-0034 <span class="keyword">if</span> isempty(edges)
-0035     edges = <a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>(vertices, faces);
-0036 <span class="keyword">end</span>
-0037 
-0038 bndEdgeInds = <a href="meshBoundaryEdgeIndices.html" class="code" title="function inds = meshBoundaryEdgeIndices(varargin)">meshBoundaryEdgeIndices</a>(vertices, edges, faces);
-0039 bndEdges = edges(bndEdgeInds, :);
+0007 <span class="comment">%     % Example 1</span>
+0008 <span class="comment">%     % create centered icosahedron</span>
+0009 <span class="comment">%     [v, f] = createIcosahedron;</span>
+0010 <span class="comment">%     v(:,3) = v(:,3) - mean(v(:,3));</span>
+0011 <span class="comment">%     % convert to simili-sphere</span>
+0012 <span class="comment">%     [v2, f2] = subdivideMesh(v, f, 3);</span>
+0013 <span class="comment">%     v3 = normalizeVector3d(v2);</span>
+0014 <span class="comment">%     % clip with plane</span>
+0015 <span class="comment">%     plane = createPlane([0 0 0], [-1 -2 3]);</span>
+0016 <span class="comment">%     [vc, fc] = clipMeshByPlane(v3, f2, plane);</span>
+0017 <span class="comment">%     figure; drawMesh(vc, fc); axis equal; view([80 -10]);</span>
+0018 <span class="comment">%     % draw mesh boundary</span>
+0019 <span class="comment">%     curves = meshBoundary(vc, fc);</span>
+0020 <span class="comment">%     hold on; drawPolygon3d(curves, 'linewidth', 2, 'color', 'b');</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%     % Example 2</span>
+0023 <span class="comment">%     mesh = readMesh('mushroom.off');</span>
+0024 <span class="comment">%     plane = createPlane([0 0 0.7], [1 2 -3]);</span>
+0025 <span class="comment">%     [vc, fc] = clipMeshByPlane(mesh, plane);</span>
+0026 <span class="comment">%     bnd = meshBoundary(vc, fc);</span>
+0027 <span class="comment">%     figure; drawMesh(vc, fc); axis equal; view([-40 50]);</span>
+0028 <span class="comment">%     drawPolygon3d(bnd, 'linewidth', 2, 'color', 'b');</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">%   See also</span>
+0031 <span class="comment">%     meshes3d, meshBoundaryEdgeIndices, meshBoundaryVertexIndices,</span>
+0032 <span class="comment">%     clipMeshByPlane, clipMeshVertices</span>
+0033 <span class="comment">%</span>
+0034 
+0035 <span class="comment">% ------</span>
+0036 <span class="comment">% Author: David Legland</span>
+0037 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0038 <span class="comment">% Created: 2019-05-01, using Matlab 8.6.0.267246 (R2015b)</span>
+0039 <span class="comment">% Copyright 2019-2024 INRA - Cepia Software Platform</span>
 0040 
-0041 <span class="keyword">if</span> isempty(bndEdgeInds)
-0042     polyList = {};
-0043     <span class="keyword">return</span>;
-0044 <span class="keyword">end</span>
-0045 
-0046 <span class="comment">% allocate empty array</span>
-0047 polyList = {};
-0048 
-0049 nPolys = 0;
-0050 <span class="keyword">while</span> ~isempty(bndEdges)
-0051     nPolys = nPolys + 1;
-0052     
-0053     <span class="comment">% current edge</span>
-0054     edge = bndEdges(1, :);
+0041 [vertices, edges, faces] = parseMeshData(varargin{:});
+0042 
+0043 <span class="comment">% Compute edge-vertex map if not specified</span>
+0044 <span class="keyword">if</span> isempty(edges)
+0045     edges = <a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>(vertices, faces);
+0046 <span class="keyword">end</span>
+0047 
+0048 bndEdgeInds = <a href="meshBoundaryEdgeIndices.html" class="code" title="function inds = meshBoundaryEdgeIndices(varargin)">meshBoundaryEdgeIndices</a>(vertices, edges, faces);
+0049 bndEdges = edges(bndEdgeInds, :);
+0050 
+0051 <span class="keyword">if</span> isempty(bndEdgeInds)
+0052     polyList = {};
+0053     <span class="keyword">return</span>;
+0054 <span class="keyword">end</span>
 0055 
-0056     <span class="comment">% initialize new polyline at first vertex</span>
-0057     ind0 = edge(1);
-0058     vertexInds = ind0;
-0059     
-0060     <span class="comment">% current vertex</span>
-0061     index = edge(2);
-0062     bndEdges(1, :) = [];
-0063     
-0064     <span class="comment">% iterate over edges until current vertex becomes ind0</span>
-0065     <span class="keyword">while</span> index ~= ind0
-0066         <span class="comment">% append current vertex to list of indices for current polygon</span>
-0067         vertexInds = [vertexInds ; index]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0068         
-0069         <span class="comment">% index of the next edge containing current vertex</span>
-0070         edgeInd = find(sum(bndEdges == index, 2) &gt; 0);
-0071         
-0072         <span class="comment">% check validity</span>
-0073         <span class="keyword">if</span> isempty(edgeInd)
-0074             error(<span class="string">'could not find next edge for vertex index %d'</span>, index);
-0075         <span class="keyword">end</span>
-0076         <span class="keyword">if</span> length(edgeInd) &gt; 1
-0077             error(<span class="string">'two many edges contains vertex index %d'</span>, index);
-0078         <span class="keyword">end</span>
-0079         
-0080         <span class="comment">% remove current edge from the list of edges to process</span>
-0081         edge = bndEdges(edgeInd, :);
-0082         bndEdges(edgeInd, :) = [];
-0083         
-0084 <span class="comment">%         % check if current edge closes current polygon</span>
-0085 <span class="comment">%         if index == ind0</span>
-0086 <span class="comment">%             break;</span>
-0087 <span class="comment">%         end</span>
-0088         
-0089         <span class="comment">% identify the next index</span>
-0090         index = edge(edge ~= index);
-0091     <span class="keyword">end</span>
-0092     
-0093     <span class="comment">% create the 3D polyline</span>
-0094     polyList{nPolys} = vertices(vertexInds, :); <span class="comment">%#ok&lt;AGROW&gt;</span>
-0095 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0056 <span class="comment">% allocate empty array</span>
+0057 polyList = {};
+0058 
+0059 nPolys = 0;
+0060 <span class="keyword">while</span> ~isempty(bndEdges)
+0061     nPolys = nPolys + 1;
+0062     
+0063     <span class="comment">% current edge</span>
+0064     edge = bndEdges(1, :);
+0065 
+0066     <span class="comment">% initialize new polyline at first vertex</span>
+0067     ind0 = edge(1);
+0068     vertexInds = ind0;
+0069     
+0070     <span class="comment">% current vertex</span>
+0071     index = edge(2);
+0072     bndEdges(1, :) = [];
+0073     
+0074     <span class="comment">% iterate over edges until current vertex becomes ind0</span>
+0075     <span class="keyword">while</span> index ~= ind0
+0076         <span class="comment">% append current vertex to list of indices for current polygon</span>
+0077         vertexInds = [vertexInds ; index]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0078         
+0079         <span class="comment">% index of the next edge containing current vertex</span>
+0080         edgeInd = find(sum(bndEdges == index, 2) &gt; 0);
+0081         
+0082         <span class="comment">% check validity</span>
+0083         <span class="keyword">if</span> isempty(edgeInd)
+0084             error(<span class="string">'could not find next edge for vertex index %d'</span>, index);
+0085         <span class="keyword">end</span>
+0086         <span class="keyword">if</span> length(edgeInd) &gt; 1
+0087             error(<span class="string">'two many edges contains vertex index %d'</span>, index);
+0088         <span class="keyword">end</span>
+0089         
+0090         <span class="comment">% remove current edge from the list of edges to process</span>
+0091         edge = bndEdges(edgeInd, :);
+0092         bndEdges(edgeInd, :) = [];
+0093         
+0094 <span class="comment">%         % check if current edge closes current polygon</span>
+0095 <span class="comment">%         if index == ind0</span>
+0096 <span class="comment">%             break;</span>
+0097 <span class="comment">%         end</span>
+0098         
+0099         <span class="comment">% identify the next index</span>
+0100         index = edge(edge ~= index);
+0101     <span class="keyword">end</span>
+0102     
+0103     <span class="comment">% create the 3D polyline</span>
+0104     polyList{nPolys} = vertices(vertexInds, :); <span class="comment">%#ok&lt;AGROW&gt;</span>
+0105 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

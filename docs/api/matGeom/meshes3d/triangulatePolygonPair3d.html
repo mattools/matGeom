@@ -1,0 +1,299 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of triangulatePolygonPair3d</title>
+  <meta name="keywords" content="triangulatePolygonPair3d">
+  <meta name="description" content="TRIANGULATEPOLYGONPAIR3D Compute a triangulation between a pair of 3D polygons.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; triangulatePolygonPair3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>triangulatePolygonPair3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>TRIANGULATEPOLYGONPAIR3D Compute a triangulation between a pair of 3D polygons.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [tri, weight] = triangulatePolygonPair3d(poly1, poly2, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">TRIANGULATEPOLYGONPAIR3D Compute a triangulation between a pair of 3D polygons.
+
+   TRI = triangulatePolygonPair3d(POLY1, POLY2)
+   Computes a triangulation between vertices of the two input polygons.
+   Each triangle refer to one vertex of either POLY1 or POLY2, and two
+   vertices of the other polygon. Vertex indices correspond to the
+   concatenation of the two polygons. They range from 1 to NV1+NV2.
+   This version minimizes the surface area of the reconstructed surface.
+
+   [TRI, WEIGHT] = triangulatePolygonPair3d(POLY1, POLY2)
+   Also returns the optimal weigth of the reconstruction, corresponding to
+   the surface area of the triangulation.
+   
+   Example
+     % triangulate a surface patch between two ellipses
+     % create two sample curves
+     poly1 = ellipseToPolygon([50 50 40 20 0], 36);
+     poly2 = ellipseToPolygon([50 50 40 20 60], 36);
+     poly1 = poly1(1:end-1,:);
+     poly2 = poly2(1:end-1,:);
+     % transform to 3D polygons / curves
+     curve1 = [poly1 10*ones(size(poly1, 1), 1)];
+     curve2 = [poly2 20*ones(size(poly2, 1), 1)];
+     % draw as 3D curves
+     figure(1); clf; hold on;
+     drawPolygon3d(curve1, 'b'); drawPoint3d(curve1, 'bo');
+     drawPolygon3d(curve2, 'g'); drawPoint3d(curve2, 'go');
+     view(3); axis equal;
+     tri = triangulatePolygonPair3d(curve1, curve2);
+     vertices = [curve1 ; curve2];
+     % display the resulting mesh
+     figure(2); clf; hold on;
+     drawMesh(vertices, tri);
+     drawPolygon3d(curve1, 'color', 'b', 'linewidth', 2);
+     drawPolygon3d(curve2, 'color', 'g', 'linewidth', 2);
+     view(3); axis equal;
+
+   References
+   Based on the paper:
+   &quot;Optimal surface reconstruction from planar contours&quot;, 
+   Fuchs, H., Kedem, Z. M., Uselton, S.P., 1977, Graphics and Image
+   Processing, 20(10), 693-702.
+
+   See also
+     <a href="triangulatePolygonPair.html" class="code" title="function [vertices, faces] = triangulatePolygonPair(poly1, poly2, varargin)">triangulatePolygonPair</a>, triangleArea3d, <a href="meshSurfaceArea.html" class="code" title="function area = meshSurfaceArea(varargin)">meshSurfaceArea</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>	DISTANCEPOINTS3D Compute euclidean distance between pairs of 3D Points.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function [path, pathWeight] = computePath(i10, weightsH, weightsV)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [tri, weight] = triangulatePolygonPair3d(poly1, poly2, varargin)</a>
+0002 <span class="comment">%TRIANGULATEPOLYGONPAIR3D Compute a triangulation between a pair of 3D polygons.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   TRI = triangulatePolygonPair3d(POLY1, POLY2)</span>
+0005 <span class="comment">%   Computes a triangulation between vertices of the two input polygons.</span>
+0006 <span class="comment">%   Each triangle refer to one vertex of either POLY1 or POLY2, and two</span>
+0007 <span class="comment">%   vertices of the other polygon. Vertex indices correspond to the</span>
+0008 <span class="comment">%   concatenation of the two polygons. They range from 1 to NV1+NV2.</span>
+0009 <span class="comment">%   This version minimizes the surface area of the reconstructed surface.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   [TRI, WEIGHT] = triangulatePolygonPair3d(POLY1, POLY2)</span>
+0012 <span class="comment">%   Also returns the optimal weigth of the reconstruction, corresponding to</span>
+0013 <span class="comment">%   the surface area of the triangulation.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   Example</span>
+0016 <span class="comment">%     % triangulate a surface patch between two ellipses</span>
+0017 <span class="comment">%     % create two sample curves</span>
+0018 <span class="comment">%     poly1 = ellipseToPolygon([50 50 40 20 0], 36);</span>
+0019 <span class="comment">%     poly2 = ellipseToPolygon([50 50 40 20 60], 36);</span>
+0020 <span class="comment">%     poly1 = poly1(1:end-1,:);</span>
+0021 <span class="comment">%     poly2 = poly2(1:end-1,:);</span>
+0022 <span class="comment">%     % transform to 3D polygons / curves</span>
+0023 <span class="comment">%     curve1 = [poly1 10*ones(size(poly1, 1), 1)];</span>
+0024 <span class="comment">%     curve2 = [poly2 20*ones(size(poly2, 1), 1)];</span>
+0025 <span class="comment">%     % draw as 3D curves</span>
+0026 <span class="comment">%     figure(1); clf; hold on;</span>
+0027 <span class="comment">%     drawPolygon3d(curve1, 'b'); drawPoint3d(curve1, 'bo');</span>
+0028 <span class="comment">%     drawPolygon3d(curve2, 'g'); drawPoint3d(curve2, 'go');</span>
+0029 <span class="comment">%     view(3); axis equal;</span>
+0030 <span class="comment">%     tri = triangulatePolygonPair3d(curve1, curve2);</span>
+0031 <span class="comment">%     vertices = [curve1 ; curve2];</span>
+0032 <span class="comment">%     % display the resulting mesh</span>
+0033 <span class="comment">%     figure(2); clf; hold on;</span>
+0034 <span class="comment">%     drawMesh(vertices, tri);</span>
+0035 <span class="comment">%     drawPolygon3d(curve1, 'color', 'b', 'linewidth', 2);</span>
+0036 <span class="comment">%     drawPolygon3d(curve2, 'color', 'g', 'linewidth', 2);</span>
+0037 <span class="comment">%     view(3); axis equal;</span>
+0038 <span class="comment">%</span>
+0039 <span class="comment">%   References</span>
+0040 <span class="comment">%   Based on the paper:</span>
+0041 <span class="comment">%   &quot;Optimal surface reconstruction from planar contours&quot;,</span>
+0042 <span class="comment">%   Fuchs, H., Kedem, Z. M., Uselton, S.P., 1977, Graphics and Image</span>
+0043 <span class="comment">%   Processing, 20(10), 693-702.</span>
+0044 <span class="comment">%</span>
+0045 <span class="comment">%   See also</span>
+0046 <span class="comment">%     triangulatePolygonPair, triangleArea3d, meshSurfaceArea</span>
+0047 <span class="comment">%</span>
+0048 
+0049 <span class="comment">% ------</span>
+0050 <span class="comment">% Author: David Legland</span>
+0051 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0052 <span class="comment">% Created: 2022-01-14, using Matlab 9.10.0.1739362 (R2021a) Update 5</span>
+0053 <span class="comment">% Copyright 2022-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0054 
+0055 <span class="comment">%% Init</span>
+0056 
+0057 <span class="comment">% number of vertices of each contour</span>
+0058 nv1 = size(poly1, 1);
+0059 nv2 = size(poly2, 1);
+0060 
+0061 <span class="comment">% compute weights for horizontal transitions between graph vertices</span>
+0062 <span class="comment">% corresponding to triangles with two vertices in poly2</span>
+0063 weightsH = inf * ones(2*nv1+1, nv2);
+0064 <span class="keyword">for</span> iv2 = 1:nv2
+0065     v2 = poly2(mod(iv2, nv2)+1, :);
+0066     <span class="keyword">for</span> iv1 = 1:nv1
+0067         v1 = poly1(iv1, :);
+0068         weightsH(iv1, iv2) = <a href="../../matGeom/geom3d/distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>(v1, v2);
+0069     <span class="keyword">end</span>
+0070 <span class="keyword">end</span>
+0071 weightsH((nv1+1):(2*nv1+1), :) = weightsH([1:nv1 1], :);
+0072 
+0073 <span class="comment">% compute weights for vertical transitions between graph vertices</span>
+0074 <span class="comment">% corresponding to triangles with two vertices in poly1</span>
+0075 weightsV = inf * ones(2*nv1, nv2+1);
+0076 <span class="keyword">for</span> iv1 = 1:nv1
+0077     v1 = poly1(mod(iv1, nv1)+1, :);
+0078     <span class="keyword">for</span> iv2 = 1:nv2
+0079         v2 = poly2(iv2, :);
+0080         weightsV(iv1, iv2) = <a href="../../matGeom/geom3d/distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>(v1, v2);
+0081     <span class="keyword">end</span>
+0082 <span class="keyword">end</span>
+0083 weightsV(1:nv1, nv2+1) = weightsV(1:nv1, 1);
+0084 weightsV(nv1+1:2*nv1, :) = weightsV(1:nv1, :);
+0085 
+0086 
+0087 <span class="comment">%% Find minimum-weight path</span>
+0088 <span class="comment">% Note that the original paper proposes an enhanced method that should</span>
+0089 <span class="comment">% reduce the total amount of computation.</span>
+0090 
+0091 pathList = cell(1, nv1);
+0092 weights = zeros(nv1, 1);
+0093 <span class="keyword">for</span> i1 = 1:nv1
+0094     [pathList{i1}, weights(i1)] = <a href="#_sub1" class="code" title="subfunction [path, pathWeight] = computePath(i10, weightsH, weightsV)">computePath</a>(i1, weightsH, weightsV);
+0095 <span class="keyword">end</span>
+0096 
+0097 <span class="comment">% choose the path</span>
+0098 [~, ind] = min(weights);
+0099 path = pathList{ind};
+0100 
+0101 weight = weights(ind);
+0102 
+0103 
+0104 <span class="comment">%% Convert path into triangle list</span>
+0105 
+0106 <span class="comment">% as many triangles as the number of transitions</span>
+0107 nt = size(path, 1) - 1;
+0108 tri = zeros(nt, 3);
+0109 
+0110 <span class="comment">% iterate over triangles</span>
+0111 <span class="keyword">for</span> it = 1:nt
+0112     iv1 = path(it, 1);
+0113     iv2 = path(it, 2);
+0114     <span class="keyword">if</span> path(it + 1, 1) == iv1
+0115         <span class="comment">% horizontal transition -&gt; use edge from contour 2</span>
+0116         iv3 = mod(path(it, 2), nv2) + 1 + nv1;
+0117     <span class="keyword">elseif</span> path(it + 1, 2) == iv2
+0118         <span class="comment">% vertical transition -&gt; use edge from contour 1</span>
+0119         iv3 = mod(path(it, 1), nv1) + 1;
+0120     <span class="keyword">else</span>
+0121         error(<span class="string">'Successive path positions must share one coordinate'</span>);
+0122     <span class="keyword">end</span>
+0123     
+0124     <span class="comment">% convert grid vertex coords to vertex indices</span>
+0125     <span class="comment">% using one-based indexing modulo</span>
+0126     iv1 = mod(iv1 - 1, nv1) + 1; 
+0127     iv2 = mod(iv2 - 1, nv2) + 1 + nv1; <span class="comment">% also add the vertex count of poly1</span>
+0128     tri(it, :) = [iv1 iv2 iv3];
+0129 <span class="keyword">end</span>
+0130 
+0131 
+0132 <a name="_sub1" href="#_subfunctions" class="code">function [path, pathWeight] = computePath(i10, weightsH, weightsV)</a>
+0133 <span class="comment">%COMPUTEPATH Computes a minimal path within an unfolded toroidal graph.</span>
+0134 <span class="comment">%</span>
+0135 <span class="comment">%   PATH = computePath(INITROW, HWEIGHTS, VWEIGHTS);</span>
+0136 <span class="comment">%</span>
+0137 
+0138 <span class="comment">%% retrieve info</span>
+0139 
+0140 <span class="comment">% size of the search graph (number of graph vertices along each dimension)</span>
+0141 ngv1 = size(weightsH, 1);
+0142 ngv2 = size(weightsV, 2);
+0143 
+0144 <span class="comment">% compute final index for i1</span>
+0145 i1Last = i10 + (ngv1 - 1) / 2;
+0146 
+0147 
+0148 <span class="comment">%% Initialize matrix of cumulated weights</span>
+0149 
+0150 <span class="comment">% create matrix of cumulated  weights</span>
+0151 cumWeights = inf * ones(ngv1, ngv2);
+0152 <span class="comment">% init first row</span>
+0153 cumWeights(i10, 1) = 0;
+0154 <span class="keyword">for</span> i2 = 1:ngv2-1
+0155     cumWeights(i10, i2+1) = cumWeights(i10, i2) + weightsH(i10, i2);
+0156 <span class="keyword">end</span>
+0157 <span class="comment">% init each subsequent row</span>
+0158 <span class="keyword">for</span> i1 = i10+1:i1Last
+0159     <span class="comment">% first vertex in row is initialized from the vertex above</span>
+0160     cumWeights(i1, 1) = cumWeights(i1-1, 1) + weightsV(i1-1, 1);
+0161     <span class="comment">% other vertices minimize weights from left or top vertices</span>
+0162     <span class="keyword">for</span> i2 = 2:ngv2
+0163         wH = cumWeights(i1, i2 - 1) + weightsH(i1, i2 - 1);
+0164         wV = cumWeights(i1 - 1, i2) + weightsV(i1 - 1, i2);
+0165         cumWeights(i1, i2) = min(wH, wV);
+0166     <span class="keyword">end</span>
+0167 <span class="keyword">end</span>
+0168 
+0169 
+0170 <span class="comment">%% Backpropagate to find path</span>
+0171 
+0172 <span class="comment">% allocate path array</span>
+0173 np = (ngv1 - 1) / 2 + ngv2;
+0174 path = zeros(np, 2);
+0175 
+0176 <span class="comment">% extreme points</span>
+0177 path(1, :) = [i10 1];
+0178 path(<span class="keyword">end</span>, :) = [i1Last ngv2];
+0179 
+0180 <span class="comment">% index of row and column</span>
+0181 i1 = i1Last;
+0182 i2 = ngv2;
+0183 
+0184 <span class="keyword">for</span> iPath = np-1:-1:1
+0185     <span class="comment">% determine the weights associated to a move in the horizontal or</span>
+0186     <span class="comment">% vertical direction</span>
+0187     moveLeft = true;
+0188     <span class="keyword">if</span> i2 == 1
+0189         moveLeft = false;
+0190     <span class="keyword">elseif</span> i1 &gt; i10
+0191         wH = cumWeights(i1, i2-1);
+0192         wV = cumWeights(i1-1, i2);
+0193         moveLeft = wH &lt; wV;
+0194     <span class="keyword">end</span>
+0195     
+0196     <span class="comment">% update position of current grid vertex</span>
+0197     <span class="keyword">if</span> moveLeft
+0198         i2 = i2 - 1;
+0199     <span class="keyword">else</span>
+0200         i1 = i1 - 1;
+0201     <span class="keyword">end</span>
+0202     
+0203     path(iPath, :) = [i1 i2];
+0204 <span class="keyword">end</span>
+0205 
+0206 pathWeight = cumWeights(i1Last, ngv2);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

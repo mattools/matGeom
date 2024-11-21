@@ -49,7 +49,7 @@ This function calls:
 <li><a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>	TRIANGULATEFACES Convert face array to an array of triangular faces.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="meshVoronoiDiagram.html" class="code" title="function [regions, distances] = meshVoronoiDiagram(vertices, faces, germInds)">meshVoronoiDiagram</a>	Voronoi Diagram on the surface of a polygonal mesh.</li><li><a href="smoothMesh.html" class="code" title="function varargout = smoothMesh(varargin)">smoothMesh</a>	SMOOTHMESH Smooth mesh by replacing each vertex by the average of its neighbors.</li><li><a href="smoothMeshFunction.html" class="code" title="function f = smoothMeshFunction(vertices, faces, f, varargin) %#ok<INUSL>">smoothMeshFunction</a>	Apply smoothing on a functions defines on mesh vertices.</li></ul>
+<li><a href="meshVoronoiDiagram.html" class="code" title="function [regions, distances] = meshVoronoiDiagram(vertices, faces, germInds)">meshVoronoiDiagram</a>	MESHVORONOIDIAGRAM Voronoi Diagram on the surface of a polygonal mesh.</li><li><a href="smoothMesh.html" class="code" title="function varargout = smoothMesh(varargin)">smoothMesh</a>	SMOOTHMESH Smooth mesh by replacing each vertex by the average of its neighbors.</li><li><a href="smoothMeshFunction.html" class="code" title="function f = smoothMeshFunction(vertices, faces, f, varargin) %#ok<INUSL>">smoothMeshFunction</a>	SMOOTHMESHFUNCTION Apply smoothing on a functions defines on mesh vertices.</li></ul>
 <!-- crossreference -->
 
 
@@ -73,9 +73,9 @@ This function is called by:
 0016 
 0017 <span class="comment">% ------</span>
 0018 <span class="comment">% Author: David Legland</span>
-0019 <span class="comment">% e-mail: david.legland@inra.fr</span>
-0020 <span class="comment">% Created: 2013-04-30,    using Matlab 7.9.0.529 (R2009b)</span>
-0021 <span class="comment">% Copyright 2013 INRA - Cepia Software Platform.</span>
+0019 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0020 <span class="comment">% Created: 2013-04-30, using Matlab 7.9.0.529 (R2009b)</span>
+0021 <span class="comment">% Copyright 2013-2024 INRA - Cepia Software Platform</span>
 0022 
 0023 <span class="comment">% Ensures faces is a N-by-3 or N-by-4 array</span>
 0024 <span class="keyword">if</span> iscell(faces) || (isnumeric(faces) &amp;&amp; size(faces, 2) &gt; 4)
@@ -103,6 +103,6 @@ This function is called by:
 0046    
 0047 <span class="comment">% remove double adjacencies</span>
 0048 adj = min(adj, 1);</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of imageGraph</title>
+  <meta name="keywords" content="imageGraph">
+  <meta name="description" content="IMAGEGRAPH Create equivalent graph of a binary image.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; imageGraph.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>imageGraph
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>IMAGEGRAPH Create equivalent graph of a binary image.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = imageGraph(img, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">IMAGEGRAPH Create equivalent graph of a binary image.
+
+   [N E] = imageGraph(IMG);
+   or 
+   [N E F] = imageGraph(IMG);
+   create graph representing adjacencies in image. N is the array of
+   nodes, E is the array of edges, and F is a 4-columns array containing
+   indices of vertices of each face.
+   IMG can be either 2D or 3D image.
+   This functions uses only 4 neighbors in 2D, and 6 neighbors in 3D.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = imageGraph(img, varargin)</a>
+0002 <span class="comment">%IMAGEGRAPH Create equivalent graph of a binary image.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [N E] = imageGraph(IMG);</span>
+0005 <span class="comment">%   or</span>
+0006 <span class="comment">%   [N E F] = imageGraph(IMG);</span>
+0007 <span class="comment">%   create graph representing adjacencies in image. N is the array of</span>
+0008 <span class="comment">%   nodes, E is the array of edges, and F is a 4-columns array containing</span>
+0009 <span class="comment">%   indices of vertices of each face.</span>
+0010 <span class="comment">%   IMG can be either 2D or 3D image.</span>
+0011 <span class="comment">%   This functions uses only 4 neighbors in 2D, and 6 neighbors in 3D.</span>
+0012 <span class="comment">%</span>
+0013 
+0014 <span class="comment">% ------</span>
+0015 <span class="comment">% Author: David Legland</span>
+0016 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0017 <span class="comment">% Created: 2004-06-28</span>
+0018 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0019 
+0020 <span class="comment">%% Initialisations</span>
+0021 
+0022 nodes = [];
+0023 edges = zeros(0, 2);
+0024 faces = zeros(0, 4);
+0025 cells = [];
+0026 
+0027 dim = size(img);
+0028 nd = ndims(img);
+0029 
+0030 <span class="comment">%% Main processing</span>
+0031 
+0032 <span class="keyword">if</span> nd == 2
+0033     <span class="comment">% Process planar image</span>
+0034     N1 = dim(1);
+0035     N2 = dim(2);
+0036     
+0037     <span class="comment">% first find nodes, equivalent to pixels</span>
+0038     ind = find(img);
+0039     [x, y] = ind2sub([N1 N2], ind);
+0040     nodes = [x y];
+0041     
+0042     <span class="comment">% find vertical edges</span>
+0043     ind = find(img(1:N1, 1:N2-1) &amp; img(1:N1, 2:N2));
+0044     <span class="keyword">for</span> i=1:length(ind)
+0045         [x, y] = ind2sub([N1 N2-1], ind(i));
+0046         i1 = find(ismember(nodes, [x y], <span class="string">'rows'</span>));
+0047         i2 = find(ismember(nodes, [x y+1], <span class="string">'rows'</span>));
+0048         edges(size(edges, 1)+1, 1:2) = [i1 i2];
+0049     <span class="keyword">end</span>
+0050     
+0051     <span class="comment">% find horizontal edges</span>
+0052     ind = find(img(1:N1-1, 1:N2) &amp; img(2:N1, 1:N2));
+0053     <span class="keyword">for</span> i=1:length(ind)
+0054         [x, y] = ind2sub([N1-1 N2], ind(i));
+0055         i1 = find(ismember(nodes, [x y], <span class="string">'rows'</span>));
+0056         i2 = find(ismember(nodes, [x+1 y], <span class="string">'rows'</span>));
+0057         edges(size(edges, 1)+1, 1:2) = [i1 i2];
+0058     <span class="keyword">end</span>
+0059     
+0060     <span class="comment">% find faces</span>
+0061     ind = find(img(1:N1-1, 1:N2-1) &amp; img(2:N1, 1:N2-1) &amp; <span class="keyword">...</span>
+0062                img(1:N1-1, 2:N2) &amp; img(2:N1, 2:N2) );
+0063     <span class="keyword">for</span> i=1:length(ind)
+0064         [x, y] = ind2sub([N1-1 N2-1], ind(i));
+0065         i1 = find(ismember(nodes, [x y], <span class="string">'rows'</span>));
+0066         i2 = find(ismember(nodes, [x+1 y], <span class="string">'rows'</span>));
+0067         i3 = find(ismember(nodes, [x+1 y+1], <span class="string">'rows'</span>));
+0068         i4 = find(ismember(nodes, [x y+1], <span class="string">'rows'</span>));
+0069         faces(size(faces, 1)+1, 1:4) = [i1 i2 i3 i4];
+0070     <span class="keyword">end</span>
+0071     
+0072 <span class="keyword">elseif</span> nd == 3
+0073     <span class="comment">% Process 3D image</span>
+0074     N1 = dim(1);
+0075     N2 = dim(2);
+0076     N3 = dim(3);
+0077     
+0078     <span class="comment">% first find nodes, equivalent to pixels</span>
+0079     ind = find(img);
+0080     [x, y, z] = ind2sub([N1 N2 N3], ind);
+0081     nodes = [x y z];
+0082     
+0083     <span class="comment">% find edges in direction 1</span>
+0084     ind = find(img(1:N1-1, 1:N2, 1:N3) &amp; img(2:N1, 1:N2, 1:N3));
+0085     [x, y, z] = ind2sub([N1-1 N2 N3], ind);
+0086     i1 = find(ismember(nodes, [x y z], <span class="string">'rows'</span>));
+0087     i2 = find(ismember(nodes, [x+1 y z], <span class="string">'rows'</span>));
+0088     edges = [edges ; [i1 i2]];
+0089   
+0090     <span class="comment">% find edges in direction 2</span>
+0091     ind = find(img(1:N1, 1:N2-1, 1:N3) &amp; img(1:N1, 2:N2, 1:N3));
+0092     [x, y, z] = ind2sub([N1 N2-1 N3], ind);
+0093     i1 = find(ismember(nodes, [x y z], <span class="string">'rows'</span>));
+0094     i2 = find(ismember(nodes, [x y+1 z], <span class="string">'rows'</span>));
+0095     edges = [edges ; [i1 i2]];
+0096    
+0097     <span class="comment">% find edges in direction 3</span>
+0098     ind = find(img(1:N1, 1:N2, 1:N3-1) &amp; img(1:N1, 1:N2, 2:N3));
+0099     [x, y, z] = ind2sub([N1 N2 N3-1], ind);
+0100     i1 = find(ismember(nodes, [x y z], <span class="string">'rows'</span>));
+0101     i2 = find(ismember(nodes, [x y z+1], <span class="string">'rows'</span>));
+0102     edges = [edges ; [i1 i2]];
+0103     
+0104     
+0105     <span class="comment">% find faces in direction 1</span>
+0106     ind = find(img(1:N1, 1:N2-1, 1:N3-1) &amp; img(1:N1, 1:N2-1, 2:N3) &amp; <span class="keyword">...</span>
+0107                img(1:N1, 2:N2, 1:N3-1)   &amp; img(1:N1, 2:N2, 2:N3) );
+0108     [x, y, z] = ind2sub([N1 N2-1 N3-1], ind);
+0109     i1 = find(ismember(nodes, [x y z],  <span class="string">'rows'</span>));
+0110     i2 = find(ismember(nodes, [x y+1 z], <span class="string">'rows'</span>));
+0111     i3 = find(ismember(nodes, [x y+1 z+1], <span class="string">'rows'</span>));
+0112     i4 = find(ismember(nodes, [x y z+1], <span class="string">'rows'</span>));
+0113     faces = [faces; [i1 i2 i3 i4]];
+0114     
+0115     <span class="comment">% find faces in direction 2</span>
+0116     ind = find(img(1:N1-1, 1:N2, 1:N3-1) &amp; img(1:N1-1, 1:N2, 2:N3) &amp; <span class="keyword">...</span>
+0117                img(2:N1, 1:N2, 1:N3-1)   &amp; img(2:N1, 1:N2, 2:N3) );
+0118     [x, y, z] = ind2sub([N1-1 N2 N3-1], ind);
+0119     i1 = find(ismember(nodes, [x y z], <span class="string">'rows'</span>));
+0120     i2 = find(ismember(nodes, [x+1 y z], <span class="string">'rows'</span>));
+0121     i3 = find(ismember(nodes, [x+1 y z+1], <span class="string">'rows'</span>));
+0122     i4 = find(ismember(nodes, [x y z+1], <span class="string">'rows'</span>));
+0123     faces = [faces; [i1 i2 i3 i4]];
+0124    
+0125     <span class="comment">% find faces in direction 3</span>
+0126     ind = find(img(1:N1-1, 1:N2-1, 1:N3) &amp; img(1:N1-1, 2:N2, 1:N3) &amp; <span class="keyword">...</span>
+0127                img(2:N1, 1:N2-1, 1:N3)   &amp; img(2:N1, 2:N2, 1:N3) );
+0128     [x, y, z] = ind2sub([N1-1 N2-1 N3], ind);
+0129     i1 = find(ismember(nodes, [x y z], <span class="string">'rows'</span>));
+0130     i2 = find(ismember(nodes, [x+1 y z], <span class="string">'rows'</span>));
+0131     i3 = find(ismember(nodes, [x+1 y+1 z], <span class="string">'rows'</span>));
+0132     i4 = find(ismember(nodes, [x y+1 z], <span class="string">'rows'</span>));
+0133     faces = [faces; [i1 i2 i3 i4]];
+0134     
+0135 <span class="keyword">end</span>
+0136 
+0137 
+0138 <span class="comment">%% Format output</span>
+0139 
+0140 <span class="keyword">if</span> nargout == 1
+0141     graph.nodes = nodes;
+0142     graph.edges = edges;
+0143     graph.faces = faces;
+0144     <span class="keyword">if</span> nd &gt; 2
+0145         graph.cells =  cells;
+0146     <span class="keyword">end</span>
+0147     varargout{1} = graph;
+0148     
+0149 <span class="keyword">elseif</span> nargout == 2
+0150     varargout{1} = nodes;
+0151     varargout{2} = edges;
+0152     
+0153 <span class="keyword">elseif</span> nargout == 3
+0154     varargout{1} = nodes;
+0155     varargout{2} = edges;
+0156     varargout{3} = faces;
+0157 <span class="keyword">end</span>
+0158 
+0159 
+0160</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

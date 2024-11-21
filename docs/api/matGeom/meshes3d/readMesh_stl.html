@@ -24,7 +24,7 @@
 <div class="box"><strong>READMESH_STL Read mesh data stored in STL format.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function varargout = readMesh_stl(fileName) </strong></div>
+<div class="box"><strong>function varargout = readMesh_stl(fName) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre class="comment">READMESH_STL Read mesh data stored in STL format.
@@ -33,14 +33,14 @@
 
    MESH = readMesh_stl(FNAME)
 
-   Example
-   readMesh_stl
-
-   References
-   Wrapper function for MATLAB's build-in stlread.
-
    See also
-   meshes3d, <a href="readMesh.html" class="code" title="function varargout = readMesh(fileName)">readMesh</a>, <a href="readMesh_off.html" class="code" title="function varargout = readMesh_off(fileName)">readMesh_off</a>, <a href="readMesh_ply.html" class="code" title="function varargout = readMesh_ply(fileName)">readMesh_ply</a></pre></div>
+     meshes3d, <a href="readMesh.html" class="code" title="function varargout = readMesh(filePath, varargin)">readMesh</a>, <a href="readMesh_off.html" class="code" title="function varargout = readMesh_off(fileName)">readMesh_off</a>, <a href="readMesh_ply.html" class="code" title="function varargout = readMesh_ply(fileName)">readMesh_ply</a>, <a href="writeMesh_stl.html" class="code" title="function writeMesh_stl(fileName, vertices, faces, varargin)">writeMesh_stl</a>
+
+   Source
+     Functions of the stlTools toolbox by Pau Micó are used for STL files
+     in ASCII format:
+     https://mathworks.com/matlabcentral/fileexchange/51200-stltools
+     MATLAB's build-in stlread is used for STL files in binary format.</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -49,40 +49,147 @@ This function calls:
 </ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="readMesh.html" class="code" title="function varargout = readMesh(fileName)">readMesh</a>	Read a 3D mesh by inferring format from file name.</li></ul>
+<li><a href="readMesh.html" class="code" title="function varargout = readMesh(filePath, varargin)">readMesh</a>	READMESH Read a 3D mesh by inferring the format from the file extension.</li></ul>
 <!-- crossreference -->
 
-
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function format = stlGetFormat(fileName)</a></li><li><a href="#_sub2" class="code">function [v, f, n, name] = stlReadAscii(fileName)</a></li></ul>
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = readMesh_stl(fileName)</a>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = readMesh_stl(fName)</a>
 0002 <span class="comment">%READMESH_STL Read mesh data stored in STL format.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   [VERTICES, FACES] = readMesh_stl(FNAME)</span>
 0005 <span class="comment">%</span>
 0006 <span class="comment">%   MESH = readMesh_stl(FNAME)</span>
 0007 <span class="comment">%</span>
-0008 <span class="comment">%   Example</span>
-0009 <span class="comment">%   readMesh_stl</span>
+0008 <span class="comment">%   See also</span>
+0009 <span class="comment">%     meshes3d, readMesh, readMesh_off, readMesh_ply, writeMesh_stl</span>
 0010 <span class="comment">%</span>
-0011 <span class="comment">%   References</span>
-0012 <span class="comment">%   Wrapper function for MATLAB's build-in stlread.</span>
-0013 <span class="comment">%</span>
-0014 <span class="comment">%   See also</span>
-0015 <span class="comment">%   meshes3d, readMesh, readMesh_off, readMesh_ply</span>
+0011 <span class="comment">%   Source</span>
+0012 <span class="comment">%     Functions of the stlTools toolbox by Pau Micó are used for STL files</span>
+0013 <span class="comment">%     in ASCII format:</span>
+0014 <span class="comment">%     https://mathworks.com/matlabcentral/fileexchange/51200-stltools</span>
+0015 <span class="comment">%     MATLAB's build-in stlread is used for STL files in binary format.</span>
 0016 
 0017 <span class="comment">% ------</span>
 0018 <span class="comment">% Author: oqilipo</span>
-0019 <span class="comment">% Created: 2021-02-12, using Matlab 9.9.0.1538559 (R2020b)</span>
-0020 <span class="comment">% Copyright 2021</span>
-0021 
-0022 TR = stlread(fileName);
-0023 vertices = TR.Points;
-0024 faces = TR.ConnectivityList;
-0025 
-0026 varargout = formatMeshOutput(nargout, vertices, faces);
-0027 
-0028 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0019 <span class="comment">% E-mail: N/A</span>
+0020 <span class="comment">% Created: 2021-02-12, using Matlab 9.9.0.1538559 (R2020b)</span>
+0021 <span class="comment">% Copyright 2021-2024</span>
+0022 
+0023 format = <a href="#_sub1" class="code" title="subfunction format = stlGetFormat(fileName)">stlGetFormat</a>(fName);
+0024 <span class="keyword">if</span> strcmp(format,<span class="string">'ascii'</span>)
+0025     [vertices,faces] = <a href="#_sub2" class="code" title="subfunction [v, f, n, name] = stlReadAscii(fileName)">stlReadAscii</a>(fName);
+0026 <span class="keyword">elseif</span> strcmp(format,<span class="string">'binary'</span>)
+0027     TR = stlread(fName);
+0028     vertices = TR.Points;
+0029     faces = TR.ConnectivityList;
+0030 <span class="keyword">end</span>
+0031 
+0032 varargout = formatMeshOutput(nargout, vertices, faces);
+0033 
+0034 <span class="keyword">end</span>
+0035 
+0036 
+0037 <a name="_sub1" href="#_subfunctions" class="code">function format = stlGetFormat(fileName)</a>
+0038 <span class="comment">%STLGETFORMAT identifies the format of the STL file and returns 'binary' or</span>
+0039 <span class="comment">%'ascii'</span>
+0040 
+0041 fid = fopen(fileName);
+0042 <span class="comment">% Check the file size first, since binary files MUST have a size of 84+(50*n)</span>
+0043 fseek(fid,0,1);         <span class="comment">% Go to the end of the file</span>
+0044 fidSIZE = ftell(fid);   <span class="comment">% Check the size of the file</span>
+0045 <span class="keyword">if</span> rem(fidSIZE-84,50) &gt; 0
+0046     format = <span class="string">'ascii'</span>;
+0047 <span class="keyword">else</span>
+0048     <span class="comment">% Files with a size of 84+(50*n), might be either ascii or binary...</span>
+0049     <span class="comment">% Read first 80 characters of the file.</span>
+0050     <span class="comment">% For an ASCII file, the data should begin immediately (give or take a few</span>
+0051     <span class="comment">% blank lines or spaces) and the first word must be 'solid'.</span>
+0052     <span class="comment">% For a binary file, the first 80 characters contains the header.</span>
+0053     <span class="comment">% It is bad practice to begin the header of a binary file with the word</span>
+0054     <span class="comment">% 'solid', so it can be used to identify whether the file is ASCII or</span>
+0055     <span class="comment">% binary.</span>
+0056     fseek(fid,0,-1); <span class="comment">% go to the beginning of the file</span>
+0057     header = strtrim(char(fread(fid,80,<span class="string">'uchar'</span>)')); <span class="comment">% trim leading and trailing spaces</span>
+0058     isSolid = strcmp(header(1:min(5,length(header))),<span class="string">'solid'</span>); <span class="comment">% take first 5 char</span>
+0059     fseek(fid,-80,1); <span class="comment">% go to the end of the file minus 80 characters</span>
+0060     tail = char(fread(fid,80,<span class="string">'uchar'</span>)');
+0061     isEndSolid = contains(tail,<span class="string">'endsolid'</span>);
+0062 
+0063     <span class="comment">% Double check by reading the last 80 characters of the file.</span>
+0064     <span class="comment">% For an ASCII file, the data should end (give or take a few</span>
+0065     <span class="comment">% blank lines or spaces) with 'endsolid &lt;object_name&gt;'.</span>
+0066     <span class="comment">% If the last 80 characters contains the word 'endsolid' then this</span>
+0067     <span class="comment">% confirms that the file is indeed ASCII.</span>
+0068     <span class="keyword">if</span> isSolid &amp;&amp; isEndSolid
+0069         format = <span class="string">'ascii'</span>;
+0070     <span class="keyword">else</span>
+0071         format = <span class="string">'binary'</span>;
+0072     <span class="keyword">end</span>
+0073 <span class="keyword">end</span>
+0074 fclose(fid);
+0075 
+0076 <span class="keyword">end</span>
+0077 
+0078 
+0079 <a name="_sub2" href="#_subfunctions" class="code">function [v, f, n, name] = stlReadAscii(fileName)</a>
+0080 <span class="comment">%STLREADASCII reads a STL file written in ASCII format</span>
+0081 <span class="comment">%V are the vertices</span>
+0082 <span class="comment">%F are the faces</span>
+0083 <span class="comment">%N are the normals</span>
+0084 <span class="comment">%NAME is the name of the STL object (NOT the name of the STL file)</span>
+0085 
+0086 <span class="comment">%======================</span>
+0087 <span class="comment">% STL ascii file format</span>
+0088 <span class="comment">%======================</span>
+0089 <span class="comment">% ASCII STL files have the following structure.  Technically each facet</span>
+0090 <span class="comment">% could be any 2D shape, but in practice only triangular facets tend to be</span>
+0091 <span class="comment">% used.  The present code ONLY works for meshes composed of triangular</span>
+0092 <span class="comment">% facets.</span>
+0093 <span class="comment">%</span>
+0094 <span class="comment">% solid object_name</span>
+0095 <span class="comment">% facet normal x y z</span>
+0096 <span class="comment">%   outer loop</span>
+0097 <span class="comment">%     vertex x y z</span>
+0098 <span class="comment">%     vertex x y z</span>
+0099 <span class="comment">%     vertex x y z</span>
+0100 <span class="comment">%   endloop</span>
+0101 <span class="comment">% endfacet</span>
+0102 <span class="comment">%</span>
+0103 <span class="comment">% &lt;Repeat for all facets...&gt;</span>
+0104 <span class="comment">%</span>
+0105 <span class="comment">% endsolid object_name</span>
+0106 
+0107 fid = fopen(fileName);
+0108 cellcontent = textscan(fid,<span class="string">'%s'</span>,<span class="string">'delimiter'</span>,<span class="string">'\n'</span>); <span class="comment">% read all the file and put content in cells</span>
+0109 content = cellcontent{:}(logical(~strcmp(cellcontent{:},<span class="string">''</span>))); <span class="comment">% remove all blank lines</span>
+0110 fclose(fid);
+0111 
+0112 <span class="comment">% read the STL name</span>
+0113 line1 = char(content(1));
+0114 <span class="keyword">if</span> (size(line1,2) &gt;= 7)
+0115     name = line1(7:end);
+0116 <span class="keyword">else</span>
+0117     name = <span class="string">'Unnamed Object'</span>;
+0118 <span class="keyword">end</span>
+0119 
+0120 <span class="comment">% read the vector normals</span>
+0121 normals = char(content(logical(strncmp(content,<span class="string">'facet normal'</span>,12))));
+0122 n = str2num(normals(:,13:end)); <span class="comment">%#ok&lt;ST2NM&gt;</span>
+0123 
+0124 <span class="comment">% read the vertex coordinates (vertices)</span>
+0125 vertices = char(content(logical(strncmp(content,<span class="string">'vertex'</span>,6))));
+0126 v = str2num(vertices(:,7:end)); <span class="comment">%#ok&lt;ST2NM&gt;</span>
+0127 nvert = size(v,1); <span class="comment">% number of vertices</span>
+0128 nfaces = sum(strcmp(content,<span class="string">'endfacet'</span>)); <span class="comment">% number of faces</span>
+0129 <span class="keyword">if</span> (nvert == 3*nfaces)
+0130     f = reshape(1:nvert,[3 nfaces])'; <span class="comment">% create faces</span>
+0131 <span class="keyword">end</span>
+0132 
+0133 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

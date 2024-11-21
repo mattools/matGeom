@@ -4,7 +4,7 @@
 <head>
   <title>Description of vectorAngle</title>
   <meta name="keywords" content="vectorAngle">
-  <meta name="description" content="Horizontal angle of a vector, or angle between 2 vectors.">
+  <meta name="description" content="VECTORANGLE Horizontal angle of a vector, or angle between 2 vectors.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Horizontal angle of a vector, or angle between 2 vectors.</strong></div>
+<div class="box"><strong>VECTORANGLE Horizontal angle of a vector, or angle between 2 vectors.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function alpha = vectorAngle(v1, varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Horizontal angle of a vector, or angle between 2 vectors.
+<div class="fragment"><pre class="comment">VECTORANGLE Horizontal angle of a vector, or angle between 2 vectors.
 
    A = vectorAngle(V);
    Returns angle between Ox axis and vector direction, in radians, in
@@ -54,7 +54,7 @@
    ans =
        270
         
-   See also:
+   See also
      <a href="vectors2d.html" class="code" title="function vectors2d">vectors2d</a>, <a href="angles2d.html" class="code" title="function angles2d">angles2d</a>, <a href="normalizeAngle.html" class="code" title="function alpha = normalizeAngle(alpha, varargin)">normalizeAngle</a></pre></div>
 
 <!-- crossreference -->
@@ -71,7 +71,7 @@ This function is called by:
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function alpha = vectorAngle(v1, varargin)</a>
-0002 <span class="comment">% Horizontal angle of a vector, or angle between 2 vectors.</span>
+0002 <span class="comment">%VECTORANGLE Horizontal angle of a vector, or angle between 2 vectors.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   A = vectorAngle(V);</span>
 0005 <span class="comment">%   Returns angle between Ox axis and vector direction, in radians, in</span>
@@ -98,82 +98,77 @@ This function is called by:
 0026 <span class="comment">%   ans =</span>
 0027 <span class="comment">%       270</span>
 0028 <span class="comment">%</span>
-0029 <span class="comment">%   See also:</span>
+0029 <span class="comment">%   See also</span>
 0030 <span class="comment">%     vectors2d, angles2d, normalizeAngle</span>
 0031 <span class="comment">%</span>
 0032 
 0033 <span class="comment">% ------</span>
 0034 <span class="comment">% Author: David Legland</span>
-0035 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0035 <span class="comment">% E-mail: david.legland@inrae.fr</span>
 0036 <span class="comment">% Created: 2007-10-18</span>
-0037 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0037 <span class="comment">% Copyright 2007-2024 INRA - Cepia Software Platform</span>
 0038 
-0039 <span class="comment">%   HISTORY</span>
-0040 <span class="comment">%   2010-04-16 add psb to specify center interval</span>
-0041 <span class="comment">%   2011-04-10 add support for angle between two vectors</span>
-0042 
-0043 
-0044 <span class="comment">%% Initializations</span>
-0045 
-0046 <span class="comment">% default values</span>
-0047 v2 = [];
-0048 midAngle = pi; <span class="comment">% normalize angles between 0 and 2*PI</span>
-0049 
-0050 <span class="comment">% process input arguments</span>
-0051 <span class="keyword">while</span> ~isempty(varargin)
-0052     var = varargin{1};
-0053     <span class="keyword">if</span> isnumeric(var) &amp;&amp; isscalar(var)
-0054         <span class="comment">% argument is normalization constant</span>
-0055         midAngle = varargin{1};
+0039 <span class="comment">%% Initializations</span>
+0040 
+0041 <span class="comment">% default values</span>
+0042 v2 = [];
+0043 midAngle = pi; <span class="comment">% normalize angles between 0 and 2*PI</span>
+0044 
+0045 <span class="comment">% process input arguments</span>
+0046 <span class="keyword">while</span> ~isempty(varargin)
+0047     var = varargin{1};
+0048     <span class="keyword">if</span> isnumeric(var) &amp;&amp; isscalar(var)
+0049         <span class="comment">% argument is normalization constant</span>
+0050         midAngle = varargin{1};
+0051         varargin(1) = [];
+0052         
+0053     <span class="keyword">elseif</span> isnumeric(var) &amp;&amp; size(var, 2) == 2
+0054         <span class="comment">% argument is second vector</span>
+0055         v2 = varargin{1};
 0056         varargin(1) = [];
 0057         
-0058     <span class="keyword">elseif</span> isnumeric(var) &amp;&amp; size(var, 2) == 2
-0059         <span class="comment">% argument is second vector</span>
-0060         v2 = varargin{1};
-0061         varargin(1) = [];
-0062         
-0063     <span class="keyword">elseif</span> ischar(var) &amp;&amp; length(varargin) &gt;= 2
-0064         <span class="comment">% argument is option given as string + value</span>
-0065         <span class="keyword">if</span> strcmpi(var, <span class="string">'cutAngle'</span>) || strcmpi(var, <span class="string">'midAngle'</span>)
-0066             midAngle = varargin{2};
-0067             varargin(1:2) = [];
-0068             
-0069         <span class="keyword">else</span>
-0070             error([<span class="string">'Unknown option: '</span> var]);
-0071         <span class="keyword">end</span>
-0072         
-0073     <span class="keyword">else</span>
-0074         error(<span class="string">'Unable to parse inputs'</span>);
-0075     <span class="keyword">end</span>
-0076 <span class="keyword">end</span>
-0077 
-0078 
-0079 <span class="comment">%% Case of one vector</span>
-0080 
-0081 <span class="comment">% If only one vector is provided, computes its angle</span>
-0082 <span class="keyword">if</span> isempty(v2)
-0083     <span class="comment">% compute angle and format result in a 2*pi interval</span>
-0084     alpha = atan2(v1(:,2), v1(:,1));
-0085     
-0086     <span class="comment">% normalize within a 2*pi interval</span>
-0087     alpha = <a href="normalizeAngle.html" class="code" title="function alpha = normalizeAngle(alpha, varargin)">normalizeAngle</a>(alpha + 2*pi, midAngle);
-0088     
-0089     <span class="keyword">return</span>;
-0090 <span class="keyword">end</span>
-0091 
-0092 
-0093 <span class="comment">%% Case of two vectors</span>
-0094 
-0095 <span class="comment">% compute angle of each vector</span>
-0096 alpha1 = mod(atan2(v1(:,2), v1(:,1)), 2*pi);
-0097 alpha2 = mod(atan2(v2(:,2), v2(:,1)), 2*pi);
-0098 
-0099 <span class="comment">% difference</span>
-0100 alpha = bsxfun(@minus, alpha2, alpha1);
-0101 
-0102 <span class="comment">% normalize within a 2*pi interval</span>
-0103 alpha = <a href="normalizeAngle.html" class="code" title="function alpha = normalizeAngle(alpha, varargin)">normalizeAngle</a>(alpha + 2*pi, midAngle);
-0104</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0058     <span class="keyword">elseif</span> ischar(var) &amp;&amp; length(varargin) &gt;= 2
+0059         <span class="comment">% argument is option given as string + value</span>
+0060         <span class="keyword">if</span> strcmpi(var, <span class="string">'cutAngle'</span>) || strcmpi(var, <span class="string">'midAngle'</span>)
+0061             midAngle = varargin{2};
+0062             varargin(1:2) = [];
+0063             
+0064         <span class="keyword">else</span>
+0065             error([<span class="string">'Unknown option: '</span> var]);
+0066         <span class="keyword">end</span>
+0067         
+0068     <span class="keyword">else</span>
+0069         error(<span class="string">'Unable to parse inputs'</span>);
+0070     <span class="keyword">end</span>
+0071 <span class="keyword">end</span>
+0072 
+0073 
+0074 <span class="comment">%% Case of one vector</span>
+0075 
+0076 <span class="comment">% If only one vector is provided, computes its angle</span>
+0077 <span class="keyword">if</span> isempty(v2)
+0078     <span class="comment">% compute angle and format result in a 2*pi interval</span>
+0079     alpha = atan2(v1(:,2), v1(:,1));
+0080     
+0081     <span class="comment">% normalize within a 2*pi interval</span>
+0082     alpha = <a href="normalizeAngle.html" class="code" title="function alpha = normalizeAngle(alpha, varargin)">normalizeAngle</a>(alpha + 2*pi, midAngle);
+0083     
+0084     <span class="keyword">return</span>;
+0085 <span class="keyword">end</span>
+0086 
+0087 
+0088 <span class="comment">%% Case of two vectors</span>
+0089 
+0090 <span class="comment">% compute angle of each vector</span>
+0091 alpha1 = mod(atan2(v1(:,2), v1(:,1)), 2*pi);
+0092 alpha2 = mod(atan2(v2(:,2), v2(:,1)), 2*pi);
+0093 
+0094 <span class="comment">% difference</span>
+0095 alpha = bsxfun(@minus, alpha2, alpha1);
+0096 
+0097 <span class="comment">% normalize within a 2*pi interval</span>
+0098 alpha = <a href="normalizeAngle.html" class="code" title="function alpha = normalizeAngle(alpha, varargin)">normalizeAngle</a>(alpha + 2*pi, midAngle);
+0099</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

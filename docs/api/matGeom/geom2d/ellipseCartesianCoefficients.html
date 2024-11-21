@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of ellipseCartesianCoefficients</title>
+  <meta name="keywords" content="ellipseCartesianCoefficients">
+  <meta name="description" content="ELLIPSECARTESIANCOEFFICIENTS Cartesian coefficients of an ellipse.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom2d</a> &gt; ellipseCartesianCoefficients.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom2d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>ellipseCartesianCoefficients
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>ELLIPSECARTESIANCOEFFICIENTS Cartesian coefficients of an ellipse.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function coeffs = ellipseCartesianCoefficients(elli) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ELLIPSECARTESIANCOEFFICIENTS Cartesian coefficients of an ellipse.
+
+   COEFFS = ellipseCartesianCoefficients(ELLI)
+   Computes the cartesian coefficients of the ellipse ELLI, given by:
+     COEFFS = [A B C D E F] 
+   such that the points on the ellipse follow:
+     A*X^2 + B*X*Y + C*Y^2 + D*X + E*Y + F = 0
+
+   Example
+     elli = [30 20 40 20 30];
+     coeffs = ellipseCartesianCoefficients(elli)
+     elli2 = createEllipse(coeffs)
+     elli2 =
+        30.0000   20.0000   40.0000   20.0000   30.0000
+
+   See also
+     <a href="ellipses2d.html" class="code" title="function ellipses2d(varargin)">ellipses2d</a>, <a href="createEllipse.html" class="code" title="function elli = createEllipse(type, varargin)">createEllipse</a>, <a href="equivalentEllipse.html" class="code" title="function ell = equivalentEllipse(points)">equivalentEllipse</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="transformEllipse.html" class="code" title="function res = transformEllipse(elli, transfo)">transformEllipse</a>	TRANSFORMELLIPSE Apply an affine transformation to an ellipse.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function coeffs = ellipseCartesianCoefficients(elli)</a>
+0002 <span class="comment">%ELLIPSECARTESIANCOEFFICIENTS Cartesian coefficients of an ellipse.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   COEFFS = ellipseCartesianCoefficients(ELLI)</span>
+0005 <span class="comment">%   Computes the cartesian coefficients of the ellipse ELLI, given by:</span>
+0006 <span class="comment">%     COEFFS = [A B C D E F]</span>
+0007 <span class="comment">%   such that the points on the ellipse follow:</span>
+0008 <span class="comment">%     A*X^2 + B*X*Y + C*Y^2 + D*X + E*Y + F = 0</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Example</span>
+0011 <span class="comment">%     elli = [30 20 40 20 30];</span>
+0012 <span class="comment">%     coeffs = ellipseCartesianCoefficients(elli)</span>
+0013 <span class="comment">%     elli2 = createEllipse(coeffs)</span>
+0014 <span class="comment">%     elli2 =</span>
+0015 <span class="comment">%        30.0000   20.0000   40.0000   20.0000   30.0000</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   See also</span>
+0018 <span class="comment">%     ellipses2d, createEllipse, equivalentEllipse</span>
+0019 <span class="comment">%</span>
+0020 
+0021 <span class="comment">% ------</span>
+0022 <span class="comment">% Author: David Legland</span>
+0023 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0024 <span class="comment">% Created: 2022-09-05, using Matlab 9.12.0.1884302 (R2022a)</span>
+0025 <span class="comment">% Copyright 2022-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0026 
+0027 <span class="comment">% retrieve ellipse center and squared radiusses</span>
+0028 xc = elli(1);
+0029 yc = elli(2);
+0030 a2 = elli(3)^2;
+0031 b2 = elli(4)^2;
+0032 
+0033 <span class="comment">% pre-compute trigonometric functions (angle is in degrees)</span>
+0034 cot = cos(elli(5) * pi / 180);
+0035 sit = sin(elli(5) * pi / 180);
+0036 
+0037 <span class="comment">% identification of each parameter</span>
+0038 A = a2 * sit * sit + b2 * cot * cot;
+0039 B = 2 * (b2 - a2) * sit * cot;
+0040 C = a2 * cot * cot + b2 * sit * sit;
+0041 D = - 2 * A * xc - B * yc;
+0042 E = - B * xc - 2 * C * yc;
+0043 F = A * xc * xc + B * xc * yc + C * yc * yc - a2 * b2;
+0044 
+0045 <span class="comment">% concatenate into a single row vector</span>
+0046 coeffs = [A B C D E F];</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

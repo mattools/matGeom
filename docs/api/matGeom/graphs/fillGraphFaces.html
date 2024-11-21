@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of fillGraphFaces</title>
+  <meta name="keywords" content="fillGraphFaces">
+  <meta name="description" content="FILLGRAPHFACES Fill faces of a graph with specified color.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; fillGraphFaces.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>fillGraphFaces
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>FILLGRAPHFACES Fill faces of a graph with specified color.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = fillGraphFaces(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">FILLGRAPHFACES Fill faces of a graph with specified color.
+
+   fillGraphFaces(NODES, FACES) 
+   draw the faces of a graph / mesh defined by a sef of vertices and a set
+   of faces. The array NODES is a NV-by-2 or NV-by-3 array containing
+   vertex coordinates. The array FACES is either a NF-by-3 or NF-by-4
+   array of integers, or a 1-by-Nf array of cells, and contains indices of
+   each face vertices.
+
+   fillGraphFaces(NODES, EDGES, FACES)
+   also specifies the edges ofthe graph.
+
+   fillGraphFaces(GRAPH)
+   passes argument in a srtucture with at least 3 fields named 'nodes', 
+   'edges', and 'faces', corresponding to previously described parameters.
+   GRAPH can also be a cell array, whose first element is node array,
+   second element is edges array, and third element, if present, is faces
+   array.
+
+   fillGraphFaces(..., SFACES)
+   specifes the draw mode for each element, as in the classical 'plot'
+   function. To not display some elements, uses 'none'.
+
+   H = fillGraphFaces(...) 
+   return handle to the set of faces.
+   
+   See also
+   graphs, <a href="drawGraph.html" class="code" title="function varargout = drawGraph(varargin)">drawGraph</a>, <a href="drawGraphEdges.html" class="code" title="function varargout = drawGraphEdges(varargin)">drawGraphEdges</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="fillGraphFaces.html" class="code" title="function varargout = fillGraphFaces(varargin)">fillGraphFaces</a>	FILLGRAPHFACES Fill faces of a graph with specified color.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="fillGraphFaces.html" class="code" title="function varargout = fillGraphFaces(varargin)">fillGraphFaces</a>	FILLGRAPHFACES Fill faces of a graph with specified color.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = fillGraphFaces(varargin)</a>
+0002 <span class="comment">%FILLGRAPHFACES Fill faces of a graph with specified color.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   fillGraphFaces(NODES, FACES)</span>
+0005 <span class="comment">%   draw the faces of a graph / mesh defined by a sef of vertices and a set</span>
+0006 <span class="comment">%   of faces. The array NODES is a NV-by-2 or NV-by-3 array containing</span>
+0007 <span class="comment">%   vertex coordinates. The array FACES is either a NF-by-3 or NF-by-4</span>
+0008 <span class="comment">%   array of integers, or a 1-by-Nf array of cells, and contains indices of</span>
+0009 <span class="comment">%   each face vertices.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   fillGraphFaces(NODES, EDGES, FACES)</span>
+0012 <span class="comment">%   also specifies the edges ofthe graph.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   fillGraphFaces(GRAPH)</span>
+0015 <span class="comment">%   passes argument in a srtucture with at least 3 fields named 'nodes',</span>
+0016 <span class="comment">%   'edges', and 'faces', corresponding to previously described parameters.</span>
+0017 <span class="comment">%   GRAPH can also be a cell array, whose first element is node array,</span>
+0018 <span class="comment">%   second element is edges array, and third element, if present, is faces</span>
+0019 <span class="comment">%   array.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   fillGraphFaces(..., SFACES)</span>
+0022 <span class="comment">%   specifes the draw mode for each element, as in the classical 'plot'</span>
+0023 <span class="comment">%   function. To not display some elements, uses 'none'.</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   H = fillGraphFaces(...)</span>
+0026 <span class="comment">%   return handle to the set of faces.</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%   See also</span>
+0029 <span class="comment">%   graphs, drawGraph, drawGraphEdges</span>
+0030 <span class="comment">%</span>
+0031 
+0032 <span class="comment">% ------</span>
+0033 <span class="comment">% Author: David Legland</span>
+0034 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0035 <span class="comment">% Created: 2005-11-24</span>
+0036 <span class="comment">% Copyright 2005-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)</span>
+0037 
+0038 <span class="comment">%% Initialisations</span>
+0039 
+0040 <span class="comment">% drawing style for filling faces. Default is cyan.</span>
+0041 faceColor = <span class="string">'c'</span>;
+0042 
+0043 
+0044 <span class="comment">%% Process input arguments</span>
+0045 
+0046 <span class="comment">% if called without argument, display usage</span>
+0047 <span class="keyword">if</span> nargin == 0
+0048     help <a href="fillGraphFaces.html" class="code" title="function varargout = fillGraphFaces(varargin)">fillGraphFaces</a>;
+0049     <span class="keyword">return</span>;
+0050 <span class="keyword">end</span>
+0051 
+0052 <span class="comment">% Extract the structure of the graph</span>
+0053 var = varargin{1};
+0054 <span class="keyword">if</span> iscell(var)
+0055     <span class="comment">% graph is stored as a cell array : first cell is nodes, second one is</span>
+0056     <span class="comment">% edges, and third one is faces</span>
+0057     n = var{1};
+0058     <span class="keyword">if</span> length(var) &gt; 2
+0059         f = var{3};
+0060     <span class="keyword">end</span>
+0061     varargin(1) = [];
+0062     
+0063 <span class="keyword">elseif</span> isstruct(var)
+0064     <span class="comment">% graph is stored as a structure, with fields 'nodes', 'edges', and</span>
+0065     <span class="comment">% eventually 'faces'.</span>
+0066     n = var.nodes;
+0067     <span class="keyword">if</span> isfield(var, <span class="string">'faces'</span>)
+0068         f = var.faces;
+0069     <span class="keyword">end</span>
+0070     varargin(1) = [];
+0071     
+0072 <span class="keyword">else</span>
+0073     <span class="comment">% graph is stored as set of variables: nodes, edges, and eventually</span>
+0074     <span class="comment">% faces</span>
+0075     n = varargin{1};
+0076     
+0077     <span class="comment">% extract faces input argument</span>
+0078     <span class="keyword">if</span> length(varargin) &gt; 2 &amp;&amp; ~ischar(varargin{3})
+0079         f = varargin{3};
+0080         varargin(1:3) = [];
+0081     <span class="keyword">else</span>
+0082         f = varargin{2};
+0083         varargin(1:2) = [];
+0084     <span class="keyword">end</span>
+0085         
+0086 <span class="keyword">end</span>
+0087 
+0088 <span class="comment">% extract drawing style</span>
+0089 <span class="keyword">if</span> ~isempty(varargin)
+0090     faceColor = varargin{1};
+0091 <span class="keyword">end</span>
+0092 
+0093 <span class="comment">% process special case of 'none' option, that can be used in a call from</span>
+0094 <span class="comment">% the drawGraph function</span>
+0095 <span class="keyword">if</span> strcmp(faceColor, <span class="string">'none'</span>)
+0096     <span class="keyword">return</span>;
+0097 <span class="keyword">end</span>
+0098 
+0099 
+0100 <span class="comment">%% Main drawing processing</span>
+0101 
+0102 <span class="comment">% setup hold to display several faces</span>
+0103 hold on;
+0104 
+0105 
+0106 <span class="keyword">if</span> size(n, 2) == 3
+0107     <span class="comment">% use a zbuffer to avoid display pbms.</span>
+0108     set(gcf, <span class="string">'renderer'</span>, <span class="string">'zbuffer'</span>);
+0109 <span class="keyword">end</span>
+0110 
+0111 <span class="keyword">if</span> iscell(f)
+0112     <span class="comment">% each face is contained in a cell.</span>
+0113     <span class="keyword">for</span> fi = 1:length(f)
+0114         hf(fi) = patch(<span class="string">'Faces'</span>, f{fi}, <span class="string">'Vertices'</span>, n, <span class="string">'FaceColor'</span>, faceColor, <span class="string">'EdgeColor'</span>, <span class="string">'none'</span>);  <span class="comment">%#ok&lt;AGROW&gt;</span>
+0115     <span class="keyword">end</span>
+0116 <span class="keyword">else</span>
+0117     <span class="comment">% process faces as a NF-by-P array. NF i the number of faces,</span>
+0118     <span class="comment">% and all faces have the same number P of vertices (nodes).</span>
+0119     hf = patch(<span class="string">'Faces'</span>, f, <span class="string">'Vertices'</span>, n, <span class="string">'FaceColor'</span>, faceColor, <span class="string">'EdgeColor'</span>, <span class="string">'none'</span>);
+0120 <span class="keyword">end</span>
+0121 
+0122 
+0123 <span class="comment">%% format output arguments</span>
+0124 
+0125 <span class="keyword">if</span> nargout == 1
+0126     varargout{1} = hf;
+0127 <span class="keyword">end</span>
+0128</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

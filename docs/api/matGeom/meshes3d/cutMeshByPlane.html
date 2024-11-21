@@ -86,103 +86,104 @@ This function is called by:
 0022 <span class="comment">%   possible, too.</span>
 0023 <span class="comment">%</span>
 0024 
-0025 <span class="comment">% ---------</span>
+0025 <span class="comment">% ------</span>
 0026 <span class="comment">% Authors: oqilipo, David Legland</span>
-0027 <span class="comment">% Created: 2017-07-09</span>
-0028 <span class="comment">% Copyright 2017</span>
-0029 
-0030 narginchk(2,5)
-0031 nargoutchk(1,6)
-0032 
+0027 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0028 <span class="comment">% Created: 2017-07-09</span>
+0029 <span class="comment">% Copyright 2017-2024</span>
+0030 
+0031 narginchk(2,5)
+0032 nargoutchk(1,6)
 0033 
-0034 <span class="comment">%% Parse inputs</span>
-0035 <span class="comment">% If first argument is a struct</span>
-0036 <span class="keyword">if</span> nargin == 2 || nargin == 4
-0037     <span class="keyword">if</span> ~isempty(varargin)
-0038         varargin = [{plane}, varargin(:)'];
-0039     <span class="keyword">end</span>
-0040     plane = f;
-0041     [v, f] = parseMeshData(v);
-0042 <span class="keyword">end</span>
-0043 
-0044 p = inputParser;
-0045 addRequired(p,<span class="string">'plane'</span>,@<a href="../../matGeom/geom3d/isPlane.html" class="code" title="function d = isPlane(plane)">isPlane</a>)
-0046 validStrings = {<span class="string">'above'</span>,<span class="string">'in'</span>,<span class="string">'below'</span>};
-0047 addParameter(p,<span class="string">'part'</span>,<span class="string">'above'</span>,@(x) any(validatestring(x, validStrings)))
-0048 parse(p, plane, varargin{:});
-0049 part=p.Results.part;
-0050 
+0034 
+0035 <span class="comment">%% Parse inputs</span>
+0036 <span class="comment">% If first argument is a struct</span>
+0037 <span class="keyword">if</span> nargin == 2 || nargin == 4
+0038     <span class="keyword">if</span> ~isempty(varargin)
+0039         varargin = [{plane}, varargin(:)'];
+0040     <span class="keyword">end</span>
+0041     plane = f;
+0042     [v, f] = parseMeshData(v);
+0043 <span class="keyword">end</span>
+0044 
+0045 p = inputParser;
+0046 addRequired(p,<span class="string">'plane'</span>,@<a href="../../matGeom/geom3d/isPlane.html" class="code" title="function d = isPlane(plane)">isPlane</a>)
+0047 validStrings = {<span class="string">'above'</span>,<span class="string">'in'</span>,<span class="string">'below'</span>};
+0048 addParameter(p,<span class="string">'part'</span>,<span class="string">'above'</span>,@(x) any(validatestring(x, validStrings)))
+0049 parse(p, plane, varargin{:});
+0050 part=p.Results.part;
 0051 
-0052 <span class="comment">%% Algorithm</span>
-0053 <span class="comment">% Logical index to the vertices below the plane</span>
-0054 VBPl_LI = <a href="../../matGeom/geom3d/isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>(v, plane);
-0055 
-0056 <span class="comment">% Logical index to three vertices of each face</span>
-0057 FBP_LI = VBPl_LI(f);
-0058 <span class="keyword">switch</span> nargout
-0059     <span class="keyword">case</span> {1, 2}
-0060         <span class="keyword">switch</span> part
-0061             <span class="keyword">case</span> <span class="string">'above'</span>
-0062                 <span class="comment">% Faces above the plane, all three vertices == 0 -&gt; sum has to be 0</span>
-0063                 above = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(v, f, ~(sum(FBP_LI, 2) == 0) );
-0064             <span class="keyword">case</span> <span class="string">'in'</span>
-0065                 <span class="comment">% Faces in the plane, 1 or 2 vertices == 0 -&gt; sum can be 1 or 2</span>
-0066                 inside = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(v, f, ~((sum(FBP_LI, 2) &gt; 0 &amp; sum(FBP_LI, 2) &lt; 3)));
-0067             <span class="keyword">case</span> <span class="string">'below'</span>
-0068                 <span class="comment">% Faces below the plane, all three vertices == 1 -&gt; sum has to be 3</span>
-0069                 below = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(v, f, ~(sum(FBP_LI, 2) == 3) );
-0070         <span class="keyword">end</span>
-0071     <span class="keyword">case</span> {3, 6}
-0072         <span class="comment">% Faces above the plane, all three vertices == 0 -&gt; sum has to be 0</span>
-0073         above = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(v, f, ~(sum(FBP_LI, 2) == 0) );
-0074         <span class="comment">% Faces in the plane, 1 or 2 vertices == 0 -&gt; sum can be 1 or 2</span>
-0075         inside = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(v, f, ~((sum(FBP_LI, 2) &gt; 0 &amp; sum(FBP_LI, 2) &lt; 3)));
-0076         <span class="comment">% Faces below the plane, all three vertices == 1 -&gt; sum has to be 3</span>
-0077         below = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(v, f, ~(sum(FBP_LI, 2) == 3) );
-0078     <span class="keyword">otherwise</span>
-0079         error(<span class="string">'Invalid number of output arguments'</span>)
-0080 <span class="keyword">end</span>
-0081 
+0052 
+0053 <span class="comment">%% Algorithm</span>
+0054 <span class="comment">% Logical index to the vertices below the plane</span>
+0055 VBPl_LI = <a href="../../matGeom/geom3d/isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>(v, plane);
+0056 
+0057 <span class="comment">% Logical index to three vertices of each face</span>
+0058 FBP_LI = VBPl_LI(f);
+0059 <span class="keyword">switch</span> nargout
+0060     <span class="keyword">case</span> {1, 2}
+0061         <span class="keyword">switch</span> part
+0062             <span class="keyword">case</span> <span class="string">'above'</span>
+0063                 <span class="comment">% Faces above the plane, all three vertices == 0 -&gt; sum has to be 0</span>
+0064                 above = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(v, f, ~(sum(FBP_LI, 2) == 0) );
+0065             <span class="keyword">case</span> <span class="string">'in'</span>
+0066                 <span class="comment">% Faces in the plane, 1 or 2 vertices == 0 -&gt; sum can be 1 or 2</span>
+0067                 inside = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(v, f, ~((sum(FBP_LI, 2) &gt; 0 &amp; sum(FBP_LI, 2) &lt; 3)));
+0068             <span class="keyword">case</span> <span class="string">'below'</span>
+0069                 <span class="comment">% Faces below the plane, all three vertices == 1 -&gt; sum has to be 3</span>
+0070                 below = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(v, f, ~(sum(FBP_LI, 2) == 3) );
+0071         <span class="keyword">end</span>
+0072     <span class="keyword">case</span> {3, 6}
+0073         <span class="comment">% Faces above the plane, all three vertices == 0 -&gt; sum has to be 0</span>
+0074         above = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(v, f, ~(sum(FBP_LI, 2) == 0) );
+0075         <span class="comment">% Faces in the plane, 1 or 2 vertices == 0 -&gt; sum can be 1 or 2</span>
+0076         inside = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(v, f, ~((sum(FBP_LI, 2) &gt; 0 &amp; sum(FBP_LI, 2) &lt; 3)));
+0077         <span class="comment">% Faces below the plane, all three vertices == 1 -&gt; sum has to be 3</span>
+0078         below = <a href="removeMeshFaces.html" class="code" title="function varargout = removeMeshFaces(v, f, fI)">removeMeshFaces</a>(v, f, ~(sum(FBP_LI, 2) == 3) );
+0079     <span class="keyword">otherwise</span>
+0080         error(<span class="string">'Invalid number of output arguments'</span>)
+0081 <span class="keyword">end</span>
 0082 
-0083 <span class="comment">%% Parse outputs</span>
-0084 <span class="keyword">switch</span> nargout
-0085     <span class="keyword">case</span> 1
-0086         <span class="keyword">switch</span> part
-0087             <span class="keyword">case</span> <span class="string">'above'</span>
-0088                 varargout{1}=above;
-0089             <span class="keyword">case</span> <span class="string">'in'</span>
-0090                 varargout{1}=inside;
-0091             <span class="keyword">case</span> <span class="string">'below'</span>
-0092                 varargout{1}=below;
-0093         <span class="keyword">end</span>
-0094     <span class="keyword">case</span> 2
-0095         <span class="keyword">switch</span> part
-0096             <span class="keyword">case</span> <span class="string">'above'</span>
-0097                 varargout{1}=above.vertices;
-0098                 varargout{2}=above.faces;
-0099             <span class="keyword">case</span> <span class="string">'in'</span>
-0100                 varargout{1}=inside.vertices;
-0101                 varargout{2}=inside.faces;
-0102             <span class="keyword">case</span> <span class="string">'below'</span>
-0103                 varargout{1}=below.vertices;
-0104                 varargout{2}=below.faces;
-0105         <span class="keyword">end</span>
-0106     <span class="keyword">case</span> 3
-0107         varargout{1}=above;
-0108         varargout{2}=inside;
-0109         varargout{3}=below;
-0110     <span class="keyword">case</span> 6
-0111         varargout{1}=above.vertices;
-0112         varargout{2}=above.faces;
-0113         varargout{3}=inside.vertices;
-0114         varargout{4}=inside.faces;
-0115         varargout{5}=below.vertices;
-0116         varargout{6}=below.faces;
-0117     <span class="keyword">otherwise</span>
-0118         error(<span class="string">'Invalid number of output arguments'</span>)
-0119 <span class="keyword">end</span>
-0120 
-0121 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0083 
+0084 <span class="comment">%% Parse outputs</span>
+0085 <span class="keyword">switch</span> nargout
+0086     <span class="keyword">case</span> 1
+0087         <span class="keyword">switch</span> part
+0088             <span class="keyword">case</span> <span class="string">'above'</span>
+0089                 varargout{1}=above;
+0090             <span class="keyword">case</span> <span class="string">'in'</span>
+0091                 varargout{1}=inside;
+0092             <span class="keyword">case</span> <span class="string">'below'</span>
+0093                 varargout{1}=below;
+0094         <span class="keyword">end</span>
+0095     <span class="keyword">case</span> 2
+0096         <span class="keyword">switch</span> part
+0097             <span class="keyword">case</span> <span class="string">'above'</span>
+0098                 varargout{1}=above.vertices;
+0099                 varargout{2}=above.faces;
+0100             <span class="keyword">case</span> <span class="string">'in'</span>
+0101                 varargout{1}=inside.vertices;
+0102                 varargout{2}=inside.faces;
+0103             <span class="keyword">case</span> <span class="string">'below'</span>
+0104                 varargout{1}=below.vertices;
+0105                 varargout{2}=below.faces;
+0106         <span class="keyword">end</span>
+0107     <span class="keyword">case</span> 3
+0108         varargout{1}=above;
+0109         varargout{2}=inside;
+0110         varargout{3}=below;
+0111     <span class="keyword">case</span> 6
+0112         varargout{1}=above.vertices;
+0113         varargout{2}=above.faces;
+0114         varargout{3}=inside.vertices;
+0115         varargout{4}=inside.faces;
+0116         varargout{5}=below.vertices;
+0117         varargout{6}=below.faces;
+0118     <span class="keyword">otherwise</span>
+0119         error(<span class="string">'Invalid number of output arguments'</span>)
+0120 <span class="keyword">end</span>
+0121 
+0122 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

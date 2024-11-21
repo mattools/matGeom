@@ -29,22 +29,16 @@
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre class="comment">RECTTOBOX Convert rectangle data to box data.
 
-   RECT = rectToBox(BOX)
+   BOX = rectToBox(RECT)
    Converts from rectangle representation to box representation.
-   BOX is given by [XMIN XMAX YMIN YMAX].
    RECT is given by [X0 Y0 WIDTH HEIGHT], with WIDTH and HEIGHT &gt; 0
+   BOX is given by [XMIN XMAX YMIN YMAX].
 
    Example
    rectToBox
 
    See also
-   <a href="boxToRect.html" class="code" title="function rect = boxToRect(box)">boxToRect</a>, <a href="drawBox.html" class="code" title="function varargout = drawBox(box, varargin)">drawBox</a>, <a href="drawRect.html" class="code" title="function varargout = drawRect(rect, varargin)">drawRect</a>
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- Created: 2012-08-23,    using Matlab 7.9.0.529 (R2009b)
- Copyright 2012 INRA - Cepia Software Platform.</pre></div>
+   <a href="boxToRect.html" class="code" title="function rect = boxToRect(box)">boxToRect</a>, <a href="drawBox.html" class="code" title="function varargout = drawBox(box, varargin)">drawBox</a>, <a href="drawRect.html" class="code" title="function varargout = drawRect(varargin)">drawRect</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -62,24 +56,24 @@ This function is called by:
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function box = rectToBox(rect)</a>
 0002 <span class="comment">%RECTTOBOX Convert rectangle data to box data.</span>
 0003 <span class="comment">%</span>
-0004 <span class="comment">%   RECT = rectToBox(BOX)</span>
+0004 <span class="comment">%   BOX = rectToBox(RECT)</span>
 0005 <span class="comment">%   Converts from rectangle representation to box representation.</span>
-0006 <span class="comment">%   BOX is given by [XMIN XMAX YMIN YMAX].</span>
-0007 <span class="comment">%   RECT is given by [X0 Y0 WIDTH HEIGHT], with WIDTH and HEIGHT &gt; 0</span>
+0006 <span class="comment">%   RECT is given by [X0 Y0 WIDTH HEIGHT], with WIDTH and HEIGHT &gt; 0</span>
+0007 <span class="comment">%   BOX is given by [XMIN XMAX YMIN YMAX].</span>
 0008 <span class="comment">%</span>
 0009 <span class="comment">%   Example</span>
 0010 <span class="comment">%   rectToBox</span>
 0011 <span class="comment">%</span>
 0012 <span class="comment">%   See also</span>
 0013 <span class="comment">%   boxToRect, drawBox, drawRect</span>
-0014 <span class="comment">%</span>
+0014 
 0015 <span class="comment">% ------</span>
 0016 <span class="comment">% Author: David Legland</span>
-0017 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0018 <span class="comment">% Created: 2012-08-23,    using Matlab 7.9.0.529 (R2009b)</span>
-0019 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
+0017 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0018 <span class="comment">% Created: 2012-08-23, using Matlab 7.9.0.529 (R2009b)</span>
+0019 <span class="comment">% Copyright 2012-2024 INRA - Cepia Software Platform</span>
 0020 
 0021 box = [rect(:,1) rect(:,1)+rect(:,3) rect(:,2) rect(:,2)+rect(:,4)];</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

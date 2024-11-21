@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of circleMesh</title>
+  <meta name="keywords" content="circleMesh">
+  <meta name="description" content="CIRCLEMESH Create a mesh defined by a 3D circle.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; circleMesh.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>circleMesh
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CIRCLEMESH Create a mesh defined by a 3D circle.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = circleMesh(circle, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CIRCLEMESH Create a mesh defined by a 3D circle.
+
+   [V, F] = cylinderMesh(CYL)
+   Computes vertex coordinates V and face vertex indices F of a mesh
+   representing a 3D circle given as [xc yc zc R theta phi psi].
+
+   [V, F] = cylinderMesh(..., NAME, VALUE);
+   Specifies one or several options using parameter name-value pairs.
+   Available options are:
+       'nP' the number of points represeting the perimeter
+       'nR' the number of points along the radius excluding the center
+
+   Example
+     c = [10 20 30 50 70 60 50];
+     [v, f] = circleMesh(c, 'nP',100, 'nR',50);
+     figure('color','w');
+     drawMesh(v, f, 'facecolor', 'r');
+     drawCircle3d(c,'LineWidth',2, 'Color','g');
+     view(3); axis equal;
+
+   See also
+   <a href="cylinderMesh.html" class="code" title="function varargout = cylinderMesh(cyl, varargin)">cylinderMesh</a>, circles3d</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/circleToPolygon.html" class="code" title="function varargout = circleToPolygon(circle, varargin)">circleToPolygon</a>	CIRCLETOPOLYGON Convert a circle into a series of points.</li><li><a href="../../matGeom/geom3d/transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="cylinderMesh.html" class="code" title="function varargout = cylinderMesh(cyl, varargin)">cylinderMesh</a>	CYLINDERMESH Create a 3D mesh representing a cylinder.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = circleMesh(circle, varargin)</a>
+0002 <span class="comment">%CIRCLEMESH Create a mesh defined by a 3D circle.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V, F] = cylinderMesh(CYL)</span>
+0005 <span class="comment">%   Computes vertex coordinates V and face vertex indices F of a mesh</span>
+0006 <span class="comment">%   representing a 3D circle given as [xc yc zc R theta phi psi].</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   [V, F] = cylinderMesh(..., NAME, VALUE);</span>
+0009 <span class="comment">%   Specifies one or several options using parameter name-value pairs.</span>
+0010 <span class="comment">%   Available options are:</span>
+0011 <span class="comment">%       'nP' the number of points represeting the perimeter</span>
+0012 <span class="comment">%       'nR' the number of points along the radius excluding the center</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   Example</span>
+0015 <span class="comment">%     c = [10 20 30 50 70 60 50];</span>
+0016 <span class="comment">%     [v, f] = circleMesh(c, 'nP',100, 'nR',50);</span>
+0017 <span class="comment">%     figure('color','w');</span>
+0018 <span class="comment">%     drawMesh(v, f, 'facecolor', 'r');</span>
+0019 <span class="comment">%     drawCircle3d(c,'LineWidth',2, 'Color','g');</span>
+0020 <span class="comment">%     view(3); axis equal;</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   See also</span>
+0023 <span class="comment">%   cylinderMesh, circles3d</span>
+0024 
+0025 <span class="comment">% ------</span>
+0026 <span class="comment">% Author: oqilipo</span>
+0027 <span class="comment">% E-mail: N/A</span>
+0028 <span class="comment">% Created: 2023-07-30, using Matlab 9.13.0.2080170 (R2022b) Update 1</span>
+0029 <span class="comment">% Copyright 2023-2024</span>
+0030 
+0031 parser = inputParser;
+0032 addParameter(parser, <span class="string">'nP'</span>, 60, @(x) validateattributes(x,{<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0033     {<span class="string">'integer'</span>,<span class="string">'scalar'</span>,<span class="string">'&gt;='</span>,3}));
+0034 addParameter(parser, <span class="string">'nR'</span>, 10, @(x) validateattributes(x,{<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0035     {<span class="string">'integer'</span>,<span class="string">'scalar'</span>,<span class="string">'&gt;='</span>,1}));
+0036 parse(parser, varargin{:});
+0037 nP = parser.Results.nP;
+0038 nR = parser.Results.nR;
+0039 nR = nR+1;
+0040 
+0041 <span class="comment">% Radius</span>
+0042 r = circle(4); 
+0043 
+0044 <span class="comment">% Check that the number of points of the inner circles stay valid</span>
+0045 <span class="keyword">if</span> (nP-(nR*2-4))&lt;3
+0046     nR = floor(((nP-3)+4)/2);
+0047 <span class="keyword">end</span>
+0048 
+0049 rr = linspace(0, r, nR);
+0050 rr = rr(2:end);
+0051 cp = fliplr(repmat(nP,1,nR-1)-(0:2:2*nR-4));
+0052 
+0053 <span class="comment">% Create points of the inner circles and the outer circle</span>
+0054 center = [0 0];
+0055 vertices = nan(sum(cp)+1,2);
+0056 vertices(1,:) = center;
+0057 sIdx = 2;
+0058 eIdx = 1;
+0059 <span class="keyword">for</span> i=1:length(rr)
+0060     eIdx = eIdx+cp(i);
+0061     vertices(sIdx:eIdx,:) = <a href="../../matGeom/geom2d/circleToPolygon.html" class="code" title="function varargout = circleToPolygon(circle, varargin)">circleToPolygon</a>([center rr(i)], cp(i));
+0062     sIdx = eIdx+1;
+0063 <span class="keyword">end</span>
+0064 
+0065 <span class="comment">% Triangulate points</span>
+0066 DT = delaunayTriangulation(vertices);
+0067 faces = DT.ConnectivityList;
+0068 vertices(:,3) = 0;
+0069 
+0070 <span class="comment">% Transform points from 2D to 3D</span>
+0071 tfm = localToGlobal3d([circle(1:3) circle(5:7)]);
+0072 vertices = <a href="../../matGeom/geom3d/transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(vertices, tfm);
+0073 
+0074 <span class="comment">% Format output</span>
+0075 varargout = formatMeshOutput(nargout, vertices, faces);
+0076 
+0077 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

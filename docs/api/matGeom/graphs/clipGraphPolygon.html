@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of clipGraphPolygon</title>
+  <meta name="keywords" content="clipGraphPolygon">
+  <meta name="description" content="CLIPGRAPHPOLYGON  Clip a graph with a polygon.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; clipGraphPolygon.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>clipGraphPolygon
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CLIPGRAPHPOLYGON  Clip a graph with a polygon.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [nodes2, edges2] = clipGraphPolygon(nodes, edges, poly) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CLIPGRAPHPOLYGON  Clip a graph with a polygon.
+
+   [NODES2, EDGES2] = clipGraphPolygon(NODES, EDGES, POLY)
+   Clips the graph defined by nodes NODES and edges EDGES with the polygon
+   given in POLY. POLY is a N-by-2 array of vertices.
+   The result is a new graph containing nodes inside the polygon, as well
+   as nodes created by the intersection of edges with the polygon.
+
+   Example
+     elli = [50 50 40 20 30];
+     figure; hold on;
+     drawEllipse(elli, 'k');
+     poly = ellipseToPolygon(elli, 200);
+     box = polygonBounds(poly);
+     germs = randomPointInPolygon(poly, 100);
+     drawPoint(germs, 'b.');
+     [n, e, f] = boundedVoronoi2d(box, germs);
+     [n2, e2] = clipGraphPolygon(n, e, poly);
+     drawGraphEdges(n2, e2);
+
+   See also
+     graphs, <a href="drawGraph.html" class="code" title="function varargout = drawGraph(varargin)">drawGraph</a>, <a href="clipGraph.html" class="code" title="function varargout = clipGraph(nodes, edges, varargin)">clipGraph</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/polygons2d/intersectEdgePolygon.html" class="code" title="function [intersects, inds] = intersectEdgePolygon(edge, poly, varargin)">intersectEdgePolygon</a>	INTERSECTEDGEPOLYGON  Intersection point of an edge with a polygon.</li><li><a href="../../matGeom/polygons2d/isPointInPolygon.html" class="code" title="function b = isPointInPolygon(point, poly)">isPointInPolygon</a>	ISPOINTINPOLYGON Test if a point is located inside a polygon.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [nodes2, edges2] = clipGraphPolygon(nodes, edges, poly)</a>
+0002 <span class="comment">%CLIPGRAPHPOLYGON  Clip a graph with a polygon.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [NODES2, EDGES2] = clipGraphPolygon(NODES, EDGES, POLY)</span>
+0005 <span class="comment">%   Clips the graph defined by nodes NODES and edges EDGES with the polygon</span>
+0006 <span class="comment">%   given in POLY. POLY is a N-by-2 array of vertices.</span>
+0007 <span class="comment">%   The result is a new graph containing nodes inside the polygon, as well</span>
+0008 <span class="comment">%   as nodes created by the intersection of edges with the polygon.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Example</span>
+0011 <span class="comment">%     elli = [50 50 40 20 30];</span>
+0012 <span class="comment">%     figure; hold on;</span>
+0013 <span class="comment">%     drawEllipse(elli, 'k');</span>
+0014 <span class="comment">%     poly = ellipseToPolygon(elli, 200);</span>
+0015 <span class="comment">%     box = polygonBounds(poly);</span>
+0016 <span class="comment">%     germs = randomPointInPolygon(poly, 100);</span>
+0017 <span class="comment">%     drawPoint(germs, 'b.');</span>
+0018 <span class="comment">%     [n, e, f] = boundedVoronoi2d(box, germs);</span>
+0019 <span class="comment">%     [n2, e2] = clipGraphPolygon(n, e, poly);</span>
+0020 <span class="comment">%     drawGraphEdges(n2, e2);</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   See also</span>
+0023 <span class="comment">%     graphs, drawGraph, clipGraph</span>
+0024 <span class="comment">%</span>
+0025 
+0026 <span class="comment">% ------</span>
+0027 <span class="comment">% Author: David Legland</span>
+0028 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0029 <span class="comment">% Created: 2012-02-24, using Matlab 7.9.0.529 (R2009b)</span>
+0030 <span class="comment">% Copyright 2012-2024 INRA - Cepia Software Platform</span>
+0031 
+0032 <span class="comment">% Algorithm summary:</span>
+0033 <span class="comment">% * For each edge not outside do:</span>
+0034 <span class="comment">%    * clip edge with poly</span>
+0035 <span class="comment">%    * if no inter</span>
+0036 <span class="comment">%    *    add current edge (same vertex indices)</span>
+0037 <span class="comment">%    *    continue</span>
+0038 <span class="comment">%    * end</span>
+0039 <span class="comment">%    * add intersections to list, compute their indices</span>
+0040 <span class="comment">%    * create the new edge(s)</span>
+0041 
+0042 <span class="comment">%% Clip the nodes</span>
+0043 
+0044 <span class="comment">% find index of nodes inside clipping window</span>
+0045 nodeInside = <a href="../../matGeom/polygons2d/isPointInPolygon.html" class="code" title="function b = isPointInPolygon(point, poly)">isPointInPolygon</a>(nodes, poly);
+0046 
+0047 innerNodeInds = find(nodeInside);
+0048 
+0049 <span class="comment">% create correspondance between original nodes and inside nodes</span>
+0050 nodeIndsMap = zeros(size(nodes, 1), 1);
+0051 <span class="keyword">for</span> i = 1:length(innerNodeInds)
+0052     nodeIndsMap(innerNodeInds(i)) = i;
+0053 <span class="keyword">end</span>
+0054 
+0055 <span class="comment">% select clipped nodes</span>
+0056 nodes2 = nodes(innerNodeInds, :);
+0057 
+0058 
+0059 <span class="comment">%% Clip the edges</span>
+0060 
+0061 insideEnds = nodeInside(edges);
+0062 
+0063 <span class="comment">% allocate memory for edges with at least one vertex inside</span>
+0064 nEdges2 = sum(sum(insideEnds, 2) ~= 0);
+0065 
+0066 <span class="comment">% allocate memory for at least edges inside</span>
+0067 edges2 = zeros(nEdges2, 2);
+0068 
+0069 nEdges = size(edges, 1);
+0070 
+0071 <span class="comment">% index of next edge</span>
+0072 iEdge2 = 1;
+0073 
+0074 <span class="comment">% index of next vertex</span>
+0075 iNode2 = size(nodes2, 1) + 1;
+0076 
+0077 
+0078 <span class="comment">% iterate over all edges</span>
+0079 <span class="keyword">for</span> iEdge = 1:nEdges
+0080     <span class="comment">% index of edge vertices</span>
+0081     v1 = edges(iEdge, 1);
+0082     v2 = edges(iEdge, 2);
+0083     
+0084     <span class="comment">% compute intersection(s) of current edge with boundary</span>
+0085     edge0 = [nodes(v1,:) nodes(v2,:)]; 
+0086     intersects = <a href="../../matGeom/polygons2d/intersectEdgePolygon.html" class="code" title="function [intersects, inds] = intersectEdgePolygon(edge, poly, varargin)">intersectEdgePolygon</a>(edge0, poly);
+0087     
+0088     <span class="comment">% process edges that do not cross polygon boundary</span>
+0089     <span class="keyword">if</span> isempty(intersects)
+0090         <span class="keyword">if</span> nodeInside(v1) &amp;&amp; nodeInside(v2)
+0091             <span class="comment">% current edge is totally inside the clipping polygon</span>
+0092             edges2(iEdge2,:) = nodeIndsMap([v1 v2]);
+0093             iEdge2 = iEdge2 + 1;
+0094         <span class="keyword">end</span>
+0095         <span class="keyword">continue</span>;
+0096     <span class="keyword">end</span>
+0097     
+0098     <span class="comment">% add intersection(s) to the vertex array</span>
+0099     nInters = size(intersects, 1);
+0100     intersectInds = iNode2:iNode2+nInters-1;
+0101     nodes2(intersectInds,:) = intersects;
+0102     iNode2 = iNode2 + nInters;
+0103     
+0104     <span class="comment">% concatenate vertex indices with indices of extremities inside poly</span>
+0105     <span class="keyword">if</span> nodeInside(v1)
+0106         intersectInds = [nodeIndsMap(v1) intersectInds]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0107     <span class="keyword">end</span>
+0108     <span class="keyword">if</span> nodeInside(v2)
+0109         intersectInds = [intersectInds nodeIndsMap(v2)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0110     <span class="keyword">end</span>
+0111     
+0112     <span class="comment">% create new edge for each couple of contiguous intersection</span>
+0113     <span class="keyword">while</span> length(intersectInds) &gt; 1
+0114         edges2(iEdge2, :) = intersectInds(1:2);
+0115         intersectInds(1:2) = [];
+0116         iEdge2 = iEdge2 + 1;
+0117     <span class="keyword">end</span>
+0118     
+0119     <span class="keyword">if</span> ~isempty(intersectInds)
+0120         warning(<span class="string">'matGeom:graphs:AlgorithmicError'</span>, <span class="keyword">...</span>
+0121             <span class="string">'edge %d has odd number of intersects'</span>, iEdge);
+0122     <span class="keyword">end</span>
+0123 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

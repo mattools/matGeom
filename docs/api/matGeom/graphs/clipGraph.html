@@ -1,0 +1,289 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of clipGraph</title>
+  <meta name="keywords" content="clipGraph">
+  <meta name="description" content="CLIPGRAPH Clip a graph with a rectangular area.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; clipGraph.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>clipGraph
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CLIPGRAPH Clip a graph with a rectangular area.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = clipGraph(nodes, edges, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CLIPGRAPH Clip a graph with a rectangular area.
+
+   [N2, E2] = clipGraph(N, E, BOX);
+   [N2, E2, F2] = clipGraph(N, E, F, BOX);
+   N is an array ov vertices, E an array of edges, containing indices of
+   first ans second vertices, and F (optional) is either a matrice or a
+   cell array containing indices of vertices for each face.
+   BOX is either a box given as a matrix: [XMIN XMAX;YMIN YMAX], or a row
+   vector following matlab axis format: [XMIN XMAX YMIN YMAX].
+
+   Example
+     % create a simple graph structure
+     n = [0 60; 40 100; 40 60; 60 40; 100 40; 60 0];
+     e = [1 3; 2 3; 3 4; 4 5; 4 6; 5 6];
+     figure(1); clf; hold on;
+     drawGraph(n, e);
+     axis equal; axis([-10 110 -10 110]);
+     % clip with a box
+     box = [10 90 10 90];
+     drawBox(box, 'k');
+     [n2, e2] = clipGraph(n, e, box);
+     drawGraphEdges(n2, e2, 'color', 'b', 'linewidth', 2);
+     
+   See also
+     graphs, <a href="drawGraph.html" class="code" title="function varargout = drawGraph(varargin)">drawGraph</a>, <a href="clipGraphPolygon.html" class="code" title="function [nodes2, edges2] = clipGraphPolygon(nodes, edges, poly)">clipGraphPolygon</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom2d/angleSort.html" class="code" title="function varargout = angleSort(pts, varargin)">angleSort</a>	ANGLESORT Sort points in the plane according to their angle to origin.</li><li><a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>	CENTROID Compute centroid (center of mass) of a set of points.</li><li><a href="../../matGeom/geom2d/clipEdge.html" class="code" title="function edge2 = clipEdge(edge, box)">clipEdge</a>	CLIPEDGE Clip an edge with a rectangular box.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="boundedCentroidalVoronoi2d.html" class="code" title="function varargout = boundedCentroidalVoronoi2d(germs, box, varargin)">boundedCentroidalVoronoi2d</a>	BOUNDEDCENTROIDALVORONOI2D Create a 2D Centroidal Voronoi Tesselation in a box.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = clipGraph(nodes, edges, varargin)</a>
+0002 <span class="comment">%CLIPGRAPH Clip a graph with a rectangular area.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [N2, E2] = clipGraph(N, E, BOX);</span>
+0005 <span class="comment">%   [N2, E2, F2] = clipGraph(N, E, F, BOX);</span>
+0006 <span class="comment">%   N is an array ov vertices, E an array of edges, containing indices of</span>
+0007 <span class="comment">%   first ans second vertices, and F (optional) is either a matrice or a</span>
+0008 <span class="comment">%   cell array containing indices of vertices for each face.</span>
+0009 <span class="comment">%   BOX is either a box given as a matrix: [XMIN XMAX;YMIN YMAX], or a row</span>
+0010 <span class="comment">%   vector following matlab axis format: [XMIN XMAX YMIN YMAX].</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%     % create a simple graph structure</span>
+0014 <span class="comment">%     n = [0 60; 40 100; 40 60; 60 40; 100 40; 60 0];</span>
+0015 <span class="comment">%     e = [1 3; 2 3; 3 4; 4 5; 4 6; 5 6];</span>
+0016 <span class="comment">%     figure(1); clf; hold on;</span>
+0017 <span class="comment">%     drawGraph(n, e);</span>
+0018 <span class="comment">%     axis equal; axis([-10 110 -10 110]);</span>
+0019 <span class="comment">%     % clip with a box</span>
+0020 <span class="comment">%     box = [10 90 10 90];</span>
+0021 <span class="comment">%     drawBox(box, 'k');</span>
+0022 <span class="comment">%     [n2, e2] = clipGraph(n, e, box);</span>
+0023 <span class="comment">%     drawGraphEdges(n2, e2, 'color', 'b', 'linewidth', 2);</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   See also</span>
+0026 <span class="comment">%     graphs, drawGraph, clipGraphPolygon</span>
+0027 <span class="comment">%</span>
+0028 
+0029 <span class="comment">% ------</span>
+0030 <span class="comment">% Author: David Legland</span>
+0031 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0032 <span class="comment">% Created: 2007-01-18</span>
+0033 <span class="comment">% Copyright 2007-2024 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas</span>
+0034 
+0035 <span class="comment">%% Format inputs</span>
+0036 
+0037 <span class="comment">% extract input arguments</span>
+0038 faces = [];
+0039 <span class="keyword">if</span> isscalar(varargin)
+0040     box     = varargin{1};
+0041 <span class="keyword">elseif</span> length(varargin)==2
+0042     faces   = varargin{1};
+0043     box     = varargin{2};
+0044 <span class="keyword">else</span>
+0045     error(<span class="string">'Wrong number of  arguments in clipGraph'</span>);
+0046 <span class="keyword">end</span>
+0047 
+0048 <span class="comment">% uniformization of input for box.</span>
+0049 box = box';
+0050 box = box(:);
+0051 
+0052 <span class="comment">% accuracy of numeric computations</span>
+0053 ACC = 1e-14;
+0054 
+0055 
+0056 <span class="comment">%% Get bounding lines</span>
+0057 
+0058 <span class="comment">% get bounds of the box</span>
+0059 xmin = box(1);
+0060 xmax = box(2);
+0061 ymin = box(3);
+0062 ymax = box(4);
+0063 
+0064 <span class="comment">% create box corners</span>
+0065 corners = [ <span class="keyword">...</span>
+0066     xmin ymin; <span class="keyword">...</span>
+0067     xmin ymax; <span class="keyword">...</span>
+0068     xmax ymin; <span class="keyword">...</span>
+0069     xmax ymax]; <span class="keyword">...</span>
+0070 
+0071 <span class="comment">%% Clip the nodes</span>
+0072 
+0073 <span class="comment">% find nodes inside clipping window</span>
+0074 insideNodes = <span class="keyword">...</span>
+0075     nodes(:,1)-xmin&gt;ACC &amp; nodes(:,1)-xmax&lt;ACC &amp; <span class="keyword">...</span>
+0076     nodes(:,2)-ymin&gt;ACC &amp; nodes(:,2)-ymax&lt;ACC;
+0077 
+0078 <span class="comment">% convert to indices</span>
+0079 indNodes = find(insideNodes);
+0080 
+0081 <span class="comment">% create correspondance between original nodes and inside nodes</span>
+0082 hashNodes = zeros(size(nodes, 1), 1);
+0083 <span class="keyword">for</span> i = 1:length(indNodes)
+0084     hashNodes(indNodes(i)) = i;
+0085 <span class="keyword">end</span>
+0086 
+0087 <span class="comment">% select clipped nodes</span>
+0088 nodes2 = nodes(indNodes, :);
+0089 
+0090 
+0091 <span class="comment">%% Clip edges</span>
+0092 
+0093 <span class="comment">% initialize empty array</span>
+0094 edges2 = zeros([0 2]);
+0095 
+0096 <span class="comment">% create correspondance map between old edges and clipped edges.</span>
+0097 hashEdges = zeros(size(edges, 1), 1);
+0098 
+0099 
+0100 <span class="comment">% iterate over each edge</span>
+0101 <span class="keyword">for</span> e = 1:size(edges, 1)    
+0102     <span class="comment">% current edge</span>
+0103     edge = [nodes(edges(e, 1), :) nodes(edges(e, 2), :)];
+0104     
+0105     <span class="comment">% flags to indicate whether nodes are inside box or not</span>
+0106     in1 = ismember(edges(e, 1), indNodes);
+0107     in2 = ismember(edges(e, 2), indNodes);
+0108     
+0109     <span class="comment">% check if edge is totally inside window -&gt; no clip</span>
+0110     <span class="keyword">if</span> in1 &amp;&amp; in2
+0111         edges2 = [edges2; hashNodes(edges(e, :))']; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0112         hashEdges(e) = size(edges2, 1);
+0113         <span class="keyword">continue</span>;
+0114     <span class="keyword">end</span>
+0115 
+0116     <span class="comment">% check that edge is not totally clipped -&gt; no edge</span>
+0117     <span class="keyword">if</span> edge(1)-xmin&lt;ACC &amp;&amp; edge(3)-xmin&lt;ACC, <span class="keyword">continue</span>; <span class="keyword">end</span>
+0118     <span class="keyword">if</span> edge(1)-xmax&gt;ACC &amp;&amp; edge(3)-xmax&gt;ACC, <span class="keyword">continue</span>; <span class="keyword">end</span>
+0119     <span class="keyword">if</span> edge(2)-ymin&lt;ACC &amp;&amp; edge(4)-ymin&lt;ACC, <span class="keyword">continue</span>; <span class="keyword">end</span>
+0120     <span class="keyword">if</span> edge(2)-ymax&gt;ACC &amp;&amp; edge(4)-ymax&gt;ACC, <span class="keyword">continue</span>; <span class="keyword">end</span>
+0121    
+0122     <span class="comment">% otherwise, we have to clip the edge !</span>
+0123     edge = <a href="../../matGeom/geom2d/clipEdge.html" class="code" title="function edge2 = clipEdge(edge, box)">clipEdge</a>(edge, [box(1) box(2); box(3) box(4)]);
+0124     
+0125     <span class="comment">% display debug info</span>
+0126     <span class="comment">% disp(sprintf('clip edge n°%2d, from %2d to %2d', e, edges(e,1), edges(e,2)));</span>
+0127     
+0128     <span class="comment">% Node for first vertex</span>
+0129     <span class="keyword">if</span> ~in1
+0130         nodes2 = [nodes2; edge([1 2])]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0131         indN1 = size(nodes2, 1);
+0132     <span class="keyword">else</span>
+0133         indN1 = hashNodes(edges(e, 1));
+0134     <span class="keyword">end</span>
+0135     
+0136     <span class="comment">% Node for second vertex</span>
+0137     <span class="keyword">if</span> ~in2
+0138         nodes2 = [nodes2; edge([3 4])]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0139         indN2 = size(nodes2, 1);
+0140     <span class="keyword">else</span>
+0141         indN2 = hashNodes(edges(e, 2));
+0142     <span class="keyword">end</span>
+0143     
+0144     <span class="comment">% add clipped edge to the list</span>
+0145     edges2 = [edges2; indN1 indN2]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0146     hashEdges(e) = size(edges2, 1);
+0147 <span class="keyword">end</span>
+0148     
+0149 
+0150 <span class="comment">%% Clip the faces</span>
+0151 faces2 = {};
+0152 <span class="keyword">for</span> f = 1:length(faces)
+0153     <span class="comment">% indices of vertices of current face</span>
+0154     face = faces{f};
+0155     
+0156     <span class="comment">% if the face is not clipped, use directly new indices of nodes</span>
+0157     face2 = hashNodes(face)';
+0158     <span class="keyword">if</span> ~ismember(0, face2)
+0159         faces2 = [faces2, {face2}]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0160         <span class="keyword">continue</span>;
+0161     <span class="keyword">end</span>
+0162     
+0163     <span class="comment">% At least one vertex is clipped. Here is some more special processing</span>
+0164     
+0165     <span class="comment">% edges of current face</span>
+0166     faceEdges = sort([face' face([2:end 1])'], 2);
+0167     
+0168     <span class="comment">% indices of face edges in edges array</span>
+0169     indEdges = ismember(edges, faceEdges, <span class="string">'rows'</span>);
+0170     
+0171     <span class="comment">% convert to indices of edges in clipped edges array. indEdges with</span>
+0172     <span class="comment">% value=0 correspond to totally clipped edges, and can be removed.</span>
+0173     indEdges = hashEdges(indEdges);
+0174     indEdges = indEdges(indEdges~=0);
+0175     
+0176     <span class="comment">% case of face totally clipped: break and continuue with next face</span>
+0177     <span class="keyword">if</span> isempty(indEdges)
+0178         <span class="keyword">continue</span>;
+0179     <span class="keyword">end</span>
+0180     
+0181     <span class="comment">% extract indices of vertices of the clipped face</span>
+0182     face2 = edges2(indEdges, :);
+0183     face2 = unique(face2(:));
+0184 
+0185     <span class="comment">% Test whether one should add one of the corner of the box.</span>
+0186     poly = [nodes(face, 1) nodes(face, 2)];
+0187     ind = inpolygon(corners(:,1), corners(:,2), poly(:,1), poly(:,2));
+0188     <span class="keyword">if</span> sum(ind)&gt;0
+0189         nodes2 = [nodes2; corners(ind, :)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0190         face2 = [face2; size(nodes2, 1)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0191     <span class="keyword">end</span>
+0192     
+0193     <span class="comment">% vertices of the face, as points</span>
+0194     faceNodes = nodes2(face2, :);
+0195 
+0196     <span class="comment">% sort vertices according to their angle around the centroid</span>
+0197     [faceNodes, I] = <a href="../../matGeom/geom2d/angleSort.html" class="code" title="function varargout = angleSort(pts, varargin)">angleSort</a>(faceNodes, <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>(faceNodes)); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0198     
+0199     <span class="comment">% add current face to list of faces</span>
+0200     faces2 = [faces2, {face2(I)'}]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0201 <span class="keyword">end</span>
+0202 
+0203 
+0204 <span class="comment">%% Format output arguments</span>
+0205 
+0206 <span class="comment">% clean up nodes to ensure coord correspond to clipping box.</span>
+0207 nodes2(:,1) = min(max(nodes2(:,1), box(1)), box(2));
+0208 nodes2(:,2) = min(max(nodes2(:,2), box(3)), box(4));
+0209 
+0210 <span class="keyword">if</span> nargout==2
+0211     varargout{1} = nodes2;
+0212     varargout{2} = edges2;
+0213 <span class="keyword">elseif</span> nargout==3
+0214     varargout{1} = nodes2;
+0215     varargout{2} = edges2;
+0216     varargout{3} = faces2;
+0217 <span class="keyword">end</span>    
+0218</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

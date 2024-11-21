@@ -24,7 +24,7 @@
 <div class="box"><strong>DRAWBEZIERCURVE Draw a cubic bezier curve defined by 4 control points.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function varargout = drawBezierCurve(points, varargin) </strong></div>
+<div class="box"><strong>function varargout = drawBezierCurve(varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre class="comment">DRAWBEZIERCURVE Draw a cubic bezier curve defined by 4 control points.
@@ -51,13 +51,7 @@
      drawBezierCurve([0 0;5 10;10 5;10 0], 'linewidth', 2, 'color', 'g');
 
    See also
-     drawPolyline, <a href="cubicBezierToPolyline.html" class="code" title="function varargout = cubicBezierToPolyline(points, varargin)">cubicBezierToPolyline</a>
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- Created: 2011-03-16,    using Matlab 7.9.0.529 (R2009b)
- Copyright 2011 INRA - Cepia Software Platform.</pre></div>
+     drawPolyline, <a href="cubicBezierToPolyline.html" class="code" title="function varargout = cubicBezierToPolyline(points, varargin)">cubicBezierToPolyline</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -72,7 +66,7 @@ This function is called by:
 
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawBezierCurve(points, varargin)</a>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawBezierCurve(varargin)</a>
 0002 <span class="comment">%DRAWBEZIERCURVE Draw a cubic bezier curve defined by 4 control points.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   drawBezierCurve(POINTS)</span>
@@ -99,23 +93,23 @@ This function is called by:
 0025 <span class="comment">%   See also</span>
 0026 <span class="comment">%     drawPolyline, cubicBezierToPolyline</span>
 0027 <span class="comment">%</span>
-0028 <span class="comment">% ------</span>
-0029 <span class="comment">% Author: David Legland</span>
-0030 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0031 <span class="comment">% Created: 2011-03-16,    using Matlab 7.9.0.529 (R2009b)</span>
-0032 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
-0033 
-0034 <span class="comment">%   HISTORY</span>
-0035 <span class="comment">%   2011-10-11 add management of axes handle</span>
-0036 
-0037 <span class="comment">% extract handle of axis to draw on</span>
-0038 <span class="keyword">if</span> isAxisHandle(points)
-0039     ax = points;
-0040     points = varargin{1};
-0041     varargin(1) = [];
-0042 <span class="keyword">else</span>
-0043     ax = gca;
-0044 <span class="keyword">end</span>
+0028 
+0029 <span class="comment">% ------</span>
+0030 <span class="comment">% Author: David Legland</span>
+0031 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0032 <span class="comment">% Created: 2011-03-16, using Matlab 7.9.0.529 (R2009b)</span>
+0033 <span class="comment">% Copyright 2011-2024 INRA - Cepia Software Platform</span>
+0034 
+0035 <span class="comment">% extract handle of axis to draw on</span>
+0036 <span class="keyword">if</span> isAxisHandle(varargin{1})
+0037     ax = varargin{1};
+0038     varargin(1) = [];
+0039 <span class="keyword">else</span>
+0040     ax = gca;
+0041 <span class="keyword">end</span>
+0042 
+0043 points = varargin{1};
+0044 varargin(1) = [];
 0045 
 0046 <span class="comment">% default number of discretization steps</span>
 0047 N = 64;
@@ -123,7 +117,7 @@ This function is called by:
 0049 <span class="comment">% check if discretization step is specified</span>
 0050 <span class="keyword">if</span> ~isempty(varargin)
 0051     var = varargin{1};
-0052     <span class="keyword">if</span> length(var) == 1 &amp;&amp; isnumeric(var)
+0052     <span class="keyword">if</span> isscalar(var) &amp;&amp; isnumeric(var)
 0053         N = round(var);
 0054         varargin(1) = [];
 0055     <span class="keyword">end</span>
@@ -139,6 +133,6 @@ This function is called by:
 0065 <span class="keyword">if</span> nargout &gt; 0
 0066     varargout = {h};
 0067 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

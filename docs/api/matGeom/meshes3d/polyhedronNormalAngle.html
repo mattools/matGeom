@@ -36,8 +36,8 @@
    vertex whose index is given by IND.
 
    THETA = polyhedraNormalAngle(GRAPH, IND);
-   Uses a graph structure. GRAPH should contain at least fields : 'nodes'
-   and 'faces'.
+   Uses a graph structure for definineg polyhedron. GRAPH structure should
+   contain at least two fields : 'nodes' and 'faces'.
 
    Example :
    % create a simple (irregular) tetrahedra
@@ -48,17 +48,10 @@
    % sum of normal angles should be equal to 4*pi :
    sum(theta)
 
-
-   TODO works only for polyhedra with convex faces ! ! !
+   Note: works only for polyhedra with convex faces!
 
    See also
-   <a href="polyhedra.html" class="code" title="function polyhedra(varargin)">polyhedra</a>, polygon3dNormalAngle
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- Created: 2005-11-30
- Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</pre></div>
+   <a href="polyhedra.html" class="code" title="function polyhedra(varargin)">polyhedra</a>, polygon3dNormalAngle</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -83,8 +76,8 @@ This function is called by:
 0008 <span class="comment">%   vertex whose index is given by IND.</span>
 0009 <span class="comment">%</span>
 0010 <span class="comment">%   THETA = polyhedraNormalAngle(GRAPH, IND);</span>
-0011 <span class="comment">%   Uses a graph structure. GRAPH should contain at least fields : 'nodes'</span>
-0012 <span class="comment">%   and 'faces'.</span>
+0011 <span class="comment">%   Uses a graph structure for definineg polyhedron. GRAPH structure should</span>
+0012 <span class="comment">%   contain at least two fields : 'nodes' and 'faces'.</span>
 0013 <span class="comment">%</span>
 0014 <span class="comment">%   Example :</span>
 0015 <span class="comment">%   % create a simple (irregular) tetrahedra</span>
@@ -95,79 +88,75 @@ This function is called by:
 0020 <span class="comment">%   % sum of normal angles should be equal to 4*pi :</span>
 0021 <span class="comment">%   sum(theta)</span>
 0022 <span class="comment">%</span>
-0023 <span class="comment">%</span>
-0024 <span class="comment">%   TODO works only for polyhedra with convex faces ! ! !</span>
-0025 <span class="comment">%</span>
-0026 <span class="comment">%   See also</span>
-0027 <span class="comment">%   polyhedra, polygon3dNormalAngle</span>
-0028 <span class="comment">%</span>
-0029 <span class="comment">% ------</span>
-0030 <span class="comment">% Author: David Legland</span>
-0031 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0032 <span class="comment">% Created: 2005-11-30</span>
-0033 <span class="comment">% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
-0034 
-0035 
-0036 <span class="keyword">if</span> length(varargin)==4
-0037     nodes = varargin{1};
-0038     faces = varargin{3};
-0039     ind   = varargin{4};
-0040     
-0041 <span class="keyword">elseif</span> length(varargin)==3
-0042     nodes = varargin{1};
-0043     faces = varargin{2};
-0044     ind   = varargin{3};
-0045     
-0046 <span class="keyword">elseif</span> length(varargin)==2
-0047     graph = varargin{1};
-0048     nodes = graph.nodes;
-0049     faces = graph.faces;
-0050     ind   = varargin{2};
-0051 <span class="keyword">else</span>
-0052     error(<span class="string">'wrong number of arguments'</span>);
-0053 <span class="keyword">end</span>
-0054 
-0055 
-0056 <span class="comment">% number of angles to compute</span>
-0057 na = length(ind);
-0058 
-0059 theta = zeros(na, 1);
-0060 <span class="keyword">for</span> i=1:na
+0023 <span class="comment">%   Note: works only for polyhedra with convex faces!</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   See also</span>
+0026 <span class="comment">%   polyhedra, polygon3dNormalAngle</span>
+0027 
+0028 <span class="comment">% ------</span>
+0029 <span class="comment">% Author: David Legland</span>
+0030 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0031 <span class="comment">% Created: 2005-11-30</span>
+0032 <span class="comment">% Copyright 2005-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)</span>
+0033 
+0034 <span class="keyword">if</span> length(varargin)==4
+0035     nodes = varargin{1};
+0036     faces = varargin{3};
+0037     ind   = varargin{4};
+0038     
+0039 <span class="keyword">elseif</span> length(varargin)==3
+0040     nodes = varargin{1};
+0041     faces = varargin{2};
+0042     ind   = varargin{3};
+0043     
+0044 <span class="keyword">elseif</span> length(varargin)==2
+0045     graph = varargin{1};
+0046     nodes = graph.nodes;
+0047     faces = graph.faces;
+0048     ind   = varargin{2};
+0049 <span class="keyword">else</span>
+0050     error(<span class="string">'wrong number of arguments'</span>);
+0051 <span class="keyword">end</span>
+0052 
+0053 
+0054 <span class="comment">% number of angles to compute</span>
+0055 na = length(ind);
+0056 
+0057 theta = zeros(na, 1);
+0058 <span class="keyword">for</span> i = 1:na
+0059     
+0060     thetaf = [];
 0061     
-0062     thetaf = [];
-0063     
-0064     <span class="comment">% find faces containing given vertex,</span>
-0065     <span class="comment">% and compute normal angle at each face containing vertex</span>
-0066     <span class="keyword">if</span> iscell(faces)
-0067         <span class="keyword">for</span> j=1:length(faces)
-0068             <span class="keyword">if</span> ismember(ind(i), faces{j})
-0069                 <span class="comment">% create 3D polygon</span>
-0070                 face = nodes(faces{j}, :);
-0071                 
-0072                 <span class="comment">% index of point in polygon</span>
-0073                 indp = find(faces{j}==i);
-0074                 
-0075                 <span class="comment">% compute normal angle of vertex</span>
-0076                 thetaf = [thetaf <a href="../../matGeom/geom3d/polygon3dNormalAngle.html" class="code" title="function theta = polygon3dNormalAngle(points, ind)">polygon3dNormalAngle</a>(face, indp)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0077             <span class="keyword">end</span>
-0078         <span class="keyword">end</span>
-0079     <span class="keyword">else</span>
-0080         indf = find(sum(ismember(faces, ind(i)), 2));
-0081         
-0082         thetaf = zeros(length(indf), 1);
-0083         <span class="keyword">for</span> j=1:length(indf)
-0084             ind2 = faces(indf(j), :);
-0085             face = nodes(ind2, :);
-0086             indp = find(ind2==ind(i));
-0087             thetaf(j) = pi - <a href="../../matGeom/geom3d/polygon3dNormalAngle.html" class="code" title="function theta = polygon3dNormalAngle(points, ind)">polygon3dNormalAngle</a>(face, indp);
-0088         <span class="keyword">end</span>
-0089     <span class="keyword">end</span>
-0090     
-0091 
-0092     <span class="comment">% compute normal angle of polyhedron, by use of angle defect formula</span>
-0093     theta(i) = 2*pi - sum(thetaf);
-0094     
-0095 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0062     <span class="comment">% find faces containing given vertex,</span>
+0063     <span class="comment">% and compute normal angle at each face containing vertex</span>
+0064     <span class="keyword">if</span> iscell(faces)
+0065         <span class="keyword">for</span> j = 1:length(faces)
+0066             <span class="keyword">if</span> ismember(ind(i), faces{j})
+0067                 <span class="comment">% create 3D polygon</span>
+0068                 face = nodes(faces{j}, :);
+0069                 
+0070                 <span class="comment">% index of point in polygon</span>
+0071                 indp = find(faces{j}==i);
+0072                 
+0073                 <span class="comment">% compute normal angle of vertex</span>
+0074                 thetaf = [thetaf <a href="../../matGeom/geom3d/polygon3dNormalAngle.html" class="code" title="function theta = polygon3dNormalAngle(points, ind)">polygon3dNormalAngle</a>(face, indp)]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0075             <span class="keyword">end</span>
+0076         <span class="keyword">end</span>
+0077     <span class="keyword">else</span>
+0078         indf = find(sum(ismember(faces, ind(i)), 2));
+0079         
+0080         thetaf = zeros(length(indf), 1);
+0081         <span class="keyword">for</span> j = 1:length(indf)
+0082             ind2 = faces(indf(j), :);
+0083             face = nodes(ind2, :);
+0084             indp = find(ind2==ind(i));
+0085             thetaf(j) = pi - <a href="../../matGeom/geom3d/polygon3dNormalAngle.html" class="code" title="function theta = polygon3dNormalAngle(points, ind)">polygon3dNormalAngle</a>(face, indp);
+0086         <span class="keyword">end</span>
+0087     <span class="keyword">end</span>
+0088     
+0089     <span class="comment">% compute normal angle of polyhedron, by use of angle defect formula</span>
+0090     theta(i) = 2*pi - sum(thetaf);
+0091 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

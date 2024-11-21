@@ -24,7 +24,7 @@
 <div class="box"><strong>DRAWSPHERICALTRIANGLE Draw a triangle on a sphere.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function varargout = drawSphericalTriangle(sphere, p1, p2, p3, varargin) </strong></div>
+<div class="box"><strong>function varargout = drawSphericalTriangle(varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre class="comment">DRAWSPHERICALTRIANGLE Draw a triangle on a sphere.
@@ -48,19 +48,14 @@
      view(3); axis equal;
 
    See also
-   <a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a>, <a href="fillSphericalTriangle.html" class="code" title="function varargout = fillSphericalTriangle(sphere, p1, p2, p3, varargin)">fillSphericalTriangle</a>, <a href="drawSphericalPolygon.html" class="code" title="function varargout = drawSphericalPolygon(sphere, poly, varargin)">drawSphericalPolygon</a>,
-   <a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>
-
-   ---------
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 22/02/2005</pre></div>
+   <a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a>, <a href="fillSphericalTriangle.html" class="code" title="function varargout = fillSphericalTriangle(sphere, p1, p2, p3, varargin)">fillSphericalTriangle</a>, <a href="drawSphericalPolygon.html" class="code" title="function varargout = drawSphericalPolygon(varargin)">drawSphericalPolygon</a>,
+   <a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(varargin)">drawSphericalEdge</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>	DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.</li><li><a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>	NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.</li></ul>
+<li><a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(varargin)">drawSphericalEdge</a>	DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.</li><li><a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>	NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 </ul>
@@ -69,7 +64,7 @@ This function is called by:
 
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawSphericalTriangle(sphere, p1, p2, p3, varargin)</a>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawSphericalTriangle(varargin)</a>
 0002 <span class="comment">%DRAWSPHERICALTRIANGLE Draw a triangle on a sphere.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   drawSphericalTriangle(SPHERE, PT1, PT2, PT3);</span>
@@ -94,44 +89,47 @@ This function is called by:
 0023 <span class="comment">%   drawSphere, fillSphericalTriangle, drawSphericalPolygon,</span>
 0024 <span class="comment">%   drawSphericalEdge</span>
 0025 <span class="comment">%</span>
-0026 <span class="comment">%   ---------</span>
-0027 <span class="comment">%   author : David Legland</span>
-0028 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0029 <span class="comment">%   created the 22/02/2005</span>
-0030 <span class="comment">%</span>
-0031 
-0032 <span class="comment">%   HISTORY</span>
-0033 <span class="comment">%   2007-06-27 manage spheres other than origin</span>
-0034 <span class="comment">%   2008-10-30 replace intersectPlaneLine by intersectLinePlane</span>
-0035 <span class="comment">%   2012-02-09 put drawing code into the 'drawSphericalEdge' function</span>
-0036 <span class="comment">%   2012-10-24 add holding facility, updtate doc</span>
-0037 
-0038 
-0039 <span class="comment">% extract data of the sphere</span>
-0040 ori = sphere(:, 1:3);
+0026 
+0027 <span class="comment">% ------</span>
+0028 <span class="comment">% Author: David Legland</span>
+0029 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0030 <span class="comment">% Created: 2005-02-22</span>
+0031 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0032 
+0033 <span class="comment">% extract handle of axis to draw on</span>
+0034 [hAx, varargin] = parseAxisHandle(varargin{:});
+0035 
+0036 sphere = varargin{1};
+0037 p1 = varargin{2};
+0038 p2 = varargin{3};
+0039 p3 = varargin{4};
+0040 varargin(1:4) = [];
 0041 
-0042 <span class="comment">% extract direction vectors for each point</span>
-0043 v1  = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p1 - ori);
-0044 v2  = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p2 - ori);
-0045 v3  = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p3 - ori);
-0046 
-0047 <span class="comment">% keep hold state of current axis</span>
-0048 h = ishold;
+0042 <span class="comment">% extract data of the sphere</span>
+0043 ori = sphere(:, 1:3);
+0044 
+0045 <span class="comment">% extract direction vectors for each point</span>
+0046 v1  = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p1 - ori);
+0047 v2  = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p2 - ori);
+0048 v3  = <a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(p3 - ori);
 0049 
-0050 <span class="comment">% draw each spherical edge</span>
-0051 hold on;
-0052 h1 = <a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>(sphere, [v1 v2], varargin{:});
-0053 h2 = <a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>(sphere, [v2 v3], varargin{:});
-0054 h3 = <a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>(sphere, [v3 v1], varargin{:});
-0055 
-0056 <span class="comment">% return to previous hold state if needed</span>
-0057 <span class="keyword">if</span> ~h
-0058     hold off;    
-0059 <span class="keyword">end</span>
-0060 
-0061 <span class="keyword">if</span> nargout &gt; 0
-0062     varargout = {h1, h2, h3};
-0063 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0050 <span class="comment">% keep hold state of current axis</span>
+0051 holdState = ishold(hAx);
+0052 hold(hAx, <span class="string">'on'</span>);
+0053 
+0054 <span class="comment">% draw each spherical edge</span>
+0055 h1 = <a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(varargin)">drawSphericalEdge</a>(hAx, sphere, [v1 v2], varargin{:});
+0056 h2 = <a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(varargin)">drawSphericalEdge</a>(hAx, sphere, [v2 v3], varargin{:});
+0057 h3 = <a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(varargin)">drawSphericalEdge</a>(hAx, sphere, [v3 v1], varargin{:});
+0058 
+0059 <span class="comment">% return to previous hold state if needed</span>
+0060 <span class="keyword">if</span> ~holdState
+0061     hold(hAx, <span class="string">'off'</span>);
+0062 <span class="keyword">end</span>
+0063 
+0064 <span class="keyword">if</span> nargout &gt; 0
+0065     varargout = {h1, h2, h3};
+0066 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

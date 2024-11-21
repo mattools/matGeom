@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of triangulateMesh</title>
+  <meta name="keywords" content="triangulateMesh">
+  <meta name="description" content="TRIANGULATEMESH Convert a non-triangle mesh into a triangle mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; triangulateMesh.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>triangulateMesh
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>TRIANGULATEMESH Convert a non-triangle mesh into a triangle mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = triangulateMesh(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">TRIANGULATEMESH Convert a non-triangle mesh into a triangle mesh.
+
+   [V2, F2] = triangulateMesh(V, F)
+   Convert the mesh represented by vertices V and faces F into a triangle
+   mesh. V is N-by-3 numeric array containing vertex coordinates. F is an
+   array representing faces: either a N-by-4 or N-by-3 numeric array, or a
+   cell array for meshes with non homogeneous face vertex counts.
+   The result is a mesh with same vertices (V == F), and F2 represented as
+   a N-by-3 numeric array. If the input mesh is already a triangular mesh,
+   the result is the same as the input.
+
+   [V2, F2] = triangulateMesh(MESH)
+   Specifies the mesh as a structure with at least two fields 'vertices'
+   and 'faces'. 
+
+   MESH2 = triangulateMesh(...)
+   Returns the result as a mesh data structure with two fields 'vertices'
+   and 'faces'. 
+
+   Example
+     % create a basic shape
+     [v, f] = createCubeOctahedron;
+     % draw with plain faces
+     figure; hold on; axis equal; view(3);
+     drawMesh(v, f);
+     % draw as a triangulation
+     [v2, f2] = triangulateMesh(v, f);
+     figure; hold on; axis equal; view(3);
+     drawMesh(v2, f2, 'facecolor', 'r');
+
+   See also
+     meshes3d, <a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>	TRIANGULATEFACES Convert face array to an array of triangular faces.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = triangulateMesh(varargin)</a>
+0002 <span class="comment">%TRIANGULATEMESH Convert a non-triangle mesh into a triangle mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V2, F2] = triangulateMesh(V, F)</span>
+0005 <span class="comment">%   Convert the mesh represented by vertices V and faces F into a triangle</span>
+0006 <span class="comment">%   mesh. V is N-by-3 numeric array containing vertex coordinates. F is an</span>
+0007 <span class="comment">%   array representing faces: either a N-by-4 or N-by-3 numeric array, or a</span>
+0008 <span class="comment">%   cell array for meshes with non homogeneous face vertex counts.</span>
+0009 <span class="comment">%   The result is a mesh with same vertices (V == F), and F2 represented as</span>
+0010 <span class="comment">%   a N-by-3 numeric array. If the input mesh is already a triangular mesh,</span>
+0011 <span class="comment">%   the result is the same as the input.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   [V2, F2] = triangulateMesh(MESH)</span>
+0014 <span class="comment">%   Specifies the mesh as a structure with at least two fields 'vertices'</span>
+0015 <span class="comment">%   and 'faces'.</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   MESH2 = triangulateMesh(...)</span>
+0018 <span class="comment">%   Returns the result as a mesh data structure with two fields 'vertices'</span>
+0019 <span class="comment">%   and 'faces'.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   Example</span>
+0022 <span class="comment">%     % create a basic shape</span>
+0023 <span class="comment">%     [v, f] = createCubeOctahedron;</span>
+0024 <span class="comment">%     % draw with plain faces</span>
+0025 <span class="comment">%     figure; hold on; axis equal; view(3);</span>
+0026 <span class="comment">%     drawMesh(v, f);</span>
+0027 <span class="comment">%     % draw as a triangulation</span>
+0028 <span class="comment">%     [v2, f2] = triangulateMesh(v, f);</span>
+0029 <span class="comment">%     figure; hold on; axis equal; view(3);</span>
+0030 <span class="comment">%     drawMesh(v2, f2, 'facecolor', 'r');</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">%   See also</span>
+0033 <span class="comment">%     meshes3d, triangulateFaces, drawMesh</span>
+0034 <span class="comment">%</span>
+0035 
+0036 <span class="comment">% ------</span>
+0037 <span class="comment">% Author: David Legland</span>
+0038 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0039 <span class="comment">% Created: 2024-02-16, using Matlab 23.2.0.2459199 (R2023b) Update 5</span>
+0040 <span class="comment">% Copyright 2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0041 
+0042 [vertices, faces] = parseMeshData(varargin{:});
+0043 
+0044 faces2 = <a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>(faces);
+0045 
+0046 varargout = formatMeshOutput(nargout, vertices, faces2);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

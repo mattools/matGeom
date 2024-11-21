@@ -44,7 +44,7 @@ This function calls:
 <li><a href="crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>	CROSSPRODUCT3D Vector cross product faster than inbuilt MATLAB cross.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="dihedralAngle.html" class="code" title="function theta = dihedralAngle(plane1, plane2)">dihedralAngle</a>	DIHEDRALANGLE Compute dihedral angle between 2 planes.</li><li><a href="intersectPlaneSphere.html" class="code" title="function circle = intersectPlaneSphere(plane, sphere)">intersectPlaneSphere</a>	INTERSECTPLANESPHERE Return intersection circle between a plane and a sphere.</li><li><a href="isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>	ISBELOWPLANE Test whether a point is below or above a plane.</li><li><a href="normalizePlane.html" class="code" title="function plane2 = normalizePlane(plane1)">normalizePlane</a>	NORMALIZEPLANE Normalize parametric representation of a plane.</li><li><a href="parallelPlane.html" class="code" title="function res = parallelPlane(plane, point)">parallelPlane</a>	PARALLELPLANE Parallel to a plane through a point or at a given distance.</li><li><a href="planesBisector.html" class="code" title="function out = planesBisector(plane1, plane2)">planesBisector</a>	PLANESBISECTOR  Bisector plane between two other planes.</li><li><a href="../../matGeom/meshes3d/clipConvexPolyhedronHP.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronHP(nodes, faces, plane)">clipConvexPolyhedronHP</a>	CLIPCONVEXPOLYHEDRONHP Clip a convex polyhedron by a plane.</li><li><a href="../../matGeom/meshes3d/meshSilhouette.html" class="code" title="function silhouette = meshSilhouette(v, f, varargin)">meshSilhouette</a>	MESHSILHOUETTE Compute the 2D outline of a 3D mesh on an arbitrary plane.</li><li><a href="../../matGeom/meshes3d/minConvexHull.html" class="code" title="function newFaces = minConvexHull(points, varargin)">minConvexHull</a>	MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.</li></ul>
+<li><a href="dihedralAngle.html" class="code" title="function theta = dihedralAngle(plane1, plane2)">dihedralAngle</a>	DIHEDRALANGLE Compute dihedral angle between 2 planes.</li><li><a href="intersectPlaneSphere.html" class="code" title="function circle = intersectPlaneSphere(plane, sphere)">intersectPlaneSphere</a>	INTERSECTPLANESPHERE Return intersection circle between a plane and a sphere.</li><li><a href="isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>	ISBELOWPLANE Test whether a point is below or above a plane.</li><li><a href="normalizePlane.html" class="code" title="function plane2 = normalizePlane(plane1)">normalizePlane</a>	NORMALIZEPLANE Normalize parametric representation of a plane.</li><li><a href="parallelPlane.html" class="code" title="function res = parallelPlane(plane, point)">parallelPlane</a>	PARALLELPLANE Parallel to a plane through a point or at a given distance.</li><li><a href="planesBisector.html" class="code" title="function bis = planesBisector(plane1, plane2)">planesBisector</a>	PLANESBISECTOR Bisector plane between two other planes.</li><li><a href="../../matGeom/meshes3d/clipConvexPolyhedronByPlane.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronByPlane(nodes, faces, plane)">clipConvexPolyhedronByPlane</a>	CLIPCONVEXPOLYHEDRONBYPLANE Clip a convex polyhedron by a plane.</li><li><a href="../../matGeom/meshes3d/clipMeshByPlane.html" class="code" title="function [v2, f2, bE] = clipMeshByPlane(v, f, plane, varargin)">clipMeshByPlane</a>	CLIPMESHBYPLANE Clip a mesh by a plane.</li><li><a href="../../matGeom/meshes3d/meshSilhouette.html" class="code" title="function silhouette = meshSilhouette(v, f, varargin)">meshSilhouette</a>	MESHSILHOUETTE Compute the 2D outline of a 3D mesh on an arbitrary plane.</li><li><a href="../../matGeom/meshes3d/minConvexHull.html" class="code" title="function newFaces = minConvexHull(points, varargin)">minConvexHull</a>	MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.</li></ul>
 <!-- crossreference -->
 
 
@@ -62,20 +62,17 @@ This function is called by:
 0010 <span class="comment">%   geom3d, planes3d, createPlane</span>
 0011 <span class="comment">%</span>
 0012 
-0013 <span class="comment">%   ---------</span>
-0014 <span class="comment">%   author : David Legland</span>
-0015 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0016 <span class="comment">%   created the 17/02/2005.</span>
-0017 <span class="comment">%</span>
+0013 <span class="comment">% ------</span>
+0014 <span class="comment">% Author: David Legland</span>
+0015 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0016 <span class="comment">% Created: 2005-02-17</span>
+0017 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0018 
-0019 <span class="comment">%   HISTORY</span>
-0020 <span class="comment">%   15/04/2013 Extended to N-dim planes by Sven Holcombe</span>
-0021 
-0022 <span class="comment">% plane normal</span>
-0023 outSz = size(plane);
-0024 outSz(2) = 3;
-0025 n = zeros(outSz);
-0026 n(:) = <a href="crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>(plane(:,4:6,:), plane(:, 7:9,:));</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0019 <span class="comment">% plane normal</span>
+0020 outSz = size(plane);
+0021 outSz(2) = 3;
+0022 n = zeros(outSz);
+0023 n(:) = <a href="crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>(plane(:,4:6,:), plane(:, 7:9,:));</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

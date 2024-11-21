@@ -51,14 +51,8 @@
      drawPoint3d(pts, '.');
      axis equal;
 
-   See also:
-   <a href="angles3d.html" class="code" title="function angles3d(varargin)">angles3d</a>, <a href="sph2cart2.html" class="code" title="function varargout = sph2cart2(theta, phi, rho)">sph2cart2</a>, <a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- created the 18/02/2005.
- Copyright INRA - Cepia Software platform</pre></div>
+   See also
+   <a href="angles3d.html" class="code" title="function angles3d(varargin)">angles3d</a>, <a href="sph2cart2.html" class="code" title="function varargout = sph2cart2(theta, phi, rho)">sph2cart2</a>, <a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -98,35 +92,30 @@ This function is called by:
 0023 <span class="comment">%     drawPoint3d(pts, '.');</span>
 0024 <span class="comment">%     axis equal;</span>
 0025 <span class="comment">%</span>
-0026 <span class="comment">%   See also:</span>
+0026 <span class="comment">%   See also</span>
 0027 <span class="comment">%   angles3d, sph2cart2, cart2sph2</span>
-0028 <span class="comment">%</span>
+0028 
 0029 <span class="comment">% ------</span>
 0030 <span class="comment">% Author: David Legland</span>
-0031 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0032 <span class="comment">% created the 18/02/2005.</span>
-0033 <span class="comment">% Copyright INRA - Cepia Software platform</span>
+0031 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0032 <span class="comment">% Created: 2005-02-18</span>
+0033 <span class="comment">% Copyright 2005-2024 INRA - Cepia Software platform</span>
 0034 
-0035 <span class="comment">%   HISTORY</span>
-0036 <span class="comment">%   2007-01-04 change angle order, update doc</span>
-0037 <span class="comment">%   2011-06-27 fix bug in input parsing, add doc</span>
-0038 
+0035 N = 1;
+0036 <span class="keyword">if</span> ~isempty(varargin)
+0037     N = varargin{1};
+0038 <span class="keyword">end</span>
 0039 
-0040 N = 1;
-0041 <span class="keyword">if</span> ~isempty(varargin)
-0042     N = varargin{1};
-0043 <span class="keyword">end</span>
-0044 
-0045 phi = 2*pi*rand(N, 1);
-0046 theta = asin(2*rand(N, 1)-1) + pi/2;
-0047 
-0048 <span class="keyword">if</span> nargout&lt;2
-0049     var = [theta phi];
-0050     varargout{1} = var;
-0051 <span class="keyword">else</span>
-0052     varargout{1} = theta;
-0053     varargout{2} = phi;
-0054 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0040 phi = 2*pi*rand(N, 1);
+0041 theta = asin(2*rand(N, 1)-1) + pi/2;
+0042 
+0043 <span class="keyword">if</span> nargout&lt;2
+0044     var = [theta phi];
+0045     varargout{1} = var;
+0046 <span class="keyword">else</span>
+0047     varargout{1} = theta;
+0048     varargout{2} = phi;
+0049 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

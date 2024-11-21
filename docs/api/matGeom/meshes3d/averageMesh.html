@@ -4,7 +4,7 @@
 <head>
   <title>Description of averageMesh</title>
   <meta name="keywords" content="averageMesh">
-  <meta name="description" content="Compute average mesh from a list of meshes.">
+  <meta name="description" content="AVERAGEMESH Compute average mesh from a list of meshes.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,21 +21,45 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Compute average mesh from a list of meshes.</strong></div>
+<div class="box"><strong>AVERAGEMESH Compute average mesh from a list of meshes.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function [refMesh, distListIters, refVerticesIters] = averageMesh(meshList, varargin) </strong></div>
+<div class="box"><strong>function [avgMesh, distsIters, verticesIters] = averageMesh(meshList, varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Compute average mesh from a list of meshes.
+<div class="fragment"><pre class="comment">AVERAGEMESH Compute average mesh from a list of meshes.
 
-   AVG = averageMesh(MESHLIST)
+   AVGMESH = averageMesh(MESHLIST)
+   Where MESHLIST is a cell array of meshes, computes an average mesh that
+   minimizes the sum of squared distances between average mesh vertices
+   and all other mesh vertices.
+   The method is to choose an arbitrary reference mesh, and to iterate a
+   series of smoothin of the reference mesh, computation of nearest vertex
+   neighbors, and computing average position of nearest neighbors.
+
+   [AVGMESH, DISTS] = averageMesh(MESHLIST)
+   Returns also a cell array containing for each iteration, the standard
+   deviation of distances to other individual meshes.
+
+   [AVGMESH, DISTS, VERT_ITERS] = averageMesh(MESHLIST)
+   Also returns for each iteration, the positions of the average vertices.
+
+   [AVGMESH, DISTS] = averageMesh(..., PNAME, PVALUE)
+   Provides addition options are parameter name-value pairs. Available
+   options are:
+   * verbose: (logical, default false) display or not information about
+       process
+   * nIters: number of smooth-projection iterations to perform. Default
+       value is 10.
+   * smoothingIteration: the number of smoothing operations to apply on
+       average mesh at each iteration. Default value is 3.
+
 
    Example
    averageMesh
 
    See also
-     meshes3d</pre></div>
+     meshes3d, <a href="smoothMesh.html" class="code" title="function varargout = smoothMesh(varargin)">smoothMesh</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -50,110 +74,140 @@ This function is called by:
 
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [refMesh, distListIters, refVerticesIters] = averageMesh(meshList, varargin)</a>
-0002 <span class="comment">% Compute average mesh from a list of meshes.</span>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [avgMesh, distsIters, verticesIters] = averageMesh(meshList, varargin)</a>
+0002 <span class="comment">%AVERAGEMESH Compute average mesh from a list of meshes.</span>
 0003 <span class="comment">%</span>
-0004 <span class="comment">%   AVG = averageMesh(MESHLIST)</span>
-0005 <span class="comment">%</span>
-0006 <span class="comment">%   Example</span>
-0007 <span class="comment">%   averageMesh</span>
-0008 <span class="comment">%</span>
-0009 <span class="comment">%   See also</span>
-0010 <span class="comment">%     meshes3d</span>
-0011  
-0012 <span class="comment">% ------</span>
-0013 <span class="comment">% Author: David Legland</span>
-0014 <span class="comment">% e-mail: david.legland@inrae.fr</span>
-0015 <span class="comment">% INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
-0016 <span class="comment">% Created: 2020-01-31,    using Matlab 9.7.0.1247435 (R2019b) Update 2</span>
-0017 <span class="comment">% Copyright 2020 INRAE.</span>
-0018 
-0019 
-0020 <span class="comment">%% Parse input values</span>
-0021 
-0022 <span class="comment">% default values</span>
-0023 nIters = 10;
-0024 verbose = false;
-0025 
-0026 <span class="comment">% parse input arguments</span>
-0027 <span class="keyword">while</span> length(varargin) &gt; 1
-0028     name = varargin{1};
-0029     <span class="keyword">if</span> ~ischar(name)
-0030         error(<span class="string">'require parameter name-value pairs'</span>);
-0031     <span class="keyword">end</span>
-0032     
-0033     <span class="keyword">if</span> strcmpi(name, <span class="string">'verbose'</span>)
-0034         verbose = varargin{2};
-0035     <span class="keyword">elseif</span> strcmpi(name, <span class="string">'nIters'</span>)
-0036         nIters = varargin{2};
-0037     <span class="keyword">else</span>
-0038         error([<span class="string">'Unknown parameter name: '</span> name]);
-0039     <span class="keyword">end</span>
-0040     varargin(1:2) = [];
-0041 <span class="keyword">end</span>
-0042 
+0004 <span class="comment">%   AVGMESH = averageMesh(MESHLIST)</span>
+0005 <span class="comment">%   Where MESHLIST is a cell array of meshes, computes an average mesh that</span>
+0006 <span class="comment">%   minimizes the sum of squared distances between average mesh vertices</span>
+0007 <span class="comment">%   and all other mesh vertices.</span>
+0008 <span class="comment">%   The method is to choose an arbitrary reference mesh, and to iterate a</span>
+0009 <span class="comment">%   series of smoothin of the reference mesh, computation of nearest vertex</span>
+0010 <span class="comment">%   neighbors, and computing average position of nearest neighbors.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   [AVGMESH, DISTS] = averageMesh(MESHLIST)</span>
+0013 <span class="comment">%   Returns also a cell array containing for each iteration, the standard</span>
+0014 <span class="comment">%   deviation of distances to other individual meshes.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   [AVGMESH, DISTS, VERT_ITERS] = averageMesh(MESHLIST)</span>
+0017 <span class="comment">%   Also returns for each iteration, the positions of the average vertices.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   [AVGMESH, DISTS] = averageMesh(..., PNAME, PVALUE)</span>
+0020 <span class="comment">%   Provides addition options are parameter name-value pairs. Available</span>
+0021 <span class="comment">%   options are:</span>
+0022 <span class="comment">%   * verbose: (logical, default false) display or not information about</span>
+0023 <span class="comment">%       process</span>
+0024 <span class="comment">%   * nIters: number of smooth-projection iterations to perform. Default</span>
+0025 <span class="comment">%       value is 10.</span>
+0026 <span class="comment">%   * smoothingIteration: the number of smoothing operations to apply on</span>
+0027 <span class="comment">%       average mesh at each iteration. Default value is 3.</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">%   Example</span>
+0031 <span class="comment">%   averageMesh</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">%   See also</span>
+0034 <span class="comment">%     meshes3d, smoothMesh</span>
+0035 
+0036 <span class="comment">% ------</span>
+0037 <span class="comment">% Author: David Legland</span>
+0038 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0039 <span class="comment">% Created: 2020-01-31, using Matlab 9.7.0.1247435 (R2019b) Update 2</span>
+0040 <span class="comment">% Copyright 2020-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0041 
+0042 <span class="comment">%% Parse input values</span>
 0043 
-0044 <span class="comment">%% Initialisations</span>
-0045 
-0046 nMeshes = length(meshList);
-0047 
-0048 <span class="comment">% initialize kd-trees to accelerate nearest-neighbor searches</span>
-0049 treeList = cell(nMeshes, 1);
-0050 <span class="keyword">for</span> iMesh = 1:nMeshes
-0051     treeList{iMesh} = KDTreeSearcher(meshList{iMesh}.vertices);
-0052 <span class="keyword">end</span>
-0053 
-0054 <span class="comment">% choose arbitrary initial mesh</span>
-0055 refMesh = struct(<span class="string">'vertices'</span>, meshList{1}.vertices, <span class="string">'faces'</span>, meshList{1}.faces);
-0056 
-0057 refVerticesIters = cell(1, nIters);
-0058 distListIters = cell(1, nIters);
-0059 
-0060 
-0061 <span class="comment">%% Main iteration</span>
-0062 
-0063 <span class="keyword">for</span> iIter = 1:nIters
-0064     <span class="keyword">if</span> verbose
-0065         fprintf(<span class="string">'iter %d/%d\n'</span>, iIter, nIters);
-0066     <span class="keyword">end</span>
-0067     refMesh = <a href="smoothMesh.html" class="code" title="function varargout = smoothMesh(varargin)">smoothMesh</a>(refMesh);
-0068     
-0069     <span class="comment">% create new array for average vertices</span>
-0070     newVerts = zeros(size(refMesh.vertices));
-0071     distList = zeros(size(refMesh.vertices, 1), 1);
-0072     
-0073     <span class="comment">% iterate over all meshes</span>
-0074     <span class="keyword">for</span> iMesh = 1:nMeshes
-0075         <span class="keyword">if</span> verbose
-0076             fprintf(<span class="string">'    mesh %d/%d\n'</span>, iMesh, nMeshes);
-0077         <span class="keyword">end</span>
-0078         
-0079 <span class="comment">%         mesh = meshList{iMesh};</span>
-0080         inds = knnsearch(treeList{iMesh}, refMesh.vertices); 
+0044 <span class="comment">% default values</span>
+0045 nIters = 10;
+0046 verbose = false;
+0047 smoothingIterations = 3;
+0048 
+0049 <span class="comment">% parse input arguments</span>
+0050 <span class="keyword">while</span> length(varargin) &gt; 1
+0051     name = varargin{1};
+0052     <span class="keyword">if</span> ~ischar(name)
+0053         error(<span class="string">'require parameter name-value pairs'</span>);
+0054     <span class="keyword">end</span>
+0055     
+0056     <span class="keyword">if</span> strcmpi(name, <span class="string">'verbose'</span>)
+0057         verbose = varargin{2};
+0058     <span class="keyword">elseif</span> strcmpi(name, <span class="string">'nIters'</span>)
+0059         nIters = varargin{2};
+0060     <span class="keyword">elseif</span> strcmpi(name, <span class="string">'smoothingIterations'</span>)
+0061         smoothingIterations = varargin{2};
+0062     <span class="keyword">else</span>
+0063         error([<span class="string">'Unknown parameter name: '</span> name]);
+0064     <span class="keyword">end</span>
+0065     varargin(1:2) = [];
+0066 <span class="keyword">end</span>
+0067 
+0068 
+0069 <span class="comment">%% Initialisations</span>
+0070 
+0071 nMeshes = length(meshList);
+0072 
+0073 <span class="comment">% initialize kd-trees to accelerate nearest-neighbor searches</span>
+0074 treeList = cell(nMeshes, 1);
+0075 <span class="keyword">for</span> iMesh = 1:nMeshes
+0076     treeList{iMesh} = KDTreeSearcher(meshList{iMesh}.vertices);
+0077 <span class="keyword">end</span>
+0078 
+0079 <span class="comment">% choose arbitrary initial mesh</span>
+0080 avgMesh = struct(<span class="string">'vertices'</span>, meshList{1}.vertices, <span class="string">'faces'</span>, meshList{1}.faces);
 0081 
-0082 <span class="comment">%         closest = mesh.vertices(inds,:);</span>
-0083         closest = treeList{iMesh}.X(inds,:);
-0084         newVerts = newVerts + closest;
-0085         distList = distList + sum((closest - refMesh.vertices).^2, 2);
-0086     <span class="keyword">end</span>
+0082 verticesIters = cell(1, nIters);
+0083 distsIters = cell(1, nIters);
+0084 
+0085 
+0086 <span class="comment">%% Main iteration</span>
 0087 
-0088     <span class="comment">% update new vertices</span>
-0089     newVerts = newVerts / nMeshes;
-0090     refVerticesIters{iIter} = newVerts;
-0091     refMesh.vertices = newVerts;
-0092     
-0093     <span class="comment">% keep list of distances</span>
-0094     distList = sqrt(distList / nMeshes);
-0095     distListIters{iIter} = distList;
-0096 <span class="keyword">end</span>
-0097 
-0098 
-0099 <span class="comment">% figure; drawMesh(refMesh, 'lineStyle', 'none', 'faceColor', [.5 .5 .5])</span>
-0100 <span class="comment">% axis equal; view(3); hold on; axis([-2.5 2.5 -2 2 -3.5 3.5]); light;</span>
-0101 <span class="comment">% lighting gouraud</span>
-0102 <span class="comment">% title('Average mesh');</span>
-0103 <span class="comment">% print(gcf, 'averageMesh_initial.png', '-dpng');</span>
-0104</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0088 <span class="comment">% iterates smoothing + computation of average projections</span>
+0089 <span class="keyword">for</span> iIter = 1:nIters
+0090     <span class="keyword">if</span> verbose
+0091         fprintf(<span class="string">'iter %d/%d\n'</span>, iIter, nIters);
+0092     <span class="keyword">end</span>
+0093     <span class="comment">% apply smoothing to current average mesh</span>
+0094     avgMesh = <a href="smoothMesh.html" class="code" title="function varargout = smoothMesh(varargin)">smoothMesh</a>(avgMesh, smoothingIterations);
+0095     
+0096     <span class="comment">% create new array for average vertices</span>
+0097     newVerts = zeros(size(avgMesh.vertices));
+0098     dists = zeros(size(avgMesh.vertices, 1), 1);
+0099     
+0100     <span class="comment">% iterate over all meshes</span>
+0101     <span class="keyword">for</span> iMesh = 1:nMeshes
+0102         <span class="keyword">if</span> verbose
+0103             fprintf(<span class="string">'    mesh %d/%d\n'</span>, iMesh, nMeshes);
+0104         <span class="keyword">end</span>
+0105         
+0106         <span class="comment">% for each vertex of reference mesh, find index of closest vertex</span>
+0107         <span class="comment">% in current mesh</span>
+0108         inds = knnsearch(treeList{iMesh}, avgMesh.vertices); 
+0109         
+0110         <span class="comment">% keep position of closest vertex to update new position</span>
+0111         closest = treeList{iMesh}.X(inds,:);
+0112         newVerts = newVerts + closest;
+0113 
+0114         <span class="comment">% keep distance to closest index to build variability map</span>
+0115         dists = dists + sum((closest - avgMesh.vertices).^2, 2);
+0116     <span class="keyword">end</span>
+0117 
+0118     <span class="comment">% update position of new vertices</span>
+0119     newVerts = newVerts / nMeshes;
+0120     verticesIters{iIter} = newVerts;
+0121     avgMesh.vertices = newVerts;
+0122     
+0123     <span class="comment">% keep list of distances</span>
+0124     dists = sqrt(dists / nMeshes);
+0125     distsIters{iIter} = dists;
+0126 <span class="keyword">end</span>
+0127 
+0128 
+0129 <span class="comment">% figure; drawMesh(refMesh, 'lineStyle', 'none', 'faceColor', [.5 .5 .5])</span>
+0130 <span class="comment">% axis equal; view(3); hold on; axis([-2.5 2.5 -2 2 -3.5 3.5]); light;</span>
+0131 <span class="comment">% lighting gouraud</span>
+0132 <span class="comment">% title('Average mesh');</span>
+0133 <span class="comment">% print(gcf, 'averageMesh_initial.png', '-dpng');</span>
+0134</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

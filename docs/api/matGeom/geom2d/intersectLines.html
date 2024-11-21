@@ -54,12 +54,7 @@
 
    See also
    <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="intersectEdges.html" class="code" title="function point = intersectEdges(edge1, edge2, varargin)">intersectEdges</a>, <a href="intersectLineEdge.html" class="code" title="function point = intersectLineEdge(line, edge, varargin)">intersectLineEdge</a>
-   <a href="intersectLineCircle.html" class="code" title="function points = intersectLineCircle(line, circle)">intersectLineCircle</a>
-
-   ---------
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 31/10/2003.</pre></div>
+   <a href="intersectLineCircle.html" class="code" title="function points = intersectLineCircle(line, circle)">intersectLineCircle</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -103,103 +98,97 @@ This function is called by:
 0027 <span class="comment">%   See also</span>
 0028 <span class="comment">%   lines2d, edges2d, intersectEdges, intersectLineEdge</span>
 0029 <span class="comment">%   intersectLineCircle</span>
-0030 <span class="comment">%</span>
-0031 <span class="comment">%   ---------</span>
-0032 <span class="comment">%   author : David Legland</span>
-0033 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0034 <span class="comment">%   created the 31/10/2003.</span>
-0035 <span class="comment">%</span>
+0030 
+0031 <span class="comment">% ------</span>
+0032 <span class="comment">% Author: David Legland</span>
+0033 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0034 <span class="comment">% Created: 2003-10-31</span>
+0035 <span class="comment">% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0036 
-0037 <span class="comment">%   HISTORY</span>
-0038 <span class="comment">%   2004-02-19 add support for multiple lines.</span>
-0039 <span class="comment">%   2007-03-08 update doc</span>
-0040 <span class="comment">%   2011-10-07 code cleanup</span>
-0041 
-0042 
-0043 <span class="comment">%% Process input arguments</span>
+0037 <span class="comment">%% Process input arguments</span>
+0038 
+0039 <span class="comment">% extract tolerance</span>
+0040 tol = 1e-14;
+0041 <span class="keyword">if</span> ~isempty(varargin)
+0042     tol = varargin{1};
+0043 <span class="keyword">end</span>
 0044 
-0045 <span class="comment">% extract tolerance</span>
-0046 tol = 1e-14;
-0047 <span class="keyword">if</span> ~isempty(varargin)
-0048     tol = varargin{1};
-0049 <span class="keyword">end</span>
-0050 
-0051 <span class="comment">% check size of each input</span>
-0052 N1 = size(line1, 1);
-0053 N2 = size(line2, 1);
-0054 N = max(N1, N2);
-0055 <span class="keyword">if</span> N1 ~= N2 &amp;&amp; N1*N2 ~= N
-0056     error(<span class="string">'matGeom:IntersectLines:IllegalArgument'</span>, <span class="keyword">...</span>
-0057         <span class="string">'The two input arguments must have same number of lines'</span>);
-0058 <span class="keyword">end</span>
-0059 
+0045 <span class="comment">% check size of each input</span>
+0046 N1 = size(line1, 1);
+0047 N2 = size(line2, 1);
+0048 N = max(N1, N2);
+0049 <span class="keyword">if</span> N1 ~= N2 &amp;&amp; N1*N2 ~= N
+0050     error(<span class="string">'matGeom:IntersectLines:IllegalArgument'</span>, <span class="keyword">...</span>
+0051         <span class="string">'The two input arguments must have same number of lines'</span>);
+0052 <span class="keyword">end</span>
+0053 
+0054 
+0055 <span class="comment">%% Check parallel and colinear lines</span>
+0056 
+0057 <span class="comment">% coordinate differences of origin points</span>
+0058 dx = bsxfun(@minus, line2(:,1), line1(:,1));
+0059 dy = bsxfun(@minus, line2(:,2), line1(:,2));
 0060 
-0061 <span class="comment">%% Check parallel and colinear lines</span>
-0062 
-0063 <span class="comment">% coordinate differences of origin points</span>
-0064 dx = bsxfun(@minus, line2(:,1), line1(:,1));
-0065 dy = bsxfun(@minus, line2(:,2), line1(:,2));
-0066 
-0067 <span class="comment">% indices of parallel lines</span>
-0068 denom = line1(:,3) .* line2(:,4) - line2(:,3) .* line1(:,4);
-0069 par = abs(denom) &lt; tol;
-0070 
-0071 <span class="comment">% indices of colinear lines</span>
-0072 col = abs(dx .* line1(:,4) - dy .* line1(:,3)) &lt; tol &amp; par ;
-0073 
-0074 <span class="comment">% initialize result array</span>
-0075 x0 = zeros(N, 1);
-0076 y0 = zeros(N, 1);
+0061 <span class="comment">% indices of parallel lines</span>
+0062 denom = line1(:,3) .* line2(:,4) - line2(:,3) .* line1(:,4);
+0063 par = abs(denom) &lt; tol;
+0064 
+0065 <span class="comment">% indices of colinear lines</span>
+0066 col = abs(dx .* line1(:,4) - dy .* line1(:,3)) &lt; tol &amp; par ;
+0067 
+0068 <span class="comment">% initialize result array</span>
+0069 x0 = zeros(N, 1);
+0070 y0 = zeros(N, 1);
+0071 
+0072 <span class="comment">% initialize result for parallel lines</span>
+0073 x0(col) = Inf;
+0074 y0(col) = Inf;
+0075 x0(par &amp; ~col) = NaN;
+0076 y0(par &amp; ~col) = NaN;
 0077 
-0078 <span class="comment">% initialize result for parallel lines</span>
-0079 x0(col) = Inf;
-0080 y0(col) = Inf;
-0081 x0(par &amp; ~col) = NaN;
-0082 y0(par &amp; ~col) = NaN;
+0078 <span class="comment">% in case all line couples are parallel, return</span>
+0079 <span class="keyword">if</span> all(par)
+0080     point = [x0 y0];
+0081     <span class="keyword">return</span>;
+0082 <span class="keyword">end</span>
 0083 
-0084 <span class="comment">% in case all line couples are parallel, return</span>
-0085 <span class="keyword">if</span> all(par)
-0086     point = [x0 y0];
-0087     <span class="keyword">return</span>;
-0088 <span class="keyword">end</span>
+0084 
+0085 <span class="comment">%% Extract coordinates of itnersecting lines</span>
+0086 
+0087 <span class="comment">% indices of intersecting lines</span>
+0088 inds = ~par;
 0089 
-0090 
-0091 <span class="comment">%% Extract coordinates of itnersecting lines</span>
-0092 
-0093 <span class="comment">% indices of intersecting lines</span>
-0094 inds = ~par;
-0095 
-0096 <span class="comment">% extract base coordinates of first lines</span>
-0097 <span class="keyword">if</span> N1 &gt; 1
-0098     line1 = line1(inds,:);
-0099 <span class="keyword">end</span>
-0100 x1 =  line1(:,1);
-0101 y1 =  line1(:,2);
-0102 dx1 = line1(:,3);
-0103 dy1 = line1(:,4);
-0104 
-0105 <span class="comment">% extract base coordinates of second lines</span>
-0106 <span class="keyword">if</span> N2 &gt; 1
-0107     line2 = line2(inds,:);
-0108 <span class="keyword">end</span>
-0109 x2 =  line2(:,1);
-0110 y2 =  line2(:,2);
-0111 dx2 = line2(:,3);
-0112 dy2 = line2(:,4);
-0113 
-0114 <span class="comment">% re-compute coordinate differences of origin points</span>
-0115 dx = bsxfun(@minus, line2(:,1), line1(:,1));
-0116 dy = bsxfun(@minus, line2(:,2), line1(:,2));
-0117 
+0090 <span class="comment">% extract base coordinates of first lines</span>
+0091 <span class="keyword">if</span> N1 &gt; 1
+0092     line1 = line1(inds,:);
+0093 <span class="keyword">end</span>
+0094 x1 =  line1(:,1);
+0095 y1 =  line1(:,2);
+0096 dx1 = line1(:,3);
+0097 dy1 = line1(:,4);
+0098 
+0099 <span class="comment">% extract base coordinates of second lines</span>
+0100 <span class="keyword">if</span> N2 &gt; 1
+0101     line2 = line2(inds,:);
+0102 <span class="keyword">end</span>
+0103 x2 =  line2(:,1);
+0104 y2 =  line2(:,2);
+0105 dx2 = line2(:,3);
+0106 dy2 = line2(:,4);
+0107 
+0108 <span class="comment">% re-compute coordinate differences of origin points</span>
+0109 dx = bsxfun(@minus, line2(:,1), line1(:,1));
+0110 dy = bsxfun(@minus, line2(:,2), line1(:,2));
+0111 
+0112 
+0113 <span class="comment">%% Compute intersection points</span>
+0114 
+0115 denom = denom(inds);
+0116 x0(inds) = (x2 .* dy2 .* dx1 - dy .* dx1 .* dx2 - x1 .* dy1 .* dx2) ./ denom ;
+0117 y0(inds) = (dx .* dy1 .* dy2 + y1 .* dx1 .* dy2 - y2 .* dx2 .* dy1) ./ denom ;
 0118 
-0119 <span class="comment">%% Compute intersection points</span>
-0120 
-0121 denom = denom(inds);
-0122 x0(inds) = (x2 .* dy2 .* dx1 - dy .* dx1 .* dx2 - x1 .* dy1 .* dx2) ./ denom ;
-0123 y0(inds) = (dx .* dy1 .* dy2 + y1 .* dx1 .* dy2 - y2 .* dx2 .* dy1) ./ denom ;
-0124 
-0125 <span class="comment">% concatenate result</span>
-0126 point = [x0 y0];</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0119 <span class="comment">% concatenate result</span>
+0120 point = [x0 y0];</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

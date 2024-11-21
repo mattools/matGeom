@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of grMergeNodes</title>
+  <meta name="keywords" content="grMergeNodes">
+  <meta name="description" content="GRMERGENODES Merge two (or more) nodes in a graph.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; grMergeNodes.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>grMergeNodes
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>GRMERGENODES Merge two (or more) nodes in a graph.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [nodes, edges] = grMergeNodes(nodes, edges, mnodes) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">GRMERGENODES Merge two (or more) nodes in a graph.
+
+ usage:
+   [NODES2 EDGES2] = grMergeNodes(NODES, EDGES, NODE_INDS)
+   NODES and EDGES are wo arrays representing a graph, and NODE_INDS is
+   the set of indices of the nodes to merge.
+   The nodes corresponding to indices in NODE_INDS are removed from the
+   list, and edges between two nodes are removed.
+
+   Example: merging of lables 1 and 2
+   Edges:         Edges2:
+   [1 2]           [1 3]
+   [1 3]           [1 4]
+   [1 4]           [3 4]
+   [2 3]
+   [3 4]</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="grRemoveMultiplePoints.html" class="code" title="function varargout = grRemoveMultiplePoints(nodes, edges)">grRemoveMultiplePoints</a>	GRREMOVEMULTIPLEPOINTS Remove groups of close nodes in a graph.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [nodes, edges] = grMergeNodes(nodes, edges, mnodes)</a>
+0002 <span class="comment">%GRMERGENODES Merge two (or more) nodes in a graph.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">% usage:</span>
+0005 <span class="comment">%   [NODES2 EDGES2] = grMergeNodes(NODES, EDGES, NODE_INDS)</span>
+0006 <span class="comment">%   NODES and EDGES are wo arrays representing a graph, and NODE_INDS is</span>
+0007 <span class="comment">%   the set of indices of the nodes to merge.</span>
+0008 <span class="comment">%   The nodes corresponding to indices in NODE_INDS are removed from the</span>
+0009 <span class="comment">%   list, and edges between two nodes are removed.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   Example: merging of lables 1 and 2</span>
+0012 <span class="comment">%   Edges:         Edges2:</span>
+0013 <span class="comment">%   [1 2]           [1 3]</span>
+0014 <span class="comment">%   [1 3]           [1 4]</span>
+0015 <span class="comment">%   [1 4]           [3 4]</span>
+0016 <span class="comment">%   [2 3]</span>
+0017 <span class="comment">%   [3 4]</span>
+0018 <span class="comment">%</span>
+0019 
+0020 <span class="comment">% ------</span>
+0021 <span class="comment">% Author: David Legland</span>
+0022 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0023 <span class="comment">% Created: 2004-06-30</span>
+0024 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0025 
+0026 refNode = mnodes(1);
+0027 mnodes = mnodes(2:length(mnodes));
+0028 
+0029 <span class="comment">% replace merged nodes references by references to refNode</span>
+0030 edges(ismember(edges, mnodes))=refNode;
+0031 
+0032 <span class="comment">% remove &quot;loop edges&quot; from and to reference node</span>
+0033 edges = edges(edges(:,1) ~= refNode | edges(:,2) ~= refNode, :);
+0034 
+0035 <span class="comment">% format output</span>
+0036 edges = sortrows(unique(sort(edges, 2), <span class="string">'rows'</span>));
+0037</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

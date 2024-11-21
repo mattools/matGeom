@@ -40,7 +40,7 @@
    which was rewritten from a Java applet by Shripad Thite:
    http://heyoka.cs.uiuc.edu/~thite/mincircle/
 
-   See also:
+   See also
    <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="boxes2d.html" class="code" title="function boxes2d(varargin)">boxes2d</a>, <a href="circumCircle.html" class="code" title="function varargout = circumCircle(varargin)">circumCircle</a></pre></div>
 
 <!-- crossreference -->
@@ -72,62 +72,61 @@ This function is called by:
 0012 <span class="comment">%   which was rewritten from a Java applet by Shripad Thite:</span>
 0013 <span class="comment">%   http://heyoka.cs.uiuc.edu/~thite/mincircle/</span>
 0014 <span class="comment">%</span>
-0015 <span class="comment">%   See also:</span>
+0015 <span class="comment">%   See also</span>
 0016 <span class="comment">%   circles2d, points2d, boxes2d, circumCircle</span>
 0017 <span class="comment">%</span>
 0018 
 0019 <span class="comment">% ------</span>
 0020 <span class="comment">% Author: David Legland</span>
-0021 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
-0022 <span class="comment">% created the 07/07/2005.</span>
-0023 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
+0021 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0022 <span class="comment">% Created: 2005-07-07</span>
+0023 <span class="comment">% Copyright 2005-2024 INRA - Cepia Software Platform</span>
 0024 
-0025 
-0026 <span class="comment">% works on convex hull: it is faster</span>
-0027 pts = pts(convhull(pts(:,1), pts(:,2)), :);
-0028 
-0029 <span class="comment">% call the recursive function</span>
-0030 circle = <a href="#_sub1" class="code" title="subfunction circ = recurseCircle(n, p, m, b)">recurseCircle</a>(size(pts, 1), pts, 1, zeros(3, 2));
+0025 <span class="comment">% works on convex hull: it is faster</span>
+0026 pts = pts(convhull(pts(:,1), pts(:,2)), :);
+0027 
+0028 <span class="comment">% call the recursive function</span>
+0029 circle = <a href="#_sub1" class="code" title="subfunction circ = recurseCircle(n, p, m, b)">recurseCircle</a>(size(pts, 1), pts, 1, zeros(3, 2));
+0030 
 0031 
 0032 
-0033 
-0034 <a name="_sub1" href="#_subfunctions" class="code">function circ = recurseCircle(n, p, m, b)</a>
-0035 <span class="comment">%    n: number of points given</span>
-0036 <span class="comment">%    m: an argument used by the function. Always use 1 for m.</span>
-0037 <span class="comment">%    bnry: an argument (3x2 array) used by the function to set the points that</span>
-0038 <span class="comment">%          determines the circle boundry. You have to be careful when choosing this</span>
-0039 <span class="comment">%          array's values. I think the values should be somewhere outside your points</span>
-0040 <span class="comment">%          boundary. For my case, for example, I know the (x,y) I have will be something</span>
-0041 <span class="comment">%          in between (-5,-5) and (5,5), so I use bnry as:</span>
-0042 <span class="comment">%                       [-10 -10</span>
-0043 <span class="comment">%                        -10 -10</span>
-0044 <span class="comment">%                        -10 -10]</span>
+0033 <a name="_sub1" href="#_subfunctions" class="code">function circ = recurseCircle(n, p, m, b)</a>
+0034 <span class="comment">%    n: number of points given</span>
+0035 <span class="comment">%    m: an argument used by the function. Always use 1 for m.</span>
+0036 <span class="comment">%    bnry: an argument (3x2 array) used by the function to set the points that</span>
+0037 <span class="comment">%          determines the circle boundry. You have to be careful when choosing this</span>
+0038 <span class="comment">%          array's values. I think the values should be somewhere outside your points</span>
+0039 <span class="comment">%          boundary. For my case, for example, I know the (x,y) I have will be something</span>
+0040 <span class="comment">%          in between (-5,-5) and (5,5), so I use bnry as:</span>
+0041 <span class="comment">%                       [-10 -10</span>
+0042 <span class="comment">%                        -10 -10</span>
+0043 <span class="comment">%                        -10 -10]</span>
+0044 
 0045 
-0046 
-0047 <span class="keyword">if</span> m == 4
-0048     circ = <a href="createCircle.html" class="code" title="function circle = createCircle(varargin)">createCircle</a>(b(1,:), b(2,:), b(3,:));
-0049     <span class="keyword">return</span>;
-0050 <span class="keyword">end</span>
-0051 
-0052 circ = [Inf Inf 0];
-0053 
-0054 <span class="keyword">if</span> m == 2
-0055     circ = [b(1,1:2) 0];
-0056 <span class="keyword">elseif</span> m == 3
-0057     c = (b(1,:) + b(2,:))/2;
-0058     circ = [c <a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(b(1,:), c)];
-0059 <span class="keyword">end</span>
+0046 <span class="keyword">if</span> m == 4
+0047     circ = <a href="createCircle.html" class="code" title="function circle = createCircle(varargin)">createCircle</a>(b(1,:), b(2,:), b(3,:));
+0048     <span class="keyword">return</span>;
+0049 <span class="keyword">end</span>
+0050 
+0051 circ = [Inf Inf 0];
+0052 
+0053 <span class="keyword">if</span> m == 2
+0054     circ = [b(1,1:2) 0];
+0055 <span class="keyword">elseif</span> m == 3
+0056     c = (b(1,:) + b(2,:))/2;
+0057     circ = [c <a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(b(1,:), c)];
+0058 <span class="keyword">end</span>
+0059 
 0060 
-0061 
-0062 <span class="keyword">for</span> i = 1:n
-0063     <span class="keyword">if</span> <a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(p(i,:), circ(1:2)) &gt; circ(3)
-0064         <span class="keyword">if</span> sum(b(:,1)==p(i,1) &amp; b(:,2)==p(i,2)) == 0
-0065             b(m,:) = p(i,:);
-0066             circ = <a href="#_sub1" class="code" title="subfunction circ = recurseCircle(n, p, m, b)">recurseCircle</a>(i, p, m+1, b);
-0067         <span class="keyword">end</span>
-0068     <span class="keyword">end</span>
-0069 <span class="keyword">end</span>
-0070</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0061 <span class="keyword">for</span> i = 1:n
+0062     <span class="keyword">if</span> <a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(p(i,:), circ(1:2)) &gt; circ(3)
+0063         <span class="keyword">if</span> sum(b(:,1)==p(i,1) &amp; b(:,2)==p(i,2)) == 0
+0064             b(m,:) = p(i,:);
+0065             circ = <a href="#_sub1" class="code" title="subfunction circ = recurseCircle(n, p, m, b)">recurseCircle</a>(i, p, m+1, b);
+0066         <span class="keyword">end</span>
+0067     <span class="keyword">end</span>
+0068 <span class="keyword">end</span>
+0069</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

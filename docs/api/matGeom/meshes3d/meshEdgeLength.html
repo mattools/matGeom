@@ -24,7 +24,7 @@
 <div class="box"><strong>MESHEDGELENGTH Lengths of edges of a polygonal or polyhedral mesh.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function lengths = meshEdgeLength(vertices, edges, faces) %#ok<INUSD> </strong></div>
+<div class="box"><strong>function lengths = meshEdgeLength(varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre class="comment">MESHEDGELENGTH Lengths of edges of a polygonal or polyhedral mesh.
@@ -34,20 +34,13 @@
    Example
    meshEdgeLength
 
-   See also
-
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- Created: 2010-10-04,    using Matlab 7.9.0.529 (R2009b)
- Copyright 2010 INRA - Cepia Software Platform.</pre></div>
+   See also</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-</ul>
+<li><a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>	MESHEDGES Computes array of edge vertex indices from face array.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 <li><a href="polyhedronMeanBreadth.html" class="code" title="function breadth = polyhedronMeanBreadth(vertices, edges, faces)">polyhedronMeanBreadth</a>	POLYHEDRONMEANBREADTH Mean breadth of a convex polyhedron.</li><li><a href="trimeshMeanBreadth.html" class="code" title="function mb = trimeshMeanBreadth(vertices, faces)">trimeshMeanBreadth</a>	TRIMESHMEANBREADTH Mean breadth of a triangular mesh.</li></ul>
@@ -56,7 +49,7 @@ This function is called by:
 
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function lengths = meshEdgeLength(vertices, edges, faces) </a><span class="comment">%#ok&lt;INUSD&gt;</span>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function lengths = meshEdgeLength(varargin)</a>
 0002 <span class="comment">%MESHEDGELENGTH Lengths of edges of a polygonal or polyhedral mesh.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   output = meshEdgeLength(V, E, F)</span>
@@ -66,19 +59,25 @@ This function is called by:
 0008 <span class="comment">%</span>
 0009 <span class="comment">%   See also</span>
 0010 <span class="comment">%</span>
-0011 <span class="comment">%</span>
+0011 
 0012 <span class="comment">% ------</span>
 0013 <span class="comment">% Author: David Legland</span>
-0014 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0015 <span class="comment">% Created: 2010-10-04,    using Matlab 7.9.0.529 (R2009b)</span>
-0016 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0014 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0015 <span class="comment">% Created: 2010-10-04, using Matlab 7.9.0.529 (R2009b)</span>
+0016 <span class="comment">% Copyright 2010-2024 INRA - Cepia Software Platform</span>
 0017 
-0018 <span class="comment">% extract vertices</span>
-0019 p1 = vertices(edges(:, 1), :);
-0020 p2 = vertices(edges(:, 2), :);
-0021 
-0022 <span class="comment">% compute euclidean distance betwenn the two vertices</span>
-0023 lengths = sqrt(sum((p2-p1).^2, 2));</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0018 <span class="comment">% parse input arguments</span>
+0019 [vertices, edges, faces] = parseMeshData(varargin{:});
+0020 <span class="keyword">if</span> isempty(edges)
+0021     edges = <a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>(faces);
+0022 <span class="keyword">end</span>
+0023 
+0024 <span class="comment">% extract vertices</span>
+0025 p1 = vertices(edges(:, 1), :);
+0026 p2 = vertices(edges(:, 2), :);
+0027 
+0028 <span class="comment">% compute euclidean distance betwenn the two vertices</span>
+0029 lengths = sqrt(sum((p2-p1).^2, 2));</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

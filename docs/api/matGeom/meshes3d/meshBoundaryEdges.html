@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of meshBoundaryEdges</title>
+  <meta name="keywords" content="meshBoundaryEdges">
+  <meta name="description" content="MESHBOUNDARYEDGES Determine the boundary edges of a mesh.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; meshBoundaryEdges.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>meshBoundaryEdges
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MESHBOUNDARYEDGES Determine the boundary edges of a mesh.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function BE = meshBoundaryEdges(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MESHBOUNDARYEDGES Determine the boundary edges of a mesh.
+
+   BE = meshBoundaryEdges(V, F)
+   Determine for each edge of the mesh if it is a boundary edge of the 
+   mesh.
+
+   Example
+     run createTrefoilKnot.m
+     f2 = triangulateFaces(f2);
+     % clip the mesh with a plane
+     plane = createPlane([0 0 0], [-1 -2 3]);
+     [v2, f2] = clipMeshVertices(v2, f2, plane, 'shape', 'plane');
+     % draw the mesh
+     figure('color','w'); drawMesh(v2, f2); axis equal; view(3);
+     % calculate the boundary edges
+     be2 = meshBoundaryEdges(v2, f2);
+     % draw boundary edges
+     drawEdge3d([v2(be2(:,1),:) v2(be2(:,2),:)], 'LineWidth',4,'Color','g')
+
+   See also
+     meshes3d, <a href="meshBoundary.html" class="code" title="function polyList = meshBoundary(varargin)">meshBoundary</a>, <a href="meshBoundaryVertexIndices.html" class="code" title="function inds = meshBoundaryVertexIndices(varargin)">meshBoundaryVertexIndices</a>, <a href="meshEdgeFaces.html" class="code" title="function edgeFaces = meshEdgeFaces(vertices, edges, faces) %#ok<INUSL>">meshEdgeFaces</a>,
+     <a href="meshBoundaryEdgeIndices.html" class="code" title="function inds = meshBoundaryEdgeIndices(varargin)">meshBoundaryEdgeIndices</a>
+
+   Source:
+     is_boundary_facet.m by Alec Jacobson:
+       https://github.com/alecjacobson/gptoolbox</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>	MESHEDGES Computes array of edge vertex indices from face array.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="meshBoundaryVertexIndices.html" class="code" title="function inds = meshBoundaryVertexIndices(varargin)">meshBoundaryVertexIndices</a>	MESHBOUNDARYVERTEXINDICES Indices of boundary vertices of a mesh.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function BE = meshBoundaryEdges(varargin)</a>
+0002 <span class="comment">%MESHBOUNDARYEDGES Determine the boundary edges of a mesh.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   BE = meshBoundaryEdges(V, F)</span>
+0005 <span class="comment">%   Determine for each edge of the mesh if it is a boundary edge of the</span>
+0006 <span class="comment">%   mesh.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   Example</span>
+0009 <span class="comment">%     run createTrefoilKnot.m</span>
+0010 <span class="comment">%     f2 = triangulateFaces(f2);</span>
+0011 <span class="comment">%     % clip the mesh with a plane</span>
+0012 <span class="comment">%     plane = createPlane([0 0 0], [-1 -2 3]);</span>
+0013 <span class="comment">%     [v2, f2] = clipMeshVertices(v2, f2, plane, 'shape', 'plane');</span>
+0014 <span class="comment">%     % draw the mesh</span>
+0015 <span class="comment">%     figure('color','w'); drawMesh(v2, f2); axis equal; view(3);</span>
+0016 <span class="comment">%     % calculate the boundary edges</span>
+0017 <span class="comment">%     be2 = meshBoundaryEdges(v2, f2);</span>
+0018 <span class="comment">%     % draw boundary edges</span>
+0019 <span class="comment">%     drawEdge3d([v2(be2(:,1),:) v2(be2(:,2),:)], 'LineWidth',4,'Color','g')</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See also</span>
+0022 <span class="comment">%     meshes3d, meshBoundary, meshBoundaryVertexIndices, meshEdgeFaces,</span>
+0023 <span class="comment">%     meshBoundaryEdgeIndices</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   Source:</span>
+0026 <span class="comment">%     is_boundary_facet.m by Alec Jacobson:</span>
+0027 <span class="comment">%       https://github.com/alecjacobson/gptoolbox</span>
+0028 
+0029 <span class="comment">% ------</span>
+0030 <span class="comment">% Author: oqilipo</span>
+0031 <span class="comment">% E-mail: N/A</span>
+0032 <span class="comment">% Created: 2023-05-15, using Matlab 9.13.0.2080170 (R2022b) Update 1</span>
+0033 <span class="comment">% Copyright 2023-2024</span>
+0034 
+0035 [V, E, F] = parseMeshData(varargin{:});
+0036 
+0037 <span class="comment">% Compute edge-vertex map if not specified</span>
+0038 <span class="keyword">if</span> isempty(E)
+0039     E = <a href="meshEdges.html" class="code" title="function edges = meshEdges(faces, varargin)">meshEdges</a>(V, F);
+0040 <span class="keyword">end</span>
+0041 
+0042 <span class="keyword">switch</span> size(F,2)
+0043     <span class="keyword">case</span> 3
+0044         allE = [F(:,[2 3]);F(:,[3 1]);F(:,[1 2])];
+0045     <span class="keyword">case</span> 4
+0046         allE = [ <span class="keyword">...</span>
+0047             F(:,2) F(:,4) F(:,3); <span class="keyword">...</span>
+0048             F(:,1) F(:,3) F(:,4); <span class="keyword">...</span>
+0049             F(:,1) F(:,4) F(:,2); <span class="keyword">...</span>
+0050             F(:,1) F(:,2) F(:,3); <span class="keyword">...</span>
+0051             ];
+0052 <span class="keyword">end</span>
+0053 
+0054 [~,~,EMAP] = unique(sort([E;allE],2),<span class="string">'rows'</span>);
+0055 N = accumarray(EMAP,1);
+0056 
+0057 <span class="comment">% Look of occurances of 2: one for original and another for boundary</span>
+0058 B = N(EMAP(1:size(E,1)))==2;
+0059 
+0060 BE = E(B,:);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

@@ -44,7 +44,7 @@
    Wrapper function for MATLAB's build-in stlwrite.
 
    See also
-   meshes3d, <a href="writeMesh.html" class="code" title="function writeMesh(fileName, vertices, faces, varargin)">writeMesh</a>, <a href="writeMesh_off.html" class="code" title="function writeMesh_off(fileName, vertices, faces)">writeMesh_off</a>, <a href="writeMesh_ply.html" class="code" title="function writeMesh_ply(fileName, vertices, faces, varargin)">writeMesh_ply</a></pre></div>
+     meshes3d, <a href="writeMesh.html" class="code" title="function writeMesh(fileName, vertices, faces, varargin)">writeMesh</a>, <a href="writeMesh_off.html" class="code" title="function writeMesh_off(fileName, vertices, faces)">writeMesh_off</a>, <a href="writeMesh_ply.html" class="code" title="function writeMesh_ply(fileName, vertices, faces, varargin)">writeMesh_ply</a>, readMaesh_stl</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -53,7 +53,7 @@ This function calls:
 </ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="writeMesh.html" class="code" title="function writeMesh(fileName, vertices, faces, varargin)">writeMesh</a>	Write 3D mesh data by inferring format from file name.</li></ul>
+<li><a href="writeMesh.html" class="code" title="function writeMesh(fileName, vertices, faces, varargin)">writeMesh</a>	WRITEMESH Write 3D mesh data by inferring format from file name.</li></ul>
 <!-- crossreference -->
 
 
@@ -77,32 +77,33 @@ This function is called by:
 0016 <span class="comment">%   Wrapper function for MATLAB's build-in stlwrite.</span>
 0017 <span class="comment">%</span>
 0018 <span class="comment">%   See also</span>
-0019 <span class="comment">%   meshes3d, writeMesh, writeMesh_off, writeMesh_ply</span>
+0019 <span class="comment">%     meshes3d, writeMesh, writeMesh_off, writeMesh_ply, readMaesh_stl</span>
 0020 
 0021 <span class="comment">% ------</span>
 0022 <span class="comment">% Author: oqilipo</span>
-0023 <span class="comment">% Created: 2021-02-13, using Matlab 9.9.0.1538559 (R2020b)</span>
-0024 <span class="comment">% Copyright 2021</span>
-0025 
-0026 <span class="comment">%% Check inputs</span>
-0027 <span class="keyword">if</span> ~ischar(fileName)
-0028     error(<span class="string">'First argument must contain the name of the file'</span>);
-0029 <span class="keyword">end</span>
-0030 
-0031 <span class="comment">% optionnaly parses data</span>
-0032 <span class="keyword">if</span> isstruct(vertices)
-0033     <span class="keyword">if</span> nargin &gt; 2
-0034         varargin = [{faces} varargin{:}];
-0035     <span class="keyword">end</span>
-0036     faces = vertices.faces;
-0037     vertices = vertices.vertices;
-0038 <span class="keyword">end</span>
-0039 
-0040 <span class="comment">%% Write STL</span>
-0041 TR = triangulation(faces, vertices);
-0042 stlwrite(TR,fileName, varargin{:})
-0043 
-0044 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0023 <span class="comment">% E-mail: N/A</span>
+0024 <span class="comment">% Created: 2021-02-13, using Matlab 9.9.0.1538559 (R2020b)</span>
+0025 <span class="comment">% Copyright 2021-2024</span>
+0026 
+0027 <span class="comment">%% Check inputs</span>
+0028 <span class="keyword">if</span> ~ischar(fileName)
+0029     error(<span class="string">'First argument must contain the name of the file'</span>);
+0030 <span class="keyword">end</span>
+0031 
+0032 <span class="comment">% optionnaly parses data</span>
+0033 <span class="keyword">if</span> isstruct(vertices)
+0034     <span class="keyword">if</span> nargin &gt; 2
+0035         varargin = [{faces} varargin{:}];
+0036     <span class="keyword">end</span>
+0037     faces = vertices.faces;
+0038     vertices = vertices.vertices;
+0039 <span class="keyword">end</span>
+0040 
+0041 <span class="comment">%% Write STL</span>
+0042 TR = triangulation(faces, vertices);
+0043 stlwrite(TR,fileName, varargin{:})
+0044 
+0045 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

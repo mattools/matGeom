@@ -4,7 +4,7 @@
 <head>
   <title>Description of drawCapsule</title>
   <meta name="keywords" content="drawCapsule">
-  <meta name="description" content="Draw a capsule.">
+  <meta name="description" content="DRAWCAPSULE Draw a capsule.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Draw a capsule.</strong></div>
+<div class="box"><strong>DRAWCAPSULE Draw a capsule.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function varargout = drawCapsule(varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Draw a capsule.
+<div class="fragment"><pre class="comment">DRAWCAPSULE Draw a capsule.
 
    drawCapsule(CAP)
    Draws the capsule CAP on the current axis. 
@@ -52,7 +52,7 @@
    Specifies one or several options using parameter name-value pairs.
    Available options are usual drawing options, as well as:
    'nPhi'    the number of arcs used for drawing the meridians
-             (for the semi-spheres and the cylinder(
+             (for the semi-spheres and the cylinder)
    'nTheta'  the number of circles used for drawing the parallels
              (only for the semi-spheres at the ends of the capsule)
 
@@ -101,24 +101,24 @@
      l = light; view(3);
      
 
-   See Also:
-     crawCylinder, <a href="drawDome.html" class="code" title="function varargout = drawDome(varargin)">drawDome</a>, <a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a></pre></div>
+   See also
+     <a href="drawCylinder.html" class="code" title="function varargout = drawCylinder(varargin)">drawCylinder</a>, <a href="drawDome.html" class="code" title="function varargout = drawDome(varargin)">drawDome</a>, <a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="drawCapsule.html" class="code" title="function varargout = drawCapsule(varargin)">drawCapsule</a>	Draw a capsule.</li><li><a href="drawCylinder.html" class="code" title="function varargout = drawCylinder(varargin)">drawCylinder</a>	Draw a cylinder.</li><li><a href="drawDome.html" class="code" title="function varargout = drawDome(varargin)">drawDome</a>	DRAWDOME Draw a dome (half-sphere, semi-sphere) as a mesh.</li></ul>
+<li><a href="drawCapsule.html" class="code" title="function varargout = drawCapsule(varargin)">drawCapsule</a>	DRAWCAPSULE Draw a capsule.</li><li><a href="drawCylinder.html" class="code" title="function varargout = drawCylinder(varargin)">drawCylinder</a>	DRAWCYLINDER Draw a cylinder.</li><li><a href="drawDome.html" class="code" title="function varargout = drawDome(varargin)">drawDome</a>	DRAWDOME Draw a dome (half-sphere, semi-sphere) as a mesh.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="drawCapsule.html" class="code" title="function varargout = drawCapsule(varargin)">drawCapsule</a>	Draw a capsule.</li></ul>
+<li><a href="drawCapsule.html" class="code" title="function varargout = drawCapsule(varargin)">drawCapsule</a>	DRAWCAPSULE Draw a capsule.</li></ul>
 <!-- crossreference -->
 
 
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawCapsule(varargin)</a>
-0002 <span class="comment">% Draw a capsule.</span>
+0002 <span class="comment">%DRAWCAPSULE Draw a capsule.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   drawCapsule(CAP)</span>
 0005 <span class="comment">%   Draws the capsule CAP on the current axis.</span>
@@ -143,7 +143,7 @@ This function is called by:
 0024 <span class="comment">%   Specifies one or several options using parameter name-value pairs.</span>
 0025 <span class="comment">%   Available options are usual drawing options, as well as:</span>
 0026 <span class="comment">%   'nPhi'    the number of arcs used for drawing the meridians</span>
-0027 <span class="comment">%             (for the semi-spheres and the cylinder(</span>
+0027 <span class="comment">%             (for the semi-spheres and the cylinder)</span>
 0028 <span class="comment">%   'nTheta'  the number of circles used for drawing the parallels</span>
 0029 <span class="comment">%             (only for the semi-spheres at the ends of the capsule)</span>
 0030 <span class="comment">%</span>
@@ -192,104 +192,103 @@ This function is called by:
 0073 <span class="comment">%     l = light; view(3);</span>
 0074 <span class="comment">%</span>
 0075 <span class="comment">%</span>
-0076 <span class="comment">%   See Also:</span>
-0077 <span class="comment">%     crawCylinder, drawDome, drawSphere</span>
+0076 <span class="comment">%   See also</span>
+0077 <span class="comment">%     drawCylinder, drawDome, drawSphere</span>
 0078 <span class="comment">%</span>
 0079 
-0080 <span class="comment">%   ---------</span>
-0081 <span class="comment">%   author: Moritz Schappler</span>
-0082 <span class="comment">%   created the 27/07/2013</span>
-0083 <span class="comment">%</span>
-0084 
-0085 <span class="comment">%   HISTORY</span>
-0086 <span class="comment">%   2013-07-27 initial version as copy of drawCylinder</span>
-0087 <span class="comment">%   2020-05-18 changes based on current version of geom3d</span>
-0088 
-0089 
-0090 <span class="comment">%% Input argument processing</span>
-0091 
-0092 <span class="comment">% parse axis handle</span>
-0093 <span class="keyword">if</span> isAxisHandle(varargin{1})
-0094     hAx = varargin{1};
-0095     varargin(1) = [];
-0096 <span class="keyword">else</span>
-0097     hAx = gca;
-0098 <span class="keyword">end</span>
-0099 
-0100 <span class="comment">% input argument representing capsules</span>
-0101 cap = varargin{1};
-0102 varargin(1) = [];
-0103 
-0104 <span class="comment">% process the case of multiple capsules</span>
-0105 <span class="keyword">if</span> iscell(cap)
-0106     hCaps = gobjects(length(cap), 1);
-0107     <span class="keyword">for</span> i = 1:length(cap)
-0108         hCaps(i) = <a href="drawCapsule.html" class="code" title="function varargout = drawCapsule(varargin)">drawCapsule</a>(hAx, cap{i}, varargin{:});
+0080 <span class="comment">% ------</span>
+0081 <span class="comment">% Author: Moritz Schappler</span>
+0082 <span class="comment">% E-mail: N/A</span>
+0083 <span class="comment">% Created: 2013-07-27</span>
+0084 <span class="comment">% Copyright 2013-2024</span>
+0085 
+0086 <span class="comment">%% Input argument processing</span>
+0087 
+0088 <span class="comment">% extract handle of axis to draw on</span>
+0089 [hAx, varargin] = parseAxisHandle(varargin{:});
+0090 
+0091 <span class="comment">% input argument representing capsules</span>
+0092 cap = varargin{1};
+0093 varargin(1) = [];
+0094 
+0095 <span class="comment">% process the case of multiple capsules</span>
+0096 <span class="keyword">if</span> iscell(cap)
+0097     hCaps = gobjects(length(cap), 1);
+0098     <span class="keyword">for</span> i = 1:length(cap)
+0099         hCaps(i) = <a href="drawCapsule.html" class="code" title="function varargout = drawCapsule(varargin)">drawCapsule</a>(hAx, cap{i}, varargin{:});
+0100     <span class="keyword">end</span>
+0101     <span class="keyword">if</span> nargout &gt; 0
+0102         varargout{1} = hCaps;
+0103     <span class="keyword">end</span>    
+0104     <span class="keyword">return</span>;
+0105 <span class="keyword">elseif</span> size(cap, 1) &gt; 1
+0106     hCaps = gobjects(size(cap, 1), 3);
+0107     <span class="keyword">for</span> i = 1:size(cap, 1)
+0108         hCaps(i,:) = <a href="drawCapsule.html" class="code" title="function varargout = drawCapsule(varargin)">drawCapsule</a>(hAx, cap(i, :), varargin{:});
 0109     <span class="keyword">end</span>
-0110     <span class="keyword">if</span> nargout &gt; 0
-0111         varargout{1} = hCaps;
-0112     <span class="keyword">end</span>    
-0113     <span class="keyword">return</span>;
-0114 <span class="keyword">elseif</span> size(cap, 1) &gt; 1
-0115     hCaps = gobjects(size(cap, 1), 3);
-0116     <span class="keyword">for</span> i = 1:size(cap, 1)
-0117         hCaps(i,:) = <a href="drawCapsule.html" class="code" title="function varargout = drawCapsule(varargin)">drawCapsule</a>(hAx, cap(i, :), varargin{:});
-0118     <span class="keyword">end</span>
-0119     
-0120     <span class="keyword">if</span> nargout &gt; 0
-0121         varargout{1} = hCaps;
-0122     <span class="keyword">end</span>    
-0123     <span class="keyword">return</span>;
-0124 <span class="keyword">end</span>
-0125 
-0126 faceColor = <span class="string">'g'</span>;
-0127 ind = find(strcmpi(varargin, <span class="string">'FaceColor'</span>), 1, <span class="string">'last'</span>);
-0128 <span class="keyword">if</span> ~isempty(ind)
-0129     faceColor = varargin{ind+1};
-0130     varargin(ind:ind+1) = [];
-0131 <span class="keyword">end</span>
-0132 
-0133 <span class="comment">% extract transparency</span>
-0134 alpha = 1;
-0135 ind = find(strcmpi(varargin, <span class="string">'FaceAlpha'</span>), 1, <span class="string">'last'</span>);
-0136 <span class="keyword">if</span> ~isempty(ind)
-0137     alpha = varargin{ind+1};
-0138     varargin(ind:ind+1) = [];
-0139 <span class="keyword">end</span>
-0140 
-0141 <span class="comment">% add default drawing options</span>
-0142 varargin = [{<span class="string">'FaceColor'</span>, faceColor, <span class="string">'edgeColor'</span>, <span class="string">'none'</span>, <span class="string">'FaceAlpha'</span>, alpha} varargin];
-0143 
-0144 <span class="comment">% adjust drawing options for the cylinder. Options nPhi and nTheta may only</span>
-0145 <span class="comment">% be given to the function drawDome, not drawCylinder</span>
-0146 options_cyl = [<span class="string">'open'</span>, varargin];
-0147 ind = find(strcmpi(options_cyl, <span class="string">'nPhi'</span>), 1, <span class="string">'last'</span>);
-0148 <span class="keyword">if</span> ~isempty(ind)
-0149     ind = ind(1);
-0150     nPhi = options_cyl{ind+1};
-0151     options_cyl(ind:ind+1) = [];
-0152     options_cyl = [nPhi, options_cyl];
-0153 <span class="keyword">end</span>
-0154 ind = find(strcmpi(options_cyl, <span class="string">'nTheta'</span>), 1, <span class="string">'last'</span>);
-0155 <span class="keyword">if</span> ~isempty(ind)
-0156     options_cyl(ind:ind+1) = [];
-0157 <span class="keyword">end</span>
-0158 
-0159 hold on
-0160 <span class="keyword">if</span> all(cap(1:3) == cap(4:6))
-0161   <span class="comment">% the capsule is only a sphere. take arbitrary axis to be able to plot</span>
-0162   cap(4:6) = cap(1:3)+eps*([0 0 1]);
-0163   h1 = 0;
-0164 <span class="keyword">else</span>
-0165   h1 = <a href="drawCylinder.html" class="code" title="function varargout = drawCylinder(varargin)">drawCylinder</a>(cap, options_cyl{:});
-0166 <span class="keyword">end</span>
-0167 h2 = <a href="drawDome.html" class="code" title="function varargout = drawDome(varargin)">drawDome</a>(cap([1:3,7]),  (cap(1:3)-cap(4:6)), varargin{:});
-0168 h3 = <a href="drawDome.html" class="code" title="function varargout = drawDome(varargin)">drawDome</a>(cap([4:6,7]), -(cap(1:3)-cap(4:6)), varargin{:});
-0169 
-0170 <span class="comment">% return handles</span>
-0171 <span class="keyword">if</span> nargout == 1
-0172     varargout{1} = [h1, h2, h3];
-0173 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0110     
+0111     <span class="keyword">if</span> nargout &gt; 0
+0112         varargout{1} = hCaps;
+0113     <span class="keyword">end</span>    
+0114     <span class="keyword">return</span>;
+0115 <span class="keyword">end</span>
+0116 
+0117 faceColor = <span class="string">'g'</span>;
+0118 ind = find(strcmpi(varargin, <span class="string">'FaceColor'</span>), 1, <span class="string">'last'</span>);
+0119 <span class="keyword">if</span> ~isempty(ind)
+0120     faceColor = varargin{ind+1};
+0121     varargin(ind:ind+1) = [];
+0122 <span class="keyword">end</span>
+0123 
+0124 <span class="comment">% extract transparency</span>
+0125 alpha = 1;
+0126 ind = find(strcmpi(varargin, <span class="string">'FaceAlpha'</span>), 1, <span class="string">'last'</span>);
+0127 <span class="keyword">if</span> ~isempty(ind)
+0128     alpha = varargin{ind+1};
+0129     varargin(ind:ind+1) = [];
+0130 <span class="keyword">end</span>
+0131 
+0132 <span class="comment">% add default drawing options</span>
+0133 varargin = [{<span class="string">'FaceColor'</span>, faceColor, <span class="string">'edgeColor'</span>, <span class="string">'none'</span>, <span class="string">'FaceAlpha'</span>, alpha} varargin];
+0134 
+0135 <span class="comment">% adjust drawing options for the cylinder. Options nPhi and nTheta may only</span>
+0136 <span class="comment">% be given to the function drawDome, not drawCylinder</span>
+0137 options_cyl = [<span class="string">'open'</span>, varargin];
+0138 ind = find(strcmpi(options_cyl, <span class="string">'nPhi'</span>), 1, <span class="string">'last'</span>);
+0139 <span class="keyword">if</span> ~isempty(ind)
+0140     ind = ind(1);
+0141     nPhi = options_cyl{ind+1};
+0142     options_cyl(ind:ind+1) = [];
+0143     options_cyl = [nPhi, options_cyl];
+0144 <span class="keyword">end</span>
+0145 ind = find(strcmpi(options_cyl, <span class="string">'nTheta'</span>), 1, <span class="string">'last'</span>);
+0146 <span class="keyword">if</span> ~isempty(ind)
+0147     options_cyl(ind:ind+1) = [];
+0148 <span class="keyword">end</span>
+0149 
+0150 <span class="comment">% save hold state</span>
+0151 holdState = ishold(hAx);
+0152 hold(hAx, <span class="string">'on'</span>);
+0153 
+0154 <span class="keyword">if</span> all(cap(1:3) == cap(4:6))
+0155     <span class="comment">% the capsule is only a sphere. take arbitrary axis to be able to plot</span>
+0156     cap(4:6) = cap(1:3)+eps*([0 0 1]);
+0157     h1 = 0;
+0158 <span class="keyword">else</span>
+0159     h1 = <a href="drawCylinder.html" class="code" title="function varargout = drawCylinder(varargin)">drawCylinder</a>(cap, options_cyl{:});
+0160 <span class="keyword">end</span>
+0161 h2 = <a href="drawDome.html" class="code" title="function varargout = drawDome(varargin)">drawDome</a>(cap([1:3,7]),  (cap(1:3)-cap(4:6)), varargin{:});
+0162 h3 = <a href="drawDome.html" class="code" title="function varargout = drawDome(varargin)">drawDome</a>(cap([4:6,7]), -(cap(1:3)-cap(4:6)), varargin{:});
+0163 
+0164 <span class="comment">% restore hold state</span>
+0165 <span class="keyword">if</span> ~holdState
+0166     hold(hAx, <span class="string">'off'</span>);
+0167 <span class="keyword">end</span>
+0168 
+0169 <span class="comment">% return handles</span>
+0170 <span class="keyword">if</span> nargout == 1
+0171     varargout{1} = [h1, h2, h3];
+0172 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

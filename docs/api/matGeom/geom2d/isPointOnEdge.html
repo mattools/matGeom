@@ -178,84 +178,71 @@ This function is called by:
 0068 <span class="comment">%   edges2d, points2d, isPointOnLine</span>
 0069 <span class="comment">%</span>
 0070 
-0071 <span class="comment">%   ---------</span>
-0072 <span class="comment">%   author : David Legland</span>
-0073 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0074 <span class="comment">%   created the 31/10/2003.</span>
-0075 <span class="comment">%</span>
+0071 <span class="comment">% ------</span>
+0072 <span class="comment">% Author: David Legland</span>
+0073 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0074 <span class="comment">% Created: 2003-10-31</span>
+0075 <span class="comment">% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0076 
-0077 <span class="comment">%   HISTORY</span>
-0078 <span class="comment">%   11/03/2004 change input format: edge is [x1 y1 x2 y2].</span>
-0079 <span class="comment">%   17/01/2005 if test N edges with N points, return N boolean.</span>
-0080 <span class="comment">%   21/01/2005 normalize test for colinearity, so enhance precision</span>
-0081 <span class="comment">%   22/05/2009 rename to isPointOnEdge, add psb to specify tolerance</span>
-0082 <span class="comment">%   26/01/2010 fix bug in precision computation</span>
-0083 <span class="comment">%   04/10/2010 fix a bug, and clean up code</span>
-0084 <span class="comment">%   28/10/2010 fix bug to have N results when input is N points and N</span>
-0085 <span class="comment">%       edges, add support for arrays with different numbers of rows, and</span>
-0086 <span class="comment">%       update doc.</span>
-0087 <span class="comment">%   2011-06-15 rewrites by using less memory, and avoiding repmat when psb</span>
-0088 
-0089 
-0090 <span class="comment">% extract computation tolerance</span>
-0091 tol = 1e-14;
-0092 <span class="keyword">if</span> ~isempty(varargin)
-0093     tol = varargin{1};
-0094 <span class="keyword">end</span>
-0095 
-0096 <span class="comment">% number of edges and of points</span>
-0097 nPoints = size(point, 1);
-0098 nEdges = size(edge, 1);
-0099 
-0100 <span class="comment">% adapt size of inputs if needed, and extract elements for computation</span>
-0101 <span class="keyword">if</span> nPoints == nEdges
-0102     <span class="comment">% When the number of points and edges is the same, the one-to-one test</span>
-0103     <span class="comment">% will be computed, so there is no need to repeat matrices</span>
-0104     dx = edge(:,3) - edge(:,1);
-0105     dy = edge(:,4) - edge(:,2);
-0106     lx = point(:,1) - edge(:,1);
-0107     ly = point(:,2) - edge(:,2);
-0108     
-0109 <span class="keyword">elseif</span> nPoints == 1
-0110     <span class="comment">% one point, several edges</span>
-0111     dx = edge(:, 3) - edge(:, 1);
-0112     dy = edge(:, 4) - edge(:, 2);
-0113     lx = point(ones(nEdges, 1), 1) - edge(:, 1);
-0114     ly = point(ones(nEdges, 1), 2) - edge(:, 2);
-0115     
-0116 <span class="keyword">elseif</span> nEdges == 1
-0117     <span class="comment">% several points, one edge</span>
-0118     dx = (edge(3) - edge(1)) * ones(nPoints, 1);
-0119     dy = (edge(4) - edge(2)) * ones(nPoints, 1);
-0120     lx = point(:, 1) - edge(1);
-0121     ly = point(:, 2) - edge(2);
-0122 
-0123 <span class="keyword">else</span>
-0124     <span class="comment">% Np points and Ne edges:</span>
-0125     <span class="comment">% Create an array for each parameter, so that the result will be a</span>
-0126     <span class="comment">% Np-by-Ne matrix of booleans (requires more memory, and uses repmat)</span>
-0127 
-0128     x0 = repmat(edge(:, 1)', nPoints, 1);
-0129     y0 = repmat(edge(:, 2)', nPoints, 1);
-0130     dx = repmat(edge(:, 3)', nPoints,  1) - x0;
-0131     dy = repmat(edge(:, 4)', nPoints,  1) - y0;
-0132     
-0133     lx = repmat(point(:, 1), 1, nEdges) - x0;
-0134     ly = repmat(point(:, 2), 1, nEdges) - y0;
-0135 <span class="keyword">end</span>
-0136 
-0137 <span class="comment">% test if point is located on supporting line</span>
-0138 b1 = abs(lx.*dy - ly.*dx) ./ (dx.*dx + dy.*dy) &lt; tol;
-0139 
-0140 <span class="comment">% compute position of point with respect to edge bounds</span>
-0141 <span class="comment">% use different tests depending on line angle</span>
-0142 ind     = abs(dx) &gt; abs(dy);
-0143 t       = zeros(size(dx));
-0144 t(ind)  = lx( ind) ./ dx( ind);
-0145 t(~ind) = ly(~ind) ./ dy(~ind);
-0146 
-0147 <span class="comment">% check if point is located between edge bounds</span>
-0148 b = t &gt;- tol &amp; t-1 &lt; tol &amp; b1;</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0077 <span class="comment">% extract computation tolerance</span>
+0078 tol = 1e-14;
+0079 <span class="keyword">if</span> ~isempty(varargin)
+0080     tol = varargin{1};
+0081 <span class="keyword">end</span>
+0082 
+0083 <span class="comment">% number of edges and of points</span>
+0084 nPoints = size(point, 1);
+0085 nEdges = size(edge, 1);
+0086 
+0087 <span class="comment">% adapt size of inputs if needed, and extract elements for computation</span>
+0088 <span class="keyword">if</span> nPoints == nEdges
+0089     <span class="comment">% When the number of points and edges is the same, the one-to-one test</span>
+0090     <span class="comment">% will be computed, so there is no need to repeat matrices</span>
+0091     dx = edge(:,3) - edge(:,1);
+0092     dy = edge(:,4) - edge(:,2);
+0093     lx = point(:,1) - edge(:,1);
+0094     ly = point(:,2) - edge(:,2);
+0095     
+0096 <span class="keyword">elseif</span> nPoints == 1
+0097     <span class="comment">% one point, several edges</span>
+0098     dx = edge(:, 3) - edge(:, 1);
+0099     dy = edge(:, 4) - edge(:, 2);
+0100     lx = point(ones(nEdges, 1), 1) - edge(:, 1);
+0101     ly = point(ones(nEdges, 1), 2) - edge(:, 2);
+0102     
+0103 <span class="keyword">elseif</span> nEdges == 1
+0104     <span class="comment">% several points, one edge</span>
+0105     dx = (edge(3) - edge(1)) * ones(nPoints, 1);
+0106     dy = (edge(4) - edge(2)) * ones(nPoints, 1);
+0107     lx = point(:, 1) - edge(1);
+0108     ly = point(:, 2) - edge(2);
+0109 
+0110 <span class="keyword">else</span>
+0111     <span class="comment">% Np points and Ne edges:</span>
+0112     <span class="comment">% Create an array for each parameter, so that the result will be a</span>
+0113     <span class="comment">% Np-by-Ne matrix of booleans (requires more memory, and uses repmat)</span>
+0114 
+0115     x0 = repmat(edge(:, 1)', nPoints, 1);
+0116     y0 = repmat(edge(:, 2)', nPoints, 1);
+0117     dx = repmat(edge(:, 3)', nPoints,  1) - x0;
+0118     dy = repmat(edge(:, 4)', nPoints,  1) - y0;
+0119     
+0120     lx = repmat(point(:, 1), 1, nEdges) - x0;
+0121     ly = repmat(point(:, 2), 1, nEdges) - y0;
+0122 <span class="keyword">end</span>
+0123 
+0124 <span class="comment">% test if point is located on supporting line</span>
+0125 b1 = abs(lx.*dy - ly.*dx) ./ (dx.*dx + dy.*dy) &lt; tol;
+0126 
+0127 <span class="comment">% compute position of point with respect to edge bounds</span>
+0128 <span class="comment">% use different tests depending on line angle</span>
+0129 ind     = abs(dx) &gt; abs(dy);
+0130 t       = zeros(size(dx));
+0131 t(ind)  = lx( ind) ./ dx( ind);
+0132 t(~ind) = ly(~ind) ./ dy(~ind);
+0133 
+0134 <span class="comment">% check if point is located between edge bounds</span>
+0135 b = t &gt;- tol &amp; t-1 &lt; tol &amp; b1;</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

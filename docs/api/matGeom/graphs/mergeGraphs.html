@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of mergeGraphs</title>
+  <meta name="keywords" content="mergeGraphs">
+  <meta name="description" content="MERGEGRAPHS Merge two graphs, by adding nodes, edges and faces lists.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; mergeGraphs.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>mergeGraphs
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MERGEGRAPHS Merge two graphs, by adding nodes, edges and faces lists.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = mergeGraphs(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MERGEGRAPHS Merge two graphs, by adding nodes, edges and faces lists.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="grSimplifyBranches.html" class="code" title="function varargout = grSimplifyBranches(nodes, edges)">grSimplifyBranches</a>	GRSIMPLIFYBRANCHES Replace branches of a graph by single edges.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = mergeGraphs(varargin)</a>
+0002 <span class="comment">%MERGEGRAPHS Merge two graphs, by adding nodes, edges and faces lists.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%</span>
+0005 <span class="comment">%</span>
+0006 
+0007 <span class="comment">% ------</span>
+0008 <span class="comment">% Author: David Legland</span>
+0009 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0010 <span class="comment">% Created: 2004-08-09</span>
+0011 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0012 
+0013 simplify = false;
+0014 
+0015 edges = {}; edges2 = {};
+0016 faces = {}; faces2 = {}; 
+0017 
+0018 <span class="comment">%% process input arguments</span>
+0019 
+0020 <span class="comment">% extract simplify tag</span>
+0021 var = varargin{nargin};
+0022 <span class="keyword">if</span> ischar(var)
+0023     <span class="keyword">if</span> strcmp(var, <span class="string">'simplify'</span>)
+0024         simplify = true;
+0025         varargin = varargin(1:length(varargin)-1);
+0026     <span class="keyword">end</span>
+0027 <span class="keyword">end</span>
+0028 
+0029 
+0030 <span class="comment">%% extract data of first graph</span>
+0031 
+0032 var = varargin{1};
+0033 <span class="keyword">if</span> iscell(var)
+0034     <span class="comment">% graph is stored as a cell array : first cell is nodes, second one is</span>
+0035     <span class="comment">% edges, and third is faces</span>
+0036     nodes = var{1};
+0037     <span class="keyword">if</span> length(var)&gt;1
+0038         edges = var{2};
+0039     <span class="keyword">end</span>
+0040     <span class="keyword">if</span> length(var)&gt;2
+0041         faces = var{3};
+0042     <span class="keyword">end</span>
+0043     varargin = varargin(2:length(varargin));
+0044     
+0045 <span class="keyword">elseif</span> isstruct(var)
+0046     <span class="comment">% graph is stored as a structure, with fields 'nodes', 'edges', and</span>
+0047     <span class="comment">% eventually 'faces'.</span>
+0048     nodes = var.nodes;
+0049     edges = var.edges;
+0050     <span class="keyword">if</span> isfield(var, <span class="string">'faces'</span>)
+0051         faces = var.faces;
+0052     <span class="keyword">end</span>
+0053     varargin = varargin(2:length(varargin));
+0054     
+0055 <span class="keyword">elseif</span> length(varargin)&gt;2
+0056     <span class="comment">% graph is stored as set of variables : nodes, edges, and eventually</span>
+0057     <span class="comment">% faces</span>
+0058     nodes = varargin{1};
+0059     edges = varargin{2};
+0060     
+0061     <span class="keyword">if</span> length(varargin)==3
+0062         <span class="comment">% last argument describe graph 2</span>
+0063         varargin = varargin(3);
+0064     <span class="keyword">else</span>
+0065         <span class="keyword">if</span> length(varargin)~=4 || ~isnumeric(varargin{4})
+0066             <span class="comment">% third argument is faces of graph 1</span>
+0067             faces = varargin{3};
+0068             varargin = varargin(4:length(varargin));
+0069         <span class="keyword">else</span>
+0070             varargin = varargin(3:length(varargin));
+0071         <span class="keyword">end</span>
+0072     <span class="keyword">end</span>
+0073     
+0074 <span class="keyword">else</span>
+0075     error(<span class="string">'Error in passing arguments in mergeGraphs'</span>);
+0076 <span class="keyword">end</span>
+0077 
+0078 
+0079 <span class="comment">%% extract data of second graph</span>
+0080 
+0081 var = varargin{1};
+0082 <span class="keyword">if</span> iscell(var)
+0083     <span class="comment">% graph is stored as a cell array : first cell is nodes, second one is</span>
+0084     <span class="comment">% edges, and third is faces</span>
+0085     nodes2 = var{1};
+0086     <span class="keyword">if</span> length(var)&gt;1
+0087         edges2 = var{2};
+0088     <span class="keyword">end</span>
+0089     <span class="keyword">if</span> length(var)&gt;2
+0090         faces2 = var{3};
+0091     <span class="keyword">end</span>
+0092     
+0093 <span class="keyword">elseif</span> isstruct(var)
+0094     <span class="comment">% graph is stored as a structure, with fields 'nodes', 'edges', and</span>
+0095     <span class="comment">% eventually 'faces'.</span>
+0096     nodes2 = var.nodes;
+0097     edges2 = var.edges;
+0098     <span class="keyword">if</span> isfield(var, <span class="string">'faces'</span>)
+0099         faces2 = var.faces;
+0100     <span class="keyword">end</span>
+0101     
+0102 <span class="keyword">elseif</span> length(varargin)&gt;1
+0103     <span class="comment">% graph is stored as set of variables : nodes, edges, and eventually</span>
+0104     <span class="comment">% faces</span>
+0105     nodes2 = varargin{1};
+0106     edges2 = varargin{2};
+0107     
+0108     <span class="keyword">if</span> length(varargin)&gt;2
+0109         <span class="comment">% last argument describe graph 2</span>
+0110         faces2 = varargin{3};
+0111     <span class="keyword">end</span>
+0112     
+0113 <span class="keyword">else</span>
+0114     error(<span class="string">'Error in passing arguments in mergeGraphs'</span>);
+0115 <span class="keyword">end</span>
+0116 
+0117 
+0118 <span class="comment">%% Main algorithm</span>
+0119 
+0120 <span class="comment">% eventually convert faces</span>
+0121 <span class="keyword">if</span> ~iscell(faces)
+0122     f = cell(size(faces, 1), 1);
+0123     <span class="keyword">for</span> i = 1:size(faces, 1)
+0124         f{i} = faces(i,:);
+0125     <span class="keyword">end</span>
+0126     faces = f;
+0127 <span class="keyword">end</span>
+0128 
+0129 edges = [edges ; edges2 + size(nodes, 1)];
+0130 <span class="keyword">if</span> iscell(faces2)
+0131     <span class="keyword">for</span> i = 1:length(faces2)
+0132         faces{length(faces)+1} = faces2{i} + size(nodes, 1); <span class="comment">%#ok&lt;AGROW&gt;</span>
+0133     <span class="keyword">end</span>
+0134 <span class="keyword">else</span>
+0135     <span class="comment">% TODO</span>
+0136 <span class="keyword">end</span>
+0137 nodes = [nodes; nodes2];
+0138 
+0139 <span class="keyword">if</span> simplify
+0140     <span class="keyword">if</span> ~isempty(faces)
+0141         [nodes, edges, faces] = <a href="grSimplifyBranches.html" class="code" title="function varargout = grSimplifyBranches(nodes, edges)">grSimplifyBranches</a>(nodes, edges, faces);
+0142     <span class="keyword">else</span>
+0143         [nodes, edges] = <a href="grSimplifyBranches.html" class="code" title="function varargout = grSimplifyBranches(nodes, edges)">grSimplifyBranches</a>(nodes, edges);
+0144     <span class="keyword">end</span>
+0145 <span class="keyword">end</span>
+0146 
+0147 
+0148 <span class="comment">%% process output depending on how many arguments are needed</span>
+0149 
+0150 <span class="keyword">if</span> nargout == 1
+0151     graph.nodes = nodes;
+0152     graph.edges = edges;
+0153     <span class="keyword">if</span> ~isempty(faces)
+0154         graph.faces = faces;
+0155     <span class="keyword">end</span>
+0156     varargout{1} = graph;
+0157 <span class="keyword">end</span>
+0158 
+0159 <span class="keyword">if</span> nargout == 2
+0160     varargout{1} = nodes;
+0161     varargout{2} = edges;
+0162 <span class="keyword">end</span>
+0163 
+0164 <span class="keyword">if</span> nargout == 3
+0165     varargout{1} = nodes;
+0166     varargout{2} = edges;
+0167     varargout{3} = faces;
+0168 <span class="keyword">end</span>
+0169 
+0170</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

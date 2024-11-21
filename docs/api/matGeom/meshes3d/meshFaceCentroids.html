@@ -44,17 +44,17 @@
      drawVector3d(centros1, normals1);
 
 
-   See also:
+   See also
      meshes3d, <a href="drawMesh.html" class="code" title="function varargout = drawMesh(varargin)">drawMesh</a>, <a href="meshFaceNormals.html" class="code" title="function normals = meshFaceNormals(varargin)">meshFaceNormals</a>, <a href="meshFaceAreas.html" class="code" title="function areas = meshFaceAreas(vertices, faces)">meshFaceAreas</a>, convhull</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="../../matGeom/geom3d/polygonCentroid3d.html" class="code" title="function centroid = polygonCentroid3d(varargin)">polygonCentroid3d</a>	POLYGONCENTROID3D Centroid (or center of mass) of a polygon.</li><li><a href="../../matGeom/polygons2d/polygonCentroid.html" class="code" title="function [centroid, area] = polygonCentroid(varargin)">polygonCentroid</a>	Computes the centroid (center of mass) of a polygon.</li></ul>
+<li><a href="../../matGeom/geom3d/polygonCentroid3d.html" class="code" title="function [centroid, area] = polygonCentroid3d(varargin)">polygonCentroid3d</a>	POLYGONCENTROID3D Centroid (or center of mass) of a polygon.</li><li><a href="../../matGeom/polygons2d/polygonCentroid.html" class="code" title="function [centroid, area, Sx, Sy] = polygonCentroid(varargin)">polygonCentroid</a>	POLYGONCENTROID Computes the centroid (center of mass) of a polygon.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="createStellatedMesh.html" class="code" title="function varargout = createStellatedMesh(vertices, faces, varargin)">createStellatedMesh</a>	CREATESTELLATEDMESH  Replaces each face of a mesh by a pyramid.</li><li><a href="drawFaceNormals.html" class="code" title="function varargout = drawFaceNormals(varargin)">drawFaceNormals</a>	DRAWFACENORMALS Draw normal vector of each face in a mesh.</li><li><a href="minConvexHull.html" class="code" title="function newFaces = minConvexHull(points, varargin)">minConvexHull</a>	MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.</li></ul>
+<li><a href="clipMeshByBox.html" class="code" title="function varargout = clipMeshByBox(varargin)">clipMeshByBox</a>	CLIPMESHBYBOX Clip a mesh by a box.</li><li><a href="createStellatedMesh.html" class="code" title="function varargout = createStellatedMesh(vertices, faces, varargin)">createStellatedMesh</a>	CREATESTELLATEDMESH  Replaces each face of a mesh by a pyramid.</li><li><a href="drawFaceNormals.html" class="code" title="function varargout = drawFaceNormals(varargin)">drawFaceNormals</a>	DRAWFACENORMALS Draw normal vector of each face in a mesh.</li><li><a href="minConvexHull.html" class="code" title="function newFaces = minConvexHull(points, varargin)">minConvexHull</a>	MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.</li></ul>
 <!-- crossreference -->
 
 
@@ -78,64 +78,60 @@ This function is called by:
 0016 <span class="comment">%     drawVector3d(centros1, normals1);</span>
 0017 <span class="comment">%</span>
 0018 <span class="comment">%</span>
-0019 <span class="comment">%   See also:</span>
+0019 <span class="comment">%   See also</span>
 0020 <span class="comment">%     meshes3d, drawMesh, meshFaceNormals, meshFaceAreas, convhull</span>
 0021 <span class="comment">%</span>
 0022 
 0023 <span class="comment">% ------</span>
 0024 <span class="comment">% Author: David Legland</span>
-0025 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0025 <span class="comment">% E-mail: david.legland@inrae.fr</span>
 0026 <span class="comment">% Created: 2006-07-05</span>
-0027 <span class="comment">% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0027 <span class="comment">% Copyright 2006-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)</span>
 0028 
-0029 <span class="comment">% HISTORY</span>
-0030 <span class="comment">% 2007-09-18 fix: worked only for 2D case, now works also for 3D</span>
-0031 <span class="comment">% 2017-11-24 rename from faceCentroids to meshFaceCentroids</span>
-0032 
-0033 <span class="comment">% parse input data</span>
-0034 [vertices, faces] = parseMeshData(varargin{:});
-0035 
-0036 <span class="keyword">if</span> isnumeric(faces)
-0037     <span class="comment">% trimesh or quadmesh</span>
-0038     nf = size(faces, 1);
-0039     centroids = zeros(nf, size(vertices, 2));
-0040     <span class="keyword">if</span> size(vertices, 2) == 2
-0041         <span class="comment">% planar case</span>
-0042         <span class="keyword">for</span> f = 1:nf
-0043             centroids(f,:) = <a href="../../matGeom/polygons2d/polygonCentroid.html" class="code" title="function [centroid, area] = polygonCentroid(varargin)">polygonCentroid</a>(vertices(faces(f,:), :));
-0044         <span class="keyword">end</span>
-0045     <span class="keyword">else</span>
-0046         <span class="comment">% 3D case</span>
-0047         <span class="keyword">if</span> size(faces, 2) == 3
-0048             <span class="comment">% For triangular meshes, uses accelerated method</span>
-0049             <span class="comment">% (taken from https://github.com/alecjacobson/gptoolbox)</span>
-0050             <span class="keyword">for</span> ff = 1:3
-0051                 centroids = centroids + 1/3 * vertices(faces(:,ff),:);
-0052             <span class="keyword">end</span>
-0053         <span class="keyword">else</span>
-0054             <span class="comment">% for quad (or larger) meshes, use slower but more precise method</span>
-0055             <span class="keyword">for</span> f = 1:nf
-0056                 centroids(f,:) = <a href="../../matGeom/geom3d/polygonCentroid3d.html" class="code" title="function centroid = polygonCentroid3d(varargin)">polygonCentroid3d</a>(vertices(faces(f,:), :));
-0057             <span class="keyword">end</span>
-0058         <span class="keyword">end</span>
-0059     <span class="keyword">end</span>        
-0060 <span class="keyword">else</span>
-0061     <span class="comment">% mesh with faces stored as cell array</span>
-0062     nf = length(faces);
-0063     centroids = zeros(nf, size(vertices, 2));
-0064     <span class="keyword">if</span> size(vertices, 2) == 2
-0065         <span class="comment">% planar case</span>
-0066         <span class="keyword">for</span> f = 1:nf
-0067             centroids(f,:) = <a href="../../matGeom/polygons2d/polygonCentroid.html" class="code" title="function [centroid, area] = polygonCentroid(varargin)">polygonCentroid</a>(vertices(faces{f}, :));
-0068         <span class="keyword">end</span>
-0069     <span class="keyword">else</span>
-0070         <span class="comment">% 3D case</span>
-0071         <span class="keyword">for</span> f = 1:nf
-0072             centroids(f,:) = <a href="../../matGeom/geom3d/polygonCentroid3d.html" class="code" title="function centroid = polygonCentroid3d(varargin)">polygonCentroid3d</a>(vertices(faces{f}, :));
-0073         <span class="keyword">end</span>
-0074     <span class="keyword">end</span>
-0075 <span class="keyword">end</span>
-0076</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0029 <span class="comment">% parse input data</span>
+0030 [vertices, faces] = parseMeshData(varargin{:});
+0031 
+0032 <span class="keyword">if</span> isnumeric(faces)
+0033     <span class="comment">% trimesh or quadmesh</span>
+0034     nf = size(faces, 1);
+0035     centroids = zeros(nf, size(vertices, 2));
+0036     <span class="keyword">if</span> size(vertices, 2) == 2
+0037         <span class="comment">% planar case</span>
+0038         <span class="keyword">for</span> f = 1:nf
+0039             centroids(f,:) = <a href="../../matGeom/polygons2d/polygonCentroid.html" class="code" title="function [centroid, area, Sx, Sy] = polygonCentroid(varargin)">polygonCentroid</a>(vertices(faces(f,:), :));
+0040         <span class="keyword">end</span>
+0041     <span class="keyword">else</span>
+0042         <span class="comment">% 3D case</span>
+0043         <span class="keyword">if</span> size(faces, 2) == 3
+0044             <span class="comment">% For triangular meshes, uses accelerated method</span>
+0045             <span class="comment">% (taken from https://github.com/alecjacobson/gptoolbox)</span>
+0046             <span class="keyword">for</span> ff = 1:3
+0047                 centroids = centroids + 1/3 * vertices(faces(:,ff),:);
+0048             <span class="keyword">end</span>
+0049         <span class="keyword">else</span>
+0050             <span class="comment">% for quad (or larger) meshes, use slower but more precise method</span>
+0051             <span class="keyword">for</span> f = 1:nf
+0052                 centroids(f,:) = <a href="../../matGeom/geom3d/polygonCentroid3d.html" class="code" title="function [centroid, area] = polygonCentroid3d(varargin)">polygonCentroid3d</a>(vertices(faces(f,:), :));
+0053             <span class="keyword">end</span>
+0054         <span class="keyword">end</span>
+0055     <span class="keyword">end</span>        
+0056 <span class="keyword">else</span>
+0057     <span class="comment">% mesh with faces stored as cell array</span>
+0058     nf = length(faces);
+0059     centroids = zeros(nf, size(vertices, 2));
+0060     <span class="keyword">if</span> size(vertices, 2) == 2
+0061         <span class="comment">% planar case</span>
+0062         <span class="keyword">for</span> f = 1:nf
+0063             centroids(f,:) = <a href="../../matGeom/polygons2d/polygonCentroid.html" class="code" title="function [centroid, area, Sx, Sy] = polygonCentroid(varargin)">polygonCentroid</a>(vertices(faces{f}, :));
+0064         <span class="keyword">end</span>
+0065     <span class="keyword">else</span>
+0066         <span class="comment">% 3D case</span>
+0067         <span class="keyword">for</span> f = 1:nf
+0068             centroids(f,:) = <a href="../../matGeom/geom3d/polygonCentroid3d.html" class="code" title="function [centroid, area] = polygonCentroid3d(varargin)">polygonCentroid3d</a>(vertices(faces{f}, :));
+0069         <span class="keyword">end</span>
+0070     <span class="keyword">end</span>
+0071 <span class="keyword">end</span>
+0072</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

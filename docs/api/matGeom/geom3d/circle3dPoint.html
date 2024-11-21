@@ -32,7 +32,7 @@
    output = circle3dPoint(input)
 
    Example
-   % Draw some points on a 3D circle
+     % Draw some points on a 3D circle
      figure('color','w'); hold on; view(130,-10);
      circle = [10 20 30 50 90 45 0];
      drawCircle3d(circle)
@@ -44,15 +44,8 @@
      % Draw point opposite to origin
      drawPoint3d(circle3dPoint(circle, 180), 'k*')
    
-
    See also
-   <a href="circles3d.html" class="code" title="function circles3d(varargin)">circles3d</a>, <a href="circle3dPosition.html" class="code" title="function theta = circle3dPosition(point, circle)">circle3dPosition</a>
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- Created: 2011-06-21,    using Matlab 7.9.0.529 (R2009b)
- Copyright 2011 INRA - Cepia Software Platform.</pre></div>
+   <a href="circles3d.html" class="code" title="function circles3d(varargin)">circles3d</a>, <a href="circle3dPosition.html" class="code" title="function theta = circle3dPosition(point, circle)">circle3dPosition</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -73,7 +66,7 @@ This function is called by:
 0004 <span class="comment">%   output = circle3dPoint(input)</span>
 0005 <span class="comment">%</span>
 0006 <span class="comment">%   Example</span>
-0007 <span class="comment">%   % Draw some points on a 3D circle</span>
+0007 <span class="comment">%     % Draw some points on a 3D circle</span>
 0008 <span class="comment">%     figure('color','w'); hold on; view(130,-10);</span>
 0009 <span class="comment">%     circle = [10 20 30 50 90 45 0];</span>
 0010 <span class="comment">%     drawCircle3d(circle)</span>
@@ -85,43 +78,42 @@ This function is called by:
 0016 <span class="comment">%     % Draw point opposite to origin</span>
 0017 <span class="comment">%     drawPoint3d(circle3dPoint(circle, 180), 'k*')</span>
 0018 <span class="comment">%</span>
-0019 <span class="comment">%</span>
-0020 <span class="comment">%   See also</span>
-0021 <span class="comment">%   circles3d, circle3dPosition</span>
-0022 <span class="comment">%</span>
-0023 <span class="comment">% ------</span>
-0024 <span class="comment">% Author: David Legland</span>
-0025 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0026 <span class="comment">% Created: 2011-06-21,    using Matlab 7.9.0.529 (R2009b)</span>
-0027 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
-0028 
-0029 pos=pos(:);
-0030 
-0031 <span class="comment">% extract circle coordinates</span>
-0032 xc  = circle(1);
-0033 yc  = circle(2);
-0034 zc  = circle(3);
-0035 r   = circle(4);
-0036 
-0037 theta   = circle(5);
-0038 phi     = circle(6);
-0039 psi     = circle(7);
-0040 
-0041 <span class="comment">% convert position to angle</span>
-0042 t = pos * pi / 180;
-0043 
-0044 <span class="comment">% compute position on base circle</span>
-0045 x   = r * cos(t);
-0046 y   = r * sin(t);
-0047 z   = zeros(length(pos),1);
-0048 pt0 = [x y z];
-0049 
-0050 <span class="comment">% compute transformation from local basis to world basis</span>
-0051 trans   = localToGlobal3d(xc, yc, zc, theta, phi, psi);
-0052 
-0053 <span class="comment">% compute points of transformed circle</span>
-0054 point   = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(pt0, trans);
-0055</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0019 <span class="comment">%   See also</span>
+0020 <span class="comment">%   circles3d, circle3dPosition</span>
+0021 
+0022 <span class="comment">% ------</span>
+0023 <span class="comment">% Author: David Legland</span>
+0024 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0025 <span class="comment">% Created: 2011-06-21, using Matlab 7.9.0.529 (R2009b)</span>
+0026 <span class="comment">% Copyright 2011-2024 INRA - Cepia Software Platform</span>
+0027 
+0028 pos=pos(:);
+0029 
+0030 <span class="comment">% extract circle coordinates</span>
+0031 xc  = circle(1);
+0032 yc  = circle(2);
+0033 zc  = circle(3);
+0034 r   = circle(4);
+0035 
+0036 theta   = circle(5);
+0037 phi     = circle(6);
+0038 psi     = circle(7);
+0039 
+0040 <span class="comment">% convert position to angle</span>
+0041 t = pos * pi / 180;
+0042 
+0043 <span class="comment">% compute position on base circle</span>
+0044 x   = r * cos(t);
+0045 y   = r * sin(t);
+0046 z   = zeros(length(pos),1);
+0047 pt0 = [x y z];
+0048 
+0049 <span class="comment">% compute transformation from local basis to world basis</span>
+0050 trans   = localToGlobal3d(xc, yc, zc, theta, phi, psi);
+0051 
+0052 <span class="comment">% compute points of transformed circle</span>
+0053 point   = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(pt0, trans);
+0054</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

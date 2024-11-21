@@ -47,8 +47,8 @@
          -20  10 
 
 
-   See also:
-   polygons2d, <a href="orientedBox.html" class="code" title="function obox = orientedBox(points)">orientedBox</a>, <a href="drawOrientedBox.html" class="code" title="function varargout = drawOrientedBox(box, varargin)">drawOrientedBox</a>, <a href="rectToPolygon.html" class="code" title="function [tx, ty] = rectToPolygon(rect)">rectToPolygon</a></pre></div>
+   See also
+   polygons2d, <a href="orientedBox.html" class="code" title="function obox = orientedBox(points)">orientedBox</a>, <a href="drawOrientedBox.html" class="code" title="function varargout = drawOrientedBox(varargin)">drawOrientedBox</a>, <a href="rectToPolygon.html" class="code" title="function [tx, ty] = rectToPolygon(rect)">rectToPolygon</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -84,39 +84,34 @@ This function is called by:
 0019 <span class="comment">%         -20  10</span>
 0020 <span class="comment">%</span>
 0021 <span class="comment">%</span>
-0022 <span class="comment">%   See also:</span>
+0022 <span class="comment">%   See also</span>
 0023 <span class="comment">%   polygons2d, orientedBox, drawOrientedBox, rectToPolygon</span>
 0024 <span class="comment">%</span>
 0025 
-0026 <span class="comment">%   ---------</span>
+0026 <span class="comment">% ------</span>
 0027 <span class="comment">% Author: David Legland</span>
-0028 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
-0029 <span class="comment">% INRA - TPV URPOI - BIA IMASTE</span>
-0030 <span class="comment">% created the 06/04/2005.</span>
-0031 <span class="comment">%</span>
-0032 
-0033 <span class="comment">%   HISTORY</span>
-0034 <span class="comment">%   2011-10-09 rewrite from rectAsPolygon to orientedBoxToPolygon</span>
-0035 <span class="comment">%   2016: Simplify by JuanPi Carbajal</span>
-0036 
-0037 <span class="comment">% extract box parameters</span>
-0038 theta = 0;
-0039 x = obox(1);
-0040 y = obox(2);
-0041 w = obox(3) / 2;  <span class="comment">% easier to compute with w and h divided by 2</span>
-0042 h = obox(4) / 2;
-0043 <span class="keyword">if</span> length(obox) &gt; 4
-0044     theta = obox(5);
-0045 <span class="keyword">end</span>
+0028 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0029 <span class="comment">% Created: 2005-04-06</span>
+0030 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0031 
+0032 <span class="comment">% extract box parameters</span>
+0033 theta = 0;
+0034 x = obox(1);
+0035 y = obox(2);
+0036 w = obox(3) / 2;  <span class="comment">% easier to compute with w and h divided by 2</span>
+0037 h = obox(4) / 2;
+0038 <span class="keyword">if</span> length(obox) &gt; 4
+0039     theta = obox(5);
+0040 <span class="keyword">end</span>
+0041 
+0042 v = [cosd(theta); sind(theta)];
+0043 M = bsxfun (@times, [-1 1; 1 1; 1 -1; -1 -1], [w h]);
+0044 tx  = x + M * v;
+0045 ty  = y + M(4:-1:1,[2 1]) * v;
 0046 
-0047 v = [cosd(theta); sind(theta)];
-0048 M = bsxfun (@times, [-1 1; 1 1; 1 -1; -1 -1], [w h]);
-0049 tx  = x + M * v;
-0050 ty  = y + M(4:-1:1,[2 1]) * v;
-0051 
-0052 <span class="keyword">if</span> nargout &lt;= 1
-0053   tx = [tx ty];
-0054 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0047 <span class="keyword">if</span> nargout &lt;= 1
+0048   tx = [tx ty];
+0049 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

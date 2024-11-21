@@ -42,15 +42,14 @@
        y = y0 + t*dy;
    for all t between -infinity and +infinity.
 
-   See also:
+   See also
    <a href="points2d.html" class="code" title="function points2d">points2d</a>, <a href="vectors2d.html" class="code" title="function vectors2d">vectors2d</a>, <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="rays2d.html" class="code" title="function rays2d(varargin)">rays2d</a>
    <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>, <a href="cartesianLine.html" class="code" title="function line = cartesianLine(varargin)">cartesianLine</a>, <a href="medianLine.html" class="code" title="function line = medianLine(varargin)">medianLine</a>, <a href="edgeToLine.html" class="code" title="function line = edgeToLine(edge)">edgeToLine</a>, <a href="lineToEdge.html" class="code" title="function edge = lineToEdge(line)">lineToEdge</a>
-   <a href="orthogonalLine.html" class="code" title="function res = orthogonalLine(line, point)">orthogonalLine</a>, <a href="parallelLine.html" class="code" title="function res = parallelLine(line, point)">parallelLine</a>, <a href="bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>, <a href="radicalAxis.html" class="code" title="function line = radicalAxis(circle1, circle2)">radicalAxis</a>
+   <a href="orthogonalLine.html" class="code" title="function res = orthogonalLine(line, point)">orthogonalLine</a>, <a href="parallelLine.html" class="code" title="function res = parallelLine(line, point)">parallelLine</a>, <a href="bisector.html" class="code" title="function ray = bisector(varargin)">bisector</a>, <a href="radicalAxis.html" class="code" title="function line = radicalAxis(circle1, circle2)">radicalAxis</a>, <a href="fitLine.html" class="code" title="function [line, res] = fitLine(varargin)">fitLine</a>
    <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>, <a href="linePosition.html" class="code" title="function pos = linePosition(point, line, varargin)">linePosition</a>, <a href="projPointOnLine.html" class="code" title="function point = projPointOnLine(point, line)">projPointOnLine</a>
    <a href="isPointOnLine.html" class="code" title="function b = isPointOnLine(point, line, varargin)">isPointOnLine</a>, <a href="distancePointLine.html" class="code" title="function [dist, pos] = distancePointLine(point, line)">distancePointLine</a>, <a href="isLeftOriented.html" class="code" title="function b = isLeftOriented(point, line)">isLeftOriented</a>
    <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>, <a href="intersectLineEdge.html" class="code" title="function point = intersectLineEdge(line, edge, varargin)">intersectLineEdge</a>, <a href="clipLine.html" class="code" title="function edge = clipLine(line, box, varargin)">clipLine</a>
-   <a href="reverseLine.html" class="code" title="function line = reverseLine(line)">reverseLine</a>, <a href="transformLine.html" class="code" title="function dest = transformLine(line, trans)">transformLine</a>, <a href="drawLine.html" class="code" title="function varargout = drawLine(lin, varargin)">drawLine</a>
-   <a href="lineFit.html" class="code" title="function line = lineFit(varargin)">lineFit</a></pre></div>
+   <a href="reverseLine.html" class="code" title="function line = reverseLine(line)">reverseLine</a>, <a href="transformLine.html" class="code" title="function dest = transformLine(line, trans)">transformLine</a>, <a href="drawLine.html" class="code" title="function varargout = drawLine(lin, varargin)">drawLine</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -81,23 +80,22 @@ This function is called by:
 0014 <span class="comment">%       y = y0 + t*dy;</span>
 0015 <span class="comment">%   for all t between -infinity and +infinity.</span>
 0016 <span class="comment">%</span>
-0017 <span class="comment">%   See also:</span>
+0017 <span class="comment">%   See also</span>
 0018 <span class="comment">%   points2d, vectors2d, edges2d, rays2d</span>
 0019 <span class="comment">%   createLine, cartesianLine, medianLine, edgeToLine, lineToEdge</span>
-0020 <span class="comment">%   orthogonalLine, parallelLine, bisector, radicalAxis</span>
+0020 <span class="comment">%   orthogonalLine, parallelLine, bisector, radicalAxis, fitLine</span>
 0021 <span class="comment">%   lineAngle, linePosition, projPointOnLine</span>
 0022 <span class="comment">%   isPointOnLine, distancePointLine, isLeftOriented</span>
 0023 <span class="comment">%   intersectLines, intersectLineEdge, clipLine</span>
 0024 <span class="comment">%   reverseLine, transformLine, drawLine</span>
-0025 <span class="comment">%   lineFit</span>
-0026 
-0027 <span class="comment">% ------</span>
-0028 <span class="comment">% Author: David Legland</span>
-0029 <span class="comment">% e-mail: david.legland@inra.fr</span>
-0030 <span class="comment">% Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)</span>
-0031 <span class="comment">% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
-0032 
-0033 help(<span class="string">'lines2d'</span>);</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0025 
+0026 <span class="comment">% ------</span>
+0027 <span class="comment">% Author: David Legland</span>
+0028 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0029 <span class="comment">% Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)</span>
+0030 <span class="comment">% Copyright 2008-2024 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas</span>
+0031 
+0032 help(<span class="string">'lines2d'</span>);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

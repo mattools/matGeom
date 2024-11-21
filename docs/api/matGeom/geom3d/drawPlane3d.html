@@ -4,7 +4,7 @@
 <head>
   <title>Description of drawPlane3d</title>
   <meta name="keywords" content="drawPlane3d">
-  <meta name="description" content="Draw a plane clipped by the current axes.">
+  <meta name="description" content="DRAWPLANE3D Draw a plane clipped by the current axes.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Draw a plane clipped by the current axes.</strong></div>
+<div class="box"><strong>DRAWPLANE3D Draw a plane clipped by the current axes.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function h = drawPlane3d(plane, varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Draw a plane clipped by the current axes.
+<div class="fragment"><pre class="comment">DRAWPLANE3D Draw a plane clipped by the current axes.
 
    drawPlane3d(PLANE) draws a plane of the format:
        [x0 y0 z0  dx1 dy1 dz1  dx2 dy2 dz2]
@@ -64,17 +64,17 @@
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="clipPlane.html" class="code" title="function poly = clipPlane(plane, box)">clipPlane</a>	Compute the 3D polygon representing a clipped plane.</li><li><a href="drawPlane3d.html" class="code" title="function h = drawPlane3d(plane, varargin)">drawPlane3d</a>	Draw a plane clipped by the current axes.</li><li><a href="isPlane.html" class="code" title="function d = isPlane(plane)">isPlane</a>	ISPLANE Check if input is a plane.</li></ul>
+<li><a href="clipPlane.html" class="code" title="function poly = clipPlane(plane, box)">clipPlane</a>	CLIPPLANE Compute the 3D polygon representing a clipped plane.</li><li><a href="drawPlane3d.html" class="code" title="function h = drawPlane3d(plane, varargin)">drawPlane3d</a>	DRAWPLANE3D Draw a plane clipped by the current axes.</li><li><a href="isPlane.html" class="code" title="function d = isPlane(plane)">isPlane</a>	ISPLANE Check if input is a plane.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="drawPlane3d.html" class="code" title="function h = drawPlane3d(plane, varargin)">drawPlane3d</a>	Draw a plane clipped by the current axes.</li><li><a href="../../matGeom/meshes3d/meshSilhouette.html" class="code" title="function silhouette = meshSilhouette(v, f, varargin)">meshSilhouette</a>	MESHSILHOUETTE Compute the 2D outline of a 3D mesh on an arbitrary plane.</li></ul>
+<li><a href="drawPlane3d.html" class="code" title="function h = drawPlane3d(plane, varargin)">drawPlane3d</a>	DRAWPLANE3D Draw a plane clipped by the current axes.</li><li><a href="../../matGeom/meshes3d/meshSilhouette.html" class="code" title="function silhouette = meshSilhouette(v, f, varargin)">meshSilhouette</a>	MESHSILHOUETTE Compute the 2D outline of a 3D mesh on an arbitrary plane.</li></ul>
 <!-- crossreference -->
 
 
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function h = drawPlane3d(plane, varargin)</a>
-0002 <span class="comment">% Draw a plane clipped by the current axes.</span>
+0002 <span class="comment">%DRAWPLANE3D Draw a plane clipped by the current axes.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   drawPlane3d(PLANE) draws a plane of the format:</span>
 0005 <span class="comment">%       [x0 y0 z0  dx1 dy1 dz1  dx2 dy2 dz2]</span>
@@ -109,72 +109,75 @@ This function is called by:
 0034 
 0035 <span class="comment">% ------</span>
 0036 <span class="comment">% Author: David Legland</span>
-0037 <span class="comment">% e-mail: david.legland@inrae.fr</span>
-0038 <span class="comment">% INRA - TPV URPOI - BIA IMASTE</span>
-0039 <span class="comment">% created the 17/02/2005.</span>
-0040 <span class="comment">%</span>
-0041 <span class="comment">%   HISTORY</span>
-0042 <span class="comment">%   2008-10-30 replace intersectPlaneLine by intersectLinePlane, add doc</span>
-0043 <span class="comment">%   2010-10-04 fix a bug for planes touching box by one corner</span>
-0044 <span class="comment">%   2011-07-19 fix a bug for param by Xin KANG (Ben)</span>
-0045 <span class="comment">%</span>
-0046 
-0047 <span class="comment">% add support for drawing multiple planes at once</span>
-0048 <span class="keyword">if</span> size(plane, 1) &gt; 1
-0049     nPlanes = size(plane, 1);
-0050     hp = zeros(nPlanes, 1);
-0051     <span class="keyword">for</span> iPlane = 1:nPlanes
-0052         hp(iPlane) = <a href="drawPlane3d.html" class="code" title="function h = drawPlane3d(plane, varargin)">drawPlane3d</a>(plane(iPlane, :), varargin{:});
-0053     <span class="keyword">end</span>
-0054     
-0055     <span class="keyword">if</span> nargout &gt; 0
-0056         h = hp;
-0057     <span class="keyword">end</span>
-0058     
-0059     <span class="keyword">return</span>;
-0060 <span class="keyword">end</span>
+0037 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0038 <span class="comment">% Created: 2005-02-17</span>
+0039 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0040 
+0041 <span class="comment">% add support for drawing multiple planes at once</span>
+0042 <span class="keyword">if</span> size(plane, 1) &gt; 1
+0043     nPlanes = size(plane, 1);
+0044     hp = zeros(nPlanes, 1);
+0045     <span class="keyword">for</span> iPlane = 1:nPlanes
+0046         hp(iPlane) = <a href="drawPlane3d.html" class="code" title="function h = drawPlane3d(plane, varargin)">drawPlane3d</a>(plane(iPlane, :), varargin{:});
+0047     <span class="keyword">end</span>
+0048     
+0049     <span class="keyword">if</span> nargout &gt; 0
+0050         h = hp;
+0051     <span class="keyword">end</span>
+0052     
+0053     <span class="keyword">return</span>;
+0054 <span class="keyword">end</span>
+0055 
+0056 <span class="comment">% Parse and check inputs</span>
+0057 valFun = @(x) size(x,1)==1 &amp;&amp; <a href="isPlane.html" class="code" title="function d = isPlane(plane)">isPlane</a>(x);
+0058 defOpts.FaceColor = <span class="string">'m'</span>;
+0059 [hAx, plane, varargin] = <span class="keyword">...</span>
+0060     parseDrawInput(plane, valFun, <span class="string">'patch'</span>, defOpts, varargin{:});
 0061 
-0062 <span class="comment">% Parse and check inputs</span>
-0063 valFun = @(x) size(x,1)==1 &amp;&amp; <a href="isPlane.html" class="code" title="function d = isPlane(plane)">isPlane</a>(x);
-0064 defOpts.FaceColor = <span class="string">'m'</span>;
-0065 [hAx, plane, varargin] = <span class="keyword">...</span>
-0066     parseDrawInput(plane, valFun, <span class="string">'patch'</span>, defOpts, varargin{:});
-0067 
-0068 <span class="comment">% extract axis bounds to crop plane</span>
-0069 lim = get(hAx, <span class="string">'xlim'</span>);
-0070 xmin = lim(1);
-0071 xmax = lim(2);
-0072 lim = get(hAx, <span class="string">'ylim'</span>);
-0073 ymin = lim(1);
-0074 ymax = lim(2);
-0075 lim = get(hAx, <span class="string">'zlim'</span>);
-0076 zmin = lim(1);
-0077 zmax = lim(2);
-0078 
-0079 poly = <a href="clipPlane.html" class="code" title="function poly = clipPlane(plane, box)">clipPlane</a>(plane, [xmin xmax ymin ymax zmin zmax]);
+0062 <span class="comment">% extract axis bounds to crop plane</span>
+0063 lim = get(hAx, <span class="string">'xlim'</span>);
+0064 xmin = lim(1);
+0065 xmax = lim(2);
+0066 lim = get(hAx, <span class="string">'ylim'</span>);
+0067 ymin = lim(1);
+0068 ymax = lim(2);
+0069 lim = get(hAx, <span class="string">'zlim'</span>);
+0070 zmin = lim(1);
+0071 zmax = lim(2);
+0072 
+0073 <span class="comment">% allocate array of handles</span>
+0074 nPlanes = size(plane, 1);
+0075 hp = gobjects(1, nPlanes);
+0076 
+0077 <span class="comment">% save hold state</span>
+0078 holdState = ishold(hAx);
+0079 hold(hAx, <span class="string">'on'</span>);
 0080 
-0081 <span class="comment">% If there is no intersection point, escape.</span>
-0082 <span class="keyword">if</span> isempty(poly)
-0083     disp(<span class="string">'plane is outside the drawing window'</span>);
-0084     <span class="keyword">if</span> nargout &gt; 0
-0085         h = [];
-0086     <span class="keyword">end</span>
-0087     <span class="keyword">return</span>;
-0088 <span class="keyword">end</span>
-0089 
-0090 <span class="comment">% draw the patch</span>
-0091 htmp = patch( <span class="keyword">...</span>
-0092     <span class="string">'XData'</span>, poly(:, 1), <span class="keyword">...</span>
-0093     <span class="string">'YData'</span>, poly(:, 2), <span class="keyword">...</span>
-0094     <span class="string">'ZData'</span>, poly(:, 3), <span class="keyword">...</span>
-0095     <span class="string">'Parent'</span>, hAx, varargin{:});
-0096 
-0097 <span class="comment">% Do not return axis if not requested</span>
-0098 <span class="comment">% avoids output when called without semicolon</span>
-0099 <span class="keyword">if</span> nargout &gt; 0
-0100     h = htmp;
-0101 <span class="keyword">end</span>
-0102</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0081 <span class="comment">% iterate over planes</span>
+0082 <span class="keyword">for</span> iPlane = 1:nPlanes
+0083     <span class="comment">% clip plane with current axis bounds</span>
+0084     poly = <a href="clipPlane.html" class="code" title="function poly = clipPlane(plane, box)">clipPlane</a>(plane(iPlane,:), [xmin xmax ymin ymax zmin zmax]);
+0085     
+0086     <span class="comment">% draw only non-empty intersections</span>
+0087     <span class="keyword">if</span> ~isempty(poly)
+0088         hp(iPlane) = patch( <span class="keyword">...</span>
+0089             <span class="string">'XData'</span>, poly(:, 1), <span class="keyword">...</span>
+0090             <span class="string">'YData'</span>, poly(:, 2), <span class="keyword">...</span>
+0091             <span class="string">'ZData'</span>, poly(:, 3), <span class="keyword">...</span>
+0092             <span class="string">'Parent'</span>, hAx, varargin{:});
+0093     <span class="keyword">end</span>
+0094 <span class="keyword">end</span>
+0095 
+0096 <span class="comment">% restore hold state</span>
+0097 <span class="keyword">if</span> ~holdState
+0098     hold(hAx, <span class="string">'off'</span>);
+0099 <span class="keyword">end</span>
+0100 
+0101 <span class="comment">% Do not return axis if not requested</span>
+0102 <span class="comment">% avoids output when called without semicolon</span>
+0103 <span class="keyword">if</span> nargout &gt; 0
+0104     h = hp;
+0105 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

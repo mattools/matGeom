@@ -4,7 +4,7 @@
 <head>
   <title>Description of polygonNormalAngle</title>
   <meta name="keywords" content="polygonNormalAngle">
-  <meta name="description" content="Normal angle at each vertex of a polygon.">
+  <meta name="description" content="POLYGONNORMALANGLE Normal angle at each vertex of a polygon.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Normal angle at each vertex of a polygon.</strong></div>
+<div class="box"><strong>POLYGONNORMALANGLE Normal angle at each vertex of a polygon.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function theta = polygonNormalAngle(poly, inds) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Normal angle at each vertex of a polygon.
+<div class="fragment"><pre class="comment">POLYGONNORMALANGLE Normal angle at each vertex of a polygon.
 
    THETA = polygonNormalAngle(POLY);
    where POLY is a N-by-2 array representing vertex coordinates, computes
@@ -60,7 +60,7 @@
      ans =
          6.2832
 
-   See also:
+   See also
      polygons2d, <a href="polygonOuterNormal.html" class="code" title="function vect = polygonOuterNormal(poly, iVertex)">polygonOuterNormal</a>, normalizeAngle</pre></div>
 
 <!-- crossreference -->
@@ -77,7 +77,7 @@ This function is called by:
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function theta = polygonNormalAngle(poly, inds)</a>
-0002 <span class="comment">% Normal angle at each vertex of a polygon.</span>
+0002 <span class="comment">%POLYGONNORMALANGLE Normal angle at each vertex of a polygon.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   THETA = polygonNormalAngle(POLY);</span>
 0005 <span class="comment">%   where POLY is a N-by-2 array representing vertex coordinates, computes</span>
@@ -110,15 +110,15 @@ This function is called by:
 0032 <span class="comment">%     ans =</span>
 0033 <span class="comment">%         6.2832</span>
 0034 <span class="comment">%</span>
-0035 <span class="comment">%   See also:</span>
+0035 <span class="comment">%   See also</span>
 0036 <span class="comment">%     polygons2d, polygonOuterNormal, normalizeAngle</span>
 0037 <span class="comment">%</span>
 0038 
 0039 <span class="comment">% ------</span>
 0040 <span class="comment">% Author: David Legland</span>
-0041 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0041 <span class="comment">% E-mail: david.legland@inrae.fr</span>
 0042 <span class="comment">% Created: 2005-11-30</span>
-0043 <span class="comment">% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0043 <span class="comment">% Copyright 2005-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)</span>
 0044 
 0045 <span class="comment">% number of polygon  vertices</span>
 0046 np = size(poly, 1);
@@ -142,6 +142,6 @@ This function is called by:
 0064     
 0065     theta(i) = <a href="../../matGeom/geom2d/angle3Points.html" class="code" title="function theta = angle3Points(varargin)">angle3Points</a>(prev, curr, next) - pi;
 0066 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

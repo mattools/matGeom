@@ -44,13 +44,7 @@
 
    Ref:
    http://mathworld.wolfram.com/RadicalLine.html
-   http://en.wikipedia.org/wiki/Radical_axis
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- Created: 2007-05-15,    using Matlab 7.4.0.287 (R2007a)
- Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</pre></div>
+   http://en.wikipedia.org/wiki/Radical_axis</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -84,42 +78,41 @@ This function is called by:
 0017 <span class="comment">%   Ref:</span>
 0018 <span class="comment">%   http://mathworld.wolfram.com/RadicalLine.html</span>
 0019 <span class="comment">%   http://en.wikipedia.org/wiki/Radical_axis</span>
-0020 <span class="comment">%</span>
+0020 
 0021 <span class="comment">% ------</span>
 0022 <span class="comment">% Author: David Legland</span>
-0023 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0024 <span class="comment">% Created: 2007-05-15,    using Matlab 7.4.0.287 (R2007a)</span>
-0025 <span class="comment">% Copyright 2007 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
-0026 <span class="comment">%</span>
-0027 
-0028 <span class="comment">% extract circles parameters</span>
-0029 x1 = circle1(:,1);
-0030 x2 = circle2(:,1);
-0031 y1 = circle1(:,2);
-0032 y2 = circle2(:,2);
-0033 r1 = circle1(:,3);
-0034 r2 = circle2(:,3);
-0035 
-0036 <span class="comment">% distance between each couple of centers</span>
-0037 dist  = sqrt((x2-x1).^2 + (y2-y1).^2);
-0038 
-0039 <span class="comment">% relative position of intersection point of</span>
-0040 <span class="comment">% the radical line with the line joining circle centers</span>
-0041 d = (dist.^2 + r1.^2 - r2.^2) * .5 ./ dist;
-0042 
-0043 <span class="comment">% compute angle of radical axis</span>
-0044 angle = <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>(<a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>([x1 y1], [x2 y2]));
-0045 cot = cos(angle);
-0046 sit = sin(angle);
-0047 
-0048 <span class="comment">% parameters of the line</span>
-0049 x0 = x1 + d*cot;
-0050 y0 = y1 + d*sit;
-0051 dx = -sit;
-0052 dy = cot;
-0053 
-0054 <span class="comment">% concatenate into one structure</span>
-0055 line = [x0 y0 dx dy];</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0023 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0024 <span class="comment">% Created: 2007-05-15, using Matlab 7.4.0.287 (R2007a)</span>
+0025 <span class="comment">% Copyright 2007-2024 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas</span>
+0026 
+0027 <span class="comment">% extract circles parameters</span>
+0028 x1 = circle1(:,1);
+0029 x2 = circle2(:,1);
+0030 y1 = circle1(:,2);
+0031 y2 = circle2(:,2);
+0032 r1 = circle1(:,3);
+0033 r2 = circle2(:,3);
+0034 
+0035 <span class="comment">% distance between each couple of centers</span>
+0036 dist  = sqrt((x2-x1).^2 + (y2-y1).^2);
+0037 
+0038 <span class="comment">% relative position of intersection point of</span>
+0039 <span class="comment">% the radical line with the line joining circle centers</span>
+0040 d = (dist.^2 + r1.^2 - r2.^2) * .5 ./ dist;
+0041 
+0042 <span class="comment">% compute angle of radical axis</span>
+0043 angle = <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>(<a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>([x1 y1], [x2 y2]));
+0044 cot = cos(angle);
+0045 sit = sin(angle);
+0046 
+0047 <span class="comment">% parameters of the line</span>
+0048 x0 = x1 + d*cot;
+0049 y0 = y1 + d*sit;
+0050 dx = -sit;
+0051 dy = cot;
+0052 
+0053 <span class="comment">% concatenate into one structure</span>
+0054 line = [x0 y0 dx dy];</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

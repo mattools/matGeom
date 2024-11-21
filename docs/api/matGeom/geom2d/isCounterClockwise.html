@@ -4,7 +4,7 @@
 <head>
   <title>Description of isCounterClockwise</title>
   <meta name="keywords" content="isCounterClockwise">
-  <meta name="description" content="Compute the relative orientation of 3 points.">
+  <meta name="description" content="ISCOUNTERCLOCKWISE Compute the relative orientation of 3 points.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Compute the relative orientation of 3 points.</strong></div>
+<div class="box"><strong>ISCOUNTERCLOCKWISE Compute the relative orientation of 3 points.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function res = isCounterClockwise(p1, p2, p3, varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Compute the relative orientation of 3 points.
+<div class="fragment"><pre class="comment">ISCOUNTERCLOCKWISE Compute the relative orientation of 3 points.
 
    CCW = isCounterClockwise(P1, P2, P3);
    Computes the orientation of the 3 points. The returns is:
@@ -75,7 +75,7 @@ This function is called by:
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function res = isCounterClockwise(p1, p2, p3, varargin)</a>
-0002 <span class="comment">% Compute the relative orientation of 3 points.</span>
+0002 <span class="comment">%ISCOUNTERCLOCKWISE Compute the relative orientation of 3 points.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   CCW = isCounterClockwise(P1, P2, P3);</span>
 0005 <span class="comment">%   Computes the orientation of the 3 points. The returns is:</span>
@@ -112,54 +112,49 @@ This function is called by:
 0036 
 0037 <span class="comment">% ------</span>
 0038 <span class="comment">% Author: David Legland</span>
-0039 <span class="comment">% e-mail: david.legland@inrae.fr</span>
+0039 <span class="comment">% E-mail: david.legland@inrae.fr</span>
 0040 <span class="comment">% Created: 2010-04-09</span>
-0041 <span class="comment">% Copyright 2011 INRAE - Cepia Software Platform.</span>
+0041 <span class="comment">% Copyright 2010-2024 INRAE - Cepia Software Platform</span>
 0042 
-0043 
-0044 <span class="comment">%   HISTORY</span>
-0045 <span class="comment">%   2011-05-16 change variable names, add support for point arrays</span>
-0046 
-0047 
-0048 <span class="comment">% get threshold value</span>
-0049 eps = 1e-12;
-0050 <span class="keyword">if</span> ~isempty(varargin)
-0051     eps = varargin{1};
-0052 <span class="keyword">end</span>
-0053 
-0054 <span class="comment">% ensure all data have same size</span>
-0055 np = max([size(p1, 1) size(p2, 1) size(p3,1)]);
-0056 <span class="keyword">if</span> np &gt; 1
-0057     <span class="keyword">if</span> size(p1,1) == 1
-0058         p1 = repmat(p1, np, 1);
-0059     <span class="keyword">end</span>
-0060     <span class="keyword">if</span> size(p2,1) == 1
-0061         p2 = repmat(p2, np, 1);
-0062     <span class="keyword">end</span>
-0063     <span class="keyword">if</span> size(p3,1) == 1
-0064         p3 = repmat(p3, np, 1);
-0065     <span class="keyword">end</span>    
-0066 <span class="keyword">end</span>
-0067 
-0068 <span class="comment">% init with 0</span>
-0069 res = zeros(np, 1);
-0070 
-0071 <span class="comment">% extract vector coordinates</span>
-0072 x0  = p1(:, 1);
-0073 y0  = p1(:, 2);
-0074 dx1 = p2(:, 1) - x0;
-0075 dy1 = p2(:, 2) - y0;
-0076 dx2 = p3(:, 1) - x0;
-0077 dy2 = p3(:, 2) - y0;
-0078 
-0079 <span class="comment">% check non colinear cases</span>
-0080 res(dx1 .* dy2 &gt; dy1 .* dx2) =  1;
-0081 res(dx1 .* dy2 &lt; dy1 .* dx2) = -1;
-0082 
-0083 <span class="comment">% case of colinear points</span>
-0084 ind = abs(dx1 .* dy2 - dy1 .* dx2) &lt; eps;
-0085 res(ind( (dx1(ind) .* dx2(ind) &lt; 0) | (dy1(ind) .* dy2(ind) &lt; 0) )) = -1;
-0086 res(ind(  hypot(dx1(ind), dy1(ind)) &lt;  hypot(dx2(ind), dy2(ind)) )) =  1;</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0043 <span class="comment">% get threshold value</span>
+0044 eps = 1e-12;
+0045 <span class="keyword">if</span> ~isempty(varargin)
+0046     eps = varargin{1};
+0047 <span class="keyword">end</span>
+0048 
+0049 <span class="comment">% ensure all data have same size</span>
+0050 np = max([size(p1, 1) size(p2, 1) size(p3,1)]);
+0051 <span class="keyword">if</span> np &gt; 1
+0052     <span class="keyword">if</span> size(p1,1) == 1
+0053         p1 = repmat(p1, np, 1);
+0054     <span class="keyword">end</span>
+0055     <span class="keyword">if</span> size(p2,1) == 1
+0056         p2 = repmat(p2, np, 1);
+0057     <span class="keyword">end</span>
+0058     <span class="keyword">if</span> size(p3,1) == 1
+0059         p3 = repmat(p3, np, 1);
+0060     <span class="keyword">end</span>    
+0061 <span class="keyword">end</span>
+0062 
+0063 <span class="comment">% init with 0</span>
+0064 res = zeros(np, 1);
+0065 
+0066 <span class="comment">% extract vector coordinates</span>
+0067 x0  = p1(:, 1);
+0068 y0  = p1(:, 2);
+0069 dx1 = p2(:, 1) - x0;
+0070 dy1 = p2(:, 2) - y0;
+0071 dx2 = p3(:, 1) - x0;
+0072 dy2 = p3(:, 2) - y0;
+0073 
+0074 <span class="comment">% check non colinear cases</span>
+0075 res(dx1 .* dy2 &gt; dy1 .* dx2) =  1;
+0076 res(dx1 .* dy2 &lt; dy1 .* dx2) = -1;
+0077 
+0078 <span class="comment">% case of colinear points</span>
+0079 ind = abs(dx1 .* dy2 - dy1 .* dx2) &lt; eps;
+0080 res(ind( (dx1(ind) .* dx2(ind) &lt; 0) | (dy1(ind) .* dy2(ind) &lt; 0) )) = -1;
+0081 res(ind(  hypot(dx1(ind), dy1(ind)) &lt;  hypot(dx2(ind), dy2(ind)) )) =  1;</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

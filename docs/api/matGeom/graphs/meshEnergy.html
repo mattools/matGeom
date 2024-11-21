@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of meshEnergy</title>
+  <meta name="keywords" content="meshEnergy">
+  <meta name="description" content="MESHENERGY Computes the energy of a tesselation, as the sum of second area moments.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; meshEnergy.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>meshEnergy
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>MESHENERGY Computes the energy of a tesselation, as the sum of second area moments.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function energy = meshEnergy(vertices, faces) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MESHENERGY Computes the energy of a tesselation, as the sum of second area moments.
+
+   This function can be used to check that the total energy of Centroidal
+   Voronoi Tesselation (CVT) decreases with the iterations of the Lloyd
+   algorithm.
+
+   E = meshEnergy(V, F)
+   V is the list of mesh vertices, and F are faces, as a cell array of
+   vertex indices.
+
+   Example
+   meshEnergy
+
+   See also
+     <a href="centroidalVoronoi2d.html" class="code" title="function [germs, germPaths] = centroidalVoronoi2d(germs, poly, varargin)">centroidalVoronoi2d</a>, <a href="cvtUpdate.html" class="code" title="function varargout = cvtUpdate(germs, points)">cvtUpdate</a>, polygonSecondAreaMoments</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/meshes3d/meshFaceNumber.html" class="code" title="function nFaces = meshFaceNumber(varargin)">meshFaceNumber</a>	MESHFACENUMBER Returns the number of faces in this mesh.</li><li><a href="../../matGeom/meshes3d/meshFacePolygons.html" class="code" title="function polys = meshFacePolygons(varargin)">meshFacePolygons</a>	MESHFACEPOLYGONS Returns the set of polygons that constitutes a mesh.</li><li><a href="../../matGeom/polygons2d/polygonSecondAreaMoments.html" class="code" title="function [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(poly)">polygonSecondAreaMoments</a>	POLYGONSECONDAREAMOMENTS Compute second-order area moments of a polygon.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function energy = meshEnergy(vertices, faces)</a>
+0002 <span class="comment">%MESHENERGY Computes the energy of a tesselation, as the sum of second area moments.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   This function can be used to check that the total energy of Centroidal</span>
+0005 <span class="comment">%   Voronoi Tesselation (CVT) decreases with the iterations of the Lloyd</span>
+0006 <span class="comment">%   algorithm.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   E = meshEnergy(V, F)</span>
+0009 <span class="comment">%   V is the list of mesh vertices, and F are faces, as a cell array of</span>
+0010 <span class="comment">%   vertex indices.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%   meshEnergy</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%   See also</span>
+0016 <span class="comment">%     centroidalVoronoi2d, cvtUpdate, polygonSecondAreaMoments</span>
+0017 
+0018 <span class="comment">% ------</span>
+0019 <span class="comment">% Author: David Legland</span>
+0020 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0021 <span class="comment">% Created: 2017-09-01, using Matlab 9.1.0.441655 (R2016b)</span>
+0022 <span class="comment">% Copyright 2017-2024 INRA - Cepia Software Platform</span>
+0023 
+0024 nFaces = <a href="../../matGeom/meshes3d/meshFaceNumber.html" class="code" title="function nFaces = meshFaceNumber(varargin)">meshFaceNumber</a>(vertices, faces);
+0025 
+0026 energyList = zeros(nFaces, 1);
+0027 
+0028 polygons = <a href="../../matGeom/meshes3d/meshFacePolygons.html" class="code" title="function polys = meshFacePolygons(varargin)">meshFacePolygons</a>(vertices, faces);
+0029 <span class="keyword">for</span> i = 1:nFaces
+0030     [Ix, Iy, Ixy] = <a href="../../matGeom/polygons2d/polygonSecondAreaMoments.html" class="code" title="function [Ixx, Iyy, Ixy] = polygonSecondAreaMoments(poly)">polygonSecondAreaMoments</a>(polygons{i}); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0031     energyList(i) = hypot(Ix, Iy);
+0032 <span class="keyword">end</span>
+0033 
+0034 energy = sum(energyList);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

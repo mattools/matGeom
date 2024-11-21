@@ -86,27 +86,22 @@ This function is called by:
 0022 <span class="comment">%      axis tight equal</span>
 0023 <span class="comment">%</span>
 0024 
-0025 <span class="comment">% ---------</span>
+0025 <span class="comment">% ------</span>
 0026 <span class="comment">% Author: David Legland</span>
-0027 <span class="comment">% e-mail: david.legland@inra.fr</span>
-0028 <span class="comment">% INRA - TPV URPOI - BIA IMASTE</span>
-0029 <span class="comment">% created the 20/01/2005.</span>
+0027 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0028 <span class="comment">% Created: 2005-01-20</span>
+0029 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0030 
-0031 
-0032 <span class="comment">%   HISTORY</span>
-0033 <span class="comment">%   22/04/2009: rename as createHomothecy</span>
-0034 <span class="comment">%   05/04/2017: improved code by JuanPi Carbajal &lt;ajuanpi+dev@gmail.com&gt;</span>
-0035 
-0036 point = point(:);
-0037 <span class="keyword">if</span> length (point) &gt; 2
-0038     error(<span class="string">'Only one point accepted.'</span>);
-0039 <span class="keyword">end</span>
-0040 <span class="keyword">if</span> length (ratio) &gt; 1
-0041     error(<span class="string">'Only one ratio accepted.'</span>);
-0042 <span class="keyword">end</span>
-0043 
-0044 T        = diag ([ratio ratio 1]);
-0045 T(1:2,3) = point .* (1 - ratio);</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0031 point = point(:);
+0032 <span class="keyword">if</span> length (point) &gt; 2
+0033     error(<span class="string">'Only one point accepted.'</span>);
+0034 <span class="keyword">end</span>
+0035 <span class="keyword">if</span> length (ratio) &gt; 1
+0036     error(<span class="string">'Only one ratio accepted.'</span>);
+0037 <span class="keyword">end</span>
+0038 
+0039 T        = diag ([ratio ratio 1]);
+0040 T(1:2,3) = point .* (1 - ratio);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

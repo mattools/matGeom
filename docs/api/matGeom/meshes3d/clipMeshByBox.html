@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of clipMeshByBox</title>
+  <meta name="keywords" content="clipMeshByBox">
+  <meta name="description" content="CLIPMESHBYBOX Clip a mesh by a box.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; clipMeshByBox.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>clipMeshByBox
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CLIPMESHBYBOX Clip a mesh by a box.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = clipMeshByBox(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CLIPMESHBYBOX Clip a mesh by a box.
+
+   [V2, F2] = clipMeshByBox(V, F, BOX)
+   Clip a mesh defined by the vertices V and faces F by a BOX and return
+   the part of the mesh (V2, F2) inside the box. New vertices, edges and 
+   faces are created at the intersections with box.
+
+   [...] = clipMeshByPlane(MESH, BOX)
+   Alternativly, a struct MESH with the fields 'vertices' and 'faces' can
+   be used as input argument.
+
+   MESH2 = clipMeshByPlane(..., BOX)
+   Returns the struct MESH2 with the fields 'vertices' and 'faces'.
+
+   Example
+     box = [-4 7 2 6 -1 8];
+     mesh = readMesh('bunny_F1k.ply');
+     mesh2 = clipMeshByBox(mesh, box);
+     drawBox3d(box)
+     drawMesh(mesh)
+     drawMesh(mesh2,'m')
+     view(105, 30); axis equal
+   
+   See also
+     <a href="clipMeshByPlane.html" class="code" title="function [v2, f2, bE] = clipMeshByPlane(v, f, plane, varargin)">clipMeshByPlane</a>, <a href="cutMeshByPlane.html" class="code" title="function varargout = cutMeshByPlane(v, f, plane, varargin)">cutMeshByPlane</a>,</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="boxToMesh.html" class="code" title="function varargout = boxToMesh(varargin)">boxToMesh</a>	BOXTOMESH Convert a box into a quad mesh with the same size.</li><li><a href="clipMeshByPlane.html" class="code" title="function [v2, f2, bE] = clipMeshByPlane(v, f, plane, varargin)">clipMeshByPlane</a>	CLIPMESHBYPLANE Clip a mesh by a plane.</li><li><a href="meshFaceCentroids.html" class="code" title="function centroids = meshFaceCentroids(varargin)">meshFaceCentroids</a>	MESHFACECENTROIDS Compute centroids of faces in a mesh.</li><li><a href="meshFaceNormals.html" class="code" title="function normals = meshFaceNormals(varargin)">meshFaceNormals</a>	MESHFACENORMALS Compute normal vector of faces in a 3D mesh.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = clipMeshByBox(varargin)</a>
+0002 <span class="comment">%CLIPMESHBYBOX Clip a mesh by a box.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V2, F2] = clipMeshByBox(V, F, BOX)</span>
+0005 <span class="comment">%   Clip a mesh defined by the vertices V and faces F by a BOX and return</span>
+0006 <span class="comment">%   the part of the mesh (V2, F2) inside the box. New vertices, edges and</span>
+0007 <span class="comment">%   faces are created at the intersections with box.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   [...] = clipMeshByPlane(MESH, BOX)</span>
+0010 <span class="comment">%   Alternativly, a struct MESH with the fields 'vertices' and 'faces' can</span>
+0011 <span class="comment">%   be used as input argument.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   MESH2 = clipMeshByPlane(..., BOX)</span>
+0014 <span class="comment">%   Returns the struct MESH2 with the fields 'vertices' and 'faces'.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   Example</span>
+0017 <span class="comment">%     box = [-4 7 2 6 -1 8];</span>
+0018 <span class="comment">%     mesh = readMesh('bunny_F1k.ply');</span>
+0019 <span class="comment">%     mesh2 = clipMeshByBox(mesh, box);</span>
+0020 <span class="comment">%     drawBox3d(box)</span>
+0021 <span class="comment">%     drawMesh(mesh)</span>
+0022 <span class="comment">%     drawMesh(mesh2,'m')</span>
+0023 <span class="comment">%     view(105, 30); axis equal</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">%   See also</span>
+0026 <span class="comment">%     clipMeshByPlane, cutMeshByPlane,</span>
+0027 
+0028 <span class="comment">% ------</span>
+0029 <span class="comment">% Author: oqilipo</span>
+0030 <span class="comment">% E-mail: N/A</span>
+0031 <span class="comment">% Created: 2024-11-16, using MATLAB 23.2.0.2515942 (R2023b) Update 7</span>
+0032 <span class="comment">% Copyright 2024</span>
+0033 
+0034 <span class="comment">% Parse input</span>
+0035 [v, f] = parseMeshData(varargin{1:end-1});
+0036 box = varargin{end};
+0037 
+0038 <span class="comment">% Create the box planes pointing inwards</span>
+0039 boxMesh = <a href="boxToMesh.html" class="code" title="function varargout = boxToMesh(varargin)">boxToMesh</a>(box);
+0040 boxMeshNormals = <a href="meshFaceNormals.html" class="code" title="function normals = meshFaceNormals(varargin)">meshFaceNormals</a>(boxMesh)*-1;
+0041 boxMeshCentroids = <a href="meshFaceCentroids.html" class="code" title="function centroids = meshFaceCentroids(varargin)">meshFaceCentroids</a>(boxMesh);
+0042 boxPlanes = <a href="../../matGeom/geom3d/createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(boxMeshCentroids, boxMeshNormals);
+0043 
+0044 <span class="comment">% Clip the mesh with the six planes of the box</span>
+0045 <span class="keyword">for</span> bp = 1:size(boxPlanes,1) 
+0046     [v, f] = <a href="clipMeshByPlane.html" class="code" title="function [v2, f2, bE] = clipMeshByPlane(v, f, plane, varargin)">clipMeshByPlane</a>(v, f, boxPlanes(bp,:));
+0047 <span class="keyword">end</span>
+0048 
+0049 <span class="comment">% Parse output</span>
+0050 varargout = formatMeshOutput(nargout, v, f);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

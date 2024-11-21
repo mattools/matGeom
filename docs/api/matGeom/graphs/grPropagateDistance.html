@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of grPropagateDistance</title>
+  <meta name="keywords" content="grPropagateDistance">
+  <meta name="description" content="GRPROPAGATEDISTANCE Propagates distances from a vertex to other vertices.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; grPropagateDistance.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>grPropagateDistance
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>GRPROPAGATEDISTANCE Propagates distances from a vertex to other vertices.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function d = grPropagateDistance(v, e, v0, l) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">GRPROPAGATEDISTANCE Propagates distances from a vertex to other vertices.
+
+   DISTS = grPropagateDistance(V, E, V0, L)
+   V0 is index of initial vertex
+   E is array of source and target vertices
+   L is the vector of length of each edge. If not specified, length 1 is
+       assumed for all edges.
+   The result DISTS is a column array with as many rows as the number of
+   vertices, containing the geodesic distance of each vertex to the vertex
+   of index V0.
+
+   Example
+     nodes = [20 20;20 50;20 80;50 50;80 20;80 50;80 80];
+     edges = [1 2;2 3;2 4;4 6;5 6;6 7];
+     figure; drawGraph(nodes, edges);
+     axis([0 100 0 100]); axis equal; hold on
+     DISTS = grPropagateDistance(nodes, edges, 2)
+     DISTS = 
+          1
+          0
+          1
+          1
+          3
+          2
+          3
+     drawNodeLabels(nodes+1, DISTS);
+
+   See also
+   <a href="graphRadius.html" class="code" title="function r = graphRadius(v, e, l)">graphRadius</a>, <a href="graphCenter.html" class="code" title="function center = graphCenter(v, e, l)">graphCenter</a>, <a href="graphDiameter.html" class="code" title="function diam = graphDiameter(v, e, l)">graphDiameter</a>, <a href="graphPeripheralVertices.html" class="code" title="function inds = graphPeripheralVertices(v, e, l)">graphPeripheralVertices</a>
+   <a href="grVertexEccentricity.html" class="code" title="function g = grVertexEccentricity(v, e, l, inds)">grVertexEccentricity</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="grAdjacentEdges.html" class="code" title="function neigh = grAdjacentEdges(edges, node)">grAdjacentEdges</a>	GRADJACENTEDGES Find list of edges adjacent to a given node.</li><li><a href="grOppositeNode.html" class="code" title="function node2 = grOppositeNode(edges, node)">grOppositeNode</a>	GROPPOSITENODE Return opposite node in an edge.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="grFindGeodesicPath.html" class="code" title="function path = grFindGeodesicPath(nodes, edges, ind0, ind1, edgeWeights)">grFindGeodesicPath</a>	GRFINDGEODESICPATH Find a geodesic path between two nodes in the graph.</li><li><a href="grFindMaximalLengthPath.html" class="code" title="function path = grFindMaximalLengthPath(nodes, edges, edgeWeights)">grFindMaximalLengthPath</a>	GRFINDMAXIMALLENGTHPATH Find a path that maximizes sum of edge weights.</li><li><a href="grVertexEccentricity.html" class="code" title="function g = grVertexEccentricity(v, e, l, inds)">grVertexEccentricity</a>	GRVERTEXECCENTRICITY Eccentricity of vertices in the graph.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function d = grPropagateDistance(v, e, v0, l)</a>
+0002 <span class="comment">%GRPROPAGATEDISTANCE Propagates distances from a vertex to other vertices.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   DISTS = grPropagateDistance(V, E, V0, L)</span>
+0005 <span class="comment">%   V0 is index of initial vertex</span>
+0006 <span class="comment">%   E is array of source and target vertices</span>
+0007 <span class="comment">%   L is the vector of length of each edge. If not specified, length 1 is</span>
+0008 <span class="comment">%       assumed for all edges.</span>
+0009 <span class="comment">%   The result DISTS is a column array with as many rows as the number of</span>
+0010 <span class="comment">%   vertices, containing the geodesic distance of each vertex to the vertex</span>
+0011 <span class="comment">%   of index V0.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   Example</span>
+0014 <span class="comment">%     nodes = [20 20;20 50;20 80;50 50;80 20;80 50;80 80];</span>
+0015 <span class="comment">%     edges = [1 2;2 3;2 4;4 6;5 6;6 7];</span>
+0016 <span class="comment">%     figure; drawGraph(nodes, edges);</span>
+0017 <span class="comment">%     axis([0 100 0 100]); axis equal; hold on</span>
+0018 <span class="comment">%     DISTS = grPropagateDistance(nodes, edges, 2)</span>
+0019 <span class="comment">%     DISTS =</span>
+0020 <span class="comment">%          1</span>
+0021 <span class="comment">%          0</span>
+0022 <span class="comment">%          1</span>
+0023 <span class="comment">%          1</span>
+0024 <span class="comment">%          3</span>
+0025 <span class="comment">%          2</span>
+0026 <span class="comment">%          3</span>
+0027 <span class="comment">%     drawNodeLabels(nodes+1, DISTS);</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%   See also</span>
+0030 <span class="comment">%   graphRadius, graphCenter, graphDiameter, graphPeripheralVertices</span>
+0031 <span class="comment">%   grVertexEccentricity</span>
+0032 
+0033 <span class="comment">% ------</span>
+0034 <span class="comment">% Author: David Legland</span>
+0035 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0036 <span class="comment">% Created: 2010-09-07, using Matlab 7.9.0.529 (R2009b)</span>
+0037 <span class="comment">% Copyright 2010-2024 INRA - Cepia Software Platform</span>
+0038 
+0039 <span class="comment">% initialize empty array for result</span>
+0040 Nv  = length(v);
+0041 d   = ones(Nv, 1)*inf;
+0042 d(v0) = 0;
+0043 
+0044 <span class="comment">% ensure there is a valid length array</span>
+0045 <span class="keyword">if</span> nargin &lt; 4
+0046     l = ones(size(e,1), 1);
+0047 <span class="keyword">end</span>
+0048 
+0049 <span class="comment">% iterate from germ vertex until there are no more vertices to process</span>
+0050 verticesToProcess = v0;
+0051 <span class="keyword">while</span> ~isempty(verticesToProcess)
+0052     <span class="comment">% init new iteration</span>
+0053     newVerticesToProcess = [];
+0054 
+0055     <span class="comment">% iterate over vertices that need to be updated</span>
+0056     <span class="keyword">for</span> i = 1:length(verticesToProcess)
+0057         vertex = verticesToProcess(i);
+0058         
+0059         <span class="comment">% iterate over neighbor edges of current vertex</span>
+0060         vertexEdges = <a href="grAdjacentEdges.html" class="code" title="function neigh = grAdjacentEdges(edges, node)">grAdjacentEdges</a>(e, vertex);
+0061         <span class="keyword">for</span> j = 1:length(vertexEdges)
+0062             iEdge = vertexEdges(j);
+0063             
+0064             <span class="comment">% compute distance between current vertex and its neighbor</span>
+0065             vertex2 = <a href="grOppositeNode.html" class="code" title="function node2 = grOppositeNode(edges, node)">grOppositeNode</a>(e(iEdge,:), vertex);
+0066             newDist = d(vertex) + l(iEdge);
+0067             
+0068             <span class="comment">% update geodesic distance of neighbor node if needed</span>
+0069             <span class="keyword">if</span> newDist &lt; d(vertex2)
+0070                 d(vertex2) = newDist;
+0071                 newVerticesToProcess = [newVerticesToProcess ; vertex2]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0072             <span class="keyword">end</span>
+0073         <span class="keyword">end</span>
+0074     <span class="keyword">end</span>
+0075     
+0076     <span class="comment">% update set of vertices for next tieration</span>
+0077     verticesToProcess = newVerticesToProcess;
+0078 <span class="keyword">end</span>
+0079</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

@@ -53,7 +53,7 @@
      drawPoint3d(x,y,z)
      drawSphere(sphere,'FaceAlpha',0.5)
    
-   See also:
+   See also
      <a href="createSphere.html" class="code" title="function sphere = createSphere(varargin)">createSphere</a>, <a href="drawSphere.html" class="code" title="function varargout = drawSphere(varargin)">drawSphere</a>, <a href="intersectLineSphere.html" class="code" title="function points = intersectLineSphere(line, sphere, varargin)">intersectLineSphere</a>, <a href="intersectPlaneSphere.html" class="code" title="function circle = intersectPlaneSphere(plane, sphere)">intersectPlaneSphere</a>
 
    Source:
@@ -100,7 +100,7 @@ This function is called by:
 0025 <span class="comment">%     drawPoint3d(x,y,z)</span>
 0026 <span class="comment">%     drawSphere(sphere,'FaceAlpha',0.5)</span>
 0027 <span class="comment">%</span>
-0028 <span class="comment">%   See also:</span>
+0028 <span class="comment">%   See also</span>
 0029 <span class="comment">%     createSphere, drawSphere, intersectLineSphere, intersectPlaneSphere</span>
 0030 <span class="comment">%</span>
 0031 <span class="comment">%   Source:</span>
@@ -109,47 +109,48 @@ This function is called by:
 0034 
 0035 <span class="comment">% ------</span>
 0036 <span class="comment">% Author: Levente Hunyadi, oqilipo (minor adaptions for matGeom)</span>
-0037 <span class="comment">% Created: 2010</span>
-0038 <span class="comment">% Copyright 2010 Levente Hunyadi</span>
-0039 
-0040 narginchk(1,3);
-0041 
-0042 <span class="keyword">switch</span> nargin  <span class="comment">% n x 3 matrix</span>
-0043     <span class="keyword">case</span> 1
-0044         n = size(x,1);
-0045         validateattributes(x, {<span class="string">'numeric'</span>}, {<span class="string">'2d'</span>,<span class="string">'real'</span>,<span class="string">'size'</span>,[n,3]});
-0046         z = x(:,3);
-0047         y = x(:,2);
-0048         x = x(:,1);
-0049     <span class="keyword">otherwise</span>  <span class="comment">% three x,y,z vectors</span>
-0050         n = length(x(:));
-0051         x = x(:);  <span class="comment">% force into columns</span>
-0052         y = y(:);
-0053         z = z(:);
-0054         validateattributes(x, {<span class="string">'numeric'</span>}, {<span class="string">'real'</span>,<span class="string">'size'</span>,[n,1]});
-0055         validateattributes(y, {<span class="string">'numeric'</span>}, {<span class="string">'real'</span>,<span class="string">'size'</span>,[n,1]});
-0056         validateattributes(z, {<span class="string">'numeric'</span>}, {<span class="string">'real'</span>,<span class="string">'size'</span>,[n,1]});
-0057 <span class="keyword">end</span>
-0058 
-0059 <span class="comment">% need four or more data points</span>
-0060 <span class="keyword">if</span> n &lt; 4
-0061    error(<span class="string">'spherefit:InsufficientData'</span>, <span class="keyword">...</span>
-0062        <span class="string">'At least four points are required to fit a unique sphere.'</span>);
-0063 <span class="keyword">end</span>
-0064 
-0065 <span class="comment">% solve linear system of normal equations</span>
-0066 A = [x, y, z, ones(size(x))];
-0067 b = -(x.^2 + y.^2 + z.^2);
-0068 a = A \ b;
-0069 
-0070 <span class="comment">% return center coordinates and sphere radius</span>
-0071 center = -a(1:3)./2;
-0072 radius = realsqrt(sum(center.^2)-a(4));
-0073 sphere = [center' radius];
-0074 
-0075 <span class="comment">% calculate residuals</span>
-0076 residuals = radius - sqrt(sum(bsxfun(@minus,[x y z],center.').^2,2));
-0077 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0037 <span class="comment">% E-mail: N/A</span>
+0038 <span class="comment">% Created: 2010</span>
+0039 <span class="comment">% Copyright 2010-2024 Levente Hunyadi</span>
+0040 
+0041 narginchk(1,3);
+0042 
+0043 <span class="keyword">switch</span> nargin  <span class="comment">% n x 3 matrix</span>
+0044     <span class="keyword">case</span> 1
+0045         n = size(x,1);
+0046         validateattributes(x, {<span class="string">'numeric'</span>}, {<span class="string">'2d'</span>,<span class="string">'real'</span>,<span class="string">'size'</span>,[n,3]});
+0047         z = x(:,3);
+0048         y = x(:,2);
+0049         x = x(:,1);
+0050     <span class="keyword">otherwise</span>  <span class="comment">% three x,y,z vectors</span>
+0051         n = length(x(:));
+0052         x = x(:);  <span class="comment">% force into columns</span>
+0053         y = y(:);
+0054         z = z(:);
+0055         validateattributes(x, {<span class="string">'numeric'</span>}, {<span class="string">'real'</span>,<span class="string">'size'</span>,[n,1]});
+0056         validateattributes(y, {<span class="string">'numeric'</span>}, {<span class="string">'real'</span>,<span class="string">'size'</span>,[n,1]});
+0057         validateattributes(z, {<span class="string">'numeric'</span>}, {<span class="string">'real'</span>,<span class="string">'size'</span>,[n,1]});
+0058 <span class="keyword">end</span>
+0059 
+0060 <span class="comment">% need four or more data points</span>
+0061 <span class="keyword">if</span> n &lt; 4
+0062    error(<span class="string">'spherefit:InsufficientData'</span>, <span class="keyword">...</span>
+0063        <span class="string">'At least four points are required to fit a unique sphere.'</span>);
+0064 <span class="keyword">end</span>
+0065 
+0066 <span class="comment">% solve linear system of normal equations</span>
+0067 A = [x, y, z, ones(size(x))];
+0068 b = -(x.^2 + y.^2 + z.^2);
+0069 a = A \ b;
+0070 
+0071 <span class="comment">% return center coordinates and sphere radius</span>
+0072 center = -a(1:3)./2;
+0073 radius = realsqrt(sum(center.^2)-a(4));
+0074 sphere = [center' radius];
+0075 
+0076 <span class="comment">% calculate residuals</span>
+0077 residuals = radius - sqrt(sum(bsxfun(@minus,[x y z],center.').^2,2));
+0078 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

@@ -41,16 +41,16 @@
    * https://en.wikipedia.org/wiki/Second_moment_of_area
 
    See also
-     polygons2d, <a href="polygonEquivalentEllipse.html" class="code" title="function elli = polygonEquivalentEllipse(poly)">polygonEquivalentEllipse</a>, <a href="polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>, <a href="polygonCentroid.html" class="code" title="function [centroid, area] = polygonCentroid(varargin)">polygonCentroid</a></pre></div>
+     polygons2d, <a href="polygonEquivalentEllipse.html" class="code" title="function elli = polygonEquivalentEllipse(poly)">polygonEquivalentEllipse</a>, <a href="polygonArea.html" class="code" title="function area = polygonArea(poly, varargin)">polygonArea</a>, <a href="polygonCentroid.html" class="code" title="function [centroid, area, Sx, Sy] = polygonCentroid(varargin)">polygonCentroid</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>	CENTROID Compute centroid (center of mass) of a set of points.</li><li><a href="polygonCentroid.html" class="code" title="function [centroid, area] = polygonCentroid(varargin)">polygonCentroid</a>	Computes the centroid (center of mass) of a polygon.</li></ul>
+<li><a href="parsePolygon.html" class="code" title="function [polyOut, inputFormat] = parsePolygon(poly, format, varargin)">parsePolygon</a>	PARSEPOLYGON Conversion between different polygon formats.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="polygonEquivalentEllipse.html" class="code" title="function elli = polygonEquivalentEllipse(poly)">polygonEquivalentEllipse</a>	Compute equivalent ellipse with same second order moments as polygon.</li><li><a href="polygonInertiaEllipse.html" class="code" title="function elli = polygonInertiaEllipse(poly)">polygonInertiaEllipse</a>	POLYGONINERTIAELLIPSE Compute ellipse with same inertia moments as polygon.</li></ul>
+<li><a href="../../matGeom/graphs/meshEnergy.html" class="code" title="function energy = meshEnergy(vertices, faces)">meshEnergy</a>	MESHENERGY Computes the energy of a tesselation, as the sum of second area moments.</li><li><a href="polygonEquivalentEllipse.html" class="code" title="function elli = polygonEquivalentEllipse(poly)">polygonEquivalentEllipse</a>	POLYGONEQUIVALENTELLIPSE Compute equivalent ellipse with same second order moments as polygon.</li></ul>
 <!-- crossreference -->
 
 
@@ -72,17 +72,17 @@ This function is called by:
 0014 <span class="comment">%</span>
 0015 <span class="comment">%   See also</span>
 0016 <span class="comment">%     polygons2d, polygonEquivalentEllipse, polygonArea, polygonCentroid</span>
-0017  
+0017 
 0018 <span class="comment">% ------</span>
 0019 <span class="comment">% Author: David Legland</span>
-0020 <span class="comment">% e-mail: david.legland@inra.fr</span>
-0021 <span class="comment">% Created: 2017-09-08,    using Matlab 9.1.0.441655 (R2016b)</span>
-0022 <span class="comment">% Copyright 2017 INRA - Cepia Software Platform.</span>
+0020 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0021 <span class="comment">% Created: 2017-09-08, using Matlab 9.1.0.441655 (R2016b)</span>
+0022 <span class="comment">% Copyright 2017-2024 INRA - Cepia Software Platform</span>
 0023 
-0024 <span class="comment">% get vertex coordinates, and recenter polygon</span>
-0025 <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a> = <a href="polygonCentroid.html" class="code" title="function [centroid, area] = polygonCentroid(varargin)">polygonCentroid</a>(poly);
-0026 px = poly(:,1) - <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>(1);
-0027 py = poly(:,2) - <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>(2);
+0024 poly = <a href="parsePolygon.html" class="code" title="function [polyOut, inputFormat] = parsePolygon(poly, format, varargin)">parsePolygon</a>(poly, <span class="string">'repetition'</span>);
+0025 
+0026 px = poly(:,1);
+0027 py = poly(:,2);
 0028 
 0029 <span class="comment">% vertex indices</span>
 0030 N = length(px);
@@ -97,6 +97,6 @@ This function is called by:
 0039 Ixy = sum( <span class="keyword">...</span>
 0040     (px .* py(iNext) + 2 * px .* py + 2 * px(iNext) .* py(iNext) <span class="keyword">...</span>
 0041     + px(iNext) .* py ) .* common) / 24;</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

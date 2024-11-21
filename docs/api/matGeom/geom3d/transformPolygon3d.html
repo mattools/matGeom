@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of transformPolygon3d</title>
+  <meta name="keywords" content="transformPolygon3d">
+  <meta name="description" content="TRANSFORMPOLYGON3D Transform a polygon with a 3D affine transform.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; transformPolygon3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>transformPolygon3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>TRANSFORMPOLYGON3D Transform a polygon with a 3D affine transform.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function tfmPoly = transformPolygon3d(poly, tfm) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">TRANSFORMPOLYGON3D Transform a polygon with a 3D affine transform.
+
+   TFMPOLY = transformPolygon3d(POLY, TFM);
+   returns the polygon TFMPOLY by transforming POLY according to the
+   affine transform specified by TFM. POLY can be either 2D or 3D. If POLY
+   is 2D, zeros are added as third dimension, before the transformation is
+   performed.
+
+   Example
+     center=-100+200*rand(1,3);
+     phi=randi([-180,180]); theta=randi([-180,180]); psi=randi([-180,180]);
+     tfm=eulerAnglesToRotation3d(phi, theta, psi, 'ZYZ'); tfm(1:3,4)=center';
+     r = [2.5, 2, 1];
+     poly = flipud(circleToPolygon([0 0 r(1)], round(2*pi*r(1))));
+     midCircle = circleToPolygon([0 0 r(2)], round(2*pi*r(2)));
+     innerCircle = flipud(circleToPolygon([0 0 r(3)], round(2*pi*r(3))));
+     poly = {poly, midCircle, innerCircle};
+     tfmPoly = transformPolygon3d(poly, tfm);
+     figure('color','w'); axis equal; view(3)
+     drawPolygon3d(tfmPoly, 'r')
+
+   See also
+     <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>, <a href="createTranslation3d.html" class="code" title="function trans = createTranslation3d(varargin)">createTranslation3d</a>
+     <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>, <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>, <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>, createScaling</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="clipPolygonByPlane3d.html" class="code" title="function poly2 = clipPolygonByPlane3d(poly, plane, varargin)">clipPolygonByPlane3d</a>	CLIPPOLYGONBYPLANE3D Clip a 3D polygon with a plane.</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function pts = twoD2threeD(pts)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function tfmPoly = transformPolygon3d(poly, tfm)</a>
+0002 <span class="comment">%TRANSFORMPOLYGON3D Transform a polygon with a 3D affine transform.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   TFMPOLY = transformPolygon3d(POLY, TFM);</span>
+0005 <span class="comment">%   returns the polygon TFMPOLY by transforming POLY according to the</span>
+0006 <span class="comment">%   affine transform specified by TFM. POLY can be either 2D or 3D. If POLY</span>
+0007 <span class="comment">%   is 2D, zeros are added as third dimension, before the transformation is</span>
+0008 <span class="comment">%   performed.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   Example</span>
+0011 <span class="comment">%     center=-100+200*rand(1,3);</span>
+0012 <span class="comment">%     phi=randi([-180,180]); theta=randi([-180,180]); psi=randi([-180,180]);</span>
+0013 <span class="comment">%     tfm=eulerAnglesToRotation3d(phi, theta, psi, 'ZYZ'); tfm(1:3,4)=center';</span>
+0014 <span class="comment">%     r = [2.5, 2, 1];</span>
+0015 <span class="comment">%     poly = flipud(circleToPolygon([0 0 r(1)], round(2*pi*r(1))));</span>
+0016 <span class="comment">%     midCircle = circleToPolygon([0 0 r(2)], round(2*pi*r(2)));</span>
+0017 <span class="comment">%     innerCircle = flipud(circleToPolygon([0 0 r(3)], round(2*pi*r(3))));</span>
+0018 <span class="comment">%     poly = {poly, midCircle, innerCircle};</span>
+0019 <span class="comment">%     tfmPoly = transformPolygon3d(poly, tfm);</span>
+0020 <span class="comment">%     figure('color','w'); axis equal; view(3)</span>
+0021 <span class="comment">%     drawPolygon3d(tfmPoly, 'r')</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">%   See also</span>
+0024 <span class="comment">%     transforms3d, transformPoint3d, createTranslation3d</span>
+0025 <span class="comment">%     createRotationOx, createRotationOy, createRotationOz, createScaling</span>
+0026 <span class="comment">%</span>
+0027 
+0028 <span class="comment">% ------</span>
+0029 <span class="comment">% Author: oqilipo</span>
+0030 <span class="comment">% E-mail: N/A</span>
+0031 <span class="comment">% Created: 2023-01-05, using MATLAB 9.13.0.2080170 (R2022b) Update 1</span>
+0032 <span class="comment">% Copyright 2023-2024</span>
+0033 
+0034 <span class="keyword">if</span> isnumeric(poly)
+0035     c = size(poly,2);
+0036     <span class="keyword">if</span> c &lt; 2 || c &gt; 3
+0037         error([<span class="string">'The polygon has '</span> num2str(c) <span class="string">' columns. A polygon must have either 2 or 3 columns!'</span>])
+0038     <span class="keyword">end</span>
+0039     tfmPoly = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(<a href="#_sub1" class="code" title="subfunction pts = twoD2threeD(pts)">twoD2threeD</a>(poly), tfm);
+0040 <span class="keyword">elseif</span> iscell(poly)
+0041     c = cellfun(@(x) size(x,2), poly);
+0042     <span class="keyword">if</span> all(c == 2) || all(c == 3)
+0043         poly = cellfun(@<a href="#_sub1" class="code" title="subfunction pts = twoD2threeD(pts)">twoD2threeD</a>, poly, <span class="string">'uni'</span>, 0);
+0044         tfmPoly = cellfun(@(x) <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(x, tfm), poly, <span class="string">'uni'</span>, 0);
+0045     <span class="keyword">else</span>
+0046         error([<span class="string">'The polygon has '</span> num2str(c) <span class="string">' columns. A polygon must have either 2 or 3 columns!'</span>])
+0047     <span class="keyword">end</span>
+0048 <span class="keyword">elseif</span> isa(poly, <span class="string">'polyshape'</span>)
+0049     error(<span class="string">'Polyshape format cannot be used for 3D polygons!'</span>)
+0050 <span class="keyword">else</span>
+0051     error(<span class="string">'Unknown polygon format!'</span>)
+0052 <span class="keyword">end</span>
+0053 
+0054 <span class="keyword">end</span>
+0055 
+0056 
+0057 <a name="_sub1" href="#_subfunctions" class="code">function pts = twoD2threeD(pts)</a>
+0058 <span class="keyword">if</span> size(pts,2) == 2
+0059     pts(:,3)=0;
+0060     pts(isnan(pts(:,1)),3)=nan;
+0061 <span class="keyword">end</span>
+0062 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

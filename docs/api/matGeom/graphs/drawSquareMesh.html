@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawSquareMesh</title>
+  <meta name="keywords" content="drawSquareMesh">
+  <meta name="description" content="DRAWSQUAREMESH Draw a 3D square mesh given as a graph.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; drawSquareMesh.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawSquareMesh
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWSQUAREMESH Draw a 3D square mesh given as a graph.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawSquareMesh(nodes, edges, faces, varargin) %#ok<INUSL> </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWSQUAREMESH Draw a 3D square mesh given as a graph.
+
+   drawSquareMesh(NODES, EDGES, FACES)
+   Draw the mesh defined by NODES, EDGES and FACES. FACES must be a N-by-4
+   array of vertex indices.
+
+   See also
+   <a href="boundaryGraph.html" class="code" title="function varargout = boundaryGraph(img)">boundaryGraph</a>, <a href="drawGraph.html" class="code" title="function varargout = drawGraph(varargin)">drawGraph</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawSquareMesh(nodes, edges, faces, varargin) </a><span class="comment">%#ok&lt;INUSL&gt;</span>
+0002 <span class="comment">%DRAWSQUAREMESH Draw a 3D square mesh given as a graph.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   drawSquareMesh(NODES, EDGES, FACES)</span>
+0005 <span class="comment">%   Draw the mesh defined by NODES, EDGES and FACES. FACES must be a N-by-4</span>
+0006 <span class="comment">%   array of vertex indices.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   See also</span>
+0009 <span class="comment">%   boundaryGraph, drawGraph</span>
+0010 
+0011 <span class="comment">% ------</span>
+0012 <span class="comment">% Author: David Legland</span>
+0013 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0014 <span class="comment">% Created: 2004-06-28</span>
+0015 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0016 
+0017 <span class="comment">% input size check up</span>
+0018 <span class="keyword">if</span> size(faces, 2) ~= 4
+0019     error(<span class="string">'Requires a face array with 4 columns'</span>);
+0020 <span class="keyword">end</span>
+0021 
+0022 <span class="comment">% number of faces</span>
+0023 Nf = size(faces, 1);
+0024 
+0025 <span class="comment">% allocate memory for vertex coordinates</span>
+0026 px = zeros(4, Nf);
+0027 py = zeros(4, Nf);
+0028 pz = zeros(4, Nf);
+0029 
+0030 <span class="comment">% initialize vertex coordinates of each face</span>
+0031 <span class="keyword">for</span> f = 1:Nf
+0032     face = faces(f, 1:4);
+0033     px(1:4, f) = nodes(face, 1);
+0034     py(1:4, f) = nodes(face, 2);
+0035     pz(1:4, f) = nodes(face, 3);
+0036 <span class="keyword">end</span>
+0037 
+0038 p = patch(px, py, pz, <span class="string">'r'</span>);
+0039 
+0040 <span class="keyword">if</span> nargout &gt; 0
+0041     varargout = {p};
+0042 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

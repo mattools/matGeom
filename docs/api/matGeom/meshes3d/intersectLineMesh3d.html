@@ -4,7 +4,7 @@
 <head>
   <title>Description of intersectLineMesh3d</title>
   <meta name="keywords" content="intersectLineMesh3d">
-  <meta name="description" content="Intersection points of a 3D line with a mesh.">
+  <meta name="description" content="INTERSECTLINEMESH3D Intersection points of a 3D line with a mesh.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Intersection points of a 3D line with a mesh.</strong></div>
+<div class="box"><strong>INTERSECTLINEMESH3D Intersection points of a 3D line with a mesh.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function [points, pos, faceInds, lineInds] = intersectLineMesh3d(line, vertices, varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Intersection points of a 3D line with a mesh.
+<div class="fragment"><pre class="comment">INTERSECTLINEMESH3D Intersection points of a 3D line with a mesh.
 
    INTERS = intersectLineMesh3d(LINE, VERTICES, FACES)
    Compute the intersection points between a 3D line and a 3D mesh defined
@@ -68,14 +68,14 @@ This function calls:
 <li><a href="../../matGeom/geom3d/crossProduct3d.html" class="code" title="function c = crossProduct3d(a,b)">crossProduct3d</a>	CROSSPRODUCT3D Vector cross product faster than inbuilt MATLAB cross.</li><li><a href="../../matGeom/geom3d/vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>	VECTORNORM3D Norm of a 3D vector or of set of 3D vectors.</li><li><a href="triangulateFaces.html" class="code" title="function [tri, inds] = triangulateFaces(faces)">triangulateFaces</a>	TRIANGULATEFACES Convert face array to an array of triangular faces.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="intersectEdgeMesh3d.html" class="code" title="function [points, pos, faceInds] = intersectEdgeMesh3d(edge, varargin)">intersectEdgeMesh3d</a>	Intersection points of a 3D edge with a mesh.</li><li><a href="isPointInMesh.html" class="code" title="function res = isPointInMesh(point, v, f, varargin)">isPointInMesh</a>	ISPOINTINMESH Check if a point is inside a 3D mesh.</li></ul>
+<li><a href="intersectEdgeMesh3d.html" class="code" title="function [points, pos, faceInds] = intersectEdgeMesh3d(edge, varargin)">intersectEdgeMesh3d</a>	INTERSECTEDGEMESH3D Intersection points of a 3D edge with a mesh.</li><li><a href="isPointInMesh.html" class="code" title="function res = isPointInMesh(point, v, f, varargin)">isPointInMesh</a>	ISPOINTINMESH Check if a point is inside a 3D mesh.</li></ul>
 <!-- crossreference -->
 
 
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [points, pos, faceInds, lineInds] = intersectLineMesh3d(line, vertices, varargin)</a>
-0002 <span class="comment">% Intersection points of a 3D line with a mesh.</span>
+0002 <span class="comment">%INTERSECTLINEMESH3D Intersection points of a 3D line with a mesh.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   INTERS = intersectLineMesh3d(LINE, VERTICES, FACES)</span>
 0005 <span class="comment">%   Compute the intersection points between a 3D line and a 3D mesh defined</span>
@@ -112,9 +112,9 @@ This function is called by:
 0036 
 0037 <span class="comment">% ------</span>
 0038 <span class="comment">% Author: David Legland</span>
-0039 <span class="comment">% e-mail: david.legland@inrae.fr</span>
-0040 <span class="comment">% Created: 2011-12-20,    using Matlab 7.9.0.529 (R2009b)</span>
-0041 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0039 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0040 <span class="comment">% Created: 2011-12-20, using Matlab 7.9.0.529 (R2009b)</span>
+0041 <span class="comment">% Copyright 2011-2024 INRA - Cepia Software Platform</span>
 0042 
 0043 <span class="comment">% tolerance for detecting if a point is on line or within edge bounds</span>
 0044 tol = 1e-12;
@@ -209,6 +209,6 @@ This function is called by:
 0133         faceInds = tri2Face(faceInds);
 0134     <span class="keyword">end</span>
 0135 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of graph2Contours</title>
+  <meta name="keywords" content="graph2Contours">
+  <meta name="description" content="GRAPH2CONTOURS Convert a graph to a set of contour curves.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; graph2Contours.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>graph2Contours
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>GRAPH2CONTOURS Convert a graph to a set of contour curves.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = graph2Contours(nodes, edges) %#ok<INUSL> </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">GRAPH2CONTOURS Convert a graph to a set of contour curves.
+ 
+   CONTOURS = GRAPH2CONTOURS(NODES, EDGES)
+   NODES, EDGES is a graph representation (type &quot;help graphs&quot; for details)
+   The algorithm assume every node has degree 2, and the set of edges
+   forms only closed loops. The result is a list of indices arrays, each
+   array containing consecutive point indices of a contour.
+
+   To transform contours into drawable curves, please use :
+   CURVES{i} = NODES(CONTOURS{i}, :);
+
+
+   NOTE : contours are not oriented. To manage contour orientation, edges
+   also need to be oriented. So we must precise generation of edges.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/meshes3d/mergeCoplanarFaces.html" class="code" title="function varargout = mergeCoplanarFaces(nodes, varargin)">mergeCoplanarFaces</a>	MERGECOPLANARFACES Merge coplanar faces of a polyhedral mesh.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = graph2Contours(nodes, edges) </a><span class="comment">%#ok&lt;INUSL&gt;</span>
+0002 <span class="comment">%GRAPH2CONTOURS Convert a graph to a set of contour curves.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   CONTOURS = GRAPH2CONTOURS(NODES, EDGES)</span>
+0005 <span class="comment">%   NODES, EDGES is a graph representation (type &quot;help graphs&quot; for details)</span>
+0006 <span class="comment">%   The algorithm assume every node has degree 2, and the set of edges</span>
+0007 <span class="comment">%   forms only closed loops. The result is a list of indices arrays, each</span>
+0008 <span class="comment">%   array containing consecutive point indices of a contour.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%   To transform contours into drawable curves, please use :</span>
+0011 <span class="comment">%   CURVES{i} = NODES(CONTOURS{i}, :);</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   NOTE : contours are not oriented. To manage contour orientation, edges</span>
+0015 <span class="comment">%   also need to be oriented. So we must precise generation of edges.</span>
+0016 
+0017 <span class="comment">% ------</span>
+0018 <span class="comment">% Author: David Legland</span>
+0019 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0020 <span class="comment">% Created: 2004-08-05</span>
+0021 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0022 
+0023 curves = {};
+0024 c = 0;
+0025 
+0026 <span class="keyword">while</span> size(edges,1)&gt;0
+0027     <span class="comment">% find first point of the curve</span>
+0028     n0 = edges(1,1);   
+0029     curve = n0;
+0030     
+0031     <span class="comment">% second point of the curve</span>
+0032     n = edges(1,2);    
+0033     e = 1;
+0034     
+0035     <span class="keyword">while</span> true
+0036         <span class="comment">% add current point to the curve</span>
+0037         curve = [curve n];         <span class="comment">%#ok&lt;AGROW&gt;</span>
+0038         
+0039         <span class="comment">% remove current edge from the list</span>
+0040         edges = edges((1:size(edges,1))~=e,:);
+0041         
+0042         <span class="comment">% find index of edge containing reference to current node</span>
+0043         e = find(edges(:,1)==n | edges(:,2)==n);            
+0044         e = e(1);
+0045         
+0046         <span class="comment">% get index of next current node</span>
+0047         <span class="comment">% (this is the other node of the current edge)</span>
+0048         <span class="keyword">if</span> edges(e,1)==n
+0049             n = edges(e,2);
+0050         <span class="keyword">else</span>
+0051             n = edges(e,1);
+0052         <span class="keyword">end</span>
+0053         
+0054         <span class="comment">% if node is same as start node, loop is closed, and we stop</span>
+0055         <span class="comment">% node iteration.</span>
+0056         <span class="keyword">if</span> n==n0
+0057             <span class="keyword">break</span>;
+0058         <span class="keyword">end</span>
+0059     <span class="keyword">end</span>
+0060     
+0061     <span class="comment">% remove the last edge of the curve from edge list.</span>
+0062     edges = edges((1:size(edges,1))~=e,:);
+0063     
+0064     <span class="comment">% add the current curve to the list, and start a new curve</span>
+0065     c = c+1;
+0066     curves{c} = curve; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0067 <span class="keyword">end</span>
+0068 
+0069 <span class="keyword">if</span> nargout == 1
+0070     varargout = {curves};
+0071 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

@@ -36,7 +36,7 @@
    [XMIN XMAX YMIN YMAX ZMIN ZMAX]
 
    Example
-   % Draw bounding box of a cubeoctehedron
+     % Draw bounding box of a cubeoctehedron
      [v e f] = createCubeOctahedron;
      box3d = boundingBox3d(v);
      figure; hold on;
@@ -47,13 +47,7 @@
      view(3)
      
    See also
-   <a href="boxes3d.html" class="code" title="function boxes3d(varargin)">boxes3d</a>, <a href="drawBox3d.html" class="code" title="function varargout = drawBox3d(box, varargin)">drawBox3d</a>
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- Created: 2011-04-01,    using Matlab 7.9.0.529 (R2009b)
- Copyright 2011 INRA - Cepia Software Platform.</pre></div>
+   <a href="boxes3d.html" class="code" title="function boxes3d(varargin)">boxes3d</a>, <a href="drawBox3d.html" class="code" title="function varargout = drawBox3d(box, varargin)">drawBox3d</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -62,7 +56,7 @@ This function calls:
 </ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="../../matGeom/meshes3d/splitMesh.html" class="code" title="function meshes = splitMesh(vertices, faces, varargin)">splitMesh</a>	SPLITMESH Return the connected components of a mesh.</li><li><a href="../../matGeom/meshes3d/triangulatePolygonPair.html" class="code" title="function [vertices, faces] = triangulatePolygonPair(poly1, poly2, varargin)">triangulatePolygonPair</a>	Compute triangulation between a pair of 3D closed curves.</li></ul>
+<li><a href="../../matGeom/meshes3d/splitMesh.html" class="code" title="function meshes = splitMesh(vertices, faces, varargin)">splitMesh</a>	SPLITMESH Return the connected components of a mesh.</li><li><a href="../../matGeom/meshes3d/triangulatePolygonPair.html" class="code" title="function [vertices, faces] = triangulatePolygonPair(poly1, poly2, varargin)">triangulatePolygonPair</a>	TRIANGULATEPOLYGONPAIR Compute triangulation between a pair of 3D closed curves.</li></ul>
 <!-- crossreference -->
 
 
@@ -78,7 +72,7 @@ This function is called by:
 0008 <span class="comment">%   [XMIN XMAX YMIN YMAX ZMIN ZMAX]</span>
 0009 <span class="comment">%</span>
 0010 <span class="comment">%   Example</span>
-0011 <span class="comment">%   % Draw bounding box of a cubeoctehedron</span>
+0011 <span class="comment">%     % Draw bounding box of a cubeoctehedron</span>
 0012 <span class="comment">%     [v e f] = createCubeOctahedron;</span>
 0013 <span class="comment">%     box3d = boundingBox3d(v);</span>
 0014 <span class="comment">%     figure; hold on;</span>
@@ -90,30 +84,36 @@ This function is called by:
 0020 <span class="comment">%</span>
 0021 <span class="comment">%   See also</span>
 0022 <span class="comment">%   boxes3d, drawBox3d</span>
-0023 <span class="comment">%</span>
+0023 
 0024 <span class="comment">% ------</span>
 0025 <span class="comment">% Author: David Legland</span>
-0026 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0027 <span class="comment">% Created: 2011-04-01,    using Matlab 7.9.0.529 (R2009b)</span>
-0028 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0026 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0027 <span class="comment">% Created: 2011-04-01, using Matlab 7.9.0.529 (R2009b)</span>
+0028 <span class="comment">% Copyright 2011-2024 INRA - Cepia Software Platform</span>
 0029 
-0030 <span class="comment">%   HISTORY</span>
-0031 <span class="comment">%   2011-04-08 add example</span>
-0032 <span class="comment">%   2011-12-09 rename to boundingBox3d</span>
-0033 
-0034 <span class="comment">% compute extreme x and y values</span>
-0035 xmin = min(points(:,1));
-0036 xmax = max(points(:,1));
-0037 ymin = min(points(:,2));
-0038 ymax = max(points(:,2));
-0039 box = [xmin xmax ymin ymax];
-0040 
-0041 <span class="comment">% process case of 3D points</span>
-0042 <span class="keyword">if</span> size(points, 2) &gt; 2
-0043     zmin = min(points(:,3));
-0044     zmax = max(points(:,3));
-0045     box = [xmin xmax ymin ymax zmin zmax];
-0046 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0030 <span class="comment">% Parse input</span>
+0031 <span class="keyword">if</span> isstruct(points)
+0032     <span class="keyword">if</span> isfield(points, <span class="string">'vertices'</span>)
+0033     points = points.vertices;
+0034     <span class="keyword">else</span>
+0035         error([<span class="string">'If a struct is passed to boundingBox3d, it must have '</span> <span class="keyword">...</span>
+0036             <span class="string">'the field ''vertices''!'</span>])
+0037     <span class="keyword">end</span>
+0038 <span class="keyword">end</span>
+0039 
+0040 <span class="comment">% compute extreme x and y values</span>
+0041 xmin = min(points(:,1));
+0042 xmax = max(points(:,1));
+0043 ymin = min(points(:,2));
+0044 ymax = max(points(:,2));
+0045 box = [xmin xmax ymin ymax];
+0046 
+0047 <span class="comment">% process case of 3D points</span>
+0048 <span class="keyword">if</span> size(points, 2) &gt; 2
+0049     zmin = min(points(:,3));
+0050     zmax = max(points(:,3));
+0051     box = [xmin xmax ymin ymax zmin zmax];
+0052 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

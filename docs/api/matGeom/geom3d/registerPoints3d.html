@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of registerPoints3d</title>
+  <meta name="keywords" content="registerPoints3d">
+  <meta name="description" content="REGISTERPOINTS3D Computes a rigid transform between two 3D point sets.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; registerPoints3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>registerPoints3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>REGISTERPOINTS3D Computes a rigid transform between two 3D point sets.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [tfm, pts, varargout] = registerPoints3d(source, target, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">REGISTERPOINTS3D Computes a rigid transform between two 3D point sets.
+
+   TFM = registerPoints3d(SOURCE, TARGET)
+   Computes the 3D rigid transform (composed of a rotation and a
+   translation) that maps the the SOURCE points onto the TARGET points. 
+   Both SOURCE and TARGET are N-by-3 numeric arrays representing point
+   coordinates. SOURCE and TARGET do not necessarily need to have the same 
+   size. The result TFM is a 4-by-4 matrix representing the final affine 
+   transform.
+
+   Note: The deviation of the aligment of the two point sets should not be
+   too extreme. A proper pre-registration increases the chance of finding
+   the global minimum.
+
+   TFM = registerPoints3d(POINTS, TARGET, NITERS)
+   Specifies the number of iterations for the algorithm.
+   
+   [TFM, PTS] = registerPoints3d(...)
+   Additionally, returns the source points transformed by TFM.
+   
+   Different algorithms can be selected using a name-value pair with the 
+   name 'algorithm' and one of the following values:
+       'icp' - registerPoints3d_icp.m - iterative closest point algorithm
+           implemented by Kjer and Wilm. This is the default setting.
+       'affine' - registerPoints3dAffine.m - algorithm implemented by 
+           Legland.
+   Have a look in the respective m-file for further information on  
+   additional input arguments defined as name-value pairs for the specific
+   algorithm.
+
+   Example
+     % Load example data
+     b1k = readMesh('bunny_F1k.ply');
+     b5k = readMesh('bunny_F5k.ply');
+     % Create a random transformation
+     center = -10+20*rand(1,3);
+     phi = randi([-15,15]); theta = randi([-15,15]); psi = randi([-15,15]);
+     TFM = eulerAnglesToRotation3d(5, 10, 15, 'ZYX'); TFM(1:3,4) = center';
+     % Apply transform to source points
+     source = transformPoint3d(b1k.vertices, TFM);
+     % Register source to target
+     [tfm, b1k2b5k] = registerPoints3d(source, b5k.vertices, 100);
+     % Compare transforms that should be almost the same
+     inv(TFM)-tfm
+   
+   See also
+   <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="registerPoints3d_icp.html" class="code" title="function [transfo, pt, ER, t] = registerPoints3d_icp(p, q, varargin)">registerPoints3d_icp</a>, <a href="registerPoints3d_affine.html" class="code" title="function [trans, points] = registerPoints3d_affine(points, target, varargin)">registerPoints3d_affine</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="registerPoints3d_affine.html" class="code" title="function [trans, points] = registerPoints3d_affine(points, target, varargin)">registerPoints3d_affine</a>	registerPoints3d_affine Fit 3D affine transform using iterative algorithm.</li><li><a href="registerPoints3d_icp.html" class="code" title="function [transfo, pt, ER, t] = registerPoints3d_icp(p, q, varargin)">registerPoints3d_icp</a>	REGISTERPOINTS3D_ICP Computes rigid transform between two 3D point sets.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [tfm, pts, varargout] = registerPoints3d(source, target, varargin)</a>
+0002 <span class="comment">%REGISTERPOINTS3D Computes a rigid transform between two 3D point sets.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   TFM = registerPoints3d(SOURCE, TARGET)</span>
+0005 <span class="comment">%   Computes the 3D rigid transform (composed of a rotation and a</span>
+0006 <span class="comment">%   translation) that maps the the SOURCE points onto the TARGET points.</span>
+0007 <span class="comment">%   Both SOURCE and TARGET are N-by-3 numeric arrays representing point</span>
+0008 <span class="comment">%   coordinates. SOURCE and TARGET do not necessarily need to have the same</span>
+0009 <span class="comment">%   size. The result TFM is a 4-by-4 matrix representing the final affine</span>
+0010 <span class="comment">%   transform.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Note: The deviation of the aligment of the two point sets should not be</span>
+0013 <span class="comment">%   too extreme. A proper pre-registration increases the chance of finding</span>
+0014 <span class="comment">%   the global minimum.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%   TFM = registerPoints3d(POINTS, TARGET, NITERS)</span>
+0017 <span class="comment">%   Specifies the number of iterations for the algorithm.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%   [TFM, PTS] = registerPoints3d(...)</span>
+0020 <span class="comment">%   Additionally, returns the source points transformed by TFM.</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%   Different algorithms can be selected using a name-value pair with the</span>
+0023 <span class="comment">%   name 'algorithm' and one of the following values:</span>
+0024 <span class="comment">%       'icp' - registerPoints3d_icp.m - iterative closest point algorithm</span>
+0025 <span class="comment">%           implemented by Kjer and Wilm. This is the default setting.</span>
+0026 <span class="comment">%       'affine' - registerPoints3dAffine.m - algorithm implemented by</span>
+0027 <span class="comment">%           Legland.</span>
+0028 <span class="comment">%   Have a look in the respective m-file for further information on</span>
+0029 <span class="comment">%   additional input arguments defined as name-value pairs for the specific</span>
+0030 <span class="comment">%   algorithm.</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">%   Example</span>
+0033 <span class="comment">%     % Load example data</span>
+0034 <span class="comment">%     b1k = readMesh('bunny_F1k.ply');</span>
+0035 <span class="comment">%     b5k = readMesh('bunny_F5k.ply');</span>
+0036 <span class="comment">%     % Create a random transformation</span>
+0037 <span class="comment">%     center = -10+20*rand(1,3);</span>
+0038 <span class="comment">%     phi = randi([-15,15]); theta = randi([-15,15]); psi = randi([-15,15]);</span>
+0039 <span class="comment">%     TFM = eulerAnglesToRotation3d(5, 10, 15, 'ZYX'); TFM(1:3,4) = center';</span>
+0040 <span class="comment">%     % Apply transform to source points</span>
+0041 <span class="comment">%     source = transformPoint3d(b1k.vertices, TFM);</span>
+0042 <span class="comment">%     % Register source to target</span>
+0043 <span class="comment">%     [tfm, b1k2b5k] = registerPoints3d(source, b5k.vertices, 100);</span>
+0044 <span class="comment">%     % Compare transforms that should be almost the same</span>
+0045 <span class="comment">%     inv(TFM)-tfm</span>
+0046 <span class="comment">%</span>
+0047 <span class="comment">%   See also</span>
+0048 <span class="comment">%   transforms3d, registerPoints3d_icp, registerPoints3d_affine</span>
+0049 
+0050 <span class="comment">% ------</span>
+0051 <span class="comment">% Author: oqilipo</span>
+0052 <span class="comment">% E-mail: N/A</span>
+0053 <span class="comment">% Created: 2024-07-07, using Matlab 23.2.0.2515942 (R2023b) Update 7</span>
+0054 <span class="comment">% Copyright 2024</span>
+0055 
+0056 parser = inputParser;
+0057 parser.KeepUnmatched = true;
+0058 isPoints3d = @(x) validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0059     {<span class="string">'size'</span>,[nan, 3],<span class="string">'nonempty'</span>,<span class="string">'nonnan'</span>,<span class="string">'real'</span>,<span class="string">'finite'</span>});
+0060 parser.addRequired(<span class="string">'source'</span>, isPoints3d);
+0061 parser.addRequired(<span class="string">'target'</span>, isPoints3d);
+0062 parser.addOptional(<span class="string">'nIters'</span>, 10, @ (x) x &gt; 0 &amp;&amp; x &lt; 10^5);
+0063 validStrings = {<span class="string">'icp'</span>,<span class="string">'affine'</span>};
+0064 parser.addParameter(<span class="string">'algorithm'</span>,<span class="string">'icp'</span>,@(x) any(validatestring(x, validStrings)))
+0065 parse(parser,source,target,varargin{:});
+0066 algorithm = parser.Results.algorithm;
+0067 
+0068 <span class="keyword">switch</span> algorithm
+0069     <span class="keyword">case</span> <span class="string">'affine'</span>
+0070         [tfm, pts] = <a href="registerPoints3d_affine.html" class="code" title="function [trans, points] = registerPoints3d_affine(points, target, varargin)">registerPoints3d_affine</a>(source, target, varargin{:});
+0071     <span class="keyword">case</span> <span class="string">'icp'</span>
+0072         [tfm, pts, err, tm] = <a href="registerPoints3d_icp.html" class="code" title="function [transfo, pt, ER, t] = registerPoints3d_icp(p, q, varargin)">registerPoints3d_icp</a>(source, target, varargin{:});
+0073         varargout{1} = err;
+0074         varargout{2} = tm;
+0075 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

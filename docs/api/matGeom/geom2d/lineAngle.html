@@ -39,12 +39,7 @@
    radians between 0 and 2*pi, in counter-clockwise direction.
 
    See also
-   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="angles2d.html" class="code" title="function angles2d">angles2d</a>, <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>, <a href="normalizeAngle.html" class="code" title="function alpha = normalizeAngle(alpha, varargin)">normalizeAngle</a>
-
-   ---------
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 31/10/2003.</pre></div>
+   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="angles2d.html" class="code" title="function angles2d">angles2d</a>, <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>, <a href="normalizeAngle.html" class="code" title="function alpha = normalizeAngle(alpha, varargin)">normalizeAngle</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -73,29 +68,25 @@ This function is called by:
 0012 <span class="comment">%</span>
 0013 <span class="comment">%   See also</span>
 0014 <span class="comment">%   lines2d, angles2d, createLine, normalizeAngle</span>
-0015 <span class="comment">%</span>
-0016 <span class="comment">%   ---------</span>
-0017 <span class="comment">%   author : David Legland</span>
-0018 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0019 <span class="comment">%   created the 31/10/2003.</span>
-0020 <span class="comment">%</span>
+0015 
+0016 <span class="comment">% ------</span>
+0017 <span class="comment">% Author: David Legland</span>
+0018 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0019 <span class="comment">% Created: 2003-10-31</span>
+0020 <span class="comment">% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0021 
-0022 <span class="comment">%   HISTORY</span>
-0023 <span class="comment">%   2004-02-19 added support for multiple lines.</span>
-0024 <span class="comment">%   2011-01-20 use bsxfun</span>
-0025 
-0026 nargs = length(varargin);
-0027 <span class="keyword">if</span> nargs == 1
-0028     <span class="comment">% angle of one line with horizontal</span>
-0029     line = varargin{1};
-0030     theta = mod(atan2(line(:,4), line(:,3)) + 2*pi, 2*pi);
-0031     
-0032 <span class="keyword">elseif</span> nargs==2
-0033     <span class="comment">% angle between two lines</span>
-0034     theta1 = <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>(varargin{1});
-0035     theta2 = <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>(varargin{2});
-0036     theta = mod(bsxfun(@minus, theta2, theta1)+2*pi, 2*pi);
-0037 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0022 nargs = length(varargin);
+0023 <span class="keyword">if</span> nargs == 1
+0024     <span class="comment">% angle of one line with horizontal</span>
+0025     line = varargin{1};
+0026     theta = mod(atan2(line(:,4), line(:,3)) + 2*pi, 2*pi);
+0027     
+0028 <span class="keyword">elseif</span> nargs==2
+0029     <span class="comment">% angle between two lines</span>
+0030     theta1 = <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>(varargin{1});
+0031     theta2 = <a href="lineAngle.html" class="code" title="function theta = lineAngle(varargin)">lineAngle</a>(varargin{2});
+0032     theta = mod(bsxfun(@minus, theta2, theta1)+2*pi, 2*pi);
+0033 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

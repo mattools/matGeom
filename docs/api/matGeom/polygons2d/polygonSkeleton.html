@@ -4,7 +4,7 @@
 <head>
   <title>Description of polygonSkeleton</title>
   <meta name="keywords" content="polygonSkeleton">
-  <meta name="description" content="Skeletonization of a polygon with a dense distribution of vertices.">
+  <meta name="description" content="POLYGONSKELETON Skeletonization of a polygon with a dense distribution of vertices.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Skeletonization of a polygon with a dense distribution of vertices.</strong></div>
+<div class="box"><strong>POLYGONSKELETON Skeletonization of a polygon with a dense distribution of vertices.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function varargout = polygonSkeleton(poly, varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Skeletonization of a polygon with a dense distribution of vertices.
+<div class="fragment"><pre class="comment">POLYGONSKELETON Skeletonization of a polygon with a dense distribution of vertices.
 
    [V, ADJ] = polygonSkeleton(POLY)
    POLY is given as a N-by-2 array of polygon vertex coordinates. The
@@ -79,7 +79,7 @@ This function is called by:
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = polygonSkeleton(poly, varargin)</a>
-0002 <span class="comment">% Skeletonization of a polygon with a dense distribution of vertices.</span>
+0002 <span class="comment">%POLYGONSKELETON Skeletonization of a polygon with a dense distribution of vertices.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   [V, ADJ] = polygonSkeleton(POLY)</span>
 0005 <span class="comment">%   POLY is given as a N-by-2 array of polygon vertex coordinates. The</span>
@@ -116,114 +116,112 @@ This function is called by:
 0036 <span class="comment">%</span>
 0037 <span class="comment">%   See also</span>
 0038 <span class="comment">%     graphs, adjacencyListToEdges</span>
-0039  
+0039 
 0040 <span class="comment">% ------</span>
 0041 <span class="comment">% Author: David Legland</span>
-0042 <span class="comment">% e-mail: david.legland@inrae.fr</span>
-0043 <span class="comment">% INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
-0044 <span class="comment">% Created: 2020-05-29,    using Matlab 9.8.0.1323502 (R2020a)</span>
-0045 <span class="comment">% Copyright 2020 INRAE.</span>
-0046 
+0042 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0043 <span class="comment">% Created: 2020-05-29, using Matlab 9.8.0.1323502 (R2020a)</span>
+0044 <span class="comment">% Copyright 2020-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0045 
+0046 <span class="comment">%% Voronoi Diagram computation</span>
 0047 
-0048 <span class="comment">%% Voronoi Diagram computation</span>
-0049 
-0050 <span class="comment">% Compute Voronoi Diagram, using polygon vertices as germs.</span>
-0051 [V, C] = voronoin(poly);
-0052 
-0053 <span class="comment">% compute number of elements of each array</span>
-0054 nVertices   = size(V, 1);
-0055 nCells      = size(C, 1);
-0056 
-0057 <span class="comment">% Detection of the vertices located inside the contour</span>
-0058 insideFlag = inpolygon(V(:,1), V(:,2), poly(:,1), poly(:,2));
-0059 innerVertices = V(insideFlag, :);
-0060 
-0061 <span class="comment">% indices of inner vertices</span>
-0062 indsInside = find(insideFlag);
-0063 nInnerVertices = length(indsInside);
-0064 
-0065 <span class="comment">% compute map between voronoi vertex indices and skeleton vertex indices.</span>
-0066 vertexIndexMap = zeros(nVertices, 1);
-0067 <span class="keyword">for</span> iVertex = 1:length(indsInside)
-0068     vertexIndexMap(indsInside(iVertex)) = iVertex;
-0069 <span class="keyword">end</span>
-0070 
-0071 
-0072 <span class="comment">%% Compute the topology of the skeleton</span>
-0073 <span class="comment">%</span>
-0074 <span class="comment">% Compute the topology as a list of adjacent vertex indices for each vertex</span>
-0075 <span class="comment">% inside the polygon.</span>
-0076 <span class="comment">% Need to convert between voronoi indices and skeleton indices.</span>
-0077 
-0078 <span class="comment">% allocate adjacncy list</span>
-0079 adjList = cell(nInnerVertices, 1);
-0080 vertexGermInds = zeros(nInnerVertices, 1);
-0081 
-0082 <span class="comment">% iterate on voronoi cells to compute skeleton by linking adjacent vertices</span>
-0083 <span class="comment">% (avoiding first cell which is located at infinity by convention)</span>
-0084 <span class="keyword">for</span> iGerm = 2:nCells
-0085     <span class="comment">% vertices of current cell</span>
-0086     cellVertices = C{iGerm};
-0087     nCellVertices = length(cellVertices);
-0088     
-0089     <span class="comment">% iterate on vertices of current cell</span>
-0090     <span class="keyword">for</span> k = 1:nCellVertices
-0091         <span class="comment">% index of current voronoi vertex</span>
-0092         iVertex = cellVertices(k);
-0093         
-0094         <span class="comment">% process only vertices within the contour</span>
-0095         <span class="keyword">if</span> insideFlag(iVertex) == 0
-0096             <span class="keyword">continue</span>;
-0097         <span class="keyword">end</span>
-0098         
-0099         <span class="comment">% convert voronoi vertex index to skeleton vertex index</span>
-0100         indV1 = vertexIndexMap(iVertex);
-0101         
-0102         <span class="comment">% update the reference germ associated to current skeleton vertex</span>
-0103         vertexGermInds(indV1) = iGerm;
-0104         
-0105         <span class="comment">% compute indices of adjacent vertices (in cell)</span>
-0106         iPrev = cellVertices(mod(k - 2, nCellVertices) + 1);
-0107         iNext = cellVertices(mod(k, nCellVertices) + 1);
-0108         
-0109         <span class="comment">% keep only the neighbors within the polygon</span>
-0110         <span class="keyword">if</span> insideFlag(iPrev) == 1
-0111             adjList{indV1} = [adjList{indV1} vertexIndexMap(iPrev)];
-0112         <span class="keyword">end</span>
-0113         <span class="keyword">if</span> insideFlag(iNext) == 1
-0114             adjList{indV1} = [adjList{indV1} vertexIndexMap(iNext)];
-0115         <span class="keyword">end</span>
-0116     <span class="keyword">end</span>
-0117 <span class="keyword">end</span>
-0118 
-0119 <span class="comment">% cleanup to avoid duplicate indices</span>
-0120 <span class="keyword">for</span> iVertex = 1:nInnerVertices
-0121     adjList{iVertex} = unique(adjList{iVertex});
-0122 <span class="keyword">end</span>
-0123 
+0048 <span class="comment">% Compute Voronoi Diagram, using polygon vertices as germs.</span>
+0049 [V, C] = voronoin(poly);
+0050 
+0051 <span class="comment">% compute number of elements of each array</span>
+0052 nVertices   = size(V, 1);
+0053 nCells      = size(C, 1);
+0054 
+0055 <span class="comment">% Detection of the vertices located inside the contour</span>
+0056 insideFlag = inpolygon(V(:,1), V(:,2), poly(:,1), poly(:,2));
+0057 innerVertices = V(insideFlag, :);
+0058 
+0059 <span class="comment">% indices of inner vertices</span>
+0060 indsInside = find(insideFlag);
+0061 nInnerVertices = length(indsInside);
+0062 
+0063 <span class="comment">% compute map between voronoi vertex indices and skeleton vertex indices.</span>
+0064 vertexIndexMap = zeros(nVertices, 1);
+0065 <span class="keyword">for</span> iVertex = 1:length(indsInside)
+0066     vertexIndexMap(indsInside(iVertex)) = iVertex;
+0067 <span class="keyword">end</span>
+0068 
+0069 
+0070 <span class="comment">%% Compute the topology of the skeleton</span>
+0071 <span class="comment">%</span>
+0072 <span class="comment">% Compute the topology as a list of adjacent vertex indices for each vertex</span>
+0073 <span class="comment">% inside the polygon.</span>
+0074 <span class="comment">% Need to convert between voronoi indices and skeleton indices.</span>
+0075 
+0076 <span class="comment">% allocate adjacncy list</span>
+0077 adjList = cell(nInnerVertices, 1);
+0078 vertexGermInds = zeros(nInnerVertices, 1);
+0079 
+0080 <span class="comment">% iterate on voronoi cells to compute skeleton by linking adjacent vertices</span>
+0081 <span class="comment">% (avoiding first cell which is located at infinity by convention)</span>
+0082 <span class="keyword">for</span> iGerm = 2:nCells
+0083     <span class="comment">% vertices of current cell</span>
+0084     cellVertices = C{iGerm};
+0085     nCellVertices = length(cellVertices);
+0086     
+0087     <span class="comment">% iterate on vertices of current cell</span>
+0088     <span class="keyword">for</span> k = 1:nCellVertices
+0089         <span class="comment">% index of current voronoi vertex</span>
+0090         iVertex = cellVertices(k);
+0091         
+0092         <span class="comment">% process only vertices within the contour</span>
+0093         <span class="keyword">if</span> insideFlag(iVertex) == 0
+0094             <span class="keyword">continue</span>;
+0095         <span class="keyword">end</span>
+0096         
+0097         <span class="comment">% convert voronoi vertex index to skeleton vertex index</span>
+0098         indV1 = vertexIndexMap(iVertex);
+0099         
+0100         <span class="comment">% update the reference germ associated to current skeleton vertex</span>
+0101         vertexGermInds(indV1) = iGerm;
+0102         
+0103         <span class="comment">% compute indices of adjacent vertices (in cell)</span>
+0104         iPrev = cellVertices(mod(k - 2, nCellVertices) + 1);
+0105         iNext = cellVertices(mod(k, nCellVertices) + 1);
+0106         
+0107         <span class="comment">% keep only the neighbors within the polygon</span>
+0108         <span class="keyword">if</span> insideFlag(iPrev) == 1
+0109             adjList{indV1} = [adjList{indV1} vertexIndexMap(iPrev)];
+0110         <span class="keyword">end</span>
+0111         <span class="keyword">if</span> insideFlag(iNext) == 1
+0112             adjList{indV1} = [adjList{indV1} vertexIndexMap(iNext)];
+0113         <span class="keyword">end</span>
+0114     <span class="keyword">end</span>
+0115 <span class="keyword">end</span>
+0116 
+0117 <span class="comment">% cleanup to avoid duplicate indices</span>
+0118 <span class="keyword">for</span> iVertex = 1:nInnerVertices
+0119     adjList{iVertex} = unique(adjList{iVertex});
+0120 <span class="keyword">end</span>
+0121 
+0122 
+0123 <span class="comment">%% Compute radius list</span>
 0124 
-0125 <span class="comment">%% Compute radius list</span>
-0126 
-0127 <span class="comment">% for each voronoi vertex inside the polygon, compute the distance to</span>
-0128 <span class="comment">% original polygon.</span>
-0129 <span class="comment">% Find indices of germs associated to each vertex.</span>
-0130 <span class="comment">% By construction, each vertex is the circumcenter of three germs.</span>
-0131 radiusList = zeros(nInnerVertices, 1);
-0132 <span class="keyword">for</span> iVertex = 1:nInnerVertices
-0133     radiusList(iVertex) = norm(poly(vertexGermInds(iVertex),:) - innerVertices(iVertex,:));
-0134 <span class="keyword">end</span>
-0135 
+0125 <span class="comment">% for each voronoi vertex inside the polygon, compute the distance to</span>
+0126 <span class="comment">% original polygon.</span>
+0127 <span class="comment">% Find indices of germs associated to each vertex.</span>
+0128 <span class="comment">% By construction, each vertex is the circumcenter of three germs.</span>
+0129 radiusList = zeros(nInnerVertices, 1);
+0130 <span class="keyword">for</span> iVertex = 1:nInnerVertices
+0131     radiusList(iVertex) = norm(poly(vertexGermInds(iVertex),:) - innerVertices(iVertex,:));
+0132 <span class="keyword">end</span>
+0133 
+0134 
+0135 <span class="comment">%% Format output</span>
 0136 
-0137 <span class="comment">%% Format output</span>
-0138 
-0139 <span class="keyword">if</span> nargout &lt;= 1
-0140     <span class="comment">% format output to a struct</span>
-0141     varargout{1} = struct(<span class="string">'vertices'</span>, {innerVertices}, <span class="string">'adjList'</span>, {adjList}, <span class="string">'radius'</span>, {radiusList});
-0142 <span class="keyword">elseif</span> nargout == 2
-0143     varargout = {innerVertices, adjList};
-0144 <span class="keyword">elseif</span> nargout == 3
-0145     varargout = {innerVertices, adjList, radiusList};
-0146 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0137 <span class="keyword">if</span> nargout &lt;= 1
+0138     <span class="comment">% format output to a struct</span>
+0139     varargout{1} = struct(<span class="string">'vertices'</span>, {innerVertices}, <span class="string">'adjList'</span>, {adjList}, <span class="string">'radius'</span>, {radiusList});
+0140 <span class="keyword">elseif</span> nargout == 2
+0141     varargout = {innerVertices, adjList};
+0142 <span class="keyword">elseif</span> nargout == 3
+0143     varargout = {innerVertices, adjList, radiusList};
+0144 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

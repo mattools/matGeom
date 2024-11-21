@@ -60,14 +60,8 @@
    ans =
        .5
 
-   See also:
-   <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>, <a href="projPointOnLine.html" class="code" title="function point = projPointOnLine(point, line)">projPointOnLine</a>, <a href="isPointOnLine.html" class="code" title="function b = isPointOnLine(point, line, varargin)">isPointOnLine</a>
-
-   ---------
-
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 25/05/2004.</pre></div>
+   See also
+     <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="linePoint.html" class="code" title="function point = linePoint(line, pos)">linePoint</a>, <a href="projPointOnLine.html" class="code" title="function point = projPointOnLine(point, line)">projPointOnLine</a>, <a href="isPointOnLine.html" class="code" title="function b = isPointOnLine(point, line, varargin)">isPointOnLine</a>, <a href="createLine.html" class="code" title="function line = createLine(varargin)">createLine</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -76,7 +70,7 @@ This function calls:
 </ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="clipLine.html" class="code" title="function edge = clipLine(line, box, varargin)">clipLine</a>	CLIPLINE Clip a line with a box.</li><li><a href="clipRay.html" class="code" title="function [edge, isInside] = clipRay(ray, bb)">clipRay</a>	Clip a ray with a box.</li><li><a href="crackPattern.html" class="code" title="function edges = crackPattern(box, points, alpha, varargin)">crackPattern</a>	CRACKPATTERN Create a (bounded) crack pattern tessellation.</li><li><a href="crackPattern2.html" class="code" title="function edges = crackPattern2(box, points, alpha, varargin)">crackPattern2</a>	CRACKPATTERN2 Create a (bounded) crack pattern tessellation.</li><li><a href="../../matGeom/polygons2d/intersectLinePolyline.html" class="code" title="function [intersects, edgeIndices] = intersectLinePolyline(line, poly, varargin)">intersectLinePolyline</a>	INTERSECTLINEPOLYLINE Intersection points between a line and a polyline.</li></ul>
+<li><a href="clipLine.html" class="code" title="function edge = clipLine(line, box, varargin)">clipLine</a>	CLIPLINE Clip a line with a box.</li><li><a href="clipRay.html" class="code" title="function [edge, isInside] = clipRay(ray, bb)">clipRay</a>	CLIPRAY Clip a ray with a box.</li><li><a href="crackPattern.html" class="code" title="function edges = crackPattern(box, points, alpha, varargin)">crackPattern</a>	CRACKPATTERN Create a (bounded) crack pattern tessellation.</li><li><a href="crackPattern2.html" class="code" title="function edges = crackPattern2(box, points, alpha, varargin)">crackPattern2</a>	CRACKPATTERN2 Create a (bounded) crack pattern tessellation.</li><li><a href="../../matGeom/polygons2d/intersectLinePolyline.html" class="code" title="function [intersects, edgeIndices] = intersectLinePolyline(line, poly, varargin)">intersectLinePolyline</a>	INTERSECTLINEPOLYLINE Intersection points between a line and a polyline.</li></ul>
 <!-- crossreference -->
 
 
@@ -116,75 +110,68 @@ This function is called by:
 0032 <span class="comment">%   ans =</span>
 0033 <span class="comment">%       .5</span>
 0034 <span class="comment">%</span>
-0035 <span class="comment">%   See also:</span>
-0036 <span class="comment">%   lines2d, createLine, projPointOnLine, isPointOnLine</span>
-0037 <span class="comment">%</span>
-0038 <span class="comment">%   ---------</span>
-0039 <span class="comment">%</span>
-0040 <span class="comment">%   author : David Legland</span>
-0041 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0042 <span class="comment">%   created the 25/05/2004.</span>
-0043 <span class="comment">%</span>
-0044 
-0045 <span class="comment">%   HISTORY</span>
-0046 <span class="comment">%   2005-07-07 manage multiple input</span>
-0047 <span class="comment">%   2011-06-15 avoid the use of repmat when possible</span>
-0048 <span class="comment">%   2012-10-24 rewrite using bsxfun</span>
-0049 <span class="comment">%   2012-11-22 add support for the diag option</span>
-0050 
-0051 <span class="comment">% if diag is true, we need only to compute position of i-th point with i-th</span>
-0052 <span class="comment">% line.</span>
-0053 diag = ~isempty(varargin) &amp;&amp; ischar(varargin{1}) &amp;&amp; strcmpi(varargin{1}, <span class="string">'diag'</span>);
-0054 
-0055 <span class="keyword">if</span> diag
-0056     <span class="comment">% In the case of 'diag' option, use direct correspondence between</span>
-0057     <span class="comment">% points and lines</span>
-0058     
-0059     <span class="comment">% check input have same size</span>
-0060     np = size(point, 1);
-0061     nl = size(line, 1);
-0062     <span class="keyword">if</span> np ~= nl
-0063         error(<span class="string">'matGeom:linePosition'</span>, <span class="keyword">...</span>
-0064             <span class="string">'Using diag option, number of points and lines should be the same'</span>);
-0065     <span class="keyword">end</span>
-0066     
-0067     <span class="comment">% direction vector of the lines</span>
-0068     vx = line(:, 3);
-0069     vy = line(:, 4);
+0035 <span class="comment">%   See also</span>
+0036 <span class="comment">%     lines2d, linePoint, projPointOnLine, isPointOnLine, createLine</span>
+0037 
+0038 <span class="comment">% ------</span>
+0039 <span class="comment">% Author: David Legland</span>
+0040 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0041 <span class="comment">% Created: 2004-05-25</span>
+0042 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0043 
+0044 <span class="comment">% if diag is true, we need only to compute position of i-th point with i-th</span>
+0045 <span class="comment">% line.</span>
+0046 diag = ~isempty(varargin) &amp;&amp; ischar(varargin{1}) &amp;&amp; strcmpi(varargin{1}, <span class="string">'diag'</span>);
+0047 
+0048 <span class="keyword">if</span> diag
+0049     <span class="comment">% In the case of 'diag' option, use direct correspondence between</span>
+0050     <span class="comment">% points and lines</span>
+0051     
+0052     <span class="comment">% check input have same size</span>
+0053     np = size(point, 1);
+0054     nl = size(line, 1);
+0055     <span class="keyword">if</span> np ~= nl
+0056         error(<span class="string">'matGeom:linePosition'</span>, <span class="keyword">...</span>
+0057             <span class="string">'Using diag option, number of points and lines should be the same'</span>);
+0058     <span class="keyword">end</span>
+0059     
+0060     <span class="comment">% direction vector of the lines</span>
+0061     vx = line(:, 3);
+0062     vy = line(:, 4);
+0063     
+0064     <span class="comment">% difference of coordinates between point and line origins</span>
+0065     dx = point(:, 1) - line(:, 1);
+0066     dy = point(:, 2) - line(:, 2);
+0067     
+0068 <span class="keyword">else</span>
+0069     <span class="comment">% General case -&gt; return NP-by-NL array</span>
 0070     
-0071     <span class="comment">% difference of coordinates between point and line origins</span>
-0072     dx = point(:, 1) - line(:, 1);
-0073     dy = point(:, 2) - line(:, 2);
+0071     <span class="comment">% direction vector of the lines</span>
+0072     vx = line(:, 3)';
+0073     vy = line(:, 4)';
 0074     
-0075 <span class="keyword">else</span>
-0076     <span class="comment">% General case -&gt; return NP-by-NL array</span>
-0077     
-0078     <span class="comment">% direction vector of the lines</span>
-0079     vx = line(:, 3)';
-0080     vy = line(:, 4)';
-0081     
-0082     <span class="comment">% difference of coordinates between point and line origins</span>
-0083     dx = bsxfun(@minus, point(:, 1), line(:, 1)');
-0084     dy = bsxfun(@minus, point(:, 2), line(:, 2)');
+0075     <span class="comment">% difference of coordinates between point and line origins</span>
+0076     dx = bsxfun(@minus, point(:, 1), line(:, 1)');
+0077     dy = bsxfun(@minus, point(:, 2), line(:, 2)');
+0078 
+0079 <span class="keyword">end</span>
+0080 
+0081 <span class="comment">% squared norm of direction vector, with a check of validity</span>
+0082 delta = vx .* vx + vy .* vy;
+0083 invalidLine = delta &lt; eps;
+0084 delta(invalidLine) = 1; 
 0085 
-0086 <span class="keyword">end</span>
-0087 
-0088 <span class="comment">% squared norm of direction vector, with a check of validity</span>
-0089 delta = vx .* vx + vy .* vy;
-0090 invalidLine = delta &lt; eps;
-0091 delta(invalidLine) = 1; 
-0092 
-0093 <span class="comment">% compute position of points projected on the line, by using normalised dot</span>
-0094 <span class="comment">% product (NP-by-NL array)</span>
-0095 pos = bsxfun(@rdivide, bsxfun(@times, dx, vx) + bsxfun(@times, dy, vy), delta);
-0096 
-0097 <span class="comment">% ensure degenerated edges are correclty processed (consider the first</span>
-0098 <span class="comment">% vertex is the closest one)</span>
-0099 <span class="keyword">if</span> diag
-0100     pos(invalidLine) = 0;
-0101 <span class="keyword">else</span>
-0102     pos(:, invalidLine) = 0;
-0103 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0086 <span class="comment">% compute position of points projected on the line, by using normalised dot</span>
+0087 <span class="comment">% product (NP-by-NL array)</span>
+0088 pos = bsxfun(@rdivide, bsxfun(@times, dx, vx) + bsxfun(@times, dy, vy), delta);
+0089 
+0090 <span class="comment">% ensure degenerated edges are correclty processed (consider the first</span>
+0091 <span class="comment">% vertex is the closest one)</span>
+0092 <span class="keyword">if</span> diag
+0093     pos(invalidLine) = 0;
+0094 <span class="keyword">else</span>
+0095     pos(:, invalidLine) = 0;
+0096 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

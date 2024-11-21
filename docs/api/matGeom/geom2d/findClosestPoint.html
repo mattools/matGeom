@@ -51,7 +51,7 @@ This function calls:
 </ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="registerICP.html" class="code" title="function [trans, points] = registerICP(points, target, varargin)">registerICP</a>	REGISTERICP Fit affine transform by Iterative Closest Point algorithm.</li><li><a href="../../matGeom/geom3d/registerPoints3dAffine.html" class="code" title="function [trans, points] = registerPoints3dAffine(points, target, varargin)">registerPoints3dAffine</a>	Fit 3D affine transform using iterative algorithm.</li></ul>
+<li><a href="registerICP.html" class="code" title="function [trans, points] = registerICP(points, target, varargin)">registerICP</a>	REGISTERICP Fit affine transform by Iterative Closest Point algorithm.</li><li><a href="../../matGeom/geom3d/registerPoints3d_affine.html" class="code" title="function [trans, points] = registerPoints3d_affine(points, target, varargin)">registerPoints3d_affine</a>	registerPoints3d_affine Fit 3D affine transform using iterative algorithm.</li></ul>
 <!-- crossreference -->
 
 
@@ -75,14 +75,14 @@ This function is called by:
 0016 <span class="comment">%   See also</span>
 0017 <span class="comment">%    points2d, minDistancePoints, distancePoints</span>
 0018 <span class="comment">%</span>
-0019  
+0019 
 0020 <span class="comment">% ------</span>
 0021 <span class="comment">% Author: David Legland</span>
-0022 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0023 <span class="comment">% Created: 2015-02-24,    using Matlab 8.4.0.150421 (R2014b)</span>
-0024 <span class="comment">% Copyright 2015 INRA - Cepia Software Platform.</span>
-0025 <span class="comment">% number of points</span>
-0026 
+0022 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0023 <span class="comment">% Created: 2015-02-24, using Matlab 8.4.0.150421 (R2014b)</span>
+0024 <span class="comment">% Copyright 2015-2024 INRA - Cepia Software Platform</span>
+0025 
+0026 <span class="comment">% number of points</span>
 0027 <span class="comment">% number of point in first input to process</span>
 0028 np = size(coord, 1);
 0029 
@@ -97,6 +97,6 @@ This function is called by:
 0038     <span class="comment">% keep index of closest point</span>
 0039     [minDist(i), index(i)] = min(dist);
 0040 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

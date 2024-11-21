@@ -50,7 +50,7 @@
          18.9282
 
    See also
-     <a href="polygons3d.html" class="code" title="function polygons3d(varargin)">polygons3d</a>, <a href="triangleArea3d.html" class="code" title="function area = triangleArea3d(pt1, pt2, pt3)">triangleArea3d</a>, polygonArea, <a href="polygonCentroid3d.html" class="code" title="function centroid = polygonCentroid3d(varargin)">polygonCentroid3d</a></pre></div>
+     <a href="polygons3d.html" class="code" title="function polygons3d(varargin)">polygons3d</a>, <a href="triangleArea3d.html" class="code" title="function area = triangleArea3d(pt1, pt2, pt3)">triangleArea3d</a>, polygonArea, <a href="polygonCentroid3d.html" class="code" title="function [centroid, area] = polygonCentroid3d(varargin)">polygonCentroid3d</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -93,56 +93,53 @@ This function is called by:
 0026 
 0027 <span class="comment">% ------</span>
 0028 <span class="comment">% Author: David Legland</span>
-0029 <span class="comment">% e-mail: david.legland@inra.fr</span>
-0030 <span class="comment">% Created: 2012-02-24,    using Matlab 7.9.0.529 (R2009b)</span>
-0031 <span class="comment">% Copyright 2012 INRA - Cepia Software Platform.</span>
+0029 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0030 <span class="comment">% Created: 2012-02-24, using Matlab 7.9.0.529 (R2009b)</span>
+0031 <span class="comment">% Copyright 2012-2024 INRA - Cepia Software Platform</span>
 0032 
-0033 <span class="comment">%   HISTORY</span>
-0034 <span class="comment">%   2013-08-20 add support for multiple polygons</span>
-0035 
-0036 <span class="comment">% Check multiple polygons</span>
-0037 <span class="keyword">if</span> iscell(poly) || sum(sum(isnan(poly))) &gt; 0
-0038     <span class="comment">% split the polygons into a cell array</span>
-0039     polygons = splitPolygons3d(poly);
-0040     nPolys = length(polygons);
-0041     
-0042     <span class="comment">% compute area of each polygon</span>
-0043     area = zeros(nPolys, 1);
-0044     <span class="keyword">for</span>  i = 1:nPolys
-0045         area(i) = <a href="polygonArea3d.html" class="code" title="function area = polygonArea3d(poly, varargin)">polygonArea3d</a>(polygons{i});
-0046     <span class="keyword">end</span>
-0047     
-0048     <span class="keyword">return</span>;
-0049 <span class="keyword">end</span>
-0050 
-0051 <span class="comment">% put the first vertex at origin (reducing computation errors for polygons</span>
-0052 <span class="comment">% far from origin)</span>
-0053 v0 = poly(1, :);
-0054 poly = bsxfun(@minus, poly, v0);
-0055 
-0056 <span class="comment">% indices of next vertices</span>
-0057 N = size(poly, 1);
-0058 iNext = [2:N 1];
-0059 
-0060 <span class="comment">% compute cross-product of each elementary triangle formed by origin and</span>
-0061 <span class="comment">% two consecutive vertices</span>
-0062 cp = cross(poly, poly(iNext,:), 2);
-0063 
-0064 <span class="comment">% choose one of the triangles as reference for the normal direction</span>
-0065 vn = <a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(cp);
-0066 [tmp, ind] = max(vn); <span class="comment">%#ok&lt;ASGLU&gt;</span>
-0067 cpRef = cp(ind,:);
-0068 
-0069 <span class="comment">% compute the sign of the area of each triangle</span>
-0070 <span class="comment">% (need to compute the sign explicitely, as the norm of the cross product</span>
-0071 <span class="comment">% does not keep orientation within supporting plane)</span>
-0072 sign_i = sign(dot(cp, repmat(cpRef, N, 1), 2));
+0033 <span class="comment">% Check multiple polygons</span>
+0034 <span class="keyword">if</span> iscell(poly) || sum(sum(isnan(poly))) &gt; 0
+0035     <span class="comment">% split the polygons into a cell array</span>
+0036     polygons = splitPolygons3d(poly);
+0037     nPolys = length(polygons);
+0038     
+0039     <span class="comment">% compute area of each polygon</span>
+0040     area = zeros(nPolys, 1);
+0041     <span class="keyword">for</span>  i = 1:nPolys
+0042         area(i) = <a href="polygonArea3d.html" class="code" title="function area = polygonArea3d(poly, varargin)">polygonArea3d</a>(polygons{i});
+0043     <span class="keyword">end</span>
+0044     
+0045     <span class="keyword">return</span>;
+0046 <span class="keyword">end</span>
+0047 
+0048 <span class="comment">% put the first vertex at origin (reducing computation errors for polygons</span>
+0049 <span class="comment">% far from origin)</span>
+0050 v0 = poly(1, :);
+0051 poly = bsxfun(@minus, poly, v0);
+0052 
+0053 <span class="comment">% indices of next vertices</span>
+0054 N = size(poly, 1);
+0055 iNext = [2:N 1];
+0056 
+0057 <span class="comment">% compute cross-product of each elementary triangle formed by origin and</span>
+0058 <span class="comment">% two consecutive vertices</span>
+0059 cp = cross(poly, poly(iNext,:), 2);
+0060 
+0061 <span class="comment">% choose one of the triangles as reference for the normal direction</span>
+0062 vn = <a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(cp);
+0063 [tmp, ind] = max(vn); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0064 cpRef = cp(ind,:);
+0065 
+0066 <span class="comment">% compute the sign of the area of each triangle</span>
+0067 <span class="comment">% (need to compute the sign explicitely, as the norm of the cross product</span>
+0068 <span class="comment">% does not keep orientation within supporting plane)</span>
+0069 sign_i = sign(dot(cp, repmat(cpRef, N, 1), 2));
+0070 
+0071 <span class="comment">% compute area of each triangle, using sign correction</span>
+0072 area_i = <a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(cp) .* sign_i;
 0073 
-0074 <span class="comment">% compute area of each triangle, using sign correction</span>
-0075 area_i = <a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(cp) .* sign_i;
-0076 
-0077 <span class="comment">% sum up individual triangles area</span>
-0078 area = sum(area_i) / 2;</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0074 <span class="comment">% sum up individual triangles area</span>
+0075 area = sum(area_i) / 2;</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

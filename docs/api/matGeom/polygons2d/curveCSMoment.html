@@ -40,19 +40,13 @@
    Based on ideas and references in:
    &quot;Affine curve moment invariants for shape recognition&quot;
    Dongmin Zhao and Jie Chen
-   Pattern Recognition, 1997, vol. 30, pp. 865-901
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- Created: 2009-03-25,    using Matlab 7.7.0.471 (R2008b)
- Copyright 2009 INRA - Cepia Software Platform.</pre></div>
+   Pattern Recognition, 1997, vol. 30, pp. 865-901</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>	CENTROID Compute centroid (center of mass) of a set of points.</li><li><a href="polylineCentroid.html" class="code" title="function center = polylineCentroid(varargin)">polylineCentroid</a>	Computes the centroid of a curve defined by a series of points.</li><li><a href="polylineLength.html" class="code" title="function len = polylineLength(poly, varargin)">polylineLength</a>	POLYLINELENGTH Return length of a polyline given as a list of points.</li></ul>
+<li><a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>	CENTROID Compute centroid (center of mass) of a set of points.</li><li><a href="polylineCentroid.html" class="code" title="function center = polylineCentroid(varargin)">polylineCentroid</a>	POLYLINECENTROID Computes the centroid of a curve defined by a series of points.</li><li><a href="polylineLength.html" class="code" title="function len = polylineLength(poly, varargin)">polylineLength</a>	POLYLINELENGTH Return length of a polyline given as a list of points.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 </ul>
@@ -76,12 +70,12 @@ This function is called by:
 0013 <span class="comment">%   &quot;Affine curve moment invariants for shape recognition&quot;</span>
 0014 <span class="comment">%   Dongmin Zhao and Jie Chen</span>
 0015 <span class="comment">%   Pattern Recognition, 1997, vol. 30, pp. 865-901</span>
-0016 <span class="comment">%</span>
+0016 
 0017 <span class="comment">% ------</span>
 0018 <span class="comment">% Author: David Legland</span>
-0019 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0020 <span class="comment">% Created: 2009-03-25,    using Matlab 7.7.0.471 (R2008b)</span>
-0021 <span class="comment">% Copyright 2009 INRA - Cepia Software Platform.</span>
+0019 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0020 <span class="comment">% Created: 2009-03-25, using Matlab 7.7.0.471 (R2008b)</span>
+0021 <span class="comment">% Copyright 2009-2024 INRA - Cepia Software Platform</span>
 0022 
 0023 <span class="comment">% compute curve centroid</span>
 0024 <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a> = <a href="polylineCentroid.html" class="code" title="function center = polylineCentroid(varargin)">polylineCentroid</a>(curve);
@@ -106,6 +100,6 @@ This function is called by:
 0043     d = (p(i)+q(i))/2+1;
 0044     m(i) = sum(cx(:).^p(i) .* cy(:).^q(i) .* dl(:)) / L^d;
 0045 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <head>
   <title>Description of writeMesh</title>
   <meta name="keywords" content="writeMesh">
-  <meta name="description" content="Write 3D mesh data by inferring format from file name.">
+  <meta name="description" content="WRITEMESH Write 3D mesh data by inferring format from file name.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,23 +21,24 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Write 3D mesh data by inferring format from file name.</strong></div>
+<div class="box"><strong>WRITEMESH Write 3D mesh data by inferring format from file name.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function writeMesh(fileName, vertices, faces, varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Write 3D mesh data by inferring format from file name.
+<div class="fragment"><pre class="comment">WRITEMESH Write 3D mesh data by inferring format from file name.
 
+   Usage:
    writeMesh(FNAME, V, F)
-
    writeMesh(FNAME, MESH)
 
    Example
-   writeMesh
+     [v, f] = createCubeOctahedron;
+     writeMesh('myMesh.off', v, f);
 
    See also
-     meshes3d, <a href="readMesh.html" class="code" title="function varargout = readMesh(fileName)">readMesh</a>, <a href="writeMesh_off.html" class="code" title="function writeMesh_off(fileName, vertices, faces)">writeMesh_off</a>, <a href="writeMesh_ply.html" class="code" title="function writeMesh_ply(fileName, vertices, faces, varargin)">writeMesh_ply</a>, <a href="writeMesh_stl.html" class="code" title="function writeMesh_stl(fileName, vertices, faces, varargin)">writeMesh_stl</a></pre></div>
+     meshes3d, <a href="readMesh.html" class="code" title="function varargout = readMesh(filePath, varargin)">readMesh</a>, <a href="writeMesh_off.html" class="code" title="function writeMesh_off(fileName, vertices, faces)">writeMesh_off</a>, <a href="writeMesh_ply.html" class="code" title="function writeMesh_ply(fileName, vertices, faces, varargin)">writeMesh_ply</a>, <a href="writeMesh_stl.html" class="code" title="function writeMesh_stl(fileName, vertices, faces, varargin)">writeMesh_stl</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -53,32 +54,32 @@ This function is called by:
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function writeMesh(fileName, vertices, faces, varargin)</a>
-0002 <span class="comment">% Write 3D mesh data by inferring format from file name.</span>
+0002 <span class="comment">%WRITEMESH Write 3D mesh data by inferring format from file name.</span>
 0003 <span class="comment">%</span>
-0004 <span class="comment">%   writeMesh(FNAME, V, F)</span>
-0005 <span class="comment">%</span>
+0004 <span class="comment">%   Usage:</span>
+0005 <span class="comment">%   writeMesh(FNAME, V, F)</span>
 0006 <span class="comment">%   writeMesh(FNAME, MESH)</span>
 0007 <span class="comment">%</span>
 0008 <span class="comment">%   Example</span>
-0009 <span class="comment">%   writeMesh</span>
-0010 <span class="comment">%</span>
-0011 <span class="comment">%   See also</span>
-0012 <span class="comment">%     meshes3d, readMesh, writeMesh_off, writeMesh_ply, writeMesh_stl</span>
-0013 <span class="comment">%</span>
-0014 
-0015 <span class="comment">% ------</span>
-0016 <span class="comment">% Author: David Legland</span>
-0017 <span class="comment">% e-mail: david.legland@inrae.fr</span>
-0018 <span class="comment">% INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
-0019 <span class="comment">% Created: 2020-11-20,    using Matlab 9.8.0.1323502 (R2020a)</span>
-0020 <span class="comment">% Copyright 2020 INRAE.</span>
+0009 <span class="comment">%     [v, f] = createCubeOctahedron;</span>
+0010 <span class="comment">%     writeMesh('myMesh.off', v, f);</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   See also</span>
+0013 <span class="comment">%     meshes3d, readMesh, writeMesh_off, writeMesh_ply, writeMesh_stl</span>
+0014 <span class="comment">%</span>
+0015 
+0016 <span class="comment">% ------</span>
+0017 <span class="comment">% Author: David Legland</span>
+0018 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0019 <span class="comment">% Created: 2020-11-20, using Matlab 9.8.0.1323502 (R2020a)</span>
+0020 <span class="comment">% Copyright 2020-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
 0021 
 0022 <span class="comment">% check inputs</span>
 0023 <span class="keyword">if</span> ~ischar(fileName)
 0024     error(<span class="string">'First argument must contain the name of the file'</span>);
 0025 <span class="keyword">end</span>
 0026 
-0027 <span class="comment">% optionnaly parses data</span>
+0027 <span class="comment">% optionaly parses data</span>
 0028 <span class="keyword">if</span> isstruct(vertices)
 0029     <span class="keyword">if</span> nargin &gt; 2
 0030         varargin = [{faces} varargin{:}];
@@ -96,8 +97,8 @@ This function is called by:
 0042     <span class="keyword">case</span> <span class="string">'.stl'</span>
 0043         <a href="writeMesh_stl.html" class="code" title="function writeMesh_stl(fileName, vertices, faces, varargin)">writeMesh_stl</a>(fileName, vertices, faces, varargin{:});
 0044     <span class="keyword">otherwise</span>
-0045         error(<span class="string">'Unrecognized file format for rezading mesh: %s'</span>, ext);
+0045         error(<span class="string">'Unrecognized file format for reading mesh: %s'</span>, ext);
 0046 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

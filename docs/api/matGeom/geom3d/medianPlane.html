@@ -36,13 +36,8 @@
    The direction of the normal of PLANE is the same as the vector from P1
    to P2.
 
-   See also:
-   <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>, <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>
-
-   ---------
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 18/02/2005.</pre></div>
+   See also
+   <a href="planes3d.html" class="code" title="function planes3d(varargin)">planes3d</a>, <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -67,35 +62,32 @@ This function is called by:
 0008 <span class="comment">%   The direction of the normal of PLANE is the same as the vector from P1</span>
 0009 <span class="comment">%   to P2.</span>
 0010 <span class="comment">%</span>
-0011 <span class="comment">%   See also:</span>
+0011 <span class="comment">%   See also</span>
 0012 <span class="comment">%   planes3d, createPlane</span>
-0013 <span class="comment">%</span>
-0014 <span class="comment">%   ---------</span>
-0015 <span class="comment">%   author : David Legland</span>
-0016 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0017 <span class="comment">%   created the 18/02/2005.</span>
-0018 <span class="comment">%</span>
+0013 
+0014 <span class="comment">% ------</span>
+0015 <span class="comment">% Author: David Legland</span>
+0016 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0017 <span class="comment">% Created: 2005-02-18</span>
+0018 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0019 
-0020 <span class="comment">%   HISTORY</span>
-0021 <span class="comment">%   28/06/2007: add doc, and manage multiple inputs</span>
-0022 
-0023 <span class="comment">% unify data dimension</span>
-0024 <span class="keyword">if</span> size(p1, 1)==1
-0025     p1 = repmat(p1, [size(p2, 1) 1]);
-0026 <span class="keyword">elseif</span> size(p2, 1)==1
-0027     p2 = repmat(p2, [size(p1, 1) 1]);
-0028 <span class="keyword">elseif</span> size(p1, 1)~=size(p2, 1)    
-0029     error(<span class="string">'data should have same length, or one data should have length 1'</span>);
-0030 <span class="keyword">end</span>
+0020 <span class="comment">% unify data dimension</span>
+0021 <span class="keyword">if</span> size(p1, 1)==1
+0022     p1 = repmat(p1, [size(p2, 1) 1]);
+0023 <span class="keyword">elseif</span> size(p2, 1)==1
+0024     p2 = repmat(p2, [size(p1, 1) 1]);
+0025 <span class="keyword">elseif</span> size(p1, 1)~=size(p2, 1)    
+0026     error(<span class="string">'data should have same length, or one data should have length 1'</span>);
+0027 <span class="keyword">end</span>
+0028 
+0029 <span class="comment">% middle point</span>
+0030 p0  = (p1 + p2)/2;
 0031 
-0032 <span class="comment">% middle point</span>
-0033 p0  = (p1 + p2)/2;
+0032 <span class="comment">% normal to plane</span>
+0033 n   = p2-p1;
 0034 
-0035 <span class="comment">% normal to plane</span>
-0036 n   = p2-p1;
-0037 
-0038 <span class="comment">% create plane from point and normal</span>
-0039 plane = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(p0, n);</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0035 <span class="comment">% create plane from point and normal</span>
+0036 plane = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(p0, n);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

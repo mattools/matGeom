@@ -24,12 +24,12 @@
 <div class="box"><strong>FITCIRCLE3D Fit a 3D circle to a set of points.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function [fittedCircle, circleNormal] = fitCircle3d(pts) </strong></div>
+<div class="box"><strong>function [fittedCircle, circleNormal, residuals] = fitCircle3d(pts, varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre class="comment">FITCIRCLE3D Fit a 3D circle to a set of points.
 
-   [FITTEDCIRCLE, CIRCLENORMAL] = fitCircle3d(PTS)
+   [FITTEDCIRCLE, CIRCLENORMAL, RESIDUALS] = fitCircle3d(PTS)
 
    Example
      % points on a 2d circle with noise
@@ -58,17 +58,13 @@
 
    See also
    <a href="circle3dOrigin.html" class="code" title="function ori = circle3dOrigin(varargin)">circle3dOrigin</a>, <a href="circle3dPosition.html" class="code" title="function theta = circle3dPosition(point, circle)">circle3dPosition</a>, <a href="circle3dPoint.html" class="code" title="function point = circle3dPoint(circle, pos)">circle3dPoint</a>, <a href="intersectPlaneSphere.html" class="code" title="function circle = intersectPlaneSphere(plane, sphere)">intersectPlaneSphere</a>
-   <a href="drawCircle3d.html" class="code" title="function varargout = drawCircle3d(varargin)">drawCircle3d</a>, <a href="drawCircleArc3d.html" class="code" title="function varargout = drawCircleArc3d(arc, varargin)">drawCircleArc3d</a>, <a href="drawEllipse3d.html" class="code" title="function varargout = drawEllipse3d(varargin)">drawEllipse3d</a>
-
- ------
- Authors: oqilipo, David Legland
- created: 2017-05-09</pre></div>
+   <a href="drawCircle3d.html" class="code" title="function varargout = drawCircle3d(varargin)">drawCircle3d</a>, <a href="drawCircleArc3d.html" class="code" title="function varargout = drawCircleArc3d(varargin)">drawCircleArc3d</a>, <a href="drawEllipse3d.html" class="code" title="function varargout = drawEllipse3d(varargin)">drawEllipse3d</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>	CENTROID Compute centroid (center of mass) of a set of points.</li><li><a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>	CART2SPH2 Convert cartesian coordinates to spherical coordinates.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+<li><a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>	CENTROID Compute centroid (center of mass) of a set of points.</li><li><a href="../../matGeom/geom2d/distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>	DISTANCEPOINTS Compute distance between two points.</li><li><a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>	CART2SPH2 Convert cartesian coordinates to spherical coordinates.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 </ul>
@@ -76,13 +72,13 @@ This function is called by:
 
 <h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="#_sub1" class="code">function Par = CircleFitByTaubin(XY)</a></li></ul>
+<li><a href="#_sub1" class="code">function Par = CircleFitByTaubin(XY, varargin)</a></li></ul>
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [fittedCircle, circleNormal] = fitCircle3d(pts)</a>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [fittedCircle, circleNormal, residuals] = fitCircle3d(pts, varargin)</a>
 0002 <span class="comment">%FITCIRCLE3D Fit a 3D circle to a set of points.</span>
 0003 <span class="comment">%</span>
-0004 <span class="comment">%   [FITTEDCIRCLE, CIRCLENORMAL] = fitCircle3d(PTS)</span>
+0004 <span class="comment">%   [FITTEDCIRCLE, CIRCLENORMAL, RESIDUALS] = fitCircle3d(PTS)</span>
 0005 <span class="comment">%</span>
 0006 <span class="comment">%   Example</span>
 0007 <span class="comment">%     % points on a 2d circle with noise</span>
@@ -112,131 +108,152 @@ This function is called by:
 0031 <span class="comment">%   See also</span>
 0032 <span class="comment">%   circle3dOrigin, circle3dPosition, circle3dPoint, intersectPlaneSphere</span>
 0033 <span class="comment">%   drawCircle3d, drawCircleArc3d, drawEllipse3d</span>
-0034 <span class="comment">%</span>
+0034 
 0035 <span class="comment">% ------</span>
-0036 <span class="comment">% Authors: oqilipo, David Legland</span>
-0037 <span class="comment">% created: 2017-05-09</span>
-0038 
-0039 <span class="comment">% Mean of all points</span>
-0040 meanPoint = mean(pts,1);
-0041 
-0042 <span class="comment">% Center points by subtracting the meanPoint</span>
-0043 centeredPoints = pts - repmat(meanPoint,size(pts,1),1);
-0044 
-0045 <span class="comment">% Project 3D data to a plane</span>
-0046 [~,~,V]=svd(centeredPoints);
-0047 tfmPoints = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(centeredPoints, V');
+0036 <span class="comment">% Authors: oqilipo</span>
+0037 <span class="comment">% E-mail: N/A</span>
+0038 <span class="comment">% Created: 2017-05-09</span>
+0039 <span class="comment">% Copyright 2017-2024</span>
+0040 
+0041 parser = inputParser;
+0042 addRequired(parser, <span class="string">'pts'</span>, @(x) validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0043     {<span class="string">'ncols'</span>,3,<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'nonnan'</span>}));
+0044 addOptional(parser,<span class="string">'verbose'</span>,true,@islogical);
+0045 parse(parser,pts,varargin{:});
+0046 pts = parser.Results.pts;
+0047 verbose = parser.Results.verbose;
 0048 
-0049 <span class="comment">% Fit a circle to the points in the xy-plane</span>
-0050 circleParamter = <a href="#_sub1" class="code" title="subfunction Par = CircleFitByTaubin(XY)">CircleFitByTaubin</a>(tfmPoints(:,1:2));
-0051 center2d = circleParamter(1:2); 
-0052 radius=circleParamter(3);
-0053 center3d = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>([center2d, 0], [inv(V'), meanPoint']);
-0054 circleNormal = V(:,3)';
-0055 [theta, phi, ~] = <a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>(circleNormal);
-0056 fittedCircle = [center3d radius rad2deg(theta) rad2deg(phi) 0];
-0057 
-0058 <span class="keyword">end</span>
-0059 
-0060 <span class="comment">% Circle Fit (Taubin method)</span>
-0061 <span class="comment">% version 1.0 (2.24 KB) by Nikolai Chernov</span>
-0062 <span class="comment">% http://www.mathworks.com/matlabcentral/fileexchange/22678</span>
-0063 <a name="_sub1" href="#_subfunctions" class="code">function Par = CircleFitByTaubin(XY)</a>
-0064 
-0065 <span class="comment">%--------------------------------------------------------------------------</span>
-0066 <span class="comment">%</span>
-0067 <span class="comment">%     Circle fit by Taubin</span>
-0068 <span class="comment">%      G. Taubin, &quot;Estimation Of Planar Curves, Surfaces And Nonplanar</span>
-0069 <span class="comment">%                  Space Curves Defined By Implicit Equations, With</span>
-0070 <span class="comment">%                  Applications To Edge And Range Image Segmentation&quot;,</span>
-0071 <span class="comment">%      IEEE Trans. PAMI, Vol. 13, pages 1115-1138, (1991)</span>
-0072 <span class="comment">%</span>
-0073 <span class="comment">%     Input:  XY(n,2) is the array of coordinates of n points x(i)=XY(i,1), y(i)=XY(i,2)</span>
-0074 <span class="comment">%</span>
-0075 <span class="comment">%     Output: Par = [a b R] is the fitting circle:</span>
-0076 <span class="comment">%                           center (a,b) and radius R</span>
-0077 <span class="comment">%</span>
-0078 <span class="comment">%     Note: this fit does not use built-in matrix functions (except &quot;mean&quot;),</span>
-0079 <span class="comment">%           so it can be easily programmed in any programming language</span>
-0080 <span class="comment">%</span>
-0081 <span class="comment">%--------------------------------------------------------------------------</span>
-0082 
-0083 n = size(XY,1);      <span class="comment">% number of data points</span>
-0084 
-0085 <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a> = mean(XY);   <span class="comment">% the centroid of the data set</span>
-0086 
-0087 <span class="comment">%     computing moments (note: all moments will be normed, i.e. divided by n)</span>
-0088 
-0089 Mxx = 0; Myy = 0; Mxy = 0; Mxz = 0; Myz = 0; Mzz = 0;
-0090 
-0091 <span class="keyword">for</span> i=1:n
-0092     Xi = XY(i,1) - <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>(1);  <span class="comment">%  centering data</span>
-0093     Yi = XY(i,2) - <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>(2);  <span class="comment">%  centering data</span>
-0094     Zi = Xi*Xi + Yi*Yi;
-0095     Mxy = Mxy + Xi*Yi;
-0096     Mxx = Mxx + Xi*Xi;
-0097     Myy = Myy + Yi*Yi;
-0098     Mxz = Mxz + Xi*Zi;
-0099     Myz = Myz + Yi*Zi;
-0100     Mzz = Mzz + Zi*Zi;
-0101 <span class="keyword">end</span>
+0049 <span class="comment">% Mean of all points</span>
+0050 meanPoint = mean(pts,1);
+0051 
+0052 <span class="comment">% Center points by subtracting the meanPoint</span>
+0053 centeredPoints = pts - repmat(meanPoint,size(pts,1),1);
+0054 
+0055 <span class="comment">% Project 3D data to a plane</span>
+0056 [~,~,V]=svd(centeredPoints);
+0057 tfmPoints = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(centeredPoints, V');
+0058 
+0059 <span class="comment">% Fit a circle to the points in the xy-plane</span>
+0060 circleParamter = <a href="#_sub1" class="code" title="subfunction Par = CircleFitByTaubin(XY, varargin)">CircleFitByTaubin</a>(tfmPoints(:,1:2), verbose);
+0061 center2d = circleParamter(1:2);
+0062 radius=circleParamter(3);
+0063 center3d = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>([center2d, 0], [inv(V'), meanPoint']);
+0064 circleNormal = V(:,3)';
+0065 [theta, phi, ~] = <a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>(circleNormal);
+0066 fittedCircle = [center3d radius rad2deg(theta) rad2deg(phi) 0];
+0067 
+0068 <span class="comment">% Residuals</span>
+0069 residuals = radius - <a href="../../matGeom/geom2d/distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(tfmPoints(:,1:2),center2d);
+0070 
+0071 <span class="keyword">end</span>
+0072 
+0073 <span class="comment">% Circle Fit (Taubin method)</span>
+0074 <span class="comment">% version 1.0 (2.24 KB) by Nikolai Chernov</span>
+0075 <span class="comment">% http://www.mathworks.com/matlabcentral/fileexchange/22678</span>
+0076 <a name="_sub1" href="#_subfunctions" class="code">function Par = CircleFitByTaubin(XY, varargin)</a>
+0077 <span class="comment">%__________________________________________________________________________</span>
+0078 <span class="comment">%</span>
+0079 <span class="comment">%     Circle fit by Taubin</span>
+0080 <span class="comment">%      G. Taubin, &quot;Estimation Of Planar Curves, Surfaces And Nonplanar</span>
+0081 <span class="comment">%                  Space Curves Defined By Implicit Equations, With</span>
+0082 <span class="comment">%                  Applications To Edge And Range Image Segmentation&quot;,</span>
+0083 <span class="comment">%      IEEE Trans. PAMI, Vol. 13, pages 1115-1138, (1991)</span>
+0084 <span class="comment">%</span>
+0085 <span class="comment">%     Input:  XY(n,2) is the array of coordinates of n points x(i)=XY(i,1), y(i)=XY(i,2)</span>
+0086 <span class="comment">%</span>
+0087 <span class="comment">%     Output: Par = [a b R] is the fitting circle:</span>
+0088 <span class="comment">%                           center (a,b) and radius R</span>
+0089 <span class="comment">%</span>
+0090 <span class="comment">%     Note: this fit does not use built-in matrix functions (except &quot;mean&quot;),</span>
+0091 <span class="comment">%           so it can be easily programmed in any programming language</span>
+0092 <span class="comment">%</span>
+0093 <span class="comment">%__________________________________________________________________________</span>
+0094 
+0095 parser = inputParser;
+0096 addRequired(parser, <span class="string">'XY'</span>, @(x) validateattributes(x, {<span class="string">'numeric'</span>},<span class="keyword">...</span>
+0097     {<span class="string">'ncols'</span>,2,<span class="string">'real'</span>,<span class="string">'finite'</span>,<span class="string">'nonnan'</span>}));
+0098 addOptional(parser,<span class="string">'verbose'</span>,true,@islogical);
+0099 parse(parser,XY,varargin{:});
+0100 XY=parser.Results.XY;
+0101 verbose = parser.Results.verbose;
 0102 
-0103 Mxx = Mxx/n;
-0104 Myy = Myy/n;
-0105 Mxy = Mxy/n;
-0106 Mxz = Mxz/n;
-0107 Myz = Myz/n;
-0108 Mzz = Mzz/n;
+0103 n = size(XY,1);  <span class="comment">% number of data points</span>
+0104 
+0105 <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a> = mean(XY); <span class="comment">% the centroid of the data set</span>
+0106 
+0107 <span class="comment">%     computing moments (note: all moments will be normed, i.e. divided by n)</span>
+0108 Mxx = 0; Myy = 0; Mxy = 0; Mxz = 0; Myz = 0; Mzz = 0;
 0109 
-0110 <span class="comment">%    computing the coefficients of the characteristic polynomial</span>
-0111 
-0112 Mz = Mxx + Myy;
-0113 Cov_xy = Mxx*Myy - Mxy*Mxy;
-0114 A3 = 4*Mz;
-0115 A2 = -3*Mz*Mz - Mzz;
-0116 A1 = Mzz*Mz + 4*Cov_xy*Mz - Mxz*Mxz - Myz*Myz - Mz*Mz*Mz;
-0117 A0 = Mxz*Mxz*Myy + Myz*Myz*Mxx - Mzz*Cov_xy - 2*Mxz*Myz*Mxy + Mz*Mz*Cov_xy;
-0118 A22 = A2 + A2;
-0119 A33 = A3 + A3 + A3;
-0120 
-0121 xnew = 0;
-0122 ynew = 1e+20;
-0123 epsilon = 1e-12;
-0124 IterMax = 20;
-0125 
-0126 <span class="comment">% Newton's method starting at x=0</span>
-0127 
-0128 <span class="keyword">for</span> iter=1:IterMax
-0129     yold = ynew;
-0130     ynew = A0 + xnew*(A1 + xnew*(A2 + xnew*A3));
-0131     <span class="keyword">if</span> abs(ynew) &gt; abs(yold)
-0132        disp(<span class="string">'Newton-Taubin goes wrong direction: |ynew| &gt; |yold|'</span>);
-0133        xnew = 0;
-0134        <span class="keyword">break</span>;
-0135     <span class="keyword">end</span>
-0136     Dy = A1 + xnew*(A22 + xnew*A33);
-0137     xold = xnew;
-0138     xnew = xold - ynew/Dy;
-0139     <span class="keyword">if</span> (abs((xnew-xold)/xnew) &lt; epsilon), <span class="keyword">break</span>, <span class="keyword">end</span>
-0140     <span class="keyword">if</span> (iter &gt;= IterMax)
-0141         disp(<span class="string">'Newton-Taubin will not converge'</span>);
-0142         xnew = 0;
-0143     <span class="keyword">end</span>
-0144     <span class="keyword">if</span> (xnew&lt;0.)
-0145         fprintf(1,<span class="string">'Newton-Taubin negative root:  x=%f\n'</span>,xnew);
-0146         xnew = 0;
-0147     <span class="keyword">end</span>
-0148 <span class="keyword">end</span>
-0149 
-0150 <span class="comment">%  computing the circle parameters</span>
-0151 
-0152 DET = xnew*xnew - xnew*Mz + Cov_xy;
-0153 Center = [Mxz*(Myy-xnew)-Myz*Mxy , Myz*(Mxx-xnew)-Mxz*Mxy]/DET/2;
-0154 
-0155 Par = [Center+<a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a> , sqrt(Center*Center'+Mz)];
-0156 
-0157 <span class="keyword">end</span>    <span class="comment">%    CircleFitByTaubin</span>
-0158</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0110 <span class="keyword">for</span> i=1:n
+0111     Xi = XY(i,1) - <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>(1);  <span class="comment">%  centering data</span>
+0112     Yi = XY(i,2) - <a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a>(2);  <span class="comment">%  centering data</span>
+0113     Zi = Xi*Xi + Yi*Yi;
+0114     Mxy = Mxy + Xi*Yi;
+0115     Mxx = Mxx + Xi*Xi;
+0116     Myy = Myy + Yi*Yi;
+0117     Mxz = Mxz + Xi*Zi;
+0118     Myz = Myz + Yi*Zi;
+0119     Mzz = Mzz + Zi*Zi;
+0120 <span class="keyword">end</span>
+0121 
+0122 Mxx = Mxx/n;
+0123 Myy = Myy/n;
+0124 Mxy = Mxy/n;
+0125 Mxz = Mxz/n;
+0126 Myz = Myz/n;
+0127 Mzz = Mzz/n;
+0128 
+0129 <span class="comment">% computing the coefficients of the characteristic polynomial</span>
+0130 Mz = Mxx + Myy;
+0131 Cov_xy = Mxx*Myy - Mxy*Mxy;
+0132 A3 = 4*Mz;
+0133 A2 = -3*Mz*Mz - Mzz;
+0134 A1 = Mzz*Mz + 4*Cov_xy*Mz - Mxz*Mxz - Myz*Myz - Mz*Mz*Mz;
+0135 A0 = Mxz*Mxz*Myy + Myz*Myz*Mxx - Mzz*Cov_xy - 2*Mxz*Myz*Mxy + Mz*Mz*Cov_xy;
+0136 A22 = A2 + A2;
+0137 A33 = A3 + A3 + A3;
+0138 
+0139 xnew = 0;
+0140 ynew = 1e+20;
+0141 epsilon = 1e-12;
+0142 IterMax = 20;
+0143 
+0144 <span class="comment">% Newton's method starting at x=0</span>
+0145 <span class="keyword">for</span> iter=1:IterMax
+0146     yold = ynew;
+0147     ynew = A0 + xnew*(A1 + xnew*(A2 + xnew*A3));
+0148     <span class="keyword">if</span> abs(ynew) &gt; abs(yold)
+0149         <span class="keyword">if</span> verbose
+0150             disp(<span class="string">'Newton-Taubin goes wrong direction: |ynew| &gt; |yold|'</span>);
+0151         <span class="keyword">end</span>
+0152         xnew = 0;
+0153         <span class="keyword">break</span>;
+0154     <span class="keyword">end</span>
+0155     Dy = A1 + xnew*(A22 + xnew*A33);
+0156     xold = xnew;
+0157     xnew = xold - ynew/Dy;
+0158     <span class="keyword">if</span> (abs((xnew-xold)/xnew) &lt; epsilon), <span class="keyword">break</span>, <span class="keyword">end</span>
+0159     <span class="keyword">if</span> (iter &gt;= IterMax)
+0160         <span class="keyword">if</span> verbose
+0161             disp(<span class="string">'Newton-Taubin will not converge'</span>);
+0162         <span class="keyword">end</span>
+0163         xnew = 0;
+0164     <span class="keyword">end</span>
+0165     <span class="keyword">if</span> (xnew&lt;0.)
+0166         <span class="keyword">if</span> verbose
+0167             fprintf(1,<span class="string">'Newton-Taubin negative root:  x=%f\n'</span>,xnew);
+0168         <span class="keyword">end</span>
+0169         xnew = 0;
+0170     <span class="keyword">end</span>
+0171 <span class="keyword">end</span>
+0172 
+0173 <span class="comment">% computing the circle parameters</span>
+0174 DET = xnew*xnew - xnew*Mz + Cov_xy;
+0175 Center = [Mxz*(Myy-xnew)-Myz*Mxy , Myz*(Mxx-xnew)-Mxz*Mxy]/DET/2;
+0176 
+0177 Par = [Center+<a href="../../matGeom/geom2d/centroid.html" class="code" title="function center = centroid(varargin)">centroid</a> , sqrt(Center*Center'+Mz)];
+0178 
+0179 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

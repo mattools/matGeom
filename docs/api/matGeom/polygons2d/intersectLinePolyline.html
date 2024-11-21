@@ -73,7 +73,7 @@
             0     0
            10    10
 
-   See Also
+   See also
    lines2d, polylines2d, intersectLines, <a href="intersectLinePolygon.html" class="code" title="function [points, edgeInds, linePositions] = intersectLinePolygon(line, poly, varargin)">intersectLinePolygon</a></pre></div>
 
 <!-- crossreference -->
@@ -136,60 +136,51 @@ This function is called by:
 0045 <span class="comment">%            0     0</span>
 0046 <span class="comment">%           10    10</span>
 0047 <span class="comment">%</span>
-0048 <span class="comment">%   See Also</span>
+0048 <span class="comment">%   See also</span>
 0049 <span class="comment">%   lines2d, polylines2d, intersectLines, intersectLinePolygon</span>
 0050 <span class="comment">%</span>
 0051 
-0052 <span class="comment">%   ---------</span>
-0053 <span class="comment">%   author : David Legland</span>
-0054 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0055 <span class="comment">%   created the 31/10/2003.</span>
-0056 <span class="comment">%</span>
+0052 <span class="comment">% ------</span>
+0053 <span class="comment">% Author: David Legland</span>
+0054 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0055 <span class="comment">% Created: 2003-10-31</span>
+0056 <span class="comment">% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0057 
-0058 <span class="comment">%   HISTORY</span>
-0059 <span class="comment">%   2008-11-24 rename 'pi' as 'intersects', update doc</span>
-0060 <span class="comment">%   2009-07-23 removed forgotten occurence of 'pi' variable (thanks to Bala</span>
-0061 <span class="comment">%       Krishnamoorthy)</span>
-0062 <span class="comment">%   2010-01-26 rewrite using vectorisation</span>
-0063 <span class="comment">%   2011-05-20 returns unique results</span>
-0064 <span class="comment">%   2011-07-20 returns intersected edge indices</span>
-0065 <span class="comment">%   2012-11-33 add 'diag' option for linePosition</span>
-0066 
-0067 <span class="comment">% get computation tolerance</span>
-0068 tol = 1e-14;
-0069 <span class="keyword">if</span> ~isempty(varargin)
-0070     tol = varargin{1};
-0071 <span class="keyword">end</span>
-0072 
-0073 <span class="comment">% create the array of edges</span>
-0074 N = size(poly, 1);
-0075 edges = [poly(1:N-1, :) poly(2:N, :)];
-0076 
-0077 <span class="comment">% compute intersections with supporting lines of polyline edges</span>
-0078 supportLines = <a href="../../matGeom/geom2d/edgeToLine.html" class="code" title="function line = edgeToLine(edge)">edgeToLine</a>(edges);
-0079 intersects = <a href="../../matGeom/geom2d/intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(line, supportLines, tol);
-0080 
-0081 <span class="comment">% find edges that are not parallel to the input line</span>
-0082 inds = find(isfinite(intersects(:, 1)));
-0083 
-0084 <span class="comment">% compute position of intersection points on corresponding lines</span>
-0085 pos = <a href="../../matGeom/geom2d/linePosition.html" class="code" title="function pos = linePosition(point, line, varargin)">linePosition</a>(intersects(inds, :), supportLines(inds, :), <span class="string">'diag'</span>);
+0058 <span class="comment">% get computation tolerance</span>
+0059 tol = 1e-14;
+0060 <span class="keyword">if</span> ~isempty(varargin)
+0061     tol = varargin{1};
+0062 <span class="keyword">end</span>
+0063 
+0064 <span class="comment">% create the array of edges</span>
+0065 N = size(poly, 1);
+0066 edges = [poly(1:N-1, :) poly(2:N, :)];
+0067 
+0068 <span class="comment">% compute intersections with supporting lines of polyline edges</span>
+0069 supportLines = <a href="../../matGeom/geom2d/edgeToLine.html" class="code" title="function line = edgeToLine(edge)">edgeToLine</a>(edges);
+0070 intersects = <a href="../../matGeom/geom2d/intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(line, supportLines, tol);
+0071 
+0072 <span class="comment">% find edges that are not parallel to the input line</span>
+0073 inds = find(isfinite(intersects(:, 1)));
+0074 
+0075 <span class="comment">% compute position of intersection points on corresponding lines</span>
+0076 pos = <a href="../../matGeom/geom2d/linePosition.html" class="code" title="function pos = linePosition(point, line, varargin)">linePosition</a>(intersects(inds, :), supportLines(inds, :), <span class="string">'diag'</span>);
+0077 
+0078 <span class="comment">% and keep only intersection points located on edges</span>
+0079 b = pos &gt; -tol &amp; pos &lt; 1+tol;
+0080 inds = inds(b);
+0081 intersects = intersects(inds, :);
+0082 
+0083 <span class="comment">% remove multiple vertices (can occur for intersections located at polyline</span>
+0084 <span class="comment">% vertices)</span>
+0085 [intersects, I, J] = unique(intersects, <span class="string">'rows'</span>); <span class="comment">%#ok&lt;ASGLU&gt;</span>
 0086 
-0087 <span class="comment">% and keep only intersection points located on edges</span>
-0088 b = pos &gt; -tol &amp; pos &lt; 1+tol;
-0089 inds = inds(b);
-0090 intersects = intersects(inds, :);
-0091 
-0092 <span class="comment">% remove multiple vertices (can occur for intersections located at polyline</span>
-0093 <span class="comment">% vertices)</span>
-0094 [intersects, I, J] = unique(intersects, <span class="string">'rows'</span>); <span class="comment">%#ok&lt;ASGLU&gt;</span>
-0095 
-0096 <span class="keyword">if</span> nargout &gt; 1
-0097     <span class="comment">% return indices of edges involved in intersection</span>
-0098     <span class="comment">% (in case of intersection located at a vertex, only one of the</span>
-0099     <span class="comment">% neighbor edges is returned)</span>
-0100     edgeIndices = inds(I);
-0101 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0087 <span class="keyword">if</span> nargout &gt; 1
+0088     <span class="comment">% return indices of edges involved in intersection</span>
+0089     <span class="comment">% (in case of intersection located at a vertex, only one of the</span>
+0090     <span class="comment">% neighbor edges is returned)</span>
+0091     edgeIndices = inds(I);
+0092 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

@@ -73,28 +73,23 @@ This function is called by:
 0016 
 0017 <span class="comment">% ------</span>
 0018 <span class="comment">% Author: David Legland</span>
-0019 <span class="comment">% e-mail: david.legland@inra.fr</span>
+0019 <span class="comment">% E-mail: david.legland@inrae.fr</span>
 0020 <span class="comment">% Created: 2006-08-09</span>
-0021 <span class="comment">% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0021 <span class="comment">% Copyright 2006-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)</span>
 0022 
-0023 <span class="comment">%   HISTORY</span>
-0024 <span class="comment">%   2007-01-04 remove unused variables, enhance output processing</span>
-0025 <span class="comment">%   2010-12-07 clean up edges, uses formatMeshOutput</span>
-0026 
-0027 
-0028 <span class="comment">% get vertices and adjacency matrix of the buckyball</span>
-0029 [b, n] = bucky;
+0023 <span class="comment">% get vertices and adjacency matrix of the buckyball</span>
+0024 [b, n] = bucky;
+0025 
+0026 <span class="comment">% compute edges</span>
+0027 [i, j] = find(b);
+0028 e = [i j];
+0029 e = unique(sort(e, 2), <span class="string">'rows'</span>);
 0030 
-0031 <span class="comment">% compute edges</span>
-0032 [i, j] = find(b);
-0033 e = [i j];
-0034 e = unique(sort(e, 2), <span class="string">'rows'</span>);
-0035 
-0036 <span class="comment">% compute polygons that correspond to each 3D face</span>
-0037 f = <a href="minConvexHull.html" class="code" title="function newFaces = minConvexHull(points, varargin)">minConvexHull</a>(n)';
-0038 
-0039 <span class="comment">% format output</span>
-0040 varargout = formatMeshOutput(nargout, n, e, f);</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0031 <span class="comment">% compute polygons that correspond to each 3D face</span>
+0032 f = <a href="minConvexHull.html" class="code" title="function newFaces = minConvexHull(points, varargin)">minConvexHull</a>(n)';
+0033 
+0034 <span class="comment">% format output</span>
+0035 varargout = formatMeshOutput(nargout, n, e, f);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

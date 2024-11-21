@@ -24,7 +24,7 @@
 <div class="box"><strong>DRAWSHAPE Draw various types of shapes (circles, polygons...).</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function varargout = drawShape(type, param, varargin) </strong></div>
+<div class="box"><strong>function varargout = drawShape(varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre class="comment">DRAWSHAPE Draw various types of shapes (circles, polygons...).
@@ -35,7 +35,7 @@
    PARAM depend on the type. For example, if TYPE is 'circle', PARAM will
    contain [x0 y0 R].
 
-   Examples :
+   Examples:
    drawShape('circle', [20 10 30]);
    Draw circle centered on [20 10] with radius 10.
    drawShape('rect', [20 20 40 10 pi/3]);
@@ -45,13 +45,7 @@
 
    drawShape(..., OPTION)
    also specifies drawing options. OPTION can be 'draw' (default) or
-   'fill'.
-
-   ---------
-
-   author : David Legland 
-   INRA - TPV URPOI - BIA IMASTE
-   created the 07/04/2005.</pre></div>
+   'fill'.</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -66,7 +60,7 @@ This function is called by:
 
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawShape(type, param, varargin)</a>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawShape(varargin)</a>
 0002 <span class="comment">%DRAWSHAPE Draw various types of shapes (circles, polygons...).</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   drawShape(TYPE, PARAM)</span>
@@ -75,7 +69,7 @@ This function is called by:
 0007 <span class="comment">%   PARAM depend on the type. For example, if TYPE is 'circle', PARAM will</span>
 0008 <span class="comment">%   contain [x0 y0 R].</span>
 0009 <span class="comment">%</span>
-0010 <span class="comment">%   Examples :</span>
+0010 <span class="comment">%   Examples:</span>
 0011 <span class="comment">%   drawShape('circle', [20 10 30]);</span>
 0012 <span class="comment">%   Draw circle centered on [20 10] with radius 10.</span>
 0013 <span class="comment">%   drawShape('rect', [20 20 40 10 pi/3]);</span>
@@ -87,66 +81,82 @@ This function is called by:
 0019 <span class="comment">%   also specifies drawing options. OPTION can be 'draw' (default) or</span>
 0020 <span class="comment">%   'fill'.</span>
 0021 <span class="comment">%</span>
-0022 <span class="comment">%   ---------</span>
-0023 <span class="comment">%</span>
-0024 <span class="comment">%   author : David Legland</span>
-0025 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0026 <span class="comment">%   created the 07/04/2005.</span>
-0027 <span class="comment">%</span>
+0022 
+0023 <span class="comment">% ------</span>
+0024 <span class="comment">% Author: David Legland</span>
+0025 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0026 <span class="comment">% Created: 2005-04-07</span>
+0027 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0028 
-0029 <span class="comment">%   HISTORY</span>
-0030 
-0031 <span class="keyword">if</span> ~iscell(type)
-0032     type = {type};
-0033 <span class="keyword">end</span>
-0034 <span class="keyword">if</span> ~iscell(param)
-0035     tmp = cell(1, size(param, 1));
-0036     <span class="keyword">for</span> i=1:size(param, 1)
-0037         tmp{i} = param(i,:);
-0038     <span class="keyword">end</span>
-0039     param = tmp;
-0040 <span class="keyword">end</span>
+0029 <span class="comment">% extract handle of axis to draw on</span>
+0030 <span class="keyword">if</span> isAxisHandle(varargin{1})
+0031     ax = varargin{1};
+0032     varargin(1) = [];
+0033 <span class="keyword">else</span>
+0034     ax = gca;
+0035 <span class="keyword">end</span>
+0036 
+0037 <span class="comment">% extract type and representation of shape</span>
+0038 type = varargin{1};
+0039 param = varargin{2};
+0040 varargin(1:2) = [];
 0041 
-0042 <span class="comment">% compute drawing options</span>
-0043 option = <span class="string">'draw'</span>;
-0044 <span class="keyword">if</span> ~isempty(varargin)
-0045     var = varargin{1};
-0046     <span class="keyword">if</span> strcmpi(var, <span class="string">'fill'</span>)
-0047         option = <span class="string">'fill'</span>;
-0048     <span class="keyword">end</span>
-0049 <span class="keyword">end</span>
-0050 
-0051     
-0052 <span class="comment">% transform each shape into a polygon</span>
-0053 shape = cell(1,length(type));
-0054 <span class="keyword">for</span> i = 1:length(type)    
-0055     <span class="keyword">if</span> strcmpi(type{i}, <span class="string">'circle'</span>)
-0056         shape{i} = <a href="circleToPolygon.html" class="code" title="function varargout = circleToPolygon(circle, varargin)">circleToPolygon</a>(param{i}, 128);
-0057     <span class="keyword">elseif</span> strcmpi(type{i}, <span class="string">'rect'</span>)
-0058         shape{i} = <a href="rectToPolygon.html" class="code" title="function [tx, ty] = rectToPolygon(rect)">rectToPolygon</a>(param{i});
-0059     <span class="keyword">elseif</span> strcmpi(type{i}, <span class="string">'polygon'</span>)
-0060         shape{i} = param{i};        
-0061     <span class="keyword">end</span>
-0062 <span class="keyword">end</span>
-0063 
-0064 
-0065 <span class="comment">% draw or fill each shape as polygon</span>
-0066 hold on;
-0067 h = zeros(length(shape), 1);
-0068 <span class="keyword">if</span> strcmp(option, <span class="string">'draw'</span>)
-0069     <span class="keyword">for</span> i = 1:length(shape)
-0070         h(i) = <a href="../../matGeom/polygons2d/drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a>(shape{i});
-0071     <span class="keyword">end</span>
-0072 <span class="keyword">else</span>
-0073     <span class="keyword">for</span> i = 1:length(shape)
-0074         h(i) = <a href="../../matGeom/polygons2d/fillPolygon.html" class="code" title="function varargout = fillPolygon(varargin)">fillPolygon</a>(shape{i});
-0075     <span class="keyword">end</span>
-0076 <span class="keyword">end</span>
-0077 
-0078 <span class="comment">% foramt output</span>
-0079 <span class="keyword">if</span> nargout &gt; 0
-0080     varargout = {h};
-0081 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0042 
+0043 <span class="keyword">if</span> ~iscell(type)
+0044     type = {type};
+0045 <span class="keyword">end</span>
+0046 <span class="keyword">if</span> ~iscell(param)
+0047     tmp = cell(1, size(param, 1));
+0048     <span class="keyword">for</span> i=1:size(param, 1)
+0049         tmp{i} = param(i,:);
+0050     <span class="keyword">end</span>
+0051     param = tmp;
+0052 <span class="keyword">end</span>
+0053 
+0054 <span class="comment">% compute drawing options</span>
+0055 option = <span class="string">'draw'</span>;
+0056 <span class="keyword">if</span> ~isempty(varargin)
+0057     var = varargin{1};
+0058     <span class="keyword">if</span> strcmpi(var, <span class="string">'fill'</span>)
+0059         option = <span class="string">'fill'</span>;
+0060         varargin(1) = [];
+0061     <span class="keyword">elseif</span> strcmpi(var, <span class="string">'draw'</span>)
+0062         option = <span class="string">'draw'</span>;
+0063         varargin(1) = [];
+0064     <span class="keyword">end</span>
+0065 <span class="keyword">end</span>
+0066 
+0067     
+0068 <span class="comment">% transform each shape into a polygon</span>
+0069 shape = cell(1,length(type));
+0070 <span class="keyword">for</span> i = 1:length(type)    
+0071     <span class="keyword">if</span> strcmpi(type{i}, <span class="string">'circle'</span>)
+0072         shape{i} = <a href="circleToPolygon.html" class="code" title="function varargout = circleToPolygon(circle, varargin)">circleToPolygon</a>(param{i}, 128);
+0073     <span class="keyword">elseif</span> strcmpi(type{i}, <span class="string">'rect'</span>)
+0074         shape{i} = <a href="rectToPolygon.html" class="code" title="function [tx, ty] = rectToPolygon(rect)">rectToPolygon</a>(param{i});
+0075     <span class="keyword">elseif</span> strcmpi(type{i}, <span class="string">'polygon'</span>)
+0076         shape{i} = param{i};        
+0077     <span class="keyword">end</span>
+0078 <span class="keyword">end</span>
+0079 
+0080 
+0081 <span class="comment">% draw or fill each shape as polygon</span>
+0082 hold on;
+0083 h = zeros(length(shape), 1);
+0084 <span class="keyword">if</span> strcmp(option, <span class="string">'draw'</span>)
+0085     <span class="keyword">for</span> i = 1:length(shape)
+0086         h(i) = <a href="../../matGeom/polygons2d/drawPolygon.html" class="code" title="function varargout = drawPolygon (px, varargin)">drawPolygon</a>(ax, shape{i}, varargin{:});
+0087     <span class="keyword">end</span>
+0088 <span class="keyword">else</span>
+0089     <span class="keyword">for</span> i = 1:length(shape)
+0090         h(i) = <a href="../../matGeom/polygons2d/fillPolygon.html" class="code" title="function varargout = fillPolygon(varargin)">fillPolygon</a>(ax, shape{i}, varargin{:});
+0091     <span class="keyword">end</span>
+0092 <span class="keyword">end</span>
+0093 
+0094 <span class="comment">% format output</span>
+0095 <span class="keyword">if</span> nargout &gt; 0
+0096     varargout = {h};
+0097 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

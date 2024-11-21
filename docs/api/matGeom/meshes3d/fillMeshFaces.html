@@ -4,7 +4,7 @@
 <head>
   <title>Description of fillMeshFaces</title>
   <meta name="keywords" content="fillMeshFaces">
-  <meta name="description" content="Fill the faces of a mesh with the specified colors.">
+  <meta name="description" content="FILLMESHFACES Fill the faces of a mesh with the specified colors.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Fill the faces of a mesh with the specified colors.</strong></div>
+<div class="box"><strong>FILLMESHFACES Fill the faces of a mesh with the specified colors.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function varargout = fillMeshFaces(varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Fill the faces of a mesh with the specified colors.
+<div class="fragment"><pre class="comment">FILLMESHFACES Fill the faces of a mesh with the specified colors.
 
    fillMeshFaces(V, F, VERTEXCOLORS)
    Colorizes a mesh by filling faces with an array of values. The colors
@@ -72,7 +72,7 @@ This function is called by:
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = fillMeshFaces(varargin)</a>
-0002 <span class="comment">% Fill the faces of a mesh with the specified colors.</span>
+0002 <span class="comment">%FILLMESHFACES Fill the faces of a mesh with the specified colors.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   fillMeshFaces(V, F, VERTEXCOLORS)</span>
 0005 <span class="comment">%   Colorizes a mesh by filling faces with an array of values. The colors</span>
@@ -102,65 +102,64 @@ This function is called by:
 0029 <span class="comment">%</span>
 0030 <span class="comment">%   See also</span>
 0031 <span class="comment">%     drawMesh</span>
-0032  
+0032 
 0033 <span class="comment">% ------</span>
 0034 <span class="comment">% Author: David Legland</span>
-0035 <span class="comment">% e-mail: david.legland@inrae.fr</span>
-0036 <span class="comment">% INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
-0037 <span class="comment">% Created: 2020-04-16,    using Matlab 9.7.0.1247435 (R2019b) Update 2</span>
-0038 <span class="comment">% Copyright 2020 INRAE.</span>
-0039 
-0040 <span class="comment">%% Parse input arguments</span>
-0041 
-0042 <span class="comment">% extract first argument</span>
-0043 var1 = varargin{1};
-0044 varargin(1) = [];
-0045 
-0046 <span class="comment">% Check if first input argument is an axes handle</span>
-0047 <span class="keyword">if</span> isAxisHandle(var1)
-0048     ax = var1;
-0049     var1 = varargin{1};
-0050     varargin(1) = [];
-0051 <span class="keyword">else</span>
-0052     ax = gca;
-0053 <span class="keyword">end</span>
-0054 
-0055 <span class="comment">% Check if the input is a mesh structure</span>
-0056 <span class="keyword">if</span> isstruct(var1)
-0057     <span class="comment">% extract data to display</span>
-0058     vertices = var1.vertices;
-0059     faces = var1.faces;
-0060 <span class="keyword">else</span>
-0061     <span class="comment">% assumes input is given with vertices+faces arrays</span>
-0062     vertices = var1;
-0063     faces = varargin{1};
-0064     varargin(1) = [];
-0065 <span class="keyword">end</span>
-0066 
-0067 <span class="comment">% next argument is face color</span>
-0068 colors = varargin{1};
-0069 varargin(1) = [];
-0070 
-0071 <span class="comment">% adapt the face color key value depending on the size of the &quot;color&quot; input</span>
-0072 <span class="comment">% argument</span>
-0073 faceColorMode = <span class="string">'interp'</span>;
-0074 <span class="keyword">if</span> size(colors, 1) == size(faces, 1)
-0075     faceColorMode = <span class="string">'flat'</span>;
-0076 <span class="keyword">end</span>
-0077 
-0078 <span class="comment">% array FACES is a NF-by-NV indices array, with NV number of vertices of</span>
-0079 <span class="comment">% each face, and NF number of faces</span>
-0080 h = patch(<span class="string">'Parent'</span>, ax, <span class="keyword">...</span>
-0081     <span class="string">'vertices'</span>, vertices, <span class="string">'faces'</span>, faces, <span class="string">'FaceVertexCData'</span>, colors, <span class="keyword">...</span>
-0082     <span class="string">'FaceColor'</span>, faceColorMode, varargin{:});
+0035 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0036 <span class="comment">% Created: 2020-04-16, using Matlab 9.7.0.1247435 (R2019b) Update 2</span>
+0037 <span class="comment">% Copyright 2020-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0038 
+0039 <span class="comment">%% Parse input arguments</span>
+0040 
+0041 <span class="comment">% extract first argument</span>
+0042 var1 = varargin{1};
+0043 varargin(1) = [];
+0044 
+0045 <span class="comment">% Check if first input argument is an axes handle</span>
+0046 <span class="keyword">if</span> isAxisHandle(var1)
+0047     ax = var1;
+0048     var1 = varargin{1};
+0049     varargin(1) = [];
+0050 <span class="keyword">else</span>
+0051     ax = gca;
+0052 <span class="keyword">end</span>
+0053 
+0054 <span class="comment">% Check if the input is a mesh structure</span>
+0055 <span class="keyword">if</span> isstruct(var1)
+0056     <span class="comment">% extract data to display</span>
+0057     vertices = var1.vertices;
+0058     faces = var1.faces;
+0059 <span class="keyword">else</span>
+0060     <span class="comment">% assumes input is given with vertices+faces arrays</span>
+0061     vertices = var1;
+0062     faces = varargin{1};
+0063     varargin(1) = [];
+0064 <span class="keyword">end</span>
+0065 
+0066 <span class="comment">% next argument is face color</span>
+0067 colors = varargin{1};
+0068 varargin(1) = [];
+0069 
+0070 <span class="comment">% adapt the face color key value depending on the size of the &quot;color&quot; input</span>
+0071 <span class="comment">% argument</span>
+0072 faceColorMode = <span class="string">'interp'</span>;
+0073 <span class="keyword">if</span> size(colors, 1) == size(faces, 1)
+0074     faceColorMode = <span class="string">'flat'</span>;
+0075 <span class="keyword">end</span>
+0076 
+0077 <span class="comment">% array FACES is a NF-by-NV indices array, with NV number of vertices of</span>
+0078 <span class="comment">% each face, and NF number of faces</span>
+0079 h = patch(<span class="string">'Parent'</span>, ax, <span class="keyword">...</span>
+0080     <span class="string">'vertices'</span>, vertices, <span class="string">'faces'</span>, faces, <span class="string">'FaceVertexCData'</span>, colors, <span class="keyword">...</span>
+0081     <span class="string">'FaceColor'</span>, faceColorMode, varargin{:});
+0082 
 0083 
-0084 
-0085 <span class="comment">%% Process output arguments</span>
-0086 
-0087 <span class="comment">% format output parameters</span>
-0088 <span class="keyword">if</span> nargout &gt; 0
-0089     varargout = {h};
-0090 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0084 <span class="comment">%% Process output arguments</span>
+0085 
+0086 <span class="comment">% format output parameters</span>
+0087 <span class="keyword">if</span> nargout &gt; 0
+0088     varargout = {h};
+0089 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

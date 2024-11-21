@@ -49,14 +49,14 @@
    ans =
        1
 
-   See also:
+   See also
      <a href="ellipses2d.html" class="code" title="function ellipses2d(varargin)">ellipses2d</a>, <a href="isPointInCircle.html" class="code" title="function b = isPointInCircle(point, circle, varargin)">isPointInCircle</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="createRotation.html" class="code" title="function trans = createRotation(varargin)">createRotation</a>	CREATEROTATION Create the 3*3 matrix of a rotation.</li><li><a href="createScaling.html" class="code" title="function trans = createScaling(varargin)">createScaling</a>	CREATESCALING Create the 3*3 matrix of a scaling in 2 dimensions.</li><li><a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>	Apply an affine transform to a point or a point set.</li></ul>
+<li><a href="createRotation.html" class="code" title="function trans = createRotation(varargin)">createRotation</a>	CREATEROTATION Create the 3*3 matrix of a rotation.</li><li><a href="createScaling.html" class="code" title="function trans = createScaling(varargin)">createScaling</a>	CREATESCALING Create the 3*3 matrix of a scaling in 2 dimensions.</li><li><a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>	TRANSFORMPOINT Apply an affine transform to a point or a point set.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 </ul>
@@ -88,36 +88,33 @@ This function is called by:
 0021 <span class="comment">%   ans =</span>
 0022 <span class="comment">%       1</span>
 0023 <span class="comment">%</span>
-0024 <span class="comment">%   See also:</span>
+0024 <span class="comment">%   See also</span>
 0025 <span class="comment">%     ellipses2d, isPointInCircle</span>
 0026 <span class="comment">%</span>
 0027 
-0028 <span class="comment">%   ---------</span>
-0029 <span class="comment">%   author : David Legland</span>
-0030 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0031 <span class="comment">%   created the 11/03/2011</span>
-0032 <span class="comment">%</span>
+0028 <span class="comment">% ------</span>
+0029 <span class="comment">% Author: David Legland</span>
+0030 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0031 <span class="comment">% Created: 2011-03-11</span>
+0032 <span class="comment">% Copyright 2011-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0033 
-0034 <span class="comment">%   HISTORY</span>
-0035 
-0036 <span class="comment">% extract computation tolerance</span>
-0037 tol = 1e-14;
-0038 <span class="keyword">if</span> ~isempty(varargin)
-0039     tol = varargin{1};
-0040 <span class="keyword">end</span>
-0041 
-0042 <span class="comment">% compute ellipse to unit circle transform</span>
-0043 rot = <a href="createRotation.html" class="code" title="function trans = createRotation(varargin)">createRotation</a>(-deg2rad(ellipse(5)));
-0044 sca = <a href="createScaling.html" class="code" title="function trans = createScaling(varargin)">createScaling</a>(1./ellipse(3:4));
-0045 trans = sca * rot;
-0046 
-0047 <span class="comment">% transform points to unit circle basis</span>
-0048 pTrans = bsxfun(@minus, point, ellipse(:,1:2));
-0049 pTrans = <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(pTrans, trans);
-0050 
-0051 <span class="comment">% test if distance to origin smaller than 1</span>
-0052 b = sqrt(sum(power(pTrans, 2), 2)) - 1 &lt;= tol;
-0053</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0034 <span class="comment">% extract computation tolerance</span>
+0035 tol = 1e-14;
+0036 <span class="keyword">if</span> ~isempty(varargin)
+0037     tol = varargin{1};
+0038 <span class="keyword">end</span>
+0039 
+0040 <span class="comment">% compute ellipse to unit circle transform</span>
+0041 rot = <a href="createRotation.html" class="code" title="function trans = createRotation(varargin)">createRotation</a>(-deg2rad(ellipse(5)));
+0042 sca = <a href="createScaling.html" class="code" title="function trans = createScaling(varargin)">createScaling</a>(1./ellipse(3:4));
+0043 trans = sca * rot;
+0044 
+0045 <span class="comment">% transform points to unit circle basis</span>
+0046 pTrans = bsxfun(@minus, point, ellipse(:,1:2));
+0047 pTrans = <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>(pTrans, trans);
+0048 
+0049 <span class="comment">% test if distance to origin smaller than 1</span>
+0050 b = sqrt(sum(power(pTrans, 2), 2)) - 1 &lt;= tol;</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

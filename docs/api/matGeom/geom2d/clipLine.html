@@ -50,7 +50,7 @@
    res = 
        0 40 100 40
 
-   See also:
+   See also
    <a href="lines2d.html" class="code" title="function lines2d(varargin)">lines2d</a>, <a href="boxes2d.html" class="code" title="function boxes2d(varargin)">boxes2d</a>, <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>
    <a href="clipEdge.html" class="code" title="function edge2 = clipEdge(edge, box)">clipEdge</a>, <a href="clipRay.html" class="code" title="function [edge, isInside] = clipRay(ray, bb)">clipRay</a>, clipLine3d</pre></div>
 
@@ -61,7 +61,7 @@ This function calls:
 <li><a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>	INTERSECTLINES Return all intersection points of N lines in 2D.</li><li><a href="linePosition.html" class="code" title="function pos = linePosition(point, line, varargin)">linePosition</a>	LINEPOSITION Position of a point on a line.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="clipRay.html" class="code" title="function [edge, isInside] = clipRay(ray, bb)">clipRay</a>	Clip a ray with a box.</li><li><a href="drawLine.html" class="code" title="function varargout = drawLine(lin, varargin)">drawLine</a>	DRAWLINE Draw a straight line clipped by the current axis.</li></ul>
+<li><a href="clipRay.html" class="code" title="function [edge, isInside] = clipRay(ray, bb)">clipRay</a>	CLIPRAY Clip a ray with a box.</li><li><a href="drawLine.html" class="code" title="function varargout = drawLine(lin, varargin)">drawLine</a>	DRAWLINE Draw a straight line clipped by the current axis.</li><li><a href="../../matGeom/polygons2d/clipPolygonByLine.html" class="code" title="function varargout = clipPolygonByLine(poly, line, varargin)">clipPolygonByLine</a>	CLIPPOLYGONBYLINE Clip a polygon by a directed line.</li></ul>
 <!-- crossreference -->
 
 
@@ -91,82 +91,76 @@ This function is called by:
 0022 <span class="comment">%   res =</span>
 0023 <span class="comment">%       0 40 100 40</span>
 0024 <span class="comment">%</span>
-0025 <span class="comment">%   See also:</span>
+0025 <span class="comment">%   See also</span>
 0026 <span class="comment">%   lines2d, boxes2d, edges2d</span>
 0027 <span class="comment">%   clipEdge, clipRay, clipLine3d</span>
 0028 <span class="comment">%</span>
 0029 
 0030 <span class="comment">% ------</span>
 0031 <span class="comment">% Author: David Legland</span>
-0032 <span class="comment">% e-mail: david.legland@inra.fr</span>
-0033 <span class="comment">% Created: 2007-08-27,    using Matlab 7.4.0.287 (R2007a)</span>
-0034 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0032 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0033 <span class="comment">% Created: 2007-08-27, using Matlab 7.4.0.287 (R2007a)</span>
+0034 <span class="comment">% Copyright 2007-2024 INRA - Cepia Software Platform</span>
 0035 
-0036 <span class="comment">% HISTORY</span>
-0037 <span class="comment">% 2010-05-16 rewrite using intersectLines, add precision management</span>
-0038 <span class="comment">% 2010-08-03 fix bugs (thanks to Reto Zingg)</span>
-0039 <span class="comment">% 2010-08-06 remove management of EPS by checking edge midpoint (thanks</span>
-0040 <span class="comment">%   again to Reto Zingg)</span>
-0041 
-0042 <span class="comment">% adjust size of two input arguments</span>
-0043 nLines = size(line, 1);
-0044 nBoxes = size(box, 1);
-0045 <span class="keyword">if</span> nLines == 1 &amp;&amp; nBoxes &gt; 1
-0046     line = repmat(line, nBoxes, 1);
-0047 <span class="keyword">elseif</span> nBoxes == 1 &amp;&amp; nLines &gt; 1
-0048     box = repmat(box, nLines, 1);
-0049 <span class="keyword">elseif</span> nLines ~= nBoxes
-0050     error(<span class="string">'bad sizes for input'</span>);
-0051 <span class="keyword">end</span>
-0052 
-0053 <span class="comment">% allocate memory</span>
-0054 nLines = size(line, 1);
-0055 edge   = zeros(nLines, 4);
-0056 
-0057 <span class="comment">% main loop on lines</span>
-0058 <span class="keyword">for</span> i = 1:nLines
-0059     <span class="comment">% extract limits of the box</span>
-0060     xmin = box(i, 1);
-0061     xmax = box(i, 2);
-0062     ymin = box(i, 3);
-0063     ymax = box(i, 4);
-0064     
-0065     <span class="comment">% use direction vector for box edges similar to direction vector of the</span>
-0066     <span class="comment">% line in order to reduce computation errors</span>
-0067     delta = hypot(line(i,3), line(i,4));
+0036 <span class="comment">% adjust size of two input arguments</span>
+0037 nLines = size(line, 1);
+0038 nBoxes = size(box, 1);
+0039 <span class="keyword">if</span> nLines == 1 &amp;&amp; nBoxes &gt; 1
+0040     line = repmat(line, nBoxes, 1);
+0041 <span class="keyword">elseif</span> nBoxes == 1 &amp;&amp; nLines &gt; 1
+0042     box = repmat(box, nLines, 1);
+0043 <span class="keyword">elseif</span> nLines ~= nBoxes
+0044     error(<span class="string">'bad sizes for input'</span>);
+0045 <span class="keyword">end</span>
+0046 
+0047 <span class="comment">% allocate memory</span>
+0048 nLines = size(line, 1);
+0049 edge   = zeros(nLines, 4);
+0050 
+0051 <span class="comment">% main loop on lines</span>
+0052 <span class="keyword">for</span> i = 1:nLines
+0053     <span class="comment">% extract limits of the box</span>
+0054     xmin = box(i, 1);
+0055     xmax = box(i, 2);
+0056     ymin = box(i, 3);
+0057     ymax = box(i, 4);
+0058     
+0059     <span class="comment">% use direction vector for box edges similar to direction vector of the</span>
+0060     <span class="comment">% line in order to reduce computation errors</span>
+0061     delta = hypot(line(i,3), line(i,4));
+0062     
+0063     <span class="comment">% compute intersection with each edge of the box</span>
+0064     px1 = <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(line(i,:), [xmin ymin delta 0]);   <span class="comment">% lower edge</span>
+0065     px2 = <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(line(i,:), [xmax ymin 0 delta]);   <span class="comment">% right edge</span>
+0066     py1 = <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(line(i,:), [xmax ymax -delta 0]);  <span class="comment">% upper edge</span>
+0067     py2 = <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(line(i,:), [xmin ymax 0 -delta]);  <span class="comment">% left edge</span>
 0068     
-0069     <span class="comment">% compute intersection with each edge of the box</span>
-0070     px1 = <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(line(i,:), [xmin ymin delta 0]);   <span class="comment">% lower edge</span>
-0071     px2 = <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(line(i,:), [xmax ymin 0 delta]);   <span class="comment">% right edge</span>
-0072     py1 = <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(line(i,:), [xmax ymax -delta 0]);  <span class="comment">% upper edge</span>
-0073     py2 = <a href="intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(line(i,:), [xmin ymax 0 -delta]);  <span class="comment">% left edge</span>
-0074     
-0075     <span class="comment">% remove undefined intersections (case of lines parallel to box edges)</span>
-0076     points = [px1 ; px2 ; py1 ; py2];
-0077     points = points(isfinite(points(:,1)), :);
-0078     
-0079     <span class="comment">% sort points according to their position on the line</span>
-0080     pos = <a href="linePosition.html" class="code" title="function pos = linePosition(point, line, varargin)">linePosition</a>(points, line(i,:));
-0081     [pos, inds] = sort(pos); <span class="comment">%#ok&lt;ASGLU&gt;</span>
-0082     points = points(inds, :);
+0069     <span class="comment">% remove undefined intersections (case of lines parallel to box edges)</span>
+0070     points = [px1 ; px2 ; py1 ; py2];
+0071     points = points(isfinite(points(:,1)), :);
+0072     
+0073     <span class="comment">% sort points according to their position on the line</span>
+0074     pos = <a href="linePosition.html" class="code" title="function pos = linePosition(point, line, varargin)">linePosition</a>(points, line(i,:));
+0075     [pos, inds] = sort(pos); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0076     points = points(inds, :);
+0077     
+0078     <span class="comment">% create clipped edge by using the two points in the middle</span>
+0079     ind = size(points, 1)/2;
+0080     inter1 = points(ind,:);
+0081     inter2 = points(ind+1,:);
+0082     edge(i, 1:4) = [inter1 inter2];
 0083     
-0084     <span class="comment">% create clipped edge by using the two points in the middle</span>
-0085     ind = size(points, 1)/2;
-0086     inter1 = points(ind,:);
-0087     inter2 = points(ind+1,:);
-0088     edge(i, 1:4) = [inter1 inter2];
+0084     <span class="comment">% check that middle point of the edge is contained in the box</span>
+0085     midX = mean(edge(i, [1 3]));
+0086     xOk = xmin &lt;= midX &amp;&amp; midX &lt;= xmax;
+0087     midY = mean(edge(i, [2 4]));
+0088     yOk = ymin &lt;= midY &amp;&amp; midY &lt;= ymax;
 0089     
-0090     <span class="comment">% check that middle point of the edge is contained in the box</span>
-0091     midX = mean(edge(i, [1 3]));
-0092     xOk = xmin &lt;= midX &amp;&amp; midX &lt;= xmax;
-0093     midY = mean(edge(i, [2 4]));
-0094     yOk = ymin &lt;= midY &amp;&amp; midY &lt;= ymax;
-0095     
-0096     <span class="comment">% if one of the bounding condition is not met, set edge to NaN</span>
-0097     <span class="keyword">if</span> ~(xOk &amp;&amp; yOk)
-0098         edge (i,:) = NaN;
-0099     <span class="keyword">end</span>
-0100 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0090     <span class="comment">% if one of the bounding condition is not met, set edge to NaN</span>
+0091     <span class="keyword">if</span> ~(xOk &amp;&amp; yOk)
+0092         edge (i,:) = NaN;
+0093     <span class="keyword">end</span>
+0094 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

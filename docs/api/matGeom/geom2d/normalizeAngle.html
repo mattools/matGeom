@@ -58,7 +58,7 @@ This function calls:
 </ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="angleAbsDiff.html" class="code" title="function dif = angleAbsDiff(angle1, angle2)">angleAbsDiff</a>	ANGLEABSDIFF Absolute difference between two angles.</li><li><a href="angleDiff.html" class="code" title="function dif = angleDiff(angle1, angle2)">angleDiff</a>	ANGLEDIFF Difference between two angles.</li><li><a href="vectorAngle.html" class="code" title="function alpha = vectorAngle(v1, varargin)">vectorAngle</a>	Horizontal angle of a vector, or angle between 2 vectors.</li></ul>
+<li><a href="angleAbsDiff.html" class="code" title="function dif = angleAbsDiff(angle1, angle2)">angleAbsDiff</a>	ANGLEABSDIFF Absolute difference between two angles.</li><li><a href="angleDiff.html" class="code" title="function dif = angleDiff(angle1, angle2)">angleDiff</a>	ANGLEDIFF Difference between two angles.</li><li><a href="vectorAngle.html" class="code" title="function alpha = vectorAngle(v1, varargin)">vectorAngle</a>	VECTORANGLE Horizontal angle of a vector, or angle between 2 vectors.</li></ul>
 <!-- crossreference -->
 
 
@@ -92,20 +92,16 @@ This function is called by:
 0026 
 0027 <span class="comment">% ------</span>
 0028 <span class="comment">% Author: David Legland</span>
-0029 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
-0030 <span class="comment">% Created: 2008-03-10,    using Matlab 7.4.0.287 (R2007a)</span>
-0031 <span class="comment">% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span>
+0029 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0030 <span class="comment">% Created: 2008-03-10, using Matlab 7.4.0.287 (R2007a)</span>
+0031 <span class="comment">% Copyright 2008-2024 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas</span>
 0032 
-0033 <span class="comment">% HISTORY</span>
-0034 <span class="comment">% 2010-03-31 rename as normalizeAngle, and add psb to specify interval</span>
-0035 <span class="comment">%   center</span>
-0036 
-0037 center = pi;
-0038 <span class="keyword">if</span> ~isempty(varargin)
-0039     center = varargin{1};
-0040 <span class="keyword">end</span>
-0041 
-0042 alpha = mod(alpha-center+pi, 2*pi) + center-pi;</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0033 center = pi;
+0034 <span class="keyword">if</span> ~isempty(varargin)
+0035     center = varargin{1};
+0036 <span class="keyword">end</span>
+0037 
+0038 alpha = mod(alpha-center+pi, 2*pi) + center-pi;</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

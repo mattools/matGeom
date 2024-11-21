@@ -96,57 +96,53 @@ This function is called by:
 0028 
 0029 <span class="comment">% ------</span>
 0030 <span class="comment">% Author: David Legland</span>
-0031 <span class="comment">% e-mail: david.legland@nantes.inra.fr</span>
-0032 <span class="comment">% Created: 2009-06-15,    using Matlab 7.7.0.471 (R2008b)</span>
-0033 <span class="comment">% Copyright 2009 INRA - Cepia Software Platform.</span>
+0031 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0032 <span class="comment">% Created: 2009-06-15, using Matlab 7.7.0.471 (R2008b)</span>
+0033 <span class="comment">% Copyright 2009-2024 INRA - Cepia Software Platform</span>
 0034 
-0035 <span class="comment">%   HISTORY</span>
-0036 <span class="comment">%   2011-06-22 fix bug when removing origin vertex (thanks to Federico</span>
-0037 <span class="comment">%       Bonelli)</span>
-0038 
-0039 tol = 1e-14;
-0040 
-0041 <span class="comment">% parse optional arguments</span>
-0042 <span class="keyword">while</span> length(varargin) &gt; 1
-0043     pname = varargin{1};
-0044     <span class="keyword">if</span> ~ischar(pname)
-0045         error(<span class="string">'Expect optional arguments as name-value pairs'</span>);
-0046     <span class="keyword">end</span>
-0047     
-0048     <span class="keyword">if</span> strcmpi(pname, <span class="string">'tolerance'</span>)
-0049         tol = varargin{2};
-0050     <span class="keyword">else</span>
-0051         error([<span class="string">'Unknown parameter name: '</span> pname]);
-0052     <span class="keyword">end</span>
-0053     varargin(1:2) = [];
-0054 <span class="keyword">end</span>
-0055 
-0056 <span class="comment">% ensure the last point equals the first one</span>
-0057 <span class="keyword">if</span> sum(abs(poly(<span class="keyword">end</span>, :)-poly(1,:)) &lt; tol) ~= 2
-0058     poly = [poly; poly(1,:)];
-0059 <span class="keyword">end</span>
-0060 
-0061 <span class="comment">% compute intersections by calling algo for polylines</span>
-0062 [points, pos1, pos2] = <a href="polylineSelfIntersections.html" class="code" title="function varargout = polylineSelfIntersections(poly, varargin)">polylineSelfIntersections</a>(poly, <span class="string">'closed'</span>, <span class="string">'tolerance'</span>, tol);
-0063 
-0064 <span class="comment">% It may append that first vertex of polygon is detected as intersection,</span>
-0065 <span class="comment">% the following tries to detect this.</span>
-0066 <span class="comment">% (pos1 &lt; pos2 by construction)</span>
-0067 n = size(poly, 1) - 1;
-0068 inds = abs(pos1) &lt; tol &amp; abs(pos2 - n) &lt; tol;
-0069 points(inds, :) = [];
-0070 pos1(inds)   = [];
-0071 pos2(inds)   = [];
-0072 
-0073 
-0074 <span class="comment">%% Post-processing</span>
-0075 
-0076 <span class="comment">% process output arguments</span>
-0077 <span class="keyword">if</span> nargout &lt;= 1
-0078     varargout = {points};
-0079 <span class="keyword">elseif</span> nargout == 3
-0080     varargout = {points, pos1, pos2};
-0081 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0035 tol = 1e-14;
+0036 
+0037 <span class="comment">% parse optional arguments</span>
+0038 <span class="keyword">while</span> length(varargin) &gt; 1
+0039     pname = varargin{1};
+0040     <span class="keyword">if</span> ~ischar(pname)
+0041         error(<span class="string">'Expect optional arguments as name-value pairs'</span>);
+0042     <span class="keyword">end</span>
+0043     
+0044     <span class="keyword">if</span> strcmpi(pname, <span class="string">'tolerance'</span>)
+0045         tol = varargin{2};
+0046     <span class="keyword">else</span>
+0047         error([<span class="string">'Unknown parameter name: '</span> pname]);
+0048     <span class="keyword">end</span>
+0049     varargin(1:2) = [];
+0050 <span class="keyword">end</span>
+0051 
+0052 <span class="comment">% ensure the last point equals the first one</span>
+0053 <span class="keyword">if</span> sum(abs(poly(<span class="keyword">end</span>, :)-poly(1,:)) &lt; tol) ~= 2
+0054     poly = [poly; poly(1,:)];
+0055 <span class="keyword">end</span>
+0056 
+0057 <span class="comment">% compute intersections by calling algo for polylines</span>
+0058 [points, pos1, pos2] = <a href="polylineSelfIntersections.html" class="code" title="function varargout = polylineSelfIntersections(poly, varargin)">polylineSelfIntersections</a>(poly, <span class="string">'closed'</span>, <span class="string">'tolerance'</span>, tol);
+0059 
+0060 <span class="comment">% It may append that first vertex of polygon is detected as intersection,</span>
+0061 <span class="comment">% the following tries to detect this.</span>
+0062 <span class="comment">% (pos1 &lt; pos2 by construction)</span>
+0063 n = size(poly, 1) - 1;
+0064 inds = abs(pos1) &lt; tol &amp; abs(pos2 - n) &lt; tol;
+0065 points(inds, :) = [];
+0066 pos1(inds)   = [];
+0067 pos2(inds)   = [];
+0068 
+0069 
+0070 <span class="comment">%% Post-processing</span>
+0071 
+0072 <span class="comment">% process output arguments</span>
+0073 <span class="keyword">if</span> nargout &lt;= 1
+0074     varargout = {points};
+0075 <span class="keyword">elseif</span> nargout == 3
+0076     varargout = {points, pos1, pos2};
+0077 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

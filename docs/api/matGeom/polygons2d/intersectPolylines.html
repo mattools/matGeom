@@ -106,9 +106,9 @@ This function is called by:
 0032 
 0033 <span class="comment">% ------</span>
 0034 <span class="comment">% Author: David Legland</span>
-0035 <span class="comment">% e-mail: david.legland@inra.fr</span>
-0036 <span class="comment">% Created: 2009-06-15,    using Matlab 7.7.0.471 (R2008b)</span>
-0037 <span class="comment">% Copyright 2009 INRA - Cepia Software Platform.</span>
+0035 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0036 <span class="comment">% Created: 2009-06-15, using Matlab 7.7.0.471 (R2008b)</span>
+0037 <span class="comment">% Copyright 2009-2024 INRA - Cepia Software Platform</span>
 0038 
 0039 <span class="comment">% The code is a slight rewritting of the interX function, consisting in</span>
 0040 <span class="comment">% avoiding argument transposition in the begining of the function. Comment</span>
@@ -187,10 +187,10 @@ This function is called by:
 0113 S1 = dx1 .* y1(1:end-1) - dy1 .* x1(1:end-1);
 0114 S2 = dx2 .* y2(1:end-1) - dy2 .* x2(1:end-1);
 0115 
-0116 C1 = feval(hF, <a href="#_sub1" class="code" title="subfunction u = D(x,y)">D</a>(bsxfun(@times,dx1,y2) - bsxfun(@times,dy1,x2), S1), 0);
-0117 C2 = feval(hF, <a href="#_sub1" class="code" title="subfunction u = D(x,y)">D</a>((bsxfun(@times,y1,dx2) - bsxfun(@times,x1,dy2))', S2'), 0)';
+0116 C1 = hF(<a href="#_sub1" class="code" title="subfunction u = D(x,y)">D</a>(bsxfun(@times,dx1,y2) - bsxfun(@times,dy1,x2), S1), 0);
+0117 C2 = hF(<a href="#_sub1" class="code" title="subfunction u = D(x,y)">D</a>((bsxfun(@times,y1,dx2) - bsxfun(@times,x1,dy2))', S2'), 0)';
 0118 
-0119 <span class="comment">% Obtain the segments where an intersection is expected</span>
+0119 <span class="comment">% retrieve the segments where an intersection is expected</span>
 0120 [i, j] = find(C1 &amp; C2); 
 0121 
 0122 <span class="comment">% Process case of no intersection</span>
@@ -212,12 +212,12 @@ This function is called by:
 0138 res = [dx2(j).*S1(i) - dx1(i).*S2(j), dy2(j).*S1(i) - dy1(i).*S2(j)] ./ [L L];
 0139 pts = unique(res, <span class="string">'rows'</span>);
 0140 
-0141 <span class="comment">% Innre function computing a kind of cross-product</span>
+0141 <span class="comment">% Inner function computing a kind of cross-product</span>
 0142 <a name="_sub1" href="#_subfunctions" class="code">function u = D(x,y)</a>
 0143     u = bsxfun(@minus, x(:,1:end-1), y) .* bsxfun(@minus, x(:,2:end), y);
 0144 <span class="keyword">end</span>
 0145 
 0146 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

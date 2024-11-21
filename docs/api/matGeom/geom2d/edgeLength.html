@@ -37,14 +37,8 @@
    N-by-4 array, containing parametric representation of each edge, and
    output is a N-by-1 array containing length of each edge.
 
-   See also:
-   <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="edgeAngle.html" class="code" title="function theta = edgeAngle(edge)">edgeAngle</a>
-
-   ---------
-
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 19/02/2004</pre></div>
+   See also
+   <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="edgeAngle.html" class="code" title="function theta = edgeAngle(edge)">edgeAngle</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -53,7 +47,7 @@ This function calls:
 </ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="intersectLineEdge.html" class="code" title="function point = intersectLineEdge(line, edge, varargin)">intersectLineEdge</a>	INTERSECTLINEEDGE Return intersection between a line and an edge.</li></ul>
+<li><a href="intersectLineEdge.html" class="code" title="function point = intersectLineEdge(line, edge, varargin)">intersectLineEdge</a>	INTERSECTLINEEDGE Return intersection between a line and an edge.</li><li><a href="../../matGeom/graphs/gabrielGraph.html" class="code" title="function varargout = gabrielGraph(pts)">gabrielGraph</a>	GABRIELGRAPH  Gabriel Graph of a set of points.</li></ul>
 <!-- crossreference -->
 
 
@@ -70,32 +64,27 @@ This function is called by:
 0009 <span class="comment">%   N-by-4 array, containing parametric representation of each edge, and</span>
 0010 <span class="comment">%   output is a N-by-1 array containing length of each edge.</span>
 0011 <span class="comment">%</span>
-0012 <span class="comment">%   See also:</span>
+0012 <span class="comment">%   See also</span>
 0013 <span class="comment">%   edges2d, edgeAngle</span>
-0014 <span class="comment">%</span>
-0015 <span class="comment">%   ---------</span>
-0016 <span class="comment">%</span>
-0017 <span class="comment">%   author : David Legland</span>
-0018 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0019 <span class="comment">%   created the 19/02/2004</span>
-0020 <span class="comment">%</span>
-0021 
-0022 <span class="comment">%   HISTORY</span>
-0023 <span class="comment">%   15/04/2005 changes definition for edge, uses [x1 y1 x2 y2] instead of</span>
-0024 <span class="comment">%       [x0 y0 dx dy].</span>
-0025 
-0026 <span class="keyword">if</span> nargin == 1
-0027     <span class="comment">% input is an edge [X1 Y1 X2 Y2]</span>
-0028     edge = varargin{1};
-0029     len = hypot(edge(:,3)-edge(:,1), edge(:,4)-edge(:,2));
-0030     
-0031 <span class="keyword">elseif</span> nargin == 2
-0032     <span class="comment">% input are two points [X1 Y1] and [X2 Y2]</span>
-0033     p1 = varargin{1};
-0034     p2 = varargin{2};
-0035     len = hypot(p2(:,1)-p1(:,1), p2(:,2)-p1(:,2));
-0036     
-0037 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0014 
+0015 <span class="comment">% ------</span>
+0016 <span class="comment">% Author: David Legland</span>
+0017 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0018 <span class="comment">% Created: 2004-02-19</span>
+0019 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0020 
+0021 <span class="keyword">if</span> nargin == 1
+0022     <span class="comment">% input is an edge [X1 Y1 X2 Y2]</span>
+0023     edge = varargin{1};
+0024     len = hypot(edge(:,3)-edge(:,1), edge(:,4)-edge(:,2));
+0025     
+0026 <span class="keyword">elseif</span> nargin == 2
+0027     <span class="comment">% input are two points [X1 Y1] and [X2 Y2]</span>
+0028     p1 = varargin{1};
+0029     p2 = varargin{2};
+0030     len = hypot(p2(:,1)-p1(:,1), p2(:,2)-p1(:,2));
+0031     
+0032 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

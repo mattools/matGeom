@@ -49,12 +49,8 @@
      ans = 
          6.0000
 
-   See also:
-   <a href="lines3d.html" class="code" title="function lines3d(varargin)">lines3d</a>, <a href="distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a>
-
-   ---------
-   authors: Brandon Baker, oqilipo, David Legland
-   created January 19, 2011</pre></div>
+   See also
+   <a href="lines3d.html" class="code" title="function lines3d(varargin)">lines3d</a>, <a href="distancePoints3d.html" class="code" title="function dist = distancePoints3d(p1, p2, varargin)">distancePoints3d</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -92,82 +88,83 @@ This function is called by:
 0021 <span class="comment">%     ans =</span>
 0022 <span class="comment">%         6.0000</span>
 0023 <span class="comment">%</span>
-0024 <span class="comment">%   See also:</span>
+0024 <span class="comment">%   See also</span>
 0025 <span class="comment">%   lines3d, distancePoints3d</span>
-0026 <span class="comment">%</span>
-0027 <span class="comment">%   ---------</span>
-0028 <span class="comment">%   authors: Brandon Baker, oqilipo, David Legland</span>
-0029 <span class="comment">%   created January 19, 2011</span>
-0030 <span class="comment">%</span>
-0031 
-0032 <span class="comment">% number of points of each array</span>
-0033 n1 = size(line1, 1);
-0034 n2 = size(line2, 1);
-0035 
-0036 <span class="keyword">if</span> nargout &lt;= 1
-0037     <span class="comment">% express line coordinate as n1-by-n2 arrays</span>
-0038     v1x = repmat(line1(:,4), [1 n2]);
-0039     v1y = repmat(line1(:,5), [1 n2]);
-0040     v1z = repmat(line1(:,6), [1 n2]);
-0041     p1x = repmat(line1(:,1), [1 n2]);
-0042     p1y = repmat(line1(:,2), [1 n2]);
-0043     p1z = repmat(line1(:,3), [1 n2]);
-0044 
-0045     v2x = repmat(line2(:,4)', [n1 1]);
-0046     v2y = repmat(line2(:,5)', [n1 1]);
-0047     v2z = repmat(line2(:,6)', [n1 1]);
-0048     p2x = repmat(line2(:,1)', [n1 1]);
-0049     p2y = repmat(line2(:,2)', [n1 1]);
-0050     p2z = repmat(line2(:,3)', [n1 1]);
-0051 
-0052     <span class="comment">% calculates distance for each set of lines</span>
-0053     vcross = cross([v1x(:) v1y(:) v1z(:)], [v2x(:) v2y(:) v2z(:)]);
-0054     num = ([p1x(:) p1y(:) p1z(:)] - [p2x(:) p2y(:) p2z(:)]) .* vcross;
-0055     t1 = sum(num,2);
-0056     d = abs(t1) ./ (<a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(vcross) + eps);
-0057     
-0058     <span class="comment">% returns result as n1-by-n2 array</span>
-0059     d = reshape(d, n1, n2);
-0060 
-0061 <span class="keyword">else</span>
-0062     <span class="comment">% check input dimension, as we need to be able to match each pair of</span>
-0063     <span class="comment">% lines</span>
-0064     <span class="keyword">if</span> n1 ~= n2
-0065         error(<span class="string">'geom3d:distanceLines3d:IllegalInputArgument'</span>, <span class="keyword">...</span>
-0066             <span class="string">'when output points are requested, number of lines should be the same'</span>);
-0067     <span class="keyword">end</span>
-0068     
-0069     p1 = line1(:, 1:3);
-0070     p2 = line2(:, 1:3);
-0071     dp = p2 - p1;
-0072     v1 = line1(:, 4:6);
-0073     v2 = line2(:, 4:6);
-0074 
-0075     <span class="comment">% compute distance</span>
-0076     vcross = cross(v1, v2, 2);
-0077     num = dp .* vcross;
-0078     t1 = sum(num, 2);
-0079     d = abs(t1) ./ (<a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(vcross) + eps);
-0080 
-0081     <span class="comment">% precomputations</span>
-0082     a = dot(v1, v1, 2);
-0083     b = dot(v1, v2, 2);
-0084     e = dot(v2, v2, 2);
-0085     den = a.*e - b.*b; <span class="comment">% 0, if lines are parallel</span>
-0086     
-0087     <span class="comment">% vector between origin of both lines</span>
-0088     r = line1(:,1:3) - line2(:,1:3);
-0089     
-0090     <span class="comment">% solve linear system</span>
-0091     c = dot(v1, r, 2);
-0092     f = dot(v2, r, 2);
-0093     s = (b .* f - c .* e) ./ den;
-0094     t = (a .* f - c .* b) ./ den;
-0095 
-0096     <span class="comment">% convert to coordinates of points on lines</span>
-0097     pt1 = line1(:,1:3) + v1 .* s;
-0098     pt2 = line2(:,1:3) + v2 .* t;
-0099 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0026 
+0027 <span class="comment">% ------</span>
+0028 <span class="comment">% Authors: Brandon Baker, oqilipo, David Legland</span>
+0029 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0030 <span class="comment">% Created: 2011-01-19</span>
+0031 <span class="comment">% Copyright 2011-2024</span>
+0032 
+0033 <span class="comment">% number of points of each array</span>
+0034 n1 = size(line1, 1);
+0035 n2 = size(line2, 1);
+0036 
+0037 <span class="keyword">if</span> nargout &lt;= 1
+0038     <span class="comment">% express line coordinate as n1-by-n2 arrays</span>
+0039     v1x = repmat(line1(:,4), [1 n2]);
+0040     v1y = repmat(line1(:,5), [1 n2]);
+0041     v1z = repmat(line1(:,6), [1 n2]);
+0042     p1x = repmat(line1(:,1), [1 n2]);
+0043     p1y = repmat(line1(:,2), [1 n2]);
+0044     p1z = repmat(line1(:,3), [1 n2]);
+0045 
+0046     v2x = repmat(line2(:,4)', [n1 1]);
+0047     v2y = repmat(line2(:,5)', [n1 1]);
+0048     v2z = repmat(line2(:,6)', [n1 1]);
+0049     p2x = repmat(line2(:,1)', [n1 1]);
+0050     p2y = repmat(line2(:,2)', [n1 1]);
+0051     p2z = repmat(line2(:,3)', [n1 1]);
+0052 
+0053     <span class="comment">% calculates distance for each set of lines</span>
+0054     vcross = cross([v1x(:) v1y(:) v1z(:)], [v2x(:) v2y(:) v2z(:)]);
+0055     num = ([p1x(:) p1y(:) p1z(:)] - [p2x(:) p2y(:) p2z(:)]) .* vcross;
+0056     t1 = sum(num,2);
+0057     d = abs(t1) ./ (<a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(vcross) + eps);
+0058     
+0059     <span class="comment">% returns result as n1-by-n2 array</span>
+0060     d = reshape(d, n1, n2);
+0061 
+0062 <span class="keyword">else</span>
+0063     <span class="comment">% check input dimension, as we need to be able to match each pair of</span>
+0064     <span class="comment">% lines</span>
+0065     <span class="keyword">if</span> n1 ~= n2
+0066         error(<span class="string">'geom3d:distanceLines3d:IllegalInputArgument'</span>, <span class="keyword">...</span>
+0067             <span class="string">'when output points are requested, number of lines should be the same'</span>);
+0068     <span class="keyword">end</span>
+0069     
+0070     p1 = line1(:, 1:3);
+0071     p2 = line2(:, 1:3);
+0072     dp = p2 - p1;
+0073     v1 = line1(:, 4:6);
+0074     v2 = line2(:, 4:6);
+0075 
+0076     <span class="comment">% compute distance</span>
+0077     vcross = cross(v1, v2, 2);
+0078     num = dp .* vcross;
+0079     t1 = sum(num, 2);
+0080     d = abs(t1) ./ (<a href="vectorNorm3d.html" class="code" title="function n = vectorNorm3d(v)">vectorNorm3d</a>(vcross) + eps);
+0081 
+0082     <span class="comment">% precomputations</span>
+0083     a = dot(v1, v1, 2);
+0084     b = dot(v1, v2, 2);
+0085     e = dot(v2, v2, 2);
+0086     den = a.*e - b.*b; <span class="comment">% 0, if lines are parallel</span>
+0087     
+0088     <span class="comment">% vector between origin of both lines</span>
+0089     r = line1(:,1:3) - line2(:,1:3);
+0090     
+0091     <span class="comment">% solve linear system</span>
+0092     c = dot(v1, r, 2);
+0093     f = dot(v2, r, 2);
+0094     s = (b .* f - c .* e) ./ den;
+0095     t = (a .* f - c .* b) ./ den;
+0096 
+0097     <span class="comment">% convert to coordinates of points on lines</span>
+0098     pt1 = line1(:,1:3) + v1 .* s;
+0099     pt2 = line2(:,1:3) + v2 .* t;
+0100 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

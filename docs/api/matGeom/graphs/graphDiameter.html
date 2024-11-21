@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of graphDiameter</title>
+  <meta name="keywords" content="graphDiameter">
+  <meta name="description" content="GRAPHDIAMETER Diameter of a graph.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; graphDiameter.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>graphDiameter
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>GRAPHDIAMETER Diameter of a graph.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function diam = graphDiameter(v, e, l) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">GRAPHDIAMETER Diameter of a graph.
+
+   D = graphDiameter(V, E)
+   Computes the diameter of the graph given by V and E. The diameter of
+   the graph is the greatest eccentricity over all vertices in the graph.
+
+   D = graphDiameter(V, E, L)
+   Specifies the weight of each edge for computing the distances. Default
+   is to consider a weight of 1 for each edge.
+
+   Example
+     nodes = [20 20;20 50;20 80;50 50;80 20;80 50;80 80];
+     edges = [1 2;2 3;2 4;4 6;5 6;6 7];
+     figure; drawGraph(nodes, edges);
+     axis([0 100 0 100]); axis equal; hold on
+     D = graphDiameter(nodes, edges)
+     D = 
+         4
+
+   See also
+   <a href="grPropagateDistance.html" class="code" title="function d = grPropagateDistance(v, e, v0, l)">grPropagateDistance</a>, <a href="grVertexEccentricity.html" class="code" title="function g = grVertexEccentricity(v, e, l, inds)">grVertexEccentricity</a>
+   <a href="graphCenter.html" class="code" title="function center = graphCenter(v, e, l)">graphCenter</a>, <a href="graphRadius.html" class="code" title="function r = graphRadius(v, e, l)">graphRadius</a>, <a href="graphPeripheralVertices.html" class="code" title="function inds = graphPeripheralVertices(v, e, l)">graphPeripheralVertices</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="grVertexEccentricity.html" class="code" title="function g = grVertexEccentricity(v, e, l, inds)">grVertexEccentricity</a>	GRVERTEXECCENTRICITY Eccentricity of vertices in the graph.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function diam = graphDiameter(v, e, l)</a>
+0002 <span class="comment">%GRAPHDIAMETER Diameter of a graph.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   D = graphDiameter(V, E)</span>
+0005 <span class="comment">%   Computes the diameter of the graph given by V and E. The diameter of</span>
+0006 <span class="comment">%   the graph is the greatest eccentricity over all vertices in the graph.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   D = graphDiameter(V, E, L)</span>
+0009 <span class="comment">%   Specifies the weight of each edge for computing the distances. Default</span>
+0010 <span class="comment">%   is to consider a weight of 1 for each edge.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   Example</span>
+0013 <span class="comment">%     nodes = [20 20;20 50;20 80;50 50;80 20;80 50;80 80];</span>
+0014 <span class="comment">%     edges = [1 2;2 3;2 4;4 6;5 6;6 7];</span>
+0015 <span class="comment">%     figure; drawGraph(nodes, edges);</span>
+0016 <span class="comment">%     axis([0 100 0 100]); axis equal; hold on</span>
+0017 <span class="comment">%     D = graphDiameter(nodes, edges)</span>
+0018 <span class="comment">%     D =</span>
+0019 <span class="comment">%         4</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%   See also</span>
+0022 <span class="comment">%   grPropagateDistance, grVertexEccentricity</span>
+0023 <span class="comment">%   graphCenter, graphRadius, graphPeripheralVertices</span>
+0024 <span class="comment">%</span>
+0025 
+0026 <span class="comment">% ------</span>
+0027 <span class="comment">% Author: David Legland</span>
+0028 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0029 <span class="comment">% Created: 2010-09-07, using Matlab 7.9.0.529 (R2009b)</span>
+0030 <span class="comment">% Copyright 2010-2024 INRA - Cepia Software Platform</span>
+0031 
+0032 <span class="comment">% ensure there is a valid length array</span>
+0033 <span class="keyword">if</span> nargin&lt;3
+0034     l = ones(size(e,1), 1);
+0035 <span class="keyword">end</span>
+0036 
+0037 g = <a href="grVertexEccentricity.html" class="code" title="function g = grVertexEccentricity(v, e, l, inds)">grVertexEccentricity</a>(v, e, l);
+0038 
+0039 diam = max(g);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

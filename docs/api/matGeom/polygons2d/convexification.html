@@ -44,12 +44,7 @@
    CAUTION: The result will be valid only for convex polygons.
 
    See also
-   polygons2d, <a href="supportFunction.html" class="code" title="function h = supportFunction(polygon, varargin)">supportFunction</a>
-
- ---------
- author: David Legland
- created the 12/01/2005.
- Copyright 2010 INRA - Cepia Software Platform.</pre></div>
+   polygons2d, <a href="supportFunction.html" class="code" title="function h = supportFunction(polygon, varargin)">supportFunction</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -83,66 +78,63 @@ This function is called by:
 0017 <span class="comment">%</span>
 0018 <span class="comment">%   See also</span>
 0019 <span class="comment">%   polygons2d, supportFunction</span>
-0020 <span class="comment">%</span>
-0021 <span class="comment">% ---------</span>
-0022 <span class="comment">% author: David Legland</span>
-0023 <span class="comment">% created the 12/01/2005.</span>
-0024 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
-0025 <span class="comment">%</span>
+0020 
+0021 <span class="comment">% ------</span>
+0022 <span class="comment">% Author: David Legland</span>
+0023 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0024 <span class="comment">% Created: 2005-01-12</span>
+0025 <span class="comment">% Copyright 2005-2024 INRA - Cepia Software Platform</span>
 0026 
-0027 <span class="comment">%   HISTORY</span>
-0028 <span class="comment">%   13/06/2007: clean up code</span>
-0029 
-0030 <span class="keyword">if</span> ~isempty(varargin)&gt;0
-0031     var = varargin{1};
-0032     <span class="keyword">if</span> size(var, 2)==1
-0033         h = var;
-0034     <span class="keyword">else</span>
-0035         poly = var;
-0036         N = 128;
-0037         <span class="keyword">if</span> length(varargin)&gt;1
-0038             N = varargin{2};
-0039         <span class="keyword">end</span>
-0040         h = <a href="supportFunction.html" class="code" title="function h = supportFunction(polygon, varargin)">supportFunction</a>(poly, N);
-0041     <span class="keyword">end</span>
-0042 <span class="keyword">else</span>
-0043     error(<span class="string">'not enough input arguments'</span>);
-0044 <span class="keyword">end</span>
-0045 
-0046 N   = length(h);
-0047 u   = (0:2*pi/N:2*pi*(1-1/N))';
-0048 v   = [cos(u) sin(u)].*[h h];
-0049 
-0050 i1  = 1:N;
-0051 i2  = [2:N 1];
-0052 i3  = [3:N 1 2];
-0053 
-0054 circ = zeros(N, 4);
-0055 <span class="keyword">for</span> i=1:N
-0056     circ(i, 1:4) = <a href="../../matGeom/geom2d/createDirectedCircle.html" class="code" title="function circle = createDirectedCircle(varargin)">createDirectedCircle</a>(v(i1(i),:), v(i2(i),:), v(i3(i), :));
-0057 <span class="keyword">end</span>
+0027 <span class="keyword">if</span> ~isempty(varargin)&gt;0
+0028     var = varargin{1};
+0029     <span class="keyword">if</span> size(var, 2)==1
+0030         h = var;
+0031     <span class="keyword">else</span>
+0032         poly = var;
+0033         N = 128;
+0034         <span class="keyword">if</span> length(varargin)&gt;1
+0035             N = varargin{2};
+0036         <span class="keyword">end</span>
+0037         h = <a href="supportFunction.html" class="code" title="function h = supportFunction(polygon, varargin)">supportFunction</a>(poly, N);
+0038     <span class="keyword">end</span>
+0039 <span class="keyword">else</span>
+0040     error(<span class="string">'not enough input arguments'</span>);
+0041 <span class="keyword">end</span>
+0042 
+0043 N   = length(h);
+0044 u   = (0:2*pi/N:2*pi*(1-1/N))';
+0045 v   = [cos(u) sin(u)].*[h h];
+0046 
+0047 i1  = 1:N;
+0048 i2  = [2:N 1];
+0049 i3  = [3:N 1 2];
+0050 
+0051 circ = zeros(N, 4);
+0052 <span class="keyword">for</span> i=1:N
+0053     circ(i, 1:4) = <a href="../../matGeom/geom2d/createDirectedCircle.html" class="code" title="function circle = createDirectedCircle(varargin)">createDirectedCircle</a>(v(i1(i),:), v(i2(i),:), v(i3(i), :));
+0054 <span class="keyword">end</span>
+0055 
+0056 <span class="comment">% remove non direct-oriented circles</span>
+0057 circ = circ(circ(:,4)==0, :);
 0058 
-0059 <span class="comment">% remove non direct-oriented circles</span>
-0060 circ = circ(circ(:,4)==0, :);
-0061 
-0062 <span class="comment">% keep only circles seen several times</span>
-0063 dp = diff(circ(:,1:2));
-0064 dp = sum(dp.*dp, 2);
-0065 ind1 = [1; find(dp&lt;1e-10)+1];
-0066 circ = circ(ind1, :);
-0067 
-0068 <span class="comment">% keep only one instance of each circle</span>
-0069 dp = diff(circ(:,1:2));
-0070 dp = sum(dp.*dp, 2);
-0071 ind = [1; find(dp&gt;1e-10)+1];
-0072 co = 2*circ(ind, 1:2);
-0073 
-0074 <span class="comment">% eventually remove the last point if it is the same as the first one</span>
-0075 <span class="keyword">if</span> <a href="../../matGeom/geom2d/distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(co(1,:), co(<span class="keyword">end</span>, :))&lt;1e-10 &amp;&amp; size(co, 1)&gt;1
-0076     co = co(1:end-1,:);
-0077 <span class="keyword">end</span>
-0078 
-0079</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0059 <span class="comment">% keep only circles seen several times</span>
+0060 dp = diff(circ(:,1:2));
+0061 dp = sum(dp.*dp, 2);
+0062 ind1 = [1; find(dp&lt;1e-10)+1];
+0063 circ = circ(ind1, :);
+0064 
+0065 <span class="comment">% keep only one instance of each circle</span>
+0066 dp = diff(circ(:,1:2));
+0067 dp = sum(dp.*dp, 2);
+0068 ind = [1; find(dp&gt;1e-10)+1];
+0069 co = 2*circ(ind, 1:2);
+0070 
+0071 <span class="comment">% eventually remove the last point if it is the same as the first one</span>
+0072 <span class="keyword">if</span> <a href="../../matGeom/geom2d/distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(co(1,:), co(<span class="keyword">end</span>, :))&lt;1e-10 &amp;&amp; size(co, 1)&gt;1
+0073     co = co(1:end-1,:);
+0074 <span class="keyword">end</span>
+0075 
+0076</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

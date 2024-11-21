@@ -94,70 +94,60 @@ This function is called by:
 0026 <span class="comment">%     points3d, clipPoints3d, drawPoint</span>
 0027 <span class="comment">%</span>
 0028 
-0029 <span class="comment">% ---------</span>
+0029 <span class="comment">% ------</span>
 0030 <span class="comment">% Author : David Legland</span>
-0031 <span class="comment">% INRA - TPV URPOI - BIA IMASTE</span>
-0032 <span class="comment">% created the 18/02/2005.</span>
-0033 <span class="comment">%</span>
-0034 <span class="comment">%   HISTORY</span>
-0035 <span class="comment">%   04/01/2007: remove unused variables, and enhance support for plot</span>
-0036 <span class="comment">%       options</span>
-0037 <span class="comment">%   12/02/2010 does not clip points anymore</span>
-0038 <span class="comment">%   12/01/2018 added axes handle input</span>
-0039 <span class="comment">%</span>
-0040 
-0041 <span class="keyword">if</span> isAxisHandle(varargin{1})
-0042     hAx = varargin{1};
-0043     varargin(1)=[];
-0044 <span class="keyword">else</span>
-0045     hAx = gca;
-0046 <span class="keyword">end</span>
-0047 
-0048 <span class="keyword">if</span> length(varargin) == 1 &amp;&amp; size(varargin{1}, 2) == 3
-0049     <span class="comment">% points are given as one single array with 3 columns</span>
-0050     px = varargin{1}(:,1);
-0051     py = varargin{1}(:,2);
-0052     pz = varargin{1}(:,3);
-0053     varargin = {};
-0054 <span class="keyword">elseif</span> length(varargin) == 2 &amp;&amp; size(varargin{1}, 2) == 3
-0055     <span class="comment">% points are given as one single array with 3 columns</span>
-0056     px = varargin{1}(:,1);
-0057     py = varargin{1}(:,2);
-0058     pz = varargin{1}(:,3);
-0059     varargin = varargin(2);
-0060 <span class="keyword">elseif</span> length(varargin) &gt;= 3 &amp;&amp; size(varargin{1}, 2) == 3
-0061     <span class="comment">% points are given as one single array with 3 columns</span>
-0062     px = varargin{1}(:,1);
-0063     py = varargin{1}(:,2);
-0064     pz = varargin{1}(:,3);
-0065     varargin = varargin(2:end);
-0066 <span class="keyword">elseif</span> length(varargin) == 3 &amp;&amp; numel(varargin{1})==numel(varargin{2}) &amp;&amp; numel(varargin{1})==numel(varargin{3})
-0067     <span class="comment">% points are given as 3 columns with equal lengths</span>
-0068     px = varargin{1};
-0069     py = varargin{2};
-0070     pz = varargin{3};
-0071     varargin = {};
-0072 <span class="keyword">elseif</span> length(varargin) &gt; 3
-0073     <span class="comment">% points are given as 3 columns with equal lengths</span>
-0074     px = varargin{1};
-0075     py = varargin{2};
-0076     pz = varargin{3};
-0077     varargin = varargin(4:end);
-0078 <span class="keyword">else</span>
-0079     error(<span class="string">'wrong number of arguments in drawPoint3d'</span>);
-0080 <span class="keyword">end</span>
-0081 
-0082 <span class="comment">% default draw style: no line, marker is 'o'</span>
-0083 <span class="keyword">if</span> length(varargin) ~= 1
-0084     varargin = [<span class="string">'linestyle'</span>, <span class="string">'none'</span>, <span class="string">'marker'</span>, <span class="string">'o'</span>, varargin];
-0085 <span class="keyword">end</span>
-0086 
-0087 <span class="comment">% plot only points inside the axis.</span>
-0088 hh = plot3(hAx, px, py, pz, varargin{:});
-0089 
-0090 <span class="keyword">if</span> nargout &gt; 0
-0091     h = hh;
-0092 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0031 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0032 <span class="comment">% Created: 2005-02-18</span>
+0033 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0034 
+0035 <span class="comment">% extract handle of axis to draw on</span>
+0036 [hAx, varargin] = parseAxisHandle(varargin{:});
+0037 
+0038 <span class="keyword">if</span> isscalar(varargin) &amp;&amp; size(varargin{1}, 2) == 3
+0039     <span class="comment">% points are given as one single array with 3 columns</span>
+0040     px = varargin{1}(:,1);
+0041     py = varargin{1}(:,2);
+0042     pz = varargin{1}(:,3);
+0043     varargin = {};
+0044 <span class="keyword">elseif</span> length(varargin) == 2 &amp;&amp; size(varargin{1}, 2) == 3
+0045     <span class="comment">% points are given as one single array with 3 columns</span>
+0046     px = varargin{1}(:,1);
+0047     py = varargin{1}(:,2);
+0048     pz = varargin{1}(:,3);
+0049     varargin = varargin(2);
+0050 <span class="keyword">elseif</span> length(varargin) &gt;= 3 &amp;&amp; size(varargin{1}, 2) == 3
+0051     <span class="comment">% points are given as one single array with 3 columns</span>
+0052     px = varargin{1}(:,1);
+0053     py = varargin{1}(:,2);
+0054     pz = varargin{1}(:,3);
+0055     varargin = varargin(2:end);
+0056 <span class="keyword">elseif</span> length(varargin) == 3 &amp;&amp; numel(varargin{1})==numel(varargin{2}) &amp;&amp; numel(varargin{1})==numel(varargin{3})
+0057     <span class="comment">% points are given as 3 columns with equal lengths</span>
+0058     px = varargin{1};
+0059     py = varargin{2};
+0060     pz = varargin{3};
+0061     varargin = {};
+0062 <span class="keyword">elseif</span> length(varargin) &gt; 3
+0063     <span class="comment">% points are given as 3 columns with equal lengths</span>
+0064     px = varargin{1};
+0065     py = varargin{2};
+0066     pz = varargin{3};
+0067     varargin = varargin(4:end);
+0068 <span class="keyword">else</span>
+0069     error(<span class="string">'wrong number of arguments in drawPoint3d'</span>);
+0070 <span class="keyword">end</span>
+0071 
+0072 <span class="comment">% default draw style: no line, marker is 'o'</span>
+0073 <span class="keyword">if</span> length(varargin) ~= 1
+0074     varargin = [<span class="string">'linestyle'</span>, <span class="string">'none'</span>, <span class="string">'marker'</span>, <span class="string">'o'</span>, varargin];
+0075 <span class="keyword">end</span>
+0076 
+0077 <span class="comment">% plot only points inside the axis.</span>
+0078 hh = plot3(hAx, px, py, pz, varargin{:});
+0079 
+0080 <span class="keyword">if</span> nargout &gt; 0
+0081     h = hh;
+0082 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

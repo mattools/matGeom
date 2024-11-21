@@ -56,7 +56,7 @@ This function calls:
 </ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="principalAxesTransform.html" class="code" title="function varargout = principalAxesTransform(pts)">principalAxesTransform</a>	Align a set of points along its principal axes.</li></ul>
+<li><a href="principalAxesTransform.html" class="code" title="function varargout = principalAxesTransform(pts)">principalAxesTransform</a>	PRINCIPALAXESTRANSFORM Align a set of points along its principal axes.</li></ul>
 <!-- crossreference -->
 
 
@@ -85,47 +85,43 @@ This function is called by:
 0021 <span class="comment">%   See also</span>
 0022 <span class="comment">%     equivalentEllipse, equivalentEllipsoid, principalAxesTransform</span>
 0023 <span class="comment">%</span>
-0024  
+0024 
 0025 <span class="comment">% ------</span>
 0026 <span class="comment">% Author: David Legland</span>
-0027 <span class="comment">% e-mail: david.legland@inrae.fr</span>
-0028 <span class="comment">% Created: 2019-08-12,    using Matlab 9.6.0.1072779 (R2019a)</span>
-0029 <span class="comment">% Copyright 2019 INRAE - Cepia Software Platform.</span>
+0027 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0028 <span class="comment">% Created: 2019-08-12, using Matlab 9.6.0.1072779 (R2019a)</span>
+0029 <span class="comment">% Copyright 2019-2024 INRAE - Cepia Software Platform</span>
 0030 
-0031 <span class="comment">% number and dimension of points</span>
-0032 n = size(points, 1);
-0033 nd = size(points, 2);
-0034 
-0035 <span class="comment">% compute centroid</span>
-0036 center = mean(points);
-0037 
-0038 <span class="comment">% compute the covariance matrix</span>
-0039 covPts = cov(points) / n;
-0040 
-0041 <span class="comment">% perform a principal component analysis to extract principal axes</span>
-0042 [rotMat, S] = svd(covPts);
-0043 
-0044 <span class="comment">% extract length of each semi axis</span>
-0045 radii = sqrt(diag(S) * n);
+0031 <span class="comment">% compute centroid of points to estimate center</span>
+0032 center = mean(points);
+0033 
+0034 <span class="comment">% compute the covariance matrix</span>
+0035 covPts = cov(points);
+0036 
+0037 <span class="comment">% perform a principal component analysis to extract principal axes</span>
+0038 [rotMat, S] = svd(covPts);
+0039 
+0040 <span class="comment">% extract length of each semi axis</span>
+0041 radii = sqrt(diag(S));
+0042 
+0043 <span class="comment">% sort axes from greater to lower</span>
+0044 [radii, ind] = sort(radii, <span class="string">'descend'</span>);
+0045 radii = radii';
 0046 
-0047 <span class="comment">% sort axes from greater to lower</span>
-0048 [radii, ind] = sort(radii, <span class="string">'descend'</span>);
-0049 radii = radii';
-0050 
-0051 <span class="comment">% format U to ensure first axis points to positive x direction</span>
-0052 rotMat = rotMat(ind, :);
-0053 <span class="keyword">if</span> rotMat(1,1) &lt; 0 &amp;&amp; nd &gt; 2
-0054     rotMat = -rotMat;
-0055     <span class="comment">% keep matrix determinant positive</span>
-0056     rotMat(:,3) = -rotMat(:,3);
-0057 <span class="keyword">end</span>
-0058 
-0059 <span class="comment">% format output</span>
-0060 <span class="keyword">if</span> nargout == 2
-0061     varargout = {center, rotMat};
-0062 <span class="keyword">elseif</span> nargout == 3
-0063     varargout = {center, rotMat, radii};
-0064 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0047 <span class="comment">% format U to ensure first axis points to positive x direction</span>
+0048 rotMat = rotMat(ind, :);
+0049 <span class="keyword">if</span> rotMat(1,1) &lt; 0 &amp;&amp; size(points, 2) &gt; 2
+0050     rotMat = -rotMat;
+0051     <span class="comment">% keep matrix determinant positive</span>
+0052     rotMat(:,3) = -rotMat(:,3);
+0053 <span class="keyword">end</span>
+0054 
+0055 <span class="comment">% format output</span>
+0056 <span class="keyword">if</span> nargout == 2
+0057     varargout = {center, rotMat};
+0058 <span class="keyword">elseif</span> nargout == 3
+0059     varargout = {center, rotMat, radii};
+0060 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

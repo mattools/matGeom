@@ -79,7 +79,7 @@ This function calls:
 <li><a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>	CREATEROTATIONOX Create the 4x4 matrix of a 3D rotation around x-axis.</li><li><a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>	CREATEROTATIONOY Create the 4x4 matrix of a 3D rotation around y-axis.</li><li><a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>	CREATEROTATIONOZ Create the 4x4 matrix of a 3D rotation around z-axis.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="fitEllipse3d.html" class="code" title="function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin)">fitEllipse3d</a>	FITELLIPSE3D Fit an ellipse to a set of points.</li><li><a href="isPointInEllipsoid.html" class="code" title="function b = isPointInEllipsoid(point, elli, varargin)">isPointInEllipsoid</a>	Check if a point is located inside a 3D ellipsoid.</li></ul>
+<li><a href="fitEllipse3d.html" class="code" title="function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin)">fitEllipse3d</a>	FITELLIPSE3D Fit an ellipse to a set of points.</li><li><a href="isPointInEllipsoid.html" class="code" title="function b = isPointInEllipsoid(point, elli, varargin)">isPointInEllipsoid</a>	ISPOINTINELLIPSOID Check if a point is located inside a 3D ellipsoid.</li></ul>
 <!-- crossreference -->
 
 
@@ -134,88 +134,85 @@ This function is called by:
 0047 
 0048 <span class="comment">% ------</span>
 0049 <span class="comment">% Author: David Legland</span>
-0050 <span class="comment">% e-mail: david.legland@inra.fr</span>
-0051 <span class="comment">% Created: 2010-07-22,    using Matlab 7.9.0.529 (R2009b)</span>
-0052 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0050 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0051 <span class="comment">% Created: 2010-07-22, using Matlab 7.9.0.529 (R2009b)</span>
+0052 <span class="comment">% Copyright 2010-2024 INRA - Cepia Software Platform</span>
 0053 
-0054 <span class="comment">%   HISTORY</span>
-0055 <span class="comment">%   2011-06-20 rename and use degrees</span>
-0056 
-0057 <span class="comment">% Process input arguments</span>
-0058 <span class="keyword">if</span> size(phi, 2) == 3
-0059     <span class="keyword">if</span> nargin &gt; 1
-0060         varargin{1} = theta;
-0061     <span class="keyword">end</span>
-0062     <span class="comment">% manages arguments given as one array</span>
-0063     psi     = phi(:, 3);
-0064     theta   = phi(:, 2);
-0065     phi     = phi(:, 1);
-0066 <span class="keyword">end</span>
-0067 
-0068 p = inputParser;
-0069 validStrings = {<span class="keyword">...</span>
-0070     <span class="string">'ZYX'</span>,<span class="string">'ZXY'</span>,<span class="string">'YXZ'</span>,<span class="string">'YZX'</span>,<span class="string">'XYZ'</span>,<span class="string">'XZY'</span>,<span class="keyword">...</span>
-0071     <span class="string">'ZYZ'</span>,<span class="string">'ZXZ'</span>,<span class="string">'YZY'</span>,<span class="string">'YXY'</span>,<span class="string">'XZX'</span>,<span class="string">'XYX'</span>};
-0072 addOptional(p,<span class="string">'convention'</span>,<span class="string">'ZYX'</span>,@(x) any(validatestring(x,validStrings)));
-0073 parse(p,varargin{:});
-0074 convention=p.Results.convention;
+0054 <span class="comment">% Process input arguments</span>
+0055 <span class="keyword">if</span> size(phi, 2) == 3
+0056     <span class="keyword">if</span> nargin &gt; 1
+0057         varargin{1} = theta;
+0058     <span class="keyword">end</span>
+0059     <span class="comment">% manages arguments given as one array</span>
+0060     psi     = phi(:, 3);
+0061     theta   = phi(:, 2);
+0062     phi     = phi(:, 1);
+0063 <span class="keyword">end</span>
+0064 
+0065 p = inputParser;
+0066 validStrings = {<span class="keyword">...</span>
+0067     <span class="string">'ZYX'</span>,<span class="string">'ZXY'</span>,<span class="string">'YXZ'</span>,<span class="string">'YZX'</span>,<span class="string">'XYZ'</span>,<span class="string">'XZY'</span>,<span class="keyword">...</span>
+0068     <span class="string">'ZYZ'</span>,<span class="string">'ZXZ'</span>,<span class="string">'YZY'</span>,<span class="string">'YXY'</span>,<span class="string">'XZX'</span>,<span class="string">'XYX'</span>};
+0069 addOptional(p,<span class="string">'convention'</span>,<span class="string">'ZYX'</span>,@(x) any(validatestring(x,validStrings)));
+0070 parse(p,varargin{:});
+0071 convention=p.Results.convention;
+0072 
+0073 <span class="comment">% create individual rotation matrices</span>
+0074 k = pi / 180;
 0075 
-0076 <span class="comment">% create individual rotation matrices</span>
-0077 k = pi / 180;
-0078 
-0079 <span class="keyword">switch</span> convention
-0080     <span class="keyword">case</span> <span class="string">'ZYX'</span>
-0081         rot1 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(psi * k);
-0082         rot2 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(theta * k);
-0083         rot3 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(phi * k);
-0084     <span class="keyword">case</span> <span class="string">'ZXY'</span>
-0085         rot1 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(psi * k);
-0086         rot2 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(theta * k);
-0087         rot3 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(phi * k);
-0088     <span class="keyword">case</span> <span class="string">'YXZ'</span>
-0089         rot1 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(psi * k);
-0090         rot2 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(theta * k);
-0091         rot3 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(phi * k);
-0092     <span class="keyword">case</span> <span class="string">'YZX'</span>
-0093         rot1 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(psi * k);
-0094         rot2 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(theta * k);
-0095         rot3 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(phi * k);
-0096     <span class="keyword">case</span> <span class="string">'XYZ'</span>
-0097         rot1 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(psi * k);
-0098         rot2 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(theta * k);
-0099         rot3 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(phi * k);
-0100     <span class="keyword">case</span> <span class="string">'XZY'</span>
-0101         rot1 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(psi * k);
-0102         rot2 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(theta * k);
-0103         rot3 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(phi * k);
-0104     <span class="keyword">case</span> <span class="string">'ZYZ'</span>
-0105         rot1 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(psi * k);
-0106         rot2 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(theta * k);
-0107         rot3 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(phi * k);
-0108     <span class="keyword">case</span> <span class="string">'ZXZ'</span>
-0109         rot1 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(psi * k);
-0110         rot2 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(theta * k);
-0111         rot3 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(phi * k);
-0112     <span class="keyword">case</span> <span class="string">'YZY'</span>
-0113         rot1 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(psi * k);
-0114         rot2 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(theta * k);
-0115         rot3 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(phi * k);
-0116     <span class="keyword">case</span> <span class="string">'YXY'</span>
-0117         rot1 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(psi * k);
-0118         rot2 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(theta * k);
-0119         rot3 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(phi * k);
-0120     <span class="keyword">case</span> <span class="string">'XZX'</span>
-0121         rot1 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(psi * k);
-0122         rot2 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(theta * k);
-0123         rot3 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(phi * k);
-0124     <span class="keyword">case</span> <span class="string">'XYX'</span>
-0125         rot1 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(psi * k);
-0126         rot2 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(theta * k);
-0127         rot3 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(phi * k);
-0128 <span class="keyword">end</span>
-0129 
-0130 <span class="comment">% concatenate matrices</span>
-0131 mat = rot3 * rot2 * rot1;</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0076 <span class="keyword">switch</span> convention
+0077     <span class="keyword">case</span> <span class="string">'ZYX'</span>
+0078         rot1 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(psi * k);
+0079         rot2 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(theta * k);
+0080         rot3 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(phi * k);
+0081     <span class="keyword">case</span> <span class="string">'ZXY'</span>
+0082         rot1 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(psi * k);
+0083         rot2 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(theta * k);
+0084         rot3 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(phi * k);
+0085     <span class="keyword">case</span> <span class="string">'YXZ'</span>
+0086         rot1 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(psi * k);
+0087         rot2 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(theta * k);
+0088         rot3 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(phi * k);
+0089     <span class="keyword">case</span> <span class="string">'YZX'</span>
+0090         rot1 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(psi * k);
+0091         rot2 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(theta * k);
+0092         rot3 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(phi * k);
+0093     <span class="keyword">case</span> <span class="string">'XYZ'</span>
+0094         rot1 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(psi * k);
+0095         rot2 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(theta * k);
+0096         rot3 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(phi * k);
+0097     <span class="keyword">case</span> <span class="string">'XZY'</span>
+0098         rot1 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(psi * k);
+0099         rot2 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(theta * k);
+0100         rot3 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(phi * k);
+0101     <span class="keyword">case</span> <span class="string">'ZYZ'</span>
+0102         rot1 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(psi * k);
+0103         rot2 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(theta * k);
+0104         rot3 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(phi * k);
+0105     <span class="keyword">case</span> <span class="string">'ZXZ'</span>
+0106         rot1 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(psi * k);
+0107         rot2 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(theta * k);
+0108         rot3 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(phi * k);
+0109     <span class="keyword">case</span> <span class="string">'YZY'</span>
+0110         rot1 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(psi * k);
+0111         rot2 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(theta * k);
+0112         rot3 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(phi * k);
+0113     <span class="keyword">case</span> <span class="string">'YXY'</span>
+0114         rot1 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(psi * k);
+0115         rot2 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(theta * k);
+0116         rot3 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(phi * k);
+0117     <span class="keyword">case</span> <span class="string">'XZX'</span>
+0118         rot1 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(psi * k);
+0119         rot2 = <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>(theta * k);
+0120         rot3 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(phi * k);
+0121     <span class="keyword">case</span> <span class="string">'XYX'</span>
+0122         rot1 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(psi * k);
+0123         rot2 = <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>(theta * k);
+0124         rot3 = <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>(phi * k);
+0125 <span class="keyword">end</span>
+0126 
+0127 <span class="comment">% concatenate matrices</span>
+0128 mat = rot3 * rot2 * rot1;</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

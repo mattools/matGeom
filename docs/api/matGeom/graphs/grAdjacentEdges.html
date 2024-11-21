@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of grAdjacentEdges</title>
+  <meta name="keywords" content="grAdjacentEdges">
+  <meta name="description" content="GRADJACENTEDGES Find list of edges adjacent to a given node.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; grAdjacentEdges.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>grAdjacentEdges
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>GRADJACENTEDGES Find list of edges adjacent to a given node.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function neigh = grAdjacentEdges(edges, node) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">GRADJACENTEDGES Find list of edges adjacent to a given node.
+
+   NEIGHS = grAdjacentEdges(EDGES, NODE)
+   EDGES  the complete edges list (containing indices of neighbor nodes)
+   NODE   index of the node
+   NEIGHS the indices of edges containing the node index
+
+   See also
+     <a href="grAdjacentNodes.html" class="code" title="function nodes2 = grAdjacentNodes(edges, node)">grAdjacentNodes</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="grPropagateDistance.html" class="code" title="function d = grPropagateDistance(v, e, v0, l)">grPropagateDistance</a>	GRPROPAGATEDISTANCE Propagates distances from a vertex to other vertices.</li><li><a href="grRemoveNode.html" class="code" title="function [nodes2, edges2] = grRemoveNode(nodes, edges, node)">grRemoveNode</a>	GRREMOVENODE Remove a node in a graph.</li><li><a href="grShortestPath.html" class="code" title="function [nodePath, edgePath] = grShortestPath(nodes, edges, ind0, ind1, edgeWeights)">grShortestPath</a>	GRSHORTESTPATH Find a shortest path between two nodes in the graph.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function neigh = grAdjacentEdges(edges, node)</a>
+0002 <span class="comment">%GRADJACENTEDGES Find list of edges adjacent to a given node.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   NEIGHS = grAdjacentEdges(EDGES, NODE)</span>
+0005 <span class="comment">%   EDGES  the complete edges list (containing indices of neighbor nodes)</span>
+0006 <span class="comment">%   NODE   index of the node</span>
+0007 <span class="comment">%   NEIGHS the indices of edges containing the node index</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   See also</span>
+0010 <span class="comment">%     grAdjacentNodes</span>
+0011 
+0012 <span class="comment">% ------</span>
+0013 <span class="comment">% Author: David Legland</span>
+0014 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0015 <span class="comment">% Created: 2003-08-13</span>
+0016 <span class="comment">% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0017 
+0018 neigh = find(edges(:,1) == node | edges(:,2) == node);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

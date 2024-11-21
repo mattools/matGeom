@@ -47,12 +47,7 @@
    <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>, <a href="createRotationOx.html" class="code" title="function trans = createRotationOx(varargin)">createRotationOx</a>, <a href="createRotationOy.html" class="code" title="function trans = createRotationOy(varargin)">createRotationOy</a>, <a href="createRotationOz.html" class="code" title="function trans = createRotationOz(varargin)">createRotationOz</a>
 
    Source
-     https://math.stackexchange.com/a/897677
-
- ---------
- Author: oqilipo
- Created: 2017-08-07
- Copyright 2017</pre></div>
+     https://math.stackexchange.com/a/897677</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -61,7 +56,7 @@ This function calls:
 <li><a href="isParallel3d.html" class="code" title="function b = isParallel3d(v1, v2, varargin)">isParallel3d</a>	ISPARALLEL3D Check parallelism of two 3D vectors.</li><li><a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>	NORMALIZEVECTOR3D Normalize a 3D vector to have norm equal to 1.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="createRotationVectorPoint3d.html" class="code" title="function TFM = createRotationVectorPoint3d(A,B,P)">createRotationVectorPoint3d</a>	CREATEROTATIONVECTORPOINT3D Calculates the rotation between two vectors.</li><li><a href="drawAngleBetweenVectors3d.html" class="code" title="function varargout = drawAngleBetweenVectors3d(o, v1, v2, r, varargin)">drawAngleBetweenVectors3d</a>	DRAWANGLEBETWEENVECTORS3D Draw an arc between 2 vectors.</li><li><a href="drawArrow3d.html" class="code" title="function varargout = drawArrow3d(pos, vec, varargin)">drawArrow3d</a>	DRAWARROW3D plot a quiver of 3D arrows.</li><li><a href="geodesicCylinder.html" class="code" title="function [geo, geoLength, conGeo, conGeoLength] = geodesicCylinder(pts, cyl, varargin)">geodesicCylinder</a>	GEODESICCYLINDER computes the geodesic between two points on a cylinder.</li><li><a href="projPointOnCylinder.html" class="code" title="function ptProj = projPointOnCylinder(pt, cyl, varargin)">projPointOnCylinder</a>	PROJPOINTONCYLINDER Project a 3D point onto a cylinder.</li></ul>
+<li><a href="createRotationVectorPoint3d.html" class="code" title="function TFM = createRotationVectorPoint3d(A,B,P)">createRotationVectorPoint3d</a>	CREATEROTATIONVECTORPOINT3D Calculates the rotation between two vectors.</li><li><a href="drawAngleBetweenVectors3d.html" class="code" title="function varargout = drawAngleBetweenVectors3d(varargin)">drawAngleBetweenVectors3d</a>	DRAWANGLEBETWEENVECTORS3D Draw an arc between 2 vectors.</li><li><a href="drawArrow3d.html" class="code" title="function varargout = drawArrow3d(varargin)">drawArrow3d</a>	DRAWARROW3D Plot a quiver of 3D arrows.</li><li><a href="geodesicCylinder.html" class="code" title="function [geo, geoLength, conGeo, conGeoLength] = geodesicCylinder(pts, cyl, varargin)">geodesicCylinder</a>	GEODESICCYLINDER Computes the geodesic between two points on a cylinder.</li><li><a href="projPointOnCylinder.html" class="code" title="function ptProj = projPointOnCylinder(pt, cyl, varargin)">projPointOnCylinder</a>	PROJPOINTONCYLINDER Project a 3D point onto a cylinder.</li></ul>
 <!-- crossreference -->
 
 
@@ -89,32 +84,33 @@ This function is called by:
 0020 <span class="comment">%</span>
 0021 <span class="comment">%   Source</span>
 0022 <span class="comment">%     https://math.stackexchange.com/a/897677</span>
-0023 <span class="comment">%</span>
-0024 <span class="comment">% ---------</span>
+0023 
+0024 <span class="comment">% ------</span>
 0025 <span class="comment">% Author: oqilipo</span>
-0026 <span class="comment">% Created: 2017-08-07</span>
-0027 <span class="comment">% Copyright 2017</span>
-0028 
-0029 <span class="keyword">if</span> <a href="isParallel3d.html" class="code" title="function b = isParallel3d(v1, v2, varargin)">isParallel3d</a>(A,B)
-0030     <span class="keyword">if</span> A*B'&gt;0
-0031         ROT = eye(4);
-0032     <span class="keyword">else</span>
-0033         ROT = -1*eye(4); ROT(end)=1;
-0034     <span class="keyword">end</span>
-0035 <span class="keyword">else</span>
-0036     a=<a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(A);
-0037     b=<a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(B);
-0038     a=reshape(a,3,1);
-0039     b=reshape(b,3,1);
-0040     
-0041     v = cross(a,b);
-0042     ssc = [0 -v(3) v(2); v(3) 0 -v(1); -v(2) v(1) 0];
-0043     ROT = eye(3) + ssc + ssc^2*(1-dot(a,b))/(norm(v))^2;
-0044     
-0045     ROT = [ROT, [0;0;0]; 0 0 0 1];
-0046 <span class="keyword">end</span>
-0047 
-0048 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0026 <span class="comment">% E-mail: N/A</span>
+0027 <span class="comment">% Created: 2017-08-07</span>
+0028 <span class="comment">% Copyright 2017-2024</span>
+0029 
+0030 <span class="keyword">if</span> <a href="isParallel3d.html" class="code" title="function b = isParallel3d(v1, v2, varargin)">isParallel3d</a>(A,B)
+0031     <span class="keyword">if</span> A*B'&gt;0
+0032         ROT = eye(4);
+0033     <span class="keyword">else</span>
+0034         ROT = -1*eye(4); ROT(end)=1;
+0035     <span class="keyword">end</span>
+0036 <span class="keyword">else</span>
+0037     a=<a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(A);
+0038     b=<a href="normalizeVector3d.html" class="code" title="function vn = normalizeVector3d(v)">normalizeVector3d</a>(B);
+0039     a=reshape(a,3,1);
+0040     b=reshape(b,3,1);
+0041     
+0042     v = cross(a,b);
+0043     ssc = [0 -v(3) v(2); v(3) 0 -v(1); -v(2) v(1) 0];
+0044     ROT = eye(3) + ssc + ssc^2*(1-dot(a,b))/(norm(v))^2;
+0045     
+0046     ROT = [ROT, [0;0;0]; 0 0 0 1];
+0047 <span class="keyword">end</span>
+0048 
+0049 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

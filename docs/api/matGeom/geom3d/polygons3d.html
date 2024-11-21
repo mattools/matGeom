@@ -34,17 +34,11 @@
    Several functions are provided for computing basic geometrical
    parameters (centroid, angles), or intersections with lines or planes.
 
-   See also:
-   <a href="polygonArea3d.html" class="code" title="function area = polygonArea3d(poly, varargin)">polygonArea3d</a>, <a href="triangleArea3d.html" class="code" title="function area = triangleArea3d(pt1, pt2, pt3)">triangleArea3d</a>, <a href="polygonCentroid3d.html" class="code" title="function centroid = polygonCentroid3d(varargin)">polygonCentroid3d</a>, <a href="polygon3dNormalAngle.html" class="code" title="function theta = polygon3dNormalAngle(points, ind)">polygon3dNormalAngle</a>
+   See also
+   <a href="polygonArea3d.html" class="code" title="function area = polygonArea3d(poly, varargin)">polygonArea3d</a>, <a href="triangleArea3d.html" class="code" title="function area = triangleArea3d(pt1, pt2, pt3)">triangleArea3d</a>, <a href="polygonCentroid3d.html" class="code" title="function [centroid, area] = polygonCentroid3d(varargin)">polygonCentroid3d</a>, <a href="polygon3dNormalAngle.html" class="code" title="function theta = polygon3dNormalAngle(points, ind)">polygon3dNormalAngle</a>
    <a href="intersectLinePolygon3d.html" class="code" title="function [inter, inside]= intersectLinePolygon3d(line, poly)">intersectLinePolygon3d</a>, <a href="intersectLineTriangle3d.html" class="code" title="function [point, pos, isInside] = intersectLineTriangle3d(line, triangle, varargin)">intersectLineTriangle3d</a>, <a href="intersectRayPolygon3d.html" class="code" title="function [inter, inside]= intersectRayPolygon3d(ray, poly)">intersectRayPolygon3d</a>
-   <a href="clipConvexPolygon3dHP.html" class="code" title="function poly2 = clipConvexPolygon3dHP(poly, plane)">clipConvexPolygon3dHP</a>
-   <a href="drawPolygon3d.html" class="code" title="function varargout = drawPolygon3d(varargin)">drawPolygon3d</a>, <a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>, <a href="fillPolygon3d.html" class="code" title="function varargout = fillPolygon3d(varargin)">fillPolygon3d</a>
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)
- Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</pre></div>
+   <a href="clipPolygonByPlane3d.html" class="code" title="function poly2 = clipPolygonByPlane3d(poly, plane, varargin)">clipPolygonByPlane3d</a>
+   <a href="drawPolygon3d.html" class="code" title="function varargout = drawPolygon3d(varargin)">drawPolygon3d</a>, <a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>, <a href="fillPolygon3d.html" class="code" title="function varargout = fillPolygon3d(varargin)">fillPolygon3d</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -67,17 +61,17 @@ This function is called by:
 0006 <span class="comment">%   Several functions are provided for computing basic geometrical</span>
 0007 <span class="comment">%   parameters (centroid, angles), or intersections with lines or planes.</span>
 0008 <span class="comment">%</span>
-0009 <span class="comment">%   See also:</span>
+0009 <span class="comment">%   See also</span>
 0010 <span class="comment">%   polygonArea3d, triangleArea3d, polygonCentroid3d, polygon3dNormalAngle</span>
 0011 <span class="comment">%   intersectLinePolygon3d, intersectLineTriangle3d, intersectRayPolygon3d</span>
-0012 <span class="comment">%   clipConvexPolygon3dHP</span>
+0012 <span class="comment">%   clipPolygonByPlane3d</span>
 0013 <span class="comment">%   drawPolygon3d, drawPolyline3d, fillPolygon3d</span>
-0014 <span class="comment">%</span>
+0014 
 0015 <span class="comment">% ------</span>
 0016 <span class="comment">% Author: David Legland</span>
-0017 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0018 <span class="comment">% Created: 2008-10-13,    using Matlab 7.4.0.287 (R2007a)</span>
-0019 <span class="comment">% Copyright 2008 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas.</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0017 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0018 <span class="comment">% Created: 2008-10-13, using Matlab 7.4.0.287 (R2007a)</span>
+0019 <span class="comment">% Copyright 2008-2024 INRA - BIA PV Nantes - MIAJ Jouy-en-Josas</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

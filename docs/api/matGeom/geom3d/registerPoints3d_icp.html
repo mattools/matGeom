@@ -1,0 +1,466 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of registerPoints3d_icp</title>
+  <meta name="keywords" content="registerPoints3d_icp">
+  <meta name="description" content="REGISTERPOINTS3D_ICP Computes rigid transform between two 3D point sets.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; registerPoints3d_icp.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>registerPoints3d_icp
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>REGISTERPOINTS3D_ICP Computes rigid transform between two 3D point sets.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [transfo, pt, ER, t] = registerPoints3d_icp(p, q, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">REGISTERPOINTS3D_ICP Computes rigid transform between two 3D point sets.
+
+   TRANSFO = registerPoints3d_icp(SOURCE, TARGET)
+   Computes the 3D rigid transform (composed of a rotation and a
+   translation) that maps the shape defined by the SOURCE points onto the
+   shape defined by the the TARGET points, using the &quot;Iterated Closest
+   Point&quot; (ICP) algorithm. 
+   Both SOURCE and TARGET are N-by-3 numeric arrays representing point
+   coordinates, not necessarily the same size. 
+   The result TRANSFO is a 4-by-4 matrix representing the final affine
+   transform.  
+
+   TRANSFO = registerPoints3d_icp(SOURCE, TARGET, NITERS)
+   Specifies the number of iterations of the algorithm (default is 10).
+
+   [TRANSFO, RES] = registerPoints3d_icp(...)
+   Also returns the result of the transform applied to SOURCE points.
+
+   [TRANSFO, RES, ER] = registerPoints3d_icp(...)
+   Also returns the error according to the iteration, as a NITERS+1 array
+   of numeric values.
+
+   [TRANSFO, RES, ER, T] = registerPoints3d_icp(...)
+   Also returns the time spent for each iteration, as a NITERS+1 array
+   of numeric values. T(1) corresponds to initialization time, T(end)
+   corresponds to the total processing time
+
+   [...] = registerPoints3d_icp(..., PNAME, PVALUE)
+   Specifies additional optional arguments are parameter name-value pairs.
+   Supported parameter names are:
+   * 'Matching'    The point matching method. Can be one of 'naive'
+       (the slowest), 'delaunay' (use a Delaunay diagram to reduce
+       computations) or 'kdTree' (use a kd-Tree data structure. This is
+       usually the fastest, but requires the Statistics Toolbox).
+
+
+   Example
+   registerPoints3d_icp
+
+   See also
+     <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="registerPoints3d_affine.html" class="code" title="function [trans, points] = registerPoints3d_affine(points, target, varargin)">registerPoints3d_affine</a>, registerICP, pcregistericp
+
+ Rewritten from the &quot;icp&quot; function, by Martin Kjer and Jakob Wilm,
+ Technical University of Denmark, 2012.
+ Notable differences:
+ * SOURCE and TARGET input arrays are given as N-by-3 arrays (using the
+   general MatGeom convention) rather than 3-by-N arrays.
+ * The resulting transform is packed into a single 4-by-4 array,
+   representing the affine transfom matrix in homogeneous coordinates.
+ * All the options available in the original file are not managed in this
+   port.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="registerPoints3d.html" class="code" title="function [tfm, pts, varargout] = registerPoints3d(source, target, varargin)">registerPoints3d</a>	REGISTERPOINTS3D Computes a rigid transform between two 3D point sets.</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function [inds, minDist] = matchPoints_naive(p, q)</a></li><li><a href="#_sub2" class="code">function [inds, minDist] = matchPoints_Delaunay(p, DT)</a></li><li><a href="#_sub3" class="code">function [inds, minDist] = matchPoints_kDtree(p, kdTree)</a></li><li><a href="#_sub4" class="code">function [R, T] = eq_point(q, p, weights)</a></li><li><a href="#_sub5" class="code">function [R, T] = eq_plane(q, p, n, weights)</a></li><li><a href="#_sub6" class="code">function [R, T] = eq_lmaPoint(q, p)</a></li><li><a href="#_sub7" class="code">function ER = rmse(p1, p2)</a></li><li><a href="#_sub8" class="code">function n = estimateVertexNormals(p, k)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [transfo, pt, ER, t] = registerPoints3d_icp(p, q, varargin)</a>
+0002 <span class="comment">%REGISTERPOINTS3D_ICP Computes rigid transform between two 3D point sets.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   TRANSFO = registerPoints3d_icp(SOURCE, TARGET)</span>
+0005 <span class="comment">%   Computes the 3D rigid transform (composed of a rotation and a</span>
+0006 <span class="comment">%   translation) that maps the shape defined by the SOURCE points onto the</span>
+0007 <span class="comment">%   shape defined by the the TARGET points, using the &quot;Iterated Closest</span>
+0008 <span class="comment">%   Point&quot; (ICP) algorithm.</span>
+0009 <span class="comment">%   Both SOURCE and TARGET are N-by-3 numeric arrays representing point</span>
+0010 <span class="comment">%   coordinates, not necessarily the same size.</span>
+0011 <span class="comment">%   The result TRANSFO is a 4-by-4 matrix representing the final affine</span>
+0012 <span class="comment">%   transform.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   TRANSFO = registerPoints3d_icp(SOURCE, TARGET, NITERS)</span>
+0015 <span class="comment">%   Specifies the number of iterations of the algorithm (default is 10).</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   [TRANSFO, RES] = registerPoints3d_icp(...)</span>
+0018 <span class="comment">%   Also returns the result of the transform applied to SOURCE points.</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%   [TRANSFO, RES, ER] = registerPoints3d_icp(...)</span>
+0021 <span class="comment">%   Also returns the error according to the iteration, as a NITERS+1 array</span>
+0022 <span class="comment">%   of numeric values.</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%   [TRANSFO, RES, ER, T] = registerPoints3d_icp(...)</span>
+0025 <span class="comment">%   Also returns the time spent for each iteration, as a NITERS+1 array</span>
+0026 <span class="comment">%   of numeric values. T(1) corresponds to initialization time, T(end)</span>
+0027 <span class="comment">%   corresponds to the total processing time</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%   [...] = registerPoints3d_icp(..., PNAME, PVALUE)</span>
+0030 <span class="comment">%   Specifies additional optional arguments are parameter name-value pairs.</span>
+0031 <span class="comment">%   Supported parameter names are:</span>
+0032 <span class="comment">%   * 'Matching'    The point matching method. Can be one of 'naive'</span>
+0033 <span class="comment">%       (the slowest), 'delaunay' (use a Delaunay diagram to reduce</span>
+0034 <span class="comment">%       computations) or 'kdTree' (use a kd-Tree data structure. This is</span>
+0035 <span class="comment">%       usually the fastest, but requires the Statistics Toolbox).</span>
+0036 <span class="comment">%</span>
+0037 <span class="comment">%</span>
+0038 <span class="comment">%   Example</span>
+0039 <span class="comment">%   registerPoints3d_icp</span>
+0040 <span class="comment">%</span>
+0041 <span class="comment">%   See also</span>
+0042 <span class="comment">%     transforms3d, registerPoints3d_affine, registerICP, pcregistericp</span>
+0043 <span class="comment">%</span>
+0044 <span class="comment">% Rewritten from the &quot;icp&quot; function, by Martin Kjer and Jakob Wilm,</span>
+0045 <span class="comment">% Technical University of Denmark, 2012.</span>
+0046 <span class="comment">% Notable differences:</span>
+0047 <span class="comment">% * SOURCE and TARGET input arrays are given as N-by-3 arrays (using the</span>
+0048 <span class="comment">%   general MatGeom convention) rather than 3-by-N arrays.</span>
+0049 <span class="comment">% * The resulting transform is packed into a single 4-by-4 array,</span>
+0050 <span class="comment">%   representing the affine transfom matrix in homogeneous coordinates.</span>
+0051 <span class="comment">% * All the options available in the original file are not managed in this</span>
+0052 <span class="comment">%   port.</span>
+0053 <span class="comment">%</span>
+0054 
+0055 <span class="comment">% ------</span>
+0056 <span class="comment">% Author: David Legland</span>
+0057 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0058 <span class="comment">% Created: 2023-05-30, using Matlab 9.14.0.2206163 (R2023a)</span>
+0059 <span class="comment">% Copyright 2023-2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)</span>
+0060 
+0061 <span class="comment">%% Parse input arguments</span>
+0062 <span class="comment">% parse input arguments using an instance of InputParser class</span>
+0063 
+0064 parser = inputParser;
+0065 parser.KeepUnmatched = true;
+0066 <span class="comment">% require source and target points sets, as N-by-3 and M-by-3 numeric arrays</span>
+0067 parser.addRequired(<span class="string">'p'</span>, @(x) isreal(x) &amp;&amp; size(x,2) == 3);
+0068 parser.addRequired(<span class="string">'q'</span>, @(x) isreal(x) &amp;&amp; size(x,2) == 3);
+0069 
+0070 <span class="comment">% optional number of iterations, default is 10.</span>
+0071 parser.addOptional(<span class="string">'nIters'</span>, 10, @ (x) x &gt; 0 &amp;&amp; x &lt; 10^5);
+0072 
+0073 <span class="comment">% parse parameters as name-value pairs.</span>
+0074 <span class="comment">% the algorithm to match transformed source to target</span>
+0075 validMatching = {<span class="string">'bruteForce'</span>, <span class="string">'Delaunay'</span>, <span class="string">'kDtree'</span>};
+0076 parser.addParameter(<span class="string">'Matching'</span>, <span class="string">'bruteForce'</span>, @(x) any(strcmpi(x, validMatching)));
+0077 
+0078 <span class="comment">% the criterium to minimize</span>
+0079 validMinimize = {<span class="string">'point'</span>, <span class="string">'plane'</span>, <span class="string">'lmapoint'</span>};
+0080 parser.addParameter(<span class="string">'Minimize'</span>, <span class="string">'point'</span>, @(x) any(strcmpi(x,validMinimize)));
+0081 
+0082 <span class="comment">% the normals computed for each point of the target cloud (used for plane</span>
+0083 <span class="comment">% minimization)</span>
+0084 parser.addParameter(<span class="string">'Normals'</span>, [], @(x) isreal(x) &amp;&amp; size(x,2) == 3);
+0085 
+0086 <span class="comment">% If Delaunay matching is used, the triangulation can be pre-computed</span>
+0087 parser.addParameter(<span class="string">'Triangulation'</span>, [], @(x) isreal(x) &amp;&amp; size(x,2) == 3);
+0088 
+0089 <span class="comment">% Weights associated to the points</span>
+0090 parser.addParameter(<span class="string">'Weight'</span>, @(x) ones(length(x),1), @(x) isa(x,<span class="string">'function_handle'</span>));
+0091 
+0092 parser.parse(p, q, varargin{:});
+0093 args = parser.Results;
+0094 
+0095 
+0096 <span class="comment">%% Initialisations</span>
+0097 
+0098 <span class="comment">% Start timer</span>
+0099 tic;
+0100 
+0101 <span class="comment">% number of iterations</span>
+0102 nIters = args.nIters;
+0103 
+0104 <span class="comment">% transformed point set</span>
+0105 <span class="comment">% initialized to initial point clouds, but will correspond to transformed</span>
+0106 <span class="comment">% cloud during subsequent iterations</span>
+0107 pt = p;
+0108 
+0109 <span class="comment">% allocate array for timing and RMS error at every iteration</span>
+0110 t = zeros(nIters+1,1); 
+0111 ER = zeros(nIters+1, 1); 
+0112 
+0113 <span class="comment">% Initialize total transform vector(s) and rotation matric(es).</span>
+0114 TT = zeros(1, 3, nIters+1);
+0115 TR = repmat(eye(3,3), [1,1, nIters+1]);
+0116 transfo = eye(4);
+0117 transfoList = cell(nIters+1, 1);
+0118 transfoList{1} = transfo;
+0119     
+0120 <span class="comment">% perform pre-processing depending on matching method</span>
+0121 <span class="keyword">if</span> strcmpi(args.Matching, <span class="string">'Delaunay'</span>)
+0122     <span class="comment">% If Matching == 'Delaunay', a triangulation is needed</span>
+0123     DT = delaunayTriangulation(q);
+0124 
+0125 <span class="keyword">elseif</span> strcmpi(args.Matching, <span class="string">'kDtree'</span>)
+0126     <span class="comment">% If Matching == 'kDtree', a kD tree should be built</span>
+0127     <span class="comment">% (requires Statistics Toolbox &gt;= 7.3)</span>
+0128     kdTree = KDTreeSearcher(q);
+0129 <span class="keyword">end</span>
+0130 
+0131 <span class="comment">% in case plane minimizer is used, check Normals&quot; data exist</span>
+0132 <span class="keyword">if</span> strcmpi(args.Minimize, <span class="string">'plane'</span>) &amp;&amp; isempty(args.Normals)
+0133     args.Normals = <a href="#_sub8" class="code" title="subfunction n = estimateVertexNormals(p, k)">estimateVertexNormals</a>(q, 4);
+0134 <span class="keyword">end</span>
+0135 
+0136 t(1) = toc;
+0137 
+0138 
+0139 <span class="comment">%% Main loop</span>
+0140 
+0141 <span class="keyword">for</span> iIter = 1:nIters
+0142        
+0143     <span class="comment">% Identify the points in Q that match the points in P.</span>
+0144     <span class="comment">% Each function returns an array with as many rows as the number of</span>
+0145     <span class="comment">% source points, containing the index of the closest target point,</span>
+0146     <span class="comment">% and the distance between each pair of points.</span>
+0147     <span class="keyword">switch</span> lower(args.Matching)
+0148         <span class="keyword">case</span> lower(<span class="string">'bruteForce'</span>)
+0149             [matchInds, mindist] = <a href="#_sub1" class="code" title="subfunction [inds, minDist] = matchPoints_naive(p, q)">matchPoints_naive</a>(pt, q);
+0150         <span class="keyword">case</span> lower(<span class="string">'Delaunay'</span>)
+0151             [matchInds, mindist] = <a href="#_sub2" class="code" title="subfunction [inds, minDist] = matchPoints_Delaunay(p, DT)">matchPoints_Delaunay</a>(pt, DT);
+0152         <span class="keyword">case</span> lower(<span class="string">'kDtree'</span>)
+0153             [matchInds, mindist] = <a href="#_sub3" class="code" title="subfunction [inds, minDist] = matchPoints_kDtree(p, kdTree)">matchPoints_kDtree</a>(pt, kdTree);
+0154         <span class="keyword">otherwise</span>
+0155             error(<span class="string">'Unknown option for point matching: %s'</span>, args.Matching);
+0156     <span class="keyword">end</span>
+0157 
+0158     <span class="keyword">if</span> iIter == 1
+0159         ER(iIter) = rms(mindist);
+0160     <span class="keyword">end</span>
+0161     
+0162     <span class="comment">% Identify the rotation and translation parts of the motion transform.</span>
+0163     <span class="comment">% Each function should return two output arguments:</span>
+0164     <span class="comment">% R as a 3-by-3 matrix representing the (vectorial) 3D rotation</span>
+0165     <span class="comment">% T as a 1-by-3 row vector representing the translation vector</span>
+0166     <span class="keyword">switch</span> lower(args.Minimize)
+0167         <span class="keyword">case</span> <span class="string">'point'</span>
+0168             <span class="comment">% Determine weight vector</span>
+0169             weights = args.Weight(matchInds);
+0170             [R,T] = <a href="#_sub4" class="code" title="subfunction [R, T] = eq_point(q, p, weights)">eq_point</a>(q(matchInds, :), pt, weights);
+0171 
+0172         <span class="keyword">case</span> <span class="string">'plane'</span>
+0173             normals = args.Normals(matchInds,:);
+0174             weights = args.Weight(matchInds);
+0175             [R,T] = <a href="#_sub5" class="code" title="subfunction [R, T] = eq_plane(q, p, n, weights)">eq_plane</a>(q(matchInds,:), pt, normals, weights);
+0176 
+0177         <span class="keyword">case</span> lower(<span class="string">'lmaPoint'</span>)
+0178             [R,T] = <a href="#_sub6" class="code" title="subfunction [R, T] = eq_lmaPoint(q, p)">eq_lmaPoint</a>(q(matchInds,:), pt);
+0179 
+0180         <span class="keyword">otherwise</span>
+0181             error(<span class="string">'Unknown option for Minimizer: %s'</span>, args.Minimize);
+0182     <span class="keyword">end</span>
+0183 
+0184     <span class="comment">% update the concatenated transform</span>
+0185     TR(:,:,iIter+1) = R * TR(:,:,iIter);
+0186     TT(:,:,iIter+1) = TT(:,:,iIter)*R' + T;
+0187     transfo = [R T' ; 0 0 0 1];
+0188     transfoList{iIter+1} = transfo * transfoList{iIter};
+0189 
+0190     <span class="comment">% apply last transform to source points</span>
+0191     pt = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(p, transfoList{iIter+1});
+0192     
+0193     <span class="comment">% root mean of objective function</span>
+0194     ER(iIter+1) = <a href="#_sub7" class="code" title="subfunction ER = rmse(p1, p2)">rmse</a>(pt, q(matchInds, :));
+0195     
+0196     t(iIter+1) = toc;
+0197 <span class="keyword">end</span>
+0198 
+0199 transfo = transfoList{end};
+0200 
+0201 
+0202 <span class="comment">%% Utility functions</span>
+0203 
+0204 <a name="_sub1" href="#_subfunctions" class="code">function [inds, minDist] = matchPoints_naive(p, q)</a>
+0205 
+0206 <span class="comment">% retrieve number of points</span>
+0207 n = size(p, 1);
+0208 
+0209 <span class="comment">% allocate memory</span>
+0210 inds = zeros(n, 1);
+0211 minDist = zeros(n, 1);
+0212 
+0213 <span class="comment">% iterate over points to match</span>
+0214 <span class="keyword">for</span> i = 1:n
+0215     dists = sum((q - p(i,:)).^2, 2);
+0216     [minDist(i), inds(i)] = min(dists);
+0217 <span class="keyword">end</span>
+0218 
+0219 minDist = sqrt(minDist);
+0220 
+0221 <span class="comment">%%</span>
+0222 <a name="_sub2" href="#_subfunctions" class="code">function [inds, minDist] = matchPoints_Delaunay(p, DT)</a>
+0223 
+0224 inds = nearestNeighbor(DT, p);
+0225 minDist = sqrt(sum((p - DT.Points(inds,:)).^2, 1));
+0226 
+0227 <span class="comment">%%</span>
+0228 <a name="_sub3" href="#_subfunctions" class="code">function [inds, minDist] = matchPoints_kDtree(p, kdTree)</a>
+0229 
+0230 [inds, minDist] = knnsearch(kdTree, p);
+0231 
+0232 <span class="comment">%%</span>
+0233 <a name="_sub4" href="#_subfunctions" class="code">function [R, T] = eq_point(q, p, weights)</a>
+0234 
+0235 <span class="comment">% retrieve size of data points</span>
+0236 m = size(p, 1);
+0237 n = size(q, 1);
+0238 
+0239 <span class="comment">% normalize weights</span>
+0240 weights = weights ./ sum(weights);
+0241 
+0242 <span class="comment">% find data centroid and deviations from centroid</span>
+0243 q_bar = weights' * q;
+0244 q_mark = q - repmat(q_bar, n, 1);
+0245 
+0246 <span class="comment">% find data centroid and deviations from centroid</span>
+0247 p_bar = weights' * p;
+0248 p_mark = p - repmat(p_bar, m, 1);
+0249 
+0250 <span class="comment">% Apply weights (need to apply to only one of the sets)</span>
+0251 p_mark = p_mark .* repmat(weights, 1, 3);
+0252 
+0253 <span class="comment">% compute singular value decomposition</span>
+0254 N = p_mark' * q_mark;
+0255 [U, ~, V] = svd(N);
+0256 
+0257 <span class="comment">% retrieve rotation and translation parts</span>
+0258 R = V*diag([1 1 det(U*V')]) * U';
+0259 T = q_bar - p_bar * R';
+0260 
+0261 
+0262 <span class="comment">%%</span>
+0263 <a name="_sub5" href="#_subfunctions" class="code">function [R, T] = eq_plane(q, p, n, weights)</a>
+0264 
+0265 n = n .* repmat(weights, 1, 3);
+0266 
+0267 c = cross(p, n, 2);
+0268 
+0269 cn = horzcat(c, n);
+0270 
+0271 C = cn' * cn;
+0272 
+0273 b = - [sum(sum((p-q).*repmat(cn(:,1),1,3).*n));
+0274        sum(sum((p-q).*repmat(cn(:,2),1,3).*n));
+0275        sum(sum((p-q).*repmat(cn(:,3),1,3).*n));
+0276        sum(sum((p-q).*repmat(cn(:,4),1,3).*n));
+0277        sum(sum((p-q).*repmat(cn(:,5),1,3).*n));
+0278        sum(sum((p-q).*repmat(cn(:,6),1,3).*n))];
+0279    
+0280 X = C\b;
+0281 
+0282 cx = cos(X(1)); cy = cos(X(2)); cz = cos(X(3)); 
+0283 sx = sin(X(1)); sy = sin(X(2)); sz = sin(X(3)); 
+0284 
+0285 R = [cy*cz cz*sx*sy-cx*sz cx*cz*sy+sx*sz;
+0286      cy*sz cx*cz+sx*sy*sz cx*sy*sz-cz*sx;
+0287      -sy cy*sx cx*cy];
+0288     
+0289 T = X(4:6)';
+0290 
+0291 
+0292 <span class="comment">%%</span>
+0293 <a name="_sub6" href="#_subfunctions" class="code">function [R, T] = eq_lmaPoint(q, p)</a>
+0294 <span class="comment">% Fit Rotation and Translation using Levenberg-Marquard minimization.</span>
+0295 
+0296 <span class="comment">% create the Rotation anonymous function for transforming points</span>
+0297 Rx = @(a)[1     0       0;
+0298           0     cos(a)  -sin(a);
+0299           0     sin(a)  cos(a)];
+0300 Ry = @(b)[cos(b)    0   sin(b);
+0301           0         1   0;
+0302           -sin(b)   0   cos(b)];
+0303 Rz = @(g)[cos(g)    -sin(g) 0;
+0304           sin(g)    cos(g)  0;
+0305           0         0       1];
+0306 Rot = @(x) Rx(x(1)) * Ry(x(2)) * Rz(x(3));
+0307 
+0308 <span class="comment">% anonymous function of the transform vector that transform the points</span>
+0309 myfun = @(x,xdata) xdata * Rot(x(1:3))' + repmat(x(4:6),length(xdata),1);
+0310 <span class="comment">% myfun = @(x,xdata)Rot(x(1:3))*xdata+repmat(x(4:6),1,length(xdata));</span>
+0311 
+0312 <span class="comment">% minimizes the quantity: 'myfun(x,p) - q'</span>
+0313 options = optimset(<span class="string">'Algorithm'</span>, <span class="string">'levenberg-marquardt'</span>);
+0314 x = lsqcurvefit(myfun, zeros(1,6), p, q, [], [], options);
+0315 
+0316 R = Rot(x(1:3));
+0317 T = x(4:6);
+0318 
+0319 
+0320 <span class="comment">%%</span>
+0321 <a name="_sub7" href="#_subfunctions" class="code">function ER = rmse(p1, p2)</a>
+0322 <span class="comment">% Determine the RMS error between two point equally sized point clouds with</span>
+0323 <span class="comment">% point correspondance.</span>
+0324 <span class="comment">% ER = rmse(p1,p2) where p1 and p2 are n-by-3 numeric arrays.</span>
+0325 
+0326 sqDist = sum((p1 - p2).^2, 2);
+0327 ER = sqrt(mean(sqDist));
+0328 
+0329 
+0330 <span class="comment">%%</span>
+0331 <a name="_sub8" href="#_subfunctions" class="code">function n = estimateVertexNormals(p, k)</a>
+0332 <span class="comment">% Least squares normal estimation from point clouds using PCA.</span>
+0333 <span class="comment">%</span>
+0334 <span class="comment">%   P: input vertices, as a M-by-3 numeric array</span>
+0335 <span class="comment">%   K: number of neighbrs to consider for computing PCA</span>
+0336 <span class="comment">%</span>
+0337 <span class="comment">% Ref:</span>
+0338 <span class="comment">% H. Hoppe, T. DeRose, T. Duchamp, J. McDonald, and W. Stuetzle.</span>
+0339 <span class="comment">% Surface reconstruction from unorganized points.</span>
+0340 <span class="comment">% In Proceedings of ACM Siggraph, pages 71:78, 1992.</span>
+0341 <span class="comment">%</span>
+0342 <span class="comment">% Requires the Statistics Toolbox</span>
+0343 
+0344 m = size(p,1);
+0345 n = zeros(m,3);
+0346 
+0347 <span class="comment">% for each point, find its (k+1) nearest neighbor</span>
+0348 <span class="comment">% (add 1 because each point is counted within its neighbors)</span>
+0349 neighbors = knnsearch(p, p, <span class="string">'k'</span>, k+1);
+0350 
+0351 <span class="keyword">for</span> i = 1:m
+0352     <span class="comment">% retrieve neighbors of current point</span>
+0353     x = p(neighbors(i, 2:end), :);
+0354 
+0355     <span class="comment">% build the variance-covariance matrix to diagonalize</span>
+0356     p_bar = mean(x);
+0357     P = (x - p_bar)' * (x - p_bar);
+0358     
+0359     <span class="comment">% perform SVD</span>
+0360     [V, D] = eig(P);
+0361     
+0362     <span class="comment">% choose the smallest eigenvalue</span>
+0363     [~, idx] = min(diag(D));
+0364     
+0365     <span class="comment">% return the corresponding eigenvector</span>
+0366     n(i,:) = V(:,idx)';
+0367 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

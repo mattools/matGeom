@@ -57,7 +57,7 @@
      hold on; drawPolygon(poly2, 'm')
      axis equal; axis([0 40 0 40]);
 
-   See also:
+   See also
    polygons2d, <a href="polygonLoops.html" class="code" title="function loops = polygonLoops(poly, varargin)">polygonLoops</a>, <a href="polygonSelfIntersections.html" class="code" title="function varargout = polygonSelfIntersections(poly, varargin)">polygonSelfIntersections</a></pre></div>
 
 <!-- crossreference -->
@@ -104,68 +104,64 @@ This function is called by:
 0029 <span class="comment">%     hold on; drawPolygon(poly2, 'm')</span>
 0030 <span class="comment">%     axis equal; axis([0 40 0 40]);</span>
 0031 <span class="comment">%</span>
-0032 <span class="comment">%   See also:</span>
+0032 <span class="comment">%   See also</span>
 0033 <span class="comment">%   polygons2d, polygonLoops, polygonSelfIntersections</span>
 0034 <span class="comment">%</span>
 0035 
-0036 <span class="comment">%   ---------</span>
-0037 <span class="comment">%   author : David Legland</span>
-0038 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0039 <span class="comment">%   created the 14/05/2005.</span>
-0040 <span class="comment">%</span>
+0036 <span class="comment">% ------</span>
+0037 <span class="comment">% Author: David Legland</span>
+0038 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0039 <span class="comment">% Created: 2005-05-14</span>
+0040 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0041 
-0042 <span class="comment">%   HISTORY:</span>
-0043 <span class="comment">%   31-07-2005 change algo for negative distance: use clipping of polygon</span>
-0044 <span class="comment">%   by half-planes</span>
-0045 
-0046 <span class="comment">% default options</span>
-0047 cleanupLoops = false;
-0048 
-0049 <span class="comment">% process input argument</span>
-0050 <span class="keyword">while</span> length(varargin) &gt; 1
-0051     paramName = varargin{1};
-0052     <span class="keyword">switch</span> lower(paramName)
-0053         <span class="keyword">case</span> <span class="string">'cleanuploops'</span>
-0054             cleanupLoops = varargin{2};
-0055         <span class="keyword">otherwise</span>
-0056             error([<span class="string">'Unknown parameter name: '</span> paramName]);
-0057     <span class="keyword">end</span>
-0058     varargin(1:2) = [];
-0059 <span class="keyword">end</span>
-0060 
-0061 <span class="comment">% eventually copy first point at the end to ensure closed polygon</span>
-0062 <span class="keyword">if</span> sum(poly(<span class="keyword">end</span>, :) == poly(1,:)) ~= 2
-0063     poly = [poly; poly(1,:)];
-0064 <span class="keyword">end</span>
-0065 
-0066 <span class="comment">% number of vertices of the polygon</span>
-0067 N = size(poly, 1)-1;
-0068 
-0069 <span class="comment">% find lines parallel to polygon edges located at distance DIST</span>
-0070 lines = zeros(N, 4);
-0071 <span class="keyword">for</span> i = 1:N
-0072     side = <a href="../../matGeom/geom2d/createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(poly(i,:), poly(i+1,:));
-0073     lines(i, 1:4) = <a href="../../matGeom/geom2d/parallelLine.html" class="code" title="function res = parallelLine(line, point)">parallelLine</a>(side, dist);
-0074 <span class="keyword">end</span>
-0075 
-0076 <span class="comment">% compute intersection points of consecutive lines</span>
-0077 lines = [lines;lines(1,:)];
-0078 poly2 = zeros(N, 2);
-0079 <span class="keyword">for</span> i = 1:N
-0080     poly2(i,1:2) = <a href="../../matGeom/geom2d/intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(lines(i,:), lines(i+1,:));
-0081 <span class="keyword">end</span>
-0082 
-0083 <span class="comment">% split result polygon into set of loops (simple polygons)</span>
-0084 loops = <a href="polygonLoops.html" class="code" title="function loops = polygonLoops(poly, varargin)">polygonLoops</a>(poly2);
-0085 
-0086 <span class="comment">% keep only loops whose distance to original polygon is correct</span>
-0087 <span class="keyword">if</span> cleanupLoops
-0088     distLoop = zeros(length(loops), 1);
-0089     <span class="keyword">for</span> i = 1:length(loops)
-0090         distLoop(i) = <a href="distancePolygons.html" class="code" title="function dist = distancePolygons(poly1, poly2)">distancePolygons</a>(loops{i}, poly);
-0091     <span class="keyword">end</span>
-0092     loops = loops(abs(distLoop-abs(dist)) &lt; abs(dist)/1000);
-0093 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0042 <span class="comment">% default options</span>
+0043 cleanupLoops = false;
+0044 
+0045 <span class="comment">% process input argument</span>
+0046 <span class="keyword">while</span> length(varargin) &gt; 1
+0047     paramName = varargin{1};
+0048     <span class="keyword">switch</span> lower(paramName)
+0049         <span class="keyword">case</span> <span class="string">'cleanuploops'</span>
+0050             cleanupLoops = varargin{2};
+0051         <span class="keyword">otherwise</span>
+0052             error([<span class="string">'Unknown parameter name: '</span> paramName]);
+0053     <span class="keyword">end</span>
+0054     varargin(1:2) = [];
+0055 <span class="keyword">end</span>
+0056 
+0057 <span class="comment">% eventually copy first point at the end to ensure closed polygon</span>
+0058 <span class="keyword">if</span> sum(poly(<span class="keyword">end</span>, :) == poly(1,:)) ~= 2
+0059     poly = [poly; poly(1,:)];
+0060 <span class="keyword">end</span>
+0061 
+0062 <span class="comment">% number of vertices of the polygon</span>
+0063 N = size(poly, 1)-1;
+0064 
+0065 <span class="comment">% find lines parallel to polygon edges located at distance DIST</span>
+0066 lines = zeros(N, 4);
+0067 <span class="keyword">for</span> i = 1:N
+0068     side = <a href="../../matGeom/geom2d/createLine.html" class="code" title="function line = createLine(varargin)">createLine</a>(poly(i,:), poly(i+1,:));
+0069     lines(i, 1:4) = <a href="../../matGeom/geom2d/parallelLine.html" class="code" title="function res = parallelLine(line, point)">parallelLine</a>(side, dist);
+0070 <span class="keyword">end</span>
+0071 
+0072 <span class="comment">% compute intersection points of consecutive lines</span>
+0073 lines = [lines;lines(1,:)];
+0074 poly2 = zeros(N, 2);
+0075 <span class="keyword">for</span> i = 1:N
+0076     poly2(i,1:2) = <a href="../../matGeom/geom2d/intersectLines.html" class="code" title="function point = intersectLines(line1, line2, varargin)">intersectLines</a>(lines(i,:), lines(i+1,:));
+0077 <span class="keyword">end</span>
+0078 
+0079 <span class="comment">% split result polygon into set of loops (simple polygons)</span>
+0080 loops = <a href="polygonLoops.html" class="code" title="function loops = polygonLoops(poly, varargin)">polygonLoops</a>(poly2);
+0081 
+0082 <span class="comment">% keep only loops whose distance to original polygon is correct</span>
+0083 <span class="keyword">if</span> cleanupLoops
+0084     distLoop = zeros(length(loops), 1);
+0085     <span class="keyword">for</span> i = 1:length(loops)
+0086         distLoop(i) = <a href="distancePolygons.html" class="code" title="function dist = distancePolygons(poly1, poly2)">distancePolygons</a>(loops{i}, poly);
+0087     <span class="keyword">end</span>
+0088     loops = loops(abs(distLoop-abs(dist)) &lt; abs(dist)/1000);
+0089 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

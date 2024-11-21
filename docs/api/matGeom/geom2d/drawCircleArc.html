@@ -56,13 +56,8 @@
      hold on
      drawCircleArc(arc, 'LineWidth', 3, 'Color', 'r')
 
-   See also:
-   <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="drawCircle.html" class="code" title="function varargout = drawCircle(varargin)">drawCircle</a>, <a href="drawEllipse.html" class="code" title="function varargout = drawEllipse(varargin)">drawEllipse</a>, <a href="circleArcToPolyline.html" class="code" title="function varargout = circleArcToPolyline(arc, N)">circleArcToPolyline</a>
-
-   --------
-   author: David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 12/12/2003.</pre></div>
+   See also
+     <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="drawCircle.html" class="code" title="function varargout = drawCircle(varargin)">drawCircle</a>, <a href="drawEllipse.html" class="code" title="function varargout = drawEllipse(varargin)">drawEllipse</a>, <a href="circleArcToPolyline.html" class="code" title="function varargout = circleArcToPolyline(arc, N)">circleArcToPolyline</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -107,82 +102,86 @@ This function is called by:
 0028 <span class="comment">%     hold on</span>
 0029 <span class="comment">%     drawCircleArc(arc, 'LineWidth', 3, 'Color', 'r')</span>
 0030 <span class="comment">%</span>
-0031 <span class="comment">%   See also:</span>
-0032 <span class="comment">%   circles2d, drawCircle, drawEllipse, circleArcToPolyline</span>
+0031 <span class="comment">%   See also</span>
+0032 <span class="comment">%     circles2d, drawCircle, drawEllipse, circleArcToPolyline</span>
 0033 <span class="comment">%</span>
-0034 <span class="comment">%   --------</span>
-0035 <span class="comment">%   author: David Legland</span>
-0036 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0037 <span class="comment">%   created the 12/12/2003.</span>
-0038 <span class="comment">%</span>
-0039 
-0040 <span class="comment">%   HISTORY</span>
-0041 <span class="comment">%   2004-05-03 angles are given as radians</span>
-0042 <span class="comment">%   2007-06-27 Now uses angle extent</span>
-0043 <span class="comment">%   2011-03-30 use angles in degrees</span>
-0044 <span class="comment">%   2011-06-09 add support for line styles</span>
-0045 <span class="comment">%   2011-10-11 add management of axes handle</span>
-0046 
-0047 <span class="keyword">if</span> nargin == 0
-0048     error(<span class="string">'Need to specify circle arc'</span>);
-0049 <span class="keyword">end</span>
-0050 
-0051 
-0052 <span class="comment">% extract handle of axis to draw on</span>
-0053 <span class="keyword">if</span> isAxisHandle(varargin{1})
-0054     ax = varargin{1};
-0055     varargin(1) = [];
-0056 <span class="keyword">else</span>
-0057     ax = gca;
-0058 <span class="keyword">end</span>
-0059 
-0060 circle = varargin{1};
-0061 <span class="keyword">if</span> size(circle, 2) == 5
-0062     x0  = circle(:,1);
-0063     y0  = circle(:,2);
-0064     r   = circle(:,3);
-0065     start   = circle(:,4);
-0066     extent  = circle(:,5);
-0067     varargin(1) = [];
-0068     
-0069 <span class="keyword">elseif</span> length(varargin) &gt;= 5
-0070     x0  = varargin{1};
-0071     y0  = varargin{2};
-0072     r   = varargin{3};
-0073     start   = varargin{4};
-0074     extent  = varargin{5};
-0075     varargin(1:5) = [];
-0076     
-0077 <span class="keyword">else</span>
-0078     error(<span class="string">'drawCircleArc: please specify center, radius and angles of circle arc'</span>);
-0079 <span class="keyword">end</span>
-0080 
-0081 <span class="comment">% convert angles in radians</span>
-0082 t0  = deg2rad(start);
-0083 t1  = t0 + deg2rad(extent);
+0034 
+0035 <span class="comment">% ------</span>
+0036 <span class="comment">% Author: David Legland</span>
+0037 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0038 <span class="comment">% Created: 2003-12-12</span>
+0039 <span class="comment">% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0040 
+0041 <span class="comment">%% Parse input arguments</span>
+0042 
+0043 <span class="comment">% extract handle of axis to draw on</span>
+0044 [ax, varargin] = parseAxisHandle(varargin{:});
+0045 
+0046 circle = varargin{1};
+0047 <span class="keyword">if</span> size(circle, 2) == 5
+0048     x0  = circle(:,1);
+0049     y0  = circle(:,2);
+0050     r   = circle(:,3);
+0051     start   = circle(:,4);
+0052     extent  = circle(:,5);
+0053     varargin(1) = [];
+0054     
+0055 <span class="keyword">elseif</span> length(varargin) &gt;= 5
+0056     x0  = varargin{1};
+0057     y0  = varargin{2};
+0058     r   = varargin{3};
+0059     start   = varargin{4};
+0060     extent  = varargin{5};
+0061     varargin(1:5) = [];
+0062     
+0063 <span class="keyword">else</span>
+0064     error(<span class="string">'drawCircleArc: please specify center, radius and angles of circle arc'</span>);
+0065 <span class="keyword">end</span>
+0066 
+0067 
+0068 <span class="comment">%% Pre-processing</span>
+0069 
+0070 <span class="comment">% convert angles in radians</span>
+0071 t0  = deg2rad(start);
+0072 t1  = t0 + deg2rad(extent);
+0073 
+0074 <span class="comment">% number of line segments</span>
+0075 N = 60;
+0076 
+0077 <span class="comment">% initialize handles vector</span>
+0078 h   = zeros(length(x0), 1);
+0079 
+0080 <span class="comment">% save hold state</span>
+0081 holdState = ishold(ax);
+0082 hold(ax, <span class="string">'on'</span>);
+0083 
 0084 
-0085 <span class="comment">% number of line segments</span>
-0086 N = 60;
-0087 
-0088 <span class="comment">% initialize handles vector</span>
-0089 h   = zeros(length(x0), 1);
-0090 
-0091 <span class="comment">% draw each circle arc individually</span>
-0092 <span class="keyword">for</span> i = 1:length(x0)
-0093     <span class="comment">% compute basis</span>
-0094     t = linspace(t0(i), t1(i), N+1)';
-0095 
-0096     <span class="comment">% compute vertices coordinates</span>
-0097     xt = x0(i) + r(i)*cos(t);
-0098     yt = y0(i) + r(i)*sin(t);
-0099     
-0100     <span class="comment">% draw the circle arc</span>
-0101     h(i) = plot(ax, xt, yt, varargin{:});
-0102 <span class="keyword">end</span>
-0103 
-0104 <span class="keyword">if</span> nargout &gt; 0
-0105     varargout = {h};
-0106 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0085 <span class="comment">%% Display each circle arc</span>
+0086 
+0087 <span class="comment">% draw each circle arc individually</span>
+0088 <span class="keyword">for</span> i = 1:length(x0)
+0089     <span class="comment">% compute basis</span>
+0090     t = linspace(t0(i), t1(i), N+1)';
+0091 
+0092     <span class="comment">% compute vertices coordinates</span>
+0093     xt = x0(i) + r(i)*cos(t);
+0094     yt = y0(i) + r(i)*sin(t);
+0095     
+0096     <span class="comment">% draw the circle arc</span>
+0097     h(i) = plot(ax, xt, yt, varargin{:});
+0098 <span class="keyword">end</span>
+0099 
+0100 
+0101 <span class="comment">%% post-processing</span>
+0102 
+0103 <span class="comment">% restore hold state</span>
+0104 <span class="keyword">if</span> ~holdState
+0105     hold(ax, <span class="string">'off'</span>);
+0106 <span class="keyword">end</span>
+0107 
+0108 <span class="keyword">if</span> nargout &gt; 0
+0109     varargout = {h};
+0110 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

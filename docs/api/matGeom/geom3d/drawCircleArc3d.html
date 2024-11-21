@@ -4,7 +4,7 @@
 <head>
   <title>Description of drawCircleArc3d</title>
   <meta name="keywords" content="drawCircleArc3d">
-  <meta name="description" content="Draw a 3D circle arc.">
+  <meta name="description" content="DRAWCIRCLEARC3D Draw a 3D circle arc.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Draw a 3D circle arc.</strong></div>
+<div class="box"><strong>DRAWCIRCLEARC3D Draw a 3D circle arc.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function varargout = drawCircleArc3d(arc, varargin) </strong></div>
+<div class="box"><strong>function varargout = drawCircleArc3d(varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Draw a 3D circle arc.
+<div class="fragment"><pre class="comment">DRAWCIRCLEARC3D Draw a 3D circle arc.
 
    drawCircleArc3d([XC YC ZC R THETA PHI PSI START EXTENT])
    [XC YC ZC]  : coordinate of arc center
@@ -46,17 +46,17 @@
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="drawCircleArc3d.html" class="code" title="function varargout = drawCircleArc3d(arc, varargin)">drawCircleArc3d</a>	Draw a 3D circle arc.</li><li><a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>	DRAWPOLYLINE3D Draw a 3D polyline specified by a list of vertex coords.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
+<li><a href="drawCircleArc3d.html" class="code" title="function varargout = drawCircleArc3d(varargin)">drawCircleArc3d</a>	DRAWCIRCLEARC3D Draw a 3D circle arc.</li><li><a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>	DRAWPOLYLINE3D Draw a 3D polyline specified by a list of vertex coords.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="drawAngleBetweenVectors3d.html" class="code" title="function varargout = drawAngleBetweenVectors3d(o, v1, v2, r, varargin)">drawAngleBetweenVectors3d</a>	DRAWANGLEBETWEENVECTORS3D Draw an arc between 2 vectors.</li><li><a href="drawCircleArc3d.html" class="code" title="function varargout = drawCircleArc3d(arc, varargin)">drawCircleArc3d</a>	Draw a 3D circle arc.</li><li><a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(sphere, edge, varargin)">drawSphericalEdge</a>	DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.</li></ul>
+<li><a href="drawAngleBetweenVectors3d.html" class="code" title="function varargout = drawAngleBetweenVectors3d(varargin)">drawAngleBetweenVectors3d</a>	DRAWANGLEBETWEENVECTORS3D Draw an arc between 2 vectors.</li><li><a href="drawCircleArc3d.html" class="code" title="function varargout = drawCircleArc3d(varargin)">drawCircleArc3d</a>	DRAWCIRCLEARC3D Draw a 3D circle arc.</li><li><a href="drawSphericalEdge.html" class="code" title="function varargout = drawSphericalEdge(varargin)">drawSphericalEdge</a>	DRAWSPHERICALEDGE Draw an edge on the surface of a sphere.</li></ul>
 <!-- crossreference -->
 
 
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawCircleArc3d(arc, varargin)</a>
-0002 <span class="comment">% Draw a 3D circle arc.</span>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawCircleArc3d(varargin)</a>
+0002 <span class="comment">%DRAWCIRCLEARC3D Draw a 3D circle arc.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   drawCircleArc3d([XC YC ZC R THETA PHI PSI START EXTENT])</span>
 0005 <span class="comment">%   [XC YC ZC]  : coordinate of arc center</span>
@@ -74,84 +74,90 @@ This function is called by:
 0017 
 0018 <span class="comment">% ------</span>
 0019 <span class="comment">% Author: David Legland</span>
-0020 <span class="comment">% e-mail: david.legland@inrae.fr</span>
-0021 <span class="comment">% INRA - TPV URPOI - BIA IMASTE</span>
-0022 <span class="comment">% created the 21/02/2005</span>
-0023 <span class="comment">%</span>
-0024 
-0025 <span class="comment">%   HISTORY</span>
-0026 <span class="comment">%   2007-06-27 change 3D angle convention</span>
-0027 <span class="comment">%   2010-03-08 use drawPolyline3d</span>
-0028 <span class="comment">%   2011-06-21 use angles in degrees</span>
+0020 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0021 <span class="comment">% Created: 2005-02-21</span>
+0022 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0023 
+0024 <span class="comment">% extract handle of axis to draw on</span>
+0025 [hAx, varargin] = parseAxisHandle(varargin{:});
+0026 
+0027 arc = varargin{1};
+0028 varargin(1) = [];
 0029 
-0030 <span class="comment">% parse axis handle</span>
-0031 hAx = gca;
-0032 <span class="keyword">if</span> isAxisHandle(arc)
-0033     hAx = arc;
-0034     arc = varargin{1};
-0035     varargin(1) = [];
-0036 <span class="keyword">end</span>
-0037 
-0038 <span class="keyword">if</span> iscell(arc)
-0039     h = [];
-0040     <span class="keyword">for</span> i = 1:length(arc)
-0041         h = [h <a href="drawCircleArc3d.html" class="code" title="function varargout = drawCircleArc3d(arc, varargin)">drawCircleArc3d</a>(hAx, arc{i}, varargin{:})]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0042     <span class="keyword">end</span>
-0043     <span class="keyword">if</span> nargout &gt; 0
-0044         varargout = {h};
-0045     <span class="keyword">end</span>
-0046     <span class="keyword">return</span>;
-0047 <span class="keyword">end</span>
-0048 
-0049 <span class="keyword">if</span> size(arc, 1) &gt; 1
-0050     h = [];
-0051     <span class="keyword">for</span> i = 1:size(arc, 1)
-0052         h = [h <a href="drawCircleArc3d.html" class="code" title="function varargout = drawCircleArc3d(arc, varargin)">drawCircleArc3d</a>(hAx, arc(i,:), varargin{:})]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0053     <span class="keyword">end</span>
-0054     <span class="keyword">if</span> nargout &gt; 0
-0055         varargout = {h};
-0056     <span class="keyword">end</span>
-0057     <span class="keyword">return</span>;
-0058 <span class="keyword">end</span>
-0059 
-0060 <span class="comment">% get center and radius</span>
-0061 xc  = arc(:,1);
-0062 yc  = arc(:,2);
-0063 zc  = arc(:,3);
-0064 r   = arc(:,4);
+0030 <span class="keyword">if</span> iscell(arc)
+0031     <span class="comment">% save hold state</span>
+0032     holdState = ishold(hAx);
+0033     hold(hAx, <span class="string">'on'</span>);
+0034     h = [];
+0035     <span class="keyword">for</span> i = 1:length(arc)
+0036         h = [h <a href="drawCircleArc3d.html" class="code" title="function varargout = drawCircleArc3d(varargin)">drawCircleArc3d</a>(hAx, arc{i}, varargin{:})]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0037     <span class="keyword">end</span>
+0038     <span class="comment">% restore hold state</span>
+0039     <span class="keyword">if</span> ~holdState
+0040         hold(hAx, <span class="string">'off'</span>);
+0041     <span class="keyword">end</span>
+0042     <span class="keyword">if</span> nargout &gt; 0
+0043         varargout = {h};
+0044     <span class="keyword">end</span>
+0045     <span class="keyword">return</span>;
+0046 <span class="keyword">end</span>
+0047 
+0048 <span class="keyword">if</span> size(arc, 1) &gt; 1
+0049     <span class="comment">% save hold state</span>
+0050     holdState = ishold(hAx);
+0051     hold(hAx, <span class="string">'on'</span>);
+0052     h = [];
+0053     <span class="keyword">for</span> i = 1:size(arc, 1)
+0054         h = [h <a href="drawCircleArc3d.html" class="code" title="function varargout = drawCircleArc3d(varargin)">drawCircleArc3d</a>(hAx, arc(i,:), varargin{:})]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0055     <span class="keyword">end</span>
+0056     <span class="comment">% restore hold state</span>
+0057     <span class="keyword">if</span> ~holdState
+0058         hold(hAx, <span class="string">'off'</span>);
+0059     <span class="keyword">end</span>
+0060     <span class="keyword">if</span> nargout &gt; 0
+0061         varargout = {h};
+0062     <span class="keyword">end</span>
+0063     <span class="keyword">return</span>;
+0064 <span class="keyword">end</span>
 0065 
-0066 <span class="comment">% get angle of normal</span>
-0067 theta   = arc(:,5);
-0068 phi     = arc(:,6);
-0069 psi     = arc(:,7);
-0070 
-0071 <span class="comment">% get starting angle and angle extent of arc</span>
-0072 start   = arc(:,8);
-0073 extent  = arc(:,9);
-0074 
-0075 <span class="comment">% positions on circle arc</span>
-0076 N       = 60;
-0077 t       = linspace(start, start+extent, N+1) * pi / 180;
-0078 
-0079 <span class="comment">% compute coordinate of points</span>
-0080 x       = r*cos(t)';
-0081 y       = r*sin(t)';
-0082 z       = zeros(length(t), 1);
-0083 curve   = [x y z];
+0066 <span class="comment">% get center and radius</span>
+0067 xc  = arc(:,1);
+0068 yc  = arc(:,2);
+0069 zc  = arc(:,3);
+0070 r   = arc(:,4);
+0071 
+0072 <span class="comment">% get angle of normal</span>
+0073 theta   = arc(:,5);
+0074 phi     = arc(:,6);
+0075 psi     = arc(:,7);
+0076 
+0077 <span class="comment">% get starting angle and angle extent of arc</span>
+0078 start   = arc(:,8);
+0079 extent  = arc(:,9);
+0080 
+0081 <span class="comment">% positions on circle arc</span>
+0082 N       = 60;
+0083 t       = linspace(start, start+extent, N+1) * pi / 180;
 0084 
-0085 <span class="comment">% compute transformation from local basis to world basis</span>
-0086 trans   = localToGlobal3d(xc, yc, zc, theta, phi, psi);
-0087 
-0088 <span class="comment">% transform circle arc</span>
-0089 curve   = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(curve, trans);
+0085 <span class="comment">% compute coordinate of points</span>
+0086 x       = r*cos(t)';
+0087 y       = r*sin(t)';
+0088 z       = zeros(length(t), 1);
+0089 curve   = [x y z];
 0090 
-0091 <span class="comment">% draw the curve with specified options</span>
-0092 h = <a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>(hAx, curve, varargin{:});
+0091 <span class="comment">% compute transformation from local basis to world basis</span>
+0092 trans   = localToGlobal3d(xc, yc, zc, theta, phi, psi);
 0093 
-0094 <span class="keyword">if</span> nargout &gt; 0
-0095     varargout = {h};
-0096 <span class="keyword">end</span>
-0097</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0094 <span class="comment">% transform circle arc</span>
+0095 curve   = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(curve, trans);
+0096 
+0097 <span class="comment">% draw the curve with specified options</span>
+0098 h = <a href="drawPolyline3d.html" class="code" title="function varargout = drawPolyline3d(varargin)">drawPolyline3d</a>(hAx, curve, varargin{:});
+0099 
+0100 <span class="keyword">if</span> nargout &gt; 0
+0101     varargout = {h};
+0102 <span class="keyword">end</span>
+0103</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

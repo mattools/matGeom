@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of grMergeNodeClusters</title>
+  <meta name="keywords" content="grMergeNodeClusters">
+  <meta name="description" content="GRMERGENODECLUSTERS Merge cluster of connected nodes in a graph.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; grMergeNodeClusters.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>grMergeNodeClusters
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>GRMERGENODECLUSTERS Merge cluster of connected nodes in a graph.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [nodes2, edges2] = grMergeNodeClusters(nodes, edges) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">GRMERGENODECLUSTERS Merge cluster of connected nodes in a graph.
+
+   grMergeNodeClusters(nodes, edges)
+   Detects groups of nodes that belongs to the same global node, and
+   replace them by a unique node. Coordinates of reference node is given
+   by the median coordinates of cluster nodes.
+
+   This function is intended to be used as filter after a binary image
+   skeletonization and vectorization.
+
+
+   See also
+   <a href="grMergeNodesMedian.html" class="code" title="function [nodes2, edges2] = grMergeNodesMedian(nodes, edges, mnodes)">grMergeNodesMedian</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="grLabel.html" class="code" title="function labels = grLabel(nodes, edges)">grLabel</a>	GRLABEL Associate a label to each connected component of the graph.</li><li><a href="grNodeDegree.html" class="code" title="function [degree, node] = grNodeDegree(node, edges)">grNodeDegree</a>	GRNODEDEGREE Degree of a node in a (undirected) graph.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [nodes2, edges2] = grMergeNodeClusters(nodes, edges)</a>
+0002 <span class="comment">%GRMERGENODECLUSTERS Merge cluster of connected nodes in a graph.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   grMergeNodeClusters(nodes, edges)</span>
+0005 <span class="comment">%   Detects groups of nodes that belongs to the same global node, and</span>
+0006 <span class="comment">%   replace them by a unique node. Coordinates of reference node is given</span>
+0007 <span class="comment">%   by the median coordinates of cluster nodes.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%   This function is intended to be used as filter after a binary image</span>
+0010 <span class="comment">%   skeletonization and vectorization.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   See also</span>
+0014 <span class="comment">%   grMergeNodesMedian</span>
+0015 <span class="comment">%</span>
+0016 
+0017 <span class="comment">% ------</span>
+0018 <span class="comment">% Author: David Legland</span>
+0019 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0020 <span class="comment">% Created: 2003-08-13</span>
+0021 <span class="comment">% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0022 
+0023 <span class="comment">%% Initialization</span>
+0024 
+0025 <span class="comment">% intialize result</span>
+0026 nodes2 = nodes;
+0027 edges2 = edges;
+0028 
+0029 <span class="comment">% compute degree of each node</span>
+0030 degrees = <a href="grNodeDegree.html" class="code" title="function [degree, node] = grNodeDegree(node, edges)">grNodeDegree</a>(1:size(nodes, 1), edges)';
+0031 
+0032 <span class="comment">% find index of multiple nodes</span>
+0033 indMul = find(degrees &gt; 2);
+0034 
+0035 <span class="comment">% indices of edges that link several multiple nodes</span>
+0036 indEdges = sum(ismember(edges, indMul), 2) == 2;
+0037 
+0038 <span class="comment">% associate a label to each cluster</span>
+0039 labels = <a href="grLabel.html" class="code" title="function labels = grLabel(nodes, edges)">grLabel</a>(nodes, edges(indEdges, :));
+0040 clusterLabels = unique(labels(indMul));
+0041 
+0042 
+0043 <span class="comment">%% Replace each cluster by median point</span>
+0044 
+0045 <span class="comment">% iterate on clusters</span>
+0046 <span class="keyword">for</span> i = 1:length(clusterLabels)
+0047     <span class="comment">% indices of nodes of the current cluster</span>
+0048     inds = find(labels == clusterLabels(i));
+0049     
+0050     <span class="comment">% coordinates of new reference node</span>
+0051     clusterNodes = nodes(inds, :);
+0052     medianNode = median(clusterNodes, 1);
+0053     
+0054     <span class="comment">% replace coordinates of reference node</span>
+0055     refNode = min(inds);
+0056     nodes2(refNode, :) = medianNode;
+0057     
+0058     <span class="comment">% replace node indices in edge array</span>
+0059     edges2(ismember(edges2, inds)) = refNode;
+0060 <span class="keyword">end</span>
+0061 
+0062 
+0063 <span class="comment">%% Clean up</span>
+0064 
+0065 <span class="comment">% keep only relevant nodes</span>
+0066 inds = unique(edges2(:));
+0067 nodes2 = nodes2(inds, :);
+0068 
+0069 <span class="comment">% relabeling of edges</span>
+0070 <span class="keyword">for</span> i = 1:length(inds)
+0071     edges2(edges2 == inds(i)) = i;
+0072 <span class="keyword">end</span>
+0073 
+0074 <span class="comment">% remove double edges</span>
+0075 edges2 = unique(sort(edges2, 2), <span class="string">'rows'</span>);
+0076 
+0077 <span class="comment">% remove 'loops'</span>
+0078 edges2(edges2(:,1) == edges2(:,2), :) = [];</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

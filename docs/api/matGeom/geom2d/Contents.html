@@ -4,7 +4,7 @@
 <head>
   <title>Description of Contents</title>
   <meta name="keywords" content="Contents">
-  <meta name="description" content="GEOM2D Geometry 2D Toolbox">
+  <meta name="description" content="CONTENTS GEOM2D Geometry 2D Toolbox.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,14 +21,14 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>GEOM2D Geometry 2D Toolbox</strong></div>
+<div class="box"><strong>CONTENTS GEOM2D Geometry 2D Toolbox.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>This is a script file. </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> GEOM2D Geometry 2D Toolbox
- Version 1.24 07-Jun-2018 .
+<div class="fragment"><pre class="comment">CONTENTS GEOM2D Geometry 2D Toolbox.
+ Version 1.24 07-Jun-2018.
 
      Library to handle and visualize geometric primitives such as points,
      lines, circles and ellipses, polygons...
@@ -78,14 +78,15 @@
  Straight lines
    lines2d                  - Description of functions operating on planar lines.
    createLine               - Create a straight line from 2 points, or from other inputs.
+   fitLine                  - Fit a straight line to a set of points.
    medianLine               - Create a median line between two points.
    cartesianLine            - Create a straight line from cartesian equation coefficients.
    orthogonalLine           - Create a line orthogonal to another one through a point.
    parallelLine             - Create a line parallel to another one.
    intersectLines           - Return all intersection points of N lines in 2D.
    lineAngle                - Computes angle between two straight lines.
+   linePoint                - Coordinates of a point on a line from its position.
    linePosition             - Position of a point on a line.
-   lineFit                  - Fit a straight line to a set of points.
    clipLine                 - Clip a line with a box.
    reverseLine              - Return same line but with opposite orientation.
    transformLine            - Transform a line with an affine transform.
@@ -100,6 +101,7 @@
    parallelEdge             - Edge parallel to another edge.
    centeredEdgeToEdge       - Convert a centered edge to a two-points edge.
    midPoint                 - Middle point of two points or of an edge.
+   edgePoint                - Extract a point from an edge.
    edgePosition             - Return position of a point on an edge.
    clipEdge                 - Clip an edge with a rectangular box.
    reverseEdge              - Intervert the source and target vertices of edge.
@@ -108,7 +110,7 @@
    transformEdge            - Transform an edge with an affine transform.
    edgeToLine               - Convert an edge to a straight line.
    edgeToPolyline           - Convert an edge to a polyline with a given number of segments.
-   drawEdge                 - Draw an edge given by 2 points.
+   drawEdge                 - Draw an edge defined by its two extremities.
    drawCenteredEdge         - Draw an edge centered on a point.
 
  Rays
@@ -121,8 +123,7 @@
  Relations between points and lines
    distancePointEdge        - Minimum distance between a point and an edge.
    distancePointLine        - Minimum distance between a point and a line.
-   projPointOnLine          - Project of a point orthogonally onto a line.
-   pointOnLine              - Create a point on a line at a given position on the line.
+   projPointOnLine          - Project a point orthogonally onto a line.
    isPointOnLine            - Test if a point belongs to a line.
    isPointOnEdge            - Test if a point belongs to an edge.
    isPointOnRay             - Test if a point belongs to a ray.
@@ -147,10 +148,19 @@
  Ellipses and Parabola
    ellipses2d               - Description of functions operating on ellipses.
    equivalentEllipse        - Equivalent ellipse of a set of points.
+   fitEllipse               - Fit an ellipse to a set of 2D points.
+   transformEllipse         - Apply an affine transformation to an ellipse.
+   createEllipse            - Create an ellipse, from various input types.
+   distancePointEllipse     - Distance from a point to an ellipse.
+   projPointOnEllipse       - Project a point orthogonally onto an ellipse.
    isPointInEllipse         - Check if a point is located inside a given ellipse.
+   ellipseArea              - Area of an ellipse.
    ellipsePerimeter         - Perimeter of an ellipse.
    ellipseToPolygon         - Convert an ellipse into a series of points.
+   ellipsePoint             - Coordinates of a point on an ellipse from parametric equation.
+   ellipseCartesianCoefficients - Cartesian coefficients of an ellipse.
    drawEllipse              - Draw an ellipse on the current axis.
+   drawEllipseAxes          - Draw the main axes of an ellipse as line segments.
    drawEllipseArc           - Draw an ellipse arc on the current axis.
    drawParabola             - Draw a parabola on the current axis.
 
@@ -204,6 +214,7 @@
    drawVector               - Draw vector at a given position.
    drawArrow                - Draw an arrow on the current axis.
    drawLabels               - Draw labels at specified positions.
+   drawGrid                 - Draw a grid defined by vertex positions along each axis.
    drawShape                - Draw various types of shapes (circles, polygons...).
 
  Other shapes
@@ -216,15 +227,7 @@
 
    Credits:
    * function 'enclosingCircle' rewritten from a file from Yazan Ahed
-       (yash78@gmail.com), available on Matlab File Exchange
-
- -----
- Author: David Legland
- e-mail: david.legland@inrae.fr
- Created: 2005-11-07
- Copyright INRA - Cepia Software Platform.
- Project homepage: http://github.com/mattools/matGeom
- http://www.pfl-cepia.inra.fr/index.php?page=geom2d</pre></div>
+       (yash78@gmail.com), available on Matlab File Exchange</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -239,6 +242,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

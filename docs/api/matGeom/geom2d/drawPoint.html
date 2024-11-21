@@ -113,74 +113,61 @@ This function is called by:
 0035 <span class="comment">%   See also</span>
 0036 <span class="comment">%     points2d, clipPoints</span>
 0037 
-0038 <span class="comment">%   ---------</span>
-0039 <span class="comment">%   author : David Legland</span>
-0040 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0041 <span class="comment">%   created the 31/10/2003.</span>
-0042 <span class="comment">%</span>
+0038 <span class="comment">% ------</span>
+0039 <span class="comment">% Author: David Legland</span>
+0040 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0041 <span class="comment">% Created: 2003-10-31</span>
+0042 <span class="comment">% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0043 
-0044 <span class="comment">%   HISTORY</span>
-0045 <span class="comment">%   23/02/2004 add more documentation. Manage different kind of inputs.</span>
-0046 <span class="comment">%     Does not draw points outside visible area.</span>
-0047 <span class="comment">%   26/02/2007 update processing of input arguments.</span>
-0048 <span class="comment">%   30/04/2009 remove clipping of points (use clipPoints if necessary)</span>
-0049 <span class="comment">%   2011-10-11 add management of axes handle</span>
-0050 <span class="comment">%   2018-31-06 fix the bug reported in https://savannah.gnu.org/bugs/index.php?53659</span>
-0051 
-0052 <span class="comment">% extract handle of axis to draw on</span>
-0053 <span class="keyword">if</span> isAxisHandle(varargin{1})
-0054     ax = varargin{1};
-0055     varargin(1) = [];
-0056 <span class="keyword">else</span>
-0057     ax = gca;
-0058 <span class="keyword">end</span>
-0059 
-0060 <span class="comment">% extract point(s) coordinates</span>
-0061 <span class="keyword">if</span> size(varargin{1}, 2) == 2
-0062     <span class="comment">% points packed in one array</span>
-0063     var = varargin{1};
-0064     px = var(:, 1);
-0065     py = var(:, 2);
-0066     varargin(1) = [];
-0067     
-0068 <span class="keyword">elseif</span> isvector(varargin{1})
-0069     <span class="comment">% points stored in separate arrays</span>
-0070     <span class="keyword">if</span> nargin == 1 || ~isnumeric(varargin{2})
-0071         error(<span class="string">'Missing array of y-coordinates'</span>);
-0072     <span class="keyword">end</span>
-0073     px = varargin{1};
-0074     py = varargin{2};
-0075     varargin(1:2) = [];
-0076     px = px(:);
-0077     py = py(:);
-0078     
-0079 <span class="keyword">else</span>
-0080     error(<span class="string">'Points should be two 1D arrays or one N-by-2 array'</span>);
-0081 <span class="keyword">end</span>
-0082 
-0083 <span class="keyword">if</span> length(varargin) &gt; 1
-0084     <span class="comment">% Check if linestyle is given</span>
-0085     char_opt = cellfun(@lower, varargin(cellfun(@ischar, varargin)), <span class="keyword">...</span>
-0086         <span class="string">'UniformOutput'</span>, false);
-0087     tf = ismember(<span class="string">'linestyle'</span>, char_opt);
-0088     <span class="keyword">if</span> tf
-0089         error(<span class="string">'Points cannot be draw with lines, use plot or drawPolygon instead'</span>);
-0090     <span class="keyword">end</span>
-0091     hh = plot(ax, px, py, <span class="string">'marker'</span>, <span class="string">'o'</span>, <span class="string">'linestyle'</span>, <span class="string">'none'</span>, varargin{:});
-0092     
-0093 <span class="keyword">elseif</span> length(varargin) == 1
-0094     <span class="comment">% use the specified single option (for example: 'b.', or 'k+')</span>
-0095     hh = plot(ax, px, py, varargin{1});
-0096 <span class="keyword">else</span>
-0097     <span class="comment">% use a default marker</span>
-0098     hh = plot(ax, px, py, <span class="string">'o'</span>);
-0099 <span class="keyword">end</span>
-0100 
-0101 <span class="keyword">if</span> nargout == 1
-0102     h = hh;
-0103 <span class="keyword">end</span>
-0104 
-0105 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0044 <span class="comment">% extract handle of axis to draw in</span>
+0045 [ax, varargin] = parseAxisHandle(varargin{:});
+0046 
+0047 <span class="comment">% extract point(s) coordinates</span>
+0048 <span class="keyword">if</span> size(varargin{1}, 2) == 2
+0049     <span class="comment">% points packed in one array</span>
+0050     var = varargin{1};
+0051     px = var(:, 1);
+0052     py = var(:, 2);
+0053     varargin(1) = [];
+0054     
+0055 <span class="keyword">elseif</span> isvector(varargin{1})
+0056     <span class="comment">% points stored in separate arrays</span>
+0057     <span class="keyword">if</span> nargin == 1 || ~isnumeric(varargin{2})
+0058         error(<span class="string">'Missing array of y-coordinates'</span>);
+0059     <span class="keyword">end</span>
+0060     px = varargin{1};
+0061     py = varargin{2};
+0062     varargin(1:2) = [];
+0063     px = px(:);
+0064     py = py(:);
+0065     
+0066 <span class="keyword">else</span>
+0067     error(<span class="string">'Points should be two 1D arrays or one N-by-2 array'</span>);
+0068 <span class="keyword">end</span>
+0069 
+0070 <span class="keyword">if</span> length(varargin) &gt; 1
+0071     <span class="comment">% Check if linestyle is given</span>
+0072     char_opt = cellfun(@lower, varargin(cellfun(@ischar, varargin)), <span class="keyword">...</span>
+0073         <span class="string">'UniformOutput'</span>, false);
+0074     tf = ismember(<span class="string">'linestyle'</span>, char_opt);
+0075     <span class="keyword">if</span> tf
+0076         error(<span class="string">'Points cannot be draw with lines, use plot or drawPolygon instead'</span>);
+0077     <span class="keyword">end</span>
+0078     hh = plot(ax, px, py, <span class="string">'marker'</span>, <span class="string">'o'</span>, <span class="string">'linestyle'</span>, <span class="string">'none'</span>, varargin{:});
+0079     
+0080 <span class="keyword">elseif</span> isscalar(varargin)
+0081     <span class="comment">% use the specified single option (for example: 'b.', or 'k+')</span>
+0082     hh = plot(ax, px, py, varargin{1});
+0083 <span class="keyword">else</span>
+0084     <span class="comment">% use a default marker</span>
+0085     hh = plot(ax, px, py, <span class="string">'o'</span>);
+0086 <span class="keyword">end</span>
+0087 
+0088 <span class="keyword">if</span> nargout == 1
+0089     h = hh;
+0090 <span class="keyword">end</span>
+0091 
+0092 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

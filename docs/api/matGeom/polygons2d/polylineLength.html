@@ -49,23 +49,17 @@
    ans = 
        6.2831
 
-   See also:
-   polygons2d, <a href="polylineCentroid.html" class="code" title="function center = polylineCentroid(varargin)">polylineCentroid</a>, <a href="polygonLength.html" class="code" title="function len = polygonLength(poly, varargin)">polygonLength</a>
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)
- Copyright 2009 INRA - Cepia Software Platform.</pre></div>
+   See also
+   polygons2d, <a href="polylineCentroid.html" class="code" title="function center = polylineCentroid(varargin)">polylineCentroid</a>, <a href="polygonLength.html" class="code" title="function len = polygonLength(poly, varargin)">polygonLength</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="polylineSubcurve.html" class="code" title="function [res, inds] = polylineSubcurve(poly, t0, t1)">polylineSubcurve</a>	Extract a portion of a polyline.</li></ul>
+<li><a href="polylineSubcurve.html" class="code" title="function [res, inds] = polylineSubcurve(poly, t0, t1)">polylineSubcurve</a>	POLYLINESUBCURVE Extract a portion of a polyline.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="curveCSMoment.html" class="code" title="function m = curveCSMoment(curve, p, q)">curveCSMoment</a>	CURVECSMOMENT  Compute centered scaled moment of a 2D curve.</li></ul>
+<li><a href="../../matGeom/graphs/clipMesh2dPolygon.html" class="code" title="function [nodes2, edges2, faces2] = clipMesh2dPolygon(nodes, edges, faces, poly)">clipMesh2dPolygon</a>	CLIPMESH2DPOLYGON  Clip a planar mesh with a polygon.</li><li><a href="curveCSMoment.html" class="code" title="function m = curveCSMoment(curve, p, q)">curveCSMoment</a>	CURVECSMOMENT  Compute centered scaled moment of a 2D curve.</li></ul>
 <!-- crossreference -->
 
 
@@ -94,63 +88,56 @@ This function is called by:
 0021 <span class="comment">%   ans =</span>
 0022 <span class="comment">%       6.2831</span>
 0023 <span class="comment">%</span>
-0024 <span class="comment">%   See also:</span>
+0024 <span class="comment">%   See also</span>
 0025 <span class="comment">%   polygons2d, polylineCentroid, polygonLength</span>
-0026 <span class="comment">%</span>
+0026 
 0027 <span class="comment">% ------</span>
 0028 <span class="comment">% Author: David Legland</span>
-0029 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0030 <span class="comment">% Created: 2009-04-30,    using Matlab 7.7.0.471 (R2008b)</span>
-0031 <span class="comment">% Copyright 2009 INRA - Cepia Software Platform.</span>
+0029 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0030 <span class="comment">% Created: 2009-04-30, using Matlab 7.7.0.471 (R2008b)</span>
+0031 <span class="comment">% Copyright 2009-2024 INRA - Cepia Software Platform</span>
 0032 
-0033 
-0034 <span class="comment">%   HISTORY</span>
-0035 <span class="comment">%   2006-05-22 manage any dimension for points, closed and open curves,</span>
-0036 <span class="comment">%       and update doc accordingly.</span>
-0037 <span class="comment">%   2009-04-30 rename as polylineLength</span>
-0038 <span class="comment">%   2011-03-31 add control for empty polylines</span>
-0039 
-0040 <span class="comment">% check there are enough points</span>
-0041 <span class="keyword">if</span> size(poly, 1) &lt; 2
-0042     len = 0;
-0043     <span class="keyword">return</span>;
-0044 <span class="keyword">end</span>
-0045 
-0046 <span class="comment">% check whether the curve is closed or not (default is open)</span>
-0047 closed = false;
-0048 <span class="keyword">if</span> ~isempty(varargin)
-0049     var = varargin{end};
-0050     <span class="keyword">if</span> ischar(var)
-0051         <span class="keyword">if</span> strcmpi(var, <span class="string">'closed'</span>)
-0052             closed = true;
-0053         <span class="keyword">end</span>
-0054         varargin = varargin(1:end-1);
-0055     <span class="keyword">end</span>
-0056 <span class="keyword">end</span>
-0057 
-0058 <span class="comment">% if the length is computed between 2 positions, compute only for a</span>
-0059 <span class="comment">% subcurve</span>
-0060 <span class="keyword">if</span> ~isempty(varargin)
-0061     <span class="comment">% values for 1 input argument</span>
-0062     t0 = 0;
-0063     t1 = varargin{1};
-0064     
-0065     <span class="comment">% values for 2 input arguments</span>
-0066     <span class="keyword">if</span> length(varargin)&gt;1
-0067         t0 = varargin{1};
-0068         t1 = varargin{2};
-0069     <span class="keyword">end</span>
-0070     
-0071     <span class="comment">% extract a portion of the polyline</span>
-0072     poly = <a href="polylineSubcurve.html" class="code" title="function [res, inds] = polylineSubcurve(poly, t0, t1)">polylineSubcurve</a>(poly, t0, t1);
-0073 <span class="keyword">end</span>
-0074 
-0075 <span class="comment">% compute lengths of each line segment, and sum up</span>
-0076 <span class="keyword">if</span> closed
-0077     len = sum(sqrt(sum(diff(poly([1:end 1],:)).^2, 2)));
-0078 <span class="keyword">else</span>
-0079     len = sum(sqrt(sum(diff(poly).^2, 2)));
-0080 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0033 <span class="comment">% check there are enough points</span>
+0034 <span class="keyword">if</span> size(poly, 1) &lt; 2
+0035     len = 0;
+0036     <span class="keyword">return</span>;
+0037 <span class="keyword">end</span>
+0038 
+0039 <span class="comment">% check whether the curve is closed or not (default is open)</span>
+0040 closed = false;
+0041 <span class="keyword">if</span> ~isempty(varargin)
+0042     var = varargin{end};
+0043     <span class="keyword">if</span> ischar(var)
+0044         <span class="keyword">if</span> strcmpi(var, <span class="string">'closed'</span>)
+0045             closed = true;
+0046         <span class="keyword">end</span>
+0047         varargin = varargin(1:end-1);
+0048     <span class="keyword">end</span>
+0049 <span class="keyword">end</span>
+0050 
+0051 <span class="comment">% if the length is computed between 2 positions, compute only for a</span>
+0052 <span class="comment">% subcurve</span>
+0053 <span class="keyword">if</span> ~isempty(varargin)
+0054     <span class="comment">% values for 1 input argument</span>
+0055     t0 = 0;
+0056     t1 = varargin{1};
+0057     
+0058     <span class="comment">% values for 2 input arguments</span>
+0059     <span class="keyword">if</span> length(varargin)&gt;1
+0060         t0 = varargin{1};
+0061         t1 = varargin{2};
+0062     <span class="keyword">end</span>
+0063     
+0064     <span class="comment">% extract a portion of the polyline</span>
+0065     poly = <a href="polylineSubcurve.html" class="code" title="function [res, inds] = polylineSubcurve(poly, t0, t1)">polylineSubcurve</a>(poly, t0, t1);
+0066 <span class="keyword">end</span>
+0067 
+0068 <span class="comment">% compute lengths of each line segment, and sum up</span>
+0069 <span class="keyword">if</span> closed
+0070     len = sum(sqrt(sum(diff(poly([1:end 1],:)).^2, 2)));
+0071 <span class="keyword">else</span>
+0072     len = sum(sqrt(sum(diff(poly).^2, 2)));
+0073 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

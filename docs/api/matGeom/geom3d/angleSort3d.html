@@ -46,23 +46,17 @@
    [PTS2, I] = angleSort3d(...);
    Also return in I the indices of PTS, such that PTS2 = PTS(I, :);
 
-   See also:
-   <a href="points3d.html" class="code" title="function points3d(varargin)">points3d</a>, <a href="angles3d.html" class="code" title="function angles3d(varargin)">angles3d</a>, angleSort
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- Created: 2005-11-24
- Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</pre></div>
+   See also
+   <a href="points3d.html" class="code" title="function points3d(varargin)">points3d</a>, <a href="angles3d.html" class="code" title="function angles3d(varargin)">angles3d</a>, angleSort</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>	PLANEPOSITION Compute position of a point on a plane.</li></ul>
+<li><a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>	CREATEPLANE Create a plane in parametrized form.</li><li><a href="planePosition.html" class="code" title="function [pos, zp] = planePosition(point, plane)">planePosition</a>	PLANEPOSITION Compute position of a point on a plane.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="../../matGeom/meshes3d/clipConvexPolyhedronHP.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronHP(nodes, faces, plane)">clipConvexPolyhedronHP</a>	CLIPCONVEXPOLYHEDRONHP Clip a convex polyhedron by a plane.</li><li><a href="../../matGeom/meshes3d/minConvexHull.html" class="code" title="function newFaces = minConvexHull(points, varargin)">minConvexHull</a>	MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.</li><li><a href="../../matGeom/meshes3d/polyhedronSlice.html" class="code" title="function points = polyhedronSlice(nodes, faces, plane)">polyhedronSlice</a>	POLYHEDRONSLICE Intersect a convex polyhedron with a plane.</li></ul>
+<li><a href="../../matGeom/meshes3d/clipConvexPolyhedronByPlane.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronByPlane(nodes, faces, plane)">clipConvexPolyhedronByPlane</a>	CLIPCONVEXPOLYHEDRONBYPLANE Clip a convex polyhedron by a plane.</li><li><a href="../../matGeom/meshes3d/minConvexHull.html" class="code" title="function newFaces = minConvexHull(points, varargin)">minConvexHull</a>	MINCONVEXHULL Return the unique minimal convex hull of a set of 3D points.</li><li><a href="../../matGeom/meshes3d/polyhedronSlice.html" class="code" title="function points = polyhedronSlice(nodes, faces, plane)">polyhedronSlice</a>	POLYHEDRONSLICE Intersect a convex polyhedron with a plane.</li></ul>
 <!-- crossreference -->
 
 
@@ -88,62 +82,58 @@ This function is called by:
 0018 <span class="comment">%   [PTS2, I] = angleSort3d(...);</span>
 0019 <span class="comment">%   Also return in I the indices of PTS, such that PTS2 = PTS(I, :);</span>
 0020 <span class="comment">%</span>
-0021 <span class="comment">%   See also:</span>
+0021 <span class="comment">%   See also</span>
 0022 <span class="comment">%   points3d, angles3d, angleSort</span>
-0023 <span class="comment">%</span>
+0023 
 0024 <span class="comment">% ------</span>
 0025 <span class="comment">% Author: David Legland</span>
-0026 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
+0026 <span class="comment">% E-mail: david.legland@inrae.fr</span>
 0027 <span class="comment">% Created: 2005-11-24</span>
-0028 <span class="comment">% Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0028 <span class="comment">% Copyright 2005-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)</span>
 0029 
-0030 
-0031 <span class="comment">%   HISTORY :</span>
-0032 <span class="comment">%   04/01/2007: remove unused variables</span>
+0030 <span class="comment">% default values</span>
+0031 pt0     = mean(pts, 1);
+0032 pt1     = pts(1,:);
 0033 
-0034 <span class="comment">% default values</span>
-0035 pt0     = mean(pts, 1);
-0036 pt1     = pts(1,:);
-0037 
-0038 <span class="keyword">if</span> length(varargin)==1
-0039     pt0 = varargin{1};
-0040 <span class="keyword">elseif</span> length(varargin)==2
-0041     pt0 = varargin{1};
-0042     pt1 = varargin{2};
-0043 <span class="keyword">end</span>
-0044 
-0045 <span class="comment">% create support plane</span>
-0046 plane   = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(pts(1:3, :));
-0047 
-0048 <span class="comment">% project points onto the plane</span>
-0049 pts2d   = <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>(pts, plane);
-0050 pt0     = <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>(pt0, plane);
-0051 pt1     = <a href="planePosition.html" class="code" title="function pos = planePosition(point, plane)">planePosition</a>(pt1, plane);
+0034 <span class="keyword">if</span> isscalar(varargin)
+0035     pt0 = varargin{1};
+0036 <span class="keyword">elseif</span> length(varargin)==2
+0037     pt0 = varargin{1};
+0038     pt1 = varargin{2};
+0039 <span class="keyword">end</span>
+0040 
+0041 <span class="comment">% create support plane</span>
+0042 plane   = <a href="createPlane.html" class="code" title="function plane = createPlane(varargin)">createPlane</a>(pts(1:3, :));
+0043 
+0044 <span class="comment">% project points onto the plane</span>
+0045 pts2d   = <a href="planePosition.html" class="code" title="function [pos, zp] = planePosition(point, plane)">planePosition</a>(pts, plane);
+0046 pt0     = <a href="planePosition.html" class="code" title="function [pos, zp] = planePosition(point, plane)">planePosition</a>(pt0, plane);
+0047 pt1     = <a href="planePosition.html" class="code" title="function [pos, zp] = planePosition(point, plane)">planePosition</a>(pt1, plane);
+0048 
+0049 <span class="comment">% compute origin angle</span>
+0050 theta0  = atan2(pt1(2)-pt0(2), pt1(1)-pt0(1));
+0051 theta0  = mod(theta0 + 2*pi, 2*pi);
 0052 
-0053 <span class="comment">% compute origin angle</span>
-0054 theta0  = atan2(pt1(2)-pt0(2), pt1(1)-pt0(1));
-0055 theta0  = mod(theta0 + 2*pi, 2*pi);
+0053 <span class="comment">% translate to reference point</span>
+0054 n       = size(pts, 1);
+0055 pts2d   = pts2d - repmat(pt0, [n 1]);
 0056 
-0057 <span class="comment">% translate to reference point</span>
-0058 n       = size(pts, 1);
-0059 pts2d   = pts2d - repmat(pt0, [n 1]);
+0057 <span class="comment">% compute angles</span>
+0058 angle   = atan2(pts2d(:,2), pts2d(:,1));
+0059 angle   = mod(angle - theta0 + 4*pi, 2*pi);
 0060 
-0061 <span class="comment">% compute angles</span>
-0062 angle   = atan2(pts2d(:,2), pts2d(:,1));
-0063 angle   = mod(angle - theta0 + 4*pi, 2*pi);
+0061 <span class="comment">% sort points according to angles</span>
+0062 [angle, I] = sort(angle); <span class="comment">%#ok&lt;ASGLU&gt;</span>
+0063 
 0064 
-0065 <span class="comment">% sort points according to angles</span>
-0066 [angle, I] = sort(angle); <span class="comment">%#ok&lt;ASGLU&gt;</span>
-0067 
-0068 
-0069 <span class="comment">% format output</span>
-0070 <span class="keyword">if</span> nargout&lt;2
-0071     varargout{1} = pts(I, :);
-0072 <span class="keyword">elseif</span> nargout==2
-0073     varargout{1} = pts(I, :);
-0074     varargout{2} = I;
-0075 <span class="keyword">end</span>
-0076</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0065 <span class="comment">% format output</span>
+0066 <span class="keyword">if</span> nargout&lt;2
+0067     varargout{1} = pts(I, :);
+0068 <span class="keyword">elseif</span> nargout==2
+0069     varargout{1} = pts(I, :);
+0070     varargout{2} = I;
+0071 <span class="keyword">end</span>
+0072</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

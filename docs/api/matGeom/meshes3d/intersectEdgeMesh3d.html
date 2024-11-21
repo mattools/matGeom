@@ -4,7 +4,7 @@
 <head>
   <title>Description of intersectEdgeMesh3d</title>
   <meta name="keywords" content="intersectEdgeMesh3d">
-  <meta name="description" content="Intersection points of a 3D edge with a mesh.">
+  <meta name="description" content="INTERSECTEDGEMESH3D Intersection points of a 3D edge with a mesh.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Intersection points of a 3D edge with a mesh.</strong></div>
+<div class="box"><strong>INTERSECTEDGEMESH3D Intersection points of a 3D edge with a mesh.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function [points, pos, faceInds] = intersectEdgeMesh3d(edge, varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Intersection points of a 3D edge with a mesh.
+<div class="fragment"><pre class="comment">INTERSECTEDGEMESH3D Intersection points of a 3D edge with a mesh.
 
    INTERS = intersectEdgeMesh3d(EDGE, VERTICES, FACES)
    Compute the intersection points between a 3D edge and a 3D mesh defined
@@ -54,7 +54,7 @@
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="../../matGeom/geom3d/edgeToLine3d.html" class="code" title="function line = edgeToLine3d(edge)">edgeToLine3d</a>	EDGETOLINE3D Convert a 3D edge to a 3D straight line.</li><li><a href="intersectLineMesh3d.html" class="code" title="function [points, pos, faceInds, lineInds] = intersectLineMesh3d(line, vertices, varargin)">intersectLineMesh3d</a>	Intersection points of a 3D line with a mesh.</li></ul>
+<li><a href="../../matGeom/geom3d/edgeToLine3d.html" class="code" title="function line = edgeToLine3d(edge)">edgeToLine3d</a>	EDGETOLINE3D Convert a 3D edge to a 3D straight line.</li><li><a href="intersectLineMesh3d.html" class="code" title="function [points, pos, faceInds, lineInds] = intersectLineMesh3d(line, vertices, varargin)">intersectLineMesh3d</a>	INTERSECTLINEMESH3D Intersection points of a 3D line with a mesh.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 </ul>
@@ -64,7 +64,7 @@ This function is called by:
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [points, pos, faceInds] = intersectEdgeMesh3d(edge, varargin)</a>
-0002 <span class="comment">% Intersection points of a 3D edge with a mesh.</span>
+0002 <span class="comment">%INTERSECTEDGEMESH3D Intersection points of a 3D edge with a mesh.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   INTERS = intersectEdgeMesh3d(EDGE, VERTICES, FACES)</span>
 0005 <span class="comment">%   Compute the intersection points between a 3D edge and a 3D mesh defined</span>
@@ -90,9 +90,9 @@ This function is called by:
 0025 
 0026 <span class="comment">% ------</span>
 0027 <span class="comment">% Author: David Legland</span>
-0028 <span class="comment">% e-mail: david.legland@inrae.fr</span>
-0029 <span class="comment">% Created: 2021-02-24,    using Matlab 9.9.0.1570001 (R2020b) Update 4</span>
-0030 <span class="comment">% Copyright 2021 INRA - Cepia Software Platform.</span>
+0028 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0029 <span class="comment">% Created: 2021-02-24, using Matlab 9.9.0.1570001 (R2020b) Update 4</span>
+0030 <span class="comment">% Copyright 2021-2024 INRA - Cepia Software Platform</span>
 0031 
 0032 <span class="comment">% perform computation on supporting line</span>
 0033 line = <a href="../../matGeom/geom3d/edgeToLine3d.html" class="code" title="function line = edgeToLine3d(edge)">edgeToLine3d</a>(edge);
@@ -103,6 +103,6 @@ This function is called by:
 0038 
 0039 <span class="comment">% select relevant results</span>
 0040 points = points(inds, :);</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

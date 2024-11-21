@@ -63,14 +63,7 @@
    http://mathworld.wolfram.com/Circle-CircleIntersection.html
 
    See also
-   <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="intersectLineCircle.html" class="code" title="function points = intersectLineCircle(line, circle)">intersectLineCircle</a>, <a href="radicalAxis.html" class="code" title="function line = radicalAxis(circle1, circle2)">radicalAxis</a>
-
-
- ------
- Author: David Legland
- e-mail: david.legland@grignon.inra.fr
- Created: 2011-01-20,    using Matlab 7.9.0.529 (R2009b)
- Copyright 2011 INRA - Cepia Software Platform.</pre></div>
+   <a href="circles2d.html" class="code" title="function circles2d(varargin)">circles2d</a>, <a href="intersectLineCircle.html" class="code" title="function points = intersectLineCircle(line, circle)">intersectLineCircle</a>, <a href="radicalAxis.html" class="code" title="function line = radicalAxis(circle1, circle2)">radicalAxis</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -124,68 +117,64 @@ This function is called by:
 0037 <span class="comment">%   See also</span>
 0038 <span class="comment">%   circles2d, intersectLineCircle, radicalAxis</span>
 0039 <span class="comment">%</span>
-0040 <span class="comment">%</span>
+0040 
 0041 <span class="comment">% ------</span>
 0042 <span class="comment">% Author: David Legland</span>
-0043 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0044 <span class="comment">% Created: 2011-01-20,    using Matlab 7.9.0.529 (R2009b)</span>
-0045 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0043 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0044 <span class="comment">% Created: 2011-01-20, using Matlab 7.9.0.529 (R2009b)</span>
+0045 <span class="comment">% Copyright 2011-2024 INRA - Cepia Software Platform</span>
 0046 
-0047 <span class="comment">%   HISTORY</span>
-0048 <span class="comment">%   2011-06-06 add support for multiple inputs</span>
-0049 
-0050 
-0051 <span class="comment">% adapt sizes of inputs</span>
-0052 n1 = size(circle1, 1);
-0053 n2 = size(circle2, 1);
-0054 <span class="keyword">if</span> n1 ~= n2
-0055     <span class="keyword">if</span> n1 &gt; 1 &amp;&amp; n2 == 1
-0056         circle2 = repmat(circle2, n1, 1);
-0057     <span class="keyword">elseif</span> n2 &gt; 1 &amp;&amp; n1 == 1
-0058         circle1 = repmat(circle1, n2, 1);
-0059     <span class="keyword">else</span> 
-0060         error(<span class="string">'Both input should have same number of rows'</span>);
-0061     <span class="keyword">end</span>
-0062 <span class="keyword">end</span>
-0063    
-0064 <span class="comment">% extract center and radius of each circle</span>
-0065 center1 = circle1(:, 1:2);
-0066 center2 = circle2(:, 1:2);
-0067 r1 = circle1(:,3);
-0068 r2 = circle2(:,3);
+0047 <span class="comment">% adapt sizes of inputs</span>
+0048 n1 = size(circle1, 1);
+0049 n2 = size(circle2, 1);
+0050 <span class="keyword">if</span> n1 ~= n2
+0051     <span class="keyword">if</span> n1 &gt; 1 &amp;&amp; n2 == 1
+0052         circle2 = repmat(circle2, n1, 1);
+0053     <span class="keyword">elseif</span> n2 &gt; 1 &amp;&amp; n1 == 1
+0054         circle1 = repmat(circle1, n2, 1);
+0055     <span class="keyword">else</span> 
+0056         error(<span class="string">'Both input should have same number of rows'</span>);
+0057     <span class="keyword">end</span>
+0058 <span class="keyword">end</span>
+0059    
+0060 <span class="comment">% extract center and radius of each circle</span>
+0061 center1 = circle1(:, 1:2);
+0062 center2 = circle2(:, 1:2);
+0063 r1 = circle1(:,3);
+0064 r2 = circle2(:,3);
+0065 
+0066 <span class="comment">% allocate memory for result</span>
+0067 nPoints = length(r1);
+0068 points = NaN * ones(2*nPoints, 2);
 0069 
-0070 <span class="comment">% allocate memory for result</span>
-0071 nPoints = length(r1);
-0072 points = NaN * ones(2*nPoints, 2);
-0073 
-0074 <span class="comment">% distance between circle centers</span>
-0075 d12 = <a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(center1, center2, <span class="string">'diag'</span>);
-0076 
-0077 <span class="comment">% get indices of circle couples with intersections</span>
-0078 inds = d12 &gt;= abs(r1 - r2) &amp; d12 &lt;= (r1 + r2);
+0070 <span class="comment">% distance between circle centers</span>
+0071 d12 = <a href="distancePoints.html" class="code" title="function dist = distancePoints(p1, p2, varargin)">distancePoints</a>(center1, center2, <span class="string">'diag'</span>);
+0072 
+0073 <span class="comment">% get indices of circle couples with intersections</span>
+0074 inds = d12 &gt;= abs(r1 - r2) &amp; d12 &lt;= (r1 + r2);
+0075 
+0076 <span class="keyword">if</span> sum(inds) == 0
+0077     <span class="keyword">return</span>;
+0078 <span class="keyword">end</span>
 0079 
-0080 <span class="keyword">if</span> sum(inds) == 0
-0081     <span class="keyword">return</span>;
-0082 <span class="keyword">end</span>
-0083 
-0084 <span class="comment">% angle of line from center1 to center2</span>
-0085 angle = <a href="angle2Points.html" class="code" title="function theta = angle2Points(varargin)">angle2Points</a>(center1(inds,:), center2(inds,:));
-0086 
-0087 <span class="comment">% position of intermediate point, located at the intersection of the</span>
-0088 <span class="comment">% radical axis with the line joining circle centers</span>
-0089 d1m  = d12(inds) / 2 + (r1(inds).^2 - r2(inds).^2) ./ (2 * d12(inds));
-0090 tmp = <a href="polarPoint.html" class="code" title="function point = polarPoint(varargin)">polarPoint</a>(center1(inds, :), d1m, angle);
-0091 
-0092 <span class="comment">% distance between intermediate point and each intersection point</span>
-0093 h   = sqrt(r1(inds).^2 - d1m.^2);
+0080 <span class="comment">% angle of line from center1 to center2</span>
+0081 angle = <a href="angle2Points.html" class="code" title="function theta = angle2Points(varargin)">angle2Points</a>(center1(inds,:), center2(inds,:));
+0082 
+0083 <span class="comment">% position of intermediate point, located at the intersection of the</span>
+0084 <span class="comment">% radical axis with the line joining circle centers</span>
+0085 d1m  = d12(inds) / 2 + (r1(inds).^2 - r2(inds).^2) ./ (2 * d12(inds));
+0086 tmp = <a href="polarPoint.html" class="code" title="function point = polarPoint(varargin)">polarPoint</a>(center1(inds, :), d1m, angle);
+0087 
+0088 <span class="comment">% distance between intermediate point and each intersection point</span>
+0089 h   = sqrt(r1(inds).^2 - d1m.^2);
+0090 
+0091 <span class="comment">% indices of valid intersections</span>
+0092 inds2 = find(inds)*2;
+0093 inds1 = inds2 - 1;
 0094 
-0095 <span class="comment">% indices of valid intersections</span>
-0096 inds2 = find(inds)*2;
-0097 inds1 = inds2 - 1;
-0098 
-0099 <span class="comment">% create intersection points</span>
-0100 points(inds1, :) = <a href="polarPoint.html" class="code" title="function point = polarPoint(varargin)">polarPoint</a>(tmp, h, angle - pi/2);
-0101 points(inds2, :) = <a href="polarPoint.html" class="code" title="function point = polarPoint(varargin)">polarPoint</a>(tmp, h, angle + pi/2);</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0095 <span class="comment">% create intersection points</span>
+0096 points(inds1, :) = <a href="polarPoint.html" class="code" title="function point = polarPoint(varargin)">polarPoint</a>(tmp, h, angle - pi/2);
+0097 points(inds2, :) = <a href="polarPoint.html" class="code" title="function point = polarPoint(varargin)">polarPoint</a>(tmp, h, angle + pi/2);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

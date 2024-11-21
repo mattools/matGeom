@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of drawEdgeLabels</title>
+  <meta name="keywords" content="drawEdgeLabels">
+  <meta name="description" content="DRAWEDGELABELS Draw values associated to graph edges.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">graphs</a> &gt; drawEdgeLabels.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\graphs&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>drawEdgeLabels
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>DRAWEDGELABELS Draw values associated to graph edges.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function varargout = drawEdgeLabels(p, e, value) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DRAWEDGELABELS Draw values associated to graph edges.
+ 
+   usage:
+   drawEdgeLabels(NODES, EDGES, VALUES);
+   NODES: array of double, containing x and y values of nodes
+   EDGES: array of int, containing indices of in and out nodes
+   VALUES is an array the same length of EDGES, containing values
+   associated to each edges of the graph.
+
+   The function computes the center of each edge, and puts the text with
+   associated value.
+   
+   H = drawEdgeLabels(...) return array of handles to each text structure,
+   making possible to change font, color, size</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = drawEdgeLabels(p, e, value)</a>
+0002 <span class="comment">%DRAWEDGELABELS Draw values associated to graph edges.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   usage:</span>
+0005 <span class="comment">%   drawEdgeLabels(NODES, EDGES, VALUES);</span>
+0006 <span class="comment">%   NODES: array of double, containing x and y values of nodes</span>
+0007 <span class="comment">%   EDGES: array of int, containing indices of in and out nodes</span>
+0008 <span class="comment">%   VALUES is an array the same length of EDGES, containing values</span>
+0009 <span class="comment">%   associated to each edges of the graph.</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   The function computes the center of each edge, and puts the text with</span>
+0012 <span class="comment">%   associated value.</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%   H = drawEdgeLabels(...) return array of handles to each text structure,</span>
+0015 <span class="comment">%   making possible to change font, color, size</span>
+0016 <span class="comment">%</span>
+0017 
+0018 <span class="comment">% ------</span>
+0019 <span class="comment">% Author: David Legland</span>
+0020 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0021 <span class="comment">% Created: 2003-02-10</span>
+0022 <span class="comment">% Copyright 2003-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0023 
+0024 <span class="keyword">if</span> length(p) &gt; 1 &amp;&amp; length(e) &gt; 1
+0025     h = zeros(length(e), 1);
+0026     hold on;
+0027     <span class="keyword">for</span> l=1:length(e)
+0028         <span class="comment">% indices of source and target nodes</span>
+0029         n1 = e(l, 1);
+0030         n2 = e(l, 2);
+0031         
+0032         <span class="comment">% node coordinates</span>
+0033         x1 = p(n1, 1);
+0034         y1 = p(n1, 2);
+0035         x2 = p(n2, 1);
+0036         y2 = p(n2, 2);
+0037         
+0038         <span class="comment">% display the edge</span>
+0039         line([x1 x2], [y1 y2]);
+0040         
+0041         <span class="comment">% coordinates of edge label</span>
+0042         xm = (x1 + x2)/2;
+0043         ym = (y1 + y2)/2;
+0044         
+0045         <span class="comment">% display label</span>
+0046         h(l) = text(xm, ym, sprintf(<span class="string">'%3d'</span>, floor(value(l))));
+0047     <span class="keyword">end</span>
+0048 <span class="keyword">end</span>
+0049 
+0050 <span class="keyword">if</span> nargout == 1
+0051     varargout = {h};
+0052 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

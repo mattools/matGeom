@@ -34,13 +34,8 @@
    Returns the origin point of the circle, i.e. the first point used for
    drawing circle.
 
-   See also:
-   <a href="circles3d.html" class="code" title="function circles3d(varargin)">circles3d</a>, <a href="points3d.html" class="code" title="function points3d(varargin)">points3d</a>, <a href="circle3dPosition.html" class="code" title="function theta = circle3dPosition(point, circle)">circle3dPosition</a>
-
-   ---------
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 21/02/2005</pre></div>
+   See also
+   <a href="circles3d.html" class="code" title="function circles3d(varargin)">circles3d</a>, <a href="points3d.html" class="code" title="function points3d(varargin)">points3d</a>, <a href="circle3dPosition.html" class="code" title="function theta = circle3dPosition(point, circle)">circle3dPosition</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -63,43 +58,41 @@ This function is called by:
 0006 <span class="comment">%   Returns the origin point of the circle, i.e. the first point used for</span>
 0007 <span class="comment">%   drawing circle.</span>
 0008 <span class="comment">%</span>
-0009 <span class="comment">%   See also:</span>
+0009 <span class="comment">%   See also</span>
 0010 <span class="comment">%   circles3d, points3d, circle3dPosition</span>
-0011 <span class="comment">%</span>
-0012 <span class="comment">%   ---------</span>
-0013 <span class="comment">%   author : David Legland</span>
-0014 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0015 <span class="comment">%   created the 21/02/2005</span>
-0016 <span class="comment">%</span>
+0011 
+0012 <span class="comment">% ------</span>
+0013 <span class="comment">% Author: David Legland</span>
+0014 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0015 <span class="comment">% Created: 2005-02-21</span>
+0016 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0017 
-0018 <span class="comment">%   HISTORY</span>
-0019 
-0020 <span class="comment">% get center and radius</span>
-0021 circle = varargin{1};
-0022 xc = circle(:,1);
-0023 yc = circle(:,2);
-0024 zc = circle(:,3);
-0025 r  = circle(:,4);
-0026 
-0027 <span class="comment">% get angle of normal</span>
-0028 theta   = circle(:,5);
-0029 phi     = circle(:,6);
-0030 
-0031 <span class="comment">% get roll</span>
-0032 <span class="keyword">if</span> size(circle, 2)==7
-0033     psi = circle(:,7);
-0034 <span class="keyword">else</span>
-0035     psi = zeros(size(circle, 1), 1);
-0036 <span class="keyword">end</span>
-0037 
-0038 <span class="comment">% create origin point</span>
-0039 pt0 = [r 0 0];
-0040 
-0041 <span class="comment">% compute transformation from local basis to world basis</span>
-0042 trans   = localToGlobal3d(xc, yc, zc, theta, phi, psi);
-0043 
-0044 <span class="comment">% transform the point</span>
-0045 ori = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(pt0, trans);</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0018 <span class="comment">% get center and radius</span>
+0019 circle = varargin{1};
+0020 xc = circle(:,1);
+0021 yc = circle(:,2);
+0022 zc = circle(:,3);
+0023 r  = circle(:,4);
+0024 
+0025 <span class="comment">% get angle of normal</span>
+0026 theta   = circle(:,5);
+0027 phi     = circle(:,6);
+0028 
+0029 <span class="comment">% get roll</span>
+0030 <span class="keyword">if</span> size(circle, 2)==7
+0031     psi = circle(:,7);
+0032 <span class="keyword">else</span>
+0033     psi = zeros(size(circle, 1), 1);
+0034 <span class="keyword">end</span>
+0035 
+0036 <span class="comment">% create origin point</span>
+0037 pt0 = [r 0 0];
+0038 
+0039 <span class="comment">% compute transformation from local basis to world basis</span>
+0040 trans   = localToGlobal3d(xc, yc, zc, theta, phi, psi);
+0041 
+0042 <span class="comment">% transform the point</span>
+0043 ori = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(pt0, trans);</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

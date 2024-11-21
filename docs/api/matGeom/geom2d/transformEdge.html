@@ -42,13 +42,8 @@
    Also wotk when EDGES is a [N*4] array of double. In this case, EDGE2
    has the same size as EDGE. 
 
-   See also:
-   <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="transforms2d.html" class="code" title="function transforms2d(varargin)">transforms2d</a>, <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>, translation, rotation
-
-   ---------
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 06/04/2004.</pre></div>
+   See also
+   <a href="edges2d.html" class="code" title="function edges2d(varargin)">edges2d</a>, <a href="transforms2d.html" class="code" title="function transforms2d(varargin)">transforms2d</a>, <a href="transformPoint.html" class="code" title="function varargout = transformPoint(varargin)">transformPoint</a>, translation, rotation</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -79,32 +74,30 @@ This function is called by:
 0014 <span class="comment">%   Also wotk when EDGES is a [N*4] array of double. In this case, EDGE2</span>
 0015 <span class="comment">%   has the same size as EDGE.</span>
 0016 <span class="comment">%</span>
-0017 <span class="comment">%   See also:</span>
+0017 <span class="comment">%   See also</span>
 0018 <span class="comment">%   edges2d, transforms2d, transformPoint, translation, rotation</span>
-0019 <span class="comment">%</span>
-0020 <span class="comment">%   ---------</span>
-0021 <span class="comment">%   author : David Legland</span>
-0022 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0023 <span class="comment">%   created the 06/04/2004.</span>
-0024 
-0025 <span class="comment">% 14/08/2017 Updated by Juanpi Carbajal &lt;ajuanpi+dev@gmail.com&gt;</span>
-0026 
-0027 
-0028 <span class="comment">% allocate memory</span>
-0029 dest = zeros(size(edge));
-0030 
-0031 <span class="comment">% compute position</span>
-0032 <span class="keyword">for</span> i=1:2
-0033   T           = trans(i,1:2).';
-0034   dest(:,i)   = edge(:,1:2) * T;
-0035   dest(:,i+2) = edge(:,3:4) * T;
-0036 <span class="keyword">end</span>
-0037 
-0038 <span class="comment">% add translation vector, if exist</span>
-0039 <span class="keyword">if</span> size(trans, 2) &gt; 2
-0040   dest = bsxfun (@plus, dest, trans([1:2 1:2],3).');
-0041 <span class="keyword">end</span>
-0042</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0019 
+0020 <span class="comment">% ------</span>
+0021 <span class="comment">% Author: David Legland</span>
+0022 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0023 <span class="comment">% Created: 2004-04-06</span>
+0024 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0025 
+0026 <span class="comment">% allocate memory</span>
+0027 dest = zeros(size(edge));
+0028 
+0029 <span class="comment">% compute position</span>
+0030 <span class="keyword">for</span> i=1:2
+0031   T           = trans(i,1:2).';
+0032   dest(:,i)   = edge(:,1:2) * T;
+0033   dest(:,i+2) = edge(:,3:4) * T;
+0034 <span class="keyword">end</span>
+0035 
+0036 <span class="comment">% add translation vector, if exist</span>
+0037 <span class="keyword">if</span> size(trans, 2) &gt; 2
+0038   dest = bsxfun (@plus, dest, trans([1:2 1:2],3).');
+0039 <span class="keyword">end</span>
+0040</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

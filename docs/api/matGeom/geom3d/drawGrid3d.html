@@ -50,7 +50,16 @@
    around the grid).
 
    H = drawGrid3d(...);
-   return a vector of handles for each LINE object which was crated.</pre></div>
+   return a vector of handles for each LINE object which was crated.
+
+
+   Example
+     figure; hold on; axis equal; axis([-5 65 -5 45 -5 45]); view(3);
+     drawGrid3d([0 0 0], [20 20 20]);
+
+
+   See also
+     <a href="drawLine3d.html" class="code" title="function h = drawLine3d(lin, varargin)">drawLine3d</a>, <a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>, <a href="clipLine3d.html" class="code" title="function edge = clipLine3d(line, box)">clipLine3d</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -91,97 +100,108 @@ This function is called by:
 0024 <span class="comment">%   H = drawGrid3d(...);</span>
 0025 <span class="comment">%   return a vector of handles for each LINE object which was crated.</span>
 0026 <span class="comment">%</span>
-0027 
-0028 <span class="comment">%   ------</span>
-0029 <span class="comment">%   Author: David Legland</span>
-0030 <span class="comment">%   e-mail: david.legland@grignon.inra.fr</span>
-0031 <span class="comment">%   Created: 2005-11-17</span>
-0032 <span class="comment">%   Copyright 2005 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
-0033 
-0034 <span class="comment">%% initialize variables -----</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">%   Example</span>
+0029 <span class="comment">%     figure; hold on; axis equal; axis([-5 65 -5 45 -5 45]); view(3);</span>
+0030 <span class="comment">%     drawGrid3d([0 0 0], [20 20 20]);</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">%   See also</span>
+0034 <span class="comment">%     drawLine3d, drawEdge3d, clipLine3d</span>
 0035 
-0036 <span class="comment">% default values</span>
-0037 closed = true;
-0038 origin = [0 0 0];
-0039 spacing = [1 1 1];
-0040 
-0041 <span class="comment">% check if grid is open or not</span>
-0042 str = <span class="string">''</span>;
-0043 <span class="keyword">if</span> ~isempty(varargin)
-0044     str = varargin{end};
-0045 <span class="keyword">end</span>
-0046 <span class="keyword">if</span> ischar(str)
-0047     <span class="keyword">if</span> strncmpi(str, <span class="string">'open'</span>, 4)
-0048         closed = false;
-0049     <span class="keyword">end</span>
-0050     varargin = varargin(1:end-1);
-0051 <span class="keyword">end</span>
-0052 
-0053 <span class="comment">% check origin and grid spacing</span>
-0054 <span class="keyword">if</span> length(varargin)==1
-0055     spacing = varargin{1};
-0056 <span class="keyword">elseif</span> length(varargin)==2
-0057     origin = varargin{1};
-0058     spacing = varargin{2};
-0059 <span class="keyword">end</span>
-0060 
-0061 <span class="comment">%% Compute internam data -----</span>
-0062 
-0063 <span class="comment">% get axis limits</span>
-0064 ax = axis;
-0065 x0 = ax(1); x1 = ax(2);
-0066 y0 = ax(3); y1 = ax(4);
-0067 z0 = ax(5); z1 = ax(6);
-0068 
-0069 <span class="comment">% get first and last coordinates of the grid in each direction</span>
-0070 dx = spacing(1); dy = spacing(2); dz = spacing(3);
-0071 xe = x0 + mod(origin(1) - x0, dx);
-0072 xf = x1 - mod(x1 - origin(1), dx);
-0073 ye = y0 + mod(origin(2) - y0, dy);
-0074 yf = y1 - mod(y1 - origin(2), dy);
-0075 ze = z0 + mod(origin(1) - z0, dz);
-0076 zf = z1 - mod(z1 - origin(1), dz);
-0077 
-0078 <span class="comment">% update first and last coordinate if grid is 'closed'</span>
-0079 <span class="keyword">if</span> closed
-0080     x0 = xe; x1 = xf;
-0081     y0 = ye; y1 = yf;
-0082     z0 = ze; z1 = zf;
-0083 <span class="keyword">end</span>
-0084 
-0085 
-0086 <span class="comment">%% Draw the grid -----</span>
-0087 
-0088 h = [];
-0089 <span class="comment">%TODO: rewrite code, avoiding loops</span>
-0090 
-0091 <span class="comment">% draw lines parallel to x axis</span>
-0092 <span class="keyword">for</span> y = ye:dy:yf
-0093     <span class="keyword">for</span> z = ze:dz:zf
-0094         h = [h; <a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>([x0 y z x1 y z])]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0095     <span class="keyword">end</span>
-0096 <span class="keyword">end</span>
-0097 
-0098 <span class="comment">% draw lines parallel to y axis</span>
-0099 <span class="keyword">for</span> x = xe:dx:xf
-0100     <span class="keyword">for</span> z = ze:dz:zf
-0101         h = [h; <a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>([x y0 z x y1 z])]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0102     <span class="keyword">end</span>
-0103 <span class="keyword">end</span>
-0104 
-0105 <span class="comment">% draw lines parallel to z axis</span>
-0106 <span class="keyword">for</span> x = xe:dx:xf
-0107     <span class="keyword">for</span> y = ye:dy:yf
-0108         h = [h; <a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>([x y z0 x y z1])]; <span class="comment">%#ok&lt;AGROW&gt;</span>
-0109     <span class="keyword">end</span>
-0110 <span class="keyword">end</span>
-0111 
-0112 
-0113 <span class="comment">%% Check output arguments -----</span>
-0114 
-0115 <span class="keyword">if</span> nargout&gt;0
-0116     varargout{1} = h;
-0117 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0036 <span class="comment">% ------</span>
+0037 <span class="comment">% Author: David Legland</span>
+0038 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0039 <span class="comment">% Created: 2005-11-17</span>
+0040 <span class="comment">% Copyright 2005-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)</span>
+0041 
+0042 <span class="comment">%% initialize variables</span>
+0043 
+0044 <span class="comment">% extract handle of axis to draw on</span>
+0045 [hAx, varargin] = parseAxisHandle(varargin{:});
+0046 
+0047 <span class="comment">% default values</span>
+0048 closed = true;
+0049 origin = [0 0 0];
+0050 spacing = [1 1 1];
+0051 
+0052 <span class="comment">% check if grid is open or not</span>
+0053 str = <span class="string">''</span>;
+0054 <span class="keyword">if</span> ~isempty(varargin)
+0055     str = varargin{end};
+0056 <span class="keyword">end</span>
+0057 <span class="keyword">if</span> ischar(str)
+0058     <span class="keyword">if</span> strncmpi(str, <span class="string">'open'</span>, 4)
+0059         closed = false;
+0060     <span class="keyword">end</span>
+0061     varargin = varargin(1:end-1);
+0062 <span class="keyword">end</span>
+0063 
+0064 <span class="comment">% check origin and grid spacing</span>
+0065 <span class="keyword">if</span> isscalar(varargin)
+0066     spacing = varargin{1};
+0067 <span class="keyword">elseif</span> length(varargin)==2
+0068     origin = varargin{1};
+0069     spacing = varargin{2};
+0070 <span class="keyword">end</span>
+0071 
+0072 <span class="comment">%% Compute internal data</span>
+0073 
+0074 <span class="comment">% get axis limits</span>
+0075 ax = axis(hAx);
+0076 x0 = ax(1); x1 = ax(2);
+0077 y0 = ax(3); y1 = ax(4);
+0078 z0 = ax(5); z1 = ax(6);
+0079 
+0080 <span class="comment">% get first and last coordinates of the grid in each direction</span>
+0081 dx = spacing(1); dy = spacing(2); dz = spacing(3);
+0082 xe = x0 + mod(origin(1) - x0, dx);
+0083 xf = x1 - mod(x1 - origin(1), dx);
+0084 ye = y0 + mod(origin(2) - y0, dy);
+0085 yf = y1 - mod(y1 - origin(2), dy);
+0086 ze = z0 + mod(origin(1) - z0, dz);
+0087 zf = z1 - mod(z1 - origin(1), dz);
+0088 
+0089 <span class="comment">% update first and last coordinate if grid is 'closed'</span>
+0090 <span class="keyword">if</span> closed
+0091     x0 = xe; x1 = xf;
+0092     y0 = ye; y1 = yf;
+0093     z0 = ze; z1 = zf;
+0094 <span class="keyword">end</span>
+0095 
+0096 
+0097 <span class="comment">%% Draw the grid</span>
+0098 
+0099 <span class="comment">% header array, one header for each line segment</span>
+0100 h = [];
+0101 
+0102 <span class="comment">% draw lines parallel to x axis</span>
+0103 <span class="keyword">for</span> y = ye:dy:yf
+0104     <span class="keyword">for</span> z = ze:dz:zf
+0105         h = [h; <a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>(hAx, [x0 y z x1 y z])]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0106     <span class="keyword">end</span>
+0107 <span class="keyword">end</span>
+0108 
+0109 <span class="comment">% draw lines parallel to y axis</span>
+0110 <span class="keyword">for</span> x = xe:dx:xf
+0111     <span class="keyword">for</span> z = ze:dz:zf
+0112         h = [h; <a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>(hAx, [x y0 z x y1 z])]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0113     <span class="keyword">end</span>
+0114 <span class="keyword">end</span>
+0115 
+0116 <span class="comment">% draw lines parallel to z axis</span>
+0117 <span class="keyword">for</span> x = xe:dx:xf
+0118     <span class="keyword">for</span> y = ye:dy:yf
+0119         h = [h; <a href="drawEdge3d.html" class="code" title="function varargout = drawEdge3d(varargin)">drawEdge3d</a>(hAx, [x y z0 x y z1])]; <span class="comment">%#ok&lt;AGROW&gt;</span>
+0120     <span class="keyword">end</span>
+0121 <span class="keyword">end</span>
+0122 
+0123 
+0124 <span class="comment">%% Check output arguments</span>
+0125 
+0126 <span class="keyword">if</span> nargout &gt; 0
+0127     varargout{1} = h;
+0128 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

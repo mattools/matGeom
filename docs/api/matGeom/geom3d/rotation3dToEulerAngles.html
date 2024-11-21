@@ -49,21 +49,14 @@
    References
    Code from '1994 - Shoemake - Graphics Gems IV: Euler Angle Conversion:
    http://webdocs.cs.ualberta.ca/~graphics/books/GraphicsGems/gemsiv/euler_angle/EulerAngles.c
-   (see also rotm2eul, that is part of MATLAB's Robotics System Toolbox)
+   (see rotm2eul, that is part of MATLAB's Robotics System Toolbox)
    Modified using explanations in:
    http://www.gregslabaugh.net/publications/euler.pdf
    https://www.geometrictools.com/Documentation/EulerAngles.pdf
 
    See also
    <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="rotation3dAxisAndAngle.html" class="code" title="function [axis, theta] = rotation3dAxisAndAngle(mat)">rotation3dAxisAndAngle</a>, <a href="createRotation3dLineAngle.html" class="code" title="function mat = createRotation3dLineAngle(line, theta)">createRotation3dLineAngle</a>,
-   <a href="eulerAnglesToRotation3d.html" class="code" title="function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)">eulerAnglesToRotation3d</a>
-
-
- ------
- Authors: David Legland, oqilipo
- e-mail: david.legland@grignon.inra.fr
- Created: 2010-08-11,    using Matlab 7.9.0.529 (R2009b)
- Copyright 2010 INRA - Cepia Software Platform.</pre></div>
+   <a href="eulerAnglesToRotation3d.html" class="code" title="function mat = eulerAnglesToRotation3d(phi, theta, psi, varargin)">eulerAnglesToRotation3d</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -72,7 +65,7 @@ This function calls:
 <li><a href="isTransform3d.html" class="code" title="function a = isTransform3d(trans, varargin)">isTransform3d</a>	ISTRANSFORM3D Check if input is a affine transformation matrix.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="drawAngleBetweenVectors3d.html" class="code" title="function varargout = drawAngleBetweenVectors3d(o, v1, v2, r, varargin)">drawAngleBetweenVectors3d</a>	DRAWANGLEBETWEENVECTORS3D Draw an arc between 2 vectors.</li><li><a href="equivalentEllipsoid.html" class="code" title="function ell = equivalentEllipsoid(points)">equivalentEllipsoid</a>	Equivalent ellipsoid of a set of 3D points.</li><li><a href="fitEllipse3d.html" class="code" title="function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin)">fitEllipse3d</a>	FITELLIPSE3D Fit an ellipse to a set of points.</li><li><a href="orientedBox3d.html" class="code" title="function [box3d, rotMat] = orientedBox3d(pts)">orientedBox3d</a>	Object-oriented bounding box of a set of 3D points.</li></ul>
+<li><a href="drawAngleBetweenVectors3d.html" class="code" title="function varargout = drawAngleBetweenVectors3d(varargin)">drawAngleBetweenVectors3d</a>	DRAWANGLEBETWEENVECTORS3D Draw an arc between 2 vectors.</li><li><a href="equivalentEllipsoid.html" class="code" title="function ell = equivalentEllipsoid(points)">equivalentEllipsoid</a>	EQUIVALENTELLIPSOID Equivalent ellipsoid of a set of 3D points.</li><li><a href="fitEllipse3d.html" class="code" title="function [fittedEllipse3d, TFM3D] = fitEllipse3d(points, varargin)">fitEllipse3d</a>	FITELLIPSE3D Fit an ellipse to a set of points.</li><li><a href="orientedBox3d.html" class="code" title="function [box3d, rotMat] = orientedBox3d(pts)">orientedBox3d</a>	ORIENTEDBOX3D Object-oriented bounding box of a set of 3D points.</li><li><a href="transformCircle3d.html" class="code" title="function circle2 = transformCircle3d(circle, tfm)">transformCircle3d</a>	TRANSFORMCIRCLE3D Transform a 3D circle with a 3D affine transformation.</li><li><a href="../../matGeom/meshes3d/meshEquivalentEllipsoid.html" class="code" title="function ellipsoid = meshEquivalentEllipsoid(vertices, faces, varargin)">meshEquivalentEllipsoid</a>	MESHEQUIVALENTELLIPSOID Equivalent ellipsoid with same moments as the given mesh.</li></ul>
 <!-- crossreference -->
 
 
@@ -101,7 +94,7 @@ This function is called by:
 0021 <span class="comment">%   References</span>
 0022 <span class="comment">%   Code from '1994 - Shoemake - Graphics Gems IV: Euler Angle Conversion:</span>
 0023 <span class="comment">%   http://webdocs.cs.ualberta.ca/~graphics/books/GraphicsGems/gemsiv/euler_angle/EulerAngles.c</span>
-0024 <span class="comment">%   (see also rotm2eul, that is part of MATLAB's Robotics System Toolbox)</span>
+0024 <span class="comment">%   (see rotm2eul, that is part of MATLAB's Robotics System Toolbox)</span>
 0025 <span class="comment">%   Modified using explanations in:</span>
 0026 <span class="comment">%   http://www.gregslabaugh.net/publications/euler.pdf</span>
 0027 <span class="comment">%   https://www.geometrictools.com/Documentation/EulerAngles.pdf</span>
@@ -110,12 +103,12 @@ This function is called by:
 0030 <span class="comment">%   transforms3d, rotation3dAxisAndAngle, createRotation3dLineAngle,</span>
 0031 <span class="comment">%   eulerAnglesToRotation3d</span>
 0032 <span class="comment">%</span>
-0033 <span class="comment">%</span>
+0033 
 0034 <span class="comment">% ------</span>
 0035 <span class="comment">% Authors: David Legland, oqilipo</span>
-0036 <span class="comment">% e-mail: david.legland@grignon.inra.fr</span>
-0037 <span class="comment">% Created: 2010-08-11,    using Matlab 7.9.0.529 (R2009b)</span>
-0038 <span class="comment">% Copyright 2010 INRA - Cepia Software Platform.</span>
+0036 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0037 <span class="comment">% Created: 2010-08-11, using Matlab 7.9.0.529 (R2009b)</span>
+0038 <span class="comment">% Copyright 2010-2024 INRA - Cepia Software Platform</span>
 0039 
 0040 p = inputParser;
 0041 validStrings = {<span class="keyword">...</span>
@@ -286,6 +279,6 @@ This function is called by:
 0206     <span class="comment">% three separate arrays</span>
 0207     varargout = cellfun(@rad2deg, {phi theta psi},<span class="string">'uni'</span>,0);
 0208 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

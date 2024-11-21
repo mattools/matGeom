@@ -40,12 +40,7 @@
          0 0 0 inf 0 0 0 1 0])
 
    See also
-   createPlane3d
-
- ------
- Author: oqilipo
- Created: 2017-07-09
- Copyright 2017</pre></div>
+   createPlane3d</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -54,7 +49,7 @@ This function calls:
 <li><a href="isParallel3d.html" class="code" title="function b = isParallel3d(v1, v2, varargin)">isParallel3d</a>	ISPARALLEL3D Check parallelism of two 3D vectors.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="drawPlane3d.html" class="code" title="function h = drawPlane3d(plane, varargin)">drawPlane3d</a>	Draw a plane clipped by the current axes.</li><li><a href="drawPlatform.html" class="code" title="function  varargout = drawPlatform(plane, siz, varargin)">drawPlatform</a>	DRAWPLATFORM Draw a rectangular platform with a given size.</li><li><a href="../../matGeom/meshes3d/cutMeshByPlane.html" class="code" title="function varargout = cutMeshByPlane(v, f, plane, varargin)">cutMeshByPlane</a>	CUTMESHBYPLANE Cut a mesh by a plane.</li><li><a href="../../matGeom/meshes3d/meshSilhouette.html" class="code" title="function silhouette = meshSilhouette(v, f, varargin)">meshSilhouette</a>	MESHSILHOUETTE Compute the 2D outline of a 3D mesh on an arbitrary plane.</li></ul>
+<li><a href="clipPolygonByPlane3d.html" class="code" title="function poly2 = clipPolygonByPlane3d(poly, plane, varargin)">clipPolygonByPlane3d</a>	CLIPPOLYGONBYPLANE3D Clip a 3D polygon with a plane.</li><li><a href="drawPlane3d.html" class="code" title="function h = drawPlane3d(plane, varargin)">drawPlane3d</a>	DRAWPLANE3D Draw a plane clipped by the current axes.</li><li><a href="drawPlatform.html" class="code" title="function  varargout = drawPlatform(varargin)">drawPlatform</a>	DRAWPLATFORM Draw a rectangular platform with a given size.</li><li><a href="../../matGeom/meshes3d/clipMeshByPlane.html" class="code" title="function [v2, f2, bE] = clipMeshByPlane(v, f, plane, varargin)">clipMeshByPlane</a>	CLIPMESHBYPLANE Clip a mesh by a plane.</li><li><a href="../../matGeom/meshes3d/cutMeshByPlane.html" class="code" title="function varargout = cutMeshByPlane(v, f, plane, varargin)">cutMeshByPlane</a>	CUTMESHBYPLANE Cut a mesh by a plane.</li><li><a href="../../matGeom/meshes3d/meshSilhouette.html" class="code" title="function silhouette = meshSilhouette(v, f, varargin)">meshSilhouette</a>	MESHSILHOUETTE Compute the 2D outline of a 3D mesh on an arbitrary plane.</li></ul>
 <!-- crossreference -->
 
 
@@ -75,26 +70,27 @@ This function is called by:
 0013 <span class="comment">%</span>
 0014 <span class="comment">%   See also</span>
 0015 <span class="comment">%   createPlane3d</span>
-0016 <span class="comment">%</span>
+0016 
 0017 <span class="comment">% ------</span>
 0018 <span class="comment">% Author: oqilipo</span>
-0019 <span class="comment">% Created: 2017-07-09</span>
-0020 <span class="comment">% Copyright 2017</span>
-0021 
-0022 narginchk(1,1)
-0023 
-0024 <span class="keyword">if</span> size(plane,2)~=9
-0025     d=false(size(plane,1),1);
-0026     <span class="keyword">return</span>
-0027 <span class="keyword">end</span>
-0028 
-0029 a = ~any(isnan(plane),2);
-0030 b = ~any(isinf(plane),2);
-0031 c = ~<a href="isParallel3d.html" class="code" title="function b = isParallel3d(v1, v2, varargin)">isParallel3d</a>(plane(:,4:6), plane(:,7:9));
-0032 
-0033 d = a &amp; b &amp; c;
-0034 
-0035 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0019 <span class="comment">% E-mail: N/A</span>
+0020 <span class="comment">% Created: 2017-07-09</span>
+0021 <span class="comment">% Copyright 2017-2024</span>
+0022 
+0023 narginchk(1,1)
+0024 
+0025 <span class="keyword">if</span> size(plane,2)~=9
+0026     d=false(size(plane,1),1);
+0027     <span class="keyword">return</span>
+0028 <span class="keyword">end</span>
+0029 
+0030 a = ~any(isnan(plane),2);
+0031 b = ~any(isinf(plane),2);
+0032 c = ~<a href="isParallel3d.html" class="code" title="function b = isParallel3d(v1, v2, varargin)">isParallel3d</a>(plane(:,4:6), plane(:,7:9));
+0033 
+0034 d = a &amp; b &amp; c;
+0035 
+0036 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

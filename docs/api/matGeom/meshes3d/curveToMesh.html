@@ -4,7 +4,7 @@
 <head>
   <title>Description of curveToMesh</title>
   <meta name="keywords" content="curveToMesh">
-  <meta name="description" content="Create a mesh surrounding a 3D curve.">
+  <meta name="description" content="CURVETOMESH Create a mesh surrounding a 3D curve.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Create a mesh surrounding a 3D curve.</strong></div>
+<div class="box"><strong>CURVETOMESH Create a mesh surrounding a 3D curve.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function [vertices, faces] = curveToMesh(curve, varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Create a mesh surrounding a 3D curve.
+<div class="fragment"><pre class="comment">CURVETOMESH Create a mesh surrounding a 3D curve.
 
    [V, F] = curveToMesh(CURVE)
    Computes the vertices and the faces of the mesh surrounding the
@@ -72,7 +72,7 @@ This function is called by:
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [vertices, faces] = curveToMesh(curve, varargin)</a>
-0002 <span class="comment">% Create a mesh surrounding a 3D curve.</span>
+0002 <span class="comment">%CURVETOMESH Create a mesh surrounding a 3D curve.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   [V, F] = curveToMesh(CURVE)</span>
 0005 <span class="comment">%   Computes the vertices and the faces of the mesh surrounding the</span>
@@ -102,12 +102,12 @@ This function is called by:
 0029 <span class="comment">%</span>
 0030 <span class="comment">%   See also</span>
 0031 <span class="comment">%     meshes3d, torusMesh, surfToMesh</span>
-0032  
+0032 
 0033 <span class="comment">% ------</span>
 0034 <span class="comment">% Author: David Legland</span>
-0035 <span class="comment">% e-mail: david.legland@inra.fr</span>
-0036 <span class="comment">% Created: 2015-01-07,    using Matlab 8.4.0.150421 (R2014b)</span>
-0037 <span class="comment">% Copyright 2015 INRA - Cepia Software Platform.</span>
+0035 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0036 <span class="comment">% Created: 2015-01-07, using Matlab 8.4.0.150421 (R2014b)</span>
+0037 <span class="comment">% Copyright 2015-2024 INRA - Cepia Software Platform</span>
 0038 
 0039 radius = .1;
 0040 <span class="keyword">if</span> nargin &gt; 1
@@ -161,6 +161,6 @@ This function is called by:
 0088     mod(inds + nCorners + add1 - 1, nVerts) + 1 <span class="keyword">...</span>
 0089     mod(inds + nCorners - 1, nVerts) + 1];
 0090</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

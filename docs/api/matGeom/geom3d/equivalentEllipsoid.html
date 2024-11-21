@@ -4,7 +4,7 @@
 <head>
   <title>Description of equivalentEllipsoid</title>
   <meta name="keywords" content="equivalentEllipsoid">
-  <meta name="description" content="Equivalent ellipsoid of a set of 3D points.">
+  <meta name="description" content="EQUIVALENTELLIPSOID Equivalent ellipsoid of a set of 3D points.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,13 +21,13 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Equivalent ellipsoid of a set of 3D points.</strong></div>
+<div class="box"><strong>EQUIVALENTELLIPSOID Equivalent ellipsoid of a set of 3D points.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function ell = equivalentEllipsoid(points) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Equivalent ellipsoid of a set of 3D points.
+<div class="fragment"><pre class="comment">EQUIVALENTELLIPSOID Equivalent ellipsoid of a set of 3D points.
 
    ELL = equivalentEllipsoid(PTS)
    Compute the equivalent ellipsoid of the set of points PTS. The result
@@ -50,7 +50,7 @@
          'drawEllipses', true, 'EllipseColor', 'b', 'EllipseWidth', 3);
 
    See also
-     <a href="spheres.html" class="code" title="function spheres(varargin)">spheres</a>, <a href="drawEllipsoid.html" class="code" title="function varargout = drawEllipsoid(elli, varargin)">drawEllipsoid</a>, equivalentEllipse, principalAxes
+     <a href="spheres.html" class="code" title="function spheres(varargin)">spheres</a>, <a href="drawEllipsoid.html" class="code" title="function varargout = drawEllipsoid(varargin)">drawEllipsoid</a>, equivalentEllipse, principalAxes
      principalAxesTransform, <a href="rotation3dToEulerAngles.html" class="code" title="function varargout = rotation3dToEulerAngles(mat, varargin)">rotation3dToEulerAngles</a></pre></div>
 
 <!-- crossreference -->
@@ -67,7 +67,7 @@ This function is called by:
 
 <h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function ell = equivalentEllipsoid(points)</a>
-0002 <span class="comment">% Equivalent ellipsoid of a set of 3D points.</span>
+0002 <span class="comment">%EQUIVALENTELLIPSOID Equivalent ellipsoid of a set of 3D points.</span>
 0003 <span class="comment">%</span>
 0004 <span class="comment">%   ELL = equivalentEllipsoid(PTS)</span>
 0005 <span class="comment">%   Compute the equivalent ellipsoid of the set of points PTS. The result</span>
@@ -95,9 +95,9 @@ This function is called by:
 0027 
 0028 <span class="comment">% ------</span>
 0029 <span class="comment">% Author: David Legland</span>
-0030 <span class="comment">% e-mail: david.legland@inrae.fr</span>
-0031 <span class="comment">% Created: 2011-03-12,    using Matlab 7.9.0.529 (R2009b)</span>
-0032 <span class="comment">% Copyright 2011 INRA - Cepia Software Platform.</span>
+0030 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0031 <span class="comment">% Created: 2011-03-12, using Matlab 7.9.0.529 (R2009b)</span>
+0032 <span class="comment">% Copyright 2011-2024 INRA - Cepia Software Platform</span>
 0033 
 0034 <span class="comment">% number of points</span>
 0035 n = size(points, 1);
@@ -131,6 +131,6 @@ This function is called by:
 0063 
 0064 <span class="comment">% concatenate result to form an ellipsoid object</span>
 0065 ell = [center, radii, angles];</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

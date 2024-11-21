@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of clipMeshByPlane</title>
+  <meta name="keywords" content="clipMeshByPlane">
+  <meta name="description" content="CLIPMESHBYPLANE Clip a mesh by a plane.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">meshes3d</a> &gt; clipMeshByPlane.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\meshes3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>clipMeshByPlane
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CLIPMESHBYPLANE Clip a mesh by a plane.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [v2, f2, bE] = clipMeshByPlane(v, f, plane, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CLIPMESHBYPLANE Clip a mesh by a plane.
+
+   [V2, F2] = clipMeshByPlane(V, F, PLANE)
+   Clip a mesh defined by the vertices V and faces F by a PLANE and return
+   the part of the mesh (V2, F2) above the plane.
+
+   [V2, F2, ENEW] = clipMeshByPlane(V, F, PLANE)
+   Additonally returns the new boundary edges created by the clipping of
+   the mesh.
+
+   [...] = clipMeshByPlane(V, F, PLANE, 'part', 'below')
+   Gives the part of the mesh below the plane. The options are:
+       'part','above': Mesh above the plane [default]
+       'part','below': Mesh below the plane
+
+   Example
+     % Create trefoil curve
+     nPoints = 200; % Number of vertices of trefoil curve
+     thickness = .5; % Thickness of the 3D mesh
+     nCorners = 16; % Number of corners around each curve vertex
+     t = linspace(0, 2*pi, nPoints + 1); % parameterisation variable
+     t(end) = [];
+     % Trefoil curve coordinates
+     curve(:,1) = sin(t) + 2 * sin(2 * t);
+     curve(:,2) = cos(t) - 2 * cos(2 * t);
+     curve(:,3) = -sin(3 * t);
+     % Create surrounding mesh
+     [v2, f2] = curveToMesh(curve, thickness, nCorners);
+     f2 = triangulateFaces(f2);
+     % Clip the mesh by a plane
+     plane = createPlane([0 0 0], [0.5 0.5 1]);
+     [v2, f2, bE] = clipMeshByPlane(v2, f2, plane, 'part','above');
+     % Display results
+     figure('color','w'); 
+     drawPolygon3d(curve, 'LineWidth', 4, 'color', 'b');
+     axis equal; view(3);
+     drawMesh(v2, f2, 'FaceAlpha', 0.5);
+     drawPlane3d(plane)
+     drawEdge3d([v2(bE(:,1),:),v2(bE(:,2),:)],'Color','g','LineWidth',4)
+   
+   See also
+     <a href="cutMeshByPlane.html" class="code" title="function varargout = cutMeshByPlane(v, f, plane, varargin)">cutMeshByPlane</a>, <a href="intersectPlaneMesh.html" class="code" title="function [polys, closedFlag] = intersectPlaneMesh(plane, v, f)">intersectPlaneMesh</a>
+
+   Source
+     half_space_intersect.m by Alec Jacobson:
+       https://github.com/alecjacobson/gptoolbox</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/geom3d/isPlane.html" class="code" title="function d = isPlane(plane)">isPlane</a>	ISPLANE Check if input is a plane.</li><li><a href="../../matGeom/geom3d/planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>	PLANENORMAL Compute the normal to a plane.</li><li><a href="../../matGeom/geom3d/reversePlane.html" class="code" title="function plane = reversePlane(plane)">reversePlane</a>	REVERSEPLANE Return same 3D plane but with opposite orientation.</li><li><a href="removeDuplicateVertices.html" class="code" title="function varargout = removeDuplicateVertices(v,varargin)">removeDuplicateVertices</a>	REMOVEDUPLICATEVERTICES Remove duplicate vertices of a mesh.</li><li><a href="removeUnreferencedVertices.html" class="code" title="function varargout = removeUnreferencedVertices(v, varargin)">removeUnreferencedVertices</a>	REMOVEUNREFERENCEDVERTICES Remove unreferenced vertices of a mesh.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="clipMeshByBox.html" class="code" title="function varargout = clipMeshByBox(varargin)">clipMeshByBox</a>	CLIPMESHBYBOX Clip a mesh by a box.</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function [U, E, Fbelow, Fabove, BC] = one_below(V, F, IF)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [v2, f2, bE] = clipMeshByPlane(v, f, plane, varargin)</a>
+0002 <span class="comment">%CLIPMESHBYPLANE Clip a mesh by a plane.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   [V2, F2] = clipMeshByPlane(V, F, PLANE)</span>
+0005 <span class="comment">%   Clip a mesh defined by the vertices V and faces F by a PLANE and return</span>
+0006 <span class="comment">%   the part of the mesh (V2, F2) above the plane.</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%   [V2, F2, ENEW] = clipMeshByPlane(V, F, PLANE)</span>
+0009 <span class="comment">%   Additonally returns the new boundary edges created by the clipping of</span>
+0010 <span class="comment">%   the mesh.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%   [...] = clipMeshByPlane(V, F, PLANE, 'part', 'below')</span>
+0013 <span class="comment">%   Gives the part of the mesh below the plane. The options are:</span>
+0014 <span class="comment">%       'part','above': Mesh above the plane [default]</span>
+0015 <span class="comment">%       'part','below': Mesh below the plane</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   Example</span>
+0018 <span class="comment">%     % Create trefoil curve</span>
+0019 <span class="comment">%     nPoints = 200; % Number of vertices of trefoil curve</span>
+0020 <span class="comment">%     thickness = .5; % Thickness of the 3D mesh</span>
+0021 <span class="comment">%     nCorners = 16; % Number of corners around each curve vertex</span>
+0022 <span class="comment">%     t = linspace(0, 2*pi, nPoints + 1); % parameterisation variable</span>
+0023 <span class="comment">%     t(end) = [];</span>
+0024 <span class="comment">%     % Trefoil curve coordinates</span>
+0025 <span class="comment">%     curve(:,1) = sin(t) + 2 * sin(2 * t);</span>
+0026 <span class="comment">%     curve(:,2) = cos(t) - 2 * cos(2 * t);</span>
+0027 <span class="comment">%     curve(:,3) = -sin(3 * t);</span>
+0028 <span class="comment">%     % Create surrounding mesh</span>
+0029 <span class="comment">%     [v2, f2] = curveToMesh(curve, thickness, nCorners);</span>
+0030 <span class="comment">%     f2 = triangulateFaces(f2);</span>
+0031 <span class="comment">%     % Clip the mesh by a plane</span>
+0032 <span class="comment">%     plane = createPlane([0 0 0], [0.5 0.5 1]);</span>
+0033 <span class="comment">%     [v2, f2, bE] = clipMeshByPlane(v2, f2, plane, 'part','above');</span>
+0034 <span class="comment">%     % Display results</span>
+0035 <span class="comment">%     figure('color','w');</span>
+0036 <span class="comment">%     drawPolygon3d(curve, 'LineWidth', 4, 'color', 'b');</span>
+0037 <span class="comment">%     axis equal; view(3);</span>
+0038 <span class="comment">%     drawMesh(v2, f2, 'FaceAlpha', 0.5);</span>
+0039 <span class="comment">%     drawPlane3d(plane)</span>
+0040 <span class="comment">%     drawEdge3d([v2(bE(:,1),:),v2(bE(:,2),:)],'Color','g','LineWidth',4)</span>
+0041 <span class="comment">%</span>
+0042 <span class="comment">%   See also</span>
+0043 <span class="comment">%     cutMeshByPlane, intersectPlaneMesh</span>
+0044 <span class="comment">%</span>
+0045 <span class="comment">%   Source</span>
+0046 <span class="comment">%     half_space_intersect.m by Alec Jacobson:</span>
+0047 <span class="comment">%       https://github.com/alecjacobson/gptoolbox</span>
+0048 
+0049 <span class="comment">% ------</span>
+0050 <span class="comment">% Author: oqilipo</span>
+0051 <span class="comment">% E-mail: N/A</span>
+0052 <span class="comment">% Created: 2023-05-18, using Matlab 9.13.0.2080170 (R2022b) Update 1</span>
+0053 <span class="comment">% Copyright 2023-2024</span>
+0054 
+0055 <span class="comment">%% Parse input</span>
+0056 <span class="keyword">if</span> isstruct(v)
+0057     <span class="keyword">if</span> nargin &gt; 2
+0058         varargin = [plane, varargin]; 
+0059     <span class="keyword">end</span>
+0060     plane = f;
+0061     f = v.faces;
+0062     v = v.vertices;
+0063 <span class="keyword">end</span>
+0064 
+0065 p = inputParser;
+0066 addRequired(p,<span class="string">'plane'</span>,@<a href="../../matGeom/geom3d/isPlane.html" class="code" title="function d = isPlane(plane)">isPlane</a>)
+0067 validStrings = {<span class="string">'above'</span>,<span class="string">'below'</span>};
+0068 addParameter(p,<span class="string">'part'</span>,<span class="string">'above'</span>,@(x) any(validatestring(x, validStrings)))
+0069 parse(p, plane, varargin{:});
+0070 part = p.Results.part;
+0071 
+0072 p = plane(1:3);
+0073 <span class="keyword">switch</span> part
+0074     <span class="keyword">case</span> <span class="string">'above'</span>
+0075         n = <a href="../../matGeom/geom3d/planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>(plane);
+0076     <span class="keyword">case</span> <span class="string">'below'</span>
+0077         n = <a href="../../matGeom/geom3d/planeNormal.html" class="code" title="function n = planeNormal(plane)">planeNormal</a>(<a href="../../matGeom/geom3d/reversePlane.html" class="code" title="function plane = reversePlane(plane)">reversePlane</a>(plane));
+0078 <span class="keyword">end</span>
+0079 
+0080 <span class="comment">% Homogeneous coordinates</span>
+0081 IV = sum(bsxfun(@times, [v(:,1:3) ones(size(v,1), 1)], [n(:)' -dot(p,n)]), 2);
+0082 IF = IV(f);
+0083 IF = reshape(IF, size(f));
+0084 
+0085 I13 = sum(IF&lt;0, 2) == 1;
+0086 [VV1, E13, ~, F13above, ~] = <a href="#_sub1" class="code" title="subfunction [U, E, Fbelow, Fabove, BC] = one_below(V, F, IF)">one_below</a>(v, f(I13,:), IF(I13,:));
+0087 
+0088 I31 = sum(IF&gt;0, 2) == 1;
+0089 [VV2, E31, F31below, ~, ~] = <a href="#_sub1" class="code" title="subfunction [U, E, Fbelow, Fabove, BC] = one_below(V, F, IF)">one_below</a>(VV1, f(I31,:), -IF(I31,:));
+0090 
+0091 above = all(IF&gt;=0, 2);
+0092 FF2 = [f(above,:); F13above; F31below];
+0093 <span class="comment">% birth = [find(above); repmat(find(I13),2,1); find(I31)];</span>
+0094 EE2 = [E13; E31];
+0095 
+0096 <span class="comment">% Remove duplicate vertices</span>
+0097 bbd = norm(max(v)-min(v));
+0098 [vIdx, fIdx] = <a href="removeDuplicateVertices.html" class="code" title="function varargout = removeDuplicateVertices(v,varargin)">removeDuplicateVertices</a>(VV2, FF2, 1e-14*bbd, <span class="string">'IndexOutput'</span>,1);
+0099 VV3 = VV2(vIdx,:);
+0100 FF3 = fIdx(FF2);
+0101 EE3 = fIdx(EE2);
+0102 <span class="comment">% Remove unreferenced/unindexed vertices</span>
+0103 [vIdx, fIdx] = <a href="removeUnreferencedVertices.html" class="code" title="function varargout = removeUnreferencedVertices(v, varargin)">removeUnreferencedVertices</a>(VV3, FF3, <span class="string">'IndexOutput'</span>,1);
+0104 v2 = VV3(vIdx,:);
+0105 f2 = fIdx(FF3);
+0106 bE = fIdx(EE3);
+0107 
+0108 <span class="keyword">end</span>
+0109 
+0110 <a name="_sub1" href="#_subfunctions" class="code">function [U, E, Fbelow, Fabove, BC] = one_below(V, F, IF)</a>
+0111 
+0112 [~, J] = min(IF, [], 2);
+0113 I = sub2ind(size(F), repmat(1:size(F,1), size(F,2),1)', mod([J J+1 J+2]-1, 3)+1);
+0114 lambda = IF(I(:,2:3))./bsxfun(@minus,IF(I(:,2:3)),IF(I(:,1)));
+0115 BC = sparse( <span class="keyword">...</span>
+0116     repmat((1:size(F,1)*2)', 1, 2), <span class="keyword">...</span>
+0117     [repmat(F(I(:,1)),2,1) reshape(F(I(:,2:3)), size(F,1)*2,1)], <span class="keyword">...</span>
+0118     [lambda(:) 1-lambda(:)], <span class="keyword">...</span>
+0119     size(F,1)*2, size(V,1));
+0120 E = size(V, 1) + bsxfun(@plus, 1:size(F,1), [0;1]*size(F,1))';
+0121 U = [V; BC*V];
+0122 Fbelow = [F(I(:,1)) E];
+0123 Fabove = [F(I(:,2)) fliplr(E); F(I(:,2:3)) E(:,2)];
+0124 
+0125 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

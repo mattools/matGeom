@@ -45,14 +45,7 @@
    cyl2cart([-1 0 2])
    gives : 4.7124    1.0000     2.0000
 
-   See also <a href="angles3d.html" class="code" title="function angles3d(varargin)">angles3d</a>, cart2pol, <a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>, <a href="cart2cyl.html" class="code" title="function varargout = cart2cyl(varargin)">cart2cyl</a>
-
-
- ------
- Author: David Legland
- e-mail: david.legland@jouy.inra.fr
- Created: 2006-03-23
- Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</pre></div>
+   See also <a href="angles3d.html" class="code" title="function angles3d(varargin)">angles3d</a>, cart2pol, <a href="cart2sph2.html" class="code" title="function varargout = cart2sph2(varargin)">cart2sph2</a>, <a href="cart2cyl.html" class="code" title="function varargout = cart2cyl(varargin)">cart2cyl</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -88,15 +81,15 @@ This function is called by:
 0019 <span class="comment">%</span>
 0020 <span class="comment">%   See also angles3d, cart2pol, cart2sph2, cart2cyl</span>
 0021 <span class="comment">%</span>
-0022 <span class="comment">%</span>
+0022 
 0023 <span class="comment">% ------</span>
 0024 <span class="comment">% Author: David Legland</span>
-0025 <span class="comment">% e-mail: david.legland@jouy.inra.fr</span>
+0025 <span class="comment">% E-mail: david.legland@inrae.fr</span>
 0026 <span class="comment">% Created: 2006-03-23</span>
-0027 <span class="comment">% Copyright 2006 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas).</span>
+0027 <span class="comment">% Copyright 2006-2024 INRA - CEPIA Nantes - MIAJ (Jouy-en-Josas)</span>
 0028 
 0029 <span class="comment">% process input parameters</span>
-0030 <span class="keyword">if</span> length(varargin)==1
+0030 <span class="keyword">if</span> isscalar(varargin)
 0031     var = varargin{1};
 0032     theta = var(:,1);
 0033     r = var(:,2);
@@ -124,6 +117,6 @@ This function is called by:
 0055     varargout{2} = y;
 0056     varargout{3} = z;
 0057 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

@@ -39,13 +39,8 @@
    where V is a vector, uses vector V of angles to compute support
    function.
    
-   See also:
-   polygons2d, <a href="convexification.html" class="code" title="function co = convexification(varargin)">convexification</a>
-
-   ---------
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 20/12/2004.</pre></div>
+   See also
+   polygons2d, <a href="convexification.html" class="code" title="function co = convexification(varargin)">convexification</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -73,21 +68,21 @@ This function is called by:
 0011 <span class="comment">%   where V is a vector, uses vector V of angles to compute support</span>
 0012 <span class="comment">%   function.</span>
 0013 <span class="comment">%</span>
-0014 <span class="comment">%   See also:</span>
+0014 <span class="comment">%   See also</span>
 0015 <span class="comment">%   polygons2d, convexification</span>
-0016 <span class="comment">%</span>
-0017 <span class="comment">%   ---------</span>
-0018 <span class="comment">%   author : David Legland</span>
-0019 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0020 <span class="comment">%   created the 20/12/2004.</span>
-0021 <span class="comment">%</span>
+0016 
+0017 <span class="comment">% ------</span>
+0018 <span class="comment">% Author: David Legland</span>
+0019 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0020 <span class="comment">% Created: 2004-12-20</span>
+0021 <span class="comment">% Copyright 2004-2024 INRA - TPV URPOI - BIA IMASTE</span>
 0022 
 0023 N = 24;
 0024 u = 0:2*pi/N:2*pi*(1-1/N);
 0025     
-0026 <span class="keyword">if</span> length(varargin)==1
+0026 <span class="keyword">if</span> isscalar(varargin)
 0027     var = varargin{1};
-0028     <span class="keyword">if</span> length(var)==1
+0028     <span class="keyword">if</span> isscalar(var)
 0029         N = var;
 0030         u = 0:2*pi/N:2*pi*(1-1/N);
 0031     <span class="keyword">else</span>
@@ -109,6 +104,6 @@ This function is called by:
 0047 
 0048     h(i) = max(dot(polygon, v, 2));
 0049 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

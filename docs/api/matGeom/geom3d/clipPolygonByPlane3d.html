@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of clipPolygonByPlane3d</title>
+  <meta name="keywords" content="clipPolygonByPlane3d">
+  <meta name="description" content="CLIPPOLYGONBYPLANE3D Clip a 3D polygon with a plane.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">matGeom</a> &gt; <a href="index.html">geom3d</a> &gt; clipPolygonByPlane3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for matGeom\geom3d&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>clipPolygonByPlane3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>CLIPPOLYGONBYPLANE3D Clip a 3D polygon with a plane.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function poly2 = clipPolygonByPlane3d(poly, plane, varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment">CLIPPOLYGONBYPLANE3D Clip a 3D polygon with a plane.
+
+   POLY2 = clipPolygonByPlane3d(POLY, PLANE)
+   The 3d polygon POLY is clipped by the PLANE. The result POLY2:
+    - Represents the part of the polygon below the plane if the plane
+      intersects the polygon.
+    - Is the same as POLY if the polygon is below the plane and the plane 
+      does not intersect the polygon.
+    - Is an empty 3d polygon [0x3] if the polygon is above the plane and 
+      the plane does not intersect the polygon.
+
+   Example
+     % 2d poly
+     pol = [6    7    6    6    5    4    3    2    2    1    2    2    6 ...
+            NaN  3    3    4    5    5    3    NaN    4    5    5;
+            4    4    5    6    6    7    6    6    4    2    2    2    1 ...
+             NaN  4    5    5    4    4    3    NaN    3    2    3]';
+     % Transform into 3d polygon
+     phi=-360+720*rand;
+     theta=-360+720*rand;
+     psi=-360+720*rand;
+     pol3d = transformPolygon3d(pol,eulerAnglesToRotation3d(phi, theta, psi));
+     plane = [polygonCentroid3d(pol3d) rand(1,6)];
+     % Clip polygon 
+     pol3d2 = clipPolygonByPlane3d(pol3d, plane);
+     % Draw results
+     figure; hold on; axis equal; view(3)
+     drawPolygon3d(pol3d, 'linewidth', 2, 'color', 'y');
+     drawPlane3d(plane)
+     drawPolygon3d(pol3d2, 'linewidth', 2, 'color', 'b');
+     drawArrow3d(polygonCentroid3d(pol3d), ...
+         normalizeVector3d(planeNormal(plane))*3,'g')
+
+   See also
+   poygons3d, <a href="intersectLinePolygon3d.html" class="code" title="function [inter, inside]= intersectLinePolygon3d(line, poly)">intersectLinePolygon3d</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="createBasisTransform3d.html" class="code" title="function transfo = createBasisTransform3d(source, target)">createBasisTransform3d</a>	CREATEBASISTRANSFORM3D Compute matrix for transforming a basis into another basis.</li><li><a href="fitPlane.html" class="code" title="function plane = fitPlane(points)">fitPlane</a>	FITPLANE  Fit a 3D plane to a set of points.</li><li><a href="intersectPlanes.html" class="code" title="function line = intersectPlanes(plane1, plane2, varargin)">intersectPlanes</a>	INTERSECTPLANES Return intersection line between 2 planes in space.</li><li><a href="isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>	ISBELOWPLANE Test whether a point is below or above a plane.</li><li><a href="isPlane.html" class="code" title="function d = isPlane(plane)">isPlane</a>	ISPLANE Check if input is a plane.</li><li><a href="isPolygon3d.html" class="code" title="function a = isPolygon3d(pol, varargin)">isPolygon3d</a>	ISPOLYGON3D Check if input is a 3d polygon.</li><li><a href="planePosition.html" class="code" title="function [pos, zp] = planePosition(point, plane)">planePosition</a>	PLANEPOSITION Compute position of a point on a plane.</li><li><a href="transformPlane3d.html" class="code" title="function plane2 = transformPlane3d(plane, trans)">transformPlane3d</a>	TRANSFORMPLANE3D Transform a 3D plane with a 3D affine transform.</li><li><a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>	TRANSFORMPOINT3D Transform a point with a 3D affine transform.</li><li><a href="transformPolygon3d.html" class="code" title="function tfmPoly = transformPolygon3d(poly, tfm)">transformPolygon3d</a>	TRANSFORMPOLYGON3D Transform a polygon with a 3D affine transform.</li><li><a href="../../matGeom/polygons2d/clipPolygonByLine.html" class="code" title="function varargout = clipPolygonByLine(poly, line, varargin)">clipPolygonByLine</a>	CLIPPOLYGONBYLINE Clip a polygon by a directed line.</li><li><a href="../../matGeom/polygons2d/parsePolygon.html" class="code" title="function [polyOut, inputFormat] = parsePolygon(poly, format, varargin)">parsePolygon</a>	PARSEPOLYGON Conversion between different polygon formats.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../matGeom/meshes3d/clipConvexPolyhedronByPlane.html" class="code" title="function [nodes2, faces2] = clipConvexPolyhedronByPlane(nodes, faces, plane)">clipConvexPolyhedronByPlane</a>	CLIPCONVEXPOLYHEDRONBYPLANE Clip a convex polyhedron by a plane.</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function poly2 = clipPolygonByPlane3d(poly, plane, varargin)</a>
+0002 <span class="comment">%CLIPPOLYGONBYPLANE3D Clip a 3D polygon with a plane.</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   POLY2 = clipPolygonByPlane3d(POLY, PLANE)</span>
+0005 <span class="comment">%   The 3d polygon POLY is clipped by the PLANE. The result POLY2:</span>
+0006 <span class="comment">%    - Represents the part of the polygon below the plane if the plane</span>
+0007 <span class="comment">%      intersects the polygon.</span>
+0008 <span class="comment">%    - Is the same as POLY if the polygon is below the plane and the plane</span>
+0009 <span class="comment">%      does not intersect the polygon.</span>
+0010 <span class="comment">%    - Is an empty 3d polygon [0x3] if the polygon is above the plane and</span>
+0011 <span class="comment">%      the plane does not intersect the polygon.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%   Example</span>
+0014 <span class="comment">%     % 2d poly</span>
+0015 <span class="comment">%     pol = [6    7    6    6    5    4    3    2    2    1    2    2    6 ...</span>
+0016 <span class="comment">%            NaN  3    3    4    5    5    3    NaN    4    5    5;</span>
+0017 <span class="comment">%            4    4    5    6    6    7    6    6    4    2    2    2    1 ...</span>
+0018 <span class="comment">%             NaN  4    5    5    4    4    3    NaN    3    2    3]';</span>
+0019 <span class="comment">%     % Transform into 3d polygon</span>
+0020 <span class="comment">%     phi=-360+720*rand;</span>
+0021 <span class="comment">%     theta=-360+720*rand;</span>
+0022 <span class="comment">%     psi=-360+720*rand;</span>
+0023 <span class="comment">%     pol3d = transformPolygon3d(pol,eulerAnglesToRotation3d(phi, theta, psi));</span>
+0024 <span class="comment">%     plane = [polygonCentroid3d(pol3d) rand(1,6)];</span>
+0025 <span class="comment">%     % Clip polygon</span>
+0026 <span class="comment">%     pol3d2 = clipPolygonByPlane3d(pol3d, plane);</span>
+0027 <span class="comment">%     % Draw results</span>
+0028 <span class="comment">%     figure; hold on; axis equal; view(3)</span>
+0029 <span class="comment">%     drawPolygon3d(pol3d, 'linewidth', 2, 'color', 'y');</span>
+0030 <span class="comment">%     drawPlane3d(plane)</span>
+0031 <span class="comment">%     drawPolygon3d(pol3d2, 'linewidth', 2, 'color', 'b');</span>
+0032 <span class="comment">%     drawArrow3d(polygonCentroid3d(pol3d), ...</span>
+0033 <span class="comment">%         normalizeVector3d(planeNormal(plane))*3,'g')</span>
+0034 <span class="comment">%</span>
+0035 <span class="comment">%   See also</span>
+0036 <span class="comment">%   poygons3d, intersectLinePolygon3d</span>
+0037 
+0038 <span class="comment">% ------</span>
+0039 <span class="comment">% Author: David Legland, oqilipo</span>
+0040 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0041 <span class="comment">% Created: 2005-08-02</span>
+0042 <span class="comment">% Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0043 
+0044 parser = inputParser;
+0045 addRequired(parser, <span class="string">'poly'</span>, @<a href="isPolygon3d.html" class="code" title="function a = isPolygon3d(pol, varargin)">isPolygon3d</a>)
+0046 addRequired(parser, <span class="string">'plane'</span>, @<a href="isPlane.html" class="code" title="function d = isPlane(plane)">isPlane</a>)
+0047 addOptional(parser,<span class="string">'tolerance'</span>,1e-14, <span class="keyword">...</span>
+0048     @(x) validateattributes(x,{<span class="string">'numeric'</span>},{<span class="string">'scalar'</span>,<span class="string">'&gt;'</span>,0,<span class="string">'&lt;'</span>,1}))
+0049 parse(parser, poly, plane, varargin{:});
+0050 TOL = parser.Results.tolerance;
+0051 
+0052 [pol, inputFormat] = <a href="../../matGeom/polygons2d/parsePolygon.html" class="code" title="function [polyOut, inputFormat] = parsePolygon(poly, format, varargin)">parsePolygon</a>(poly, <span class="string">'repetition'</span>);
+0053 
+0054 <span class="comment">% Check if the polygon's plane is the same as the clipping plane</span>
+0055 [~, dist] = <a href="planePosition.html" class="code" title="function [pos, zp] = planePosition(point, plane)">planePosition</a>(unique(pol,<span class="string">'rows'</span>), plane);
+0056 <span class="keyword">if</span> all(dist&lt;TOL)
+0057         poly2 = poly;
+0058         warning([<span class="string">'The polygon''s plane is the same as the clipping plane! '</span> <span class="keyword">...</span>
+0059             <span class="string">'Returning the input polygon!'</span>]);
+0060     <span class="keyword">return</span>;
+0061 <span class="keyword">end</span>
+0062 
+0063 <span class="comment">% Check for each point of the polygon if it's above or below the plane.</span>
+0064 below = <a href="isBelowPlane.html" class="code" title="function below = isBelowPlane(point, varargin)">isBelowPlane</a>(pol, plane);
+0065 
+0066 <span class="comment">% In the case of a polygon totally over the plane, return empty array</span>
+0067 <span class="keyword">if</span> sum(below) == 0
+0068     poly2 = zeros(0, 3);
+0069     <span class="keyword">return</span>;
+0070 <span class="keyword">end</span>
+0071 
+0072 <span class="comment">% In the case of a polygon totally below the plane, return original polygon</span>
+0073 <span class="keyword">if</span> sum(~below) == 0
+0074     poly2 = poly;
+0075     <span class="keyword">return</span>;
+0076 <span class="keyword">end</span>
+0077 
+0078 <span class="comment">% Transform into 2D</span>
+0079 basisTFM = <a href="createBasisTransform3d.html" class="code" title="function transfo = createBasisTransform3d(source, target)">createBasisTransform3d</a>(<span class="string">'global'</span>, <a href="fitPlane.html" class="code" title="function plane = fitPlane(points)">fitPlane</a>(pol));
+0080 poly2d = <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>(pol, basisTFM);
+0081 
+0082 <span class="comment">% Intersection line between polygon and plane</span>
+0083 itsLine = <a href="intersectPlanes.html" class="code" title="function line = intersectPlanes(plane1, plane2, varargin)">intersectPlanes</a>([0 0 0 1 0 0 0 1 0], <span class="keyword">...</span>
+0084     <a href="transformPlane3d.html" class="code" title="function plane2 = transformPlane3d(plane, trans)">transformPlane3d</a>(plane, basisTFM));
+0085 poly2dNan = <a href="../../matGeom/polygons2d/parsePolygon.html" class="code" title="function [polyOut, inputFormat] = parsePolygon(poly, format, varargin)">parsePolygon</a>(poly2d,<span class="string">'nan'</span>);
+0086 
+0087 <span class="comment">% Clip the 2d polygon by the intersection line</span>
+0088 poly22d = <a href="../../matGeom/polygons2d/clipPolygonByLine.html" class="code" title="function varargout = clipPolygonByLine(poly, line, varargin)">clipPolygonByLine</a>(poly2dNan(:,1:2), [itsLine(1:2) itsLine(4:5)],<span class="keyword">...</span>
+0089     <span class="string">'method'</span>, <span class="string">'polyshape'</span>);
+0090 
+0091 <span class="comment">% Transform the 2d polygon back to 3d</span>
+0092 poly2 = <a href="transformPolygon3d.html" class="code" title="function tfmPoly = transformPolygon3d(poly, tfm)">transformPolygon3d</a>(poly22d, inv(basisTFM));
+0093 poly2 = <a href="../../matGeom/polygons2d/parsePolygon.html" class="code" title="function [polyOut, inputFormat] = parsePolygon(poly, format, varargin)">parsePolygon</a>(poly2, inputFormat);
+0094 
+0095 <span class="comment">% The input format of the polygon is not clear if it only contains one</span>
+0096 <span class="comment">% repetition of the first and last point. It can be 'repetiton' or 'nan'.</span>
+0097 <span class="comment">% In this case the last point is removed.</span>
+0098 <span class="keyword">if</span> size(poly2, 1) - size(unique(poly2, <span class="string">'rows'</span>), 1) == 1 &amp;&amp; <span class="keyword">...</span>
+0099         isequal(poly2(1,:), poly2(<span class="keyword">end</span>,:))
+0100     poly2(<span class="keyword">end</span>,:) = [];
+0101 <span class="keyword">end</span>
+0102 
+0103 <span class="keyword">end</span>
+0104</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

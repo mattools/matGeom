@@ -48,7 +48,7 @@
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="collapseEdgesWithManyFaces.html" class="code" title="function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargin)">collapseEdgesWithManyFaces</a>	removes mesh edges adjacent to more than two faces</li><li><a href="removeDuplicateFaces.html" class="code" title="function faces2 = removeDuplicateFaces(faces, varargin)">removeDuplicateFaces</a>	REMOVEDUPLICATEFACES Remove duplicate faces in a face array.</li></ul>
+<li><a href="collapseEdgesWithManyFaces.html" class="code" title="function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargin)">collapseEdgesWithManyFaces</a>	COLLAPSEEDGESWITHMANYFACES Remove mesh edges adjacent to more than two faces.</li><li><a href="removeDuplicateFaces.html" class="code" title="function faces2 = removeDuplicateFaces(faces, varargin)">removeDuplicateFaces</a>	REMOVEDUPLICATEFACES Remove duplicate faces in a face array.</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 </ul>
@@ -74,49 +74,48 @@ This function is called by:
 0015 <span class="comment">%</span>
 0016 <span class="comment">%   See also</span>
 0017 <span class="comment">%    meshes3d, isManifoldMesh</span>
-0018  
+0018 
 0019 <span class="comment">% ------</span>
 0020 <span class="comment">% Author: David Legland</span>
-0021 <span class="comment">% e-mail: david.legland@inra.fr</span>
-0022 <span class="comment">% Created: 2019-02-01,    using Matlab 9.5.0.944444 (R2018b)</span>
-0023 <span class="comment">% Copyright 2019 INRA - Cepia Software Platform.</span>
+0021 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0022 <span class="comment">% Created: 2019-02-01, using Matlab 9.5.0.944444 (R2018b)</span>
+0023 <span class="comment">% Copyright 2019-2024 INRA - Cepia Software Platform</span>
 0024 
-0025 
-0026 <span class="comment">%% Parse input arguments</span>
-0027 
-0028 [vertices, faces] = parseMeshData(varargin{:});
-0029 verbose = true;
+0025 <span class="comment">%% Parse input arguments</span>
+0026 
+0027 [vertices, faces] = parseMeshData(varargin{:});
+0028 verbose = true;
+0029 
 0030 
-0031 
-0032 <span class="comment">%% Pre-processing</span>
-0033 
-0034 <span class="comment">% remove duplicate faces if any</span>
-0035 <span class="keyword">if</span> verbose
-0036     disp(<span class="string">'remove duplicate faces'</span>);
-0037 <span class="keyword">end</span>
-0038 faces = <a href="removeDuplicateFaces.html" class="code" title="function faces2 = removeDuplicateFaces(faces, varargin)">removeDuplicateFaces</a>(faces);
+0031 <span class="comment">%% Pre-processing</span>
+0032 
+0033 <span class="comment">% remove duplicate faces if any</span>
+0034 <span class="keyword">if</span> verbose
+0035     disp(<span class="string">'remove duplicate faces'</span>);
+0036 <span class="keyword">end</span>
+0037 faces = <a href="removeDuplicateFaces.html" class="code" title="function faces2 = removeDuplicateFaces(faces, varargin)">removeDuplicateFaces</a>(faces);
+0038 
 0039 
-0040 
-0041 <span class="comment">%% Iterative processing of multiple edges</span>
-0042 <span class="comment">% Reduces all edges connected to more than two faces, by collapsing second</span>
-0043 <span class="comment">% vertex onto the first one.</span>
-0044 
-0045 <span class="comment">% iter = 0;</span>
-0046 <span class="comment">% while ~isManifoldMesh(vertices, faces) &amp;&amp; iter &lt; 10</span>
-0047 <span class="comment">%     iter = iter + 1;</span>
-0048     <span class="keyword">if</span> verbose
-0049         disp(<span class="string">'collapse edges with many faces'</span>);
-0050     <span class="keyword">end</span>
-0051     
-0052     [vertices, faces] = <a href="collapseEdgesWithManyFaces.html" class="code" title="function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargin)">collapseEdgesWithManyFaces</a>(vertices, faces);
-0053 <span class="comment">% end</span>
+0040 <span class="comment">%% Iterative processing of multiple edges</span>
+0041 <span class="comment">% Reduces all edges connected to more than two faces, by collapsing second</span>
+0042 <span class="comment">% vertex onto the first one.</span>
+0043 
+0044 <span class="comment">% iter = 0;</span>
+0045 <span class="comment">% while ~isManifoldMesh(vertices, faces) &amp;&amp; iter &lt; 10</span>
+0046 <span class="comment">%     iter = iter + 1;</span>
+0047     <span class="keyword">if</span> verbose
+0048         disp(<span class="string">'collapse edges with many faces'</span>);
+0049     <span class="keyword">end</span>
+0050     
+0051     [vertices, faces] = <a href="collapseEdgesWithManyFaces.html" class="code" title="function [vertices, faces] = collapseEdgesWithManyFaces(vertices, faces, varargin)">collapseEdgesWithManyFaces</a>(vertices, faces);
+0052 <span class="comment">% end</span>
+0053 
 0054 
 0055 
-0056 
-0057 <span class="comment">%% Format output</span>
-0058 
-0059 varargout = formatMeshOutput(nargout, vertices, faces);
-0060</pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0056 <span class="comment">%% Format output</span>
+0057 
+0058 varargout = formatMeshOutput(nargout, vertices, faces);
+0059</pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

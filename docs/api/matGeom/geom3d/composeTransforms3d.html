@@ -45,14 +45,8 @@
    PTS3 = transformPoint3d(transformPoint3d(transformPoint3d(PTS, ...
        ROT1), ROT2), ROT3);
 
-   See also:
-   <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a>
-
-   ---------
-
-   author : David Legland
-   INRA - TPV URPOI - BIA IMASTE
-   created the 29/29/2006.</pre></div>
+   See also
+   <a href="transforms3d.html" class="code" title="function transforms3d(varargin)">transforms3d</a>, <a href="transformPoint3d.html" class="code" title="function varargout = transformPoint3d(pts, transfo, varargin)">transformPoint3d</a></pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -86,20 +80,19 @@ This function is called by:
 0017 <span class="comment">%   PTS3 = transformPoint3d(transformPoint3d(transformPoint3d(PTS, ...</span>
 0018 <span class="comment">%       ROT1), ROT2), ROT3);</span>
 0019 <span class="comment">%</span>
-0020 <span class="comment">%   See also:</span>
+0020 <span class="comment">%   See also</span>
 0021 <span class="comment">%   transforms3d, transformPoint3d</span>
-0022 <span class="comment">%</span>
-0023 <span class="comment">%   ---------</span>
-0024 <span class="comment">%</span>
-0025 <span class="comment">%   author : David Legland</span>
-0026 <span class="comment">%   INRA - TPV URPOI - BIA IMASTE</span>
-0027 <span class="comment">%   created the 29/29/2006.</span>
-0028 <span class="comment">%</span>
-0029 
-0030 trans = varargin{nargin};
-0031 <span class="keyword">for</span> i=length(varargin)-1:-1:1
-0032     trans = trans * varargin{i};
-0033 <span class="keyword">end</span></pre></div>
-<hr><address>Generated on Wed 16-Feb-2022 15:10:47 by <strong><a href="https://www.artefact.tk/software/matlab/m2html/">m2html</a></strong> &copy; 2003-2019</address>
+0022 
+0023 <span class="comment">% ------</span>
+0024 <span class="comment">% Author: David Legland</span>
+0025 <span class="comment">% E-mail: david.legland@inrae.fr</span>
+0026 <span class="comment">% Created: 2006-09-29</span>
+0027 <span class="comment">% Copyright 2006-2024 INRA - TPV URPOI - BIA IMASTE</span>
+0028 
+0029 trans = varargin{nargin};
+0030 <span class="keyword">for</span> i=length(varargin)-1:-1:1
+0031     trans = trans * varargin{i};
+0032 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Thu 21-Nov-2024 11:30:22 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>
