@@ -18,15 +18,14 @@ function point = line3dPoint(line, pos)
 %     ans =
 %         0.7000
 %
-%   See also
+%   See also 
 %     lines3d, line3dPosition
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% Created: 2024-07-11,    using Matlab 24.1.0.2628055 (R2024a) Update 4
-% Copyright 2024 INRAE.
+% E-mail: david.legland@inrae.fr
+% Created: 2024-07-11, using Matlab 24.1.0.2628055 (R2024a) Update 4
+% Copyright 2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 x = line(:,1) + pos(:) .* line(:,4);
 y = line(:,2) + pos(:) .* line(:,5);

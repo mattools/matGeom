@@ -13,15 +13,14 @@ function centroid = meshCentroid(varargin)
 %     ans =
 %         0.6496   -0.1670   -0.7924
 %
-%   See also
+%   See also 
 %     centroid, meshEquivalentEllipsoid, meshVolume, boundingBox3d
- 
+
 % ------
 % Author: David Legland
-% e-mail: david.legland@inrae.fr
-% INRAE - BIA Research Unit - BIBS Platform (Nantes)
-% Created: 2024-07-11,    using Matlab 24.1.0.2628055 (R2024a) Update 4
-% Copyright 2024 INRAE.
+% E-mail: david.legland@inrae.fr
+% Created: 2024-07-11, using Matlab 24.1.0.2628055 (R2024a) Update 4
+% Copyright 2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)
 
 [vertices, faces] = parseMeshData(varargin{:});
 

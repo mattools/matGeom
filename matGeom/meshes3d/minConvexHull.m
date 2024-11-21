@@ -8,6 +8,10 @@ function newFaces = minConvexHull(points, varargin)
 %   FACES is a cell array, each cell containing the vector of indices of
 %   nodes given in NODES for the corresponding face.
 %
+%   NOTE: minConvexHull does not remove unreferenced vertices, etc. The
+%   function trimMesh can be subsequently applied to the mesh to adress
+%   this.
+%
 %   FACES = minConvexHull(PTS, PRECISION)
 %   Adjust the threshold for deciding if two faces are coplanar or
 %   parallel. Default value is 1e-14.
@@ -109,4 +113,3 @@ for iFace = 1:N
     % mark processed faces
     flag(ind2) = 0;
 end
-
