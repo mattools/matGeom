@@ -1,5 +1,5 @@
 function runAllTests(varargin)
-%RUNALLTESTS  Explore all subdirectories, and run 'runtests' function
+%RUNALLTESTS Apply unit tests for all modules of MatGeom library.
 %
 %   output = runAllTests(input)
 %
@@ -11,12 +11,14 @@ function runAllTests(varargin)
 %
 % ------
 % Author: David Legland
-% e-mail: david.legland@grignon.inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2011-07-20, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2011 INRA - Cepia Software Platform.
 
 % Change the directory 
-cd(fileparts(mfilename('fullpath')))
+originalPath = pwd;
+basePath = fileparts(mfilename('fullpath'));
+% cd(fileparts(mfilename('fullpath')))
 
 % Add matGeom to path
 addpath(genpath(strrep(mfilename('fullpath'),['tests' filesep mfilename],'matGeom')))
@@ -33,9 +35,8 @@ for i = 1:length(directories)
     name = directories{i};
     disp(['Running tests for directory: ' name]);
     
-    cd(name);
+    cd(fullfile(basePath, name));
     runtests;
-    disp('Press any key to continue ...')
-    pause
-    cd('..');
 end
+
+cd(originalPath);
