@@ -72,6 +72,9 @@ function [polys, closedFlag] = intersectPlaneMesh(plane, v, f)
 % Created: 2012-07-31, using Matlab 7.9.0.529 (R2009b)
 % Copyright 2012-2024 INRA - Cepia Software Platform
 
+
+%% Parse input arguments
+
 e = [];
 if isstruct(v)
     f = v.faces;
@@ -79,6 +82,11 @@ if isstruct(v)
         e = v.edges;
     end
     v = v.vertices;
+end
+
+% ensure triangular faces (necessary to identify next edges to iterate)
+if size(f, 2) ~= 3
+    f = triangulateFaces(f);
 end
 
 

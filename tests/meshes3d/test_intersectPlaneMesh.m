@@ -21,7 +21,6 @@ test_suite = functiontests(localfunctions);
 function test_cube_horizPlane(testCase)
 plane = createPlane([5 5 5], [0 0 1]);
 [v, f] = createCube;
-f = triangulateFaces(f);
 v = v * 10;
 polys = intersectPlaneMesh(plane, v, f);
 
@@ -33,7 +32,6 @@ assertEqual(testCase, 8, size(polys{1}, 1));
 function test_cube_diagPlane(testCase)
 plane = createPlane([1 1 1], [3 4 5]);
 [v, f] = createCube;
-f = triangulateFaces(f);
 v = v * 5;
 polys = intersectPlaneMesh(plane, v, f);
 
@@ -45,7 +43,6 @@ assertEqual(testCase, 6, size(polys{1}, 1));
 function test_cube_planeOutside(testCase)
 plane = createPlane([15 15 15], [0 0 1]);
 [v, f] = createCube;
-f = triangulateFaces(f);
 v = v * 5;
 polys = intersectPlaneMesh(plane, v, f);
 
@@ -58,7 +55,6 @@ function test_torus(testCase)
 
 torus = [0 0 0  30 10 0 0];
 [v, f] = torusMesh(torus);
-f = triangulateFaces(f);
 plane = [0 0 0  1 0 0  0 0 1];
 polys = intersectPlaneMesh(plane, v, f);
 
