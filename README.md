@@ -22,10 +22,10 @@ and
 libraries that were distributed on the FileExchange. Distribution as a single library greatly 
 facilitates the interoperability of the functions.
 
-If you use matGeom, you might cite it as follows:
-```
-David Legland et al. (2024) "MatGeom library for geometric computing with MATLAB" DOI: 10.5281/zenodo.5768192
-```
+If you use matGeom for your research, please be kind enough to cite the following article:
+* [Legland, D. MatGeom: A toolbox for geometry processing with MATLAB](https://www.sciencedirect.com/science/article/pii/S2352711024003546). 
+*SoftwareX*, **29**, 101984, (**2025**). DOI:10.1016/j.softx.2024.101984
+
 
 ## Package organization
 The library is organized into several modules:
@@ -36,6 +36,8 @@ The library is organized into several modules:
 * [meshes3d](https://github.com/mattools/matGeom/wiki/meshes3d "meshes3d Wiki page") - Manipulation of 3D polygonal meshes (trimesh, quadmesh, or more generic meshes)
 
 ## Quick overview
+
+### Fit geometries to point data
 Basic functionalities comprise creation of simple geometries such as points, lines, ellipses... 
 A simple example is provided with the following script.
 
@@ -64,7 +66,9 @@ for i = 1:3
     drawEllipseAxes(elli, 'color', colors(i,:), 'linewidth', 2)
 end
 ```
-![Computation of equivalent ellipses, oriented box, and fitting line from set of points](https://github.com/mattools/matGeom/blob/master/docs/images/demo_geom2d_iris.png)
+![Computation of equivalent ellipses, oriented box, and fitting line from set of points](docs/images/demo_geom2d_iris.png)
+
+### Polygon data processing
 
 It is possible to work with more complex shapes such as polygonal lines ("polylines") or polygons.
 Common operations comprise smoothing, simplification (retaining only a selection of vertices), 
@@ -101,4 +105,15 @@ drawLine(line, 'k');
 inters = intersectLinePolygon(line, poly_simpl);
 drawPoint(inters, 'Color', 'r', 'Marker', 'o', 'MarkerFaceColor', 'w', 'linewidth', 2);
 ```
-![Summary of polygon processing operations: smoothing, simplification, convex hull, intersection with lines.](https://github.com/mattools/matGeom/blob/master/docs/images/leafPoly_variousOps.png)
+![Summary of polygon processing operations: smoothing, simplification, convex hull, intersection with lines.](docs/images/leafPoly_variousOps.png)
+
+### Polygon mesh processing
+
+The MatGeom library also provides features for polygon mesh processing.
+Mesh data can be retrieved from common mesh file formats, 
+or generated from simple data,
+and various operations can be performed: intersections (with lines or planes), clipping by plane, 
+distance to point... 
+Several measurements on meshes are also provided: main curvatures, surface area, bounding box...
+
+![Summary of polygon mesh processing operations: smoothing, simplification, convex hull, intersection with lines.](docs/images/bunnyMesh_variousOps.png)
