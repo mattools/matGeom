@@ -5838,7 +5838,8 @@ parabola
 
 \begin_layout Standard
 Apart circles and ellipses,
- parabola can be drawn with MatGeom.
+ MatGeom supports also the display of parabolas.
+ 
 \end_layout
 
 \begin_layout Minisec
@@ -5859,6 +5860,9 @@ drawParabola
 
 \begin_layout Standard
 Draws a parabola on the current axis.
+ As parabolas are unbounded curves,
+ the function displays a parabola arc,
+ defined by the parameterization domain.
 \end_layout
 
 \begin_layout Standard
@@ -23008,6 +23012,75 @@ Can identify and select elements of the mesh that intersect other primitives,
  or that are contained within a region.
 \end_layout
 
+\begin_layout Minisec
+clipMeshByPlane
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+clipMeshByPlane
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+clipping!mesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Clips a mesh with a plane,
+ by retaining vertices located below the plane,
+ and by creating new vertices at the intersections with the plane (See Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Mesh-Clipping"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Minisec
+clipMeshByBox
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+clipMeshByBox
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Clips a mesh with a box.
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 placement document
@@ -23019,17 +23092,17 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/meshes3d/demoIntersectLineMesh3d_03.png
-	lyxscale 70
-	width 45text%
+	filename images/meshes3d/bunny/bunny1k_clipWithPlane.png
+	lyxscale 60
+	height 4cm
 
 \end_inset
 
 
 \begin_inset Graphics
-	filename images/meshes3d/demoIntersectPlaneMesh_03.png
-	lyxscale 70
-	width 45text%
+	filename images/meshes3d/cutMeshByPlane_crop.png
+	lyxscale 50
+	height 4cm
 
 \end_inset
 
@@ -23042,17 +23115,218 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Intersect-Mesh-Line-Plane"
+name "fig:Mesh-Clipping"
 
 \end_inset
 
-Intersection of a 3D polygonal mesh with a collection of lines,
- or a collection of planes.
+Left:
+ clipping of a complex triangular mesh with a plane.
+ Right:
+ illustration of the 
+\begin_inset Quotes eld
+\end_inset
+
+cutMeshByPlane
+\begin_inset Quotes erd
+\end_inset
+
+ function.
+ The colors of the meshes indicates their location relative to the plane:
+ red=above,
+ blue=below,
+ green=intersects.
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Minisec
+clipMeshVertices
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+clipMeshVertices
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+clipping!mesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Clips vertices of a surface mesh and remove outer faces.
+\end_layout
+
+\begin_layout Minisec
+clipConvexPolyhedronByPlane
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+clipConvexPolyhedronByPlane
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "fun:clipConvexPolyhedronByPlane"
+
+\end_inset
+
+Clips a convex polyhedron by a plane.
+ Contrary the function clipMeshByPlane,
+ this function may return non-triangle meshes.
+ See also the function clipPolygonByPlane3d 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fun:clipPolygonByPlane3d"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Minisec
+cutMeshByPlane
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+cutMeshByPlane
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Cuts a mesh by a plane (See Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Mesh-Clipping"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
+ Example:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+% create triangulated mesh,
+ and a plane from origin and normal vector
+\end_layout
+
+\begin_layout Plain Layout
+
+[v,
+ f] = createSoccerBall;
+ f = triangulateFaces(f);
+\end_layout
+
+\begin_layout Plain Layout
+
+plane = createPlane([-0.2 0 0],
+ [-1 0 -1]);
+\end_layout
+
+\begin_layout Plain Layout
+
+% split the different parts of the mesh
+\end_layout
+
+\begin_layout Plain Layout
+
+[above,
+ inside,
+ below] = cutMeshByPlane(mesh,
+ plane);
+\end_layout
+
+\begin_layout Plain Layout
+
+% draw the different parts
+\end_layout
+
+\begin_layout Plain Layout
+
+figure('color','w');
+ axis equal;
+ hold on;
+ view(3) 
+\end_layout
+
+\begin_layout Plain Layout
+
+drawMesh(above,
+ 'FaceColor',
+ 'r');
+\end_layout
+
+\begin_layout Plain Layout
+
+drawMesh(inside,
+ 'FaceColor',
+ 'g');
+\end_layout
+
+\begin_layout Plain Layout
+
+drawMesh(below,
+ 'FaceColor',
+ 'b');
+\end_layout
+
+\begin_layout Plain Layout
+
+drawPlane3d(plane,
+ 'FaceAlpha',.7)
 \end_layout
 
 \end_inset
@@ -23192,176 +23466,6 @@ polyhedronSlice
 Intersects a convex polyhedron with a plane.
 \end_layout
 
-\begin_layout Minisec
-clipMeshVertices
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-clipMeshVertices
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Index gen
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-clipping!mesh
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Clips vertices of a surface mesh and remove outer faces.
-\end_layout
-
-\begin_layout Minisec
-clipConvexPolyhedronByPlane
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-clipConvexPolyhedronByPlane
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset label
-LatexCommand label
-name "fun:clipConvexPolyhedronByPlane"
-
-\end_inset
-
-Clips a convex polyhedron by a plane.
- See also the function clipPolygonByPlane3d 
-\begin_inset CommandInset ref
-LatexCommand vpageref
-reference "fun:clipPolygonByPlane3d"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Minisec
-cutMeshByPlane
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-cutMeshByPlane
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Cuts a mesh by a plane.
- Example:
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-% create triangulated mesh,
- and a plane from origin and normal vector
-\end_layout
-
-\begin_layout Plain Layout
-
-[v,
- f] = createSoccerBall;
- f = triangulateFaces(f);
-\end_layout
-
-\begin_layout Plain Layout
-
-plane = createPlane([-0.2 0 0],
- [-1 0 -1]);
-\end_layout
-
-\begin_layout Plain Layout
-
-% split the different parts of the mesh
-\end_layout
-
-\begin_layout Plain Layout
-
-[above,
- inside,
- below] = cutMeshByPlane(mesh,
- plane);
-\end_layout
-
-\begin_layout Plain Layout
-
-% draw the different parts
-\end_layout
-
-\begin_layout Plain Layout
-
-figure('color','w');
- axis equal;
- hold on;
- view(3) 
-\end_layout
-
-\begin_layout Plain Layout
-
-drawMesh(above,
- 'FaceColor',
- 'r');
-\end_layout
-
-\begin_layout Plain Layout
-
-drawMesh(inside,
- 'FaceColor',
- 'g');
-\end_layout
-
-\begin_layout Plain Layout
-
-drawMesh(below,
- 'FaceColor',
- 'b');
-\end_layout
-
-\begin_layout Plain Layout
-
-drawPlane3d(plane,
- 'FaceAlpha',.7)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Standard
 \begin_inset Float figure
 placement document
@@ -23371,15 +23475,19 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/meshes3d/cutMeshByPlane_crop.png
-	lyxscale 50
-	width 60text%
+	filename images/meshes3d/demoIntersectLineMesh3d_03.png
+	lyxscale 70
+	width 45text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/meshes3d/demoIntersectPlaneMesh_03.png
+	lyxscale 70
+	width 45text%
 
 \end_inset
 
@@ -23390,24 +23498,14 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Illustration of the 
-\begin_inset Quotes eld
-\end_inset
-
-cutMeshByPlane
-\begin_inset Quotes erd
-\end_inset
-
- function.
-\end_layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Intersect-Mesh-Line-Plane"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
-
+Intersection of a 3D polygonal mesh with a collection of lines,
+ or a collection of planes.
 \end_layout
 
 \end_inset
@@ -23415,36 +23513,9 @@ cutMeshByPlane
 
 \end_layout
 
-\begin_layout Minisec
-clipMeshByPlane
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-clipMeshByPlane
-\end_layout
-
 \end_inset
 
 
-\begin_inset Index gen
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-clipping!mesh
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Clips a mesh by a plane.
 \end_layout
 
 \begin_layout Subsection
@@ -23469,7 +23540,6 @@ averageMesh
 
 \begin_layout Standard
 Computes an average mesh from a list of meshes.
- 
 \end_layout
 
 \begin_layout Subsection
@@ -26465,6 +26535,67 @@ drawCircle
 \begin_layout Standard
 When contributing a new functions,
  providing a set of corresponding unit tests is strongly encouraged.
+\end_layout
+
+\begin_layout Subsection
+Running the tests
+\end_layout
+
+\begin_layout Standard
+Tests can be run separately for each module.
+ For this,
+ change the current path to the module under test,
+ and run the 
+\family typewriter
+\color gray
+runtests
+\family default
+\color inherit
+ command.
+ Example for the geom2d module:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+>> cd [MatGeomBaseDir]/tests/geom2d
+\end_layout
+
+\begin_layout Plain Layout
+
+>> runtests
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+All the tests are run,
+ throwing errors if assertions are not verified,
+ and display a summary of the test suite.
+\end_layout
+
+\begin_layout Standard
+The whole set of test (for all modules) can be run from the 
+\family typewriter
+\color gray
+tests
+\family default
+\color inherit
+ directory,
+ by running the 
+\family typewriter
+\color gray
+runAlltests
+\family default
+\color inherit
+ script.
 \end_layout
 
 \begin_layout Subsection
