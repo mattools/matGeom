@@ -33,3 +33,14 @@ assertTrue(testCase, isfield(mesh, 'faces'));
 
 assertEqual(testCase, 226, size(mesh.vertices, 1));
 assertEqual(testCase, 448, size(mesh.faces, 1));
+
+
+function test_fileWithMissingFace(testCase) %#ok<*DEFNU>
+
+flag = false;
+try 
+    assertError(testCase, @(x) readMesh_off('octahedron_missingFace.off'));
+catch
+    flag = true;
+end
+assertTrue(testCase, flag);
