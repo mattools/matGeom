@@ -1066,7 +1066,7 @@ geom3d
 geom2d
 \series default
  module.
- Several fucntions of the 
+ Several functions of the 
 \series bold
 graphs 
 \series default
@@ -1126,7 +1126,7 @@ Simple
  geometries such as points,
  lines,
  circles...
- are represented by concatenating parameters within a single row vector.
+ are represented by concatenating their parameters within a single row vector.
  
 \end_layout
 
@@ -1174,7 +1174,7 @@ ELLI = [50 50  40 20  30];
 
 \begin_layout Standard
 Simple geometry data may be concatenated to represent an array of geometries:
- each row of the array represents one geometry.
+ each row of the array represents one single geometry.
 \end_layout
 
 \begin_layout Standard
@@ -3103,7 +3103,7 @@ straight
 \begin_inset space ~
 \end_inset
 
-lines are infinite in ech direction
+lines are infinite in each direction
 \end_layout
 
 \begin_layout Description
@@ -3123,7 +3123,7 @@ edges correspond to the set of points between two extremity points
 \end_layout
 
 \begin_layout Description
-rays emanate from a point,
+rays emanate from an origin point,
  and are unbounded in one direction
 \end_layout
 
