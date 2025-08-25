@@ -1486,7 +1486,7 @@ name "sec:General-conventions"
 \end_layout
 
 \begin_layout Standard
-The MatGeom library tries to follow standard conventions and practices both from mathematical and Matlab-programming point of view.
+The MatGeom library tries to follow standard conventions and practices from both mathematical and Matlab-programming point of view.
  Conventions are recalled within the manual or in function headers when appropriate.
 \end_layout
 
@@ -1495,7 +1495,7 @@ Function names follow the (lower)
 \begin_inset Quotes eld
 \end_inset
 
-came case
+camel case
 \begin_inset Quotes erd
 \end_inset
 
@@ -1506,8 +1506,8 @@ came case
 drawLine
 \family default
 .
- Functions start either by a verb at the infinitive,
- or by a noun (when working on a specific data structure).
+ Function names begins either with a verb at the infinitive,
+ or with a noun (when working on a specific data structure).
  Examples:
  
 \family typewriter
@@ -1516,13 +1516,18 @@ clipPolygon
 ,
  
 \family typewriter
-polygonCentroid
+projPointOnLine
+\family default
+,
+
+\family typewriter
+ polygonCentroid
 \family default
 .
 \end_layout
 
 \begin_layout Standard
-Angles are in radians,
+Angles are expressed in radians,
  except when they are used to define the orientation of geometries.
  In that case,
  they are given as degrees (usually more intuitive).
