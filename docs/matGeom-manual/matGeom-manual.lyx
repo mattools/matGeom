@@ -10822,6 +10822,18 @@ https://en.wikipedia.org/wiki/Delaunay_triangulation
 
 \end_inset
 
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+Delaunay triangulation
+\end_layout
+
+\end_inset
+
  of input points (Fig.
 \begin_inset space ~
 \end_inset
@@ -10857,7 +10869,19 @@ euclideanMST
 \end_layout
 
 \begin_layout Standard
-Build the euclidean minimal spanning tree (MST) of a set of points.
+Build the euclidean minimal spanning tree
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+minimal spanning tree
+\end_layout
+
+\end_inset
+
+ (MST) of a set of points.
  The minimal spanning tree is the graph with the smallest total length of edges that connect all the nodes of the graph (Fig.
 \begin_inset space ~
 \end_inset
@@ -10944,7 +10968,7 @@ placement document
 alignment document
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -10977,7 +11001,7 @@ placement document
 alignment document
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -10994,7 +11018,11 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Delaunay Graph
+Minimal Spanning 
+\begin_inset Newline newline
+\end_inset
+
+Tree (MST)
 \end_layout
 
 \end_inset
