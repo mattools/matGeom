@@ -20,7 +20,7 @@ function [points, pos, faceInds] = intersectEdgeMesh3d(edge, varargin)
 %              0    0.5000    0.5000
 %
 %   See also 
-%     meshes3d, interesectLineMesh3d, triangulateFaces
+%     meshes3d, intersectLineMesh3d, triangulateFaces
 %
 
 % ------
