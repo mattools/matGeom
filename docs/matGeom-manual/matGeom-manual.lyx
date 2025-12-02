@@ -20685,94 +20685,6 @@ nolink "false"
 ).
 \end_layout
 
-\begin_layout Minisec
-createCube
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-createCube
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Index gen
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-cube
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Creates a 3D mesh representing the unit cube (Fig.
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Platonic-Solids"
-nolink "false"
-
-\end_inset
-
--a).
-\end_layout
-
-\begin_layout Minisec
-createOctahedron
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-createOctahedron
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Index gen
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-octahedron
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Creates a 3D mesh representing an octahedron (Fig.
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Platonic-Solids"
-nolink "false"
-
-\end_inset
-
--b).
-\end_layout
-
 \begin_layout Standard
 \begin_inset Float figure
 placement document
@@ -20783,26 +20695,19 @@ status open
 
 \begin_layout Plain Layout
 \align center
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Graphics
-	filename images/meshes3d/cube.png
+	filename images/meshes3d/polyhedra/cube_crop.png
 	lyxscale 25
-	width 24text%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename images/meshes3d/octahedron.png
-	lyxscale 25
-	width 24text%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename images/meshes3d/icosahedron.png
-	lyxscale 25
-	width 24text%
+	width 19text%
 
 \end_inset
 
@@ -20810,27 +20715,152 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/meshes3d/dodecahedron.png
+	filename images/meshes3d/polyhedra/Octahedron_crop.png
 	lyxscale 25
-	width 24text%
+	width 19text%
 
 \end_inset
 
 
-\begin_inset Graphics
-	filename images/meshes3d/tetrahedron.png
-	lyxscale 25
-	width 24text%
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
 
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Graphics
-	filename images/meshes3d/soccerBall.png
+	filename images/meshes3d/polyhedra/tetrahedron_crop.png
 	lyxscale 25
-	width 24text%
+	width 19text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/meshes3d/polyhedra/icosahedron_crop.png
+	lyxscale 25
+	width 19text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/meshes3d/polyhedra/dodecahedron_crop.png
+	lyxscale 25
+	width 19text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -20861,23 +20891,36 @@ The five platonic solids and a soccer ball represented as 3D meshes.
 \end_layout
 
 \begin_layout Minisec
-createIcosahedron
+createCube
 \begin_inset Index idx
 range none
 pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-createIcosahedron
+createCube
 \end_layout
 
 \end_inset
 
- 
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+cube
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Creates a 3D mesh representing an Icosahedron (Fig.
+Creates a 3D mesh representing the unit cube,
+ composed of six square faces (Fig.
 \begin_inset space ~
 \end_inset
 
@@ -20889,18 +20932,30 @@ nolink "false"
 
 \end_inset
 
--c).
+-a).
 \end_layout
 
 \begin_layout Minisec
-createDodecahedron
+createOctahedron
 \begin_inset Index idx
 range none
 pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-createDodecahedron
+createOctahedron
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+octahedron
 \end_layout
 
 \end_inset
@@ -20909,7 +20964,41 @@ createDodecahedron
 \end_layout
 
 \begin_layout Standard
-Creates a 3D mesh representing a dodecahedron (Fig.
+Creates a 3D mesh representing an octahedron,
+ composed of eight triangle faces (Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Platonic-Solids"
+nolink "false"
+
+\end_inset
+
+-b).
+\end_layout
+
+\begin_layout Minisec
+createTetrahedron
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+createTetrahedron
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Creates a 3D mesh representing a tetrahedron,
+ composed of four triangle faces (Fig.
 \begin_inset space ~
 \end_inset
 
@@ -20925,14 +21014,14 @@ nolink "false"
 \end_layout
 
 \begin_layout Minisec
-createTetrahedron
+createIcosahedron
 \begin_inset Index idx
 range none
 pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-createTetrahedron
+createIcosahedron
 \end_layout
 
 \end_inset
@@ -20941,7 +21030,41 @@ createTetrahedron
 \end_layout
 
 \begin_layout Standard
-Creates a 3D mesh representing a tetrahedron (Fig.
+Creates a 3D mesh representing an Icosahedron,
+ composed of twenty triangle faces (Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Platonic-Solids"
+nolink "false"
+
+\end_inset
+
+-d).
+\end_layout
+
+\begin_layout Minisec
+createDodecahedron
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+createDodecahedron
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Creates a 3D mesh representing a dodecahedron,
+ composed of twelve pentagon faces (Fig.
 \begin_inset space ~
 \end_inset
 
@@ -20970,7 +21093,7 @@ Other classical polyhedra
 \begin_layout Standard
 Other classical (non platonic) polyhedra can be easily generated.
  For some of them,
- number of vertices,
+ the number of vertices,
  faces and edges are given in Table
 \begin_inset space ~
 \end_inset
@@ -21004,15 +21127,40 @@ nolink "false"
 ).
 \end_layout
 
-\begin_layout Minisec
-createSoccerBall
-\begin_inset Index idx
-range none
-pageformat default
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
 status collapsed
 
 \begin_layout Plain Layout
-createSoccerBall
+\align center
+\begin_inset Graphics
+	filename images/meshes3d/polyhedra/CubeOctahedron_crop.png
+	lyxscale 25
+	width 19text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -21020,21 +21168,176 @@ createSoccerBall
 
 \end_layout
 
-\begin_layout Standard
-Creates a 3D mesh representing a soccer ball (Fig.
-\begin_inset space ~
 \end_inset
 
 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Platonic-Solids"
-nolink "false"
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/meshes3d/polyhedra/tetrakaidecahedron_crop.png
+	lyxscale 25
+	width 19text%
 
 \end_inset
 
--f).
- It can be seen as a truncated icosahedron.
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/meshes3d/polyhedra/rhombododecahedron_crop.png
+	lyxscale 25
+	width 19text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/meshes3d/polyhedra/soccerBall_crop.png
+	lyxscale 25
+	width 19text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/meshes3d/polyhedra/DurerPolyhedron_crop.png
+	lyxscale 25
+	width 19text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Other-Sample-Polyhedra"
+
+\end_inset
+
+Additional polyhedra that can be generated from the 
+\begin_inset Quotes eld
+\end_inset
+
+meshes3d
+\begin_inset Quotes erd
+\end_inset
+
+ module.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Minisec
@@ -21142,27 +21445,44 @@ nolink "false"
 
 -c).
  This mesh is composed of twelve identical faces,
- but vertices do not all have the same number of vertices.
+ but vertices do not all have the same number of adjacent faces.
 \end_layout
 
 \begin_layout Minisec
-createStellatedMesh
+createSoccerBall
 \begin_inset Index idx
 range none
 pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-createStellatedMesh
+createSoccerBall
 \end_layout
 
 \end_inset
 
- 
+
 \end_layout
 
 \begin_layout Standard
-Replaces each face of a mesh by a pyramid.
+Creates a 3D mesh representing a soccer ball,
+ composed of twelve pentagon faces and twenty hexagonal faces (Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Other-Sample-Polyhedra"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+-d).
+ It can be seen as a truncated icosahedron.
 \end_layout
 
 \begin_layout Minisec
@@ -21197,82 +21517,27 @@ nolink "false"
 
 \end_inset
 
--d).
+-e).
+\end_layout
+
+\begin_layout Minisec
+createStellatedMesh
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+createStellatedMesh
+\end_layout
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-placement document
-alignment document
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename images/meshes3d/cubeOctahedron.png
-	lyxscale 25
-	width 24text%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename images/meshes3d/tetrakaidecahedron.png
-	lyxscale 25
-	width 24text%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename images/meshes3d/rhombododecahedron.png
-	lyxscale 25
-	width 24text%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename images/meshes3d/durerPolyhedron.png
-	lyxscale 25
-	width 24text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Other-Sample-Polyhedra"
-
-\end_inset
-
-Additional polyhedra that can be generated from the 
-\begin_inset Quotes eld
-\end_inset
-
-meshes3d
-\begin_inset Quotes erd
-\end_inset
-
- module.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+Replaces each face of a mesh by a pyramid.
 \end_layout
 
 \begin_layout Standard
@@ -21940,12 +22205,20 @@ Number of vertices and faces of polyhedra provided by MatGeom.
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Conversion from smooth surface models
 \end_layout
 
 \begin_layout Standard
-It is often convenient to convert a geometrical 3D model (cylinder,
+Besides polyhedra,
+ it is often convenient to convert a geometrical 3D model (cylinder,
  ellipsoid...) with known parameters into a discretized version represented by a mesh.
 \end_layout
 
@@ -22336,6 +22609,61 @@ Computes triangulation between a pair of 3D open curves (polylines).
 \end_layout
 
 \begin_layout Minisec
+convexHull3d
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+convexHull3d
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+convex hull
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes the convex hull of a collection 3D points as a triangular mesh.
+ Can specify a 
+\begin_inset Quotes eld
+\end_inset
+
+mergeCoplanarFaces
+\begin_inset Quotes erd
+\end_inset
+
+ option to merge the coplanar faces of the resuting meshes into polygons with arbitrary number of vertices.
+\end_layout
+
+\begin_layout Minisec
 minConvexHull
 \begin_inset Index idx
 range none
@@ -22348,7 +22676,7 @@ minConvexHull
 
 \end_inset
 
- 
+
 \begin_inset Index gen
 range none
 pageformat default
@@ -22407,7 +22735,7 @@ steinerPolytope
 \end_layout
 
 \begin_layout Standard
-Creates a steiner polytope from a set of vectors.
+Creates a Steiner polytope from a set of vectors.
  Example (See Fig.
 \begin_inset space ~
 \end_inset
