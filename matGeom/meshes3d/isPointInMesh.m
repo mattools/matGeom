@@ -1,4 +1,4 @@
-function res = isPointInMesh(point, v, f, varargin)
+function res = isPointInMesh(point, varargin)
 %ISPOINTINMESH Check if a point is inside a 3D mesh.
 %
 %   B = isPointInMesh(PT, V, F)
@@ -28,6 +28,9 @@ function res = isPointInMesh(point, v, f, varargin)
 % E-mail: david.legland@inrae.fr
 % Created: 2018-01-26, using Matlab 9.3.0.713579 (R2017b)
 % Copyright 2018-2024 INRA - Cepia Software Platform
+
+% retrieve mesh data
+[v, f] = parseMeshData(varargin{:});
 
 % choose a random vector
 vect = rand(1, 3);
