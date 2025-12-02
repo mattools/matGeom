@@ -86,8 +86,8 @@ end
 
 %% Pre-processing for formatting display options
 
-% default color for drawing mesh
-faceColor = [1 0 0];
+% default face color for drawing mesh: light gray
+faceColor = [0.7 0.7 0.7];
 
 % combine default face color with varargin
 if isempty(varargin)
