@@ -20611,17 +20611,8 @@ Creation of meshes
 \end_layout
 
 \begin_layout Standard
-The library contains many functions for generating polygonal meshes corresponding to classical polyhedra,
- such as platonic solids.
+The library contains many functions for generating polygonal meshes corresponding to classical polyhedra.
  It also provides facilities for converting from smooth surfaces.
-\end_layout
-
-\begin_layout Subsection
-Platonic solids
-\end_layout
-
-\begin_layout Standard
-Several functions allows creation of meshes representing classical polyhedra.
  The results are typically of the form 
 \family typewriter
 \color gray
@@ -20651,6 +20642,54 @@ f
 e
 \family default
  is the array of edge vertex indices.
+ 
+\end_layout
+
+\begin_layout Subsection
+Platonic solids
+\end_layout
+
+\begin_layout Standard
+Platonic solids are convex and 3D polyhedra that are regular:
+ the number of vertices of each face is constance,
+ as well as the number of faces adjacent to any vertex
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://en.wikipedia.org/wiki/Platonic_solid
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ There are only five platonic solids,
+ illustrated in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Platonic-Solids"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
  Number of vertices,
  faces and edges for each polyhedron are given in Table
 \begin_inset space ~
@@ -20878,6 +20917,11 @@ name "fig:Platonic-Solids"
 \end_inset
 
 The five platonic solids and a soccer ball represented as 3D meshes.
+ (a) cube,
+ (b) octahedron,
+ (c) tetrahedron,
+ (d) icosahedron,
+ (e) dodecahedron.
 \end_layout
 
 \end_inset
@@ -21092,9 +21136,31 @@ Other classical polyhedra
 
 \begin_layout Standard
 Other classical (non platonic) polyhedra can be easily generated.
- For some of them,
- the number of vertices,
- faces and edges are given in Table
+ Some of them are Archimedean solids:
+ faces are regular polygons (with various number of vertices),
+ and the degrees of faces meeting at aeach vertex is constant
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://en.wikipedia.org/wiki/Archimedean_solid
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ The number of vertices,
+ faces and edges of polyhedra are given in Table
 \begin_inset space ~
 \end_inset
 
@@ -21133,7 +21199,7 @@ placement document
 alignment document
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -21142,7 +21208,7 @@ placement document
 alignment document
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -21176,7 +21242,7 @@ placement document
 alignment document
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -21210,7 +21276,7 @@ placement document
 alignment document
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -21244,7 +21310,7 @@ placement document
 alignment document
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -21278,7 +21344,7 @@ placement document
 alignment document
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -21328,6 +21394,19 @@ meshes3d
 \end_inset
 
  module.
+ (a) cubeoctahedron,
+ (b) tetrakaidecahedron,
+ (c) rhombododecahedron,
+ (d) soccer ball,
+ (e) 
+\begin_inset Quotes eld
+\end_inset
+
+Durer's
+\begin_inset Quotes erd
+\end_inset
+
+ polyhedron.
 \end_layout
 
 \end_inset
@@ -21502,7 +21581,27 @@ createDurerPolyhedron
 \end_layout
 
 \begin_layout Standard
-Creates a mesh corresponding to the polyhedron represented in Durer's "Melancholia" (Fig.
+Creates a mesh corresponding to the polyhedron represented in Durer's "Melancholia" engraving
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://en.wikipedia.org/wiki/Melencolia_I
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ (Fig.
 \begin_inset space ~
 \end_inset
 
@@ -21945,7 +22044,7 @@ soccer ball
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Archimedean
 \end_layout
 
 \end_inset
@@ -22001,7 +22100,7 @@ cube-octahedron
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Archimedean
 \end_layout
 
 \end_inset
@@ -22223,6 +22322,167 @@ Besides polyhedra,
 \end_layout
 
 \begin_layout Minisec
+sphereMesh
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+sphereMesh
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+sphere!mesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Creates a 3D mesh representing a sphere (Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CurveToMesh"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+-a).
+\end_layout
+
+\begin_layout Minisec
+ellipsoidMesh
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+ellipsoidMesh
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+ellipsoid!mesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Converts a 3D ellipsoid to face-vertex mesh representation (Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CurveToMesh"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+-b).
+\end_layout
+
+\begin_layout Minisec
+torusMesh
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+torusMesh
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+torus!mesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Creates a 3D mesh representing a torus (Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CurveToMesh"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+-c).
+\end_layout
+
+\begin_layout Minisec
+circleMesh
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+circleMesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Create a mesh defined by a 3D circle.
+\end_layout
+
+\begin_layout Minisec
 cylinderMesh
 \begin_inset Index idx
 range none
@@ -22255,122 +22515,6 @@ Creates a 3D mesh representing a cylinder.
 \end_layout
 
 \begin_layout Minisec
-sphereMesh
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-sphereMesh
-\end_layout
-
-\end_inset
-
-
-\begin_inset Index gen
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-sphere!mesh
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Creates a 3D mesh representing a sphere.
-\end_layout
-
-\begin_layout Minisec
-circleMesh
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-circleMesh
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Create a mesh defined by a 3D circle.
-\end_layout
-
-\begin_layout Minisec
-ellipsoidMesh
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-ellipsoidMesh
-\end_layout
-
-\end_inset
-
-
-\begin_inset Index gen
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-ellipsoid!mesh
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Converts a 3D ellipsoid to face-vertex mesh representation.
-\end_layout
-
-\begin_layout Minisec
-torusMesh
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-torusMesh
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Index gen
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-torus!mesh
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Creates a 3D mesh representing a torus.
-\end_layout
-
-\begin_layout Minisec
 curveToMesh
 \begin_inset Index idx
 range none
@@ -22395,11 +22539,14 @@ Creates a mesh surrounding a 3D curve (Fig.
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:CurveToMesh"
+plural "false"
+caps "false"
+noprefix "false"
 nolink "false"
 
 \end_inset
 
-).
+-d).
 \end_layout
 
 \begin_layout Minisec
@@ -22432,10 +22579,138 @@ status open
 
 \begin_layout Plain Layout
 \align center
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Graphics
-	filename images/meshes3d/trefoilKnot.png
-	lyxscale 50
-	width 60text%
+	filename images/meshes3d/createMesh/sphereMesh_crop.png
+	lyxscale 25
+	width 23text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/meshes3d/createMesh/ellipsoidMesh_crop.png
+	lyxscale 25
+	width 23text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/meshes3d/createMesh/torusMesh_crop.png
+	lyxscale 25
+	width 23text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/meshes3d/createMesh/curveToMesh_crop.png
+	lyxscale 25
+	width 23text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -22452,29 +22727,11 @@ name "fig:CurveToMesh"
 
 \end_inset
 
-Application of the curveToMesh function
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-update figure to add more shapes.
-\end_layout
-
-\begin_layout Plain Layout
-[ sphereBasic sphereOctahedron sphereIcosahedron]
-\end_layout
-
-\begin_layout Plain Layout
-[
-\begin_inset space \space{}
-\end_inset
-
-ellipsoid torus knot]
-\end_layout
-
-\end_inset
-
-
+Generation of 3D meshes from smooth surfaces.
+ (a) sphere,
+ (b) ellipsoid,
+ (c) torus,
+ (d) 3D curve.
 \end_layout
 
 \end_inset
