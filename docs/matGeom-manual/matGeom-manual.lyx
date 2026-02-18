@@ -23965,6 +23965,13 @@ Reduces the memory footprint of a polygonal mesh by removing vertices that are n
  and recomputing indices of remaining vertices.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Intersection and clipping
 \end_layout
@@ -23972,6 +23979,67 @@ Intersection and clipping
 \begin_layout Standard
 Can identify and select elements of the mesh that intersect other primitives,
  or that are contained within a region.
+\end_layout
+
+\begin_layout Minisec
+intersectConvexPolyhedra
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+intersectConvexPolyhedra
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+intersection!convex polyhedra
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes the convex polyhedron resulting from the intersection of two convex polyhedra (see Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Mesh-Clipping"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Minisec
@@ -24024,14 +24092,43 @@ nolink "false"
 \end_layout
 
 \begin_layout Minisec
-clipMeshByBox
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
 
 \begin_layout Plain Layout
-clipMeshByBox
+\align center
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/meshes3d/process/intersection_cube_octahedron.png
+	lyxscale 70
+	width 35text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+convex polyhedra
+\begin_inset Newline newline
+\end_inset
+
+intersection
 \end_layout
 
 \end_inset
@@ -24039,11 +24136,9 @@ clipMeshByBox
 
 \end_layout
 
-\begin_layout Standard
-Clips a mesh with a box.
-\end_layout
+\end_inset
 
-\begin_layout Standard
+
 \begin_inset Float figure
 placement document
 alignment document
@@ -24056,15 +24151,58 @@ status open
 \begin_inset Graphics
 	filename images/meshes3d/bunny/bunny1k_clipWithPlane.png
 	lyxscale 60
-	height 4cm
+	width 30text%
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+plane clipping
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename images/meshes3d/cutMeshByPlane_crop.png
 	lyxscale 50
-	height 4cm
+	width 35text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+cut with plane
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -24081,10 +24219,12 @@ name "fig:Mesh-Clipping"
 
 \end_inset
 
-Left:
- clipping of a complex triangular mesh with a plane.
- Right:
- illustration of the 
+(a) Intersection of two convex polyhedra:
+ a cube and an octahedron.
+ Original polyhedra are represented as wireframes.
+ The result of intersection is shown in magenta.
+ (b) clipping of a complex triangular mesh with a plane.
+ (c) Illustration of the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -24107,6 +24247,26 @@ cutMeshByPlane
 \end_inset
 
 
+\end_layout
+
+\begin_layout Minisec
+clipMeshByBox
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+clipMeshByBox
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Clips a mesh with a box.
 \end_layout
 
 \begin_layout Minisec
@@ -24441,7 +24601,7 @@ status open
 \begin_inset Graphics
 	filename images/meshes3d/demoIntersectLineMesh3d_03.png
 	lyxscale 70
-	width 45text%
+	width 50text%
 
 \end_inset
 
@@ -24449,7 +24609,7 @@ status open
 \begin_inset Graphics
 	filename images/meshes3d/demoIntersectPlaneMesh_03.png
 	lyxscale 70
-	width 45text%
+	width 50text%
 
 \end_inset
 
@@ -24502,6 +24662,13 @@ averageMesh
 
 \begin_layout Standard
 Computes an average mesh from a list of meshes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -24745,6 +24912,13 @@ removeMeshFaces
 Removes faces from a mesh by face indices.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Information on meshes
 \end_layout
@@ -24939,51 +25113,7 @@ checkMeshAdjacentFaces
 \end_layout
 
 \begin_layout Standard
-Checks if adjacent faces of a mesh have similar orientation.
-\end_layout
-
-\begin_layout Minisec
-\begin_inset Float figure
-placement document
-alignment document
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename images/meshes3d/def/mesh_boundary_vertexRing.png
-	width 50text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Boundary_VertexRing"
-
-\end_inset
-
-Topological information about a mesh.
- Mesh boundary edges (thick blue).
- Vertex Ring of the red vertex (thick red).
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+Checks that the adjacent faces of a mesh have a consistent orientation.
 \end_layout
 
 \begin_layout Minisec
@@ -25014,6 +25144,18 @@ meshVertexRing
 \end_inset
 
 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+vertex ring
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -25037,6 +25179,13 @@ nolink "false"
 ).
  For regular vertices,
  the vertex ring forms either a loop or an open polyline (for vertices located on the boundary of the mesh).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -25131,6 +25280,50 @@ https://github.com/alecjacobson/gptoolbox
 
 .
  
+\end_layout
+
+\begin_layout Minisec
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/meshes3d/def/mesh_boundary_vertexRing.png
+	width 50text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Boundary_VertexRing"
+
+\end_inset
+
+Topological information about a mesh.
+ Mesh boundary edges (thick blue).
+ Vertex Ring of the red vertex (thick red).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Minisec
@@ -25529,6 +25722,18 @@ meshFaceAreas
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+area!mesh face
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -25544,6 +25749,18 @@ status collapsed
 
 \begin_layout Plain Layout
 meshFaceNormals
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+normal!mesh face
 \end_layout
 
 \end_inset
