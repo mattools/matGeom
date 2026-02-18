@@ -1,11 +1,19 @@
-function res = intersectConvexPolyhedra(mesh1, mesh2)
+function varargout = intersectConvexPolyhedra(mesh1, mesh2, varargin)
 %INTERSECTCONVEXPOLYHEDRA Intersection of two convex polyhedra.
 %
 %   usage:
-%   res = intersectConvexPolyhedra(mesh1, mesh2)
+%   RES = intersectConvexPolyhedra(MESH1, MESH2)
+%   [VI, FI] = intersectConvexPolyhedra(MESH1, MESH2)
 %   Computes the (convex) mesh resulting from the intersection of the
 %   volumes defined by the two input convex meshes. The result is also a
-%   mesh corresponding to the boundary of the convex volume.
+%   mesh corresponding to the boundary of the convex volume. If two output
+%   arguments are requested, they correspond to the vertices and the faces
+%   of the resulting mesh.
+%
+%   ... = intersectConvexPolyhedra(..., 'mergeCoplanarFaces', TF)
+%   Specifies whether the resulting mesh should be given as a triangulation
+%   (TF is false) or as a polygonal mesh with potentially a variable number
+%   of vertex per face (TF is true). Default value is TRUE.
 %
 %   Example
 %     mesh1 = createCube;
@@ -18,7 +26,7 @@ function res = intersectConvexPolyhedra(mesh1, mesh2)
 %     axis equal; view(3);
 %
 %   See also
-%     convexHull3d, minConvexHull
+%     meshes3d, convexHull3d, minConvexHull
 
 % ------
 % Author: David Legland
@@ -27,9 +35,17 @@ function res = intersectConvexPolyhedra(mesh1, mesh2)
 % Created: 2025-12-01,    using Matlab 25.1.0.2943329 (R2025a)
 % Copyright 2025 INRAE.
 
+
+% parse optional input arguments
+parser = inputParser;
+addParameter(parser, 'mergeCoplanarFaces', true);
+parse(parser, varargin{:});
+mergeCoplanar = parser.Results.mergeCoplanarFaces;
+
 % retrieve data from each mesh
 verts1 = mesh1.vertices;
 verts2 = mesh2.vertices;
+
 
 % identify which vertices are within the other mesh
 inVertsFlag1 = isPointInMesh(verts1, mesh2);
@@ -45,7 +61,7 @@ inters1 = zeros(0, 3);
 for i1 = 1:ne1
     seg = [verts1(edges1(i1,1), :) verts1(edges1(i1,2), :)];
     tmp = intersectEdgeMesh3d(seg, mesh2);
-    inters1 = [inters1 ; tmp];
+    inters1 = [inters1 ; tmp]; %#ok<AGROW>
 end
 
 % iterate over edges of first mesh, and populate array of intersections
@@ -54,11 +70,20 @@ inters2 = zeros(0, 3);
 for i1 = 1:ne2
     seg = [verts2(edges2(i1,1), :) verts2(edges2(i1,2), :)];
     tmp = intersectEdgeMesh3d(seg, mesh1);
-    inters2 = [inters2 ; tmp];
+    inters2 = [inters2 ; tmp]; %#ok<AGROW>
 end
 
-
+% concatenates vertices of result mesh
 convVerts = [verts1(inVertsFlag1,:) ; verts2(inVertsFlag2,:) ; inters1 ; inters2];
 
+% convert to mesh data structure
 tri = convhulln(convVerts);
-res = trimMesh(convVerts, tri);
+[vertices2, faces2] = trimMesh(convVerts, tri);
+
+% optional cleanup of faces
+if mergeCoplanar
+    [vertices2, faces2] = mergeCoplanarFaces(vertices2, faces2);
+end
+
+% format output arguments
+varargout = formatMeshOutput(nargout, vertices2, faces2);
