@@ -3434,6 +3434,18 @@ intersectLines
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+intersection!lines
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3896,6 +3908,18 @@ intersectEdges
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+intersection!edges
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3916,6 +3940,18 @@ intersectLineEdge
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+intersection!line-edge
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4132,6 +4168,18 @@ bisector
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+bisector
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4745,6 +4793,18 @@ intersectCircles
 \end_inset
 
 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+intersection!circles
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4760,6 +4820,18 @@ status collapsed
 
 \begin_layout Plain Layout
 intersectLineCircle
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+intersection!line-circle
 \end_layout
 
 \end_inset
@@ -5148,6 +5220,18 @@ status collapsed
 
 \begin_layout Plain Layout
 moments!points
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+ellipse!equivalent ellipse
 \end_layout
 
 \end_inset
@@ -8985,6 +9069,18 @@ intersectLinePolygon
 \end_inset
 
 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+intersection!line-polygon
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -9065,10 +9161,22 @@ intersectPolylines
 \end_inset
 
 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+intersection!polylines
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Identifies the common points between 2 polylines.
+Identifies the intersection points between 2 polylines or two simple polygons.
  Based on the 
 \begin_inset Quotes eld
 \end_inset
@@ -9362,6 +9470,18 @@ resamplePolyline
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+resampling!polyline
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -9381,7 +9501,7 @@ resamplePolylineByLength
 
 \end_inset
 
- 
+
 \end_layout
 
 \begin_layout Standard
@@ -9402,6 +9522,18 @@ resamplePolygon
 \end_inset
 
  
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+resampling!polygon
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -9852,7 +9984,7 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-skeleton
+skeleton!polygon
 \end_layout
 
 \end_inset
@@ -9937,6 +10069,18 @@ status collapsed
 
 \begin_layout Plain Layout
 polygonSymmetryAxis
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+symmetry
 \end_layout
 
 \end_inset
@@ -15900,6 +16044,18 @@ intersectPlanes
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+intersection!planes
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -15935,6 +16091,18 @@ status collapsed
 
 \begin_layout Plain Layout
 intersectLinePlane
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+intersection!line-plane
 \end_layout
 
 \end_inset
@@ -15980,6 +16148,18 @@ planesBisector
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+bisector!planes
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -16288,7 +16468,7 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-polygon (3D)
+polygon!3D polygon
 \end_layout
 
 \end_inset
@@ -16329,6 +16509,18 @@ intersectLinePolygon3d
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+intersection!line-polygon (3D)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -17504,6 +17696,18 @@ status collapsed
 
 \begin_layout Plain Layout
 moments!points (3D)
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status open
+
+\begin_layout Plain Layout
+ellipsoid!equivalent ellipsoid
 \end_layout
 
 \end_inset
@@ -19880,7 +20084,7 @@ literal "false"
 
 
 \begin_inset CommandInset ref
-LatexCommand pageref
+LatexCommand ref
 reference "fig:Polygon-mesh-representation."
 plural "false"
 caps "false"
@@ -20650,7 +20854,71 @@ Platonic solids
 \end_layout
 
 \begin_layout Standard
-Platonic solids are convex and 3D polyhedra that are regular:
+Platonic solids
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Platonic solids
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+polyhedra!Platonic
+\end_layout
+
+\end_inset
+
+ are convex and 3D polyhedra
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+polyhedra
+\end_layout
+
+\end_inset
+
+ that are regular:
  the number of vertices of each face is constance,
  as well as the number of faces adjacent to any vertex
 \begin_inset Foot
@@ -21135,10 +21403,48 @@ Other classical polyhedra
 \end_layout
 
 \begin_layout Standard
-Other classical (non platonic) polyhedra can be easily generated.
- Some of them are Archimedean solids:
- faces are regular polygons (with various number of vertices),
- and the degrees of faces meeting at aeach vertex is constant
+Several functions are provided to generate easily other classical (non platonic) polyhedra.
+ Another particular class of polyhedra are Archimedean solids
+\begin_inset Index gen
+range none
+pageformat default
+status open
+
+\begin_layout Plain Layout
+Archimedean
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ solids
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status open
+
+\begin_layout Plain Layout
+polyhedra!Archimedean
+\end_layout
+
+\end_inset
+
+:
+ their faces are regular polygons (with various number of vertices),
+ and the degrees of faces meeting at each vertex is constant
 \begin_inset Foot
 status collapsed
 
@@ -23373,7 +23679,9 @@ subdivideMesh
 \end_layout
 
 \begin_layout Standard
-Subdivides each face of the mesh.
+Subdivides each face of a triangle mesh.
+ The resulting mesh is also a triangle mesh,
+ with as many faces as the initial number of faces multiplied by the square of the number of divisions.
 \end_layout
 
 \begin_layout Standard
@@ -23407,6 +23715,42 @@ mesh2 = subdivideMesh(...);
 \end_layout
 
 \begin_layout Minisec
+subdivideQuadMesh
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+subdivideQuadMesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Subdivides each face of a quadrangular mesh.
+ The resulting mesh is also a quadrangular mesh,
+ with as many faces as the initial number of faces multiplied by the square of the number of divisions.
+\end_layout
+
+\begin_layout Minisec
 triangulateMesh
 \begin_inset Index idx
 range none
@@ -23437,7 +23781,7 @@ triangulation!mesh
 \begin_layout Standard
 Converts a non-triangle mesh into a triangle mesh.
  Simple wrapper for the triangulateFaces function,
- but uses mesh data structure as input and output.
+ that uses mesh data structure as input and output.
 \begin_inset listings
 inline false
 status open
