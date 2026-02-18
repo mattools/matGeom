@@ -1,0 +1,202 @@
+function varargout = subdivideQuadMesh(vertices, faces, n)
+%SUBDIVIDEQUADMESH Subdivides each face of a quadrilateral mesh.
+%
+%   [V2, F2] = subdivideQuadMesh(V, F, N)
+%   [V2, F2] = subdivideQuadMesh(MESH, N)
+%   Subdivides the (quadrilateral) mesh specified by (V,F) such that each
+%   face F is divided into N^2 smaller quadrilateral faces.
+%   V is a Nv-by-3 array containing vertex coordinates, and F2 is a Nf-by-4
+%   array containing index of vertices of each face.
+%   MESH is a Matlab structure with at least two fields 'vertices' and
+%   'faces', containing vertex and face respectively. It may also contain
+%   an additional 'edges' field.
+%
+%   Example
+%     [v, f] = createCube;
+%     figure; drawMesh(v, f); axis equal; view(3);
+%     [v2, f2] = subdivideMesh(v, f, 4);
+%     figure; drawMesh(v2, f2); axis equal; view(3)
+%
+%   See also 
+%     meshes3d, subdivideMesh, drawMesh
+%
+ 
+% ------
+% Author: David Legland
+% e-mail: david.legland@inrae.fr
+% INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Created: 2026-02-18,    using Matlab 25.1.0.2973910 (R2025a) Update 1
+% Copyright 2026 INRAE.
+
+
+% vertex to vertex edges, will be computed if not provided within mesh
+% structure
+edges = [];
+
+% The face-to-edge adjacency information is necessary for associating new
+% faces to vertices (will be computed if not found)
+faceEdgeIndices = [];
+
+% if mesh is provided as structure, retrieve all possible data
+if isstruct(vertices)
+    % get relevant inputs
+    mesh = vertices;
+    n = faces;
+    
+    % parse fields from a mesh structure
+    vertices = mesh.vertices;
+    faces = mesh.faces;
+    if isfield(mesh, 'edges')
+        edges = mesh.edges;
+    end
+
+    % The face-to-edge adjacency information is necessary for associating
+    % new faces to vertices
+    % (will be computed if not found)
+    if isfield(mesh, 'faceEdges')
+        faceEdgeIndices = mesh.faceEdges;
+    end
+end
+
+if ~isnumeric(faces) || size(faces, 2) ~= 4
+    error('Requires a quadrilateral mesh');
+end
+
+% compute the edge array
+if isempty(edges)
+    edges = meshEdges(faces);
+end
+nEdges = size(edges, 1);
+
+% compute index of edges around each face if not already provided
+if isempty(faceEdgeIndices)
+    faceEdgeIndices = meshFaceEdges(vertices, edges, faces);
+end
+
+
+%% Process Edges
+% Create new vertices on existing edges. Each edge is subdivided into n new
+% edges, creating (n-1) new vertices.
+
+% positions to interpolate vertex positions
+t = linspace(0, 1, n + 1)';
+coef = t(2:end-1);
+coef1 = 1 - t(2:end-1);
+
+% initialise the array of new vertices
+vertices2 = vertices;
+
+% keep an array containing index of new vertices for each original edge
+edgeNewVertexIndices = zeros(nEdges, n-1);
+
+% create new vertices on each edge
+for iEdge = 1:nEdges
+    % extract each extremity as a point
+    v1 = vertices(edges(iEdge, 1), :);
+    v2 = vertices(edges(iEdge, 2), :);
+
+    % compute new points
+    newPoints = coef1 * v1 + coef * v2;
+    
+    % add new vertices, and keep their indices
+    edgeNewVertexIndices(iEdge,:) = size(vertices2, 1) + (1:n-1);
+    vertices2 = [vertices2 ; newPoints]; %#ok<AGROW>
+end
+
+
+%% Process faces
+% Subdivide each face, by processing 'strips' on parallel faces. Each strip
+% rely on two vertices of two edges of the original mesh.
+
+% create result array (will grow during face iteration)
+faces2 = zeros(0, 4);
+
+% iterate on faces of original mesh
+nFaces = size(faces, 1);
+for iFace = 1:nFaces
+    % compute index of each corner vertex
+    face = faces(iFace, :);
+    iv1 = face(1);
+    iv2 = face(2);
+    iv3 = face(3);
+    iv4 = face(4);
+    
+    % compute index of each edge
+    faceEdges = faceEdgeIndices{iFace};
+    ie1 = faceEdges(1);
+    ie2 = faceEdges(2);
+    ie3 = faceEdges(3);
+    ie4 = faceEdges(4);
+    
+    % indices of new vertices on edges
+    edge1NewVertexIndices = edgeNewVertexIndices(ie1, :);
+    edge2NewVertexIndices = edgeNewVertexIndices(ie2, :);
+    edge3NewVertexIndices = edgeNewVertexIndices(ie3, :);
+    edge4NewVertexIndices = edgeNewVertexIndices(ie4, :);
+    
+    % keep vertex 1 as reference vertex for edges 1 and 4
+    if edges(ie1, 1) ~= iv1
+        edge1NewVertexIndices = edge1NewVertexIndices(end:-1:1);
+    end
+    if edges(ie4, 1) ~= iv1
+        edge4NewVertexIndices = edge4NewVertexIndices(end:-1:1);
+    end
+    % keep vertex 2 as ref for edge 2
+    if edges(ie2, 1) ~= iv2
+        edge2NewVertexIndices = edge2NewVertexIndices(end:-1:1);
+    end
+    % keep vertex 4 as ref for edge 3
+    if edges(ie3, 1) ~= iv4
+        edge3NewVertexIndices = edge3NewVertexIndices(end:-1:1);
+    end
+       
+    % retrieve index of vertices on the bottom of current strip
+    bottomVertexIndices = [iv1 edge1NewVertexIndices iv2];
+        
+    % iterate over strips (except the last one)
+    for iStrip = 1:n-1
+        % index of extreme vertices of current row
+        ivr1 = edge4NewVertexIndices(iStrip);
+        ivr2 = edge2NewVertexIndices(iStrip);
+        
+        % position of extreme vertices
+        v1 = vertices2(ivr1, :);
+        v2 = vertices2(ivr2, :);
+        
+        % create additional vertices within the top row of the strip
+        t = linspace(0, 1, n+1)';
+        coef = t(2:end-1);
+        newPoints = (1 - coef) * v1 + coef * v2;
+
+        % compute index of new vertices in result array
+        newInds = size(vertices2, 1) + (1:n-1);
+        topVertexInds = [ivr1 newInds ivr2];
+        
+        % add new vertices
+        vertices2 = [vertices2 ; newPoints]; %#ok<AGROW>
+        
+        % create new faces within current strip
+        for k = 1:n
+            newFace = [bottomVertexIndices(k:k+1) topVertexInds(k+1:-1:k)];
+            faces2 = [faces2; newFace]; %#ok<AGROW>
+        end
+
+        % top vertices of current strip becomes bottom vertices of next strip
+        bottomVertexIndices = topVertexInds;
+    end
+        
+    % for top-most strip, keep vertices of edge3 as reference
+    topVertexInds = [iv4 edge3NewVertexIndices iv3];
+    
+    % create new faces for last strip
+    for k = 1:n
+        newFace = [bottomVertexIndices(k:k+1) topVertexInds(k+1:-1:k)];
+        faces2 = [faces2; newFace]; %#ok<AGROW>
+    end
+end
+
+
+%% Post-processing
+
+% setup output arguments
+varargout = formatMeshOutput(nargout, vertices2, faces2);

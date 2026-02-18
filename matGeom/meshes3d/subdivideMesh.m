@@ -1,18 +1,24 @@
 function varargout = subdivideMesh(vertices, faces, n)
 %SUBDIVIDEMESH Subdivides each face of the mesh.
 %
-%   [V2 F2] = subdivideMesh(V, F, N)
+%   [V2, F2] = subdivideMesh(V, F, N)
+%   [V2, F2] = subdivideMesh(MESH, N)
 %   Subdivides the mesh specified by (V,F) such that each face F is divided
 %   into N^2 smaller faces.
+%   V is a Nv-by-3 array containing vertex coordinates, and F2 is a Nf-by-3
+%   array containing index of vertices of each face.
+%   MESH is a Matlab structure with at least two fields 'vertices' and
+%   'faces', containing vertex and face respectively. It may also contain
+%   an additional 'edges' field.
 %
 %   Example
 %     [v, f] = createOctahedron;
-%     figure; drawMesh(v, f); view(3);
+%     figure; drawMesh(v, f); axis equal; view(3);
 %     [v2, f2] = subdivideMesh(v, f, 4);
-%     figure; drawMesh(v2, f2); view(3)
+%     figure; drawMesh(v2, f2); axis equal; view(3)
 %
 %   See also 
-%     meshes3d, drawMesh
+%     meshes3d, subdivideQuadMesh, drawMesh
 %
 
 % ------
@@ -125,7 +131,7 @@ for iFace = 1:nFaces
     edge2NewVertexIndices = edgeNewVertexIndices(ie2, :);
     edge3NewVertexIndices = edgeNewVertexIndices(ie3, :);
     
-    % keep vertex 1 as reference for edges 1 and 3
+    % keep vertex 1 as reference vertex for edges 1 and 3
     if edges(ie1, 1) ~= iv1
         edge1NewVertexIndices = edge1NewVertexIndices(end:-1:1);
     end
@@ -144,7 +150,7 @@ for iFace = 1:nFaces
         ivr1 = edge1NewVertexIndices(iStrip);
         ivr2 = edge3NewVertexIndices(iStrip);
         
-        % extreme vertices as points
+        % position of extreme vertices
         v1 = vertices2(ivr1, :);
         v2 = vertices2(ivr2, :);
         
@@ -154,7 +160,7 @@ for iFace = 1:nFaces
         coef1 = 1 - t(2:end-1);
         newPoints = coef1 * v1 + coef2 * v2;
 
-        % compute indices of new vertices in result array
+        % compute index of new vertices in result array
         newInds = size(vertices2, 1) + (1:iStrip-1);
         botVertexInds = [ivr1 newInds ivr2];
         
