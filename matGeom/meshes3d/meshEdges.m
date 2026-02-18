@@ -26,16 +26,17 @@ elseif nargin > 1
 end
 
 
-if ~iscell(faces)
+if isnumeric(faces)
     %% Process faces given as numeric array
-    % all faces have same number of vertices
-    nVF = size(faces,2);
-    e = nchoosek(1:nVF,2);
-    A = sparse(faces(:,e(:,1)),faces(:,e(:,2)),1,max(faces(:)),max(faces(:)));
-    [EI,EJ] = find(tril(A+A'));
+    % e = nchoosek(1:3,2);
+    nVF = size(faces, 2);
+    e = [(1:nVF)' [2:nVF 1]'];
+    nv = max(faces(:));
+    A = sparse(faces(:,e(:,1)), faces(:,e(:,2)), 1, nv, nv);
+    [EI, EJ] = find(tril(A + A'));
     edges = [EJ EI];
     
-else
+elseif iscell(faces)
     %% faces are given as a cell array
     % faces may have different number of vertices
     
@@ -63,4 +64,6 @@ else
 
     % keep only unique edges, and return sorted result
     edges = sortrows(unique(sort(edges, 2), 'rows'));
+else
+    error('Input argument must be either a Nf-by-Nvf numeric array, or a cell array');
 end

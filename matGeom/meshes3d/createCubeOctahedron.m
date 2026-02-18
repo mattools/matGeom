@@ -5,7 +5,7 @@ function varargout = createCubeOctahedron()
 %   Cubeoctahedron can be seen either as a truncated cube, or as a
 %   truncated octahedron.
 %   V is the 12-by-3 array of vertex coordinates
-%   E is the 27-by-2 array of edge vertex indices
+%   E is the 24-by-2 array of edge vertex indices
 %   F is the 1-by-14 cell array of face vertex indices
 %
 %   [V, F] = createCubeOctahedron;
