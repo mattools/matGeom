@@ -1,5 +1,5 @@
-#LyX 2.4 created this file. For more info see https://www.lyx.org/
-\lyxformat 620
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -8,47 +8,35 @@
 \begin_preamble
 \PassOptionsToPackage{usenames,dvipsnames}{xcolor}
 \usepackage[dvipsnames]{xcolor}
-
 \usepackage[T1]{fontenc}
-
 %\usepackage{hyperref}
 %\usepackage{lstlinebgrd}
-
-\definecolor{bl}{rgb}{0.0,0.2,0.6} 
-
+\definecolor{bl}{rgb}{0.0,0.2,0.6}
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 \definecolor{lightgray}{rgb}{0.95,0.95,0.95}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
-
 \hypersetup{colorlinks=true, citecolor=blue, linkcolor=blue}
-
 % package that modifies style of section headers
 \addtokomafont{chapter}{\color{bl}\scshape \selectfont}
 \addtokomafont{section}{\color{bl}\scshape \selectfont}
 \addtokomafont{subsection}{\color{bl}\scshape \selectfont}
 \addtokomafont{subsubsection}{\color{bl}\scshape \selectfont}
-
 % setup font style for different title elements
 \setkomafont{title}{\color{bl} \bfseries \scshape}
 \setkomafont{author}{\centering \small}
 \setkomafont{date}{\centering \small}
-
-
 % Change the abstract environment
 \usepackage[runin]{abstract}		% runin option for a run-in title
 \setlength\absleftindent{30pt}		% left margin
 \setlength\absrightindent{30pt}		% right margin
-\abslabeldelim{\quad }			
+\abslabeldelim{\quad }
 \setlength{\abstitleskip}{-10pt}
 \renewcommand{\abstractname}{}
 \renewcommand{\abstracttextfont}{\color{bl} \small \slshape }	% slanted text
-
-
 % Custom headers and footers using KOMA-Script
 \usepackage{scrlayer-scrpage}
-\usepackage{lastpage}	% for page numbering	
-
+\usepackage{lastpage}	% for page numbering
 % Left header: chapter title on even pages
 \lehead{\slshape\leftmark}
 \lohead{}
@@ -57,7 +45,6 @@
 % Right header: section title on odd pages
 \rehead{}
 \rohead{\slshape\rightmark}
-
 % Outer footer (left of even pages, right of odd pages)
 \KOMAoptions{footsepline=on}
 \ofoot[\footnotesize page \thepage\ / \pageref{LastPage}]{\footnotesize page \thepage\ / \pageref{LastPage}}
@@ -65,30 +52,21 @@
 \cfoot{}
 % Inner footer (right of even pages, left of odd pages)
 \ifoot[\footnotesize \jobname]{\footnotesize \jobname}
-
 % left chapter no number, nothing on the right
 \renewcommand{\chaptermark}[1]{\markboth{\thechapter\ #1}{}}
 % right section with number
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
-
 % Added by lyx2lyx
 \usepackage[charter]{mathdesign}
-
-% setup of figure captions 
+% setup of figure captions
 \usepackage[format=plain,font=it,labelfont=bf]{caption}
-
-
 % To add mini-TOC in the beginning of each chapter
-% The 'nohints' option is to prevent a conflict with the lastpage package, 
+% The 'nohints' option is to prevent a conflict with the lastpage package,
 % resulting in an extra empty page at the end of the document.
 \usepackage[nohints]{minitoc}
-
-
 % "Prettification" of Matlab listings
 \usepackage{matlab-prettifier}
-
 \usepackage{hyperref}
-
 % some info for populating document title page
 \author{D. Legland}
 \date{\today}
@@ -152,11 +130,19 @@
 \use_indices true
 \paperorientation portrait
 \suppress_date false
-\justification true
-\use_refstyle 0
+\justification default
+\crossref_package prettyref
 \use_formatted_ref 0
 \use_minted 0
 \use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
 \index Index of functions
 \shortcut idx
 \color #008000
@@ -187,6 +173,7 @@
 \html_be_strict false
 \docbook_table_output 0
 \docbook_mathml_prefix 1
+\docbook_mathml_version 0
 \end_header
 
 \begin_body
@@ -222,7 +209,6 @@ Matlab Geometry
 status open
 
 \begin_layout Plain Layout
-
 
 \backslash
 dominitoc
@@ -303,7 +289,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 http://github.com/mattools/matGeom
 \end_layout
 
@@ -369,28 +354,23 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 % load data
 \end_layout
 
 \begin_layout Plain Layout
-
 data = load('fisheriris');
 \end_layout
 
 \begin_layout Plain Layout
-
 pts = data.meas(:,
  [3 1]);
 \end_layout
 
 \begin_layout Plain Layout
-
 % display
 \end_layout
 
 \begin_layout Plain Layout
-
 figure;
  axis equal;
  hold on;
@@ -398,23 +378,19 @@ figure;
 \end_layout
 
 \begin_layout Plain Layout
-
 drawPoint(pts,
  'bx');
 \end_layout
 
 \begin_layout Plain Layout
-
 % Fit line
 \end_layout
 
 \begin_layout Plain Layout
-
 line = fitLine(pts);
 \end_layout
 
 \begin_layout Plain Layout
-
 drawLine(line,
  'color',
  'k',
@@ -423,17 +399,14 @@ drawLine(line,
 \end_layout
 
 \begin_layout Plain Layout
-
 % Draw oriented box
 \end_layout
 
 \begin_layout Plain Layout
-
 obox = orientedBox(pts);
 \end_layout
 
 \begin_layout Plain Layout
-
 drawOrientedBox(obox,
  'color',
  'k',
@@ -442,43 +415,36 @@ drawOrientedBox(obox,
 \end_layout
 
 \begin_layout Plain Layout
-
 % identifiy species index
 \end_layout
 
 \begin_layout Plain Layout
-
 [labels,
  ~,
  inds]= unique(str.species);
 \end_layout
 
 \begin_layout Plain Layout
-
 % for ech species,
  compute equivalent ellipse and display with axes
 \end_layout
 
 \begin_layout Plain Layout
-
 colors = [1 0 0;
  0 0.8 0;
  0 0 1];
 \end_layout
 
 \begin_layout Plain Layout
-
 for i = 1:3
 \end_layout
 
 \begin_layout Plain Layout
-
     pts_i = pts(inds == i,
  :);
 \end_layout
 
 \begin_layout Plain Layout
-
     drawPoint(pts_i,
  'marker',
  'x',
@@ -489,12 +455,10 @@ for i = 1:3
 \end_layout
 
 \begin_layout Plain Layout
-
     elli = equivalentEllipse(pts_i);
 \end_layout
 
 \begin_layout Plain Layout
-
     drawEllipse(elli,
  'color',
  colors(i,:),
@@ -503,7 +467,6 @@ for i = 1:3
 \end_layout
 
 \begin_layout Plain Layout
-
     drawEllipseAxes(elli,
  'color',
  colors(i,:),
@@ -512,7 +475,6 @@ for i = 1:3
 \end_layout
 
 \begin_layout Plain Layout
-
 end
 \end_layout
 
@@ -663,12 +625,10 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 % read polygon data as a numeric N-by-2 array
 \end_layout
 
 \begin_layout Plain Layout
-
 poly = load('leaf_poly.txt');
 \end_layout
 
@@ -677,12 +637,10 @@ poly = load('leaf_poly.txt');
 \end_layout
 
 \begin_layout Plain Layout
-
 % dislay the polygon using basic color option
 \end_layout
 
 \begin_layout Plain Layout
-
 figure;
  axis equal;
  hold on;
@@ -690,7 +648,6 @@ figure;
 \end_layout
 
 \begin_layout Plain Layout
-
 drawPolygon(poly,
  'k');
 \end_layout
@@ -700,17 +657,14 @@ drawPolygon(poly,
 \end_layout
 
 \begin_layout Plain Layout
-
 % Bounding box of the polygon
 \end_layout
 
 \begin_layout Plain Layout
-
 poly_bnd = boundingBox(poly);
 \end_layout
 
 \begin_layout Plain Layout
-
 drawBox(poly_bnd,
  'k');
 \end_layout
@@ -720,17 +674,14 @@ drawBox(poly_bnd,
 \end_layout
 
 \begin_layout Plain Layout
-
 % computes convex hull of polygon vertices
 \end_layout
 
 \begin_layout Plain Layout
-
 poly_hull = convexHull(poly);
 \end_layout
 
 \begin_layout Plain Layout
-
 drawPolygon(poly_hull,
  'LineWidth',
  2,
@@ -743,18 +694,15 @@ drawPolygon(poly_hull,
 \end_layout
 
 \begin_layout Plain Layout
-
 % applies smoothing to the original polygon.
 \end_layout
 
 \begin_layout Plain Layout
-
 poly_smooth = smoothPolygon(poly,
  51);
 \end_layout
 
 \begin_layout Plain Layout
-
 drawPolygon(poly_smooth,
  'color',
  'b',
@@ -767,18 +715,15 @@ drawPolygon(poly_smooth,
 \end_layout
 
 \begin_layout Plain Layout
-
 % Computes a simplified version of the polygon
 \end_layout
 
 \begin_layout Plain Layout
-
 poly_simpl = simplifyPolygon(poly,
  20);
 \end_layout
 
 \begin_layout Plain Layout
-
 drawPolygon(poly_simpl,
  'color',
  'r',
@@ -787,7 +732,6 @@ drawPolygon(poly_simpl,
 \end_layout
 
 \begin_layout Plain Layout
-
 drawVertices(poly_simpl,
  'Color',
  'k',
@@ -802,30 +746,25 @@ drawVertices(poly_simpl,
 \end_layout
 
 \begin_layout Plain Layout
-
 % compute intersections with an arbitrary line
 \end_layout
 
 \begin_layout Plain Layout
-
 line = createLine([0 250],
  [600 350]);
 \end_layout
 
 \begin_layout Plain Layout
-
 drawLine(line,
  'k');
 \end_layout
 
 \begin_layout Plain Layout
-
 inters = intersectLinePolygon(line,
  poly_simpl);
 \end_layout
 
 \begin_layout Plain Layout
-
 drawPoint(inters,
  'Color',
  'r',
@@ -943,7 +882,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 http://github.com/mattools/matGeom
 \end_layout
 
@@ -1136,26 +1074,22 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 PNT = [20 30 40];
                         % create a 3D point 
 \end_layout
 
 \begin_layout Plain Layout
-
 EDGE = [0 0  50 30];
                      % create a line segment between (0,0) and (50,30)
 \end_layout
 
 \begin_layout Plain Layout
-
 CIRCLE = [50 50 10];
                      % create a circle,
  center (50,50) and radius 10
 \end_layout
 
 \begin_layout Plain Layout
-
 ELLI = [50 50  40 20  30];
                % ellipse with center (50,50),
  radius lengths 40 and 20,
@@ -1163,7 +1097,6 @@ ELLI = [50 50  40 20  30];
 \end_layout
 
 \begin_layout Plain Layout
-
                                          % and an orientation 30 degreees.
 \end_layout
 
@@ -1185,7 +1118,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 POLY = [0 0;10 0;10 10;0 10];
             % create a polygon or polyline with four vertices
 \end_layout
@@ -1207,21 +1139,18 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 D = distancePointLine(P1,
  L2);
            % compute distance between a point a line
 \end_layout
 
 \begin_layout Plain Layout
-
 POLY2 = simplifyPolygon(POLY,
  5);
         % compute a simplified version of a polygon
 \end_layout
 
 \begin_layout Plain Layout
-
 RINGS = intersectPlaneMesh(PLN,
  MESH);
    % compute intersection between a plane and a mesh
@@ -1265,7 +1194,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 drawLine(L1,
  'LineWidth',
  2);
@@ -1274,7 +1202,6 @@ drawLine(L1,
 \end_layout
 
 \begin_layout Plain Layout
-
 HC = drawCircle(AX,
  C1,
  'Color',
@@ -1315,139 +1242,113 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 >> help polygonCentroid
 \end_layout
 
 \begin_layout Plain Layout
-
  Computes the centroid (center of mass) of a polygon.
 \end_layout
 
 \begin_layout Plain Layout
-
  
 \end_layout
 
 \begin_layout Plain Layout
-
     CENTROID = polygonCentroid(POLY)
 \end_layout
 
 \begin_layout Plain Layout
-
     CENTROID = polygonCentroid(PTX,
  PTY)
 \end_layout
 
 \begin_layout Plain Layout
-
     Computes center of mass of a polygon defined by POLY.
  POLY is a N-by-2
 \end_layout
 
 \begin_layout Plain Layout
-
     array of double containing coordinates of vertices.
 \end_layout
 
 \begin_layout Plain Layout
-
  
 \end_layout
 
 \begin_layout Plain Layout
-
     [CENTROID,
  AREA] = polygonCentroid(POLY)
 \end_layout
 
 \begin_layout Plain Layout
-
     Also returns the (signed) area of the polygon.
  
 \end_layout
 
 \begin_layout Plain Layout
-
  
 \end_layout
 
 \begin_layout Plain Layout
-
     Example
 \end_layout
 
 \begin_layout Plain Layout
-
       % Draws the centroid of a paper hen
 \end_layout
 
 \begin_layout Plain Layout
-
       x = [0 10 20  0 -10 -20 -10 -10  0];
 \end_layout
 
 \begin_layout Plain Layout
-
       y = [0  0 10 10  20  10  10  0 -10];
 \end_layout
 
 \begin_layout Plain Layout
-
       poly = [x' y'];
 \end_layout
 
 \begin_layout Plain Layout
-
       centro = polygonCentroid(poly);
 \end_layout
 
 \begin_layout Plain Layout
-
       drawPolygon(poly);
 \end_layout
 
 \begin_layout Plain Layout
-
       hold on;
  axis equal;
 \end_layout
 
 \begin_layout Plain Layout
-
       drawPoint(centro,
  'bo');
 \end_layout
 
 \begin_layout Plain Layout
-
   
 \end_layout
 
 \begin_layout Plain Layout
-
     References
 \end_layout
 
 \begin_layout Plain Layout
-
       algo adapted from P.
  Bourke web page.
 \end_layout
 
 \begin_layout Plain Layout
-
  
 \end_layout
 
 \begin_layout Plain Layout
-
     See also:
 \end_layout
 
 \begin_layout Plain Layout
-
       polygons2d,
  polygonArea,
  polygonSecondAreaMoments,
@@ -1566,7 +1467,6 @@ The geom2d module of the MatGeom library allows to process geometric planar shap
 status open
 
 \begin_layout Plain Layout
-
 
 \backslash
 minitoc
@@ -2072,12 +1972,10 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 pt = [x y];
 \end_layout
 
 \begin_layout Plain Layout
-
 vect = [vx vy];
 \end_layout
 
@@ -2095,14 +1993,12 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 pts = [x1 y1 ;
  x2 y2 ;
  x3 y3];
 \end_layout
 
 \begin_layout Plain Layout
-
 vectList = [vx1 vy1 ;
  vx2 vy2 ;
  vx3 vy3];
@@ -2291,7 +2187,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-distance!points
+distance
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+points
 \end_layout
 
 \end_inset
@@ -2385,47 +2291,39 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 % generate random data
 \end_layout
 
 \begin_layout Plain Layout
-
 rng(42);
  pts = randn([100 2]) * 15 + 50;
 \end_layout
 
 \begin_layout Plain Layout
-
 % compute derived shapes
 \end_layout
 
 \begin_layout Plain Layout
-
 centro = centroid(pts);
  bbox = boundingBox(pts);
 \end_layout
 
 \begin_layout Plain Layout
-
 elli = equivalentEllipse(pts);
  hull = convexHull(pts);
 \end_layout
 
 \begin_layout Plain Layout
-
 % display shapes
 \end_layout
 
 \begin_layout Plain Layout
-
 figure;
  hold on;
  axis([0 100 0 100]);
 \end_layout
 
 \begin_layout Plain Layout
-
 drawPoint(pts,
  'color',
  'k',
@@ -2436,7 +2334,6 @@ drawPoint(pts,
 \end_layout
 
 \begin_layout Plain Layout
-
 drawPoint(centPts,
  'color',
  'b',
@@ -2449,7 +2346,6 @@ drawPoint(centPts,
 \end_layout
 
 \begin_layout Plain Layout
-
 drawBox(bbox,
  'color',
  [0 0 .7],
@@ -2458,7 +2354,6 @@ drawBox(bbox,
 \end_layout
 
 \begin_layout Plain Layout
-
 drawEllipse(elli,
  'color',
  [.7 0 0],
@@ -2467,7 +2362,6 @@ drawEllipse(elli,
 \end_layout
 
 \begin_layout Plain Layout
-
 drawPolygon(hull,
  'color',
  [0 .7 0],
@@ -2476,7 +2370,6 @@ drawPolygon(hull,
 \end_layout
 
 \begin_layout Plain Layout
-
 legend({'Points',
  'Centroid',
  'BoundingBox',
@@ -2564,7 +2457,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-clipping!points
+clipping
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+points
 \end_layout
 
 \end_inset
@@ -2596,7 +2499,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-centroid!points
+centroid
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+points
 \end_layout
 
 \end_inset
@@ -2718,7 +2631,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-distance!points
+distance
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+points
 \end_layout
 
 \end_inset
@@ -2886,7 +2809,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-angle!vector
+angle
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+vector
 \end_layout
 
 \end_inset
@@ -3270,7 +3203,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 LINE = [X0 Y0  DX DY];
 \end_layout
 
@@ -3328,7 +3260,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-fitting!line
+fitting
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+line
 \end_layout
 
 \end_inset
@@ -3440,7 +3382,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-intersection!lines
+intersection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+lines
 \end_layout
 
 \end_inset
@@ -3472,7 +3424,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-angle!line
+angle
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+line
 \end_layout
 
 \end_inset
@@ -3544,7 +3506,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-clipping!line
+clipping
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+line
 \end_layout
 
 \end_inset
@@ -3650,7 +3622,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 EDGE = [X1 Y1  X2 Y2];
 \end_layout
 
@@ -3728,7 +3699,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-angle!line segment
+angle
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+line segment
 \end_layout
 
 \end_inset
@@ -3862,7 +3843,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-clipping!line segment
+clipping
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+line segment
 \end_layout
 
 \end_inset
@@ -3914,7 +3905,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-intersection!edges
+intersection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+edges
 \end_layout
 
 \end_inset
@@ -3946,7 +3947,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-intersection!line-edge
+intersection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+line-edge
 \end_layout
 
 \end_inset
@@ -4036,7 +4047,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 CEDG = [XC YC  L  ORI];
 \end_layout
 
@@ -4112,7 +4122,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 RAY = [X0 Y0  DX DY];
 \end_layout
 
@@ -4275,7 +4284,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-distance!point to line
+distance
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+point to line
 \end_layout
 
 \end_inset
@@ -4307,7 +4326,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-projection!on line
+projection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+on line
 \end_layout
 
 \end_inset
@@ -4588,47 +4617,39 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 % construction of circum circle to three points
 \end_layout
 
 \begin_layout Plain Layout
-
 pA = [30 20];
  pB = [80 40];
  pC = [20 70];
 \end_layout
 
 \begin_layout Plain Layout
-
 circ = circumCircle(pA,
  pB,
  pC);
 \end_layout
 
 \begin_layout Plain Layout
-
 % polygon discretisation
 \end_layout
 
 \begin_layout Plain Layout
-
 poly = circleToPolygon(circ,
  12);
 \end_layout
 
 \begin_layout Plain Layout
-
 % intersection with a line (given as origin + direction)
 \end_layout
 
 \begin_layout Plain Layout
-
 line = [60 70  5 2];
 \end_layout
 
 \begin_layout Plain Layout
-
 inters = intersectLineCircle(line,
  circ);
 \end_layout
@@ -4799,7 +4820,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-intersection!circles
+intersection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+circles
 \end_layout
 
 \end_inset
@@ -4831,7 +4862,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-intersection!line-circle
+intersection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+line-circle
 \end_layout
 
 \end_inset
@@ -4986,7 +5027,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 ELLI = [XC YC  A B  THETA];
 \end_layout
 
@@ -5163,7 +5203,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-fitting!ellipse
+fitting
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+ellipse
 \end_layout
 
 \end_inset
@@ -5219,7 +5269,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-moments!points
+moments
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+points
 \end_layout
 
 \end_inset
@@ -5231,7 +5291,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-ellipse!equivalent ellipse
+ellipse
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+equivalent ellipse
 \end_layout
 
 \end_inset
@@ -5337,7 +5407,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-projection!on ellipse
+projection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+on ellipse
 \end_layout
 
 \end_inset
@@ -5367,13 +5447,11 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 elli = [50 50  40 20  30];
                          % reference ellipse
 \end_layout
 
 \begin_layout Plain Layout
-
 figure;
  hold on;
  axis equal;
@@ -5382,7 +5460,6 @@ figure;
 \end_layout
 
 \begin_layout Plain Layout
-
 drawEllipse(elli,
  'LineWidth',
  2,
@@ -5391,54 +5468,46 @@ drawEllipse(elli,
 \end_layout
 
 \begin_layout Plain Layout
-
 pts = [90 50 ;
  50 90 ;
  10 70];
 \end_layout
 
 \begin_layout Plain Layout
-
 drawPoint(pts,
  'bo');
                               % draw points
 \end_layout
 
 \begin_layout Plain Layout
-
 proj = projPointOnEllipse(pts,
  elli);
               % compute projections
 \end_layout
 
 \begin_layout Plain Layout
-
 drawPoint(proj,
  'ko');
 \end_layout
 
 \begin_layout Plain Layout
-
 drawEdge([pts proj],
  'b');
                          % draw connection between points
 \end_layout
 
 \begin_layout Plain Layout
-
 dists = distancePointEllipse(pts,
  elli);
            % compute distances to ellipse
 \end_layout
 
 \begin_layout Plain Layout
-
 mid = midPoint(pts,
  proj);	        		     % display distances as labels
 \end_layout
 
 \begin_layout Plain Layout
-
 drawLabels(mid + [1 2],
  dists);
 \end_layout
@@ -5690,12 +5759,10 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 load fisherIris;
 \end_layout
 
 \begin_layout Plain Layout
-
 figure;
  hold on;
  set(gca,
@@ -5704,31 +5771,26 @@ figure;
 \end_layout
 
 \begin_layout Plain Layout
-
 colors = {'b',
  'g',
  'm'};
 \end_layout
 
 \begin_layout Plain Layout
-
 hi = zeros(1,
  3);
 \end_layout
 
 \begin_layout Plain Layout
-
 for i = 1:3
 \end_layout
 
 \begin_layout Plain Layout
-
     pts = meas((1:50)+(i-1) * 50,
  3:4);
 \end_layout
 
 \begin_layout Plain Layout
-
     hi(i) = drawPoint(pts,
  'Marker',
  'o',
@@ -5739,7 +5801,6 @@ for i = 1:3
 \end_layout
 
 \begin_layout Plain Layout
-
     drawEllipse(equivalentEllipse(pts),
  'Color',
  colors{i},
@@ -5748,12 +5809,10 @@ for i = 1:3
 \end_layout
 
 \begin_layout Plain Layout
-
 end
 \end_layout
 
 \begin_layout Plain Layout
-
 legend(hi,
  species([1 51 101]),
  'Location',
@@ -5837,7 +5896,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 CA = [CX CY R  TH0 DTH];
 \end_layout
 
@@ -6385,7 +6443,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 box = [xmin xmax ymin ymax];
 \end_layout
 
@@ -6567,7 +6624,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 rect = [x0 y0 sizeX sizeY];
 \end_layout
 
@@ -6688,7 +6744,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 obox = [xCenter yCenter length width theta];
 \end_layout
 
@@ -6963,27 +7018,22 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 >> createTranslation([5 4])
 \end_layout
 
 \begin_layout Plain Layout
-
 ans =
 \end_layout
 
 \begin_layout Plain Layout
-
      1     0     5
 \end_layout
 
 \begin_layout Plain Layout
-
      0     1     4
 \end_layout
 
 \begin_layout Plain Layout
-
      0     0     1
 \end_layout
 
@@ -7032,27 +7082,22 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 >> createRotation(pi/6)
 \end_layout
 
 \begin_layout Plain Layout
-
 ans =
 \end_layout
 
 \begin_layout Plain Layout
-
     0.8660   -0.5000         0
 \end_layout
 
 \begin_layout Plain Layout
-
     0.5000    0.8660         0
 \end_layout
 
 \begin_layout Plain Layout
-
          0         0    1.0000
 \end_layout
 
@@ -7099,27 +7144,22 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 >> createRotation90(1)
 \end_layout
 
 \begin_layout Plain Layout
-
 ans =
 \end_layout
 
 \begin_layout Plain Layout
-
      0    -1     0
 \end_layout
 
 \begin_layout Plain Layout
-
      1     0     0
 \end_layout
 
 \begin_layout Plain Layout
-
      0     0     1
 \end_layout
 
@@ -7453,13 +7493,11 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 lx = 5:5:35;
  ly = 15:5:40;
 \end_layout
 
 \begin_layout Plain Layout
-
 figure;
  hold on;
  axis equal;
@@ -7467,7 +7505,6 @@ figure;
 \end_layout
 
 \begin_layout Plain Layout
-
 drawGrid(lx,
  ly,
  'k');
@@ -7607,7 +7644,6 @@ polygons2d
 status open
 
 \begin_layout Plain Layout
-
 
 \backslash
 minitoc
@@ -7974,12 +8010,10 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 % Simple polygon (square shape)
 \end_layout
 
 \begin_layout Plain Layout
-
 poly1 = [1 1;
  2 1;
  2 2;
@@ -7987,7 +8021,6 @@ poly1 = [1 1;
 \end_layout
 
 \begin_layout Plain Layout
-
 figure;
  hold on;
  axis equal;
@@ -7995,23 +8028,19 @@ figure;
 \end_layout
 
 \begin_layout Plain Layout
-
 drawPolygon(poly1);
 \end_layout
 
 \begin_layout Plain Layout
-
 % Multiple polygon:
 \end_layout
 
 \begin_layout Plain Layout
-
 poly2 = [10 10;40 10;
  40 40;10 40;NaN NaN;20 20;20 30;30 30;30 20];
 \end_layout
 
 \begin_layout Plain Layout
-
 figure;
  hold on;
  axis equal;
@@ -8019,7 +8048,6 @@ figure;
 \end_layout
 
 \begin_layout Plain Layout
-
 fillPolygon(poly2,
  'y');
  drawPolygon(poly2,
@@ -8465,7 +8493,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-centroid!polyline
+centroid
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polyline
 \end_layout
 
 \end_inset
@@ -8569,7 +8607,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-centroid!polygon
+centroid
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygon
 \end_layout
 
 \end_inset
@@ -8613,7 +8661,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-area!polygon
+area
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygon
 \end_layout
 
 \end_inset
@@ -8647,7 +8705,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-ellipse!polygon equivalent
+ellipse
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygon equivalent
 \end_layout
 
 \end_inset
@@ -8679,7 +8747,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-moments!polygon
+moments
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygon
 \end_layout
 
 \end_inset
@@ -8711,7 +8789,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-angle!polygon normal
+angle
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygon normal
 \end_layout
 
 \end_inset
@@ -8763,7 +8851,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-distance!polygons
+distance
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygons
 \end_layout
 
 \end_inset
@@ -8928,7 +9026,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-curvature!polygon
+curvature
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygon
 \end_layout
 
 \end_inset
@@ -8969,7 +9077,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-clipping!polygon
+clipping
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygon
 \end_layout
 
 \end_inset
@@ -9075,7 +9193,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-intersection!line-polygon
+intersection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+line-polygon
 \end_layout
 
 \end_inset
@@ -9167,7 +9295,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-intersection!polylines
+intersection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polylines
 \end_layout
 
 \end_inset
@@ -9202,7 +9340,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 https://fr.mathworks.com/matlabcentral/fileexchange/22441-curve-intersections
 \end_layout
 
@@ -9340,7 +9477,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-projection!on polyline
+projection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+on polyline
 \end_layout
 
 \end_inset
@@ -9372,7 +9519,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-projection!on polygon
+projection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+on polygon
 \end_layout
 
 \end_inset
@@ -9404,7 +9561,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-distance!point to polyline
+distance
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+point to polyline
 \end_layout
 
 \end_inset
@@ -9436,7 +9603,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-distance!point to polygon
+distance
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+point to polygon
 \end_layout
 
 \end_inset
@@ -9476,7 +9653,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-resampling!polyline
+resampling
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polyline
 \end_layout
 
 \end_inset
@@ -9528,7 +9715,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-resampling!polygon
+resampling
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygon
 \end_layout
 
 \end_inset
@@ -9600,7 +9797,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-smoothing!polygon
+smoothing
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygon
 \end_layout
 
 \end_inset
@@ -9648,7 +9855,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-simplification!polygon
+simplification
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygon
 \end_layout
 
 \end_inset
@@ -9861,7 +10078,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-triangulation!polygon
+triangulation
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygon
 \end_layout
 
 \end_inset
@@ -9984,7 +10211,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-skeleton!polygon
+skeleton
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygon
 \end_layout
 
 \end_inset
@@ -10267,7 +10504,6 @@ status open
 
 \begin_layout Plain Layout
 
-
 \backslash
 minitoc
 \end_layout
@@ -10407,7 +10643,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 https://en.wikipedia.org/wiki/Adjacency_list
 \end_layout
 
@@ -10816,29 +11051,24 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 nodes = [10 10;20 10;10 20;20 20;28 15;33 22];
 \end_layout
 
 \begin_layout Plain Layout
-
 edges = [1 2;1 3;2 4;2 5;3 4;4 5;5 6];
 \end_layout
 
 \begin_layout Plain Layout
-
 drawGraph(nodes,
  edges);
  axis([0 40 0 30]);
 \end_layout
 
 \begin_layout Plain Layout
-
 % equivalent structure
 \end_layout
 
 \begin_layout Plain Layout
-
 graph = struct('nodes',
  nodes,
  'edges',
@@ -10846,7 +11076,6 @@ graph = struct('nodes',
 \end_layout
 
 \begin_layout Plain Layout
-
 figure;
  drawGraph(graph);
  axis([0 40 0 30]);
@@ -10955,7 +11184,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 https://en.wikipedia.org/wiki/Delaunay_triangulation
 \end_layout
 
@@ -11249,7 +11477,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 https://en.wikipedia.org/wiki/Relative_neighborhood_graph
 \end_layout
 
@@ -11290,7 +11517,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 https://en.wikipedia.org/wiki/Gabriel_graph
 \end_layout
 
@@ -11907,7 +12133,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-distance!geodesic
+distance
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+geodesic
 \end_layout
 
 \end_inset
@@ -11919,7 +12155,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-geodesic!distance
+geodesic
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+distance
 \end_layout
 
 \end_inset
@@ -11971,7 +12217,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-diameter!graph
+diameter
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+graph
 \end_layout
 
 \end_inset
@@ -13016,82 +13272,66 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 # graph
 \end_layout
 
 \begin_layout Plain Layout
-
 # nodes
 \end_layout
 
 \begin_layout Plain Layout
-
 5 2
 \end_layout
 
 \begin_layout Plain Layout
-
 10 10
 \end_layout
 
 \begin_layout Plain Layout
-
 20 10
 \end_layout
 
 \begin_layout Plain Layout
-
 10 20
 \end_layout
 
 \begin_layout Plain Layout
-
 20 20
 \end_layout
 
 \begin_layout Plain Layout
-
 27 15
 \end_layout
 
 \begin_layout Plain Layout
-
 # edges
 \end_layout
 
 \begin_layout Plain Layout
-
 6
 \end_layout
 
 \begin_layout Plain Layout
-
 1 2
 \end_layout
 
 \begin_layout Plain Layout
-
 1 3
 \end_layout
 
 \begin_layout Plain Layout
-
 2 4
 \end_layout
 
 \begin_layout Plain Layout
-
 2 5
 \end_layout
 
 \begin_layout Plain Layout
-
 3 4
 \end_layout
 
 \begin_layout Plain Layout
-
 4 5
 \end_layout
 
@@ -13190,7 +13430,6 @@ The geom3d module allows to create,
 status open
 
 \begin_layout Plain Layout
-
 
 \backslash
 minitoc
@@ -14086,7 +14325,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-angle!3D
+angle
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+3D
 \end_layout
 
 \end_inset
@@ -14181,7 +14430,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 http://www.physics.oregonstate.edu/bridge/papers/spherical.pdf
 \end_layout
 
@@ -14418,7 +14666,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-angle!three points (3D)
+angle
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+three points (3D)
 \end_layout
 
 \end_inset
@@ -14450,7 +14708,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-angle!spherical
+angle
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+spherical
 \end_layout
 
 \end_inset
@@ -14520,12 +14788,10 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 point = [x0 y0 z0];
 \end_layout
 
 \begin_layout Plain Layout
-
 vector = [dx dy dz];
 \end_layout
 
@@ -14648,7 +14914,17 @@ pageformat default
 status open
 
 \begin_layout Plain Layout
-distance!points (3D)
+distance
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+points (3D)
 \end_layout
 
 \end_inset
@@ -14680,7 +14956,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-clipping!points (3D)
+clipping
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+points (3D)
 \end_layout
 
 \end_inset
@@ -14833,7 +15119,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-angle!vectors (3D)
+angle
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+vectors (3D)
 \end_layout
 
 \end_inset
@@ -14959,7 +15255,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 box = [xmin xmax  ymin ymax  zmin zmax];
 \end_layout
 
@@ -15205,7 +15500,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 LINE = [X0 Y0 Z0 DX DY DZ];
 \end_layout
 
@@ -15243,7 +15537,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 EDGE = [X1 Y1 Z1 X2 Y2 Z2];
 \end_layout
 
@@ -15316,7 +15609,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-fitting!line 3D
+fitting
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+line 3D
 \end_layout
 
 \end_inset
@@ -15424,7 +15727,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-distance!point to line (3D)
+distance
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+point to line (3D)
 \end_layout
 
 \end_inset
@@ -15476,7 +15789,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-projection!on line (3D)
+projection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+on line (3D)
 \end_layout
 
 \end_inset
@@ -15576,7 +15899,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-clipping!line (3D)
+clipping
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+line (3D)
 \end_layout
 
 \end_inset
@@ -15801,7 +16134,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 PLANE = [X0 Y0 Z0 DX1 DY1 DZ1 DX2 DY2 DZ2];
 \end_layout
 
@@ -15820,23 +16152,19 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 plane = ...
 \end_layout
 
 \begin_layout Plain Layout
-
 origin = plane(1,1:3);
 \end_layout
 
 \begin_layout Plain Layout
-
 v1 = plane(1,
  4:6);
 \end_layout
 
 \begin_layout Plain Layout
-
 v2 = plane(1,
  7:9);
 \end_layout
@@ -15910,7 +16238,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-fitting!plane
+fitting
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+plane
 \end_layout
 
 \end_inset
@@ -15982,7 +16320,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-orientation!plane
+orientation
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+plane
 \end_layout
 
 \end_inset
@@ -16050,7 +16398,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-intersection!planes
+intersection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+planes
 \end_layout
 
 \end_inset
@@ -16102,7 +16460,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-intersection!line-plane
+intersection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+line-plane
 \end_layout
 
 \end_inset
@@ -16154,7 +16522,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-bisector!planes
+bisector
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+planes
 \end_layout
 
 \end_inset
@@ -16230,7 +16608,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-projection!on plane
+projection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+on plane
 \end_layout
 
 \end_inset
@@ -16262,7 +16650,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-distance!point to plane
+distance
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+point to plane
 \end_layout
 
 \end_inset
@@ -16378,7 +16776,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-angle!dihedral
+angle
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+dihedral
 \end_layout
 
 \end_inset
@@ -16468,7 +16876,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-polygon!3D polygon
+polygon
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+3D polygon
 \end_layout
 
 \end_inset
@@ -16515,7 +16933,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-intersection!line-polygon (3D)
+intersection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+line-polygon (3D)
 \end_layout
 
 \end_inset
@@ -16567,7 +16995,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-clipping!polygon (3D)
+clipping
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygon (3D)
 \end_layout
 
 \end_inset
@@ -16659,7 +17097,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-projection!on polyline (3D)
+projection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+on polyline (3D)
 \end_layout
 
 \end_inset
@@ -16695,7 +17143,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-centroid!polygon (3D)
+centroid
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygon (3D)
 \end_layout
 
 \end_inset
@@ -16727,7 +17185,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-area!polygon (3D)
+area
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygon (3D)
 \end_layout
 
 \end_inset
@@ -16877,7 +17345,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-area!triangle (3D)
+area
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+triangle (3D)
 \end_layout
 
 \end_inset
@@ -16909,7 +17387,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-distance!point to triangle (3D)
+distance
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+point to triangle (3D)
 \end_layout
 
 \end_inset
@@ -17011,7 +17499,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-circle!3D
+circle
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+3D
 \end_layout
 
 \end_inset
@@ -17049,7 +17547,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 circle = [x0 y0 z0 R THETA PHI PSI];
 \end_layout
 
@@ -17236,7 +17733,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-ellipse!3D
+ellipse
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+3D
 \end_layout
 
 \end_inset
@@ -17271,7 +17778,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 elli = [x0 y0 z0  A B C  THETA PHI PSI];
 \end_layout
 
@@ -17316,7 +17822,6 @@ status open
 status open
 
 \begin_layout Plain Layout
-
 https://mathworks.com/matlabcentral/fileexchange/45356
 \end_layout
 
@@ -17397,7 +17902,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 sphere = [x0 y0 z0 R]
 \end_layout
 
@@ -17666,7 +18170,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 Elli = [x0 y0 z0 RA RB RC PHI THETA PSI]
 \end_layout
 
@@ -17695,7 +18198,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-moments!points (3D)
+moments
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+points (3D)
 \end_layout
 
 \end_inset
@@ -17707,7 +18220,17 @@ pageformat default
 status open
 
 \begin_layout Plain Layout
-ellipsoid!equivalent ellipsoid
+ellipsoid
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+equivalent ellipsoid
 \end_layout
 
 \end_inset
@@ -17815,7 +18338,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-area!ellipsoid
+area
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+ellipsoid
 \end_layout
 
 \end_inset
@@ -17927,7 +18460,17 @@ status collapsed
 \uwave off
 \noun off
 \color none
-ellipse!3D
+ellipse
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+3D
 \end_layout
 
 \end_inset
@@ -17983,7 +18526,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 Cylinder = [X1 Y1 Z1 X2 Y2 Z2 R];
 \end_layout
 
@@ -18012,7 +18554,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-area!cylinder
+area
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+cylinder
 \end_layout
 
 \end_inset
@@ -18550,12 +19102,10 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 transfo = createTranslation3d(vect);
 \end_layout
 
 \begin_layout Plain Layout
-
 transfo = createTranslation3d([vx vy vz]);
 \end_layout
 
@@ -18609,12 +19159,10 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 transfo = createScaling3d(s);
 \end_layout
 
 \begin_layout Plain Layout
-
 transfo = createScaling3d([sx sy sz]);
 \end_layout
 
@@ -18643,7 +19191,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-rotation!rotation 3D
+rotation
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+rotation 3D
 \end_layout
 
 \end_inset
@@ -18720,7 +19278,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 transfo = createRotationOx(theta);
 \end_layout
 
@@ -18797,7 +19354,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 transfo = createRotationOy(theta);
 \end_layout
 
@@ -18865,7 +19421,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 transfo = createRotationOz(theta);
 \end_layout
 
@@ -18920,7 +19475,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-angle!Euler angles
+angle
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+Euler angles
 \end_layout
 
 \end_inset
@@ -19383,7 +19948,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 https://www.mathworks.com/matlabcentral/fileexchange/27804-iterative-closest-point
 \end_layout
 
@@ -19433,7 +19997,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 transfo = registerPoints3d_icp(srcPts,
  tgtPts,
  nIters);
@@ -19520,7 +20083,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 transfo = registerPoints3d_affine(srcPts,
  tgtPts,
  nIters);
@@ -19818,7 +20380,6 @@ polyhedron
 status open
 
 \begin_layout Plain Layout
-
 
 \backslash
 minitoc
@@ -20648,7 +21209,7 @@ Mesh visualization
 
 \begin_layout Standard
 The library includes several functions to quickly display a mesh.
- Input arguments usually comprise 
+ Input arguments usually consist either in 
 \family typewriter
 \color gray
 vertices
@@ -20661,7 +21222,19 @@ faces
 \family default
 \color inherit
  arrays,
- but a mesh structure may sometimes be passed as well.
+ or in a mesh structure containing at least the 
+\family typewriter
+\color gray
+vertices
+\family default
+\color inherit
+ and 
+\family typewriter
+\color gray
+faces
+\family default
+\color inherit
+ fields.
 \end_layout
 
 \begin_layout Standard
@@ -20682,6 +21255,14 @@ status open
 \end_inset
 
 
+\begin_inset Graphics
+	filename images/meshes3d/drawWireframe_mushroom_crop.png
+	lyxscale 38
+	width 50text%
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -20690,11 +21271,15 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Draw-Mesh-With-Face-Normals"
+name "fig:Draw-Mesh"
 
 \end_inset
 
-Representation of a 3D polygonal mesh together with the face normals.
+Representation of a 3D polygonal mesh.
+ Left:
+ default representation together with the face normals.
+ Right:
+ wireframe representation.
 \end_layout
 
 \end_inset
@@ -20730,14 +21315,14 @@ name "fun:drawMesh"
 
 \end_inset
 
-Draws a 3D mesh defined by vertex and face arrays (Fig.
+Draws a 3D mesh using face filling representation (Fig.
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Draw-Mesh-With-Face-Normals"
+reference "fig:Draw-Mesh"
 plural "false"
 caps "false"
 noprefix "false"
@@ -20746,6 +21331,7 @@ nolink "false"
 \end_inset
 
 ).
+ 
 \end_layout
 
 \begin_layout Minisec
@@ -20792,7 +21378,51 @@ Draws normal vector of each face in a mesh (Fig.
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Draw-Mesh-With-Face-Normals"
+reference "fig:Draw-Mesh"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Minisec
+drawWireframe
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+drawWireframe
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Draws the 
+\begin_inset Quotes eld
+\end_inset
+
+wireframe
+\begin_inset Quotes erd
+\end_inset
+
+ representation of a 3D mesh,
+ that consists in representing only the edges of the meshes (Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Draw-Mesh"
 plural "false"
 caps "false"
 noprefix "false"
@@ -20887,7 +21517,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-polyhedra!Platonic
+polyhedra
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+Platonic
 \end_layout
 
 \end_inset
@@ -20929,7 +21569,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 https://en.wikipedia.org/wiki/Platonic_solid
 \end_layout
 
@@ -21184,7 +21823,7 @@ name "fig:Platonic-Solids"
 
 \end_inset
 
-The five platonic solids and a soccer ball represented as 3D meshes.
+The five platonic solids represented as 3D meshes.
  (a) cube,
  (b) octahedron,
  (c) tetrahedron,
@@ -21437,7 +22076,17 @@ pageformat default
 status open
 
 \begin_layout Plain Layout
-polyhedra!Archimedean
+polyhedra
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+Archimedean
 \end_layout
 
 \end_inset
@@ -21453,7 +22102,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 https://en.wikipedia.org/wiki/Archimedean_solid
 \end_layout
 
@@ -21896,7 +22544,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 https://en.wikipedia.org/wiki/Melencolia_I
 \end_layout
 
@@ -22647,7 +23294,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-sphere!mesh
+sphere
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh
 \end_layout
 
 \end_inset
@@ -22694,7 +23351,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-ellipsoid!mesh
+ellipsoid
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh
 \end_layout
 
 \end_inset
@@ -22741,7 +23408,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-torus!mesh
+torus
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh
 \end_layout
 
 \end_inset
@@ -22808,7 +23485,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-cylinder!mesh
+cylinder
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh
 \end_layout
 
 \end_inset
@@ -23320,7 +24007,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 vecList = [1 0 0;
  0 1 0;
  0 0 1;
@@ -23328,13 +24014,11 @@ vecList = [1 0 0;
 \end_layout
 
 \begin_layout Plain Layout
-
 [v,
  f] = steinerPolytope(vecList);
 \end_layout
 
 \begin_layout Plain Layout
-
 figure;
  drawMesh(v,
  f);
@@ -23454,7 +24138,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-smoothing!mesh
+smoothing
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh
 \end_layout
 
 \end_inset
@@ -23472,20 +24166,17 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 [v2,
  f2] = smoothMesh(v,
  f);
 \end_layout
 
 \begin_layout Plain Layout
-
 [v2,
  f2] = smoothMesh(mesh);
 \end_layout
 
 \begin_layout Plain Layout
-
 mesh2 = smoothMesh(...);
 \end_layout
 
@@ -23514,7 +24205,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-simplification!mesh
+simplification
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh
 \end_layout
 
 \end_inset
@@ -23532,7 +24233,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 [v2,
  f2] = meshVertexClustering(v,
  f,
@@ -23540,14 +24240,12 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-
 [v2,
  f2] = meshVertexClustering(mesh,
  spacing);
 \end_layout
 
 \begin_layout Plain Layout
-
 mesh2 = meshVertexClustering(...);
 \end_layout
 
@@ -23583,7 +24281,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 [V,
  F] = concatenateMeshes(V1,
  F1,
@@ -23616,7 +24313,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-connected components!mesh
+connected components
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh
 \end_layout
 
 \end_inset
@@ -23652,7 +24359,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 meshes = splitMesh(vertices,
  faces);
 \end_layout
@@ -23690,7 +24396,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 [v2,
  f2] = subdivideMesh(v,
  f,
@@ -23698,14 +24403,12 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-
 [v2,
  f2] = subdivideMesh(mesh,
  nDivs);
 \end_layout
 
 \begin_layout Plain Layout
-
 mesh2 = subdivideMesh(...);
 \end_layout
 
@@ -23770,7 +24473,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-triangulation!mesh
+triangulation
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh
 \end_layout
 
 \end_inset
@@ -23787,12 +24500,10 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 mesh = createCube;
 \end_layout
 
 \begin_layout Plain Layout
-
 mesh2 = triangulateMesh(mesh);
 \end_layout
 
@@ -23843,13 +24554,11 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 [v,
  f] = createCube;
 \end_layout
 
 \begin_layout Plain Layout
-
 f2 = triangulateFaces(f);
 \end_layout
 
@@ -23892,7 +24601,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-orientation!mesh
+orientation
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh
 \end_layout
 
 \end_inset
@@ -23932,7 +24651,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 [v2,
  f2] = mergeCoplanarFaces(v,
  f,
@@ -24015,7 +24733,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-intersection!convex polyhedra
+intersection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+convex polyhedra
 \end_layout
 
 \end_inset
@@ -24062,7 +24790,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-clipping!mesh
+clipping
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh
 \end_layout
 
 \end_inset
@@ -24289,7 +25027,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-clipping!mesh
+clipping
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh
 \end_layout
 
 \end_inset
@@ -24380,31 +25128,26 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 % create triangulated mesh,
  and a plane from origin and normal vector
 \end_layout
 
 \begin_layout Plain Layout
-
 [v,
  f] = createSoccerBall;
  f = triangulateFaces(f);
 \end_layout
 
 \begin_layout Plain Layout
-
 plane = createPlane([-0.2 0 0],
  [-1 0 -1]);
 \end_layout
 
 \begin_layout Plain Layout
-
 % split the different parts of the mesh
 \end_layout
 
 \begin_layout Plain Layout
-
 [above,
  inside,
  below] = cutMeshByPlane(mesh,
@@ -24412,12 +25155,10 @@ plane = createPlane([-0.2 0 0],
 \end_layout
 
 \begin_layout Plain Layout
-
 % draw the different parts
 \end_layout
 
 \begin_layout Plain Layout
-
 figure('color','w');
  axis equal;
  hold on;
@@ -24425,28 +25166,24 @@ figure('color','w');
 \end_layout
 
 \begin_layout Plain Layout
-
 drawMesh(above,
  'FaceColor',
  'r');
 \end_layout
 
 \begin_layout Plain Layout
-
 drawMesh(inside,
  'FaceColor',
  'g');
 \end_layout
 
 \begin_layout Plain Layout
-
 drawMesh(below,
  'FaceColor',
  'b');
 \end_layout
 
 \begin_layout Plain Layout
-
 drawPlane3d(plane,
  'FaceAlpha',.7)
 \end_layout
@@ -24551,7 +25288,6 @@ Yury (2023).
 status open
 
 \begin_layout Plain Layout
-
 https://github.com/caiuspetronius/mesh_xsections
 \end_layout
 
@@ -25210,7 +25946,17 @@ status collapsed
 \uwave off
 \noun off
 \color none
-boundary!mesh
+boundary
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh
 \end_layout
 
 \end_inset
@@ -25267,7 +26013,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 https://github.com/alecjacobson/gptoolbox
 \end_layout
 
@@ -25437,7 +26182,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-centroid!mesh
+centroid
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh
 \end_layout
 
 \end_inset
@@ -25504,7 +26259,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-ellipsoid!of a mesh
+ellipsoid
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+of a mesh
 \end_layout
 
 \end_inset
@@ -25516,7 +26281,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-moments!mesh
+moments
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh
 \end_layout
 
 \end_inset
@@ -25561,7 +26336,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-area!mesh
+area
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh
 \end_layout
 
 \end_inset
@@ -25593,7 +26378,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-area!triangle mesh
+area
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+triangle mesh
 \end_layout
 
 \end_inset
@@ -25728,7 +26523,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-area!mesh face
+area
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh face
 \end_layout
 
 \end_inset
@@ -25760,7 +26565,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-normal!mesh face
+normal
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh face
 \end_layout
 
 \end_inset
@@ -25832,7 +26647,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-angle!mesh edge
+angle
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh edge
 \end_layout
 
 \end_inset
@@ -25878,7 +26703,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-curvature!mesh
+curvature
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh
 \end_layout
 
 \end_inset
@@ -25930,7 +26765,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-angle!mesh vertex
+angle
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh vertex
 \end_layout
 
 \end_inset
@@ -25990,7 +26835,17 @@ pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-distance!point to mesh
+distance
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+point to mesh
 \end_layout
 
 \end_inset
@@ -26143,7 +26998,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 https://en.wikipedia.org/wiki/OFF_(file_format)
 \end_layout
 
@@ -26208,102 +27062,82 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 OFF
 \end_layout
 
 \begin_layout Plain Layout
-
 #
 \end_layout
 
 \begin_layout Plain Layout
-
 #  cube.off
 \end_layout
 
 \begin_layout Plain Layout
-
 #  A cube.
 \end_layout
 
 \begin_layout Plain Layout
-
 #  There is extra RGBA color information specified for the faces.
 \end_layout
 
 \begin_layout Plain Layout
-
 8 6 12
 \end_layout
 
 \begin_layout Plain Layout
-
   1.632993   0.000000   1.154701
 \end_layout
 
 \begin_layout Plain Layout
-
   0.000000   1.632993   1.154701
 \end_layout
 
 \begin_layout Plain Layout
-
  -1.632993   0.000000   1.154701
 \end_layout
 
 \begin_layout Plain Layout
-
   0.000000  -1.632993   1.154701
 \end_layout
 
 \begin_layout Plain Layout
-
   1.632993   0.000000  -1.154701
 \end_layout
 
 \begin_layout Plain Layout
-
   0.000000   1.632993  -1.154701
 \end_layout
 
 \begin_layout Plain Layout
-
  -1.632993   0.000000  -1.154701
 \end_layout
 
 \begin_layout Plain Layout
-
   0.000000  -1.632993  -1.154701
 \end_layout
 
 \begin_layout Plain Layout
-
   4  0 1 2 3  1.000 0.000 0.000 0.75
 \end_layout
 
 \begin_layout Plain Layout
-
   4  7 4 0 3  0.300 0.400 0.000 0.75
 \end_layout
 
 \begin_layout Plain Layout
-
   4  4 5 1 0  0.200 0.500 0.100 0.75
 \end_layout
 
 \begin_layout Plain Layout
-
   4  5 6 2 1  0.100 0.600 0.200 0.75
 \end_layout
 
 \begin_layout Plain Layout
-
   4  3 2 6 7  0.000 0.700 0.300 0.75
 \end_layout
 
 \begin_layout Plain Layout
-
   4  6 5 4 7  0.000 1.000 0.000 0.75
 \end_layout
 
@@ -26384,7 +27218,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 https://en.wikipedia.org/wiki/PLY_(file_format)
 \end_layout
 
@@ -26412,122 +27245,98 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 ply
 \end_layout
 
 \begin_layout Plain Layout
-
 format ascii 1.0
 \end_layout
 
 \begin_layout Plain Layout
-
 comment written with Matlab
 \end_layout
 
 \begin_layout Plain Layout
-
 element vertex 8
 \end_layout
 
 \begin_layout Plain Layout
-
 property float x
 \end_layout
 
 \begin_layout Plain Layout
-
 property float y
 \end_layout
 
 \begin_layout Plain Layout
-
 property float z
 \end_layout
 
 \begin_layout Plain Layout
-
 element face 6
 \end_layout
 
 \begin_layout Plain Layout
-
 property list uchar int vertex_index
 \end_layout
 
 \begin_layout Plain Layout
-
 end_header
 \end_layout
 
 \begin_layout Plain Layout
-
 -1 -1 -1
 \end_layout
 
 \begin_layout Plain Layout
-
 1 -1 -1
 \end_layout
 
 \begin_layout Plain Layout
-
 1 1 -1
 \end_layout
 
 \begin_layout Plain Layout
-
 -1 1 -1
 \end_layout
 
 \begin_layout Plain Layout
-
 -1 -1 1
 \end_layout
 
 \begin_layout Plain Layout
-
 1 -1 1
 \end_layout
 
 \begin_layout Plain Layout
-
 1 1 1
 \end_layout
 
 \begin_layout Plain Layout
-
 -1 1 1
 \end_layout
 
 \begin_layout Plain Layout
-
 4 0 1 2 3
 \end_layout
 
 \begin_layout Plain Layout
-
 4 5 4 7 6
 \end_layout
 
 \begin_layout Plain Layout
-
 4 6 2 1 5
 \end_layout
 
 \begin_layout Plain Layout
-
 4 3 7 4 0
 \end_layout
 
 \begin_layout Plain Layout
-
 4 7 3 2 6
 \end_layout
 
 \begin_layout Plain Layout
-
 4 5 1 0 4
 \end_layout
 
@@ -26601,7 +27410,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 https://en.wikipedia.org/wiki/STL_(file_format)
 \end_layout
 
@@ -26684,7 +27492,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 https://en.wikipedia.org/wiki/Wavefront_.obj_file
 \end_layout
 
@@ -27447,7 +28254,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 https://github.com/mattools/matGeom
 \end_layout
 
@@ -27595,7 +28401,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 https://fr.mathworks.com/matlabcentral/fileexchange/8532-tedit
 \end_layout
 
@@ -27630,7 +28435,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 error('MatGeom:theFunction',
  'A problem was encountered.');
 \end_layout
@@ -27650,7 +28454,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 error('MatGeom:theFunction',
  'The value %d is invalid.',
  value);
@@ -27740,12 +28543,10 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 >> cd [MatGeomBaseDir]/tests/geom2d
 \end_layout
 
 \begin_layout Plain Layout
-
 >> runtests
 \end_layout
 
@@ -27799,7 +28600,6 @@ status collapsed
 status open
 
 \begin_layout Plain Layout
-
 https://java-design-patterns.com/patterns/arrange-act-assert/
 \end_layout
 
@@ -27817,17 +28617,14 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 % arrange data for test
 \end_layout
 
 \begin_layout Plain Layout
-
 pt1 = [10 10];
 \end_layout
 
 \begin_layout Plain Layout
-
 pt2 = [10 20];
 \end_layout
 
@@ -27836,7 +28633,6 @@ pt2 = [10 20];
 \end_layout
 
 \begin_layout Plain Layout
-
 % 
 \begin_inset Quotes eld
 \end_inset
@@ -27850,7 +28646,6 @@ act
 \end_layout
 
 \begin_layout Plain Layout
-
 dist = distancePoints(pt1,
  pt2);
 \end_layout
@@ -27860,12 +28655,10 @@ dist = distancePoints(pt1,
 \end_layout
 
 \begin_layout Plain Layout
-
 % assert validity of result
 \end_layout
 
 \begin_layout Plain Layout
-
 assertEqual(testCase,
  dist,
  10,
@@ -27894,12 +28687,10 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 circ = [40 30  10];
 \end_layout
 
 \begin_layout Plain Layout
-
 hf = figure();
  clf;
 \end_layout
@@ -27909,7 +28700,6 @@ hf = figure();
 \end_layout
 
 \begin_layout Plain Layout
-
 hc = drawCircle(circ);
 \end_layout
 
@@ -27918,7 +28708,6 @@ hc = drawCircle(circ);
 \end_layout
 
 \begin_layout Plain Layout
-
 assertTrue(testCase,
  ishghandle(hc));
 \end_layout
@@ -27928,7 +28717,6 @@ assertTrue(testCase,
 \end_layout
 
 \begin_layout Plain Layout
-
 close(hf);
 \end_layout
 
@@ -28001,37 +28789,30 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 % retrieve handle to axis object used for drawing
 \end_layout
 
 \begin_layout Plain Layout
-
 if isAxisHandle(varargin{1})
 \end_layout
 
 \begin_layout Plain Layout
-
     hAx = varargin{1};
 \end_layout
 
 \begin_layout Plain Layout
-
     varargin(1) = [];
 \end_layout
 
 \begin_layout Plain Layout
-
 else
 \end_layout
 
 \begin_layout Plain Layout
-
     hAx = gca;
 \end_layout
 
 \begin_layout Plain Layout
-
 end
 \end_layout
 
@@ -28079,7 +28860,6 @@ inline false
 status open
 
 \begin_layout Plain Layout
-
 [ax,
  varargin] = parseAxisHandle(varargin{:});
 \end_layout

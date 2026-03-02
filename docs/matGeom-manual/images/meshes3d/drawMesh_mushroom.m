@@ -18,8 +18,15 @@
 [v, f] = readMesh_off('mushroom.off');
 
 figure; 
-drawMesh(v, f, 'facecolor', [.7 .7 .7], 'linestyle', 'none');
+drawMesh(v, f, 'facecolor', [0.7 0.7 0.7], 'linestyle', 'none');
 axis equal; view([-15 80]); light; axis off
 drawFaceNormals(v, f);
 
 print(gcf, 'drawMesh_mushroom.png', '-dpng');
+
+figure; 
+axis equal; view([-15 80]); light; axis off
+drawWireframe(v, f, 'LineWidth', 2);
+
+print(gcf, 'drawWireframe_mushroom.png', '-dpng');
+
