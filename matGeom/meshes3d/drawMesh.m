@@ -42,7 +42,7 @@ function varargout = drawMesh(varargin)
 %     drawMesh(v, f, 'VertexColor', v(:,1), 'LineStyle', 'none');
 %
 %   See also 
-%     meshes3d, polyhedra, patch
+%     meshes3d, drawWireframe, fillMeshFaces, polyhedra, patch
 %
 
 % ------
