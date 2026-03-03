@@ -2223,6 +2223,28 @@ transformPoint
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status open
+
+\begin_layout Plain Layout
+transform
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+point
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6888,7 +6910,29 @@ name "sec:Transforms"
 
 \begin_layout Standard
 The MatGeom library contains various functions for manipulation of geometric transforms.
- Most of them consider affine transforms in the plane,
+ Most of them consider affine transforms
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+transform
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+affine
+\end_layout
+
+\end_inset
+
+ in the plane,
  that can be represented by a 3-by-3 matrix in homogeneous coordinates:
 \begin_inset Formula 
 \begin{align}
@@ -6996,7 +7040,7 @@ createTranslation
 Creates the 3-by-3 matrix of a translation,
  given the components of the translation vector.
  If the translation vector is given by 
-\begin_inset Formula $\mathbf{v}$
+\begin_inset Formula $\mathbf{u}$
 \end_inset
 
 ,
@@ -7004,8 +7048,8 @@ Creates the 3-by-3 matrix of a translation,
 \begin_inset Formula 
 \[
 T_{\mathbf{v}}=\left(\begin{array}{ccc}
-1 & 0 & v_{x}\\
-0 & 1 & v_{y}\\
+1 & 0 & u_{x}\\
+0 & 1 & u_{y}\\
 0 & 0 & 1
 \end{array}\right)
 \]
@@ -7285,6 +7329,28 @@ fitAffineTransform2d
 \end_inset
 
  
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+transform
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+fit affine
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -9709,7 +9775,7 @@ resamplePolygon
 \end_inset
 
  
-\begin_inset Index idx
+\begin_inset Index gen
 range none
 pageformat default
 status collapsed
@@ -13066,7 +13132,7 @@ Low level graph edition
 \end_layout
 
 \begin_layout Standard
-Some functions for removing elements from a graph by maintaining the consistency of the informations.
+Some functions for removing elements from a graph by maintaining topological consistency.
 \end_layout
 
 \begin_layout Minisec
@@ -14966,11 +15032,38 @@ transformPoint3d
 
 \end_inset
 
- 
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+transform
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+point (3D)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Applies a 3D affine transform to a point or an array of points.
+Applies a geometric transform to a point or an array of points.
+ The transform can be provided as a 
+\begin_inset Formula $4\times4$
+\end_inset
+
+ matrix representing an affine transform.
  See the section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -14983,6 +15076,12 @@ nolink "false"
 \end_inset
 
  for the creation of 3D transform matrices.
+ More generic transforms can be provided as function handle taking as input an 
+\begin_inset Formula $N\times3$
+\end_inset
+
+ array of coordinates,
+ and providing as output the array of transformed coordinates.
 \end_layout
 
 \begin_layout Minisec
@@ -15002,7 +15101,7 @@ distancePoints3d
 \begin_inset Index gen
 range none
 pageformat default
-status open
+status collapsed
 
 \begin_layout Plain Layout
 distance
@@ -15125,7 +15224,7 @@ normalizeVector3d
 \end_layout
 
 \begin_layout Standard
-Normalizes a 3D vector to have norm equal to 1.
+Normalizes a 3D vector such that the result is a vector with norm equal to 1.
 \end_layout
 
 \begin_layout Minisec
@@ -18747,6 +18846,13 @@ Draws a cylinder with an ellipse cross-section.
  
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Other smooth surfaces
 \end_layout
@@ -19034,7 +19140,7 @@ drawSurfPatch
 
 \begin_layout Standard
 Draws a 3D surface patch,
- with 2 parametrized surfaces.
+ with 2 parameterized surfaces.
 \end_layout
 
 \begin_layout Standard
@@ -19050,7 +19156,7 @@ status open
 \begin_inset Graphics
 	filename images/demoRevolutionSurface_01.png
 	lyxscale 50
-	width 60text%
+	width 50text%
 
 \end_inset
 
@@ -19102,7 +19208,29 @@ name "sec:3D-Transforms"
 \end_layout
 
 \begin_layout Standard
-Transforms in 3D space are represented by 4-by-4 matrices in homogeneous coordinates:
+Affine transforms
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+transform
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+affine (3D)
+\end_layout
+
+\end_inset
+
+ in 3D space can be represented by 4-by-4 matrices in homogeneous coordinates:
 \begin_inset Formula 
 \begin{align}
 \left(\begin{array}{c}
@@ -19146,7 +19274,7 @@ The upper-left
 \end_layout
 
 \begin_layout Subsection
-Basic transforms
+Common 3D transforms
 \end_layout
 
 \begin_layout Standard
@@ -24582,6 +24710,28 @@ Subdivides each face of a quadrangular mesh.
 \end_layout
 
 \begin_layout Minisec
+subdivideMeshEdges
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+subdivideMeshEdges
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Subdivides each edge of a regular mesh (either triangular or quadrangular).
+ The resulting mesh has the same number of faces,
+ but each face is incident to a larger number of vertices.
+\end_layout
+
+\begin_layout Minisec
 triangulateMesh
 \begin_inset Index idx
 range none
@@ -24858,7 +25008,7 @@ intersectConvexPolyhedra
 \begin_inset Index gen
 range none
 pageformat default
-status collapsed
+status open
 
 \begin_layout Plain Layout
 intersection
@@ -25506,6 +25656,68 @@ Intersection of a 3D polygonal mesh with a collection of lines,
 
 \begin_layout Subsection
 Generic operations
+\end_layout
+
+\begin_layout Minisec
+transformMesh
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+transformMesh
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+transform
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+mesh
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Applies a geometric transform to a mesh.
+ The transform can be either an affine transform provided as a 
+\begin_inset Formula $4\times4$
+\end_inset
+
+ matrix,
+ or a more generic transform provided as a function handle.
 \end_layout
 
 \begin_layout Minisec
