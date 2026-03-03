@@ -18,7 +18,7 @@ function varargout = subdivideQuadMesh(vertices, faces, n)
 %     figure; drawMesh(v2, f2); axis equal; view(3)
 %
 %   See also 
-%     meshes3d, subdivideMesh, drawMesh
+%     meshes3d, subdivideMesh, subdivideMeshEdges, drawMesh
 %
  
 % ------
