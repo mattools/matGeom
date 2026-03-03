@@ -20,6 +20,10 @@ function varargout = transformPoint(varargin)
 %   transforms each pair (PX1, PY1), and returns the result in (X2, Y2),
 %   which has the same size as (PX1 PY1). 
 %
+%   PT2 = transformPoint(..., FUN);
+%   Also works when FUN is a function handle accepting as input an N-by-2
+%   array of coordinates, and returning as output the N-by-2 array of
+%   transformed coordinates.
 %
 %   See also 
 %     points2d, transforms2d, translation, rotation
@@ -36,25 +40,38 @@ if length(varargin) == 2
     var = varargin{1};
     px = var(:,1);
     py = var(:,2);
-    trans = varargin{2};
+    transfo = varargin{2};
 elseif length(varargin) == 3
     px = varargin{1};
     py = varargin{2};
-    trans = varargin{3};
+    transfo = varargin{3};
 else
     error('wrong number of arguments in "transformPoint"');
 end
 
+if isnumeric(transfo)
+    % case of an affine transform given as a transformation matrix.
 
-% apply linear part of the transform
-px2 = px * trans(1,1) + py * trans(1,2);
-py2 = px * trans(2,1) + py * trans(2,2);
+    % first apply linear part of the transform
+    px2 = px * transfo(1,1) + py * transfo(1,2);
+    py2 = px * transfo(2,1) + py * transfo(2,2);
 
-% add translation vector, if exist
-if size(trans, 2) > 2
-    px2 = px2 + trans(1,3);
-    py2 = py2 + trans(2,3);
+    % then add translation vector, if exist
+    if size(transfo, 2) > 2
+        px2 = px2 + transfo(1,3);
+        py2 = py2 + transfo(2,3);
+    end
+
+elseif isa(transfo, "function_handle")
+    % use transfo as a function handle
+    res = transfo([px(:) py(:)]);
+    px2 = reshape(res(:,1), size(px));
+    py2 = reshape(res(:,2), size(py));
+
+else
+    error('can not manage transform given as %s', class(transfo));
 end
+
 
 % format output arguments
 if nargout < 2
