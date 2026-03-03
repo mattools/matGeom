@@ -48,9 +48,9 @@ function varargout = transformPoint3d(pts, transfo, varargin)
 % 'vertices', then the output will be the same struct, but with the
 % transformed vertices.
 if nargin == 2 && isstruct(pts) && isfield(pts, 'vertices')
-    mesh = pts;
-    mesh.vertices = transformPoint3d(mesh.vertices, transfo);
-    varargout = {mesh};
+    res = pts;
+    res.vertices = transformPoint3d(res.vertices, transfo);
+    varargout = {res};
     return;
 end
 
@@ -79,24 +79,29 @@ else
 end
 
 
-%% Process transformation matrix
-
-% extract the linear and the translation parts of the matrix
-linear = transfo(1:3, 1:3)';
-trans = [0 0 0];
-if size(transfo, 2) > 3
-    trans = transfo(1:3, 4)';
-end
-
-
 %% Main processing
 
-% convert coordinates
 try
-    % vectorial processing, if there is enough memory.
-    % same as: 
-    % res = (transfo * [x(:) y(:) z(:) ones(NP, 1)]')';
-    res = bsxfun(@plus, [x(:) y(:) z(:)] * linear, trans);
+    % try to process all points in a single matrix multiplication.
+    % if this fails, use the "catch" block to process points one by one.
+    if isnumeric(transfo)
+        % vectorial processing, if there is enough memory.
+
+        % split linear and translation parts of transform matrix
+        linear = transfo(1:3, 1:3)';
+        trans = [0 0 0];
+        if size(transfo, 2) > 3
+            trans = transfo(1:3, 4)';
+        end
+
+        % same as:
+        % res = (transfo * [x(:) y(:) z(:) ones(NP, 1)]')';
+        res = bsxfun(@plus, [x(:) y(:) z(:)] * linear, trans);
+    elseif isa(transfo, "function_handle")
+        res = transfo([x(:) y(:) z(:)]);
+    else
+        error('can not manage transform given as %s', class(transfo));
+    end
     
     % Back-fill x,y,z with new result (saves calling costly reshape())
     x(:) = res(:,1);
@@ -105,13 +110,24 @@ try
     
 catch ME
     disp(ME.message)
-    % process each point one by one, writing in existing array
-    NP = numel(x);
-    for i = 1:NP
-        res = [x(i) y(i) z(i)] * linear + trans;
-        x(i) = res(1);
-        y(i) = res(2);
-        z(i) = res(3);
+    % process each point one by one, writing into existing array
+
+    if isnumeric(transfo)
+        % split linear and translation parts of transform matrix
+        linear = transfo(1:3, 1:3)';
+        trans = [0 0 0];
+        if size(transfo, 2) > 3
+            trans = transfo(1:3, 4)';
+        end
+
+        % iterate over points
+        NP = numel(x);
+        for i = 1:NP
+            res = [x(i) y(i) z(i)] * linear + trans;
+            x(i) = res(1);
+            y(i) = res(2);
+            z(i) = res(3);
+        end
     end
 end
 

@@ -23,7 +23,7 @@ trans = createTranslation3d(v);
 
 pt = transformPoint3d(p0, trans);
 ctrl = p0 + v;
-assertEqual(testCase, ctrl, pt, 'AbsTol', .01);
+assertEqual(testCase, pt, ctrl, 'AbsTol', .01);
 
 
 function testTranslation_separateCoords(testCase) %#ok<*DEFNU>
@@ -34,7 +34,7 @@ trans = createTranslation3d(v);
 pt = transformPoint3d(p0(1), p0(2), p0(3), trans);
 
 ctrl = p0 + v;
-assertEqual(testCase, ctrl, pt, 'AbsTol', .01);
+assertEqual(testCase, pt, ctrl, 'AbsTol', .01);
 
 
 function testTranslation_Array(testCase)
@@ -46,7 +46,7 @@ trans = createTranslation3d(v);
 pt = transformPoint3d(p0, trans);
 
 ctrl = p0 + repmat(v, 3, 1);
-assertEqual(testCase, ctrl, pt, 'AbsTol', .01);
+assertEqual(testCase, pt, ctrl, 'AbsTol', .01);
 
 
 function testRotationOx(testCase)
@@ -57,7 +57,7 @@ trans = createRotationOx([10 10 10], pi/2);
 pt = transformPoint3d(p0, trans);
 
 ctrl = [10 -10 20];
-assertEqual(testCase, ctrl, pt, 'AbsTol', .01);
+assertEqual(testCase, pt, ctrl, 'AbsTol', .01);
 
 
 function testRotationOxOnMesh(testCase)
@@ -72,4 +72,15 @@ ctrl = transformPoint3d(vertices, transfo);
 
 assertTrue(testCase, isstruct(mesh2));
 assertEqual(testCase, mesh2.vertices, ctrl, 'AbsTol', .01);
+
+
+function test_rotationOx_functionHandle(testCase)
+
+p0 = [10 20 30];
+transfo = @(x) [x(:,1) x(:,3) -x(:,2)];
+
+pt = transformPoint3d(p0, transfo);
+
+ctrl = [10 30 -20];
+assertEqual(testCase, pt, ctrl, 'AbsTol', .01);
 
