@@ -6080,6 +6080,90 @@ Spline curves are a convenient way to represent a large family of curves with a 
 \end_layout
 
 \begin_layout Minisec
+drawBSplinePolygon
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+drawBSplinePolygon
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Displays a smooth closed curve by interpolating vertices of a control polygon (Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Bezier-Curve"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+).
+ Usage example:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+poly = [10 10;
+ 30 10;
+ 45 20;40 40;25 20;5 40];
+\end_layout
+
+\begin_layout Plain Layout
+figure;
+ hold on;
+ axis equal;
+ axis([0 50 0 50]);
+\end_layout
+
+\begin_layout Plain Layout
+drawPolygon(poly,
+ 'k');
+\end_layout
+
+\begin_layout Plain Layout
+drawBSplinePolygon(poly,
+ 'linewidth',
+ 2,
+ 'color',
+ 'r');
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Minisec
 cubicBezierToPolyline
 \begin_inset Index idx
 range none
@@ -6145,7 +6229,15 @@ status open
 \begin_inset Graphics
 	filename images/demoBezierCurve.png
 	lyxscale 50
-	width 60text%
+	width 40text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/geom2d/drawBSplinePolygon.png
+	lyxscale 50
+	width 40text%
 
 \end_inset
 
@@ -6162,7 +6254,8 @@ name "fig:Bezier-Curve"
 
 \end_inset
 
-Bezier Curve through four points
+Bezier Curve through four points,
+ and closed curve obtained by interpolating a control polygon via Bezier splines.
 \end_layout
 
 \end_inset
