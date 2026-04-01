@@ -178,6 +178,7 @@
 %   drawOrientedBox          - Draw centered oriented rectangle.
 %
 % Splines
+%   drawBSplinePolygon       - Draw a smooth curve by interpolating polygon vertices.
 %   cubicBezierToPolyline    - Compute equivalent polyline from bezier curve control.
 %   drawBezierCurve          - Draw a cubic bezier curve defined by 4 control points.
 %
