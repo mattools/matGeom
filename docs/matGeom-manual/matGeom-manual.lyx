@@ -1434,6 +1434,23 @@ Angles are expressed in radians,
  they are given as degrees (usually more intuitive).
 \end_layout
 
+\begin_layout Section
+References
+\end_layout
+
+\begin_layout Standard
+If you use MatGeom for your research,
+ please be kind enough to cite the following article 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Legland_2025_SoftwareX"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Chapter
 Module geom2d
 \end_layout
@@ -6076,7 +6093,49 @@ spline
 \end_layout
 
 \begin_layout Standard
-Spline curves are a convenient way to represent a large family of curves with a few number control points.
+Spline curves are a convenient way to represent a large family of curves with a few number control points 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Unser_1999_SPM"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Minisec
+BSplinePolygon
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+BSplinePolygon
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Interpolate polygon vertices using cubic BSpline.
 \end_layout
 
 \begin_layout Minisec
