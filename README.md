@@ -2,7 +2,7 @@
 MATLAB geometry processing library in 2D/3D.
 
 [![View matGeom on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://fr.mathworks.com/matlabcentral/fileexchange/107370-matgeom)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7799184.svg)](https://doi.org/10.5281/zenodo.5768192)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.12800469.svg)](https://doi.org/10.5281/zenodo.12800469)
 
 **MatGeom** is a library for geometry processing / geometric computing with MATLAB in 2D and 3D. 
 MatGeom is a “function-based” library: it contains several hundreds of functions for the creation,
