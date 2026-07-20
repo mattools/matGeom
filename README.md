@@ -4,23 +4,17 @@ MATLAB geometry processing library in 2D/3D.
 [![View matGeom on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://fr.mathworks.com/matlabcentral/fileexchange/107370-matgeom)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7799184.svg)](https://doi.org/10.5281/zenodo.5768192)
 
+
 **MatGeom** is a library for geometry processing / geometric computing with MATLAB in 2D and 3D. 
 MatGeom is a “function-based” library: it contains several hundreds of functions for the creation,
 manipulation and display of 2D and 3D shapes such as point sets, lines, ellipses, polygons, 
 3D polygonal meshes...
 The official homepage for the project is http://github.com/mattools/matGeom. 
 
-A [user manual](https://github.com/mattools/matGeom/releases/download/v1.2.8/matGeom-manual-1.2.8.pdf) 
+A [user manual](https://github.com/mattools/matGeom/releases/download/v1.2.9/matGeom-manual-1.2.9.pdf) 
 containing a large number of illustrations and examples is available.
-Starting from February 2022, the HTML pages of the functions (obtained with m2html) are available 
-[here](https://mattools.github.io/matGeom/api/index.html).
-
-The MatGeom library corresponds to the concatenation of the 
-"[geom2d](https://fr.mathworks.com/matlabcentral/fileexchange/7844-geom2d)" 
-and 
-"[geom3d](https://fr.mathworks.com/matlabcentral/fileexchange/24484-geom3d)" 
-libraries that were distributed on the FileExchange. Distribution as a single library greatly 
-facilitates the interoperability of the functions.
+The HTML pages of the functions (obtained with m2html) 
+[are also available](https://mattools.github.io/matGeom/api/index.html).
 
 Thanks to the work of other people (mostly Juan Pablo Carbajal),
 a port of MatGeom for the [GNU Octave](https://www.octave.org/) language is available at https://gnu-octave.github.io/packages/matgeom/.
@@ -29,14 +23,27 @@ If you use MatGeom for your research, please be kind enough to cite the followin
 * [Legland, D. MatGeom: A toolbox for geometry processing with MATLAB](https://www.sciencedirect.com/science/article/pii/S2352711024003546). 
 *SoftwareX*, **29**, 101984, (**2025**). DOI:10.1016/j.softx.2024.101984
 
+## Installation
 
-## Package organization
-The library is organized into several modules:
-* [geom2d](https://github.com/mattools/matGeom/wiki/geom2d "geom2d Wiki page") - General functions in Euclidean plane
-* [polygons2d](https://github.com/mattools/matGeom/wiki/polygons2d "polygons2d Wiki page") - Functions operating on polygons and polylines represented as list of vertices
-* [graphs](https://github.com/mattools/matGeom/wiki/graphs "graphs Wiki page") - Manipulation of geometric graphs
-* [geom3d](https://github.com/mattools/matGeom/wiki/geom3d "geom3d Wiki page") - General functions in 3D Euclidean space
-* [meshes3d](https://github.com/mattools/matGeom/wiki/meshes3d "meshes3d Wiki page") - Manipulation of 3D polygonal meshes (trimesh, quadmesh, or more generic meshes)
+### Install as a Matlab Add-On
+
+This is the simplest method. Simply open the “Add-Ons” button from the toolbar of the main Matlab frame, and look for “MatGeom”. Select the library, and click on “Install”. That's it!
+
+### Install using mip package manager
+
+[Mip](https://mip.sh/) is an open-source package manager for Matlab in the spirit of pip or conda. To install mip, type the following from Matlab command line:
+
+    eval(webread('https://mip.sh/install.txt'))
+
+To install MatGeom:
+
+    mip install matgeom
+    mip load matgeom
+
+### Install manually as Toolbox 
+
+The latest version of the toolbox can also be downloaded manually as a “.mltx” file. When executing the file from Matlab, the toolbox is automatically installed.
+
 
 ## Quick overview
 
@@ -115,8 +122,17 @@ drawPoint(inters, 'Color', 'r', 'Marker', 'o', 'MarkerFaceColor', 'w', 'linewidt
 The MatGeom library also provides features for polygon mesh processing.
 Mesh data can be retrieved from common mesh file formats, 
 or generated from simple data,
-and various operations can be performed: intersections (with lines or planes), clipping by plane, 
-distance to point... 
+and various operations can be performed: computation of intersections (with lines or planes), 
+clipping by plane, distance to point... 
 Several measurements on meshes are also provided: main curvatures, surface area, bounding box...
 
 ![Summary of polygon mesh processing operations: smoothing, simplification, convex hull, intersection with lines.](docs/images/bunnyMesh_variousOps.png)
+
+
+## Package organization
+The library is organized into several modules:
+* [geom2d](https://github.com/mattools/matGeom/wiki/geom2d "geom2d Wiki page") - General functions in Euclidean plane
+* [polygons2d](https://github.com/mattools/matGeom/wiki/polygons2d "polygons2d Wiki page") - Functions operating on polygons and polylines represented as list of vertices
+* [graphs](https://github.com/mattools/matGeom/wiki/graphs "graphs Wiki page") - Manipulation of geometric graphs
+* [geom3d](https://github.com/mattools/matGeom/wiki/geom3d "geom3d Wiki page") - General functions in 3D Euclidean space
+* [meshes3d](https://github.com/mattools/matGeom/wiki/meshes3d "meshes3d Wiki page") - Manipulation of 3D polygonal meshes (trimesh, quadmesh, or more generic meshes)
