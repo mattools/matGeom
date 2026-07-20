@@ -831,7 +831,66 @@ Install
 \end_layout
 
 \begin_layout Subsection
-Install as Toolbox manually 
+Install using mip package manager
+\end_layout
+
+\begin_layout Standard
+Mip
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+https://mip.sh/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ is an open-source package manager for Matlab in the spirit of pip/conda/brewstyle...
+ To install mip,
+ type the following from Matlab command line:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+eval(webread('https://mip.sh/install.txt'))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To install MatGeom:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+mip install matgeom
+\end_layout
+
+\begin_layout Plain Layout
+mip load matgeom
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Install manually as Toolbox 
 \end_layout
 
 \begin_layout Standard
@@ -854,7 +913,7 @@ Download zip archive
 
 \begin_layout Standard
 Most versions provide an archive of the whole library in a zip file.
- The library an be installed by decompressing the archive,
+ The library can be installed by decompressing the archive,
  and running the 
 \begin_inset Quotes eld
 \end_inset
