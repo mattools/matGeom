@@ -30,6 +30,24 @@ res = intersectConvexPolyhedra(mesh1, mesh2);
 
 % pyramid with square basis -> four triangle faces for sides, plus two for basis
 assertEqual(testCase, size(res.vertices), [5 3]);
+assertTrue(testCase, iscell(res.faces));
+assertEqual(testCase, size(res.faces), [5 1]);
+
+
+function test_twoOctahedra_noMerge(testCase) %#ok<*DEFNU>
+% Test call of function without argument.
+
+% create a cubic mesh with corners at +/- 1
+mesh1 = createCube;
+mesh1.vertices = (mesh1.vertices - mean(mesh1.vertices)) * 2;
+transfo = createTranslation3d([1.0 0 0]);
+mesh2 = transformMesh(createOctahedron, transfo);
+
+res = intersectConvexPolyhedra(mesh1, mesh2, 'mergeCoplanarFaces', false);
+
+% pyramid with square basis -> four triangle faces for sides, plus two for basis
+assertEqual(testCase, size(res.vertices), [5 3]);
+assertTrue(testCase, isnumeric(res.faces));
 assertEqual(testCase, size(res.faces), [6 3]);
 
 
