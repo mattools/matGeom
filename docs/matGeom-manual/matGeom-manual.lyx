@@ -8681,7 +8681,7 @@ Extracts the portion of a polyline located between two positions.
 \end_layout
 
 \begin_layout Subsection
-Measures
+Measures 
 \end_layout
 
 \begin_layout Standard
@@ -8727,27 +8727,17 @@ polygonLength
 \end_layout
 
 \begin_layout Standard
-Perimeter of a polygon.
-\end_layout
-
-\begin_layout Minisec
-polygonBounds
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-polygonBounds
-\end_layout
-
+Returns the length of a polygon (perimeter) given as a list of points.
+ Contrary to the 
+\begin_inset Quotes eld
 \end_inset
 
- 
-\end_layout
+polylineLength
+\begin_inset Quotes erd
+\end_inset
 
-\begin_layout Standard
-Computes the bounding box of a polygon.
+ function,
+ the distance between the last and the first point is also taken into account.
 \end_layout
 
 \begin_layout Minisec
@@ -8789,7 +8779,43 @@ polyline
 \end_layout
 
 \begin_layout Standard
-Computes the centroid of a polygonal curve defined by a series of vertices.
+Computes the centroid
+\begin_inset Index gen
+range none
+pageformat default
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+centroid
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polyline
+\end_layout
+
+\end_inset
+
+ of a polygonal curve defined by a series of vertices.
  It is in general different from the vertex-based centroid,
  as obtained by the 
 \begin_inset Quotes eld
@@ -8799,7 +8825,129 @@ centroid
 \begin_inset Quotes erd
 \end_inset
 
- function.
+ function (see Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Polygon-Centroids"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Minisec
+polygonCentroid
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+polygonCentroid
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+centroid
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygon
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computes the centroid
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+centroid
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygon
+\end_layout
+
+\end_inset
+
+ (center of mass) of a polygon.
+ It is in general different from the vertex-based centroid,
+ as obtained by the 
+\begin_inset Quotes eld
+\end_inset
+
+centroid
+\begin_inset Quotes erd
+\end_inset
+
+ function,
+ and from the centroid of its boundary,
+ as obtained by the polylineCentroid function (see Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Polygon-Centroids"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -8809,10 +8957,6 @@ alignment document
 wide false
 sideways false
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \align center
@@ -8855,67 +8999,45 @@ Various summary shapes that can be obtained from a polygon:
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
 \end_layout
 
 \begin_layout Minisec
-polygonCentroid
+polygonBounds
 \begin_inset Index idx
 range none
 pageformat default
 status collapsed
 
 \begin_layout Plain Layout
-polygonCentroid
+polygonBounds
 \end_layout
 
 \end_inset
 
-
-\begin_inset Index gen
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-centroid
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-!
-\end_layout
-
-\end_inset
-
-polygon
-\end_layout
-
-\end_inset
-
-
+ 
 \end_layout
 
 \begin_layout Standard
-Computes the centroid (center of mass) of a polygon.
- It is in general different from the vertex-based centroid,
- as obtained by the 
-\begin_inset Quotes eld
+Computes the bounding box of a polygon (see Figure
+\begin_inset space ~
 \end_inset
 
-centroid
-\begin_inset Quotes erd
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Polygon-Centroids"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
 \end_inset
 
- function,
- and from the centroid of its boundary,
- as obtained by the polylineCentroid function.
+).
 \end_layout
 
 \begin_layout Minisec
@@ -9001,7 +9123,23 @@ polygon equivalent
 \end_layout
 
 \begin_layout Standard
-Computes the ellipse with the same moments as the polygon.
+Computes the ellipse with the same moments as the polygon (see Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Polygon-Centroids"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Minisec
@@ -9106,6 +9244,117 @@ polygonOuterNormal
 
 \begin_layout Standard
 Outer normal vector for a given vertex(ices).
+\end_layout
+
+\begin_layout Minisec
+polygonCurvature
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+polygonCurvature
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+curvature
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+polygon
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Estimates the curvature of a polygon curve on polygon vertices (see Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Polygon-Curvature"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+).
+ The curvature is estimated using polynomial fit within a moving window whose size can be specified.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/polygons2d/smoothPolygon_curvatureMarkers.png
+	lyxscale 50
+	special height=5cm
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/polygons2d/smoothPolygon_curvature.png
+	lyxscale 50
+	special height=5cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Polygon-Curvature"
+
+\end_inset
+
+Computation of the curvature of a polygon with smooth boundary.
+ Points with high curvature are highlighted.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Minisec
@@ -9283,46 +9532,11 @@ signatureToPolygon
 Reconstructs a polygon from its polar signature.
 \end_layout
 
-\begin_layout Minisec
-polygonCurvature
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-polygonCurvature
-\end_layout
-
-\end_inset
-
-
-\begin_inset Index gen
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-curvature
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-!
-\end_layout
-
-\end_inset
-
-polygon
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Standard
-Estimates the curvature on polygon vertices using polynomial fit.
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
