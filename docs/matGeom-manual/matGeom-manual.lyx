@@ -1525,20 +1525,6 @@ name "chap:geom2d"
 \end_layout
 
 \begin_layout Standard
-The geom2d module of the MatGeom library allows to process geometric planar shapes such as point sets,
- edges,
- straight lines,
- bounding boxes,
- conics (circles and ellipses)...
- Most functions works for planar shapes,
- but some ones have been extended to 3D or to any dimension.
- Other modules provide additional functions for specific shapes:
- polygons2d,
- graphs,
- polynomialCurves2d.
-\end_layout
-
-\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -1565,13 +1551,17 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-The geom2d module provides functions for processing points,
- vectors,
- linear shapes (including straight lines,
- line segments,
- or rays),
- as well as smooth curves such as circles or ellipses.
- 
+The geom2d module of the MatGeom library provides functions for processing geometric planar shapes such as point sets,
+ edges,
+ straight lines,
+ bounding boxes,
+ conics (circles and ellipses)...
+ Most functions works for planar shapes,
+ but some ones have been extended to 3D or to any dimension.
+ Other modules provide additional functions for specific shapes:
+ polygons2d,
+ graphs,
+ polynomialCurves2d.
 \end_layout
 
 \begin_layout Standard
@@ -2040,7 +2030,7 @@ Points and vectors
 
 \begin_layout Standard
 Points and vectors are the most elementary geometric entities.
- Both points and vectors are defined by their two cartesian coordinates,
+ Both points and vectors are defined by their two Cartesian coordinates,
  stored into a row vector of 2 elements:
  
 \begin_inset listings
@@ -7725,6 +7715,13 @@ Computes the coefficients of the polynomial transform that matches two point set
  Note that using large degrees may result in degenerated transforms.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Grids and tessellations
 \end_layout
@@ -7907,16 +7904,6 @@ name "chap:polygons2d"
 \end_layout
 
 \begin_layout Standard
-The 
-\series bold
-polygons2d
-\series default
- module contains functions operating on shapes composed of a vertex list,
- like polygons or polylines.
- 
-\end_layout
-
-\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -7936,6 +7923,18 @@ minitoc
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+polygons2d
+\series default
+ module contains functions operating on shapes composed of a vertex list,
+ like polygons or polylines.
+ This chapter first recalls the definitions used within the library,
+ then presents how polygons and polylines can be represented using Matlab data structures.
+ The remaining sections present the functions operating on polygons or polylines.
 \end_layout
 
 \begin_layout Section
@@ -8170,12 +8169,13 @@ multiple polygons
 
 
 \begin_inset CommandInset ref
-LatexCommand vpageref
+LatexCommand ref
 reference "fig:Multiple-Polygon"
 plural "false"
 caps "false"
 noprefix "false"
 nolink "false"
+tuple "range"
 
 \end_inset
 
@@ -9888,6 +9888,10 @@ Identifies the self-intersection points of a polyline.
 Points and polygons
 \end_layout
 
+\begin_layout Standard
+These functions describe relationships between points and polygons or polylines.
+\end_layout
+
 \begin_layout Minisec
 isPointOnPolyline
 \begin_inset Index idx
@@ -10116,6 +10120,13 @@ point to polygon
 Shortest distance between a point and a polygon.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Smoothing and filtering
 \end_layout
@@ -10323,7 +10334,7 @@ nolink "false"
 
 \end_inset
 
-.
+-a.
 \end_layout
 
 \begin_layout Minisec
@@ -10389,10 +10400,19 @@ nolink "false"
 
 \end_inset
 
-.
+-b.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Float figure
 placement document
 alignment document
@@ -10410,10 +10430,53 @@ status open
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Polygon smoothing
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename images/polygons2d/leafPoly_simplifiedD5_annot.png
 	lyxscale 50
 	width 48text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Polygon simplification
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -10748,7 +10811,7 @@ nolink "false"
 
 .
  The result is given as a pair of arguments,
- containing the coordinates of the skeletong vertices,
+ containing the coordinates of the skeleton vertices,
  and the edges as pairs of indices to adjacent skeleton vertices.
  See the chapter on graphs for manipulation of such data (chapter
 \begin_inset space ~
@@ -11076,11 +11139,6 @@ name "chap:Graphs"
 \end_layout
 
 \begin_layout Standard
-The aim of this module is to provide functions to easily create,
- modify and display geometric graphs (geometric in a sense the nodes are associated to geometric position in 2D or 3D).
-\end_layout
-
-\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -11120,7 +11178,7 @@ quick tour
 \end_layout
 
 \begin_layout Standard
-The Graph module provides functionnalities for the processing of geometric graphs.
+The Graph module provides functionalities for the processing of geometric graphs.
  
 \series bold
 Graphs
@@ -13996,18 +14054,6 @@ name "chap:geom3d"
 \end_layout
 
 \begin_layout Standard
-The geom3d module allows to create,
- manipulate,
- transform,
- and visualize geometrical 3D primitives,
- such as points,
- lines,
- planes,
- polyhedra,
- circles and spheres.
-\end_layout
-
-\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -14126,7 +14172,7 @@ The geom3d module is the equivalent of the geom2d module for the 3D Euclidean sp
  It provides functions for processing 3D points,
  vectors,
  linear shapes (including 3D lines and planes),
- as well as smooth surfaces such as ellipsoids.
+ as well as smooth surfaces such as spheres or ellipsoids.
  
 \end_layout
 
@@ -17284,7 +17330,7 @@ point to plane
 \end_layout
 
 \begin_layout Standard
-Signed distance betwen 3D point and plane.
+Signed distance between 3D point and plane.
 \end_layout
 
 \begin_layout Minisec
@@ -17348,7 +17394,43 @@ planeNormal
 \end_layout
 
 \begin_layout Standard
-Computes the normal to a plane.
+Computes the normal
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+normal
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+plane
+\end_layout
+
+\end_inset
+
+ to a plane.
 \end_layout
 
 \begin_layout Minisec
@@ -17385,6 +17467,10 @@ dihedralAngle
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Computes the dihedral angle
 \begin_inset Index gen
 range none
 pageformat default
@@ -17406,11 +17492,7 @@ dihedral
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Computes the dihedral angle between 2 planes.
+ between 2 planes.
 \end_layout
 
 \begin_layout Subsection
@@ -20997,29 +21079,6 @@ name "chap:meshes3d"
 \end_layout
 
 \begin_layout Standard
-The meshes3d module provides functions for the manipulation of 3D surface meshes.
- Meshes can be composed of triangular faces (
-\begin_inset Quotes eld
-\end_inset
-
-tri-mesh
-\begin_inset Quotes erd
-\end_inset
-
-),
- or have faces with variable number of vertices.
- The term 
-\begin_inset Quotes eld
-\end_inset
-
-polyhedron
-\begin_inset Quotes erd
-\end_inset
-
- is sometimes used to denote functions that expect as input a 3D mesh that is convex and with a low number of faces.
-\end_layout
-
-\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -21042,15 +21101,40 @@ minitoc
 \end_layout
 
 \begin_layout Section
-Quick tour
+Introduction
 \end_layout
 
 \begin_layout Standard
 The meshes3d module provides functions for the manipulation of 3D surface meshes,
  also known as polygonal meshes.
- The library supports triangular meshes,
- quadrangular meshes,
- as well as meshes with arbitrary number of face vertices for some functions.
+ The library supports meshes with triangular faces (
+\begin_inset Quotes eld
+\end_inset
+
+tri-mesh
+\begin_inset Quotes erd
+\end_inset
+
+),
+ quadrangular faces (
+\begin_inset Quotes eld
+\end_inset
+
+quad-mesh
+\begin_inset Quotes erd
+\end_inset
+
+),
+ as well as meshes with an arbitrary number of face vertices.
+ The term 
+\begin_inset Quotes eld
+\end_inset
+
+polyhedron
+\begin_inset Quotes erd
+\end_inset
+
+ is sometimes used to denote functions that expect as input a 3D mesh that is convex and with a low number of faces.
 \end_layout
 
 \begin_layout Standard
@@ -29002,10 +29086,7 @@ name "chap:Developer-Side"
 
 \end_inset
 
-This chapter gathers information for people interested in contributing new features to the library.
-\end_layout
 
-\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -29025,6 +29106,10 @@ minitoc
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+This chapter gathers information for people interested in contributing new features to the library.
 \end_layout
 
 \begin_layout Section
