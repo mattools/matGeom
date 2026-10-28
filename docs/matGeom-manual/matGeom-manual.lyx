@@ -2539,6 +2539,10 @@ clipPoints
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Clips
 \begin_inset Index gen
 range none
 pageformat default
@@ -2560,11 +2564,7 @@ points
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Clips a set of points by a box.
+ a set of points by a box.
 \end_layout
 
 \begin_layout Minisec
@@ -2581,6 +2581,16 @@ centroid
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "fun:centroid"
+
+\end_inset
+
+Computes the centroid
 \begin_inset Index gen
 range none
 pageformat default
@@ -2602,17 +2612,7 @@ points
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset label
-LatexCommand label
-name "fun:centroid"
-
-\end_inset
-
-Computes the centroid (center of mass) of a set of points.
+ (center of mass) of a set of points.
 \end_layout
 
 \begin_layout Minisec
@@ -2656,7 +2656,39 @@ Principal axes of a set of ND points,
  returned as a centroid,
  a rotation matrix,
  and optionally a scaling factor.
- See also EquivalentEllipse and EquivalentEllipsoid.
+ See also EquivalentEllipse (section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fun:equivalentEllipse"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "range"
+
+\end_inset
+
+) and EquivalentEllipsoid (section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fun:equivalentEllipsoid"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "range"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Minisec
@@ -2677,6 +2709,7 @@ angleSort
 
 \begin_layout Standard
 Sorts points in the plane according to their angle to origin.
+ The function can also provide a second output argument containing the original index of the points before sorting.
 \end_layout
 
 \begin_layout Minisec
@@ -2696,7 +2729,7 @@ findClosestPoint
 \end_layout
 
 \begin_layout Standard
-Finds index of closest point in an array.
+Finds the index of the closest point within an array.
 \end_layout
 
 \begin_layout Minisec
@@ -2712,7 +2745,11 @@ minDistancePoints
 
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
+Computes the minimal distance
 \begin_inset Index gen
 range none
 pageformat default
@@ -2734,11 +2771,7 @@ points
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Minimal distance between several points.
+ between several points.
 \end_layout
 
 \begin_layout Minisec
@@ -2778,7 +2811,7 @@ hausdorffDistance
 \end_layout
 
 \begin_layout Standard
-Hausdorff distance between two point sets.
+Computes the Hausdorff distance between two point sets.
 \end_layout
 
 \begin_layout Minisec
@@ -2854,6 +2887,10 @@ createVector
 
 \begin_layout Standard
 Creates a vector from two points.
+ One of the two arguments may also be an array of points.
+ In that case,
+ the function creates an array of vectors,
+ using binary array expansion.
 \end_layout
 
 \begin_layout Minisec
@@ -2873,8 +2910,9 @@ vectorNorm
 \end_layout
 
 \begin_layout Standard
-Computes norm of a vector,
- or of a set of vectors.
+Computes the norm of a vector.
+ Can also compute the norm of a set of vectors,
+ returning an array with the norm of each vector.
 \end_layout
 
 \begin_layout Minisec
@@ -2916,8 +2954,8 @@ vector
 \end_layout
 
 \begin_layout Standard
-Angle of a vector,
- or between 2 vectors.
+Computes the angle of a vector with respect to the horizontal direction,
+ or the angle between 2 vectors.
 \end_layout
 
 \begin_layout Minisec
@@ -2937,7 +2975,7 @@ normalizeVector
 \end_layout
 
 \begin_layout Standard
-Normalizes a vector to have norm equal to 1.
+Normalizes a vector or an array of vector such that the norm of each result vector is equal to 1.
 \end_layout
 
 \begin_layout Minisec
@@ -5398,6 +5436,12 @@ equivalent ellipse
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "fun:equivalentEllipse"
+
+\end_inset
+
 Computes the equivalent ellipse with same moments up to the second order as a set of points (Fig.
 \begin_inset space ~
 \end_inset
@@ -18936,6 +18980,12 @@ equivalent ellipsoid
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "fun:equivalentEllipsoid"
+
+\end_inset
+
 Computes the ellipsoid with the same moments up to the second order as the given set of 3D points (Fig.
 \begin_inset space ~
 \end_inset
