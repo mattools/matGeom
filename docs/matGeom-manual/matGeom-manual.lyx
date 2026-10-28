@@ -12234,7 +12234,33 @@ Voronoi Graphs
 \end_layout
 
 \begin_layout Standard
-Voronoi diagrams are a fundamental data structure in geometry 
+Voronoi diagrams
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Voronoi diagram
+\end_layout
+
+\end_inset
+
+ are a fundamental data structure in geometry 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Aurenhammer_1991_ACM"
@@ -13743,7 +13769,7 @@ Remove several edges from a graph.
 \end_layout
 
 \begin_layout Section
-Display
+Graph display
 \end_layout
 
 \begin_layout Standard
@@ -14114,94 +14140,6 @@ minitoc
 
 \begin_layout Standard
 \begin_inset Newpage newpage
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Section
-Conventions
-\end_layout
-
-\begin_layout Subsection
-Geometric primitives
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Necessary section ?
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Description
-Point [x0 y0 z0]
-\end_layout
-
-\begin_layout Description
-Vector [dx dy dz]
-\end_layout
-
-\begin_layout Description
-Line [x0 y0 z0 dx dy dz]
-\end_layout
-
-\begin_layout Description
-Edge [x1 y1 z1 x2 y2 z2]
-\end_layout
-
-\begin_layout Description
-Plane [x0 y0 z0 dx1 dy1 dz1 dx2 dy2 dz2]
-\end_layout
-
-\begin_layout Description
-Sphere [x0 y0 z0 R]
-\end_layout
-
-\begin_layout Description
-Circle [x0 y0 z0 R PHI THETA PSI] (origin+center+normal+'roll').
-\end_layout
-
-\begin_layout Description
-Ellipsoid [x0 y0 z0 A B C PHI THETA PSI]
-\end_layout
-
-\begin_layout Description
-Cylinder [X1 Y1 Z1 X2 Y2 Z2 R]
-\end_layout
-
-\begin_layout Description
-Box [xmin xmax ymin ymax zmin zmax].
- Used for clipping shapes.
-\end_layout
-
-\begin_layout Description
-Polygons represented by N-by-3 array of points,
- the last point is not necessarily the same as the first one.
- Points must be coplanar.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Add Euler angles convention?
- Some docs already in section 3D Angles
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \end_inset
 
 
@@ -14830,7 +14768,7 @@ elongated or "solid" shapes (ellipsoids,
  cuboids,
  cylinders...) consider two angles for representing the direction of the main axis of the shape,
  and one angle to represent the rotation of the shape around that axis.
- The direction is given by a (azimut,
+ The direction is given by a (azimuth,
  elevation) pair (see Fig.
 \begin_inset space ~
 \end_inset
@@ -14884,7 +14822,8 @@ nolink "false"
 flat objects (3D ellipses or discs),
  or shapes organized around a symmetry axis consider two spherical angles for representing the main direction (usually that of the normal angle of the supporting plane),
  and one angle for representing the rotation around the normal axis.
- Spherical angle uses a (colatitude,azimut) pair (see Fig.
+ Spherical angle uses a (co-latitude,
+ azimuth) pair (see Fig.
 \begin_inset space ~
 \end_inset
 
@@ -14919,12 +14858,12 @@ nolink "false"
 \begin_inset Formula $\theta$
 \end_inset
 
- is the colatitude,
+ is the co-latitude,
  
 \begin_inset Formula $\varphi$
 \end_inset
 
- is the azimut,
+ is the azimuth,
  and 
 \begin_inset Formula $\psi$
 \end_inset
@@ -15061,7 +15000,33 @@ Spherical coordinates
 \end_layout
 
 \begin_layout Standard
-Spherical coordinates comprise three components:
+Spherical coordinates
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Spherical coordinates
+\end_layout
+
+\end_inset
+
+ comprise three components:
  two angular coordinates on the surface of the sphere,
  and the distance to origin.
  They can be useful for considering positions of dimensionless objects such as points.
@@ -15069,13 +15034,13 @@ Spherical coordinates comprise three components:
 \end_layout
 
 \begin_layout Standard
-The two spherical angles used by MatGeom are 1) the colatitude,
+The two spherical angles used by MatGeom are 1) the co-latitude,
  corresponding to the angle with the 
 \begin_inset Formula $z$
 \end_inset
 
 -axis,
- and 2) the azimut (See Fig.
+ and 2) the azimuth (See Fig.
 \begin_inset space ~
 \end_inset
 
@@ -15181,7 +15146,7 @@ sph2cart2
 \end_layout
 
 \begin_layout Standard
-Converts spherical coordinates to cartesian coordinates.
+Converts spherical coordinates to Cartesian coordinates.
 \end_layout
 
 \begin_layout Minisec
@@ -15201,7 +15166,7 @@ cart2sph2
 \end_layout
 
 \begin_layout Standard
-Converts cartesian coordinates to spherical coordinates.
+Converts Cartesian coordinates to spherical coordinates.
 \end_layout
 
 \begin_layout Minisec
@@ -15221,7 +15186,7 @@ cart2sph2d
 \end_layout
 
 \begin_layout Standard
-Converts cartesian coordinates to spherical coordinates in degrees.
+Converts Cartesian coordinates to spherical coordinates in degrees.
 \end_layout
 
 \begin_layout Minisec
@@ -15241,7 +15206,7 @@ sph2cart2d
 \end_layout
 
 \begin_layout Standard
-Converts spherical coordinates to cartesian coordinates in degrees.
+Converts spherical coordinates to Cartesian coordinates in degrees.
 \end_layout
 
 \begin_layout Subsection
@@ -15250,7 +15215,7 @@ Cylindrical coordinates
 
 \begin_layout Standard
 Cylindrical coordinates comprise three components:
- the azimut angle,
+ the azimuth angle,
  the distance to the 
 \begin_inset Formula $z$
 \end_inset
@@ -15291,7 +15256,7 @@ cart2cyl
 \end_layout
 
 \begin_layout Standard
-Converts cartesian to cylindrical coordinates.
+Converts Cartesian to cylindrical coordinates.
 \end_layout
 
 \begin_layout Minisec
@@ -15311,7 +15276,7 @@ cyl2cart
 \end_layout
 
 \begin_layout Standard
-Converts cylindrical to cartesian coordinates.
+Converts cylindrical to Cartesian coordinates.
 \end_layout
 
 \begin_layout Subsection
@@ -15399,7 +15364,7 @@ spherical
 \end_layout
 
 \begin_layout Standard
-Computes angle between points on the sphere.
+Computes a spherical angle between three points on the sphere.
 \end_layout
 
 \begin_layout Minisec
@@ -16216,7 +16181,7 @@ A 3D ray is represented the same way as a line.
 \begin_inset Quotes eld
 \end_inset
 
-clipRay
+clipRay3d
 \begin_inset Quotes erd
 \end_inset
 
@@ -16224,7 +16189,7 @@ clipRay
 \begin_inset Quotes eld
 \end_inset
 
-clipLine
+clipLine3d
 \begin_inset Quotes erd
 \end_inset
 
@@ -18602,6 +18567,13 @@ name "fun:drawEllipse3d"
 Draws a 3D ellipse.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Smooth surfaces
 \end_layout
@@ -18713,6 +18685,140 @@ intersectPlaneSphere
 
 \begin_layout Standard
 Returns the intersection circle between a plane and a sphere.
+\end_layout
+
+\begin_layout Subsubsection
+Specific functions
+\end_layout
+
+\begin_layout Minisec
+sphericalVoronoiDiagram
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+sphericalVoronoiDiagram
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Computes a Voronoi diagram
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Voronoi diagram
+\end_layout
+
+\end_inset
+
+ on the surface of the unit sphere.
+ An example of result is provided on Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Spherical-Voronoi-Domain"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/geom3d/sphericalVoronoi_N58.png
+	lyxscale 50
+	width 60text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Spherical-Voronoi-Domain"
+
+\end_inset
+
+Spherical Voronoi Domain.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Minisec
+sphericalVoronoiDomain
+\begin_inset Index idx
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+sphericalVoronoiDomain
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Computes a spherical Voronoi domain from a germ and the list of its neighbors.
 \end_layout
 
 \begin_layout Subsubsection
@@ -18844,24 +18950,11 @@ fillSphericalPolygon
 Fills a spherical polygon.
 \end_layout
 
-\begin_layout Minisec
-sphericalVoronoiDomain
-\begin_inset Index idx
-range none
-pageformat default
-status collapsed
-
-\begin_layout Plain Layout
-sphericalVoronoiDomain
-\end_layout
-
+\begin_layout Standard
+\begin_inset Newpage newpage
 \end_inset
 
- 
-\end_layout
 
-\begin_layout Standard
-Computes a spherical voronoi domain.
 \end_layout
 
 \begin_layout Subsection
