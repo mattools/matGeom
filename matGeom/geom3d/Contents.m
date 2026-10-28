@@ -169,6 +169,7 @@
 %   fillSphericalTriangle       - Fill a triangle on a sphere.
 %   drawSphericalPolygon        - Draw a spherical polygon.
 %   fillSphericalPolygon        - Fill a spherical polygon.
+%   sphericalVoronoiDiagram     - Spherical Voronoi Diagram on the unit sphere.
 %   sphericalVoronoiDomain      - Compute a spherical voronoi domain.
 %
 % Smooth surfaces

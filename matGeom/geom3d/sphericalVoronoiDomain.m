@@ -12,18 +12,18 @@ function poly = sphericalVoronoiDomain(refPoint, neighbors)
 %   sphericalVoronoiDomain
 %
 %   See also 
-%   drawSphericalPolygon
+%   drawSphericalPolygon, sphericalVoronoiDiagram
 
 % ------
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2010-11-17, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2010-2024 INRA - Cepia Software Platform
+% Copyright 2010-2024 INRAE
 
 % reference sphere
 sphere = [0 0 0 1];
 
-% number of neigbors, and number of sides of the domain
+% number of neighbors, and number of sides of the domain
 nbSides = size(neighbors, 1);
 
 % compute planes containing separating circles
