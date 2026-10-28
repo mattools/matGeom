@@ -18712,7 +18712,7 @@ Computes a Voronoi diagram
 \begin_inset Index gen
 range none
 pageformat default
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -18730,6 +18730,16 @@ status collapsed
 \noun off
 \color none
 Voronoi diagram
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+!
+\end_layout
+
+\end_inset
+
+spherical
 \end_layout
 
 \end_inset
@@ -19004,12 +19014,202 @@ inline false
 status open
 
 \begin_layout Plain Layout
-Elli = [x0 y0 z0 RA RB RC PHI THETA PSI]
+Elli = [x0 y0 z0 R1 R2 R3 PHI THETA PSI]
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The radius values are usually ordered from the largest to the smallest:
+ 
+\begin_inset Formula $r_{1}\ge r_{2}\ge r_{3}$
+\end_inset
+
+.
+ When the three radius values are equal,
+ the ellipsoid is a sphere,
+ and the rotation angles are irrelevant.
+ When two radius values are equal,
+ one gets a so-called spheroid
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+spheroid
+\end_layout
+
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+https://en.wikipedia.org/wiki/Spheroid
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+,
+ that can be either an 
+\series bold
+oblate
+\series default
+ ellipsoid
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+oblate ellipsoid
+\end_layout
+
+\end_inset
+
+ (when 
+\begin_inset Formula $r_{1}=r_{2}>r_{3}$
+\end_inset
+
+) or a 
+\series bold
+prolate
+\series default
+ ellipsoid
+\begin_inset Index gen
+range none
+pageformat default
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+prolate ellipsoid
+\end_layout
+
+\end_inset
+
+ (when 
+\begin_inset Formula $r_{1}>r_{2}=r_{3}$
+\end_inset
+
+) .
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/geom3d/surfaces/ellipsoids.png
+	lyxscale 50
+	width 90text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Ellipsoids"
+
+\end_inset
+
+Two examples of ellipsoids.
+ Left:
+ an oblate ellipsoid,
+ with 
+\begin_inset Formula $r_{i}=(50,50,20)$
+\end_inset
+
+.
+ Right:
+ a prolate ellipsoid,
+ with 
+\begin_inset Formula $r_{i}=(50,20,20)$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Creation
 \end_layout
 
 \begin_layout Minisec
@@ -19138,6 +19338,10 @@ Equivalent ellipsoid of a point cloud.
 
 \end_layout
 
+\begin_layout Subsubsection
+Computation
+\end_layout
+
 \begin_layout Minisec
 isPointInEllipsoid
 \begin_inset Index idx
@@ -19260,6 +19464,10 @@ Computes the approximated surface area of a prolate ellipsoid,
  given its largest and smallest radiusses.
 \end_layout
 
+\begin_layout Subsubsection
+Drawing
+\end_layout
+
 \begin_layout Minisec
 drawEllipsoid
 \begin_inset Index idx
@@ -19332,6 +19540,46 @@ nolink "false"
 \end_inset
 
 ).
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+elli = [10 20 30   50 30 10   5 10 0];
+\end_layout
+
+\begin_layout Plain Layout
+figure;
+ hold on;
+ axis equal;
+\end_layout
+
+\begin_layout Plain Layout
+drawEllipsoid(elli,
+ 'FaceColor',
+ 'r',
+ ...
+\end_layout
+
+\begin_layout Plain Layout
+     'drawEllipses',
+ true,
+ 'EllipseColor',
+ 'b',
+ 'EllipseWidth',
+ 3);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -19366,12 +19614,59 @@ inline false
 status open
 
 \begin_layout Plain Layout
-Cylinder = [X1 Y1 Z1 X2 Y2 Z2 R];
+cylinder = [X1 Y1 Z1 X2 Y2 Z2 R];
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/geom3d/surfaces/cylinder.png
+	lyxscale 50
+	width 60text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Cylinder"
+
+\end_inset
+
+3D Representation of a cylinder.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Functions
 \end_layout
 
 \begin_layout Minisec
@@ -19454,7 +19749,30 @@ drawCylinder
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "fun:drawCylinder"
+
+\end_inset
+
 Draws a cylinder on the current axis.
+ See also the cylinderToMesh function (Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fun:cylinderMesh"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Minisec
@@ -22040,7 +22358,7 @@ faces an array containing the vertex indices for each face.
 \end_layout
 
 \begin_layout Standard
-Some functions may require or return additionnal data:
+Some functions may require or return additional data:
 \end_layout
 
 \begin_layout Labeling
@@ -22068,7 +22386,7 @@ faces
  input arguments.
  A large number of functions also accept as first argument a Matlab structure that encapsulates the vertices,
  faces.
- Representing a mesh as a structure allows to also include additional inforamtion wuch as mesh name,
+ Representing a mesh as a structure allows to also include additional information such as mesh name,
  vertex normals,
  edge-to-face relationships...
  that maybe useful or necessary for some functions.
@@ -22467,7 +22785,7 @@ polyhedra
 \end_inset
 
  that are regular:
- the number of vertices of each face is constance,
+ the number of vertices of each face is constant,
  as well as the number of faces adjacent to any vertex
 \begin_inset Foot
 status collapsed
@@ -24412,7 +24730,30 @@ mesh
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "fun:cylinderMesh"
+
+\end_inset
+
 Creates a 3D mesh representing a cylinder.
+ See also the drawCylinder function (section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fun:drawCylinder"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Minisec
