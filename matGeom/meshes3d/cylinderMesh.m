@@ -12,8 +12,8 @@ function varargout = cylinderMesh(cyl, varargin)
 %   [V, F] = cylinderMesh(..., NAME, VALUE);
 %   Specifies one or several options using parameter name-value pairs.
 %   Available options are:
-%   'nPerimeter' the number of points represeting the perimeter
-%   'nRho' the number of circles along the hight
+%   'nPerimeter' the number of points representing the perimeter
+%   'nRho' the number of circles along the height
 %
 %   Example
 %     % Draw a rotated cylinder
@@ -29,7 +29,7 @@ function varargout = cylinderMesh(cyl, varargin)
 %     p3 = [30 30 90];
 %     [v1, f1] = cylinderMesh([p0 p1 25]);
 %     [v2, f2] = cylinderMesh([p0 p2 25]);
-%     [v3, f3] = cylinderMesh([p0 p3 25],'closed','nPeri',40,'nRho',20);
+%     [v3, f3] = cylinderMesh([p0 p3 25],'closed','nPerimeter',40,'nRho',20);
 %     figure; hold on;
 %     drawMesh(v1, f1, 'FaceColor', 'r');
 %     drawMesh(v2, f2, 'FaceColor', 'g');
@@ -44,7 +44,7 @@ function varargout = cylinderMesh(cyl, varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2012-10-25, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2012-2024 INRA - Cepia Software Platform
+% Copyright 2026 INRAE - BIA Research Unit - BIBS Facility (Nantes)
 
 parser = inputParser;
 addRequired(parser, 'cyl', @(x) validateattributes(x, {'numeric'},...
@@ -70,12 +70,12 @@ r  = cyl(:, 7);
 % compute length and orientation
 [theta, phi, rho] = cart2sph2d(p2 - p1);
 
-% parametrisation on x
+% parameterization on x
 t = linspace(0, 2*pi, NoPP+1);
 lx = r * cos(t);
 ly = r * sin(t);
 
-% parametrisation on z
+% parameterization on z
 lz = linspace(0, rho, nRho);
 
 % generate surface grids

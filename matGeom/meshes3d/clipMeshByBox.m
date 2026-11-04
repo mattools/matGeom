@@ -7,7 +7,7 @@ function varargout = clipMeshByBox(varargin)
 %   faces are created at the intersections with box.
 %
 %   [...] = clipMeshByPlane(MESH, BOX)
-%   Alternativly, a struct MESH with the fields 'vertices' and 'faces' can
+%   Alternatively, a struct MESH with the fields 'vertices' and 'faces' can
 %   be used as input argument.
 %
 %   MESH2 = clipMeshByPlane(..., BOX)

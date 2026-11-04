@@ -8,7 +8,7 @@ function varargout = circleMesh(circle, varargin)
 %   [V, F] = cylinderMesh(..., NAME, VALUE);
 %   Specifies one or several options using parameter name-value pairs.
 %   Available options are:
-%       'nP' the number of points represeting the perimeter
+%       'nP' the number of points representing the perimeter
 %       'nR' the number of points along the radius excluding the center
 %
 %   Example

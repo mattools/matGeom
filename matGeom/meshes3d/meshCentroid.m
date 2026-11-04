@@ -20,7 +20,7 @@ function centroid = meshCentroid(varargin)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2024-07-11, using Matlab 24.1.0.2628055 (R2024a) Update 4
-% Copyright 2024 INRAE - BIA Research Unit - BIBS Platform (Nantes)
+% Copyright 2024 INRAE - BIA Research Unit - BIBS Facility (Nantes)
 
 [vertices, faces] = parseMeshData(varargin{:});
 

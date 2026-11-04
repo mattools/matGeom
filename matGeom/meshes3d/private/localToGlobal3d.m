@@ -2,16 +2,16 @@ function trans = localToGlobal3d(varargin)
 %LOCALTOGLOBAL3D Transformation matrix from local to global coordinate system.
 %
 %   TRANS = localToGlobal3d(CENTER, THETA, PHI, PSI)
-%   Compute the transformation matrix from a local (or modelling)
+%   Compute the transformation matrix from a local (or modeling)
 %   coordinate system to the global (or world) coordinate system.
 %   This is a low-level function, used by several drawing functions.
 %
 %   The transform is defined by:
 %   - CENTER: the position of the local origin into the World coordinate
 %       system
-%   - THETA: colatitude, defined as the angle with the Oz axis (between 0
+%   - THETA: co-latitude, defined as the angle with the Oz axis (between 0
 %       and 180 degrees), positive in the direction of the of Oy axis.
-%   - PHI: azimut, defined as the angle of the normal with the Ox axis,
+%   - PHI: azimuth, defined as the angle of the normal with the Ox axis,
 %       between 0 and 360 degrees
 %   - PSI: intrinsic rotation, corresponding to the rotation of the object
 %       around the direction vector, between 0 and 360 degrees
@@ -75,7 +75,7 @@ k = pi / 180;
 % rotation around normal vector axis
 rot1    = createRotationOz(psi * k);
 
-% colatitude
+% co-latitude
 rot2    = createRotationOy(theta * k);
 
 % longitude

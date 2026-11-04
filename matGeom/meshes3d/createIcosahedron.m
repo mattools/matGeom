@@ -28,7 +28,7 @@ function varargout = createIcosahedron()
 % Created: 2005-03-21
 % Copyright 2005-2024 INRA - TPV URPOI - BIA IMASTE
 
-%% Initialisations
+%% Initializations
 
 theta = 2*pi/5;
 l = 1/sin(theta/2)/2;
@@ -60,7 +60,7 @@ edges = [...
     7 8;8 9;9 10;10 11;11 7; ...
     7 12;8 12;9 12;10 12;11 12];
     
-% faces are ordered to have normals pointing outside of the mesh
+% faces are ordered to have normal vectors pointing outside of the mesh
 faces = [...
     1 3  2 ; 1 4  3 ; 1  5  4 ;  1  6  5 ;  1 2  6;...
     2 3  7 ; 3 4  8 ; 4  5  9 ;  5  6 10 ;  6 2 11;...

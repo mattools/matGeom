@@ -42,7 +42,7 @@ P = v'*v;
 Q = [0 -v(3) v(2) ; v(3) 0 -v(1) ; -v(2) v(1) 0];
 I = eye(3);
 
-% compute vectorial part of the transform
+% compute linear part of the transform
 mat = eye(4);
 mat(1:3, 1:3) = P + (I - P)*cos(theta) + Q*sin(theta);
 

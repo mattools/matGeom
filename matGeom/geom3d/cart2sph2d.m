@@ -1,11 +1,11 @@
 function varargout = cart2sph2d(x, y, z)
 %CART2SPH2D Convert cartesian coordinates to spherical coordinates in degrees.
 %
-%   [THETA PHI RHO] = cart2sph2d([X Y Z])
-%   [THETA PHI RHO] = cart2sph2d(X, Y, Z)
+%   [THETA, PHI, RHO] = cart2sph2d([X Y Z])
+%   [THETA, PHI, RHO] = cart2sph2d(X, Y, Z)
 %
 %   The following convention is used:
-%   THETA is the colatitude, in degrees, 0 for north pole, 180 degrees for
+%   THETA is the co-latitude, in degrees, 0 for north pole, 180 degrees for
 %   south pole, 90 degrees for points with z=0.
 %   PHI is the azimuth, in degrees, defined as matlab cart2sph: angle from
 %   Ox axis, counted counter-clockwise.
@@ -39,7 +39,7 @@ function varargout = cart2sph2d(x, y, z)
 % Author: David Legland
 % E-mail: david.legland@inrae.fr
 % Created: 2011-06-29, using Matlab 7.9.0.529 (R2009b)
-% Copyright 2011-2024 INRA - Cepia Software Platform
+% Copyright 2026 INRAE - BIA Research Unit - BIBS Facility (Nantes)
 
 % if data are grouped, extract each coordinate
 if nargin == 1

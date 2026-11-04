@@ -6,17 +6,18 @@ function [avgMesh, distsIters, verticesIters] = averageMesh(meshList, varargin)
 %   minimizes the sum of squared distances between average mesh vertices
 %   and all other mesh vertices.
 %   The method is to choose an arbitrary reference mesh, and to iterate a
-%   series of smoothin of the reference mesh, computation of nearest vertex
-%   neighbors, and computing average position of nearest neighbors.
+%   series of smoothing operations on the reference mesh, computations of
+%   nearest vertex neighbors, and of average position of nearest neighbors.
 %
 %   [AVGMESH, DISTS] = averageMesh(MESHLIST)
 %   Returns also a cell array containing for each iteration, the standard
 %   deviation of distances to other individual meshes.
 %
 %   [AVGMESH, DISTS, VERT_ITERS] = averageMesh(MESHLIST)
-%   Also returns for each iteration, the positions of the average vertices.
+%   Also returns for each iteration, the positions of the average vertices
+%   at each step of the iterations.
 %
-%   [AVGMESH, DISTS] = averageMesh(..., PNAME, PVALUE)
+%   [...] = averageMesh(..., PNAME, PVALUE)
 %   Provides addition options are parameter name-value pairs. Available
 %   options are:
 %   * verbose: (logical, default false) display or not information about
@@ -66,7 +67,7 @@ while length(varargin) > 1
 end
 
 
-%% Initialisations
+%% Initializations
 
 nMeshes = length(meshList);
 
@@ -124,11 +125,4 @@ for iIter = 1:nIters
     dists = sqrt(dists / nMeshes);
     distsIters{iIter} = dists;
 end
-
-
-% figure; drawMesh(refMesh, 'lineStyle', 'none', 'faceColor', [.5 .5 .5])
-% axis equal; view(3); hold on; axis([-2.5 2.5 -2 2 -3.5 3.5]); light;
-% lighting gouraud
-% title('Average mesh');
-% print(gcf, 'averageMesh_initial.png', '-dpng');
 
