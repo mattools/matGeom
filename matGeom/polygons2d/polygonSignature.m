@@ -48,10 +48,10 @@ end
 
 % allocate memory
 nTheta = length(thetaList);
-res = NaN * ones(nTheta, 1);
+res = NaN * ones(size(thetaList));
 
 % iterate on angles
-for i = 1:length(thetaList)
+for i = 1:nTheta
     theta = deg2rad(thetaList(i));
     ray = [center cos(theta) sin(theta)];
 
